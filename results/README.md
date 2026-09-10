@@ -13,6 +13,8 @@ All JSON measurements were recorded on 2026-09-10. Absolute runtime paths identi
 | `doom-scene.json` | External PowerShell E1M1 renderer and our encoders, sixteen headless samples across eight headings. |
 | `doom-replay.json` | 12 real-scene replay cases using cached encodings. |
 | `doom-live.json` | Headless repeats plus 12 four-second live geometry/encode/write cases. No game simulation. |
+| `doom-live-post-install.json` | Same 12 live-scene cases after the user reported Steam installation completion; includes slower observations and substantial low-resolution variability. |
+| `post-install-context.json` | User-reported installation state, one pre-run CPU snapshot, and harness hash for that comparison. Not a continuous idle-state measurement. |
 | `terminal-probe.json` | Post-run encoding/grid probe in the same Terminal profile; not retrospective process telemetry. |
 | `terminal-utf8-check.json` | Raw UTF-8 half-block cursor-advance probe, comparing inherited and explicit UTF-8 encoding. |
 | `pre-utf8-fix/` | Superseded original terminal runs and smoke test, retained to document the console code-page defect. |

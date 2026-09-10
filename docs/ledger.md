@@ -88,3 +88,15 @@ The pinned external renderer was downloaded again by exact commit and its SHA-25
 The batch coordinator completed and removed the study profile. A final finite console glyph-width probe then compared the same three raw UTF-8 bytes for U+2580 under inherited code page 437 and explicit UTF-8. It measured cursor advances of three columns and one column, respectively (`results/terminal-utf8-check.json`). This independently confirms the decoding/cell-width consequence of the configuration error without claiming monitor-visible pixel inspection. The probe completed and its temporary profile was removed as well.
 
 Downloaded tools, caches, and extracted images remain in ignored `local/` for repeatability. No service, scheduled job, or security change was created. First-batch documentation, raw measurements, reproduction instructions, and the known limitations are complete; a full Doom engine implementation remains outside this batch.
+
+## 2026-09-10 — User confirms Steam installation activity, then completion
+
+The user reported substantial Steam installation activity and requested a roughly ten-minute pause. They subsequently reported that all installations had finished, ending the pause early. Earlier measurements remain valid observations of an active desktop, but are provisional for estimating performance with installation work absent. Do not attribute timing differences solely to Steam without a controlled comparison.
+
+Running the same finite E1M1 live-scene harness again, with no algorithm or protocol changes, into `results/doom-live-post-install.json`. Preserve the previous report. Record the user-reported installation state and a lightweight pre-run system CPU snapshot separately. This is a post-installation comparison, not proof that the entire machine is idle. The requested delayed follow-up was not created; both scheduling attempts returned errors before the user reported completion, so no timer remains to cancel.
+
+**Measured follow-up:** all 12 cases completed with UTF-8 and the same WAD hash, external source hash, and terminal grid as before. System CPU was 4% in one snapshot before the run; there was no continuous load measurement. At 320x200, ANSI produced 20.7–22.2 completed writes/second, original Sixel 10.9–11.0, and bulk Sixel 17.9–18.6. This does not show a clear improvement over the earlier 21.9–22.3 / 11.2–11.3 / 19.0–19.2 ranges.
+
+At 147x92 the repeat was substantially more variable: ANSI 50.9–76.9, original Sixel 15.0–33.9, and bulk Sixel 35.6–44.1. Keep these slower observations; no further runs were selected to obtain a preferred outcome. Installation completion is user-reported, and background activity, scheduling, clock behavior, and runtime effects were not controlled. The cause of the variation remains unestablished. A future performance investigation should correlate per-frame timing with continuous CPU/process and presentation telemetry.
+
+Saved the post-installation context and report separately, updated the findings, validated report completion and matching inputs, and removed the study profile again. No benchmark code changed in this follow-up.
