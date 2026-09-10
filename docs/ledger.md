@@ -128,3 +128,32 @@ The corrected runspace recheck remained slower: eight workers gave 22.4 ms media
 The optional fixed-palette live run completed 1800 updates in 30 seconds, with median frame work 9.1 ms, p95 12.0 ms, 15 work overruns, and 35 late completion deadlines. Its p95 frame-start interval was 16.6715 ms. It approximates colors and therefore remains optional; full-color ANSI is the recommended default. No alternative terminal or compiled graphics library was installed or used.
 
 Recorded the tested architecture, complete timing limitations, reproduction commands, and unimplemented alternatives in [the 60 FPS investigation](sixty-fps-investigation.md). The next integration concerns are PowerShell simulation at Doom's 35-tic rate, actors/HUD, consistent mutable-world snapshots, more demanding maps, and independent physical presentation measurement. The current demonstration is not an interactive game and does not establish full-game or displayed 60 FPS.
+
+## 2026-09-10 — User-supplied Matrix transforms lead
+
+The user supplied StartAutomating's Reddit post about the Matrix PowerShell module. **Source-inspected:** [PoshWeb/Matrix](https://github.com/PoshWeb/Matrix/tree/66e39e634548aaeca2c775a80c92a04b5ea3275f), inspected at commit `66e39e634548aaeca2c775a80c92a04b5ea3275f`, has an MIT license. Its aliases select .NET matrix constructors and transformations. The [implementation](https://github.com/PoshWeb/Matrix/blob/66e39e634548aaeca2c775a80c92a04b5ea3275f/Matrix.ps1) collects pipeline inputs and invokes their static Transform methods. The CSS/HTML representations are useful for browser demonstrations; this code supplies no Terminal GPU rendering path. The public website could not be opened by the web tool; the repository was inspected instead. The module was neither installed nor executed, and no module performance measurement is claimed.
+
+**Relevance:** the inspected Doom renderer already performs a two-dimensional world-to-camera rotation and translation for segment endpoints, after back-face rejection. A Matrix3x2 can represent that operation; a general Matrix4x4 is unnecessary for this stage. Microsoft's [Matrix3x2 documentation](https://learn.microsoft.com/en-us/dotnet/api/system.numerics.matrix3x2?view=net-10.0) specifies row-vector convention and single-precision components. The current scalar camera arithmetic uses doubles. The [.NET Vector2 implementation](https://github.com/dotnet/runtime/blob/v10.0.0/src/libraries/System.Private.CoreLib/src/System/Numerics/Vector2.cs) is CPU numerical code, not a GPU submission API; this inspection does not establish which instructions the current JIT emitted.
+
+**Measured:** added `scripts/Measure-CameraTransforms.ps1`. It transforms all 470 E1M1 vertices at the player start using eight non-cardinal headings, with preallocated double output arrays. Each method receives 64 warmup batches and 64 measured samples of 16 batches. Method order rotates between samples. Timings include camera setup and coordinate storage, but exclude loading, visibility tests, projection, rasterization, encoding, IPC, Terminal output, and gameplay. These are coordinate-only microbenchmarks, not renderer frame times.
+
+| Method | Initial median ms/map | Typed-variant follow-up median ms/map |
+| --- | ---: | ---: |
+| Scalar relative-coordinate arithmetic | about 0.04 | 0.0279 |
+| Scalar affine coefficients | about 0.04 | 0.0391 |
+| Matrix3x2, cached Vector2 inputs | 2.15 | 2.1284 |
+| Matrix3x2, construct Vector2 per point | 3.31 | 3.2924 |
+| Matrix3x2, cached inputs and explicitly typed matrix/result locals | untested | 2.2314 |
+
+All outputs were checked against the scalar calculation for every vertex at every heading. Maximum absolute coordinate difference was approximately `9.1e-13` map units for scalar affine arithmetic and `0.000464` for the matrix variants, within the declared `1e-8` and `0.01` tolerances respectively. This is not a pixel-equivalence test: small coordinate differences can change rasterization at boundaries. Exact scalar agreement is expected for the reference method itself.
+
+The initial attempt stopped before timing because a temporary variable collided with PowerShell's reserved `$Error` variable; it was renamed. The successful four-method run is retained in `results/camera-transforms.json`. A console summary formatting defect omitted labels but did not affect the JSON; it was fixed before the five-method follow-up in `results/camera-transforms-typed.json`. The latter specifically tested whether explicit struct typing reversed the outcome; it did not. Runs used PowerShell 7.6.5 / .NET 10.0.11 on the same active desktop, without system tuning.
+
+**Decision:** keep the existing scalar renderer math. Direct per-point System.Numerics calls, in these tested forms, were substantially slower. This does not rule out other data layouts, bulk SIMD algorithms, or .NET numerics generally, and does not establish the exact cause of the overhead. Matrix composition remains useful for designing camera/automap transforms and authoring tools. **Untested hypothesis:** reusing transformed vertices within a frame could avoid repeated endpoint work. Its benefit must account for visibility rejection, cache lookup/storage, and worker communication; transforming the whole map upfront may also do unnecessary work. No renderer or encoder implementation changed in this follow-up.
+
+Reproduce after the existing [WAD/source setup](reproduce.md), writing a fresh local report:
+
+```powershell
+$wad = 'C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\base\DOOM.WAD'
+.\scripts\Measure-CameraTransforms.ps1 -Wad $wad -Output .\local\my-camera-transforms.json
+```

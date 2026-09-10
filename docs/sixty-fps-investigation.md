@@ -86,3 +86,7 @@ $wad = 'C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\base\DOOM.WA
 This launches a geometry demonstration and timing run, not an interactive game. Omit `-PacedOnly` to run an uncapped case first. Add `-ColorMode Ansi256` to test color approximation. The original pinned external source must already be present; see [setup instructions](reproduce.md).
 
 For headless worker comparisons, invoke `Measure-ProcessScene.ps1` or `Measure-ParallelScene.ps1` from PowerShell using `-WorkerCounts @(1,2,4,8,16)` and a fresh output filename. Do not pass that array as a comma-separated native `pwsh -File` argument. Run `Test-AnsiStrips.ps1` to verify strip composition without launching Terminal.
+
+## Matrix transforms follow-up
+
+The user's Matrix module reference prompted a coordinate-only experiment. Direct Matrix3x2/Vector2 calls took about 2.13 ms to transform all 470 E1M1 vertices with cached inputs, versus 0.028 ms for scalar relative-coordinate arithmetic in the same follow-up run. Explicitly typing matrix/result locals did not improve that outcome. These timings exclude rendering and output and do not measure the Matrix module itself. Keep scalar camera math in the current renderer; transformed-vertex reuse remains an untested optimization. The [ledger](ledger.md#2026-09-10--user-supplied-matrix-transforms-lead) records the source inspection, complete comparisons, precision checks, and reproducible experiment.

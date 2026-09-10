@@ -41,3 +41,12 @@ Current terminal performance reports explicitly record `OutputCodePage: 65001`. 
 | `process-scene-live-ansi256.json` | Corresponding approximate-color comparison. |
 
 See [the follow-up findings](../docs/sixty-fps-investigation.md). These are scene-rendering tests with no gameplay. Correctness comparisons use the adapted serial renderer, not a claim of exact upstream or reference-Doom fidelity. Older JSON files retain the behavior and defects of their original runs even though the scripts have since been fixed.
+
+## Camera transforms lead
+
+| File | Contents |
+| --- | --- |
+| `camera-transforms.json` | Four-method coordinate-only comparison: scalar relative/affine math and direct Matrix3x2 transforms with cached/new Vector2 inputs. |
+| `camera-transforms-typed.json` | Five-method follow-up adding explicitly typed matrix and result locals. |
+
+Both reports transform 470 E1M1 vertices, with 64 warmups and 64 samples of 16 batches per method. Raw samples are milliseconds per complete map-coordinate transformation, not rendered frames. The Matrix module itself was not executed or timed. See the [ledger](../docs/ledger.md#2026-09-10--user-supplied-matrix-transforms-lead) for sources, numerical checks, limitations, and reproduction.
