@@ -1,0 +1,56 @@
+{
+  "Meaning": "Component integration tests. Door, pickup, and exit tests position the player explicitly; they do not establish a full input-only playthrough.",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "Checks": [
+    {
+      "Evidence": [
+        69206016,
+        -236978176
+      ],
+      "Check": "IWAD player spawn"
+    },
+    {
+      "Evidence": 6,
+      "Check": "E1M1 HMP monsters match independently decoded THINGS flags"
+    },
+    {
+      "Evidence": 41.0,
+      "Check": "Initial camera height follows the reference first-tic rule"
+    },
+    {
+      "Evidence": [
+        -236978176,
+        -189793744,
+        -189793744
+      ],
+      "Check": "Forward input moves then stops at solid wall"
+    },
+    {
+      "Evidence": [
+        50,
+        47
+      ],
+      "Check": "Pistol consumes ammunition through TicCmd attack"
+    },
+    {
+      "Evidence": [
+        0,
+        4456448
+      ],
+      "Check": "Use input opens a real door from a positioned fixture"
+    },
+    {
+      "Evidence": true,
+      "Check": "Green armor fixture exists"
+    },
+    {
+      "Evidence": 100,
+      "Check": "Movement collision collects armor from a positioned fixture"
+    },
+    {
+      "Evidence": "Intermission",
+      "Check": "Exit switch enters intermission through Use input from a positioned fixture"
+    }
+  ],
+  "FinishedUtc": "2026-09-10T21:04:10.0669129Z"
+}

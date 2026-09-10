@@ -1,0 +1,49 @@
+##
+## Copyright (C) 1993-1996 Id Software, Inc.
+## Copyright (C) 2019-2020 Nobuaki Tanaka
+## Copyright (C) 2026 Oleyska
+##
+## This file is a PowerShell port / modified version of code from ManagedDoom.
+##
+## This program is free software; you can redistribute it and/or modify
+## it under the terms of the GNU General Public License as published by
+## the Free Software Foundation; either version 2 of the License, or
+## (at your option) any later version.
+##
+## This program is distributed in the hope that it will be useful,
+## but WITHOUT ANY WARRANTY; without even the implied warranty of
+## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+## GNU General Public License for more details.
+##
+
+class IFlatLookup {
+    hidden [Flat[]] $Flats
+
+    IFlatLookup() {
+        $this.Flats = @()
+    }
+
+    [int] GetNumber([string] $name) {
+        throw "GetNumber must be implemented in derived class"
+    }
+
+    [int] get_Count() {
+        throw "Count must be implemented in derived class"
+    }
+
+    [Flat] get_Item([int] $num) {
+        throw "Indexer must be implemented in derived class"
+    }
+
+    [Flat] get_Item([string] $name) {
+        throw "Indexer must be implemented in derived class"
+    }
+
+    [int] get_SkyFlatNumber() {
+        throw "SkyFlatNumber must be implemented in derived class"
+    }
+
+    [Flat] get_SkyFlat() {
+        throw "SkyFlat must be implemented in derived class"
+    }
+}

@@ -1,0 +1,123 @@
+# pwshDoom modification, 2026-09-10: initialize Fixed/Angle fields to their original struct defaults.
+##
+## Copyright (C) 1993-1996 Id Software, Inc.
+## Copyright (C) 2019-2020 Nobuaki Tanaka
+## Copyright (C) 2026 Oleyska
+##
+## This file is a PowerShell port / modified version of code from ManagedDoom.
+##
+## This program is free software; you can redistribute it and/or modify
+## it under the terms of the GNU General Public License as published by
+## the Free Software Foundation; either version 2 of the License, or
+## (at your option) any later version.
+##
+## This program is distributed in the hope that it will be useful,
+## but WITHOUT ANY WARRANTY; without even the implied warranty of
+## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+## GNU General Public License for more details.
+##
+
+#needs [Thinker]
+class VerticalDoor : Thinker {
+    [World] $World
+    [VerticalDoorType] $Type
+    [Sector] $Sector
+    [Fixed] $TopHeight = [Fixed]::Zero
+    [Fixed] $Speed = [Fixed]::Zero
+    [int] $Direction
+    [int] $TopWait
+    [int] $TopCountDown
+
+    VerticalDoor([World] $world) {
+        $this.World = $world
+    }
+
+    [void] Run() {
+        $sa = $this.World.SectorAction
+        $result = $null
+
+        switch ($this.Direction) {
+            0 {
+                # Waiting.
+                if (--$this.TopCountDown -eq 0) {
+                    switch ($this.Type) {
+                        { $_ -eq [VerticalDoorType]::BlazeRaise } {
+                            $this.Direction = -1
+                            $this.World.StartSound($this.Sector.SoundOrigin, [Sfx]::BDCLS, [SfxType]::Misc)
+                        }
+                        { $_ -eq [VerticalDoorType]::Normal } {
+                            $this.Direction = -1
+                            $this.World.StartSound($this.Sector.SoundOrigin, [Sfx]::DORCLS, [SfxType]::Misc)
+                        }
+                        { $_ -eq [VerticalDoorType]::Close30ThenOpen } {
+                            $this.Direction = 1
+                            $this.World.StartSound($this.Sector.SoundOrigin, [Sfx]::DOROPN, [SfxType]::Misc)
+                        }
+                    }
+                }
+            }
+            2 {
+                # Initial wait.
+                if (--$this.TopCountDown -eq 0) {
+                    switch ($this.Type) {
+                        { $_ -eq [VerticalDoorType]::RaiseIn5Mins } {
+                            $this.Direction = 1
+                            $this.Type = [VerticalDoorType]::Normal
+                            $this.World.StartSound($this.Sector.SoundOrigin, [Sfx]::DOROPN, [SfxType]::Misc)
+                        }
+                    }
+                }
+            }
+            -1 {
+                # Down.
+                $result = $sa.MovePlane($this.Sector, $this.Speed, $this.Sector.FloorHeight, $false, 1, $this.Direction)
+                
+                if ($result -eq [SectorActionResult]::PastDestination) {
+                    switch ($this.Type) {
+                        { $_ -in ([VerticalDoorType]::BlazeRaise, [VerticalDoorType]::BlazeClose) } {
+                            $this.Sector.SpecialData = $null
+                            $this.World.Thinkers.Remove($this)
+                            $this.Sector.DisableFrameInterpolationForOneFrame()
+                            $this.World.StartSound($this.Sector.SoundOrigin, [Sfx]::BDCLS, [SfxType]::Misc)
+                        }
+                        { $_ -in ([VerticalDoorType]::Normal, [VerticalDoorType]::Close) } {
+                            $this.Sector.SpecialData = $null
+                            $this.World.Thinkers.Remove($this)
+                            $this.Sector.DisableFrameInterpolationForOneFrame()
+                        }
+                        { $_ -eq [VerticalDoorType]::Close30ThenOpen } {
+                            $this.Direction = 0
+                            $this.TopCountDown = 35 * 30
+                        }
+                    }
+                }
+                elseif ($result -eq [SectorActionResult]::Crushed) {
+                    switch ($this.Type) {
+                        { $_ -notin ([VerticalDoorType]::BlazeClose, [VerticalDoorType]::Close) } {
+                            $this.Direction = 1
+                            $this.World.StartSound($this.Sector.SoundOrigin, [Sfx]::DOROPN, [SfxType]::Misc)
+                        }
+                    }
+                }
+            }
+            1 {
+                # Up.
+                $result = $sa.MovePlane($this.Sector, $this.Speed, $this.TopHeight, $false, 1, $this.Direction)
+
+                if ($result -eq [SectorActionResult]::PastDestination) {
+                    switch ($this.Type) {
+                        { $_ -in ([VerticalDoorType]::BlazeRaise, [VerticalDoorType]::Normal) } {
+                            $this.Direction = 0
+                            $this.TopCountDown = $this.TopWait
+                        }
+                        { $_ -in ([VerticalDoorType]::Close30ThenOpen, [VerticalDoorType]::BlazeOpen, [VerticalDoorType]::Open) } {
+                            $this.Sector.SpecialData = $null
+                            $this.World.Thinkers.Remove($this)
+                            $this.Sector.DisableFrameInterpolationForOneFrame()
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

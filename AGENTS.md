@@ -1,12 +1,12 @@
 # Working in this study
 
-This is a feasibility investigation, not a commitment to ship a Doom port.
+The user approved implementation on 2026-09-10. The current milestone is playable E1M1 with real Doom simulation and measured terminal rendering; retain the feasibility record and distinguish implemented behavior from verified compatibility.
 
 - Update `docs/ledger.md` as findings, failures, decisions, and corrections occur.
 - Keep author reports, source inspection, measured behavior, and hypotheses distinct.
 - Preserve raw results and exact parameters. Never call completed console writes displayed FPS.
 - Use the user's requested root `C:\projects\pwshDoom`.
-- Keep WADs, extracted images, external source, and downloaded tools in ignored `local/`.
+- Keep WADs, extracted images, original downloaded source checkouts, and downloaded tools in ignored `local/`. An explicitly attributed, licensed source subset adopted for the implementation may live under `src/`; preserve notices and record modifications.
 - Do not adopt external code without checking its license. A runtime adapter may inspect/test a user-local source file while leaving it outside this repository.
 - Keep experiments finite. Clean up only resources created by the study; preserve the user's Terminal profiles and default settings.
 - Do not change security settings for performance. Record access limitations rather than obscuring them.

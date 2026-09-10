@@ -1,5 +1,7 @@
 # PowerShell-only rendering toward 320x200 at 60 FPS
 
+This document records the earlier scene-only experiment. The subsequent [playable E1M1 implementation](implementation.md) uses a licensed gameplay core and a new rasterizer, with complete-level 35-tic/60-update measurements and their timing limits.
+
 Follow-up investigation, 2026-09-10. The user requires engine and rendering algorithms to remain in PowerShell. A C/C# Doom engine, compiled rendering hot loop, or GPU rasterizer does not satisfy that requirement.
 
 **Result:** the new PowerShell process renderer can construct, encode, and write fresh 320x200 E1M1 scene updates at 60 per second in Windows Terminal. Full color is retained. This establishes a renderer throughput path; full gameplay at 60 displayed FPS is still unproven.

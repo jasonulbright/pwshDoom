@@ -1,0 +1,47 @@
+{
+  "TicsPerSecond": 34.91562578597927,
+  "IntervalsOver33_333ms": 27,
+  "IntervalsOver16_667ms": 1176,
+  "SnapshotPublishMs": {
+    "Count": 1560,
+    "Mean": 5.389159102564111,
+    "Median": 5.147349999999999,
+    "P95": 7.8421,
+    "Max": 13.5948
+  },
+  "WriteIntervalMs": {
+    "Count": 2680,
+    "Mean": 16.643503283582085,
+    "Median": 16.290100000000002,
+    "P95": 22.7384,
+    "Max": 74.0104
+  },
+  "SimulationWorkMs": {
+    "Count": 1560,
+    "Mean": 7.5072541666666535,
+    "Median": 5.753299999999999,
+    "P95": 18.3732,
+    "Max": 109.8899
+  },
+  "CompletedUpdatesPerSecond": 60.00563636680155,
+  "IntervalsOver17_667ms": 808,
+  "Meaning": "Intervals between consecutive completed writes from EndQpc. Render-to-write latency overlaps with the next frame and is not an output interval. The 60 Hz scheduler catches up after stalls; average throughput does not establish steady cadence or monitor presentations.",
+  "QpcFrequency": 10000000,
+  "AnalyzedUtc": "2026-09-10T21:01:51.8764143Z",
+  "RenderToWriteLatencyMs": {
+    "Count": 2681,
+    "Mean": 27.734304811637443,
+    "Median": 27.0106,
+    "P95": 37.5485,
+    "Max": 141.1117
+  },
+  "SimulationStartLatenessMs": {
+    "Count": 1560,
+    "Mean": 11.936133910256387,
+    "Median": 7.9919142857143015,
+    "P95": 21.045942857148475,
+    "Max": 214.23990000000003
+  },
+  "SessionSha256": "39A0CD482C2FD45520183D36EE03C6507D1E1BF15E8B3025688461A571EFE2EC",
+  "SessionFile": "game-terminal-pipelined-e1m1.json"
+}

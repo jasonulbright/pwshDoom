@@ -1,6 +1,7 @@
 #requires -Version 7.4
 $ErrorActionPreference='Stop'
 . "$PSScriptRoot/ParallelScene.ps1"
+. "$PSScriptRoot/../src/TerminalCodec.ps1"
 function Read-AnsiStripPixels {
     param([string]$Text,[int]$Width,[int]$Height,[int[][]]$TerminalPalette)
     $pixels=[int[]]::new($Width*$Height);[Array]::Fill($pixels,-1)

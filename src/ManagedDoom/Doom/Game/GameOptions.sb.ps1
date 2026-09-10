@@ -1,0 +1,92 @@
+# pwshDoom modification, 2026-09-10: avoid reserved $args in class methods.
+##
+## Copyright (C) 1993-1996 Id Software, Inc.
+## Copyright (C) 2019-2020 Nobuaki Tanaka
+## Copyright (C) 2026 Oleyska
+##
+## This file is a PowerShell port / modified version of code from ManagedDoom.
+##
+## This program is free software; you can redistribute it and/or modify
+## it under the terms of the GNU General Public License as published by
+## the Free Software Foundation; either version 2 of the License, or
+## (at your option) any later version.
+##
+## This program is distributed in the hope that it will be useful,
+## but WITHOUT ANY WARRANTY; without even the implied warranty of
+## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+## GNU General Public License for more details.
+##
+
+class GameOptions {
+    [GameVersion] $GameVersion
+    [GameMode] $GameMode
+    [MissionPack] $MissionPack
+
+    [Player[]] $Players
+    [int] $ConsolePlayer
+
+    [int] $Episode
+    [int] $Map
+    [GameSkill] $Skill
+
+    [bool] $DemoPlayback
+    [bool] $NetGame
+
+    [int] $Deathmatch
+    [bool] $FastMonsters
+    [bool] $RespawnMonsters
+    [bool] $NoMonsters
+
+    [IntermissionInfo] $IntermissionInfo
+    [DoomRandom] $Random
+
+    [IVideo] $Video
+    [ISound] $Sound
+    [IMusic] $Music
+    [IUserInput] $UserInput
+
+    GameOptions() {
+        $this.GameVersion = [GameVersion]::Version109
+        $this.GameMode = [GameMode]::Commercial
+        $this.MissionPack = [MissionPack]::Doom2
+
+        $this.Players = [Player[]]::new([Player]::MaxPlayerCount)
+        for ($i = 0; $i -lt [Player]::MaxPlayerCount; $i++) {
+            $this.Players[$i] = [Player]::new($i)
+        }
+        $this.Players[0].InGame = $true
+        $this.ConsolePlayer = 0
+
+        $this.Episode = 1
+        $this.Map = 1
+        $this.Skill = [GameSkill]::Medium
+
+        $this.DemoPlayback = $false
+        $this.NetGame = $false
+
+        $this.Deathmatch = 0
+        $this.FastMonsters = $false
+        $this.RespawnMonsters = $false
+        $this.NoMonsters = $false
+
+        $this.IntermissionInfo = [IntermissionInfo]::new()
+        $this.Random = [DoomRandom]::new()
+
+        $this.Video = [NullVideo]::GetInstance()
+        $this.Sound = [NullSound]::GetInstance()
+        $this.Music = [NullMusic]::GetInstance()
+        $this.UserInput = [NullUserInput]::GetInstance()
+    }
+
+    GameOptionsArgs($gameArguments, [GameContent] $content) {
+        #$this.GameOptions()
+        $mArgs = [CommandLineArgs]::new($gameArguments)
+        if ($mArgs.SoloNet.Present) {
+            $this.NetGame = $true
+        }
+        
+        $this.GameVersion = $content.Wad.GameVersion
+        $this.GameMode = $content.Wad.GameMode
+        $this.MissionPack = $content.Wad.MissionPack
+    }
+}

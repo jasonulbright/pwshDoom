@@ -1,0 +1,20 @@
+{
+  "FinishedUtc": "2026-09-10T21:03:35.7624727Z",
+  "Meaning": "Two owned headless sessions: finite normal exit and abrupt coordinator termination. Only test-created processes are terminated. This does not test terminal keyboard/visual restoration.",
+  "Checks": [
+    {
+      "OwnedChildren": 3,
+      "AssetCacheRemoved": true,
+      "AllExited": true,
+      "Mode": "Normal",
+      "WaitSeconds": 2.1389273
+    },
+    {
+      "OwnedChildren": 3,
+      "AssetCacheRemoved": true,
+      "AllExited": true,
+      "Mode": "OwnerKilled",
+      "WaitSeconds": 0.7663359
+    }
+  ]
+}
