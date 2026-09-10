@@ -1,0 +1,239 @@
+{
+  "RecordedUtc": "2026-09-10T16:08:15.8882763Z",
+  "Meaning": "Uncompressed Sixel trades stream size for less PowerShell work. Raster pixels independently round-trip checked.",
+  "Results": [
+    {
+      "Encoder": "Sixel",
+      "Colors": 16,
+      "SamplesMs": [
+        32.807,
+        30.9482,
+        32.7932,
+        31.9109,
+        32.3648,
+        32.3008,
+        30.3448,
+        30.8535,
+        36.9847,
+        30.3041,
+        27.5329,
+        27.4088
+      ],
+      "EncodingIncludingUtf8Ms": {
+        "Count": 12,
+        "Mean": 31.379475,
+        "Median": 31.42955,
+        "P95": 36.9847,
+        "Max": 36.9847
+      },
+      "Width": 320,
+      "Bytes": 12127,
+      "Height": 200,
+      "Pattern": "Coherent"
+    },
+    {
+      "Encoder": "SixelFast",
+      "Colors": 16,
+      "SamplesMs": [
+        67.6692,
+        65.864,
+        57.1927,
+        46.1246,
+        47.4096,
+        53.8951,
+        45.1173,
+        44.4999,
+        44.8306,
+        43.5338,
+        42.4093,
+        41.3428
+      ],
+      "EncodingIncludingUtf8Ms": {
+        "Count": 12,
+        "Mean": 49.99074166666668,
+        "Median": 45.62095,
+        "P95": 67.6692,
+        "Max": 67.6692
+      },
+      "Width": 320,
+      "Bytes": 124380,
+      "Height": 200,
+      "Pattern": "Coherent"
+    },
+    {
+      "Encoder": "Sixel",
+      "Colors": 16,
+      "SamplesMs": [
+        245.8804,
+        247.5679,
+        262.9618,
+        249.0203,
+        248.4558,
+        259.0232,
+        252.7385,
+        248.9829,
+        251.4048,
+        253.4595,
+        255.106,
+        250.945
+      ],
+      "EncodingIncludingUtf8Ms": {
+        "Count": 12,
+        "Mean": 252.12884166666666,
+        "Median": 251.17489999999998,
+        "P95": 262.9618,
+        "Max": 262.9618
+      },
+      "Width": 320,
+      "Bytes": 139070,
+      "Height": 200,
+      "Pattern": "Entropy"
+    },
+    {
+      "Encoder": "SixelFast",
+      "Colors": 16,
+      "SamplesMs": [
+        47.3518,
+        46.0304,
+        30.1625,
+        25.9719,
+        39.2262,
+        26.5252,
+        26.2225,
+        41.7317,
+        27.2588,
+        26.5671,
+        26.2108,
+        24.7858
+      ],
+      "EncodingIncludingUtf8Ms": {
+        "Count": 12,
+        "Mean": 32.33705833333334,
+        "Median": 26.912950000000002,
+        "P95": 47.3518,
+        "Max": 47.3518
+      },
+      "Width": 320,
+      "Bytes": 175072,
+      "Height": 200,
+      "Pattern": "Entropy"
+    },
+    {
+      "Encoder": "Sixel",
+      "Colors": 256,
+      "SamplesMs": [
+        28.3679,
+        29.086,
+        29.3729,
+        29.4825,
+        29.5521,
+        28.5819,
+        28.3013,
+        27.9076,
+        28.0349,
+        28.7995,
+        28.688,
+        28.5074
+      ],
+      "EncodingIncludingUtf8Ms": {
+        "Count": 12,
+        "Mean": 28.7235,
+        "Median": 28.63495,
+        "P95": 29.5521,
+        "Max": 29.5521
+      },
+      "Width": 320,
+      "Bytes": 17320,
+      "Height": 200,
+      "Pattern": "Coherent"
+    },
+    {
+      "Encoder": "SixelFast",
+      "Colors": 256,
+      "SamplesMs": [
+        27.545,
+        36.4373,
+        27.9814,
+        28.6288,
+        27.7453,
+        29.2402,
+        29.1842,
+        30.3845,
+        27.7154,
+        29.7283,
+        28.1279,
+        50.7241
+      ],
+      "EncodingIncludingUtf8Ms": {
+        "Count": 12,
+        "Mean": 31.120200000000008,
+        "Median": 28.9065,
+        "P95": 50.7241,
+        "Max": 50.7241
+      },
+      "Width": 320,
+      "Bytes": 146830,
+      "Height": 200,
+      "Pattern": "Coherent"
+    },
+    {
+      "Encoder": "Sixel",
+      "Colors": 256,
+      "SamplesMs": [
+        591.4286,
+        588.5647,
+        588.7145,
+        609.6684,
+        611.1235,
+        598.2084,
+        599.0659,
+        635.1907,
+        620.8689,
+        619.6579,
+        616.7228,
+        632.8417
+      ],
+      "EncodingIncludingUtf8Ms": {
+        "Count": 12,
+        "Mean": 609.3380000000001,
+        "Median": 610.3959500000001,
+        "P95": 635.1907,
+        "Max": 635.1907
+      },
+      "Width": 320,
+      "Bytes": 341354,
+      "Height": 200,
+      "Pattern": "Entropy"
+    },
+    {
+      "Encoder": "SixelFast",
+      "Colors": 256,
+      "SamplesMs": [
+        294.2405,
+        277.7554,
+        314.1601,
+        291.3035,
+        321.951,
+        324.7028,
+        302.7387,
+        295.4506,
+        315.6746,
+        292.8194,
+        279.0269,
+        288.0006
+      ],
+      "EncodingIncludingUtf8Ms": {
+        "Count": 12,
+        "Mean": 299.8186749999999,
+        "Median": 294.84555,
+        "P95": 324.7028,
+        "Max": 324.7028
+      },
+      "Width": 320,
+      "Bytes": 2456543,
+      "Height": 200,
+      "Pattern": "Entropy"
+    }
+  ],
+  "PowerShell": "7.6.5"
+}

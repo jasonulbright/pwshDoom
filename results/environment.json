@@ -1,0 +1,66 @@
+{
+  "RecordedUtc": "2026-09-10T15:57:16.9034025Z",
+  "Cpu": [
+    {
+      "Name": "Intel(R) Core(TM) Ultra 7 265K",
+      "NumberOfCores": 20,
+      "NumberOfLogicalProcessors": 20,
+      "MaxClockSpeed": 3900
+    }
+  ],
+  "Memory": [
+    {
+      "Manufacturer": "Team Group Inc",
+      "Capacity": 17179869184,
+      "Speed": 7200,
+      "ConfiguredClockSpeed": 7200
+    },
+    {
+      "Manufacturer": "Team Group Inc",
+      "Capacity": 17179869184,
+      "Speed": 7200,
+      "ConfiguredClockSpeed": 7200
+    }
+  ],
+  "Gpu": [
+    {
+      "Name": "Intel(R) Graphics",
+      "DriverVersion": "32.0.101.8860",
+      "CurrentHorizontalResolution": null,
+      "CurrentVerticalResolution": null,
+      "CurrentRefreshRate": null
+    },
+    {
+      "Name": "NVIDIA GeForce RTX 4070 Ti SUPER",
+      "DriverVersion": "32.0.16.1656",
+      "CurrentHorizontalResolution": 3440,
+      "CurrentVerticalResolution": 1440,
+      "CurrentRefreshRate": 165
+    }
+  ],
+  "Disk": [
+    {
+      "FriendlyName": "Samsung SSD 9100 PRO 2TB",
+      "MediaType": "SSD",
+      "Size": 2000398934016
+    }
+  ],
+  "OS": {
+    "Caption": "Microsoft Windows 11 Pro",
+    "Version": "10.0.26200",
+    "BuildNumber": "26200"
+  },
+  "Terminal": [
+    {
+      "Name": "Microsoft.WindowsTerminal",
+      "Version": "1.24.11911.0"
+    }
+  ],
+  "Defender": {
+    "AntivirusEnabled": true,
+    "RealTimeProtectionEnabled": true,
+    "AMServiceEnabled": true
+  },
+  "Power": "Power Scheme GUID: 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c  (High performance)",
+  "PowerShell": "7.6.5 (bundled task runtime; see individual results for exact executable)"
+}
