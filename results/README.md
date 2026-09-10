@@ -24,3 +24,20 @@ All JSON measurements were recorded on 2026-09-10. Absolute runtime paths identi
 `local/` contains ignored machine inventory, external source, benchmark plans, encoded caches, PNGs, and the downloaded PresentMon tool. Commercial WADs remain in the Steam installation. The main [findings](../docs/findings-2026-09-10.md) state the measurement limitations.
 
 Current terminal performance reports explicitly record `OutputCodePage: 65001`. Initial reports without that precondition are superseded, as explained in `pre-utf8-fix/README.md`. Headless results were unaffected.
+
+## Parallel-renderer follow-up
+
+| File | Contents |
+| --- | --- |
+| `parallel-scene.json` | Initial runspace partition experiment, including pixel mismatches and the byte-enumeration defect. |
+| `parallel-scene-corrected.json` | Partition-independent interpolation; correct pixels against the adapted serial renderer, still before the byte-array return fix. |
+| `parallel-scene-bytearray.json` | Runspace recheck after fixing byte-array pipeline enumeration. |
+| `process-scene.json` | Initial separate-process experiment, before the array-return fix. |
+| `process-scene-bytearray.json` | Corrected 1/2/4/8-process headless construction and transfer measurements. |
+| `process-scene-more-workers.json` | 12/16-process headless comparison. |
+| `process-scene-live-truecolor.json` | Initial 12-second continuously rotating live cases, uncapped and coarse-paced. |
+| `process-scene-live-truecolor-30s.json` | Longer full-rotation truecolor cases; includes discovery of coarse pacing jitter. |
+| `process-scene-live-precise.json` | 30-second full-color case with precise pacing, interval stats, deadline misses, and worker memory use. |
+| `process-scene-live-ansi256.json` | Corresponding approximate-color comparison. |
+
+See [the follow-up findings](../docs/sixty-fps-investigation.md). These are scene-rendering tests with no gameplay. Correctness comparisons use the adapted serial renderer, not a claim of exact upstream or reference-Doom fidelity. Older JSON files retain the behavior and defects of their original runs even though the scripts have since been fixed.

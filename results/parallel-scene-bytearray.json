@@ -1,0 +1,291 @@
+{
+  "RecordedUtc": "2026-09-10T17:07:55.1282858Z",
+  "PowerShell": "7.6.5",
+  "Width": 320,
+  "Height": 200,
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "SourceSha256": "30624D2F6878FE6832997C1F2B65858E7C26BAC9A54A1C920BC06E649471E943",
+  "Meaning": "PowerShell persistent worker runspaces; geometry and strip encoding. No output/gameplay; not displayed FPS.",
+  "InterpolationChangesAgainstUpstream": [
+    2147,
+    2395,
+    1944,
+    0,
+    44,
+    0,
+    0,
+    940
+  ],
+  "Results": [
+    {
+      "LastWorkerTimings": [
+        {
+          "EncodeMs": 4.0027,
+          "StartQpc": 1677378986335,
+          "EndQpc": 1677379167798,
+          "RenderMs": 14.1436
+        },
+        {
+          "EncodeMs": 6.504,
+          "StartQpc": 1677378986522,
+          "EndQpc": 1677379232468,
+          "RenderMs": 18.0906
+        },
+        {
+          "EncodeMs": 5.1072,
+          "StartQpc": 1677378986594,
+          "EndQpc": 1677379207298,
+          "RenderMs": 16.9632
+        },
+        {
+          "EncodeMs": 5.3532,
+          "StartQpc": 1677378986761,
+          "EndQpc": 1677379207044,
+          "RenderMs": 16.6751
+        },
+        {
+          "EncodeMs": 7.5829,
+          "StartQpc": 1677378986832,
+          "EndQpc": 1677379248057,
+          "RenderMs": 18.5396
+        },
+        {
+          "EncodeMs": 3.7499,
+          "StartQpc": 1677378987011,
+          "EndQpc": 1677379145019,
+          "RenderMs": 12.0509
+        },
+        {
+          "EncodeMs": 3.6786,
+          "StartQpc": 1677378987049,
+          "EndQpc": 1677379126749,
+          "RenderMs": 10.2914
+        },
+        {
+          "EncodeMs": 2.2604,
+          "StartQpc": 1677378986876,
+          "EndQpc": 1677379105656,
+          "RenderMs": 9.6176
+        }
+      ],
+      "SamplesMs": [
+        27.0568,
+        25.3648,
+        21.9232,
+        20.1175,
+        18.1892,
+        19.5209,
+        21.4439,
+        25.6777,
+        27.2478,
+        25.9312,
+        49.1592,
+        20.1674,
+        17.6346,
+        19.2344,
+        22.0399,
+        27.0399,
+        28.3459,
+        25.3188,
+        22.271,
+        20.2133,
+        19.4956,
+        18.5425,
+        46.9689,
+        27.3036,
+        28.4583,
+        23.8409,
+        22.4445,
+        20.2453,
+        30.3614,
+        20.2798,
+        21.4104,
+        26.3219
+      ],
+      "Workers": 8,
+      "PixelMismatchesByHeading": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "Bytes": {
+        "Count": 32,
+        "Mean": 469086.875,
+        "Median": 474713.0,
+        "P95": 492877.0,
+        "Max": 492877.0
+      },
+      "RenderAndEncodeMs": {
+        "Count": 32,
+        "Mean": 24.674078125,
+        "Median": 22.357750000000003,
+        "P95": 46.9689,
+        "Max": 49.1592
+      }
+    },
+    {
+      "LastWorkerTimings": [
+        {
+          "EncodeMs": 12.0076,
+          "StartQpc": 1677409412718,
+          "EndQpc": 1677409674669,
+          "RenderMs": 14.1875
+        },
+        {
+          "EncodeMs": 6.124,
+          "StartQpc": 1677409413201,
+          "EndQpc": 1677409640008,
+          "RenderMs": 16.5567
+        },
+        {
+          "EncodeMs": 6.443,
+          "StartQpc": 1677409412889,
+          "EndQpc": 1677409623240,
+          "RenderMs": 14.5921
+        },
+        {
+          "EncodeMs": 1.5009,
+          "StartQpc": 1677409414538,
+          "EndQpc": 1677409691511,
+          "RenderMs": 26.1964
+        },
+        {
+          "EncodeMs": 3.0379,
+          "StartQpc": 1677409413113,
+          "EndQpc": 1677409710309,
+          "RenderMs": 26.6817
+        },
+        {
+          "EncodeMs": 3.1189,
+          "StartQpc": 1677409413067,
+          "EndQpc": 1677409610399,
+          "RenderMs": 16.6143
+        },
+        {
+          "EncodeMs": 11.7196,
+          "StartQpc": 1677409413274,
+          "EndQpc": 1677409659326,
+          "RenderMs": 12.8856
+        },
+        {
+          "EncodeMs": 2.5511,
+          "StartQpc": 1677409413253,
+          "EndQpc": 1677409718013,
+          "RenderMs": 27.9249
+        },
+        {
+          "EncodeMs": 2.0995,
+          "StartQpc": 1677409413716,
+          "EndQpc": 1677409703032,
+          "RenderMs": 26.8321
+        },
+        {
+          "EncodeMs": 13.1277,
+          "StartQpc": 1677409414850,
+          "EndQpc": 1677409667712,
+          "RenderMs": 12.1585
+        },
+        {
+          "EncodeMs": 4.6086,
+          "StartQpc": 1677409416171,
+          "EndQpc": 1677409588936,
+          "RenderMs": 12.6679
+        },
+        {
+          "EncodeMs": 12.9553,
+          "StartQpc": 1677409432744,
+          "EndQpc": 1677409648121,
+          "RenderMs": 8.5824
+        },
+        {
+          "EncodeMs": 5.7008,
+          "StartQpc": 1677409416348,
+          "EndQpc": 1677409597420,
+          "RenderMs": 12.4064
+        },
+        {
+          "EncodeMs": 10.9406,
+          "StartQpc": 1677409416416,
+          "EndQpc": 1677409648060,
+          "RenderMs": 12.2238
+        },
+        {
+          "EncodeMs": 4.1418,
+          "StartQpc": 1677409416593,
+          "EndQpc": 1677409554634,
+          "RenderMs": 9.6623
+        },
+        {
+          "EncodeMs": 4.2491,
+          "StartQpc": 1677409416477,
+          "EndQpc": 1677409578634,
+          "RenderMs": 11.9666
+        }
+      ],
+      "SamplesMs": [
+        31.1524,
+        29.8202,
+        26.2276,
+        21.8649,
+        21.1895,
+        22.938,
+        26.3851,
+        32.6031,
+        34.044,
+        27.1281,
+        24.6116,
+        23.274,
+        21.3563,
+        22.1532,
+        26.7697,
+        32.3483,
+        31.6063,
+        31.994,
+        25.2379,
+        22.6573,
+        20.4479,
+        23.3465,
+        27.6895,
+        30.95,
+        31.7956,
+        30.1761,
+        26.3999,
+        20.1089,
+        21.4371,
+        23.6249,
+        25.7647,
+        30.6241
+      ],
+      "Workers": 16,
+      "PixelMismatchesByHeading": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "Bytes": {
+        "Count": 32,
+        "Mean": 485665.875,
+        "Median": 491704.5,
+        "P95": 505765.0,
+        "Max": 505765.0
+      },
+      "RenderAndEncodeMs": {
+        "Count": 32,
+        "Mean": 26.491459374999994,
+        "Median": 26.306350000000002,
+        "P95": 32.6031,
+        "Max": 34.044
+      }
+    }
+  ]
+}

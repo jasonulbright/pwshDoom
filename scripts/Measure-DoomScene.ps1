@@ -5,7 +5,8 @@ param(
     [string]$Source = (Join-Path $PSScriptRoot '../local/upstream/nick-doom.ps1'),
     [ValidateRange(8,64)][int]$Samples = 16,
     [string]$Output = (Join-Path $PSScriptRoot '../results/doom-scene.json'),
-    [switch]$Live
+    [switch]$Live,
+    [switch]$InitializeOnly
 )
 $ErrorActionPreference = 'Stop'
 if ($Live -and (-not $env:WT_SESSION -or [Console]::IsOutputRedirected)) { throw '-Live requires an actual Windows Terminal window.' }
@@ -77,6 +78,13 @@ $ss = Find-Subsector $level.startX $level.startY $level.nodeX $level.nodeY $leve
 $sector = Get-SubsectorSector $ss $level.ssFirst $level.segLine $level.segSide $level.lineRight $level.lineLeft $level.sideSector
 $loadClock.Stop()
 $ctx = New-CodecContext $palette
+if ($InitializeOnly) {
+    return @{Level=$level;Palette=$palette;Context=$ctx;Colormap=$colormap;
+        Textures=$textures.ToArray();Flats=$flats.ToArray();SkyTexture=$textures[$textureSlots.SKY1];
+        EyeZ=$level.secFloor[$sector]+41;
+        BspDefinition=($definitions | Where-Object Name -eq 'Get-BspFrame').Extent.Text;
+        SourceSha256=$expectedHash;WadSha256=(Get-FileHash -LiteralPath $Wad).Hash}
+}
 $frequency = [Diagnostics.Stopwatch]::Frequency
 $report = [ordered]@{
     RecordedUtc=[DateTime]::UtcNow.ToString('o'); PowerShell=$PSVersionTable.PSVersion.ToString();

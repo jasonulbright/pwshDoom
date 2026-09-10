@@ -12,3 +12,4 @@ This is a feasibility investigation, not a commitment to ship a Doom port.
 - Do not change security settings for performance. Record access limitations rather than obscuring them.
 - Pure PowerShell here means game/encoder algorithms written in PowerShell using standard .NET APIs. Any compiled custom helper must be identified separately.
 - Run codec correctness checks when modifying encoding, and appropriate targeted benchmarks when making performance claims.
+- The user clarified that both engine and rendering algorithms must stay in PowerShell. Do not meet the 320x200/60 FPS target by substituting a C/C# engine, custom compiled renderer/encoder, or GPU rendering shader. Standard .NET data structures, bulk copying, synchronization, and IPC primitives are allowed within the study's existing definition.

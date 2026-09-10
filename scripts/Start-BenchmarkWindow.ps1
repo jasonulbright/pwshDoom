@@ -2,7 +2,8 @@
 [CmdletBinding()]
 param([string]$Plan = (Join-Path $PSScriptRoot '../local/plan.json'),
     [string]$Output = (Join-Path $PSScriptRoot '../results/terminal.json'),
-    [int]$HoldSeconds = 0, [switch]$Live, [string]$DoomWad, [switch]$Probe)
+    [int]$HoldSeconds = 0, [switch]$Live, [string]$DoomWad, [switch]$Probe,
+    [switch]$ProcessScene,[int]$Workers=16,[ValidateSet('TrueColor','Ansi256')][string]$ColorMode='TrueColor',[int]$Seconds=12,[switch]$PacedOnly)
 $ErrorActionPreference='Stop'
 $root=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
 $runtime=(Get-Process -Id $PID).Path
@@ -20,7 +21,11 @@ $profile=@{profiles=@(@{guid='{34f60d65-7977-49c3-9d73-39268493836f}';name='pwsh
     useAcrylic=$false;opacity=100;scrollbarState='hidden';closeOnExit='graceful';suppressApplicationTitle=$true;tabTitle='pwshDoom benchmark'})}
 $profile | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath $fragment -Encoding utf8
 # Adds only a study profile, never edits the user's settings.json or default profile.
-if ($Probe) {
+if ($ProcessScene) {
+    $launchArgs=@('-Wad',[IO.Path]::GetFullPath($DoomWad),'-Workers',"$Workers",'-ColorMode',$ColorMode,'-Seconds',"$Seconds",'-Output',[IO.Path]::GetFullPath($Output))
+    if($PacedOnly){$launchArgs+='-PacedOnly'}
+    & wt.exe -w new --size 324,105 new-tab -p 'pwshDoom Study' $runtime -NoProfile -File (Join-Path $PSScriptRoot 'Measure-LiveProcessScene.ps1') @launchArgs
+} elseif ($Probe) {
     & wt.exe -w new --size 324,105 new-tab -p 'pwshDoom Study' $runtime -NoProfile -File (Join-Path $PSScriptRoot 'Get-TerminalProbe.ps1') -VerifyGlyphWidth -Output ([IO.Path]::GetFullPath($Output))
 } elseif ($DoomWad) {
     & wt.exe -w new --size 324,105 new-tab -p 'pwshDoom Study' $runtime -NoProfile -File (Join-Path $PSScriptRoot 'Measure-DoomScene.ps1') -Live -Wad ([IO.Path]::GetFullPath($DoomWad)) -Output ([IO.Path]::GetFullPath($Output))

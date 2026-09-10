@@ -1,0 +1,108 @@
+{
+  "RecordedUtc": "2026-09-10T16:49:28.8994361Z",
+  "PowerShell": "7.6.5",
+  "Width": 320,
+  "Height": 200,
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "SourceSha256": "30624D2F6878FE6832997C1F2B65858E7C26BAC9A54A1C920BC06E649471E943",
+  "Meaning": "PowerShell persistent worker runspaces; geometry and strip encoding. No output/gameplay; not displayed FPS.",
+  "InterpolationChangesAgainstUpstream": [
+    2147,
+    2395,
+    1944,
+    0,
+    44,
+    0,
+    0,
+    940
+  ],
+  "Results": [
+    {
+      "PixelMismatchesByHeading": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "RenderAndEncodeMs": {
+        "Count": 32,
+        "Mean": 59.2808875,
+        "Median": 57.7501,
+        "P95": 85.2374,
+        "Max": 93.0454
+      },
+      "Bytes": {
+        "Count": 32,
+        "Mean": 459948.0,
+        "Median": 467677.5,
+        "P95": 485083.0,
+        "Max": 485083.0
+      },
+      "SamplesMs": [
+        52.0528,
+        93.0454,
+        45.6903,
+        51.5024,
+        57.7115,
+        55.0286,
+        65.264,
+        50.0507,
+        59.6484,
+        67.6793,
+        72.6161,
+        41.1024,
+        49.2175,
+        65.0363,
+        73.6284,
+        51.4045,
+        51.2002,
+        85.2374,
+        59.2047,
+        61.1407,
+        32.2305,
+        51.0066,
+        65.3783,
+        60.66,
+        57.7887,
+        55.6353,
+        56.0467,
+        73.3198,
+        47.3693,
+        74.8115,
+        54.226,
+        61.0541
+      ],
+      "LastWorkerTimings": [
+        {
+          "EncodeMs": 12.2213,
+          "StartQpc": 1666349869900,
+          "RenderMs": 34.5585,
+          "EndQpc": 1666350337698
+        },
+        {
+          "EncodeMs": 26.0706,
+          "StartQpc": 1666349869972,
+          "RenderMs": 34.8455,
+          "EndQpc": 1666350479133
+        },
+        {
+          "EncodeMs": 12.1868,
+          "StartQpc": 1666349870099,
+          "RenderMs": 34.5809,
+          "EndQpc": 1666350337776
+        },
+        {
+          "EncodeMs": 6.2897,
+          "StartQpc": 1666349870151,
+          "RenderMs": 28.7801,
+          "EndQpc": 1666350220849
+        }
+      ],
+      "Workers": 4
+    }
+  ]
+}

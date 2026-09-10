@@ -6,6 +6,7 @@ The objective is to find out what works on real hardware before choosing an engi
 
 ## Read the investigation
 
+- [PowerShell-only 60 FPS rendering investigation](docs/sixty-fps-investigation.md): the new parallel renderer, measured 60-update pacing, and remaining gameplay/display work.
 - [First findings](docs/findings-2026-09-10.md): measured outcomes, limitations, and the next useful experiment.
 - [Ledger](docs/ledger.md): dated decisions, observations, corrections, and experiment outcomes.
 - [Existing implementations](docs/existing-implementations.md): evidence and gaps in current offerings.
