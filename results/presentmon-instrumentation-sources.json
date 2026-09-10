@@ -1,0 +1,21 @@
+{
+  "InstalledSdkHeaderSha256": "3766FA9AD32E4351EF24478D593888123196C3024D3533CF177BF0F874BC467D",
+  "RecordedUtc": "2026-09-10T21:29:51.2744994Z",
+  "Note": "Optional measurement code. The post-capture collector change only creates the output directory; capture/query logic and analysis are unchanged. Hashes describe worktree bytes, including line endings.",
+  "Files": [
+    {
+      "Sha256": "E669A1728B7F4831198B841B54CEA3DA430435B9144B86A387220C098E378ECE",
+      "Path": "scripts/PresentMonApi.ps1"
+    },
+    {
+      "Sha256": "125585DB2C9BB64C2DE3E8942AF0DB4754F8BB5E3BF23A2E3D8F56515BC4ABD3",
+      "Path": "scripts/Measure-PresentMonGame.ps1"
+    },
+    {
+      "Sha256": "3E2832DC9FE303717E02FADDE2B091701804E46188BBD234DE25494AC6BCCC56",
+      "Path": "scripts/Analyze-PresentMonGame.ps1"
+    }
+  ],
+  "GameSourceManifest": "implementation-release-sources.json",
+  "GameSourceHashesVerified": 220
+}

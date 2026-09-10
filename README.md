@@ -2,7 +2,7 @@
 
 A PowerShell Doom prototype for Windows Terminal, with a retained investigation and measurement ledger. Game logic, software rendering, and terminal encoding are PowerShell. User-supplied IWADs stay outside the repository.
 
-The E1M1 test completes the level through normal movement, turning, shooting, and use commands, with five kills and no cheats. A full-level Windows Terminal run at **320×200 completed 60.0 image updates/sec and 34.9 simulation tics/sec** over 44.68 seconds. This meets the average throughput target on the tested machine; timing spikes remain. Completed writes are not measured monitor presentations. See [implementation and validation](docs/implementation.md) for the measurements, reproducible route, and limits.
+The E1M1 test completes the level through normal movement, turning, shooting, and use commands, with five kills and no cheats. Full-level Windows Terminal runs at **320×200 complete about 60 image updates/sec and 34.9 simulation tics/sec**. A separate PresentMon service capture measured **59.96 displayed Terminal updates/sec** during gameplay. This meets the average throughput target on the tested machine; timing spikes remain. The ETW capture measures presentation timing, without identifying the Doom framebuffer contents of every presentation. See [implementation and validation](docs/implementation.md) and the [PresentMon findings](docs/presentmon-validation.md).
 
 ## Play
 
@@ -44,7 +44,7 @@ That recording requires the same IWAD hash as the test and the default skill 3 /
 
 ## Source and tests
 
-The gameplay core is an attributed GPL PowerShell translation of ManagedDoom, with integration fixes. See [source provenance](src/ManagedDoom/ORIGIN.md) and [LICENSE](LICENSE). No unlicensed third-party engine, compiled rendering helper, WAD, or native game binary is distributed. The only custom C# text declares Windows console/timer API signatures and an input record layout; it contains no algorithm bodies. A process-local 1 ms timer request is paired with its release on handled exit.
+The gameplay core is an attributed GPL PowerShell translation of ManagedDoom, with integration fixes. See [source provenance](src/ManagedDoom/ORIGIN.md) and [LICENSE](LICENSE). No unlicensed third-party engine, compiled rendering helper, WAD, or native game binary is distributed. The game's custom C# text declares Windows console/timer API signatures and an input record layout; it contains no algorithm bodies. A process-local 1 ms timer request is paired with its release on handled exit. Optional PresentMon measurement scripts also declare API signatures for the installed external tool; the game does not load PresentMon.
 
 ```powershell
 pwsh -NoProfile -File scripts/Test-GameActions.ps1

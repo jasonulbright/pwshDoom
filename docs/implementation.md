@@ -67,7 +67,7 @@ The release launcher was then checked with maximization enabled. At a 688×123 g
 
 `FrameMs` means **render submission to completed write latency**, not time between frames. Stages overlap, so 27 ms latency can coexist with 60 updates/sec. Consecutive `FrameStats[].EndQpc` values establish output intervals. A pending job finished during shutdown is not counted as a completed image update. New reports count simulation tics published at clock stop, excluding commands drained during cleanup.
 
-Catch-up contributes to the average. Neither a 60 Hz average nor 35 tics/sec establishes that every deadline was met. Input-to-display latency and physical monitor presentations remain unmeasured. PresentMon tracing was unavailable under the study's access conditions; security/access settings were not changed. In the first pipelined run, renderer working sets totaled 2.99 GiB and simulation 0.30 GiB, excluding the coordinator and Terminal.
+Catch-up contributes to the average. Neither a 60 Hz average nor 35 tics/sec establishes that every deadline was met. The initial standalone PresentMon probe was denied access. After the user installed PresentMon, its documented service API became accessible: a full replay measured **59.96 ETW-reported displayed Terminal updates/sec**, with 24.279 ms p95 displayed-frame spacing and a 60.616 ms maximum. See [PresentMon validation](presentmon-validation.md) for the raw capture, windowing method, and limitations. Security/access settings were not changed. Input-to-display latency, optical measurement, and identification of each displayed Doom framebuffer remain untested. In the first pipelined run, renderer working sets totaled 2.99 GiB and simulation 0.30 GiB, excluding the coordinator and Terminal.
 
 ## Correctness evidence
 

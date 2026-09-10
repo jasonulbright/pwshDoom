@@ -1,0 +1,16 @@
+{
+  "InstalledCaptureAppProbe": {
+    "Note": "Observed tool output; no elevation was attempted.",
+    "Outcome": "Process creation failed",
+    "UseShellExecute": false,
+    "Executable": "C:\\Program Files\\Intel\\PresentMon\\PresentMonApplication\\PresentMon.exe",
+    "CreateNoWindow": true,
+    "Arguments": [
+      "--help"
+    ],
+    "ObservedMessage": "The requested operation requires elevation."
+  },
+  "ServiceApiProbe": "presentmon-service-probe.json",
+  "AccessChanges": false,
+  "RecordedUtc": "2026-09-10T21:29:51.2265456Z"
+}
