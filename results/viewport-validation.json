@@ -1,0 +1,75 @@
+{
+  "Meaning": "Final parse, codec, source-hash, capture-outcome and owned-process cleanup checks. Physical resize/1080p display testing remains unperformed.",
+  "AnsiCheck": "PASS: 24 ANSI strip round-trips, both origins/color modes, odd dimensions and uneven partitions.",
+  "CreatedUtc": "2026-09-10T21:51:23.2976243Z",
+  "RuntimeHashesVerified": 221,
+  "ViewportTestSha256": "1194BB03FA5CA9D52D24C06BF22439F750EBC717FC8C29AFF5151D2B0D3CA6E9",
+  "PartitionTestSha256": "637E67FA354043D74566A483C2E12EC86A79728BB5357BD5CD4322A91CF36789",
+  "ParsedFiles": 55,
+  "Captures": [
+    {
+      "Rows": 156,
+      "Prefix": "presentmon-viewport-e1m1",
+      "Columns": 582,
+      "TicsPerSecond": 34.910757094550625,
+      "WritesPerSecond": 59.99726908364759,
+      "Viewport": [
+        {
+          "WallMs": 0.3961,
+          "Top": 28,
+          "PublishedSimulationTics": 0,
+          "Left": 131,
+          "IssuedCommands": 0,
+          "Rows": 156,
+          "Fits": true,
+          "Columns": 582,
+          "ActiveMs": 5.9655
+        }
+      ],
+      "DisplayedPerSecond": 57.604276914634205
+    },
+    {
+      "Rows": 156,
+      "Prefix": "presentmon-viewport-repeat",
+      "Columns": 582,
+      "TicsPerSecond": 34.91829566484883,
+      "WritesPerSecond": 60.0102247932434,
+      "Viewport": [
+        {
+          "Rows": 156,
+          "Left": 131,
+          "IssuedCommands": 0,
+          "Fits": true,
+          "Columns": 582,
+          "ActiveMs": 5.6458,
+          "PublishedSimulationTics": 0,
+          "Top": 28,
+          "WallMs": 0.3604
+        }
+      ],
+      "DisplayedPerSecond": 57.6644659960379
+    },
+    {
+      "Rows": 151,
+      "Prefix": "presentmon-viewport-maximized",
+      "Columns": 688,
+      "TicsPerSecond": 34.923521718555335,
+      "WritesPerSecond": 59.99681936264635,
+      "Viewport": [
+        {
+          "IssuedCommands": 0,
+          "Fits": true,
+          "Rows": 151,
+          "Top": 25,
+          "Columns": 688,
+          "PublishedSimulationTics": 0,
+          "Left": 184,
+          "WallMs": 0.3754,
+          "ActiveMs": 5.4439
+        }
+      ],
+      "DisplayedPerSecond": 59.73321142464535
+    }
+  ],
+  "RemainingOwnedGameProcesses": 0
+}

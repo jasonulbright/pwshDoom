@@ -23,7 +23,7 @@ try {
         $ctx.World=$snapshot;$ctx.Sectors=$snapshot.Sectors;$ctx.Sides=$snapshot.Sides
         $watch=[Diagnostics.Stopwatch]::StartNew();Invoke-FastRender $ctx $FirstColumn $EndColumn
         $view.Write(16,$watch.Elapsed.TotalMilliseconds);$watch.Restart()
-        $encoded=ConvertTo-AnsiStrip $ctx.Pixels 320 200 $FirstColumn $EndColumn $codec
+        $encoded=ConvertTo-AnsiStrip $ctx.Pixels 320 200 $FirstColumn $EndColumn $codec -ColumnOffset ($view.ReadInt32(64)) -RowOffset ($view.ReadInt32(68))
         if($encoded.Length -gt 3000000){throw 'Encoded frame exceeds transport capacity.'}
         $view.Write(24,$watch.Elapsed.TotalMilliseconds);$view.Write(8,$encoded.Length);$view.Write(32,[int]$snapshot.Tic)
         $view.WriteArray(1048576L,$ctx.Pixels,0,64000);$view.WriteArray(1114112L,$encoded,0,$encoded.Length)

@@ -3,7 +3,8 @@
 # PresentMon is external measurement software; it is not a game dependency.
 param([string]$OutputPrefix="$PSScriptRoot/../results/presentmon-e1m1",
     [string]$Wad='C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\base\DOOM.WAD',
-    [string]$Replay="$PSScriptRoot/../results/e1m1-route.json")
+    [string]$Replay="$PSScriptRoot/../results/e1m1-route.json",
+    [ValidateRange(4,24)][int]$FontSize=6,[switch]$Maximized)
 $ErrorActionPreference='Stop'
 . "$PSScriptRoot/PresentMonApi.ps1"
 Initialize-PresentMonApi
@@ -41,7 +42,7 @@ try {
         if($elements[$i].DataSize -ne $size -or $elements[$i].DataOffset+$size -gt $blobSize){throw 'Returned field ABI/size mismatch.'}
         $fields.Add(@{Name=$spec[$i][0];Metric=$spec[$i][1];Id=$m.Id;Type=$m.FrameType;Unit=$m.Unit;Offset=$elements[$i].DataOffset;Size=$size})
     }
-    & "$PSScriptRoot/../Start-Doom.ps1" -Wad $Wad -Replay $Replay -Seconds 90 -Report $reportPath
+    & "$PSScriptRoot/../Start-Doom.ps1" -Wad $Wad -Replay $Replay -Seconds 90 -Report $reportPath -FontSize $FontSize -Maximized:$Maximized
     $watch=[Diagnostics.Stopwatch]::StartNew()
     while($null -eq $target) {
         $found=@(Get-Process WindowsTerminal -ErrorAction SilentlyContinue)
@@ -76,6 +77,7 @@ finally {
         TerminalPid=if($null -ne $target){$target.Id}else{$null};Fields=$fields.ToArray();BlobSize=$blobSize;
         CaptureBeforeQpc=$beforeQpc;CaptureStopQpc=$stopQpc;QpcFrequency=[Diagnostics.Stopwatch]::Frequency;
         GameReport=[IO.Path]::GetFileName($reportPath);FramesFile=[IO.Path]::GetFileName($prefix+'-frames.csv');
+        LaunchFontSize=$FontSize;LaunchMaximized=[bool]$Maximized;
         PresentMonDll='C:\Program Files\Intel\PresentMonSharedService\PresentMonAPI2.dll';
         PresentMonDllSha256=(Get-FileHash 'C:\Program Files\Intel\PresentMonSharedService\PresentMonAPI2.dll').Hash;
         Meaning='PresentMon service frame events for the isolated Windows Terminal process. Includes startup/cleanup and potentially multiple swapchains; analyze within game write timestamps and per swapchain. Does not identify the Doom frame contents of each presentation.'} |

@@ -51,3 +51,7 @@ With the user's PresentMon service/SDK installed at their default paths, run fro
 ```
 
 Choose a fresh prefix to preserve previous captures. The default replay requires the previously validated Ultimate Doom IWAD. The adapter stops only its own tracking session, frees its query/session handles, and leaves the installed shared service running. The game retains its finite duration and owned-worker cleanup. The native measurement dependency adds instrumentation overhead; one successful capture is not a statistical estimate of that overhead.
+
+## Subsequent viewport comparison
+
+The original results above precede the centered viewport and optional status rows. Three captures of the updated runtime retained about 60 completed image writes/sec: two 6-point/windowed launches measured 57.604 and 57.664 displayed updates/sec, while a 6-point/maximized launch measured 59.733/sec. The windowed captures include initial dropped presents that are not removed from the analysis. See [viewport comparison](viewport.md#live-terminal-and-presentmon-comparison) for the parameters, raw evidence, and limits. The collector now accepts explicit `-FontSize` and `-Maximized` options and records them in new captures.

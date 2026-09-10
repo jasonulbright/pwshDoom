@@ -48,12 +48,13 @@ function Test-GameRenderCompleted {
     return $true
 }
 function Submit-GameRender {
-    param($Pool,$Snapshot)
+    param($Pool,$Snapshot,[int]$ColumnOffset=0,[int]$RowOffset=0)
     if(-not (Test-GameRenderCompleted $Pool)){throw 'A render is already in progress.'}
     if($Snapshot -is [byte[]]){$bytes=$Snapshot}else{$bytes=ConvertTo-GameSnapshotBytes $Snapshot}
     if($bytes.Length -gt 1048448){throw 'Snapshot exceeds transport capacity.'}
     foreach($worker in $Pool.Workers) {
-        [void]$worker.Done.Reset();$worker.View.Write(4,$bytes.Length);$worker.View.WriteArray(128L,$bytes,0,$bytes.Length);[void]$worker.Go.Set()
+        [void]$worker.Done.Reset();$worker.View.Write(4,$bytes.Length);$worker.View.WriteArray(128L,$bytes,0,$bytes.Length)
+        $worker.View.Write(64,$ColumnOffset);$worker.View.Write(68,$RowOffset);[void]$worker.Go.Set()
     }
 }
 function Wait-GameRender {

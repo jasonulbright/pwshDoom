@@ -1,0 +1,143 @@
+{
+  "LayoutChecks": [
+    {
+      "Left": 0,
+      "Fits": true,
+      "Top": 0,
+      "Diagnostics": false,
+      "Rows": 100,
+      "Columns": 320
+    },
+    {
+      "Left": 0,
+      "Fits": false,
+      "Top": 0,
+      "Diagnostics": false,
+      "Rows": 100,
+      "Columns": 319
+    },
+    {
+      "Left": 0,
+      "Fits": false,
+      "Top": 0,
+      "Diagnostics": false,
+      "Rows": 99,
+      "Columns": 320
+    },
+    {
+      "Left": 0,
+      "Fits": false,
+      "Top": 0,
+      "Diagnostics": false,
+      "Rows": 98,
+      "Columns": 589
+    },
+    {
+      "Left": 184,
+      "Fits": true,
+      "Top": 11,
+      "Diagnostics": false,
+      "Rows": 123,
+      "Columns": 688
+    },
+    {
+      "Left": 80,
+      "Fits": true,
+      "Top": 4,
+      "Diagnostics": false,
+      "Rows": 108,
+      "Columns": 480
+    },
+    {
+      "Left": 240,
+      "Fits": true,
+      "Top": 25,
+      "Diagnostics": false,
+      "Rows": 150,
+      "Columns": 800
+    },
+    {
+      "Left": 0,
+      "Fits": true,
+      "Top": 2,
+      "Diagnostics": true,
+      "Rows": 102,
+      "Columns": 320
+    },
+    {
+      "Left": 0,
+      "Fits": false,
+      "Top": 2,
+      "Diagnostics": true,
+      "Rows": 100,
+      "Columns": 320
+    }
+  ],
+  "Integration": {
+    "Pauses": 2,
+    "Result": "Pass",
+    "History": [
+      {
+        "PublishedSimulationTics": 0,
+        "Left": 0,
+        "Fits": false,
+        "ActiveMs": 7.0013,
+        "Columns": 589,
+        "Top": 0,
+        "Rows": 98,
+        "IssuedCommands": 0,
+        "WallMs": 0.4261
+      },
+      {
+        "PublishedSimulationTics": 0,
+        "Left": 0,
+        "Fits": true,
+        "ActiveMs": 7.008,
+        "Columns": 320,
+        "Top": 0,
+        "Rows": 100,
+        "IssuedCommands": 0,
+        "WallMs": 876.944
+      },
+      {
+        "PublishedSimulationTics": 35,
+        "Left": 240,
+        "Fits": true,
+        "ActiveMs": 1016.3523,
+        "Columns": 800,
+        "Top": 25,
+        "Rows": 150,
+        "IssuedCommands": 35,
+        "WallMs": 1888.0057
+      },
+      {
+        "PublishedSimulationTics": 56,
+        "Left": 0,
+        "Fits": false,
+        "ActiveMs": 1620.7548,
+        "Columns": 320,
+        "Top": 0,
+        "Rows": 97,
+        "IssuedCommands": 56,
+        "WallMs": 2492.4258
+      },
+      {
+        "PublishedSimulationTics": 56,
+        "Left": 0,
+        "Fits": true,
+        "ActiveMs": 1620.7563,
+        "Columns": 320,
+        "Top": 0,
+        "Rows": 100,
+        "IssuedCommands": 56,
+        "WallMs": 3471.649
+      }
+    ],
+    "WallSeconds": 5.0007711,
+    "ActiveSeconds": 3.1496197,
+    "ViewportPausedSeconds": 1.8557410999999997
+  },
+  "PauseMessageSizes": 3,
+  "FinishedUtc": "2026-09-10T21:40:00.6658254Z",
+  "Meaning": "Synthetic terminal-grid tests with real headless simulation/render workers. The 98-row startup pauses, exact 320x100 resumes, enlargement recenters, shrinking pauses, restoration resumes without catch-up. No physical desktop resize or 1080p-monitor observation is claimed."
+}

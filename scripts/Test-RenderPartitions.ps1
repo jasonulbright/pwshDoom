@@ -24,10 +24,12 @@ try {
         $serial=$context.Clone();Set-GameRenderSnapshot $serial $snapshot;Invoke-FastRender $serial
         $expected=[byte[]]$serial.Pixels.Clone()
         . "$PSScriptRoot/../src/FastRenderer.ps1"
-        Submit-GameRender $pool $snapshot;Wait-GameRender $pool
+        Submit-GameRender $pool $snapshot -ColumnOffset 17 -RowOffset 5;Wait-GameRender $pool
         $actual=[byte[]]::new(64000)
         for($i=0;$i -lt $pool.Count;$i++) {
             $worker=$pool.Workers[$i];$result=$pool.Results[$i]
+            $prefix="$([char]27)[6;$($worker.First+18)H"
+            if(-not [Text.Encoding]::UTF8.GetString($result.Bytes).StartsWith($prefix)){throw 'Worker did not apply the requested viewport origin.'}
             if($result.Tic -ne $snapshot.Tic){throw 'Worker returned a different simulation tic.'}
             for($y=0;$y -lt 200;$y++){[Array]::Copy($result.Pixels,$y*320+$worker.First,$actual,$y*320+$worker.First,$worker.End-$worker.First)}
         }

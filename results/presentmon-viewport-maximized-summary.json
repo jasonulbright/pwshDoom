@@ -1,0 +1,79 @@
+{
+  "WindowEndQpc": 1846726082972,
+  "WindowSeconds": 44.5815642,
+  "SwapChains": [
+    {
+      "GpuBusyMs": {
+        "Count": 2669,
+        "Mean": 2.124269052079434,
+        "Median": 2.128,
+        "P95": 3.802,
+        "Max": 10.1753
+      },
+      "SubmittedWithinWindow": 2669,
+      "PresentModes": [
+        {
+          "Mode": 3,
+          "Count": 3
+        },
+        {
+          "Mode": 4,
+          "Count": 102
+        },
+        {
+          "Mode": 8,
+          "Count": 2564
+        }
+      ],
+      "MissingDisplayTimestampForNonDropped": 0,
+      "DisplayedTransitionsPerSecond": 59.73321142464535,
+      "DisplayIntervalsOver50ms": 1,
+      "DisplayIntervalsOver33_333ms": 26,
+      "MaximumDisplayIntervalCheckErrorMs": 7.105427357601002E-15,
+      "MaximumPresentIntervalCheckErrorMs": 7.105427357601002E-15,
+      "SubmittedPerSecond": 59.86779620442299,
+      "SwapChain": "2135585588784",
+      "DisplayIntervalMs": {
+        "Count": 2662,
+        "Mean": 16.738318670172845,
+        "Median": 18.1762,
+        "P95": 24.266,
+        "Max": 54.5515
+      },
+      "DroppedAmongSubmitted": 6,
+      "DisplayTransitionsWithinWindow": 2663,
+      "PresentToDisplayMs": {
+        "Count": 2663,
+        "Mean": 5.4524657153586045,
+        "Median": 5.3422,
+        "P95": 9.1686,
+        "Max": 20.3296
+      },
+      "PresentIntervalMs": {
+        "Count": 2668,
+        "Mean": 16.702464580209917,
+        "Median": 16.41455,
+        "P95": 22.5489,
+        "Max": 58.8346
+      },
+      "AllCapturedRows": 2692
+    }
+  ],
+  "GameCompletedUpdatesPerSecond": 59.99681936264635,
+  "GameDurationSeconds": 44.6690346,
+  "TerminalPid": 23464,
+  "GameSimulationTicsPerSecond": 34.923521718555335,
+  "AnalyzedUtc": "2026-09-10T21:50:34.9421462Z",
+  "CaptureSha256": "99EE2314B885C446F1937F4E7512471A6715F53631F74D975670BA53C0B61C07",
+  "GameKills": 5,
+  "FramesSha256": "28F012DBD8A12057198A3BCF3542D20A5A4FA58AEA1D8CCA139B6BFE56B152D4",
+  "GameFrames": 2680,
+  "WindowStartQpc": 1846280267330,
+  "QpcFrequency": 10000000.0,
+  "GameSha256": "657AFBD57FB390BD143F4891A4ED7DEE3041FD107C41FF0A92E942F65EE108DA",
+  "GameHealth": 75,
+  "Method": "Clip to the interval between first and last completed game writes. Group by swapchain. Present events use PresentStartQpc; display events use PresentStartQpc + UntilDisplayedMs * QpcFrequency / 1000 for non-dropped rows. Rates are event counts / window duration. Intervals use consecutive in-window timestamps, excluding boundary-crossing startup intervals; verify against native interval metrics.",
+  "GameExit": "LevelComplete",
+  "GameTics": 1560,
+  "Meaning": "Independent ETW-based Terminal presentation/display timing from the installed PresentMon service. This is not an optical measurement or a one-to-one identification of distinct Doom framebuffers. Presentation/display latency here starts at Terminal Present(), not user input or Doom rendering. Windows compositor scheduling and the active desktop affect cadence."
+}

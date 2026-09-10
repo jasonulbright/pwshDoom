@@ -2,7 +2,7 @@
 
 A PowerShell Doom prototype for Windows Terminal, with a retained investigation and measurement ledger. Game logic, software rendering, and terminal encoding are PowerShell. User-supplied IWADs stay outside the repository.
 
-The E1M1 test completes the level through normal movement, turning, shooting, and use commands, with five kills and no cheats. Full-level Windows Terminal runs at **320×200 complete about 60 image updates/sec and 34.9 simulation tics/sec**. A separate PresentMon service capture measured **59.96 displayed Terminal updates/sec** during gameplay. This meets the average throughput target on the tested machine; timing spikes remain. The ETW capture measures presentation timing, without identifying the Doom framebuffer contents of every presentation. See [implementation and validation](docs/implementation.md) and the [PresentMon findings](docs/presentmon-validation.md).
+The E1M1 test completes the level through normal movement, turning, shooting, and use commands, with five kills and no cheats. Full-level Windows Terminal runs at **320×200 complete about 60 image updates/sec and 34.9 simulation tics/sec**. An earlier PresentMon service capture measured **59.96 displayed Terminal updates/sec** during gameplay. With the current layout, a maximized run measured **59.73/sec**, while two windowed captures measured **57.60 and 57.66/sec**, with dropped presents concentrated at the start; all three completed about 60 image writes/sec. Presentation pacing remains unfinished. The ETW capture measures presentation timing, without identifying the Doom framebuffer contents of every presentation. See [implementation and validation](docs/implementation.md), [viewport findings](docs/viewport.md), and the [PresentMon findings](docs/presentmon-validation.md).
 
 ## Play
 
@@ -18,7 +18,9 @@ The launcher finds the classic Steam Ultimate Doom IWAD at its usual location. F
 .\Start-Doom.ps1 -Wad 'D:\Games\DOOM.WAD'
 ```
 
-Startup loads the WAD, warms a disposable level, resets the game, and starts a simulation process and persistent rendering workers. The launcher adds a separate `pwshDoom` Terminal profile with a small font and opens a maximized window; the image requires 320 columns and 102 rows. `-Here` uses the current tab if it is large enough. `-Workers 16` is the tested default. Only classic Ultimate Doom E1M1 on skill 3 is validated so far. The measured setup used PowerShell 7.6.5, Windows Terminal 1.24, and a Core Ultra 7 265K; renderer and simulation working sets totaled about 3.3 GiB, excluding the coordinator and Terminal.
+Startup loads the WAD, warms a disposable level, resets the game, and starts a simulation process and persistent rendering workers. The launcher adds a separate `pwshDoom` Terminal profile with a 6-point font and opens a window. The full 320×200 image occupies **320 columns × 100 rows** and is centered in any extra space. Shrinking below that size pauses the game; enlarging it resumes. `-FontSize 5` makes the image smaller physically; a larger value makes it larger. `-Maximized` is optional, and `-Diagnostics` adds two status rows (102 required). `-Here` uses the current tab and its existing font. These are character-grid requirements, not a minimum monitor resolution; see [window sizing and resize behavior](docs/viewport.md).
+
+`-Workers 16` is the tested default. Only classic Ultimate Doom E1M1 on skill 3 is validated so far. The measured setup used PowerShell 7.6.5, Windows Terminal 1.24, and a Core Ultra 7 265K; renderer and simulation working sets totaled about 3.3 GiB, excluding the coordinator and Terminal.
 
 | Key | Action |
 | --- | --- |
@@ -52,6 +54,7 @@ pwsh -NoProfile -File scripts/Test-E1M1Route.ps1
 pwsh -NoProfile -File scripts/Test-RenderPartitions.ps1
 pwsh -NoProfile -File scripts/Test-ConsoleInput.ps1
 pwsh -NoProfile -File scripts/Test-AnsiStrips.ps1
+pwsh -NoProfile -File scripts/Test-Viewport.ps1
 pwsh -NoProfile -File scripts/Test-SnapshotTransport.ps1
 pwsh -NoProfile -File scripts/Test-GameLifecycle.ps1
 ```
