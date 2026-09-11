@@ -81,13 +81,14 @@ function Reset-DoomInputAfterSessionAction {
 }
 
 function Set-DoomInputCommand {
-    param($State,$Command)
+    param($State,$Command,[switch]$AutomapVisible)
     $keys=$State.Keys.Clone()
     foreach($key in 87,83,65,68,37,38,39,40,17,69,32,13,16){
         if($State.ContainsKey('Suppressed') -and $State.Suppressed[$key]){$keys[$key]=$false}
         elseif($State.Pressed[$key]){$keys[$key]=$true}
     }
     $Command.Clear();$run=$keys[16]
+    if($AutomapVisible){foreach($key in 37,38,39,40){$keys[$key]=$false}}
     $speed=if($run){50}else{25};$strafe=if($run){40}else{24};$turn=if($run){1280}else{640}
     if($keys[87] -or $keys[38]){$Command.ForwardMove+=$speed}
     if($keys[83] -or $keys[40]){$Command.ForwardMove-=$speed}
@@ -97,6 +98,20 @@ function Set-DoomInputCommand {
     if($keys[69] -or $keys[32] -or $keys[13]){$Command.Buttons=$Command.Buttons -bor 2}
     for($key=49;$key -le 55;$key++) {if($State.Pressed[$key]){$Command.Buttons=$Command.Buttons -bor 4 -bor (($key-49) -shl 3)}}
     [Array]::Clear($State.Pressed)
+}
+
+function Get-DoomAutomapInputMask {
+    param($State,[bool]$Visible)
+    [int]$mask=0
+    if($State.Pressed[9] -and -not $State.Suppressed[9]){$mask=1;$Visible=-not $Visible}
+    $State.AutomapVisible=$Visible
+    if($Visible){
+        foreach($pair in @(@(70,2),@(77,4),@(67,8))){if($State.Pressed[$pair[0]] -and -not $State.Suppressed[$pair[0]]){$mask=$mask -bor $pair[1]}}
+        foreach($pair in @(@(187,16),@(107,16),@(189,32),@(109,32),@(37,64),@(39,128),@(38,256),@(40,512))){
+            if(($State.Keys[$pair[0]] -or $State.Pressed[$pair[0]]) -and -not $State.Suppressed[$pair[0]]){$mask=$mask -bor $pair[1]}
+        }
+    }
+    return $mask
 }
 
 function Close-DoomConsoleInput {

@@ -1,0 +1,192 @@
+{
+  "Checks": [
+    {
+      "Passed": true,
+      "Name": "Versioned data-only round trip"
+    },
+    {
+      "Passed": true,
+      "Name": "Existing file preserved"
+    },
+    {
+      "Passed": true,
+      "Name": "Wrong IWAD rejected"
+    },
+    {
+      "Passed": true,
+      "Name": "Recorded nondefault settings"
+    },
+    {
+      "Passed": true,
+      "Name": "Conflicting explicit setting rejected"
+    },
+    {
+      "Passed": true,
+      "Name": "Actual PSBoundParameters accepted"
+    },
+    {
+      "Passed": true,
+      "Name": "Unknown version"
+    },
+    {
+      "Passed": true,
+      "Name": "String version"
+    },
+    {
+      "Passed": true,
+      "Name": "Wrong format"
+    },
+    {
+      "Passed": true,
+      "Name": "Missing starting skill"
+    },
+    {
+      "Passed": true,
+      "Name": "Boolean skill"
+    },
+    {
+      "Passed": true,
+      "Name": "Map outside bounds"
+    },
+    {
+      "Passed": true,
+      "Name": "Nonboolean continuation"
+    },
+    {
+      "Passed": true,
+      "Name": "Missing continuation"
+    },
+    {
+      "Passed": true,
+      "Name": "Invalid WAD hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Invalid source fingerprint"
+    },
+    {
+      "Passed": true,
+      "Name": "Null commands"
+    },
+    {
+      "Passed": true,
+      "Name": "Scalar command"
+    },
+    {
+      "Passed": true,
+      "Name": "Short command"
+    },
+    {
+      "Passed": true,
+      "Name": "Float command"
+    },
+    {
+      "Passed": true,
+      "Name": "String command"
+    },
+    {
+      "Passed": true,
+      "Name": "Null command field"
+    },
+    {
+      "Passed": true,
+      "Name": "Forward movement bound"
+    },
+    {
+      "Passed": true,
+      "Name": "Side movement bound"
+    },
+    {
+      "Passed": true,
+      "Name": "Turn bound"
+    },
+    {
+      "Passed": true,
+      "Name": "Button bound"
+    },
+    {
+      "Passed": true,
+      "Name": "Unordered checkpoints"
+    },
+    {
+      "Passed": true,
+      "Name": "Out-of-range checkpoint"
+    },
+    {
+      "Passed": true,
+      "Name": "Invalid checkpoint hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Historical replay defaults under strict mode"
+    },
+    {
+      "Passed": true,
+      "Name": "Version 2 new-game action round trip"
+    },
+    {
+      "Passed": true,
+      "Name": "Version 3 hash-only load round trip discards slot/path fields"
+    },
+    {
+      "Passed": true,
+      "Name": "Version 2 cannot restore saves"
+    },
+    {
+      "Passed": true,
+      "Name": "Replay save hash rejects path traversal"
+    },
+    {
+      "Passed": true,
+      "Name": "Replay cannot write saves"
+    },
+    {
+      "Passed": true,
+      "Name": "Version 1 cannot smuggle control actions"
+    },
+    {
+      "Passed": true,
+      "Name": "Version 2 requires control array"
+    },
+    {
+      "Passed": true,
+      "Name": "Unknown control action rejected"
+    },
+    {
+      "Passed": true,
+      "Name": "Out-of-range control boundary rejected"
+    },
+    {
+      "Passed": true,
+      "Name": "Negative control boundary rejected"
+    },
+    {
+      "Passed": true,
+      "Name": "New game begins at map one"
+    },
+    {
+      "Passed": true,
+      "Name": "Zero-command graceful recording"
+    },
+    {
+      "Passed": true,
+      "Name": "128 MiB size guard before JSON parsing"
+    },
+    {
+      "Passed": true,
+      "Name": "Unconsumed future checkpoint excluded"
+    },
+    {
+      "Passed": true,
+      "Name": "Missing consumed checkpoint fails"
+    },
+    {
+      "Passed": true,
+      "Name": "Diverged checkpoint fails"
+    }
+  ],
+  "Error": null,
+  "Meaning": "Data format, bounds, non-overwrite, legacy defaults, launch binding and checkpoint-comparison checks. No WAD or running engine required; separate real-host replay checks establish runtime behavior.",
+  "FinishedUtc": "2026-09-11T17:00:18.0838852Z",
+  "SourceSha256": "5B800261BD249C3BD3A52C249FFEFA14A3DEEC0AE4313F8912928737EFCC98DB"
+}

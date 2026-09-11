@@ -1,0 +1,201 @@
+{
+  "WarmMapSamplesMs": [
+    8.2117,
+    7.6353,
+    7.4673,
+    8.1631,
+    7.4689,
+    7.4294,
+    7.3975,
+    7.8738,
+    7.4917,
+    7.4325
+  ],
+  "WarmMapMs": {
+    "Count": 10,
+    "Mean": 7.657120000000001,
+    "Median": 7.4803,
+    "P95": 8.2117,
+    "Max": 8.2117
+  },
+  "FinishedUtc": "2026-09-11T17:04:22.5987587Z",
+  "Checks": [
+    {
+      "Name": "Tab opens map without pausing gameplay",
+      "Passed": true
+    },
+    {
+      "Name": "Follow toggle permits right pan and zoom",
+      "Passed": true
+    },
+    {
+      "Name": "Zero mask releases held pan and zoom",
+      "Passed": true
+    },
+    {
+      "Name": "Marks wrap at ten slots",
+      "Passed": true
+    },
+    {
+      "Name": "Initial cached composition matches direct map/HUD",
+      "Passed": true
+    },
+    {
+      "Name": "Initial warm cache preserves direct pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Health cached composition matches direct map/HUD",
+      "Passed": true
+    },
+    {
+      "Name": "Health warm cache preserves direct pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Armor cached composition matches direct map/HUD",
+      "Passed": true
+    },
+    {
+      "Name": "Armor warm cache preserves direct pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Ammo cached composition matches direct map/HUD",
+      "Passed": true
+    },
+    {
+      "Name": "Ammo warm cache preserves direct pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Capacity cached composition matches direct map/HUD",
+      "Passed": true
+    },
+    {
+      "Name": "Capacity warm cache preserves direct pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Weapons cached composition matches direct map/HUD",
+      "Passed": true
+    },
+    {
+      "Name": "Weapons warm cache preserves direct pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Keys cached composition matches direct map/HUD",
+      "Passed": true
+    },
+    {
+      "Name": "Keys warm cache preserves direct pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Face cached composition matches direct map/HUD",
+      "Passed": true
+    },
+    {
+      "Name": "Face warm cache preserves direct pixels",
+      "Passed": true
+    },
+    {
+      "Name": "ReadyWeapon cached composition matches direct map/HUD",
+      "Passed": true
+    },
+    {
+      "Name": "ReadyWeapon warm cache preserves direct pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Frags cached composition matches direct map/HUD",
+      "Passed": true
+    },
+    {
+      "Name": "Frags warm cache preserves direct pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Network cached composition matches direct map/HUD",
+      "Passed": true
+    },
+    {
+      "Name": "Network warm cache preserves direct pixels",
+      "Passed": true
+    },
+    {
+      "Name": "PlayerNumber cached composition matches direct map/HUD",
+      "Passed": true
+    },
+    {
+      "Name": "PlayerNumber warm cache preserves direct pixels",
+      "Passed": true
+    },
+    {
+      "Name": "NegativeHealth cached composition matches direct map/HUD",
+      "Passed": true
+    },
+    {
+      "Name": "NegativeHealth warm cache preserves direct pixels",
+      "Passed": true
+    },
+    {
+      "Name": "ClearKeys cached composition matches direct map/HUD",
+      "Passed": true
+    },
+    {
+      "Name": "ClearKeys warm cache preserves direct pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Automap state 0 direct pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Automap state 1 direct pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Automap state 2 direct pixels",
+      "Passed": true
+    },
+    {
+      "Name": "All-map power direct pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Clear removes markers and resets ring",
+      "Passed": true
+    },
+    {
+      "Name": "Save restores discovery, visibility, view, marks and held controls",
+      "Passed": true
+    },
+    {
+      "Name": "First post-load command releases held map controls",
+      "Passed": true
+    },
+    {
+      "Name": "Close resets held map controls",
+      "Passed": true
+    },
+    {
+      "Name": "Opening map captures arrows while WASD still moves",
+      "Passed": true
+    },
+    {
+      "Name": "Closing map restores arrow turning",
+      "Passed": true
+    },
+    {
+      "Name": "Menu-suppressed mark key cannot add a mark",
+      "Passed": true
+    }
+  ],
+  "Error": null,
+  "Meaning": "Simulation object, cached composition, save restoration and synthetic key checks. No physical keyboard or live display pacing claim.",
+  "Directory": "C:\\projects\\pwshDoom\\scripts\\..\\local\\automap-session-9d4ef70328b6472c9de445e016ed5f4f",
+  "SourceFingerprint": "D27984366A26F87600527DCB197ADCE032BAC21D67B0310586D863AAAE8C915B",
+  "HarnessSha256": "D110F988D80D6DD1DA772643A82BF677FD0964B2B6C5368144E94A6EA15EFDBF"
+}

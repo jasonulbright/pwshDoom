@@ -8,6 +8,7 @@ $ErrorActionPreference='Stop'
 . "$PSScriptRoot/../src/InputReplay.ps1"
 . "$PSScriptRoot/../src/SessionMenu.ps1"
 . "$PSScriptRoot/../src/SaveState.ps1"
+. "$PSScriptRoot/../src/AutomapSession.ps1"
 $channelMap=[IO.MemoryMappedFiles.MemoryMappedFile]::OpenExisting($Channel);$view=$channelMap.CreateViewAccessor()
 $ready=[Threading.EventWaitHandle]::OpenExisting($Channel+'-ready');$go=[Threading.EventWaitHandle]::OpenExisting($Channel+'-go')
 $content=$null;$game=$null;$tick=0;$version=0;$slot=0;$failure=$null;$outcome='Stopped'
@@ -17,6 +18,7 @@ $transitions=[Collections.Generic.List[object]]::new();$uiTimes=[Collections.Gen
 $checkpoints=[Collections.Generic.List[object]]::new();$checkpointTimes=[Collections.Generic.List[double]]::new();$extraCheckpoints=@{}
 $menuGraphics=$null;$menuPixels=$null;$menuScreen=0;$menuRevision=0;$episodeCount=4;$controlLog=[Collections.Generic.List[object]]::new()
 $saveOperations=[Collections.Generic.List[object]]::new()
+$automapGraphics=$null;$automapCommands=[Collections.Generic.List[object]]::new();$discoveryTimes=[Collections.Generic.List[double]]::new();$automapTimes=[Collections.Generic.List[double]]::new()
 function Record-ReplayCheckpoint {
     param([switch]$Replace)
     if(-not $ReplayCheckpoints){return}
@@ -30,8 +32,9 @@ function Record-SimulationTransition {
 }
 function Publish-SimulationSnapshot {
     $state=if($StopAtLevelEnd){0}else{[int]$game.State}
-    $screenKind=if($null -ne $script:menuPixels){2}elseif($state -ne 0){1}else{0}
+    $screenKind=if($null -ne $script:menuPixels){2}elseif($state -ne 0){1}elseif($game.World.AutoMap.Visible){3}else{0}
     if($screenKind -eq 2){$current=$script:menuPixels;$old=$current}
+    elseif($screenKind -eq 3){$mapWatch=[Diagnostics.Stopwatch]::StartNew();$current=Get-DoomAutomapScreen $automapGraphics $game;$old=$current;$automapTimes.Add($mapWatch.Elapsed.TotalMilliseconds)}
     elseif($state -eq 0){
         $old=ConvertTo-GameSnapshotBytes (New-GameRenderSnapshot $game 0)
         $current=ConvertTo-GameSnapshotBytes (New-GameRenderSnapshot $game 1)
@@ -47,12 +50,15 @@ function Publish-SimulationSnapshot {
     $view.Write($base+12,$script:generation);$view.Write($base+16,[int]$state);$view.Write($base+20,[int]$game.Options.Episode);$view.Write($base+24,[int]$game.Options.Map)
     $view.Write($base+28,[int]$game.World.ConsolePlayer.Health);$view.Write($base+32,[int]$game.World.ConsolePlayer.KillCount)
     $view.Write($base+36,[int]$screenKind);$view.Write($base+40,[int]$script:menuRevision);$view.Write($base+44,[int]$script:menuScreen)
+    $view.Write($base+48,[int]([int]$game.State -eq 0 -and $game.World.AutoMap.Visible))
     $view.WriteArray($base+64,$old,0,$old.Length);$view.WriteArray($base+64+$old.Length,$current,0,$current.Length)
     [Threading.Thread]::MemoryBarrier();$view.Write($base,$script:version);$view.Write(16,$script:slot);$view.Write(20,$script:tick)
 }
 function Publish-SimulationMapChange {
     $view.Write(12,5);$script:generation++
     $context=New-FastRenderContext $content $game.World;Write-GameRenderAssets $context $palette $Assets
+    $script:automapGraphics.HudKey=''
+    if([int]$game.State -eq 0){$automapGraphics.Discovery.DiscoverMap($game.World.ConsolePlayer)}
     Record-SimulationTransition;Record-ReplayCheckpoint -Replace
     $publishWatch=[Diagnostics.Stopwatch]::StartNew();Publish-SimulationSnapshot;$snapshotTimes.Add($publishWatch.Elapsed.TotalMilliseconds)
     $view.Write(24,$script:generation);[Threading.Thread]::MemoryBarrier();$view.Write(12,4)
@@ -63,7 +69,7 @@ try {
     $owner=[Diagnostics.Process]::GetProcessById($OwnerPid)
     $wadHash=(Get-FileHash -LiteralPath $Wad).Hash;$saveDirectory=Get-DoomSaveDirectory $SaveRoot $wadHash
     if($CheckpointReplay){$recorded=Read-DoomInputReplay $CheckpointReplay (Get-FileHash -LiteralPath $Wad).Hash;foreach($point in $recorded.Checkpoints){$extraCheckpoints[[int]$point.Tic]=$true}}
-    $bundle=& "$PSScriptRoot/Build-EngineBundle.ps1";. $bundle
+    $bundle=& "$PSScriptRoot/Build-EngineBundle.ps1" -Output "$PSScriptRoot/../local/simulation-bundle-$PID.ps1";. $bundle
     $null=[DoomInfo]::SwitchNames;$content=[GameContent]::new(@('-iwad',$Wad));$options=[GameOptions]::new()
     $options.GameMode=$content.Wad.GameMode;$options.GameVersion=$content.Wad.GameVersion;$options.MissionPack=$content.Wad.MissionPack
     $episodeCount=if($options.GameMode -in [GameMode]::Shareware,[GameMode]::Commercial){1}elseif($options.GameMode -eq [GameMode]::Retail){4}else{3};$view.Write(80,[int]$episodeCount)
@@ -76,6 +82,8 @@ try {
     for($i=0;$i -lt 256;$i++){$palette[$i]=@($content.Palette.Data[3*$i],$content.Palette.Data[3*$i+1],$content.Palette.Data[3*$i+2])}
     Write-GameRenderAssets $context $palette $Assets
     if(-not $StopAtLevelEnd){$screens=New-DoomSessionScreens $content}
+    $automapGraphics=New-DoomAutomapGraphics $content
+    $automapGraphics.Discovery.DiscoverMap($game.World.ConsolePlayer)
     Record-SimulationTransition
     Record-ReplayCheckpoint
     Publish-SimulationSnapshot;$view.Write(12,1);[void]$ready.Set()
@@ -171,10 +179,14 @@ try {
         [long]$offset=4096+($tick%1024)*16
         $cmd=$commands[0];$cmd.Clear();$cmd.ForwardMove=$view.ReadInt32($offset);$cmd.SideMove=$view.ReadInt32($offset+4);$cmd.AngleTurn=$view.ReadInt32($offset+8);$cmd.Buttons=$view.ReadInt32($offset+12)
         $commandLog.Add(@($cmd.ForwardMove,$cmd.SideMove,$cmd.AngleTurn,$cmd.Buttons))
+        $automapMask=$view.ReadInt32(98304+($tick%1024)*4)
+        Set-DoomAutomapCommand $game $automapMask
+        if($automapMask -ne 0){$automapCommands.Add(@{Tic=$tick;Mask=$automapMask})}
         $start=$view.ReadInt64(40)
         if($start -gt 0){$lateness.Add(([Diagnostics.Stopwatch]::GetTimestamp()-$start)*1000.0/[Diagnostics.Stopwatch]::Frequency-($tick+1)*1000.0/35)}
         $priorWorld=$game.World;$priorState=$game.State
         $watch=[Diagnostics.Stopwatch]::StartNew();$null=$game.Update($commands);$tickTimes.Add($watch.Elapsed.TotalMilliseconds);$tick++
+        if([int]$game.State -eq 0){$watch.Restart();$automapGraphics.Discovery.DiscoverMap($game.World.ConsolePlayer);$discoveryTimes.Add($watch.Elapsed.TotalMilliseconds)}
         $mapChanged=-not [object]::ReferenceEquals($priorWorld,$game.World)
         if($mapChanged){
             Publish-SimulationMapChange;if($outcome -eq 'OwnerExited'){break}
@@ -191,6 +203,7 @@ finally {
     @{FinishedUtc=[DateTime]::UtcNow.ToString('o');Outcome=$outcome;Error=$failure;Tics=$tick;WarmupTics=140;Skill=$Skill;Episode=$Episode;Map=$Map;
         ReplayCheckpoints=$checkpoints.ToArray();ReplayCheckpointMs=(Get-SampleStats $checkpointTimes.ToArray());ReplayCheckpointSamplesMs=$checkpointTimes.ToArray();
         ControlEvents=$controlLog.ToArray();MenuScreen=$menuScreen;MenuRevision=$menuRevision;SaveOperations=$saveOperations.ToArray();SaveDirectory=$saveDirectory;
+        AutomapCommands=$automapCommands.ToArray();AutomapDiscoveryMs=(Get-SampleStats $discoveryTimes.ToArray());AutomapDiscoverySamplesMs=$discoveryTimes.ToArray();AutomapRenderMs=(Get-SampleStats $automapTimes.ToArray());AutomapRenderSamplesMs=$automapTimes.ToArray();
         StopAtLevelEnd=[bool]$StopAtLevelEnd;Transitions=$transitions.ToArray();FinalGeneration=$generation;SessionScreenMs=(Get-SampleStats $uiTimes.ToArray());SessionScreenSamplesMs=$uiTimes.ToArray();
         SimulationMs=(Get-SampleStats $tickTimes.ToArray());SnapshotPublishMs=(Get-SampleStats $snapshotTimes.ToArray());TickLatenessMs=(Get-SampleStats $lateness.ToArray());
         SimulationSamplesMs=$tickTimes.ToArray();SnapshotSamplesMs=$snapshotTimes.ToArray();TickLatenessSamplesMs=$lateness.ToArray();InputCommands=$commandLog.ToArray();

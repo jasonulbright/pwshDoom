@@ -67,7 +67,7 @@ function Get-DoomCompactMenu {
         2 {@('Knee-Deep in the Dead','The Shores of Hell','Inferno','Thy Flesh Consumed')|Select-Object -First $Menu.Episodes}
         3 {@("I'm too young to die",'Hey, not too rough','Hurt me plenty','Ultra-Violence','Nightmare')}
         {$_ -in 4,6,10,11} {@('No','Yes')}
-        5 {@('WASD move/strafe; arrows move/turn','Ctrl fire; E/Space/Enter use','Shift run; 1-7 weapons','P pause; Esc menu/back')}
+        5 {@('WASD move/strafe; arrows move/turn','Ctrl fire; E/Space/Enter use','Shift run; 1-7 weapons','Tab map; +/- zoom; F follow','Map: arrows pan; M mark; C clear','P pause; Esc menu/back')}
         7 {@('P / Enter / Esc to resume')}
         {$_ -in 8,9} {@($Menu.Slots|ForEach-Object {if($_.State -eq 'Ready'){"$($_.Slot)  E$($_.Episode)M$($_.Map)  $($_.Time)"}else{"$($_.Slot)  $($_.State)"}})}
         12 {@($Menu.MessageDetail,'Enter / Esc to return')}
@@ -130,7 +130,7 @@ function Get-DoomMenuPixels {
         }
         5 {
             Draw-DoomMenuText $Graphics 'CONTROLS' 0 6 -Center
-            $lines=@('WASD: MOVE/STRAFE','ARROWS: MOVE/TURN','CTRL: FIRE','E/SPACE/ENTER: USE','SHIFT: RUN','1-7: WEAPONS','P: PAUSE/RESUME','ESC: MENU/BACK','ENTER: RETURN')
+            $lines=@('WASD MOVE/STRAFE','ARROWS MOVE/TURN','CTRL FIRE / E USE','SHIFT RUN / 1-7','TAB MAP / +/- ZOOM','MAP: ARROWS PAN','F FOLLOW / M MARK','C CLEAR / P PAUSE','ESC MENU / ENTER')
             for($i=0;$i -lt $lines.Count;$i++){Draw-DoomMenuText $Graphics $lines[$i] 16 (30+18*$i)}
         }
         6 {

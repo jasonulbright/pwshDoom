@@ -1,0 +1,576 @@
+{
+  "Simulation": {
+    "ReplayCheckpointMs": {
+      "Count": 3,
+      "Mean": 25.608966666666664,
+      "Median": 2.4193,
+      "P95": 72.0665,
+      "Max": 72.0665
+    },
+    "MenuRevision": 7,
+    "Health": 100,
+    "WarmupTics": 140,
+    "StopAtLevelEnd": false,
+    "Map": 1,
+    "AutomapDiscoverySamplesMs": [
+      36.979,
+      30.5053,
+      24.8912,
+      25.3663,
+      22.5532,
+      26.0254,
+      22.6453,
+      25.3549,
+      24.3123,
+      22.7555
+    ],
+    "FinalGeneration": 3,
+    "SessionScreenSamplesMs": [],
+    "SaveDirectory": "C:\\projects\\pwshDoom\\local\\automap-worker-09b98d7a9a3c49b98ee4e3ee0481905b\\6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+    "Transitions": [
+      {
+        "Armor": 0,
+        "Map": 1,
+        "Ammo": [
+          50,
+          0,
+          0,
+          0
+        ],
+        "Tic": 0,
+        "Kills": 0,
+        "Generation": 1,
+        "State": "Level",
+        "Keys": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "DidSecret": false,
+        "Episode": 1,
+        "Health": 100,
+        "Weapons": [
+          true,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "Armor": 0,
+        "Map": 1,
+        "Ammo": [
+          50,
+          0,
+          0,
+          0
+        ],
+        "Tic": 8,
+        "Kills": 0,
+        "Generation": 2,
+        "State": "Level",
+        "Keys": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "DidSecret": false,
+        "Episode": 1,
+        "Health": 100,
+        "Weapons": [
+          true,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "Armor": 0,
+        "Map": 1,
+        "Ammo": [
+          50,
+          0,
+          0,
+          0
+        ],
+        "Tic": 10,
+        "Kills": 0,
+        "Generation": 3,
+        "State": "Level",
+        "Keys": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "DidSecret": false,
+        "Episode": 2,
+        "Health": 100,
+        "Weapons": [
+          true,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      }
+    ],
+    "ReplayCheckpoints": [
+      {
+        "Sha256": "20931EDD7A9ABBC3B8E753795EB527C6F4E9C2D68F2D62E8A1EC3E20B84BF943",
+        "State": {
+          "Schema": 1,
+          "Tic": 0,
+          "State": "Level",
+          "Episode": 1,
+          "Map": 1,
+          "LevelTime": 1,
+          "RandomIndex": 144,
+          "Paused": false,
+          "PlayerState": "Live",
+          "Health": 100,
+          "Armor": 0,
+          "Position": [
+            69206016,
+            -236978176,
+            0,
+            1073741824
+          ],
+          "Ammo": [
+            50,
+            0,
+            0,
+            0
+          ],
+          "Weapons": [
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "Keys": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "DidSecret": false,
+          "RenderSnapshotSha256": "ED2A27F9B114FD60CB6F057F423C6AE068ED39F4207999CC8134DA6C95A35566",
+          "Intermission": null,
+          "Finale": null
+        },
+        "Tic": 0,
+        "AutomapSha256": "683FBC3374C915C4FAFDB4CBFEE0CD8899B1AF9046A4B23140EE784EAC28A015"
+      },
+      {
+        "Sha256": "6CC7F3CA75280325E3D210BC40529CBA333DA066EAB5BB98E5043A55FCD763D1",
+        "State": {
+          "Schema": 1,
+          "Tic": 8,
+          "State": "Level",
+          "Episode": 1,
+          "Map": 1,
+          "LevelTime": 6,
+          "RandomIndex": 144,
+          "Paused": false,
+          "PlayerState": "Live",
+          "Health": 100,
+          "Armor": 0,
+          "Position": [
+            69206016,
+            -236978176,
+            0,
+            1073741824
+          ],
+          "Ammo": [
+            50,
+            0,
+            0,
+            0
+          ],
+          "Weapons": [
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "Keys": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "DidSecret": false,
+          "RenderSnapshotSha256": "90355547DAA724AE24831B8284D50EDE9423E452BE04CB7333C36F3B252EC879",
+          "Intermission": null,
+          "Finale": null
+        },
+        "Tic": 8,
+        "AutomapSha256": "EF19EEEE11185515EF59635DE768EE70A4F1675E609A38FA752595875819969F"
+      },
+      {
+        "Sha256": "03A2D9B8AD8D58453CB422642283E2AEAB49469612EFEB62C8E2B1FFC83FC3AD",
+        "State": {
+          "Schema": 1,
+          "Tic": 10,
+          "State": "Level",
+          "Episode": 2,
+          "Map": 1,
+          "LevelTime": 1,
+          "RandomIndex": 159,
+          "Paused": false,
+          "PlayerState": "Live",
+          "Health": 100,
+          "Armor": 0,
+          "Position": [
+            0,
+            3145728,
+            0,
+            1073741824
+          ],
+          "Ammo": [
+            50,
+            0,
+            0,
+            0
+          ],
+          "Weapons": [
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "Keys": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "DidSecret": false,
+          "RenderSnapshotSha256": "D26B45DE67894DB4B41A6B9DDA18B90116EEF290D8B6CB265542FF90E9F75A3C",
+          "Intermission": null,
+          "Finale": null
+        },
+        "Tic": 10,
+        "AutomapSha256": "A7082FC67CD9D64E78ABA392483D968BF79899148278848C78CF111423E6861A"
+      }
+    ],
+    "ReplayCheckpointSamplesMs": [
+      72.0665,
+      2.3411,
+      2.4193
+    ],
+    "Outcome": "Stopped",
+    "Tics": 10,
+    "TickLatenessSamplesMs": [],
+    "InputCommands": [
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "SimulationSamplesMs": [
+      2.6702,
+      11.8252,
+      4.6094,
+      1.4296,
+      1.3541,
+      3.3775,
+      1.4862,
+      3.443,
+      3.1605,
+      3.2004
+    ],
+    "SaveOperations": [
+      {
+        "Tic": 5,
+        "Request": {
+          "Slot": 1,
+          "ExpectedHash": null,
+          "Action": "SaveGame"
+        },
+        "Action": "SaveGame",
+        "Success": true,
+        "Milliseconds": 2453.8175,
+        "Result": {
+          "Bytes": 395606,
+          "Nodes": 1846,
+          "Path": "C:\\projects\\pwshDoom\\local\\automap-worker-09b98d7a9a3c49b98ee4e3ee0481905b\\6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F\\slot-01.pds",
+          "Milliseconds": 1870.1871,
+          "Sha256": "00697338F9F4F72B4FE3B9B528B0A3F116C1FEF9411B0059D2572634D5F4F349",
+          "Backup": null
+        },
+        "Error": null
+      },
+      {
+        "Tic": 8,
+        "Request": {
+          "Slot": 1,
+          "ExpectedHash": "00697338F9F4F72B4FE3B9B528B0A3F116C1FEF9411B0059D2572634D5F4F349",
+          "Action": "LoadGame",
+          "AllowSourceMismatch": false
+        },
+        "Action": "LoadGame",
+        "Success": true,
+        "Milliseconds": 2578.1082,
+        "Result": {
+          "GameTic": 147,
+          "SourceMatches": true,
+          "Sha256": "00697338F9F4F72B4FE3B9B528B0A3F116C1FEF9411B0059D2572634D5F4F349",
+          "Episode": 1,
+          "Map": 1
+        },
+        "Error": null
+      }
+    ],
+    "AutomapCommands": [
+      {
+        "Tic": 0,
+        "Mask": 1
+      },
+      {
+        "Tic": 1,
+        "Mask": 2
+      },
+      {
+        "Tic": 2,
+        "Mask": 144
+      },
+      {
+        "Tic": 3,
+        "Mask": 4
+      },
+      {
+        "Tic": 5,
+        "Mask": 96
+      },
+      {
+        "Tic": 6,
+        "Mask": 8
+      },
+      {
+        "Tic": 7,
+        "Mask": 1
+      },
+      {
+        "Tic": 9,
+        "Mask": 1
+      }
+    ],
+    "MenuScreen": 0,
+    "AutomapRenderMs": {
+      "Count": 11,
+      "Mean": 23.129745454545453,
+      "Median": 7.6259,
+      "P95": 160.4302,
+      "Max": 160.4302
+    },
+    "SnapshotSamplesMs": [
+      160.7226,
+      8.9693,
+      7.5156,
+      9.7447,
+      7.3743,
+      7.4588,
+      7.3012,
+      5.1224,
+      23.9463,
+      7.365,
+      3.851,
+      4.3272
+    ],
+    "Skill": 3,
+    "AutomapRenderSamplesMs": [
+      160.4302,
+      8.7055,
+      7.284,
+      9.5028,
+      7.1368,
+      8.5987,
+      7.2304,
+      7.0786,
+      23.742,
+      7.6259,
+      7.0923
+    ],
+    "Error": null,
+    "SimulationMs": {
+      "Count": 10,
+      "Mean": 3.6556100000000007,
+      "Median": 3.18045,
+      "P95": 11.8252,
+      "Max": 11.8252
+    },
+    "Kills": 0,
+    "SnapshotPublishMs": {
+      "Count": 12,
+      "Mean": 21.141533333333335,
+      "Median": 7.41655,
+      "P95": 160.7226,
+      "Max": 160.7226
+    },
+    "TickLatenessMs": null,
+    "AutomapDiscoveryMs": {
+      "Count": 10,
+      "Mean": 26.138839999999995,
+      "Median": 25.12305,
+      "P95": 36.979,
+      "Max": 36.979
+    },
+    "ControlEvents": [
+      {
+        "SaveHash": "00697338F9F4F72B4FE3B9B528B0A3F116C1FEF9411B0059D2572634D5F4F349",
+        "Tic": 8,
+        "Action": "LoadGame"
+      },
+      {
+        "Episode": 2,
+        "Skill": 3,
+        "Tic": 10,
+        "Action": "NewGame",
+        "Map": 1
+      }
+    ],
+    "FinishedUtc": "2026-09-11T17:04:00.9231294Z",
+    "Episode": 1,
+    "SessionScreenMs": null
+  },
+  "HarnessSha256": "95B421D86F98E380619C1B652A24FB7D511DF3749010CDDFAD552D525D35A393",
+  "Error": null,
+  "Meaning": "Actual simulation worker, map command ring, bitmap snapshot, save/menu/load/new-game boundaries. No presentation worker or display pacing claim.",
+  "SaveRoot": "C:\\projects\\pwshDoom\\scripts\\..\\local\\automap-worker-09b98d7a9a3c49b98ee4e3ee0481905b",
+  "FinishedUtc": "2026-09-11T17:04:00.9908123Z",
+  "Checks": [
+    {
+      "Name": "Initial snapshot remains numeric world",
+      "Passed": true
+    },
+    {
+      "Name": "Tab publishes map pixels at consumed command boundary",
+      "Passed": true
+    },
+    {
+      "Name": "Save resumes the map without changing its pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Tab returns to numeric rendering",
+      "Passed": true
+    },
+    {
+      "Name": "Load installs map pixels with a new asset generation",
+      "Passed": true
+    },
+    {
+      "Name": "Menu covers map but retains map visibility metadata",
+      "Passed": true
+    },
+    {
+      "Name": "Resume restores unchanged map pixels",
+      "Passed": true
+    },
+    {
+      "Name": "New game resets automap visibility",
+      "Passed": true
+    }
+  ]
+}

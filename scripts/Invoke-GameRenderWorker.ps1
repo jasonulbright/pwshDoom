@@ -22,7 +22,7 @@ try {
         if($view.ReadInt32(0) -ne 0){break}
         $kind=$view.ReadInt32(76)
         if($kind -eq 2){$ctx=Read-GameRenderAssets $Assets;$previousSnapshot=$null;[void]$done.Set();continue}
-        if($kind -notin 0,1,3){throw 'Unknown rendering job kind.'}
+        if($kind -notin 0,1,3,4){throw 'Unknown rendering job kind.'}
         $view.Write(48,[long][Diagnostics.Stopwatch]::GetTimestamp())
         $length=$view.ReadInt32(4);if($length -le 0 -or $length -gt 1048448){throw 'Invalid snapshot length.'}
         $bytes=[byte[]]::new($length);[void]$view.ReadArray(128L,$bytes,0,$length)
@@ -40,8 +40,8 @@ try {
         $view.Write(16,$watch.Elapsed.TotalMilliseconds);$watch.Restart()
         $encoded=if($Style -eq 'Classic'){
             ConvertTo-AnsiStrip $ctx.Pixels 320 200 $FirstColumn $EndColumn $codec -ColumnOffset ($view.ReadInt32(64)) -RowOffset ($view.ReadInt32(68))
-        }elseif($kind -eq 3){
-            ConvertTo-MenuStrip $ctx.Pixels 320 200 $FirstColumn $EndColumn $codec -ColumnOffset ($view.ReadInt32(64)) -RowOffset ($view.ReadInt32(68))
+        }elseif($kind -in 3,4){
+            ConvertTo-MenuStrip $ctx.Pixels 320 200 $FirstColumn $EndColumn $codec -ColumnOffset ($view.ReadInt32(64)) -RowOffset ($view.ReadInt32(68)) -HudStart $(if($kind -eq 4){168}else{-1})
         }else{
             ConvertTo-CharacterStrip $ctx.Pixels 320 200 $FirstColumn $EndColumn $codec -ColumnOffset ($view.ReadInt32(64)) -RowOffset ($view.ReadInt32(68)) -FrameNumber ($view.ReadInt32(72)) -HudStart $(if($kind -eq 0){168}else{200})
         }

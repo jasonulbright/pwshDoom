@@ -37,9 +37,9 @@ try{
             if($ReferenceReport){$expected=@($referenceCases|Where-Object {$_.Map -eq $name -and $null -ne $_.PSObject.Properties['Heading'] -and $_.Heading -eq $degrees});Check "$name heading $degrees preserves baseline automap/HUD pixels" ($expected.Count -eq 1 -and $expected[0].FrameSha256 -eq (Get-FileHash $path).Hash)}
             $cases.Add(@{Map=$name;Heading=$degrees;MappedLines=$discovered;ReferenceLines=$reference;DiscoveryMs=$discoveryMs;MapRenderMs=$mapMs;Frame=$path;FrameSha256=(Get-FileHash $path).Hash})
         }
-        $discoveryTimes=[Collections.Generic.List[double]]::new();$mapTimes=[Collections.Generic.List[double]]::new()
-        for($i=0;$i -lt $Samples;$i++){$watch.Restart();$renderer.DiscoverMap($player);$discoveryTimes.Add($watch.Elapsed.TotalMilliseconds);$watch.Restart();$automap.Render($player);$hud.Render($player,$true);$mapTimes.Add($watch.Elapsed.TotalMilliseconds)}
-        $cases.Add(@{Map=$name;RepeatedDiscoveryMs=(Get-SampleStats $discoveryTimes.ToArray());RepeatedMapRenderMs=(Get-SampleStats $mapTimes.ToArray());DiscoverySamples=$discoveryTimes.ToArray();MapSamples=$mapTimes.ToArray()})
+        $discoveryTimes=[Collections.Generic.List[double]]::new();$mapTimes=[Collections.Generic.List[double]]::new();$mapOnlyTimes=[Collections.Generic.List[double]]::new();$hudTimes=[Collections.Generic.List[double]]::new()
+        for($i=0;$i -lt $Samples;$i++){$watch.Restart();$renderer.DiscoverMap($player);$discoveryTimes.Add($watch.Elapsed.TotalMilliseconds);$watch.Restart();$automap.Render($player);$mapOnly=$watch.Elapsed.TotalMilliseconds;$hud.Render($player,$true);$combined=$watch.Elapsed.TotalMilliseconds;$mapTimes.Add($combined);$mapOnlyTimes.Add($mapOnly);$hudTimes.Add($combined-$mapOnly)}
+        $cases.Add(@{Map=$name;RepeatedDiscoveryMs=(Get-SampleStats $discoveryTimes.ToArray());RepeatedMapRenderMs=(Get-SampleStats $mapTimes.ToArray());RepeatedMapOnlyMs=(Get-SampleStats $mapOnlyTimes.ToArray());RepeatedHudMs=(Get-SampleStats $hudTimes.ToArray());DiscoverySamples=$discoveryTimes.ToArray();MapSamples=$mapTimes.ToArray();MapOnlySamples=$mapOnlyTimes.ToArray();HudSamples=$hudTimes.ToArray()})
     }
 }catch{$failure=$_.ToString()+"`n"+$_.ScriptStackTrace;throw}finally{
     @{FinishedUtc=[datetime]::UtcNow.ToString('o');Error=$failure;Checks=$checks.ToArray();Cases=$cases.ToArray();WadSha256=(Get-FileHash $Wad).Hash;HarnessSha256=(Get-FileHash $PSCommandPath).Hash;BundleSha256=(Get-FileHash $bundle).Hash;FrameDirectory=$directory;

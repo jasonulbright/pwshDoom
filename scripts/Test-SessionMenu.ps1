@@ -41,6 +41,11 @@ try{
                 $actual=ConvertTo-MenuStrip $pixels 32 16 $first $end $ctx -ColumnOffset $origin[0] -RowOffset $origin[1]
                 $reference=ConvertTo-AnsiStrip $expected 16 8 ($first/2) ($end/2) $ctx.Hud -ColumnOffset $origin[0] -RowOffset $origin[1]
                 Assert-Menu "$style max-brightness reference / origin $($origin -join ',') / strip $part" ([Convert]::ToBase64String($actual) -ceq [Convert]::ToBase64String($reference))
+                $mapExpected=$expected.Clone()
+                for($hy=4;$hy -lt 8;$hy++){for($hx=0;$hx -lt 16;$hx++){$mapExpected[$hy*16+$hx]=$pixels[(2*$hy+1)*32+2*$hx+1]}}
+                $mapActual=ConvertTo-MenuStrip $pixels 32 16 $first $end $ctx -ColumnOffset $origin[0] -RowOffset $origin[1] -HudStart 8
+                $mapReference=ConvertTo-AnsiStrip $mapExpected 16 8 ($first/2) ($end/2) $ctx.Hud -ColumnOffset $origin[0] -RowOffset $origin[1]
+                Assert-Menu "$style map lines plus gameplay HUD / origin $($origin -join ',') / strip $part" ([Convert]::ToBase64String($mapActual) -ceq [Convert]::ToBase64String($mapReference))
             }
         }
     }

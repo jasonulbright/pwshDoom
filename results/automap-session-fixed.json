@@ -1,0 +1,177 @@
+{
+  "WarmMapMs": {
+    "Count": 10,
+    "Mean": 7.7266,
+    "Median": 7.5127500000000005,
+    "P95": 8.6576,
+    "Max": 8.6576
+  },
+  "Directory": "C:\\projects\\pwshDoom\\scripts\\..\\local\\automap-session-0380b989d7184b5f913ff290e5246f58",
+  "WarmMapSamplesMs": [
+    8.6576,
+    7.6954,
+    7.4978,
+    8.1803,
+    7.5253,
+    7.4559,
+    7.4215,
+    7.8593,
+    7.4727,
+    7.5002
+  ],
+  "Meaning": "Simulation object, cached composition, save restoration and synthetic key checks. No physical keyboard or live display pacing claim.",
+  "HarnessSha256": "AFF1B02848374050750131D17AD30B3AC63FB30722DCA2B6BCF8C3D6C6BD8308",
+  "SourceFingerprint": "D27984366A26F87600527DCB197ADCE032BAC21D67B0310586D863AAAE8C915B",
+  "Checks": [
+    {
+      "Name": "Tab opens map without pausing gameplay",
+      "Passed": true
+    },
+    {
+      "Name": "Follow toggle permits right pan and zoom",
+      "Passed": true
+    },
+    {
+      "Name": "Zero mask releases held pan and zoom",
+      "Passed": true
+    },
+    {
+      "Name": "Marks wrap at ten slots",
+      "Passed": true
+    },
+    {
+      "Name": "Initial cached composition matches direct map/HUD",
+      "Passed": true
+    },
+    {
+      "Name": "Initial warm cache preserves direct pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Health cached composition matches direct map/HUD",
+      "Passed": true
+    },
+    {
+      "Name": "Health warm cache preserves direct pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Armor cached composition matches direct map/HUD",
+      "Passed": true
+    },
+    {
+      "Name": "Armor warm cache preserves direct pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Ammo cached composition matches direct map/HUD",
+      "Passed": true
+    },
+    {
+      "Name": "Ammo warm cache preserves direct pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Capacity cached composition matches direct map/HUD",
+      "Passed": true
+    },
+    {
+      "Name": "Capacity warm cache preserves direct pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Weapons cached composition matches direct map/HUD",
+      "Passed": true
+    },
+    {
+      "Name": "Weapons warm cache preserves direct pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Keys cached composition matches direct map/HUD",
+      "Passed": true
+    },
+    {
+      "Name": "Keys warm cache preserves direct pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Face cached composition matches direct map/HUD",
+      "Passed": true
+    },
+    {
+      "Name": "Face warm cache preserves direct pixels",
+      "Passed": true
+    },
+    {
+      "Name": "ReadyWeapon cached composition matches direct map/HUD",
+      "Passed": true
+    },
+    {
+      "Name": "ReadyWeapon warm cache preserves direct pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Frags cached composition matches direct map/HUD",
+      "Passed": true
+    },
+    {
+      "Name": "Frags warm cache preserves direct pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Network cached composition matches direct map/HUD",
+      "Passed": true
+    },
+    {
+      "Name": "Network warm cache preserves direct pixels",
+      "Passed": true
+    },
+    {
+      "Name": "PlayerNumber cached composition matches direct map/HUD",
+      "Passed": true
+    },
+    {
+      "Name": "PlayerNumber warm cache preserves direct pixels",
+      "Passed": true
+    },
+    {
+      "Name": "NegativeHealth cached composition matches direct map/HUD",
+      "Passed": true
+    },
+    {
+      "Name": "NegativeHealth warm cache preserves direct pixels",
+      "Passed": true
+    },
+    {
+      "Name": "ClearKeys cached composition matches direct map/HUD",
+      "Passed": true
+    },
+    {
+      "Name": "ClearKeys warm cache preserves direct pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Automap state 0 direct pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Automap state 1 direct pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Automap state 2 direct pixels",
+      "Passed": true
+    },
+    {
+      "Name": "All-map power direct pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Clear removes markers and resets ring",
+      "Passed": true
+    }
+  ],
+  "FinishedUtc": "2026-09-11T17:02:49.6464654Z",
+  "Error": "Saved graph disagrees with its IWAD/settings header.\nat New-DoomGameFromSave, C:\\projects\\pwshDoom\\src\\SaveState.ps1: line 270\r\nat <ScriptBlock>, C:\\projects\\pwshDoom\\scripts\\Test-AutomapSession.ps1: line 54"
+}

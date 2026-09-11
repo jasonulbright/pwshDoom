@@ -7,7 +7,7 @@ function Read-DoomInputReplay {
     if($file.Length -gt 128MB){throw 'Replay exceeds the 128 MiB input limit.'}
     $data=[IO.File]::ReadAllText($file.FullName)|ConvertFrom-Json -Depth 16
     if($data -isnot [pscustomobject]){throw 'Replay root must be an object.'}
-    foreach($field in 'Format','Version','Skill','Episode','Map','Checkpoints','SourceFingerprint','ControlEvents'){
+    foreach($field in 'Format','Version','Skill','Episode','Map','Checkpoints','SourceFingerprint','ControlEvents','AutomapCommands'){
         if($null -eq $data.PSObject.Properties[$field]){$data|Add-Member -NotePropertyName $field -NotePropertyValue $null}
     }
     $hasContinuation=$null -ne $data.PSObject.Properties['ContinueCampaign']
@@ -16,18 +16,18 @@ function Read-DoomInputReplay {
     if($null -ne $data.SourceFingerprint -and $data.SourceFingerprint -notmatch '^[0-9a-fA-F]{64}$'){throw 'Invalid replay source fingerprint.'}
     if($data.WadSha256 -notmatch '^[0-9a-fA-F]{64}$' -or ($WadSha256 -and $data.WadSha256 -ne $WadSha256)){throw 'Replay IWAD hash does not match.'}
     if($null -ne $data.Format -or $null -ne $data.Version){
-        if($data.Format -ne 'pwshDoom.InputReplay' -or $data.Version -isnot [long] -or $data.Version -notin 1,2,3){throw 'Unsupported input replay format/version.'}
+        if($data.Format -ne 'pwshDoom.InputReplay' -or $data.Version -isnot [long] -or $data.Version -notin 1,2,3,4){throw 'Unsupported input replay format/version.'}
         foreach($field in 'Skill','Episode','Map'){if($null -eq $data.$field){throw "Replay is missing $field."}}
         if(-not $hasContinuation -or $data.ContinueCampaign -isnot [bool]){throw 'Replay ContinueCampaign must be a boolean.'}
     }
-    if($data.Version -in 2,3){
+    if($data.Version -in 2,3,4){
         if($data.ControlEvents -isnot [array] -or $data.ControlEvents.Count -gt 10000){throw 'Invalid replay control event list.'}
         $lastControl=-1
         foreach($control in $data.ControlEvents){
             if($control.Tic -isnot [long] -or $control.Tic -lt 0 -or $control.Tic -lt $lastControl -or $control.Tic -gt $data.InputCommands.Count){throw 'Invalid replay control boundary.'}
             if($control.Action -eq 'NewGame'){
                 if($control.Skill -isnot [long] -or $control.Skill -lt 1 -or $control.Skill -gt 5 -or $control.Episode -isnot [long] -or $control.Episode -lt 1 -or $control.Episode -gt 4 -or $control.Map -isnot [long] -or $control.Map -ne 1){throw 'Invalid replay new-game event.'}
-            }elseif($control.Action -eq 'LoadGame' -and $data.Version -eq 3){
+            }elseif($control.Action -eq 'LoadGame' -and $data.Version -in 3,4){
                 if($control.SaveHash -isnot [string] -or $control.SaveHash -notmatch '^[a-fA-F0-9]{64}$'){throw 'Invalid replay save reference.'}
             }else{throw 'Unsupported replay control action.'}
             $lastControl=$control.Tic
@@ -40,6 +40,14 @@ function Read-DoomInputReplay {
         if($null -ne $value -and ($value -isnot [long] -or $value -lt 1 -or $value -gt $pair[1])){throw "Invalid replay $($pair[0])."}
     }
     if($data.InputCommands -isnot [array] -or $data.InputCommands.Count -gt 1260000){throw 'Replay requires an array of at most ten hours of commands.'}
+    if($data.Version -eq 4){
+        if($data.AutomapCommands -isnot [array] -or $data.AutomapCommands.Count -gt $data.InputCommands.Count){throw 'Invalid replay automap command list.'}
+        $lastMapTic=-1
+        foreach($mapCommand in $data.AutomapCommands){
+            if($mapCommand.Tic -isnot [long] -or $mapCommand.Tic -le $lastMapTic -or $mapCommand.Tic -ge $data.InputCommands.Count -or $mapCommand.Mask -isnot [long] -or $mapCommand.Mask -lt 1 -or $mapCommand.Mask -gt 1023){throw 'Invalid replay automap command.'}
+            $lastMapTic=$mapCommand.Tic
+        }
+    }elseif($null -ne $data.AutomapCommands -and $data.AutomapCommands.Count -gt 0){throw 'Automap commands require replay version 4.'}
     foreach($entry in $data.InputCommands){
         if($entry -isnot [array] -or $entry.Count -ne 4){throw 'Invalid replay command shape.'}
         foreach($value in $entry){if($value -isnot [long]){throw 'Replay commands must contain integers.'}}
@@ -50,6 +58,7 @@ function Read-DoomInputReplay {
         $last=-1
         foreach($checkpoint in $data.Checkpoints){
             if($checkpoint.Tic -isnot [long] -or $checkpoint.Tic -le $last -or $checkpoint.Tic -gt $data.InputCommands.Count -or $checkpoint.Sha256 -notmatch '^[0-9a-fA-F]{64}$'){throw 'Invalid replay checkpoint.'}
+            if($null -ne $checkpoint.PSObject.Properties['AutomapSha256'] -and $checkpoint.AutomapSha256 -notmatch '^[0-9a-fA-F]{64}$'){throw 'Invalid replay automap checkpoint.'}
             $last=$checkpoint.Tic
         }
     }
@@ -70,7 +79,7 @@ function Set-DoomReplaySettings {
 
 function Get-DoomReplaySourceFingerprint {
     $root=Split-Path $PSScriptRoot
-    $paths=@('scripts/Build-EngineBundle.ps1','scripts/Invoke-SimulationWorker.ps1','src/GameHost.ps1','src/SnapshotTransport.ps1','src/SessionScreens.ps1','src/SessionMenu.ps1','src/InputReplay.ps1','src/SaveState.ps1','src/SaveSlots.ps1')
+    $paths=@('scripts/Build-EngineBundle.ps1','scripts/Invoke-SimulationWorker.ps1','src/GameHost.ps1','src/SnapshotTransport.ps1','src/SessionScreens.ps1','src/SessionMenu.ps1','src/InputReplay.ps1','src/SaveState.ps1','src/SaveSlots.ps1','src/AutomapSession.ps1')
     $paths+=@(Get-ChildItem -LiteralPath "$PSScriptRoot/ManagedDoom" -Filter *.ps1 -File -Recurse|ForEach-Object {[IO.Path]::GetRelativePath($root,$_.FullName).Replace('\','/')})
     $lines=@($paths|Sort-Object|ForEach-Object {$_+' '+(Get-FileHash -LiteralPath (Join-Path $root $_)).Hash})
     return [Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([Text.Encoding]::UTF8.GetBytes($lines -join "`n")))
@@ -87,7 +96,9 @@ function Get-DoomReplayCheckpoint {
     if([int]$Game.State -eq 1){$ui=$Game.Intermission;$state.Intermission=@([int]$ui.State,$ui.SpState,$ui.Count,$ui.BgCount,$ui.TimeCount,$ui.ParCount,$ui.Random.Index)}
     if([int]$Game.State -eq 2){$ui=$Game.Finale;$state.Finale=@($ui.Stage,$ui.Count,$ui.Scrolled,$ui.TheEndIndex)}
     $json=$state|ConvertTo-Json -Depth 5 -Compress
-    return @{Tic=$Tic;Sha256=[Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([Text.Encoding]::UTF8.GetBytes($json)));State=$state}
+    $result=@{Tic=$Tic;Sha256=[Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([Text.Encoding]::UTF8.GetBytes($json)));State=$state}
+    if(Get-Command Get-DoomAutomapCheckpoint -ErrorAction SilentlyContinue){$result.AutomapSha256=Get-DoomAutomapCheckpoint $Game}
+    return $result
 }
 
 function Compare-DoomReplayCheckpoints {
@@ -98,6 +109,11 @@ function Compare-DoomReplayCheckpoints {
         if($entry.Tic -gt $ConsumedTics){continue}
         $observed=$byTic[[int]$entry.Tic];$checked++
         if($null -eq $observed -or $entry.Sha256 -ne $observed.Sha256){$mismatches+=@{Tic=$entry.Tic;Expected=$entry.Sha256;Actual=if($null -ne $observed){$observed.Sha256}else{$null}}}
+        $expectedMap=if($entry -is [Collections.IDictionary]){$entry['AutomapSha256']}elseif($null -ne $entry.PSObject.Properties['AutomapSha256']){$entry.AutomapSha256}else{$null}
+        if($expectedMap){
+            $actualMap=if($observed -is [Collections.IDictionary]){$observed['AutomapSha256']}elseif($null -ne $observed -and $null -ne $observed.PSObject.Properties['AutomapSha256']){$observed.AutomapSha256}else{$null}
+            if($expectedMap -ne $actualMap){$mismatches+=@{Tic=$entry.Tic;Kind='Automap';Expected=$expectedMap;Actual=$actualMap}}
+        }
     }
     return @{Checked=$checked;Matched=$mismatches.Count -eq 0;Mismatches=$mismatches;Meaning='Compared available recorded checkpoints through the consumed prefix. This samples selected state and render data, not every hidden game field.'}
 }

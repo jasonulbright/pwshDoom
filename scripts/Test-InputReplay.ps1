@@ -74,6 +74,19 @@ try{
     Assert-Rejected 'Out-of-range control boundary rejected' {param($d)$d.Version=2;$d|Add-Member ControlEvents @(@{Tic=3;Action='NewGame';Skill=3;Episode=2;Map=1})}
     Assert-Rejected 'Negative control boundary rejected' {param($d)$d.Version=2;$d|Add-Member ControlEvents @(@{Tic=-1;Action='NewGame';Skill=3;Episode=2;Map=1})}
     Assert-Rejected 'New game begins at map one' {param($d)$d.Version=2;$d|Add-Member ControlEvents @(@{Tic=1;Action='NewGame';Skill=3;Episode=2;Map=2})}
+    $v4=New-Fixture;$v4.Version=4;$v4|Add-Member ControlEvents @();$v4|Add-Member AutomapCommands @(@{Tic=0;Mask=1},@{Tic=1;Mask=1023})
+    $v4.Checkpoints[0].AutomapSha256='E'*64
+    $path=Join-Path $directory 'map-v4.json';$null=Write-DoomInputReplay $path $v4;$loaded=Read-DoomInputReplay $path
+    if($loaded.AutomapCommands.Count -ne 2 -or $loaded.AutomapCommands[1].Mask -ne 1023){throw 'Automap input round trip failed.'}
+    $checks.Add(@{Name='Version 4 preserves map masks and legacy four-integer commands';Passed=$true})
+    foreach($bad in -1,1024,0,1.5){$value=$bad;Assert-Rejected "Invalid map mask $bad" {param($d)$d.Version=4;$d|Add-Member ControlEvents @();$d|Add-Member AutomapCommands @(@{Tic=0;Mask=$value})}}
+    foreach($bad in -1,2,0.5){$value=$bad;Assert-Rejected "Invalid map command tic $bad" {param($d)$d.Version=4;$d|Add-Member ControlEvents @();$d|Add-Member AutomapCommands @(@{Tic=$value;Mask=1})}}
+    Assert-Rejected 'Duplicate map command boundary' {param($d)$d.Version=4;$d|Add-Member ControlEvents @();$d|Add-Member AutomapCommands @(@{Tic=0;Mask=1},@{Tic=0;Mask=2})}
+    Assert-Rejected 'Older replay cannot smuggle map commands' {param($d)$d|Add-Member AutomapCommands @(@{Tic=0;Mask=1})}
+    Assert-Rejected 'Version 4 needs a map command array' {param($d)$d.Version=4;$d|Add-Member ControlEvents @()}
+    $comparison=Compare-DoomReplayCheckpoints @(@{Tic=0;Sha256=('B'*64);AutomapSha256=('E'*64)}) @(@{Tic=0;Sha256=('B'*64);AutomapSha256=('F'*64)}) 0
+    if($comparison.Matched -or $comparison.Mismatches[0].Kind -ne 'Automap'){throw 'Map divergence accepted.'}
+    $checks.Add(@{Name='Map-only divergence fails even when gameplay checkpoint agrees';Passed=$true})
     $empty=New-Fixture;$empty.InputCommands=@();$empty.Checkpoints=@(@{Tic=0;Sha256=('B'*64)})
     $null=Write-DoomInputReplay (Join-Path $directory 'empty.json') $empty
     $checks.Add(@{Name='Zero-command graceful recording';Passed=$true})

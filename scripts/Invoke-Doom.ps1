@@ -29,7 +29,7 @@ function Start-DoomRenderJob {
     [byte[]]$bytes=if($screenPixels){$Snapshot.Pixels}else{Get-InterpolatedSnapshotBytes $Snapshot.Previous $Snapshot.Current $fraction}
     $InterpolationTimes.Add($watch.Elapsed.TotalMilliseconds)
     $qpc=[Diagnostics.Stopwatch]::GetTimestamp();$watch.Restart()
-    Submit-GameRender $Pool $bytes -ColumnOffset $Viewport.Left -RowOffset $Viewport.Top -FrameNumber ([int][Math]::Floor($Clock.Elapsed.TotalSeconds*60)) -ScreenPixels:$screenPixels -Tic $Snapshot.Tic -MenuPixels:($Snapshot.ScreenKind -eq 2)
+    Submit-GameRender $Pool $bytes -ColumnOffset $Viewport.Left -RowOffset $Viewport.Top -FrameNumber ([int][Math]::Floor($Clock.Elapsed.TotalSeconds*60)) -ScreenPixels:$screenPixels -Tic $Snapshot.Tic -MenuPixels:($Snapshot.ScreenKind -eq 2) -AutomapPixels:($Snapshot.ScreenKind -eq 3)
     return @{Tic=$Snapshot.Tic;Version=$Snapshot.Version;StartQpc=$qpc;SubmitMs=$watch.Elapsed.TotalMilliseconds;ViewportKey=$Viewport.Key;State=$Snapshot.State;Generation=$Snapshot.Generation;Episode=$Snapshot.Episode;Map=$Snapshot.Map;ScreenKind=$Snapshot.ScreenKind;MenuRevision=$Snapshot.MenuRevision;MenuScreen=$Snapshot.MenuScreen}
 }
 $simulation=$null;$pool=$null;$consoleState=$null;$terminalActive=$false;$timerRequested=$false;$failure=$null
@@ -46,6 +46,8 @@ $assetGeneration=1;$loadingStart=$null;$loadingMs=0.0;$loadingWasRunning=$false;
 $recordingPath=$null;$recordingError=$null;$replayVerification=$null;$sourceFingerprint=$null;$sourceMatches=$null
 $menu=$null;$pendingAction=$null;$sessionStart=$null;$sessionPausedMs=0.0;$sessionEvents=[Collections.Generic.List[object]]::new();$sessionScheduleData=@();$scheduleIndex=0;$controlIndex=0;$lastPresentedVersion=-1
 $compactMenuKey=''
+$mapInputIndex=0;$inputMapVisible=$false
+$captureDirectory=if($CaptureEveryTics -gt 0){Join-Path "$PSScriptRoot/../local" ('frames-'+[guid]::NewGuid().ToString('N'))}else{$null}
 try {
     if($SessionSchedule){
         if(-not ($Headless -or $Scripted -or $Replay)){throw 'A session schedule is a replay/scripted test driver.'}
@@ -211,19 +213,21 @@ try {
         }else{$compactMenuKey=''}
         $now=$clock.Elapsed.TotalMilliseconds
         if($viewport.Fits -and $menu.Screen -eq 0 -and $null -eq $pendingAction -and $now -ge ($tics+1)*1000.0/35) {
-            $cmd.Clear();$send=$true
+            $cmd.Clear();$send=$true;$automapMask=0
             if($null -ne $replayData) {
                 if($tics -ge $replayData.InputCommands.Count){$send=$false;if($simulation.View.ReadInt32(20) -ge $tics){$exitReason='ReplayEnd';break}}
                 else{$entry=$replayData.InputCommands[$tics];$cmd.ForwardMove=$entry[0];$cmd.SideMove=$entry[1];$cmd.AngleTurn=$entry[2];$cmd.Buttons=$entry[3]}
-            } elseif($null -ne $consoleState){Set-DoomInputCommand $consoleState $cmd}
+                if($replayData.Version -eq 4 -and $mapInputIndex -lt $replayData.AutomapCommands.Count -and $replayData.AutomapCommands[$mapInputIndex].Tic -eq $tics){$automapMask=[int]$replayData.AutomapCommands[$mapInputIndex].Mask;$mapInputIndex++}
+            } elseif($null -ne $consoleState){$automapMask=Get-DoomAutomapInputMask $consoleState $inputMapVisible;$inputMapVisible=$consoleState.AutomapVisible;Set-DoomInputCommand $consoleState $cmd -AutomapVisible:$inputMapVisible}
             elseif($Scripted) {
                 $phase=$tics%700
                 if($phase -lt 120){$cmd.ForwardMove=25}elseif($phase -lt 260){$cmd.AngleTurn=640}elseif($phase -lt 430){$cmd.ForwardMove=25}
                 if(($tics%14) -lt 7){$cmd.Buttons=1};if(($tics%70) -eq 69){$cmd.Buttons=$cmd.Buttons -bor 2}
             }
-            if($send){Send-DoomSimulationCommand $simulation $tics @($cmd.ForwardMove,$cmd.SideMove,$cmd.AngleTurn,$cmd.Buttons);$tics++}
+            if($send){Send-DoomSimulationCommand $simulation $tics @($cmd.ForwardMove,$cmd.SideMove,$cmd.AngleTurn,$cmd.Buttons) -AutomapMask $automapMask;$tics++}
         }
         $snapshot=Read-DoomSimulationSnapshot $simulation $snapshot
+        if($snapshot.Tic -eq $tics){$inputMapVisible=$snapshot.AutomapVisible}
         if($snapshot.Generation -ne $assetGeneration){continue}
         if($inFlight -and (Test-GameRenderCompleted $pool)) {
             $captureDue=$CaptureEveryTics -gt 0 -and $activeFrame.Tic -ge $nextCapture
@@ -238,7 +242,8 @@ try {
             if($CaptureEveryTics -gt 0 -and $lastFrameTic -ge $nextCapture) {
                 $capture=[byte[]]::new(64000)
                 for($i=0;$i -lt $pool.Count;$i++){$worker=$pool.Workers[$i];for($y=0;$y -lt 200;$y++){[Array]::Copy($pool.Results[$i].Pixels,$y*320+$worker.First,$capture,$y*320+$worker.First,$worker.End-$worker.First)}}
-                $capturePath="$PSScriptRoot/../local/capture-$lastFrameTic.bin";[IO.File]::WriteAllBytes($capturePath,$capture);$captures.Add([IO.Path]::GetFullPath($capturePath));$nextCapture+=$CaptureEveryTics
+                [void][IO.Directory]::CreateDirectory($captureDirectory)
+                $capturePath=Join-Path $captureDirectory "capture-$lastFrameTic.bin";[IO.File]::WriteAllBytes($capturePath,$capture);$captures.Add([IO.Path]::GetFullPath($capturePath));$nextCapture+=$CaptureEveryTics
             }
             # The next render overlaps the current console write. Results are copied
             # out of shared memory before this dispatch, so workers may reuse it.
@@ -295,7 +300,7 @@ finally {
         if($RecordInput){
             try{
                 $consumed=@($simulationReport.InputCommands|Select-Object -First $simulationReport.Tics)
-                $recordingPath=Write-DoomInputReplay $RecordInput ([ordered]@{Format='pwshDoom.InputReplay';Version=3;CreatedUtc=[DateTime]::UtcNow.ToString('o');WadSha256=$wadHash;
+                $recordingPath=Write-DoomInputReplay $RecordInput ([ordered]@{Format='pwshDoom.InputReplay';Version=4;AutomapCommands=@($simulationReport.AutomapCommands);CreatedUtc=[DateTime]::UtcNow.ToString('o');WadSha256=$wadHash;
                     Skill=$Skill;Episode=$Episode;Map=$Map;ContinueCampaign=-not $stopAtLevelEnd;SourceFingerprint=$sourceFingerprint;PowerShell=$PSVersionTable.PSVersion.ToString();
                     Origin=if($Replay){'Replay'}elseif($Scripted){'Scripted'}elseif($Headless){'HeadlessIdle'}else{'Keyboard'};ExitReason=$exitReason;Error=$failure;InputCommands=$consumed;
                     Checkpoints=$simulationReport.ReplayCheckpoints;Transitions=$simulationReport.Transitions;ControlEvents=$simulationReport.ControlEvents;

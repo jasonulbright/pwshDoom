@@ -410,6 +410,13 @@ class DrawScreen {
             return
         }
 
+        # pwshDoom, 2026-09-11: unit scale samples each source byte once.
+        # Keep clipping and transparent post gaps in the existing blitter.
+        if ($scale -eq 1) {
+            $this.DrawColumnBlit($source, $x, $y)
+            return
+        }
+
         $screenData = $this.Data
         $screenHeight = $this.Height
         $step = [Fixed]::One / $scale

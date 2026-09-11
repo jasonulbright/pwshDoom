@@ -23,10 +23,11 @@ function New-DoomSimulation {
     } catch {Close-DoomSimulation $state;throw}
 }
 function Send-DoomSimulationCommand {
-    param($Simulation,[int]$Index,[int[]]$Command)
+    param($Simulation,[int]$Index,[int[]]$Command,[ValidateRange(0,1023)][int]$AutomapMask=0)
     if($Index-$Simulation.View.ReadInt32(20) -ge 1024){throw 'Simulation command ring overflow.'}
     [long]$offset=4096+($Index%1024)*16
     for($i=0;$i -lt 4;$i++){$Simulation.View.Write($offset+4*$i,[int]$Command[$i])}
+    $Simulation.View.Write(98304+($Index%1024)*4,[int]$AutomapMask)
     [Threading.Thread]::MemoryBarrier();$Simulation.View.Write(0,$Index+1);[void]$Simulation.Go.Set()
 }
 function Read-DoomSimulationSnapshot {
@@ -40,16 +41,17 @@ function Read-DoomSimulationSnapshot {
     [int]$episode=$view.ReadInt32($base+20);[int]$map=$view.ReadInt32($base+24)
     [int]$health=$view.ReadInt32($base+28);[int]$kills=$view.ReadInt32($base+32)
     [int]$screenKind=$view.ReadInt32($base+36);[int]$menuRevision=$view.ReadInt32($base+40);[int]$menuScreen=$view.ReadInt32($base+44)
-    if($state -lt 0 -or $state -gt 2 -or $screenKind -lt 0 -or $screenKind -gt 2 -or ($screenKind -ne 0 -and $length -ne 64000)){throw 'Invalid session snapshot state.'}
+    [bool]$automapVisible=$view.ReadInt32($base+48) -ne 0
+    if($state -lt 0 -or $state -gt 2 -or $screenKind -lt 0 -or $screenKind -gt 3 -or ($screenKind -ne 0 -and $length -ne 64000)){throw 'Invalid session snapshot state.'}
     if($length -lt 384 -or $length%8 -ne 0 -or $length*2+64 -gt 1048576){throw 'Invalid simulation snapshot size.'}
     $oldBytes=[byte[]]::new($length);$newBytes=[byte[]]::new($length)
     [void]$view.ReadArray($base+64,$oldBytes,0,$length);[void]$view.ReadArray($base+64+$length,$newBytes,0,$length)
     [Threading.Thread]::MemoryBarrier()
     if($version -ne $view.ReadInt32($base)){return $Previous}
-    if($screenKind -ne 0){return @{Version=$version;Tic=$tic;Generation=$generation;State=$state;Episode=$episode;Map=$map;Health=$health;Kills=$kills;Pixels=$newBytes;ScreenKind=$screenKind;MenuRevision=$menuRevision;MenuScreen=$menuScreen}}
+    if($screenKind -ne 0){return @{Version=$version;Tic=$tic;Generation=$generation;State=$state;Episode=$episode;Map=$map;Health=$health;Kills=$kills;Pixels=$newBytes;ScreenKind=$screenKind;MenuRevision=$menuRevision;MenuScreen=$menuScreen;AutomapVisible=$automapVisible}}
     $oldValues=[double[]]::new($length/8);$newValues=[double[]]::new($length/8)
     [Buffer]::BlockCopy($oldBytes,0,$oldValues,0,$length);[Buffer]::BlockCopy($newBytes,0,$newValues,0,$length)
-    return @{Version=$version;Tic=$tic;Previous=$oldValues;Current=$newValues;Generation=$generation;State=$state;Episode=$episode;Map=$map;Health=$health;Kills=$kills;ScreenKind=$screenKind;MenuRevision=$menuRevision;MenuScreen=$menuScreen}
+    return @{Version=$version;Tic=$tic;Previous=$oldValues;Current=$newValues;Generation=$generation;State=$state;Episode=$episode;Map=$map;Health=$health;Kills=$kills;ScreenKind=$screenKind;MenuRevision=$menuRevision;MenuScreen=$menuScreen;AutomapVisible=$automapVisible}
 }
 function Close-DoomSimulation {
     param($Simulation)

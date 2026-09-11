@@ -47,12 +47,16 @@ Modifications, 2026-09-11:
 - `ThreeDRenderer`: added an experimental discovery-only BSP traversal that
   marks visible lines without rasterizing pixels or processing sprites. It
   uses simulation-endpoint camera values and horizontal solid-range clipping.
-  It is not yet connected to the playable host; reference buffer-limit parity
-  is unqualified. See `docs/automap.md` for the bounded comparisons.
+  The host now uses it after simulation updates; reference buffer-limit parity
+  and pacing remain unqualified. See `docs/automap.md` for the comparisons.
+- `DrawScreen.DrawColumnExact`: unit-scale drawing uses the existing clipped
+  bulk post copy instead of per-pixel Fixed operations. Sixteen baseline
+  map/HUD hashes remain unchanged; expanded cached HUD checks are documented.
 - `AutoMapRenderer`: clear the column-major map area with standard bulk array
   operations and skip transforms of undiscovered lines when neither cheating
   nor the all-map power exposes them. Sixteen baseline map/HUD images retain
-  identical hashes; the combined render remains too slow for integration.
+  identical hashes; subsequent HUD caching and remaining pacing limits are
+  documented in the automap investigation.
 - `ThingAllocation.SpawnPlayer`: clear the previous damage attacker with the
   damage counter. Cross-map save qualification exposed an E1M1 actor retaining
   its old world after the player entered E1M2. This is an explicit lifecycle
@@ -67,6 +71,8 @@ Modifications, 2026-09-11:
 
 The new game host and 3D rasterizer are in the parent `src` directory. They consume
 the adopted data model. The session-screen path uses the adopted PowerShell
-intermission/finale 2D renderers; gameplay does not call its 3D reference renderer.
+intermission/finale 2D renderers. Gameplay uses its 3D reference renderer only
+for discovery, without 3D pixel rasterization, and its automap/HUD renderers for
+map screens with a presentation-only HUD cache.
 Further adaptations and validation are recorded in `docs/ledger.md` at the
 repository root. This attribution does not claim vanilla compatibility.
