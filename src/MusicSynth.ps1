@@ -23,21 +23,27 @@ function Invoke-DoomMusicEvent {
         if($channel.CC[32] -ne 0){throw 'Nonzero MUS bank selection is not yet supported.'}
         $number=if($ch -eq 15){128}else{0};$regions=Find-DoomSoundFontRegions $Synth.Bank -BankNumber $number -Program $channel.Program -Key $a -Velocity $b
         if($regions.Count -eq 0){throw 'Note-on has no matching sample region.'}
-        $Synth.NextNote++;$Synth.NoteOns++
+        $classes=[Collections.Generic.HashSet[int]]::new();foreach($region in $regions){if($region.Values[57] -gt 0){$null=$classes.Add($region.Values[57])}}
+        $cuts=[Collections.Generic.List[int]]::new()
+        for($i=$Synth.Voices.Count-1;$i -ge 0;$i--){$old=$Synth.Voices[$i];if($old.Channel -eq $ch -and ($channel.Mono -or $classes.Contains($old.Exclusive))){$cuts.Add($i)}}
+        if($Synth.Voices.Count-$cuts.Count+$regions.Count -gt $Synth.MaxVoices){throw 'Music voice limit reached; the complete note was rejected without changing voices.'}
+        $noteId=$Synth.NextNote+1;$pending=[Collections.Generic.List[object]]::new();$reverbVoices=0;$chorusVoices=0
         foreach($region in $regions){
             $exclusive=$region.Values[57]
-            for($i=$Synth.Voices.Count-1;$i -ge 0;$i--){$old=$Synth.Voices[$i];if($old.Channel -eq $ch -and $old.NoteId -ne $Synth.NextNote -and (($exclusive -gt 0 -and $old.Exclusive -eq $exclusive) -or $channel.Mono)){$Synth.Voices.RemoveAt($i);$Synth.ExclusiveCuts++}}
-            if($Synth.Voices.Count -ge $Synth.MaxVoices){throw 'Music voice limit reached; no voice was silently discarded.'}
             $key=$a;if($region.Values[46] -ge 0 -and $region.Values[46] -le 127){$key=$region.Values[46]}
             $velocity=$b;if($region.Values[47] -ge 0 -and $region.Values[47] -le 127){$velocity=$region.Values[47]}
             $mods=Get-DoomMusicModulators $region;$g=Get-DoomMusicGenerators $region $mods $channel $key $velocity
-            $voice=@{Channel=$ch;Key=$a;EffectiveKey=$key;Velocity=$velocity;NoteId=$Synth.NextNote;Exclusive=$exclusive;KeyDown=$true;Released=$false;
-                Region=$region;Modulators=$mods;Generators=$g;ChannelRevision=$channel.Revision;Frame=0L;ControlUntil=0L;ControlLeft=0.0;ControlRight=0.0;DeltaLeft=0.0;DeltaRight=0.0;
+            $voice=@{Channel=$ch;Key=$a;EffectiveKey=$key;Velocity=$velocity;NoteId=$noteId;Exclusive=$exclusive;KeyDown=$true;Released=$false;
+                Region=$region;Modulators=$mods;Generators=$g;ChannelRevision=$channel.Revision;StaticControl=$null;LastCutoff=[double]::NaN;Frame=0L;ControlUntil=0L;ControlLeft=0.0;ControlRight=0.0;DeltaLeft=0.0;DeltaRight=0.0;
                 VolumeEnvelope=(New-DoomMusicEnvelope $g $key);ModEnvelope=(New-DoomMusicEnvelope $g $key -Modulation);
                 Oscillator=(New-DoomMusicOscillator $Synth.Bank $region -Key $a -Rate $Synth.Rate);Filter=[double[]]::new(5);X1=0.0;X2=0.0;Y1=0.0;Y2=0.0;Finished=$false}
-            if($g[16] -gt 0){$Synth.NonzeroReverbVoices++};if($g[15] -gt 0){$Synth.NonzeroChorusVoices++}
-            $Synth.Voices.Add($voice);$Synth.PeakVoices=[Math]::Max($Synth.PeakVoices,$Synth.Voices.Count)
+            if($g[16] -gt 0){$reverbVoices++};if($g[15] -gt 0){$chorusVoices++};$pending.Add($voice)
         }
+        # Publish only after every layer validates; rejected notes retain prior sound.
+        foreach($index in $cuts){$Synth.Voices.RemoveAt($index)}
+        foreach($voice in $pending){$Synth.Voices.Add($voice)}
+        $Synth.NextNote=$noteId;$Synth.NoteOns++;$Synth.ExclusiveCuts+=$cuts.Count;$Synth.NonzeroReverbVoices+=$reverbVoices;$Synth.NonzeroChorusVoices+=$chorusVoices
+        $Synth.PeakVoices=[Math]::Max($Synth.PeakVoices,$Synth.Voices.Count)
         return
     }
     if($kind -eq 2){$channel.Bend=$a;$channel.Revision++;return}
@@ -62,19 +68,30 @@ function Invoke-DoomMusicEvent {
 function Update-DoomMusicVoiceControl {
     param($Voice,$Synth)
     $channel=$Synth.Channels[$Voice.Channel]
-    if($Voice.ChannelRevision -ne $channel.Revision){$Voice.Generators=Get-DoomMusicGenerators $Voice.Region $Voice.Modulators $channel $Voice.EffectiveKey $Voice.Velocity;$Voice.ChannelRevision=$channel.Revision}
-    $g=$Voice.Generators;[int]$span=32-[int]($Voice.Frame%32);$time=$Voice.Frame/[double]$Synth.Rate;$nextTime=($Voice.Frame+$span)/[double]$Synth.Rate
-    $modDelay=Convert-DoomMusicTimecents $g[21] 5000;$modHz=8.176*[Math]::Pow(2,[Math]::Clamp($g[22],-16000.0,4500.0)/1200)
-    $vibDelay=Convert-DoomMusicTimecents $g[23] 5000;$vibHz=8.176*[Math]::Pow(2,[Math]::Clamp($g[24],-16000.0,4500.0)/1200)
-    $mod=Get-DoomMusicLfo $time $modDelay $modHz;$vib=Get-DoomMusicLfo $time $vibDelay $vibHz;$env=Get-DoomMusicEnvelopeValue $Voice.ModEnvelope $time
-    $pitch=($Voice.EffectiveKey-$Voice.Region.RootKey)*[Math]::Clamp($g[56],0.0,1200.0)+100*[Math]::Clamp($g[51],-120.0,120.0)+$g[52]+$Voice.Region.Sample.Correction+$mod*$g[5]+$vib*$g[6]+$env*$g[7]
-    $Voice.Oscillator.Step=$Voice.Region.Sample.Rate/[double]$Synth.Rate*[Math]::Pow(2,[Math]::Clamp($pitch,-24000.0,24000.0)/1200)
-    $cutoff=8.176*[Math]::Pow(2,[Math]::Clamp(($g[8]+$mod*$g[10]+$env*$g[11]),1500.0,13500.0)/1200)
-    $q=[Math]::Pow(10,[Math]::Clamp($g[9],0.0,960.0)/200)/[Math]::Sqrt(2);$Voice.Filter=Get-DoomMusicLowPass $cutoff $q $Synth.Rate
-    $pan=[Math]::Clamp($g[17],-500.0,500.0);$angle=($pan+500)/1000*[Math]::PI/2
-    $left=[Math]::Cos($angle);$right=[Math]::Sin($angle)
-    $gain=[Math]::Pow(10,-[Math]::Clamp(($g[48]+$g[9]/2+$mod*$g[13]),-960.0,2880.0)/200)
-    $gainNext=[Math]::Pow(10,-[Math]::Clamp(($g[48]+$g[9]/2+(Get-DoomMusicLfo $nextTime $modDelay $modHz)*$g[13]),-960.0,2880.0)/200)
+    if($Voice.ChannelRevision -ne $channel.Revision){$Voice.Generators=Get-DoomMusicGenerators $Voice.Region $Voice.Modulators $channel $Voice.EffectiveKey $Voice.Velocity;$Voice.ChannelRevision=$channel.Revision;$Voice.StaticControl=$null}
+    $g=$Voice.Generators
+    if($null -eq $Voice.StaticControl){
+        $s=[double[]]::new(18)
+        $s[0]=Convert-DoomMusicTimecents $g[21] 5000;$s[1]=8.176*[Math]::Pow(2,[Math]::Clamp($g[22],-16000.0,4500.0)/1200)
+        $s[2]=Convert-DoomMusicTimecents $g[23] 5000;$s[3]=8.176*[Math]::Pow(2,[Math]::Clamp($g[24],-16000.0,4500.0)/1200)
+        $s[4]=($Voice.EffectiveKey-$Voice.Region.RootKey)*[Math]::Clamp($g[56],0.0,1200.0)+100*[Math]::Clamp($g[51],-120.0,120.0)+$g[52]+$Voice.Region.Sample.Correction
+        $s[5]=[int]($g[5] -ne 0 -or $g[6] -ne 0 -or $g[7] -ne 0)
+        $s[6]=$Voice.Region.Sample.Rate/[double]$Synth.Rate*[Math]::Pow(2,[Math]::Clamp($s[4],-24000.0,24000.0)/1200)
+        $s[7]=[int]($g[10] -ne 0 -or $g[11] -ne 0);$s[8]=[Math]::Pow(10,[Math]::Clamp($g[9],0.0,960.0)/200)/[Math]::Sqrt(2)
+        $s[9]=8.176*[Math]::Pow(2,[Math]::Clamp($g[8],1500.0,13500.0)/1200)
+        $angle=([Math]::Clamp($g[17],-500.0,500.0)+500)/1000*[Math]::PI/2;$s[10]=[Math]::Cos($angle);$s[11]=[Math]::Sin($angle)
+        $s[12]=$g[48]+$g[9]/2;$s[13]=[int]($g[13] -ne 0);$s[14]=[Math]::Pow(10,-[Math]::Clamp($s[12],-960.0,2880.0)/200)
+        $s[15]=[int]($g[5] -ne 0 -or $g[10] -ne 0 -or $g[13] -ne 0);$s[16]=[int]($g[6] -ne 0);$s[17]=[int]($g[7] -ne 0 -or $g[11] -ne 0)
+        $Voice.StaticControl=$s;$Voice.LastCutoff=[double]::NaN
+    }
+    [double[]]$s=$Voice.StaticControl;[int]$span=32-[int]($Voice.Frame%32);$time=$Voice.Frame/[double]$Synth.Rate;$nextTime=($Voice.Frame+$span)/[double]$Synth.Rate
+    $mod=0.0;$vib=0.0;$env=0.0
+    if($s[15]){$mod=Get-DoomMusicLfo $time $s[0] $s[1]};if($s[16]){$vib=Get-DoomMusicLfo $time $s[2] $s[3]};if($s[17]){$env=Get-DoomMusicEnvelopeValue $Voice.ModEnvelope $time}
+    if($s[5]){$pitch=$s[4]+$mod*$g[5]+$vib*$g[6]+$env*$g[7];$Voice.Oscillator.Step=$Voice.Region.Sample.Rate/[double]$Synth.Rate*[Math]::Pow(2,[Math]::Clamp($pitch,-24000.0,24000.0)/1200)}else{$Voice.Oscillator.Step=$s[6]}
+    $cutoff=$s[9];if($s[7]){$cutoff=8.176*[Math]::Pow(2,[Math]::Clamp(($g[8]+$mod*$g[10]+$env*$g[11]),1500.0,13500.0)/1200)}
+    if($cutoff -ne $Voice.LastCutoff){$Voice.Filter=Get-DoomMusicLowPass $cutoff $s[8] $Synth.Rate;$Voice.LastCutoff=$cutoff}
+    $left=$s[10];$right=$s[11];$gain=$s[14];$gainNext=$gain
+    if($s[13]){$gain=[Math]::Pow(10,-[Math]::Clamp(($s[12]+$mod*$g[13]),-960.0,2880.0)/200);$gainNext=[Math]::Pow(10,-[Math]::Clamp(($s[12]+(Get-DoomMusicLfo $nextTime $s[0] $s[1])*$g[13]),-960.0,2880.0)/200)}
     $gain*=Get-DoomMusicEnvelopeValue $Voice.VolumeEnvelope $time;$gainNext*=Get-DoomMusicEnvelopeValue $Voice.VolumeEnvelope $nextTime
     if($channel.CC[7] -eq 0 -or $channel.CC[11] -eq 0){$gain=0;$gainNext=0}
     $Voice.ControlLeft=$left*$gain;$Voice.ControlRight=$right*$gain;$Voice.DeltaLeft=$left*($gainNext-$gain)/$span;$Voice.DeltaRight=$right*($gainNext-$gain)/$span;$Voice.ControlUntil=$Voice.Frame+$span
@@ -85,14 +102,29 @@ function Add-DoomMusicVoiceFrames {
     while($written -lt $Frames -and -not $Voice.Finished){
         if($Voice.Frame -ge $Voice.ControlUntil -or $Voice.ChannelRevision -ne $Synth.Channels[$Voice.Channel].Revision){Update-DoomMusicVoiceControl $Voice $Synth}
         [int]$count=[Math]::Min($Frames-$written,$Voice.ControlUntil-$Voice.Frame)
-        $mono=Read-DoomMusicOscillator $Voice.Oscillator $count;$f=$Voice.Filter
+        # Fuse sample interpolation with filtering; avoid a function and mono array per control interval.
+        $osc=$Voice.Oscillator;[int16[]]$samples=$osc.Samples;$region=$osc.Region
+        [double]$position=$osc.Position;[double]$step=$osc.Step
+        [int]$end=$region.End;[int]$loopEnd=$region.LoopEnd;[int]$loopStart=$region.LoopStart;[int]$loopLength=$loopEnd-$loopStart
+        [bool]$loop=$region.LoopMode -eq 1 -or ($region.LoopMode -eq 3 -and -not $osc.Released)
+        [bool]$advancing=-not $osc.Paused -and -not $osc.Finished;$f=$Voice.Filter
         [double]$b0=$f[0];[double]$b1=$f[1];[double]$b2=$f[2];[double]$a1=$f[3];[double]$a2=$f[4]
         [double]$x1=$Voice.X1;[double]$x2=$Voice.X2;[double]$y1=$Voice.Y1;[double]$y2=$Voice.Y2
         [double]$left=$Voice.ControlLeft;[double]$right=$Voice.ControlRight;[double]$dl=$Voice.DeltaLeft;[double]$dr=$Voice.DeltaRight
         for($i=0;$i -lt $count;$i++){
-            [double]$x=$mono[$i];[double]$y=$b0*$x+$b1*$x1+$b2*$x2-$a1*$y1-$a2*$y2;$x2=$x1;$x1=$x;$y2=$y1;$y1=$y
+            [double]$x=0
+            if($advancing){
+                if($loop -and $position -ge $loopEnd){$position=$loopStart+($position-$loopStart)%$loopLength}
+                if($position -lt $end){
+                    [int]$index=[Math]::Floor($position);[int]$next=$index+1
+                    if($loop -and $next -ge $loopEnd){$next=$loopStart}elseif($next -ge $end){$next=$end-1}
+                    $x=$samples[$index]+([int]$samples[$next]-[int]$samples[$index])*($position-$index);$position+=$step
+                }else{$advancing=$false}
+            }
+            [double]$y=$b0*$x+$b1*$x1+$b2*$x2-$a1*$y1-$a2*$y2;$x2=$x1;$x1=$x;$y2=$y1;$y1=$y
             $Mix[2*($written+$i)]+=$left*$y;$Mix[2*($written+$i)+1]+=$right*$y;$left+=$dl;$right+=$dr
         }
+        if(-not $osc.Paused){$osc.Position=$position;$osc.Frames+=$count;if(-not $loop -and $position -ge $end){$osc.Finished=$true}}
         $Voice.X1=$x1;$Voice.X2=$x2;$Voice.Y1=$y1;$Voice.Y2=$y2;$Voice.ControlLeft=$left;$Voice.ControlRight=$right;$Voice.Frame+=$count;$written+=$count
         $e=$Voice.VolumeEnvelope
         if($Voice.Oscillator.Finished -or ($Voice.Released -and $Voice.Frame/[double]$Synth.Rate -ge $e.ReleaseTime+$e.Release)){$Voice.Finished=$true}
@@ -107,9 +139,9 @@ function Read-DoomMusicSynth {
 }
 function ConvertTo-DoomMusicPcm {
     param($Synth,[double[]]$Mix)
-    $pcm=[int16[]]::new($Mix.Length)
-    for($i=0;$i -lt $Mix.Length;$i++){
-        $value=$Mix[$i]*$Synth.Volume;if(-not [double]::IsFinite($value)){throw 'Music synthesis produced nonfinite PCM.'}
+    $pcm=[int16[]]::new($Mix.Length);[double]$volume=$Synth.Volume
+    for([int]$i=0;$i -lt $Mix.Length;$i++){
+        [double]$value=$Mix[$i]*$volume;if(-not [double]::IsFinite($value)){throw 'Music synthesis produced nonfinite PCM.'}
         if($value -ge 32767.5){$pcm[$i]=32767;$Synth.ClippedSamples++}elseif($value -lt -32768.5){$pcm[$i]=-32768;$Synth.ClippedSamples++}else{$pcm[$i]=[int16]$value}
     }
     return ,$pcm

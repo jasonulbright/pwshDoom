@@ -1,0 +1,13 @@
+Exploratory local PowerShell class probe, not adopted in the runtime.
+Command: pwsh -NoProfile -File local/music-references/Test-PcmCandidate.ps1
+Source SHA-256: 61D6C42E3D245275924823693D13C39F98D6EF809033E8388D3F6343EBDBD441
+Each pass converts the same 2520-double synthetic sinusoid 280 times with each implementation.
+Function first, PowerShell class method second; no clipping. Times are console-rounded milliseconds.
+No C# helper or compiled custom algorithm was used.
+
+Pass FunctionMs MethodMs Equal
+1    1926.27    1844.33  True
+2    1836.70    1843.36  True
+3    1837.13    1850.22  True
+
+No consistent warm improvement. No additional real-score render was justified for this candidate.

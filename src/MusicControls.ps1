@@ -20,7 +20,7 @@ function Get-DoomMusicModSource {
         0 {$value=$x}
         1 {$value=if($x -ge 1){1.0}else{[Math]::Clamp(-40.0/96*[Math]::Log10(1-$x),0.0,1.0)}}
         2 {$value=if($x -le 0){0.0}else{1-[Math]::Clamp(-40.0/96*[Math]::Log10($x),0.0,1.0)}}
-        3 {if($bipolar -and $sign -eq 0){$sign=1};$value=if($bipolar -or $x -ge .5){1.0}else{0.0}}
+        3 {if($bipolar -and $sign -eq 0){$sign=if($negative){-1}else{1}};$value=if($bipolar -or $x -ge .5){1.0}else{0.0}}
     }
     return [double]($sign*$value)
 }

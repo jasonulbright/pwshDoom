@@ -64,6 +64,8 @@ The bank inventory currently expects the 32-track Ultimate Doom fixture. The evi
 
 ## Region selection and sample oscillator
 
+This section preserves the region/oscillator milestone. The later [dry synthesizer and optimization findings](music-synthesis.md) add modulator evaluation, full-score output and measured control caching; music remains outside the normal host.
+
 `src/SoundFontRegions.ps1` resolves preset/instrument globals and locals, intersects key/velocity ranges across levels, preserves overlapping layers and applies sample-address offsets. Instrument values replace defaults; preset values add after their own global/local overrides. Explicit modulators are retained with local replacements but are not yet evaluated. These behaviors follow sections 8.5 and 9.4 of the specification linked above. Missing presets and invalid effective sample/loop bounds fail explicitly. The resolver has a bounded expansion limit and no implicit program substitution.
 
 `music-regions-unit-first.json` passes sixteen independent synthetic checks for precedence, layers, endpoints, signed values, modulator retention and bounds. `music-note-coverage-first.json` then resolves every one of 71,681 positive-velocity note-ons across all 32 complete IWAD scores, including program changes and percussion selection. All observed bank controller values are zero. There are 5,020 distinct bank/program/key/velocity queries, selecting 133 samples from 2,063 expanded regions. No bank zone is skipped. Individual notes can select six layers; E1M1 reaches two layers per note. These counts exclude release tails and do not establish the maximum simultaneous synthesis load.

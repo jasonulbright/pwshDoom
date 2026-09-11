@@ -6,7 +6,7 @@ The experimental renderer now produces dry stereo PCM from MUS scores and the lo
 
 `MusicControls.ps1` implements default/explicit modulator evaluation, controller curves, timecents, volume/modulation envelopes, triangular LFOs and normalized low-pass coefficients. `MusicSynth.ps1` combines resolved sample layers, the existing oscillator, voice filters and stereo gains, and converts the mix to signed 16-bit PCM. MUS events are applied at their scheduled sample positions. Control values update on a 32-frame grid per note; gains interpolate within that grid. A channel change invalidates pending controls immediately. At 44.1 kHz the control interval is about 0.726 ms.
 
-Implemented session behavior includes program changes, pitch bend, volume/expression/pan, sustain pedal, all-notes/all-sounds-off, controller reset, percussion on MUS channel 15 and exclusive-class cuts. A 256-voice bound fails explicitly rather than silently stealing voices. Ordinary end-of-score events release voices while the looping timeline restarts. Pause freezes both music and voice clocks. The current maximum-voice failure path is not yet transactional across an entire layered note; this needs correction before host integration.
+Implemented session behavior includes program changes, pitch bend, volume/expression/pan, sustain pedal, all-notes/all-sounds-off, controller reset, percussion on MUS channel 15 and exclusive-class cuts. A 256-voice bound fails explicitly rather than silently stealing voices. Ordinary end-of-score events release voices while the looping timeline restarts. Pause freezes both music and voice clocks. Layered note admission now validates capacity and stages every new voice before removing old exclusive/mono voices or publishing counters. A rejected layer leaves the previously playing note intact.
 
 The model is not certified SoundFont-compatible. Envelopes use linear amplitude attack; volume decay/release use a declared 96 dB scale, and modulation decay/release are linear. Envelope durations are latched when a note starts. Dynamic pitch and filter control are held within each 32-frame interval. The low-pass uses a standard two-pole form with bounded cutoff and Q; it is not a hardware Sound Blaster emulation. Effects sends are evaluated and counted, but **reverb and chorus are not yet mixed**. Full modulation-destination semantics, filter-change transients, stereo-linked banks and broader bank support remain unqualified.
 
@@ -14,7 +14,7 @@ The [SoundFont specification](https://musescore.org/sites/musescore.org/files/20
 
 ## Initial evidence
 
-`music-synth-unit-lifetime.json` contains 34 passing checks. Independent vectors cover controller/pitch math, envelope points, LFO phase, filter coefficients and the actual filter loop's impulse response. Additional checks cover sample identity across caller block partitions, sustain release/reset, immediate channel mute, pause, percussion, exclusive layers, release cleanup and PCM rounding/saturation. The first fixture accidentally flattened a single modulator row; another used PowerShell's reserved `Error` variable for its impulse error accumulator. Both failures are preserved. Review corrected the positive-direction bipolar switch at its center. The negative-direction center still needs a correction; that source is absent from the inspected score-used modulator configurations and defaults.
+`music-synth-unit-lifetime.json` contains the original 34 passing checks. Independent vectors cover controller/pitch math, envelope points, LFO phase, filter coefficients and the actual filter loop's impulse response. Additional checks cover sample identity across caller block partitions, sustain release/reset, immediate channel mute, pause, percussion, exclusive layers, release cleanup and PCM rounding/saturation. The first fixture accidentally flattened a single modulator row; another used PowerShell's reserved `Error` variable for its impulse error accumulator. Both failures are preserved. Review corrected the positive-direction bipolar switch at its center; the later admission/optimization milestone also corrects the negative-direction center and tests it. That source is absent from the inspected score-used modulator configurations and defaults.
 
 The first eight seconds of E1M1 render with 71 note-ons, nine peak voices and zero clipped output samples. Rendering takes 14.756 seconds, excluding bank/score preparation and file writing/hashing. Peak PCM is 7,107; RMS is 370.787 at master volume 0.2. The output is 352,800 frames of 44.1 kHz stereo signed 16-bit audio. This short result is slower than real time and supports investigating a cache or render-ahead pipeline. It does not certify live audio deadlines.
 
@@ -25,6 +25,29 @@ The complete 98-second fixture covers the 96-second score and its next two secon
 Full PowerShell rendering takes **664.386 seconds**, about 0.148 audio seconds per rendering second. Short unit/reference diagnostics overlap this long run, so treat it as a practical observed cost, not an isolated speed comparison. Even allowing for that limitation, a naive live synthesizer is unsuitable. A cache alone would impose an approximately eleven-minute initial E1M1 render under these conditions; optimization and startup policy need evidence before adopting that experience. Profile control recomputation and quiet release tails before designing the cache around this cost.
 
 Full local output: `local/music-render-f686470699d14fcdb5ed14d0ee278cc3/D_E1M1-dry.wav`, SHA-256 `989CBD3C9E16782088EB4EF558477AC7A18602897D9390B1E148314B0D2FC530`. `music-dry-validation.json` passes forty evidence checks with seven current source hashes/parses. `music-dry-media-validation.json` records independent ffprobe identification of all four reference/PowerShell WAVs. No playback device was used and no auditory review is claimed.
+
+## Optimization and note admission
+
+The follow-up fixes negative-direction bipolar switch centering and makes layered note admission transactional. The expanded suite in `music-synth-unit-fused-edges.json` passes 51 checks, including capacity failure, invalid later layers, old voice identity, and transparent-filter comparisons against the standalone oscillator. Those oscillator comparisons cover modes 0/1/3, held/released notes, fractional interpolation, multi-loop jumps and finite trailing silence. Existing impulse, partition, mute and release checks still pass.
+
+`Render-MusicScore.ps1 -Profile` instruments the owned synthesizer source with timestamp counters. The profiler validates each replacement marker before loading; reports pin the instrumented text hash. Render reports now capture source hashes before loading and report changes during execution. The host never loads the experimental profiler. Inclusive read time contains control and voice work; do not add it to those nested categories.
+
+| Eight-second E1M1 stage | Total render seconds | Control seconds | Oscillator seconds | Filter/mix seconds | PCM seconds |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Baseline after admission fix | 13.958 | 6.803 | 4.278 | 0.255 | 1.890 |
+| Cache static control values | 10.765 | 3.273 | 4.473 | 0.280 | 1.943 |
+| Also cache PCM volume/type locals | 10.773 | 3.275 | 4.509 | 0.273 | 1.912 |
+| Fuse oscillator/filter/mix | 9.861 | 3.217 | Combined below | 4.101 combined | 1.907 |
+
+Raw reports are `music-profile-baseline.json`, `music-profile-static-cache.json`, `music-profile-pcm-cache.json` and `music-profile-fused-first.json`. These are individual instrumented observations, not repeated paired or live benchmarks. The fused category includes oscillator/filter setup, sample arithmetic, mixing and oscillator state publication, so its boundary is broader than the original filter-loop category. Every stage retains the same complete eight-second WAV SHA-256 `1BE9256376413BE07688B984E1EDF7D017A5E0D7BB9E493F5595868490EA9650`.
+
+Static control caching avoids recomputing note/channel constants, skips LFO/envelope values with zero contribution, and recalculates filter coefficients only when cutoff or channel revision changes. The 32-frame control grid, interpolation, selected layers and full envelope tails remain unchanged. Fusing sample interpolation and filtering removes 50,129 oscillator calls and temporary mono buffers from this fixture. PCM volume caching alone has no meaningful measured improvement. A separate PowerShell class-method conversion probe likewise shows no consistent warm improvement and was not adopted (`music-pcm-class-probe.txt`; local source `local/music-references/Test-PcmCandidate.ps1`, SHA-256 `61D6C42E3D245275924823693D13C39F98D6EF809033E8388D3F6343EBDBD441`).
+
+The uninstrumented full 98-second render now takes **380.828 seconds** (0.257 audio seconds per rendering second), compared with the earlier 664.386-second observation. The new run had no overlapping synthesis/reference/test workload; documentation and read-only repository work continued, and ordinary system activity was uncontrolled. The earlier run had declared overlapping diagnostics. These observations suggest a substantial gain but are not a controlled paired speed ratio.
+
+The complete WAV remains byte-identical: SHA-256 `989CBD3C9E16782088EB4EF558477AC7A18602897D9390B1E148314B0D2FC530`, covering all 4,321,800 frames, 2,351 note-ons, 46 peak voices, 108 exclusive cuts and the two seconds after restart, with no clipping. The local file is `local/music-render-9bdb61c7456843a9aca3d5017c4b8490/D_E1M1-dry.wav`; raw results are `music-e1m1-dry-optimized-loop.json`. `music-optimization-validation.json` passes 60 evidence checks, including current source hashes/parses, all retained eight-second hashes and exact full-loop identity. This verifies preservation of this dry model on this score, not equivalence to a reference synthesizer or perceptual fidelity.
+
+Even the improved full-score startup cost exceeds six minutes. Next isolate numerical-kernel and dynamic-control overhead before selecting a bounded cache/render-ahead policy; profile the denser workload separately if needed. Keep all sample layers and release tails during fidelity-preserving optimizations. Live music, reverb/chorus and full campaign qualification remain open.
 
 ## Separate compiled comparison
 
@@ -43,10 +66,12 @@ Run from `C:\projects\pwshDoom` with fresh report paths:
 ```powershell
 ./scripts/Test-MusicSynth.ps1 -Output local/music-synth-unit.json
 ./scripts/Render-MusicScore.ps1 -Output local/music-dry.json -Track D_E1M1 -Seconds 8
+./scripts/Render-MusicScore.ps1 -Output local/music-profile.json -Track D_E1M1 -Seconds 8 -Profile
+./scripts/Render-MusicScore.ps1 -Output local/music-full-loop.json -Track D_E1M1 -Seconds 98
 ./scripts/Render-MusicReference.ps1 -Output local/music-reference.json -Track D_E1M1 -Seconds 8
 ./scripts/Compare-MusicPcm.ps1 -Output local/music-comparison.json -PowerShellReport local/music-dry.json -ReferenceReport local/music-reference.json
 ```
 
-The score scripts accept `-Wad` and `-SoundFont`; the reference also accepts `-Library` and requires the tested PowerShell 7.6 API boundary. Defaults use the existing local assets. Render reports include exact paths, hashes, timing boundaries and dry-output limitations.
+The score scripts accept `-Wad` and `-SoundFont`; the reference also accepts `-Library` and requires the tested PowerShell 7.6 API boundary. Defaults use the existing local assets. Render reports include exact paths, hashes, timing boundaries and dry-output limitations. `Test-MusicOptimizationEvidence.ps1 -Output local/music-optimization-evidence.json` audits the named retained reports and local WAV hashes without running the synthesizer.
 
 Next qualify the full score and loop boundary, correct any lifetime/filter/controller discrepancies, add reverb/chorus, and measure a bounded render-ahead/cache implementation. Cache work must account for synthesis/source/bank hashes, partial-file recovery, loop tails, first-use time and storage. Then integrate music with the effects worker, volume/mute, pause, map/menu transitions, save/load, clean shutdown and audiovisual capture. No live terminal run or playback device was used for this offline milestone.

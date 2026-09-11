@@ -23,6 +23,7 @@ try{
     Check 'Concave velocity attenuation yields squared velocity gain' ([Math]::Abs([Math]::Pow(10,-$atten/200)-[Math]::Pow(64.0/127,2)) -lt 1e-12)
     Check 'Negative switch changes at half scale' ((Get-DoomMusicModSource 0x0d02 $channel 60 32) -eq 1 -and (Get-DoomMusicModSource 0x0d02 $channel 60 96) -eq 0)
     Check 'Bipolar switch chooses positive side at center' ((Get-DoomMusicModSource 0x0e8a $channel 60 100) -eq 1)
+    Check 'Negative bipolar switch reverses the center result' ((Get-DoomMusicModSource 0x0f8a $channel 60 100) -eq -1)
     $bank=Fixture;$region=$bank.Presets['0:0'].Regions[0];$mods=Get-DoomMusicModulators $region;$channel.Bend=0;$g=Get-DoomMusicGenerators $region $mods $channel 60 127
     Check 'Two-semitone bend default produces minus 200 cents' ([Math]::Abs($g[52]+200) -lt 1e-12)
     $region.InstrumentModulators=@(,[int[]]@(0x0502,48,0,0,0));$mods=Get-DoomMusicModulators $region;$channel.CC[7]=127;$channel.Bend=8192;$g=Get-DoomMusicGenerators $region $mods $channel 60 1
@@ -47,6 +48,20 @@ try{
     $out=Read-DoomMusicSynth $impulse 4;$expected=[double[]]@((1.0/3),(2.0/3),(2.0/9),(-2.0/9));$impulseError=0.0
     for($i=0;$i -lt 4;$i++){$impulseError=[Math]::Max($impulseError,[Math]::Abs($out[2*$i]-$expected[$i]))}
     Check 'Independent impulse response through the actual voice filter loop' ($impulseError -lt 1e-12)
+    # A transparent filter isolates the fused oscillator from envelope/filter conventions.
+    foreach($mode in 0,1,3){foreach($released in $false,$true){foreach($step in .625,19.25){
+        $oscBank=Fixture;$r=$oscBank.Presets['0:0'].Regions[0];$r.LoopMode=$mode;$r.LoopStart=2;$r.LoopEnd=6
+        $s=New-DoomMusicSynth $oscBank -Rate 8000;Invoke-DoomMusicEvent $s ([long[]]@(0,1,0,60,127));$v=$s.Voices[0]
+        $v.ControlUntil=1000;$v.Filter=[double[]]@(1,0,0,0,0);$v.ControlLeft=1;$v.ControlRight=1
+        $v.Oscillator.Step=$step;$v.Oscillator.Position=4.75;$v.Oscillator.Released=$released
+        $reference=New-DoomMusicOscillator $oscBank $r -Rate 8000;$reference.Step=$step;$reference.Position=4.75;$reference.Released=$released
+        $expected=Read-DoomMusicOscillator $reference 23;$actual=Read-DoomMusicSynth $s 23;$matches=$true
+        for($i=0;$i -lt 23;$i++){if($actual[2*$i] -cne $expected[$i] -or $actual[2*$i+1] -cne $expected[$i]){$matches=$false}}
+        Check "Fused oscillator equals standalone: mode=$mode released=$released step=$step" ($matches -and $v.Oscillator.Position -eq $reference.Position -and $v.Oscillator.Frames -eq $reference.Frames -and $v.Oscillator.Finished -eq $reference.Finished)
+    }}}
+    $s=New-DoomMusicSynth (Fixture) -Rate 8000;Invoke-DoomMusicEvent $s ([long[]]@(0,1,0,60,100));$v=$s.Voices[0];$v.Oscillator.Paused=$true
+    $silent=Read-DoomMusicSynth $s 19
+    Check 'Paused oscillator supplies zero without advancing its own clock' ($v.Oscillator.Frames -eq 0 -and $v.Oscillator.Position -eq 0 -and @($silent|Where-Object {$_ -ne 0}).Count -eq 0)
     $whole=New-DoomMusicSynth (Fixture) -Rate 8000;$parts=New-DoomMusicSynth (Fixture) -Rate 8000
     foreach($s in @($whole,$parts)){Invoke-DoomMusicEvent $s ([long[]]@(0,1,0,60,100))}
     $a=Read-DoomMusicSynth $whole 128;$joined=[Collections.Generic.List[double]]::new();foreach($size in 1,63,64){$joined.AddRange((Read-DoomMusicSynth $parts $size))}
@@ -72,6 +87,15 @@ try{
     $layerBank=Fixture;$region=$layerBank.Presets['0:0'].Regions[0];$region.Values[57]=1;$layerBank.Presets['0:0'].Regions=@($region,$region)
     $layered=New-DoomMusicSynth $layerBank -Rate 8000;Invoke-DoomMusicEvent $layered ([long[]]@(0,1,0,60,100));Invoke-DoomMusicEvent $layered ([long[]]@(0,1,0,62,100))
     Check 'Exclusive class cuts older notes while retaining all new layers' ($layered.Voices.Count -eq 2 -and $layered.ExclusiveCuts -eq 2 -and $layered.Voices[0].NoteId -eq $layered.Voices[1].NoteId)
+    $bounded=New-DoomMusicSynth $layerBank -Rate 8000 -MaxVoices 1;$rejected=$false
+    try{Invoke-DoomMusicEvent $bounded ([long[]]@(0,1,0,60,100))}catch{$rejected=$true}
+    Check 'Oversized layered note leaves no partial voice or counters' ($rejected -and $bounded.Voices.Count -eq 0 -and $bounded.NextNote -eq 0 -and $bounded.NoteOns -eq 0 -and $bounded.NonzeroReverbVoices -eq 0)
+    $stable=New-DoomMusicSynth (Fixture) -Rate 8000 -MaxVoices 1;Invoke-DoomMusicEvent $stable ([long[]]@(0,1,0,60,100));$prior=$stable.Voices[0];$rejected=$false
+    try{Invoke-DoomMusicEvent $stable ([long[]]@(0,1,0,62,100))}catch{$rejected=$true}
+    Check 'Capacity rejection preserves the active note identity' ($rejected -and $stable.NoteOns -eq 1 -and [object]::ReferenceEquals($prior,$stable.Voices[0]))
+    $valid=$layerBank.Presets['0:0'].Regions[0];$bad=$valid.Clone();$bad.Values=$valid.Values.Clone();$bad.Sample=$valid.Sample.Clone();$bad.Sample.Rate=0;$layerBank.Presets['0:0'].Regions=@($valid,$bad)
+    $prior=$layered.Voices[0];$rejected=$false;try{Invoke-DoomMusicEvent $layered ([long[]]@(0,1,0,64,100))}catch{$rejected=$true}
+    Check 'Invalid later layer preserves earlier voices and cut counters' ($rejected -and $layered.Voices.Count -eq 2 -and [object]::ReferenceEquals($prior,$layered.Voices[0]) -and $layered.NextNote -eq 2 -and $layered.ExclusiveCuts -eq 2)
     $s.Volume=1;$pcm=ConvertTo-DoomMusicPcm $s ([double[]]@(-32768.5,32767.5,.5,1.5))
     Check 'PCM ties-to-even and asymmetric clipping boundary' (($pcm -join ',') -ceq '-32768,32767,0,2' -and $s.ClippedSamples -eq 1)
 }catch{$failure=$_.ToString()+"`n"+$_.ScriptStackTrace;throw}finally{
