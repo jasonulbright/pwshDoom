@@ -1,5 +1,7 @@
 # Katakana and actual screen recordings
 
+The next session build adds three recordings of E1M1 → intermission → E1M2 in Classic, Matrix and AnsiArt. See [campaign session recordings](campaign-session.md#actual-terminal-recordings) for the current results. The two E1M1-only captures below remain historical evidence for the earlier build. The exporter now also accepts successful full-session replays and checks visible duration against the wall clock, preserving map handoff pauses in the viewing copy.
+
 The user requested Japanese characters in both art modes and screen recordings of the finished effects. The game now defaults to half-width katakana in Matrix and AnsiArt. ASCII remains selectable. Gameplay, rasterization, interpolation, and terminal character conversion still run in PowerShell.
 
 ## Glyphs and font

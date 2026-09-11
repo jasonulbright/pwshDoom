@@ -50,14 +50,23 @@ function Test-GameRenderCompleted {
     return $true
 }
 function Submit-GameRender {
-    param($Pool,$Snapshot,[int]$ColumnOffset=0,[int]$RowOffset=0,[int]$FrameNumber=0)
+    param($Pool,$Snapshot,[int]$ColumnOffset=0,[int]$RowOffset=0,[int]$FrameNumber=0,[switch]$ScreenPixels,[int]$Tic=0)
     if(-not (Test-GameRenderCompleted $Pool)){throw 'A render is already in progress.'}
     if($Snapshot -is [byte[]]){$bytes=$Snapshot}else{$bytes=ConvertTo-GameSnapshotBytes $Snapshot}
     if($bytes.Length -gt 1048448){throw 'Snapshot exceeds transport capacity.'}
+    if($ScreenPixels -and $bytes.Length -ne 64000){throw 'Session screens require 320x200 indexed pixels.'}
     foreach($worker in $Pool.Workers) {
         [void]$worker.Done.Reset();$worker.View.Write(4,$bytes.Length);$worker.View.WriteArray(128L,$bytes,0,$bytes.Length)
-        $worker.View.Write(64,$ColumnOffset);$worker.View.Write(68,$RowOffset);$worker.View.Write(72,$FrameNumber);[void]$worker.Go.Set()
+        $worker.View.Write(64,$ColumnOffset);$worker.View.Write(68,$RowOffset);$worker.View.Write(72,$FrameNumber)
+        $worker.View.Write(76,[int][bool]$ScreenPixels);$worker.View.Write(80,$Tic);[void]$worker.Go.Set()
     }
+}
+function Update-GameRenderAssets {
+    param($Pool)
+    if(-not (Test-GameRenderCompleted $Pool)){throw 'Drain rendering before changing map assets.'}
+    foreach($worker in $Pool.Workers){[void]$worker.Done.Reset();$worker.View.Write(76,2);[void]$worker.Go.Set()}
+    foreach($worker in $Pool.Workers){if(-not $worker.Done.WaitOne(30000)){throw 'Map asset reload timed out.'};Get-GameWorkerError $worker}
+    $Pool.Results=[object[]]::new($Pool.Count)
 }
 function Wait-GameRender {
     param($Pool,[int]$TimeoutMs=30000,[switch]$ReadPixels)

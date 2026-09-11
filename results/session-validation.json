@@ -1,0 +1,86 @@
+{
+  "ParsedFiles": 69,
+  "VerifiedOriginalAndViewingVideoHashes": 6,
+  "CharacterPartitionCases": 144,
+  "ControllerChecks": 57,
+  "WorkerStripComparisons": 42.0,
+  "WorkerPixelsCompared": 384000.0,
+  "Meaning": "Final current-source syntax/hash/result/video-hash and owned-process audit. Controller, screen, worker, character codec and Classic ANSI tests passed before captures; runtime and capture source hashes remain unchanged. Every viewing copy fully decoded by export harness and visually sampled at 45.5, 47.5 and 50.5 seconds. No new PresentMon, full-campaign or unique displayed-FPS claim.",
+  "RecordedCompletedSessions": 3,
+  "Inputs": [
+    {
+      "Sha256": "8687C93DB8A2C8421D3D93DE13CD5B642BF331230A0C7B4B1CCAB01963596D7F",
+      "Path": "results/session-sources.json"
+    },
+    {
+      "Sha256": "1D5BFFF3C9A7792302ED47D1E64CDA45F0B7D0A28377F6878CF34A248C3C76EF",
+      "Path": "results/campaign-transitions-before.json"
+    },
+    {
+      "Sha256": "E7A840C0C345143AD5997D5E92C54E2099BD3FC1D8310C35489C8F8D514F1C33",
+      "Path": "results/campaign-transitions-session.json"
+    },
+    {
+      "Sha256": "59F61534F987D3459446F259351AB894D12FECADF3149D76687AA38F9CD708E0",
+      "Path": "results/e1m1-e1m2-session-route.json"
+    },
+    {
+      "Sha256": "99B064997748894A76F7B8CA629A527410BF6ACB5BAF4F2D410956D78F7CB9F1",
+      "Path": "results/session-screens-first.json"
+    },
+    {
+      "Sha256": "A62D829A8338F85C87DADCE4B2F94B7B3F2345309D2F383D80130A8B08EBBE01",
+      "Path": "results/session-screens-cached.json"
+    },
+    {
+      "Sha256": "6E298A27356D1062B35D07A94290FF9851A8362C803F6B242C037EFBA43D135D",
+      "Path": "results/session-screens-text-fixed.json"
+    },
+    {
+      "Sha256": "F825BF1383E57C4AB728B260250AFF1D14E3C91AADC0750BAB21AF0744673E56",
+      "Path": "results/session-worker-classic.json"
+    },
+    {
+      "Sha256": "8894800F1CA33DAEEA4A0D8DFC733A3A744C1A8BB7E56252A69B525A63A90479",
+      "Path": "results/session-worker-matrix.json"
+    },
+    {
+      "Sha256": "11DCDC6B0E2504F6F1E7F73BED1445D5F68E62ECF2E105E4EF6153C88B2FEECF",
+      "Path": "results/session-worker-ansiart.json"
+    },
+    {
+      "Sha256": "6C15FAC274435F5D6320F1B8BB2BBD0F9C2C572E0616070F5C86CC0C10E51D8E",
+      "Path": "results/session-character-codec.json"
+    },
+    {
+      "Sha256": "886CEA77751ED33C50F2A17635126EB2B638DE98B0053EA0C55807783FF6F62A",
+      "Path": "results/session-host-first.json"
+    },
+    {
+      "Sha256": "C4365278FF769FCBF95E4DC069F48CEAF1E05A8B54FA854D6BCF35FF4D55E202",
+      "Path": "results/session-host-buffer-fixed.json"
+    },
+    {
+      "Sha256": "F19FACF3C4613922FE0720EC23BB209F1A314DA6E95AA1CB75A32E383081492B",
+      "Path": "results/session-recorded-classic-game.json"
+    },
+    {
+      "Sha256": "2BE97504B999250BDCA6DEF3CFD61541EA9E33D3AC3FE6099CD881E4DED31D91",
+      "Path": "results/session-recorded-matrix-game.json"
+    },
+    {
+      "Sha256": "48BE58AC13DB9AA66CE2A76CD513EE075ACCA1397A98666B1151EF118A4879EB",
+      "Path": "results/session-recorded-ansiart-game.json"
+    },
+    {
+      "Sha256": "F5B1FF3785324C71D9D9F86896464D11A7D8C319B6338DBE797A128C6ACFE14F",
+      "Path": "results/session-recordings.json"
+    }
+  ],
+  "SourceHashesVerified": 224,
+  "ClassicAnsiCases": 24,
+  "ScreenChecks": 24,
+  "RemainingOwnedGameOrRecorderProcesses": 0,
+  "ParseErrors": 0,
+  "FinishedUtc": "2026-09-11T12:45:59.0126761Z"
+}

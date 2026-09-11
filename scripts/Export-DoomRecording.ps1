@@ -11,7 +11,7 @@ $prefix=[IO.Path]::GetFullPath($InputPrefix);$output=[IO.Path]::GetFullPath($Out
 if(Test-Path -LiteralPath $output){throw 'Use a new output path; the original capture is retained.'}
 $recording=Get-Content -LiteralPath ($prefix+'-recording.json') -Raw | ConvertFrom-Json
 $game=Get-Content -LiteralPath ($prefix+'-game.json') -Raw | ConvertFrom-Json
-if($recording.Error -or $recording.EncoderExitCode -ne 0 -or $game.Error -or $game.ExitReason -ne 'LevelComplete'){throw 'A successful full replay recording is required.'}
+if($recording.Error -or $recording.EncoderExitCode -ne 0 -or $game.Error -or $game.ExitReason -notin 'LevelComplete','ReplayEnd'){throw 'A successful full replay recording is required.'}
 if($game.ViewportChanges.Count -ne 1 -or $game.ViewportPauseCount -ne 0){throw 'The window changed during capture; inspect it before choosing a crop.'}
 if((Get-FileHash -LiteralPath $recording.Video).Hash -ne $recording.VideoSha256){throw 'Original recording hash changed.'}
 function Invoke-RecordingTool {
@@ -43,7 +43,8 @@ foreach($line in ($scan.Err -split '\r?\n')){
 }
 if($times.Count -lt 300){throw 'Too few visible gameplay samples; inspect the recording/crop.'}
 $start=[Math]::Max(0,$times[0]-.1);$end=[Math]::Min([double]$sourceInfo.format.duration,$times[-1]+.2);$duration=$end-$start
-if([Math]::Abs($duration-$game.DurationSeconds) -gt 1.0){throw 'Detected gameplay duration does not agree with the game report; inspect before exporting.'}
+$recordedGameDuration=if($game.WallDurationSeconds){$game.WallDurationSeconds}else{$game.DurationSeconds}
+if([Math]::Abs($duration-$recordedGameDuration) -gt 1.0){throw 'Detected gameplay duration does not agree with the game wall-clock report; inspect before exporting.'}
 $exportArguments=@('-hide_banner','-n','-ss',$start.ToString('F3',[Globalization.CultureInfo]::InvariantCulture),'-i',$recording.Video,
     '-t',$duration.ToString('F3',[Globalization.CultureInfo]::InvariantCulture),'-an','-vf',$crop,'-c:v','libx264','-threads','4','-preset','medium','-crf','16','-pix_fmt','yuv420p','-movflags','+faststart',$output)
 $export=Invoke-RecordingTool $ffmpeg $exportArguments;$export.Err | Set-Content -LiteralPath ($output+'.export.log')
@@ -53,7 +54,7 @@ if($finalProbe.Code -ne 0){throw 'Viewing-copy decode verification failed.'}
 $finalInfo=$finalProbe.Out | ConvertFrom-Json
 @{CreatedUtc=[DateTime]::UtcNow.ToString('o');OriginalVideo=$recording.Video;OriginalSha256=$recording.VideoSha256;
     Style=$recording.Style;GlyphSet=$recording.GlyphSet;Crop=@{X=$X;Y=$Y;Width=$Width;Height=$Height};
-    StartSeconds=$start;EndSeconds=$end;ContrastSampleRate=10;GameDurationSeconds=$game.DurationSeconds;VisibleSamples=$times.Count;
+    StartSeconds=$start;EndSeconds=$end;ContrastSampleRate=10;GameDurationSeconds=$game.DurationSeconds;GameWallDurationSeconds=$recordedGameDuration;VisibleSamples=$times.Count;
     Output=$output;OutputSha256=(Get-FileHash -LiteralPath $output).Hash;VerifiedVideo=$finalInfo;Arguments=$exportArguments;
     Meaning='Viewing copy of actual window-capture footage. Removes startup/console return and fixed empty margins; no game frames are synthesized and no speed change, tint, sharpening, shader, or rescaling is applied. Re-encoded H.264 is lossy; capture may already contain repeated frames. The untrimmed original is retained.'} |
     ConvertTo-Json -Depth 7 | Set-Content -LiteralPath ($output+'.json')

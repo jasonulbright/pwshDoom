@@ -42,7 +42,18 @@ Modifications, 2026-09-10:
   reference-renderer strip baseline. These are not the game presentation path;
   scaled drawing paths have not been validated as independent strips.
 
-The new game host and rasterizer are in the parent `src` directory. They consume
-the adopted data model but do not call its reference renderer during play.
+Modifications, 2026-09-11:
+
+- `DoomGame`: route Ultimate Doom map-8 completions to the finale, return E4M9
+  to E4M3, preserve secret-visit history, and convert par seconds to tics.
+- `Finale`: choose each Ultimate Doom episode's text/flat, remove accidental
+  here-string indentation/CR line endings, and request victory music.
+- `FinaleRenderer`: read the instance text speed, cache immutable 320×200 flat
+  pixels and incrementally reveal text. `IntermissionRenderer`: cache immutable
+  320×200 map backgrounds. Reference pixel hashes are retained in the study.
+
+The new game host and 3D rasterizer are in the parent `src` directory. They consume
+the adopted data model. The session-screen path uses the adopted PowerShell
+intermission/finale 2D renderers; gameplay does not call its 3D reference renderer.
 Further adaptations and validation are recorded in `docs/ledger.md` at the
 repository root. This attribution does not claim vanilla compatibility.

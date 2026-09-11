@@ -71,6 +71,9 @@ class Finale {
         # Set flat and text depending on mission pack and game mode
         $this.SetMissionPack()
         $this.SetGameMode()
+        if ($this.options.GameMode -ne [GameMode]::Commercial) {
+            $this.options.Music.StartMusic([Bgm]::VICTOR, $true)
+        }
 
         $this.castNumber = 0
         $this.castState = [DoomInfo]::States.all[0]
@@ -105,8 +108,15 @@ class Finale {
                 $this.text = [DoomInfo]::Strings.C1TEXT
             }
             default {
-                $this.flat = "FLOOR4_8"
-                $this.text = [DoomInfo]::Strings.E1TEXT
+                switch ($this.options.Episode) {
+                    1 { $this.flat = 'FLOOR4_8'; $this.text = [DoomInfo]::Strings.E1TEXT.ToString() }
+                    2 { $this.flat = 'SFLR6_1'; $this.text = [DoomInfo]::Strings.E2TEXT.ToString() }
+                    3 { $this.flat = 'MFLR8_4'; $this.text = [DoomInfo]::Strings.E3TEXT.ToString() }
+                    4 { $this.flat = 'MFLR8_3'; $this.text = [DoomInfo]::Strings.E4TEXT.ToString() }
+                }
+                # The translated here-strings contain source-code indentation.
+                # Doom's finale text has flush-left lines and LF separators.
+                $this.text = (($this.text -split '\r?\n') | ForEach-Object { $_.Trim() }) -join "`n"
             }
         }
     }

@@ -1,5 +1,7 @@
 # E1M1 implementation, 2026-09-10
 
+The architecture and performance observations below describe the original E1M1 baseline. The 2026-09-11 [campaign session follow-up](campaign-session.md) adds live intermission/finale screens, map-generation handoff, and persistent-worker asset refresh. Its recordings and game timings are separate from the earlier PresentMon measurements.
+
 The repository contains an executable E1M1 prototype and reproducible tests. Three full-level Windows Terminal replays at 320×200 completed **60.0 rendered image writes/sec and 34.9 simulation tics/sec**. Game logic, rasterization, interpolation, and terminal encoding are PowerShell algorithms. This establishes average throughput and one level's tested behavior; it does not establish a complete Doom source port or perfectly steady presentation.
 
 ## Play and reproduce
@@ -10,7 +12,7 @@ pwsh -NoProfile -File C:\projects\pwshDoom\Start-Doom.ps1
 
 The default IWAD is the user's Steam Ultimate Doom installation; use `-Wad` for another location. No WAD or extracted assets are distributed. The launcher creates a separate removable Terminal profile with a 6-point font and requests a 320×100 character window. Use `-FontSize` to change its physical size, `-Maximized` for maximization, or `-Here` for the current tab and font. The image centers in extra space and pauses when fewer than 320 columns or 100 rows fit. `-Diagnostics` adds two status rows. User defaults and `settings.json` are not edited. See [viewport behavior and tests](viewport.md) and Terminal's documented [command-line options](https://learn.microsoft.com/en-us/windows/terminal/command-line-arguments).
 
-W/S move, A/D strafe, arrows turn or move, Ctrl fires, E/Space uses doors and switches, Shift runs, 1–7 select weapons, Enter uses/respawns, and Escape exits. The prototype stops on level completion. The session report defaults to ignored `local/game-session.json`.
+W/S move, A/D strafe, arrows turn or move, Ctrl fires, E/Space uses doors and switches, Shift runs, 1–7 select weapons, Enter uses/respawns, and Escape exits. Interactive sessions continue through intermission; the original single-map benchmark replay retains its first-exit stop. The session report defaults to ignored `local/game-session.json`.
 
 To reproduce the full-level test:
 

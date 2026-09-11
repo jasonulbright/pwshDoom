@@ -14,7 +14,7 @@ The MyHouse audit is a named follow-on, not part of the first-release gate. Begi
 
 ## Baseline and acceptance
 
-The current baseline is an E1M1/HMP prototype, not a campaign-qualified game. It has a complete input-only route, 35 Hz simulation scheduling, parallel PowerShell rendering, truecolor ANSI output, keyboard handling, resize pauses, and independent presentation telemetry. It stops at level completion. Audio, menus, save/load UI, automap UI, and campaign transitions are not implemented in the game host. See [implementation](implementation.md), [viewport](viewport.md), and [provenance](../src/ManagedDoom/ORIGIN.md).
+The current baseline is a single-player session prototype, not a campaign-qualified game. It has an E1M1/HMP input-only completion route, intermission advancement into E1M2, 35 Hz simulation scheduling, parallel PowerShell rendering, truecolor ANSI output, keyboard handling, resize pauses, and independent presentation telemetry for earlier builds. Intermission/finale screens and map-specific asset refresh are implemented. Audio, menus, save/load UI and automap UI remain unfinished. See [campaign session work](campaign-session.md), [implementation](implementation.md), [viewport](viewport.md), and [provenance](../src/ManagedDoom/ORIGIN.md).
 
 Release acceptance requires:
 
@@ -33,8 +33,8 @@ Release acceptance requires:
 | Milestone | Concrete result | Exit evidence | Status |
 | --- | --- | --- | --- |
 | M0 — Preserve the baseline | Reproducible E1M1 game, source lineage, raw timings | Existing input route, codec/transport/lifecycle checks, PresentMon captures | Baseline established; limits recorded |
-| M1 — Campaign foundation | Map inventory and failure matrix; correct state transitions; renderer asset refresh on level changes | Per-map smoke results, normal/secret routing tests, E1M1 → E1M2 through the real host, carryover/death checks | 36-map smoke passes after E2M7 fix; transitions next |
-| M2 — Complete single-player session | Menus, intermission/finale display, pause, save/load, automap, input recording | Scripted state-machine checks, save continuation, short user playtest | Pending M1 |
+| M1 — Campaign foundation | Map inventory and failure matrix; correct state transitions; renderer asset refresh on level changes | Per-map smoke results, normal/secret routing tests, E1M1 → E1M2 through the real host, carryover/death checks | Foundation verified: 57 controller checks and recorded E1M1 → E1M2 in all three styles; broader campaign unqualified |
+| M2 — Complete single-player session | Menus, intermission/finale display, pause, save/load, automap, input recording | Scripted state-machine checks, save continuation, short user playtest | Intermission/finale display implemented; menus, pause, recording, save/load and automap next |
 | M3 — Audio | PowerShell-controlled effects/music and declared device backend | Offline output correctness, real playback review, underrun/latency/load measurements | PowerShell mixing + standard playback approved; backend experiment pending |
 | M4 — Rendering fidelity | Reference comparisons and corrected effects/geometry/HUD | Golden states, categorized differences, regressions tested with animation and moving sectors | Can start alongside M1/M2 |
 | M5 — Campaign qualification | Complete first-target campaign with normal/secret paths and endings | Route evidence per map and transition, difficulty matrix, longer human sessions | Builds on M1–M4 |
@@ -48,8 +48,8 @@ Do not postpone all performance work until M6. Measure after a feature adds subs
 ## Immediate work queue
 
 1. Completed first step: all 36 Ultimate Doom maps pass the load/35-idle-tic/two-frame smoke sweep after fixing E2M7 line-flag conversion. See [campaign matrix](campaign-matrix.md). This is smoke coverage only.
-2. Verify episode-ending and secret-return rules against primary/reference source. Inspection has identified candidate gaps in the adopted `DoomGame` transition paths; write reproductions before changing them.
-3. Exercise intermission advancement with the existing E1M1 input route; implement real host state transitions and map-specific renderer asset refresh. Do not render a new map with an old map's cached geometry.
+2. Controller routing/finale/par/secret-history fixes pass 57 isolated checks, including carryover and death/respawn. Broader boss/exit behavioral qualification remains in M5.
+3. The ordinary-input E1M1 -> intermission -> E1M2 route now runs through the host with generation-checked asset refresh in persistent workers. Preserve this as the session regression while implementing M2.
 4. Add ordinary-input recording so user play sessions can become reproducible correctness/performance cases; retain asset hashes, settings, and checkpoint state.
 5. Present a small physical-play checklist only after the relevant controls/UI are implemented. The scope and audio boundary are now resolved; no user input blocks the campaign foundation work.
 
@@ -96,7 +96,7 @@ Microsoft's [Terminal shader sample](https://github.com/microsoft/terminal/blob/
 
 The first experiment uses a PowerShell character encoder over fixed real-game captures, followed by live replay measurements. The glyph view is a stylized, lossy representation of the 320×200 source image; retain Classic for fidelity comparisons. The prototype does not reduce simulation or omit scene actors to make room for the effect. Human playability, dark-scene tuning, and temporal artifacts remain feedback/qualification work. Shader-based embellishments are an explicit alternative to the all-PowerShell style path, not silently included in its performance claim. Campaign progression remains the next main release milestone after this optional display prototype.
 
-The Japanese-glyph follow-up is implemented for both styles, with half-width katakana and an explicit MS Gothic profile. Two complete E1M1 screen recordings and repeatable window-capture/export scripts are available; see [recordings and validation](recordings.md). Recorded runs sustain approximately 35 simulation tics and 60 console writes per second, while movie frame rate remains separate from unique displayed game frames. This completes the requested visual demonstration; campaign progression remains the next main release milestone.
+The Japanese-glyph follow-up is implemented for both styles, with half-width katakana and an explicit MS Gothic profile. Two complete E1M1 screen recordings and repeatable window-capture/export scripts are available; see [recordings and validation](recordings.md). Those recorded runs sustain approximately 35 simulation tics and 60 console writes per second, while movie frame rate remains separate from unique displayed game frames. Three newer [campaign-session captures](campaign-session.md#actual-terminal-recordings) verify E1M1 → E1M2 and retain their slower 58.2–59.4 writes/sec plus roughly 0.9-second asset handoff. Small text is harder to read in character styles; M2 must provide readable menus. Session controls/save/load are now the next main release milestone.
 
 ## Write-up structure
 

@@ -43,15 +43,16 @@ Matrix uses green code and animated falling highlights; AnsiArt uses full-color 
 | Enter | Use / respawn after death |
 | Escape | Quit |
 
-The prototype ends at level completion and writes `local/game-session.json`. It currently has no audio, menus, save/load, automap interface, or multiplayer interface. The new renderer approximates some visual effects and does not claim vanilla pixel or demo compatibility. Keyboard state handling has automated synthetic-record tests; physical keyboard play has not been observed by the agent.
+Interactive sessions now continue through intermission into the next map, refreshing map assets in the same rendering workers. Use Ctrl or E/Space/Enter to advance intermission. Episode endings select their own finale text and art. The report is `local/game-session.json`. Audio, menus, save/load, automap and multiplayer interfaces remain unfinished. The new renderer approximates some visual effects and does not claim vanilla pixel or demo compatibility. Keyboard state handling has automated synthetic-record tests; physical keyboard play has not been observed by the agent. See [campaign session work](docs/campaign-session.md).
 
 To watch the reproducible E1M1 test in Terminal:
 
 ```powershell
 .\Start-Doom.ps1 -Replay .\results\e1m1-route.json -Seconds 90
+.\Start-Doom.ps1 -Replay .\results\e1m1-e1m2-session-route.json -Seconds 90
 ```
 
-That recording requires the same IWAD hash as the test and the default skill 3 / episode 1 / map 1. Remove the added profile with `scripts/Remove-GameProfile.ps1`. Session workers and their disposable asset cache are cleaned up on normal exit and handled failures; abrupt coordinator termination also has an automated cleanup test.
+These recordings require the same IWAD hash as the test and the default skill 3 / episode 1 / map 1. The first retains its historical stop at the E1M1 exit; the second advances through intermission and renders E1M2. Remove the added profile with `scripts/Remove-GameProfile.ps1`. Session workers and their disposable asset cache are cleaned up on normal exit and handled failures; abrupt coordinator termination also has an automated cleanup test.
 
 ## Source and tests
 

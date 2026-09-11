@@ -1,0 +1,718 @@
+{
+  "Recordings": [
+    {
+      "FontFace": "Cascadia Mono",
+      "CaptureLimit": 240,
+      "ViewingCopy": {
+        "Bytes": 51521831,
+        "Sha256": "857210DFA42AEF55269559867C9655258A9C83EDAD669FB22F73C52CE3B9D99F",
+        "EndSeconds": 78.5,
+        "StartSeconds": 27,
+        "Video": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "h264",
+              "width": 1600,
+              "height": 902,
+              "pix_fmt": "yuv420p",
+              "avg_frame_rate": "60/1",
+              "nb_read_frames": "3090"
+            }
+          ],
+          "format": {
+            "duration": "51.500000"
+          }
+        },
+        "ExportArguments": [
+          "-hide_banner",
+          "-n",
+          "-ss",
+          "27.000",
+          "-i",
+          "C:\\projects\\pwshDoom\\local\\recordings\\session-classic-full.mp4",
+          "-t",
+          "51.500",
+          "-an",
+          "-vf",
+          "crop=1600:902:920:256",
+          "-c:v",
+          "libx264",
+          "-threads",
+          "4",
+          "-preset",
+          "medium",
+          "-crf",
+          "16",
+          "-pix_fmt",
+          "yuv420p",
+          "-movflags",
+          "+faststart",
+          "C:\\projects\\pwshDoom\\local\\recordings\\session-classic.mp4"
+        ],
+        "Path": "local/recordings/session-classic.mp4",
+        "Crop": {
+          "Y": 256,
+          "Height": 902,
+          "Width": 1600,
+          "X": 920
+        }
+      },
+      "Tool": {
+        "ExportScriptSha256": "8C651EABD0D4E554EF993A80C56B6B76EDBA507910F1BC27870636F415647911",
+        "RecordingScriptSha256": "2E59F8744188E7829D49BF06C9CB28B3CB37DFE133F3048A19003D09DACDE674",
+        "FfmpegSha256": "72A489ECCD008C2EC2C0A5856C5C75BC3D8BBFA90166C4566865C246445E6AA3"
+      },
+      "FontSize": 6,
+      "Game": {
+        "SimulationTics": 1747,
+        "ActiveSeconds": 50.3286424,
+        "GlyphWidthProbe": null,
+        "TicsPerSecond": 34.71184432346222,
+        "WritesPerSecond": 58.217346232252034,
+        "Sha256": "F19FACF3C4613922FE0720EC23BB209F1A314DA6E95AA1CB75A32E383081492B",
+        "Transitions": [
+          {
+            "Armor": 0,
+            "Map": 1,
+            "Health": 100,
+            "Weapons": [
+              true,
+              true,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false
+            ],
+            "Tic": 0,
+            "DidSecret": false,
+            "Generation": 1,
+            "Kills": 0,
+            "State": "Level",
+            "Ammo": [
+              50,
+              0,
+              0,
+              0
+            ],
+            "Keys": [
+              false,
+              false,
+              false,
+              false,
+              false,
+              false
+            ],
+            "Episode": 1
+          },
+          {
+            "Armor": 0,
+            "Map": 1,
+            "Health": 75,
+            "Weapons": [
+              true,
+              true,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false
+            ],
+            "Tic": 1560,
+            "DidSecret": false,
+            "Generation": 1,
+            "Kills": 5,
+            "State": "Intermission",
+            "Ammo": [
+              37,
+              4,
+              0,
+              0
+            ],
+            "Keys": [
+              false,
+              false,
+              false,
+              false,
+              false,
+              false
+            ],
+            "Episode": 1
+          },
+          {
+            "Armor": 0,
+            "Map": 2,
+            "Health": 75,
+            "Weapons": [
+              true,
+              true,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false
+            ],
+            "Tic": 1676,
+            "DidSecret": false,
+            "Generation": 2,
+            "Kills": 0,
+            "State": "Level",
+            "Ammo": [
+              37,
+              4,
+              0,
+              0
+            ],
+            "Keys": [
+              false,
+              false,
+              false,
+              false,
+              false,
+              false
+            ],
+            "Episode": 1
+          }
+        ],
+        "ExitReason": "ReplayEnd",
+        "CompletedWrites": 2930,
+        "Report": "results/session-recorded-classic-game.json",
+        "WallSeconds": 51.2406653,
+        "ViewportPauses": 0,
+        "MapReloadPausedSeconds": 0.9103366000000024
+      },
+      "Original": {
+        "Path": "local/recordings/session-classic-full.mp4",
+        "Bytes": 106548226,
+        "Sha256": "D016CE9CA352885F49654ECECA213A7D3E59F7781F9BD5B5A667C08684387D1E",
+        "CaptureArguments": [
+          "-hide_banner",
+          "-n",
+          "-filter_complex",
+          "gfxcapture=hwnd=2426212:max_framerate=240:capture_cursor=0:display_border=1:width=-2:height=-2",
+          "-an",
+          "-c:v",
+          "h264_nvenc",
+          "-preset",
+          "p4",
+          "-cq",
+          "18",
+          "-b:v",
+          "0",
+          "-r",
+          "60",
+          "-fps_mode",
+          "cfr",
+          "-movflags",
+          "+faststart",
+          "-t",
+          "125",
+          "C:\\projects\\pwshDoom\\local\\recordings\\session-classic-full.mp4"
+        ],
+        "FinalEncoderLog": "frame= 4712 fps= 59 q=14.0 Lsize=  104051KiB time=00:01:18.48 bitrate=10860.7kbits/s dup=2149 drop=205 speed=0.99x elapsed=0:01:19.24    "
+      },
+      "GlyphSet": "Blocks",
+      "Style": "Classic",
+      "VisualInspection": {
+        "Findings": "Actual captured stats screen, next-map screen and E1M2 geometry/HUD visible inside crop. Katakana visible without missing-glyph squares in sampled character-mode frames. Small intermission text is hard to read in character modes, particularly Matrix; Classic is readable. Classic crop includes one alignment row above and below the 1600x900 game. Sampled inspection does not certify every frame or human playability.",
+        "ViewingCopySeconds": [
+          45.5,
+          47.5,
+          50.5
+        ]
+      }
+    },
+    {
+      "FontFace": "MS Gothic",
+      "CaptureLimit": 240,
+      "ViewingCopy": {
+        "Bytes": 68099889,
+        "Sha256": "E9C716F76B3A0591DBDD8D35FC20B212AA401EDEB8564833807ACD45DC140D8F",
+        "EndSeconds": 79.60000000000001,
+        "StartSeconds": 28,
+        "Video": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "h264",
+              "width": 1280,
+              "height": 800,
+              "pix_fmt": "yuv420p",
+              "avg_frame_rate": "60/1",
+              "nb_read_frames": "3096"
+            }
+          ],
+          "format": {
+            "duration": "51.600000"
+          }
+        },
+        "ExportArguments": [
+          "-hide_banner",
+          "-n",
+          "-ss",
+          "28.000",
+          "-i",
+          "C:\\projects\\pwshDoom\\local\\recordings\\session-matrix-full.mp4",
+          "-t",
+          "51.600",
+          "-an",
+          "-vf",
+          "crop=1280:800:1080:304",
+          "-c:v",
+          "libx264",
+          "-threads",
+          "4",
+          "-preset",
+          "medium",
+          "-crf",
+          "16",
+          "-pix_fmt",
+          "yuv420p",
+          "-movflags",
+          "+faststart",
+          "C:\\projects\\pwshDoom\\local\\recordings\\session-matrix.mp4"
+        ],
+        "Path": "local/recordings/session-matrix.mp4",
+        "Crop": {
+          "Y": 304,
+          "X": 1080,
+          "Height": 800,
+          "Width": 1280
+        }
+      },
+      "Tool": {
+        "ExportScriptSha256": "8C651EABD0D4E554EF993A80C56B6B76EDBA507910F1BC27870636F415647911",
+        "RecordingScriptSha256": "2E59F8744188E7829D49BF06C9CB28B3CB37DFE133F3048A19003D09DACDE674",
+        "FfmpegSha256": "72A489ECCD008C2EC2C0A5856C5C75BC3D8BBFA90166C4566865C246445E6AA3"
+      },
+      "FontSize": 12,
+      "Game": {
+        "SimulationTics": 1747,
+        "ActiveSeconds": 50.3191527,
+        "GlyphWidthProbe": {
+          "Checks": [
+            {
+              "Columns": 61,
+              "Symbols": "Complete alphabet",
+              "Expected": 61
+            }
+          ],
+          "SymbolCount": 61,
+          "Meaning": "Live console cursor advancement under the active Terminal profile; batch mode checks total alphabet width. Visual font rendering is verified separately by recording.",
+          "GlyphSet": "Katakana"
+        },
+        "TicsPerSecond": 34.71839063776605,
+        "WritesPerSecond": 59.420714371448476,
+        "Sha256": "2BE97504B999250BDCA6DEF3CFD61541EA9E33D3AC3FE6099CD881E4DED31D91",
+        "Transitions": [
+          {
+            "Generation": 1,
+            "Health": 100,
+            "Keys": [
+              false,
+              false,
+              false,
+              false,
+              false,
+              false
+            ],
+            "Episode": 1,
+            "Map": 1,
+            "Armor": 0,
+            "Weapons": [
+              true,
+              true,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false
+            ],
+            "DidSecret": false,
+            "Kills": 0,
+            "Ammo": [
+              50,
+              0,
+              0,
+              0
+            ],
+            "Tic": 0,
+            "State": "Level"
+          },
+          {
+            "Generation": 1,
+            "Health": 75,
+            "Keys": [
+              false,
+              false,
+              false,
+              false,
+              false,
+              false
+            ],
+            "Episode": 1,
+            "Map": 1,
+            "Armor": 0,
+            "Weapons": [
+              true,
+              true,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false
+            ],
+            "DidSecret": false,
+            "Kills": 5,
+            "Ammo": [
+              37,
+              4,
+              0,
+              0
+            ],
+            "Tic": 1560,
+            "State": "Intermission"
+          },
+          {
+            "Generation": 2,
+            "Health": 75,
+            "Keys": [
+              false,
+              false,
+              false,
+              false,
+              false,
+              false
+            ],
+            "Episode": 1,
+            "Map": 2,
+            "Armor": 0,
+            "Weapons": [
+              true,
+              true,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false
+            ],
+            "DidSecret": false,
+            "Kills": 0,
+            "Ammo": [
+              37,
+              4,
+              0,
+              0
+            ],
+            "Tic": 1676,
+            "State": "Level"
+          }
+        ],
+        "ExitReason": "ReplayEnd",
+        "CompletedWrites": 2990,
+        "Report": "results/session-recorded-matrix-game.json",
+        "WallSeconds": 51.2590377,
+        "ViewportPauses": 0,
+        "MapReloadPausedSeconds": 0.9379027999999962
+      },
+      "Original": {
+        "Path": "local/recordings/session-matrix-full.mp4",
+        "Bytes": 140701447,
+        "Sha256": "0625F52445F2C4B25C0922E488B69F6F96741774C94A9928947F3F1EDBB94348",
+        "CaptureArguments": [
+          "-hide_banner",
+          "-n",
+          "-filter_complex",
+          "gfxcapture=hwnd=2688982:max_framerate=240:capture_cursor=0:display_border=1:width=-2:height=-2",
+          "-an",
+          "-c:v",
+          "h264_nvenc",
+          "-preset",
+          "p4",
+          "-cq",
+          "18",
+          "-b:v",
+          "0",
+          "-r",
+          "60",
+          "-fps_mode",
+          "cfr",
+          "-movflags",
+          "+faststart",
+          "-t",
+          "125",
+          "C:\\projects\\pwshDoom\\local\\recordings\\session-matrix-full.mp4"
+        ],
+        "FinalEncoderLog": "frame= 4822 fps= 59 q=14.0 Lsize=  137404KiB time=00:01:20.31 bitrate=14014.7kbits/s dup=2241 drop=85 speed=0.99x elapsed=0:01:21.09    "
+      },
+      "GlyphSet": "Katakana",
+      "Style": "Matrix",
+      "VisualInspection": {
+        "Findings": "Actual captured stats screen, next-map screen and E1M2 geometry/HUD visible inside crop. Katakana visible without missing-glyph squares in sampled character-mode frames. Small intermission text is hard to read in character modes, particularly Matrix; Classic is readable. Classic crop includes one alignment row above and below the 1600x900 game. Sampled inspection does not certify every frame or human playability.",
+        "ViewingCopySeconds": [
+          45.5,
+          47.5,
+          50.5
+        ]
+      }
+    },
+    {
+      "FontFace": "MS Gothic",
+      "CaptureLimit": 240,
+      "ViewingCopy": {
+        "Bytes": 56638416,
+        "Sha256": "C0E6E924BE487AB20CE721DF2F4F833E678C181B032997EF5AF7CB87651C25A6",
+        "EndSeconds": 78.7,
+        "StartSeconds": 27,
+        "Video": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "h264",
+              "width": 1280,
+              "height": 800,
+              "pix_fmt": "yuv420p",
+              "avg_frame_rate": "60/1",
+              "nb_read_frames": "3102"
+            }
+          ],
+          "format": {
+            "duration": "51.700000"
+          }
+        },
+        "ExportArguments": [
+          "-hide_banner",
+          "-n",
+          "-ss",
+          "27.000",
+          "-i",
+          "C:\\projects\\pwshDoom\\local\\recordings\\session-ansiart-full.mp4",
+          "-t",
+          "51.700",
+          "-an",
+          "-vf",
+          "crop=1280:800:1080:304",
+          "-c:v",
+          "libx264",
+          "-threads",
+          "4",
+          "-preset",
+          "medium",
+          "-crf",
+          "16",
+          "-pix_fmt",
+          "yuv420p",
+          "-movflags",
+          "+faststart",
+          "C:\\projects\\pwshDoom\\local\\recordings\\session-ansiart.mp4"
+        ],
+        "Path": "local/recordings/session-ansiart.mp4",
+        "Crop": {
+          "Y": 304,
+          "Width": 1280,
+          "X": 1080,
+          "Height": 800
+        }
+      },
+      "Tool": {
+        "ExportScriptSha256": "8C651EABD0D4E554EF993A80C56B6B76EDBA507910F1BC27870636F415647911",
+        "RecordingScriptSha256": "2E59F8744188E7829D49BF06C9CB28B3CB37DFE133F3048A19003D09DACDE674",
+        "FfmpegSha256": "72A489ECCD008C2EC2C0A5856C5C75BC3D8BBFA90166C4566865C246445E6AA3"
+      },
+      "FontSize": 12,
+      "Game": {
+        "SimulationTics": 1747,
+        "ActiveSeconds": 50.3373231,
+        "GlyphWidthProbe": {
+          "Meaning": "Live console cursor advancement under the active Terminal profile; batch mode checks total alphabet width. Visual font rendering is verified separately by recording.",
+          "GlyphSet": "Katakana",
+          "SymbolCount": 61,
+          "Checks": [
+            {
+              "Symbols": "Complete alphabet",
+              "Columns": 61,
+              "Expected": 61
+            }
+          ]
+        },
+        "TicsPerSecond": 34.705858246164865,
+        "WritesPerSecond": 58.306636492555164,
+        "Sha256": "48BE58AC13DB9AA66CE2A76CD513EE075ACCA1397A98666B1151EF118A4879EB",
+        "Transitions": [
+          {
+            "Kills": 0,
+            "Episode": 1,
+            "Tic": 0,
+            "Generation": 1,
+            "Ammo": [
+              50,
+              0,
+              0,
+              0
+            ],
+            "State": "Level",
+            "Weapons": [
+              true,
+              true,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false
+            ],
+            "DidSecret": false,
+            "Keys": [
+              false,
+              false,
+              false,
+              false,
+              false,
+              false
+            ],
+            "Map": 1,
+            "Armor": 0,
+            "Health": 100
+          },
+          {
+            "Kills": 5,
+            "Episode": 1,
+            "Tic": 1560,
+            "Generation": 1,
+            "Ammo": [
+              37,
+              4,
+              0,
+              0
+            ],
+            "State": "Intermission",
+            "Weapons": [
+              true,
+              true,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false
+            ],
+            "DidSecret": false,
+            "Keys": [
+              false,
+              false,
+              false,
+              false,
+              false,
+              false
+            ],
+            "Map": 1,
+            "Armor": 0,
+            "Health": 75
+          },
+          {
+            "Kills": 0,
+            "Episode": 1,
+            "Tic": 1676,
+            "Generation": 2,
+            "Ammo": [
+              37,
+              4,
+              0,
+              0
+            ],
+            "State": "Level",
+            "Weapons": [
+              true,
+              true,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false
+            ],
+            "DidSecret": false,
+            "Keys": [
+              false,
+              false,
+              false,
+              false,
+              false,
+              false
+            ],
+            "Map": 2,
+            "Armor": 0,
+            "Health": 75
+          }
+        ],
+        "ExitReason": "ReplayEnd",
+        "CompletedWrites": 2935,
+        "Report": "results/session-recorded-ansiart-game.json",
+        "WallSeconds": 51.2262366,
+        "ViewportPauses": 0,
+        "MapReloadPausedSeconds": 0.8869182000000001
+      },
+      "Original": {
+        "Path": "local/recordings/session-ansiart-full.mp4",
+        "Bytes": 78272496,
+        "Sha256": "A45B75EFCFCBFA136473E0E452D4815A341F4F987899EE9DA7BACBFFE23BE032",
+        "CaptureArguments": [
+          "-hide_banner",
+          "-n",
+          "-filter_complex",
+          "gfxcapture=hwnd=1311940:max_framerate=240:capture_cursor=0:display_border=1:width=-2:height=-2",
+          "-an",
+          "-c:v",
+          "h264_nvenc",
+          "-preset",
+          "p4",
+          "-cq",
+          "18",
+          "-b:v",
+          "0",
+          "-r",
+          "60",
+          "-fps_mode",
+          "cfr",
+          "-movflags",
+          "+faststart",
+          "-t",
+          "125",
+          "C:\\projects\\pwshDoom\\local\\recordings\\session-ansiart-full.mp4"
+        ],
+        "FinalEncoderLog": "frame= 4763 fps= 59 q=14.0 Lsize=   76438KiB time=00:01:19.33 bitrate=7893.0kbits/s dup=2115 drop=123 speed=0.99x elapsed=0:01:20.12    "
+      },
+      "GlyphSet": "Katakana",
+      "Style": "AnsiArt",
+      "VisualInspection": {
+        "Findings": "Actual captured stats screen, next-map screen and E1M2 geometry/HUD visible inside crop. Katakana visible without missing-glyph squares in sampled character-mode frames. Small intermission text is hard to read in character modes, particularly Matrix; Classic is readable. Classic crop includes one alignment row above and below the 1600x900 game. Sampled inspection does not certify every frame or human playability.",
+        "ViewingCopySeconds": [
+          45.5,
+          47.5,
+          50.5
+        ]
+      }
+    }
+  ],
+  "FinishedUtc": "2026-09-11T12:45:58.8764260Z",
+  "Meaning": "Three actual game-window captures of the ordinary-input E1M1-intermission-E1M2 session. Viewing copies trim startup/console return and crop fixed margins without speed changes, rescaling or added effects. Original footage retained under ignored local/. Full decode completed in export harness. Encoded 60 FPS can contain duplicates; recorded-run writes and simulation tics are not unique displayed FPS or a clean PresentMon benchmark."
+}

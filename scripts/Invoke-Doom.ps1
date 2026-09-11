@@ -22,11 +22,13 @@ class HostInputCommand {
 function Start-DoomRenderJob {
     param($Pool,$Snapshot,$Clock,$InterpolationTimes,$Viewport)
     $fraction=if($Snapshot.Tic -eq 0){1}else{[Math]::Clamp([double]($Clock.Elapsed.TotalMilliseconds*35/1000-$Snapshot.Tic),[double]0,[double]1)}
-    $watch=[Diagnostics.Stopwatch]::StartNew();$bytes=Get-InterpolatedSnapshotBytes $Snapshot.Previous $Snapshot.Current $fraction
+    $watch=[Diagnostics.Stopwatch]::StartNew()
+    $screenPixels=$Snapshot.State -ne 0
+    [byte[]]$bytes=if($screenPixels){$Snapshot.Pixels}else{Get-InterpolatedSnapshotBytes $Snapshot.Previous $Snapshot.Current $fraction}
     $InterpolationTimes.Add($watch.Elapsed.TotalMilliseconds)
     $qpc=[Diagnostics.Stopwatch]::GetTimestamp();$watch.Restart()
-    Submit-GameRender $Pool $bytes -ColumnOffset $Viewport.Left -RowOffset $Viewport.Top -FrameNumber ([int][Math]::Floor($Clock.Elapsed.TotalSeconds*60))
-    return @{Tic=$Snapshot.Tic;StartQpc=$qpc;SubmitMs=$watch.Elapsed.TotalMilliseconds;ViewportKey=$Viewport.Key}
+    Submit-GameRender $Pool $bytes -ColumnOffset $Viewport.Left -RowOffset $Viewport.Top -FrameNumber ([int][Math]::Floor($Clock.Elapsed.TotalSeconds*60)) -ScreenPixels:$screenPixels -Tic $Snapshot.Tic
+    return @{Tic=$Snapshot.Tic;StartQpc=$qpc;SubmitMs=$watch.Elapsed.TotalMilliseconds;ViewportKey=$Viewport.Key;State=$Snapshot.State;Generation=$Snapshot.Generation;Episode=$Snapshot.Episode;Map=$Snapshot.Map}
 }
 $simulation=$null;$pool=$null;$consoleState=$null;$terminalActive=$false;$timerRequested=$false;$failure=$null
 $oldEncoding=[Console]::OutputEncoding;$esc=[char]27;$clock=[Diagnostics.Stopwatch]::new()
@@ -38,6 +40,7 @@ $frameTimes=[Collections.Generic.List[double]]::new();$frameStats=[Collections.G
 $captures=[Collections.Generic.List[string]]::new();$nextCapture=$CaptureEveryTics;$snapshot=$null;$replayData=$null
 $interpolationTimes=[Collections.Generic.List[double]]::new();$simulationReport=$null
 $glyphProbe=$null
+$assetGeneration=1;$loadingStart=$null;$loadingMs=0.0;$loadingWasRunning=$false;$mapReloads=[Collections.Generic.List[object]]::new();$transitionDiscarded=0
 try {
     if($ViewportSchedule) {
         if(-not $Headless){throw 'Synthetic viewport schedules are only allowed with -Headless.'}
@@ -53,7 +56,10 @@ try {
         }
     }
     Write-Host 'Loading the PowerShell simulation and rendering workers...'
-    $simulation=New-DoomSimulation $Wad $Skill $Episode $Map
+    # Existing single-map benchmark replays retain their first-exit stopping rule.
+    # Session recordings explicitly carry ContinueCampaign=true.
+    $stopAtLevelEnd=$null -ne $replayData -and -not $replayData.ContinueCampaign
+    $simulation=New-DoomSimulation $Wad $Skill $Episode $Map -StopAtLevelEnd:$stopAtLevelEnd
     $snapshot=Read-DoomSimulationSnapshot $simulation $null
     if($null -eq $snapshot){throw 'Initial simulation snapshot was not published.'}
     $context=Read-GameRenderAssets $simulation.Assets;$context.AssetPath=$simulation.Assets
@@ -81,6 +87,26 @@ try {
         if($status -eq 2){$exitReason='LevelComplete';break}
         if($simulation.Process.HasExited){throw 'Simulation exited unexpectedly.'}
         if($Seconds -gt 0 -and $wallNow -ge $Seconds*1000){$exitReason='Duration';break}
+        if($status -in 4,5){
+            if($status -eq 4 -and $assetGeneration -eq $simulation.View.ReadInt32(24)){[Threading.Thread]::Sleep(1);continue}
+            if($null -eq $loadingStart){
+                $loadingStart=$wallNow;$loadingWasRunning=$clock.IsRunning;$clock.Stop()
+                if($inFlight){Wait-GameRender $pool;$inFlight=$false;$transitionDiscarded++}
+                if($null -ne $pendingFrame){$pendingFrame=$null;$transitionDiscarded++}
+                $needsClear=$true
+            }
+            if($status -eq 5){[Threading.Thread]::Sleep(10);continue}
+            Update-GameRenderAssets $pool
+            $snapshot=Read-DoomSimulationSnapshot $simulation $snapshot
+            $assetGeneration=$simulation.View.ReadInt32(24)
+            if($snapshot.Generation -ne $assetGeneration -or $snapshot.State -ne 0){throw 'Map assets and snapshot generations disagree.'}
+            $reloadEnd=$wallClock.Elapsed.TotalMilliseconds;$loadingMs+=$reloadEnd-$loadingStart
+            $mapReloads.Add(@{Generation=$assetGeneration;Episode=$snapshot.Episode;Map=$snapshot.Map;Tic=$snapshot.Tic;StartWallMs=$loadingStart;EndWallMs=$reloadEnd;WorkerPids=@($pool.Workers.Process.Id)})
+            $loadingStart=$null
+            $simulation.View.Write(40,[long]([Diagnostics.Stopwatch]::GetTimestamp()-$clock.ElapsedTicks))
+            if($loadingWasRunning){$clock.Start()};$nextPresentation=$clock.Elapsed.TotalMilliseconds
+            $simulation.View.Write(28,$assetGeneration);[void]$simulation.Go.Set();continue
+        }
         if($null -ne $consoleState){Read-DoomConsoleInput $consoleState;if($consoleState.Keys[27] -or $consoleState.Pressed[27]){break}}
         if($wallNow-$lastViewportCheck -ge 100) {
             $lastViewportCheck=$wallNow
@@ -119,6 +145,7 @@ try {
             if($send){Send-DoomSimulationCommand $simulation $tics @($cmd.ForwardMove,$cmd.SideMove,$cmd.AngleTurn,$cmd.Buttons);$tics++}
         }
         $snapshot=Read-DoomSimulationSnapshot $simulation $snapshot
+        if($snapshot.Generation -ne $assetGeneration){continue}
         if($inFlight -and (Test-GameRenderCompleted $pool)) {
             $captureDue=$CaptureEveryTics -gt 0 -and $activeFrame.Tic -ge $nextCapture
             $harvestWatch=[Diagnostics.Stopwatch]::StartNew();Wait-GameRender $pool 0 -ReadPixels:$captureDue;$harvestMs=$harvestWatch.Elapsed.TotalMilliseconds
@@ -126,6 +153,7 @@ try {
             $inFlight=$false
         }
         if($null -ne $pendingFrame -and ($pendingFrame.ViewportKey -ne $viewport.Key -or -not $viewport.Fits)){$pendingFrame=$null;$resizeDiscarded++}
+        if($null -ne $pendingFrame -and ($pendingFrame.State -ne $snapshot.State -or $pendingFrame.Generation -ne $snapshot.Generation)){$pendingFrame=$null;$transitionDiscarded++}
         if($viewport.Fits -and $null -ne $pendingFrame -and $clock.Elapsed.TotalMilliseconds -ge $nextPresentation) {
             $present=$pendingFrame;$pendingFrame=$null;$lastFrameTic=$present.Tic
             if($CaptureEveryTics -gt 0 -and $lastFrameTic -ge $nextCapture) {
@@ -143,13 +171,13 @@ try {
                 foreach($result in $present.Results){$stdout.Write($result.Bytes)}
                 if($Diagnostics) {
                     $statusLine="$esc[$($viewport.StatusTop+1);$($viewport.Left+1)H$esc[0mpwshDoom | WASD move | arrows turn | Ctrl fire | E/Space use | Shift run | 1-7 weapons | Esc quit"
-                    $statusLine+="$esc[$($viewport.StatusTop+2);$($viewport.Left+1)Htic $($snapshot.Tic) | $([Math]::Round($completed/[Math]::Max(.01,$clock.Elapsed.TotalSeconds),1)) completed updates/s | health $($snapshot.Current[16]) | kills $($snapshot.Current[18])       "
+                    $statusLine+="$esc[$($viewport.StatusTop+2);$($viewport.Left+1)Htic $($snapshot.Tic) | $([Math]::Round($completed/[Math]::Max(.01,$clock.Elapsed.TotalSeconds),1)) completed updates/s | health $($snapshot.Health) | kills $($snapshot.Kills)       "
                     $stdout.Write([Text.Encoding]::UTF8.GetBytes($statusLine))
                 }
                 $stdout.Write($frameEnd);$stdout.Flush()
             }
             $endQpc=[Diagnostics.Stopwatch]::GetTimestamp();$frameTimes.Add(($endQpc-$present.StartQpc)*1000.0/[Diagnostics.Stopwatch]::Frequency);$completed++
-            $frameStats.Add(@{Tic=$lastFrameTic;SubmitMs=$present.SubmitMs;HarvestMs=$present.HarvestMs;OutputMs=$outputWatch.Elapsed.TotalMilliseconds;StartQpc=$present.StartQpc;EndQpc=$endQpc;ElapsedMs=$clock.Elapsed.TotalMilliseconds;
+            $frameStats.Add(@{Tic=$lastFrameTic;State=$present.State;Generation=$present.Generation;Episode=$present.Episode;Map=$present.Map;SubmitMs=$present.SubmitMs;HarvestMs=$present.HarvestMs;OutputMs=$outputWatch.Elapsed.TotalMilliseconds;StartQpc=$present.StartQpc;EndQpc=$endQpc;ElapsedMs=$clock.Elapsed.TotalMilliseconds;
                 Workers=@($present.Results | ForEach-Object {,@($_.RenderMs,$_.EncodeMs,$_.DecodeMs,$_.StartedQpc,$_.DoneQpc)})})
             $nextPresentation+=1000.0/60
         }
@@ -162,6 +190,7 @@ try {
 } catch {$failure=$_.ToString()+"`n"+$_.ScriptStackTrace;$exitReason='Error';[Console]::Error.WriteLine($failure);throw}
 finally {
     $clock.Stop();$wallClock.Stop();if($null -ne $pauseStart){$pausedMs+=$wallClock.Elapsed.TotalMilliseconds-$pauseStart}
+    if($null -ne $loadingStart){$loadingMs+=$wallClock.Elapsed.TotalMilliseconds-$loadingStart}
     $measuredTics=if($null -ne $simulation){$simulation.View.ReadInt32(20)}else{0}
     if($timerRequested){$null=[PwshDoomPlatform.ConsoleApi]::timeEndPeriod(1)}
     if($null -ne $simulation -and -not $simulation.Process.HasExited){$simulation.Process.Refresh();$simMemory=$simulation.Process.WorkingSet64}
@@ -183,13 +212,14 @@ finally {
         Architecture='SeparateSimulation';Transport='NumericV1';QpcFrequency=[Diagnostics.Stopwatch]::Frequency;Headless=[bool]$Headless;Scripted=[bool]$Scripted;Replay=$Replay;ExitReason=$exitReason;Error=$failure;
         DurationSeconds=$clock.Elapsed.TotalSeconds;IssuedCommands=$tics;SimulationTics=$simTics;TicsPerSecond=$simTics/[Math]::Max(.001,$clock.Elapsed.TotalSeconds);
         WallDurationSeconds=$wallClock.Elapsed.TotalSeconds;ViewportPausedSeconds=$pausedMs/1000;ViewportPauseCount=$pauseCount;
+        MapReloads=$mapReloads.ToArray();MapReloadPausedSeconds=$loadingMs/1000;DiscardedTransitionFrames=$transitionDiscarded;FinalAssetGeneration=$assetGeneration;
         CompletedUpdatesPerWallSecond=$completed/[Math]::Max(.001,$wallClock.Elapsed.TotalSeconds);DiscardedResizeFrames=$resizeDiscarded;
         Diagnostics=[bool]$Diagnostics;SyntheticViewport=[bool]$ViewportSchedule;ViewportChanges=$viewportChanges.ToArray();
         CompletedFrames=$completed;CompletedUpdatesPerSecond=$completed/[Math]::Max(.001,$clock.Elapsed.TotalSeconds);FrameMs=(Get-SampleStats $frameTimes.ToArray());
         InterpolationMs=(Get-SampleStats $interpolationTimes.ToArray());FrameSamplesMs=$frameTimes.ToArray();FrameStats=$frameStats.ToArray();Simulation=$simulationReport;
         Requested1msTimer=$timerRequested;TerminalColumns=$terminalWidth;TerminalRows=$terminalHeight;WorkerWorkingSetBytes=$workerMemory;SimulationWorkingSetBytes=$simMemory;
         CaptureEveryTics=$CaptureEveryTics;Captures=$captures.ToArray();PowerShell=$PSVersionTable.PSVersion.ToString();
-        Meaning='35 Hz simulation and 60 Hz interpolated PowerShell rendering. DurationSeconds and throughput exclude time paused for an undersized viewport; wall duration/rate and pause history are also recorded. FrameMs is overlapping render-to-write latency, not output interval. Updates are completed renders/encodes and, when visible, console writes; this report alone does not measure monitor presentation.'}
+        Meaning='35 Hz simulation and 60 Hz interpolated PowerShell rendering. DurationSeconds excludes undersized-viewport and map-asset handoff pauses; wall duration/rate and pause histories are retained. Map loading inside a simulation update remains in its measured tick cost. Session screens use the adopted PowerShell 2D renderer and the same terminal encoders. FrameMs is overlapping render-to-write latency, not output interval. Completed writes do not measure monitor presentation.'}
     [void][IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName([IO.Path]::GetFullPath($Report)))
     $data | ConvertTo-Json -Depth 10 | Set-Content -LiteralPath $Report
     [pscustomobject]@{Report=$Report;Tics=$simTics;Frames=$completed;Seconds=$clock.Elapsed.TotalSeconds;Exit=$exitReason} | Format-List

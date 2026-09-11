@@ -10,8 +10,8 @@ E1M1 has an [input-only completion report](../results/e1m1-route-lineflags.json)
 
 | Map | Load / idle simulation / two frames | Input-only completion | Transition / ending |
 | --- | --- | --- | --- |
-| E1M1 | Pass | Pass, HMP | Untested in terminal host |
-| E1M2 | Pass | Untested | Untested in terminal host |
+| E1M1 | Pass | Pass, HMP | Pass: real intermission -> E1M2 |
+| E1M2 | Pass | Untested | Entered/rendered; exit untested |
 | E1M3 | Pass | Untested | Untested in terminal host |
 | E1M4 | Pass | Untested | Untested in terminal host |
 | E1M5 | Pass | Untested | Untested in terminal host |
@@ -49,8 +49,8 @@ E1M1 has an [input-only completion report](../results/e1m1-route-lineflags.json)
 
 ## Current blockers and next work
 
-- The terminal host stops at level completion. Implement intermission, next-map asset refresh, carryover, and episode-ending presentation.
-- Source inspection identified episode-map-8 finale routing and the episode-4 secret-map return as candidate defects. Add isolated behavior reproductions and repair before claiming campaign progression.
+- [Recorded terminal session](../results/session-recorded-classic-game.json) verifies E1M1 intermission -> E1M2 and map-asset generation refresh. E1M2 completion and other terminal transitions remain unqualified.
+- Isolated controller fixtures verify episode finales, all four secret returns, par units, secret-visit history, inventory carryover and death/respawn. See results/campaign-transitions-session.json. Fixtures do not qualify map playthroughs or boss-triggered exits.
 - Add ordinary-input recording and completion routes for the remaining maps, including normal/secret paths and boss-triggered effects. Keep targeted state fixtures separate from playthrough evidence.
 - Physical controls, audio, save/load, automap, harder scenes, visual fidelity, other difficulties, and 1080p hardware need their own validation.
 - Doom II and MyHouse coverage has not started. MyHouse requires a version-pinned package/feature audit before choosing an extension scope.

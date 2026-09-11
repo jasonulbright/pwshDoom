@@ -25,6 +25,12 @@ class FinaleRenderer {
     [int] $scale
 
     [PatchCache] $cache
+    [hashtable] $flatBackgrounds = @{}
+    [byte[]] $textPixels
+    [string] $cachedText
+    [int] $textVisible = -1
+    [int] $textCursorX
+    [int] $textCursorY
 
     FinaleRenderer([GameContent] $content, [DrawScreen] $screen) {
         $this.wad = $content.Wad
@@ -56,6 +62,29 @@ class FinaleRenderer {
     }
 
     [void] RenderTextScreen([Finale] $finale) {
+        if ($this.screen.Width -eq 320 -and $this.screen.Height -eq 200) {
+            $visible = [Math]::Clamp([int][Math]::Floor(($finale.Count - 10) / $finale.TextSpeed), 0, $finale.Text.Length)
+            $key = $finale.Flat + ':' + $finale.Text
+            if ($this.cachedText -cne $key -or $visible -lt $this.textVisible -or $null -eq $this.textPixels) {
+                $this.FillFlat($this.flats.get_Item($finale.Flat))
+                $this.textPixels = $this.screen.Data.Clone()
+                $this.cachedText = $key; $this.textVisible = 0
+                $this.textCursorX = 10; $this.textCursorY = 17
+            } else {
+                [Array]::Copy($this.textPixels, $this.screen.Data, 64000)
+            }
+            # Draw newly revealed characters once. The exact indexed image is
+            # retained when successive tics reveal no additional text.
+            for ($i = $this.textVisible; $i -lt $visible; $i++) {
+                $c = $finale.Text[$i]
+                if ($c -eq "`n") { $this.textCursorX = 10; $this.textCursorY += 11; continue }
+                $this.screen.DrawChar($c, $this.textCursorX, $this.textCursorY, 1)
+                $this.textCursorX += $this.screen.MeasureChar($c, 1)
+            }
+            $this.textVisible = $visible
+            [Array]::Copy($this.screen.Data, $this.textPixels, 64000)
+            return
+        }
         $this.FillFlat($this.flats.get_Item($finale.Flat))
 
         # Draw some of the text onto the screen.
@@ -63,7 +92,7 @@ class FinaleRenderer {
         $cy = 17 * $this.scale
         $ch = 0
 
-        $count = ($finale.Count - 10) / [Finale]::TextSpeed
+        $count = [Math]::Floor(($finale.Count - 10) / $finale.TextSpeed)
         if ($count -lt 0) { $count = 0 }
 
         for (; $count -gt 0; $count--) {
@@ -107,6 +136,21 @@ class FinaleRenderer {
     }
 
     [void] FillFlat([Flat] $flat) {
+        # Cache the immutable 320x200 tiled background. The generic scaled
+        # reference path below remains available at other screen dimensions.
+        if ($this.screen.Width -eq 320 -and $this.screen.Height -eq 200) {
+            if (-not $this.flatBackgrounds.ContainsKey($flat.Name)) {
+                $background = [byte[]]::new(64000)
+                for ($x = 0; $x -lt 320; $x++) {
+                    for ($y = 0; $y -lt 200; $y++) {
+                        $background[$x * 200 + $y] = $flat.Data[(($y -band 63) * 64) + ($x -band 63)]
+                    }
+                }
+                $this.flatBackgrounds[$flat.Name] = $background
+            }
+            [Array]::Copy($this.flatBackgrounds[$flat.Name], $this.screen.Data, 64000)
+            return
+        }
         $src = $flat.Data
         $dst = $this.screen.Data
         $mScale = $this.screen.Width / 320

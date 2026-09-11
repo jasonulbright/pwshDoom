@@ -192,7 +192,6 @@ class DoomGame {
 
     [void] DoCompleted() {
         $this.gameAction = [GameAction]::Nothing
-        $this.PrepareIntermissionInfo()
         $optionsPlayersEnumerable = $this.options.Players
         if ($null -ne $optionsPlayersEnumerable) {
             $optionsPlayersEnumerator = $optionsPlayersEnumerable.GetEnumerator()
@@ -200,6 +199,9 @@ class DoomGame {
                 $player = $optionsPlayersEnumerator.Current
                 if ($player.InGame) {
                     $player.FinishLevel()
+                    if ($this.options.GameMode -ne [GameMode]::Commercial -and $this.options.Map -eq 9) {
+                        $player.DidSecret = $true
+                    }
                     $player.Cmd.Clear()
                     $player.AttackDown = $false
                     $player.UseDown = $false
@@ -207,6 +209,11 @@ class DoomGame {
 
             }
         }
+        if ($this.options.GameMode -ne [GameMode]::Commercial -and $this.options.Map -eq 8) {
+            $this.DoFinale()
+            return
+        }
+        $this.PrepareIntermissionInfo()
         $this.gameState = [GameState]::Intermission
         $this.State = $this.gameState
         $this.intermission = [Intermission]::new($this.options, $this.options.IntermissionInfo)
@@ -223,9 +230,9 @@ class DoomGame {
         $info.MaxKillCount = [math]::Max($localWorld.TotalKills, 1)
         $info.MaxItemCount = [math]::Max($localWorld.TotalItems, 1)
         $info.MaxSecretCount = [math]::Max($localWorld.TotalSecrets, 1)
-        $info.ParTime = $this.GetParTime()
+        $info.ParTime = [GameConst]::TicRate * $this.GetParTime()
 
-        $info.DidSecret = ($localWorld.SecretExit -or $localOptions.Map -eq 9)
+        $info.DidSecret = $localOptions.Players[$localOptions.ConsolePlayer].DidSecret
 
         $players = $localOptions.Players
         for ($i = 0; $i -lt [Player]::MaxPlayerCount; $i++) {
@@ -272,6 +279,7 @@ class DoomGame {
                 1 { return 4 }
                 2 { return 6 }
                 3 { return 7 }
+                4 { return 3 }
                 default { return [math]::Min($localOptions.Map + 1, 9) }
             }
         }
@@ -299,6 +307,9 @@ class DoomGame {
 
     [void] DoWorldDone() {
         $this.gameAction = [GameAction]::Nothing
+        if ($this.world.SecretExit) {
+            $this.options.Players[$this.options.ConsolePlayer].DidSecret = $true
+        }
         $this.gameState = [GameState]::Level
         $this.State = $this.gameState
         $this.options.Map = $this.options.IntermissionInfo.NextLevel + 1

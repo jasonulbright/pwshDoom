@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 # Command ring and double-buffered snapshots for the dedicated simulation process.
 function New-DoomSimulation {
-    param([string]$Wad,[int]$Skill,[int]$Episode,[int]$Map)
+    param([string]$Wad,[int]$Skill,[int]$Episode,[int]$Map,[switch]$StopAtLevelEnd)
     $root=Split-Path $PSScriptRoot;$id=[guid]::NewGuid().ToString('N');$name='Local\pwshDoom-sim-'+$id
     $state=@{Assets="$root/local/session-$id.assets";Report="$root/local/simulation-$id.json";Name=$name;Process=$null}
     try {
@@ -11,6 +11,7 @@ function New-DoomSimulation {
         $info=[Diagnostics.ProcessStartInfo]::new((Get-Process -Id $PID).Path);$info.UseShellExecute=$false;$info.CreateNoWindow=$true
         $info.RedirectStandardOutput=$true;$info.RedirectStandardError=$true
         foreach($arg in @('-NoProfile','-File',"$root/scripts/Invoke-SimulationWorker.ps1",'-Wad',$Wad,'-Skill',"$Skill",'-Episode',"$Episode",'-Map',"$Map",'-Channel',$name,'-Assets',$state.Assets,'-Report',$state.Report,'-OwnerPid',"$PID")){$info.ArgumentList.Add($arg)}
+        if($StopAtLevelEnd){$info.ArgumentList.Add('-StopAtLevelEnd')}
         $state.Process=[Diagnostics.Process]::Start($info);$state.Stdout=$state.Process.StandardOutput.ReadToEndAsync();$state.Stderr=$state.Process.StandardError.ReadToEndAsync()
         if(-not $state.Ready.WaitOne(30000)){throw 'Simulation startup timed out.'}
         if($state.View.ReadInt32(12) -eq 3){throw "Simulation startup failed. $($state.Stderr.Result)"}
@@ -31,14 +32,19 @@ function Read-DoomSimulationSnapshot {
     if(($version -band 1) -ne 0 -or $version -eq 0){return $Previous}
     if($null -ne $Previous -and $Previous.Version -eq $version){return $Previous}
     [int]$length=$view.ReadInt32($base+4);[int]$tic=$view.ReadInt32($base+8)
+    [int]$generation=$view.ReadInt32($base+12);[int]$state=$view.ReadInt32($base+16)
+    [int]$episode=$view.ReadInt32($base+20);[int]$map=$view.ReadInt32($base+24)
+    [int]$health=$view.ReadInt32($base+28);[int]$kills=$view.ReadInt32($base+32)
+    if($state -lt 0 -or $state -gt 2 -or ($state -ne 0 -and $length -ne 64000)){throw 'Invalid session snapshot state.'}
     if($length -lt 384 -or $length%8 -ne 0 -or $length*2+64 -gt 1048576){throw 'Invalid simulation snapshot size.'}
     $oldBytes=[byte[]]::new($length);$newBytes=[byte[]]::new($length)
     [void]$view.ReadArray($base+64,$oldBytes,0,$length);[void]$view.ReadArray($base+64+$length,$newBytes,0,$length)
     [Threading.Thread]::MemoryBarrier()
     if($version -ne $view.ReadInt32($base)){return $Previous}
+    if($state -ne 0){return @{Version=$version;Tic=$tic;Generation=$generation;State=$state;Episode=$episode;Map=$map;Health=$health;Kills=$kills;Pixels=$newBytes}}
     $oldValues=[double[]]::new($length/8);$newValues=[double[]]::new($length/8)
     [Buffer]::BlockCopy($oldBytes,0,$oldValues,0,$length);[Buffer]::BlockCopy($newBytes,0,$newValues,0,$length)
-    return @{Version=$version;Tic=$tic;Previous=$oldValues;Current=$newValues}
+    return @{Version=$version;Tic=$tic;Previous=$oldValues;Current=$newValues;Generation=$generation;State=$state;Episode=$episode;Map=$map;Health=$health;Kills=$kills}
 }
 function Close-DoomSimulation {
     param($Simulation)

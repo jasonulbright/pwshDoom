@@ -71,6 +71,7 @@ class IntermissionRenderer {
     [Patch] $percent
     [Patch] $colon
     [int] $scale
+    [hashtable] $backgroundFrames = @{}
 
     IntermissionRenderer([Wad] $wad, [DrawScreen] $screen) {
         $this.wad = $wad
@@ -132,6 +133,20 @@ class IntermissionRenderer {
         }
     }
     [void] DrawBackground([Intermission] $im) {
+        if ($this.screen.Width -eq 320 -and $this.screen.Height -eq 200) {
+            $name = 'INTERPIC'
+            $episode = $im.Options.Episode - 1
+            if ($im.Options.GameMode -ne [GameMode]::Commercial -and $episode -ge 0 -and $episode -lt 3) {
+                $name = [IntermissionRenderer]::mapPictures[$episode]
+            }
+            if (-not $this.backgroundFrames.ContainsKey($name)) {
+                $this.DrawPatch($name, 0, 0)
+                $this.backgroundFrames[$name] = $this.screen.Data.Clone()
+            } else {
+                [Array]::Copy($this.backgroundFrames[$name], $this.screen.Data, 64000)
+            }
+            return
+        }
         if ($im.Options.GameMode -eq [GameMode]::Commercial) {
             $this.DrawPatch("INTERPIC", 0, 0)
         }

@@ -1,0 +1,362 @@
+{
+  "Failures": 13,
+  "Meaning": "Isolated controller/routing/finale fixtures plus real intermission input advancement and E1M2 world creation. Direct exit and inventory setup are test fixtures, not map playthrough evidence.",
+  "Checks": [
+    {
+      "Name": "E1M1 normal destination",
+      "Actual": 2,
+      "Passed": true,
+      "Expected": 2
+    },
+    {
+      "Name": "E1M2 normal destination",
+      "Actual": 3,
+      "Passed": true,
+      "Expected": 3
+    },
+    {
+      "Name": "E1M3 normal destination",
+      "Actual": 4,
+      "Passed": true,
+      "Expected": 4
+    },
+    {
+      "Name": "E1M4 normal destination",
+      "Actual": 5,
+      "Passed": true,
+      "Expected": 5
+    },
+    {
+      "Name": "E1M5 normal destination",
+      "Actual": 6,
+      "Passed": true,
+      "Expected": 6
+    },
+    {
+      "Name": "E1M6 normal destination",
+      "Actual": 7,
+      "Passed": true,
+      "Expected": 7
+    },
+    {
+      "Name": "E1M7 normal destination",
+      "Actual": 8,
+      "Passed": true,
+      "Expected": 8
+    },
+    {
+      "Name": "E1M9 normal destination",
+      "Actual": 4,
+      "Passed": true,
+      "Expected": 4
+    },
+    {
+      "Name": "Episode 1 secret destination",
+      "Actual": 9,
+      "Passed": true,
+      "Expected": 9
+    },
+    {
+      "Name": "Episode 1 completion state",
+      "Actual": "Intermission",
+      "Passed": false,
+      "Expected": "Finale"
+    },
+    {
+      "Name": "Episode 1 finale flat",
+      "Actual": "FLOOR4_8",
+      "Passed": true,
+      "Expected": "FLOOR4_8"
+    },
+    {
+      "Name": "Episode 1 finale text",
+      "Actual": "        Once you beat the big badasses and \r\n        clean out the moon base you're supposed \r\n        to win, aren't you? Aren't you? Where's \r\n        your fat reward and ticket home? What \r\n        the hell is this? It's not supposed to \r\n        end this way! \r\n         \r\n        It stinks like rotten meat, but looks \r\n        like the lost Deimos base.  Looks like \r\n        you're stuck on The Shores of Hell. \r\n        The only way out is through. \r\n         \r\n        To continue the DOOM experience, play \r\n        The Shores of Hell and its amazing \r\n        sequel, Inferno!",
+      "Passed": true,
+      "Expected": "        Once you beat the big badasses and \r\n        clean out the moon base you're supposed \r\n        to win, aren't you? Aren't you? Where's \r\n        your fat reward and ticket home? What \r\n        the hell is this? It's not supposed to \r\n        end this way! \r\n         \r\n        It stinks like rotten meat, but looks \r\n        like the lost Deimos base.  Looks like \r\n        you're stuck on The Shores of Hell. \r\n        The only way out is through. \r\n         \r\n        To continue the DOOM experience, play \r\n        The Shores of Hell and its amazing \r\n        sequel, Inferno!"
+    },
+    {
+      "Name": "E2M1 normal destination",
+      "Actual": 2,
+      "Passed": true,
+      "Expected": 2
+    },
+    {
+      "Name": "E2M2 normal destination",
+      "Actual": 3,
+      "Passed": true,
+      "Expected": 3
+    },
+    {
+      "Name": "E2M3 normal destination",
+      "Actual": 4,
+      "Passed": true,
+      "Expected": 4
+    },
+    {
+      "Name": "E2M4 normal destination",
+      "Actual": 5,
+      "Passed": true,
+      "Expected": 5
+    },
+    {
+      "Name": "E2M5 normal destination",
+      "Actual": 6,
+      "Passed": true,
+      "Expected": 6
+    },
+    {
+      "Name": "E2M6 normal destination",
+      "Actual": 7,
+      "Passed": true,
+      "Expected": 7
+    },
+    {
+      "Name": "E2M7 normal destination",
+      "Actual": 8,
+      "Passed": true,
+      "Expected": 8
+    },
+    {
+      "Name": "E2M9 normal destination",
+      "Actual": 6,
+      "Passed": true,
+      "Expected": 6
+    },
+    {
+      "Name": "Episode 2 secret destination",
+      "Actual": 9,
+      "Passed": true,
+      "Expected": 9
+    },
+    {
+      "Name": "Episode 2 completion state",
+      "Actual": "Intermission",
+      "Passed": false,
+      "Expected": "Finale"
+    },
+    {
+      "Name": "Episode 2 finale flat",
+      "Actual": "FLOOR4_8",
+      "Passed": false,
+      "Expected": "SFLR6_1"
+    },
+    {
+      "Name": "Episode 2 finale text",
+      "Actual": "        Once you beat the big badasses and \r\n        clean out the moon base you're supposed \r\n        to win, aren't you? Aren't you? Where's \r\n        your fat reward and ticket home? What \r\n        the hell is this? It's not supposed to \r\n        end this way! \r\n         \r\n        It stinks like rotten meat, but looks \r\n        like the lost Deimos base.  Looks like \r\n        you're stuck on The Shores of Hell. \r\n        The only way out is through. \r\n         \r\n        To continue the DOOM experience, play \r\n        The Shores of Hell and its amazing \r\n        sequel, Inferno!",
+      "Passed": false,
+      "Expected": "        You've done it! The hideous cyber- \r\n        demon lord that ruled the lost Deimos \r\n        moon base has been slain and you \r\n        are triumphant! But ... where are \r\n        you? You clamber to the edge of the \r\n        moon and look down to see the awful \r\n        truth. \r\n         \r\n        Deimos floats above Hell itself! \r\n        You've never heard of anyone escaping \r\n        from Hell, but you'll make the bastards \r\n        sorry they ever heard of you! Quickly, \r\n        you rappel down to  the surface of \r\n        Hell. \r\n         \r\n        Now, it's on to the final chapter of \r\n        DOOM! -- Inferno."
+    },
+    {
+      "Name": "E3M1 normal destination",
+      "Actual": 2,
+      "Passed": true,
+      "Expected": 2
+    },
+    {
+      "Name": "E3M2 normal destination",
+      "Actual": 3,
+      "Passed": true,
+      "Expected": 3
+    },
+    {
+      "Name": "E3M3 normal destination",
+      "Actual": 4,
+      "Passed": true,
+      "Expected": 4
+    },
+    {
+      "Name": "E3M4 normal destination",
+      "Actual": 5,
+      "Passed": true,
+      "Expected": 5
+    },
+    {
+      "Name": "E3M5 normal destination",
+      "Actual": 6,
+      "Passed": true,
+      "Expected": 6
+    },
+    {
+      "Name": "E3M6 normal destination",
+      "Actual": 7,
+      "Passed": true,
+      "Expected": 7
+    },
+    {
+      "Name": "E3M7 normal destination",
+      "Actual": 8,
+      "Passed": true,
+      "Expected": 8
+    },
+    {
+      "Name": "E3M9 normal destination",
+      "Actual": 7,
+      "Passed": true,
+      "Expected": 7
+    },
+    {
+      "Name": "Episode 3 secret destination",
+      "Actual": 9,
+      "Passed": true,
+      "Expected": 9
+    },
+    {
+      "Name": "Episode 3 completion state",
+      "Actual": "Intermission",
+      "Passed": false,
+      "Expected": "Finale"
+    },
+    {
+      "Name": "Episode 3 finale flat",
+      "Actual": "FLOOR4_8",
+      "Passed": false,
+      "Expected": "MFLR8_4"
+    },
+    {
+      "Name": "Episode 3 finale text",
+      "Actual": "        Once you beat the big badasses and \r\n        clean out the moon base you're supposed \r\n        to win, aren't you? Aren't you? Where's \r\n        your fat reward and ticket home? What \r\n        the hell is this? It's not supposed to \r\n        end this way! \r\n         \r\n        It stinks like rotten meat, but looks \r\n        like the lost Deimos base.  Looks like \r\n        you're stuck on The Shores of Hell. \r\n        The only way out is through. \r\n         \r\n        To continue the DOOM experience, play \r\n        The Shores of Hell and its amazing \r\n        sequel, Inferno!",
+      "Passed": false,
+      "Expected": "        The loathsome spiderdemon that \r\n        masterminded the invasion of the moon \r\n        bases and caused so much death has had \r\n        its ass kicked for all time. \r\n         \r\n        A hidden doorway opens and you enter. \r\n        You've proven too tough for Hell to \r\n        contain, and now Hell at last plays \r\n        fair -- for you emerge from the door \r\n        to see the green fields of Earth! \r\n        Home at last. \r\n         \r\n        You wonder what's been happening on \r\n        Earth while you were battling evil \r\n        unleashed. It's good that no Hell- \r\n        spawn could have come through that \r\n        door with you ..."
+    },
+    {
+      "Name": "E4M1 normal destination",
+      "Actual": 2,
+      "Passed": true,
+      "Expected": 2
+    },
+    {
+      "Name": "E4M2 normal destination",
+      "Actual": 3,
+      "Passed": true,
+      "Expected": 3
+    },
+    {
+      "Name": "E4M3 normal destination",
+      "Actual": 4,
+      "Passed": true,
+      "Expected": 4
+    },
+    {
+      "Name": "E4M4 normal destination",
+      "Actual": 5,
+      "Passed": true,
+      "Expected": 5
+    },
+    {
+      "Name": "E4M5 normal destination",
+      "Actual": 6,
+      "Passed": true,
+      "Expected": 6
+    },
+    {
+      "Name": "E4M6 normal destination",
+      "Actual": 7,
+      "Passed": true,
+      "Expected": 7
+    },
+    {
+      "Name": "E4M7 normal destination",
+      "Actual": 8,
+      "Passed": true,
+      "Expected": 8
+    },
+    {
+      "Name": "E4M9 normal destination",
+      "Actual": 9,
+      "Passed": false,
+      "Expected": 3
+    },
+    {
+      "Name": "Episode 4 secret destination",
+      "Actual": 9,
+      "Passed": true,
+      "Expected": 9
+    },
+    {
+      "Name": "Episode 4 completion state",
+      "Actual": "Intermission",
+      "Passed": false,
+      "Expected": "Finale"
+    },
+    {
+      "Name": "Episode 4 finale flat",
+      "Actual": "FLOOR4_8",
+      "Passed": false,
+      "Expected": "MFLR8_3"
+    },
+    {
+      "Name": "Episode 4 finale text",
+      "Actual": "        Once you beat the big badasses and \r\n        clean out the moon base you're supposed \r\n        to win, aren't you? Aren't you? Where's \r\n        your fat reward and ticket home? What \r\n        the hell is this? It's not supposed to \r\n        end this way! \r\n         \r\n        It stinks like rotten meat, but looks \r\n        like the lost Deimos base.  Looks like \r\n        you're stuck on The Shores of Hell. \r\n        The only way out is through. \r\n         \r\n        To continue the DOOM experience, play \r\n        The Shores of Hell and its amazing \r\n        sequel, Inferno!",
+      "Passed": false,
+      "Expected": "        the spider mastermind must have sent forth \r\n        its legions of hellspawn before your \r\n        final confrontation with that terrible \r\n        beast from hell.  but you stepped forward \r\n        and brought forth eternal damnation and \r\n        suffering upon the horde as a true hero \r\n        would in the face of something so evil. \r\n         \r\n        besides, someone was gonna pay for what \r\n        happened to daisy, your pet rabbit. \r\n         \r\n        but now, you see spread before you more \r\n        potential pain and gibbitude as a nation \r\n        of demons run amok among our cities. \r\n         \r\n        next stop, hell on earth!"
+    },
+    {
+      "Name": "E1M1 par is 30 seconds in tics",
+      "Actual": 30,
+      "Passed": false,
+      "Expected": 1050
+    },
+    {
+      "Name": "Exit clears keys",
+      "Actual": false,
+      "Passed": true,
+      "Expected": false
+    },
+    {
+      "Name": "Intermission advances to E1M2",
+      "Actual": [
+        "Level",
+        1,
+        2
+      ],
+      "Passed": true,
+      "Expected": [
+        "Level",
+        1,
+        2
+      ]
+    },
+    {
+      "Name": "Map transition creates a fresh world",
+      "Actual": false,
+      "Passed": true,
+      "Expected": false
+    },
+    {
+      "Name": "Health armor weapons ammo carry over",
+      "Actual": [
+        73,
+        42,
+        37,
+        true,
+        11
+      ],
+      "Passed": true,
+      "Expected": [
+        73,
+        42,
+        37,
+        true,
+        11
+      ]
+    },
+    {
+      "Name": "Intermission retains prior secret visit",
+      "Actual": false,
+      "Passed": false,
+      "Expected": true
+    }
+  ],
+  "Sources": [
+    {
+      "Sha256": "0067DC376F9617E9FA4C177A2A38D61F7737F3558228A03D587DA0F63EFA8BF6",
+      "Path": "src/ManagedDoom/Doom/Game/DoomGame.sb.ps1"
+    },
+    {
+      "Sha256": "57D2963F1157BF2C3DD1F491C706A6D2001126B2C8413C690768CB702F66E048",
+      "Path": "src/ManagedDoom/Doom/Intermission/Finale.sb.ps1"
+    }
+  ],
+  "FinishedUtc": "2026-09-11T12:16:38.7624810Z",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F"
+}
