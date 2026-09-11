@@ -78,6 +78,24 @@ The first two harnesses refuse an existing output file. Their default IWAD is th
 
 The [existing-offerings survey](existing-implementations.md) and earlier [experiment protocol](experiment-protocol.md) remain evidence, with their original dates and workload limitations. Refresh primary sources before a release comparison. No new competitor ranking has been established by this plan.
 
+## Visual-style exploration
+
+The user raised an optional Matrix/ANSI-art direction after the campaign roadmap. This is a design discussion; no new display mode or GPU effect has been implemented. It can share the existing gameplay, assets, simulation, and 320×200 source framebuffer. A separate conversation/repository is unnecessary for Doom display modes; a general-purpose effect for other games would be a distinct project if pursued.
+
+The existing output is already truecolor ANSI: each upper-half-block character carries two independently colored pixels. ANSI describes color/cursor control, not an obligation to draw recognizable letters. The proposed art mode would deliberately expose glyph shapes.
+
+| Proposed mode | Work | Evidence status |
+| --- | --- | --- |
+| Green phosphor blocks | Remap the startup palette to green intensity levels; retain current half-block encoder | Small implementation change inferred from existing palette lookup; appearance/performance untested |
+| Truecolor character art | Sample image regions, choose glyphs from brightness/edge shape, color them from the Doom image, stabilize choices over time | New PowerShell encoder/style stage; loses pixel-level detail by design; grid/readability and performance require measurement |
+| Matrix character art | Add green gradients, sparse bright leaders, deterministic falling-code animation and restrained trails; keep scene contours and HUD legible | Builds on character mode; temporal state and strip seams need tests; no 60 FPS guarantee |
+| Optional Terminal shader | HLSL post-processing for glow, scanlines, tint, procedural code or image-to-glyph effects | Microsoft documents an experimental terminal texture/time shader hook; compiled GPU effect must be declared separately from the PowerShell implementation |
+| General game post-process | Implement a reusable character/Matrix effect in a framework such as ReShade | Separate compatibility/performance project; does not run other games in PowerShell or automatically transport them into a terminal |
+
+Microsoft's [Terminal shader sample](https://github.com/microsoft/terminal/blob/main/samples/PixelShaders/README.md) provides the terminal image, time, scale and resolution; it does not provide Doom's geometry or object identities. Effects derived from image colors are plausible. Geometry-attached symbols, object-specific effects, or persistent trails need additional design/state rather than assuming a simple tint supplies them. [ReShade's upstream description](https://github.com/crosire/reshade) establishes a general game post-processing route, with actual compatibility to be tested per target.
+
+The recommended first experiment is a PowerShell character encoder over a fixed real-game capture, comparing color and Matrix palettes at a readable cell size, followed by a live replay benchmark. An optional glyph view is a stylized, lossy representation of the 320×200 source image; retain the faithful half-block mode for fidelity comparisons. Use deterministic glyph/rain selection to avoid random full-screen shimmer, preserve a readable HUD, and measure the added work without reducing simulation or secretly omitting scene content. Shader-based embellishments are an explicit alternative to the all-PowerShell style path, not silently included in its performance claim.
+
 ## Write-up structure
 
 Working subject: **Doom in PowerShell: how far can a terminal go?**
