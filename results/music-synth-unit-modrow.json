@@ -1,0 +1,136 @@
+{
+  "Checks": [
+    {
+      "Passed": true,
+      "Name": "No-controller modulator is unity"
+    },
+    {
+      "Passed": true,
+      "Name": "Default pan center is exactly bipolar zero"
+    },
+    {
+      "Passed": true,
+      "Name": "Pitch wheel center and lower endpoint"
+    },
+    {
+      "Passed": true,
+      "Name": "Pitch wheel lower endpoint is minus one"
+    },
+    {
+      "Passed": true,
+      "Name": "Concave velocity attenuation yields squared velocity gain"
+    },
+    {
+      "Passed": true,
+      "Name": "Negative switch changes at half scale"
+    },
+    {
+      "Passed": true,
+      "Name": "Two-semitone bend default produces minus 200 cents"
+    },
+    {
+      "Passed": true,
+      "Name": "Instrument zero modulator disables a default"
+    },
+    {
+      "Passed": true,
+      "Name": "Instant delay and hold sentinel"
+    },
+    {
+      "Passed": true,
+      "Name": "Volume attack midpoint is linear amplitude"
+    },
+    {
+      "Passed": true,
+      "Name": "Volume decay follows 96 dB per declared decay duration"
+    },
+    {
+      "Passed": true,
+      "Name": "Volume sustain clamps decay"
+    },
+    {
+      "Passed": true,
+      "Name": "Volume release starts at current envelope value"
+    },
+    {
+      "Passed": true,
+      "Name": "Modulation envelope uses linear decay and percent sustain"
+    },
+    {
+      "Passed": true,
+      "Name": "Envelope hold scales with played key"
+    },
+    {
+      "Passed": true,
+      "Name": "Delayed triangular LFO independent quarter-cycle points"
+    },
+    {
+      "Passed": true,
+      "Name": "Independent quarter-rate low-pass coefficients"
+    },
+    {
+      "Passed": true,
+      "Name": "Full note render is exactly independent of caller block partition"
+    },
+    {
+      "Passed": true,
+      "Name": "Dry synth emits finite nonzero stereo"
+    },
+    {
+      "Passed": true,
+      "Name": "Release render preserves caller partition invariance"
+    },
+    {
+      "Passed": true,
+      "Name": "Synth pause freezes all clocks"
+    },
+    {
+      "Passed": true,
+      "Name": "Sustain pedal defers key release"
+    },
+    {
+      "Passed": true,
+      "Name": "Pedal lift starts release"
+    },
+    {
+      "Passed": true,
+      "Name": "All sounds off removes channel voices"
+    },
+    {
+      "Passed": true,
+      "Name": "MUS channel 15 uses drum preset"
+    },
+    {
+      "Passed": true,
+      "Name": "Score end releases all channels"
+    },
+    {
+      "Passed": true,
+      "Name": "PCM ties-to-even and asymmetric clipping boundary"
+    }
+  ],
+  "Error": null,
+  "Meaning": "Independent control/envelope/filter vectors and dry synthesizer state/partition tests. Does not prove matching another synthesizer or complete effects/live performance.",
+  "Sources": [
+    {
+      "Path": "src/MusicControls.ps1",
+      "Sha256": "1456C13921713988D41C0302D89F1F2AC472CEB02E70B2C4B2BB040E09B767D1"
+    },
+    {
+      "Path": "src/MusicSynth.ps1",
+      "Sha256": "6A2E1A008E60773F34C046C62FB9D0B9666E742DCF6BF04FE47A072147BB0FC7"
+    },
+    {
+      "Path": "src/MusicOscillator.ps1",
+      "Sha256": "1D7911DC5CD2004D6DBBF27ECF43FFD652FAC8E4813943D9F8CFD5116332417B"
+    },
+    {
+      "Path": "src/SoundFontRegions.ps1",
+      "Sha256": "9D409332EB51B5B6FCBC4B259E0C5E243E561A3C0D6AD2040A772F46539B9D8E"
+    },
+    {
+      "Path": "scripts/Test-MusicSynth.ps1",
+      "Sha256": "02A933FDA576430D13ADCBC2D1329914FF3ABE0141A5BAC686432F87375352F5"
+    }
+  ]
+}

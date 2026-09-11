@@ -1,0 +1,10 @@
+{
+  "Tool": "FFmpeg 9.0.1 essentials, apsnr filter",
+  "CommandArguments": "-hide_banner -i <PowerShell dry eight-second WAV> -i <MeltySynth dry eight-second WAV> -filter_complex [0:a][1:a]apsnr -f null -",
+  "PowerShellWavSha256": "1BE9256376413BE07688B984E1EDF7D017A5E0D7BB9E493F5595868490EA9650",
+  "ReferenceWavSha256": "28A26D93301D492BB414314E59AFB3A1FAB0184E5287A8F537E6510FFAE92EBB",
+  "ReportedChannel0Db": 167.362,
+  "ReportedChannel1Db": 168.867,
+  "AcceptedAsFidelityEvidence": false,
+  "Reason": "Sample-scale interpretation was not established. Direct signed-16 PCM RMS/correlation was calculated separately; this tool diagnostic is not used to claim fidelity."
+}

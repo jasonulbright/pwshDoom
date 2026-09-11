@@ -1,0 +1,203 @@
+{
+  "LoopWindow": {
+    "RmsPcm": 351.6011147757706,
+    "NoteOns": 2351,
+    "Seconds": 2,
+    "NonzeroSamples": 174892,
+    "StartSecond": 96
+  },
+  "Meaning": "Current source hashes, synthetic dry-synth tests, complete E1M1 plus loop output and preserved opening PCM. No general SoundFont, full campaign, live audio or perceptual fidelity certification.",
+  "Error": null,
+  "Checks": [
+    {
+      "Name": "music-synth-unit-lifetime successful",
+      "Passed": true
+    },
+    {
+      "Name": "music-synth-unit-lifetime current source src/MusicControls.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "music-synth-unit-lifetime current source src/MusicSynth.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "music-synth-unit-lifetime current source src/MusicOscillator.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "music-synth-unit-lifetime current source src/SoundFontRegions.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "music-synth-unit-lifetime current source scripts/Test-MusicSynth.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "music-e1m1-dry-loop successful",
+      "Passed": true
+    },
+    {
+      "Name": "music-e1m1-dry-loop current source src/MusScore.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "music-e1m1-dry-loop current source src/SoundFontBank.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "music-e1m1-dry-loop current source src/SoundFontRegions.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "music-e1m1-dry-loop current source src/MusicOscillator.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "music-e1m1-dry-loop current source src/MusicControls.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "music-e1m1-dry-loop current source src/MusicSynth.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "music-e1m1-dry-loop current source src/AudioMixer.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "music-e1m1-dry-loop current source scripts/Render-MusicScore.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "music-e1m1-reference-current successful",
+      "Passed": true
+    },
+    {
+      "Name": "music-e1m1-reference-current current source src/MusScore.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "music-e1m1-reference-current current source src/AudioMixer.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "music-e1m1-reference-current current source scripts/Render-MusicReference.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "music-e1m1-reference-loop successful",
+      "Passed": true
+    },
+    {
+      "Name": "music-e1m1-reference-loop current source src/MusScore.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "music-e1m1-reference-loop current source src/AudioMixer.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "music-e1m1-reference-loop current source scripts/Render-MusicReference.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "All 34 named synthesis checks passed",
+      "Passed": true
+    },
+    {
+      "Name": "Same 98-second score/bank/rate fixture",
+      "Passed": true
+    },
+    {
+      "Name": "Full WAV exists with retained hash",
+      "Passed": true
+    },
+    {
+      "Name": "No clipping in full fixture",
+      "Passed": true
+    },
+    {
+      "Name": "Full WAV exists with retained hash",
+      "Passed": true
+    },
+    {
+      "Name": "No clipping in full fixture",
+      "Passed": true
+    },
+    {
+      "Name": "Complete canonical stereo PCM payload length",
+      "Passed": true
+    },
+    {
+      "Name": "Current full render preserves first eight-second PCM exactly",
+      "Passed": true
+    },
+    {
+      "Name": "Output continues beyond the loop boundary",
+      "Passed": true
+    },
+    {
+      "Name": "Direct PCM comparison source and reference report hashes current",
+      "Passed": true
+    },
+    {
+      "Name": "Parse src/MusicControls.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Parse src/MusicSynth.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Parse scripts/Test-MusicSynth.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Parse scripts/Render-MusicScore.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Parse scripts/Render-MusicReference.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Parse scripts/Compare-MusicPcm.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Parse scripts/Test-DryMusicEvidence.ps1",
+      "Passed": true
+    }
+  ],
+  "Sources": [
+    {
+      "Path": "src/MusicControls.ps1",
+      "Sha256": "4369CD247B2E9419F76BC08D7F522D9126618CB7137558EC58DEA495DD918CFC"
+    },
+    {
+      "Path": "src/MusicSynth.ps1",
+      "Sha256": "6A2E1A008E60773F34C046C62FB9D0B9666E742DCF6BF04FE47A072147BB0FC7"
+    },
+    {
+      "Path": "scripts/Test-MusicSynth.ps1",
+      "Sha256": "5CB65AA88DC3E0BBE75652F235DD9160262AB47C3169002AAC377AD79F96273E"
+    },
+    {
+      "Path": "scripts/Render-MusicScore.ps1",
+      "Sha256": "29F096BEB6B86E7CB0D60812B49D9A2012295A6BB7D397B2B5CF4D1E7A12991C"
+    },
+    {
+      "Path": "scripts/Render-MusicReference.ps1",
+      "Sha256": "1FB097DD3CF9B47F8696B95A37E1D98DDC1B3DA4D9F98CE81D9BC3E8891E5090"
+    },
+    {
+      "Path": "scripts/Compare-MusicPcm.ps1",
+      "Sha256": "D8C39757573F4DC9F484B597E90D456980EC490AB250487CD6E0B3CA1FDBB2C5"
+    },
+    {
+      "Path": "scripts/Test-DryMusicEvidence.ps1",
+      "Sha256": "FC02009766425265B9BACBD716A2C22C3CCE1709A02D1676B3CA5854A410269D"
+    }
+  ]
+}

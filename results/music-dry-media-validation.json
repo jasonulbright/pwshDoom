@@ -1,0 +1,71 @@
+{
+  "Meaning": "Container/codec metadata only, not auditory or fidelity approval.",
+  "Arguments": "-v error -show_entries stream=codec_name,sample_rate,channels,duration -of json",
+  "Artifacts": [
+    {
+      "WavSha256": "1BE9256376413BE07688B984E1EDF7D017A5E0D7BB9E493F5595868490EA9650",
+      "Report": "music-e1m1-dry-first",
+      "Metadata": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "pcm_s16le",
+            "sample_rate": "44100",
+            "channels": 2,
+            "duration": "8.000000"
+          }
+        ]
+      }
+    },
+    {
+      "WavSha256": "989CBD3C9E16782088EB4EF558477AC7A18602897D9390B1E148314B0D2FC530",
+      "Report": "music-e1m1-dry-loop",
+      "Metadata": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "pcm_s16le",
+            "sample_rate": "44100",
+            "channels": 2,
+            "duration": "98.000000"
+          }
+        ]
+      }
+    },
+    {
+      "WavSha256": "28A26D93301D492BB414314E59AFB3A1FAB0184E5287A8F537E6510FFAE92EBB",
+      "Report": "music-e1m1-reference-current",
+      "Metadata": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "pcm_s16le",
+            "sample_rate": "44100",
+            "channels": 2,
+            "duration": "8.000000"
+          }
+        ]
+      }
+    },
+    {
+      "WavSha256": "85F2D073B7AA8DFDF2E1037B3F65BFD9702A12230C05674F0CC3E1C918E01EC4",
+      "Report": "music-e1m1-reference-loop",
+      "Metadata": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "pcm_s16le",
+            "sample_rate": "44100",
+            "channels": 2,
+            "duration": "98.000000"
+          }
+        ]
+      }
+    }
+  ],
+  "Tool": "ffprobe 9.0.1"
+}

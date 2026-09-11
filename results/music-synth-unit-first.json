@@ -1,0 +1,56 @@
+{
+  "Meaning": "Independent control/envelope/filter vectors and dry synthesizer state/partition tests. Does not prove matching another synthesizer or complete effects/live performance.",
+  "Sources": [
+    {
+      "Sha256": "1456C13921713988D41C0302D89F1F2AC472CEB02E70B2C4B2BB040E09B767D1",
+      "Path": "src/MusicControls.ps1"
+    },
+    {
+      "Sha256": "6A2E1A008E60773F34C046C62FB9D0B9666E742DCF6BF04FE47A072147BB0FC7",
+      "Path": "src/MusicSynth.ps1"
+    },
+    {
+      "Sha256": "1D7911DC5CD2004D6DBBF27ECF43FFD652FAC8E4813943D9F8CFD5116332417B",
+      "Path": "src/MusicOscillator.ps1"
+    },
+    {
+      "Sha256": "9D409332EB51B5B6FCBC4B259E0C5E243E561A3C0D6AD2040A772F46539B9D8E",
+      "Path": "src/SoundFontRegions.ps1"
+    },
+    {
+      "Sha256": "483244B2CA3231FA1D4A559C0559E2894FB385D6FB640BADC25294670A54CCA7",
+      "Path": "scripts/Test-MusicSynth.ps1"
+    }
+  ],
+  "Error": "Unable to index into an object of type \"System.Int32\".\nat Get-DoomMusicModulators, C:\\projects\\pwshDoom\\src\\MusicControls.ps1: line 34\r\nat <ScriptBlock>, C:\\projects\\pwshDoom\\scripts\\Test-MusicSynth.ps1: line 27",
+  "Checks": [
+    {
+      "Passed": true,
+      "Name": "No-controller modulator is unity"
+    },
+    {
+      "Passed": true,
+      "Name": "Default pan center is exactly bipolar zero"
+    },
+    {
+      "Passed": true,
+      "Name": "Pitch wheel center and lower endpoint"
+    },
+    {
+      "Passed": true,
+      "Name": "Pitch wheel lower endpoint is minus one"
+    },
+    {
+      "Passed": true,
+      "Name": "Concave velocity attenuation yields squared velocity gain"
+    },
+    {
+      "Passed": true,
+      "Name": "Negative switch changes at half scale"
+    },
+    {
+      "Passed": true,
+      "Name": "Two-semitone bend default produces minus 200 cents"
+    }
+  ]
+}

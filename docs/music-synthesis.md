@@ -1,0 +1,52 @@
+# PowerShell music synthesis
+
+The experimental renderer now produces dry stereo PCM from MUS scores and the local TimGM bank using PowerShell algorithms. It is an offline implementation. `Start-Doom.ps1 -Sound` still plays effects only; it does not load this synthesizer or the compiled comparison library.
+
+## Model and boundaries
+
+`MusicControls.ps1` implements default/explicit modulator evaluation, controller curves, timecents, volume/modulation envelopes, triangular LFOs and normalized low-pass coefficients. `MusicSynth.ps1` combines resolved sample layers, the existing oscillator, voice filters and stereo gains, and converts the mix to signed 16-bit PCM. MUS events are applied at their scheduled sample positions. Control values update on a 32-frame grid per note; gains interpolate within that grid. A channel change invalidates pending controls immediately. At 44.1 kHz the control interval is about 0.726 ms.
+
+Implemented session behavior includes program changes, pitch bend, volume/expression/pan, sustain pedal, all-notes/all-sounds-off, controller reset, percussion on MUS channel 15 and exclusive-class cuts. A 256-voice bound fails explicitly rather than silently stealing voices. Ordinary end-of-score events release voices while the looping timeline restarts. Pause freezes both music and voice clocks. The current maximum-voice failure path is not yet transactional across an entire layered note; this needs correction before host integration.
+
+The model is not certified SoundFont-compatible. Envelopes use linear amplitude attack; volume decay/release use a declared 96 dB scale, and modulation decay/release are linear. Envelope durations are latched when a note starts. Dynamic pitch and filter control are held within each 32-frame interval. The low-pass uses a standard two-pole form with bounded cutoff and Q; it is not a hardware Sound Blaster emulation. Effects sends are evaluated and counted, but **reverb and chorus are not yet mixed**. Full modulation-destination semantics, filter-change transients, stereo-linked banks and broader bank support remain unqualified.
+
+The [SoundFont specification](https://musescore.org/sites/musescore.org/files/2023-01/sfspec24.pdf) defines the format and synthesis model. Its default tables contain ambiguities and typographical errors: this implementation uses CC7 for volume, a centered bipolar pan default of 500, and the 2.04 velocity-to-filter definition. Bank-provided modulators override matching identities; for example, an old velocity/filter override using a different secondary source does not override the selected 2.04 default. This choice is explicit and needs reference/listening qualification. FluidSynth's [default-modulator implementation](https://github.com/FluidSynth/fluidsynth/blob/master/src/synth/fluid_synth.c) documents alternative compatibility choices. The coefficient equations follow the low-pass section of the [W3C Audio EQ Cookbook](https://www.w3.org/TR/2021/NOTE-audio-eq-cookbook-20210608/). No external source body has been copied into the PowerShell synthesizer.
+
+## Initial evidence
+
+`music-synth-unit-lifetime.json` contains 34 passing checks. Independent vectors cover controller/pitch math, envelope points, LFO phase, filter coefficients and the actual filter loop's impulse response. Additional checks cover sample identity across caller block partitions, sustain release/reset, immediate channel mute, pause, percussion, exclusive layers, release cleanup and PCM rounding/saturation. The first fixture accidentally flattened a single modulator row; another used PowerShell's reserved `Error` variable for its impulse error accumulator. Both failures are preserved. Review corrected the positive-direction bipolar switch at its center. The negative-direction center still needs a correction; that source is absent from the inspected score-used modulator configurations and defaults.
+
+The first eight seconds of E1M1 render with 71 note-ons, nine peak voices and zero clipped output samples. Rendering takes 14.756 seconds, excluding bank/score preparation and file writing/hashing. Peak PCM is 7,107; RMS is 370.787 at master volume 0.2. The output is 352,800 frames of 44.1 kHz stereo signed 16-bit audio. This short result is slower than real time and supports investigating a cache or render-ahead pipeline. It does not certify live audio deadlines.
+
+Local first sample: `local/music-render-839aaf75b2eb4acaab77818f8161249e/D_E1M1-dry.wav`, SHA-256 `1BE9256376413BE07688B984E1EDF7D017A5E0D7BB9E493F5595868490EA9650`. It contains music derived from the user's WAD and local bank and remains excluded from Git.
+
+The complete 98-second fixture covers the 96-second score and its next two seconds after looping. It emits 4,321,800 stereo frames, processes 2,351 note-ons, peaks at 46 voices and performs 108 exclusive-class cuts, without clipping. RMS is 485.567 and peak remains 7,107. All first eight seconds of PCM match the earlier render exactly. The loop window is nonzero and additional note-ons confirm continued score playback, but this is not a click-free/seamless-loop certification.
+
+Full PowerShell rendering takes **664.386 seconds**, about 0.148 audio seconds per rendering second. Short unit/reference diagnostics overlap this long run, so treat it as a practical observed cost, not an isolated speed comparison. Even allowing for that limitation, a naive live synthesizer is unsuitable. A cache alone would impose an approximately eleven-minute initial E1M1 render under these conditions; optimization and startup policy need evidence before adopting that experience. Profile control recomputation and quiet release tails before designing the cache around this cost.
+
+Full local output: `local/music-render-f686470699d14fcdb5ed14d0ee278cc3/D_E1M1-dry.wav`, SHA-256 `989CBD3C9E16782088EB4EF558477AC7A18602897D9390B1E148314B0D2FC530`. `music-dry-validation.json` passes forty evidence checks with seven current source hashes/parses. `music-dry-media-validation.json` records independent ffprobe identification of all four reference/PowerShell WAVs. No playback device was used and no auditory review is claimed.
+
+## Separate compiled comparison
+
+`Render-MusicReference.ps1` uses the already-local MeltySynth DLL only as a labeled comparison. No custom compiled wrapper is needed: the tested PowerShell 7.6 runtime calls its span-based rendering API with standard arrays. The comparison fixes the same score, soundfont, rate, volume and 32-frame block size, with effects disabled. It remaps MUS percussion to MIDI channel 9. The binary reports version 2.4.1.0 and SHA-256 `66D6BDC28C35E26F1C894D0B47D0280CA700AFCCCFC28467643177EEEB342999`. Its retained license is MIT.
+
+The separately inspected [MeltySynth source](https://github.com/sinshu/meltysynth/tree/4ba079c9ee1453b03be7e164d254f48426f0aac3/MeltySynth/src) has a pinned commit and file hashes in `music-synthesis-reference-sources.json`. This does not establish which commit built the local DLL. Source inspection identifies different envelope, initial-attenuation, filter and control conventions; it is not a claim that the two renders should be byte-identical.
+
+The compiled eight-second comparison peaks at nine voices without clipping; RMS is 483.629. `music-e1m1-reference-comparison.json` directly compares signed PCM: PowerShell is 2.308 dB lower in RMS level, difference RMS is 351.290 and zero-lag correlation is 0.6914. No gain normalization or lag search is applied. These numbers reflect model, precision, level and block-event latency differences and are not a perceptual score. An exploratory FFmpeg `apsnr` invocation returned very large values whose sample-scale interpretation was not established; those values are not used as fidelity evidence.
+
+The complete compiled 98-second fixture peaks at 39 voices, has no clipping, RMS 717.803 and peak PCM 8,042. Differences in envelope lifetime and gain convention require investigation; no equal-fidelity performance ratio is claimed. The binary remains solely a reference, with all game/music algorithms in the implementation still PowerShell.
+
+## Reproduction and remaining work
+
+Run from `C:\projects\pwshDoom` with fresh report paths:
+
+```powershell
+./scripts/Test-MusicSynth.ps1 -Output local/music-synth-unit.json
+./scripts/Render-MusicScore.ps1 -Output local/music-dry.json -Track D_E1M1 -Seconds 8
+./scripts/Render-MusicReference.ps1 -Output local/music-reference.json -Track D_E1M1 -Seconds 8
+./scripts/Compare-MusicPcm.ps1 -Output local/music-comparison.json -PowerShellReport local/music-dry.json -ReferenceReport local/music-reference.json
+```
+
+The score scripts accept `-Wad` and `-SoundFont`; the reference also accepts `-Library` and requires the tested PowerShell 7.6 API boundary. Defaults use the existing local assets. Render reports include exact paths, hashes, timing boundaries and dry-output limitations.
+
+Next qualify the full score and loop boundary, correct any lifetime/filter/controller discrepancies, add reverb/chorus, and measure a bounded render-ahead/cache implementation. Cache work must account for synthesis/source/bank hashes, partial-file recovery, loop tails, first-use time and storage. Then integrate music with the effects worker, volume/mute, pause, map/menu transitions, save/load, clean shutdown and audiovisual capture. No live terminal run or playback device was used for this offline milestone.

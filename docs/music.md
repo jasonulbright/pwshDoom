@@ -1,6 +1,6 @@
 # Music foundation
 
-Music is not yet audible in the game. This milestone implements original PowerShell MUS decoding, sample scheduling and a structural SF2 instrument-bank reader. The existing `-Sound` option still plays effects only. No compiled synthesizer has been added.
+Music is not yet audible in the game. The original PowerShell foundation now includes MUS decoding, sample scheduling, SF2 bank/region readers and an [offline dry synthesizer](music-synthesis.md). The existing `-Sound` option still plays effects only. A compiled synthesizer is used solely in a separately labeled comparison script.
 
 ## Decoder and timeline
 

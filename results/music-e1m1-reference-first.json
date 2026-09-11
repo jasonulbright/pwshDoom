@@ -1,0 +1,39 @@
+{
+  "Details": {
+    "RenderSeconds": 1.5205976,
+    "PeakPcm": 7255,
+    "WavSha256": "28A26D93301D492BB414314E59AFB3A1FAB0184E5287A8F537E6510FFAE92EBB",
+    "RmsPcm": 483.62882518506547,
+    "SoundFontSha256": "82475B91A76DE15CB28A104707D3247BA932E228BADA3F47BBA63C6B31AAF7A1",
+    "ReferenceOnly": true,
+    "LibrarySha256": "66D6BDC28C35E26F1C894D0B47D0280CA700AFCCCFC28467643177EEEB342999",
+    "LibraryIdentity": "MeltySynth, Version=2.4.1.0, Culture=neutral, PublicKeyToken=null",
+    "WavPath": "C:\\projects\\pwshDoom\\local\\music-reference-2dc94ac760c644f5a673f6c03eee6f6b\\D_E1M1-meltysynth-dry.wav",
+    "Track": "D_E1M1",
+    "BlockFrames": 32,
+    "Effects": "Disabled",
+    "MusSha256": "8F4673A3210C9FAFFE7B654F0B8F604A193398809545D9561E142704820035BF",
+    "ClippedSamples": 0,
+    "Seconds": 8,
+    "Frames": 352800,
+    "PeakVoices": 9,
+    "Volume": 0.2
+  },
+  "Meaning": "Separately labeled compiled MeltySynth reference using the same decoded score, bank, rate, volume and dry setting. Float precision, block event latency, envelopes, modulators and gain conventions can differ. Not the PowerShell implementation or its performance.",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "Sources": [
+    {
+      "Path": "src/MusScore.ps1",
+      "Sha256": "66B87D1CDD3FAD62E493A0C50C9A5AEBFE27167C8CCCCA974CC80463B6D1BB33"
+    },
+    {
+      "Path": "src/AudioMixer.ps1",
+      "Sha256": "F6227640C7AD799B5E7D486B70752E680EF074881EB6B795BC087970BEB8C990"
+    },
+    {
+      "Path": "scripts/Render-MusicReference.ps1",
+      "Sha256": "1BF1E499D45C9B207CC58EEF93443347B177E4E60B61C652439E63DA10F9B233"
+    }
+  ],
+  "Error": null
+}

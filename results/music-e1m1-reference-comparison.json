@@ -1,0 +1,21 @@
+{
+  "Meaning": "Direct signed-16 PCM comparison at zero lag without gain normalization. Differences include block event latency, model/precision and level choices. Correlation/RMS are diagnostic, not perceptual fidelity or audibility certification.",
+  "SourceSha256": "D8C39757573F4DC9F484B597E90D456980EC490AB250487CD6E0B3CA1FDBB2C5",
+  "Details": {
+    "DifferenceRms": 351.2904751839024,
+    "ReferenceRms": 483.62882518506547,
+    "Samples": 705600,
+    "SameWaveHash": false,
+    "PowerShellWavSha256": "1BE9256376413BE07688B984E1EDF7D017A5E0D7BB9E493F5595868490EA9650",
+    "ReferenceWavSha256": "28A26D93301D492BB414314E59AFB3A1FAB0184E5287A8F537E6510FFAE92EBB",
+    "ZeroLagCorrelation": 0.6914181761931079,
+    "LevelDifferenceDb": -2.3077444684818533,
+    "Frames": 352800,
+    "PowerShellRms": 370.7873886102892
+  },
+  "Error": null,
+  "Reports": {
+    "PowerShell": "52071C45C0BFE0C751DF5C92982761EA4FB3E8D6BA3C7EA5A38E7E1599C18402",
+    "Reference": "C97C01F0E8C4F8359AA49D4A9BD8F53EF8A0F922CF114FDF65964F74D51A803B"
+  }
+}
