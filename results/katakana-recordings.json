@@ -1,0 +1,268 @@
+{
+  "FinishedUtc": "2026-09-11T02:32:44.3640385Z",
+  "Meaning": "Actual game-window captures. Viewing copies trim startup/console return and crop fixed margins, without speed changes, rescaling or added visual effects. H.264 re-encoding is lossy. Originals and all footage remain ignored/local. Encoded 60 FPS can contain capture duplicates; these recorded-run write rates are not unique displayed FPS or clean PresentMon benchmarks.",
+  "Recordings": [
+    {
+      "FontFace": "MS Gothic",
+      "GlyphSet": "Katakana",
+      "VisualInspection": {
+        "ViewingCopySeconds": [
+          10,
+          23,
+          43
+        ],
+        "Findings": "Actual captured Japanese glyphs, scene and HUD visible within crop; no missing-glyph squares or outside windows in sampled frames. Dark scenes and green HUD remain less readable. Still-frame samples do not certify every frame or human playability."
+      },
+      "Game": {
+        "Report": "results/recorded-matrix-katakana-game.json",
+        "Kills": 5,
+        "Health": 75,
+        "ViewportPauses": 0,
+        "ExitReason": "LevelComplete",
+        "SimulationTics": 1560,
+        "DurationSeconds": 44.6766034,
+        "WritesPerSecond": 60.00903819827987,
+        "GlyphWidthProbe": {
+          "SymbolCount": 61,
+          "Meaning": "Live console cursor advancement under the active Terminal profile; batch mode checks total alphabet width. Visual font rendering is verified separately by recording.",
+          "Checks": [
+            {
+              "Symbols": "Complete alphabet",
+              "Columns": 61,
+              "Expected": 61
+            }
+          ],
+          "GlyphSet": "Katakana"
+        },
+        "TicsPerSecond": 34.917605217947255,
+        "Sha256": "A92A817A2569B8496D2B6F6EC0FD7D301110FCE7B41D2615A8771D75F5ED6E5F",
+        "CompletedWrites": 2681
+      },
+      "CaptureLimit": 240,
+      "ViewingCopy": {
+        "Path": "local/recordings/matrix-katakana.mp4",
+        "Sha256": "77E84DD7F583F45552750F2D258AC2D864AD3916B30F421D2EA456D3AE78EA11",
+        "StartSeconds": 25,
+        "EndSeconds": 69.8,
+        "Crop": {
+          "Height": 800,
+          "Y": 304,
+          "X": 1080,
+          "Width": 1280
+        },
+        "Bytes": 65904372,
+        "ExportArguments": [
+          "-hide_banner",
+          "-n",
+          "-ss",
+          "25.000",
+          "-i",
+          "C:\\projects\\pwshDoom\\local\\recordings\\matrix-katakana-full.mp4",
+          "-t",
+          "44.800",
+          "-an",
+          "-vf",
+          "crop=1280:800:1080:304",
+          "-c:v",
+          "libx264",
+          "-threads",
+          "4",
+          "-preset",
+          "medium",
+          "-crf",
+          "16",
+          "-pix_fmt",
+          "yuv420p",
+          "-movflags",
+          "+faststart",
+          "C:\\projects\\pwshDoom\\local\\recordings\\matrix-katakana.mp4"
+        ],
+        "Video": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "h264",
+              "width": 1280,
+              "height": 800,
+              "pix_fmt": "yuv420p",
+              "avg_frame_rate": "60/1",
+              "nb_read_frames": "2688"
+            }
+          ],
+          "format": {
+            "duration": "44.800000"
+          }
+        }
+      },
+      "Tool": {
+        "FfmpegSha256": "72A489ECCD008C2EC2C0A5856C5C75BC3D8BBFA90166C4566865C246445E6AA3",
+        "ExportScriptSha256": "673C830FF15411497E55B079722B77671786029DD62BD440E7FFECD6563CFB6F",
+        "RecordingScriptSha256": "AFC82AC8B2202AA715C56057969545D964C7EC19321C5654FCBA9925F91E484C"
+      },
+      "Original": {
+        "Sha256": "0F4A55801F0FD12769B87BA5F6ECFEED9FE0BBA723E465BD8CBC72BD81E6FF25",
+        "CaptureArguments": [
+          "-hide_banner",
+          "-n",
+          "-filter_complex",
+          "gfxcapture=hwnd=11536410:max_framerate=240:capture_cursor=0:display_border=1:width=-2:height=-2",
+          "-an",
+          "-c:v",
+          "h264_nvenc",
+          "-preset",
+          "p4",
+          "-cq",
+          "18",
+          "-b:v",
+          "0",
+          "-r",
+          "60",
+          "-fps_mode",
+          "cfr",
+          "-movflags",
+          "+faststart",
+          "-t",
+          "125",
+          "C:\\projects\\pwshDoom\\local\\recordings\\matrix-katakana-full.mp4"
+        ],
+        "Bytes": 143811406,
+        "FinalEncoderLog": "frame= 4201 fps= 59 q=14.0 Lsize=  140441KiB time=00:01:09.96 bitrate=16443.4kbits/s dup=1718 drop=58 speed=0.988x elapsed=0:01:10.83    ",
+        "Path": "local/recordings/matrix-katakana-full.mp4"
+      },
+      "Style": "Matrix",
+      "FontSize": 12
+    },
+    {
+      "FontFace": "MS Gothic",
+      "GlyphSet": "Katakana",
+      "VisualInspection": {
+        "ViewingCopySeconds": [
+          10,
+          23,
+          43
+        ],
+        "Findings": "Actual captured Japanese glyphs, scene and HUD visible within crop; no missing-glyph squares or outside windows in sampled frames. Dark scenes and green HUD remain less readable. Still-frame samples do not certify every frame or human playability."
+      },
+      "Game": {
+        "Report": "results/recorded-ansiart-katakana-game.json",
+        "Kills": 5,
+        "Health": 75,
+        "ViewportPauses": 0,
+        "ExitReason": "LevelComplete",
+        "SimulationTics": 1560,
+        "DurationSeconds": 44.6731161,
+        "WritesPerSecond": 60.01372266037202,
+        "GlyphWidthProbe": {
+          "Meaning": "Live console cursor advancement under the active Terminal profile; batch mode checks total alphabet width. Visual font rendering is verified separately by recording.",
+          "SymbolCount": 61,
+          "Checks": [
+            {
+              "Expected": 61,
+              "Columns": 61,
+              "Symbols": "Complete alphabet"
+            }
+          ],
+          "GlyphSet": "Katakana"
+        },
+        "TicsPerSecond": 34.92033097731456,
+        "Sha256": "32C7354FF91D301E5C03F289F4C66834C13D4BB03C14C4E6A6754C6CDC2E12B2",
+        "CompletedWrites": 2681
+      },
+      "CaptureLimit": 240,
+      "ViewingCopy": {
+        "Path": "local/recordings/ansiart-katakana.mp4",
+        "Sha256": "5F418B7AF547253A30C51C03D7B621B842795BBDCF8CDED5E5B0EC1B6D63D6AF",
+        "StartSeconds": 24,
+        "EndSeconds": 69.0,
+        "Crop": {
+          "X": 1080,
+          "Y": 304,
+          "Width": 1280,
+          "Height": 800
+        },
+        "Bytes": 54398386,
+        "ExportArguments": [
+          "-hide_banner",
+          "-n",
+          "-ss",
+          "24.000",
+          "-i",
+          "C:\\projects\\pwshDoom\\local\\recordings\\ansiart-katakana-full.mp4",
+          "-t",
+          "45.000",
+          "-an",
+          "-vf",
+          "crop=1280:800:1080:304",
+          "-c:v",
+          "libx264",
+          "-threads",
+          "4",
+          "-preset",
+          "medium",
+          "-crf",
+          "16",
+          "-pix_fmt",
+          "yuv420p",
+          "-movflags",
+          "+faststart",
+          "C:\\projects\\pwshDoom\\local\\recordings\\ansiart-katakana.mp4"
+        ],
+        "Video": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "h264",
+              "width": 1280,
+              "height": 800,
+              "pix_fmt": "yuv420p",
+              "avg_frame_rate": "60/1",
+              "nb_read_frames": "2700"
+            }
+          ],
+          "format": {
+            "duration": "45.000000"
+          }
+        }
+      },
+      "Tool": {
+        "FfmpegSha256": "72A489ECCD008C2EC2C0A5856C5C75BC3D8BBFA90166C4566865C246445E6AA3",
+        "ExportScriptSha256": "673C830FF15411497E55B079722B77671786029DD62BD440E7FFECD6563CFB6F",
+        "RecordingScriptSha256": "AFC82AC8B2202AA715C56057969545D964C7EC19321C5654FCBA9925F91E484C"
+      },
+      "Original": {
+        "Sha256": "AC22D5073F272D9F99D60E721BC8E1C7D82C37D65BF663EE48D703CAB333764C",
+        "CaptureArguments": [
+          "-hide_banner",
+          "-n",
+          "-filter_complex",
+          "gfxcapture=hwnd=17632110:max_framerate=240:capture_cursor=0:display_border=1:width=-2:height=-2",
+          "-an",
+          "-c:v",
+          "h264_nvenc",
+          "-preset",
+          "p4",
+          "-cq",
+          "18",
+          "-b:v",
+          "0",
+          "-r",
+          "60",
+          "-fps_mode",
+          "cfr",
+          "-movflags",
+          "+faststart",
+          "-t",
+          "125",
+          "C:\\projects\\pwshDoom\\local\\recordings\\ansiart-katakana-full.mp4"
+        ],
+        "Bytes": 76683681,
+        "FinalEncoderLog": "frame= 4165 fps= 59 q=14.0 Lsize=   74886KiB time=00:01:09.36 bitrate=8843.9kbits/s dup=1728 drop=80 speed=0.988x elapsed=0:01:10.20    ",
+        "Path": "local/recordings/ansiart-katakana-full.mp4"
+      },
+      "Style": "AnsiArt",
+      "FontSize": 12
+    }
+  ]
+}

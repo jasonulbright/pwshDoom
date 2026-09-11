@@ -3,7 +3,8 @@
 # Offline QA: render actual encoded terminal cells with GDI+. Not a game backend or Terminal screenshot.
 param([string]$Frame="$PSScriptRoot/../local/capture-350.bin",[int]$FrameNumber=180,
     [string]$Output="$PSScriptRoot/../local/character-preview.png",
-    [ValidateSet('Both','AnsiArt','Matrix')][string]$Style='Both')
+    [ValidateSet('Both','AnsiArt','Matrix')][string]$Style='Both',
+    [ValidateSet('Ascii','Katakana')][string]$GlyphSet='Katakana')
 $ErrorActionPreference='Stop'
 . "$PSScriptRoot/FrameCodec.ps1";. "$PSScriptRoot/../src/CharacterCodec.ps1"
 Add-Type -AssemblyName System.Drawing
@@ -11,15 +12,16 @@ $pixels=[IO.File]::ReadAllBytes($Frame);$rawPalette=[IO.File]::ReadAllBytes("$PS
 $palette=[int[][]]::new(256);for($i=0;$i -lt 256;$i++){$palette[$i]=@($rawPalette[3*$i],$rawPalette[3*$i+1],$rawPalette[3*$i+2])}
 $styles=if($Style -eq 'Both'){@('AnsiArt','Matrix')}else{@($Style)}
 $bitmap=[Drawing.Bitmap]::new(1600,830*@($styles).Count);$graphics=[Drawing.Graphics]::FromImage($bitmap);$graphics.Clear([Drawing.Color]::Black)
-$font=[Drawing.Font]::new('Consolas',14,[Drawing.FontStyle]::Regular,[Drawing.GraphicsUnit]::Pixel)
+$fontName=if($GlyphSet -eq 'Katakana'){'MS Gothic'}else{'Consolas'}
+$font=[Drawing.Font]::new($fontName,16,[Drawing.FontStyle]::Regular,[Drawing.GraphicsUnit]::Pixel)
 $format=[Drawing.StringFormat]::GenericTypographic.Clone();$format.FormatFlags=$format.FormatFlags -bor [Drawing.StringFormatFlags]::NoWrap
 $graphics.TextRenderingHint=[Drawing.Text.TextRenderingHint]::AntiAliasGridFit
 $brush=[Drawing.SolidBrush]::new([Drawing.Color]::White)
 try {
     $index=0
     foreach($selectedStyle in $styles) {
-        $top=$index*830;$graphics.DrawString("$selectedStyle | actual encoded 160 x 50 cells | offline preview",$font,[Drawing.Brushes]::White,4,$top+3)
-        $context=New-CharacterCodecContext $palette $selectedStyle
+        $top=$index*830;$graphics.DrawString("$selectedStyle / $GlyphSet | actual encoded 160 x 50 cells | offline preview",$font,[Drawing.Brushes]::White,4,$top+3)
+        $context=New-CharacterCodecContext $palette $selectedStyle -GlyphSet $GlyphSet
         $bytes=ConvertTo-CharacterStrip $pixels 320 200 0 320 $context -FrameNumber $FrameNumber
         [IO.File]::WriteAllBytes([IO.Path]::ChangeExtension($Output,"$selectedStyle.ansi"),$bytes)
         $row=0;$column=0;$fg=[Drawing.Color]::White;$bg=[Drawing.Color]::Black

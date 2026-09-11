@@ -2,6 +2,7 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 param([string]$Wad='C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\base\DOOM.WAD',[string]$CompareRenderer,
     [ValidateSet('Classic','AnsiArt','Matrix')][string]$Style='Classic',
+    [ValidateSet('Ascii','Katakana')][string]$GlyphSet='Ascii',
     [string]$Report="$PSScriptRoot/../results/render-partitions.json")
 $ErrorActionPreference='Stop'
 . "$PSScriptRoot/FrameCodec.ps1"
@@ -19,8 +20,8 @@ try {
     $context=New-FastRenderContext $content $game.World
     $palette=[int[][]]::new(256)
     for($i=0;$i -lt 256;$i++){$palette[$i]=@($content.Palette.Data[3*$i],$content.Palette.Data[3*$i+1],$content.Palette.Data[3*$i+2])}
-    $pool=New-GameRenderPool $context (New-CodecContext $palette) 7 -Style $Style
-    $characterCodec=if($Style -ne 'Classic'){New-CharacterCodecContext $palette $Style}else{$null}
+    $pool=New-GameRenderPool $context (New-CodecContext $palette) 7 -Style $Style -GlyphSet $GlyphSet
+    $characterCodec=if($Style -ne 'Classic'){New-CharacterCodecContext $palette $Style -GlyphSet $GlyphSet}else{$null}
     foreach($angle in 0,37,89,173,269) {
         $snapshot=New-GameRenderSnapshot $game;$snapshot.ConsolePlayer.Mobj.Angle=$angle*[Math]::PI/180
         if($angle -eq 37){$snapshot.ConsolePlayer.ExtraLight=2;foreach($sector in $snapshot.Sectors){$sector.LightLevel=255}}
@@ -47,7 +48,7 @@ try {
         if($differences -ne 0){throw "$differences pixels differ at $angle degrees between serial rendering and seven process strips."}
         $checks.Add(@{AngleDegrees=$angle;ComparedPixels=64000;Differences=$differences})
     }
-    @{FinishedUtc=[DateTime]::UtcNow.ToString('o');Style=$Style;Checks=$checks.ToArray();CharacterStripByteChecks=if($Style -ne 'Classic'){35}else{0};BaselineRendererSha256=if($CompareRenderer){(Get-FileHash -LiteralPath $CompareRenderer).Hash}else{(Get-FileHash "$PSScriptRoot/../src/FastRenderer.ps1").Hash};Meaning='Exact serial/partition equivalence of the new renderer, including its binary asset cache and NumericV1 snapshot transport. Character modes also compare encoded worker bytes against serial image encoding at a fixed time and viewport origin. This is not a vanilla renderer equivalence claim.'} |
+    @{FinishedUtc=[DateTime]::UtcNow.ToString('o');Style=$Style;GlyphSet=$GlyphSet;Checks=$checks.ToArray();CharacterStripByteChecks=if($Style -ne 'Classic'){35}else{0};BaselineRendererSha256=if($CompareRenderer){(Get-FileHash -LiteralPath $CompareRenderer).Hash}else{(Get-FileHash "$PSScriptRoot/../src/FastRenderer.ps1").Hash};Meaning='Exact serial/partition equivalence of the new renderer, including its binary asset cache and NumericV1 snapshot transport. Character modes also compare encoded worker bytes against serial image encoding at a fixed time and viewport origin. This is not a vanilla renderer equivalence claim.'} |
         ConvertTo-Json -Depth 5 | Set-Content -LiteralPath $Report
     'PASS: 320,000 pixels match across five views and seven uneven process strips.'
 } catch {[Console]::Error.WriteLine($_.ScriptStackTrace);throw}

@@ -96,6 +96,8 @@ Microsoft's [Terminal shader sample](https://github.com/microsoft/terminal/blob/
 
 The first experiment uses a PowerShell character encoder over fixed real-game captures, followed by live replay measurements. The glyph view is a stylized, lossy representation of the 320×200 source image; retain Classic for fidelity comparisons. The prototype does not reduce simulation or omit scene actors to make room for the effect. Human playability, dark-scene tuning, and temporal artifacts remain feedback/qualification work. Shader-based embellishments are an explicit alternative to the all-PowerShell style path, not silently included in its performance claim. Campaign progression remains the next main release milestone after this optional display prototype.
 
+The Japanese-glyph follow-up is implemented for both styles, with half-width katakana and an explicit MS Gothic profile. Two complete E1M1 screen recordings and repeatable window-capture/export scripts are available; see [recordings and validation](recordings.md). Recorded runs sustain approximately 35 simulation tics and 60 console writes per second, while movie frame rate remains separate from unique displayed game frames. This completes the requested visual demonstration; campaign progression remains the next main release milestone.
+
 ## Write-up structure
 
 Working subject: **Doom in PowerShell: how far can a terminal go?**

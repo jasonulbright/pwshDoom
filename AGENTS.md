@@ -9,6 +9,7 @@ The user approved implementation on 2026-09-10 and then requested a complete gam
 - Keep WADs, extracted images, original downloaded source checkouts, and downloaded tools in ignored `local/`. An explicitly attributed, licensed source subset adopted for the implementation may live under `src/`; preserve notices and record modifications.
 - Do not adopt external code without checking its license. A runtime adapter may inspect/test a user-local source file while leaving it outside this repository.
 - Keep experiments finite. Clean up only resources created by the study; preserve the user's Terminal profiles and default settings.
+- The user requested screen recordings of live effect test runs. Keep actual window-capture footage and per-run metadata under ignored `local/recordings`; publish only portable findings/hashes to the repo. Label recorded runs separately from clean performance measurements. Retain original footage when making trimmed/cropped viewing copies.
 - Do not change security settings for performance. Record access limitations rather than obscuring them.
 - Pure PowerShell here means game/encoder algorithms written in PowerShell using standard .NET APIs. Any compiled custom helper must be identified separately.
 - Run codec correctness checks when modifying encoding, and appropriate targeted benchmarks when making performance claims.

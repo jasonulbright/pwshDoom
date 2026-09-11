@@ -6,12 +6,14 @@ param([Parameter(Mandatory)][string]$Wad,[ValidateRange(1,32)][int]$Workers=16,
     [ValidateRange(0,10000)][int]$CaptureEveryTics=0,[ValidateRange(1,5)][int]$Skill=3,
     [ValidateRange(1,4)][int]$Episode=1,[ValidateRange(1,32)][int]$Map=1,
     [ValidateSet('Classic','AnsiArt','Matrix')][string]$Style='Classic',
+    [ValidateSet('Ascii','Katakana')][string]$GlyphSet='Katakana',
     [string]$Report="$PSScriptRoot/../local/game-session.json",[string]$ReadyFile,
-    [switch]$Diagnostics,[string]$ViewportSchedule)
+    [switch]$Diagnostics,[string]$ViewportSchedule,[ValidateRange(0,30)][int]$ExitDelaySeconds=0)
 $ErrorActionPreference='Stop'
 . "$PSScriptRoot/FrameCodec.ps1";. "$PSScriptRoot/../src/GameProcesses.ps1"
 . "$PSScriptRoot/../src/SimulationProcess.ps1";. "$PSScriptRoot/../src/ConsoleInput.ps1"
 . "$PSScriptRoot/../src/Viewport.ps1"
+. "$PSScriptRoot/../src/CharacterCodec.ps1"
 # Input values only; the actual TicCmd and Doom engine live in the simulation process.
 class HostInputCommand {
     [sbyte]$ForwardMove;[sbyte]$SideMove;[int16]$AngleTurn;[byte]$Buttons
@@ -35,6 +37,7 @@ $completed=0;$tics=0;$exitReason='Error';$terminalWidth=0;$terminalHeight=0;$wor
 $frameTimes=[Collections.Generic.List[double]]::new();$frameStats=[Collections.Generic.List[object]]::new()
 $captures=[Collections.Generic.List[string]]::new();$nextCapture=$CaptureEveryTics;$snapshot=$null;$replayData=$null
 $interpolationTimes=[Collections.Generic.List[double]]::new();$simulationReport=$null
+$glyphProbe=$null
 try {
     if($ViewportSchedule) {
         if(-not $Headless){throw 'Synthetic viewport schedules are only allowed with -Headless.'}
@@ -57,7 +60,7 @@ try {
     $paletteBytes=[byte[]]::new(768)
     for($i=0;$i -lt 256;$i++){for($j=0;$j -lt 3;$j++){$paletteBytes[3*$i+$j]=$context.Palette[$i][$j]}}
     [IO.File]::WriteAllBytes("$PSScriptRoot/../local/palette.bin",$paletteBytes)
-    $pool=New-GameRenderPool $context $null $Workers -Style $Style
+    $pool=New-GameRenderPool $context $null $Workers -Style $Style -GlyphSet $GlyphSet
     $initialBytes=Get-InterpolatedSnapshotBytes $snapshot.Previous $snapshot.Current 1
     for($i=0;$i -lt 4;$i++){Submit-GameRender $pool $initialBytes;Wait-GameRender $pool}
     if(-not $Headless) {
@@ -65,6 +68,7 @@ try {
         [Console]::OutputEncoding=[Text.UTF8Encoding]::new($false)
         if(-not $Scripted -and -not $Replay){$consoleState=Open-DoomConsoleInput}
         [Console]::Write("$esc[?1049h$esc[?25l$esc[2J");$terminalActive=$true
+        if($Style -ne 'Classic'){$glyphProbe=Test-CharacterConsoleWidth $GlyphSet -Batch}
     }
     Initialize-DoomConsoleApi;$timerRequested=[PwshDoomPlatform.ConsoleApi]::timeBeginPeriod(1) -eq 0
     $stdout=[Console]::OpenStandardOutput();$frameStart=[Text.Encoding]::UTF8.GetBytes("$esc[?2026h");$frameEnd=[Text.Encoding]::UTF8.GetBytes("$esc[0m$esc[?2026l")
@@ -174,7 +178,7 @@ finally {
     # Exclude any queued command drained while workers are being closed.
     $simTics=$measuredTics
     $data=@{FinishedUtc=[DateTime]::UtcNow.ToString('o');WadSha256=(Get-FileHash -LiteralPath $Wad).Hash;Workers=$Workers;Skill=$Skill;Episode=$Episode;Map=$Map;
-        OutputStyle=$Style;SourceWidth=320;SourceHeight=200;OutputColumns=$outputColumns;OutputRows=$outputRows;
+        OutputStyle=$Style;GlyphSet=if($Style -eq 'Classic'){'Blocks'}else{$GlyphSet};GlyphWidthProbe=$glyphProbe;SourceWidth=320;SourceHeight=200;OutputColumns=$outputColumns;OutputRows=$outputRows;
         OutputRepresentation=if($Style -eq 'Classic'){'Two source pixels per truecolor half-block cell'}else{'Lossy 2x4 source-pixel character cells; HUD downsampled to half blocks'};
         Architecture='SeparateSimulation';Transport='NumericV1';QpcFrequency=[Diagnostics.Stopwatch]::Frequency;Headless=[bool]$Headless;Scripted=[bool]$Scripted;Replay=$Replay;ExitReason=$exitReason;Error=$failure;
         DurationSeconds=$clock.Elapsed.TotalSeconds;IssuedCommands=$tics;SimulationTics=$simTics;TicsPerSecond=$simTics/[Math]::Max(.001,$clock.Elapsed.TotalSeconds);
@@ -189,4 +193,5 @@ finally {
     [void][IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName([IO.Path]::GetFullPath($Report)))
     $data | ConvertTo-Json -Depth 10 | Set-Content -LiteralPath $Report
     [pscustomobject]@{Report=$Report;Tics=$simTics;Frames=$completed;Seconds=$clock.Elapsed.TotalSeconds;Exit=$exitReason} | Format-List
+    if($ExitDelaySeconds -gt 0){Start-Sleep -Seconds $ExitDelaySeconds}
 }

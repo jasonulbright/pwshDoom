@@ -1,7 +1,8 @@
 #requires -Version 7.4
 # SPDX-License-Identifier: GPL-2.0-or-later
 param([string]$Assets,[string]$Channel,[int]$FirstColumn,[int]$EndColumn,[int]$OwnerPid,
-    [ValidateSet('Classic','AnsiArt','Matrix')][string]$Style='Classic')
+    [ValidateSet('Classic','AnsiArt','Matrix')][string]$Style='Classic',
+    [ValidateSet('Ascii','Katakana')][string]$GlyphSet='Ascii')
 $ErrorActionPreference='Stop'
 . "$PSScriptRoot/../src/FastRenderer.ps1"
 . "$PSScriptRoot/../src/RenderAssets.ps1"
@@ -14,7 +15,7 @@ $ready=[Threading.EventWaitHandle]::OpenExisting($Channel+'-ready');$go=[Threadi
 try {
     $owner=if($OwnerPid -gt 0){[Diagnostics.Process]::GetProcessById($OwnerPid)}else{$null}
     $previousSnapshot=$null;$ctx=Read-GameRenderAssets $Assets
-    $codec=if($Style -eq 'Classic'){New-CodecContext $ctx.Palette}else{New-CharacterCodecContext $ctx.Palette $Style}
+    $codec=if($Style -eq 'Classic'){New-CodecContext $ctx.Palette}else{New-CharacterCodecContext $ctx.Palette $Style -GlyphSet $GlyphSet}
     [void]$ready.Set()
     while($true) {
         if(-not $go.WaitOne(1000)){if($null -ne $owner -and $owner.HasExited){break};continue}

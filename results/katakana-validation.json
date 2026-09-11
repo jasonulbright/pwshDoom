@@ -1,0 +1,69 @@
+{
+  "ParsedFiles": 64,
+  "SourceHashesVerified": 223,
+  "Inputs": [
+    {
+      "Path": "results/glyph-codec-tests.json",
+      "Sha256": "CD0C2C912AE924A1A4129C6EAA081733C50A079976DA9ABC7A239C943F173F74"
+    },
+    {
+      "Path": "results/katakana-matrix-partitions.json",
+      "Sha256": "703AD24D79B1AC2BE1CD23FDE6DE557A2021371FB520FCA58AC2B37B2DB5B4BB"
+    },
+    {
+      "Path": "results/katakana-ansiart-partitions.json",
+      "Sha256": "78BFFB8F293150E92E507F2A4F6E959B19D0D21FEE46E676C8520D05C0C8ECC6"
+    },
+    {
+      "Path": "results/katakana-gdi-probe.json",
+      "Sha256": "6D598C43318D44B1B7D82D52BE788AF79C5B50B30DF4B38C5C0B5DB89B89A720"
+    },
+    {
+      "Path": "results/recording-probes.json",
+      "Sha256": "7D76B1D673E6615E80E68005406370890203411C53053042346DA4CF7EFA62DA"
+    },
+    {
+      "Path": "results/recording-tool.json",
+      "Sha256": "C8BF3AC1733A8376B55CA9C76619AE6BB2DA1C8DC84B8C2530D1E407E7ED25A1"
+    },
+    {
+      "Path": "results/katakana-sources.json",
+      "Sha256": "FFD2D93532716BD82BD045AB392B0D46DC026CD2A0774EDDC5638F7067D12AE1"
+    },
+    {
+      "Path": "results/recorded-matrix-katakana-game.json",
+      "Sha256": "A92A817A2569B8496D2B6F6EC0FD7D301110FCE7B41D2615A8771D75F5ED6E5F"
+    },
+    {
+      "Path": "results/recorded-ansiart-katakana-game.json",
+      "Sha256": "32C7354FF91D301E5C03F289F4C66834C13D4BB03C14C4E6A6754C6CDC2E12B2"
+    },
+    {
+      "Path": "results/katakana-recordings.json",
+      "Sha256": "E81A2038ADF17318413F93CFCFD9D05A41B26E54AFB6E0AEDB7786E34B8AE558"
+    }
+  ],
+  "WorkerCharacterStripComparisons": 70,
+  "VerifiedOriginalAndViewingVideoHashes": 4,
+  "ParseErrors": 0,
+  "RecordedCompletedRoutes": 2,
+  "ViewportCases": 10,
+  "IndependentBrightnessEdgeProbes": 8,
+  "RejectedInvalidDimensions": 6,
+  "AuthoredToolSources": [
+    {
+      "Path": "scripts/Record-DoomReplay.ps1",
+      "Sha256": "AFC82AC8B2202AA715C56057969545D964C7EC19321C5654FCBA9925F91E484C"
+    },
+    {
+      "Path": "scripts/Export-DoomRecording.ps1",
+      "Sha256": "673C830FF15411497E55B079722B77671786029DD62BD440E7FFECD6563CFB6F"
+    }
+  ],
+  "ClassicAnsiCases": 24,
+  "FinishedUtc": "2026-09-11T02:32:44.5540163Z",
+  "RemainingOwnedGameOrRecorderProcesses": 0,
+  "WorkerPixelsCompared": 640000.0,
+  "Meaning": "Final current-source syntax/hash/result/video-hash and owned-process audit. Codec, worker and Classic ANSI tests passed before the full captures; game source hashes remain unchanged. Viewing copies were fully decoded by the export harness and visually sampled at 10, 23 and 43 seconds. No clean katakana PresentMon or universal displayed-FPS claim.",
+  "CharacterPartitionCases": 144
+}

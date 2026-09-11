@@ -1,7 +1,36 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 # PowerShell image-to-character encoding. Source pixels are never modified.
+function Get-CharacterAlphabet {
+    param([ValidateSet('Ascii','Katakana')][string]$GlyphSet='Ascii')
+    if($GlyphSet -eq 'Katakana'){
+        # Half-width forms; do not normalize to full-width or add voiced marks.
+        return @{Ramp=' ･､ｨｱｲｳｴｵｶｷｻﾈﾎ';Vertical='ｲ';Horizontal='ｰ';
+            Code='ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝ0123456789'}
+    }
+    return @{Ramp=' .,:;i1tfLCG08@';Code='0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ:;+=<>[]{}';Vertical='|';Horizontal='-'}
+}
+
+function Test-CharacterConsoleWidth {
+    param([ValidateSet('Ascii','Katakana')][string]$GlyphSet='Katakana',[switch]$Batch)
+    $alphabet=Get-CharacterAlphabet $GlyphSet
+    $symbols=($alphabet.Ramp+$alphabet.Code+$alphabet.Vertical+$alphabet.Horizontal+[char]0x2580).ToCharArray() | Sort-Object -Unique
+    $results=[Collections.Generic.List[object]]::new();$stream=[Console]::OpenStandardOutput()
+    $probes=if($Batch -and [Console]::WindowWidth -gt $symbols.Count){,@{Text=($symbols -join '');Label='Complete alphabet';Expected=$symbols.Count}}
+        else{@($symbols | ForEach-Object {@{Text=[string]$_;Label=('U+{0:X4}' -f [int]$_);Expected=1}})}
+    foreach($probe in $probes){
+        [Console]::SetCursorPosition(0,0);$before=[Console]::CursorLeft
+        $bytes=[Text.Encoding]::UTF8.GetBytes($probe.Text);$stream.Write($bytes);$stream.Flush()
+        $advance=[Console]::CursorLeft-$before
+        $results.Add(@{Symbols=$probe.Label;Columns=$advance;Expected=$probe.Expected})
+        if($advance -ne $probe.Expected){throw "Character width mismatch for $($probe.Label); try -GlyphSet Ascii."}
+    }
+    [Console]::Write("$([char]27)[2J$([char]27)[H")
+    return @{GlyphSet=$GlyphSet;SymbolCount=$symbols.Count;Checks=$results.ToArray();Meaning='Live console cursor advancement under the active Terminal profile; batch mode checks total alphabet width. Visual font rendering is verified separately by recording.'}
+}
+
 function New-CharacterCodecContext {
-    param([int[][]]$Palette,[ValidateSet('AnsiArt','Matrix')][string]$Style='Matrix')
+    param([int[][]]$Palette,[ValidateSet('AnsiArt','Matrix')][string]$Style='Matrix',
+        [ValidateSet('Ascii','Katakana')][string]$GlyphSet='Ascii')
     if($Palette.Count -ne 256){throw 'A 256-color source palette is required.'}
     $luma=[int[]]::new(256);$tones=[int[]]::new(256);$colors=[string[]]::new(256)
     $matrixColors=[string[]]::new(1280);$greenPalette=[int[][]]::new(256);$esc=[char]27
@@ -24,8 +53,9 @@ function New-CharacterCodecContext {
         }
     }
     $hudPalette=if($Style -eq 'Matrix'){$greenPalette}else{$Palette}
-    return @{Style=$Style;Luma=$luma;Tones=$tones;Colors=$colors;MatrixColors=$matrixColors;
-        Ramp=' .,:;i1tfLCG08@';Code='0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ:;+=<>[]{}';Hud=(New-CodecContext $hudPalette)}
+    $alphabet=Get-CharacterAlphabet $GlyphSet
+    return @{Style=$Style;GlyphSet=$GlyphSet;Luma=$luma;Tones=$tones;Colors=$colors;MatrixColors=$matrixColors;
+        Ramp=$alphabet.Ramp;Code=$alphabet.Code;Vertical=$alphabet.Vertical;Horizontal=$alphabet.Horizontal;Hud=(New-CodecContext $hudPalette)}
 }
 
 function ConvertTo-CharacterStrip {
@@ -37,6 +67,7 @@ function ConvertTo-CharacterStrip {
     [int]$columns=$Width/2;[int]$rows=$Height/4;[int]$sceneRows=$HudStart/4
     [int[]]$lum=$Context.Luma;[string[]]$colors=$Context.Colors;[string[]]$matrixColors=$Context.MatrixColors
     [int[]]$tones=$Context.Tones;[string]$ramp=$Context.Ramp;[string]$code=$Context.Code;[string[]]$hud=$Context.Hud.Cells
+    [string]$verticalGlyph=$Context.Vertical;[string]$horizontalGlyph=$Context.Horizontal
     [bool]$matrix=$Context.Style -eq 'Matrix';$esc=[char]27
     [string[]]$chunks=[string[]]::new((($EndColumn-$FirstColumn)/2+1)*$rows);[int]$n=0
     [int[]]$heads=[int[]]::new($columns);[Array]::Fill($heads,-100)
@@ -72,8 +103,8 @@ function ConvertTo-CharacterStrip {
                 $glyph=[string]$ramp[[int]($tones[$mean]*($ramp.Length-1)/255)]
                 [int]$horizontal=($lb+$ld+$lf+$lh-$la-$lc-$le-$lg)/4
                 [int]$vertical=($le+$lf+$lg+$lh-$la-$lb-$lc-$ld)/4
-                if([Math]::Abs($horizontal) -gt 28 -and [Math]::Abs($horizontal) -gt 2*[Math]::Abs($vertical)){$glyph='|'}
-                elseif([Math]::Abs($vertical) -gt 28 -and [Math]::Abs($vertical) -gt 2*[Math]::Abs($horizontal)){$glyph='-'}
+                if([Math]::Abs($horizontal) -gt 28 -and [Math]::Abs($horizontal) -gt 2*[Math]::Abs($vertical)){$glyph=$verticalGlyph}
+                elseif([Math]::Abs($vertical) -gt 28 -and [Math]::Abs($vertical) -gt 2*[Math]::Abs($horizontal)){$glyph=$horizontalGlyph}
                 $chunks[$n++]=$colors[$representative]+$glyph
             }
         }

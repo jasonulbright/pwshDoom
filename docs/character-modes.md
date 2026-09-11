@@ -11,7 +11,9 @@ Set-Location C:\projects\pwshDoom
 .\Start-Doom.ps1 -Style Classic
 ```
 
-Choose one command. Add `-Maximized` for a maximized window, or `-Replay .\results\e1m1-route.json -Seconds 90` for the finite input-only demonstration. The replay requires the matching Ultimate Doom IWAD and default skill/episode/map. WAD discovery and controls are shared with Classic. Style selection currently happens at launch.
+Choose one command. Add `-Maximized` for a maximized window, or `-Replay .\results\e1m1-route.json -Seconds 90` for the finite input-only demonstration. The replay requires the matching Ultimate Doom IWAD and default skill/episode/map. WAD discovery and controls are shared with Classic. Style and alphabet selection currently happen at launch.
+
+The character modes now default to `-GlyphSet Katakana`, using half-width Japanese characters and MS Gothic. `-GlyphSet Ascii` restores the first prototype's alphabet and Cascadia Mono. `-FontFace` overrides the choice; the selected font must be installed. The HUD remains half blocks in both alphabets. [Recordings and capture findings](recordings.md) cover the Japanese version.
 
 | Style | Terminal cells | Default font | Representation |
 | --- | --- | --- | --- |
@@ -21,7 +23,7 @@ Choose one command. Add `-Maximized` for a maximized window, or `-Replay .\resul
 
 All three render a 320×200 source framebuffer. The character modes intentionally reduce image detail: each character summarizes a 2×4 source-pixel region. They are not lossless 320×200 presentations. The HUD is also downsampled, retaining two colors per cell rather than turning numbers into letters. `-Diagnostics` needs two extra rows. Explicit `-FontSize` overrides the default; `-Here` uses the existing tab/font. The actual image aspect depends on font cell dimensions, as it does in Classic. No 1080p hardware qualification is implied by the smaller grid.
 
-The host centers the selected grid and pauses when it does not fit. The same active game clock drives code animation; a resize pause does not accumulate animation time. ASCII code symbols avoid the ambiguous widths and font fallback of some decorative Unicode characters. Human playability and font preference still need user feedback.
+The host centers the selected grid and pauses when it does not fit. The same active game clock drives code animation; a resize pause does not accumulate animation time. The katakana alphabet uses characters from U+FF61–U+FF9D, whose width property is half-width in [Unicode's width data](https://www.unicode.org/Public/17.0.0/ucd/EastAsianWidth.txt). It excludes voiced marks and full-width kana and is not compatibility-normalized. A live startup probe checks the complete alphabet's cursor advance before gameplay; individual glyph widths were also tested during development. Human playability and font preference still need feedback.
 
 ## What the PowerShell code does
 
@@ -37,9 +39,9 @@ Sixteen persistent PowerShell rendering processes remain the default. Character 
 
 No custom compiled encoder or shader is used. .NET supplies standard collections, UTF-8 conversion, copying, synchronization, and transport. Terminal renders the resulting text. The optional offline preview script uses GDI+ to paint already-encoded cells for inspection; it is not a game display backend or a screenshot of Windows Terminal.
 
-## Measured results
+## Measured results: initial ASCII version
 
-Five sequential full E1M1 replays used the same source revision, user IWAD, input route, 16 workers, and maximized Terminal. Character modes used their 12-pt default; Classic used 6 pt. Actual grids were 382×71 and 688×151 respectively. Hardware/runtime match the existing study: Core Ultra 7 265K, RTX 4070 Ti SUPER, 32 GiB DDR5-7200, 3440×1440 at 165 Hz, PowerShell 7.6.5, Windows Terminal 1.24.11911.0. These are exploratory observations on one desktop, not a controlled claim that one encoder is intrinsically faster: output representation, glyph shapes, cell sizes, and physical image size differ.
+These five historical captures belong to the ASCII prototype committed as `033b82a`; they are not measurements of the later katakana/font change. They used the same source revision, user IWAD, input route, 16 workers, and maximized Terminal. Character modes used their 12-pt default; Classic used 6 pt, all in Cascadia Mono. Actual grids were 382×71 and 688×151 respectively. Hardware/runtime match the existing study: Core Ultra 7 265K, RTX 4070 Ti SUPER, 32 GiB DDR5-7200, 3440×1440 at 165 Hz, PowerShell 7.6.5, Windows Terminal 1.24.11911.0. These are exploratory observations on one desktop, not a controlled claim that one encoder is intrinsically faster: output representation, glyph shapes, cell sizes, and physical image size differ.
 
 | Run, in capture order | Writes/sec | Simulation tics/sec | Display transitions/sec | Dropped submissions | Display gap p95 / max, ms |
 | --- | ---: | ---: | ---: | ---: | ---: |
@@ -67,7 +69,7 @@ pwsh -NoProfile -File scripts/Test-RenderPartitions.ps1 -Style AnsiArt -Report l
 pwsh -NoProfile -File scripts/Test-Viewport.ps1 -Style Matrix -OutputPrefix local/matrix-viewport
 ```
 
-The character test independently decodes terminal control sequences and checks coverage, color ranges, duplicate writes, bounds, strip equivalence, source immutability, deterministic animation, stable HUD, and green dominance. Black, white, and two edge probes have hand-defined expected glyphs. It does not establish perceptual readability.
+The character test independently decodes terminal control sequences and checks coverage, color ranges, duplicate writes, bounds, strip equivalence, source immutability, deterministic animation, stable HUD, and green dominance. It now runs 144 cases across both alphabets. Black, white, and two edge probes have hand-defined expected glyphs in each alphabet. It does not establish perceptual readability or prove cell width in every terminal. Add `-GlyphSet Katakana` to the worker partition tests to check the Japanese alphabet through real processes.
 
 Actual worker tests compare five headings and seven uneven strips with a serial 320×200 reference image. Character bytes must also match encoding that reference at the requested origin and animation time. This checks the transport, strip boundaries, and style selection together. It is not vanilla renderer equivalence.
 

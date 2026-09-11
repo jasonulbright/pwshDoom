@@ -27,7 +27,7 @@ For Doom made of characters, choose an optional style:
 .\Start-Doom.ps1 -Style AnsiArt
 ```
 
-Matrix uses green code and animated falling highlights; AnsiArt uses full-color brightness/edge glyphs. Both keep a block HUD and use **160×50 cells** with a default 12-point font. They encode the same 320×200 rendered scene into a deliberately lossy character view. `-Style Classic` retains the default half-block output. See [character modes and measurements](docs/character-modes.md).
+Matrix uses green code and animated falling highlights; AnsiArt uses full-color brightness/edge glyphs. Both now default to **half-width Japanese katakana**, using MS Gothic at 12 points and **160×50 cells**, with a block HUD. `-GlyphSet Ascii` restores the earlier alphabet and Cascadia Mono font; `-FontFace` permits an explicit font choice. They encode the same 320×200 rendered scene into a deliberately lossy character view. `-Style Classic` retains the default half-block output. See [character modes and measurements](docs/character-modes.md) and [screen recordings](docs/recordings.md).
 
 `-Workers 16` is the tested default. All 36 classic Ultimate Doom maps pass a short headless loading/simulation/rendering sweep at skill 3; only E1M1 has a complete input-only route. See the [campaign matrix](docs/campaign-matrix.md) for the distinction and remaining work. The measured setup used PowerShell 7.6.5, Windows Terminal 1.24, and a Core Ultra 7 265K; renderer and simulation working sets totaled about 3.3 GiB, excluding the coordinator and Terminal.
 

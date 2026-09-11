@@ -1,5 +1,6 @@
 #requires -Version 7.4
 # SPDX-License-Identifier: GPL-2.0-or-later
+param([string]$Report="$PSScriptRoot/../results/glyph-codec-tests.json")
 $ErrorActionPreference='Stop'
 . "$PSScriptRoot/FrameCodec.ps1";. "$PSScriptRoot/../src/CharacterCodec.ps1"
 . "$PSScriptRoot/../src/Viewport.ps1"
@@ -29,8 +30,13 @@ function Read-CharacterCells {
     return ,$cells
 }
 $checks=[Collections.Generic.List[object]]::new();$palette=New-TestPalette 256
+foreach($glyphSet in 'Ascii','Katakana') {
 foreach($style in 'AnsiArt','Matrix') {
-    $ctx=New-CharacterCodecContext $palette $style
+    $ctx=New-CharacterCodecContext $palette $style -GlyphSet $glyphSet
+    foreach($symbol in ($ctx.Ramp+$ctx.Code+$ctx.Vertical+$ctx.Horizontal).ToCharArray()){
+        $cp=[int]$symbol
+        if($cp -gt 127 -and ($cp -lt 0xFF61 -or $cp -gt 0xFF9D)){throw 'A wide or combining character entered the single-cell alphabet.'}
+    }
     foreach($pattern in 'Coherent','Entropy') {
         $source=New-IndexedFrame 34 24 3 $pattern 256;$before=[Convert]::ToBase64String($source)
         foreach($origin in @(@(0,0),@(13,9))) {
@@ -47,7 +53,7 @@ foreach($style in 'AnsiArt','Matrix') {
                     }
                     $actual=Read-CharacterCells ([string]::Concat($parts)) 17 6 $origin[0] $origin[1]
                     if(($actual.Signature -join ';') -cne ($expected.Signature -join ';')){throw 'Partition seam or origin mismatch.'}
-                    $checks.Add(@{Style=$style;Pattern=$pattern;Workers=$workers;Origin=$origin;FrameNumber=$time;Cells=102})
+                    $checks.Add(@{Style=$style;GlyphSet=$glyphSet;Pattern=$pattern;Workers=$workers;Origin=$origin;FrameNumber=$time;Cells=102})
                 }
             }
         }
@@ -59,12 +65,14 @@ foreach($style in 'AnsiArt','Matrix') {
     $repeat=[Text.Encoding]::UTF8.GetString((ConvertTo-CharacterStrip $source 320 200 0 320 $ctx -FrameNumber 180))
     if($textA -cne $repeat){throw 'Same image and clock are not deterministic.'}
     $cellsA=Read-CharacterCells $textA 160 50;$cellsB=Read-CharacterCells $textB 160 50
+    if($glyphSet -eq 'Katakana' -and @($cellsA[0..6719] | Where-Object {[int][char]$_.Glyph -ge 0xFF61 -and [int][char]$_.Glyph -le 0xFF9D}).Count -lt 1000){throw 'Katakana did not reach the encoded world view.'}
     if(($cellsA[6720..7999].Signature -join ';') -cne ($cellsB[6720..7999].Signature -join ';')){throw 'Rain affected the HUD.'}
     foreach($cell in $cellsA[6720..7999]){if($cell.Glyph -cne [string][char]0x2580){throw 'HUD is not half blocks.'}}
     if($style -eq 'Matrix') {
         if($textA -ceq $textB){throw 'Matrix animation did not advance.'}
         foreach($cell in $cellsA){if($cell.Foreground[1] -lt $cell.Foreground[0] -or $cell.Foreground[1] -lt $cell.Foreground[2]){throw 'Matrix color is not green dominant.'}}
     } elseif($textA -cne $textB){throw 'Color art changed without a source-image change.'}
+}
 }
 # Hand-defined brightness and edge probes do not use the encoder's lookup tables.
 $gray=[int[][]]::new(256);for($i=0;$i -lt 256;$i++){$gray[$i]=@($i,$i,$i)}
@@ -76,6 +84,9 @@ for($y=0;$y -lt 4;$y++){
 }
 $cells=Read-CharacterCells ([Text.Encoding]::UTF8.GetString((ConvertTo-CharacterStrip $source 8 4 0 8 $ctx -HudStart 4))) 4 1
 if(($cells.Glyph -join '') -cne ' @|-'){throw 'Black/white/vertical/horizontal probes failed.'}
+$kanaCtx=New-CharacterCodecContext $gray AnsiArt -GlyphSet Katakana
+$kanaCells=Read-CharacterCells ([Text.Encoding]::UTF8.GetString((ConvertTo-CharacterStrip $source 8 4 0 8 $kanaCtx -HudStart 4))) 4 1
+if(($kanaCells.Glyph -join '') -cne ' ﾎｲｰ'){throw 'Katakana contrast/edge probes failed.'}
 $guards=0
 foreach($invalid in @(@(7,4,0,6,4),@(8,3,0,8,0),@(8,4,1,8,4),@(8,4,0,7,4),@(8,4,0,8,3),@(8,4,0,10,4))) {
     $failed=$false
@@ -89,9 +100,9 @@ foreach($style in 'AnsiArt','Matrix') {
         if($v.Fits -ne $case[3] -or $v.Left -ne $case[4] -or $v.Top -ne $case[5] -or $v.Width -ne 160 -or $v.Height -ne 50){throw 'Character viewport mismatch.'};$layouts++
     }
 }
-@{FinishedUtc=[DateTime]::UtcNow.ToString('o');PartitionChecks=$checks.ToArray();FullFrameTemporalStyles=2;FullFrameCellsPerStyle=8000;
-    IndependentBrightnessEdgeProbes=4;RejectedInvalidDimensions=$guards;ViewportCases=$layouts;
+@{FinishedUtc=[DateTime]::UtcNow.ToString('o');PartitionChecks=$checks.ToArray();FullFrameStyleAlphabetPairs=4;FullFrameCellsPerStyle=8000;
+    IndependentBrightnessEdgeProbes=8;RejectedInvalidDimensions=$guards;ViewportCases=$layouts;
     CodecSha256=(Get-FileHash "$PSScriptRoot/../src/CharacterCodec.ps1").Hash;
     Meaning='Independent ANSI decoding checks full coverage, truecolor bounds, partition equivalence, determinism, stable block HUD, green dominance, immutable source pixels and hand-defined contrast/edge cases. Not a perceptual readability or displayed-frame-rate test.'} |
-    ConvertTo-Json -Depth 8 | Set-Content "$PSScriptRoot/../results/character-codec-tests.json"
-"PASS: $($checks.Count) character partition cases, full-frame temporal/HUD checks, 4 independent edge/brightness probes, $guards guards, $layouts viewport cases."
+    ConvertTo-Json -Depth 8 | Set-Content -LiteralPath $Report
+"PASS: $($checks.Count) character partition cases, both alphabets, full-frame temporal/HUD checks, 8 independent edge/brightness probes, $guards guards, $layouts viewport cases."
