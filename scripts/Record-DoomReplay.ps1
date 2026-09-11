@@ -8,8 +8,9 @@ param([ValidateSet('Classic','AnsiArt','Matrix')][string]$Style='Matrix',
     [string]$OutputPrefix="$PSScriptRoot/../local/recordings/matrix-katakana",
     [string]$Ffmpeg,[ValidateRange(1,90)][int]$Seconds=90,
     [ValidateRange(60,240)][int]$CaptureLimit=240,
+    [ValidateSet('GraphicsCapture','Gdi')][string]$CaptureBackend='GraphicsCapture',
     [ValidateRange(4,24)][int]$FontSize=12,[string]$FontFace,[switch]$Maximized,
-    [string]$SessionSchedule,[switch]$RecordInput,[ValidateSet('ReplayEnd','LevelComplete','ConfirmedQuit','Duration')][string]$ExpectedExit)
+    [string]$SessionSchedule,[switch]$RecordInput,[string]$SaveRoot,[ValidateRange(3,30)][int]$ExitDelaySeconds=3,[ValidateSet('ReplayEnd','LevelComplete','ConfirmedQuit','Duration')][string]$ExpectedExit)
 $ErrorActionPreference='Stop'
 $replayInfo=Get-Content -LiteralPath $Replay -Raw | ConvertFrom-Json
 $expectedEnding=if($ExpectedExit){$ExpectedExit}elseif($replayInfo.ContinueCampaign){'ReplayEnd'}else{'LevelComplete'}
@@ -27,8 +28,9 @@ if($RecordInput -and (Test-Path -LiteralPath ($prefix+'-input.json'))){throw 'In
 [void][IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName($prefix))
 $recorder=$null;$target=$null;$failure=$null;$captureQpc=$null;$exitCode=$null;$stderr='';$game=$null
 try {
-    $launch=@{Wad=$Wad;Replay=$Replay;Style=$Style;GlyphSet=$GlyphSet;Seconds=$Seconds;FontSize=$FontSize;FontFace=$FontFace;Maximized=$Maximized;ExitDelaySeconds=3;Report=$gamePath}
+    $launch=@{Wad=$Wad;Replay=$Replay;Style=$Style;GlyphSet=$GlyphSet;Seconds=$Seconds;FontSize=$FontSize;FontFace=$FontFace;Maximized=$Maximized;ExitDelaySeconds=$ExitDelaySeconds;Report=$gamePath}
     if($SessionSchedule){$launch.SessionSchedule=$SessionSchedule}
+    if($SaveRoot){$launch.SaveRoot=$SaveRoot}
     if($RecordInput){$launch.RecordInput=$prefix+'-input.json'}
     & "$PSScriptRoot/../Start-Doom.ps1" @launch
     $watch=[Diagnostics.Stopwatch]::StartNew()
@@ -39,8 +41,17 @@ try {
         if($watch.Elapsed.TotalSeconds -gt 20){throw 'No target game window appeared.'}
         Start-Sleep -Milliseconds 100
     }
-    $captureInput='gfxcapture=hwnd='+$target.MainWindowHandle.ToInt64()+":max_framerate=$($CaptureLimit):capture_cursor=0:display_border=1:width=-2:height=-2"
-    $arguments=@('-hide_banner','-n','-filter_complex',$captureInput,
+    if($CaptureBackend -eq 'Gdi'){
+        # Capture only the observed game window. GDI samples at 60 Hz; it is a
+        # separate workload from compositor-driven Graphics Capture.
+        $captureArguments=@('-f','gdigrab','-framerate','60','-draw_mouse','0','-i',('hwnd='+$target.MainWindowHandle.ToInt64()),'-pix_fmt','yuv420p')
+        $captureMeaning='Actual game-window GDI capture sampled at 60 Hz and passed to external NVENC H.264 encoding. CaptureLimit does not apply to this backend.'
+    }else{
+        $captureInput='gfxcapture=hwnd='+$target.MainWindowHandle.ToInt64()+":max_framerate=$($CaptureLimit):capture_cursor=0:display_border=1:width=-2:height=-2"
+        $captureArguments=@('-filter_complex',$captureInput)
+        $captureMeaning='Actual game-window Windows.Graphics.Capture at the recorded capture ceiling, with D3D11 frames passed to external NVENC H.264 encoding. The ceiling exceeds 60 to avoid capture-rate aliasing; actual arrival rate is compositor-driven.'
+    }
+    $arguments=@('-hide_banner','-n')+$captureArguments+@(
         '-an','-c:v','h264_nvenc','-preset','p4','-cq','18','-b:v','0',
         '-r','60','-fps_mode','cfr','-movflags','+faststart','-t',"$($Seconds+35)",$videoPath)
     $info=[Diagnostics.ProcessStartInfo]::new($Ffmpeg);$info.UseShellExecute=$false;$info.CreateNoWindow=$true
@@ -76,14 +87,15 @@ finally {
         if(-not $recorder.HasExited){$recorder.StandardInput.WriteLine('q');$recorder.StandardInput.Flush();if(-not $recorder.WaitForExit(10000)){$recorder.Kill();$recorder.WaitForExit()}}
         $stderr=$stderrTask.Result;$exitCode=$recorder.ExitCode;$recorder.Dispose()
     }
+    if($null -ne $exitCode -and $exitCode -ne 0 -and -not $failure){$failure="FFmpeg exited with code $exitCode."}
     $stderr | Set-Content -LiteralPath ($prefix+'-ffmpeg.log')
-    @{FinishedUtc=[DateTime]::UtcNow.ToString('o');Error=$failure;Style=$Style;GlyphSet=$GlyphSet;FontFace=$FontFace;FontSize=$FontSize;Maximized=[bool]$Maximized;CaptureLimit=$CaptureLimit;VideoFps=60;ExpectedExit=$expectedEnding;ReplaySha256=(Get-FileHash -LiteralPath $Replay).Hash;
-        SessionScheduleSha256=if($SessionSchedule){(Get-FileHash -LiteralPath $SessionSchedule).Hash}else{$null};InputReplaySha256=if($RecordInput -and (Test-Path -LiteralPath ($prefix+'-input.json'))){(Get-FileHash -LiteralPath ($prefix+'-input.json')).Hash}else{$null};
+    @{FinishedUtc=[DateTime]::UtcNow.ToString('o');Error=$failure;Style=$Style;GlyphSet=$GlyphSet;FontFace=$FontFace;FontSize=$FontSize;Maximized=[bool]$Maximized;CaptureBackend=$CaptureBackend;CaptureLimit=if($CaptureBackend -eq 'GraphicsCapture'){$CaptureLimit}else{$null};VideoFps=60;ExpectedExit=$expectedEnding;ReplaySha256=(Get-FileHash -LiteralPath $Replay).Hash;
+        SessionScheduleSha256=if($SessionSchedule){(Get-FileHash -LiteralPath $SessionSchedule).Hash}else{$null};SaveRoot=$SaveRoot;ExitDelaySeconds=$ExitDelaySeconds;InputReplaySha256=if($RecordInput -and (Test-Path -LiteralPath ($prefix+'-input.json'))){(Get-FileHash -LiteralPath ($prefix+'-input.json')).Hash}else{$null};
         TerminalPid=if($null -ne $target){$target.Id}else{$null};WindowHandle=if($null -ne $target){$target.MainWindowHandle.ToInt64()}else{$null};
         CaptureStartQpc=$captureQpc;QpcFrequency=[Diagnostics.Stopwatch]::Frequency;EncoderExitCode=$exitCode;
         Ffmpeg=$Ffmpeg;FfmpegSha256=(Get-FileHash -LiteralPath $Ffmpeg).Hash;Arguments=$arguments;
         Video=$videoPath;VideoSha256=if(Test-Path -LiteralPath $videoPath){(Get-FileHash -LiteralPath $videoPath).Hash}else{$null};GameReport=$gamePath;
-        Meaning='Actual game-window Windows.Graphics.Capture at the recorded capture ceiling, with D3D11 frames passed to external NVENC H.264 encoding. The ceiling exceeds 60 to avoid capture-rate aliasing; actual arrival rate is compositor-driven. Output is resampled to 60 FPS and can contain duplicates. Video includes startup and a short console return. Recording can affect game/presentation timing; encoded 60 FPS does not prove 60 distinct displayed game images. No microphone, desktop audio, or other windows are captured.'} |
+        Meaning=$captureMeaning+' Output is resampled to 60 FPS and can contain duplicates. Video includes startup and a short console return. Recording can affect game/presentation timing; encoded 60 FPS does not prove 60 distinct displayed game images. No microphone or desktop audio is captured. The input selects only the game window; inspect footage for occlusion or capture artifacts.'} |
         ConvertTo-Json -Depth 6 | Set-Content -LiteralPath ($prefix+'-recording.json')
 }
 if($exitCode -ne 0){throw 'FFmpeg exited unsuccessfully; inspect the retained recording/log.'}

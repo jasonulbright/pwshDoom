@@ -1,0 +1,72 @@
+{
+  "FinishedUtc": "2026-09-11T15:25:00.3525718Z",
+  "Checks": [
+    {
+      "Passed": true,
+      "Name": "Main menu opens save slots"
+    },
+    {
+      "Passed": true,
+      "Name": "Empty slot saves directly with no overwrite hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Busy screen ignores navigation"
+    },
+    {
+      "Passed": true,
+      "Name": "Occupied slot defaults to no replacement"
+    },
+    {
+      "Passed": true,
+      "Name": "Default no returns without a save action"
+    },
+    {
+      "Passed": true,
+      "Name": "Replacement carries the exact selected save hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Empty load slot shows a message without load action"
+    },
+    {
+      "Passed": true,
+      "Name": "Empty-slot message returns to load slots"
+    },
+    {
+      "Passed": true,
+      "Name": "Loading defaults to no"
+    },
+    {
+      "Passed": true,
+      "Name": "Compact confirmation exposes changed source version"
+    },
+    {
+      "Passed": true,
+      "Name": "Confirmed changed-version load includes selected hash and acceptance"
+    },
+    {
+      "Passed": true,
+      "Name": "Listing absent slots creates no files"
+    },
+    {
+      "Passed": true,
+      "Name": "Metadata preview identifies map and source"
+    },
+    {
+      "Passed": true,
+      "Name": "UTC metadata is displayed in the local time zone"
+    },
+    {
+      "Passed": true,
+      "Name": "Malformed slot remains visible and preserves a hash for replacement"
+    },
+    {
+      "Passed": true,
+      "Name": "Replay archive keys cannot name paths"
+    }
+  ],
+  "HarnessSha256": "1A0B30B774DD807C36A14485D7E220E373C64A15FC95CB00E76E21432CFD6F53",
+  "Error": null,
+  "Meaning": "Menu state/confirmation and bounded metadata-preview fixtures. Actual save graph validation and worker transactions have separate tests."
+}

@@ -1,0 +1,697 @@
+{
+  "VisualReview": "Six initial frames per style plus targeted follow-ups show slots, busy screens, default-no load/overwrite confirmations, cancellation and returned gameplay. Classic timing estimates initially sampled adjacent screens; follow-ups verify the intended views. One Matrix cancellation sample has a partially drawn footer; a sample 0.2 seconds later is complete. Matrix menus are dim. These remain presentation limitations, not proof of fully qualified physical play or every video frame.",
+  "Schedule": "results/save-menu-demo-schedule.json",
+  "FinishedUtc": "2026-09-11T15:29:18.0044769Z",
+  "Samples": "results/save-menu-video-samples.json",
+  "RejectedCaptures": [
+    "results/save-menu-capture-failure.json",
+    "results/save-menu-capture-failure-120.json",
+    "results/save-menu-capture-failure-held.json",
+    "results/save-menu-gdi-black.json"
+  ],
+  "Recordings": [
+    {
+      "InputReplay": {
+        "SourceFingerprint": "65F6392D6A42ED8E646243B66797AAA4C8B527A026F435BCE03F441959E43965",
+        "Controls": [
+          {
+            "Action": "LoadGame",
+            "Tic": 225,
+            "SaveHash": "4EE478D004C037DCEEE82EB1332838A5895F42F4318C14AA80E2BBE271D53EBA"
+          }
+        ],
+        "Sha256": "C3017571D6AEEB24AF06EA9924A81CF4B8D1BE13FB3E9204F3DA8E14085477F8",
+        "Path": "local/recordings/save-menu-classic-full-input.json"
+      },
+      "SourceManifest": "results/save-menu-capture-sources.json",
+      "Capture": {
+        "CaptureStartQpc": 111977077410,
+        "GlyphSet": "Katakana",
+        "FinishedUtc": "2026-09-11T15:00:22.9420055Z",
+        "Arguments": [
+          "-hide_banner",
+          "-n",
+          "-filter_complex",
+          "gfxcapture=hwnd=722474:max_framerate=240:capture_cursor=0:display_border=1:width=-2:height=-2",
+          "-an",
+          "-c:v",
+          "h264_nvenc",
+          "-preset",
+          "p4",
+          "-cq",
+          "18",
+          "-b:v",
+          "0",
+          "-r",
+          "60",
+          "-fps_mode",
+          "cfr",
+          "-movflags",
+          "+faststart",
+          "-t",
+          "75",
+          "C:\\projects\\pwshDoom\\local\\recordings\\save-menu-classic-full.mp4"
+        ],
+        "GameReport": "C:\\projects\\pwshDoom\\local\\recordings\\save-menu-classic-full-game.json",
+        "Video": "C:\\projects\\pwshDoom\\local\\recordings\\save-menu-classic-full.mp4",
+        "Meaning": "Actual game-window Windows.Graphics.Capture at the recorded capture ceiling, with D3D11 frames passed to external NVENC H.264 encoding. The ceiling exceeds 60 to avoid capture-rate aliasing; actual arrival rate is compositor-driven. Output is resampled to 60 FPS and can contain duplicates. Video includes startup and a short console return. Recording can affect game/presentation timing; encoded 60 FPS does not prove 60 distinct displayed game images. No microphone, desktop audio, or other windows are captured.",
+        "VideoFps": 60,
+        "SaveRoot": "./local/save-demo-classic",
+        "FontFace": "Cascadia Mono",
+        "TerminalPid": 20960,
+        "ExpectedExit": "ConfirmedQuit",
+        "WindowHandle": 722474,
+        "SessionScheduleSha256": "64223E706A28A457877BAB5C9C3A65835DCA19C8BED9B9F6CE424DE592F3EE6A",
+        "QpcFrequency": 10000000,
+        "Error": null,
+        "Ffmpeg": "C:\\projects\\pwshDoom\\local\\tools\\ffmpeg\\ffmpeg-9.0.1-essentials_build\\bin\\ffmpeg.exe",
+        "VideoSha256": "0EBF599520E6F15DF5360DC6C3A134D0EF4F1D64FA766B67A19183505ED13E3E",
+        "Style": "Classic",
+        "ReplaySha256": "DF62BD8CA80098BCEDC7C6803FBE13D041F57B02DDB788B278491492147BD296",
+        "Maximized": true,
+        "FfmpegSha256": "72A489ECCD008C2EC2C0A5856C5C75BC3D8BBFA90166C4566865C246445E6AA3",
+        "EncoderExitCode": 0,
+        "FontSize": 6,
+        "InputReplaySha256": "C3017571D6AEEB24AF06EA9924A81CF4B8D1BE13FB3E9204F3DA8E14085477F8",
+        "CaptureLimit": 240
+      },
+      "Style": null,
+      "Game": {
+        "MeasuredCommands": 493,
+        "ExitReason": "ConfirmedQuit",
+        "ReportSha256": "6DA634A2581BF40D40CBB2235C63FBE8968EAFC7E693C37E0B195DD2943C640C",
+        "Viewport": [
+          {
+            "Columns": 688,
+            "Fits": true,
+            "Rows": 151,
+            "PublishedSimulationTics": 0,
+            "ActiveMs": 5.9081,
+            "Top": 25,
+            "Left": 184,
+            "IssuedCommands": 0,
+            "WallMs": 0.3781
+          }
+        ],
+        "Operations": [
+          {
+            "Action": "SaveGame",
+            "Success": true,
+            "Request": {
+              "Action": "SaveGame",
+              "Slot": 1,
+              "ExpectedHash": null
+            },
+            "Milliseconds": 1734.8286,
+            "Tic": 104,
+            "Result": {
+              "Nodes": 1845,
+              "Backup": null,
+              "Path": "C:\\projects\\pwshDoom\\local\\save-demo-classic\\6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F\\slot-01.pds",
+              "Milliseconds": 1717.8537,
+              "Sha256": "4EE478D004C037DCEEE82EB1332838A5895F42F4318C14AA80E2BBE271D53EBA",
+              "Bytes": 395878
+            },
+            "Error": null
+          },
+          {
+            "Action": "LoadGame",
+            "Success": true,
+            "Request": {
+              "Action": "LoadGame",
+              "Slot": 1,
+              "ExpectedHash": "4EE478D004C037DCEEE82EB1332838A5895F42F4318C14AA80E2BBE271D53EBA",
+              "AllowSourceMismatch": false
+            },
+            "Milliseconds": 2231.5947,
+            "Tic": 225,
+            "Result": {
+              "Sha256": "4EE478D004C037DCEEE82EB1332838A5895F42F4318C14AA80E2BBE271D53EBA",
+              "Episode": 1,
+              "GameTic": 246,
+              "Map": 1,
+              "SourceMatches": true
+            },
+            "Error": null
+          },
+          {
+            "Action": "SaveGame",
+            "Success": true,
+            "Request": {
+              "Action": "SaveGame",
+              "Slot": 1,
+              "ExpectedHash": "4EE478D004C037DCEEE82EB1332838A5895F42F4318C14AA80E2BBE271D53EBA",
+              "AllowSourceMismatch": false
+            },
+            "Milliseconds": 1333.9504,
+            "Tic": 378,
+            "Result": {
+              "Nodes": 1845,
+              "Backup": "C:\\projects\\pwshDoom\\local\\save-demo-classic\\6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F\\slot-01.pds.09b594af453749768297605a21545ee1.bak",
+              "Path": "C:\\projects\\pwshDoom\\local\\save-demo-classic\\6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F\\slot-01.pds",
+              "Milliseconds": 1325.0645,
+              "Sha256": "8D7FE4D184A78594D31869F36253355ACDAE48FEE20C49209838D1830E7CE9D2",
+              "Bytes": 396123
+            },
+            "Error": null
+          }
+        ],
+        "ConsumedCommands": 493,
+        "Report": "C:\\projects\\pwshDoom\\local\\recordings\\save-menu-classic-full-game.json"
+      },
+      "Replay": {
+        "SourceMatches": true,
+        "Commands": 493,
+        "Verification": {
+          "Matched": true,
+          "Meaning": "Compared available recorded checkpoints through the consumed prefix. This samples selected state and render data, not every hidden game field.",
+          "Checked": 4,
+          "Mismatches": []
+        },
+        "Report": "results/save-menu-classic-replayed.json"
+      },
+      "ViewingCopy": {
+        "ContrastSampleRate": 10,
+        "GameDurationSeconds": 14.1113921,
+        "Arguments": [
+          "-hide_banner",
+          "-n",
+          "-ss",
+          "26.000",
+          "-i",
+          "C:\\projects\\pwshDoom\\local\\recordings\\save-menu-classic-full.mp4",
+          "-t",
+          "31.800",
+          "-an",
+          "-vf",
+          "crop=1600:902:920:256",
+          "-c:v",
+          "libx264",
+          "-threads",
+          "4",
+          "-preset",
+          "medium",
+          "-crf",
+          "16",
+          "-pix_fmt",
+          "yuv420p",
+          "-movflags",
+          "+faststart",
+          "C:\\projects\\pwshDoom\\local\\recordings\\save-menu-classic.mp4"
+        ],
+        "VisibleSamples": 320,
+        "EndSeconds": 57.800000000000004,
+        "OriginalVideo": "C:\\projects\\pwshDoom\\local\\recordings\\save-menu-classic-full.mp4",
+        "GameWallDurationSeconds": 31.8006727,
+        "OriginalSha256": "0EBF599520E6F15DF5360DC6C3A134D0EF4F1D64FA766B67A19183505ED13E3E",
+        "Output": "C:\\projects\\pwshDoom\\local\\recordings\\save-menu-classic.mp4",
+        "Meaning": "Viewing copy of actual window-capture footage. Removes startup/console return and fixed empty margins; no game frames are synthesized and no speed change, tint, sharpening, shader, or rescaling is applied. Re-encoded H.264 is lossy; capture may already contain repeated frames. The untrimmed original is retained.",
+        "VerifiedVideo": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "h264",
+              "width": 1600,
+              "height": 902,
+              "pix_fmt": "yuv420p",
+              "avg_frame_rate": "60/1",
+              "nb_read_frames": "1908"
+            }
+          ],
+          "format": {
+            "duration": "31.800000"
+          }
+        },
+        "GlyphSet": "Katakana",
+        "StartSeconds": 26,
+        "CreatedUtc": "2026-09-11T15:21:31.8937706Z",
+        "Style": "Classic",
+        "Crop": {
+          "Height": 902,
+          "Y": 256,
+          "Width": 1600,
+          "X": 920
+        },
+        "OutputSha256": "C6080A738138D0BC11E4B55477CA3A9777EC88FF5F35BF833F5947F7F3494D27"
+      }
+    },
+    {
+      "InputReplay": {
+        "SourceFingerprint": "65F6392D6A42ED8E646243B66797AAA4C8B527A026F435BCE03F441959E43965",
+        "Controls": [
+          {
+            "Action": "LoadGame",
+            "SaveHash": "536C57BFD578ACF6D856DF1A6F75688DA22ED4879B0DFD818672A1AD14D6B164",
+            "Tic": 218
+          }
+        ],
+        "Sha256": "E043501F08529979899C588BCCE9D18EDD176282178DDC1724D872391809123A",
+        "Path": "local/recordings/save-menu-matrix-held-full-input.json"
+      },
+      "SourceManifest": "results/save-menu-capture-sources-held.json",
+      "Capture": {
+        "VideoFps": 60,
+        "ReplaySha256": "DF62BD8CA80098BCEDC7C6803FBE13D041F57B02DDB788B278491492147BD296",
+        "CaptureLimit": 120,
+        "WindowHandle": 2033144,
+        "Style": "Matrix",
+        "GameReport": "C:\\projects\\pwshDoom\\local\\recordings\\save-menu-matrix-held-full-game.json",
+        "FinishedUtc": "2026-09-11T15:09:52.9257171Z",
+        "VideoSha256": "D771A593237560DDD84757F35E5A3DE2B7AE498855F6D27130CDB4844D514446",
+        "SaveRoot": "./local/save-demo-matrix-held",
+        "Arguments": [
+          "-hide_banner",
+          "-n",
+          "-filter_complex",
+          "gfxcapture=hwnd=2033144:max_framerate=120:capture_cursor=0:display_border=1:width=-2:height=-2",
+          "-an",
+          "-c:v",
+          "h264_nvenc",
+          "-preset",
+          "p4",
+          "-cq",
+          "18",
+          "-b:v",
+          "0",
+          "-r",
+          "60",
+          "-fps_mode",
+          "cfr",
+          "-movflags",
+          "+faststart",
+          "-t",
+          "75",
+          "C:\\projects\\pwshDoom\\local\\recordings\\save-menu-matrix-held-full.mp4"
+        ],
+        "SessionScheduleSha256": "64223E706A28A457877BAB5C9C3A65835DCA19C8BED9B9F6CE424DE592F3EE6A",
+        "TerminalPid": 9848,
+        "EncoderExitCode": 0,
+        "Ffmpeg": "C:\\projects\\pwshDoom\\local\\tools\\ffmpeg\\ffmpeg-9.0.1-essentials_build\\bin\\ffmpeg.exe",
+        "Maximized": true,
+        "Meaning": "Actual game-window Windows.Graphics.Capture at the recorded capture ceiling, with D3D11 frames passed to external NVENC H.264 encoding. The ceiling exceeds 60 to avoid capture-rate aliasing; actual arrival rate is compositor-driven. Output is resampled to 60 FPS and can contain duplicates. Video includes startup and a short console return. Recording can affect game/presentation timing; encoded 60 FPS does not prove 60 distinct displayed game images. No microphone, desktop audio, or other windows are captured.",
+        "FfmpegSha256": "72A489ECCD008C2EC2C0A5856C5C75BC3D8BBFA90166C4566865C246445E6AA3",
+        "GlyphSet": "Katakana",
+        "ExpectedExit": "ConfirmedQuit",
+        "FontSize": 12,
+        "Error": null,
+        "QpcFrequency": 10000000,
+        "CaptureStartQpc": 117676848238,
+        "InputReplaySha256": "E043501F08529979899C588BCCE9D18EDD176282178DDC1724D872391809123A",
+        "ExitDelaySeconds": 15,
+        "Video": "C:\\projects\\pwshDoom\\local\\recordings\\save-menu-matrix-held-full.mp4",
+        "FontFace": "MS Gothic"
+      },
+      "Style": null,
+      "Game": {
+        "MeasuredCommands": 479,
+        "ExitReason": "ConfirmedQuit",
+        "ReportSha256": "90AC374C031526A4578400F7B54AA5AC7C433517E488ABBC5EFC87639FB93860",
+        "Viewport": [
+          {
+            "Rows": 85,
+            "Columns": 430,
+            "Fits": true,
+            "IssuedCommands": 0,
+            "PublishedSimulationTics": 0,
+            "ActiveMs": 6.0318,
+            "WallMs": 0.3748,
+            "Left": 135,
+            "Top": 17
+          }
+        ],
+        "Operations": [
+          {
+            "Success": true,
+            "Request": {
+              "Slot": 1,
+              "ExpectedHash": null,
+              "Action": "SaveGame"
+            },
+            "Tic": 104,
+            "Action": "SaveGame",
+            "Error": null,
+            "Result": {
+              "Bytes": 395878,
+              "Sha256": "536C57BFD578ACF6D856DF1A6F75688DA22ED4879B0DFD818672A1AD14D6B164",
+              "Backup": null,
+              "Nodes": 1845,
+              "Path": "C:\\projects\\pwshDoom\\local\\save-demo-matrix-held\\6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F\\slot-01.pds",
+              "Milliseconds": 1934.7742
+            },
+            "Milliseconds": 1951.764
+          },
+          {
+            "Success": true,
+            "Request": {
+              "AllowSourceMismatch": false,
+              "Slot": 1,
+              "ExpectedHash": "536C57BFD578ACF6D856DF1A6F75688DA22ED4879B0DFD818672A1AD14D6B164",
+              "Action": "LoadGame"
+            },
+            "Tic": 218,
+            "Action": "LoadGame",
+            "Error": null,
+            "Result": {
+              "GameTic": 246,
+              "Sha256": "536C57BFD578ACF6D856DF1A6F75688DA22ED4879B0DFD818672A1AD14D6B164",
+              "Map": 1,
+              "SourceMatches": true,
+              "Episode": 1
+            },
+            "Milliseconds": 2227.5141
+          },
+          {
+            "Success": true,
+            "Request": {
+              "AllowSourceMismatch": false,
+              "Slot": 1,
+              "ExpectedHash": "536C57BFD578ACF6D856DF1A6F75688DA22ED4879B0DFD818672A1AD14D6B164",
+              "Action": "SaveGame"
+            },
+            "Tic": 371,
+            "Action": "SaveGame",
+            "Error": null,
+            "Result": {
+              "Bytes": 396134,
+              "Sha256": "E00E6BD042D4381FCCF7DDA814A1E026E753816554751B27F03052858E5C562D",
+              "Backup": "C:\\projects\\pwshDoom\\local\\save-demo-matrix-held\\6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F\\slot-01.pds.3ed75a8ec3b947269c6f1c6e279d6795.bak",
+              "Nodes": 1845,
+              "Path": "C:\\projects\\pwshDoom\\local\\save-demo-matrix-held\\6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F\\slot-01.pds",
+              "Milliseconds": 1527.7012
+            },
+            "Milliseconds": 1535.5784
+          }
+        ],
+        "ConsumedCommands": 479,
+        "Report": "C:\\projects\\pwshDoom\\local\\recordings\\save-menu-matrix-held-full-game.json"
+      },
+      "Replay": {
+        "SourceMatches": true,
+        "Commands": 479,
+        "Verification": {
+          "Checked": 4,
+          "Matched": true,
+          "Mismatches": [],
+          "Meaning": "Compared available recorded checkpoints through the consumed prefix. This samples selected state and render data, not every hidden game field."
+        },
+        "Report": "results/save-menu-matrix-replayed.json"
+      },
+      "ViewingCopy": {
+        "ContrastSampleRate": 10,
+        "GameDurationSeconds": 13.6914604,
+        "Arguments": [
+          "-hide_banner",
+          "-n",
+          "-ss",
+          "26.000",
+          "-i",
+          "C:\\projects\\pwshDoom\\local\\recordings\\save-menu-matrix-held-full.mp4",
+          "-t",
+          "31.700",
+          "-an",
+          "-vf",
+          "crop=1280:800:1080:304",
+          "-c:v",
+          "libx264",
+          "-threads",
+          "4",
+          "-preset",
+          "medium",
+          "-crf",
+          "16",
+          "-pix_fmt",
+          "yuv420p",
+          "-movflags",
+          "+faststart",
+          "C:\\projects\\pwshDoom\\local\\recordings\\save-menu-matrix.mp4"
+        ],
+        "VisibleSamples": 320,
+        "EndSeconds": 57.7,
+        "OriginalVideo": "C:\\projects\\pwshDoom\\local\\recordings\\save-menu-matrix-held-full.mp4",
+        "GameWallDurationSeconds": 31.8015591,
+        "OriginalSha256": "D771A593237560DDD84757F35E5A3DE2B7AE498855F6D27130CDB4844D514446",
+        "Output": "C:\\projects\\pwshDoom\\local\\recordings\\save-menu-matrix.mp4",
+        "Meaning": "Viewing copy of actual window-capture footage. Removes startup/console return and fixed empty margins; no game frames are synthesized and no speed change, tint, sharpening, shader, or rescaling is applied. Re-encoded H.264 is lossy; capture may already contain repeated frames. The untrimmed original is retained.",
+        "VerifiedVideo": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "h264",
+              "width": 1280,
+              "height": 800,
+              "pix_fmt": "yuv420p",
+              "avg_frame_rate": "60/1",
+              "nb_read_frames": "1902"
+            }
+          ],
+          "format": {
+            "duration": "31.700000"
+          }
+        },
+        "GlyphSet": "Katakana",
+        "StartSeconds": 26,
+        "CreatedUtc": "2026-09-11T15:21:44.2386341Z",
+        "Style": "Matrix",
+        "Crop": {
+          "Height": 800,
+          "Y": 304,
+          "Width": 1280,
+          "X": 1080
+        },
+        "OutputSha256": "2A1E8232DEFA757A9827A97CA1000F476D0FF495F8C736264FD4E1406AEE23BB"
+      }
+    },
+    {
+      "InputReplay": {
+        "SourceFingerprint": "65F6392D6A42ED8E646243B66797AAA4C8B527A026F435BCE03F441959E43965",
+        "Controls": [
+          {
+            "SaveHash": "03B5FD781F9FE2D542637AE09ABA27E29D45E986F71F12D6B1746120CEBE4B76",
+            "Action": "LoadGame",
+            "Tic": 224
+          }
+        ],
+        "Sha256": "37CD5974A413C2F0874B952015979B54D16AAE2543655DB94BF7CD480B4D5F37",
+        "Path": "local/recordings/save-menu-ansiart-retry-full-input.json"
+      },
+      "SourceManifest": "results/save-menu-capture-sources-gdi.json",
+      "Capture": {
+        "FfmpegSha256": "72A489ECCD008C2EC2C0A5856C5C75BC3D8BBFA90166C4566865C246445E6AA3",
+        "Arguments": [
+          "-hide_banner",
+          "-n",
+          "-filter_complex",
+          "gfxcapture=hwnd=4653896:max_framerate=120:capture_cursor=0:display_border=1:width=-2:height=-2",
+          "-an",
+          "-c:v",
+          "h264_nvenc",
+          "-preset",
+          "p4",
+          "-cq",
+          "18",
+          "-b:v",
+          "0",
+          "-r",
+          "60",
+          "-fps_mode",
+          "cfr",
+          "-movflags",
+          "+faststart",
+          "-t",
+          "75",
+          "C:\\projects\\pwshDoom\\local\\recordings\\save-menu-ansiart-retry-full.mp4"
+        ],
+        "CaptureBackend": "GraphicsCapture",
+        "Maximized": true,
+        "Video": "C:\\projects\\pwshDoom\\local\\recordings\\save-menu-ansiart-retry-full.mp4",
+        "WindowHandle": 4653896,
+        "ExpectedExit": "ConfirmedQuit",
+        "EncoderExitCode": 0,
+        "FinishedUtc": "2026-09-11T15:19:54.3269794Z",
+        "GlyphSet": "Katakana",
+        "CaptureStartQpc": 123685126207,
+        "FontSize": 12,
+        "VideoFps": 60,
+        "GameReport": "C:\\projects\\pwshDoom\\local\\recordings\\save-menu-ansiart-retry-full-game.json",
+        "Error": null,
+        "QpcFrequency": 10000000,
+        "SessionScheduleSha256": "64223E706A28A457877BAB5C9C3A65835DCA19C8BED9B9F6CE424DE592F3EE6A",
+        "ReplaySha256": "DF62BD8CA80098BCEDC7C6803FBE13D041F57B02DDB788B278491492147BD296",
+        "ExitDelaySeconds": 15,
+        "TerminalPid": 14160,
+        "SaveRoot": "./local/save-demo-ansiart-retry",
+        "Style": "AnsiArt",
+        "FontFace": "MS Gothic",
+        "VideoSha256": "C0EFF10746F732F7259F1B584E93D3079BF965E5AF55FC0AC8A644E9701E443C",
+        "CaptureLimit": 120,
+        "Ffmpeg": "C:\\projects\\pwshDoom\\local\\tools\\ffmpeg\\ffmpeg-9.0.1-essentials_build\\bin\\ffmpeg.exe",
+        "Meaning": "Actual game-window Windows.Graphics.Capture at the recorded capture ceiling, with D3D11 frames passed to external NVENC H.264 encoding. The ceiling exceeds 60 to avoid capture-rate aliasing; actual arrival rate is compositor-driven. Output is resampled to 60 FPS and can contain duplicates. Video includes startup and a short console return. Recording can affect game/presentation timing; encoded 60 FPS does not prove 60 distinct displayed game images. No microphone or desktop audio is captured. The input selects only the game window; inspect footage for occlusion or capture artifacts.",
+        "InputReplaySha256": "37CD5974A413C2F0874B952015979B54D16AAE2543655DB94BF7CD480B4D5F37"
+      },
+      "Style": null,
+      "Game": {
+        "MeasuredCommands": 493,
+        "ExitReason": "ConfirmedQuit",
+        "ReportSha256": "60B5505E8206DF64EECDD3F6C48959D1F4ECA8B07A11FA0F17E53DE05A5F38F7",
+        "Viewport": [
+          {
+            "Top": 17,
+            "Rows": 85,
+            "PublishedSimulationTics": 0,
+            "WallMs": 0.381,
+            "Columns": 430,
+            "Left": 135,
+            "Fits": true,
+            "IssuedCommands": 0,
+            "ActiveMs": 6.1734
+          }
+        ],
+        "Operations": [
+          {
+            "Result": {
+              "Bytes": 395878,
+              "Path": "C:\\projects\\pwshDoom\\local\\save-demo-ansiart-retry\\6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F\\slot-01.pds",
+              "Sha256": "03B5FD781F9FE2D542637AE09ABA27E29D45E986F71F12D6B1746120CEBE4B76",
+              "Milliseconds": 1764.2558,
+              "Backup": null,
+              "Nodes": 1845
+            },
+            "Request": {
+              "Action": "SaveGame",
+              "ExpectedHash": null,
+              "Slot": 1
+            },
+            "Success": true,
+            "Action": "SaveGame",
+            "Milliseconds": 1781.2773,
+            "Tic": 104,
+            "Error": null
+          },
+          {
+            "Result": {
+              "GameTic": 246,
+              "Sha256": "03B5FD781F9FE2D542637AE09ABA27E29D45E986F71F12D6B1746120CEBE4B76",
+              "SourceMatches": true,
+              "Episode": 1,
+              "Map": 1
+            },
+            "Request": {
+              "Action": "LoadGame",
+              "ExpectedHash": "03B5FD781F9FE2D542637AE09ABA27E29D45E986F71F12D6B1746120CEBE4B76",
+              "AllowSourceMismatch": false,
+              "Slot": 1
+            },
+            "Success": true,
+            "Action": "LoadGame",
+            "Milliseconds": 2198.8246,
+            "Tic": 224,
+            "Error": null
+          },
+          {
+            "Result": {
+              "Bytes": 396124,
+              "Path": "C:\\projects\\pwshDoom\\local\\save-demo-ansiart-retry\\6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F\\slot-01.pds",
+              "Sha256": "54DA4F4935EC028AD71574D9FECF290BEC4A5EB8C896852BC0FD966C61C2A538",
+              "Milliseconds": 1303.0998,
+              "Backup": "C:\\projects\\pwshDoom\\local\\save-demo-ansiart-retry\\6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F\\slot-01.pds.2746f78268c345348f86abea14e9e92d.bak",
+              "Nodes": 1845
+            },
+            "Request": {
+              "Action": "SaveGame",
+              "ExpectedHash": "03B5FD781F9FE2D542637AE09ABA27E29D45E986F71F12D6B1746120CEBE4B76",
+              "AllowSourceMismatch": false,
+              "Slot": 1
+            },
+            "Success": true,
+            "Action": "SaveGame",
+            "Milliseconds": 1320.9859,
+            "Tic": 378,
+            "Error": null
+          }
+        ],
+        "ConsumedCommands": 493,
+        "Report": "C:\\projects\\pwshDoom\\local\\recordings\\save-menu-ansiart-retry-full-game.json"
+      },
+      "Replay": {
+        "SourceMatches": true,
+        "Commands": 493,
+        "Verification": {
+          "Meaning": "Compared available recorded checkpoints through the consumed prefix. This samples selected state and render data, not every hidden game field.",
+          "Mismatches": [],
+          "Matched": true,
+          "Checked": 4
+        },
+        "Report": "results/save-menu-ansiart-replayed.json"
+      },
+      "ViewingCopy": {
+        "ContrastSampleRate": 10,
+        "GameDurationSeconds": 14.097681,
+        "Arguments": [
+          "-hide_banner",
+          "-n",
+          "-ss",
+          "27.000",
+          "-i",
+          "C:\\projects\\pwshDoom\\local\\recordings\\save-menu-ansiart-retry-full.mp4",
+          "-t",
+          "31.900",
+          "-an",
+          "-vf",
+          "crop=1280:800:1080:304",
+          "-c:v",
+          "libx264",
+          "-threads",
+          "4",
+          "-preset",
+          "medium",
+          "-crf",
+          "16",
+          "-pix_fmt",
+          "yuv420p",
+          "-movflags",
+          "+faststart",
+          "C:\\projects\\pwshDoom\\local\\recordings\\save-menu-ansiart.mp4"
+        ],
+        "VisibleSamples": 320,
+        "EndSeconds": 58.900000000000006,
+        "OriginalVideo": "C:\\projects\\pwshDoom\\local\\recordings\\save-menu-ansiart-retry-full.mp4",
+        "GameWallDurationSeconds": 31.8003135,
+        "OriginalSha256": "C0EFF10746F732F7259F1B584E93D3079BF965E5AF55FC0AC8A644E9701E443C",
+        "Output": "C:\\projects\\pwshDoom\\local\\recordings\\save-menu-ansiart.mp4",
+        "Meaning": "Viewing copy of actual window-capture footage. Removes startup/console return and fixed empty margins; no game frames are synthesized and no speed change, tint, sharpening, shader, or rescaling is applied. Re-encoded H.264 is lossy; capture may already contain repeated frames. The untrimmed original is retained.",
+        "VerifiedVideo": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "h264",
+              "width": 1280,
+              "height": 800,
+              "pix_fmt": "yuv420p",
+              "avg_frame_rate": "60/1",
+              "nb_read_frames": "1914"
+            }
+          ],
+          "format": {
+            "duration": "31.900000"
+          }
+        },
+        "GlyphSet": "Katakana",
+        "StartSeconds": 27,
+        "CreatedUtc": "2026-09-11T15:21:55.9556465Z",
+        "Style": "AnsiArt",
+        "Crop": {
+          "Height": 800,
+          "Y": 304,
+          "Width": 1280,
+          "X": 1080
+        },
+        "OutputSha256": "8AE819B2516EB7C2EBA5B407D86602E4BCB06DAEA536C513EAB247D87FCEE93D"
+      }
+    }
+  ],
+  "Meaning": "Actual Windows.Graphics.Capture footage, with originals retained. Cropped/trimmed viewing copies fully decode at 60 CFR; this can include duplicate/static frames and does not establish unique displayed FPS. No audio, added effect, rescaling or speed change. Retrying the external recorder did not establish a reliable teardown fix.",
+  "PostCaptureChange": "SaveSlots.ps1 now preserves UTC DateTime kind when converting the displayed HH:mm to local time. These movies retain the earlier UTC-looking labels. No gameplay, save graph or display algorithm changed after these captures."
+}

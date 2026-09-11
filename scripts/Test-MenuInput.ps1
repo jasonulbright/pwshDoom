@@ -33,6 +33,11 @@ Send-Key 13 $false;Send-Key 13 $true;Set-DoomInputCommand $state $cmd
 Check 'A new Enter press can use in gameplay' ($cmd.Buttons -eq 2)
 Reset-ForMenu;Send-Key 0 $false 16;Set-DoomInputCommand $state $cmd
 Check 'Focus loss clears menu input state' ($cmd.ForwardMove -eq 0 -and $cmd.Buttons -eq 0)
+function Read-DoomConsoleInput {param($State) Send-Key 13 $true;Send-Key 13 $false;Send-Key 87 $true}
+Reset-DoomInputAfterSessionAction $state;Set-DoomInputCommand $state $cmd
+Check 'Completed action drains a queued use tap and masks held movement' ($cmd.Buttons -eq 0 -and $cmd.ForwardMove -eq 0 -and $state.Keys[87])
+Send-Key 87 $false;Send-Key 87 $true;Set-DoomInputCommand $state $cmd
+Check 'Movement works after releasing a key held during the action' ($cmd.ForwardMove -eq 25)
 $failed=@($checks|Where-Object Passed -eq $false).Count
 @{FinishedUtc=[DateTime]::UtcNow.ToString('o');Checks=$checks.ToArray();Failures=$failed;SourceSha256=(Get-FileHash "$PSScriptRoot/../src/ConsoleInput.ps1").Hash;
     Meaning='Synthetic native KEY_EVENT records including repeated key-down events. Uses the current menu-reset helper when present, otherwise reproduces the original host reset. No desktop input is injected.'}|ConvertTo-Json -Depth 5|Set-Content $Output

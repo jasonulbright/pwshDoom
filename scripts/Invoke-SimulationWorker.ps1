@@ -1,12 +1,13 @@
 #requires -Version 7.4
 # SPDX-License-Identifier: GPL-2.0-or-later
-param([string]$Wad,[int]$Skill,[int]$Episode,[int]$Map,[string]$Channel,[string]$Assets,[string]$Report,[int]$OwnerPid,[switch]$StopAtLevelEnd,[switch]$ReplayCheckpoints,[string]$CheckpointReplay)
+param([string]$Wad,[int]$Skill,[int]$Episode,[int]$Map,[string]$Channel,[string]$Assets,[string]$Report,[int]$OwnerPid,[switch]$StopAtLevelEnd,[switch]$ReplayCheckpoints,[string]$CheckpointReplay,[string]$SaveRoot)
 $ErrorActionPreference='Stop'
 . "$PSScriptRoot/FrameCodec.ps1";. "$PSScriptRoot/../src/GameHost.ps1";. "$PSScriptRoot/../src/FastRenderer.ps1"
 . "$PSScriptRoot/../src/RenderAssets.ps1";. "$PSScriptRoot/../src/SnapshotTransport.ps1"
 . "$PSScriptRoot/../src/SessionScreens.ps1"
 . "$PSScriptRoot/../src/InputReplay.ps1"
 . "$PSScriptRoot/../src/SessionMenu.ps1"
+. "$PSScriptRoot/../src/SaveState.ps1"
 $channelMap=[IO.MemoryMappedFiles.MemoryMappedFile]::OpenExisting($Channel);$view=$channelMap.CreateViewAccessor()
 $ready=[Threading.EventWaitHandle]::OpenExisting($Channel+'-ready');$go=[Threading.EventWaitHandle]::OpenExisting($Channel+'-go')
 $content=$null;$game=$null;$tick=0;$version=0;$slot=0;$failure=$null;$outcome='Stopped'
@@ -15,6 +16,7 @@ $commandLog=[Collections.Generic.List[object]]::new()
 $transitions=[Collections.Generic.List[object]]::new();$uiTimes=[Collections.Generic.List[double]]::new();$generation=1;$screens=$null
 $checkpoints=[Collections.Generic.List[object]]::new();$checkpointTimes=[Collections.Generic.List[double]]::new();$extraCheckpoints=@{}
 $menuGraphics=$null;$menuPixels=$null;$menuScreen=0;$menuRevision=0;$episodeCount=4;$controlLog=[Collections.Generic.List[object]]::new()
+$saveOperations=[Collections.Generic.List[object]]::new()
 function Record-ReplayCheckpoint {
     param([switch]$Replace)
     if(-not $ReplayCheckpoints){return}
@@ -59,6 +61,7 @@ function Publish-SimulationMapChange {
 }
 try {
     $owner=[Diagnostics.Process]::GetProcessById($OwnerPid)
+    $wadHash=(Get-FileHash -LiteralPath $Wad).Hash;$saveDirectory=Get-DoomSaveDirectory $SaveRoot $wadHash
     if($CheckpointReplay){$recorded=Read-DoomInputReplay $CheckpointReplay (Get-FileHash -LiteralPath $Wad).Hash;foreach($point in $recorded.Checkpoints){$extraCheckpoints[[int]$point.Tic]=$true}}
     $bundle=& "$PSScriptRoot/Build-EngineBundle.ps1";. $bundle
     $null=[DoomInfo]::SwitchNames;$content=[GameContent]::new(@('-iwad',$Wad));$options=[GameOptions]::new()
@@ -80,17 +83,19 @@ try {
         $request=$view.ReadInt32(48)
         if($request -ne $view.ReadInt32(52) -and $tick -ge $view.ReadInt32(76)){
             if($tick -ne $view.ReadInt32(76)){throw 'Session action crossed its command boundary.'}
-            $kind=$view.ReadInt32(56);$menuRevision=$request
+            $kind=$view.ReadInt32(56);$menuRevision++;$action=Read-DoomSessionPayload $view 32768
+            $response=@{Action=$action.Action;Success=$true;Screen=0;Choice=0;Episode=$options.Episode;Skill=[int]$options.Skill+1;MessageTitle='';MessageDetail='';ReturnScreen=1}
             if($kind -eq 1){
                 $menuScreen=$view.ReadInt32(60);$choice=$view.ReadInt32(64);$selectedEpisode=$view.ReadInt32(68);$selectedSkill=$view.ReadInt32(72)
-                if($menuScreen -lt 0 -or $menuScreen -gt 7 -or $choice -lt 0 -or $choice -gt 4){throw 'Invalid menu request.'}
+                if($menuScreen -lt 0 -or $menuScreen -gt 13 -or $choice -lt 0 -or $choice -gt 5){throw 'Invalid menu request.'}
                 if($menuScreen -eq 0){$menuPixels=$null;$options.Sound.Resume()}
                 else{
                     $options.Sound.Pause()
                     if($null -eq $menuGraphics){$menuGraphics=New-DoomMenuGraphics $content}
-                    $menuPixels=Get-DoomMenuPixels $menuGraphics $menuScreen $choice $selectedEpisode $selectedSkill $episodeCount
+                    $menuPixels=Get-DoomMenuPixels $menuGraphics $menuScreen $choice $selectedEpisode $selectedSkill $episodeCount -Details $action
                 }
                 Publish-SimulationSnapshot
+                $response.Screen=$menuScreen;$response.Choice=$choice
             }elseif($kind -eq 2){
                 $newSkill=$view.ReadInt32(60);$newEpisode=$view.ReadInt32(64);$newMap=$view.ReadInt32(68)
                 if($newSkill -lt 1 -or $newSkill -gt 5 -or $newEpisode -lt 1 -or $newEpisode -gt $episodeCount -or $newMap -ne 1){throw 'Invalid new-game selection.'}
@@ -98,7 +103,67 @@ try {
                 $game.DeferedInitNew([GameSkill]($newSkill-1),$newEpisode,$newMap);$null=$game.Update($commands)
                 $controlLog.Add(@{Tic=$tick;Action='NewGame';Skill=$newSkill;Episode=$newEpisode;Map=$newMap})
                 Publish-SimulationMapChange
+            }elseif($kind -in 3,4){
+                $operationWatch=[Diagnostics.Stopwatch]::StartNew();$result=$null;$errorText=$null
+                $menuScreen=13;$options.Sound.Pause()
+                if($null -eq $menuGraphics){$menuGraphics=New-DoomMenuGraphics $content}
+                $busy=@{MessageTitle=if($kind -eq 3){'SAVING GAME'}else{'LOADING GAME'}}
+                $menuPixels=Get-DoomMenuPixels $menuGraphics 13 0 $options.Episode ([int]$options.Skill+1) $episodeCount -Details $busy
+                Publish-SimulationSnapshot
+                try{
+                    if($kind -eq 3){
+                        if($action.Action -ne 'SaveGame' -or $action.Slot -isnot [long] -or $action.Slot -lt 1 -or $action.Slot -gt 6){throw 'Invalid save slot request.'}
+                        $path=Get-DoomSlotPath $saveDirectory $action.Slot
+                        $result=Write-DoomSaveState $game $path $wadHash "E$($options.Episode)M$($options.Map)" -ReplaceExpectedHash $action.ExpectedHash
+                    }else{
+                        if($action.Action -ne 'LoadGame'){throw 'Invalid load request.'}
+                        $replayLoad=$null -ne $action.PSObject.Properties['SaveHash']
+                        if($replayLoad){$expectedHash=$action.SaveHash;$path=Get-DoomReplaySavePath $saveDirectory $expectedHash}
+                        else{
+                            if($action.Slot -isnot [long] -or $action.Slot -lt 1 -or $action.Slot -gt 6){throw 'Invalid load slot request.'}
+                            $expectedHash=$action.ExpectedHash;$path=Get-DoomSlotPath $saveDirectory $action.Slot
+                        }
+                        if($expectedHash -notmatch '^[a-fA-F0-9]{64}$'){throw 'Loading requires the selected save hash.'}
+                        $saved=Read-DoomSaveState $path $wadHash
+                        if($saved.Sha256 -ne $expectedHash){throw 'Save changed after selection.'}
+                        if(-not $saved.SourceMatches -and -not ($replayLoad -or $action.AllowSourceMismatch)){throw 'Save version changed; select and confirm again.'}
+                        $candidate=New-DoomGameFromSave $saved $content
+                        # Archive the exact parsed bytes before publishing the candidate.
+                        # Replay loads cannot mutate a slot or name an arbitrary path.
+                        $archive=Get-DoomReplaySavePath $saveDirectory $saved.Sha256
+                        [void][IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName($archive))
+                        if(Test-Path -LiteralPath $archive){if((Get-FileHash -LiteralPath $archive).Hash -ne $saved.Sha256){throw 'Replay save archive checksum differs.'}}
+                        else{
+                            $temporary=$archive+'.'+[guid]::NewGuid().ToString('N')+'.tmp'
+                            try{[IO.File]::WriteAllBytes($temporary,$saved.Bytes);[IO.File]::Move($temporary,$archive,$false)}finally{if(Test-Path -LiteralPath $temporary){Remove-Item -LiteralPath $temporary}}
+                        }
+                    }
+                }catch{
+                    $errorText=$_.ToString()+"`n"+$_.ScriptStackTrace;$response.Success=$false;$response.Error=$errorText
+                    $response.Screen=12;$response.ReturnScreen=if($kind -eq 3){8}else{9}
+                    $response.MessageTitle=if($kind -eq 3){'SAVE FAILED'}else{'LOAD FAILED'}
+                    $response.MessageDetail=if($errorText -match 'changed after|version changed'){'SELECT SLOT AGAIN'}else{'FILE UNAVAILABLE'}
+                    $menuRevision++;$menuScreen=12;$menuPixels=Get-DoomMenuPixels $menuGraphics 12 0 $options.Episode ([int]$options.Skill+1) $episodeCount -Details $response
+                    Publish-SimulationSnapshot
+                }
+                if($response.Success){
+                    # Reconstruction/archive failures above leave the live game
+                    # intact. Failures after this commit are host/worker failures.
+                    $menuRevision++;$menuScreen=0;$menuPixels=$null
+                    if($kind -eq 4){
+                        foreach($device in 'Video','Sound','Music','UserInput'){$candidate.Options.$device=$options.$device}
+                        $game=$candidate;$options=$game.Options;$game.Paused=$false;foreach($cmd in $commands){$cmd.Clear()}
+                        $screens=if($StopAtLevelEnd){$null}else{New-DoomSessionScreens $content}
+                        $options.Sound.SetListener($game.World.ConsolePlayer.Mobj);$options.Sound.Resume()
+                        $controlLog.Add(@{Tic=$tick;Action='LoadGame';SaveHash=$saved.Sha256})
+                        $result=@{Sha256=$saved.Sha256;SourceMatches=$saved.SourceMatches;GameTic=$game.GameTic;Episode=$options.Episode;Map=$options.Map}
+                        Publish-SimulationMapChange
+                    }else{$options.Sound.Resume();Publish-SimulationSnapshot}
+                }
+                $saveOperations.Add(@{Tic=$tick;Action=$action.Action;Request=$action;Success=$response.Success;Error=$errorText;Milliseconds=$operationWatch.Elapsed.TotalMilliseconds;Result=$result})
             }else{throw 'Unknown session action.'}
+            $response.Screen=$menuScreen;$response.Episode=$options.Episode;$response.Skill=[int]$options.Skill+1
+            Write-DoomSessionPayload $view 65536 $response
             [Threading.Thread]::MemoryBarrier();$view.Write(52,$request)
             if($outcome -eq 'OwnerExited'){break};continue
         }
@@ -125,7 +190,7 @@ finally {
     if($null -ne $game -and $null -ne $game.World -and -not $failure){try{Record-ReplayCheckpoint}catch{$failure=$_.ToString();$outcome='Error'}}
     @{FinishedUtc=[DateTime]::UtcNow.ToString('o');Outcome=$outcome;Error=$failure;Tics=$tick;WarmupTics=140;Skill=$Skill;Episode=$Episode;Map=$Map;
         ReplayCheckpoints=$checkpoints.ToArray();ReplayCheckpointMs=(Get-SampleStats $checkpointTimes.ToArray());ReplayCheckpointSamplesMs=$checkpointTimes.ToArray();
-        ControlEvents=$controlLog.ToArray();MenuScreen=$menuScreen;MenuRevision=$menuRevision;
+        ControlEvents=$controlLog.ToArray();MenuScreen=$menuScreen;MenuRevision=$menuRevision;SaveOperations=$saveOperations.ToArray();SaveDirectory=$saveDirectory;
         StopAtLevelEnd=[bool]$StopAtLevelEnd;Transitions=$transitions.ToArray();FinalGeneration=$generation;SessionScreenMs=(Get-SampleStats $uiTimes.ToArray());SessionScreenSamplesMs=$uiTimes.ToArray();
         SimulationMs=(Get-SampleStats $tickTimes.ToArray());SnapshotPublishMs=(Get-SampleStats $snapshotTimes.ToArray());TickLatenessMs=(Get-SampleStats $lateness.ToArray());
         SimulationSamplesMs=$tickTimes.ToArray();SnapshotSamplesMs=$snapshotTimes.ToArray();TickLatenessSamplesMs=$lateness.ToArray();InputCommands=$commandLog.ToArray();

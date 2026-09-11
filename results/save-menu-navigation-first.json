@@ -1,0 +1,68 @@
+{
+  "HarnessSha256": "613356C320A4DF89398B2C29EDD08012F7916ADFF423AE28E13D981707155CB0",
+  "Checks": [
+    {
+      "Passed": true,
+      "Name": "Main menu opens save slots"
+    },
+    {
+      "Passed": true,
+      "Name": "Empty slot saves directly with no overwrite hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Busy screen ignores navigation"
+    },
+    {
+      "Passed": true,
+      "Name": "Occupied slot defaults to no replacement"
+    },
+    {
+      "Passed": true,
+      "Name": "Default no returns without a save action"
+    },
+    {
+      "Passed": true,
+      "Name": "Replacement carries the exact selected save hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Empty load slot shows a message without load action"
+    },
+    {
+      "Passed": true,
+      "Name": "Empty-slot message returns to load slots"
+    },
+    {
+      "Passed": true,
+      "Name": "Loading defaults to no"
+    },
+    {
+      "Passed": true,
+      "Name": "Compact confirmation exposes changed source version"
+    },
+    {
+      "Passed": true,
+      "Name": "Confirmed changed-version load includes selected hash and acceptance"
+    },
+    {
+      "Passed": true,
+      "Name": "Listing absent slots creates no files"
+    },
+    {
+      "Passed": true,
+      "Name": "Metadata preview identifies map and source"
+    },
+    {
+      "Passed": true,
+      "Name": "Malformed slot remains visible and preserves a hash for replacement"
+    },
+    {
+      "Passed": true,
+      "Name": "Replay archive keys cannot name paths"
+    }
+  ],
+  "Meaning": "Menu state/confirmation and bounded metadata-preview fixtures. Actual save graph validation and worker transactions have separate tests.",
+  "Error": null,
+  "FinishedUtc": "2026-09-11T14:49:46.1016074Z"
+}

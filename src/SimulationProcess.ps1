@@ -1,7 +1,8 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 # Command ring and double-buffered snapshots for the dedicated simulation process.
+. "$PSScriptRoot/SaveSlots.ps1"
 function New-DoomSimulation {
-    param([string]$Wad,[int]$Skill,[int]$Episode,[int]$Map,[switch]$StopAtLevelEnd,[switch]$ReplayCheckpoints,[string]$CheckpointReplay)
+    param([string]$Wad,[int]$Skill,[int]$Episode,[int]$Map,[switch]$StopAtLevelEnd,[switch]$ReplayCheckpoints,[string]$CheckpointReplay,[string]$SaveRoot)
     $root=Split-Path $PSScriptRoot;$id=[guid]::NewGuid().ToString('N');$name='Local\pwshDoom-sim-'+$id
     $state=@{Assets="$root/local/session-$id.assets";Report="$root/local/simulation-$id.json";Name=$name;Process=$null}
     try {
@@ -14,6 +15,7 @@ function New-DoomSimulation {
         if($StopAtLevelEnd){$info.ArgumentList.Add('-StopAtLevelEnd')}
         if($ReplayCheckpoints){$info.ArgumentList.Add('-ReplayCheckpoints')}
         if($CheckpointReplay){$info.ArgumentList.Add('-CheckpointReplay');$info.ArgumentList.Add([IO.Path]::GetFullPath($CheckpointReplay))}
+        if($SaveRoot){$info.ArgumentList.Add('-SaveRoot');$info.ArgumentList.Add([IO.Path]::GetFullPath($SaveRoot))}
         $state.Process=[Diagnostics.Process]::Start($info);$state.Stdout=$state.Process.StandardOutput.ReadToEndAsync();$state.Stderr=$state.Process.StandardError.ReadToEndAsync()
         if(-not $state.Ready.WaitOne(30000)){throw 'Simulation startup timed out.'}
         if($state.View.ReadInt32(12) -eq 3){throw "Simulation startup failed. $($state.Stderr.Result)"}

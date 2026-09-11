@@ -1,5 +1,7 @@
 # Katakana and actual screen recordings
 
+The latest [save/load recordings](save-load.md#remaining-release-work) exercise integrated slots, confirmations, loading and overwrite/cancellation in all three styles. Exact capture/export metadata and failed attempts are in [save-menu-recordings.json](../results/save-menu-recordings.json). These are session/UI demonstrations; menu holds make their aggregate output rates unsuitable for gameplay FPS comparison.
+
 The next session build adds three recordings of E1M1 → intermission → E1M2 in Classic, Matrix and AnsiArt. See [campaign session recordings](campaign-session.md#actual-terminal-recordings) for the current results. The two E1M1-only captures below remain historical evidence for the earlier build. The exporter now also accepts successful full-session replays and checks visible duration against the wall clock, preserving map handoff pauses in the viewing copy.
 
 The user requested Japanese characters in both art modes and screen recordings of the finished effects. The game now defaults to half-width katakana in Matrix and AnsiArt. ASCII remains selectable. Gameplay, rasterization, interpolation, and terminal character conversion still run in PowerShell.
@@ -18,7 +20,7 @@ MS Gothic is present on the test machine and is the default for the Japanese sty
 
 ## Recording implementation
 
-`scripts/Record-DoomReplay.ps1` launches one finite replay in an isolated Terminal process, selects that process's game window, and passes its actual window handle to FFmpeg's `gfxcapture` source. It records only that window, with no microphone or system audio. The game itself is still silent. A three-second optional post-report delay lets the recorder finalize cleanly; the default interactive launcher has no delay.
+`scripts/Record-DoomReplay.ps1` launches one finite replay in an isolated Terminal process, selects that process's game window, and passes its actual window handle to FFmpeg's `gfxcapture` source. It records only that window, with no microphone or system audio. The game itself is still silent. The recorder's post-report window delay defaults to three seconds and can be set with `-ExitDelaySeconds`; the default interactive launcher has no delay. Later captures still encounter intermittent native teardown failures, even with a 15-second delay. A successful game/encoder exit plus visual inspection is required before accepting footage. The experimental `-CaptureBackend Gdi` option reproduces black Terminal frames on this setup and is not an accepted recording path here.
 
 [FFmpeg documents `gfxcapture`](https://ffmpeg.org/ffmpeg-filters.html#gfxcapture) as Windows.Graphics.Capture producing D3D11 frames. We pass those frames to NVENC for external video encoding. The capture ceiling is 240 arrivals/sec; the MP4 is resampled to 60 FPS. This avoids imposing a second 60 Hz cap on compositor arrivals near the game's 60 Hz cadence, but it does not guarantee one unique game frame per video frame. Capture timestamps and encoder logs are retained, including duplication counts. Movie FPS is not a replacement for PresentMon or an optical/frame-identity experiment.
 

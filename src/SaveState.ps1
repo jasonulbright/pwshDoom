@@ -239,7 +239,9 @@ function Read-DoomSaveState {
     param([string]$Path,[string]$WadSha256)
     $file=Get-Item -LiteralPath $Path
     if($file.Length -gt 64MB){throw 'Save exceeds 64 MiB.'}
-    $document=[IO.File]::ReadAllText($file.FullName)|ConvertFrom-Json -Depth 4
+    $fileBytes=[IO.File]::ReadAllBytes($file.FullName)
+    if($fileBytes.Length -gt 64MB){throw 'Save exceeds 64 MiB.'}
+    $document=[Text.Encoding]::UTF8.GetString($fileBytes)|ConvertFrom-Json -Depth 4
     if($document -isnot [pscustomobject] -or $document.Format -ne 'pwshDoom.SaveState' -or $document.Version -isnot [long] -or $document.Version -ne 1){throw 'Unsupported save format/version.'}
     if($document.WadSha256 -notmatch '^[a-fA-F0-9]{64}$' -or ($WadSha256 -and $document.WadSha256 -ne $WadSha256)){throw 'Save IWAD does not match.'}
     if($document.SchemaSha256 -ne (Get-DoomSaveSchemaHash)){throw 'Save schema differs from the installed version.'}
@@ -250,7 +252,7 @@ function Read-DoomSaveState {
     $bytes=[Text.Encoding]::UTF8.GetBytes($document.GraphJson)
     if($bytes.Length -gt 32MB -or [Convert]::ToHexString([Security.Cryptography.SHA256]::HashData($bytes)) -ne $document.GraphSha256){throw 'Save graph checksum failed.'}
     $graph=$document.GraphJson|ConvertFrom-Json -Depth 12
-    return @{Metadata=$document;Graph=$graph;Path=$file.FullName;Sha256=(Get-FileHash -LiteralPath $Path).Hash;SourceMatches=$document.EngineSourceFingerprint -eq (Get-DoomReplaySourceFingerprint)}
+    return @{Metadata=$document;Graph=$graph;Path=$file.FullName;Bytes=$fileBytes;Sha256=[Convert]::ToHexString([Security.Cryptography.SHA256]::HashData($fileBytes));SourceMatches=$document.EngineSourceFingerprint -eq (Get-DoomReplaySourceFingerprint)}
 }
 function New-DoomGameFromSave {
     param($Save,$Content)

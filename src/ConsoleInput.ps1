@@ -72,6 +72,14 @@ function Reset-DoomInputForMenu {
     $State.Suppressed=$State.Keys.Clone();[Array]::Clear($State.Pressed)
 }
 
+function Reset-DoomInputAfterSessionAction {
+    param($State)
+    # Discard taps queued while save/load/new-game work blocked navigation;
+    # preserve physical held state and mask it until the key is released.
+    Read-DoomConsoleInput $State
+    Reset-DoomInputForMenu $State
+}
+
 function Set-DoomInputCommand {
     param($State,$Command)
     $keys=$State.Keys.Clone()

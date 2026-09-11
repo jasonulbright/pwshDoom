@@ -1,0 +1,10 @@
+{
+  "Error": "Simulation startup failed. Exception calling \"WriteAllText\" with \"3\" argument(s): \"The process cannot access the file 'C:\\projects\\pwshDoom\\local\\engine-bundle.ps1' because it is being used by another process.\"\nat <ScriptBlock>, C:\\projects\\pwshDoom\\scripts\\Build-EngineBundle.ps1: line 44\r\nat <ScriptBlock>, C:\\projects\\pwshDoom\\scripts\\Invoke-SimulationWorker.ps1: line 66\r\n\nat New-DoomSimulation, C:\\projects\\pwshDoom\\src\\SimulationProcess.ps1: line 21\r\nat <ScriptBlock>, C:\\projects\\pwshDoom\\scripts\\Test-SaveWorker.ps1: line 41",
+  "Simulation": null,
+  "FinishedUtc": "2026-09-11T15:25:22.1800438Z",
+  "HarnessSha256": "5935536BE5157CFDB9063CA540B9F8AE3256E98C9720692A8C7A28206203128F",
+  "Meaning": "Actual simulation process and bounded session IPC. Numeric snapshots, command indices, asset generation handshake, failed candidate isolation, atomic replacement/backup and immutable replay saves. Rendering workers and live menus are qualified separately.",
+  "SaveRoot": "C:\\projects\\pwshDoom\\scripts\\..\\local\\save-worker-0d92f55654514e26abd5d00bf4abb95c",
+  "Actions": [],
+  "Checks": []
+}

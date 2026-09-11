@@ -1,0 +1,59 @@
+{
+  "HarnessSha256": "612534DB554EB65E3900D8A319558798729651FEC25716A100D8E42470E609AD",
+  "SaveSha256": "1AF1CACD837438DC0A099D0FA4FDCBC4530C10A28776EA80130561C54A3F969D",
+  "Meaning": "Additional bounded corruption cases against independent candidate games; named expected rejection messages prevent arbitrary harness failures from counting as success.",
+  "FinishedUtc": "2026-09-11T15:21:35.5557659Z",
+  "Error": null,
+  "Checks": [
+    {
+      "Name": "Truncated JSON",
+      "Passed": true,
+      "Error": "Conversion from JSON failed with error: Unexpected end when reading JSON. Path '', line 1, position 1."
+    },
+    {
+      "Name": "File size limit before JSON parsing",
+      "Passed": true,
+      "Error": "Save exceeds 64 MiB."
+    },
+    {
+      "Name": "Actual candidate IWAD checked even after metadata-only read",
+      "Passed": true,
+      "Error": "Candidate content does not match the saved single IWAD."
+    },
+    {
+      "Name": "Duplicate binding",
+      "Passed": true,
+      "Error": "Unknown or repeated save binding."
+    },
+    {
+      "Name": "Null thinker ring",
+      "Passed": true,
+      "Error": "Invalid saved thinker ring."
+    },
+    {
+      "Name": "Invalid collision-grid dimensions",
+      "Passed": true,
+      "Error": "Invalid saved collision-grid size."
+    },
+    {
+      "Name": "Invalid RNG index",
+      "Passed": true,
+      "Error": "Invalid saved clock or RNG state."
+    },
+    {
+      "Name": "Out-of-range Fixed value",
+      "Passed": true,
+      "Error": "Fixed value outside range."
+    },
+    {
+      "Name": "Header and graph starting settings disagree",
+      "Passed": true,
+      "Error": "Saved graph disagrees with its IWAD/settings header."
+    },
+    {
+      "Passed": true,
+      "Name": "Rejected candidates leave live checkpoint unchanged"
+    }
+  ],
+  "SourceSha256": "87368E204F816634FEA245966529892438D698B5ACD8694E370AEC46FB4B6563"
+}

@@ -1,6 +1,6 @@
 # Menus, pause and new games
 
-Escape opens a menu with Resume Game, New Game, Controls and Quit Game. Arrows choose an item; Enter selects it; Escape goes back. New Game selects an available episode and difficulty, then asks before replacing the current game. Quit also defaults to No. P or the Pause key pauses; P, Enter or Escape resumes the paused screen. Save/load, automap and settings menus remain unfinished.
+Escape opens a menu with Resume Game, New Game, Save Game, Load Game, Controls and Quit. Arrows choose an item; Enter selects it; Escape goes back. New Game selects an available episode and difficulty, then asks before replacing the current game. Quit also defaults to No. P or the Pause key pauses; P, Enter or Escape resumes the paused screen. [Save/load](save-load.md) now has six slots, overwrite/load confirmation, progress/error screens and exact-save replay references. Automap and settings remain unfinished.
 
 The menus use native WAD graphics and the adopted PowerShell `DrawScreen`, with a small new PowerShell controller suited to this host's separate simulation process. The inherited menu controller depends on another `Doom` wrapper and its video/input settings interfaces; it is retained in the attributed source but not silently presented as integrated.
 
@@ -16,7 +16,7 @@ A new-game selection is handled at the same command boundary. The simulation ini
 
 Input recording version 2 adds ordered `NewGame` control events between gameplay commands. Menu navigation and wall-clock pauses need not be replayed to reproduce the simulation; a new game does. Multiple control events can share a command boundary. Checkpoints at that boundary represent the state after its controls. Versions 1 and the original study route files remain supported. The reader bounds and validates control types, settings and ordering; unknown action types are rejected.
 
-## Evidence so far
+## Original menu milestone evidence
 
 The first integrated Matrix probe paused at tic 34, then its menu encoder failed on PowerShell arithmetic/comma precedence in an array literal. The failure is retained in `results/menu-probe-game.json`. Parenthesizing the index expressions fixes it. Independent menu-encoder tests compare the selected colors against stable-sorted 2×2 brightness samples through the separate ANSI encoder.
 
@@ -47,3 +47,7 @@ Six samples per style at viewing seconds 1.8, 4.8, 8.4, 10.2, 12.8 and 14.2 show
 The final Classic capture records 122 consumed commands and one new-game control. A separate headless host replays that file against unchanged source and matches all three checkpoints. [menu-validation.json](../results/menu-validation.json) verifies 226 frozen source hashes, 74 script/bundle parses, six original/viewing video hashes and zero remaining owned game/recorder processes. Save/load, settings, automap, audio, wider campaign qualification and final pacing/fidelity remain on the release roadmap.
 
 The first menu request takes 713 / 698 / 604 ms to acknowledge in those Classic / Matrix / AnsiArt runs, including queued-command drain and lazy menu-graphics initialization. This is a responsiveness issue for later tuning, not measured key-to-display latency. The new-game asset holds take 0.906 / 0.967 / 0.947 seconds and remain in wall reports and footage.
+
+## Save-menu follow-up
+
+Six save slots, default-no overwrite/load decisions, version warnings and busy/error screens are now integrated. The [save/load findings](save-load.md) describe their implementation, 39 menu fixtures, host/replay checks and three newer live recordings. The current main menu adds Save Game and Load Game; older menu evidence above retains its original layout. Save-menu footage exposes a timestamp display bug corrected afterward and a transient incomplete Matrix footer that remains a presentation finding. Automap/settings and physical-play qualification are still ahead.

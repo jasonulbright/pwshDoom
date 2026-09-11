@@ -1,0 +1,1371 @@
+{
+  "HarnessSha256": "5935536BE5157CFDB9063CA540B9F8AE3256E98C9720692A8C7A28206203128F",
+  "Checks": [
+    {
+      "Name": "Empty slot saves and resumes without changing the command index",
+      "Passed": true
+    },
+    {
+      "Name": "Stale load selection shows a recoverable error",
+      "Passed": true
+    },
+    {
+      "Name": "Rejected load leaves current numeric game snapshot intact",
+      "Passed": true
+    },
+    {
+      "Name": "Stale save confirmation preserves the prior slot",
+      "Passed": true
+    },
+    {
+      "Name": "Different episode installs generation two",
+      "Passed": true
+    },
+    {
+      "Name": "Slot load restores E1M1 at the monotonic input boundary",
+      "Passed": true
+    },
+    {
+      "Name": "Loaded numeric state equals the earlier saved state",
+      "Passed": true
+    },
+    {
+      "Name": "Load archives the exact selected bytes for replay",
+      "Passed": true
+    },
+    {
+      "Name": "Confirmed replacement creates a changed save",
+      "Passed": true
+    },
+    {
+      "Name": "Replacement retains exact previous save as backup",
+      "Passed": true
+    },
+    {
+      "Name": "Replay load restores the old state after slot overwrite",
+      "Passed": true
+    },
+    {
+      "Name": "Replay load does not modify the slot",
+      "Passed": true
+    }
+  ],
+  "Error": null,
+  "FinishedUtc": "2026-09-11T15:28:58.1218065Z",
+  "SaveRoot": "C:\\projects\\pwshDoom\\scripts\\..\\local\\save-worker-039487b87d17490f91cbf22b4941c75e",
+  "Meaning": "Actual simulation process and bounded session IPC. Numeric snapshots, command indices, asset generation handshake, failed candidate isolation, atomic replacement/backup and immutable replay saves. Rendering workers and live menus are qualified separately.",
+  "Simulation": {
+    "SessionScreenMs": null,
+    "ReplayCheckpointSamplesMs": [
+      59.9309,
+      2.6093,
+      2.8725,
+      2.0829
+    ],
+    "Kills": 0,
+    "Episode": 1,
+    "ReplayCheckpointMs": {
+      "Count": 4,
+      "Mean": 16.8739,
+      "Median": 2.7409,
+      "P95": 59.9309,
+      "Max": 59.9309
+    },
+    "Transitions": [
+      {
+        "State": "Level",
+        "Keys": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "Ammo": [
+          50,
+          0,
+          0,
+          0
+        ],
+        "Map": 1,
+        "Armor": 0,
+        "DidSecret": false,
+        "Tic": 0,
+        "Health": 100,
+        "Weapons": [
+          true,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "Kills": 0,
+        "Generation": 1,
+        "Episode": 1
+      },
+      {
+        "State": "Level",
+        "Keys": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "Ammo": [
+          50,
+          0,
+          0,
+          0
+        ],
+        "Map": 1,
+        "Armor": 0,
+        "DidSecret": false,
+        "Tic": 70,
+        "Health": 100,
+        "Weapons": [
+          true,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "Kills": 0,
+        "Generation": 2,
+        "Episode": 2
+      },
+      {
+        "State": "Level",
+        "Keys": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "Ammo": [
+          50,
+          0,
+          0,
+          0
+        ],
+        "Map": 1,
+        "Armor": 0,
+        "DidSecret": false,
+        "Tic": 70,
+        "Health": 100,
+        "Weapons": [
+          true,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "Kills": 0,
+        "Generation": 3,
+        "Episode": 1
+      },
+      {
+        "State": "Level",
+        "Keys": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "Ammo": [
+          50,
+          0,
+          0,
+          0
+        ],
+        "Map": 1,
+        "Armor": 0,
+        "DidSecret": false,
+        "Tic": 77,
+        "Health": 100,
+        "Weapons": [
+          true,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "Kills": 0,
+        "Generation": 4,
+        "Episode": 1
+      }
+    ],
+    "SaveOperations": [
+      {
+        "Action": "SaveGame",
+        "Tic": 35,
+        "Milliseconds": 2595.6777,
+        "Request": {
+          "ExpectedHash": null,
+          "Slot": 1,
+          "Action": "SaveGame"
+        },
+        "Success": true,
+        "Result": {
+          "Milliseconds": 2001.6892,
+          "Bytes": 395674,
+          "Path": "C:\\projects\\pwshDoom\\local\\save-worker-039487b87d17490f91cbf22b4941c75e\\6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F\\slot-01.pds",
+          "Nodes": 1845,
+          "Sha256": "F58D1479609998A4FFE1E85723C6F2D79E85494B3EE34A23A90EBCDFCFF5D1D8",
+          "Backup": null
+        },
+        "Error": null
+      },
+      {
+        "Action": "LoadGame",
+        "Tic": 70,
+        "Milliseconds": 132.045,
+        "Request": {
+          "ExpectedHash": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+          "Slot": 1,
+          "Action": "LoadGame",
+          "AllowSourceMismatch": false
+        },
+        "Success": false,
+        "Result": null,
+        "Error": "Save changed after selection.\nat <ScriptBlock>, C:\\projects\\pwshDoom\\scripts\\Invoke-SimulationWorker.ps1: line 128"
+      },
+      {
+        "Action": "SaveGame",
+        "Tic": 70,
+        "Milliseconds": 1599.7847,
+        "Request": {
+          "ExpectedHash": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+          "Slot": 1,
+          "Action": "SaveGame"
+        },
+        "Success": false,
+        "Result": null,
+        "Error": "Save changed after overwrite confirmation.\nat Write-DoomSaveState, C:\\projects\\pwshDoom\\src\\SaveState.ps1: line 231\r\nat <ScriptBlock>, C:\\projects\\pwshDoom\\scripts\\Invoke-SimulationWorker.ps1: line 117"
+      },
+      {
+        "Action": "LoadGame",
+        "Tic": 70,
+        "Milliseconds": 2533.2134,
+        "Request": {
+          "ExpectedHash": "F58D1479609998A4FFE1E85723C6F2D79E85494B3EE34A23A90EBCDFCFF5D1D8",
+          "Slot": 1,
+          "Action": "LoadGame",
+          "AllowSourceMismatch": false
+        },
+        "Success": true,
+        "Result": {
+          "Map": 1,
+          "Episode": 1,
+          "GameTic": 177,
+          "SourceMatches": true,
+          "Sha256": "F58D1479609998A4FFE1E85723C6F2D79E85494B3EE34A23A90EBCDFCFF5D1D8"
+        },
+        "Error": null
+      },
+      {
+        "Action": "SaveGame",
+        "Tic": 77,
+        "Milliseconds": 1530.5031,
+        "Request": {
+          "ExpectedHash": "F58D1479609998A4FFE1E85723C6F2D79E85494B3EE34A23A90EBCDFCFF5D1D8",
+          "Slot": 1,
+          "Action": "SaveGame"
+        },
+        "Success": true,
+        "Result": {
+          "Milliseconds": 1522.7162,
+          "Bytes": 395720,
+          "Path": "C:\\projects\\pwshDoom\\local\\save-worker-039487b87d17490f91cbf22b4941c75e\\6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F\\slot-01.pds",
+          "Nodes": 1845,
+          "Sha256": "14067DCB51C0F27486014B1D27403061B9667950F094880D7A59CBAA2D1E981C",
+          "Backup": "C:\\projects\\pwshDoom\\local\\save-worker-039487b87d17490f91cbf22b4941c75e\\6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F\\slot-01.pds.566f2c18f24f48e78afcfc778ed0c467.bak"
+        },
+        "Error": null
+      },
+      {
+        "Action": "LoadGame",
+        "Tic": 77,
+        "Milliseconds": 2382.5261,
+        "Request": {
+          "SaveHash": "F58D1479609998A4FFE1E85723C6F2D79E85494B3EE34A23A90EBCDFCFF5D1D8",
+          "Action": "LoadGame"
+        },
+        "Success": true,
+        "Result": {
+          "Map": 1,
+          "Episode": 1,
+          "GameTic": 177,
+          "SourceMatches": true,
+          "Sha256": "F58D1479609998A4FFE1E85723C6F2D79E85494B3EE34A23A90EBCDFCFF5D1D8"
+        },
+        "Error": null
+      }
+    ],
+    "MenuRevision": 15,
+    "FinalGeneration": 4,
+    "Health": 100,
+    "FinishedUtc": "2026-09-11T15:28:58.0568468Z",
+    "TickLatenessSamplesMs": [],
+    "Tics": 77,
+    "SimulationMs": {
+      "Count": 77,
+      "Mean": 5.868606493506492,
+      "Median": 3.7973,
+      "P95": 14.3941,
+      "Max": 16.3352
+    },
+    "SessionScreenSamplesMs": [],
+    "MenuScreen": 0,
+    "Error": null,
+    "Map": 1,
+    "Outcome": "Stopped",
+    "WarmupTics": 140,
+    "Skill": 3,
+    "ReplayCheckpoints": [
+      {
+        "Sha256": "20931EDD7A9ABBC3B8E753795EB527C6F4E9C2D68F2D62E8A1EC3E20B84BF943",
+        "State": {
+          "Schema": 1,
+          "Tic": 0,
+          "State": "Level",
+          "Episode": 1,
+          "Map": 1,
+          "LevelTime": 1,
+          "RandomIndex": 144,
+          "Paused": false,
+          "PlayerState": "Live",
+          "Health": 100,
+          "Armor": 0,
+          "Position": [
+            69206016,
+            -236978176,
+            0,
+            1073741824
+          ],
+          "Ammo": [
+            50,
+            0,
+            0,
+            0
+          ],
+          "Weapons": [
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "Keys": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "DidSecret": false,
+          "RenderSnapshotSha256": "ED2A27F9B114FD60CB6F057F423C6AE068ED39F4207999CC8134DA6C95A35566",
+          "Intermission": null,
+          "Finale": null
+        },
+        "Tic": 0
+      },
+      {
+        "Sha256": "5C1AE4F1463F1CFF753EA6AFF76354076163B5B9943ADCA03BFA82E4A2BCA02C",
+        "State": {
+          "Schema": 1,
+          "Tic": 70,
+          "State": "Level",
+          "Episode": 1,
+          "Map": 1,
+          "LevelTime": 36,
+          "RandomIndex": 144,
+          "Paused": false,
+          "PlayerState": "Live",
+          "Health": 100,
+          "Armor": 0,
+          "Position": [
+            69200415,
+            -222974830,
+            0,
+            1073741824
+          ],
+          "Ammo": [
+            50,
+            0,
+            0,
+            0
+          ],
+          "Weapons": [
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "Keys": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "DidSecret": false,
+          "RenderSnapshotSha256": "DAA91EE66F4BF1B3867938AD499FEAE5C32709C1D660AFCFDA409FD8E5C78ACC",
+          "Intermission": null,
+          "Finale": null
+        },
+        "Tic": 70
+      },
+      {
+        "Sha256": "D96C67D3DED90680C87DEFC9610D3324C8000A171194348C61789758FAC92E24",
+        "State": {
+          "Schema": 1,
+          "Tic": 77,
+          "State": "Level",
+          "Episode": 1,
+          "Map": 1,
+          "LevelTime": 36,
+          "RandomIndex": 144,
+          "Paused": false,
+          "PlayerState": "Live",
+          "Health": 100,
+          "Armor": 0,
+          "Position": [
+            69200415,
+            -222974830,
+            0,
+            1073741824
+          ],
+          "Ammo": [
+            50,
+            0,
+            0,
+            0
+          ],
+          "Weapons": [
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "Keys": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "DidSecret": false,
+          "RenderSnapshotSha256": "DAA91EE66F4BF1B3867938AD499FEAE5C32709C1D660AFCFDA409FD8E5C78ACC",
+          "Intermission": null,
+          "Finale": null
+        },
+        "Tic": 77
+      }
+    ],
+    "SimulationSamplesMs": [
+      4.804,
+      13.8238,
+      2.0965,
+      3.7973,
+      2.0362,
+      1.9096,
+      2.0893,
+      9.8255,
+      2.0318,
+      5.0352,
+      3.4948,
+      9.6069,
+      2.0575,
+      4.5868,
+      1.9992,
+      3.8994,
+      10.5054,
+      8.3406,
+      2.1339,
+      5.8687,
+      3.0906,
+      14.4808,
+      3.0603,
+      2.6573,
+      2.6073,
+      2.8113,
+      13.8525,
+      12.283,
+      2.9642,
+      7.7285,
+      3.8963,
+      14.3941,
+      2.1266,
+      2.0928,
+      2.0465,
+      4.4683,
+      11.1393,
+      9.863,
+      2.1876,
+      5.4893,
+      2.0552,
+      9.8028,
+      2.5707,
+      1.8288,
+      1.7659,
+      1.8152,
+      9.8056,
+      10.0115,
+      1.9718,
+      6.44,
+      2.1245,
+      12.2251,
+      2.1204,
+      2.6605,
+      2.0242,
+      2.0776,
+      10.1269,
+      12.174,
+      2.1141,
+      7.4084,
+      2.6508,
+      16.3352,
+      2.4279,
+      2.4628,
+      2.6663,
+      2.4002,
+      12.7745,
+      15.6261,
+      2.5604,
+      8.279,
+      5.0279,
+      11.7449,
+      12.2558,
+      3.8074,
+      8.4938,
+      3.7905,
+      12.274
+    ],
+    "ControlEvents": [
+      {
+        "Map": 1,
+        "Episode": 2,
+        "Action": "NewGame",
+        "Skill": 3,
+        "Tic": 70
+      },
+      {
+        "Action": "LoadGame",
+        "SaveHash": "F58D1479609998A4FFE1E85723C6F2D79E85494B3EE34A23A90EBCDFCFF5D1D8",
+        "Tic": 70
+      },
+      {
+        "Action": "LoadGame",
+        "SaveHash": "F58D1479609998A4FFE1E85723C6F2D79E85494B3EE34A23A90EBCDFCFF5D1D8",
+        "Tic": 77
+      }
+    ],
+    "SaveDirectory": "C:\\projects\\pwshDoom\\local\\save-worker-039487b87d17490f91cbf22b4941c75e\\6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+    "InputCommands": [
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "TickLatenessMs": null,
+    "SnapshotPublishMs": {
+      "Count": 80,
+      "Mean": 4.466804999999999,
+      "Median": 4.1597,
+      "P95": 5.7733,
+      "Max": 7.7719
+    },
+    "SnapshotSamplesMs": [
+      4.7425,
+      4.2082,
+      4.138,
+      4.1598,
+      4.1016,
+      4.1113,
+      4.0813,
+      4.1715,
+      4.092,
+      4.7942,
+      4.1071,
+      4.5714,
+      4.1596,
+      4.8976,
+      4.151,
+      4.4541,
+      4.5601,
+      4.3261,
+      5.4401,
+      4.2025,
+      4.1553,
+      5.3868,
+      7.7719,
+      5.6333,
+      5.7406,
+      5.6828,
+      5.7733,
+      6.5116,
+      5.6876,
+      7.4967,
+      5.494,
+      4.2698,
+      3.943,
+      3.8047,
+      5.2424,
+      3.7688,
+      3.7448,
+      4.6482,
+      3.666,
+      3.8271,
+      4.579,
+      3.7256,
+      3.678,
+      3.639,
+      3.6701,
+      3.6997,
+      3.6953,
+      3.7336,
+      3.6118,
+      3.7572,
+      3.7016,
+      3.771,
+      3.6508,
+      3.7477,
+      3.6494,
+      3.6513,
+      3.716,
+      3.8628,
+      3.6787,
+      5.0775,
+      5.0447,
+      5.0393,
+      4.8642,
+      6.2086,
+      4.8833,
+      4.8096,
+      4.971,
+      5.0037,
+      4.9346,
+      5.1309,
+      4.6209,
+      3.6881,
+      3.8064,
+      3.7974,
+      3.7987,
+      3.6914,
+      3.8181,
+      3.7179,
+      4.8228,
+      4.678
+    ],
+    "StopAtLevelEnd": false
+  },
+  "Actions": [
+    {
+      "Action": {
+        "ExpectedHash": null,
+        "Slot": 1,
+        "Action": "SaveGame"
+      },
+      "Generations": [],
+      "Milliseconds": 2623.6231,
+      "Response": {
+        "ReturnScreen": 1,
+        "Success": true,
+        "Screen": 0,
+        "Choice": 0,
+        "Episode": 1,
+        "MessageTitle": "",
+        "Skill": 3,
+        "MessageDetail": "",
+        "Action": "SaveGame"
+      }
+    },
+    {
+      "Action": {
+        "ExpectedHash": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "Slot": 1,
+        "Action": "LoadGame",
+        "AllowSourceMismatch": false
+      },
+      "Generations": [],
+      "Milliseconds": 145.5432,
+      "Response": {
+        "ReturnScreen": 9,
+        "Success": false,
+        "Error": "Save changed after selection.\nat <ScriptBlock>, C:\\projects\\pwshDoom\\scripts\\Invoke-SimulationWorker.ps1: line 128",
+        "Screen": 12,
+        "Choice": 0,
+        "Episode": 1,
+        "MessageTitle": "LOAD FAILED",
+        "Skill": 3,
+        "MessageDetail": "SELECT SLOT AGAIN",
+        "Action": "LoadGame"
+      }
+    },
+    {
+      "Action": {
+        "Screen": 0,
+        "Choice": 0,
+        "Action": "ShowMenu",
+        "Episode": 1,
+        "Skill": 3
+      },
+      "Generations": [],
+      "Milliseconds": 14.2252,
+      "Response": {
+        "ReturnScreen": 1,
+        "Success": true,
+        "Screen": 0,
+        "Choice": 0,
+        "Episode": 1,
+        "MessageTitle": "",
+        "Skill": 3,
+        "MessageDetail": "",
+        "Action": "ShowMenu"
+      }
+    },
+    {
+      "Action": {
+        "ExpectedHash": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "Slot": 1,
+        "Action": "SaveGame"
+      },
+      "Generations": [],
+      "Milliseconds": 1606.1472,
+      "Response": {
+        "ReturnScreen": 8,
+        "Success": false,
+        "Error": "Save changed after overwrite confirmation.\nat Write-DoomSaveState, C:\\projects\\pwshDoom\\src\\SaveState.ps1: line 231\r\nat <ScriptBlock>, C:\\projects\\pwshDoom\\scripts\\Invoke-SimulationWorker.ps1: line 117",
+        "Screen": 12,
+        "Choice": 0,
+        "Episode": 1,
+        "MessageTitle": "SAVE FAILED",
+        "Skill": 3,
+        "MessageDetail": "SELECT SLOT AGAIN",
+        "Action": "SaveGame"
+      }
+    },
+    {
+      "Action": {
+        "Screen": 0,
+        "Choice": 0,
+        "Action": "ShowMenu",
+        "Episode": 1,
+        "Skill": 3
+      },
+      "Generations": [],
+      "Milliseconds": 15.7919,
+      "Response": {
+        "ReturnScreen": 1,
+        "Success": true,
+        "Screen": 0,
+        "Choice": 0,
+        "Episode": 1,
+        "MessageTitle": "",
+        "Skill": 3,
+        "MessageDetail": "",
+        "Action": "ShowMenu"
+      }
+    },
+    {
+      "Action": {
+        "Episode": 2,
+        "Action": "NewGame",
+        "Skill": 3,
+        "Map": 1
+      },
+      "Generations": [
+        {
+          "Generation": 2,
+          "Episode": 2,
+          "Map": 1,
+          "AssetSha256": "EBB191AE210303A9980CB475B85FD9C26C718CE287916DA9268AE0954FCF1015"
+        }
+      ],
+      "Milliseconds": 1170.236,
+      "Response": {
+        "ReturnScreen": 1,
+        "Success": true,
+        "Screen": 0,
+        "Choice": 0,
+        "Episode": 2,
+        "MessageTitle": "",
+        "Skill": 3,
+        "MessageDetail": "",
+        "Action": "NewGame"
+      }
+    },
+    {
+      "Action": {
+        "ExpectedHash": "F58D1479609998A4FFE1E85723C6F2D79E85494B3EE34A23A90EBCDFCFF5D1D8",
+        "Slot": 1,
+        "Action": "LoadGame",
+        "AllowSourceMismatch": false
+      },
+      "Generations": [
+        {
+          "Generation": 3,
+          "Episode": 1,
+          "Map": 1,
+          "AssetSha256": "C4520C7E38983206022AA08E31B22E329D69E9BB0857600E8684AC4FDC8532B5"
+        }
+      ],
+      "Milliseconds": 2544.7268,
+      "Response": {
+        "ReturnScreen": 1,
+        "Success": true,
+        "Screen": 0,
+        "Choice": 0,
+        "Episode": 1,
+        "MessageTitle": "",
+        "Skill": 3,
+        "MessageDetail": "",
+        "Action": "LoadGame"
+      }
+    },
+    {
+      "Action": {
+        "ExpectedHash": "F58D1479609998A4FFE1E85723C6F2D79E85494B3EE34A23A90EBCDFCFF5D1D8",
+        "Slot": 1,
+        "Action": "SaveGame"
+      },
+      "Generations": [],
+      "Milliseconds": 1533.3089,
+      "Response": {
+        "ReturnScreen": 1,
+        "Success": true,
+        "Screen": 0,
+        "Choice": 0,
+        "Episode": 1,
+        "MessageTitle": "",
+        "Skill": 3,
+        "MessageDetail": "",
+        "Action": "SaveGame"
+      }
+    },
+    {
+      "Action": {
+        "SaveHash": "F58D1479609998A4FFE1E85723C6F2D79E85494B3EE34A23A90EBCDFCFF5D1D8",
+        "Action": "LoadGame"
+      },
+      "Generations": [
+        {
+          "Generation": 4,
+          "Episode": 1,
+          "Map": 1,
+          "AssetSha256": "C4520C7E38983206022AA08E31B22E329D69E9BB0857600E8684AC4FDC8532B5"
+        }
+      ],
+      "Milliseconds": 2399.6862,
+      "Response": {
+        "ReturnScreen": 1,
+        "Success": true,
+        "Screen": 0,
+        "Choice": 0,
+        "Episode": 1,
+        "MessageTitle": "",
+        "Skill": 3,
+        "MessageDetail": "",
+        "Action": "LoadGame"
+      }
+    }
+  ]
+}

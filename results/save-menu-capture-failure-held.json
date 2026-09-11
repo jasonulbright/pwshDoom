@@ -1,0 +1,127 @@
+{
+  "Capture": {
+    "VideoFps": 60,
+    "ReplaySha256": "DF62BD8CA80098BCEDC7C6803FBE13D041F57B02DDB788B278491492147BD296",
+    "CaptureLimit": 120,
+    "WindowHandle": 3737406,
+    "Style": "AnsiArt",
+    "GameReport": "C:\\projects\\pwshDoom\\local\\recordings\\save-menu-ansiart-held-full-game.json",
+    "FinishedUtc": "2026-09-11T15:11:10.0534424Z",
+    "VideoSha256": "B1C609BFD032773E786CFC5E32E6AB7643C32CA770CFC3A59DE99ACF7B5C26EA",
+    "SaveRoot": "./local/save-demo-ansiart-held",
+    "Arguments": [
+      "-hide_banner",
+      "-n",
+      "-filter_complex",
+      "gfxcapture=hwnd=3737406:max_framerate=120:capture_cursor=0:display_border=1:width=-2:height=-2",
+      "-an",
+      "-c:v",
+      "h264_nvenc",
+      "-preset",
+      "p4",
+      "-cq",
+      "18",
+      "-b:v",
+      "0",
+      "-r",
+      "60",
+      "-fps_mode",
+      "cfr",
+      "-movflags",
+      "+faststart",
+      "-t",
+      "75",
+      "C:\\projects\\pwshDoom\\local\\recordings\\save-menu-ansiart-held-full.mp4"
+    ],
+    "SessionScheduleSha256": "64223E706A28A457877BAB5C9C3A65835DCA19C8BED9B9F6CE424DE592F3EE6A",
+    "TerminalPid": 27276,
+    "EncoderExitCode": -1073741819,
+    "Ffmpeg": "C:\\projects\\pwshDoom\\local\\tools\\ffmpeg\\ffmpeg-9.0.1-essentials_build\\bin\\ffmpeg.exe",
+    "Maximized": true,
+    "Meaning": "Actual game-window Windows.Graphics.Capture at the recorded capture ceiling, with D3D11 frames passed to external NVENC H.264 encoding. The ceiling exceeds 60 to avoid capture-rate aliasing; actual arrival rate is compositor-driven. Output is resampled to 60 FPS and can contain duplicates. Video includes startup and a short console return. Recording can affect game/presentation timing; encoded 60 FPS does not prove 60 distinct displayed game images. No microphone, desktop audio, or other windows are captured.",
+    "FfmpegSha256": "72A489ECCD008C2EC2C0A5856C5C75BC3D8BBFA90166C4566865C246445E6AA3",
+    "GlyphSet": "Katakana",
+    "ExpectedExit": "ConfirmedQuit",
+    "FontSize": 12,
+    "Error": "FFmpeg exited with code -1073741819.",
+    "QpcFrequency": 10000000,
+    "CaptureStartQpc": 118414830224,
+    "InputReplaySha256": "0E21C310E3BD16482A815D877CA4AEB82ED1271BAFA47BC77E9774F6E5E0F6A0",
+    "ExitDelaySeconds": 15,
+    "Video": "C:\\projects\\pwshDoom\\local\\recordings\\save-menu-ansiart-held-full.mp4",
+    "FontFace": "MS Gothic"
+  },
+  "Operations": [
+    {
+      "Error": null,
+      "Result": {
+        "Backup": null,
+        "Path": "C:\\projects\\pwshDoom\\local\\save-demo-ansiart-held\\6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F\\slot-01.pds",
+        "Nodes": 1845,
+        "Milliseconds": 1767.4745,
+        "Sha256": "136DB213EF1BF40C0E5D9AA1C112CCDC56AAE8015C38E52687E72501D01F6603",
+        "Bytes": 395878
+      },
+      "Tic": 104,
+      "Milliseconds": 1785.059,
+      "Success": true,
+      "Action": "SaveGame",
+      "Request": {
+        "Slot": 1,
+        "ExpectedHash": null,
+        "Action": "SaveGame"
+      }
+    },
+    {
+      "Error": null,
+      "Result": {
+        "Map": 1,
+        "Sha256": "136DB213EF1BF40C0E5D9AA1C112CCDC56AAE8015C38E52687E72501D01F6603",
+        "GameTic": 246,
+        "Episode": 1,
+        "SourceMatches": true
+      },
+      "Tic": 224,
+      "Milliseconds": 2165.2031,
+      "Success": true,
+      "Action": "LoadGame",
+      "Request": {
+        "AllowSourceMismatch": false,
+        "Slot": 1,
+        "ExpectedHash": "136DB213EF1BF40C0E5D9AA1C112CCDC56AAE8015C38E52687E72501D01F6603",
+        "Action": "LoadGame"
+      }
+    },
+    {
+      "Error": null,
+      "Result": {
+        "Backup": "C:\\projects\\pwshDoom\\local\\save-demo-ansiart-held\\6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F\\slot-01.pds.aa0f6a453f6a4fadaf024184cdaaf12f.bak",
+        "Path": "C:\\projects\\pwshDoom\\local\\save-demo-ansiart-held\\6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F\\slot-01.pds",
+        "Nodes": 1845,
+        "Milliseconds": 1278.035,
+        "Sha256": "81AE16CCA8E10C2CD8CBA11C387EC256649902B3E84CB5674374164C5B6A3389",
+        "Bytes": 396122
+      },
+      "Tic": 379,
+      "Milliseconds": 1286.3593,
+      "Success": true,
+      "Action": "SaveGame",
+      "Request": {
+        "AllowSourceMismatch": false,
+        "Slot": 1,
+        "ExpectedHash": "136DB213EF1BF40C0E5D9AA1C112CCDC56AAE8015C38E52687E72501D01F6603",
+        "Action": "SaveGame"
+      }
+    }
+  ],
+  "Meaning": "AnsiArt still failed during Graphics Capture shutdown with a 15-second target exit delay. A successful Matrix run with that delay does not establish a reliable workaround.",
+  "Events": [
+    {
+      "TimeCreated": "2026-09-11T11:11:07.7946531-04:00",
+      "Id": 1000,
+      "Message": "Faulting application name: ffmpeg.exe, version: 0.0.0.0, time stamp: 0x6a7c196d\r\nFaulting module name: graphicscapture.dll_unloaded, version: 10.0.26100.9278, time stamp: 0x6d822985\r\nException code: 0xc0000005\r\nFault offset: 0x000000000001115c\r\nFaulting process id: 0x582C\r\nFaulting application start time: 0x1DD41FFA1BF953E\r\nFaulting application path: C:\\projects\\pwshDoom\\local\\tools\\ffmpeg\\ffmpeg-9.0.1-essentials_build\\bin\\ffmpeg.exe\r\nFaulting module path: graphicscapture.dll\r\nReport Id: 56b1db0c-692b-4aa3-ad8a-58add2ba47d0\r\nFaulting package full name: \r\nFaulting package-relative application ID: "
+    }
+  ],
+  "GameExit": "ConfirmedQuit",
+  "GameError": null
+}

@@ -41,7 +41,7 @@ try{
     function Test-ExplicitBinding {param([int]$Skill=2) Set-DoomReplaySettings $data $PSBoundParameters $Skill}
     $null=Test-ExplicitBinding -Skill 2;$checks.Add(@{Name='Actual PSBoundParameters accepted';Passed=$true})
     foreach($case in @(
-        @('Unknown version',{param($d)$d.Version=3}),@('String version',{param($d)$d.Version='1'}),@('Wrong format',{param($d)$d.Format='other'}),
+        @('Unknown version',{param($d)$d.Version=4}),@('String version',{param($d)$d.Version='1'}),@('Wrong format',{param($d)$d.Format='other'}),
         @('Missing starting skill',{param($d)$d.PSObject.Properties.Remove('Skill')}),@('Boolean skill',{param($d)$d.Skill=$true}),@('Map outside bounds',{param($d)$d.Map=33}),
         @('Nonboolean continuation',{param($d)$d.ContinueCampaign='false'}),@('Missing continuation',{param($d)$d.PSObject.Properties.Remove('ContinueCampaign')}),
         @('Invalid WAD hash',{param($d)$d.WadSha256='no'}),@('Invalid source fingerprint',{param($d)$d|Add-Member SourceFingerprint 'bad'}),@('Null commands',{param($d)$d.InputCommands=$null}),@('Scalar command',{param($d)$d.InputCommands=@(1)}),
@@ -61,6 +61,13 @@ try{
     $loaded=Read-DoomInputReplay $v2Path
     if($loaded.ControlEvents.Count -ne 1 -or $loaded.ControlEvents[0].Episode -ne 2){throw 'New-game control round trip failed.'}
     $checks.Add(@{Name='Version 2 new-game action round trip';Passed=$true})
+    $v3=New-Fixture;$v3.Version=3;$v3|Add-Member ControlEvents @(@{Tic=1;Action='LoadGame';SaveHash=('D'*64);Slot=6;Path='untrusted.pds'})
+    $v3Path=Join-Path $directory 'version3.json';$null=Write-DoomInputReplay $v3Path $v3;$loaded=Read-DoomInputReplay $v3Path
+    if($loaded.ControlEvents[0].SaveHash -ne ('D'*64) -or $null -ne $loaded.ControlEvents[0].PSObject.Properties['Slot'] -or $null -ne $loaded.ControlEvents[0].PSObject.Properties['Path']){throw 'Replay load did not normalize its exact save reference.'}
+    $checks.Add(@{Name='Version 3 hash-only load round trip discards slot/path fields';Passed=$true})
+    Assert-Rejected 'Version 2 cannot restore saves' {param($d)$d.Version=2;$d|Add-Member ControlEvents @(@{Tic=1;Action='LoadGame';SaveHash=('D'*64)})}
+    Assert-Rejected 'Replay save hash rejects path traversal' {param($d)$d.Version=3;$d|Add-Member ControlEvents @(@{Tic=1;Action='LoadGame';SaveHash='../slot-01.pds'})}
+    Assert-Rejected 'Replay cannot write saves' {param($d)$d.Version=3;$d|Add-Member ControlEvents @(@{Tic=1;Action='SaveGame';SaveHash=('D'*64)})}
     Assert-Rejected 'Version 1 cannot smuggle control actions' {param($d)$d|Add-Member ControlEvents @(@{Tic=1;Action='NewGame';Skill=3;Episode=2;Map=1})}
     Assert-Rejected 'Version 2 requires control array' {param($d)$d.Version=2}
     Assert-Rejected 'Unknown control action rejected' {param($d)$d.Version=2;$d|Add-Member ControlEvents @(@{Tic=1;Action='Execute';Skill=3;Episode=2;Map=1})}

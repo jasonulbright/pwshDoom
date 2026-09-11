@@ -1,0 +1,69 @@
+{
+  "GameError": null,
+  "Meaning": "Second Matrix recorder teardown failure at the lower 120 ceiling. This experiment did not establish a capture-rate fix; game operations all succeeded. A separate longer target-window lifetime experiment follows.",
+  "Events": [
+    {
+      "TimeCreated": "2026-09-11T11:05:59.9043841-04:00",
+      "Id": 1000,
+      "Message": "Faulting application name: ffmpeg.exe, version: 0.0.0.0, time stamp: 0x6a7c196d\r\nFaulting module name: graphicscapture.dll_unloaded, version: 10.0.26100.9278, time stamp: 0x6d822985\r\nException code: 0xc0000005\r\nFault offset: 0x000000000001115c\r\nFaulting process id: 0x6F68\r\nFaulting application start time: 0x1DD41FEEA85A97A\r\nFaulting application path: C:\\projects\\pwshDoom\\local\\tools\\ffmpeg\\ffmpeg-9.0.1-essentials_build\\bin\\ffmpeg.exe\r\nFaulting module path: graphicscapture.dll\r\nReport Id: 17f3bb64-2500-48bf-af02-40d289039d80\r\nFaulting package full name: \r\nFaulting package-relative application ID: "
+    },
+    {
+      "TimeCreated": "2026-09-11T11:01:24.6132162-04:00",
+      "Id": 1000,
+      "Message": "Faulting application name: ffmpeg.exe, version: 0.0.0.0, time stamp: 0x6a7c196d\r\nFaulting module name: graphicscapture.dll_unloaded, version: 10.0.26100.9278, time stamp: 0x6d822985\r\nException code: 0xc0000005\r\nFault offset: 0x000000000001115c\r\nFaulting process id: 0x58C8\r\nFaulting application start time: 0x1DD41FE470B686D\r\nFaulting application path: C:\\projects\\pwshDoom\\local\\tools\\ffmpeg\\ffmpeg-9.0.1-essentials_build\\bin\\ffmpeg.exe\r\nFaulting module path: graphicscapture.dll\r\nReport Id: 60fcfc12-68f9-4783-8bd9-ac87c20e6345\r\nFaulting package full name: \r\nFaulting package-relative application ID: "
+    }
+  ],
+  "GameExit": "ConfirmedQuit",
+  "Capture": {
+    "GlyphSet": "Katakana",
+    "SessionScheduleSha256": "64223E706A28A457877BAB5C9C3A65835DCA19C8BED9B9F6CE424DE592F3EE6A",
+    "Error": null,
+    "CaptureLimit": 120,
+    "Ffmpeg": "C:\\projects\\pwshDoom\\local\\tools\\ffmpeg\\ffmpeg-9.0.1-essentials_build\\bin\\ffmpeg.exe",
+    "Meaning": "Actual game-window Windows.Graphics.Capture at the recorded capture ceiling, with D3D11 frames passed to external NVENC H.264 encoding. The ceiling exceeds 60 to avoid capture-rate aliasing; actual arrival rate is compositor-driven. Output is resampled to 60 FPS and can contain duplicates. Video includes startup and a short console return. Recording can affect game/presentation timing; encoded 60 FPS does not prove 60 distinct displayed game images. No microphone, desktop audio, or other windows are captured.",
+    "FinishedUtc": "2026-09-11T15:06:01.8980521Z",
+    "VideoSha256": "214BC2DFEC6C6F631580B720534CE6A8F7626AFD1BD6A6355CC8D2A94919C7B4",
+    "Video": "C:\\projects\\pwshDoom\\local\\recordings\\save-menu-matrix-120-full.mp4",
+    "InputReplaySha256": "CE1D2982298A46B75069F3FE63F89FB103CE298360F6850D641B9151CC0A9ECD",
+    "QpcFrequency": 10000000,
+    "ExpectedExit": "ConfirmedQuit",
+    "FontFace": "MS Gothic",
+    "WindowHandle": 11077562,
+    "TerminalPid": 21516,
+    "FfmpegSha256": "72A489ECCD008C2EC2C0A5856C5C75BC3D8BBFA90166C4566865C246445E6AA3",
+    "Style": "Matrix",
+    "Maximized": true,
+    "VideoFps": 60,
+    "ReplaySha256": "DF62BD8CA80098BCEDC7C6803FBE13D041F57B02DDB788B278491492147BD296",
+    "EncoderExitCode": -1073741819,
+    "Arguments": [
+      "-hide_banner",
+      "-n",
+      "-filter_complex",
+      "gfxcapture=hwnd=11077562:max_framerate=120:capture_cursor=0:display_border=1:width=-2:height=-2",
+      "-an",
+      "-c:v",
+      "h264_nvenc",
+      "-preset",
+      "p4",
+      "-cq",
+      "18",
+      "-b:v",
+      "0",
+      "-r",
+      "60",
+      "-fps_mode",
+      "cfr",
+      "-movflags",
+      "+faststart",
+      "-t",
+      "75",
+      "C:\\projects\\pwshDoom\\local\\recordings\\save-menu-matrix-120-full.mp4"
+    ],
+    "FontSize": 12,
+    "GameReport": "C:\\projects\\pwshDoom\\local\\recordings\\save-menu-matrix-120-full-game.json",
+    "SaveRoot": "./local/save-demo-matrix-120",
+    "CaptureStartQpc": 115340798701
+  },
+  "FinishedUtc": "2026-09-11T15:09:53.4787315Z"
+}

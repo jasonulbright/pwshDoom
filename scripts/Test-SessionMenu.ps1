@@ -9,7 +9,7 @@ function Assert-Menu([string]$Name,[bool]$Condition){if(-not $Condition){throw $
 try{
     $m=New-DoomMenuState
     $null=Invoke-DoomMenuKey $m Escape;Assert-Menu 'Escape opens main' ($m.Screen -eq 1)
-    $null=Invoke-DoomMenuKey $m Up;Assert-Menu 'Choice wraps upwards' ($m.Choice -eq 3)
+    $null=Invoke-DoomMenuKey $m Up;Assert-Menu 'Choice wraps upwards' ($m.Choice -eq 5)
     $null=Invoke-DoomMenuKey $m Enter;Assert-Menu 'Quit defaults to no' ($m.Screen -eq 6 -and $m.Choice -eq 0)
     $a=Invoke-DoomMenuKey $m Enter;Assert-Menu 'Quit cancellation returns to menu' ($a.Action -eq 'ShowMenu' -and $m.Screen -eq 1)
     $null=Invoke-DoomMenuKey $m Enter;$a=Invoke-DoomMenuKey $m Yes;Assert-Menu 'Quit requires confirmation' ($a.Action -eq 'Quit')
@@ -50,11 +50,12 @@ try{
     }
     $bundle=& "$PSScriptRoot/Build-EngineBundle.ps1";. $bundle
     $content=[GameContent]::new(@('-iwad',$Wad));$graphics=New-DoomMenuGraphics $content
-    $directory="$PSScriptRoot/../local/menu-unit-frames";[void][IO.Directory]::CreateDirectory($directory)
-    for($screen=1;$screen -le 7;$screen++){
-        $count=switch($screen){1{4};2{4};3{5};4{2};6{2};default{1}}
+    $directory=Join-Path "$PSScriptRoot/../local" ('menu-unit-frames-'+[guid]::NewGuid().ToString('N'));[void][IO.Directory]::CreateDirectory($directory)
+    $details=New-DoomMenuState;$details.MessageTitle='SAVE FAILED';$details.MessageDetail='SELECT SLOT AGAIN';$details.Slots[0]=@{Slot=1;State='Ready';Episode=4;Map=9;Skill=5;Time='23:59';Sha256=('A'*64);SourceMatches=$false}
+    for($screen=1;$screen -le 13;$screen++){
+        $count=switch($screen){1{6};2{4};3{5};4{2};6{2};8{6};9{6};10{2};11{2};default{1}}
         for($choice=0;$choice -lt $count;$choice++){
-            $frame=Get-DoomMenuPixels $graphics $screen $choice 4 5 4
+            $frame=Get-DoomMenuPixels $graphics $screen $choice 4 5 4 -Details $details
             Assert-Menu "Menu $screen / choice $choice draws nonblank pixels" (@($frame|Where-Object {$_ -ne 0}).Count -gt 100)
             $path=Join-Path $directory "$screen-$choice.bin";[IO.File]::WriteAllBytes($path,$frame)
             $frames.Add(@{Screen=$screen;Choice=$choice;Sha256=(Get-FileHash $path).Hash})
@@ -62,7 +63,7 @@ try{
     }
     [IO.File]::WriteAllBytes((Join-Path $directory 'palette.bin'),$content.Palette.Data[0..767])
 }catch{$failure=$_.ToString();throw}finally{
-    @{FinishedUtc=[DateTime]::UtcNow.ToString('o');Error=$failure;Checks=$checks.ToArray();Frames=$frames.ToArray();WadSha256=(Get-FileHash $Wad).Hash;
+    @{FinishedUtc=[DateTime]::UtcNow.ToString('o');Error=$failure;Checks=$checks.ToArray();Frames=$frames.ToArray();FrameDirectory=$directory;WadSha256=(Get-FileHash $Wad).Hash;
         Sources=@('src/SessionMenu.ps1','src/CharacterCodec.ps1'|ForEach-Object {@{Path=$_;Sha256=(Get-FileHash (Join-Path "$PSScriptRoot/.." $_)).Hash}});
         Meaning='Menu navigation/confirmation and native WAD screen fixtures; independent stable-sort brightness reduction versus actual menu encoders at uneven partitions/origins. Screen draws are not a live keyboard test.'}|ConvertTo-Json -Depth 6|Set-Content $Output
     if($null -ne $content){$content.Dispose()}
