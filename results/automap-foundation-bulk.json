@@ -1,0 +1,24 @@
+{
+  "Cases": [],
+  "FrameDirectory": "C:\\projects\\pwshDoom\\scripts\\..\\local\\automap-foundation-9b181c1b199e4534a5129850bc7fda5d",
+  "Meaning": "Four fixed headings at each selected map spawn compare discovery flags against the inherited full 3D renderer, then render the automap/HUD. Discovery must leave framebuffer and renderer-related world counters untouched. Repeated stationary timings are preliminary operation costs, not live gameplay or display FPS. Reference buffer-limit parity and moving-world coverage are not implied.",
+  "HarnessSha256": "336A254F7EF883CF6899C4C63AF611AEB332CB6949AE2D7E0C23FD33C990A0A4",
+  "FinishedUtc": "2026-09-11T15:40:50.5447611Z",
+  "BundleSha256": "C262A2C217BA7976579494C538A7D255F53BE96AFFF45A25D9A7BB081DDC9C85",
+  "Checks": [
+    {
+      "Passed": true,
+      "Name": "E1M1 heading 0 matches reference mapped lines"
+    },
+    {
+      "Passed": true,
+      "Name": "E1M1 heading 0 changes no framebuffer pixels"
+    },
+    {
+      "Passed": true,
+      "Name": "E1M1 heading 0 leaves world/sector valid counters alone"
+    }
+  ],
+  "Error": "The property 'Heading' cannot be found on this object. Verify that the property exists.\nat <ScriptBlock>, C:\\projects\\pwshDoom\\scripts\\Test-AutomapFoundation.ps1: line 37\r\nat <ScriptBlock>, C:\\projects\\pwshDoom\\scripts\\Test-AutomapFoundation.ps1: line 37",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F"
+}

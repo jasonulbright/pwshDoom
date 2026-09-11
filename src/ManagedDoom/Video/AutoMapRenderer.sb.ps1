@@ -105,7 +105,11 @@ class AutoMapRenderer {
             #>
     }
     [void] Render([Player] $player) {
-        $this.screen.FillRect(0, 0, $this.amWidth, $this.amHeight, [AutoMapRenderer]::background)
+        # pwshDoom, 2026-09-11: clear only the map region in column-major
+        # storage with standard bulk operations, preserving the status bar.
+        for ($x = 0; $x -lt $this.amWidth; $x++) {
+            [Array]::Clear($this.screen.Data, $x * $this.screen.Height, $this.amHeight)
+        }
     
         $world = $player.Mobj.World
         $am = $world.AutoMap
@@ -125,15 +129,18 @@ class AutoMapRenderer {
         $this.renderViewX = [Math]::Round($this.zoom * $this.ppu * $this.actualViewX) / ($this.zoom * $this.ppu)
         $this.renderViewY = [Math]::Round($this.zoom * $this.ppu * $this.actualViewY) / ($this.zoom * $this.ppu)
     
+        $cheating = $am.State -ne [AutoMapState]::None
+        $allMap = $player.Powers[[int][PowerType]::AllMap] -gt 0
         $autoMapLinesEnumerable = $world.Map.Lines
         if ($null -ne $autoMapLinesEnumerable) {
             $autoMapLinesEnumerator = $autoMapLinesEnumerable.GetEnumerator()
             for (; $autoMapLinesEnumerator.MoveNext(); ) {
                 $line = $autoMapLinesEnumerator.Current
+                if (-not $cheating -and ($line.Flags -band [LineFlags]::Mapped) -eq 0 -and -not $allMap) {
+                    continue
+                }
                 $v1 = $this.ToScreenPos($line.Vertex1)
                 $v2 = $this.ToScreenPos($line.Vertex2)
-
-                $cheating = $am.State -ne [AutoMapState]::None
 
                 if ($cheating -or ($line.Flags -band [LineFlags]::Mapped) -ne 0) {
                     if (($line.Flags -band [LineFlags]::DontDraw) -ne 0 -and -not $cheating) {

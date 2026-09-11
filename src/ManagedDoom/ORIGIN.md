@@ -44,6 +44,15 @@ Modifications, 2026-09-10:
 
 Modifications, 2026-09-11:
 
+- `ThreeDRenderer`: added an experimental discovery-only BSP traversal that
+  marks visible lines without rasterizing pixels or processing sprites. It
+  uses simulation-endpoint camera values and horizontal solid-range clipping.
+  It is not yet connected to the playable host; reference buffer-limit parity
+  is unqualified. See `docs/automap.md` for the bounded comparisons.
+- `AutoMapRenderer`: clear the column-major map area with standard bulk array
+  operations and skip transforms of undiscovered lines when neither cheating
+  nor the all-map power exposes them. Sixteen baseline map/HUD images retain
+  identical hashes; the combined render remains too slow for integration.
 - `ThingAllocation.SpawnPlayer`: clear the previous damage attacker with the
   damage counter. Cross-map save qualification exposed an E1M1 actor retaining
   its old world after the player entered E1M2. This is an explicit lifecycle

@@ -21,6 +21,10 @@
 
 class ThreeDRenderer {
     static [int] $MaxScreenSize = 9
+    # pwshDoom, 2026-09-11: reuse BSP/angular clipping for automap discovery
+    # without rasterizing another 3D frame or touching sprite valid counts.
+    [bool] $DiscoveryOnly
+    [int] $DiscoveryRanges
 
     [ColorMap] $colorMap
     [ITextureLookup] $textures
@@ -721,6 +725,30 @@ class ThreeDRenderer {
     [long] $PerfThreeDVisWalls
     [long] $PerfThreeDVisSprites
 
+    [void] DiscoverMap([Player] $player) {
+        $this.world = $player.Mobj.World
+        $this.frameFrac = [Fixed]::One
+        $this.viewX = $player.Mobj.X
+        $this.viewY = $player.Mobj.Y
+        $this.viewZ = $player.ViewZ
+        $this.viewAngle = $player.Mobj.Angle
+        $this.viewXData = $this.viewX.Data
+        $this.viewYData = $this.viewY.Data
+        $this.viewZData = $this.viewZ.Data
+        $this.viewNegYData = [Fixed]::ToInt32Unchecked(-[long]$this.viewYData)
+        $this.viewAngleData = $this.viewAngle.Data
+        # Discovery uses horizontal solid ranges, not the vertical pixel clips.
+        $this.clipRanges[0].First = -0x7fffffff
+        $this.clipRanges[0].Last = [Math]::Max(0, $this.screen.FirstColumn - $this.windowX) - 1
+        $this.clipRanges[1].First = [Math]::Min($this.windowWidth, $this.screen.EndColumn - $this.windowX)
+        $this.clipRanges[1].Last = 0x7fffffff
+        $this.clipRangeCount = 2
+        $this.DiscoveryRanges = 0
+        $this.DiscoveryOnly = $true
+        try { $this.RenderBspNode($this.world.Map.Nodes.Length - 1) }
+        finally { $this.DiscoveryOnly = $false }
+    }
+
     [void] Render([Player] $player, [Fixed] $frameFrac) {
         $perfEnabled = $this.perfThreeDEnabled
         [long] $perfThreeDStart = 0
@@ -936,6 +964,12 @@ class ThreeDRenderer {
 
     [void] DrawSubsector([int] $subsector) {
         $target = $this.world.Map.Subsectors[$subsector]
+        if ($this.DiscoveryOnly) {
+            for ($i = 0; $i -lt $target.SegCount; $i++) {
+                $this.DrawSeg($this.world.Map.Segs[$target.FirstSeg + $i])
+            }
+            return
+        }
         if ($this.perfThreeDEnabled) {
             $this.debugSubsectorCount++
             $this.debugSegCount += $target.SegCount
@@ -1283,6 +1317,11 @@ class ThreeDRenderer {
         if ($x2 -lt $x1) {
             return
         }
+        if ($this.DiscoveryOnly) {
+            $seg.LineDef.Flags = $seg.LineDef.Flags -bor [LineFlags]::Mapped
+            $this.DiscoveryRanges++
+            return
+        }
 
         if ($null -ne $seg.BackSector) {
             $this.DrawPassWallRange($seg, $rwAngle1, $x1, $x2, $true)
@@ -1526,6 +1565,11 @@ class ThreeDRenderer {
 
     [void] DrawPassWallRange([Seg] $seg, [Angle] $rwAngle1, [int] $x1, [int] $x2, [bool] $drawAsSolidWall) {
         if ($x2 -lt $x1) {
+            return
+        }
+        if ($this.DiscoveryOnly) {
+            $seg.LineDef.Flags = $seg.LineDef.Flags -bor [LineFlags]::Mapped
+            $this.DiscoveryRanges++
             return
         }
 
