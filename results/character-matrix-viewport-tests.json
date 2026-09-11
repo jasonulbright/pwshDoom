@@ -1,0 +1,144 @@
+{
+  "Integration": {
+    "Result": "Pass",
+    "ViewportPausedSeconds": 1.8241255000000003,
+    "ActiveSeconds": 3.1831875,
+    "History": [
+      {
+        "WallMs": 0.3923,
+        "Fits": false,
+        "Left": 0,
+        "IssuedCommands": 0,
+        "ActiveMs": 7.5691,
+        "PublishedSimulationTics": 0,
+        "Top": 0,
+        "Columns": 159,
+        "Rows": 49
+      },
+      {
+        "WallMs": 856.7119,
+        "Fits": true,
+        "Left": 0,
+        "IssuedCommands": 0,
+        "ActiveMs": 7.5721,
+        "PublishedSimulationTics": 0,
+        "Top": 0,
+        "Columns": 160,
+        "Rows": 50
+      },
+      {
+        "WallMs": 1879.0678,
+        "Fits": true,
+        "Left": 70,
+        "IssuedCommands": 35,
+        "ActiveMs": 1028.4289,
+        "PublishedSimulationTics": 35,
+        "Top": 20,
+        "Columns": 300,
+        "Rows": 90
+      },
+      {
+        "WallMs": 2483.2425,
+        "Fits": false,
+        "Left": 0,
+        "IssuedCommands": 57,
+        "ActiveMs": 1632.5903,
+        "PublishedSimulationTics": 56,
+        "Top": 0,
+        "Columns": 160,
+        "Rows": 47
+      },
+      {
+        "WallMs": 3451.0484,
+        "Fits": true,
+        "Left": 0,
+        "IssuedCommands": 57,
+        "ActiveMs": 1632.5915,
+        "PublishedSimulationTics": 57,
+        "Top": 0,
+        "Columns": 160,
+        "Rows": 50
+      }
+    ],
+    "WallSeconds": 5.0018693,
+    "Pauses": 2
+  },
+  "Meaning": "Synthetic terminal-grid tests with real headless simulation/render workers. Undersized startup pauses, exact image dimensions resume, enlargement recenters, shrinking pauses, restoration resumes without catch-up. No physical desktop resize or 1080p-monitor observation is claimed.",
+  "FinishedUtc": "2026-09-11T01:46:12.6871420Z",
+  "LayoutChecks": [
+    {
+      "Left": 0,
+      "Fits": true,
+      "Top": 0,
+      "Rows": 100,
+      "Diagnostics": false,
+      "Columns": 320
+    },
+    {
+      "Left": 0,
+      "Fits": false,
+      "Top": 0,
+      "Rows": 100,
+      "Diagnostics": false,
+      "Columns": 319
+    },
+    {
+      "Left": 0,
+      "Fits": false,
+      "Top": 0,
+      "Rows": 99,
+      "Diagnostics": false,
+      "Columns": 320
+    },
+    {
+      "Left": 0,
+      "Fits": false,
+      "Top": 0,
+      "Rows": 98,
+      "Diagnostics": false,
+      "Columns": 589
+    },
+    {
+      "Left": 184,
+      "Fits": true,
+      "Top": 11,
+      "Rows": 123,
+      "Diagnostics": false,
+      "Columns": 688
+    },
+    {
+      "Left": 80,
+      "Fits": true,
+      "Top": 4,
+      "Rows": 108,
+      "Diagnostics": false,
+      "Columns": 480
+    },
+    {
+      "Left": 240,
+      "Fits": true,
+      "Top": 25,
+      "Rows": 150,
+      "Diagnostics": false,
+      "Columns": 800
+    },
+    {
+      "Left": 0,
+      "Fits": true,
+      "Top": 2,
+      "Rows": 102,
+      "Diagnostics": true,
+      "Columns": 320
+    },
+    {
+      "Left": 0,
+      "Fits": false,
+      "Top": 2,
+      "Rows": 100,
+      "Diagnostics": true,
+      "Columns": 320
+    }
+  ],
+  "Style": "Matrix",
+  "PauseMessageSizes": 3
+}

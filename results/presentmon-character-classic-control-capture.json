@@ -1,0 +1,192 @@
+{
+  "PresentMonDllSha256": "0859E22071180AB9074BD1F74B5D380E852DC155E21221D62E393F58F1614C65",
+  "QpcFrequency": 10000000,
+  "LaunchMaximized": true,
+  "Fields": [
+    {
+      "Size": 8,
+      "Offset": 0,
+      "Id": 1,
+      "Metric": "PM_METRIC_SWAP_CHAIN_ADDRESS",
+      "Type": 5,
+      "Name": "SwapChain",
+      "Unit": 0
+    },
+    {
+      "Size": 8,
+      "Offset": 8,
+      "Id": 7,
+      "Metric": "PM_METRIC_CPU_START_QPC",
+      "Type": 5,
+      "Name": "CpuStartQpc",
+      "Unit": 30
+    },
+    {
+      "Size": 8,
+      "Offset": 16,
+      "Id": 77,
+      "Metric": "PM_METRIC_PRESENT_START_QPC",
+      "Type": 5,
+      "Name": "PresentStartQpc",
+      "Unit": 30
+    },
+    {
+      "Size": 8,
+      "Offset": 24,
+      "Id": 8,
+      "Metric": "PM_METRIC_CPU_FRAME_TIME",
+      "Type": 0,
+      "Name": "CpuFrameMs",
+      "Unit": 6
+    },
+    {
+      "Size": 8,
+      "Offset": 32,
+      "Id": 9,
+      "Metric": "PM_METRIC_CPU_BUSY",
+      "Type": 0,
+      "Name": "CpuBusyMs",
+      "Unit": 6
+    },
+    {
+      "Size": 8,
+      "Offset": 40,
+      "Id": 10,
+      "Metric": "PM_METRIC_CPU_WAIT",
+      "Type": 0,
+      "Name": "CpuWaitMs",
+      "Unit": 6
+    },
+    {
+      "Size": 8,
+      "Offset": 48,
+      "Id": 13,
+      "Metric": "PM_METRIC_GPU_TIME",
+      "Type": 0,
+      "Name": "GpuTimeMs",
+      "Unit": 6
+    },
+    {
+      "Size": 8,
+      "Offset": 56,
+      "Id": 14,
+      "Metric": "PM_METRIC_GPU_BUSY",
+      "Type": 0,
+      "Name": "GpuBusyMs",
+      "Unit": 6
+    },
+    {
+      "Size": 1,
+      "Offset": 64,
+      "Id": 16,
+      "Metric": "PM_METRIC_DROPPED_FRAMES",
+      "Type": 6,
+      "Name": "Dropped",
+      "Unit": 0
+    },
+    {
+      "Size": 8,
+      "Offset": 72,
+      "Id": 17,
+      "Metric": "PM_METRIC_DISPLAYED_TIME",
+      "Type": 0,
+      "Name": "DisplayedMs",
+      "Unit": 6
+    },
+    {
+      "Size": 8,
+      "Offset": 80,
+      "Id": 78,
+      "Metric": "PM_METRIC_BETWEEN_PRESENTS",
+      "Type": 0,
+      "Name": "BetweenPresentsMs",
+      "Unit": 6
+    },
+    {
+      "Size": 8,
+      "Offset": 88,
+      "Id": 80,
+      "Metric": "PM_METRIC_BETWEEN_DISPLAY_CHANGE",
+      "Type": 0,
+      "Name": "BetweenDisplayChangesMs",
+      "Unit": 6
+    },
+    {
+      "Size": 8,
+      "Offset": 96,
+      "Id": 81,
+      "Metric": "PM_METRIC_UNTIL_DISPLAYED",
+      "Type": 0,
+      "Name": "UntilDisplayedMs",
+      "Unit": 6
+    },
+    {
+      "Size": 8,
+      "Offset": 104,
+      "Id": 24,
+      "Metric": "PM_METRIC_DISPLAY_LATENCY",
+      "Type": 0,
+      "Name": "DisplayLatencyMs",
+      "Unit": 6
+    },
+    {
+      "Size": 4,
+      "Offset": 112,
+      "Id": 20,
+      "Metric": "PM_METRIC_PRESENT_MODE",
+      "Type": 3,
+      "Name": "PresentMode",
+      "Unit": 0
+    },
+    {
+      "Size": 4,
+      "Offset": 116,
+      "Id": 21,
+      "Metric": "PM_METRIC_PRESENT_RUNTIME",
+      "Type": 3,
+      "Name": "PresentRuntime",
+      "Unit": 0
+    },
+    {
+      "Size": 4,
+      "Offset": 120,
+      "Id": 18,
+      "Metric": "PM_METRIC_SYNC_INTERVAL",
+      "Type": 1,
+      "Name": "SyncInterval",
+      "Unit": 13
+    },
+    {
+      "Size": 1,
+      "Offset": 124,
+      "Id": 22,
+      "Metric": "PM_METRIC_ALLOWS_TEARING",
+      "Type": 6,
+      "Name": "AllowsTearing",
+      "Unit": 0
+    },
+    {
+      "Size": 4,
+      "Offset": 128,
+      "Id": 63,
+      "Metric": "PM_METRIC_FRAME_TYPE",
+      "Type": 3,
+      "Name": "FrameType",
+      "Unit": 0
+    }
+  ],
+  "FinishedUtc": "2026-09-11T01:51:50.1496002Z",
+  "CaptureStopQpc": 1991699017278,
+  "BlobSize": 144,
+  "CaptureBeforeQpc": 1990951141961,
+  "FrameRows": 2703,
+  "GameReport": "presentmon-character-classic-control-game.json",
+  "LaunchFontSize": 6,
+  "FramesFile": "presentmon-character-classic-control-frames.csv",
+  "PresentMonDll": "C:\\Program Files\\Intel\\PresentMonSharedService\\PresentMonAPI2.dll",
+  "TerminalPid": 27764,
+  "Error": null,
+  "LaunchStyle": "Classic",
+  "ExitReason": "GameReportAndDrain",
+  "Meaning": "PresentMon service frame events for the isolated Windows Terminal process. Includes startup/cleanup and potentially multiple swapchains; analyze within game write timestamps and per swapchain. Does not identify the Doom frame contents of each presentation."
+}

@@ -20,6 +20,15 @@ The launcher finds the classic Steam Ultimate Doom IWAD at its usual location. F
 
 Startup loads the WAD, warms a disposable level, resets the game, and starts a simulation process and persistent rendering workers. The launcher adds a separate `pwshDoom` Terminal profile with a 6-point font and opens a window. The full 320×200 image occupies **320 columns × 100 rows** and is centered in any extra space. Shrinking below that size pauses the game; enlarging it resumes. `-FontSize 5` makes the image smaller physically; a larger value makes it larger. `-Maximized` is optional, and `-Diagnostics` adds two status rows (102 required). `-Here` uses the current tab and its existing font. These are character-grid requirements, not a minimum monitor resolution; see [window sizing and resize behavior](docs/viewport.md).
 
+For Doom made of characters, choose an optional style:
+
+```powershell
+.\Start-Doom.ps1 -Style Matrix
+.\Start-Doom.ps1 -Style AnsiArt
+```
+
+Matrix uses green code and animated falling highlights; AnsiArt uses full-color brightness/edge glyphs. Both keep a block HUD and use **160×50 cells** with a default 12-point font. They encode the same 320×200 rendered scene into a deliberately lossy character view. `-Style Classic` retains the default half-block output. See [character modes and measurements](docs/character-modes.md).
+
 `-Workers 16` is the tested default. All 36 classic Ultimate Doom maps pass a short headless loading/simulation/rendering sweep at skill 3; only E1M1 has a complete input-only route. See the [campaign matrix](docs/campaign-matrix.md) for the distinction and remaining work. The measured setup used PowerShell 7.6.5, Windows Terminal 1.24, and a Core Ultra 7 265K; renderer and simulation working sets totaled about 3.3 GiB, excluding the coordinator and Terminal.
 
 | Key | Action |
@@ -54,6 +63,7 @@ pwsh -NoProfile -File scripts/Test-E1M1Route.ps1
 pwsh -NoProfile -File scripts/Test-RenderPartitions.ps1
 pwsh -NoProfile -File scripts/Test-ConsoleInput.ps1
 pwsh -NoProfile -File scripts/Test-AnsiStrips.ps1
+pwsh -NoProfile -File scripts/Test-CharacterCodec.ps1
 pwsh -NoProfile -File scripts/Test-Viewport.ps1
 pwsh -NoProfile -File scripts/Test-SnapshotTransport.ps1
 pwsh -NoProfile -File scripts/Test-GameLifecycle.ps1

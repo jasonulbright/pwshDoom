@@ -3,9 +3,9 @@
 . "$PSScriptRoot/RenderAssets.ps1"
 . "$PSScriptRoot/SnapshotTransport.ps1"
 function New-GameRenderPool {
-    param($Context,$Codec,[int]$Workers=16)
+    param($Context,$Codec,[int]$Workers=16,[ValidateSet('Classic','AnsiArt','Matrix')][string]$Style='Classic')
     $root=Split-Path $PSScriptRoot
-    $pool=@{Workers=[Collections.Generic.List[object]]::new();Results=[object[]]::new($Workers);Count=$Workers;
+    $pool=@{Workers=[Collections.Generic.List[object]]::new();Results=[object[]]::new($Workers);Count=$Workers;Style=$Style;
         Assets=(Join-Path $root ('local/session-'+[guid]::NewGuid().ToString('N')+'.assets'))}
     $pool.OwnAssets=$false;$pool.CopyPixels=-not $Context.ContainsKey('AssetPath')
     try {
@@ -23,9 +23,10 @@ function New-GameRenderPool {
             $go=[Threading.EventWaitHandle]::new($false,[Threading.EventResetMode]::AutoReset,$name+'-go')
             $done=[Threading.EventWaitHandle]::new($true,[Threading.EventResetMode]::ManualReset,$name+'-done')
             $first=[int][Math]::Floor($i*320.0/$Workers);$end=[int][Math]::Floor(($i+1)*320.0/$Workers)
+            if($Style -ne 'Classic'){$first=2*[int][Math]::Floor($i*160.0/$Workers);$end=2*[int][Math]::Floor(($i+1)*160.0/$Workers)}
             $info=[Diagnostics.ProcessStartInfo]::new((Get-Process -Id $PID).Path);$info.UseShellExecute=$false;$info.CreateNoWindow=$true
             $info.RedirectStandardOutput=$true;$info.RedirectStandardError=$true
-            foreach($arg in @('-NoProfile','-File',"$root/scripts/Invoke-GameRenderWorker.ps1",'-Assets',$pool.Assets,'-OwnerPid',"$PID",'-Channel',$name,'-FirstColumn',"$first",'-EndColumn',"$end")){$info.ArgumentList.Add($arg)}
+            foreach($arg in @('-NoProfile','-File',"$root/scripts/Invoke-GameRenderWorker.ps1",'-Assets',$pool.Assets,'-OwnerPid',"$PID",'-Channel',$name,'-FirstColumn',"$first",'-EndColumn',"$end",'-Style',$Style)){$info.ArgumentList.Add($arg)}
             $process=[Diagnostics.Process]::Start($info)
             $pool.Workers.Add(@{Map=$map;View=$view;Ready=$ready;Go=$go;Done=$done;Process=$process;First=$first;End=$end;
                 Stdout=$process.StandardOutput.ReadToEndAsync();Stderr=$process.StandardError.ReadToEndAsync()})
@@ -48,13 +49,13 @@ function Test-GameRenderCompleted {
     return $true
 }
 function Submit-GameRender {
-    param($Pool,$Snapshot,[int]$ColumnOffset=0,[int]$RowOffset=0)
+    param($Pool,$Snapshot,[int]$ColumnOffset=0,[int]$RowOffset=0,[int]$FrameNumber=0)
     if(-not (Test-GameRenderCompleted $Pool)){throw 'A render is already in progress.'}
     if($Snapshot -is [byte[]]){$bytes=$Snapshot}else{$bytes=ConvertTo-GameSnapshotBytes $Snapshot}
     if($bytes.Length -gt 1048448){throw 'Snapshot exceeds transport capacity.'}
     foreach($worker in $Pool.Workers) {
         [void]$worker.Done.Reset();$worker.View.Write(4,$bytes.Length);$worker.View.WriteArray(128L,$bytes,0,$bytes.Length)
-        $worker.View.Write(64,$ColumnOffset);$worker.View.Write(68,$RowOffset);[void]$worker.Go.Set()
+        $worker.View.Write(64,$ColumnOffset);$worker.View.Write(68,$RowOffset);$worker.View.Write(72,$FrameNumber);[void]$worker.Go.Set()
     }
 }
 function Wait-GameRender {

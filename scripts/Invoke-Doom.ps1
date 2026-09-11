@@ -5,6 +5,7 @@ param([Parameter(Mandatory)][string]$Wad,[ValidateRange(1,32)][int]$Workers=16,
     [ValidateRange(0,3600)][int]$Seconds=0,[switch]$Headless,[switch]$Scripted,[string]$Replay,
     [ValidateRange(0,10000)][int]$CaptureEveryTics=0,[ValidateRange(1,5)][int]$Skill=3,
     [ValidateRange(1,4)][int]$Episode=1,[ValidateRange(1,32)][int]$Map=1,
+    [ValidateSet('Classic','AnsiArt','Matrix')][string]$Style='Classic',
     [string]$Report="$PSScriptRoot/../local/game-session.json",[string]$ReadyFile,
     [switch]$Diagnostics,[string]$ViewportSchedule)
 $ErrorActionPreference='Stop'
@@ -21,12 +22,14 @@ function Start-DoomRenderJob {
     $fraction=if($Snapshot.Tic -eq 0){1}else{[Math]::Clamp([double]($Clock.Elapsed.TotalMilliseconds*35/1000-$Snapshot.Tic),[double]0,[double]1)}
     $watch=[Diagnostics.Stopwatch]::StartNew();$bytes=Get-InterpolatedSnapshotBytes $Snapshot.Previous $Snapshot.Current $fraction
     $InterpolationTimes.Add($watch.Elapsed.TotalMilliseconds)
-    $qpc=[Diagnostics.Stopwatch]::GetTimestamp();$watch.Restart();Submit-GameRender $Pool $bytes -ColumnOffset $Viewport.Left -RowOffset $Viewport.Top
+    $qpc=[Diagnostics.Stopwatch]::GetTimestamp();$watch.Restart()
+    Submit-GameRender $Pool $bytes -ColumnOffset $Viewport.Left -RowOffset $Viewport.Top -FrameNumber ([int][Math]::Floor($Clock.Elapsed.TotalSeconds*60))
     return @{Tic=$Snapshot.Tic;StartQpc=$qpc;SubmitMs=$watch.Elapsed.TotalMilliseconds;ViewportKey=$Viewport.Key}
 }
 $simulation=$null;$pool=$null;$consoleState=$null;$terminalActive=$false;$timerRequested=$false;$failure=$null
 $oldEncoding=[Console]::OutputEncoding;$esc=[char]27;$clock=[Diagnostics.Stopwatch]::new()
 $wallClock=[Diagnostics.Stopwatch]::new();$viewport=$null;$viewportScheduleData=@();$needsClear=$true
+$outputColumns=if($Style -eq 'Classic'){320}else{160};$outputRows=if($Style -eq 'Classic'){100}else{50}
 $viewportChanges=[Collections.Generic.List[object]]::new();$pauseStart=$null;$pausedMs=0.0;$pauseCount=0;$resizeDiscarded=0
 $completed=0;$tics=0;$exitReason='Error';$terminalWidth=0;$terminalHeight=0;$workerMemory=0;$simMemory=0
 $frameTimes=[Collections.Generic.List[double]]::new();$frameStats=[Collections.Generic.List[object]]::new()
@@ -54,7 +57,7 @@ try {
     $paletteBytes=[byte[]]::new(768)
     for($i=0;$i -lt 256;$i++){for($j=0;$j -lt 3;$j++){$paletteBytes[3*$i+$j]=$context.Palette[$i][$j]}}
     [IO.File]::WriteAllBytes("$PSScriptRoot/../local/palette.bin",$paletteBytes)
-    $pool=New-GameRenderPool $context $null $Workers
+    $pool=New-GameRenderPool $context $null $Workers -Style $Style
     $initialBytes=Get-InterpolatedSnapshotBytes $snapshot.Previous $snapshot.Current 1
     for($i=0;$i -lt 4;$i++){Submit-GameRender $pool $initialBytes;Wait-GameRender $pool}
     if(-not $Headless) {
@@ -78,10 +81,10 @@ try {
         if($wallNow-$lastViewportCheck -ge 100) {
             $lastViewportCheck=$wallNow
             if($Headless) {
-                $columns=320;$rows=if($Diagnostics){102}else{100}
+                $columns=$outputColumns;$rows=$outputRows;if($Diagnostics){$rows+=2}
                 foreach($entry in $viewportScheduleData){if($entry.AtSeconds*1000 -le $wallNow){$columns=$entry.Columns;$rows=$entry.Rows}else{break}}
             } else {$columns=[Console]::WindowWidth;$rows=[Console]::WindowHeight;$terminalWidth=$columns;$terminalHeight=$rows}
-            $nextViewport=Get-DoomViewport $columns $rows -Diagnostics:$Diagnostics
+            $nextViewport=Get-DoomViewport $columns $rows -Diagnostics:$Diagnostics -Style $Style
             if($null -eq $viewport -or $nextViewport.Key -ne $viewport.Key) {
                 $viewport=$nextViewport;$needsClear=$true
                 if(-not $viewport.Fits -and $clock.IsRunning){$clock.Stop();$pauseStart=$wallNow;$pauseCount++}
@@ -171,6 +174,8 @@ finally {
     # Exclude any queued command drained while workers are being closed.
     $simTics=$measuredTics
     $data=@{FinishedUtc=[DateTime]::UtcNow.ToString('o');WadSha256=(Get-FileHash -LiteralPath $Wad).Hash;Workers=$Workers;Skill=$Skill;Episode=$Episode;Map=$Map;
+        OutputStyle=$Style;SourceWidth=320;SourceHeight=200;OutputColumns=$outputColumns;OutputRows=$outputRows;
+        OutputRepresentation=if($Style -eq 'Classic'){'Two source pixels per truecolor half-block cell'}else{'Lossy 2x4 source-pixel character cells; HUD downsampled to half blocks'};
         Architecture='SeparateSimulation';Transport='NumericV1';QpcFrequency=[Diagnostics.Stopwatch]::Frequency;Headless=[bool]$Headless;Scripted=[bool]$Scripted;Replay=$Replay;ExitReason=$exitReason;Error=$failure;
         DurationSeconds=$clock.Elapsed.TotalSeconds;IssuedCommands=$tics;SimulationTics=$simTics;TicsPerSecond=$simTics/[Math]::Max(.001,$clock.Elapsed.TotalSeconds);
         WallDurationSeconds=$wallClock.Elapsed.TotalSeconds;ViewportPausedSeconds=$pausedMs/1000;ViewportPauseCount=$pauseCount;

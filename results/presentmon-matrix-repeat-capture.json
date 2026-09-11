@@ -1,0 +1,192 @@
+{
+  "LaunchMaximized": true,
+  "PresentMonDllSha256": "0859E22071180AB9074BD1F74B5D380E852DC155E21221D62E393F58F1614C65",
+  "FramesFile": "presentmon-matrix-repeat-frames.csv",
+  "TerminalPid": 30544,
+  "QpcFrequency": 10000000,
+  "CaptureBeforeQpc": 1992836746122,
+  "PresentMonDll": "C:\\Program Files\\Intel\\PresentMonSharedService\\PresentMonAPI2.dll",
+  "Meaning": "PresentMon service frame events for the isolated Windows Terminal process. Includes startup/cleanup and potentially multiple swapchains; analyze within game write timestamps and per swapchain. Does not identify the Doom frame contents of each presentation.",
+  "LaunchFontSize": 12,
+  "Fields": [
+    {
+      "Size": 8,
+      "Metric": "PM_METRIC_SWAP_CHAIN_ADDRESS",
+      "Name": "SwapChain",
+      "Type": 5,
+      "Offset": 0,
+      "Id": 1,
+      "Unit": 0
+    },
+    {
+      "Size": 8,
+      "Metric": "PM_METRIC_CPU_START_QPC",
+      "Name": "CpuStartQpc",
+      "Type": 5,
+      "Offset": 8,
+      "Id": 7,
+      "Unit": 30
+    },
+    {
+      "Size": 8,
+      "Metric": "PM_METRIC_PRESENT_START_QPC",
+      "Name": "PresentStartQpc",
+      "Type": 5,
+      "Offset": 16,
+      "Id": 77,
+      "Unit": 30
+    },
+    {
+      "Size": 8,
+      "Metric": "PM_METRIC_CPU_FRAME_TIME",
+      "Name": "CpuFrameMs",
+      "Type": 0,
+      "Offset": 24,
+      "Id": 8,
+      "Unit": 6
+    },
+    {
+      "Size": 8,
+      "Metric": "PM_METRIC_CPU_BUSY",
+      "Name": "CpuBusyMs",
+      "Type": 0,
+      "Offset": 32,
+      "Id": 9,
+      "Unit": 6
+    },
+    {
+      "Size": 8,
+      "Metric": "PM_METRIC_CPU_WAIT",
+      "Name": "CpuWaitMs",
+      "Type": 0,
+      "Offset": 40,
+      "Id": 10,
+      "Unit": 6
+    },
+    {
+      "Size": 8,
+      "Metric": "PM_METRIC_GPU_TIME",
+      "Name": "GpuTimeMs",
+      "Type": 0,
+      "Offset": 48,
+      "Id": 13,
+      "Unit": 6
+    },
+    {
+      "Size": 8,
+      "Metric": "PM_METRIC_GPU_BUSY",
+      "Name": "GpuBusyMs",
+      "Type": 0,
+      "Offset": 56,
+      "Id": 14,
+      "Unit": 6
+    },
+    {
+      "Size": 1,
+      "Metric": "PM_METRIC_DROPPED_FRAMES",
+      "Name": "Dropped",
+      "Type": 6,
+      "Offset": 64,
+      "Id": 16,
+      "Unit": 0
+    },
+    {
+      "Size": 8,
+      "Metric": "PM_METRIC_DISPLAYED_TIME",
+      "Name": "DisplayedMs",
+      "Type": 0,
+      "Offset": 72,
+      "Id": 17,
+      "Unit": 6
+    },
+    {
+      "Size": 8,
+      "Metric": "PM_METRIC_BETWEEN_PRESENTS",
+      "Name": "BetweenPresentsMs",
+      "Type": 0,
+      "Offset": 80,
+      "Id": 78,
+      "Unit": 6
+    },
+    {
+      "Size": 8,
+      "Metric": "PM_METRIC_BETWEEN_DISPLAY_CHANGE",
+      "Name": "BetweenDisplayChangesMs",
+      "Type": 0,
+      "Offset": 88,
+      "Id": 80,
+      "Unit": 6
+    },
+    {
+      "Size": 8,
+      "Metric": "PM_METRIC_UNTIL_DISPLAYED",
+      "Name": "UntilDisplayedMs",
+      "Type": 0,
+      "Offset": 96,
+      "Id": 81,
+      "Unit": 6
+    },
+    {
+      "Size": 8,
+      "Metric": "PM_METRIC_DISPLAY_LATENCY",
+      "Name": "DisplayLatencyMs",
+      "Type": 0,
+      "Offset": 104,
+      "Id": 24,
+      "Unit": 6
+    },
+    {
+      "Size": 4,
+      "Metric": "PM_METRIC_PRESENT_MODE",
+      "Name": "PresentMode",
+      "Type": 3,
+      "Offset": 112,
+      "Id": 20,
+      "Unit": 0
+    },
+    {
+      "Size": 4,
+      "Metric": "PM_METRIC_PRESENT_RUNTIME",
+      "Name": "PresentRuntime",
+      "Type": 3,
+      "Offset": 116,
+      "Id": 21,
+      "Unit": 0
+    },
+    {
+      "Size": 4,
+      "Metric": "PM_METRIC_SYNC_INTERVAL",
+      "Name": "SyncInterval",
+      "Type": 1,
+      "Offset": 120,
+      "Id": 18,
+      "Unit": 13
+    },
+    {
+      "Size": 1,
+      "Metric": "PM_METRIC_ALLOWS_TEARING",
+      "Name": "AllowsTearing",
+      "Type": 6,
+      "Offset": 124,
+      "Id": 22,
+      "Unit": 0
+    },
+    {
+      "Size": 4,
+      "Metric": "PM_METRIC_FRAME_TYPE",
+      "Name": "FrameType",
+      "Type": 3,
+      "Offset": 128,
+      "Id": 63,
+      "Unit": 0
+    }
+  ],
+  "CaptureStopQpc": 1993576225044,
+  "Error": null,
+  "BlobSize": 144,
+  "ExitReason": "GameReportAndDrain",
+  "GameReport": "presentmon-matrix-repeat-game.json",
+  "LaunchStyle": "Matrix",
+  "FinishedUtc": "2026-09-11T01:54:57.8719256Z",
+  "FrameRows": 2692
+}

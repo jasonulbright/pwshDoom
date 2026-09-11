@@ -1,0 +1,75 @@
+{
+  "CaptureSha256": "3BABAAB50237BE89AC879C1E0A5C1084E0503845AA2BD1C3E426099F219CB294",
+  "TerminalPid": 32608,
+  "SwapChains": [
+    {
+      "SubmittedWithinWindow": 2617,
+      "GpuBusyMs": {
+        "Count": 2617,
+        "Mean": 2.881581696599154,
+        "Median": 2.7151,
+        "P95": 5.4827,
+        "Max": 10.9106
+      },
+      "DisplayIntervalsOver33_333ms": 31,
+      "SubmittedPerSecond": 58.63737154040796,
+      "MaximumPresentIntervalCheckErrorMs": 7.105427357601002E-15,
+      "PresentIntervalMs": {
+        "Count": 2616,
+        "Mean": 16.875436429663566,
+        "Median": 16.698050000000002,
+        "P95": 21.5025,
+        "Max": 64.416
+      },
+      "AllCapturedRows": 2648,
+      "DisplayTransitionsWithinWindow": 2615,
+      "MissingDisplayTimestampForNonDropped": 0,
+      "PresentModes": [
+        {
+          "Mode": 4,
+          "Count": 101
+        },
+        {
+          "Mode": 8,
+          "Count": 2516
+        }
+      ],
+      "PresentToDisplayMs": {
+        "Count": 2615,
+        "Mean": 6.375922179732319,
+        "Median": 6.2174000000000005,
+        "P95": 11.0288,
+        "Max": 17.3901
+      },
+      "MaximumDisplayIntervalCheckErrorMs": 7.105427357601002E-15,
+      "SwapChain": "2116435030080",
+      "DisplayIntervalsOver50ms": 1,
+      "DisplayedTransitionsPerSecond": 58.592558875875746,
+      "DroppedAmongSubmitted": 2,
+      "DisplayIntervalMs": {
+        "Count": 2614,
+        "Mean": 16.88571885998473,
+        "Median": 18.1759,
+        "P95": 24.2538,
+        "Max": 66.6479
+      }
+    }
+  ],
+  "WindowSeconds": 44.6302406,
+  "AnalyzedUtc": "2026-09-11T01:48:38.5469546Z",
+  "QpcFrequency": 10000000.0,
+  "GameCompletedUpdatesPerSecond": 60.00806108287214,
+  "Method": "Clip to the interval between first and last completed game writes. Group by swapchain. Present events use PresentStartQpc; display events use PresentStartQpc + UntilDisplayedMs * QpcFrequency / 1000 for non-dropped rows. Rates are event counts / window duration. Intervals use consecutive in-window timestamps, excluding boundary-crossing startup intervals; verify against native interval metrics.",
+  "GameSimulationTicsPerSecond": 34.90401763209565,
+  "GameExit": "LevelComplete",
+  "GameSha256": "1F1B968C25A89FBBB2EFB48ADEC0705559BFAFEC54B44CFAD1382544ACD9AC94",
+  "GameTics": 1560,
+  "Meaning": "Independent ETW-based Terminal presentation/display timing from the installed PresentMon service. This is not an optical measurement or a one-to-one identification of distinct Doom framebuffers. Presentation/display latency here starts at Terminal Present(), not user input or Doom rendering. Windows compositor scheduling and the active desktop affect cadence.",
+  "FramesSha256": "071F1D52F29FF39FF698FF9A73A8F7C200541F8B4789C7B665FF25F4F5C9F17C",
+  "GameKills": 5,
+  "GameHealth": 75,
+  "GameDurationSeconds": 44.6939953,
+  "GameFrames": 2682,
+  "WindowStartQpc": 1988904052301,
+  "WindowEndQpc": 1989350354707
+}

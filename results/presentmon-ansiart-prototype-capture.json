@@ -1,0 +1,192 @@
+{
+  "LaunchStyle": "AnsiArt",
+  "FinishedUtc": "2026-09-11T01:49:55.6558926Z",
+  "QpcFrequency": 10000000,
+  "FrameRows": 2690,
+  "ExitReason": "GameReportAndDrain",
+  "LaunchFontSize": 12,
+  "Error": null,
+  "CaptureBeforeQpc": 1989793063546,
+  "PresentMonDllSha256": "0859E22071180AB9074BD1F74B5D380E852DC155E21221D62E393F58F1614C65",
+  "Meaning": "PresentMon service frame events for the isolated Windows Terminal process. Includes startup/cleanup and potentially multiple swapchains; analyze within game write timestamps and per swapchain. Does not identify the Doom frame contents of each presentation.",
+  "TerminalPid": 20980,
+  "BlobSize": 144,
+  "GameReport": "presentmon-ansiart-prototype-game.json",
+  "PresentMonDll": "C:\\Program Files\\Intel\\PresentMonSharedService\\PresentMonAPI2.dll",
+  "Fields": [
+    {
+      "Id": 1,
+      "Metric": "PM_METRIC_SWAP_CHAIN_ADDRESS",
+      "Type": 5,
+      "Size": 8,
+      "Name": "SwapChain",
+      "Unit": 0,
+      "Offset": 0
+    },
+    {
+      "Id": 7,
+      "Metric": "PM_METRIC_CPU_START_QPC",
+      "Type": 5,
+      "Size": 8,
+      "Name": "CpuStartQpc",
+      "Unit": 30,
+      "Offset": 8
+    },
+    {
+      "Id": 77,
+      "Metric": "PM_METRIC_PRESENT_START_QPC",
+      "Type": 5,
+      "Size": 8,
+      "Name": "PresentStartQpc",
+      "Unit": 30,
+      "Offset": 16
+    },
+    {
+      "Id": 8,
+      "Metric": "PM_METRIC_CPU_FRAME_TIME",
+      "Type": 0,
+      "Size": 8,
+      "Name": "CpuFrameMs",
+      "Unit": 6,
+      "Offset": 24
+    },
+    {
+      "Id": 9,
+      "Metric": "PM_METRIC_CPU_BUSY",
+      "Type": 0,
+      "Size": 8,
+      "Name": "CpuBusyMs",
+      "Unit": 6,
+      "Offset": 32
+    },
+    {
+      "Id": 10,
+      "Metric": "PM_METRIC_CPU_WAIT",
+      "Type": 0,
+      "Size": 8,
+      "Name": "CpuWaitMs",
+      "Unit": 6,
+      "Offset": 40
+    },
+    {
+      "Id": 13,
+      "Metric": "PM_METRIC_GPU_TIME",
+      "Type": 0,
+      "Size": 8,
+      "Name": "GpuTimeMs",
+      "Unit": 6,
+      "Offset": 48
+    },
+    {
+      "Id": 14,
+      "Metric": "PM_METRIC_GPU_BUSY",
+      "Type": 0,
+      "Size": 8,
+      "Name": "GpuBusyMs",
+      "Unit": 6,
+      "Offset": 56
+    },
+    {
+      "Id": 16,
+      "Metric": "PM_METRIC_DROPPED_FRAMES",
+      "Type": 6,
+      "Size": 1,
+      "Name": "Dropped",
+      "Unit": 0,
+      "Offset": 64
+    },
+    {
+      "Id": 17,
+      "Metric": "PM_METRIC_DISPLAYED_TIME",
+      "Type": 0,
+      "Size": 8,
+      "Name": "DisplayedMs",
+      "Unit": 6,
+      "Offset": 72
+    },
+    {
+      "Id": 78,
+      "Metric": "PM_METRIC_BETWEEN_PRESENTS",
+      "Type": 0,
+      "Size": 8,
+      "Name": "BetweenPresentsMs",
+      "Unit": 6,
+      "Offset": 80
+    },
+    {
+      "Id": 80,
+      "Metric": "PM_METRIC_BETWEEN_DISPLAY_CHANGE",
+      "Type": 0,
+      "Size": 8,
+      "Name": "BetweenDisplayChangesMs",
+      "Unit": 6,
+      "Offset": 88
+    },
+    {
+      "Id": 81,
+      "Metric": "PM_METRIC_UNTIL_DISPLAYED",
+      "Type": 0,
+      "Size": 8,
+      "Name": "UntilDisplayedMs",
+      "Unit": 6,
+      "Offset": 96
+    },
+    {
+      "Id": 24,
+      "Metric": "PM_METRIC_DISPLAY_LATENCY",
+      "Type": 0,
+      "Size": 8,
+      "Name": "DisplayLatencyMs",
+      "Unit": 6,
+      "Offset": 104
+    },
+    {
+      "Id": 20,
+      "Metric": "PM_METRIC_PRESENT_MODE",
+      "Type": 3,
+      "Size": 4,
+      "Name": "PresentMode",
+      "Unit": 0,
+      "Offset": 112
+    },
+    {
+      "Id": 21,
+      "Metric": "PM_METRIC_PRESENT_RUNTIME",
+      "Type": 3,
+      "Size": 4,
+      "Name": "PresentRuntime",
+      "Unit": 0,
+      "Offset": 116
+    },
+    {
+      "Id": 18,
+      "Metric": "PM_METRIC_SYNC_INTERVAL",
+      "Type": 1,
+      "Size": 4,
+      "Name": "SyncInterval",
+      "Unit": 13,
+      "Offset": 120
+    },
+    {
+      "Id": 22,
+      "Metric": "PM_METRIC_ALLOWS_TEARING",
+      "Type": 6,
+      "Size": 1,
+      "Name": "AllowsTearing",
+      "Unit": 0,
+      "Offset": 124
+    },
+    {
+      "Id": 63,
+      "Metric": "PM_METRIC_FRAME_TYPE",
+      "Type": 3,
+      "Size": 4,
+      "Name": "FrameType",
+      "Unit": 0,
+      "Offset": 128
+    }
+  ],
+  "CaptureStopQpc": 1990554069763,
+  "LaunchMaximized": true,
+  "FramesFile": "presentmon-ansiart-prototype-frames.csv"
+}

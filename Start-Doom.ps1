@@ -5,8 +5,10 @@ param([string]$Wad,[ValidateRange(1,32)][int]$Workers=16,[ValidateRange(1,5)][in
     [ValidateRange(1,4)][int]$Episode=1,[ValidateRange(1,32)][int]$Map=1,
     [switch]$Here,[switch]$Scripted,[ValidateRange(0,3600)][int]$Seconds=0,[string]$Replay,[int]$CaptureEveryTics=0,
     [ValidateRange(4,24)][int]$FontSize=6,[switch]$Maximized,[switch]$Diagnostics,
+    [ValidateSet('Classic','AnsiArt','Matrix')][string]$Style='Classic',
     [string]$Report="$PSScriptRoot/local/game-session.json")
 $ErrorActionPreference='Stop'
+if($Style -ne 'Classic' -and -not $PSBoundParameters.ContainsKey('FontSize')){$FontSize=12}
 if(-not $IsWindows){throw 'This prototype requires Windows and PowerShell 7.4 or later.'}
 if(-not $Wad) {
     $candidates=@("${env:ProgramFiles(x86)}/Steam/steamapps/common/Ultimate Doom/base/DOOM.WAD",
@@ -15,7 +17,7 @@ if(-not $Wad) {
     if(-not $Wad){throw 'Supply your own classic Doom IWAD: .\Start-Doom.ps1 -Wad C:\path\DOOM.WAD'}
 }
 $Wad=(Resolve-Path -LiteralPath $Wad).Path
-$arguments=@('-Wad',$Wad,'-Workers',"$Workers",'-Skill',"$Skill",'-Episode',"$Episode",'-Map',"$Map",'-Seconds',"$Seconds",'-Report',[IO.Path]::GetFullPath($Report))
+$arguments=@('-Wad',$Wad,'-Workers',"$Workers",'-Skill',"$Skill",'-Episode',"$Episode",'-Map',"$Map",'-Seconds',"$Seconds",'-Style',$Style,'-Report',[IO.Path]::GetFullPath($Report))
 if($Scripted){$arguments+='-Scripted'}
 if($Diagnostics){$arguments+='-Diagnostics'}
 if($Replay){$arguments+=@('-Replay',(Resolve-Path -LiteralPath $Replay).Path)}
@@ -36,6 +38,7 @@ if(Test-Path -LiteralPath $profilePath) {
     scrollbarState='hidden';closeOnExit='graceful';tabTitle='pwshDoom';suppressApplicationTitle=$true})} |
     ConvertTo-Json -Depth 5 | Set-Content -LiteralPath $profilePath -Encoding utf8
 $windowArguments=@('-w','new');if($Maximized){$windowArguments+='--maximized'}
-$rows=if($Diagnostics){102}else{100}
-& $wt.Source @windowArguments --size "320,$rows" new-tab -p 'pwshDoom' $runtime -NoProfile -File "$PSScriptRoot/scripts/Invoke-Doom.ps1" @arguments
+$columns=if($Style -eq 'Classic'){320}else{160};$rows=if($Style -eq 'Classic'){100}else{50}
+if($Diagnostics){$rows+=2}
+& $wt.Source @windowArguments --size "$columns,$rows" new-tab -p 'pwshDoom' $runtime -NoProfile -File "$PSScriptRoot/scripts/Invoke-Doom.ps1" @arguments
 if($LASTEXITCODE -ne 0){throw 'Windows Terminal launch failed.'}

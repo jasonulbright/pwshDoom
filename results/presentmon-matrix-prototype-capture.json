@@ -1,0 +1,192 @@
+{
+  "CaptureStopQpc": 1989385934447,
+  "Meaning": "PresentMon service frame events for the isolated Windows Terminal process. Includes startup/cleanup and potentially multiple swapchains; analyze within game write timestamps and per swapchain. Does not identify the Doom frame contents of each presentation.",
+  "PresentMonDllSha256": "0859E22071180AB9074BD1F74B5D380E852DC155E21221D62E393F58F1614C65",
+  "TerminalPid": 32608,
+  "FramesFile": "presentmon-matrix-prototype-frames.csv",
+  "ExitReason": "GameReportAndDrain",
+  "FrameRows": 2648,
+  "LaunchStyle": "Matrix",
+  "Error": null,
+  "Fields": [
+    {
+      "Type": 5,
+      "Unit": 0,
+      "Size": 8,
+      "Offset": 0,
+      "Id": 1,
+      "Name": "SwapChain",
+      "Metric": "PM_METRIC_SWAP_CHAIN_ADDRESS"
+    },
+    {
+      "Type": 5,
+      "Unit": 30,
+      "Size": 8,
+      "Offset": 8,
+      "Id": 7,
+      "Name": "CpuStartQpc",
+      "Metric": "PM_METRIC_CPU_START_QPC"
+    },
+    {
+      "Type": 5,
+      "Unit": 30,
+      "Size": 8,
+      "Offset": 16,
+      "Id": 77,
+      "Name": "PresentStartQpc",
+      "Metric": "PM_METRIC_PRESENT_START_QPC"
+    },
+    {
+      "Type": 0,
+      "Unit": 6,
+      "Size": 8,
+      "Offset": 24,
+      "Id": 8,
+      "Name": "CpuFrameMs",
+      "Metric": "PM_METRIC_CPU_FRAME_TIME"
+    },
+    {
+      "Type": 0,
+      "Unit": 6,
+      "Size": 8,
+      "Offset": 32,
+      "Id": 9,
+      "Name": "CpuBusyMs",
+      "Metric": "PM_METRIC_CPU_BUSY"
+    },
+    {
+      "Type": 0,
+      "Unit": 6,
+      "Size": 8,
+      "Offset": 40,
+      "Id": 10,
+      "Name": "CpuWaitMs",
+      "Metric": "PM_METRIC_CPU_WAIT"
+    },
+    {
+      "Type": 0,
+      "Unit": 6,
+      "Size": 8,
+      "Offset": 48,
+      "Id": 13,
+      "Name": "GpuTimeMs",
+      "Metric": "PM_METRIC_GPU_TIME"
+    },
+    {
+      "Type": 0,
+      "Unit": 6,
+      "Size": 8,
+      "Offset": 56,
+      "Id": 14,
+      "Name": "GpuBusyMs",
+      "Metric": "PM_METRIC_GPU_BUSY"
+    },
+    {
+      "Type": 6,
+      "Unit": 0,
+      "Size": 1,
+      "Offset": 64,
+      "Id": 16,
+      "Name": "Dropped",
+      "Metric": "PM_METRIC_DROPPED_FRAMES"
+    },
+    {
+      "Type": 0,
+      "Unit": 6,
+      "Size": 8,
+      "Offset": 72,
+      "Id": 17,
+      "Name": "DisplayedMs",
+      "Metric": "PM_METRIC_DISPLAYED_TIME"
+    },
+    {
+      "Type": 0,
+      "Unit": 6,
+      "Size": 8,
+      "Offset": 80,
+      "Id": 78,
+      "Name": "BetweenPresentsMs",
+      "Metric": "PM_METRIC_BETWEEN_PRESENTS"
+    },
+    {
+      "Type": 0,
+      "Unit": 6,
+      "Size": 8,
+      "Offset": 88,
+      "Id": 80,
+      "Name": "BetweenDisplayChangesMs",
+      "Metric": "PM_METRIC_BETWEEN_DISPLAY_CHANGE"
+    },
+    {
+      "Type": 0,
+      "Unit": 6,
+      "Size": 8,
+      "Offset": 96,
+      "Id": 81,
+      "Name": "UntilDisplayedMs",
+      "Metric": "PM_METRIC_UNTIL_DISPLAYED"
+    },
+    {
+      "Type": 0,
+      "Unit": 6,
+      "Size": 8,
+      "Offset": 104,
+      "Id": 24,
+      "Name": "DisplayLatencyMs",
+      "Metric": "PM_METRIC_DISPLAY_LATENCY"
+    },
+    {
+      "Type": 3,
+      "Unit": 0,
+      "Size": 4,
+      "Offset": 112,
+      "Id": 20,
+      "Name": "PresentMode",
+      "Metric": "PM_METRIC_PRESENT_MODE"
+    },
+    {
+      "Type": 3,
+      "Unit": 0,
+      "Size": 4,
+      "Offset": 116,
+      "Id": 21,
+      "Name": "PresentRuntime",
+      "Metric": "PM_METRIC_PRESENT_RUNTIME"
+    },
+    {
+      "Type": 1,
+      "Unit": 13,
+      "Size": 4,
+      "Offset": 120,
+      "Id": 18,
+      "Name": "SyncInterval",
+      "Metric": "PM_METRIC_SYNC_INTERVAL"
+    },
+    {
+      "Type": 6,
+      "Unit": 0,
+      "Size": 1,
+      "Offset": 124,
+      "Id": 22,
+      "Name": "AllowsTearing",
+      "Metric": "PM_METRIC_ALLOWS_TEARING"
+    },
+    {
+      "Type": 3,
+      "Unit": 0,
+      "Size": 4,
+      "Offset": 128,
+      "Id": 63,
+      "Name": "FrameType",
+      "Metric": "PM_METRIC_FRAME_TYPE"
+    }
+  ],
+  "QpcFrequency": 10000000,
+  "LaunchMaximized": true,
+  "BlobSize": 144,
+  "LaunchFontSize": 12,
+  "GameReport": "presentmon-matrix-prototype-game.json",
+  "PresentMonDll": "C:\\Program Files\\Intel\\PresentMonSharedService\\PresentMonAPI2.dll",
+  "CaptureBeforeQpc": 1988631671199,
+  "FinishedUtc": "2026-09-11T01:47:58.8418269Z"
+}

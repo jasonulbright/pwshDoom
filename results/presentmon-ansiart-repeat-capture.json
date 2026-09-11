@@ -1,0 +1,192 @@
+{
+  "CaptureBeforeQpc": 1991932503842,
+  "LaunchFontSize": 12,
+  "FrameRows": 2685,
+  "PresentMonDllSha256": "0859E22071180AB9074BD1F74B5D380E852DC155E21221D62E393F58F1614C65",
+  "QpcFrequency": 10000000,
+  "FinishedUtc": "2026-09-11T01:53:28.9265907Z",
+  "GameReport": "presentmon-ansiart-repeat-game.json",
+  "FramesFile": "presentmon-ansiart-repeat-frames.csv",
+  "Meaning": "PresentMon service frame events for the isolated Windows Terminal process. Includes startup/cleanup and potentially multiple swapchains; analyze within game write timestamps and per swapchain. Does not identify the Doom frame contents of each presentation.",
+  "LaunchMaximized": true,
+  "PresentMonDll": "C:\\Program Files\\Intel\\PresentMonSharedService\\PresentMonAPI2.dll",
+  "ExitReason": "GameReportAndDrain",
+  "TerminalPid": 36872,
+  "CaptureStopQpc": 1992686762629,
+  "LaunchStyle": "AnsiArt",
+  "Error": null,
+  "Fields": [
+    {
+      "Id": 1,
+      "Metric": "PM_METRIC_SWAP_CHAIN_ADDRESS",
+      "Size": 8,
+      "Type": 5,
+      "Offset": 0,
+      "Unit": 0,
+      "Name": "SwapChain"
+    },
+    {
+      "Id": 7,
+      "Metric": "PM_METRIC_CPU_START_QPC",
+      "Size": 8,
+      "Type": 5,
+      "Offset": 8,
+      "Unit": 30,
+      "Name": "CpuStartQpc"
+    },
+    {
+      "Id": 77,
+      "Metric": "PM_METRIC_PRESENT_START_QPC",
+      "Size": 8,
+      "Type": 5,
+      "Offset": 16,
+      "Unit": 30,
+      "Name": "PresentStartQpc"
+    },
+    {
+      "Id": 8,
+      "Metric": "PM_METRIC_CPU_FRAME_TIME",
+      "Size": 8,
+      "Type": 0,
+      "Offset": 24,
+      "Unit": 6,
+      "Name": "CpuFrameMs"
+    },
+    {
+      "Id": 9,
+      "Metric": "PM_METRIC_CPU_BUSY",
+      "Size": 8,
+      "Type": 0,
+      "Offset": 32,
+      "Unit": 6,
+      "Name": "CpuBusyMs"
+    },
+    {
+      "Id": 10,
+      "Metric": "PM_METRIC_CPU_WAIT",
+      "Size": 8,
+      "Type": 0,
+      "Offset": 40,
+      "Unit": 6,
+      "Name": "CpuWaitMs"
+    },
+    {
+      "Id": 13,
+      "Metric": "PM_METRIC_GPU_TIME",
+      "Size": 8,
+      "Type": 0,
+      "Offset": 48,
+      "Unit": 6,
+      "Name": "GpuTimeMs"
+    },
+    {
+      "Id": 14,
+      "Metric": "PM_METRIC_GPU_BUSY",
+      "Size": 8,
+      "Type": 0,
+      "Offset": 56,
+      "Unit": 6,
+      "Name": "GpuBusyMs"
+    },
+    {
+      "Id": 16,
+      "Metric": "PM_METRIC_DROPPED_FRAMES",
+      "Size": 1,
+      "Type": 6,
+      "Offset": 64,
+      "Unit": 0,
+      "Name": "Dropped"
+    },
+    {
+      "Id": 17,
+      "Metric": "PM_METRIC_DISPLAYED_TIME",
+      "Size": 8,
+      "Type": 0,
+      "Offset": 72,
+      "Unit": 6,
+      "Name": "DisplayedMs"
+    },
+    {
+      "Id": 78,
+      "Metric": "PM_METRIC_BETWEEN_PRESENTS",
+      "Size": 8,
+      "Type": 0,
+      "Offset": 80,
+      "Unit": 6,
+      "Name": "BetweenPresentsMs"
+    },
+    {
+      "Id": 80,
+      "Metric": "PM_METRIC_BETWEEN_DISPLAY_CHANGE",
+      "Size": 8,
+      "Type": 0,
+      "Offset": 88,
+      "Unit": 6,
+      "Name": "BetweenDisplayChangesMs"
+    },
+    {
+      "Id": 81,
+      "Metric": "PM_METRIC_UNTIL_DISPLAYED",
+      "Size": 8,
+      "Type": 0,
+      "Offset": 96,
+      "Unit": 6,
+      "Name": "UntilDisplayedMs"
+    },
+    {
+      "Id": 24,
+      "Metric": "PM_METRIC_DISPLAY_LATENCY",
+      "Size": 8,
+      "Type": 0,
+      "Offset": 104,
+      "Unit": 6,
+      "Name": "DisplayLatencyMs"
+    },
+    {
+      "Id": 20,
+      "Metric": "PM_METRIC_PRESENT_MODE",
+      "Size": 4,
+      "Type": 3,
+      "Offset": 112,
+      "Unit": 0,
+      "Name": "PresentMode"
+    },
+    {
+      "Id": 21,
+      "Metric": "PM_METRIC_PRESENT_RUNTIME",
+      "Size": 4,
+      "Type": 3,
+      "Offset": 116,
+      "Unit": 0,
+      "Name": "PresentRuntime"
+    },
+    {
+      "Id": 18,
+      "Metric": "PM_METRIC_SYNC_INTERVAL",
+      "Size": 4,
+      "Type": 1,
+      "Offset": 120,
+      "Unit": 13,
+      "Name": "SyncInterval"
+    },
+    {
+      "Id": 22,
+      "Metric": "PM_METRIC_ALLOWS_TEARING",
+      "Size": 1,
+      "Type": 6,
+      "Offset": 124,
+      "Unit": 0,
+      "Name": "AllowsTearing"
+    },
+    {
+      "Id": 63,
+      "Metric": "PM_METRIC_FRAME_TYPE",
+      "Size": 4,
+      "Type": 3,
+      "Offset": 128,
+      "Unit": 0,
+      "Name": "FrameType"
+    }
+  ],
+  "BlobSize": 144
+}
