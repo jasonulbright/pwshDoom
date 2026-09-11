@@ -7,20 +7,28 @@ function ConvertTo-MenuStrip {
     if($HudStart -ne -1 -and ($HudStart -lt 0 -or $HudStart -gt $Height -or $HudStart%4)){throw 'Map HUD boundary is invalid.'}
     # Brightest of each 2x2 source region preserves thin menu text on black.
     # Each output cell still carries two independent palette colors.
-    $chunks=[Collections.Generic.List[string]]::new();$esc=[char]27;[int[]]$luma=$Context.Luma;[string[]]$cells=$Context.Hud.Cells
-    for($y=0;$y -lt $Height;$y+=4){
-        $chunks.Add("$esc[$($y/4+1+$RowOffset);$($FirstColumn/2+1+$ColumnOffset)H")
-        for($x=$FirstColumn;$x -lt $EndColumn;$x+=2){
+    [string[]]$chunks=[string[]]::new(($Height/4)*(($EndColumn-$FirstColumn)/2+1));[int]$n=0
+    $esc=[char]27;[int[]]$luma=$Context.Luma;[string[]]$cells=$Context.Hud.Cells
+    for([int]$y=0;$y -lt $Height;$y+=4){
+        $chunks[$n++]="$esc[$($y/4+1+$RowOffset);$($FirstColumn/2+1+$ColumnOffset)H"
+        [int]$sourceRow=$y*$Width
+        for([int]$x=$FirstColumn;$x -lt $EndColumn;$x+=2){
+            [int]$offset=$sourceRow+$x
             if($HudStart -ge 0 -and $y -ge $HudStart){
                 # Match normal gameplay HUD samples; brightest-region dilation
                 # is useful for map lines but obscures small HUD numbers.
-                $top=$Pixels[($y+1)*$Width+$x+1];$bottom=$Pixels[($y+3)*$Width+$x+1]
-                $chunks.Add($cells[$top*256+$bottom]);continue
+                [int]$top=$Pixels[$offset+$Width+1];[int]$bottom=$Pixels[$offset+3*$Width+1]
+                $chunks[$n++]=$cells[$top*256+$bottom];continue
             }
-            $offset=$y*$Width+$x;$top=[int]$Pixels[$offset];$bottom=[int]$Pixels[$offset+2*$Width]
-            foreach($index in @(($offset+1),($offset+$Width),($offset+$Width+1))){if($luma[$Pixels[$index]] -gt $luma[$top]){$top=$Pixels[$index]}}
-            foreach($index in @(($offset+2*$Width+1),($offset+3*$Width),($offset+3*$Width+1))){if($luma[$Pixels[$index]] -gt $luma[$bottom]){$bottom=$Pixels[$index]}}
-            $chunks.Add($cells[$top*256+$bottom])
+            [int]$top=$Pixels[$offset];[int]$bottom=$Pixels[$offset+2*$Width]
+            # Preserve first-wins luminance ties without per-cell candidate arrays.
+            [int]$candidate=$Pixels[$offset+1];if($luma[$candidate] -gt $luma[$top]){$top=$candidate}
+            $candidate=$Pixels[$offset+$Width];if($luma[$candidate] -gt $luma[$top]){$top=$candidate}
+            $candidate=$Pixels[$offset+$Width+1];if($luma[$candidate] -gt $luma[$top]){$top=$candidate}
+            $candidate=$Pixels[$offset+2*$Width+1];if($luma[$candidate] -gt $luma[$bottom]){$bottom=$candidate}
+            $candidate=$Pixels[$offset+3*$Width];if($luma[$candidate] -gt $luma[$bottom]){$bottom=$candidate}
+            $candidate=$Pixels[$offset+3*$Width+1];if($luma[$candidate] -gt $luma[$bottom]){$bottom=$candidate}
+            $chunks[$n++]=$cells[$top*256+$bottom]
         }
     }
     return ,([Text.Encoding]::UTF8.GetBytes([string]::Concat($chunks)))

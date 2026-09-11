@@ -60,3 +60,8 @@ The integrated host also loads an intermission save, advances to E1M2, then load
 - Doom II and MyHouse coverage has not started. MyHouse requires a version-pinned package/feature audit before choosing an extension scope.
 
 The initial sweep failed E2M7 because an enum conversion rejected extra line-flag bits. The raw failure and synthetic before/after tests remain in results/campaign-smoke-baseline.json and results/line-flags-*.json; the fix preserves the bitfield rather than deleting unknown bits.
+
+The numeric automap discovery follow-up preserves all eight legacy checkpoints
+and matches discovered-line sets at 48 sampled poses on the established
+E1M1/intermission/E1M2 route (`results/automap-numeric-route.json`). This adds
+regression coverage; it does not add another completed map to the campaign matrix.

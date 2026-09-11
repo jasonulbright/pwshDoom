@@ -44,6 +44,12 @@ Modifications, 2026-09-10:
 
 Modifications, 2026-09-11:
 
+- `Geometry.PointToAngleData` and discovery-only `ThreeDRenderer` projection:
+  retain the adopted slope table, octants, rounding and binary-angle wrapping
+  using numeric PowerShell operations. This avoids Fixed/Angle allocations
+  in automap discovery; ordinary 3D rendering keeps its reference path.
+  Comparisons cover 2,139 angle cases, sixteen fixed map/HUD images and 48
+  moving-route discovery viewpoints, with eight legacy gameplay checkpoints.
 - `ThreeDRenderer`: added an experimental discovery-only BSP traversal that
   marks visible lines without rasterizing pixels or processing sprites. It
   uses simulation-endpoint camera values and horizontal solid-range clipping.

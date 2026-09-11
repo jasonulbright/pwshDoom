@@ -25,6 +25,51 @@ class ThreeDRenderer {
     # without rasterizing another 3D frame or touching sprite valid counts.
     [bool] $DiscoveryOnly
     [int] $DiscoveryRanges
+    [int] $DiscoveryX1
+    [int] $DiscoveryX2
+
+    # Discovery stays at the simulation endpoint. Use numeric BAM arithmetic
+    # instead of allocating Fixed/Angle wrappers in its projection hot path.
+    [bool] ProjectDiscoveryAngles([long] $first, [long] $second) {
+        [long] $span = ($first - $second) -band 0xffffffffL
+        if ($span -ge 0x80000000L) { return $false }
+        [long] $a1 = ($first - $this.viewAngleData) -band 0xffffffffL
+        [long] $a2 = ($second - $this.viewAngleData) -band 0xffffffffL
+        [long] $clip = $this.clipAngle.Data
+        [long] $clip2 = $this.clipAngle2.Data
+        [long] $outside = ($a1 + $clip) -band 0xffffffffL
+        if ($outside -gt $clip2) {
+            if ((($outside - $clip2) -band 0xffffffffL) -ge $span) { return $false }
+            $a1 = $clip
+        }
+        $outside = ($clip - $a2) -band 0xffffffffL
+        if ($outside -gt $clip2) {
+            if ((($outside - $clip2) -band 0xffffffffL) -ge $span) { return $false }
+            $a2 = (-$clip) -band 0xffffffffL
+        }
+        $this.DiscoveryX1 = $this.angleToX[(($a1 + 0x40000000L) -band 0xffffffffL) -shr 19]
+        $this.DiscoveryX2 = $this.angleToX[(($a2 + 0x40000000L) -band 0xffffffffL) -shr 19]
+        return $this.DiscoveryX1 -ne $this.DiscoveryX2
+    }
+
+    [void] DiscoverSeg([Seg] $seg) {
+        [long] $a1 = [Geometry]::PointToAngleData($this.viewXData, $this.viewYData, $seg.Vertex1.X.Data, $seg.Vertex1.Y.Data)
+        [long] $a2 = [Geometry]::PointToAngleData($this.viewXData, $this.viewYData, $seg.Vertex2.X.Data, $seg.Vertex2.Y.Data)
+        if (-not $this.ProjectDiscoveryAngles($a1, $a2)) { return }
+        [int] $x1 = $this.DiscoveryX1
+        [int] $x2 = $this.DiscoveryX2
+        if ($x2 -le $this.screen.FirstColumn - $this.windowX -or $x1 -ge $this.screen.EndColumn - $this.windowX) { return }
+        $front = $seg.FrontSector
+        $back = $seg.BackSector
+        if ($null -eq $back -or $back.CeilingHeight.Data -le $front.FloorHeight.Data -or $back.FloorHeight.Data -ge $front.CeilingHeight.Data) {
+            $this.DrawSolidWall($seg, [Angle]::Ang0, $x1, $x2 - 1)
+            return
+        }
+        if ($back.CeilingHeight.Data -eq $front.CeilingHeight.Data -and $back.FloorHeight.Data -eq $front.FloorHeight.Data -and
+            $back.CeilingFlat -eq $front.CeilingFlat -and $back.FloorFlat -eq $front.FloorFlat -and
+            $back.LightLevel -eq $front.LightLevel -and $seg.SideDef.MiddleTexture -eq 0) { return }
+        $this.DrawPassWall($seg, [Angle]::Ang0, $x1, $x2 - 1)
+    }
 
     [ColorMap] $colorMap
     [ITextureLookup] $textures
@@ -1038,6 +1083,17 @@ class ThreeDRenderer {
         $x2 = $bbox[[ThreeDRenderer]::viewPosToFrustumTangent[$viewPos][2]]
         $y2 = $bbox[[ThreeDRenderer]::viewPosToFrustumTangent[$viewPos][3]]
 
+        if ($this.DiscoveryOnly) {
+            [long] $first = [Geometry]::PointToAngleData($this.viewXData, $this.viewYData, $x1.Data, $y1.Data)
+            [long] $second = [Geometry]::PointToAngleData($this.viewXData, $this.viewYData, $x2.Data, $y2.Data)
+            if ((($first - $second) -band 0xffffffffL) -ge 0x80000000L) { return $true }
+            if (-not $this.ProjectDiscoveryAngles($first, $second)) { return $false }
+            [int] $end = $this.DiscoveryX2 - 1
+            [int] $range = 0
+            while ($this.clipRanges[$range].Last -lt $end) { $range++ }
+            return -not ($this.DiscoveryX1 -ge $this.clipRanges[$range].First -and $end -le $this.clipRanges[$range].Last)
+        }
+
         # Check clip list for an open space.
         $angle1 = [Geometry]::PointToAngle($this.viewX, $this.viewY, $x1, $y1) - $this.viewAngle
         $angle2 = [Geometry]::PointToAngle($this.viewX, $this.viewY, $x2, $y2) - $this.viewAngle
@@ -1102,6 +1158,7 @@ class ThreeDRenderer {
     ############################################################
 
     [void] DrawSeg([Seg] $seg) {
+        if ($this.DiscoveryOnly) { $this.DiscoverSeg($seg); return }
         # OPTIMIZE: quickly reject orthogonal back sides.
         $angle1 = [Geometry]::PointToAngle($this.viewX, $this.viewY, $seg.Vertex1.X, $seg.Vertex1.Y)
         $angle2 = [Geometry]::PointToAngle($this.viewX, $this.viewY, $seg.Vertex2.X, $seg.Vertex2.Y)

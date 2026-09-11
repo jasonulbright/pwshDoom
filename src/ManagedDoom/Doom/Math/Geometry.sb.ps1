@@ -17,6 +17,32 @@
 ##
 
 class Geometry {
+    # pwshDoom, 2026-09-11: numeric equivalent used by automap discovery.
+    # Preserve the adopted slope table and its rounding; no atan2 substitute.
+    static [long] PointToAngleData([int] $fromX, [int] $fromY, [int] $toX, [int] $toY) {
+        [long] $x = ([long]$toX - $fromX) -band 0xffffffffL
+        [long] $y = ([long]$toY - $fromY) -band 0xffffffffL
+        if ($x -ge 0x80000000L) { $x -= 0x100000000L }
+        if ($y -ge 0x80000000L) { $y -= 0x100000000L }
+        if ($x -eq 0 -and $y -eq 0) { return 0 }
+        if ($x -eq -2147483648L -or $y -eq -2147483648L) {
+            # Preserve the reference's overflow/error behavior at this edge.
+            return [Geometry]::PointToAngle([Fixed]::new($fromX), [Fixed]::new($fromY), [Fixed]::new($toX), [Fixed]::new($toY)).Data
+        }
+        [bool] $negativeX = $x -lt 0
+        [bool] $negativeY = $y -lt 0
+        if ($negativeX) { $x = -$x }
+        if ($negativeY) { $y = -$y }
+        [bool] $wide = $x -gt $y
+        [int] $slope = if ($wide) { [Geometry]::SlopeDiv([int]$y, [int]$x) } else { [Geometry]::SlopeDiv([int]$x, [int]$y) }
+        [long] $angle = [Trig]::tanToAngleTable[$slope]
+        if (-not $negativeX) {
+            if (-not $negativeY) { if ($wide) { return $angle }; return 0x40000000L - 1 - $angle }
+            if ($wide) { return (-$angle) -band 0xffffffffL }; return 0xc0000000L + $angle
+        }
+        if (-not $negativeY) { if ($wide) { return 0x80000000L - 1 - $angle }; return 0x40000000L + $angle }
+        if ($wide) { return 0x80000000L + $angle }; return 0xc0000000L - 1 - $angle
+    }
     static [int] $slopeRange = 2048
     static [int] $slopeBits = 11
     static [int] $fracToSlopeShift = 16 - 11  # Assuming Fixed.FracBits = 16

@@ -4,7 +4,7 @@ param([string]$Wad='C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\
 $ErrorActionPreference='Stop'
 if(Test-Path -LiteralPath $Output){throw 'Choose a fresh report path.'}
 . "$PSScriptRoot/../src/SessionMenu.ps1";. "$PSScriptRoot/FrameCodec.ps1";. "$PSScriptRoot/../src/TerminalCodec.ps1";. "$PSScriptRoot/../src/CharacterCodec.ps1"
-$checks=[Collections.Generic.List[object]]::new();$frames=[Collections.Generic.List[object]]::new();$failure=$null;$content=$null
+$checks=[Collections.Generic.List[object]]::new();$frames=[Collections.Generic.List[object]]::new();$failure=$null;$content=$null;$directory=$null
 function Assert-Menu([string]$Name,[bool]$Condition){if(-not $Condition){throw $Name};$checks.Add(@{Name=$Name;Passed=$true})}
 try{
     $m=New-DoomMenuState

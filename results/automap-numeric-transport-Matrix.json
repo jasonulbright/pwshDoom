@@ -1,0 +1,42 @@
+{
+  "Checks": [
+    {
+      "StripBytesCompared": 7,
+      "PixelsCompared": 64000,
+      "Menu": false,
+      "Automap": false,
+      "Tic": 987,
+      "Screen": true
+    },
+    {
+      "StripBytesCompared": 7,
+      "PixelsCompared": 64000,
+      "Menu": true,
+      "Automap": false,
+      "Tic": 988,
+      "Screen": false
+    },
+    {
+      "StripBytesCompared": 7,
+      "PixelsCompared": 64000,
+      "Menu": false,
+      "Automap": true,
+      "Tic": 989,
+      "Screen": false
+    },
+    {
+      "StripBytesCompared": 7,
+      "PixelsCompared": 64000,
+      "Menu": false,
+      "Automap": false,
+      "Tic": 1,
+      "Screen": false
+    }
+  ],
+  "FinishedUtc": "2026-09-11T17:37:02.4713129Z",
+  "Error": null,
+  "Meaning": "Seven actual workers: independently constructed column/row-major screen equivalence and encoded strip equivalence, then changed E1M2 assets and real rasterization against the serial reference without restarting workers. This is a transport/lifecycle check, not campaign completion or a performance benchmark.",
+  "Style": "Matrix",
+  "WorkerProcessesPreserved": true,
+  "GlyphSet": "Katakana"
+}

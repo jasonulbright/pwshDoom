@@ -146,3 +146,70 @@ To repeat the comparison from PowerShell 7, choose a fresh output path:
 .\scripts\Test-AutomapFoundation.ps1 -Output .\local\automap-repeat.json `
     -ReferenceReport .\results\automap-foundation-first.json
 ```
+
+## Numeric discovery and encoder follow-up
+
+The discovery pass now projects numeric fixed-point coordinates into binary
+angles with the same slope lookup, octant offsets and wrapping as the retained
+renderer. It avoids repeated Fixed/Angle wrapper allocation. It still runs on
+every simulation tic, reads current sector heights at the simulation endpoint,
+and preserves discovered-line semantics rather than using a reduced update rate.
+
+[Foundation comparisons](../results/automap-numeric-foundation.json) pass 64
+checks and retain all sixteen map/HUD hashes. The
+[moving-route comparison](../results/automap-numeric-route.json) matches 2,139
+point-angle cases (including ten matching exceptional cases), 48 sampled poses
+on E1M1/intermission/E1M2, and all eight legacy campaign checkpoints. This is
+broader coverage, not a proof for all maps or the inherited clipping-buffer limits.
+
+Menu and map encoding now uses a sized string array and direct luminance
+comparisons, eliminating temporary candidate arrays inside each character cell.
+Strict greater-than comparisons preserve the first pixel on brightness ties;
+HUD sampling remains unchanged. The independent encoder/navigation suite passes
+[118 checks and 39 screen fixtures](../results/automap-numeric-menu.json).
+Actual Matrix and AnsiArt workers compare 512,000 pixels and 56 encoded strips
+across screen/menu/map transport and E1M2 asset reload.
+
+All following headless tests consume the same 350 gameplay commands and automap
+masks. The initial integration run records the two gameplay/map checkpoints;
+each numeric follow-up matches them. Tests ran sequentially; these are individual
+instrumented observations, not repeated paired trials.
+
+| Build / report | Workers | Active seconds | Completed frames | Completed updates/s |
+| --- | ---: | ---: | ---: | ---: |
+| [Initial integration](../results/automap-host-first.json) | 7 | 13.4845 | 498 | 36.93 |
+| [Numeric discovery](../results/automap-numeric-host.json) | 7 | 10.0293 | 326 | 32.50 |
+| [Numeric discovery](../results/automap-numeric-host-16.json) | 16 | 10.0343 | 452 | 45.05 |
+| [Numeric discovery + encoder](../results/automap-numeric-codec-host-16.json) | 16 | 10.0341 | 600 | 59.80 |
+
+The final row recovers approximately 35 tics and 60 completed updates per second
+for this bounded workload. It does **not** establish uniform pacing: tic lateness
+is 6.31 ms median, 143.21 ms p95 and 224.11 ms maximum; the first uncached map/HUD
+draw reaches 190.77 ms. Render-to-completion latency is 17.05 ms median, 33.36 ms
+p95 and 42.82 ms maximum. These latencies are not frame presentation intervals.
+Headless frames do not measure visible output. Recorded/live presentation and
+longer combat/door/moving-sector routes remain separate qualification work.
+
+To repeat the moving comparison from PowerShell 7:
+
+```powershell
+.\scripts\Test-NumericDiscovery.ps1 -Output .\local\numeric-discovery-repeat.json
+```
+
+The optimized Matrix [recorded run](../results/automap-numeric-recorded-matrix-game.json)
+finishes 350 tics in 10.0315 s and writes 599 frames (59.71/s). Its input/mask stream
+matches the replay fixture and both checkpoints match. The actual window-capture
+viewing copy is `local/recordings/automap-numeric-matrix-view.mp4`: 10.0667 s,
+604 fully decoded 60-CFR frames. The original remains alongside it. A contact
+sheet confirms map/pan/HUD and return to katakana gameplay; an unused tile is black.
+Small-label loss and dimness remain. This measures completed writes and provides
+visual evidence; it does not identify unique game frames at every monitor refresh.
+
+The [longer Classic regression](../results/automap-numeric-campaign-host.json)
+matches all eight E1M1/intermission/E1M2 checkpoints, but 1,747 tics take 51.3342
+active seconds instead of 49.9143 scheduled seconds. Wall time is 52.3448 s,
+including 1.0097 s asset handoff. Discovery averages 4.344 ms, with 11.287 ms p95;
+maximum tic lateness remains 1.378 s. Its 59.16 completed updates/sec does not
+remove that simulation pacing limitation. The
+[final audit](../results/automap-numeric-validation.json) preserves source hashes,
+checks, host summaries, recording hashes and zero owned processes.

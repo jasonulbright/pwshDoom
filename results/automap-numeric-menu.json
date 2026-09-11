@@ -1,0 +1,688 @@
+{
+  "FrameDirectory": "C:\\projects\\pwshDoom\\scripts\\..\\local\\menu-unit-frames-23d270bed09c4cfeaf8744ac4041784a",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "Meaning": "Menu navigation/confirmation and native WAD screen fixtures; independent stable-sort brightness reduction versus actual menu encoders at uneven partitions/origins. Screen draws are not a live keyboard test.",
+  "Frames": [
+    {
+      "Choice": 0,
+      "Sha256": "B7AC8951F4D95B3AA093512DEB86D259E241877B2F8FE2014B72854E4639C11C",
+      "Screen": 1
+    },
+    {
+      "Choice": 1,
+      "Sha256": "13931BF3F664430E03487F074FBDC12B3D2855EC08190D95ED88F544C528BA3A",
+      "Screen": 1
+    },
+    {
+      "Choice": 2,
+      "Sha256": "E73D56D721E482A5B9FAA4250B15057515E6B7D2243EFBF5FE1DEEFF6A268C3B",
+      "Screen": 1
+    },
+    {
+      "Choice": 3,
+      "Sha256": "58D4466B3A5874CEFB63B3C40FFB0B6BC7032EF54BB96B026304158FFC26D2B0",
+      "Screen": 1
+    },
+    {
+      "Choice": 4,
+      "Sha256": "C4C36DC8B5E1A071C4DC292A1FA336788F2311A206D5F1CE4D7896FAA0F626A4",
+      "Screen": 1
+    },
+    {
+      "Choice": 5,
+      "Sha256": "DF446D8C9704FABBA0C44B748984CD00AAD4799D205816ACDC18F369646C5A1D",
+      "Screen": 1
+    },
+    {
+      "Choice": 0,
+      "Sha256": "0BF065349152D4576C7E66A918D2823003C734EDC2153BB0800E183F9B02090B",
+      "Screen": 2
+    },
+    {
+      "Choice": 1,
+      "Sha256": "40587945505DAAE157F19B47E8B391CD39C8485C35568DEBA565A7D90C73B4A2",
+      "Screen": 2
+    },
+    {
+      "Choice": 2,
+      "Sha256": "AF4C45ACFE52154B215A268B66DBAF005FADD4CF5F1D69B367C8D14B7B0B4AF6",
+      "Screen": 2
+    },
+    {
+      "Choice": 3,
+      "Sha256": "9BC93D30204CD81C60D585DA0540BD2E162DAA1A75EFE8F558AC0A63177B8016",
+      "Screen": 2
+    },
+    {
+      "Choice": 0,
+      "Sha256": "454A4542F39AF16C21B6E6107FFCC3DACD7FCC67CD1B4B5D2C50BB854A365171",
+      "Screen": 3
+    },
+    {
+      "Choice": 1,
+      "Sha256": "6DA1C4709CA320C6F76072DE37324686201D7F6C494E1814EEE8D4309160D8A0",
+      "Screen": 3
+    },
+    {
+      "Choice": 2,
+      "Sha256": "F65F185C9EA7F639A83386C7B76813D79EFBB674FC31807A661F058A98DC4684",
+      "Screen": 3
+    },
+    {
+      "Choice": 3,
+      "Sha256": "536909DC165D00751138651823C17AF514B7C33A59E47F5A40435AA2A6B89E05",
+      "Screen": 3
+    },
+    {
+      "Choice": 4,
+      "Sha256": "409932E996B2AE38689B45B3E2A8EA4571ED90A5CF1546975DDA650454355F1C",
+      "Screen": 3
+    },
+    {
+      "Choice": 0,
+      "Sha256": "964A4F456C7B8BCF619491EEF6CE14115D383E713A21884B779C59D64674EA09",
+      "Screen": 4
+    },
+    {
+      "Choice": 1,
+      "Sha256": "30DEA463BECE6D56C73E7ACCDBBDDBCB1C76ED568F7253D039D6FE328F927C3A",
+      "Screen": 4
+    },
+    {
+      "Choice": 0,
+      "Sha256": "2446C6A43390AA38AD90DF25606F39CB06878C3EA9C98019F7B5E95C411006D5",
+      "Screen": 5
+    },
+    {
+      "Choice": 0,
+      "Sha256": "FFF0635451F18D92EA481F3F8E62F93B5E2FB7BBC504653E870775099E76439C",
+      "Screen": 6
+    },
+    {
+      "Choice": 1,
+      "Sha256": "0CE8FDBE40FFE321146313F28B9388F80905D4413C680E419A0D2C51016B64E6",
+      "Screen": 6
+    },
+    {
+      "Choice": 0,
+      "Sha256": "C8ADF364AFAD310540D9C5FF754839AABE75976CAA8E27E092E3F6BDE896C7E2",
+      "Screen": 7
+    },
+    {
+      "Choice": 0,
+      "Sha256": "F9696A1993276475F02981C8E8E69D8EC385E2C2859BC970177BBFC9BCB5E46F",
+      "Screen": 8
+    },
+    {
+      "Choice": 1,
+      "Sha256": "4C4A4A68E3E0EF8A02E5D2326E96B98E0012C62D4EB50EC26CC6278F6DD12ECD",
+      "Screen": 8
+    },
+    {
+      "Choice": 2,
+      "Sha256": "89BD66793153C0DC0EBC57CF60EE4C762CF840E1402B87988C2CB4183BED35ED",
+      "Screen": 8
+    },
+    {
+      "Choice": 3,
+      "Sha256": "CEA783C4B60E28B661CDA5F4D8525893DB2B1431911700D63B8AACE4C76C4591",
+      "Screen": 8
+    },
+    {
+      "Choice": 4,
+      "Sha256": "DCA10C2854A6173C67E9F67AA5FB55F9819E369BA45B4D70875D1D70DFF36D9D",
+      "Screen": 8
+    },
+    {
+      "Choice": 5,
+      "Sha256": "43D98947AF22AD298C9182B894D00AAC0334E1B619863ABFCD6F34E09E3B0730",
+      "Screen": 8
+    },
+    {
+      "Choice": 0,
+      "Sha256": "1AEFDB197F84EFDC98F3003A6EE7E5DB15E9258D6A3554326E1F14A32636F0CE",
+      "Screen": 9
+    },
+    {
+      "Choice": 1,
+      "Sha256": "74BA1E3B2EF02F049EAE9D7184473B8E4AC507D62A2298357E3E4268D31906F9",
+      "Screen": 9
+    },
+    {
+      "Choice": 2,
+      "Sha256": "6CE515FDC268943AB991866DBD1D66C28E62362D731DFDC16007AA037FFCCC92",
+      "Screen": 9
+    },
+    {
+      "Choice": 3,
+      "Sha256": "363F3121864667DDC8FED8A543CD10A0F128872D0633BF94EC7756564594CE84",
+      "Screen": 9
+    },
+    {
+      "Choice": 4,
+      "Sha256": "C32FB83BF097F6DDB3101336327F968ABF69D3A36C9AB056C228A18E2DEBE69A",
+      "Screen": 9
+    },
+    {
+      "Choice": 5,
+      "Sha256": "76210B8A2D345E915EF67C10F3C52FA70694BF4E3ADD01C07A1157B1FC803FF5",
+      "Screen": 9
+    },
+    {
+      "Choice": 0,
+      "Sha256": "A51E266459AB54F5AD8C76323041D8366735E77B5CEB2731FBA4F88052A5FC3A",
+      "Screen": 10
+    },
+    {
+      "Choice": 1,
+      "Sha256": "DEA7DFC2A44A7B954ACDB537DA03B647012CFA7ED90B1B446B38D6E9F50FB9F2",
+      "Screen": 10
+    },
+    {
+      "Choice": 0,
+      "Sha256": "CBFA8C25659E2278501DA448DDA5F1BB09B755573C79DB02D83D029EB13A9D62",
+      "Screen": 11
+    },
+    {
+      "Choice": 1,
+      "Sha256": "5B06F422AE298FB83B85A29D4671810C53D6E981EFB623F8C21F4BE3B9D5558F",
+      "Screen": 11
+    },
+    {
+      "Choice": 0,
+      "Sha256": "2B47FF3EB2D5848BCD757D8901EC23F785C73F6E91CF1D47926A2677A9AB081E",
+      "Screen": 12
+    },
+    {
+      "Choice": 0,
+      "Sha256": "B052A5DA83EAAF4B29439FBCB609A5AEB18240FA814DCCB4FD574F999C7D1037",
+      "Screen": 13
+    }
+  ],
+  "Sources": [
+    {
+      "Sha256": "168705A724E1B255BDDBCEFD5E779E618A1EA3A28CFC198D9AD7880BC90EA9CC",
+      "Path": "src/SessionMenu.ps1"
+    },
+    {
+      "Sha256": "D2E3E027B39D5EC8084A930EC89233442902390063D2986814E25D5CA4174B53",
+      "Path": "src/CharacterCodec.ps1"
+    }
+  ],
+  "FinishedUtc": "2026-09-11T17:36:32.9923425Z",
+  "Error": null,
+  "Checks": [
+    {
+      "Name": "Escape opens main",
+      "Passed": true
+    },
+    {
+      "Name": "Choice wraps upwards",
+      "Passed": true
+    },
+    {
+      "Name": "Quit defaults to no",
+      "Passed": true
+    },
+    {
+      "Name": "Quit cancellation returns to menu",
+      "Passed": true
+    },
+    {
+      "Name": "Quit requires confirmation",
+      "Passed": true
+    },
+    {
+      "Name": "New game opens episodes",
+      "Passed": true
+    },
+    {
+      "Name": "Episode selection preserves episode four",
+      "Passed": true
+    },
+    {
+      "Name": "Nightmare selection asks before replacing game",
+      "Passed": true
+    },
+    {
+      "Name": "New-game cancellation returns to skill",
+      "Passed": true
+    },
+    {
+      "Name": "Confirmed new game carries settings",
+      "Passed": true
+    },
+    {
+      "Name": "Pause opens paused screen",
+      "Passed": true
+    },
+    {
+      "Name": "Enter resumes pause",
+      "Passed": true
+    },
+    {
+      "Name": "Single-episode content skips unavailable episodes",
+      "Passed": true
+    },
+    {
+      "Name": "Single-episode skill back returns home",
+      "Passed": true
+    },
+    {
+      "Name": "Compact menu fits 8x1",
+      "Passed": true
+    },
+    {
+      "Name": "Compact menu fits 40x2",
+      "Passed": true
+    },
+    {
+      "Name": "Compact menu fits 320x98",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix max-brightness reference / origin 0,0 / strip 0",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix map lines plus gameplay HUD / origin 0,0 / strip 0",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix max-brightness reference / origin 0,0 / strip 1",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix map lines plus gameplay HUD / origin 0,0 / strip 1",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix max-brightness reference / origin 0,0 / strip 2",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix map lines plus gameplay HUD / origin 0,0 / strip 2",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix max-brightness reference / origin 0,0 / strip 3",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix map lines plus gameplay HUD / origin 0,0 / strip 3",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix max-brightness reference / origin 0,0 / strip 4",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix map lines plus gameplay HUD / origin 0,0 / strip 4",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix max-brightness reference / origin 0,0 / strip 5",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix map lines plus gameplay HUD / origin 0,0 / strip 5",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix max-brightness reference / origin 0,0 / strip 6",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix map lines plus gameplay HUD / origin 0,0 / strip 6",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix max-brightness reference / origin 11,3 / strip 0",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix map lines plus gameplay HUD / origin 11,3 / strip 0",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix max-brightness reference / origin 11,3 / strip 1",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix map lines plus gameplay HUD / origin 11,3 / strip 1",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix max-brightness reference / origin 11,3 / strip 2",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix map lines plus gameplay HUD / origin 11,3 / strip 2",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix max-brightness reference / origin 11,3 / strip 3",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix map lines plus gameplay HUD / origin 11,3 / strip 3",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix max-brightness reference / origin 11,3 / strip 4",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix map lines plus gameplay HUD / origin 11,3 / strip 4",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix max-brightness reference / origin 11,3 / strip 5",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix map lines plus gameplay HUD / origin 11,3 / strip 5",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix max-brightness reference / origin 11,3 / strip 6",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix map lines plus gameplay HUD / origin 11,3 / strip 6",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt max-brightness reference / origin 0,0 / strip 0",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt map lines plus gameplay HUD / origin 0,0 / strip 0",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt max-brightness reference / origin 0,0 / strip 1",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt map lines plus gameplay HUD / origin 0,0 / strip 1",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt max-brightness reference / origin 0,0 / strip 2",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt map lines plus gameplay HUD / origin 0,0 / strip 2",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt max-brightness reference / origin 0,0 / strip 3",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt map lines plus gameplay HUD / origin 0,0 / strip 3",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt max-brightness reference / origin 0,0 / strip 4",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt map lines plus gameplay HUD / origin 0,0 / strip 4",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt max-brightness reference / origin 0,0 / strip 5",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt map lines plus gameplay HUD / origin 0,0 / strip 5",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt max-brightness reference / origin 0,0 / strip 6",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt map lines plus gameplay HUD / origin 0,0 / strip 6",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt max-brightness reference / origin 11,3 / strip 0",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt map lines plus gameplay HUD / origin 11,3 / strip 0",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt max-brightness reference / origin 11,3 / strip 1",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt map lines plus gameplay HUD / origin 11,3 / strip 1",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt max-brightness reference / origin 11,3 / strip 2",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt map lines plus gameplay HUD / origin 11,3 / strip 2",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt max-brightness reference / origin 11,3 / strip 3",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt map lines plus gameplay HUD / origin 11,3 / strip 3",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt max-brightness reference / origin 11,3 / strip 4",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt map lines plus gameplay HUD / origin 11,3 / strip 4",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt max-brightness reference / origin 11,3 / strip 5",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt map lines plus gameplay HUD / origin 11,3 / strip 5",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt max-brightness reference / origin 11,3 / strip 6",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt map lines plus gameplay HUD / origin 11,3 / strip 6",
+      "Passed": true
+    },
+    {
+      "Name": "Invalid menu dimensions 32,0,0,32",
+      "Passed": true
+    },
+    {
+      "Name": "Invalid menu dimensions 31,16,0,30",
+      "Passed": true
+    },
+    {
+      "Name": "Invalid menu dimensions 32,15,0,32",
+      "Passed": true
+    },
+    {
+      "Name": "Invalid menu dimensions 32,16,1,32",
+      "Passed": true
+    },
+    {
+      "Name": "Invalid menu dimensions 32,16,0,34",
+      "Passed": true
+    },
+    {
+      "Name": "Invalid menu dimensions 32,16,4,4",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 1 / choice 0 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 1 / choice 1 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 1 / choice 2 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 1 / choice 3 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 1 / choice 4 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 1 / choice 5 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 2 / choice 0 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 2 / choice 1 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 2 / choice 2 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 2 / choice 3 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 3 / choice 0 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 3 / choice 1 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 3 / choice 2 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 3 / choice 3 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 3 / choice 4 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 4 / choice 0 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 4 / choice 1 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 5 / choice 0 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 6 / choice 0 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 6 / choice 1 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 7 / choice 0 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 8 / choice 0 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 8 / choice 1 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 8 / choice 2 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 8 / choice 3 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 8 / choice 4 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 8 / choice 5 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 9 / choice 0 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 9 / choice 1 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 9 / choice 2 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 9 / choice 3 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 9 / choice 4 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 9 / choice 5 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 10 / choice 0 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 10 / choice 1 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 11 / choice 0 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 11 / choice 1 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 12 / choice 0 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 13 / choice 0 draws nonblank pixels",
+      "Passed": true
+    }
+  ]
+}

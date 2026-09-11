@@ -1,0 +1,1145 @@
+{
+  "HarnessSha256": "6FCDB813335E862F253DD608603C7CDBFC1442DCF45892C82B580265232F3329",
+  "Cases": [
+    {
+      "Heading": 0,
+      "MappedLines": [
+        9,
+        10,
+        13,
+        16,
+        18,
+        19,
+        22,
+        23,
+        25,
+        26,
+        27,
+        30,
+        31,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        47,
+        48,
+        49,
+        50,
+        51,
+        54,
+        57,
+        58,
+        143,
+        145,
+        146,
+        477,
+        479
+      ],
+      "Frame": "C:\\projects\\pwshDoom\\scripts\\..\\local\\automap-foundation-17c492917270473095578c3ff17d7d5b\\E1M1-0.raw",
+      "ReferenceLines": [
+        9,
+        10,
+        13,
+        16,
+        18,
+        19,
+        22,
+        23,
+        25,
+        26,
+        27,
+        30,
+        31,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        47,
+        48,
+        49,
+        50,
+        51,
+        54,
+        57,
+        58,
+        143,
+        145,
+        146,
+        477,
+        479
+      ],
+      "Map": "E1M1",
+      "MapRenderMs": 195.8715,
+      "DiscoveryMs": 50.7112,
+      "FrameSha256": "37C3EFB1CC4ECD0011CC80D2015EF690F75216403D379A32FBB70212F3FE4368"
+    },
+    {
+      "Heading": 90,
+      "MappedLines": [
+        1,
+        4,
+        6,
+        46,
+        52,
+        54,
+        56,
+        57,
+        61,
+        63,
+        67,
+        135,
+        136
+      ],
+      "Frame": "C:\\projects\\pwshDoom\\scripts\\..\\local\\automap-foundation-17c492917270473095578c3ff17d7d5b\\E1M1-90.raw",
+      "ReferenceLines": [
+        1,
+        4,
+        6,
+        46,
+        52,
+        54,
+        56,
+        57,
+        61,
+        63,
+        67,
+        135,
+        136
+      ],
+      "Map": "E1M1",
+      "MapRenderMs": 29.6775,
+      "DiscoveryMs": 5.428,
+      "FrameSha256": "E425BE2814A1DDA59588445C7C02C083E9A4ACAC71D2DEF89FB80EC563E50837"
+    },
+    {
+      "Heading": 180,
+      "MappedLines": [
+        0,
+        1,
+        2,
+        3,
+        46
+      ],
+      "Frame": "C:\\projects\\pwshDoom\\scripts\\..\\local\\automap-foundation-17c492917270473095578c3ff17d7d5b\\E1M1-180.raw",
+      "ReferenceLines": [
+        0,
+        1,
+        2,
+        3,
+        46
+      ],
+      "Map": "E1M1",
+      "MapRenderMs": 27.3448,
+      "DiscoveryMs": 1.2195,
+      "FrameSha256": "CF8C926912106358D813FDD56AB897A5861B7BAF61D0CA021248C9C7671CF4AA"
+    },
+    {
+      "Heading": 270,
+      "MappedLines": [
+        3,
+        5,
+        25,
+        30,
+        38,
+        159,
+        160,
+        167,
+        469,
+        470,
+        471,
+        477,
+        479
+      ],
+      "Frame": "C:\\projects\\pwshDoom\\scripts\\..\\local\\automap-foundation-17c492917270473095578c3ff17d7d5b\\E1M1-270.raw",
+      "ReferenceLines": [
+        3,
+        5,
+        25,
+        30,
+        38,
+        159,
+        160,
+        167,
+        469,
+        470,
+        471,
+        477,
+        479
+      ],
+      "Map": "E1M1",
+      "MapRenderMs": 24.7359,
+      "DiscoveryMs": 5.3368,
+      "FrameSha256": "566FD1BFB840FF902887AEC8482652B92CE1AC95BEA123568740428D429B6772"
+    },
+    {
+      "Map": "E1M1",
+      "RepeatedHudMs": {
+        "Count": 10,
+        "Mean": 19.78947,
+        "Median": 19.610500000000002,
+        "P95": 22.3492,
+        "Max": 22.3492
+      },
+      "MapSamples": [
+        23.4358,
+        25.4965,
+        26.7737,
+        23.4025,
+        27.4087,
+        23.6687,
+        25.7602,
+        24.0329,
+        25.661,
+        23.5533
+      ],
+      "DiscoverySamples": [
+        5.5909,
+        6.4556,
+        7.3093,
+        6.3793,
+        5.4655,
+        5.9644,
+        5.4084,
+        6.3043,
+        6.2876,
+        6.2764
+      ],
+      "MapOnlySamples": [
+        5.4827,
+        4.3527,
+        5.7472,
+        5.3188,
+        5.0595,
+        4.8539,
+        4.4051,
+        6.0854,
+        5.3092,
+        4.6841
+      ],
+      "RepeatedMapOnlyMs": {
+        "Count": 10,
+        "Mean": 5.129859999999999,
+        "Median": 5.18435,
+        "P95": 6.0854,
+        "Max": 6.0854
+      },
+      "RepeatedDiscoveryMs": {
+        "Count": 10,
+        "Mean": 6.14417,
+        "Median": 6.282,
+        "P95": 7.3093,
+        "Max": 7.3093
+      },
+      "RepeatedMapRenderMs": {
+        "Count": 10,
+        "Mean": 24.919330000000002,
+        "Median": 24.7647,
+        "P95": 27.4087,
+        "Max": 27.4087
+      },
+      "HudSamples": [
+        17.9531,
+        21.143800000000002,
+        21.026500000000002,
+        18.0837,
+        22.3492,
+        18.8148,
+        21.3551,
+        17.9475,
+        20.3518,
+        18.8692
+      ]
+    },
+    {
+      "Heading": 0,
+      "MappedLines": [
+        177,
+        178,
+        181,
+        184,
+        185,
+        280,
+        281,
+        300,
+        326,
+        327,
+        1333,
+        1334,
+        1339,
+        1340
+      ],
+      "Frame": "C:\\projects\\pwshDoom\\scripts\\..\\local\\automap-foundation-17c492917270473095578c3ff17d7d5b\\E2M7-0.raw",
+      "ReferenceLines": [
+        177,
+        178,
+        181,
+        184,
+        185,
+        280,
+        281,
+        300,
+        326,
+        327,
+        1333,
+        1334,
+        1339,
+        1340
+      ],
+      "Map": "E2M7",
+      "MapRenderMs": 28.0479,
+      "DiscoveryMs": 5.4918,
+      "FrameSha256": "4DE1DB5F5C8071C5FE61DF8CEEDC7C36CBEAE255AC4D9B7822E456FECA69AED0"
+    },
+    {
+      "Heading": 90,
+      "MappedLines": [
+        178,
+        1336,
+        1337,
+        1678
+      ],
+      "Frame": "C:\\projects\\pwshDoom\\scripts\\..\\local\\automap-foundation-17c492917270473095578c3ff17d7d5b\\E2M7-90.raw",
+      "ReferenceLines": [
+        178,
+        1336,
+        1337,
+        1678
+      ],
+      "Map": "E2M7",
+      "MapRenderMs": 25.3686,
+      "DiscoveryMs": 3.1238,
+      "FrameSha256": "EF04C43E1F0A5318A3F1DB844CA01F6A266C8DDF6AAA6092F5E78FB5DD65083E"
+    },
+    {
+      "Heading": 180,
+      "MappedLines": [
+        1325,
+        1326,
+        1327,
+        1329,
+        1332,
+        1677,
+        1678
+      ],
+      "Frame": "C:\\projects\\pwshDoom\\scripts\\..\\local\\automap-foundation-17c492917270473095578c3ff17d7d5b\\E2M7-180.raw",
+      "ReferenceLines": [
+        1325,
+        1326,
+        1327,
+        1329,
+        1332,
+        1677,
+        1678
+      ],
+      "Map": "E2M7",
+      "MapRenderMs": 30.0609,
+      "DiscoveryMs": 2.7091,
+      "FrameSha256": "42EDAF7B7C0369AB9B18F1F503180A264919AA60571625B52718741F2B21C55A"
+    },
+    {
+      "Heading": 270,
+      "MappedLines": [
+        179,
+        181,
+        326,
+        327,
+        328,
+        899,
+        900,
+        901,
+        903,
+        904,
+        905,
+        906,
+        1325,
+        1333,
+        1343,
+        1346
+      ],
+      "Frame": "C:\\projects\\pwshDoom\\scripts\\..\\local\\automap-foundation-17c492917270473095578c3ff17d7d5b\\E2M7-270.raw",
+      "ReferenceLines": [
+        179,
+        181,
+        326,
+        327,
+        328,
+        899,
+        900,
+        901,
+        903,
+        904,
+        905,
+        906,
+        1325,
+        1333,
+        1343,
+        1346
+      ],
+      "Map": "E2M7",
+      "MapRenderMs": 23.6441,
+      "DiscoveryMs": 3.8864,
+      "FrameSha256": "4AC327F8AF628936EB516A17D598C85666C78BC83DC4FFE17718DFD825C0FF14"
+    },
+    {
+      "Map": "E2M7",
+      "RepeatedHudMs": {
+        "Count": 10,
+        "Mean": 17.029310000000002,
+        "Median": 16.88675,
+        "P95": 18.6132,
+        "Max": 18.6132
+      },
+      "MapSamples": [
+        25.1483,
+        23.4706,
+        24.3052,
+        24.051,
+        24.669,
+        23.9592,
+        24.1082,
+        27.4736,
+        24.2939,
+        24.5599
+      ],
+      "DiscoverySamples": [
+        3.7222,
+        3.4321,
+        3.3541,
+        2.9542,
+        3.0943,
+        3.3861,
+        2.9432,
+        3.6939,
+        3.4614,
+        2.9475
+      ],
+      "MapOnlySamples": [
+        7.6429,
+        7.5311,
+        7.1565,
+        7.4262,
+        7.0766,
+        7.4744,
+        6.8717,
+        8.8604,
+        7.7307,
+        7.9753
+      ],
+      "RepeatedMapOnlyMs": {
+        "Count": 10,
+        "Mean": 7.57458,
+        "Median": 7.502750000000001,
+        "P95": 8.8604,
+        "Max": 8.8604
+      },
+      "RepeatedDiscoveryMs": {
+        "Count": 10,
+        "Mean": 3.2988999999999997,
+        "Median": 3.3701,
+        "P95": 3.7222,
+        "Max": 3.7222
+      },
+      "RepeatedMapRenderMs": {
+        "Count": 10,
+        "Mean": 24.60389,
+        "Median": 24.29955,
+        "P95": 27.4736,
+        "Max": 27.4736
+      },
+      "HudSamples": [
+        17.505399999999998,
+        15.9395,
+        17.148699999999998,
+        16.6248,
+        17.5924,
+        16.4848,
+        17.2365,
+        18.6132,
+        16.563200000000002,
+        16.5846
+      ]
+    },
+    {
+      "Heading": 0,
+      "MappedLines": [
+        2,
+        5,
+        9
+      ],
+      "Frame": "C:\\projects\\pwshDoom\\scripts\\..\\local\\automap-foundation-17c492917270473095578c3ff17d7d5b\\E3M8-0.raw",
+      "ReferenceLines": [
+        2,
+        5,
+        9
+      ],
+      "Map": "E3M8",
+      "MapRenderMs": 22.4747,
+      "DiscoveryMs": 1.9366,
+      "FrameSha256": "3DFF3A21BB57F8FCEF015D3C0F7158CB4AF379F3A200832320183EE576C0608E"
+    },
+    {
+      "Heading": 90,
+      "MappedLines": [
+        2,
+        3
+      ],
+      "Frame": "C:\\projects\\pwshDoom\\scripts\\..\\local\\automap-foundation-17c492917270473095578c3ff17d7d5b\\E3M8-90.raw",
+      "ReferenceLines": [
+        2,
+        3
+      ],
+      "Map": "E3M8",
+      "MapRenderMs": 20.8724,
+      "DiscoveryMs": 0.4592,
+      "FrameSha256": "93F0B5A0249C6DFBA23CCCF5E3E13321D2E112552F6F2E3D50FE14A1687CFB65"
+    },
+    {
+      "Heading": 180,
+      "MappedLines": [
+        3,
+        4
+      ],
+      "Frame": "C:\\projects\\pwshDoom\\scripts\\..\\local\\automap-foundation-17c492917270473095578c3ff17d7d5b\\E3M8-180.raw",
+      "ReferenceLines": [
+        3,
+        4
+      ],
+      "Map": "E3M8",
+      "MapRenderMs": 25.6353,
+      "DiscoveryMs": 0.5091,
+      "FrameSha256": "7BDBD8643B1DEA3CA3E4F87C9B2095CD2512305AAEDD6AB4C944FAD6D0F6BD9B"
+    },
+    {
+      "Heading": 270,
+      "MappedLines": [
+        4,
+        5
+      ],
+      "Frame": "C:\\projects\\pwshDoom\\scripts\\..\\local\\automap-foundation-17c492917270473095578c3ff17d7d5b\\E3M8-270.raw",
+      "ReferenceLines": [
+        4,
+        5
+      ],
+      "Map": "E3M8",
+      "MapRenderMs": 24.2806,
+      "DiscoveryMs": 0.5907,
+      "FrameSha256": "C5F514CBC12438944398D7C380708F6A9129C196F44C0CD9BED62CDB0B657501"
+    },
+    {
+      "Map": "E3M8",
+      "RepeatedHudMs": {
+        "Count": 10,
+        "Mean": 20.018980000000003,
+        "Median": 19.62315,
+        "P95": 23.5279,
+        "Max": 23.5279
+      },
+      "MapSamples": [
+        26.9617,
+        27.6696,
+        24.1131,
+        22.2327,
+        23.4123,
+        20.4635,
+        23.0966,
+        21.7118,
+        21.5171,
+        22.2067
+      ],
+      "DiscoverySamples": [
+        0.542,
+        0.6192,
+        0.5111,
+        0.7087,
+        0.6513,
+        0.5037,
+        0.7781,
+        0.5955,
+        0.4988,
+        0.4962
+      ],
+      "MapOnlySamples": [
+        3.4338,
+        4.4187,
+        3.3604,
+        3.0303,
+        3.4632,
+        3.2105,
+        2.8168,
+        3.4563,
+        3.0958,
+        2.9095
+      ],
+      "RepeatedMapOnlyMs": {
+        "Count": 10,
+        "Mean": 3.3195300000000003,
+        "Median": 3.28545,
+        "P95": 4.4187,
+        "Max": 4.4187
+      },
+      "RepeatedDiscoveryMs": {
+        "Count": 10,
+        "Mean": 0.59046,
+        "Median": 0.5687500000000001,
+        "P95": 0.7781,
+        "Max": 0.7781
+      },
+      "RepeatedMapRenderMs": {
+        "Count": 10,
+        "Mean": 23.338510000000003,
+        "Median": 22.66465,
+        "P95": 27.6696,
+        "Max": 27.6696
+      },
+      "HudSamples": [
+        23.5279,
+        23.250899999999998,
+        20.7527,
+        19.2024,
+        19.949099999999998,
+        17.253,
+        20.279799999999998,
+        18.2555,
+        18.4213,
+        19.2972
+      ]
+    },
+    {
+      "Heading": 0,
+      "MappedLines": [
+        2,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        23,
+        25,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        52,
+        53,
+        54,
+        55,
+        57,
+        58,
+        59,
+        60,
+        61,
+        68,
+        69,
+        70,
+        73,
+        74,
+        75,
+        76,
+        77,
+        79,
+        80,
+        81,
+        83,
+        84,
+        85,
+        86,
+        89,
+        90,
+        91,
+        93,
+        98,
+        99,
+        100,
+        102,
+        224,
+        465,
+        467,
+        468,
+        469
+      ],
+      "Frame": "C:\\projects\\pwshDoom\\scripts\\..\\local\\automap-foundation-17c492917270473095578c3ff17d7d5b\\E4M1-0.raw",
+      "ReferenceLines": [
+        2,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        23,
+        25,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        52,
+        53,
+        54,
+        55,
+        57,
+        58,
+        59,
+        60,
+        61,
+        68,
+        69,
+        70,
+        73,
+        74,
+        75,
+        76,
+        77,
+        79,
+        80,
+        81,
+        83,
+        84,
+        85,
+        86,
+        89,
+        90,
+        91,
+        93,
+        98,
+        99,
+        100,
+        102,
+        224,
+        465,
+        467,
+        468,
+        469
+      ],
+      "Map": "E4M1",
+      "MapRenderMs": 30.001,
+      "DiscoveryMs": 8.688,
+      "FrameSha256": "719D5917EFEA4C6110867EFC935A0F643601D6EAF48F62678CF99C703EDAAC73"
+    },
+    {
+      "Heading": 90,
+      "MappedLines": [
+        1,
+        2
+      ],
+      "Frame": "C:\\projects\\pwshDoom\\scripts\\..\\local\\automap-foundation-17c492917270473095578c3ff17d7d5b\\E4M1-90.raw",
+      "ReferenceLines": [
+        1,
+        2
+      ],
+      "Map": "E4M1",
+      "MapRenderMs": 26.071,
+      "DiscoveryMs": 0.724,
+      "FrameSha256": "86F2E5E64ACF919764F102B78DDABBE22A94D626EE0445EC284C04BAE9726E84"
+    },
+    {
+      "Heading": 180,
+      "MappedLines": [
+        0,
+        1
+      ],
+      "Frame": "C:\\projects\\pwshDoom\\scripts\\..\\local\\automap-foundation-17c492917270473095578c3ff17d7d5b\\E4M1-180.raw",
+      "ReferenceLines": [
+        0,
+        1
+      ],
+      "Map": "E4M1",
+      "MapRenderMs": 25.193,
+      "DiscoveryMs": 0.6193,
+      "FrameSha256": "384F44D131CC3D7E49B5850A33DC2EF1FE131E77DEC9B58C8672015BEC374412"
+    },
+    {
+      "Heading": 270,
+      "MappedLines": [
+        0,
+        18
+      ],
+      "Frame": "C:\\projects\\pwshDoom\\scripts\\..\\local\\automap-foundation-17c492917270473095578c3ff17d7d5b\\E4M1-270.raw",
+      "ReferenceLines": [
+        0,
+        18
+      ],
+      "Map": "E4M1",
+      "MapRenderMs": 26.418,
+      "DiscoveryMs": 1.1072,
+      "FrameSha256": "24E33CCFEFD8D40A3A690DA15684B2808E53AA30BEB5BB608F3A61F2278D4B13"
+    },
+    {
+      "Map": "E4M1",
+      "RepeatedHudMs": {
+        "Count": 10,
+        "Mean": 22.3335,
+        "Median": 21.5214,
+        "P95": 25.291200000000003,
+        "Max": 25.291200000000003
+      },
+      "MapSamples": [
+        29.5695,
+        30.7879,
+        31.0222,
+        30.0615,
+        27.1973,
+        26.0334,
+        25.2557,
+        25.5561,
+        25.8719,
+        25.3598
+      ],
+      "DiscoverySamples": [
+        1.3294,
+        1.7212,
+        1.4907,
+        1.404,
+        1.172,
+        1.2235,
+        1.1807,
+        1.7328,
+        1.1672,
+        1.492
+      ],
+      "MapOnlySamples": [
+        5.2967,
+        5.9544,
+        5.731,
+        5.589,
+        5.0895,
+        5.0984,
+        5.0634,
+        4.7355,
+        5.2711,
+        5.5513
+      ],
+      "RepeatedMapOnlyMs": {
+        "Count": 10,
+        "Mean": 5.33803,
+        "Median": 5.2839,
+        "P95": 5.9544,
+        "Max": 5.9544
+      },
+      "RepeatedDiscoveryMs": {
+        "Count": 10,
+        "Mean": 1.3913499999999999,
+        "Median": 1.3666999999999998,
+        "P95": 1.7328,
+        "Max": 1.7328
+      },
+      "RepeatedMapRenderMs": {
+        "Count": 10,
+        "Mean": 27.671529999999997,
+        "Median": 26.61535,
+        "P95": 31.0222,
+        "Max": 31.0222
+      },
+      "HudSamples": [
+        24.2728,
+        24.8335,
+        25.291200000000003,
+        24.472499999999997,
+        22.107799999999997,
+        20.935000000000002,
+        20.192300000000003,
+        20.8206,
+        20.6008,
+        19.8085
+      ]
+    }
+  ],
+  "FrameDirectory": "C:\\projects\\pwshDoom\\scripts\\..\\local\\automap-foundation-17c492917270473095578c3ff17d7d5b",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "Meaning": "Four fixed headings at each selected map spawn compare discovery flags against the inherited full 3D renderer, then render the automap/HUD. Discovery must leave framebuffer and renderer-related world counters untouched. Repeated stationary timings are preliminary operation costs, not live gameplay or display FPS. Reference buffer-limit parity and moving-world coverage are not implied.",
+  "Error": null,
+  "Checks": [
+    {
+      "Name": "E1M1 heading 0 matches reference mapped lines",
+      "Passed": true
+    },
+    {
+      "Name": "E1M1 heading 0 changes no framebuffer pixels",
+      "Passed": true
+    },
+    {
+      "Name": "E1M1 heading 0 leaves world/sector valid counters alone",
+      "Passed": true
+    },
+    {
+      "Name": "E1M1 heading 0 preserves baseline automap/HUD pixels",
+      "Passed": true
+    },
+    {
+      "Name": "E1M1 heading 90 matches reference mapped lines",
+      "Passed": true
+    },
+    {
+      "Name": "E1M1 heading 90 changes no framebuffer pixels",
+      "Passed": true
+    },
+    {
+      "Name": "E1M1 heading 90 leaves world/sector valid counters alone",
+      "Passed": true
+    },
+    {
+      "Name": "E1M1 heading 90 preserves baseline automap/HUD pixels",
+      "Passed": true
+    },
+    {
+      "Name": "E1M1 heading 180 matches reference mapped lines",
+      "Passed": true
+    },
+    {
+      "Name": "E1M1 heading 180 changes no framebuffer pixels",
+      "Passed": true
+    },
+    {
+      "Name": "E1M1 heading 180 leaves world/sector valid counters alone",
+      "Passed": true
+    },
+    {
+      "Name": "E1M1 heading 180 preserves baseline automap/HUD pixels",
+      "Passed": true
+    },
+    {
+      "Name": "E1M1 heading 270 matches reference mapped lines",
+      "Passed": true
+    },
+    {
+      "Name": "E1M1 heading 270 changes no framebuffer pixels",
+      "Passed": true
+    },
+    {
+      "Name": "E1M1 heading 270 leaves world/sector valid counters alone",
+      "Passed": true
+    },
+    {
+      "Name": "E1M1 heading 270 preserves baseline automap/HUD pixels",
+      "Passed": true
+    },
+    {
+      "Name": "E2M7 heading 0 matches reference mapped lines",
+      "Passed": true
+    },
+    {
+      "Name": "E2M7 heading 0 changes no framebuffer pixels",
+      "Passed": true
+    },
+    {
+      "Name": "E2M7 heading 0 leaves world/sector valid counters alone",
+      "Passed": true
+    },
+    {
+      "Name": "E2M7 heading 0 preserves baseline automap/HUD pixels",
+      "Passed": true
+    },
+    {
+      "Name": "E2M7 heading 90 matches reference mapped lines",
+      "Passed": true
+    },
+    {
+      "Name": "E2M7 heading 90 changes no framebuffer pixels",
+      "Passed": true
+    },
+    {
+      "Name": "E2M7 heading 90 leaves world/sector valid counters alone",
+      "Passed": true
+    },
+    {
+      "Name": "E2M7 heading 90 preserves baseline automap/HUD pixels",
+      "Passed": true
+    },
+    {
+      "Name": "E2M7 heading 180 matches reference mapped lines",
+      "Passed": true
+    },
+    {
+      "Name": "E2M7 heading 180 changes no framebuffer pixels",
+      "Passed": true
+    },
+    {
+      "Name": "E2M7 heading 180 leaves world/sector valid counters alone",
+      "Passed": true
+    },
+    {
+      "Name": "E2M7 heading 180 preserves baseline automap/HUD pixels",
+      "Passed": true
+    },
+    {
+      "Name": "E2M7 heading 270 matches reference mapped lines",
+      "Passed": true
+    },
+    {
+      "Name": "E2M7 heading 270 changes no framebuffer pixels",
+      "Passed": true
+    },
+    {
+      "Name": "E2M7 heading 270 leaves world/sector valid counters alone",
+      "Passed": true
+    },
+    {
+      "Name": "E2M7 heading 270 preserves baseline automap/HUD pixels",
+      "Passed": true
+    },
+    {
+      "Name": "E3M8 heading 0 matches reference mapped lines",
+      "Passed": true
+    },
+    {
+      "Name": "E3M8 heading 0 changes no framebuffer pixels",
+      "Passed": true
+    },
+    {
+      "Name": "E3M8 heading 0 leaves world/sector valid counters alone",
+      "Passed": true
+    },
+    {
+      "Name": "E3M8 heading 0 preserves baseline automap/HUD pixels",
+      "Passed": true
+    },
+    {
+      "Name": "E3M8 heading 90 matches reference mapped lines",
+      "Passed": true
+    },
+    {
+      "Name": "E3M8 heading 90 changes no framebuffer pixels",
+      "Passed": true
+    },
+    {
+      "Name": "E3M8 heading 90 leaves world/sector valid counters alone",
+      "Passed": true
+    },
+    {
+      "Name": "E3M8 heading 90 preserves baseline automap/HUD pixels",
+      "Passed": true
+    },
+    {
+      "Name": "E3M8 heading 180 matches reference mapped lines",
+      "Passed": true
+    },
+    {
+      "Name": "E3M8 heading 180 changes no framebuffer pixels",
+      "Passed": true
+    },
+    {
+      "Name": "E3M8 heading 180 leaves world/sector valid counters alone",
+      "Passed": true
+    },
+    {
+      "Name": "E3M8 heading 180 preserves baseline automap/HUD pixels",
+      "Passed": true
+    },
+    {
+      "Name": "E3M8 heading 270 matches reference mapped lines",
+      "Passed": true
+    },
+    {
+      "Name": "E3M8 heading 270 changes no framebuffer pixels",
+      "Passed": true
+    },
+    {
+      "Name": "E3M8 heading 270 leaves world/sector valid counters alone",
+      "Passed": true
+    },
+    {
+      "Name": "E3M8 heading 270 preserves baseline automap/HUD pixels",
+      "Passed": true
+    },
+    {
+      "Name": "E4M1 heading 0 matches reference mapped lines",
+      "Passed": true
+    },
+    {
+      "Name": "E4M1 heading 0 changes no framebuffer pixels",
+      "Passed": true
+    },
+    {
+      "Name": "E4M1 heading 0 leaves world/sector valid counters alone",
+      "Passed": true
+    },
+    {
+      "Name": "E4M1 heading 0 preserves baseline automap/HUD pixels",
+      "Passed": true
+    },
+    {
+      "Name": "E4M1 heading 90 matches reference mapped lines",
+      "Passed": true
+    },
+    {
+      "Name": "E4M1 heading 90 changes no framebuffer pixels",
+      "Passed": true
+    },
+    {
+      "Name": "E4M1 heading 90 leaves world/sector valid counters alone",
+      "Passed": true
+    },
+    {
+      "Name": "E4M1 heading 90 preserves baseline automap/HUD pixels",
+      "Passed": true
+    },
+    {
+      "Name": "E4M1 heading 180 matches reference mapped lines",
+      "Passed": true
+    },
+    {
+      "Name": "E4M1 heading 180 changes no framebuffer pixels",
+      "Passed": true
+    },
+    {
+      "Name": "E4M1 heading 180 leaves world/sector valid counters alone",
+      "Passed": true
+    },
+    {
+      "Name": "E4M1 heading 180 preserves baseline automap/HUD pixels",
+      "Passed": true
+    },
+    {
+      "Name": "E4M1 heading 270 matches reference mapped lines",
+      "Passed": true
+    },
+    {
+      "Name": "E4M1 heading 270 changes no framebuffer pixels",
+      "Passed": true
+    },
+    {
+      "Name": "E4M1 heading 270 leaves world/sector valid counters alone",
+      "Passed": true
+    },
+    {
+      "Name": "E4M1 heading 270 preserves baseline automap/HUD pixels",
+      "Passed": true
+    }
+  ],
+  "FinishedUtc": "2026-09-11T17:27:57.8321428Z",
+  "BundleSha256": "A4B3A371C8BB4714D09EA68AE897DF6A5B6451899A481B576FFC4E6CF80C4284"
+}
