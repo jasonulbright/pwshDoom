@@ -70,4 +70,4 @@ Run one engine-building test at a time: current harnesses share the generated en
 
 ## Remaining release work
 
-M2 adds menus, pause/resume, ordinary-input recording, save/load and automap. M3 adds PowerShell audio decoding/mixing and music with measured device playback. M4–M7 retain reference fidelity, every-map ordinary-input completion, difficult workloads, actual human/1080p checks, a clean-checkout release candidate and the evidence-based article. No full-campaign or new 60-displayed-FPS claim follows from this session handoff.
+M2 now includes [versioned input recording](input-recording.md), with menus, pause/resume, save/load and automap next. M3 adds PowerShell audio decoding/mixing and music with measured device playback. M4–M7 retain reference fidelity, every-map ordinary-input completion, difficult workloads, actual human/1080p checks, a clean-checkout release candidate and the evidence-based article. No full-campaign or new 60-displayed-FPS claim follows from this session handoff.

@@ -34,7 +34,7 @@ Release acceptance requires:
 | --- | --- | --- | --- |
 | M0 — Preserve the baseline | Reproducible E1M1 game, source lineage, raw timings | Existing input route, codec/transport/lifecycle checks, PresentMon captures | Baseline established; limits recorded |
 | M1 — Campaign foundation | Map inventory and failure matrix; correct state transitions; renderer asset refresh on level changes | Per-map smoke results, normal/secret routing tests, E1M1 → E1M2 through the real host, carryover/death checks | Foundation verified: 57 controller checks and recorded E1M1 → E1M2 in all three styles; broader campaign unqualified |
-| M2 — Complete single-player session | Menus, intermission/finale display, pause, save/load, automap, input recording | Scripted state-machine checks, save continuation, short user playtest | Intermission/finale display implemented; menus, pause, recording, save/load and automap next |
+| M2 — Complete single-player session | Menus, intermission/finale display, pause, save/load, automap, input recording | Scripted state-machine checks, save continuation, short user playtest | Intermission/finale and versioned input recording verified through the host; menus, pause, save/load and automap next |
 | M3 — Audio | PowerShell-controlled effects/music and declared device backend | Offline output correctness, real playback review, underrun/latency/load measurements | PowerShell mixing + standard playback approved; backend experiment pending |
 | M4 — Rendering fidelity | Reference comparisons and corrected effects/geometry/HUD | Golden states, categorized differences, regressions tested with animation and moving sectors | Can start alongside M1/M2 |
 | M5 — Campaign qualification | Complete first-target campaign with normal/secret paths and endings | Route evidence per map and transition, difficulty matrix, longer human sessions | Builds on M1–M4 |
@@ -50,7 +50,7 @@ Do not postpone all performance work until M6. Measure after a feature adds subs
 1. Completed first step: all 36 Ultimate Doom maps pass the load/35-idle-tic/two-frame smoke sweep after fixing E2M7 line-flag conversion. See [campaign matrix](campaign-matrix.md). This is smoke coverage only.
 2. Controller routing/finale/par/secret-history fixes pass 57 isolated checks, including carryover and death/respawn. Broader boss/exit behavioral qualification remains in M5.
 3. The ordinary-input E1M1 -> intermission -> E1M2 route now runs through the host with generation-checked asset refresh in persistent workers. Preserve this as the session regression while implementing M2.
-4. Add ordinary-input recording so user play sessions can become reproducible correctness/performance cases; retain asset hashes, settings, and checkpoint state.
+4. Versioned input recording is implemented with asset/source hashes, starting settings, overwrite protection and selected-state checkpoints. The full session matches eight checkpoints on replay; an altered command produces a nonzero divergence failure. See [input recording](input-recording.md). Physical keyboard use remains unobserved.
 5. Present a small physical-play checklist only after the relevant controls/UI are implemented. The scope and audio boundary are now resolved; no user input blocks the campaign foundation work.
 
 Reproduce the current foundation checks from PowerShell 7 with fresh output paths:

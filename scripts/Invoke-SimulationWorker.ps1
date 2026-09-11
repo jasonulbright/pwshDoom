@@ -1,16 +1,22 @@
 #requires -Version 7.4
 # SPDX-License-Identifier: GPL-2.0-or-later
-param([string]$Wad,[int]$Skill,[int]$Episode,[int]$Map,[string]$Channel,[string]$Assets,[string]$Report,[int]$OwnerPid,[switch]$StopAtLevelEnd)
+param([string]$Wad,[int]$Skill,[int]$Episode,[int]$Map,[string]$Channel,[string]$Assets,[string]$Report,[int]$OwnerPid,[switch]$StopAtLevelEnd,[switch]$ReplayCheckpoints,[string]$CheckpointReplay)
 $ErrorActionPreference='Stop'
 . "$PSScriptRoot/FrameCodec.ps1";. "$PSScriptRoot/../src/GameHost.ps1";. "$PSScriptRoot/../src/FastRenderer.ps1"
 . "$PSScriptRoot/../src/RenderAssets.ps1";. "$PSScriptRoot/../src/SnapshotTransport.ps1"
 . "$PSScriptRoot/../src/SessionScreens.ps1"
+. "$PSScriptRoot/../src/InputReplay.ps1"
 $channelMap=[IO.MemoryMappedFiles.MemoryMappedFile]::OpenExisting($Channel);$view=$channelMap.CreateViewAccessor()
 $ready=[Threading.EventWaitHandle]::OpenExisting($Channel+'-ready');$go=[Threading.EventWaitHandle]::OpenExisting($Channel+'-go')
 $content=$null;$game=$null;$tick=0;$version=0;$slot=0;$failure=$null;$outcome='Stopped'
 $tickTimes=[Collections.Generic.List[double]]::new();$snapshotTimes=[Collections.Generic.List[double]]::new();$lateness=[Collections.Generic.List[double]]::new()
 $commandLog=[Collections.Generic.List[object]]::new()
 $transitions=[Collections.Generic.List[object]]::new();$uiTimes=[Collections.Generic.List[double]]::new();$generation=1;$screens=$null
+$checkpoints=[Collections.Generic.List[object]]::new();$checkpointTimes=[Collections.Generic.List[double]]::new();$extraCheckpoints=@{}
+function Record-ReplayCheckpoint {
+    if(-not $ReplayCheckpoints -or ($checkpoints.Count -gt 0 -and $checkpoints[-1].Tic -eq $script:tick)){return}
+    $watch=[Diagnostics.Stopwatch]::StartNew();$checkpoints.Add((Get-DoomReplayCheckpoint $game $script:tick));$checkpointTimes.Add($watch.Elapsed.TotalMilliseconds)
+}
 function Record-SimulationTransition {
     $player=$game.World.ConsolePlayer
     $transitions.Add(@{Tic=$script:tick;State=$game.State.ToString();Episode=$game.Options.Episode;Map=$game.Options.Map;Generation=$script:generation;
@@ -37,6 +43,7 @@ function Publish-SimulationSnapshot {
 }
 try {
     $owner=[Diagnostics.Process]::GetProcessById($OwnerPid)
+    if($CheckpointReplay){$recorded=Read-DoomInputReplay $CheckpointReplay (Get-FileHash -LiteralPath $Wad).Hash;foreach($point in $recorded.Checkpoints){$extraCheckpoints[[int]$point.Tic]=$true}}
     $bundle=& "$PSScriptRoot/Build-EngineBundle.ps1";. $bundle
     $null=[DoomInfo]::SwitchNames;$content=[GameContent]::new(@('-iwad',$Wad));$options=[GameOptions]::new()
     $options.GameMode=$content.Wad.GameMode;$options.GameVersion=$content.Wad.GameVersion;$options.MissionPack=$content.Wad.MissionPack
@@ -50,6 +57,7 @@ try {
     Write-GameRenderAssets $context $palette $Assets
     if(-not $StopAtLevelEnd){$screens=New-DoomSessionScreens $content}
     Record-SimulationTransition
+    Record-ReplayCheckpoint
     Publish-SimulationSnapshot;$view.Write(12,1);[void]$ready.Set()
     while($view.ReadInt32(4) -eq 0) {
         if($tick -ge $view.ReadInt32(0)){[void]$go.WaitOne(1000);if($owner.HasExited){$outcome='OwnerExited';break};continue}
@@ -68,6 +76,7 @@ try {
             $context=New-FastRenderContext $content $game.World;Write-GameRenderAssets $context $palette $Assets
         }
         if($mapChanged -or $game.State -ne $priorState){Record-SimulationTransition}
+        if($tick%350 -eq 0 -or $mapChanged -or $game.State -ne $priorState -or $extraCheckpoints.ContainsKey($tick)){Record-ReplayCheckpoint}
         $watch.Restart();Publish-SimulationSnapshot;$snapshotTimes.Add($watch.Elapsed.TotalMilliseconds)
         if($mapChanged){
             $view.Write(24,$generation);[Threading.Thread]::MemoryBarrier();$view.Write(12,4)
@@ -78,7 +87,9 @@ try {
     }
 } catch {$failure=$_.ToString()+"`n"+$_.ScriptStackTrace;$outcome='Error';[Console]::Error.WriteLine($failure);$view.Write(12,3);[void]$ready.Set()}
 finally {
+    if($null -ne $game -and $null -ne $game.World -and -not $failure){try{Record-ReplayCheckpoint}catch{$failure=$_.ToString();$outcome='Error'}}
     @{FinishedUtc=[DateTime]::UtcNow.ToString('o');Outcome=$outcome;Error=$failure;Tics=$tick;WarmupTics=140;Skill=$Skill;Episode=$Episode;Map=$Map;
+        ReplayCheckpoints=$checkpoints.ToArray();ReplayCheckpointMs=(Get-SampleStats $checkpointTimes.ToArray());ReplayCheckpointSamplesMs=$checkpointTimes.ToArray();
         StopAtLevelEnd=[bool]$StopAtLevelEnd;Transitions=$transitions.ToArray();FinalGeneration=$generation;SessionScreenMs=(Get-SampleStats $uiTimes.ToArray());SessionScreenSamplesMs=$uiTimes.ToArray();
         SimulationMs=(Get-SampleStats $tickTimes.ToArray());SnapshotPublishMs=(Get-SampleStats $snapshotTimes.ToArray());TickLatenessMs=(Get-SampleStats $lateness.ToArray());
         SimulationSamplesMs=$tickTimes.ToArray();SnapshotSamplesMs=$snapshotTimes.ToArray();TickLatenessSamplesMs=$lateness.ToArray();InputCommands=$commandLog.ToArray();

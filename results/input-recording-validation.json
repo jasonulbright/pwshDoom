@@ -1,0 +1,130 @@
+{
+  "Meaning": "Real headless host recording/playback plus format and source/cleanup checks. Full session consumes the established ordinary-input E1M1-E1M2 route twice and matches selected-state checkpoints; short scripted run proves nondefault settings and deliberate command mutation triggers divergence. No physical-keyboard, whole-game-state, vanilla-demo or performance qualification.",
+  "RemainingOwnedProcesses": 0,
+  "AlteredInput": {
+    "OriginalValue": 0,
+    "ChangedCommand": 0,
+    "Comparison": {
+      "Checked": 2,
+      "Mismatches": [
+        {
+          "Tic": 139,
+          "Expected": "63056A8AEA335CE7D1220DB3DDC27A1366CA4B531284445A9B3A0B53851660FF",
+          "Actual": "DB6F307F846CE63B36BB056E6BDEA2302E540A8C053602092FCB90AE4C021A21"
+        }
+      ],
+      "Meaning": "Compared available recorded checkpoints through the consumed prefix. This samples selected state and render data, not every hidden game field.",
+      "Matched": false
+    },
+    "ChangedField": "AngleTurn",
+    "ObservedExit": "ReplayDiverged",
+    "ProcessExit": 1,
+    "AlteredValue": 640
+  },
+  "FinishedUtc": "2026-09-11T13:00:09.8190454Z",
+  "ParseErrors": 0,
+  "ShortNondefaultReplay": {
+    "Map": 2,
+    "Skill": 2,
+    "MatchedCheckpoints": 2,
+    "Episode": 1,
+    "SourceMatches": false,
+    "Commands": 139
+  },
+  "SourceFingerprint": "5E32D438E78DFD8A4FEFB5B99874DFA46715DACE9BE7211DC1FF6B80D85F9AFB",
+  "ParsedFiles": 71,
+  "FormatChecks": 35,
+  "Inputs": [
+    {
+      "Sha256": "159A14BBB5E13290783D6A9C6CAF6E4DC382601A5D2A6D0D8A7C8F27B658206E",
+      "Path": "results/input-replay-format.json"
+    },
+    {
+      "Sha256": "FDBC369A82882116F75530022DDB567B0C2D41FF02226D87B3CE1FDC73277C4D",
+      "Path": "results/input-replay-format-fixed.json"
+    },
+    {
+      "Sha256": "C95B413A74ACA3C2DED3CD794CFA4E9F9A4DF665E2DE44ED1C705823739C96B6",
+      "Path": "results/input-replay-format-final.json"
+    },
+    {
+      "Sha256": "34E27CE3E37FDE6350F3E26EA52AD6932F86FB552612EFD584B42B64FE1E1475",
+      "Path": "results/input-recording-short-game.json"
+    },
+    {
+      "Sha256": "374F4C440C54AB81EC8ADEA4BCED9CE3D9B61A06F9FE5F42CBC481C1D99A24FE",
+      "Path": "results/input-recording-short-fixed-game.json"
+    },
+    {
+      "Sha256": "04FA8AA945D655FFB035F8C71EF8E38993899A94A2417CBF4C34CB2156A7AEA3",
+      "Path": "results/input-recording-short-replay-game.json"
+    },
+    {
+      "Sha256": "E21DCFAA17C93F85200F8BE47A39782962C842769D0182D9BDD13C3EB63BD0C1",
+      "Path": "results/input-recording-session-game.json"
+    },
+    {
+      "Sha256": "7F944B4C0100A4B22261D4DBE555F3CC009ECFAD1CAEEFDBCC52AA4E4403FF9F",
+      "Path": "results/input-recording-session-replay-game.json"
+    },
+    {
+      "Sha256": "5A4EFCCFDAF93F937648E9AB3709E651B8D2DE7DD6A35C8101EFA69E9C7B6490",
+      "Path": "results/input-recording-altered-game.json"
+    },
+    {
+      "Sha256": "EEDB95CC5E4B8556B9ECA5781011CB99526A96F8CA8529D7060ECDAEBE98A1E5",
+      "Path": "results/input-recording-altered-exit.json"
+    },
+    {
+      "Sha256": "44E229AEFB44058B598D50F8EE260421762449E43332B17BC4CDF2FBF8A4AC13",
+      "Path": "results/input-session-replay.json"
+    },
+    {
+      "Sha256": "949F8C105637F7BF8E91D439AD2611FB3159BD35554A061268242D9AB18DB282",
+      "Path": "results/input-short-replay.json"
+    },
+    {
+      "Sha256": "40E0E4082929D32C32C0DB4D48CFFDA5C7B6E9B5483063404F99ADF6D266A0BC",
+      "Path": "results/input-altered-replay.json"
+    },
+    {
+      "Sha256": "247B25A809FE782F31FF6C36E827B013168CBB1A14DD569102071366E7470019",
+      "Path": "results/input-recording-sources.json"
+    }
+  ],
+  "FullSession": {
+    "FinalMap": 2,
+    "MatchedCheckpoints": 8,
+    "CheckpointSamplesMs": [
+      66.5056,
+      3.1285,
+      3.0799,
+      2.1923,
+      2.873,
+      5.0473,
+      4.1068,
+      4.6609
+    ],
+    "Commands": 1747,
+    "FinalGeneration": 2,
+    "RecordedCheckpointMs": {
+      "Count": 8,
+      "Mean": 11.4492875,
+      "Median": 3.61765,
+      "P95": 66.5056,
+      "Max": 66.5056
+    },
+    "FinalEpisode": 1,
+    "CheckpointTics": [
+      0,
+      350,
+      700,
+      1050,
+      1400,
+      1560,
+      1676,
+      1747
+    ],
+    "SourceMatched": true
+  }
+}

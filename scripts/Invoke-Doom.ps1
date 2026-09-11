@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 [CmdletBinding()]
 param([Parameter(Mandatory)][string]$Wad,[ValidateRange(1,32)][int]$Workers=16,
-    [ValidateRange(0,3600)][int]$Seconds=0,[switch]$Headless,[switch]$Scripted,[string]$Replay,
+    [ValidateRange(0,3600)][int]$Seconds=0,[switch]$Headless,[switch]$Scripted,[string]$Replay,[string]$RecordInput,
     [ValidateRange(0,10000)][int]$CaptureEveryTics=0,[ValidateRange(1,5)][int]$Skill=3,
     [ValidateRange(1,4)][int]$Episode=1,[ValidateRange(1,32)][int]$Map=1,
     [ValidateSet('Classic','AnsiArt','Matrix')][string]$Style='Classic',
@@ -14,6 +14,7 @@ $ErrorActionPreference='Stop'
 . "$PSScriptRoot/../src/SimulationProcess.ps1";. "$PSScriptRoot/../src/ConsoleInput.ps1"
 . "$PSScriptRoot/../src/Viewport.ps1"
 . "$PSScriptRoot/../src/CharacterCodec.ps1"
+. "$PSScriptRoot/../src/InputReplay.ps1"
 # Input values only; the actual TicCmd and Doom engine live in the simulation process.
 class HostInputCommand {
     [sbyte]$ForwardMove;[sbyte]$SideMove;[int16]$AngleTurn;[byte]$Buttons
@@ -41,6 +42,7 @@ $captures=[Collections.Generic.List[string]]::new();$nextCapture=$CaptureEveryTi
 $interpolationTimes=[Collections.Generic.List[double]]::new();$simulationReport=$null
 $glyphProbe=$null
 $assetGeneration=1;$loadingStart=$null;$loadingMs=0.0;$loadingWasRunning=$false;$mapReloads=[Collections.Generic.List[object]]::new();$transitionDiscarded=0
+$recordingPath=$null;$recordingError=$null;$replayVerification=$null;$sourceFingerprint=$null;$sourceMatches=$null
 try {
     if($ViewportSchedule) {
         if(-not $Headless){throw 'Synthetic viewport schedules are only allowed with -Headless.'}
@@ -48,18 +50,23 @@ try {
         foreach($entry in $viewportScheduleData){if($entry.AtSeconds -lt 0 -or $entry.Columns -lt 1 -or $entry.Rows -lt 1){throw 'Invalid synthetic viewport schedule.'}}
     }
     $Wad=(Resolve-Path -LiteralPath $Wad).Path;$wadHash=(Get-FileHash -LiteralPath $Wad).Hash
-    if($Replay) {
-        $replayData=Get-Content -LiteralPath $Replay -Raw | ConvertFrom-Json
-        if($replayData.WadSha256 -ne $wadHash){throw 'Replay IWAD hash does not match.'}
-        foreach($entry in $replayData.InputCommands) {
-            if($entry.Count -ne 4 -or [Math]::Abs($entry[0]) -gt 50 -or [Math]::Abs($entry[1]) -gt 50 -or $entry[2] -lt -32768 -or $entry[2] -gt 32767 -or $entry[3] -lt 0 -or $entry[3] -gt 255){throw 'Invalid replay command.'}
-        }
+    if($RecordInput){
+        $RecordInput=[IO.Path]::GetFullPath($RecordInput)
+        if((Test-Path -LiteralPath $RecordInput) -or $RecordInput -eq [IO.Path]::GetFullPath($Report)){throw 'Input recording needs a new filename distinct from the game report.'}
     }
+    if($Replay) {
+        $replayData=Read-DoomInputReplay $Replay $wadHash
+        $settings=Set-DoomReplaySettings $replayData $PSBoundParameters $Skill $Episode $Map
+        $Skill=$settings.Skill;$Episode=$settings.Episode;$Map=$settings.Map
+    }
+    $withCheckpoints=[bool]$RecordInput -or ($null -ne $replayData -and $null -ne $replayData.Checkpoints -and $replayData.Checkpoints.Count -gt 0)
+    if($withCheckpoints){$sourceFingerprint=Get-DoomReplaySourceFingerprint}
+    if($null -ne $replayData -and $replayData.SourceFingerprint){$sourceMatches=$sourceFingerprint -eq $replayData.SourceFingerprint;if(-not $sourceMatches){Write-Warning 'Replay simulation source differs; checkpoint comparison will report observed compatibility.'}}
     Write-Host 'Loading the PowerShell simulation and rendering workers...'
     # Existing single-map benchmark replays retain their first-exit stopping rule.
     # Session recordings explicitly carry ContinueCampaign=true.
     $stopAtLevelEnd=$null -ne $replayData -and -not $replayData.ContinueCampaign
-    $simulation=New-DoomSimulation $Wad $Skill $Episode $Map -StopAtLevelEnd:$stopAtLevelEnd
+    $simulation=New-DoomSimulation $Wad $Skill $Episode $Map -StopAtLevelEnd:$stopAtLevelEnd -ReplayCheckpoints:$withCheckpoints -CheckpointReplay $(if($null -ne $replayData -and $replayData.Checkpoints){$Replay}else{''})
     $snapshot=Read-DoomSimulationSnapshot $simulation $null
     if($null -eq $snapshot){throw 'Initial simulation snapshot was not published.'}
     $context=Read-GameRenderAssets $simulation.Assets;$context.AssetPath=$simulation.Assets
@@ -204,12 +211,30 @@ finally {
     if($null -ne $simulation){Close-DoomSimulation $simulation;if(Test-Path -LiteralPath $simulation.Report){$simulationReport=Get-Content -LiteralPath $simulation.Report -Raw | ConvertFrom-Json}}
     if($terminalActive){[Console]::Write("$esc[?2026l$esc[0m$esc[?25h$esc[?1049l")}
     if($null -ne $consoleState){Close-DoomConsoleInput $consoleState};[Console]::OutputEncoding=$oldEncoding
+    if($null -ne $simulationReport){
+        if($simulationReport.Error -and -not $failure){$failure=$simulationReport.Error;$exitReason='Error'}
+        if($null -ne $replayData -and $replayData.Checkpoints){
+            $replayVerification=Compare-DoomReplayCheckpoints $replayData.Checkpoints $simulationReport.ReplayCheckpoints $simulationReport.Tics
+            if(-not $replayVerification.Matched){$failure='Replay checkpoint divergence; inspect ReplayVerification.';$exitReason='ReplayDiverged'}
+        }
+        if($RecordInput){
+            try{
+                $consumed=@($simulationReport.InputCommands|Select-Object -First $simulationReport.Tics)
+                $recordingPath=Write-DoomInputReplay $RecordInput ([ordered]@{Format='pwshDoom.InputReplay';Version=1;CreatedUtc=[DateTime]::UtcNow.ToString('o');WadSha256=$wadHash;
+                    Skill=$Skill;Episode=$Episode;Map=$Map;ContinueCampaign=-not $stopAtLevelEnd;SourceFingerprint=$sourceFingerprint;PowerShell=$PSVersionTable.PSVersion.ToString();
+                    Origin=if($Replay){'Replay'}elseif($Scripted){'Scripted'}elseif($Headless){'HeadlessIdle'}else{'Keyboard'};ExitReason=$exitReason;Error=$failure;InputCommands=$consumed;
+                    Checkpoints=$simulationReport.ReplayCheckpoints;Transitions=$simulationReport.Transitions;
+                    Meaning='Fresh-game commands consumed by the simulation, including any commands completed during shutdown. One command per 1/35 second; resize/loading wall pauses are not commands. Checkpoints sample state/render data and do not restore a saved game or prove vanilla demo compatibility.'})
+            }catch{$recordingError=$_.ToString();[Console]::Error.WriteLine("Input recording failed: $recordingError")}
+        }
+    }
     # Exclude any queued command drained while workers are being closed.
     $simTics=$measuredTics
     $data=@{FinishedUtc=[DateTime]::UtcNow.ToString('o');WadSha256=(Get-FileHash -LiteralPath $Wad).Hash;Workers=$Workers;Skill=$Skill;Episode=$Episode;Map=$Map;
         OutputStyle=$Style;GlyphSet=if($Style -eq 'Classic'){'Blocks'}else{$GlyphSet};GlyphWidthProbe=$glyphProbe;SourceWidth=320;SourceHeight=200;OutputColumns=$outputColumns;OutputRows=$outputRows;
         OutputRepresentation=if($Style -eq 'Classic'){'Two source pixels per truecolor half-block cell'}else{'Lossy 2x4 source-pixel character cells; HUD downsampled to half blocks'};
         Architecture='SeparateSimulation';Transport='NumericV1';QpcFrequency=[Diagnostics.Stopwatch]::Frequency;Headless=[bool]$Headless;Scripted=[bool]$Scripted;Replay=$Replay;ExitReason=$exitReason;Error=$failure;
+        InputRecording=$recordingPath;InputRecordingError=$recordingError;ReplaySourceMatches=$sourceMatches;ReplayVerification=$replayVerification;
         DurationSeconds=$clock.Elapsed.TotalSeconds;IssuedCommands=$tics;SimulationTics=$simTics;TicsPerSecond=$simTics/[Math]::Max(.001,$clock.Elapsed.TotalSeconds);
         WallDurationSeconds=$wallClock.Elapsed.TotalSeconds;ViewportPausedSeconds=$pausedMs/1000;ViewportPauseCount=$pauseCount;
         MapReloads=$mapReloads.ToArray();MapReloadPausedSeconds=$loadingMs/1000;DiscardedTransitionFrames=$transitionDiscarded;FinalAssetGeneration=$assetGeneration;
@@ -225,3 +250,4 @@ finally {
     [pscustomobject]@{Report=$Report;Tics=$simTics;Frames=$completed;Seconds=$clock.Elapsed.TotalSeconds;Exit=$exitReason} | Format-List
     if($ExitDelaySeconds -gt 0){Start-Sleep -Seconds $ExitDelaySeconds}
 }
+if($recordingError -or $failure){exit 1}

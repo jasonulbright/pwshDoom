@@ -1,0 +1,28 @@
+{
+  "Checks": [
+    {
+      "Passed": true,
+      "Name": "Versioned data-only round trip"
+    },
+    {
+      "Passed": true,
+      "Name": "Existing file preserved"
+    },
+    {
+      "Passed": true,
+      "Name": "Wrong IWAD rejected"
+    },
+    {
+      "Passed": true,
+      "Name": "Recorded nondefault settings"
+    },
+    {
+      "Passed": true,
+      "Name": "Conflicting explicit setting rejected"
+    }
+  ],
+  "Error": "Cannot find an overload for \"Contains\" and the argument count: \"1\".",
+  "Meaning": "Data format, bounds, non-overwrite, legacy defaults, launch binding and checkpoint-comparison checks. No WAD or running engine required; separate real-host replay checks establish runtime behavior.",
+  "FinishedUtc": "2026-09-11T12:54:19.8046120Z",
+  "SourceSha256": "486F59A86CE530E87D47169FD553BFC7370EA42EACB3B3493BC343782924B6E4"
+}

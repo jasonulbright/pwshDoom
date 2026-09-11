@@ -3,7 +3,7 @@
 [CmdletBinding()]
 param([string]$Wad,[ValidateRange(1,32)][int]$Workers=16,[ValidateRange(1,5)][int]$Skill=3,
     [ValidateRange(1,4)][int]$Episode=1,[ValidateRange(1,32)][int]$Map=1,
-    [switch]$Here,[switch]$Scripted,[ValidateRange(0,3600)][int]$Seconds=0,[string]$Replay,[int]$CaptureEveryTics=0,
+    [switch]$Here,[switch]$Scripted,[ValidateRange(0,3600)][int]$Seconds=0,[string]$Replay,[string]$RecordInput,[int]$CaptureEveryTics=0,
     [ValidateRange(4,24)][int]$FontSize=6,[switch]$Maximized,[switch]$Diagnostics,
     [ValidateSet('Classic','AnsiArt','Matrix')][string]$Style='Classic',
     [ValidateSet('Ascii','Katakana')][string]$GlyphSet='Katakana',[string]$FontFace,
@@ -20,7 +20,15 @@ if(-not $Wad) {
     if(-not $Wad){throw 'Supply your own classic Doom IWAD: .\Start-Doom.ps1 -Wad C:\path\DOOM.WAD'}
 }
 $Wad=(Resolve-Path -LiteralPath $Wad).Path
+if($Replay){
+    . "$PSScriptRoot/src/InputReplay.ps1"
+    $inputReplay=Read-DoomInputReplay $Replay (Get-FileHash -LiteralPath $Wad).Hash
+    $settings=Set-DoomReplaySettings $inputReplay $PSBoundParameters $Skill $Episode $Map
+    $Skill=$settings.Skill;$Episode=$settings.Episode;$Map=$settings.Map
+}
+if($RecordInput -and (Test-Path -LiteralPath $RecordInput)){throw 'Input recording destination already exists; choose a new filename.'}
 $arguments=@('-Wad',$Wad,'-Workers',"$Workers",'-Skill',"$Skill",'-Episode',"$Episode",'-Map',"$Map",'-Seconds',"$Seconds",'-Style',$Style,'-GlyphSet',$GlyphSet,'-Report',[IO.Path]::GetFullPath($Report))
+if($RecordInput){$arguments+=@('-RecordInput',[IO.Path]::GetFullPath($RecordInput))}
 if($Scripted){$arguments+='-Scripted'}
 if($Diagnostics){$arguments+='-Diagnostics'}
 if($ExitDelaySeconds -gt 0){$arguments+=@('-ExitDelaySeconds',"$ExitDelaySeconds")}

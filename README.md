@@ -45,6 +45,8 @@ Matrix uses green code and animated falling highlights; AnsiArt uses full-color 
 
 Interactive sessions now continue through intermission into the next map, refreshing map assets in the same rendering workers. Use Ctrl or E/Space/Enter to advance intermission. Episode endings select their own finale text and art. The report is `local/game-session.json`. Audio, menus, save/load, automap and multiplayer interfaces remain unfinished. The new renderer approximates some visual effects and does not claim vanilla pixel or demo compatibility. Keyboard state handling has automated synthetic-record tests; physical keyboard play has not been observed by the agent. See [campaign session work](docs/campaign-session.md).
 
+Add `-RecordInput .\local\my-play-session.json` to retain a replay of your commands at orderly exit. Play it back with `-Replay .\local\my-play-session.json`; starting skill/episode/map are selected from the recording. Existing recording files are never overwritten. See [input recording and checkpoint limits](docs/input-recording.md).
+
 To watch the reproducible E1M1 test in Terminal:
 
 ```powershell

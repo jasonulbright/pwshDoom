@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 # Command ring and double-buffered snapshots for the dedicated simulation process.
 function New-DoomSimulation {
-    param([string]$Wad,[int]$Skill,[int]$Episode,[int]$Map,[switch]$StopAtLevelEnd)
+    param([string]$Wad,[int]$Skill,[int]$Episode,[int]$Map,[switch]$StopAtLevelEnd,[switch]$ReplayCheckpoints,[string]$CheckpointReplay)
     $root=Split-Path $PSScriptRoot;$id=[guid]::NewGuid().ToString('N');$name='Local\pwshDoom-sim-'+$id
     $state=@{Assets="$root/local/session-$id.assets";Report="$root/local/simulation-$id.json";Name=$name;Process=$null}
     try {
@@ -12,6 +12,8 @@ function New-DoomSimulation {
         $info.RedirectStandardOutput=$true;$info.RedirectStandardError=$true
         foreach($arg in @('-NoProfile','-File',"$root/scripts/Invoke-SimulationWorker.ps1",'-Wad',$Wad,'-Skill',"$Skill",'-Episode',"$Episode",'-Map',"$Map",'-Channel',$name,'-Assets',$state.Assets,'-Report',$state.Report,'-OwnerPid',"$PID")){$info.ArgumentList.Add($arg)}
         if($StopAtLevelEnd){$info.ArgumentList.Add('-StopAtLevelEnd')}
+        if($ReplayCheckpoints){$info.ArgumentList.Add('-ReplayCheckpoints')}
+        if($CheckpointReplay){$info.ArgumentList.Add('-CheckpointReplay');$info.ArgumentList.Add([IO.Path]::GetFullPath($CheckpointReplay))}
         $state.Process=[Diagnostics.Process]::Start($info);$state.Stdout=$state.Process.StandardOutput.ReadToEndAsync();$state.Stderr=$state.Process.StandardError.ReadToEndAsync()
         if(-not $state.Ready.WaitOne(30000)){throw 'Simulation startup timed out.'}
         if($state.View.ReadInt32(12) -eq 3){throw "Simulation startup failed. $($state.Stderr.Result)"}
