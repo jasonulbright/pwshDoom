@@ -1,0 +1,372 @@
+{
+  "Details": {
+    "DistinctSamples": 133,
+    "RegionStats": {
+      "Regions": 2063,
+      "IgnoredZones": 0,
+      "IgnoredGenerators": 0,
+      "EmptyIntersections": 0,
+      "DuplicatePresets": 0
+    },
+    "SoundFontSha256": "82475B91A76DE15CB28A104707D3247BA932E228BADA3F47BBA63C6B31AAF7A1",
+    "UniqueNoteQueries": 5020,
+    "BuildRegionsMilliseconds": 294.3854,
+    "ExplicitModulatorConfigurations": [
+      [
+        129,
+        6,
+        0,
+        0,
+        0
+      ],
+      [
+        13,
+        6,
+        0,
+        0,
+        0
+      ],
+      [
+        219,
+        16,
+        1000,
+        0,
+        0
+      ],
+      [
+        221,
+        15,
+        1000,
+        0,
+        0
+      ],
+      [
+        258,
+        8,
+        0,
+        3330,
+        0
+      ],
+      [
+        650,
+        17,
+        1000,
+        0,
+        0
+      ]
+    ]
+  },
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "Meaning": "Every actual note-on in every IWAD MUS track resolves using its program, key and velocity. Region bounds are checked. No PCM, envelopes, modulation evaluation or complete music fidelity claim.",
+  "Sources": [
+    {
+      "Path": "src/MusScore.ps1",
+      "Sha256": "66B87D1CDD3FAD62E493A0C50C9A5AEBFE27167C8CCCCA974CC80463B6D1BB33"
+    },
+    {
+      "Path": "src/SoundFontBank.ps1",
+      "Sha256": "AF80287762169B5318F60FD719479137BAED1D3EEF39561513D2B34AC118A855"
+    },
+    {
+      "Path": "src/SoundFontRegions.ps1",
+      "Sha256": "9D409332EB51B5B6FCBC4B259E0C5E243E561A3C0D6AD2040A772F46539B9D8E"
+    },
+    {
+      "Path": "scripts/Test-MusicNoteCoverage.ps1",
+      "Sha256": "B6FF7A87786AF2E86AF680C60169B5B6CA9E6A85ED361C87CF4E93DDAA268623"
+    }
+  ],
+  "Tracks": [
+    {
+      "DistinctSamples": 25,
+      "EveryNoteCovered": true,
+      "BankControllerValues": [],
+      "MaximumLayersPerNote": 2,
+      "Name": "D_E1M1",
+      "LayeredNoteOns": 22,
+      "NoteOns": 2332
+    },
+    {
+      "DistinctSamples": 14,
+      "EveryNoteCovered": true,
+      "BankControllerValues": [],
+      "MaximumLayersPerNote": 6,
+      "Name": "D_E1M2",
+      "LayeredNoteOns": 292,
+      "NoteOns": 2036
+    },
+    {
+      "DistinctSamples": 9,
+      "EveryNoteCovered": true,
+      "BankControllerValues": [
+        0
+      ],
+      "MaximumLayersPerNote": 2,
+      "Name": "D_E1M3",
+      "LayeredNoteOns": 165,
+      "NoteOns": 3749
+    },
+    {
+      "DistinctSamples": 17,
+      "EveryNoteCovered": true,
+      "BankControllerValues": [],
+      "MaximumLayersPerNote": 1,
+      "Name": "D_E1M4",
+      "LayeredNoteOns": 0,
+      "NoteOns": 3105
+    },
+    {
+      "DistinctSamples": 13,
+      "EveryNoteCovered": true,
+      "BankControllerValues": [],
+      "MaximumLayersPerNote": 6,
+      "Name": "D_E1M5",
+      "LayeredNoteOns": 1440,
+      "NoteOns": 1464
+    },
+    {
+      "DistinctSamples": 17,
+      "EveryNoteCovered": true,
+      "BankControllerValues": [],
+      "MaximumLayersPerNote": 2,
+      "Name": "D_E1M6",
+      "LayeredNoteOns": 99,
+      "NoteOns": 1625
+    },
+    {
+      "DistinctSamples": 18,
+      "EveryNoteCovered": true,
+      "BankControllerValues": [],
+      "MaximumLayersPerNote": 6,
+      "Name": "D_E1M7",
+      "LayeredNoteOns": 684,
+      "NoteOns": 1336
+    },
+    {
+      "DistinctSamples": 22,
+      "EveryNoteCovered": true,
+      "BankControllerValues": [],
+      "MaximumLayersPerNote": 3,
+      "Name": "D_E1M8",
+      "LayeredNoteOns": 148,
+      "NoteOns": 877
+    },
+    {
+      "DistinctSamples": 25,
+      "EveryNoteCovered": true,
+      "BankControllerValues": [],
+      "MaximumLayersPerNote": 2,
+      "Name": "D_E1M9",
+      "LayeredNoteOns": 120,
+      "NoteOns": 3805
+    },
+    {
+      "DistinctSamples": 19,
+      "EveryNoteCovered": true,
+      "BankControllerValues": [],
+      "MaximumLayersPerNote": 2,
+      "Name": "D_INTER",
+      "LayeredNoteOns": 594,
+      "NoteOns": 4932
+    },
+    {
+      "DistinctSamples": 13,
+      "EveryNoteCovered": true,
+      "BankControllerValues": [],
+      "MaximumLayersPerNote": 2,
+      "Name": "D_INTRO",
+      "LayeredNoteOns": 7,
+      "NoteOns": 110
+    },
+    {
+      "DistinctSamples": 29,
+      "EveryNoteCovered": true,
+      "BankControllerValues": [],
+      "MaximumLayersPerNote": 5,
+      "Name": "D_VICTOR",
+      "LayeredNoteOns": 1054,
+      "NoteOns": 2254
+    },
+    {
+      "DistinctSamples": 8,
+      "EveryNoteCovered": true,
+      "BankControllerValues": [],
+      "MaximumLayersPerNote": 2,
+      "Name": "D_INTROA",
+      "LayeredNoteOns": 6,
+      "NoteOns": 58
+    },
+    {
+      "DistinctSamples": 27,
+      "EveryNoteCovered": true,
+      "BankControllerValues": [],
+      "MaximumLayersPerNote": 2,
+      "Name": "D_E2M1",
+      "LayeredNoteOns": 3,
+      "NoteOns": 3804
+    },
+    {
+      "DistinctSamples": 16,
+      "EveryNoteCovered": true,
+      "BankControllerValues": [],
+      "MaximumLayersPerNote": 2,
+      "Name": "D_E2M2",
+      "LayeredNoteOns": 1241,
+      "NoteOns": 2477
+    },
+    {
+      "DistinctSamples": 19,
+      "EveryNoteCovered": true,
+      "BankControllerValues": [],
+      "MaximumLayersPerNote": 2,
+      "Name": "D_E2M3",
+      "LayeredNoteOns": 594,
+      "NoteOns": 4932
+    },
+    {
+      "DistinctSamples": 15,
+      "EveryNoteCovered": true,
+      "BankControllerValues": [],
+      "MaximumLayersPerNote": 5,
+      "Name": "D_E2M4",
+      "LayeredNoteOns": 1067,
+      "NoteOns": 1361
+    },
+    {
+      "DistinctSamples": 18,
+      "EveryNoteCovered": true,
+      "BankControllerValues": [],
+      "MaximumLayersPerNote": 6,
+      "Name": "D_E2M5",
+      "LayeredNoteOns": 684,
+      "NoteOns": 1336
+    },
+    {
+      "DistinctSamples": 18,
+      "EveryNoteCovered": true,
+      "BankControllerValues": [],
+      "MaximumLayersPerNote": 6,
+      "Name": "D_E2M6",
+      "LayeredNoteOns": 892,
+      "NoteOns": 1640
+    },
+    {
+      "DistinctSamples": 20,
+      "EveryNoteCovered": true,
+      "BankControllerValues": [],
+      "MaximumLayersPerNote": 5,
+      "Name": "D_E2M7",
+      "LayeredNoteOns": 591,
+      "NoteOns": 1051
+    },
+    {
+      "DistinctSamples": 11,
+      "EveryNoteCovered": true,
+      "BankControllerValues": [],
+      "MaximumLayersPerNote": 2,
+      "Name": "D_E2M8",
+      "LayeredNoteOns": 950,
+      "NoteOns": 1834
+    },
+    {
+      "DistinctSamples": 29,
+      "EveryNoteCovered": true,
+      "BankControllerValues": [],
+      "MaximumLayersPerNote": 5,
+      "Name": "D_E2M9",
+      "LayeredNoteOns": 480,
+      "NoteOns": 2647
+    },
+    {
+      "DistinctSamples": 29,
+      "EveryNoteCovered": true,
+      "BankControllerValues": [],
+      "MaximumLayersPerNote": 5,
+      "Name": "D_E3M1",
+      "LayeredNoteOns": 480,
+      "NoteOns": 2647
+    },
+    {
+      "DistinctSamples": 23,
+      "EveryNoteCovered": true,
+      "BankControllerValues": [],
+      "MaximumLayersPerNote": 2,
+      "Name": "D_E3M2",
+      "LayeredNoteOns": 213,
+      "NoteOns": 3097
+    },
+    {
+      "DistinctSamples": 18,
+      "EveryNoteCovered": true,
+      "BankControllerValues": [],
+      "MaximumLayersPerNote": 2,
+      "Name": "D_E3M3",
+      "LayeredNoteOns": 29,
+      "NoteOns": 4924
+    },
+    {
+      "DistinctSamples": 22,
+      "EveryNoteCovered": true,
+      "BankControllerValues": [],
+      "MaximumLayersPerNote": 3,
+      "Name": "D_E3M4",
+      "LayeredNoteOns": 148,
+      "NoteOns": 877
+    },
+    {
+      "DistinctSamples": 18,
+      "EveryNoteCovered": true,
+      "BankControllerValues": [],
+      "MaximumLayersPerNote": 6,
+      "Name": "D_E3M5",
+      "LayeredNoteOns": 684,
+      "NoteOns": 1336
+    },
+    {
+      "DistinctSamples": 17,
+      "EveryNoteCovered": true,
+      "BankControllerValues": [],
+      "MaximumLayersPerNote": 2,
+      "Name": "D_E3M6",
+      "LayeredNoteOns": 99,
+      "NoteOns": 1625
+    },
+    {
+      "DistinctSamples": 20,
+      "EveryNoteCovered": true,
+      "BankControllerValues": [],
+      "MaximumLayersPerNote": 5,
+      "Name": "D_E3M7",
+      "LayeredNoteOns": 591,
+      "NoteOns": 1051
+    },
+    {
+      "DistinctSamples": 11,
+      "EveryNoteCovered": true,
+      "BankControllerValues": [],
+      "MaximumLayersPerNote": 1,
+      "Name": "D_E3M8",
+      "LayeredNoteOns": 0,
+      "NoteOns": 2812
+    },
+    {
+      "DistinctSamples": 25,
+      "EveryNoteCovered": true,
+      "BankControllerValues": [],
+      "MaximumLayersPerNote": 2,
+      "Name": "D_E3M9",
+      "LayeredNoteOns": 120,
+      "NoteOns": 3805
+    },
+    {
+      "DistinctSamples": 31,
+      "EveryNoteCovered": true,
+      "BankControllerValues": [],
+      "MaximumLayersPerNote": 6,
+      "Name": "D_BUNNY",
+      "LayeredNoteOns": 59,
+      "NoteOns": 742
+    }
+  ],
+  "Error": null
+}

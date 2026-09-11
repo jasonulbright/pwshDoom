@@ -47,7 +47,7 @@ No live terminal run or device playback occurred in this milestone. There is con
 
 ## Next implementation
 
-Resolve preset and instrument zones with global/local precedence and key/velocity selection. Then implement PowerShell sample playback, tuning, loop/release behavior, envelopes and the bank's necessary modulation/filter features. Measure real score polyphony and block cost before integrating with the effects worker. Remaining host work includes score changes, loops, pause, independent music volume, new-game/save/load restoration and cleanup. Compare against a pinned reference synthesis output with intentional differences declared; a pitched-sample demonstration alone will not qualify music fidelity.
+Region selection and the sample oscillator are now implemented and measured below. Next implement envelopes and the bank's necessary modulation/filter features, then qualify full-score PCM against a pinned reference. The isolated oscillator cost already exceeds a live block budget at sixteen voices; investigate PowerShell render-ahead/cache work alongside complete synthesis, including first-use startup, cache invalidation, storage and score-transition behavior. Remaining host work includes score changes, loops, pause, independent music volume, new-game/save/load restoration and cleanup. A pitched-sample demonstration alone will not qualify music fidelity.
 
 The retained upstream `SilkMusic` path delegates to a compiled `DoomMusicBridge` and MeltySynth. It is an alternative/reference, not an allowed implementation under the user's PowerShell algorithm constraint. A new PowerShell OPL synthesizer using IWAD GENMIDI is another possible route, but operator emulation and fidelity/cost remain unmeasured. SF2 is the current implementation experiment because a local instrument bank is available; no performance superiority has been established.
 
@@ -61,3 +61,34 @@ Reproduce from PowerShell 7.4 or newer with fresh output paths:
 ```
 
 The bank inventory currently expects the 32-track Ultimate Doom fixture. The evidence audit uses the named retained reports; it does not run synthesis or gameplay.
+
+## Region selection and sample oscillator
+
+`src/SoundFontRegions.ps1` resolves preset/instrument globals and locals, intersects key/velocity ranges across levels, preserves overlapping layers and applies sample-address offsets. Instrument values replace defaults; preset values add after their own global/local overrides. Explicit modulators are retained with local replacements but are not yet evaluated. These behaviors follow sections 8.5 and 9.4 of the specification linked above. Missing presets and invalid effective sample/loop bounds fail explicitly. The resolver has a bounded expansion limit and no implicit program substitution.
+
+`music-regions-unit-first.json` passes sixteen independent synthetic checks for precedence, layers, endpoints, signed values, modulator retention and bounds. `music-note-coverage-first.json` then resolves every one of 71,681 positive-velocity note-ons across all 32 complete IWAD scores, including program changes and percussion selection. All observed bank controller values are zero. There are 5,020 distinct bank/program/key/velocity queries, selecting 133 samples from 2,063 expanded regions. No bank zone is skipped. Individual notes can select six layers; E1M1 reaches two layers per note. These counts exclude release tails and do not establish the maximum simultaneous synthesis load.
+
+`src/MusicOscillator.ps1` implements pitch/rate conversion, linear interpolation, continuous loops, sustain loops that exit on release, finite sample tails and pause in PowerShell. `music-oscillator-unit-final.json` passes eleven checks, including independent sample vectors, the interpolation tap at a loop seam, block partition invariance and a fractional-step piecewise waveform. The first fixture expected the wrong sample at frame 99 of a loop; the retained failure is corrected by calculating the wrapped phase, without changing the oscillator for that assertion.
+
+The cost fixture uses the real bank's program 30/key 60 region, ten warmup blocks and forty measured blocks of 1,260 frames at 44.1 kHz. Each block represents 28.571 ms. Returned mono floating-point samples are hashed outside the timing interval. Output allocation/collection is included; envelopes, filters, final mixing, hashing, devices, gameplay and rendering are excluded.
+
+| Oscillators | Mean ms/block | p95 ms | Maximum ms | Blocks exceeding duration |
+| --- | ---: | ---: | ---: | ---: |
+| 1 | 3.53 | 3.62 | 13.58 | 0/40 |
+| 8 | 26.09 | 26.63 | 30.13 | 1/40 |
+| 16 | 50.91 | 57.50 | 63.69 | 40/40 |
+
+Source: `music-oscillator-cost-quiescent.json`. The earlier `-first` report overlaps this study's note-coverage process and is not the isolated baseline. The repeated baseline has no other study workload running; uncontrolled system activity remains possible. These short trials do not support a stable live deadline or a hardware-wide performance claim.
+
+A segmented-loop candidate preserves every trial's output hash but changes means to 3.42/24.98/54.02 ms. It provides no consistent improvement and is not retained as the implementation. Raw timings remain in `music-oscillator-cost-segment.json`; the candidate source is local at `local/music-references/MusicOscillator-segment.ps1`, SHA-256 `5533A3C6AE9175B76C8284ABD0ED6BCAEA228D83FFC72F702BE63E31777DF0C9`. Review also identified a potential repeated-floating-addition versus segment-count rounding boundary that would need a guard before adoption. The retained oscillator checks boundaries for every sample.
+
+`music-voice-validation.json` passes 34 evidence checks, pins seven current source files and parses, checks all 27 named region/oscillator tests, verifies full-score coverage and compares candidate/baseline output hashes. This milestone produces no complete music mix or device playback, and no live terminal run occurred. Music remains unavailable in the normal host.
+
+Additional reproduction commands, with fresh output paths:
+
+```powershell
+./scripts/Test-SoundFontRegions.ps1 -Output local/music-regions.json
+./scripts/Test-MusicOscillator.ps1 -Output local/music-oscillator.json
+./scripts/Test-MusicNoteCoverage.ps1 -Output local/music-notes.json -Wad 'C:\path\to\DOOM.WAD' -SoundFont 'C:\path\to\TimGM6mb.sf2'
+./scripts/Measure-MusicOscillator.ps1 -Output local/music-cost.json -SoundFont 'C:\path\to\TimGM6mb.sf2'
+```

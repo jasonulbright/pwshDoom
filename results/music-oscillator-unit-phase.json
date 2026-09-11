@@ -1,0 +1,56 @@
+{
+  "Error": null,
+  "Sources": [
+    {
+      "Sha256": "1D7911DC5CD2004D6DBBF27ECF43FFD652FAC8E4813943D9F8CFD5116332417B",
+      "Path": "src/MusicOscillator.ps1"
+    },
+    {
+      "Sha256": "B0A071BFD56E2121DACDD52DFDB27AE724C4A40E2D05095BFBD4058BBD170791",
+      "Path": "scripts/Test-MusicOscillator.ps1"
+    }
+  ],
+  "Checks": [
+    {
+      "Name": "Independent half-rate interpolation and finite tail",
+      "Passed": true
+    },
+    {
+      "Name": "Independent fractional loop interpolation wraps next tap",
+      "Passed": true
+    },
+    {
+      "Name": "Sustain loop exits into sample tail after release",
+      "Passed": true
+    },
+    {
+      "Name": "Continuous loop remains looping through release",
+      "Passed": true
+    },
+    {
+      "Name": "Oscillator block partition invariance",
+      "Passed": true
+    },
+    {
+      "Name": "Pause freezes position and clock",
+      "Passed": true
+    },
+    {
+      "Name": "Coarse octave doubles source step",
+      "Passed": true
+    },
+    {
+      "Name": "Forced key replaces played key for pitch",
+      "Passed": true
+    },
+    {
+      "Name": "Zero scale tuning retains bend",
+      "Passed": true
+    },
+    {
+      "Name": "Large step crosses multiple loops without losing phase",
+      "Passed": true
+    }
+  ],
+  "Meaning": "Independent sample oscillator values, loop/release behavior and pitch ratios. No envelopes, filters, controller modulation or complete synthesizer fidelity."
+}

@@ -1,0 +1,80 @@
+{
+  "Checks": [
+    {
+      "Name": "Layering plus disjoint preset range exclusion",
+      "Passed": true
+    },
+    {
+      "Name": "Local instrument overrides global and local preset adds once",
+      "Passed": true
+    },
+    {
+      "Name": "Signed generators and inherited/default values",
+      "Passed": true
+    },
+    {
+      "Name": "Global key range replaced locally then intersected across levels",
+      "Passed": true
+    },
+    {
+      "Name": "Velocity range intersection",
+      "Passed": true
+    },
+    {
+      "Name": "Effective sample offsets and root override",
+      "Passed": true
+    },
+    {
+      "Name": "Modulator local replacement retained separately at each level",
+      "Passed": true
+    },
+    {
+      "Name": "Input structures unchanged",
+      "Passed": true
+    },
+    {
+      "Name": "Inclusive lower key and velocity endpoints",
+      "Passed": true
+    },
+    {
+      "Name": "Inclusive upper key and velocity endpoints",
+      "Passed": true
+    },
+    {
+      "Name": "Out of velocity range does not trigger split",
+      "Passed": true
+    },
+    {
+      "Name": "Out of key range is silent",
+      "Passed": true
+    },
+    {
+      "Name": "Missing preset is explicit",
+      "Passed": true
+    },
+    {
+      "Name": "Region expansion bound",
+      "Passed": true
+    },
+    {
+      "Name": "Effective end cannot escape sample pool",
+      "Passed": true
+    },
+    {
+      "Name": "Effective loop cannot escape sample span",
+      "Passed": true
+    }
+  ],
+  "Sources": [
+    {
+      "Sha256": "9D409332EB51B5B6FCBC4B259E0C5E243E561A3C0D6AD2040A772F46539B9D8E",
+      "Path": "src/SoundFontRegions.ps1"
+    },
+    {
+      "Sha256": "0B0A8C66181E897CB8EFB0C056A444556C1F81DA7B048B70912969FB569E3468",
+      "Path": "scripts/Test-SoundFontRegions.ps1"
+    }
+  ],
+  "Meaning": "Synthetic independent region/generator/modulator precedence and boundary tests. Modulators are retained, not evaluated; no synthesis fidelity claim.",
+  "Error": null
+}

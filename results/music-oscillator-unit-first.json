@@ -1,0 +1,32 @@
+{
+  "Sources": [
+    {
+      "Path": "src/MusicOscillator.ps1",
+      "Sha256": "1D7911DC5CD2004D6DBBF27ECF43FFD652FAC8E4813943D9F8CFD5116332417B"
+    },
+    {
+      "Path": "scripts/Test-MusicOscillator.ps1",
+      "Sha256": "54E5709595D4987F6DBD5D9B845CD91B9BC1D9C78D9B0A62C7B434BAE0E2EA62"
+    }
+  ],
+  "Error": "Continuous loop remains looping through release\nat Check, C:\\projects\\pwshDoom\\scripts\\Test-MusicOscillator.ps1: line 8\r\nat <ScriptBlock>, C:\\projects\\pwshDoom\\scripts\\Test-MusicOscillator.ps1: line 23",
+  "Meaning": "Independent sample oscillator values, loop/release behavior and pitch ratios. No envelopes, filters, controller modulation or complete synthesizer fidelity.",
+  "Checks": [
+    {
+      "Name": "Independent half-rate interpolation and finite tail",
+      "Passed": true
+    },
+    {
+      "Name": "Independent fractional loop interpolation wraps next tap",
+      "Passed": true
+    },
+    {
+      "Name": "Sustain loop exits into sample tail after release",
+      "Passed": true
+    },
+    {
+      "Name": "Continuous loop remains looping through release",
+      "Passed": false
+    }
+  ]
+}

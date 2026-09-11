@@ -1,0 +1,178 @@
+{
+  "Error": null,
+  "Sources": [
+    {
+      "Sha256": "9D409332EB51B5B6FCBC4B259E0C5E243E561A3C0D6AD2040A772F46539B9D8E",
+      "Path": "src/SoundFontRegions.ps1"
+    },
+    {
+      "Sha256": "1D7911DC5CD2004D6DBBF27ECF43FFD652FAC8E4813943D9F8CFD5116332417B",
+      "Path": "src/MusicOscillator.ps1"
+    },
+    {
+      "Sha256": "0B0A8C66181E897CB8EFB0C056A444556C1F81DA7B048B70912969FB569E3468",
+      "Path": "scripts/Test-SoundFontRegions.ps1"
+    },
+    {
+      "Sha256": "77C9D564352A01B71AE5A71690F2FC77F771FB897835786F132B8C1693DC4CE8",
+      "Path": "scripts/Test-MusicOscillator.ps1"
+    },
+    {
+      "Sha256": "B6FF7A87786AF2E86AF680C60169B5B6CA9E6A85ED361C87CF4E93DDAA268623",
+      "Path": "scripts/Test-MusicNoteCoverage.ps1"
+    },
+    {
+      "Sha256": "8199B921354A764928E121F43C5D43FDCE623308EB62CCB1F73838C5BF0C585C",
+      "Path": "scripts/Measure-MusicOscillator.ps1"
+    },
+    {
+      "Sha256": "3A42C9BEB6DC1735F691466E460D870BB4688432D0FA29D0151E6C6D36DF320C",
+      "Path": "scripts/Test-MusicVoiceEvidence.ps1"
+    }
+  ],
+  "Meaning": "Region/oscillator primitive correctness, full-score note coverage and bounded cost evidence. Complete synthesis, live music and real-time deadlines remain unqualified.",
+  "Checks": [
+    {
+      "Passed": true,
+      "Name": "music-regions-unit-first successful"
+    },
+    {
+      "Passed": true,
+      "Name": "music-regions-unit-first current source src/SoundFontRegions.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "music-regions-unit-first current source scripts/Test-SoundFontRegions.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "music-oscillator-unit-final successful"
+    },
+    {
+      "Passed": true,
+      "Name": "music-oscillator-unit-final current source src/MusicOscillator.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "music-oscillator-unit-final current source scripts/Test-MusicOscillator.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "music-note-coverage-first successful"
+    },
+    {
+      "Passed": true,
+      "Name": "music-note-coverage-first current source src/MusScore.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "music-note-coverage-first current source src/SoundFontBank.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "music-note-coverage-first current source src/SoundFontRegions.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "music-note-coverage-first current source scripts/Test-MusicNoteCoverage.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "music-oscillator-cost-quiescent successful"
+    },
+    {
+      "Passed": true,
+      "Name": "music-oscillator-cost-quiescent current source src/SoundFontBank.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "music-oscillator-cost-quiescent current source src/SoundFontRegions.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "music-oscillator-cost-quiescent current source src/MusicOscillator.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "music-oscillator-cost-quiescent current source scripts/Measure-MusicOscillator.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "music-regions-unit-first every named check passed"
+    },
+    {
+      "Passed": true,
+      "Name": "music-oscillator-unit-final every named check passed"
+    },
+    {
+      "Passed": true,
+      "Name": "16 region and 11 oscillator checks"
+    },
+    {
+      "Passed": true,
+      "Name": "Every note in 32 full tracks resolves"
+    },
+    {
+      "Passed": true,
+      "Name": "Region coverage includes layers and no skipped bank zones"
+    },
+    {
+      "Passed": true,
+      "Name": "Candidate preserved 1-voice sample hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Forty measured blocks retained for 1 voices"
+    },
+    {
+      "Passed": true,
+      "Name": "Candidate preserved 8-voice sample hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Forty measured blocks retained for 8 voices"
+    },
+    {
+      "Passed": true,
+      "Name": "Candidate preserved 16-voice sample hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Forty measured blocks retained for 16 voices"
+    },
+    {
+      "Passed": true,
+      "Name": "Parse src/SoundFontRegions.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Parse src/MusicOscillator.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Parse scripts/Test-SoundFontRegions.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Parse scripts/Test-MusicOscillator.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Parse scripts/Test-MusicNoteCoverage.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Parse scripts/Measure-MusicOscillator.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Parse scripts/Test-MusicVoiceEvidence.ps1"
+    }
+  ],
+  "AcceptedReports": [
+    "music-note-coverage-first",
+    "music-oscillator-cost-quiescent",
+    "music-oscillator-unit-final",
+    "music-regions-unit-first"
+  ]
+}
