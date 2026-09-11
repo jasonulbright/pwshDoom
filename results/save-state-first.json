@@ -1,0 +1,168 @@
+{
+  "Checks": [
+    {
+      "Passed": true,
+      "Name": "Save at 700 leaves live state unchanged"
+    },
+    {
+      "Passed": true,
+      "Name": "Independent state matches on load at 700"
+    },
+    {
+      "Passed": true,
+      "Name": "Serialized graph matches on load at 700"
+    },
+    {
+      "Passed": true,
+      "Name": "Continued independent state matches at command 735"
+    },
+    {
+      "Passed": true,
+      "Name": "Continued independent state matches at command 770"
+    },
+    {
+      "Passed": true,
+      "Name": "Continued independent state matches at command 805"
+    },
+    {
+      "Passed": true,
+      "Name": "Continued independent state matches at command 840"
+    },
+    {
+      "Passed": true,
+      "Name": "Continued graph matches after 700+140"
+    },
+    {
+      "Passed": true,
+      "Name": "Existing save is preserved without overwrite confirmation"
+    },
+    {
+      "Passed": true,
+      "Name": "Stale overwrite confirmation preserves original"
+    },
+    {
+      "Passed": true,
+      "Name": "Confirmed overwrite retains exact prior save as backup"
+    },
+    {
+      "Passed": true,
+      "Name": "Unknown version rejected"
+    },
+    {
+      "Passed": true,
+      "Name": "Wrong IWAD rejected"
+    },
+    {
+      "Passed": true,
+      "Name": "Wrong schema rejected"
+    },
+    {
+      "Passed": true,
+      "Name": "Checksum corruption rejected"
+    },
+    {
+      "Passed": true,
+      "Name": "Out-of-range settings rejected"
+    },
+    {
+      "Passed": true,
+      "Name": "Unknown graph type rejected in candidate"
+    },
+    {
+      "Passed": true,
+      "Name": "Bad reference rejected in candidate"
+    },
+    {
+      "Passed": true,
+      "Name": "Missing properties rejected in candidate"
+    },
+    {
+      "Passed": true,
+      "Name": "Forged binding rejected in candidate"
+    },
+    {
+      "Passed": true,
+      "Name": "Invalid scalar type rejected in candidate"
+    },
+    {
+      "Passed": true,
+      "Name": "Failed loads leave live state unchanged"
+    }
+  ],
+  "FinishedUtc": "2026-09-11T14:13:23.7211960Z",
+  "Error": null,
+  "Runs": [
+    {
+      "Save": {
+        "Milliseconds": 1790.6944,
+        "Backup": null,
+        "Nodes": 1847,
+        "Bytes": 398503,
+        "Sha256": "C0BC4ED5C582BFB49B6BA90C8DEC862FD0DF66E0CF3E4C5C789B0418347458C1",
+        "Path": "C:\\projects\\pwshDoom\\local\\save-state-de67c8c5b6134510837dc27fedf22fcd\\at-700.pds"
+      },
+      "EndEpisode": 1,
+      "SaveAt": 700,
+      "ContinueTics": 140,
+      "LoadMs": 1188.0327,
+      "FinalCheckpoint": {
+        "State": {
+          "Schema": 1,
+          "Tic": 840,
+          "State": "Level",
+          "Episode": 1,
+          "Map": 1,
+          "LevelTime": 841,
+          "RandomIndex": 238,
+          "Paused": false,
+          "PlayerState": "Live",
+          "Health": 81,
+          "Armor": 0,
+          "Position": [
+            210568510,
+            -215843193,
+            -1572864,
+            2732261376
+          ],
+          "Ammo": [
+            40,
+            0,
+            0,
+            0
+          ],
+          "Weapons": [
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "Keys": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "DidSecret": false,
+          "RenderSnapshotSha256": "9F4E54E2244070B39857D9533E0B1F8F25E8CA2199FA873EECEC95334F037C89",
+          "Intermission": null,
+          "Finale": null
+        },
+        "Sha256": "7D49066E1E1D00766ED4318D8D4BF354124AB4B319BFC3B4987EC61B030ED85A",
+        "Tic": 840
+      },
+      "StartState": "Level",
+      "EndState": "Level",
+      "EndMap": 1
+    }
+  ],
+  "Meaning": "Same-process save reconstruction, independent actor/sector/player/HUD projection, canonical graph round trip and continued ordinary input. Corruption is tested against a separate candidate. This does not yet prove fresh-process loading or menu integration.",
+  "SaveDirectory": "C:\\projects\\pwshDoom\\scripts\\..\\local\\save-state-de67c8c5b6134510837dc27fedf22fcd",
+  "SourceSha256": "3C51787D26FAF69BD40F23D23A6F0FEB825DAEF4AB8112805293D812FCF52AA6"
+}

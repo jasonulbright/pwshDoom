@@ -1,0 +1,144 @@
+{
+  "Observations": [
+    {
+      "AfterRng": 144,
+      "CheckpointMatched": false,
+      "After": {
+        "State": {
+          "Schema": 1,
+          "Tic": 350,
+          "State": "Level",
+          "Episode": 1,
+          "Map": 1,
+          "LevelTime": 351,
+          "RandomIndex": 144,
+          "Paused": false,
+          "PlayerState": "Live",
+          "Health": 100,
+          "Armor": 0,
+          "Position": [
+            102128781,
+            -163575224,
+            0,
+            4294770688
+          ],
+          "Ammo": [
+            50,
+            0,
+            0,
+            0
+          ],
+          "Weapons": [
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "Keys": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "DidSecret": false,
+          "RenderSnapshotSha256": "9B9513BEF0CF772DE3042429D26A22BDE7E65C1CEA2A9AFDAFA484E208F88260",
+          "Intermission": null,
+          "Finale": null
+        },
+        "Sha256": "B597ED21D3F98CD5CEFC1F6D495E0CBF2DFC993655D5669E0A5319DC74178EFE",
+        "Tic": 350
+      },
+      "Error": null,
+      "BeforeRng": 177,
+      "SaveBytes": 25682,
+      "Name": "Inherited save/load",
+      "Before": {
+        "State": {
+          "Schema": 1,
+          "Tic": 350,
+          "State": "Level",
+          "Episode": 1,
+          "Map": 1,
+          "LevelTime": 351,
+          "RandomIndex": 177,
+          "Paused": false,
+          "PlayerState": "Live",
+          "Health": 100,
+          "Armor": 0,
+          "Position": [
+            102128781,
+            -163575224,
+            0,
+            4294770688
+          ],
+          "Ammo": [
+            50,
+            0,
+            0,
+            0
+          ],
+          "Weapons": [
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "Keys": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "DidSecret": false,
+          "RenderSnapshotSha256": "A2B654FAC7DCD700DC335E6C96C359783A0DEC002EF19E11ABFED845ACA73B67",
+          "Intermission": null,
+          "Finale": null
+        },
+        "Sha256": "F16AB13EE9D7BD5653E50BEA4CED5F868D0D5FF176BB152F2BF03261AD999072",
+        "Tic": 350
+      }
+    },
+    {
+      "Name": "Truncated save",
+      "Rejected": true,
+      "LiveWorldReplaced": true,
+      "AfterLevelTime": 0,
+      "BeforeLevelTime": 351
+    },
+    {
+      "Name": "Standard .NET object allocation probe",
+      "Index": 8,
+      "Type": "DoomRandom",
+      "MethodsWork": true,
+      "Returned": 75
+    }
+  ],
+  "Sources": [
+    {
+      "Path": "src/ManagedDoom/Doom/Game/SaveAndLoad.sb.ps1",
+      "Sha256": "552ABB904E36BDC6A0E6593E6286F843F2F0D68CC5F03D4989FDDCE0242F55E2"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Game/DoomGame.sb.ps1",
+      "Sha256": "6040FD17A8E76C85CBAA07D708BD6A2DBEBFD044B52D6DB9B4E69F71B9225C3B"
+    }
+  ],
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "FinishedUtc": "2026-09-11T13:57:37.6313111Z",
+  "Error": null,
+  "Meaning": "Bounded investigation of inherited serialization on 350 ordinary route commands, plus malformed input and standard .NET object allocation. Test saves stay in unique ignored local directories."
+}

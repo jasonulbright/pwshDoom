@@ -1,0 +1,241 @@
+{
+  "Runs": [
+    {
+      "EndEpisode": 1,
+      "FinalCheckpoint": {
+        "Sha256": "7D49066E1E1D00766ED4318D8D4BF354124AB4B319BFC3B4987EC61B030ED85A",
+        "Tic": 840,
+        "State": {
+          "Schema": 1,
+          "Tic": 840,
+          "State": "Level",
+          "Episode": 1,
+          "Map": 1,
+          "LevelTime": 841,
+          "RandomIndex": 238,
+          "Paused": false,
+          "PlayerState": "Live",
+          "Health": 81,
+          "Armor": 0,
+          "Position": [
+            210568510,
+            -215843193,
+            -1572864,
+            2732261376
+          ],
+          "Ammo": [
+            40,
+            0,
+            0,
+            0
+          ],
+          "Weapons": [
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "Keys": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "DidSecret": false,
+          "RenderSnapshotSha256": "9F4E54E2244070B39857D9533E0B1F8F25E8CA2199FA873EECEC95334F037C89",
+          "Intermission": null,
+          "Finale": null
+        }
+      },
+      "StartState": "Level",
+      "EndState": "Level",
+      "Save": {
+        "Backup": null,
+        "Nodes": 1847,
+        "Path": "C:\\projects\\pwshDoom\\local\\save-state-108b5d62da1d4704a63e36eb141a15e5\\at-700.pds",
+        "Sha256": "AEC5B4313CFE2C11D32C7BD07635E35A91BC781E1609BE46DC42654A03FBFFF9",
+        "Milliseconds": 1676.2856,
+        "Bytes": 398503
+      },
+      "LoadMs": 1232.0063,
+      "ContinueTics": 140,
+      "SaveAt": 700,
+      "EndMap": 1
+    },
+    {
+      "EndEpisode": 1,
+      "FinalCheckpoint": {
+        "Sha256": "46BD5468602CC21DD1177B8502017F7BB9D909BD31EDBCF130D04615D70C30E7",
+        "Tic": 1690,
+        "State": {
+          "Schema": 1,
+          "Tic": 1690,
+          "State": "Level",
+          "Episode": 1,
+          "Map": 1,
+          "LevelTime": 1691,
+          "RandomIndex": 137,
+          "Paused": false,
+          "PlayerState": "Live",
+          "Health": 53,
+          "Armor": 0,
+          "Position": [
+            195147415,
+            -299786662,
+            -1572864,
+            1869152256
+          ],
+          "Ammo": [
+            32,
+            4,
+            0,
+            0
+          ],
+          "Weapons": [
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "Keys": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "DidSecret": false,
+          "RenderSnapshotSha256": "971359E554504ABAD126641AE1FEB60ABCDC3B40B3959365BE8CBC2D94F162D1",
+          "Intermission": null,
+          "Finale": null
+        }
+      },
+      "StartState": "Level",
+      "EndState": "Level",
+      "Save": {
+        "Backup": null,
+        "Nodes": 1846,
+        "Path": "C:\\projects\\pwshDoom\\local\\save-state-108b5d62da1d4704a63e36eb141a15e5\\at-1550.pds",
+        "Sha256": "2DCA1112512AE5B4D35B47F65E0B7429C7EB1FFF472EC26AC29766DD67A59666",
+        "Milliseconds": 1323.9116,
+        "Bytes": 397269
+      },
+      "LoadMs": 1003.0364,
+      "ContinueTics": 140,
+      "SaveAt": 1550,
+      "EndMap": 1
+    }
+  ],
+  "Checks": [
+    {
+      "Name": "Save at 700 leaves live state unchanged",
+      "Passed": true
+    },
+    {
+      "Name": "Independent state matches on load at 700",
+      "Passed": true
+    },
+    {
+      "Name": "Serialized graph matches on load at 700",
+      "Passed": true
+    },
+    {
+      "Name": "Continued independent state matches at command 735",
+      "Passed": true
+    },
+    {
+      "Name": "Continued independent state matches at command 770",
+      "Passed": true
+    },
+    {
+      "Name": "Continued independent state matches at command 805",
+      "Passed": true
+    },
+    {
+      "Name": "Continued independent state matches at command 840",
+      "Passed": true
+    },
+    {
+      "Name": "Continued graph matches after 700+140",
+      "Passed": true
+    },
+    {
+      "Name": "Save at 1550 leaves live state unchanged",
+      "Passed": true
+    },
+    {
+      "Name": "Independent state matches on load at 1550",
+      "Passed": true
+    },
+    {
+      "Name": "Serialized graph matches on load at 1550",
+      "Passed": true
+    },
+    {
+      "Name": "Continued independent state matches at command 1585",
+      "Passed": true
+    },
+    {
+      "Name": "Continued independent state matches at command 1620",
+      "Passed": true
+    },
+    {
+      "Name": "Continued independent state matches at command 1655",
+      "Passed": true
+    },
+    {
+      "Name": "Continued independent state matches at command 1690",
+      "Passed": true
+    },
+    {
+      "Name": "Continued graph matches after 1550+140",
+      "Passed": true
+    },
+    {
+      "Name": "Save at 1600 leaves live state unchanged",
+      "Passed": true
+    },
+    {
+      "Name": "Independent state matches on load at 1600",
+      "Passed": true
+    },
+    {
+      "Name": "Serialized graph matches on load at 1600",
+      "Passed": true
+    },
+    {
+      "Name": "Continued independent state matches at command 1635",
+      "Passed": true
+    },
+    {
+      "Name": "Continued independent state matches at command 1670",
+      "Passed": true
+    },
+    {
+      "Name": "Continued independent state matches at command 1705",
+      "Passed": true
+    },
+    {
+      "Name": "Continued independent state matches at command 1740",
+      "Passed": true
+    }
+  ],
+  "FinishedUtc": "2026-09-11T14:15:52.5557287Z",
+  "Error": "Unbound external save value: Subsector\nat Encode-Value, C:\\projects\\pwshDoom\\src\\SaveState.ps1: line 82\r\nat ConvertTo-DoomSaveGraph, C:\\projects\\pwshDoom\\src\\SaveState.ps1: line 91\r\nat <ScriptBlock>, C:\\projects\\pwshDoom\\scripts\\Test-SaveState.ps1: line 49\r\nat <ScriptBlock>, <No file>: line 1",
+  "SourceSha256": "A9AB834328DE163C92876822F73BA6DEA7A2D0A925520933C0654396E502B71B",
+  "SaveDirectory": "C:\\projects\\pwshDoom\\scripts\\..\\local\\save-state-108b5d62da1d4704a63e36eb141a15e5",
+  "Meaning": "Same-process save reconstruction, independent actor/sector/player/HUD projection, canonical graph round trip and continued ordinary input. Corruption is tested against a separate candidate. This does not yet prove fresh-process loading or menu integration."
+}

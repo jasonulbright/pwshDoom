@@ -1,0 +1,129 @@
+{
+  "Evidence": {
+    "Setup": {
+      "ButtonTimer": 35,
+      "PlatformStatus": "InStasis",
+      "CeilingSector": 1,
+      "LightSector": 0,
+      "PlatformSector": 3,
+      "ButtonLine": 0,
+      "CeilingDirection": -1,
+      "MissileType": "Troopshot"
+    },
+    "Save": {
+      "Nodes": 1849,
+      "Milliseconds": 1911.3791,
+      "Backup": null,
+      "Path": "C:\\projects\\pwshDoom\\local\\save-specials-c40432899aa240508df8e3b01968c902\\specials.pds",
+      "Bytes": 394847,
+      "Sha256": "A4C3740154B384AB2780E9FF916C1F06938CF3A9676FD1F869DF51CFD3BAD2AC"
+    },
+    "FinalCheckpoint": {
+      "Tic": 70,
+      "Sha256": "B79304EBB54AD5EEB1D8C01277DE7DC7F0A9700BE031C1532E73A8C50FB9198B",
+      "State": {
+        "Schema": 1,
+        "Tic": 70,
+        "State": "Level",
+        "Episode": 1,
+        "Map": 1,
+        "LevelTime": 70,
+        "RandomIndex": 163,
+        "Paused": false,
+        "PlayerState": "Live",
+        "Health": 100,
+        "Armor": 0,
+        "Position": [
+          69206016,
+          -236978176,
+          0,
+          1073741824
+        ],
+        "Ammo": [
+          50,
+          0,
+          0,
+          0
+        ],
+        "Weapons": [
+          true,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "Keys": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "DidSecret": false,
+        "RenderSnapshotSha256": "183563D6FA7AE831FD70CB5B4EB703F7AB3ABB31D68A8968CB250F0EEBFA9A05",
+        "Intermission": null,
+        "Finale": null
+      }
+    }
+  },
+  "HarnessSha256": "5904079CC0FB16391DF022E0AE2D27BADFC6D8468C20774DB936D8C5437FB475",
+  "Meaning": "Explicit E1M1 data/behavior fixtures, not a human campaign route: pending switch, fire flicker, crusher, stasis platform and cyclic actor/sector links. Both games then run identical updates, including stop/resume actions.",
+  "Checks": [
+    {
+      "Name": "Entire fixture graph matches on load",
+      "Passed": true
+    },
+    {
+      "Name": "Actor target/tracer cycles retain loaded player identity",
+      "Passed": true
+    },
+    {
+      "Name": "Sector sound target retains loaded actor identity",
+      "Passed": true
+    },
+    {
+      "Name": "Mover registries and sector links share their loaded thinkers",
+      "Passed": true
+    },
+    {
+      "Name": "Stasis platform survives with its resume state",
+      "Passed": true
+    },
+    {
+      "Name": "Full graph matches after special continuation tic 10",
+      "Passed": true
+    },
+    {
+      "Name": "Ceiling actually entered stasis",
+      "Passed": true
+    },
+    {
+      "Name": "Full graph matches after special continuation tic 20",
+      "Passed": true
+    },
+    {
+      "Name": "Ceiling and platform actually resumed",
+      "Passed": true
+    },
+    {
+      "Name": "Full graph matches after special continuation tic 35",
+      "Passed": true
+    },
+    {
+      "Name": "Pending switch expires and restores its texture",
+      "Passed": true
+    },
+    {
+      "Name": "Full graph matches after special continuation tic 70",
+      "Passed": true
+    }
+  ],
+  "SourceSha256": "C7460B63EADD98221FFF9F76EF6601F4E9EDD3BFBA62420FD9BF2323B300F728",
+  "Error": null,
+  "FinishedUtc": "2026-09-11T14:25:37.6477699Z"
+}

@@ -182,6 +182,9 @@ class ThingAllocation {
         $player.Message = $null
         $player.MessageTime = 0
         $player.DamageCount = 0
+        # A new spawn has no current damage source. Keeping the old attacker
+        # retains actors and geometry from the previous world across map loads.
+        $player.Attacker = $null
         $player.BonusCount = 0
         $player.ExtraLight = 0
         $player.FixedColorMap = 0

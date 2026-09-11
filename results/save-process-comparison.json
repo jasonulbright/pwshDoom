@@ -1,0 +1,17 @@
+{
+  "FinishedUtc": "2026-09-11T14:35:01.7449569Z",
+  "LoadReport": "results/save-process-load-final.json",
+  "ReferenceReport": "results/save-process-reference-final.json",
+  "DifferentProcesses": true,
+  "SameSave": true,
+  "SameImplementation": true,
+  "Samples": 5,
+  "SamplesMatch": true,
+  "FinalGraphMatches": true,
+  "OriginalReferenceCheckpoints": 8,
+  "OriginalReferencePassed": true,
+  "OriginalLoadedCheckpoints": 2,
+  "OriginalLoadedPassed": true,
+  "NoErrors": true,
+  "Meaning": "Separately started processes. The Load process reconstructs command 1600; Reference plays the entire prefix. Both continue to command 1747. Five sampled selected-state/render checkpoints and the final declared graph must agree. Concurrent runs are not a controlled latency benchmark."
+}

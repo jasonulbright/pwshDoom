@@ -1,0 +1,308 @@
+{
+  "RecordedChecks": [
+    {
+      "Actual": "DF7BBE0AFA2E2016D116A73359D06C8DAB6E2F0F064556D7F31FEDD55D4692F2",
+      "Expected": "DF7BBE0AFA2E2016D116A73359D06C8DAB6E2F0F064556D7F31FEDD55D4692F2",
+      "Passed": true,
+      "Tic": 1676
+    },
+    {
+      "Actual": "677ED4AF1A191E5157884E2C814ED568DACFE7B8A2257CBE082395F83E7214C5",
+      "Expected": "677ED4AF1A191E5157884E2C814ED568DACFE7B8A2257CBE082395F83E7214C5",
+      "Passed": true,
+      "Tic": 1747
+    }
+  ],
+  "Mode": "Load",
+  "Save": "./local/save-state-f2572f9f67cb47b2b4f8fc7d4f498e25/at-1600.pds",
+  "PowerShell": "7.6.5",
+  "StartCommand": 1600,
+  "ContinueTics": 147,
+  "Error": null,
+  "HarnessSha256": "839B66E063552A2EE045431C6D00D7D51FFBF7086ED81BBD1C785594642CCAD0",
+  "ProcessId": 4772,
+  "Meaning": "Run this harness in separate PowerShell processes for Load and Reference, then compare checkpoints and final graph hashes. Reference plays the full prefix from a fresh game; Load reconstructs the recorded boundary and plays only the suffix. Each also verifies original recorded checkpoints encountered along its portion.",
+  "GraphSha256": "7F89C89164A2C5FD99416FA1281071BD26F617FDA2EC629C71A02F447F6BA0D2",
+  "LoadMs": 2902.7445,
+  "SourceSha256": "B32F6AF3B2C7D3E5CC992BC34788F0074A5D0457F761A9758F8DAE070C1519F9",
+  "SaveSha256": "F3510EF79949A1BD2620A284337CBAE8F833759FC0D1FA11299FEDEB53AFD793",
+  "FinishedUtc": "2026-09-11T14:31:20.3895145Z",
+  "Samples": [
+    {
+      "Sha256": "95798F8F08499FC43EC6FFECDB6719A8B9AEA7FABD7E45C793FC78CCB9EF1A93",
+      "Tic": 1635,
+      "State": {
+        "Schema": 1,
+        "Tic": 1635,
+        "State": "Intermission",
+        "Episode": 1,
+        "Map": 1,
+        "LevelTime": 1561,
+        "RandomIndex": 231,
+        "Paused": false,
+        "PlayerState": "Live",
+        "Health": 75,
+        "Armor": 0,
+        "Position": [
+          193541037,
+          -312736380,
+          -1572864,
+          1868496896
+        ],
+        "Ammo": [
+          37,
+          4,
+          0,
+          0
+        ],
+        "Weapons": [
+          true,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "Keys": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "DidSecret": false,
+        "RenderSnapshotSha256": "934BE7C5587941BBBAFAD33A5B4F3AEA588E1E9F9AC206E671EC4230E2CA13AA",
+        "Intermission": [
+          1,
+          10,
+          136,
+          75,
+          45,
+          30,
+          20
+        ],
+        "Finale": null
+      }
+    },
+    {
+      "Sha256": "CF2419833EB3356F200489BDC4C53E9D01E8BF4C88C6BC0B3E5A7A64D9CFD974",
+      "Tic": 1670,
+      "State": {
+        "Schema": 1,
+        "Tic": 1670,
+        "State": "Intermission",
+        "Episode": 1,
+        "Map": 1,
+        "LevelTime": 1561,
+        "RandomIndex": 231,
+        "Paused": false,
+        "PlayerState": "Live",
+        "Health": 75,
+        "Armor": 0,
+        "Position": [
+          193541037,
+          -312736380,
+          -1572864,
+          1868496896
+        ],
+        "Ammo": [
+          37,
+          4,
+          0,
+          0
+        ],
+        "Weapons": [
+          true,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "Keys": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "DidSecret": false,
+        "RenderSnapshotSha256": "934BE7C5587941BBBAFAD33A5B4F3AEA588E1E9F9AC206E671EC4230E2CA13AA",
+        "Intermission": [
+          -1,
+          10,
+          6,
+          110,
+          45,
+          30,
+          20
+        ],
+        "Finale": null
+      }
+    },
+    {
+      "Sha256": "770DACFFF89B75EE0A8DD67476D00003A60F7644199B2F333210F9227FCB29AF",
+      "Tic": 1705,
+      "State": {
+        "Schema": 1,
+        "Tic": 1705,
+        "State": "Level",
+        "Episode": 1,
+        "Map": 2,
+        "LevelTime": 29,
+        "RandomIndex": 45,
+        "Paused": false,
+        "PlayerState": "Live",
+        "Health": 75,
+        "Armor": 0,
+        "Position": [
+          -2097152,
+          -15728640,
+          1572864,
+          1073741824
+        ],
+        "Ammo": [
+          37,
+          4,
+          0,
+          0
+        ],
+        "Weapons": [
+          true,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "Keys": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "DidSecret": false,
+        "RenderSnapshotSha256": "7E351EBD9EFB216094CDF4B2C77CF55F926226E1FE75F4013EEDE54B5BF7474F",
+        "Intermission": null,
+        "Finale": null
+      }
+    },
+    {
+      "Sha256": "B0B297249698BF229BCB35F598F9FF184D4361CFCA49FA53B13A7F29B9893AD0",
+      "Tic": 1740,
+      "State": {
+        "Schema": 1,
+        "Tic": 1740,
+        "State": "Level",
+        "Episode": 1,
+        "Map": 2,
+        "LevelTime": 64,
+        "RandomIndex": 45,
+        "Paused": false,
+        "PlayerState": "Live",
+        "Health": 75,
+        "Armor": 0,
+        "Position": [
+          -2097152,
+          -15728640,
+          1572864,
+          1073741824
+        ],
+        "Ammo": [
+          37,
+          4,
+          0,
+          0
+        ],
+        "Weapons": [
+          true,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "Keys": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "DidSecret": false,
+        "RenderSnapshotSha256": "F34F226A576870B4651810E419192A1B391C10518587115B7235E0B4DFA806EF",
+        "Intermission": null,
+        "Finale": null
+      }
+    },
+    {
+      "Sha256": "677ED4AF1A191E5157884E2C814ED568DACFE7B8A2257CBE082395F83E7214C5",
+      "Tic": 1747,
+      "State": {
+        "Schema": 1,
+        "Tic": 1747,
+        "State": "Level",
+        "Episode": 1,
+        "Map": 2,
+        "LevelTime": 71,
+        "RandomIndex": 51,
+        "Paused": false,
+        "PlayerState": "Live",
+        "Health": 75,
+        "Armor": 0,
+        "Position": [
+          -2097152,
+          -15728640,
+          1572864,
+          1073741824
+        ],
+        "Ammo": [
+          37,
+          4,
+          0,
+          0
+        ],
+        "Weapons": [
+          true,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "Keys": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "DidSecret": false,
+        "RenderSnapshotSha256": "8B2ED9A6E2B80AB2B0C057A0266E75874197DD25AB1C1CC5A39D00352BF89060",
+        "Intermission": null,
+        "Finale": null
+      }
+    }
+  ]
+}

@@ -44,6 +44,10 @@ Modifications, 2026-09-10:
 
 Modifications, 2026-09-11:
 
+- `ThingAllocation.SpawnPlayer`: clear the previous damage attacker with the
+  damage counter. Cross-map save qualification exposed an E1M1 actor retaining
+  its old world after the player entered E1M2. This is an explicit lifecycle
+  adaptation, not a claim of an additional vanilla compatibility result.
 - `DoomGame`: route Ultimate Doom map-8 completions to the finale, return E4M9
   to E4M3, preserve secret-visit history, and convert par seconds to tics.
 - `Finale`: choose each Ultimate Doom episode's text/flat, remove accidental

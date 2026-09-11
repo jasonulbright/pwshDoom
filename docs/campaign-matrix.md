@@ -8,6 +8,8 @@ Source/IWAD hashes and detailed results: [results/campaign-smoke-lineflags-fixed
 
 E1M1 has an [input-only completion report](../results/e1m1-route-lineflags.json) with 1560 commands. That route ends at intermission; it does not qualify next-level presentation or a whole episode. Other maps still need completion evidence. The route harness targets E1M1/HMP; source-version matching is checked separately in the campaign validation report.
 
+The [save/load core](save-load.md) now preserves the E1M1 → intermission → E1M2 input route across reconstruction and a fresh PowerShell process. Death/respawn and all four finale boundaries pass explicit save fixtures. These add state-continuation coverage; map-completion and terminal-host entries below retain their existing scope.
+
 | Map | Load / idle simulation / two frames | Input-only completion | Transition / ending |
 | --- | --- | --- | --- |
 | E1M1 | Pass | Pass, HMP | Pass: real intermission -> E1M2 |

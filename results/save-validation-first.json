@@ -1,0 +1,35 @@
+{
+  "HarnessSha256": "6E45918B4C1AEDC61C5B9A42AF5A404BBF4BD25A244B2FC4D54FEA48AEE250A1",
+  "Checks": [
+    {
+      "Name": "Truncated JSON",
+      "Passed": true,
+      "Error": "Conversion from JSON failed with error: Unexpected end when reading JSON. Path '', line 1, position 1."
+    },
+    {
+      "Name": "File size limit before JSON parsing",
+      "Passed": true,
+      "Error": "Save exceeds 64 MiB."
+    },
+    {
+      "Name": "Actual candidate IWAD checked even after metadata-only read",
+      "Passed": true,
+      "Error": "Candidate content does not match the saved single IWAD."
+    },
+    {
+      "Name": "Duplicate binding",
+      "Passed": true,
+      "Error": "Unknown or repeated save binding."
+    },
+    {
+      "Name": "Null thinker ring",
+      "Passed": false,
+      "Error": "The property 'Next' cannot be found on this object. Verify that the property exists."
+    }
+  ],
+  "FinishedUtc": "2026-09-11T14:28:52.5077929Z",
+  "Error": "Unexpected validation result for Null thinker ring : The property 'Next' cannot be found on this object. Verify that the property exists.\nat Check-Rejection, C:\\projects\\pwshDoom\\scripts\\Test-SaveValidation.ps1: line 15\r\nat <ScriptBlock>, C:\\projects\\pwshDoom\\scripts\\Test-SaveValidation.ps1: line 39",
+  "SourceSha256": "C7460B63EADD98221FFF9F76EF6601F4E9EDD3BFBA62420FD9BF2323B300F728",
+  "Meaning": "Additional bounded corruption cases against independent candidate games; named expected rejection messages prevent arbitrary harness failures from counting as success.",
+  "SaveSha256": "1AF1CACD837438DC0A099D0FA4FDCBC4530C10A28776EA80130561C54A3F969D"
+}

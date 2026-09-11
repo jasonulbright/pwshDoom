@@ -1,0 +1,479 @@
+{
+  "Error": null,
+  "Checks": [
+    {
+      "Passed": true,
+      "Name": "Save at 700 leaves live state unchanged"
+    },
+    {
+      "Passed": true,
+      "Name": "Independent state matches on load at 700"
+    },
+    {
+      "Passed": true,
+      "Name": "Serialized graph matches on load at 700"
+    },
+    {
+      "Passed": true,
+      "Name": "Continued independent state matches at command 735"
+    },
+    {
+      "Passed": true,
+      "Name": "Continued independent state matches at command 770"
+    },
+    {
+      "Passed": true,
+      "Name": "Continued independent state matches at command 805"
+    },
+    {
+      "Passed": true,
+      "Name": "Continued independent state matches at command 840"
+    },
+    {
+      "Passed": true,
+      "Name": "Continued graph matches after 700+140"
+    },
+    {
+      "Passed": true,
+      "Name": "Save at 1550 leaves live state unchanged"
+    },
+    {
+      "Passed": true,
+      "Name": "Independent state matches on load at 1550"
+    },
+    {
+      "Passed": true,
+      "Name": "Serialized graph matches on load at 1550"
+    },
+    {
+      "Passed": true,
+      "Name": "Continued independent state matches at command 1585"
+    },
+    {
+      "Passed": true,
+      "Name": "Continued independent state matches at command 1620"
+    },
+    {
+      "Passed": true,
+      "Name": "Continued independent state matches at command 1655"
+    },
+    {
+      "Passed": true,
+      "Name": "Continued independent state matches at command 1690"
+    },
+    {
+      "Passed": true,
+      "Name": "Continued graph matches after 1550+140"
+    },
+    {
+      "Passed": true,
+      "Name": "Save at 1600 leaves live state unchanged"
+    },
+    {
+      "Passed": true,
+      "Name": "Independent state matches on load at 1600"
+    },
+    {
+      "Passed": true,
+      "Name": "Serialized graph matches on load at 1600"
+    },
+    {
+      "Passed": true,
+      "Name": "Continued independent state matches at command 1635"
+    },
+    {
+      "Passed": true,
+      "Name": "Continued independent state matches at command 1670"
+    },
+    {
+      "Passed": true,
+      "Name": "Continued independent state matches at command 1705"
+    },
+    {
+      "Passed": true,
+      "Name": "Continued independent state matches at command 1740"
+    },
+    {
+      "Passed": true,
+      "Name": "Continued graph matches after 1600+140"
+    },
+    {
+      "Passed": true,
+      "Name": "Save at 1700 leaves live state unchanged"
+    },
+    {
+      "Passed": true,
+      "Name": "Independent state matches on load at 1700"
+    },
+    {
+      "Passed": true,
+      "Name": "Serialized graph matches on load at 1700"
+    },
+    {
+      "Passed": true,
+      "Name": "Continued independent state matches at command 1735"
+    },
+    {
+      "Passed": true,
+      "Name": "Continued independent state matches at command 1770"
+    },
+    {
+      "Passed": true,
+      "Name": "Continued independent state matches at command 1805"
+    },
+    {
+      "Passed": true,
+      "Name": "Continued independent state matches at command 1840"
+    },
+    {
+      "Passed": true,
+      "Name": "Continued graph matches after 1700+140"
+    },
+    {
+      "Passed": true,
+      "Name": "Existing save is preserved without overwrite confirmation"
+    },
+    {
+      "Passed": true,
+      "Name": "Stale overwrite confirmation preserves original"
+    },
+    {
+      "Passed": true,
+      "Name": "Confirmed overwrite retains exact prior save as backup"
+    },
+    {
+      "Passed": true,
+      "Name": "Unknown version rejected"
+    },
+    {
+      "Passed": true,
+      "Name": "Wrong IWAD rejected"
+    },
+    {
+      "Passed": true,
+      "Name": "Wrong schema rejected"
+    },
+    {
+      "Passed": true,
+      "Name": "Checksum corruption rejected"
+    },
+    {
+      "Passed": true,
+      "Name": "Out-of-range settings rejected"
+    },
+    {
+      "Passed": true,
+      "Name": "Unknown graph type rejected in candidate"
+    },
+    {
+      "Passed": true,
+      "Name": "Bad reference rejected in candidate"
+    },
+    {
+      "Passed": true,
+      "Name": "Missing properties rejected in candidate"
+    },
+    {
+      "Passed": true,
+      "Name": "Forged binding rejected in candidate"
+    },
+    {
+      "Passed": true,
+      "Name": "Invalid scalar type rejected in candidate"
+    },
+    {
+      "Passed": true,
+      "Name": "Executable game action rejected in candidate"
+    },
+    {
+      "Passed": true,
+      "Name": "String root rejected in candidate"
+    },
+    {
+      "Passed": true,
+      "Name": "Failed loads leave live state unchanged"
+    }
+  ],
+  "Meaning": "Same-process save reconstruction, independent actor/sector/player/HUD projection, canonical graph round trip and continued ordinary input. Corruption is tested against a separate candidate. This does not yet prove fresh-process loading or menu integration.",
+  "SaveDirectory": "C:\\projects\\pwshDoom\\scripts\\..\\local\\save-state-f2572f9f67cb47b2b4f8fc7d4f498e25",
+  "SourceSha256": "C7460B63EADD98221FFF9F76EF6601F4E9EDD3BFBA62420FD9BF2323B300F728",
+  "FinishedUtc": "2026-09-11T14:23:57.6307486Z",
+  "Runs": [
+    {
+      "ContinueTics": 140,
+      "StartState": "Level",
+      "EndMap": 1,
+      "EndState": "Level",
+      "LoadMs": 1225.8886,
+      "FinalCheckpoint": {
+        "Sha256": "7D49066E1E1D00766ED4318D8D4BF354124AB4B319BFC3B4987EC61B030ED85A",
+        "Tic": 840,
+        "State": {
+          "Schema": 1,
+          "Tic": 840,
+          "State": "Level",
+          "Episode": 1,
+          "Map": 1,
+          "LevelTime": 841,
+          "RandomIndex": 238,
+          "Paused": false,
+          "PlayerState": "Live",
+          "Health": 81,
+          "Armor": 0,
+          "Position": [
+            210568510,
+            -215843193,
+            -1572864,
+            2732261376
+          ],
+          "Ammo": [
+            40,
+            0,
+            0,
+            0
+          ],
+          "Weapons": [
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "Keys": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "DidSecret": false,
+          "RenderSnapshotSha256": "9F4E54E2244070B39857D9533E0B1F8F25E8CA2199FA873EECEC95334F037C89",
+          "Intermission": null,
+          "Finale": null
+        }
+      },
+      "Save": {
+        "Bytes": 398503,
+        "Nodes": 1847,
+        "Backup": null,
+        "Milliseconds": 1680.411,
+        "Path": "C:\\projects\\pwshDoom\\local\\save-state-f2572f9f67cb47b2b4f8fc7d4f498e25\\at-700.pds",
+        "Sha256": "1AF1CACD837438DC0A099D0FA4FDCBC4530C10A28776EA80130561C54A3F969D"
+      },
+      "SaveAt": 700,
+      "EndEpisode": 1
+    },
+    {
+      "ContinueTics": 140,
+      "StartState": "Level",
+      "EndMap": 2,
+      "EndState": "Level",
+      "LoadMs": 1028.9232,
+      "FinalCheckpoint": {
+        "Sha256": "C6636299D4D4F32CFA70689529F39CEC7B419048B54FA80EACDA3687630C6771",
+        "Tic": 1690,
+        "State": {
+          "Schema": 1,
+          "Tic": 1690,
+          "State": "Level",
+          "Episode": 1,
+          "Map": 2,
+          "LevelTime": 14,
+          "RandomIndex": 44,
+          "Paused": false,
+          "PlayerState": "Live",
+          "Health": 75,
+          "Armor": 0,
+          "Position": [
+            -2097152,
+            -15728640,
+            1572864,
+            1073741824
+          ],
+          "Ammo": [
+            37,
+            4,
+            0,
+            0
+          ],
+          "Weapons": [
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "Keys": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "DidSecret": false,
+          "RenderSnapshotSha256": "12E1046E2FE9947A4C9D52E8B9245257CB851C4C698F1AC59A43C025E100652C",
+          "Intermission": null,
+          "Finale": null
+        }
+      },
+      "Save": {
+        "Bytes": 398496,
+        "Nodes": 1848,
+        "Backup": null,
+        "Milliseconds": 1327.6377,
+        "Path": "C:\\projects\\pwshDoom\\local\\save-state-f2572f9f67cb47b2b4f8fc7d4f498e25\\at-1550.pds",
+        "Sha256": "3C94C7508D1E02E44BAD1B37CDD7C399ED99AE692ACCD4D2FB0025543BE36918"
+      },
+      "SaveAt": 1550,
+      "EndEpisode": 1
+    },
+    {
+      "ContinueTics": 140,
+      "StartState": "Intermission",
+      "EndMap": 2,
+      "EndState": "Level",
+      "LoadMs": 1161.4096,
+      "FinalCheckpoint": {
+        "Sha256": "B0B297249698BF229BCB35F598F9FF184D4361CFCA49FA53B13A7F29B9893AD0",
+        "Tic": 1740,
+        "State": {
+          "Schema": 1,
+          "Tic": 1740,
+          "State": "Level",
+          "Episode": 1,
+          "Map": 2,
+          "LevelTime": 64,
+          "RandomIndex": 45,
+          "Paused": false,
+          "PlayerState": "Live",
+          "Health": 75,
+          "Armor": 0,
+          "Position": [
+            -2097152,
+            -15728640,
+            1572864,
+            1073741824
+          ],
+          "Ammo": [
+            37,
+            4,
+            0,
+            0
+          ],
+          "Weapons": [
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "Keys": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "DidSecret": false,
+          "RenderSnapshotSha256": "F34F226A576870B4651810E419192A1B391C10518587115B7235E0B4DFA806EF",
+          "Intermission": null,
+          "Finale": null
+        }
+      },
+      "Save": {
+        "Bytes": 404666,
+        "Nodes": 1893,
+        "Backup": null,
+        "Milliseconds": 1760.667,
+        "Path": "C:\\projects\\pwshDoom\\local\\save-state-f2572f9f67cb47b2b4f8fc7d4f498e25\\at-1600.pds",
+        "Sha256": "F3510EF79949A1BD2620A284337CBAE8F833759FC0D1FA11299FEDEB53AFD793"
+      },
+      "SaveAt": 1600,
+      "EndEpisode": 1
+    },
+    {
+      "ContinueTics": 140,
+      "StartState": "Level",
+      "EndMap": 2,
+      "EndState": "Level",
+      "LoadMs": 1964.541,
+      "FinalCheckpoint": {
+        "Sha256": "CEF15A2BFFE40707E6449B8A644D22B5397F0FE91B80530012FDFB72A061DD7F",
+        "Tic": 1840,
+        "State": {
+          "Schema": 1,
+          "Tic": 1840,
+          "State": "Level",
+          "Episode": 1,
+          "Map": 2,
+          "LevelTime": 164,
+          "RandomIndex": 65,
+          "Paused": false,
+          "PlayerState": "Live",
+          "Health": 75,
+          "Armor": 0,
+          "Position": [
+            -2097152,
+            -15728640,
+            1572864,
+            1073741824
+          ],
+          "Ammo": [
+            37,
+            4,
+            0,
+            0
+          ],
+          "Weapons": [
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "Keys": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "DidSecret": false,
+          "RenderSnapshotSha256": "11ABEB571461C15EEA90C1236EC23E1E29E1F55468683DC3D57A975D0C0F59CC",
+          "Intermission": null,
+          "Finale": null
+        }
+      },
+      "Save": {
+        "Bytes": 778651,
+        "Nodes": 3423,
+        "Backup": null,
+        "Milliseconds": 2495.3104,
+        "Path": "C:\\projects\\pwshDoom\\local\\save-state-f2572f9f67cb47b2b4f8fc7d4f498e25\\at-1700.pds",
+        "Sha256": "0462B7131028D554A2C701125FF6A3F2C8517230B37FB22DC64F4F593ED17197"
+      },
+      "SaveAt": 1700,
+      "EndEpisode": 1
+    }
+  ]
+}

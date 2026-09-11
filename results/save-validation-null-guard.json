@@ -1,0 +1,40 @@
+{
+  "FinishedUtc": "2026-09-11T14:29:47.1695034Z",
+  "HarnessSha256": "F0A872B162780E8E8E5E995C27E8654E08118EE553E2839B3C10B4EE8EA9830F",
+  "Meaning": "Additional bounded corruption cases against independent candidate games; named expected rejection messages prevent arbitrary harness failures from counting as success.",
+  "Checks": [
+    {
+      "Name": "Truncated JSON",
+      "Passed": true,
+      "Error": "Conversion from JSON failed with error: Unexpected end when reading JSON. Path '', line 1, position 1."
+    },
+    {
+      "Name": "File size limit before JSON parsing",
+      "Passed": true,
+      "Error": "Save exceeds 64 MiB."
+    },
+    {
+      "Name": "Actual candidate IWAD checked even after metadata-only read",
+      "Passed": true,
+      "Error": "Candidate content does not match the saved single IWAD."
+    },
+    {
+      "Name": "Duplicate binding",
+      "Passed": true,
+      "Error": "Unknown or repeated save binding."
+    },
+    {
+      "Name": "Null thinker ring",
+      "Passed": true,
+      "Error": "Invalid saved thinker ring."
+    },
+    {
+      "Name": "Invalid collision-grid dimensions",
+      "Passed": true,
+      "Error": "Invalid saved collision-grid size."
+    }
+  ],
+  "SaveSha256": "1AF1CACD837438DC0A099D0FA4FDCBC4530C10A28776EA80130561C54A3F969D",
+  "Error": "Fixture property unavailable: DoomRandom.index\nat Set-GraphProperty, C:\\projects\\pwshDoom\\scripts\\Test-SaveValidation.ps1: line 19\r\nat <ScriptBlock>, C:\\projects\\pwshDoom\\scripts\\Test-SaveValidation.ps1: line 34\r\nat <ScriptBlock>, C:\\projects\\pwshDoom\\scripts\\Test-SaveValidation.ps1: line 37",
+  "SourceSha256": "B32F6AF3B2C7D3E5CC992BC34788F0074A5D0457F761A9758F8DAE070C1519F9"
+}
