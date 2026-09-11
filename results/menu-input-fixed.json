@@ -1,0 +1,40 @@
+{
+  "SourceSha256": "0EA0CC4C74C1480D9FE4E66F06E954C9F70BF6ED61F0EF7E318D21BD7EC17D82",
+  "Meaning": "Synthetic native KEY_EVENT records including repeated key-down events. Uses the current menu-reset helper when present, otherwise reproduces the original host reset. No desktop input is injected.",
+  "FinishedUtc": "2026-09-11T13:31:29.2966148Z",
+  "Checks": [
+    {
+      "Passed": true,
+      "Name": "Pause physical key press is available"
+    },
+    {
+      "Passed": true,
+      "Name": "Held pause repeat does not toggle again"
+    },
+    {
+      "Passed": true,
+      "Name": "Released and repressed pause toggles again"
+    },
+    {
+      "Passed": true,
+      "Name": "Held movement remains suppressed after menu"
+    },
+    {
+      "Passed": true,
+      "Name": "New movement press works after release"
+    },
+    {
+      "Passed": true,
+      "Name": "Held menu Enter does not leak into use"
+    },
+    {
+      "Passed": true,
+      "Name": "A new Enter press can use in gameplay"
+    },
+    {
+      "Passed": true,
+      "Name": "Focus loss clears menu input state"
+    }
+  ],
+  "Failures": 0
+}

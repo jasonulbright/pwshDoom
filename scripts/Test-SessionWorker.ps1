@@ -9,7 +9,7 @@ $bundle=& "$PSScriptRoot/Build-EngineBundle.ps1";. $bundle
 . "$PSScriptRoot/../src/TerminalCodec.ps1"
 . "$PSScriptRoot/../src/GameHost.ps1";. "$PSScriptRoot/../src/GameProcesses.ps1"
 $content=$null;$pool=$null;$failure=$null;$checks=[Collections.Generic.List[object]]::new()
-function Assert-WorkerImage([byte[]]$Expected,[int]$ExpectedTic,[switch]$Screen){
+function Assert-WorkerImage([byte[]]$Expected,[int]$ExpectedTic,[switch]$Screen,[switch]$Menu){
     $compared=0
     for($i=0;$i -lt $pool.Count;$i++){
         $worker=$pool.Workers[$i];$r=$pool.Results[$i]
@@ -18,10 +18,11 @@ function Assert-WorkerImage([byte[]]$Expected,[int]$ExpectedTic,[switch]$Screen)
             if($r.Pixels[$y*320+$x] -ne $Expected[$y*320+$x]){throw "Worker pixel mismatch at $x,$y"};$compared++
         }}
         $bytes=if($Style -eq 'Classic'){ConvertTo-AnsiStrip $Expected 320 200 $worker.First $worker.End $codec -ColumnOffset 11 -RowOffset 3}
+            elseif($Menu){ConvertTo-MenuStrip $Expected 320 200 $worker.First $worker.End $codec -ColumnOffset 11 -RowOffset 3}
             else{ConvertTo-CharacterStrip $Expected 320 200 $worker.First $worker.End $codec -ColumnOffset 11 -RowOffset 3 -FrameNumber 321 -HudStart $(if($Screen){200}else{168})}
         if([Convert]::ToBase64String($bytes) -cne [Convert]::ToBase64String($r.Bytes)){throw 'Encoded worker output mismatch.'}
     }
-    $checks.Add(@{Tic=$ExpectedTic;Screen=[bool]$Screen;PixelsCompared=$compared;StripBytesCompared=$pool.Count})
+    $checks.Add(@{Tic=$ExpectedTic;Screen=[bool]$Screen;Menu=[bool]$Menu;PixelsCompared=$compared;StripBytesCompared=$pool.Count})
 }
 try{
     $content=[GameContent]::new(@('-iwad',$Wad));$o=[GameOptions]::new();$o.GameMode=$content.Wad.GameMode
@@ -35,6 +36,8 @@ try{
     for($x=0;$x -lt 320;$x++){for($y=0;$y -lt 200;$y++){$value=($x*17+$y*31)%256;$columns[$x*200+$y]=$value;$rows[$y*320+$x]=$value}}
     Submit-GameRender $pool $columns -ScreenPixels -Tic 987 -ColumnOffset 11 -RowOffset 3 -FrameNumber 321;Wait-GameRender $pool -ReadPixels
     Assert-WorkerImage $rows 987 -Screen
+    Submit-GameRender $pool $columns -MenuPixels -Tic 988 -ColumnOffset 11 -RowOffset 3 -FrameNumber 321;Wait-GameRender $pool -ReadPixels
+    Assert-WorkerImage $rows 988 -Menu
     $oldHash=(Get-FileHash -LiteralPath $pool.Assets).Hash
     $game.DeferedInitNew([GameSkill]::Medium,1,2);$null=$game.Update($cmds)
     $context=New-FastRenderContext $content $game.World;Write-GameRenderAssets $context $palette $pool.Assets
@@ -49,4 +52,4 @@ try{
         Meaning='Seven actual workers: independently constructed column/row-major screen equivalence and encoded strip equivalence, then changed E1M2 assets and real rasterization against the serial reference without restarting workers. This is a transport/lifecycle check, not campaign completion or a performance benchmark.'}|ConvertTo-Json -Depth 6|Set-Content -LiteralPath $Output
     if($null -ne $pool){Close-GameRenderPool $pool};if($null -ne $content){$content.Dispose()}
 }
-"PASS: $Style screen transport and map reload, 128,000 pixels and 14 encoded strips."
+"PASS: $Style screen/menu transport and map reload, 192,000 pixels and 21 encoded strips."

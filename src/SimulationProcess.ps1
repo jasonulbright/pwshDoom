@@ -37,16 +37,17 @@ function Read-DoomSimulationSnapshot {
     [int]$generation=$view.ReadInt32($base+12);[int]$state=$view.ReadInt32($base+16)
     [int]$episode=$view.ReadInt32($base+20);[int]$map=$view.ReadInt32($base+24)
     [int]$health=$view.ReadInt32($base+28);[int]$kills=$view.ReadInt32($base+32)
-    if($state -lt 0 -or $state -gt 2 -or ($state -ne 0 -and $length -ne 64000)){throw 'Invalid session snapshot state.'}
+    [int]$screenKind=$view.ReadInt32($base+36);[int]$menuRevision=$view.ReadInt32($base+40);[int]$menuScreen=$view.ReadInt32($base+44)
+    if($state -lt 0 -or $state -gt 2 -or $screenKind -lt 0 -or $screenKind -gt 2 -or ($screenKind -ne 0 -and $length -ne 64000)){throw 'Invalid session snapshot state.'}
     if($length -lt 384 -or $length%8 -ne 0 -or $length*2+64 -gt 1048576){throw 'Invalid simulation snapshot size.'}
     $oldBytes=[byte[]]::new($length);$newBytes=[byte[]]::new($length)
     [void]$view.ReadArray($base+64,$oldBytes,0,$length);[void]$view.ReadArray($base+64+$length,$newBytes,0,$length)
     [Threading.Thread]::MemoryBarrier()
     if($version -ne $view.ReadInt32($base)){return $Previous}
-    if($state -ne 0){return @{Version=$version;Tic=$tic;Generation=$generation;State=$state;Episode=$episode;Map=$map;Health=$health;Kills=$kills;Pixels=$newBytes}}
+    if($screenKind -ne 0){return @{Version=$version;Tic=$tic;Generation=$generation;State=$state;Episode=$episode;Map=$map;Health=$health;Kills=$kills;Pixels=$newBytes;ScreenKind=$screenKind;MenuRevision=$menuRevision;MenuScreen=$menuScreen}}
     $oldValues=[double[]]::new($length/8);$newValues=[double[]]::new($length/8)
     [Buffer]::BlockCopy($oldBytes,0,$oldValues,0,$length);[Buffer]::BlockCopy($newBytes,0,$newValues,0,$length)
-    return @{Version=$version;Tic=$tic;Previous=$oldValues;Current=$newValues;Generation=$generation;State=$state;Episode=$episode;Map=$map;Health=$health;Kills=$kills}
+    return @{Version=$version;Tic=$tic;Previous=$oldValues;Current=$newValues;Generation=$generation;State=$state;Episode=$episode;Map=$map;Health=$health;Kills=$kills;ScreenKind=$screenKind;MenuRevision=$menuRevision;MenuScreen=$menuScreen}
 }
 function Close-DoomSimulation {
     param($Simulation)

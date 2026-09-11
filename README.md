@@ -41,9 +41,10 @@ Matrix uses green code and animated falling highlights; AnsiArt uses full-color 
 | Shift | Run |
 | 1–7 | Select weapon |
 | Enter | Use / respawn after death |
-| Escape | Quit |
+| P / Pause | Pause; P, Enter or Escape resumes |
+| Escape | Open menu / go back |
 
-Interactive sessions now continue through intermission into the next map, refreshing map assets in the same rendering workers. Use Ctrl or E/Space/Enter to advance intermission. Episode endings select their own finale text and art. The report is `local/game-session.json`. Audio, menus, save/load, automap and multiplayer interfaces remain unfinished. The new renderer approximates some visual effects and does not claim vanilla pixel or demo compatibility. Keyboard state handling has automated synthetic-record tests; physical keyboard play has not been observed by the agent. See [campaign session work](docs/campaign-session.md).
+Interactive sessions continue through intermission into the next map, refreshing map assets in the same rendering workers. Use Ctrl or E/Space/Enter to advance intermission. Episode endings select their own finale text and art. Escape opens [menus](docs/menus.md) for resuming, starting an episode/difficulty, viewing controls and confirming quit. Menu arrows choose and Enter selects. Held gameplay keys must be released before they act again after a menu. The report is `local/game-session.json`. Audio, save/load, automap, settings and multiplayer interfaces remain unfinished. The new renderer approximates some visual effects and does not claim vanilla pixel or demo compatibility. Keyboard state handling has automated synthetic-record tests; physical keyboard play has not been observed by the agent. See [campaign session work](docs/campaign-session.md).
 
 Add `-RecordInput .\local\my-play-session.json` to retain a replay of your commands at orderly exit. Play it back with `-Replay .\local\my-play-session.json`; starting skill/episode/map are selected from the recording. Existing recording files are never overwritten. See [input recording and checkpoint limits](docs/input-recording.md).
 

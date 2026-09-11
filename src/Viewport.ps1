@@ -13,7 +13,7 @@ function Get-DoomViewportMessage {
     param($Viewport)
     $lines=@('pwshDoom paused',
         "Resize to $($Viewport.RequiredColumns) columns x $($Viewport.RequiredRows) rows, or zoom the terminal font out.",
-        "Current size: $($Viewport.Columns) x $($Viewport.Rows). Esc quits.")
+        "Current size: $($Viewport.Columns) x $($Viewport.Rows). Esc opens the menu.")
     $result=[Collections.Generic.List[string]]::new();$limit=[Math]::Max(0,$Viewport.Columns-1)
     for($i=0;$i -lt [Math]::Min($lines.Count,$Viewport.Rows);$i++) {
         $line=$lines[$i];if($line.Length -gt $limit){$line=$line.Substring(0,$limit)};$result.Add($line)

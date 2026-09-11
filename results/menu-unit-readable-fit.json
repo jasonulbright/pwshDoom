@@ -1,0 +1,395 @@
+{
+  "Error": null,
+  "Frames": [
+    {
+      "Screen": 1,
+      "Sha256": "6DF37FA13011AC0E2AF7810268F12FD84F08CB82E1BE866C07F8A4721E4CC47B",
+      "Choice": 0
+    },
+    {
+      "Screen": 1,
+      "Sha256": "333BBD4D71A9CFDD774A8938062EF587DF8C75DEED2F605EC281BFC003137AC6",
+      "Choice": 1
+    },
+    {
+      "Screen": 1,
+      "Sha256": "AC0DF20D407F98952EB97E8B9CD78F4B04826469CC04B401FAB87F09EB54D7DB",
+      "Choice": 2
+    },
+    {
+      "Screen": 1,
+      "Sha256": "E372F5CEAB26D49B6824BD5CF2A5991C1269AD419007FD4E9940AE6C2BD29D4D",
+      "Choice": 3
+    },
+    {
+      "Screen": 2,
+      "Sha256": "0BF065349152D4576C7E66A918D2823003C734EDC2153BB0800E183F9B02090B",
+      "Choice": 0
+    },
+    {
+      "Screen": 2,
+      "Sha256": "40587945505DAAE157F19B47E8B391CD39C8485C35568DEBA565A7D90C73B4A2",
+      "Choice": 1
+    },
+    {
+      "Screen": 2,
+      "Sha256": "AF4C45ACFE52154B215A268B66DBAF005FADD4CF5F1D69B367C8D14B7B0B4AF6",
+      "Choice": 2
+    },
+    {
+      "Screen": 2,
+      "Sha256": "9BC93D30204CD81C60D585DA0540BD2E162DAA1A75EFE8F558AC0A63177B8016",
+      "Choice": 3
+    },
+    {
+      "Screen": 3,
+      "Sha256": "454A4542F39AF16C21B6E6107FFCC3DACD7FCC67CD1B4B5D2C50BB854A365171",
+      "Choice": 0
+    },
+    {
+      "Screen": 3,
+      "Sha256": "6DA1C4709CA320C6F76072DE37324686201D7F6C494E1814EEE8D4309160D8A0",
+      "Choice": 1
+    },
+    {
+      "Screen": 3,
+      "Sha256": "F65F185C9EA7F639A83386C7B76813D79EFBB674FC31807A661F058A98DC4684",
+      "Choice": 2
+    },
+    {
+      "Screen": 3,
+      "Sha256": "536909DC165D00751138651823C17AF514B7C33A59E47F5A40435AA2A6B89E05",
+      "Choice": 3
+    },
+    {
+      "Screen": 3,
+      "Sha256": "409932E996B2AE38689B45B3E2A8EA4571ED90A5CF1546975DDA650454355F1C",
+      "Choice": 4
+    },
+    {
+      "Screen": 4,
+      "Sha256": "964A4F456C7B8BCF619491EEF6CE14115D383E713A21884B779C59D64674EA09",
+      "Choice": 0
+    },
+    {
+      "Screen": 4,
+      "Sha256": "30DEA463BECE6D56C73E7ACCDBBDDBCB1C76ED568F7253D039D6FE328F927C3A",
+      "Choice": 1
+    },
+    {
+      "Screen": 5,
+      "Sha256": "A02CF5F0AC4AB56631A0ABF3BD44D755BDBF0E5F290AECBE101EFE4129ACAC6E",
+      "Choice": 0
+    },
+    {
+      "Screen": 6,
+      "Sha256": "FFF0635451F18D92EA481F3F8E62F93B5E2FB7BBC504653E870775099E76439C",
+      "Choice": 0
+    },
+    {
+      "Screen": 6,
+      "Sha256": "0CE8FDBE40FFE321146313F28B9388F80905D4413C680E419A0D2C51016B64E6",
+      "Choice": 1
+    },
+    {
+      "Screen": 7,
+      "Sha256": "C8ADF364AFAD310540D9C5FF754839AABE75976CAA8E27E092E3F6BDE896C7E2",
+      "Choice": 0
+    }
+  ],
+  "Checks": [
+    {
+      "Name": "Escape opens main",
+      "Passed": true
+    },
+    {
+      "Name": "Choice wraps upwards",
+      "Passed": true
+    },
+    {
+      "Name": "Quit defaults to no",
+      "Passed": true
+    },
+    {
+      "Name": "Quit cancellation returns to menu",
+      "Passed": true
+    },
+    {
+      "Name": "Quit requires confirmation",
+      "Passed": true
+    },
+    {
+      "Name": "New game opens episodes",
+      "Passed": true
+    },
+    {
+      "Name": "Episode selection preserves episode four",
+      "Passed": true
+    },
+    {
+      "Name": "Nightmare selection asks before replacing game",
+      "Passed": true
+    },
+    {
+      "Name": "New-game cancellation returns to skill",
+      "Passed": true
+    },
+    {
+      "Name": "Confirmed new game carries settings",
+      "Passed": true
+    },
+    {
+      "Name": "Pause opens paused screen",
+      "Passed": true
+    },
+    {
+      "Name": "Enter resumes pause",
+      "Passed": true
+    },
+    {
+      "Name": "Single-episode content skips unavailable episodes",
+      "Passed": true
+    },
+    {
+      "Name": "Single-episode skill back returns home",
+      "Passed": true
+    },
+    {
+      "Name": "Compact menu fits 8x1",
+      "Passed": true
+    },
+    {
+      "Name": "Compact menu fits 40x2",
+      "Passed": true
+    },
+    {
+      "Name": "Compact menu fits 320x98",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix max-brightness reference / origin 0,0 / strip 0",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix max-brightness reference / origin 0,0 / strip 1",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix max-brightness reference / origin 0,0 / strip 2",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix max-brightness reference / origin 0,0 / strip 3",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix max-brightness reference / origin 0,0 / strip 4",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix max-brightness reference / origin 0,0 / strip 5",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix max-brightness reference / origin 0,0 / strip 6",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix max-brightness reference / origin 11,3 / strip 0",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix max-brightness reference / origin 11,3 / strip 1",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix max-brightness reference / origin 11,3 / strip 2",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix max-brightness reference / origin 11,3 / strip 3",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix max-brightness reference / origin 11,3 / strip 4",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix max-brightness reference / origin 11,3 / strip 5",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix max-brightness reference / origin 11,3 / strip 6",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt max-brightness reference / origin 0,0 / strip 0",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt max-brightness reference / origin 0,0 / strip 1",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt max-brightness reference / origin 0,0 / strip 2",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt max-brightness reference / origin 0,0 / strip 3",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt max-brightness reference / origin 0,0 / strip 4",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt max-brightness reference / origin 0,0 / strip 5",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt max-brightness reference / origin 0,0 / strip 6",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt max-brightness reference / origin 11,3 / strip 0",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt max-brightness reference / origin 11,3 / strip 1",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt max-brightness reference / origin 11,3 / strip 2",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt max-brightness reference / origin 11,3 / strip 3",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt max-brightness reference / origin 11,3 / strip 4",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt max-brightness reference / origin 11,3 / strip 5",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt max-brightness reference / origin 11,3 / strip 6",
+      "Passed": true
+    },
+    {
+      "Name": "Invalid menu dimensions 32,0,0,32",
+      "Passed": true
+    },
+    {
+      "Name": "Invalid menu dimensions 31,16,0,30",
+      "Passed": true
+    },
+    {
+      "Name": "Invalid menu dimensions 32,15,0,32",
+      "Passed": true
+    },
+    {
+      "Name": "Invalid menu dimensions 32,16,1,32",
+      "Passed": true
+    },
+    {
+      "Name": "Invalid menu dimensions 32,16,0,34",
+      "Passed": true
+    },
+    {
+      "Name": "Invalid menu dimensions 32,16,4,4",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 1 / choice 0 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 1 / choice 1 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 1 / choice 2 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 1 / choice 3 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 2 / choice 0 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 2 / choice 1 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 2 / choice 2 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 2 / choice 3 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 3 / choice 0 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 3 / choice 1 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 3 / choice 2 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 3 / choice 3 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 3 / choice 4 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 4 / choice 0 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 4 / choice 1 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 5 / choice 0 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 6 / choice 0 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 6 / choice 1 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 7 / choice 0 draws nonblank pixels",
+      "Passed": true
+    }
+  ],
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "FinishedUtc": "2026-09-11T13:44:44.4279894Z",
+  "Meaning": "Menu navigation/confirmation and native WAD screen fixtures; independent stable-sort brightness reduction versus actual menu encoders at uneven partitions/origins. Screen draws are not a live keyboard test.",
+  "Sources": [
+    {
+      "Sha256": "34A75305CE54E99CF1B91984B38CF5A1C861AFB7A13C774BF2148904F8DDDC83",
+      "Path": "src/SessionMenu.ps1"
+    },
+    {
+      "Sha256": "2F0D8B12EC0815AF71F48F6F6033D669A3593B573DEBABC5C1DF68A8A056CFDF",
+      "Path": "src/CharacterCodec.ps1"
+    }
+  ]
+}

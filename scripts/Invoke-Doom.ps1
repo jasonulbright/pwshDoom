@@ -8,13 +8,14 @@ param([Parameter(Mandatory)][string]$Wad,[ValidateRange(1,32)][int]$Workers=16,
     [ValidateSet('Classic','AnsiArt','Matrix')][string]$Style='Classic',
     [ValidateSet('Ascii','Katakana')][string]$GlyphSet='Katakana',
     [string]$Report="$PSScriptRoot/../local/game-session.json",[string]$ReadyFile,
-    [switch]$Diagnostics,[string]$ViewportSchedule,[ValidateRange(0,30)][int]$ExitDelaySeconds=0)
+    [switch]$Diagnostics,[string]$ViewportSchedule,[string]$SessionSchedule,[ValidateRange(0,30)][int]$ExitDelaySeconds=0)
 $ErrorActionPreference='Stop'
 . "$PSScriptRoot/FrameCodec.ps1";. "$PSScriptRoot/../src/GameProcesses.ps1"
 . "$PSScriptRoot/../src/SimulationProcess.ps1";. "$PSScriptRoot/../src/ConsoleInput.ps1"
 . "$PSScriptRoot/../src/Viewport.ps1"
 . "$PSScriptRoot/../src/CharacterCodec.ps1"
 . "$PSScriptRoot/../src/InputReplay.ps1"
+. "$PSScriptRoot/../src/SessionMenu.ps1"
 # Input values only; the actual TicCmd and Doom engine live in the simulation process.
 class HostInputCommand {
     [sbyte]$ForwardMove;[sbyte]$SideMove;[int16]$AngleTurn;[byte]$Buttons
@@ -24,12 +25,12 @@ function Start-DoomRenderJob {
     param($Pool,$Snapshot,$Clock,$InterpolationTimes,$Viewport)
     $fraction=if($Snapshot.Tic -eq 0){1}else{[Math]::Clamp([double]($Clock.Elapsed.TotalMilliseconds*35/1000-$Snapshot.Tic),[double]0,[double]1)}
     $watch=[Diagnostics.Stopwatch]::StartNew()
-    $screenPixels=$Snapshot.State -ne 0
+    $screenPixels=$Snapshot.ScreenKind -ne 0
     [byte[]]$bytes=if($screenPixels){$Snapshot.Pixels}else{Get-InterpolatedSnapshotBytes $Snapshot.Previous $Snapshot.Current $fraction}
     $InterpolationTimes.Add($watch.Elapsed.TotalMilliseconds)
     $qpc=[Diagnostics.Stopwatch]::GetTimestamp();$watch.Restart()
-    Submit-GameRender $Pool $bytes -ColumnOffset $Viewport.Left -RowOffset $Viewport.Top -FrameNumber ([int][Math]::Floor($Clock.Elapsed.TotalSeconds*60)) -ScreenPixels:$screenPixels -Tic $Snapshot.Tic
-    return @{Tic=$Snapshot.Tic;StartQpc=$qpc;SubmitMs=$watch.Elapsed.TotalMilliseconds;ViewportKey=$Viewport.Key;State=$Snapshot.State;Generation=$Snapshot.Generation;Episode=$Snapshot.Episode;Map=$Snapshot.Map}
+    Submit-GameRender $Pool $bytes -ColumnOffset $Viewport.Left -RowOffset $Viewport.Top -FrameNumber ([int][Math]::Floor($Clock.Elapsed.TotalSeconds*60)) -ScreenPixels:$screenPixels -Tic $Snapshot.Tic -MenuPixels:($Snapshot.ScreenKind -eq 2)
+    return @{Tic=$Snapshot.Tic;Version=$Snapshot.Version;StartQpc=$qpc;SubmitMs=$watch.Elapsed.TotalMilliseconds;ViewportKey=$Viewport.Key;State=$Snapshot.State;Generation=$Snapshot.Generation;Episode=$Snapshot.Episode;Map=$Snapshot.Map;ScreenKind=$Snapshot.ScreenKind;MenuRevision=$Snapshot.MenuRevision;MenuScreen=$Snapshot.MenuScreen}
 }
 $simulation=$null;$pool=$null;$consoleState=$null;$terminalActive=$false;$timerRequested=$false;$failure=$null
 $oldEncoding=[Console]::OutputEncoding;$esc=[char]27;$clock=[Diagnostics.Stopwatch]::new()
@@ -43,7 +44,16 @@ $interpolationTimes=[Collections.Generic.List[double]]::new();$simulationReport=
 $glyphProbe=$null
 $assetGeneration=1;$loadingStart=$null;$loadingMs=0.0;$loadingWasRunning=$false;$mapReloads=[Collections.Generic.List[object]]::new();$transitionDiscarded=0
 $recordingPath=$null;$recordingError=$null;$replayVerification=$null;$sourceFingerprint=$null;$sourceMatches=$null
+$menu=$null;$pendingAction=$null;$sessionStart=$null;$sessionPausedMs=0.0;$sessionEvents=[Collections.Generic.List[object]]::new();$sessionScheduleData=@();$scheduleIndex=0;$controlIndex=0;$lastPresentedVersion=-1
+$compactMenuKey=''
 try {
+    if($SessionSchedule){
+        if(-not ($Headless -or $Scripted -or $Replay)){throw 'A session schedule is a replay/scripted test driver.'}
+        if((Get-Item -LiteralPath $SessionSchedule).Length -gt 1MB){throw 'Session schedule is too large.'}
+        $sessionScheduleData=@(Get-Content -LiteralPath $SessionSchedule -Raw|ConvertFrom-Json -Depth 4|Sort-Object AtSeconds)
+        if($sessionScheduleData.Count -gt 1000){throw 'Too many scheduled session keys.'}
+        foreach($entry in $sessionScheduleData){if($entry.AtSeconds -lt 0 -or $entry.Key -notin 'Escape','Pause','Up','Down','Enter','Yes','No'){throw 'Invalid scheduled session key.'}}
+    }
     if($ViewportSchedule) {
         if(-not $Headless){throw 'Synthetic viewport schedules are only allowed with -Headless.'}
         $viewportScheduleData=@(Get-Content -LiteralPath $ViewportSchedule -Raw | ConvertFrom-Json | Sort-Object AtSeconds)
@@ -68,6 +78,7 @@ try {
     $stopAtLevelEnd=$null -ne $replayData -and -not $replayData.ContinueCampaign
     $simulation=New-DoomSimulation $Wad $Skill $Episode $Map -StopAtLevelEnd:$stopAtLevelEnd -ReplayCheckpoints:$withCheckpoints -CheckpointReplay $(if($null -ne $replayData -and $replayData.Checkpoints){$Replay}else{''})
     $snapshot=Read-DoomSimulationSnapshot $simulation $null
+    $menu=New-DoomMenuState ($simulation.View.ReadInt32(80)) $Episode $Skill
     if($null -eq $snapshot){throw 'Initial simulation snapshot was not published.'}
     $context=Read-GameRenderAssets $simulation.Assets;$context.AssetPath=$simulation.Assets
     $paletteBytes=[byte[]]::new(768)
@@ -114,7 +125,43 @@ try {
             if($loadingWasRunning){$clock.Start()};$nextPresentation=$clock.Elapsed.TotalMilliseconds
             $simulation.View.Write(28,$assetGeneration);[void]$simulation.Go.Set();continue
         }
-        if($null -ne $consoleState){Read-DoomConsoleInput $consoleState;if($consoleState.Keys[27] -or $consoleState.Pressed[27]){break}}
+        if($null -ne $pendingAction){
+            if($simulation.View.ReadInt32(52) -eq $pendingAction.Sequence){
+                $snapshot=Read-DoomSimulationSnapshot $simulation $snapshot
+                $sessionEvents.Add(@{Phase='Acknowledged';Action=$pendingAction.Action.Action;Sequence=$pendingAction.Sequence;Tic=$snapshot.Tic;WallMs=$wallNow;MenuScreen=$snapshot.MenuScreen;Generation=$snapshot.Generation;Episode=$snapshot.Episode;Map=$snapshot.Map})
+                $pendingAction=$null;$nextPresentation=$clock.Elapsed.TotalMilliseconds
+                if($menu.Screen -eq 0){
+                    $sessionPausedMs+=$wallNow-$sessionStart;$sessionStart=$null
+                    if($null -ne $viewport -and $viewport.Fits){$simulation.View.Write(40,[long]([Diagnostics.Stopwatch]::GetTimestamp()-$clock.ElapsedTicks));$clock.Start()}
+                }
+            }elseif($wallNow-$pendingAction.StartWallMs -gt 30000){throw 'Session action timed out.'}
+        }
+        $nextAction=$null
+        if($null -eq $pendingAction){
+            $key=$null
+            if($null -ne $consoleState){
+                Read-DoomConsoleInput $consoleState
+                $keyCodes=if($menu.Screen -eq 0){@(27,80,19)}else{@(27,80,19,38,40,13,89,78)}
+                foreach($code in $keyCodes){if($consoleState.Pressed[$code]){$key=switch($code){27{'Escape'};80{'Pause'};19{'Pause'};38{'Up'};40{'Down'};13{'Enter'};89{'Yes'};78{'No'}};break}}
+            }
+            if($null -eq $key -and $scheduleIndex -lt $sessionScheduleData.Count -and $sessionScheduleData[$scheduleIndex].AtSeconds*1000 -le $wallNow){$key=$sessionScheduleData[$scheduleIndex].Key;$scheduleIndex++}
+            if($null -ne $key){
+                $nextAction=Invoke-DoomMenuKey $menu $key
+                if($null -ne $consoleState){Reset-DoomInputForMenu $consoleState}
+                if($null -ne $nextAction -and $nextAction.Action -eq 'Quit'){$exitReason='ConfirmedQuit';break}
+            }
+            if($null -eq $nextAction -and $menu.Screen -eq 0 -and $null -ne $replayData -and $null -ne $replayData.ControlEvents -and $controlIndex -lt $replayData.ControlEvents.Count){
+                $control=$replayData.ControlEvents[$controlIndex]
+                if($tics -gt $control.Tic){throw 'Replay passed a control event boundary.'}
+                if($tics -eq $control.Tic){$nextAction=$control;$controlIndex++}
+            }
+            if($null -ne $nextAction){
+                if($null -eq $sessionStart){$sessionStart=$wallNow;$clock.Stop()}
+                $sequence=Send-DoomSessionAction $simulation $nextAction $tics
+                $pendingAction=@{Sequence=$sequence;Action=$nextAction;StartWallMs=$wallNow}
+                $sessionEvents.Add(@{Phase='Requested';Action=$nextAction.Action;Sequence=$sequence;Tic=$tics;WallMs=$wallNow;MenuScreen=$menu.Screen})
+            }
+        }
         if($wallNow-$lastViewportCheck -ge 100) {
             $lastViewportCheck=$wallNow
             if($Headless) {
@@ -124,12 +171,12 @@ try {
             $nextViewport=Get-DoomViewport $columns $rows -Diagnostics:$Diagnostics -Style $Style
             if($null -eq $viewport -or $nextViewport.Key -ne $viewport.Key) {
                 $viewport=$nextViewport;$needsClear=$true
-                if(-not $viewport.Fits -and $clock.IsRunning){$clock.Stop();$pauseStart=$wallNow;$pauseCount++}
-                elseif($viewport.Fits -and -not $clock.IsRunning) {
+                if(-not $viewport.Fits -and $null -eq $pauseStart){$clock.Stop();$pauseStart=$wallNow;$pauseCount++}
+                elseif($viewport.Fits -and $null -ne $pauseStart) {
                     $pausedMs+=$wallNow-$pauseStart;$pauseStart=$null
                     # Keep the simulation's lateness reference on the active game
                     # clock, so restoring the window does not queue paused tics.
-                    $simulation.View.Write(40,[long]([Diagnostics.Stopwatch]::GetTimestamp()-$clock.ElapsedTicks));$clock.Start()
+                    $simulation.View.Write(40,[long]([Diagnostics.Stopwatch]::GetTimestamp()-$clock.ElapsedTicks));if($null -eq $sessionStart){$clock.Start()}
                 }
                 $viewportChanges.Add(@{WallMs=$wallNow;ActiveMs=$clock.Elapsed.TotalMilliseconds;Columns=$columns;Rows=$rows;Fits=$viewport.Fits;Left=$viewport.Left;Top=$viewport.Top;IssuedCommands=$tics;PublishedSimulationTics=$simulation.View.ReadInt32(20)})
                 if(-not $Headless -and -not $viewport.Fits) {
@@ -137,8 +184,16 @@ try {
                 }
             }
         }
+        if(-not $Headless -and -not $viewport.Fits){
+            $compactKey="$($viewport.Key),$($menu.Screen),$($menu.Choice)"
+            if($compactKey -ne $compactMenuKey){
+                $compactMenuKey=$compactKey
+                $message=if($menu.Screen -gt 0){Get-DoomCompactMenu $menu $viewport.Columns $viewport.Rows}else{Get-DoomViewportMessage $viewport}
+                [Console]::Write("$esc[?2026h$esc[0m$esc[2J$esc[H"+$message+"$esc[?2026l")
+            }
+        }else{$compactMenuKey=''}
         $now=$clock.Elapsed.TotalMilliseconds
-        if($viewport.Fits -and $now -ge ($tics+1)*1000.0/35) {
+        if($viewport.Fits -and $menu.Screen -eq 0 -and $null -eq $pendingAction -and $now -ge ($tics+1)*1000.0/35) {
             $cmd.Clear();$send=$true
             if($null -ne $replayData) {
                 if($tics -ge $replayData.InputCommands.Count){$send=$false;if($simulation.View.ReadInt32(20) -ge $tics){$exitReason='ReplayEnd';break}}
@@ -160,9 +215,9 @@ try {
             $inFlight=$false
         }
         if($null -ne $pendingFrame -and ($pendingFrame.ViewportKey -ne $viewport.Key -or -not $viewport.Fits)){$pendingFrame=$null;$resizeDiscarded++}
-        if($null -ne $pendingFrame -and ($pendingFrame.State -ne $snapshot.State -or $pendingFrame.Generation -ne $snapshot.Generation)){$pendingFrame=$null;$transitionDiscarded++}
-        if($viewport.Fits -and $null -ne $pendingFrame -and $clock.Elapsed.TotalMilliseconds -ge $nextPresentation) {
-            $present=$pendingFrame;$pendingFrame=$null;$lastFrameTic=$present.Tic
+        if($null -ne $pendingFrame -and ($pendingFrame.State -ne $snapshot.State -or $pendingFrame.Generation -ne $snapshot.Generation -or $pendingFrame.MenuRevision -ne $snapshot.MenuRevision)){$pendingFrame=$null;$transitionDiscarded++}
+        if($viewport.Fits -and $null -ne $pendingFrame -and ($needsClear -or $clock.Elapsed.TotalMilliseconds -ge $nextPresentation -or ($snapshot.ScreenKind -eq 2 -and $lastPresentedVersion -ne $snapshot.Version))) {
+            $present=$pendingFrame;$pendingFrame=$null;$lastFrameTic=$present.Tic;$lastPresentedVersion=$present.Version
             if($CaptureEveryTics -gt 0 -and $lastFrameTic -ge $nextCapture) {
                 $capture=[byte[]]::new(64000)
                 for($i=0;$i -lt $pool.Count;$i++){$worker=$pool.Workers[$i];for($y=0;$y -lt 200;$y++){[Array]::Copy($pool.Results[$i].Pixels,$y*320+$worker.First,$capture,$y*320+$worker.First,$worker.End-$worker.First)}}
@@ -170,25 +225,27 @@ try {
             }
             # The next render overlaps the current console write. Results are copied
             # out of shared memory before this dispatch, so workers may reuse it.
-            $activeFrame=Start-DoomRenderJob $pool $snapshot $clock $interpolationTimes $viewport;$inFlight=$true
+            if($menu.Screen -eq 0){$activeFrame=Start-DoomRenderJob $pool $snapshot $clock $interpolationTimes $viewport;$inFlight=$true}
             $outputWatch=[Diagnostics.Stopwatch]::StartNew()
             if(-not $Headless) {
                 $stdout.Write($frameStart)
                 if($needsClear){$stdout.Write([Text.Encoding]::UTF8.GetBytes("$esc[0m$esc[2J"));$needsClear=$false}
                 foreach($result in $present.Results){$stdout.Write($result.Bytes)}
                 if($Diagnostics) {
-                    $statusLine="$esc[$($viewport.StatusTop+1);$($viewport.Left+1)H$esc[0mpwshDoom | WASD move | arrows turn | Ctrl fire | E/Space use | Shift run | 1-7 weapons | Esc quit"
+                    $statusLine="$esc[$($viewport.StatusTop+1);$($viewport.Left+1)H$esc[0mpwshDoom | WASD move | arrows turn | Ctrl fire | E/Space use | Shift run | 1-7 weapons | P pause | Esc menu"
                     $statusLine+="$esc[$($viewport.StatusTop+2);$($viewport.Left+1)Htic $($snapshot.Tic) | $([Math]::Round($completed/[Math]::Max(.01,$clock.Elapsed.TotalSeconds),1)) completed updates/s | health $($snapshot.Health) | kills $($snapshot.Kills)       "
                     $stdout.Write([Text.Encoding]::UTF8.GetBytes($statusLine))
                 }
                 $stdout.Write($frameEnd);$stdout.Flush()
             }
+            $needsClear=$false
             $endQpc=[Diagnostics.Stopwatch]::GetTimestamp();$frameTimes.Add(($endQpc-$present.StartQpc)*1000.0/[Diagnostics.Stopwatch]::Frequency);$completed++
             $frameStats.Add(@{Tic=$lastFrameTic;State=$present.State;Generation=$present.Generation;Episode=$present.Episode;Map=$present.Map;SubmitMs=$present.SubmitMs;HarvestMs=$present.HarvestMs;OutputMs=$outputWatch.Elapsed.TotalMilliseconds;StartQpc=$present.StartQpc;EndQpc=$endQpc;ElapsedMs=$clock.Elapsed.TotalMilliseconds;
+                ScreenKind=$present.ScreenKind;MenuScreen=$present.MenuScreen;MenuRevision=$present.MenuRevision;
                 Workers=@($present.Results | ForEach-Object {,@($_.RenderMs,$_.EncodeMs,$_.DecodeMs,$_.StartedQpc,$_.DoneQpc)})})
             $nextPresentation+=1000.0/60
         }
-        if($viewport.Fits -and -not $inFlight -and $null -eq $pendingFrame) {
+        if($viewport.Fits -and -not $inFlight -and $null -eq $pendingFrame -and ($needsClear -or $menu.Screen -eq 0 -or $lastPresentedVersion -ne $snapshot.Version)) {
             $activeFrame=Start-DoomRenderJob $pool $snapshot $clock $interpolationTimes $viewport;$inFlight=$true
         }
         if($inFlight -and ([Diagnostics.Stopwatch]::GetTimestamp()-$activeFrame.StartQpc)/[Diagnostics.Stopwatch]::Frequency -gt 30){throw 'Renderer timed out.'}
@@ -198,6 +255,7 @@ try {
 finally {
     $clock.Stop();$wallClock.Stop();if($null -ne $pauseStart){$pausedMs+=$wallClock.Elapsed.TotalMilliseconds-$pauseStart}
     if($null -ne $loadingStart){$loadingMs+=$wallClock.Elapsed.TotalMilliseconds-$loadingStart}
+    if($null -ne $sessionStart){$sessionPausedMs+=$wallClock.Elapsed.TotalMilliseconds-$sessionStart}
     $measuredTics=if($null -ne $simulation){$simulation.View.ReadInt32(20)}else{0}
     if($timerRequested){$null=[PwshDoomPlatform.ConsoleApi]::timeEndPeriod(1)}
     if($null -ne $simulation -and -not $simulation.Process.HasExited){$simulation.Process.Refresh();$simMemory=$simulation.Process.WorkingSet64}
@@ -220,10 +278,10 @@ finally {
         if($RecordInput){
             try{
                 $consumed=@($simulationReport.InputCommands|Select-Object -First $simulationReport.Tics)
-                $recordingPath=Write-DoomInputReplay $RecordInput ([ordered]@{Format='pwshDoom.InputReplay';Version=1;CreatedUtc=[DateTime]::UtcNow.ToString('o');WadSha256=$wadHash;
+                $recordingPath=Write-DoomInputReplay $RecordInput ([ordered]@{Format='pwshDoom.InputReplay';Version=2;CreatedUtc=[DateTime]::UtcNow.ToString('o');WadSha256=$wadHash;
                     Skill=$Skill;Episode=$Episode;Map=$Map;ContinueCampaign=-not $stopAtLevelEnd;SourceFingerprint=$sourceFingerprint;PowerShell=$PSVersionTable.PSVersion.ToString();
                     Origin=if($Replay){'Replay'}elseif($Scripted){'Scripted'}elseif($Headless){'HeadlessIdle'}else{'Keyboard'};ExitReason=$exitReason;Error=$failure;InputCommands=$consumed;
-                    Checkpoints=$simulationReport.ReplayCheckpoints;Transitions=$simulationReport.Transitions;
+                    Checkpoints=$simulationReport.ReplayCheckpoints;Transitions=$simulationReport.Transitions;ControlEvents=$simulationReport.ControlEvents;
                     Meaning='Fresh-game commands consumed by the simulation, including any commands completed during shutdown. One command per 1/35 second; resize/loading wall pauses are not commands. Checkpoints sample state/render data and do not restore a saved game or prove vanilla demo compatibility.'})
             }catch{$recordingError=$_.ToString();[Console]::Error.WriteLine("Input recording failed: $recordingError")}
         }
@@ -235,6 +293,7 @@ finally {
         OutputRepresentation=if($Style -eq 'Classic'){'Two source pixels per truecolor half-block cell'}else{'Lossy 2x4 source-pixel character cells; HUD downsampled to half blocks'};
         Architecture='SeparateSimulation';Transport='NumericV1';QpcFrequency=[Diagnostics.Stopwatch]::Frequency;Headless=[bool]$Headless;Scripted=[bool]$Scripted;Replay=$Replay;ExitReason=$exitReason;Error=$failure;
         InputRecording=$recordingPath;InputRecordingError=$recordingError;ReplaySourceMatches=$sourceMatches;ReplayVerification=$replayVerification;
+        SessionSchedule=$SessionSchedule;SessionPausedSeconds=$sessionPausedMs/1000;SessionEvents=$sessionEvents.ToArray();
         DurationSeconds=$clock.Elapsed.TotalSeconds;IssuedCommands=$tics;SimulationTics=$simTics;TicsPerSecond=$simTics/[Math]::Max(.001,$clock.Elapsed.TotalSeconds);
         WallDurationSeconds=$wallClock.Elapsed.TotalSeconds;ViewportPausedSeconds=$pausedMs/1000;ViewportPauseCount=$pauseCount;
         MapReloads=$mapReloads.ToArray();MapReloadPausedSeconds=$loadingMs/1000;DiscardedTransitionFrames=$transitionDiscarded;FinalAssetGeneration=$assetGeneration;
@@ -244,7 +303,7 @@ finally {
         InterpolationMs=(Get-SampleStats $interpolationTimes.ToArray());FrameSamplesMs=$frameTimes.ToArray();FrameStats=$frameStats.ToArray();Simulation=$simulationReport;
         Requested1msTimer=$timerRequested;TerminalColumns=$terminalWidth;TerminalRows=$terminalHeight;WorkerWorkingSetBytes=$workerMemory;SimulationWorkingSetBytes=$simMemory;
         CaptureEveryTics=$CaptureEveryTics;Captures=$captures.ToArray();PowerShell=$PSVersionTable.PSVersion.ToString();
-        Meaning='35 Hz simulation and 60 Hz interpolated PowerShell rendering. DurationSeconds excludes undersized-viewport and map-asset handoff pauses; wall duration/rate and pause histories are retained. Map loading inside a simulation update remains in its measured tick cost. Session screens use the adopted PowerShell 2D renderer and the same terminal encoders. FrameMs is overlapping render-to-write latency, not output interval. Completed writes do not measure monitor presentation.'}
+        Meaning='35 Hz simulation and 60 Hz interpolated PowerShell rendering. Active duration excludes viewport, menu/control and asset-handoff holds; these wall intervals can overlap and are reported separately. Menus publish on change and do not continually redraw. Map loading inside a gameplay update remains in its tick cost. FrameMs is render-to-write latency, not output interval; writes do not measure monitor presentation.'}
     [void][IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName([IO.Path]::GetFullPath($Report)))
     $data | ConvertTo-Json -Depth 10 | Set-Content -LiteralPath $Report
     [pscustomobject]@{Report=$Report;Tics=$simTics;Frames=$completed;Seconds=$clock.Elapsed.TotalSeconds;Exit=$exitReason} | Format-List

@@ -41,7 +41,7 @@ try{
     function Test-ExplicitBinding {param([int]$Skill=2) Set-DoomReplaySettings $data $PSBoundParameters $Skill}
     $null=Test-ExplicitBinding -Skill 2;$checks.Add(@{Name='Actual PSBoundParameters accepted';Passed=$true})
     foreach($case in @(
-        @('Unknown version',{param($d)$d.Version=2}),@('String version',{param($d)$d.Version='1'}),@('Wrong format',{param($d)$d.Format='other'}),
+        @('Unknown version',{param($d)$d.Version=3}),@('String version',{param($d)$d.Version='1'}),@('Wrong format',{param($d)$d.Format='other'}),
         @('Missing starting skill',{param($d)$d.PSObject.Properties.Remove('Skill')}),@('Boolean skill',{param($d)$d.Skill=$true}),@('Map outside bounds',{param($d)$d.Map=33}),
         @('Nonboolean continuation',{param($d)$d.ContinueCampaign='false'}),@('Missing continuation',{param($d)$d.PSObject.Properties.Remove('ContinueCampaign')}),
         @('Invalid WAD hash',{param($d)$d.WadSha256='no'}),@('Invalid source fingerprint',{param($d)$d|Add-Member SourceFingerprint 'bad'}),@('Null commands',{param($d)$d.InputCommands=$null}),@('Scalar command',{param($d)$d.InputCommands=@(1)}),
@@ -56,6 +56,17 @@ try{
     $old=Read-DoomInputReplay $legacy;$settings=Set-DoomReplaySettings $old @{}
     if($old.ContinueCampaign -or $settings.Skill -ne 3 -or $settings.Map -ne 1){throw 'Historical replay defaults changed.'}
     $checks.Add(@{Name='Historical replay defaults under strict mode';Passed=$true})
+    $v2=New-Fixture;$v2.Version=2;$v2|Add-Member ControlEvents @(@{Tic=1;Action='NewGame';Skill=3;Episode=2;Map=1})
+    $v2Path=Join-Path $directory 'version2.json';$null=Write-DoomInputReplay $v2Path $v2
+    $loaded=Read-DoomInputReplay $v2Path
+    if($loaded.ControlEvents.Count -ne 1 -or $loaded.ControlEvents[0].Episode -ne 2){throw 'New-game control round trip failed.'}
+    $checks.Add(@{Name='Version 2 new-game action round trip';Passed=$true})
+    Assert-Rejected 'Version 1 cannot smuggle control actions' {param($d)$d|Add-Member ControlEvents @(@{Tic=1;Action='NewGame';Skill=3;Episode=2;Map=1})}
+    Assert-Rejected 'Version 2 requires control array' {param($d)$d.Version=2}
+    Assert-Rejected 'Unknown control action rejected' {param($d)$d.Version=2;$d|Add-Member ControlEvents @(@{Tic=1;Action='Execute';Skill=3;Episode=2;Map=1})}
+    Assert-Rejected 'Out-of-range control boundary rejected' {param($d)$d.Version=2;$d|Add-Member ControlEvents @(@{Tic=3;Action='NewGame';Skill=3;Episode=2;Map=1})}
+    Assert-Rejected 'Negative control boundary rejected' {param($d)$d.Version=2;$d|Add-Member ControlEvents @(@{Tic=-1;Action='NewGame';Skill=3;Episode=2;Map=1})}
+    Assert-Rejected 'New game begins at map one' {param($d)$d.Version=2;$d|Add-Member ControlEvents @(@{Tic=1;Action='NewGame';Skill=3;Episode=2;Map=2})}
     $empty=New-Fixture;$empty.InputCommands=@();$empty.Checkpoints=@(@{Tic=0;Sha256=('B'*64)})
     $null=Write-DoomInputReplay (Join-Path $directory 'empty.json') $empty
     $checks.Add(@{Name='Zero-command graceful recording';Passed=$true})

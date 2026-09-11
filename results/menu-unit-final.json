@@ -1,0 +1,383 @@
+{
+  "Frames": [
+    {
+      "Screen": 1,
+      "Sha256": "100537093D6499AA6420ED8622B7EA768D83E0920F098003C52A1D003A389D41",
+      "Choice": 0
+    },
+    {
+      "Screen": 1,
+      "Sha256": "B05EC3216C19F6FE8F31D8DC77B502208B37798ADBD0E9D22B12911EA2A80E68",
+      "Choice": 1
+    },
+    {
+      "Screen": 1,
+      "Sha256": "05474D601FB2127E2B7D78B2007FCA2FB10653DD940A7B6D3C630E95CEEE07A4",
+      "Choice": 2
+    },
+    {
+      "Screen": 1,
+      "Sha256": "EBBB066AB3D49799738647B156EBF91310B543243B18835AFDED8FDD4DE1A28D",
+      "Choice": 3
+    },
+    {
+      "Screen": 2,
+      "Sha256": "8372D5FF452D26476FCEA1293896C3ACD1EE383DB55E7012507035315C962C9F",
+      "Choice": 0
+    },
+    {
+      "Screen": 2,
+      "Sha256": "E771AD7F98A8B0A49ECB1384DF2835F2985A85D825B325FFA325BD3572B07DCA",
+      "Choice": 1
+    },
+    {
+      "Screen": 2,
+      "Sha256": "37CCFF1FBE58C6718AB5B6A8D6B00E0D738BB329A466E3B7F5F2D3D23D536175",
+      "Choice": 2
+    },
+    {
+      "Screen": 2,
+      "Sha256": "493388B1F017BC812CDE0B24F066F711A015CCA99C43F424DAB1EE9644A8E8A6",
+      "Choice": 3
+    },
+    {
+      "Screen": 3,
+      "Sha256": "D87C1B6603FBAB2DD101DD16FA5CB610F16467C5B3F5B300A42FA509029CE115",
+      "Choice": 0
+    },
+    {
+      "Screen": 3,
+      "Sha256": "3263A961143C9DA03525A4EACC49306151590247916125222A45E54AB48BF6EA",
+      "Choice": 1
+    },
+    {
+      "Screen": 3,
+      "Sha256": "CD649089671CC7726AB2D7F5BE3EFD3B2BBF10E3A28C2D53887122B2D010CA6B",
+      "Choice": 2
+    },
+    {
+      "Screen": 3,
+      "Sha256": "BDB0E144E9BB8A3AE158478090C65AEEC0C98519D7E02DAECF04CEE46C57C288",
+      "Choice": 3
+    },
+    {
+      "Screen": 3,
+      "Sha256": "DA125DCD1EA342116E048ECB0DA137537E6C00DFA935420BC9F2F0A968B0DECC",
+      "Choice": 4
+    },
+    {
+      "Screen": 4,
+      "Sha256": "1D2423A6D944E7580D5062409F0CF9D4D41A9EEEB6871E01ADE3C4A288B16B01",
+      "Choice": 0
+    },
+    {
+      "Screen": 4,
+      "Sha256": "05D2FD74FC3A13A5647F1B7DF3F9DD627266F05BBE387B4D0D82E343DB65ACC0",
+      "Choice": 1
+    },
+    {
+      "Screen": 5,
+      "Sha256": "62D4BCE021BD101BA2E4B09596B24F265386C5E62064AE52FE00533417369889",
+      "Choice": 0
+    },
+    {
+      "Screen": 6,
+      "Sha256": "C88060E3C5389BD2A2CC9DCBB246D91A95FDB9A174AAE924D0D8AB1F997EEE49",
+      "Choice": 0
+    },
+    {
+      "Screen": 6,
+      "Sha256": "9BD4AD45BC58E6E740CC1B17976B6DBBD7D1177107F0FB7D8D74FEFF009F2D5E",
+      "Choice": 1
+    },
+    {
+      "Screen": 7,
+      "Sha256": "87EDACA3DDBDAADF13FB6F3D76867A28A551082AAD7F96D815F9A9FD01ABFEC1",
+      "Choice": 0
+    }
+  ],
+  "Meaning": "Menu navigation/confirmation and native WAD screen fixtures; independent stable-sort brightness reduction versus actual menu encoders at uneven partitions/origins. Screen draws are not a live keyboard test.",
+  "Sources": [
+    {
+      "Path": "src/SessionMenu.ps1",
+      "Sha256": "1801EDA38FD7C32EF1BDBAE821D72D9A1EE734AF9FD4DAF1F0EFAD2D33EE8235"
+    },
+    {
+      "Path": "src/CharacterCodec.ps1",
+      "Sha256": "2F0D8B12EC0815AF71F48F6F6033D669A3593B573DEBABC5C1DF68A8A056CFDF"
+    }
+  ],
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "FinishedUtc": "2026-09-11T13:17:47.2783501Z",
+  "Error": null,
+  "Checks": [
+    {
+      "Name": "Escape opens main",
+      "Passed": true
+    },
+    {
+      "Name": "Choice wraps upwards",
+      "Passed": true
+    },
+    {
+      "Name": "Quit defaults to no",
+      "Passed": true
+    },
+    {
+      "Name": "Quit cancellation returns to menu",
+      "Passed": true
+    },
+    {
+      "Name": "Quit requires confirmation",
+      "Passed": true
+    },
+    {
+      "Name": "New game opens episodes",
+      "Passed": true
+    },
+    {
+      "Name": "Episode selection preserves episode four",
+      "Passed": true
+    },
+    {
+      "Name": "Nightmare selection asks before replacing game",
+      "Passed": true
+    },
+    {
+      "Name": "New-game cancellation returns to skill",
+      "Passed": true
+    },
+    {
+      "Name": "Confirmed new game carries settings",
+      "Passed": true
+    },
+    {
+      "Name": "Pause opens paused screen",
+      "Passed": true
+    },
+    {
+      "Name": "Enter resumes pause",
+      "Passed": true
+    },
+    {
+      "Name": "Single-episode content skips unavailable episodes",
+      "Passed": true
+    },
+    {
+      "Name": "Single-episode skill back returns home",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix max-brightness reference / origin 0,0 / strip 0",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix max-brightness reference / origin 0,0 / strip 1",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix max-brightness reference / origin 0,0 / strip 2",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix max-brightness reference / origin 0,0 / strip 3",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix max-brightness reference / origin 0,0 / strip 4",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix max-brightness reference / origin 0,0 / strip 5",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix max-brightness reference / origin 0,0 / strip 6",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix max-brightness reference / origin 11,3 / strip 0",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix max-brightness reference / origin 11,3 / strip 1",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix max-brightness reference / origin 11,3 / strip 2",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix max-brightness reference / origin 11,3 / strip 3",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix max-brightness reference / origin 11,3 / strip 4",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix max-brightness reference / origin 11,3 / strip 5",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix max-brightness reference / origin 11,3 / strip 6",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt max-brightness reference / origin 0,0 / strip 0",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt max-brightness reference / origin 0,0 / strip 1",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt max-brightness reference / origin 0,0 / strip 2",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt max-brightness reference / origin 0,0 / strip 3",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt max-brightness reference / origin 0,0 / strip 4",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt max-brightness reference / origin 0,0 / strip 5",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt max-brightness reference / origin 0,0 / strip 6",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt max-brightness reference / origin 11,3 / strip 0",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt max-brightness reference / origin 11,3 / strip 1",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt max-brightness reference / origin 11,3 / strip 2",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt max-brightness reference / origin 11,3 / strip 3",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt max-brightness reference / origin 11,3 / strip 4",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt max-brightness reference / origin 11,3 / strip 5",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt max-brightness reference / origin 11,3 / strip 6",
+      "Passed": true
+    },
+    {
+      "Name": "Invalid menu dimensions 32,0,0,32",
+      "Passed": true
+    },
+    {
+      "Name": "Invalid menu dimensions 31,16,0,30",
+      "Passed": true
+    },
+    {
+      "Name": "Invalid menu dimensions 32,15,0,32",
+      "Passed": true
+    },
+    {
+      "Name": "Invalid menu dimensions 32,16,1,32",
+      "Passed": true
+    },
+    {
+      "Name": "Invalid menu dimensions 32,16,0,34",
+      "Passed": true
+    },
+    {
+      "Name": "Invalid menu dimensions 32,16,4,4",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 1 / choice 0 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 1 / choice 1 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 1 / choice 2 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 1 / choice 3 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 2 / choice 0 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 2 / choice 1 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 2 / choice 2 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 2 / choice 3 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 3 / choice 0 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 3 / choice 1 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 3 / choice 2 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 3 / choice 3 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 3 / choice 4 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 4 / choice 0 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 4 / choice 1 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 5 / choice 0 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 6 / choice 0 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 6 / choice 1 draws nonblank pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Menu 7 / choice 0 draws nonblank pixels",
+      "Passed": true
+    }
+  ]
+}

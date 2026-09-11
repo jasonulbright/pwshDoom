@@ -9,7 +9,7 @@ Interactive play now continues from a completed map through the native intermiss
 .\Start-Doom.ps1 -Style AnsiArt -Replay .\results\e1m1-e1m2-session-route.json -Seconds 90
 ```
 
-Ctrl or E/Space/Enter advances the intermission stages. The legacy E1M1 benchmark replay retains its first-exit stop. Session replays include `ContinueCampaign=true`; their commands continue across intermission and map changes. These replays require the documented Ultimate Doom IWAD hash and skill 3 / episode 1 / map 1. Interactive episode/difficulty menus, pause UI, save/load and automap are the next session milestone. Escape still quits directly.
+Ctrl or E/Space/Enter advances the intermission stages. The legacy E1M1 benchmark replay retains its first-exit stop. Session replays include `ContinueCampaign=true`; their commands continue across intermission and map changes. These replays require the documented Ultimate Doom IWAD hash and skill 3 / episode 1 / map 1. The subsequent [menu work](menus.md) adds interactive episode/difficulty selection and pause/resume. Escape now opens the menu with quit confirmation. Save/load, settings and automap remain unfinished.
 
 ## Controller behavior and evidence
 

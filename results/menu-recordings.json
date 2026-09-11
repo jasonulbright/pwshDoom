@@ -1,0 +1,428 @@
+{
+  "FailedCapture": "results/menu-recording-failure.json",
+  "Meaning": "Actual Terminal window captures of a finite menu test schedule and game input. Viewing copies trim startup/console return and fixed margins without speed changes or added effects. Originals retained. No audio. 60 CFR movie frames include duplicates and static menus; menu aggregate writes are unsuitable for gameplay FPS comparisons.",
+  "SourceManifest": "results/menu-verified-sources.json",
+  "FinishedUtc": "2026-09-11T13:53:13.3744413Z",
+  "Recordings": [
+    {
+      "FontSize": 6,
+      "ViewingCopy": {
+        "StartSeconds": 26,
+        "Sha256": "65455114A810707F7FBABE15090B9E934B44DFF54D158044DE6CE58265E9B19A",
+        "EndSeconds": 44.900000000000006,
+        "ExportArguments": [
+          "-hide_banner",
+          "-n",
+          "-ss",
+          "26.000",
+          "-i",
+          "C:\\projects\\pwshDoom\\local\\recordings\\menu-verified-classic-full.mp4",
+          "-t",
+          "18.900",
+          "-an",
+          "-vf",
+          "crop=1600:902:920:256",
+          "-c:v",
+          "libx264",
+          "-threads",
+          "4",
+          "-preset",
+          "medium",
+          "-crf",
+          "16",
+          "-pix_fmt",
+          "yuv420p",
+          "-movflags",
+          "+faststart",
+          "C:\\projects\\pwshDoom\\local\\recordings\\menu-verified-classic.mp4"
+        ],
+        "Crop": {
+          "Height": 902,
+          "Y": 256,
+          "Width": 1600,
+          "X": 920
+        },
+        "Path": "local/recordings/menu-verified-classic.mp4",
+        "Bytes": 3661656,
+        "Video": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "h264",
+              "width": 1600,
+              "height": 902,
+              "pix_fmt": "yuv420p",
+              "avg_frame_rate": "60/1",
+              "nb_read_frames": "1134"
+            }
+          ],
+          "format": {
+            "duration": "18.900000"
+          }
+        }
+      },
+      "Game": {
+        "MeasuredTics": 122,
+        "ControlEvents": [
+          {
+            "Skill": 4,
+            "Map": 1,
+            "Episode": 2,
+            "Tic": 23,
+            "Action": "NewGame"
+          }
+        ],
+        "InputSha256": "74B968E64332C30AA58CECF8F94D997BC1BF894110111BBD69DB093E0ADBA868",
+        "SessionPausedSeconds": 15.4995035,
+        "Sha256": "1E9155829D628F874248723834C6DE015EDA875B9059C0C0C057092D54B96F2C",
+        "ExitReason": "ConfirmedQuit",
+        "ConsumedTics": 122,
+        "MapReloadPausedSeconds": 0.9057545999999993,
+        "MenuScreensOutput": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "WallSeconds": 19.0017935,
+        "ActiveSeconds": 3.5060533,
+        "Input": "results/menu-verified-classic-input.json",
+        "Report": "results/menu-verified-classic-game.json"
+      },
+      "CaptureLimit": 240,
+      "GlyphSet": "Blocks",
+      "FontFace": "Cascadia Mono",
+      "VisualInspection": {
+        "Findings": "Sampled gameplay, main menu, skill or new-game confirmation, pause/resume guidance and controls inspected. Enlarged custom text fits within the crop and is readable in the sampled images. Character gameplay retains katakana; Matrix remains green but fairly dim, and AnsiArt preserves scene color. This is sampled image review, not every-frame certification or physical play.",
+        "ViewingCopySeconds": [
+          1.8,
+          4.8,
+          8.4,
+          10.2,
+          12.8,
+          14.2
+        ]
+      },
+      "Tool": {
+        "ExportScriptSha256": "A194348245876069FEBAF9045A6BEFDEDF41E3DF24BA73720F6D176758DB054C",
+        "FfmpegSha256": "72A489ECCD008C2EC2C0A5856C5C75BC3D8BBFA90166C4566865C246445E6AA3",
+        "RecordingScriptSha256": "9E20FEA62A2563644C6730C1B5D30788A29DB50A3BFCBBB7588139E936A25BE7"
+      },
+      "Style": "Classic",
+      "Original": {
+        "Bytes": 6919983,
+        "Sha256": "28C49E28175D1F0F89F6AE762506AC78BE702A2FDB5A5C0998943376CF4BEACC",
+        "Arguments": [
+          "-hide_banner",
+          "-n",
+          "-filter_complex",
+          "gfxcapture=hwnd=11732342:max_framerate=240:capture_cursor=0:display_border=1:width=-2:height=-2",
+          "-an",
+          "-c:v",
+          "h264_nvenc",
+          "-preset",
+          "p4",
+          "-cq",
+          "18",
+          "-b:v",
+          "0",
+          "-r",
+          "60",
+          "-fps_mode",
+          "cfr",
+          "-movflags",
+          "+faststart",
+          "-t",
+          "70",
+          "C:\\projects\\pwshDoom\\local\\recordings\\menu-verified-classic-full.mp4"
+        ],
+        "Path": "local/recordings/menu-verified-classic-full.mp4"
+      }
+    },
+    {
+      "FontSize": 12,
+      "ViewingCopy": {
+        "StartSeconds": 26,
+        "Sha256": "0A6A3FCFD034DBE3BF09B7526FFB5DBA9C7530AB4C48782E4ADE498D78305B3D",
+        "EndSeconds": 45.2,
+        "ExportArguments": [
+          "-hide_banner",
+          "-n",
+          "-ss",
+          "26.000",
+          "-i",
+          "C:\\projects\\pwshDoom\\local\\recordings\\menu-verified-matrix-full.mp4",
+          "-t",
+          "19.200",
+          "-an",
+          "-vf",
+          "crop=1280:800:1080:304",
+          "-c:v",
+          "libx264",
+          "-threads",
+          "4",
+          "-preset",
+          "medium",
+          "-crf",
+          "16",
+          "-pix_fmt",
+          "yuv420p",
+          "-movflags",
+          "+faststart",
+          "C:\\projects\\pwshDoom\\local\\recordings\\menu-verified-matrix.mp4"
+        ],
+        "Crop": {
+          "Height": 800,
+          "Y": 304,
+          "Width": 1280,
+          "X": 1080
+        },
+        "Path": "local/recordings/menu-verified-matrix.mp4",
+        "Bytes": 4048141,
+        "Video": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "h264",
+              "width": 1280,
+              "height": 800,
+              "pix_fmt": "yuv420p",
+              "avg_frame_rate": "60/1",
+              "nb_read_frames": "1152"
+            }
+          ],
+          "format": {
+            "duration": "19.200000"
+          }
+        }
+      },
+      "Game": {
+        "MeasuredTics": 120,
+        "ControlEvents": [
+          {
+            "Action": "NewGame",
+            "Tic": 24,
+            "Skill": 4,
+            "Episode": 2,
+            "Map": 1
+          }
+        ],
+        "InputSha256": "28E7A90AD2125791EEFF5544D5732BA4B3981B0E8FE81EB2B2C8192106BBE677",
+        "SessionPausedSeconds": 15.565579699999999,
+        "Sha256": "141E3C0C4F7F64F3C25682EB686B82E57285F8AABF71F5244E69B4BADA2F60A3",
+        "ExitReason": "ConfirmedQuit",
+        "ConsumedTics": 120,
+        "MapReloadPausedSeconds": 0.9673796999999995,
+        "MenuScreensOutput": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "WallSeconds": 19.0010827,
+        "ActiveSeconds": 3.4406721,
+        "Input": "results/menu-verified-matrix-input.json",
+        "Report": "results/menu-verified-matrix-game.json"
+      },
+      "CaptureLimit": 240,
+      "GlyphSet": "Katakana",
+      "FontFace": "MS Gothic",
+      "VisualInspection": {
+        "Findings": "Sampled gameplay, main menu, skill or new-game confirmation, pause/resume guidance and controls inspected. Enlarged custom text fits within the crop and is readable in the sampled images. Character gameplay retains katakana; Matrix remains green but fairly dim, and AnsiArt preserves scene color. This is sampled image review, not every-frame certification or physical play.",
+        "ViewingCopySeconds": [
+          1.8,
+          4.8,
+          8.4,
+          10.2,
+          12.8,
+          14.2
+        ]
+      },
+      "Tool": {
+        "ExportScriptSha256": "A194348245876069FEBAF9045A6BEFDEDF41E3DF24BA73720F6D176758DB054C",
+        "FfmpegSha256": "72A489ECCD008C2EC2C0A5856C5C75BC3D8BBFA90166C4566865C246445E6AA3",
+        "RecordingScriptSha256": "9E20FEA62A2563644C6730C1B5D30788A29DB50A3BFCBBB7588139E936A25BE7"
+      },
+      "Style": "Matrix",
+      "Original": {
+        "Bytes": 9245247,
+        "Sha256": "3B0FD9BE31EB07C8E60BD5680A4C3C1F7AB811A9EABDA3301E4D428B80F1E880",
+        "Arguments": [
+          "-hide_banner",
+          "-n",
+          "-filter_complex",
+          "gfxcapture=hwnd=15861308:max_framerate=240:capture_cursor=0:display_border=1:width=-2:height=-2",
+          "-an",
+          "-c:v",
+          "h264_nvenc",
+          "-preset",
+          "p4",
+          "-cq",
+          "18",
+          "-b:v",
+          "0",
+          "-r",
+          "60",
+          "-fps_mode",
+          "cfr",
+          "-movflags",
+          "+faststart",
+          "-t",
+          "70",
+          "C:\\projects\\pwshDoom\\local\\recordings\\menu-verified-matrix-full.mp4"
+        ],
+        "Path": "local/recordings/menu-verified-matrix-full.mp4"
+      }
+    },
+    {
+      "FontSize": 12,
+      "ViewingCopy": {
+        "StartSeconds": 27,
+        "Sha256": "00F8FBEA87BE77391AE4D94D499F6E259046541F8E6FC5D2E0C8FFF94560CBC4",
+        "EndSeconds": 46.900000000000006,
+        "ExportArguments": [
+          "-hide_banner",
+          "-n",
+          "-ss",
+          "27.000",
+          "-i",
+          "C:\\projects\\pwshDoom\\local\\recordings\\menu-verified-ansiart-full.mp4",
+          "-t",
+          "19.900",
+          "-an",
+          "-vf",
+          "crop=1280:800:1080:304",
+          "-c:v",
+          "libx264",
+          "-threads",
+          "4",
+          "-preset",
+          "medium",
+          "-crf",
+          "16",
+          "-pix_fmt",
+          "yuv420p",
+          "-movflags",
+          "+faststart",
+          "C:\\projects\\pwshDoom\\local\\recordings\\menu-verified-ansiart.mp4"
+        ],
+        "Crop": {
+          "Height": 800,
+          "Y": 304,
+          "Width": 1280,
+          "X": 1080
+        },
+        "Path": "local/recordings/menu-verified-ansiart.mp4",
+        "Bytes": 3515293,
+        "Video": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "h264",
+              "width": 1280,
+              "height": 800,
+              "pix_fmt": "yuv420p",
+              "avg_frame_rate": "60/1",
+              "nb_read_frames": "1194"
+            }
+          ],
+          "format": {
+            "duration": "19.900000"
+          }
+        }
+      },
+      "Game": {
+        "MeasuredTics": 120,
+        "ControlEvents": [
+          {
+            "Episode": 2,
+            "Tic": 24,
+            "Skill": 4,
+            "Map": 1,
+            "Action": "NewGame"
+          }
+        ],
+        "InputSha256": "0DD98C8BAD7DE5836F021375C0BAA3674FE6E4DF54B979DA102E45B9A9176ACF",
+        "SessionPausedSeconds": 15.558568800000003,
+        "Sha256": "067EE903F8BB3F8B41BA9C1F6EB53726D5BC0BFE91B9A3FC69B35B64F5740BA2",
+        "ExitReason": "ConfirmedQuit",
+        "ConsumedTics": 120,
+        "MapReloadPausedSeconds": 0.9467354999999997,
+        "MenuScreensOutput": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "WallSeconds": 19.0016042,
+        "ActiveSeconds": 3.4481684,
+        "Input": "results/menu-verified-ansiart-input.json",
+        "Report": "results/menu-verified-ansiart-game.json"
+      },
+      "CaptureLimit": 240,
+      "GlyphSet": "Katakana",
+      "FontFace": "MS Gothic",
+      "VisualInspection": {
+        "Findings": "Sampled gameplay, main menu, skill or new-game confirmation, pause/resume guidance and controls inspected. Enlarged custom text fits within the crop and is readable in the sampled images. Character gameplay retains katakana; Matrix remains green but fairly dim, and AnsiArt preserves scene color. This is sampled image review, not every-frame certification or physical play.",
+        "ViewingCopySeconds": [
+          1.8,
+          4.8,
+          8.4,
+          10.2,
+          12.8,
+          14.2
+        ]
+      },
+      "Tool": {
+        "ExportScriptSha256": "A194348245876069FEBAF9045A6BEFDEDF41E3DF24BA73720F6D176758DB054C",
+        "FfmpegSha256": "72A489ECCD008C2EC2C0A5856C5C75BC3D8BBFA90166C4566865C246445E6AA3",
+        "RecordingScriptSha256": "9E20FEA62A2563644C6730C1B5D30788A29DB50A3BFCBBB7588139E936A25BE7"
+      },
+      "Style": "AnsiArt",
+      "Original": {
+        "Bytes": 4625714,
+        "Sha256": "220F691C1C3599C59437D2B207ECE8679153D5DDF0EC1E4B8666A8FBF87F56EA",
+        "Arguments": [
+          "-hide_banner",
+          "-n",
+          "-filter_complex",
+          "gfxcapture=hwnd=5572132:max_framerate=240:capture_cursor=0:display_border=1:width=-2:height=-2",
+          "-an",
+          "-c:v",
+          "h264_nvenc",
+          "-preset",
+          "p4",
+          "-cq",
+          "18",
+          "-b:v",
+          "0",
+          "-r",
+          "60",
+          "-fps_mode",
+          "cfr",
+          "-movflags",
+          "+faststart",
+          "-t",
+          "70",
+          "C:\\projects\\pwshDoom\\local\\recordings\\menu-verified-ansiart-full.mp4"
+        ],
+        "Path": "local/recordings/menu-verified-ansiart-full.mp4"
+      }
+    }
+  ]
+}

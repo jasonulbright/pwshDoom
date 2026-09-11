@@ -7,7 +7,7 @@ function Read-DoomInputReplay {
     if($file.Length -gt 128MB){throw 'Replay exceeds the 128 MiB input limit.'}
     $data=[IO.File]::ReadAllText($file.FullName)|ConvertFrom-Json -Depth 16
     if($data -isnot [pscustomobject]){throw 'Replay root must be an object.'}
-    foreach($field in 'Format','Version','Skill','Episode','Map','Checkpoints','SourceFingerprint'){
+    foreach($field in 'Format','Version','Skill','Episode','Map','Checkpoints','SourceFingerprint','ControlEvents'){
         if($null -eq $data.PSObject.Properties[$field]){$data|Add-Member -NotePropertyName $field -NotePropertyValue $null}
     }
     $hasContinuation=$null -ne $data.PSObject.Properties['ContinueCampaign']
@@ -16,10 +16,19 @@ function Read-DoomInputReplay {
     if($null -ne $data.SourceFingerprint -and $data.SourceFingerprint -notmatch '^[0-9a-fA-F]{64}$'){throw 'Invalid replay source fingerprint.'}
     if($data.WadSha256 -notmatch '^[0-9a-fA-F]{64}$' -or ($WadSha256 -and $data.WadSha256 -ne $WadSha256)){throw 'Replay IWAD hash does not match.'}
     if($null -ne $data.Format -or $null -ne $data.Version){
-        if($data.Format -ne 'pwshDoom.InputReplay' -or $data.Version -isnot [long] -or $data.Version -ne 1){throw 'Unsupported input replay format/version.'}
+        if($data.Format -ne 'pwshDoom.InputReplay' -or $data.Version -isnot [long] -or $data.Version -notin 1,2){throw 'Unsupported input replay format/version.'}
         foreach($field in 'Skill','Episode','Map'){if($null -eq $data.$field){throw "Replay is missing $field."}}
         if(-not $hasContinuation -or $data.ContinueCampaign -isnot [bool]){throw 'Replay ContinueCampaign must be a boolean.'}
     }
+    if($data.Version -eq 2){
+        if($data.ControlEvents -isnot [array] -or $data.ControlEvents.Count -gt 10000){throw 'Invalid replay control event list.'}
+        $lastControl=-1
+        foreach($control in $data.ControlEvents){
+            if($control.Action -ne 'NewGame' -or $control.Tic -isnot [long] -or $control.Tic -lt 0 -or $control.Tic -lt $lastControl -or $control.Tic -gt $data.InputCommands.Count -or
+                $control.Skill -isnot [long] -or $control.Skill -lt 1 -or $control.Skill -gt 5 -or $control.Episode -isnot [long] -or $control.Episode -lt 1 -or $control.Episode -gt 4 -or $control.Map -isnot [long] -or $control.Map -ne 1){throw 'Invalid replay new-game event.'}
+            $lastControl=$control.Tic
+        }
+    }elseif($null -ne $data.ControlEvents -and $data.ControlEvents.Count -gt 0){throw 'Control events require replay version 2.'}
     foreach($pair in @(@('Skill',5),@('Episode',4),@('Map',32))){
         $value=$data.($pair[0])
         if($null -ne $value -and ($value -isnot [long] -or $value -lt 1 -or $value -gt $pair[1])){throw "Invalid replay $($pair[0])."}
@@ -55,7 +64,7 @@ function Set-DoomReplaySettings {
 
 function Get-DoomReplaySourceFingerprint {
     $root=Split-Path $PSScriptRoot
-    $paths=@('scripts/Build-EngineBundle.ps1','scripts/Invoke-SimulationWorker.ps1','src/GameHost.ps1','src/SnapshotTransport.ps1','src/SessionScreens.ps1','src/InputReplay.ps1')
+    $paths=@('scripts/Build-EngineBundle.ps1','scripts/Invoke-SimulationWorker.ps1','src/GameHost.ps1','src/SnapshotTransport.ps1','src/SessionScreens.ps1','src/SessionMenu.ps1','src/InputReplay.ps1')
     $paths+=@(Get-ChildItem -LiteralPath "$PSScriptRoot/ManagedDoom" -Filter *.ps1 -File -Recurse|ForEach-Object {[IO.Path]::GetRelativePath($root,$_.FullName).Replace('\','/')})
     $lines=@($paths|Sort-Object|ForEach-Object {$_+' '+(Get-FileHash -LiteralPath (Join-Path $root $_)).Hash})
     return [Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([Text.Encoding]::UTF8.GetBytes($lines -join "`n")))

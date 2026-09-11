@@ -14,7 +14,7 @@ The MyHouse audit is a named follow-on, not part of the first-release gate. Begi
 
 ## Baseline and acceptance
 
-The current baseline is a single-player session prototype, not a campaign-qualified game. It has an E1M1/HMP input-only completion route, intermission advancement into E1M2, 35 Hz simulation scheduling, parallel PowerShell rendering, truecolor ANSI output, keyboard handling, resize pauses, and independent presentation telemetry for earlier builds. Intermission/finale screens and map-specific asset refresh are implemented. Audio, menus, save/load UI and automap UI remain unfinished. See [campaign session work](campaign-session.md), [implementation](implementation.md), [viewport](viewport.md), and [provenance](../src/ManagedDoom/ORIGIN.md).
+The current baseline is a single-player session prototype, not a campaign-qualified game. It has an E1M1/HMP input-only completion route, intermission advancement into E1M2, 35 Hz simulation scheduling, parallel PowerShell rendering, truecolor ANSI output, keyboard handling, resize pauses, and independent presentation telemetry for earlier builds. Intermission/finale screens, map-specific asset refresh, new-game/quit menus and pause/resume are implemented. Audio, save/load, settings and automap UI remain unfinished. See [menus](menus.md), [campaign session work](campaign-session.md), [implementation](implementation.md), [viewport](viewport.md), and [provenance](../src/ManagedDoom/ORIGIN.md).
 
 Release acceptance requires:
 
@@ -34,7 +34,7 @@ Release acceptance requires:
 | --- | --- | --- | --- |
 | M0 — Preserve the baseline | Reproducible E1M1 game, source lineage, raw timings | Existing input route, codec/transport/lifecycle checks, PresentMon captures | Baseline established; limits recorded |
 | M1 — Campaign foundation | Map inventory and failure matrix; correct state transitions; renderer asset refresh on level changes | Per-map smoke results, normal/secret routing tests, E1M1 → E1M2 through the real host, carryover/death checks | Foundation verified: 57 controller checks and recorded E1M1 → E1M2 in all three styles; broader campaign unqualified |
-| M2 — Complete single-player session | Menus, intermission/finale display, pause, save/load, automap, input recording | Scripted state-machine checks, save continuation, short user playtest | Intermission/finale and versioned input recording verified through the host; menus, pause, save/load and automap next |
+| M2 — Complete single-player session | Menus, intermission/finale display, pause, save/load, automap, input recording | Scripted state-machine checks, save continuation, short user playtest | Intermission/finale, resume/new-game/quit menus, pause and versioned input/control recording implemented; save/load, automap, settings and physical play qualification remain |
 | M3 — Audio | PowerShell-controlled effects/music and declared device backend | Offline output correctness, real playback review, underrun/latency/load measurements | PowerShell mixing + standard playback approved; backend experiment pending |
 | M4 — Rendering fidelity | Reference comparisons and corrected effects/geometry/HUD | Golden states, categorized differences, regressions tested with animation and moving sectors | Can start alongside M1/M2 |
 | M5 — Campaign qualification | Complete first-target campaign with normal/secret paths and endings | Route evidence per map and transition, difficulty matrix, longer human sessions | Builds on M1–M4 |
@@ -51,7 +51,8 @@ Do not postpone all performance work until M6. Measure after a feature adds subs
 2. Controller routing/finale/par/secret-history fixes pass 57 isolated checks, including carryover and death/respawn. Broader boss/exit behavioral qualification remains in M5.
 3. The ordinary-input E1M1 -> intermission -> E1M2 route now runs through the host with generation-checked asset refresh in persistent workers. Preserve this as the session regression while implementing M2.
 4. Versioned input recording is implemented with asset/source hashes, starting settings, overwrite protection and selected-state checkpoints. The full session matches eight checkpoints on replay; an altered command produces a nonzero divergence failure. See [input recording](input-recording.md). Physical keyboard use remains unobserved.
-5. Present a small physical-play checklist only after the relevant controls/UI are implemented. The scope and audio boundary are now resolved; no user input blocks the campaign foundation work.
+5. Menus/new-game/pause and replayed new-game controls now pass the [menu milestone](menus.md), with three live recordings. Next, qualify a bounded, versioned save/load format with continuation checks before connecting save slots to the menu; the inherited serialization code is not yet qualified. Then integrate automap and settings.
+6. Present a small physical-play checklist only after the relevant controls/UI are implemented. The scope and audio boundary are now resolved; no user input blocks the next implementation work.
 
 Reproduce the current foundation checks from PowerShell 7 with fresh output paths:
 

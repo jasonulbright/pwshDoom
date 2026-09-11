@@ -1,0 +1,910 @@
+{
+  "Files": [
+    {
+      "Path": "scripts/Build-EngineBundle.ps1",
+      "Sha256": "E9CC3FF4728AD1DD55FC814D335F53DCFB33AF3DA5386C2F11C1522775F3FDED"
+    },
+    {
+      "Path": "scripts/FrameCodec.ps1",
+      "Sha256": "F35213BA328A8925E7D8EE1BF67FCF16182150F292B3673A738683ED88470318"
+    },
+    {
+      "Path": "scripts/Invoke-Doom.ps1",
+      "Sha256": "DFFEEA4BE6055CE8625CF5DFACC484FA6502346557BBEA2DB242AC3EB96644E9"
+    },
+    {
+      "Path": "scripts/Invoke-GameRenderWorker.ps1",
+      "Sha256": "00E86C103E2DA3F9BC92BDF5EA09A1A74C104D0A27E118551605EC01D827CF90"
+    },
+    {
+      "Path": "scripts/Invoke-SimulationWorker.ps1",
+      "Sha256": "02BEBEB1346F4A57D54B2E82D00D3D6462C4EF427B85A1C5C804DD6D8AA7CEE6"
+    },
+    {
+      "Path": "scripts/Record-DoomReplay.ps1",
+      "Sha256": "9E20FEA62A2563644C6730C1B5D30788A29DB50A3BFCBBB7588139E936A25BE7"
+    },
+    {
+      "Path": "src/CharacterCodec.ps1",
+      "Sha256": "2F0D8B12EC0815AF71F48F6F6033D669A3593B573DEBABC5C1DF68A8A056CFDF"
+    },
+    {
+      "Path": "src/ConsoleInput.ps1",
+      "Sha256": "0EA0CC4C74C1480D9FE4E66F06E954C9F70BF6ED61F0EF7E318D21BD7EC17D82"
+    },
+    {
+      "Path": "src/FastRenderer.ps1",
+      "Sha256": "E2919A66D4B417B99FCE96FFA573CBBF8B8880C83A117BCFC73BC1E3347A993B"
+    },
+    {
+      "Path": "src/GameHost.ps1",
+      "Sha256": "18F77E493E50ABE6F6037D98863188DA13A6935D5B4E4517E1C4D957B68F6ADB"
+    },
+    {
+      "Path": "src/GameProcesses.ps1",
+      "Sha256": "DD593D47CD1163DF0293E73482477B0AE5F0DDAFB91EE6513846EBD43D75CF85"
+    },
+    {
+      "Path": "src/InputReplay.ps1",
+      "Sha256": "F357009361798397D860A2C3A39DEAAEA11C9D68DA19B7A7A60EA11051A8F5E2"
+    },
+    {
+      "Path": "src/ManagedDoom/ApplicationInfo.ps1",
+      "Sha256": "CD26E8B5115220F28309E3DF432994E65D71C432A8C2605BEE26A98971C581CE"
+    },
+    {
+      "Path": "src/ManagedDoom/Audio/Bgm.ps1",
+      "Sha256": "B188E05D41F0E50B070140DBBA3F5EC80A2F7B51FC83FDD30EB872E3C81E54E8"
+    },
+    {
+      "Path": "src/ManagedDoom/Audio/IMusic.ps1",
+      "Sha256": "731896ECF4BE250E9DD506B966D080209A69671578E15C5963192F79AEB04B1D"
+    },
+    {
+      "Path": "src/ManagedDoom/Audio/ISound.sb.ps1",
+      "Sha256": "0CEDE82564543CADF1A272B1F9C2C5FD94D5020819241820340850E088CB7B52"
+    },
+    {
+      "Path": "src/ManagedDoom/Audio/NullMusic.ps1",
+      "Sha256": "5DDF8DEC7C2F6CC45FD04D090BE41DCCD485EF1642C630A72A68DFC17E0CD415"
+    },
+    {
+      "Path": "src/ManagedDoom/Audio/NullSound.sb.ps1",
+      "Sha256": "FD7DCDCFA180997F67394820B21DB389965764F83E401992227AAD82E3292FAC"
+    },
+    {
+      "Path": "src/ManagedDoom/Audio/sfx.ps1",
+      "Sha256": "A99FED896FB2B6F09AE46BDF059D771BED1845388753ED8311338883C2138856"
+    },
+    {
+      "Path": "src/ManagedDoom/Audio/SfxType.ps1",
+      "Sha256": "F75368255A1646026039C1D1900CA60099DEE551555423E9704A5EA7A689BBC3"
+    },
+    {
+      "Path": "src/ManagedDoom/CommandLineArgs.ps1",
+      "Sha256": "BA3D565CF315055E5FB12C9B3178923305F3293632F3AEBD877AF8D9594401B8"
+    },
+    {
+      "Path": "src/ManagedDoom/Config.ps1",
+      "Sha256": "FAC5A8B2AF947E72957A4AC405E4A3BDE99D6CF7B605C073509E783E413F5461"
+    },
+    {
+      "Path": "src/ManagedDoom/ConfigUtilities.ps1",
+      "Sha256": "80EC8BFC1415B14B17B555D470477B6CFA1DEDF1F305AA15EC415D7E0FFAC52E"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Common/DoomDebug.sb.ps1",
+      "Sha256": "106E8467E9C06F345F4D78E333B3F1C70E7A2A00D535541344162166557D7515"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Common/DoomInterop.ps1",
+      "Sha256": "A702B4D2D61D33AA33E8F703CBF465B9ADD62128B61DBBA21627FB1E89AAE460"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Common/DoomRandom.ps1",
+      "Sha256": "103FE2A517CE6C414F23A51D4BD47536A333D78B3137867938E931C88F0C1DCB"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Common/DoomString.ps1",
+      "Sha256": "9A0FB73CF6B0DDECEE045171D9D2A05985A744B3763137C48F2AFC32E01E0B40"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/DeHackEd.sb.ps1",
+      "Sha256": "1E54D04428F332C67D6F8F72A613E42E927EA39BB37D89813942F97850C2C852"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Doom.sb.ps1",
+      "Sha256": "D368163FD1F58A5B15E472A3BF4A1D1E262F2054623C4433EBC6D8CCE0B4F349"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/DoomState.ps1",
+      "Sha256": "1972FB7B1EC5CCFE54673AD4499B718AAC3BD737533451E9286002F41D17BED1"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Event/DoomEvent.ps1",
+      "Sha256": "5F80C1876963E258755176ACC1B37233D6A8D94607C29726973A10B0ACEC550F"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Event/EventType.ps1",
+      "Sha256": "7D8C1D19616FBC0378996891E378455DE6F0D7664CBAECDF0B5B1B7B9742E94D"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Game/Demo.sb.ps1",
+      "Sha256": "D17099D5AEA5FA66C4536863A4B6D60B6342D253845AA172B4ECF3E72C672CF2"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Game/DoomGame.sb.ps1",
+      "Sha256": "6040FD17A8E76C85CBAA07D708BD6A2DBEBFD044B52D6DB9B4E69F71B9225C3B"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Game/GameConst.ps1",
+      "Sha256": "EF8189CFF730811138865CE79F00F502EEB7FEE2B36E2545473FC313E5266007"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Game/GameContent.sb.ps1",
+      "Sha256": "3CF399E77B5410E70F4E82406873DB4BC860B975FE8199ABD6D3F480483CF0A9"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Game/GameMode.ps1",
+      "Sha256": "DEF3F9959A6770117A14A051A55D1543AA515699A5FD3D0D4217A09E537EE202"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Game/GameOptions.sb.ps1",
+      "Sha256": "4DA7DD6A2B16E6935E5A17EED02B2D31EC7BE0C2A51B67351B8F441ABC0B52F3"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Game/GameSkill.ps1",
+      "Sha256": "3C379DA43144ED892BBA3E075AC5346E59CC2E1A7DA9D20FABB75F7C794B373E"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Game/GameState.ps1",
+      "Sha256": "9FAF7420A048DAC573048F54B77C5E3CC8C305B8DAD9914D085C65CB26584EC7"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Game/GameVersion.ps1",
+      "Sha256": "2AAE3C60115F87AA62CC21484A9B9A61B4B57C3A30D40D2CACE89888B672979B"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Game/MissionPack.ps1",
+      "Sha256": "8A59591368ACE63259ABA56EBB5BC4E7E9985260D2AEE3C1FB5757914DFF5260"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Game/Player.sb.ps1",
+      "Sha256": "693D85DC136FD18A445B47C8CBCD3C1F28033B75CB8F83717D5CF587961B6E98"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Game/PlayerState.ps1",
+      "Sha256": "B64BE1E3C6A13654C60F6D08AF421E475F3C32DF6BD2D38B817B9E186E32BE1C"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Game/SaveAndLoad.sb.ps1",
+      "Sha256": "552ABB904E36BDC6A0E6593E6286F843F2F0D68CC5F03D4989FDDCE0242F55E2"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Game/TicCmd.ps1",
+      "Sha256": "186E02974BCB90B889FE8B4D7700BF4C6166FEF23206285F5048321E090418DA"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Game/TicCmdButtons.ps1",
+      "Sha256": "00F40AC55A69F6D45034325EBA880301CC47921D54D1522B9521125877F8F9D7"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Game/UpdateResult.ps1",
+      "Sha256": "1F7B9B26F63C270E20F92D6B6E44DC1EAE015634015E7568453525B8137E2E3A"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Graphics/AnimationDef.ps1",
+      "Sha256": "802314A3DB0C742954A930A71EB7CB0E0EDF6E71FFE918E6B00C5DFF53BCDBE1"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Graphics/ColorMap.ps1",
+      "Sha256": "BA23EBFEE5F19B2EE0C43F6FC47053C42843BE44F2945D8FB6C1E233D693D8F3"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Graphics/Column.ps1",
+      "Sha256": "69AD40C977EC8DBD1FBBB76EC65CD98B2F8A42A4885ECB9F921BD7B864DE946B"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Graphics/Dummy/DummyData.ps1",
+      "Sha256": "A67FF609FD937111F621DA6C5A2C92449DB74C82F984D48AD521A62647CCD039"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Graphics/Dummy/DummyFlatLookup.ps1",
+      "Sha256": "B5FEB4449B25354F3B07000BE62A6FD91D8E59192CE3267F560FEBD78BEFC0A1"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Graphics/Dummy/DummySpriteLookup.sb.ps1",
+      "Sha256": "C806E68899FE1BEAB6511E5244EEED17BBF39342F5A0756577F7B91FB1B84A52"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Graphics/Dummy/DummyTextureLookup.sb.ps1",
+      "Sha256": "8805EE72ABF6D28C2E505A0043B4606D88580F9C3A5B5B0AA33C40B6AB5570BB"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Graphics/Flat.ps1",
+      "Sha256": "609A81940BEA41D790E4C82C8B1F8AE67C89EF037F438EABA97EEC1315780FE1"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Graphics/FlatLookup.ps1",
+      "Sha256": "03F372C899BC7B0DC2CE5C32609A5053EB34172A355147411DC388DCD6BA17CE"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Graphics/IFlatLookup.ps1",
+      "Sha256": "6DD953DD4900D0E83D45458DEC39423D6A95DB3BD88A0E41E5EDEDD109BAABBE"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Graphics/ISpriteLookup.ps1",
+      "Sha256": "6C5AC1D023FC3ECFA95A82C1A7D50BD11D1619F169EB91ECC5BB9D3ED12E88E8"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Graphics/ITextureLookup.ps1",
+      "Sha256": "F49BD51E7159992CB5988AA474CDF1B9440F7151C8C9201ABC86BD9A96AB6D38"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Graphics/Palette.ps1",
+      "Sha256": "C26F04FD2E0E144C997D7DFCDF10ABCFCD34C1FA7D7C2333D897080658296E3B"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Graphics/Patch.ps1",
+      "Sha256": "E946C14E4C8C100863A5BBE471D9776E6E0BF7456C4F5AB03E80718E8CDE11B6"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Graphics/PatchCache.ps1",
+      "Sha256": "F6CE298E20AB38DCCF9D5CCA5E3DCC5F26C08459B92D444149B4DCDB4ECBF433"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Graphics/Sprite.ps1",
+      "Sha256": "45AB3C6F2DACA5172C6327B99BC6F2746309E473648273DD89625EB8350FC97C"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Graphics/SpriteDef.ps1",
+      "Sha256": "DE0A03751D8A0B7FDFAE2B0637136464F5E3F826A526F740D379AA9FE313FA06"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Graphics/SpriteFrame.ps1",
+      "Sha256": "3922CE6A1EB5AA3DFCE500C4C66C6F0F8CA92AFBC93F03F969AC0617E11F8EA3"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Graphics/SpriteLookup.sb.ps1",
+      "Sha256": "A964980BE27E83731E4CA608D000D1C2375AC4FB04C6AECC6310989950D648B1"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Graphics/Texture.ps1",
+      "Sha256": "2456AD37BBA877FCA2BD3627326C82140817348EE70E5316F8A7BBC50E759D34"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Graphics/TextureAnimation.sb.ps1",
+      "Sha256": "95495B02B852AC8357B450A58C001508A6BE2892D73DD9F0300FF9F1116290B3"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Graphics/TextureAnimationInfo.ps1",
+      "Sha256": "8D23137201AB7D69F29CECC4695EDFE1E6030FF4CA665EC8B3D7F446200BFD36"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Graphics/TextureLookup.sb.ps1",
+      "Sha256": "972577B837FE2A7ECB57210CD1F92F946848555AD089546EED49F3E58E692D4F"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Graphics/TexturePatch.ps1",
+      "Sha256": "407E7D40E93C6C5D1D6E17C6A281085AD546F668325CD7B7A6DEBACC296EC0DF"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Info/DoomInfo.AmmoInfos.ps1",
+      "Sha256": "205DED92FA82A971B7A787523E1E68FD3BFED8C96EFFF801BB25FB2110FA319D"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Info/DoomInfo.DeHackEdConst.ps1",
+      "Sha256": "876C3DF4DA173BF04815BA54F4B4EB0DDF1485B0517C861355C6A743893D913B"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Info/DoomInfo.MapTitles.ps1",
+      "Sha256": "0DAAAE53CEDE51DCC5C28C367FBF59C9C8321A1EA778AECDFC8BAE13B4C9E454"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Info/DoomInfo.MobjActions.ps1",
+      "Sha256": "2EC9AE089A8200B7B296463F55E48E5E88266F02B27EFCF29A946D4934AEDB3F"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Info/DoomInfo.MobjInfos.ps1",
+      "Sha256": "26BD78C3C286C8458D1BE92A7CBD60C8997058173574CB2AF0A4AD78C70B3F4B"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Info/DoomInfo.ParTimes.ps1",
+      "Sha256": "A473FBA8AAB7FD631B4A99437575367F576589D88395992A0851F68E1DA1FCFD"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Info/DoomInfo.PlayerActions.ps1",
+      "Sha256": "2FAAD7E33B1816FDCCB65D621C069985913DF548DAFBFA50864874FE4AACA1BC"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Info/DoomInfo.PowerDuration.ps1",
+      "Sha256": "4B91B708C262C94F7C177DE9C9BA47410AE933B04E4D0C5087DAC43F11D550C2"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Info/DoomInfo.QuitMessages.ps1",
+      "Sha256": "C1E438D3CD687E293CDDF86012D79C1BD308A402685B5216832F3100919FB435"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Info/DoomInfo.sb.ps1",
+      "Sha256": "DA1A35B1F34414DF0CB4ED2524EE29211EDC9D3CFC160C10DE2A88B8D3C8096D"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Info/DoomInfo.SfxNames.ps1",
+      "Sha256": "CB567EAB3B8A32180BE6F0844C456C7DC303D8D5C2D097A52C6D02528BF8A44B"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Info/DoomInfo.SpriteNames.ps1",
+      "Sha256": "F3A831B8D520D3507680446AC78E7DBF3DDB25DE917DE14B4EE93D1D03829180"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Info/DoomInfo.States.sb.ps1",
+      "Sha256": "7D1DA78D71177D84B532BB1506625D33E43A43F2E2C651784ABEA0ADA99ABFB4"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Info/DoomInfo.Strings.ps1",
+      "Sha256": "0942500419C45D4ADE3E179257998E19AB57F79B3B30AA133F5B13597B33E752"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Info/DoomInfo.SwitchNames.ps1",
+      "Sha256": "DAF68D17314B0AE6DDBA911F1894F9A548745428181BEB46C0F0095DE6FEED08"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Info/DoomInfo.TextureAnimation.ps1",
+      "Sha256": "68C3713694E091C28516AE93A13633C26F2641FA88520D80F9B1B052DEC63EA4"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Info/DoomInfo.WeaponInfos.ps1",
+      "Sha256": "8E69AD51DAF41302FE708FBC177E21250E2493AF27D9CEB7BEC15BAB250C43BD"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Intermission/Animation.sb.ps1",
+      "Sha256": "2A621CAE1F67EA0F18A8DCDA2D09E711FF5A87929B4A3C29D177F09E91F93C4E"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Intermission/AnimationInfo.ps1",
+      "Sha256": "4C2732727760AE31ED8102A970F3A4CC173AF52FA5DB7896ED492D6F8EFF0EC4"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Intermission/AnimationType.ps1",
+      "Sha256": "6132854B85E7384921AB4DFB92A7456333C814A6D3E9F44CD90CF732BF7DD967"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Intermission/Finale.sb.ps1",
+      "Sha256": "DEF9697137CA6CADD3279146B3F5BD6DE8FEBBC45075E59C2FE9F621682FC6E3"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Intermission/Intermission.sb.ps1",
+      "Sha256": "B175E5570D55D35161098E71821BBA7E5A9F043FBADB91E2F0F7CAA747F30BEF"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Intermission/IntermissionInfo.sb.ps1",
+      "Sha256": "E06E1DCC926A7DE7808B8C984B11F46BC2063147C31DC36AD3D80F782F216A47"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Intermission/IntermissionState.ps1",
+      "Sha256": "A5D6493E079E516578A4A8F1650C42A81E3B8D591927F90FC47C360F964F3944"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Intermission/PlayerScores.sb.ps1",
+      "Sha256": "2533892D72BB7ABF39B847F2CE5DC1DC8FB39CE69066957F60F8869E6A566FFC"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Intermission/WorldMap.ps1",
+      "Sha256": "D44F36841FAF6F2B08800B19C1417F631B2BA90A7E88B584B6165B9F7FE719EE"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Map/BlockMap.sb.ps1",
+      "Sha256": "EF03A6B43D38590138F209B0A1428420E8916EC592A2DAFE7E86F25824511895"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Map/LineDef.sb.ps1",
+      "Sha256": "019850AEAE8F8A5316B3506A67EE0A032D1E5F77DDC97A28D0A84F855B8E6F40"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Map/LineFlags.ps1",
+      "Sha256": "99C69EC5D797E93956E7AC2B2F428DC6C14BAC94C3B5D4A977B251B589502342"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Map/LineSpecial.ps1",
+      "Sha256": "C0F09CABC12DA33FCA1BF312E5A1479B6995072856EC0760630FB432DFE0A23B"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Map/Map.sb.ps1",
+      "Sha256": "0FD1B35983046471382FF98B955AF4001A3D581DAAEB3A61844829C97FFAF98A"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Map/MapThing.ps1",
+      "Sha256": "E4DF2184B408505E0C06D6BAF87FE61DF8176B3CED5F791A2679480800A5EB00"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Map/Node.sb.ps1",
+      "Sha256": "E982BC7744F3255ACC9B85F2AECB90BFECD93F5DFE1019CBA472BA847F06CCB7"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Map/Reject.sb.ps1",
+      "Sha256": "E757CC44795DFDD52270B2E3240D10FDEDB31BA8612657E27D800297D5ED104B"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Map/Sector.sb.ps1",
+      "Sha256": "35B17C2EA7416ACAEB4C9B6BA10FAC3EDD174FD056B85616636BDDB78C5E36EC"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Map/SectorSpecial.ps1",
+      "Sha256": "73E473A40858F083F3E3F78BBACD22058489A013A3DBEF7CE4785145E0508869"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Map/Seg.sb.ps1",
+      "Sha256": "C812AFC3BC75145EEC6B49F0A7B394F6E33E85E89F3F31A64DAD5D36E2A12E15"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Map/SideDef.sb.ps1",
+      "Sha256": "16AD7E7F9ED349AEEB73D4B21665C4FB3677CF86B78C55B4591A353661DFE0E4"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Map/SlopeType.ps1",
+      "Sha256": "F2FAF4751852E338B27FB6C3C0FD50C8C9DBC8D5D8FBFD0E8A4374E4DB34AE32"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Map/Subsector.sb.ps1",
+      "Sha256": "860C74B750CC71D0D2FCEDC8FA304FC501DBF1C8FFDDE6C5C9F3E3E7EA57E6E3"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Map/ThingFlags.ps1",
+      "Sha256": "0C2557C19047C1FB84635E743D5D7314942440EC20C7D7E30975091A93CE713C"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Map/Vertex.ps1",
+      "Sha256": "A140946E1DB27BDEBC32F0614A07D77F685EF12675D164CD4F433AB264DB18F5"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Math/Angle.ps1",
+      "Sha256": "BEC4D182921EC455E2ED3F398F30C58952F454A2586CACBC9FE6C9281C28642A"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Math/Fixed.ps1",
+      "Sha256": "467B07448D5E2E2F823A5B55136C2B77A0715903B032CAC828746FFB21D4B784"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Math/Geometry.sb.ps1",
+      "Sha256": "0C2D64BAF280B20D61C5658BC66E3E3CEE0F19CF88B8B5EF7BDA9AEE50A4324B"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Math/Trig.ps1",
+      "Sha256": "EBD2108E63D47BD99FA2F533A7D8948AA156530317C95523C98452810F2F876E"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Math/Trig.Tables.ps1",
+      "Sha256": "7A93BF92A21EC5313653517DC0E25D161F87135449CD9A3497585DF40E6006A2"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Menu/DoomMenu.sb.ps1",
+      "Sha256": "3BFD724C480CCB0AA5D6065BB1B53837C9E21335B827E73FE1F88B4B9E2BDDA6"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Menu/HelpScreen.sb.ps1",
+      "Sha256": "0CB1661CB05B7B165DF44EA288FD0ECEE098A0D892E0CE79DB64E33C8E40F3B9"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Menu/LoadMenu.sb.ps1",
+      "Sha256": "C5DDB00826C7F3A925F42EE20F68281453A25E8AAEF4389730956221193F23F6"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Menu/MenuDef.ps1",
+      "Sha256": "F97FA53F66A9E841A5B795A7ACC2D763CB201DCDCA532E17FD04F05042B2E03B"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Menu/MenuItem.sb.ps1",
+      "Sha256": "E88342697685284DA782E3A205714D3259F55EDE425B8EA09229EC0C2F59F4F4"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Menu/PressAnyKey.sb.ps1",
+      "Sha256": "A6199E304BEAC231F5A91ABC2032151AE60B292611DF853CEB882BD9111ADE9B"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Menu/QuitConfirm.sb.ps1",
+      "Sha256": "1179774844ADB56718B09EE0CB83A0CB6C442EEF2AF8D4FB656248D2EAE13A5C"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Menu/SaveMenu.sb.ps1",
+      "Sha256": "F6EF17B400CE0324A9BE8CC23DC4C5F70B68A8107C292F5986DEFAC28C58CA3A"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Menu/SaveSlots.ps1",
+      "Sha256": "6B8004782489847451780C182AB5298CEF3960C54867B2F390DE1E5E7DAEDD9A"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Menu/SelectableMenu.ps1",
+      "Sha256": "FEC2BD1A9D05799EBA57189407FE236FE0906D0DDC2094298571E041B8A1E1E9"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Menu/SimpleMenuItem.ps1",
+      "Sha256": "BE818DB234DA902D2248DCA0CB736402AA6548073A2FE605BB1C7FA3974AFFD1"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Menu/SliderMenuItem.sb.ps1",
+      "Sha256": "FBDCAC780F4628DF90AD5C99577194011C24300B7552F62385BFB0BB8CF6F902"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Menu/TextBoxMenuItem.sb.ps1",
+      "Sha256": "B68D4BF65148AAA1A839E7469617BD49195B7361CE0760E67421DC81AC876B11"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Menu/TextInput.ps1",
+      "Sha256": "75D5C245D3B478EE9991849FC26ECAF2C065A8911FA5C69EDDD0969ADA311DC4"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Menu/TextInputState.ps1",
+      "Sha256": "E906FE7456A67690BBD2CFCEBE683B1A5FC65660B94F156DE20675BD1DEC2378"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Menu/ToggleMenuItem.sb.ps1",
+      "Sha256": "B6BE9EC2925D672D75E676767CFBA4B163808E8CA707FEB5D89B79E98CD6CC04"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Menu/YesNoConfirm.ps1",
+      "Sha256": "920A429AE8A7BD49A03F23DB9DD7D18ED45D9CBC28262C4C0EA6D3AE5B38481A"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Opening/DemoPlayback.sb.ps1",
+      "Sha256": "FF474E14169DCD81DF6703C423710DC574665AB81D1B140C5A6DFDCC181F4EE2"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Opening/OpeningSequence.sb.ps1",
+      "Sha256": "07DC48F5084B5D3FE490B361C089A6EE511116C94A66FCE21ECB3F8A5C907C08"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Opening/OpeningSequenceState.ps1",
+      "Sha256": "B367726120BE5FE36BFC893129F481B8E4A2D544F92D6AFB67E0A633AAB64E8E"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Wad/LumpInfo.ps1",
+      "Sha256": "B693548639B3D2E135BD75BF17469D4C49AEFCC93296727D9875E6A7D5B01A37"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Wad/Wad.ps1",
+      "Sha256": "57A0667B9764F7B7176D59AA7E9CCA9CB188A1F8F16A2F6C8B8C3D8961258A8B"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/World/AmmoType.ps1",
+      "Sha256": "1667F8E4CACDE85F1B4D7ACAF1C8A11218B58BDBE7B4D6DEFCA944E785649C65"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/World/AutoMap.sb.ps1",
+      "Sha256": "C885B2DA47C045B40F17F4F0506F561E108AEE7014835B57B36DFD2FAA37FA66"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/World/AutoMapState.ps1",
+      "Sha256": "02D491567290D1A749DFE151EFA9FACA2EC603A65C02BCCAB39687EE867DB1BF"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/World/Box.ps1",
+      "Sha256": "16988950A5704077C57B7DEC3424905DE42EFE09551E6DDBEE593AA9B74645F1"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/World/BoxEx.ps1",
+      "Sha256": "ADEA505A60128C1105DC09F06174EFE95BCD8C8D31536592C32EFD77B6CCC95A"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/World/Button.sb.ps1",
+      "Sha256": "D3E0BF32CC0CE486336184BD19CBF470BD8FD1F95E7EC06885E009BB8B5BDD23"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/World/ButtonPosition.ps1",
+      "Sha256": "0EE993DB18EBA1B2470DF7357E59F9AE12A157709A07382020FD05A6FFD84E6F"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/World/CardType.ps1",
+      "Sha256": "92DB7E2FD073F6961E279FFFAF24D60B69A83B431BAE226ECFED12D9DF74370F"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/World/CeilingMove.sb.ps1",
+      "Sha256": "9BBE5189E29CCBFCB32A02E0F37E3AD28F11970269877C940A135CF442F2BEB6"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/World/CeilingMoveType.ps1",
+      "Sha256": "09188B90C69719C9D9DE4E7A113EBBF28E2293B2544F85F895F28103CCAC3361"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/World/Cheat.sb.ps1",
+      "Sha256": "603DFCDA37BAFA9DC918F172EDC095C3CCC95D10A2C7877335D2F04882445353"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/World/CheatFlags.ps1",
+      "Sha256": "A55D770CE249F6CECC0A14F5DFD5AD19E4B39141AA5F59F2E4069A951BCADE7E"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/World/Direction.ps1",
+      "Sha256": "D8A0D84E2D8D7B87BC2200B1D87E0262C804CD4A52E11C1BC0A3E79712C9674B"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/World/DivLine.sb.ps1",
+      "Sha256": "567137F01DAF594704048B954B90F5AB14FF9AEBB26B5AA4C49E8E304CA4E237"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/World/FireFlicker.sb.ps1",
+      "Sha256": "CF6FACF8469CE1A952F5F1BCB145B9256F6B8D3F767D8CF0CAD6DBAFA9F77F62"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/World/FloorMove.sb.ps1",
+      "Sha256": "5E23D11F17DB8CADE33FF7A35ECF8C6C612D945FA3B18DF60B764DFD7A4D40B3"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/World/FloorMoveType.ps1",
+      "Sha256": "7F2AF493DEB152788198E63D4EFE5D21614EC455A27FA7E3ECF735D0CF4663FB"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/World/GlowingLight.sb.ps1",
+      "Sha256": "13B738DEE308BEAA0FDA145C2C72C8E6E0196A651AB3EF9CDB10429A87840E14"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/World/Hitscan.sb.ps1",
+      "Sha256": "853EFAF9D8086DF4EE13951FE704145E91311759F6D7C0465F3C904695DDF704"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/World/Intercept.sb.ps1",
+      "Sha256": "3D403B044F742BD5D703841EFC4D2CF43A54386719A8CE8A4E3B54BBA81FFA20"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/World/ItemPickup.sb.ps1",
+      "Sha256": "3AD9E1E3EEB4001ECFD3E6EC0253144B64B2AFFF36EC41B38F4FF0D75173E112"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/World/LightFlash.sb.ps1",
+      "Sha256": "CFEC468F23FECF96AD5617DF395B0EE2621789983E37399BF4062A4BA4CB67C3"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/World/LightingChange.sb.ps1",
+      "Sha256": "F3979A9D9AB2ADA2FEAA13973F5570C468A2633095BA62912192A23DEFA8ADE8"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/World/MapCollision.sb.ps1",
+      "Sha256": "F6B6E82301F787D571CA2EB08DD8539C2DFEC517A9E332A9448EA45EBB4544D1"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/World/MapInteraction.sb.ps1",
+      "Sha256": "AF8E936DDD865AF3CF3412F3F41CFBDB9C43FA0F24A7EC1488CF91B8CB726F5D"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/World/Mobj.sb.ps1",
+      "Sha256": "F8227B9ACDBEE52E11BEA308625CB6984C901CE589161DAC684B3E3621DAB3BC"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/World/MobjFlags.ps1",
+      "Sha256": "735CD1E06CE098FBA267D8B1E8C5C71A3A758F56E4801E3612988E3F9E0F6BC4"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/World/MobjInfo.ps1",
+      "Sha256": "0DDB82D81369A4913CA1F2838C6CF8051865F179B12E8CA7C041DAB226DDBE73"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/World/MobjState.ps1",
+      "Sha256": "936DE72039FD73D37B3418750B6B2A399BE80C3640D4540CC7C81CF498FEA863"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/World/MobjStateDef.sb.ps1",
+      "Sha256": "3CE36E51596CEF854BC320BD747BB972693C02D4178C9A0A597C022BF33741D6"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/World/MobjType.ps1",
+      "Sha256": "E16A5154B0EF1808BD3F122DBA3FFA5BD78B74A58B8A69FCC37DEEEEBCFB1A5A"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/World/MonsterBehavior.sb.ps1",
+      "Sha256": "DA09A85670214E260709C8482235736C8812470309F9125AF3F1064A8B7B3782"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/World/PathTraversal.sb.ps1",
+      "Sha256": "0F16AE92CD9057B52AF6C8F712EC724557B2E8701855084B1A05C627C5950F3E"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/World/PathTraverseFlags.ps1",
+      "Sha256": "507E53A8053EA9D98144BE8264D18533B50854625854C7374EAA986B2B03FE54"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/World/Platform.sb.ps1",
+      "Sha256": "FE4BA111EEF147E04026C3630A3D7B66FE06EFCE8BF939D24FE009FC885C16C1"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/World/PlatformState.ps1",
+      "Sha256": "6BB795D07B6549699CD81638E25E9CCC91144C1C85B268867A8D33E644D59F8B"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/World/PlatformType.ps1",
+      "Sha256": "CFC05A33053C644F4A011FB7DE8A0EE668C57D3ECA28654AF22015647DFF278E"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/World/PlayerBehavior.sb.ps1",
+      "Sha256": "4AD1ADD23ECA45890F6A70A573E5C465C1AD3CC4D7367B5E7212213034475F16"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/World/PlayerSprite.ps1",
+      "Sha256": "60DCC56181575377B70E2D9C54DDA8607521302EA696156230D20B4D0E1E1A0C"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/World/PlayerSpriteDef.ps1",
+      "Sha256": "346F064777847B79039D4D5D92E1947EB041FFD2B9332917D8FD10A7DC1CFD6E"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/World/PowerType.ps1",
+      "Sha256": "01F058141A69195CC7F68983649067A9694605458CD7151700771498D2775190"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/World/SectorAction.sb.ps1",
+      "Sha256": "D9739A7B76702FDC7286F432544B09CEFB25D1602832911928D2C62B1077633B"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/World/SectorActionResult.ps1",
+      "Sha256": "B7EADC56206756442CBCE435562A32EF7E8C1F0CB89AD9A77354E42D73C06F88"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/World/Specials.sb.ps1",
+      "Sha256": "3096AA75A966C700B9BE91A000C3FCD728E5A2330D7CE87505BC5D6DA95345FD"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/World/StairType.ps1",
+      "Sha256": "249E4BBEE9910B3E6D3322B66DCD296616719869924FAF107E849781C9919FBC"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/World/StatusBar.sb.ps1",
+      "Sha256": "8B86F7AAD272FFBB1953D4DC8C87BCF1A00A17D890B22D6A520DD9E8DE491F56"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/World/StrobeFlash.sb.ps1",
+      "Sha256": "CEF5F7E4BC0DE9BF393D643766144952BF92F357F614841E4269A622EFE0FEF5"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/World/ThingAllocation.sb.ps1",
+      "Sha256": "1DEDE8B506A7D02A8518EF0207938449DD3D2D50797FEE51925DBB2F494E5677"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/World/ThingInteraction.sb.ps1",
+      "Sha256": "7C87538F52B4D82FB31D13AA3F2CD60902E32DAF5A2BBC2792E412D8B7A2E08C"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/World/ThingMovement.sb.ps1",
+      "Sha256": "BF01655C2FC73235BD27D611CE0A81798252F955FE98F8193CE7CC418AE26B35"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/World/Thinker.ps1",
+      "Sha256": "3DBE0CC413336F5CFD6E46F60B508637B305790C470F8DB6AC2B3CEA965D4E7F"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/World/Thinkers.sb.ps1",
+      "Sha256": "ABDEC459E8AA6CB34742A1DBE0C3D602B6C006257AAB5823B00C1C75D3AAEFFE"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/World/ThinkerState.ps1",
+      "Sha256": "E86C30957EF49D7A7B12C846D7A3EEAD118DA3B6E50E6952C62707C22F9968EB"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/World/VerticalDoor.sb.ps1",
+      "Sha256": "C22D0D60F0AB78722A0C1FDABE903B7C6097CC7DC7F4F17489FCB4599B8AA5DA"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/World/VerticalDoorType.ps1",
+      "Sha256": "352B77216F1903F3FD4F8AE4D4649F2D0DA7FAE927D68B915F56C4E9F58BD306"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/World/VisibilityCheck.sb.ps1",
+      "Sha256": "10AD04E6FB7B46F4795139A989282F9D6E44B4CF441E684DE689EA13311CE374"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/World/WeaponBehavior.sb.ps1",
+      "Sha256": "758F3E8EE119BA02D9F1D63D4FDEFD68360718544CB1320EBF80CE28F8406341"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/World/WeaponInfo.ps1",
+      "Sha256": "272A95E23FC46A06D6396535D61A0330104C0A9BA67626316190BCE9F004B161"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/World/WeaponType.ps1",
+      "Sha256": "2991BE3F3D69A95A0EF62910C949E84DA6DC046C50106A2D93000FE952FC7319"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/World/World.sb.ps1",
+      "Sha256": "7F1E591D6A99CB68195AEF4CAB88DF73A442EAE6B722870100B766F3E8B894ED"
+    },
+    {
+      "Path": "src/ManagedDoom/UserInput/DoomKey.ps1",
+      "Sha256": "DDAA355FA1BBF0631600F9F2143AA8DF9E0CE4324FD54B7E40CAAE3D6C0234B4"
+    },
+    {
+      "Path": "src/ManagedDoom/UserInput/DoomMouseButton.ps1",
+      "Sha256": "66C89C273B8D20337108A108A44DDF5A4B703734DDBFCE5DB83FA630E15FA030"
+    },
+    {
+      "Path": "src/ManagedDoom/UserInput/IUserInput.ps1",
+      "Sha256": "A2A320A20E69A93470C16D3024D382D97934D6368449C0C01C72BA70CC3D2DAA"
+    },
+    {
+      "Path": "src/ManagedDoom/UserInput/KeyBinding.ps1",
+      "Sha256": "F8ABCB79A03F832653A53631627108C3813BA960E211753A0A642BBCD3FC1211"
+    },
+    {
+      "Path": "src/ManagedDoom/UserInput/NullUserInput.ps1",
+      "Sha256": "FFB16D54FAD9D4FA00C547FB18ED2673D65BEC4661CD0EA50FAFC80634088700"
+    },
+    {
+      "Path": "src/ManagedDoom/Video/AutoMapRenderer.sb.ps1",
+      "Sha256": "D417C3F78E69C11F1EDA05C49847FCA6BEF92776361F957986E20A9E08A8DB76"
+    },
+    {
+      "Path": "src/ManagedDoom/Video/DrawScreen.sb.ps1",
+      "Sha256": "F8D4ECDDB7652997F1A1A36375621677AB2BD62D5AE0F84B0B2E3D03BF551937"
+    },
+    {
+      "Path": "src/ManagedDoom/Video/FinaleRenderer.sb.ps1",
+      "Sha256": "B97BBE4B4665EB9A22877B47C4DA7F14F5BF3EB1EEAF0FCC9CC637E78B0D7EA7"
+    },
+    {
+      "Path": "src/ManagedDoom/Video/IntermissionRenderer.sb.ps1",
+      "Sha256": "C1A6186F815F09A030D6EE2AE5529475F9906F6C8FAA381F41AE50B02E8B3B78"
+    },
+    {
+      "Path": "src/ManagedDoom/Video/IVideo.sb.ps1",
+      "Sha256": "62F442E4FA86735CAC1427C601AC0EF88F8516A65891F0B87D89B881A3EC73F9"
+    },
+    {
+      "Path": "src/ManagedDoom/Video/MenuRenderer.sb.ps1",
+      "Sha256": "62464A6FE574981DB703277255149AFDA3AF554670F58B5E1064504DF7BB6DF4"
+    },
+    {
+      "Path": "src/ManagedDoom/Video/NullVideo.sb.ps1",
+      "Sha256": "2F04AD7FFD0CB3C0DD110442C60E371A7286C808B212BEAB26D5CD8BA3FD196F"
+    },
+    {
+      "Path": "src/ManagedDoom/Video/OpeningSequenceRenderer.sb.ps1",
+      "Sha256": "55851024370BF016774F0F85A452D47E19F770E1055DD48791495502EA0EF984"
+    },
+    {
+      "Path": "src/ManagedDoom/Video/Renderer.sb.ps1",
+      "Sha256": "9A6D365AAC7430644810E49474FFFB23583A99270FC58B49F81D0458DFD8B6D0"
+    },
+    {
+      "Path": "src/ManagedDoom/Video/StatusBarRenderer.sb.ps1",
+      "Sha256": "0C3F62880E92594732A2E187AD445282C4D57097F7A70706A464738498A35103"
+    },
+    {
+      "Path": "src/ManagedDoom/Video/ThreeDRenderer.sb.ps1",
+      "Sha256": "B686C3252C5C21A61A389D4BF532FA64333799CEE56D6B4823FC4F703BD6E4B8"
+    },
+    {
+      "Path": "src/ManagedDoom/Video/WipeEffect.ps1",
+      "Sha256": "631760D1DC226A6BD816DE87E8DDCC5712016A4DDD24F1F076A1BB69A8E724A6"
+    },
+    {
+      "Path": "src/RenderAssets.ps1",
+      "Sha256": "6DE76C2484E28CC81C37077CFAC6B2A4B0AE9EC7EADDD4979C4A91E2A0AF4049"
+    },
+    {
+      "Path": "src/SessionMenu.ps1",
+      "Sha256": "34A75305CE54E99CF1B91984B38CF5A1C861AFB7A13C774BF2148904F8DDDC83"
+    },
+    {
+      "Path": "src/SessionScreens.ps1",
+      "Sha256": "5012AEDCFE6B805BD4745C675CE1D14956F332AEB7D61553C9D73E005569C9E0"
+    },
+    {
+      "Path": "src/SimulationProcess.ps1",
+      "Sha256": "DD138AD3D4926EDC24892250EFA14336AD976FB1E80606D5931881B5019A38CE"
+    },
+    {
+      "Path": "src/SnapshotTransport.ps1",
+      "Sha256": "3BB8BCAB4462452647EC8E5881C387EE31BB7587FB755C11C5B0A14DC4580A28"
+    },
+    {
+      "Path": "src/TerminalCodec.ps1",
+      "Sha256": "B335BBC854C4CBC6030630A2AA3DE57CE9393B1C5C2508180D5534CB67E25438"
+    },
+    {
+      "Path": "src/Viewport.ps1",
+      "Sha256": "533815BF5984BD1C3033BFE21879A0B02ED0E419E7C52FB06F411B8C0FB1DAF6"
+    },
+    {
+      "Path": "Start-Doom.ps1",
+      "Sha256": "9E0B15505D84B9543995FC74406AC7F833E630A1BE63D82FE51858D220E5EB09"
+    }
+  ],
+  "Meaning": "Menu/runtime/capture sources after recorded small-text readability correction; earlier source manifests retained.",
+  "CreatedUtc": "2026-09-11T13:45:02.4555950Z"
+}

@@ -6,6 +6,7 @@ $ErrorActionPreference='Stop'
 . "$PSScriptRoot/../src/RenderAssets.ps1";. "$PSScriptRoot/../src/SnapshotTransport.ps1"
 . "$PSScriptRoot/../src/SessionScreens.ps1"
 . "$PSScriptRoot/../src/InputReplay.ps1"
+. "$PSScriptRoot/../src/SessionMenu.ps1"
 $channelMap=[IO.MemoryMappedFiles.MemoryMappedFile]::OpenExisting($Channel);$view=$channelMap.CreateViewAccessor()
 $ready=[Threading.EventWaitHandle]::OpenExisting($Channel+'-ready');$go=[Threading.EventWaitHandle]::OpenExisting($Channel+'-go')
 $content=$null;$game=$null;$tick=0;$version=0;$slot=0;$failure=$null;$outcome='Stopped'
@@ -13,8 +14,11 @@ $tickTimes=[Collections.Generic.List[double]]::new();$snapshotTimes=[Collections
 $commandLog=[Collections.Generic.List[object]]::new()
 $transitions=[Collections.Generic.List[object]]::new();$uiTimes=[Collections.Generic.List[double]]::new();$generation=1;$screens=$null
 $checkpoints=[Collections.Generic.List[object]]::new();$checkpointTimes=[Collections.Generic.List[double]]::new();$extraCheckpoints=@{}
+$menuGraphics=$null;$menuPixels=$null;$menuScreen=0;$menuRevision=0;$episodeCount=4;$controlLog=[Collections.Generic.List[object]]::new()
 function Record-ReplayCheckpoint {
-    if(-not $ReplayCheckpoints -or ($checkpoints.Count -gt 0 -and $checkpoints[-1].Tic -eq $script:tick)){return}
+    param([switch]$Replace)
+    if(-not $ReplayCheckpoints){return}
+    if($checkpoints.Count -gt 0 -and $checkpoints[-1].Tic -eq $script:tick){if(-not $Replace){return};$checkpoints.RemoveAt($checkpoints.Count-1)}
     $watch=[Diagnostics.Stopwatch]::StartNew();$checkpoints.Add((Get-DoomReplayCheckpoint $game $script:tick));$checkpointTimes.Add($watch.Elapsed.TotalMilliseconds)
 }
 function Record-SimulationTransition {
@@ -24,7 +28,9 @@ function Record-SimulationTransition {
 }
 function Publish-SimulationSnapshot {
     $state=if($StopAtLevelEnd){0}else{[int]$game.State}
-    if($state -eq 0){
+    $screenKind=if($null -ne $script:menuPixels){2}elseif($state -ne 0){1}else{0}
+    if($screenKind -eq 2){$current=$script:menuPixels;$old=$current}
+    elseif($state -eq 0){
         $old=ConvertTo-GameSnapshotBytes (New-GameRenderSnapshot $game 0)
         $current=ConvertTo-GameSnapshotBytes (New-GameRenderSnapshot $game 1)
     }else{
@@ -38,8 +44,18 @@ function Publish-SimulationSnapshot {
     $view.Write($base+4,$old.Length);$view.Write($base+8,$script:tick)
     $view.Write($base+12,$script:generation);$view.Write($base+16,[int]$state);$view.Write($base+20,[int]$game.Options.Episode);$view.Write($base+24,[int]$game.Options.Map)
     $view.Write($base+28,[int]$game.World.ConsolePlayer.Health);$view.Write($base+32,[int]$game.World.ConsolePlayer.KillCount)
+    $view.Write($base+36,[int]$screenKind);$view.Write($base+40,[int]$script:menuRevision);$view.Write($base+44,[int]$script:menuScreen)
     $view.WriteArray($base+64,$old,0,$old.Length);$view.WriteArray($base+64+$old.Length,$current,0,$current.Length)
     [Threading.Thread]::MemoryBarrier();$view.Write($base,$script:version);$view.Write(16,$script:slot);$view.Write(20,$script:tick)
+}
+function Publish-SimulationMapChange {
+    $view.Write(12,5);$script:generation++
+    $context=New-FastRenderContext $content $game.World;Write-GameRenderAssets $context $palette $Assets
+    Record-SimulationTransition;Record-ReplayCheckpoint -Replace
+    $publishWatch=[Diagnostics.Stopwatch]::StartNew();Publish-SimulationSnapshot;$snapshotTimes.Add($publishWatch.Elapsed.TotalMilliseconds)
+    $view.Write(24,$script:generation);[Threading.Thread]::MemoryBarrier();$view.Write(12,4)
+    while($view.ReadInt32(28) -ne $script:generation -and $view.ReadInt32(4) -eq 0){[void]$go.WaitOne(1000);if($owner.HasExited){$script:outcome='OwnerExited';break}}
+    if($script:outcome -ne 'OwnerExited'){$view.Write(12,1)}
 }
 try {
     $owner=[Diagnostics.Process]::GetProcessById($OwnerPid)
@@ -47,6 +63,7 @@ try {
     $bundle=& "$PSScriptRoot/Build-EngineBundle.ps1";. $bundle
     $null=[DoomInfo]::SwitchNames;$content=[GameContent]::new(@('-iwad',$Wad));$options=[GameOptions]::new()
     $options.GameMode=$content.Wad.GameMode;$options.GameVersion=$content.Wad.GameVersion;$options.MissionPack=$content.Wad.MissionPack
+    $episodeCount=if($options.GameMode -in [GameMode]::Shareware,[GameMode]::Commercial){1}elseif($options.GameMode -eq [GameMode]::Retail){4}else{3};$view.Write(80,[int]$episodeCount)
     $game=[DoomGame]::new($content,$options);$commands=[TicCmd[]]::new(4)
     for($i=0;$i -lt 4;$i++){$commands[$i]=[TicCmd]::new()}
     $game.DeferedInitNew([GameSkill]($Skill-1),$Episode,$Map);$null=$game.Update($commands)
@@ -60,6 +77,31 @@ try {
     Record-ReplayCheckpoint
     Publish-SimulationSnapshot;$view.Write(12,1);[void]$ready.Set()
     while($view.ReadInt32(4) -eq 0) {
+        $request=$view.ReadInt32(48)
+        if($request -ne $view.ReadInt32(52) -and $tick -ge $view.ReadInt32(76)){
+            if($tick -ne $view.ReadInt32(76)){throw 'Session action crossed its command boundary.'}
+            $kind=$view.ReadInt32(56);$menuRevision=$request
+            if($kind -eq 1){
+                $menuScreen=$view.ReadInt32(60);$choice=$view.ReadInt32(64);$selectedEpisode=$view.ReadInt32(68);$selectedSkill=$view.ReadInt32(72)
+                if($menuScreen -lt 0 -or $menuScreen -gt 7 -or $choice -lt 0 -or $choice -gt 4){throw 'Invalid menu request.'}
+                if($menuScreen -eq 0){$menuPixels=$null;$options.Sound.Resume()}
+                else{
+                    $options.Sound.Pause()
+                    if($null -eq $menuGraphics){$menuGraphics=New-DoomMenuGraphics $content}
+                    $menuPixels=Get-DoomMenuPixels $menuGraphics $menuScreen $choice $selectedEpisode $selectedSkill $episodeCount
+                }
+                Publish-SimulationSnapshot
+            }elseif($kind -eq 2){
+                $newSkill=$view.ReadInt32(60);$newEpisode=$view.ReadInt32(64);$newMap=$view.ReadInt32(68)
+                if($newSkill -lt 1 -or $newSkill -gt 5 -or $newEpisode -lt 1 -or $newEpisode -gt $episodeCount -or $newMap -ne 1){throw 'Invalid new-game selection.'}
+                $menuScreen=0;$menuPixels=$null;$game.Paused=$false;foreach($cmd in $commands){$cmd.Clear()}
+                $game.DeferedInitNew([GameSkill]($newSkill-1),$newEpisode,$newMap);$null=$game.Update($commands)
+                $controlLog.Add(@{Tic=$tick;Action='NewGame';Skill=$newSkill;Episode=$newEpisode;Map=$newMap})
+                Publish-SimulationMapChange
+            }else{throw 'Unknown session action.'}
+            [Threading.Thread]::MemoryBarrier();$view.Write(52,$request)
+            if($outcome -eq 'OwnerExited'){break};continue
+        }
         if($tick -ge $view.ReadInt32(0)){[void]$go.WaitOne(1000);if($owner.HasExited){$outcome='OwnerExited';break};continue}
         [long]$offset=4096+($tick%1024)*16
         $cmd=$commands[0];$cmd.Clear();$cmd.ForwardMove=$view.ReadInt32($offset);$cmd.SideMove=$view.ReadInt32($offset+4);$cmd.AngleTurn=$view.ReadInt32($offset+8);$cmd.Buttons=$view.ReadInt32($offset+12)
@@ -70,18 +112,11 @@ try {
         $watch=[Diagnostics.Stopwatch]::StartNew();$null=$game.Update($commands);$tickTimes.Add($watch.Elapsed.TotalMilliseconds);$tick++
         $mapChanged=-not [object]::ReferenceEquals($priorWorld,$game.World)
         if($mapChanged){
-            # Block further simulation commands until the host has drained old jobs
-            # and every persistent renderer has loaded this generation's assets.
-            $view.Write(12,5);$generation++
-            $context=New-FastRenderContext $content $game.World;Write-GameRenderAssets $context $palette $Assets
-        }
-        if($mapChanged -or $game.State -ne $priorState){Record-SimulationTransition}
-        if($tick%350 -eq 0 -or $mapChanged -or $game.State -ne $priorState -or $extraCheckpoints.ContainsKey($tick)){Record-ReplayCheckpoint}
-        $watch.Restart();Publish-SimulationSnapshot;$snapshotTimes.Add($watch.Elapsed.TotalMilliseconds)
-        if($mapChanged){
-            $view.Write(24,$generation);[Threading.Thread]::MemoryBarrier();$view.Write(12,4)
-            while($view.ReadInt32(28) -ne $generation -and $view.ReadInt32(4) -eq 0){[void]$go.WaitOne(1000);if($owner.HasExited){$outcome='OwnerExited';break}}
-            if($outcome -eq 'OwnerExited'){break};$view.Write(12,1)
+            Publish-SimulationMapChange;if($outcome -eq 'OwnerExited'){break}
+        }else{
+            if($game.State -ne $priorState){Record-SimulationTransition}
+            if($tick%350 -eq 0 -or $game.State -ne $priorState -or $extraCheckpoints.ContainsKey($tick)){Record-ReplayCheckpoint}
+            $watch.Restart();Publish-SimulationSnapshot;$snapshotTimes.Add($watch.Elapsed.TotalMilliseconds)
         }
         if($StopAtLevelEnd -and $game.State -ne [GameState]::Level){$outcome='LevelComplete';$view.Write(12,2);break}
     }
@@ -90,6 +125,7 @@ finally {
     if($null -ne $game -and $null -ne $game.World -and -not $failure){try{Record-ReplayCheckpoint}catch{$failure=$_.ToString();$outcome='Error'}}
     @{FinishedUtc=[DateTime]::UtcNow.ToString('o');Outcome=$outcome;Error=$failure;Tics=$tick;WarmupTics=140;Skill=$Skill;Episode=$Episode;Map=$Map;
         ReplayCheckpoints=$checkpoints.ToArray();ReplayCheckpointMs=(Get-SampleStats $checkpointTimes.ToArray());ReplayCheckpointSamplesMs=$checkpointTimes.ToArray();
+        ControlEvents=$controlLog.ToArray();MenuScreen=$menuScreen;MenuRevision=$menuRevision;
         StopAtLevelEnd=[bool]$StopAtLevelEnd;Transitions=$transitions.ToArray();FinalGeneration=$generation;SessionScreenMs=(Get-SampleStats $uiTimes.ToArray());SessionScreenSamplesMs=$uiTimes.ToArray();
         SimulationMs=(Get-SampleStats $tickTimes.ToArray());SnapshotPublishMs=(Get-SampleStats $snapshotTimes.ToArray());TickLatenessMs=(Get-SampleStats $lateness.ToArray());
         SimulationSamplesMs=$tickTimes.ToArray();SnapshotSamplesMs=$snapshotTimes.ToArray();TickLatenessSamplesMs=$lateness.ToArray();InputCommands=$commandLog.ToArray();

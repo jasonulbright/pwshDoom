@@ -1,5 +1,23 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 # PowerShell image-to-character encoding. Source pixels are never modified.
+function ConvertTo-MenuStrip {
+    param([byte[]]$Pixels,[int]$Width,[int]$Height,[int]$FirstColumn,[int]$EndColumn,[hashtable]$Context,
+        [ValidateRange(0,32767)][int]$ColumnOffset=0,[ValidateRange(0,32767)][int]$RowOffset=0)
+    if($Width -lt 2 -or $Height -lt 4 -or $Pixels.Length -ne $Width*$Height -or $Width%2 -or $Height%4 -or $FirstColumn%2 -or $EndColumn%2 -or $FirstColumn -lt 0 -or $EndColumn -gt $Width -or $FirstColumn -ge $EndColumn){throw 'Menu strip dimensions are invalid.'}
+    # Brightest of each 2x2 source region preserves thin menu text on black.
+    # Each output cell still carries two independent palette colors.
+    $chunks=[Collections.Generic.List[string]]::new();$esc=[char]27;[int[]]$luma=$Context.Luma;[string[]]$cells=$Context.Hud.Cells
+    for($y=0;$y -lt $Height;$y+=4){
+        $chunks.Add("$esc[$($y/4+1+$RowOffset);$($FirstColumn/2+1+$ColumnOffset)H")
+        for($x=$FirstColumn;$x -lt $EndColumn;$x+=2){
+            $offset=$y*$Width+$x;$top=[int]$Pixels[$offset];$bottom=[int]$Pixels[$offset+2*$Width]
+            foreach($index in @(($offset+1),($offset+$Width),($offset+$Width+1))){if($luma[$Pixels[$index]] -gt $luma[$top]){$top=$Pixels[$index]}}
+            foreach($index in @(($offset+2*$Width+1),($offset+3*$Width),($offset+3*$Width+1))){if($luma[$Pixels[$index]] -gt $luma[$bottom]){$bottom=$Pixels[$index]}}
+            $chunks.Add($cells[$top*256+$bottom])
+        }
+    }
+    return ,([Text.Encoding]::UTF8.GetBytes([string]::Concat($chunks)))
+}
 function Get-CharacterAlphabet {
     param([ValidateSet('Ascii','Katakana')][string]$GlyphSet='Ascii')
     if($GlyphSet -eq 'Katakana'){

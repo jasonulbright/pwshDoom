@@ -7,7 +7,7 @@ param([string]$Wad,[ValidateRange(1,32)][int]$Workers=16,[ValidateRange(1,5)][in
     [ValidateRange(4,24)][int]$FontSize=6,[switch]$Maximized,[switch]$Diagnostics,
     [ValidateSet('Classic','AnsiArt','Matrix')][string]$Style='Classic',
     [ValidateSet('Ascii','Katakana')][string]$GlyphSet='Katakana',[string]$FontFace,
-    [ValidateRange(0,30)][int]$ExitDelaySeconds=0,
+    [ValidateRange(0,30)][int]$ExitDelaySeconds=0,[string]$SessionSchedule,
     [string]$Report="$PSScriptRoot/local/game-session.json")
 $ErrorActionPreference='Stop'
 if($Style -ne 'Classic' -and -not $PSBoundParameters.ContainsKey('FontSize')){$FontSize=12}
@@ -29,6 +29,7 @@ if($Replay){
 if($RecordInput -and (Test-Path -LiteralPath $RecordInput)){throw 'Input recording destination already exists; choose a new filename.'}
 $arguments=@('-Wad',$Wad,'-Workers',"$Workers",'-Skill',"$Skill",'-Episode',"$Episode",'-Map',"$Map",'-Seconds',"$Seconds",'-Style',$Style,'-GlyphSet',$GlyphSet,'-Report',[IO.Path]::GetFullPath($Report))
 if($RecordInput){$arguments+=@('-RecordInput',[IO.Path]::GetFullPath($RecordInput))}
+if($SessionSchedule){$arguments+=@('-SessionSchedule',(Resolve-Path -LiteralPath $SessionSchedule).Path)}
 if($Scripted){$arguments+='-Scripted'}
 if($Diagnostics){$arguments+='-Diagnostics'}
 if($ExitDelaySeconds -gt 0){$arguments+=@('-ExitDelaySeconds',"$ExitDelaySeconds")}

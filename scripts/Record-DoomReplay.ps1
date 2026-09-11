@@ -8,10 +8,11 @@ param([ValidateSet('Classic','AnsiArt','Matrix')][string]$Style='Matrix',
     [string]$OutputPrefix="$PSScriptRoot/../local/recordings/matrix-katakana",
     [string]$Ffmpeg,[ValidateRange(1,90)][int]$Seconds=90,
     [ValidateRange(60,240)][int]$CaptureLimit=240,
-    [ValidateRange(4,24)][int]$FontSize=12,[string]$FontFace,[switch]$Maximized)
+    [ValidateRange(4,24)][int]$FontSize=12,[string]$FontFace,[switch]$Maximized,
+    [string]$SessionSchedule,[switch]$RecordInput,[ValidateSet('ReplayEnd','LevelComplete','ConfirmedQuit','Duration')][string]$ExpectedExit)
 $ErrorActionPreference='Stop'
 $replayInfo=Get-Content -LiteralPath $Replay -Raw | ConvertFrom-Json
-$expectedExit=if($replayInfo.ContinueCampaign){'ReplayEnd'}else{'LevelComplete'}
+$expectedEnding=if($ExpectedExit){$ExpectedExit}elseif($replayInfo.ContinueCampaign){'ReplayEnd'}else{'LevelComplete'}
 if(-not $Ffmpeg){
     $found=@(Get-ChildItem "$PSScriptRoot/../local/tools/ffmpeg" -Recurse -Filter ffmpeg.exe -File -ErrorAction SilentlyContinue)
     if($found.Count -ne 1){throw 'Pass -Ffmpeg with the path to a local FFmpeg build supporting gfxcapture and h264_nvenc.'}
@@ -22,10 +23,14 @@ if($Style -eq 'Classic' -and -not $PSBoundParameters.ContainsKey('FontSize')){$F
 if(@(Get-Process WindowsTerminal -ErrorAction SilentlyContinue).Count){throw 'This capture requires an isolated Terminal process. Existing Terminal windows were left untouched.'}
 $prefix=[IO.Path]::GetFullPath($OutputPrefix);$gamePath=$prefix+'-game.json';$videoPath=$prefix+'.mp4'
 foreach($path in @($gamePath,$videoPath,$prefix+'-recording.json')){if(Test-Path -LiteralPath $path){throw 'Choose a fresh output prefix; recordings are never overwritten.'}}
+if($RecordInput -and (Test-Path -LiteralPath ($prefix+'-input.json'))){throw 'Input recording already exists.'}
 [void][IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName($prefix))
 $recorder=$null;$target=$null;$failure=$null;$captureQpc=$null;$exitCode=$null;$stderr='';$game=$null
 try {
-    & "$PSScriptRoot/../Start-Doom.ps1" -Wad $Wad -Replay $Replay -Style $Style -GlyphSet $GlyphSet -Seconds $Seconds -FontSize $FontSize -FontFace $FontFace -Maximized:$Maximized -ExitDelaySeconds 3 -Report $gamePath
+    $launch=@{Wad=$Wad;Replay=$Replay;Style=$Style;GlyphSet=$GlyphSet;Seconds=$Seconds;FontSize=$FontSize;FontFace=$FontFace;Maximized=$Maximized;ExitDelaySeconds=3;Report=$gamePath}
+    if($SessionSchedule){$launch.SessionSchedule=$SessionSchedule}
+    if($RecordInput){$launch.RecordInput=$prefix+'-input.json'}
+    & "$PSScriptRoot/../Start-Doom.ps1" @launch
     $watch=[Diagnostics.Stopwatch]::StartNew()
     while($null -eq $target){
         $candidates=@(Get-Process WindowsTerminal -ErrorAction SilentlyContinue | Where-Object {$_.MainWindowHandle -ne 0 -and $_.MainWindowTitle -eq 'pwshDoom'})
@@ -50,8 +55,8 @@ try {
         Start-Sleep -Milliseconds 100
     }
     $game=Get-Content -LiteralPath $gamePath -Raw | ConvertFrom-Json
-    if($game.Error){throw "Game failed: $($game.Error)"}
-    if($Seconds -eq 90 -and $game.ExitReason -ne $expectedExit){throw "The full replay did not reach its expected ending: $expectedExit."}
+    if($game.Error -or $game.InputRecordingError){throw "Game/recording failed: $($game.Error) $($game.InputRecordingError)"}
+    if(($Seconds -eq 90 -or $ExpectedExit) -and $game.ExitReason -ne $expectedEnding){throw "The replay did not reach its expected ending: $expectedEnding."}
     if($Seconds -eq 90 -and $replayInfo.ContinueCampaign){
         if($game.SimulationTics -ne $replayInfo.InputCommands.Count){throw 'The recorded session did not consume every replay command.'}
         $expectedTransitions=@($replayInfo.Transitions | Select-Object -Skip 1)
@@ -72,7 +77,8 @@ finally {
         $stderr=$stderrTask.Result;$exitCode=$recorder.ExitCode;$recorder.Dispose()
     }
     $stderr | Set-Content -LiteralPath ($prefix+'-ffmpeg.log')
-    @{FinishedUtc=[DateTime]::UtcNow.ToString('o');Error=$failure;Style=$Style;GlyphSet=$GlyphSet;FontFace=$FontFace;FontSize=$FontSize;Maximized=[bool]$Maximized;CaptureLimit=$CaptureLimit;VideoFps=60;ExpectedExit=$expectedExit;ReplaySha256=(Get-FileHash -LiteralPath $Replay).Hash;
+    @{FinishedUtc=[DateTime]::UtcNow.ToString('o');Error=$failure;Style=$Style;GlyphSet=$GlyphSet;FontFace=$FontFace;FontSize=$FontSize;Maximized=[bool]$Maximized;CaptureLimit=$CaptureLimit;VideoFps=60;ExpectedExit=$expectedEnding;ReplaySha256=(Get-FileHash -LiteralPath $Replay).Hash;
+        SessionScheduleSha256=if($SessionSchedule){(Get-FileHash -LiteralPath $SessionSchedule).Hash}else{$null};InputReplaySha256=if($RecordInput -and (Test-Path -LiteralPath ($prefix+'-input.json'))){(Get-FileHash -LiteralPath ($prefix+'-input.json')).Hash}else{$null};
         TerminalPid=if($null -ne $target){$target.Id}else{$null};WindowHandle=if($null -ne $target){$target.MainWindowHandle.ToInt64()}else{$null};
         CaptureStartQpc=$captureQpc;QpcFrequency=[Diagnostics.Stopwatch]::Frequency;EncoderExitCode=$exitCode;
         Ffmpeg=$Ffmpeg;FfmpegSha256=(Get-FileHash -LiteralPath $Ffmpeg).Hash;Arguments=$arguments;

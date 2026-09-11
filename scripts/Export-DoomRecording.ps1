@@ -11,7 +11,7 @@ $prefix=[IO.Path]::GetFullPath($InputPrefix);$output=[IO.Path]::GetFullPath($Out
 if(Test-Path -LiteralPath $output){throw 'Use a new output path; the original capture is retained.'}
 $recording=Get-Content -LiteralPath ($prefix+'-recording.json') -Raw | ConvertFrom-Json
 $game=Get-Content -LiteralPath ($prefix+'-game.json') -Raw | ConvertFrom-Json
-if($recording.Error -or $recording.EncoderExitCode -ne 0 -or $game.Error -or $game.ExitReason -notin 'LevelComplete','ReplayEnd'){throw 'A successful full replay recording is required.'}
+if($recording.Error -or $recording.EncoderExitCode -ne 0 -or $game.Error -or $game.ExitReason -notin 'LevelComplete','ReplayEnd','ConfirmedQuit','Duration'){throw 'A successful game recording is required.'}
 if($game.ViewportChanges.Count -ne 1 -or $game.ViewportPauseCount -ne 0){throw 'The window changed during capture; inspect it before choosing a crop.'}
 if((Get-FileHash -LiteralPath $recording.Video).Hash -ne $recording.VideoSha256){throw 'Original recording hash changed.'}
 function Invoke-RecordingTool {
@@ -41,9 +41,10 @@ foreach($line in ($scan.Err -split '\r?\n')){
         if([double]$Matches[1]-$minimum -gt 40){$times.Add($time)}
     }
 }
-if($times.Count -lt 300){throw 'Too few visible gameplay samples; inspect the recording/crop.'}
-$start=[Math]::Max(0,$times[0]-.1);$end=[Math]::Min([double]$sourceInfo.format.duration,$times[-1]+.2);$duration=$end-$start
 $recordedGameDuration=if($game.WallDurationSeconds){$game.WallDurationSeconds}else{$game.DurationSeconds}
+$minimumSamples=[Math]::Max(5,[Math]::Min(300,[Math]::Floor($recordedGameDuration*10*.8)))
+if($times.Count -lt $minimumSamples){throw 'Too few visible game/menu samples; inspect the recording/crop.'}
+$start=[Math]::Max(0,$times[0]-.1);$end=[Math]::Min([double]$sourceInfo.format.duration,$times[-1]+.2);$duration=$end-$start
 if([Math]::Abs($duration-$recordedGameDuration) -gt 1.0){throw 'Detected gameplay duration does not agree with the game wall-clock report; inspect before exporting.'}
 $exportArguments=@('-hide_banner','-n','-ss',$start.ToString('F3',[Globalization.CultureInfo]::InvariantCulture),'-i',$recording.Video,
     '-t',$duration.ToString('F3',[Globalization.CultureInfo]::InvariantCulture),'-an','-vf',$crop,'-c:v','libx264','-threads','4','-preset','medium','-crf','16','-pix_fmt','yuv420p','-movflags','+faststart',$output)

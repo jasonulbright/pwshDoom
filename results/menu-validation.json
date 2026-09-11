@@ -1,0 +1,220 @@
+{
+  "HistoricalRegression": {
+    "NaturalCommands": 1747,
+    "NewGameMatchedCheckpoints": 3,
+    "Meaning": "Earlier menu-build results remain valid historical evidence; later changes enlarge menu text, reject negative control tics and redraw restored static menus. No gameplay algorithm changed.",
+    "NaturalMatchedCheckpoints": 8,
+    "NewGameCommands": 199
+  },
+  "ParsedFiles": 74,
+  "FinalRecordedReplay": {
+    "SourceMatched": true,
+    "MatchedCheckpoints": 3,
+    "Commands": 122
+  },
+  "SourceHashesVerified": 226,
+  "Meaning": "Source/syntax, result, video-hash and process audit after functional tests and sampled live-video review. No physical-keyboard, campaign-wide, audio or unique displayed-FPS qualification.",
+  "VerifiedVideoHashes": 6,
+  "MenuFixtures": 19,
+  "SourceFingerprint": "1A81F26C0659E22B33D4FE06F02326325C49982C10C26FCC049F0A8F203A73A2",
+  "RestoredMenu": {
+    "OriginalMenuFrames": 1,
+    "CorrectedMenuFrames": 2,
+    "PausedTic": 34,
+    "FrameGapSeconds": 1.2552443,
+    "Commands": 139,
+    "IdenticalPausedRevision": true
+  },
+  "WorkerStripComparisons": 63.0,
+  "FinishedUtc": "2026-09-11T13:53:14.3672130Z",
+  "RecordedCompletedTests": 3,
+  "RemainingOwnedProcesses": 0,
+  "WorkerPixelsCompared": 576000.0,
+  "NativeKeyChecks": 8,
+  "Inputs": [
+    {
+      "Sha256": "70798EE9AFF5D1254C1358EE2319DE571FF67D03A913A05DC0ED0ED4BFCFB231",
+      "Path": "results/menu-character-codec.json"
+    },
+    {
+      "Sha256": "902A89B2E933ED46A2A6410E0C2048BBF23E83468A6CA2079773D20CF123F1EC",
+      "Path": "results/menu-control-replay-game.json"
+    },
+    {
+      "Sha256": "BB3C0A4F8C04A060E1DB7E7C4138811825D3E1DCA180499DFA0C4CF3DEC2F57F",
+      "Path": "results/menu-demo-schedule.json"
+    },
+    {
+      "Sha256": "618C096660C41A360600A9194F4FDBFADD4D62FCD9BD7B47B617CE1052D9AFC6",
+      "Path": "results/menu-ffmpeg-crash-events.json"
+    },
+    {
+      "Sha256": "49118B64FBBCA3979DB77264AD9D248897857F202F671582891FCD7A726302EF",
+      "Path": "results/menu-final-sources.json"
+    },
+    {
+      "Sha256": "616B5069B41710468557B47E67FB606EBAE239604502229C4316CAEE7C190D70",
+      "Path": "results/menu-input-before.json"
+    },
+    {
+      "Sha256": "DA64158DC0436D56F2EA259867BCF39758AA18A983A36A72910CAF7A80B29C32",
+      "Path": "results/menu-input-fixed.json"
+    },
+    {
+      "Sha256": "577ABA20CB268243AF3762B346B3D4948A38990B828C7AA4DD453C5F0BE98B2A",
+      "Path": "results/menu-natural-progression-game.json"
+    },
+    {
+      "Sha256": "A9F654A5BC37F17D735115F926DFA9C6AE95D454A2D5A20237DAB756C3601759",
+      "Path": "results/menu-probe-fixed-game.json"
+    },
+    {
+      "Sha256": "BED224C9CE1DA05D10A9FC79D9A226A26E1182BC1FAB6D27E8CAF8E6618E096D",
+      "Path": "results/menu-probe-game.json"
+    },
+    {
+      "Sha256": "3B75E6AE42F74E6BEB7BD53C170D71C48E9B4C09C400835EFDE46146423DCB88",
+      "Path": "results/menu-readable-classic-game.json"
+    },
+    {
+      "Sha256": "6BA76876C66C7F351DF84044E80A59F2D2A1B66E2025E9AB2C1DD09523CDCFFF",
+      "Path": "results/menu-readable-classic-input.json"
+    },
+    {
+      "Sha256": "FCC2FE612C921EF3F16F861C615164A43BC56F2026F61BA99ADFEB6046D28B56",
+      "Path": "results/menu-readable-sources.json"
+    },
+    {
+      "Sha256": "C525F0BC054EC8BC8954E765A0A020DDDCEBC9491380C5CF235667FDD7BB054D",
+      "Path": "results/menu-recorded-ansiart-game.json"
+    },
+    {
+      "Sha256": "13F8B52AE68B2A483F5AC2697B534161BE6C8D37C979D67EE94A1D1AF15148A2",
+      "Path": "results/menu-recorded-ansiart-input.json"
+    },
+    {
+      "Sha256": "3EE063AB765752DD1599F58652A7F1C17A1A7191CEB8AE129F3DE8808EF1E353",
+      "Path": "results/menu-recorded-classic-game.json"
+    },
+    {
+      "Sha256": "3E33B265F3529BBDD253EFEB5756D7F6E6BEAAC8526D802D3066C2F1C2C7B7FB",
+      "Path": "results/menu-recorded-classic-input.json"
+    },
+    {
+      "Sha256": "742749F7F12DBC2FEFD1DC604D67C0A813ACF24051EE1D68206DED10BB81B34E",
+      "Path": "results/menu-recorded-matrix-game.json"
+    },
+    {
+      "Sha256": "994C3288E14CE79CB5C714D7378EBF3B133142D9C778F6669D1E460CA8A97B5F",
+      "Path": "results/menu-recorded-matrix-input.json"
+    },
+    {
+      "Sha256": "35B8790B700C3D8F794963269DC489CF46EA897FCE451FD629105E596D833991",
+      "Path": "results/menu-recorded-replay-game.json"
+    },
+    {
+      "Sha256": "89FFAD14DD9FD2E5DAE77612D6012F60B39D593F23A36FCE397B92B9BD0C9144",
+      "Path": "results/menu-recording-failure.json"
+    },
+    {
+      "Sha256": "5125AAE7F057240F9DAEA2BEE0801047AF00F8D5CF344B92FCF193FD5A6C0B3F",
+      "Path": "results/menu-recordings.json"
+    },
+    {
+      "Sha256": "91EAB9EE107E6D8699AB10FEE6458154162D1969CABCF030F24E714605227EE8",
+      "Path": "results/menu-replay-format-bounds.json"
+    },
+    {
+      "Sha256": "86B599C0C3F427180D62DE6C91A35E81FCF5BDC1FEACC2EA48605066665077A0",
+      "Path": "results/menu-replay-format.json"
+    },
+    {
+      "Sha256": "36E05199188E85077BF250650E59AFFFCF5F4C03952EDF4CDA532AE8CFF45E9A",
+      "Path": "results/menu-resize-game.json"
+    },
+    {
+      "Sha256": "76A661D406EAEAC3283FD412B88029FCFB199B6CBB48D7DCEFD45117AE02751A",
+      "Path": "results/menu-resize-redraw-game.json"
+    },
+    {
+      "Sha256": "B7EE98783C49D518FACAEE19323EC19D0A593D0EC1C9F7A4F8ABABC7E4A320F7",
+      "Path": "results/menu-resize-schedule.json"
+    },
+    {
+      "Sha256": "8C9511CC7E0843FAE62A47B986A69187AA58C2F4607378A6E0704C486C3400D9",
+      "Path": "results/menu-resize-viewport.json"
+    },
+    {
+      "Sha256": "FCA4B4DFF7325191716754F0AA527F3B15C73B845D7C2E5820158FEB7EF723BB",
+      "Path": "results/menu-sources.json"
+    },
+    {
+      "Sha256": "18359474EBB5C1BDF4B3BC27805CFB7835281427DBF0CE149F3C4930256340E6",
+      "Path": "results/menu-unit-compact.json"
+    },
+    {
+      "Sha256": "E2B79F3CADBA07679EFDAA0C4834020D9D7DFB244B2FD502DDAEA9A331934AA6",
+      "Path": "results/menu-unit-final.json"
+    },
+    {
+      "Sha256": "ABBA64D6FDA1C8F8EA4B4A3D4B665C27104C8FED2DAA01867B959B873F9EC821",
+      "Path": "results/menu-unit-readable-fit.json"
+    },
+    {
+      "Sha256": "0AEA1EFABA81114FA3302C108EC294812F924D5FE0B98C89EE1A9DC381010DCC",
+      "Path": "results/menu-unit-readable.json"
+    },
+    {
+      "Sha256": "C8F3DD93FC77A6C778F1AF7EBCFEB6F4DDD00618C44F34E9800C4F8963DD3012",
+      "Path": "results/menu-unit.json"
+    },
+    {
+      "Sha256": "067EE903F8BB3F8B41BA9C1F6EB53726D5BC0BFE91B9A3FC69B35B64F5740BA2",
+      "Path": "results/menu-verified-ansiart-game.json"
+    },
+    {
+      "Sha256": "0DD98C8BAD7DE5836F021375C0BAA3674FE6E4DF54B979DA102E45B9A9176ACF",
+      "Path": "results/menu-verified-ansiart-input.json"
+    },
+    {
+      "Sha256": "1E9155829D628F874248723834C6DE015EDA875B9059C0C0C057092D54B96F2C",
+      "Path": "results/menu-verified-classic-game.json"
+    },
+    {
+      "Sha256": "74B968E64332C30AA58CECF8F94D997BC1BF894110111BBD69DB093E0ADBA868",
+      "Path": "results/menu-verified-classic-input.json"
+    },
+    {
+      "Sha256": "141E3C0C4F7F64F3C25682EB686B82E57285F8AABF71F5244E69B4BADA2F60A3",
+      "Path": "results/menu-verified-matrix-game.json"
+    },
+    {
+      "Sha256": "28E7A90AD2125791EEFF5544D5732BA4B3981B0E8FE81EB2B2C8192106BBE677",
+      "Path": "results/menu-verified-matrix-input.json"
+    },
+    {
+      "Sha256": "07EC2B9D2642750C09AD8887DC12BFC0C7165930565EDBB725C8BB9E395F4D6E",
+      "Path": "results/menu-verified-replay-game.json"
+    },
+    {
+      "Sha256": "BCF775FDA3D97BCAC1F9EBAC09B6B8DE8E8D4CE16EE87CE4BD4663BEDD94B1F2",
+      "Path": "results/menu-verified-sources.json"
+    },
+    {
+      "Sha256": "C3D6EBF5F08653716C81577D9443081B6D36CFE74006EDBD38695534CED19020",
+      "Path": "results/menu-worker-ansiart.json"
+    },
+    {
+      "Sha256": "93A16E7B4FD280509C4490AC9597FF71895DF7B7E536FD6B9C435B82A82EEE8E",
+      "Path": "results/menu-worker-classic.json"
+    },
+    {
+      "Sha256": "42FDF86362D8ED5E527FE4D72390BF46089A7470EB24028F090317917737162B",
+      "Path": "results/menu-worker-matrix.json"
+    }
+  ],
+  "CharacterPartitionCases": 144,
+  "ParseErrors": 0,
+  "MenuChecks": 70,
+  "ReplayFormatChecks": 42
+}

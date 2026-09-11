@@ -37,7 +37,7 @@ function Open-DoomConsoleInput {
     if(-not [PwshDoomPlatform.ConsoleApi]::GetConsoleMode($handle,[ref]$mode)){throw 'A Windows console input handle is required. Launch from Windows Terminal.'}
     $newMode=($mode -band (-bnot (1+2+4+16+64+512))) -bor 8 -bor 128
     if(-not [PwshDoomPlatform.ConsoleApi]::SetConsoleMode($handle,$newMode)){throw 'Cannot enable console key events.'}
-    return @{Handle=$handle;Mode=$mode;Keys=[bool[]]::new(256);Pressed=[bool[]]::new(256);Records=[PwshDoomPlatform.InputRecord[]]::new(128)}
+    return @{Handle=$handle;Mode=$mode;Keys=[bool[]]::new(256);Pressed=[bool[]]::new(256);Suppressed=[bool[]]::new(256);Records=[PwshDoomPlatform.InputRecord[]]::new(128)}
 }
 
 function Read-DoomConsoleInput {
@@ -60,13 +60,26 @@ function Update-DoomInputRecords {
                 $key=[int]$event.VirtualKey;$down=$event.KeyDown -ne 0
                 if($down -and -not $State.Keys[$key]){$State.Pressed[$key]=$true}
                 $State.Keys[$key]=$down
-            } elseif($event.EventType -eq 16 -and $event.KeyDown -eq 0){[Array]::Clear($State.Keys);[Array]::Clear($State.Pressed)}
+                if(-not $down -and $State.ContainsKey('Suppressed')){$State.Suppressed[$key]=$false}
+            } elseif($event.EventType -eq 16 -and $event.KeyDown -eq 0){[Array]::Clear($State.Keys);[Array]::Clear($State.Pressed);if($State.ContainsKey('Suppressed')){[Array]::Clear($State.Suppressed)}}
         }
+}
+
+function Reset-DoomInputForMenu {
+    param($State)
+    # Keep physical key state for repeat debouncing. Gameplay keys held through
+    # a menu remain masked until release, including the Enter used to resume.
+    $State.Suppressed=$State.Keys.Clone();[Array]::Clear($State.Pressed)
 }
 
 function Set-DoomInputCommand {
     param($State,$Command)
-    $keys=$State.Keys.Clone();foreach($key in 87,83,65,68,37,38,39,40,17,69,32,13){if($State.Pressed[$key]){$keys[$key]=$true}};$Command.Clear();$run=$keys[16]
+    $keys=$State.Keys.Clone()
+    foreach($key in 87,83,65,68,37,38,39,40,17,69,32,13,16){
+        if($State.ContainsKey('Suppressed') -and $State.Suppressed[$key]){$keys[$key]=$false}
+        elseif($State.Pressed[$key]){$keys[$key]=$true}
+    }
+    $Command.Clear();$run=$keys[16]
     $speed=if($run){50}else{25};$strafe=if($run){40}else{24};$turn=if($run){1280}else{640}
     if($keys[87] -or $keys[38]){$Command.ForwardMove+=$speed}
     if($keys[83] -or $keys[40]){$Command.ForwardMove-=$speed}

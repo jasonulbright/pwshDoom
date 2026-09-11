@@ -1,0 +1,395 @@
+{
+  "FinishedUtc": "2026-09-11T13:43:13.2319576Z",
+  "Frames": [
+    {
+      "Sha256": "EBCA92B8C41441D1EECD179B192A87B653A759B14219CE0A280D1CBFB467C74F",
+      "Choice": 0,
+      "Screen": 1
+    },
+    {
+      "Sha256": "45DFC7B2DB92AB53F5ECB5F8A044B8A4F6EEBD3143D8ED7B6DEE4578BD4E4EE4",
+      "Choice": 1,
+      "Screen": 1
+    },
+    {
+      "Sha256": "25108087BDFAD44245470FDA2D6D84D6CA2D29932051529E5D9892B2E7C410C8",
+      "Choice": 2,
+      "Screen": 1
+    },
+    {
+      "Sha256": "7367BE7D29B54E2692E62CD49E790CA2457721D58658749840A566587E6BD4FF",
+      "Choice": 3,
+      "Screen": 1
+    },
+    {
+      "Sha256": "4D573F46EFB56148F12C2C2C15BB510E273BC211139898FF32BD1BDF690FB52D",
+      "Choice": 0,
+      "Screen": 2
+    },
+    {
+      "Sha256": "5D2CB1F52ACDEEBE2884CD9A047B2DADAB69D40E6EE1BE8604EDDA109F5B0DA9",
+      "Choice": 1,
+      "Screen": 2
+    },
+    {
+      "Sha256": "78138A4647B8B00E9B77D3BC78A0FA49DCE469FC42FD54F81F1306B20D4E0F87",
+      "Choice": 2,
+      "Screen": 2
+    },
+    {
+      "Sha256": "622D30D6B42C4E97629E6F15C5E5F4C676F937EC7BB8D526F6A6B25DBBC67386",
+      "Choice": 3,
+      "Screen": 2
+    },
+    {
+      "Sha256": "32BD82B2EB885560344A5544D794CCA7EACD8EE852B5EF44F4467D1B1D46F78F",
+      "Choice": 0,
+      "Screen": 3
+    },
+    {
+      "Sha256": "506AAC07C80EEADA95662DFA4E910753997107568A03F7C1F616E388073752D2",
+      "Choice": 1,
+      "Screen": 3
+    },
+    {
+      "Sha256": "38C6AF8D1F5C4C30129583F9C387956FB729D89461DD49871148EC7494558B5F",
+      "Choice": 2,
+      "Screen": 3
+    },
+    {
+      "Sha256": "CA2E8FBB9ADE634FC3DD97DD9853F0BEED0569666D682B8D88FCEF32CAFD27EF",
+      "Choice": 3,
+      "Screen": 3
+    },
+    {
+      "Sha256": "02B8104FA6D83F48658B9A6456DA9D65A8F5D01F427D6FC1872A0DCF5EA825C9",
+      "Choice": 4,
+      "Screen": 3
+    },
+    {
+      "Sha256": "8B04CDC5F42D902A121AA4A4B8042DC03E12B6997EEF3CA43D0077DB3C0F9C3B",
+      "Choice": 0,
+      "Screen": 4
+    },
+    {
+      "Sha256": "77256F4647CEC92EB3A961AE9796D87BAB4010F40E3104D4FB974C34F6797555",
+      "Choice": 1,
+      "Screen": 4
+    },
+    {
+      "Sha256": "A02CF5F0AC4AB56631A0ABF3BD44D755BDBF0E5F290AECBE101EFE4129ACAC6E",
+      "Choice": 0,
+      "Screen": 5
+    },
+    {
+      "Sha256": "000DB589414B5C8934CF941170408CA14A367CC00F3C0AEDD517A9B1778A6823",
+      "Choice": 0,
+      "Screen": 6
+    },
+    {
+      "Sha256": "E2A34E0F97F2E6C13BD93DCB3A02BD0FEBDC3C48EAD9661413AB884AA5C15530",
+      "Choice": 1,
+      "Screen": 6
+    },
+    {
+      "Sha256": "C8ADF364AFAD310540D9C5FF754839AABE75976CAA8E27E092E3F6BDE896C7E2",
+      "Choice": 0,
+      "Screen": 7
+    }
+  ],
+  "Error": null,
+  "Meaning": "Menu navigation/confirmation and native WAD screen fixtures; independent stable-sort brightness reduction versus actual menu encoders at uneven partitions/origins. Screen draws are not a live keyboard test.",
+  "Sources": [
+    {
+      "Sha256": "E221931C288770A8875AE29A556F6ECF4E1B8344F828C525F8289C55A788B8E1",
+      "Path": "src/SessionMenu.ps1"
+    },
+    {
+      "Sha256": "2F0D8B12EC0815AF71F48F6F6033D669A3593B573DEBABC5C1DF68A8A056CFDF",
+      "Path": "src/CharacterCodec.ps1"
+    }
+  ],
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "Checks": [
+    {
+      "Passed": true,
+      "Name": "Escape opens main"
+    },
+    {
+      "Passed": true,
+      "Name": "Choice wraps upwards"
+    },
+    {
+      "Passed": true,
+      "Name": "Quit defaults to no"
+    },
+    {
+      "Passed": true,
+      "Name": "Quit cancellation returns to menu"
+    },
+    {
+      "Passed": true,
+      "Name": "Quit requires confirmation"
+    },
+    {
+      "Passed": true,
+      "Name": "New game opens episodes"
+    },
+    {
+      "Passed": true,
+      "Name": "Episode selection preserves episode four"
+    },
+    {
+      "Passed": true,
+      "Name": "Nightmare selection asks before replacing game"
+    },
+    {
+      "Passed": true,
+      "Name": "New-game cancellation returns to skill"
+    },
+    {
+      "Passed": true,
+      "Name": "Confirmed new game carries settings"
+    },
+    {
+      "Passed": true,
+      "Name": "Pause opens paused screen"
+    },
+    {
+      "Passed": true,
+      "Name": "Enter resumes pause"
+    },
+    {
+      "Passed": true,
+      "Name": "Single-episode content skips unavailable episodes"
+    },
+    {
+      "Passed": true,
+      "Name": "Single-episode skill back returns home"
+    },
+    {
+      "Passed": true,
+      "Name": "Compact menu fits 8x1"
+    },
+    {
+      "Passed": true,
+      "Name": "Compact menu fits 40x2"
+    },
+    {
+      "Passed": true,
+      "Name": "Compact menu fits 320x98"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix max-brightness reference / origin 0,0 / strip 0"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix max-brightness reference / origin 0,0 / strip 1"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix max-brightness reference / origin 0,0 / strip 2"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix max-brightness reference / origin 0,0 / strip 3"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix max-brightness reference / origin 0,0 / strip 4"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix max-brightness reference / origin 0,0 / strip 5"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix max-brightness reference / origin 0,0 / strip 6"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix max-brightness reference / origin 11,3 / strip 0"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix max-brightness reference / origin 11,3 / strip 1"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix max-brightness reference / origin 11,3 / strip 2"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix max-brightness reference / origin 11,3 / strip 3"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix max-brightness reference / origin 11,3 / strip 4"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix max-brightness reference / origin 11,3 / strip 5"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix max-brightness reference / origin 11,3 / strip 6"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt max-brightness reference / origin 0,0 / strip 0"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt max-brightness reference / origin 0,0 / strip 1"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt max-brightness reference / origin 0,0 / strip 2"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt max-brightness reference / origin 0,0 / strip 3"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt max-brightness reference / origin 0,0 / strip 4"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt max-brightness reference / origin 0,0 / strip 5"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt max-brightness reference / origin 0,0 / strip 6"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt max-brightness reference / origin 11,3 / strip 0"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt max-brightness reference / origin 11,3 / strip 1"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt max-brightness reference / origin 11,3 / strip 2"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt max-brightness reference / origin 11,3 / strip 3"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt max-brightness reference / origin 11,3 / strip 4"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt max-brightness reference / origin 11,3 / strip 5"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt max-brightness reference / origin 11,3 / strip 6"
+    },
+    {
+      "Passed": true,
+      "Name": "Invalid menu dimensions 32,0,0,32"
+    },
+    {
+      "Passed": true,
+      "Name": "Invalid menu dimensions 31,16,0,30"
+    },
+    {
+      "Passed": true,
+      "Name": "Invalid menu dimensions 32,15,0,32"
+    },
+    {
+      "Passed": true,
+      "Name": "Invalid menu dimensions 32,16,1,32"
+    },
+    {
+      "Passed": true,
+      "Name": "Invalid menu dimensions 32,16,0,34"
+    },
+    {
+      "Passed": true,
+      "Name": "Invalid menu dimensions 32,16,4,4"
+    },
+    {
+      "Passed": true,
+      "Name": "Menu 1 / choice 0 draws nonblank pixels"
+    },
+    {
+      "Passed": true,
+      "Name": "Menu 1 / choice 1 draws nonblank pixels"
+    },
+    {
+      "Passed": true,
+      "Name": "Menu 1 / choice 2 draws nonblank pixels"
+    },
+    {
+      "Passed": true,
+      "Name": "Menu 1 / choice 3 draws nonblank pixels"
+    },
+    {
+      "Passed": true,
+      "Name": "Menu 2 / choice 0 draws nonblank pixels"
+    },
+    {
+      "Passed": true,
+      "Name": "Menu 2 / choice 1 draws nonblank pixels"
+    },
+    {
+      "Passed": true,
+      "Name": "Menu 2 / choice 2 draws nonblank pixels"
+    },
+    {
+      "Passed": true,
+      "Name": "Menu 2 / choice 3 draws nonblank pixels"
+    },
+    {
+      "Passed": true,
+      "Name": "Menu 3 / choice 0 draws nonblank pixels"
+    },
+    {
+      "Passed": true,
+      "Name": "Menu 3 / choice 1 draws nonblank pixels"
+    },
+    {
+      "Passed": true,
+      "Name": "Menu 3 / choice 2 draws nonblank pixels"
+    },
+    {
+      "Passed": true,
+      "Name": "Menu 3 / choice 3 draws nonblank pixels"
+    },
+    {
+      "Passed": true,
+      "Name": "Menu 3 / choice 4 draws nonblank pixels"
+    },
+    {
+      "Passed": true,
+      "Name": "Menu 4 / choice 0 draws nonblank pixels"
+    },
+    {
+      "Passed": true,
+      "Name": "Menu 4 / choice 1 draws nonblank pixels"
+    },
+    {
+      "Passed": true,
+      "Name": "Menu 5 / choice 0 draws nonblank pixels"
+    },
+    {
+      "Passed": true,
+      "Name": "Menu 6 / choice 0 draws nonblank pixels"
+    },
+    {
+      "Passed": true,
+      "Name": "Menu 6 / choice 1 draws nonblank pixels"
+    },
+    {
+      "Passed": true,
+      "Name": "Menu 7 / choice 0 draws nonblank pixels"
+    }
+  ]
+}
