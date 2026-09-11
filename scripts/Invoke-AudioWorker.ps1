@@ -8,9 +8,20 @@ $mixTimes=[Collections.Generic.List[double]]::new();$ages=[Collections.Generic.L
 $starves=[Collections.Generic.List[object]]::new();$starved=$false;$cancelled=0L;$stale=0;$packets=0;$resets=0;$pauses=0;$lastSequence=-1;$maxVoices=0
 $watch=[Diagnostics.Stopwatch]::StartNew();$failure=$null;$cleanup=$null
 $pending=$null;$digest=[Security.Cryptography.IncrementalHash]::CreateHash([Security.Cryptography.HashAlgorithmName]::SHA256)
+$volumeChanges=[Collections.Generic.List[object]]::new();$mutedPackets=0
 try{
     $device=Open-DoomWaveOut -BufferFrames 1260 -Buffers 4;$Shared.Ready=$true
     while(-not $Shared.Stop){
+        $volume=[double]$Shared.Volume
+        if(-not [double]::IsFinite($volume) -or $volume -lt 0 -or $volume -gt 1){throw 'Invalid shared sound volume.'}
+        if($volume -ne $mixer.Volume){
+            # Do not replay previously queued loud PCM after unpausing a muted
+            # menu. Clear its device tail, while retaining advanced voice positions.
+            $cleared=Reset-DoomWaveOut $device;$cancelled+=$cleared;Set-DoomWaveOutPaused $device $true
+            $mixer.Volume=$volume;$devicePaused=$true;$started=$false;$starved=$false
+            $volumeChanges.Add(@{Volume=$volume;AfterPacket=$lastSequence;WallMs=$watch.Elapsed.TotalMilliseconds;CancelledFramesUpperBound=$cleared})
+            $Shared.AppliedVolume=$volume
+        }
         if($Shared.Epoch -ne $epoch){
             $cancelled+=Reset-DoomWaveOut $device;Set-DoomWaveOutPaused $device $true
             $epoch=$Shared.Epoch;$mixer.Voices.Clear();$mixer.Paused=$false;$devicePaused=$true;$started=$false;$starved=$false;$resets++
@@ -29,13 +40,14 @@ try{
             Update-DoomAudioPacket $mixer $packet $Clips
             $maxVoices=[Math]::Max($maxVoices,$mixer.Voices.Count)
             $mixWatch=[Diagnostics.Stopwatch]::StartNew();$pcm=Read-DoomAudioFrames $mixer 1260;$mixTimes.Add($mixWatch.Elapsed.TotalMilliseconds)
+            if($mixer.Volume -eq 0){$mutedPackets++}
             $bytes=[byte[]]::new(5040);[Buffer]::BlockCopy($pcm,0,$bytes,0,5040)
             # Epoch/pause can change during a block; next loop resets/pauses before
             # continuing. The driver owns only copied PCM, never game objects.
             Submit-DoomWaveOut $device $slot $bytes
             $digest.AppendData($bytes)
             $ages.Add(([Diagnostics.Stopwatch]::GetTimestamp()-$packet.Qpc)*1000.0/[Diagnostics.Stopwatch]::Frequency)
-            $lastSequence=$packet.Sequence;$packets++
+            $lastSequence=$packet.Sequence;$packets++;$Shared.LastSequence=$lastSequence
         }
         $queued=@($device.Buffers|Where-Object Queued).Count
         if($devicePaused -and ($started -or $queued -ge 2)){
@@ -50,6 +62,7 @@ try{
     if($device){try{$cancelled+=Reset-DoomWaveOut $device;Close-DoomWaveOut $device}catch{$cleanup=$_.ToString();$Shared.Error=$cleanup}}
     $Shared.Report=@{Error=$failure;CleanupError=$cleanup;Packets=$packets;LastSequence=$lastSequence;StalePacketsDiscarded=$stale;EpochResets=$resets;PauseTransitions=$pauses;MixSamplesMs=$mixTimes.ToArray();PacketAgeAtSubmissionMs=$ages.ToArray();QueueStarvationObservations=$starves.ToArray();MaxVoices=$maxVoices;ClippedSamples=$mixer.ClippedSamples;SubmittedFrames=if($device){$device.SubmittedFrames}else{0};ReturnedCompletedFrames=if($device){$device.CompletedFrames}else{0};CancelledQueuedFramesUpperBound=$cancelled;UnconsumedPackets=$Queue.Count;DeviceClosed=if($device){$device.Closed}else{$false};WallSeconds=$watch.Elapsed.TotalSeconds;Meaning='PowerShell runspace mixing and waveOut playback; packet age ends at submission, not audible output. Starvation is queue polling, not hardware telemetry. Reset/exit can cancel queued tail audio; cancelled frame count is an upper bound.'}
     $Shared.Report.PcmSha256=[Convert]::ToHexString($digest.GetHashAndReset());$digest.Dispose()
+    $Shared.Report.VolumeChanges=$volumeChanges.ToArray();$Shared.Report.MutedPackets=$mutedPackets;$Shared.Report.FinalVolume=$mixer.Volume
     $Shared.Report.PendingPacket=if($pending){$pending.Sequence}else{$null}
     $Shared.Finished=$true
 }

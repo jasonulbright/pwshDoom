@@ -1,0 +1,204 @@
+{
+  "FinishedUtc": "2026-09-11T20:41:33.6583455Z",
+  "AcceptedNamedChecks": 207,
+  "Error": null,
+  "Checks": [
+    {
+      "Passed": true,
+      "Name": "sound-settings-unit named checks pass"
+    },
+    {
+      "Passed": true,
+      "Name": "sound-settings-menus-fit named checks pass"
+    },
+    {
+      "Passed": true,
+      "Name": "sound-volume-worker named checks pass"
+    },
+    {
+      "Passed": true,
+      "Name": "sound-settings-host named checks pass"
+    },
+    {
+      "Passed": true,
+      "Name": "sound-settings-recovery named checks pass"
+    },
+    {
+      "Passed": true,
+      "Name": "207 accepted named checks"
+    },
+    {
+      "Passed": true,
+      "Name": "Offline audio replay retains all checkpoints"
+    },
+    {
+      "Passed": true,
+      "Name": "Derived WAV matches retained hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Whole submitted PCM matches volume-controlled offline replay"
+    },
+    {
+      "Passed": true,
+      "Name": "Successful recorded controls with eight gameplay checkpoints"
+    },
+    {
+      "Passed": true,
+      "Name": "Recorded audio worker closes; video explicitly has no captured audio"
+    },
+    {
+      "Passed": true,
+      "Name": "Original and viewing copy retain recorded hashes"
+    },
+    {
+      "Passed": true,
+      "Name": "Parse src/UserSettings.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Parse src/SessionMenu.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Parse src/SimulationProcess.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Parse src/AudioRunspace.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Parse scripts/Invoke-Doom.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Parse scripts/Invoke-SimulationWorker.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Parse scripts/Invoke-AudioWorker.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Parse scripts/Render-AudioReplay.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Parse scripts/Test-UserSettings.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Parse scripts/Test-SessionMenu.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Parse scripts/Test-SettingsHost.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Parse scripts/Test-AudioVolume.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Parse scripts/Test-SoundSettingsHost.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Parse scripts/Test-SoundSettingsEvidence.ps1"
+    }
+  ],
+  "Sources": [
+    {
+      "Sha256": "B8D4EF93831BB372048B3AEB7504E9A6AFDA645CC41BCA21375EDC546EFCF499",
+      "Path": "src/UserSettings.ps1"
+    },
+    {
+      "Sha256": "CA647B604FC51FE1981CD2045D14F90043314DFC09DC5EF298597307D433CAF8",
+      "Path": "src/SessionMenu.ps1"
+    },
+    {
+      "Sha256": "09BD41078D00D78DB8E482D691A4ED38A7A3965AA3349F2835FA8A192415FC01",
+      "Path": "src/SimulationProcess.ps1"
+    },
+    {
+      "Sha256": "33FEF544B1821CA1B89E11DC360A848046FDDD0A1EB47498A9783BB9D95AB18A",
+      "Path": "src/AudioRunspace.ps1"
+    },
+    {
+      "Sha256": "13E8B1E616ECB53A6C1503A2760A373888091E490886618A3A84E7A75286B8EA",
+      "Path": "scripts/Invoke-Doom.ps1"
+    },
+    {
+      "Sha256": "ABC475D51E4B9DE38118EDE3E53D30D3ED0E2B906FCAE899D2FB5F3D1514A48D",
+      "Path": "scripts/Invoke-SimulationWorker.ps1"
+    },
+    {
+      "Sha256": "74B2BB428987C096F2B66199643FB51794C6B6CB881D7E1CD0E242686ED8BBB8",
+      "Path": "scripts/Invoke-AudioWorker.ps1"
+    },
+    {
+      "Sha256": "C69DB1C75B5DE3669B5AFB8129E7338FF74691565B21DD4C75A6E629667956B3",
+      "Path": "scripts/Render-AudioReplay.ps1"
+    },
+    {
+      "Sha256": "11F49E306A52440641A2FB841A09DBC1E4F71B4DD1E9CC7E09E280F6BCC693FC",
+      "Path": "scripts/Test-UserSettings.ps1"
+    },
+    {
+      "Sha256": "B6493E0A3E56F5D2F83427951ACABA2B2D4A3612BA90AE8106C22D88A5630722",
+      "Path": "scripts/Test-SessionMenu.ps1"
+    },
+    {
+      "Sha256": "D1AAE56C5BD981130E391889EAC06BB811934C02F1278F29D6AF87856ADEBE1C",
+      "Path": "scripts/Test-SettingsHost.ps1"
+    },
+    {
+      "Sha256": "6BE6A62FA25C8A23BFA6EA35D8548A448CF9058936BAF4CB9FD2C6AA657D5081",
+      "Path": "scripts/Test-AudioVolume.ps1"
+    },
+    {
+      "Sha256": "76C6C0F8AA2C263140EEA3AB90E2F0C5BD8979AD17BC777C460EF2EE4E4F439A",
+      "Path": "scripts/Test-SoundSettingsHost.ps1"
+    },
+    {
+      "Sha256": "B957ACFD98597B2A1B2353FFEF2FE874725432F7E3D6840BC34C6374339C5223",
+      "Path": "scripts/Test-SoundSettingsEvidence.ps1"
+    }
+  ],
+  "Reports": [
+    {
+      "Sha256": "C749EB61A8C335B0131AAFF77BEDC3E503C5A3FA7DA69FF55450F9D6E25D1F90",
+      "Path": "results/sound-settings-unit.json"
+    },
+    {
+      "Sha256": "D52E0A1FE1790E98B35F07D4C8188EFADA5E6E1A75D99ABBC0189D03C033499F",
+      "Path": "results/sound-settings-menus.json"
+    },
+    {
+      "Sha256": "FD829024084846A60AE78197B669453367E021C7CBEEE9F4E7E5AD0ABC4011EC",
+      "Path": "results/sound-settings-menus-fit.json"
+    },
+    {
+      "Sha256": "0CC70F356D97BE0ACCF5EF55FCD6EE8C0FA7723896E426B0A16869C0CCA10F12",
+      "Path": "results/sound-volume-worker.json"
+    },
+    {
+      "Sha256": "D8DE8112F3C8F8AD50A6274299365AE6EA39649AEDA1CB32D5FCBDB8B92BE104",
+      "Path": "results/sound-settings-host.json"
+    },
+    {
+      "Sha256": "B20444F5227ADC6C85878E732EF479CBA96D62B76ACE78EB4C2730F11205C94C",
+      "Path": "results/sound-settings-audio-replay.json"
+    },
+    {
+      "Sha256": "005C631EEC324570F4C867FE9C415F48D790D163493D71694B7531467950BADA",
+      "Path": "results/sound-settings-recovery.json"
+    },
+    {
+      "Sha256": "CDB49887E4FD99A6AC86F9538C73DC624EF320891B083FEF62A9A79CCC1FD03A",
+      "Path": "results/sound-settings-recording.json"
+    }
+  ],
+  "Meaning": "Current source/evidence audit for persistent sound volume and mute. Failed first menu report retained separately. Submitted PCM includes subsequently cancelled device tails; no acoustic latency, physical keyboard or full release qualification."
+}

@@ -1,0 +1,99 @@
+{
+  "Audio": {
+    "WallSeconds": 0.95304,
+    "PauseTransitions": 0,
+    "ReturnedCompletedFrames": 0,
+    "EpochResets": 0,
+    "MutedPackets": 3,
+    "CancelledQueuedFramesUpperBound": 10080,
+    "MixSamplesMs": [
+      29.9781,
+      2.8526,
+      2.7544,
+      2.9578,
+      2.6935,
+      2.7076,
+      2.8755,
+      3.6496
+    ],
+    "SubmittedFrames": 10080,
+    "Error": null,
+    "Meaning": "PowerShell runspace mixing and waveOut playback; packet age ends at submission, not audible output. Starvation is queue polling, not hardware telemetry. Reset/exit can cancel queued tail audio; cancelled frame count is an upper bound.",
+    "FinalVolume": 0.25,
+    "PacketAgeAtSubmissionMs": [
+      80.6424,
+      81.6365,
+      84.5886,
+      19.0078,
+      21.9383,
+      24.9135,
+      15.2494,
+      19.2376
+    ],
+    "LastSequence": 7,
+    "PcmSha256": "12479E268A496A1EB9EB5960E3AFCB9CA25AC3D1607924B9AD15525F488F6681",
+    "QueueStarvationObservations": [],
+    "StalePacketsDiscarded": 0,
+    "ClippedSamples": 0,
+    "VolumeChanges": [
+      {
+        "WallMs": 829.4547,
+        "Volume": 0.0,
+        "CancelledFramesUpperBound": 3780,
+        "AfterPacket": 2
+      },
+      {
+        "WallMs": 877.6904,
+        "Volume": 0.25,
+        "CancelledFramesUpperBound": 3780,
+        "AfterPacket": 5
+      }
+    ],
+    "Packets": 8,
+    "MaxPacketQueue": 3,
+    "UnconsumedPackets": 0,
+    "MaxVoices": 1,
+    "CleanupError": null,
+    "DeviceClosed": true,
+    "PendingPacket": null
+  },
+  "Meaning": "Independent submitted-PCM vector across full volume, mute and quarter volume in the actual playback runspace. Gain changes can cancel queued tail PCM. No acoustic latency or listening claim.",
+  "Checks": [
+    {
+      "Passed": true,
+      "Name": "Device and worker close cleanly"
+    },
+    {
+      "Passed": true,
+      "Name": "Submitted PCM matches independent gain and timeline vector"
+    },
+    {
+      "Passed": true,
+      "Name": "Mute produces three packets without resetting the active voice"
+    },
+    {
+      "Passed": true,
+      "Name": "Gain acknowledgements retain selected quarter volume"
+    }
+  ],
+  "ExpectedPcmSha256": "12479E268A496A1EB9EB5960E3AFCB9CA25AC3D1607924B9AD15525F488F6681",
+  "Sources": [
+    {
+      "Path": "src/AudioMixer.ps1",
+      "Sha256": "F6227640C7AD799B5E7D486B70752E680EF074881EB6B795BC087970BEB8C990"
+    },
+    {
+      "Path": "src/AudioRunspace.ps1",
+      "Sha256": "33FEF544B1821CA1B89E11DC360A848046FDDD0A1EB47498A9783BB9D95AB18A"
+    },
+    {
+      "Path": "scripts/Invoke-AudioWorker.ps1",
+      "Sha256": "74B2BB428987C096F2B66199643FB51794C6B6CB881D7E1CD0E242686ED8BBB8"
+    },
+    {
+      "Path": "scripts/Test-AudioVolume.ps1",
+      "Sha256": "6BE6A62FA25C8A23BFA6EA35D8548A448CF9058936BAF4CB9FD2C6AA657D5081"
+    }
+  ],
+  "Error": null
+}

@@ -58,7 +58,7 @@ try{
     $directory=Join-Path "$PSScriptRoot/../local" ('menu-unit-frames-'+[guid]::NewGuid().ToString('N'));[void][IO.Directory]::CreateDirectory($directory)
     $details=New-DoomMenuState;$details.MessageTitle='SAVE FAILED';$details.MessageDetail='SELECT SLOT AGAIN';$details.Slots[0]=@{Slot=1;State='Ready';Episode=4;Map=9;Skill=5;Time='23:59';Sha256=('A'*64);SourceMatches=$false}
     for($screen=1;$screen -le 14;$screen++){
-        $count=switch($screen){1{7};14{4};2{4};3{5};4{2};6{2};8{6};9{6};10{2};11{2};default{1}}
+        $count=switch($screen){1{7};14{6};2{4};3{5};4{2};6{2};8{6};9{6};10{2};11{2};default{1}}
         for($choice=0;$choice -lt $count;$choice++){
             $frame=Get-DoomMenuPixels $graphics $screen $choice 4 5 4 -Details $details
             Assert-Menu "Menu $screen / choice $choice draws nonblank pixels" (@($frame|Where-Object {$_ -ne 0}).Count -gt 100)

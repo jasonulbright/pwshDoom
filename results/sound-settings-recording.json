@@ -1,0 +1,286 @@
+{
+  "Recording": {
+    "Video": "C:\\projects\\pwshDoom\\local\\recordings\\sound-settings-ansiart.mp4",
+    "AudioCaptured": false,
+    "FontFace": "MS Gothic",
+    "VideoSha256": "56E92C404E7A48577692181FDA713137159DA31A2EFAD3C6C193CD65C350CC6F",
+    "GameReport": "C:\\projects\\pwshDoom\\local\\recordings\\sound-settings-ansiart-game.json",
+    "Meaning": "Actual game-window Windows.Graphics.Capture at the recorded capture ceiling, with D3D11 frames passed to external NVENC H.264 encoding. The ceiling exceeds 60 to avoid capture-rate aliasing; actual arrival rate is compositor-driven. Output is resampled to 60 FPS and can contain duplicates. Video includes startup and a short console return. Recording can affect game/presentation timing; encoded 60 FPS does not prove 60 distinct displayed game images. No microphone or desktop audio is captured. The input selects only the game window; inspect footage for occlusion or capture artifacts.",
+    "Maximized": false,
+    "WindowHandle": 72156532,
+    "TerminalPid": 11792,
+    "GlyphSet": "Katakana",
+    "SoundRequested": true,
+    "FinishedUtc": "2026-09-11T20:37:34.1223946Z",
+    "Arguments": [
+      "-hide_banner",
+      "-n",
+      "-filter_complex",
+      "gfxcapture=hwnd=72156532:max_framerate=240:capture_cursor=0:display_border=1:width=-2:height=-2",
+      "-an",
+      "-c:v",
+      "h264_nvenc",
+      "-preset",
+      "p4",
+      "-cq",
+      "18",
+      "-b:v",
+      "0",
+      "-r",
+      "60",
+      "-fps_mode",
+      "cfr",
+      "-movflags",
+      "+faststart",
+      "-t",
+      "125",
+      "C:\\projects\\pwshDoom\\local\\recordings\\sound-settings-ansiart.mp4"
+    ],
+    "Style": "AnsiArt",
+    "SessionScheduleSha256": "0DA8EE1EC6513322C09C3338AA59BE3DC85C1FADB52B3A6318B1CE2661087DF3",
+    "QpcFrequency": 10000000,
+    "SaveRoot": "",
+    "CaptureStartQpc": 313969306298,
+    "VideoFps": 60,
+    "InputReplaySha256": null,
+    "ReplaySha256": "44E229AEFB44058B598D50F8EE260421762449E43332B17BC4CDF2FBF8A4AC13",
+    "EncoderExitCode": 0,
+    "ExpectedExit": "ReplayEnd",
+    "FfmpegSha256": "72A489ECCD008C2EC2C0A5856C5C75BC3D8BBFA90166C4566865C246445E6AA3",
+    "CaptureLimit": 240,
+    "Ffmpeg": "C:\\projects\\pwshDoom\\local\\tools\\ffmpeg\\ffmpeg-9.0.1-essentials_build\\bin\\ffmpeg.exe",
+    "ExitDelaySeconds": 3,
+    "CaptureBackend": "GraphicsCapture",
+    "Error": null,
+    "FontSize": 12
+  },
+  "Meaning": "Actual terminal recording with audio playback enabled and six successful sound preference edits. Video contains no audio stream; raw/viewing media stay ignored. Encoded frames and writes do not prove unique displayed FPS.",
+  "Error": null,
+  "Style": "AnsiArt",
+  "Review": {
+    "Images": [
+      {
+        "Path": "local/recordings/sound-settings-ansiart-review.png",
+        "Sha256": "41976F7F0CE050808C0924C08035A03B8A622569C88900706A6E897507C0B651"
+      },
+      {
+        "Path": "local/recordings/sound-settings-ansiart-values.png",
+        "Sha256": "F96EC83F606094B3870A480BC32FB26CDE33AA872E4CE78D6E51849137CAD75C"
+      },
+      {
+        "Path": "local/recordings/sound-settings-ansiart-mute-on.png",
+        "Sha256": "38255851729E79EB1DE3D7A9BF45E1A57564FF339F3D1B317EE1A4863C1AED57"
+      }
+    ],
+    "Finding": "Full-size samples show color-art gameplay, all six bounded settings rows, volume 70 percent, mute Off and mute On. The video is silent. Capture process QPC origin is not assumed equal to the first encoded frame timestamp."
+  },
+  "ViewingCopy": {
+    "CreatedUtc": "2026-09-11T20:38:58.3145382Z",
+    "EndSeconds": 90.133008,
+    "Style": "AnsiArt",
+    "GlyphSet": "Katakana",
+    "VisibleSamples": 606,
+    "OriginalVideo": "C:\\projects\\pwshDoom\\local\\recordings\\sound-settings-ansiart.mp4",
+    "Arguments": [
+      "-hide_banner",
+      "-n",
+      "-ss",
+      "29.000",
+      "-i",
+      "C:\\projects\\pwshDoom\\local\\recordings\\sound-settings-ansiart.mp4",
+      "-t",
+      "61.133",
+      "-an",
+      "-vf",
+      "crop=1280:800:96:120",
+      "-c:v",
+      "libx264",
+      "-threads",
+      "4",
+      "-preset",
+      "medium",
+      "-crf",
+      "16",
+      "-pix_fmt",
+      "yuv420p",
+      "-movflags",
+      "+faststart",
+      "C:\\projects\\pwshDoom\\local\\recordings\\sound-settings-ansiart-view.mp4"
+    ],
+    "GameWallDurationSeconds": 60.1480292,
+    "Output": "C:\\projects\\pwshDoom\\local\\recordings\\sound-settings-ansiart-view.mp4",
+    "GameDurationSeconds": 51.6347127,
+    "OutputSha256": "182E021DD569587C7A4703B3ACF20481CB2FE691913A469878DD2D616AA297B7",
+    "StartSeconds": 29,
+    "OriginalSha256": "56E92C404E7A48577692181FDA713137159DA31A2EFAD3C6C193CD65C350CC6F",
+    "Meaning": "Viewing copy of actual window-capture footage. Removes startup/console return and fixed empty margins; no game frames are synthesized and no speed change, tint, sharpening, shader, or rescaling is applied. Re-encoded H.264 is lossy; capture may already contain repeated frames. The untrimmed original is retained.",
+    "Crop": {
+      "Y": 120,
+      "Width": 1280,
+      "Height": 800,
+      "X": 96
+    },
+    "ContrastSampleRate": 10,
+    "VerifiedVideo": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_name": "h264",
+          "width": 1280,
+          "height": 800,
+          "pix_fmt": "yuv420p",
+          "avg_frame_rate": "60/1",
+          "nb_read_frames": "3668"
+        }
+      ],
+      "format": {
+        "duration": "61.133333"
+      }
+    }
+  },
+  "Game": {
+    "Path": "C:\\projects\\pwshDoom\\local\\recordings\\sound-settings-ansiart-game.json",
+    "Audio": {
+      "DeviceClosed": true,
+      "PcmSha256": "0C2EE5E213065921D5BAEAD29321EE2F600EF63937E5D71A897366BE59FFA04D",
+      "MutedPackets": 1166,
+      "Error": null,
+      "VolumeChanges": [
+        {
+          "WallMs": 29461.9225,
+          "Volume": 0.9,
+          "AfterPacket": 412,
+          "CancelledFramesUpperBound": 3780
+        },
+        {
+          "WallMs": 29711.0068,
+          "Volume": 0.8,
+          "AfterPacket": 412,
+          "CancelledFramesUpperBound": 0
+        },
+        {
+          "WallMs": 29947.5414,
+          "Volume": 0.7,
+          "AfterPacket": 412,
+          "CancelledFramesUpperBound": 0
+        },
+        {
+          "WallMs": 30454.313,
+          "Volume": 0.0,
+          "AfterPacket": 412,
+          "CancelledFramesUpperBound": 0
+        },
+        {
+          "WallMs": 35703.4165,
+          "Volume": 0.7,
+          "AfterPacket": 517,
+          "CancelledFramesUpperBound": 3780
+        },
+        {
+          "WallMs": 42699.1084,
+          "Volume": 0.0,
+          "AfterPacket": 685,
+          "CancelledFramesUpperBound": 3780
+        }
+      ]
+    },
+    "Writes": 2976,
+    "Sha256": "7F259891D1EF70352452DAE1389BB7652C6AC47C5C63E711F3B6DBA3EF5AFD96",
+    "WallSeconds": 60.1480292,
+    "FinalSettings": {
+      "Version": 2,
+      "TurnSpeed": 100,
+      "SoundMuted": true,
+      "AlwaysRun": false,
+      "SoundVolume": 70
+    },
+    "SettingsEvents": [
+      {
+        "Success": true,
+        "Tic": 419,
+        "Values": {
+          "Version": 2,
+          "TurnSpeed": 100,
+          "SoundMuted": false,
+          "AlwaysRun": false,
+          "SoundVolume": 90
+        },
+        "Persisted": true,
+        "WallMs": 13500.4771
+      },
+      {
+        "Success": true,
+        "Tic": 419,
+        "Values": {
+          "Version": 2,
+          "TurnSpeed": 100,
+          "SoundMuted": false,
+          "AlwaysRun": false,
+          "SoundVolume": 80
+        },
+        "Persisted": true,
+        "WallMs": 13750.0196
+      },
+      {
+        "Success": true,
+        "Tic": 419,
+        "Values": {
+          "Version": 2,
+          "TurnSpeed": 100,
+          "SoundMuted": false,
+          "AlwaysRun": false,
+          "SoundVolume": 70
+        },
+        "Persisted": true,
+        "WallMs": 14000.5839
+      },
+      {
+        "Success": true,
+        "Tic": 419,
+        "Values": {
+          "Version": 2,
+          "TurnSpeed": 100,
+          "SoundMuted": true,
+          "AlwaysRun": false,
+          "SoundVolume": 70
+        },
+        "Persisted": true,
+        "WallMs": 14501.3283
+      },
+      {
+        "Success": true,
+        "Tic": 524,
+        "Values": {
+          "Version": 2,
+          "TurnSpeed": 100,
+          "SoundMuted": false,
+          "AlwaysRun": false,
+          "SoundVolume": 70
+        },
+        "Persisted": true,
+        "WallMs": 19751.0197
+      },
+      {
+        "Success": true,
+        "Tic": 690,
+        "Values": {
+          "Version": 2,
+          "TurnSpeed": 100,
+          "SoundMuted": true,
+          "AlwaysRun": false,
+          "SoundVolume": 70
+        },
+        "Persisted": true,
+        "WallMs": 26750.9891
+      }
+    ],
+    "ActiveSeconds": 51.6347127,
+    "ReplayVerification": {
+      "Mismatches": [],
+      "Meaning": "Compared available recorded checkpoints through the consumed prefix. This samples selected state and render data, not every hidden game field.",
+      "Matched": true,
+      "Checked": 8
+    }
+  }
+}

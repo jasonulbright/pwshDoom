@@ -1,0 +1,262 @@
+{
+  "Meaning": "Isolated file validation, typed persistence, stale-edit rejection, menu settings navigation and synthetic command generation. No physical keyboard observation or audio/display settings qualification.",
+  "Sources": [
+    {
+      "Path": "src/UserSettings.ps1",
+      "Sha256": "B8D4EF93831BB372048B3AEB7504E9A6AFDA645CC41BCA21375EDC546EFCF499"
+    },
+    {
+      "Path": "src/SessionMenu.ps1",
+      "Sha256": "D63E4C38E72C8B2915256288750A588070781507CB2934557D27F2A23002DDA2"
+    },
+    {
+      "Path": "src/ConsoleInput.ps1",
+      "Sha256": "7DDFDC801009B2D6B02DDCD1E02B7E7A2C557E860B8DBB418AA44706AD6777C8"
+    }
+  ],
+  "Error": null,
+  "Fixtures": "C:\\projects\\pwshDoom\\scripts\\..\\local\\settings-test-a02ff0a87cbb4ef9bd890481225e70d1",
+  "FinishedUtc": "2026-09-11T20:27:20.5354828Z",
+  "Checks": [
+    {
+      "Passed": true,
+      "Name": "Missing settings returns defaults without writing a file"
+    },
+    {
+      "Passed": true,
+      "Name": "Copy does not alias live preferences"
+    },
+    {
+      "Passed": true,
+      "Name": "File round trip retains typed preferences and exact byte hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Menu IPC object preserves typed preferences"
+    },
+    {
+      "Passed": true,
+      "Name": "Legacy preferences migrate in memory without rewriting user file"
+    },
+    {
+      "Passed": true,
+      "Name": "Sound gain and mute persist independently in version two"
+    },
+    {
+      "Passed": true,
+      "Name": "Reject invalid sound volume -1"
+    },
+    {
+      "Passed": true,
+      "Name": "Reject invalid sound volume 101"
+    },
+    {
+      "Passed": true,
+      "Name": "Reject invalid sound volume 50"
+    },
+    {
+      "Passed": true,
+      "Name": "Reject invalid sound volume 50.5"
+    },
+    {
+      "Passed": true,
+      "Name": "Reject invalid sound volume True"
+    },
+    {
+      "Passed": true,
+      "Name": "Reject string mute value"
+    },
+    {
+      "Passed": true,
+      "Name": "Stale writer rejected without changing newer file"
+    },
+    {
+      "Passed": true,
+      "Name": "Invalid file 0 rejected"
+    },
+    {
+      "Passed": true,
+      "Name": "Invalid file 0 preserved on attempted save"
+    },
+    {
+      "Passed": true,
+      "Name": "Invalid file 1 rejected"
+    },
+    {
+      "Passed": true,
+      "Name": "Invalid file 1 preserved on attempted save"
+    },
+    {
+      "Passed": true,
+      "Name": "Invalid file 2 rejected"
+    },
+    {
+      "Passed": true,
+      "Name": "Invalid file 2 preserved on attempted save"
+    },
+    {
+      "Passed": true,
+      "Name": "Invalid file 3 rejected"
+    },
+    {
+      "Passed": true,
+      "Name": "Invalid file 3 preserved on attempted save"
+    },
+    {
+      "Passed": true,
+      "Name": "Invalid file 4 rejected"
+    },
+    {
+      "Passed": true,
+      "Name": "Invalid file 4 preserved on attempted save"
+    },
+    {
+      "Passed": true,
+      "Name": "Invalid file 5 rejected"
+    },
+    {
+      "Passed": true,
+      "Name": "Invalid file 5 preserved on attempted save"
+    },
+    {
+      "Passed": true,
+      "Name": "Invalid file 6 rejected"
+    },
+    {
+      "Passed": true,
+      "Name": "Invalid file 6 preserved on attempted save"
+    },
+    {
+      "Passed": true,
+      "Name": "Invalid file 7 rejected"
+    },
+    {
+      "Passed": true,
+      "Name": "Invalid file 7 preserved on attempted save"
+    },
+    {
+      "Passed": true,
+      "Name": "Invalid file 8 rejected"
+    },
+    {
+      "Passed": true,
+      "Name": "Invalid file 8 preserved on attempted save"
+    },
+    {
+      "Passed": true,
+      "Name": "Invalid file 9 rejected"
+    },
+    {
+      "Passed": true,
+      "Name": "Invalid file 9 preserved on attempted save"
+    },
+    {
+      "Passed": true,
+      "Name": "No temporary settings files left"
+    },
+    {
+      "Passed": true,
+      "Name": "Main menu reaches settings"
+    },
+    {
+      "Passed": true,
+      "Name": "Always-run toggle is marked for persistence"
+    },
+    {
+      "Passed": true,
+      "Name": "Turn speed moves to 150 percent"
+    },
+    {
+      "Passed": true,
+      "Name": "Turn speed wraps to 50 percent"
+    },
+    {
+      "Passed": true,
+      "Name": "Reverse cycling returns to 150 percent"
+    },
+    {
+      "Passed": true,
+      "Name": "Volume steps down by ten percent"
+    },
+    {
+      "Passed": true,
+      "Name": "Volume clamps to zero without redundant persistence"
+    },
+    {
+      "Passed": true,
+      "Name": "Volume clamps to one hundred"
+    },
+    {
+      "Passed": true,
+      "Name": "Mute keeps chosen volume"
+    },
+    {
+      "Passed": true,
+      "Name": "Reset restores both input defaults"
+    },
+    {
+      "Passed": true,
+      "Name": "Reset also restores sound defaults"
+    },
+    {
+      "Passed": true,
+      "Name": "Back returns to selected settings item"
+    },
+    {
+      "Passed": true,
+      "Name": "Commands always=False shift=False turn=50"
+    },
+    {
+      "Passed": true,
+      "Name": "Commands always=False shift=False turn=100"
+    },
+    {
+      "Passed": true,
+      "Name": "Commands always=False shift=False turn=150"
+    },
+    {
+      "Passed": true,
+      "Name": "Commands always=False shift=True turn=50"
+    },
+    {
+      "Passed": true,
+      "Name": "Commands always=False shift=True turn=100"
+    },
+    {
+      "Passed": true,
+      "Name": "Commands always=False shift=True turn=150"
+    },
+    {
+      "Passed": true,
+      "Name": "Commands always=True shift=False turn=50"
+    },
+    {
+      "Passed": true,
+      "Name": "Commands always=True shift=False turn=100"
+    },
+    {
+      "Passed": true,
+      "Name": "Commands always=True shift=False turn=150"
+    },
+    {
+      "Passed": true,
+      "Name": "Commands always=True shift=True turn=50"
+    },
+    {
+      "Passed": true,
+      "Name": "Commands always=True shift=True turn=100"
+    },
+    {
+      "Passed": true,
+      "Name": "Commands always=True shift=True turn=150"
+    },
+    {
+      "Passed": true,
+      "Name": "Automap captures turn arrows while preserving configured WASD movement"
+    },
+    {
+      "Passed": true,
+      "Name": "Held movement suppressed after settings menu despite always-run"
+    }
+  ]
+}

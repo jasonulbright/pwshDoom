@@ -1,6 +1,6 @@
 # PowerShell audio investigation
 
-The terminal game now has opt-in sound effects with `./Start-Doom.ps1 -Sound`. The default remains silent while integration is qualified. DMX decoding, stereo positioning, linear resampling and mixing run in PowerShell, with a standard Windows playback queue. Music, volume settings, audible latency and broader session qualification remain open release requirements.
+The terminal game now has opt-in sound effects with `./Start-Doom.ps1 -Sound`. The default remains silent while integration is qualified. DMX decoding, stereo positioning, linear resampling and mixing run in PowerShell, with a standard Windows playback queue. Persistent [sound volume and mute](settings.md#sound-controls-qualification) are implemented. Music, audible latency and broader session qualification remain open release requirements.
 
 ## Implementation boundary
 
@@ -62,7 +62,7 @@ The corrected controls run (`results/audio-host-controls.json`) pauses at twelve
 
 `results/audio-integration-validation.json` passes 27 evidence checks and pins sixteen current source files, including fifteen standalone parses. The engine-dependent event class is exercised by the actual host. No owned game or recorder processes remain after these runs. The full Ultimate Doom release goal remains active.
 
-Next: qualify menu/save/load/new-game/viewport timing in the integrated host, reduce queue delay without hiding starvation, measure audible latency, add volume controls and music with documented synthesis/instrument provenance, and record actual audiovisual output. The recorder can launch with `-Sound`, but its existing `-an` video path does not capture playback audio; footage is explicitly silent video until loopback capture is implemented.
+Next: broaden menu/save/load/new-game/viewport timing qualification, reduce queue delay without hiding starvation, measure audible latency, add music with documented synthesis/instrument provenance, and record actual audiovisual output. The recorder can launch with `-Sound`, but its existing `-an` video path does not capture playback audio; footage is explicitly silent video until loopback capture is implemented.
 
 ## Reproducing the bounded experiments
 

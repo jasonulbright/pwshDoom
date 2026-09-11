@@ -32,7 +32,7 @@ function Record-SimulationTransition {
         Health=$player.Health;Armor=$player.ArmorPoints;Ammo=$player.Ammo.Clone();Weapons=$player.WeaponOwned.Clone();Keys=$player.Cards.Clone();Kills=$player.KillCount;DidSecret=$player.DidSecret})
 }
 function Publish-SimulationSnapshot {
-    if($null -ne $audio){$audio.Shared.Paused=$script:menuScreen -ne 0 -or $view.ReadInt32(84) -ne 0 -or $script:audioLoading}
+    if($null -ne $audio){$audio.Shared.Volume=$view.ReadInt32(88)/100.0;$audio.Shared.Paused=$script:menuScreen -ne 0 -or $view.ReadInt32(84) -ne 0 -or $script:audioLoading}
     $state=if($StopAtLevelEnd){0}else{[int]$game.State}
     $screenKind=if($null -ne $script:menuPixels){2}elseif($state -ne 0){1}elseif($game.World.AutoMap.Visible){3}else{0}
     if($screenKind -eq 2){$current=$script:menuPixels;$old=$current}
@@ -99,7 +99,7 @@ try {
     Publish-SimulationSnapshot;$view.Write(12,1);[void]$ready.Set()
     while($view.ReadInt32(4) -eq 0) {
         if($null -ne $audio){
-            $audio.Shared.Paused=$menuScreen -ne 0 -or $view.ReadInt32(84) -ne 0
+            $audio.Shared.Volume=$view.ReadInt32(88)/100.0;$audio.Shared.Paused=$menuScreen -ne 0 -or $view.ReadInt32(84) -ne 0
             if($audio.Shared.Error -or $audio.Async.IsCompleted){throw "Audio worker failed: $($audio.Shared.Error)"}
         }
         $request=$view.ReadInt32(48)
@@ -109,7 +109,7 @@ try {
             $response=@{Action=$action.Action;Success=$true;Screen=0;Choice=0;Episode=$options.Episode;Skill=[int]$options.Skill+1;MessageTitle='';MessageDetail='';ReturnScreen=1}
             if($kind -eq 1){
                 $menuScreen=$view.ReadInt32(60);$choice=$view.ReadInt32(64);$selectedEpisode=$view.ReadInt32(68);$selectedSkill=$view.ReadInt32(72)
-                if($menuScreen -lt 0 -or $menuScreen -gt 14 -or $choice -lt 0 -or $choice -gt 6 -or ($menuScreen -eq 14 -and $choice -gt 3)){throw 'Invalid menu request.'}
+                if($menuScreen -lt 0 -or $menuScreen -gt 14 -or $choice -lt 0 -or $choice -gt 6 -or ($menuScreen -eq 14 -and $choice -gt 5)){throw 'Invalid menu request.'}
                 if($menuScreen -eq 0){$menuPixels=$null;$options.Sound.Resume()}
                 else{
                     $options.Sound.Pause()

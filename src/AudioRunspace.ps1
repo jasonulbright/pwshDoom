@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 function Start-DoomAudioRunspace {
     param([hashtable]$Clips)
-    $state=@{Queue=[Collections.Concurrent.BlockingCollection[object]]::new(32);Shared=[hashtable]::Synchronized(@{Ready=$false;Stop=$false;Paused=$true;Epoch=0;Error=$null;Finished=$false;Report=$null});PowerShell=$null;Runspace=$null;Async=$null;MaxQueue=0;Closed=$false}
+    $state=@{Queue=[Collections.Concurrent.BlockingCollection[object]]::new(32);Shared=[hashtable]::Synchronized(@{Ready=$false;Stop=$false;Paused=$true;Volume=1.0;AppliedVolume=1.0;LastSequence=-1;Epoch=0;Error=$null;Finished=$false;Report=$null});PowerShell=$null;Runspace=$null;Async=$null;MaxQueue=0;Closed=$false}
     try{
         $state.Runspace=[RunspaceFactory]::CreateRunspace();$state.Runspace.Open()
         $state.PowerShell=[PowerShell]::Create();$state.PowerShell.Runspace=$state.Runspace

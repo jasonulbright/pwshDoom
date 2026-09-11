@@ -21,6 +21,14 @@ try{
     Check 'File round trip retains typed preferences and exact byte hash' ($read.Values.AlwaysRun -and $read.Values.TurnSpeed -eq 150 -and $read.Sha256 -ceq $hash -and $hash -ceq (Get-FileHash $path).Hash)
     $wire=$copy|ConvertTo-Json|ConvertFrom-Json;$wireCopy=Copy-DoomUserSettings $wire
     Check 'Menu IPC object preserves typed preferences' ($wireCopy.AlwaysRun -and $wireCopy.TurnSpeed -eq 150)
+    $legacy=Join-Path $directory legacy.json;[IO.File]::WriteAllText($legacy,'{"Version":1,"AlwaysRun":true,"TurnSpeed":150}');$legacyHash=(Get-FileHash $legacy).Hash
+    $migrated=Read-DoomUserSettings $legacy
+    Check 'Legacy preferences migrate in memory without rewriting user file' ($migrated.Values.Version -eq 2 -and $migrated.Values.AlwaysRun -and $migrated.Values.SoundVolume -eq 100 -and -not $migrated.Values.SoundMuted -and (Get-FileHash $legacy).Hash -eq $legacyHash)
+    $migrated.Values.SoundVolume=40;$migrated.Values.SoundMuted=$true;$null=Write-DoomUserSettings $legacy $migrated.Values $legacyHash
+    $soundRead=Read-DoomUserSettings $legacy
+    Check 'Sound gain and mute persist independently in version two' ($soundRead.Values.SoundVolume -eq 40 -and $soundRead.Values.SoundMuted -and (Get-Content $legacy -Raw|ConvertFrom-Json).Version -eq 2)
+    foreach($badVolume in -1,101,'50',50.5,$true){$invalid=New-DoomUserSettings;$invalid.SoundVolume=$badVolume;$rejected=$false;try{$null=Copy-DoomUserSettings $invalid}catch{$rejected=$true};Check "Reject invalid sound volume $badVolume" $rejected}
+    $invalid=New-DoomUserSettings;$invalid.SoundMuted='false';$rejected=$false;try{$null=Copy-DoomUserSettings $invalid}catch{$rejected=$true};Check 'Reject string mute value' $rejected
     $hash2=Write-DoomUserSettings $path $values $hash;$rejected=$false
     try{$null=Write-DoomUserSettings $path $copy $hash}catch{$rejected=$true}
     Check 'Stale writer rejected without changing newer file' ($rejected -and (Get-FileHash $path).Hash -ceq $hash2)
@@ -42,8 +50,16 @@ try{
     Check 'Turn speed moves to 150 percent' ($menu.Settings.TurnSpeed -eq 150)
     $null=Invoke-DoomMenuKey $menu Right;Check 'Turn speed wraps to 50 percent' ($menu.Settings.TurnSpeed -eq 50)
     $null=Invoke-DoomMenuKey $menu Left;Check 'Reverse cycling returns to 150 percent' ($menu.Settings.TurnSpeed -eq 150)
+    $null=Invoke-DoomMenuKey $menu Down;$action=Invoke-DoomMenuKey $menu Left
+    Check 'Volume steps down by ten percent' ($menu.Settings.SoundVolume -eq 90 -and $action.SettingsChanged)
+    for($i=0;$i -lt 12;$i++){$null=Invoke-DoomMenuKey $menu Left};$action=Invoke-DoomMenuKey $menu Left
+    Check 'Volume clamps to zero without redundant persistence' ($menu.Settings.SoundVolume -eq 0 -and -not $action.SettingsChanged)
+    for($i=0;$i -lt 12;$i++){$null=Invoke-DoomMenuKey $menu Right};Check 'Volume clamps to one hundred' ($menu.Settings.SoundVolume -eq 100)
+    $null=Invoke-DoomMenuKey $menu Down;$null=Invoke-DoomMenuKey $menu Enter
+    Check 'Mute keeps chosen volume' ($menu.Settings.SoundMuted -and $menu.Settings.SoundVolume -eq 100)
     $null=Invoke-DoomMenuKey $menu Down;$action=Invoke-DoomMenuKey $menu Enter
     Check 'Reset restores both input defaults' (-not $menu.Settings.AlwaysRun -and $menu.Settings.TurnSpeed -eq 100 -and $action.SettingsChanged)
+    Check 'Reset also restores sound defaults' ($menu.Settings.SoundVolume -eq 100 -and -not $menu.Settings.SoundMuted)
     $null=Invoke-DoomMenuKey $menu Down;$action=Invoke-DoomMenuKey $menu Enter
     Check 'Back returns to selected settings item' ($menu.Screen -eq 1 -and $menu.Choice -eq 5 -and -not $action.SettingsChanged)
     $state=@{Keys=[bool[]]::new(256);Pressed=[bool[]]::new(256);Suppressed=[bool[]]::new(256)};$cmd=[SettingsTestCommand]::new()

@@ -2,12 +2,13 @@
 # Command ring and double-buffered snapshots for the dedicated simulation process.
 . "$PSScriptRoot/SaveSlots.ps1"
 function New-DoomSimulation {
-    param([string]$Wad,[int]$Skill,[int]$Episode,[int]$Map,[switch]$StopAtLevelEnd,[switch]$ReplayCheckpoints,[string]$CheckpointReplay,[string]$SaveRoot,[switch]$Sound)
+    param([string]$Wad,[int]$Skill,[int]$Episode,[int]$Map,[switch]$StopAtLevelEnd,[switch]$ReplayCheckpoints,[string]$CheckpointReplay,[string]$SaveRoot,[switch]$Sound,[ValidateRange(0,100)][int]$SoundVolume=100)
     $root=Split-Path $PSScriptRoot;$id=[guid]::NewGuid().ToString('N');$name='Local\pwshDoom-sim-'+$id
     $state=@{Assets="$root/local/session-$id.assets";Report="$root/local/simulation-$id.json";Name=$name;Process=$null}
     try {
         $state.Map=[IO.MemoryMappedFiles.MemoryMappedFile]::CreateNew($name,3145728);$state.View=$state.Map.CreateViewAccessor()
         $state.View.Write(84,1) # Audio paused until the host's active clock runs.
+        $state.View.Write(88,$SoundVolume)
         $state.Ready=[Threading.EventWaitHandle]::new($false,[Threading.EventResetMode]::ManualReset,$name+'-ready')
         $state.Go=[Threading.EventWaitHandle]::new($false,[Threading.EventResetMode]::AutoReset,$name+'-go')
         $info=[Diagnostics.ProcessStartInfo]::new((Get-Process -Id $PID).Path);$info.UseShellExecute=$false;$info.CreateNoWindow=$true
