@@ -1,0 +1,44 @@
+{
+  "Checks": [
+    {
+      "Passed": true,
+      "Name": "Independent signed little-endian PCM vector"
+    },
+    {
+      "Passed": true,
+      "Name": "Version, odd INFO padding and unknown INFO chunk"
+    },
+    {
+      "Passed": true,
+      "Name": "Independent preset to instrument to sample chain"
+    },
+    {
+      "Passed": true,
+      "Name": "Loop endpoints, source rate and signed pitch correction"
+    },
+    {
+      "Passed": true,
+      "Name": "Reject malformed/unsupported short"
+    },
+    {
+      "Passed": true,
+      "Name": "Reject malformed/unsupported signature"
+    },
+    {
+      "Passed": true,
+      "Name": "Reject malformed/unsupported riffsize"
+    }
+  ],
+  "Error": "Cannot process argument transformation on parameter 'Value'. Cannot convert value \"-1\" to type \"System.UInt32\". Error: \"Value was either too large or too small for a UInt32.\"\nat <ScriptBlock>, C:\\projects\\pwshDoom\\scripts\\Test-SoundFontBank.ps1: line 43",
+  "Meaning": "Independent synthetic SF2 container, PCM and table values; malformed structure rejection. No synthesis or general SoundFont compliance claim.",
+  "Sources": [
+    {
+      "Sha256": "AF80287762169B5318F60FD719479137BAED1D3EEF39561513D2B34AC118A855",
+      "Path": "src/SoundFontBank.ps1"
+    },
+    {
+      "Sha256": "8DAAB5F2BE89B6FBCD1CC8EC77536590E2622A51EF44A49CA55695C1CCAB44EB",
+      "Path": "scripts/Test-SoundFontBank.ps1"
+    }
+  ]
+}

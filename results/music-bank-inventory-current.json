@@ -1,0 +1,1046 @@
+{
+  "Sources": [
+    {
+      "Sha256": "AF80287762169B5318F60FD719479137BAED1D3EEF39561513D2B34AC118A855",
+      "Path": "src/SoundFontBank.ps1"
+    },
+    {
+      "Sha256": "06F307D0BAEAA856FB11F86D6732C8CDEDA7E60AA290200CF0579C4808D0BC07",
+      "Path": "scripts/Test-MusicBankInventory.ps1"
+    }
+  ],
+  "Meaning": "Structural bank inventory and preset-header availability only. Percussion key/velocity zones, generator semantics, sound quality and synthesis cost remain unqualified. Bank/sample content remains ignored local data.",
+  "Error": null,
+  "Details": {
+    "MissingMelodicPrograms": [],
+    "SampleRates": [
+      11025,
+      12000,
+      17857,
+      22050,
+      22321,
+      22500,
+      44100,
+      44642
+    ],
+    "DrumPresets": [
+      {
+        "Program": 48,
+        "Bank": 128,
+        "Bag": 1,
+        "Name": "Orchestra"
+      },
+      {
+        "Program": 40,
+        "Bank": 128,
+        "Bag": 4,
+        "Name": "Brush"
+      },
+      {
+        "Program": 32,
+        "Bank": 128,
+        "Bag": 6,
+        "Name": "Jazz"
+      },
+      {
+        "Program": 25,
+        "Bank": 128,
+        "Bag": 8,
+        "Name": "TR 808"
+      },
+      {
+        "Program": 24,
+        "Bank": 128,
+        "Bag": 11,
+        "Name": "Electronic"
+      },
+      {
+        "Program": 16,
+        "Bank": 128,
+        "Bag": 13,
+        "Name": "Power"
+      },
+      {
+        "Program": 8,
+        "Bank": 128,
+        "Bag": 16,
+        "Name": "Room"
+      },
+      {
+        "Program": 0,
+        "Bank": 128,
+        "Bag": 18,
+        "Name": "Standard"
+      }
+    ],
+    "RequiredPercussionKeys": [
+      35,
+      36,
+      38,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      55,
+      57,
+      59,
+      64,
+      75,
+      80,
+      81
+    ],
+    "Presets": [
+      {
+        "Program": 73,
+        "Bank": 0,
+        "Bag": 0,
+        "Name": "Flute TB"
+      },
+      {
+        "Program": 48,
+        "Bank": 128,
+        "Bag": 1,
+        "Name": "Orchestra"
+      },
+      {
+        "Program": 40,
+        "Bank": 128,
+        "Bag": 4,
+        "Name": "Brush"
+      },
+      {
+        "Program": 32,
+        "Bank": 128,
+        "Bag": 6,
+        "Name": "Jazz"
+      },
+      {
+        "Program": 25,
+        "Bank": 128,
+        "Bag": 8,
+        "Name": "TR 808"
+      },
+      {
+        "Program": 24,
+        "Bank": 128,
+        "Bag": 11,
+        "Name": "Electronic"
+      },
+      {
+        "Program": 16,
+        "Bank": 128,
+        "Bag": 13,
+        "Name": "Power"
+      },
+      {
+        "Program": 8,
+        "Bank": 128,
+        "Bag": 16,
+        "Name": "Room"
+      },
+      {
+        "Program": 0,
+        "Bank": 128,
+        "Bag": 18,
+        "Name": "Standard"
+      },
+      {
+        "Program": 127,
+        "Bank": 0,
+        "Bag": 20,
+        "Name": "Gun Shot"
+      },
+      {
+        "Program": 126,
+        "Bank": 0,
+        "Bag": 22,
+        "Name": "Applause"
+      },
+      {
+        "Program": 125,
+        "Bank": 0,
+        "Bag": 24,
+        "Name": "Helicopter"
+      },
+      {
+        "Program": 124,
+        "Bank": 0,
+        "Bag": 25,
+        "Name": "Telephone"
+      },
+      {
+        "Program": 123,
+        "Bank": 0,
+        "Bag": 26,
+        "Name": "Bird"
+      },
+      {
+        "Program": 122,
+        "Bank": 0,
+        "Bag": 27,
+        "Name": "Seashore"
+      },
+      {
+        "Program": 121,
+        "Bank": 0,
+        "Bag": 28,
+        "Name": "Breath Noise"
+      },
+      {
+        "Program": 120,
+        "Bank": 0,
+        "Bag": 30,
+        "Name": "Fret Noise"
+      },
+      {
+        "Program": 119,
+        "Bank": 0,
+        "Bag": 31,
+        "Name": "Reverse Cymbal"
+      },
+      {
+        "Program": 118,
+        "Bank": 0,
+        "Bag": 32,
+        "Name": "Synth Drum"
+      },
+      {
+        "Program": 117,
+        "Bank": 0,
+        "Bag": 33,
+        "Name": "Melodic Tom"
+      },
+      {
+        "Program": 116,
+        "Bank": 0,
+        "Bag": 34,
+        "Name": "Taiko Drum"
+      },
+      {
+        "Program": 115,
+        "Bank": 0,
+        "Bag": 35,
+        "Name": "Wood Block"
+      },
+      {
+        "Program": 114,
+        "Bank": 0,
+        "Bag": 36,
+        "Name": "Steel Drum"
+      },
+      {
+        "Program": 113,
+        "Bank": 0,
+        "Bag": 37,
+        "Name": "Agogo"
+      },
+      {
+        "Program": 112,
+        "Bank": 0,
+        "Bag": 38,
+        "Name": "Tinker Bell"
+      },
+      {
+        "Program": 111,
+        "Bank": 0,
+        "Bag": 39,
+        "Name": "Shenai"
+      },
+      {
+        "Program": 110,
+        "Bank": 0,
+        "Bag": 40,
+        "Name": "Fiddle"
+      },
+      {
+        "Program": 109,
+        "Bank": 0,
+        "Bag": 41,
+        "Name": "Bagpipe"
+      },
+      {
+        "Program": 108,
+        "Bank": 0,
+        "Bag": 43,
+        "Name": "Kalimba"
+      },
+      {
+        "Program": 107,
+        "Bank": 0,
+        "Bag": 44,
+        "Name": "Koto"
+      },
+      {
+        "Program": 106,
+        "Bank": 0,
+        "Bag": 45,
+        "Name": "Shamisen"
+      },
+      {
+        "Program": 105,
+        "Bank": 0,
+        "Bag": 46,
+        "Name": "Banjo"
+      },
+      {
+        "Program": 104,
+        "Bank": 0,
+        "Bag": 47,
+        "Name": "Sitar"
+      },
+      {
+        "Program": 103,
+        "Bank": 0,
+        "Bag": 48,
+        "Name": "Star Theme"
+      },
+      {
+        "Program": 102,
+        "Bank": 0,
+        "Bag": 50,
+        "Name": "Echo Drops"
+      },
+      {
+        "Program": 101,
+        "Bank": 0,
+        "Bag": 52,
+        "Name": "Goblin"
+      },
+      {
+        "Program": 100,
+        "Bank": 0,
+        "Bag": 54,
+        "Name": "Brightness"
+      },
+      {
+        "Program": 99,
+        "Bank": 0,
+        "Bag": 56,
+        "Name": "Atmosphere"
+      },
+      {
+        "Program": 98,
+        "Bank": 0,
+        "Bag": 58,
+        "Name": "Crystal"
+      },
+      {
+        "Program": 97,
+        "Bank": 0,
+        "Bag": 60,
+        "Name": "Soundtrack"
+      },
+      {
+        "Program": 96,
+        "Bank": 0,
+        "Bag": 62,
+        "Name": "IceRain"
+      },
+      {
+        "Program": 95,
+        "Bank": 0,
+        "Bag": 63,
+        "Name": "Sweep Pad"
+      },
+      {
+        "Program": 94,
+        "Bank": 0,
+        "Bag": 65,
+        "Name": "Halo Pad"
+      },
+      {
+        "Program": 93,
+        "Bank": 0,
+        "Bag": 67,
+        "Name": "Metal Pad"
+      },
+      {
+        "Program": 92,
+        "Bank": 0,
+        "Bag": 69,
+        "Name": "Bowed Glass"
+      },
+      {
+        "Program": 91,
+        "Bank": 0,
+        "Bag": 71,
+        "Name": "Space Voice"
+      },
+      {
+        "Program": 90,
+        "Bank": 0,
+        "Bag": 73,
+        "Name": "Poly Synth"
+      },
+      {
+        "Program": 89,
+        "Bank": 0,
+        "Bag": 75,
+        "Name": "Warm Pad"
+      },
+      {
+        "Program": 88,
+        "Bank": 0,
+        "Bag": 76,
+        "Name": "Fantasia"
+      },
+      {
+        "Program": 87,
+        "Bank": 0,
+        "Bag": 79,
+        "Name": "Bass & Lead"
+      },
+      {
+        "Program": 86,
+        "Bank": 0,
+        "Bag": 81,
+        "Name": "5th Saw Wave"
+      },
+      {
+        "Program": 85,
+        "Bank": 0,
+        "Bag": 83,
+        "Name": "Solo Vox"
+      },
+      {
+        "Program": 84,
+        "Bank": 0,
+        "Bag": 85,
+        "Name": "Charang"
+      },
+      {
+        "Program": 83,
+        "Bank": 0,
+        "Bag": 87,
+        "Name": "Chiffer Lead"
+      },
+      {
+        "Program": 82,
+        "Bank": 0,
+        "Bag": 89,
+        "Name": "Synth Calliope"
+      },
+      {
+        "Program": 81,
+        "Bank": 0,
+        "Bag": 91,
+        "Name": "Saw Wave"
+      },
+      {
+        "Program": 80,
+        "Bank": 0,
+        "Bag": 93,
+        "Name": "Square Wave"
+      },
+      {
+        "Program": 79,
+        "Bank": 0,
+        "Bag": 95,
+        "Name": "Ocarina"
+      },
+      {
+        "Program": 78,
+        "Bank": 0,
+        "Bag": 96,
+        "Name": "Whistle"
+      },
+      {
+        "Program": 77,
+        "Bank": 0,
+        "Bag": 97,
+        "Name": "Shakuhachi"
+      },
+      {
+        "Program": 76,
+        "Bank": 0,
+        "Bag": 98,
+        "Name": "Bottle Chiff"
+      },
+      {
+        "Program": 75,
+        "Bank": 0,
+        "Bag": 100,
+        "Name": "Pan Flute"
+      },
+      {
+        "Program": 74,
+        "Bank": 0,
+        "Bag": 101,
+        "Name": "Recorder"
+      },
+      {
+        "Program": 72,
+        "Bank": 0,
+        "Bag": 102,
+        "Name": "Piccolo"
+      },
+      {
+        "Program": 71,
+        "Bank": 0,
+        "Bag": 103,
+        "Name": "Clarinet"
+      },
+      {
+        "Program": 70,
+        "Bank": 0,
+        "Bag": 104,
+        "Name": "Bassoon"
+      },
+      {
+        "Program": 69,
+        "Bank": 0,
+        "Bag": 105,
+        "Name": "English Horn"
+      },
+      {
+        "Program": 68,
+        "Bank": 0,
+        "Bag": 106,
+        "Name": "Oboe (Orch)"
+      },
+      {
+        "Program": 60,
+        "Bank": 0,
+        "Bag": 107,
+        "Name": "French Horns"
+      },
+      {
+        "Program": 63,
+        "Bank": 0,
+        "Bag": 111,
+        "Name": "Synth Brass 2"
+      },
+      {
+        "Program": 62,
+        "Bank": 0,
+        "Bag": 112,
+        "Name": "Synth Brass 1"
+      },
+      {
+        "Program": 61,
+        "Bank": 0,
+        "Bag": 114,
+        "Name": "Brass"
+      },
+      {
+        "Program": 59,
+        "Bank": 0,
+        "Bag": 115,
+        "Name": "Mute Trumpet"
+      },
+      {
+        "Program": 58,
+        "Bank": 0,
+        "Bag": 116,
+        "Name": "Tuba"
+      },
+      {
+        "Program": 57,
+        "Bank": 0,
+        "Bag": 117,
+        "Name": "Trombone"
+      },
+      {
+        "Program": 56,
+        "Bank": 0,
+        "Bag": 118,
+        "Name": "SoloTrumpet"
+      },
+      {
+        "Program": 55,
+        "Bank": 0,
+        "Bag": 119,
+        "Name": "Orchestra Hit"
+      },
+      {
+        "Program": 54,
+        "Bank": 0,
+        "Bag": 121,
+        "Name": "Synth Vox"
+      },
+      {
+        "Program": 53,
+        "Bank": 0,
+        "Bag": 122,
+        "Name": "Voice Oohs"
+      },
+      {
+        "Program": 51,
+        "Bank": 0,
+        "Bag": 124,
+        "Name": "Synth Strings 2"
+      },
+      {
+        "Program": 47,
+        "Bank": 0,
+        "Bag": 126,
+        "Name": "Timpani"
+      },
+      {
+        "Program": 46,
+        "Bank": 0,
+        "Bag": 127,
+        "Name": "Harp LP"
+      },
+      {
+        "Program": 45,
+        "Bank": 0,
+        "Bag": 128,
+        "Name": "Pizzicato"
+      },
+      {
+        "Program": 43,
+        "Bank": 0,
+        "Bag": 129,
+        "Name": "Contrabass"
+      },
+      {
+        "Program": 42,
+        "Bank": 0,
+        "Bag": 130,
+        "Name": "Cello"
+      },
+      {
+        "Program": 41,
+        "Bank": 0,
+        "Bag": 131,
+        "Name": "Viola"
+      },
+      {
+        "Program": 40,
+        "Bank": 0,
+        "Bag": 132,
+        "Name": "Violin"
+      },
+      {
+        "Program": 39,
+        "Bank": 0,
+        "Bag": 133,
+        "Name": "Synth Bass 2"
+      },
+      {
+        "Program": 38,
+        "Bank": 0,
+        "Bag": 135,
+        "Name": "Synth Bass 1"
+      },
+      {
+        "Program": 37,
+        "Bank": 0,
+        "Bag": 136,
+        "Name": "Slap Bass 2"
+      },
+      {
+        "Program": 36,
+        "Bank": 0,
+        "Bag": 137,
+        "Name": "Slap Bass 1"
+      },
+      {
+        "Program": 35,
+        "Bank": 0,
+        "Bag": 138,
+        "Name": "Fretless Bass"
+      },
+      {
+        "Program": 34,
+        "Bank": 0,
+        "Bag": 139,
+        "Name": "Picked Bass"
+      },
+      {
+        "Program": 33,
+        "Bank": 0,
+        "Bag": 140,
+        "Name": "Fingered Bass"
+      },
+      {
+        "Program": 32,
+        "Bank": 0,
+        "Bag": 141,
+        "Name": "Acoustic Bass"
+      },
+      {
+        "Program": 31,
+        "Bank": 0,
+        "Bag": 142,
+        "Name": "Guitar Harmonics"
+      },
+      {
+        "Program": 30,
+        "Bank": 0,
+        "Bag": 143,
+        "Name": "DistortionGuitar"
+      },
+      {
+        "Program": 29,
+        "Bank": 0,
+        "Bag": 145,
+        "Name": "Overdrive Guitar"
+      },
+      {
+        "Program": 28,
+        "Bank": 0,
+        "Bag": 147,
+        "Name": "Guitar Mutes"
+      },
+      {
+        "Program": 27,
+        "Bank": 0,
+        "Bag": 148,
+        "Name": "Clean Guitar"
+      },
+      {
+        "Program": 26,
+        "Bank": 0,
+        "Bag": 149,
+        "Name": "Jazz Guitar"
+      },
+      {
+        "Program": 25,
+        "Bank": 0,
+        "Bag": 150,
+        "Name": "Steel Guitar"
+      },
+      {
+        "Program": 24,
+        "Bank": 0,
+        "Bag": 151,
+        "Name": "Nylon Guitar"
+      },
+      {
+        "Program": 23,
+        "Bank": 0,
+        "Bag": 152,
+        "Name": "Bandoneon"
+      },
+      {
+        "Program": 22,
+        "Bank": 0,
+        "Bag": 154,
+        "Name": "Harmonica"
+      },
+      {
+        "Program": 21,
+        "Bank": 0,
+        "Bag": 155,
+        "Name": "Accordion"
+      },
+      {
+        "Program": 20,
+        "Bank": 0,
+        "Bag": 157,
+        "Name": "Reed Organ"
+      },
+      {
+        "Program": 19,
+        "Bank": 0,
+        "Bag": 159,
+        "Name": "Church Organ"
+      },
+      {
+        "Program": 18,
+        "Bank": 0,
+        "Bag": 161,
+        "Name": "Organ 3"
+      },
+      {
+        "Program": 17,
+        "Bank": 0,
+        "Bag": 163,
+        "Name": "Organ 2"
+      },
+      {
+        "Program": 16,
+        "Bank": 0,
+        "Bag": 164,
+        "Name": "Organ 1"
+      },
+      {
+        "Program": 15,
+        "Bank": 0,
+        "Bag": 165,
+        "Name": "Dulcimer"
+      },
+      {
+        "Program": 14,
+        "Bank": 0,
+        "Bag": 167,
+        "Name": "Tubular Bells"
+      },
+      {
+        "Program": 13,
+        "Bank": 0,
+        "Bag": 168,
+        "Name": "Xylophone"
+      },
+      {
+        "Program": 12,
+        "Bank": 0,
+        "Bag": 172,
+        "Name": "Marimba"
+      },
+      {
+        "Program": 11,
+        "Bank": 0,
+        "Bag": 173,
+        "Name": "Vibraphone"
+      },
+      {
+        "Program": 10,
+        "Bank": 0,
+        "Bag": 174,
+        "Name": "MusicBox"
+      },
+      {
+        "Program": 9,
+        "Bank": 0,
+        "Bag": 175,
+        "Name": "Glockenspiel"
+      },
+      {
+        "Program": 8,
+        "Bank": 0,
+        "Bag": 176,
+        "Name": "Celesta"
+      },
+      {
+        "Program": 7,
+        "Bank": 0,
+        "Bag": 177,
+        "Name": "Clavinet"
+      },
+      {
+        "Program": 6,
+        "Bank": 0,
+        "Bag": 178,
+        "Name": "Harpsichord"
+      },
+      {
+        "Program": 5,
+        "Bank": 0,
+        "Bag": 179,
+        "Name": "E.Piano 2"
+      },
+      {
+        "Program": 4,
+        "Bank": 0,
+        "Bag": 180,
+        "Name": "E.Piano 1"
+      },
+      {
+        "Program": 3,
+        "Bank": 0,
+        "Bag": 182,
+        "Name": "Honky Tonk"
+      },
+      {
+        "Program": 2,
+        "Bank": 0,
+        "Bag": 184,
+        "Name": "Piano 3"
+      },
+      {
+        "Program": 1,
+        "Bank": 0,
+        "Bag": 186,
+        "Name": "Piano 2"
+      },
+      {
+        "Program": 0,
+        "Bank": 0,
+        "Bag": 187,
+        "Name": "Piano 1"
+      },
+      {
+        "Program": 67,
+        "Bank": 0,
+        "Bag": 188,
+        "Name": "BariSax (TB) v2.3"
+      },
+      {
+        "Program": 66,
+        "Bank": 0,
+        "Bag": 189,
+        "Name": "Tenor Sax (TB) v2.3"
+      },
+      {
+        "Program": 65,
+        "Bank": 0,
+        "Bag": 190,
+        "Name": "AltoSax (TB) v2.3"
+      },
+      {
+        "Program": 64,
+        "Bank": 0,
+        "Bag": 191,
+        "Name": "SopSax (TB) v2.3"
+      },
+      {
+        "Program": 52,
+        "Bank": 0,
+        "Bag": 192,
+        "Name": "Choir Aahs"
+      },
+      {
+        "Program": 50,
+        "Bank": 0,
+        "Bag": 195,
+        "Name": "Synth Strings 1"
+      },
+      {
+        "Program": 49,
+        "Bank": 0,
+        "Bag": 197,
+        "Name": "Slow Strings LP"
+      },
+      {
+        "Program": 48,
+        "Bank": 0,
+        "Bag": 202,
+        "Name": "Strings CLP"
+      },
+      {
+        "Program": 44,
+        "Bank": 0,
+        "Bag": 208,
+        "Name": "Strings (Tremelo)"
+      }
+    ],
+    "SampleTypes": [
+      1
+    ],
+    "PresetGeneratorIds": [
+      41
+    ],
+    "Bytes": 5994284,
+    "ParseMilliseconds": 855.4833,
+    "InstrumentGeneratorIds": [
+      2,
+      3,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      13,
+      15,
+      16,
+      17,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      40,
+      43,
+      48,
+      52,
+      53,
+      54,
+      56,
+      57,
+      58
+    ],
+    "SampleFrames": 2893608,
+    "SoundFontSha256": "82475B91A76DE15CB28A104707D3247BA932E228BADA3F47BBA63C6B31AAF7A1",
+    "TableRecordCounts": {
+      "shdr": 521,
+      "pgen": 211,
+      "pmod": 1,
+      "pbag": 211,
+      "phdr": 137,
+      "inst": 211,
+      "ibag": 2064,
+      "imod": 456,
+      "igen": 39635
+    },
+    "Metadata": {
+      "INAM": "TimGM6mb",
+      "isng": "EMU8000",
+      "ISFT": "Awave Studio v8.5"
+    },
+    "RequiredMelodicPrograms": [
+      0,
+      6,
+      7,
+      10,
+      11,
+      13,
+      15,
+      18,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      37,
+      38,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      55,
+      62,
+      63,
+      70,
+      72,
+      75,
+      79,
+      80,
+      81,
+      82,
+      87,
+      92,
+      94,
+      97,
+      101,
+      102,
+      108,
+      117,
+      118,
+      119,
+      120,
+      123
+    ],
+    "Version": [
+      2,
+      1
+    ]
+  },
+  "MusicInventorySha256": "C31FFDD579BACB7BC1BB5DD99AB30F7A13D2F56EEA62235404D6774EBAA33E85"
+}

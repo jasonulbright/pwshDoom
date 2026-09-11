@@ -1,0 +1,15 @@
+{
+  "Checks": [],
+  "Error": "Exception calling \"CopyTo\" with \"2\" argument(s): \"At least one element in the source array could not be cast down to the destination array type.\"\nat Fixture, C:\\projects\\pwshDoom\\scripts\\Test-MusScore.ps1: line 10\r\nat <ScriptBlock>, C:\\projects\\pwshDoom\\scripts\\Test-MusScore.ps1: line 17",
+  "Meaning": "Independent synthetic MUS bytes, malformed bounds and exact sample scheduling. No synthesis, playback or whole-IWAD compatibility claim.",
+  "Sources": [
+    {
+      "Path": "src/MusScore.ps1",
+      "Sha256": "00EF280ADA72445ECE70E555E9C1341BE53D7D86BD56A9E5E743D15902B26C5C"
+    },
+    {
+      "Path": "scripts/Test-MusScore.ps1",
+      "Sha256": "785ECA46150DBFD25F5A22E3AD9B29AF7A1CB7EE11C980D016A426F55AC17DDC"
+    }
+  ]
+}

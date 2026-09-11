@@ -1,0 +1,6 @@
+{
+  "Error": "ConvertTo-Json: Test-MusicInventory.ps1:48: The type 'System.Collections.Hashtable' is not supported for serialization or deserialization of a dictionary. Keys must be strings.",
+  "AttemptedOutput": "results/music-iwad-inventory-projection.json",
+  "Evidence": "Recorded from failed process output; its report serializer failed, so no track results were preserved. Numeric event-kind keys were subsequently changed to strings.",
+  "ExitCode": 1
+}

@@ -1,0 +1,22 @@
+{
+  "Tracks": [],
+  "Error": "Method invocation failed because [System.Object[]] does not contain a method named 'op_Multiply'.\nat <ScriptBlock>, C:\\projects\\pwshDoom\\scripts\\Test-MusicInventory.ps1: line 31\r\nat <ScriptBlock>, C:\\projects\\pwshDoom\\scripts\\Test-MusicInventory.ps1: line 31",
+  "Meaning": "All D_ lumps in this IWAD parsed and scheduled at 44.1 kHz; exact event-sample hashes compared against independent tick*315 projection. Map table records the retained engine mapping, not independently proved routing. Depressed-key peak excludes sustain, release tails and layered soundfont voices. No synthesis or music playback qualification.",
+  "MapMusic": [],
+  "Sources": [
+    {
+      "Sha256": "00EF280ADA72445ECE70E555E9C1341BE53D7D86BD56A9E5E743D15902B26C5C",
+      "Path": "src/MusScore.ps1"
+    },
+    {
+      "Sha256": "204B006C78743C57D115495A9BDF9F069271EE3103265A0F287F499652D3BDD6",
+      "Path": "scripts/Test-MusicInventory.ps1"
+    },
+    {
+      "Sha256": "0FD1B35983046471382FF98B955AF4001A3D581DAAEB3A61844829C97FFAF98A",
+      "Path": "src/ManagedDoom/Doom/Map/Map.sb.ps1"
+    }
+  ],
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "FinishedUtc": "2026-09-11T20:51:05.4482739Z"
+}

@@ -1,0 +1,116 @@
+{
+  "Meaning": "Independent synthetic MUS bytes, malformed bounds and exact sample scheduling. No synthesis, playback or whole-IWAD compatibility claim.",
+  "Error": null,
+  "Sources": [
+    {
+      "Sha256": "66B87D1CDD3FAD62E493A0C50C9A5AEBFE27167C8CCCCA974CC80463B6D1BB33",
+      "Path": "src/MusScore.ps1"
+    },
+    {
+      "Sha256": "38B8CE98C57D07203EA858F45430778118B509BED95CBD1D31EC2C982606F5E3",
+      "Path": "scripts/Test-MusScore.ps1"
+    }
+  ],
+  "Checks": [
+    {
+      "Passed": true,
+      "Name": "Independent event/timing/channel vector"
+    },
+    {
+      "Passed": true,
+      "Name": "Instrument, duration and normalization metadata"
+    },
+    {
+      "Passed": true,
+      "Name": "Program and note/velocity high bits are masked; end flag consumes no delay"
+    },
+    {
+      "Passed": true,
+      "Name": "Masking normalization counter"
+    },
+    {
+      "Passed": true,
+      "Name": "Reject malformed short"
+    },
+    {
+      "Passed": true,
+      "Name": "Reject malformed signature"
+    },
+    {
+      "Passed": true,
+      "Name": "Reject malformed scorestart"
+    },
+    {
+      "Passed": true,
+      "Name": "Reject malformed scorelength"
+    },
+    {
+      "Passed": true,
+      "Name": "Reject malformed instrumentcount"
+    },
+    {
+      "Passed": true,
+      "Name": "Reject malformed truncatednote"
+    },
+    {
+      "Passed": true,
+      "Name": "Reject malformed truncateddelay"
+    },
+    {
+      "Passed": true,
+      "Name": "Reject malformed missingend"
+    },
+    {
+      "Passed": true,
+      "Name": "Reject malformed reserved"
+    },
+    {
+      "Passed": true,
+      "Name": "Reject malformed system"
+    },
+    {
+      "Passed": true,
+      "Name": "Reject malformed controller"
+    },
+    {
+      "Passed": true,
+      "Name": "Reject malformed longdelay"
+    },
+    {
+      "Passed": true,
+      "Name": "Reject malformed duration"
+    },
+    {
+      "Passed": true,
+      "Name": "Big-endian base-128 delay"
+    },
+    {
+      "Passed": true,
+      "Name": "Music tick maps exactly to 315 frames at 44.1 kHz"
+    },
+    {
+      "Passed": true,
+      "Name": "Events on block endpoint belong to next block"
+    },
+    {
+      "Passed": true,
+      "Name": "Loop event sequence independent of audio block partition"
+    },
+    {
+      "Passed": true,
+      "Name": "Pause retains music position and pending events"
+    },
+    {
+      "Passed": true,
+      "Name": "Nonlooping score ends once"
+    },
+    {
+      "Passed": true,
+      "Name": "Nonintegral loop length accumulates no rounded-cycle drift"
+    },
+    {
+      "Passed": true,
+      "Name": "Zero-duration infinite loop rejected"
+    }
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "Checks": [
+    {
+      "Passed": true,
+      "Name": "Independent signed little-endian PCM vector"
+    },
+    {
+      "Passed": true,
+      "Name": "Version, odd INFO padding and unknown INFO chunk"
+    },
+    {
+      "Passed": true,
+      "Name": "Independent preset to instrument to sample chain"
+    },
+    {
+      "Passed": true,
+      "Name": "Loop endpoints, source rate and signed pitch correction"
+    },
+    {
+      "Passed": true,
+      "Name": "Reject malformed/unsupported short"
+    },
+    {
+      "Passed": true,
+      "Name": "Reject malformed/unsupported signature"
+    },
+    {
+      "Passed": true,
+      "Name": "Reject malformed/unsupported riffsize"
+    },
+    {
+      "Passed": true,
+      "Name": "Reject malformed/unsupported chunkoverflow"
+    },
+    {
+      "Passed": true,
+      "Name": "Reject malformed/unsupported version"
+    },
+    {
+      "Passed": true,
+      "Name": "Reject malformed/unsupported tablewidth"
+    },
+    {
+      "Passed": true,
+      "Name": "Reject malformed/unsupported missingtable"
+    },
+    {
+      "Passed": true,
+      "Name": "Reject malformed/unsupported headerterminal"
+    },
+    {
+      "Passed": true,
+      "Name": "Reject malformed/unsupported bagterminal"
+    },
+    {
+      "Passed": true,
+      "Name": "Reject malformed/unsupported instrumentreference"
+    },
+    {
+      "Passed": true,
+      "Name": "Reject malformed/unsupported samplereference"
+    },
+    {
+      "Passed": true,
+      "Name": "Reject malformed/unsupported sampleend"
+    },
+    {
+      "Passed": true,
+      "Name": "Reject malformed/unsupported looporder"
+    },
+    {
+      "Passed": true,
+      "Name": "Reject malformed/unsupported zerorate"
+    },
+    {
+      "Passed": true,
+      "Name": "Reject malformed/unsupported rom"
+    },
+    {
+      "Passed": true,
+      "Name": "Reject malformed/unsupported stereolink"
+    },
+    {
+      "Passed": true,
+      "Name": "Reject malformed/unsupported oddpcm"
+    }
+  ],
+  "Error": null,
+  "Meaning": "Independent synthetic SF2 container, PCM and table values; malformed structure rejection. No synthesis or general SoundFont compliance claim.",
+  "Sources": [
+    {
+      "Sha256": "AF80287762169B5318F60FD719479137BAED1D3EEF39561513D2B34AC118A855",
+      "Path": "src/SoundFontBank.ps1"
+    },
+    {
+      "Sha256": "5001675C87B52AB8162C69B8B234D757B624397126D25073D820425658E5011B",
+      "Path": "scripts/Test-SoundFontBank.ps1"
+    }
+  ]
+}

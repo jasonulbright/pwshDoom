@@ -1,0 +1,154 @@
+{
+  "Meaning": "Source freshness, bounded format/timeline tests and local asset inventories only. No music PCM synthesis, playback, fidelity or real-time deadline qualification.",
+  "AcceptedReports": [
+    "music-bank-inventory-current",
+    "music-bank-unit-unsigned",
+    "music-iwad-inventory-program-mask",
+    "music-mus-unit-program-explicit"
+  ],
+  "Sources": [
+    {
+      "Path": "src/MusScore.ps1",
+      "Sha256": "66B87D1CDD3FAD62E493A0C50C9A5AEBFE27167C8CCCCA974CC80463B6D1BB33"
+    },
+    {
+      "Path": "src/SoundFontBank.ps1",
+      "Sha256": "AF80287762169B5318F60FD719479137BAED1D3EEF39561513D2B34AC118A855"
+    },
+    {
+      "Path": "scripts/Test-MusScore.ps1",
+      "Sha256": "38B8CE98C57D07203EA858F45430778118B509BED95CBD1D31EC2C982606F5E3"
+    },
+    {
+      "Path": "scripts/Test-SoundFontBank.ps1",
+      "Sha256": "5001675C87B52AB8162C69B8B234D757B624397126D25073D820425658E5011B"
+    },
+    {
+      "Path": "scripts/Test-MusicInventory.ps1",
+      "Sha256": "5C8CDAD3B6138AD2768CAAB97EB90CC6D2EF297D64823B24B9CFF16B2B57105B"
+    },
+    {
+      "Path": "scripts/Test-MusicBankInventory.ps1",
+      "Sha256": "06F307D0BAEAA856FB11F86D6732C8CDEDA7E60AA290200CF0579C4808D0BC07"
+    },
+    {
+      "Path": "scripts/Test-MusicFoundationEvidence.ps1",
+      "Sha256": "0F48ED5F7741C9BF0A3588C04E8FED5C8EE0A69B014565961EDEA230D5FBAE6D"
+    }
+  ],
+  "Error": null,
+  "Checks": [
+    {
+      "Name": "music-mus-unit-program-explicit successful",
+      "Passed": true
+    },
+    {
+      "Name": "music-mus-unit-program-explicit current source src/MusScore.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "music-mus-unit-program-explicit current source scripts/Test-MusScore.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "music-bank-unit-unsigned successful",
+      "Passed": true
+    },
+    {
+      "Name": "music-bank-unit-unsigned current source src/SoundFontBank.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "music-bank-unit-unsigned current source scripts/Test-SoundFontBank.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "music-iwad-inventory-program-mask successful",
+      "Passed": true
+    },
+    {
+      "Name": "music-iwad-inventory-program-mask current source src/MusScore.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "music-iwad-inventory-program-mask current source scripts/Test-MusicInventory.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "music-iwad-inventory-program-mask current source src/ManagedDoom/Doom/Map/Map.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "music-bank-inventory-current successful",
+      "Passed": true
+    },
+    {
+      "Name": "music-bank-inventory-current current source src/SoundFontBank.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "music-bank-inventory-current current source scripts/Test-MusicBankInventory.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "music-mus-unit-program-explicit all named checks passed",
+      "Passed": true
+    },
+    {
+      "Name": "music-bank-unit-unsigned all named checks passed",
+      "Passed": true
+    },
+    {
+      "Name": "25 MUS and 21 bank named checks",
+      "Passed": true
+    },
+    {
+      "Name": "32 complete track schedules and 36 map references",
+      "Passed": true
+    },
+    {
+      "Name": "Program high-bit correction preserves all actual IWAD event hashes",
+      "Passed": true
+    },
+    {
+      "Name": "Bank inventory uses current IWAD report",
+      "Passed": true
+    },
+    {
+      "Name": "136 preset headers cover 52 observed melodic programs",
+      "Passed": true
+    },
+    {
+      "Name": "Bank has default drum preset",
+      "Passed": true
+    },
+    {
+      "Name": "Parse src/MusScore.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Parse src/SoundFontBank.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Parse scripts/Test-MusScore.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Parse scripts/Test-SoundFontBank.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Parse scripts/Test-MusicInventory.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Parse scripts/Test-MusicBankInventory.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Parse scripts/Test-MusicFoundationEvidence.ps1",
+      "Passed": true
+    }
+  ]
+}

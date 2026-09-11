@@ -1,0 +1,108 @@
+{
+  "Meaning": "Independent synthetic MUS bytes, malformed bounds and exact sample scheduling. No synthesis, playback or whole-IWAD compatibility claim.",
+  "Error": null,
+  "Sources": [
+    {
+      "Path": "src/MusScore.ps1",
+      "Sha256": "00EF280ADA72445ECE70E555E9C1341BE53D7D86BD56A9E5E743D15902B26C5C"
+    },
+    {
+      "Path": "scripts/Test-MusScore.ps1",
+      "Sha256": "855B9718D59FD8E26E2B42398C14294AEC0721CA2BED26E7A186A6F838737736"
+    }
+  ],
+  "Checks": [
+    {
+      "Passed": true,
+      "Name": "Independent event/timing/channel vector"
+    },
+    {
+      "Passed": true,
+      "Name": "Instrument, duration and normalization metadata"
+    },
+    {
+      "Passed": true,
+      "Name": "Reject malformed short"
+    },
+    {
+      "Passed": true,
+      "Name": "Reject malformed signature"
+    },
+    {
+      "Passed": true,
+      "Name": "Reject malformed scorestart"
+    },
+    {
+      "Passed": true,
+      "Name": "Reject malformed scorelength"
+    },
+    {
+      "Passed": true,
+      "Name": "Reject malformed instrumentcount"
+    },
+    {
+      "Passed": true,
+      "Name": "Reject malformed truncatednote"
+    },
+    {
+      "Passed": true,
+      "Name": "Reject malformed truncateddelay"
+    },
+    {
+      "Passed": true,
+      "Name": "Reject malformed missingend"
+    },
+    {
+      "Passed": true,
+      "Name": "Reject malformed reserved"
+    },
+    {
+      "Passed": true,
+      "Name": "Reject malformed system"
+    },
+    {
+      "Passed": true,
+      "Name": "Reject malformed controller"
+    },
+    {
+      "Passed": true,
+      "Name": "Reject malformed longdelay"
+    },
+    {
+      "Passed": true,
+      "Name": "Reject malformed duration"
+    },
+    {
+      "Passed": true,
+      "Name": "Big-endian base-128 delay"
+    },
+    {
+      "Passed": true,
+      "Name": "Music tick maps exactly to 315 frames at 44.1 kHz"
+    },
+    {
+      "Passed": true,
+      "Name": "Events on block endpoint belong to next block"
+    },
+    {
+      "Passed": true,
+      "Name": "Loop event sequence independent of audio block partition"
+    },
+    {
+      "Passed": true,
+      "Name": "Pause retains music position and pending events"
+    },
+    {
+      "Passed": true,
+      "Name": "Nonlooping score ends once"
+    },
+    {
+      "Passed": true,
+      "Name": "Nonintegral loop length accumulates no rounded-cycle drift"
+    },
+    {
+      "Passed": true,
+      "Name": "Zero-duration infinite loop rejected"
+    }
+  ]
+}
