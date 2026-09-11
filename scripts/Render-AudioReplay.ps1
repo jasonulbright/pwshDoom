@@ -1,12 +1,13 @@
 #requires -Version 7.4
 # SPDX-License-Identifier: GPL-2.0-or-later
 param([Parameter(Mandatory)][string]$Output,[string]$Wad='C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\base\DOOM.WAD',
-    [string]$Replay="$PSScriptRoot/../results/input-session-replay.json")
+    [string]$Replay="$PSScriptRoot/../results/input-session-replay.json",[switch]$PacketMix)
 $ErrorActionPreference='Stop'
 if(Test-Path $Output){throw 'Use a fresh report path.'}
 $bundle=& "$PSScriptRoot/Build-EngineBundle.ps1" -Output "$PSScriptRoot/../local/audio-replay-$PID.ps1";. $bundle
 . "$PSScriptRoot/../src/AudioMixer.ps1";. "$PSScriptRoot/../src/AudioEvents.ps1";. "$PSScriptRoot/../src/InputReplay.ps1"
 . "$PSScriptRoot/../src/GameHost.ps1";. "$PSScriptRoot/../src/SnapshotTransport.ps1";. "$PSScriptRoot/FrameCodec.ps1"
+. "$PSScriptRoot/../src/AudioPackets.ps1";$packetState=New-DoomAudioPacketState
 $directory=Join-Path "$PSScriptRoot/../local" ('audio-replay-'+[guid]::NewGuid().ToString('N'));[void][IO.Directory]::CreateDirectory($directory)
 $content=$null;$failure=$null;$clips=@{};$assets=[Collections.Generic.List[object]]::new();$eventsLog=[Collections.Generic.List[object]]::new()
 $mixTimes=[Collections.Generic.List[double]]::new();$eventTimes=[Collections.Generic.List[double]]::new();$checkpoints=[Collections.Generic.List[object]]::new()
@@ -28,14 +29,18 @@ try{
     $events=[DoomSoundEvents]::new();$options.Sound=$events;$mixer=New-DoomAudioMixer 44100
     $game=[DoomGame]::new($content,$options);$commands=[TicCmd[]]::new(4);for($i=0;$i -lt 4;$i++){$commands[$i]=[TicCmd]::new()}
     $game.DeferedInitNew([GameSkill]([int]$recorded.Skill-1),[int]$recorded.Episode,[int]$recorded.Map);$null=$game.Update($commands)
-    Update-DoomAudioEvents $mixer $events $clips $eventsLog
+    if($PacketMix){$packet=Get-DoomAudioPacket $packetState $events $clips;foreach($event in $packet.Events){$eventsLog.Add($event)};Update-DoomAudioPacket $mixer $packet $clips}
+    else{Update-DoomAudioEvents $mixer $events $clips $eventsLog}
     $checkpointTics=@{};foreach($point in $recorded.Checkpoints){$checkpointTics[[int]$point.Tic]=$true}
     $pcm=[int16[]]::new($recorded.InputCommands.Count*1260*2);$watch=[Diagnostics.Stopwatch]::new()
     for($tic=0;$tic -le $recorded.InputCommands.Count;$tic++){
         if($checkpointTics.ContainsKey($tic)){$checkpoints.Add((Get-DoomReplayCheckpoint $game $tic))}
         if($tic -eq $recorded.InputCommands.Count){break}
         $events.Tic=$tic;$entry=$recorded.InputCommands[$tic];$cmd=$commands[0];$cmd.Clear();$cmd.ForwardMove=$entry[0];$cmd.SideMove=$entry[1];$cmd.AngleTurn=$entry[2];$cmd.Buttons=$entry[3]
-        $null=$game.Update($commands);$watch.Restart();Update-DoomAudioEvents $mixer $events $clips $eventsLog;$eventTimes.Add($watch.Elapsed.TotalMilliseconds)
+        $null=$game.Update($commands);$watch.Restart()
+        if($PacketMix){$packet=Get-DoomAudioPacket $packetState $events $clips;foreach($event in $packet.Events){$eventsLog.Add($event)};Update-DoomAudioPacket $mixer $packet $clips}
+        else{Update-DoomAudioEvents $mixer $events $clips $eventsLog}
+        $eventTimes.Add($watch.Elapsed.TotalMilliseconds)
         $maxVoices=[Math]::Max($maxVoices,$mixer.Voices.Count);$watch.Restart();$block=Read-DoomAudioFrames $mixer 1260;$mixTimes.Add($watch.Elapsed.TotalMilliseconds)
         [Array]::Copy($block,0,$pcm,$tic*2520,$block.Length)
     }
@@ -46,7 +51,8 @@ try{
     $wav=Join-Path $directory replay.wav;Write-DoomPcmWave $wav $pcm
 }catch{$failure=$_.ToString()+"`n"+$_.ScriptStackTrace;throw}finally{
     @{FinishedUtc=[datetime]::UtcNow.ToString('o');Error=$failure;WadSha256=(Get-FileHash $Wad).Hash;ReplaySha256=(Get-FileHash $Replay).Hash;BundleSha256=(Get-FileHash $bundle).Hash;
-        Sources=@('src/AudioMixer.ps1','src/AudioEvents.ps1','scripts/Render-AudioReplay.ps1'|ForEach-Object {@{Path=$_;Sha256=(Get-FileHash (Join-Path "$PSScriptRoot/.." $_)).Hash}});
+        PacketMix=[bool]$PacketMix;PacketMaxSources=$packetState.MaxSources;
+        Sources=@('src/AudioMixer.ps1','src/AudioEvents.ps1','src/AudioPackets.ps1','scripts/Render-AudioReplay.ps1'|ForEach-Object {@{Path=$_;Sha256=(Get-FileHash (Join-Path "$PSScriptRoot/.." $_)).Hash}});
         Assets=$assets.ToArray();Events=$eventsLog.ToArray();CheckpointComparison=$comparison;MixMs=(Get-SampleStats $mixTimes.ToArray());EventMs=(Get-SampleStats $eventTimes.ToArray());MixSamplesMs=$mixTimes.ToArray();EventSamplesMs=$eventTimes.ToArray();MaxVoices=$maxVoices;Peak=$peak;NonzeroSamples=$nonzero;ClippedSamples=if($mixer){$mixer.ClippedSamples}else{0};ReplacedVoices=if($mixer){$mixer.ReplacedVoices}else{0};Wave=$wav;WaveSha256=if($wav -and (Test-Path $wav)){(Get-FileHash $wav).Hash}else{$null};SampleRate=44100;OutputFrames=if($pcm){$pcm.Length/2}else{0};
         Meaning='Offline PowerShell event collection, current-position spatialization and PCM mixing for the ordinary-input E1M1/intermission/E1M2 route. No live device, audio/video synchronization, music, randomized pitch or vanilla mixer equivalence is claimed. Per-block timing excludes gameplay and file writing.'}|ConvertTo-Json -Depth 9|Set-Content $Output
     if($content){$content.Dispose()}

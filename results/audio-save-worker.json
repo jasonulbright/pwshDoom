@@ -1,0 +1,1749 @@
+{
+  "FinishedUtc": "2026-09-11T20:17:52.3968328Z",
+  "Checks": [
+    {
+      "Passed": true,
+      "Name": "Empty slot saves and resumes without changing the command index"
+    },
+    {
+      "Passed": true,
+      "Name": "Stale load selection shows a recoverable error"
+    },
+    {
+      "Passed": true,
+      "Name": "Rejected load leaves current numeric game snapshot intact"
+    },
+    {
+      "Passed": true,
+      "Name": "Stale save confirmation preserves the prior slot"
+    },
+    {
+      "Passed": true,
+      "Name": "Different episode installs generation two"
+    },
+    {
+      "Passed": true,
+      "Name": "Slot load restores E1M1 at the monotonic input boundary"
+    },
+    {
+      "Passed": true,
+      "Name": "Loaded numeric state equals the earlier saved state"
+    },
+    {
+      "Passed": true,
+      "Name": "Load archives the exact selected bytes for replay"
+    },
+    {
+      "Passed": true,
+      "Name": "Confirmed replacement creates a changed save"
+    },
+    {
+      "Passed": true,
+      "Name": "Replacement retains exact previous save as backup"
+    },
+    {
+      "Passed": true,
+      "Name": "Replay load restores the old state after slot overwrite"
+    },
+    {
+      "Passed": true,
+      "Name": "Replay load does not modify the slot"
+    },
+    {
+      "Passed": true,
+      "Name": "Audio device survives save/load/new-game and closes"
+    },
+    {
+      "Passed": true,
+      "Name": "New game and both successful loads reset audio epochs"
+    }
+  ],
+  "Actions": [
+    {
+      "Response": {
+        "ReturnScreen": 1,
+        "Choice": 0,
+        "MessageDetail": "",
+        "Episode": 1,
+        "Screen": 0,
+        "Skill": 3,
+        "Action": "SaveGame",
+        "Success": true,
+        "MessageTitle": ""
+      },
+      "Generations": [],
+      "Action": {
+        "ExpectedHash": null,
+        "Slot": 1,
+        "Action": "SaveGame"
+      },
+      "Milliseconds": 2577.4206
+    },
+    {
+      "Response": {
+        "ReturnScreen": 9,
+        "Choice": 0,
+        "MessageDetail": "SELECT SLOT AGAIN",
+        "Error": "Save changed after selection.\nat <ScriptBlock>, C:\\projects\\pwshDoom\\scripts\\Invoke-SimulationWorker.ps1: line 150",
+        "Episode": 1,
+        "Screen": 12,
+        "Skill": 3,
+        "Action": "LoadGame",
+        "Success": false,
+        "MessageTitle": "LOAD FAILED"
+      },
+      "Generations": [],
+      "Action": {
+        "ExpectedHash": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "Slot": 1,
+        "AllowSourceMismatch": false,
+        "Action": "LoadGame"
+      },
+      "Milliseconds": 127.4727
+    },
+    {
+      "Response": {
+        "ReturnScreen": 1,
+        "Choice": 0,
+        "MessageDetail": "",
+        "Episode": 1,
+        "Screen": 0,
+        "Skill": 3,
+        "Action": "ShowMenu",
+        "Success": true,
+        "MessageTitle": ""
+      },
+      "Generations": [],
+      "Action": {
+        "Screen": 0,
+        "Skill": 3,
+        "Action": "ShowMenu",
+        "Choice": 0,
+        "Episode": 1
+      },
+      "Milliseconds": 14.9454
+    },
+    {
+      "Response": {
+        "ReturnScreen": 8,
+        "Choice": 0,
+        "MessageDetail": "SELECT SLOT AGAIN",
+        "Error": "Save changed after overwrite confirmation.\nat Write-DoomSaveState, C:\\projects\\pwshDoom\\src\\SaveState.ps1: line 231\r\nat <ScriptBlock>, C:\\projects\\pwshDoom\\scripts\\Invoke-SimulationWorker.ps1: line 139",
+        "Episode": 1,
+        "Screen": 12,
+        "Skill": 3,
+        "Action": "SaveGame",
+        "Success": false,
+        "MessageTitle": "SAVE FAILED"
+      },
+      "Generations": [],
+      "Action": {
+        "ExpectedHash": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "Slot": 1,
+        "Action": "SaveGame"
+      },
+      "Milliseconds": 1624.272
+    },
+    {
+      "Response": {
+        "ReturnScreen": 1,
+        "Choice": 0,
+        "MessageDetail": "",
+        "Episode": 1,
+        "Screen": 0,
+        "Skill": 3,
+        "Action": "ShowMenu",
+        "Success": true,
+        "MessageTitle": ""
+      },
+      "Generations": [],
+      "Action": {
+        "Screen": 0,
+        "Skill": 3,
+        "Action": "ShowMenu",
+        "Choice": 0,
+        "Episode": 1
+      },
+      "Milliseconds": 16.2241
+    },
+    {
+      "Response": {
+        "ReturnScreen": 1,
+        "Choice": 0,
+        "MessageDetail": "",
+        "Episode": 2,
+        "Screen": 0,
+        "Skill": 3,
+        "Action": "NewGame",
+        "Success": true,
+        "MessageTitle": ""
+      },
+      "Generations": [
+        {
+          "Generation": 2,
+          "AssetSha256": "7EF0987395A6591AD4C762FD586B3F85B79DDC4161D91940806994B22BDEA9DF",
+          "Episode": 2,
+          "Map": 1
+        }
+      ],
+      "Action": {
+        "Skill": 3,
+        "Action": "NewGame",
+        "Episode": 2,
+        "Map": 1
+      },
+      "Milliseconds": 1145.9
+    },
+    {
+      "Response": {
+        "ReturnScreen": 1,
+        "Choice": 0,
+        "MessageDetail": "",
+        "Episode": 1,
+        "Screen": 0,
+        "Skill": 3,
+        "Action": "LoadGame",
+        "Success": true,
+        "MessageTitle": ""
+      },
+      "Generations": [
+        {
+          "Generation": 3,
+          "AssetSha256": "D4B966297A5E274ED911413E33C04C2C193A906470E26A3558BA1DD33144C475",
+          "Episode": 1,
+          "Map": 1
+        }
+      ],
+      "Action": {
+        "ExpectedHash": "12E5B1DE94F0A71DDD34526086E6B22FF051BA0ADF0C2DA24B7549135B9D751B",
+        "Slot": 1,
+        "AllowSourceMismatch": false,
+        "Action": "LoadGame"
+      },
+      "Milliseconds": 2586.9138
+    },
+    {
+      "Response": {
+        "ReturnScreen": 1,
+        "Choice": 0,
+        "MessageDetail": "",
+        "Episode": 1,
+        "Screen": 0,
+        "Skill": 3,
+        "Action": "SaveGame",
+        "Success": true,
+        "MessageTitle": ""
+      },
+      "Generations": [],
+      "Action": {
+        "ExpectedHash": "12E5B1DE94F0A71DDD34526086E6B22FF051BA0ADF0C2DA24B7549135B9D751B",
+        "Slot": 1,
+        "Action": "SaveGame"
+      },
+      "Milliseconds": 1558.3633
+    },
+    {
+      "Response": {
+        "ReturnScreen": 1,
+        "Choice": 0,
+        "MessageDetail": "",
+        "Episode": 1,
+        "Screen": 0,
+        "Skill": 3,
+        "Action": "LoadGame",
+        "Success": true,
+        "MessageTitle": ""
+      },
+      "Generations": [
+        {
+          "Generation": 4,
+          "AssetSha256": "D4B966297A5E274ED911413E33C04C2C193A906470E26A3558BA1DD33144C475",
+          "Episode": 1,
+          "Map": 1
+        }
+      ],
+      "Action": {
+        "Action": "LoadGame",
+        "SaveHash": "12E5B1DE94F0A71DDD34526086E6B22FF051BA0ADF0C2DA24B7549135B9D751B"
+      },
+      "Milliseconds": 2430.0145
+    }
+  ],
+  "HarnessSha256": "89D32D6D710BC0B7B92F4B60BC0634B06C9DB10C55C2BBC7020FFE376C879110",
+  "Simulation": {
+    "Audio": {
+      "Meaning": "PowerShell runspace mixing and waveOut playback; packet age ends at submission, not audible output. Starvation is queue polling, not hardware telemetry. Reset/exit can cancel queued tail audio; cancelled frame count is an upper bound.",
+      "MaxPacketQueue": 2,
+      "EpochResets": 3,
+      "Packets": 77,
+      "SubmittedFrames": 97020,
+      "PcmSha256": "1E45ECF53790CFCA8CFF2B1E226CD5C071D740F1F75ADD813117D7525606C879",
+      "StalePacketsDiscarded": 0,
+      "ReturnedCompletedFrames": 94500,
+      "CleanupError": null,
+      "WallSeconds": 15.1419522,
+      "Error": null,
+      "UnconsumedPackets": 0,
+      "LastSequence": 76,
+      "MixSamplesMs": [
+        4.8323,
+        0.0292,
+        0.0316,
+        0.0285,
+        0.0374,
+        0.0332,
+        0.0636,
+        0.0353,
+        0.0501,
+        0.0523,
+        0.0608,
+        0.038,
+        0.0332,
+        0.0369,
+        0.0345,
+        0.0353,
+        0.0374,
+        0.0325,
+        0.0329,
+        0.0368,
+        0.0402,
+        0.0365,
+        0.0345,
+        0.0354,
+        0.0306,
+        0.0349,
+        0.0312,
+        0.0326,
+        0.0327,
+        0.035,
+        0.0356,
+        0.031,
+        0.0358,
+        0.0511,
+        0.0291,
+        0.0305,
+        0.0222,
+        0.0297,
+        0.0261,
+        0.0301,
+        0.0265,
+        0.0297,
+        0.0287,
+        0.0298,
+        0.0293,
+        0.0299,
+        0.0286,
+        0.029,
+        0.0272,
+        0.0263,
+        0.0259,
+        0.0276,
+        0.0263,
+        0.026,
+        0.0253,
+        0.0292,
+        0.0251,
+        0.0272,
+        0.0279,
+        0.0268,
+        0.0259,
+        0.0259,
+        0.0269,
+        0.0282,
+        0.0291,
+        0.0241,
+        0.0248,
+        0.0264,
+        0.029,
+        0.0267,
+        0.0266,
+        0.025,
+        0.0247,
+        0.0238,
+        0.0285,
+        0.024,
+        0.047
+      ],
+      "ClippedSamples": 0,
+      "DeviceClosed": true,
+      "PacketAgeAtSubmissionMs": [
+        26.4647,
+        1.0575,
+        2.3576,
+        0.4097,
+        7.8127,
+        23.0702,
+        33.6745,
+        28.8314,
+        34.82,
+        37.2511,
+        31.1448,
+        21.7427,
+        37.6076,
+        32.5858,
+        37.8591,
+        33.3507,
+        34.9868,
+        26.886,
+        32.9716,
+        28.0137,
+        35.7922,
+        27.6326,
+        36.0846,
+        40.9953,
+        32.7078,
+        30.3626,
+        22.8252,
+        30.1819,
+        36.5958,
+        32.3072,
+        41.5336,
+        22.5529,
+        32.9173,
+        33.2759,
+        35.1924,
+        2.5908,
+        1.094,
+        4.8432,
+        1.9597,
+        11.0016,
+        8.9812,
+        5.2868,
+        2.115,
+        8.5261,
+        1.8511,
+        2.7232,
+        0.3017,
+        6.6661,
+        2.0939,
+        4.646,
+        2.4809,
+        4.4146,
+        3.4209,
+        2.0167,
+        3.1184,
+        9.4523,
+        0.9673,
+        4.9321,
+        2.5366,
+        4.1451,
+        2.9713,
+        4.5548,
+        2.5274,
+        10.2767,
+        9.0167,
+        2.5057,
+        1.3053,
+        5.4478,
+        3.712,
+        4.0475,
+        6.0146,
+        3.5069,
+        2.8524,
+        4.132,
+        2.0301,
+        3.0389,
+        2.9386
+      ],
+      "MaxVoices": 0,
+      "PauseTransitions": 5,
+      "CancelledQueuedFramesUpperBound": 2520,
+      "PendingPacket": null,
+      "QueueStarvationObservations": [
+        {
+          "WallMs": 1716.0154,
+          "AfterPacket": 34
+        },
+        {
+          "WallMs": 5458.521,
+          "AfterPacket": 69
+        }
+      ]
+    },
+    "SaveDirectory": "C:\\projects\\pwshDoom\\local\\save-worker-d8fcce3e3b0741ddb2f6ffa389711f97\\6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+    "AutomapRenderSamplesMs": [],
+    "SimulationMs": {
+      "Count": 77,
+      "Mean": 5.771125974025976,
+      "Median": 3.3507,
+      "P95": 12.9171,
+      "Max": 15.1035
+    },
+    "Skill": 3,
+    "AutomapDiscoverySamplesMs": [
+      25.3756,
+      7.0376,
+      7.5516,
+      7.6144,
+      6.634,
+      6.6878,
+      7.6104,
+      6.6103,
+      7.3464,
+      6.8272,
+      5.1286,
+      5.3642,
+      5.0902,
+      7.0604,
+      5.1242,
+      7.3634,
+      4.2861,
+      4.409,
+      4.8562,
+      4.3344,
+      5.9657,
+      6.2945,
+      4.9794,
+      5.4217,
+      5.2394,
+      4.634,
+      5.2999,
+      5.0981,
+      4.5411,
+      4.1491,
+      5.4533,
+      4.1365,
+      4.1716,
+      3.7579,
+      4.0034,
+      5.4195,
+      3.3221,
+      3.3852,
+      3.408,
+      4.2809,
+      3.1721,
+      3.0008,
+      3.7916,
+      3.2344,
+      3.0127,
+      3.1935,
+      3.1307,
+      3.1287,
+      2.9663,
+      2.9649,
+      2.6086,
+      3.1647,
+      2.7425,
+      2.6283,
+      2.4755,
+      2.474,
+      2.6068,
+      2.5407,
+      2.4522,
+      2.5353,
+      2.623,
+      2.5322,
+      2.4957,
+      2.249,
+      2.3335,
+      2.9294,
+      3.2364,
+      2.2071,
+      2.1821,
+      1.8512,
+      3.609,
+      3.2158,
+      4.026,
+      3.4888,
+      3.2978,
+      3.314,
+      3.3119
+    ],
+    "Outcome": "Stopped",
+    "AutomapCommands": [],
+    "AutomapRenderMs": null,
+    "Tics": 77,
+    "AudioSourcePeak": 0,
+    "SaveOperations": [
+      {
+        "Error": null,
+        "Action": "SaveGame",
+        "Success": true,
+        "Tic": 35,
+        "Milliseconds": 2560.5168,
+        "Result": {
+          "Bytes": 395734,
+          "Sha256": "12E5B1DE94F0A71DDD34526086E6B22FF051BA0ADF0C2DA24B7549135B9D751B",
+          "Path": "C:\\projects\\pwshDoom\\local\\save-worker-d8fcce3e3b0741ddb2f6ffa389711f97\\6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F\\slot-01.pds",
+          "Backup": null,
+          "Milliseconds": 2005.2394,
+          "Nodes": 1845
+        },
+        "Request": {
+          "ExpectedHash": null,
+          "Slot": 1,
+          "Action": "SaveGame"
+        }
+      },
+      {
+        "Error": "Save changed after selection.\nat <ScriptBlock>, C:\\projects\\pwshDoom\\scripts\\Invoke-SimulationWorker.ps1: line 150",
+        "Action": "LoadGame",
+        "Success": false,
+        "Tic": 70,
+        "Milliseconds": 119.6613,
+        "Result": null,
+        "Request": {
+          "ExpectedHash": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+          "Slot": 1,
+          "AllowSourceMismatch": false,
+          "Action": "LoadGame"
+        }
+      },
+      {
+        "Error": "Save changed after overwrite confirmation.\nat Write-DoomSaveState, C:\\projects\\pwshDoom\\src\\SaveState.ps1: line 231\r\nat <ScriptBlock>, C:\\projects\\pwshDoom\\scripts\\Invoke-SimulationWorker.ps1: line 139",
+        "Action": "SaveGame",
+        "Success": false,
+        "Tic": 70,
+        "Milliseconds": 1622.0003,
+        "Result": null,
+        "Request": {
+          "ExpectedHash": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+          "Slot": 1,
+          "Action": "SaveGame"
+        }
+      },
+      {
+        "Error": null,
+        "Action": "LoadGame",
+        "Success": true,
+        "Tic": 70,
+        "Milliseconds": 2575.6431,
+        "Result": {
+          "SourceMatches": true,
+          "Sha256": "12E5B1DE94F0A71DDD34526086E6B22FF051BA0ADF0C2DA24B7549135B9D751B",
+          "Episode": 1,
+          "Map": 1,
+          "GameTic": 177
+        },
+        "Request": {
+          "ExpectedHash": "12E5B1DE94F0A71DDD34526086E6B22FF051BA0ADF0C2DA24B7549135B9D751B",
+          "Slot": 1,
+          "AllowSourceMismatch": false,
+          "Action": "LoadGame"
+        }
+      },
+      {
+        "Error": null,
+        "Action": "SaveGame",
+        "Success": true,
+        "Tic": 77,
+        "Milliseconds": 1550.4439,
+        "Result": {
+          "Bytes": 395780,
+          "Sha256": "6AE94EA886DA44CF5562D8AA807FD0D9D8CADB4C56430305AEB3731277426EDB",
+          "Path": "C:\\projects\\pwshDoom\\local\\save-worker-d8fcce3e3b0741ddb2f6ffa389711f97\\6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F\\slot-01.pds",
+          "Backup": "C:\\projects\\pwshDoom\\local\\save-worker-d8fcce3e3b0741ddb2f6ffa389711f97\\6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F\\slot-01.pds.0b06ca1eabb644c3a7a739a81586f02b.bak",
+          "Milliseconds": 1542.3763,
+          "Nodes": 1845
+        },
+        "Request": {
+          "ExpectedHash": "12E5B1DE94F0A71DDD34526086E6B22FF051BA0ADF0C2DA24B7549135B9D751B",
+          "Slot": 1,
+          "Action": "SaveGame"
+        }
+      },
+      {
+        "Error": null,
+        "Action": "LoadGame",
+        "Success": true,
+        "Tic": 77,
+        "Milliseconds": 2417.8324,
+        "Result": {
+          "SourceMatches": true,
+          "Sha256": "12E5B1DE94F0A71DDD34526086E6B22FF051BA0ADF0C2DA24B7549135B9D751B",
+          "Episode": 1,
+          "Map": 1,
+          "GameTic": 177
+        },
+        "Request": {
+          "Action": "LoadGame",
+          "SaveHash": "12E5B1DE94F0A71DDD34526086E6B22FF051BA0ADF0C2DA24B7549135B9D751B"
+        }
+      }
+    ],
+    "SnapshotSamplesMs": [
+      4.5281,
+      13.5465,
+      3.9286,
+      3.8698,
+      3.936,
+      4.0442,
+      3.9304,
+      4.0513,
+      3.9754,
+      3.9136,
+      4.1518,
+      5.2516,
+      4.0002,
+      3.9115,
+      3.9085,
+      4.6023,
+      3.9307,
+      3.8755,
+      3.8447,
+      3.9552,
+      3.7981,
+      4.0732,
+      4.0584,
+      3.8266,
+      3.7609,
+      4.1026,
+      4.5505,
+      4.0253,
+      3.8615,
+      4.3799,
+      4.1998,
+      4.3587,
+      4.1019,
+      3.9107,
+      6.0618,
+      4.6492,
+      5.6089,
+      5.458,
+      3.9666,
+      4.0456,
+      4.1152,
+      3.9162,
+      4.0767,
+      3.8104,
+      5.1664,
+      4.0608,
+      3.914,
+      3.9465,
+      3.9029,
+      3.8867,
+      5.0859,
+      4.2376,
+      4.0754,
+      5.1141,
+      4.0429,
+      4.1979,
+      3.7512,
+      4.9774,
+      4.2434,
+      4.6864,
+      4.1845,
+      4.1976,
+      4.7577,
+      3.7866,
+      4.1539,
+      4.1687,
+      3.7958,
+      3.7915,
+      3.7451,
+      3.9589,
+      3.7249,
+      3.631,
+      3.9809,
+      5.0394,
+      3.8278,
+      3.8032,
+      3.7299,
+      3.7046,
+      3.8929,
+      5.0132
+    ],
+    "WarmupTics": 140,
+    "MenuRevision": 15,
+    "SessionScreenSamplesMs": [],
+    "AudioPacketMs": {
+      "Count": 77,
+      "Mean": 0.2871844155844156,
+      "Median": 0.1106,
+      "P95": 0.1584,
+      "Max": 12.2511
+    },
+    "Transitions": [
+      {
+        "Health": 100,
+        "Weapons": [
+          true,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "DidSecret": false,
+        "Keys": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "Ammo": [
+          50,
+          0,
+          0,
+          0
+        ],
+        "Armor": 0,
+        "Episode": 1,
+        "Kills": 0,
+        "Tic": 0,
+        "Generation": 1,
+        "State": "Level",
+        "Map": 1
+      },
+      {
+        "Health": 100,
+        "Weapons": [
+          true,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "DidSecret": false,
+        "Keys": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "Ammo": [
+          50,
+          0,
+          0,
+          0
+        ],
+        "Armor": 0,
+        "Episode": 2,
+        "Kills": 0,
+        "Tic": 70,
+        "Generation": 2,
+        "State": "Level",
+        "Map": 1
+      },
+      {
+        "Health": 100,
+        "Weapons": [
+          true,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "DidSecret": false,
+        "Keys": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "Ammo": [
+          50,
+          0,
+          0,
+          0
+        ],
+        "Armor": 0,
+        "Episode": 1,
+        "Kills": 0,
+        "Tic": 70,
+        "Generation": 3,
+        "State": "Level",
+        "Map": 1
+      },
+      {
+        "Health": 100,
+        "Weapons": [
+          true,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "DidSecret": false,
+        "Keys": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "Ammo": [
+          50,
+          0,
+          0,
+          0
+        ],
+        "Armor": 0,
+        "Episode": 1,
+        "Kills": 0,
+        "Tic": 77,
+        "Generation": 4,
+        "State": "Level",
+        "Map": 1
+      }
+    ],
+    "Error": null,
+    "FinishedUtc": "2026-09-11T20:17:52.3196213Z",
+    "TickLatenessMs": null,
+    "SoundEnabled": true,
+    "AudioPacketSamplesMs": [
+      12.2511,
+      0.164,
+      0.1191,
+      0.1257,
+      0.1227,
+      0.1173,
+      0.1147,
+      0.1088,
+      0.1149,
+      0.1352,
+      0.1262,
+      0.1176,
+      0.1318,
+      0.1163,
+      0.1231,
+      0.126,
+      0.1312,
+      0.1302,
+      0.1144,
+      0.113,
+      0.1584,
+      0.1137,
+      0.1271,
+      0.1346,
+      0.1309,
+      0.1223,
+      0.115,
+      0.1428,
+      0.133,
+      0.1155,
+      0.1219,
+      0.1147,
+      1.4869,
+      0.1277,
+      0.1106,
+      0.1185,
+      0.1017,
+      0.1023,
+      0.0903,
+      0.0922,
+      0.1084,
+      0.1008,
+      0.0973,
+      0.0953,
+      0.0999,
+      0.0998,
+      0.1168,
+      0.1065,
+      0.0984,
+      0.1014,
+      0.0976,
+      0.1071,
+      0.0905,
+      0.0948,
+      0.1005,
+      0.1383,
+      0.0951,
+      0.1077,
+      0.1555,
+      0.0921,
+      0.0934,
+      0.0961,
+      0.0963,
+      0.094,
+      0.0925,
+      0.0945,
+      0.0913,
+      0.0941,
+      0.0974,
+      0.1074,
+      0.1206,
+      0.0899,
+      0.0917,
+      0.1016,
+      0.094,
+      0.0901,
+      0.1011
+    ],
+    "Kills": 0,
+    "AutomapDiscoveryMs": {
+      "Count": 77,
+      "Mean": 4.441564935064935,
+      "Median": 3.7579,
+      "P95": 7.5516,
+      "Max": 25.3756
+    },
+    "StopAtLevelEnd": false,
+    "Health": 100,
+    "InputCommands": [
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "SessionScreenMs": null,
+    "Map": 1,
+    "MenuScreen": 0,
+    "SnapshotPublishMs": {
+      "Count": 80,
+      "Mean": 4.3006275,
+      "Median": 4.0341000000000005,
+      "P95": 5.2516,
+      "Max": 13.5465
+    },
+    "AudioEvents": 11,
+    "FinalGeneration": 4,
+    "SimulationSamplesMs": [
+      9.464,
+      15.1035,
+      2.2058,
+      2.2462,
+      2.1337,
+      2.7905,
+      2.2668,
+      3.206,
+      2.081,
+      5.1346,
+      3.2145,
+      11.0659,
+      2.1081,
+      5.4229,
+      2.1697,
+      2.5957,
+      10.7894,
+      8.782,
+      2.1817,
+      7.5036,
+      3.3507,
+      10.4291,
+      2.6433,
+      3.4192,
+      2.3036,
+      3.3405,
+      10.6111,
+      9.3069,
+      2.2315,
+      7.1186,
+      3.1424,
+      12.4596,
+      2.3183,
+      2.2573,
+      3.4106,
+      4.9653,
+      12.9171,
+      10.4405,
+      2.3717,
+      6.1903,
+      2.3952,
+      12.1859,
+      2.2983,
+      2.257,
+      2.1614,
+      2.1777,
+      10.8956,
+      10.9344,
+      2.2148,
+      6.4897,
+      2.1398,
+      11.8846,
+      2.0742,
+      2.3798,
+      2.2995,
+      2.1708,
+      10.8294,
+      11.9949,
+      2.2237,
+      6.0134,
+      2.4796,
+      12.809,
+      2.2842,
+      2.2056,
+      2.126,
+      2.3341,
+      9.7635,
+      12.6378,
+      2.4609,
+      7.7425,
+      5.0733,
+      13.0261,
+      12.4375,
+      4.0045,
+      8.9352,
+      4.7155,
+      13.6281
+    ],
+    "ReplayCheckpoints": [
+      {
+        "Tic": 0,
+        "Sha256": "20931EDD7A9ABBC3B8E753795EB527C6F4E9C2D68F2D62E8A1EC3E20B84BF943",
+        "State": {
+          "Schema": 1,
+          "Tic": 0,
+          "State": "Level",
+          "Episode": 1,
+          "Map": 1,
+          "LevelTime": 1,
+          "RandomIndex": 144,
+          "Paused": false,
+          "PlayerState": "Live",
+          "Health": 100,
+          "Armor": 0,
+          "Position": [
+            69206016,
+            -236978176,
+            0,
+            1073741824
+          ],
+          "Ammo": [
+            50,
+            0,
+            0,
+            0
+          ],
+          "Weapons": [
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "Keys": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "DidSecret": false,
+          "RenderSnapshotSha256": "ED2A27F9B114FD60CB6F057F423C6AE068ED39F4207999CC8134DA6C95A35566",
+          "Intermission": null,
+          "Finale": null
+        },
+        "AutomapSha256": "683FBC3374C915C4FAFDB4CBFEE0CD8899B1AF9046A4B23140EE784EAC28A015"
+      },
+      {
+        "Tic": 70,
+        "Sha256": "5C1AE4F1463F1CFF753EA6AFF76354076163B5B9943ADCA03BFA82E4A2BCA02C",
+        "State": {
+          "Schema": 1,
+          "Tic": 70,
+          "State": "Level",
+          "Episode": 1,
+          "Map": 1,
+          "LevelTime": 36,
+          "RandomIndex": 144,
+          "Paused": false,
+          "PlayerState": "Live",
+          "Health": 100,
+          "Armor": 0,
+          "Position": [
+            69200415,
+            -222974830,
+            0,
+            1073741824
+          ],
+          "Ammo": [
+            50,
+            0,
+            0,
+            0
+          ],
+          "Weapons": [
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "Keys": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "DidSecret": false,
+          "RenderSnapshotSha256": "DAA91EE66F4BF1B3867938AD499FEAE5C32709C1D660AFCFDA409FD8E5C78ACC",
+          "Intermission": null,
+          "Finale": null
+        },
+        "AutomapSha256": "D3B245C0328E83D4A11BE05C01CAF3174B9F85AB6A5047ECF5472E3B8DABFCA0"
+      },
+      {
+        "Tic": 77,
+        "Sha256": "D96C67D3DED90680C87DEFC9610D3324C8000A171194348C61789758FAC92E24",
+        "State": {
+          "Schema": 1,
+          "Tic": 77,
+          "State": "Level",
+          "Episode": 1,
+          "Map": 1,
+          "LevelTime": 36,
+          "RandomIndex": 144,
+          "Paused": false,
+          "PlayerState": "Live",
+          "Health": 100,
+          "Armor": 0,
+          "Position": [
+            69200415,
+            -222974830,
+            0,
+            1073741824
+          ],
+          "Ammo": [
+            50,
+            0,
+            0,
+            0
+          ],
+          "Weapons": [
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "Keys": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "DidSecret": false,
+          "RenderSnapshotSha256": "DAA91EE66F4BF1B3867938AD499FEAE5C32709C1D660AFCFDA409FD8E5C78ACC",
+          "Intermission": null,
+          "Finale": null
+        },
+        "AutomapSha256": "D3B245C0328E83D4A11BE05C01CAF3174B9F85AB6A5047ECF5472E3B8DABFCA0"
+      }
+    ],
+    "ReplayCheckpointMs": {
+      "Count": 4,
+      "Mean": 21.173050000000003,
+      "Median": 2.3871,
+      "P95": 77.6336,
+      "Max": 77.6336
+    },
+    "ControlEvents": [
+      {
+        "Tic": 70,
+        "Action": "NewGame",
+        "Episode": 2,
+        "Skill": 3,
+        "Map": 1
+      },
+      {
+        "Tic": 70,
+        "Action": "LoadGame",
+        "SaveHash": "12E5B1DE94F0A71DDD34526086E6B22FF051BA0ADF0C2DA24B7549135B9D751B"
+      },
+      {
+        "Tic": 77,
+        "Action": "LoadGame",
+        "SaveHash": "12E5B1DE94F0A71DDD34526086E6B22FF051BA0ADF0C2DA24B7549135B9D751B"
+      }
+    ],
+    "ReplayCheckpointSamplesMs": [
+      77.6336,
+      2.3507,
+      2.4235,
+      2.2844
+    ],
+    "Episode": 1,
+    "TickLatenessSamplesMs": []
+  },
+  "Meaning": "Actual simulation process and bounded session IPC. Numeric snapshots, command indices, asset generation handshake, failed candidate isolation, atomic replacement/backup and immutable replay saves. Rendering workers and live menus are qualified separately.",
+  "Error": null,
+  "SaveRoot": "C:\\projects\\pwshDoom\\scripts\\..\\local\\save-worker-d8fcce3e3b0741ddb2f6ffa389711f97"
+}

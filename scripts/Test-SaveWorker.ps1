@@ -1,7 +1,7 @@
 #requires -Version 7.4
 # SPDX-License-Identifier: GPL-2.0-or-later
 param([string]$Wad='C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\base\DOOM.WAD',
-    [Parameter(Mandatory)][string]$Output)
+    [Parameter(Mandatory)][string]$Output,[switch]$Sound)
 $ErrorActionPreference='Stop'
 if(Test-Path -LiteralPath $Output){throw 'Use a fresh report path.'}
 . "$PSScriptRoot/../src/SimulationProcess.ps1";. "$PSScriptRoot/../src/SessionMenu.ps1"
@@ -18,7 +18,11 @@ function Wait-Boundary {
     $script:snapshot=Read-DoomSimulationSnapshot $simulation $null
 }
 function Advance-Commands([int]$Count,[int]$Forward=0){
-    for($i=0;$i -lt $Count;$i++){Send-DoomSimulationCommand $simulation $script:tick @($Forward,0,0,0);$script:tick++};Wait-Boundary
+    $pace=[Diagnostics.Stopwatch]::StartNew()
+    for($i=0;$i -lt $Count;$i++){
+        if($Sound){while($pace.Elapsed.TotalMilliseconds -lt ($i+1)*1000/35){[Threading.Thread]::Sleep(1)}}
+        Send-DoomSimulationCommand $simulation $script:tick @($Forward,0,0,0);$script:tick++
+    };Wait-Boundary
 }
 function Send-Action($Action){
     $sequence=Send-DoomSessionAction $simulation $Action $script:tick;$watch=[Diagnostics.Stopwatch]::StartNew();$generations=[Collections.Generic.List[object]]::new()
@@ -38,7 +42,8 @@ function Send-Action($Action){
 }
 function Resume-Game {$null=Send-Action @{Action='ShowMenu';Screen=0;Choice=0;Episode=1;Skill=3}}
 try{
-    $simulation=New-DoomSimulation $Wad 3 1 1 -ReplayCheckpoints -SaveRoot $saveRoot
+    $simulation=New-DoomSimulation $Wad 3 1 1 -ReplayCheckpoints -SaveRoot $saveRoot -Sound:$Sound
+    if($Sound){$simulation.View.Write(84,0);[void]$simulation.Go.Set()}
     Advance-Commands 35 25;$savedSnapshot=Snapshot-Hash $snapshot
     $reply=Send-Action @{Action='SaveGame';Slot=1;ExpectedHash=$null}
     Assert-Worker 'Empty slot saves and resumes without changing the command index' ($reply.Success -and $snapshot.Tic -eq 35 -and $snapshot.MenuScreen -eq 0)
@@ -67,6 +72,13 @@ try{
     Assert-Worker 'Replay load does not modify the slot' ((Get-FileHash $path).Hash -eq $newHash)
 }catch{$failure=$_.ToString()+"`n"+$_.ScriptStackTrace;throw}finally{
     if($null -ne $simulation){Close-DoomSimulation $simulation;if(Test-Path $simulation.Report){$reportData=Get-Content $simulation.Report -Raw|ConvertFrom-Json}}
+    if($Sound -and $null -eq $failure){
+        try{
+            Assert-Worker 'Audio device survives save/load/new-game and closes' ($null -eq $reportData.Audio.Error -and $null -eq $reportData.Audio.CleanupError -and $reportData.Audio.DeviceClosed)
+            Assert-Worker 'New game and both successful loads reset audio epochs' ($reportData.Audio.EpochResets -eq 3)
+        }catch{$failure=$_.ToString()}
+    }
     @{FinishedUtc=[DateTime]::UtcNow.ToString('o');Error=$failure;Checks=$checks.ToArray();Actions=$actions.ToArray();Simulation=$reportData;SaveRoot=$saveRoot;HarnessSha256=(Get-FileHash $PSCommandPath).Hash;Meaning='Actual simulation process and bounded session IPC. Numeric snapshots, command indices, asset generation handshake, failed candidate isolation, atomic replacement/backup and immutable replay saves. Rendering workers and live menus are qualified separately.'}|ConvertTo-Json -Depth 12|Set-Content $Output
 }
+if($failure){throw $failure}
 "PASS: $($checks.Count) save worker checks."

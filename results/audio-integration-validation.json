@@ -1,0 +1,214 @@
+{
+  "Reports": [
+    {
+      "Sha256": "8CC60A36B34E3335D1437B5B5355FC4317AFE16B31DE15428227D9699AF8F27C",
+      "Path": "results/audio-packets-unit.json"
+    },
+    {
+      "Sha256": "90A44E6BA5075B5A67C74A4B63DB40B829BA5F7433D44C8C167139814225A792",
+      "Path": "results/audio-runspace-future-epoch.json"
+    },
+    {
+      "Sha256": "B794914D25A419D86D850C141BAE18A2F3BDD639267082EA402D13A329BC82CB",
+      "Path": "results/audio-save-worker.json"
+    },
+    {
+      "Sha256": "785D0293007C888F725A3A4D876CE640F8209227FA3E4864F98CB8CEF7CBFAE3",
+      "Path": "results/audio-host-first.json"
+    },
+    {
+      "Sha256": "F5C50E0C3065AE3B289105AC8DEEDD2B8AF88D12D7CA77E3348556E2901C29AD",
+      "Path": "results/audio-host-controls.json"
+    },
+    {
+      "Sha256": "664531766B2031343AE442E4C2A87CF09481353E3D4A7589C39435DA1F55E43F",
+      "Path": "results/audio-packets-replay.json"
+    }
+  ],
+  "Sources": [
+    {
+      "Sha256": "49FB11F7E96DC63BD352077E5AED9262B3F6F05CEF7CD38FD05BEBF0EF99FAFB",
+      "Path": "Start-Doom.ps1"
+    },
+    {
+      "Sha256": "F6227640C7AD799B5E7D486B70752E680EF074881EB6B795BC087970BEB8C990",
+      "Path": "src/AudioMixer.ps1"
+    },
+    {
+      "Sha256": "52E6F728AF88DB21E2BDA5C6065EB3324DFC4A91EA25371DD4DB9889B6BD3BE1",
+      "Path": "src/AudioEvents.ps1"
+    },
+    {
+      "Sha256": "01865375DB878EFA137B3B5EF49437B4FFBF9B8C6F0359A2AA52580E0977801E",
+      "Path": "src/AudioPackets.ps1"
+    },
+    {
+      "Sha256": "F7F428BF7CC8CD06F5F1925265E37D9EB27EB88C11EB687CFD95DAA4C6E4E255",
+      "Path": "src/AudioRunspace.ps1"
+    },
+    {
+      "Sha256": "F0A41396375D67A599FA0CDC4F198AA3F5EB7BC84601FCB8F8116E9D5B958205",
+      "Path": "src/WaveOutDevice.ps1"
+    },
+    {
+      "Sha256": "206E978179DF18BCEBFCA25079B42A214FE7AF10B410D178B852F671A1D70EBE",
+      "Path": "src/SimulationProcess.ps1"
+    },
+    {
+      "Sha256": "DA0E938392D6F0C270045855E7F534E16A94ECAAC3FC95975A749886DE323C4C",
+      "Path": "scripts/Invoke-AudioWorker.ps1"
+    },
+    {
+      "Sha256": "4EA7AE4CF2BD7C57B4CD96AB66B704720172567A8488EA55C0ED8614354034BD",
+      "Path": "scripts/Invoke-SimulationWorker.ps1"
+    },
+    {
+      "Sha256": "99EB052B6347106D0043FC44291BBC8F76368710DA5F16B65CDE160B1A7ECD0F",
+      "Path": "scripts/Invoke-Doom.ps1"
+    },
+    {
+      "Sha256": "D29FBF1101B880AFB70145C0B09CF7F42514933E426187EA7DC0A2C497CAC9D9",
+      "Path": "scripts/Record-DoomReplay.ps1"
+    },
+    {
+      "Sha256": "776F8DB3ED14B65A7D95D939569FC86015D8C4501A929ED1C410D1AE0E1CD76E",
+      "Path": "scripts/Render-AudioReplay.ps1"
+    },
+    {
+      "Sha256": "68618CE798C6677C6B2DA3EF24B45DFB5CE83AB13A399DD1997AB1C39A4C25D9",
+      "Path": "scripts/Test-AudioPackets.ps1"
+    },
+    {
+      "Sha256": "11DEFE3D93F984872C65692AEA8FC0477581B725FA7A2E19CE64C4A6AF6D8AE9",
+      "Path": "scripts/Test-AudioRunspace.ps1"
+    },
+    {
+      "Sha256": "89D32D6D710BC0B7B92F4B60BC0634B06C9DB10C55C2BBC7020FFE376C879110",
+      "Path": "scripts/Test-SaveWorker.ps1"
+    },
+    {
+      "Sha256": "2DBF9C9443DC744F5F31BADBF23D0060412AEA3908EAD2B0FBFCF162F7092CB1",
+      "Path": "scripts/Test-AudioIntegration.ps1"
+    }
+  ],
+  "Error": null,
+  "Checks": [
+    {
+      "Name": "audio-packets-unit named checks",
+      "Passed": true
+    },
+    {
+      "Name": "audio-runspace-future-epoch named checks",
+      "Passed": true
+    },
+    {
+      "Name": "audio-save-worker named checks",
+      "Passed": true
+    },
+    {
+      "Name": "Reference WAV retains its recorded hash",
+      "Passed": true
+    },
+    {
+      "Name": "Successful actual video capture, explicitly no recorded audio",
+      "Passed": true
+    },
+    {
+      "Name": "Headless controls complete game route",
+      "Passed": true
+    },
+    {
+      "Name": "Headless controls exact submitted PCM",
+      "Passed": true
+    },
+    {
+      "Name": "Headless controls device completion and cleanup",
+      "Passed": true
+    },
+    {
+      "Name": "Recorded Matrix complete game route",
+      "Passed": true
+    },
+    {
+      "Name": "Recorded Matrix exact submitted PCM",
+      "Passed": true
+    },
+    {
+      "Name": "Recorded Matrix device completion and cleanup",
+      "Passed": true
+    },
+    {
+      "Name": "Menu and synthetic resize pause observed",
+      "Passed": true
+    },
+    {
+      "Name": "Parse Start-Doom.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Parse src/AudioMixer.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Parse src/AudioPackets.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Parse src/AudioRunspace.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Parse src/WaveOutDevice.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Parse src/SimulationProcess.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Parse scripts/Invoke-AudioWorker.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Parse scripts/Invoke-SimulationWorker.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Parse scripts/Invoke-Doom.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Parse scripts/Record-DoomReplay.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Parse scripts/Render-AudioReplay.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Parse scripts/Test-AudioPackets.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Parse scripts/Test-AudioRunspace.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Parse scripts/Test-SaveWorker.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Parse scripts/Test-AudioIntegration.ps1",
+      "Passed": true
+    }
+  ],
+  "FinishedUtc": "2026-09-11T20:19:55.9108655Z",
+  "Recording": {
+    "Game": "C:\\projects\\pwshDoom\\scripts/../local/recordings/audio-matrix-first-game.json",
+    "MetadataSha256": "B91C48D49A545756AE0D487DCE7DF82E24599C2128BC4EA74173F54EBD6402C6",
+    "GameSha256": "567DEF7CA8D43803D46CD4182A7CEF437C4D51F5A29E1ACDD1F247AC52703908",
+    "Metadata": "C:\\projects\\pwshDoom\\scripts/../local/recordings/audio-matrix-first-recording.json"
+  },
+  "ReferencePcmSha256": "25C7077C167D10105F0A8408B7EAEFE52566808E5F9BD46A15D98D40CF82D8F6",
+  "Meaning": "Current source snapshot and accepted integration evidence. First host/replay reports precede documented corrections. Full submitted-PCM identity is not acoustic latency, waveform loopback or physical listening evidence. Music/volume and full release remain unfinished."
+}

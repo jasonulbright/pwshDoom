@@ -64,6 +64,14 @@ function Set-DoomWaveOutPaused {
     if($Paused){Assert-DoomWaveResult ([PwshDoomAudio.WaveApi]::waveOutPause($Device.Handle)) 'waveOutPause'}
     else{Assert-DoomWaveResult ([PwshDoomAudio.WaveApi]::waveOutRestart($Device.Handle)) 'waveOutRestart'}
 }
+function Reset-DoomWaveOut {
+    param($Device)
+    Update-DoomWaveOutBuffers $Device
+    $cancelled=0L;foreach($slot in $Device.Buffers){if($slot.Queued){$cancelled+=$slot.Frames}}
+    Assert-DoomWaveResult ([PwshDoomAudio.WaveApi]::waveOutReset($Device.Handle)) 'waveOutReset'
+    foreach($slot in $Device.Buffers){$slot.Queued=$false}
+    return $cancelled
+}
 function Close-DoomWaveOut {
     param($Device)
     if($Device.Closed){return}

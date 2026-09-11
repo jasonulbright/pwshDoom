@@ -10,7 +10,7 @@ param([ValidateSet('Classic','AnsiArt','Matrix')][string]$Style='Matrix',
     [ValidateRange(60,240)][int]$CaptureLimit=240,
     [ValidateSet('GraphicsCapture','Gdi')][string]$CaptureBackend='GraphicsCapture',
     [ValidateRange(4,24)][int]$FontSize=12,[string]$FontFace,[switch]$Maximized,
-    [string]$SessionSchedule,[switch]$RecordInput,[string]$SaveRoot,[string]$SettingsPath,[ValidateRange(3,30)][int]$ExitDelaySeconds=3,[ValidateSet('ReplayEnd','LevelComplete','ConfirmedQuit','Duration')][string]$ExpectedExit)
+    [string]$SessionSchedule,[switch]$RecordInput,[switch]$Sound,[string]$SaveRoot,[string]$SettingsPath,[ValidateRange(3,30)][int]$ExitDelaySeconds=3,[ValidateSet('ReplayEnd','LevelComplete','ConfirmedQuit','Duration')][string]$ExpectedExit)
 $ErrorActionPreference='Stop'
 $replayInfo=Get-Content -LiteralPath $Replay -Raw | ConvertFrom-Json
 $expectedEnding=if($ExpectedExit){$ExpectedExit}elseif($replayInfo.ContinueCampaign){'ReplayEnd'}else{'LevelComplete'}
@@ -33,6 +33,7 @@ try {
     if($SaveRoot){$launch.SaveRoot=$SaveRoot}
     if($SettingsPath){$launch.SettingsPath=$SettingsPath}
     if($RecordInput){$launch.RecordInput=$prefix+'-input.json'}
+    if($Sound){$launch.Sound=$true}
     & "$PSScriptRoot/../Start-Doom.ps1" @launch
     $watch=[Diagnostics.Stopwatch]::StartNew()
     while($null -eq $target){
@@ -91,6 +92,7 @@ finally {
     if($null -ne $exitCode -and $exitCode -ne 0 -and -not $failure){$failure="FFmpeg exited with code $exitCode."}
     $stderr | Set-Content -LiteralPath ($prefix+'-ffmpeg.log')
     @{FinishedUtc=[DateTime]::UtcNow.ToString('o');Error=$failure;Style=$Style;GlyphSet=$GlyphSet;FontFace=$FontFace;FontSize=$FontSize;Maximized=[bool]$Maximized;CaptureBackend=$CaptureBackend;CaptureLimit=if($CaptureBackend -eq 'GraphicsCapture'){$CaptureLimit}else{$null};VideoFps=60;ExpectedExit=$expectedEnding;ReplaySha256=(Get-FileHash -LiteralPath $Replay).Hash;
+        SoundRequested=[bool]$Sound;AudioCaptured=$false;
         SessionScheduleSha256=if($SessionSchedule){(Get-FileHash -LiteralPath $SessionSchedule).Hash}else{$null};SaveRoot=$SaveRoot;ExitDelaySeconds=$ExitDelaySeconds;InputReplaySha256=if($RecordInput -and (Test-Path -LiteralPath ($prefix+'-input.json'))){(Get-FileHash -LiteralPath ($prefix+'-input.json')).Hash}else{$null};
         TerminalPid=if($null -ne $target){$target.Id}else{$null};WindowHandle=if($null -ne $target){$target.MainWindowHandle.ToInt64()}else{$null};
         CaptureStartQpc=$captureQpc;QpcFrequency=[Diagnostics.Stopwatch]::Frequency;EncoderExitCode=$exitCode;

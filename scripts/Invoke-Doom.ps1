@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 [CmdletBinding()]
 param([Parameter(Mandatory)][string]$Wad,[ValidateRange(1,32)][int]$Workers=16,
-    [ValidateRange(0,3600)][int]$Seconds=0,[switch]$Headless,[switch]$Scripted,[string]$Replay,[string]$RecordInput,
+    [ValidateRange(0,3600)][int]$Seconds=0,[switch]$Headless,[switch]$Scripted,[switch]$Sound,[string]$Replay,[string]$RecordInput,
     [ValidateRange(0,10000)][int]$CaptureEveryTics=0,[ValidateRange(1,5)][int]$Skill=3,
     [ValidateRange(1,4)][int]$Episode=1,[ValidateRange(1,32)][int]$Map=1,
     [ValidateSet('Classic','AnsiArt','Matrix')][string]$Style='Classic',
@@ -95,7 +95,7 @@ try {
     # Existing single-map benchmark replays retain their first-exit stopping rule.
     # Session recordings explicitly carry ContinueCampaign=true.
     $stopAtLevelEnd=$null -ne $replayData -and -not $replayData.ContinueCampaign
-    $simulation=New-DoomSimulation $Wad $Skill $Episode $Map -StopAtLevelEnd:$stopAtLevelEnd -ReplayCheckpoints:$withCheckpoints -CheckpointReplay $(if($null -ne $replayData -and $replayData.Checkpoints){$Replay}else{''}) -SaveRoot $SaveRoot
+    $simulation=New-DoomSimulation $Wad $Skill $Episode $Map -StopAtLevelEnd:$stopAtLevelEnd -ReplayCheckpoints:$withCheckpoints -CheckpointReplay $(if($null -ne $replayData -and $replayData.Checkpoints){$Replay}else{''}) -SaveRoot $SaveRoot -Sound:$Sound
     $snapshot=Read-DoomSimulationSnapshot $simulation $null
     $menu=New-DoomMenuState ($simulation.View.ReadInt32(80)) $Episode $Skill
     $menu.Settings=Copy-DoomUserSettings $preferences
@@ -235,6 +235,10 @@ try {
             }
         }else{$compactMenuKey=''}
         $now=$clock.Elapsed.TotalMilliseconds
+        if($Sound){
+            $audioPause=[int](-not $clock.IsRunning)
+            if($simulation.View.ReadInt32(84) -ne $audioPause){$simulation.View.Write(84,$audioPause);[void]$simulation.Go.Set()}
+        }
         if($viewport.Fits -and $menu.Screen -eq 0 -and $null -eq $pendingAction -and $now -ge ($tics+1)*1000.0/35) {
             $cmd.Clear();$send=$true;$automapMask=0
             if($null -ne $replayData) {

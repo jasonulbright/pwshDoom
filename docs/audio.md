@@ -1,10 +1,10 @@
 # PowerShell audio investigation
 
-The normal terminal game remains silent. The first audio foundation implements game sound-event capture, DMX decoding, stereo positioning, linear resampling and mixing in PowerShell, plus a tested Windows playback queue. Music and live host integration remain open release requirements.
+The terminal game now has opt-in sound effects with `./Start-Doom.ps1 -Sound`. The default remains silent while integration is qualified. DMX decoding, stereo positioning, linear resampling and mixing run in PowerShell, with a standard Windows playback queue. Music, volume settings, audible latency and broader session qualification remain open release requirements.
 
 ## Implementation boundary
 
-`src/AudioEvents.ps1` implements the retained engine's `ISound` callbacks without consuming gameplay RNG. It records start/stop/reset/pause/resume events and assigns reference-based numeric emitter IDs. The offline adapter updates gains from current listener/emitter positions once per tic. Its source registry currently lasts until level reset; bounded emitter lifecycle and destroyed/moving-source semantics require qualification before live use.
+`src/AudioEvents.ps1` implements the retained engine's `ISound` callbacks without consuming gameplay RNG. It records start/stop/reset/pause/resume events and assigns reference-based numeric emitter IDs. Both adapters update gains from current listener/emitter positions once per tic. The first direct offline adapter retains sources until level reset; the new packet adapter retires them after their longest pending sound plus two active audio tics. Paused packets do not advance this expiry clock. A later emission gets a new ID. The real route peaks at four retained sources; broader moving/destroyed-emitter semantics remain to qualify.
 
 `src/AudioMixer.ps1` accepts format-3 DMX unsigned 8-bit samples, validates the declared rate/count, removes the conventional sixteen samples at each end, maps unsigned midpoint 128 to zero, and resamples linearly to stereo signed 16-bit PCM. The explicit `None` padding option is for unpadded experimental data. The DMX mode rejects source counts of 48 or fewer. These header/padding rules are informed by [Chocolate Doom's primary implementation](https://github.com/chocolate-doom/chocolate-doom/blob/master/src/i_sdlsound.c), inspected 2026-09-11; this moving link is a reference, not a pinned vendored dependency. The implementation is original GPL PowerShell, with no external algorithm body adopted for this milestone.
 
@@ -23,7 +23,7 @@ Microsoft documents [event callbacks and device opening](https://learn.microsoft
 - `results/audio-mixer-cast.json`: 22 checks pass after optimization, including independent ties-to-even rounding and asymmetric saturation-boundary values.
 - `results/audio-validation-canonical.json`: 26 evidence checks pass, including source hashes, parsing, PCM identity and ordered event identity. The earlier `audio-validation.json` retains a harness failure caused by comparing JSON property order across PowerShell processes; sorting property names within each event fixes the comparison without reordering events.
 
-No live game/window test occurred in this milestone. The WAV is derived from the user's local IWAD and is excluded from Git. There is no claim that existing screen recordings contain this audio.
+No live game/window test occurred in the initial foundation milestone. Later integration tests are described below. The WAV is derived from the user's local IWAD and is excluded from Git. There is no claim that existing screen recordings contain this audio.
 
 ## Cost and next integration decision
 
@@ -42,7 +42,27 @@ Sources: `results/audio-mixer-cost-baseline.json` and `results/audio-mixer-cost-
 
 The optimized real route (`results/audio-replay-cast.json`) preserves the entire WAV SHA-256, all 75 events and eight gameplay checkpoints. Mixing falls to 2.137 ms mean, 6.608 ms p95 and 12.271 ms maximum. Event processing averages 0.147 ms, with a 20.634 ms maximum. This is still an isolated offline route, not a live deadline test; sixteen-voice cost remains unresolved.
 
-Next: decide an explicit bounded audio-worker/event transport, measure deadlines with the renderer running, integrate host pause/menu/save/load/reset semantics and volume settings, then implement music with documented synthesis and instrument provenance. Capture actual audiovisual runs once that path exists. Do not place this workload on the simulation thread and assume the existing 35/60 targets survive.
+## Live worker integration
+
+`src/AudioRunspace.ps1` starts a dedicated runspace for `scripts/Invoke-AudioWorker.ps1`. The simulation thread sends numeric sound events and gain snapshots using `src/AudioPackets.ps1`. Decoded sample arrays are shared read-only; game objects and PowerShell class method calls stay on the simulation thread. A bounded 32-packet collection rejects overflow explicitly. Nothing silently discards a gameplay tic to meet an audio target.
+
+The device uses four 1,260-frame buffers (114.3 ms nominal capacity), starts after two queued blocks, and responds to a shared pause flag. A dedicated host-memory field tracks active-clock pauses, including a too-small viewport. Menu pauses are also applied by the simulation. Map/new-game/load transitions advance an epoch and reset old-world queued sound; stale packets are counted. A packet from a newer epoch is retained until control catches up. Successful save loading resets the former sound state before replacing its listener. Device shutdown reports how much queued audio may have been cancelled. It does not pretend those frames were heard.
+
+`results/audio-packets-replay.json` preserves the entire earlier PCM hash and all eight checkpoints. `results/audio-packets-unit.json` independently checks numerical packet output, conservative source expiry, paused lifetime, reset and missing-asset rejection. `results/audio-runspace-future-epoch.json` checks an actual output device in a separate runspace, including a deliberately early future-epoch packet. Those synthetic tone tests are not audibility reviews.
+
+The first full Classic headless host (`results/audio-host-first.json`) runs all sixteen rendering workers and the real output device. It consumes 1,747 tics in 50.887 active seconds with 3,017 completed renders (59.29/sec), matching all eight checkpoints. Audio consumes all 1,747 packets, submits and receives completion for 2,201,220 stereo frames, and closes cleanly. Mixing averages 3.141 ms, with 31.580 ms maximum; packet construction averages 0.216 ms. Packet age ends at driver submission: mean 91.843 ms, maximum 226.301 ms. Four polling starvation observations occur before the last packet and another after route completion. These are not direct hardware-underrun or acoustic-latency measurements. Worker wall time includes its wait during renderer startup; it is not the active game clock. No uniquely displayed-FPS claim follows from this headless run.
+
+The first host precedes the reviewed future-epoch race correction, paused-expiry correction, PCM digest telemetry and explicit loading-pause hold. Do not treat its hashes as evidence for later code changes.
+
+The corrected controls run (`results/audio-host-controls.json`) pauses at twelve seconds, resumes at thirteen, shrinks its synthetic Classic viewport to 98 rows at sixteen seconds and restores it at seventeen. All 1,747 tics and eight checkpoints match. The worker reports two pause transitions and one level epoch reset, consumes every packet without stale/unconsumed entries, returns all 2,201,220 frames and closes cleanly. Its SHA-256 of submitted PCM bytes is `25C7077C167D10105F0A8408B7EAEFE52566808E5F9BD46A15D98D40CF82D8F6`, matching the entire offline WAV payload after its 44-byte header. Timing pauses therefore preserve the content on this route. This does not establish acoustic timing or every gameplay transition.
+
+`results/audio-save-worker.json` passes fourteen checks in the actual simulation process, including isolated save replacement/rejection, new-game and two successful loads, exact numeric state restoration and three audio epoch resets. Audio closes without worker or cleanup error. This short fixture is primarily session/lifetime evidence; it does not qualify acoustic transitions during a noisy fight.
+
+`results/audio-live-recording.json` records the actual Matrix terminal run and local media hashes. It preserves all eight checkpoints and the same complete submitted-PCM hash, with a menu pause and clean audio shutdown. The host completes 3,002 writes in 51.665 active seconds (58.10/sec); these are recorded-run writes, not unique displayed frames. The 1472×1006 original has 5,129 encoded frames. The inspected 1280×800 crop begins at X=96/Y=120, matching the observed 184×60 terminal and centered 160×50 game grid. Its 54.483-second viewing copy fully decodes to 3,269 frames. A full-size frame and five populated contact-sheet tiles show katakana gameplay and HUD; the sixth tile is unused. Dim green scene values remain a known limitation. Original and copy remain under ignored `local/recordings/`; neither contains an audio stream.
+
+`results/audio-integration-validation.json` passes 27 evidence checks and pins sixteen current source files, including fifteen standalone parses. The engine-dependent event class is exercised by the actual host. No owned game or recorder processes remain after these runs. The full Ultimate Doom release goal remains active.
+
+Next: qualify menu/save/load/new-game/viewport timing in the integrated host, reduce queue delay without hiding starvation, measure audible latency, add volume controls and music with documented synthesis/instrument provenance, and record actual audiovisual output. The recorder can launch with `-Sound`, but its existing `-an` video path does not capture playback audio; footage is explicitly silent video until loopback capture is implemented.
 
 ## Reproducing the bounded experiments
 

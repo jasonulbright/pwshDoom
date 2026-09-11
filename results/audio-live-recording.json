@@ -1,0 +1,127 @@
+{
+  "Game": {
+    "AudioClosed": true,
+    "PcmSha256": "25C7077C167D10105F0A8408B7EAEFE52566808E5F9BD46A15D98D40CF82D8F6",
+    "ActiveSeconds": 51.6654732,
+    "WallSeconds": 53.6537747,
+    "ReplayVerification": {
+      "Mismatches": [],
+      "Matched": true,
+      "Meaning": "Compared available recorded checkpoints through the consumed prefix. This samples selected state and render data, not every hidden game field.",
+      "Checked": 8
+    },
+    "AudioPackets": 1747,
+    "Report": "C:\\projects\\pwshDoom\\local\\recordings\\audio-matrix-first-game.json",
+    "Exit": "ReplayEnd",
+    "Pauses": 1,
+    "CompletedWrites": 3002,
+    "Sha256": "567DEF7CA8D43803D46CD4182A7CEF437C4D51F5A29E1ACDD1F247AC52703908"
+  },
+  "SoundRequested": true,
+  "Original": {
+    "MetadataSha256": "B91C48D49A545756AE0D487DCE7DF82E24599C2128BC4EA74173F54EBD6402C6",
+    "Arguments": [
+      "-hide_banner",
+      "-n",
+      "-filter_complex",
+      "gfxcapture=hwnd=27067214:max_framerate=240:capture_cursor=0:display_border=1:width=-2:height=-2",
+      "-an",
+      "-c:v",
+      "h264_nvenc",
+      "-preset",
+      "p4",
+      "-cq",
+      "18",
+      "-b:v",
+      "0",
+      "-r",
+      "60",
+      "-fps_mode",
+      "cfr",
+      "-movflags",
+      "+faststart",
+      "-t",
+      "120",
+      "C:\\projects\\pwshDoom\\local\\recordings\\audio-matrix-first.mp4"
+    ],
+    "Sha256": "5977EA1863A2B5FC9F76BD122597BBC7DA5361125C1BA582DCD836617208D1AF",
+    "Path": "C:\\projects\\pwshDoom\\local\\recordings\\audio-matrix-first.mp4"
+  },
+  "Review": {
+    "ContactSha256": "5EABD07CC7A1FE6500494AD5322D0000C30166C6BE2A02AFA62DAEE1899C48BB",
+    "FullFrameSha256": "84B26D925812FF85118F32B07C536BE46A582EE8975CE051C3DF8FB0D0E20C0C",
+    "FullFrame": "local/recordings/audio-matrix-first-review.png",
+    "Contact": "local/recordings/audio-matrix-contact.png",
+    "Finding": "Full-size gameplay frame and five populated contact-sheet tiles show katakana scene and HUD. One tile is unused. Existing dim green values remain. No audio stream is captured; no speed/tint/sharpening or scaling change applied to viewing copy."
+  },
+  "FinishedUtc": "2026-09-11T20:21:34.8982051Z",
+  "Style": "Matrix",
+  "ViewingCopy": {
+    "CreatedUtc": "2026-09-11T20:18:36.5668092Z",
+    "Style": "Matrix",
+    "GameWallDurationSeconds": 53.6537747,
+    "Output": "C:\\projects\\pwshDoom\\local\\recordings\\audio-matrix-view.mp4",
+    "Crop": {
+      "Width": 1280,
+      "X": 96,
+      "Height": 800,
+      "Y": 120
+    },
+    "GlyphSet": "Katakana",
+    "VerifiedVideo": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_name": "h264",
+          "width": 1280,
+          "height": 800,
+          "pix_fmt": "yuv420p",
+          "avg_frame_rate": "60/1",
+          "nb_read_frames": "3269"
+        }
+      ],
+      "format": {
+        "duration": "54.483333"
+      }
+    },
+    "ContrastSampleRate": 10,
+    "OutputSha256": "5A3C533B6CC5A88908E87E20E4449A7FE6116D6F2885319B855667A536FA7825",
+    "Meaning": "Viewing copy of actual window-capture footage. Removes startup/console return and fixed empty margins; no game frames are synthesized and no speed change, tint, sharpening, shader, or rescaling is applied. Re-encoded H.264 is lossy; capture may already contain repeated frames. The untrimmed original is retained.",
+    "OriginalSha256": "5977EA1863A2B5FC9F76BD122597BBC7DA5361125C1BA582DCD836617208D1AF",
+    "GameDurationSeconds": 51.6654732,
+    "Arguments": [
+      "-hide_banner",
+      "-n",
+      "-ss",
+      "31.000",
+      "-i",
+      "C:\\projects\\pwshDoom\\local\\recordings\\audio-matrix-first.mp4",
+      "-t",
+      "54.483",
+      "-an",
+      "-vf",
+      "crop=1280:800:96:120",
+      "-c:v",
+      "libx264",
+      "-threads",
+      "4",
+      "-preset",
+      "medium",
+      "-crf",
+      "16",
+      "-pix_fmt",
+      "yuv420p",
+      "-movflags",
+      "+faststart",
+      "C:\\projects\\pwshDoom\\local\\recordings\\audio-matrix-view.mp4"
+    ],
+    "VisibleSamples": 545,
+    "StartSeconds": 31,
+    "OriginalVideo": "C:\\projects\\pwshDoom\\local\\recordings\\audio-matrix-first.mp4",
+    "EndSeconds": 85.483008
+  },
+  "Meaning": "Actual terminal window recording with sound playback enabled; video is silent. Completed writes and 60 CFR movie frames are not unique displayed-frame counts. Original, viewing copy and derived media stay ignored locally.",
+  "Error": null,
+  "AudioCaptured": false
+}
