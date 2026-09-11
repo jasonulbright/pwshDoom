@@ -10,7 +10,7 @@ param([ValidateSet('Classic','AnsiArt','Matrix')][string]$Style='Matrix',
     [ValidateRange(60,240)][int]$CaptureLimit=240,
     [ValidateSet('GraphicsCapture','Gdi')][string]$CaptureBackend='GraphicsCapture',
     [ValidateRange(4,24)][int]$FontSize=12,[string]$FontFace,[switch]$Maximized,
-    [string]$SessionSchedule,[switch]$RecordInput,[string]$SaveRoot,[ValidateRange(3,30)][int]$ExitDelaySeconds=3,[ValidateSet('ReplayEnd','LevelComplete','ConfirmedQuit','Duration')][string]$ExpectedExit)
+    [string]$SessionSchedule,[switch]$RecordInput,[string]$SaveRoot,[string]$SettingsPath,[ValidateRange(3,30)][int]$ExitDelaySeconds=3,[ValidateSet('ReplayEnd','LevelComplete','ConfirmedQuit','Duration')][string]$ExpectedExit)
 $ErrorActionPreference='Stop'
 $replayInfo=Get-Content -LiteralPath $Replay -Raw | ConvertFrom-Json
 $expectedEnding=if($ExpectedExit){$ExpectedExit}elseif($replayInfo.ContinueCampaign){'ReplayEnd'}else{'LevelComplete'}
@@ -31,6 +31,7 @@ try {
     $launch=@{Wad=$Wad;Replay=$Replay;Style=$Style;GlyphSet=$GlyphSet;Seconds=$Seconds;FontSize=$FontSize;FontFace=$FontFace;Maximized=$Maximized;ExitDelaySeconds=$ExitDelaySeconds;Report=$gamePath}
     if($SessionSchedule){$launch.SessionSchedule=$SessionSchedule}
     if($SaveRoot){$launch.SaveRoot=$SaveRoot}
+    if($SettingsPath){$launch.SettingsPath=$SettingsPath}
     if($RecordInput){$launch.RecordInput=$prefix+'-input.json'}
     & "$PSScriptRoot/../Start-Doom.ps1" @launch
     $watch=[Diagnostics.Stopwatch]::StartNew()

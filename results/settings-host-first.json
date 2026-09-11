@@ -1,0 +1,9 @@
+{
+  "FinishedUtc": "2026-09-11T19:32:55.0978816Z",
+  "Checks": [],
+  "Runs": [],
+  "Error": "save host failed; inspect C:\\projects\\pwshDoom\\scripts\\..\\local\\settings-host-f57939b3b9d948009d4530a7550f7e50\\save-game.json\nat Run-SettingsHost, C:\\projects\\pwshDoom\\scripts\\Test-SettingsHost.ps1: line 18\r\nat <ScriptBlock>, C:\\projects\\pwshDoom\\scripts\\Test-SettingsHost.ps1: line 26",
+  "Directory": "C:\\projects\\pwshDoom\\scripts\\..\\local\\settings-host-f57939b3b9d948009d4530a7550f7e50",
+  "HarnessSha256": "524C74FD6DA670C78F39A4A33C7D33FA68AE3683FFAFA2E0D753648D63E0444B",
+  "Meaning": "Three real isolated headless hosts: menu edits/reset/persistence, process restart, and malformed-file/save-failure recovery while preserving replay checkpoints. No user settings file is read or written."
+}

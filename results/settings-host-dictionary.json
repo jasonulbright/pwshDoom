@@ -1,0 +1,681 @@
+{
+  "FinishedUtc": "2026-09-11T19:34:30.6957079Z",
+  "Checks": [
+    {
+      "Passed": true,
+      "Name": "Settings host preserves both gameplay/map checkpoints"
+    },
+    {
+      "Passed": true,
+      "Name": "All five edits saved through the real host"
+    },
+    {
+      "Passed": true,
+      "Name": "Final host preferences reflect post-reset choices"
+    },
+    {
+      "Passed": true,
+      "Name": "Actual simulation worker acknowledges settings screen"
+    },
+    {
+      "Passed": true,
+      "Name": "Fresh host loads saved preferences"
+    },
+    {
+      "Passed": true,
+      "Name": "Malformed existing preferences fall back to defaults"
+    },
+    {
+      "Passed": true,
+      "Name": "Failed save leaves file and active preferences unchanged"
+    },
+    {
+      "Passed": true,
+      "Name": "Save failure reaches recoverable message screen"
+    },
+    {
+      "Passed": true,
+      "Name": "Recovered session reaches replay end with matching checkpoints"
+    }
+  ],
+  "HarnessSha256": "524C74FD6DA670C78F39A4A33C7D33FA68AE3683FFAFA2E0D753648D63E0444B",
+  "Error": null,
+  "Runs": [
+    {
+      "ReplayVerification": {
+        "Checked": 2,
+        "Matched": true,
+        "Mismatches": [],
+        "Meaning": "Compared available recorded checkpoints through the consumed prefix. This samples selected state and render data, not every hidden game field."
+      },
+      "InitialSettings": {
+        "AlwaysRun": false,
+        "Version": 1,
+        "TurnSpeed": 100
+      },
+      "Sha256": "2E29DCC03D9CA14C273696F05CAEC324156682E455E1AAA54FC55A0D2549E90F",
+      "SettingsEvents": [
+        {
+          "Values": {
+            "AlwaysRun": true,
+            "Version": 1,
+            "TurnSpeed": 100
+          },
+          "WallMs": 1900.4604,
+          "Tic": 17,
+          "Success": true,
+          "Persisted": true
+        },
+        {
+          "Values": {
+            "AlwaysRun": true,
+            "Version": 1,
+            "TurnSpeed": 150
+          },
+          "WallMs": 2601.7699,
+          "Tic": 17,
+          "Success": true,
+          "Persisted": true
+        },
+        {
+          "Values": {
+            "AlwaysRun": false,
+            "Version": 1,
+            "TurnSpeed": 100
+          },
+          "WallMs": 3301.9623,
+          "Tic": 17,
+          "Success": true,
+          "Persisted": true
+        },
+        {
+          "Values": {
+            "AlwaysRun": false,
+            "Version": 1,
+            "TurnSpeed": 150
+          },
+          "WallMs": 4001.0149,
+          "Tic": 17,
+          "Success": true,
+          "Persisted": true
+        },
+        {
+          "Values": {
+            "AlwaysRun": true,
+            "Version": 1,
+            "TurnSpeed": 150
+          },
+          "WallMs": 4700.6123,
+          "Tic": 17,
+          "Success": true,
+          "Persisted": true
+        }
+      ],
+      "Arguments": [
+        "-NoProfile",
+        "-File",
+        "C:\\projects\\pwshDoom\\scripts/Invoke-Doom.ps1",
+        "-Wad",
+        "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Ultimate Doom\\base\\DOOM.WAD",
+        "-Headless",
+        "-Workers",
+        "4",
+        "-Style",
+        "Matrix",
+        "-SettingsPath",
+        "C:\\projects\\pwshDoom\\scripts\\..\\local\\settings-host-eeee089d405841a29f874169e66f34fc\\preferences.json",
+        "-Report",
+        "C:\\projects\\pwshDoom\\scripts\\..\\local\\settings-host-eeee089d405841a29f874169e66f34fc\\save-game.json",
+        "-SessionSchedule",
+        "C:\\projects\\pwshDoom\\scripts\\..\\local\\settings-host-eeee089d405841a29f874169e66f34fc\\save-schedule.json",
+        "-Seconds",
+        "35",
+        "-Replay",
+        "C:\\projects\\pwshDoom\\scripts/../results/automap-host-recorded.json"
+      ],
+      "ExitReason": "ReplayEnd",
+      "Report": "C:\\projects\\pwshDoom\\scripts\\..\\local\\settings-host-eeee089d405841a29f874169e66f34fc\\save-game.json",
+      "SessionEvents": [
+        {
+          "Sequence": 1,
+          "Tic": 17,
+          "MenuScreen": 1,
+          "Phase": "Requested",
+          "WallMs": 500.9471,
+          "Action": "ShowMenu"
+        },
+        {
+          "MenuScreen": 1,
+          "Phase": "Acknowledged",
+          "Generation": 1,
+          "Map": 1,
+          "Episode": 1,
+          "WallMs": 1253.6429,
+          "Tic": 17,
+          "Sequence": 1,
+          "Action": "ShowMenu"
+        },
+        {
+          "Sequence": 2,
+          "Tic": 17,
+          "MenuScreen": 1,
+          "Phase": "Requested",
+          "WallMs": 1253.6429,
+          "Action": "ShowMenu"
+        },
+        {
+          "MenuScreen": 1,
+          "Phase": "Acknowledged",
+          "Generation": 1,
+          "Map": 1,
+          "Episode": 1,
+          "WallMs": 1283.7173,
+          "Tic": 17,
+          "Sequence": 2,
+          "Action": "ShowMenu"
+        },
+        {
+          "Sequence": 3,
+          "Tic": 17,
+          "MenuScreen": 1,
+          "Phase": "Requested",
+          "WallMs": 1283.7173,
+          "Action": "ShowMenu"
+        },
+        {
+          "MenuScreen": 1,
+          "Phase": "Acknowledged",
+          "Generation": 1,
+          "Map": 1,
+          "Episode": 1,
+          "WallMs": 1310.7301,
+          "Tic": 17,
+          "Sequence": 3,
+          "Action": "ShowMenu"
+        },
+        {
+          "Sequence": 4,
+          "Tic": 17,
+          "MenuScreen": 14,
+          "Phase": "Requested",
+          "WallMs": 1550.7371,
+          "Action": "ShowMenu"
+        },
+        {
+          "MenuScreen": 14,
+          "Phase": "Acknowledged",
+          "Generation": 1,
+          "Map": 1,
+          "Episode": 1,
+          "WallMs": 1583.2624,
+          "Tic": 17,
+          "Sequence": 4,
+          "Action": "ShowMenu"
+        },
+        {
+          "Sequence": 5,
+          "Tic": 17,
+          "MenuScreen": 14,
+          "Phase": "Requested",
+          "WallMs": 1900.4604,
+          "Action": "ShowMenu"
+        },
+        {
+          "MenuScreen": 14,
+          "Phase": "Acknowledged",
+          "Generation": 1,
+          "Map": 1,
+          "Episode": 1,
+          "WallMs": 1940.6079,
+          "Tic": 17,
+          "Sequence": 5,
+          "Action": "ShowMenu"
+        },
+        {
+          "Sequence": 6,
+          "Tic": 17,
+          "MenuScreen": 14,
+          "Phase": "Requested",
+          "WallMs": 2250.1237,
+          "Action": "ShowMenu"
+        },
+        {
+          "MenuScreen": 14,
+          "Phase": "Acknowledged",
+          "Generation": 1,
+          "Map": 1,
+          "Episode": 1,
+          "WallMs": 2275.6434,
+          "Tic": 17,
+          "Sequence": 6,
+          "Action": "ShowMenu"
+        },
+        {
+          "Sequence": 7,
+          "Tic": 17,
+          "MenuScreen": 14,
+          "Phase": "Requested",
+          "WallMs": 2601.7699,
+          "Action": "ShowMenu"
+        },
+        {
+          "MenuScreen": 14,
+          "Phase": "Acknowledged",
+          "Generation": 1,
+          "Map": 1,
+          "Episode": 1,
+          "WallMs": 2632.8083,
+          "Tic": 17,
+          "Sequence": 7,
+          "Action": "ShowMenu"
+        },
+        {
+          "Sequence": 8,
+          "Tic": 17,
+          "MenuScreen": 14,
+          "Phase": "Requested",
+          "WallMs": 2951.4486,
+          "Action": "ShowMenu"
+        },
+        {
+          "MenuScreen": 14,
+          "Phase": "Acknowledged",
+          "Generation": 1,
+          "Map": 1,
+          "Episode": 1,
+          "WallMs": 2974.7613,
+          "Tic": 17,
+          "Sequence": 8,
+          "Action": "ShowMenu"
+        },
+        {
+          "Sequence": 9,
+          "Tic": 17,
+          "MenuScreen": 14,
+          "Phase": "Requested",
+          "WallMs": 3301.9623,
+          "Action": "ShowMenu"
+        },
+        {
+          "MenuScreen": 14,
+          "Phase": "Acknowledged",
+          "Generation": 1,
+          "Map": 1,
+          "Episode": 1,
+          "WallMs": 3327.4715,
+          "Tic": 17,
+          "Sequence": 9,
+          "Action": "ShowMenu"
+        },
+        {
+          "Sequence": 10,
+          "Tic": 17,
+          "MenuScreen": 14,
+          "Phase": "Requested",
+          "WallMs": 3650.2831,
+          "Action": "ShowMenu"
+        },
+        {
+          "MenuScreen": 14,
+          "Phase": "Acknowledged",
+          "Generation": 1,
+          "Map": 1,
+          "Episode": 1,
+          "WallMs": 3671.2255,
+          "Tic": 17,
+          "Sequence": 10,
+          "Action": "ShowMenu"
+        },
+        {
+          "Sequence": 11,
+          "Tic": 17,
+          "MenuScreen": 14,
+          "Phase": "Requested",
+          "WallMs": 4001.0149,
+          "Action": "ShowMenu"
+        },
+        {
+          "MenuScreen": 14,
+          "Phase": "Acknowledged",
+          "Generation": 1,
+          "Map": 1,
+          "Episode": 1,
+          "WallMs": 4027.0218,
+          "Tic": 17,
+          "Sequence": 11,
+          "Action": "ShowMenu"
+        },
+        {
+          "Sequence": 12,
+          "Tic": 17,
+          "MenuScreen": 14,
+          "Phase": "Requested",
+          "WallMs": 4350.452,
+          "Action": "ShowMenu"
+        },
+        {
+          "MenuScreen": 14,
+          "Phase": "Acknowledged",
+          "Generation": 1,
+          "Map": 1,
+          "Episode": 1,
+          "WallMs": 4371.9859,
+          "Tic": 17,
+          "Sequence": 12,
+          "Action": "ShowMenu"
+        },
+        {
+          "Sequence": 13,
+          "Tic": 17,
+          "MenuScreen": 14,
+          "Phase": "Requested",
+          "WallMs": 4700.6123,
+          "Action": "ShowMenu"
+        },
+        {
+          "MenuScreen": 14,
+          "Phase": "Acknowledged",
+          "Generation": 1,
+          "Map": 1,
+          "Episode": 1,
+          "WallMs": 4724.7683,
+          "Tic": 17,
+          "Sequence": 13,
+          "Action": "ShowMenu"
+        },
+        {
+          "Sequence": 14,
+          "Tic": 17,
+          "MenuScreen": 1,
+          "Phase": "Requested",
+          "WallMs": 5050.4102,
+          "Action": "ShowMenu"
+        },
+        {
+          "MenuScreen": 1,
+          "Phase": "Acknowledged",
+          "Generation": 1,
+          "Map": 1,
+          "Episode": 1,
+          "WallMs": 5072.9151,
+          "Tic": 17,
+          "Sequence": 14,
+          "Action": "ShowMenu"
+        },
+        {
+          "Sequence": 15,
+          "Tic": 17,
+          "MenuScreen": 0,
+          "Phase": "Requested",
+          "WallMs": 5400.4977,
+          "Action": "ShowMenu"
+        },
+        {
+          "MenuScreen": 0,
+          "Phase": "Acknowledged",
+          "Generation": 1,
+          "Map": 1,
+          "Episode": 1,
+          "WallMs": 5417.5202,
+          "Tic": 17,
+          "Sequence": 15,
+          "Action": "ShowMenu"
+        }
+      ],
+      "Name": "save",
+      "FinalSettings": {
+        "AlwaysRun": true,
+        "Version": 1,
+        "TurnSpeed": 150
+      },
+      "SettingsLoadError": null
+    },
+    {
+      "ReplayVerification": null,
+      "InitialSettings": {
+        "Version": 1,
+        "TurnSpeed": 150,
+        "AlwaysRun": true
+      },
+      "Sha256": "31C2B150BD1AED626C8D628EE10B45F031C046412FD4779570148635E4A55E9F",
+      "SettingsEvents": [],
+      "Arguments": [
+        "-NoProfile",
+        "-File",
+        "C:\\projects\\pwshDoom\\scripts/Invoke-Doom.ps1",
+        "-Wad",
+        "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Ultimate Doom\\base\\DOOM.WAD",
+        "-Headless",
+        "-Workers",
+        "4",
+        "-Style",
+        "Matrix",
+        "-SettingsPath",
+        "C:\\projects\\pwshDoom\\scripts\\..\\local\\settings-host-eeee089d405841a29f874169e66f34fc\\preferences.json",
+        "-Report",
+        "C:\\projects\\pwshDoom\\scripts\\..\\local\\settings-host-eeee089d405841a29f874169e66f34fc\\restart-game.json",
+        "-Seconds",
+        "1"
+      ],
+      "ExitReason": "Duration",
+      "Report": "C:\\projects\\pwshDoom\\scripts\\..\\local\\settings-host-eeee089d405841a29f874169e66f34fc\\restart-game.json",
+      "SessionEvents": [],
+      "Name": "restart",
+      "FinalSettings": {
+        "Version": 1,
+        "TurnSpeed": 150,
+        "AlwaysRun": true
+      },
+      "SettingsLoadError": null
+    },
+    {
+      "ReplayVerification": {
+        "Matched": true,
+        "Checked": 2,
+        "Mismatches": [],
+        "Meaning": "Compared available recorded checkpoints through the consumed prefix. This samples selected state and render data, not every hidden game field."
+      },
+      "InitialSettings": {
+        "Version": 1,
+        "TurnSpeed": 100,
+        "AlwaysRun": false
+      },
+      "Sha256": "585E2429C0E24485923F82B53CFAAD010D07562B23DC967737AF7917749B4873",
+      "SettingsEvents": [
+        {
+          "Error": "Invalid settings fields.",
+          "Success": false,
+          "WallMs": 1901.8733,
+          "Tic": 17
+        }
+      ],
+      "Arguments": [
+        "-NoProfile",
+        "-File",
+        "C:\\projects\\pwshDoom\\scripts/Invoke-Doom.ps1",
+        "-Wad",
+        "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Ultimate Doom\\base\\DOOM.WAD",
+        "-Headless",
+        "-Workers",
+        "4",
+        "-Style",
+        "Matrix",
+        "-SettingsPath",
+        "C:\\projects\\pwshDoom\\scripts\\..\\local\\settings-host-eeee089d405841a29f874169e66f34fc\\invalid.json",
+        "-Report",
+        "C:\\projects\\pwshDoom\\scripts\\..\\local\\settings-host-eeee089d405841a29f874169e66f34fc\\invalid-game.json",
+        "-SessionSchedule",
+        "C:\\projects\\pwshDoom\\scripts\\..\\local\\settings-host-eeee089d405841a29f874169e66f34fc\\invalid-schedule.json",
+        "-Seconds",
+        "35",
+        "-Replay",
+        "C:\\projects\\pwshDoom\\scripts/../results/automap-host-recorded.json"
+      ],
+      "ExitReason": "ReplayEnd",
+      "Report": "C:\\projects\\pwshDoom\\scripts\\..\\local\\settings-host-eeee089d405841a29f874169e66f34fc\\invalid-game.json",
+      "SessionEvents": [
+        {
+          "Action": "ShowMenu",
+          "Sequence": 1,
+          "MenuScreen": 1,
+          "Tic": 17,
+          "WallMs": 500.8097,
+          "Phase": "Requested"
+        },
+        {
+          "Tic": 17,
+          "Generation": 1,
+          "Map": 1,
+          "MenuScreen": 1,
+          "Action": "ShowMenu",
+          "Episode": 1,
+          "WallMs": 1241.6137,
+          "Phase": "Acknowledged",
+          "Sequence": 1
+        },
+        {
+          "Action": "ShowMenu",
+          "Sequence": 2,
+          "MenuScreen": 1,
+          "Tic": 17,
+          "WallMs": 1241.6137,
+          "Phase": "Requested"
+        },
+        {
+          "Tic": 17,
+          "Generation": 1,
+          "Map": 1,
+          "MenuScreen": 1,
+          "Action": "ShowMenu",
+          "Episode": 1,
+          "WallMs": 1269.1069,
+          "Phase": "Acknowledged",
+          "Sequence": 2
+        },
+        {
+          "Action": "ShowMenu",
+          "Sequence": 3,
+          "MenuScreen": 1,
+          "Tic": 17,
+          "WallMs": 1269.1069,
+          "Phase": "Requested"
+        },
+        {
+          "Tic": 17,
+          "Generation": 1,
+          "Map": 1,
+          "MenuScreen": 1,
+          "Action": "ShowMenu",
+          "Episode": 1,
+          "WallMs": 1295.0921,
+          "Phase": "Acknowledged",
+          "Sequence": 3
+        },
+        {
+          "Action": "ShowMenu",
+          "Sequence": 4,
+          "MenuScreen": 14,
+          "Tic": 17,
+          "WallMs": 1551.1585,
+          "Phase": "Requested"
+        },
+        {
+          "Tic": 17,
+          "Generation": 1,
+          "Map": 1,
+          "MenuScreen": 14,
+          "Action": "ShowMenu",
+          "Episode": 1,
+          "WallMs": 1593.668,
+          "Phase": "Acknowledged",
+          "Sequence": 4
+        },
+        {
+          "Action": "ShowMenu",
+          "Sequence": 5,
+          "MenuScreen": 12,
+          "Tic": 17,
+          "WallMs": 1901.8733,
+          "Phase": "Requested"
+        },
+        {
+          "Tic": 17,
+          "Generation": 1,
+          "Map": 1,
+          "MenuScreen": 12,
+          "Action": "ShowMenu",
+          "Episode": 1,
+          "WallMs": 1933.3633,
+          "Phase": "Acknowledged",
+          "Sequence": 5
+        },
+        {
+          "Action": "ShowMenu",
+          "Sequence": 6,
+          "MenuScreen": 14,
+          "Tic": 17,
+          "WallMs": 2252.4904,
+          "Phase": "Requested"
+        },
+        {
+          "Tic": 17,
+          "Generation": 1,
+          "Map": 1,
+          "MenuScreen": 14,
+          "Action": "ShowMenu",
+          "Episode": 1,
+          "WallMs": 2271.024,
+          "Phase": "Acknowledged",
+          "Sequence": 6
+        },
+        {
+          "Action": "ShowMenu",
+          "Sequence": 7,
+          "MenuScreen": 1,
+          "Tic": 17,
+          "WallMs": 2601.117,
+          "Phase": "Requested"
+        },
+        {
+          "Tic": 17,
+          "Generation": 1,
+          "Map": 1,
+          "MenuScreen": 1,
+          "Action": "ShowMenu",
+          "Episode": 1,
+          "WallMs": 2619.2303,
+          "Phase": "Acknowledged",
+          "Sequence": 7
+        },
+        {
+          "Action": "ShowMenu",
+          "Sequence": 8,
+          "MenuScreen": 0,
+          "Tic": 17,
+          "WallMs": 2951.3762,
+          "Phase": "Requested"
+        },
+        {
+          "Tic": 17,
+          "Generation": 1,
+          "Map": 1,
+          "MenuScreen": 0,
+          "Action": "ShowMenu",
+          "Episode": 1,
+          "WallMs": 2958.4007,
+          "Phase": "Acknowledged",
+          "Sequence": 8
+        }
+      ],
+      "Name": "invalid",
+      "FinalSettings": {
+        "Version": 1,
+        "TurnSpeed": 100,
+        "AlwaysRun": false
+      },
+      "SettingsLoadError": "Invalid settings fields."
+    }
+  ],
+  "Directory": "C:\\projects\\pwshDoom\\scripts\\..\\local\\settings-host-eeee089d405841a29f874169e66f34fc",
+  "Meaning": "Three real isolated headless hosts: menu edits/reset/persistence, process restart, and malformed-file/save-failure recovery while preserving replay checkpoints. No user settings file is read or written."
+}

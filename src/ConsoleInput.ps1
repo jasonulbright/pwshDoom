@@ -81,15 +81,16 @@ function Reset-DoomInputAfterSessionAction {
 }
 
 function Set-DoomInputCommand {
-    param($State,$Command,[switch]$AutomapVisible)
+    param($State,$Command,[switch]$AutomapVisible,[switch]$AlwaysRun,[ValidateSet(50,100,150)][int]$TurnSpeed=100)
     $keys=$State.Keys.Clone()
     foreach($key in 87,83,65,68,37,38,39,40,17,69,32,13,16){
         if($State.ContainsKey('Suppressed') -and $State.Suppressed[$key]){$keys[$key]=$false}
         elseif($State.Pressed[$key]){$keys[$key]=$true}
     }
-    $Command.Clear();$run=$keys[16]
+    $Command.Clear();$run=$keys[16] -xor [bool]$AlwaysRun
     if($AutomapVisible){foreach($key in 37,38,39,40){$keys[$key]=$false}}
     $speed=if($run){50}else{25};$strafe=if($run){40}else{24};$turn=if($run){1280}else{640}
+    $turn=[int]($turn*$TurnSpeed/100)
     if($keys[87] -or $keys[38]){$Command.ForwardMove+=$speed}
     if($keys[83] -or $keys[40]){$Command.ForwardMove-=$speed}
     if($keys[68]){$Command.SideMove+=$strafe};if($keys[65]){$Command.SideMove-=$strafe}

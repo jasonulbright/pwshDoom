@@ -1,6 +1,6 @@
 # Menus, pause and new games
 
-Escape opens a menu with Resume Game, New Game, Save Game, Load Game, Controls and Quit. Arrows choose an item; Enter selects it; Escape goes back. New Game selects an available episode and difficulty, then asks before replacing the current game. Quit also defaults to No. P or the Pause key pauses; P, Enter or Escape resumes the paused screen. [Save/load](save-load.md) now has six slots, overwrite/load confirmation, progress/error screens and exact-save replay references. Automap and settings remain unfinished.
+Escape opens a menu with Resume Game, New Game, Save Game, Load Game, Controls, Settings and Quit. Arrows choose an item; Enter selects it; Escape goes back. New Game selects an available episode and difficulty, then asks before replacing the current game. Quit also defaults to No. P or the Pause key pauses; P, Enter or Escape resumes the paused screen. [Save/load](save-load.md) has six slots, overwrite/load confirmation, progress/error screens and exact-save replay references. [Automap](automap.md) and [persistent input settings](settings.md) are integrated; broader qualification and audio remain open.
 
 The menus use native WAD graphics and the adopted PowerShell `DrawScreen`, with a small new PowerShell controller suited to this host's separate simulation process. The inherited menu controller depends on another `Doom` wrapper and its video/input settings interfaces; it is retained in the attributed source but not silently presented as integrated.
 
@@ -51,3 +51,8 @@ The first menu request takes 713 / 698 / 604 ms to acknowledge in those Classic 
 ## Save-menu follow-up
 
 Six save slots, default-no overwrite/load decisions, version warnings and busy/error screens are now integrated. The [save/load findings](save-load.md) describe their implementation, 39 menu fixtures, host/replay checks and three newer live recordings. The current main menu adds Save Game and Load Game; older menu evidence above retains its original layout. Save-menu footage exposes a timestamp display bug corrected afterward and a transient incomplete Matrix footer that remains a presentation finding. Automap/settings and physical-play qualification are still ahead.
+
+Persistent input preferences and the current seven-item main menu are covered by
+[settings validation](settings.md). It records 123 menu checks/44 screen fixtures,
+three actual settings captures and their remaining presentation limitations. The
+older schedules and movies above are historical evidence for their menu revisions.

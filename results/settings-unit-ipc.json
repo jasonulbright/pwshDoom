@@ -1,0 +1,30 @@
+{
+  "Error": "Invalid settings fields.\nat Copy-DoomUserSettings, C:\\projects\\pwshDoom\\src\\UserSettings.ps1: line 8\r\nat Read-DoomUserSettings, C:\\projects\\pwshDoom\\src\\UserSettings.ps1: line 21\r\nat <ScriptBlock>, C:\\projects\\pwshDoom\\scripts\\Test-UserSettings.ps1: line 20",
+  "Meaning": "Isolated file validation, typed persistence, stale-edit rejection, menu settings navigation and synthetic command generation. No physical keyboard observation or audio/display settings qualification.",
+  "Sources": [
+    {
+      "Path": "src/UserSettings.ps1",
+      "Sha256": "4F8A6D14B07CECF3C38E383B6D0BF1CDC314986A07969CCE287F7E5EF1DFB2D8"
+    },
+    {
+      "Path": "src/SessionMenu.ps1",
+      "Sha256": "22D026C538687642B0DDEF6303DE201FCA718FBA6C84C5C29CC1F7EB72776FE2"
+    },
+    {
+      "Path": "src/ConsoleInput.ps1",
+      "Sha256": "7DDFDC801009B2D6B02DDCD1E02B7E7A2C557E860B8DBB418AA44706AD6777C8"
+    }
+  ],
+  "Fixtures": "C:\\projects\\pwshDoom\\scripts\\..\\local\\settings-test-f5ef1b3cdfd74ce6ac95b305e41e33c4",
+  "FinishedUtc": "2026-09-11T19:31:42.2277975Z",
+  "Checks": [
+    {
+      "Name": "Missing settings returns defaults without writing a file",
+      "Passed": true
+    },
+    {
+      "Name": "Copy does not alias live preferences",
+      "Passed": true
+    }
+  ]
+}

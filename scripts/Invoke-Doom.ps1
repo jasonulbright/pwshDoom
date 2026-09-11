@@ -7,7 +7,7 @@ param([Parameter(Mandatory)][string]$Wad,[ValidateRange(1,32)][int]$Workers=16,
     [ValidateRange(1,4)][int]$Episode=1,[ValidateRange(1,32)][int]$Map=1,
     [ValidateSet('Classic','AnsiArt','Matrix')][string]$Style='Classic',
     [ValidateSet('Ascii','Katakana')][string]$GlyphSet='Katakana',
-    [string]$Report="$PSScriptRoot/../local/game-session.json",[string]$ReadyFile,[string]$SaveRoot,
+    [string]$Report="$PSScriptRoot/../local/game-session.json",[string]$ReadyFile,[string]$SaveRoot,[string]$SettingsPath,
     [switch]$Diagnostics,[string]$ViewportSchedule,[string]$SessionSchedule,[ValidateRange(0,30)][int]$ExitDelaySeconds=0)
 $ErrorActionPreference='Stop'
 . "$PSScriptRoot/FrameCodec.ps1";. "$PSScriptRoot/../src/GameProcesses.ps1"
@@ -46,15 +46,25 @@ $assetGeneration=1;$loadingStart=$null;$loadingMs=0.0;$loadingWasRunning=$false;
 $recordingPath=$null;$recordingError=$null;$replayVerification=$null;$sourceFingerprint=$null;$sourceMatches=$null
 $menu=$null;$pendingAction=$null;$sessionStart=$null;$sessionPausedMs=0.0;$sessionEvents=[Collections.Generic.List[object]]::new();$sessionScheduleData=@();$scheduleIndex=0;$controlIndex=0;$lastPresentedVersion=-1
 $compactMenuKey=''
+$preferences=New-DoomUserSettings;$initialPreferences=$null;$preferencesHash=$null;$preferencesLoadError=$null
+$preferencesEvents=[Collections.Generic.List[object]]::new()
 $mapInputIndex=0;$inputMapVisible=$false
 $captureDirectory=if($CaptureEveryTics -gt 0){Join-Path "$PSScriptRoot/../local" ('frames-'+[guid]::NewGuid().ToString('N'))}else{$null}
 try {
+    # Benchmarks/replays use defaults unless explicitly given an isolated file.
+    if(-not $SettingsPath -and -not ($Headless -or $Scripted -or $Replay)){$SettingsPath=Join-Path ([Environment]::GetFolderPath('LocalApplicationData')) 'pwshDoom/settings.json'}
+    if($SettingsPath){
+        $SettingsPath=[IO.Path]::GetFullPath($SettingsPath)
+        try{$loadedPreferences=Read-DoomUserSettings $SettingsPath;$preferences=$loadedPreferences.Values;$preferencesHash=$loadedPreferences.Sha256}
+        catch{$preferencesLoadError=$_.ToString();Write-Warning "Using default input settings: $preferencesLoadError"}
+    }
+    $initialPreferences=Copy-DoomUserSettings $preferences
     if($SessionSchedule){
         if(-not ($Headless -or $Scripted -or $Replay)){throw 'A session schedule is a replay/scripted test driver.'}
         if((Get-Item -LiteralPath $SessionSchedule).Length -gt 1MB){throw 'Session schedule is too large.'}
         $sessionScheduleData=@(Get-Content -LiteralPath $SessionSchedule -Raw|ConvertFrom-Json -Depth 4|Sort-Object AtSeconds)
         if($sessionScheduleData.Count -gt 1000){throw 'Too many scheduled session keys.'}
-        foreach($entry in $sessionScheduleData){if($entry.AtSeconds -lt 0 -or $entry.Key -notin 'Escape','Pause','Up','Down','Enter','Yes','No'){throw 'Invalid scheduled session key.'}}
+        foreach($entry in $sessionScheduleData){if($entry.AtSeconds -lt 0 -or $entry.Key -notin 'Escape','Pause','Up','Down','Left','Right','Enter','Yes','No'){throw 'Invalid scheduled session key.'}}
     }
     if($ViewportSchedule) {
         if(-not $Headless){throw 'Synthetic viewport schedules are only allowed with -Headless.'}
@@ -88,6 +98,7 @@ try {
     $simulation=New-DoomSimulation $Wad $Skill $Episode $Map -StopAtLevelEnd:$stopAtLevelEnd -ReplayCheckpoints:$withCheckpoints -CheckpointReplay $(if($null -ne $replayData -and $replayData.Checkpoints){$Replay}else{''}) -SaveRoot $SaveRoot
     $snapshot=Read-DoomSimulationSnapshot $simulation $null
     $menu=New-DoomMenuState ($simulation.View.ReadInt32(80)) $Episode $Skill
+    $menu.Settings=Copy-DoomUserSettings $preferences
     if($null -eq $snapshot){throw 'Initial simulation snapshot was not published.'}
     $context=Read-GameRenderAssets $simulation.Assets;$context.AssetPath=$simulation.Assets
     $paletteBytes=[byte[]]::new(768)
@@ -157,13 +168,25 @@ try {
             $key=$null
             if($null -ne $consoleState){
                 Read-DoomConsoleInput $consoleState
-                $keyCodes=if($menu.Screen -eq 0){@(27,80,19)}else{@(27,80,19,38,40,13,89,78)}
-                foreach($code in $keyCodes){if($consoleState.Pressed[$code]){$key=switch($code){27{'Escape'};80{'Pause'};19{'Pause'};38{'Up'};40{'Down'};13{'Enter'};89{'Yes'};78{'No'}};break}}
+                $keyCodes=if($menu.Screen -eq 0){@(27,80,19)}else{@(27,80,19,38,40,37,39,13,89,78)}
+                foreach($code in $keyCodes){if($consoleState.Pressed[$code]){$key=switch($code){27{'Escape'};80{'Pause'};19{'Pause'};38{'Up'};40{'Down'};37{'Left'};39{'Right'};13{'Enter'};89{'Yes'};78{'No'}};break}}
             }
             if($null -eq $key -and $scheduleIndex -lt $sessionScheduleData.Count -and $sessionScheduleData[$scheduleIndex].AtSeconds*1000 -le $wallNow){$key=$sessionScheduleData[$scheduleIndex].Key;$scheduleIndex++}
             if($null -ne $key){
                 $priorMenuScreen=$menu.Screen
                 $nextAction=Invoke-DoomMenuKey $menu $key
+                if($null -ne $nextAction -and $nextAction.Action -eq 'ShowMenu' -and $nextAction.SettingsChanged){
+                    try{
+                        if($SettingsPath){$preferencesHash=Write-DoomUserSettings $SettingsPath $menu.Settings $preferencesHash}
+                        $preferences=Copy-DoomUserSettings $menu.Settings
+                        $preferencesEvents.Add(@{Tic=$tics;WallMs=$wallNow;Success=$true;Values=(Copy-DoomUserSettings $preferences);Persisted=[bool]$SettingsPath})
+                    }catch{
+                        $preferencesEvents.Add(@{Tic=$tics;WallMs=$wallNow;Success=$false;Error=$_.ToString()})
+                        $menu.Settings=Copy-DoomUserSettings $preferences;$menu.Screen=12;$menu.ReturnScreen=14;$menu.MessageTitle='SETTINGS NOT SAVED';$menu.MessageDetail='FILE UNAVAILABLE'
+                        $nextAction.Screen=12;$nextAction.Settings=$menu.Settings;$nextAction.MessageTitle=$menu.MessageTitle;$nextAction.MessageDetail=$menu.MessageDetail
+                    }
+                    $compactMenuKey=''
+                }
                 if($null -ne $nextAction -and $nextAction.Action -eq 'ShowMenu' -and $nextAction.Screen -in 8,9 -and $priorMenuScreen -notin 8,9){$menu.Slots=Get-DoomSlotSummaries $saveDirectory $wadHash;$nextAction.Slots=$menu.Slots}
                 if($null -ne $consoleState){Reset-DoomInputForMenu $consoleState}
                 if($null -ne $nextAction -and $nextAction.Action -eq 'Quit'){$exitReason='ConfirmedQuit';break}
@@ -218,7 +241,7 @@ try {
                 if($tics -ge $replayData.InputCommands.Count){$send=$false;if($simulation.View.ReadInt32(20) -ge $tics){$exitReason='ReplayEnd';break}}
                 else{$entry=$replayData.InputCommands[$tics];$cmd.ForwardMove=$entry[0];$cmd.SideMove=$entry[1];$cmd.AngleTurn=$entry[2];$cmd.Buttons=$entry[3]}
                 if($replayData.Version -eq 4 -and $mapInputIndex -lt $replayData.AutomapCommands.Count -and $replayData.AutomapCommands[$mapInputIndex].Tic -eq $tics){$automapMask=[int]$replayData.AutomapCommands[$mapInputIndex].Mask;$mapInputIndex++}
-            } elseif($null -ne $consoleState){$automapMask=Get-DoomAutomapInputMask $consoleState $inputMapVisible;$inputMapVisible=$consoleState.AutomapVisible;Set-DoomInputCommand $consoleState $cmd -AutomapVisible:$inputMapVisible}
+            } elseif($null -ne $consoleState){$automapMask=Get-DoomAutomapInputMask $consoleState $inputMapVisible;$inputMapVisible=$consoleState.AutomapVisible;Set-DoomInputCommand $consoleState $cmd -AutomapVisible:$inputMapVisible -AlwaysRun:$preferences.AlwaysRun -TurnSpeed $preferences.TurnSpeed}
             elseif($Scripted) {
                 $phase=$tics%700
                 if($phase -lt 120){$cmd.ForwardMove=25}elseif($phase -lt 260){$cmd.AngleTurn=640}elseif($phase -lt 430){$cmd.ForwardMove=25}
@@ -316,6 +339,7 @@ finally {
         Architecture='SeparateSimulation';Transport='NumericV1';QpcFrequency=[Diagnostics.Stopwatch]::Frequency;Headless=[bool]$Headless;Scripted=[bool]$Scripted;Replay=$Replay;ExitReason=$exitReason;Error=$failure;
         InputRecording=$recordingPath;InputRecordingError=$recordingError;ReplaySourceMatches=$sourceMatches;ReplayVerification=$replayVerification;
         SessionSchedule=$SessionSchedule;SessionPausedSeconds=$sessionPausedMs/1000;SessionEvents=$sessionEvents.ToArray();SaveDirectory=$saveDirectory;
+        SettingsPath=$SettingsPath;InitialSettings=$initialPreferences;FinalSettings=$preferences;SettingsLoadError=$preferencesLoadError;SettingsEvents=$preferencesEvents.ToArray();
         DurationSeconds=$clock.Elapsed.TotalSeconds;IssuedCommands=$tics;SimulationTics=$simTics;TicsPerSecond=$simTics/[Math]::Max(.001,$clock.Elapsed.TotalSeconds);
         WallDurationSeconds=$wallClock.Elapsed.TotalSeconds;ViewportPausedSeconds=$pausedMs/1000;ViewportPauseCount=$pauseCount;
         MapReloads=$mapReloads.ToArray();MapReloadPausedSeconds=$loadingMs/1000;DiscardedTransitionFrames=$transitionDiscarded;FinalAssetGeneration=$assetGeneration;

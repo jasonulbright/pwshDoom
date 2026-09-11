@@ -65,3 +65,8 @@ The numeric automap discovery follow-up preserves all eight legacy checkpoints
 and matches discovered-line sets at 48 sampled poses on the established
 E1M1/intermission/E1M2 route (`results/automap-numeric-route.json`). This adds
 regression coverage; it does not add another completed map to the campaign matrix.
+
+Persistent input preferences now have isolated storage/command tests and actual
+host restart/recovery coverage. Replays bypass preference-based command generation;
+three settings-menu recordings preserve the existing control fixture checkpoints.
+This UI work adds no map completion to the matrix. See [settings](settings.md).
