@@ -1,0 +1,77 @@
+{
+  "Sources": [
+    {
+      "Path": "src/AudioMixer.ps1",
+      "Sha256": "351420237EE78443F8E6B1DBA6777CCA04CAFA4C1D22550AABDAD4B4BA4612C1"
+    },
+    {
+      "Path": "scripts/Measure-AudioMixer.ps1",
+      "Sha256": "11746130CFB861658240D3B72839B2D098DF8C2D420D7D545DBF0A174565FE39"
+    }
+  ],
+  "Cases": [
+    {
+      "ClippedSamples": 0,
+      "PcmSha256": "046CFDBE4AC1E2B7FFBBBD4FBB131CC85E40426A4540F46FE808D695055E2D24",
+      "SampleCount": 80,
+      "FramesPerBlock": 1260,
+      "Voices": 0,
+      "MedianMs": 4.6514,
+      "MeanMs": 4.800046249999999,
+      "MaxMs": 12.3583,
+      "Rate": 44100,
+      "WarmupBlocks": 10,
+      "BlocksOverAudioDuration": 0,
+      "P95Ms": 5.0846,
+      "RemainingVoices": 0
+    },
+    {
+      "ClippedSamples": 0,
+      "PcmSha256": "B6404EEAF49645E709617C1B5429DEA25A16265D5C751DB8FBBFE0FF4A01E05B",
+      "SampleCount": 80,
+      "FramesPerBlock": 1260,
+      "Voices": 1,
+      "MedianMs": 10.5744,
+      "MeanMs": 10.991817500000002,
+      "MaxMs": 15.7867,
+      "Rate": 44100,
+      "WarmupBlocks": 10,
+      "BlocksOverAudioDuration": 0,
+      "P95Ms": 12.2234,
+      "RemainingVoices": 1
+    },
+    {
+      "ClippedSamples": 0,
+      "PcmSha256": "A821226EC446CC1BCCCA33E147127DA96E038913B8C1914EAA6E8888336BD551",
+      "SampleCount": 80,
+      "FramesPerBlock": 1260,
+      "Voices": 5,
+      "MedianMs": 27.9315,
+      "MeanMs": 27.83095000000001,
+      "MaxMs": 30.7396,
+      "Rate": 44100,
+      "WarmupBlocks": 10,
+      "BlocksOverAudioDuration": 6,
+      "P95Ms": 28.7561,
+      "RemainingVoices": 5
+    },
+    {
+      "ClippedSamples": 0,
+      "PcmSha256": "667549396CF6D44247B9B0925D9FFE06C17B173F9D2F3FD380D9E9B74E31FD26",
+      "SampleCount": 80,
+      "FramesPerBlock": 1260,
+      "Voices": 16,
+      "MedianMs": 78.2172,
+      "MeanMs": 78.50430750000004,
+      "MaxMs": 98.1502,
+      "Rate": 44100,
+      "WarmupBlocks": 10,
+      "BlocksOverAudioDuration": 80,
+      "P95Ms": 82.7713,
+      "RemainingVoices": 16
+    }
+  ],
+  "Error": null,
+  "FinishedUtc": "2026-09-11T19:56:42.2127763Z",
+  "Meaning": "Finite synthetic isolated mixer cost; ten warmup blocks then eighty timed blocks per voice count. Hashing and sample generation excluded. No renderer/device load or live scheduling qualification."
+}

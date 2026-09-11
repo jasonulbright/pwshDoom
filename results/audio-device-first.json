@@ -1,0 +1,74 @@
+{
+  "CleanupError": null,
+  "Buffers": 4,
+  "WallSeconds": 8.2287272,
+  "FinishedUtc": "2026-09-11T19:55:42.1993668Z",
+  "PauseMilliseconds": 204.1445,
+  "TailFrames": 137,
+  "Sources": [
+    {
+      "Sha256": "7210FC5D0D4AB06576C4D0CD043C79D251634BF88481DEB05EAD97C2554B8C8E",
+      "Path": "src/WaveOutDevice.ps1"
+    },
+    {
+      "Sha256": "E852C4A27274B19F4515BABE448A0FD83634890D571FA4B97EC4650B27755428",
+      "Path": "scripts/Test-WaveOutPlayback.ps1"
+    }
+  ],
+  "ReplayReportSha256": "177A651A3001A6C4E5680BDB8971983A98A2995BC302156D8938F6937D1E6292",
+  "CompletedFrames": 352937,
+  "SubmittedFrames": 352937,
+  "Checks": [
+    {
+      "Passed": true,
+      "Name": "Source PCM matches replay hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Canonical stereo PCM format"
+    },
+    {
+      "Passed": true,
+      "Name": "Selected segment lies within PCM data"
+    },
+    {
+      "Passed": true,
+      "Name": "Native PCM format layout"
+    },
+    {
+      "Passed": true,
+      "Name": "Native header layout"
+    },
+    {
+      "Passed": true,
+      "Name": "Reject overwriting queued native buffer"
+    },
+    {
+      "Passed": true,
+      "Name": "Every submitted frame returned by driver"
+    },
+    {
+      "Passed": true,
+      "Name": "Partial final buffer completed"
+    },
+    {
+      "Passed": true,
+      "Name": "Pause and restart completed"
+    },
+    {
+      "Passed": true,
+      "Name": "Idempotent close releases native allocations"
+    },
+    {
+      "Passed": true,
+      "Name": "Early close safely resets outstanding buffer"
+    }
+  ],
+  "SelectedFrames": 352937,
+  "BufferFrames": 882,
+  "SourceStartSeconds": 9,
+  "Rate": 44100,
+  "QueueEmptyWithInputRemainingObservations": 0,
+  "Error": null,
+  "Meaning": "Default Windows waveOut device API completion of prerecorded PowerShell PCM. Queue-empty polling is not hardware underrun telemetry. No audibility, latency, live mixing, renderer load, or audio/video synchronization claim."
+}

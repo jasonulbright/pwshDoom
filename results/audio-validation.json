@@ -1,0 +1,131 @@
+{
+  "FinishedUtc": "2026-09-11T20:01:00.0078594Z",
+  "Checks": [
+    {
+      "Name": "Mixer checks pass",
+      "Passed": true
+    },
+    {
+      "Name": "Playback checks and cleanup pass",
+      "Passed": true
+    },
+    {
+      "Name": "Accepted report has no error",
+      "Passed": true
+    },
+    {
+      "Name": "Current source hash: src/AudioMixer.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Current source hash: src/AudioEvents.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Current source hash: scripts/Render-AudioReplay.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Accepted report has no error",
+      "Passed": true
+    },
+    {
+      "Name": "Current source hash: src/AudioMixer.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Current source hash: scripts/Measure-AudioMixer.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Accepted report has no error",
+      "Passed": true
+    },
+    {
+      "Name": "Current source hash: src/WaveOutDevice.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Current source hash: scripts/Test-WaveOutPlayback.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Optimized replay matches all eight checkpoints",
+      "Passed": true
+    },
+    {
+      "Name": "Optimized route retains complete PCM hash",
+      "Passed": true
+    },
+    {
+      "Name": "Optimized route retains ordered event stream",
+      "Passed": false
+    }
+  ],
+  "Reports": [
+    {
+      "Path": "results/audio-mixer-cast.json",
+      "Sha256": "FE26E3AF22621F42EE40518F122F6103B8987E35CF46A8A15B8160F148776AC4"
+    },
+    {
+      "Path": "results/audio-device-first.json",
+      "Sha256": "B3786C337233914D0EE231B87CC0CEFEBFA65B6EE83E18DF60F5E8F86CA8614C"
+    },
+    {
+      "Path": "results/audio-replay-first.json",
+      "Sha256": "A9FEE458210E02C5C9C05FCE8E76D5C25902073B511191FEB8D220CC5ED631CB"
+    },
+    {
+      "Path": "results/audio-replay-legacy.json",
+      "Sha256": "177A651A3001A6C4E5680BDB8971983A98A2995BC302156D8938F6937D1E6292"
+    },
+    {
+      "Path": "results/audio-replay-cast.json",
+      "Sha256": "353628FACDC3E69CB949E9FBDE223778BA1BB4DCEFD696AEE89F8813706CE311"
+    },
+    {
+      "Path": "results/audio-mixer-cost-baseline.json",
+      "Sha256": "9887E8146339024B8021A8D6A901BD1CE00AC951BC6EDF35C7D06074BA3718DB"
+    },
+    {
+      "Path": "results/audio-mixer-cost-cast.json",
+      "Sha256": "F37BFA75C9B0850F4FD44BDE78784B8BC52C006446A9D6503D24ABA4AED998BF"
+    }
+  ],
+  "Sources": [
+    {
+      "Path": "src/AudioMixer.ps1",
+      "Sha256": "F6227640C7AD799B5E7D486B70752E680EF074881EB6B795BC087970BEB8C990"
+    },
+    {
+      "Path": "src/AudioEvents.ps1",
+      "Sha256": "52E6F728AF88DB21E2BDA5C6065EB3324DFC4A91EA25371DD4DB9889B6BD3BE1"
+    },
+    {
+      "Path": "src/WaveOutDevice.ps1",
+      "Sha256": "7210FC5D0D4AB06576C4D0CD043C79D251634BF88481DEB05EAD97C2554B8C8E"
+    },
+    {
+      "Path": "scripts/Test-AudioMixer.ps1",
+      "Sha256": "FED55A738A4374039DEDB4751A668003C07695530C64B3DC8445D5A7721BFD96"
+    },
+    {
+      "Path": "scripts/Render-AudioReplay.ps1",
+      "Sha256": "C89622B394E4E7A2A3724AEA399329705A07FAAA92A96D7DA07265B3C83EEFDA"
+    },
+    {
+      "Path": "scripts/Measure-AudioMixer.ps1",
+      "Sha256": "11746130CFB861658240D3B72839B2D098DF8C2D420D7D545DBF0A174565FE39"
+    },
+    {
+      "Path": "scripts/Test-WaveOutPlayback.ps1",
+      "Sha256": "E852C4A27274B19F4515BABE448A0FD83634890D571FA4B97EC4650B27755428"
+    },
+    {
+      "Path": "scripts/Test-AudioEvidence.ps1",
+      "Sha256": "D99A76770133992DCE6F94E03E975C8C4070744644780780FD7B6FA1E35C3C42"
+    }
+  ],
+  "Meaning": "Accepted audio evidence hash/semantic audit. AudioEvents class loading is exercised by the actual engine replay, not standalone parsing. Historical reports pin earlier source versions. No live audio/render synchronization qualification.",
+  "Error": "Optimized route retains ordered event stream\nat Check, C:\\projects\\pwshDoom\\scripts\\Test-AudioEvidence.ps1: line 7\r\nat <ScriptBlock>, C:\\projects\\pwshDoom\\scripts\\Test-AudioEvidence.ps1: line 21"
+}

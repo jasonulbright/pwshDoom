@@ -1,0 +1,77 @@
+{
+  "Meaning": "Finite synthetic isolated mixer cost; ten warmup blocks then eighty timed blocks per voice count. Hashing and sample generation excluded. No renderer/device load or live scheduling qualification.",
+  "Cases": [
+    {
+      "BlocksOverAudioDuration": 0,
+      "MedianMs": 0.037,
+      "P95Ms": 0.0421,
+      "FramesPerBlock": 1260,
+      "MaxMs": 0.0871,
+      "Voices": 0,
+      "SampleCount": 80,
+      "WarmupBlocks": 10,
+      "ClippedSamples": 0,
+      "PcmSha256": "046CFDBE4AC1E2B7FFBBBD4FBB131CC85E40426A4540F46FE808D695055E2D24",
+      "Rate": 44100,
+      "MeanMs": 0.03813749999999999,
+      "RemainingVoices": 0
+    },
+    {
+      "BlocksOverAudioDuration": 0,
+      "MedianMs": 2.6767,
+      "P95Ms": 3.2608,
+      "FramesPerBlock": 1260,
+      "MaxMs": 8.6809,
+      "Voices": 1,
+      "SampleCount": 80,
+      "WarmupBlocks": 10,
+      "ClippedSamples": 0,
+      "PcmSha256": "B6404EEAF49645E709617C1B5429DEA25A16265D5C751DB8FBBFE0FF4A01E05B",
+      "Rate": 44100,
+      "MeanMs": 2.8035599999999996,
+      "RemainingVoices": 1
+    },
+    {
+      "BlocksOverAudioDuration": 0,
+      "MedianMs": 10.5404,
+      "P95Ms": 13.4371,
+      "FramesPerBlock": 1260,
+      "MaxMs": 13.7571,
+      "Voices": 5,
+      "SampleCount": 80,
+      "WarmupBlocks": 10,
+      "ClippedSamples": 0,
+      "PcmSha256": "A821226EC446CC1BCCCA33E147127DA96E038913B8C1914EAA6E8888336BD551",
+      "Rate": 44100,
+      "MeanMs": 11.187014999999997,
+      "RemainingVoices": 5
+    },
+    {
+      "BlocksOverAudioDuration": 80,
+      "MedianMs": 32.8922,
+      "P95Ms": 34.1953,
+      "FramesPerBlock": 1260,
+      "MaxMs": 40.5632,
+      "Voices": 16,
+      "SampleCount": 80,
+      "WarmupBlocks": 10,
+      "ClippedSamples": 0,
+      "PcmSha256": "667549396CF6D44247B9B0925D9FFE06C17B173F9D2F3FD380D9E9B74E31FD26",
+      "Rate": 44100,
+      "MeanMs": 32.878240000000005,
+      "RemainingVoices": 16
+    }
+  ],
+  "FinishedUtc": "2026-09-11T19:57:46.5193553Z",
+  "Sources": [
+    {
+      "Path": "src/AudioMixer.ps1",
+      "Sha256": "F6227640C7AD799B5E7D486B70752E680EF074881EB6B795BC087970BEB8C990"
+    },
+    {
+      "Path": "scripts/Measure-AudioMixer.ps1",
+      "Sha256": "11746130CFB861658240D3B72839B2D098DF8C2D420D7D545DBF0A174565FE39"
+    }
+  ],
+  "Error": null
+}

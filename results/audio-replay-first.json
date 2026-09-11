@@ -1,0 +1,38 @@
+{
+  "ReplacedVoices": 0,
+  "EventMs": null,
+  "OutputFrames": 0,
+  "Events": [],
+  "FinishedUtc": "2026-09-11T19:48:57.4569812Z",
+  "BundleSha256": "A4B3A371C8BB4714D09EA68AE897DF6A5B6451899A481B576FFC4E6CF80C4284",
+  "ClippedSamples": 0,
+  "WaveSha256": null,
+  "ReplaySha256": "44E229AEFB44058B598D50F8EE260421762449E43332B17BC4CDF2FBF8A4AC13",
+  "Assets": [],
+  "Meaning": "Offline PowerShell event collection, current-position spatialization and PCM mixing for the ordinary-input E1M1/intermission/E1M2 route. No live device, audio/video synchronization, music, randomized pitch or vanilla mixer equivalence is claimed. Per-block timing excludes gameplay and file writing.",
+  "CheckpointComparison": null,
+  "MixSamplesMs": [],
+  "MixMs": null,
+  "EventSamplesMs": [],
+  "MaxVoices": 0,
+  "Sources": [
+    {
+      "Sha256": "351420237EE78443F8E6B1DBA6777CCA04CAFA4C1D22550AABDAD4B4BA4612C1",
+      "Path": "src/AudioMixer.ps1"
+    },
+    {
+      "Sha256": "52E6F728AF88DB21E2BDA5C6065EB3324DFC4A91EA25371DD4DB9889B6BD3BE1",
+      "Path": "src/AudioEvents.ps1"
+    },
+    {
+      "Sha256": "4D5AA9B715CD365B3AA489D6739767DA7CDB1B1184AE9D65148ED10F1B10415A",
+      "Path": "scripts/Render-AudioReplay.ps1"
+    }
+  ],
+  "Wave": null,
+  "NonzeroSamples": 0,
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "Peak": 0,
+  "SampleRate": 44100,
+  "Error": "The property 'Count' cannot be found on this object. Verify that the property exists.\nat <ScriptBlock>, C:\\projects\\pwshDoom\\scripts\\Render-AudioReplay.ps1: line 16"
+}
