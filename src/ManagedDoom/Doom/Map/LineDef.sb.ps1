@@ -1,4 +1,5 @@
 # pwshDoom modification, 2026-09-10: initialize Fixed/Angle fields to their original struct defaults.
+# pwshDoom modification, 2026-09-10: preserve signed WAD line-flag bits in an integer, including bits outside the named enum.
 ##
 ## Copyright (C) 1993-1996 Id Software, Inc.
 ## Copyright (C) 2019-2020 Nobuaki Tanaka
@@ -24,7 +25,7 @@ class LineDef {
     [Vertex]$vertex2
     [Fixed]$dx = [Fixed]::Zero
     [Fixed]$dy = [Fixed]::Zero
-    [LineFlags]$flags
+    [int]$flags
     [int]$special
     [short]$tag
     [SideDef]$frontSide
@@ -40,7 +41,7 @@ class LineDef {
     LineDef(
         [Vertex]$vertex1,
         [Vertex]$vertex2,
-        [LineFlags]$flags,
+        [int]$flags,
         [int]$special,
         [short]$tag,
         [SideDef]$frontSide,
@@ -86,7 +87,7 @@ class LineDef {
         return [LineDef]::new(
             $vertices[$vertex1Number],
             $vertices[$vertex2Number],
-            [LineFlags]$mflags,
+            $mflags,
             $mspecial,
             $mtag,
             $sides[$side0Number],

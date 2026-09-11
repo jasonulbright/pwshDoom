@@ -1,6 +1,6 @@
 # Working in this study
 
-The user approved implementation on 2026-09-10. The current milestone is playable E1M1 with real Doom simulation and measured terminal rendering; retain the feasibility record and distinguish implemented behavior from verified compatibility.
+The user approved implementation on 2026-09-10 and then requested a complete game and a substantial scientific/entertainment write-up. E1M1 is the baseline; follow `docs/roadmap.md` for the release milestones, acceptance criteria, current scope, and next work. Retain the feasibility record and distinguish implemented behavior from verified compatibility.
 
 - Update `docs/ledger.md` as findings, failures, decisions, and corrections occur.
 - Keep author reports, source inspection, measured behavior, and hypotheses distinct.

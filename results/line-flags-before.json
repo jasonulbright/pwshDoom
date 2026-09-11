@@ -1,0 +1,52 @@
+{
+  "LineDefSha256": "B6A1B05F1BA07EE977F1AF66ED5F8268226AC892697D70C653DA5FF43904E2FC",
+  "Meaning": "Synthetic LINEDEFS records test raw 16-bit flag preservation, recognized masks, and setting the automap Mapped bit while retaining unknown bits. No IWAD assets included.",
+  "FinishedUtc": "2026-09-11T00:48:22.3611729Z",
+  "Checks": [
+    {
+      "Error": null,
+      "Passed": true,
+      "Raw16Bits": 0
+    },
+    {
+      "Error": null,
+      "Passed": true,
+      "Raw16Bits": 1
+    },
+    {
+      "Error": null,
+      "Passed": true,
+      "Raw16Bits": 3
+    },
+    {
+      "Error": null,
+      "Passed": true,
+      "Raw16Bits": 255
+    },
+    {
+      "Error": null,
+      "Passed": true,
+      "Raw16Bits": 511
+    },
+    {
+      "Error": "Cannot convert value \"512\" to type \"LineFlags\" due to enumeration values that are not valid. Specify one of the following enumeration values and try again. The possible enumeration values are \"Unknown,Blocking,BlockMonsters,TwoSided,DontPegTop,DontPegBottom,Secret,SoundBlock,DontDraw,Mapped\".",
+      "Passed": false,
+      "Raw16Bits": 512
+    },
+    {
+      "Error": "Cannot convert value \"-32768\" to type \"LineFlags\" due to enumeration values that are not valid. Specify one of the following enumeration values and try again. The possible enumeration values are \"Unknown,Blocking,BlockMonsters,TwoSided,DontPegTop,DontPegBottom,Secret,SoundBlock,DontDraw,Mapped\".",
+      "Passed": false,
+      "Raw16Bits": 32768
+    },
+    {
+      "Error": "Cannot convert value \"-511\" to type \"LineFlags\" due to enumeration values that are not valid. Specify one of the following enumeration values and try again. The possible enumeration values are \"Unknown,Blocking,BlockMonsters,TwoSided,DontPegTop,DontPegBottom,Secret,SoundBlock,DontDraw,Mapped\".",
+      "Passed": false,
+      "Raw16Bits": 65025
+    },
+    {
+      "Error": "Cannot convert value \"-1\" to type \"LineFlags\" due to enumeration values that are not valid. Specify one of the following enumeration values and try again. The possible enumeration values are \"Unknown,Blocking,BlockMonsters,TwoSided,DontPegTop,DontPegBottom,Secret,SoundBlock,DontDraw,Mapped\".",
+      "Passed": false,
+      "Raw16Bits": 65535
+    }
+  ]
+}

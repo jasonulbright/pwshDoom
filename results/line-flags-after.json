@@ -1,0 +1,52 @@
+{
+  "Meaning": "Synthetic LINEDEFS records test raw 16-bit flag preservation, recognized masks, and setting the automap Mapped bit while retaining unknown bits. No IWAD assets included.",
+  "Checks": [
+    {
+      "Raw16Bits": 0,
+      "Passed": true,
+      "Error": null
+    },
+    {
+      "Raw16Bits": 1,
+      "Passed": true,
+      "Error": null
+    },
+    {
+      "Raw16Bits": 3,
+      "Passed": true,
+      "Error": null
+    },
+    {
+      "Raw16Bits": 255,
+      "Passed": true,
+      "Error": null
+    },
+    {
+      "Raw16Bits": 511,
+      "Passed": true,
+      "Error": null
+    },
+    {
+      "Raw16Bits": 512,
+      "Passed": true,
+      "Error": null
+    },
+    {
+      "Raw16Bits": 32768,
+      "Passed": true,
+      "Error": null
+    },
+    {
+      "Raw16Bits": 65025,
+      "Passed": true,
+      "Error": null
+    },
+    {
+      "Raw16Bits": 65535,
+      "Passed": true,
+      "Error": null
+    }
+  ],
+  "FinishedUtc": "2026-09-11T00:49:11.6546510Z",
+  "LineDefSha256": "019850AEAE8F8A5316B3506A67EE0A032D1E5F77DDC97A28D0A84F855B8E6F40"
+}

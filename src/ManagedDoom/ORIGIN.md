@@ -31,6 +31,9 @@ Modifications, 2026-09-10:
 - `LineDef`: guard absent front/back sides. `BlockMap`: use the static block
   size constant. `World`: initialize the console player before the status bar.
   `Hitscan`: read the sky-flat identifier from the flat lookup.
+- `LineDef`: retain the WAD's signed 16-bit flags in an integer instead of a
+  validated PowerShell enum. E2M7 contains bits outside the named flags; preserving
+  them avoids rejecting the map and keeps named bit tests/automap updates valid.
 - Initialized 126 instance `Fixed`/`Angle` fields across 26 files to zero, restoring
   the defaults of the original C# structs. See `docs/engine-defaults.json` at the
   repository root. These objects are used as immutable values.

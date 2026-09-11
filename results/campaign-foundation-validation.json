@@ -1,0 +1,36 @@
+{
+  "Inputs": [
+    {
+      "Sha256": "177D10B439C8919E3F25232EA428E14A9A655E0FF6651345EEC7C98578F296E1",
+      "Path": "results/campaign-smoke-baseline.json"
+    },
+    {
+      "Sha256": "EB2DE44D5D6ED351C0A6BF691148F0F1623065B1708FC2A0DDC2E41C14202562",
+      "Path": "results/campaign-smoke-lineflags-fixed.json"
+    },
+    {
+      "Sha256": "41CF35EDF94C1CABE8C96A1CEEFBCFBF41F20DF24093569B65A1A4C9C56C017B",
+      "Path": "results/e1m1-route-lineflags.json"
+    },
+    {
+      "Sha256": "3EF96079ED563CCDF866513A5605A63AB0DED4BECC3090428BC694106106C7D1",
+      "Path": "results/line-flags-before.json"
+    },
+    {
+      "Sha256": "F0493F000B31FC0B05D90D7D75AF54B795983AF801986D6DE97B8920D599376E",
+      "Path": "results/line-flags-after.json"
+    }
+  ],
+  "CurrentFailed": 0,
+  "BaselinePassed": 35,
+  "BaselineFailed": 1,
+  "Meaning": "Campaign foundation regression checks: matching frame fingerprints, unchanged E1M1 command stream, runtime source hashes, syntax and owned-process cleanup. No campaign completion or new performance claim.",
+  "SourceHashesVerified": 217,
+  "RouteHarnessSha256": "61E8AC98AC634E1760FE27C8EE7E6F4980F9AC7A373EA8697DD6096C874B67BF",
+  "CurrentPassed": 36,
+  "RemainingExperimentProcesses": 0,
+  "UnchangedE1M1InputCommands": 1560,
+  "UnchangedFrameHashes": 70,
+  "ParsedFiles": 58,
+  "FinishedUtc": "2026-09-11T00:54:15.4479779Z"
+}

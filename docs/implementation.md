@@ -88,7 +88,7 @@ Catch-up contributes to the average. Neither a 60 Hz average nor 35 tics/sec est
 
 ## Remaining limits
 
-Only Ultimate Doom E1M1 on skill 3 has a complete route test. Other maps, IWADs, difficulties, lifts, denser combat, and campaigns need qualification. The interface stops at level completion. Audio, menus, save/load, automap, and multiplayer interfaces are absent. Vanilla demo synchronization is unverified.
+Only Ultimate Doom E1M1 on skill 3 has a complete route test. A subsequent 36-map load/35-idle-tic/two-frame smoke sweep found and fixed E2M7 line-flag enum conversion; all maps now pass that narrow sweep. It does not establish campaign completion, transitions, or visual-reference fidelity. See the [campaign matrix](campaign-matrix.md) and [completion roadmap](roadmap.md). Other IWADs, difficulties, lifts, denser combat, and campaigns need qualification. The interface stops at level completion. Audio, menus, save/load, automap, and multiplayer interfaces are absent. Vanilla demo synchronization is unverified.
 
 Lighting is approximate; sky sampling, texture alignment, and sprite edges need reference comparisons. Damage/bonus palette effects and spectre fuzz are absent; the HUD weapon inventory indicator is incomplete. The GPL reference renderer remains available for comparisons. Physical keyboard play and input latency need direct testing.
 

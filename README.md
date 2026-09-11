@@ -20,7 +20,7 @@ The launcher finds the classic Steam Ultimate Doom IWAD at its usual location. F
 
 Startup loads the WAD, warms a disposable level, resets the game, and starts a simulation process and persistent rendering workers. The launcher adds a separate `pwshDoom` Terminal profile with a 6-point font and opens a window. The full 320×200 image occupies **320 columns × 100 rows** and is centered in any extra space. Shrinking below that size pauses the game; enlarging it resumes. `-FontSize 5` makes the image smaller physically; a larger value makes it larger. `-Maximized` is optional, and `-Diagnostics` adds two status rows (102 required). `-Here` uses the current tab and its existing font. These are character-grid requirements, not a minimum monitor resolution; see [window sizing and resize behavior](docs/viewport.md).
 
-`-Workers 16` is the tested default. Only classic Ultimate Doom E1M1 on skill 3 is validated so far. The measured setup used PowerShell 7.6.5, Windows Terminal 1.24, and a Core Ultra 7 265K; renderer and simulation working sets totaled about 3.3 GiB, excluding the coordinator and Terminal.
+`-Workers 16` is the tested default. All 36 classic Ultimate Doom maps pass a short headless loading/simulation/rendering sweep at skill 3; only E1M1 has a complete input-only route. See the [campaign matrix](docs/campaign-matrix.md) for the distinction and remaining work. The measured setup used PowerShell 7.6.5, Windows Terminal 1.24, and a Core Ultra 7 265K; renderer and simulation working sets totaled about 3.3 GiB, excluding the coordinator and Terminal.
 
 | Key | Action |
 | --- | --- |
@@ -63,6 +63,8 @@ The game tests need the user's matching Ultimate Doom IWAD. The input and codec 
 
 ## Read the investigation
 
+- [Release and research roadmap](docs/roadmap.md): milestones, completion criteria, alternatives, and the write-up plan.
+- [Campaign qualification matrix](docs/campaign-matrix.md): per-map smoke versus actual completion evidence and current blockers.
 - [PowerShell-only 60 FPS rendering investigation](docs/sixty-fps-investigation.md): the new parallel renderer, measured 60-update pacing, and remaining gameplay/display work.
 - [First findings](docs/findings-2026-09-10.md): measured outcomes, limitations, and the next useful experiment.
 - [Ledger](docs/ledger.md): dated decisions, observations, corrections, and experiment outcomes.
