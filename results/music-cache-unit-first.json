@@ -1,0 +1,97 @@
+{
+  "SourceSha256": "F40435EB3E4EC45DA648FC5C43101ABAA7025D7B7180E134A766DF6DB1237ABC",
+  "FixtureDirectory": "C:\\projects\\pwshDoom\\local\\music-cache-test-ccd1c99cd461417a830df7599eabf783",
+  "Error": null,
+  "ScriptSha256": "E378820A68E9BEA743895C3062F390BCC05EAB459433B730D1314B5BA8AC13AD",
+  "Meaning": "Synthetic exact samples, pause/cursor, boundary reads, explicit exhaustion, writer exclusion, orphan recovery and corruption checks. No device or crash/power-loss durability certification.",
+  "Checks": [
+    {
+      "Name": "New cache has empty committed prefix",
+      "Passed": true
+    },
+    {
+      "Name": "Concurrent writer cannot acquire lock",
+      "Passed": true
+    },
+    {
+      "Name": "Out-of-sequence append rejected",
+      "Passed": true
+    },
+    {
+      "Name": "Partial chunks rejected",
+      "Passed": true
+    },
+    {
+      "Name": "Nonfinite samples rejected before publication",
+      "Passed": true
+    },
+    {
+      "Name": "Append publishes a complete prefix",
+      "Passed": true
+    },
+    {
+      "Name": "Pause outputs silence and freezes frame",
+      "Passed": true
+    },
+    {
+      "Name": "Resume starts with original samples",
+      "Passed": true
+    },
+    {
+      "Name": "Exhaustion does not invent a loop",
+      "Passed": true
+    },
+    {
+      "Name": "Failed exhaustion leaves cursor unchanged",
+      "Passed": true
+    },
+    {
+      "Name": "Reopen ignores uncommitted payload and partial files",
+      "Passed": true
+    },
+    {
+      "Name": "Identical orphan recovered into committed prefix",
+      "Passed": true
+    },
+    {
+      "Name": "Existing reader retains immutable prefix snapshot",
+      "Passed": true
+    },
+    {
+      "Name": "Reads cross chunk boundary without sample changes",
+      "Passed": true
+    },
+    {
+      "Name": "Reader retains one chunk and bounds disk reads",
+      "Passed": true
+    },
+    {
+      "Name": "Closed writer cannot append",
+      "Passed": true
+    },
+    {
+      "Name": "Manifest identity mismatch rejected",
+      "Passed": true
+    },
+    {
+      "Name": "Different synthesis identity uses different directory",
+      "Passed": true
+    },
+    {
+      "Name": "Corrupt sample payload rejected",
+      "Passed": true
+    },
+    {
+      "Name": "Corrupt read does not advance frame",
+      "Passed": true
+    },
+    {
+      "Name": "Truncated payload rejected",
+      "Passed": true
+    },
+    {
+      "Name": "Malformed payload identifier rejected",
+      "Passed": true
+    }
+  ]
+}

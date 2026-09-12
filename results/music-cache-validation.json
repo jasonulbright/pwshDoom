@@ -1,0 +1,1601 @@
+{
+  "SourceSha256": "75408523CBCDD1A73701BE151DEB74670E82C1EE114E68AE45C0E4E0588039B0",
+  "Checks": [
+    {
+      "Passed": true,
+      "Name": "All 22 cache checks pass on current storage source"
+    },
+    {
+      "Passed": true,
+      "Name": "Cold opening builds requested prefix"
+    },
+    {
+      "Passed": true,
+      "Name": "Extension verifies prior prefix before appending"
+    },
+    {
+      "Passed": true,
+      "Name": "Warm run reuses complete prefix without synthesis replay"
+    },
+    {
+      "Passed": true,
+      "Name": "Independent processes derive identical cache keys"
+    },
+    {
+      "Passed": true,
+      "Name": "Comparison covers the entire expected reference"
+    },
+    {
+      "Passed": true,
+      "Name": "Cache PCM digest matches canonical reference bytes independently"
+    },
+    {
+      "Passed": true,
+      "Name": "Output and observed disk byte counts use correct units"
+    },
+    {
+      "Passed": true,
+      "Name": "No source drift during build"
+    },
+    {
+      "Passed": true,
+      "Name": "Current cache input source: src/MusScore.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Current cache input source: src/SoundFontBank.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Current cache input source: src/SoundFontRegions.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Current cache input source: src/MusicOscillator.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Current cache input source: src/MusicControls.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Current cache input source: src/MusicSynth.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Current cache input source: src/MusicGroup.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Current cache input source: src/MusicCache.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Comparison covers the entire expected reference"
+    },
+    {
+      "Passed": true,
+      "Name": "Cache PCM digest matches canonical reference bytes independently"
+    },
+    {
+      "Passed": true,
+      "Name": "Output and observed disk byte counts use correct units"
+    },
+    {
+      "Passed": true,
+      "Name": "No source drift during build"
+    },
+    {
+      "Passed": true,
+      "Name": "Current cache input source: src/MusScore.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Current cache input source: src/SoundFontBank.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Current cache input source: src/SoundFontRegions.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Current cache input source: src/MusicOscillator.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Current cache input source: src/MusicControls.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Current cache input source: src/MusicSynth.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Current cache input source: src/MusicGroup.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Current cache input source: src/MusicCache.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Comparison covers the entire expected reference"
+    },
+    {
+      "Passed": true,
+      "Name": "Cache PCM digest matches canonical reference bytes independently"
+    },
+    {
+      "Passed": true,
+      "Name": "Output and observed disk byte counts use correct units"
+    },
+    {
+      "Passed": true,
+      "Name": "No source drift during build"
+    },
+    {
+      "Passed": true,
+      "Name": "Current cache input source: src/MusScore.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Current cache input source: src/SoundFontBank.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Current cache input source: src/SoundFontRegions.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Current cache input source: src/MusicOscillator.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Current cache input source: src/MusicControls.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Current cache input source: src/MusicSynth.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Current cache input source: src/MusicGroup.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Current cache input source: src/MusicCache.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Final builder source matches warm and extension runs"
+    },
+    {
+      "Passed": true,
+      "Name": "Published manifest matches measured cache"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 0 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 0 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 1 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 1 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 2 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 2 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 3 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 3 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 4 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 4 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 5 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 5 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 6 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 6 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 7 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 7 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 8 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 8 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 9 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 9 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 10 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 10 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 11 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 11 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 12 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 12 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 13 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 13 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 14 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 14 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 15 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 15 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 16 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 16 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 17 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 17 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 18 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 18 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 19 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 19 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 20 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 20 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 21 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 21 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 22 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 22 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 23 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 23 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 24 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 24 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 25 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 25 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 26 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 26 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 27 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 27 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 28 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 28 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 29 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 29 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 30 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 30 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 31 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 31 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 32 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 32 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 33 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 33 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 34 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 34 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 35 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 35 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 36 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 36 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 37 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 37 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 38 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 38 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 39 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 39 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 40 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 40 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 41 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 41 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 42 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 42 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 43 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 43 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 44 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 44 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 45 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 45 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 46 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 46 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 47 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 47 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 48 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 48 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 49 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 49 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 50 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 50 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 51 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 51 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 52 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 52 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 53 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 53 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 54 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 54 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 55 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 55 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 56 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 56 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 57 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 57 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 58 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 58 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 59 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 59 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 60 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 60 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 61 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 61 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 62 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 62 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 63 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 63 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 64 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 64 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 65 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 65 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 66 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 66 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 67 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 67 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 68 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 68 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 69 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 69 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 70 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 70 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 71 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 71 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 72 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 72 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 73 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 73 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 74 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 74 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 75 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 75 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 76 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 76 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 77 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 77 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 78 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 78 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 79 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 79 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 80 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 80 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 81 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 81 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 82 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 82 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 83 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 83 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 84 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 84 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 85 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 85 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 86 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 86 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 87 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 87 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 88 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 88 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 89 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 89 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 90 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 90 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 91 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 91 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 92 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 92 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 93 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 93 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 94 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 94 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 95 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 95 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 96 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 96 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 97 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 97 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 98 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 98 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 99 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 99 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 100 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 100 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 101 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 101 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 102 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 102 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 103 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 103 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 104 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 104 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 105 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 105 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 106 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 106 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 107 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 107 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 108 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 108 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 109 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 109 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 110 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 110 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 111 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 111 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 112 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 112 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 113 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 113 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 114 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 114 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 115 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 115 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 116 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 116 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 117 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 117 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 118 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 118 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 119 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 119 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 120 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 120 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 121 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 121 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 122 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 122 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 123 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 123 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 124 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 124 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 125 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 125 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 126 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 126 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 127 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 127 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 128 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 128 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 129 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 129 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 130 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 130 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 131 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 131 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 132 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 132 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 133 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 133 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 134 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 134 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 135 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 135 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 136 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 136 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 137 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 137 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 138 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 138 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 139 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 139 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 140 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 140 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 141 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 141 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 142 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 142 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 143 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 143 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 144 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 144 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 145 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 145 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 146 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 146 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 147 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 147 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 148 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 148 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 149 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 149 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 150 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 150 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 151 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 151 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 152 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 152 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 153 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 153 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 154 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 154 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 155 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 155 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 156 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 156 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 157 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 157 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 158 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 158 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 159 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 159 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 160 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 160 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 161 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 161 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 162 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 162 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 163 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 163 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 164 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 164 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 165 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 165 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 166 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 166 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 167 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 167 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 168 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 168 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 169 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 169 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 170 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 170 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Manifest chunk 171 has bounded identifier"
+    },
+    {
+      "Passed": true,
+      "Name": "Stored chunk 171 has exact bytes and hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Source parses: src/MusicCache.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Source parses: scripts/Build-MusicCache.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Source parses: scripts/Test-MusicCache.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Source parses: scripts/Test-MusicCacheEvidence.ps1"
+    }
+  ],
+  "Error": null,
+  "Reports": [
+    {
+      "Path": "results/music-cache-unit-first.json",
+      "Sha256": "A86091743CD0F63D665ADA90D7BD2437E59EC334A1601B9A294A74256B4B8F63"
+    },
+    {
+      "Path": "results/music-cache-short-first.json",
+      "Sha256": "1238F1570D0EE2AF80ABCED0F07BC31838EC95D179AD15C938C462AC2D7E30F2"
+    },
+    {
+      "Path": "results/music-cache-full-extension.json",
+      "Sha256": "5D717E71AA2B7320208C14D2F513D4212BFDF270FAE3AD8E7CC508914611F175"
+    },
+    {
+      "Path": "results/music-cache-full-warm.json",
+      "Sha256": "BDB1DF794C7D0EB1E4C8C5769F33E451A54AAE504173E34883D00833831BC514"
+    },
+    {
+      "Path": "results/music-e1m1-dry-first.json",
+      "Sha256": "52071C45C0BFE0C751DF5C92982761EA4FB3E8D6BA3C7EA5A38E7E1599C18402"
+    },
+    {
+      "Path": "results/music-e1m1-dry-numeric-loop.json",
+      "Sha256": "73146B9A82CC9E4BEB17A0CADFBDB2C12A71A039FE66CF30E3E54E9D43D9DFD7"
+    },
+    {
+      "Path": "results/music-e1m1-dry-numeric-loop.json",
+      "Sha256": "73146B9A82CC9E4BEB17A0CADFBDB2C12A71A039FE66CF30E3E54E9D43D9DFD7"
+    }
+  ],
+  "Meaning": "Current synthetic cache behavior plus retained cold/extension/warm evidence, source identity, independently verified reference PCM digests and all on-disk chunk hashes. Finite prefix includes a score restart; not indefinite loop, device, paced-consumer, host or gameplay-load qualification."
+}

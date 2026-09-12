@@ -75,7 +75,7 @@ The same-capacity eight-worker observation (`music-groups-paced-eight-baseline.j
 
 `Test-MusicPacingEvidence.ps1` independently derives deadlines and capacity from the retained absolute frame positions and completion times, checks WAVs on disk, inputs, counters and source identity, and reports deadline qualification separately from evidence integrity. A successful audit can correctly certify a failed deadline test. Neither result qualifies a physical audio device or concurrent gameplay.
 
-The four/eight-worker audits pass 543/547 evidence-integrity checks respectively, both with `MeetsVirtualDeadlines=false`. No other study synthesis/test workload overlaps either full render; documentation/read-only work and ordinary system activity are uncontrolled. A bounded cache/render-ahead implementation is the next implementation direction: account for first-use rendering time, source/bank/score identity, partial-file recovery and evolving loop tails before device integration. Repeating the opening WAV at the score boundary would not preserve the measured synthesizer's state.
+The four/eight-worker audits pass 543/547 evidence-integrity checks respectively, both with `MeetsVirtualDeadlines=false`. No other study synthesis/test workload overlaps either full render; documentation/read-only work and ordinary system activity are uncontrolled. The subsequent [finite music cache](music-cache.md) preserves continuous synthesis across the measured score restart, with first-use costs, source/bank/score identity, interrupted-publication recovery and bounded reads. Indefinite looping and device integration remain open. Repeating the opening WAV at the score boundary would not preserve the measured synthesizer's state.
 
 ## Reproduce
 

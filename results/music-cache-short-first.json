@@ -1,0 +1,66 @@
+{
+  "Meaning": "Finite exact continuous synthesis prefix in immutable hashed float64 chunks. Cold/extension time includes bank decoding, synthesis, validation and durable disk publication. Extension reconstructs and verifies the prior prefix; warm hit skips synthesis. Cached read/PCM timing is unpaced offline and includes hashing, not physical playback or concurrent gameplay. Prefix exhaustion throws; no loop reuse or host integration.",
+  "Error": null,
+  "ScriptSha256": "B2705110768AC922311BABE99C886D1333F135493D6C3F85087C0848A4F6A15A",
+  "Sources": [
+    {
+      "Path": "src/MusScore.ps1",
+      "Sha256": "66B87D1CDD3FAD62E493A0C50C9A5AEBFE27167C8CCCCA974CC80463B6D1BB33"
+    },
+    {
+      "Path": "src/SoundFontBank.ps1",
+      "Sha256": "AF80287762169B5318F60FD719479137BAED1D3EEF39561513D2B34AC118A855"
+    },
+    {
+      "Path": "src/SoundFontRegions.ps1",
+      "Sha256": "9D409332EB51B5B6FCBC4B259E0C5E243E561A3C0D6AD2040A772F46539B9D8E"
+    },
+    {
+      "Path": "src/MusicOscillator.ps1",
+      "Sha256": "1D7911DC5CD2004D6DBBF27ECF43FFD652FAC8E4813943D9F8CFD5116332417B"
+    },
+    {
+      "Path": "src/MusicControls.ps1",
+      "Sha256": "30CC10D9118335FEC1C57653871B236B020FDBBA2D4103F89BA8EA672F1AF5D9"
+    },
+    {
+      "Path": "src/MusicSynth.ps1",
+      "Sha256": "3CCA7492A9F809EB8D54C8BF7D3D9847A1EC29D5E8ED6923F72ECA7803A50B48"
+    },
+    {
+      "Path": "src/MusicGroup.ps1",
+      "Sha256": "F8FAED17EDBFFDA3EC7BAEE9555998C649DA31ABB8AA8730ADAA4B4BFB1170F4"
+    },
+    {
+      "Path": "src/MusicCache.ps1",
+      "Sha256": "F40435EB3E4EC45DA648FC5C43101ABAA7025D7B7180E134A766DF6DB1237ABC"
+    }
+  ],
+  "SourcesChangedDuringRun": [],
+  "Details": {
+    "RequestedChunks": 14,
+    "BuildSeconds": 5.3932475,
+    "Comparison": {
+      "ExpectedPcmSha256": "5595EE0BD1295FC4DAAC5BC1CEB94AEA718777CE340D31421CEB00101BB0B313",
+      "Exact": true,
+      "ReadAndPcmSeconds": 0.0954019,
+      "ReferenceReportSha256": "52071C45C0BFE0C751DF5C92982761EA4FB3E8D6BA3C7EA5A38E7E1599C18402",
+      "MaximumBlockMilliseconds": 19.0169,
+      "Blocks": 280,
+      "ClippedSamples": 0,
+      "Frames": 352800,
+      "ActualPcmSha256": "5595EE0BD1295FC4DAAC5BC1CEB94AEA718777CE340D31421CEB00101BB0B313",
+      "PayloadBytesRead": 5644800
+    },
+    "Key": "81FE8A9F504AF1B8DE140AA9FA330E5797B776227E96C73EBE603FDA530BB9D1",
+    "Identity": "{\"Version\":1,\"Mus\":\"8F4673A3210C9FAFFE7B654F0B8F604A193398809545D9561E142704820035BF\",\"Bank\":\"82475B91A76DE15CB28A104707D3247BA932E228BADA3F47BBA63C6B31AAF7A1\",\"Sources\":[{\"Path\":\"src/MusScore.ps1\",\"Sha256\":\"66B87D1CDD3FAD62E493A0C50C9A5AEBFE27167C8CCCCA974CC80463B6D1BB33\"},{\"Path\":\"src/SoundFontBank.ps1\",\"Sha256\":\"AF80287762169B5318F60FD719479137BAED1D3EEF39561513D2B34AC118A855\"},{\"Path\":\"src/SoundFontRegions.ps1\",\"Sha256\":\"9D409332EB51B5B6FCBC4B259E0C5E243E561A3C0D6AD2040A772F46539B9D8E\"},{\"Path\":\"src/MusicOscillator.ps1\",\"Sha256\":\"1D7911DC5CD2004D6DBBF27ECF43FFD652FAC8E4813943D9F8CFD5116332417B\"},{\"Path\":\"src/MusicControls.ps1\",\"Sha256\":\"30CC10D9118335FEC1C57653871B236B020FDBBA2D4103F89BA8EA672F1AF5D9\"},{\"Path\":\"src/MusicSynth.ps1\",\"Sha256\":\"3CCA7492A9F809EB8D54C8BF7D3D9847A1EC29D5E8ED6923F72ECA7803A50B48\"},{\"Path\":\"src/MusicGroup.ps1\",\"Sha256\":\"F8FAED17EDBFFDA3EC7BAEE9555998C649DA31ABB8AA8730ADAA4B4BFB1170F4\"},{\"Path\":\"src/MusicCache.ps1\",\"Sha256\":\"F40435EB3E4EC45DA648FC5C43101ABAA7025D7B7180E134A766DF6DB1237ABC\"}],\"Rate\":44100,\"ChunkFrames\":25200,\"BlockFrames\":1260,\"MaxVoices\":256,\"Partition\":\"SingleContinuousGroup\",\"Effects\":\"Dry\",\"SampleFormat\":\"StereoFloat64LE\",\"PowerShell\":\"7.6.5\"}",
+    "ExistingChunks": 0,
+    "CacheDirectory": "C:\\projects\\pwshDoom\\local\\music-cache\\81FE8A9F504AF1B8DE140AA9FA330E5797B776227E96C73EBE603FDA530BB9D1",
+    "Frames": 352800,
+    "Track": "D_E1M1",
+    "CommittedChunks": 14,
+    "PreparationSeconds": 0.351262,
+    "ReplayedChunks": 0,
+    "PayloadBytes": 5644800
+  }
+}
