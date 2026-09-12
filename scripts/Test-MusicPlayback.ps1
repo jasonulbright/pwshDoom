@@ -1,11 +1,11 @@
 #requires -Version 7.4
 # SPDX-License-Identifier: GPL-2.0-or-later
-param([Parameter(Mandatory)][string]$Output)
+param([Parameter(Mandatory)][string]$Output,[string]$Qualification="$PSScriptRoot/../results/music-loop-e1m1-hour-bound.json")
 $ErrorActionPreference='Stop';Set-StrictMode -Version Latest
 if(Test-Path $Output){throw 'Use a fresh report path.'}
 . "$PSScriptRoot/../src/MusicLoopReader.ps1";. "$PSScriptRoot/../src/MusicPlayback.ps1"
 $state=$null;$checks=[Collections.Generic.List[object]]::new();$failure=$null
-$report=[IO.Path]::GetFullPath("$PSScriptRoot/../results/music-loop-e1m1-first.json")
+$report=[IO.Path]::GetFullPath($Qualification)
 function Check([string]$Name,[bool]$Passed){$checks.Add(@{Name=$Name;Passed=$Passed});if(-not $Passed){throw $Name}}
 function Reject([string]$Name,[scriptblock]$Action){$rejected=$false;try{& $Action}catch{$rejected=$true};Check $Name $rejected}
 try{

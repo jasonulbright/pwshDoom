@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 # Experimental channel-partitioned synthesis. Not loaded by the game host.
 function New-DoomMusicGroup {
-    param($Bank,$Score,[int[]]$Channels,[ValidateRange(1,13230000)][int]$Frames,
+    param($Bank,$Score,[int[]]$Channels,[ValidateRange(1,158760000)][int]$Frames,
         [ValidateSet('Channel','Note')][string]$Partition='Channel',[ValidateRange(1,8)][int]$GroupCount=1,[int]$GroupIndex=0)
     $owned=[bool[]]::new(16)
     if($Channels.Count -eq 0){throw 'A music group needs at least one channel.'}

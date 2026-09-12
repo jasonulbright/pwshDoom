@@ -1,0 +1,69 @@
+{
+  "FixtureDirectory": "C:\\projects\\pwshDoom\\local\\loop-reader-test-32e753a5e87643d2a73c5ce291ff0e68",
+  "Meaning": "Reader-only synthetic receipt and samples: intro/loop mapping, pause, long positions, bounded pages, file locking and rejection/cleanup. The fabricated receipt is test data and proves no real synthesizer loop.",
+  "SourceSha256": "AD69EA0A78EA942C10BCC7433EE7DD1B06BAE98376816B589ED0CA0802CBB7CD",
+  "Checks": [
+    {
+      "Name": "Playback file cannot be opened for writing while reader holds it",
+      "Passed": true
+    },
+    {
+      "Name": "Intro then multiple loop boundaries preserve every sample",
+      "Passed": true
+    },
+    {
+      "Name": "Paused loop is silent and freezes position",
+      "Passed": true
+    },
+    {
+      "Name": "Resume continues at the retained position",
+      "Passed": true
+    },
+    {
+      "Name": "Seven-day position uses exact integer loop mapping",
+      "Passed": true
+    },
+    {
+      "Name": "Reader retains one bounded decoded page",
+      "Passed": true
+    },
+    {
+      "Name": "Negative cursor rejected",
+      "Passed": true
+    },
+    {
+      "Name": "Cursor overflow rejected",
+      "Passed": true
+    },
+    {
+      "Name": "Closed reader rejected",
+      "Passed": true
+    },
+    {
+      "Name": "Close releases playback file handles",
+      "Passed": true
+    },
+    {
+      "Name": "Unqualified report rejected",
+      "Passed": true
+    },
+    {
+      "Name": "Changed synthesis source rejected",
+      "Passed": true
+    },
+    {
+      "Name": "Inconsistent state evidence rejected",
+      "Passed": true
+    },
+    {
+      "Name": "Corrupt loop rejected at open",
+      "Passed": true
+    },
+    {
+      "Name": "Failed open releases earlier handles",
+      "Passed": true
+    }
+  ],
+  "Error": null,
+  "ScriptSha256": "628C34023861EEF17C244E903E37219AFB73758BE1E87A4EC1C066A8B029CCC4"
+}

@@ -40,7 +40,7 @@ Byte-identical copies of the full live game report and recorder metadata are bac
 
 ## Run the current E1M1 integration
 
-Create a local JSON catalog mapping `D_E1M1` to the absolute path of `results/music-loop-e1m1-first.json`. `Test-MusicEvents.ps1` currently creates `local/music-catalog-e1m1.json` for this workspace. Then:
+Create a local JSON catalog mapping `D_E1M1` to the absolute path of `results/music-loop-e1m1-hour-bound.json`. This is the current requalification after extending finite synthesis bounds; the original report remains historical. `Test-MusicEvents.ps1` uses a separate test catalog so it does not overwrite the playback catalog. Then:
 
 ```powershell
 ./Start-Doom.ps1 -Style Matrix -MusicCatalog ./local/music-catalog-e1m1.json
@@ -49,3 +49,5 @@ Create a local JSON catalog mapping `D_E1M1` to the absolute path of `results/mu
 Supplying a catalog enables sound playback automatically. It does not prepare missing tracks, and leaving E1M1 will require the destination/intermission qualifications. Use ordinary `-Sound` for a session that should retain effects-only behavior while the soundtrack is completed.
 
 `Record-DoomReplay.ps1` forwards the catalog and records its hash. Its window targeting now excludes every preexisting visible Terminal window and selects the newly created `pwshDoom` window. Existing Terminal windows can remain open. The recorder captures only that game window, and still explicitly produces silent video until loopback audio capture is implemented.
+
+The separate [process-audio capture fixture](process-audio-capture.md) now passes ten scope/device checks. It has not yet been connected or synchronized with the video recorder. Current E1M1 requalification also passes thirteen playback, eleven event/catalog, ten device-worker and twenty-three loop-evidence checks. The first updated loop-evidence attempt correctly rejects its old state-test source hash; the audit now accepts explicit current state/reader report paths. Historical successful and failed receipts remain unchanged.

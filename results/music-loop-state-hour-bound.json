@@ -1,0 +1,129 @@
+{
+  "Checks": [
+    {
+      "Passed": true,
+      "Name": "Map order is immaterial"
+    },
+    {
+      "Passed": true,
+      "Name": "Double precision bits are retained"
+    },
+    {
+      "Passed": true,
+      "Name": "Array ordering is material"
+    },
+    {
+      "Passed": true,
+      "Name": "Scalar types remain distinct"
+    },
+    {
+      "Passed": true,
+      "Name": "Opening and sustained loop states differ"
+    },
+    {
+      "Passed": true,
+      "Name": "Live release tail participates in loop state"
+    },
+    {
+      "Passed": true,
+      "Name": "Normalized adjacent loop states match"
+    },
+    {
+      "Passed": true,
+      "Name": "Repeated future cycle preserves every float bit"
+    },
+    {
+      "Passed": true,
+      "Name": "Oscillator Position changes fingerprint"
+    },
+    {
+      "Passed": true,
+      "Name": "Oscillator Step changes fingerprint"
+    },
+    {
+      "Passed": true,
+      "Name": "Voice X1 changes fingerprint"
+    },
+    {
+      "Passed": true,
+      "Name": "Voice Y1 changes fingerprint"
+    },
+    {
+      "Passed": true,
+      "Name": "Voice ControlLeft changes fingerprint"
+    },
+    {
+      "Passed": true,
+      "Name": "Voice DeltaRight changes fingerprint"
+    },
+    {
+      "Passed": true,
+      "Name": "Voice LastCutoff changes fingerprint"
+    },
+    {
+      "Passed": true,
+      "Name": "Envelope history changes fingerprint"
+    },
+    {
+      "Passed": true,
+      "Name": "Controller state changes fingerprint"
+    },
+    {
+      "Passed": true,
+      "Name": "Pending controller revision remains material"
+    },
+    {
+      "Passed": true,
+      "Name": "Diagnostic counters do not change future state"
+    },
+    {
+      "Passed": true,
+      "Name": "Unknown synthesizer state requires review"
+    },
+    {
+      "Passed": true,
+      "Name": "Paused snapshot rejected"
+    },
+    {
+      "Passed": true,
+      "Name": "Note-partitioned snapshot rejected"
+    },
+    {
+      "Passed": true,
+      "Name": "Fingerprinting never changes the actual synthesis state"
+    }
+  ],
+  "Error": null,
+  "Meaning": "Synthetic recurring state with live release tails, exact future float output, bit-sensitive fields and conservative snapshot rejection. Does not by itself qualify any real score/bank or reference-engine fidelity.",
+  "Sources": [
+    {
+      "Path": "src/MusScore.ps1",
+      "Sha256": "66B87D1CDD3FAD62E493A0C50C9A5AEBFE27167C8CCCCA974CC80463B6D1BB33"
+    },
+    {
+      "Path": "src/SoundFontRegions.ps1",
+      "Sha256": "9D409332EB51B5B6FCBC4B259E0C5E243E561A3C0D6AD2040A772F46539B9D8E"
+    },
+    {
+      "Path": "src/MusicOscillator.ps1",
+      "Sha256": "1D7911DC5CD2004D6DBBF27ECF43FFD652FAC8E4813943D9F8CFD5116332417B"
+    },
+    {
+      "Path": "src/MusicControls.ps1",
+      "Sha256": "30CC10D9118335FEC1C57653871B236B020FDBBA2D4103F89BA8EA672F1AF5D9"
+    },
+    {
+      "Path": "src/MusicSynth.ps1",
+      "Sha256": "3CCA7492A9F809EB8D54C8BF7D3D9847A1EC29D5E8ED6923F72ECA7803A50B48"
+    },
+    {
+      "Path": "src/MusicGroup.ps1",
+      "Sha256": "6EA293142AD9A61661244DC5910CE264ACEE6E8A0CECE75F668CC55AC5A6E5DD"
+    },
+    {
+      "Path": "src/MusicLoopState.ps1",
+      "Sha256": "9183717AE1384F2BEF103885A20AECF0EA66F6A8A80FFC311040C28E14155F7F"
+    }
+  ],
+  "ScriptSha256": "1C3F9C2310DCDEACAE05E2241037DC9D496C9024CD3AD75705E7CE9FCD1DAB62"
+}

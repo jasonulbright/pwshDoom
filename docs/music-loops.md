@@ -60,3 +60,9 @@ Use PowerShell 7.6.5 from `C:\projects\pwshDoom`, local assets and fresh output 
 ```
 
 The evidence audit uses the named retained unit reports and original canonical WAVs; it is scoped to E1M1. The qualifier accepts `-Wad`, `-SoundFont`, `-Track` and a matching `-ReferenceReport`. Its three-period duration bound and current qualification conditions can reject other tracks. A rejected or missing qualification must not be silently replaced with E1M1 music.
+
+## Longer-score bound and current E1M1 identity
+
+The finite group horizon now permits 158,760,000 frames (one hour at 44.1 kHz), and the reader permits periods up to 52,920,000 frames (twenty minutes). Stock MUS periods must align with the existing 1,260-frame scheduling grid. E1M2 therefore needs four 155.364-second cycles per period and three periods totaling 1,864.371 seconds; intermission needs four 201.364-second cycles per period, totaling 2,416.371 seconds. The old five-minute total limit excluded both. Storage remains streamed and reader pages remain bounded.
+
+`music-loop-e1m1-hour-bound.json` requalifies E1M1 against the changed source identity. All three complete float hashes match the earlier run, as do the recurrent state and original 98-second PCM. Its 441.085-second render overlaps the two longer qualification jobs, so it is a correctness observation, not a paired performance comparison. Twenty-two group, twenty-three state and fifteen reader checks pass against these bounds. The first updated real-evidence audit rejects its stale named state-test report; the retained failure is `music-loop-evidence-hour-bound.json`. Explicit report parameters correct that selection, and `music-loop-evidence-hour-bound-current.json` passes all twenty-three checks with full four-period float and original PCM identity. Its maximum observed block cost remains 48.433 ms; no deadline claim follows from aggregate read speed.

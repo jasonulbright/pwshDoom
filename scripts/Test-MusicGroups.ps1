@@ -15,6 +15,12 @@ function Fixture {
 function Hash-Doubles([double[]]$Values){$bytes=[byte[]]::new($Values.Length*8);[Buffer]::BlockCopy($Values,0,$bytes,0,$bytes.Length);return [Convert]::ToHexString([Security.Cryptography.SHA256]::HashData($bytes))}
 try{
     $bank=Fixture;$score=@{DurationTicks=4;Events=@([long[]]@(0,1,0,60,100),[long[]]@(0,1,1,64,100),[long[]]@(1,2,1,1000,0),[long[]]@(1,4,0,8,127),[long[]]@(2,0,0,60,0),[long[]]@(2,0,1,64,0),[long[]]@(3,4,0,8,0),[long[]]@(4,6,0,0,0))}
+    $longScore=@{DurationTicks=504000;Events=@(,[long[]]@(504000,6,0,0,0))}
+    $longGroup=New-DoomMusicGroup $bank $longScore ([int[]]@(0)) 158760000
+    Check 'One-hour horizon creates state without allocating the complete output' ($longGroup.Frames -eq 158760000 -and $longGroup.Synth.Frame -eq 0)
+    $longGroup.Synth.Frame=158758740L;$longGroup.Timeline.Frame=158758740L;$tail=Read-DoomMusicGroup $longGroup 1
+    Check 'Last subblock of the larger horizon retains exact integer bounds' ($tail.Frame -eq 158758740 -and $tail.Frames -eq 1260 -and $tail.Mix.Length -eq 2520 -and $longGroup.Synth.Frame -eq 158760000)
+    $rejected=$false;try{$null=New-DoomMusicGroup $bank $score ([int[]]@(0)) 158760001}catch{$rejected=$true};Check 'Beyond one-hour horizon is rejected' $rejected
     foreach($channels in @([int[]]@(),[int[]]@(0,0),[int[]]@(-1),[int[]]@(16))){$rejected=$false;try{$null=New-DoomMusicGroup $bank $score $channels 1260}catch{$rejected=$true};Check "Invalid channel selection rejected: $($channels -join ',')" $rejected}
     $group=New-DoomMusicGroup $bank $score ([int[]]@(0)) 1260;$chunk=Read-DoomMusicGroup $group 1
     $reference=New-DoomMusicSynth $bank;$expected=[Collections.Generic.List[double]]::new()

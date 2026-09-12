@@ -6,7 +6,7 @@ function Open-DoomMusicLoopReader {
     if(([IO.FileInfo]::new($Report)).Length -gt 16MB){throw 'Loop report exceeds size bound.'}
     $r=[IO.File]::ReadAllText($Report)|ConvertFrom-Json -AsHashtable;$d=$r.Details
     if($r.Error -or -not $d.Qualified -or -not $d.NormalizedStateRepeats -or -not $d.NextPeriodFloatOutputRepeats -or -not $d.Reference.Exact -or $d.SourcesChangedDuringRun.Count -ne 0 -or $d.PowerShell -cne $PSVersionTable.PSVersion.ToString()){throw 'Music loop has no current successful qualification.'}
-    if($d.PeriodFrames -le 0 -or $d.PeriodFrames -gt 4410000 -or $d.PeriodFrames%1260 -ne 0 -or $d.LoopStartFrame -ne $d.PeriodFrames -or $d.LoopFrames -ne $d.PeriodFrames -or $d.Periods.Count -ne 3 -or $d.Snapshots.Count -ne 4){throw 'Unsupported music loop layout.'}
+    if($d.PeriodFrames -le 0 -or $d.PeriodFrames -gt 52920000 -or $d.PeriodFrames%1260 -ne 0 -or $d.LoopStartFrame -ne $d.PeriodFrames -or $d.LoopFrames -ne $d.PeriodFrames -or $d.Periods.Count -ne 3 -or $d.Snapshots.Count -ne 4){throw 'Unsupported music loop layout.'}
     if($d.Snapshots[1].StateSha256 -cne $d.Snapshots[2].StateSha256 -or $d.Snapshots[2].StateSha256 -cne $d.Snapshots[3].StateSha256 -or $d.Periods[1].Sha256 -cne $d.Periods[2].Sha256){throw 'Music loop evidence is inconsistent.'}
     $names='MusScore','SoundFontBank','SoundFontRegions','MusicOscillator','MusicControls','MusicSynth','MusicGroup','MusicLoopState'
     if($r.Sources.Count -ne $names.Count){throw 'Music loop source set differs.'}

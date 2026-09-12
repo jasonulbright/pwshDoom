@@ -1,14 +1,16 @@
 #requires -Version 7.4
 # SPDX-License-Identifier: GPL-2.0-or-later
-param([Parameter(Mandatory)][string]$Output,[string]$Qualification='results/music-loop-e1m1-first.json')
+param([Parameter(Mandatory)][string]$Output,[string]$Qualification='results/music-loop-e1m1-hour-bound.json',
+    [string]$StateReport='results/music-loop-state-hour-bound.json',[string]$ReaderReport='results/music-loop-reader-hour-bound.json',
+    [string]$MixerReport='results/music-effect-mix-unit-first.json')
 $ErrorActionPreference='Stop';Set-StrictMode -Version Latest
 if(Test-Path $Output){throw 'Use a fresh report path.'}
 $root=[IO.Path]::GetFullPath("$PSScriptRoot/..");. "$root/src/MusicLoopReader.ps1";. "$root/src/AudioMixer.ps1"
 $checks=[Collections.Generic.List[object]]::new();$failure=$null;$reader=$null;$digest=$null;$pcmDigest=$null;$details=$null
 function Check([string]$Name,[bool]$Passed){$checks.Add(@{Name=$Name;Passed=$Passed});if(-not $Passed){throw $Name}}
 try{
-    foreach($case in @(@('music-loop-state-unit-first',23,'MusicLoopState'),@('music-loop-reader-unit-first',15,'MusicLoopReader'),@('music-effect-mix-unit-first',9,'AudioMixer'))){
-        $unit=Get-Content "$root/results/$($case[0]).json" -Raw|ConvertFrom-Json
+    foreach($case in @(@($StateReport,23,'MusicLoopState'),@($ReaderReport,15,'MusicLoopReader'),@($MixerReport,9,'AudioMixer'))){
+        $unit=Get-Content (Join-Path $root $case[0]) -Raw|ConvertFrom-Json
         Check "$($case[0]) checks pass" (-not $unit.Error -and $unit.Checks.Count -eq $case[1] -and @($unit.Checks|Where-Object {-not $_.Passed}).Count -eq 0)
         if($case[2] -ne 'MusicLoopState'){Check "$($case[2]) unit source is current" ($unit.SourceSha256 -ceq (Get-FileHash "$root/src/$($case[2]).ps1").Hash)}
         else{foreach($s in $unit.Sources){Check "State unit source current: $($s.Path)" ($s.Sha256 -ceq (Get-FileHash (Join-Path $root $s.Path)).Hash)}}

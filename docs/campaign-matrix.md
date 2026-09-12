@@ -70,3 +70,5 @@ Persistent input preferences now have isolated storage/command tests and actual
 host restart/recovery coverage. Replays bypass preference-based command generation;
 three settings-menu recordings preserve the existing control fixture checkpoints.
 This UI work adds no map completion to the matrix. See [settings](settings.md).
+
+Music integration currently qualifies E1M1 only. Its longer-bound source requalification preserves every prior sample. E1M2 and intermission continuous soundtrack qualification is running; no additional campaign route or completed map is claimed. A separate process-scoped audio capture fixture passes ten checks, but synchronized gameplay recording remains open. See [music integration](music-integration.md) and [capture evidence](process-audio-capture.md).

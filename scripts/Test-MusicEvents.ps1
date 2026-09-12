@@ -1,6 +1,7 @@
 #requires -Version 7.4
 # SPDX-License-Identifier: GPL-2.0-or-later
-param([Parameter(Mandatory)][string]$Output,[string]$Wad='C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\base\DOOM.WAD')
+param([Parameter(Mandatory)][string]$Output,[string]$Wad='C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\base\DOOM.WAD',
+    [string]$Qualification="$PSScriptRoot/../results/music-loop-e1m1-hour-bound.json")
 $ErrorActionPreference='Stop';Set-StrictMode -Version Latest
 if(Test-Path $Output){throw 'Use a fresh report path.'}
 $root=[IO.Path]::GetFullPath("$PSScriptRoot/..");$bundle=& "$PSScriptRoot/Build-EngineBundle.ps1" -Output "$root/local/music-events-$PID.ps1";. $bundle;. "$root/src/MusicEvents.ps1"
@@ -21,9 +22,9 @@ try{
     $options.Episode=3;$fake=@{State=[GameState]::Finale;Options=$options;Finale=@{stage=0}};Sync-DoomMusicSession $events $fake;Check 'Episode three text finale uses victory score' ($events.Drain()[0].Track -ceq 'D_VICTOR')
     $fake.Finale.stage=1;Sync-DoomMusicSession $events $fake;Check 'Episode three art stage restores bunny score' ($events.Drain()[0].Track -ceq 'D_BUNNY')
     $options.Episode=4;Sync-DoomMusicSession $events $fake;Check 'Other Ultimate Doom art finales retain victory score' ($events.Drain()[0].Track -ceq 'D_VICTOR')
-    $catalog="$root/local/music-catalog-e1m1.json";@{D_E1M1="$root/results/music-loop-e1m1-first.json"}|ConvertTo-Json|Set-Content $catalog
+    $catalog="$root/local/music-catalog-test-$PID.json";@{D_E1M1=[IO.Path]::GetFullPath($Qualification)}|ConvertTo-Json|Set-Content $catalog
     $reports=Read-DoomMusicCatalog $catalog $content;Check 'Catalog validates qualified score against actual IWAD bytes' ($reports.Count -eq 1 -and $reports.ContainsKey('D_E1M1'))
-    $bad="$root/local/music-catalog-mismatch-$PID.json";@{D_E1M2="$root/results/music-loop-e1m1-first.json"}|ConvertTo-Json|Set-Content $bad
+    $bad="$root/local/music-catalog-mismatch-$PID.json";@{D_E1M2=[IO.Path]::GetFullPath($Qualification)}|ConvertTo-Json|Set-Content $bad
     Reject 'Mismatched map/qualification catalog rejected' {$null=Read-DoomMusicCatalog $bad $content}
 }catch{$failure=$_.ToString()+"`n"+$_.ScriptStackTrace;throw}finally{
     if($content){$content.Dispose()}

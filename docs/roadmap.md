@@ -47,6 +47,8 @@ Do not postpone all performance work until M6. Measure after a feature adds subs
 
 ## Immediate work queue
 
+Current audio continuation: E1M1 remains qualified after the finite synthesis bound expands to one hour, with exact historical float/PCM output. E1M2 and intermission three-period jobs are in progress. A [game-process audio capture fixture](process-audio-capture.md) now passes ten inclusion/isolation/device checks; integrate its readiness handshake and verify video timestamp alignment before claiming audiovisual gameplay capture. No new map completion or soundtrack-wide qualification follows from this milestone.
+
 1. Completed first step: all 36 Ultimate Doom maps pass the load/35-idle-tic/two-frame smoke sweep after fixing E2M7 line-flag conversion. See [campaign matrix](campaign-matrix.md). This is smoke coverage only.
 2. Controller routing/finale/par/secret-history fixes pass 57 isolated checks, including carryover and death/respawn. Broader boss/exit behavioral qualification remains in M5.
 3. The ordinary-input E1M1 -> intermission -> E1M2 route now runs through the host with generation-checked asset refresh in persistent workers. Preserve this as the session regression while implementing M2.

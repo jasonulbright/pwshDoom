@@ -17,7 +17,7 @@ try{
     [long]$cycleFrames=$score.DurationTicks*315;[int]$cyclesPerPeriod=1
     while(($cycleFrames*$cyclesPerPeriod)%1260 -ne 0){$cyclesPerPeriod++}
     [long]$periodFrames=$cycleFrames*$cyclesPerPeriod
-    if($periodFrames -le 0 -or $periodFrames*3 -gt 13230000){throw 'Three aligned periods exceed this finite 300-second qualification bound.'}
+    if($periodFrames -le 0 -or $periodFrames*3 -gt 158760000){throw 'Three aligned periods exceed this finite 3600-second qualification bound.'}
     $reference=Get-Content $ReferenceReport -Raw|ConvertFrom-Json;$ref=$reference.Details
     if($reference.Error -or $ref.MusSha256 -cne $score.SourceSha256 -or $ref.SoundFontSha256 -cne $bank.SourceSha256 -or $ref.Frames -gt 3*$periodFrames -or (Get-FileHash $ref.WavPath).Hash -cne $ref.WavSha256){throw 'Reference assets, duration or bytes differ.'}
     $refBytes=[IO.File]::ReadAllBytes($ref.WavPath)

@@ -1,0 +1,277 @@
+{
+  "Checks": [
+    {
+      "Name": "music-groups-hour-bound targeted checks pass",
+      "Passed": true
+    },
+    {
+      "Name": "Current receipt source: src/MusScore.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Current receipt source: src/SoundFontRegions.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Current receipt source: src/MusicOscillator.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Current receipt source: src/MusicControls.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Current receipt source: src/MusicSynth.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Current receipt source: src/MusicGroup.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Current receipt source: scripts/Invoke-MusicGroupWorker.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Current receipt source: scripts/Test-MusicGroups.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "music-loop-state-hour-bound targeted checks pass",
+      "Passed": true
+    },
+    {
+      "Name": "Current receipt source: src/MusScore.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Current receipt source: src/SoundFontRegions.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Current receipt source: src/MusicOscillator.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Current receipt source: src/MusicControls.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Current receipt source: src/MusicSynth.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Current receipt source: src/MusicGroup.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Current receipt source: src/MusicLoopState.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "music-loop-reader-hour-bound targeted checks pass",
+      "Passed": true
+    },
+    {
+      "Name": "music-playback-hour-bound targeted checks pass",
+      "Passed": true
+    },
+    {
+      "Name": "Current receipt source: src/MusicLoopReader.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Current receipt source: src/MusicPlayback.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "music-events-hour-bound targeted checks pass",
+      "Passed": true
+    },
+    {
+      "Name": "music-audio-worker-hour-bound targeted checks pass",
+      "Passed": true
+    },
+    {
+      "Name": "Current receipt source: src/AudioMixer.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Current receipt source: src/AudioPackets.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Current receipt source: src/AudioRunspace.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Current receipt source: src/WaveOutDevice.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Current receipt source: src/MusicLoopReader.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Current receipt source: src/MusicPlayback.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Current receipt source: scripts/Invoke-AudioWorker.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Current receipt source: scripts/Test-MusicAudioWorker.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "music-loop-evidence-hour-bound-current targeted checks pass",
+      "Passed": true
+    },
+    {
+      "Name": "Current receipt source: src/MusicLoopReader.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Current receipt source: src/AudioMixer.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "process-audio-capture-first targeted checks pass",
+      "Passed": true
+    },
+    {
+      "Name": "Current receipt source: src/ProcessAudioCapture.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Current receipt source: scripts/Record-ProcessAudio.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Current receipt source: scripts/Invoke-CaptureTestTone.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Current receipt source: scripts/Test-ProcessAudioCapture.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Requalification passed with unchanged canonical PCM",
+      "Passed": true
+    },
+    {
+      "Name": "Requalification source is current: src/MusScore.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Requalification source is current: src/SoundFontBank.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Requalification source is current: src/SoundFontRegions.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Requalification source is current: src/MusicOscillator.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Requalification source is current: src/MusicControls.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Requalification source is current: src/MusicSynth.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Requalification source is current: src/MusicGroup.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Requalification source is current: src/MusicLoopState.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Complete period 0 unchanged and retained on disk",
+      "Passed": true
+    },
+    {
+      "Name": "Complete period 1 unchanged and retained on disk",
+      "Passed": true
+    },
+    {
+      "Name": "Complete period 2 unchanged and retained on disk",
+      "Passed": true
+    },
+    {
+      "Name": "Stale state-test source failure remains recorded",
+      "Passed": true
+    },
+    {
+      "Name": "Retained capture WAV has the recorded digest and exact frame length",
+      "Passed": true
+    },
+    {
+      "Name": "Retained local capture report matches portable embedded report receipt",
+      "Passed": true
+    },
+    {
+      "Name": "All captured packets have contiguous device/output frame positions",
+      "Passed": false
+    }
+  ],
+  "Error": "All captured packets have contiguous device/output frame positions\nat Check, C:\\projects\\pwshDoom\\scripts\\Test-MusicCaptureEvidence.ps1: line 7\r\nat <ScriptBlock>, C:\\projects\\pwshDoom\\scripts\\Test-MusicCaptureEvidence.ps1: line 29",
+  "Meaning": "Current-source receipt audit, complete E1M1 sample retention and process-capture packet continuity/scope evidence. Longer soundtrack jobs are still in progress and are excluded from qualification. No new campaign completion, game-load capture, audiovisual synchronization, acoustic measurement or performance qualification.",
+  "Receipts": [
+    {
+      "Sha256": "AC2F939EA5783C5ACD5A9B5FF9699EB4A4FB2B549BE80E1F3F5F90935ED68449",
+      "Path": "results/music-groups-hour-bound.json"
+    },
+    {
+      "Sha256": "2FBFAE92519306E489AB3C6F9DFDFA081AE6970C0688DA7B46EFF6281D14304E",
+      "Path": "results/music-loop-state-hour-bound.json"
+    },
+    {
+      "Sha256": "F99956ABC3BAA41737CE8AD69ADD4B30BD7CCDD0458B456BF2B13571C836D958",
+      "Path": "results/music-loop-reader-hour-bound.json"
+    },
+    {
+      "Sha256": "C7ABBB83E787B6CF74062A5FD023E990119EFC05E53AD07021074191B5794528",
+      "Path": "results/music-playback-hour-bound.json"
+    },
+    {
+      "Sha256": "2EA4C619D0C8506290E91F2B47034F2EC31889AB6D8103F9F5D4BED7D7BCCC93",
+      "Path": "results/music-events-hour-bound.json"
+    },
+    {
+      "Sha256": "975914A5A380BAF2E94210535DC227683043BEE1224E4D62376B7BDAE834E6AB",
+      "Path": "results/music-audio-worker-hour-bound.json"
+    },
+    {
+      "Sha256": "BFB5615359247BC5E647D1FEC7FDA059E3F784C44ED317D14DBC0C4DC5842BC3",
+      "Path": "results/music-loop-evidence-hour-bound-current.json"
+    },
+    {
+      "Sha256": "4EFA8D5B96FC503664B8132E9B83ABDAC9415B847857066A230A82C5B5FBC756",
+      "Path": "results/process-audio-capture-first.json"
+    },
+    {
+      "Sha256": "DD3734A2154D974A3108113AE5B9414D4FFD65DB854E2DF11E1E335A4D1EDF54",
+      "Path": "results/music-loop-e1m1-first.json"
+    },
+    {
+      "Sha256": "1D5A9D6D16E8CDCA74646D6AEF009CDB42EB59B87941B0EFE648F9D3A98C96CF",
+      "Path": "results/music-loop-e1m1-hour-bound.json"
+    },
+    {
+      "Sha256": "7EE3CB467187872C5E98341A24B914BC212A57BD3EB9678B955C6A45E2871D5A",
+      "Path": "results/music-loop-evidence-hour-bound.json"
+    },
+    {
+      "Sha256": "4EFA8D5B96FC503664B8132E9B83ABDAC9415B847857066A230A82C5B5FBC756",
+      "Path": "results/process-audio-capture-first.json"
+    }
+  ],
+  "Sources": []
+}

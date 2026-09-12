@@ -1,0 +1,53 @@
+{
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "Meaning": "Actual engine initialization callback plus isolated Ultimate Doom save-state music selection and IWAD/catalog identity checks. Non-E1M1 tracks are selection tests only; they are not playback qualifications.",
+  "SourceSha256": "7E59CFCC112C2FC8369F17077F40A391E56947FE4CD31354E6387D750102386E",
+  "ScriptSha256": "3122804F7EC70E28EC407EDEE0195D48577D080A485184FD72AD464909ED0756",
+  "Error": null,
+  "Checks": [
+    {
+      "Name": "Actual world initialization emits E1M1 music callback",
+      "Passed": true
+    },
+    {
+      "Name": "Draining callbacks is destructive exactly once",
+      "Passed": true
+    },
+    {
+      "Name": "Engine music volume clamps to conventional range and emits gain",
+      "Passed": true
+    },
+    {
+      "Name": "One-shot flag and explicit stop are preserved",
+      "Passed": true
+    },
+    {
+      "Name": "Loaded level synchronizes its actual map music",
+      "Passed": true
+    },
+    {
+      "Name": "Ultimate Doom intermission mapping",
+      "Passed": true
+    },
+    {
+      "Name": "Episode three text finale uses victory score",
+      "Passed": true
+    },
+    {
+      "Name": "Episode three art stage restores bunny score",
+      "Passed": true
+    },
+    {
+      "Name": "Other Ultimate Doom art finales retain victory score",
+      "Passed": true
+    },
+    {
+      "Name": "Catalog validates qualified score against actual IWAD bytes",
+      "Passed": true
+    },
+    {
+      "Name": "Mismatched map/qualification catalog rejected",
+      "Passed": true
+    }
+  ]
+}

@@ -1,10 +1,10 @@
 #requires -Version 7.4
 # SPDX-License-Identifier: GPL-2.0-or-later
-param([Parameter(Mandatory)][string]$Output)
+param([Parameter(Mandatory)][string]$Output,[string]$Qualification="$PSScriptRoot/../results/music-loop-e1m1-hour-bound.json")
 $ErrorActionPreference='Stop';Set-StrictMode -Version Latest
 if(Test-Path $Output){throw 'Use a fresh report path.'}
 $root=[IO.Path]::GetFullPath("$PSScriptRoot/..");foreach($name in 'AudioMixer','AudioPackets','AudioRunspace','MusicLoopReader'){. "$root/src/$name.ps1"}
-$qualification="$root/results/music-loop-e1m1-first.json";$audio=$null;$reader=$null;$report=$null;$failure=$null;$expectedHash=$null;$checks=[Collections.Generic.List[object]]::new()
+$qualification=[IO.Path]::GetFullPath($Qualification);$audio=$null;$reader=$null;$report=$null;$failure=$null;$expectedHash=$null;$checks=[Collections.Generic.List[object]]::new()
 function Check([string]$Name,[bool]$Passed){$checks.Add(@{Name=$Name;Passed=$Passed});if(-not $Passed){throw $Name}}
 function Wait-AudioValue([string]$Key,$Value){
     $wait=[Diagnostics.Stopwatch]::StartNew()

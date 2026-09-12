@@ -1,0 +1,47 @@
+{
+  "Sources": [
+    {
+      "Sha256": "AD69EA0A78EA942C10BCC7433EE7DD1B06BAE98376816B589ED0CA0802CBB7CD",
+      "Path": "src/MusicLoopReader.ps1"
+    },
+    {
+      "Sha256": "C8B63D3E491C61F4A1BA85A32ECC5743DF317F5AC0AEB18D4D6D218E05998258",
+      "Path": "src/AudioMixer.ps1"
+    }
+  ],
+  "Error": "State unit source current: src/MusicGroup.ps1\nat Check, C:\\projects\\pwshDoom\\scripts\\Test-MusicLoopEvidence.ps1: line 8\r\nat <ScriptBlock>, C:\\projects\\pwshDoom\\scripts\\Test-MusicLoopEvidence.ps1: line 14",
+  "Checks": [
+    {
+      "Name": "music-loop-state-unit-first checks pass",
+      "Passed": true
+    },
+    {
+      "Name": "State unit source current: src/MusScore.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "State unit source current: src/SoundFontRegions.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "State unit source current: src/MusicOscillator.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "State unit source current: src/MusicControls.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "State unit source current: src/MusicSynth.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "State unit source current: src/MusicGroup.ps1",
+      "Passed": false
+    }
+  ],
+  "Meaning": "Real pinned E1M1 state/output qualification plus four periods of bounded cached reads, exact full float comparison and canonical first-98-second PCM through the combined effects mixer. Unpaced offline timing; fourth period is justified by normalized state recurrence, not a separately synthesized fourth reference. No device/host qualification.",
+  "Details": null,
+  "QualificationSha256": "1D5A9D6D16E8CDCA74646D6AEF009CDB42EB59B87941B0EFE648F9D3A98C96CF",
+  "ScriptSha256": "BCC77FE17856FD202D0B1CC2A51607BF6A4AE63E00F999926FD5AC8C72201A68"
+}
