@@ -48,7 +48,9 @@ Complete game/capture/audio/merge/source receipts are copied byte-identically in
 
 All three recordings overlap E1M3 preparation. They are correctness/readability observations, not clean paired performance trials. Console writes and encoded 60 fps are not proof of 60 distinct displayed updates. Source state/checkpoint equivalence does not establish acoustic continuity.
 
-Initial Matrix starvation polls occur after packets 310, 1674 and 1677. Revised Matrix and color-art both report polls after 313, 316, 1674 and 1684. These include a repeatable early-game region and the map handoff. They are queue observations, not hardware underrun telemetry, and cause remains unclassified. Returning every submitted frame does not imply timely continuous playback. The next timing experiment should repeat this workload without synthesis/build/test contention, retain capture instrumentation and inspect simulation lateness and audio queue behavior before changing buffer sizes or scheduling.
+Initial Matrix starvation polls occur after packets 310, 1674 and 1677. Revised Matrix and color-art both report polls after 313, 316, 1674 and 1684. These include a repeatable early-game region and the map handoff. They are queue observations, not hardware underrun telemetry. Returning every submitted frame does not imply timely continuous playback.
+
+The subsequent [isolated route and buffer recovery study](audio-recovery.md) removes concurrent study preparation/build/test work. Its baseline has no early-game starvation but retains expensive intermission/map-transition gaps. The worker now rebuilds a reserve after an empty queue, with a tested final-packet fallback. Three isolated recorded routes retain identical submitted PCM and all commands/checkpoints/returned frames; transition stalls remain open. The retained failure, exact timing, actual recordings and limits are documented separately.
 
 ## Reproduce
 

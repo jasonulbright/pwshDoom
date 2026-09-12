@@ -1,0 +1,133 @@
+{
+  "ExpectedPcmSha256": "9D90AE0531AFA18CDAEB5DEA882A639A367A38FB1285FCF559C3C7C6916D0E05",
+  "Sources": [
+    {
+      "Sha256": "A3933267259B9FD9A7CD47AFD960F660899330A041ECF4B0A3D204BEAF08ADBD",
+      "Path": "scripts/Invoke-AudioWorker.ps1"
+    },
+    {
+      "Sha256": "C88EF8DA24B802FD2ED23AA9DD13B744BA25702CF800E4757606252B0F6BF7BC",
+      "Path": "src/AudioRunspace.ps1"
+    },
+    {
+      "Sha256": "F0A41396375D67A599FA0CDC4F198AA3F5EB7BC84601FCB8F8116E9D5B958205",
+      "Path": "src/WaveOutDevice.ps1"
+    },
+    {
+      "Sha256": "F50C7080AFEC47EA455379DAC6D52242857071A070F3DC98F64757B4CF22AFEE",
+      "Path": "scripts/Test-AudioRebuffer.ps1"
+    }
+  ],
+  "Checks": [
+    {
+      "Passed": true,
+      "Name": "Drained device enters recovery after the initial four packets"
+    },
+    {
+      "Passed": true,
+      "Name": "One recovery packet is held briefly for a reserve"
+    },
+    {
+      "Passed": true,
+      "Name": "Exactly two packets restart the first recovery"
+    },
+    {
+      "Passed": true,
+      "Name": "Final single packet restarts after the bounded deadline"
+    },
+    {
+      "Passed": true,
+      "Name": "All literal PCM samples retain their original sequence and values"
+    },
+    {
+      "Passed": true,
+      "Name": "Every frame completes with no discarded packets or cancelled tail"
+    },
+    {
+      "Passed": true,
+      "Name": "Device and worker close without error"
+    }
+  ],
+  "Audio": {
+    "FinalVolume": 1.0,
+    "UnconsumedPackets": 0,
+    "Music": {
+      "Reports": {},
+      "Transitions": [],
+      "Gain": 0.2,
+      "Selected": null,
+      "Closed": true,
+      "Frames": 0
+    },
+    "CleanupError": null,
+    "PauseTransitions": 0,
+    "MaxPacketQueue": 3,
+    "CancelledQueuedFramesUpperBound": 0,
+    "DeviceClosed": true,
+    "PacketAgeAtSubmissionMs": [
+      84.3842,
+      84.8352,
+      87.7848,
+      90.7465,
+      17.2146,
+      18.5511,
+      20.1271
+    ],
+    "Error": null,
+    "PcmSha256": "9D90AE0531AFA18CDAEB5DEA882A639A367A38FB1285FCF559C3C7C6916D0E05",
+    "EpochResets": 0,
+    "RebufferCount": 3,
+    "Meaning": "PowerShell runspace mixing and waveOut playback; packet age ends at submission, not audible output. Starvation is queue polling, not hardware telemetry. Reset/exit can cancel queued tail audio; cancelled frame count is an upper bound.",
+    "MutedPackets": 0,
+    "WallSeconds": 1.253643,
+    "StalePacketsDiscarded": 0,
+    "MixSamplesMs": [
+      45.3355,
+      2.6999,
+      2.6709,
+      2.6746,
+      2.7788,
+      2.8764,
+      3.3835
+    ],
+    "ClippedSamples": 0,
+    "PendingPacket": null,
+    "LastSequence": 6,
+    "SubmittedFrames": 8820,
+    "RebufferSinglePacketDeadlineMs": 100,
+    "ReturnedCompletedFrames": 8820,
+    "QueueStarvationObservations": [
+      {
+        "WallMs": 916.7108,
+        "AfterPacket": 3
+      },
+      {
+        "WallMs": 1046.9767,
+        "AfterPacket": 5
+      },
+      {
+        "WallMs": 1196.8624,
+        "AfterPacket": 6
+      }
+    ],
+    "VolumeChanges": [],
+    "RebufferResumes": [
+      {
+        "Reason": "TwoPackets",
+        "QueuedBuffers": 2,
+        "WaitMilliseconds": 58.0714999999999,
+        "AfterPacket": 5
+      },
+      {
+        "Reason": "SinglePacketDeadline",
+        "QueuedBuffers": 1,
+        "WaitMilliseconds": 110.57499999999982,
+        "AfterPacket": 6
+      }
+    ],
+    "MaxVoices": 1,
+    "Packets": 7
+  },
+  "Meaning": "Finite actual device test with seven distinct literal PCM packets. Deliberate producer gaps verify two-packet reserve recovery, bounded final-single-packet playback, unchanged PCM order and complete device return. Does not eliminate producer stalls or measure acoustics.",
+  "Error": null
+}

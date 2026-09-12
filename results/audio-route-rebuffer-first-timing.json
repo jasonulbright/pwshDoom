@@ -1,0 +1,546 @@
+{
+  "Snapshots": {
+    "P95": 11.3288,
+    "Maximum": 124.1866,
+    "Count": 1747,
+    "Mean": 6.02779084144247
+  },
+  "ReturnedFrames": 2201220,
+  "SourceSha256": "100C9486AE1251B1568C2CBAC0340941A850BB05DF05628E12610E65EDD6784A",
+  "Transitions": [
+    {
+      "Tic": 0,
+      "Health": 100,
+      "State": "Level",
+      "Armor": 0,
+      "Kills": 0,
+      "Episode": 1,
+      "Weapons": [
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "DidSecret": false,
+      "Generation": 1,
+      "Keys": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "Map": 1,
+      "Ammo": [
+        50,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "Tic": 1560,
+      "Health": 75,
+      "State": "Intermission",
+      "Armor": 0,
+      "Kills": 5,
+      "Episode": 1,
+      "Weapons": [
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "DidSecret": false,
+      "Generation": 1,
+      "Keys": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "Map": 1,
+      "Ammo": [
+        37,
+        4,
+        0,
+        0
+      ]
+    },
+    {
+      "Tic": 1676,
+      "Health": 75,
+      "State": "Level",
+      "Armor": 0,
+      "Kills": 0,
+      "Episode": 1,
+      "Weapons": [
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "DidSecret": false,
+      "Generation": 2,
+      "Keys": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "Map": 2,
+      "Ammo": [
+        37,
+        4,
+        0,
+        0
+      ]
+    }
+  ],
+  "SubmissionAge": {
+    "P95": 161.6297,
+    "Maximum": 195.91,
+    "Count": 1747,
+    "Mean": 115.80099284487702
+  },
+  "CheckpointMatches": 8,
+  "WallSeconds": 51.9292962,
+  "Tics": 1747,
+  "MusicTransitions": [
+    {
+      "Loop": true,
+      "AfterFrames": 0,
+      "Track": "D_E1M1",
+      "Kind": "Start"
+    },
+    {
+      "Loop": true,
+      "AfterFrames": 1965600,
+      "Track": "D_INTER",
+      "Kind": "Start"
+    },
+    {
+      "Kind": "EpochReset",
+      "AfterFrames": 2110500
+    },
+    {
+      "Loop": true,
+      "AfterFrames": 2110500,
+      "Track": "D_E1M2",
+      "Kind": "Start"
+    }
+  ],
+  "AudioMix": {
+    "P95": 14.5798,
+    "Maximum": 86.3603,
+    "Count": 1747,
+    "Mean": 4.79404264453349
+  },
+  "Meaning": "Sequence-aligned retained route measurements after asserting all six arrays and audio packet counts equal consumed commands. Starvation polling is not hardware telemetry. Tick-start lateness and submission age have different origins; no sum is presented as acoustic latency. Map/UI transitions and initial work remain in their recorded timing windows.",
+  "GameReportSha256": "1B1F5F4473DF23831ED6A540B68F7C4F2F848C83E9043D9B980081F22BDAC76F",
+  "Writes": 3027,
+  "MapReloads": [
+    {
+      "Tic": 1676,
+      "WorkerPids": [
+        24932,
+        13676,
+        8560,
+        31564,
+        4760,
+        32212,
+        26560,
+        30388,
+        26564,
+        8804,
+        15024,
+        28184,
+        21320,
+        31612,
+        6580,
+        29444
+      ],
+      "EndWallMs": 49817.7634,
+      "Map": 2,
+      "Generation": 2,
+      "Episode": 1,
+      "StartWallMs": 48896.2648
+    }
+  ],
+  "GameReport": "C:\\projects\\pwshDoom\\local\\recordings\\music-route-rebuffer-first-game.json",
+  "SubmittedFrames": 2201220,
+  "StarvationWindows": [
+    {
+      "Samples": [
+        {
+          "Sequence": 1670,
+          "PacketBuildMs": 0.1873,
+          "PacketSubmissionAgeMs": 162.1284,
+          "AudioMixMs": 0.5022,
+          "SnapshotMs": 9.6801,
+          "SimulationMs": 0.1361,
+          "TickStartLatenessMs": 27.63645714285667
+        },
+        {
+          "Sequence": 1671,
+          "PacketBuildMs": 0.1415,
+          "PacketSubmissionAgeMs": 173.6326,
+          "AudioMixMs": 0.4953,
+          "SnapshotMs": 12.5585,
+          "SimulationMs": 0.1386,
+          "TickStartLatenessMs": 14.358128571424459
+        },
+        {
+          "Sequence": 1672,
+          "PacketBuildMs": 0.1465,
+          "PacketSubmissionAgeMs": 176.1537,
+          "AudioMixMs": 0.4996,
+          "SnapshotMs": 10.0439,
+          "SimulationMs": 0.1406,
+          "TickStartLatenessMs": 15.733399999997346
+        },
+        {
+          "Sequence": 1673,
+          "PacketBuildMs": 0.1326,
+          "PacketSubmissionAgeMs": 181.748,
+          "AudioMixMs": 0.4798,
+          "SnapshotMs": 11.214,
+          "SimulationMs": 0.1456,
+          "TickStartLatenessMs": 10.149671428574948
+        },
+        {
+          "Sequence": 1674,
+          "PacketBuildMs": 0.1421,
+          "PacketSubmissionAgeMs": 190.7664,
+          "AudioMixMs": 0.5852,
+          "SnapshotMs": 9.9906,
+          "SimulationMs": 0.1555,
+          "TickStartLatenessMs": 4.13454285714397
+        },
+        {
+          "Sequence": 1675,
+          "PacketBuildMs": 0.1683,
+          "PacketSubmissionAgeMs": 6.9384,
+          "AudioMixMs": 1.5545,
+          "SnapshotMs": 7.5848,
+          "SimulationMs": 966.9668,
+          "TickStartLatenessMs": 9.133214285720896
+        },
+        {
+          "Sequence": 1676,
+          "PacketBuildMs": 0.1525,
+          "PacketSubmissionAgeMs": 9.7048,
+          "AudioMixMs": 0.6344,
+          "SnapshotMs": 8.38,
+          "SimulationMs": 4.6511,
+          "TickStartLatenessMs": 983.7665857142856
+        },
+        {
+          "Sequence": 1677,
+          "PacketBuildMs": 0.1373,
+          "PacketSubmissionAgeMs": 12.4586,
+          "AudioMixMs": 0.6286,
+          "SnapshotMs": 12.1759,
+          "SimulationMs": 4.7307,
+          "TickStartLatenessMs": 982.9745571428575
+        },
+        {
+          "Sequence": 1678,
+          "PacketBuildMs": 0.1369,
+          "PacketSubmissionAgeMs": 0.8959,
+          "AudioMixMs": 0.5073,
+          "SnapshotMs": 8.6146,
+          "SimulationMs": 7.0208,
+          "TickStartLatenessMs": 982.924928571425
+        },
+        {
+          "Sequence": 1679,
+          "PacketBuildMs": 0.1301,
+          "PacketSubmissionAgeMs": 2.9096,
+          "AudioMixMs": 0.5022,
+          "SnapshotMs": 10.7551,
+          "SimulationMs": 3.1093,
+          "TickStartLatenessMs": 981.7535999999964
+        },
+        {
+          "Sequence": 1680,
+          "PacketBuildMs": 1.0513,
+          "PacketSubmissionAgeMs": 6.1504,
+          "AudioMixMs": 0.6046,
+          "SnapshotMs": 9.6497,
+          "SimulationMs": 12.4931,
+          "TickStartLatenessMs": 978.1882714285748
+        },
+        {
+          "Sequence": 1681,
+          "PacketBuildMs": 0.2542,
+          "PacketSubmissionAgeMs": 3.1225,
+          "AudioMixMs": 0.5817,
+          "SnapshotMs": 10.4281,
+          "SimulationMs": 8.6939,
+          "TickStartLatenessMs": 983.3474428571426
+        },
+        {
+          "Sequence": 1682,
+          "PacketBuildMs": 0.1561,
+          "PacketSubmissionAgeMs": 14.25,
+          "AudioMixMs": 0.5928,
+          "SnapshotMs": 11.2323,
+          "SimulationMs": 4.3573,
+          "TickStartLatenessMs": 988.2714142857149
+        },
+        {
+          "Sequence": 1683,
+          "PacketBuildMs": 0.1364,
+          "PacketSubmissionAgeMs": 7.7845,
+          "AudioMixMs": 2.3486,
+          "SnapshotMs": 8.6517,
+          "SimulationMs": 13.285,
+          "TickStartLatenessMs": 987.5272857142845
+        },
+        {
+          "Sequence": 1684,
+          "PacketBuildMs": 0.1599,
+          "PacketSubmissionAgeMs": 5.2657,
+          "AudioMixMs": 0.5992,
+          "SnapshotMs": 12.9106,
+          "SimulationMs": 11.0707,
+          "TickStartLatenessMs": 992.2995571428546
+        }
+      ],
+      "AfterPacket": 1674,
+      "AudioWorkerWallMs": 67212.7858,
+      "AfterFinalPacket": false
+    },
+    {
+      "Samples": [
+        {
+          "Sequence": 1680,
+          "PacketBuildMs": 1.0513,
+          "PacketSubmissionAgeMs": 6.1504,
+          "AudioMixMs": 0.6046,
+          "SnapshotMs": 9.6497,
+          "SimulationMs": 12.4931,
+          "TickStartLatenessMs": 978.1882714285748
+        },
+        {
+          "Sequence": 1681,
+          "PacketBuildMs": 0.2542,
+          "PacketSubmissionAgeMs": 3.1225,
+          "AudioMixMs": 0.5817,
+          "SnapshotMs": 10.4281,
+          "SimulationMs": 8.6939,
+          "TickStartLatenessMs": 983.3474428571426
+        },
+        {
+          "Sequence": 1682,
+          "PacketBuildMs": 0.1561,
+          "PacketSubmissionAgeMs": 14.25,
+          "AudioMixMs": 0.5928,
+          "SnapshotMs": 11.2323,
+          "SimulationMs": 4.3573,
+          "TickStartLatenessMs": 988.2714142857149
+        },
+        {
+          "Sequence": 1683,
+          "PacketBuildMs": 0.1364,
+          "PacketSubmissionAgeMs": 7.7845,
+          "AudioMixMs": 2.3486,
+          "SnapshotMs": 8.6517,
+          "SimulationMs": 13.285,
+          "TickStartLatenessMs": 987.5272857142845
+        },
+        {
+          "Sequence": 1684,
+          "PacketBuildMs": 0.1599,
+          "PacketSubmissionAgeMs": 5.2657,
+          "AudioMixMs": 0.5992,
+          "SnapshotMs": 12.9106,
+          "SimulationMs": 11.0707,
+          "TickStartLatenessMs": 992.2995571428546
+        },
+        {
+          "Sequence": 1685,
+          "PacketBuildMs": 0.1547,
+          "PacketSubmissionAgeMs": 8.0512,
+          "AudioMixMs": 1.8517,
+          "SnapshotMs": 8.7011,
+          "SimulationMs": 19.9343,
+          "TickStartLatenessMs": 1011.5654285714263
+        },
+        {
+          "Sequence": 1686,
+          "PacketBuildMs": 0.1445,
+          "PacketSubmissionAgeMs": 5.3624,
+          "AudioMixMs": 0.4734,
+          "SnapshotMs": 8.6205,
+          "SimulationMs": 12.4419,
+          "TickStartLatenessMs": 1033.2972999999984
+        },
+        {
+          "Sequence": 1687,
+          "PacketBuildMs": 0.1307,
+          "PacketSubmissionAgeMs": 8.764,
+          "AudioMixMs": 0.6208,
+          "SnapshotMs": 8.625,
+          "SimulationMs": 3.9886,
+          "TickStartLatenessMs": 1037.3550714285739
+        },
+        {
+          "Sequence": 1688,
+          "PacketBuildMs": 0.1302,
+          "PacketSubmissionAgeMs": 9.8231,
+          "AudioMixMs": 0.4951,
+          "SnapshotMs": 14.0447,
+          "SimulationMs": 9.6284,
+          "TickStartLatenessMs": 1033.4466428571468
+        },
+        {
+          "Sequence": 1689,
+          "PacketBuildMs": 0.1438,
+          "PacketSubmissionAgeMs": 15.6281,
+          "AudioMixMs": 0.4769,
+          "SnapshotMs": 8.3183,
+          "SimulationMs": 5.5605,
+          "TickStartLatenessMs": 1048.692414285717
+        },
+        {
+          "Sequence": 1690,
+          "PacketBuildMs": 0.137,
+          "PacketSubmissionAgeMs": 3.0267,
+          "AudioMixMs": 1.1737,
+          "SnapshotMs": 8.5484,
+          "SimulationMs": 10.2745,
+          "TickStartLatenessMs": 1046.0687857142839
+        },
+        {
+          "Sequence": 1691,
+          "PacketBuildMs": 0.1427,
+          "PacketSubmissionAgeMs": 6.901,
+          "AudioMixMs": 0.6608,
+          "SnapshotMs": 9.1629,
+          "SimulationMs": 7.8965,
+          "TickStartLatenessMs": 1046.644257142856
+        },
+        {
+          "Sequence": 1692,
+          "PacketBuildMs": 0.1704,
+          "PacketSubmissionAgeMs": 13.2452,
+          "AudioMixMs": 1.2277,
+          "SnapshotMs": 8.5646,
+          "SimulationMs": 4.2584,
+          "TickStartLatenessMs": 1046.0939285714267
+        },
+        {
+          "Sequence": 1693,
+          "PacketBuildMs": 0.188,
+          "PacketSubmissionAgeMs": 2.7197,
+          "AudioMixMs": 0.6767,
+          "SnapshotMs": 8.6438,
+          "SimulationMs": 4.395,
+          "TickStartLatenessMs": 1041.8884000000035
+        },
+        {
+          "Sequence": 1694,
+          "PacketBuildMs": 0.1236,
+          "PacketSubmissionAgeMs": 15.7053,
+          "AudioMixMs": 0.4934,
+          "SnapshotMs": 10.1491,
+          "SimulationMs": 11.2054,
+          "TickStartLatenessMs": 1038.8897714285704
+        }
+      ],
+      "AfterPacket": 1684,
+      "AudioWorkerWallMs": 69202.7673,
+      "AfterFinalPacket": false
+    },
+    {
+      "Samples": [
+        {
+          "Sequence": 1742,
+          "PacketBuildMs": 0.1453,
+          "PacketSubmissionAgeMs": 7.6248,
+          "AudioMixMs": 1.2001,
+          "SnapshotMs": 8.5682,
+          "SimulationMs": 4.0654,
+          "TickStartLatenessMs": 1053.2301999999981
+        },
+        {
+          "Sequence": 1743,
+          "PacketBuildMs": 0.1393,
+          "PacketSubmissionAgeMs": 16.0439,
+          "AudioMixMs": 0.6282,
+          "SnapshotMs": 9.5239,
+          "SimulationMs": 3.6452,
+          "TickStartLatenessMs": 1048.3567714285746
+        },
+        {
+          "Sequence": 1744,
+          "PacketBuildMs": 0.1198,
+          "PacketSubmissionAgeMs": 15.0966,
+          "AudioMixMs": 0.4754,
+          "SnapshotMs": 8.7474,
+          "SimulationMs": 10.7748,
+          "TickStartLatenessMs": 1044.103642857146
+        },
+        {
+          "Sequence": 1745,
+          "PacketBuildMs": 0.1353,
+          "PacketSubmissionAgeMs": 13.1014,
+          "AudioMixMs": 1.3773,
+          "SnapshotMs": 9.3867,
+          "SimulationMs": 17.0503,
+          "TickStartLatenessMs": 1046.3322142857141
+        },
+        {
+          "Sequence": 1746,
+          "PacketBuildMs": 0.2172,
+          "PacketSubmissionAgeMs": 6.3415,
+          "AudioMixMs": 0.4621,
+          "SnapshotMs": 9.2188,
+          "SimulationMs": 8.9424,
+          "TickStartLatenessMs": 1054.5189857142832
+        }
+      ],
+      "AfterPacket": 1746,
+      "AudioWorkerWallMs": 71042.5308,
+      "AfterFinalPacket": true
+    }
+  ],
+  "RebufferResumes": {
+    "Reason": "TwoPackets",
+    "WaitMilliseconds": 41.027900000000955,
+    "AfterPacket": 1686,
+    "QueuedBuffers": 2
+  },
+  "ActiveStarves": 2,
+  "Simulation": {
+    "P95": 17.5134,
+    "Maximum": 966.9668,
+    "Count": 1747,
+    "Mean": 7.553662907842011
+  },
+  "ActiveSeconds": 51.0080848,
+  "Error": null,
+  "CancelledFramesUpperBound": 0
+}

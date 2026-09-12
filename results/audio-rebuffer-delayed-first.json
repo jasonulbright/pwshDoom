@@ -1,0 +1,100 @@
+{
+  "Checks": [
+    {
+      "Name": "Drained device enters recovery after the initial four packets",
+      "Passed": true
+    },
+    {
+      "Name": "One recovery packet is held briefly for a reserve",
+      "Passed": false
+    }
+  ],
+  "ExpectedPcmSha256": "9D90AE0531AFA18CDAEB5DEA882A639A367A38FB1285FCF559C3C7C6916D0E05",
+  "Meaning": "Finite actual device test with seven distinct literal PCM packets. Deliberate producer gaps verify two-packet reserve recovery, bounded final-single-packet playback, unchanged PCM order and complete device return. Does not eliminate producer stalls or measure acoustics.",
+  "Audio": {
+    "MixSamplesMs": [
+      43.2579,
+      2.6663,
+      2.6154,
+      2.6318,
+      2.6768
+    ],
+    "Packets": 5,
+    "FinalVolume": 1.0,
+    "ClippedSamples": 0,
+    "SubmittedFrames": 6300,
+    "DeviceClosed": true,
+    "Music": {
+      "Transitions": [],
+      "Frames": 0,
+      "Gain": 0.2,
+      "Selected": null,
+      "Reports": {},
+      "Closed": true
+    },
+    "LastSequence": 4,
+    "EpochResets": 0,
+    "VolumeChanges": [],
+    "Meaning": "PowerShell runspace mixing and waveOut playback; packet age ends at submission, not audible output. Starvation is queue polling, not hardware telemetry. Reset/exit can cancel queued tail audio; cancelled frame count is an upper bound.",
+    "WallSeconds": 1.1269227,
+    "RebufferCount": 2,
+    "MaxPacketQueue": 3,
+    "ReturnedCompletedFrames": 6300,
+    "RebufferSinglePacketDeadlineMs": 100,
+    "StalePacketsDiscarded": 0,
+    "MaxVoices": 1,
+    "UnconsumedPackets": 0,
+    "CleanupError": null,
+    "PauseTransitions": 0,
+    "PcmSha256": "FCF40951C6D2CD974FEE7A744E8BBB25049B11F3A82F3CED8F4107BA1E4EA729",
+    "PacketAgeAtSubmissionMs": [
+      80.01,
+      80.5365,
+      83.4212,
+      86.3164,
+      18.8225
+    ],
+    "Error": null,
+    "CancelledQueuedFramesUpperBound": 0,
+    "RebufferResumes": [
+      {
+        "QueuedBuffers": 1,
+        "WaitMilliseconds": 212.34109999999998,
+        "Reason": "SinglePacketDeadline",
+        "AfterPacket": 4
+      }
+    ],
+    "PendingPacket": null,
+    "MutedPackets": 0,
+    "QueueStarvationObservations": [
+      {
+        "WallMs": 829.3047,
+        "AfterPacket": 3
+      },
+      {
+        "WallMs": 1079.3363,
+        "AfterPacket": 4
+      }
+    ]
+  },
+  "ProducerGapMilliseconds": 180,
+  "Error": "One recovery packet is held briefly for a reserve\nat Check, C:\\projects\\pwshDoom\\scripts\\Test-AudioRebuffer.ps1: line 8\r\nat <ScriptBlock>, C:\\projects\\pwshDoom\\scripts\\Test-AudioRebuffer.ps1: line 28",
+  "Sources": [
+    {
+      "Sha256": "A3933267259B9FD9A7CD47AFD960F660899330A041ECF4B0A3D204BEAF08ADBD",
+      "Path": "scripts/Invoke-AudioWorker.ps1"
+    },
+    {
+      "Sha256": "C88EF8DA24B802FD2ED23AA9DD13B744BA25702CF800E4757606252B0F6BF7BC",
+      "Path": "src/AudioRunspace.ps1"
+    },
+    {
+      "Sha256": "F0A41396375D67A599FA0CDC4F198AA3F5EB7BC84601FCB8F8116E9D5B958205",
+      "Path": "src/WaveOutDevice.ps1"
+    },
+    {
+      "Sha256": "EEC4D20EFADB27C6B91A82801D66993302CB4F2F3BF008DB72B506C0FB40CB02",
+      "Path": "scripts/Test-AudioRebuffer.ps1"
+    }
+  ]
+}

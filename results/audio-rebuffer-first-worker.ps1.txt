@@ -11,7 +11,7 @@ $starves=[Collections.Generic.List[object]]::new();$starved=$false;$cancelled=0L
 $watch=[Diagnostics.Stopwatch]::StartNew();$failure=$null;$cleanup=$null
 $pending=$null;$digest=[Security.Cryptography.IncrementalHash]::CreateHash([Security.Cryptography.HashAlgorithmName]::SHA256)
 $volumeChanges=[Collections.Generic.List[object]]::new();$mutedPackets=0
-$rebufferStart=-1.0;$rebufferFirstPacket=-1.0;$rebufferResumes=[Collections.Generic.List[object]]::new()
+$rebufferStart=-1.0;$rebufferResumes=[Collections.Generic.List[object]]::new()
 $Shared.Rebuffering=$false;$Shared.RebufferCount=0;$Shared.RebufferResumeCount=0
 try{
     $music=New-DoomMusicPlayback $MusicReports
@@ -24,7 +24,7 @@ try{
             # menu. Clear its device tail, while retaining advanced voice positions.
             $cleared=Reset-DoomWaveOut $device;$cancelled+=$cleared;Set-DoomWaveOutPaused $device $true
             $mixer.Volume=$volume;$devicePaused=$true;$started=$false;$starved=$false
-            $rebufferStart=-1.0;$rebufferFirstPacket=-1.0;$Shared.Rebuffering=$false
+            $rebufferStart=-1.0;$Shared.Rebuffering=$false
             $volumeChanges.Add(@{Volume=$volume;AfterPacket=$lastSequence;WallMs=$watch.Elapsed.TotalMilliseconds;CancelledFramesUpperBound=$cleared})
             $Shared.AppliedVolume=$volume
         }
@@ -32,7 +32,7 @@ try{
             $cancelled+=Reset-DoomWaveOut $device;Set-DoomWaveOutPaused $device $true
             $epoch=$Shared.Epoch;$mixer.Voices.Clear();$mixer.Paused=$false;$devicePaused=$true;$started=$false;$starved=$false;$resets++
             Reset-DoomMusicPlayback $music
-            $rebufferStart=-1.0;$rebufferFirstPacket=-1.0;$Shared.Rebuffering=$false
+            $rebufferStart=-1.0;$Shared.Rebuffering=$false
         }
         if($Shared.Paused){
             if(-not $devicePaused){Set-DoomWaveOutPaused $device $true;$devicePaused=$true;$pauses++}
@@ -61,13 +61,12 @@ try{
             $lastSequence=$packet.Sequence;$packets++;$Shared.LastSequence=$lastSequence
         }
         $queued=@($device.Buffers|Where-Object Queued).Count
-        if($rebufferStart -ge 0 -and $queued -gt 0 -and $rebufferFirstPacket -lt 0){$rebufferFirstPacket=$watch.Elapsed.TotalMilliseconds}
-        $rebufferExpired=$rebufferFirstPacket -ge 0 -and $watch.Elapsed.TotalMilliseconds-$rebufferFirstPacket -ge 100
+        $rebufferExpired=$rebufferStart -ge 0 -and $watch.Elapsed.TotalMilliseconds-$rebufferStart -ge 100
         if($devicePaused -and $queued -gt 0 -and ($started -or $queued -ge 2 -or $rebufferExpired)){
             Set-DoomWaveOutPaused $device $false;$devicePaused=$false;$started=$true
             if($rebufferStart -ge 0){
-                $rebufferResumes.Add(@{AfterPacket=$lastSequence;QueuedBuffers=$queued;WaitMilliseconds=$watch.Elapsed.TotalMilliseconds-$rebufferStart;ReserveWaitMilliseconds=$watch.Elapsed.TotalMilliseconds-$rebufferFirstPacket;Reason=if($queued -ge 2){'TwoPackets'}else{'SinglePacketDeadline'}})
-                $Shared.RebufferResumeCount++;$Shared.Rebuffering=$false;$rebufferStart=-1.0;$rebufferFirstPacket=-1.0
+                $rebufferResumes.Add(@{AfterPacket=$lastSequence;QueuedBuffers=$queued;WaitMilliseconds=$watch.Elapsed.TotalMilliseconds-$rebufferStart;Reason=if($queued -ge 2){'TwoPackets'}else{'SinglePacketDeadline'}})
+                $Shared.RebufferResumeCount++;$Shared.Rebuffering=$false;$rebufferStart=-1.0
             }
         }
         if($started -and $queued -eq 0){
@@ -76,7 +75,7 @@ try{
             # single-packet fallback prevents an end-of-stream tail from waiting
             # forever. No reset, invented samples or discarded packets here.
             Set-DoomWaveOutPaused $device $true;$devicePaused=$true;$started=$false
-            $rebufferStart=$watch.Elapsed.TotalMilliseconds;$rebufferFirstPacket=-1.0;$Shared.Rebuffering=$true;$Shared.RebufferCount++
+            $rebufferStart=$watch.Elapsed.TotalMilliseconds;$Shared.Rebuffering=$true;$Shared.RebufferCount++
         }else{$starved=$false}
         $null=$device.Event.WaitOne(2)
     }

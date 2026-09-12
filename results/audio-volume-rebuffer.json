@@ -1,0 +1,110 @@
+{
+  "ExpectedPcmSha256": "12479E268A496A1EB9EB5960E3AFCB9CA25AC3D1607924B9AD15525F488F6681",
+  "Sources": [
+    {
+      "Path": "src/AudioMixer.ps1",
+      "Sha256": "C8B63D3E491C61F4A1BA85A32ECC5743DF317F5AC0AEB18D4D6D218E05998258"
+    },
+    {
+      "Path": "src/AudioRunspace.ps1",
+      "Sha256": "C88EF8DA24B802FD2ED23AA9DD13B744BA25702CF800E4757606252B0F6BF7BC"
+    },
+    {
+      "Path": "scripts/Invoke-AudioWorker.ps1",
+      "Sha256": "A3933267259B9FD9A7CD47AFD960F660899330A041ECF4B0A3D204BEAF08ADBD"
+    },
+    {
+      "Path": "scripts/Test-AudioVolume.ps1",
+      "Sha256": "6BE6A62FA25C8A23BFA6EA35D8548A448CF9058936BAF4CB9FD2C6AA657D5081"
+    }
+  ],
+  "Checks": [
+    {
+      "Passed": true,
+      "Name": "Device and worker close cleanly"
+    },
+    {
+      "Passed": true,
+      "Name": "Submitted PCM matches independent gain and timeline vector"
+    },
+    {
+      "Passed": true,
+      "Name": "Mute produces three packets without resetting the active voice"
+    },
+    {
+      "Passed": true,
+      "Name": "Gain acknowledgements retain selected quarter volume"
+    }
+  ],
+  "Audio": {
+    "PendingPacket": null,
+    "VolumeChanges": [
+      {
+        "Volume": 0.0,
+        "CancelledFramesUpperBound": 3780,
+        "AfterPacket": 2,
+        "WallMs": 401.5646
+      },
+      {
+        "Volume": 0.25,
+        "CancelledFramesUpperBound": 3780,
+        "AfterPacket": 5,
+        "WallMs": 459.8489
+      }
+    ],
+    "ReturnedCompletedFrames": 0,
+    "QueueStarvationObservations": [],
+    "CancelledQueuedFramesUpperBound": 10080,
+    "FinalVolume": 0.25,
+    "WallSeconds": 0.5372526,
+    "MutedPackets": 3,
+    "PauseTransitions": 0,
+    "RebufferResumes": [],
+    "PcmSha256": "12479E268A496A1EB9EB5960E3AFCB9CA25AC3D1607924B9AD15525F488F6681",
+    "DeviceClosed": true,
+    "StalePacketsDiscarded": 0,
+    "CleanupError": null,
+    "LastSequence": 7,
+    "ClippedSamples": 0,
+    "MixSamplesMs": [
+      38.1086,
+      2.415,
+      2.3581,
+      2.5109,
+      2.3307,
+      2.3814,
+      2.4758,
+      3.2018
+    ],
+    "Music": {
+      "Closed": true,
+      "Reports": {},
+      "Frames": 0,
+      "Transitions": [],
+      "Selected": null,
+      "Gain": 0.2
+    },
+    "SubmittedFrames": 10080,
+    "EpochResets": 0,
+    "RebufferCount": 0,
+    "MaxPacketQueue": 3,
+    "Packets": 8,
+    "MaxVoices": 1,
+    "PacketAgeAtSubmissionMs": [
+      78.4148,
+      78.8175,
+      81.3018,
+      8.7388,
+      11.4179,
+      14.0051,
+      2.8674,
+      6.2411
+    ],
+    "Error": null,
+    "UnconsumedPackets": 0,
+    "RebufferSinglePacketDeadlineMs": 100,
+    "Meaning": "PowerShell runspace mixing and waveOut playback; packet age ends at submission, not audible output. Starvation is queue polling, not hardware telemetry. Reset/exit can cancel queued tail audio; cancelled frame count is an upper bound."
+  },
+  "Meaning": "Independent submitted-PCM vector across full volume, mute and quarter volume in the actual playback runspace. Gain changes can cancel queued tail PCM. No acoustic latency or listening claim.",
+  "Error": null
+}

@@ -1,0 +1,689 @@
+{
+  "Tics": 1747,
+  "MapReloads": [
+    {
+      "Generation": 2,
+      "Tic": 1676,
+      "EndWallMs": 49787.0099,
+      "WorkerPids": [
+        30824,
+        18216,
+        31232,
+        24076,
+        31912,
+        17120,
+        13764,
+        3100,
+        9988,
+        21668,
+        28412,
+        24104,
+        30652,
+        19320,
+        22940,
+        25292
+      ],
+      "Episode": 1,
+      "Map": 2,
+      "StartWallMs": 48804.2962
+    }
+  ],
+  "WallSeconds": 51.8645391,
+  "Error": null,
+  "Snapshots": {
+    "Maximum": 122.3012,
+    "P95": 10.666,
+    "Mean": 6.006280881511158,
+    "Count": 1747
+  },
+  "RebufferResumes": [
+    {
+      "Reason": "TwoPackets",
+      "ReserveWaitMilliseconds": 110.954899999997,
+      "QueuedBuffers": 4,
+      "WaitMilliseconds": 147.41279999999824,
+      "AfterPacket": 1562
+    },
+    {
+      "Reason": "TwoPackets",
+      "ReserveWaitMilliseconds": 16.153200000000652,
+      "QueuedBuffers": 2,
+      "WaitMilliseconds": 29.851599999994505,
+      "AfterPacket": 1739
+    }
+  ],
+  "StarvationWindows": [
+    {
+      "AfterPacket": 1558,
+      "AfterFinalPacket": false,
+      "Samples": [
+        {
+          "PacketBuildMs": 0.2817,
+          "PacketSubmissionAgeMs": 98.6935,
+          "SnapshotMs": 4.1565,
+          "TickStartLatenessMs": 3.9445714285757276,
+          "SimulationMs": 6.5791,
+          "AudioMixMs": 4.7615,
+          "Sequence": 1554
+        },
+        {
+          "PacketBuildMs": 0.2798,
+          "PacketSubmissionAgeMs": 100.0424,
+          "SnapshotMs": 4.002,
+          "TickStartLatenessMs": 2.877342857143958,
+          "SimulationMs": 6.8204,
+          "AudioMixMs": 4.6959,
+          "Sequence": 1555
+        },
+        {
+          "PacketBuildMs": 0.2401,
+          "PacketSubmissionAgeMs": 101.0759,
+          "SnapshotMs": 3.8941,
+          "TickStartLatenessMs": 5.784114285714168,
+          "SimulationMs": 5.6949,
+          "AudioMixMs": 4.6823,
+          "Sequence": 1556
+        },
+        {
+          "PacketBuildMs": 0.2949,
+          "PacketSubmissionAgeMs": 94.6004,
+          "SnapshotMs": 4.5144,
+          "TickStartLatenessMs": 2.9566857142854133,
+          "SimulationMs": 5.1137,
+          "AudioMixMs": 4.6871,
+          "Sequence": 1557
+        },
+        {
+          "PacketBuildMs": 0.348,
+          "PacketSubmissionAgeMs": 100.2488,
+          "SnapshotMs": 4.5362,
+          "TickStartLatenessMs": 2.2976571428516763,
+          "SimulationMs": 6.5442,
+          "AudioMixMs": 8.5482,
+          "Sequence": 1558
+        },
+        {
+          "PacketBuildMs": 0.3516,
+          "PacketSubmissionAgeMs": 10.2365,
+          "SnapshotMs": 122.3012,
+          "TickStartLatenessMs": 4.310428571428929,
+          "SimulationMs": 89.6492,
+          "AudioMixMs": 6.755,
+          "Sequence": 1559
+        },
+        {
+          "PacketBuildMs": 0.3735,
+          "PacketSubmissionAgeMs": 37.2364,
+          "SnapshotMs": 16.2295,
+          "TickStartLatenessMs": 194.59449999999924,
+          "SimulationMs": 17.9391,
+          "AudioMixMs": 21.6642,
+          "Sequence": 1560
+        },
+        {
+          "PacketBuildMs": 0.4157,
+          "PacketSubmissionAgeMs": 32.7487,
+          "SnapshotMs": 26.9521,
+          "TickStartLatenessMs": 200.7846714285697,
+          "SimulationMs": 2.7087,
+          "AudioMixMs": 25.3093,
+          "Sequence": 1561
+        },
+        {
+          "PacketBuildMs": 0.6947,
+          "PacketSubmissionAgeMs": 28.9396,
+          "SnapshotMs": 25.9192,
+          "TickStartLatenessMs": 202.50554285714315,
+          "SimulationMs": 0.1885,
+          "AudioMixMs": 22.7754,
+          "Sequence": 1562
+        },
+        {
+          "PacketBuildMs": 0.3859,
+          "PacketSubmissionAgeMs": 71.9445,
+          "SnapshotMs": 24.9409,
+          "TickStartLatenessMs": 200.9834142857144,
+          "SimulationMs": 0.2621,
+          "AudioMixMs": 26.6231,
+          "Sequence": 1563
+        },
+        {
+          "PacketBuildMs": 0.3366,
+          "PacketSubmissionAgeMs": 72.2454,
+          "SnapshotMs": 20.1474,
+          "TickStartLatenessMs": 198.19758571428247,
+          "SimulationMs": 0.2002,
+          "AudioMixMs": 17.2165,
+          "Sequence": 1564
+        },
+        {
+          "PacketBuildMs": 0.3381,
+          "PacketSubmissionAgeMs": 90.5831,
+          "SnapshotMs": 17.8643,
+          "TickStartLatenessMs": 190.48635714285774,
+          "SimulationMs": 0.1399,
+          "AudioMixMs": 24.2016,
+          "Sequence": 1565
+        },
+        {
+          "PacketBuildMs": 0.4014,
+          "PacketSubmissionAgeMs": 91.7077,
+          "SnapshotMs": 22.5725,
+          "TickStartLatenessMs": 180.42902857143054,
+          "SimulationMs": 0.1443,
+          "AudioMixMs": 18.6317,
+          "Sequence": 1566
+        },
+        {
+          "PacketBuildMs": 0.3729,
+          "PacketSubmissionAgeMs": 100.2052,
+          "SnapshotMs": 19.92,
+          "TickStartLatenessMs": 175.16649999999936,
+          "SimulationMs": 0.1692,
+          "AudioMixMs": 16.3581,
+          "Sequence": 1567
+        },
+        {
+          "PacketBuildMs": 0.3998,
+          "PacketSubmissionAgeMs": 98.1416,
+          "SnapshotMs": 26.0917,
+          "TickStartLatenessMs": 167.25417142856895,
+          "SimulationMs": 0.1797,
+          "AudioMixMs": 12.6461,
+          "Sequence": 1568
+        }
+      ],
+      "AudioWorkerWallMs": 62356.644
+    },
+    {
+      "AfterPacket": 1674,
+      "AfterFinalPacket": false,
+      "Samples": [
+        {
+          "PacketBuildMs": 0.1366,
+          "PacketSubmissionAgeMs": 262.0211,
+          "SnapshotMs": 9.6589,
+          "TickStartLatenessMs": 3.628357142857567,
+          "SimulationMs": 0.1367,
+          "AudioMixMs": 0.4804,
+          "Sequence": 1670
+        },
+        {
+          "PacketBuildMs": 0.1319,
+          "PacketSubmissionAgeMs": 260.3703,
+          "SnapshotMs": 9.4584,
+          "TickStartLatenessMs": 6.983328571426682,
+          "SimulationMs": 0.1291,
+          "AudioMixMs": 0.4966,
+          "Sequence": 1671
+        },
+        {
+          "PacketBuildMs": 0.1301,
+          "PacketSubmissionAgeMs": 266.0028,
+          "SnapshotMs": 9.5369,
+          "TickStartLatenessMs": 2.573499999998603,
+          "SimulationMs": 0.139,
+          "AudioMixMs": 0.4858,
+          "Sequence": 1672
+        },
+        {
+          "PacketBuildMs": 0.1384,
+          "PacketSubmissionAgeMs": 260.6648,
+          "SnapshotMs": 10.4751,
+          "TickStartLatenessMs": 8.436871428573795,
+          "SimulationMs": 0.1359,
+          "AudioMixMs": 0.5078,
+          "Sequence": 1673
+        },
+        {
+          "PacketBuildMs": 0.1286,
+          "PacketSubmissionAgeMs": 243.1004,
+          "SnapshotMs": 9.7054,
+          "TickStartLatenessMs": 18.189842857143958,
+          "SimulationMs": 0.1397,
+          "AudioMixMs": 0.4788,
+          "Sequence": 1674
+        },
+        {
+          "PacketBuildMs": 0.1746,
+          "PacketSubmissionAgeMs": 8.1154,
+          "SnapshotMs": 8.9224,
+          "TickStartLatenessMs": 2.422214285717928,
+          "SimulationMs": 904.7925,
+          "AudioMixMs": 0.8343,
+          "Sequence": 1675
+        },
+        {
+          "PacketBuildMs": 0.1328,
+          "PacketSubmissionAgeMs": 15.3407,
+          "SnapshotMs": 10.3955,
+          "TickStartLatenessMs": 891.5254857142791,
+          "SimulationMs": 3.5932,
+          "AudioMixMs": 1.3616,
+          "Sequence": 1676
+        },
+        {
+          "PacketBuildMs": 0.1472,
+          "PacketSubmissionAgeMs": 6.2613,
+          "SnapshotMs": 7.9648,
+          "TickStartLatenessMs": 887.6153571428586,
+          "SimulationMs": 4.0375,
+          "AudioMixMs": 0.497,
+          "Sequence": 1677
+        },
+        {
+          "PacketBuildMs": 0.1178,
+          "PacketSubmissionAgeMs": 12.7712,
+          "SnapshotMs": 7.7091,
+          "TickStartLatenessMs": 882.7716285714268,
+          "SimulationMs": 7.1187,
+          "AudioMixMs": 0.6255,
+          "Sequence": 1678
+        },
+        {
+          "PacketBuildMs": 0.1209,
+          "PacketSubmissionAgeMs": 5.7811,
+          "SnapshotMs": 7.7688,
+          "TickStartLatenessMs": 879.6679000000004,
+          "SimulationMs": 2.8036,
+          "AudioMixMs": 0.5851,
+          "Sequence": 1679
+        },
+        {
+          "PacketBuildMs": 0.1272,
+          "PacketSubmissionAgeMs": 10.5603,
+          "SnapshotMs": 8.872,
+          "TickStartLatenessMs": 873.8299714285749,
+          "SimulationMs": 9.5657,
+          "AudioMixMs": 0.5004,
+          "Sequence": 1680
+        },
+        {
+          "PacketBuildMs": 0.1332,
+          "PacketSubmissionAgeMs": 13.9126,
+          "SnapshotMs": 8.8072,
+          "TickStartLatenessMs": 873.5321428571478,
+          "SimulationMs": 6.7116,
+          "AudioMixMs": 0.5875,
+          "Sequence": 1681
+        },
+        {
+          "PacketBuildMs": 0.1388,
+          "PacketSubmissionAgeMs": 3.4451,
+          "SnapshotMs": 9.1515,
+          "TickStartLatenessMs": 871.32161428572,
+          "SimulationMs": 3.8862,
+          "AudioMixMs": 0.5897,
+          "Sequence": 1682
+        },
+        {
+          "PacketBuildMs": 0.1592,
+          "PacketSubmissionAgeMs": 7.1606,
+          "SnapshotMs": 11.3676,
+          "TickStartLatenessMs": 866.9483857142841,
+          "SimulationMs": 4.6009,
+          "AudioMixMs": 0.602,
+          "Sequence": 1683
+        },
+        {
+          "PacketBuildMs": 0.1651,
+          "PacketSubmissionAgeMs": 6.2764,
+          "SnapshotMs": 23.4386,
+          "TickStartLatenessMs": 864.6882571428578,
+          "SimulationMs": 12.4622,
+          "AudioMixMs": 0.5737,
+          "Sequence": 1684
+        }
+      ],
+      "AudioWorkerWallMs": 65826.695
+    },
+    {
+      "AfterPacket": 1737,
+      "AfterFinalPacket": false,
+      "Samples": [
+        {
+          "PacketBuildMs": 0.1491,
+          "PacketSubmissionAgeMs": 16.4667,
+          "SnapshotMs": 8.687,
+          "TickStartLatenessMs": 861.6277571428582,
+          "SimulationMs": 4.4261,
+          "AudioMixMs": 0.5802,
+          "Sequence": 1733
+        },
+        {
+          "PacketBuildMs": 0.1601,
+          "PacketSubmissionAgeMs": 6.0185,
+          "SnapshotMs": 8.0627,
+          "TickStartLatenessMs": 856.802728571427,
+          "SimulationMs": 9.9548,
+          "AudioMixMs": 0.5822,
+          "Sequence": 1734
+        },
+        {
+          "PacketBuildMs": 0.1271,
+          "PacketSubmissionAgeMs": 3.1014,
+          "SnapshotMs": 7.9765,
+          "TickStartLatenessMs": 858.8206999999966,
+          "SimulationMs": 14.3179,
+          "AudioMixMs": 0.7008,
+          "Sequence": 1735
+        },
+        {
+          "PacketBuildMs": 0.1578,
+          "PacketSubmissionAgeMs": 4.6921,
+          "SnapshotMs": 8.2093,
+          "TickStartLatenessMs": 863.211671428573,
+          "SimulationMs": 9.7713,
+          "AudioMixMs": 0.4926,
+          "Sequence": 1736
+        },
+        {
+          "PacketBuildMs": 0.158,
+          "PacketSubmissionAgeMs": 4.5578,
+          "SnapshotMs": 13.3165,
+          "TickStartLatenessMs": 863.4896428571446,
+          "SimulationMs": 5.5024,
+          "AudioMixMs": 0.5273,
+          "Sequence": 1737
+        },
+        {
+          "PacketBuildMs": 0.1327,
+          "PacketSubmissionAgeMs": 13.0287,
+          "SnapshotMs": 36.2215,
+          "TickStartLatenessMs": 864.3652142857172,
+          "SimulationMs": 8.5889,
+          "AudioMixMs": 0.8077,
+          "Sequence": 1738
+        },
+        {
+          "PacketBuildMs": 0.1248,
+          "PacketSubmissionAgeMs": 4.1693,
+          "SnapshotMs": 8.2636,
+          "TickStartLatenessMs": 940.3078857142827,
+          "SimulationMs": 5.4384,
+          "AudioMixMs": 1.195,
+          "Sequence": 1739
+        },
+        {
+          "PacketBuildMs": 0.1375,
+          "PacketSubmissionAgeMs": 6.7465,
+          "SnapshotMs": 7.8025,
+          "TickStartLatenessMs": 936.6647571428548,
+          "SimulationMs": 10.1822,
+          "AudioMixMs": 0.5682,
+          "Sequence": 1740
+        },
+        {
+          "PacketBuildMs": 0.1374,
+          "PacketSubmissionAgeMs": 11.1166,
+          "SnapshotMs": 9.3873,
+          "TickStartLatenessMs": 936.5888285714245,
+          "SimulationMs": 7.3456,
+          "AudioMixMs": 0.4783,
+          "Sequence": 1741
+        },
+        {
+          "PacketBuildMs": 0.1339,
+          "PacketSubmissionAgeMs": 4.1075,
+          "SnapshotMs": 7.9963,
+          "TickStartLatenessMs": 935.1642999999967,
+          "SimulationMs": 4.1726,
+          "AudioMixMs": 0.4834,
+          "Sequence": 1742
+        },
+        {
+          "PacketBuildMs": 0.1222,
+          "PacketSubmissionAgeMs": 12.2553,
+          "SnapshotMs": 7.989,
+          "TickStartLatenessMs": 929.3796714285709,
+          "SimulationMs": 4.3062,
+          "AudioMixMs": 0.5788,
+          "Sequence": 1743
+        },
+        {
+          "PacketBuildMs": 0.1593,
+          "PacketSubmissionAgeMs": 12.1291,
+          "SnapshotMs": 10.0395,
+          "TickStartLatenessMs": 923.7808428571443,
+          "SimulationMs": 10.7298,
+          "AudioMixMs": 0.5454,
+          "Sequence": 1744
+        },
+        {
+          "PacketBuildMs": 0.1437,
+          "PacketSubmissionAgeMs": 7.6854,
+          "SnapshotMs": 7.8563,
+          "TickStartLatenessMs": 927.4962142857185,
+          "SimulationMs": 14.5486,
+          "AudioMixMs": 0.5746,
+          "Sequence": 1745
+        },
+        {
+          "PacketBuildMs": 0.1286,
+          "PacketSubmissionAgeMs": 2.4315,
+          "SnapshotMs": 9.5265,
+          "TickStartLatenessMs": 932.8263857142811,
+          "SimulationMs": 10.8431,
+          "AudioMixMs": 0.4648,
+          "Sequence": 1746
+        }
+      ],
+      "AudioWorkerWallMs": 69226.7476
+    },
+    {
+      "AfterPacket": 1746,
+      "AfterFinalPacket": true,
+      "Samples": [
+        {
+          "PacketBuildMs": 0.1339,
+          "PacketSubmissionAgeMs": 4.1075,
+          "SnapshotMs": 7.9963,
+          "TickStartLatenessMs": 935.1642999999967,
+          "SimulationMs": 4.1726,
+          "AudioMixMs": 0.4834,
+          "Sequence": 1742
+        },
+        {
+          "PacketBuildMs": 0.1222,
+          "PacketSubmissionAgeMs": 12.2553,
+          "SnapshotMs": 7.989,
+          "TickStartLatenessMs": 929.3796714285709,
+          "SimulationMs": 4.3062,
+          "AudioMixMs": 0.5788,
+          "Sequence": 1743
+        },
+        {
+          "PacketBuildMs": 0.1593,
+          "PacketSubmissionAgeMs": 12.1291,
+          "SnapshotMs": 10.0395,
+          "TickStartLatenessMs": 923.7808428571443,
+          "SimulationMs": 10.7298,
+          "AudioMixMs": 0.5454,
+          "Sequence": 1744
+        },
+        {
+          "PacketBuildMs": 0.1437,
+          "PacketSubmissionAgeMs": 7.6854,
+          "SnapshotMs": 7.8563,
+          "TickStartLatenessMs": 927.4962142857185,
+          "SimulationMs": 14.5486,
+          "AudioMixMs": 0.5746,
+          "Sequence": 1745
+        },
+        {
+          "PacketBuildMs": 0.1286,
+          "PacketSubmissionAgeMs": 2.4315,
+          "SnapshotMs": 9.5265,
+          "TickStartLatenessMs": 932.8263857142811,
+          "SimulationMs": 10.8431,
+          "AudioMixMs": 0.4648,
+          "Sequence": 1746
+        }
+      ],
+      "AudioWorkerWallMs": 69526.6083
+    }
+  ],
+  "ActiveStarves": 3,
+  "CancelledFramesUpperBound": 0,
+  "GameReportSha256": "7F2A08A4B4A40796C25FF8906C6FA1AE364E55C4440A170C6DCB3CC49B4A8637",
+  "Simulation": {
+    "Maximum": 904.7925,
+    "P95": 15.769,
+    "Mean": 7.031608986834577,
+    "Count": 1747
+  },
+  "MusicTransitions": [
+    {
+      "AfterFrames": 0,
+      "Loop": true,
+      "Track": "D_E1M1",
+      "Kind": "Start"
+    },
+    {
+      "AfterFrames": 1965600,
+      "Loop": true,
+      "Track": "D_INTER",
+      "Kind": "Start"
+    },
+    {
+      "AfterFrames": 2110500,
+      "Kind": "EpochReset"
+    },
+    {
+      "AfterFrames": 2110500,
+      "Loop": true,
+      "Track": "D_E1M2",
+      "Kind": "Start"
+    }
+  ],
+  "SubmittedFrames": 2201220,
+  "GameReport": "C:\\projects\\pwshDoom\\local\\recordings\\music-route-rebuffer-fixed-game.json",
+  "Meaning": "Sequence-aligned retained route measurements after asserting all six arrays and audio packet counts equal consumed commands. Starvation polling is not hardware telemetry. Tick-start lateness and submission age have different origins; no sum is presented as acoustic latency. Map/UI transitions and initial work remain in their recorded timing windows.",
+  "ReturnedFrames": 2201220,
+  "ActiveSeconds": 50.8818883,
+  "CheckpointMatches": 8,
+  "SourceSha256": "100C9486AE1251B1568C2CBAC0340941A850BB05DF05628E12610E65EDD6784A",
+  "SubmissionAge": {
+    "Maximum": 276.1271,
+    "P95": 163.8096,
+    "Mean": 93.71620440755571,
+    "Count": 1747
+  },
+  "AudioMix": {
+    "Maximum": 43.5897,
+    "P95": 12.4742,
+    "Mean": 3.672551745850031,
+    "Count": 1747
+  },
+  "Writes": 3023,
+  "Transitions": [
+    {
+      "Kills": 0,
+      "Armor": 0,
+      "DidSecret": false,
+      "Keys": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "Episode": 1,
+      "Weapons": [
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "Generation": 1,
+      "State": "Level",
+      "Tic": 0,
+      "Map": 1,
+      "Health": 100,
+      "Ammo": [
+        50,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "Kills": 5,
+      "Armor": 0,
+      "DidSecret": false,
+      "Keys": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "Episode": 1,
+      "Weapons": [
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "Generation": 1,
+      "State": "Intermission",
+      "Tic": 1560,
+      "Map": 1,
+      "Health": 75,
+      "Ammo": [
+        37,
+        4,
+        0,
+        0
+      ]
+    },
+    {
+      "Kills": 0,
+      "Armor": 0,
+      "DidSecret": false,
+      "Keys": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "Episode": 1,
+      "Weapons": [
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "Generation": 2,
+      "State": "Level",
+      "Tic": 1676,
+      "Map": 2,
+      "Health": 75,
+      "Ammo": [
+        37,
+        4,
+        0,
+        0
+      ]
+    }
+  ]
+}
