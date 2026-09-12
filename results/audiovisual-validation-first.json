@@ -1,0 +1,130 @@
+{
+  "Checks": [
+    {
+      "Passed": true,
+      "Name": "Relevant current targeted checks pass"
+    },
+    {
+      "Passed": true,
+      "Name": "Targeted source is current: src/CaptureTimeline.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Targeted source is current: src/CaptureClock.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Targeted source is current: scripts/Test-CaptureTimeline.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Relevant current targeted checks pass"
+    },
+    {
+      "Passed": true,
+      "Name": "Targeted source is current: src/ProcessAudioCapture.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Targeted source is current: scripts/Record-ProcessAudio.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Targeted source is current: scripts/Invoke-CaptureTestTone.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Targeted source is current: scripts/Test-ProcessAudioCapture.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Relevant current targeted checks pass"
+    },
+    {
+      "Passed": true,
+      "Name": "Targeted source is current: src/MusicLoopReader.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Targeted source is current: src/AudioMixer.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Targeted source is current: scripts/Test-MusicTrackQualification.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Documented recorder recipe completed on fresh source tree"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix post-processing failure remains explicit before successful recovery"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix game and actual audio device close with all tics/frames"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix capture targets a newly created game window"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix audio captures the owned simulation PID"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix runtime recorder binary is retained unchanged"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix original WGC QPC is the audio placement origin"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix merge preserves complete compressed video and packet clocks"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix raw and placed PCM files match recorded hashes"
+    }
+  ],
+  "SourceSha256": "15EA30C8C0BCEABA43CACB5B4735E8F2AE5325A7966A40F1CA532F91522FF91C",
+  "Meaning": "Three actual eight-second WGC/music/effects game recordings, original QPC origin, independent entire PCM timestamp placement, video packet-preservation checks and complete media decode. Sampled visual review is separately documented. Recorded workloads overlap synthesis and are not clean performance trials, acoustic measurements or campaign completion.",
+  "Error": "The property '5' cannot be found on this object. Verify that the property exists.\nat <ScriptBlock>, C:\\projects\\pwshDoom\\scripts\\Test-AudiovisualEvidence.ps1: line 32",
+  "Runs": [],
+  "Receipts": [
+    {
+      "Sha256": "B2B51B72C7F009EE2E32A768C9CEBF5B2308CB6EFABC47FFC68CB1E8FE4253C9",
+      "Path": "results/capture-timeline-unit-first.json"
+    },
+    {
+      "Sha256": "9415E3E179F54420B4B9547D9305F35F3091548F33EE2CCFF863008EA2501E4C",
+      "Path": "results/process-audio-capture-clock.json"
+    },
+    {
+      "Sha256": "066ED84046C90A7BD9A4986D0E676399BDC8EF9C0FD34EE714AB3162F643224C",
+      "Path": "results/music-e1m2-reader-first.json"
+    },
+    {
+      "Sha256": "7929FE3D789DF807E97C232D3AF69AE9DCECB9170C5915490AD0001EF917B09A",
+      "Path": "results/capture-recorder-recipe-first.json"
+    },
+    {
+      "Sha256": "BC7BAB44641906284183171935A8236CE4304C9B058DB8D65B0CED756FCFC9E4",
+      "Path": "local/recordings/music-matrix-wgc-first-game.json"
+    },
+    {
+      "Sha256": "508744D22E874936252F02C0B1D8E705FB6A5465C949A41E27A42216B55B2D2C",
+      "Path": "local/recordings/music-matrix-wgc-first-recording.json"
+    },
+    {
+      "Sha256": "D30925F285F0BA42BC9FEB076FA6A5340650C0AF8185C53FBB0C9F91E7598755",
+      "Path": "local/recordings/music-matrix-wgc-first-audio.json"
+    },
+    {
+      "Sha256": "CB1514F6D959759673F8F3D649F17E7379FD65E61FFE7BF7C02FEDE71DB8AE89",
+      "Path": "local/recordings/music-matrix-wgc-merged.json"
+    }
+  ]
+}

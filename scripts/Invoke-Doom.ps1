@@ -7,9 +7,10 @@ param([Parameter(Mandatory)][string]$Wad,[ValidateRange(1,32)][int]$Workers=16,
     [ValidateRange(1,4)][int]$Episode=1,[ValidateRange(1,32)][int]$Map=1,
     [ValidateSet('Classic','AnsiArt','Matrix')][string]$Style='Classic',
     [ValidateSet('Ascii','Katakana')][string]$GlyphSet='Katakana',
-    [string]$Report="$PSScriptRoot/../local/game-session.json",[string]$ReadyFile,[string]$SaveRoot,[string]$SettingsPath,
+    [string]$Report="$PSScriptRoot/../local/game-session.json",[string]$ReadyFile,[string]$CaptureStartFile,[string]$SaveRoot,[string]$SettingsPath,
     [switch]$Diagnostics,[string]$ViewportSchedule,[string]$SessionSchedule,[ValidateRange(0,30)][int]$ExitDelaySeconds=0)
 $ErrorActionPreference='Stop'
+if($CaptureStartFile -and (-not $ReadyFile -or (Test-Path -LiteralPath $CaptureStartFile))){throw 'Capture startup gate requires a readiness destination and a fresh start-file path.'}
 if($MusicCatalog){$Sound=$true}
 . "$PSScriptRoot/FrameCodec.ps1";. "$PSScriptRoot/../src/GameProcesses.ps1"
 . "$PSScriptRoot/../src/SimulationProcess.ps1";. "$PSScriptRoot/../src/ConsoleInput.ps1"
@@ -118,8 +119,19 @@ try {
     Initialize-DoomConsoleApi;$timerRequested=[PwshDoomPlatform.ConsoleApi]::timeBeginPeriod(1) -eq 0
     $stdout=[Console]::OpenStandardOutput();$frameStart=[Text.Encoding]::UTF8.GetBytes("$esc[?2026h");$frameEnd=[Text.Encoding]::UTF8.GetBytes("$esc[0m$esc[?2026l")
     $cmd=[HostInputCommand]::new();$inFlight=$false;$nextPresentation=0.0;$activeFrame=$null;$pendingFrame=$null
+    if($ReadyFile){
+        $readyJson=@{HostPid=$PID;SimulationPid=$simulation.Process.Id;WorkerPids=@($pool.Workers.Process.Id);Assets=$simulation.Assets;CaptureGate=[bool]$CaptureStartFile}|ConvertTo-Json
+        $readyTemporary=$ReadyFile+".$PID.tmp";[IO.File]::WriteAllText($readyTemporary,$readyJson);[IO.File]::Move($readyTemporary,$ReadyFile,$true)
+    }
+    if($CaptureStartFile){
+        $captureWait=[Diagnostics.Stopwatch]::StartNew()
+        while(-not (Test-Path -LiteralPath $CaptureStartFile)){
+            if($captureWait.Elapsed.TotalSeconds -gt 30){throw 'Capture startup gate timed out before simulation started.'}
+            if($simulation.Process.HasExited){throw 'Simulation exited while awaiting capture startup.'}
+            [Threading.Thread]::Sleep(10)
+        }
+    }
     $startQpc=[Diagnostics.Stopwatch]::GetTimestamp();$simulation.View.Write(40,[long]$startQpc);$clock.Start();$wallClock.Start();$lastViewportCheck=-100.0;$exitReason='Quit'
-    if($ReadyFile){@{HostPid=$PID;SimulationPid=$simulation.Process.Id;WorkerPids=@($pool.Workers.Process.Id);Assets=$simulation.Assets} | ConvertTo-Json | Set-Content -LiteralPath $ReadyFile}
     while($true) {
         $wallNow=$wallClock.Elapsed.TotalMilliseconds;$status=$simulation.View.ReadInt32(12)
         if($status -eq 3){throw 'Simulation failed; see the simulation error in the session report.'}

@@ -1,6 +1,6 @@
 # Game-process audio capture
 
-`src/ProcessAudioCapture.ps1` and `scripts/Record-ProcessAudio.ps1` now record a selected Windows process tree through WASAPI into stereo PCM16 WAV at 44.1 kHz. This is external recording instrumentation; the game does not load it. The first ten-check scope test passes on this machine, Windows build 26200 and PowerShell 7.6.5. Video/audio synchronization and actual game-load capture remain to be integrated and qualified. Existing game movies are still silent.
+`src/ProcessAudioCapture.ps1` and `scripts/Record-ProcessAudio.ps1` record a selected Windows process tree through WASAPI into stereo PCM16 WAV at 44.1 kHz. This is external recording instrumentation; the game does not load it. The first ten-check scope test passes on this machine, Windows build 26200 and PowerShell 7.6.5. Subsequent [audiovisual integration](audiovisual-recording.md) now records all three game styles with the original WGC QPC clock and explicit PCM placement. Earlier silent movies and the historical continuity failure remain labeled separately.
 
 ## Boundary and sources
 
@@ -33,4 +33,6 @@ From the repository root, in PowerShell 7:
 ./scripts/Record-ProcessAudio.ps1 -TargetProcessId 12345 -Seconds 10 -OutputPrefix local/recordings/new-audio
 ```
 
-Replace the example PID with the actual owned sound-producing process. The first command creates its own finite processes and assets; it does not need game WADs. Raw audio remains under ignored `local/`. Next connect the recorder to the simulation readiness handshake, establish video timestamp alignment, then record finite gameplay with music and effects. An audio-enabled movie must not be claimed before that integration and its checks pass.
+Replace the example PID with the actual owned sound-producing process. The first command creates its own finite processes and assets; it does not need game WADs. Raw audio remains under ignored `local/`.
+
+The subsequent [audiovisual integration](audiovisual-recording.md) now connects the simulation readiness handshake and original WGC QPC clock. All three visual modes have finite gameplay movies with scoped music/effects audio. Thirteen timeline tests and 88 integrated evidence checks verify explicit gap handling, unchanged captured samples, process ownership and video packet preservation. The historical packet-concatenation continuity failure above remains valid; the new movie uses a separate explicitly placed timeline, not that raw concatenation.

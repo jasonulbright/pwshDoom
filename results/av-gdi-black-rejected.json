@@ -1,0 +1,104 @@
+{
+  "VideoInfo": {
+    "streams": [
+      {
+        "index": 0,
+        "codec_name": "h264",
+        "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+        "profile": "High",
+        "codec_type": "video",
+        "codec_tag_string": "avc1",
+        "codec_tag": "0x31637661",
+        "mime_codec_string": "avc1.64002a",
+        "width": 1473,
+        "height": 1007,
+        "coded_width": 1473,
+        "coded_height": 1007,
+        "has_b_frames": 2,
+        "sample_aspect_ratio": "1:1",
+        "display_aspect_ratio": "1473:1007",
+        "pix_fmt": "yuv420p",
+        "level": 42,
+        "chroma_location": "left",
+        "field_order": "progressive",
+        "is_avc": "true",
+        "nal_length_size": "4",
+        "id": "0x1",
+        "r_frame_rate": "60/1",
+        "avg_frame_rate": "60/1",
+        "time_base": "1/15360",
+        "start_pts": 0,
+        "start_time": "0.000000",
+        "duration_ts": 657654,
+        "duration": "42.816016",
+        "bit_rate": "32135",
+        "bits_per_raw_sample": "8",
+        "nb_frames": "2569",
+        "extradata_size": 60,
+        "disposition": {
+          "default": 1,
+          "dub": 0,
+          "original": 0,
+          "comment": 0,
+          "lyrics": 0,
+          "karaoke": 0,
+          "forced": 0,
+          "hearing_impaired": 0,
+          "visual_impaired": 0,
+          "clean_effects": 0,
+          "attached_pic": 0,
+          "timed_thumbnails": 0,
+          "non_diegetic": 0,
+          "captions": 0,
+          "descriptions": 0,
+          "metadata": 0,
+          "dependent": 0,
+          "still_image": 0,
+          "multilayer": 0
+        },
+        "tags": {
+          "language": "und",
+          "handler_name": "VideoHandler",
+          "encoder": "Lavc63.1.101 h264_nvenc"
+        }
+      }
+    ]
+  },
+  "TimelineWav": "C:\\projects\\pwshDoom\\local\\recordings\\music-matrix-av-black-rejected.wav",
+  "OriginalVideoSha256": "6810BD46A2800AC517BB0053578E65139B8CF4C50A854F8DC23530FF411458A4",
+  "Validation": null,
+  "Sources": [
+    {
+      "Sha256": "CED03D531F7C129D9E079F1F3B548DD436EFD81782974A3752D4689FA3E45DFB",
+      "Path": "src/CaptureClock.ps1"
+    },
+    {
+      "Sha256": "EFA64468F234327E5D7682CE08FF5B8863EEEFC5D5B082DB9B74BE544D092E21",
+      "Path": "src/CaptureTimeline.ps1"
+    },
+    {
+      "Sha256": "87FE1BC7D858C8F6333C0ADC0330A30230928F29BD4F6744C2F033D7158E6FCB",
+      "Path": "scripts/Merge-DoomCaptureAudio.ps1"
+    }
+  ],
+  "CaptureBackend": "Gdi",
+  "TimelineWavSha256": null,
+  "Video": "C:\\projects\\pwshDoom\\local\\recordings\\music-matrix-av-black-rejected.mp4",
+  "BlackIntervals": [
+    {
+      "End": 42.8,
+      "Start": 0.0,
+      "Seconds": 42.8
+    }
+  ],
+  "MuxExitCode": null,
+  "Clock": null,
+  "VideoSha256": null,
+  "VideoLogSha256": "6F78338F9A918021C5B32C458B501ECC044C34C4F313957AA79D93785C9C2AE2",
+  "Error": "Captured video is over 99 percent black; audiovisual gameplay capture is rejected.\nat <ScriptBlock>, C:\\projects\\pwshDoom\\scripts\\Merge-DoomCaptureAudio.ps1: line 31",
+  "Meaning": "Video original timestamp aligned to scoped digital PCM: WGC uses retained 100 ns QPC directly; GDI uses bracketed UTC/QPC anchors. Packet gaps are explicitly zero-filled and raw inputs retained. AAC is an external recording codec. All video packet bytes and PTS/DTS are checked, with container final-duration metadata differences retained. Visual quality and physical A/V latency require separate review.",
+  "OriginalVideoTimestamp": 1789214674016668.0,
+  "AudioReportSha256": "C7549CBBF4CE32FBF500B36D9FD9F465EC233725A24B69E671F93C8FD4E347D5",
+  "ClockReportSha256": "528D08285B3C1C9A857BD2DA34DB3D025641C9A5708D484604FD18301E3952E9",
+  "Timeline": null
+}

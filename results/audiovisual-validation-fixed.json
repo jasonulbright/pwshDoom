@@ -1,0 +1,866 @@
+{
+  "Checks": [
+    {
+      "Passed": true,
+      "Name": "Relevant current targeted checks pass"
+    },
+    {
+      "Passed": true,
+      "Name": "Targeted source is current: src/CaptureTimeline.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Targeted source is current: src/CaptureClock.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Targeted source is current: scripts/Test-CaptureTimeline.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Relevant current targeted checks pass"
+    },
+    {
+      "Passed": true,
+      "Name": "Targeted source is current: src/ProcessAudioCapture.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Targeted source is current: scripts/Record-ProcessAudio.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Targeted source is current: scripts/Invoke-CaptureTestTone.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Targeted source is current: scripts/Test-ProcessAudioCapture.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Relevant current targeted checks pass"
+    },
+    {
+      "Passed": true,
+      "Name": "Targeted source is current: src/MusicLoopReader.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Targeted source is current: src/AudioMixer.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Targeted source is current: scripts/Test-MusicTrackQualification.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Documented recorder recipe completed on fresh source tree"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix post-processing failure remains explicit before successful recovery"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix game and actual audio device close with all tics/frames"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix capture targets a newly created game window"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix audio captures the owned simulation PID"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix runtime recorder binary is retained unchanged"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix original WGC QPC is the audio placement origin"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix merge preserves complete compressed video and packet clocks"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix raw and placed PCM files match recorded hashes"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix entire placed PCM equals independent QPC-derived sample mapping"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix explicit zero-filled gaps stay outside observed gameplay interval"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix observed gameplay has captured nonzero PCM"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix full movie decodes audio and video"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix six-second viewing copy decodes"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix viewing copy contains picture and audio streams"
+    },
+    {
+      "Passed": true,
+      "Name": "Portable raw receipt is byte-identical to local original"
+    },
+    {
+      "Passed": true,
+      "Name": "Portable raw receipt is byte-identical to local original"
+    },
+    {
+      "Passed": true,
+      "Name": "Portable raw receipt is byte-identical to local original"
+    },
+    {
+      "Passed": true,
+      "Name": "Portable raw receipt is byte-identical to local original"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt recorder reports delivered audiovisual output without source drift"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt capture source current: Start-Doom.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt capture source current: scripts/Invoke-Doom.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt capture source current: scripts/Record-DoomReplay.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt capture source current: scripts/Record-ProcessAudio.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt capture source current: scripts/Merge-DoomCaptureAudio.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt capture source current: src/ProcessAudioCapture.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt capture source current: src/CaptureClock.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt capture source current: src/CaptureTimeline.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt game and actual audio device close with all tics/frames"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt capture targets a newly created game window"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt audio captures the owned simulation PID"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt runtime recorder binary is retained unchanged"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt original WGC QPC is the audio placement origin"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt merge preserves complete compressed video and packet clocks"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt raw and placed PCM files match recorded hashes"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt entire placed PCM equals independent QPC-derived sample mapping"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt explicit zero-filled gaps stay outside observed gameplay interval"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt observed gameplay has captured nonzero PCM"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt full movie decodes audio and video"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt six-second viewing copy decodes"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt viewing copy contains picture and audio streams"
+    },
+    {
+      "Passed": true,
+      "Name": "Portable raw receipt is byte-identical to local original"
+    },
+    {
+      "Passed": true,
+      "Name": "Portable raw receipt is byte-identical to local original"
+    },
+    {
+      "Passed": true,
+      "Name": "Portable raw receipt is byte-identical to local original"
+    },
+    {
+      "Passed": true,
+      "Name": "Portable raw receipt is byte-identical to local original"
+    },
+    {
+      "Passed": true,
+      "Name": "Classic recorder reports delivered audiovisual output without source drift"
+    },
+    {
+      "Passed": true,
+      "Name": "Classic capture source current: Start-Doom.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Classic capture source current: scripts/Invoke-Doom.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Classic capture source current: scripts/Record-DoomReplay.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Classic capture source current: scripts/Record-ProcessAudio.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Classic capture source current: scripts/Merge-DoomCaptureAudio.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Classic capture source current: src/ProcessAudioCapture.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Classic capture source current: src/CaptureClock.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Classic capture source current: src/CaptureTimeline.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Classic game and actual audio device close with all tics/frames"
+    },
+    {
+      "Passed": true,
+      "Name": "Classic capture targets a newly created game window"
+    },
+    {
+      "Passed": true,
+      "Name": "Classic audio captures the owned simulation PID"
+    },
+    {
+      "Passed": true,
+      "Name": "Classic runtime recorder binary is retained unchanged"
+    },
+    {
+      "Passed": true,
+      "Name": "Classic original WGC QPC is the audio placement origin"
+    },
+    {
+      "Passed": true,
+      "Name": "Classic merge preserves complete compressed video and packet clocks"
+    },
+    {
+      "Passed": true,
+      "Name": "Classic raw and placed PCM files match recorded hashes"
+    },
+    {
+      "Passed": true,
+      "Name": "Classic entire placed PCM equals independent QPC-derived sample mapping"
+    },
+    {
+      "Passed": true,
+      "Name": "Classic explicit zero-filled gaps stay outside observed gameplay interval"
+    },
+    {
+      "Passed": true,
+      "Name": "Classic observed gameplay has captured nonzero PCM"
+    },
+    {
+      "Passed": true,
+      "Name": "Classic full movie decodes audio and video"
+    },
+    {
+      "Passed": true,
+      "Name": "Classic six-second viewing copy decodes"
+    },
+    {
+      "Passed": true,
+      "Name": "Classic viewing copy contains picture and audio streams"
+    },
+    {
+      "Passed": true,
+      "Name": "Portable raw receipt is byte-identical to local original"
+    },
+    {
+      "Passed": true,
+      "Name": "Portable raw receipt is byte-identical to local original"
+    },
+    {
+      "Passed": true,
+      "Name": "Portable raw receipt is byte-identical to local original"
+    },
+    {
+      "Passed": true,
+      "Name": "Portable raw receipt is byte-identical to local original"
+    },
+    {
+      "Passed": true,
+      "Name": "Known black GDI footage is rejected automatically"
+    },
+    {
+      "Passed": true,
+      "Name": "Portable raw receipt is byte-identical to local original"
+    },
+    {
+      "Passed": true,
+      "Name": "Portable raw receipt is byte-identical to local original"
+    },
+    {
+      "Passed": true,
+      "Name": "Portable raw receipt is byte-identical to local original"
+    }
+  ],
+  "SourceSha256": "57509E0711D6685AB50E6B5CC8ABE9233D7AF021024D4EB449910CA2753C5701",
+  "Runs": [
+    {
+      "ZeroFilledIntervals": [
+        {
+          "NextPacket": 0,
+          "Frames": 1353594,
+          "Frame": 0
+        },
+        {
+          "NextPacket": 827,
+          "Frames": 1121,
+          "Frame": 1718301
+        }
+      ],
+      "ViewingCopyStreams": [
+        {
+          "index": 0,
+          "codec_name": "h264",
+          "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+          "profile": "High",
+          "codec_type": "video",
+          "codec_tag_string": "avc1",
+          "codec_tag": "0x31637661",
+          "mime_codec_string": "avc1.64002a",
+          "width": 1472,
+          "height": 1006,
+          "coded_width": 1472,
+          "coded_height": 1006,
+          "has_b_frames": 2,
+          "sample_aspect_ratio": "1:1",
+          "display_aspect_ratio": "736:503",
+          "pix_fmt": "yuv420p",
+          "level": 42,
+          "color_range": "tv",
+          "color_space": "bt470bg",
+          "color_transfer": "iec61966-2-1",
+          "color_primaries": "bt709",
+          "chroma_location": "left",
+          "field_order": "progressive",
+          "is_avc": "true",
+          "nal_length_size": "4",
+          "id": "0x1",
+          "r_frame_rate": "60/1",
+          "avg_frame_rate": "60/1",
+          "time_base": "1/15360",
+          "start_pts": 0,
+          "start_time": "0.000000",
+          "duration_ts": 92160,
+          "duration": "6.000000",
+          "bit_rate": "26804517",
+          "bits_per_raw_sample": "8",
+          "nb_frames": "360",
+          "extradata_size": 63,
+          "disposition": {
+            "default": 1,
+            "dub": 0,
+            "original": 0,
+            "comment": 0,
+            "lyrics": 0,
+            "karaoke": 0,
+            "forced": 0,
+            "hearing_impaired": 0,
+            "visual_impaired": 0,
+            "clean_effects": 0,
+            "attached_pic": 0,
+            "timed_thumbnails": 0,
+            "non_diegetic": 0,
+            "captions": 0,
+            "descriptions": 0,
+            "metadata": 0,
+            "dependent": 0,
+            "still_image": 0,
+            "multilayer": 0
+          },
+          "tags": {
+            "language": "und",
+            "handler_name": "VideoHandler",
+            "encoder": "Lavc63.1.101 h264_nvenc"
+          }
+        },
+        {
+          "index": 1,
+          "codec_name": "aac",
+          "codec_long_name": "AAC (Advanced Audio Coding)",
+          "profile": "LC",
+          "codec_type": "audio",
+          "codec_tag_string": "mp4a",
+          "codec_tag": "0x6134706d",
+          "mime_codec_string": "mp4a.40.2",
+          "sample_fmt": "fltp",
+          "sample_rate": "44100",
+          "channels": 2,
+          "channel_layout": "stereo",
+          "bits_per_sample": 0,
+          "initial_padding": 1024,
+          "id": "0x2",
+          "r_frame_rate": "0/0",
+          "avg_frame_rate": "0/0",
+          "time_base": "1/44100",
+          "start_pts": 0,
+          "start_time": "0.000000",
+          "duration_ts": 264600,
+          "duration": "6.000000",
+          "bit_rate": "192147",
+          "nb_frames": "260",
+          "extradata_size": 5,
+          "disposition": {
+            "default": 1,
+            "dub": 0,
+            "original": 0,
+            "comment": 0,
+            "lyrics": 0,
+            "karaoke": 0,
+            "forced": 0,
+            "hearing_impaired": 0,
+            "visual_impaired": 0,
+            "clean_effects": 0,
+            "attached_pic": 0,
+            "timed_thumbnails": 0,
+            "non_diegetic": 0,
+            "captions": 0,
+            "descriptions": 0,
+            "metadata": 0,
+            "dependent": 0,
+            "still_image": 0,
+            "multilayer": 0
+          },
+          "tags": {
+            "language": "und",
+            "handler_name": "SoundHandler"
+          }
+        }
+      ],
+      "ObservedGameFirstSeconds": 30.8091591,
+      "ViewingCopySha256": "D7406B1BD26223628F6FEC693247EE3B934B2368CF056F5EF4A310229B5A0D7D",
+      "MaximumAudioMixMilliseconds": 51.7674,
+      "ObservedGameLastSeconds": 38.7330391,
+      "ViewingCopy": "C:\\projects\\pwshDoom/local/recordings/music-matrix-wgc-play.mp4",
+      "ConsoleWrites": 432,
+      "NonzeroGameplayFrames": 339722,
+      "Style": "Matrix",
+      "SimulationTics": 279,
+      "FullMovieSha256": "8388C9BD69DAF5DD1AC53AB6A8799D4620BE6C920FE32191B3083F6F999EC046",
+      "TimelinePcmSha256": "D77B195D90E876462379E7A5FD64000AF1245C63B247D4B12FA8226EC987D7E8",
+      "FullMovie": "C:\\projects\\pwshDoom\\local\\recordings\\music-matrix-wgc-merged.mp4"
+    },
+    {
+      "ZeroFilledIntervals": [
+        {
+          "Frames": 1391346,
+          "Frame": 0,
+          "NextPacket": 0
+        },
+        {
+          "Frames": 1083,
+          "Frame": 1756935,
+          "NextPacket": 829
+        }
+      ],
+      "ViewingCopyStreams": [
+        {
+          "index": 0,
+          "codec_name": "h264",
+          "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+          "profile": "High",
+          "codec_type": "video",
+          "codec_tag_string": "avc1",
+          "codec_tag": "0x31637661",
+          "mime_codec_string": "avc1.64002a",
+          "width": 1472,
+          "height": 1006,
+          "coded_width": 1472,
+          "coded_height": 1006,
+          "has_b_frames": 2,
+          "sample_aspect_ratio": "1:1",
+          "display_aspect_ratio": "736:503",
+          "pix_fmt": "yuv420p",
+          "level": 42,
+          "color_range": "tv",
+          "color_space": "bt470bg",
+          "color_transfer": "iec61966-2-1",
+          "color_primaries": "bt709",
+          "chroma_location": "left",
+          "field_order": "progressive",
+          "is_avc": "true",
+          "nal_length_size": "4",
+          "id": "0x1",
+          "r_frame_rate": "60/1",
+          "avg_frame_rate": "60/1",
+          "time_base": "1/15360",
+          "start_pts": 256,
+          "start_time": "0.016667",
+          "duration_ts": 91904,
+          "duration": "5.983333",
+          "bit_rate": "18750627",
+          "bits_per_raw_sample": "8",
+          "nb_frames": "359",
+          "extradata_size": 63,
+          "disposition": {
+            "default": 1,
+            "dub": 0,
+            "original": 0,
+            "comment": 0,
+            "lyrics": 0,
+            "karaoke": 0,
+            "forced": 0,
+            "hearing_impaired": 0,
+            "visual_impaired": 0,
+            "clean_effects": 0,
+            "attached_pic": 0,
+            "timed_thumbnails": 0,
+            "non_diegetic": 0,
+            "captions": 0,
+            "descriptions": 0,
+            "metadata": 0,
+            "dependent": 0,
+            "still_image": 0,
+            "multilayer": 0
+          },
+          "tags": {
+            "language": "und",
+            "handler_name": "VideoHandler",
+            "encoder": "Lavc63.1.101 h264_nvenc"
+          }
+        },
+        {
+          "index": 1,
+          "codec_name": "aac",
+          "codec_long_name": "AAC (Advanced Audio Coding)",
+          "profile": "LC",
+          "codec_type": "audio",
+          "codec_tag_string": "mp4a",
+          "codec_tag": "0x6134706d",
+          "mime_codec_string": "mp4a.40.2",
+          "sample_fmt": "fltp",
+          "sample_rate": "44100",
+          "channels": 2,
+          "channel_layout": "stereo",
+          "bits_per_sample": 0,
+          "initial_padding": 1024,
+          "id": "0x2",
+          "r_frame_rate": "0/0",
+          "avg_frame_rate": "0/0",
+          "time_base": "1/44100",
+          "start_pts": 0,
+          "start_time": "0.000000",
+          "duration_ts": 264600,
+          "duration": "6.000000",
+          "bit_rate": "192151",
+          "nb_frames": "260",
+          "extradata_size": 5,
+          "disposition": {
+            "default": 1,
+            "dub": 0,
+            "original": 0,
+            "comment": 0,
+            "lyrics": 0,
+            "karaoke": 0,
+            "forced": 0,
+            "hearing_impaired": 0,
+            "visual_impaired": 0,
+            "clean_effects": 0,
+            "attached_pic": 0,
+            "timed_thumbnails": 0,
+            "non_diegetic": 0,
+            "captions": 0,
+            "descriptions": 0,
+            "metadata": 0,
+            "dependent": 0,
+            "still_image": 0,
+            "multilayer": 0
+          },
+          "tags": {
+            "language": "und",
+            "handler_name": "SoundHandler"
+          }
+        }
+      ],
+      "ObservedGameFirstSeconds": 31.651987,
+      "ViewingCopySha256": "A77FED02317B9D2B0D778B6BACF12921652A5BF48B6EE2FA8AE8B97406B04F83",
+      "MaximumAudioMixMilliseconds": 78.6738,
+      "ObservedGameLastSeconds": 39.5920018,
+      "ViewingCopy": "C:\\projects\\pwshDoom/local/recordings/music-color-wgc-play.mp4",
+      "ConsoleWrites": 389,
+      "NonzeroGameplayFrames": 339981,
+      "Style": "AnsiArt",
+      "SimulationTics": 279,
+      "FullMovieSha256": "1E2792CF6BD88D83C79FA544278C33638313E6B642BF11A8A3ECC2CA2B8A04EA",
+      "TimelinePcmSha256": "D96F1DA7C5ABAF0272A3D6AFB8E50F6B18AA8B7E69E3F287B8F9EE565DE9B5D5",
+      "FullMovie": "C:\\projects\\pwshDoom\\local\\recordings\\music-color-wgc-first-av.mp4"
+    },
+    {
+      "ZeroFilledIntervals": [
+        {
+          "NextPacket": 0,
+          "Frames": 1502195,
+          "Frame": 0
+        },
+        {
+          "NextPacket": 830,
+          "Frames": 1086,
+          "Frame": 1868225
+        }
+      ],
+      "ViewingCopyStreams": [
+        {
+          "index": 0,
+          "codec_name": "h264",
+          "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+          "profile": "High",
+          "codec_type": "video",
+          "codec_tag_string": "avc1",
+          "codec_tag": "0x31637661",
+          "mime_codec_string": "avc1.640034",
+          "width": 2912,
+          "height": 1452,
+          "coded_width": 2912,
+          "coded_height": 1452,
+          "has_b_frames": 2,
+          "sample_aspect_ratio": "1:1",
+          "display_aspect_ratio": "728:363",
+          "pix_fmt": "yuv420p",
+          "level": 52,
+          "color_range": "tv",
+          "color_space": "bt470bg",
+          "color_transfer": "iec61966-2-1",
+          "color_primaries": "bt709",
+          "chroma_location": "left",
+          "field_order": "progressive",
+          "is_avc": "true",
+          "nal_length_size": "4",
+          "id": "0x1",
+          "r_frame_rate": "60/1",
+          "avg_frame_rate": "60/1",
+          "time_base": "1/15360",
+          "start_pts": 0,
+          "start_time": "0.000000",
+          "duration_ts": 92160,
+          "duration": "6.000000",
+          "bit_rate": "13197617",
+          "bits_per_raw_sample": "8",
+          "nb_frames": "360",
+          "extradata_size": 64,
+          "disposition": {
+            "default": 1,
+            "dub": 0,
+            "original": 0,
+            "comment": 0,
+            "lyrics": 0,
+            "karaoke": 0,
+            "forced": 0,
+            "hearing_impaired": 0,
+            "visual_impaired": 0,
+            "clean_effects": 0,
+            "attached_pic": 0,
+            "timed_thumbnails": 0,
+            "non_diegetic": 0,
+            "captions": 0,
+            "descriptions": 0,
+            "metadata": 0,
+            "dependent": 0,
+            "still_image": 0,
+            "multilayer": 0
+          },
+          "tags": {
+            "language": "und",
+            "handler_name": "VideoHandler",
+            "encoder": "Lavc63.1.101 h264_nvenc"
+          }
+        },
+        {
+          "index": 1,
+          "codec_name": "aac",
+          "codec_long_name": "AAC (Advanced Audio Coding)",
+          "profile": "LC",
+          "codec_type": "audio",
+          "codec_tag_string": "mp4a",
+          "codec_tag": "0x6134706d",
+          "mime_codec_string": "mp4a.40.2",
+          "sample_fmt": "fltp",
+          "sample_rate": "44100",
+          "channels": 2,
+          "channel_layout": "stereo",
+          "bits_per_sample": 0,
+          "initial_padding": 1024,
+          "id": "0x2",
+          "r_frame_rate": "0/0",
+          "avg_frame_rate": "0/0",
+          "time_base": "1/44100",
+          "start_pts": 0,
+          "start_time": "0.000000",
+          "duration_ts": 264600,
+          "duration": "6.000000",
+          "bit_rate": "191793",
+          "nb_frames": "260",
+          "extradata_size": 5,
+          "disposition": {
+            "default": 1,
+            "dub": 0,
+            "original": 0,
+            "comment": 0,
+            "lyrics": 0,
+            "karaoke": 0,
+            "forced": 0,
+            "hearing_impaired": 0,
+            "visual_impaired": 0,
+            "clean_effects": 0,
+            "attached_pic": 0,
+            "timed_thumbnails": 0,
+            "non_diegetic": 0,
+            "captions": 0,
+            "descriptions": 0,
+            "metadata": 0,
+            "dependent": 0,
+            "still_image": 0,
+            "multilayer": 0
+          },
+          "tags": {
+            "language": "und",
+            "handler_name": "SoundHandler"
+          }
+        }
+      ],
+      "ObservedGameFirstSeconds": 34.192832,
+      "ViewingCopySha256": "58101FA26F2D5844332FAAD7777424E8D7E0437A01902DBCE6066DA540DB5B6E",
+      "MaximumAudioMixMilliseconds": 47.3256,
+      "ObservedGameLastSeconds": 42.1227996,
+      "ViewingCopy": "C:\\projects\\pwshDoom/local/recordings/music-classic-wgc-play.mp4",
+      "ConsoleWrites": 410,
+      "NonzeroGameplayFrames": 340736,
+      "Style": "Classic",
+      "SimulationTics": 279,
+      "FullMovieSha256": "17CE6B2701AE44671E779DCA0E1930BC21E64703C4602A5063EE8A6A8EDF5335",
+      "TimelinePcmSha256": "73EB7B6FBA3856B6E468885218924A5A6636E39BBDD35DADF44FA3C94024D900",
+      "FullMovie": "C:\\projects\\pwshDoom\\local\\recordings\\music-classic-wgc-first-av.mp4"
+    }
+  ],
+  "Meaning": "Three actual eight-second WGC/music/effects game recordings, original QPC origin, independent entire PCM timestamp placement, video packet-preservation checks and complete media decode. Sampled visual review is separately documented. Recorded workloads overlap synthesis and are not clean performance trials, acoustic measurements or campaign completion.",
+  "Receipts": [
+    {
+      "Path": "results/capture-timeline-unit-first.json",
+      "Sha256": "B2B51B72C7F009EE2E32A768C9CEBF5B2308CB6EFABC47FFC68CB1E8FE4253C9"
+    },
+    {
+      "Path": "results/process-audio-capture-clock.json",
+      "Sha256": "9415E3E179F54420B4B9547D9305F35F3091548F33EE2CCFF863008EA2501E4C"
+    },
+    {
+      "Path": "results/music-e1m2-reader-first.json",
+      "Sha256": "066ED84046C90A7BD9A4986D0E676399BDC8EF9C0FD34EE714AB3162F643224C"
+    },
+    {
+      "Path": "results/capture-recorder-recipe-first.json",
+      "Sha256": "7929FE3D789DF807E97C232D3AF69AE9DCECB9170C5915490AD0001EF917B09A"
+    },
+    {
+      "Path": "local/recordings/music-matrix-wgc-first-game.json",
+      "Sha256": "BC7BAB44641906284183171935A8236CE4304C9B058DB8D65B0CED756FCFC9E4"
+    },
+    {
+      "Path": "local/recordings/music-matrix-wgc-first-recording.json",
+      "Sha256": "508744D22E874936252F02C0B1D8E705FB6A5465C949A41E27A42216B55B2D2C"
+    },
+    {
+      "Path": "local/recordings/music-matrix-wgc-first-audio.json",
+      "Sha256": "D30925F285F0BA42BC9FEB076FA6A5340650C0AF8185C53FBB0C9F91E7598755"
+    },
+    {
+      "Path": "local/recordings/music-matrix-wgc-merged.json",
+      "Sha256": "CB1514F6D959759673F8F3D649F17E7379FD65E61FFE7BF7C02FEDE71DB8AE89"
+    },
+    {
+      "Path": "local/recordings/music-color-wgc-first-game.json",
+      "Sha256": "4F3049BECDA01FDC209AC0C0260697F4E58951FC26043047FCE948E00C4E4236"
+    },
+    {
+      "Path": "local/recordings/music-color-wgc-first-recording.json",
+      "Sha256": "5FFC69CE3CF435D1F2CF6CF3B3793E8D44F7494529E1D753B1B210FA62B9B4D4"
+    },
+    {
+      "Path": "local/recordings/music-color-wgc-first-audio.json",
+      "Sha256": "53066412E6ACD1569ADE5430E083A1A5AC163A978F1BDBCDA116E230FDC0244C"
+    },
+    {
+      "Path": "local/recordings/music-color-wgc-first-av.json",
+      "Sha256": "351CBF0F266D22D94D8F12A893981F401DBCC5FDA07D863ED0E7C0F960B27ABA"
+    },
+    {
+      "Path": "local/recordings/music-classic-wgc-first-game.json",
+      "Sha256": "EACDBEBC5B772EE3BB92C48B9658EAD84305FF8CD3672AC11DD7449E09A95B39"
+    },
+    {
+      "Path": "local/recordings/music-classic-wgc-first-recording.json",
+      "Sha256": "5E414D6CFD99FC9107A0822C3611588B2603888EAB0848B9FFC267773C05C577"
+    },
+    {
+      "Path": "local/recordings/music-classic-wgc-first-audio.json",
+      "Sha256": "57D072B56475AD86EC535D8FC3C52DB2EDE394F3AF9E3B2B0592B954952171BC"
+    },
+    {
+      "Path": "local/recordings/music-classic-wgc-first-av.json",
+      "Sha256": "B801A883AAEB802D962637E20E7D11BE21966F00738D366A63329A8F68873A53"
+    },
+    {
+      "Path": "local/recordings/music-matrix-av-black-rejected.json",
+      "Sha256": "C28A6A0D70D7F15715A0D52555A131FBD1462E199A3B86B98A5B6E3730A15802"
+    }
+  ],
+  "Error": null
+}

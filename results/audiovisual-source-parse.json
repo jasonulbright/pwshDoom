@@ -1,0 +1,62 @@
+{
+  "Checks": [
+    {
+      "Passed": true,
+      "Sha256": "3EC570EDED87DA4C7316B3CB2F567F580571BF2E6D10BF696DCC4D95D5C147EC",
+      "Path": "Start-Doom.ps1"
+    },
+    {
+      "Passed": true,
+      "Sha256": "05A86C46911204AE6BADA81EADE7C788E92F022F248F83B5E35063C22DF900FF",
+      "Path": "scripts/Invoke-Doom.ps1"
+    },
+    {
+      "Passed": true,
+      "Sha256": "2664735C59ED560351E70B4AC424428A78EA330763B8252880EC17CDAAB0D0FA",
+      "Path": "scripts/Record-DoomReplay.ps1"
+    },
+    {
+      "Passed": true,
+      "Sha256": "41EE7E57F6703E7F7BC1FDCE53A1FD23F84A67A717CD647C703C5C1176004346",
+      "Path": "scripts/Record-ProcessAudio.ps1"
+    },
+    {
+      "Passed": true,
+      "Sha256": "A84A0537B5C433E3D33BA9120803DBDA43EDC68B649023C1CB5B2B7331C8B104",
+      "Path": "scripts/Build-CaptureFfmpeg.ps1"
+    },
+    {
+      "Passed": true,
+      "Sha256": "795D02E96FFC3373741E7970512D1D65CC777A43B834D5771F69EC81CF3AF2C4",
+      "Path": "scripts/Merge-DoomCaptureAudio.ps1"
+    },
+    {
+      "Passed": true,
+      "Sha256": "57509E0711D6685AB50E6B5CC8ABE9233D7AF021024D4EB449910CA2753C5701",
+      "Path": "scripts/Test-AudiovisualEvidence.ps1"
+    },
+    {
+      "Passed": true,
+      "Sha256": "F929EF2510D07DEC8E56D42915EF60C77E1B65B5EA085E3DC6901A91C0810DD9",
+      "Path": "scripts/Test-CaptureTimeline.ps1"
+    },
+    {
+      "Passed": true,
+      "Sha256": "06EFA54FB8D1E617398FF0D3FDFC524FABB35F7D359238998A75A9B7BC5D3CA2",
+      "Path": "scripts/Test-MusicTrackQualification.ps1"
+    },
+    {
+      "Passed": true,
+      "Sha256": "CED03D531F7C129D9E079F1F3B548DD436EFD81782974A3752D4689FA3E45DFB",
+      "Path": "src/CaptureClock.ps1"
+    },
+    {
+      "Passed": true,
+      "Sha256": "EFA64468F234327E5D7682CE08FF5B8863EEEFC5D5B082DB9B74BE544D092E21",
+      "Path": "src/CaptureTimeline.ps1"
+    }
+  ],
+  "PowerShell": "7.6.5",
+  "Error": null,
+  "Meaning": "PowerShell parser checks for the eleven new or modified source files in this audiovisual milestone; behavioral checks are retained separately."
+}

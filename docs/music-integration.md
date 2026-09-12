@@ -1,6 +1,6 @@
 # Qualified music in the audio worker and game host
 
-Music can now run through the persistent audio worker alongside effects using an explicitly supplied catalog of qualified tracks. E1M1 is the only real track qualified so far. This is opt-in integration, not a complete soundtrack release. The normal `-Sound` path remains effects-only.
+Music can now run through the persistent audio worker alongside effects using an explicitly supplied catalog of qualified tracks. E1M1 and E1M2 now have qualified real loops; intermission continuous qualification is still running. This is opt-in integration, not a complete soundtrack release. The normal `-Sound` path remains effects-only.
 
 ## Catalog and commands
 
@@ -28,7 +28,7 @@ One-shot opening music and Doom II finale restoration remain unqualified. Non-E1
 - A six-second headless Matrix host run completes without error. Its final simulation report records 209 tics/audio packets, all 263,340 submitted frames returned, and one initial E1M1 start. The host's earlier final snapshot reports 206 tics; these counters have different observation boundaries. Music and renderer workers execute concurrently, but this short run does not qualify sustained performance. Its maximum observed mix block is 54.041 ms; the single recorded starvation observation is after the final packet, during shutdown.
 - Fifteen actual save-worker checks pass with the E1M1 catalog and same-episode new game, including failed-save/load isolation, numeric save restoration, immutable replay archives, three epoch resets, music consumption and clean closure. This explicitly uses episode one because other music tracks are not yet qualified; the existing default test still switches to episode two for effects-only runs.
 
-Actual device tests exercise Windows `waveOut`. No microphone or desktop loopback is captured by those tests. Acoustic latency, a full audiovisual recording, playback under longer game/render load and complete track availability remain open.
+Actual device tests exercise Windows `waveOut`. No microphone or desktop loopback is captured by those tests. Subsequent process-scoped [audiovisual recordings](audiovisual-recording.md) now cover all three styles. Acoustic latency, playback under longer game/render load and complete track availability remain open.
 
 The subsequent visible eight-second Matrix run also succeeds, with 279 simulation/audio packets and all 351,540 submitted frames returned. Its maximum observed mix block is 35.086 ms, and the only starvation poll is after the final packet. The host completes 480 writes; these are not measured distinct display updates. The recorder excludes one preexisting Terminal window and captures the new game window. The preexisting Terminal remains after the game closes.
 
@@ -48,6 +48,6 @@ Create a local JSON catalog mapping `D_E1M1` to the absolute path of `results/mu
 
 Supplying a catalog enables sound playback automatically. It does not prepare missing tracks, and leaving E1M1 will require the destination/intermission qualifications. Use ordinary `-Sound` for a session that should retain effects-only behavior while the soundtrack is completed.
 
-`Record-DoomReplay.ps1` forwards the catalog and records its hash. Its window targeting now excludes every preexisting visible Terminal window and selects the newly created `pwshDoom` window. Existing Terminal windows can remain open. The recorder captures only that game window, and still explicitly produces silent video until loopback audio capture is implemented.
+`Record-DoomReplay.ps1` forwards the catalog and records its hash. Its window targeting excludes every preexisting visible Terminal window and selects the newly created `pwshDoom` window. Existing Terminal windows can remain open. The optional `-CaptureAudio` path now gates startup, captures the simulation process tree and places audio using the original WGC QPC clock; see the [recording recipe and evidence](audiovisual-recording.md). Earlier silent recordings remain labeled as such.
 
-The separate [process-audio capture fixture](process-audio-capture.md) now passes ten scope/device checks. It has not yet been connected or synchronized with the video recorder. Current E1M1 requalification also passes thirteen playback, eleven event/catalog, ten device-worker and twenty-three loop-evidence checks. The first updated loop-evidence attempt correctly rejects its old state-test source hash; the audit now accepts explicit current state/reader report paths. Historical successful and failed receipts remain unchanged.
+The separate [process-audio capture fixture](process-audio-capture.md) passes ten scope/device checks. Its integrated recording path now passes 88 audiovisual evidence checks, including independent complete PCM timestamp placement and preserved compressed video. Current E1M1 requalification also passes thirteen playback, eleven event/catalog, ten device-worker and twenty-three loop-evidence checks. The first updated loop-evidence attempt correctly rejects its old state-test source hash; the audit now accepts explicit current state/reader report paths. Historical successful and failed receipts remain unchanged.

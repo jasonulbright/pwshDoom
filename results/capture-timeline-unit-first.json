@@ -1,0 +1,84 @@
+{
+  "Sources": [
+    {
+      "Path": "src/CaptureTimeline.ps1",
+      "Sha256": "EFA64468F234327E5D7682CE08FF5B8863EEEFC5D5B082DB9B74BE544D092E21"
+    },
+    {
+      "Path": "src/CaptureClock.ps1",
+      "Sha256": "CED03D531F7C129D9E079F1F3B548DD436EFD81782974A3752D4689FA3E45DFB"
+    },
+    {
+      "Path": "scripts/Test-CaptureTimeline.ps1",
+      "Sha256": "F929EF2510D07DEC8E56D42915EF60C77E1B65B5EA085E3DC6901A91C0810DD9"
+    }
+  ],
+  "Details": {
+    "ClockFixture": {
+      "Meaning": "Median of bracketed precise UTC/QPC offsets, accepted only within explicit observed clock bounds. Does not include GDI copy latency or prove physical A/V synchronization.",
+      "MaximumBracketMilliseconds": 0.002,
+      "OriginQpc100ns": 10000000.0,
+      "OffsetSpreadMilliseconds": 0.0,
+      "OffsetUnix100ns": 16999999990000000.0,
+      "MaximumRegularClockDeltaMilliseconds": 0.0
+    },
+    "Directory": "C:\\projects\\pwshDoom\\scripts\\..\\local\\timeline-test-40bfc2c5f14a442997def4cdbb7c4718",
+    "TimelineWavSha256": "79D29449287835BF7117CDE14DD631F1024A8B52C1B1019E993B71CDB23510B8"
+  },
+  "Meaning": "Synthetic sample/timestamp placement, actual WAV bytes, rejection policies and exact UTC/QPC arithmetic. Not a live capture, measured A/V sync or performance test.",
+  "Error": null,
+  "Checks": [
+    {
+      "Name": "Contiguous packets retain every sample with no padding",
+      "Passed": true
+    },
+    {
+      "Name": "Clock gap explicitly reserves two frames instead of collapsing time",
+      "Passed": true
+    },
+    {
+      "Name": "Actual WAV preserves both channels around explicit zero gap",
+      "Passed": true
+    },
+    {
+      "Name": "Existing output is not overwritten",
+      "Passed": true
+    },
+    {
+      "Name": "Beginning and end trim address exact source frames",
+      "Passed": true
+    },
+    {
+      "Name": "Outside capture coverage has explicit leading and trailing padding",
+      "Passed": true
+    },
+    {
+      "Name": "One-sample clock jitter is reported without dropping samples",
+      "Passed": true
+    },
+    {
+      "Name": "Larger overlapping timestamp fails instead of dropping samples",
+      "Passed": true
+    },
+    {
+      "Name": "Timestamp-error flag rejects placement",
+      "Passed": true
+    },
+    {
+      "Name": "Malformed packet/source mapping is rejected",
+      "Passed": true
+    },
+    {
+      "Name": "Unaccounted source frames are rejected",
+      "Passed": true
+    },
+    {
+      "Name": "Clock conversion retains exact epoch arithmetic and brackets",
+      "Passed": true
+    },
+    {
+      "Name": "Clock step beyond stated bound is rejected",
+      "Passed": true
+    }
+  ]
+}
