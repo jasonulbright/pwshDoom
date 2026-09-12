@@ -1,0 +1,63 @@
+{
+  "SourceSha256": "EAE8CD2CDBEAB01368171598209FC42551F3F7850388E1BF2F8DDB6AAFC1074E",
+  "Trials": [
+    {
+      "Milliseconds": 177.9768,
+      "Kernel": "Pow-Standard",
+      "Pass": 1,
+      "Count": 100000
+    },
+    {
+      "Milliseconds": 1380.4204,
+      "Kernel": "Pow-Delegate",
+      "Pass": 1,
+      "Count": 100000
+    },
+    {
+      "Milliseconds": 180.1044,
+      "Kernel": "Pow-Typed",
+      "Pass": 1,
+      "Count": 100000
+    },
+    {
+      "Milliseconds": 184.3582,
+      "Kernel": "Pow-Typed",
+      "Pass": 2,
+      "Count": 100000
+    },
+    {
+      "Milliseconds": 1498.5557,
+      "Kernel": "Pow-Delegate",
+      "Pass": 2,
+      "Count": 100000
+    },
+    {
+      "Milliseconds": 187.5458,
+      "Kernel": "Pow-Standard",
+      "Pass": 2,
+      "Count": 100000
+    },
+    {
+      "Milliseconds": 189.8967,
+      "Kernel": "Pow-Standard",
+      "Pass": 3,
+      "Count": 100000
+    },
+    {
+      "Milliseconds": 1439.2528,
+      "Kernel": "Pow-Delegate",
+      "Pass": 3,
+      "Count": 100000
+    },
+    {
+      "Milliseconds": 188.6657,
+      "Kernel": "Pow-Typed",
+      "Pass": 3,
+      "Count": 100000
+    }
+  ],
+  "Error": null,
+  "PowerShell": "7.6.5",
+  "Meaning": "Bounded exact-result comparison of standard .NET Math.Pow dispatch from PowerShell. Delegate binds the existing standard method; no compiled custom math. One warmup per kernel, alternating trial order. Not a synthesizer benchmark.",
+  "Count": 100000
+}

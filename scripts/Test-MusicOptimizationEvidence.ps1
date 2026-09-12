@@ -10,17 +10,17 @@ function Read-Report([string]$Name){
     $r=Get-Content $path -Raw|ConvertFrom-Json;Check "$Name has no error" (-not $r.Error);return $r
 }
 try{
-    $unit=Read-Report 'music-synth-unit-fused-edges'
-    Check 'All 51 synthesis checks pass' ($unit.Checks.Count -eq 51 -and @($unit.Checks|Where-Object {-not $_.Passed}).Count -eq 0)
+    $unit=Read-Report 'music-synth-unit-numeric-first'
+    Check 'All 55 synthesis checks pass' ($unit.Checks.Count -eq 55 -and @($unit.Checks|Where-Object {-not $_.Passed}).Count -eq 0)
     foreach($source in $unit.Sources){Check "Unit source matches: $($source.Path)" ((Get-FileHash (Join-Path $root $source.Path)).Hash -ceq $source.Sha256)}
     $short=Read-Report 'music-e1m1-dry-first'
-    foreach($name in 'music-profile-baseline','music-profile-static-cache','music-profile-pcm-cache','music-profile-fused-first'){
+    foreach($name in 'music-profile-baseline','music-profile-static-cache','music-profile-pcm-cache','music-profile-fused-first','music-profile-numeric-first','music-profile-envelope-cache'){
         $r=Read-Report $name
         Check "$name unchanged render inputs" ($r.WadSha256 -ceq $short.WadSha256 -and $r.Details.MusSha256 -ceq $short.Details.MusSha256 -and $r.Details.SoundFontSha256 -ceq $short.Details.SoundFontSha256 -and $r.Details.Volume -eq $short.Details.Volume -and $r.Details.Frames -eq $short.Details.Frames)
         Check "$name exact eight-second WAV" ($r.Details.WavSha256 -ceq $short.Details.WavSha256 -and (Get-FileHash $r.Details.WavPath).Hash -ceq $short.Details.WavSha256)
         Check "$name no source edits during rendering" ($r.SourcesChangedDuringRun.Count -eq 0)
     }
-    $old=Read-Report 'music-e1m1-dry-loop';$current=Read-Report 'music-e1m1-dry-optimized-loop'
+    $old=Read-Report 'music-e1m1-dry-loop';$current=Read-Report 'music-e1m1-dry-numeric-loop'
     foreach($key in 'MusSha256','SoundFontSha256','Volume','Frames','Seconds','NoteOns','PeakVoices','ExclusiveCuts','ClippedSamples','PeakPcm','RmsPcm','NonzeroSamples'){
         Check "Full loop preserves $key" ($old.Details.$key -ceq $current.Details.$key)
     }

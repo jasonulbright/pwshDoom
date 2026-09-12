@@ -116,7 +116,8 @@ function Add-DoomMusicVoiceFrames {
             if($advancing){
                 if($loop -and $position -ge $loopEnd){$position=$loopStart+($position-$loopStart)%$loopLength}
                 if($position -lt $end){
-                    [int]$index=[Math]::Floor($position);[int]$next=$index+1
+                    # Sample positions are nonnegative and bank-bounded below Int32 maximum.
+                    [int]$index=$position;if($index -gt $position){$index--};[int]$next=$index+1
                     if($loop -and $next -ge $loopEnd){$next=$loopStart}elseif($next -ge $end){$next=$end-1}
                     $x=$samples[$index]+([int]$samples[$next]-[int]$samples[$index])*($position-$index);$position+=$step
                 }else{$advancing=$false}
@@ -139,9 +140,9 @@ function Read-DoomMusicSynth {
 }
 function ConvertTo-DoomMusicPcm {
     param($Synth,[double[]]$Mix)
-    $pcm=[int16[]]::new($Mix.Length);[double]$volume=$Synth.Volume
+    $pcm=[int16[]]::new($Mix.Length);[double]$volume=$Synth.Volume;[double]$upper=[double]::MaxValue;[double]$lower=-$upper
     for([int]$i=0;$i -lt $Mix.Length;$i++){
-        [double]$value=$Mix[$i]*$volume;if(-not [double]::IsFinite($value)){throw 'Music synthesis produced nonfinite PCM.'}
+        [double]$value=$Mix[$i]*$volume;if(-not ($value -le $upper -and $value -ge $lower)){throw 'Music synthesis produced nonfinite PCM.'}
         if($value -ge 32767.5){$pcm[$i]=32767;$Synth.ClippedSamples++}elseif($value -lt -32768.5){$pcm[$i]=-32768;$Synth.ClippedSamples++}else{$pcm[$i]=[int16]$value}
     }
     return ,$pcm

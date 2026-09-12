@@ -1,0 +1,81 @@
+{
+  "PowerShell": "7.6.5",
+  "Count": 200000,
+  "SourceSha256": "550B4F1D576E888B72551197B17F08E5B30B6493AEA5A5CC8F63855FEFE30AB8",
+  "Trials": [
+    {
+      "Milliseconds": 338.1568,
+      "Kernel": "Floor-Standard",
+      "Count": 200000,
+      "Pass": 1
+    },
+    {
+      "Milliseconds": 24.635,
+      "Kernel": "Floor-RoundCorrect",
+      "Count": 200000,
+      "Pass": 1
+    },
+    {
+      "Milliseconds": 375.002,
+      "Kernel": "Finite-Standard",
+      "Count": 200000,
+      "Pass": 1
+    },
+    {
+      "Milliseconds": 13.137,
+      "Kernel": "Finite-Range",
+      "Count": 200000,
+      "Pass": 1
+    },
+    {
+      "Milliseconds": 37.3464,
+      "Kernel": "Finite-Range",
+      "Count": 200000,
+      "Pass": 2
+    },
+    {
+      "Milliseconds": 373.9172,
+      "Kernel": "Finite-Standard",
+      "Count": 200000,
+      "Pass": 2
+    },
+    {
+      "Milliseconds": 21.3466,
+      "Kernel": "Floor-RoundCorrect",
+      "Count": 200000,
+      "Pass": 2
+    },
+    {
+      "Milliseconds": 329.79,
+      "Kernel": "Floor-Standard",
+      "Count": 200000,
+      "Pass": 2
+    },
+    {
+      "Milliseconds": 329.0283,
+      "Kernel": "Floor-Standard",
+      "Count": 200000,
+      "Pass": 3
+    },
+    {
+      "Milliseconds": 17.3055,
+      "Kernel": "Floor-RoundCorrect",
+      "Count": 200000,
+      "Pass": 3
+    },
+    {
+      "Milliseconds": 373.3139,
+      "Kernel": "Finite-Standard",
+      "Count": 200000,
+      "Pass": 3
+    },
+    {
+      "Milliseconds": 15.3081,
+      "Kernel": "Finite-Range",
+      "Count": 200000,
+      "Pass": 3
+    }
+  ],
+  "Error": null,
+  "Meaning": "Bounded numeric-operation probe with one warmup and alternating measured order. Candidate floor is limited to nonnegative sample positions safely below Int32 maximum. Includes output allocation and function dispatch. Does not establish game or synthesizer performance."
+}

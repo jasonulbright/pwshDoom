@@ -98,6 +98,12 @@ try{
     Check 'Invalid later layer preserves earlier voices and cut counters' ($rejected -and $layered.Voices.Count -eq 2 -and [object]::ReferenceEquals($prior,$layered.Voices[0]) -and $layered.NextNote -eq 2 -and $layered.ExclusiveCuts -eq 2)
     $s.Volume=1;$pcm=ConvertTo-DoomMusicPcm $s ([double[]]@(-32768.5,32767.5,.5,1.5))
     Check 'PCM ties-to-even and asymmetric clipping boundary' (($pcm -join ',') -ceq '-32768,32767,0,2' -and $s.ClippedSamples -eq 1)
+    foreach($badPcm in [double]::NaN,[double]::PositiveInfinity,[double]::NegativeInfinity){
+        $rejected=$false;try{$null=ConvertTo-DoomMusicPcm $s ([double[]]@($badPcm))}catch{$rejected=$true}
+        Check "PCM rejects $badPcm" $rejected
+    }
+    $pcm=ConvertTo-DoomMusicPcm $s ([double[]]@(-[double]::MaxValue,[double]::MaxValue,-[double]::Epsilon,[double]::Epsilon))
+    Check 'Finite extremes saturate and subnormals round to zero' (($pcm -join ',') -ceq '-32768,32767,0,0' -and $s.ClippedSamples -eq 3)
 }catch{$failure=$_.ToString()+"`n"+$_.ScriptStackTrace;throw}finally{
     @{Error=$failure;Checks=$checks.ToArray();Sources=@('src/MusicControls.ps1','src/MusicSynth.ps1','src/MusicOscillator.ps1','src/SoundFontRegions.ps1','scripts/Test-MusicSynth.ps1'|ForEach-Object {@{Path=$_;Sha256=(Get-FileHash (Join-Path "$PSScriptRoot/.." $_)).Hash}});Meaning='Independent control/envelope/filter vectors and dry synthesizer state/partition tests. Does not prove matching another synthesizer or complete effects/live performance.'}|ConvertTo-Json -Depth 7|Set-Content $Output
 }

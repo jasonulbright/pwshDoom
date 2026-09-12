@@ -1,0 +1,321 @@
+{
+  "SourceSha256": "E16E731C71385750B8A133F6DAF2DB6EC124165161F3F7ABDD33A9AA5FD54CC5",
+  "Reports": [
+    {
+      "Sha256": "3F496CD89242011B1BE9C7BC547254A0BCB8D475ABC256FFA0EE8B988826203A",
+      "Path": "results/music-synth-unit-numeric-first.json"
+    },
+    {
+      "Sha256": "52071C45C0BFE0C751DF5C92982761EA4FB3E8D6BA3C7EA5A38E7E1599C18402",
+      "Path": "results/music-e1m1-dry-first.json"
+    },
+    {
+      "Sha256": "E54AE092023E2C713512DD3F5947AD1323E05D892EC7C69AC909BEB3A361F566",
+      "Path": "results/music-profile-baseline.json"
+    },
+    {
+      "Sha256": "C6825CA6D8C17D2E3513973E5C176A9D33B35C9F35C3A4B96B8169E58A088994",
+      "Path": "results/music-profile-static-cache.json"
+    },
+    {
+      "Sha256": "43297EEE1878B5856ECFA730C103988F7FF9944D51109D4FBC7A3325973C4D7F",
+      "Path": "results/music-profile-pcm-cache.json"
+    },
+    {
+      "Sha256": "013A00A3357DAC8BE11510FE9E54055EA14632FAA397E5408E90F41474CBEA29",
+      "Path": "results/music-profile-fused-first.json"
+    },
+    {
+      "Sha256": "C21135F31B0D50B88FBCAF814477CADBF00D98E22CB953898B540D4A5F8E645E",
+      "Path": "results/music-profile-numeric-first.json"
+    },
+    {
+      "Sha256": "16D175882D88DD4E14951BE68A7FEFAD85E0AA549B6C1AB35FB4D616B95F8204",
+      "Path": "results/music-profile-envelope-cache.json"
+    },
+    {
+      "Sha256": "C5EC5D1CC40A00EC22C706CE1FEF772481F62632F3A4F55A755270BAAC85F81B",
+      "Path": "results/music-e1m1-dry-loop.json"
+    },
+    {
+      "Sha256": "73146B9A82CC9E4BEB17A0CADFBDB2C12A71A039FE66CF30E3E54E9D43D9DFD7",
+      "Path": "results/music-e1m1-dry-numeric-loop.json"
+    }
+  ],
+  "Checks": [
+    {
+      "Passed": true,
+      "Name": "music-synth-unit-numeric-first has no error"
+    },
+    {
+      "Passed": true,
+      "Name": "All 55 synthesis checks pass"
+    },
+    {
+      "Passed": true,
+      "Name": "Unit source matches: src/MusicControls.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Unit source matches: src/MusicSynth.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Unit source matches: src/MusicOscillator.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Unit source matches: src/SoundFontRegions.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Unit source matches: scripts/Test-MusicSynth.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "music-e1m1-dry-first has no error"
+    },
+    {
+      "Passed": true,
+      "Name": "music-profile-baseline has no error"
+    },
+    {
+      "Passed": true,
+      "Name": "music-profile-baseline unchanged render inputs"
+    },
+    {
+      "Passed": true,
+      "Name": "music-profile-baseline exact eight-second WAV"
+    },
+    {
+      "Passed": true,
+      "Name": "music-profile-baseline no source edits during rendering"
+    },
+    {
+      "Passed": true,
+      "Name": "music-profile-static-cache has no error"
+    },
+    {
+      "Passed": true,
+      "Name": "music-profile-static-cache unchanged render inputs"
+    },
+    {
+      "Passed": true,
+      "Name": "music-profile-static-cache exact eight-second WAV"
+    },
+    {
+      "Passed": true,
+      "Name": "music-profile-static-cache no source edits during rendering"
+    },
+    {
+      "Passed": true,
+      "Name": "music-profile-pcm-cache has no error"
+    },
+    {
+      "Passed": true,
+      "Name": "music-profile-pcm-cache unchanged render inputs"
+    },
+    {
+      "Passed": true,
+      "Name": "music-profile-pcm-cache exact eight-second WAV"
+    },
+    {
+      "Passed": true,
+      "Name": "music-profile-pcm-cache no source edits during rendering"
+    },
+    {
+      "Passed": true,
+      "Name": "music-profile-fused-first has no error"
+    },
+    {
+      "Passed": true,
+      "Name": "music-profile-fused-first unchanged render inputs"
+    },
+    {
+      "Passed": true,
+      "Name": "music-profile-fused-first exact eight-second WAV"
+    },
+    {
+      "Passed": true,
+      "Name": "music-profile-fused-first no source edits during rendering"
+    },
+    {
+      "Passed": true,
+      "Name": "music-profile-numeric-first has no error"
+    },
+    {
+      "Passed": true,
+      "Name": "music-profile-numeric-first unchanged render inputs"
+    },
+    {
+      "Passed": true,
+      "Name": "music-profile-numeric-first exact eight-second WAV"
+    },
+    {
+      "Passed": true,
+      "Name": "music-profile-numeric-first no source edits during rendering"
+    },
+    {
+      "Passed": true,
+      "Name": "music-profile-envelope-cache has no error"
+    },
+    {
+      "Passed": true,
+      "Name": "music-profile-envelope-cache unchanged render inputs"
+    },
+    {
+      "Passed": true,
+      "Name": "music-profile-envelope-cache exact eight-second WAV"
+    },
+    {
+      "Passed": true,
+      "Name": "music-profile-envelope-cache no source edits during rendering"
+    },
+    {
+      "Passed": true,
+      "Name": "music-e1m1-dry-loop has no error"
+    },
+    {
+      "Passed": true,
+      "Name": "music-e1m1-dry-numeric-loop has no error"
+    },
+    {
+      "Passed": true,
+      "Name": "Full loop preserves MusSha256"
+    },
+    {
+      "Passed": true,
+      "Name": "Full loop preserves SoundFontSha256"
+    },
+    {
+      "Passed": true,
+      "Name": "Full loop preserves Volume"
+    },
+    {
+      "Passed": true,
+      "Name": "Full loop preserves Frames"
+    },
+    {
+      "Passed": true,
+      "Name": "Full loop preserves Seconds"
+    },
+    {
+      "Passed": true,
+      "Name": "Full loop preserves NoteOns"
+    },
+    {
+      "Passed": true,
+      "Name": "Full loop preserves PeakVoices"
+    },
+    {
+      "Passed": true,
+      "Name": "Full loop preserves ExclusiveCuts"
+    },
+    {
+      "Passed": true,
+      "Name": "Full loop preserves ClippedSamples"
+    },
+    {
+      "Passed": true,
+      "Name": "Full loop preserves PeakPcm"
+    },
+    {
+      "Passed": true,
+      "Name": "Full loop preserves RmsPcm"
+    },
+    {
+      "Passed": true,
+      "Name": "Full loop preserves NonzeroSamples"
+    },
+    {
+      "Passed": true,
+      "Name": "Full loop uses the same IWAD"
+    },
+    {
+      "Passed": true,
+      "Name": "Complete 98-second WAV hash preserved"
+    },
+    {
+      "Passed": true,
+      "Name": "Local full WAV verified: C:\\projects\\pwshDoom\\local\\music-render-f686470699d14fcdb5ed14d0ee278cc3\\D_E1M1-dry.wav"
+    },
+    {
+      "Passed": true,
+      "Name": "Local full WAV verified: C:\\projects\\pwshDoom\\local\\music-render-267b77532ab84632a6c443b4156e16ad\\D_E1M1-dry.wav"
+    },
+    {
+      "Passed": true,
+      "Name": "Final full render has no profiler"
+    },
+    {
+      "Passed": true,
+      "Name": "Final full render has no source drift"
+    },
+    {
+      "Passed": true,
+      "Name": "Full render source matches: src/MusScore.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Source parses: src/MusScore.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Full render source matches: src/SoundFontBank.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Source parses: src/SoundFontBank.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Full render source matches: src/SoundFontRegions.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Source parses: src/SoundFontRegions.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Full render source matches: src/MusicOscillator.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Source parses: src/MusicOscillator.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Full render source matches: src/MusicControls.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Source parses: src/MusicControls.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Full render source matches: src/MusicSynth.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Source parses: src/MusicSynth.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Full render source matches: src/AudioMixer.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Source parses: src/AudioMixer.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Full render source matches: scripts/Render-MusicScore.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Source parses: scripts/Render-MusicScore.ps1"
+    }
+  ],
+  "Error": null,
+  "Meaning": "Evidence audit of retained checks and exact canonical WAV identity across PowerShell optimization stages. Timings are observations, not repeated paired benchmarks. No device, deadline, acoustic or reference-model fidelity qualification."
+}
