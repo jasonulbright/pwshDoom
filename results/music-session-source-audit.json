@@ -1,0 +1,51 @@
+{
+  "Parses": [
+    {
+      "Parsed": true,
+      "Sha256": "CF581D4476F6C1DC990359CE23773A717D4FA65F21FF6A03914517540FCD439C",
+      "Path": "scripts/Prepare-DoomMusic.ps1"
+    },
+    {
+      "Parsed": true,
+      "Sha256": "EB37782FA0F48BD3BCB313C27C856ED726B9756C5621C76AF57CC021883384FC",
+      "Path": "scripts/Test-MusicPreparation.ps1"
+    },
+    {
+      "Parsed": true,
+      "Sha256": "6C3BD7C77861FC9770E0EAD5431B2EEEA28FFD1DAD6DBAFAA968DB4559F3CEF4",
+      "Path": "scripts/Test-MusicRouteEvidence.ps1"
+    },
+    {
+      "Parsed": true,
+      "Sha256": "36FB672AA23BAB26E5039B62495398BB75694FF3549F120B4B0BEA8AAAF4D7E2",
+      "Path": "scripts/Export-MusicRouteClip.ps1"
+    },
+    {
+      "Parsed": true,
+      "Sha256": "E973B52067DC70FC32F427249F881C1B7C04A21BFD4D8623DB1D4C5888601757",
+      "Path": "scripts/Invoke-GameRenderWorker.ps1"
+    },
+    {
+      "Parsed": true,
+      "Sha256": "AE067E716CCCB2E4A4A3FE6F615E6258342F227AD8BD3082F9F3484AB57D1808",
+      "Path": "scripts/Test-SessionWorker.ps1"
+    }
+  ],
+  "CurrentPreparationAndReaderSourceChecks": 32,
+  "FourTrackHost": {
+    "SubmittedFrames": 175140,
+    "CheckpointMatches": 1,
+    "DeviceClosed": true,
+    "QualifiedTracks": [
+      "D_E1M2",
+      "D_E1M1",
+      "D_INTER",
+      "D_E1M3"
+    ],
+    "Tics": 139,
+    "ReturnedCompletedFrames": 171360,
+    "CancelledQueuedFramesUpperBound": 3780
+  },
+  "Error": null,
+  "Meaning": "Current code parses and source identity of actual preparation/reader tests; four-track warmed headless startup and bounded prefix only. Larger/cold soundtrack startup, acoustic continuity and performance are not qualified."
+}

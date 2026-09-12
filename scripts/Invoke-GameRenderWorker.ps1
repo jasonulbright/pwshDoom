@@ -40,7 +40,7 @@ try {
         $view.Write(16,$watch.Elapsed.TotalMilliseconds);$watch.Restart()
         $encoded=if($Style -eq 'Classic'){
             ConvertTo-AnsiStrip $ctx.Pixels 320 200 $FirstColumn $EndColumn $codec -ColumnOffset ($view.ReadInt32(64)) -RowOffset ($view.ReadInt32(68))
-        }elseif($kind -in 3,4){
+        }elseif($kind -in 1,3,4){
             ConvertTo-MenuStrip $ctx.Pixels 320 200 $FirstColumn $EndColumn $codec -ColumnOffset ($view.ReadInt32(64)) -RowOffset ($view.ReadInt32(68)) -HudStart $(if($kind -eq 4){168}else{-1})
         }else{
             ConvertTo-CharacterStrip $ctx.Pixels 320 200 $FirstColumn $EndColumn $codec -ColumnOffset ($view.ReadInt32(64)) -RowOffset ($view.ReadInt32(68)) -FrameNumber ($view.ReadInt32(72)) -HudStart $(if($kind -eq 0){168}else{200})

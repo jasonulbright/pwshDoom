@@ -1,8 +1,10 @@
 # Qualified music in the audio worker and game host
 
-Music can now run through the persistent audio worker alongside effects using an explicitly supplied catalog of qualified tracks. E1M1 and E1M2 now have qualified real loops; intermission continuous qualification is still running. This is opt-in integration, not a complete soundtrack release. The normal `-Sound` path remains effects-only.
+Music can now run through the persistent audio worker alongside effects using an explicitly supplied catalog of qualified tracks. E1M1, E1M2, intermission and E1M3 now have qualified real loops. This is opt-in integration, not a complete soundtrack release. The normal `-Sound` path remains effects-only. The established [campaign transition route](campaign-music.md) now passes with music in recorded Matrix/color-art runs, while queue starvation remains under investigation.
 
 ## Catalog and commands
+
+The [finite preparation command](music-preparation.md) can now create a catalog from requested local tracks, verify existing qualifications and resume completed tracks after interruption. It publishes only after every requested track passes; soundtrack-wide preparation remains incomplete.
 
 `MusicPlayback.ps1` opens a catalog of qualified readers at worker startup. Each reader validates its source/runtime identity and the complete cached payloads before playback. The simulation process additionally verifies that each catalog track's MUS hash matches the score in the active IWAD. Relative report paths are resolved against the catalog's directory. No asset is supplied by the repository.
 

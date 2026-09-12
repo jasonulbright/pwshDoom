@@ -1,0 +1,50 @@
+{
+  "SourceSha256": "1317388929B63F6C04271411913E3AE5CD46EAFF67E4F0C44F96FCD5F24EA61A",
+  "Receipts": [
+    {
+      "Path": "C:\\projects\\pwshDoom\\local\\recordings\\music-route-matrix-first-game.json",
+      "Sha256": "64B12CBA4FA1102A815FE5A3E1ABDD5C85913C88D3D28D3C8EA7D031D39DCF24"
+    },
+    {
+      "Path": "C:\\projects\\pwshDoom\\local\\recordings\\music-route-matrix-first-recording.json",
+      "Sha256": "ED3E708421FA3EC5D4919675FE4CFC1A3D9CE7277BDC3C2CC61809FE04B57CFD"
+    },
+    {
+      "Path": "C:\\projects\\pwshDoom\\local\\recordings\\music-route-matrix-first-audio.json",
+      "Sha256": "1E344318721B73B17E0A2761BB2875516ED70C1A87CF5691F4BB60583D76CC83"
+    },
+    {
+      "Path": "C:\\projects\\pwshDoom\\local\\recordings\\music-route-matrix-first-av.json",
+      "Sha256": "B776EA1F028AFADE76EDE9106864D2AB9B433B58280587B5E836E45B90504047"
+    },
+    {
+      "Path": "C:\\projects\\pwshDoom/results/input-session-replay.json",
+      "Sha256": "44E229AEFB44058B598D50F8EE260421762449E43332B17BC4CDF2FBF8A4AC13"
+    },
+    {
+      "Path": "C:\\projects\\pwshDoom\\local\\recordings\\music-route-matrix-first-route-sources.json",
+      "Sha256": "C787AF4DA9FAF9666CF5FC7910585C6657B563789CE22ACCB52074429F5474EA"
+    }
+  ],
+  "Details": null,
+  "Meaning": "Actual recorded E1M1/intermission/E1M2 ordinary-input route with three qualified music changes at their first affected packet, eight legacy checkpoints, scoped audiovisual output and source/media integrity. Audio starvation, returned/cancelled tails and pacing are reported, not silently treated as passing performance gates. No E1M2 completion or full campaign/fidelity claim.",
+  "Error": "Audio receives exactly three music changes\nat Check, C:\\projects\\pwshDoom\\scripts\\Test-MusicRouteEvidence.ps1: line 8\r\nat <ScriptBlock>, C:\\projects\\pwshDoom\\scripts\\Test-MusicRouteEvidence.ps1: line 18",
+  "Checks": [
+    {
+      "Name": "Actual session reaches replay end without game or audio errors",
+      "Passed": true
+    },
+    {
+      "Name": "All 1747 ordinary commands and eight established checkpoints match",
+      "Passed": true
+    },
+    {
+      "Name": "Actual game transitions retain E1M1 exit and E1M2 entry",
+      "Passed": true
+    },
+    {
+      "Name": "Audio receives exactly three music changes",
+      "Passed": false
+    }
+  ]
+}

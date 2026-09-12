@@ -18,7 +18,7 @@ function Assert-WorkerImage([byte[]]$Expected,[int]$ExpectedTic,[switch]$Screen,
             if($r.Pixels[$y*320+$x] -ne $Expected[$y*320+$x]){throw "Worker pixel mismatch at $x,$y"};$compared++
         }}
         $bytes=if($Style -eq 'Classic'){ConvertTo-AnsiStrip $Expected 320 200 $worker.First $worker.End $codec -ColumnOffset 11 -RowOffset 3}
-            elseif($Menu -or $Automap){ConvertTo-MenuStrip $Expected 320 200 $worker.First $worker.End $codec -ColumnOffset 11 -RowOffset 3 -HudStart $(if($Automap){168}else{-1})}
+            elseif($Screen -or $Menu -or $Automap){ConvertTo-MenuStrip $Expected 320 200 $worker.First $worker.End $codec -ColumnOffset 11 -RowOffset 3 -HudStart $(if($Automap){168}else{-1})}
             else{ConvertTo-CharacterStrip $Expected 320 200 $worker.First $worker.End $codec -ColumnOffset 11 -RowOffset 3 -FrameNumber 321 -HudStart $(if($Screen){200}else{168})}
         if([Convert]::ToBase64String($bytes) -cne [Convert]::ToBase64String($r.Bytes)){throw 'Encoded worker output mismatch.'}
     }

@@ -1,0 +1,52 @@
+{
+  "Meaning": "Actual long-period reader with source/payload verification, independent original-renderer opening PCM through the game mixer, and exact boundary bytes against the independently synthesized following period. No device, campaign completion or performance claim.",
+  "Details": {
+    "QualificationSha256": "DF75B2743048D05106F500317127BA462D2A2BB3F0EE1A63D9CA1E3D0F1697B2",
+    "ReferenceSha256": "480A6EE4997A58E8EE6F3307B7338BC1D6C9D8668CC0F050F8B63BBE6404EA3D",
+    "OpeningPcmSha256": "AF5C3E2B379798D8CFDFEE9C60AB0342D87989E335DBA6B917E5C6A38FC05A00",
+    "Track": "D_E1M3",
+    "BoundaryFloatSha256": "BBC30E3843D6D62148E042F1433F15C5EC159ADA1A457025FB43DF2A20725123",
+    "PeriodFrames": 11995200
+  },
+  "Error": null,
+  "Checks": [
+    {
+      "Name": "Continuous synthesis report qualified the matching score and bank",
+      "Passed": true
+    },
+    {
+      "Name": "Actual period exceeds old reader limit and opens under the new bound",
+      "Passed": true
+    },
+    {
+      "Name": "Independent reference WAV is intact and frame-aligned",
+      "Passed": true
+    },
+    {
+      "Name": "Reader plus game PCM mixer exactly reproduces independent opening",
+      "Passed": true
+    },
+    {
+      "Name": "Reusable boundary equals independently continuous second-to-third period bytes",
+      "Passed": true
+    },
+    {
+      "Name": "Qualified payload handles close",
+      "Passed": true
+    }
+  ],
+  "Sources": [
+    {
+      "Sha256": "AD69EA0A78EA942C10BCC7433EE7DD1B06BAE98376816B589ED0CA0802CBB7CD",
+      "Path": "src/MusicLoopReader.ps1"
+    },
+    {
+      "Sha256": "C8B63D3E491C61F4A1BA85A32ECC5743DF317F5AC0AEB18D4D6D218E05998258",
+      "Path": "src/AudioMixer.ps1"
+    },
+    {
+      "Sha256": "06EFA54FB8D1E617398FF0D3FDFC524FABB35F7D359238998A75A9B7BC5D3CA2",
+      "Path": "scripts/Test-MusicTrackQualification.ps1"
+    }
+  ]
+}

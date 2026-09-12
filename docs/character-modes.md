@@ -91,3 +91,11 @@ Plain green half blocks would preserve much more pixel detail and require only a
 A Terminal HLSL effect could add glow, scanlines, or its own character conversion to the terminal texture. Microsoft's [shader sample](https://github.com/microsoft/terminal/blob/main/samples/PixelShaders/README.md) documents that route. It would execute the effect on the GPU and would need to be identified separately from these PowerShell algorithms. No shader was installed or benchmarked for this prototype.
 
 Applying a similar effect to other games is a separate project. A framework such as [ReShade](https://github.com/crosire/reshade) offers game post-processing integration; per-game compatibility and performance would require tests. Neither that route nor this encoder makes arbitrary games run inside PowerShell. The reusable part here is an image-to-character conversion concept, while a general capture/input/audio/display integration remains additional work.
+
+## Session-screen readability correction
+
+The full music-enabled Matrix route exposed unreadable intermission labels when the entire screen passed through katakana encoding. Intermission/finale screen jobs now use the existing menu block encoder in both character styles. The output remains 160x50 cells; Matrix retains its green palette, color-art retains its source colors, and ordinary gameplay remains character art with its block HUD. Classic is unchanged.
+
+The codec regression passes 144 partition cases plus full-frame, temporal/HUD, independent edge/brightness, guard and viewport checks. The menu encoder passes 125 checks and 46 screen fixtures. Real seven-worker tests for Matrix and AnsiArt each compare 256,000 pixels and 28 strips, including screen/menu/automap transport and E1M2 asset replacement. These are transport/encoding checks, not complete finale fidelity.
+
+A subsequent actual Matrix route matches all eight legacy gameplay checkpoints with music enabled. Sampled intermission footage now shows the HANGAR/FINISHED and KILLS/ITEMS/SECRET labels as recognizable block text. Low contrast and downsampled edges remain; readability is improved, not certified for all screens/fonts. The original unreadable footage is retained alongside the revised audiovisual recording. See the campaign music findings for clocks, audio limitations and viewing-copy hashes.
