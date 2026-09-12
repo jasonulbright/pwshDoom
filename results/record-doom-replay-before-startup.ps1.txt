@@ -7,7 +7,6 @@ param([ValidateSet('Classic','AnsiArt','Matrix')][string]$Style='Matrix',
     [string]$Replay="$PSScriptRoot/../results/e1m1-route.json",
     [string]$OutputPrefix="$PSScriptRoot/../local/recordings/matrix-katakana",
     [string]$Ffmpeg,[string]$MediaFfmpeg,[ValidateRange(1,240)][int]$Seconds=90,
-    [ValidateRange(15,180)][int]$StartupTimeoutSeconds=60,
     [ValidateRange(60,240)][int]$CaptureLimit=240,
     [ValidateSet('GraphicsCapture','Gdi')][string]$CaptureBackend='GraphicsCapture',
     [ValidateRange(4,24)][int]$FontSize=12,[string]$FontFace,[switch]$Maximized,
@@ -78,7 +77,7 @@ try {
     $filterArgs=if($CaptureAudio -and $CaptureBackend -eq 'Gdi'){@('-vf','setpts=PTS-STARTPTS')}else{@()}
     $arguments=@('-hide_banner','-n')+$clockArgs+$captureArguments+$filterArgs+@(
         '-an','-c:v','h264_nvenc','-preset','p4','-cq','18','-b:v','0',
-        '-r','60','-fps_mode','cfr','-movflags','+faststart','-t',"$($Seconds+$StartupTimeoutSeconds+15)",$videoPath)
+        '-r','60','-fps_mode','cfr','-movflags','+faststart','-t',"$($Seconds+35)",$videoPath)
     $info=[Diagnostics.ProcessStartInfo]::new($Ffmpeg);$info.UseShellExecute=$false;$info.CreateNoWindow=$true
     $info.RedirectStandardInput=$true;$info.RedirectStandardOutput=$true;$info.RedirectStandardError=$true
     foreach($arg in $arguments){$info.ArgumentList.Add($arg)}
@@ -88,7 +87,7 @@ try {
     $watch.Restart()
     if($CaptureAudio){
         while(-not (Test-Path $hostReady)){
-            if($recorder.HasExited -or (Test-Path $gamePath) -or $watch.Elapsed.TotalSeconds -gt $StartupTimeoutSeconds){throw 'Game did not reach the capture startup gate.'}
+            if($recorder.HasExited -or (Test-Path $gamePath) -or $watch.Elapsed.TotalSeconds -gt 35){throw 'Game did not reach the capture startup gate.'}
             Start-Sleep -Milliseconds 20
         }
         $hostInfo=Get-Content $hostReady -Raw|ConvertFrom-Json
@@ -106,7 +105,7 @@ try {
     while(-not (Test-Path -LiteralPath $gamePath)){
         if($recorder.HasExited){throw 'Window capture exited before the game report; inspect the capture log.'}
         if($audioRecorder -and $audioRecorder.HasExited){throw 'Scoped audio capture exited before the game report.'}
-        if($watch.Elapsed.TotalSeconds -gt $Seconds+$StartupTimeoutSeconds+15){throw 'Game report did not arrive before the capture deadline.'}
+        if($watch.Elapsed.TotalSeconds -gt $Seconds+35){throw 'Game report did not arrive before the capture deadline.'}
         Start-Sleep -Milliseconds 100
     }
     $game=Get-Content -LiteralPath $gamePath -Raw | ConvertFrom-Json
@@ -142,7 +141,7 @@ finally {
         }
     }
     $stderr | Set-Content -LiteralPath ($prefix+'-ffmpeg.log')
-    @{FinishedUtc=[DateTime]::UtcNow.ToString('o');Error=$failure;Style=$Style;GlyphSet=$GlyphSet;FontFace=$FontFace;FontSize=$FontSize;Maximized=[bool]$Maximized;CaptureBackend=$CaptureBackend;CaptureLimit=if($CaptureBackend -eq 'GraphicsCapture'){$CaptureLimit}else{$null};VideoFps=60;ExpectedExit=$expectedEnding;ReplaySha256=(Get-FileHash -LiteralPath $Replay).Hash;StartupTimeoutSeconds=$StartupTimeoutSeconds;CaptureDeadlineSeconds=$Seconds+$StartupTimeoutSeconds+15;
+    @{FinishedUtc=[DateTime]::UtcNow.ToString('o');Error=$failure;Style=$Style;GlyphSet=$GlyphSet;FontFace=$FontFace;FontSize=$FontSize;Maximized=[bool]$Maximized;CaptureBackend=$CaptureBackend;CaptureLimit=if($CaptureBackend -eq 'GraphicsCapture'){$CaptureLimit}else{$null};VideoFps=60;ExpectedExit=$expectedEnding;ReplaySha256=(Get-FileHash -LiteralPath $Replay).Hash;
         Sources=$sourceSnapshot;SourcesChangedDuringRun=@($sourceSnapshot|Where-Object {$_.Sha256 -cne (Get-FileHash "$PSScriptRoot/../$($_.Path)").Hash});SoundRequested=[bool]$Sound;MusicCatalogSha256=if($MusicCatalog){(Get-FileHash $MusicCatalog).Hash}else{$null};AudioCaptured=$false;AudioCaptureRequested=[bool]$CaptureAudio;AudioExitCode=$audioExitCode;
         AudioReport=if($CaptureAudio){$audioPrefix+'.json'}else{$null};ClockReport=if($CaptureAudio){$clockPath}else{$null};
         SessionScheduleSha256=if($SessionSchedule){(Get-FileHash -LiteralPath $SessionSchedule).Hash}else{$null};SaveRoot=$SaveRoot;ExitDelaySeconds=$ExitDelaySeconds;InputReplaySha256=if($RecordInput -and (Test-Path -LiteralPath ($prefix+'-input.json'))){(Get-FileHash -LiteralPath ($prefix+'-input.json')).Hash}else{$null};

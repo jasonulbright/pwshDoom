@@ -6,7 +6,7 @@ Updated from the completed smoke report dated 2026-09-11T00:50:32.9972562Z. Rele
 
 Source/IWAD hashes and detailed results: [results/campaign-smoke-lineflags-fixed.json](../results/campaign-smoke-lineflags-fixed.json).
 
-E1M1 has an [input-only completion report](../results/e1m1-route-lineflags.json) with 1560 commands. That route ends at intermission; it does not qualify next-level presentation or a whole episode. Other maps still need completion evidence. The route harness targets E1M1/HMP; source-version matching is checked separately in the campaign validation report.
+E1M1 has an [input-only completion report](../results/e1m1-route-lineflags.json) with 1560 commands. That route ends at intermission; it does not qualify next-level presentation or a whole episode. E1M2 now has a separate [normal-route qualification](campaign-e1m2.md), including recorded continuation into E1M3. The remaining maps still need completion evidence. Source-version matching is checked separately from input/state equivalence.
 
 The [save/load core](save-load.md) now preserves the E1M1 → intermission → E1M2 input route across reconstruction and a fresh PowerShell process. Death/respawn and all four finale boundaries pass explicit save fixtures. These add state-continuation coverage; map-completion and terminal-host entries below retain their existing scope.
 
@@ -15,7 +15,7 @@ The integrated host also loads an intermission save, advances to E1M2, then load
 | Map | Load / idle simulation / two frames | Input-only completion | Transition / ending |
 | --- | --- | --- | --- |
 | E1M1 | Pass | Pass, HMP | Pass: real intermission -> E1M2 |
-| E1M2 | Pass | Untested | Entered/rendered; exit untested |
+| E1M2 | Pass | Pass, HMP pistol start, normal exit | Pass: recorded AnsiArt intermission -> E1M3, 13 matching checkpoints |
 | E1M3 | Pass | Untested | Untested in terminal host |
 | E1M4 | Pass | Untested | Untested in terminal host |
 | E1M5 | Pass | Untested | Untested in terminal host |
@@ -53,7 +53,7 @@ The integrated host also loads an intermission save, advances to E1M2, then load
 
 ## Current blockers and next work
 
-- [Recorded terminal session](../results/session-recorded-classic-game.json) verifies E1M1 intermission -> E1M2 and map-asset generation refresh. E1M2 completion and other terminal transitions remain unqualified.
+- [Recorded terminal session](../results/session-recorded-classic-game.json) verifies E1M1 intermission -> E1M2 and map-asset generation refresh. The [E1M2 route](campaign-e1m2.md) completes normally with 3,046 commands and independently continues into E1M3. Recorded AnsiArt playback passes all 42 integration checks after fixing an audio queue overflow. E1M3 normal/secret completion is next; audio starvation and below-target pacing remain open.
 - Isolated controller fixtures verify episode finales, all four secret returns, par units, secret-visit history, inventory carryover and death/respawn. See results/campaign-transitions-session.json. Fixtures do not qualify map playthroughs or boss-triggered exits.
 - Add ordinary-input recording and completion routes for the remaining maps, including normal/secret paths and boss-triggered effects. Keep targeted state fixtures separate from playthrough evidence.
 - Save/load has the bounded coverage above. Physical controls, audio, automap, harder scenes, visual fidelity, other difficulties, and 1080p hardware still need their own validation.
@@ -71,4 +71,4 @@ host restart/recovery coverage. Replays bypass preference-based command generati
 three settings-menu recordings preserve the existing control fixture checkpoints.
 This UI work adds no map completion to the matrix. See [settings](settings.md).
 
-Music integration currently has E1M1, E1M2, intermission and E1M3 qualified loops. E1M1's requalification preserves prior samples; the three longer tracks each pass six actual reader checks. The existing 1,747-command/eight-checkpoint route now passes with music and recorded audio in Matrix/color-art, including the improved block intermission UI. No additional completed map is claimed. Queue starvation remains an open timing issue. See [campaign music](campaign-music.md), [preparation](music-preparation.md) and [audiovisual capture evidence](audiovisual-recording.md).
+Music integration currently has E1M1, E1M2, intermission and E1M3 qualified loops. E1M1's requalification preserves prior samples; the three longer tracks each pass six actual reader checks. The 1,747-command/eight-checkpoint E1M1 route passes with music and recorded audio in Matrix/color-art, including the block intermission UI. The longer E1M2 route now completes with all 4,073,580 audio frames returned. Queue starvation remains an open timing issue. See [E1M2 qualification](campaign-e1m2.md), [campaign music](campaign-music.md), [preparation](music-preparation.md) and [audiovisual capture evidence](audiovisual-recording.md).

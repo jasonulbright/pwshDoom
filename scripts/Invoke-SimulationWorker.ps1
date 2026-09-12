@@ -14,6 +14,7 @@ $ready=[Threading.EventWaitHandle]::OpenExisting($Channel+'-ready');$go=[Threadi
 $content=$null;$game=$null;$tick=0;$version=0;$slot=0;$failure=$null;$outcome='Stopped'
 $audio=$null;$audioReport=$null;$audioPackets=$null;$audioEvents=$null;$audioClips=$null;$audioLoading=$false;$audioPacketTimes=[Collections.Generic.List[double]]::new()
 $audioPublicationTrace=[Collections.Generic.List[object]]::new()
+$audioBackpressure=[Collections.Generic.List[object]]::new();$audioBackpressureStart=0L
 $musicEvents=$null;$musicReports=@{};if($MusicCatalog){$Sound=$true}
 $loadingBoundary=$null;$loadingBoundaries=[Collections.Generic.List[object]]::new()
 $tickTimes=[Collections.Generic.List[double]]::new();$snapshotTimes=[Collections.Generic.List[double]]::new();$lateness=[Collections.Generic.List[double]]::new()
@@ -227,6 +228,19 @@ try {
             if($outcome -eq 'OwnerExited'){break};continue
         }
         if($tick -ge $view.ReadInt32(0)){[void]$go.WaitOne($(if($Sound){25}else{1000}));if($owner.HasExited){$outcome='OwnerExited';break};continue}
+        # This process is the only audio producer. Leave one slot of headroom
+        # for consumer semaphore bookkeeping before advancing game state.
+        # Return through the control loop while full so pause/menu/stop still work.
+        if($null -ne $audio -and $audio.Queue.Count -ge $audio.Queue.BoundedCapacity-1){
+            if($audioBackpressureStart -eq 0){$audioBackpressureStart=[Diagnostics.Stopwatch]::GetTimestamp()}
+            if($owner.HasExited){$outcome='OwnerExited';break}
+            [void]$go.WaitOne(2);continue
+        }
+        if($audioBackpressureStart -ne 0){
+            $pressureEnd=[Diagnostics.Stopwatch]::GetTimestamp()
+            $audioBackpressure.Add(@{BeforeTic=$tick;StartQpc=$audioBackpressureStart;EndQpc=$pressureEnd;Milliseconds=($pressureEnd-$audioBackpressureStart)*1000.0/[Diagnostics.Stopwatch]::Frequency})
+            $audioBackpressureStart=0L
+        }
         [long]$offset=4096+($tick%1024)*16
         $cmd=$commands[0];$cmd.Clear();$cmd.ForwardMove=$view.ReadInt32($offset);$cmd.SideMove=$view.ReadInt32($offset+4);$cmd.AngleTurn=$view.ReadInt32($offset+8);$cmd.Buttons=$view.ReadInt32($offset+12)
         $commandLog.Add(@($cmd.ForwardMove,$cmd.SideMove,$cmd.AngleTurn,$cmd.Buttons))
@@ -267,6 +281,7 @@ finally {
     @{FinishedUtc=[DateTime]::UtcNow.ToString('o');Outcome=$outcome;Error=$failure;Tics=$tick;WarmupTics=140;Skill=$Skill;Episode=$Episode;Map=$Map;
         SoundEnabled=[bool]$Sound;Audio=$audioReport;AudioPacketMs=(Get-SampleStats $audioPacketTimes.ToArray());AudioPacketSamplesMs=$audioPacketTimes.ToArray();AudioSourcePeak=if($audioPackets){$audioPackets.MaxSources}else{0};AudioEvents=if($audioPackets){$audioPackets.Events}else{0};
         AudioPublicationTrace=$audioPublicationTrace.ToArray();
+        AudioBackpressure=$audioBackpressure.ToArray();IncompleteAudioBackpressureStartQpc=$audioBackpressureStart;
         ReplayCheckpoints=$checkpoints.ToArray();ReplayCheckpointMs=(Get-SampleStats $checkpointTimes.ToArray());ReplayCheckpointSamplesMs=$checkpointTimes.ToArray();
         ControlEvents=$controlLog.ToArray();MenuScreen=$menuScreen;MenuRevision=$menuRevision;SaveOperations=$saveOperations.ToArray();SaveDirectory=$saveDirectory;
         AutomapCommands=$automapCommands.ToArray();AutomapDiscoveryMs=(Get-SampleStats $discoveryTimes.ToArray());AutomapDiscoverySamplesMs=$discoveryTimes.ToArray();AutomapRenderMs=(Get-SampleStats $automapTimes.ToArray());AutomapRenderSamplesMs=$automapTimes.ToArray();

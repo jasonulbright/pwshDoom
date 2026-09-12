@@ -1,0 +1,112 @@
+{
+  "Format": "pwshDoom.InputReplay",
+  "Version": 4,
+  "AutomapCommands": [],
+  "CreatedUtc": "2026-09-12T14:10:34.6495104Z",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "Skill": 3,
+  "Episode": 1,
+  "Map": 2,
+  "ContinueCampaign": true,
+  "SourceFingerprint": "32DB0407863141C2C87D648D48F8387EBAF23BFC40D6F6F9415141011BA537AF",
+  "PowerShell": "7.6.5",
+  "Origin": "Replay",
+  "ExitReason": "Error",
+  "Error": "Capture startup gate timed out before simulation started.\nat <ScriptBlock>, C:\\projects\\pwshDoom\\scripts\\Invoke-Doom.ps1: line 129",
+  "InputCommands": [],
+  "Checkpoints": [
+    {
+      "Sha256": "F6CD963B8D33F06E5DE25B23D3AFC87226ED98E67CAB99CC4E9F65B606E576F0",
+      "State": {
+        "Schema": 1,
+        "Tic": 0,
+        "State": "Level",
+        "Episode": 1,
+        "Map": 2,
+        "LevelTime": 1,
+        "RandomIndex": 66,
+        "Paused": false,
+        "PlayerState": "Live",
+        "Health": 100,
+        "Armor": 0,
+        "Position": [
+          -2097152,
+          -15728640,
+          1572864,
+          1073741824
+        ],
+        "Ammo": [
+          50,
+          0,
+          0,
+          0
+        ],
+        "Weapons": [
+          true,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "Keys": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "DidSecret": false,
+        "RenderSnapshotSha256": "0634B9B4D60E821031D7E90B18B255C4B4F89FAAB18222DE01705C6153708A47",
+        "Intermission": null,
+        "Finale": null
+      },
+      "AutomapSha256": "019965405903AC3AB694C4F9D693EE285CAD93108A379E32A227846B80589F57",
+      "Tic": 0
+    }
+  ],
+  "Transitions": [
+    {
+      "Weapons": [
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "Generation": 1,
+      "Keys": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "Tic": 0,
+      "Armor": 0,
+      "Map": 2,
+      "Kills": 0,
+      "Episode": 1,
+      "DidSecret": false,
+      "Ammo": [
+        50,
+        0,
+        0,
+        0
+      ],
+      "State": "Level",
+      "Health": 100
+    }
+  ],
+  "ControlEvents": [],
+  "Meaning": "Commands consumed by the simulation, including shutdown drainage. One command per 1/35 second; wall pauses are not commands. Load controls restore the exact hash-addressed save in the matching SaveRoot; the command index remains monotonic across game-clock rewinds. Checkpoints sample state/render data and do not prove vanilla demo compatibility."
+}

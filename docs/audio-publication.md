@@ -40,4 +40,4 @@ Use the [campaign recording command](campaign-music.md), then analyze fresh path
   -Baseline ./results/music-route-loading-boundary-game.json -Output ./local/my-publication.json
 ```
 
-The analyzer is deliberately specific to the established 1,747-command/eight-checkpoint route. Next extend ordinary-input campaign coverage to E1M2, retaining this route as a regression. Repeated pacing trials, difficult scenes, full soundtrack, fidelity, physical controls and portability remain release work.
+The analyzer is deliberately specific to the established 1,747-command/eight-checkpoint route. The subsequent [E1M2 qualification](campaign-e1m2.md) exposed a real queue overflow on a longer route. Producer waiting now prevents that failure, but its successful recording has 17 unexpected pre-shutdown empty queues. The single zero-starvation trial above must not be generalized. Repeated pacing trials, difficult scenes, full soundtrack, fidelity, physical controls and portability remain release work.

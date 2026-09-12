@@ -1,0 +1,53 @@
+{
+  "Sources": [
+    {
+      "Sha256": "B3619B971A0753D362FC2DCD8EED4E0C68A9C4A6E22B8DD7AEBC06A5D2FBE9C0",
+      "Path": "scripts/Invoke-SimulationWorker.ps1"
+    },
+    {
+      "Sha256": "DF656735B564B0F27DC1628AFE78C6F8A2899C1A37F60FB1872CCBE69DF42112",
+      "Path": "scripts/Invoke-AudioWorker.ps1"
+    },
+    {
+      "Sha256": "7E59CFCC112C2FC8369F17077F40A391E56947FE4CD31354E6387D750102386E",
+      "Path": "src/MusicEvents.ps1"
+    },
+    {
+      "Sha256": "1A4DFDE7531BEFC0B176CAC8566F82C28EF5CC03D30057B8943E25384E79B596",
+      "Path": "src/MusicPlayback.ps1"
+    },
+    {
+      "Sha256": "A930314C31A8DC628E96266E4654ACE1E2222FE076519B98578663A165DE1AD4",
+      "Path": "src/AudioRunspace.ps1"
+    },
+    {
+      "Sha256": "01865375DB878EFA137B3B5EF49437B4FFBF9B8C6F0359A2AA52580E0977801E",
+      "Path": "src/AudioPackets.ps1"
+    },
+    {
+      "Sha256": "C8B63D3E491C61F4A1BA85A32ECC5743DF317F5AC0AEB18D4D6D218E05998258",
+      "Path": "src/AudioMixer.ps1"
+    },
+    {
+      "Sha256": "96A01F59E5901B5966C7786C0E28AE6D88E186DC57B56C0EE8F57BB42CEFFB3B",
+      "Path": "src/SimulationProcess.ps1"
+    },
+    {
+      "Sha256": "C4556777C9426FB266A1C80B4264276D65473203828F9E82D087F3A778F6B994",
+      "Path": "scripts/Test-MusicRouteEvidence.ps1"
+    },
+    {
+      "Sha256": "E973B52067DC70FC32F427249F881C1B7C04A21BFD4D8623DB1D4C5888601757",
+      "Path": "scripts/Invoke-GameRenderWorker.ps1"
+    },
+    {
+      "Sha256": "D2E3E027B39D5EC8084A930EC89233442902390063D2986814E25D5CA4174B53",
+      "Path": "src/CharacterCodec.ps1"
+    },
+    {
+      "Sha256": "EC3189377645405DF30D1E37841B0CAA7FA862B66BD54523DBEF68E83F895CAE",
+      "Path": "src/ManagedDoom/Doom/Game/DoomGame.sb.ps1"
+    }
+  ],
+  "CreatedUtc": "2026-09-12T14:14:26.5093089Z"
+}

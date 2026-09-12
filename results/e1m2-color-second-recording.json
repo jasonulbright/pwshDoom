@@ -1,0 +1,101 @@
+{
+  "Video": "C:\\projects\\pwshDoom\\local\\recordings\\e1m2-color-second.mp4",
+  "Style": "AnsiArt",
+  "FontSize": 12,
+  "TargetWasPreexisting": false,
+  "ExitDelaySeconds": 3,
+  "Error": "Game/recording failed: Simulation failed; see the simulation error in the session report.\nat <ScriptBlock>, C:\\projects\\pwshDoom\\scripts\\Invoke-Doom.ps1: line 137 ",
+  "VideoSha256": "D53C2A46DA49CAB9216300CF61F681F381EEC9346EBF363284EFEC9CA72B6E58",
+  "SessionScheduleSha256": null,
+  "GameReport": "C:\\projects\\pwshDoom\\local\\recordings\\e1m2-color-second-game.json",
+  "EncoderExitCode": 0,
+  "Arguments": [
+    "-hide_banner",
+    "-n",
+    "-filter_complex",
+    "gfxcapture=hwnd=424216416:max_framerate=240:capture_cursor=0:display_border=1:width=-2:height=-2",
+    "-an",
+    "-c:v",
+    "h264_nvenc",
+    "-preset",
+    "p4",
+    "-cq",
+    "18",
+    "-b:v",
+    "0",
+    "-r",
+    "60",
+    "-fps_mode",
+    "cfr",
+    "-movflags",
+    "+faststart",
+    "-t",
+    "225",
+    "C:\\projects\\pwshDoom\\local\\recordings\\e1m2-color-second.mp4"
+  ],
+  "GlyphSet": "Katakana",
+  "StartupTimeoutSeconds": 60,
+  "TerminalPid": 1952,
+  "VideoFps": 60,
+  "CaptureLimit": 240,
+  "InputReplaySha256": "4C929394B1179FF8F61B194FED12E026AD823A39AA76B5D049DDBC85FB471FD3",
+  "FfmpegSha256": "BD59EE9D861A9531AC289A8D9C0A02B8166A215A47D882605E372845324A1863",
+  "FontFace": "MS Gothic",
+  "ClockReport": "C:\\projects\\pwshDoom\\local\\recordings\\e1m2-color-second-clock.json",
+  "FinishedUtc": "2026-09-12T14:16:08.1963895Z",
+  "Ffmpeg": "local/tools/capture-build/FFmpeg-n9.0.1/ffmpeg.exe",
+  "WindowHandle": 424216416,
+  "SourcesChangedDuringRun": [],
+  "CaptureStartQpc": 949015535185,
+  "AudioCaptured": false,
+  "ReplaySha256": "4FDA15BDC43BBF759A38FCB2382416CBF6582377CB8175DFAFB8FEACFF10591D",
+  "MediaFfmpegSha256": "72A489ECCD008C2EC2C0A5856C5C75BC3D8BBFA90166C4566865C246445E6AA3",
+  "CaptureBackend": "GraphicsCapture",
+  "AudioCaptureRequested": true,
+  "SaveRoot": "",
+  "AudioExitCode": 0,
+  "ExpectedExit": "ReplayEnd",
+  "AudioReport": "C:\\projects\\pwshDoom\\local\\recordings\\e1m2-color-second-audio.json",
+  "Sources": [
+    {
+      "Path": "Start-Doom.ps1",
+      "Sha256": "3EC570EDED87DA4C7316B3CB2F567F580571BF2E6D10BF696DCC4D95D5C147EC"
+    },
+    {
+      "Path": "scripts/Invoke-Doom.ps1",
+      "Sha256": "05A86C46911204AE6BADA81EADE7C788E92F022F248F83B5E35063C22DF900FF"
+    },
+    {
+      "Path": "scripts/Record-DoomReplay.ps1",
+      "Sha256": "349796E8739CC3FF5AFEE23D1085A9F58B4738F4A0961AE28A01D33F569FB666"
+    },
+    {
+      "Path": "scripts/Record-ProcessAudio.ps1",
+      "Sha256": "41EE7E57F6703E7F7BC1FDCE53A1FD23F84A67A717CD647C703C5C1176004346"
+    },
+    {
+      "Path": "scripts/Merge-DoomCaptureAudio.ps1",
+      "Sha256": "795D02E96FFC3373741E7970512D1D65CC777A43B834D5771F69EC81CF3AF2C4"
+    },
+    {
+      "Path": "src/ProcessAudioCapture.ps1",
+      "Sha256": "A747786A2428F71C907F86AD631983548AAE8C6450F422F64144D367B8E9E321"
+    },
+    {
+      "Path": "src/CaptureClock.ps1",
+      "Sha256": "CED03D531F7C129D9E079F1F3B548DD436EFD81782974A3752D4689FA3E45DFB"
+    },
+    {
+      "Path": "src/CaptureTimeline.ps1",
+      "Sha256": "EFA64468F234327E5D7682CE08FF5B8863EEEFC5D5B082DB9B74BE544D092E21"
+    }
+  ],
+  "PreexistingTerminalWindows": 1,
+  "SoundRequested": true,
+  "MediaFfmpeg": "local/tools/ffmpeg/ffmpeg-9.0.1-essentials_build/bin/ffmpeg.exe",
+  "CaptureDeadlineSeconds": 225,
+  "Maximized": false,
+  "MusicCatalogSha256": "86A210DDFF0EFB7864E2606CC1B4AB38BD8872D6A5716230F5F4F8BD67F819BB",
+  "Meaning": "Actual game-window Windows.Graphics.Capture at the recorded capture ceiling, with D3D11 frames passed to external NVENC H.264 encoding. The ceiling exceeds 60 to avoid capture-rate aliasing; actual arrival rate is compositor-driven. Output is resampled to 60 FPS and can contain duplicates. Video includes startup and a short console return. Recording can affect game/presentation timing; encoded 60 FPS does not prove 60 distinct displayed game images. No microphone or desktop audio is captured. The input selects only the game window; inspect footage for occlusion or capture artifacts.",
+  "QpcFrequency": 10000000
+}
