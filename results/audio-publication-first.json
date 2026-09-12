@@ -1,0 +1,85 @@
+{
+  "SourceSha256": "6807D9C88382DDE5493CE6A0EE3FE5C1DA923CFC5B5CA1FEDB578F3A1ADB216E",
+  "BaselineSha256": "963BE85C51B714151408054E1C25F959F155E79A290BB8B515F4052596622C72",
+  "Checks": [
+    {
+      "Name": "Both complete routes preserve the same IWAD and recorded commands",
+      "Passed": true
+    },
+    {
+      "Name": "All eight established checkpoints match in both routes",
+      "Passed": true
+    },
+    {
+      "Name": "Every consumed tic has one audio packet and publication trace",
+      "Passed": true
+    },
+    {
+      "Name": "Moving publication preserves every submitted PCM sample",
+      "Passed": true
+    },
+    {
+      "Name": "QPC proves publication precedes presentation work except map epoch handoff",
+      "Passed": true
+    },
+    {
+      "Name": "The sole deferred packet is the established new-world tic",
+      "Passed": true
+    }
+  ],
+  "Error": null,
+  "Details": {
+    "DeferredMapPackets": 1,
+    "UpdateToEnqueueMs": {
+      "Count": 1746,
+      "Mean": 0.29830756013745713,
+      "P95": 0.4213,
+      "Maximum": 31.207700000000003
+    },
+    "ReturnedFrames": 2201220,
+    "ActiveSeconds": 49.9962949,
+    "EarlyPackets": 1746,
+    "Writes": 2966,
+    "PresentationWorkAfterEnqueueMs": {
+      "Count": 1746,
+      "Mean": 9.412631901489128,
+      "P95": 18.465600000000002,
+      "Maximum": 131.4944
+    },
+    "Loading": [
+      {
+        "StartQpc": 933896866263,
+        "EndQpc": 933919235069,
+        "Tic": 1675,
+        "TotalMilliseconds": 2236.8806,
+        "BeforeAssetsMilliseconds": 1106.6763,
+        "Map": 2,
+        "Episode": 1,
+        "AudioDrain": {
+          "AcknowledgedQpc": 933899236056,
+          "CompletedFrames": 2110500,
+          "ThroughSequence": 1674,
+          "WaitMilliseconds": 247.9906
+        }
+      }
+    ],
+    "WallSeconds": 52.2311891,
+    "EarlyUiPackets": 116,
+    "UiPresentationWorkAfterEnqueueMs": {
+      "Count": 116,
+      "Mean": 15.491197413793103,
+      "P95": 20.4934,
+      "Maximum": 131.4944
+    },
+    "CancelledFramesUpperBound": 0,
+    "SubmittedPcmSha256": "DB35F5D34C9206B8D47126FEF57070EB6D10BD0D3D3A302BC11269666288AD63",
+    "Starvation": [
+      {
+        "AfterPacket": 1746,
+        "WallMs": 70333.8372
+      }
+    ]
+  },
+  "GameReportSha256": "21F382A64E28859410A718A9C002CF67EDF2FC055FC3852F3022977F37B42EB4",
+  "Meaning": "Actual QPC ordering around completed simulation tics and presentation work, with independent retained-route command/checkpoint/PCM identity. Time overlapped with presentation is not a measured improvement in physical speaker latency; starvation and wall time remain visible."
+}

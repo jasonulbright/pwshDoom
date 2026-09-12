@@ -1,0 +1,257 @@
+{
+  "Meaning": "Sequence-aligned retained route measurements after asserting all six arrays and audio packet counts equal consumed commands. Starvation polling is not hardware telemetry. Tick-start lateness and submission age have different origins; no sum is presented as acoustic latency. Map/UI transitions and initial work remain in their recorded timing windows.",
+  "ActiveStarves": 0,
+  "Snapshots": {
+    "Maximum": 124.6407,
+    "Mean": 5.778992100744128,
+    "P95": 11.2536,
+    "Count": 1747
+  },
+  "Transitions": [
+    {
+      "Keys": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "State": "Level",
+      "Tic": 0,
+      "Generation": 1,
+      "Weapons": [
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "Kills": 0,
+      "Map": 1,
+      "Health": 100,
+      "Ammo": [
+        50,
+        0,
+        0,
+        0
+      ],
+      "DidSecret": false,
+      "Episode": 1,
+      "Armor": 0
+    },
+    {
+      "Keys": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "State": "Intermission",
+      "Tic": 1560,
+      "Generation": 1,
+      "Weapons": [
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "Kills": 5,
+      "Map": 1,
+      "Health": 75,
+      "Ammo": [
+        37,
+        4,
+        0,
+        0
+      ],
+      "DidSecret": false,
+      "Episode": 1,
+      "Armor": 0
+    },
+    {
+      "Keys": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "State": "Level",
+      "Tic": 1676,
+      "Generation": 2,
+      "Weapons": [
+        true,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "Kills": 0,
+      "Map": 2,
+      "Health": 75,
+      "Ammo": [
+        37,
+        4,
+        0,
+        0
+      ],
+      "DidSecret": false,
+      "Episode": 1,
+      "Armor": 0
+    }
+  ],
+  "SubmittedFrames": 2201220,
+  "Error": null,
+  "MapReloads": [
+    {
+      "Episode": 1,
+      "Map": 2,
+      "Tic": 1676,
+      "WorkerPids": [
+        23320,
+        26920,
+        7136,
+        26580,
+        19660,
+        25576,
+        31872,
+        2384,
+        24864,
+        18656,
+        22368,
+        17508,
+        14984,
+        17364,
+        32292,
+        29920
+      ],
+      "StartWallMs": 47897.7442,
+      "Generation": 2,
+      "EndWallMs": 50132.7237
+    }
+  ],
+  "RebufferResumes": null,
+  "ActiveSeconds": 49.9962949,
+  "AudioMix": {
+    "Maximum": 67.954,
+    "Mean": 4.423073440183173,
+    "P95": 14.5309,
+    "Count": 1747
+  },
+  "MusicTransitions": [
+    {
+      "Kind": "Start",
+      "Loop": true,
+      "Track": "D_E1M1",
+      "AfterFrames": 0
+    },
+    {
+      "Kind": "Start",
+      "Loop": true,
+      "Track": "D_INTER",
+      "AfterFrames": 1965600
+    },
+    {
+      "Kind": "EpochReset",
+      "AfterFrames": 2110500
+    },
+    {
+      "Kind": "Start",
+      "Loop": true,
+      "Track": "D_E1M2",
+      "AfterFrames": 2110500
+    }
+  ],
+  "WallSeconds": 52.2311891,
+  "CancelledFramesUpperBound": 0,
+  "Tics": 1747,
+  "StarvationWindows": [
+    {
+      "AudioWorkerWallMs": 70333.8372,
+      "AfterFinalPacket": true,
+      "Samples": [
+        {
+          "AudioMixMs": 0.816,
+          "SnapshotMs": 8.2123,
+          "PacketBuildMs": 0.1223,
+          "TickStartLatenessMs": 43.75819999999658,
+          "Sequence": 1742,
+          "PacketSubmissionAgeMs": 7.0714,
+          "SimulationMs": 3.9507
+        },
+        {
+          "AudioMixMs": 0.5697,
+          "SnapshotMs": 8.5219,
+          "PacketBuildMs": 0.1265,
+          "TickStartLatenessMs": 38.91257142856921,
+          "Sequence": 1743,
+          "PacketSubmissionAgeMs": 15.4019,
+          "SimulationMs": 3.5323
+        },
+        {
+          "AudioMixMs": 0.5057,
+          "SnapshotMs": 9.3896,
+          "PacketBuildMs": 0.1357,
+          "TickStartLatenessMs": 35.008542857147404,
+          "Sequence": 1744,
+          "PacketSubmissionAgeMs": 4.65,
+          "SimulationMs": 11.7389
+        },
+        {
+          "AudioMixMs": 1.1833,
+          "SnapshotMs": 8.3533,
+          "PacketBuildMs": 0.1295,
+          "TickStartLatenessMs": 38.79261428571772,
+          "Sequence": 1745,
+          "PacketSubmissionAgeMs": 11.3961,
+          "SimulationMs": 14.1804
+        },
+        {
+          "AudioMixMs": 0.5915,
+          "SnapshotMs": 10.0165,
+          "PacketBuildMs": 0.1475,
+          "TickStartLatenessMs": 44.37658571428619,
+          "Sequence": 1746,
+          "PacketSubmissionAgeMs": 12.3245,
+          "SimulationMs": 9.9782
+        }
+      ],
+      "AfterPacket": 1746
+    }
+  ],
+  "ReturnedFrames": 2201220,
+  "GameReport": "C:\\projects\\pwshDoom\\local\\recordings\\music-route-early-audio-game.json",
+  "Simulation": {
+    "Maximum": 1099.3393,
+    "Mean": 7.70629433314254,
+    "P95": 17.6508,
+    "Count": 1747
+  },
+  "CheckpointMatches": 8,
+  "Writes": 2966,
+  "SourceSha256": "100C9486AE1251B1568C2CBAC0340941A850BB05DF05628E12610E65EDD6784A",
+  "SubmissionAge": {
+    "Maximum": 180.9146,
+    "Mean": 125.18650440755589,
+    "P95": 157.5199,
+    "Count": 1747
+  },
+  "GameReportSha256": "21F382A64E28859410A718A9C002CF67EDF2FC055FC3852F3022977F37B42EB4"
+}

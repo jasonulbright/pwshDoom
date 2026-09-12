@@ -13,6 +13,7 @@ $channelMap=[IO.MemoryMappedFiles.MemoryMappedFile]::OpenExisting($Channel);$vie
 $ready=[Threading.EventWaitHandle]::OpenExisting($Channel+'-ready');$go=[Threading.EventWaitHandle]::OpenExisting($Channel+'-go')
 $content=$null;$game=$null;$tick=0;$version=0;$slot=0;$failure=$null;$outcome='Stopped'
 $audio=$null;$audioReport=$null;$audioPackets=$null;$audioEvents=$null;$audioClips=$null;$audioLoading=$false;$audioPacketTimes=[Collections.Generic.List[double]]::new()
+$audioPublicationTrace=[Collections.Generic.List[object]]::new()
 $musicEvents=$null;$musicReports=@{};if($MusicCatalog){$Sound=$true}
 $loadingBoundary=$null;$loadingBoundaries=[Collections.Generic.List[object]]::new()
 $tickTimes=[Collections.Generic.List[double]]::new();$snapshotTimes=[Collections.Generic.List[double]]::new();$lateness=[Collections.Generic.List[double]]::new()
@@ -66,6 +67,17 @@ function Begin-SimulationLevelLoad {
         $script:audioLoading=$true
         $script:loadingBoundary.AudioDrain=Suspend-DoomAudioAfterPacket $audio ($audioPackets.Sequence-1)
     }
+}
+function Publish-SimulationAudioPacket {
+    if($null -eq $audio){return 0L}
+    $audio.Shared.Volume=$view.ReadInt32(88)/100.0
+    $audio.Shared.Paused=$script:menuScreen -ne 0 -or $view.ReadInt32(84) -ne 0 -or $script:audioLoading
+    $packetWatch=[Diagnostics.Stopwatch]::StartNew()
+    $packet=Get-DoomAudioPacket $audioPackets $audioEvents $audioClips $audio.Shared.Epoch
+    if($musicEvents){$packet.Music=$musicEvents.Drain()}
+    Send-DoomAudioPacket $audio $packet
+    $queuedQpc=[Diagnostics.Stopwatch]::GetTimestamp();$audioPacketTimes.Add($packetWatch.Elapsed.TotalMilliseconds)
+    return $queuedQpc
 }
 function Publish-SimulationMapChange {
     if($null -eq $script:loadingBoundary){Begin-SimulationLevelLoad}
@@ -226,8 +238,13 @@ try {
         $priorWorld=$game.World;$priorState=$game.State
         if($null -ne $audioEvents){$audioEvents.Tic=$tick}
         $watch=[Diagnostics.Stopwatch]::StartNew();$null=$game.Update($commands);$tickTimes.Add($watch.Elapsed.TotalMilliseconds);$tick++
-        if([int]$game.State -eq 0){$watch.Restart();$automapGraphics.Discovery.DiscoverMap($game.World.ConsolePlayer);$discoveryTimes.Add($watch.Elapsed.TotalMilliseconds)}
+        $updateEndQpc=[Diagnostics.Stopwatch]::GetTimestamp()
         $mapChanged=-not [object]::ReferenceEquals($priorWorld,$game.World)
+        # The tic's audio is independent of discovery, checkpoints and UI drawing.
+        # A map change still needs its existing epoch/asset handoff first.
+        $packetQueuedQpc=if(-not $mapChanged){Publish-SimulationAudioPacket}else{0L}
+        $presentationStartQpc=[Diagnostics.Stopwatch]::GetTimestamp()
+        if([int]$game.State -eq 0){$watch.Restart();$automapGraphics.Discovery.DiscoverMap($game.World.ConsolePlayer);$discoveryTimes.Add($watch.Elapsed.TotalMilliseconds)}
         if($mapChanged){
             Publish-SimulationMapChange;if($outcome -eq 'OwnerExited'){break}
         }else{
@@ -235,7 +252,9 @@ try {
             if($tick%350 -eq 0 -or $game.State -ne $priorState -or $extraCheckpoints.ContainsKey($tick)){Record-ReplayCheckpoint}
             $watch.Restart();Publish-SimulationSnapshot;$snapshotTimes.Add($watch.Elapsed.TotalMilliseconds)
         }
-        if($null -ne $audio){$watch.Restart();$packet=Get-DoomAudioPacket $audioPackets $audioEvents $audioClips $audio.Shared.Epoch;if($musicEvents){$packet.Music=$musicEvents.Drain()};Send-DoomAudioPacket $audio $packet;$audioPacketTimes.Add($watch.Elapsed.TotalMilliseconds)}
+        $presentationEndQpc=[Diagnostics.Stopwatch]::GetTimestamp()
+        if($mapChanged){$packetQueuedQpc=Publish-SimulationAudioPacket}
+        if($null -ne $audio){$audioPublicationTrace.Add(@{Sequence=$tick-1;State=[int]$game.State;MapChanged=$mapChanged;UpdateEndQpc=$updateEndQpc;EnqueuedQpc=$packetQueuedQpc;PresentationStartQpc=$presentationStartQpc;PresentationEndQpc=$presentationEndQpc})}
         if($StopAtLevelEnd -and $game.State -ne [GameState]::Level){$outcome='LevelComplete';$view.Write(12,2);break}
     }
 } catch {$failure=$_.ToString()+"`n"+$_.ScriptStackTrace;$outcome='Error';[Console]::Error.WriteLine($failure);$view.Write(12,3);[void]$ready.Set()}
@@ -247,6 +266,7 @@ finally {
     if($null -ne $game -and $null -ne $game.World -and -not $failure){try{Record-ReplayCheckpoint}catch{$failure=$_.ToString();$outcome='Error'}}
     @{FinishedUtc=[DateTime]::UtcNow.ToString('o');Outcome=$outcome;Error=$failure;Tics=$tick;WarmupTics=140;Skill=$Skill;Episode=$Episode;Map=$Map;
         SoundEnabled=[bool]$Sound;Audio=$audioReport;AudioPacketMs=(Get-SampleStats $audioPacketTimes.ToArray());AudioPacketSamplesMs=$audioPacketTimes.ToArray();AudioSourcePeak=if($audioPackets){$audioPackets.MaxSources}else{0};AudioEvents=if($audioPackets){$audioPackets.Events}else{0};
+        AudioPublicationTrace=$audioPublicationTrace.ToArray();
         ReplayCheckpoints=$checkpoints.ToArray();ReplayCheckpointMs=(Get-SampleStats $checkpointTimes.ToArray());ReplayCheckpointSamplesMs=$checkpointTimes.ToArray();
         ControlEvents=$controlLog.ToArray();MenuScreen=$menuScreen;MenuRevision=$menuRevision;SaveOperations=$saveOperations.ToArray();SaveDirectory=$saveDirectory;
         AutomapCommands=$automapCommands.ToArray();AutomapDiscoveryMs=(Get-SampleStats $discoveryTimes.ToArray());AutomapDiscoverySamplesMs=$discoveryTimes.ToArray();AutomapRenderMs=(Get-SampleStats $automapTimes.ToArray());AutomapRenderSamplesMs=$automapTimes.ToArray();

@@ -1,0 +1,102 @@
+{
+  "ClockReport": "C:\\projects\\pwshDoom\\local\\recordings\\music-route-early-audio-clock.json",
+  "CaptureStartQpc": 933100640031,
+  "Meaning": "Actual game-window Windows.Graphics.Capture at the recorded capture ceiling, with D3D11 frames passed to external NVENC H.264 encoding. The ceiling exceeds 60 to avoid capture-rate aliasing; actual arrival rate is compositor-driven. Output is resampled to 60 FPS and can contain duplicates. Video includes startup and a short console return. Recording can affect game/presentation timing; encoded 60 FPS does not prove 60 distinct displayed game images. No microphone or unrelated application audio is captured. The input selects only the game window; inspect footage for occlusion or capture artifacts. Delivered movie includes scoped digital audio aligned by the retained capture timestamp and QPC clock model, with explicit zero-filled intervals in its audio/video report. Original silent video and raw captured PCM remain retained. This does not qualify acoustic output or physical A/V latency.",
+  "AudioReport": "C:\\projects\\pwshDoom\\local\\recordings\\music-route-early-audio-audio.json",
+  "QpcFrequency": 10000000,
+  "EncoderExitCode": 0,
+  "FfmpegSha256": "BD59EE9D861A9531AC289A8D9C0A02B8166A215A47D882605E372845324A1863",
+  "GlyphSet": "Katakana",
+  "GameReport": "C:\\projects\\pwshDoom\\local\\recordings\\music-route-early-audio-game.json",
+  "SourcesChangedDuringRun": [],
+  "InputReplaySha256": null,
+  "MusicCatalogSha256": "3ED6A4FB50B180DE2F8145169E09B2106A930B5B09ADC9B0A71D078416C99649",
+  "CaptureBackend": "GraphicsCapture",
+  "WindowHandle": 8586486,
+  "ReplaySha256": "44E229AEFB44058B598D50F8EE260421762449E43332B17BC4CDF2FBF8A4AC13",
+  "VideoSha256": "54A7D365BE4148EB032638E39C68CDCF4274614195A40783C8D90DFAC8D61698",
+  "AudioCaptured": true,
+  "TerminalPid": 14924,
+  "TargetWasPreexisting": false,
+  "ExpectedExit": "ReplayEnd",
+  "VideoFps": 60,
+  "AudioCaptureRequested": true,
+  "Arguments": [
+    "-hide_banner",
+    "-n",
+    "-filter_complex",
+    "gfxcapture=hwnd=8586486:max_framerate=240:capture_cursor=0:display_border=1:width=-2:height=-2",
+    "-an",
+    "-c:v",
+    "h264_nvenc",
+    "-preset",
+    "p4",
+    "-cq",
+    "18",
+    "-b:v",
+    "0",
+    "-r",
+    "60",
+    "-fps_mode",
+    "cfr",
+    "-movflags",
+    "+faststart",
+    "-t",
+    "125",
+    "C:\\projects\\pwshDoom\\local\\recordings\\music-route-early-audio.mp4"
+  ],
+  "Video": "C:\\projects\\pwshDoom\\local\\recordings\\music-route-early-audio-av.mp4",
+  "MediaFfmpeg": "local/tools/ffmpeg/ffmpeg-9.0.1-essentials_build/bin/ffmpeg.exe",
+  "CaptureLimit": 240,
+  "AudioExitCode": 0,
+  "FinishedUtc": "2026-09-12T13:49:21.8171076Z",
+  "PreexistingTerminalWindows": 0,
+  "SoundRequested": true,
+  "SessionScheduleSha256": null,
+  "FontFace": "MS Gothic",
+  "SaveRoot": "",
+  "MediaFfmpegSha256": "72A489ECCD008C2EC2C0A5856C5C75BC3D8BBFA90166C4566865C246445E6AA3",
+  "Ffmpeg": "local/tools/capture-build/FFmpeg-n9.0.1/ffmpeg.exe",
+  "Style": "Matrix",
+  "Maximized": false,
+  "Error": null,
+  "ExitDelaySeconds": 3,
+  "Sources": [
+    {
+      "Path": "Start-Doom.ps1",
+      "Sha256": "3EC570EDED87DA4C7316B3CB2F567F580571BF2E6D10BF696DCC4D95D5C147EC"
+    },
+    {
+      "Path": "scripts/Invoke-Doom.ps1",
+      "Sha256": "05A86C46911204AE6BADA81EADE7C788E92F022F248F83B5E35063C22DF900FF"
+    },
+    {
+      "Path": "scripts/Record-DoomReplay.ps1",
+      "Sha256": "2664735C59ED560351E70B4AC424428A78EA330763B8252880EC17CDAAB0D0FA"
+    },
+    {
+      "Path": "scripts/Record-ProcessAudio.ps1",
+      "Sha256": "41EE7E57F6703E7F7BC1FDCE53A1FD23F84A67A717CD647C703C5C1176004346"
+    },
+    {
+      "Path": "scripts/Merge-DoomCaptureAudio.ps1",
+      "Sha256": "795D02E96FFC3373741E7970512D1D65CC777A43B834D5771F69EC81CF3AF2C4"
+    },
+    {
+      "Path": "src/ProcessAudioCapture.ps1",
+      "Sha256": "A747786A2428F71C907F86AD631983548AAE8C6450F422F64144D367B8E9E321"
+    },
+    {
+      "Path": "src/CaptureClock.ps1",
+      "Sha256": "CED03D531F7C129D9E079F1F3B548DD436EFD81782974A3752D4689FA3E45DFB"
+    },
+    {
+      "Path": "src/CaptureTimeline.ps1",
+      "Sha256": "EFA64468F234327E5D7682CE08FF5B8863EEEFC5D5B082DB9B74BE544D092E21"
+    }
+  ],
+  "FontSize": 12,
+  "RawSilentVideo": "C:\\projects\\pwshDoom\\local\\recordings\\music-route-early-audio.mp4",
+  "RawSilentVideoSha256": "4F6447884559525C5AF1CA61A1269150C2AB556D4E435B18EBC91A6ADE3E25E3",
+  "AudioVideoReport": "C:\\projects\\pwshDoom\\local\\recordings\\music-route-early-audio-av.json"
+}

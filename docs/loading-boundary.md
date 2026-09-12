@@ -34,4 +34,4 @@ Simulation reports retain `LoadingBoundaries` with start/end QPC, command bounda
 
 The producer waits at most three seconds for acknowledgement, then fails explicitly and invokes ordinary host cleanup. The bounded queue remains 32 packets; overflow is still an error. No extra game tics or audio samples are generated to conceal a pause. Menu/volume/epoch controls retain their existing explicit behavior, including reported canceled tails where applicable.
 
-The next audio producer issue is intermission/UI work before packet publication. The earlier [recovery study](audio-recovery.md) retains those measurements and the original late-loading behavior for comparison.
+The subsequent [early audio publication change](audio-publication.md) queues ordinary audio before independent presentation work. Its single recorded route has no unexpected pre-shutdown empty queues, while retaining every command/checkpoint/sample and the explicit loading pause. Repeated pacing and broader campaign coverage remain open. The earlier [recovery study](audio-recovery.md) retains failures and the original late-loading behavior for comparison.
