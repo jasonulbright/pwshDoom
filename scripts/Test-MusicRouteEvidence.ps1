@@ -23,6 +23,15 @@ try{
     for($i=0;$i -lt 3;$i++){$e=$starts[$i];Check "Correct track and first affected audio packet for $($expectedNames[$i])" ($e.Track -ceq $expectedNames[$i] -and $e.Loop -and $e.AfterFrames -eq $expectedFrames[$i])}
     Check 'All simulation audio packets and music frames are consumed' ($a.Packets -eq 1747 -and $a.LastSequence -eq 1746 -and $a.SubmittedFrames -eq 2201220 -and $a.Music.Frames -eq $a.SubmittedFrames -and $a.UnconsumedPackets -eq 0 -and $a.StalePacketsDiscarded -eq 0)
     Check 'Music readers and device close' ($a.Music.Closed -and $a.DeviceClosed)
+    if($g.Simulation.PSObject.Properties['LoadingBoundaries']){
+        $boundaries=@($g.Simulation.LoadingBoundaries);$boundary=$boundaries[0]
+        Check 'Loading begins at the established command boundary for E1M2' ($boundaries.Count -eq 1 -and $boundary.Tic -eq 1675 -and $boundary.Episode -eq 1 -and $boundary.Map -eq 2 -and $null -eq $g.Simulation.IncompleteLoadingBoundary)
+        Check 'Every old-map audio frame returns before construction proceeds' ($boundary.AudioDrain.ThroughSequence -eq 1674 -and $boundary.AudioDrain.CompletedFrames -eq 2110500)
+        Check 'Worker acknowledgement agrees with the producer loading receipt' ($a.LoadingDrains.Count -eq 1 -and $a.LoadingDrains[0].ThroughSequence -eq 1674 -and $a.LoadingDrains[0].CompletedFrames -eq 2110500 -and $a.LoadingDrains[0].Qpc -eq $boundary.AudioDrain.AcknowledgedQpc)
+        $beforeAssetsQpc=$boundary.StartQpc+$boundary.BeforeAssetsMilliseconds*$g.QpcFrequency/1000
+        Check 'Drain acknowledgement lies inside the pre-asset loading boundary' ($boundary.StartQpc -le $boundary.AudioDrain.AcknowledgedQpc -and $boundary.AudioDrain.AcknowledgedQpc -le $beforeAssetsQpc -and $beforeAssetsQpc -lt $boundary.EndQpc)
+        Check 'Complete loading duration retains the original QPC interval' ($boundary.TotalMilliseconds -gt $boundary.BeforeAssetsMilliseconds -and [Math]::Abs($boundary.TotalMilliseconds-($boundary.EndQpc-$boundary.StartQpc)*1000.0/$g.QpcFrequency) -lt .001)
+    }
     $catalogEntries=Get-Content $Catalog -Raw|ConvertFrom-Json -AsHashtable
     foreach($track in $expectedNames){
         $path=[IO.Path]::GetFullPath($catalogEntries[$track],[IO.Path]::GetDirectoryName([IO.Path]::GetFullPath($Catalog)));$q=Receipt $path

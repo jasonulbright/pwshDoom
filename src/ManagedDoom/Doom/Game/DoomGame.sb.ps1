@@ -30,6 +30,8 @@ class DoomGame {
     [int] $loadGameSlotNumber
     [int] $saveGameSlotNumber
     [string] $saveGameDescription
+    # Host-only loading notification; scriptblocks are excluded from save data.
+    [scriptblock] $BeforeLevelLoad
 
     DoomGame([GameContent] $content, [GameOptions] $options) {
         $this.content = $content
@@ -150,6 +152,7 @@ class DoomGame {
     }
 
     [void] DoLoadLevel() {
+        if ($null -ne $this.BeforeLevelLoad) { $null = $this.BeforeLevelLoad.Invoke($this) }
         $this.gameAction = [GameAction]::Nothing
         $this.gameState = [GameState]::Level
         $this.State = $this.gameState

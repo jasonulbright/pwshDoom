@@ -1,0 +1,45 @@
+{
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "Meaning": "Actual engine construction/reload boundaries and callback-free save data. Controller fixtures do not establish campaign completion.",
+  "Error": null,
+  "Checks": [
+    {
+      "Name": "Initial loading notification precedes world construction",
+      "Passed": true
+    },
+    {
+      "Name": "Ordinary tics do not enter a loading boundary",
+      "Passed": true
+    },
+    {
+      "Name": "Reload notifies exactly once while the old world is still present",
+      "Passed": true
+    },
+    {
+      "Name": "Host callback is excluded from the data-only save schema",
+      "Passed": true
+    },
+    {
+      "Name": "Changing the host callback does not change saved game data",
+      "Passed": true
+    },
+    {
+      "Name": "A failing boundary aborts before replacing the world",
+      "Passed": true
+    }
+  ],
+  "Sources": [
+    {
+      "Path": "src/ManagedDoom/Doom/Game/DoomGame.sb.ps1",
+      "Sha256": "EC3189377645405DF30D1E37841B0CAA7FA862B66BD54523DBEF68E83F895CAE"
+    },
+    {
+      "Path": "src/SaveState.ps1",
+      "Sha256": "87368E204F816634FEA245966529892438D698B5ACD8694E370AEC46FB4B6563"
+    },
+    {
+      "Path": "scripts/Test-LevelLoadBoundary.ps1",
+      "Sha256": "A8720B00EDA07B3B8F3A8628B93DD85768BB059A02C6EAA8315BEFF434FD8484"
+    }
+  ]
+}

@@ -13,6 +13,7 @@ $pending=$null;$digest=[Security.Cryptography.IncrementalHash]::CreateHash([Secu
 $volumeChanges=[Collections.Generic.List[object]]::new();$mutedPackets=0
 $rebufferStart=-1.0;$rebufferFirstPacket=-1.0;$rebufferResumes=[Collections.Generic.List[object]]::new()
 $Shared.Rebuffering=$false;$Shared.RebufferCount=0;$Shared.RebufferResumeCount=0
+$Shared.DrainTarget=$null;$Shared.DrainReady=$false;$drains=[Collections.Generic.List[object]]::new()
 try{
     $music=New-DoomMusicPlayback $MusicReports
     $device=Open-DoomWaveOut -BufferFrames 1260 -Buffers 4;$Shared.Ready=$true
@@ -34,13 +35,14 @@ try{
             Reset-DoomMusicPlayback $music
             $rebufferStart=-1.0;$rebufferFirstPacket=-1.0;$Shared.Rebuffering=$false
         }
-        if($Shared.Paused){
+        if($Shared.Paused -or ($null -ne $Shared.DrainTarget -and $Shared.DrainReady)){
             if(-not $devicePaused){Set-DoomWaveOutPaused $device $true;$devicePaused=$true;$pauses++}
             [Threading.Thread]::Sleep(2);continue
         }
         $device.Event.Reset()|Out-Null;Update-DoomWaveOutBuffers $device
         foreach($slot in $device.Buffers){
             if($slot.Queued){continue};$packet=$null
+            if($null -ne $Shared.DrainTarget -and $lastSequence -ge $Shared.DrainTarget){break}
             if($null -ne $pending){$packet=$pending;$pending=$null}
             elseif(-not $Queue.TryTake([ref]$packet)){break}
             if($packet.Epoch -gt $epoch){$pending=$packet;break}
@@ -61,9 +63,18 @@ try{
             $lastSequence=$packet.Sequence;$packets++;$Shared.LastSequence=$lastSequence
         }
         $queued=@($device.Buffers|Where-Object Queued).Count
+        $drainFinished=$null -ne $Shared.DrainTarget -and $lastSequence -ge $Shared.DrainTarget
+        if($drainFinished -and $queued -eq 0){
+            Set-DoomWaveOutPaused $device $true;$devicePaused=$true;$started=$false
+            $Shared.DrainAcknowledgedQpc=[Diagnostics.Stopwatch]::GetTimestamp();$Shared.DrainCompletedFrames=$device.CompletedFrames
+            $drains.Add(@{ThroughSequence=$lastSequence;Qpc=$Shared.DrainAcknowledgedQpc;CompletedFrames=$device.CompletedFrames})
+            $rebufferStart=-1.0;$rebufferFirstPacket=-1.0;$Shared.Rebuffering=$false
+            $Shared.DrainReady=$true
+            continue
+        }
         if($rebufferStart -ge 0 -and $queued -gt 0 -and $rebufferFirstPacket -lt 0){$rebufferFirstPacket=$watch.Elapsed.TotalMilliseconds}
         $rebufferExpired=$rebufferFirstPacket -ge 0 -and $watch.Elapsed.TotalMilliseconds-$rebufferFirstPacket -ge 100
-        if($devicePaused -and $queued -gt 0 -and ($started -or $queued -ge 2 -or $rebufferExpired)){
+        if($devicePaused -and $queued -gt 0 -and ($started -or $queued -ge 2 -or $rebufferExpired -or $drainFinished)){
             Set-DoomWaveOutPaused $device $false;$devicePaused=$false;$started=$true
             if($rebufferStart -ge 0){
                 $rebufferResumes.Add(@{AfterPacket=$lastSequence;QueuedBuffers=$queued;WaitMilliseconds=$watch.Elapsed.TotalMilliseconds-$rebufferStart;ReserveWaitMilliseconds=$watch.Elapsed.TotalMilliseconds-$rebufferFirstPacket;Reason=if($queued -ge 2){'TwoPackets'}else{'SinglePacketDeadline'}})
@@ -89,6 +100,7 @@ try{
     $Shared.Report.PendingPacket=if($pending){$pending.Sequence}else{$null}
     $Shared.Report.RebufferResumes=$rebufferResumes.ToArray();$Shared.Report.RebufferCount=$Shared.RebufferCount
     $Shared.Report.RebufferSinglePacketDeadlineMs=100
+    $Shared.Report.LoadingDrains=$drains.ToArray()
     $Shared.Report.Music=if($music){@{Selected=$music.Selected;Gain=$music.Gain;Frames=$music.Frames;Transitions=$music.Transitions.ToArray();Reports=$music.Reports;Closed=$music.Closed}}else{$null}
     $Shared.Finished=$true
 }

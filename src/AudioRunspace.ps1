@@ -20,6 +20,19 @@ function Send-DoomAudioPacket {
     if(-not $Audio.Queue.TryAdd($Packet)){throw 'Audio packet queue overflow (32 tics); no silent drop performed.'}
     $Audio.MaxQueue=[Math]::Max($Audio.MaxQueue,$Audio.Queue.Count)
 }
+function Suspend-DoomAudioAfterPacket {
+    param($Audio,[int]$Sequence)
+    if($Sequence -lt -1 -or $null -ne $Audio.Shared.DrainTarget){throw 'Invalid or overlapping audio drain request.'}
+    $watch=[Diagnostics.Stopwatch]::StartNew()
+    $Audio.Shared.DrainReady=$false;$Audio.Shared.DrainTarget=$Sequence;$Audio.Shared.Paused=$false
+    while(-not $Audio.Shared.DrainReady){
+        if($Audio.Shared.Error -or $Audio.Async.IsCompleted){throw "Audio drain failed: $($Audio.Shared.Error)"}
+        if($watch.Elapsed.TotalSeconds -gt 3){throw 'Audio drain timed out; no packet or queued sample was silently discarded.'}
+        [Threading.Thread]::Sleep(1)
+    }
+    $Audio.Shared.Paused=$true
+    return @{ThroughSequence=$Sequence;WaitMilliseconds=$watch.Elapsed.TotalMilliseconds;AcknowledgedQpc=$Audio.Shared.DrainAcknowledgedQpc;CompletedFrames=$Audio.Shared.DrainCompletedFrames}
+}
 function Stop-DoomAudioRunspace {
     param($Audio)
     if($Audio.Closed){return $Audio.Shared.Report}

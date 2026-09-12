@@ -14,6 +14,7 @@ $ready=[Threading.EventWaitHandle]::OpenExisting($Channel+'-ready');$go=[Threadi
 $content=$null;$game=$null;$tick=0;$version=0;$slot=0;$failure=$null;$outcome='Stopped'
 $audio=$null;$audioReport=$null;$audioPackets=$null;$audioEvents=$null;$audioClips=$null;$audioLoading=$false;$audioPacketTimes=[Collections.Generic.List[double]]::new()
 $musicEvents=$null;$musicReports=@{};if($MusicCatalog){$Sound=$true}
+$loadingBoundary=$null;$loadingBoundaries=[Collections.Generic.List[object]]::new()
 $tickTimes=[Collections.Generic.List[double]]::new();$snapshotTimes=[Collections.Generic.List[double]]::new();$lateness=[Collections.Generic.List[double]]::new()
 $commandLog=[Collections.Generic.List[object]]::new()
 $transitions=[Collections.Generic.List[object]]::new();$uiTimes=[Collections.Generic.List[double]]::new();$generation=1;$screens=$null
@@ -57,7 +58,18 @@ function Publish-SimulationSnapshot {
     $view.WriteArray($base+64,$old,0,$old.Length);$view.WriteArray($base+64+$old.Length,$current,0,$current.Length)
     [Threading.Thread]::MemoryBarrier();$view.Write($base,$script:version);$view.Write(16,$script:slot);$view.Write(20,$script:tick)
 }
+function Begin-SimulationLevelLoad {
+    if($null -ne $script:loadingBoundary){throw 'Overlapping level loading boundaries.'}
+    $script:loadingBoundary=@{Tic=$script:tick;StartQpc=[Diagnostics.Stopwatch]::GetTimestamp();Episode=$game.Options.Episode;Map=$game.Options.Map;AudioDrain=$null}
+    $view.Write(12,5)
+    if($null -ne $audio){
+        $script:audioLoading=$true
+        $script:loadingBoundary.AudioDrain=Suspend-DoomAudioAfterPacket $audio ($audioPackets.Sequence-1)
+    }
+}
 function Publish-SimulationMapChange {
+    if($null -eq $script:loadingBoundary){Begin-SimulationLevelLoad}
+    $script:loadingBoundary.BeforeAssetsMilliseconds=([Diagnostics.Stopwatch]::GetTimestamp()-$script:loadingBoundary.StartQpc)*1000.0/[Diagnostics.Stopwatch]::Frequency
     if($null -ne $audio){$script:audioLoading=$true;$audio.Shared.Paused=$true;$audio.Shared.Epoch++}
     $view.Write(12,5);$script:generation++
     $context=New-FastRenderContext $content $game.World;Write-GameRenderAssets $context $palette $Assets
@@ -69,6 +81,10 @@ function Publish-SimulationMapChange {
     while($view.ReadInt32(28) -ne $script:generation -and $view.ReadInt32(4) -eq 0){[void]$go.WaitOne(1000);if($owner.HasExited){$script:outcome='OwnerExited';break}}
     if($script:outcome -ne 'OwnerExited'){$view.Write(12,1)}
     $script:audioLoading=$false
+    if($null -ne $audio){$audio.Shared.DrainTarget=$null}
+    $script:loadingBoundary.EndQpc=[Diagnostics.Stopwatch]::GetTimestamp()
+    $script:loadingBoundary.TotalMilliseconds=($script:loadingBoundary.EndQpc-$script:loadingBoundary.StartQpc)*1000.0/[Diagnostics.Stopwatch]::Frequency
+    $loadingBoundaries.Add($script:loadingBoundary);$script:loadingBoundary=$null
 }
 try {
     $owner=[Diagnostics.Process]::GetProcessById($OwnerPid)
@@ -100,6 +116,7 @@ try {
         }
         $audio=Start-DoomAudioRunspace $audioClips -MusicReports $musicReports
     }
+    $game.BeforeLevelLoad={param($LoadingGame) Begin-SimulationLevelLoad}
     Record-SimulationTransition
     Record-ReplayCheckpoint
     Publish-SimulationSnapshot;$view.Write(12,1);[void]$ready.Set()
@@ -181,6 +198,7 @@ try {
                     if($kind -eq 4){
                         foreach($device in 'Video','Sound','Music','UserInput'){$candidate.Options.$device=$options.$device}
                         $game=$candidate;$options=$game.Options;$game.Paused=$false;foreach($cmd in $commands){$cmd.Clear()}
+                        $game.BeforeLevelLoad={param($LoadingGame) Begin-SimulationLevelLoad}
                         $screens=if($StopAtLevelEnd){$null}else{New-DoomSessionScreens $content}
                         $options.Sound.Reset();$options.Sound.SetListener($game.World.ConsolePlayer.Mobj);$options.Sound.Resume()
                         if($musicEvents){Sync-DoomMusicSession $musicEvents $game}
@@ -232,7 +250,7 @@ finally {
         ReplayCheckpoints=$checkpoints.ToArray();ReplayCheckpointMs=(Get-SampleStats $checkpointTimes.ToArray());ReplayCheckpointSamplesMs=$checkpointTimes.ToArray();
         ControlEvents=$controlLog.ToArray();MenuScreen=$menuScreen;MenuRevision=$menuRevision;SaveOperations=$saveOperations.ToArray();SaveDirectory=$saveDirectory;
         AutomapCommands=$automapCommands.ToArray();AutomapDiscoveryMs=(Get-SampleStats $discoveryTimes.ToArray());AutomapDiscoverySamplesMs=$discoveryTimes.ToArray();AutomapRenderMs=(Get-SampleStats $automapTimes.ToArray());AutomapRenderSamplesMs=$automapTimes.ToArray();
-        StopAtLevelEnd=[bool]$StopAtLevelEnd;Transitions=$transitions.ToArray();FinalGeneration=$generation;SessionScreenMs=(Get-SampleStats $uiTimes.ToArray());SessionScreenSamplesMs=$uiTimes.ToArray();
+        StopAtLevelEnd=[bool]$StopAtLevelEnd;Transitions=$transitions.ToArray();FinalGeneration=$generation;SessionScreenMs=(Get-SampleStats $uiTimes.ToArray());SessionScreenSamplesMs=$uiTimes.ToArray();LoadingBoundaries=$loadingBoundaries.ToArray();IncompleteLoadingBoundary=$loadingBoundary;
         SimulationMs=(Get-SampleStats $tickTimes.ToArray());SnapshotPublishMs=(Get-SampleStats $snapshotTimes.ToArray());TickLatenessMs=(Get-SampleStats $lateness.ToArray());
         SimulationSamplesMs=$tickTimes.ToArray();SnapshotSamplesMs=$snapshotTimes.ToArray();TickLatenessSamplesMs=$lateness.ToArray();InputCommands=$commandLog.ToArray();
         Health=if($null -ne $game){$game.World.ConsolePlayer.Health}else{$null};Kills=if($null -ne $game){$game.World.ConsolePlayer.KillCount}else{$null}} |

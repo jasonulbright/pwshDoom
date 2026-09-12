@@ -1,0 +1,144 @@
+{
+  "Error": null,
+  "Barriers": [
+    {
+      "AcknowledgedQpc": 926462835264,
+      "WaitMilliseconds": 28.8381,
+      "ThroughSequence": -1,
+      "CompletedFrames": 0
+    },
+    {
+      "AcknowledgedQpc": 926464219022,
+      "WaitMilliseconds": 129.5012,
+      "ThroughSequence": 0,
+      "CompletedFrames": 1260
+    },
+    {
+      "AcknowledgedQpc": 926466618409,
+      "WaitMilliseconds": 167.562,
+      "ThroughSequence": 4,
+      "CompletedFrames": 6300
+    }
+  ],
+  "Sources": [
+    {
+      "Sha256": "A930314C31A8DC628E96266E4654ACE1E2222FE076519B98578663A165DE1AD4",
+      "Path": "src/AudioRunspace.ps1"
+    },
+    {
+      "Sha256": "DF656735B564B0F27DC1628AFE78C6F8A2899C1A37F60FB1872CCBE69DF42112",
+      "Path": "scripts/Invoke-AudioWorker.ps1"
+    },
+    {
+      "Sha256": "E611ED5CEB2AEB30B50DE1452A11ACD627E7507E4BA7C0789368B64663DBE874",
+      "Path": "scripts/Test-AudioLoadingBoundary.ps1"
+    }
+  ],
+  "Meaning": "Actual device drain/hold boundaries with five independent literal PCM packets, including empty startup, one-packet tail, queued future packets and clean held shutdown. Intentional loading silence is not uninterrupted playback.",
+  "Audio": {
+    "RebufferSinglePacketDeadlineMs": 100,
+    "PendingPacket": null,
+    "EpochResets": 0,
+    "FinalVolume": 1.0,
+    "VolumeChanges": [],
+    "QueueStarvationObservations": [],
+    "Error": null,
+    "UnconsumedPackets": 0,
+    "PcmSha256": "FCF40951C6D2CD974FEE7A744E8BBB25049B11F3A82F3CED8F4107BA1E4EA729",
+    "StalePacketsDiscarded": 0,
+    "CleanupError": null,
+    "Meaning": "PowerShell runspace mixing and waveOut playback; packet age ends at submission, not audible output. Starvation is queue polling, not hardware telemetry. Reset/exit can cancel queued tail audio; cancelled frame count is an upper bound.",
+    "Packets": 5,
+    "RebufferCount": 0,
+    "Music": {
+      "Selected": null,
+      "Gain": 0.2,
+      "Closed": true,
+      "Reports": {},
+      "Transitions": [],
+      "Frames": 0
+    },
+    "CancelledQueuedFramesUpperBound": 0,
+    "PacketAgeAtSubmissionMs": [
+      85.3737,
+      90.8527,
+      93.8252,
+      96.7851,
+      99.7497
+    ],
+    "SubmittedFrames": 6300,
+    "MaxVoices": 1,
+    "LastSequence": 4,
+    "PauseTransitions": 0,
+    "WallSeconds": 1.288876,
+    "MixSamplesMs": [
+      40.5915,
+      2.7905,
+      2.7132,
+      2.6755,
+      2.6679
+    ],
+    "LoadingDrains": [
+      {
+        "Qpc": 926462835264,
+        "ThroughSequence": -1,
+        "CompletedFrames": 0
+      },
+      {
+        "Qpc": 926464219022,
+        "ThroughSequence": 0,
+        "CompletedFrames": 1260
+      },
+      {
+        "Qpc": 926466618409,
+        "ThroughSequence": 4,
+        "CompletedFrames": 6300
+      }
+    ],
+    "ClippedSamples": 0,
+    "RebufferResumes": [],
+    "MaxPacketQueue": 4,
+    "MutedPackets": 0,
+    "ReturnedCompletedFrames": 6300,
+    "DeviceClosed": true
+  },
+  "ExpectedPcmSha256": "FCF40951C6D2CD974FEE7A744E8BBB25049B11F3A82F3CED8F4107BA1E4EA729",
+  "Checks": [
+    {
+      "Passed": true,
+      "Name": "Empty startup boundary acknowledges without invented audio"
+    },
+    {
+      "Passed": true,
+      "Name": "A single initial packet plays completely before pause"
+    },
+    {
+      "Passed": true,
+      "Name": "Acknowledged boundary holds later queued packets"
+    },
+    {
+      "Passed": true,
+      "Name": "Overlapping boundary is rejected"
+    },
+    {
+      "Passed": true,
+      "Name": "All remaining packets complete before the next acknowledgement"
+    },
+    {
+      "Passed": true,
+      "Name": "Distinct literal PCM values and ordering remain exact"
+    },
+    {
+      "Passed": true,
+      "Name": "All submitted frames return with no canceled tail or stale packets"
+    },
+    {
+      "Passed": true,
+      "Name": "Intentional drains are reported separately from starvation"
+    },
+    {
+      "Passed": true,
+      "Name": "Held device and worker close cleanly"
+    }
+  ]
+}
