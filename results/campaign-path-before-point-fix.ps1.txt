@@ -1,0 +1,76 @@
+#requires -Version 7.4
+# SPDX-License-Identifier: GPL-2.0-or-later
+param([Parameter(Mandatory)][string]$MapGeometry,[Parameter(Mandatory)][double]$StartX,
+    [Parameter(Mandatory)][double]$StartY,[Parameter(Mandatory)][double]$EndX,
+    [Parameter(Mandatory)][double]$EndY,[Parameter(Mandatory)][string]$Output,
+    [ValidateRange(100,200000)][int]$MaxVisited=100000)
+$ErrorActionPreference='Stop';Set-StrictMode -Version Latest
+if(Test-Path -LiteralPath $Output){throw 'Use a fresh local planning output path.'}
+$map=Get-Content -LiteralPath $MapGeometry -Raw|ConvertFrom-Json
+$walls=@($map.Lines|Where-Object {-not $_.TwoSided -or ($_.Flags -band 1) -ne 0})
+$buckets=@{};$radius=16.1;$cell=16;$bucket=128
+foreach($wall in $walls){
+    $lowX=[int][Math]::Floor(([Math]::Min($wall.X1,$wall.X2)-$radius)/$bucket)
+    $highX=[int][Math]::Floor(([Math]::Max($wall.X1,$wall.X2)+$radius)/$bucket)
+    $lowY=[int][Math]::Floor(([Math]::Min($wall.Y1,$wall.Y2)-$radius)/$bucket)
+    $highY=[int][Math]::Floor(([Math]::Max($wall.Y1,$wall.Y2)+$radius)/$bucket)
+    for($x=$lowX;$x -le $highX;$x++){for($y=$lowY;$y -le $highY;$y++){
+        $key="$x,$y";if(-not $buckets.ContainsKey($key)){$buckets[$key]=[Collections.Generic.List[object]]::new()}
+        $buckets[$key].Add($wall)
+    }}
+}
+$clearCache=@{}
+function Clear-Point([double]$X,[double]$Y){
+    $key="$X,$Y";if($clearCache.ContainsKey($key)){return $clearCache[$key]}
+    $clear=$true;$bucketKey="$([int][Math]::Floor($X/$bucket)),$([int][Math]::Floor($Y/$bucket))"
+    if($buckets.ContainsKey($bucketKey)){foreach($wall in $buckets[$bucketKey]){
+        $dx=$wall.X2-$wall.X1;$dy=$wall.Y2-$wall.Y1;$square=$dx*$dx+$dy*$dy
+        $t=if($square -eq 0){0}else{[Math]::Clamp((($X-$wall.X1)*$dx+($Y-$wall.Y1)*$dy)/$square,0,1)}
+        $ex=$X-($wall.X1+$t*$dx);$ey=$Y-($wall.Y1+$t*$dy)
+        if($ex*$ex+$ey*$ey -lt $radius*$radius){$clear=$false;break}
+    }}
+    $clearCache[$key]=$clear;return $clear
+}
+$minX=[int][Math]::Floor($map.Bounds[0]/$cell);$minY=[int][Math]::Floor($map.Bounds[1]/$cell)
+$maxX=[int][Math]::Ceiling($map.Bounds[2]/$cell);$maxY=[int][Math]::Ceiling($map.Bounds[3]/$cell)
+$width=$maxX-$minX+1;$height=$maxY-$minY+1
+$sx=[int][Math]::Round($StartX/$cell);$sy=[int][Math]::Round($StartY/$cell)
+$ex=[int][Math]::Round($EndX/$cell);$ey=[int][Math]::Round($EndY/$cell)
+$source=($sy-$minY)*$width+$sx-$minX;$target=($ey-$minY)*$width+$ex-$minX
+$distance=[Collections.Generic.Dictionary[int,double]]::new();$previous=[Collections.Generic.Dictionary[int,int]]::new()
+$closed=[Collections.Generic.HashSet[int]]::new();$queue=[Collections.Generic.PriorityQueue[int,double]]::new()
+$distance[$source]=0;$queue.Enqueue($source,0);$failure=$null;$found=$false;$waypoints=@();$watch=[Diagnostics.Stopwatch]::StartNew()
+try{
+    if($sx -lt $minX -or $sx -gt $maxX -or $sy -lt $minY -or $sy -gt $maxY -or $ex -lt $minX -or $ex -gt $maxX -or $ey -lt $minY -or $ey -gt $maxY){throw 'Endpoint is outside map bounds.'}
+    if(-not (Clear-Point ($sx*$cell) ($sy*$cell)) -or -not (Clear-Point ($ex*$cell) ($ey*$cell))){throw 'A rounded endpoint intersects an impassable wall.'}
+    while($queue.Count -gt 0){
+        $node=$queue.Dequeue();if(-not $closed.Add($node)){continue}
+        if($closed.Count -gt $MaxVisited){throw 'Planning visit bound reached.'}
+        if($node -eq $target){$found=$true;break}
+        $x=$node%$width+$minX;$y=[int][Math]::Floor($node/$width)+$minY
+        foreach($delta in @(@(1,0),@(-1,0),@(0,1),@(0,-1),@(1,1),@(1,-1),@(-1,1),@(-1,-1))){
+            $nx=$x+$delta[0];$ny=$y+$delta[1]
+            if($nx -lt $minX -or $nx -gt $maxX -or $ny -lt $minY -or $ny -gt $maxY){continue}
+            $next=($ny-$minY)*$width+$nx-$minX;if($closed.Contains($next)){continue}
+            if(-not (Clear-Point ($nx*$cell) ($ny*$cell)) -or -not (Clear-Point (($x+$nx)*$cell/2) (($y+$ny)*$cell/2))){continue}
+            $cost=$distance[$node]+[Math]::Sqrt($delta[0]*$delta[0]+$delta[1]*$delta[1])
+            if(-not $distance.ContainsKey($next) -or $cost -lt $distance[$next]){
+                $distance[$next]=$cost;$previous[$next]=$node
+                $queue.Enqueue($next,$cost+[Math]::Sqrt(($nx-$ex)*($nx-$ex)+($ny-$ey)*($ny-$ey)))
+            }
+        }
+    }
+    if(-not $found){throw 'No planar corridor found within the map bounds.'}
+    $nodes=[Collections.Generic.List[int]]::new();$node=$target;$nodes.Add($node)
+    while($node -ne $source){$node=$previous[$node];$nodes.Add($node)};$nodes.Reverse()
+    $points=@(foreach($n in $nodes){,@(($n%$width+$minX)*$cell,([int][Math]::Floor($n/$width)+$minY)*$cell)})
+    $selected=[Collections.Generic.List[object]]::new();$selected.Add($points[0])
+    for($i=1;$i -lt $points.Count-1;$i++){
+        $a=$points[$i-1];$b=$points[$i];$c=$points[$i+1]
+        if(($b[0]-$a[0])*($c[1]-$b[1]) -ne ($b[1]-$a[1])*($c[0]-$b[0])){$selected.Add($b)}
+    };if($points.Count -gt 1){$selected.Add($points[-1])};$waypoints=$selected.ToArray()
+}catch{$failure=$_.ToString()+"`n"+$_.ScriptStackTrace}finally{
+    @{Error=$failure;Found=$found;Waypoints=$waypoints;Visited=$closed.Count;Seconds=$watch.Elapsed.TotalSeconds;Start=@($StartX,$StartY);End=@($EndX,$EndY);GridSize=$cell;Radius=$radius;GeometrySha256=(Get-FileHash $MapGeometry).Hash;ScriptSha256=(Get-FileHash $PSCommandPath).Hash;Meaning='PowerShell A* planning over a 16-unit grid with point/midpoint clearance from one-sided and explicitly blocking linedefs. This is planar guidance only: sector heights, dynamic floors, doors, keys, things, damage and timed triggers require actual ordinary-input validation. No engine state is moved or edited.'}|ConvertTo-Json -Depth 5|Set-Content -LiteralPath $Output
+}
+if($failure){throw $failure}
+$waypoints|ConvertTo-Json -Compress

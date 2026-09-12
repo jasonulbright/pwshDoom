@@ -1,0 +1,104 @@
+{
+  "SoundFontSha256": "82475B91A76DE15CB28A104707D3247BA932E228BADA3F47BBA63C6B31AAF7A1",
+  "Published": true,
+  "Tracks": [
+    {
+      "Track": "D_E1M1",
+      "Report": "C:\\projects\\pwshDoom\\results\\music-loop-e1m1-hour-bound.json",
+      "Action": "VerifiedExistingCatalog",
+      "ReportSha256": "1D5A9D6D16E8CDCA74646D6AEF009CDB42EB59B87941B0EFE648F9D3A98C96CF",
+      "MusSha256": "8F4673A3210C9FAFFE7B654F0B8F604A193398809545D9561E142704820035BF"
+    },
+    {
+      "Track": "D_E1M2",
+      "Report": "C:\\projects\\pwshDoom\\results\\music-loop-e1m2-first.json",
+      "Action": "VerifiedExistingCatalog",
+      "ReportSha256": "B2EBA683C99C515DE356A3D9E8E77824D775F59695F7CC14EC9F4D88B2D75518",
+      "MusSha256": "E684FEE5BECB2A4738CE1AA37C3ECC415A670F786A069B31AD7D18F33CA74ADD"
+    },
+    {
+      "Track": "D_INTER",
+      "Report": "C:\\projects\\pwshDoom\\results\\music-loop-inter-first.json",
+      "Action": "VerifiedExistingCatalog",
+      "ReportSha256": "084536988F462CD7C6718665FA53DCD6BB1009B3FCBCDD4556C50D51AC1B1778",
+      "MusSha256": "F14E4C026C5BF73737E3DAC959747F626A67AF4E02FD4359B0E32D3EAD7CA639"
+    },
+    {
+      "Track": "D_E1M3",
+      "Report": "C:\\projects\\pwshDoom\\results\\music-loop-e1m3-prepared.json",
+      "Action": "VerifiedExistingCatalog",
+      "ReportSha256": "DF75B2743048D05106F500317127BA462D2A2BB3F0EE1A63D9CA1E3D0F1697B2",
+      "MusSha256": "D9466D9A81720108565A4F3ED8785F5A2AC1DFEFED027CF738E82372678E75B5"
+    },
+    {
+      "Track": "D_E1M4",
+      "Report": "C:\\projects\\pwshDoom\\results\\music-loop-e1m4-prepared.json",
+      "Action": "VerifiedExistingCatalog",
+      "ReportSha256": "24CD95F078930A352DF57C5E609D75C587D9F156786EBC7AABBDE64C7BA9630C",
+      "MusSha256": "4CE28929EE92EE8301D024D8048D125E3AE8F773AD24A992165310835B473924"
+    }
+  ],
+  "Meaning": "Finite sequential preparation of exactly the requested dry looping tracks. Existing/resumed tracks undergo source/runtime/complete payload and IWAD/SF2 identity checks. Catalog published only after all requests pass. Successful per-track reports survive failed/interrupted batches for explicit same-directory resume. No one-shot, full soundtrack, fidelity, live deadline or campaign completion claim.",
+  "Catalog": "C:\\projects\\pwshDoom\\local\\music-prepared-five.json",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "Seconds": 5.5265821,
+  "Sources": [
+    {
+      "Sha256": "CF581D4476F6C1DC990359CE23773A717D4FA65F21FF6A03914517540FCD439C",
+      "Path": "scripts/Prepare-DoomMusic.ps1"
+    },
+    {
+      "Sha256": "557C8BAFA2A234B9A1C816A37EB3F17D9D68DCCDC1FC02B69D60C8FDC290F7AB",
+      "Path": "scripts/Render-MusicScore.ps1"
+    },
+    {
+      "Sha256": "AEFD57579580D18A55FA7E43EFD2C48B002B18786C1C4B8BAE62FE541B2FB4A9",
+      "Path": "scripts/Qualify-MusicLoop.ps1"
+    },
+    {
+      "Sha256": "AD69EA0A78EA942C10BCC7433EE7DD1B06BAE98376816B589ED0CA0802CBB7CD",
+      "Path": "src/MusicLoopReader.ps1"
+    },
+    {
+      "Sha256": "66B87D1CDD3FAD62E493A0C50C9A5AEBFE27167C8CCCCA974CC80463B6D1BB33",
+      "Path": "src/MusScore.ps1"
+    },
+    {
+      "Sha256": "AF80287762169B5318F60FD719479137BAED1D3EEF39561513D2B34AC118A855",
+      "Path": "src/SoundFontBank.ps1"
+    },
+    {
+      "Sha256": "9D409332EB51B5B6FCBC4B259E0C5E243E561A3C0D6AD2040A772F46539B9D8E",
+      "Path": "src/SoundFontRegions.ps1"
+    },
+    {
+      "Sha256": "1D7911DC5CD2004D6DBBF27ECF43FFD652FAC8E4813943D9F8CFD5116332417B",
+      "Path": "src/MusicOscillator.ps1"
+    },
+    {
+      "Sha256": "30CC10D9118335FEC1C57653871B236B020FDBBA2D4103F89BA8EA672F1AF5D9",
+      "Path": "src/MusicControls.ps1"
+    },
+    {
+      "Sha256": "3CCA7492A9F809EB8D54C8BF7D3D9847A1EC29D5E8ED6923F72ECA7803A50B48",
+      "Path": "src/MusicSynth.ps1"
+    },
+    {
+      "Sha256": "6EA293142AD9A61661244DC5910CE264ACEE6E8A0CECE75F668CC55AC5A6E5DD",
+      "Path": "src/MusicGroup.ps1"
+    },
+    {
+      "Sha256": "9183717AE1384F2BEF103885A20AECF0EA66F6A8A80FFC311040C28E14155F7F",
+      "Path": "src/MusicLoopState.ps1"
+    }
+  ],
+  "CatalogSha256": "E7ACDF1EACB6B7D7794CE76513ED7165BD26D1AB69445212D0EB30AF718DD8A5",
+  "Error": null,
+  "RequestedTracks": [
+    "D_E1M1",
+    "D_E1M2",
+    "D_INTER",
+    "D_E1M3",
+    "D_E1M4"
+  ]
+}

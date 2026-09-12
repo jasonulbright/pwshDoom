@@ -1,0 +1,9 @@
+# Preserve fractional camera interpolation
+
+An E1M3 planning investigation exposed a PowerShell overload-selection hazard, then a source review found it in `New-GameRenderSnapshot`: Clamp with integer zero/one bounds rounded quarter and midpoint fractions to zero, and three-quarter fractions to one. The older single-host loop had the same call before passing the fraction into the helper. Both now supply explicit double bounds.
+
+`Test-GameSnapshotFractions.ps1` runs 35 real E1M1 movement/turn commands, requires nonzero camera movement, and compares camera X/Y, angle and view height against interpolation between the actual old/current snapshots. It covers quarter, midpoint, three-quarter, endpoints and out-of-range requests. Before the fix, 12 of 28 checks fail; all 28 pass afterward. Exact samples, source/IWAD hashes and both results are retained in `results/game-snapshot-fractions-before.json` and `game-snapshot-fractions-after.json`. The prior source is in commit `8e87dcb`.
+
+The main persistent-process terminal host already interpolates numeric endpoint snapshots with explicit double bounds in `SnapshotTransport.ps1`, and its clock fraction also uses explicit doubles. Its simulation worker asks this helper for fractions zero and one. The correction therefore does not establish a new main-host displayed frame rate or retroactively invalidate its endpoint-based route checkpoints. It fixes fractional use of the shared helper and the older single-host path. Sector/actor expressions receive the corrected fraction too, but this test specifically verifies the moving camera, angle and view height; it is not a complete moving-sector or renderer-reference qualification.
+
+No live terminal effect run was performed for this change. Actual displayed smoothness in the older single-host path remains unmeasured. Gameplay, rendering and mixing still remain PowerShell.

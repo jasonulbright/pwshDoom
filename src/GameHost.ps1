@@ -3,7 +3,7 @@
 # invoke PowerShell class methods or read the live simulation while it is changing.
 function New-GameRenderSnapshot {
     param($Game,[double]$Fraction=1)
-    $Fraction=[Math]::Clamp($Fraction,0,1)
+    $Fraction=[Math]::Clamp($Fraction,[double]0,[double]1)
     $world=$Game.World;$player=$world.ConsolePlayer;$camera=$player.Mobj
     $sectors=[object[]]::new($world.Map.Sectors.Length)
     for($i=0;$i -lt $sectors.Length;$i++) {

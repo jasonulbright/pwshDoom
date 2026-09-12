@@ -1,0 +1,20 @@
+{
+  "ScriptSha256": "2112B4EBE91B1D2C67B6D7F0F12C67F26958C8FFDD80B88018D84EE704E6CB82",
+  "Meaning": "PowerShell A* planning over a 16-unit grid with point/midpoint clearance from one-sided and explicitly blocking linedefs. This is planar guidance only: sector heights, dynamic floors, doors, keys, things, damage and timed triggers require actual ordinary-input validation. No engine state is moved or edited.",
+  "GridSize": 16,
+  "Waypoints": [],
+  "Found": true,
+  "Visited": 594,
+  "Start": [
+    -2336.0,
+    -2464.0
+  ],
+  "Error": "Method invocation failed because [System.Object[]] does not contain a method named 'op_Multiply'.\nat <ScriptBlock>, C:\\projects\\pwshDoom\\scripts\\Find-CampaignPath.ps1: line 66",
+  "End": [
+    -2688.0,
+    -1728.0
+  ],
+  "Seconds": 0.2889436,
+  "Radius": 16.1,
+  "GeometrySha256": "42943903CA82E900CF34B504AF10DDC74A48BE5DB6658CD89F3EC74497D0E5D1"
+}

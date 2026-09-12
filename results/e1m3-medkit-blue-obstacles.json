@@ -1,0 +1,78 @@
+{
+  "ScriptSha256": "EF4FE6980F65E0886956DB3AA44EB74EA538E94BD5A0BCA14836629595F7B6B7",
+  "Visited": 8127,
+  "Meaning": "PowerShell A* planning with declared grid size and point/midpoint axis-aligned square clearance from blocking linedefs and exported initial solid non-CountKill obstacles. This is planar guidance only: sector heights, dynamic floors, doors, keys, moving actors, damage and timed triggers require actual ordinary-input validation. No engine state is moved or edited.",
+  "GeometrySha256": "3AE2FC8CDDE6C555F96E1A7BD250AC8786E81B680F55BC818CBD14113B918ECC",
+  "Start": [
+    -1104.0,
+    -768.0
+  ],
+  "InitialObstacles": 45,
+  "Radius": 16.1,
+  "End": [
+    -160.0,
+    -864.0
+  ],
+  "Error": null,
+  "Waypoints": [
+    [
+      -1104,
+      -768
+    ],
+    [
+      -680,
+      -768
+    ],
+    [
+      -592,
+      -680
+    ],
+    [
+      -512,
+      -680
+    ],
+    [
+      -408,
+      -576
+    ],
+    [
+      -408,
+      -432
+    ],
+    [
+      -400,
+      -424
+    ],
+    [
+      -328,
+      -424
+    ],
+    [
+      -296,
+      -456
+    ],
+    [
+      -176,
+      -456
+    ],
+    [
+      -168,
+      -464
+    ],
+    [
+      -168,
+      -848
+    ],
+    [
+      -160,
+      -856
+    ],
+    [
+      -160,
+      -864
+    ]
+  ],
+  "Seconds": 5.5500125,
+  "GridSize": 8,
+  "Found": true
+}

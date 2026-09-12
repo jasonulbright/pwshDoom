@@ -118,7 +118,7 @@ try {
             $inFlight=$false
         }
         if(-not $inFlight -and $clock.Elapsed.TotalMilliseconds -ge $nextFrame) {
-            $watch=[Diagnostics.Stopwatch]::StartNew();$snapshot=New-GameRenderSnapshot $game ([Math]::Clamp($clock.Elapsed.TotalMilliseconds*35/1000-$tics,0,1));$snapshotTimes.Add($watch.Elapsed.TotalMilliseconds)
+            $watch=[Diagnostics.Stopwatch]::StartNew();$snapshot=New-GameRenderSnapshot $game ([Math]::Clamp($clock.Elapsed.TotalMilliseconds*35/1000-$tics,[double]0,[double]1));$snapshotTimes.Add($watch.Elapsed.TotalMilliseconds)
             $lastFrameTic=$tics;$frameWatch.Restart();$frameQpc=[Diagnostics.Stopwatch]::GetTimestamp();$submitWatch=[Diagnostics.Stopwatch]::StartNew();Submit-GameRender $pool $snapshot;$submitMs=$submitWatch.Elapsed.TotalMilliseconds;$inFlight=$true
             $nextFrame+=1000.0/60
         }

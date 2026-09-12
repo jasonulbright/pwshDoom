@@ -1,0 +1,249 @@
+{
+  "SnapshotSourceSha256": "AEEFE83BD5E6B2493B6FBA5658E90D6E50C348DB2AA2EB6376924D2C68E9C012",
+  "Samples": [
+    {
+      "ActualFraction": 0.0,
+      "Requested": -0.5,
+      "ViewZ": 34.33308410644531,
+      "Camera": {
+        "Angle": 3.2397674240144743,
+        "Y": -3473.476348876953,
+        "X": 934.4696655273438
+      }
+    },
+    {
+      "ActualFraction": 0.0,
+      "Requested": 0,
+      "ViewZ": 34.33308410644531,
+      "Camera": {
+        "Angle": 3.2397674240144743,
+        "Y": -3473.476348876953,
+        "X": 934.4696655273438
+      }
+    },
+    {
+      "ActualFraction": 0.25,
+      "Requested": 0.25,
+      "ViewZ": 34.24346160888672,
+      "Camera": {
+        "Angle": 3.2520392703175593,
+        "Y": -3472.9956588745117,
+        "X": 932.6581192016602
+      }
+    },
+    {
+      "ActualFraction": 0.5,
+      "Requested": 0.5,
+      "ViewZ": 34.153839111328125,
+      "Camera": {
+        "Angle": 3.2643111166206444,
+        "Y": -3472.5149688720703,
+        "X": 930.8465728759766
+      }
+    },
+    {
+      "ActualFraction": 0.75,
+      "Requested": 0.75,
+      "ViewZ": 34.06421661376953,
+      "Camera": {
+        "Angle": 3.2765829629237295,
+        "Y": -3472.034278869629,
+        "X": 929.035026550293
+      }
+    },
+    {
+      "ActualFraction": 1.0,
+      "Requested": 1,
+      "ViewZ": 33.97459411621094,
+      "Camera": {
+        "Angle": 3.2888548092268146,
+        "Y": -3471.5535888671875,
+        "X": 927.2234802246094
+      }
+    },
+    {
+      "ActualFraction": 1.0,
+      "Requested": 1.5,
+      "ViewZ": 33.97459411621094,
+      "Camera": {
+        "Angle": 3.2888548092268146,
+        "Y": -3471.5535888671875,
+        "X": 927.2234802246094
+      }
+    }
+  ],
+  "HarnessSha256": "22499215C0071EAA5F4E8CA60DDE37DE1FCF6C2490FFE24DD61A5CB2316FD748",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "Checks": [
+    {
+      "Actual": 934.4696655273438,
+      "Passed": true,
+      "Expected": 934.4696655273438,
+      "Name": "Camera X at fraction -0.5"
+    },
+    {
+      "Actual": -3473.476348876953,
+      "Passed": true,
+      "Expected": -3473.476348876953,
+      "Name": "Camera Y at fraction -0.5"
+    },
+    {
+      "Actual": 3.2397674240144743,
+      "Passed": true,
+      "Expected": 3.2397674240144743,
+      "Name": "Camera Angle at fraction -0.5"
+    },
+    {
+      "Actual": 34.33308410644531,
+      "Passed": true,
+      "Expected": 34.33308410644531,
+      "Name": "View height at fraction -0.5"
+    },
+    {
+      "Actual": 934.4696655273438,
+      "Passed": true,
+      "Expected": 934.4696655273438,
+      "Name": "Camera X at fraction 0"
+    },
+    {
+      "Actual": -3473.476348876953,
+      "Passed": true,
+      "Expected": -3473.476348876953,
+      "Name": "Camera Y at fraction 0"
+    },
+    {
+      "Actual": 3.2397674240144743,
+      "Passed": true,
+      "Expected": 3.2397674240144743,
+      "Name": "Camera Angle at fraction 0"
+    },
+    {
+      "Actual": 34.33308410644531,
+      "Passed": true,
+      "Expected": 34.33308410644531,
+      "Name": "View height at fraction 0"
+    },
+    {
+      "Actual": 932.6581192016602,
+      "Passed": true,
+      "Expected": 932.6581192016602,
+      "Name": "Camera X at fraction 0.25"
+    },
+    {
+      "Actual": -3472.9956588745117,
+      "Passed": true,
+      "Expected": -3472.9956588745117,
+      "Name": "Camera Y at fraction 0.25"
+    },
+    {
+      "Actual": 3.2520392703175593,
+      "Passed": true,
+      "Expected": 3.2520392703175593,
+      "Name": "Camera Angle at fraction 0.25"
+    },
+    {
+      "Actual": 34.24346160888672,
+      "Passed": true,
+      "Expected": 34.24346160888672,
+      "Name": "View height at fraction 0.25"
+    },
+    {
+      "Actual": 930.8465728759766,
+      "Passed": true,
+      "Expected": 930.8465728759766,
+      "Name": "Camera X at fraction 0.5"
+    },
+    {
+      "Actual": -3472.5149688720703,
+      "Passed": true,
+      "Expected": -3472.5149688720703,
+      "Name": "Camera Y at fraction 0.5"
+    },
+    {
+      "Actual": 3.2643111166206444,
+      "Passed": true,
+      "Expected": 3.2643111166206444,
+      "Name": "Camera Angle at fraction 0.5"
+    },
+    {
+      "Actual": 34.153839111328125,
+      "Passed": true,
+      "Expected": 34.153839111328125,
+      "Name": "View height at fraction 0.5"
+    },
+    {
+      "Actual": 929.035026550293,
+      "Passed": true,
+      "Expected": 929.035026550293,
+      "Name": "Camera X at fraction 0.75"
+    },
+    {
+      "Actual": -3472.034278869629,
+      "Passed": true,
+      "Expected": -3472.034278869629,
+      "Name": "Camera Y at fraction 0.75"
+    },
+    {
+      "Actual": 3.2765829629237295,
+      "Passed": true,
+      "Expected": 3.2765829629237295,
+      "Name": "Camera Angle at fraction 0.75"
+    },
+    {
+      "Actual": 34.06421661376953,
+      "Passed": true,
+      "Expected": 34.06421661376953,
+      "Name": "View height at fraction 0.75"
+    },
+    {
+      "Actual": 927.2234802246094,
+      "Passed": true,
+      "Expected": 927.2234802246094,
+      "Name": "Camera X at fraction 1"
+    },
+    {
+      "Actual": -3471.5535888671875,
+      "Passed": true,
+      "Expected": -3471.5535888671875,
+      "Name": "Camera Y at fraction 1"
+    },
+    {
+      "Actual": 3.2888548092268146,
+      "Passed": true,
+      "Expected": 3.2888548092268146,
+      "Name": "Camera Angle at fraction 1"
+    },
+    {
+      "Actual": 33.97459411621094,
+      "Passed": true,
+      "Expected": 33.97459411621094,
+      "Name": "View height at fraction 1"
+    },
+    {
+      "Actual": 927.2234802246094,
+      "Passed": true,
+      "Expected": 927.2234802246094,
+      "Name": "Camera X at fraction 1.5"
+    },
+    {
+      "Actual": -3471.5535888671875,
+      "Passed": true,
+      "Expected": -3471.5535888671875,
+      "Name": "Camera Y at fraction 1.5"
+    },
+    {
+      "Actual": 3.2888548092268146,
+      "Passed": true,
+      "Expected": 3.2888548092268146,
+      "Name": "Camera Angle at fraction 1.5"
+    },
+    {
+      "Actual": 33.97459411621094,
+      "Passed": true,
+      "Expected": 33.97459411621094,
+      "Name": "View height at fraction 1.5"
+    }
+  ],
+  "Meaning": "Real E1M1 world after 35 ordinary moving/turning commands. Camera position, angle and view height checked at quarter/midpoint/endpoints and out-of-range clamps. No live terminal window or displayed-rate claim.",
+  "Error": null
+}

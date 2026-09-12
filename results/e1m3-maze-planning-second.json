@@ -1,0 +1,61 @@
+{
+  "Error": null,
+  "Waypoints": [
+    [
+      -1824,
+      -2336
+    ],
+    [
+      -1840,
+      -2320
+    ],
+    [
+      -1856,
+      -2320
+    ],
+    [
+      -1904,
+      -2272
+    ],
+    [
+      -2032,
+      -2272
+    ],
+    [
+      -2064,
+      -2240
+    ],
+    [
+      -2144,
+      -2240
+    ],
+    [
+      -2640,
+      -1744
+    ],
+    [
+      -2672,
+      -1744
+    ],
+    [
+      -2688,
+      -1728
+    ]
+  ],
+  "ScriptSha256": "84C75DE24806889CC6A5F2B10A910305EC11A7CA4A434A770D1FCF10B032013E",
+  "Start": [
+    -1824.0,
+    -2336.0
+  ],
+  "Radius": 16.1,
+  "Visited": 616,
+  "Found": true,
+  "Seconds": 0.3827165,
+  "End": [
+    -2688.0,
+    -1728.0
+  ],
+  "GridSize": 16,
+  "Meaning": "PowerShell A* planning over a 16-unit grid with point/midpoint clearance from one-sided and explicitly blocking linedefs. This is planar guidance only: sector heights, dynamic floors, doors, keys, things, damage and timed triggers require actual ordinary-input validation. No engine state is moved or edited.",
+  "GeometrySha256": "42943903CA82E900CF34B504AF10DDC74A48BE5DB6658CD89F3EC74497D0E5D1"
+}

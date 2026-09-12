@@ -1,6 +1,6 @@
 #requires -Version 7.4
 # SPDX-License-Identifier: GPL-2.0-or-later
-param([Parameter(Mandatory)][string]$Route,[Parameter(Mandatory)][string]$Output,[int]$MaxTics=10000,[ValidateRange(1,32)][double]$ArrivalDistance=18,[switch]$CombatStrafe,[string]$Wad='C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\base\DOOM.WAD')
+param([Parameter(Mandatory)][string]$Route,[Parameter(Mandatory)][string]$Output,[int]$MaxTics=10000,[ValidateRange(1,32)][double]$ArrivalDistance=18,[string]$Wad='C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\base\DOOM.WAD')
 $ErrorActionPreference='Stop'
 if(Test-Path $Output){throw 'Use a fresh route result.'}
 $plan=Get-Content $Route -Raw|ConvertFrom-Json;$waypoints=$plan.Waypoints
@@ -34,17 +34,16 @@ try{
         $cmd=$commands[0];$cmd.Clear();$cmd.AngleTurn=[int16][Math]::Clamp([Math]::Round($delta*65536/(2*[Math]::PI)),-2048,2048)
         if([Math]::Abs($delta) -lt .18 -and -not $attack -and -not $holding){$cmd.ForwardMove=if($distance -gt 70){25}else{8}}
         if($attack -and [Math]::Abs($delta) -lt .08){$cmd.Buttons=1}
-        if($CombatStrafe -and $attack -and -not $holding -and [Math]::Abs($delta) -lt .18){$cmd.SideMove=if(($commandsLog.Count%140) -lt 70){24}else{-24}}
         if(($commandsLog.Count%35) -eq 0){$cmd.Buttons=$cmd.Buttons -bor 2}
         $commandsLog.Add(@($cmd.ForwardMove,$cmd.SideMove,$cmd.AngleTurn,$cmd.Buttons));$null=$game.Update($commands)
-        if(($commandsLog.Count%35) -eq 0){$trace.Add(@{Command=$commandsLog.Count;Waypoint=$waypoint;X=$x;Y=$y;Z=$mo.Z.Data/65536.0;Health=$player.Health;Armor=$player.ArmorPoints;Kills=$player.KillCount;Ammo=$player.Ammo.Clone();Cards=$player.Cards.Clone();Weapon=$player.ReadyWeapon.ToString()})}
+        if(($commandsLog.Count%35) -eq 0){$trace.Add(@{Command=$commandsLog.Count;Waypoint=$waypoint;X=$x;Y=$y;Z=$mo.Z.Data/65536.0;Health=$player.Health;Kills=$player.KillCount;Ammo=$player.Ammo.Clone();Cards=$player.Cards.Clone();Weapon=$player.ReadyWeapon.ToString()})}
         if($game.State -eq [GameState]::Intermission){$passed=$true;break}
         if($player.Health -le 0){throw "Player died at waypoint $waypoint ($x,$y)."}
         if($tic-$reachedAt -gt 900){throw "Route stalled at waypoint $waypoint ($x,$y), target $($target -join ',')."}
     }
     if(-not $passed){throw 'Route did not complete within its tic budget.'}
 }catch{$failure=$_.ToString()+"`n"+$_.ScriptStackTrace;throw}finally{
-    @{FinishedUtc=[DateTime]::UtcNow.ToString('o');Passed=$passed;Error=$failure;Episode=$plan.Episode;Map=$plan.Map;Skill=$plan.Skill;ArrivalDistance=$ArrivalDistance;CombatStrafe=[bool]$CombatStrafe;MaxIterations=$MaxTics;DriverIterations=$tic;SimulationCommands=$commandsLog.Count;Route=$waypoints;Reached=$reached.ToArray();Trace=$trace.ToArray();InputCommands=$commandsLog.ToArray();WadSha256=(Get-FileHash $Wad).Hash;PlanSha256=(Get-FileHash $Route).Hash;DriverSha256=(Get-FileHash $PSCommandPath).Hash;FinalState=if($game){$game.State.ToString()};FinalHealth=if($game){$game.World.ConsolePlayer.Health};Meaning='Unpaced waypoint/combat driver with ordinary TicCmd movement, turns, attacks and use only. Optional combat strafing uses declared alternating player sidemove commands. No teleport, god mode, direct damage, direct specials or state edits. Route planning reads geometry; view tests require separate recorded host replay.'}|ConvertTo-Json -Depth 8|Set-Content $Output
+    @{FinishedUtc=[DateTime]::UtcNow.ToString('o');Passed=$passed;Error=$failure;Episode=$plan.Episode;Map=$plan.Map;Skill=$plan.Skill;ArrivalDistance=$ArrivalDistance;DriverIterations=$tic;SimulationCommands=$commandsLog.Count;Route=$waypoints;Reached=$reached.ToArray();Trace=$trace.ToArray();InputCommands=$commandsLog.ToArray();WadSha256=(Get-FileHash $Wad).Hash;PlanSha256=(Get-FileHash $Route).Hash;DriverSha256=(Get-FileHash $PSCommandPath).Hash;FinalState=if($game){$game.State.ToString()};FinalHealth=if($game){$game.World.ConsolePlayer.Health};Meaning='Unpaced authored waypoint/combat driver with ordinary TicCmd movement, turns, attacks and use only. No teleport, god mode, direct damage, direct specials or state edits. Route planning reads geometry; view tests require separate recorded host replay.'}|ConvertTo-Json -Depth 8|Set-Content $Output
     if($content){$content.Dispose()}
 }
 "PASS: E$($plan.Episode)M$($plan.Map) with $($commandsLog.Count) commands."

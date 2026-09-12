@@ -1,10 +1,13 @@
 #requires -Version 7.4
 # SPDX-License-Identifier: GPL-2.0-or-later
-param([Parameter(Mandatory)][string]$RouteResult,[Parameter(Mandatory)][string]$Output,[string]$Wad='C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\base\DOOM.WAD')
+param([Parameter(Mandatory)][string]$RouteResult,[Parameter(Mandatory)][string]$Output,
+    [ValidateRange(0,9)][int]$ExpectedNextMap=0,[switch]$SecretExit,
+    [string]$Wad='C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\base\DOOM.WAD')
 $ErrorActionPreference='Stop'
 if(Test-Path $Output){throw 'Use a fresh qualification/replay path.'}
 $reference=Get-Content $RouteResult -Raw|ConvertFrom-Json;$wadHash=(Get-FileHash $Wad).Hash
 if(-not $reference.Passed -or $reference.Error -or $reference.WadSha256 -cne $wadHash){throw 'Expected a successful route for this IWAD.'}
+if($ExpectedNextMap -eq 0){if($SecretExit){throw 'Declare the expected secret destination map.'};$ExpectedNextMap=$reference.Map+1}
 $bundle=& "$PSScriptRoot/Build-EngineBundle.ps1";. $bundle
 . "$PSScriptRoot/../src/InputReplay.ps1";. "$PSScriptRoot/../src/GameHost.ps1";. "$PSScriptRoot/../src/SnapshotTransport.ps1"
 $content=$null;$game=$null;$failure=$null;$commands=$null;$lastTransition='';$traceChecks=0;$continued=$false
@@ -14,7 +17,7 @@ function Record-Point {
 }
 function Record-Transition {
     $key="$($game.State):$($game.Options.Episode):$($game.Options.Map)"
-    if($key -ne $script:lastTransition){$p=$game.World.ConsolePlayer;$transitions.Add(@{Tic=$log.Count;State=$game.State.ToString();Episode=$game.Options.Episode;Map=$game.Options.Map;Health=$p.Health;Armor=$p.ArmorPoints;Ammo=$p.Ammo.Clone()});$script:lastTransition=$key;Record-Point}
+    if($key -ne $script:lastTransition){$p=$game.World.ConsolePlayer;$transitions.Add(@{Tic=$log.Count;State=$game.State.ToString();Episode=$game.Options.Episode;Map=$game.Options.Map;Health=$p.Health;Armor=$p.ArmorPoints;Ammo=$p.Ammo.Clone();DidSecret=$p.DidSecret});$script:lastTransition=$key;Record-Point}
 }
 function Advance($Entry){
     $p=$game.World.ConsolePlayer;$pre=@{X=$p.Mobj.X.Data/65536.0;Y=$p.Mobj.Y.Data/65536.0}
@@ -32,21 +35,24 @@ try{
         $pre=Advance $entry;$p=$game.World.ConsolePlayer
         if($expected.ContainsKey($log.Count)){
             $e=$expected[$log.Count]
+            if($e.PSObject.Properties['Armor'] -and $p.ArmorPoints -ne $e.Armor){throw "Independent armor differs at command $($log.Count)."}
             if($pre.X -ne $e.X -or $pre.Y -ne $e.Y -or $p.Mobj.Z.Data/65536.0 -ne $e.Z -or $p.Health -ne $e.Health -or $p.KillCount -ne $e.Kills -or ($p.Ammo -join ',') -cne ($e.Ammo -join ',') -or ($p.Cards -join ',') -cne ($e.Cards -join ',') -or $p.ReadyWeapon.ToString() -cne $e.Weapon){throw "Independent route trace differs at command $($log.Count)."};$traceChecks++
         }
     }
     if($game.State -ne [GameState]::Intermission -or $game.World.ConsolePlayer.Health -ne $reference.FinalHealth -or $traceChecks -ne $reference.Trace.Count){throw 'Independent replay did not reproduce route completion.'}
+    if($game.World.SecretExit -ne [bool]$SecretExit -or $game.Options.IntermissionInfo.NextLevel+1 -ne $ExpectedNextMap){throw 'Exit kind or advertised destination differs from the declared route.'}
     $exitInventory=@($game.World.ConsolePlayer.Health,$game.World.ConsolePlayer.ArmorPoints)+$game.World.ConsolePlayer.Ammo.Clone()
     for($n=0;$n -lt 700;$n++){
         $null=Advance @(0,0,0,$(if($n -in 35,70,105){2}else{0}))
-        if($game.State -eq [GameState]::Level -and $game.Options.Map -eq $reference.Map+1 -and $game.World.LevelTime -ge 71){$continued=$true;break}
+        if($game.State -eq [GameState]::Level -and $game.Options.Episode -eq $reference.Episode -and $game.Options.Map -eq $ExpectedNextMap -and $game.World.LevelTime -ge 71){$continued=$true;break}
     }
     if(-not $continued){throw 'Ordinary use-button continuation did not enter the next map.'}
     $entryInventory=@($transitions[2].Health,$transitions[2].Armor)+$transitions[2].Ammo
     if(($exitInventory -join ',') -cne ($entryInventory -join ',')){throw 'Exit inventory changed before next-map spawn.'}
+    if($SecretExit -and -not $transitions[2].DidSecret){throw 'Secret exit history was not retained at destination spawn.'}
     Record-Point
 }catch{$failure=$_.ToString()+"`n"+$_.ScriptStackTrace;throw}finally{
-    $data=@{Format='pwshDoom.InputReplay';Version=1;ContinueCampaign=$true;Episode=$reference.Episode;Map=$reference.Map;Skill=$reference.Skill;WadSha256=$wadHash;SourceFingerprint=Get-DoomReplaySourceFingerprint;InputCommands=$log.ToArray();Checkpoints=$points.ToArray();Transitions=$transitions.ToArray();Error=$failure;Passed=($null -eq $failure -and $continued);TraceChecks=$traceChecks;RouteResultSha256=(Get-FileHash $RouteResult).Hash;QualificationSourceSha256=(Get-FileHash $PSCommandPath).Hash;Meaning='Fresh independent fixed-command replay, compared with original driver position/inventory/combat samples; then ordinary use presses through intermission and 71 tics in the next map with spawn inventory preserved. Checkpoints are selected state/render data, not complete vanilla demo compatibility.'}
+    $data=@{Format='pwshDoom.InputReplay';Version=1;ContinueCampaign=$true;Episode=$reference.Episode;Map=$reference.Map;Skill=$reference.Skill;ExpectedNextMap=$ExpectedNextMap;SecretExit=[bool]$SecretExit;WadSha256=$wadHash;SourceFingerprint=Get-DoomReplaySourceFingerprint;InputCommands=$log.ToArray();Checkpoints=$points.ToArray();Transitions=$transitions.ToArray();Error=$failure;Passed=($null -eq $failure -and $continued);TraceChecks=$traceChecks;RouteResultSha256=(Get-FileHash $RouteResult).Hash;QualificationSourceSha256=(Get-FileHash $PSCommandPath).Hash;Meaning='Fresh independent fixed-command replay, compared with original driver position/inventory/combat samples; declared exit kind/destination checked before ordinary use presses through intermission and 71 tics in the destination with spawn inventory preserved. Secret routes also check retained secret history. Checkpoints are selected state/render data, not complete vanilla demo compatibility.'}
     Write-DoomInputReplay $Output $data
     if($content){$content.Dispose()}
 }
