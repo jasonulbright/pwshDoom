@@ -10,8 +10,9 @@ param([ValidateSet('Classic','AnsiArt','Matrix')][string]$Style='Matrix',
     [ValidateRange(60,240)][int]$CaptureLimit=240,
     [ValidateSet('GraphicsCapture','Gdi')][string]$CaptureBackend='GraphicsCapture',
     [ValidateRange(4,24)][int]$FontSize=12,[string]$FontFace,[switch]$Maximized,
-    [string]$SessionSchedule,[switch]$RecordInput,[switch]$Sound,[string]$SaveRoot,[string]$SettingsPath,[ValidateRange(3,30)][int]$ExitDelaySeconds=3,[ValidateSet('ReplayEnd','LevelComplete','ConfirmedQuit','Duration')][string]$ExpectedExit)
+    [string]$SessionSchedule,[switch]$RecordInput,[switch]$Sound,[string]$MusicCatalog,[string]$SaveRoot,[string]$SettingsPath,[ValidateRange(3,30)][int]$ExitDelaySeconds=3,[ValidateSet('ReplayEnd','LevelComplete','ConfirmedQuit','Duration')][string]$ExpectedExit)
 $ErrorActionPreference='Stop'
+if($MusicCatalog){$Sound=$true}
 $replayInfo=Get-Content -LiteralPath $Replay -Raw | ConvertFrom-Json
 $expectedEnding=if($ExpectedExit){$ExpectedExit}elseif($replayInfo.ContinueCampaign){'ReplayEnd'}else{'LevelComplete'}
 if(-not $Ffmpeg){
@@ -21,7 +22,8 @@ if(-not $Ffmpeg){
 }
 if(-not $FontFace){$FontFace=if($Style -ne 'Classic' -and $GlyphSet -eq 'Katakana'){'MS Gothic'}else{'Cascadia Mono'}}
 if($Style -eq 'Classic' -and -not $PSBoundParameters.ContainsKey('FontSize')){$FontSize=6}
-if(@(Get-Process WindowsTerminal -ErrorAction SilentlyContinue).Count){throw 'This capture requires an isolated Terminal process. Existing Terminal windows were left untouched.'}
+. "$PSScriptRoot/WindowCaptureTargets.ps1"
+$existingHandles=@(Get-DoomTerminalWindows|ForEach-Object {$_.MainWindowHandle.ToInt64()})
 $prefix=[IO.Path]::GetFullPath($OutputPrefix);$gamePath=$prefix+'-game.json';$videoPath=$prefix+'.mp4'
 foreach($path in @($gamePath,$videoPath,$prefix+'-recording.json')){if(Test-Path -LiteralPath $path){throw 'Choose a fresh output prefix; recordings are never overwritten.'}}
 if($RecordInput -and (Test-Path -LiteralPath ($prefix+'-input.json'))){throw 'Input recording already exists.'}
@@ -34,10 +36,11 @@ try {
     if($SettingsPath){$launch.SettingsPath=$SettingsPath}
     if($RecordInput){$launch.RecordInput=$prefix+'-input.json'}
     if($Sound){$launch.Sound=$true}
+    if($MusicCatalog){$launch.MusicCatalog=$MusicCatalog}
     & "$PSScriptRoot/../Start-Doom.ps1" @launch
     $watch=[Diagnostics.Stopwatch]::StartNew()
     while($null -eq $target){
-        $candidates=@(Get-Process WindowsTerminal -ErrorAction SilentlyContinue | Where-Object {$_.MainWindowHandle -ne 0 -and $_.MainWindowTitle -eq 'pwshDoom'})
+        $candidates=@(Get-DoomTerminalWindows | Where-Object {$_.MainWindowHandle.ToInt64() -notin $existingHandles -and $_.MainWindowTitle -eq 'pwshDoom'})
         if($candidates.Count -gt 1){throw 'Ambiguous capture window.'}
         if($candidates.Count -eq 1){$target=$candidates[0];break}
         if($watch.Elapsed.TotalSeconds -gt 20){throw 'No target game window appeared.'}
@@ -92,9 +95,10 @@ finally {
     if($null -ne $exitCode -and $exitCode -ne 0 -and -not $failure){$failure="FFmpeg exited with code $exitCode."}
     $stderr | Set-Content -LiteralPath ($prefix+'-ffmpeg.log')
     @{FinishedUtc=[DateTime]::UtcNow.ToString('o');Error=$failure;Style=$Style;GlyphSet=$GlyphSet;FontFace=$FontFace;FontSize=$FontSize;Maximized=[bool]$Maximized;CaptureBackend=$CaptureBackend;CaptureLimit=if($CaptureBackend -eq 'GraphicsCapture'){$CaptureLimit}else{$null};VideoFps=60;ExpectedExit=$expectedEnding;ReplaySha256=(Get-FileHash -LiteralPath $Replay).Hash;
-        SoundRequested=[bool]$Sound;AudioCaptured=$false;
+        SoundRequested=[bool]$Sound;MusicCatalogSha256=if($MusicCatalog){(Get-FileHash $MusicCatalog).Hash}else{$null};AudioCaptured=$false;
         SessionScheduleSha256=if($SessionSchedule){(Get-FileHash -LiteralPath $SessionSchedule).Hash}else{$null};SaveRoot=$SaveRoot;ExitDelaySeconds=$ExitDelaySeconds;InputReplaySha256=if($RecordInput -and (Test-Path -LiteralPath ($prefix+'-input.json'))){(Get-FileHash -LiteralPath ($prefix+'-input.json')).Hash}else{$null};
         TerminalPid=if($null -ne $target){$target.Id}else{$null};WindowHandle=if($null -ne $target){$target.MainWindowHandle.ToInt64()}else{$null};
+        PreexistingTerminalWindows=$existingHandles.Count;TargetWasPreexisting=if($target){$target.MainWindowHandle.ToInt64() -in $existingHandles}else{$null};
         CaptureStartQpc=$captureQpc;QpcFrequency=[Diagnostics.Stopwatch]::Frequency;EncoderExitCode=$exitCode;
         Ffmpeg=$Ffmpeg;FfmpegSha256=(Get-FileHash -LiteralPath $Ffmpeg).Hash;Arguments=$arguments;
         Video=$videoPath;VideoSha256=if(Test-Path -LiteralPath $videoPath){(Get-FileHash -LiteralPath $videoPath).Hash}else{$null};GameReport=$gamePath;

@@ -1,8 +1,9 @@
 #requires -Version 7.4
 # SPDX-License-Identifier: GPL-2.0-or-later
 param([string]$Wad='C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\base\DOOM.WAD',
-    [Parameter(Mandatory)][string]$Output,[switch]$Sound)
+    [Parameter(Mandatory)][string]$Output,[switch]$Sound,[string]$MusicCatalog,[ValidateRange(1,4)][int]$NewGameEpisode=2)
 $ErrorActionPreference='Stop'
+if($MusicCatalog){$Sound=$true}
 if(Test-Path -LiteralPath $Output){throw 'Use a fresh report path.'}
 . "$PSScriptRoot/../src/SimulationProcess.ps1";. "$PSScriptRoot/../src/SessionMenu.ps1"
 . "$PSScriptRoot/../src/InputReplay.ps1"
@@ -42,7 +43,7 @@ function Send-Action($Action){
 }
 function Resume-Game {$null=Send-Action @{Action='ShowMenu';Screen=0;Choice=0;Episode=1;Skill=3}}
 try{
-    $simulation=New-DoomSimulation $Wad 3 1 1 -ReplayCheckpoints -SaveRoot $saveRoot -Sound:$Sound
+    $simulation=New-DoomSimulation $Wad 3 1 1 -ReplayCheckpoints -SaveRoot $saveRoot -Sound:$Sound -MusicCatalog $MusicCatalog
     if($Sound){$simulation.View.Write(84,0);[void]$simulation.Go.Set()}
     Advance-Commands 35 25;$savedSnapshot=Snapshot-Hash $snapshot
     $reply=Send-Action @{Action='SaveGame';Slot=1;ExpectedHash=$null}
@@ -55,8 +56,8 @@ try{
     $reply=Send-Action @{Action='SaveGame';Slot=1;ExpectedHash=('A'*64)}
     Assert-Worker 'Stale save confirmation preserves the prior slot' (-not $reply.Success -and (Get-FileHash $path).Hash -eq $originalHash)
     Resume-Game
-    $reply=Send-Action @{Action='NewGame';Skill=3;Episode=2;Map=1}
-    Assert-Worker 'Different episode installs generation two' ($reply.Success -and $snapshot.Episode -eq 2 -and $snapshot.Generation -eq 2)
+    $reply=Send-Action @{Action='NewGame';Skill=3;Episode=$NewGameEpisode;Map=1}
+    Assert-Worker 'Requested episode installs generation two' ($reply.Success -and $snapshot.Episode -eq $NewGameEpisode -and $snapshot.Generation -eq 2)
     $reply=Send-Action @{Action='LoadGame';Slot=1;ExpectedHash=$originalHash;AllowSourceMismatch=$false}
     Assert-Worker 'Slot load restores E1M1 at the monotonic input boundary' ($reply.Success -and $snapshot.Episode -eq 1 -and $snapshot.Generation -eq 3 -and $snapshot.Tic -eq 70)
     Assert-Worker 'Loaded numeric state equals the earlier saved state' ((Snapshot-Hash $snapshot) -ceq $savedSnapshot)
@@ -76,9 +77,10 @@ try{
         try{
             Assert-Worker 'Audio device survives save/load/new-game and closes' ($null -eq $reportData.Audio.Error -and $null -eq $reportData.Audio.CleanupError -and $reportData.Audio.DeviceClosed)
             Assert-Worker 'New game and both successful loads reset audio epochs' ($reportData.Audio.EpochResets -eq 3)
+            if($MusicCatalog){Assert-Worker 'Qualified music is consumed and closes across session operations' ($reportData.Audio.Music.Closed -and $reportData.Audio.Music.Frames -gt 0 -and @($reportData.Audio.Music.Transitions|Where-Object {$_.Kind -eq 'Start' -and $_.Track -ceq 'D_E1M1'}).Count -ge 2)}
         }catch{$failure=$_.ToString()}
     }
-    @{FinishedUtc=[DateTime]::UtcNow.ToString('o');Error=$failure;Checks=$checks.ToArray();Actions=$actions.ToArray();Simulation=$reportData;SaveRoot=$saveRoot;HarnessSha256=(Get-FileHash $PSCommandPath).Hash;Meaning='Actual simulation process and bounded session IPC. Numeric snapshots, command indices, asset generation handshake, failed candidate isolation, atomic replacement/backup and immutable replay saves. Rendering workers and live menus are qualified separately.'}|ConvertTo-Json -Depth 12|Set-Content $Output
+    @{FinishedUtc=[DateTime]::UtcNow.ToString('o');Error=$failure;Checks=$checks.ToArray();Actions=$actions.ToArray();Simulation=$reportData;SaveRoot=$saveRoot;NewGameEpisode=$NewGameEpisode;MusicCatalogSha256=if($MusicCatalog){(Get-FileHash $MusicCatalog).Hash}else{$null};HarnessSha256=(Get-FileHash $PSCommandPath).Hash;Meaning='Actual simulation process and bounded session IPC. Numeric snapshots, command indices, asset generation handshake, failed candidate isolation, atomic replacement/backup and immutable replay saves. Rendering workers and live menus are qualified separately.'}|ConvertTo-Json -Depth 12|Set-Content $Output
 }
 if($failure){throw $failure}
 "PASS: $($checks.Count) save worker checks."

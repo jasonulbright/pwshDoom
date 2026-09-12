@@ -1,0 +1,319 @@
+{
+  "Receipts": [
+    {
+      "Path": "results/music-playback-unit-first.json",
+      "Sha256": "78EB96F77951BD79ECCB2A2C10C3CED8C3953D9CC603B2A9F3762A5F899A695F"
+    },
+    {
+      "Path": "results/music-events-unit-backing-field.json",
+      "Sha256": "E514EFC4EE1A6E8A7E2D9B72F69B5139533A5C956F927E236C60631C6B494B6B"
+    },
+    {
+      "Path": "results/music-audio-worker-first.json",
+      "Sha256": "9C2A239FD9833B2EE8F0DCE0ED3F8EF3B4D6DE470AA92427EB32F77EBEB7F6AA"
+    },
+    {
+      "Path": "results/audio-runspace-music-compatible.json",
+      "Sha256": "7A0515BF94430979589188DA6B3EC2CE8EBC2C9460049FCFB977087B75C1EEF5"
+    },
+    {
+      "Path": "results/audio-volume-music-compatible.json",
+      "Sha256": "82EC6B3E3893E01A3406FCF974A287BC559CB4B1CBD34AA83D76F2008AE8DB48"
+    },
+    {
+      "Path": "results/music-save-worker-first.json",
+      "Sha256": "4DD0850154B05AE265CB37449B56EE90C17729EB53C91A9BD95F0D5BDF53B7AA"
+    },
+    {
+      "Path": "results/music-events-unit-first.json",
+      "Sha256": "82F6F40BD0ABC3F13EBAE3800C4A36A7202CDE8D67BA572BFADF78D780F37647"
+    },
+    {
+      "Path": "results/music-events-unit-fixed.json",
+      "Sha256": "C98366FC3D2C957984CA9E5DC6F3D3A03953F82050EF1BEB40BAEA5E5539686B"
+    },
+    {
+      "Path": "results/music-events-unit-backing-field.json",
+      "Sha256": "E514EFC4EE1A6E8A7E2D9B72F69B5139533A5C956F927E236C60631C6B494B6B"
+    },
+    {
+      "Path": "results/music-audio-worker-first.json",
+      "Sha256": "9C2A239FD9833B2EE8F0DCE0ED3F8EF3B4D6DE470AA92427EB32F77EBEB7F6AA"
+    },
+    {
+      "Path": "results/music-host-first.json",
+      "Sha256": "7C97B3DCE52FD7573486F0D151C2C821DBF675D2F36F0D1185869EF273121351"
+    },
+    {
+      "Path": "local/recordings/music-matrix-first-game.json",
+      "Sha256": "9A9DEF3BDB388F6C71BD9DE588D47B3315BF3710CF7E026E7AA199CDD7FF1BC2"
+    },
+    {
+      "Path": "local/recordings/music-matrix-first-recording.json",
+      "Sha256": "A25B7696059FD55B56E9BB73B8D6EC1F95E5BF0EC0AE7170C282A20BFF40C37C"
+    },
+    {
+      "Path": "results/music-live-recording.json",
+      "Sha256": "87CFB1807C7DFEC51847F76A0F3B84B0268EE91FE8B5D67635FBFC45320C1575"
+    }
+  ],
+  "SourceSha256": "E05B3B33D2CF4930FE3007D00203D8BD1A09248F6E26372AB8475D275AFCC4D2",
+  "Meaning": "Current integration source snapshot with unit/device/save/headless/actual-window evidence. Complete worker-fixture submitted PCM has an independent offline control schedule. Host audio frame accounting is not waveform equivalence or acoustic capture; video is silent. E1M1 only, no full campaign or sustained presentation-rate qualification.",
+  "Checks": [
+    {
+      "Passed": true,
+      "Name": "music-playback-unit-first targeted checks pass"
+    },
+    {
+      "Passed": true,
+      "Name": "Current source in music-playback-unit-first: src/MusicLoopReader.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Current source in music-playback-unit-first: src/MusicPlayback.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "music-events-unit-backing-field targeted checks pass"
+    },
+    {
+      "Passed": true,
+      "Name": "music-audio-worker-first targeted checks pass"
+    },
+    {
+      "Passed": true,
+      "Name": "Current source in music-audio-worker-first: src/AudioMixer.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Current source in music-audio-worker-first: src/AudioPackets.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Current source in music-audio-worker-first: src/AudioRunspace.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Current source in music-audio-worker-first: src/WaveOutDevice.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Current source in music-audio-worker-first: src/MusicLoopReader.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Current source in music-audio-worker-first: src/MusicPlayback.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Current source in music-audio-worker-first: scripts/Invoke-AudioWorker.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Current source in music-audio-worker-first: scripts/Test-MusicAudioWorker.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "audio-runspace-music-compatible targeted checks pass"
+    },
+    {
+      "Passed": true,
+      "Name": "Current source in audio-runspace-music-compatible: src/AudioRunspace.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Current source in audio-runspace-music-compatible: src/AudioPackets.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Current source in audio-runspace-music-compatible: src/WaveOutDevice.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Current source in audio-runspace-music-compatible: scripts/Invoke-AudioWorker.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Current source in audio-runspace-music-compatible: scripts/Test-AudioRunspace.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "audio-volume-music-compatible targeted checks pass"
+    },
+    {
+      "Passed": true,
+      "Name": "Current source in audio-volume-music-compatible: src/AudioMixer.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Current source in audio-volume-music-compatible: src/AudioRunspace.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Current source in audio-volume-music-compatible: scripts/Invoke-AudioWorker.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Current source in audio-volume-music-compatible: scripts/Test-AudioVolume.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "music-save-worker-first targeted checks pass"
+    },
+    {
+      "Passed": true,
+      "Name": "Failed adapter dispatch attempts remain recorded"
+    },
+    {
+      "Passed": true,
+      "Name": "Failed adapter dispatch attempts remain recorded"
+    },
+    {
+      "Passed": true,
+      "Name": "Current event adapter is the corrected source"
+    },
+    {
+      "Passed": true,
+      "Name": "Complete worker PCM matches independent offline fixture"
+    },
+    {
+      "Passed": true,
+      "Name": "Headless host/music closes successfully"
+    },
+    {
+      "Passed": true,
+      "Name": "Headless all simulation audio frames consumed and returned"
+    },
+    {
+      "Passed": true,
+      "Name": "Headless receives one actual starting-map music command"
+    },
+    {
+      "Passed": true,
+      "Name": "Headless starvation polls are confined to final packet shutdown"
+    },
+    {
+      "Passed": true,
+      "Name": "Recorded host/music closes successfully"
+    },
+    {
+      "Passed": true,
+      "Name": "Recorded all simulation audio frames consumed and returned"
+    },
+    {
+      "Passed": true,
+      "Name": "Recorded receives one actual starting-map music command"
+    },
+    {
+      "Passed": true,
+      "Name": "Recorded starvation polls are confined to final packet shutdown"
+    },
+    {
+      "Passed": true,
+      "Name": "Capture selected a new window while an existing Terminal remained open"
+    },
+    {
+      "Passed": true,
+      "Name": "Original video and viewing copy match retained hashes"
+    },
+    {
+      "Passed": true,
+      "Name": "Recording explicitly distinguishes enabled playback from silent footage"
+    },
+    {
+      "Passed": true,
+      "Name": "Parse Start-Doom.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Parse src/MusicPlayback.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Parse src/AudioRunspace.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Parse src/SimulationProcess.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Parse scripts/Invoke-AudioWorker.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Parse scripts/Invoke-SimulationWorker.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Parse scripts/Invoke-Doom.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Parse scripts/Record-DoomReplay.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Parse scripts/WindowCaptureTargets.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Parse scripts/Test-SaveWorker.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Parse scripts/Test-MusicIntegrationEvidence.ps1"
+    }
+  ],
+  "Error": null,
+  "Sources": [
+    {
+      "Path": "Start-Doom.ps1",
+      "Sha256": "8D9A176BB62578634D99C5B6E88FE8ABC3E6F5AC7238EFA8875503CC0EED89C2"
+    },
+    {
+      "Path": "src/MusicEvents.ps1",
+      "Sha256": "7E59CFCC112C2FC8369F17077F40A391E56947FE4CD31354E6387D750102386E"
+    },
+    {
+      "Path": "src/MusicPlayback.ps1",
+      "Sha256": "1A4DFDE7531BEFC0B176CAC8566F82C28EF5CC03D30057B8943E25384E79B596"
+    },
+    {
+      "Path": "src/AudioRunspace.ps1",
+      "Sha256": "C88EF8DA24B802FD2ED23AA9DD13B744BA25702CF800E4757606252B0F6BF7BC"
+    },
+    {
+      "Path": "src/SimulationProcess.ps1",
+      "Sha256": "96A01F59E5901B5966C7786C0E28AE6D88E186DC57B56C0EE8F57BB42CEFFB3B"
+    },
+    {
+      "Path": "scripts/Invoke-AudioWorker.ps1",
+      "Sha256": "905C83E213DEA4EBFB35F58892703718CE65C184EBE94BA785020DAEBD113CEC"
+    },
+    {
+      "Path": "scripts/Invoke-SimulationWorker.ps1",
+      "Sha256": "FBE12F5AFDF39686B96E0C66CD37D00EBDA3C989BEBA485C936B0BE3A08F9B92"
+    },
+    {
+      "Path": "scripts/Invoke-Doom.ps1",
+      "Sha256": "C6FE2135113D85F25FB597F9DE78D16A4BF1AD3F29176AC55FFE1703D9AE02EF"
+    },
+    {
+      "Path": "scripts/Record-DoomReplay.ps1",
+      "Sha256": "3F5BEC90FA6DDB2E345B6B7FFD794DEAA114C62731D2B2E6E115F086F70C78F1"
+    },
+    {
+      "Path": "scripts/WindowCaptureTargets.ps1",
+      "Sha256": "4AB3B0F6833F552B4443BAF3000A3AB2E6466D9B3CA425FB62D7BA021002FA5E"
+    },
+    {
+      "Path": "scripts/Test-SaveWorker.ps1",
+      "Sha256": "19DC81FDFEEF33095D72BDE98986F661839834A40176C24E194409B310893C08"
+    },
+    {
+      "Path": "scripts/Test-MusicIntegrationEvidence.ps1",
+      "Sha256": "E05B3B33D2CF4930FE3007D00203D8BD1A09248F6E26372AB8475D275AFCC4D2"
+    }
+  ]
+}

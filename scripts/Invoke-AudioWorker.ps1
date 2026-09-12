@@ -1,8 +1,10 @@
 #requires -Version 7.4
 # SPDX-License-Identifier: GPL-2.0-or-later
-param($Queue,$Shared,[hashtable]$Clips)
+param($Queue,$Shared,[hashtable]$Clips,[hashtable]$MusicReports=@{})
 $ErrorActionPreference='Stop';Set-StrictMode -Version Latest
 . "$PSScriptRoot/../src/AudioMixer.ps1";. "$PSScriptRoot/../src/AudioPackets.ps1";. "$PSScriptRoot/../src/WaveOutDevice.ps1"
+. "$PSScriptRoot/../src/MusicLoopReader.ps1";. "$PSScriptRoot/../src/MusicPlayback.ps1"
+$music=$null
 $device=$null;$mixer=New-DoomAudioMixer 44100;$epoch=0;$started=$false;$devicePaused=$true
 $mixTimes=[Collections.Generic.List[double]]::new();$ages=[Collections.Generic.List[double]]::new()
 $starves=[Collections.Generic.List[object]]::new();$starved=$false;$cancelled=0L;$stale=0;$packets=0;$resets=0;$pauses=0;$lastSequence=-1;$maxVoices=0
@@ -10,6 +12,7 @@ $watch=[Diagnostics.Stopwatch]::StartNew();$failure=$null;$cleanup=$null
 $pending=$null;$digest=[Security.Cryptography.IncrementalHash]::CreateHash([Security.Cryptography.HashAlgorithmName]::SHA256)
 $volumeChanges=[Collections.Generic.List[object]]::new();$mutedPackets=0
 try{
+    $music=New-DoomMusicPlayback $MusicReports
     $device=Open-DoomWaveOut -BufferFrames 1260 -Buffers 4;$Shared.Ready=$true
     while(-not $Shared.Stop){
         $volume=[double]$Shared.Volume
@@ -25,6 +28,7 @@ try{
         if($Shared.Epoch -ne $epoch){
             $cancelled+=Reset-DoomWaveOut $device;Set-DoomWaveOutPaused $device $true
             $epoch=$Shared.Epoch;$mixer.Voices.Clear();$mixer.Paused=$false;$devicePaused=$true;$started=$false;$starved=$false;$resets++
+            Reset-DoomMusicPlayback $music
         }
         if($Shared.Paused){
             if(-not $devicePaused){Set-DoomWaveOutPaused $device $true;$devicePaused=$true;$pauses++}
@@ -38,8 +42,11 @@ try{
             if($packet.Epoch -gt $epoch){$pending=$packet;break}
             if($packet.Epoch -lt $epoch){$stale++;continue}
             Update-DoomAudioPacket $mixer $packet $Clips
+            if($packet.ContainsKey('Music')){Update-DoomMusicPlayback $music $packet.Music}
             $maxVoices=[Math]::Max($maxVoices,$mixer.Voices.Count)
-            $mixWatch=[Diagnostics.Stopwatch]::StartNew();$pcm=Read-DoomAudioFrames $mixer 1260;$mixTimes.Add($mixWatch.Elapsed.TotalMilliseconds)
+            $mixWatch=[Diagnostics.Stopwatch]::StartNew()
+            $musicFrames=if(-not $mixer.Paused){Read-DoomMusicPlayback $music 1260}else{$null}
+            $pcm=Read-DoomAudioFrames $mixer 1260 -Music $musicFrames -MusicGain ($music.Gain*$mixer.Volume);$mixTimes.Add($mixWatch.Elapsed.TotalMilliseconds)
             if($mixer.Volume -eq 0){$mutedPackets++}
             $bytes=[byte[]]::new(5040);[Buffer]::BlockCopy($pcm,0,$bytes,0,5040)
             # Epoch/pause can change during a block; next loop resets/pauses before
@@ -60,9 +67,11 @@ try{
     }
 }catch{$failure=$_.ToString()+"`n"+$_.ScriptStackTrace;$Shared.Error=$failure}finally{
     if($device){try{$cancelled+=Reset-DoomWaveOut $device;Close-DoomWaveOut $device}catch{$cleanup=$_.ToString();$Shared.Error=$cleanup}}
+    if($music){try{Close-DoomMusicPlayback $music}catch{$cleanup=$_.ToString();$Shared.Error=$cleanup}}
     $Shared.Report=@{Error=$failure;CleanupError=$cleanup;Packets=$packets;LastSequence=$lastSequence;StalePacketsDiscarded=$stale;EpochResets=$resets;PauseTransitions=$pauses;MixSamplesMs=$mixTimes.ToArray();PacketAgeAtSubmissionMs=$ages.ToArray();QueueStarvationObservations=$starves.ToArray();MaxVoices=$maxVoices;ClippedSamples=$mixer.ClippedSamples;SubmittedFrames=if($device){$device.SubmittedFrames}else{0};ReturnedCompletedFrames=if($device){$device.CompletedFrames}else{0};CancelledQueuedFramesUpperBound=$cancelled;UnconsumedPackets=$Queue.Count;DeviceClosed=if($device){$device.Closed}else{$false};WallSeconds=$watch.Elapsed.TotalSeconds;Meaning='PowerShell runspace mixing and waveOut playback; packet age ends at submission, not audible output. Starvation is queue polling, not hardware telemetry. Reset/exit can cancel queued tail audio; cancelled frame count is an upper bound.'}
     $Shared.Report.PcmSha256=[Convert]::ToHexString($digest.GetHashAndReset());$digest.Dispose()
     $Shared.Report.VolumeChanges=$volumeChanges.ToArray();$Shared.Report.MutedPackets=$mutedPackets;$Shared.Report.FinalVolume=$mixer.Volume
     $Shared.Report.PendingPacket=if($pending){$pending.Sequence}else{$null}
+    $Shared.Report.Music=if($music){@{Selected=$music.Selected;Gain=$music.Gain;Frames=$music.Frames;Transitions=$music.Transitions.ToArray();Reports=$music.Reports;Closed=$music.Closed}}else{$null}
     $Shared.Finished=$true
 }

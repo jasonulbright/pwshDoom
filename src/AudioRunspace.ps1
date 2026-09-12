@@ -1,11 +1,11 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 function Start-DoomAudioRunspace {
-    param([hashtable]$Clips)
+    param([hashtable]$Clips,[hashtable]$MusicReports=@{})
     $state=@{Queue=[Collections.Concurrent.BlockingCollection[object]]::new(32);Shared=[hashtable]::Synchronized(@{Ready=$false;Stop=$false;Paused=$true;Volume=1.0;AppliedVolume=1.0;LastSequence=-1;Epoch=0;Error=$null;Finished=$false;Report=$null});PowerShell=$null;Runspace=$null;Async=$null;MaxQueue=0;Closed=$false}
     try{
         $state.Runspace=[RunspaceFactory]::CreateRunspace();$state.Runspace.Open()
         $state.PowerShell=[PowerShell]::Create();$state.PowerShell.Runspace=$state.Runspace
-        $null=$state.PowerShell.AddCommand("$PSScriptRoot/../scripts/Invoke-AudioWorker.ps1").AddParameter('Queue',$state.Queue).AddParameter('Shared',$state.Shared).AddParameter('Clips',$Clips)
+        $null=$state.PowerShell.AddCommand("$PSScriptRoot/../scripts/Invoke-AudioWorker.ps1").AddParameter('Queue',$state.Queue).AddParameter('Shared',$state.Shared).AddParameter('Clips',$Clips).AddParameter('MusicReports',$MusicReports)
         $state.Async=$state.PowerShell.BeginInvoke();$watch=[Diagnostics.Stopwatch]::StartNew()
         while(-not $state.Shared.Ready){
             if($state.Async.IsCompleted -or $state.Shared.Error){throw "Audio startup failed: $($state.Shared.Error) $($state.PowerShell.Streams.Error)"}

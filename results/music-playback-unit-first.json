@@ -1,0 +1,70 @@
+{
+  "Checks": [
+    {
+      "Name": "Catalog opens qualified track without selecting it",
+      "Passed": true
+    },
+    {
+      "Name": "Start offset crosses intro boundary with exact stored samples",
+      "Passed": true
+    },
+    {
+      "Name": "Explicit restart and gain applied",
+      "Passed": true
+    },
+    {
+      "Name": "Missing track packet rejected atomically",
+      "Passed": true
+    },
+    {
+      "Name": "Rejected packet preserves prior track and gain",
+      "Passed": true
+    },
+    {
+      "Name": "Unqualified one-shot command rejected",
+      "Passed": true
+    },
+    {
+      "Name": "Negative start frame rejected",
+      "Passed": true
+    },
+    {
+      "Name": "Nonfinite gain rejected",
+      "Passed": true
+    },
+    {
+      "Name": "Epoch reset stops selection while retaining gain",
+      "Passed": true
+    },
+    {
+      "Name": "Stop leaves no music layer",
+      "Passed": true
+    },
+    {
+      "Name": "Catalog closes all qualified readers",
+      "Passed": true
+    },
+    {
+      "Name": "Closed playback rejects commands",
+      "Passed": true
+    },
+    {
+      "Name": "Catalog rejects mismatched track label",
+      "Passed": true
+    }
+  ],
+  "Meaning": "Persistent catalog command/lifecycle checks using real qualified E1M1 samples and independent file slices at the intro seam. No playback device or host integration.",
+  "QualificationSha256": "DD3734A2154D974A3108113AE5B9414D4FFD65DB854E2DF11E1E335A4D1EDF54",
+  "Sources": [
+    {
+      "Path": "src/MusicLoopReader.ps1",
+      "Sha256": "CF8C9D49A964F3A3E5AC02190622DBF40A26DE42CED825C0799FB0209DCC0A28"
+    },
+    {
+      "Path": "src/MusicPlayback.ps1",
+      "Sha256": "1A4DFDE7531BEFC0B176CAC8566F82C28EF5CC03D30057B8943E25384E79B596"
+    }
+  ],
+  "Error": null,
+  "ScriptSha256": "73988714AD786802C111A802F5F64DD5851ED0CD43CB149B38933D31BD762F9E"
+}

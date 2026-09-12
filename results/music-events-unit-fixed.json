@@ -1,0 +1,21 @@
+{
+  "Error": "Engine music volume clamps to conventional range and emits gain\nat Check, C:\\projects\\pwshDoom\\scripts\\Test-MusicEvents.ps1: line 8\r\nat <ScriptBlock>, C:\\projects\\pwshDoom\\scripts\\Test-MusicEvents.ps1: line 16",
+  "Checks": [
+    {
+      "Name": "Actual world initialization emits E1M1 music callback",
+      "Passed": true
+    },
+    {
+      "Name": "Draining callbacks is destructive exactly once",
+      "Passed": true
+    },
+    {
+      "Name": "Engine music volume clamps to conventional range and emits gain",
+      "Passed": false
+    }
+  ],
+  "SourceSha256": "9A2A076494D3DE4ED074DC368813CA7C79EC7F17AD8BC9A9C5584B7C2D5E8275",
+  "Meaning": "Actual engine initialization callback plus isolated Ultimate Doom save-state music selection and IWAD/catalog identity checks. Non-E1M1 tracks are selection tests only; they are not playback qualifications.",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "ScriptSha256": "A1E36C7D2E5200154D8DAB6F7151D53D9805AEBD1411B1EEAC60A6F27B2EE530"
+}

@@ -1,6 +1,6 @@
 #requires -Version 7.4
 # SPDX-License-Identifier: GPL-2.0-or-later
-param([string]$Wad,[int]$Skill,[int]$Episode,[int]$Map,[string]$Channel,[string]$Assets,[string]$Report,[int]$OwnerPid,[switch]$StopAtLevelEnd,[switch]$ReplayCheckpoints,[string]$CheckpointReplay,[string]$SaveRoot,[switch]$Sound)
+param([string]$Wad,[int]$Skill,[int]$Episode,[int]$Map,[string]$Channel,[string]$Assets,[string]$Report,[int]$OwnerPid,[switch]$StopAtLevelEnd,[switch]$ReplayCheckpoints,[string]$CheckpointReplay,[string]$SaveRoot,[switch]$Sound,[string]$MusicCatalog)
 $ErrorActionPreference='Stop'
 . "$PSScriptRoot/FrameCodec.ps1";. "$PSScriptRoot/../src/GameHost.ps1";. "$PSScriptRoot/../src/FastRenderer.ps1"
 . "$PSScriptRoot/../src/RenderAssets.ps1";. "$PSScriptRoot/../src/SnapshotTransport.ps1"
@@ -13,6 +13,7 @@ $channelMap=[IO.MemoryMappedFiles.MemoryMappedFile]::OpenExisting($Channel);$vie
 $ready=[Threading.EventWaitHandle]::OpenExisting($Channel+'-ready');$go=[Threading.EventWaitHandle]::OpenExisting($Channel+'-go')
 $content=$null;$game=$null;$tick=0;$version=0;$slot=0;$failure=$null;$outcome='Stopped'
 $audio=$null;$audioReport=$null;$audioPackets=$null;$audioEvents=$null;$audioClips=$null;$audioLoading=$false;$audioPacketTimes=[Collections.Generic.List[double]]::new()
+$musicEvents=$null;$musicReports=@{};if($MusicCatalog){$Sound=$true}
 $tickTimes=[Collections.Generic.List[double]]::new();$snapshotTimes=[Collections.Generic.List[double]]::new();$lateness=[Collections.Generic.List[double]]::new()
 $commandLog=[Collections.Generic.List[object]]::new()
 $transitions=[Collections.Generic.List[object]]::new();$uiTimes=[Collections.Generic.List[double]]::new();$generation=1;$screens=$null
@@ -92,7 +93,12 @@ try {
         . "$PSScriptRoot/../src/AudioMixer.ps1";. "$PSScriptRoot/../src/AudioEvents.ps1";. "$PSScriptRoot/../src/AudioPackets.ps1";. "$PSScriptRoot/../src/AudioRunspace.ps1"
         $audioClips=Read-DoomSoundClips $content;$audioPackets=New-DoomAudioPacketState
         $audioEvents=[DoomSoundEvents]::new();$audioEvents.SetListener($game.World.ConsolePlayer.Mobj);$audioEvents.Reset();$options.Sound=$audioEvents
-        $audio=Start-DoomAudioRunspace $audioClips
+        if($MusicCatalog){
+            . "$PSScriptRoot/../src/MusicEvents.ps1"
+            $musicReports=Read-DoomMusicCatalog $MusicCatalog $content
+            $musicEvents=[DoomMusicEvents]::new();$options.Music=$musicEvents;Sync-DoomMusicSession $musicEvents $game
+        }
+        $audio=Start-DoomAudioRunspace $audioClips -MusicReports $musicReports
     }
     Record-SimulationTransition
     Record-ReplayCheckpoint
@@ -177,6 +183,7 @@ try {
                         $game=$candidate;$options=$game.Options;$game.Paused=$false;foreach($cmd in $commands){$cmd.Clear()}
                         $screens=if($StopAtLevelEnd){$null}else{New-DoomSessionScreens $content}
                         $options.Sound.Reset();$options.Sound.SetListener($game.World.ConsolePlayer.Mobj);$options.Sound.Resume()
+                        if($musicEvents){Sync-DoomMusicSession $musicEvents $game}
                         $controlLog.Add(@{Tic=$tick;Action='LoadGame';SaveHash=$saved.Sha256})
                         $result=@{Sha256=$saved.Sha256;SourceMatches=$saved.SourceMatches;GameTic=$game.GameTic;Episode=$options.Episode;Map=$options.Map}
                         Publish-SimulationMapChange
@@ -210,7 +217,7 @@ try {
             if($tick%350 -eq 0 -or $game.State -ne $priorState -or $extraCheckpoints.ContainsKey($tick)){Record-ReplayCheckpoint}
             $watch.Restart();Publish-SimulationSnapshot;$snapshotTimes.Add($watch.Elapsed.TotalMilliseconds)
         }
-        if($null -ne $audio){$watch.Restart();Send-DoomAudioPacket $audio (Get-DoomAudioPacket $audioPackets $audioEvents $audioClips $audio.Shared.Epoch);$audioPacketTimes.Add($watch.Elapsed.TotalMilliseconds)}
+        if($null -ne $audio){$watch.Restart();$packet=Get-DoomAudioPacket $audioPackets $audioEvents $audioClips $audio.Shared.Epoch;if($musicEvents){$packet.Music=$musicEvents.Drain()};Send-DoomAudioPacket $audio $packet;$audioPacketTimes.Add($watch.Elapsed.TotalMilliseconds)}
         if($StopAtLevelEnd -and $game.State -ne [GameState]::Level){$outcome='LevelComplete';$view.Write(12,2);break}
     }
 } catch {$failure=$_.ToString()+"`n"+$_.ScriptStackTrace;$outcome='Error';[Console]::Error.WriteLine($failure);$view.Write(12,3);[void]$ready.Set()}

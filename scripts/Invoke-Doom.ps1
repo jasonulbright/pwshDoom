@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 [CmdletBinding()]
 param([Parameter(Mandatory)][string]$Wad,[ValidateRange(1,32)][int]$Workers=16,
-    [ValidateRange(0,3600)][int]$Seconds=0,[switch]$Headless,[switch]$Scripted,[switch]$Sound,[string]$Replay,[string]$RecordInput,
+    [ValidateRange(0,3600)][int]$Seconds=0,[switch]$Headless,[switch]$Scripted,[switch]$Sound,[string]$MusicCatalog,[string]$Replay,[string]$RecordInput,
     [ValidateRange(0,10000)][int]$CaptureEveryTics=0,[ValidateRange(1,5)][int]$Skill=3,
     [ValidateRange(1,4)][int]$Episode=1,[ValidateRange(1,32)][int]$Map=1,
     [ValidateSet('Classic','AnsiArt','Matrix')][string]$Style='Classic',
@@ -10,6 +10,7 @@ param([Parameter(Mandatory)][string]$Wad,[ValidateRange(1,32)][int]$Workers=16,
     [string]$Report="$PSScriptRoot/../local/game-session.json",[string]$ReadyFile,[string]$SaveRoot,[string]$SettingsPath,
     [switch]$Diagnostics,[string]$ViewportSchedule,[string]$SessionSchedule,[ValidateRange(0,30)][int]$ExitDelaySeconds=0)
 $ErrorActionPreference='Stop'
+if($MusicCatalog){$Sound=$true}
 . "$PSScriptRoot/FrameCodec.ps1";. "$PSScriptRoot/../src/GameProcesses.ps1"
 . "$PSScriptRoot/../src/SimulationProcess.ps1";. "$PSScriptRoot/../src/ConsoleInput.ps1"
 . "$PSScriptRoot/../src/Viewport.ps1"
@@ -95,7 +96,7 @@ try {
     # Existing single-map benchmark replays retain their first-exit stopping rule.
     # Session recordings explicitly carry ContinueCampaign=true.
     $stopAtLevelEnd=$null -ne $replayData -and -not $replayData.ContinueCampaign
-    $simulation=New-DoomSimulation $Wad $Skill $Episode $Map -StopAtLevelEnd:$stopAtLevelEnd -ReplayCheckpoints:$withCheckpoints -CheckpointReplay $(if($null -ne $replayData -and $replayData.Checkpoints){$Replay}else{''}) -SaveRoot $SaveRoot -Sound:$Sound -SoundVolume $(if($preferences.SoundMuted){0}else{$preferences.SoundVolume})
+    $simulation=New-DoomSimulation $Wad $Skill $Episode $Map -StopAtLevelEnd:$stopAtLevelEnd -ReplayCheckpoints:$withCheckpoints -CheckpointReplay $(if($null -ne $replayData -and $replayData.Checkpoints){$Replay}else{''}) -SaveRoot $SaveRoot -Sound:$Sound -SoundVolume $(if($preferences.SoundMuted){0}else{$preferences.SoundVolume}) -MusicCatalog $MusicCatalog
     $snapshot=Read-DoomSimulationSnapshot $simulation $null
     $menu=New-DoomMenuState ($simulation.View.ReadInt32(80)) $Episode $Skill
     $menu.Settings=Copy-DoomUserSettings $preferences

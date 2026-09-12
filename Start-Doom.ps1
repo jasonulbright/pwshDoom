@@ -3,7 +3,7 @@
 [CmdletBinding()]
 param([string]$Wad,[ValidateRange(1,32)][int]$Workers=16,[ValidateRange(1,5)][int]$Skill=3,
     [ValidateRange(1,4)][int]$Episode=1,[ValidateRange(1,32)][int]$Map=1,
-    [switch]$Here,[switch]$Scripted,[switch]$Sound,[ValidateRange(0,3600)][int]$Seconds=0,[string]$Replay,[string]$RecordInput,[int]$CaptureEveryTics=0,
+    [switch]$Here,[switch]$Scripted,[switch]$Sound,[string]$MusicCatalog,[ValidateRange(0,3600)][int]$Seconds=0,[string]$Replay,[string]$RecordInput,[int]$CaptureEveryTics=0,
     [ValidateRange(4,24)][int]$FontSize=6,[switch]$Maximized,[switch]$Diagnostics,
     [ValidateSet('Classic','AnsiArt','Matrix')][string]$Style='Classic',
     [ValidateSet('Ascii','Katakana')][string]$GlyphSet='Katakana',[string]$FontFace,
@@ -34,6 +34,7 @@ if($SaveRoot){$arguments+=@('-SaveRoot',[IO.Path]::GetFullPath($SaveRoot))}
 if($SettingsPath){$arguments+=@('-SettingsPath',[IO.Path]::GetFullPath($SettingsPath))}
 if($Scripted){$arguments+='-Scripted'}
 if($Sound){$arguments+='-Sound'}
+if($MusicCatalog){$arguments+=@('-MusicCatalog',(Resolve-Path -LiteralPath $MusicCatalog).Path)}
 if($Diagnostics){$arguments+='-Diagnostics'}
 if($ExitDelaySeconds -gt 0){$arguments+=@('-ExitDelaySeconds',"$ExitDelaySeconds")}
 if($Replay){$arguments+=@('-Replay',(Resolve-Path -LiteralPath $Replay).Path)}

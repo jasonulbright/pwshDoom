@@ -1,6 +1,6 @@
 # Qualified cached music loops
 
-The finite cache established exact output through E1M1's first restart. This work checks a reusable loop against the current PowerShell dry synthesizer's state, then supplies a bounded reader for a locally trusted qualification report. The normal game host still uses sound effects only; this is an integration foundation.
+The finite cache established exact output through E1M1's first restart. This work checks a reusable loop against the current PowerShell dry synthesizer's state, then supplies a bounded reader for a locally trusted qualification report. The subsequent [music integration](music-integration.md) connects qualified E1M1 playback to the host with an explicit catalog. Ordinary `-Sound` remains effects-only while the soundtrack is completed.
 
 ## State comparison
 
