@@ -1,0 +1,2281 @@
+{
+  "Meaning": "Offline dry PowerShell group experiment. Parallel queues are bounded; bank/score objects are shared read-only. Timing includes initialization, producer waits, mixing and optional paced-consumer waits; excludes preparation/output/diagnostics. Pacing enforces an audio-frame budget against a virtual clock, while retaining a separate complete PCM archive for comparison; no device is used or drained. Late chunks are virtual deadlines, not measured device underruns. Unpaced required startup is retrospective. No game-host integration.",
+  "SourcesChangedDuringRun": [],
+  "Error": null,
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "Sources": [
+    {
+      "Sha256": "66B87D1CDD3FAD62E493A0C50C9A5AEBFE27167C8CCCCA974CC80463B6D1BB33",
+      "Path": "src/MusScore.ps1"
+    },
+    {
+      "Sha256": "AF80287762169B5318F60FD719479137BAED1D3EEF39561513D2B34AC118A855",
+      "Path": "src/SoundFontBank.ps1"
+    },
+    {
+      "Sha256": "9D409332EB51B5B6FCBC4B259E0C5E243E561A3C0D6AD2040A772F46539B9D8E",
+      "Path": "src/SoundFontRegions.ps1"
+    },
+    {
+      "Sha256": "1D7911DC5CD2004D6DBBF27ECF43FFD652FAC8E4813943D9F8CFD5116332417B",
+      "Path": "src/MusicOscillator.ps1"
+    },
+    {
+      "Sha256": "30CC10D9118335FEC1C57653871B236B020FDBBA2D4103F89BA8EA672F1AF5D9",
+      "Path": "src/MusicControls.ps1"
+    },
+    {
+      "Sha256": "3CCA7492A9F809EB8D54C8BF7D3D9847A1EC29D5E8ED6923F72ECA7803A50B48",
+      "Path": "src/MusicSynth.ps1"
+    },
+    {
+      "Sha256": "F8FAED17EDBFFDA3EC7BAEE9555998C649DA31ABB8AA8730ADAA4B4BFB1170F4",
+      "Path": "src/MusicGroup.ps1"
+    },
+    {
+      "Sha256": "F6227640C7AD799B5E7D486B70752E680EF074881EB6B795BC087970BEB8C990",
+      "Path": "src/AudioMixer.ps1"
+    },
+    {
+      "Sha256": "395E3A0B858B65342AE510A682DFF4FA2D41E303529971ED9F4496C93CAC9998",
+      "Path": "scripts/Invoke-MusicGroupWorker.ps1"
+    },
+    {
+      "Sha256": "C7668D57AF89B34E4F6567165D647D5205CC0049B122497E9E7B6F72A1B524CE",
+      "Path": "scripts/Render-MusicGroups.ps1"
+    }
+  ],
+  "PowerShell": "7.6.5",
+  "Details": {
+    "Track": "D_E1M1",
+    "WavSha256": "989CBD3C9E16782088EB4EF558477AC7A18602897D9390B1E148314B0D2FC530",
+    "WavPath": "C:\\projects\\pwshDoom\\local\\music-groups-015601ddbf444a1dbb85b2b235b0cd8a\\D_E1M1-Parallel-4.wav",
+    "Execution": "Parallel",
+    "ChannelAssignment": null,
+    "MergeAndPcmSeconds": 1.9733424,
+    "Comparison": {
+      "DifferenceRms": 0.0,
+      "MaximumPcmDifference": 0,
+      "ReportSha256": "73146B9A82CC9E4BEB17A0CADFBDB2C12A71A039FE66CF30E3E54E9D43D9DFD7",
+      "ReferenceWavSha256": "989CBD3C9E16782088EB4EF558477AC7A18602897D9390B1E148314B0D2FC530",
+      "ChangedSamples": 0
+    },
+    "GroupPolicy": "RoundRobinNotes",
+    "ClippedSamples": 0,
+    "BlocksPerChunk": 20,
+    "InitializationSeconds": 0.1053493,
+    "Chunks": [
+      {
+        "CompletedSeconds": 0.6019873,
+        "LatenessSeconds": 0.0,
+        "Frame": 0,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          394.2479,
+          348.8989,
+          379.0574,
+          455.4728
+        ]
+      },
+      {
+        "CompletedSeconds": 0.8902772,
+        "LatenessSeconds": 0.0,
+        "Frame": 25200,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          140.4702,
+          126.7623,
+          135.6314,
+          307.292
+        ]
+      },
+      {
+        "CompletedSeconds": 1.2096578,
+        "LatenessSeconds": 0.0,
+        "Frame": 50400,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          130.1311,
+          102.9649,
+          109.4833,
+          316.9852
+        ]
+      },
+      {
+        "CompletedSeconds": 1.4864971,
+        "LatenessSeconds": 0.0,
+        "Frame": 75600,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          156.1654,
+          167.4387,
+          169.0154,
+          276.1779
+        ]
+      },
+      {
+        "CompletedSeconds": 1.8650451,
+        "LatenessSeconds": 0.0,
+        "Frame": 100800,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          141.4304,
+          164.4848,
+          172.6591,
+          378.7152
+        ]
+      },
+      {
+        "CompletedSeconds": 2.2015615,
+        "LatenessSeconds": 0.0,
+        "Frame": 126000,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          126.9516,
+          124.0441,
+          95.7602,
+          337.3289
+        ]
+      },
+      {
+        "CompletedSeconds": 2.4643922,
+        "LatenessSeconds": 0.0,
+        "Frame": 151200,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          72.064,
+          89.5712,
+          124.0286,
+          261.6413
+        ]
+      },
+      {
+        "CompletedSeconds": 2.7564219,
+        "LatenessSeconds": 0.0,
+        "Frame": 176400,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          131.8644,
+          46.9733,
+          222.9431,
+          292.1264
+        ]
+      },
+      {
+        "CompletedSeconds": 3.34988,
+        "LatenessSeconds": 0.0,
+        "Frame": 201600,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          84.8778,
+          118.8778,
+          122.8344,
+          241.838
+        ]
+      },
+      {
+        "CompletedSeconds": 3.9174349,
+        "LatenessSeconds": 0.0,
+        "Frame": 226800,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          126.2339,
+          125.5196,
+          102.3117,
+          254.369
+        ]
+      },
+      {
+        "CompletedSeconds": 4.4855526,
+        "LatenessSeconds": 0.0,
+        "Frame": 252000,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          117.733,
+          88.7289,
+          108.4786,
+          190.1956
+        ]
+      },
+      {
+        "CompletedSeconds": 5.053252,
+        "LatenessSeconds": 0.0,
+        "Frame": 277200,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          152.7182,
+          165.8172,
+          173.7441,
+          224.2149
+        ]
+      },
+      {
+        "CompletedSeconds": 5.6302444,
+        "LatenessSeconds": 0.0,
+        "Frame": 302400,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          88.5515,
+          123.9696,
+          114.3766,
+          296.8676
+        ]
+      },
+      {
+        "CompletedSeconds": 6.1997155,
+        "LatenessSeconds": 0.0,
+        "Frame": 327600,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          90.5928,
+          95.9701,
+          77.413,
+          204.9748
+        ]
+      },
+      {
+        "CompletedSeconds": 6.7700126,
+        "LatenessSeconds": 0.0,
+        "Frame": 352800,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          27.2233,
+          23.3249,
+          79.0774,
+          137.399
+        ]
+      },
+      {
+        "CompletedSeconds": 7.3389095,
+        "LatenessSeconds": 0.0,
+        "Frame": 378000,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          289.5111,
+          263.5742,
+          294.5693,
+          361.5605
+        ]
+      },
+      {
+        "CompletedSeconds": 7.9194579,
+        "LatenessSeconds": 0.0,
+        "Frame": 403200,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          353.7388,
+          358.444,
+          394.0584,
+          397.1153
+        ]
+      },
+      {
+        "CompletedSeconds": 8.4865896,
+        "LatenessSeconds": 0.0,
+        "Frame": 428400,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          323.7,
+          308.288,
+          405.6993,
+          393.0315
+        ]
+      },
+      {
+        "CompletedSeconds": 9.0555632,
+        "LatenessSeconds": 0.0,
+        "Frame": 453600,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          324.3019,
+          319.4374,
+          376.4795,
+          296.626
+        ]
+      },
+      {
+        "CompletedSeconds": 9.6305848,
+        "LatenessSeconds": 0.0,
+        "Frame": 478800,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          582.5957,
+          553.5002,
+          702.0023,
+          561.283
+        ]
+      },
+      {
+        "CompletedSeconds": 10.1994297,
+        "LatenessSeconds": 0.0,
+        "Frame": 504000,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          473.6967,
+          472.9484,
+          630.4508,
+          443.5411
+        ]
+      },
+      {
+        "CompletedSeconds": 10.7692347,
+        "LatenessSeconds": 0.0,
+        "Frame": 529200,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          412.6589,
+          448.0978,
+          589.6564,
+          463.334
+        ]
+      },
+      {
+        "CompletedSeconds": 11.3399874,
+        "LatenessSeconds": 0.0,
+        "Frame": 554400,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          414.0034,
+          487.9134,
+          640.2679,
+          484.472
+        ]
+      },
+      {
+        "CompletedSeconds": 11.917969,
+        "LatenessSeconds": 0.0,
+        "Frame": 579600,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          599.395,
+          711.4094,
+          895.9806,
+          622.4919
+        ]
+      },
+      {
+        "CompletedSeconds": 12.4881884,
+        "LatenessSeconds": 0.0,
+        "Frame": 604800,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          483.0303,
+          537.7109,
+          963.0227,
+          556.1487
+        ]
+      },
+      {
+        "CompletedSeconds": 13.2736166,
+        "LatenessSeconds": 0.0,
+        "Frame": 630000,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          392.1416,
+          537.7837,
+          933.1168,
+          569.1581
+        ]
+      },
+      {
+        "CompletedSeconds": 14.2536086,
+        "LatenessSeconds": 0.0,
+        "Frame": 655200,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          374.6087,
+          548.0132,
+          977.9224,
+          637.4372
+        ]
+      },
+      {
+        "CompletedSeconds": 15.2800364,
+        "LatenessSeconds": 0.0,
+        "Frame": 680400,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          597.9276,
+          781.8354,
+          1027.7909,
+          633.5785
+        ]
+      },
+      {
+        "CompletedSeconds": 16.27247,
+        "LatenessSeconds": 0.0,
+        "Frame": 705600,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          537.0266,
+          618.612,
+          991.8209,
+          689.2588
+        ]
+      },
+      {
+        "CompletedSeconds": 17.3335012,
+        "LatenessSeconds": 0.0,
+        "Frame": 730800,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          637.0544,
+          890.2303,
+          1062.2574,
+          1051.8812
+        ]
+      },
+      {
+        "CompletedSeconds": 18.2651008,
+        "LatenessSeconds": 0.0,
+        "Frame": 756000,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          821.3708,
+          1042.9051,
+          930.7862,
+          959.8156
+        ]
+      },
+      {
+        "CompletedSeconds": 19.1914626,
+        "LatenessSeconds": 0.0,
+        "Frame": 781200,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          656.0227,
+          828.1939,
+          925.6808,
+          817.8407
+        ]
+      },
+      {
+        "CompletedSeconds": 19.9962245,
+        "LatenessSeconds": 0.0,
+        "Frame": 806400,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          690.437,
+          613.4991,
+          805.3089,
+          752.9953
+        ]
+      },
+      {
+        "CompletedSeconds": 20.6797711,
+        "LatenessSeconds": 0.0,
+        "Frame": 831600,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          600.7444,
+          683.949,
+          683.6347,
+          778.0123
+        ]
+      },
+      {
+        "CompletedSeconds": 21.213409,
+        "LatenessSeconds": 0.0,
+        "Frame": 856800,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          602.3681,
+          732.7188,
+          533.7986,
+          665.9391
+        ]
+      },
+      {
+        "CompletedSeconds": 21.6827962,
+        "LatenessSeconds": 0.0,
+        "Frame": 882000,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          538.057,
+          620.235,
+          469.7838,
+          468.8926
+        ]
+      },
+      {
+        "CompletedSeconds": 22.0278703,
+        "LatenessSeconds": 0.0,
+        "Frame": 907200,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          298.2448,
+          352.6689,
+          345.0016,
+          312.0548
+        ]
+      },
+      {
+        "CompletedSeconds": 22.4468656,
+        "LatenessSeconds": 0.0,
+        "Frame": 932400,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          202.4727,
+          221.0893,
+          418.4756,
+          363.2686
+        ]
+      },
+      {
+        "CompletedSeconds": 22.7611661,
+        "LatenessSeconds": 0.0,
+        "Frame": 957600,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          316.9705,
+          320.5339,
+          314.6946,
+          247.4152
+        ]
+      },
+      {
+        "CompletedSeconds": 23.0833078,
+        "LatenessSeconds": 0.0,
+        "Frame": 982800,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          224.0025,
+          258.9046,
+          321.4166,
+          287.7529
+        ]
+      },
+      {
+        "CompletedSeconds": 23.3185024,
+        "LatenessSeconds": 0.0,
+        "Frame": 1008000,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          269.4444,
+          253.0019,
+          236.0244,
+          200.2951
+        ]
+      },
+      {
+        "CompletedSeconds": 23.5888225,
+        "LatenessSeconds": 0.0,
+        "Frame": 1033200,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          237.1087,
+          202.6267,
+          269.3939,
+          251.7316
+        ]
+      },
+      {
+        "CompletedSeconds": 23.8772561,
+        "LatenessSeconds": 0.0,
+        "Frame": 1058400,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          276.3288,
+          298.0276,
+          287.2185,
+          232.9012
+        ]
+      },
+      {
+        "CompletedSeconds": 24.1082065,
+        "LatenessSeconds": 0.0,
+        "Frame": 1083600,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          301.7729,
+          222.5458,
+          231.0794,
+          308.067
+        ]
+      },
+      {
+        "CompletedSeconds": 24.6888742,
+        "LatenessSeconds": 0.0,
+        "Frame": 1108800,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          385.8789,
+          412.1364,
+          580.328,
+          544.374
+        ]
+      },
+      {
+        "CompletedSeconds": 25.3222695,
+        "LatenessSeconds": 0.0,
+        "Frame": 1134000,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          832.8303,
+          480.4696,
+          633.5307,
+          747.4981
+        ]
+      },
+      {
+        "CompletedSeconds": 25.9236975,
+        "LatenessSeconds": 0.0,
+        "Frame": 1159200,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          559.0689,
+          449.615,
+          600.9789,
+          570.3024
+        ]
+      },
+      {
+        "CompletedSeconds": 26.5685225,
+        "LatenessSeconds": 0.0,
+        "Frame": 1184400,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          493.2366,
+          569.4763,
+          644.6482,
+          479.0838
+        ]
+      },
+      {
+        "CompletedSeconds": 27.0706356,
+        "LatenessSeconds": 0.0,
+        "Frame": 1209600,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          684.5354,
+          584.4164,
+          500.9822,
+          518.2006
+        ]
+      },
+      {
+        "CompletedSeconds": 27.81001,
+        "LatenessSeconds": 0.0,
+        "Frame": 1234800,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          527.4934,
+          541.9565,
+          702.0287,
+          576.6844
+        ]
+      },
+      {
+        "CompletedSeconds": 28.3688149,
+        "LatenessSeconds": 0.0,
+        "Frame": 1260000,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          387.2306,
+          687.8269,
+          597.039,
+          582.134
+        ]
+      },
+      {
+        "CompletedSeconds": 28.8746067,
+        "LatenessSeconds": 0.0,
+        "Frame": 1285200,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          450.9657,
+          587.105,
+          505.1892,
+          737.7702
+        ]
+      },
+      {
+        "CompletedSeconds": 29.4637406,
+        "LatenessSeconds": 0.0,
+        "Frame": 1310400,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          421.3544,
+          535.8247,
+          589.1906,
+          608.1098
+        ]
+      },
+      {
+        "CompletedSeconds": 30.0836035,
+        "LatenessSeconds": 0.0,
+        "Frame": 1335600,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          444.367,
+          482.2235,
+          619.5973,
+          713.2661
+        ]
+      },
+      {
+        "CompletedSeconds": 30.7102435,
+        "LatenessSeconds": 0.0,
+        "Frame": 1360800,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          311.9706,
+          622.2094,
+          626.975,
+          761.3611
+        ]
+      },
+      {
+        "CompletedSeconds": 31.3305607,
+        "LatenessSeconds": 0.0,
+        "Frame": 1386000,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          404.3934,
+          679.4849,
+          620.2838,
+          748.0703
+        ]
+      },
+      {
+        "CompletedSeconds": 32.0316286,
+        "LatenessSeconds": 0.0,
+        "Frame": 1411200,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          495.0441,
+          615.8408,
+          646.7507,
+          814.295
+        ]
+      },
+      {
+        "CompletedSeconds": 32.8672451,
+        "LatenessSeconds": 0.0,
+        "Frame": 1436400,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          556.4019,
+          782.5938,
+          769.1692,
+          835.9272
+        ]
+      },
+      {
+        "CompletedSeconds": 33.7709188,
+        "LatenessSeconds": 0.0,
+        "Frame": 1461600,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          588.3406,
+          693.9771,
+          781.7593,
+          904.5727
+        ]
+      },
+      {
+        "CompletedSeconds": 34.6105417,
+        "LatenessSeconds": 0.0,
+        "Frame": 1486800,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          681.0004,
+          915.1413,
+          858.4296,
+          838.1933
+        ]
+      },
+      {
+        "CompletedSeconds": 35.5726659,
+        "LatenessSeconds": 0.0,
+        "Frame": 1512000,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          776.4427,
+          824.6234,
+          925.7731,
+          962.6452
+        ]
+      },
+      {
+        "CompletedSeconds": 36.4618294,
+        "LatenessSeconds": 0.0,
+        "Frame": 1537200,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          659.1655,
+          717.6409,
+          767.6378,
+          889.7039
+        ]
+      },
+      {
+        "CompletedSeconds": 37.246239,
+        "LatenessSeconds": 0.0,
+        "Frame": 1562400,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          531.0773,
+          769.6262,
+          824.387,
+          784.4487
+        ]
+      },
+      {
+        "CompletedSeconds": 37.9694277,
+        "LatenessSeconds": 0.0,
+        "Frame": 1587600,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          658.0124,
+          663.0038,
+          675.7806,
+          723.6251
+        ]
+      },
+      {
+        "CompletedSeconds": 38.6754512,
+        "LatenessSeconds": 0.0,
+        "Frame": 1612800,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          649.7592,
+          555.7315,
+          687.2678,
+          704.9569
+        ]
+      },
+      {
+        "CompletedSeconds": 39.3408381,
+        "LatenessSeconds": 0.0,
+        "Frame": 1638000,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          553.8714,
+          608.8063,
+          594.3041,
+          666.1108
+        ]
+      },
+      {
+        "CompletedSeconds": 40.0135455,
+        "LatenessSeconds": 0.0,
+        "Frame": 1663200,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          549.2465,
+          597.4401,
+          452.7652,
+          672.6114
+        ]
+      },
+      {
+        "CompletedSeconds": 40.6493226,
+        "LatenessSeconds": 0.0,
+        "Frame": 1688400,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          473.2033,
+          484.4791,
+          599.5042,
+          635.7301
+        ]
+      },
+      {
+        "CompletedSeconds": 41.2394376,
+        "LatenessSeconds": 0.0,
+        "Frame": 1713600,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          455.7384,
+          449.2921,
+          639.518,
+          590.0092
+        ]
+      },
+      {
+        "CompletedSeconds": 41.7555911,
+        "LatenessSeconds": 0.0,
+        "Frame": 1738800,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          494.995,
+          503.8565,
+          476.4726,
+          515.9144
+        ]
+      },
+      {
+        "CompletedSeconds": 42.2173436,
+        "LatenessSeconds": 0.0,
+        "Frame": 1764000,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          411.3639,
+          443.2878,
+          468.124,
+          461.3908
+        ]
+      },
+      {
+        "CompletedSeconds": 42.5886412,
+        "LatenessSeconds": 0.0,
+        "Frame": 1789200,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          475.845,
+          433.8516,
+          424.7478,
+          371.2684
+        ]
+      },
+      {
+        "CompletedSeconds": 42.919825,
+        "LatenessSeconds": 0.0,
+        "Frame": 1814400,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          471.3871,
+          377.7897,
+          387.5582,
+          331.1948
+        ]
+      },
+      {
+        "CompletedSeconds": 43.2837013,
+        "LatenessSeconds": 0.0,
+        "Frame": 1839600,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          375.6842,
+          306.1426,
+          436.4948,
+          362.9246
+        ]
+      },
+      {
+        "CompletedSeconds": 43.6413491,
+        "LatenessSeconds": 0.0,
+        "Frame": 1864800,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          411.5659,
+          278.3726,
+          405.85,
+          356.3602
+        ]
+      },
+      {
+        "CompletedSeconds": 43.9481982,
+        "LatenessSeconds": 0.0,
+        "Frame": 1890000,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          469.3222,
+          259.408,
+          455.3484,
+          309.0838
+        ]
+      },
+      {
+        "CompletedSeconds": 44.2552545,
+        "LatenessSeconds": 0.0,
+        "Frame": 1915200,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          439.4757,
+          308.0245,
+          265.3818,
+          269.8012
+        ]
+      },
+      {
+        "CompletedSeconds": 44.7027427,
+        "LatenessSeconds": 0.0,
+        "Frame": 1940400,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          215.9191,
+          233.4502,
+          244.5405,
+          483.5891
+        ]
+      },
+      {
+        "CompletedSeconds": 45.1848462,
+        "LatenessSeconds": 0.0,
+        "Frame": 1965600,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          183.8037,
+          251.3678,
+          373.5542,
+          482.957
+        ]
+      },
+      {
+        "CompletedSeconds": 45.6614395,
+        "LatenessSeconds": 0.0,
+        "Frame": 1990800,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          337.3507,
+          251.077,
+          255.4756,
+          476.4676
+        ]
+      },
+      {
+        "CompletedSeconds": 46.1685973,
+        "LatenessSeconds": 0.0,
+        "Frame": 2016000,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          284.175,
+          322.723,
+          390.4589,
+          507.8495
+        ]
+      },
+      {
+        "CompletedSeconds": 46.7056664,
+        "LatenessSeconds": 0.0,
+        "Frame": 2041200,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          251.2583,
+          443.6679,
+          352.4368,
+          537.6313
+        ]
+      },
+      {
+        "CompletedSeconds": 47.170784,
+        "LatenessSeconds": 0.0,
+        "Frame": 2066400,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          338.0063,
+          441.053,
+          267.9145,
+          464.9245
+        ]
+      },
+      {
+        "CompletedSeconds": 47.7173639,
+        "LatenessSeconds": 0.0,
+        "Frame": 2091600,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          300.4074,
+          351.2177,
+          393.1021,
+          545.815
+        ]
+      },
+      {
+        "CompletedSeconds": 48.2991771,
+        "LatenessSeconds": 0.0,
+        "Frame": 2116800,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          417.0295,
+          496.1412,
+          436.644,
+          581.4674
+        ]
+      },
+      {
+        "CompletedSeconds": 48.9394054,
+        "LatenessSeconds": 0.0,
+        "Frame": 2142000,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          256.6805,
+          438.5126,
+          415.1476,
+          640.2939
+        ]
+      },
+      {
+        "CompletedSeconds": 49.6094885,
+        "LatenessSeconds": 0.0,
+        "Frame": 2167200,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          283.187,
+          493.9022,
+          444.9515,
+          669.734
+        ]
+      },
+      {
+        "CompletedSeconds": 50.2804204,
+        "LatenessSeconds": 0.0,
+        "Frame": 2192400,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          427.1992,
+          552.8047,
+          446.0152,
+          670.9612
+        ]
+      },
+      {
+        "CompletedSeconds": 50.9500223,
+        "LatenessSeconds": 0.0,
+        "Frame": 2217600,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          399.3761,
+          542.5093,
+          525.8005,
+          668.2649
+        ]
+      },
+      {
+        "CompletedSeconds": 51.6552835,
+        "LatenessSeconds": 0.0,
+        "Frame": 2242800,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          550.381,
+          554.7682,
+          577.207,
+          705.6516
+        ]
+      },
+      {
+        "CompletedSeconds": 52.4074373,
+        "LatenessSeconds": 0.0,
+        "Frame": 2268000,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          530.8323,
+          590.3319,
+          644.3463,
+          752.6885
+        ]
+      },
+      {
+        "CompletedSeconds": 53.1327884,
+        "LatenessSeconds": 0.0,
+        "Frame": 2293200,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          589.6561,
+          629.2354,
+          778.4945,
+          725.5263
+        ]
+      },
+      {
+        "CompletedSeconds": 53.9314811,
+        "LatenessSeconds": 0.0,
+        "Frame": 2318400,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          561.7272,
+          626.6065,
+          595.7539,
+          798.078
+        ]
+      },
+      {
+        "CompletedSeconds": 54.6963523,
+        "LatenessSeconds": 0.0,
+        "Frame": 2343600,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          546.8623,
+          670.7766,
+          683.887,
+          765.2087
+        ]
+      },
+      {
+        "CompletedSeconds": 55.4486265,
+        "LatenessSeconds": 0.0,
+        "Frame": 2368800,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          542.4415,
+          605.9587,
+          617.3926,
+          751.6698
+        ]
+      },
+      {
+        "CompletedSeconds": 56.1823915,
+        "LatenessSeconds": 0.0,
+        "Frame": 2394000,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          643.7092,
+          741.2151,
+          737.0426,
+          732.992
+        ]
+      },
+      {
+        "CompletedSeconds": 56.9944257,
+        "LatenessSeconds": 0.0,
+        "Frame": 2419200,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          695.3764,
+          747.6799,
+          641.9533,
+          811.0576
+        ]
+      },
+      {
+        "CompletedSeconds": 57.668491,
+        "LatenessSeconds": 0.0,
+        "Frame": 2444400,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          668.2675,
+          812.1515,
+          681.8741,
+          674.2946
+        ]
+      },
+      {
+        "CompletedSeconds": 58.2610842,
+        "LatenessSeconds": 0.0,
+        "Frame": 2469600,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          608.3807,
+          747.6016,
+          650.7583,
+          592.3787
+        ]
+      },
+      {
+        "CompletedSeconds": 58.9918384,
+        "LatenessSeconds": 0.0,
+        "Frame": 2494800,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          756.2608,
+          935.6891,
+          815.4089,
+          729.7931
+        ]
+      },
+      {
+        "CompletedSeconds": 59.7276477,
+        "LatenessSeconds": 0.0,
+        "Frame": 2520000,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          742.1624,
+          1025.9037,
+          730.2528,
+          736.3989
+        ]
+      },
+      {
+        "CompletedSeconds": 60.2840757,
+        "LatenessSeconds": 0.0,
+        "Frame": 2545200,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          631.8686,
+          971.815,
+          738.0715,
+          556.7114
+        ]
+      },
+      {
+        "CompletedSeconds": 60.694368,
+        "LatenessSeconds": 0.0,
+        "Frame": 2570400,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          662.9841,
+          1005.9198,
+          718.2485,
+          410.1343
+        ]
+      },
+      {
+        "CompletedSeconds": 61.3502241,
+        "LatenessSeconds": 0.0,
+        "Frame": 2595600,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          878.3975,
+          991.6186,
+          840.8142,
+          656.0132
+        ]
+      },
+      {
+        "CompletedSeconds": 62.2582017,
+        "LatenessSeconds": 0.07320837142857073,
+        "Frame": 2620800,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          749.6892,
+          1058.9811,
+          701.0322,
+          573.3416
+        ]
+      },
+      {
+        "CompletedSeconds": 63.4746682,
+        "LatenessSeconds": 0.7182463000000041,
+        "Frame": 2646000,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          751.3132,
+          1217.1369,
+          838.4437,
+          665.3413
+        ]
+      },
+      {
+        "CompletedSeconds": 64.5706206,
+        "LatenessSeconds": 1.2427701285714292,
+        "Frame": 2671200,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          1081.2505,
+          1095.1707,
+          945.569,
+          774.3539
+        ]
+      },
+      {
+        "CompletedSeconds": 65.4348704,
+        "LatenessSeconds": 1.5355913571428488,
+        "Frame": 2696400,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          952.5159,
+          863.2791,
+          773.0714,
+          520.4289
+        ]
+      },
+      {
+        "CompletedSeconds": 66.1922557,
+        "LatenessSeconds": 1.7215480857142893,
+        "Frame": 2721600,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          823.681,
+          757.9129,
+          727.706,
+          519.2345
+        ]
+      },
+      {
+        "CompletedSeconds": 66.8549936,
+        "LatenessSeconds": 1.812857414285709,
+        "Frame": 2746800,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          574.6934,
+          663.3765,
+          614.3435,
+          443.0554
+        ]
+      },
+      {
+        "CompletedSeconds": 67.4503111,
+        "LatenessSeconds": 1.8367463428571327,
+        "Frame": 2772000,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          540.9126,
+          595.1826,
+          567.4287,
+          481.0809
+        ]
+      },
+      {
+        "CompletedSeconds": 67.9492244,
+        "LatenessSeconds": 1.7642310714285685,
+        "Frame": 2797200,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          627.6053,
+          498.9506,
+          461.3252,
+          353.9542
+        ]
+      },
+      {
+        "CompletedSeconds": 68.4106715,
+        "LatenessSeconds": 1.6542496,
+        "Frame": 2822400,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          389.8193,
+          460.391,
+          374.6215,
+          242.0403
+        ]
+      },
+      {
+        "CompletedSeconds": 68.7251955,
+        "LatenessSeconds": 1.3973450285714222,
+        "Frame": 2847600,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          302.7991,
+          315.6385,
+          315.2789,
+          332.2718
+        ]
+      },
+      {
+        "CompletedSeconds": 69.0551694,
+        "LatenessSeconds": 1.1558903571428516,
+        "Frame": 2872800,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          324.6715,
+          329.5404,
+          250.5482,
+          372.6874
+        ]
+      },
+      {
+        "CompletedSeconds": 69.3075004,
+        "LatenessSeconds": 0.8367927857142803,
+        "Frame": 2898000,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          319.9733,
+          251.5219,
+          228.1019,
+          252.9272
+        ]
+      },
+      {
+        "CompletedSeconds": 69.5564568,
+        "LatenessSeconds": 0.5143206142857082,
+        "Frame": 2923200,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          240.8453,
+          249.5855,
+          269.8957,
+          270.4416
+        ]
+      },
+      {
+        "CompletedSeconds": 69.8181251,
+        "LatenessSeconds": 0.20456034285713542,
+        "Frame": 2948400,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          254.1525,
+          261.4648,
+          189.287,
+          222.5083
+        ]
+      },
+      {
+        "CompletedSeconds": 70.1346238,
+        "LatenessSeconds": 0.0,
+        "Frame": 2973600,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          179.6734,
+          316.316,
+          304.6626,
+          247.7016
+        ]
+      },
+      {
+        "CompletedSeconds": 70.4346117,
+        "LatenessSeconds": 0.0,
+        "Frame": 2998800,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          310.6861,
+          299.9625,
+          228.2114,
+          254.0137
+        ]
+      },
+      {
+        "CompletedSeconds": 70.8269201,
+        "LatenessSeconds": 0.0,
+        "Frame": 3024000,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          443.2636,
+          391.7601,
+          457.8093,
+          502.3485
+        ]
+      },
+      {
+        "CompletedSeconds": 71.4740777,
+        "LatenessSeconds": 0.0,
+        "Frame": 3049200,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          667.0454,
+          647.6569,
+          445.3143,
+          671.0109
+        ]
+      },
+      {
+        "CompletedSeconds": 72.0556186,
+        "LatenessSeconds": 0.0,
+        "Frame": 3074400,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          457.468,
+          579.6456,
+          391.8227,
+          533.8068
+        ]
+      },
+      {
+        "CompletedSeconds": 72.709395,
+        "LatenessSeconds": 0.0,
+        "Frame": 3099600,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          482.3294,
+          654.178,
+          381.2401,
+          410.2969
+        ]
+      },
+      {
+        "CompletedSeconds": 73.2757619,
+        "LatenessSeconds": 0.0,
+        "Frame": 3124800,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          506.5865,
+          565.808,
+          303.1093,
+          442.4207
+        ]
+      },
+      {
+        "CompletedSeconds": 73.879348,
+        "LatenessSeconds": 0.0,
+        "Frame": 3150000,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          445.6064,
+          603.1474,
+          472.2001,
+          487.1844
+        ]
+      },
+      {
+        "CompletedSeconds": 74.4297655,
+        "LatenessSeconds": 0.0,
+        "Frame": 3175200,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          598.1785,
+          550.6181,
+          456.6608,
+          476.2265
+        ]
+      },
+      {
+        "CompletedSeconds": 74.826077,
+        "LatenessSeconds": 0.0,
+        "Frame": 3200400,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          611.0567,
+          395.6989,
+          512.2821,
+          567.9248
+        ]
+      },
+      {
+        "CompletedSeconds": 75.3565089,
+        "LatenessSeconds": 0.0,
+        "Frame": 3225600,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          484.2891,
+          530.5162,
+          565.3495,
+          391.0056
+        ]
+      },
+      {
+        "CompletedSeconds": 76.0031555,
+        "LatenessSeconds": 0.0,
+        "Frame": 3250800,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          427.6921,
+          646.8769,
+          757.3312,
+          419.0273
+        ]
+      },
+      {
+        "CompletedSeconds": 76.5639902,
+        "LatenessSeconds": 0.0,
+        "Frame": 3276000,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          574.5671,
+          559.9393,
+          731.0238,
+          400.5919
+        ]
+      },
+      {
+        "CompletedSeconds": 77.2121039,
+        "LatenessSeconds": 0.0,
+        "Frame": 3301200,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          621.7582,
+          647.0421,
+          744.4449,
+          352.7333
+        ]
+      },
+      {
+        "CompletedSeconds": 77.8275208,
+        "LatenessSeconds": 0.0,
+        "Frame": 3326400,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          675.2996,
+          616.1334,
+          800.6363,
+          497.3944
+        ]
+      },
+      {
+        "CompletedSeconds": 78.5562934,
+        "LatenessSeconds": 0.0,
+        "Frame": 3351600,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          754.6072,
+          728.6124,
+          826.4548,
+          541.7418
+        ]
+      },
+      {
+        "CompletedSeconds": 79.3146063,
+        "LatenessSeconds": 0.0,
+        "Frame": 3376800,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          713.0746,
+          757.1077,
+          919.5604,
+          586.6064
+        ]
+      },
+      {
+        "CompletedSeconds": 80.1825731,
+        "LatenessSeconds": 0.2832940571428537,
+        "Frame": 3402000,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          765.3142,
+          843.7725,
+          957.8791,
+          634.5833
+        ]
+      },
+      {
+        "CompletedSeconds": 81.1426095,
+        "LatenessSeconds": 0.6719018857142913,
+        "Frame": 3427200,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          919.6469,
+          884.7469,
+          958.4697,
+          778.0762
+        ]
+      },
+      {
+        "CompletedSeconds": 82.0199906,
+        "LatenessSeconds": 0.9778544142857015,
+        "Frame": 3452400,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          832.0114,
+          840.3604,
+          877.3371,
+          641.78
+        ]
+      },
+      {
+        "CompletedSeconds": 82.8893794,
+        "LatenessSeconds": 1.275814642857128,
+        "Frame": 3477600,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          666.4853,
+          721.3735,
+          869.6926,
+          664.226
+        ]
+      },
+      {
+        "CompletedSeconds": 83.7474615,
+        "LatenessSeconds": 1.5624681714285629,
+        "Frame": 3502800,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          669.0932,
+          773.5823,
+          857.4858,
+          601.0484
+        ]
+      },
+      {
+        "CompletedSeconds": 84.4305282,
+        "LatenessSeconds": 1.6741062999999912,
+        "Frame": 3528000,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          711.1749,
+          718.326,
+          683.434,
+          616.4935
+        ]
+      },
+      {
+        "CompletedSeconds": 85.1454379,
+        "LatenessSeconds": 1.8175874285714286,
+        "Frame": 3553200,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          557.7886,
+          701.6827,
+          715.4211,
+          632.4868
+        ]
+      },
+      {
+        "CompletedSeconds": 85.8277027,
+        "LatenessSeconds": 1.928423657142858,
+        "Frame": 3578400,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          586.657,
+          658.5927,
+          681.7691,
+          460.6547
+        ]
+      },
+      {
+        "CompletedSeconds": 86.4869085,
+        "LatenessSeconds": 2.0162008857142837,
+        "Frame": 3603600,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          550.3766,
+          496.6236,
+          659.2046,
+          525.7048
+        ]
+      },
+      {
+        "CompletedSeconds": 87.0635502,
+        "LatenessSeconds": 2.0214140142856962,
+        "Frame": 3628800,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          535.45,
+          504.5553,
+          577.2361,
+          591.6574
+        ]
+      },
+      {
+        "CompletedSeconds": 87.593229,
+        "LatenessSeconds": 1.979664242857126,
+        "Frame": 3654000,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          485.1565,
+          570.6748,
+          529.1333,
+          544.255
+        ]
+      },
+      {
+        "CompletedSeconds": 88.0583404,
+        "LatenessSeconds": 1.8733470714285687,
+        "Frame": 3679200,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          509.452,
+          468.1687,
+          465.4916,
+          499.5724
+        ]
+      },
+      {
+        "CompletedSeconds": 88.4657692,
+        "LatenessSeconds": 1.7093472999999904,
+        "Frame": 3704400,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          434.7513,
+          475.8559,
+          406.754,
+          439.0012
+        ]
+      },
+      {
+        "CompletedSeconds": 88.8083522,
+        "LatenessSeconds": 1.4805017285714257,
+        "Frame": 3729600,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          396.8734,
+          451.7343,
+          342.2333,
+          440.4874
+        ]
+      },
+      {
+        "CompletedSeconds": 89.1841898,
+        "LatenessSeconds": 1.2849107571428533,
+        "Frame": 3754800,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          280.435,
+          465.6013,
+          376.7172,
+          414.4267
+        ]
+      },
+      {
+        "CompletedSeconds": 89.4590434,
+        "LatenessSeconds": 0.988335785714284,
+        "Frame": 3780000,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          326.3478,
+          416.5207,
+          274.3056,
+          339.8544
+        ]
+      },
+      {
+        "CompletedSeconds": 89.8036853,
+        "LatenessSeconds": 0.7615491142856996,
+        "Frame": 3805200,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          289.3071,
+          496.908,
+          332.0007,
+          363.7266
+        ]
+      },
+      {
+        "CompletedSeconds": 90.3082867,
+        "LatenessSeconds": 0.6947219428571287,
+        "Frame": 3830400,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          222.6423,
+          503.1443,
+          309.6581,
+          371.78
+        ]
+      },
+      {
+        "CompletedSeconds": 90.5564342,
+        "LatenessSeconds": 0.3714408714285611,
+        "Frame": 3855600,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          445.6555,
+          248.4807,
+          206.0452,
+          216.7554
+        ]
+      },
+      {
+        "CompletedSeconds": 90.7456284,
+        "LatenessSeconds": 0.0,
+        "Frame": 3880800,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          588.8946,
+          189.5143,
+          200.1633,
+          311.3952
+        ]
+      },
+      {
+        "CompletedSeconds": 90.9828904,
+        "LatenessSeconds": 0.0,
+        "Frame": 3906000,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          530.7955,
+          235.9856,
+          281.483,
+          371.9422
+        ]
+      },
+      {
+        "CompletedSeconds": 91.3791748,
+        "LatenessSeconds": 0.0,
+        "Frame": 3931200,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          616.4344,
+          299.0165,
+          260.0907,
+          469.7191
+        ]
+      },
+      {
+        "CompletedSeconds": 92.0407089,
+        "LatenessSeconds": 0.0,
+        "Frame": 3956400,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          661.0567,
+          235.1759,
+          448.9988,
+          405.2959
+        ]
+      },
+      {
+        "CompletedSeconds": 92.6186496,
+        "LatenessSeconds": 0.0,
+        "Frame": 3981600,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          578.8879,
+          324.7923,
+          523.3699,
+          337.7721
+        ]
+      },
+      {
+        "CompletedSeconds": 93.1870335,
+        "LatenessSeconds": 0.0,
+        "Frame": 4006800,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          567.8644,
+          319.6415,
+          383.453,
+          449.4898
+        ]
+      },
+      {
+        "CompletedSeconds": 93.7921086,
+        "LatenessSeconds": 0.0,
+        "Frame": 4032000,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          567.6344,
+          381.2578,
+          461.7757,
+          430.6099
+        ]
+      },
+      {
+        "CompletedSeconds": 94.3828459,
+        "LatenessSeconds": 0.0,
+        "Frame": 4057200,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          627.8094,
+          268.9493,
+          451.6469,
+          412.1044
+        ]
+      },
+      {
+        "CompletedSeconds": 95.0533046,
+        "LatenessSeconds": 0.0,
+        "Frame": 4082400,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          670.586,
+          283.8852,
+          418.9483,
+          433.0335
+        ]
+      },
+      {
+        "CompletedSeconds": 95.6822611,
+        "LatenessSeconds": 0.0,
+        "Frame": 4107600,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          629.4831,
+          405.7023,
+          570.7958,
+          446.9869
+        ]
+      },
+      {
+        "CompletedSeconds": 96.3081253,
+        "LatenessSeconds": 0.0,
+        "Frame": 4132800,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          624.4186,
+          433.5134,
+          586.6372,
+          530.3391
+        ]
+      },
+      {
+        "CompletedSeconds": 97.0528421,
+        "LatenessSeconds": 0.010705914285708218,
+        "Frame": 4158000,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          746.3072,
+          506.8458,
+          518.3463,
+          550.9979
+        ]
+      },
+      {
+        "CompletedSeconds": 97.7959953,
+        "LatenessSeconds": 0.18243054285713356,
+        "Frame": 4183200,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          738.9414,
+          524.5107,
+          595.7513,
+          614.2024
+        ]
+      },
+      {
+        "CompletedSeconds": 98.4307893,
+        "LatenessSeconds": 0.24579597142856358,
+        "Frame": 4208400,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          637.3132,
+          579.0162,
+          627.7061,
+          698.8265
+        ]
+      },
+      {
+        "CompletedSeconds": 99.0297534,
+        "LatenessSeconds": 0.2733314999999976,
+        "Frame": 4233600,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          598.1564,
+          447.7758,
+          545.7711,
+          663.1231
+        ]
+      },
+      {
+        "CompletedSeconds": 99.464386,
+        "LatenessSeconds": 0.1365355285714287,
+        "Frame": 4258800,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          438.5458,
+          347.8031,
+          384.5886,
+          522.6095
+        ]
+      },
+      {
+        "CompletedSeconds": 99.748344,
+        "LatenessSeconds": 0.0,
+        "Frame": 4284000,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          283.6596,
+          355.193,
+          357.9716,
+          564.1153
+        ]
+      },
+      {
+        "CompletedSeconds": 99.8841902,
+        "LatenessSeconds": 0.0,
+        "Frame": 4309200,
+        "Frames": 12600,
+        "WorkerRenderMilliseconds": [
+          141.2634,
+          170.8086,
+          162.9533,
+          265.2392
+        ]
+      }
+    ],
+    "Workers": [
+      {
+        "NoteOns": 588,
+        "Channels": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "ExclusiveCuts": 28,
+        "PeakVoices": 12,
+        "ProcessedNoteOns": 2351,
+        "Frames": 4321800
+      },
+      {
+        "NoteOns": 588,
+        "Channels": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "ExclusiveCuts": 24,
+        "PeakVoices": 12,
+        "ProcessedNoteOns": 2351,
+        "Frames": 4321800
+      },
+      {
+        "NoteOns": 588,
+        "Channels": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "ExclusiveCuts": 26,
+        "PeakVoices": 13,
+        "ProcessedNoteOns": 2351,
+        "Frames": 4321800
+      },
+      {
+        "NoteOns": 587,
+        "Channels": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "ExclusiveCuts": 30,
+        "PeakVoices": 13,
+        "ProcessedNoteOns": 2351,
+        "Frames": 4321800
+      }
+    ],
+    "Seconds": 98,
+    "MergeMode": "Function",
+    "QueueCapacityPerWorker": 2,
+    "Volume": 0.2,
+    "Pacing": {
+      "Enabled": true,
+      "ConsumerWaitSeconds": 10.424697300000034,
+      "PrefillFrames": 201600,
+      "PlaybackStartSeconds": 2.7564219,
+      "PrefillChunks": 8,
+      "VirtualPlaybackEndSeconds": 100.7564219,
+      "LateChunks": 38,
+      "PeakReadyFrames": 201600.0,
+      "MaximumLatenessMilliseconds": 2021.4140142856963
+    },
+    "FirstChunkSeconds": 0.6019873,
+    "PreparationSeconds": 1.5975666,
+    "PeakProcessWorkingSetBytes": 334430208,
+    "RenderSeconds": 99.8883184,
+    "RequiredStartupSecondsForObservedChunkSchedule": 4.777835914285703,
+    "AudioSecondsPerRenderSecond": 0.9810957033790649,
+    "QueuePayloadBoundBytes": 3225600,
+    "SoundFontSha256": "82475B91A76DE15CB28A104707D3247BA932E228BADA3F47BBA63C6B31AAF7A1",
+    "Frames": 4321800,
+    "OutputPcmBytes": 17287200,
+    "MusSha256": "8F4673A3210C9FAFFE7B654F0B8F604A193398809545D9561E142704820035BF",
+    "Groups": 4,
+    "ChannelNotesPerScore": [
+      656,
+      712,
+      262,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      702
+    ]
+  }
+}

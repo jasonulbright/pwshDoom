@@ -7,6 +7,7 @@ param([Parameter(Mandatory)][string]$Output,
     [ValidateRange(1,8)][int]$Groups=2,[ValidateSet('Serial','Parallel')][string]$Execution='Parallel',
     [ValidateSet('RoundRobin','GreedyNotes','RoundRobinNotes')][string]$GroupPolicy='RoundRobin',
     [ValidateSet('Inline','Function')][string]$MergeMode='Inline',
+    [switch]$Paced,[ValidateRange(2,64)][int]$PrefillChunks=8,
     [ValidateRange(1,140)][int]$BlocksPerChunk=20,[ValidateRange(10,3600)][int]$TimeoutSeconds=600,
     [ValidateRange(0,1)][double]$Volume=.2,[string]$ReferenceReport)
 $ErrorActionPreference='Stop';Set-StrictMode -Version Latest
@@ -37,6 +38,8 @@ try{
         }
     }
     $preparationSeconds=$prep.Elapsed.TotalSeconds;$frames=$Seconds*44100;$samples=[int16[]]::new($frames*2);$pcmState=@{Volume=$Volume;ClippedSamples=0L}
+    [int]$prefillFrames=$PrefillChunks*$BlocksPerChunk*1260
+    if($Paced -and $frames -le $prefillFrames){throw 'Paced fixture must be longer than its prefill capacity.'}
     $watch=[Diagnostics.Stopwatch]::StartNew();$launch=[Diagnostics.Stopwatch]::GetTimestamp();$initialized=0L
     if($Execution -eq 'Parallel'){$pool=[runspacefactory]::CreateRunspacePool($Groups,$Groups);$pool.Open()}
     for($id=0;$id -lt $Groups;$id++){
@@ -50,7 +53,19 @@ try{
     }
     if($Execution -eq 'Serial'){$initialized=[Diagnostics.Stopwatch]::GetTimestamp()}
     [int]$cursor=0;[int]$chunkIndex=0;[double]$mergeSeconds=0;[double]$firstChunkSeconds=0;[double]$requiredStartupSeconds=0
+    [double]$playbackStart=-1;[double]$pacingWait=0;[int]$lateChunks=0;[double]$maximumLate=0;[double]$peakReadyFrames=0
     while($cursor -lt $frames){
+        if($Paced -and $playbackStart -ge 0){
+            # Free audio-frame capacity before accepting another mixed chunk.
+            $waitStarted=$watch.Elapsed.TotalSeconds
+            $nextFrames=[Math]::Min($BlocksPerChunk*1260,$frames-$cursor)
+            $slotTime=$playbackStart+($cursor+$nextFrames-$prefillFrames)/44100.0
+            while($watch.Elapsed.TotalSeconds -lt $slotTime){
+                if($watch.Elapsed.TotalSeconds -gt $TimeoutSeconds){throw 'Music group experiment timed out during paced consumption.'}
+                [Threading.Thread]::Sleep(1)
+            }
+            $pacingWait+=$watch.Elapsed.TotalSeconds-$waitStarted
+        }
         $chunks=[Collections.Generic.List[object]]::new()
         for($id=0;$id -lt $Groups;$id++){
             if($Execution -eq 'Serial'){$chunk=Read-DoomMusicGroup $states[$id] $BlocksPerChunk}
@@ -74,8 +89,15 @@ try{
         $pcm=ConvertTo-DoomMusicPcm $pcmState $mix;$pcm.CopyTo($samples,2*$cursor);$mergeSeconds+=$merge.Elapsed.TotalSeconds
         $completed=$watch.Elapsed.TotalSeconds;if($chunkIndex -eq 0){$firstChunkSeconds=$completed}
         $requiredStartupSeconds=[Math]::Max($requiredStartupSeconds,$completed-$cursor/44100.0)
-        $chunkTimes.Add(@{Frame=$cursor;Frames=$chunks[0].Frames;CompletedSeconds=$completed;WorkerRenderMilliseconds=@($chunks|ForEach-Object {$_.RenderMilliseconds})})
+        [double]$lateness=0
+        if($Paced -and $playbackStart -ge 0){$lateness=[Math]::Max(0.0,$completed-$playbackStart-$cursor/44100.0);if($lateness -gt 0){$lateChunks++};$maximumLate=[Math]::Max($maximumLate,$lateness)}
+        $chunkTimes.Add(@{Frame=$cursor;Frames=$chunks[0].Frames;CompletedSeconds=$completed;LatenessSeconds=$lateness;WorkerRenderMilliseconds=@($chunks|ForEach-Object {$_.RenderMilliseconds})})
         $cursor+=$chunks[0].Frames;$chunkIndex++
+        if($Paced){
+            if($playbackStart -lt 0 -and $cursor -ge $prefillFrames){$playbackStart=$completed}
+            $consumed=if($playbackStart -ge 0){($completed-$playbackStart)*44100.0}else{0.0}
+            $peakReadyFrames=[Math]::Max($peakReadyFrames,$cursor-$consumed)
+        }
         if($chunkIndex%10 -eq 0 -or $cursor -eq $frames){"Produced $([Math]::Round($cursor/44100.0,2))/$Seconds seconds with $Groups $Execution groups."}
         if($watch.Elapsed.TotalSeconds -gt $TimeoutSeconds){throw 'Music group experiment timed out.'}
     }
@@ -103,12 +125,14 @@ try{
         Execution=$Execution;Groups=$Groups;GroupPolicy=$GroupPolicy;MergeMode=$MergeMode;ChannelNotesPerScore=$channelNotes;ChannelAssignment=if($partition -eq 'Channel'){$assignment}else{$null};BlocksPerChunk=$BlocksPerChunk;QueueCapacityPerWorker=2;Workers=$workers.ToArray();ClippedSamples=$pcmState.ClippedSamples;
         PreparationSeconds=$preparationSeconds;RenderSeconds=$renderSeconds;AudioSecondsPerRenderSecond=$Seconds/$renderSeconds;InitializationSeconds=($initialized-$launch)/[double][Diagnostics.Stopwatch]::Frequency;
         FirstChunkSeconds=$firstChunkSeconds;MergeAndPcmSeconds=$mergeSeconds;RequiredStartupSecondsForObservedChunkSchedule=$requiredStartupSeconds;Chunks=$chunkTimes.ToArray();Comparison=$comparison;
+        Pacing=@{Enabled=[bool]$Paced;PrefillChunks=$PrefillChunks;PrefillFrames=$prefillFrames;PlaybackStartSeconds=$playbackStart;VirtualPlaybackEndSeconds=if($Paced){$playbackStart+$Seconds}else{$null};
+            LateChunks=$lateChunks;MaximumLatenessMilliseconds=$maximumLate*1000;ConsumerWaitSeconds=$pacingWait;PeakReadyFrames=$peakReadyFrames};
         PeakProcessWorkingSetBytes=[Diagnostics.Process]::GetCurrentProcess().PeakWorkingSet64;QueuePayloadBoundBytes=$Groups*2*$BlocksPerChunk*1260*2*8;OutputPcmBytes=$samples.Length*2}
 }catch{$failure=$_.ToString()+"`n"+$_.ScriptStackTrace;throw}finally{
     $cancellation.Cancel()
     foreach($task in $tasks){if(-not $task.Handle.IsCompleted){$task.Shell.Stop()};$task.Shell.Dispose();$task.Queue.Dispose()}
     if($pool){$pool.Close();$pool.Dispose()};$cancellation.Dispose();if($archive){$archive.Dispose()}
     @{Error=$failure;Details=$details;WadSha256=(Get-FileHash $Wad).Hash;Sources=$sourceHashes;SourcesChangedDuringRun=@($sourceHashes|Where-Object {$_.Sha256 -cne (Get-FileHash (Join-Path $root $_.Path)).Hash});PowerShell=$PSVersionTable.PSVersion.ToString();
-      Meaning='Offline dry PowerShell channel-group experiment. Parallel queues are bounded; bank/score objects are shared read-only. Render timing includes group/pool initialization, producer waits and final mixing, excludes bank/score preparation and output/diagnostics. Peak memory is the entire harness process. Required startup is retrospective from an unpaced chunk schedule, not actual playback/underrun evidence. No game-host integration.'}|ConvertTo-Json -Depth 8|Set-Content $Output
+      Meaning='Offline dry PowerShell group experiment. Parallel queues are bounded; bank/score objects are shared read-only. Timing includes initialization, producer waits, mixing and optional paced-consumer waits; excludes preparation/output/diagnostics. Pacing enforces an audio-frame budget against a virtual clock, while retaining a separate complete PCM archive for comparison; no device is used or drained. Late chunks are virtual deadlines, not measured device underruns. Unpaced required startup is retrospective. No game-host integration.'}|ConvertTo-Json -Depth 8|Set-Content $Output
 }
 "PASS: grouped music rendered to $wave"

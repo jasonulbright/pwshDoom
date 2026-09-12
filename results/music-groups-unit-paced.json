@@ -1,0 +1,116 @@
+{
+  "Checks": [
+    {
+      "Name": "Invalid channel selection rejected: ",
+      "Passed": true
+    },
+    {
+      "Name": "Invalid channel selection rejected: 0,0",
+      "Passed": true
+    },
+    {
+      "Name": "Invalid channel selection rejected: -1",
+      "Passed": true
+    },
+    {
+      "Name": "Invalid channel selection rejected: 16",
+      "Passed": true
+    },
+    {
+      "Name": "Owned-channel output equals manually scheduled reference at all boundaries",
+      "Passed": true
+    },
+    {
+      "Name": "Unowned channel pitch and note state remain untouched",
+      "Passed": true
+    },
+    {
+      "Name": "Group chunk metadata and clocks cover exactly one subblock",
+      "Passed": true
+    },
+    {
+      "Name": "Finished group rejects an extra read",
+      "Passed": true
+    },
+    {
+      "Name": "Group batching preserves exact doubles through two loop boundaries",
+      "Passed": true
+    },
+    {
+      "Name": "Global end releases older voices while new loop notes start",
+      "Passed": true
+    },
+    {
+      "Name": "Note partition keeps every layer of the assigned note together",
+      "Passed": true
+    },
+    {
+      "Name": "Foreign note triggers exclusive cuts on the other worker",
+      "Passed": true
+    },
+    {
+      "Name": "Cross-worker exclusive-note waveform equals unsplit reference",
+      "Passed": true
+    },
+    {
+      "Name": "Foreign mono note cuts the prior locally owned voice",
+      "Passed": true
+    },
+    {
+      "Name": "Worker fills the bounded queue and remains live",
+      "Passed": true
+    },
+    {
+      "Name": "Cancellation terminates a producer with a full queue",
+      "Passed": true
+    },
+    {
+      "Name": "Cancelled worker completes queue publication",
+      "Passed": true
+    },
+    {
+      "Name": "Invalid preset worker terminates promptly",
+      "Passed": true
+    },
+    {
+      "Name": "Worker errors are visible and leave no partial chunk",
+      "Passed": true
+    }
+  ],
+  "Error": null,
+  "Meaning": "Synthetic ownership, event-boundary, exact-double batching, loop and actual runspace cancellation/error checks. No playback device or game integration.",
+  "Sources": [
+    {
+      "Path": "src/MusScore.ps1",
+      "Sha256": "66B87D1CDD3FAD62E493A0C50C9A5AEBFE27167C8CCCCA974CC80463B6D1BB33"
+    },
+    {
+      "Path": "src/SoundFontRegions.ps1",
+      "Sha256": "9D409332EB51B5B6FCBC4B259E0C5E243E561A3C0D6AD2040A772F46539B9D8E"
+    },
+    {
+      "Path": "src/MusicOscillator.ps1",
+      "Sha256": "1D7911DC5CD2004D6DBBF27ECF43FFD652FAC8E4813943D9F8CFD5116332417B"
+    },
+    {
+      "Path": "src/MusicControls.ps1",
+      "Sha256": "30CC10D9118335FEC1C57653871B236B020FDBBA2D4103F89BA8EA672F1AF5D9"
+    },
+    {
+      "Path": "src/MusicSynth.ps1",
+      "Sha256": "3CCA7492A9F809EB8D54C8BF7D3D9847A1EC29D5E8ED6923F72ECA7803A50B48"
+    },
+    {
+      "Path": "src/MusicGroup.ps1",
+      "Sha256": "F8FAED17EDBFFDA3EC7BAEE9555998C649DA31ABB8AA8730ADAA4B4BFB1170F4"
+    },
+    {
+      "Path": "scripts/Invoke-MusicGroupWorker.ps1",
+      "Sha256": "395E3A0B858B65342AE510A682DFF4FA2D41E303529971ED9F4496C93CAC9998"
+    },
+    {
+      "Path": "scripts/Test-MusicGroups.ps1",
+      "Sha256": "16F2B2F3583D3BDD76022B33BF5A8849EFF78D44A0002AFB9FC2878ED3BC39FA"
+    }
+  ]
+}

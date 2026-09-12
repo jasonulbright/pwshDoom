@@ -47,13 +47,13 @@ Times include pool/group initialization, producer waits, final mixing and PCM co
 
 Moving the addition loop into a small PowerShell function is a separate measured variant, selected with `-MergeMode Function`. Its eight-second four-worker run observes 4.098 seconds total and 0.206 seconds in merge/PCM, preserving every output sample. A same-source inline control observes 4.434 seconds total and 2.033 seconds in merge/PCM. The full function-merge run observes **98.512 seconds**, including 2.003 seconds in merge/PCM, initialization of 0.106 seconds and first-chunk availability at 0.610 seconds. Producer work overlaps consumer mixing, so the large reduction in merge time does not translate into the same wall-time reduction.
 
-The full function-merge output is local at `local/music-groups-c05d4af1fdc14e57b23c3e69f99697c9/D_E1M1-Parallel-4.wav`, with the exact full reference hash above. Its retrospective startup requirement is 3.043 seconds and whole-process peak working set is 329,515,008 bytes. The result is near playback speed on this finite unpaced fixture, with insufficient demonstrated margin for live gameplay. Further optimization and a paced bounded-consumer test are required before host integration.
+The full function-merge output is local at `local/music-groups-c05d4af1fdc14e57b23c3e69f99697c9/D_E1M1-Parallel-4.wav`, with the exact full reference hash above. Its retrospective startup requirement is 3.043 seconds and whole-process peak working set is 329,515,008 bytes. The result is near playback speed on this finite unpaced fixture, with insufficient demonstrated margin for live gameplay. The subsequent paced tests below fail their deadlines.
 
 ## Validation and limits
 
 `Test-MusicGroups.ps1` passes nineteen checks. They cover invalid channel selections, exact manually scheduled output, ignored-channel isolation, chunk metadata, finished reads, batching through score loops, complete layer ownership, cross-worker exclusive and mono cuts, actual queue backpressure, cancellation and error propagation. The tests use synthetic samples and real runspaces, without a playback device.
 
-`music-group-validation.json` passes 164 evidence checks. It verifies all named successful short/full WAVs on disk, exact PCM comparisons, input identity, once-only aggregate note ownership, exclusive-cut totals, frame sequences, fixture voice bounds, current source hashes/parses and retention of the initial reporting failure.
+`music-group-validation.json` records 164 evidence checks at the `faf0170` milestone. It verifies all named successful short/full WAVs on disk, exact PCM comparisons, input identity, once-only aggregate note ownership, exclusive-cut totals, frame sequences, fixture voice bounds, then-current source hashes/parses and retention of the initial reporting failure. Its audit script requires that source snapshot; it does not certify subsequent harness edits. The current group suite again passes nineteen checks in `music-groups-unit-paced.json`.
 
 Per-worker voice limits do not yet enforce one global admission limit for arbitrary scores. This stock fixture stays below 256 even when summing all worker peak counts, so that distinction does not affect these measurements. A general host implementation needs an explicit admission policy before claiming equivalent behavior near the limit.
 
@@ -61,7 +61,21 @@ The reported minimum startup delay is retrospective: for every chunk, take its c
 
 The entire harness process peaks around 270–339 MB in the runs inspected so far; these figures include engine definitions, bank preparation, output arrays and garbage collection behavior. They are not isolated worker allocations. Read the exact report for each run's memory, queue payload bound, initialization time, first-chunk time and per-chunk schedule.
 
-An independent `Measure-MusicStateAccess.ps1` probe shows faster access to typed PowerShell fields than hashtable properties on its synthetic loop. It is retained as a possible later optimization, not applied to the synthesizer or counted as a real music speedup.
+An independent `Measure-MusicStateAccess.ps1` probe shows faster access to typed PowerShell fields than hashtable properties on its synthetic loop. Subsequent instrumented opening runs with typed voice, typed voice/envelope, envelope-only and restored baseline state all preserve the WAV, but their single observations do not establish a reliable winner. The hashtable representation remains in use; candidate files and raw profiles are retained, without claiming a music speedup.
+
+## Paced virtual consumption
+
+`-Paced -PrefillChunks 8` fills 201,600 audio frames (4.571 seconds with the default chunk size), then starts a monotonic virtual playback clock. Before accepting another mixed chunk, the consumer waits until that chunk fits in the ready-audio capacity. This can backpressure the bounded producer queues. A chunk misses its deadline when its complete PCM becomes available after the virtual clock reaches its first frame. The clock continues through misses; it does not silently pause playback or recover lost time.
+
+The complete PCM archive remains separate from the ready-audio capacity. No device receives audio, and the experiment ends after production, without waiting for the last frame to play. `VirtualPlaybackEndSeconds` identifies the scheduled end explicitly. Paced wall time includes imposed waits and is not intrinsic synthesis throughput.
+
+The four-worker full run (`music-groups-paced-four-baseline.json`) preserves the canonical WAV but **fails virtual deadline qualification**: 38 late chunks, maximum lateness 2,021.414 ms, first miss at audio time 59.429 seconds. Prefill completes at wall time 2.756 seconds. The consumer waits 10.425 seconds in aggregate and the ready-audio peak stays at exactly 201,600 frames. Production takes 99.888 seconds; the virtual final playback time is 100.756 seconds. An acceptable average is insufficient when harder passages exhaust the available lead.
+
+The same-capacity eight-worker observation (`music-groups-paced-eight-baseline.json`) also preserves every sample but misses 118 deadlines, first at audio time 30.857 seconds, with a maximum delay of 10,320.270 ms. Prefill completes at 2.735 seconds, production at 108.845 seconds, and imposed waits total 11.010 seconds. Merge/PCM work is 3.981 seconds and peak process memory is 376,602,624 bytes. The four-worker observation used 334,430,208 bytes. These sequential observations do not establish a universal worker-count optimum, but neither configuration meets this finite fixture's deadlines.
+
+`Test-MusicPacingEvidence.ps1` independently derives deadlines and capacity from the retained absolute frame positions and completion times, checks WAVs on disk, inputs, counters and source identity, and reports deadline qualification separately from evidence integrity. A successful audit can correctly certify a failed deadline test. Neither result qualifies a physical audio device or concurrent gameplay.
+
+The four/eight-worker audits pass 543/547 evidence-integrity checks respectively, both with `MeetsVirtualDeadlines=false`. No other study synthesis/test workload overlaps either full render; documentation/read-only work and ordinary system activity are uncontrolled. A bounded cache/render-ahead implementation is the next implementation direction: account for first-use rendering time, source/bank/score identity, partial-file recovery and evolving loop tails before device integration. Repeating the opening WAV at the score boundary would not preserve the measured synthesizer's state.
 
 ## Reproduce
 
@@ -70,7 +84,8 @@ Run from `C:\projects\pwshDoom` with fresh output paths and user-local assets:
 ```powershell
 ./scripts/Test-MusicGroups.ps1 -Output local/music-groups-unit.json
 ./scripts/Render-MusicGroups.ps1 -Output local/music-groups.json -Seconds 98 -Groups 4 -Execution Parallel -GroupPolicy RoundRobinNotes -MergeMode Function -ReferenceReport results/music-e1m1-dry-numeric-loop.json
-./scripts/Test-MusicGroupEvidence.ps1 -Output local/music-group-evidence.json
+./scripts/Render-MusicGroups.ps1 -Output local/music-paced.json -Seconds 98 -Groups 4 -Execution Parallel -GroupPolicy RoundRobinNotes -MergeMode Function -Paced -PrefillChunks 8 -ReferenceReport results/music-e1m1-dry-numeric-loop.json
+./scripts/Test-MusicPacingEvidence.ps1 -Report local/music-paced.json -Output local/music-paced-audit.json
 ```
 
 The render script accepts `-Wad`, `-SoundFont`, `-Track`, `-Volume`, `-BlocksPerChunk` and a finite timeout. The evidence audit requires the named retained reports and local WAV files. No compiled custom synthesizer, mixer or rendering helper is used.

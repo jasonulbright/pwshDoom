@@ -1,0 +1,2190 @@
+{
+  "Error": null,
+  "SourceSha256": "06108374082AE057E953A3C6D47B9C2ABFA573752B75C3BE59EFA9BBBDEF8FD0",
+  "ReportSha256": "F03D54B426CD90E6F794E3A958A4575913E32BC6021F08E856F60F58A46A30F2",
+  "Qualification": {
+    "MaximumLatenessMilliseconds": 2021.4140142856963,
+    "FirstLateAudioSeconds": 59.42857142857143,
+    "LateChunks": 38,
+    "MeetsVirtualDeadlines": false,
+    "PeakReadyFrames": 201600.0,
+    "DevicePlaybackQualified": false,
+    "GameplayLoadQualified": false
+  },
+  "Meaning": "Evidence-integrity checks can pass while deadline qualification fails. Recomputes virtual deadlines and ready-audio capacity from retained chunks; exact WAV identity preserves the chosen dry model. No device, acoustic, gameplay-load or arbitrary-score qualification.",
+  "ReferenceReportSha256": "73146B9A82CC9E4BEB17A0CADFBDB2C12A71A039FE66CF30E3E54E9D43D9DFD7",
+  "Checks": [
+    {
+      "Name": "Both renders completed",
+      "Passed": true
+    },
+    {
+      "Name": "Paced parallel note fixture",
+      "Passed": true
+    },
+    {
+      "Name": "Identical source assets, duration and volume",
+      "Passed": true
+    },
+    {
+      "Name": "Exact canonical WAVs verified on disk",
+      "Passed": true
+    },
+    {
+      "Name": "Sample comparison agrees",
+      "Passed": true
+    },
+    {
+      "Name": "Capacity and duration have consistent frame units",
+      "Passed": true
+    },
+    {
+      "Name": "Consumer actually waited and producers use bounded queues",
+      "Passed": true
+    },
+    {
+      "Name": "Clock starts when prefill completes",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 0 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 0 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 0 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 25200 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 25200 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 25200 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 50400 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 50400 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 50400 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 75600 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 75600 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 75600 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 100800 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 100800 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 100800 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 126000 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 126000 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 126000 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 151200 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 151200 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 151200 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 176400 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 176400 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 176400 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 201600 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 201600 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 201600 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 226800 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 226800 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 226800 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 252000 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 252000 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 252000 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 277200 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 277200 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 277200 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 302400 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 302400 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 302400 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 327600 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 327600 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 327600 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 352800 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 352800 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 352800 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 378000 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 378000 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 378000 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 403200 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 403200 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 403200 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 428400 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 428400 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 428400 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 453600 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 453600 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 453600 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 478800 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 478800 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 478800 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 504000 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 504000 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 504000 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 529200 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 529200 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 529200 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 554400 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 554400 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 554400 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 579600 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 579600 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 579600 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 604800 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 604800 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 604800 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 630000 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 630000 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 630000 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 655200 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 655200 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 655200 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 680400 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 680400 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 680400 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 705600 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 705600 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 705600 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 730800 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 730800 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 730800 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 756000 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 756000 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 756000 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 781200 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 781200 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 781200 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 806400 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 806400 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 806400 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 831600 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 831600 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 831600 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 856800 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 856800 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 856800 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 882000 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 882000 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 882000 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 907200 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 907200 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 907200 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 932400 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 932400 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 932400 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 957600 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 957600 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 957600 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 982800 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 982800 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 982800 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1008000 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1008000 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1008000 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1033200 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1033200 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1033200 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1058400 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1058400 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1058400 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1083600 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1083600 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1083600 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1108800 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1108800 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1108800 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1134000 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1134000 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1134000 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1159200 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1159200 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1159200 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1184400 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1184400 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1184400 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1209600 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1209600 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1209600 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1234800 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1234800 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1234800 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1260000 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1260000 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1260000 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1285200 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1285200 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1285200 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1310400 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1310400 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1310400 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1335600 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1335600 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1335600 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1360800 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1360800 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1360800 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1386000 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1386000 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1386000 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1411200 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1411200 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1411200 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1436400 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1436400 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1436400 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1461600 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1461600 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1461600 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1486800 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1486800 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1486800 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1512000 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1512000 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1512000 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1537200 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1537200 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1537200 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1562400 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1562400 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1562400 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1587600 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1587600 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1587600 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1612800 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1612800 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1612800 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1638000 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1638000 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1638000 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1663200 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1663200 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1663200 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1688400 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1688400 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1688400 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1713600 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1713600 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1713600 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1738800 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1738800 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1738800 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1764000 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1764000 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1764000 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1789200 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1789200 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1789200 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1814400 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1814400 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1814400 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1839600 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1839600 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1839600 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1864800 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1864800 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1864800 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1890000 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1890000 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1890000 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1915200 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1915200 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1915200 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1940400 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1940400 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1940400 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1965600 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1965600 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1965600 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1990800 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1990800 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 1990800 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2016000 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2016000 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2016000 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2041200 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2041200 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2041200 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2066400 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2066400 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2066400 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2091600 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2091600 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2091600 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2116800 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2116800 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2116800 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2142000 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2142000 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2142000 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2167200 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2167200 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2167200 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2192400 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2192400 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2192400 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2217600 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2217600 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2217600 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2242800 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2242800 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2242800 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2268000 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2268000 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2268000 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2293200 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2293200 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2293200 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2318400 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2318400 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2318400 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2343600 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2343600 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2343600 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2368800 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2368800 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2368800 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2394000 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2394000 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2394000 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2419200 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2419200 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2419200 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2444400 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2444400 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2444400 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2469600 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2469600 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2469600 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2494800 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2494800 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2494800 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2520000 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2520000 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2520000 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2545200 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2545200 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2545200 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2570400 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2570400 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2570400 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2595600 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2595600 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2595600 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2620800 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2620800 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2620800 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2646000 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2646000 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2646000 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2671200 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2671200 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2671200 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2696400 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2696400 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2696400 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2721600 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2721600 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2721600 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2746800 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2746800 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2746800 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2772000 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2772000 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2772000 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2797200 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2797200 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2797200 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2822400 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2822400 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2822400 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2847600 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2847600 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2847600 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2872800 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2872800 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2872800 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2898000 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2898000 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2898000 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2923200 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2923200 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2923200 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2948400 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2948400 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2948400 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2973600 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2973600 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2973600 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2998800 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2998800 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 2998800 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3024000 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3024000 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3024000 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3049200 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3049200 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3049200 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3074400 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3074400 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3074400 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3099600 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3099600 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3099600 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3124800 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3124800 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3124800 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3150000 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3150000 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3150000 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3175200 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3175200 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3175200 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3200400 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3200400 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3200400 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3225600 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3225600 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3225600 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3250800 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3250800 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3250800 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3276000 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3276000 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3276000 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3301200 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3301200 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3301200 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3326400 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3326400 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3326400 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3351600 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3351600 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3351600 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3376800 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3376800 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3376800 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3402000 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3402000 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3402000 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3427200 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3427200 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3427200 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3452400 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3452400 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3452400 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3477600 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3477600 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3477600 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3502800 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3502800 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3502800 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3528000 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3528000 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3528000 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3553200 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3553200 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3553200 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3578400 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3578400 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3578400 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3603600 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3603600 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3603600 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3628800 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3628800 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3628800 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3654000 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3654000 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3654000 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3679200 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3679200 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3679200 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3704400 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3704400 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3704400 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3729600 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3729600 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3729600 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3754800 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3754800 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3754800 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3780000 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3780000 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3780000 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3805200 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3805200 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3805200 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3830400 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3830400 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3830400 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3855600 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3855600 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3855600 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3880800 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3880800 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3880800 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3906000 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3906000 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3906000 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3931200 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3931200 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3931200 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3956400 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3956400 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3956400 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3981600 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3981600 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 3981600 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 4006800 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 4006800 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 4006800 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 4032000 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 4032000 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 4032000 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 4057200 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 4057200 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 4057200 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 4082400 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 4082400 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 4082400 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 4107600 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 4107600 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 4107600 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 4132800 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 4132800 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 4132800 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 4158000 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 4158000 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 4158000 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 4183200 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 4183200 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 4183200 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 4208400 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 4208400 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 4208400 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 4233600 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 4233600 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 4233600 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 4258800 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 4258800 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 4258800 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 4284000 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 4284000 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 4284000 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 4309200 has valid sequence and monotonic completion",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 4309200 recorded lateness matches deadline",
+      "Passed": true
+    },
+    {
+      "Name": "Chunk 4309200 respects virtual ready-audio capacity",
+      "Passed": true
+    },
+    {
+      "Name": "Complete frame sequence",
+      "Passed": true
+    },
+    {
+      "Name": "Recorded timing aggregates agree",
+      "Passed": true
+    },
+    {
+      "Name": "Virtual end includes entire requested audio",
+      "Passed": true
+    },
+    {
+      "Name": "Worker completed all frames and broadcast notes",
+      "Passed": true
+    },
+    {
+      "Name": "Worker completed all frames and broadcast notes",
+      "Passed": true
+    },
+    {
+      "Name": "Worker completed all frames and broadcast notes",
+      "Passed": true
+    },
+    {
+      "Name": "Worker completed all frames and broadcast notes",
+      "Passed": true
+    },
+    {
+      "Name": "Fixture notes, cuts, voice bounds and clipping preserved",
+      "Passed": true
+    },
+    {
+      "Name": "No source changes during run",
+      "Passed": true
+    },
+    {
+      "Name": "Current source matches: src/MusScore.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Current source matches: src/SoundFontBank.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Current source matches: src/SoundFontRegions.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Current source matches: src/MusicOscillator.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Current source matches: src/MusicControls.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Current source matches: src/MusicSynth.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Current source matches: src/MusicGroup.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Current source matches: src/AudioMixer.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Current source matches: scripts/Invoke-MusicGroupWorker.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Current source matches: scripts/Render-MusicGroups.ps1",
+      "Passed": true
+    }
+  ]
+}

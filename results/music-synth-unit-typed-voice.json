@@ -1,0 +1,248 @@
+{
+  "Error": null,
+  "Meaning": "Independent control/envelope/filter vectors and dry synthesizer state/partition tests. Does not prove matching another synthesizer or complete effects/live performance.",
+  "Checks": [
+    {
+      "Passed": true,
+      "Name": "No-controller modulator is unity"
+    },
+    {
+      "Passed": true,
+      "Name": "Default pan center is exactly bipolar zero"
+    },
+    {
+      "Passed": true,
+      "Name": "Pitch wheel center and lower endpoint"
+    },
+    {
+      "Passed": true,
+      "Name": "Pitch wheel lower endpoint is minus one"
+    },
+    {
+      "Passed": true,
+      "Name": "Concave velocity attenuation yields squared velocity gain"
+    },
+    {
+      "Passed": true,
+      "Name": "Negative switch changes at half scale"
+    },
+    {
+      "Passed": true,
+      "Name": "Bipolar switch chooses positive side at center"
+    },
+    {
+      "Passed": true,
+      "Name": "Negative bipolar switch reverses the center result"
+    },
+    {
+      "Passed": true,
+      "Name": "Two-semitone bend default produces minus 200 cents"
+    },
+    {
+      "Passed": true,
+      "Name": "Instrument zero modulator disables a default"
+    },
+    {
+      "Passed": true,
+      "Name": "Instant delay and hold sentinel"
+    },
+    {
+      "Passed": true,
+      "Name": "Volume attack midpoint is linear amplitude"
+    },
+    {
+      "Passed": true,
+      "Name": "Volume decay follows 96 dB per declared decay duration"
+    },
+    {
+      "Passed": true,
+      "Name": "Volume sustain clamps decay"
+    },
+    {
+      "Passed": true,
+      "Name": "Volume release starts at current envelope value"
+    },
+    {
+      "Passed": true,
+      "Name": "Modulation envelope uses linear decay and percent sustain"
+    },
+    {
+      "Passed": true,
+      "Name": "Envelope hold scales with played key"
+    },
+    {
+      "Passed": true,
+      "Name": "Delayed triangular LFO independent quarter-cycle points"
+    },
+    {
+      "Passed": true,
+      "Name": "Independent quarter-rate low-pass coefficients"
+    },
+    {
+      "Passed": true,
+      "Name": "Independent impulse response through the actual voice filter loop"
+    },
+    {
+      "Passed": true,
+      "Name": "Fused oscillator equals standalone: mode=0 released=False step=0.625"
+    },
+    {
+      "Passed": true,
+      "Name": "Fused oscillator equals standalone: mode=0 released=False step=19.25"
+    },
+    {
+      "Passed": true,
+      "Name": "Fused oscillator equals standalone: mode=0 released=True step=0.625"
+    },
+    {
+      "Passed": true,
+      "Name": "Fused oscillator equals standalone: mode=0 released=True step=19.25"
+    },
+    {
+      "Passed": true,
+      "Name": "Fused oscillator equals standalone: mode=1 released=False step=0.625"
+    },
+    {
+      "Passed": true,
+      "Name": "Fused oscillator equals standalone: mode=1 released=False step=19.25"
+    },
+    {
+      "Passed": true,
+      "Name": "Fused oscillator equals standalone: mode=1 released=True step=0.625"
+    },
+    {
+      "Passed": true,
+      "Name": "Fused oscillator equals standalone: mode=1 released=True step=19.25"
+    },
+    {
+      "Passed": true,
+      "Name": "Fused oscillator equals standalone: mode=3 released=False step=0.625"
+    },
+    {
+      "Passed": true,
+      "Name": "Fused oscillator equals standalone: mode=3 released=False step=19.25"
+    },
+    {
+      "Passed": true,
+      "Name": "Fused oscillator equals standalone: mode=3 released=True step=0.625"
+    },
+    {
+      "Passed": true,
+      "Name": "Fused oscillator equals standalone: mode=3 released=True step=19.25"
+    },
+    {
+      "Passed": true,
+      "Name": "Paused oscillator supplies zero without advancing its own clock"
+    },
+    {
+      "Passed": true,
+      "Name": "Full note render is exactly independent of caller block partition"
+    },
+    {
+      "Passed": true,
+      "Name": "Dry synth emits finite nonzero stereo"
+    },
+    {
+      "Passed": true,
+      "Name": "Release render preserves caller partition invariance"
+    },
+    {
+      "Passed": true,
+      "Name": "Synth pause freezes all clocks"
+    },
+    {
+      "Passed": true,
+      "Name": "Sustain pedal defers key release"
+    },
+    {
+      "Passed": true,
+      "Name": "Pedal lift starts release"
+    },
+    {
+      "Passed": true,
+      "Name": "All sounds off removes channel voices"
+    },
+    {
+      "Passed": true,
+      "Name": "MUS channel 15 uses drum preset"
+    },
+    {
+      "Passed": true,
+      "Name": "Score end releases all channels"
+    },
+    {
+      "Passed": true,
+      "Name": "Released looping voice is removed at envelope end"
+    },
+    {
+      "Passed": true,
+      "Name": "Channel volume zero invalidates pending gain immediately"
+    },
+    {
+      "Passed": true,
+      "Name": "All notes off honors sustain pedal"
+    },
+    {
+      "Passed": true,
+      "Name": "Reset controllers releases sustained notes and preserves volume"
+    },
+    {
+      "Passed": true,
+      "Name": "Exclusive class cuts older notes while retaining all new layers"
+    },
+    {
+      "Passed": true,
+      "Name": "Oversized layered note leaves no partial voice or counters"
+    },
+    {
+      "Passed": true,
+      "Name": "Capacity rejection preserves the active note identity"
+    },
+    {
+      "Passed": true,
+      "Name": "Invalid later layer preserves earlier voices and cut counters"
+    },
+    {
+      "Passed": true,
+      "Name": "PCM ties-to-even and asymmetric clipping boundary"
+    },
+    {
+      "Passed": true,
+      "Name": "PCM rejects NaN"
+    },
+    {
+      "Passed": true,
+      "Name": "PCM rejects Infinity"
+    },
+    {
+      "Passed": true,
+      "Name": "PCM rejects -Infinity"
+    },
+    {
+      "Passed": true,
+      "Name": "Finite extremes saturate and subnormals round to zero"
+    }
+  ],
+  "Sources": [
+    {
+      "Sha256": "A90099A6C0150A93B55792755C4BEF98589EFF661748A58C8736E86D1F9968B0",
+      "Path": "src/MusicControls.ps1"
+    },
+    {
+      "Sha256": "72D0FA052B757D1AA60A56B1F858E0C4B97D7835C4AC771A96163038B439F97C",
+      "Path": "src/MusicSynth.ps1"
+    },
+    {
+      "Sha256": "1D7911DC5CD2004D6DBBF27ECF43FFD652FAC8E4813943D9F8CFD5116332417B",
+      "Path": "src/MusicOscillator.ps1"
+    },
+    {
+      "Sha256": "9D409332EB51B5B6FCBC4B259E0C5E243E561A3C0D6AD2040A772F46539B9D8E",
+      "Path": "src/SoundFontRegions.ps1"
+    },
+    {
+      "Sha256": "77B9941E90506A932038555BBA94016CA6F0528E69C38278329F608325EF2D9E",
+      "Path": "scripts/Test-MusicSynth.ps1"
+    }
+  ]
+}
