@@ -1,0 +1,72 @@
+{
+  "Error": null,
+  "Count": 200000,
+  "SourceSha256": "52D6E68F84485A7F32C6DC13C0379584D1542B798BD94C2FE72299570BE9DACA",
+  "Trials": [
+    {
+      "Milliseconds": 53.3613,
+      "Pass": 1,
+      "Kind": "HashtableProperty",
+      "Checksum": 128200640000.0,
+      "Frame": 6400000
+    },
+    {
+      "Milliseconds": 33.0656,
+      "Pass": 1,
+      "Kind": "HashtableIndex",
+      "Checksum": 128200640000.0,
+      "Frame": 6400000
+    },
+    {
+      "Milliseconds": 15.8288,
+      "Pass": 1,
+      "Kind": "PowerShellClass",
+      "Checksum": 128200640000.0,
+      "Frame": 6400000
+    },
+    {
+      "Milliseconds": 15.5976,
+      "Pass": 2,
+      "Kind": "PowerShellClass",
+      "Checksum": 128200640000.0,
+      "Frame": 6400000
+    },
+    {
+      "Milliseconds": 31.8321,
+      "Pass": 2,
+      "Kind": "HashtableIndex",
+      "Checksum": 128200640000.0,
+      "Frame": 6400000
+    },
+    {
+      "Milliseconds": 133.777,
+      "Pass": 2,
+      "Kind": "HashtableProperty",
+      "Checksum": 128200640000.0,
+      "Frame": 6400000
+    },
+    {
+      "Milliseconds": 111.0949,
+      "Pass": 3,
+      "Kind": "HashtableProperty",
+      "Checksum": 128200640000.0,
+      "Frame": 6400000
+    },
+    {
+      "Milliseconds": 22.6857,
+      "Pass": 3,
+      "Kind": "HashtableIndex",
+      "Checksum": 128200640000.0,
+      "Frame": 6400000
+    },
+    {
+      "Milliseconds": 11.339,
+      "Pass": 3,
+      "Kind": "PowerShellClass",
+      "Checksum": 128200640000.0,
+      "Frame": 6400000
+    }
+  ],
+  "Meaning": "Isolated mutable-state access probe, one warmup and alternating measured order. Class is declared in PowerShell and contains only fields. Not evidence of actual music-render performance.",
+  "PowerShell": "7.6.5"
+}

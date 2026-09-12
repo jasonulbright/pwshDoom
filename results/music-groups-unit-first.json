@@ -1,0 +1,100 @@
+{
+  "Meaning": "Synthetic ownership, event-boundary, exact-double batching, loop and actual runspace cancellation/error checks. No playback device or game integration.",
+  "Checks": [
+    {
+      "Name": "Invalid channel selection rejected: ",
+      "Passed": true
+    },
+    {
+      "Name": "Invalid channel selection rejected: 0,0",
+      "Passed": true
+    },
+    {
+      "Name": "Invalid channel selection rejected: -1",
+      "Passed": true
+    },
+    {
+      "Name": "Invalid channel selection rejected: 16",
+      "Passed": true
+    },
+    {
+      "Name": "Owned-channel output equals manually scheduled reference at all boundaries",
+      "Passed": true
+    },
+    {
+      "Name": "Unowned channel pitch and note state remain untouched",
+      "Passed": true
+    },
+    {
+      "Name": "Group chunk metadata and clocks cover exactly one subblock",
+      "Passed": true
+    },
+    {
+      "Name": "Finished group rejects an extra read",
+      "Passed": true
+    },
+    {
+      "Name": "Group batching preserves exact doubles through two loop boundaries",
+      "Passed": true
+    },
+    {
+      "Name": "Global end releases older voices while new loop notes start",
+      "Passed": true
+    },
+    {
+      "Name": "Worker fills the bounded queue and remains live",
+      "Passed": true
+    },
+    {
+      "Name": "Cancellation terminates a producer with a full queue",
+      "Passed": true
+    },
+    {
+      "Name": "Cancelled worker completes queue publication",
+      "Passed": true
+    },
+    {
+      "Name": "Invalid preset worker terminates promptly",
+      "Passed": true
+    },
+    {
+      "Name": "Worker errors are visible and leave no partial chunk",
+      "Passed": true
+    }
+  ],
+  "Sources": [
+    {
+      "Sha256": "66B87D1CDD3FAD62E493A0C50C9A5AEBFE27167C8CCCCA974CC80463B6D1BB33",
+      "Path": "src/MusScore.ps1"
+    },
+    {
+      "Sha256": "9D409332EB51B5B6FCBC4B259E0C5E243E561A3C0D6AD2040A772F46539B9D8E",
+      "Path": "src/SoundFontRegions.ps1"
+    },
+    {
+      "Sha256": "1D7911DC5CD2004D6DBBF27ECF43FFD652FAC8E4813943D9F8CFD5116332417B",
+      "Path": "src/MusicOscillator.ps1"
+    },
+    {
+      "Sha256": "A90099A6C0150A93B55792755C4BEF98589EFF661748A58C8736E86D1F9968B0",
+      "Path": "src/MusicControls.ps1"
+    },
+    {
+      "Sha256": "C39A1630875848B0116F9B22A70221C0CDD17DCCAE8AC37F52FA689597A2462D",
+      "Path": "src/MusicSynth.ps1"
+    },
+    {
+      "Sha256": "914FDF26F8DFEC170A13E136F28DA3753C0B4EFE077D45FE0758DF7CA23DCD91",
+      "Path": "src/MusicGroup.ps1"
+    },
+    {
+      "Sha256": "29416FC2F23AAB454A31428F0277E374421A14AB7CACCD78E955897D883E10E1",
+      "Path": "scripts/Invoke-MusicGroupWorker.ps1"
+    },
+    {
+      "Sha256": "4D1242A85F5CEEEB7A9F33D3C60EAED5EB76523600A821D2C4E1C6F26304C6C8",
+      "Path": "scripts/Test-MusicGroups.ps1"
+    }
+  ],
+  "Error": null
+}

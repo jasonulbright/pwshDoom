@@ -1,0 +1,222 @@
+{
+  "PowerShell": "7.6.5",
+  "Details": {
+    "BlocksPerChunk": 20,
+    "PreparationSeconds": 1.6313864,
+    "RenderSeconds": 5.4375159,
+    "Execution": "Serial",
+    "InitializationSeconds": 0.0209263,
+    "MusSha256": "8F4673A3210C9FAFFE7B654F0B8F604A193398809545D9561E142704820035BF",
+    "OutputPcmBytes": 1411200,
+    "QueueCapacityPerWorker": 2,
+    "Comparison": {
+      "ReportSha256": "52071C45C0BFE0C751DF5C92982761EA4FB3E8D6BA3C7EA5A38E7E1599C18402",
+      "ChangedSamples": 0,
+      "ReferenceWavSha256": "1BE9256376413BE07688B984E1EDF7D017A5E0D7BB9E493F5595868490EA9650",
+      "MaximumPcmDifference": 0,
+      "DifferenceRms": 0.0
+    },
+    "Seconds": 8,
+    "WavPath": "C:\\projects\\pwshDoom\\local\\music-groups-da306225cd1644c5ac94236f25b04673\\D_E1M1-Serial-1.wav",
+    "RequiredStartupSecondsForObservedChunkSchedule": 0.7206084,
+    "ClippedSamples": 0,
+    "Volume": 0.2,
+    "FirstChunkSeconds": 0.7206084,
+    "Frames": 352800,
+    "MergeAndPcmSeconds": 0.0735489,
+    "PeakProcessWorkingSetBytes": 269094912,
+    "Track": "D_E1M1",
+    "AudioSecondsPerRenderSecond": 1.4712600656487276,
+    "SoundFontSha256": "82475B91A76DE15CB28A104707D3247BA932E228BADA3F47BBA63C6B31AAF7A1",
+    "QueuePayloadBoundBytes": 806400,
+    "Groups": 1,
+    "Workers": [
+      {
+        "Frames": 352800,
+        "PeakVoices": 9,
+        "ExclusiveCuts": 0,
+        "Channels": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "NoteOns": 71
+      }
+    ],
+    "WavSha256": "1BE9256376413BE07688B984E1EDF7D017A5E0D7BB9E493F5595868490EA9650",
+    "Chunks": [
+      {
+        "Frame": 0,
+        "WorkerRenderMilliseconds": [
+          673.8594
+        ],
+        "Frames": 25200,
+        "CompletedSeconds": 0.7206084
+      },
+      {
+        "Frame": 25200,
+        "WorkerRenderMilliseconds": [
+          422.656
+        ],
+        "Frames": 25200,
+        "CompletedSeconds": 1.1566786
+      },
+      {
+        "Frame": 50400,
+        "WorkerRenderMilliseconds": [
+          362.6704
+        ],
+        "Frames": 25200,
+        "CompletedSeconds": 1.5243938
+      },
+      {
+        "Frame": 75600,
+        "WorkerRenderMilliseconds": [
+          427.8458
+        ],
+        "Frames": 25200,
+        "CompletedSeconds": 1.9569933
+      },
+      {
+        "Frame": 100800,
+        "WorkerRenderMilliseconds": [
+          554.4421
+        ],
+        "Frames": 25200,
+        "CompletedSeconds": 2.5175933
+      },
+      {
+        "Frame": 126000,
+        "WorkerRenderMilliseconds": [
+          379.0467
+        ],
+        "Frames": 25200,
+        "CompletedSeconds": 2.9016834
+      },
+      {
+        "Frame": 151200,
+        "WorkerRenderMilliseconds": [
+          273.8157
+        ],
+        "Frames": 25200,
+        "CompletedSeconds": 3.1801763
+      },
+      {
+        "Frame": 176400,
+        "WorkerRenderMilliseconds": [
+          358.643
+        ],
+        "Frames": 25200,
+        "CompletedSeconds": 3.5430286
+      },
+      {
+        "Frame": 201600,
+        "WorkerRenderMilliseconds": [
+          300.5144
+        ],
+        "Frames": 25200,
+        "CompletedSeconds": 3.848216
+      },
+      {
+        "Frame": 226800,
+        "WorkerRenderMilliseconds": [
+          305.8039
+        ],
+        "Frames": 25200,
+        "CompletedSeconds": 4.1580654
+      },
+      {
+        "Frame": 252000,
+        "WorkerRenderMilliseconds": [
+          255.2267
+        ],
+        "Frames": 25200,
+        "CompletedSeconds": 4.4203742
+      },
+      {
+        "Frame": 277200,
+        "WorkerRenderMilliseconds": [
+          376.9028
+        ],
+        "Frames": 25200,
+        "CompletedSeconds": 4.8013928
+      },
+      {
+        "Frame": 302400,
+        "WorkerRenderMilliseconds": [
+          300.1291
+        ],
+        "Frames": 25200,
+        "CompletedSeconds": 5.1064765
+      },
+      {
+        "Frame": 327600,
+        "WorkerRenderMilliseconds": [
+          314.0684
+        ],
+        "Frames": 25200,
+        "CompletedSeconds": 5.4245187
+      }
+    ],
+    "GroupPolicy": "MUS channel modulo group count"
+  },
+  "Sources": [
+    {
+      "Path": "src/MusScore.ps1",
+      "Sha256": "66B87D1CDD3FAD62E493A0C50C9A5AEBFE27167C8CCCCA974CC80463B6D1BB33"
+    },
+    {
+      "Path": "src/SoundFontBank.ps1",
+      "Sha256": "AF80287762169B5318F60FD719479137BAED1D3EEF39561513D2B34AC118A855"
+    },
+    {
+      "Path": "src/SoundFontRegions.ps1",
+      "Sha256": "9D409332EB51B5B6FCBC4B259E0C5E243E561A3C0D6AD2040A772F46539B9D8E"
+    },
+    {
+      "Path": "src/MusicOscillator.ps1",
+      "Sha256": "1D7911DC5CD2004D6DBBF27ECF43FFD652FAC8E4813943D9F8CFD5116332417B"
+    },
+    {
+      "Path": "src/MusicControls.ps1",
+      "Sha256": "A90099A6C0150A93B55792755C4BEF98589EFF661748A58C8736E86D1F9968B0"
+    },
+    {
+      "Path": "src/MusicSynth.ps1",
+      "Sha256": "C39A1630875848B0116F9B22A70221C0CDD17DCCAE8AC37F52FA689597A2462D"
+    },
+    {
+      "Path": "src/MusicGroup.ps1",
+      "Sha256": "914FDF26F8DFEC170A13E136F28DA3753C0B4EFE077D45FE0758DF7CA23DCD91"
+    },
+    {
+      "Path": "src/AudioMixer.ps1",
+      "Sha256": "F6227640C7AD799B5E7D486B70752E680EF074881EB6B795BC087970BEB8C990"
+    },
+    {
+      "Path": "scripts/Invoke-MusicGroupWorker.ps1",
+      "Sha256": "29416FC2F23AAB454A31428F0277E374421A14AB7CACCD78E955897D883E10E1"
+    },
+    {
+      "Path": "scripts/Render-MusicGroups.ps1",
+      "Sha256": "08D0300B8C140FA8778DFC7E5EB64FE612D1657014441095F6377EB18F6C2EAD"
+    }
+  ],
+  "SourcesChangedDuringRun": [],
+  "Error": null,
+  "Meaning": "Offline dry PowerShell channel-group experiment. Parallel queues are bounded; bank/score objects are shared read-only. Render timing includes group/pool initialization, producer waits and final mixing, excludes bank/score preparation and output/diagnostics. Peak memory is the entire harness process. Required startup is retrospective from an unpaced chunk schedule, not actual playback/underrun evidence. No game-host integration.",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F"
+}

@@ -1,0 +1,737 @@
+{
+  "Error": null,
+  "Meaning": "Retained synthetic/runspace checks and exact WAV identity across group policies. Verifies fixture-level voice bounds, not general global admission. Timing observations and retrospective startup are not actual device, paced-consumer or gameplay-load qualification.",
+  "SourceSha256": "F8CE9D1FB4BFB61BEEE47C1A05A2CB32537B21DD87EB9CC485DCBAF4EF7106D7",
+  "Reports": [
+    {
+      "Path": "results/music-groups-unit-notes.json",
+      "Sha256": "C0644E3362EEE4D962E79E9EC29C58254F739008479DF9F6DB1B7D91A8E83E73"
+    },
+    {
+      "Path": "results/music-e1m1-dry-first.json",
+      "Sha256": "52071C45C0BFE0C751DF5C92982761EA4FB3E8D6BA3C7EA5A38E7E1599C18402"
+    },
+    {
+      "Path": "results/music-e1m1-dry-numeric-loop.json",
+      "Sha256": "73146B9A82CC9E4BEB17A0CADFBDB2C12A71A039FE66CF30E3E54E9D43D9DFD7"
+    },
+    {
+      "Path": "results/music-groups-one-first.json",
+      "Sha256": "4E117ED003725E7E4293FD364972A96661E9C1F97A36F5A000BE2C00561FA477"
+    },
+    {
+      "Path": "results/music-groups-two-serial-first.json",
+      "Sha256": "36AAB50901DD0385F02F5174AF41CCFCF11D38BCCCC7301F25AA5ED66C0130F6"
+    },
+    {
+      "Path": "results/music-groups-two-parallel-fixed.json",
+      "Sha256": "ABAEB64DEED1FD4E6DDFD357DCF5FF7C8BEBB2AB6BF9AB4A0B46D8C9D807D758"
+    },
+    {
+      "Path": "results/music-groups-two-greedy-serial.json",
+      "Sha256": "127C8274BEA35E980821832FFC12D193CCD5F454BD93AA94723DE99A4014D027"
+    },
+    {
+      "Path": "results/music-groups-two-greedy-parallel.json",
+      "Sha256": "C1A8DF4D05517259E93B69488358729DB73DC0194D2ECABCC19EB6DBC8366931"
+    },
+    {
+      "Path": "results/music-groups-two-greedy-full.json",
+      "Sha256": "B8123CB3511216E43785DE092545776923A5E06F977E6BF0410BC46D2104132B"
+    },
+    {
+      "Path": "results/music-groups-four-greedy-full.json",
+      "Sha256": "DBBDAC977BB825BA8DE154CB23B42CBC3D14FB94164992BBEE3DD1550A6E71FB"
+    },
+    {
+      "Path": "results/music-groups-notes-two-serial.json",
+      "Sha256": "AFBF4AB95FE109935ED09E6291B706A730727E34910942FAB9BAF2B5232DA19C"
+    },
+    {
+      "Path": "results/music-groups-notes-two-parallel.json",
+      "Sha256": "67F3FD680EB6809123A76EDECC8E3963D1F35B2BD9069D2CA7573A1DB10F1AA3"
+    },
+    {
+      "Path": "results/music-groups-notes-two-full.json",
+      "Sha256": "0F65A6C0FD83AED94A69C7711E95687B53C40FC7331DB2A6DEE049B19B521AFE"
+    },
+    {
+      "Path": "results/music-groups-notes-four-full.json",
+      "Sha256": "E65657BDC7ED839C7E5C4B2ECEEA7BB06DE45B7EE83A8901712933C9B76FC466"
+    },
+    {
+      "Path": "results/music-groups-notes-four-function-short.json",
+      "Sha256": "E07AC7820409090DEAAF1C7E613E3202F5644941C9157A844227D7C3404E5DA5"
+    },
+    {
+      "Path": "results/music-groups-notes-four-inline-short.json",
+      "Sha256": "74A194F164742E1D8A3156C859518941C554699261A64F1DCAB48942A8967D3A"
+    },
+    {
+      "Path": "results/music-groups-notes-four-function-full.json",
+      "Sha256": "3A5D2A74D4D6A7D96BBEC43CB545391B74EB759BA0C1B9E3A5DB219FB9C7D881"
+    },
+    {
+      "Path": "results/music-groups-two-parallel-first.json",
+      "Sha256": "A502A3D3921C802EBB49E004BBE15955F57A3441D24A03BAEFB45CBD01E5C997"
+    }
+  ],
+  "Checks": [
+    {
+      "Name": "All 19 group and lifecycle checks pass",
+      "Passed": true
+    },
+    {
+      "Name": "Unit source matches: src/MusScore.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Unit source matches: src/SoundFontRegions.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Unit source matches: src/MusicOscillator.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Unit source matches: src/MusicControls.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Unit source matches: src/MusicSynth.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Unit source matches: src/MusicGroup.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Unit source matches: scripts/Invoke-MusicGroupWorker.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Unit source matches: scripts/Test-MusicGroups.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Original short and full references succeeded",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-one-first succeeded",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-one-first preserves inputs and frame count",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-one-first exact WAV verified on disk",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-one-first comparison reports no changed samples",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-one-first owns each reference note once and preserves cuts",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-one-first stock fixture stays below the global voice bound",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-one-first completed every worker and had no clipping",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-one-first chunk sequence is complete",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-one-first sources remained unchanged during rendering",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-two-serial-first succeeded",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-two-serial-first preserves inputs and frame count",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-two-serial-first exact WAV verified on disk",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-two-serial-first comparison reports no changed samples",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-two-serial-first owns each reference note once and preserves cuts",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-two-serial-first stock fixture stays below the global voice bound",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-two-serial-first completed every worker and had no clipping",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-two-serial-first chunk sequence is complete",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-two-serial-first sources remained unchanged during rendering",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-two-parallel-fixed succeeded",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-two-parallel-fixed preserves inputs and frame count",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-two-parallel-fixed exact WAV verified on disk",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-two-parallel-fixed comparison reports no changed samples",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-two-parallel-fixed owns each reference note once and preserves cuts",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-two-parallel-fixed stock fixture stays below the global voice bound",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-two-parallel-fixed completed every worker and had no clipping",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-two-parallel-fixed chunk sequence is complete",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-two-parallel-fixed sources remained unchanged during rendering",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-two-greedy-serial succeeded",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-two-greedy-serial preserves inputs and frame count",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-two-greedy-serial exact WAV verified on disk",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-two-greedy-serial comparison reports no changed samples",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-two-greedy-serial owns each reference note once and preserves cuts",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-two-greedy-serial stock fixture stays below the global voice bound",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-two-greedy-serial completed every worker and had no clipping",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-two-greedy-serial chunk sequence is complete",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-two-greedy-serial sources remained unchanged during rendering",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-two-greedy-parallel succeeded",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-two-greedy-parallel preserves inputs and frame count",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-two-greedy-parallel exact WAV verified on disk",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-two-greedy-parallel comparison reports no changed samples",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-two-greedy-parallel owns each reference note once and preserves cuts",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-two-greedy-parallel stock fixture stays below the global voice bound",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-two-greedy-parallel completed every worker and had no clipping",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-two-greedy-parallel chunk sequence is complete",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-two-greedy-parallel sources remained unchanged during rendering",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-two-greedy-full succeeded",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-two-greedy-full preserves inputs and frame count",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-two-greedy-full exact WAV verified on disk",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-two-greedy-full comparison reports no changed samples",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-two-greedy-full owns each reference note once and preserves cuts",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-two-greedy-full stock fixture stays below the global voice bound",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-two-greedy-full completed every worker and had no clipping",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-two-greedy-full chunk sequence is complete",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-two-greedy-full sources remained unchanged during rendering",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-four-greedy-full succeeded",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-four-greedy-full preserves inputs and frame count",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-four-greedy-full exact WAV verified on disk",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-four-greedy-full comparison reports no changed samples",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-four-greedy-full owns each reference note once and preserves cuts",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-four-greedy-full stock fixture stays below the global voice bound",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-four-greedy-full completed every worker and had no clipping",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-four-greedy-full chunk sequence is complete",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-four-greedy-full sources remained unchanged during rendering",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-notes-two-serial succeeded",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-notes-two-serial preserves inputs and frame count",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-notes-two-serial exact WAV verified on disk",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-notes-two-serial comparison reports no changed samples",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-notes-two-serial owns each reference note once and preserves cuts",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-notes-two-serial stock fixture stays below the global voice bound",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-notes-two-serial completed every worker and had no clipping",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-notes-two-serial chunk sequence is complete",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-notes-two-serial sources remained unchanged during rendering",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-notes-two-serial distributes whole notes and broadcasts their control events",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-notes-two-parallel succeeded",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-notes-two-parallel preserves inputs and frame count",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-notes-two-parallel exact WAV verified on disk",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-notes-two-parallel comparison reports no changed samples",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-notes-two-parallel owns each reference note once and preserves cuts",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-notes-two-parallel stock fixture stays below the global voice bound",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-notes-two-parallel completed every worker and had no clipping",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-notes-two-parallel chunk sequence is complete",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-notes-two-parallel sources remained unchanged during rendering",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-notes-two-parallel distributes whole notes and broadcasts their control events",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-notes-two-full succeeded",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-notes-two-full preserves inputs and frame count",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-notes-two-full exact WAV verified on disk",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-notes-two-full comparison reports no changed samples",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-notes-two-full owns each reference note once and preserves cuts",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-notes-two-full stock fixture stays below the global voice bound",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-notes-two-full completed every worker and had no clipping",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-notes-two-full chunk sequence is complete",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-notes-two-full sources remained unchanged during rendering",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-notes-two-full distributes whole notes and broadcasts their control events",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-notes-four-full succeeded",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-notes-four-full preserves inputs and frame count",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-notes-four-full exact WAV verified on disk",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-notes-four-full comparison reports no changed samples",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-notes-four-full owns each reference note once and preserves cuts",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-notes-four-full stock fixture stays below the global voice bound",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-notes-four-full completed every worker and had no clipping",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-notes-four-full chunk sequence is complete",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-notes-four-full sources remained unchanged during rendering",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-notes-four-full distributes whole notes and broadcasts their control events",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-notes-four-function-short succeeded",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-notes-four-function-short preserves inputs and frame count",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-notes-four-function-short exact WAV verified on disk",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-notes-four-function-short comparison reports no changed samples",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-notes-four-function-short owns each reference note once and preserves cuts",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-notes-four-function-short stock fixture stays below the global voice bound",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-notes-four-function-short completed every worker and had no clipping",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-notes-four-function-short chunk sequence is complete",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-notes-four-function-short sources remained unchanged during rendering",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-notes-four-function-short distributes whole notes and broadcasts their control events",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-notes-four-inline-short succeeded",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-notes-four-inline-short preserves inputs and frame count",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-notes-four-inline-short exact WAV verified on disk",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-notes-four-inline-short comparison reports no changed samples",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-notes-four-inline-short owns each reference note once and preserves cuts",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-notes-four-inline-short stock fixture stays below the global voice bound",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-notes-four-inline-short completed every worker and had no clipping",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-notes-four-inline-short chunk sequence is complete",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-notes-four-inline-short sources remained unchanged during rendering",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-notes-four-inline-short distributes whole notes and broadcasts their control events",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-notes-four-function-full succeeded",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-notes-four-function-full preserves inputs and frame count",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-notes-four-function-full exact WAV verified on disk",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-notes-four-function-full comparison reports no changed samples",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-notes-four-function-full owns each reference note once and preserves cuts",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-notes-four-function-full stock fixture stays below the global voice bound",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-notes-four-function-full completed every worker and had no clipping",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-notes-four-function-full chunk sequence is complete",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-notes-four-function-full sources remained unchanged during rendering",
+      "Passed": true
+    },
+    {
+      "Name": "music-groups-notes-four-function-full distributes whole notes and broadcasts their control events",
+      "Passed": true
+    },
+    {
+      "Name": "Final full source matches: src/MusScore.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Final source parses: src/MusScore.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Final full source matches: src/SoundFontBank.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Final source parses: src/SoundFontBank.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Final full source matches: src/SoundFontRegions.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Final source parses: src/SoundFontRegions.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Final full source matches: src/MusicOscillator.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Final source parses: src/MusicOscillator.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Final full source matches: src/MusicControls.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Final source parses: src/MusicControls.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Final full source matches: src/MusicSynth.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Final source parses: src/MusicSynth.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Final full source matches: src/MusicGroup.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Final source parses: src/MusicGroup.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Final full source matches: src/AudioMixer.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Final source parses: src/AudioMixer.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Final full source matches: scripts/Invoke-MusicGroupWorker.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Final source parses: scripts/Invoke-MusicGroupWorker.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Final full source matches: scripts/Render-MusicGroups.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Final source parses: scripts/Render-MusicGroups.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Initial result-unwrapping failure remains recorded",
+      "Passed": true
+    }
+  ]
+}

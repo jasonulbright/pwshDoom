@@ -1,0 +1,281 @@
+{
+  "SourcesChangedDuringRun": [],
+  "Meaning": "Offline dry PowerShell channel-group experiment. Parallel queues are bounded; bank/score objects are shared read-only. Render timing includes group/pool initialization, producer waits and final mixing, excludes bank/score preparation and output/diagnostics. Peak memory is the entire harness process. Required startup is retrospective from an unpaced chunk schedule, not actual playback/underrun evidence. No game-host integration.",
+  "Error": null,
+  "Details": {
+    "SoundFontSha256": "82475B91A76DE15CB28A104707D3247BA932E228BADA3F47BBA63C6B31AAF7A1",
+    "ChannelNotesPerScore": [
+      656,
+      712,
+      262,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      702
+    ],
+    "GroupPolicy": "RoundRobinNotes",
+    "RenderSeconds": 5.0552573,
+    "PeakProcessWorkingSetBytes": 286760960,
+    "Seconds": 8,
+    "RequiredStartupSecondsForObservedChunkSchedule": 0.7246301,
+    "WavPath": "C:\\projects\\pwshDoom\\local\\music-groups-1bea0090d5c5418aa53c315a1889ab1e\\D_E1M1-Parallel-2.wav",
+    "OutputPcmBytes": 1411200,
+    "ClippedSamples": 0,
+    "WavSha256": "1BE9256376413BE07688B984E1EDF7D017A5E0D7BB9E493F5595868490EA9650",
+    "Workers": [
+      {
+        "NoteOns": 36,
+        "Frames": 352800,
+        "ProcessedNoteOns": 71,
+        "ExclusiveCuts": 0,
+        "Channels": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "PeakVoices": 4
+      },
+      {
+        "NoteOns": 35,
+        "Frames": 352800,
+        "ProcessedNoteOns": 71,
+        "ExclusiveCuts": 0,
+        "Channels": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "PeakVoices": 5
+      }
+    ],
+    "BlocksPerChunk": 20,
+    "PreparationSeconds": 1.641787,
+    "Volume": 0.2,
+    "InitializationSeconds": 0.0894149,
+    "ChannelAssignment": null,
+    "Execution": "Parallel",
+    "Track": "D_E1M1",
+    "FirstChunkSeconds": 0.7246301,
+    "Chunks": [
+      {
+        "CompletedSeconds": 0.7246301,
+        "Frame": 0,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          503.3231,
+          521.3738
+        ]
+      },
+      {
+        "CompletedSeconds": 1.0565961,
+        "Frame": 25200,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          228.5793,
+          362.741
+        ]
+      },
+      {
+        "CompletedSeconds": 1.3849433,
+        "Frame": 50400,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          205.7176,
+          333.0758
+        ]
+      },
+      {
+        "CompletedSeconds": 1.7926372,
+        "Frame": 75600,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          237.4569,
+          409.8348
+        ]
+      },
+      {
+        "CompletedSeconds": 2.3104892,
+        "Frame": 100800,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          254.3586,
+          523.7635
+        ]
+      },
+      {
+        "CompletedSeconds": 2.7390505,
+        "Frame": 126000,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          184.1484,
+          441.4312
+        ]
+      },
+      {
+        "CompletedSeconds": 3.0272243,
+        "Frame": 151200,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          169.9027,
+          291.1197
+        ]
+      },
+      {
+        "CompletedSeconds": 3.3564853,
+        "Frame": 176400,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          324.1216,
+          328.8149
+        ]
+      },
+      {
+        "CompletedSeconds": 3.761401,
+        "Frame": 201600,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          184.8343,
+          406.476
+        ]
+      },
+      {
+        "CompletedSeconds": 4.1115642,
+        "Frame": 226800,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          154.8119,
+          354.041
+        ]
+      },
+      {
+        "CompletedSeconds": 4.307092,
+        "Frame": 252000,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          169.3935,
+          194.5106
+        ]
+      },
+      {
+        "CompletedSeconds": 4.5587204,
+        "Frame": 277200,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          254.1758,
+          250.3243
+        ]
+      },
+      {
+        "CompletedSeconds": 4.8159399,
+        "Frame": 302400,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          131.6313,
+          261.3361
+        ]
+      },
+      {
+        "CompletedSeconds": 5.0508092,
+        "Frame": 327600,
+        "Frames": 25200,
+        "WorkerRenderMilliseconds": [
+          111.6056,
+          240.0569
+        ]
+      }
+    ],
+    "Groups": 2,
+    "Comparison": {
+      "ReportSha256": "AFBF4AB95FE109935ED09E6291B706A730727E34910942FAB9BAF2B5232DA19C",
+      "ChangedSamples": 0,
+      "MaximumPcmDifference": 0,
+      "DifferenceRms": 0.0,
+      "ReferenceWavSha256": "1BE9256376413BE07688B984E1EDF7D017A5E0D7BB9E493F5595868490EA9650"
+    },
+    "Frames": 352800,
+    "MusSha256": "8F4673A3210C9FAFFE7B654F0B8F604A193398809545D9561E142704820035BF",
+    "QueueCapacityPerWorker": 2,
+    "MergeAndPcmSeconds": 0.709834,
+    "QueuePayloadBoundBytes": 1612800,
+    "AudioSecondsPerRenderSecond": 1.5825109436071632
+  },
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "Sources": [
+    {
+      "Path": "src/MusScore.ps1",
+      "Sha256": "66B87D1CDD3FAD62E493A0C50C9A5AEBFE27167C8CCCCA974CC80463B6D1BB33"
+    },
+    {
+      "Path": "src/SoundFontBank.ps1",
+      "Sha256": "AF80287762169B5318F60FD719479137BAED1D3EEF39561513D2B34AC118A855"
+    },
+    {
+      "Path": "src/SoundFontRegions.ps1",
+      "Sha256": "9D409332EB51B5B6FCBC4B259E0C5E243E561A3C0D6AD2040A772F46539B9D8E"
+    },
+    {
+      "Path": "src/MusicOscillator.ps1",
+      "Sha256": "1D7911DC5CD2004D6DBBF27ECF43FFD652FAC8E4813943D9F8CFD5116332417B"
+    },
+    {
+      "Path": "src/MusicControls.ps1",
+      "Sha256": "A90099A6C0150A93B55792755C4BEF98589EFF661748A58C8736E86D1F9968B0"
+    },
+    {
+      "Path": "src/MusicSynth.ps1",
+      "Sha256": "C39A1630875848B0116F9B22A70221C0CDD17DCCAE8AC37F52FA689597A2462D"
+    },
+    {
+      "Path": "src/MusicGroup.ps1",
+      "Sha256": "F8FAED17EDBFFDA3EC7BAEE9555998C649DA31ABB8AA8730ADAA4B4BFB1170F4"
+    },
+    {
+      "Path": "src/AudioMixer.ps1",
+      "Sha256": "F6227640C7AD799B5E7D486B70752E680EF074881EB6B795BC087970BEB8C990"
+    },
+    {
+      "Path": "scripts/Invoke-MusicGroupWorker.ps1",
+      "Sha256": "395E3A0B858B65342AE510A682DFF4FA2D41E303529971ED9F4496C93CAC9998"
+    },
+    {
+      "Path": "scripts/Render-MusicGroups.ps1",
+      "Sha256": "E6E4585368001CA99A8252B02330840F758A8BC8C2121A925B68AAC695EC7585"
+    }
+  ],
+  "PowerShell": "7.6.5"
+}
