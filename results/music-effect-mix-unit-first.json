@@ -1,0 +1,44 @@
+{
+  "SourceSha256": "C8B63D3E491C61F4A1BA85A32ECC5743DF317F5AC0AEB18D4D6D218E05998258",
+  "Error": null,
+  "Checks": [
+    {
+      "Name": "Music alone uses explicit gain and ties-to-even PCM",
+      "Passed": true
+    },
+    {
+      "Name": "Opposing music cancels loud effects before clipping",
+      "Passed": true
+    },
+    {
+      "Name": "Combined clipping is counted once per sample",
+      "Passed": true
+    },
+    {
+      "Name": "Paused combined mixer is silent without advancing effects",
+      "Passed": true
+    },
+    {
+      "Name": "Wrong music span is rejected before state advances",
+      "Passed": true
+    },
+    {
+      "Name": "NaN music rejected before state advances",
+      "Passed": true
+    },
+    {
+      "Name": "Rejected layers leave effects and frame unchanged",
+      "Passed": true
+    },
+    {
+      "Name": "Effects volume and explicit music gain are independent",
+      "Passed": true
+    },
+    {
+      "Name": "Combined conversion retains asymmetric rounding boundaries",
+      "Passed": true
+    }
+  ],
+  "ScriptSha256": "8515E15E57D125AF1A0EA3C2CE7AC92AEBFBB5C3BE0E73BFA3161EBB37D71A78",
+  "Meaning": "Synthetic unquantized effects/music combination with one final PCM conversion; distinct gains, pause, validation and clipping. Does not qualify device or host integration."
+}

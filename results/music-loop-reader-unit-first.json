@@ -1,0 +1,69 @@
+{
+  "FixtureDirectory": "C:\\projects\\pwshDoom\\local\\loop-reader-test-d27311330f734a54b784c0bcd7cfe0a9",
+  "Checks": [
+    {
+      "Name": "Playback file cannot be opened for writing while reader holds it",
+      "Passed": true
+    },
+    {
+      "Name": "Intro then multiple loop boundaries preserve every sample",
+      "Passed": true
+    },
+    {
+      "Name": "Paused loop is silent and freezes position",
+      "Passed": true
+    },
+    {
+      "Name": "Resume continues at the retained position",
+      "Passed": true
+    },
+    {
+      "Name": "Seven-day position uses exact integer loop mapping",
+      "Passed": true
+    },
+    {
+      "Name": "Reader retains one bounded decoded page",
+      "Passed": true
+    },
+    {
+      "Name": "Negative cursor rejected",
+      "Passed": true
+    },
+    {
+      "Name": "Cursor overflow rejected",
+      "Passed": true
+    },
+    {
+      "Name": "Closed reader rejected",
+      "Passed": true
+    },
+    {
+      "Name": "Close releases playback file handles",
+      "Passed": true
+    },
+    {
+      "Name": "Unqualified report rejected",
+      "Passed": true
+    },
+    {
+      "Name": "Changed synthesis source rejected",
+      "Passed": true
+    },
+    {
+      "Name": "Inconsistent state evidence rejected",
+      "Passed": true
+    },
+    {
+      "Name": "Corrupt loop rejected at open",
+      "Passed": true
+    },
+    {
+      "Name": "Failed open releases earlier handles",
+      "Passed": true
+    }
+  ],
+  "ScriptSha256": "628C34023861EEF17C244E903E37219AFB73758BE1E87A4EC1C066A8B029CCC4",
+  "SourceSha256": "CF8C9D49A964F3A3E5AC02190622DBF40A26DE42CED825C0799FB0209DCC0A28",
+  "Error": null,
+  "Meaning": "Reader-only synthetic receipt and samples: intro/loop mapping, pause, long positions, bounded pages, file locking and rejection/cleanup. The fabricated receipt is test data and proves no real synthesizer loop."
+}

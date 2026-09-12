@@ -22,6 +22,8 @@ Warm hits skip bank decoding and synthesis when enough chunks already exist. Act
 
 Indefinite reuse needs a qualified periodic state boundary or another explicit continuation strategy. Matching a few repeated audio samples would be insufficient evidence of identical future synthesis state. First-use preparation, bounded background production, map transitions, save/load, pause, volume, effects integration and actual device output are release work still to do.
 
+The subsequent [E1M1 loop qualification](music-loops.md) now proves matching normalized state at three boundaries and exact full second/third-period output for the pinned dry model. It provides a separate bounded intro/loop reader; this finite-prefix format itself retains its explicit exhaustion behavior. Other tracks and live integration remain open.
+
 ## Initial checks
 
 `music-cache-unit-first.json` passes 22 checks: exact sample reads, pause/resume, cross-chunk copies, explicit exhaustion with unchanged cursor, writer exclusion, partial/orphan recovery, immutable reader snapshots, identity separation, corruption and truncation rejection. These use synthetic data and ordinary file APIs.

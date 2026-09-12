@@ -38,10 +38,14 @@ function Remove-DoomAudioSource {
     for($i=$Mixer.Voices.Count-1;$i -ge 0;$i--){if($Mixer.Voices[$i].Source -eq $Source){$Mixer.Voices.RemoveAt($i)}}
 }
 function Read-DoomAudioFrames {
-    param($Mixer,[ValidateRange(1,48000)][int]$Frames)
+    param($Mixer,[ValidateRange(1,48000)][int]$Frames,[double[]]$Music,[ValidateRange(0,1)][double]$MusicGain=.2)
+    if($null -ne $Music){
+        if($Music.Length -ne $Frames*2){throw 'Music layer must contain exactly the requested stereo frames.'}
+        foreach($value in $Music){if(-not ($value -le [double]::MaxValue -and $value -ge -[double]::MaxValue)){throw 'Nonfinite music layer sample.'}}
+    }
     [int16[]]$pcm=[int16[]]::new($Frames*2)
     if($Mixer.Paused){return ,$pcm}
-    if($Mixer.Voices.Count -eq 0){$Mixer.Frames+=$Frames;return ,$pcm}
+    if($Mixer.Voices.Count -eq 0 -and $null -eq $Music){$Mixer.Frames+=$Frames;return ,$pcm}
     [double[]]$mix=[double[]]::new($Frames*2)
     foreach($voice in $Mixer.Voices){
         [single[]]$samples=$voice.Clip.Samples;[double]$position=$voice.Position;[double]$step=$voice.Step
@@ -54,6 +58,9 @@ function Read-DoomAudioFrames {
         }
         $voice.Position=$position
     }
+    # Add the unquantized music layer after effects; saturate the combined result once.
+    # Effects volume and music gain are separate; the caller applies any shared master control.
+    if($null -ne $Music){for([int]$i=0;$i -lt $mix.Length;$i++){$mix[$i]+=$Music[$i]*$MusicGain}}
     for([int]$i=0;$i -lt $pcm.Length;$i++){
         # PowerShell's numeric cast rounds to even. Test the rounding boundaries
         # before casting: -32768.5 rounds to valid -32768, +32767.5 overflows.

@@ -1,0 +1,96 @@
+{
+  "FinishedUtc": "2026-09-12T11:05:46.3880773Z",
+  "Checks": [
+    {
+      "Passed": true,
+      "Name": "DMX header/padding/unsigned conversion"
+    },
+    {
+      "Passed": true,
+      "Name": "Explicit unpadded decoding"
+    },
+    {
+      "Passed": true,
+      "Name": "Reject malformed DMX short"
+    },
+    {
+      "Passed": true,
+      "Name": "Reject malformed DMX format"
+    },
+    {
+      "Passed": true,
+      "Name": "Reject malformed DMX rate"
+    },
+    {
+      "Passed": true,
+      "Name": "Reject malformed DMX count"
+    },
+    {
+      "Passed": true,
+      "Name": "Reject malformed DMX minimum"
+    },
+    {
+      "Passed": true,
+      "Name": "Independent half-rate interpolation/tail/silence values"
+    },
+    {
+      "Passed": true,
+      "Name": "Completed voice removed"
+    },
+    {
+      "Passed": true,
+      "Name": "PCM is invariant to block boundaries"
+    },
+    {
+      "Passed": true,
+      "Name": "Overlapping channels saturate without signed wrap"
+    },
+    {
+      "Passed": true,
+      "Name": "To-even cast and asymmetric saturation boundaries"
+    },
+    {
+      "Passed": true,
+      "Name": "Pause emits silence without advancing voice"
+    },
+    {
+      "Passed": true,
+      "Name": "Mute emits silence while advancing voice"
+    },
+    {
+      "Passed": true,
+      "Name": "Same emitter/group replaces prior voice"
+    },
+    {
+      "Passed": true,
+      "Name": "Voice limit replaces oldest rather than growing"
+    },
+    {
+      "Passed": true,
+      "Name": "Stop emitter preserves other emitters"
+    },
+    {
+      "Passed": true,
+      "Name": "Front is centered and near field is full gain"
+    },
+    {
+      "Passed": true,
+      "Name": "Left/right cardinal pans have correct handedness"
+    },
+    {
+      "Passed": true,
+      "Name": "Cutoff emits no energy"
+    },
+    {
+      "Passed": true,
+      "Name": "Mid attenuation point is half volume"
+    },
+    {
+      "Passed": true,
+      "Name": "Listener rotation changes pan"
+    }
+  ],
+  "Meaning": "Deterministic synthetic DMX/PCM tests with explicit reference sample values, stereo geometry, voice lifecycle and block partitioning. No device playback or vanilla audio equivalence claim.",
+  "SourceSha256": "C8B63D3E491C61F4A1BA85A32ECC5743DF317F5AC0AEB18D4D6D218E05998258",
+  "Error": null
+}

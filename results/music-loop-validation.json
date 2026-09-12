@@ -1,0 +1,123 @@
+{
+  "ScriptSha256": "031B9768653BE9FDE46AD9E9C11D03EB997AAC15E3B9725B89A216AB29539C4E",
+  "Error": null,
+  "Details": {
+    "MaximumBlockMilliseconds": 50.1123,
+    "ReferencePcmSha256": "E5C7539145FD3005C0BEBF10EF96C7EA5851231B73AD97C65536CE62AC02F03B",
+    "DiskBytesRead": 270950400,
+    "PeriodHashes": [
+      "B2B9EF7E205C89DC3391F7C7D0DD8F5A7BFC354BC1CA1D119EBD4246778F033B",
+      "4C068351C46CD40E5FF90DE7B79680C0C5CDA91F4BF59F0AB1947B10F7F12A86",
+      "4C068351C46CD40E5FF90DE7B79680C0C5CDA91F4BF59F0AB1947B10F7F12A86",
+      "4C068351C46CD40E5FF90DE7B79680C0C5CDA91F4BF59F0AB1947B10F7F12A86"
+    ],
+    "ReadHashAndPartialPcmSeconds": 2.736834,
+    "Frames": 16934400
+  },
+  "Checks": [
+    {
+      "Name": "music-loop-state-unit-first checks pass",
+      "Passed": true
+    },
+    {
+      "Name": "State unit source current: src/MusScore.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "State unit source current: src/SoundFontRegions.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "State unit source current: src/MusicOscillator.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "State unit source current: src/MusicControls.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "State unit source current: src/MusicSynth.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "State unit source current: src/MusicGroup.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "State unit source current: src/MusicLoopState.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "music-loop-reader-unit-first checks pass",
+      "Passed": true
+    },
+    {
+      "Name": "MusicLoopReader unit source is current",
+      "Passed": true
+    },
+    {
+      "Name": "music-effect-mix-unit-first checks pass",
+      "Passed": true
+    },
+    {
+      "Name": "AudioMixer unit source is current",
+      "Passed": true
+    },
+    {
+      "Name": "Full E1M1 qualification succeeded without source drift",
+      "Passed": true
+    },
+    {
+      "Name": "Qualifier script is current",
+      "Passed": true
+    },
+    {
+      "Name": "Loop states retain 35 live voices and exact component hashes",
+      "Passed": true
+    },
+    {
+      "Name": "Original PCM/WAV evidence agrees with qualification",
+      "Passed": true
+    },
+    {
+      "Name": "Reader period 0 reproduces every float byte",
+      "Passed": true
+    },
+    {
+      "Name": "Reader period 1 reproduces every float byte",
+      "Passed": true
+    },
+    {
+      "Name": "Reader period 2 reproduces every float byte",
+      "Passed": true
+    },
+    {
+      "Name": "Reader period 3 reproduces every float byte",
+      "Passed": true
+    },
+    {
+      "Name": "Combined effects mixer preserves complete 98-second music reference",
+      "Passed": true
+    },
+    {
+      "Name": "Loop reader retains bounded page after four periods",
+      "Passed": true
+    },
+    {
+      "Name": "Loop reader closes all playback files",
+      "Passed": true
+    }
+  ],
+  "QualificationSha256": "DD3734A2154D974A3108113AE5B9414D4FFD65DB854E2DF11E1E335A4D1EDF54",
+  "Sources": [
+    {
+      "Sha256": "CF8C9D49A964F3A3E5AC02190622DBF40A26DE42CED825C0799FB0209DCC0A28",
+      "Path": "src/MusicLoopReader.ps1"
+    },
+    {
+      "Sha256": "C8B63D3E491C61F4A1BA85A32ECC5743DF317F5AC0AEB18D4D6D218E05998258",
+      "Path": "src/AudioMixer.ps1"
+    }
+  ],
+  "Meaning": "Real pinned E1M1 state/output qualification plus four periods of bounded cached reads, exact full float comparison and canonical first-98-second PCM through the combined effects mixer. Unpaced offline timing; fourth period is justified by normalized state recurrence, not a separately synthesized fourth reference. No device/host qualification."
+}
