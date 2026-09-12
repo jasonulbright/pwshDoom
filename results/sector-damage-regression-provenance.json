@@ -1,0 +1,16 @@
+{
+  "BundleSha256": "A6FDAF0DEA303FF583AFB7AD33B31308F4D54DFE454A8D3D85D6B7AAE7E47C08",
+  "E1M1CommandsEqual": true,
+  "Meaning": "Post-sector-damage regression source/report pins. E1M1 command arrays and all recorded transition fields match the earlier session receipt; neither report is a per-tic world-state equivalence test.",
+  "E1M1TransitionsEqual": true,
+  "E1M1ReferenceSha256": "59F61534F987D3459446F259351AB894D12FECADF3149D76687AA38F9CD708E0",
+  "Hashes": {
+    "results/e1m2-qualified-sector-damage.json": "1A9A587953C4D41DFD76E3A6B3D87405DEF01F116619D2FA8D86E3E44D5477EE",
+    "scripts/Test-SessionProgression.ps1": "7B9719841FBAB34CC41C59FD37F13F64F60F2F07D1E73173808D0841F8592996",
+    "scripts/Test-SectorDamage.ps1": "2E9B0F9A5C00B95F133ED6AB8C259FACB1CE9D17562D9772884C7FAF7CA65063",
+    "scripts/Qualify-CampaignRoute.ps1": "80400257A58D8AA9ABD1EE6E8C5C7AFB11FBDEE972D244AA2B5786B2C3FF290F",
+    "results/sector-damage-after.json": "5AC067E8C5E38B4E70173B0201EA1DBCD6A62723C6EAEF5506EA514B1E67E7DC",
+    "src/ManagedDoom/Doom/World/PlayerBehavior.sb.ps1": "8BEF2DB3279229F23C275DB74B3F715834200CBC22631B8050B05D31D3273AE4",
+    "results/e1m1-session-sector-damage.json": "03E2D60BCBDE0F7D8C687CB0C8FD097386DAB93D5500C4C1640EEAF14D557BE8"
+  }
+}

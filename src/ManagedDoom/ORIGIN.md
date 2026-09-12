@@ -82,3 +82,18 @@ for discovery, without 3D pixel rasterization, and its automap/HUD renderers for
 map screens with a presentation-only HUD cache.
 Further adaptations and validation are recorded in `docs/ledger.md` at the
 repository root. This attribution does not claim vanilla compatibility.
+
+Modifications, 2026-09-12 (damaging floors and stairs):
+
+- `PlayerBehavior.PlayerInSpecialSector`: select the existing type-4 damage
+  branch for type 16 as well. The adopted empty case incorrectly relied on
+  C-style switch fallthrough. The authored PowerShell repair restores the
+  shared hazard semantics and radiation-suit RNG ordering. All 512 focused
+  real-object assertions pass; E1M1/E1M2 input regressions remain successful.
+  See `docs/sector-damage.md` at the repository root for references and limits.
+- `SectorAction.BuildStairs`: parenthesize the two-sided bitwise flag test
+  before comparing with zero. The adopted precedence error failed to skip
+  one-sided boundaries and crashed the ordinary E1M3 exit-stair trigger.
+  Both direct staircase variants reproduce before repair; all 86 focused
+  construction, retrigger and floor-completion checks pass afterward.
+  See `docs/stair-building.md` at the repository root.

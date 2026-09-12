@@ -1,0 +1,25 @@
+{
+  "Checks": [
+    {
+      "Actual": 14,
+      "Name": "Build8 trigger tag",
+      "Passed": true,
+      "Expected": 14
+    },
+    {
+      "Actual": 14,
+      "Name": "Turbo16 trigger tag",
+      "Passed": true,
+      "Expected": 14
+    }
+  ],
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "Errors": [
+    "Build8: The property 'Number' cannot be found on this object. Verify that the property exists.\nat BuildStairs, C:\\projects\\pwshDoom\\local\\engine-bundle.ps1: line 26734\r\nat <ScriptBlock>, C:\\projects\\pwshDoom\\scripts\\Test-StairBuild.ps1: line 21",
+    "Turbo16: The property 'Number' cannot be found on this object. Verify that the property exists.\nat BuildStairs, C:\\projects\\pwshDoom\\local\\engine-bundle.ps1: line 26734\r\nat <ScriptBlock>, C:\\projects\\pwshDoom\\scripts\\Test-StairBuild.ps1: line 21"
+  ],
+  "Passed": false,
+  "ActionSourceSha256": "D9739A7B76702FDC7286F432544B09CEFB25D1602832911928D2C62B1077633B",
+  "HarnessSha256": "32FF23529CC6EBC7C25A75C2A8A71601FF0C5BBE8B8B8B683E40274B0F4CAEA0",
+  "Meaning": "Real installed E1M3 direct staircase fixture, both step types, destinations/speeds, active retrigger rejection and bounded actual floor thinker completion. No ordinary-input campaign or live performance claim."
+}

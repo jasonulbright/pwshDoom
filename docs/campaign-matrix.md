@@ -16,7 +16,7 @@ The integrated host also loads an intermission save, advances to E1M2, then load
 | --- | --- | --- | --- |
 | E1M1 | Pass | Pass, HMP | Pass: real intermission -> E1M2 |
 | E1M2 | Pass | Pass, HMP pistol start, normal exit | Pass: recorded AnsiArt intermission -> E1M3, 13 matching checkpoints |
-| E1M3 | Pass | Untested | Untested in terminal host |
+| E1M3 | Pass | Pass, HMP pistol start, normal exit; [evidence](campaign-e1m3.md) | Headless intermission -> E1M4 passes 198 samples/24 checkpoints; terminal host untested |
 | E1M4 | Pass | Untested | Untested in terminal host |
 | E1M5 | Pass | Untested | Untested in terminal host |
 | E1M6 | Pass | Untested | Untested in terminal host |

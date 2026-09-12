@@ -1359,7 +1359,7 @@ class SectorAction {
 
                 for ($i = 0; $i -lt $sector.Lines.Length; $i++)
                 {
-                    if (($sector.Lines[$i]).Flags -band [LineFlags]::TwoSided -eq 0)
+                    if ((($sector.Lines[$i]).Flags -band [LineFlags]::TwoSided) -eq 0)
                     {
                         continue
                     }

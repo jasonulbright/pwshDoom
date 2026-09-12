@@ -1,0 +1,526 @@
+{
+  "HarnessSha256": "32FF23529CC6EBC7C25A75C2A8A71601FF0C5BBE8B8B8B683E40274B0F4CAEA0",
+  "Checks": [
+    {
+      "Actual": 14,
+      "Expected": 14,
+      "Passed": true,
+      "Name": "Build8 trigger tag"
+    },
+    {
+      "Actual": true,
+      "Expected": true,
+      "Passed": true,
+      "Name": "Build8 creates staircase"
+    },
+    {
+      "Actual": 56.0,
+      "Expected": 56,
+      "Passed": true,
+      "Name": "Build8 sector 16 destination"
+    },
+    {
+      "Actual": 0.25,
+      "Expected": 0.25,
+      "Passed": true,
+      "Name": "Build8 sector 16 speed"
+    },
+    {
+      "Actual": 64.0,
+      "Expected": 64,
+      "Passed": true,
+      "Name": "Build8 sector 17 destination"
+    },
+    {
+      "Actual": 0.25,
+      "Expected": 0.25,
+      "Passed": true,
+      "Name": "Build8 sector 17 speed"
+    },
+    {
+      "Actual": 72.0,
+      "Expected": 72,
+      "Passed": true,
+      "Name": "Build8 sector 18 destination"
+    },
+    {
+      "Actual": 0.25,
+      "Expected": 0.25,
+      "Passed": true,
+      "Name": "Build8 sector 18 speed"
+    },
+    {
+      "Actual": 80.0,
+      "Expected": 80,
+      "Passed": true,
+      "Name": "Build8 sector 19 destination"
+    },
+    {
+      "Actual": 0.25,
+      "Expected": 0.25,
+      "Passed": true,
+      "Name": "Build8 sector 19 speed"
+    },
+    {
+      "Actual": 88.0,
+      "Expected": 88,
+      "Passed": true,
+      "Name": "Build8 sector 8 destination"
+    },
+    {
+      "Actual": 0.25,
+      "Expected": 0.25,
+      "Passed": true,
+      "Name": "Build8 sector 8 speed"
+    },
+    {
+      "Actual": 96.0,
+      "Expected": 96,
+      "Passed": true,
+      "Name": "Build8 sector 9 destination"
+    },
+    {
+      "Actual": 0.25,
+      "Expected": 0.25,
+      "Passed": true,
+      "Name": "Build8 sector 9 speed"
+    },
+    {
+      "Actual": 104.0,
+      "Expected": 104,
+      "Passed": true,
+      "Name": "Build8 sector 10 destination"
+    },
+    {
+      "Actual": 0.25,
+      "Expected": 0.25,
+      "Passed": true,
+      "Name": "Build8 sector 10 speed"
+    },
+    {
+      "Actual": 112.0,
+      "Expected": 112,
+      "Passed": true,
+      "Name": "Build8 sector 11 destination"
+    },
+    {
+      "Actual": 0.25,
+      "Expected": 0.25,
+      "Passed": true,
+      "Name": "Build8 sector 11 speed"
+    },
+    {
+      "Actual": 120.0,
+      "Expected": 120,
+      "Passed": true,
+      "Name": "Build8 sector 12 destination"
+    },
+    {
+      "Actual": 0.25,
+      "Expected": 0.25,
+      "Passed": true,
+      "Name": "Build8 sector 12 speed"
+    },
+    {
+      "Actual": 128.0,
+      "Expected": 128,
+      "Passed": true,
+      "Name": "Build8 sector 13 destination"
+    },
+    {
+      "Actual": 0.25,
+      "Expected": 0.25,
+      "Passed": true,
+      "Name": "Build8 sector 13 speed"
+    },
+    {
+      "Actual": false,
+      "Expected": false,
+      "Passed": true,
+      "Name": "Build8 active staircase ignores retrigger"
+    },
+    {
+      "Actual": 56.0,
+      "Expected": 56,
+      "Passed": true,
+      "Name": "Build8 sector 16 final height"
+    },
+    {
+      "Actual": true,
+      "Expected": true,
+      "Passed": true,
+      "Name": "Build8 sector 16 releases ownership"
+    },
+    {
+      "Actual": 64.0,
+      "Expected": 64,
+      "Passed": true,
+      "Name": "Build8 sector 17 final height"
+    },
+    {
+      "Actual": true,
+      "Expected": true,
+      "Passed": true,
+      "Name": "Build8 sector 17 releases ownership"
+    },
+    {
+      "Actual": 72.0,
+      "Expected": 72,
+      "Passed": true,
+      "Name": "Build8 sector 18 final height"
+    },
+    {
+      "Actual": true,
+      "Expected": true,
+      "Passed": true,
+      "Name": "Build8 sector 18 releases ownership"
+    },
+    {
+      "Actual": 80.0,
+      "Expected": 80,
+      "Passed": true,
+      "Name": "Build8 sector 19 final height"
+    },
+    {
+      "Actual": true,
+      "Expected": true,
+      "Passed": true,
+      "Name": "Build8 sector 19 releases ownership"
+    },
+    {
+      "Actual": 88.0,
+      "Expected": 88,
+      "Passed": true,
+      "Name": "Build8 sector 8 final height"
+    },
+    {
+      "Actual": true,
+      "Expected": true,
+      "Passed": true,
+      "Name": "Build8 sector 8 releases ownership"
+    },
+    {
+      "Actual": 96.0,
+      "Expected": 96,
+      "Passed": true,
+      "Name": "Build8 sector 9 final height"
+    },
+    {
+      "Actual": true,
+      "Expected": true,
+      "Passed": true,
+      "Name": "Build8 sector 9 releases ownership"
+    },
+    {
+      "Actual": 104.0,
+      "Expected": 104,
+      "Passed": true,
+      "Name": "Build8 sector 10 final height"
+    },
+    {
+      "Actual": true,
+      "Expected": true,
+      "Passed": true,
+      "Name": "Build8 sector 10 releases ownership"
+    },
+    {
+      "Actual": 112.0,
+      "Expected": 112,
+      "Passed": true,
+      "Name": "Build8 sector 11 final height"
+    },
+    {
+      "Actual": true,
+      "Expected": true,
+      "Passed": true,
+      "Name": "Build8 sector 11 releases ownership"
+    },
+    {
+      "Actual": 120.0,
+      "Expected": 120,
+      "Passed": true,
+      "Name": "Build8 sector 12 final height"
+    },
+    {
+      "Actual": true,
+      "Expected": true,
+      "Passed": true,
+      "Name": "Build8 sector 12 releases ownership"
+    },
+    {
+      "Actual": 128.0,
+      "Expected": 128,
+      "Passed": true,
+      "Name": "Build8 sector 13 final height"
+    },
+    {
+      "Actual": true,
+      "Expected": true,
+      "Passed": true,
+      "Name": "Build8 sector 13 releases ownership"
+    },
+    {
+      "Actual": 14,
+      "Expected": 14,
+      "Passed": true,
+      "Name": "Turbo16 trigger tag"
+    },
+    {
+      "Actual": true,
+      "Expected": true,
+      "Passed": true,
+      "Name": "Turbo16 creates staircase"
+    },
+    {
+      "Actual": 64.0,
+      "Expected": 64,
+      "Passed": true,
+      "Name": "Turbo16 sector 16 destination"
+    },
+    {
+      "Actual": 4.0,
+      "Expected": 4.0,
+      "Passed": true,
+      "Name": "Turbo16 sector 16 speed"
+    },
+    {
+      "Actual": 80.0,
+      "Expected": 80,
+      "Passed": true,
+      "Name": "Turbo16 sector 17 destination"
+    },
+    {
+      "Actual": 4.0,
+      "Expected": 4.0,
+      "Passed": true,
+      "Name": "Turbo16 sector 17 speed"
+    },
+    {
+      "Actual": 96.0,
+      "Expected": 96,
+      "Passed": true,
+      "Name": "Turbo16 sector 18 destination"
+    },
+    {
+      "Actual": 4.0,
+      "Expected": 4.0,
+      "Passed": true,
+      "Name": "Turbo16 sector 18 speed"
+    },
+    {
+      "Actual": 112.0,
+      "Expected": 112,
+      "Passed": true,
+      "Name": "Turbo16 sector 19 destination"
+    },
+    {
+      "Actual": 4.0,
+      "Expected": 4.0,
+      "Passed": true,
+      "Name": "Turbo16 sector 19 speed"
+    },
+    {
+      "Actual": 128.0,
+      "Expected": 128,
+      "Passed": true,
+      "Name": "Turbo16 sector 8 destination"
+    },
+    {
+      "Actual": 4.0,
+      "Expected": 4.0,
+      "Passed": true,
+      "Name": "Turbo16 sector 8 speed"
+    },
+    {
+      "Actual": 144.0,
+      "Expected": 144,
+      "Passed": true,
+      "Name": "Turbo16 sector 9 destination"
+    },
+    {
+      "Actual": 4.0,
+      "Expected": 4.0,
+      "Passed": true,
+      "Name": "Turbo16 sector 9 speed"
+    },
+    {
+      "Actual": 160.0,
+      "Expected": 160,
+      "Passed": true,
+      "Name": "Turbo16 sector 10 destination"
+    },
+    {
+      "Actual": 4.0,
+      "Expected": 4.0,
+      "Passed": true,
+      "Name": "Turbo16 sector 10 speed"
+    },
+    {
+      "Actual": 176.0,
+      "Expected": 176,
+      "Passed": true,
+      "Name": "Turbo16 sector 11 destination"
+    },
+    {
+      "Actual": 4.0,
+      "Expected": 4.0,
+      "Passed": true,
+      "Name": "Turbo16 sector 11 speed"
+    },
+    {
+      "Actual": 192.0,
+      "Expected": 192,
+      "Passed": true,
+      "Name": "Turbo16 sector 12 destination"
+    },
+    {
+      "Actual": 4.0,
+      "Expected": 4.0,
+      "Passed": true,
+      "Name": "Turbo16 sector 12 speed"
+    },
+    {
+      "Actual": 208.0,
+      "Expected": 208,
+      "Passed": true,
+      "Name": "Turbo16 sector 13 destination"
+    },
+    {
+      "Actual": 4.0,
+      "Expected": 4.0,
+      "Passed": true,
+      "Name": "Turbo16 sector 13 speed"
+    },
+    {
+      "Actual": false,
+      "Expected": false,
+      "Passed": true,
+      "Name": "Turbo16 active staircase ignores retrigger"
+    },
+    {
+      "Actual": 64.0,
+      "Expected": 64,
+      "Passed": true,
+      "Name": "Turbo16 sector 16 final height"
+    },
+    {
+      "Actual": true,
+      "Expected": true,
+      "Passed": true,
+      "Name": "Turbo16 sector 16 releases ownership"
+    },
+    {
+      "Actual": 80.0,
+      "Expected": 80,
+      "Passed": true,
+      "Name": "Turbo16 sector 17 final height"
+    },
+    {
+      "Actual": true,
+      "Expected": true,
+      "Passed": true,
+      "Name": "Turbo16 sector 17 releases ownership"
+    },
+    {
+      "Actual": 96.0,
+      "Expected": 96,
+      "Passed": true,
+      "Name": "Turbo16 sector 18 final height"
+    },
+    {
+      "Actual": true,
+      "Expected": true,
+      "Passed": true,
+      "Name": "Turbo16 sector 18 releases ownership"
+    },
+    {
+      "Actual": 112.0,
+      "Expected": 112,
+      "Passed": true,
+      "Name": "Turbo16 sector 19 final height"
+    },
+    {
+      "Actual": true,
+      "Expected": true,
+      "Passed": true,
+      "Name": "Turbo16 sector 19 releases ownership"
+    },
+    {
+      "Actual": 128.0,
+      "Expected": 128,
+      "Passed": true,
+      "Name": "Turbo16 sector 8 final height"
+    },
+    {
+      "Actual": true,
+      "Expected": true,
+      "Passed": true,
+      "Name": "Turbo16 sector 8 releases ownership"
+    },
+    {
+      "Actual": 144.0,
+      "Expected": 144,
+      "Passed": true,
+      "Name": "Turbo16 sector 9 final height"
+    },
+    {
+      "Actual": true,
+      "Expected": true,
+      "Passed": true,
+      "Name": "Turbo16 sector 9 releases ownership"
+    },
+    {
+      "Actual": 160.0,
+      "Expected": 160,
+      "Passed": true,
+      "Name": "Turbo16 sector 10 final height"
+    },
+    {
+      "Actual": true,
+      "Expected": true,
+      "Passed": true,
+      "Name": "Turbo16 sector 10 releases ownership"
+    },
+    {
+      "Actual": 176.0,
+      "Expected": 176,
+      "Passed": true,
+      "Name": "Turbo16 sector 11 final height"
+    },
+    {
+      "Actual": true,
+      "Expected": true,
+      "Passed": true,
+      "Name": "Turbo16 sector 11 releases ownership"
+    },
+    {
+      "Actual": 192.0,
+      "Expected": 192,
+      "Passed": true,
+      "Name": "Turbo16 sector 12 final height"
+    },
+    {
+      "Actual": true,
+      "Expected": true,
+      "Passed": true,
+      "Name": "Turbo16 sector 12 releases ownership"
+    },
+    {
+      "Actual": 208.0,
+      "Expected": 208,
+      "Passed": true,
+      "Name": "Turbo16 sector 13 final height"
+    },
+    {
+      "Actual": true,
+      "Expected": true,
+      "Passed": true,
+      "Name": "Turbo16 sector 13 releases ownership"
+    }
+  ],
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "Passed": true,
+  "Errors": [],
+  "ActionSourceSha256": "71DAB3A2FA3FE9A781F64AB6A4CF35433E68C7C4E2D093DC4E15A22EC7DAC3D6",
+  "Meaning": "Real installed E1M3 direct staircase fixture, both step types, destinations/speeds, active retrigger rejection and bounded actual floor thinker completion. No ordinary-input campaign or live performance claim."
+}

@@ -3,12 +3,18 @@
 param([Parameter(Mandatory)][string]$MapGeometry,[Parameter(Mandatory)][double]$StartX,
     [Parameter(Mandatory)][double]$StartY,[Parameter(Mandatory)][double]$EndX,
     [Parameter(Mandatory)][double]$EndY,[Parameter(Mandatory)][string]$Output,
-    [ValidateRange(100,200000)][int]$MaxVisited=100000,[ValidateSet(8,16)][int]$GridSize=8)
+    [ValidateRange(100,200000)][int]$MaxVisited=100000,[ValidateSet(8,16)][int]$GridSize=8,
+    [switch]$AvoidDamagingFloors)
 $ErrorActionPreference='Stop';Set-StrictMode -Version Latest
 if(Test-Path -LiteralPath $Output){throw 'Use a fresh local planning output path.'}
 $map=Get-Content -LiteralPath $MapGeometry -Raw|ConvertFrom-Json
 $obstacles=if($map.PSObject.Properties['Obstacles']){@($map.Obstacles)}else{@()}
-$walls=@($map.Lines|Where-Object {-not $_.TwoSided -or ($_.Flags -band 1) -ne 0})
+$hazards=@{}
+if($AvoidDamagingFloors){foreach($sector in $map.Sectors){if($sector.Special -in 4,5,7,11,16){$hazards[[int]$sector.Index]=$true}}}
+# Treat initial hazard boundaries as walls for this optional conservative planner.
+# Triggered floor changes remain outside this static guidance model.
+$walls=@($map.Lines|Where-Object {-not $_.TwoSided -or ($_.Flags -band 1) -ne 0 -or
+    $hazards.ContainsKey([int]$_.FrontSector) -or ($null -ne $_.BackSector -and $hazards.ContainsKey([int]$_.BackSector))})
 $buckets=@{};$radius=16.1;$cell=$GridSize;$bucket=128
 foreach($wall in $walls){
     $lowX=[int][Math]::Floor(([Math]::Min($wall.X1,$wall.X2)-$radius)/$bucket)
@@ -82,7 +88,7 @@ try{
         if(($b[0]-$a[0])*($c[1]-$b[1]) -ne ($b[1]-$a[1])*($c[0]-$b[0])){$selected.Add($b)}
     };if($points.Count -gt 1){$selected.Add($points[-1])};$waypoints=$selected.ToArray()
 }catch{$failure=$_.ToString()+"`n"+$_.ScriptStackTrace}finally{
-    @{Error=$failure;Found=$found;Waypoints=$waypoints;Visited=$closed.Count;Seconds=$watch.Elapsed.TotalSeconds;Start=@($StartX,$StartY);End=@($EndX,$EndY);GridSize=$cell;Radius=$radius;InitialObstacles=$obstacles.Count;GeometrySha256=(Get-FileHash $MapGeometry).Hash;ScriptSha256=(Get-FileHash $PSCommandPath).Hash;Meaning='PowerShell A* planning with declared grid size and point/midpoint axis-aligned square clearance from blocking linedefs and exported initial solid non-CountKill obstacles. This is planar guidance only: sector heights, dynamic floors, doors, keys, moving actors, damage and timed triggers require actual ordinary-input validation. No engine state is moved or edited.'}|ConvertTo-Json -Depth 5|Set-Content -LiteralPath $Output
+    @{Error=$failure;Found=$found;Waypoints=$waypoints;Visited=$closed.Count;Seconds=$watch.Elapsed.TotalSeconds;Start=@($StartX,$StartY);End=@($EndX,$EndY);GridSize=$cell;Radius=$radius;InitialObstacles=$obstacles.Count;AvoidDamagingFloors=[bool]$AvoidDamagingFloors;HazardSectors=@($hazards.Keys|Sort-Object);GeometrySha256=(Get-FileHash $MapGeometry).Hash;ScriptSha256=(Get-FileHash $PSCommandPath).Hash;Meaning='PowerShell A* planning with declared grid size and point/midpoint axis-aligned square clearance from blocking linedefs and exported initial solid non-CountKill obstacles. Optional initial hazardous-sector boundaries are treated as walls, not a guarantee that endpoints are outside hazards. This is planar guidance only: sector heights, dynamic floors, doors, keys, moving actors, damage and timed triggers require actual ordinary-input validation. No engine state is moved or edited.'}|ConvertTo-Json -Depth 5|Set-Content -LiteralPath $Output
 }
 if($failure){throw $failure}
 $waypoints|ConvertTo-Json -Compress

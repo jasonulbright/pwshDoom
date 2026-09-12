@@ -360,8 +360,8 @@ class PlayerBehavior {
                     $ti.DamageMobj($player.Mobj, $null, $null, 5)
                 }
             }
-            16{}
-            4 {
+            # PowerShell switch has no C-style fallthrough: both hazards share this branch.
+            { $_ -eq 16 -or $_ -eq 4 } {
                 if ($player.Powers[[PowerType]::IronFeet] -eq 0 -or ($this.World.Random.Next() -lt 5)) {
                     if (($this.World.LevelTime -band 0x1f) -eq 0) {
                         $ti.DamageMobj($player.Mobj, $null, $null, 20)

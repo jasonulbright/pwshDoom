@@ -1,0 +1,3083 @@
+{
+  "HarnessSha256": "2E9B0F9A5C00B95F133ED6AB8C259FACB1CE9D17562D9772884C7FAF7CA65063",
+  "Passed": true,
+  "Checks": [
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=5 tic=31 boots=0 airborne=False seed=0 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=5 tic=31 boots=0 airborne=False seed=0 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 0,
+      "Passed": true,
+      "Name": "special=5 tic=31 boots=0 airborne=False seed=0 random index",
+      "Expected": 0
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=5 tic=31 boots=0 airborne=False seed=0 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=5 tic=31 boots=0 airborne=False seed=65 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=5 tic=31 boots=0 airborne=False seed=65 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 65,
+      "Passed": true,
+      "Name": "special=5 tic=31 boots=0 airborne=False seed=65 random index",
+      "Expected": 65
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=5 tic=31 boots=0 airborne=False seed=65 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=5 tic=31 boots=0 airborne=True seed=0 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=5 tic=31 boots=0 airborne=True seed=0 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 0,
+      "Passed": true,
+      "Name": "special=5 tic=31 boots=0 airborne=True seed=0 random index",
+      "Expected": 0
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=5 tic=31 boots=0 airborne=True seed=0 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=5 tic=31 boots=0 airborne=True seed=65 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=5 tic=31 boots=0 airborne=True seed=65 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 65,
+      "Passed": true,
+      "Name": "special=5 tic=31 boots=0 airborne=True seed=65 random index",
+      "Expected": 65
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=5 tic=31 boots=0 airborne=True seed=65 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=5 tic=31 boots=100 airborne=False seed=0 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=5 tic=31 boots=100 airborne=False seed=0 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 0,
+      "Passed": true,
+      "Name": "special=5 tic=31 boots=100 airborne=False seed=0 random index",
+      "Expected": 0
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=5 tic=31 boots=100 airborne=False seed=0 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=5 tic=31 boots=100 airborne=False seed=65 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=5 tic=31 boots=100 airborne=False seed=65 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 65,
+      "Passed": true,
+      "Name": "special=5 tic=31 boots=100 airborne=False seed=65 random index",
+      "Expected": 65
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=5 tic=31 boots=100 airborne=False seed=65 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=5 tic=31 boots=100 airborne=True seed=0 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=5 tic=31 boots=100 airborne=True seed=0 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 0,
+      "Passed": true,
+      "Name": "special=5 tic=31 boots=100 airborne=True seed=0 random index",
+      "Expected": 0
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=5 tic=31 boots=100 airborne=True seed=0 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=5 tic=31 boots=100 airborne=True seed=65 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=5 tic=31 boots=100 airborne=True seed=65 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 65,
+      "Passed": true,
+      "Name": "special=5 tic=31 boots=100 airborne=True seed=65 random index",
+      "Expected": 65
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=5 tic=31 boots=100 airborne=True seed=65 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 90,
+      "Passed": true,
+      "Name": "special=5 tic=32 boots=0 airborne=False seed=0 health",
+      "Expected": 90
+    },
+    {
+      "Actual": 90,
+      "Passed": true,
+      "Name": "special=5 tic=32 boots=0 airborne=False seed=0 actor health",
+      "Expected": 90
+    },
+    {
+      "Actual": 1,
+      "Passed": true,
+      "Name": "special=5 tic=32 boots=0 airborne=False seed=0 random index",
+      "Expected": 1
+    },
+    {
+      "Actual": true,
+      "Passed": true,
+      "Name": "special=5 tic=32 boots=0 airborne=False seed=0 damage source",
+      "Expected": true
+    },
+    {
+      "Actual": 90,
+      "Passed": true,
+      "Name": "special=5 tic=32 boots=0 airborne=False seed=65 health",
+      "Expected": 90
+    },
+    {
+      "Actual": 90,
+      "Passed": true,
+      "Name": "special=5 tic=32 boots=0 airborne=False seed=65 actor health",
+      "Expected": 90
+    },
+    {
+      "Actual": 66,
+      "Passed": true,
+      "Name": "special=5 tic=32 boots=0 airborne=False seed=65 random index",
+      "Expected": 66
+    },
+    {
+      "Actual": true,
+      "Passed": true,
+      "Name": "special=5 tic=32 boots=0 airborne=False seed=65 damage source",
+      "Expected": true
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=5 tic=32 boots=0 airborne=True seed=0 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=5 tic=32 boots=0 airborne=True seed=0 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 0,
+      "Passed": true,
+      "Name": "special=5 tic=32 boots=0 airborne=True seed=0 random index",
+      "Expected": 0
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=5 tic=32 boots=0 airborne=True seed=0 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=5 tic=32 boots=0 airborne=True seed=65 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=5 tic=32 boots=0 airborne=True seed=65 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 65,
+      "Passed": true,
+      "Name": "special=5 tic=32 boots=0 airborne=True seed=65 random index",
+      "Expected": 65
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=5 tic=32 boots=0 airborne=True seed=65 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=5 tic=32 boots=100 airborne=False seed=0 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=5 tic=32 boots=100 airborne=False seed=0 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 0,
+      "Passed": true,
+      "Name": "special=5 tic=32 boots=100 airborne=False seed=0 random index",
+      "Expected": 0
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=5 tic=32 boots=100 airborne=False seed=0 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=5 tic=32 boots=100 airborne=False seed=65 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=5 tic=32 boots=100 airborne=False seed=65 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 65,
+      "Passed": true,
+      "Name": "special=5 tic=32 boots=100 airborne=False seed=65 random index",
+      "Expected": 65
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=5 tic=32 boots=100 airborne=False seed=65 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=5 tic=32 boots=100 airborne=True seed=0 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=5 tic=32 boots=100 airborne=True seed=0 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 0,
+      "Passed": true,
+      "Name": "special=5 tic=32 boots=100 airborne=True seed=0 random index",
+      "Expected": 0
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=5 tic=32 boots=100 airborne=True seed=0 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=5 tic=32 boots=100 airborne=True seed=65 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=5 tic=32 boots=100 airborne=True seed=65 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 65,
+      "Passed": true,
+      "Name": "special=5 tic=32 boots=100 airborne=True seed=65 random index",
+      "Expected": 65
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=5 tic=32 boots=100 airborne=True seed=65 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=5 tic=33 boots=0 airborne=False seed=0 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=5 tic=33 boots=0 airborne=False seed=0 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 0,
+      "Passed": true,
+      "Name": "special=5 tic=33 boots=0 airborne=False seed=0 random index",
+      "Expected": 0
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=5 tic=33 boots=0 airborne=False seed=0 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=5 tic=33 boots=0 airborne=False seed=65 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=5 tic=33 boots=0 airborne=False seed=65 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 65,
+      "Passed": true,
+      "Name": "special=5 tic=33 boots=0 airborne=False seed=65 random index",
+      "Expected": 65
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=5 tic=33 boots=0 airborne=False seed=65 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=5 tic=33 boots=0 airborne=True seed=0 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=5 tic=33 boots=0 airborne=True seed=0 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 0,
+      "Passed": true,
+      "Name": "special=5 tic=33 boots=0 airborne=True seed=0 random index",
+      "Expected": 0
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=5 tic=33 boots=0 airborne=True seed=0 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=5 tic=33 boots=0 airborne=True seed=65 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=5 tic=33 boots=0 airborne=True seed=65 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 65,
+      "Passed": true,
+      "Name": "special=5 tic=33 boots=0 airborne=True seed=65 random index",
+      "Expected": 65
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=5 tic=33 boots=0 airborne=True seed=65 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=5 tic=33 boots=100 airborne=False seed=0 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=5 tic=33 boots=100 airborne=False seed=0 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 0,
+      "Passed": true,
+      "Name": "special=5 tic=33 boots=100 airborne=False seed=0 random index",
+      "Expected": 0
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=5 tic=33 boots=100 airborne=False seed=0 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=5 tic=33 boots=100 airborne=False seed=65 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=5 tic=33 boots=100 airborne=False seed=65 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 65,
+      "Passed": true,
+      "Name": "special=5 tic=33 boots=100 airborne=False seed=65 random index",
+      "Expected": 65
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=5 tic=33 boots=100 airborne=False seed=65 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=5 tic=33 boots=100 airborne=True seed=0 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=5 tic=33 boots=100 airborne=True seed=0 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 0,
+      "Passed": true,
+      "Name": "special=5 tic=33 boots=100 airborne=True seed=0 random index",
+      "Expected": 0
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=5 tic=33 boots=100 airborne=True seed=0 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=5 tic=33 boots=100 airborne=True seed=65 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=5 tic=33 boots=100 airborne=True seed=65 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 65,
+      "Passed": true,
+      "Name": "special=5 tic=33 boots=100 airborne=True seed=65 random index",
+      "Expected": 65
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=5 tic=33 boots=100 airborne=True seed=65 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 90,
+      "Passed": true,
+      "Name": "special=5 tic=64 boots=0 airborne=False seed=0 health",
+      "Expected": 90
+    },
+    {
+      "Actual": 90,
+      "Passed": true,
+      "Name": "special=5 tic=64 boots=0 airborne=False seed=0 actor health",
+      "Expected": 90
+    },
+    {
+      "Actual": 1,
+      "Passed": true,
+      "Name": "special=5 tic=64 boots=0 airborne=False seed=0 random index",
+      "Expected": 1
+    },
+    {
+      "Actual": true,
+      "Passed": true,
+      "Name": "special=5 tic=64 boots=0 airborne=False seed=0 damage source",
+      "Expected": true
+    },
+    {
+      "Actual": 90,
+      "Passed": true,
+      "Name": "special=5 tic=64 boots=0 airborne=False seed=65 health",
+      "Expected": 90
+    },
+    {
+      "Actual": 90,
+      "Passed": true,
+      "Name": "special=5 tic=64 boots=0 airborne=False seed=65 actor health",
+      "Expected": 90
+    },
+    {
+      "Actual": 66,
+      "Passed": true,
+      "Name": "special=5 tic=64 boots=0 airborne=False seed=65 random index",
+      "Expected": 66
+    },
+    {
+      "Actual": true,
+      "Passed": true,
+      "Name": "special=5 tic=64 boots=0 airborne=False seed=65 damage source",
+      "Expected": true
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=5 tic=64 boots=0 airborne=True seed=0 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=5 tic=64 boots=0 airborne=True seed=0 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 0,
+      "Passed": true,
+      "Name": "special=5 tic=64 boots=0 airborne=True seed=0 random index",
+      "Expected": 0
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=5 tic=64 boots=0 airborne=True seed=0 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=5 tic=64 boots=0 airborne=True seed=65 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=5 tic=64 boots=0 airborne=True seed=65 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 65,
+      "Passed": true,
+      "Name": "special=5 tic=64 boots=0 airborne=True seed=65 random index",
+      "Expected": 65
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=5 tic=64 boots=0 airborne=True seed=65 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=5 tic=64 boots=100 airborne=False seed=0 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=5 tic=64 boots=100 airborne=False seed=0 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 0,
+      "Passed": true,
+      "Name": "special=5 tic=64 boots=100 airborne=False seed=0 random index",
+      "Expected": 0
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=5 tic=64 boots=100 airborne=False seed=0 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=5 tic=64 boots=100 airborne=False seed=65 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=5 tic=64 boots=100 airborne=False seed=65 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 65,
+      "Passed": true,
+      "Name": "special=5 tic=64 boots=100 airborne=False seed=65 random index",
+      "Expected": 65
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=5 tic=64 boots=100 airborne=False seed=65 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=5 tic=64 boots=100 airborne=True seed=0 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=5 tic=64 boots=100 airborne=True seed=0 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 0,
+      "Passed": true,
+      "Name": "special=5 tic=64 boots=100 airborne=True seed=0 random index",
+      "Expected": 0
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=5 tic=64 boots=100 airborne=True seed=0 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=5 tic=64 boots=100 airborne=True seed=65 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=5 tic=64 boots=100 airborne=True seed=65 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 65,
+      "Passed": true,
+      "Name": "special=5 tic=64 boots=100 airborne=True seed=65 random index",
+      "Expected": 65
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=5 tic=64 boots=100 airborne=True seed=65 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=7 tic=31 boots=0 airborne=False seed=0 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=7 tic=31 boots=0 airborne=False seed=0 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 0,
+      "Passed": true,
+      "Name": "special=7 tic=31 boots=0 airborne=False seed=0 random index",
+      "Expected": 0
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=7 tic=31 boots=0 airborne=False seed=0 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=7 tic=31 boots=0 airborne=False seed=65 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=7 tic=31 boots=0 airborne=False seed=65 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 65,
+      "Passed": true,
+      "Name": "special=7 tic=31 boots=0 airborne=False seed=65 random index",
+      "Expected": 65
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=7 tic=31 boots=0 airborne=False seed=65 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=7 tic=31 boots=0 airborne=True seed=0 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=7 tic=31 boots=0 airborne=True seed=0 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 0,
+      "Passed": true,
+      "Name": "special=7 tic=31 boots=0 airborne=True seed=0 random index",
+      "Expected": 0
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=7 tic=31 boots=0 airborne=True seed=0 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=7 tic=31 boots=0 airborne=True seed=65 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=7 tic=31 boots=0 airborne=True seed=65 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 65,
+      "Passed": true,
+      "Name": "special=7 tic=31 boots=0 airborne=True seed=65 random index",
+      "Expected": 65
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=7 tic=31 boots=0 airborne=True seed=65 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=7 tic=31 boots=100 airborne=False seed=0 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=7 tic=31 boots=100 airborne=False seed=0 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 0,
+      "Passed": true,
+      "Name": "special=7 tic=31 boots=100 airborne=False seed=0 random index",
+      "Expected": 0
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=7 tic=31 boots=100 airborne=False seed=0 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=7 tic=31 boots=100 airborne=False seed=65 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=7 tic=31 boots=100 airborne=False seed=65 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 65,
+      "Passed": true,
+      "Name": "special=7 tic=31 boots=100 airborne=False seed=65 random index",
+      "Expected": 65
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=7 tic=31 boots=100 airborne=False seed=65 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=7 tic=31 boots=100 airborne=True seed=0 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=7 tic=31 boots=100 airborne=True seed=0 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 0,
+      "Passed": true,
+      "Name": "special=7 tic=31 boots=100 airborne=True seed=0 random index",
+      "Expected": 0
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=7 tic=31 boots=100 airborne=True seed=0 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=7 tic=31 boots=100 airborne=True seed=65 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=7 tic=31 boots=100 airborne=True seed=65 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 65,
+      "Passed": true,
+      "Name": "special=7 tic=31 boots=100 airborne=True seed=65 random index",
+      "Expected": 65
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=7 tic=31 boots=100 airborne=True seed=65 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 95,
+      "Passed": true,
+      "Name": "special=7 tic=32 boots=0 airborne=False seed=0 health",
+      "Expected": 95
+    },
+    {
+      "Actual": 95,
+      "Passed": true,
+      "Name": "special=7 tic=32 boots=0 airborne=False seed=0 actor health",
+      "Expected": 95
+    },
+    {
+      "Actual": 1,
+      "Passed": true,
+      "Name": "special=7 tic=32 boots=0 airborne=False seed=0 random index",
+      "Expected": 1
+    },
+    {
+      "Actual": true,
+      "Passed": true,
+      "Name": "special=7 tic=32 boots=0 airborne=False seed=0 damage source",
+      "Expected": true
+    },
+    {
+      "Actual": 95,
+      "Passed": true,
+      "Name": "special=7 tic=32 boots=0 airborne=False seed=65 health",
+      "Expected": 95
+    },
+    {
+      "Actual": 95,
+      "Passed": true,
+      "Name": "special=7 tic=32 boots=0 airborne=False seed=65 actor health",
+      "Expected": 95
+    },
+    {
+      "Actual": 66,
+      "Passed": true,
+      "Name": "special=7 tic=32 boots=0 airborne=False seed=65 random index",
+      "Expected": 66
+    },
+    {
+      "Actual": true,
+      "Passed": true,
+      "Name": "special=7 tic=32 boots=0 airborne=False seed=65 damage source",
+      "Expected": true
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=7 tic=32 boots=0 airborne=True seed=0 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=7 tic=32 boots=0 airborne=True seed=0 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 0,
+      "Passed": true,
+      "Name": "special=7 tic=32 boots=0 airborne=True seed=0 random index",
+      "Expected": 0
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=7 tic=32 boots=0 airborne=True seed=0 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=7 tic=32 boots=0 airborne=True seed=65 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=7 tic=32 boots=0 airborne=True seed=65 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 65,
+      "Passed": true,
+      "Name": "special=7 tic=32 boots=0 airborne=True seed=65 random index",
+      "Expected": 65
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=7 tic=32 boots=0 airborne=True seed=65 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=7 tic=32 boots=100 airborne=False seed=0 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=7 tic=32 boots=100 airborne=False seed=0 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 0,
+      "Passed": true,
+      "Name": "special=7 tic=32 boots=100 airborne=False seed=0 random index",
+      "Expected": 0
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=7 tic=32 boots=100 airborne=False seed=0 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=7 tic=32 boots=100 airborne=False seed=65 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=7 tic=32 boots=100 airborne=False seed=65 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 65,
+      "Passed": true,
+      "Name": "special=7 tic=32 boots=100 airborne=False seed=65 random index",
+      "Expected": 65
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=7 tic=32 boots=100 airborne=False seed=65 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=7 tic=32 boots=100 airborne=True seed=0 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=7 tic=32 boots=100 airborne=True seed=0 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 0,
+      "Passed": true,
+      "Name": "special=7 tic=32 boots=100 airborne=True seed=0 random index",
+      "Expected": 0
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=7 tic=32 boots=100 airborne=True seed=0 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=7 tic=32 boots=100 airborne=True seed=65 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=7 tic=32 boots=100 airborne=True seed=65 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 65,
+      "Passed": true,
+      "Name": "special=7 tic=32 boots=100 airborne=True seed=65 random index",
+      "Expected": 65
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=7 tic=32 boots=100 airborne=True seed=65 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=7 tic=33 boots=0 airborne=False seed=0 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=7 tic=33 boots=0 airborne=False seed=0 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 0,
+      "Passed": true,
+      "Name": "special=7 tic=33 boots=0 airborne=False seed=0 random index",
+      "Expected": 0
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=7 tic=33 boots=0 airborne=False seed=0 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=7 tic=33 boots=0 airborne=False seed=65 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=7 tic=33 boots=0 airborne=False seed=65 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 65,
+      "Passed": true,
+      "Name": "special=7 tic=33 boots=0 airborne=False seed=65 random index",
+      "Expected": 65
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=7 tic=33 boots=0 airborne=False seed=65 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=7 tic=33 boots=0 airborne=True seed=0 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=7 tic=33 boots=0 airborne=True seed=0 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 0,
+      "Passed": true,
+      "Name": "special=7 tic=33 boots=0 airborne=True seed=0 random index",
+      "Expected": 0
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=7 tic=33 boots=0 airborne=True seed=0 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=7 tic=33 boots=0 airborne=True seed=65 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=7 tic=33 boots=0 airborne=True seed=65 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 65,
+      "Passed": true,
+      "Name": "special=7 tic=33 boots=0 airborne=True seed=65 random index",
+      "Expected": 65
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=7 tic=33 boots=0 airborne=True seed=65 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=7 tic=33 boots=100 airborne=False seed=0 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=7 tic=33 boots=100 airborne=False seed=0 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 0,
+      "Passed": true,
+      "Name": "special=7 tic=33 boots=100 airborne=False seed=0 random index",
+      "Expected": 0
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=7 tic=33 boots=100 airborne=False seed=0 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=7 tic=33 boots=100 airborne=False seed=65 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=7 tic=33 boots=100 airborne=False seed=65 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 65,
+      "Passed": true,
+      "Name": "special=7 tic=33 boots=100 airborne=False seed=65 random index",
+      "Expected": 65
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=7 tic=33 boots=100 airborne=False seed=65 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=7 tic=33 boots=100 airborne=True seed=0 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=7 tic=33 boots=100 airborne=True seed=0 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 0,
+      "Passed": true,
+      "Name": "special=7 tic=33 boots=100 airborne=True seed=0 random index",
+      "Expected": 0
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=7 tic=33 boots=100 airborne=True seed=0 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=7 tic=33 boots=100 airborne=True seed=65 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=7 tic=33 boots=100 airborne=True seed=65 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 65,
+      "Passed": true,
+      "Name": "special=7 tic=33 boots=100 airborne=True seed=65 random index",
+      "Expected": 65
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=7 tic=33 boots=100 airborne=True seed=65 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 95,
+      "Passed": true,
+      "Name": "special=7 tic=64 boots=0 airborne=False seed=0 health",
+      "Expected": 95
+    },
+    {
+      "Actual": 95,
+      "Passed": true,
+      "Name": "special=7 tic=64 boots=0 airborne=False seed=0 actor health",
+      "Expected": 95
+    },
+    {
+      "Actual": 1,
+      "Passed": true,
+      "Name": "special=7 tic=64 boots=0 airborne=False seed=0 random index",
+      "Expected": 1
+    },
+    {
+      "Actual": true,
+      "Passed": true,
+      "Name": "special=7 tic=64 boots=0 airborne=False seed=0 damage source",
+      "Expected": true
+    },
+    {
+      "Actual": 95,
+      "Passed": true,
+      "Name": "special=7 tic=64 boots=0 airborne=False seed=65 health",
+      "Expected": 95
+    },
+    {
+      "Actual": 95,
+      "Passed": true,
+      "Name": "special=7 tic=64 boots=0 airborne=False seed=65 actor health",
+      "Expected": 95
+    },
+    {
+      "Actual": 66,
+      "Passed": true,
+      "Name": "special=7 tic=64 boots=0 airborne=False seed=65 random index",
+      "Expected": 66
+    },
+    {
+      "Actual": true,
+      "Passed": true,
+      "Name": "special=7 tic=64 boots=0 airborne=False seed=65 damage source",
+      "Expected": true
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=7 tic=64 boots=0 airborne=True seed=0 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=7 tic=64 boots=0 airborne=True seed=0 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 0,
+      "Passed": true,
+      "Name": "special=7 tic=64 boots=0 airborne=True seed=0 random index",
+      "Expected": 0
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=7 tic=64 boots=0 airborne=True seed=0 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=7 tic=64 boots=0 airborne=True seed=65 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=7 tic=64 boots=0 airborne=True seed=65 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 65,
+      "Passed": true,
+      "Name": "special=7 tic=64 boots=0 airborne=True seed=65 random index",
+      "Expected": 65
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=7 tic=64 boots=0 airborne=True seed=65 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=7 tic=64 boots=100 airborne=False seed=0 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=7 tic=64 boots=100 airborne=False seed=0 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 0,
+      "Passed": true,
+      "Name": "special=7 tic=64 boots=100 airborne=False seed=0 random index",
+      "Expected": 0
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=7 tic=64 boots=100 airborne=False seed=0 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=7 tic=64 boots=100 airborne=False seed=65 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=7 tic=64 boots=100 airborne=False seed=65 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 65,
+      "Passed": true,
+      "Name": "special=7 tic=64 boots=100 airborne=False seed=65 random index",
+      "Expected": 65
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=7 tic=64 boots=100 airborne=False seed=65 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=7 tic=64 boots=100 airborne=True seed=0 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=7 tic=64 boots=100 airborne=True seed=0 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 0,
+      "Passed": true,
+      "Name": "special=7 tic=64 boots=100 airborne=True seed=0 random index",
+      "Expected": 0
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=7 tic=64 boots=100 airborne=True seed=0 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=7 tic=64 boots=100 airborne=True seed=65 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=7 tic=64 boots=100 airborne=True seed=65 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 65,
+      "Passed": true,
+      "Name": "special=7 tic=64 boots=100 airborne=True seed=65 random index",
+      "Expected": 65
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=7 tic=64 boots=100 airborne=True seed=65 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=4 tic=31 boots=0 airborne=False seed=0 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=4 tic=31 boots=0 airborne=False seed=0 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 0,
+      "Passed": true,
+      "Name": "special=4 tic=31 boots=0 airborne=False seed=0 random index",
+      "Expected": 0
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=4 tic=31 boots=0 airborne=False seed=0 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=4 tic=31 boots=0 airborne=False seed=65 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=4 tic=31 boots=0 airborne=False seed=65 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 65,
+      "Passed": true,
+      "Name": "special=4 tic=31 boots=0 airborne=False seed=65 random index",
+      "Expected": 65
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=4 tic=31 boots=0 airborne=False seed=65 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=4 tic=31 boots=0 airborne=True seed=0 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=4 tic=31 boots=0 airborne=True seed=0 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 0,
+      "Passed": true,
+      "Name": "special=4 tic=31 boots=0 airborne=True seed=0 random index",
+      "Expected": 0
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=4 tic=31 boots=0 airborne=True seed=0 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=4 tic=31 boots=0 airborne=True seed=65 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=4 tic=31 boots=0 airborne=True seed=65 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 65,
+      "Passed": true,
+      "Name": "special=4 tic=31 boots=0 airborne=True seed=65 random index",
+      "Expected": 65
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=4 tic=31 boots=0 airborne=True seed=65 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=4 tic=31 boots=100 airborne=False seed=0 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=4 tic=31 boots=100 airborne=False seed=0 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 1,
+      "Passed": true,
+      "Name": "special=4 tic=31 boots=100 airborne=False seed=0 random index",
+      "Expected": 1
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=4 tic=31 boots=100 airborne=False seed=0 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=4 tic=31 boots=100 airborne=False seed=65 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=4 tic=31 boots=100 airborne=False seed=65 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 66,
+      "Passed": true,
+      "Name": "special=4 tic=31 boots=100 airborne=False seed=65 random index",
+      "Expected": 66
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=4 tic=31 boots=100 airborne=False seed=65 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=4 tic=31 boots=100 airborne=True seed=0 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=4 tic=31 boots=100 airborne=True seed=0 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 0,
+      "Passed": true,
+      "Name": "special=4 tic=31 boots=100 airborne=True seed=0 random index",
+      "Expected": 0
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=4 tic=31 boots=100 airborne=True seed=0 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=4 tic=31 boots=100 airborne=True seed=65 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=4 tic=31 boots=100 airborne=True seed=65 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 65,
+      "Passed": true,
+      "Name": "special=4 tic=31 boots=100 airborne=True seed=65 random index",
+      "Expected": 65
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=4 tic=31 boots=100 airborne=True seed=65 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 80,
+      "Passed": true,
+      "Name": "special=4 tic=32 boots=0 airborne=False seed=0 health",
+      "Expected": 80
+    },
+    {
+      "Actual": 80,
+      "Passed": true,
+      "Name": "special=4 tic=32 boots=0 airborne=False seed=0 actor health",
+      "Expected": 80
+    },
+    {
+      "Actual": 1,
+      "Passed": true,
+      "Name": "special=4 tic=32 boots=0 airborne=False seed=0 random index",
+      "Expected": 1
+    },
+    {
+      "Actual": true,
+      "Passed": true,
+      "Name": "special=4 tic=32 boots=0 airborne=False seed=0 damage source",
+      "Expected": true
+    },
+    {
+      "Actual": 80,
+      "Passed": true,
+      "Name": "special=4 tic=32 boots=0 airborne=False seed=65 health",
+      "Expected": 80
+    },
+    {
+      "Actual": 80,
+      "Passed": true,
+      "Name": "special=4 tic=32 boots=0 airborne=False seed=65 actor health",
+      "Expected": 80
+    },
+    {
+      "Actual": 66,
+      "Passed": true,
+      "Name": "special=4 tic=32 boots=0 airborne=False seed=65 random index",
+      "Expected": 66
+    },
+    {
+      "Actual": true,
+      "Passed": true,
+      "Name": "special=4 tic=32 boots=0 airborne=False seed=65 damage source",
+      "Expected": true
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=4 tic=32 boots=0 airborne=True seed=0 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=4 tic=32 boots=0 airborne=True seed=0 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 0,
+      "Passed": true,
+      "Name": "special=4 tic=32 boots=0 airborne=True seed=0 random index",
+      "Expected": 0
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=4 tic=32 boots=0 airborne=True seed=0 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=4 tic=32 boots=0 airborne=True seed=65 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=4 tic=32 boots=0 airborne=True seed=65 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 65,
+      "Passed": true,
+      "Name": "special=4 tic=32 boots=0 airborne=True seed=65 random index",
+      "Expected": 65
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=4 tic=32 boots=0 airborne=True seed=65 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=4 tic=32 boots=100 airborne=False seed=0 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=4 tic=32 boots=100 airborne=False seed=0 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 1,
+      "Passed": true,
+      "Name": "special=4 tic=32 boots=100 airborne=False seed=0 random index",
+      "Expected": 1
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=4 tic=32 boots=100 airborne=False seed=0 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 80,
+      "Passed": true,
+      "Name": "special=4 tic=32 boots=100 airborne=False seed=65 health",
+      "Expected": 80
+    },
+    {
+      "Actual": 80,
+      "Passed": true,
+      "Name": "special=4 tic=32 boots=100 airborne=False seed=65 actor health",
+      "Expected": 80
+    },
+    {
+      "Actual": 67,
+      "Passed": true,
+      "Name": "special=4 tic=32 boots=100 airborne=False seed=65 random index",
+      "Expected": 67
+    },
+    {
+      "Actual": true,
+      "Passed": true,
+      "Name": "special=4 tic=32 boots=100 airborne=False seed=65 damage source",
+      "Expected": true
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=4 tic=32 boots=100 airborne=True seed=0 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=4 tic=32 boots=100 airborne=True seed=0 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 0,
+      "Passed": true,
+      "Name": "special=4 tic=32 boots=100 airborne=True seed=0 random index",
+      "Expected": 0
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=4 tic=32 boots=100 airborne=True seed=0 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=4 tic=32 boots=100 airborne=True seed=65 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=4 tic=32 boots=100 airborne=True seed=65 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 65,
+      "Passed": true,
+      "Name": "special=4 tic=32 boots=100 airborne=True seed=65 random index",
+      "Expected": 65
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=4 tic=32 boots=100 airborne=True seed=65 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=4 tic=33 boots=0 airborne=False seed=0 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=4 tic=33 boots=0 airborne=False seed=0 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 0,
+      "Passed": true,
+      "Name": "special=4 tic=33 boots=0 airborne=False seed=0 random index",
+      "Expected": 0
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=4 tic=33 boots=0 airborne=False seed=0 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=4 tic=33 boots=0 airborne=False seed=65 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=4 tic=33 boots=0 airborne=False seed=65 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 65,
+      "Passed": true,
+      "Name": "special=4 tic=33 boots=0 airborne=False seed=65 random index",
+      "Expected": 65
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=4 tic=33 boots=0 airborne=False seed=65 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=4 tic=33 boots=0 airborne=True seed=0 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=4 tic=33 boots=0 airborne=True seed=0 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 0,
+      "Passed": true,
+      "Name": "special=4 tic=33 boots=0 airborne=True seed=0 random index",
+      "Expected": 0
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=4 tic=33 boots=0 airborne=True seed=0 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=4 tic=33 boots=0 airborne=True seed=65 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=4 tic=33 boots=0 airborne=True seed=65 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 65,
+      "Passed": true,
+      "Name": "special=4 tic=33 boots=0 airborne=True seed=65 random index",
+      "Expected": 65
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=4 tic=33 boots=0 airborne=True seed=65 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=4 tic=33 boots=100 airborne=False seed=0 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=4 tic=33 boots=100 airborne=False seed=0 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 1,
+      "Passed": true,
+      "Name": "special=4 tic=33 boots=100 airborne=False seed=0 random index",
+      "Expected": 1
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=4 tic=33 boots=100 airborne=False seed=0 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=4 tic=33 boots=100 airborne=False seed=65 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=4 tic=33 boots=100 airborne=False seed=65 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 66,
+      "Passed": true,
+      "Name": "special=4 tic=33 boots=100 airborne=False seed=65 random index",
+      "Expected": 66
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=4 tic=33 boots=100 airborne=False seed=65 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=4 tic=33 boots=100 airborne=True seed=0 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=4 tic=33 boots=100 airborne=True seed=0 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 0,
+      "Passed": true,
+      "Name": "special=4 tic=33 boots=100 airborne=True seed=0 random index",
+      "Expected": 0
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=4 tic=33 boots=100 airborne=True seed=0 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=4 tic=33 boots=100 airborne=True seed=65 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=4 tic=33 boots=100 airborne=True seed=65 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 65,
+      "Passed": true,
+      "Name": "special=4 tic=33 boots=100 airborne=True seed=65 random index",
+      "Expected": 65
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=4 tic=33 boots=100 airborne=True seed=65 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 80,
+      "Passed": true,
+      "Name": "special=4 tic=64 boots=0 airborne=False seed=0 health",
+      "Expected": 80
+    },
+    {
+      "Actual": 80,
+      "Passed": true,
+      "Name": "special=4 tic=64 boots=0 airborne=False seed=0 actor health",
+      "Expected": 80
+    },
+    {
+      "Actual": 1,
+      "Passed": true,
+      "Name": "special=4 tic=64 boots=0 airborne=False seed=0 random index",
+      "Expected": 1
+    },
+    {
+      "Actual": true,
+      "Passed": true,
+      "Name": "special=4 tic=64 boots=0 airborne=False seed=0 damage source",
+      "Expected": true
+    },
+    {
+      "Actual": 80,
+      "Passed": true,
+      "Name": "special=4 tic=64 boots=0 airborne=False seed=65 health",
+      "Expected": 80
+    },
+    {
+      "Actual": 80,
+      "Passed": true,
+      "Name": "special=4 tic=64 boots=0 airborne=False seed=65 actor health",
+      "Expected": 80
+    },
+    {
+      "Actual": 66,
+      "Passed": true,
+      "Name": "special=4 tic=64 boots=0 airborne=False seed=65 random index",
+      "Expected": 66
+    },
+    {
+      "Actual": true,
+      "Passed": true,
+      "Name": "special=4 tic=64 boots=0 airborne=False seed=65 damage source",
+      "Expected": true
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=4 tic=64 boots=0 airborne=True seed=0 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=4 tic=64 boots=0 airborne=True seed=0 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 0,
+      "Passed": true,
+      "Name": "special=4 tic=64 boots=0 airborne=True seed=0 random index",
+      "Expected": 0
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=4 tic=64 boots=0 airborne=True seed=0 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=4 tic=64 boots=0 airborne=True seed=65 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=4 tic=64 boots=0 airborne=True seed=65 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 65,
+      "Passed": true,
+      "Name": "special=4 tic=64 boots=0 airborne=True seed=65 random index",
+      "Expected": 65
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=4 tic=64 boots=0 airborne=True seed=65 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=4 tic=64 boots=100 airborne=False seed=0 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=4 tic=64 boots=100 airborne=False seed=0 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 1,
+      "Passed": true,
+      "Name": "special=4 tic=64 boots=100 airborne=False seed=0 random index",
+      "Expected": 1
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=4 tic=64 boots=100 airborne=False seed=0 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 80,
+      "Passed": true,
+      "Name": "special=4 tic=64 boots=100 airborne=False seed=65 health",
+      "Expected": 80
+    },
+    {
+      "Actual": 80,
+      "Passed": true,
+      "Name": "special=4 tic=64 boots=100 airborne=False seed=65 actor health",
+      "Expected": 80
+    },
+    {
+      "Actual": 67,
+      "Passed": true,
+      "Name": "special=4 tic=64 boots=100 airborne=False seed=65 random index",
+      "Expected": 67
+    },
+    {
+      "Actual": true,
+      "Passed": true,
+      "Name": "special=4 tic=64 boots=100 airborne=False seed=65 damage source",
+      "Expected": true
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=4 tic=64 boots=100 airborne=True seed=0 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=4 tic=64 boots=100 airborne=True seed=0 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 0,
+      "Passed": true,
+      "Name": "special=4 tic=64 boots=100 airborne=True seed=0 random index",
+      "Expected": 0
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=4 tic=64 boots=100 airborne=True seed=0 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=4 tic=64 boots=100 airborne=True seed=65 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=4 tic=64 boots=100 airborne=True seed=65 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 65,
+      "Passed": true,
+      "Name": "special=4 tic=64 boots=100 airborne=True seed=65 random index",
+      "Expected": 65
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=4 tic=64 boots=100 airborne=True seed=65 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=16 tic=31 boots=0 airborne=False seed=0 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=16 tic=31 boots=0 airborne=False seed=0 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 0,
+      "Passed": true,
+      "Name": "special=16 tic=31 boots=0 airborne=False seed=0 random index",
+      "Expected": 0
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=16 tic=31 boots=0 airborne=False seed=0 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=16 tic=31 boots=0 airborne=False seed=65 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=16 tic=31 boots=0 airborne=False seed=65 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 65,
+      "Passed": true,
+      "Name": "special=16 tic=31 boots=0 airborne=False seed=65 random index",
+      "Expected": 65
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=16 tic=31 boots=0 airborne=False seed=65 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=16 tic=31 boots=0 airborne=True seed=0 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=16 tic=31 boots=0 airborne=True seed=0 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 0,
+      "Passed": true,
+      "Name": "special=16 tic=31 boots=0 airborne=True seed=0 random index",
+      "Expected": 0
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=16 tic=31 boots=0 airborne=True seed=0 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=16 tic=31 boots=0 airborne=True seed=65 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=16 tic=31 boots=0 airborne=True seed=65 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 65,
+      "Passed": true,
+      "Name": "special=16 tic=31 boots=0 airborne=True seed=65 random index",
+      "Expected": 65
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=16 tic=31 boots=0 airborne=True seed=65 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=16 tic=31 boots=100 airborne=False seed=0 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=16 tic=31 boots=100 airborne=False seed=0 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 1,
+      "Passed": true,
+      "Name": "special=16 tic=31 boots=100 airborne=False seed=0 random index",
+      "Expected": 1
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=16 tic=31 boots=100 airborne=False seed=0 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=16 tic=31 boots=100 airborne=False seed=65 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=16 tic=31 boots=100 airborne=False seed=65 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 66,
+      "Passed": true,
+      "Name": "special=16 tic=31 boots=100 airborne=False seed=65 random index",
+      "Expected": 66
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=16 tic=31 boots=100 airborne=False seed=65 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=16 tic=31 boots=100 airborne=True seed=0 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=16 tic=31 boots=100 airborne=True seed=0 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 0,
+      "Passed": true,
+      "Name": "special=16 tic=31 boots=100 airborne=True seed=0 random index",
+      "Expected": 0
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=16 tic=31 boots=100 airborne=True seed=0 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=16 tic=31 boots=100 airborne=True seed=65 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=16 tic=31 boots=100 airborne=True seed=65 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 65,
+      "Passed": true,
+      "Name": "special=16 tic=31 boots=100 airborne=True seed=65 random index",
+      "Expected": 65
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=16 tic=31 boots=100 airborne=True seed=65 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 80,
+      "Passed": true,
+      "Name": "special=16 tic=32 boots=0 airborne=False seed=0 health",
+      "Expected": 80
+    },
+    {
+      "Actual": 80,
+      "Passed": true,
+      "Name": "special=16 tic=32 boots=0 airborne=False seed=0 actor health",
+      "Expected": 80
+    },
+    {
+      "Actual": 1,
+      "Passed": true,
+      "Name": "special=16 tic=32 boots=0 airborne=False seed=0 random index",
+      "Expected": 1
+    },
+    {
+      "Actual": true,
+      "Passed": true,
+      "Name": "special=16 tic=32 boots=0 airborne=False seed=0 damage source",
+      "Expected": true
+    },
+    {
+      "Actual": 80,
+      "Passed": true,
+      "Name": "special=16 tic=32 boots=0 airborne=False seed=65 health",
+      "Expected": 80
+    },
+    {
+      "Actual": 80,
+      "Passed": true,
+      "Name": "special=16 tic=32 boots=0 airborne=False seed=65 actor health",
+      "Expected": 80
+    },
+    {
+      "Actual": 66,
+      "Passed": true,
+      "Name": "special=16 tic=32 boots=0 airborne=False seed=65 random index",
+      "Expected": 66
+    },
+    {
+      "Actual": true,
+      "Passed": true,
+      "Name": "special=16 tic=32 boots=0 airborne=False seed=65 damage source",
+      "Expected": true
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=16 tic=32 boots=0 airborne=True seed=0 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=16 tic=32 boots=0 airborne=True seed=0 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 0,
+      "Passed": true,
+      "Name": "special=16 tic=32 boots=0 airborne=True seed=0 random index",
+      "Expected": 0
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=16 tic=32 boots=0 airborne=True seed=0 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=16 tic=32 boots=0 airborne=True seed=65 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=16 tic=32 boots=0 airborne=True seed=65 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 65,
+      "Passed": true,
+      "Name": "special=16 tic=32 boots=0 airborne=True seed=65 random index",
+      "Expected": 65
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=16 tic=32 boots=0 airborne=True seed=65 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=16 tic=32 boots=100 airborne=False seed=0 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=16 tic=32 boots=100 airborne=False seed=0 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 1,
+      "Passed": true,
+      "Name": "special=16 tic=32 boots=100 airborne=False seed=0 random index",
+      "Expected": 1
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=16 tic=32 boots=100 airborne=False seed=0 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 80,
+      "Passed": true,
+      "Name": "special=16 tic=32 boots=100 airborne=False seed=65 health",
+      "Expected": 80
+    },
+    {
+      "Actual": 80,
+      "Passed": true,
+      "Name": "special=16 tic=32 boots=100 airborne=False seed=65 actor health",
+      "Expected": 80
+    },
+    {
+      "Actual": 67,
+      "Passed": true,
+      "Name": "special=16 tic=32 boots=100 airborne=False seed=65 random index",
+      "Expected": 67
+    },
+    {
+      "Actual": true,
+      "Passed": true,
+      "Name": "special=16 tic=32 boots=100 airborne=False seed=65 damage source",
+      "Expected": true
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=16 tic=32 boots=100 airborne=True seed=0 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=16 tic=32 boots=100 airborne=True seed=0 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 0,
+      "Passed": true,
+      "Name": "special=16 tic=32 boots=100 airborne=True seed=0 random index",
+      "Expected": 0
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=16 tic=32 boots=100 airborne=True seed=0 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=16 tic=32 boots=100 airborne=True seed=65 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=16 tic=32 boots=100 airborne=True seed=65 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 65,
+      "Passed": true,
+      "Name": "special=16 tic=32 boots=100 airborne=True seed=65 random index",
+      "Expected": 65
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=16 tic=32 boots=100 airborne=True seed=65 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=16 tic=33 boots=0 airborne=False seed=0 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=16 tic=33 boots=0 airborne=False seed=0 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 0,
+      "Passed": true,
+      "Name": "special=16 tic=33 boots=0 airborne=False seed=0 random index",
+      "Expected": 0
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=16 tic=33 boots=0 airborne=False seed=0 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=16 tic=33 boots=0 airborne=False seed=65 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=16 tic=33 boots=0 airborne=False seed=65 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 65,
+      "Passed": true,
+      "Name": "special=16 tic=33 boots=0 airborne=False seed=65 random index",
+      "Expected": 65
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=16 tic=33 boots=0 airborne=False seed=65 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=16 tic=33 boots=0 airborne=True seed=0 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=16 tic=33 boots=0 airborne=True seed=0 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 0,
+      "Passed": true,
+      "Name": "special=16 tic=33 boots=0 airborne=True seed=0 random index",
+      "Expected": 0
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=16 tic=33 boots=0 airborne=True seed=0 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=16 tic=33 boots=0 airborne=True seed=65 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=16 tic=33 boots=0 airborne=True seed=65 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 65,
+      "Passed": true,
+      "Name": "special=16 tic=33 boots=0 airborne=True seed=65 random index",
+      "Expected": 65
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=16 tic=33 boots=0 airborne=True seed=65 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=16 tic=33 boots=100 airborne=False seed=0 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=16 tic=33 boots=100 airborne=False seed=0 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 1,
+      "Passed": true,
+      "Name": "special=16 tic=33 boots=100 airborne=False seed=0 random index",
+      "Expected": 1
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=16 tic=33 boots=100 airborne=False seed=0 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=16 tic=33 boots=100 airborne=False seed=65 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=16 tic=33 boots=100 airborne=False seed=65 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 66,
+      "Passed": true,
+      "Name": "special=16 tic=33 boots=100 airborne=False seed=65 random index",
+      "Expected": 66
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=16 tic=33 boots=100 airborne=False seed=65 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=16 tic=33 boots=100 airborne=True seed=0 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=16 tic=33 boots=100 airborne=True seed=0 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 0,
+      "Passed": true,
+      "Name": "special=16 tic=33 boots=100 airborne=True seed=0 random index",
+      "Expected": 0
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=16 tic=33 boots=100 airborne=True seed=0 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=16 tic=33 boots=100 airborne=True seed=65 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=16 tic=33 boots=100 airborne=True seed=65 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 65,
+      "Passed": true,
+      "Name": "special=16 tic=33 boots=100 airborne=True seed=65 random index",
+      "Expected": 65
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=16 tic=33 boots=100 airborne=True seed=65 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 80,
+      "Passed": true,
+      "Name": "special=16 tic=64 boots=0 airborne=False seed=0 health",
+      "Expected": 80
+    },
+    {
+      "Actual": 80,
+      "Passed": true,
+      "Name": "special=16 tic=64 boots=0 airborne=False seed=0 actor health",
+      "Expected": 80
+    },
+    {
+      "Actual": 1,
+      "Passed": true,
+      "Name": "special=16 tic=64 boots=0 airborne=False seed=0 random index",
+      "Expected": 1
+    },
+    {
+      "Actual": true,
+      "Passed": true,
+      "Name": "special=16 tic=64 boots=0 airborne=False seed=0 damage source",
+      "Expected": true
+    },
+    {
+      "Actual": 80,
+      "Passed": true,
+      "Name": "special=16 tic=64 boots=0 airborne=False seed=65 health",
+      "Expected": 80
+    },
+    {
+      "Actual": 80,
+      "Passed": true,
+      "Name": "special=16 tic=64 boots=0 airborne=False seed=65 actor health",
+      "Expected": 80
+    },
+    {
+      "Actual": 66,
+      "Passed": true,
+      "Name": "special=16 tic=64 boots=0 airborne=False seed=65 random index",
+      "Expected": 66
+    },
+    {
+      "Actual": true,
+      "Passed": true,
+      "Name": "special=16 tic=64 boots=0 airborne=False seed=65 damage source",
+      "Expected": true
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=16 tic=64 boots=0 airborne=True seed=0 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=16 tic=64 boots=0 airborne=True seed=0 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 0,
+      "Passed": true,
+      "Name": "special=16 tic=64 boots=0 airborne=True seed=0 random index",
+      "Expected": 0
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=16 tic=64 boots=0 airborne=True seed=0 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=16 tic=64 boots=0 airborne=True seed=65 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=16 tic=64 boots=0 airborne=True seed=65 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 65,
+      "Passed": true,
+      "Name": "special=16 tic=64 boots=0 airborne=True seed=65 random index",
+      "Expected": 65
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=16 tic=64 boots=0 airborne=True seed=65 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=16 tic=64 boots=100 airborne=False seed=0 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=16 tic=64 boots=100 airborne=False seed=0 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 1,
+      "Passed": true,
+      "Name": "special=16 tic=64 boots=100 airborne=False seed=0 random index",
+      "Expected": 1
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=16 tic=64 boots=100 airborne=False seed=0 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 80,
+      "Passed": true,
+      "Name": "special=16 tic=64 boots=100 airborne=False seed=65 health",
+      "Expected": 80
+    },
+    {
+      "Actual": 80,
+      "Passed": true,
+      "Name": "special=16 tic=64 boots=100 airborne=False seed=65 actor health",
+      "Expected": 80
+    },
+    {
+      "Actual": 67,
+      "Passed": true,
+      "Name": "special=16 tic=64 boots=100 airborne=False seed=65 random index",
+      "Expected": 67
+    },
+    {
+      "Actual": true,
+      "Passed": true,
+      "Name": "special=16 tic=64 boots=100 airborne=False seed=65 damage source",
+      "Expected": true
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=16 tic=64 boots=100 airborne=True seed=0 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=16 tic=64 boots=100 airborne=True seed=0 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 0,
+      "Passed": true,
+      "Name": "special=16 tic=64 boots=100 airborne=True seed=0 random index",
+      "Expected": 0
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=16 tic=64 boots=100 airborne=True seed=0 damage source",
+      "Expected": false
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=16 tic=64 boots=100 airborne=True seed=65 health",
+      "Expected": 100
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "special=16 tic=64 boots=100 airborne=True seed=65 actor health",
+      "Expected": 100
+    },
+    {
+      "Actual": 65,
+      "Passed": true,
+      "Name": "special=16 tic=64 boots=100 airborne=True seed=65 random index",
+      "Expected": 65
+    },
+    {
+      "Actual": false,
+      "Passed": true,
+      "Name": "special=16 tic=64 boots=100 airborne=True seed=65 damage source",
+      "Expected": false
+    }
+  ],
+  "BehaviorSourceSha256": "8BEF2DB3279229F23C275DB74B3F715834200CBC22631B8050B05D31D3273AE4",
+  "Reference": "https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/p_spec.c#L944-L1004",
+  "Error": null,
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "Meaning": "Actual E1M1 player, world, sector and damage methods with isolated fixture state; no campaign or live rendering claim."
+}
