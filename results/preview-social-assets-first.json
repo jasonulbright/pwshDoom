@@ -1,0 +1,109 @@
+{
+  "CheckedDate": "2026-09-19",
+  "Files": [
+    {
+      "Name": "matrix",
+      "File": "pwshDoom-matrix-x.mp4",
+      "DurationSeconds": 30.0,
+      "Bytes": 44966549,
+      "AverageBitsPerSecond": 11991079,
+      "Width": 1920,
+      "Height": 1080,
+      "FramesPerSecond": 30,
+      "Video": "H.264 High, yuv420p",
+      "Audio": "AAC-LC, 48 kHz, stereo",
+      "NonSilentAudio": true,
+      "FullDecodePassed": true,
+      "Sha256": "6B194DEF838B9FA028E0E49F2741DBCE3B2BD3991494978E1511DA085F843323"
+    },
+    {
+      "Name": "color",
+      "File": "pwshDoom-color-x.mp4",
+      "DurationSeconds": 30.0,
+      "Bytes": 45085991,
+      "AverageBitsPerSecond": 12022930,
+      "Width": 1920,
+      "Height": 1080,
+      "FramesPerSecond": 30,
+      "Video": "H.264 High, yuv420p",
+      "Audio": "AAC-LC, 48 kHz, stereo",
+      "NonSilentAudio": true,
+      "FullDecodePassed": true,
+      "Sha256": "177939AD28BB38888297A24816EEEA7E0C53D189C7D1A2D2CCA252207B9AB3DD"
+    },
+    {
+      "Name": "classic",
+      "File": "pwshDoom-classic-x.mp4",
+      "DurationSeconds": 30.0,
+      "Bytes": 42334530,
+      "AverageBitsPerSecond": 11289208,
+      "Width": 1920,
+      "Height": 1080,
+      "FramesPerSecond": 30,
+      "Video": "H.264 High, yuv420p",
+      "Audio": "AAC-LC, 48 kHz, stereo",
+      "NonSilentAudio": true,
+      "FullDecodePassed": true,
+      "Sha256": "2BA016AD0A025A2BCB0B8865A478271576E1B5FE868787F8F0C546056207D426"
+    },
+    {
+      "Name": "showcase",
+      "File": "pwshDoom-showcase-x.mp4",
+      "DurationSeconds": 90.021354,
+      "Bytes": 132384922,
+      "AverageBitsPerSecond": 11764757,
+      "Width": 1920,
+      "Height": 1080,
+      "FramesPerSecond": 30,
+      "Video": "H.264 High, yuv420p",
+      "Audio": "AAC-LC, 48 kHz, stereo",
+      "NonSilentAudio": true,
+      "FullDecodePassed": true,
+      "Sha256": "0330D9DE9219ABD7B89D38B7F547425D4794448A142949F33244AD422B7271C6"
+    }
+  ],
+  "ExportReceiptSha256": "210C8A646F2F6976DF10D8574829705F5CBC06B1874876E47971DDCD44C42D36",
+  "Meaning": "Existing gameplay edited after preview publication. Every output fits conservative140-second/512MB web-upload bounds,1920x1080,30fps and configured12Mbps video ceiling; no need to infer exact subscription tier from price. Complete decoding and non-silent audio verified; three final frames visually inspected. No new game or screen/audio capture and no post to X.",
+  "SourcesConsulted": [
+    "https://help.x.com/en/using-x/x-videos",
+    "https://help.x.com/en/using-x/premium-longer-videos",
+    "https://help.x.com/en/using-x/media-studio-faqs"
+  ],
+  "Sources": [
+    {
+      "SourceSha256": "8ACB8B25D27138D375D71BE92D81A481B0E49D581034D51205FE888FF1D5D0EF",
+      "StartSeconds": 49.5,
+      "Crop": "1280:800:96:122",
+      "Output": "pwshDoom-matrix-x.mp4",
+      "Source": "C:\\projects\\pwshDoom\\local\\recordings\\e1m3-matrix-third-av.mp4",
+      "DurationSeconds": 30,
+      "Name": "matrix",
+      "Sha256": "6B194DEF838B9FA028E0E49F2741DBCE3B2BD3991494978E1511DA085F843323"
+    },
+    {
+      "SourceSha256": "BA14274134CCCA51965FD2002A4E4C93AF887405972149D90ACB2472BA9AC3B4",
+      "StartSeconds": 45.5,
+      "Crop": "1280:800:96:122",
+      "Output": "pwshDoom-color-x.mp4",
+      "Source": "C:\\projects\\pwshDoom\\local\\recordings\\e1m2-color-third-av.mp4",
+      "DurationSeconds": 30,
+      "Name": "color",
+      "Sha256": "177939AD28BB38888297A24816EEEA7E0C53D189C7D1A2D2CCA252207B9AB3DD"
+    },
+    {
+      "SourceSha256": "60874FD1B74C9907B8AEFC26BE396764A41AB80E7ED459B444D109EEA9F45019",
+      "StartSeconds": 46.0,
+      "Crop": "1600:900:920:256",
+      "Output": "pwshDoom-classic-x.mp4",
+      "Source": "C:\\projects\\pwshDoom\\local\\recordings\\e1m2-classic-lighting-second-av.mp4",
+      "DurationSeconds": 30,
+      "Name": "classic",
+      "Sha256": "2BA016AD0A025A2BCB0B8865A478271576E1B5FE868787F8F0C546056207D426"
+    }
+  ],
+  "VisualReview": [
+    "matrix-final-review.png",
+    "color-final-review.png",
+    "classic-final-review.png"
+  ]
+}
