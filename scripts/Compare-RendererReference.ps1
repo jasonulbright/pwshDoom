@@ -4,6 +4,7 @@ param(
     [string]$Wad='C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\base\DOOM.WAD',
     [ValidateRange(1,4)][int]$Episode=1,[ValidateRange(1,9)][int]$Map=1,
     [int[]]$Angles=@(0,90,180),
+    [ValidateRange(0,32)][int]$FixedColorMap=0,
     [Parameter(Mandatory)][string]$Images,
     [Parameter(Mandatory)][string]$Output
 )
@@ -23,6 +24,9 @@ try{
     for($i=0;$i -lt 4;$i++){$commands[$i]=[TicCmd]::new()}
     $game.DeferedInitNew([GameSkill]::Medium,$Episode,$Map);$null=$game.Update($commands)
     for($i=0;$i -lt 35;$i++){$null=$game.Update($commands)}
+    # A nonzero map is an explicit diagnostic override on both renderers. It
+    # removes distance/sector lighting variation without changing the textures.
+    $game.World.ConsolePlayer.FixedColorMap=$FixedColorMap
     $config=[Config]::new();$config.video_highresolution=$false;$config.video_gamescreensize=7;$config.video_gammacorrection=0
     $reference=[Renderer]::new($config,$content);$context=New-FastRenderContext $content $game.World
     foreach($angle in $Angles){
@@ -57,8 +61,8 @@ try{
     }
 }catch{$failure=$_.ToString()+"`n"+$_.ScriptStackTrace;throw}finally{
     if($content){$content.Dispose()}
-    @{Error=$failure;Episode=$Episode;Map=$Map;Views=$views.ToArray();WadSha256=(Get-FileHash $Wad).Hash;BundleSha256=(Get-FileHash $bundle).Hash;
+    @{Error=$failure;Episode=$Episode;Map=$Map;FixedColorMap=$FixedColorMap;Views=$views.ToArray();WadSha256=(Get-FileHash $Wad).Hash;BundleSha256=(Get-FileHash $bundle).Hash;
       Sources=$sources;SourcesChangedDuringRun=@($sources|Where-Object {$_.Sha256 -cne (Get-FileHash "$PSScriptRoot/../$($_.Path)").Hash}|ForEach-Object {$_.Path});
-      Meaning='Diagnostic comparison against the adopted, locally adapted PowerShell reference renderer at the same static simulation endpoint. This reference is not independently validated original Doom output. No fidelity pass threshold or performance claim. Images show reference, current, then white differing-index mask; base palette, square pixels, 320x168 scene plus HUD. Fixture changes only camera heading after 35 idle updates.'}|
+      Meaning='Diagnostic comparison against the adopted, locally adapted PowerShell reference renderer at the same static simulation endpoint. This reference is not independently validated original Doom output. No fidelity pass threshold or performance claim. Images show reference, current, then white differing-index mask; base palette, square pixels, 320x168 scene plus HUD. Fixture changes camera heading and optionally the explicitly reported fixed colormap after 35 idle updates.'}|
       ConvertTo-Json -Depth 7|Set-Content -LiteralPath $Output
 }

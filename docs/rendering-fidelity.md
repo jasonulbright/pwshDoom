@@ -27,3 +27,9 @@ An intermediate diagnostic (`render-reference-e1m1-hud.json`) observed 171 remai
 ## Remaining work
 
 Compare additional real gameplay endpoints, moving sectors, sprites, sky, palettes and invisibility against an independently established reference. Diagnose sampling and lighting differences separately before changing 3D algorithms. Measure full-host pacing after presentation changes. Record the next E1M4-to-E1M5 terminal continuation with the completed seven-track catalog, retaining footage and audio evidence. Campaign completion, sound at the speakers and 35/60 pacing remain separate gates.
+
+## Fixed-lighting diagnostic
+
+A subsequent `-FixedColorMap 16` fixture applies the same explicit override to the live reference player and numeric snapshot. Scene disagreement falls to 15,772 / 16,347 / 15,603 pixels for headings 0 / 90 / 180; all three HUDs remain exact. Receipt: `results/render-reference-e1m1-fixed16.json`, with unchanged source pins during the run. Source inspection shows different distance-lighting formulas and missing horizontal/vertical wall contrast in the current renderer. This makes lighting a concrete next investigation. A darker common palette can also merge different texel colors, so the reduced mismatch is not a mathematical partition of all errors into lighting versus geometry. No production lighting algorithm changed in this diagnostic.
+
+The corrected HUD is now exercised in the [recorded E1M4 continuation](campaign-e1m4.md). Its full-host performance and audio limits remain visible there. The next rendering step is to compare the 16-level scale/distance light tables and their wall-orientation, sector, extra-light and fixed-map selection against the adopted reference, then check actual images and cost before adoption. A trusted original-executable reference is still needed for a vanilla-fidelity claim.
