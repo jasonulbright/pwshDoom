@@ -1,0 +1,92 @@
+{
+  "Checks": [
+    {
+      "Name": "Both complete the same 1200 commands without error",
+      "Passed": true
+    },
+    {
+      "Name": "Source and harness match across both reports",
+      "Passed": true
+    },
+    {
+      "Name": "Every mapped-line hash agrees independently",
+      "Passed": true
+    },
+    {
+      "Name": "All sampled and final selected-state hashes agree",
+      "Passed": true
+    },
+    {
+      "Name": "Owned bundles still match their receipts",
+      "Passed": true
+    }
+  ],
+  "BaselineSha256": "332DC9AA1F43C1649235AB946E9052E1697CAC6F7680B450BF2EDDCC67CE34C4",
+  "ProfileSha256": "9B3E28AAE759A1876207ED9805B18F095F471BAEA8E7ED466EA94F2ADB8AFF5B",
+  "BaselineMs": {
+    "Count": 1200,
+    "Mean": 7.165972500000015,
+    "Median": 7.09135,
+    "P95": 13.4971,
+    "Max": 34.7206
+  },
+  "InstrumentedMs": {
+    "Count": 1200,
+    "Mean": 9.839141749999989,
+    "Median": 9.92145,
+    "P95": 17.5003,
+    "Max": 43.8439
+  },
+  "Methods": [
+    {
+      "Method": "Geometry.PointOnSide",
+      "Calls": 45507,
+      "InclusiveTicks": 9546087,
+      "MeanInclusiveMsPerCommand": 0.79550725,
+      "MeanMicrosecondsPerCall": 20.977183729975607
+    },
+    {
+      "Method": "Geometry.PointToAngleData",
+      "Calls": 235248,
+      "InclusiveTicks": 20240860,
+      "MeanInclusiveMsPerCommand": 1.6867383333333335,
+      "MeanMicrosecondsPerCall": 8.604051894171258
+    },
+    {
+      "Method": "ThreeDRenderer.DiscoverSeg",
+      "Calls": 73412,
+      "InclusiveTicks": 55656681,
+      "MeanInclusiveMsPerCommand": 4.63805675,
+      "MeanMicrosecondsPerCall": 75.81414618863401
+    },
+    {
+      "Method": "ThreeDRenderer.ProjectDiscoveryAngles",
+      "Calls": 117624,
+      "InclusiveTicks": 4122559,
+      "MeanInclusiveMsPerCommand": 0.3435465833333333,
+      "MeanMicrosecondsPerCall": 3.504862102972183
+    },
+    {
+      "Method": "ThreeDRenderer.IsPotentiallyVisible",
+      "Calls": 45507,
+      "InclusiveTicks": 26460760,
+      "MeanInclusiveMsPerCommand": 2.2050633333333334,
+      "MeanMicrosecondsPerCall": 58.146570857230756
+    },
+    {
+      "Method": "ThreeDRenderer.DrawSolidWall",
+      "Calls": 26072,
+      "InclusiveTicks": 5166517,
+      "MeanInclusiveMsPerCommand": 0.43054308333333335,
+      "MeanMicrosecondsPerCall": 19.816343203436638
+    },
+    {
+      "Method": "ThreeDRenderer.DrawPassWall",
+      "Calls": 10037,
+      "InclusiveTicks": 3043597,
+      "MeanInclusiveMsPerCommand": 0.2536330833333333,
+      "MeanMicrosecondsPerCall": 30.323772043439277
+    }
+  ],
+  "Meaning": "Sum each method column over all 1200 samples, convert QPC ticks with recorded frequency, divide by commands or calls. Inclusive nested times overlap; profiling overhead and sequential run variation prohibit treating these values as achievable savings. Independent full mapping-hash and sampled/final selected-state comparisons pass."
+}

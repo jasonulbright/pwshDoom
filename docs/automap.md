@@ -4,6 +4,10 @@
 integrated. Performance and broader compatibility remain unqualified; the full
 release goal remains active.
 
+The September 19 [moving-route discovery profile](automap-discovery-performance.md)
+preserves all 1,200 per-command mapping hashes and original gameplay checkpoints.
+It measures the remaining discovery cost without changing production behavior.
+
 The adopted gameplay model already has discovery flags, follow/pan/zoom state,
 markers, all-map power handling, and an automap renderer. The fast game renderer
 does not itself update the adopted line-discovery flags. The simulation now
