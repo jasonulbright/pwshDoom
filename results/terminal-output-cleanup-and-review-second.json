@@ -1,0 +1,36 @@
+{
+  "Meaning": "Observed recorded process IDs and owned windows are absent; no process/window termination was necessary. Earlier receipt falsely included null as one PID through empty-array property enumeration; it is retained separately.",
+  "Passed": false,
+  "Checks": [
+    {
+      "OwnedWindowRemaining": false,
+      "LiveRecordedPids": [],
+      "Name": "output-strips-first",
+      "ReviewedFrameSha256": "43092E4A22D50A2F36F521EEB1B35A327113F14C80A1941A28C0A0116FB70E6F",
+      "ReviewedFrame": "local/recordings/output-strips-first-review.png"
+    },
+    {
+      "OwnedWindowRemaining": false,
+      "LiveRecordedPids": [],
+      "Name": "output-batch-first",
+      "ReviewedFrameSha256": "07D8F8EEC5547B0452BB5CF04AA9C85149D404A83E9A363481B631A60A6DDC7D",
+      "ReviewedFrame": "local/recordings/output-batch-first-review.png"
+    },
+    {
+      "OwnedWindowRemaining": false,
+      "LiveRecordedPids": [],
+      "Name": "output-batch-second",
+      "ReviewedFrameSha256": "575B8E36095BA5382BC8BD66F0C32E1AFB081822F93274BA8EB5CCB2219C4E10",
+      "ReviewedFrame": "local/recordings/output-batch-second-review.png"
+    },
+    {
+      "OwnedWindowRemaining": false,
+      "LiveRecordedPids": [
+        27552
+      ],
+      "Name": "output-strips-second",
+      "ReviewedFrameSha256": "31A48E26B5F0D7921625242B5AA73559C0224E47B798A811E5B509A68117DB42",
+      "ReviewedFrame": "local/recordings/output-strips-second-review.png"
+    }
+  ]
+}

@@ -1,0 +1,382 @@
+{
+  "Meaning": "Byte-exact comparison to the original stream-write sequence using actual Classic/Matrix/AnsiArt katakana codecs, seven uneven strips, viewport offsets, clear/status combinations and reused growing/shrinking buffers. Memory-stream correctness only; no terminal throughput or displayed-FPS claim.",
+  "Error": "Character strips require an even width, four-pixel rows, and boundaries aligned to two source columns.\nat ConvertTo-CharacterStrip, C:\\projects\\pwshDoom\\src\\CharacterCodec.ps1: line 99\r\nat <ScriptBlock>, C:\\projects\\pwshDoom\\scripts\\Test-TerminalOutput.ps1: line 27",
+  "FramesPerMode": 16,
+  "BytesPerMode": 6439500,
+  "Sources": [
+    {
+      "Sha256": "F29549B4836797BC616CFEE5D69F146D3E159A123A729B36E8CFEDBB58DDF3B7",
+      "Path": "scripts/Test-TerminalOutput.ps1"
+    },
+    {
+      "Sha256": "F35213BA328A8925E7D8EE1BF67FCF16182150F292B3673A738683ED88470318",
+      "Path": "scripts/FrameCodec.ps1"
+    },
+    {
+      "Sha256": "B335BBC854C4CBC6030630A2AA3DE57CE9393B1C5C2508180D5534CB67E25438",
+      "Path": "src/TerminalCodec.ps1"
+    },
+    {
+      "Sha256": "D2E3E027B39D5EC8084A930EC89233442902390063D2986814E25D5CA4174B53",
+      "Path": "src/CharacterCodec.ps1"
+    },
+    {
+      "Sha256": "54E40AABD82C633D640090CF823DA3677835C8C78FFC744CE5B762B48DE5B783",
+      "Path": "src/TerminalOutput.ps1"
+    }
+  ],
+  "Checks": [
+    {
+      "Style": "Classic",
+      "Decorations": 0,
+      "Passed": true,
+      "ComparedBytes": 1136698,
+      "Mode": "Strips",
+      "Height": 200,
+      "Pattern": "Entropy",
+      "Capacity": 0,
+      "Width": 320
+    },
+    {
+      "Style": "Classic",
+      "Decorations": 0,
+      "Passed": true,
+      "ComparedBytes": 1136698,
+      "Mode": "Batch",
+      "Height": 200,
+      "Pattern": "Entropy",
+      "Capacity": 1179648,
+      "Width": 320
+    },
+    {
+      "Style": "Classic",
+      "Decorations": 1,
+      "Passed": true,
+      "ComparedBytes": 1136706,
+      "Mode": "Strips",
+      "Height": 200,
+      "Pattern": "Entropy",
+      "Capacity": 0,
+      "Width": 320
+    },
+    {
+      "Style": "Classic",
+      "Decorations": 1,
+      "Passed": true,
+      "ComparedBytes": 1136706,
+      "Mode": "Batch",
+      "Height": 200,
+      "Pattern": "Entropy",
+      "Capacity": 1179648,
+      "Width": 320
+    },
+    {
+      "Style": "Classic",
+      "Decorations": 2,
+      "Passed": true,
+      "ComparedBytes": 1136735,
+      "Mode": "Strips",
+      "Height": 200,
+      "Pattern": "Entropy",
+      "Capacity": 0,
+      "Width": 320
+    },
+    {
+      "Style": "Classic",
+      "Decorations": 2,
+      "Passed": true,
+      "ComparedBytes": 1136735,
+      "Mode": "Batch",
+      "Height": 200,
+      "Pattern": "Entropy",
+      "Capacity": 1179648,
+      "Width": 320
+    },
+    {
+      "Style": "Classic",
+      "Decorations": 3,
+      "Passed": true,
+      "ComparedBytes": 1136743,
+      "Mode": "Strips",
+      "Height": 200,
+      "Pattern": "Entropy",
+      "Capacity": 0,
+      "Width": 320
+    },
+    {
+      "Style": "Classic",
+      "Decorations": 3,
+      "Passed": true,
+      "ComparedBytes": 1136743,
+      "Mode": "Batch",
+      "Height": 200,
+      "Pattern": "Entropy",
+      "Capacity": 1179648,
+      "Width": 320
+    },
+    {
+      "Style": "Classic",
+      "Decorations": 0,
+      "Passed": true,
+      "ComparedBytes": 10712,
+      "Mode": "Strips",
+      "Height": 40,
+      "Pattern": "Coherent",
+      "Capacity": 0,
+      "Width": 64
+    },
+    {
+      "Style": "Classic",
+      "Decorations": 0,
+      "Passed": true,
+      "ComparedBytes": 10712,
+      "Mode": "Batch",
+      "Height": 40,
+      "Pattern": "Coherent",
+      "Capacity": 1179648,
+      "Width": 64
+    },
+    {
+      "Style": "Classic",
+      "Decorations": 1,
+      "Passed": true,
+      "ComparedBytes": 10720,
+      "Mode": "Strips",
+      "Height": 40,
+      "Pattern": "Coherent",
+      "Capacity": 0,
+      "Width": 64
+    },
+    {
+      "Style": "Classic",
+      "Decorations": 1,
+      "Passed": true,
+      "ComparedBytes": 10720,
+      "Mode": "Batch",
+      "Height": 40,
+      "Pattern": "Coherent",
+      "Capacity": 1179648,
+      "Width": 64
+    },
+    {
+      "Style": "Classic",
+      "Decorations": 2,
+      "Passed": true,
+      "ComparedBytes": 10749,
+      "Mode": "Strips",
+      "Height": 40,
+      "Pattern": "Coherent",
+      "Capacity": 0,
+      "Width": 64
+    },
+    {
+      "Style": "Classic",
+      "Decorations": 2,
+      "Passed": true,
+      "ComparedBytes": 10749,
+      "Mode": "Batch",
+      "Height": 40,
+      "Pattern": "Coherent",
+      "Capacity": 1179648,
+      "Width": 64
+    },
+    {
+      "Style": "Classic",
+      "Decorations": 3,
+      "Passed": true,
+      "ComparedBytes": 10757,
+      "Mode": "Strips",
+      "Height": 40,
+      "Pattern": "Coherent",
+      "Capacity": 0,
+      "Width": 64
+    },
+    {
+      "Style": "Classic",
+      "Decorations": 3,
+      "Passed": true,
+      "ComparedBytes": 10757,
+      "Mode": "Batch",
+      "Height": 40,
+      "Pattern": "Coherent",
+      "Capacity": 1179648,
+      "Width": 64
+    },
+    {
+      "Style": "Classic",
+      "Decorations": 0,
+      "Passed": true,
+      "ComparedBytes": 203581,
+      "Mode": "Strips",
+      "Height": 200,
+      "Pattern": "Coherent",
+      "Capacity": 0,
+      "Width": 320
+    },
+    {
+      "Style": "Classic",
+      "Decorations": 0,
+      "Passed": true,
+      "ComparedBytes": 203581,
+      "Mode": "Batch",
+      "Height": 200,
+      "Pattern": "Coherent",
+      "Capacity": 1179648,
+      "Width": 320
+    },
+    {
+      "Style": "Classic",
+      "Decorations": 1,
+      "Passed": true,
+      "ComparedBytes": 203589,
+      "Mode": "Strips",
+      "Height": 200,
+      "Pattern": "Coherent",
+      "Capacity": 0,
+      "Width": 320
+    },
+    {
+      "Style": "Classic",
+      "Decorations": 1,
+      "Passed": true,
+      "ComparedBytes": 203589,
+      "Mode": "Batch",
+      "Height": 200,
+      "Pattern": "Coherent",
+      "Capacity": 1179648,
+      "Width": 320
+    },
+    {
+      "Style": "Classic",
+      "Decorations": 2,
+      "Passed": true,
+      "ComparedBytes": 203618,
+      "Mode": "Strips",
+      "Height": 200,
+      "Pattern": "Coherent",
+      "Capacity": 0,
+      "Width": 320
+    },
+    {
+      "Style": "Classic",
+      "Decorations": 2,
+      "Passed": true,
+      "ComparedBytes": 203618,
+      "Mode": "Batch",
+      "Height": 200,
+      "Pattern": "Coherent",
+      "Capacity": 1179648,
+      "Width": 320
+    },
+    {
+      "Style": "Classic",
+      "Decorations": 3,
+      "Passed": true,
+      "ComparedBytes": 203626,
+      "Mode": "Strips",
+      "Height": 200,
+      "Pattern": "Coherent",
+      "Capacity": 0,
+      "Width": 320
+    },
+    {
+      "Style": "Classic",
+      "Decorations": 3,
+      "Passed": true,
+      "ComparedBytes": 203626,
+      "Mode": "Batch",
+      "Height": 200,
+      "Pattern": "Coherent",
+      "Capacity": 1179648,
+      "Width": 320
+    },
+    {
+      "Style": "Matrix",
+      "Decorations": 0,
+      "Passed": true,
+      "ComparedBytes": 258794,
+      "Mode": "Strips",
+      "Height": 200,
+      "Pattern": "Entropy",
+      "Capacity": 0,
+      "Width": 320
+    },
+    {
+      "Style": "Matrix",
+      "Decorations": 0,
+      "Passed": true,
+      "ComparedBytes": 258794,
+      "Mode": "Batch",
+      "Height": 200,
+      "Pattern": "Entropy",
+      "Capacity": 1179648,
+      "Width": 320
+    },
+    {
+      "Style": "Matrix",
+      "Decorations": 1,
+      "Passed": true,
+      "ComparedBytes": 258802,
+      "Mode": "Strips",
+      "Height": 200,
+      "Pattern": "Entropy",
+      "Capacity": 0,
+      "Width": 320
+    },
+    {
+      "Style": "Matrix",
+      "Decorations": 1,
+      "Passed": true,
+      "ComparedBytes": 258802,
+      "Mode": "Batch",
+      "Height": 200,
+      "Pattern": "Entropy",
+      "Capacity": 1179648,
+      "Width": 320
+    },
+    {
+      "Style": "Matrix",
+      "Decorations": 2,
+      "Passed": true,
+      "ComparedBytes": 258831,
+      "Mode": "Strips",
+      "Height": 200,
+      "Pattern": "Entropy",
+      "Capacity": 0,
+      "Width": 320
+    },
+    {
+      "Style": "Matrix",
+      "Decorations": 2,
+      "Passed": true,
+      "ComparedBytes": 258831,
+      "Mode": "Batch",
+      "Height": 200,
+      "Pattern": "Entropy",
+      "Capacity": 1179648,
+      "Width": 320
+    },
+    {
+      "Style": "Matrix",
+      "Decorations": 3,
+      "Passed": true,
+      "ComparedBytes": 258839,
+      "Mode": "Strips",
+      "Height": 200,
+      "Pattern": "Entropy",
+      "Capacity": 0,
+      "Width": 320
+    },
+    {
+      "Style": "Matrix",
+      "Decorations": 3,
+      "Passed": true,
+      "ComparedBytes": 258839,
+      "Mode": "Batch",
+      "Height": 200,
+      "Pattern": "Entropy",
+      "Capacity": 1179648,
+      "Width": 320
+    }
+  ]
+}

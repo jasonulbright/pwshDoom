@@ -12,6 +12,14 @@ try{
     $capture=Read-Receipt ($prefix+'-audio.json');$merge=Read-Receipt ($prefix+'-av.json');$sourceSet=Read-Receipt ($prefix+'-route-sources.json');$ready=Read-Receipt ($prefix+'-host-ready.json')
     Check 'Reference is a successful independently qualified two-level route' ($r.Passed -and -not $r.Error -and $r.TraceChecks -gt 0 -and $r.Transitions.Count -eq 3 -and $r.Transitions[1].State -ceq 'Intermission' -and $r.Transitions[2].State -ceq 'Level')
     Check 'Actual host and audio reach replay end without error' (-not $g.Error -and -not $g.Simulation.Error -and -not $a.Error -and -not $a.CleanupError -and $g.ExitReason -ceq 'ReplayEnd')
+    if($c.PSObject.Properties.Name -contains 'TerminalOutput'){
+        Check 'Recorded output mode and host frame accounting agree' ($g.TerminalOutput.Mode -ceq $c.TerminalOutput -and $g.TerminalOutput.Frames -eq $g.CompletedFrames -and $g.TerminalOutput.Bytes -gt 0)
+        if($c.TerminalOutput -ceq 'Batch'){
+            Check 'Batch writes exactly once for each completed image' ($g.TerminalOutput.WriteCalls -eq $g.CompletedFrames -and $g.TerminalOutput.BufferCapacity -gt 0)
+        }else{
+            Check 'Strip mode retains separate output writes without a batch buffer' ($g.TerminalOutput.WriteCalls -gt $g.CompletedFrames -and $g.TerminalOutput.BufferCapacity -eq 0)
+        }
+    }
     $count=$r.InputCommands.Count
     Check 'Every ordinary command is consumed unchanged' ($g.Simulation.Tics -eq $count -and ($g.Simulation.InputCommands|ConvertTo-Json -Compress -Depth 4) -ceq ($r.InputCommands|ConvertTo-Json -Compress -Depth 4))
     $comparison=Compare-DoomReplayCheckpoints $r.Checkpoints $g.Simulation.ReplayCheckpoints $count

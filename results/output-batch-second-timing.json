@@ -1,0 +1,178 @@
+{
+  "SourceSha256": "1166454100F1F2B5ACE57C4BCFD75E93244DDADA59A229350B1785679D261AEC",
+  "DiscoveryMs": {
+    "Count": 3117,
+    "Mean": 3.593835611164572,
+    "Median": 3.0227,
+    "P95": 7.4907,
+    "Max": 34.3013
+  },
+  "Audio": {
+    "CancelledFramesUpperBound": 0,
+    "QueueEmptyObservations": 2,
+    "InternalTimelineZeroFilledFrames": 1153.0,
+    "ReturnedFrames": 4073580,
+    "ApiDiscontinuityPackets": 0,
+    "InternalTimelineFills": [
+      {
+        "Frames": 1153,
+        "NextPacket": 9505,
+        "Frame": 5748188
+      }
+    ],
+    "TimelineZeroFilledFrames": 1557636,
+    "SubmittedFrames": 4073580
+  },
+  "AllConsecutiveWriteGapsMs": {
+    "Max": 2366.6222,
+    "Count": 5282,
+    "P50": 17.1901,
+    "P99": 33.6577,
+    "Mean": 17.917723135176036,
+    "P95": 24.3274
+  },
+  "Video": {
+    "Height": 1392,
+    "DurationSeconds": 131.65,
+    "Width": 3440
+  },
+  "ActiveSeconds": 92.4114598,
+  "Meaning": "One recorded run, not an isolated benchmark or causal before/after comparison. Gaps are consecutive console-write completion QPC differences, not frame pipeline latency or displayed images. All gaps include transitions; SameWorld is an explicitly filtered companion series. Percentiles use nearest rank. No warm-up exclusions. Timeline zero fill reflects capture alignment; software empty-queue observations and returned buffers do not prove uninterrupted acoustic playback.",
+  "ConsoleWrites": 5283,
+  "LargestGaps": [
+    {
+      "Map": 3,
+      "Tic": 3162,
+      "PreviousTic": 3160,
+      "AfterWrite": 5183,
+      "SameWorld": false,
+      "PreviousMap": 2,
+      "Milliseconds": 2366.6222
+    },
+    {
+      "Map": 2,
+      "Tic": 43,
+      "PreviousTic": 42,
+      "AfterWrite": 32,
+      "SameWorld": true,
+      "PreviousMap": 2,
+      "Milliseconds": 81.3943
+    },
+    {
+      "Map": 2,
+      "Tic": 37,
+      "PreviousTic": 36,
+      "AfterWrite": 29,
+      "SameWorld": true,
+      "PreviousMap": 2,
+      "Milliseconds": 79.4552
+    },
+    {
+      "Map": 2,
+      "Tic": 39,
+      "PreviousTic": 37,
+      "AfterWrite": 30,
+      "SameWorld": true,
+      "PreviousMap": 2,
+      "Milliseconds": 78.741
+    },
+    {
+      "Map": 2,
+      "Tic": 1,
+      "PreviousTic": 0,
+      "AfterWrite": 3,
+      "SameWorld": true,
+      "PreviousMap": 2,
+      "Milliseconds": 53.6169
+    },
+    {
+      "Map": 2,
+      "Tic": 8,
+      "PreviousTic": 7,
+      "AfterWrite": 8,
+      "SameWorld": true,
+      "PreviousMap": 2,
+      "Milliseconds": 52.8372
+    },
+    {
+      "Map": 3,
+      "Tic": 3171,
+      "PreviousTic": 3171,
+      "AfterWrite": 5195,
+      "SameWorld": true,
+      "PreviousMap": 3,
+      "Milliseconds": 52.5603
+    },
+    {
+      "Map": 2,
+      "Tic": 17,
+      "PreviousTic": 15,
+      "AfterWrite": 14,
+      "SameWorld": true,
+      "PreviousMap": 2,
+      "Milliseconds": 50.6115
+    },
+    {
+      "Map": 2,
+      "Tic": 0,
+      "PreviousTic": 0,
+      "AfterWrite": 1,
+      "SameWorld": true,
+      "PreviousMap": 2,
+      "Milliseconds": 49.4354
+    },
+    {
+      "Map": 2,
+      "Tic": 42,
+      "PreviousTic": 39,
+      "AfterWrite": 31,
+      "SameWorld": true,
+      "PreviousMap": 2,
+      "Milliseconds": 49.1059
+    }
+  ],
+  "ConsoleWritesPerActiveSecond": 57.16823445310405,
+  "WallSeconds": 94.7421213,
+  "SimulationUpdateMs": {
+    "Count": 3233,
+    "Mean": 8.878645313949866,
+    "Median": 6.7353,
+    "P95": 17.3219,
+    "Max": 1283.1975
+  },
+  "Error": null,
+  "SimulationTicsPerActiveSecond": 34.98483853622665,
+  "Commands": 3233,
+  "SimulationLatenessMs": {
+    "Count": 3233,
+    "Mean": 16.935835570677366,
+    "Median": 8.175557142858452,
+    "P95": 78.76817142857146,
+    "Max": 242.63068571429176
+  },
+  "SameWorldWriteGapsMs": {
+    "Max": 81.3943,
+    "Count": 5141,
+    "P50": 17.0866,
+    "P99": 32.8358,
+    "Mean": 17.349063645205195,
+    "P95": 23.7798
+  },
+  "SnapshotMs": {
+    "Count": 3233,
+    "Mean": 6.329522610578412,
+    "Median": 5.4955,
+    "P95": 10.5498,
+    "Max": 155.3925
+  },
+  "Receipts": [
+    {
+      "Path": "C:\\projects\\pwshDoom\\local\\recordings\\output-batch-second-game.json",
+      "Sha256": "22680BDC5F02B728243B16CAC45C1D72AD8C9F3687F5B01A7D782CA01FB87531"
+    },
+    {
+      "Path": "C:\\projects\\pwshDoom\\local\\recordings\\output-batch-second-av.json",
+      "Sha256": "7704B0B3B2ECD77958F89543CAFD01D2B991A23AB3612C5D4156090A822EEA5F"
+    }
+  ]
+}

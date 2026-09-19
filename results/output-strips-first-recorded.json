@@ -1,0 +1,479 @@
+{
+  "SourceSha256": "758DB93FB269285931944C8EC01F791ADF92158BD198A5906B8416F3B1133200",
+  "Checks": [
+    {
+      "Name": "Reference is a successful independently qualified two-level route",
+      "Passed": true
+    },
+    {
+      "Name": "Actual host and audio reach replay end without error",
+      "Passed": true
+    },
+    {
+      "Name": "Recorded output mode and host frame accounting agree",
+      "Passed": true
+    },
+    {
+      "Name": "Strip mode retains separate output writes without a batch buffer",
+      "Passed": true
+    },
+    {
+      "Name": "Every ordinary command is consumed unchanged",
+      "Passed": true
+    },
+    {
+      "Name": "Every independent selected-state checkpoint matches directly",
+      "Passed": true
+    },
+    {
+      "Name": "Exit and destination transitions retain command timing and inventory",
+      "Passed": true
+    },
+    {
+      "Name": "Destination generation is actually submitted by the terminal host",
+      "Passed": true
+    },
+    {
+      "Name": "Three score starts and one epoch reset are recorded",
+      "Passed": true
+    },
+    {
+      "Name": "Score D_E1M2 begins at its expected packet",
+      "Passed": true
+    },
+    {
+      "Name": "Score D_E1M2 pins a successful qualification",
+      "Passed": true
+    },
+    {
+      "Name": "Score D_INTER begins at its expected packet",
+      "Passed": true
+    },
+    {
+      "Name": "Score D_INTER pins a successful qualification",
+      "Passed": true
+    },
+    {
+      "Name": "Score D_E1M3 begins at its expected packet",
+      "Passed": true
+    },
+    {
+      "Name": "Score D_E1M3 pins a successful qualification",
+      "Passed": true
+    },
+    {
+      "Name": "All tic audio is consumed with no stale or unconsumed packet",
+      "Passed": true
+    },
+    {
+      "Name": "All submitted audio frames return before device closure",
+      "Passed": true
+    },
+    {
+      "Name": "Music readers and the device close cleanly",
+      "Passed": true
+    },
+    {
+      "Name": "Old audio completes before the new world and asset handoff",
+      "Passed": true
+    },
+    {
+      "Name": "Source is unchanged: scripts/Invoke-AudioWorker.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Source is unchanged: scripts/Invoke-GameRenderWorker.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Source is unchanged: scripts/Invoke-SimulationWorker.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Source is unchanged: scripts/Invoke-TerminalOutputTrial.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Source is unchanged: scripts/Test-CampaignRecording.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Source is unchanged: src/AudioMixer.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Source is unchanged: src/AudioPackets.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Source is unchanged: src/AudioRunspace.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Source is unchanged: src/CharacterCodec.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Source is unchanged: src/FastRenderer.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Source is unchanged: src/GameHost.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Source is unchanged: src/GameProcesses.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Source is unchanged: src/ManagedDoom/Doom/Game/DoomGame.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Source is unchanged: src/ManagedDoom/Doom/Math/Geometry.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Source is unchanged: src/ManagedDoom/Doom/World/Mobj.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Source is unchanged: src/ManagedDoom/Video/ThreeDRenderer.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Source is unchanged: src/MusicEvents.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Source is unchanged: src/MusicLoopReader.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Source is unchanged: src/MusicPlayback.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Source is unchanged: src/RenderAssets.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Source is unchanged: src/RenderLighting.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Source is unchanged: src/SimulationProcess.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Source is unchanged: src/SnapshotTransport.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Source is unchanged: src/TerminalOutput.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Source is unchanged: Start-Doom.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Source is unchanged: scripts/Invoke-Doom.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Source is unchanged: scripts/Record-DoomReplay.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Source is unchanged: scripts/Record-ProcessAudio.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Source is unchanged: scripts/Merge-DoomCaptureAudio.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Source is unchanged: src/ProcessAudioCapture.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Source is unchanged: src/CaptureClock.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Source is unchanged: src/CaptureTimeline.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Source is unchanged: src/TerminalOutput.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Capture pins the requested IWAD, replay and music catalog",
+      "Passed": true
+    },
+    {
+      "Name": "Fresh owned window and process-scoped audio capture complete",
+      "Passed": true
+    },
+    {
+      "Name": "Original PCM and delivered movie hashes remain intact",
+      "Passed": true
+    },
+    {
+      "Name": "Mux preserves original video packet timing and compressed frames",
+      "Passed": true
+    },
+    {
+      "Name": "Full delivered audiovisual movie decodes",
+      "Passed": true
+    },
+    {
+      "Name": "Captured input recording retains all original commands and start settings",
+      "Passed": true
+    }
+  ],
+  "Meaning": "Recorded independently qualified ordinary-input level/intermission/next-level route. Caller declares expected map scores; reference checkpoints and commands are compared directly. Buffer return, starvation, canceled tails and pacing are reported rather than treated as universal performance success. No full campaign or physical listening claim.",
+  "Details": {
+    "ActiveSeconds": 93.1865965,
+    "MusicTransitions": [
+      {
+        "Kind": "Start",
+        "Loop": true,
+        "AfterFrames": 0,
+        "Track": "D_E1M2"
+      },
+      {
+        "Kind": "Start",
+        "Loop": true,
+        "AfterFrames": 3837960,
+        "Track": "D_INTER"
+      },
+      {
+        "Kind": "EpochReset",
+        "AfterFrames": 3982860
+      },
+      {
+        "Kind": "Start",
+        "Loop": true,
+        "AfterFrames": 3982860,
+        "Track": "D_E1M3"
+      }
+    ],
+    "Transitions": [
+      {
+        "State": "Level",
+        "Ammo": [
+          50,
+          0,
+          0,
+          0
+        ],
+        "Armor": 0,
+        "Generation": 1,
+        "Map": 2,
+        "Weapons": [
+          true,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "Keys": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "Episode": 1,
+        "Tic": 0,
+        "Kills": 0,
+        "DidSecret": false,
+        "Health": 100
+      },
+      {
+        "State": "Intermission",
+        "Ammo": [
+          122,
+          13,
+          0,
+          0
+        ],
+        "Armor": 0,
+        "Generation": 1,
+        "Map": 2,
+        "Weapons": [
+          true,
+          true,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "Keys": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "Episode": 1,
+        "Tic": 3046,
+        "Kills": 21,
+        "DidSecret": false,
+        "Health": 82
+      },
+      {
+        "State": "Level",
+        "Ammo": [
+          122,
+          13,
+          0,
+          0
+        ],
+        "Armor": 0,
+        "Generation": 2,
+        "Map": 3,
+        "Weapons": [
+          true,
+          true,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "Keys": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "Episode": 1,
+        "Tic": 3162,
+        "Kills": 0,
+        "DidSecret": false,
+        "Health": 82
+      }
+    ],
+    "VideoSha256": "767B4F71A27DE7D7710307487A57634D4A409B6CAC5278D384D680DBC521533C",
+    "ReturnedFrames": 4073580,
+    "Video": "C:\\projects\\pwshDoom\\local\\recordings\\output-strips-first-av.mp4",
+    "Commands": 3233,
+    "CancelledFramesUpperBound": 0,
+    "Checkpoints": 13,
+    "Loading": [
+      {
+        "AudioDrain": {
+          "AcknowledgedQpc": 650513601740,
+          "ThroughSequence": 3160,
+          "WaitMilliseconds": 854.3424,
+          "CompletedFrames": 3982860
+        },
+        "EndQpc": 650534351891,
+        "StartQpc": 650505162501,
+        "BeforeAssetsMilliseconds": 1801.33,
+        "Map": 3,
+        "TotalMilliseconds": 2918.939,
+        "Episode": 1,
+        "Tic": 3161
+      }
+    ],
+    "SubmittedFrames": 4073580,
+    "Starvation": [
+      {
+        "AfterPacket": 9,
+        "WallMs": 25525.2529
+      },
+      {
+        "AfterPacket": 16,
+        "WallMs": 25965.2242
+      },
+      {
+        "AfterPacket": 29,
+        "WallMs": 26665.1471
+      },
+      {
+        "AfterPacket": 34,
+        "WallMs": 26926.3567
+      },
+      {
+        "AfterPacket": 35,
+        "WallMs": 27105.4583
+      },
+      {
+        "AfterPacket": 40,
+        "WallMs": 27645.1497
+      },
+      {
+        "AfterPacket": 3164,
+        "WallMs": 119215.2135
+      }
+    ],
+    "PcmSha256": "E3F83A18976BF6DB60D16A707770B3ED3EAE14FA9E1A173D3417DCFF1F2DD0CF",
+    "Writes": 3675,
+    "WallSeconds": 96.0854378
+  },
+  "Receipts": [
+    {
+      "Path": "C:\\projects\\pwshDoom\\results\\e1m2-qualified-declared-destination.json",
+      "Sha256": "F0DB742A0C1118ED3362C2F9E5E2185238E57F42ABB04AD27375018C4A12CE65"
+    },
+    {
+      "Path": "C:\\projects\\pwshDoom\\local\\recordings\\output-strips-first-game.json",
+      "Sha256": "F7D713548909C9C9CF111C1B4225B2D5A432BD3D2CFA3FC8287B4F173AAC157E"
+    },
+    {
+      "Path": "C:\\projects\\pwshDoom\\local\\recordings\\output-strips-first-recording.json",
+      "Sha256": "25918AE45E6E93FE936E8F235C6B2C9F653129AA200B446076864EE0A4E6CF71"
+    },
+    {
+      "Path": "C:\\projects\\pwshDoom\\local\\recordings\\output-strips-first-audio.json",
+      "Sha256": "3FCB89A0A2AF12D421351FFAA1C9E2B6C34246B97B06E0D0F73C2B1E25392CB4"
+    },
+    {
+      "Path": "C:\\projects\\pwshDoom\\local\\recordings\\output-strips-first-av.json",
+      "Sha256": "B1282C8E2CAE862C4D6F2F233767719344BA8D2FB99C3FD519C31A9931F3FB48"
+    },
+    {
+      "Path": "C:\\projects\\pwshDoom\\local\\recordings\\output-strips-first-route-sources.json",
+      "Sha256": "F4BA7CC2FC281179DF3BEBE7D8E59C018A0CBBC5AA1BB79FB5E85B3198E14DBA"
+    },
+    {
+      "Path": "C:\\projects\\pwshDoom\\local\\recordings\\output-strips-first-host-ready.json",
+      "Sha256": "35DAE1D95A03CFBCC2ABCB8B78B05291693269B5C6E0905B6FC9F2CE8E376BD5"
+    },
+    {
+      "Path": "C:\\projects\\pwshDoom\\results\\music-loop-e1m2-first.json",
+      "Sha256": "B2EBA683C99C515DE356A3D9E8E77824D775F59695F7CC14EC9F4D88B2D75518"
+    },
+    {
+      "Path": "C:\\projects\\pwshDoom\\results\\music-loop-inter-first.json",
+      "Sha256": "084536988F462CD7C6718665FA53DCD6BB1009B3FCBCDD4556C50D51AC1B1778"
+    },
+    {
+      "Path": "C:\\projects\\pwshDoom\\results\\music-loop-e1m3-prepared.json",
+      "Sha256": "DF75B2743048D05106F500317127BA462D2A2BB3F0EE1A63D9CA1E3D0F1697B2"
+    },
+    {
+      "Path": "C:\\projects\\pwshDoom\\local\\recordings\\output-strips-first-input.json",
+      "Sha256": "87CFDA38BBDD0489733D773CF92C92B1EC182C0B0B630819A7042D992DFA2CA1"
+    }
+  ],
+  "Error": null
+}

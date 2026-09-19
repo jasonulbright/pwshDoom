@@ -2,6 +2,7 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 # External window capture. FFmpeg is not an engine, renderer, or game dependency.
 param([ValidateSet('Classic','AnsiArt','Matrix')][string]$Style='Matrix',
+    [ValidateSet('Strips','Batch')][string]$TerminalOutput='Strips',
     [ValidateSet('Ascii','Katakana')][string]$GlyphSet='Katakana',
     [string]$Wad='C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\base\DOOM.WAD',
     [string]$Replay="$PSScriptRoot/../results/e1m1-route.json",
@@ -44,10 +45,11 @@ if($RecordInput -and (Test-Path -LiteralPath ($prefix+'-input.json'))){throw 'In
 [void][IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName($prefix))
 $recorder=$null;$target=$null;$failure=$null;$captureQpc=$null;$exitCode=$null;$stderr='';$game=$null
 $audioRecorder=$null;$audioExitCode=$null;$audioStdout=$null;$audioStderr=$null;$clockAnchors=[Collections.Generic.List[object]]::new()
-$sourceNames=@('Start-Doom.ps1','scripts/Invoke-Doom.ps1','scripts/Record-DoomReplay.ps1','scripts/Record-ProcessAudio.ps1','scripts/Merge-DoomCaptureAudio.ps1','src/ProcessAudioCapture.ps1','src/CaptureClock.ps1','src/CaptureTimeline.ps1')
+$sourceNames=@('Start-Doom.ps1','scripts/Invoke-Doom.ps1','scripts/Record-DoomReplay.ps1','scripts/Record-ProcessAudio.ps1','scripts/Merge-DoomCaptureAudio.ps1','src/ProcessAudioCapture.ps1','src/CaptureClock.ps1','src/CaptureTimeline.ps1','src/TerminalOutput.ps1')
 $sourceSnapshot=@($sourceNames|ForEach-Object {@{Path=$_;Sha256=(Get-FileHash "$PSScriptRoot/../$_").Hash}})
 try {
     $launch=@{Wad=$Wad;Replay=$Replay;Style=$Style;GlyphSet=$GlyphSet;Seconds=$Seconds;FontSize=$FontSize;FontFace=$FontFace;Maximized=$Maximized;ExitDelaySeconds=$ExitDelaySeconds;Report=$gamePath}
+    $launch.TerminalOutput=$TerminalOutput
     if($SessionSchedule){$launch.SessionSchedule=$SessionSchedule}
     if($SaveRoot){$launch.SaveRoot=$SaveRoot}
     if($SettingsPath){$launch.SettingsPath=$SettingsPath}
@@ -143,7 +145,7 @@ finally {
     }
     $stderr | Set-Content -LiteralPath ($prefix+'-ffmpeg.log')
     @{FinishedUtc=[DateTime]::UtcNow.ToString('o');Error=$failure;Style=$Style;GlyphSet=$GlyphSet;FontFace=$FontFace;FontSize=$FontSize;Maximized=[bool]$Maximized;CaptureBackend=$CaptureBackend;CaptureLimit=if($CaptureBackend -eq 'GraphicsCapture'){$CaptureLimit}else{$null};VideoFps=60;ExpectedExit=$expectedEnding;ReplaySha256=(Get-FileHash -LiteralPath $Replay).Hash;StartupTimeoutSeconds=$StartupTimeoutSeconds;CaptureDeadlineSeconds=$Seconds+$StartupTimeoutSeconds+15;
-        Sources=$sourceSnapshot;SourcesChangedDuringRun=@($sourceSnapshot|Where-Object {$_.Sha256 -cne (Get-FileHash "$PSScriptRoot/../$($_.Path)").Hash});SoundRequested=[bool]$Sound;MusicCatalogSha256=if($MusicCatalog){(Get-FileHash $MusicCatalog).Hash}else{$null};AudioCaptured=$false;AudioCaptureRequested=[bool]$CaptureAudio;AudioExitCode=$audioExitCode;
+        TerminalOutput=$TerminalOutput;Sources=$sourceSnapshot;SourcesChangedDuringRun=@($sourceSnapshot|Where-Object {$_.Sha256 -cne (Get-FileHash "$PSScriptRoot/../$($_.Path)").Hash});SoundRequested=[bool]$Sound;MusicCatalogSha256=if($MusicCatalog){(Get-FileHash $MusicCatalog).Hash}else{$null};AudioCaptured=$false;AudioCaptureRequested=[bool]$CaptureAudio;AudioExitCode=$audioExitCode;
         AudioReport=if($CaptureAudio){$audioPrefix+'.json'}else{$null};ClockReport=if($CaptureAudio){$clockPath}else{$null};
         SessionScheduleSha256=if($SessionSchedule){(Get-FileHash -LiteralPath $SessionSchedule).Hash}else{$null};SaveRoot=$SaveRoot;ExitDelaySeconds=$ExitDelaySeconds;InputReplaySha256=if($RecordInput -and (Test-Path -LiteralPath ($prefix+'-input.json'))){(Get-FileHash -LiteralPath ($prefix+'-input.json')).Hash}else{$null};
         TerminalPid=if($null -ne $target){$target.Id}else{$null};WindowHandle=if($null -ne $target){$target.MainWindowHandle.ToInt64()}else{$null};

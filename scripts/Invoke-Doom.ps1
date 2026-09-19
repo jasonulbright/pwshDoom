@@ -7,6 +7,7 @@ param([Parameter(Mandatory)][string]$Wad,[ValidateRange(1,32)][int]$Workers=16,
     [ValidateRange(1,4)][int]$Episode=1,[ValidateRange(1,32)][int]$Map=1,
     [ValidateSet('Classic','AnsiArt','Matrix')][string]$Style='Classic',
     [ValidateSet('Ascii','Katakana')][string]$GlyphSet='Katakana',
+    [ValidateSet('Strips','Batch')][string]$TerminalOutput='Strips',
     [string]$Report="$PSScriptRoot/../local/game-session.json",[string]$ReadyFile,[string]$CaptureStartFile,[string]$SaveRoot,[string]$SettingsPath,
     [switch]$Diagnostics,[string]$ViewportSchedule,[string]$SessionSchedule,[ValidateRange(0,30)][int]$ExitDelaySeconds=0)
 $ErrorActionPreference='Stop'
@@ -18,6 +19,8 @@ if($MusicCatalog){$Sound=$true}
 . "$PSScriptRoot/../src/CharacterCodec.ps1"
 . "$PSScriptRoot/../src/InputReplay.ps1"
 . "$PSScriptRoot/../src/SessionMenu.ps1"
+. "$PSScriptRoot/../src/TerminalOutput.ps1"
+$terminalOutputContext=New-DoomTerminalOutputContext;$emptyOutput=[byte[]]::new(0)
 # Input values only; the actual TicCmd and Doom engine live in the simulation process.
 class HostInputCommand {
     [sbyte]$ForwardMove;[sbyte]$SideMove;[int16]$AngleTurn;[byte]$Buttons
@@ -302,15 +305,15 @@ try {
             if($menu.Screen -eq 0){$activeFrame=Start-DoomRenderJob $pool $snapshot $clock $interpolationTimes $viewport;$inFlight=$true}
             $outputWatch=[Diagnostics.Stopwatch]::StartNew()
             if(-not $Headless) {
-                $stdout.Write($frameStart)
-                if($needsClear){$stdout.Write([Text.Encoding]::UTF8.GetBytes("$esc[0m$esc[2J"));$needsClear=$false}
-                foreach($result in $present.Results){$stdout.Write($result.Bytes)}
+                [byte[]]$clearOutput=$emptyOutput
+                if($needsClear){$clearOutput=[Text.Encoding]::UTF8.GetBytes("$esc[0m$esc[2J")}
+                [byte[]]$statusOutput=$emptyOutput
                 if($Diagnostics) {
                     $statusLine="$esc[$($viewport.StatusTop+1);$($viewport.Left+1)H$esc[0mpwshDoom | WASD move | arrows turn | Ctrl fire | E/Space use | Shift run | 1-7 weapons | P pause | Esc menu"
                     $statusLine+="$esc[$($viewport.StatusTop+2);$($viewport.Left+1)Htic $($snapshot.Tic) | $([Math]::Round($completed/[Math]::Max(.01,$clock.Elapsed.TotalSeconds),1)) completed updates/s | health $($snapshot.Health) | kills $($snapshot.Kills)       "
-                    $stdout.Write([Text.Encoding]::UTF8.GetBytes($statusLine))
+                    $statusOutput=[Text.Encoding]::UTF8.GetBytes($statusLine)
                 }
-                $stdout.Write($frameEnd);$stdout.Flush()
+                Write-DoomTerminalFrame $terminalOutputContext $stdout $present.Results $frameStart $frameEnd $clearOutput $statusOutput -Mode $TerminalOutput
             }
             $needsClear=$false
             $endQpc=[Diagnostics.Stopwatch]::GetTimestamp();$frameTimes.Add(($endQpc-$present.StartQpc)*1000.0/[Diagnostics.Stopwatch]::Frequency);$completed++
@@ -375,6 +378,7 @@ finally {
         MapReloads=$mapReloads.ToArray();MapReloadPausedSeconds=$loadingMs/1000;DiscardedTransitionFrames=$transitionDiscarded;FinalAssetGeneration=$assetGeneration;
         CompletedUpdatesPerWallSecond=$completed/[Math]::Max(.001,$wallClock.Elapsed.TotalSeconds);DiscardedResizeFrames=$resizeDiscarded;
         Diagnostics=[bool]$Diagnostics;SyntheticViewport=[bool]$ViewportSchedule;ViewportChanges=$viewportChanges.ToArray();
+        TerminalOutput=@{Mode=$TerminalOutput;Frames=$terminalOutputContext.Frames;Bytes=$terminalOutputContext.Bytes;WriteCalls=$terminalOutputContext.Writes;BufferCapacity=$terminalOutputContext.Buffer.Length};
         CompletedFrames=$completed;CompletedUpdatesPerSecond=$completed/[Math]::Max(.001,$clock.Elapsed.TotalSeconds);FrameMs=(Get-SampleStats $frameTimes.ToArray());
         InterpolationMs=(Get-SampleStats $interpolationTimes.ToArray());FrameSamplesMs=$frameTimes.ToArray();FrameStats=$frameStats.ToArray();Simulation=$simulationReport;
         Requested1msTimer=$timerRequested;TerminalColumns=$terminalWidth;TerminalRows=$terminalHeight;WorkerWorkingSetBytes=$workerMemory;SimulationWorkingSetBytes=$simMemory;

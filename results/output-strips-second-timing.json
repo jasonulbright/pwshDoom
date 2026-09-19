@@ -1,0 +1,178 @@
+{
+  "SnapshotMs": {
+    "Count": 3233,
+    "Mean": 5.999048437983307,
+    "Median": 5.3315,
+    "P95": 8.4082,
+    "Max": 132.5953
+  },
+  "Meaning": "One recorded run, not an isolated benchmark or causal before/after comparison. Gaps are consecutive console-write completion QPC differences, not frame pipeline latency or displayed images. All gaps include transitions; SameWorld is an explicitly filtered companion series. Percentiles use nearest rank. No warm-up exclusions. Timeline zero fill reflects capture alignment; software empty-queue observations and returned buffers do not prove uninterrupted acoustic playback.",
+  "Audio": {
+    "ApiDiscontinuityPackets": 0,
+    "SubmittedFrames": 4073580,
+    "QueueEmptyObservations": 3,
+    "TimelineZeroFilledFrames": 1592909,
+    "CancelledFramesUpperBound": 0,
+    "ReturnedFrames": 4073580,
+    "InternalTimelineZeroFilledFrames": 1218.0,
+    "InternalTimelineFills": [
+      {
+        "Frames": 1218,
+        "NextPacket": 9537,
+        "Frame": 5797508
+      }
+    ]
+  },
+  "ConsoleWrites": 5105,
+  "Video": {
+    "Width": 3440,
+    "DurationSeconds": 132.583333,
+    "Height": 1392
+  },
+  "ActiveSeconds": 92.4191379,
+  "Error": null,
+  "AllConsecutiveWriteGapsMs": {
+    "Count": 5104,
+    "Max": 2683.4889,
+    "P50": 17.9624,
+    "P99": 34.1008,
+    "Mean": 18.6074651253919,
+    "P95": 24.9026
+  },
+  "SimulationLatenessMs": {
+    "Count": 3233,
+    "Mean": 25.967427899783452,
+    "Median": 11.666357142850757,
+    "P95": 107.89547142857009,
+    "Max": 499.2223857142858
+  },
+  "SimulationUpdateMs": {
+    "Count": 3233,
+    "Mean": 8.961179028765839,
+    "Median": 6.9001,
+    "P95": 16.1938,
+    "Max": 1573.4382
+  },
+  "Receipts": [
+    {
+      "Path": "C:\\projects\\pwshDoom\\local\\recordings\\output-strips-second-game.json",
+      "Sha256": "B0DCE722E215DD49B95DFA38EA8606A31191F4226CFE55071E2D5199E2BCC23F"
+    },
+    {
+      "Path": "C:\\projects\\pwshDoom\\local\\recordings\\output-strips-second-av.json",
+      "Sha256": "1C9207C8B54E219CC300E4BC7EFDB3F7E9907700F37024006DB154996F054A3A"
+    }
+  ],
+  "WallSeconds": 95.0622168,
+  "DiscoveryMs": {
+    "Count": 3117,
+    "Mean": 3.3716469361565737,
+    "Median": 2.8065,
+    "P95": 7.3552,
+    "Max": 17.0105
+  },
+  "Commands": 3233,
+  "ConsoleWritesPerActiveSecond": 55.237476955517025,
+  "SameWorldWriteGapsMs": {
+    "Count": 4975,
+    "Max": 217.2538,
+    "P50": 17.8052,
+    "P99": 32.9196,
+    "Mean": 17.92803123618097,
+    "P95": 24.5025
+  },
+  "SimulationTicsPerActiveSecond": 34.981932026872975,
+  "LargestGaps": [
+    {
+      "Map": 3,
+      "PreviousTic": 3160,
+      "SameWorld": false,
+      "AfterWrite": 5008,
+      "Tic": 3162,
+      "PreviousMap": 2,
+      "Milliseconds": 2683.4889
+    },
+    {
+      "Map": 2,
+      "PreviousTic": 33,
+      "SameWorld": true,
+      "AfterWrite": 27,
+      "Tic": 34,
+      "PreviousMap": 2,
+      "Milliseconds": 217.2538
+    },
+    {
+      "Map": 2,
+      "PreviousTic": 34,
+      "SameWorld": true,
+      "AfterWrite": 28,
+      "Tic": 35,
+      "PreviousMap": 2,
+      "Milliseconds": 189.3488
+    },
+    {
+      "Map": 2,
+      "PreviousTic": 30,
+      "SameWorld": true,
+      "AfterWrite": 24,
+      "Tic": 31,
+      "PreviousMap": 2,
+      "Milliseconds": 67.7726
+    },
+    {
+      "Map": 3,
+      "PreviousTic": 3166,
+      "SameWorld": true,
+      "AfterWrite": 5014,
+      "Tic": 3167,
+      "PreviousMap": 3,
+      "Milliseconds": 65.4213
+    },
+    {
+      "Map": 2,
+      "PreviousTic": 29,
+      "SameWorld": true,
+      "AfterWrite": 23,
+      "Tic": 30,
+      "PreviousMap": 2,
+      "Milliseconds": 64.7554
+    },
+    {
+      "Map": 2,
+      "PreviousTic": 6,
+      "SameWorld": true,
+      "AfterWrite": 7,
+      "Tic": 7,
+      "PreviousMap": 2,
+      "Milliseconds": 58.4297
+    },
+    {
+      "Map": 2,
+      "PreviousTic": 20,
+      "SameWorld": true,
+      "AfterWrite": 17,
+      "Tic": 22,
+      "PreviousMap": 2,
+      "Milliseconds": 47.5892
+    },
+    {
+      "Map": 2,
+      "PreviousTic": 11,
+      "SameWorld": true,
+      "AfterWrite": 11,
+      "Tic": 12,
+      "PreviousMap": 2,
+      "Milliseconds": 46.6103
+    },
+    {
+      "Map": 3,
+      "PreviousTic": 3168,
+      "SameWorld": true,
+      "AfterWrite": 5017,
+      "Tic": 3169,
+      "PreviousMap": 3,
+      "Milliseconds": 46.2292
+    }
+  ],
+  "SourceSha256": "1166454100F1F2B5ACE57C4BCFD75E93244DDADA59A229350B1785679D261AEC"
+}

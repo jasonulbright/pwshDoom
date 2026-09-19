@@ -1,0 +1,183 @@
+{
+  "SnapshotMs": {
+    "Count": 3233,
+    "Mean": 6.90635672749766,
+    "Median": 5.7707,
+    "P95": 14.5717,
+    "Max": 147.4025
+  },
+  "LargestGaps": [
+    {
+      "Tic": 3162,
+      "Map": 3,
+      "Milliseconds": 3094.2586,
+      "PreviousMap": 2,
+      "AfterWrite": 3488,
+      "PreviousTic": 3160,
+      "SameWorld": false
+    },
+    {
+      "Tic": 39,
+      "Map": 2,
+      "Milliseconds": 197.2351,
+      "PreviousMap": 2,
+      "AfterWrite": 29,
+      "PreviousTic": 36,
+      "SameWorld": true
+    },
+    {
+      "Tic": 36,
+      "Map": 2,
+      "Milliseconds": 123.9497,
+      "PreviousMap": 2,
+      "AfterWrite": 28,
+      "PreviousTic": 35,
+      "SameWorld": true
+    },
+    {
+      "Tic": 41,
+      "Map": 2,
+      "Milliseconds": 115.6449,
+      "PreviousMap": 2,
+      "AfterWrite": 30,
+      "PreviousTic": 39,
+      "SameWorld": true
+    },
+    {
+      "Tic": 42,
+      "Map": 2,
+      "Milliseconds": 110.2925,
+      "PreviousMap": 2,
+      "AfterWrite": 31,
+      "PreviousTic": 41,
+      "SameWorld": true
+    },
+    {
+      "Tic": 3,
+      "Map": 2,
+      "Milliseconds": 93.6876,
+      "PreviousMap": 2,
+      "AfterWrite": 4,
+      "PreviousTic": 1,
+      "SameWorld": true
+    },
+    {
+      "Tic": 33,
+      "Map": 2,
+      "Milliseconds": 91.3183,
+      "PreviousMap": 2,
+      "AfterWrite": 24,
+      "PreviousTic": 32,
+      "SameWorld": true
+    },
+    {
+      "Tic": 43,
+      "Map": 2,
+      "Milliseconds": 85.7078,
+      "PreviousMap": 2,
+      "AfterWrite": 32,
+      "PreviousTic": 42,
+      "SameWorld": true
+    },
+    {
+      "Tic": 28,
+      "Map": 2,
+      "Milliseconds": 80.9319,
+      "PreviousMap": 2,
+      "AfterWrite": 21,
+      "PreviousTic": 28,
+      "SameWorld": true
+    },
+    {
+      "Tic": 0,
+      "Map": 2,
+      "Milliseconds": 78.0602,
+      "PreviousMap": 2,
+      "AfterWrite": 2,
+      "PreviousTic": 0,
+      "SameWorld": true
+    }
+  ],
+  "Error": null,
+  "SimulationUpdateMs": {
+    "Count": 3233,
+    "Mean": 10.561472223940607,
+    "Median": 7.9759,
+    "P95": 20.7808,
+    "Max": 1907.7548
+  },
+  "AllConsecutiveWriteGapsMs": {
+    "P50": 24.6045,
+    "Max": 3094.2586,
+    "Count": 3559,
+    "Mean": 26.78671019949427,
+    "P95": 40.8696,
+    "P99": 50.7437
+  },
+  "SameWorldWriteGapsMs": {
+    "P50": 24.6775,
+    "Max": 197.2351,
+    "Count": 3434,
+    "Mean": 25.981932411182317,
+    "P95": 40.8741,
+    "P99": 50.6933
+  },
+  "Receipts": [
+    {
+      "Path": "C:\\projects\\pwshDoom\\local\\recordings\\output-batch-first-game.json",
+      "Sha256": "DF0E4614D7B5078B37E3C9F707435AAC0486287034135A740351ED1FBC2A7113"
+    },
+    {
+      "Path": "C:\\projects\\pwshDoom\\local\\recordings\\output-batch-first-av.json",
+      "Sha256": "B016DBF467BD2B3404682C268313F3CFDE922D1A7E1C6FE25F60662E8412B2BC"
+    }
+  ],
+  "Meaning": "One recorded run, not an isolated benchmark or causal before/after comparison. Gaps are consecutive console-write completion QPC differences, not frame pipeline latency or displayed images. All gaps include transitions; SameWorld is an explicitly filtered companion series. Percentiles use nearest rank. No warm-up exclusions. Timeline zero fill reflects capture alignment; software empty-queue observations and returned buffers do not prove uninterrupted acoustic playback.",
+  "Video": {
+    "Width": 3440,
+    "DurationSeconds": 135.85,
+    "Height": 1392
+  },
+  "ConsoleWritesPerActiveSecond": 38.524305526510524,
+  "Audio": {
+    "InternalTimelineFills": [
+      {
+        "Frames": 2205,
+        "NextPacket": 8251,
+        "Frame": 5362919
+      },
+      {
+        "Frames": 1563,
+        "NextPacket": 9580,
+        "Frame": 5951213
+      }
+    ],
+    "SubmittedFrames": 4073580,
+    "InternalTimelineZeroFilledFrames": 3768.0,
+    "CancelledFramesUpperBound": 0,
+    "QueueEmptyObservations": 6,
+    "ApiDiscontinuityPackets": 0,
+    "TimelineZeroFilledFrames": 1727996,
+    "ReturnedFrames": 4073580
+  },
+  "DiscoveryMs": {
+    "Count": 3117,
+    "Mean": 4.054028521013789,
+    "Median": 3.1301,
+    "P95": 9.7934,
+    "Max": 47.7432
+  },
+  "SimulationTicsPerActiveSecond": 34.98569656382262,
+  "WallSeconds": 95.4554837,
+  "ActiveSeconds": 92.4091934,
+  "SourceSha256": "1166454100F1F2B5ACE57C4BCFD75E93244DDADA59A229350B1785679D261AEC",
+  "Commands": 3233,
+  "ConsoleWrites": 3560,
+  "SimulationLatenessMs": {
+    "Count": 3233,
+    "Mean": 287.8511278069898,
+    "Median": 274.52319999999963,
+    "P95": 731.7630000000063,
+    "Max": 904.3589428571429
+  }
+}

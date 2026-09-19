@@ -1,0 +1,178 @@
+{
+  "LargestGaps": [
+    {
+      "Tic": 3162,
+      "Map": 3,
+      "AfterWrite": 3610,
+      "Milliseconds": 2960.2532,
+      "SameWorld": false,
+      "PreviousMap": 2,
+      "PreviousTic": 3160
+    },
+    {
+      "Tic": 34,
+      "Map": 2,
+      "AfterWrite": 27,
+      "Milliseconds": 463.9397,
+      "SameWorld": true,
+      "PreviousMap": 2,
+      "PreviousTic": 33
+    },
+    {
+      "Tic": 14,
+      "Map": 2,
+      "AfterWrite": 11,
+      "Milliseconds": 276.7581,
+      "SameWorld": true,
+      "PreviousMap": 2,
+      "PreviousTic": 13
+    },
+    {
+      "Tic": 6,
+      "Map": 2,
+      "AfterWrite": 5,
+      "Milliseconds": 262.322,
+      "SameWorld": true,
+      "PreviousMap": 2,
+      "PreviousTic": 4
+    },
+    {
+      "Tic": 3162,
+      "Map": 3,
+      "AfterWrite": 3611,
+      "Milliseconds": 251.9742,
+      "SameWorld": true,
+      "PreviousMap": 3,
+      "PreviousTic": 3162
+    },
+    {
+      "Tic": 8,
+      "Map": 2,
+      "AfterWrite": 6,
+      "Milliseconds": 91.5063,
+      "SameWorld": true,
+      "PreviousMap": 2,
+      "PreviousTic": 6
+    },
+    {
+      "Tic": 35,
+      "Map": 2,
+      "AfterWrite": 28,
+      "Milliseconds": 89.5624,
+      "SameWorld": true,
+      "PreviousMap": 2,
+      "PreviousTic": 34
+    },
+    {
+      "Tic": 37,
+      "Map": 2,
+      "AfterWrite": 30,
+      "Milliseconds": 68.8946,
+      "SameWorld": true,
+      "PreviousMap": 2,
+      "PreviousTic": 36
+    },
+    {
+      "Tic": 4,
+      "Map": 2,
+      "AfterWrite": 4,
+      "Milliseconds": 63.9771,
+      "SameWorld": true,
+      "PreviousMap": 2,
+      "PreviousTic": 2
+    },
+    {
+      "Tic": 16,
+      "Map": 2,
+      "AfterWrite": 12,
+      "Milliseconds": 63.3386,
+      "SameWorld": true,
+      "PreviousMap": 2,
+      "PreviousTic": 14
+    }
+  ],
+  "Video": {
+    "DurationSeconds": 139.85,
+    "Height": 1392,
+    "Width": 3440
+  },
+  "Audio": {
+    "InternalTimelineZeroFilledFrames": 1190.0,
+    "InternalTimelineFills": [
+      {
+        "NextPacket": 9641,
+        "Frames": 1190,
+        "Frame": 6096579
+      }
+    ],
+    "TimelineZeroFilledFrames": 1846088,
+    "QueueEmptyObservations": 7,
+    "SubmittedFrames": 4073580,
+    "ApiDiscontinuityPackets": 0,
+    "ReturnedFrames": 4073580,
+    "CancelledFramesUpperBound": 0
+  },
+  "ActiveSeconds": 93.1865965,
+  "Receipts": [
+    {
+      "Path": "C:\\projects\\pwshDoom\\local\\recordings\\output-strips-first-game.json",
+      "Sha256": "F7D713548909C9C9CF111C1B4225B2D5A432BD3D2CFA3FC8287B4F173AAC157E"
+    },
+    {
+      "Path": "C:\\projects\\pwshDoom\\local\\recordings\\output-strips-first-av.json",
+      "Sha256": "B1282C8E2CAE862C4D6F2F233767719344BA8D2FB99C3FD519C31A9931F3FB48"
+    }
+  ],
+  "SourceSha256": "1166454100F1F2B5ACE57C4BCFD75E93244DDADA59A229350B1785679D261AEC",
+  "SnapshotMs": {
+    "Count": 3233,
+    "Mean": 6.259885988246209,
+    "Median": 5.4444,
+    "P95": 10.2749,
+    "Max": 149.6845
+  },
+  "Error": null,
+  "SimulationTicsPerActiveSecond": 34.693830673384454,
+  "AllConsecutiveWriteGapsMs": {
+    "P95": 34.6433,
+    "P99": 41.369,
+    "Max": 2960.2532,
+    "Mean": 26.118998312465997,
+    "Count": 3674,
+    "P50": 24.8233
+  },
+  "ConsoleWritesPerActiveSecond": 39.43700208001481,
+  "SimulationLatenessMs": {
+    "Count": 3233,
+    "Mean": 689.0575431178481,
+    "Median": 641.1980857142917,
+    "P95": 975.8671571428567,
+    "Max": 1423.1160857142859
+  },
+  "WallSeconds": 96.0854378,
+  "SameWorldWriteGapsMs": {
+    "P95": 34.3772,
+    "P99": 40.8879,
+    "Max": 463.9397,
+    "Mean": 25.242746374367627,
+    "Count": 3558,
+    "P50": 24.8151
+  },
+  "Commands": 3233,
+  "Meaning": "One recorded run, not an isolated benchmark or causal before/after comparison. Gaps are consecutive console-write completion QPC differences, not frame pipeline latency or displayed images. All gaps include transitions; SameWorld is an explicitly filtered companion series. Percentiles use nearest rank. No warm-up exclusions. Timeline zero fill reflects capture alignment; software empty-queue observations and returned buffers do not prove uninterrupted acoustic playback.",
+  "ConsoleWrites": 3675,
+  "SimulationUpdateMs": {
+    "Count": 3233,
+    "Mean": 9.959528270955765,
+    "Median": 7.6468,
+    "P95": 18.8552,
+    "Max": 1792.7624
+  },
+  "DiscoveryMs": {
+    "Count": 3117,
+    "Mean": 3.68896823869105,
+    "Median": 3.0168,
+    "P95": 8.2951,
+    "Max": 26.2874
+  }
+}
