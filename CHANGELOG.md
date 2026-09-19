@@ -3,6 +3,8 @@
 ## Unreleased
 
 - Preserve fence/grille pixels when drawing scenery behind two-sided transparent walls; retain actor occlusion through their holes.
+- Fix a missile-collision crash caused by looking up the sky flat on the map instead of its flat collection.
+- Repair external vanilla demo file construction in the adopted engine; this does not yet expose `.lmp` playback in the preview launcher or establish demo synchronization.
 
 ## 0.1.0-preview.1
 

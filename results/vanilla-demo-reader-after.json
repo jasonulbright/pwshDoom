@@ -1,0 +1,146 @@
+{
+  "HarnessSha256": "F4D8C3572B14C3A99B09FF9CDB7DC3EFFE94CE3AB7A2FA2DFB689ABB405451DC",
+  "Lumps": [
+    {
+      "Sha256": "7C3817081EB5CF32A118195492DD8B134E7617F142ECD1EED028CDFA60927679",
+      "Map": 5,
+      "Commands": 1710,
+      "Name": "DEMO1",
+      "Episode": 1
+    },
+    {
+      "Sha256": "A2F526018429F399C490ACB2100AC5DBF474AE056398B490E81A6FED2BF45C3D",
+      "Map": 2,
+      "Commands": 2347,
+      "Name": "DEMO2",
+      "Episode": 2
+    },
+    {
+      "Sha256": "E8F765A3A2005DDBB851433329F942D1ECDC02C38BC4C6986F71A54A590F3C76",
+      "Map": 5,
+      "Commands": 3863,
+      "Name": "DEMO3",
+      "Episode": 3
+    }
+  ],
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "BundleSha256": "FF9ED9726C8EDB306001488698F3D458FFC0B571B10DA5A2BFC0EAED34C932B8",
+  "Checks": [
+    {
+      "Passed": true,
+      "Actual": true,
+      "Name": "First signed command exists",
+      "Expected": true
+    },
+    {
+      "Passed": true,
+      "Actual": 127,
+      "Name": "Positive movement",
+      "Expected": 127
+    },
+    {
+      "Passed": true,
+      "Actual": -128,
+      "Name": "Negative sidemove",
+      "Expected": "-128"
+    },
+    {
+      "Passed": true,
+      "Actual": -32768,
+      "Name": "Negative turn",
+      "Expected": "-32768"
+    },
+    {
+      "Passed": true,
+      "Actual": 255,
+      "Name": "All button bits",
+      "Expected": 255
+    },
+    {
+      "Passed": true,
+      "Actual": true,
+      "Name": "Second command exists",
+      "Expected": true
+    },
+    {
+      "Passed": true,
+      "Actual": -1,
+      "Name": "Negative forward",
+      "Expected": "-1"
+    },
+    {
+      "Passed": true,
+      "Actual": 32512,
+      "Name": "Positive turn",
+      "Expected": 32512
+    },
+    {
+      "Passed": true,
+      "Actual": false,
+      "Name": "Terminator ends input",
+      "Expected": false
+    },
+    {
+      "Passed": true,
+      "Actual": false,
+      "Name": "Terminator remains terminal",
+      "Expected": false
+    },
+    {
+      "Passed": true,
+      "Actual": "{\"Skill\":3,\"Episode\":1,\"Map\":5,\"Deathmatch\":0,\"RespawnMonsters\":false,\"FastMonsters\":false,\"NoMonsters\":false,\"ConsolePlayer\":0,\"DemoPlayback\":true,\"NetGame\":false}",
+      "Name": "DEMO1 options match",
+      "Expected": "{\"Skill\":3,\"Episode\":1,\"Map\":5,\"Deathmatch\":0,\"RespawnMonsters\":false,\"FastMonsters\":false,\"NoMonsters\":false,\"ConsolePlayer\":0,\"DemoPlayback\":true,\"NetGame\":false}"
+    },
+    {
+      "Passed": true,
+      "Actual": true,
+      "Name": "DEMO1 every command matches",
+      "Expected": true
+    },
+    {
+      "Passed": true,
+      "Actual": false,
+      "Name": "DEMO1 file ends with lump",
+      "Expected": false
+    },
+    {
+      "Passed": true,
+      "Actual": "{\"Skill\":3,\"Episode\":2,\"Map\":2,\"Deathmatch\":0,\"RespawnMonsters\":false,\"FastMonsters\":false,\"NoMonsters\":false,\"ConsolePlayer\":0,\"DemoPlayback\":true,\"NetGame\":false}",
+      "Name": "DEMO2 options match",
+      "Expected": "{\"Skill\":3,\"Episode\":2,\"Map\":2,\"Deathmatch\":0,\"RespawnMonsters\":false,\"FastMonsters\":false,\"NoMonsters\":false,\"ConsolePlayer\":0,\"DemoPlayback\":true,\"NetGame\":false}"
+    },
+    {
+      "Passed": true,
+      "Actual": true,
+      "Name": "DEMO2 every command matches",
+      "Expected": true
+    },
+    {
+      "Passed": true,
+      "Actual": false,
+      "Name": "DEMO2 file ends with lump",
+      "Expected": false
+    },
+    {
+      "Passed": true,
+      "Actual": "{\"Skill\":3,\"Episode\":3,\"Map\":5,\"Deathmatch\":0,\"RespawnMonsters\":false,\"FastMonsters\":false,\"NoMonsters\":false,\"ConsolePlayer\":0,\"DemoPlayback\":true,\"NetGame\":false}",
+      "Name": "DEMO3 options match",
+      "Expected": "{\"Skill\":3,\"Episode\":3,\"Map\":5,\"Deathmatch\":0,\"RespawnMonsters\":false,\"FastMonsters\":false,\"NoMonsters\":false,\"ConsolePlayer\":0,\"DemoPlayback\":true,\"NetGame\":false}"
+    },
+    {
+      "Passed": true,
+      "Actual": true,
+      "Name": "DEMO3 every command matches",
+      "Expected": true
+    },
+    {
+      "Passed": true,
+      "Actual": false,
+      "Name": "DEMO3 file ends with lump",
+      "Expected": false
+    }
+  ],
+  "Error": null,
+  "Meaning": "External-file and WAD-byte decoder parity plus authored signed boundaries. No simulation synchronization or campaign-completion claim. Temporary extracted demo removed."
+}

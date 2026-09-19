@@ -1,3 +1,4 @@
+# pwshDoom modification, 2026-09-19: share initialization between byte/file constructors.
 ##
 ## Copyright (C) 1993-1996 Id Software, Inc.
 ## Copyright (C) 2019-2020 Nobuaki Tanaka
@@ -23,6 +24,10 @@ class Demo {
     [int] $playerCount
 
     Demo([byte[]] $data) {
+        $this.Initialize($data)
+    }
+
+    hidden [void] Initialize([byte[]] $data) {
         $this.p = 0
 
         if ($data[$this.p++] -ne 109) {
@@ -60,7 +65,8 @@ class Demo {
     }
 
     Demo([string] $fileName) {
-        $this.new([System.IO.File]::ReadAllBytes($fileName)) }
+        $this.Initialize([System.IO.File]::ReadAllBytes($fileName))
+    }
 
     [bool] ReadCmd([TicCmd[]] $cmds) {
         if ($this.p -eq $this.data.Length) {

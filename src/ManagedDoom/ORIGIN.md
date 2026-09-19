@@ -134,3 +134,6 @@ Modifications, 2026-09-19 (numeric movement gates):
   previous all-map discovery cases remain identical. See
   `docs/rendering-fidelity.md`; the adopted reference itself is not assumed
   infallible or equivalent to original-executable output.
+
+- `Demo`: replace the external-file constructor's invalid call to an instance `new` method with a shared initializer used by both constructors. Parsing behavior remains unchanged. Nineteen signed-command/file-byte parity checks pass over authored bytes and three user-owned IWAD demos.
+- `ThingMovement.XYMovement`: blocked missile sky handling now reads `Map.Flats.SkyFlatNumber` rather than nonexistent `Map.SkyFlatNumber`. The installed E1M5 demo formerly crashed after 687 completed commands and now executes all 1,710; 19 retained prefix samples match. E2M2's 2,347-command demo also executes without exception. Original demo synchronization remains unverified; see `docs/vanilla-demo-investigation.md`.

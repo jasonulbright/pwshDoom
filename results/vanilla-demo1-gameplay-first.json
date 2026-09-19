@@ -1,0 +1,229 @@
+{
+  "Error": "The property 'SkyFlatNumber' cannot be found on this object. Verify that the property exists.\nat XYMovement, C:\\projects\\pwshDoom\\local\\engine-bundle.ps1: line 28500\r\nat Run, C:\\projects\\pwshDoom\\local\\engine-bundle.ps1: line 39639\r\nat Run, C:\\projects\\pwshDoom\\local\\engine-bundle.ps1: line 29054\r\nat Update, C:\\projects\\pwshDoom\\local\\engine-bundle.ps1: line 30266\r\nat Update, C:\\projects\\pwshDoom\\local\\engine-bundle.ps1: line 2530\r\nat <ScriptBlock>, C:\\projects\\pwshDoom\\scripts\\Inspect-WadDemo.ps1: line 17",
+  "Final": null,
+  "BundleSha256": "FF9ED9726C8EDB306001488698F3D458FFC0B571B10DA5A2BFC0EAED34C932B8",
+  "Meaning": "Unpaced execution of user-owned IWAD vanilla input demo through the adopted decoder and DoomGame, including DemoPlayback semantics. No state edits. Selected trace only; no original-executable synchronization, campaign completion, rendered output, audio or performance guarantee.",
+  "Transitions": [
+    {
+      "State": "Level:1:5",
+      "Command": 1
+    }
+  ],
+  "DemoSha256": "7C3817081EB5CF32A118195492DD8B134E7617F142ECD1EED028CDFA60927679",
+  "Trace": [
+    {
+      "Command": 35,
+      "Y": -38877317,
+      "Z": 0,
+      "Armor": 0,
+      "Angle": 2231369728,
+      "Health": 100,
+      "Kills": 0,
+      "Rng": 201,
+      "X": -12530137
+    },
+    {
+      "Command": 70,
+      "Y": -41046127,
+      "Z": 0,
+      "Armor": 0,
+      "Angle": 100663296,
+      "Health": 100,
+      "Kills": 0,
+      "Rng": 219,
+      "X": -18368940
+    },
+    {
+      "Command": 105,
+      "Y": -38608903,
+      "Z": 0,
+      "Armor": 0,
+      "Angle": 1258291200,
+      "Health": 100,
+      "Kills": 0,
+      "Rng": 249,
+      "X": -1677485
+    },
+    {
+      "Command": 140,
+      "Y": -37724484,
+      "Z": 0,
+      "Armor": 0,
+      "Angle": 1157627904,
+      "Health": 100,
+      "Kills": 0,
+      "Rng": 15,
+      "X": -6733088
+    },
+    {
+      "Command": 175,
+      "Y": -15013109,
+      "Z": 0,
+      "Armor": 0,
+      "Angle": 1090519040,
+      "Health": 100,
+      "Kills": 0,
+      "Rng": 41,
+      "X": -24578653
+    },
+    {
+      "Command": 210,
+      "Y": -17688378,
+      "Z": -589824,
+      "Armor": 96,
+      "Angle": 1073741824,
+      "Health": 92,
+      "Kills": 0,
+      "Rng": 116,
+      "X": -13858225
+    },
+    {
+      "Command": 245,
+      "Y": -9770726,
+      "Z": 0,
+      "Armor": 95,
+      "Angle": 2298478592,
+      "Health": 88,
+      "Kills": 0,
+      "Rng": 171,
+      "X": -8908860
+    },
+    {
+      "Command": 280,
+      "Y": 511199,
+      "Z": 0,
+      "Armor": 85,
+      "Angle": 419430400,
+      "Health": 78,
+      "Kills": 0,
+      "Rng": 252,
+      "X": -6373161
+    },
+    {
+      "Command": 315,
+      "Y": 23164756,
+      "Z": 2621440,
+      "Armor": 85,
+      "Angle": 1040187392,
+      "Health": 78,
+      "Kills": 0,
+      "Rng": 97,
+      "X": 11824514
+    },
+    {
+      "Command": 350,
+      "Y": 35334207,
+      "Z": 3670016,
+      "Armor": 83,
+      "Angle": 1493172224,
+      "Health": 74,
+      "Kills": 0,
+      "Rng": 3,
+      "X": 18754309
+    },
+    {
+      "Command": 385,
+      "Y": 48232622,
+      "Z": 3670016,
+      "Armor": 83,
+      "Angle": 1677721600,
+      "Health": 74,
+      "Kills": 0,
+      "Rng": 246,
+      "X": 10162557
+    },
+    {
+      "Command": 420,
+      "Y": 48008932,
+      "Z": 3670016,
+      "Armor": 83,
+      "Angle": 3858759680,
+      "Health": 99,
+      "Kills": 1,
+      "Rng": 251,
+      "X": 6729077
+    },
+    {
+      "Command": 455,
+      "Y": 43407348,
+      "Z": 3670016,
+      "Armor": 81,
+      "Angle": 3053453312,
+      "Health": 95,
+      "Kills": 1,
+      "Rng": 2,
+      "X": 22552821
+    },
+    {
+      "Command": 490,
+      "Y": 39916820,
+      "Z": 3670016,
+      "Armor": 79,
+      "Angle": 3372220416,
+      "Health": 91,
+      "Kills": 1,
+      "Rng": 76,
+      "X": 20689446
+    },
+    {
+      "Command": 525,
+      "Y": 34591120,
+      "Z": 3670016,
+      "Armor": 73,
+      "Angle": 3556769792,
+      "Health": 79,
+      "Kills": 1,
+      "Rng": 169,
+      "X": 14914262
+    },
+    {
+      "Command": 560,
+      "Y": 35717083,
+      "Z": 3670016,
+      "Armor": 69,
+      "Angle": 3841982464,
+      "Health": 71,
+      "Kills": 1,
+      "Rng": 26,
+      "X": 8733856
+    },
+    {
+      "Command": 595,
+      "Y": 34081107,
+      "Z": 3670016,
+      "Armor": 65,
+      "Angle": 3875536896,
+      "Health": 61,
+      "Kills": 2,
+      "Rng": 124,
+      "X": 10651876
+    },
+    {
+      "Command": 630,
+      "Y": 27574510,
+      "Z": 3670016,
+      "Armor": 57,
+      "Angle": 3070230528,
+      "Health": 45,
+      "Kills": 3,
+      "Rng": 186,
+      "X": 21381079
+    },
+    {
+      "Command": 665,
+      "Y": 19760620,
+      "Z": 3670016,
+      "Armor": 58,
+      "Angle": 4043309056,
+      "Health": 45,
+      "Kills": 3,
+      "Rng": 16,
+      "X": 19762538
+    }
+  ],
+  "HarnessSha256": "82B2794BC2AD06945CBDC158CC00BC9BAEBD0B8ECC512078870796FB1441B44C",
+  "Name": "DEMO1",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "FirstDeathCommand": null,
+  "Commands": 687
+}

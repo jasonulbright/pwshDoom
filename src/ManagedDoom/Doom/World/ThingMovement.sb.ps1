@@ -1,4 +1,5 @@
 # pwshDoom modification, 2026-09-10: initialize Fixed/Angle fields to their original struct defaults.
+# pwshDoom modification, 2026-09-19: read missile sky-flat identity from Map.Flats.
 ##
 ## Copyright (C) 1993-1996 Id Software, Inc.
 ## Copyright (C) 2019-2020 Nobuaki Tanaka
@@ -499,7 +500,7 @@ class ThingMovement {
                     # Explode a missile.
                     if ($null -ne $this.currentCeilingLine -and
                         $null -ne $this.currentCeilingLine.BackSector -and
-                        $this.currentCeilingLine.BackSector.CeilingFlat -eq $this.world.Map.SkyFlatNumber) {
+                        $this.currentCeilingLine.BackSector.CeilingFlat -eq $this.world.Map.Flats.SkyFlatNumber) {
                         # Hack to prevent missiles exploding against the sky.
                         # Does not handle sky floors.
                         $this.world.ThingAllocation.RemoveMobj($thing)
