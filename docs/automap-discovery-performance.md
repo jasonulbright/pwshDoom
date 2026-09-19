@@ -28,3 +28,9 @@ Reproduce with fresh output paths in PowerShell 7:
 ```
 
 Raw results are `results/automap-discovery-baseline-first.json` and `results/automap-discovery-profile-first.json`. Both pin the source bundle, harness, replay and IWAD. Derive each method mean by summing its `ProfileTicks` column, multiplying by 1,000, and dividing by the recorded QPC frequency and command count. The audit retains those sums and input hashes. Original run handles 44685 and 58906 both exited successfully; no production change or loaded-performance improvement is claimed by this investigation.
+
+## First cache experiment: correct but slower
+
+The isolated dictionary-by-vertex candidate clears its cache every discovery pass. `Test-DiscoveryAngleCache.ps1` alternates baseline/candidate order at each of 1,200 actual E1M3 states, clears mapped flags before both calls to expose fresh visibility differences, compares those complete bitsets, then restores cumulative discovery. All 1,200 fresh comparisons and all 1,200 prior baseline cumulative hashes agree; all four original gameplay checkpoints also pass. Production sources are unchanged.
+
+`results/discovery-angle-cache-first.json` retains every timing. Baseline/candidate mean is **7.353/11.008 ms**, median 7.316/10.990, p95 13.372/19.765. The candidate loses whether it runs first or second (candidate means 11.06/10.96 ms). It is not adopted. Reduced angle evaluation does not compensate for cache lookup/reference handling and surrounding overhead in this implementation; the experiment does not isolate those individual costs. Test indexed storage next before any production change. Timings include per-pass cache clearing and cold calls, exclude flag reset/hash/setup; neither is a loaded-host result.
