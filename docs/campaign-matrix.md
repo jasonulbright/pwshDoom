@@ -17,7 +17,7 @@ The integrated host also loads an intermission save, advances to E1M2, then load
 | E1M1 | Pass | Pass, HMP | Pass: real intermission -> E1M2 |
 | E1M2 | Pass | Pass, HMP pistol start, normal exit | Pass: recorded AnsiArt intermission -> E1M3, 13 matching checkpoints |
 | E1M3 | Pass | Pass, HMP pistol start, normal exit; [evidence](campaign-e1m3.md) | Recorded Matrix intermission -> E1M4 passes 24 checkpoints and all audio frames; 47 integration checks. Pacing/queue starvation remain open |
-| E1M4 | Pass | Untested | Untested in terminal host |
+| E1M4 | Pass | Pass, HMP pistol start, normal exit; [evidence](campaign-e1m4.md) | Headless intermission -> E1M5 passes 176 samples, one weapon-acquisition check and 22 checkpoints; full route untested in terminal host |
 | E1M5 | Pass | Untested | Untested in terminal host |
 | E1M6 | Pass | Untested | Untested in terminal host |
 | E1M7 | Pass | Untested | Untested in terminal host |

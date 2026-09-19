@@ -12,6 +12,13 @@ $bundle=& "$PSScriptRoot/Build-EngineBundle.ps1";. $bundle
 . "$PSScriptRoot/../src/InputReplay.ps1";. "$PSScriptRoot/../src/GameHost.ps1";. "$PSScriptRoot/../src/SnapshotTransport.ps1"
 $content=$null;$game=$null;$failure=$null;$commands=$null;$lastTransition='';$traceChecks=0;$continued=$false
 $log=[Collections.Generic.List[object]]::new();$points=[Collections.Generic.List[object]]::new();$transitions=[Collections.Generic.List[object]]::new()
+$pickupClaims=@{};$pickupChecks=0
+if($reference.PSObject.Properties['PickupEvents']){
+    foreach($claim in @($reference.PickupEvents|Where-Object Event -eq 'OwnedAfterMove')){
+        if($claim.Type -notin 'Shotgun','Chaingun' -or $claim.Command -lt 1 -or $claim.Command -gt $reference.InputCommands.Count -or $pickupClaims.ContainsKey([int]$claim.Command)){throw 'Invalid or duplicate dropped-weapon acquisition claim.'}
+        $pickupClaims[[int]$claim.Command]=$claim
+    }
+}
 function Record-Point {
     if($points.Count -eq 0 -or $points[-1].Tic -ne $log.Count){$points.Add((Get-DoomReplayCheckpoint $game $log.Count))}
 }
@@ -21,8 +28,14 @@ function Record-Transition {
 }
 function Advance($Entry){
     $p=$game.World.ConsolePlayer;$pre=@{X=$p.Mobj.X.Data/65536.0;Y=$p.Mobj.Y.Data/65536.0}
+    $claim=if($pickupClaims.ContainsKey($log.Count+1)){$pickupClaims[$log.Count+1]}else{$null}
+    if($claim){$weaponIndex=[int][Enum]::Parse([WeaponType],$claim.Type);$wasOwned=$p.WeaponOwned[$weaponIndex]}
     $cmd=$commands[0];$cmd.Clear();$cmd.ForwardMove=$Entry[0];$cmd.SideMove=$Entry[1];$cmd.AngleTurn=$Entry[2];$cmd.Buttons=$Entry[3]
     $null=$game.Update($commands);$log.Add(@($cmd.ForwardMove,$cmd.SideMove,$cmd.AngleTurn,$cmd.Buttons));Record-Transition
+    if($claim){
+        if($wasOwned -or -not $game.World.ConsolePlayer.WeaponOwned[$weaponIndex] -or $game.World.ConsolePlayer.Health -ne $claim.Health){throw "Independent weapon acquisition differs at command $($log.Count)."}
+        $script:pickupChecks++
+    }
     if($log.Count%350 -eq 0){Record-Point};return $pre
 }
 try{
@@ -40,7 +53,7 @@ try{
             if($pre.X -ne $e.X -or $pre.Y -ne $e.Y -or $p.Mobj.Z.Data/65536.0 -ne $e.Z -or $p.Health -ne $e.Health -or $p.KillCount -ne $e.Kills -or ($p.Ammo -join ',') -cne ($e.Ammo -join ',') -or ($p.Cards -join ',') -cne ($e.Cards -join ',') -or $p.ReadyWeapon.ToString() -cne $e.Weapon){throw "Independent route trace differs at command $($log.Count)."};$traceChecks++
         }
     }
-    if($game.State -ne [GameState]::Intermission -or $game.World.ConsolePlayer.Health -ne $reference.FinalHealth -or $traceChecks -ne $reference.Trace.Count){throw 'Independent replay did not reproduce route completion.'}
+    if($game.State -ne [GameState]::Intermission -or $game.World.ConsolePlayer.Health -ne $reference.FinalHealth -or $traceChecks -ne $reference.Trace.Count -or $pickupChecks -ne $pickupClaims.Count){throw 'Independent replay did not reproduce route completion.'}
     if($game.World.SecretExit -ne [bool]$SecretExit -or $game.Options.IntermissionInfo.NextLevel+1 -ne $ExpectedNextMap){throw 'Exit kind or advertised destination differs from the declared route.'}
     $exitInventory=@($game.World.ConsolePlayer.Health,$game.World.ConsolePlayer.ArmorPoints)+$game.World.ConsolePlayer.Ammo.Clone()
     for($n=0;$n -lt 700;$n++){
@@ -53,7 +66,7 @@ try{
     if($SecretExit -and -not $transitions[2].DidSecret){throw 'Secret exit history was not retained at destination spawn.'}
     Record-Point
 }catch{$failure=$_.ToString()+"`n"+$_.ScriptStackTrace;throw}finally{
-    $data=@{Format='pwshDoom.InputReplay';Version=1;ContinueCampaign=$true;Episode=$reference.Episode;Map=$reference.Map;Skill=$reference.Skill;ExpectedNextMap=$ExpectedNextMap;SecretExit=[bool]$SecretExit;WadSha256=$wadHash;SourceFingerprint=Get-DoomReplaySourceFingerprint;InputCommands=$log.ToArray();Checkpoints=$points.ToArray();Transitions=$transitions.ToArray();Error=$failure;Passed=($null -eq $failure -and $continued);TraceChecks=$traceChecks;RouteResultSha256=(Get-FileHash $RouteResult).Hash;QualificationSourceSha256=(Get-FileHash $PSCommandPath).Hash;Meaning='Fresh independent fixed-command replay, compared with original driver position/inventory/combat samples; declared exit kind/destination checked before ordinary use presses through intermission and 71 tics in the destination with spawn inventory preserved. Secret routes also check retained secret history. Checkpoints are selected state/render data, not complete vanilla demo compatibility.'}
+    $data=@{Format='pwshDoom.InputReplay';Version=1;ContinueCampaign=$true;Episode=$reference.Episode;Map=$reference.Map;Skill=$reference.Skill;ExpectedNextMap=$ExpectedNextMap;SecretExit=[bool]$SecretExit;WadSha256=$wadHash;SourceFingerprint=Get-DoomReplaySourceFingerprint;InputCommands=$log.ToArray();Checkpoints=$points.ToArray();Transitions=$transitions.ToArray();Error=$failure;Passed=($null -eq $failure -and $continued);TraceChecks=$traceChecks;PickupChecks=$pickupChecks;PickupClaims=@($pickupClaims.Values|Sort-Object Command);RouteResultSha256=(Get-FileHash $RouteResult).Hash;QualificationSourceSha256=(Get-FileHash $PSCommandPath).Hash;Meaning='Fresh independent fixed-command replay, compared with original driver position/inventory/combat samples and any exact-command weapon-acquisition claims; declared exit kind/destination checked before ordinary use presses through intermission and 71 tics in the destination with spawn inventory preserved. Secret routes also check retained secret history. Checkpoints are selected state/render data, not complete vanilla demo compatibility.'}
     Write-DoomInputReplay $Output $data
     if($content){$content.Dispose()}
 }

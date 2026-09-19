@@ -1,0 +1,42 @@
+{
+  "Passed": true,
+  "RouteSha256": "E4ACD0AEA8F94A86784D989C30E60A4B7C1E073A361F29B01B9FC7474D01D35E",
+  "QualificationSha256": "3DDB764D06A8C54ADA8FA05EBAA803932433CB91BF4046D08E8755D9B8BF129B",
+  "NegativeSha256": "2431715832DA8FFCC774E869F34CA122E330B769FC164B419AB938B28B328C78",
+  "Commands": 6348,
+  "TraceChecks": 176,
+  "PickupChecks": 1,
+  "Checkpoints": 22,
+  "ExitWeapons": [
+    true,
+    true,
+    true,
+    true,
+    false,
+    false,
+    false,
+    false,
+    false
+  ],
+  "EntryWeapons": [
+    true,
+    true,
+    true,
+    true,
+    false,
+    false,
+    false,
+    false,
+    false
+  ],
+  "EntryCards": [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+  ],
+  "CurrentPlanDriverQualifierPinsMatch": true,
+  "Meaning": "Receipt consistency and explicit checkpoint weapon carryover check supplement the independent positive replay and one-command-early pickup rejection. No terminal, audio, displayed FPS or continuous-episode qualification."
+}
