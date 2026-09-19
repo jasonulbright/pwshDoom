@@ -1,0 +1,64 @@
+{
+  "ExpectSourceChange": true,
+  "ReplaySha256": "0831147553FFA4589062EC0EE1F969D6932E0E5DF3B7F4D300C6293CFDA1F4BB",
+  "ReportSha256": "D785FA0DA31A2AF17CD3A0460A189496A05509B558E626FEDFB8B9EBA75FD2D5",
+  "RecordingSha256": "A97432D220418B0FE214F7960F94B8D3D76B399257C089523CACEB0DAF7E507C",
+  "Meaning": "Audit of completed real-host evidence and every recorded command, supplied checkpoint, pressure interval and digital audio frame accounting. Two is the configured admission limit, not a separately sampled maximum. No acoustic or displayed-rate claim.",
+  "Checks": [
+    {
+      "Passed": true,
+      "Name": "Host and simulation finish the complete supplied replay"
+    },
+    {
+      "Passed": true,
+      "Name": "Recorded input is complete and successful"
+    },
+    {
+      "Passed": true,
+      "Name": "Recorded Skill matches input"
+    },
+    {
+      "Passed": true,
+      "Name": "Recorded Episode matches input"
+    },
+    {
+      "Passed": true,
+      "Name": "Recorded Map matches input"
+    },
+    {
+      "Passed": true,
+      "Name": "Recorded ContinueCampaign matches input"
+    },
+    {
+      "Passed": true,
+      "Name": "Declared source change is explicitly reported"
+    },
+    {
+      "Passed": true,
+      "Name": "Every command and field survives in order"
+    },
+    {
+      "Passed": true,
+      "Name": "Every supplied checkpoint matches the independently recorded replay"
+    },
+    {
+      "Passed": true,
+      "Name": "Host independently reports all checkpoints matching"
+    },
+    {
+      "Passed": true,
+      "Name": "Two-command admission pressure occurs and finishes"
+    },
+    {
+      "Passed": true,
+      "Name": "Pressure intervals are ordered and bounded"
+    },
+    {
+      "Passed": true,
+      "Name": "All replay audio packets and frames return without cancellation"
+    }
+  ],
+  "FinishedUtc": "2026-09-19T11:59:11.0866014Z",
+  "HarnessSha256": "51D0D950E672AC2DD12A630E1C461A5777203123638203A960237C3C13C21AA4",
+  "Error": null
+}

@@ -438,18 +438,20 @@ class Geometry {
             return $(if ($line.Dx.Data -gt [Fixed]::Zero.Data) { 1 } else { 0 })
         }
 
-        $dx = $x - $line.X
-        $dy = $y - $line.Y
+        [long]$dx = ([long]$x.Data - $line.X.Data) -band 0xFFFFFFFFL
+        if ($dx -ge 0x80000000L) { $dx -= 0x100000000L }
+        [long]$dy = ([long]$y.Data - $line.Y.Data) -band 0xFFFFFFFFL
+        if ($dy -ge 0x80000000L) { $dy -= 0x100000000L }
 
-        $left = [Fixed]::new(($line.Dy.Data -shr [Fixed]::FracBits) * ($dx.Data -shr [Fixed]::FracBits))
-        $right = [Fixed]::new(($dy.Data -shr [Fixed]::FracBits) * ($line.Dx.Data -shr [Fixed]::FracBits))
+        $left = ($line.Dy.Data -shr 16) * ($dx -shr 16)
+        $right = ($dy -shr 16) * ($line.Dx.Data -shr 16)
 
-        if ($right.Data -lt $left.Data) {
+        if ($right -lt $left) {
             # Front side.
             return 0
         }
 
-        if ($left.Data -eq $right.Data) {
+        if ($left -eq $right) {
             return 2
         } else {
             # Back side.
@@ -487,18 +489,20 @@ class Geometry {
             return $(if ($node.Dx.Data -gt [Fixed]::Zero.Data) { 1 } else { 0 })
         }
 
-        $dx = $x - $node.X
-        $dy = $y - $node.Y
+        [long]$dx = ([long]$x.Data - $node.X.Data) -band 0xFFFFFFFFL
+        if ($dx -ge 0x80000000L) { $dx -= 0x100000000L }
+        [long]$dy = ([long]$y.Data - $node.Y.Data) -band 0xFFFFFFFFL
+        if ($dy -ge 0x80000000L) { $dy -= 0x100000000L }
 
-        $left = [Fixed]::new(($node.Dy.Data -shr [Fixed]::FracBits) * ($dx.Data -shr [Fixed]::FracBits))
-        $right = [Fixed]::new(($dy.Data -shr [Fixed]::FracBits) * ($node.Dx.Data -shr [Fixed]::FracBits))
+        $left = ($node.Dy.Data -shr 16) * ($dx -shr 16)
+        $right = ($dy -shr 16) * ($node.Dx.Data -shr 16)
 
-        if ($right.Data -lt $left.Data) {
+        if ($right -lt $left) {
             # Front side.
             return 0
         }
 
-        if ($left.Data -eq $right.Data) {
+        if ($left -eq $right) {
             return 2
         } else {
             # Back side.

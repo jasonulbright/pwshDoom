@@ -19,6 +19,8 @@ No E1M3 live terminal recording, audio playback, display pacing, secret exit, E1
 
 The September 19 Matrix recording failed with a full input-command ring after about 59.8 active seconds. The [command-admission investigation](command-admission.md) retains the footage and failure evidence, then verifies a bounded 1,200-command headless prefix with all four checkpoints and all audio frames returned. It still runs at only 19.424 ticks/sec; full recorded E1M3 completion remains open.
 
+After shared snapshots and [numeric visibility calculations](numeric-visibility.md), the second Matrix recording completes all 7,118 commands and 24 original checkpoints through E1M4 at 30.458 ticks/sec. Its audiovisual qualification fails because 23 audio packets remain queued and four device buffers are cancelled at shutdown. This is recorded gameplay completion with an identified audio-tail defect, not an audio or 35/60 pass.
+
 Reproduce with fresh paths and PowerShell 7 (or supply another user-local IWAD with `-Wad`):
 
 ```powershell

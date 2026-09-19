@@ -106,3 +106,10 @@ Modifications, 2026-09-19 (numeric movement gates):
   actual-world fixture fails eighteen assertions before the repair and passes
   all 27 afterward, including retained movement and skull-charge behavior.
   See `docs/mobj-movement-gates.md`; this narrow fix is not a global Fixed audit.
+
+- `Geometry.DivLineSide` (both overloads): replace diagonal Fixed wrapper
+  arithmetic with numeric differences, explicit signed 32-bit wrapping and
+  the same arithmetic shifts/products. Axis and on-line behavior is retained.
+  The original methods remain in a licensed test fixture; 44,424 comparisons,
+  thirty analytic assertions and all 24 full E1M3 route checkpoints pass.
+  See `docs/numeric-visibility.md` for timings and qualification limits.

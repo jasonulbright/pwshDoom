@@ -1,0 +1,106 @@
+{
+  "SourceSha256": "E82D0BB074F3572E1CF6FF9C05ACC5AFAE29ECEBFB8ED42ADFFC592E1C10E637",
+  "Error": "All tic audio is consumed with no stale or unconsumed packet\nat Check, C:\\projects\\pwshDoom\\scripts\\Test-CampaignRecording.ps1: line 8\r\nat <ScriptBlock>, C:\\projects\\pwshDoom\\scripts\\Test-CampaignRecording.ps1: line 34",
+  "Receipts": [
+    {
+      "Sha256": "A9E3E3E48DF5A483D904A412E3AF7A872ED5B5862713A331DC3310007AA09970",
+      "Path": "C:\\projects\\pwshDoom\\results\\e1m3-qualified-replay.json"
+    },
+    {
+      "Sha256": "A078C34FE155370E6F2944FC60D3CC9A3A3616F8D857DAC2A66314A51A74C76F",
+      "Path": "C:\\projects\\pwshDoom\\local\\recordings\\e1m3-matrix-second-game.json"
+    },
+    {
+      "Sha256": "992A95DC2BAB96FB75AB31CE2DA10F7F2F4E31DB0209B880AE7F6EDC4A96C13E",
+      "Path": "C:\\projects\\pwshDoom\\local\\recordings\\e1m3-matrix-second-recording.json"
+    },
+    {
+      "Sha256": "FBB5178E86DB5FD3D4B987EBFFFEF6CFDBFE5ED4D5BB7ABA747124A710757A25",
+      "Path": "C:\\projects\\pwshDoom\\local\\recordings\\e1m3-matrix-second-audio.json"
+    },
+    {
+      "Sha256": "A5D219BA3717A83BCEA1898BE7CEEAAF8E4D549DD57E12303BAA04ACE1CAF22C",
+      "Path": "C:\\projects\\pwshDoom\\local\\recordings\\e1m3-matrix-second-av.json"
+    },
+    {
+      "Sha256": "98229033FD5EA6133AF5338312BE661E6D0E2767A9190DD825F2090CA6D1F5AE",
+      "Path": "C:\\projects\\pwshDoom\\local\\recordings\\e1m3-matrix-second-route-sources.json"
+    },
+    {
+      "Sha256": "86D6AE6F1FA078A9BB01734C6BA09F52BDA4C72DAA1E7FAA8D143D9235489615",
+      "Path": "C:\\projects\\pwshDoom\\local\\recordings\\e1m3-matrix-second-host-ready.json"
+    },
+    {
+      "Sha256": "DF75B2743048D05106F500317127BA462D2A2BB3F0EE1A63D9CA1E3D0F1697B2",
+      "Path": "C:\\projects\\pwshDoom\\results\\music-loop-e1m3-prepared.json"
+    },
+    {
+      "Sha256": "084536988F462CD7C6718665FA53DCD6BB1009B3FCBCDD4556C50D51AC1B1778",
+      "Path": "C:\\projects\\pwshDoom\\results\\music-loop-inter-first.json"
+    },
+    {
+      "Sha256": "24CD95F078930A352DF57C5E609D75C587D9F156786EBC7AABBDE64C7BA9630C",
+      "Path": "C:\\projects\\pwshDoom\\local\\music-preparation-e1m3\\D_E1M4\\qualified.json"
+    }
+  ],
+  "Details": null,
+  "Meaning": "Recorded independently qualified ordinary-input level/intermission/next-level route. Caller declares expected map scores; reference checkpoints and commands are compared directly. Buffer return, starvation, canceled tails and pacing are reported rather than treated as universal performance success. No full campaign or physical listening claim.",
+  "Checks": [
+    {
+      "Name": "Reference is a successful independently qualified two-level route",
+      "Passed": true
+    },
+    {
+      "Name": "Actual host and audio reach replay end without error",
+      "Passed": true
+    },
+    {
+      "Name": "Every ordinary command is consumed unchanged",
+      "Passed": true
+    },
+    {
+      "Name": "Every independent selected-state checkpoint matches directly",
+      "Passed": true
+    },
+    {
+      "Name": "Exit and destination transitions retain command timing and inventory",
+      "Passed": true
+    },
+    {
+      "Name": "Destination generation is actually submitted by the terminal host",
+      "Passed": true
+    },
+    {
+      "Name": "Three score starts and one epoch reset are recorded",
+      "Passed": true
+    },
+    {
+      "Name": "Score D_E1M3 begins at its expected packet",
+      "Passed": true
+    },
+    {
+      "Name": "Score D_E1M3 pins a successful qualification",
+      "Passed": true
+    },
+    {
+      "Name": "Score D_INTER begins at its expected packet",
+      "Passed": true
+    },
+    {
+      "Name": "Score D_INTER pins a successful qualification",
+      "Passed": true
+    },
+    {
+      "Name": "Score D_E1M4 begins at its expected packet",
+      "Passed": true
+    },
+    {
+      "Name": "Score D_E1M4 pins a successful qualification",
+      "Passed": true
+    },
+    {
+      "Name": "All tic audio is consumed with no stale or unconsumed packet",
+      "Passed": false
+    }
+  ]
+}

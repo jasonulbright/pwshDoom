@@ -1,7 +1,7 @@
 #requires -Version 7.4
 # SPDX-License-Identifier: GPL-2.0-or-later
 param([Parameter(Mandatory)][int]$TargetProcessId,[Parameter(Mandatory)][string]$OutputPrefix,
-    [ValidateRange(1,300)][int]$Seconds=10,[string]$StopFile,[string]$ReadyFile)
+    [ValidateRange(1,660)][int]$Seconds=10,[string]$StopFile,[string]$ReadyFile)
 $ErrorActionPreference='Stop';Set-StrictMode -Version Latest
 . "$PSScriptRoot/../src/ProcessAudioCapture.ps1"
 . "$PSScriptRoot/../src/CaptureClock.ps1"
