@@ -305,15 +305,23 @@ function Invoke-FastRender {
 
     }
     $actorMs=$phaseWatch.Elapsed.TotalMilliseconds;$phaseWatch.Restart()
-    foreach($psp in $player.PlayerSprites) {
-
-        $frame=$Context.SpriteAtlas[$psp.Sprite][$psp.Frame -band 127]
-        $patch=$frame.Patches[0]
-        Draw-FastPatch $Context $patch ($psp.Sx-$patch.Left) ($psp.Sy-$patch.Top-16.25) 1 0 $frame.Flip[0] 0 $FirstColumn $EndColumn 168
-    }
+    Draw-FastPlayerSprites $Context $FirstColumn $EndColumn
     $weaponMs=$phaseWatch.Elapsed.TotalMilliseconds;$phaseWatch.Restart()
     Draw-FastHud $Context $FirstColumn $EndColumn
     $Context.Profile=@{GeometryMs=$geometryMs;ActorsMs=$actorMs;WeaponMs=$weaponMs;HudMs=$phaseWatch.Elapsed.TotalMilliseconds}
+}
+
+function Draw-FastPlayerSprites {
+    param($Context,[int]$FirstColumn=0,[int]$EndColumn=320)
+    $player=$Context.World.ConsolePlayer
+    [int]$sectorLight=$Context.Lighting.Scale[[Math]::Clamp(($player.SectorLight -shr 4)+$player.ExtraLight,0,15)][47]
+    foreach($psp in $player.PlayerSprites){
+        $frame=$Context.SpriteAtlas[$psp.Sprite][$psp.Frame -band 32767];$patch=$frame.Patches[0]
+        [int]$light=$sectorLight
+        if($psp.Frame -band 32768){$light=0}
+        if($player.FixedColorMap -gt 0){$light=$player.FixedColorMap}
+        Draw-FastPatch $Context $patch ($psp.Sx-$patch.Left) ($psp.Sy-$patch.Top-16.25) 1 0 $frame.Flip[0] $light $FirstColumn $EndColumn 168
+    }
 }
 
 function Draw-FastHud {

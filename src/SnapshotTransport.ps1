@@ -8,6 +8,8 @@ function ConvertTo-GameSnapshotBytes {
     $values[0]=1;$values[1]=$Snapshot.Tic;$values[2]=$Snapshot.Fraction;$values[3]=$ns;$values[4]=$nd;$values[5]=$na;$values[6]=$nw
     $values[8]=$p.Mobj.X;$values[9]=$p.Mobj.Y;$values[10]=$p.Mobj.Angle;$values[11]=$p.ViewZ
     $values[12]=$p.ExtraLight;$values[13]=$p.FixedColorMap;$values[14]=$p.FaceIndex;$values[15]=$p.AmmoType
+    # Previously reserved header slot: discrete player-sector light, never interpolated.
+    $values[43]=$p.SectorLight
     $values[16]=$p.Health;$values[17]=$p.ArmorPoints;$values[18]=$p.Kills;$values[19]=$p.Secrets
     for($i=0;$i -lt 4;$i++){$values[20+$i]=$p.Ammo[$i];$values[24+$i]=$p.MaxAmmo[$i]}
     for($i=0;$i -lt 6;$i++){$values[28+$i]=[int]$p.Cards[$i]}
@@ -40,6 +42,7 @@ function Read-GameSnapshotBytes {
     $state.Tic=[int]$v[1];$state.Fraction=$v[2]
     $p.Mobj.X=$v[8];$p.Mobj.Y=$v[9];$p.Mobj.Angle=$v[10];$p.ViewZ=$v[11]
     $p.ExtraLight=[int]$v[12];$p.FixedColorMap=[int]$v[13];$p.FaceIndex=[int]$v[14];$p.AmmoType=[int]$v[15]
+    $p.SectorLight=[int]$v[43]
     $p.Health=[int]$v[16];$p.ArmorPoints=[int]$v[17];$p.Kills=[int]$v[18];$p.Secrets=[int]$v[19]
     for($i=0;$i -lt 4;$i++){$p.Ammo[$i]=$v[20+$i];$p.MaxAmmo[$i]=$v[24+$i]}
     for($i=0;$i -lt 6;$i++){$p.Cards[$i]=$v[28+$i] -ne 0}

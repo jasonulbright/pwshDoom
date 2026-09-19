@@ -89,6 +89,11 @@ function Get-DoomReplayCheckpoint {
     param($Game,[int]$Tic)
     $p=$Game.World.ConsolePlayer
     $bytes=ConvertTo-GameSnapshotBytes (New-GameRenderSnapshot $Game 1)
+    $currentRenderHash=[Convert]::ToHexString([Security.Cryptography.SHA256]::HashData($bytes))
+    # Schema 1 historically hashed a NumericV1 header with slots 43..47 zero.
+    # Keep that canonical representation; record the complete current packet
+    # separately. Sector lighting already exists in the hashed sector array.
+    [Array]::Clear($bytes,43*8,5*8)
     $state=[ordered]@{Schema=1;Tic=$Tic;State=$Game.State.ToString();Episode=$Game.Options.Episode;Map=$Game.Options.Map;LevelTime=$Game.World.LevelTime;
         RandomIndex=$Game.Options.Random.Index;Paused=$Game.Paused;PlayerState=$p.PlayerState.ToString();Health=$p.Health;Armor=$p.ArmorPoints;
         Position=@($p.Mobj.X.Data,$p.Mobj.Y.Data,$p.Mobj.Z.Data,$p.Mobj.Angle.Data);Ammo=$p.Ammo.Clone();Weapons=$p.WeaponOwned.Clone();Keys=$p.Cards.Clone();DidSecret=$p.DidSecret;
@@ -96,7 +101,7 @@ function Get-DoomReplayCheckpoint {
     if([int]$Game.State -eq 1){$ui=$Game.Intermission;$state.Intermission=@([int]$ui.State,$ui.SpState,$ui.Count,$ui.BgCount,$ui.TimeCount,$ui.ParCount,$ui.Random.Index)}
     if([int]$Game.State -eq 2){$ui=$Game.Finale;$state.Finale=@($ui.Stage,$ui.Count,$ui.Scrolled,$ui.TheEndIndex)}
     $json=$state|ConvertTo-Json -Depth 5 -Compress
-    $result=@{Tic=$Tic;Sha256=[Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([Text.Encoding]::UTF8.GetBytes($json)));State=$state}
+    $result=@{Tic=$Tic;Sha256=[Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([Text.Encoding]::UTF8.GetBytes($json)));State=$state;CurrentRenderSnapshotSha256=$currentRenderHash}
     if(Get-Command Get-DoomAutomapCheckpoint -ErrorAction SilentlyContinue){$result.AutomapSha256=Get-DoomAutomapCheckpoint $Game}
     return $result
 }

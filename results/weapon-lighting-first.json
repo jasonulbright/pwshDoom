@@ -1,0 +1,1964 @@
+{
+  "PreviousMismatchCases": 88,
+  "Sources": [
+    {
+      "Sha256": "D05CFD7DDFFE433FCBCD0B7AABD8FCF13F04C3946E8BAB8B10597DACBD960E80",
+      "Path": "scripts/Test-WeaponLighting.ps1"
+    },
+    {
+      "Sha256": "1C356B2A5E8E611E8FE0B6EBFFFD8660DFB639E07568888CA3DABB1C64F5AF97",
+      "Path": "src/FastRenderer.ps1"
+    },
+    {
+      "Sha256": "8B0725D8AC7DD818F1FBCF8FA2B2DD899A659111513AAAF48D527B6BF2039ADA",
+      "Path": "src/GameHost.ps1"
+    },
+    {
+      "Sha256": "D23EE15E8C52E063AA84F669F2DF97692717C75D69C0D63AAC63DA4EBA1FC10C",
+      "Path": "src/SnapshotTransport.ps1"
+    },
+    {
+      "Sha256": "E9C47D9E4005509206EC13DA08267F95DB3AF7A1E86F14A743F1F27DE145BF9F",
+      "Path": "src/RenderLighting.ps1"
+    }
+  ],
+  "SourcesChangedDuringRun": [],
+  "Checks": [
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 0,
+        "Light": 0,
+        "Bright": 0,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 16,
+        "Light": 0,
+        "Bright": 0,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 32,
+        "Light": 0,
+        "Bright": 0,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": true,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 0,
+        "Light": 0,
+        "Bright": 32768,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 16,
+        "Light": 0,
+        "Bright": 32768,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 32,
+        "Light": 0,
+        "Bright": 32768,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 0,
+        "Light": 16,
+        "Bright": 0,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 16,
+        "Light": 16,
+        "Bright": 0,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 32,
+        "Light": 16,
+        "Bright": 0,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": true,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 0,
+        "Light": 16,
+        "Bright": 32768,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 16,
+        "Light": 16,
+        "Bright": 32768,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 32,
+        "Light": 16,
+        "Bright": 32768,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 0,
+        "Light": 32,
+        "Bright": 0,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 16,
+        "Light": 32,
+        "Bright": 0,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 32,
+        "Light": 32,
+        "Bright": 0,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": true,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 0,
+        "Light": 32,
+        "Bright": 32768,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 16,
+        "Light": 32,
+        "Bright": 32768,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 32,
+        "Light": 32,
+        "Bright": 32768,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 0,
+        "Light": 48,
+        "Bright": 0,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 16,
+        "Light": 48,
+        "Bright": 0,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 32,
+        "Light": 48,
+        "Bright": 0,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": true,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 0,
+        "Light": 48,
+        "Bright": 32768,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 16,
+        "Light": 48,
+        "Bright": 32768,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 32,
+        "Light": 48,
+        "Bright": 32768,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 0,
+        "Light": 64,
+        "Bright": 0,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 16,
+        "Light": 64,
+        "Bright": 0,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 32,
+        "Light": 64,
+        "Bright": 0,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": true,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 0,
+        "Light": 64,
+        "Bright": 32768,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 16,
+        "Light": 64,
+        "Bright": 32768,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 32,
+        "Light": 64,
+        "Bright": 32768,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 0,
+        "Light": 80,
+        "Bright": 0,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 16,
+        "Light": 80,
+        "Bright": 0,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 32,
+        "Light": 80,
+        "Bright": 0,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": true,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 0,
+        "Light": 80,
+        "Bright": 32768,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 16,
+        "Light": 80,
+        "Bright": 32768,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 32,
+        "Light": 80,
+        "Bright": 32768,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 0,
+        "Light": 96,
+        "Bright": 0,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 16,
+        "Light": 96,
+        "Bright": 0,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 32,
+        "Light": 96,
+        "Bright": 0,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": true,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 0,
+        "Light": 96,
+        "Bright": 32768,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 16,
+        "Light": 96,
+        "Bright": 32768,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 32,
+        "Light": 96,
+        "Bright": 32768,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 0,
+        "Light": 112,
+        "Bright": 0,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 16,
+        "Light": 112,
+        "Bright": 0,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 32,
+        "Light": 112,
+        "Bright": 0,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": true,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 0,
+        "Light": 112,
+        "Bright": 32768,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 16,
+        "Light": 112,
+        "Bright": 32768,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 32,
+        "Light": 112,
+        "Bright": 32768,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 0,
+        "Light": 128,
+        "Bright": 0,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 16,
+        "Light": 128,
+        "Bright": 0,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 32,
+        "Light": 128,
+        "Bright": 0,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": true,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 0,
+        "Light": 128,
+        "Bright": 32768,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 16,
+        "Light": 128,
+        "Bright": 32768,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 32,
+        "Light": 128,
+        "Bright": 32768,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 0,
+        "Light": 144,
+        "Bright": 0,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 16,
+        "Light": 144,
+        "Bright": 0,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 32,
+        "Light": 144,
+        "Bright": 0,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": true,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 0,
+        "Light": 144,
+        "Bright": 32768,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 16,
+        "Light": 144,
+        "Bright": 32768,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 32,
+        "Light": 144,
+        "Bright": 32768,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": true,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 0,
+        "Light": 160,
+        "Bright": 0,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 16,
+        "Light": 160,
+        "Bright": 0,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 32,
+        "Light": 160,
+        "Bright": 0,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": true,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 0,
+        "Light": 160,
+        "Bright": 32768,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 16,
+        "Light": 160,
+        "Bright": 32768,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 32,
+        "Light": 160,
+        "Bright": 32768,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": true,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 0,
+        "Light": 176,
+        "Bright": 0,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 16,
+        "Light": 176,
+        "Bright": 0,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 32,
+        "Light": 176,
+        "Bright": 0,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": true,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 0,
+        "Light": 176,
+        "Bright": 32768,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 16,
+        "Light": 176,
+        "Bright": 32768,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 32,
+        "Light": 176,
+        "Bright": 32768,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": true,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 0,
+        "Light": 192,
+        "Bright": 0,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 16,
+        "Light": 192,
+        "Bright": 0,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 32,
+        "Light": 192,
+        "Bright": 0,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": true,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 0,
+        "Light": 192,
+        "Bright": 32768,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 16,
+        "Light": 192,
+        "Bright": 32768,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 32,
+        "Light": 192,
+        "Bright": 32768,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": true,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 0,
+        "Light": 208,
+        "Bright": 0,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 16,
+        "Light": 208,
+        "Bright": 0,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 32,
+        "Light": 208,
+        "Bright": 0,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": true,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 0,
+        "Light": 208,
+        "Bright": 32768,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 16,
+        "Light": 208,
+        "Bright": 32768,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 32,
+        "Light": 208,
+        "Bright": 32768,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": true,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 0,
+        "Light": 224,
+        "Bright": 0,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 16,
+        "Light": 224,
+        "Bright": 0,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 32,
+        "Light": 224,
+        "Bright": 0,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": true,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 0,
+        "Light": 224,
+        "Bright": 32768,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 16,
+        "Light": 224,
+        "Bright": 32768,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 32,
+        "Light": 224,
+        "Bright": 32768,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": true,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 0,
+        "Light": 240,
+        "Bright": 0,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 16,
+        "Light": 240,
+        "Bright": 0,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 32,
+        "Light": 240,
+        "Bright": 0,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": true,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 0,
+        "Light": 240,
+        "Bright": 32768,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 16,
+        "Light": 240,
+        "Bright": 32768,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 32,
+        "Light": 240,
+        "Bright": 32768,
+        "Extra": 0,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": true,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 0,
+        "Fixed": 0,
+        "Light": -16,
+        "Bright": 0,
+        "Extra": -2,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": true,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 0,
+        "Fixed": 0,
+        "Light": 64,
+        "Bright": 0,
+        "Extra": 2,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": true,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 0,
+        "Fixed": 0,
+        "Light": 300,
+        "Bright": 0,
+        "Extra": 2,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 0,
+        "Light": -16,
+        "Bright": 0,
+        "Extra": -2,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 0,
+        "Light": 64,
+        "Bright": 0,
+        "Extra": 2,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": true,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 0,
+        "Light": 300,
+        "Bright": 0,
+        "Extra": 2,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": true,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 0,
+        "Light": -16,
+        "Bright": 0,
+        "Extra": -2,
+        "Phase": "FlashState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": true,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 0,
+        "Light": 64,
+        "Bright": 0,
+        "Extra": 2,
+        "Phase": "FlashState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": true,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 1,
+        "Fixed": 0,
+        "Light": 300,
+        "Bright": 0,
+        "Extra": 2,
+        "Phase": "FlashState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 2,
+        "Fixed": 0,
+        "Light": -16,
+        "Bright": 0,
+        "Extra": -2,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 2,
+        "Fixed": 0,
+        "Light": 64,
+        "Bright": 0,
+        "Extra": 2,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": true,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 2,
+        "Fixed": 0,
+        "Light": 300,
+        "Bright": 0,
+        "Extra": 2,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": true,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 2,
+        "Fixed": 0,
+        "Light": -16,
+        "Bright": 0,
+        "Extra": -2,
+        "Phase": "FlashState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": true,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 2,
+        "Fixed": 0,
+        "Light": 64,
+        "Bright": 0,
+        "Extra": 2,
+        "Phase": "FlashState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": true,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 2,
+        "Fixed": 0,
+        "Light": 300,
+        "Bright": 0,
+        "Extra": 2,
+        "Phase": "FlashState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 3,
+        "Fixed": 0,
+        "Light": -16,
+        "Bright": 0,
+        "Extra": -2,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 3,
+        "Fixed": 0,
+        "Light": 64,
+        "Bright": 0,
+        "Extra": 2,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": true,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 3,
+        "Fixed": 0,
+        "Light": 300,
+        "Bright": 0,
+        "Extra": 2,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": true,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 3,
+        "Fixed": 0,
+        "Light": -16,
+        "Bright": 0,
+        "Extra": -2,
+        "Phase": "FlashState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": true,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 3,
+        "Fixed": 0,
+        "Light": 64,
+        "Bright": 0,
+        "Extra": 2,
+        "Phase": "FlashState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": true,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 3,
+        "Fixed": 0,
+        "Light": 300,
+        "Bright": 0,
+        "Extra": 2,
+        "Phase": "FlashState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 4,
+        "Fixed": 0,
+        "Light": -16,
+        "Bright": 0,
+        "Extra": -2,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 4,
+        "Fixed": 0,
+        "Light": 64,
+        "Bright": 0,
+        "Extra": 2,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": true,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 4,
+        "Fixed": 0,
+        "Light": 300,
+        "Bright": 0,
+        "Extra": 2,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": true,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 4,
+        "Fixed": 0,
+        "Light": -16,
+        "Bright": 0,
+        "Extra": -2,
+        "Phase": "FlashState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": true,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 4,
+        "Fixed": 0,
+        "Light": 64,
+        "Bright": 0,
+        "Extra": 2,
+        "Phase": "FlashState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": true,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 4,
+        "Fixed": 0,
+        "Light": 300,
+        "Bright": 0,
+        "Extra": 2,
+        "Phase": "FlashState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 5,
+        "Fixed": 0,
+        "Light": -16,
+        "Bright": 0,
+        "Extra": -2,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 5,
+        "Fixed": 0,
+        "Light": 64,
+        "Bright": 0,
+        "Extra": 2,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": true,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 5,
+        "Fixed": 0,
+        "Light": 300,
+        "Bright": 0,
+        "Extra": 2,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": true,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 5,
+        "Fixed": 0,
+        "Light": -16,
+        "Bright": 0,
+        "Extra": -2,
+        "Phase": "FlashState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": true,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 5,
+        "Fixed": 0,
+        "Light": 64,
+        "Bright": 0,
+        "Extra": 2,
+        "Phase": "FlashState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": true,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 5,
+        "Fixed": 0,
+        "Light": 300,
+        "Bright": 0,
+        "Extra": 2,
+        "Phase": "FlashState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 6,
+        "Fixed": 0,
+        "Light": -16,
+        "Bright": 0,
+        "Extra": -2,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 6,
+        "Fixed": 0,
+        "Light": 64,
+        "Bright": 0,
+        "Extra": 2,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": true,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 6,
+        "Fixed": 0,
+        "Light": 300,
+        "Bright": 0,
+        "Extra": 2,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": true,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 6,
+        "Fixed": 0,
+        "Light": -16,
+        "Bright": 0,
+        "Extra": -2,
+        "Phase": "FlashState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": true,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 6,
+        "Fixed": 0,
+        "Light": 64,
+        "Bright": 0,
+        "Extra": 2,
+        "Phase": "FlashState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": true,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 6,
+        "Fixed": 0,
+        "Light": 300,
+        "Bright": 0,
+        "Extra": 2,
+        "Phase": "FlashState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 7,
+        "Fixed": 0,
+        "Light": -16,
+        "Bright": 0,
+        "Extra": -2,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": false,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 7,
+        "Fixed": 0,
+        "Light": 64,
+        "Bright": 0,
+        "Extra": 2,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    },
+    {
+      "Pixels": 64000,
+      "PreviousFullBrightMatches": true,
+      "ReferenceDifferences": 0,
+      "Fixture": {
+        "Weapon": 7,
+        "Fixed": 0,
+        "Light": 300,
+        "Bright": 0,
+        "Extra": 2,
+        "Phase": "ReadyState"
+      },
+      "CachedSevenStripsMatch": true
+    }
+  ],
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "BundleSha256": "D57DF4DE73F7C8499436CE60F5F2EB284B833931A679D31A798A020C33339013",
+  "Error": null,
+  "Meaning": "Isolated player-sprite indexed images compared to adopted ThreeDRenderer, then cached assets and seven uneven strips after snapshot wire transport. Covers light bands, extra-light clamps, full-bright frames, fixed maps, ready/flash states for Ultimate Doom weapons. Previous always-full-bright call is a negative control. Invisibility, original-executable fidelity, whole-world rendering and full-game pacing remain separate."
+}

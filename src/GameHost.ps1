@@ -38,7 +38,7 @@ function New-GameRenderSnapshot {
     $viewZ=if($player.Interpolate -and $world.LevelTime -gt 1){($player.OldViewZ.Data+($player.ViewZ.Data-$player.OldViewZ.Data)*$Fraction)/65536.0}else{$player.ViewZ.Data/65536.0}
     return @{Tic=$world.LevelTime;Fraction=$Fraction;Sectors=$sectors;Sides=$sides;Actors=$actors.ToArray();ConsolePlayer=@{
         Mobj=@{X=($camera.OldX.Data+($camera.X.Data-$camera.OldX.Data)*$f)/65536.0;Y=($camera.OldY.Data+($camera.Y.Data-$camera.OldY.Data)*$f)/65536.0;Angle=$angleValue*(2*[Math]::PI/4294967296.0)};
-        ViewZ=$viewZ;ExtraLight=$player.ExtraLight;FixedColorMap=$player.FixedColorMap;
+        ViewZ=$viewZ;ExtraLight=$player.ExtraLight;FixedColorMap=$player.FixedColorMap;SectorLight=$camera.Subsector.Sector.LightLevel;
         PlayerSprites=$weapon.ToArray();FaceIndex=$world.StatusBar.FaceIndex;AmmoType=[int][DoomInfo]::WeaponInfos[[int]$player.ReadyWeapon].Ammo;
         Ammo=$player.Ammo.Clone();MaxAmmo=$player.MaxAmmo.Clone();Cards=$player.Cards.Clone();WeaponOwned=$player.WeaponOwned.Clone();
         Health=$player.Health;ArmorPoints=$player.ArmorPoints;Kills=$player.KillCount;Secrets=$player.SecretCount}}
@@ -73,6 +73,7 @@ function Get-GameRenderSnapshotBytes {
     $v[10]=$angleValue*(2*[Math]::PI/4294967296.0)
     $v[11]=if($player.Interpolate -and $world.LevelTime -gt 1){($player.OldViewZ.Data+($player.ViewZ.Data-$player.OldViewZ.Data)*$Fraction)/65536.0}else{$player.ViewZ.Data/65536.0}
     $v[12]=$player.ExtraLight;$v[13]=$player.FixedColorMap;$v[14]=$world.StatusBar.FaceIndex
+    $v[43]=$camera.Subsector.Sector.LightLevel
     $v[15]=[int][DoomInfo]::WeaponInfos[[int]$player.ReadyWeapon].Ammo
     $v[16]=$player.Health;$v[17]=$player.ArmorPoints;$v[18]=$player.KillCount;$v[19]=$player.SecretCount
     for($i=0;$i -lt 4;$i++){$v[20+$i]=$player.Ammo[$i];$v[24+$i]=$player.MaxAmmo[$i]}

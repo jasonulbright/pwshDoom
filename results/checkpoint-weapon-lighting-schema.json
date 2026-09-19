@@ -1,0 +1,51 @@
+{
+  "Checks": [
+    {
+      "Name": "Historical initial checkpoint hash is preserved exactly",
+      "Passed": true
+    },
+    {
+      "Name": "Complete current packet hash is retained separately",
+      "Passed": true
+    },
+    {
+      "Name": "Changing sector lighting still changes the historical-compatible hash",
+      "Passed": true
+    },
+    {
+      "Name": "Changing sector lighting changes the complete packet hash",
+      "Passed": true
+    },
+    {
+      "Name": "Changing health still changes the checkpoint hash",
+      "Passed": true
+    },
+    {
+      "Name": "Restoring state restores both exact hashes",
+      "Passed": true
+    }
+  ],
+  "Sources": [
+    {
+      "Path": "scripts/Test-CheckpointSnapshotSchema.ps1",
+      "Sha256": "6E1D80F675F9E3EED477220A3B07BA787E8C7191327A94F32018E2CD5D6B8A60"
+    },
+    {
+      "Path": "src/InputReplay.ps1",
+      "Sha256": "3BE73AC1811E424F0B9B176681A4E41C2579E1E1F068758E21B374F7D97781A3"
+    },
+    {
+      "Path": "src/GameHost.ps1",
+      "Sha256": "8B0725D8AC7DD818F1FBCF8FA2B2DD899A659111513AAAF48D527B6BF2039ADA"
+    },
+    {
+      "Path": "src/SnapshotTransport.ps1",
+      "Sha256": "D23EE15E8C52E063AA84F669F2DF97692717C75D69C0D63AAC63DA4EBA1FC10C"
+    }
+  ],
+  "ReplaySha256": "F0DB742A0C1118ED3362C2F9E5E2185238E57F42ABB04AD27375018C4A12CE65",
+  "Meaning": "Original Schema1 checkpoint digest preserved against an existing independent route; complete new packet digest retained. Negative controls demonstrate lighting and health changes remain detectable, with exact restoration. No campaign-completion claim.",
+  "Error": null,
+  "BundleSha256": "D57DF4DE73F7C8499436CE60F5F2EB284B833931A679D31A798A020C33339013",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F"
+}
