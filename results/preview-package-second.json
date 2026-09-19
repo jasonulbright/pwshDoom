@@ -1,0 +1,20 @@
+{
+  "Prerequisites": {
+    "Ready": true,
+    "PowerShell": "7.6.5",
+    "Wad": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Ultimate Doom\\base\\DOOM.WAD",
+    "EpisodeMaps": 36,
+    "Root": "C:\\projects\\pwshDoom\\artifacts\\Fresh preview second\\pwshDoom-0.1.0-preview.2",
+    "WindowsTerminal": "C:\\Users\\jason\\AppData\\Local\\Microsoft\\WindowsApps\\wt.exe"
+  },
+  "ZipBytes": 1326433,
+  "Meaning": "Fresh extraction with spaces; all 512 manifest hashes checked, no WAD/demo/soundfont/native/media payload, packaged prerequisite check only. No new live launch or recording. Source changes have separate targeted evidence.",
+  "Version": "0.1.0-preview.2",
+  "ExcludedContentAbsent": true,
+  "ZipSha256": "4783AC6778CEC2A281857CA53FE34369E3EE591B4E70B0153B70E6BA0F6C50CF",
+  "ManifestFiles": 512,
+  "WorkingTreeDirty": false,
+  "SourceCommit": "c69e41c35213377f36d5c9a6747cef648be34489",
+  "InitialInvocationError": "Incorrect native -Command argument forwarding; corrected explicit quoted path, same extracted package.",
+  "AllHashesMatch": true
+}
