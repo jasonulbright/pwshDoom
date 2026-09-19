@@ -1,0 +1,1126 @@
+{
+  "OwnedBundle": "C:\\projects\\pwshDoom\\scripts\\..\\local\\discovery-profile-c96aaf5fe9b74e0d8c15eca922485e66/instrumented.ps1",
+  "QpcFrequency": 10000000,
+  "ReferenceReportSha256": null,
+  "Error": null,
+  "MethodOrder": [
+    "Geometry.PointOnSide",
+    "Geometry.PointToAngleData",
+    "ThreeDRenderer.DiscoverSeg",
+    "ThreeDRenderer.ProjectDiscoveryAngles",
+    "ThreeDRenderer.IsPotentiallyVisible",
+    "ThreeDRenderer.DrawSolidWall",
+    "ThreeDRenderer.DrawPassWall",
+    "ThreeDRenderer.DiscoverIndexedSeg"
+  ],
+  "ReplaySha256": "A9E3E3E48DF5A483D904A412E3AF7A872ED5B5862713A331DC3310007AA09970",
+  "Profile": true,
+  "Samples": [
+    {
+      "MappedSha256": "5934D5B3C90ED3C081DAA25B5A877203F0F59D27380CD74A856BD07C8833072E",
+      "ProfileCounts": [
+        11,
+        34,
+        0,
+        26,
+        11,
+        4,
+        3,
+        15
+      ],
+      "DiscoveryMs": 3.5338,
+      "Episode": 1,
+      "Map": 3,
+      "Command": 1,
+      "ProfileTicks": [
+        1458,
+        3544,
+        0,
+        1522,
+        5935,
+        1550,
+        1086,
+        10694
+      ],
+      "State": 0
+    },
+    {
+      "MappedSha256": "5934D5B3C90ED3C081DAA25B5A877203F0F59D27380CD74A856BD07C8833072E",
+      "ProfileCounts": [
+        11,
+        34,
+        0,
+        26,
+        11,
+        4,
+        3,
+        15
+      ],
+      "DiscoveryMs": 3.1854,
+      "Episode": 1,
+      "Map": 3,
+      "Command": 2,
+      "ProfileTicks": [
+        922,
+        3975,
+        0,
+        1750,
+        9012,
+        2841,
+        1445,
+        14141
+      ],
+      "State": 0
+    },
+    {
+      "MappedSha256": "5934D5B3C90ED3C081DAA25B5A877203F0F59D27380CD74A856BD07C8833072E",
+      "ProfileCounts": [
+        11,
+        34,
+        0,
+        26,
+        11,
+        4,
+        3,
+        15
+      ],
+      "DiscoveryMs": 1.9596,
+      "Episode": 1,
+      "Map": 3,
+      "Command": 3,
+      "ProfileTicks": [
+        801,
+        2415,
+        0,
+        764,
+        5418,
+        1684,
+        966,
+        8546
+      ],
+      "State": 0
+    },
+    {
+      "MappedSha256": "5934D5B3C90ED3C081DAA25B5A877203F0F59D27380CD74A856BD07C8833072E",
+      "ProfileCounts": [
+        11,
+        34,
+        0,
+        26,
+        11,
+        4,
+        3,
+        15
+      ],
+      "DiscoveryMs": 4.195,
+      "Episode": 1,
+      "Map": 3,
+      "Command": 4,
+      "ProfileTicks": [
+        952,
+        2844,
+        0,
+        1050,
+        6759,
+        1887,
+        1363,
+        28847
+      ],
+      "State": 0
+    },
+    {
+      "MappedSha256": "5934D5B3C90ED3C081DAA25B5A877203F0F59D27380CD74A856BD07C8833072E",
+      "ProfileCounts": [
+        11,
+        34,
+        0,
+        26,
+        11,
+        4,
+        3,
+        15
+      ],
+      "DiscoveryMs": 2.9299,
+      "Episode": 1,
+      "Map": 3,
+      "Command": 5,
+      "ProfileTicks": [
+        1533,
+        3557,
+        0,
+        1044,
+        8043,
+        1948,
+        2614,
+        12193
+      ],
+      "State": 0
+    },
+    {
+      "MappedSha256": "5934D5B3C90ED3C081DAA25B5A877203F0F59D27380CD74A856BD07C8833072E",
+      "ProfileCounts": [
+        11,
+        34,
+        0,
+        26,
+        11,
+        4,
+        3,
+        15
+      ],
+      "DiscoveryMs": 2.4117,
+      "Episode": 1,
+      "Map": 3,
+      "Command": 6,
+      "ProfileTicks": [
+        1063,
+        3161,
+        0,
+        948,
+        6695,
+        2167,
+        1765,
+        10329
+      ],
+      "State": 0
+    },
+    {
+      "MappedSha256": "5934D5B3C90ED3C081DAA25B5A877203F0F59D27380CD74A856BD07C8833072E",
+      "ProfileCounts": [
+        11,
+        34,
+        0,
+        26,
+        11,
+        3,
+        3,
+        15
+      ],
+      "DiscoveryMs": 2.4139,
+      "Episode": 1,
+      "Map": 3,
+      "Command": 7,
+      "ProfileTicks": [
+        1340,
+        3184,
+        0,
+        982,
+        6591,
+        1646,
+        1411,
+        9673
+      ],
+      "State": 0
+    },
+    {
+      "MappedSha256": "5934D5B3C90ED3C081DAA25B5A877203F0F59D27380CD74A856BD07C8833072E",
+      "ProfileCounts": [
+        11,
+        34,
+        0,
+        26,
+        11,
+        3,
+        3,
+        15
+      ],
+      "DiscoveryMs": 1.7643,
+      "Episode": 1,
+      "Map": 3,
+      "Command": 8,
+      "ProfileTicks": [
+        1014,
+        2355,
+        0,
+        751,
+        4881,
+        1085,
+        893,
+        7032
+      ],
+      "State": 0
+    },
+    {
+      "MappedSha256": "5934D5B3C90ED3C081DAA25B5A877203F0F59D27380CD74A856BD07C8833072E",
+      "ProfileCounts": [
+        11,
+        34,
+        0,
+        26,
+        11,
+        3,
+        3,
+        15
+      ],
+      "DiscoveryMs": 1.7713,
+      "Episode": 1,
+      "Map": 3,
+      "Command": 9,
+      "ProfileTicks": [
+        815,
+        2372,
+        0,
+        747,
+        5059,
+        1093,
+        939,
+        7228
+      ],
+      "State": 0
+    },
+    {
+      "MappedSha256": "5934D5B3C90ED3C081DAA25B5A877203F0F59D27380CD74A856BD07C8833072E",
+      "ProfileCounts": [
+        11,
+        34,
+        0,
+        26,
+        11,
+        3,
+        3,
+        15
+      ],
+      "DiscoveryMs": 1.8708,
+      "Episode": 1,
+      "Map": 3,
+      "Command": 10,
+      "ProfileTicks": [
+        924,
+        2426,
+        0,
+        790,
+        5141,
+        1498,
+        960,
+        7901
+      ],
+      "State": 0
+    },
+    {
+      "MappedSha256": "5934D5B3C90ED3C081DAA25B5A877203F0F59D27380CD74A856BD07C8833072E",
+      "ProfileCounts": [
+        11,
+        34,
+        0,
+        26,
+        11,
+        3,
+        3,
+        15
+      ],
+      "DiscoveryMs": 2.3564,
+      "Episode": 1,
+      "Map": 3,
+      "Command": 11,
+      "ProfileTicks": [
+        1048,
+        3533,
+        0,
+        949,
+        6632,
+        1299,
+        1770,
+        10061
+      ],
+      "State": 0
+    },
+    {
+      "MappedSha256": "5934D5B3C90ED3C081DAA25B5A877203F0F59D27380CD74A856BD07C8833072E",
+      "ProfileCounts": [
+        11,
+        34,
+        0,
+        26,
+        11,
+        3,
+        3,
+        15
+      ],
+      "DiscoveryMs": 2.1399,
+      "Episode": 1,
+      "Map": 3,
+      "Command": 12,
+      "ProfileTicks": [
+        1093,
+        2954,
+        0,
+        892,
+        6245,
+        1251,
+        1080,
+        8459
+      ],
+      "State": 0
+    },
+    {
+      "MappedSha256": "5934D5B3C90ED3C081DAA25B5A877203F0F59D27380CD74A856BD07C8833072E",
+      "ProfileCounts": [
+        11,
+        32,
+        0,
+        22,
+        11,
+        2,
+        2,
+        11
+      ],
+      "DiscoveryMs": 1.6106,
+      "Episode": 1,
+      "Map": 3,
+      "Command": 13,
+      "ProfileTicks": [
+        822,
+        2242,
+        0,
+        657,
+        5076,
+        912,
+        794,
+        5903
+      ],
+      "State": 0
+    },
+    {
+      "MappedSha256": "5934D5B3C90ED3C081DAA25B5A877203F0F59D27380CD74A856BD07C8833072E",
+      "ProfileCounts": [
+        11,
+        32,
+        0,
+        22,
+        11,
+        2,
+        2,
+        11
+      ],
+      "DiscoveryMs": 1.9278,
+      "Episode": 1,
+      "Map": 3,
+      "Command": 14,
+      "ProfileTicks": [
+        1072,
+        2719,
+        0,
+        730,
+        5061,
+        840,
+        1150,
+        7890
+      ],
+      "State": 0
+    },
+    {
+      "MappedSha256": "5934D5B3C90ED3C081DAA25B5A877203F0F59D27380CD74A856BD07C8833072E",
+      "ProfileCounts": [
+        11,
+        32,
+        0,
+        22,
+        11,
+        2,
+        2,
+        11
+      ],
+      "DiscoveryMs": 1.4469,
+      "Episode": 1,
+      "Map": 3,
+      "Command": 15,
+      "ProfileTicks": [
+        768,
+        2164,
+        0,
+        632,
+        4739,
+        571,
+        628,
+        5086
+      ],
+      "State": 0
+    },
+    {
+      "MappedSha256": "5934D5B3C90ED3C081DAA25B5A877203F0F59D27380CD74A856BD07C8833072E",
+      "ProfileCounts": [
+        11,
+        32,
+        0,
+        22,
+        11,
+        2,
+        2,
+        11
+      ],
+      "DiscoveryMs": 5.2055,
+      "Episode": 1,
+      "Map": 3,
+      "Command": 16,
+      "ProfileTicks": [
+        1324,
+        28179,
+        0,
+        1201,
+        33395,
+        1573,
+        1639,
+        9604
+      ],
+      "State": 0
+    },
+    {
+      "MappedSha256": "5934D5B3C90ED3C081DAA25B5A877203F0F59D27380CD74A856BD07C8833072E",
+      "ProfileCounts": [
+        11,
+        32,
+        0,
+        22,
+        11,
+        2,
+        2,
+        11
+      ],
+      "DiscoveryMs": 2.3992,
+      "Episode": 1,
+      "Map": 3,
+      "Command": 17,
+      "ProfileTicks": [
+        2205,
+        3055,
+        0,
+        922,
+        6611,
+        807,
+        904,
+        7283
+      ],
+      "State": 0
+    },
+    {
+      "MappedSha256": "5934D5B3C90ED3C081DAA25B5A877203F0F59D27380CD74A856BD07C8833072E",
+      "ProfileCounts": [
+        11,
+        28,
+        0,
+        18,
+        11,
+        2,
+        1,
+        7
+      ],
+      "DiscoveryMs": 2.0191,
+      "Episode": 1,
+      "Map": 3,
+      "Command": 18,
+      "ProfileTicks": [
+        1177,
+        3065,
+        0,
+        832,
+        6469,
+        1293,
+        847,
+        6640
+      ],
+      "State": 0
+    },
+    {
+      "MappedSha256": "5934D5B3C90ED3C081DAA25B5A877203F0F59D27380CD74A856BD07C8833072E",
+      "ProfileCounts": [
+        11,
+        28,
+        0,
+        18,
+        11,
+        2,
+        1,
+        7
+      ],
+      "DiscoveryMs": 1.712,
+      "Episode": 1,
+      "Map": 3,
+      "Command": 19,
+      "ProfileTicks": [
+        893,
+        2991,
+        0,
+        694,
+        6121,
+        892,
+        574,
+        5646
+      ],
+      "State": 0
+    },
+    {
+      "MappedSha256": "5934D5B3C90ED3C081DAA25B5A877203F0F59D27380CD74A856BD07C8833072E",
+      "ProfileCounts": [
+        11,
+        28,
+        0,
+        18,
+        11,
+        2,
+        1,
+        7
+      ],
+      "DiscoveryMs": 1.7397,
+      "Episode": 1,
+      "Map": 3,
+      "Command": 20,
+      "ProfileTicks": [
+        1174,
+        2486,
+        0,
+        674,
+        6097,
+        865,
+        628,
+        5023
+      ],
+      "State": 0
+    },
+    {
+      "MappedSha256": "5934D5B3C90ED3C081DAA25B5A877203F0F59D27380CD74A856BD07C8833072E",
+      "ProfileCounts": [
+        11,
+        28,
+        0,
+        18,
+        11,
+        2,
+        1,
+        7
+      ],
+      "DiscoveryMs": 1.7019,
+      "Episode": 1,
+      "Map": 3,
+      "Command": 21,
+      "ProfileTicks": [
+        1091,
+        2406,
+        0,
+        657,
+        6012,
+        846,
+        548,
+        5157
+      ],
+      "State": 0
+    },
+    {
+      "MappedSha256": "5934D5B3C90ED3C081DAA25B5A877203F0F59D27380CD74A856BD07C8833072E",
+      "ProfileCounts": [
+        11,
+        26,
+        0,
+        15,
+        11,
+        1,
+        0,
+        4
+      ],
+      "DiscoveryMs": 1.7082,
+      "Episode": 1,
+      "Map": 3,
+      "Command": 22,
+      "ProfileTicks": [
+        1008,
+        3232,
+        0,
+        704,
+        8036,
+        526,
+        0,
+        3543
+      ],
+      "State": 0
+    },
+    {
+      "MappedSha256": "5934D5B3C90ED3C081DAA25B5A877203F0F59D27380CD74A856BD07C8833072E",
+      "ProfileCounts": [
+        11,
+        26,
+        0,
+        15,
+        11,
+        1,
+        0,
+        4
+      ],
+      "DiscoveryMs": 1.3686,
+      "Episode": 1,
+      "Map": 3,
+      "Command": 23,
+      "ProfileTicks": [
+        992,
+        2222,
+        0,
+        538,
+        5906,
+        519,
+        0,
+        2802
+      ],
+      "State": 0
+    },
+    {
+      "MappedSha256": "5934D5B3C90ED3C081DAA25B5A877203F0F59D27380CD74A856BD07C8833072E",
+      "ProfileCounts": [
+        11,
+        26,
+        0,
+        15,
+        11,
+        1,
+        0,
+        4
+      ],
+      "DiscoveryMs": 1.6088,
+      "Episode": 1,
+      "Map": 3,
+      "Command": 24,
+      "ProfileTicks": [
+        1052,
+        2575,
+        0,
+        600,
+        7906,
+        460,
+        0,
+        2883
+      ],
+      "State": 0
+    },
+    {
+      "MappedSha256": "5934D5B3C90ED3C081DAA25B5A877203F0F59D27380CD74A856BD07C8833072E",
+      "ProfileCounts": [
+        11,
+        26,
+        0,
+        15,
+        11,
+        1,
+        0,
+        4
+      ],
+      "DiscoveryMs": 1.6398,
+      "Episode": 1,
+      "Map": 3,
+      "Command": 25,
+      "ProfileTicks": [
+        934,
+        2246,
+        0,
+        541,
+        8532,
+        445,
+        0,
+        3120
+      ],
+      "State": 0
+    },
+    {
+      "MappedSha256": "5934D5B3C90ED3C081DAA25B5A877203F0F59D27380CD74A856BD07C8833072E",
+      "ProfileCounts": [
+        11,
+        26,
+        0,
+        15,
+        11,
+        1,
+        0,
+        4
+      ],
+      "DiscoveryMs": 1.8369,
+      "Episode": 1,
+      "Map": 3,
+      "Command": 26,
+      "ProfileTicks": [
+        1209,
+        2422,
+        0,
+        614,
+        9277,
+        493,
+        0,
+        3363
+      ],
+      "State": 0
+    },
+    {
+      "MappedSha256": "5934D5B3C90ED3C081DAA25B5A877203F0F59D27380CD74A856BD07C8833072E",
+      "ProfileCounts": [
+        11,
+        26,
+        0,
+        15,
+        11,
+        1,
+        0,
+        4
+      ],
+      "DiscoveryMs": 1.7261,
+      "Episode": 1,
+      "Map": 3,
+      "Command": 27,
+      "ProfileTicks": [
+        936,
+        2395,
+        0,
+        608,
+        9085,
+        485,
+        0,
+        3194
+      ],
+      "State": 0
+    },
+    {
+      "MappedSha256": "5934D5B3C90ED3C081DAA25B5A877203F0F59D27380CD74A856BD07C8833072E",
+      "ProfileCounts": [
+        11,
+        26,
+        0,
+        15,
+        11,
+        1,
+        0,
+        4
+      ],
+      "DiscoveryMs": 1.6795,
+      "Episode": 1,
+      "Map": 3,
+      "Command": 28,
+      "ProfileTicks": [
+        939,
+        2180,
+        0,
+        538,
+        8994,
+        459,
+        0,
+        3031
+      ],
+      "State": 0
+    },
+    {
+      "MappedSha256": "5934D5B3C90ED3C081DAA25B5A877203F0F59D27380CD74A856BD07C8833072E",
+      "ProfileCounts": [
+        11,
+        26,
+        0,
+        15,
+        11,
+        1,
+        0,
+        4
+      ],
+      "DiscoveryMs": 1.85,
+      "Episode": 1,
+      "Map": 3,
+      "Command": 29,
+      "ProfileTicks": [
+        1128,
+        2463,
+        0,
+        633,
+        9327,
+        504,
+        0,
+        3637
+      ],
+      "State": 0
+    },
+    {
+      "MappedSha256": "5934D5B3C90ED3C081DAA25B5A877203F0F59D27380CD74A856BD07C8833072E",
+      "ProfileCounts": [
+        11,
+        26,
+        0,
+        15,
+        11,
+        1,
+        0,
+        4
+      ],
+      "DiscoveryMs": 1.9049,
+      "Episode": 1,
+      "Map": 3,
+      "Command": 30,
+      "ProfileTicks": [
+        1071,
+        2950,
+        0,
+        671,
+        10662,
+        469,
+        0,
+        3204
+      ],
+      "State": 0
+    },
+    {
+      "MappedSha256": "5934D5B3C90ED3C081DAA25B5A877203F0F59D27380CD74A856BD07C8833072E",
+      "ProfileCounts": [
+        11,
+        26,
+        0,
+        15,
+        11,
+        1,
+        0,
+        4
+      ],
+      "DiscoveryMs": 1.8209,
+      "Episode": 1,
+      "Map": 3,
+      "Command": 31,
+      "ProfileTicks": [
+        1084,
+        2330,
+        0,
+        550,
+        8887,
+        490,
+        0,
+        3071
+      ],
+      "State": 0
+    },
+    {
+      "MappedSha256": "5934D5B3C90ED3C081DAA25B5A877203F0F59D27380CD74A856BD07C8833072E",
+      "ProfileCounts": [
+        11,
+        26,
+        0,
+        15,
+        11,
+        1,
+        0,
+        4
+      ],
+      "DiscoveryMs": 3.4238,
+      "Episode": 1,
+      "Map": 3,
+      "Command": 32,
+      "ProfileTicks": [
+        20789,
+        2282,
+        0,
+        554,
+        6141,
+        523,
+        0,
+        2744
+      ],
+      "State": 0
+    },
+    {
+      "MappedSha256": "5934D5B3C90ED3C081DAA25B5A877203F0F59D27380CD74A856BD07C8833072E",
+      "ProfileCounts": [
+        11,
+        26,
+        0,
+        15,
+        11,
+        1,
+        0,
+        4
+      ],
+      "DiscoveryMs": 1.3763,
+      "Episode": 1,
+      "Map": 3,
+      "Command": 33,
+      "ProfileTicks": [
+        1088,
+        2330,
+        0,
+        554,
+        5835,
+        590,
+        0,
+        2895
+      ],
+      "State": 0
+    },
+    {
+      "MappedSha256": "5934D5B3C90ED3C081DAA25B5A877203F0F59D27380CD74A856BD07C8833072E",
+      "ProfileCounts": [
+        11,
+        26,
+        0,
+        15,
+        11,
+        1,
+        0,
+        4
+      ],
+      "DiscoveryMs": 1.1303,
+      "Episode": 1,
+      "Map": 3,
+      "Command": 34,
+      "ProfileTicks": [
+        749,
+        1757,
+        0,
+        439,
+        4695,
+        417,
+        0,
+        2257
+      ],
+      "State": 0
+    },
+    {
+      "MappedSha256": "5934D5B3C90ED3C081DAA25B5A877203F0F59D27380CD74A856BD07C8833072E",
+      "ProfileCounts": [
+        11,
+        26,
+        0,
+        15,
+        11,
+        1,
+        0,
+        4
+      ],
+      "DiscoveryMs": 1.0937,
+      "Episode": 1,
+      "Map": 3,
+      "Command": 35,
+      "ProfileTicks": [
+        802,
+        1789,
+        0,
+        453,
+        4689,
+        472,
+        0,
+        2330
+      ],
+      "State": 0
+    }
+  ],
+  "BaselineBundleSha256": "A1AFAEE97606A57DF264A2E3ADCEBAB461577C3F132E2681D721B8F04D225B50",
+  "Commands": 35,
+  "MappingComparisons": 0,
+  "ReplayVerification": {
+    "Meaning": "Compared available recorded checkpoints through the consumed prefix. This samples selected state and render data, not every hidden game field.",
+    "Matched": true,
+    "Mismatches": [],
+    "Checked": 1
+  },
+  "Checkpoints": [
+    {
+      "Tic": 0,
+      "Sha256": "B52D46A97CEAF9562C3916592623ABFE24CE903EF38F714FBC2C5A15E9B6A2CC",
+      "State": {
+        "Schema": 1,
+        "Tic": 0,
+        "State": "Level",
+        "Episode": 1,
+        "Map": 3,
+        "LevelTime": 1,
+        "RandomIndex": 10,
+        "Paused": false,
+        "PlayerState": "Live",
+        "Health": 100,
+        "Armor": 0,
+        "Position": [
+          -96468992,
+          -219152384,
+          4194304,
+          1073741824
+        ],
+        "Ammo": [
+          50,
+          0,
+          0,
+          0
+        ],
+        "Weapons": [
+          true,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "Keys": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "DidSecret": false,
+        "RenderSnapshotSha256": "6E371264694F8D617B0BFDFE3E31B0F719D937F2C318F8FFFB9CD45FA1EEC733",
+        "Intermission": null,
+        "Finale": null
+      }
+    },
+    {
+      "Tic": 35,
+      "Sha256": "4E5BC88F269FEADC3BA62371831756BFE0E5FEEB97AF5BD5C92FD7C19A9194EE",
+      "State": {
+        "Schema": 1,
+        "Tic": 35,
+        "State": "Level",
+        "Episode": 1,
+        "Map": 3,
+        "LevelTime": 36,
+        "RandomIndex": 13,
+        "Paused": false,
+        "PlayerState": "Live",
+        "Health": 100,
+        "Armor": 0,
+        "Position": [
+          -96469253,
+          -210764252,
+          4194304,
+          1073676288
+        ],
+        "Ammo": [
+          50,
+          4,
+          0,
+          0
+        ],
+        "Weapons": [
+          true,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "Keys": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "DidSecret": false,
+        "RenderSnapshotSha256": "CADE3BE2AE1BE8238FE0D678DE2718EEF9E2B74212F1362BD53A1967EEB32600",
+        "Intermission": null,
+        "Finale": null
+      }
+    }
+  ],
+  "DiscoveryMs": {
+    "Count": 35,
+    "Mean": 2.1275,
+    "Median": 1.8369,
+    "P95": 4.195,
+    "Max": 5.2055
+  },
+  "ExecutedBundleSha256": "1CA297E2ACD8479BE00CA7930CACD2C3CD7B6D93EC03D7E69A28D5DFD3F12F14",
+  "HarnessSha256": "B383F75C7076C27EB56150BB61AC3EF91C8495AB73121343D8DCD2848CA3E57D",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "Meaning": "Unpaced simulation and endpoint discovery only. Optional method timers exist in an owned bundle and include substantial instrumentation overhead; nested inclusive times overlap. Timers reset after gameplay. All post-command discovery samples retained; initial discovery is outside timing. Complete per-command mapped-line bitsets are hashed outside timing and may be compared with an uninstrumented run. Not loaded-host or display FPS."
+}

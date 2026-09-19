@@ -14,6 +14,7 @@ try{
     $null=[DoomInfo]::SwitchNames;$content=[GameContent]::new(@('-iwad',$Wad))
     $screens=@([DrawScreen]::new($content.Wad,320,200),[DrawScreen]::new($content.Wad,320,200))
     $renderers=@([ThreeDRenderer]::new($content,$screens[0],7),[ThreeDRenderer]::new($content,$screens[1],7))
+    $renderers[0].CacheDiscoveryAngles=$false
     $renderers[1].CacheDiscoveryAngles=$true
     $sentinel=[byte[]]::new(64000);[Array]::Fill($sentinel,[byte]77)
     $commands=[TicCmd[]]::new(4);for($j=0;$j -lt 4;$j++){$commands[$j]=[TicCmd]::new()}

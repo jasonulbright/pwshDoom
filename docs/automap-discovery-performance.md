@@ -46,3 +46,22 @@ The 1,200-command paired run passes every fresh and prior cumulative mapping has
 The full 7,118-command E1M3 replay passes 7,002 fresh mapping comparisons across level states and all 24 original checkpoints through E1M4. Baseline/candidate mean is 3.379/2.726 ms, median 2.920/2.375 and p95 7.383/5.717. Both map setup costs (20.020 and 7.232 ms) are included. Intermission commands have no discovery work and are explicitly excluded from the per-discovery timing summary, while all commands/checkpoints remain in the receipt. These are operation costs, not loaded-host FPS.
 
 The separate all-map fixture passes 144 synthetic heading cases over all 36 map starts, with complete mapped-bit agreement, unchanged framebuffers, unchanged world/sector renderer counters and unchanged other line flags. One candidate renderer is reused across all maps; all 36 index rebuilds occur. This broadens discovery parity, not campaign completion or inherited renderer buffer-limit fidelity. Receipts: `results/discovery-angle-indexed-first.json`, `discovery-angle-indexed-full.json`, and `discovery-angle-indexed-maps.json`.
+
+## Adopted path and loaded host
+
+The indexed path is now the production default. `CacheDiscoveryAngles = false` selects the retained reference path for diagnostic paired tests. The complete adopted renderer class matches the validated candidate after normalizing only newlines and the default switch; helper classes remain intact. The paired harness explicitly sets its reference instance to false. The indexed experiment builder copies an already-adopted bundle unchanged. Reproduce the retired dictionary experiment at commit `2a25f78`; its prior harness/source hashes remain in Git.
+
+The actual 16-worker headless Matrix prefix with effects and the unchanged six-track music catalog completes all 1,200 commands and four original checkpoints. All thirteen input/state/audio audit checks pass; all 1,512,000 audio frames return, and the complete PCM hash matches the prior host prefix. Current/pre-run/recorded-input source fingerprints agree, with the original replay source mismatch explicitly declared.
+
+| Loaded prefix metric | Previous numeric-side build | Indexed discovery |
+| --- | ---: | ---: |
+| Active seconds | 40.4643 | 38.9243 |
+| Simulation tics/sec | 29.6558 | 30.8290 |
+| Mean discovery ms/tic | 6.1581 | 5.1501 |
+| Mean game update ms/tic | 18.5892 | 18.4286 |
+| Mean snapshot publication ms/tic | 8.0820 | 7.9637 |
+| Headless completed images/sec | 54.6408 | 53.9251 |
+
+These are separate before/after host observations, not controlled repeats. The older build also predates the separately qualified audio shutdown repair; it had already returned all prefix audio frames. The paired discovery tests support the local optimization; this single host comparison does not prove stable 35-tic/60-display performance. Headless image completions are neither console writes nor displayed frames. Original raw samples, pins, input and audit are `results/e1m3-host-indexed-discovery*`, `e1m3-indexed-discovery-recorded.json` and `e1m3-indexed-discovery-comparison.json`.
+
+The actual simulation-worker automap fixture also passes eight save/load/menu/new-game checks after adoption (`results/automap-worker-indexed-discovery.json`). This covers restoring map pixels under a new generation and switching map identity without stale cache effects. The profiler now includes DiscoverIndexedSeg as an additional inclusive method when available, so future profiles will not silently omit the new hot path. Campaign completion, reference fidelity, audio queue starvation and physical presentation targets remain open.

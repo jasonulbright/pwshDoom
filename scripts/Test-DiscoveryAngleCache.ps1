@@ -1,7 +1,7 @@
 #requires -Version 7.4
 # SPDX-License-Identifier: GPL-2.0-or-later
 param([Parameter(Mandatory)][string]$Replay,[Parameter(Mandatory)][string]$Output,
-    [ValidateSet('Dictionary','Indexed')][string]$Candidate='Dictionary',
+    [ValidateSet('Dictionary','Indexed')][string]$Candidate='Indexed',
     [ValidateRange(1,1260000)][int]$MaxCommands=1200,[string]$ReferenceReport,
     [string]$Wad='C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\base\DOOM.WAD')
 $ErrorActionPreference='Stop'
@@ -29,6 +29,7 @@ try{
     $game=[DoomGame]::new($content,$options);$commands=[TicCmd[]]::new(4);for($j=0;$j -lt 4;$j++){$commands[$j]=[TicCmd]::new()}
     $game.DeferedInitNew([GameSkill]([int]$reference.Skill-1),$reference.Episode,$reference.Map);$null=$game.Update($commands)
     $renderers=@([ThreeDRenderer]::new($content,[DrawScreen]::new($content.Wad,320,200),7),[ThreeDRenderer]::new($content,[DrawScreen]::new($content.Wad,320,200),7))
+    $renderers[0].CacheDiscoveryAngles=$false
     $renderers[1].CacheDiscoveryAngles=$true
     $renderers[0].DiscoverMap($game.World.ConsolePlayer)
     $expected=@{};foreach($point in $reference.Checkpoints){$expected[[int]$point.Tic]=$true}

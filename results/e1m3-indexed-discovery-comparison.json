@@ -1,0 +1,25 @@
+{
+  "BaselineSha256": "D785FA0DA31A2AF17CD3A0460A189496A05509B558E626FEDFB8B9EBA75FD2D5",
+  "IndexedSha256": "B5DEAEC168EC5DD560BA54E2AF39E793B6981B9D6DDA4D955C275A90879742EF",
+  "PcmSha256": "327710E1C9D4DAAF6698507300B047298921BC97D21DBFEC62E43084B1E89D6E",
+  "PcmIdentical": true,
+  "BaselineTicsPerSecond": 29.655793801525892,
+  "IndexedTicsPerSecond": 30.829044332458626,
+  "BaselineDiscoveryMs": {
+    "Count": 1200,
+    "Mean": 6.15809683333333,
+    "Median": 5.9325,
+    "P95": 11.4462,
+    "Max": 21.8563
+  },
+  "IndexedDiscoveryMs": {
+    "Count": 1200,
+    "Mean": 5.15009916666667,
+    "Median": 4.855449999999999,
+    "P95": 9.6707,
+    "Max": 18.7077
+  },
+  "BaselineHeadlessImagesPerSecond": 54.640800079311454,
+  "IndexedHeadlessImagesPerSecond": 53.925136711525546,
+  "Meaning": "Same 1200-command/six-track/16-worker Matrix headless workload, separate before/after runs. All digital PCM bytes hash identically. Earlier baseline predates the separately validated shutdown drain; it already returned every audio frame. These before/after host observations accompany paired same-state discovery experiments, not controlled repeatability or displayed-FPS qualification."
+}

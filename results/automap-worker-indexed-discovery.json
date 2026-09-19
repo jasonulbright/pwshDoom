@@ -1,0 +1,609 @@
+{
+  "FinishedUtc": "2026-09-19T12:47:47.2109617Z",
+  "SaveRoot": "C:\\projects\\pwshDoom\\scripts\\..\\local\\automap-worker-49bf778eb1f348ff82fa1a85937ff81d",
+  "Meaning": "Actual simulation worker, map command ring, bitmap snapshot, save/menu/load/new-game boundaries. No presentation worker or display pacing claim.",
+  "Checks": [
+    {
+      "Name": "Initial snapshot remains numeric world",
+      "Passed": true
+    },
+    {
+      "Name": "Tab publishes map pixels at consumed command boundary",
+      "Passed": true
+    },
+    {
+      "Name": "Save resumes the map without changing its pixels",
+      "Passed": true
+    },
+    {
+      "Name": "Tab returns to numeric rendering",
+      "Passed": true
+    },
+    {
+      "Name": "Load installs map pixels with a new asset generation",
+      "Passed": true
+    },
+    {
+      "Name": "Menu covers map but retains map visibility metadata",
+      "Passed": true
+    },
+    {
+      "Name": "Resume restores unchanged map pixels",
+      "Passed": true
+    },
+    {
+      "Name": "New game resets automap visibility",
+      "Passed": true
+    }
+  ],
+  "Simulation": {
+    "Episode": 1,
+    "SimulationMs": {
+      "Count": 10,
+      "Mean": 3.2727199999999996,
+      "Median": 2.6216,
+      "P95": 7.66,
+      "Max": 7.66
+    },
+    "MenuScreen": 0,
+    "StopAtLevelEnd": false,
+    "ControlEvents": [
+      {
+        "SaveHash": "A3E837E695024536548110429F5247818FCB8016DFFB90F0018128E456DB6C94",
+        "Tic": 8,
+        "Action": "LoadGame"
+      },
+      {
+        "Skill": 3,
+        "Tic": 10,
+        "Action": "NewGame",
+        "Map": 1,
+        "Episode": 2
+      }
+    ],
+    "ShutdownAudioDrain": null,
+    "TickLatenessMs": null,
+    "SnapshotSamplesMs": [
+      191.4462,
+      8.6395,
+      9.36,
+      15.4226,
+      11.9458,
+      9.5833,
+      9.6114,
+      3.2825,
+      24.4058,
+      9.2075,
+      2.8728,
+      2.9449
+    ],
+    "ReplayCheckpointSamplesMs": [
+      96.8286,
+      2.9513,
+      3.3071
+    ],
+    "SaveDirectory": "C:\\projects\\pwshDoom\\local\\automap-worker-49bf778eb1f348ff82fa1a85937ff81d\\6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+    "Kills": 0,
+    "Skill": 3,
+    "AutomapDiscoveryMs": {
+      "Count": 10,
+      "Mean": 9.84486,
+      "Median": 8.97455,
+      "P95": 16.2257,
+      "Max": 16.2257
+    },
+    "Outcome": "Stopped",
+    "AutomapCommands": [
+      {
+        "Tic": 0,
+        "Mask": 1
+      },
+      {
+        "Tic": 1,
+        "Mask": 2
+      },
+      {
+        "Tic": 2,
+        "Mask": 144
+      },
+      {
+        "Tic": 3,
+        "Mask": 4
+      },
+      {
+        "Tic": 5,
+        "Mask": 96
+      },
+      {
+        "Tic": 6,
+        "Mask": 8
+      },
+      {
+        "Tic": 7,
+        "Mask": 1
+      },
+      {
+        "Tic": 9,
+        "Mask": 1
+      }
+    ],
+    "SessionScreenSamplesMs": [],
+    "FinishedUtc": "2026-09-19T12:47:47.1382246Z",
+    "AutomapDiscoverySamplesMs": [
+      16.2257,
+      6.5188,
+      15.2744,
+      9.6771,
+      10.0486,
+      9.1211,
+      7.4156,
+      8.7957,
+      8.828,
+      6.5436
+    ],
+    "AudioPacketMs": null,
+    "InputCommands": [
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "AudioPacketSamplesMs": [],
+    "Tics": 10,
+    "AudioSourcePeak": 0,
+    "Transitions": [
+      {
+        "Kills": 0,
+        "Tic": 0,
+        "DidSecret": false,
+        "Health": 100,
+        "Ammo": [
+          50,
+          0,
+          0,
+          0
+        ],
+        "Generation": 1,
+        "Weapons": [
+          true,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "Map": 1,
+        "Armor": 0,
+        "State": "Level",
+        "Episode": 1,
+        "Keys": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "Kills": 0,
+        "Tic": 8,
+        "DidSecret": false,
+        "Health": 100,
+        "Ammo": [
+          50,
+          0,
+          0,
+          0
+        ],
+        "Generation": 2,
+        "Weapons": [
+          true,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "Map": 1,
+        "Armor": 0,
+        "State": "Level",
+        "Episode": 1,
+        "Keys": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      {
+        "Kills": 0,
+        "Tic": 10,
+        "DidSecret": false,
+        "Health": 100,
+        "Ammo": [
+          50,
+          0,
+          0,
+          0
+        ],
+        "Generation": 3,
+        "Weapons": [
+          true,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "Map": 1,
+        "Armor": 0,
+        "State": "Level",
+        "Episode": 2,
+        "Keys": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      }
+    ],
+    "ReplayCheckpointMs": {
+      "Count": 3,
+      "Mean": 34.36233333333333,
+      "Median": 3.3071,
+      "P95": 96.8286,
+      "Max": 96.8286
+    },
+    "MenuRevision": 7,
+    "SnapshotPublishMs": {
+      "Count": 12,
+      "Mean": 24.893524999999997,
+      "Median": 9.47165,
+      "P95": 191.4462,
+      "Max": 191.4462
+    },
+    "AutomapRenderMs": {
+      "Count": 11,
+      "Mean": 27.74197272727273,
+      "Median": 9.2653,
+      "P95": 191.0739,
+      "Max": 191.0739
+    },
+    "SessionScreenMs": null,
+    "TickLatenessSamplesMs": [],
+    "AutomapRenderSamplesMs": [
+      191.0739,
+      8.3728,
+      9.0645,
+      15.1153,
+      11.6755,
+      8.5947,
+      9.2653,
+      9.2507,
+      24.1911,
+      9.6402,
+      8.9177
+    ],
+    "WarmupTics": 140,
+    "Audio": null,
+    "Health": 100,
+    "AudioEvents": 0,
+    "Error": null,
+    "SaveOperations": [
+      {
+        "Tic": 5,
+        "Action": "SaveGame",
+        "Error": null,
+        "Result": {
+          "Path": "C:\\projects\\pwshDoom\\local\\automap-worker-49bf778eb1f348ff82fa1a85937ff81d\\6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F\\slot-01.pds",
+          "Bytes": 395606,
+          "Backup": null,
+          "Milliseconds": 2254.2313,
+          "Sha256": "A3E837E695024536548110429F5247818FCB8016DFFB90F0018128E456DB6C94",
+          "Nodes": 1846
+        },
+        "Success": true,
+        "Request": {
+          "ExpectedHash": null,
+          "Slot": 1,
+          "Action": "SaveGame"
+        },
+        "Milliseconds": 2853.8417
+      },
+      {
+        "Tic": 8,
+        "Action": "LoadGame",
+        "Error": null,
+        "Result": {
+          "GameTic": 147,
+          "Episode": 1,
+          "Map": 1,
+          "SourceMatches": true,
+          "Sha256": "A3E837E695024536548110429F5247818FCB8016DFFB90F0018128E456DB6C94"
+        },
+        "Success": true,
+        "Request": {
+          "ExpectedHash": "A3E837E695024536548110429F5247818FCB8016DFFB90F0018128E456DB6C94",
+          "Slot": 1,
+          "AllowSourceMismatch": false,
+          "Action": "LoadGame"
+        },
+        "Milliseconds": 3156.0157
+      }
+    ],
+    "IncompleteLoadingBoundary": null,
+    "ReplayCheckpoints": [
+      {
+        "State": {
+          "Schema": 1,
+          "Tic": 0,
+          "State": "Level",
+          "Episode": 1,
+          "Map": 1,
+          "LevelTime": 1,
+          "RandomIndex": 144,
+          "Paused": false,
+          "PlayerState": "Live",
+          "Health": 100,
+          "Armor": 0,
+          "Position": [
+            69206016,
+            -236978176,
+            0,
+            1073741824
+          ],
+          "Ammo": [
+            50,
+            0,
+            0,
+            0
+          ],
+          "Weapons": [
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "Keys": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "DidSecret": false,
+          "RenderSnapshotSha256": "ED2A27F9B114FD60CB6F057F423C6AE068ED39F4207999CC8134DA6C95A35566",
+          "Intermission": null,
+          "Finale": null
+        },
+        "Tic": 0,
+        "AutomapSha256": "683FBC3374C915C4FAFDB4CBFEE0CD8899B1AF9046A4B23140EE784EAC28A015",
+        "Sha256": "20931EDD7A9ABBC3B8E753795EB527C6F4E9C2D68F2D62E8A1EC3E20B84BF943"
+      },
+      {
+        "State": {
+          "Schema": 1,
+          "Tic": 8,
+          "State": "Level",
+          "Episode": 1,
+          "Map": 1,
+          "LevelTime": 6,
+          "RandomIndex": 144,
+          "Paused": false,
+          "PlayerState": "Live",
+          "Health": 100,
+          "Armor": 0,
+          "Position": [
+            69206016,
+            -236978176,
+            0,
+            1073741824
+          ],
+          "Ammo": [
+            50,
+            0,
+            0,
+            0
+          ],
+          "Weapons": [
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "Keys": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "DidSecret": false,
+          "RenderSnapshotSha256": "90355547DAA724AE24831B8284D50EDE9423E452BE04CB7333C36F3B252EC879",
+          "Intermission": null,
+          "Finale": null
+        },
+        "Tic": 8,
+        "AutomapSha256": "EF19EEEE11185515EF59635DE768EE70A4F1675E609A38FA752595875819969F",
+        "Sha256": "6CC7F3CA75280325E3D210BC40529CBA333DA066EAB5BB98E5043A55FCD763D1"
+      },
+      {
+        "State": {
+          "Schema": 1,
+          "Tic": 10,
+          "State": "Level",
+          "Episode": 2,
+          "Map": 1,
+          "LevelTime": 1,
+          "RandomIndex": 159,
+          "Paused": false,
+          "PlayerState": "Live",
+          "Health": 100,
+          "Armor": 0,
+          "Position": [
+            0,
+            3145728,
+            0,
+            1073741824
+          ],
+          "Ammo": [
+            50,
+            0,
+            0,
+            0
+          ],
+          "Weapons": [
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "Keys": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "DidSecret": false,
+          "RenderSnapshotSha256": "D26B45DE67894DB4B41A6B9DDA18B90116EEF290D8B6CB265542FF90E9F75A3C",
+          "Intermission": null,
+          "Finale": null
+        },
+        "Tic": 10,
+        "AutomapSha256": "A7082FC67CD9D64E78ABA392483D968BF79899148278848C78CF111423E6861A",
+        "Sha256": "03A2D9B8AD8D58453CB422642283E2AEAB49469612EFEB62C8E2B1FFC83FC3AD"
+      }
+    ],
+    "SimulationSamplesMs": [
+      2.4715,
+      7.66,
+      4.8341,
+      2.6132,
+      2.63,
+      3.7227,
+      1.773,
+      3.6995,
+      1.6366,
+      1.6866
+    ],
+    "SoundEnabled": false,
+    "AudioBackpressure": [],
+    "FinalGeneration": 3,
+    "IncompleteAudioBackpressureStartQpc": 0,
+    "AudioPublicationTrace": [],
+    "Map": 1,
+    "LoadingBoundaries": [
+      {
+        "Tic": 8,
+        "TotalMilliseconds": 937.7741,
+        "AudioDrain": null,
+        "StartQpc": 574344077680,
+        "Map": 1,
+        "BeforeAssetsMilliseconds": 0.0274,
+        "Episode": 1,
+        "EndQpc": 574353455421
+      },
+      {
+        "Tic": 10,
+        "TotalMilliseconds": 1443.9042,
+        "AudioDrain": null,
+        "StartQpc": 574354527778,
+        "Map": 1,
+        "BeforeAssetsMilliseconds": 454.1885,
+        "Episode": 2,
+        "EndQpc": 574368966820
+      }
+    ]
+  },
+  "HarnessSha256": "95B421D86F98E380619C1B652A24FB7D511DF3749010CDDFAD552D525D35A393",
+  "Error": null
+}

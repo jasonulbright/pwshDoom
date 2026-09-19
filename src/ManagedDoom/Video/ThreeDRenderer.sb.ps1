@@ -19,7 +19,46 @@
 
 # ThreeDRenderer.ps1 - Ported from C# ThreeDRenderer.cs
 
+# pwshDoom, 2026-09-19: within-pass indexed vertex angles; reference path retained for diagnostics.
 class ThreeDRenderer {
+    [bool] $CacheDiscoveryAngles = $true
+    [Map] $DiscoveryIndexedMap
+    [int[]] $DiscoveryVertex1
+    [int[]] $DiscoveryVertex2
+    [long[]] $DiscoveryAngleValues
+    [bool[]] $DiscoveryAngleReady
+    [Collections.Generic.List[double]] $DiscoveryCacheSetupSamples = [Collections.Generic.List[double]]::new()
+    [void] DiscoverIndexedSeg([int] $index) {
+        $seg=$this.world.Map.Segs[$index]
+
+        [int] $v1 = $this.DiscoveryVertex1[$index]
+        [int] $v2 = $this.DiscoveryVertex2[$index]
+        if (-not $this.DiscoveryAngleReady[$v1]) {
+            $this.DiscoveryAngleValues[$v1] = [Geometry]::PointToAngleData($this.viewXData, $this.viewYData, $seg.Vertex1.X.Data, $seg.Vertex1.Y.Data)
+            $this.DiscoveryAngleReady[$v1] = $true
+        }
+        if (-not $this.DiscoveryAngleReady[$v2]) {
+            $this.DiscoveryAngleValues[$v2] = [Geometry]::PointToAngleData($this.viewXData, $this.viewYData, $seg.Vertex2.X.Data, $seg.Vertex2.Y.Data)
+            $this.DiscoveryAngleReady[$v2] = $true
+        }
+        [long] $a1 = $this.DiscoveryAngleValues[$v1]
+        [long] $a2 = $this.DiscoveryAngleValues[$v2]
+        if (-not $this.ProjectDiscoveryAngles($a1, $a2)) { return }
+        [int] $x1 = $this.DiscoveryX1
+        [int] $x2 = $this.DiscoveryX2
+        if ($x2 -le $this.screen.FirstColumn - $this.windowX -or $x1 -ge $this.screen.EndColumn - $this.windowX) { return }
+        $front = $seg.FrontSector
+        $back = $seg.BackSector
+        if ($null -eq $back -or $back.CeilingHeight.Data -le $front.FloorHeight.Data -or $back.FloorHeight.Data -ge $front.CeilingHeight.Data) {
+            $this.DrawSolidWall($seg, [Angle]::Ang0, $x1, $x2 - 1)
+            return
+        }
+        if ($back.CeilingHeight.Data -eq $front.CeilingHeight.Data -and $back.FloorHeight.Data -eq $front.FloorHeight.Data -and
+            $back.CeilingFlat -eq $front.CeilingFlat -and $back.FloorFlat -eq $front.FloorFlat -and
+            $back.LightLevel -eq $front.LightLevel -and $seg.SideDef.MiddleTexture -eq 0) { return }
+        $this.DrawPassWall($seg, [Angle]::Ang0, $x1, $x2 - 1)
+    }
+
     static [int] $MaxScreenSize = 9
     # pwshDoom, 2026-09-11: reuse BSP/angular clipping for automap discovery
     # without rasterizing another 3D frame or touching sprite valid counts.
@@ -771,6 +810,25 @@ class ThreeDRenderer {
     [long] $PerfThreeDVisSprites
 
     [void] DiscoverMap([Player] $player) {
+        if ($this.CacheDiscoveryAngles) {
+            if (-not [object]::ReferenceEquals($this.DiscoveryIndexedMap, $player.Mobj.World.Map)) {
+                $setupWatch = [Diagnostics.Stopwatch]::StartNew()
+                $map = $player.Mobj.World.Map
+                $lookup = [Collections.Generic.Dictionary[Vertex,int]]::new()
+                for ($v = 0; $v -lt $map.Vertices.Length; $v++) { $lookup.Add($map.Vertices[$v], $v) }
+                $this.DiscoveryVertex1 = [int[]]::new($map.Segs.Length)
+                $this.DiscoveryVertex2 = [int[]]::new($map.Segs.Length)
+                for ($s = 0; $s -lt $map.Segs.Length; $s++) {
+                    $this.DiscoveryVertex1[$s] = $lookup[$map.Segs[$s].Vertex1]
+                    $this.DiscoveryVertex2[$s] = $lookup[$map.Segs[$s].Vertex2]
+                }
+                $this.DiscoveryAngleValues = [long[]]::new($map.Vertices.Length)
+                $this.DiscoveryAngleReady = [bool[]]::new($map.Vertices.Length)
+                $this.DiscoveryIndexedMap = $map
+                $this.DiscoveryCacheSetupSamples.Add($setupWatch.Elapsed.TotalMilliseconds)
+            }
+            [Array]::Clear($this.DiscoveryAngleReady)
+        }
         $this.world = $player.Mobj.World
         $this.frameFrac = [Fixed]::One
         $this.viewX = $player.Mobj.X
@@ -1011,7 +1069,8 @@ class ThreeDRenderer {
         $target = $this.world.Map.Subsectors[$subsector]
         if ($this.DiscoveryOnly) {
             for ($i = 0; $i -lt $target.SegCount; $i++) {
-                $this.DrawSeg($this.world.Map.Segs[$target.FirstSeg + $i])
+                if ($this.CacheDiscoveryAngles) { $this.DiscoverIndexedSeg($target.FirstSeg + $i) }
+                else { $this.DrawSeg($this.world.Map.Segs[$target.FirstSeg + $i]) }
             }
             return
         }

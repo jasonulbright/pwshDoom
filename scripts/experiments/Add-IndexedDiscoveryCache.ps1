@@ -4,6 +4,12 @@ param([Parameter(Mandatory)][string]$Bundle,[Parameter(Mandatory)][string]$Outpu
 $ErrorActionPreference='Stop'
 if(Test-Path -LiteralPath $Output){throw 'Use a fresh candidate bundle.'}
 $text=[IO.File]::ReadAllText($Bundle)
+if($text.Contains('[bool] $CacheDiscoveryAngles = $true') -and $text.Contains('[void] DiscoverIndexedSeg([int] $index)')){
+    # The validated candidate is now in production; callers explicitly select
+    # reference/cached instances. Preserve the input bundle byte-for-byte.
+    [IO.File]::Copy($Bundle,$Output)
+    return [IO.Path]::GetFullPath($Output)
+}
 function Replace-Once([string]$Marker,[string]$Replacement){
     if([regex]::Matches($script:text,[regex]::Escape($Marker)).Count -ne 1){throw "Missing or ambiguous candidate marker: $Marker"}
     $script:text=$script:text.Replace($Marker,$Replacement)

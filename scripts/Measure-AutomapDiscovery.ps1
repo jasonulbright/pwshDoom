@@ -11,6 +11,7 @@ $baselineHash=(Get-FileHash $bundle).Hash
 $methods=@(@('Geometry','PointOnSide'),@('Geometry','PointToAngleData'),
     @('ThreeDRenderer','DiscoverSeg'),@('ThreeDRenderer','ProjectDiscoveryAngles'),
     @('ThreeDRenderer','IsPotentiallyVisible'),@('ThreeDRenderer','DrawSolidWall'),@('ThreeDRenderer','DrawPassWall'))
+if([IO.File]::ReadAllText($bundle).Contains('[void] DiscoverIndexedSeg(')){$methods+=,@('ThreeDRenderer','DiscoverIndexedSeg')}
 if($Profile){
     $source=[IO.File]::ReadAllText($bundle)
     $tokens=$null;$issues=$null;$ast=[Management.Automation.Language.Parser]::ParseInput($source,[ref]$tokens,[ref]$issues)
@@ -25,7 +26,7 @@ if($Profile){
         @{Start=$body.StartOffset;Length=$body.Text.Length;Text=$changed}
     })
     foreach($edit in @($edits|Sort-Object Start -Descending)){$source=$source.Remove($edit.Start,$edit.Length).Insert($edit.Start,$edit.Text)}
-    $source=$source.Replace('class Geometry {',('class Geometry {'+"`n"+'static [long[]]$DiscoveryProfileTicks=[long[]]::new(7)'+"`n"+'static [long[]]$DiscoveryProfileCounts=[long[]]::new(7)'+"`n"))
+    $source=$source.Replace('class Geometry {',('class Geometry {'+"`n"+'static [long[]]$DiscoveryProfileTicks=[long[]]::new('+$methods.Count+')'+"`n"+'static [long[]]$DiscoveryProfileCounts=[long[]]::new('+$methods.Count+')'+"`n"))
     $bundle="$owned/instrumented.ps1";[IO.File]::WriteAllText($bundle,$source,[Text.UTF8Encoding]::new($false))
 }
 . $bundle

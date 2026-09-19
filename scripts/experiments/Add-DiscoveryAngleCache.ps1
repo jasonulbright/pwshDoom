@@ -4,6 +4,7 @@ param([Parameter(Mandatory)][string]$Bundle,[Parameter(Mandatory)][string]$Outpu
 $ErrorActionPreference='Stop'
 if(Test-Path -LiteralPath $Output){throw 'Use a fresh candidate bundle.'}
 $text=[IO.File]::ReadAllText($Bundle)
+if($text.Contains('[Map] $DiscoveryIndexedMap')){throw 'The retired dictionary experiment requires the pre-indexed renderer; reproduce it at commit 2a25f78.'}
 function Replace-Once([string]$Marker,[string]$Replacement){
     if([regex]::Matches($script:text,[regex]::Escape($Marker)).Count -ne 1){throw "Missing or ambiguous candidate marker: $Marker"}
     $script:text=$script:text.Replace($Marker,$Replacement)

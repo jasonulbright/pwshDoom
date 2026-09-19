@@ -113,3 +113,14 @@ Modifications, 2026-09-19 (numeric movement gates):
   The original methods remain in a licensed test fixture; 44,424 comparisons,
   thirty analytic assertions and all 24 full E1M3 route checkpoints pass.
   See `docs/numeric-visibility.md` for timings and qualification limits.
+
+- `ThreeDRenderer.DiscoverMap`/discovery traversal: index segment vertex
+  references once per map, then reuse exact numeric vertex angles within each
+  discovery pass. Clear validity every pass and rebuild on map identity change;
+  no cross-tic visibility reuse. A dedicated indexed segment entry preserves
+  existing angular, sector and occlusion rules. The original path remains
+  selectable for diagnostic comparisons. Full E1M3 input preserves 7,002 fresh
+  mapped-line bitsets and 24 original gameplay checkpoints; 144 headings over
+  all 36 map starts also match with pixels/counters/other flags untouched.
+  See `docs/automap-discovery-performance.md`, including the rejected slower
+  dictionary experiment and separate loaded-host performance boundary.

@@ -1,0 +1,9 @@
+{
+  "SmokeSha256": "8A5C6F055175E2178084D7631DBC32D5ADF6F813E78AD9A31AEF0ED972E4C961",
+  "BaselineSha256": "332DC9AA1F43C1649235AB946E9052E1697CAC6F7680B450BF2EDDCC67CE34C4",
+  "MappingComparisons": 35,
+  "ProfiledMethods": 8,
+  "IndexedSegmentCalls": 319,
+  "Passed": true,
+  "Meaning": "Post-adoption diagnostic smoke: all 35 cumulative mapping hashes match the pre-change uninstrumented baseline, and the newly included indexed method actually executes. These short-run times are not a benchmark."
+}
