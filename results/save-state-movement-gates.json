@@ -1,0 +1,176 @@
+{
+  "Error": null,
+  "FinishedUtc": "2026-09-19T11:50:44.4567957Z",
+  "Runs": [
+    {
+      "Save": {
+        "Sha256": "07F2C5B1697F257E8F991B017E6E1F2F85FEEB4A2AF87B9C71475216D4433BD9",
+        "Backup": null,
+        "Nodes": 1847,
+        "Bytes": 398503,
+        "Milliseconds": 1739.6495,
+        "Path": "C:\\projects\\pwshDoom\\local\\save-state-eaaec4da119d4caf943088906f7a7481\\at-700.pds"
+      },
+      "StartState": "Level",
+      "LoadMs": 1335.9951,
+      "EndMap": 1,
+      "EndState": "Level",
+      "FinalCheckpoint": {
+        "State": {
+          "Schema": 1,
+          "Tic": 840,
+          "State": "Level",
+          "Episode": 1,
+          "Map": 1,
+          "LevelTime": 841,
+          "RandomIndex": 238,
+          "Paused": false,
+          "PlayerState": "Live",
+          "Health": 81,
+          "Armor": 0,
+          "Position": [
+            210568510,
+            -215843193,
+            -1572864,
+            2732261376
+          ],
+          "Ammo": [
+            40,
+            0,
+            0,
+            0
+          ],
+          "Weapons": [
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "Keys": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "DidSecret": false,
+          "RenderSnapshotSha256": "9F4E54E2244070B39857D9533E0B1F8F25E8CA2199FA873EECEC95334F037C89",
+          "Intermission": null,
+          "Finale": null
+        },
+        "Sha256": "7D49066E1E1D00766ED4318D8D4BF354124AB4B319BFC3B4987EC61B030ED85A",
+        "Tic": 840
+      },
+      "SaveAt": 700,
+      "ContinueTics": 140,
+      "EndEpisode": 1
+    }
+  ],
+  "Checks": [
+    {
+      "Name": "Save at 700 leaves live state unchanged",
+      "Passed": true
+    },
+    {
+      "Name": "Independent state matches on load at 700",
+      "Passed": true
+    },
+    {
+      "Name": "Serialized graph matches on load at 700",
+      "Passed": true
+    },
+    {
+      "Name": "Continued independent state matches at command 735",
+      "Passed": true
+    },
+    {
+      "Name": "Continued independent state matches at command 770",
+      "Passed": true
+    },
+    {
+      "Name": "Continued independent state matches at command 805",
+      "Passed": true
+    },
+    {
+      "Name": "Continued independent state matches at command 840",
+      "Passed": true
+    },
+    {
+      "Name": "Continued graph matches after 700+140",
+      "Passed": true
+    },
+    {
+      "Name": "Existing save is preserved without overwrite confirmation",
+      "Passed": true
+    },
+    {
+      "Name": "Stale overwrite confirmation preserves original",
+      "Passed": true
+    },
+    {
+      "Name": "Confirmed overwrite retains exact prior save as backup",
+      "Passed": true
+    },
+    {
+      "Name": "Unknown version rejected",
+      "Passed": true
+    },
+    {
+      "Name": "Wrong IWAD rejected",
+      "Passed": true
+    },
+    {
+      "Name": "Wrong schema rejected",
+      "Passed": true
+    },
+    {
+      "Name": "Checksum corruption rejected",
+      "Passed": true
+    },
+    {
+      "Name": "Out-of-range settings rejected",
+      "Passed": true
+    },
+    {
+      "Name": "Unknown graph type rejected in candidate",
+      "Passed": true
+    },
+    {
+      "Name": "Bad reference rejected in candidate",
+      "Passed": true
+    },
+    {
+      "Name": "Missing properties rejected in candidate",
+      "Passed": true
+    },
+    {
+      "Name": "Forged binding rejected in candidate",
+      "Passed": true
+    },
+    {
+      "Name": "Invalid scalar type rejected in candidate",
+      "Passed": true
+    },
+    {
+      "Name": "Executable game action rejected in candidate",
+      "Passed": true
+    },
+    {
+      "Name": "String root rejected in candidate",
+      "Passed": true
+    },
+    {
+      "Name": "Failed loads leave live state unchanged",
+      "Passed": true
+    }
+  ],
+  "SourceSha256": "87368E204F816634FEA245966529892438D698B5ACD8694E370AEC46FB4B6563",
+  "Meaning": "Same-process save reconstruction, independent actor/sector/player/HUD projection, canonical graph round trip and continued ordinary input. Corruption is tested against a separate candidate. This does not yet prove fresh-process loading or menu integration.",
+  "SaveDirectory": "C:\\projects\\pwshDoom\\scripts\\..\\local\\save-state-eaaec4da119d4caf943088906f7a7481"
+}

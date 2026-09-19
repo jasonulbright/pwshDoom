@@ -1,0 +1,37 @@
+{
+  "Reports": [
+    {
+      "Matched": true,
+      "Sha256": "33F745D8E4E798A7B4BF4478EFFB9BC8AA3FFEE03DC9505A171CDA19FAFAE4E0",
+      "Path": "results/simulation-stages-profile-first.json",
+      "FinalCheckpoint": "9A591A56A3326C25526B1C0E83FBCE29C7B3DB621953F156D8396623AA85E2CA",
+      "Commands": 1200,
+      "Checks": 4
+    },
+    {
+      "Matched": true,
+      "Sha256": "690E50149B2FBE508583D64C912AC94CB2243F52CE2CA70D20C182D859599508",
+      "Path": "results/simulation-stages-baseline-first.json",
+      "FinalCheckpoint": "9A591A56A3326C25526B1C0E83FBCE29C7B3DB621953F156D8396623AA85E2CA",
+      "Commands": 1200,
+      "Checks": 4
+    },
+    {
+      "Matched": true,
+      "Sha256": "46ACD025F90EE126379394E24A20C902DBFAB6581CF2FCE79B60ED988C7CB10B",
+      "Path": "results/simulation-actors-first.json",
+      "FinalCheckpoint": "9A591A56A3326C25526B1C0E83FBCE29C7B3DB621953F156D8396623AA85E2CA",
+      "Commands": 1200,
+      "Checks": 4
+    },
+    {
+      "Matched": true,
+      "Sha256": "14116DBC2F09FF604BB8351B154C1BCC5F34C5E0A97A1BFD8616EEDE2C2596BD",
+      "Path": "results/simulation-actors-second.json",
+      "FinalCheckpoint": "9A591A56A3326C25526B1C0E83FBCE29C7B3DB621953F156D8396623AA85E2CA",
+      "Commands": 1200,
+      "Checks": 4
+    }
+  ],
+  "Meaning": "Four sequential simulation-only runs, no concurrent study workload. Exact final selected-state checkpoint matches across baseline and increasingly instrumented bundles; instrumentation lives only in ignored owned bundles."
+}

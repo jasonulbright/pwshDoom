@@ -1,0 +1,192 @@
+{
+  "HarnessSha256": "9821CC68D2558398C60AD263477AFFB24C7823A6ACA5D3577732CA34D5EC54B4",
+  "BundleSha256": "8DC685C40A0B4DB9E26079FA3A3F20A80021B75BBF097232E359F45EBDA06B25",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "Meaning": "Real E1M1 world and actual Mobj.Run/ThingMovement. Eight allocation-identity variants of a stationary grounded missile, nonzero vertical movement and zero-momentum skull charge. Direct test fixtures, not campaign completion. Numeric gate expectation follows id Software P_MobjThinker.",
+  "Checks": [
+    {
+      "Name": "Stationary missile keeps state and flags, allocation mask 0",
+      "Passed": true
+    },
+    {
+      "Name": "Stationary missile advances state clock once, allocation mask 0",
+      "Passed": true
+    },
+    {
+      "Name": "Stationary missile keeps position and RNG, allocation mask 0",
+      "Passed": true
+    },
+    {
+      "Name": "Stationary missile keeps state and flags, allocation mask 1",
+      "Passed": true
+    },
+    {
+      "Name": "Stationary missile advances state clock once, allocation mask 1",
+      "Passed": true
+    },
+    {
+      "Name": "Stationary missile keeps position and RNG, allocation mask 1",
+      "Passed": true
+    },
+    {
+      "Name": "Stationary missile keeps state and flags, allocation mask 2",
+      "Passed": true
+    },
+    {
+      "Name": "Stationary missile advances state clock once, allocation mask 2",
+      "Passed": true
+    },
+    {
+      "Name": "Stationary missile keeps position and RNG, allocation mask 2",
+      "Passed": true
+    },
+    {
+      "Name": "Stationary missile keeps state and flags, allocation mask 3",
+      "Passed": true
+    },
+    {
+      "Name": "Stationary missile advances state clock once, allocation mask 3",
+      "Passed": true
+    },
+    {
+      "Name": "Stationary missile keeps position and RNG, allocation mask 3",
+      "Passed": true
+    },
+    {
+      "Name": "Stationary missile keeps state and flags, allocation mask 4",
+      "Passed": true
+    },
+    {
+      "Name": "Stationary missile advances state clock once, allocation mask 4",
+      "Passed": true
+    },
+    {
+      "Name": "Stationary missile keeps position and RNG, allocation mask 4",
+      "Passed": true
+    },
+    {
+      "Name": "Stationary missile keeps state and flags, allocation mask 5",
+      "Passed": true
+    },
+    {
+      "Name": "Stationary missile advances state clock once, allocation mask 5",
+      "Passed": true
+    },
+    {
+      "Name": "Stationary missile keeps position and RNG, allocation mask 5",
+      "Passed": true
+    },
+    {
+      "Name": "Stationary missile keeps state and flags, allocation mask 6",
+      "Passed": true
+    },
+    {
+      "Name": "Stationary missile advances state clock once, allocation mask 6",
+      "Passed": true
+    },
+    {
+      "Name": "Stationary missile keeps position and RNG, allocation mask 6",
+      "Passed": true
+    },
+    {
+      "Name": "Stationary missile keeps state and flags, allocation mask 7",
+      "Passed": true
+    },
+    {
+      "Name": "Stationary missile advances state clock once, allocation mask 7",
+      "Passed": true
+    },
+    {
+      "Name": "Stationary missile keeps position and RNG, allocation mask 7",
+      "Passed": true
+    },
+    {
+      "Name": "Nonzero downward momentum still hits floor and explodes",
+      "Passed": true
+    },
+    {
+      "Name": "One fixed-point unit upward still moves and remains a missile",
+      "Passed": true
+    },
+    {
+      "Name": "Zero-momentum skull charge still enters movement and clears charge flag",
+      "Passed": true
+    }
+  ],
+  "Error": null,
+  "MobjSha256": "FE1026114134579926388FBD9A2E53A07B2188DD727E747E4AA4A85C7DE6129B",
+  "Cases": [
+    {
+      "State": 114,
+      "Tics": 9,
+      "RandomBefore": 145,
+      "Mask": 0,
+      "Z": 0,
+      "RandomAfter": 145,
+      "Flags": 67088
+    },
+    {
+      "State": 114,
+      "Tics": 9,
+      "RandomBefore": 146,
+      "Mask": 1,
+      "Z": 0,
+      "RandomAfter": 146,
+      "Flags": 67088
+    },
+    {
+      "State": 114,
+      "Tics": 9,
+      "RandomBefore": 147,
+      "Mask": 2,
+      "Z": 0,
+      "RandomAfter": 147,
+      "Flags": 67088
+    },
+    {
+      "State": 114,
+      "Tics": 9,
+      "RandomBefore": 148,
+      "Mask": 3,
+      "Z": 0,
+      "RandomAfter": 148,
+      "Flags": 67088
+    },
+    {
+      "State": 114,
+      "Tics": 9,
+      "RandomBefore": 149,
+      "Mask": 4,
+      "Z": 0,
+      "RandomAfter": 149,
+      "Flags": 67088
+    },
+    {
+      "State": 114,
+      "Tics": 9,
+      "RandomBefore": 150,
+      "Mask": 5,
+      "Z": 0,
+      "RandomAfter": 150,
+      "Flags": 67088
+    },
+    {
+      "State": 114,
+      "Tics": 9,
+      "RandomBefore": 151,
+      "Mask": 6,
+      "Z": 0,
+      "RandomAfter": 151,
+      "Flags": 67088
+    },
+    {
+      "State": 114,
+      "Tics": 9,
+      "RandomBefore": 152,
+      "Mask": 7,
+      "Z": 0,
+      "RandomAfter": 152,
+      "Flags": 67088
+    }
+  ]
+}

@@ -97,3 +97,12 @@ Modifications, 2026-09-12 (damaging floors and stairs):
   Both direct staircase variants reproduce before repair; all 86 focused
   construction, retrigger and floor-completion checks pass afterward.
   See `docs/stair-building.md` at the repository root.
+
+Modifications, 2026-09-19 (numeric movement gates):
+
+- `Mobj.Run`: compare momentum and height `Data` integers instead of Fixed
+  object identity. Separately allocated equal values could spuriously run
+  vertical movement and explode a stationary grounded missile. The focused
+  actual-world fixture fails eighteen assertions before the repair and passes
+  all 27 afterward, including retained movement and skull-charge behavior.
+  See `docs/mobj-movement-gates.md`; this narrow fix is not a global Fixed audit.

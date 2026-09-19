@@ -148,7 +148,7 @@ class Mobj : Thinker {
     }
 
     [void] Run() {
-        if ($this.momX -ne [Fixed]::Zero -or $this.momY -ne [Fixed]::Zero -or 
+        if ($this.momX.Data -ne 0 -or $this.momY.Data -ne 0 -or
             ($this.flags -band [MobjFlags]::SkullFly) -ne 0) {
             $this.world.ThingMovement.XYMovement($this)
 
@@ -157,7 +157,7 @@ class Mobj : Thinker {
             }
         }
 
-        if (($this.z -ne $this.floorZ) -or $this.momZ -ne [Fixed]::Zero) {
+        if (($this.z.Data -ne $this.floorZ.Data) -or $this.momZ.Data -ne 0) {
             $this.world.ThingMovement.ZMovement($this)
 
             if ($this.ThinkerState -eq [ThinkerState]::Removed) {
