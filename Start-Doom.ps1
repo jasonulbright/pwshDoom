@@ -8,6 +8,7 @@ param([string]$Wad,[ValidateRange(1,32)][int]$Workers=16,[ValidateRange(1,5)][in
     [ValidateSet('Classic','AnsiArt','Matrix')][string]$Style='Classic',
     [ValidateSet('Ascii','Katakana')][string]$GlyphSet='Katakana',[string]$FontFace,
     [ValidateSet('Strips','Batch')][string]$TerminalOutput='Strips',
+    [ValidateSet('Pairs','ColorState')][string]$AnsiEncoding='Pairs',
     [ValidateRange(0,30)][int]$ExitDelaySeconds=0,[string]$SessionSchedule,[string]$SaveRoot,[string]$SettingsPath,
     [string]$Report="$PSScriptRoot/local/game-session.json",[string]$ReadyFile,[string]$CaptureStartFile)
 $ErrorActionPreference='Stop'
@@ -30,6 +31,7 @@ if($Replay){
 if($RecordInput -and (Test-Path -LiteralPath $RecordInput)){throw 'Input recording destination already exists; choose a new filename.'}
 $arguments=@('-Wad',$Wad,'-Workers',"$Workers",'-Skill',"$Skill",'-Episode',"$Episode",'-Map',"$Map",'-Seconds',"$Seconds",'-Style',$Style,'-GlyphSet',$GlyphSet,'-Report',[IO.Path]::GetFullPath($Report))
 $arguments+=@('-TerminalOutput',$TerminalOutput)
+$arguments+=@('-AnsiEncoding',$AnsiEncoding)
 if($ReadyFile){$arguments+=@('-ReadyFile',[IO.Path]::GetFullPath($ReadyFile))}
 if($CaptureStartFile){$arguments+=@('-CaptureStartFile',[IO.Path]::GetFullPath($CaptureStartFile))}
 if($RecordInput){$arguments+=@('-RecordInput',[IO.Path]::GetFullPath($RecordInput))}

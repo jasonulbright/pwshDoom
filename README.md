@@ -33,6 +33,8 @@ Matrix uses green code and animated falling highlights; AnsiArt uses full-color 
 
 `-Workers 16` is the tested default. All 36 classic Ultimate Doom maps pass a short headless loading/simulation/rendering sweep at skill 3; E1M1–E1M4 also have independently qualified normal-exit input routes. See the [campaign matrix](docs/campaign-matrix.md) for the distinction and remaining work. The earlier measured setup used PowerShell 7.6.5, Windows Terminal 1.24, and a Core Ultra 7 265K; renderer and simulation working sets totaled about 3.3 GiB, excluding the coordinator and Terminal.
 
+Classic has an experimental `-AnsiEncoding ColorState` option that preserves pixel colors while sending fewer color instructions. It reduces bytes in the tested scenes and recorded routes, but a consistent whole-game speedup is not established; `Pairs` remains the default. See the [encoder comparison](docs/ansi-color-state.md). Matrix and AnsiArt keep their existing encoders.
+
 | Key | Action |
 | --- | --- |
 | W / S, up / down | Forward / backward |

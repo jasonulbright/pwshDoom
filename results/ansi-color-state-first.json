@@ -1,0 +1,599 @@
+{
+  "Error": null,
+  "PowerShell": "7.6.5",
+  "Samples": [
+    {
+      "First": true,
+      "Round": 0,
+      "Mode": "Baseline",
+      "Frame": "E1M1-0",
+      "Bytes": 671945,
+      "Milliseconds": 36.9671
+    },
+    {
+      "First": false,
+      "Round": 0,
+      "Mode": "Candidate",
+      "Frame": "E1M1-0",
+      "Bytes": 566558,
+      "Milliseconds": 33.8232
+    },
+    {
+      "First": true,
+      "Round": 0,
+      "Mode": "Baseline",
+      "Frame": "E1M1-90",
+      "Bytes": 665952,
+      "Milliseconds": 36.9333
+    },
+    {
+      "First": false,
+      "Round": 0,
+      "Mode": "Candidate",
+      "Frame": "E1M1-90",
+      "Bytes": 530539,
+      "Milliseconds": 29.2117
+    },
+    {
+      "First": true,
+      "Round": 0,
+      "Mode": "Baseline",
+      "Frame": "E1M1-180",
+      "Bytes": 661934,
+      "Milliseconds": 35.3539
+    },
+    {
+      "First": false,
+      "Round": 0,
+      "Mode": "Candidate",
+      "Frame": "E1M1-180",
+      "Bytes": 555835,
+      "Milliseconds": 29.9627
+    },
+    {
+      "First": true,
+      "Round": 0,
+      "Mode": "Baseline",
+      "Frame": "E1M3-0",
+      "Bytes": 675243,
+      "Milliseconds": 37.0943
+    },
+    {
+      "First": false,
+      "Round": 0,
+      "Mode": "Candidate",
+      "Frame": "E1M3-0",
+      "Bytes": 568508,
+      "Milliseconds": 30.9552
+    },
+    {
+      "First": true,
+      "Round": 0,
+      "Mode": "Baseline",
+      "Frame": "E1M3-90",
+      "Bytes": 703996,
+      "Milliseconds": 38.4885
+    },
+    {
+      "First": false,
+      "Round": 0,
+      "Mode": "Candidate",
+      "Frame": "E1M3-90",
+      "Bytes": 580177,
+      "Milliseconds": 31.904
+    },
+    {
+      "First": true,
+      "Round": 0,
+      "Mode": "Baseline",
+      "Frame": "E1M3-180",
+      "Bytes": 657805,
+      "Milliseconds": 35.5382
+    },
+    {
+      "First": false,
+      "Round": 0,
+      "Mode": "Candidate",
+      "Frame": "E1M3-180",
+      "Bytes": 550007,
+      "Milliseconds": 29.5759
+    },
+    {
+      "First": true,
+      "Round": 1,
+      "Mode": "Candidate",
+      "Frame": "E1M1-0",
+      "Bytes": 566558,
+      "Milliseconds": 30.6785
+    },
+    {
+      "First": false,
+      "Round": 1,
+      "Mode": "Baseline",
+      "Frame": "E1M1-0",
+      "Bytes": 671945,
+      "Milliseconds": 36.0856
+    },
+    {
+      "First": true,
+      "Round": 1,
+      "Mode": "Candidate",
+      "Frame": "E1M1-90",
+      "Bytes": 530539,
+      "Milliseconds": 29.2738
+    },
+    {
+      "First": false,
+      "Round": 1,
+      "Mode": "Baseline",
+      "Frame": "E1M1-90",
+      "Bytes": 665952,
+      "Milliseconds": 36.2272
+    },
+    {
+      "First": true,
+      "Round": 1,
+      "Mode": "Candidate",
+      "Frame": "E1M1-180",
+      "Bytes": 555835,
+      "Milliseconds": 29.0392
+    },
+    {
+      "First": false,
+      "Round": 1,
+      "Mode": "Baseline",
+      "Frame": "E1M1-180",
+      "Bytes": 661934,
+      "Milliseconds": 33.3152
+    },
+    {
+      "First": true,
+      "Round": 1,
+      "Mode": "Candidate",
+      "Frame": "E1M3-0",
+      "Bytes": 568508,
+      "Milliseconds": 31.0506
+    },
+    {
+      "First": false,
+      "Round": 1,
+      "Mode": "Baseline",
+      "Frame": "E1M3-0",
+      "Bytes": 675243,
+      "Milliseconds": 34.6124
+    },
+    {
+      "First": true,
+      "Round": 1,
+      "Mode": "Candidate",
+      "Frame": "E1M3-90",
+      "Bytes": 580177,
+      "Milliseconds": 31.2247
+    },
+    {
+      "First": false,
+      "Round": 1,
+      "Mode": "Baseline",
+      "Frame": "E1M3-90",
+      "Bytes": 703996,
+      "Milliseconds": 38.2754
+    },
+    {
+      "First": true,
+      "Round": 1,
+      "Mode": "Candidate",
+      "Frame": "E1M3-180",
+      "Bytes": 550007,
+      "Milliseconds": 28.5616
+    },
+    {
+      "First": false,
+      "Round": 1,
+      "Mode": "Baseline",
+      "Frame": "E1M3-180",
+      "Bytes": 657805,
+      "Milliseconds": 35.6059
+    },
+    {
+      "First": true,
+      "Round": 2,
+      "Mode": "Baseline",
+      "Frame": "E1M1-0",
+      "Bytes": 671945,
+      "Milliseconds": 35.7052
+    },
+    {
+      "First": false,
+      "Round": 2,
+      "Mode": "Candidate",
+      "Frame": "E1M1-0",
+      "Bytes": 566558,
+      "Milliseconds": 53.7929
+    },
+    {
+      "First": true,
+      "Round": 2,
+      "Mode": "Baseline",
+      "Frame": "E1M1-90",
+      "Bytes": 665952,
+      "Milliseconds": 45.6635
+    },
+    {
+      "First": false,
+      "Round": 2,
+      "Mode": "Candidate",
+      "Frame": "E1M1-90",
+      "Bytes": 530539,
+      "Milliseconds": 28.5585
+    },
+    {
+      "First": true,
+      "Round": 2,
+      "Mode": "Baseline",
+      "Frame": "E1M1-180",
+      "Bytes": 661934,
+      "Milliseconds": 35.1477
+    },
+    {
+      "First": false,
+      "Round": 2,
+      "Mode": "Candidate",
+      "Frame": "E1M1-180",
+      "Bytes": 555835,
+      "Milliseconds": 29.7455
+    },
+    {
+      "First": true,
+      "Round": 2,
+      "Mode": "Baseline",
+      "Frame": "E1M3-0",
+      "Bytes": 675243,
+      "Milliseconds": 35.8789
+    },
+    {
+      "First": false,
+      "Round": 2,
+      "Mode": "Candidate",
+      "Frame": "E1M3-0",
+      "Bytes": 568508,
+      "Milliseconds": 30.5122
+    },
+    {
+      "First": true,
+      "Round": 2,
+      "Mode": "Baseline",
+      "Frame": "E1M3-90",
+      "Bytes": 703996,
+      "Milliseconds": 37.5127
+    },
+    {
+      "First": false,
+      "Round": 2,
+      "Mode": "Candidate",
+      "Frame": "E1M3-90",
+      "Bytes": 580177,
+      "Milliseconds": 31.2291
+    },
+    {
+      "First": true,
+      "Round": 2,
+      "Mode": "Baseline",
+      "Frame": "E1M3-180",
+      "Bytes": 657805,
+      "Milliseconds": 35.2519
+    },
+    {
+      "First": false,
+      "Round": 2,
+      "Mode": "Candidate",
+      "Frame": "E1M3-180",
+      "Bytes": 550007,
+      "Milliseconds": 28.778
+    },
+    {
+      "First": true,
+      "Round": 3,
+      "Mode": "Candidate",
+      "Frame": "E1M1-0",
+      "Bytes": 566558,
+      "Milliseconds": 30.1095
+    },
+    {
+      "First": false,
+      "Round": 3,
+      "Mode": "Baseline",
+      "Frame": "E1M1-0",
+      "Bytes": 671945,
+      "Milliseconds": 35.3396
+    },
+    {
+      "First": true,
+      "Round": 3,
+      "Mode": "Candidate",
+      "Frame": "E1M1-90",
+      "Bytes": 530539,
+      "Milliseconds": 27.9009
+    },
+    {
+      "First": false,
+      "Round": 3,
+      "Mode": "Baseline",
+      "Frame": "E1M1-90",
+      "Bytes": 665952,
+      "Milliseconds": 35.7776
+    },
+    {
+      "First": true,
+      "Round": 3,
+      "Mode": "Candidate",
+      "Frame": "E1M1-180",
+      "Bytes": 555835,
+      "Milliseconds": 29.453
+    },
+    {
+      "First": false,
+      "Round": 3,
+      "Mode": "Baseline",
+      "Frame": "E1M1-180",
+      "Bytes": 661934,
+      "Milliseconds": 32.9489
+    },
+    {
+      "First": true,
+      "Round": 3,
+      "Mode": "Candidate",
+      "Frame": "E1M3-0",
+      "Bytes": 568508,
+      "Milliseconds": 30.6846
+    },
+    {
+      "First": false,
+      "Round": 3,
+      "Mode": "Baseline",
+      "Frame": "E1M3-0",
+      "Bytes": 675243,
+      "Milliseconds": 36.6724
+    },
+    {
+      "First": true,
+      "Round": 3,
+      "Mode": "Candidate",
+      "Frame": "E1M3-90",
+      "Bytes": 580177,
+      "Milliseconds": 31.563
+    },
+    {
+      "First": false,
+      "Round": 3,
+      "Mode": "Baseline",
+      "Frame": "E1M3-90",
+      "Bytes": 703996,
+      "Milliseconds": 38.294
+    },
+    {
+      "First": true,
+      "Round": 3,
+      "Mode": "Candidate",
+      "Frame": "E1M3-180",
+      "Bytes": 550007,
+      "Milliseconds": 29.418
+    },
+    {
+      "First": false,
+      "Round": 3,
+      "Mode": "Baseline",
+      "Frame": "E1M3-180",
+      "Bytes": 657805,
+      "Milliseconds": 36.682
+    }
+  ],
+  "SourcesChangedDuringRun": [],
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "Meaning": "Experimental foreground/background state compression. Independently parse the entire stream and compare every painted RGB pixel to its source palette; no unrecognized bytes or duplicate painting accepted. Odd dimensions, uneven partitions and offsets plus six real static views. Alternating-order 16-strip serial encoding, including UTF8 and memory-stream assembly; setup/rendering and preceding correctness checks excluded. All timed samples retained. No concurrent study workload, terminal output, audio, display or full-game performance claim.",
+  "Summary": {
+    "Candidate": {
+      "TotalBytes": 13406496.0,
+      "TimingMs": {
+        "Count": 24,
+        "Mean": 31.1252625,
+        "Median": 30.0361,
+        "P95": 33.8232,
+        "Max": 53.7929
+      }
+    },
+    "Baseline": {
+      "TotalBytes": 16147500.0,
+      "TimingMs": {
+        "Count": 24,
+        "Mean": 36.47380833333334,
+        "Median": 35.98225,
+        "P95": 38.4885,
+        "Max": 45.6635
+      }
+    }
+  },
+  "Checks": [
+    {
+      "Parts": 1,
+      "CandidateBytes": 758,
+      "Name": "synthetic-Coherent",
+      "Pixels": 221,
+      "BackgroundOnly": 2,
+      "BaselineBytes": 780,
+      "PixelSha256": "2CC23B7BA2386B2DCCC2193625B99FA7B3A63DC1950E63AA74FAE08BE1EDF859",
+      "ForegroundOnly": 0,
+      "Passed": true,
+      "Both": 12
+    },
+    {
+      "Parts": 3,
+      "CandidateBytes": 989,
+      "Name": "synthetic-Coherent",
+      "Pixels": 221,
+      "BackgroundOnly": 2,
+      "BaselineBytes": 1023,
+      "PixelSha256": "2CC23B7BA2386B2DCCC2193625B99FA7B3A63DC1950E63AA74FAE08BE1EDF859",
+      "ForegroundOnly": 1,
+      "Passed": true,
+      "Both": 16
+    },
+    {
+      "Parts": 7,
+      "CandidateBytes": 1173,
+      "Name": "synthetic-Coherent",
+      "Pixels": 221,
+      "BackgroundOnly": 0,
+      "BaselineBytes": 1221,
+      "PixelSha256": "2CC23B7BA2386B2DCCC2193625B99FA7B3A63DC1950E63AA74FAE08BE1EDF859",
+      "ForegroundOnly": 4,
+      "Passed": true,
+      "Both": 14
+    },
+    {
+      "Parts": 1,
+      "CandidateBytes": 4274,
+      "Name": "synthetic-Entropy",
+      "Pixels": 221,
+      "BackgroundOnly": 0,
+      "BaselineBytes": 4274,
+      "PixelSha256": "3CB041EABA10D6270AD92613971A2B582FD47248B4AF2687BA1A10A8A78E145F",
+      "ForegroundOnly": 0,
+      "Passed": true,
+      "Both": 119
+    },
+    {
+      "Parts": 3,
+      "CandidateBytes": 4371,
+      "Name": "synthetic-Entropy",
+      "Pixels": 221,
+      "BackgroundOnly": 1,
+      "BaselineBytes": 4386,
+      "PixelSha256": "3CB041EABA10D6270AD92613971A2B582FD47248B4AF2687BA1A10A8A78E145F",
+      "ForegroundOnly": 0,
+      "Passed": true,
+      "Both": 118
+    },
+    {
+      "Parts": 7,
+      "CandidateBytes": 4610,
+      "Name": "synthetic-Entropy",
+      "Pixels": 221,
+      "BackgroundOnly": 0,
+      "BaselineBytes": 4610,
+      "PixelSha256": "3CB041EABA10D6270AD92613971A2B582FD47248B4AF2687BA1A10A8A78E145F",
+      "ForegroundOnly": 0,
+      "Passed": true,
+      "Both": 119
+    },
+    {
+      "Parts": 1,
+      "CandidateBytes": 141,
+      "Name": "component-transitions",
+      "Pixels": 16,
+      "BackgroundOnly": 2,
+      "BaselineBytes": 189,
+      "PixelSha256": "457D9F9F6C2E726847D0690D8AA4F0F5CB509680B3EFFFE033A162CCCBDF6E6E",
+      "ForegroundOnly": 2,
+      "Passed": true,
+      "Both": 2
+    },
+    {
+      "Parts": 16,
+      "CandidateBytes": 566558,
+      "Name": "E1M1-0",
+      "Pixels": 64000,
+      "BackgroundOnly": 3695,
+      "BaselineBytes": 671945,
+      "PixelSha256": "FF2BC2AE71DF90BD34B020FB587C4D033AAC0A4635FB4798A3C02B656AD716F4",
+      "ForegroundOnly": 3742,
+      "Passed": true,
+      "Both": 10996
+    },
+    {
+      "Parts": 16,
+      "CandidateBytes": 530539,
+      "Name": "E1M1-90",
+      "Pixels": 64000,
+      "BackgroundOnly": 4728,
+      "BaselineBytes": 665952,
+      "PixelSha256": "028F6DFB61552077AFE764A786C3D15742D92C8FA73D0A7578073C73DF424485",
+      "ForegroundOnly": 4932,
+      "Passed": true,
+      "Both": 8782
+    },
+    {
+      "Parts": 16,
+      "CandidateBytes": 555835,
+      "Name": "E1M1-180",
+      "Pixels": 64000,
+      "BackgroundOnly": 3742,
+      "BaselineBytes": 661934,
+      "PixelSha256": "E74EB8EFB8EF0E0EFA022648DC607C55F5AACAA19CA11CDB84010BAB7AE2CFCA",
+      "ForegroundOnly": 3789,
+      "Passed": true,
+      "Both": 10677
+    },
+    {
+      "Parts": 16,
+      "CandidateBytes": 568508,
+      "Name": "E1M3-0",
+      "Pixels": 64000,
+      "BackgroundOnly": 3722,
+      "BaselineBytes": 675243,
+      "PixelSha256": "BC45EE350C471E64A933F148ECABB7B8B07640E2A44CB642897FA3F3F1A850D2",
+      "ForegroundOnly": 3793,
+      "Passed": true,
+      "Both": 11019
+    },
+    {
+      "Parts": 16,
+      "CandidateBytes": 580177,
+      "Name": "E1M3-90",
+      "Pixels": 64000,
+      "BackgroundOnly": 4262,
+      "BaselineBytes": 703996,
+      "PixelSha256": "3CCA84DAD715FA9F9E412B46832F6B0D31317B29DAD31C1BE399EF7476CCC73B",
+      "ForegroundOnly": 4488,
+      "Passed": true,
+      "Both": 10666
+    },
+    {
+      "Parts": 16,
+      "CandidateBytes": 550007,
+      "Name": "E1M3-180",
+      "Pixels": 64000,
+      "BackgroundOnly": 3849,
+      "BaselineBytes": 657805,
+      "PixelSha256": "CF6A37E90E87A24CE27AB1C1FF09526EBE359600804650CD5A45C6F459F6745A",
+      "ForegroundOnly": 3794,
+      "Passed": true,
+      "Both": 10413
+    }
+  ],
+  "Sources": [
+    {
+      "Sha256": "DDFE8239D9C51E10095D7D7EE6D795FCE87CC70E6EF738CAF8F540008B20925F",
+      "Path": "scripts/Test-AnsiColorState.ps1"
+    },
+    {
+      "Sha256": "F35213BA328A8925E7D8EE1BF67FCF16182150F292B3673A738683ED88470318",
+      "Path": "scripts/FrameCodec.ps1"
+    },
+    {
+      "Sha256": "B335BBC854C4CBC6030630A2AA3DE57CE9393B1C5C2508180D5534CB67E25438",
+      "Path": "src/TerminalCodec.ps1"
+    },
+    {
+      "Sha256": "37CB32B227F909B75E17FF1D10D50D0906758AC9DB972F8B43D32AD65CDF9F1B",
+      "Path": "src/AnsiColorState.ps1"
+    },
+    {
+      "Sha256": "186DBB22ADF4F81EEFC0B5324ECF2276B7A234F4FEDAEACE9CBD6F7E4D522284",
+      "Path": "src/FastRenderer.ps1"
+    },
+    {
+      "Sha256": "E9C47D9E4005509206EC13DA08267F95DB3AF7A1E86F14A743F1F27DE145BF9F",
+      "Path": "src/RenderLighting.ps1"
+    }
+  ]
+}

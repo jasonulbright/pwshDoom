@@ -1,0 +1,178 @@
+{
+  "SimulationLatenessMs": {
+    "Count": 3233,
+    "Mean": 22.57190046396539,
+    "Median": 11.412799999998242,
+    "P95": 75.8089857142877,
+    "Max": 461.1281142857142
+  },
+  "LargestGaps": [
+    {
+      "PreviousMap": 2,
+      "Map": 3,
+      "SameWorld": false,
+      "Tic": 3162,
+      "Milliseconds": 3070.9466,
+      "AfterWrite": 4945,
+      "PreviousTic": 3160
+    },
+    {
+      "PreviousMap": 2,
+      "Map": 2,
+      "SameWorld": true,
+      "Tic": 33,
+      "Milliseconds": 316.0588,
+      "AfterWrite": 27,
+      "PreviousTic": 32
+    },
+    {
+      "PreviousMap": 2,
+      "Map": 2,
+      "SameWorld": true,
+      "Tic": 34,
+      "Milliseconds": 90.0762,
+      "AfterWrite": 28,
+      "PreviousTic": 33
+    },
+    {
+      "PreviousMap": 2,
+      "Map": 2,
+      "SameWorld": true,
+      "Tic": 8,
+      "Milliseconds": 56.8862,
+      "AfterWrite": 7,
+      "PreviousTic": 6
+    },
+    {
+      "PreviousMap": 2,
+      "Map": 2,
+      "SameWorld": true,
+      "Tic": 4,
+      "Milliseconds": 54.0261,
+      "AfterWrite": 5,
+      "PreviousTic": 3
+    },
+    {
+      "PreviousMap": 2,
+      "Map": 2,
+      "SameWorld": true,
+      "Tic": 14,
+      "Milliseconds": 50.7833,
+      "AfterWrite": 12,
+      "PreviousTic": 13
+    },
+    {
+      "PreviousMap": 2,
+      "Map": 2,
+      "SameWorld": true,
+      "Tic": 0,
+      "Milliseconds": 44.9412,
+      "AfterWrite": 2,
+      "PreviousTic": 0
+    },
+    {
+      "PreviousMap": 2,
+      "Map": 2,
+      "SameWorld": true,
+      "Tic": 30,
+      "Milliseconds": 44.9252,
+      "AfterWrite": 24,
+      "PreviousTic": 29
+    },
+    {
+      "PreviousMap": 2,
+      "Map": 2,
+      "SameWorld": false,
+      "Tic": 3046,
+      "Milliseconds": 44.4193,
+      "AfterWrite": 4814,
+      "PreviousTic": 3045
+    },
+    {
+      "PreviousMap": 2,
+      "Map": 2,
+      "SameWorld": true,
+      "Tic": 37,
+      "Milliseconds": 42.6749,
+      "AfterWrite": 31,
+      "PreviousTic": 36
+    }
+  ],
+  "SnapshotMs": {
+    "Count": 3233,
+    "Mean": 5.628668048252395,
+    "Median": 4.9048,
+    "P95": 7.6914,
+    "Max": 151.1055
+  },
+  "ActiveSeconds": 92.4333107,
+  "ConsoleWrites": 5048,
+  "DiscoveryMs": {
+    "Count": 3117,
+    "Mean": 3.354463650946426,
+    "Median": 2.8248,
+    "P95": 7.0979,
+    "Max": 21.0831
+  },
+  "SimulationUpdateMs": {
+    "Count": 3233,
+    "Mean": 9.053151747602843,
+    "Median": 6.9919,
+    "P95": 15.9764,
+    "Max": 1974.8797
+  },
+  "Meaning": "One recorded run, not an isolated benchmark or causal before/after comparison. Gaps are consecutive console-write completion QPC differences, not frame pipeline latency or displayed images. All gaps include transitions; SameWorld is an explicitly filtered companion series. Percentiles use nearest rank. No warm-up exclusions. Timeline zero fill reflects capture alignment; software empty-queue observations and returned buffers do not prove uninterrupted acoustic playback.",
+  "AllConsecutiveWriteGapsMs": {
+    "P95": 25.4823,
+    "P50": 18.3226,
+    "P99": 34.6884,
+    "Count": 5047,
+    "Max": 3070.9466,
+    "Mean": 18.895843629879124
+  },
+  "Error": null,
+  "Video": {
+    "Width": 3440,
+    "Height": 1392,
+    "DurationSeconds": 134.566667
+  },
+  "SimulationTicsPerActiveSecond": 34.97656824705728,
+  "SourceSha256": "1166454100F1F2B5ACE57C4BCFD75E93244DDADA59A229350B1785679D261AEC",
+  "Audio": {
+    "InternalTimelineZeroFilledFrames": 1156.0,
+    "TimelineZeroFilledFrames": 1642921,
+    "QueueEmptyObservations": 2,
+    "ReturnedFrames": 4073580,
+    "ApiDiscontinuityPackets": 0,
+    "CancelledFramesUpperBound": 0,
+    "InternalTimelineFills": [
+      {
+        "Frames": 1156,
+        "NextPacket": 9580,
+        "Frame": 5866545
+      }
+    ],
+    "SubmittedFrames": 4073580
+  },
+  "WallSeconds": 95.4655071,
+  "ConsoleWritesPerActiveSecond": 54.61234658556918,
+  "Receipts": [
+    {
+      "Sha256": "B172D47A869A7850583693879349938FBDE823FBD5394722F457F814B050C82A",
+      "Path": "C:\\projects\\pwshDoom\\local\\recordings\\ansi-pairs-second-game.json"
+    },
+    {
+      "Sha256": "11B12BD7108EB0EFFF545F7D6569D8946ADDD224EAD9144816A5115AF3549547",
+      "Path": "C:\\projects\\pwshDoom\\local\\recordings\\ansi-pairs-second-av.json"
+    }
+  ],
+  "SameWorldWriteGapsMs": {
+    "P95": 24.9548,
+    "P50": 18.2024,
+    "P99": 31.6656,
+    "Count": 4915,
+    "Max": 316.0588,
+    "Mean": 18.149984272634782
+  },
+  "Commands": 3233
+}

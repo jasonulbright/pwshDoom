@@ -28,6 +28,8 @@ A separate full E1M3 Matrix recording completed the route and passed 47 integrat
 
 ## Completing a level changes the test
 
+An [independent color-state encoder](ansi-color-state.md) now avoids resending an unchanged foreground or background. Exact decoded colors survive, and recorded Classic output shrinks by about 15%. A controlled serial encoding comparison is faster. The four full-game trials remain inconsistent, however, and the unchanged rasterizer also runs progressively faster across them. The result supports a lower-bandwidth option, not a universal game-speed claim. The next performance study needs to account better for changing execution conditions.
+
 The later [four-run output comparison](terminal-output.md) illustrates another performance trap. Combining each Classic image into one write lowers the time spent in the host's output phase, yet the first pair's full-game rate drops slightly and the reversed repeat improves slightly. Rates vary from about 38.5 to 57.2 completed images/sec with the same route, assets, code and viewport. All four routes preserve their checkpoints and synthesized audio. That establishes correctness and a narrower output-time result; it does not establish a reliable whole-game speedup. The existing default remains in place.
 
 Loading a map and rendering a room is a useful smoke test. Campaign play exercises keys, doors, floor triggers, lifts, intermission, asset replacement, and inventory carryover. All 36 Ultimate Doom maps pass a short smoke sweep. E1M1 through E1M4 additionally have independently replayed HMP pistol-start normal exits and continuation into the next map. Those separate runs still do not constitute a continuous episode. The [campaign matrix](campaign-matrix.md) keeps that distinction explicit.

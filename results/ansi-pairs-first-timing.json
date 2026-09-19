@@ -1,0 +1,183 @@
+{
+  "Commands": 3233,
+  "Video": {
+    "DurationSeconds": 138.716667,
+    "Height": 1392,
+    "Width": 3440
+  },
+  "Audio": {
+    "TimelineZeroFilledFrames": 1808406,
+    "InternalTimelineZeroFilledFrames": 13530.0,
+    "InternalTimelineFills": [
+      {
+        "Frame": 5384175,
+        "Frames": 12348,
+        "NextPacket": 8139
+      },
+      {
+        "Frame": 6067725,
+        "Frames": 1182,
+        "NextPacket": 9661
+      }
+    ],
+    "QueueEmptyObservations": 6,
+    "ApiDiscontinuityPackets": 0,
+    "CancelledFramesUpperBound": 0,
+    "SubmittedFrames": 4073580,
+    "ReturnedFrames": 4073580
+  },
+  "DiscoveryMs": {
+    "Count": 3117,
+    "Mean": 3.8627982354828365,
+    "Median": 3.205,
+    "P95": 8.4127,
+    "Max": 30.5665
+  },
+  "Receipts": [
+    {
+      "Sha256": "313215ADD4E833AE7314BE49EEF237F298E036A53C142386061B16475CC8EB63",
+      "Path": "C:\\projects\\pwshDoom\\local\\recordings\\ansi-pairs-first-game.json"
+    },
+    {
+      "Sha256": "9C7F8C0BE19E34EF0C8729D52EC0D6F00B3C342E8241F5C0F2877F7D4A5B8536",
+      "Path": "C:\\projects\\pwshDoom\\local\\recordings\\ansi-pairs-first-av.json"
+    }
+  ],
+  "SimulationUpdateMs": {
+    "Count": 3233,
+    "Mean": 10.26200807299722,
+    "Median": 7.8185,
+    "P95": 20.7469,
+    "Max": 1164.853
+  },
+  "WallSeconds": 96.5241576,
+  "SimulationLatenessMs": {
+    "Count": 3233,
+    "Mean": 1042.0171231054767,
+    "Median": 959.5196142857144,
+    "P95": 1553.1388714285713,
+    "Max": 1787.1074714285642
+  },
+  "Error": null,
+  "ConsoleWrites": 3310,
+  "LargestGaps": [
+    {
+      "AfterWrite": 3247,
+      "PreviousTic": 3160,
+      "Tic": 3162,
+      "PreviousMap": 2,
+      "SameWorld": false,
+      "Milliseconds": 2543.2173,
+      "Map": 3
+    },
+    {
+      "AfterWrite": 27,
+      "PreviousTic": 30,
+      "Tic": 31,
+      "PreviousMap": 2,
+      "SameWorld": true,
+      "Milliseconds": 478.8441,
+      "Map": 2
+    },
+    {
+      "AfterWrite": 10,
+      "PreviousTic": 9,
+      "Tic": 10,
+      "PreviousMap": 2,
+      "SameWorld": true,
+      "Milliseconds": 295.7714,
+      "Map": 2
+    },
+    {
+      "AfterWrite": 3249,
+      "PreviousTic": 3163,
+      "Tic": 3165,
+      "PreviousMap": 3,
+      "SameWorld": true,
+      "Milliseconds": 194.9041,
+      "Map": 3
+    },
+    {
+      "AfterWrite": 4,
+      "PreviousTic": 2,
+      "Tic": 4,
+      "PreviousMap": 2,
+      "SameWorld": true,
+      "Milliseconds": 165.8382,
+      "Map": 2
+    },
+    {
+      "AfterWrite": 11,
+      "PreviousTic": 10,
+      "Tic": 11,
+      "PreviousMap": 2,
+      "SameWorld": true,
+      "Milliseconds": 89.9529,
+      "Map": 2
+    },
+    {
+      "AfterWrite": 13,
+      "PreviousTic": 13,
+      "Tic": 14,
+      "PreviousMap": 2,
+      "SameWorld": true,
+      "Milliseconds": 78.22,
+      "Map": 2
+    },
+    {
+      "AfterWrite": 28,
+      "PreviousTic": 31,
+      "Tic": 32,
+      "PreviousMap": 2,
+      "SameWorld": true,
+      "Milliseconds": 77.8,
+      "Map": 2
+    },
+    {
+      "AfterWrite": 5,
+      "PreviousTic": 4,
+      "Tic": 5,
+      "PreviousMap": 2,
+      "SameWorld": true,
+      "Milliseconds": 73.8332,
+      "Map": 2
+    },
+    {
+      "AfterWrite": 3,
+      "PreviousTic": 1,
+      "Tic": 2,
+      "PreviousMap": 2,
+      "SameWorld": true,
+      "Milliseconds": 72.9174,
+      "Map": 2
+    }
+  ],
+  "SnapshotMs": {
+    "Count": 3233,
+    "Mean": 6.4553125579956765,
+    "Median": 5.56,
+    "P95": 10.5416,
+    "Max": 158.7683
+  },
+  "SameWorldWriteGapsMs": {
+    "P95": 38.8381,
+    "Max": 478.8441,
+    "P99": 46.3901,
+    "Mean": 28.299021954275,
+    "Count": 3193,
+    "P50": 27.9432
+  },
+  "ActiveSeconds": 94.0615103,
+  "SimulationTicsPerActiveSecond": 34.37112576322305,
+  "ConsoleWritesPerActiveSecond": 35.189739027611594,
+  "Meaning": "One recorded run, not an isolated benchmark or causal before/after comparison. Gaps are consecutive console-write completion QPC differences, not frame pipeline latency or displayed images. All gaps include transitions; SameWorld is an explicitly filtered companion series. Percentiles use nearest rank. No warm-up exclusions. Timeline zero fill reflects capture alignment; software empty-queue observations and returned buffers do not prove uninterrupted acoustic playback.",
+  "AllConsecutiveWriteGapsMs": {
+    "P95": 39.0508,
+    "Max": 2543.2173,
+    "P99": 46.6128,
+    "Mean": 29.1297017225748,
+    "Count": 3309,
+    "P50": 27.9542
+  },
+  "SourceSha256": "1166454100F1F2B5ACE57C4BCFD75E93244DDADA59A229350B1785679D261AEC"
+}

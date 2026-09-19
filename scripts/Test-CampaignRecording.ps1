@@ -21,6 +21,10 @@ try{
         }
     }
     $count=$r.InputCommands.Count
+    if($c.PSObject.Properties.Name -contains 'AnsiEncoding'){
+        $expectedEncoding=if($c.Style -eq 'Classic'){$c.AnsiEncoding}else{'NotApplicable'}
+        Check 'Recorded ANSI encoder selection reaches the actual host' ($g.AnsiEncoding -ceq $expectedEncoding)
+    }
     Check 'Every ordinary command is consumed unchanged' ($g.Simulation.Tics -eq $count -and ($g.Simulation.InputCommands|ConvertTo-Json -Compress -Depth 4) -ceq ($r.InputCommands|ConvertTo-Json -Compress -Depth 4))
     $comparison=Compare-DoomReplayCheckpoints $r.Checkpoints $g.Simulation.ReplayCheckpoints $count
     Check 'Every independent selected-state checkpoint matches directly' ($comparison.Matched -and $comparison.Checked -eq $r.Checkpoints.Count -and $g.ReplayVerification.Checked -eq $comparison.Checked -and $g.ReplayVerification.Matched)

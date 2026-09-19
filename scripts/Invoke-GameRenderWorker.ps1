@@ -2,20 +2,24 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 param([string]$Assets,[string]$Channel,[int]$FirstColumn,[int]$EndColumn,[int]$OwnerPid,
     [ValidateSet('Classic','AnsiArt','Matrix')][string]$Style='Classic',
-    [ValidateSet('Ascii','Katakana')][string]$GlyphSet='Ascii')
+    [ValidateSet('Ascii','Katakana')][string]$GlyphSet='Ascii',
+    [ValidateSet('Pairs','ColorState')][string]$AnsiEncoding='Pairs')
 $ErrorActionPreference='Stop'
 . "$PSScriptRoot/../src/FastRenderer.ps1"
 . "$PSScriptRoot/../src/RenderAssets.ps1"
 . "$PSScriptRoot/../src/SnapshotTransport.ps1"
 . "$PSScriptRoot/../src/TerminalCodec.ps1"
 . "$PSScriptRoot/FrameCodec.ps1"
+. "$PSScriptRoot/../src/AnsiColorState.ps1"
 . "$PSScriptRoot/../src/CharacterCodec.ps1"
 $map=[IO.MemoryMappedFiles.MemoryMappedFile]::OpenExisting($Channel);$view=$map.CreateViewAccessor()
 $ready=[Threading.EventWaitHandle]::OpenExisting($Channel+'-ready');$go=[Threading.EventWaitHandle]::OpenExisting($Channel+'-go');$done=[Threading.EventWaitHandle]::OpenExisting($Channel+'-done')
 try {
     $owner=if($OwnerPid -gt 0){[Diagnostics.Process]::GetProcessById($OwnerPid)}else{$null}
     $previousSnapshot=$null;$ctx=Read-GameRenderAssets $Assets
-    $codec=if($Style -eq 'Classic'){New-CodecContext $ctx.Palette}else{New-CharacterCodecContext $ctx.Palette $Style -GlyphSet $GlyphSet}
+    $codec=if($Style -eq 'Classic'){
+        if($AnsiEncoding -eq 'ColorState'){New-AnsiColorStateContext $ctx.Palette}else{New-CodecContext $ctx.Palette}
+    }else{New-CharacterCodecContext $ctx.Palette $Style -GlyphSet $GlyphSet}
     [void]$ready.Set()
     while($true) {
         if(-not $go.WaitOne(1000)){if($null -ne $owner -and $owner.HasExited){break};continue}
@@ -39,7 +43,9 @@ try {
         else{for($x=$FirstColumn;$x -lt $EndColumn;$x++){for($y=0;$y -lt 200;$y++){$ctx.Pixels[$y*320+$x]=$bytes[$x*200+$y]}}}
         $view.Write(16,$watch.Elapsed.TotalMilliseconds);$watch.Restart()
         $encoded=if($Style -eq 'Classic'){
-            ConvertTo-AnsiStrip $ctx.Pixels 320 200 $FirstColumn $EndColumn $codec -ColumnOffset ($view.ReadInt32(64)) -RowOffset ($view.ReadInt32(68))
+            if($AnsiEncoding -eq 'ColorState'){
+                ConvertTo-AnsiColorStateStrip $ctx.Pixels 320 200 $FirstColumn $EndColumn $codec -ColumnOffset ($view.ReadInt32(64)) -RowOffset ($view.ReadInt32(68))
+            }else{ConvertTo-AnsiStrip $ctx.Pixels 320 200 $FirstColumn $EndColumn $codec -ColumnOffset ($view.ReadInt32(64)) -RowOffset ($view.ReadInt32(68))}
         }elseif($kind -in 1,3,4){
             ConvertTo-MenuStrip $ctx.Pixels 320 200 $FirstColumn $EndColumn $codec -ColumnOffset ($view.ReadInt32(64)) -RowOffset ($view.ReadInt32(68)) -HudStart $(if($kind -eq 4){168}else{-1})
         }else{

@@ -8,6 +8,7 @@ param([Parameter(Mandatory)][string]$Wad,[ValidateRange(1,32)][int]$Workers=16,
     [ValidateSet('Classic','AnsiArt','Matrix')][string]$Style='Classic',
     [ValidateSet('Ascii','Katakana')][string]$GlyphSet='Katakana',
     [ValidateSet('Strips','Batch')][string]$TerminalOutput='Strips',
+    [ValidateSet('Pairs','ColorState')][string]$AnsiEncoding='Pairs',
     [string]$Report="$PSScriptRoot/../local/game-session.json",[string]$ReadyFile,[string]$CaptureStartFile,[string]$SaveRoot,[string]$SettingsPath,
     [switch]$Diagnostics,[string]$ViewportSchedule,[string]$SessionSchedule,[ValidateRange(0,30)][int]$ExitDelaySeconds=0)
 $ErrorActionPreference='Stop'
@@ -110,7 +111,7 @@ try {
     $paletteBytes=[byte[]]::new(768)
     for($i=0;$i -lt 256;$i++){for($j=0;$j -lt 3;$j++){$paletteBytes[3*$i+$j]=$context.Palette[$i][$j]}}
     [IO.File]::WriteAllBytes("$PSScriptRoot/../local/palette.bin",$paletteBytes)
-    $pool=New-GameRenderPool $context $null $Workers -Style $Style -GlyphSet $GlyphSet
+    $pool=New-GameRenderPool $context $null $Workers -Style $Style -GlyphSet $GlyphSet -AnsiEncoding $AnsiEncoding
     $initialBytes=Get-InterpolatedSnapshotBytes $snapshot.Previous $snapshot.Current 1
     for($i=0;$i -lt 4;$i++){Submit-GameRender $pool $initialBytes;Wait-GameRender $pool}
     if(-not $Headless) {
@@ -378,6 +379,7 @@ finally {
         MapReloads=$mapReloads.ToArray();MapReloadPausedSeconds=$loadingMs/1000;DiscardedTransitionFrames=$transitionDiscarded;FinalAssetGeneration=$assetGeneration;
         CompletedUpdatesPerWallSecond=$completed/[Math]::Max(.001,$wallClock.Elapsed.TotalSeconds);DiscardedResizeFrames=$resizeDiscarded;
         Diagnostics=[bool]$Diagnostics;SyntheticViewport=[bool]$ViewportSchedule;ViewportChanges=$viewportChanges.ToArray();
+        AnsiEncoding=if($Style -eq 'Classic'){$AnsiEncoding}else{'NotApplicable'};
         TerminalOutput=@{Mode=$TerminalOutput;Frames=$terminalOutputContext.Frames;Bytes=$terminalOutputContext.Bytes;WriteCalls=$terminalOutputContext.Writes;BufferCapacity=$terminalOutputContext.Buffer.Length};
         CompletedFrames=$completed;CompletedUpdatesPerSecond=$completed/[Math]::Max(.001,$clock.Elapsed.TotalSeconds);FrameMs=(Get-SampleStats $frameTimes.ToArray());
         InterpolationMs=(Get-SampleStats $interpolationTimes.ToArray());FrameSamplesMs=$frameTimes.ToArray();FrameStats=$frameStats.ToArray();Simulation=$simulationReport;

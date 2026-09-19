@@ -4,7 +4,8 @@
 . "$PSScriptRoot/SnapshotTransport.ps1"
 function New-GameRenderPool {
     param($Context,$Codec,[int]$Workers=16,[ValidateSet('Classic','AnsiArt','Matrix')][string]$Style='Classic',
-        [ValidateSet('Ascii','Katakana')][string]$GlyphSet='Ascii')
+        [ValidateSet('Ascii','Katakana')][string]$GlyphSet='Ascii',
+        [ValidateSet('Pairs','ColorState')][string]$AnsiEncoding='Pairs')
     $root=Split-Path $PSScriptRoot
     $pool=@{Workers=[Collections.Generic.List[object]]::new();Results=[object[]]::new($Workers);Count=$Workers;Style=$Style;
         Assets=(Join-Path $root ('local/session-'+[guid]::NewGuid().ToString('N')+'.assets'))}
@@ -27,7 +28,7 @@ function New-GameRenderPool {
             if($Style -ne 'Classic'){$first=2*[int][Math]::Floor($i*160.0/$Workers);$end=2*[int][Math]::Floor(($i+1)*160.0/$Workers)}
             $info=[Diagnostics.ProcessStartInfo]::new((Get-Process -Id $PID).Path);$info.UseShellExecute=$false;$info.CreateNoWindow=$true
             $info.RedirectStandardOutput=$true;$info.RedirectStandardError=$true
-            foreach($arg in @('-NoProfile','-File',"$root/scripts/Invoke-GameRenderWorker.ps1",'-Assets',$pool.Assets,'-OwnerPid',"$PID",'-Channel',$name,'-FirstColumn',"$first",'-EndColumn',"$end",'-Style',$Style,'-GlyphSet',$GlyphSet)){$info.ArgumentList.Add($arg)}
+            foreach($arg in @('-NoProfile','-File',"$root/scripts/Invoke-GameRenderWorker.ps1",'-Assets',$pool.Assets,'-OwnerPid',"$PID",'-Channel',$name,'-FirstColumn',"$first",'-EndColumn',"$end",'-Style',$Style,'-GlyphSet',$GlyphSet,'-AnsiEncoding',$AnsiEncoding)){$info.ArgumentList.Add($arg)}
             $process=[Diagnostics.Process]::Start($info)
             $pool.Workers.Add(@{Map=$map;View=$view;Ready=$ready;Go=$go;Done=$done;Process=$process;First=$first;End=$end;
                 Stdout=$process.StandardOutput.ReadToEndAsync();Stderr=$process.StandardError.ReadToEndAsync()})
