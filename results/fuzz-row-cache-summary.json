@@ -1,0 +1,98 @@
+{
+  "SourceSha256": "2C69CC3EE5B76EF89F1B9B7A32D655EB1C195A093D99805F3CE14AC20BB2BFCC",
+  "Comparisons": 30,
+  "Meaning": "Arithmetic means of all sequential 20-column strip samples, including cold samples. Six paired repetitions per mode at five fixed saved-world states; rendering/encoding/display concurrency is absent.",
+  "PixelsAndDepthAllMatch": true,
+  "Summary": [
+    {
+      "TotalMeanMs": 12.350696874999997,
+      "Mode": "Reference",
+      "Tic": 0,
+      "Samples": 96,
+      "GeometryMeanMs": 7.919143749999999,
+      "WeaponMeanMs": 0.24835624999999995,
+      "ActorsMeanMs": 2.8938906249999996
+    },
+    {
+      "TotalMeanMs": 8.932564583333333,
+      "Mode": "Current",
+      "Tic": 0,
+      "Samples": 96,
+      "GeometryMeanMs": 6.875829166666667,
+      "WeaponMeanMs": 0.12026770833333329,
+      "ActorsMeanMs": 0.9912125
+    },
+    {
+      "TotalMeanMs": 11.196777083333332,
+      "Mode": "Reference",
+      "Tic": 35,
+      "Samples": 96,
+      "GeometryMeanMs": 5.7634052083333325,
+      "WeaponMeanMs": 0.7155697916666671,
+      "ActorsMeanMs": 3.992008333333333
+    },
+    {
+      "TotalMeanMs": 7.195075,
+      "Mode": "Current",
+      "Tic": 35,
+      "Samples": 96,
+      "GeometryMeanMs": 5.563673958333333,
+      "WeaponMeanMs": 0.13842916666666666,
+      "ActorsMeanMs": 0.7840020833333333
+    },
+    {
+      "TotalMeanMs": 11.665264583333332,
+      "Mode": "Reference",
+      "Tic": 90,
+      "Samples": 96,
+      "GeometryMeanMs": 6.432669791666666,
+      "WeaponMeanMs": 0.7232135416666665,
+      "ActorsMeanMs": 3.785973958333333
+    },
+    {
+      "TotalMeanMs": 7.884141666666667,
+      "Mode": "Current",
+      "Tic": 90,
+      "Samples": 96,
+      "GeometryMeanMs": 6.274006250000002,
+      "WeaponMeanMs": 0.12877499999999997,
+      "ActorsMeanMs": 0.7749927083333334
+    },
+    {
+      "TotalMeanMs": 11.668230208333334,
+      "Mode": "Reference",
+      "Tic": 210,
+      "Samples": 96,
+      "GeometryMeanMs": 6.416023958333333,
+      "WeaponMeanMs": 0.08861770833333334,
+      "ActorsMeanMs": 4.4267802083333345
+    },
+    {
+      "TotalMeanMs": 8.080194791666662,
+      "Mode": "Current",
+      "Tic": 210,
+      "Samples": 96,
+      "GeometryMeanMs": 6.348695833333331,
+      "WeaponMeanMs": 0.07756145833333335,
+      "ActorsMeanMs": 0.9199218749999997
+    },
+    {
+      "TotalMeanMs": 12.053922916666664,
+      "Mode": "Reference",
+      "Tic": 350,
+      "Samples": 96,
+      "GeometryMeanMs": 6.598040624999997,
+      "WeaponMeanMs": 0.10310208333333339,
+      "ActorsMeanMs": 4.569429166666667
+    },
+    {
+      "TotalMeanMs": 8.476048958333335,
+      "Mode": "Current",
+      "Tic": 350,
+      "Samples": 96,
+      "GeometryMeanMs": 6.672241666666667,
+      "WeaponMeanMs": 0.08204375000000001,
+      "ActorsMeanMs": 0.9521572916666664
+    }
+  ]
+}

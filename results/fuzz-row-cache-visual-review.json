@@ -1,0 +1,35 @@
+{
+  "Frames": [
+    {
+      "Path": "local/recordings/fuzz-row-cache-classic-active.png",
+      "Sha256": "7D99ED1ECCE4CD04560719DEDB63703CDC28A724296141ACA871AD71FDAE39D0",
+      "Meaning": "Gameplay with invisible weapon and Spectre."
+    },
+    {
+      "Path": "local/recordings/fuzz-row-cache-classic-expired.png",
+      "Sha256": "D611AAF3DB553FBCBEBD0D9A7A8818B30BFA76B0BC11AC090EA9A041F3E5E1C7",
+      "Meaning": "Gameplay after power expiry, with opaque pistol and Spectre."
+    },
+    {
+      "Path": "local/recordings/fuzz-row-cache-matrix-active.png",
+      "Sha256": "ADC86CF8ADE43CA815EC382293F703325467D4382931CBAC5BB5833C81F52FF8",
+      "Meaning": "Gameplay with invisible weapon and Spectre."
+    },
+    {
+      "Path": "local/recordings/fuzz-row-cache-matrix-expired.png",
+      "Sha256": "94D131B91BB169096C454D5D54B9A331DD1BB45CBBF1D2D00817BA1716BA341F",
+      "Meaning": "Gameplay after power expiry, with opaque pistol and Spectre."
+    },
+    {
+      "Path": "local/recordings/fuzz-row-cache-ansiart-active.png",
+      "Sha256": "60EB276A7D94F94781088FE43B14D0E25F3CE112BEB4C5DD49AC96E8B3B1B444",
+      "Meaning": "Gameplay with invisible weapon and Spectre."
+    },
+    {
+      "Path": "local/recordings/fuzz-row-cache-ansiart-expired.png",
+      "Sha256": "C9404CFC6291AAE353EF09CD9F51B7FD07380FAD9A6DCC9A9484AE515E92020C",
+      "Meaning": "Gameplay after power expiry, with opaque pistol and Spectre."
+    }
+  ],
+  "Meaning": "Six actual-window capture frames visually reviewed. These are appearance samples, not frame-rate or exact-frame equivalence proof. Cleanup is independently checked in each recorded report."
+}

@@ -35,7 +35,7 @@ Matrix uses green code and animated falling highlights; AnsiArt uses full-color 
 
 Classic has an experimental `-AnsiEncoding ColorState` option that preserves pixel colors while sending fewer color instructions. It reduces bytes in the tested scenes and recorded routes, but a consistent whole-game speedup is not established; `Pairs` remains the default. See the [encoder comparison](docs/ansi-color-state.md). Matrix and AnsiArt keep their existing encoders.
 
-Invisibility and Spectres now distort the background in all three styles, including the power-up's final blinking period. The parallel fuzz pattern is a documented approximation of Doom's original global pattern. A close-up test scene with a Spectre records about 34.9 game tics/sec but only 23–31 image writes/sec; effect/scene performance remains unfinished. See [rendering evidence and recordings](docs/rendering-fidelity.md#invisibility-and-spectres-september-19).
+Invisibility and Spectres now distort the background in all three styles, including the power-up's final blinking period. The parallel fuzz pattern is a documented approximation of Doom's original global pattern. After reducing repeated source-row calculations, the latest close-up Spectre recordings reach about 34.9 game tics/sec and 41–46 image writes/sec; the 60-display target and pacing remain unfinished. See the [paired optimization evidence](docs/fuzz-performance.md) and [rendering evidence](docs/rendering-fidelity.md#invisibility-and-spectres-september-19).
 
 | Key | Action |
 | --- | --- |

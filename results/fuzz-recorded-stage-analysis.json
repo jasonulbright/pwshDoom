@@ -1,0 +1,98 @@
+{
+  "Runs": [
+    {
+      "Style": "classic",
+      "PhaseMeans": [
+        {
+          "Mean": 35.76876681034485,
+          "Phase": "MaxRender"
+        },
+        {
+          "Mean": 3.5146068965517245,
+          "Phase": "MaxEncode"
+        },
+        {
+          "Mean": 1.0689788793103439,
+          "Phase": "MaxDecode"
+        },
+        {
+          "Mean": 13.884031896551722,
+          "Phase": "Output"
+        },
+        {
+          "Mean": 1.1424793103448272,
+          "Phase": "Submit"
+        },
+        {
+          "Mean": 1.4245021551724155,
+          "Phase": "Harvest"
+        }
+      ],
+      "Source": "C3075D0C5455DC61EA6421F047E76416D58ABE36C573C81917E8E18086EB0137",
+      "Frames": 232
+    },
+    {
+      "Style": "matrix",
+      "PhaseMeans": [
+        {
+          "Mean": 25.588092012779565,
+          "Phase": "MaxRender"
+        },
+        {
+          "Mean": 3.0420642172523973,
+          "Phase": "MaxEncode"
+        },
+        {
+          "Mean": 1.173290734824281,
+          "Phase": "MaxDecode"
+        },
+        {
+          "Mean": 10.672965814696488,
+          "Phase": "Output"
+        },
+        {
+          "Mean": 1.3077773162939301,
+          "Phase": "Submit"
+        },
+        {
+          "Mean": 1.2731185303514374,
+          "Phase": "Harvest"
+        }
+      ],
+      "Source": "321631892452E59435A832733CA215CFBD37E5C65FBACA6ED4AD143DC6B2A1AD",
+      "Frames": 313
+    },
+    {
+      "Style": "ansiart",
+      "PhaseMeans": [
+        {
+          "Mean": 25.567688410596038,
+          "Phase": "MaxRender"
+        },
+        {
+          "Mean": 4.70124701986755,
+          "Phase": "MaxEncode"
+        },
+        {
+          "Mean": 1.2754698675496687,
+          "Phase": "MaxDecode"
+        },
+        {
+          "Mean": 9.90136688741722,
+          "Phase": "Output"
+        },
+        {
+          "Mean": 1.1518735099337754,
+          "Phase": "Submit"
+        },
+        {
+          "Mean": 1.252431456953642,
+          "Phase": "Harvest"
+        }
+      ],
+      "Source": "B9C6F39837416AA443E0D2AF6C69666DEE4C590C9CA96D116CC7C0D26DCB5B4A",
+      "Frames": 302
+    }
+  ],
+  "Meaning": "Per-completed-world-frame maximum worker duration for each phase, then arithmetic mean. Independent maxima need not identify the same worker. Overlapping pipeline phases are not additive; historical loaded recordings are not a controlled comparison."
+}
