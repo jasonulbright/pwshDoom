@@ -4,6 +4,8 @@ Music can now run through the persistent audio worker alongside effects using an
 
 ## Catalog and commands
 
+The source launcher now accepts `./Play.ps1 -Style Matrix -MusicCatalog ./local/my-route-music.json` (unreleased after preview 2). It forwards the explicit catalog to the existing audio path; `-Silent` cannot be combined with it. `-Check` verifies the catalog file exists and reports its resolved path, but does not certify track contents. Audio startup still validates qualifications and active-WAD identity. An incomplete catalog can fail when gameplay requests an absent track, so prepare every map/intermission/ending track you intend to visit. This option neither supplies music assets nor silently substitutes missing tracks.
+
 The [finite preparation command](music-preparation.md) can now create a catalog from requested local tracks, verify existing qualifications and resume completed tracks after interruption. It publishes only after every requested track passes; soundtrack-wide preparation remains incomplete.
 
 `MusicPlayback.ps1` opens a catalog of qualified readers at worker startup. Each reader validates its source/runtime identity and the complete cached payloads before playback. The simulation process additionally verifies that each catalog track's MUS hash matches the score in the active IWAD. Relative report paths are resolved against the catalog's directory. No asset is supplied by the repository.

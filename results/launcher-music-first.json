@@ -1,0 +1,27 @@
+{
+  "ConflictExitCode": 1,
+  "MissingCatalogExitCode": 1,
+  "Meaning": "Copied exact launcher with a stub Start-Doom captures forwarding; actual launcher rejects conflicting/missing arguments and performs path-only preflight. No game launch or audio playback; track validation remains existing startup responsibility.",
+  "Forwarded": {
+    "Seconds": 0,
+    "Maximized": true,
+    "Workers": 16,
+    "Report": "C:\\projects\\pwshDoom\\local\\launcher-music-check\\forwarded.json",
+    "MusicCatalog": "C:\\projects\\pwshDoom\\local\\music-prepared-seven.json",
+    "Sound": true,
+    "Wad": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Ultimate Doom\\base\\DOOM.WAD",
+    "Style": "Matrix"
+  },
+  "Passed": true,
+  "Preflight": {
+    "Ready": true,
+    "PowerShell": "7.6.5",
+    "Wad": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Ultimate Doom\\base\\DOOM.WAD",
+    "EpisodeMaps": 36,
+    "Root": "C:\\projects\\pwshDoom",
+    "WindowsTerminal": "C:\\Users\\jason\\AppData\\Local\\Microsoft\\WindowsApps\\wt.exe",
+    "MusicCatalog": "C:\\projects\\pwshDoom\\local\\music-prepared-seven.json",
+    "MusicValidation": "Track qualification and WAD identity are checked at audio startup; -Check verifies path only."
+  },
+  "LauncherSha256": "BC26D8D09BE5107BC9CD3BAB67A6A7BDD008672C795F7E611AD8477CBA3461C3"
+}

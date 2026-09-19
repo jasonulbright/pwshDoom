@@ -1,5 +1,7 @@
 # Preparing a local music catalog
 
+September 19 follow-up: an eleven-track Episode 1 catalog is being prepared under `local/music-preparation-episode1`, reusing the seven verified tracks and adding D_E1M6, D_E1M7, D_E1M8 and D_VICTOR. The intended catalog is `local/music-prepared-episode1.json`; it is not usable until the finite preparation command publishes it successfully. This is an incremental soundtrack milestone, not full Ultimate Doom music qualification. Existing seven-track playback remains available. Do not modify the pinned synthesis/preparation sources during the batch.
+
 `scripts/Prepare-DoomMusic.ps1` replaces manual opening-render, continuous-loop qualification and catalog editing. Gameplay and all synthesis/mixing algorithms stay PowerShell. This command prepares exactly the requested dry looping tracks from a user-supplied IWAD and soundfont; it does not provide assets, certify the full soundtrack, or implement one-shot music.
 
 From PowerShell 7.6.5 in the repository root, with the existing local assets:

@@ -3,9 +3,14 @@
 [CmdletBinding()]
 param([string]$Wad,[ValidateSet('Classic','Matrix','AnsiArt')][string]$Style,
     [ValidateRange(1,32)][int]$Workers=16,[switch]$Silent,[switch]$Ascii,
-    [switch]$Check,[ValidateRange(0,3600)][int]$Seconds=0,[string]$Report)
+    [switch]$Check,[ValidateRange(0,3600)][int]$Seconds=0,[string]$Report,[string]$MusicCatalog)
 $ErrorActionPreference='Stop'
 try{
+    if($Silent -and $MusicCatalog){throw 'Choose -Silent or -MusicCatalog, not both. Omit -MusicCatalog for sound effects only.'}
+    if($MusicCatalog){
+        if(-not (Test-Path -LiteralPath $MusicCatalog -PathType Leaf)){throw 'Music catalog not found. Supply a catalog created by scripts/Prepare-DoomMusic.ps1.'}
+        $MusicCatalog=(Resolve-Path -LiteralPath $MusicCatalog).Path
+    }
     if(-not $IsWindows -or -not [Environment]::Is64BitProcess){throw 'This preview requires 64-bit PowerShell 7.4 or later on Windows.'}
     if(-not (Get-Command wt.exe -ErrorAction SilentlyContinue)){throw 'Install Windows Terminal, then open Play.cmd again. See https://aka.ms/terminal'}
     if(-not $Wad){
@@ -36,7 +41,7 @@ try{
     $probe=Join-Path $local ('write-check-'+[guid]::NewGuid().ToString('N'))
     try{[IO.File]::WriteAllText($probe,'');[IO.File]::Delete($probe)}catch{throw 'Extract the complete ZIP into a writable folder, such as Documents\pwshDoom.'}
     if($Check){
-        [pscustomobject]@{Ready=$true;PowerShell=$PSVersionTable.PSVersion.ToString();Wad=$Wad;EpisodeMaps=$maps.Count;Root=$PSScriptRoot;WindowsTerminal=(Get-Command wt.exe).Source}
+        [pscustomobject]@{Ready=$true;PowerShell=$PSVersionTable.PSVersion.ToString();Wad=$Wad;EpisodeMaps=$maps.Count;Root=$PSScriptRoot;WindowsTerminal=(Get-Command wt.exe).Source;MusicCatalog=$MusicCatalog;MusicValidation=if($MusicCatalog){'Track qualification and WAD identity are checked at audio startup; -Check verifies path only.'}else{'Effects only; no music catalog requested.'}}
         return
     }
     Write-Host "`npwshDoom — playable preview" -ForegroundColor Green
@@ -49,11 +54,13 @@ try{
     }
     Write-Host "Opening $Style. First startup can take a minute."
     Write-Host 'WASD move | arrows turn | Ctrl fire | E use | Escape menu | Tab map'
-    Write-Host 'Sound effects are on unless -Silent is supplied. Music is not bundled.'
+    if($MusicCatalog){Write-Host 'Prepared music enabled. Your catalog must cover the maps, intermissions and endings you play.'}
+    else{Write-Host 'Sound effects are on unless -Silent is supplied. Use -MusicCatalog with your prepared catalog to enable music.'}
     Write-Host 'If the game asks for more space, reduce Terminal font size with Ctrl+minus.'
     $launch=@{Wad=$Wad;Style=$Style;Workers=$Workers;Maximized=$true;Sound=(-not $Silent);Seconds=$Seconds}
     if($Ascii){$launch.GlyphSet='Ascii'}
     if($Report){$launch.Report=[IO.Path]::GetFullPath($Report)}
+    if($MusicCatalog){$launch.MusicCatalog=$MusicCatalog}
     & "$PSScriptRoot/Start-Doom.ps1" @launch
 }catch{
     Write-Host "`npwshDoom could not start: $($_.Exception.Message)" -ForegroundColor Red

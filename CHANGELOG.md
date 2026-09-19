@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Allow `Play.ps1 -MusicCatalog` to use an existing prepared music catalog. Reject combining it with `-Silent`; missing files fail before launch. Music preparation and full-track validation remain separate.
+
 ## 0.1.0-preview.2
 
 Gameplay and rendering fixes following the first playable preview. Qualification also adds 97 boss-trigger checks; these do not certify ordinary-input boss victories.
