@@ -1,0 +1,9 @@
+{
+  "Passed": true,
+  "RouteResultSha256": "3E68FC79C8736FE198919EC5E2C0B146303A5EBCC81029E0C32D1A00BD49A60F",
+  "DriverSha256": "ABAA44FCFB47FF1604210F188F0CA232FCF0CAC50757F65B4517F778B8E4C478",
+  "Targets": 9,
+  "ObservedTargetDeaths": 9,
+  "PostDestructionMovementCommandsChecked": 315,
+  "Meaning": "Retained ordinary-input route has nine recorded target deaths with bounded targeting attempts, target-admission distances in [160,300), and 35 following inputs without forward/sidemove per event. This does not verify all intermediate targeting decisions, causality of death, absence of chain explosions, or map completion."
+}

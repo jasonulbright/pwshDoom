@@ -1,0 +1,17 @@
+{
+  "Passed": true,
+  "Checks": {
+    "NoDiagnosticError": true,
+    "EveryInputReplayed": true,
+    "EverySampleMatched": true,
+    "OriginalReceiptPinned": true,
+    "InspectorPinned": true,
+    "SameBundle": true,
+    "SameFinalX": true,
+    "SameFinalY": true,
+    "SameFinalHealth": true,
+    "SameFinalArmor": true
+  },
+  "DiagnosticSha256": "CC7E82411E893594D4E21F90930C4A2F658D0D51CFE3F8F7C1872A244664820E",
+  "Meaning": "Confirms the fixed-input failure diagnostic matches the retained route and its loaded bundle, all original samples and final position/health/armor. Nearby-actor output is read-only diagnosis, not completion evidence."
+}

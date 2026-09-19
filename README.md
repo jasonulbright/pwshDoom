@@ -2,6 +2,8 @@
 
 A PowerShell Doom prototype for Windows Terminal, with a retained investigation and measurement ledger. Game logic, software rendering, and terminal encoding are PowerShell. User-supplied IWADs stay outside the repository.
 
+September 19 status: E1M1–E1M4 have independently replayed HMP normal-exit routes, with inventory-preserving entry into the following map. E1M5 route development is underway. Full-episode continuity and the release gates remain open. With the newer gameplay, automap and music load, the measured E1M3 headless prefix averages **30.829 simulation tics/sec**; sustained 35-tic/60-display performance remains a target. Read the [working article](docs/article-draft.md), [campaign matrix](docs/campaign-matrix.md) and [current performance evidence](docs/automap-discovery-performance.md).
+
 The E1M1 test completes the level through normal movement, turning, shooting, and use commands, with five kills and no cheats. Earlier builds completed full-level Windows Terminal runs at **320×200 with about 60 image updates/sec and 34.9 simulation tics/sec**. Their PresentMon captures measured 57.60–59.96 displayed Terminal updates/sec, without identifying the Doom framebuffer contents of every presentation. The automap integration initially regressed pacing to 13.48 seconds for ten seconds of simulation. Numeric discovery and lower-allocation encoding recover **350 tics in 10.03 seconds and 59.8 headless completed updates/sec** in the sixteen-worker control test. Timing spikes and broader workloads remain unqualified; the earlier display measurements do not qualify this build. See [automap findings](docs/automap.md), [implementation and validation](docs/implementation.md), [viewport findings](docs/viewport.md), and [PresentMon findings](docs/presentmon-validation.md).
 
 ## Play
@@ -29,7 +31,7 @@ For Doom made of characters, choose an optional style:
 
 Matrix uses green code and animated falling highlights; AnsiArt uses full-color brightness/edge glyphs. Both now default to **half-width Japanese katakana**, using MS Gothic at 12 points and **160×50 cells**, with a block HUD. `-GlyphSet Ascii` restores the earlier alphabet and Cascadia Mono font; `-FontFace` permits an explicit font choice. They encode the same 320×200 rendered scene into a deliberately lossy character view. `-Style Classic` retains the default half-block output. See [character modes and measurements](docs/character-modes.md) and [screen recordings](docs/recordings.md).
 
-`-Workers 16` is the tested default. All 36 classic Ultimate Doom maps pass a short headless loading/simulation/rendering sweep at skill 3; only E1M1 has a complete input-only route. See the [campaign matrix](docs/campaign-matrix.md) for the distinction and remaining work. The measured setup used PowerShell 7.6.5, Windows Terminal 1.24, and a Core Ultra 7 265K; renderer and simulation working sets totaled about 3.3 GiB, excluding the coordinator and Terminal.
+`-Workers 16` is the tested default. All 36 classic Ultimate Doom maps pass a short headless loading/simulation/rendering sweep at skill 3; E1M1–E1M4 also have independently qualified normal-exit input routes. See the [campaign matrix](docs/campaign-matrix.md) for the distinction and remaining work. The earlier measured setup used PowerShell 7.6.5, Windows Terminal 1.24, and a Core Ultra 7 265K; renderer and simulation working sets totaled about 3.3 GiB, excluding the coordinator and Terminal.
 
 | Key | Action |
 | --- | --- |

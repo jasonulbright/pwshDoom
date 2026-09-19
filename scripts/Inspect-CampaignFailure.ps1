@@ -8,6 +8,7 @@ $reference=Get-Content $RouteResult -Raw|ConvertFrom-Json
 if($reference.WadSha256 -cne (Get-FileHash $Wad).Hash){throw 'IWAD differs from recorded input.'}
 $bundle=& "$PSScriptRoot/Build-EngineBundle.ps1";. $bundle
 $content=$null;$failure=$null;$events=[Collections.Generic.List[object]]::new();$n=0;$traceChecks=0
+$nearbyActors=[Collections.Generic.List[object]]::new();$finalPlayer=$null
 try{
     $null=[DoomInfo]::SwitchNames;$content=[GameContent]::new(@('-iwad',$Wad));$options=[GameOptions]::new()
     $options.GameMode=$content.Wad.GameMode;$options.GameVersion=$content.Wad.GameVersion;$options.MissionPack=$content.Wad.MissionPack
@@ -27,9 +28,22 @@ try{
             $traceChecks++
         }
     }
+    # Read the final live actors, rather than assuming initial map things still
+    # occupy their spawn positions. This does not advance or modify the world.
+    $p=$game.World.ConsolePlayer;$mo=$p.Mobj;$s=$mo.Subsector.Sector
+    $finalPlayer=@{X=$mo.X.Data/65536.0;Y=$mo.Y.Data/65536.0;Z=$mo.Z.Data/65536.0;Sector=$s.Number;Floor=$s.FloorHeight.Data/65536.0;Ceiling=$s.CeilingHeight.Data/65536.0;Health=$p.Health;Armor=$p.ArmorPoints;Weapon=$p.ReadyWeapon.ToString();Ammo=$p.Ammo.Clone()}
+    $cap=$game.World.Thinkers.Cap;$actor=$cap.Next
+    while(-not [object]::ReferenceEquals($actor,$cap)){
+        if($actor -is [Mobj] -and -not [object]::ReferenceEquals($actor,$mo)){
+            $dx=($actor.X.Data-$mo.X.Data)/65536.0;$dy=($actor.Y.Data-$mo.Y.Data)/65536.0
+            if($dx*$dx+$dy*$dy -le 192*192){
+                $nearbyActors.Add(@{Type=$actor.Type.ToString();X=$actor.X.Data/65536.0;Y=$actor.Y.Data/65536.0;Z=$actor.Z.Data/65536.0;Radius=$actor.Radius.Data/65536.0;Height=$actor.Height.Data/65536.0;Health=$actor.Health;Flags=[int]$actor.Flags;Solid=[bool]($actor.Flags -band [MobjFlags]::Solid);Shootable=[bool]($actor.Flags -band [MobjFlags]::Shootable);CountKill=[bool]($actor.Flags -band [MobjFlags]::CountKill)})
+            }
+        };$actor=$actor.Next
+    }
 }catch{$failure=$_.ToString()+"`n"+$_.ScriptStackTrace}finally{
     if($content){$content.Dispose()}
-    @{Error=$failure;Commands=$n;TraceChecks=$traceChecks;Events=$events.ToArray();RouteResultSha256=(Get-FileHash $RouteResult).Hash;WadSha256=(Get-FileHash $Wad).Hash;BundleSha256=(Get-FileHash $bundle).Hash;HarnessSha256=(Get-FileHash $PSCommandPath).Hash;Meaning='Fixed ordinary-command replay of a retained failure. End-of-tic attacker identifies the last damage source only; multiple same-tic sources are not separately instrumented. Selected original trace positions/health/height must match.'}|ConvertTo-Json -Depth 6|Set-Content $Output
+    @{Error=$failure;Commands=$n;TraceChecks=$traceChecks;Events=$events.ToArray();FinalPlayer=$finalPlayer;FinalActorsWithin192=$nearbyActors.ToArray();RouteResultSha256=(Get-FileHash $RouteResult).Hash;WadSha256=(Get-FileHash $Wad).Hash;BundleSha256=(Get-FileHash $bundle).Hash;HarnessSha256=(Get-FileHash $PSCommandPath).Hash;Meaning='Fixed ordinary-command replay of a retained failure. End-of-tic attacker identifies the last damage source only; multiple same-tic sources are not separately instrumented. Selected original trace positions/health/height must match. Final nearby actors are read from the live thinker list without advancing or changing the world; proximity alone does not prove collision.'}|ConvertTo-Json -Depth 6|Set-Content $Output
 }
 if($failure){throw $failure}
 "Reproduced $n commands and $traceChecks failure trace samples."

@@ -1,18 +1,34 @@
-# E1M5 investigation
+# E1M5 route development
 
-2026-09-19. The qualified E1M4 replay reaches E1M5 and runs 71 destination tics with carried inventory. E1M5 itself has no completed route yet. Its earlier map smoke pass is not completion evidence.
+2026-09-19. E1M5 has map-start smoke coverage and verified entry from E1M4, but no qualified completion yet. Route generation uses ordinary movement, turning, attacks and use commands from an HMP pistol start. The engine is not altered to accommodate the driver.
 
-A read-only export of the installed Ultimate Doom IWAD is retained under ignored `local/e1m5-plan.json` and `.png`. Initial geometry and map things identify these planning anchors; all route feasibility still requires ordinary-input validation:
+Static planning finds paths through the starting pool to green armor, the placed shotgun, the northern stairs into the blue-key room, and the blue door toward the normal exit. Forbidding all damaging-floor boundaries disconnects the spawn because crossing sector 59's damaging pool is necessary. The blue-key room's western threshold is too high to use from the central lower floor; the route instead approaches its northern stairs. These are planning observations, not proof of a playable route. Full extracted geometry remains under ignored `local/`.
 
-| Anchor | Position / constraint |
-| --- | --- |
-| Player start | (-224, -624) |
-| Green armor near start | (-416, -160), map flags 7 |
-| Placed shotgun available on HMP | (288, 352), flags 7; the one at (864, 288) is easy-only, flags 1 |
-| Blue key | (192, 1040), flags 7 |
-| Yellow key | (688, 800), flags 7 |
-| Normal exit switch | Line 409/type 11, between (-320, 2496) and (-256, 2496) |
+The original planning anchors remain useful: start (-224,-624), green armor (-416,-160), HMP shotgun (288,352), blue key (192,1040), yellow key (688,800), and normal exit line 409/type 11 between (-320,2496) and (-256,2496). The shotgun at (864,288) has easy-only flags 1. Central sector 72 starts at floor -24 with damaging special 7; blue-key room 130 is at 56 and western threshold 142 at 80. Ordinary movement must respect those heights.
 
-Do not repeat the planar-height mistakes from E1M4. The central sector 72 has initial floor -24 and damaging special 7; the blue-key room's sector 130 has floor 56 and its western threshold sector 142 has floor 80. A planar shortcut across that threshold is not evidence of a walkable approach. The geometry shows northern steps and an eastern shotgun-room approach that need to be considered when planning. Door/key order, moving floors and enemy positions remain part of actual route validation.
+| Receipt | Completed commands | Observation |
+| --- | ---: | --- |
+| `results/e1m5-route-first.json` | 1,837 | Acquires a dropped shotgun at command 311 after 28 steering commands; reaches 78 health/87 armor, then stalls near (44.54,144.00) while aiming for (104,144). Independent failure replay matches all 52 samples and finds a displaced barrel immediately ahead. |
+| `results/e1m5-route-second.json` | 2,834 | Barrel bypass and shotgun-room visit succeed. Stalls at (39.99,1295.98), floor 0 in sector 140, with 48 health/77 armor. Sector 141 ahead has ceiling 0 and requires the blue-room switch before this approach can reach the north stairs. |
+| `results/e1m5-route-third.json` | 5,519 | Traverses the raised eastern bridge and obtains yellow; ammunition runs out in the western ring. Dies at floor -184 with 38 armor, last attacker `Possessed`. |
+| `results/e1m5-route-fourth.json` | 4,214 | Explicitly collects the shotgun-room shell box. Ammunition remains, but dies on the central western approach with 39 armor and last attacker `Player`, consistent with a player-triggered barrel explosion. |
+| `results/e1m5-route-fifth.json` | 5,895 | Optional barrel clearing records nine target deaths and passes the central approach. Later dies at the western pit rim with 37 armor and last attacker `Troop`; four shells and 25 bullets remained at command 5,775. |
+| `results/e1m5-route-sixth.json` | 8,672 | Extra landing ammunition and western medkit allow the western switch, return lift and central door/stairs. Dies in the eastern blue-key approach, sector 127/floor 72, with 22 armor and last attacker `Shotguy`. Ammunition remains; health had fallen to 13 on the return from the west. |
 
-E1M5 music preparation revalidated all six existing tracks and passed its independent eight-second opening render (`results/music-e1m5-preparation-opening.json`). The continuous three-period qualification covers 492 audio seconds and is still running on original preparation handle 68091. Its intended seven-track catalog is `local/music-prepared-seven.json`; it must not be treated as available before successful atomic publication. Keep all pinned synthesis sources unchanged, and defer live recordings/performance measurements while synthesis runs. Functional unpaced route work may continue, with no timing claim.
+The diagnostic replay checks the original position/health/height samples and reports nearby actors from the final live thinker list. Initial map obstacles alone do not establish where barrels or monsters are after combat. Proximity also does not by itself prove collision.
+
+`results/e1m5-first-diagnostic.json` identifies the surviving solid barrel at (71.16,169.05), displaced from (80,176), with radius 10 and health 11. Its horizontal distance from the stopped player is 26.62 and vertical distance 25.05. The player's radius is 16; the next eastward move enters the combined 26-unit collision square. No linedef crosses this immediate path. The second plan passes farther south at y=128 and returns on the barrel's west side at x=32. This changes only the input route, not the engine or barrel.
+
+The second failure exposes progression missing from the planar route. Sector 141/tag 7 is opened by switch 420/type 103 inside the blue-key room. Eastern crossing line 271/type 22/tag 6 instead raises sector 91 toward its neighboring 56-height walkways and clears its damaging special. This reaches the **yellow** key; the western window from that room is too short for the player. Yellow opens the western door. Switch 189/type 103 in the western pit opens central door 82/tag 2, allowing the stairs and eastern loop toward blue. The loop also has an ordinary type-31 door, which a planning filter limited to type 1 initially omitted.
+
+The third plan follows those dependencies. Its western approach goes around the ring to the gap between the two initially raised side platforms, crosses the damaging pit to the switch and returns over the 24-unit western rim. It then calls and rides the real return lift. Local planning copies assume the predicted bridge and door changes and block tall/closed boundaries; actual ordinary-input gameplay must verify them. The copies do not change the engine world. Earlier direct eastern-to-blue and initial north-stair approaches were rejected during investigation.
+
+The fifth candidate uses the fourth plan with an optional `ClearBarrels` driver strategy. It may aim and fire at visible live barrels 160–300 units away, when no shootable barrel is nearer than 160 and no enemy is within 64. It bounds targeting to 140 commands per barrel and waits 35 commands after a targeted barrel dies before moving again. Holds and dropped-weapon collection retain priority. This emits ordinary commands only; it does not remove barrels, edit health or suppress blast damage. Chain explosions and changing actor positions mean the distance rule is not a safety guarantee.
+
+`results/e1m5-fourth-default-parity.json` passes 35 checks: with the option off, regenerating the fourth route produces all 4,214 identical commands, every recorded trace/arrival/pickup value, and the same final failure. `results/e1m5-barrel-input-audit.json` checks the fifth run's nine target admissions and observed deaths, bounded attempts and all 315 post-destruction movement-free inputs. These checks establish driver behavior, not a completed map. A sixth candidate adds three upper-landing shell pickups, its nearby medkit and the western medkit before entering the pit.
+
+The fifth failure independently reproduces all 5,895 inputs and 168 samples (`results/e1m5-fifth-diagnostic.json`). The sixth candidate reaches the intended moving-floor and switch sequence, but its later death motivates a seventh medkit detour after opening the central door. The medkit at (416,688) lies close to two walls: the conservative planner rejects its exact center, while (432,696) has clearance and lies within ordinary pickup range. That detour must still be validated in gameplay.
+
+These functional jobs overlap the finite E1M5 music preparation and provide no performance measurement. Live terminal rendering, recorded audio, complete-episode continuity and harder difficulties remain separate qualification work.
+
+Music preparation revalidated six existing tracks and passed the eight-second opening render (`results/music-e1m5-preparation-opening.json`). Its continuous three-period qualification covers 492 audio seconds; `local/music-prepared-seven.json` is usable only after successful atomic publication. Keep pinned synthesis sources unchanged and defer live recording/performance measurements until that job finishes.

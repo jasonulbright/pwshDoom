@@ -1,0 +1,1343 @@
+{
+  "FinalPlayer": {
+    "Ammo": [
+      30,
+      0,
+      0,
+      0
+    ],
+    "Z": 0.0,
+    "Ceiling": 72.0,
+    "Sector": 63,
+    "Armor": 87,
+    "Weapon": "Pistol",
+    "X": 44.54304504394531,
+    "Floor": 0.0,
+    "Health": 78,
+    "Y": 144.00286865234375
+  },
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "FinalActorsWithin192": [
+    {
+      "Shootable": false,
+      "Radius": 20.0,
+      "Z": 0.0,
+      "Type": "Possessed",
+      "Height": 14.0,
+      "Solid": false,
+      "X": -37.96830749511719,
+      "Flags": 5244032,
+      "Health": 0,
+      "CountKill": true,
+      "Y": 5.0217742919921875
+    },
+    {
+      "Shootable": false,
+      "Radius": 20.0,
+      "Z": 0.0,
+      "Type": "Shotguy",
+      "Height": 14.0,
+      "Solid": false,
+      "X": 8.018157958984375,
+      "Flags": 5244032,
+      "Health": 0,
+      "CountKill": true,
+      "Y": -31.432952880859375
+    },
+    {
+      "Shootable": true,
+      "Radius": 10.0,
+      "Z": 0.0,
+      "Type": "Barrel",
+      "Height": 42.0,
+      "Solid": true,
+      "X": 71.16337585449219,
+      "Flags": 524294,
+      "Health": 11,
+      "CountKill": false,
+      "Y": 169.05459594726562
+    },
+    {
+      "Shootable": false,
+      "Radius": 20.0,
+      "Z": 0.0,
+      "Type": "Shotgun",
+      "Height": 16.0,
+      "Solid": false,
+      "X": -16.031814575195312,
+      "Flags": 131073,
+      "Health": 1000,
+      "CountKill": false,
+      "Y": -35.79193115234375
+    }
+  ],
+  "Commands": 1837,
+  "RouteResultSha256": "995AEEC300941C0C9B023A2552BE1DED22077650877E9C7F6A9CC733F52D280D",
+  "HarnessSha256": "31FCC752D150A611F00ACC340D08E88DF67EC15484C45D03A2EA7332878A8A20",
+  "Meaning": "Fixed ordinary-command replay of a retained failure. End-of-tic attacker identifies the last damage source only; multiple same-tic sources are not separately instrumented. Selected original trace positions/health/height must match. Final nearby actors are read from the live thinker list without advancing or changing the world; proximity alone does not prove collision.",
+  "Error": null,
+  "Events": [
+    {
+      "Input": [
+        0,
+        0,
+        2008,
+        0
+      ],
+      "Z": 0.0,
+      "Health": 100,
+      "Command": 35,
+      "X": -226.44766235351562,
+      "Attacker": null,
+      "Special": 0,
+      "Floor": 0.0,
+      "Sector": 60,
+      "LevelTime": 36,
+      "HealthBefore": 100,
+      "Y": -565.3806610107422,
+      "Armor": 0
+    },
+    {
+      "Input": [
+        25,
+        0,
+        -7,
+        0
+      ],
+      "Z": 0.0,
+      "Health": 100,
+      "Command": 70,
+      "X": -235.05821228027344,
+      "Attacker": null,
+      "Special": 7,
+      "Floor": -16.0,
+      "Sector": 59,
+      "LevelTime": 71,
+      "HealthBefore": 100,
+      "Y": -470.59385681152344,
+      "Armor": 0
+    },
+    {
+      "Input": [
+        25,
+        0,
+        -7,
+        0
+      ],
+      "Z": -2.0,
+      "Health": 100,
+      "Command": 72,
+      "X": -234.7694549560547,
+      "Attacker": null,
+      "Special": 7,
+      "Floor": -16.0,
+      "Sector": 59,
+      "LevelTime": 73,
+      "HealthBefore": 100,
+      "Y": -456.23875427246094,
+      "Armor": 0
+    },
+    {
+      "Input": [
+        25,
+        0,
+        -9,
+        0
+      ],
+      "Z": -5.0,
+      "Health": 100,
+      "Command": 73,
+      "X": -234.6250762939453,
+      "Attacker": null,
+      "Special": 7,
+      "Floor": -16.0,
+      "Sector": 59,
+      "LevelTime": 74,
+      "HealthBefore": 100,
+      "Y": -449.0612030029297,
+      "Armor": 0
+    },
+    {
+      "Input": [
+        25,
+        0,
+        -11,
+        0
+      ],
+      "Z": -9.0,
+      "Health": 100,
+      "Command": 74,
+      "X": -234.48069763183594,
+      "Attacker": null,
+      "Special": 7,
+      "Floor": -16.0,
+      "Sector": 59,
+      "LevelTime": 75,
+      "HealthBefore": 100,
+      "Y": -441.88365173339844,
+      "Armor": 0
+    },
+    {
+      "Input": [
+        25,
+        0,
+        -12,
+        0
+      ],
+      "Z": -14.0,
+      "Health": 100,
+      "Command": 75,
+      "X": -234.33631896972656,
+      "Attacker": null,
+      "Special": 7,
+      "Floor": -16.0,
+      "Sector": 59,
+      "LevelTime": 76,
+      "HealthBefore": 100,
+      "Y": -434.7061004638672,
+      "Armor": 0
+    },
+    {
+      "Input": [
+        8,
+        0,
+        -15,
+        0
+      ],
+      "Z": -16.0,
+      "Health": 100,
+      "Command": 76,
+      "X": -234.1919403076172,
+      "Attacker": null,
+      "Special": 7,
+      "Floor": -16.0,
+      "Sector": 59,
+      "LevelTime": 77,
+      "HealthBefore": 100,
+      "Y": -427.52854919433594,
+      "Armor": 0
+    },
+    {
+      "Input": [
+        25,
+        0,
+        74,
+        0
+      ],
+      "Z": -16.0,
+      "Health": 95,
+      "Command": 96,
+      "X": -245.31796264648438,
+      "Attacker": null,
+      "Special": 7,
+      "Floor": -16.0,
+      "Sector": 59,
+      "LevelTime": 97,
+      "HealthBefore": 100,
+      "Y": -330.5622863769531,
+      "Armor": 0
+    },
+    {
+      "Input": [
+        25,
+        0,
+        56,
+        0
+      ],
+      "Z": -16.0,
+      "Health": 95,
+      "Command": 105,
+      "X": -284.0537414550781,
+      "Attacker": null,
+      "Special": 7,
+      "Floor": -16.0,
+      "Sector": 59,
+      "LevelTime": 106,
+      "HealthBefore": 95,
+      "Y": -288.1272277832031,
+      "Armor": 0
+    },
+    {
+      "Input": [
+        8,
+        0,
+        93,
+        0
+      ],
+      "Z": 0.0,
+      "Health": 95,
+      "Command": 117,
+      "X": -353.41285705566406,
+      "Attacker": null,
+      "Special": 7,
+      "Floor": -16.0,
+      "Sector": 59,
+      "LevelTime": 118,
+      "HealthBefore": 95,
+      "Y": -229.8902587890625,
+      "Armor": 0
+    },
+    {
+      "Input": [
+        0,
+        0,
+        -2048,
+        0
+      ],
+      "Z": 0.0,
+      "Health": 95,
+      "Command": 140,
+      "X": -419.9333953857422,
+      "Attacker": null,
+      "Special": 0,
+      "Floor": 0.0,
+      "Sector": 63,
+      "LevelTime": 141,
+      "HealthBefore": 95,
+      "Y": -176.9435272216797,
+      "Armor": 100
+    },
+    {
+      "Input": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "Z": 0.0,
+      "Health": 95,
+      "Command": 175,
+      "X": -422.7369079589844,
+      "Attacker": null,
+      "Special": 0,
+      "Floor": 0.0,
+      "Sector": 63,
+      "LevelTime": 176,
+      "HealthBefore": 95,
+      "Y": -170.26043701171875,
+      "Armor": 100
+    },
+    {
+      "Input": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "Z": 0.0,
+      "Health": 95,
+      "Command": 210,
+      "X": -413.9888153076172,
+      "Attacker": null,
+      "Special": 0,
+      "Floor": 0.0,
+      "Sector": 63,
+      "LevelTime": 211,
+      "HealthBefore": 95,
+      "Y": -168.91871643066406,
+      "Armor": 100
+    },
+    {
+      "Input": [
+        0,
+        0,
+        -2048,
+        0
+      ],
+      "Z": 0.0,
+      "Health": 95,
+      "Command": 245,
+      "X": -416.63958740234375,
+      "Attacker": null,
+      "Special": 0,
+      "Floor": 0.0,
+      "Sector": 63,
+      "LevelTime": 246,
+      "HealthBefore": 95,
+      "Y": -158.96426391601562,
+      "Armor": 100
+    },
+    {
+      "Input": [
+        0,
+        0,
+        -2048,
+        0
+      ],
+      "Z": 0.0,
+      "Health": 95,
+      "Command": 280,
+      "X": -376.3305969238281,
+      "Attacker": null,
+      "Special": 0,
+      "Floor": 0.0,
+      "Sector": 63,
+      "LevelTime": 281,
+      "HealthBefore": 95,
+      "Y": -130.0298309326172,
+      "Armor": 100
+    },
+    {
+      "Input": [
+        0,
+        0,
+        73,
+        1
+      ],
+      "Z": 0.0,
+      "Health": 95,
+      "Command": 315,
+      "X": -231.3922119140625,
+      "Attacker": null,
+      "Special": 0,
+      "Floor": 0.0,
+      "Sector": 63,
+      "LevelTime": 316,
+      "HealthBefore": 95,
+      "Y": -109.39749145507812,
+      "Armor": 100
+    },
+    {
+      "Input": [
+        0,
+        0,
+        8,
+        1
+      ],
+      "Z": 0.0,
+      "Health": 95,
+      "Command": 350,
+      "X": -200.1916961669922,
+      "Attacker": null,
+      "Special": 0,
+      "Floor": 0.0,
+      "Sector": 63,
+      "LevelTime": 351,
+      "HealthBefore": 95,
+      "Y": -106.56895446777344,
+      "Armor": 100
+    },
+    {
+      "Input": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "Z": 0.0,
+      "Health": 83,
+      "Command": 374,
+      "X": -199.733642578125,
+      "Attacker": "Troop",
+      "Special": 0,
+      "Floor": 0.0,
+      "Sector": 63,
+      "LevelTime": 375,
+      "HealthBefore": 95,
+      "Y": -106.52784729003906,
+      "Armor": 94
+    },
+    {
+      "Input": [
+        0,
+        0,
+        -9,
+        1
+      ],
+      "Z": 0.0,
+      "Health": 83,
+      "Command": 385,
+      "X": -202.8366241455078,
+      "Attacker": "Troop",
+      "Special": 0,
+      "Floor": 0.0,
+      "Sector": 63,
+      "LevelTime": 386,
+      "HealthBefore": 83,
+      "Y": -122.09457397460938,
+      "Armor": 94
+    },
+    {
+      "Input": [
+        0,
+        0,
+        -7,
+        1
+      ],
+      "Z": 0.0,
+      "Health": 93,
+      "Command": 388,
+      "X": -203.24301147460938,
+      "Attacker": "Troop",
+      "Special": 0,
+      "Floor": 0.0,
+      "Sector": 63,
+      "LevelTime": 389,
+      "HealthBefore": 83,
+      "Y": -124.13275146484375,
+      "Armor": 94
+    },
+    {
+      "Input": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "Z": 0.0,
+      "Health": 81,
+      "Command": 415,
+      "X": -204.31576538085938,
+      "Attacker": "Troop",
+      "Special": 0,
+      "Floor": 0.0,
+      "Sector": 63,
+      "LevelTime": 416,
+      "HealthBefore": 93,
+      "Y": -129.5080108642578,
+      "Armor": 88
+    },
+    {
+      "Input": [
+        0,
+        0,
+        -2048,
+        0
+      ],
+      "Z": 0.0,
+      "Health": 81,
+      "Command": 420,
+      "X": -204.72714233398438,
+      "Attacker": "Troop",
+      "Special": 0,
+      "Floor": 0.0,
+      "Sector": 63,
+      "LevelTime": 421,
+      "HealthBefore": 81,
+      "Y": -138.82826232910156,
+      "Armor": 88
+    },
+    {
+      "Input": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "Z": 0.0,
+      "Health": 81,
+      "Command": 455,
+      "X": -205.35098266601562,
+      "Attacker": "Troop",
+      "Special": 0,
+      "Floor": 0.0,
+      "Sector": 63,
+      "LevelTime": 456,
+      "HealthBefore": 81,
+      "Y": -152.9176025390625,
+      "Armor": 88
+    },
+    {
+      "Input": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "Z": 0.0,
+      "Health": 81,
+      "Command": 490,
+      "X": -330.4223937988281,
+      "Attacker": "Troop",
+      "Special": 0,
+      "Floor": 0.0,
+      "Sector": 63,
+      "LevelTime": 491,
+      "HealthBefore": 81,
+      "Y": -131.66419982910156,
+      "Armor": 88
+    },
+    {
+      "Input": [
+        8,
+        0,
+        4,
+        0
+      ],
+      "Z": 0.0,
+      "Health": 81,
+      "Command": 525,
+      "X": -355.8102569580078,
+      "Attacker": "Troop",
+      "Special": 0,
+      "Floor": 0.0,
+      "Sector": 63,
+      "LevelTime": 526,
+      "HealthBefore": 81,
+      "Y": -121.52711486816406,
+      "Armor": 88
+    },
+    {
+      "Input": [
+        8,
+        0,
+        179,
+        0
+      ],
+      "Z": 0.0,
+      "Health": 81,
+      "Command": 560,
+      "X": -282.2156677246094,
+      "Attacker": "Troop",
+      "Special": 0,
+      "Floor": 0.0,
+      "Sector": 63,
+      "LevelTime": 561,
+      "HealthBefore": 81,
+      "Y": -111.32365417480469,
+      "Armor": 88
+    },
+    {
+      "Input": [
+        0,
+        0,
+        312,
+        1
+      ],
+      "Z": 0.0,
+      "Health": 81,
+      "Command": 595,
+      "X": -257.84349060058594,
+      "Attacker": "Troop",
+      "Special": 0,
+      "Floor": 0.0,
+      "Sector": 63,
+      "LevelTime": 596,
+      "HealthBefore": 81,
+      "Y": -78.20060729980469,
+      "Armor": 88
+    },
+    {
+      "Input": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "Z": 0.0,
+      "Health": 81,
+      "Command": 630,
+      "X": -257.2361145019531,
+      "Attacker": "Troop",
+      "Special": 0,
+      "Floor": 0.0,
+      "Sector": 63,
+      "LevelTime": 631,
+      "HealthBefore": 81,
+      "Y": -77.27719116210938,
+      "Armor": 88
+    },
+    {
+      "Input": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "Z": 0.0,
+      "Health": 81,
+      "Command": 665,
+      "X": -257.2361145019531,
+      "Attacker": "Troop",
+      "Special": 0,
+      "Floor": 0.0,
+      "Sector": 63,
+      "LevelTime": 666,
+      "HealthBefore": 81,
+      "Y": -77.27719116210938,
+      "Armor": 88
+    },
+    {
+      "Input": [
+        0,
+        0,
+        3,
+        1
+      ],
+      "Z": 0.0,
+      "Health": 81,
+      "Command": 700,
+      "X": -257.2361145019531,
+      "Attacker": "Troop",
+      "Special": 0,
+      "Floor": 0.0,
+      "Sector": 63,
+      "LevelTime": 701,
+      "HealthBefore": 81,
+      "Y": -77.27719116210938,
+      "Armor": 88
+    },
+    {
+      "Input": [
+        0,
+        0,
+        -4,
+        1
+      ],
+      "Z": 0.0,
+      "Health": 81,
+      "Command": 735,
+      "X": -257.2361145019531,
+      "Attacker": "Troop",
+      "Special": 0,
+      "Floor": 0.0,
+      "Sector": 63,
+      "LevelTime": 736,
+      "HealthBefore": 81,
+      "Y": -77.27719116210938,
+      "Armor": 88
+    },
+    {
+      "Input": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "Z": 0.0,
+      "Health": 81,
+      "Command": 770,
+      "X": -257.2361145019531,
+      "Attacker": "Troop",
+      "Special": 0,
+      "Floor": 0.0,
+      "Sector": 63,
+      "LevelTime": 771,
+      "HealthBefore": 81,
+      "Y": -77.27719116210938,
+      "Armor": 88
+    },
+    {
+      "Input": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "Z": 0.0,
+      "Health": 81,
+      "Command": 805,
+      "X": -257.2361145019531,
+      "Attacker": "Troop",
+      "Special": 0,
+      "Floor": 0.0,
+      "Sector": 63,
+      "LevelTime": 806,
+      "HealthBefore": 81,
+      "Y": -77.27719116210938,
+      "Armor": 88
+    },
+    {
+      "Input": [
+        0,
+        0,
+        -1,
+        1
+      ],
+      "Z": 0.0,
+      "Health": 78,
+      "Command": 813,
+      "X": -257.2361145019531,
+      "Attacker": "Shadows",
+      "Special": 0,
+      "Floor": 0.0,
+      "Sector": 63,
+      "LevelTime": 814,
+      "HealthBefore": 81,
+      "Y": -77.27719116210938,
+      "Armor": 87
+    },
+    {
+      "Input": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "Z": 0.0,
+      "Health": 78,
+      "Command": 840,
+      "X": -261.9753112792969,
+      "Attacker": "Shadows",
+      "Special": 0,
+      "Floor": 0.0,
+      "Sector": 63,
+      "LevelTime": 841,
+      "HealthBefore": 78,
+      "Y": -76.65507507324219,
+      "Armor": 87
+    },
+    {
+      "Input": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "Z": 0.0,
+      "Health": 78,
+      "Command": 875,
+      "X": -218.71441650390625,
+      "Attacker": "Shadows",
+      "Special": 0,
+      "Floor": 0.0,
+      "Sector": 63,
+      "LevelTime": 876,
+      "HealthBefore": 78,
+      "Y": -78.72970581054688,
+      "Armor": 87
+    },
+    {
+      "Input": [
+        25,
+        0,
+        13,
+        0
+      ],
+      "Z": 0.0,
+      "Health": 78,
+      "Command": 910,
+      "X": -96.33692932128906,
+      "Attacker": "Shadows",
+      "Special": 0,
+      "Floor": 0.0,
+      "Sector": 63,
+      "LevelTime": 911,
+      "HealthBefore": 78,
+      "Y": 0.7448577880859375,
+      "Armor": 87
+    },
+    {
+      "Input": [
+        8,
+        0,
+        -252,
+        0
+      ],
+      "Z": 0.0,
+      "Health": 78,
+      "Command": 945,
+      "X": 44.54304504394531,
+      "Attacker": "Shadows",
+      "Special": 0,
+      "Floor": 0.0,
+      "Sector": 63,
+      "LevelTime": 946,
+      "HealthBefore": 78,
+      "Y": 159.27633666992188,
+      "Armor": 87
+    },
+    {
+      "Input": [
+        8,
+        0,
+        91,
+        0
+      ],
+      "Z": 0.0,
+      "Health": 78,
+      "Command": 980,
+      "X": 44.54304504394531,
+      "Attacker": "Shadows",
+      "Special": 0,
+      "Floor": 0.0,
+      "Sector": 63,
+      "LevelTime": 981,
+      "HealthBefore": 78,
+      "Y": 152.44395446777344,
+      "Armor": 87
+    },
+    {
+      "Input": [
+        8,
+        0,
+        11,
+        0
+      ],
+      "Z": 0.0,
+      "Health": 78,
+      "Command": 1015,
+      "X": 44.54304504394531,
+      "Attacker": "Shadows",
+      "Special": 0,
+      "Floor": 0.0,
+      "Sector": 63,
+      "LevelTime": 1016,
+      "HealthBefore": 78,
+      "Y": 143.6353759765625,
+      "Armor": 87
+    },
+    {
+      "Input": [
+        8,
+        0,
+        -3,
+        0
+      ],
+      "Z": 0.0,
+      "Health": 78,
+      "Command": 1050,
+      "X": 44.54304504394531,
+      "Attacker": "Shadows",
+      "Special": 0,
+      "Floor": 0.0,
+      "Sector": 63,
+      "LevelTime": 1051,
+      "HealthBefore": 78,
+      "Y": 143.7303009033203,
+      "Armor": 87
+    },
+    {
+      "Input": [
+        8,
+        0,
+        -1,
+        0
+      ],
+      "Z": 0.0,
+      "Health": 78,
+      "Command": 1085,
+      "X": 44.54304504394531,
+      "Attacker": "Shadows",
+      "Special": 0,
+      "Floor": 0.0,
+      "Sector": 63,
+      "LevelTime": 1086,
+      "HealthBefore": 78,
+      "Y": 144.01063537597656,
+      "Armor": 87
+    },
+    {
+      "Input": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "Z": 0.0,
+      "Health": 78,
+      "Command": 1120,
+      "X": 44.54304504394531,
+      "Attacker": "Shadows",
+      "Special": 0,
+      "Floor": 0.0,
+      "Sector": 63,
+      "LevelTime": 1121,
+      "HealthBefore": 78,
+      "Y": 143.9989776611328,
+      "Armor": 87
+    },
+    {
+      "Input": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "Z": 0.0,
+      "Health": 78,
+      "Command": 1155,
+      "X": 44.54304504394531,
+      "Attacker": "Shadows",
+      "Special": 0,
+      "Floor": 0.0,
+      "Sector": 63,
+      "LevelTime": 1156,
+      "HealthBefore": 78,
+      "Y": 144.00283813476562,
+      "Armor": 87
+    },
+    {
+      "Input": [
+        8,
+        0,
+        1,
+        0
+      ],
+      "Z": 0.0,
+      "Health": 78,
+      "Command": 1190,
+      "X": 44.54304504394531,
+      "Attacker": "Shadows",
+      "Special": 0,
+      "Floor": 0.0,
+      "Sector": 63,
+      "LevelTime": 1191,
+      "HealthBefore": 78,
+      "Y": 144.00286865234375,
+      "Armor": 87
+    },
+    {
+      "Input": [
+        8,
+        0,
+        1,
+        0
+      ],
+      "Z": 0.0,
+      "Health": 78,
+      "Command": 1225,
+      "X": 44.54304504394531,
+      "Attacker": "Shadows",
+      "Special": 0,
+      "Floor": 0.0,
+      "Sector": 63,
+      "LevelTime": 1226,
+      "HealthBefore": 78,
+      "Y": 144.00286865234375,
+      "Armor": 87
+    },
+    {
+      "Input": [
+        8,
+        0,
+        1,
+        0
+      ],
+      "Z": 0.0,
+      "Health": 78,
+      "Command": 1260,
+      "X": 44.54304504394531,
+      "Attacker": "Shadows",
+      "Special": 0,
+      "Floor": 0.0,
+      "Sector": 63,
+      "LevelTime": 1261,
+      "HealthBefore": 78,
+      "Y": 144.00286865234375,
+      "Armor": 87
+    },
+    {
+      "Input": [
+        8,
+        0,
+        1,
+        0
+      ],
+      "Z": 0.0,
+      "Health": 78,
+      "Command": 1295,
+      "X": 44.54304504394531,
+      "Attacker": "Shadows",
+      "Special": 0,
+      "Floor": 0.0,
+      "Sector": 63,
+      "LevelTime": 1296,
+      "HealthBefore": 78,
+      "Y": 144.00286865234375,
+      "Armor": 87
+    },
+    {
+      "Input": [
+        8,
+        0,
+        1,
+        0
+      ],
+      "Z": 0.0,
+      "Health": 78,
+      "Command": 1330,
+      "X": 44.54304504394531,
+      "Attacker": "Shadows",
+      "Special": 0,
+      "Floor": 0.0,
+      "Sector": 63,
+      "LevelTime": 1331,
+      "HealthBefore": 78,
+      "Y": 144.00286865234375,
+      "Armor": 87
+    },
+    {
+      "Input": [
+        8,
+        0,
+        1,
+        0
+      ],
+      "Z": 0.0,
+      "Health": 78,
+      "Command": 1365,
+      "X": 44.54304504394531,
+      "Attacker": "Shadows",
+      "Special": 0,
+      "Floor": 0.0,
+      "Sector": 63,
+      "LevelTime": 1366,
+      "HealthBefore": 78,
+      "Y": 144.00286865234375,
+      "Armor": 87
+    },
+    {
+      "Input": [
+        8,
+        0,
+        1,
+        0
+      ],
+      "Z": 0.0,
+      "Health": 78,
+      "Command": 1400,
+      "X": 44.54304504394531,
+      "Attacker": "Shadows",
+      "Special": 0,
+      "Floor": 0.0,
+      "Sector": 63,
+      "LevelTime": 1401,
+      "HealthBefore": 78,
+      "Y": 144.00286865234375,
+      "Armor": 87
+    },
+    {
+      "Input": [
+        8,
+        0,
+        1,
+        0
+      ],
+      "Z": 0.0,
+      "Health": 78,
+      "Command": 1435,
+      "X": 44.54304504394531,
+      "Attacker": "Shadows",
+      "Special": 0,
+      "Floor": 0.0,
+      "Sector": 63,
+      "LevelTime": 1436,
+      "HealthBefore": 78,
+      "Y": 144.00286865234375,
+      "Armor": 87
+    },
+    {
+      "Input": [
+        8,
+        0,
+        1,
+        0
+      ],
+      "Z": 0.0,
+      "Health": 78,
+      "Command": 1470,
+      "X": 44.54304504394531,
+      "Attacker": "Shadows",
+      "Special": 0,
+      "Floor": 0.0,
+      "Sector": 63,
+      "LevelTime": 1471,
+      "HealthBefore": 78,
+      "Y": 144.00286865234375,
+      "Armor": 87
+    },
+    {
+      "Input": [
+        8,
+        0,
+        1,
+        0
+      ],
+      "Z": 0.0,
+      "Health": 78,
+      "Command": 1505,
+      "X": 44.54304504394531,
+      "Attacker": "Shadows",
+      "Special": 0,
+      "Floor": 0.0,
+      "Sector": 63,
+      "LevelTime": 1506,
+      "HealthBefore": 78,
+      "Y": 144.00286865234375,
+      "Armor": 87
+    },
+    {
+      "Input": [
+        8,
+        0,
+        1,
+        0
+      ],
+      "Z": 0.0,
+      "Health": 78,
+      "Command": 1540,
+      "X": 44.54304504394531,
+      "Attacker": "Shadows",
+      "Special": 0,
+      "Floor": 0.0,
+      "Sector": 63,
+      "LevelTime": 1541,
+      "HealthBefore": 78,
+      "Y": 144.00286865234375,
+      "Armor": 87
+    },
+    {
+      "Input": [
+        8,
+        0,
+        1,
+        0
+      ],
+      "Z": 0.0,
+      "Health": 78,
+      "Command": 1575,
+      "X": 44.54304504394531,
+      "Attacker": "Shadows",
+      "Special": 0,
+      "Floor": 0.0,
+      "Sector": 63,
+      "LevelTime": 1576,
+      "HealthBefore": 78,
+      "Y": 144.00286865234375,
+      "Armor": 87
+    },
+    {
+      "Input": [
+        8,
+        0,
+        1,
+        0
+      ],
+      "Z": 0.0,
+      "Health": 78,
+      "Command": 1610,
+      "X": 44.54304504394531,
+      "Attacker": "Shadows",
+      "Special": 0,
+      "Floor": 0.0,
+      "Sector": 63,
+      "LevelTime": 1611,
+      "HealthBefore": 78,
+      "Y": 144.00286865234375,
+      "Armor": 87
+    },
+    {
+      "Input": [
+        8,
+        0,
+        1,
+        0
+      ],
+      "Z": 0.0,
+      "Health": 78,
+      "Command": 1645,
+      "X": 44.54304504394531,
+      "Attacker": "Shadows",
+      "Special": 0,
+      "Floor": 0.0,
+      "Sector": 63,
+      "LevelTime": 1646,
+      "HealthBefore": 78,
+      "Y": 144.00286865234375,
+      "Armor": 87
+    },
+    {
+      "Input": [
+        8,
+        0,
+        1,
+        0
+      ],
+      "Z": 0.0,
+      "Health": 78,
+      "Command": 1680,
+      "X": 44.54304504394531,
+      "Attacker": "Shadows",
+      "Special": 0,
+      "Floor": 0.0,
+      "Sector": 63,
+      "LevelTime": 1681,
+      "HealthBefore": 78,
+      "Y": 144.00286865234375,
+      "Armor": 87
+    },
+    {
+      "Input": [
+        8,
+        0,
+        1,
+        0
+      ],
+      "Z": 0.0,
+      "Health": 78,
+      "Command": 1715,
+      "X": 44.54304504394531,
+      "Attacker": "Shadows",
+      "Special": 0,
+      "Floor": 0.0,
+      "Sector": 63,
+      "LevelTime": 1716,
+      "HealthBefore": 78,
+      "Y": 144.00286865234375,
+      "Armor": 87
+    },
+    {
+      "Input": [
+        8,
+        0,
+        1,
+        0
+      ],
+      "Z": 0.0,
+      "Health": 78,
+      "Command": 1750,
+      "X": 44.54304504394531,
+      "Attacker": "Shadows",
+      "Special": 0,
+      "Floor": 0.0,
+      "Sector": 63,
+      "LevelTime": 1751,
+      "HealthBefore": 78,
+      "Y": 144.00286865234375,
+      "Armor": 87
+    },
+    {
+      "Input": [
+        8,
+        0,
+        1,
+        0
+      ],
+      "Z": 0.0,
+      "Health": 78,
+      "Command": 1785,
+      "X": 44.54304504394531,
+      "Attacker": "Shadows",
+      "Special": 0,
+      "Floor": 0.0,
+      "Sector": 63,
+      "LevelTime": 1786,
+      "HealthBefore": 78,
+      "Y": 144.00286865234375,
+      "Armor": 87
+    },
+    {
+      "Input": [
+        8,
+        0,
+        1,
+        0
+      ],
+      "Z": 0.0,
+      "Health": 78,
+      "Command": 1820,
+      "X": 44.54304504394531,
+      "Attacker": "Shadows",
+      "Special": 0,
+      "Floor": 0.0,
+      "Sector": 63,
+      "LevelTime": 1821,
+      "HealthBefore": 78,
+      "Y": 144.00286865234375,
+      "Armor": 87
+    }
+  ],
+  "TraceChecks": 52,
+  "BundleSha256": "A1AFAEE97606A57DF264A2E3ADCEBAB461577C3F132E2681D721B8F04D225B50"
+}

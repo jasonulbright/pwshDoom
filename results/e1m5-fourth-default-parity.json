@@ -1,0 +1,152 @@
+{
+  "Checks": [
+    {
+      "Passed": true,
+      "Name": "Same WadSha256"
+    },
+    {
+      "Passed": true,
+      "Name": "Same BundleSha256"
+    },
+    {
+      "Passed": true,
+      "Name": "Same PlanSha256"
+    },
+    {
+      "Passed": true,
+      "Name": "Same Episode"
+    },
+    {
+      "Passed": true,
+      "Name": "Same Map"
+    },
+    {
+      "Passed": true,
+      "Name": "Same Skill"
+    },
+    {
+      "Passed": true,
+      "Name": "Same ArrivalDistance"
+    },
+    {
+      "Passed": true,
+      "Name": "Same CombatStrafe"
+    },
+    {
+      "Passed": true,
+      "Name": "Same CollectDroppedWeapons"
+    },
+    {
+      "Passed": true,
+      "Name": "Same MaxIterations"
+    },
+    {
+      "Passed": true,
+      "Name": "Same CompletedUpdates"
+    },
+    {
+      "Passed": true,
+      "Name": "Same SimulationCommands"
+    },
+    {
+      "Passed": true,
+      "Name": "Same FinalHealth"
+    },
+    {
+      "Passed": true,
+      "Name": "Same FinalState"
+    },
+    {
+      "Passed": true,
+      "Name": "Same Passed"
+    },
+    {
+      "Passed": true,
+      "Name": "Candidate pins current driver"
+    },
+    {
+      "Passed": true,
+      "Name": "Barrel strategy is disabled with no events"
+    },
+    {
+      "Passed": true,
+      "Name": "Identical planned points and emitted commands"
+    },
+    {
+      "Passed": true,
+      "Name": "Same trace and arrival counts"
+    },
+    {
+      "Passed": true,
+      "Name": "Same Trace count"
+    },
+    {
+      "Passed": true,
+      "Name": "Every Trace value matches"
+    },
+    {
+      "Passed": true,
+      "Name": "Same Reached count"
+    },
+    {
+      "Passed": true,
+      "Name": "Every Reached value matches"
+    },
+    {
+      "Passed": true,
+      "Name": "Same PickupEvents count"
+    },
+    {
+      "Passed": true,
+      "Name": "Every PickupEvents value matches"
+    },
+    {
+      "Passed": true,
+      "Name": "Final player Armor matches"
+    },
+    {
+      "Passed": true,
+      "Name": "Final player SectorSpecial matches"
+    },
+    {
+      "Passed": true,
+      "Name": "Final player Z matches"
+    },
+    {
+      "Passed": true,
+      "Name": "Final player Health matches"
+    },
+    {
+      "Passed": true,
+      "Name": "Final player X matches"
+    },
+    {
+      "Passed": true,
+      "Name": "Final player Floor matches"
+    },
+    {
+      "Passed": true,
+      "Name": "Final player Y matches"
+    },
+    {
+      "Passed": true,
+      "Name": "Final player LastAttacker matches"
+    },
+    {
+      "Passed": true,
+      "Name": "Final player Sector matches"
+    },
+    {
+      "Passed": true,
+      "Name": "Same outcome message"
+    }
+  ],
+  "TraceSamples": 120,
+  "Error": null,
+  "ReferenceSha256": "AEED539769195A8DDFF9EDAB987121902625BF4ECBB02450755D9616F9BB2535",
+  "Commands": 4214,
+  "Passed": true,
+  "CandidateSha256": "33D2CFA5553D3B693485A2722A0B61216C9623F50FE46DD7D6FC8F43BE3E788F",
+  "Meaning": "Two complete route-driver executions with identical plan/assets/options compare every emitted input and recorded trace/arrival/pickup value plus final state. Candidate barrel strategy is off. An identical retained failure proves default preservation, not successful map completion; changing script stack line numbers is expected.",
+  "ScriptSha256": "8C32B0C2F0ED1AD7396D72035BC109B0CA5CD777A1DCC7767A424DFB65A14CA8"
+}

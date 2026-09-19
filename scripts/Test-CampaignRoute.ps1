@@ -1,6 +1,6 @@
 #requires -Version 7.4
 # SPDX-License-Identifier: GPL-2.0-or-later
-param([Parameter(Mandatory)][string]$Route,[Parameter(Mandatory)][string]$Output,[int]$MaxTics=10000,[ValidateRange(1,32)][double]$ArrivalDistance=18,[switch]$CombatStrafe,[switch]$CollectDroppedWeapons,[string]$Wad='C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\base\DOOM.WAD')
+param([Parameter(Mandatory)][string]$Route,[Parameter(Mandatory)][string]$Output,[int]$MaxTics=10000,[ValidateRange(1,32)][double]$ArrivalDistance=18,[switch]$CombatStrafe,[switch]$CollectDroppedWeapons,[switch]$ClearBarrels,[string]$Wad='C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\base\DOOM.WAD')
 $ErrorActionPreference='Stop'
 if(Test-Path $Output){throw 'Use a fresh route result.'}
 $plan=Get-Content $Route -Raw|ConvertFrom-Json;$waypoints=$plan.Waypoints
@@ -13,6 +13,7 @@ $content=$null;$game=$null;$failure=$null;$passed=$false;$waypoint=0;$reachedAt=
 $commandsLog=[Collections.Generic.List[object]]::new();$trace=[Collections.Generic.List[object]]::new();$reached=[Collections.Generic.List[object]]::new()
 $completedUpdates=0
 $pickupAttempts=[Collections.Generic.Dictionary[object,int]]::new();$pickupEvents=[Collections.Generic.List[object]]::new();$lastPickup=$null
+$barrelAttempts=[Collections.Generic.Dictionary[object,int]]::new();$barrelEvents=[Collections.Generic.List[object]]::new();$barrelHoldUntil=0
 try{
     $null=[DoomInfo]::SwitchNames;$content=[GameContent]::new(@('-iwad',$Wad));$options=[GameOptions]::new()
     $options.GameMode=$content.Wad.GameMode;$options.GameVersion=$content.Wad.GameVersion;$options.MissionPack=$content.Wad.MissionPack
@@ -27,7 +28,13 @@ try{
         if($distance -lt $ArrivalDistance -and -not $holding -and $waypoint -lt $waypoints.Count-1){$reached.Add(@{Waypoint=$waypoint;Command=$commandsLog.Count;X=$x;Y=$y});$waypoint++;$reachedAt=$tic;$holdStarted=-1;"Waypoint $waypoint at command $($commandsLog.Count)";continue}
         $aim=[Math]::Atan2($dy,$dx);$attack=$false;$cap=$world.Thinkers.Cap;$enemy=$cap.Next;$nearest=300.0
         $pickup=$null;$pickupDistance=160.0;$pickupWeapon=-1
+        $barrel=$null;$barrelDistance=300.0;$nearBarrel=$false
         while(-not [object]::ReferenceEquals($enemy,$cap)){
+            if($ClearBarrels -and $enemy -is [Mobj] -and $enemy.Type -eq [MobjType]::Barrel -and ($enemy.Flags -band [MobjFlags]::Shootable)){
+                $bx=$enemy.X.Data/65536.0-$x;$by=$enemy.Y.Data/65536.0-$y;$bd=[Math]::Sqrt($bx*$bx+$by*$by)
+                if($bd -lt 160){$nearBarrel=$true}
+                elseif($bd -lt $barrelDistance -and $enemy.Health -gt 0 -and (-not $barrelAttempts.ContainsKey($enemy) -or $barrelAttempts[$enemy] -lt 140) -and $world.VisibilityCheck.CheckSight($mo,$enemy)){$barrel=$enemy;$barrelDistance=$bd}
+            }
             if($enemy -is [Mobj] -and ($enemy.Flags -band [MobjFlags]::CountKill) -and $enemy.Health -gt 0){
                 $ex=$enemy.X.Data/65536.0-$x;$ey=$enemy.Y.Data/65536.0-$y;$ed=[Math]::Sqrt($ex*$ex+$ey*$ey)
                 if($ed -lt $nearest -and ($player.Ammo|Measure-Object -Sum).Sum -gt 0 -and $world.VisibilityCheck.CheckSight($mo,$enemy)){$nearest=$ed;$aim=[Math]::Atan2($ey,$ex);$attack=$true}
@@ -50,14 +57,24 @@ try{
             $pickupAttempts[$pickup]++;$lastPickup=$pickup
             $aim=[Math]::Atan2($pickup.Y.Data/65536.0-$y,$pickup.X.Data/65536.0-$x);$distance=$pickupDistance;$attack=$false
         }else{$lastPickup=$null}
+        # Optional driver strategy: shoot visible barrels before walking into
+        # their blast radius, and wait through the explosion animation. This
+        # emits ordinary attacks only; nearby barrels/close enemies take priority
+        # over attempting this clearance. The game still computes all damage.
+        $clearingBarrel=$null -ne $barrel -and -not $nearBarrel -and -not $holding -and -not $seekingPickup -and $nearest -ge 64 -and ($player.Ammo|Measure-Object -Sum).Sum -gt 0 -and $commandsLog.Count -ge $barrelHoldUntil
+        if($clearingBarrel){
+            if(-not $barrelAttempts.ContainsKey($barrel)){$barrelAttempts.Add($barrel,0);$barrelEvents.Add(@{Event='Target';Command=$commandsLog.Count;X=$barrel.X.Data/65536.0;Y=$barrel.Y.Data/65536.0;Distance=$barrelDistance;Health=$player.Health})}
+            $barrelAttempts[$barrel]++;$aim=[Math]::Atan2($barrel.Y.Data/65536.0-$y,$barrel.X.Data/65536.0-$x);$attack=$true
+        }
         if($holding -and $target.Count -ge 4){$aim=$target[3]*[Math]::PI/180;$attack=$false}
         $delta=($aim-$angle+3*[Math]::PI)%(2*[Math]::PI)-[Math]::PI
         $cmd=$commands[0];$cmd.Clear();$cmd.AngleTurn=[int16][Math]::Clamp([Math]::Round($delta*65536/(2*[Math]::PI)),-2048,2048)
-        if([Math]::Abs($delta) -lt .18 -and -not $attack -and -not $holding){$cmd.ForwardMove=if($distance -gt 70){25}else{8}}
+        if([Math]::Abs($delta) -lt .18 -and -not $attack -and -not $holding -and $commandsLog.Count -ge $barrelHoldUntil){$cmd.ForwardMove=if($distance -gt 70){25}else{8}}
         if($attack -and [Math]::Abs($delta) -lt .08){$cmd.Buttons=1}
-        if($CombatStrafe -and $attack -and -not $holding -and [Math]::Abs($delta) -lt .18){$cmd.SideMove=if(($commandsLog.Count%140) -lt 70){24}else{-24}}
+        if($CombatStrafe -and $attack -and -not $holding -and -not $clearingBarrel -and $commandsLog.Count -ge $barrelHoldUntil -and [Math]::Abs($delta) -lt .18){$cmd.SideMove=if(($commandsLog.Count%140) -lt 70){24}else{-24}}
         if(($commandsLog.Count%35) -eq 0){$cmd.Buttons=$cmd.Buttons -bor 2}
         $commandsLog.Add(@($cmd.ForwardMove,$cmd.SideMove,$cmd.AngleTurn,$cmd.Buttons));$null=$game.Update($commands);$completedUpdates++
+        if($clearingBarrel -and $barrel.Health -le 0){$barrelHoldUntil=$commandsLog.Count+35;$barrelEvents.Add(@{Event='DestroyedAfterAttack';Command=$commandsLog.Count;Attempts=$barrelAttempts[$barrel];Health=$player.Health;HoldUntil=$barrelHoldUntil})}
         if($seekingPickup -and $player.WeaponOwned[$pickupWeapon]){$pickupEvents.Add(@{Event='OwnedAfterMove';Command=$commandsLog.Count;Type=$pickup.Type.ToString();Health=$player.Health;Attempts=$pickupAttempts[$pickup]});$lastPickup=$null}
         elseif($seekingPickup -and $pickupAttempts[$pickup] -eq 140){$pickupEvents.Add(@{Event='AttemptLimit';Command=$commandsLog.Count;Type=$pickup.Type.ToString();Health=$player.Health});$lastPickup=$null}
         if(($commandsLog.Count%35) -eq 0){$trace.Add(@{Command=$commandsLog.Count;Waypoint=$waypoint;X=$x;Y=$y;Z=$mo.Z.Data/65536.0;Health=$player.Health;Armor=$player.ArmorPoints;Kills=$player.KillCount;Ammo=$player.Ammo.Clone();Cards=$player.Cards.Clone();Weapon=$player.ReadyWeapon.ToString();Sector=$mo.Subsector.Sector.Number;SectorSpecial=[int]$mo.Subsector.Sector.Special;Floor=$mo.Subsector.Sector.FloorHeight.Data/65536.0})}
@@ -67,8 +84,11 @@ try{
     }
     if(-not $passed){throw 'Route did not complete within its tic budget.'}
 }catch{$failure=$_.ToString()+"`n"+$_.ScriptStackTrace;throw}finally{
+    # Strategy observations are separate from the fixed-input state checks;
+    # proximity/targeting alone does not certify a safe explosion.
+    $barrelStrategy=@{Enabled=[bool]$ClearBarrels;Events=$barrelEvents.ToArray();MinimumTargetDistance=160;MaximumTargetDistance=300;MaximumCommandsPerBarrel=140;PostDestructionHoldCommands=35}
     $finalPlayer=if($game -and $game.World){$p=$game.World.ConsolePlayer;$m=$p.Mobj;@{X=$m.X.Data/65536.0;Y=$m.Y.Data/65536.0;Z=$m.Z.Data/65536.0;Sector=$m.Subsector.Sector.Number;SectorSpecial=[int]$m.Subsector.Sector.Special;Floor=$m.Subsector.Sector.FloorHeight.Data/65536.0;Health=$p.Health;Armor=$p.ArmorPoints;LastAttacker=if($p.Attacker){$p.Attacker.Type.ToString()}else{$null}}}
-    @{FinishedUtc=[DateTime]::UtcNow.ToString('o');Passed=$passed;Error=$failure;Episode=$plan.Episode;Map=$plan.Map;Skill=$plan.Skill;ArrivalDistance=$ArrivalDistance;CombatStrafe=[bool]$CombatStrafe;CollectDroppedWeapons=[bool]$CollectDroppedWeapons;PickupEvents=$pickupEvents.ToArray();MaxIterations=$MaxTics;DriverIterations=$tic;SimulationCommands=$commandsLog.Count;CompletedUpdates=$completedUpdates;FailedUpdateCommand=if($completedUpdates -lt $commandsLog.Count){$commandsLog.Count}else{$null};Route=$waypoints;Reached=$reached.ToArray();Trace=$trace.ToArray();InputCommands=$commandsLog.ToArray();WadSha256=(Get-FileHash $Wad).Hash;PlanSha256=$planSha256;DriverSha256=$driverSha256;BundleSha256=$bundleSha256;FinalState=if($game){$game.State.ToString()};FinalHealth=if($game){$game.World.ConsolePlayer.Health};FinalPlayer=$finalPlayer;Meaning='Unpaced waypoint/combat driver with ordinary TicCmd movement, turns, attacks and use only. Optional combat strafing uses declared alternating player sidemove commands. Optional dropped-weapon collection seeks visible unowned shotgun/chaingun drops within 160 units and 24 height units, through ordinary movement only, at most 140 steering commands per drop; enemies closer than 64 units retain combat priority. No teleport, god mode, direct damage, direct specials or state edits. SimulationCommands counts attempted inputs; CompletedUpdates excludes a throwing update. Trace X/Y precede the update; other trace state and FinalPlayer follow it. LastAttacker is the most recent damage source, not necessarily from the final tic. Route planning reads geometry; view tests require separate recorded host replay.'}|ConvertTo-Json -Depth 8|Set-Content $Output
+    @{BarrelStrategy=$barrelStrategy;FinishedUtc=[DateTime]::UtcNow.ToString('o');Passed=$passed;Error=$failure;Episode=$plan.Episode;Map=$plan.Map;Skill=$plan.Skill;ArrivalDistance=$ArrivalDistance;CombatStrafe=[bool]$CombatStrafe;CollectDroppedWeapons=[bool]$CollectDroppedWeapons;PickupEvents=$pickupEvents.ToArray();MaxIterations=$MaxTics;DriverIterations=$tic;SimulationCommands=$commandsLog.Count;CompletedUpdates=$completedUpdates;FailedUpdateCommand=if($completedUpdates -lt $commandsLog.Count){$commandsLog.Count}else{$null};Route=$waypoints;Reached=$reached.ToArray();Trace=$trace.ToArray();InputCommands=$commandsLog.ToArray();WadSha256=(Get-FileHash $Wad).Hash;PlanSha256=$planSha256;DriverSha256=$driverSha256;BundleSha256=$bundleSha256;FinalState=if($game){$game.State.ToString()};FinalHealth=if($game){$game.World.ConsolePlayer.Health};FinalPlayer=$finalPlayer;Meaning='Unpaced waypoint/combat driver with ordinary TicCmd movement, turns, attacks and use only. Optional combat strafing uses declared alternating player sidemove commands. Optional dropped-weapon collection seeks visible unowned shotgun/chaingun drops within 160 units and 24 height units, through ordinary movement only, at most 140 steering commands per drop; enemies closer than 64 units retain combat priority. No teleport, god mode, direct damage, direct specials or state edits. SimulationCommands counts attempted inputs; CompletedUpdates excludes a throwing update. Trace X/Y precede the update; other trace state and FinalPlayer follow it. LastAttacker is the most recent damage source, not necessarily from the final tic. Route planning reads geometry; view tests require separate recorded host replay.'}|ConvertTo-Json -Depth 8|Set-Content $Output
     if($content){$content.Dispose()}
 }
 "PASS: E$($plan.Episode)M$($plan.Map) with $($commandsLog.Count) commands."
