@@ -59,6 +59,9 @@ function Read-DoomInputReplay {
         foreach($checkpoint in $data.Checkpoints){
             if($checkpoint.Tic -isnot [long] -or $checkpoint.Tic -le $last -or $checkpoint.Tic -gt $data.InputCommands.Count -or $checkpoint.Sha256 -notmatch '^[0-9a-fA-F]{64}$'){throw 'Invalid replay checkpoint.'}
             if($null -ne $checkpoint.PSObject.Properties['AutomapSha256'] -and $checkpoint.AutomapSha256 -notmatch '^[0-9a-fA-F]{64}$'){throw 'Invalid replay automap checkpoint.'}
+            if($null -ne $checkpoint.PSObject.Properties['CurrentRenderSnapshotVersion']){
+                if($checkpoint.CurrentRenderSnapshotVersion -ne 2 -or $checkpoint.CurrentRenderSnapshotSha256 -notmatch '^[0-9a-fA-F]{64}$'){throw 'Invalid replay render checkpoint.'}
+            }
             $last=$checkpoint.Tic
         }
     }
@@ -90,6 +93,11 @@ function Get-DoomReplayCheckpoint {
     $p=$Game.World.ConsolePlayer
     $bytes=ConvertTo-GameSnapshotBytes (New-GameRenderSnapshot $Game 1)
     $currentRenderHash=[Convert]::ToHexString([Security.Cryptography.SHA256]::HashData($bytes))
+    # NumericV2 appends actor flags. Schema1 never contained them: retain its
+    # exact old bytes while the separate current digest covers the new fields.
+    $legacyLength=$bytes.Length-8*[int][BitConverter]::ToDouble($bytes,5*8)
+    $legacy=[byte[]]::new($legacyLength);[Buffer]::BlockCopy($bytes,0,$legacy,0,$legacyLength);$bytes=$legacy
+    [Buffer]::BlockCopy([BitConverter]::GetBytes([double]1),0,$bytes,0,8)
     # Schema 1 historically hashed a NumericV1 header with slots 43..47 zero.
     # Keep that canonical representation; record the complete current packet
     # separately. Sector lighting already exists in the hashed sector array.
@@ -101,7 +109,7 @@ function Get-DoomReplayCheckpoint {
     if([int]$Game.State -eq 1){$ui=$Game.Intermission;$state.Intermission=@([int]$ui.State,$ui.SpState,$ui.Count,$ui.BgCount,$ui.TimeCount,$ui.ParCount,$ui.Random.Index)}
     if([int]$Game.State -eq 2){$ui=$Game.Finale;$state.Finale=@($ui.Stage,$ui.Count,$ui.Scrolled,$ui.TheEndIndex)}
     $json=$state|ConvertTo-Json -Depth 5 -Compress
-    $result=@{Tic=$Tic;Sha256=[Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([Text.Encoding]::UTF8.GetBytes($json)));State=$state;CurrentRenderSnapshotSha256=$currentRenderHash}
+    $result=@{Tic=$Tic;Sha256=[Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([Text.Encoding]::UTF8.GetBytes($json)));State=$state;CurrentRenderSnapshotVersion=2;CurrentRenderSnapshotSha256=$currentRenderHash}
     if(Get-Command Get-DoomAutomapCheckpoint -ErrorAction SilentlyContinue){$result.AutomapSha256=Get-DoomAutomapCheckpoint $Game}
     return $result
 }
@@ -114,6 +122,13 @@ function Compare-DoomReplayCheckpoints {
         if($entry.Tic -gt $ConsumedTics){continue}
         $observed=$byTic[[int]$entry.Tic];$checked++
         if($null -eq $observed -or $entry.Sha256 -ne $observed.Sha256){$mismatches+=@{Tic=$entry.Tic;Expected=$entry.Sha256;Actual=if($null -ne $observed){$observed.Sha256}else{$null}}}
+        $expectedVersion=if($entry -is [Collections.IDictionary]){$entry['CurrentRenderSnapshotVersion']}elseif($null -ne $entry.PSObject.Properties['CurrentRenderSnapshotVersion']){$entry.CurrentRenderSnapshotVersion}else{$null}
+        if($expectedVersion){
+            $actualVersion=if($observed -is [Collections.IDictionary]){$observed['CurrentRenderSnapshotVersion']}elseif($null -ne $observed -and $null -ne $observed.PSObject.Properties['CurrentRenderSnapshotVersion']){$observed.CurrentRenderSnapshotVersion}else{$null}
+            if($expectedVersion -ne $actualVersion -or $entry.CurrentRenderSnapshotSha256 -cne $observed.CurrentRenderSnapshotSha256){
+                $mismatches+=@{Tic=$entry.Tic;Kind='RenderSnapshot';Expected=$entry.CurrentRenderSnapshotSha256;Actual=if($null -ne $observed){$observed.CurrentRenderSnapshotSha256}else{$null}}
+            }
+        }
         $expectedMap=if($entry -is [Collections.IDictionary]){$entry['AutomapSha256']}elseif($null -ne $entry.PSObject.Properties['AutomapSha256']){$entry.AutomapSha256}else{$null}
         if($expectedMap){
             $actualMap=if($observed -is [Collections.IDictionary]){$observed['AutomapSha256']}elseif($null -ne $observed -and $null -ne $observed.PSObject.Properties['AutomapSha256']){$observed.AutomapSha256}else{$null}

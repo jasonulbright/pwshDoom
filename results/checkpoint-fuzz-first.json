@@ -1,0 +1,63 @@
+{
+  "ReplaySha256": "F0DB742A0C1118ED3362C2F9E5E2185238E57F42ABB04AD27375018C4A12CE65",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "Error": "Actor flags are covered by the new packet digest\nat Check, C:\\projects\\pwshDoom\\scripts\\Test-CheckpointSnapshotSchema.ps1: line 10\r\nat <ScriptBlock>, C:\\projects\\pwshDoom\\scripts\\Test-CheckpointSnapshotSchema.ps1: line 35\r\nat <ScriptBlock>, <No file>: line 1",
+  "Checks": [
+    {
+      "Passed": true,
+      "Name": "Historical initial checkpoint hash is preserved exactly"
+    },
+    {
+      "Passed": true,
+      "Name": "Complete current packet hash is retained separately"
+    },
+    {
+      "Passed": true,
+      "Name": "Changing sector lighting still changes the historical-compatible hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Changing sector lighting changes the complete packet hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Changing health still changes the checkpoint hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Restoring state restores both exact hashes"
+    },
+    {
+      "Passed": true,
+      "Name": "Invisibility is covered by the new packet digest"
+    },
+    {
+      "Passed": true,
+      "Name": "Schema1 retains its historical absence of invisibility"
+    },
+    {
+      "Passed": false,
+      "Name": "Actor flags are covered by the new packet digest"
+    }
+  ],
+  "Sources": [
+    {
+      "Sha256": "0FE3BF99D9200236143AC89A254253E7E3A7CF2DABA39603246BDD9C7E93FDD8",
+      "Path": "scripts/Test-CheckpointSnapshotSchema.ps1"
+    },
+    {
+      "Sha256": "AED14A923015A4321F5AD2A3762950707C2AA79ABDBE50A259FFBB117E4F3DC1",
+      "Path": "src/InputReplay.ps1"
+    },
+    {
+      "Sha256": "189C36F78AB4269A02FCD698FF86983BB181410EDDF00F3F4DCE78C94C7B7A7E",
+      "Path": "src/GameHost.ps1"
+    },
+    {
+      "Sha256": "C8A82E1434CE01CC63F299A138936D96607480E5AC9F46B249A1DAB03BCF3B4C",
+      "Path": "src/SnapshotTransport.ps1"
+    }
+  ],
+  "Meaning": "Original Schema1 checkpoint digest preserved against an existing independent route; complete new packet digest retained. Negative controls demonstrate lighting and health changes remain detectable, with exact restoration. No campaign-completion claim.",
+  "BundleSha256": "D57DF4DE73F7C8499436CE60F5F2EB284B833931A679D31A798A020C33339013"
+}

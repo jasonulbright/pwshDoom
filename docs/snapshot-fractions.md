@@ -9,3 +9,7 @@ The main persistent-process terminal host already interpolates numeric endpoint 
 No live terminal effect run was performed for this change. Actual displayed smoothness in the older single-host path remains unmeasured. Gameplay, rendering and mixing still remain PowerShell.
 
 September 19 weapon-lighting integration adds a discrete player-sector light in reserved NumericV1 slot43. The synthetic wire test supplies differing old/current values and confirms the current value survives every interpolation fraction. Its fresh receipt is `results/snapshot-weapon-lighting.json`. The [weapon fidelity investigation](rendering-fidelity.md) covers real known-light fixtures, cached worker output and Schema1 replay-hash compatibility; packet length and prior field offsets remain unchanged.
+
+## NumericV2 visual-effect fields
+
+The fuzz implementation extends packets to version2: header44 contains the player's remaining invisibility timer and a trailing array contains actor flags, after all prior weapon records. Header43 still contains sector light. All position offsets are unchanged. The current packet clone carries these discrete fields through interpolation; endpoint pairing adjusts only positions. Version1 packets are rejected by the new decoder, and all host/worker processes must use the same checkout. Historical replay checkpoint compatibility is a separate canonicalization described in rendering-fidelity.md; new checkpoints compare a version-tagged complete packet digest.

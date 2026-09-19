@@ -1,0 +1,199 @@
+{
+  "Receipts": [
+    {
+      "Path": "results/fuzz-recording-fixture-third.json",
+      "Sha256": "81D7D319147265391793528DC14489D97391F6A6B6D4906381092FE1DF4046CA"
+    },
+    {
+      "Path": "local/recordings/fuzz-matrix-second-game.json",
+      "Sha256": "321631892452E59435A832733CA215CFBD37E5C65FBACA6ED4AD143DC6B2A1AD"
+    },
+    {
+      "Path": "local/recordings/fuzz-matrix-second-recording.json",
+      "Sha256": "AA89CA1CB20D26071CA20364D22FEE2E90298577866746B222AA821C574EA162"
+    },
+    {
+      "Path": "local/recordings/fuzz-matrix-second-host-ready.json",
+      "Sha256": "15A1A46164BDF2BB5AF6B76FBC25DE2FC0B7DCF2F56EE4237834AB502EF42755"
+    },
+    {
+      "Path": "local/recordings/fuzz-matrix-second-audio.json",
+      "Sha256": "BEF4D3BBD37171BAB8A814C5EB564D3E2FE7E2D9B18D60770CD12C99556DD0B6"
+    },
+    {
+      "Path": "local/recordings/fuzz-matrix-second-av.json",
+      "Sha256": "D84E94E8216811EA4780ED4B83577400AFEC93D0A10426A902206DB7FBFB758B"
+    },
+    {
+      "Path": "local/recordings/fuzz-matrix-second-input.json",
+      "Sha256": "862E0E762200FB4D01911A24F32572485E39053B55D76C845855A3F5BC65BD45"
+    }
+  ],
+  "HarnessSha256": "CF73BFDEF0A7659ED3DC3B8025F008DB6B199364B0C020B712434BF128008C40",
+  "Details": {
+    "Frames": 315,
+    "VideoSha256": "BE354CABC76D05A315F66021D8EADD67B2EDCC30CA45BC1705BFF2CB8F718BAA",
+    "WallSeconds": 13.6491888,
+    "OriginalProcessesRemaining": [],
+    "SubmittedAudioFrames": 441000,
+    "Checkpoints": 17,
+    "WritesPerSecond": 31.40455684107644,
+    "Video": "C:\\projects\\pwshDoom\\local\\recordings\\fuzz-matrix-second-av.mp4",
+    "QueueEmptyObservations": [
+      {
+        "WallMs": 20349.6174,
+        "AfterPacket": 8
+      },
+      {
+        "WallMs": 21059.8566,
+        "AfterPacket": 30
+      }
+    ],
+    "Commands": 350,
+    "ReturnedAudioFrames": 441000,
+    "TicsPerSecond": 34.89395204564049,
+    "Style": "Matrix",
+    "ActiveSeconds": 10.0303915,
+    "OwnedWindowRemaining": 0
+  },
+  "Error": null,
+  "Checks": [
+    {
+      "Passed": true,
+      "Name": "Fixture explicitly declares save load and shortened power timer"
+    },
+    {
+      "Passed": true,
+      "Name": "Host and audio exit successfully"
+    },
+    {
+      "Passed": true,
+      "Name": "All 350 commands consumed unchanged"
+    },
+    {
+      "Passed": true,
+      "Name": "All 17 independent state and full packet checkpoints match"
+    },
+    {
+      "Passed": true,
+      "Name": "Source fixture covers active, blink and expired power states"
+    },
+    {
+      "Passed": true,
+      "Name": "Exact save loaded successfully"
+    },
+    {
+      "Passed": true,
+      "Name": "World images submitted at tics 1..70"
+    },
+    {
+      "Passed": true,
+      "Name": "World images submitted at tics 82..209"
+    },
+    {
+      "Passed": true,
+      "Name": "World images submitted at tics 210..350"
+    },
+    {
+      "Passed": true,
+      "Name": "Recorded input and load control retained"
+    },
+    {
+      "Passed": true,
+      "Name": "All sound frames consumed and returned"
+    },
+    {
+      "Passed": true,
+      "Name": "Fresh window and process-scoped capture completed"
+    },
+    {
+      "Passed": true,
+      "Name": "Replay and original media hashes match"
+    },
+    {
+      "Passed": true,
+      "Name": "Mux preserves source compressed frames and timing"
+    },
+    {
+      "Passed": true,
+      "Name": "Pinned source: Start-Doom.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Pinned source: scripts/Invoke-Doom.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Pinned source: scripts/Record-DoomReplay.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Pinned source: scripts/Record-ProcessAudio.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Pinned source: scripts/Merge-DoomCaptureAudio.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Pinned source: src/ProcessAudioCapture.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Pinned source: src/CaptureClock.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Pinned source: src/CaptureTimeline.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Pinned source: src/TerminalOutput.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Pinned source: src/AnsiColorState.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Pinned source: src/TerminalCodec.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Pinned source: scripts/FrameCodec.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Pinned source: src/FastRenderer.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Pinned source: src/RenderFuzz.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Pinned source: src/GameHost.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Pinned source: src/SnapshotTransport.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Pinned source: src/InputReplay.ps1"
+    },
+    {
+      "Passed": true,
+      "Name": "Complete delivered movie decodes"
+    },
+    {
+      "Passed": true,
+      "Name": "Owned window is absent"
+    },
+    {
+      "Passed": true,
+      "Name": "Original game processes are absent (PID reuse excluded)"
+    }
+  ],
+  "Meaning": "Recorded explicit invisibility/Spectre save fixture, not a campaign route. Verifies complete input, independently generated full packet checkpoints, loaded-state presentation, source/media integrity, returned audio and owned-resource cleanup. Captured/write rate does not measure distinct displayed frames; no acoustic-continuity guarantee."
+}

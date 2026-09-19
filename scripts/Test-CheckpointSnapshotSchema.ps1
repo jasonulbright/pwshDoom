@@ -25,6 +25,20 @@ try{
     Check 'Changing health still changes the checkpoint hash' ($changed.Sha256 -cne $original.Sha256)
     $player.Health++;$restored=Get-DoomReplayCheckpoint $game 0
     Check 'Restoring state restores both exact hashes' ($restored.Sha256 -ceq $original.Sha256 -and $restored.CurrentRenderSnapshotSha256 -ceq $original.CurrentRenderSnapshotSha256)
+    $power=$player.Powers[[int][PowerType]::Invisibility];$player.Powers[[int][PowerType]::Invisibility]=129
+    $changed=Get-DoomReplayCheckpoint $game 0
+    Check 'Invisibility is covered by the new packet digest' ($changed.CurrentRenderSnapshotSha256 -cne $original.CurrentRenderSnapshotSha256)
+    Check 'Schema1 retains its historical absence of invisibility' ($changed.Sha256 -ceq $original.Sha256)
+    Check 'New replay comparison rejects changed invisibility' (-not (Compare-DoomReplayCheckpoints @($original) @($changed) 0).Matched)
+    $player.Powers[[int][PowerType]::Invisibility]=$power
+    $actor=$game.World.Thinkers.Cap.Next
+    while($actor -isnot [Mobj] -or [object]::ReferenceEquals($actor,$player.Mobj)){$actor=$actor.Next}
+    $flags=$actor.Flags;$actor.Flags=$flags -bxor [MobjFlags]::Shadow;$changed=Get-DoomReplayCheckpoint $game 0
+    Check 'Actor flags are covered by the new packet digest' ($changed.CurrentRenderSnapshotSha256 -cne $original.CurrentRenderSnapshotSha256)
+    Check 'Schema1 retains its historical absence of actor flags' ($changed.Sha256 -ceq $original.Sha256)
+    Check 'New replay comparison rejects changed actor flags' (-not (Compare-DoomReplayCheckpoints @($original) @($changed) 0).Matched)
+    Check 'New replay comparison accepts matching serialized checkpoints' ((Compare-DoomReplayCheckpoints @((($original|ConvertTo-Json -Depth 7)|ConvertFrom-Json)) @($original) 0).Matched)
+    $actor.Flags=$flags
 }catch{$failure=$_.ToString()+"`n"+$_.ScriptStackTrace;throw}finally{
     if($content){$content.Dispose()}
     @{Error=$failure;Checks=$checks.ToArray();ReplaySha256=(Get-FileHash $Replay).Hash;BundleSha256=(Get-FileHash $bundle).Hash;WadSha256=(Get-FileHash $Wad).Hash;

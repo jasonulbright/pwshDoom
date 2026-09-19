@@ -48,6 +48,7 @@ $recorder=$null;$target=$null;$failure=$null;$captureQpc=$null;$exitCode=$null;$
 $audioRecorder=$null;$audioExitCode=$null;$audioStdout=$null;$audioStderr=$null;$clockAnchors=[Collections.Generic.List[object]]::new()
 $sourceNames=@('Start-Doom.ps1','scripts/Invoke-Doom.ps1','scripts/Record-DoomReplay.ps1','scripts/Record-ProcessAudio.ps1','scripts/Merge-DoomCaptureAudio.ps1','src/ProcessAudioCapture.ps1','src/CaptureClock.ps1','src/CaptureTimeline.ps1','src/TerminalOutput.ps1')
 $sourceNames+=@('src/AnsiColorState.ps1','src/TerminalCodec.ps1','scripts/FrameCodec.ps1')
+$sourceNames+=@('src/FastRenderer.ps1','src/RenderFuzz.ps1','src/GameHost.ps1','src/SnapshotTransport.ps1','src/InputReplay.ps1')
 $sourceSnapshot=@($sourceNames|ForEach-Object {@{Path=$_;Sha256=(Get-FileHash "$PSScriptRoot/../$_").Hash}})
 try {
     $launch=@{Wad=$Wad;Replay=$Replay;Style=$Style;GlyphSet=$GlyphSet;Seconds=$Seconds;FontSize=$FontSize;FontFace=$FontFace;Maximized=$Maximized;ExitDelaySeconds=$ExitDelaySeconds;Report=$gamePath}

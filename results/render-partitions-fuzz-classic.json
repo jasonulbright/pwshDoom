@@ -1,0 +1,48 @@
+{
+  "BaselineRendererSha256": "6DF2288773DFFA5E05678F0EE05820FBB53B2F77D643C958334F3467CE54A9EA",
+  "CharacterStripByteChecks": 0,
+  "Checks": [
+    {
+      "ComparedPixels": 64000,
+      "OpaqueActorDifferences": 21635,
+      "Differences": 0,
+      "Invisibility": 129,
+      "AngleDegrees": 0
+    },
+    {
+      "ComparedPixels": 64000,
+      "OpaqueActorDifferences": 17809,
+      "Differences": 0,
+      "Invisibility": 128,
+      "AngleDegrees": 37
+    },
+    {
+      "ComparedPixels": 64000,
+      "OpaqueActorDifferences": 18605,
+      "Differences": 0,
+      "Invisibility": 120,
+      "AngleDegrees": 89
+    },
+    {
+      "ComparedPixels": 64000,
+      "OpaqueActorDifferences": 21560,
+      "Differences": 0,
+      "Invisibility": 8,
+      "AngleDegrees": 173
+    },
+    {
+      "ComparedPixels": 64000,
+      "OpaqueActorDifferences": 19314,
+      "Differences": 0,
+      "Invisibility": 0,
+      "AngleDegrees": 269
+    }
+  ],
+  "FinishedUtc": "2026-09-19T15:59:07.1387858Z",
+  "FuzzFixture": true,
+  "GlyphSet": "Katakana",
+  "EncodedStripByteChecks": 35,
+  "AnsiEncoding": "Pairs",
+  "Meaning": "Exact serial/partition equivalence, including binary assets and NumericV2 snapshots. Fuzz fixtures explicitly place a shadow demon ahead of the camera and set the player invisibility timer; these are not ordinary gameplay completion evidence. All modes compare encoded bytes against serial encoding at a fixed time and viewport. No vanilla pixel-equivalence claim.",
+  "Style": "Classic"
+}

@@ -1,0 +1,3153 @@
+{
+  "Skill": 3,
+  "Map": 1,
+  "FixtureTimers": [
+    {
+      "Invisibility": 175,
+      "Tic": 35,
+      "Health": 975
+    },
+    {
+      "Invisibility": 140,
+      "Tic": 70,
+      "Health": 975
+    },
+    {
+      "Invisibility": 128,
+      "Tic": 82,
+      "Health": 975
+    },
+    {
+      "Invisibility": 120,
+      "Tic": 90,
+      "Health": 959
+    },
+    {
+      "Invisibility": 112,
+      "Tic": 98,
+      "Health": 959
+    },
+    {
+      "Invisibility": 105,
+      "Tic": 105,
+      "Health": 959
+    },
+    {
+      "Invisibility": 90,
+      "Tic": 120,
+      "Health": 935
+    },
+    {
+      "Invisibility": 82,
+      "Tic": 128,
+      "Health": 935
+    },
+    {
+      "Invisibility": 81,
+      "Tic": 129,
+      "Health": 935
+    },
+    {
+      "Invisibility": 70,
+      "Tic": 140,
+      "Health": 919
+    },
+    {
+      "Invisibility": 35,
+      "Tic": 175,
+      "Health": 899
+    },
+    {
+      "Invisibility": 0,
+      "Tic": 210,
+      "Health": 867
+    },
+    {
+      "Invisibility": 0,
+      "Tic": 245,
+      "Health": 807
+    },
+    {
+      "Invisibility": 0,
+      "Tic": 280,
+      "Health": 799
+    },
+    {
+      "Invisibility": 0,
+      "Tic": 315,
+      "Health": 739
+    },
+    {
+      "Invisibility": 0,
+      "Tic": 350,
+      "Health": 727
+    }
+  ],
+  "Meaning": "Explicit save fixture: grant invisibility, shorten its timer to 210, set player and actor health to999, and spawn a Spectre 96 units ahead in E1M1. Then load through normal replay control and run 350 idle commands. Shows fuzz and power expiry; not a pickup route or campaign completion.",
+  "Format": "pwshDoom.InputReplay",
+  "ContinueCampaign": true,
+  "Transitions": [
+    {
+      "State": "Level",
+      "Map": 1,
+      "Episode": 1,
+      "Tic": 0
+    },
+    {
+      "State": "Level",
+      "Map": 1,
+      "Episode": 1,
+      "Tic": 0
+    }
+  ],
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "ControlEvents": [
+    {
+      "SaveHash": "419FC0455287A610561F8E07E76915E18DA81328BC40988FFA697A14F56CE2EC",
+      "Action": "LoadGame",
+      "Tic": 0
+    }
+  ],
+  "Version": 3,
+  "SourceFingerprint": "06BC2371DC206ABFF9EC104BE14069C4C6016AA925CBC14DFC1EF015A2684568",
+  "Checkpoints": [
+    {
+      "CurrentRenderSnapshotVersion": 2,
+      "Tic": 0,
+      "AutomapSha256": "683FBC3374C915C4FAFDB4CBFEE0CD8899B1AF9046A4B23140EE784EAC28A015",
+      "State": {
+        "Schema": 1,
+        "Tic": 0,
+        "State": "Level",
+        "Episode": 1,
+        "Map": 1,
+        "LevelTime": 1,
+        "RandomIndex": 145,
+        "Paused": false,
+        "PlayerState": "Live",
+        "Health": 999,
+        "Armor": 0,
+        "Position": [
+          69206016,
+          -236978176,
+          0,
+          1073741824
+        ],
+        "Ammo": [
+          50,
+          0,
+          0,
+          0
+        ],
+        "Weapons": [
+          true,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "Keys": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "DidSecret": false,
+        "RenderSnapshotSha256": "BB8451138D930CEC4B43664E16B67797CBA121E94579B2B557A316EC328F33E0",
+        "Intermission": null,
+        "Finale": null
+      },
+      "Sha256": "49A6D9BA21BD4A473365C92A0AB298A96D150C065EAE7A937828F67921775409",
+      "CurrentRenderSnapshotSha256": "80E8692E9E79CEAC9489C6B456BB01CC302BCEB49FB9B7EA48B33AB02E4C20B4"
+    },
+    {
+      "CurrentRenderSnapshotVersion": 2,
+      "Tic": 35,
+      "AutomapSha256": "9F65FFE7F2C6DDCEEE74E2F50C6FC71C27C4B041A1E5E16F5EFEFB28BB1D71E1",
+      "State": {
+        "Schema": 1,
+        "Tic": 35,
+        "State": "Level",
+        "Episode": 1,
+        "Map": 1,
+        "LevelTime": 36,
+        "RandomIndex": 159,
+        "Paused": false,
+        "PlayerState": "Live",
+        "Health": 975,
+        "Armor": 0,
+        "Position": [
+          69206091,
+          -237174781,
+          0,
+          1073741824
+        ],
+        "Ammo": [
+          50,
+          0,
+          0,
+          0
+        ],
+        "Weapons": [
+          true,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "Keys": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "DidSecret": false,
+        "RenderSnapshotSha256": "8B6FFA571F1C39CF37B5663C4E1139FD8912ED277F4CAA21349DB62A8C2FE549",
+        "Intermission": null,
+        "Finale": null
+      },
+      "Sha256": "2CEB1BFCED23ECB6FC074A33A8F86059E658AC54CD756CC0020D9FB60A634F12",
+      "CurrentRenderSnapshotSha256": "0FFE27CF5E89785D704356C8E4C7F16B035F2CC6B05F016BED8DBCB8BCF19BD9"
+    },
+    {
+      "CurrentRenderSnapshotVersion": 2,
+      "Tic": 70,
+      "AutomapSha256": "52B093E58E1DDACE13634B90C4CBB6CC93F08009160743B201390AC7AA9F281B",
+      "State": {
+        "Schema": 1,
+        "Tic": 70,
+        "State": "Level",
+        "Episode": 1,
+        "Map": 1,
+        "LevelTime": 71,
+        "RandomIndex": 170,
+        "Paused": false,
+        "PlayerState": "Live",
+        "Health": 975,
+        "Armor": 0,
+        "Position": [
+          69206657,
+          -239014835,
+          0,
+          1073741824
+        ],
+        "Ammo": [
+          50,
+          0,
+          0,
+          0
+        ],
+        "Weapons": [
+          true,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "Keys": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "DidSecret": false,
+        "RenderSnapshotSha256": "5CEA5FC86E3F5F612EAFFAAC5A5282E7C69F3316C9F9031E7331255571600CDC",
+        "Intermission": null,
+        "Finale": null
+      },
+      "Sha256": "539F153F1094B06D9A93C63AB0BD4A17DA53593FB28291F877F8B8C5C16F5EA9",
+      "CurrentRenderSnapshotSha256": "C99B2B6C82CED175A5567F121A8BCB79A0FD5BF0E522511B70EBA8AD0924D6CC"
+    },
+    {
+      "CurrentRenderSnapshotVersion": 2,
+      "Tic": 82,
+      "AutomapSha256": "65D8308A085F51653D652D4568CE267F20DE441B1544063FBB1ACC777C050B72",
+      "State": {
+        "Schema": 1,
+        "Tic": 82,
+        "State": "Level",
+        "Episode": 1,
+        "Map": 1,
+        "LevelTime": 83,
+        "RandomIndex": 174,
+        "Paused": false,
+        "PlayerState": "Live",
+        "Health": 975,
+        "Armor": 0,
+        "Position": [
+          69206657,
+          -239038414,
+          0,
+          1073741824
+        ],
+        "Ammo": [
+          50,
+          0,
+          0,
+          0
+        ],
+        "Weapons": [
+          true,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "Keys": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "DidSecret": false,
+        "RenderSnapshotSha256": "BC66860ECE6FABDA22D5FDBB91AAEAC1B6ED41C2DE6E999C5D1503796115C642",
+        "Intermission": null,
+        "Finale": null
+      },
+      "Sha256": "57DED8EC99FB5831F386B86E0E17EB1A952888E1E39EC5EC31809164BFE020D9",
+      "CurrentRenderSnapshotSha256": "0BDEAE16B1273A60588D4F7FBA1E5A7430E50B4E2289706D3F63703CC6E7F1E1"
+    },
+    {
+      "CurrentRenderSnapshotVersion": 2,
+      "Tic": 90,
+      "AutomapSha256": "28136B9FC5895069B4D432919C16B7F7D886C4BFAA99EB9A14040E7705F1F752",
+      "State": {
+        "Schema": 1,
+        "Tic": 90,
+        "State": "Level",
+        "Episode": 1,
+        "Map": 1,
+        "LevelTime": 91,
+        "RandomIndex": 178,
+        "Paused": false,
+        "PlayerState": "Live",
+        "Health": 959,
+        "Armor": 0,
+        "Position": [
+          69206752,
+          -239288267,
+          0,
+          1073741824
+        ],
+        "Ammo": [
+          50,
+          0,
+          0,
+          0
+        ],
+        "Weapons": [
+          true,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "Keys": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "DidSecret": false,
+        "RenderSnapshotSha256": "79010112597EFD0147A5E3D836DBF3880F7EBA6C37D46E43FB6A17C19074BDF3",
+        "Intermission": null,
+        "Finale": null
+      },
+      "Sha256": "BC965469BD6143F8E5CE8CB95B3066D8EA328407DFDD2CC66EBBA8F68DDDA461",
+      "CurrentRenderSnapshotSha256": "37F1F5829DAE1FD7586E2A7F67203D61F624216C5F81F4A0C9AA3F2204A9BA89"
+    },
+    {
+      "CurrentRenderSnapshotVersion": 2,
+      "Tic": 98,
+      "AutomapSha256": "6D3B904E1F19D5BE5EA60720AAAF9943F7BB671F168B073D52690712BBEC711A",
+      "State": {
+        "Schema": 1,
+        "Tic": 98,
+        "State": "Level",
+        "Episode": 1,
+        "Map": 1,
+        "LevelTime": 99,
+        "RandomIndex": 180,
+        "Paused": false,
+        "PlayerState": "Live",
+        "Health": 959,
+        "Armor": 0,
+        "Position": [
+          69206976,
+          -239914104,
+          0,
+          1073741824
+        ],
+        "Ammo": [
+          50,
+          0,
+          0,
+          0
+        ],
+        "Weapons": [
+          true,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "Keys": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "DidSecret": false,
+        "RenderSnapshotSha256": "7F6E83CB3B74119C1C2C779E7186543ED85B33621C068BAD67BA9A9BDEF10BF4",
+        "Intermission": null,
+        "Finale": null
+      },
+      "Sha256": "DD65A5AB4BB23006BD2291B73DFFD7ABD821270921C192F6DDE616FA1D1A6FAB",
+      "CurrentRenderSnapshotSha256": "572A7293FFEFB89DE128C76FDCE1ABC13D14B63605E4A5F2554407E162CB3A09"
+    },
+    {
+      "CurrentRenderSnapshotVersion": 2,
+      "Tic": 105,
+      "AutomapSha256": "1A309DCD059959CC5164D86ABFB2348C2B909F6BB6583501C1416941F3C0C513",
+      "State": {
+        "Schema": 1,
+        "Tic": 105,
+        "State": "Level",
+        "Episode": 1,
+        "Map": 1,
+        "LevelTime": 106,
+        "RandomIndex": 182,
+        "Paused": false,
+        "PlayerState": "Live",
+        "Health": 959,
+        "Armor": 0,
+        "Position": [
+          69207044,
+          -240122919,
+          0,
+          1073741824
+        ],
+        "Ammo": [
+          50,
+          0,
+          0,
+          0
+        ],
+        "Weapons": [
+          true,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "Keys": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "DidSecret": false,
+        "RenderSnapshotSha256": "103354AD8EB79D8DB5291F9285C82643E683BAD9E28CBB76FC1462FF04E68BBF",
+        "Intermission": null,
+        "Finale": null
+      },
+      "Sha256": "F4BB11CEA69A5BA9F84FB8F8D5EDAD6C5DEFF4BBA630E3506AD27D5CDDD60FB0",
+      "CurrentRenderSnapshotSha256": "021D804FDF951DAA621E08E651BDCBD1702FFE0AD43493869FB06BCF429D15EF"
+    },
+    {
+      "CurrentRenderSnapshotVersion": 2,
+      "Tic": 120,
+      "AutomapSha256": "35AA23D30D8B87A317163292202964BD25E4EA50D68C4E1C9BAE6EE475D37C0A",
+      "State": {
+        "Schema": 1,
+        "Tic": 120,
+        "State": "Level",
+        "Episode": 1,
+        "Map": 1,
+        "LevelTime": 121,
+        "RandomIndex": 188,
+        "Paused": false,
+        "PlayerState": "Live",
+        "Health": 935,
+        "Armor": 0,
+        "Position": [
+          69207118,
+          -240122919,
+          0,
+          1073741824
+        ],
+        "Ammo": [
+          50,
+          0,
+          0,
+          0
+        ],
+        "Weapons": [
+          true,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "Keys": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "DidSecret": false,
+        "RenderSnapshotSha256": "44ABA0E1438D207106053D6E286D1286630F5B55AEB28361A6E0DFC8EC2C164E",
+        "Intermission": null,
+        "Finale": null
+      },
+      "Sha256": "AE9B30F0747332BC687816B252CFE8DD9059523CACFD2572D354CA8640199FEE",
+      "CurrentRenderSnapshotSha256": "35684EF4972D502D3B3A75344A6EEE67A5ACC048283D0DE95B2FAC3D48E940B5"
+    },
+    {
+      "CurrentRenderSnapshotVersion": 2,
+      "Tic": 128,
+      "AutomapSha256": "35AA23D30D8B87A317163292202964BD25E4EA50D68C4E1C9BAE6EE475D37C0A",
+      "State": {
+        "Schema": 1,
+        "Tic": 128,
+        "State": "Level",
+        "Episode": 1,
+        "Map": 1,
+        "LevelTime": 129,
+        "RandomIndex": 190,
+        "Paused": false,
+        "PlayerState": "Live",
+        "Health": 935,
+        "Armor": 0,
+        "Position": [
+          69207118,
+          -240122919,
+          0,
+          1073741824
+        ],
+        "Ammo": [
+          50,
+          0,
+          0,
+          0
+        ],
+        "Weapons": [
+          true,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "Keys": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "DidSecret": false,
+        "RenderSnapshotSha256": "4B1183A75212977428698706B08458DC9B5350E650D188DED0286C91206378AE",
+        "Intermission": null,
+        "Finale": null
+      },
+      "Sha256": "D3F04D93FBED21E3CD615C469FE0C1F5A311D02DB9AB8808EC559456829A42D9",
+      "CurrentRenderSnapshotSha256": "507EF66949843190BA37BFFFD09E0B812A2301D15E23C64AA812336A5D4DAA03"
+    },
+    {
+      "CurrentRenderSnapshotVersion": 2,
+      "Tic": 129,
+      "AutomapSha256": "35AA23D30D8B87A317163292202964BD25E4EA50D68C4E1C9BAE6EE475D37C0A",
+      "State": {
+        "Schema": 1,
+        "Tic": 129,
+        "State": "Level",
+        "Episode": 1,
+        "Map": 1,
+        "LevelTime": 130,
+        "RandomIndex": 190,
+        "Paused": false,
+        "PlayerState": "Live",
+        "Health": 935,
+        "Armor": 0,
+        "Position": [
+          69207118,
+          -240122919,
+          0,
+          1073741824
+        ],
+        "Ammo": [
+          50,
+          0,
+          0,
+          0
+        ],
+        "Weapons": [
+          true,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "Keys": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "DidSecret": false,
+        "RenderSnapshotSha256": "1D7CDEBCEB9AFBACD4AB905CAF1D55EF46DD818A2625D5A0B36784CF7591DA21",
+        "Intermission": null,
+        "Finale": null
+      },
+      "Sha256": "5B6AC392906F8247278D1003C996DD6DE3A85BE9E0A81C6D66370818DAE20BBD",
+      "CurrentRenderSnapshotSha256": "439641582322EF3C9B165778A244B06E09E3020C9B38A8AFCD15417603D7A536"
+    },
+    {
+      "CurrentRenderSnapshotVersion": 2,
+      "Tic": 140,
+      "AutomapSha256": "35AA23D30D8B87A317163292202964BD25E4EA50D68C4E1C9BAE6EE475D37C0A",
+      "State": {
+        "Schema": 1,
+        "Tic": 140,
+        "State": "Level",
+        "Episode": 1,
+        "Map": 1,
+        "LevelTime": 141,
+        "RandomIndex": 199,
+        "Paused": false,
+        "PlayerState": "Live",
+        "Health": 919,
+        "Armor": 0,
+        "Position": [
+          69207118,
+          -240122919,
+          0,
+          1073741824
+        ],
+        "Ammo": [
+          50,
+          0,
+          0,
+          0
+        ],
+        "Weapons": [
+          true,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "Keys": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "DidSecret": false,
+        "RenderSnapshotSha256": "509F232BA3A0268AD06AF89EE8B611DD7A5C3D0988FBAB3838EEE02E8864DB7F",
+        "Intermission": null,
+        "Finale": null
+      },
+      "Sha256": "ABD2E1A31AAB68B1412EBEAC287750C64F2719DB06C20A66A83997C5FD8EA905",
+      "CurrentRenderSnapshotSha256": "2F56F0C59717D1A48E662CFCF898443E0143AD875CB532D1EFD52CD5347BD9A8"
+    },
+    {
+      "CurrentRenderSnapshotVersion": 2,
+      "Tic": 175,
+      "AutomapSha256": "EA79AD81B2F2890171618517CB8ED4ED462964B46FE1DCAF1F3B927EAFB485BB",
+      "State": {
+        "Schema": 1,
+        "Tic": 175,
+        "State": "Level",
+        "Episode": 1,
+        "Map": 1,
+        "LevelTime": 176,
+        "RandomIndex": 210,
+        "Paused": false,
+        "PlayerState": "Live",
+        "Health": 899,
+        "Armor": 0,
+        "Position": [
+          69207228,
+          -240122919,
+          0,
+          1073741824
+        ],
+        "Ammo": [
+          50,
+          0,
+          0,
+          0
+        ],
+        "Weapons": [
+          true,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "Keys": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "DidSecret": false,
+        "RenderSnapshotSha256": "41201FA132C7A801A402E97FC3DD964D81ED51D837788EDF2CFCBF7A07917B2E",
+        "Intermission": null,
+        "Finale": null
+      },
+      "Sha256": "3DACEE34D80BACF3BB4B84AD9C265E5F375F970D31D94B4C1B3F88CC1EE65930",
+      "CurrentRenderSnapshotSha256": "7726B183A32FD0D3E77E528A0410E769292FD5A6EA1782A03E9193B5780CAB30"
+    },
+    {
+      "CurrentRenderSnapshotVersion": 2,
+      "Tic": 210,
+      "AutomapSha256": "6F587753E78793BBC9BD9DC192C29EB120F8ADAD086D57658B7E9D0D2BC04FB0",
+      "State": {
+        "Schema": 1,
+        "Tic": 210,
+        "State": "Level",
+        "Episode": 1,
+        "Map": 1,
+        "LevelTime": 211,
+        "RandomIndex": 221,
+        "Paused": false,
+        "PlayerState": "Live",
+        "Health": 867,
+        "Armor": 0,
+        "Position": [
+          69207327,
+          -240122919,
+          0,
+          1073741824
+        ],
+        "Ammo": [
+          50,
+          0,
+          0,
+          0
+        ],
+        "Weapons": [
+          true,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "Keys": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "DidSecret": false,
+        "RenderSnapshotSha256": "5D3F8007A3972FCF9EF0FDE70F5B2C8519C1FE925A2A81419AFA8E894EF93F7C",
+        "Intermission": null,
+        "Finale": null
+      },
+      "Sha256": "7E6358EEED384FCF76A599E5FCB34C0ED3769FDCA8B0DEA4058C4006E9FBB5B8",
+      "CurrentRenderSnapshotSha256": "600CC41B33CE782BA736A7CC317C60FF36607C768A1609FB65EB704E1D05EBE7"
+    },
+    {
+      "CurrentRenderSnapshotVersion": 2,
+      "Tic": 245,
+      "AutomapSha256": "B5C6BA281548F621A0576E0A973485B5C3419DB082FB094FE5A8568D182E736F",
+      "State": {
+        "Schema": 1,
+        "Tic": 245,
+        "State": "Level",
+        "Episode": 1,
+        "Map": 1,
+        "LevelTime": 246,
+        "RandomIndex": 230,
+        "Paused": false,
+        "PlayerState": "Live",
+        "Health": 807,
+        "Armor": 0,
+        "Position": [
+          69207512,
+          -240122919,
+          0,
+          1073741824
+        ],
+        "Ammo": [
+          50,
+          0,
+          0,
+          0
+        ],
+        "Weapons": [
+          true,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "Keys": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "DidSecret": false,
+        "RenderSnapshotSha256": "E9EE3D4FCF6336FE53D89E9944B795C383203912F3061901A374E99792D8745B",
+        "Intermission": null,
+        "Finale": null
+      },
+      "Sha256": "D5280672434B8BC889B4D2F1864F38B0EB04B59EA8727E3C552BC614BA94473D",
+      "CurrentRenderSnapshotSha256": "DA0DA85C3A628E824E6D747FD380F3E74212BB9BACC9E220EDF13E4FE720BE23"
+    },
+    {
+      "CurrentRenderSnapshotVersion": 2,
+      "Tic": 280,
+      "AutomapSha256": "D56DCDA1DAAB12176368C2D54B955AF165B5AECF39422F0A5A6E60BCCB362790",
+      "State": {
+        "Schema": 1,
+        "Tic": 280,
+        "State": "Level",
+        "Episode": 1,
+        "Map": 1,
+        "LevelTime": 281,
+        "RandomIndex": 232,
+        "Paused": false,
+        "PlayerState": "Live",
+        "Health": 799,
+        "Armor": 0,
+        "Position": [
+          69207536,
+          -240122919,
+          0,
+          1073741824
+        ],
+        "Ammo": [
+          50,
+          0,
+          0,
+          0
+        ],
+        "Weapons": [
+          true,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "Keys": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "DidSecret": false,
+        "RenderSnapshotSha256": "B50877608C0B394C020DE90DAC1611BCAC321F5A4FEB2D0E3268DBED0E9D4E69",
+        "Intermission": null,
+        "Finale": null
+      },
+      "Sha256": "308A7B4C2A5D693F26E1CCE0DAE5E28CB9FD7F3D94019D6AD2645814B23C31EA",
+      "CurrentRenderSnapshotSha256": "E0628DD8913DE2F43E02FEC009FD99F56B2B0779CD9C473164BAD7C04E4F9E8C"
+    },
+    {
+      "CurrentRenderSnapshotVersion": 2,
+      "Tic": 315,
+      "AutomapSha256": "FC96189E6E7E1832AE2F7121C9569F5F282663558D91B488DCF1DA1CB52445C0",
+      "State": {
+        "Schema": 1,
+        "Tic": 315,
+        "State": "Level",
+        "Episode": 1,
+        "Map": 1,
+        "LevelTime": 316,
+        "RandomIndex": 238,
+        "Paused": false,
+        "PlayerState": "Live",
+        "Health": 739,
+        "Armor": 0,
+        "Position": [
+          69207721,
+          -240122919,
+          0,
+          1073741824
+        ],
+        "Ammo": [
+          50,
+          0,
+          0,
+          0
+        ],
+        "Weapons": [
+          true,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "Keys": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "DidSecret": false,
+        "RenderSnapshotSha256": "0D7861F7573DE5EFD8BD5136444CD21FA8AB03CB16F8D171B8A4D6C6CB4B9DB5",
+        "Intermission": null,
+        "Finale": null
+      },
+      "Sha256": "31742E1F206282A2E652A6E437008BADABA8DABC8F5C373C74764A24C31F4FD2",
+      "CurrentRenderSnapshotSha256": "9A5181D888CF76654130D5E58B29C63F3002756969E34DB3C07FDABDC77FF88C"
+    },
+    {
+      "CurrentRenderSnapshotVersion": 2,
+      "Tic": 350,
+      "AutomapSha256": "875E8FD1F3A14053DA28CFABA718635BE16E3604631C788EFD6AC530E8CC5557",
+      "State": {
+        "Schema": 1,
+        "Tic": 350,
+        "State": "Level",
+        "Episode": 1,
+        "Map": 1,
+        "LevelTime": 351,
+        "RandomIndex": 240,
+        "Paused": false,
+        "PlayerState": "Live",
+        "Health": 727,
+        "Armor": 0,
+        "Position": [
+          69207757,
+          -240122919,
+          0,
+          1073741824
+        ],
+        "Ammo": [
+          50,
+          0,
+          0,
+          0
+        ],
+        "Weapons": [
+          true,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "Keys": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "DidSecret": false,
+        "RenderSnapshotSha256": "32E1EEFEE339D2A088C6C1B86AE4FDF675E25098D90D135E0374FEB8156C8112",
+        "Intermission": null,
+        "Finale": null
+      },
+      "Sha256": "52B331E1EBE5BE9C158EDE2330CFF93843B8BE39BF6D177BDA90327FB5A62F45",
+      "CurrentRenderSnapshotSha256": "F648D49220F972D30C33CB7582DB7D47BEB4D587B9B6EAEAF968354B9E9599B2"
+    }
+  ],
+  "InputCommands": [
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ]
+  ],
+  "Episode": 1
+}

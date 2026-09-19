@@ -1,0 +1,58 @@
+{
+  "Error": "Source fixture covers active, blink and expired power states\nat Check, C:\\projects\\pwshDoom\\scripts\\Test-FuzzRecording.ps1: line 8\r\nat <ScriptBlock>, C:\\projects\\pwshDoom\\scripts\\Test-FuzzRecording.ps1: line 19\r\nat <ScriptBlock>, <No file>: line 1",
+  "Receipts": [
+    {
+      "Path": "results/fuzz-recording-fixture-second.json",
+      "Sha256": "5FA9616EE0D73BACAAA10B9FB39FF08EEA2A0FBB11B477BE107063219F8B47FA"
+    },
+    {
+      "Path": "local/recordings/fuzz-classic-first-game.json",
+      "Sha256": "ADC74C17193720E4B9152C84944E523C9ACD009791E20F3034AAAA7997C1492F"
+    },
+    {
+      "Path": "local/recordings/fuzz-classic-first-recording.json",
+      "Sha256": "B9106FF9B42A470D9C985E463D7D063572E1A007DB8FEC46ACEA43495FC3F1C2"
+    },
+    {
+      "Path": "local/recordings/fuzz-classic-first-host-ready.json",
+      "Sha256": "A5F0658374CD5BF685245D34665C8CF155972C0394982B33BF8E12479F3EAA4A"
+    },
+    {
+      "Path": "local/recordings/fuzz-classic-first-audio.json",
+      "Sha256": "E0901366C6EB67644DCCEABCCDF4B746F9C7A9BC2AC7320F847997422680DBC6"
+    },
+    {
+      "Path": "local/recordings/fuzz-classic-first-av.json",
+      "Sha256": "20136E125E42E8B52C660408A07633E6832F5A86763DA65429128A52CBDFB24F"
+    },
+    {
+      "Path": "local/recordings/fuzz-classic-first-input.json",
+      "Sha256": "642CCF8BC9C67DD377EDB76004BAFB232F49DA64110A4E8A6D14B4DC7401D93A"
+    }
+  ],
+  "HarnessSha256": "CF73BFDEF0A7659ED3DC3B8025F008DB6B199364B0C020B712434BF128008C40",
+  "Details": null,
+  "Meaning": "Recorded explicit invisibility/Spectre save fixture, not a campaign route. Verifies complete input, independently generated full packet checkpoints, loaded-state presentation, source/media integrity, returned audio and owned-resource cleanup. Captured/write rate does not measure distinct displayed frames; no acoustic-continuity guarantee.",
+  "Checks": [
+    {
+      "Name": "Fixture explicitly declares save load and shortened power timer",
+      "Passed": true
+    },
+    {
+      "Name": "Host and audio exit successfully",
+      "Passed": true
+    },
+    {
+      "Name": "All 350 commands consumed unchanged",
+      "Passed": true
+    },
+    {
+      "Name": "All 17 independent state and full packet checkpoints match",
+      "Passed": true
+    },
+    {
+      "Name": "Source fixture covers active, blink and expired power states",
+      "Passed": false
+    }
+  ]
+}

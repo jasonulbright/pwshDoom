@@ -1,0 +1,88 @@
+{
+  "Frames": [
+    {
+      "Sha256": "99A055F44037B352C2E4504906231F1E6FE816C4D64E1430A882234ABDBD94F2",
+      "Meaning": "Initial sample showed the save-loading screen, not active power.",
+      "Path": "local/recordings/fuzz-classic-second-active.png"
+    },
+    {
+      "Sha256": "BF24894C393CE35B875ED60B21B9C96E0E3AB6A2272E849383D7E91C14923CBB",
+      "Meaning": "Actual gameplay while invisibility remains active.",
+      "Path": "local/recordings/fuzz-classic-second-active-corrected.png"
+    },
+    {
+      "Sha256": "C4754E9CAA552FCC3BF0A1011327CCA1E5A63A455F6492159B6645C4FC5DB794",
+      "Meaning": "Actual gameplay after power expiry; opaque pistol visible.",
+      "Path": "local/recordings/fuzz-classic-second-expired.png"
+    },
+    {
+      "Sha256": "2DA6534426DA4CE26038959FA0F95CDC3696B7EFB42F13DEF28F517B0FD6C809",
+      "Meaning": "Initial sample showed the save-loading screen, not active power.",
+      "Path": "local/recordings/fuzz-matrix-second-active.png"
+    },
+    {
+      "Sha256": "5EA3E7F90DD9537217BEA8ABAEBFFDC47C611F84B5BB4781655CF03A792F6C87",
+      "Meaning": "Actual gameplay while invisibility remains active.",
+      "Path": "local/recordings/fuzz-matrix-second-active-corrected.png"
+    },
+    {
+      "Sha256": "9DA3CD30DED1438B41D4DAA60FBBF1097D73A5DE3619F2CB2FC96F4A1CD1A202",
+      "Meaning": "Actual gameplay after power expiry; opaque pistol visible.",
+      "Path": "local/recordings/fuzz-matrix-second-expired.png"
+    },
+    {
+      "Sha256": "350A4ED1F759829E71126D65FE5CEEBFA730E171F8E7168796BBA3BE7214113D",
+      "Meaning": "Initial sample showed the save-loading screen, not active power.",
+      "Path": "local/recordings/fuzz-ansiart-second-active.png"
+    },
+    {
+      "Sha256": "7416450E1F3874573482967E2F921656C84988E05577F4FF598FE27DD172EB18",
+      "Meaning": "Actual gameplay while invisibility remains active.",
+      "Path": "local/recordings/fuzz-ansiart-second-active-corrected.png"
+    },
+    {
+      "Sha256": "C192EC64B7F6C19CF4E6D5748F6FBF3B5D386CD8F97843518D1A9045D1D4FD1A",
+      "Meaning": "Actual gameplay after power expiry; opaque pistol visible.",
+      "Path": "local/recordings/fuzz-ansiart-second-expired.png"
+    }
+  ],
+  "Meaning": "All six owned capture windows and original game processes absent, allowing for PID reuse. No termination performed. Nine extracted images reviewed; three initially selected loading screens retained and explicitly relabeled here.",
+  "Cleanup": [
+    {
+      "Name": "classic-first",
+      "WindowRemaining": 0,
+      "OriginalProcessesRemaining": [],
+      "Passed": true
+    },
+    {
+      "Name": "classic-second",
+      "WindowRemaining": 0,
+      "OriginalProcessesRemaining": [],
+      "Passed": true
+    },
+    {
+      "Name": "matrix-first",
+      "WindowRemaining": 0,
+      "OriginalProcessesRemaining": [],
+      "Passed": true
+    },
+    {
+      "Name": "matrix-second",
+      "WindowRemaining": 0,
+      "OriginalProcessesRemaining": [],
+      "Passed": true
+    },
+    {
+      "Name": "ansiart-first",
+      "WindowRemaining": 0,
+      "OriginalProcessesRemaining": [],
+      "Passed": true
+    },
+    {
+      "Name": "ansiart-second",
+      "WindowRemaining": 0,
+      "OriginalProcessesRemaining": [],
+      "Passed": true
+    }
+  ]
+}

@@ -4,6 +4,7 @@
 Set-StrictMode -Version Latest
 
 . "$PSScriptRoot/RenderLighting.ps1"
+. "$PSScriptRoot/RenderFuzz.ps1"
 
 function ConvertTo-RenderPatch {
     param($Patch)
@@ -286,19 +287,31 @@ function Invoke-FastRender {
     }
     $geometryMs=$phaseWatch.Elapsed.TotalMilliseconds;$phaseWatch.Restart()
     # Actor sprites share the geometry depth buffer, including masked wall holes.
-    foreach($actor in $world.Actors) {
+    $drawActors=$world.Actors
+    foreach($candidate in $drawActors){
+        if($candidate.Flags -band 0x40000){
+            # Fuzz samples the actors behind it: draw farther sprites first.
+            $drawActors=@($world.Actors|Sort-Object {($_.X-$cx)*$co+($_.Y-$cy)*$si} -Descending -Stable)
+            break
+        }
+    }
+    foreach($actor in $drawActors) {
         if($true) {
             [double]$dx=$actor.X-$cx;[double]$dy=$actor.Y-$cy
             [double]$d=$dx*$co+$dy*$si
             if($d -gt 1) {
-                $frame=$Context.SpriteAtlas[$actor.Sprite][$actor.Frame -band 127];[int]$rotation=0
+                $frame=$Context.SpriteAtlas[$actor.Sprite][$actor.Frame -band 32767];[int]$rotation=0
                 if($frame.Rotate){$a=[Math]::Atan2($dy,$dx)-$actor.Angle+9*[Math]::PI/8;$a=($a%(2*[Math]::PI)+2*[Math]::PI)%(2*[Math]::PI);$rotation=[Math]::Floor($a/( [Math]::PI/4))}
                 $patch=$frame.Patches[$rotation];[double]$scale=160/$d
                 [double]$left=160+($dx*$si-$dy*$co-$patch.Left)*$scale
                 if($left -lt $EndColumn -and $left+$patch.Width*$scale -gt $FirstColumn) {
                     $light=if($actor.Frame -band 32768){0}else{$Context.Lighting.Scale[[Math]::Clamp(($actor.LightLevel -shr 4)+$player.ExtraLight,0,15)][[Math]::Min(47,[int][Math]::Floor(2560.0/$d))]}
                     if($player.FixedColorMap -gt 0){$light=$player.FixedColorMap}
-                    Draw-FastPatch $Context $patch $left (84-($actor.Z+$patch.Top-$cz)*$scale) $scale $d $frame.Flip[$rotation] $light $FirstColumn $EndColumn 168
+                    if($actor.Flags -band 0x40000){
+                        Draw-FastFuzzPatch $Context $patch $left (84-($actor.Z+$patch.Top-$cz)*$scale) $scale $d $frame.Flip[$rotation] $FirstColumn $EndColumn 168
+                    }else{
+                        Draw-FastPatch $Context $patch $left (84-($actor.Z+$patch.Top-$cz)*$scale) $scale $d $frame.Flip[$rotation] $light $FirstColumn $EndColumn 168
+                    }
                 }
             }
         }
@@ -315,12 +328,17 @@ function Draw-FastPlayerSprites {
     param($Context,[int]$FirstColumn=0,[int]$EndColumn=320)
     $player=$Context.World.ConsolePlayer
     [int]$sectorLight=$Context.Lighting.Scale[[Math]::Clamp(($player.SectorLight -shr 4)+$player.ExtraLight,0,15)][47]
+    [bool]$fuzz=$player.Invisibility -gt 128 -or ($player.Invisibility -band 8) -ne 0
     foreach($psp in $player.PlayerSprites){
         $frame=$Context.SpriteAtlas[$psp.Sprite][$psp.Frame -band 32767];$patch=$frame.Patches[0]
         [int]$light=$sectorLight
         if($psp.Frame -band 32768){$light=0}
         if($player.FixedColorMap -gt 0){$light=$player.FixedColorMap}
-        Draw-FastPatch $Context $patch ($psp.Sx-$patch.Left) ($psp.Sy-$patch.Top-16.25) 1 0 $frame.Flip[0] $light $FirstColumn $EndColumn 168
+        if($fuzz){
+            Draw-FastFuzzPatch $Context $patch ($psp.Sx-$patch.Left) ($psp.Sy-$patch.Top-16.25) 1 0 $frame.Flip[0] $FirstColumn $EndColumn 168
+        }else{
+            Draw-FastPatch $Context $patch ($psp.Sx-$patch.Left) ($psp.Sy-$patch.Top-16.25) 1 0 $frame.Flip[0] $light $FirstColumn $EndColumn 168
+        }
     }
 }
 

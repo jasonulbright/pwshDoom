@@ -4,7 +4,7 @@ param([string]$Wad='C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\
     [ValidateSet('Classic','AnsiArt','Matrix')][string]$Style='Classic',
     [ValidateSet('Ascii','Katakana')][string]$GlyphSet='Ascii',
     [ValidateSet('Pairs','ColorState')][string]$AnsiEncoding='Pairs',
-    [string]$Report="$PSScriptRoot/../results/render-partitions.json")
+    [string]$Report="$PSScriptRoot/../results/render-partitions.json",[switch]$Fuzz)
 $ErrorActionPreference='Stop'
 . "$PSScriptRoot/FrameCodec.ps1"
 . "$PSScriptRoot/../src/CharacterCodec.ps1"
@@ -27,10 +27,24 @@ try {
     $characterCodec=if($Style -ne 'Classic'){New-CharacterCodecContext $palette $Style -GlyphSet $GlyphSet}else{$null}
     foreach($angle in 0,37,89,173,269) {
         $snapshot=New-GameRenderSnapshot $game;$snapshot.ConsolePlayer.Mobj.Angle=$angle*[Math]::PI/180
+        if($Fuzz){
+            $snapshot.ConsolePlayer.Invisibility=@{0=129;37=128;89=120;173=8;269=0}[$angle]
+            $shadow=$snapshot.Actors[0];$shadow.Flags=$shadow.Flags -bor 0x40000;$shadow.Sprite=[int][Sprite]::SARG;$shadow.Frame=0
+            $a=$snapshot.ConsolePlayer.Mobj.Angle;$shadow.X=$snapshot.ConsolePlayer.Mobj.X+32*[Math]::Cos($a)
+            $shadow.Y=$snapshot.ConsolePlayer.Mobj.Y+32*[Math]::Sin($a);$shadow.Z=$snapshot.ConsolePlayer.ViewZ-41
+        }
         if($angle -eq 37){$snapshot.ConsolePlayer.ExtraLight=2;foreach($sector in $snapshot.Sectors){$sector.LightLevel=255}}
         if($CompareRenderer){. $CompareRenderer}
         $serial=$context.Clone();Set-GameRenderSnapshot $serial $snapshot;Invoke-FastRender $serial
         $expected=[byte[]]$serial.Pixels.Clone()
+        $opaqueDifferences=0
+        if($Fuzz){
+            $flags=$snapshot.Actors[0].Flags;$snapshot.Actors[0].Flags=$flags -band (-bnot 0x40000)
+            Invoke-FastRender $serial
+            for($pixel=0;$pixel -lt 64000;$pixel++){if($serial.Pixels[$pixel] -ne $expected[$pixel]){$opaqueDifferences++}}
+            $snapshot.Actors[0].Flags=$flags
+            if($opaqueDifferences -eq 0){throw 'The shadow actor fixture did not distinguish an opaque actor.'}
+        }
         . "$PSScriptRoot/../src/FastRenderer.ps1"
         Submit-GameRender $pool $snapshot -ColumnOffset 17 -RowOffset 5 -FrameNumber 123;Wait-GameRender $pool
         $actual=[byte[]]::new(64000)
@@ -53,9 +67,9 @@ try {
         $differences=0
         for($i=0;$i -lt 64000;$i++){if($actual[$i] -ne $expected[$i]){$differences++}}
         if($differences -ne 0){throw "$differences pixels differ at $angle degrees between serial rendering and seven process strips."}
-        $checks.Add(@{AngleDegrees=$angle;ComparedPixels=64000;Differences=$differences})
+        $checks.Add(@{AngleDegrees=$angle;ComparedPixels=64000;Differences=$differences;Invisibility=$snapshot.ConsolePlayer.Invisibility;OpaqueActorDifferences=$opaqueDifferences})
     }
-    @{FinishedUtc=[DateTime]::UtcNow.ToString('o');Style=$Style;GlyphSet=$GlyphSet;AnsiEncoding=$AnsiEncoding;Checks=$checks.ToArray();EncodedStripByteChecks=35;CharacterStripByteChecks=if($Style -ne 'Classic'){35}else{0};BaselineRendererSha256=if($CompareRenderer){(Get-FileHash -LiteralPath $CompareRenderer).Hash}else{(Get-FileHash "$PSScriptRoot/../src/FastRenderer.ps1").Hash};Meaning='Exact serial/partition equivalence of the new renderer, including its binary asset cache and NumericV1 snapshot transport. All modes compare encoded worker bytes against selected serial image encoding at a fixed time and viewport origin. This is not a vanilla renderer equivalence claim.'} |
+    @{FinishedUtc=[DateTime]::UtcNow.ToString('o');Style=$Style;GlyphSet=$GlyphSet;AnsiEncoding=$AnsiEncoding;FuzzFixture=[bool]$Fuzz;Checks=$checks.ToArray();EncodedStripByteChecks=35;CharacterStripByteChecks=if($Style -ne 'Classic'){35}else{0};BaselineRendererSha256=if($CompareRenderer){(Get-FileHash -LiteralPath $CompareRenderer).Hash}else{(Get-FileHash "$PSScriptRoot/../src/FastRenderer.ps1").Hash};Meaning='Exact serial/partition equivalence, including binary assets and NumericV2 snapshots. Fuzz fixtures explicitly place a shadow demon ahead of the camera and set the player invisibility timer; these are not ordinary gameplay completion evidence. All modes compare encoded bytes against serial encoding at a fixed time and viewport. No vanilla pixel-equivalence claim.'} |
         ConvertTo-Json -Depth 5 | Set-Content -LiteralPath $Report
     'PASS: 320,000 pixels match across five views and seven uneven process strips.'
 } catch {[Console]::Error.WriteLine($_.ScriptStackTrace);throw}
