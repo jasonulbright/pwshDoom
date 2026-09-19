@@ -38,3 +38,7 @@ The same 1,200-command E1M3 prefix, 16 Matrix workers, effects and six-track mus
 Receipts: `results/e1m3-host-admission-first.json`, `e1m3-host-paired-first.json`, `e1m3-host-paired-first-sources.json`, `e1m3-paired-recorded.json`, and the audit above. These are one before/after host run, supported by the separate same-state paired measurements, not a repeated display benchmark. The headless completed-image rates are not console or display FPS. The prefix does not qualify a full live E1M3 route, other presentation styles under load, or full campaign behavior.
 
 The improvement leaves a substantial deficit: game update plus snapshot publication still average roughly 35.2 ms before other work, exceeding the 28.6 ms tick budget. Profile gameplay stages next, preserving exact commands, original checkpoints, fixed resolution and all actors. Full live recording and sustained 35-tic/60-display qualification remain open.
+
+## NumericV3 palette selection
+
+The [palette presentation](palette-presentation.md) follow-up uses header45 for a discrete PLAYPAL index0..13. Both producers reuse the adopted PowerShell selector, and interpolation preserves the current endpoint selection. NumericV2 compatibility digests retain version2 and a zero45 slot; current V3 digests include the field. Schema1 keeps its original representation. All336 current all-map/E1M2 byte comparisons and13 legacy checkpoints pass. Compatibility hashes preserve old evidence; they do not retroactively expand what it checked.

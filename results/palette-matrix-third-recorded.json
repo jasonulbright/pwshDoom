@@ -1,0 +1,355 @@
+{
+  "Checks": [
+    {
+      "Name": "Explicit four-state visual fixture",
+      "Passed": true
+    },
+    {
+      "Name": "Successful host and sound shutdown",
+      "Passed": true
+    },
+    {
+      "Name": "All 700 commands preserved",
+      "Passed": true
+    },
+    {
+      "Name": "All 52 independent NumericV3 checkpoints match",
+      "Passed": true
+    },
+    {
+      "Name": "Four exact saves loaded",
+      "Passed": true
+    },
+    {
+      "Name": "Save hash 0",
+      "Passed": true
+    },
+    {
+      "Name": "Save hash 1",
+      "Passed": true
+    },
+    {
+      "Name": "Save hash 2",
+      "Passed": true
+    },
+    {
+      "Name": "Save hash 3",
+      "Passed": true
+    },
+    {
+      "Name": "All eight automap controls preserved",
+      "Passed": true
+    },
+    {
+      "Name": "Damage: active world effect presented",
+      "Passed": true
+    },
+    {
+      "Name": "Damage: active automap effect presented",
+      "Passed": true
+    },
+    {
+      "Name": "Damage: world base palette restored",
+      "Passed": true
+    },
+    {
+      "Name": "Bonus: active world effect presented",
+      "Passed": true
+    },
+    {
+      "Name": "Bonus: active automap effect presented",
+      "Passed": true
+    },
+    {
+      "Name": "Bonus: world base palette restored",
+      "Passed": true
+    },
+    {
+      "Name": "Berserk: active world effect presented",
+      "Passed": true
+    },
+    {
+      "Name": "Berserk: active automap effect presented",
+      "Passed": true
+    },
+    {
+      "Name": "Berserk: world base palette restored",
+      "Passed": true
+    },
+    {
+      "Name": "Radiation: active world effect presented",
+      "Passed": true
+    },
+    {
+      "Name": "Radiation: active automap effect presented",
+      "Passed": true
+    },
+    {
+      "Name": "Radiation: world base palette restored",
+      "Passed": true
+    },
+    {
+      "Name": "Every presented fixture frame agrees with independent palette and automap state",
+      "Passed": true
+    },
+    {
+      "Name": "All effects audio frames consumed and returned",
+      "Passed": true
+    },
+    {
+      "Name": "Fresh window and scoped audio capture completed",
+      "Passed": true
+    },
+    {
+      "Name": "Recorded commands controls and automap retained",
+      "Passed": true
+    },
+    {
+      "Name": "Original media and replay hashes match",
+      "Passed": true
+    },
+    {
+      "Name": "Mux preserves source video and timing",
+      "Passed": true
+    },
+    {
+      "Name": "Pinned source: Start-Doom.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Pinned source: scripts/Invoke-Doom.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Pinned source: scripts/Record-DoomReplay.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Pinned source: scripts/Record-ProcessAudio.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Pinned source: scripts/Merge-DoomCaptureAudio.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Pinned source: src/ProcessAudioCapture.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Pinned source: src/CaptureClock.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Pinned source: src/CaptureTimeline.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Pinned source: src/TerminalOutput.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Pinned source: src/AnsiColorState.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Pinned source: src/TerminalCodec.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Pinned source: scripts/FrameCodec.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Pinned source: src/FastRenderer.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Pinned source: src/RenderFuzz.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Pinned source: src/GameHost.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Pinned source: src/SnapshotTransport.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Pinned source: src/InputReplay.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Pinned source: src/PaletteCodec.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Pinned source: src/CharacterCodec.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Pinned source: src/RenderAssets.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Pinned source: src/GameProcesses.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Pinned source: src/SimulationProcess.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Pinned source: scripts/Invoke-SimulationWorker.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Pinned source: scripts/Invoke-GameRenderWorker.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Complete delivered movie decodes",
+      "Passed": true
+    },
+    {
+      "Name": "Owned window absent",
+      "Passed": true
+    },
+    {
+      "Name": "Original processes absent (PID reuse excluded)",
+      "Passed": true
+    }
+  ],
+  "Error": null,
+  "Receipts": [
+    {
+      "Path": "results/palette-recording-fixture-second.json",
+      "Sha256": "6B0F729ACFEDD98EA97A0E281BD746186B7F7F955332315BDA6CC21FEF7C3511"
+    },
+    {
+      "Path": "local/recordings/palette-matrix-third-game.json",
+      "Sha256": "3477669E4BC2E2F5752094CF431C8C76F31AA576D2B78D156B481472DCF57CE2"
+    },
+    {
+      "Path": "local/recordings/palette-matrix-third-recording.json",
+      "Sha256": "1519B6BE52240ACF7631D687E9B10E2745E7B7387449360DF4CD10968D917098"
+    },
+    {
+      "Path": "local/recordings/palette-matrix-third-host-ready.json",
+      "Sha256": "6870214BBE36DE0A6BAEBDA2643D699AF2059782C6F7DD26B9CE8525F762D094"
+    },
+    {
+      "Path": "local/recordings/palette-matrix-third-audio.json",
+      "Sha256": "DF6E61F1EE5E05C7EFB9ABE9E239C0B3B56150917562F6B5A619611F329A8DD4"
+    },
+    {
+      "Path": "local/recordings/palette-matrix-third-av.json",
+      "Sha256": "AC43A38AA93D8F10CAA92623E7A40CAB284161EBF1ABBE02CADC3E98D5354700"
+    },
+    {
+      "Path": "local/recordings/palette-matrix-third-input.json",
+      "Sha256": "3E401D0B67249484C3AD07C8E27CBB12444AFD3D2F4EE409C1F6F0835C9D5FF1"
+    }
+  ],
+  "Details": {
+    "Commands": 700,
+    "WorkerWorkingSetBytes": 5426847744,
+    "QueueEmptyObservations": [
+      {
+        "AfterPacket": 14,
+        "WallMs": 19397.5806
+      },
+      {
+        "AfterPacket": 16,
+        "WallMs": 19757.568
+      },
+      {
+        "AfterPacket": 699,
+        "WallMs": 47217.3845
+      }
+    ],
+    "VerifiedFrames": 1196,
+    "WritesPerSecond": 59.81022246367313,
+    "Style": "Matrix",
+    "AudioFrames": 882000,
+    "TicsPerSecond": 34.947542341044404,
+    "Checkpoints": 52,
+    "PaletteCounts": {
+      "Radiation": [
+        {
+          "Frames": 170,
+          "Palette": 0
+        },
+        {
+          "Frames": 252,
+          "Palette": 13
+        }
+      ],
+      "Damage": [
+        {
+          "Frames": 75,
+          "Palette": 0
+        },
+        {
+          "Frames": 15,
+          "Palette": 2
+        },
+        {
+          "Frames": 15,
+          "Palette": 3
+        },
+        {
+          "Frames": 15,
+          "Palette": 4
+        },
+        {
+          "Frames": 15,
+          "Palette": 5
+        },
+        {
+          "Frames": 15,
+          "Palette": 6
+        },
+        {
+          "Frames": 13,
+          "Palette": 7
+        },
+        {
+          "Frames": 69,
+          "Palette": 8
+        }
+      ],
+      "Berserk": [
+        {
+          "Frames": 79,
+          "Palette": 0
+        },
+        {
+          "Frames": 222,
+          "Palette": 2
+        }
+      ],
+      "Bonus": [
+        {
+          "Frames": 67,
+          "Palette": 0
+        },
+        {
+          "Frames": 14,
+          "Palette": 10
+        },
+        {
+          "Frames": 14,
+          "Palette": 11
+        },
+        {
+          "Frames": 146,
+          "Palette": 12
+        }
+      ]
+    }
+  },
+  "HarnessSha256": "F4488CB3FB01D09F5118C2A9ADD6C42B7EC7E0A2913EB045AD2C1AFE7BEA8D30",
+  "Meaning": "Actual-host palette transport, effect expiry and automap checked against independently simulated fixture states and NumericV3 checkpoints. Optional recording adds source/media/audio/ownership checks. Artificial saves do not prove pickup mechanics, campaign completion, distinct displayed FPS or acoustic continuity."
+}

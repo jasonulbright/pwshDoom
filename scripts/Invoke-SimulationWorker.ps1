@@ -58,6 +58,10 @@ function Publish-SimulationSnapshot {
     $view.Write($base+28,[int]$game.World.ConsolePlayer.Health);$view.Write($base+32,[int]$game.World.ConsolePlayer.KillCount)
     $view.Write($base+36,[int]$screenKind);$view.Write($base+40,[int]$script:menuRevision);$view.Write($base+44,[int]$script:menuScreen)
     $view.Write($base+48,[int]([int]$game.State -eq 0 -and $game.World.AutoMap.Visible))
+    # Our full-screen menus use the base palette for readability; world and
+    # automap retain the same gameplay palette, including the HUD.
+    $paletteNumber=if($state -eq 0 -and $screenKind -ne 2){[Renderer]::GetPaletteNumber($game.World.ConsolePlayer)}else{0}
+    $view.Write($base+52,[int]$paletteNumber)
     $view.WriteArray($base+64,$old,0,$old.Length);$view.WriteArray($base+64+$old.Length,$current,0,$current.Length)
     [Threading.Thread]::MemoryBarrier();$view.Write($base,$script:version);$view.Write(16,$script:slot);$view.Write(20,$script:tick)
 }

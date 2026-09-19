@@ -9,7 +9,7 @@ function Write-GameRenderAssets {
     }
     $meta=@{Segments=$Context.Segments;Nodes=$Context.Nodes;SkyFlat=$Context.SkyFlat;Sky=$patchIds[$Context.Sky];
         Subsectors=@($Context.Subsectors | ForEach-Object {@{FirstSeg=$_.FirstSeg;SegCount=$_.SegCount}});
-        Palette=$Palette;Hud=@{};Textures=@{};SpriteAtlas=[object[]]::new($Context.SpriteAtlas.Length)}
+        Palette=$Palette;PlayPal=if($Context.ContainsKey('PlayPal')){$Context.PlayPal}else{$Context.Content.Palette.Data};Hud=@{};Textures=@{};SpriteAtlas=[object[]]::new($Context.SpriteAtlas.Length)}
     foreach($key in $Context.Textures.Keys){$meta.Textures[$key.ToString()]=$patchIds[$Context.Textures[$key]]}
     foreach($key in $Context.Hud.get_Keys()) {
         $value=$Context.Hud[$key]
@@ -24,7 +24,7 @@ function Write-GameRenderAssets {
     }
     $writer=[IO.BinaryWriter]::new([IO.File]::Create($Path))
     try {
-        $writer.Write('pwshDoom-assets-v1');$writer.Write(($meta | ConvertTo-Json -Depth 12 -Compress));$writer.Write($patches.Count)
+        $writer.Write('pwshDoom-assets-v2');$writer.Write(($meta | ConvertTo-Json -Depth 12 -Compress));$writer.Write($patches.Count)
         foreach($p in $patches) {
             $writer.Write([int]$p.Width);$writer.Write([int]$p.Height);$writer.Write([int]$p.Left);$writer.Write([int]$p.Top)
             $bytes=[byte[]]::new($p.Data.Length*4);[Buffer]::BlockCopy($p.Data,0,$bytes,0,$bytes.Length);$writer.Write($bytes)
@@ -42,7 +42,7 @@ function Read-GameRenderAssets {
     param([string]$Path)
     $reader=[IO.BinaryReader]::new([IO.File]::OpenRead($Path))
     try {
-        if($reader.ReadString() -ne 'pwshDoom-assets-v1'){throw 'Unknown render asset format.'}
+        if($reader.ReadString() -ne 'pwshDoom-assets-v2'){throw 'Unknown render asset format.'}
         $meta=$reader.ReadString() | ConvertFrom-Json -AsHashtable
         $patches=[object[]]::new($reader.ReadInt32())
         for($i=0;$i -lt $patches.Length;$i++) {
@@ -54,7 +54,7 @@ function Read-GameRenderAssets {
         }
         $ctx=@{Segments=$meta.Segments;Nodes=$meta.Nodes;Subsectors=$meta.Subsectors;SkyFlat=$meta.SkyFlat;Sky=$patches[[int]$meta.Sky];Lighting=(New-FastLightingTables);
             Pixels=[byte[]]::new(64000);Depth=[double[]]::new(64000);Planes=[int[]]::new(53760);TopClip=[int[]]::new(320);BottomClip=[int[]]::new(320);
-            Stack=[int[]]::new($meta.Nodes.Count*2+4);Textures=@{};Hud=@{};SpriteAtlas=[object[]]::new($meta.SpriteAtlas.Count);Palette=[int[][]]$meta.Palette}
+            Stack=[int[]]::new($meta.Nodes.Count*2+4);Textures=@{};Hud=@{};SpriteAtlas=[object[]]::new($meta.SpriteAtlas.Count);Palette=[int[][]]$meta.Palette;PlayPal=[byte[]]$meta.PlayPal}
         foreach($key in $meta.Textures.Keys){$ctx.Textures[[int]$key]=$patches[[int]$meta.Textures[$key]]}
         foreach($key in $meta.Hud.get_Keys()) {
             $value=$meta.Hud[$key]

@@ -1,0 +1,1162 @@
+{
+  "Meaning": "Explicit palette-selection boundaries and precedence, actual object/direct snapshots and interpolation, all PLAYPAL RGB entries, exhaustive Classic pair encoding and character scene/menu/HUD equivalence to eager tables. No campaign completion or displayed-frame performance claim.",
+  "Sources": [
+    {
+      "Path": "src/PaletteCodec.ps1",
+      "Sha256": "1A144EC542C7E2F8C33EA022C39775698A64B683AECA8CBF4C74865FC3B421BB"
+    },
+    {
+      "Path": "scripts/FrameCodec.ps1",
+      "Sha256": "A1CEA3BF32B01AEF4DAC5665A8478EBC3CAD7C4F4EE8605961A0782079202133"
+    },
+    {
+      "Path": "src/CharacterCodec.ps1",
+      "Sha256": "78E3BF44DD0009FA3DE2B855FDD3B411BC6FFD21A62FBC04A0D9BA83E6A5CD78"
+    },
+    {
+      "Path": "src/AnsiColorState.ps1",
+      "Sha256": "5370ABE79597E5E4FC629BBDE768DCA5F7A642200CFA31CF45AC1E7D4B46F4FA"
+    },
+    {
+      "Path": "src/TerminalCodec.ps1",
+      "Sha256": "E543D00540B54DBCAB9DC41F3034B788D4060786E49EFF6414BD013B73107539"
+    },
+    {
+      "Path": "src/GameHost.ps1",
+      "Sha256": "3732C6A81C74F43451CB2A2E4ED342EBE303FC3EEB558B64C3658F78EAACB940"
+    },
+    {
+      "Path": "src/SnapshotTransport.ps1",
+      "Sha256": "A42B7E62F049D2EB5A798DDD1E2029629490D1E0441B62B6E954997EEE90E009"
+    },
+    {
+      "Path": "C:\\projects\\pwshDoom\\scripts\\Test-PalettePresentation.ps1",
+      "Sha256": "DC30914FDAF37503B6A40448FE8BBAC7FA6A771D711C3B956E0C4780CD99691A"
+    }
+  ],
+  "Checks": [
+    {
+      "Passed": true,
+      "Name": "Selection/precedence 0"
+    },
+    {
+      "Passed": true,
+      "Name": "Object and direct packet 0"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 0 at 0"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 0 at 0.5"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 0 at 1"
+    },
+    {
+      "Passed": true,
+      "Name": "Selection/precedence 1"
+    },
+    {
+      "Passed": true,
+      "Name": "Object and direct packet 1"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 1 at 0"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 1 at 0.5"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 1 at 1"
+    },
+    {
+      "Passed": true,
+      "Name": "Selection/precedence 2"
+    },
+    {
+      "Passed": true,
+      "Name": "Object and direct packet 2"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 2 at 0"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 2 at 0.5"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 2 at 1"
+    },
+    {
+      "Passed": true,
+      "Name": "Selection/precedence 3"
+    },
+    {
+      "Passed": true,
+      "Name": "Object and direct packet 3"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 3 at 0"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 3 at 0.5"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 3 at 1"
+    },
+    {
+      "Passed": true,
+      "Name": "Selection/precedence 4"
+    },
+    {
+      "Passed": true,
+      "Name": "Object and direct packet 4"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 4 at 0"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 4 at 0.5"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 4 at 1"
+    },
+    {
+      "Passed": true,
+      "Name": "Selection/precedence 5"
+    },
+    {
+      "Passed": true,
+      "Name": "Object and direct packet 5"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 5 at 0"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 5 at 0.5"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 5 at 1"
+    },
+    {
+      "Passed": true,
+      "Name": "Selection/precedence 6"
+    },
+    {
+      "Passed": true,
+      "Name": "Object and direct packet 6"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 6 at 0"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 6 at 0.5"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 6 at 1"
+    },
+    {
+      "Passed": true,
+      "Name": "Selection/precedence 7"
+    },
+    {
+      "Passed": true,
+      "Name": "Object and direct packet 7"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 7 at 0"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 7 at 0.5"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 7 at 1"
+    },
+    {
+      "Passed": true,
+      "Name": "Selection/precedence 8"
+    },
+    {
+      "Passed": true,
+      "Name": "Object and direct packet 8"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 8 at 0"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 8 at 0.5"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 8 at 1"
+    },
+    {
+      "Passed": true,
+      "Name": "Selection/precedence 9"
+    },
+    {
+      "Passed": true,
+      "Name": "Object and direct packet 9"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 9 at 0"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 9 at 0.5"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 9 at 1"
+    },
+    {
+      "Passed": true,
+      "Name": "Selection/precedence 10"
+    },
+    {
+      "Passed": true,
+      "Name": "Object and direct packet 10"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 10 at 0"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 10 at 0.5"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 10 at 1"
+    },
+    {
+      "Passed": true,
+      "Name": "Selection/precedence 11"
+    },
+    {
+      "Passed": true,
+      "Name": "Object and direct packet 11"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 11 at 0"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 11 at 0.5"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 11 at 1"
+    },
+    {
+      "Passed": true,
+      "Name": "Selection/precedence 12"
+    },
+    {
+      "Passed": true,
+      "Name": "Object and direct packet 12"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 12 at 0"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 12 at 0.5"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 12 at 1"
+    },
+    {
+      "Passed": true,
+      "Name": "Selection/precedence 13"
+    },
+    {
+      "Passed": true,
+      "Name": "Object and direct packet 13"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 13 at 0"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 13 at 0.5"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 13 at 1"
+    },
+    {
+      "Passed": true,
+      "Name": "Selection/precedence 14"
+    },
+    {
+      "Passed": true,
+      "Name": "Object and direct packet 14"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 14 at 0"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 14 at 0.5"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 14 at 1"
+    },
+    {
+      "Passed": true,
+      "Name": "Selection/precedence 15"
+    },
+    {
+      "Passed": true,
+      "Name": "Object and direct packet 15"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 15 at 0"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 15 at 0.5"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 15 at 1"
+    },
+    {
+      "Passed": true,
+      "Name": "Selection/precedence 16"
+    },
+    {
+      "Passed": true,
+      "Name": "Object and direct packet 16"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 16 at 0"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 16 at 0.5"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 16 at 1"
+    },
+    {
+      "Passed": true,
+      "Name": "Selection/precedence 17"
+    },
+    {
+      "Passed": true,
+      "Name": "Object and direct packet 17"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 17 at 0"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 17 at 0.5"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 17 at 1"
+    },
+    {
+      "Passed": true,
+      "Name": "Selection/precedence 18"
+    },
+    {
+      "Passed": true,
+      "Name": "Object and direct packet 18"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 18 at 0"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 18 at 0.5"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 18 at 1"
+    },
+    {
+      "Passed": true,
+      "Name": "Selection/precedence 19"
+    },
+    {
+      "Passed": true,
+      "Name": "Object and direct packet 19"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 19 at 0"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 19 at 0.5"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 19 at 1"
+    },
+    {
+      "Passed": true,
+      "Name": "Selection/precedence 20"
+    },
+    {
+      "Passed": true,
+      "Name": "Object and direct packet 20"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 20 at 0"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 20 at 0.5"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 20 at 1"
+    },
+    {
+      "Passed": true,
+      "Name": "Selection/precedence 21"
+    },
+    {
+      "Passed": true,
+      "Name": "Object and direct packet 21"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 21 at 0"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 21 at 0.5"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 21 at 1"
+    },
+    {
+      "Passed": true,
+      "Name": "Selection/precedence 22"
+    },
+    {
+      "Passed": true,
+      "Name": "Object and direct packet 22"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 22 at 0"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 22 at 0.5"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 22 at 1"
+    },
+    {
+      "Passed": true,
+      "Name": "Selection/precedence 23"
+    },
+    {
+      "Passed": true,
+      "Name": "Object and direct packet 23"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 23 at 0"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 23 at 0.5"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 23 at 1"
+    },
+    {
+      "Passed": true,
+      "Name": "Selection/precedence 24"
+    },
+    {
+      "Passed": true,
+      "Name": "Object and direct packet 24"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 24 at 0"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 24 at 0.5"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 24 at 1"
+    },
+    {
+      "Passed": true,
+      "Name": "Selection/precedence 25"
+    },
+    {
+      "Passed": true,
+      "Name": "Object and direct packet 25"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 25 at 0"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 25 at 0.5"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 25 at 1"
+    },
+    {
+      "Passed": true,
+      "Name": "Selection/precedence 26"
+    },
+    {
+      "Passed": true,
+      "Name": "Object and direct packet 26"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 26 at 0"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 26 at 0.5"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 26 at 1"
+    },
+    {
+      "Passed": true,
+      "Name": "Selection/precedence 27"
+    },
+    {
+      "Passed": true,
+      "Name": "Object and direct packet 27"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 27 at 0"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 27 at 0.5"
+    },
+    {
+      "Passed": true,
+      "Name": "Discrete palette 27 at 1"
+    },
+    {
+      "Passed": true,
+      "Name": "PLAYPAL RGB 0"
+    },
+    {
+      "Passed": true,
+      "Name": "Empty lazy pair table 0"
+    },
+    {
+      "Passed": true,
+      "Name": "All 65,536 Classic pairs 0"
+    },
+    {
+      "Passed": true,
+      "Name": "All color-state pairs 0"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix scene/HUD 0"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix menu/map 0 HUD -1"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix menu/map 0 HUD 12"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt scene/HUD 0"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt menu/map 0 HUD -1"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt menu/map 0 HUD 12"
+    },
+    {
+      "Passed": true,
+      "Name": "PLAYPAL RGB 1"
+    },
+    {
+      "Passed": true,
+      "Name": "Empty lazy pair table 1"
+    },
+    {
+      "Passed": true,
+      "Name": "All 65,536 Classic pairs 1"
+    },
+    {
+      "Passed": true,
+      "Name": "All color-state pairs 1"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix scene/HUD 1"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix menu/map 1 HUD -1"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix menu/map 1 HUD 12"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt scene/HUD 1"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt menu/map 1 HUD -1"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt menu/map 1 HUD 12"
+    },
+    {
+      "Passed": true,
+      "Name": "PLAYPAL RGB 2"
+    },
+    {
+      "Passed": true,
+      "Name": "Empty lazy pair table 2"
+    },
+    {
+      "Passed": true,
+      "Name": "All 65,536 Classic pairs 2"
+    },
+    {
+      "Passed": true,
+      "Name": "All color-state pairs 2"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix scene/HUD 2"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix menu/map 2 HUD -1"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix menu/map 2 HUD 12"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt scene/HUD 2"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt menu/map 2 HUD -1"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt menu/map 2 HUD 12"
+    },
+    {
+      "Passed": true,
+      "Name": "PLAYPAL RGB 3"
+    },
+    {
+      "Passed": true,
+      "Name": "Empty lazy pair table 3"
+    },
+    {
+      "Passed": true,
+      "Name": "All 65,536 Classic pairs 3"
+    },
+    {
+      "Passed": true,
+      "Name": "All color-state pairs 3"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix scene/HUD 3"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix menu/map 3 HUD -1"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix menu/map 3 HUD 12"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt scene/HUD 3"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt menu/map 3 HUD -1"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt menu/map 3 HUD 12"
+    },
+    {
+      "Passed": true,
+      "Name": "PLAYPAL RGB 4"
+    },
+    {
+      "Passed": true,
+      "Name": "Empty lazy pair table 4"
+    },
+    {
+      "Passed": true,
+      "Name": "All 65,536 Classic pairs 4"
+    },
+    {
+      "Passed": true,
+      "Name": "All color-state pairs 4"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix scene/HUD 4"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix menu/map 4 HUD -1"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix menu/map 4 HUD 12"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt scene/HUD 4"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt menu/map 4 HUD -1"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt menu/map 4 HUD 12"
+    },
+    {
+      "Passed": true,
+      "Name": "PLAYPAL RGB 5"
+    },
+    {
+      "Passed": true,
+      "Name": "Empty lazy pair table 5"
+    },
+    {
+      "Passed": true,
+      "Name": "All 65,536 Classic pairs 5"
+    },
+    {
+      "Passed": true,
+      "Name": "All color-state pairs 5"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix scene/HUD 5"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix menu/map 5 HUD -1"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix menu/map 5 HUD 12"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt scene/HUD 5"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt menu/map 5 HUD -1"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt menu/map 5 HUD 12"
+    },
+    {
+      "Passed": true,
+      "Name": "PLAYPAL RGB 6"
+    },
+    {
+      "Passed": true,
+      "Name": "Empty lazy pair table 6"
+    },
+    {
+      "Passed": true,
+      "Name": "All 65,536 Classic pairs 6"
+    },
+    {
+      "Passed": true,
+      "Name": "All color-state pairs 6"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix scene/HUD 6"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix menu/map 6 HUD -1"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix menu/map 6 HUD 12"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt scene/HUD 6"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt menu/map 6 HUD -1"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt menu/map 6 HUD 12"
+    },
+    {
+      "Passed": true,
+      "Name": "PLAYPAL RGB 7"
+    },
+    {
+      "Passed": true,
+      "Name": "Empty lazy pair table 7"
+    },
+    {
+      "Passed": true,
+      "Name": "All 65,536 Classic pairs 7"
+    },
+    {
+      "Passed": true,
+      "Name": "All color-state pairs 7"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix scene/HUD 7"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix menu/map 7 HUD -1"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix menu/map 7 HUD 12"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt scene/HUD 7"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt menu/map 7 HUD -1"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt menu/map 7 HUD 12"
+    },
+    {
+      "Passed": true,
+      "Name": "PLAYPAL RGB 8"
+    },
+    {
+      "Passed": true,
+      "Name": "Empty lazy pair table 8"
+    },
+    {
+      "Passed": true,
+      "Name": "All 65,536 Classic pairs 8"
+    },
+    {
+      "Passed": true,
+      "Name": "All color-state pairs 8"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix scene/HUD 8"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix menu/map 8 HUD -1"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix menu/map 8 HUD 12"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt scene/HUD 8"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt menu/map 8 HUD -1"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt menu/map 8 HUD 12"
+    },
+    {
+      "Passed": true,
+      "Name": "PLAYPAL RGB 9"
+    },
+    {
+      "Passed": true,
+      "Name": "Empty lazy pair table 9"
+    },
+    {
+      "Passed": true,
+      "Name": "All 65,536 Classic pairs 9"
+    },
+    {
+      "Passed": true,
+      "Name": "All color-state pairs 9"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix scene/HUD 9"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix menu/map 9 HUD -1"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix menu/map 9 HUD 12"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt scene/HUD 9"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt menu/map 9 HUD -1"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt menu/map 9 HUD 12"
+    },
+    {
+      "Passed": true,
+      "Name": "PLAYPAL RGB 10"
+    },
+    {
+      "Passed": true,
+      "Name": "Empty lazy pair table 10"
+    },
+    {
+      "Passed": true,
+      "Name": "All 65,536 Classic pairs 10"
+    },
+    {
+      "Passed": true,
+      "Name": "All color-state pairs 10"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix scene/HUD 10"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix menu/map 10 HUD -1"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix menu/map 10 HUD 12"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt scene/HUD 10"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt menu/map 10 HUD -1"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt menu/map 10 HUD 12"
+    },
+    {
+      "Passed": true,
+      "Name": "PLAYPAL RGB 11"
+    },
+    {
+      "Passed": true,
+      "Name": "Empty lazy pair table 11"
+    },
+    {
+      "Passed": true,
+      "Name": "All 65,536 Classic pairs 11"
+    },
+    {
+      "Passed": true,
+      "Name": "All color-state pairs 11"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix scene/HUD 11"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix menu/map 11 HUD -1"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix menu/map 11 HUD 12"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt scene/HUD 11"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt menu/map 11 HUD -1"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt menu/map 11 HUD 12"
+    },
+    {
+      "Passed": true,
+      "Name": "PLAYPAL RGB 12"
+    },
+    {
+      "Passed": true,
+      "Name": "Empty lazy pair table 12"
+    },
+    {
+      "Passed": true,
+      "Name": "All 65,536 Classic pairs 12"
+    },
+    {
+      "Passed": true,
+      "Name": "All color-state pairs 12"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix scene/HUD 12"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix menu/map 12 HUD -1"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix menu/map 12 HUD 12"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt scene/HUD 12"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt menu/map 12 HUD -1"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt menu/map 12 HUD 12"
+    },
+    {
+      "Passed": true,
+      "Name": "PLAYPAL RGB 13"
+    },
+    {
+      "Passed": true,
+      "Name": "Empty lazy pair table 13"
+    },
+    {
+      "Passed": true,
+      "Name": "All 65,536 Classic pairs 13"
+    },
+    {
+      "Passed": true,
+      "Name": "All color-state pairs 13"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix scene/HUD 13"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix menu/map 13 HUD -1"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix menu/map 13 HUD 12"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt scene/HUD 13"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt menu/map 13 HUD -1"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt menu/map 13 HUD 12"
+    }
+  ],
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "Error": null,
+  "BundleSha256": "D57DF4DE73F7C8499436CE60F5F2EB284B833931A679D31A798A020C33339013"
+}

@@ -5,12 +5,13 @@ function ConvertTo-GameSnapshotBytes {
     param($Snapshot)
     $p=$Snapshot.ConsolePlayer;$ns=$Snapshot.Sectors.Count;$nd=$Snapshot.Sides.Count;$na=$Snapshot.Actors.Count;$nw=$p.PlayerSprites.Count
     [double[]]$values=[double[]]::new(48+5*$ns+5*$nd+8*$na+4*$nw)
-    $values[0]=2;$values[1]=$Snapshot.Tic;$values[2]=$Snapshot.Fraction;$values[3]=$ns;$values[4]=$nd;$values[5]=$na;$values[6]=$nw
+    $values[0]=3;$values[1]=$Snapshot.Tic;$values[2]=$Snapshot.Fraction;$values[3]=$ns;$values[4]=$nd;$values[5]=$na;$values[6]=$nw
     $values[8]=$p.Mobj.X;$values[9]=$p.Mobj.Y;$values[10]=$p.Mobj.Angle;$values[11]=$p.ViewZ
     $values[12]=$p.ExtraLight;$values[13]=$p.FixedColorMap;$values[14]=$p.FaceIndex;$values[15]=$p.AmmoType
     # Previously reserved header slot: discrete player-sector light, never interpolated.
     $values[43]=$p.SectorLight
     $values[44]=$p.Invisibility
+    $values[45]=$p.PaletteNumber
     $values[16]=$p.Health;$values[17]=$p.ArmorPoints;$values[18]=$p.Kills;$values[19]=$p.Secrets
     for($i=0;$i -lt 4;$i++){$values[20+$i]=$p.Ammo[$i];$values[24+$i]=$p.MaxAmmo[$i]}
     for($i=0;$i -lt 6;$i++){$values[28+$i]=[int]$p.Cards[$i]}
@@ -31,7 +32,8 @@ function Read-GameSnapshotBytes {
     if($Bytes.Length -lt 384 -or $Bytes.Length%8 -ne 0){throw 'Malformed snapshot byte length.'}
     [double[]]$v=[double[]]::new($Bytes.Length/8);[Buffer]::BlockCopy($Bytes,0,$v,0,$Bytes.Length)
     [int]$ns=$v[3];[int]$nd=$v[4];[int]$na=$v[5];[int]$nw=$v[6]
-    if($v[0] -ne 2 -or $ns -lt 0 -or $nd -lt 0 -or $na -lt 0 -or $nw -lt 0 -or 48L+5L*$ns+5L*$nd+8L*$na+4L*$nw -ne $v.Length){throw 'Malformed snapshot header.'}
+    if($v[0] -ne 3 -or $ns -lt 0 -or $nd -lt 0 -or $na -lt 0 -or $nw -lt 0 -or 48L+5L*$ns+5L*$nd+8L*$na+4L*$nw -ne $v.Length){throw 'Malformed snapshot header.'}
+    if(-not [double]::IsFinite($v[45]) -or $v[45] -lt 0 -or $v[45] -gt 13 -or $v[45] -ne [Math]::Floor($v[45])){throw 'Invalid snapshot palette.'}
     $state=$Previous
     if($null -eq $state) {$state=@{Sectors=@();Sides=@();Actors=@();ConsolePlayer=@{Mobj=@{};Ammo=[int[]]::new(4);MaxAmmo=[int[]]::new(4);Cards=[bool[]]::new(6);WeaponOwned=[bool[]]::new(9);PlayerSprites=@()}}}
     foreach($entry in @(@('Sectors',$ns),@('Sides',$nd),@('Actors',$na))) {
@@ -47,6 +49,7 @@ function Read-GameSnapshotBytes {
     $p.ExtraLight=[int]$v[12];$p.FixedColorMap=[int]$v[13];$p.FaceIndex=[int]$v[14];$p.AmmoType=[int]$v[15]
     $p.SectorLight=[int]$v[43]
     $p.Invisibility=[int]$v[44]
+    $p.PaletteNumber=[int]$v[45]
     $p.Health=[int]$v[16];$p.ArmorPoints=[int]$v[17];$p.Kills=[int]$v[18];$p.Secrets=[int]$v[19]
     for($i=0;$i -lt 4;$i++){$p.Ammo[$i]=$v[20+$i];$p.MaxAmmo[$i]=$v[24+$i]}
     for($i=0;$i -lt 6;$i++){$p.Cards[$i]=$v[28+$i] -ne 0}

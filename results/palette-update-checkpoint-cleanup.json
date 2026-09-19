@@ -1,0 +1,72 @@
+{
+  "CaptureFailures": [
+    {
+      "EncoderExitCode": 0,
+      "Prefix": "palette-classic-first",
+      "Error": "Recorded session transition count differs from the qualified route.",
+      "AudioExitCode": 0
+    },
+    {
+      "EncoderExitCode": -1073741819,
+      "Prefix": "palette-classic-second",
+      "Error": "FFmpeg exited with code -1073741819.",
+      "AudioExitCode": 0
+    },
+    {
+      "EncoderExitCode": -1073741819,
+      "Prefix": "palette-ansiart-third",
+      "Error": "FFmpeg exited with code -1073741819.",
+      "AudioExitCode": 0
+    }
+  ],
+  "VisualReview": "Inspected all ten extracted Classic/Matrix frames: red damage, bonus automap, late berserk, radiation and restored base scene are present. Matrix retains green and strongest damage reduces contrast substantially.",
+  "ImageReceipts": [
+    {
+      "Path": "results/palette-classic-third-review.json",
+      "Sha256": "CF97DABF07E86BBC376E99B5B72DE531CE29DF8D70F9F710DBDCC1E7D681A492"
+    },
+    {
+      "Path": "results/palette-matrix-third-review.json",
+      "Sha256": "F0CAEE2B3BE9EA7D4DF5EC202C36E91F2408308FBD5E7045C2715E0734D229F4"
+    }
+  ],
+  "OwnedResources": [
+    {
+      "OriginalProcessesRemaining": [],
+      "Prefix": "palette-classic-first",
+      "OwnedWindowsRemaining": 0,
+      "RecordingSha256": "C4A9FDFA8AF262EF6BAD589D2893C770B23A676511B1A6D39A7D1A07162F0ED4",
+      "GameSha256": "3C267345C929EFDAF15CC021CF125BF3C5B0973C668DAE164A852D0B5B88939D"
+    },
+    {
+      "OriginalProcessesRemaining": [],
+      "Prefix": "palette-classic-second",
+      "OwnedWindowsRemaining": 0,
+      "RecordingSha256": "67FDDBF5B62664390F3193EF96B1A568116CFBC7DC7498B8BBAB332C6F21E540",
+      "GameSha256": "F9139554C955426D1DDE69739BF99759E0042595EDD8E8FDBBD1E5A6120B5ED6"
+    },
+    {
+      "OriginalProcessesRemaining": [],
+      "Prefix": "palette-classic-third",
+      "OwnedWindowsRemaining": 0,
+      "RecordingSha256": "6E6C2CAC1F894FE6B6FC0ED83B20AC897C1FBB5859FF813C9244161879AB4CEE",
+      "GameSha256": "A85BAA06D9C4F94B4A43588A980BC822D47E10A435A71B685E58DDFA2F8653B4"
+    },
+    {
+      "OriginalProcessesRemaining": [],
+      "Prefix": "palette-matrix-third",
+      "OwnedWindowsRemaining": 0,
+      "RecordingSha256": "1519B6BE52240ACF7631D687E9B10E2745E7B7387449360DF4CD10968D917098",
+      "GameSha256": "3477669E4BC2E2F5752094CF431C8C76F31AA576D2B78D156B481472DCF57CE2"
+    },
+    {
+      "OriginalProcessesRemaining": [],
+      "Prefix": "palette-ansiart-third",
+      "OwnedWindowsRemaining": 0,
+      "RecordingSha256": "2CBAC3ADF8E8EA46E674B0E796E87D8640DBFA92B4673E89311A04F11C7330BA",
+      "GameSha256": "31C169F00253EDFC75234685B1CD6367F967B6525ACAA7DA01C8A5CF67BF9004"
+    }
+  ],
+  "Passed": true,
+  "ActiveProjectRuntimes": 0
+}

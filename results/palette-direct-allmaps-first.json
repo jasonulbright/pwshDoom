@@ -1,0 +1,1411 @@
+{
+  "ByteComparisons": 336,
+  "ReplayVerification": {
+    "Matched": true,
+    "Mismatches": [],
+    "Checked": 13,
+    "Meaning": "Compared available recorded checkpoints through the consumed prefix. This samples selected state and render data, not every hidden game field."
+  },
+  "ObjectMs": {
+    "Count": 168,
+    "Mean": 9.32161369047619,
+    "Median": 8.39915,
+    "P95": 15.8863,
+    "Max": 78.8692
+  },
+  "Transitions": [
+    {
+      "Command": 0,
+      "State": "Level:1:2"
+    },
+    {
+      "Command": 3046,
+      "State": "Intermission:1:2"
+    },
+    {
+      "Command": 3162,
+      "State": "Level:1:3"
+    }
+  ],
+  "AllMaps": true,
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "Samples": [
+    {
+      "Sha256": "7400AF34C129D133ADBA9D48618FA195488516863ACFC29A3D383731993B14E9",
+      "Bytes": 36400,
+      "Label": "E1M1 initial",
+      "DirectMilliseconds": 29.5452,
+      "ObjectMilliseconds": 78.8692,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "9EC3CF1630BD0E49777155A8714E85A6B3AEC5DEB55F2C1DC980F1354B8A655F",
+      "Bytes": 36400,
+      "Label": "E1M1 35 idle tics",
+      "DirectMilliseconds": 3.3155,
+      "ObjectMilliseconds": 6.6358,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "53A847E7D305D971C54305EFE5B30CE9AC753C90F66F78B9900010D7DC6F0A4E",
+      "Bytes": 74072,
+      "Label": "E1M2 initial",
+      "DirectMilliseconds": 4.9603,
+      "ObjectMilliseconds": 11.6911,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "2D33A18E7A4E4E814922C47D55FFE7C22473ABA3784C8E897ABE1E67B09FE875",
+      "Bytes": 74072,
+      "Label": "E1M2 35 idle tics",
+      "DirectMilliseconds": 7.7713,
+      "ObjectMilliseconds": 11.8406,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "43BE3E2F2BFE4158F40F8B60303DB3EDB49A65E6C820061C5707DECEEA6CE1F1",
+      "Bytes": 80312,
+      "Label": "E1M3 initial",
+      "DirectMilliseconds": 7.933,
+      "ObjectMilliseconds": 16.0541,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "C467A6F8C5A5A6E7B682F6852526A72BDA58C5B56212C7DAEFBCBCD2E0DDCC6C",
+      "Bytes": 80312,
+      "Label": "E1M3 35 idle tics",
+      "DirectMilliseconds": 6.8926,
+      "ObjectMilliseconds": 13.1602,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "88C21776F02C8FB608F40FE194D90029373AAFFC1DB08C2F349DB87DD2FA5ED1",
+      "Bytes": 60936,
+      "Label": "E1M4 initial",
+      "DirectMilliseconds": 5.3686,
+      "ObjectMilliseconds": 11.6508,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "6950E9480A59C1FC97F12BCE3EFCCE765A8FAC11E3D7FFAC26A49D0FE147E106",
+      "Bytes": 60936,
+      "Label": "E1M4 35 idle tics",
+      "DirectMilliseconds": 5.499,
+      "ObjectMilliseconds": 9.9906,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "94445EFA0ED4C4EDAA0D908CA60B1B65ACF2FE73ED59D5C69DEF8464494BF7AF",
+      "Bytes": 62016,
+      "Label": "E1M5 initial",
+      "DirectMilliseconds": 5.7848,
+      "ObjectMilliseconds": 10.4347,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "F08E09858D5970AA19A3B6F536C3630C20C056ABCB8C3D647E92B9564175A39B",
+      "Bytes": 62016,
+      "Label": "E1M5 35 idle tics",
+      "DirectMilliseconds": 4.7226,
+      "ObjectMilliseconds": 7.5019,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "6BD82A77D9523FCB89E340B9825D4E4DE998ACEEFFEA67402541C0730D21640B",
+      "Bytes": 103112,
+      "Label": "E1M6 initial",
+      "DirectMilliseconds": 8.4703,
+      "ObjectMilliseconds": 12.4961,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "02E8B7993F4B4FB412721332F45B493515773CDC043BD2EC76B652F4D91CEAC5",
+      "Bytes": 103112,
+      "Label": "E1M6 35 idle tics",
+      "DirectMilliseconds": 7.3278,
+      "ObjectMilliseconds": 12.4835,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "D6205CFA390C668480071976EF55A52FB273AE9B8219352DBF5A390213031428",
+      "Bytes": 73160,
+      "Label": "E1M7 initial",
+      "DirectMilliseconds": 7.0433,
+      "ObjectMilliseconds": 9.3501,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "252FFC7429BB833C11A9A990EA69BDDCC4DC92C0A1CB2BF5AEA7E20D026D1773",
+      "Bytes": 73160,
+      "Label": "E1M7 35 idle tics",
+      "DirectMilliseconds": 5.3804,
+      "ObjectMilliseconds": 8.9193,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "873A70BCF763F724516B90B4B10A19C846BFA5B1EF8D0D4B22FEAD40D431AADF",
+      "Bytes": 30088,
+      "Label": "E1M8 initial",
+      "DirectMilliseconds": 2.0772,
+      "ObjectMilliseconds": 3.6393,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "603125C3F62F4476319CA151BDFB9F1F09223B20A860E95D2CF67433B228457B",
+      "Bytes": 30088,
+      "Label": "E1M8 35 idle tics",
+      "DirectMilliseconds": 2.1651,
+      "ObjectMilliseconds": 3.5708,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "5877BB39E81BDBA25B74C413AE0D51D8BF6733323C778E9491F4BDF6A2D74A55",
+      "Bytes": 54600,
+      "Label": "E1M9 initial",
+      "DirectMilliseconds": 4.1501,
+      "ObjectMilliseconds": 7.8105,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "FE120C15B679D66812005BC2730D0BA988F4C4E75C502147390D812F0C7E76DD",
+      "Bytes": 54600,
+      "Label": "E1M9 35 idle tics",
+      "DirectMilliseconds": 3.8578,
+      "ObjectMilliseconds": 6.7428,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "696E6570BA4F451EB736B083BF8986AC7B931D0FDC670EA029931E90C1D63646",
+      "Bytes": 32432,
+      "Label": "E2M1 initial",
+      "DirectMilliseconds": 2.1442,
+      "ObjectMilliseconds": 4.3404,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "6597113EE7B20329639440A548555783E232E1C43BEE0F1F71E89F0A5E95C83D",
+      "Bytes": 32432,
+      "Label": "E2M1 35 idle tics",
+      "DirectMilliseconds": 2.1623,
+      "ObjectMilliseconds": 3.6528,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "E840BFFFA517B5834555516FA45E04C971F548FD596E97F4D41BFF81B0606075",
+      "Bytes": 109896,
+      "Label": "E2M2 initial",
+      "DirectMilliseconds": 6.978,
+      "ObjectMilliseconds": 15.2849,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "89FE499A5DA1DF4D561F3542B46206D27BE57A8862B2A9ACD132F727DBA031BB",
+      "Bytes": 109896,
+      "Label": "E2M2 35 idle tics",
+      "DirectMilliseconds": 6.5281,
+      "ObjectMilliseconds": 13.9095,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "39BFF5A0FB50C5E7A63E6BDEEECE14930BBE71F90835F5E852AF4A1D09BF906C",
+      "Bytes": 63880,
+      "Label": "E2M3 initial",
+      "DirectMilliseconds": 5.6085,
+      "ObjectMilliseconds": 8.8793,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "ABDC09AC3FFEDBFC4A32DFFC4AF58769A1944D9123B6ADA399AFBDE4D23D0E79",
+      "Bytes": 63880,
+      "Label": "E2M3 35 idle tics",
+      "DirectMilliseconds": 4.089,
+      "ObjectMilliseconds": 7.6402,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "5710D2F0D501CF266B7B51806DE2C93AD817F054B2A4E705E831E02331615EC1",
+      "Bytes": 80576,
+      "Label": "E2M4 initial",
+      "DirectMilliseconds": 4.6309,
+      "ObjectMilliseconds": 8.6395,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "C8FD98D692CC4315A4D9795D5CAD51EB1BDDAFB72EA89E115A8F2FE9EFD969FC",
+      "Bytes": 80576,
+      "Label": "E2M4 35 idle tics",
+      "DirectMilliseconds": 5.9379,
+      "ObjectMilliseconds": 11.2663,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "4FDD8FD3EFAC1D7C82BCCBFF3C242D38EA5DBF6DA6CF6AD905FAC891B0EBC5A5",
+      "Bytes": 96184,
+      "Label": "E2M5 initial",
+      "DirectMilliseconds": 5.6031,
+      "ObjectMilliseconds": 9.8454,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "D1A657C5833B617BE7B0AA8E362A496E00B236B8C75D431064DC8F98A6B14876",
+      "Bytes": 95992,
+      "Label": "E2M5 35 idle tics",
+      "DirectMilliseconds": 6.0241,
+      "ObjectMilliseconds": 10.0661,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "F44C6D825F9E77231D671A1BA444F3D5AF08725F97EFF4A1D6A81F287EC6A122",
+      "Bytes": 77576,
+      "Label": "E2M6 initial",
+      "DirectMilliseconds": 5.6479,
+      "ObjectMilliseconds": 10.4824,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "05DCDA2B0B33BC8AAE25C6FFA8D86AF94E70726904C7B6DF06B055EC571EE931",
+      "Bytes": 77576,
+      "Label": "E2M6 35 idle tics",
+      "DirectMilliseconds": 5.3231,
+      "ObjectMilliseconds": 9.0409,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "F31D52FDF88B933844E53BC86AFFE02ACDF768BDFA1715B49EECBCC25F7837B4",
+      "Bytes": 116280,
+      "Label": "E2M7 initial",
+      "DirectMilliseconds": 7.0607,
+      "ObjectMilliseconds": 15.8863,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "36490FE246EF0B8A357089EEC0AD28BA38F228FAC1DBC946832F49A8291496BD",
+      "Bytes": 116280,
+      "Label": "E2M7 35 idle tics",
+      "DirectMilliseconds": 6.4574,
+      "ObjectMilliseconds": 11.1636,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "BF961D599FE9E076CCB1A0A4BA434B9CD79ADF5E1A6D53061B20EF25885D25A1",
+      "Bytes": 15112,
+      "Label": "E2M8 initial",
+      "DirectMilliseconds": 1.3754,
+      "ObjectMilliseconds": 2.0817,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "25D0BF869A1BFBA94427FEFA5C57A5C87D0117BCB9B2D6F6920AF5F77242470C",
+      "Bytes": 15112,
+      "Label": "E2M8 35 idle tics",
+      "DirectMilliseconds": 1.5291,
+      "ObjectMilliseconds": 2.0134,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "26C03FB8AFA0A59CAF94886BCCF97CBCB45F0C8C4DA321E6A49FB18BA83B5A96",
+      "Bytes": 11656,
+      "Label": "E2M9 initial",
+      "DirectMilliseconds": 1.423,
+      "ObjectMilliseconds": 2.058,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "CB8F93D0508224007EB74C9E8F755A6B3F5645D2D7451C7031A339E003ABAFC4",
+      "Bytes": 11656,
+      "Label": "E2M9 35 idle tics",
+      "DirectMilliseconds": 1.0454,
+      "ObjectMilliseconds": 1.8592,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "0726622A27849B2C66B54931D5DA818D017A2274422DD30794E7611315C54688",
+      "Bytes": 17416,
+      "Label": "E3M1 initial",
+      "DirectMilliseconds": 1.5125,
+      "ObjectMilliseconds": 2.5378,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "95AA9C753DBA7DAC555258FE88417195ED04E4779C72F538624E497E22024759",
+      "Bytes": 17416,
+      "Label": "E3M1 35 idle tics",
+      "DirectMilliseconds": 1.5544,
+      "ObjectMilliseconds": 2.4902,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "FD14D9A4D70D8B43039FDD898FBF2F25F1D5D136129771177C2EC73260335F44",
+      "Bytes": 39400,
+      "Label": "E3M2 initial",
+      "DirectMilliseconds": 3.4957,
+      "ObjectMilliseconds": 5.7867,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "B38BDD8B8592ECA135BE9E1C5EBF56464C31450376CB55E0B734B2A7F7949706",
+      "Bytes": 39400,
+      "Label": "E3M2 35 idle tics",
+      "DirectMilliseconds": 3.5328,
+      "ObjectMilliseconds": 5.7209,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "2BF64AB8FB0E654AD22C6EAA6A88BA4770A352D23F6E9D04E4F806C3359B034D",
+      "Bytes": 74352,
+      "Label": "E3M3 initial",
+      "DirectMilliseconds": 3.5095,
+      "ObjectMilliseconds": 6.9593,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "2D38B1234EBD6903F74D7A007D25B5432D5DBEC3D54F7145263F4B5E2DC0F36D",
+      "Bytes": 74352,
+      "Label": "E3M3 35 idle tics",
+      "DirectMilliseconds": 3.5341,
+      "ObjectMilliseconds": 6.2893,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "8C0C0726064FAF49C287332C1177FA54ECB53DD1652D1732C16C061A72174B98",
+      "Bytes": 81624,
+      "Label": "E3M4 initial",
+      "DirectMilliseconds": 7.5652,
+      "ObjectMilliseconds": 16.0128,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "ECDA29BAF998DFFB624641E40778108D493BA2FF61205814ED67FDEFAA7EFB73",
+      "Bytes": 81624,
+      "Label": "E3M4 35 idle tics",
+      "DirectMilliseconds": 5.8903,
+      "ObjectMilliseconds": 10.8949,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "B8DBFE290BFB838F0EFA9D267BCA811A8CF14FEE535E912316F0978885D3AABD",
+      "Bytes": 100592,
+      "Label": "E3M5 initial",
+      "DirectMilliseconds": 4.9789,
+      "ObjectMilliseconds": 9.7581,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "A4E24D655FEE753BC86B34E4AD735AAD825A575219366E11E2CA0B7090B89823",
+      "Bytes": 100592,
+      "Label": "E3M5 35 idle tics",
+      "DirectMilliseconds": 5.0515,
+      "ObjectMilliseconds": 10.3658,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "CE63BAC47B5B97A0F3CD08DEB38437A64FF7A056E161F602EDEA874DB80D3CA0",
+      "Bytes": 61296,
+      "Label": "E3M6 initial",
+      "DirectMilliseconds": 6.2113,
+      "ObjectMilliseconds": 8.9914,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "E33847C72186B08F11F4E71D9250821C7A00DA6CFD9965B84B9A795F2F50BEF5",
+      "Bytes": 61296,
+      "Label": "E3M6 35 idle tics",
+      "DirectMilliseconds": 5.4397,
+      "ObjectMilliseconds": 9.0046,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "D7D5D153BA58B32EE08256A2B8ED9F94709B1874CFFD6103F7907D8A7B8FD96A",
+      "Bytes": 64936,
+      "Label": "E3M7 initial",
+      "DirectMilliseconds": 2.7097,
+      "ObjectMilliseconds": 5.0745,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "302BA4B8B9A6DE202F086350645C2BE45134A0AEDD8435348F041886EB62B380",
+      "Bytes": 64936,
+      "Label": "E3M7 35 idle tics",
+      "DirectMilliseconds": 2.7134,
+      "ObjectMilliseconds": 5.6589,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "15D12325C20D4F2E1955E8111C3731A5E4DD6B5095EE782AF05B241A77F4F6AA",
+      "Bytes": 10000,
+      "Label": "E3M8 initial",
+      "DirectMilliseconds": 0.7327,
+      "ObjectMilliseconds": 2.26,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "C1B999E1A6C84D37B53A613E73809B1BE4463ED40C2DCBA3FF0E593D28356483",
+      "Bytes": 10000,
+      "Label": "E3M8 35 idle tics",
+      "DirectMilliseconds": 0.8013,
+      "ObjectMilliseconds": 1.2879,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "036E51BF57F02A42888BDE8B43A90BDD3F48F24D355E93FA98231F6D401B32C6",
+      "Bytes": 38016,
+      "Label": "E3M9 initial",
+      "DirectMilliseconds": 3.4082,
+      "ObjectMilliseconds": 5.794,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "5AE0CA2CE85289FDD3934D9E0A6854345C0D1A67FB84F67D1DCE6C82CA6361F0",
+      "Bytes": 38016,
+      "Label": "E3M9 35 idle tics",
+      "DirectMilliseconds": 3.5123,
+      "ObjectMilliseconds": 5.7109,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "E9E4020150F87EF31D389712FCB10EDFA8EDE70F9D906F96B86AB79E513978AB",
+      "Bytes": 36888,
+      "Label": "E4M1 initial",
+      "DirectMilliseconds": 2.4871,
+      "ObjectMilliseconds": 5.017,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "53D2A513F598B6DAD5EB3B021E05B71E3B4D07C0ACEB5D00143C42392B8661DE",
+      "Bytes": 36888,
+      "Label": "E4M1 35 idle tics",
+      "DirectMilliseconds": 3.2489,
+      "ObjectMilliseconds": 4.2597,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "DADAC7724072B6E847AD11FADAFE8676609E5F6019C28D34DE4BE212801C9D2D",
+      "Bytes": 58144,
+      "Label": "E4M2 initial",
+      "DirectMilliseconds": 3.9203,
+      "ObjectMilliseconds": 6.7215,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "0BBF9C7D418FC9E510CDCE0BAD2DC638686D6B82098EC390765FEED6B2D60BA0",
+      "Bytes": 58144,
+      "Label": "E4M2 35 idle tics",
+      "DirectMilliseconds": 3.9912,
+      "ObjectMilliseconds": 6.7395,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "D92C13B1F684A405FFECDD4C5D04E4A6388E1D70C8B58883F9D7F87D590A17FA",
+      "Bytes": 71808,
+      "Label": "E4M3 initial",
+      "DirectMilliseconds": 5.0938,
+      "ObjectMilliseconds": 8.6642,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "8808ABCA3B41C222F8C8BB6A82DF26D73079BC852C773CA1A5D7626E6B0FE8DD",
+      "Bytes": 71808,
+      "Label": "E4M3 35 idle tics",
+      "DirectMilliseconds": 5.1243,
+      "ObjectMilliseconds": 10.2715,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "3A7EA46D7E4253A3C0D1C4935062771B69026555FD131A828C8547A21489AB7D",
+      "Bytes": 48800,
+      "Label": "E4M4 initial",
+      "DirectMilliseconds": 2.1874,
+      "ObjectMilliseconds": 4.0298,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "528D925BA954FF7ACF2F30BD4655DEC45D054CFA4337C25B0001156B5439F860",
+      "Bytes": 48800,
+      "Label": "E4M4 35 idle tics",
+      "DirectMilliseconds": 2.3029,
+      "ObjectMilliseconds": 5.3003,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "4949AB8ECB6878EF33AFDE77C5E073D3708D0352BE3211EEE0B3D705927548A0",
+      "Bytes": 90648,
+      "Label": "E4M5 initial",
+      "DirectMilliseconds": 4.8433,
+      "ObjectMilliseconds": 8.5818,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "1F447FE555CD23D0EDF83AF247B37891E1F71C29FA1BE3B33FD7A7D413A2A19E",
+      "Bytes": 90648,
+      "Label": "E4M5 35 idle tics",
+      "DirectMilliseconds": 5.6843,
+      "ObjectMilliseconds": 8.5097,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "44B2BEA5308A2C1C1EE6DF5D7DDEA8A5BD416C8854287BEF86181B7644DDDE1A",
+      "Bytes": 104920,
+      "Label": "E4M6 initial",
+      "DirectMilliseconds": 5.5772,
+      "ObjectMilliseconds": 11.312,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "36005D861A6772BD4270031EDBC4F93959AFF0E05A9DC495621B8256E4EA7AF8",
+      "Bytes": 104920,
+      "Label": "E4M6 35 idle tics",
+      "DirectMilliseconds": 5.5126,
+      "ObjectMilliseconds": 10.5557,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "F33A94502AB8D84B25B89513EDC92A38684BF6339A71343920470CA4516F82BB",
+      "Bytes": 104488,
+      "Label": "E4M7 initial",
+      "DirectMilliseconds": 4.4254,
+      "ObjectMilliseconds": 9.8735,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "754DBBB7959337D70918B71A98DC331F37D4A2FF267EB3D1E283D35D073B334D",
+      "Bytes": 104488,
+      "Label": "E4M7 35 idle tics",
+      "DirectMilliseconds": 4.5814,
+      "ObjectMilliseconds": 8.475,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "78C6A5221288852FFF0B0E197055760D4F53AD6F722CD9343541DF4AB681EDED",
+      "Bytes": 101336,
+      "Label": "E4M8 initial",
+      "DirectMilliseconds": 5.0916,
+      "ObjectMilliseconds": 9.0935,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "F10AC16EC6B41D641E54EE168C7C354964CB6310B185B2984E7635754734D00A",
+      "Bytes": 101336,
+      "Label": "E4M8 35 idle tics",
+      "DirectMilliseconds": 5.2116,
+      "ObjectMilliseconds": 9.0112,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "0FE0D7969A07D3E708A56D9E432D5FB6DC314D91755F9DBC8303B55C2FE3A99C",
+      "Bytes": 120200,
+      "Label": "E4M9 initial",
+      "DirectMilliseconds": 4.4778,
+      "ObjectMilliseconds": 12.4326,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "56983F033660E7FCEF53C0984DE48F26B9542EF2BBEDC6B36F9D9566D3C290CF",
+      "Bytes": 120200,
+      "Label": "E4M9 35 idle tics",
+      "DirectMilliseconds": 4.8223,
+      "ObjectMilliseconds": 8.3264,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "53A847E7D305D971C54305EFE5B30CE9AC753C90F66F78B9900010D7DC6F0A4E",
+      "Bytes": 74072,
+      "Label": "Replay command 0 Level:1:2",
+      "DirectMilliseconds": 5.6002,
+      "ObjectMilliseconds": 8.8337,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "FF9D365F2BE3ECDA0C4090724AFDCB39E0130CFC7021B12F489EECACFA81B709",
+      "Bytes": 74072,
+      "Label": "Replay command 35 Level:1:2",
+      "DirectMilliseconds": 5.6719,
+      "ObjectMilliseconds": 9.605,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "0FD4F09ABAAA54A745477374FEC10AB651652E5EDD083C0D511022CE8759F15B",
+      "Bytes": 74072,
+      "Label": "Replay command 70 Level:1:2",
+      "DirectMilliseconds": 4.1328,
+      "ObjectMilliseconds": 7.3133,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "663911FB468185EDB0487D0AC7BEDF2F38D25FA00D8952B1E1E6122D3C425FC5",
+      "Bytes": 74072,
+      "Label": "Replay command 105 Level:1:2",
+      "DirectMilliseconds": 4.1944,
+      "ObjectMilliseconds": 7.2272,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "B09398CB4CD6AC468252B7CEAA21AA088D662406661A7F7C4A50CE9D0AA8BB0E",
+      "Bytes": 74072,
+      "Label": "Replay command 140 Level:1:2",
+      "DirectMilliseconds": 4.1626,
+      "ObjectMilliseconds": 8.7754,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "C6502405073719C12E36BD0273756207C257281D26C00E37497E539F0DE7583F",
+      "Bytes": 74072,
+      "Label": "Replay command 175 Level:1:2",
+      "DirectMilliseconds": 4.2004,
+      "ObjectMilliseconds": 7.2563,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "64E36FA38C2788560B9BC69B62DC6BC63D9C55D91163345AE03DEFA0553352BF",
+      "Bytes": 74072,
+      "Label": "Replay command 210 Level:1:2",
+      "DirectMilliseconds": 4.7273,
+      "ObjectMilliseconds": 7.321,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "94E7F57ABDD12DC9CB6A78785C316AE074F62F30AE0CB3E2CA1D6E9D6B5C5E17",
+      "Bytes": 74072,
+      "Label": "Replay command 245 Level:1:2",
+      "DirectMilliseconds": 4.2524,
+      "ObjectMilliseconds": 7.2274,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "EB7B556A8262DEEC0D2D127001AEAE60835357EC459B401DB8D39192EC9E0983",
+      "Bytes": 74072,
+      "Label": "Replay command 280 Level:1:2",
+      "DirectMilliseconds": 4.8888,
+      "ObjectMilliseconds": 7.3365,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "CAF9E926C1068A3FA16029BB31B24741970996261E1A88D15A0617616C2A897C",
+      "Bytes": 74008,
+      "Label": "Replay command 315 Level:1:2",
+      "DirectMilliseconds": 4.9273,
+      "ObjectMilliseconds": 7.2118,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "FB4C50166D1863CD2B82ECDA0D61391B04A6792D2E0C1B9A2BE0CE55559483A5",
+      "Bytes": 74008,
+      "Label": "Replay command 350 Level:1:2",
+      "DirectMilliseconds": 4.133,
+      "ObjectMilliseconds": 7.3621,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "2FF264767F17BBC5489B12368F5E55438DDE11B093B9BF161E536617B74FA0DA",
+      "Bytes": 74008,
+      "Label": "Replay command 385 Level:1:2",
+      "DirectMilliseconds": 4.5782,
+      "ObjectMilliseconds": 7.1722,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "881B2E612D0CB98001D73822C93462A8BBFBEC8ECECE4FA09CE7444547A50693",
+      "Bytes": 74008,
+      "Label": "Replay command 420 Level:1:2",
+      "DirectMilliseconds": 4.1369,
+      "ObjectMilliseconds": 7.1986,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "AFB3029F187BFFECA3A1D3C70F7DD2DCD2EF05CB3B209CDC221919D60AB0894D",
+      "Bytes": 74008,
+      "Label": "Replay command 455 Level:1:2",
+      "DirectMilliseconds": 4.1548,
+      "ObjectMilliseconds": 7.1492,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "DD41D6C78B141E1BE614A0B55AF720B31B1EB18CFB94DE2C351E9E7C0A0EBA19",
+      "Bytes": 74456,
+      "Label": "Replay command 490 Level:1:2",
+      "DirectMilliseconds": 4.2231,
+      "ObjectMilliseconds": 8.3022,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "D9952382A0A5EB0F47CFFEB15B9E54A054C90BBA65D894CBFBD5411A41CF578F",
+      "Bytes": 74616,
+      "Label": "Replay command 525 Level:1:2",
+      "DirectMilliseconds": 4.2902,
+      "ObjectMilliseconds": 7.4208,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "28B721BEE5E3A988696D081D21E9EEB7DC1A2FE4A52C8593E450DEA0ED35AC2B",
+      "Bytes": 74136,
+      "Label": "Replay command 560 Level:1:2",
+      "DirectMilliseconds": 4.0508,
+      "ObjectMilliseconds": 7.295,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "5954FEE2DBDADDBC6EB05F690A110457559C386469D4341BFB21301E06BA3129",
+      "Bytes": 74072,
+      "Label": "Replay command 595 Level:1:2",
+      "DirectMilliseconds": 4.1156,
+      "ObjectMilliseconds": 8.3922,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "8920FCA00F89C548518B4D6C9E1759DDB48DA7279C3D4A1925D727485AC07279",
+      "Bytes": 74072,
+      "Label": "Replay command 630 Level:1:2",
+      "DirectMilliseconds": 4.065,
+      "ObjectMilliseconds": 7.3095,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "E753258CC07E461CBDB72AC4D3D24D1D2F25277CD911EB51225347AD37414A5B",
+      "Bytes": 74072,
+      "Label": "Replay command 665 Level:1:2",
+      "DirectMilliseconds": 4.1289,
+      "ObjectMilliseconds": 7.1901,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "B918AAC49E97022BD693D1974F3D211A648A7CFEBF3D1770FF5F6BF3256C3C32",
+      "Bytes": 74520,
+      "Label": "Replay command 700 Level:1:2",
+      "DirectMilliseconds": 4.2104,
+      "ObjectMilliseconds": 7.5111,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "4E231D4FA45B8636DE2905059D6F81569C50B7518C1C41B102CE045CAB8276A1",
+      "Bytes": 74072,
+      "Label": "Replay command 735 Level:1:2",
+      "DirectMilliseconds": 4.1154,
+      "ObjectMilliseconds": 7.2329,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "191CA9E6810C11FA71CC22CCC2D9733A7F3D750F72C1AE6CE3330016562116B0",
+      "Bytes": 74072,
+      "Label": "Replay command 770 Level:1:2",
+      "DirectMilliseconds": 4.0852,
+      "ObjectMilliseconds": 8.4113,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "A8B2BA65EC988ACAD13C064E27B7F6F37ADE85A4C9C33F30943E9FD8A6860A85",
+      "Bytes": 74008,
+      "Label": "Replay command 805 Level:1:2",
+      "DirectMilliseconds": 4.1088,
+      "ObjectMilliseconds": 7.3003,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "CD29E8EC632D0D2029DD0EB392208334146714DFB8B8818D450B2435A88E9626",
+      "Bytes": 74008,
+      "Label": "Replay command 840 Level:1:2",
+      "DirectMilliseconds": 4.0647,
+      "ObjectMilliseconds": 7.2972,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "2CE4811B76947A1B022E4C41B985462389AE216B54F245E48DF5450BC0E2AF1B",
+      "Bytes": 74008,
+      "Label": "Replay command 875 Level:1:2",
+      "DirectMilliseconds": 4.8182,
+      "ObjectMilliseconds": 7.2601,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "2152DA1755E7153DE483BCA9ED0C7C51A3D7B301F0C4276430D9644C3CCB8657",
+      "Bytes": 74136,
+      "Label": "Replay command 910 Level:1:2",
+      "DirectMilliseconds": 4.8426,
+      "ObjectMilliseconds": 7.4303,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "FF555A44AFA2FA3E32F513E7169EDFAF3457E1B2DEE5FCABEC959D0DB3EF7E74",
+      "Bytes": 74200,
+      "Label": "Replay command 945 Level:1:2",
+      "DirectMilliseconds": 4.1506,
+      "ObjectMilliseconds": 7.2557,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "67CA7F70E5C4D318D26CCE629F7B92C61C65D21FD382C3DEAC7E72A72916E766",
+      "Bytes": 74264,
+      "Label": "Replay command 980 Level:1:2",
+      "DirectMilliseconds": 4.1135,
+      "ObjectMilliseconds": 7.3632,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "3389D138571CE0E49CE60200367F34A36417A12D874BA480F3D1063942ED8B3C",
+      "Bytes": 74136,
+      "Label": "Replay command 1015 Level:1:2",
+      "DirectMilliseconds": 4.7355,
+      "ObjectMilliseconds": 7.3203,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "4197CCFEBA2CE2A3E663A221CD6AE3A5889E50DECE995EEA065210F65916F3FC",
+      "Bytes": 74136,
+      "Label": "Replay command 1050 Level:1:2",
+      "DirectMilliseconds": 4.4812,
+      "ObjectMilliseconds": 7.2844,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "DC626E526335C402FF79FFFC0C1ECCE457E16CEF3F05F0296DC2679EAF25E48F",
+      "Bytes": 74072,
+      "Label": "Replay command 1085 Level:1:2",
+      "DirectMilliseconds": 4.0999,
+      "ObjectMilliseconds": 7.624,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "DD493F310474E579F94B81D65ACCD726B969E70202A416EBD922B6040A02A067",
+      "Bytes": 74072,
+      "Label": "Replay command 1120 Level:1:2",
+      "DirectMilliseconds": 4.0641,
+      "ObjectMilliseconds": 8.1447,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "163B362D51F893EDFAE5C906F620D8990E33618B55A149F16C3D690B36F569A4",
+      "Bytes": 74072,
+      "Label": "Replay command 1155 Level:1:2",
+      "DirectMilliseconds": 4.1375,
+      "ObjectMilliseconds": 8.0592,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "1DD0DE5B4A11DC435AC790C54C95BFFE0C1E03387B29305969151D35BCBD9663",
+      "Bytes": 74072,
+      "Label": "Replay command 1190 Level:1:2",
+      "DirectMilliseconds": 4.0904,
+      "ObjectMilliseconds": 8.333,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "72F5F9589111FCD65CAABC51B28754F32FFE127363740FB2CFD3EFB72C308A80",
+      "Bytes": 74072,
+      "Label": "Replay command 1225 Level:1:2",
+      "DirectMilliseconds": 4.1403,
+      "ObjectMilliseconds": 7.192,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "1910B66F31DFB94335B02924B6E26728DA037259FA659B6F09E792590AAB82B0",
+      "Bytes": 74072,
+      "Label": "Replay command 1260 Level:1:2",
+      "DirectMilliseconds": 4.0749,
+      "ObjectMilliseconds": 7.8762,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "37F5B0467D56FDE7B3462F215ED3EE0AF4BD7BEA3FA1FCA71F4AE561B04F714E",
+      "Bytes": 74136,
+      "Label": "Replay command 1295 Level:1:2",
+      "DirectMilliseconds": 4.1401,
+      "ObjectMilliseconds": 8.2674,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "81944CEAD61D8BF97159FEEC9BB6871AD6BF3CD8907FB62875B424D0DA98A965",
+      "Bytes": 74136,
+      "Label": "Replay command 1330 Level:1:2",
+      "DirectMilliseconds": 4.1088,
+      "ObjectMilliseconds": 7.438,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "C9DC745E4B03306503E07755DDB9DA9ACDE221A615F38EBEB23640730054F518",
+      "Bytes": 74072,
+      "Label": "Replay command 1365 Level:1:2",
+      "DirectMilliseconds": 4.1234,
+      "ObjectMilliseconds": 7.2681,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "19636A54A02D7F33D22C8A986369CFBCB9AB3E8B31521C14758C16068702E697",
+      "Bytes": 74072,
+      "Label": "Replay command 1400 Level:1:2",
+      "DirectMilliseconds": 4.1019,
+      "ObjectMilliseconds": 7.3076,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "A359C9DC1193F319030223B9930BD5AA6F082F0229FEE1FFB167AECE924617E1",
+      "Bytes": 74136,
+      "Label": "Replay command 1435 Level:1:2",
+      "DirectMilliseconds": 4.1404,
+      "ObjectMilliseconds": 8.4061,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "E5E4E9D2BB3ADFC81334ACBBBFF6D4244C410B98C6CFB1DB702B7B3EB6FD8F61",
+      "Bytes": 74072,
+      "Label": "Replay command 1470 Level:1:2",
+      "DirectMilliseconds": 4.0686,
+      "ObjectMilliseconds": 7.3414,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "F4FF67C1F99B316EFC717C9883916C225F2434FC1F86F9F3898FB110961E8037",
+      "Bytes": 74072,
+      "Label": "Replay command 1505 Level:1:2",
+      "DirectMilliseconds": 4.1096,
+      "ObjectMilliseconds": 8.1888,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "521647240EA8F5C7CC50D55D3B6C65E8F73E53743B810518FC531E9AE6CE8B77",
+      "Bytes": 74168,
+      "Label": "Replay command 1540 Level:1:2",
+      "DirectMilliseconds": 4.1138,
+      "ObjectMilliseconds": 7.3232,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "BB1588745F029A14E18A6C4046287C31D8547D2AA5C135FB5915EC4E22A1C5E6",
+      "Bytes": 74200,
+      "Label": "Replay command 1575 Level:1:2",
+      "DirectMilliseconds": 5.1261,
+      "ObjectMilliseconds": 7.3343,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "6CC3038F8C6173D6332CFD6CBAB40DB35BC62CF881BE7A96A834DF6225C49579",
+      "Bytes": 74136,
+      "Label": "Replay command 1610 Level:1:2",
+      "DirectMilliseconds": 4.1031,
+      "ObjectMilliseconds": 9.2582,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "90137644E9BE3FFF953712C166452DD478582F711BB033A8F9B997D68DCEDF1C",
+      "Bytes": 74136,
+      "Label": "Replay command 1645 Level:1:2",
+      "DirectMilliseconds": 4.1174,
+      "ObjectMilliseconds": 7.9873,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "479008EB4FBA76ECB9E4E74C1F6F1C17C7C7A5C449BF4201A28D71A2727CAF72",
+      "Bytes": 74136,
+      "Label": "Replay command 1680 Level:1:2",
+      "DirectMilliseconds": 4.0589,
+      "ObjectMilliseconds": 7.2652,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "D50E998047FBE91F2AA8DA3A619F318816C692FAC50E06EAFB762612E05EF610",
+      "Bytes": 74136,
+      "Label": "Replay command 1715 Level:1:2",
+      "DirectMilliseconds": 4.5726,
+      "ObjectMilliseconds": 7.2615,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "808A95560D3E8759D53400922504A5AB7930CB86E9ED36403F92288254568715",
+      "Bytes": 74264,
+      "Label": "Replay command 1750 Level:1:2",
+      "DirectMilliseconds": 5.8461,
+      "ObjectMilliseconds": 12.9105,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "910C9902EC1CD82DD6AD8F3CD09053B55245D4C5388AE7EFBB46141DFD5D5E8D",
+      "Bytes": 74232,
+      "Label": "Replay command 1785 Level:1:2",
+      "DirectMilliseconds": 5.8037,
+      "ObjectMilliseconds": 14.0066,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "B3EDC5606C917DE573670F073A0B0659F2A6EBD30BA04D431E849713B5F25BED",
+      "Bytes": 74200,
+      "Label": "Replay command 1820 Level:1:2",
+      "DirectMilliseconds": 5.7469,
+      "ObjectMilliseconds": 12.7185,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "53321B6CE2B2BE2963F956D6617911A8D84667B55C932BBDAF45463F521CB894",
+      "Bytes": 74200,
+      "Label": "Replay command 1855 Level:1:2",
+      "DirectMilliseconds": 5.7905,
+      "ObjectMilliseconds": 12.7495,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "5BEFE936EE329EC66CD94392D3A6C7A8706E60A85AD27AE336D80F27BDA28A0C",
+      "Bytes": 74072,
+      "Label": "Replay command 1890 Level:1:2",
+      "DirectMilliseconds": 5.6635,
+      "ObjectMilliseconds": 13.6137,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "ECD4B8630FCF94F450F3AD3A8E681293937017B073942C422809144EC9C56EA4",
+      "Bytes": 74072,
+      "Label": "Replay command 1925 Level:1:2",
+      "DirectMilliseconds": 5.7843,
+      "ObjectMilliseconds": 13.3326,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "BF3ECF40FDBDAEDDE042BCC80A67BE65EA3C3F4C73557A26ADC31CD00E0D1620",
+      "Bytes": 74232,
+      "Label": "Replay command 1960 Level:1:2",
+      "DirectMilliseconds": 5.7459,
+      "ObjectMilliseconds": 12.7284,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "7250224ED0488BC1DB6229D80879286D9096C7DC8F1AD87437FB95F96125C093",
+      "Bytes": 74200,
+      "Label": "Replay command 1995 Level:1:2",
+      "DirectMilliseconds": 4.2159,
+      "ObjectMilliseconds": 7.2656,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "B838E1FA8977CE6915DC24F2011083D1A3D7F005A5698EB79F83BBCFB3F2DA0E",
+      "Bytes": 74136,
+      "Label": "Replay command 2030 Level:1:2",
+      "DirectMilliseconds": 4.4983,
+      "ObjectMilliseconds": 7.2917,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "041880C556089AF73D6B093374C57EDD38E98B503DB38791E9580ECE95A099CF",
+      "Bytes": 74136,
+      "Label": "Replay command 2065 Level:1:2",
+      "DirectMilliseconds": 4.1885,
+      "ObjectMilliseconds": 7.8641,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "2D94C6EE8BDE8DF1F14E37BDEB37E8BDA50ABC5A58AC572A394471928B38F3B9",
+      "Bytes": 74136,
+      "Label": "Replay command 2100 Level:1:2",
+      "DirectMilliseconds": 4.15,
+      "ObjectMilliseconds": 7.3177,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "EFFEE6DD76221188DCB71E56089756ED169FEFE7CFF6083B6571AC8A476307E5",
+      "Bytes": 74136,
+      "Label": "Replay command 2135 Level:1:2",
+      "DirectMilliseconds": 4.1919,
+      "ObjectMilliseconds": 7.2368,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "73B16C4BE3CDB7E88C361FCEAB92BCB5BD939DC5E1F8C8138B489B942A960F3B",
+      "Bytes": 74136,
+      "Label": "Replay command 2170 Level:1:2",
+      "DirectMilliseconds": 4.1769,
+      "ObjectMilliseconds": 7.4218,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "79441FA360762A6E851DA7AA3C20EF91F3425519B07F2700CE5947B8572A6BB2",
+      "Bytes": 74136,
+      "Label": "Replay command 2205 Level:1:2",
+      "DirectMilliseconds": 4.1567,
+      "ObjectMilliseconds": 7.2472,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "6A550BF243C98AB45374ADCDE7E8D53B565184A9FB335FAEC2EEE50D43F64AE4",
+      "Bytes": 74072,
+      "Label": "Replay command 2240 Level:1:2",
+      "DirectMilliseconds": 5.4522,
+      "ObjectMilliseconds": 7.3882,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "59321147DA99172839F53F30BD023C659A58C6D1388E673A6BCCBF3FCAB2D404",
+      "Bytes": 74008,
+      "Label": "Replay command 2275 Level:1:2",
+      "DirectMilliseconds": 6.4483,
+      "ObjectMilliseconds": 10.3239,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "A9D4E0701533F5383287F9DDC2D0066EACB2A317D1A2280EDF508B3C8FF867AC",
+      "Bytes": 74136,
+      "Label": "Replay command 2310 Level:1:2",
+      "DirectMilliseconds": 7.0782,
+      "ObjectMilliseconds": 9.6456,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "78C2DFF6E8CCD4A9427469D54E722C8C749B3862EFBFCAAD6D402C305062D795",
+      "Bytes": 74328,
+      "Label": "Replay command 2345 Level:1:2",
+      "DirectMilliseconds": 6.62,
+      "ObjectMilliseconds": 9.6939,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "68274BC44558781D6AD3B5B4936EFF9B6A387E795993A97FAC49742F11A824B3",
+      "Bytes": 74520,
+      "Label": "Replay command 2380 Level:1:2",
+      "DirectMilliseconds": 4.2713,
+      "ObjectMilliseconds": 11.3203,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "F37E3100CFA6B2E7C22756AC124656E220903A15316A6A58DD15FE0C8C769B2C",
+      "Bytes": 74456,
+      "Label": "Replay command 2415 Level:1:2",
+      "DirectMilliseconds": 4.3062,
+      "ObjectMilliseconds": 11.1671,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "9BE90F9F2701D3EC8FD14528A7BD8863AD9F43279DF7CA0A5D998EA1F5BDFA7F",
+      "Bytes": 74072,
+      "Label": "Replay command 2450 Level:1:2",
+      "DirectMilliseconds": 4.1379,
+      "ObjectMilliseconds": 12.7589,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "35AEEA200BFFFCA56DF998BBF4A457CB9ED3813228525B4EDE7F62F3AF44E733",
+      "Bytes": 74072,
+      "Label": "Replay command 2485 Level:1:2",
+      "DirectMilliseconds": 4.1973,
+      "ObjectMilliseconds": 11.4804,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "D73ACF38785D5CFA7B2B0AB979932095F3463FAD8B2CF8C7998CADE205BABC27",
+      "Bytes": 74072,
+      "Label": "Replay command 2520 Level:1:2",
+      "DirectMilliseconds": 4.1324,
+      "ObjectMilliseconds": 11.109,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "B3034A78F71DBDA144051F66358BD6686B42216339EBA8CAA5CB4E8E3878A82F",
+      "Bytes": 74072,
+      "Label": "Replay command 2555 Level:1:2",
+      "DirectMilliseconds": 4.1846,
+      "ObjectMilliseconds": 11.046,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "B71C3E417FA0B6C535B9CBB653BBD4DBC541B1A94CA7EB619694BAA2190DD25C",
+      "Bytes": 74008,
+      "Label": "Replay command 2590 Level:1:2",
+      "DirectMilliseconds": 4.087,
+      "ObjectMilliseconds": 10.9512,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "D3312B9F26EA9399F83C33EE0022C80D7EFD40F89F30EE75E104C709A05B0392",
+      "Bytes": 74008,
+      "Label": "Replay command 2625 Level:1:2",
+      "DirectMilliseconds": 4.1564,
+      "ObjectMilliseconds": 10.9652,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "C2D8731A6BAAF9EC9359E44E96FADB9BA862483CC9AE315E224F606A33CCE04C",
+      "Bytes": 74008,
+      "Label": "Replay command 2660 Level:1:2",
+      "DirectMilliseconds": 4.1059,
+      "ObjectMilliseconds": 11.0638,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "C8D520940312CEAA68539BFE9EC9F5191A5354815A3CC7CD5361121429739E1A",
+      "Bytes": 74008,
+      "Label": "Replay command 2695 Level:1:2",
+      "DirectMilliseconds": 4.1521,
+      "ObjectMilliseconds": 10.9367,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "E6FC321AAA0E804E8D2092BA2835DBDF837C829340BB5025C0B20E030DC72E01",
+      "Bytes": 74008,
+      "Label": "Replay command 2730 Level:1:2",
+      "DirectMilliseconds": 4.1128,
+      "ObjectMilliseconds": 11.9725,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "B9B53C23C8FD963CF23F977E9D1CFE6FF6A67801DAE5600A4331E17D6BAFE5B8",
+      "Bytes": 74008,
+      "Label": "Replay command 2765 Level:1:2",
+      "DirectMilliseconds": 4.2091,
+      "ObjectMilliseconds": 11.951,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "44631C57EFD441BBBBA5140DB2460C3A9FC49697D909B377698176E1141DA778",
+      "Bytes": 73944,
+      "Label": "Replay command 2800 Level:1:2",
+      "DirectMilliseconds": 4.0909,
+      "ObjectMilliseconds": 10.8722,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "8970266F2B0242C10F955EA79A3EE4D135087E6BFAA15E354D1AFCC2BD06B37C",
+      "Bytes": 74200,
+      "Label": "Replay command 2835 Level:1:2",
+      "DirectMilliseconds": 4.2632,
+      "ObjectMilliseconds": 11.1476,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "895404D3BD675BF2490D46438B7E6E316D9FC861CE3A04A8D2960B8C0CCBA686",
+      "Bytes": 74008,
+      "Label": "Replay command 2870 Level:1:2",
+      "DirectMilliseconds": 4.8202,
+      "ObjectMilliseconds": 11.1311,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "B55521AC20E4A3B627C4D09B3C1E78267FA63F7F463BC70D351366F8F6A5F4B9",
+      "Bytes": 74392,
+      "Label": "Replay command 2905 Level:1:2",
+      "DirectMilliseconds": 4.3354,
+      "ObjectMilliseconds": 12.3124,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "89E679832404DA81C8A676D0FECBFC1F8024FD6C6E13B4833D93905A05B4BFA3",
+      "Bytes": 74008,
+      "Label": "Replay command 2940 Level:1:2",
+      "DirectMilliseconds": 4.9813,
+      "ObjectMilliseconds": 11.096,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "51144FF7DC1AF87E57985AE37958F4CBD941CE3AB06239962282241E7440C378",
+      "Bytes": 74456,
+      "Label": "Replay command 2975 Level:1:2",
+      "DirectMilliseconds": 4.2885,
+      "ObjectMilliseconds": 11.2837,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "2E3813C6D7656553245312BCA9C8B5E3640FE1F94AB78AAA8CDEECEA5D533BA5",
+      "Bytes": 74008,
+      "Label": "Replay command 3010 Level:1:2",
+      "DirectMilliseconds": 4.4932,
+      "ObjectMilliseconds": 11.0532,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "3162DB60373DA312DB7891F0001F644AC307AD058684B886C35DC136237B55FA",
+      "Bytes": 74008,
+      "Label": "Replay command 3045 Level:1:2",
+      "DirectMilliseconds": 4.1968,
+      "ObjectMilliseconds": 10.9485,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "2D067DC1F2608382755056CA0381ED381A10FD66100B2D8FF3355E5F7DAECC98",
+      "Bytes": 74008,
+      "Label": "Replay command 3046 Intermission:1:2",
+      "DirectMilliseconds": 4.107,
+      "ObjectMilliseconds": 10.9224,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "2D067DC1F2608382755056CA0381ED381A10FD66100B2D8FF3355E5F7DAECC98",
+      "Bytes": 74008,
+      "Label": "Replay command 3080 Intermission:1:2",
+      "DirectMilliseconds": 4.2635,
+      "ObjectMilliseconds": 11.1192,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "2D067DC1F2608382755056CA0381ED381A10FD66100B2D8FF3355E5F7DAECC98",
+      "Bytes": 74008,
+      "Label": "Replay command 3115 Intermission:1:2",
+      "DirectMilliseconds": 4.2081,
+      "ObjectMilliseconds": 19.0634,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "2D067DC1F2608382755056CA0381ED381A10FD66100B2D8FF3355E5F7DAECC98",
+      "Bytes": 74008,
+      "Label": "Replay command 3150 Intermission:1:2",
+      "DirectMilliseconds": 4.2382,
+      "ObjectMilliseconds": 12.4304,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "497AC06866B6E33051007BA70B9EEBE79218979B53392DCE6C5C73898472226A",
+      "Bytes": 80312,
+      "Label": "Replay command 3162 Level:1:3",
+      "DirectMilliseconds": 6.8902,
+      "ObjectMilliseconds": 16.0475,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "02F4B6206AC60DBDAAAD2115F5BA720DE14EA1DFD5FCFD6E1A61C76B0C364410",
+      "Bytes": 80312,
+      "Label": "Replay command 3185 Level:1:3",
+      "DirectMilliseconds": 6.1323,
+      "ObjectMilliseconds": 15.9585,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "243E780A852EE54B03A3BFDAF71E51B80490F3C9509F72C8C2FCD992C11129EE",
+      "Bytes": 80312,
+      "Label": "Replay command 3220 Level:1:3",
+      "DirectMilliseconds": 6.0679,
+      "ObjectMilliseconds": 15.9919,
+      "Fraction": 0.0
+    },
+    {
+      "Sha256": "A54618A36A4A54DA614F89ECA54AA04C851A2E5B3A1BB90501F5AC6C85B286E2",
+      "Bytes": 80312,
+      "Label": "Replay command 3233 Level:1:3",
+      "DirectMilliseconds": 6.6056,
+      "ObjectMilliseconds": 16.008,
+      "Fraction": 0.0
+    }
+  ],
+  "Meaning": "Exact complete NumericV1 byte equality against unchanged object snapshot + serializer. Pairs mode compares both endpoints once per state and times both together; otherwise times individual fractions. Alternating in-process order includes all samples and cold calls; these microbenchmarks are not full-host or displayed FPS. Fixed replay checks original selected-state checkpoints.",
+  "FinishedUtc": "2026-09-19T16:42:36.7363868Z",
+  "Commands": 3233,
+  "DirectMs": {
+    "Count": 168,
+    "Mean": 4.678663690476189,
+    "Median": 4.213150000000001,
+    "P95": 7.0433,
+    "Max": 29.5452
+  },
+  "ReplaySha256": "F0DB742A0C1118ED3362C2F9E5E2185238E57F42ABB04AD27375018C4A12CE65",
+  "Sources": [
+    {
+      "Path": "scripts/Test-DirectSnapshots.ps1",
+      "Sha256": "7F6D26ED985BAAB72E3890476B2A4C50F8FAED312017F1C8D010C31072ADFC4A"
+    },
+    {
+      "Path": "src/GameHost.ps1",
+      "Sha256": "3732C6A81C74F43451CB2A2E4ED342EBE303FC3EEB558B64C3658F78EAACB940"
+    },
+    {
+      "Path": "src/SnapshotTransport.ps1",
+      "Sha256": "A42B7E62F049D2EB5A798DDD1E2029629490D1E0441B62B6E954997EEE90E009"
+    },
+    {
+      "Path": "src/InputReplay.ps1",
+      "Sha256": "61B600BB0F9A1F57DD0D41FEE877A25F5DAE156663428E396691E7D14AC1B6DD"
+    }
+  ],
+  "Error": null,
+  "Pairs": true,
+  "PowerShell": "7.6.5",
+  "BundleSha256": "D57DF4DE73F7C8499436CE60F5F2EB284B833931A679D31A798A020C33339013"
+}

@@ -12,20 +12,25 @@ $ErrorActionPreference='Stop'
 . "$PSScriptRoot/FrameCodec.ps1"
 . "$PSScriptRoot/../src/AnsiColorState.ps1"
 . "$PSScriptRoot/../src/CharacterCodec.ps1"
+. "$PSScriptRoot/../src/PaletteCodec.ps1"
 $map=[IO.MemoryMappedFiles.MemoryMappedFile]::OpenExisting($Channel);$view=$map.CreateViewAccessor()
 $ready=[Threading.EventWaitHandle]::OpenExisting($Channel+'-ready');$go=[Threading.EventWaitHandle]::OpenExisting($Channel+'-go');$done=[Threading.EventWaitHandle]::OpenExisting($Channel+'-done')
 try {
     $owner=if($OwnerPid -gt 0){[Diagnostics.Process]::GetProcessById($OwnerPid)}else{$null}
     $previousSnapshot=$null;$ctx=Read-GameRenderAssets $Assets
-    $codec=if($Style -eq 'Classic'){
-        if($AnsiEncoding -eq 'ColorState'){New-AnsiColorStateContext $ctx.Palette}else{New-CodecContext $ctx.Palette}
-    }else{New-CharacterCodecContext $ctx.Palette $Style -GlyphSet $GlyphSet}
+    $codecs=New-DoomPaletteCodecs $ctx.PlayPal $Style -GlyphSet $GlyphSet -AnsiEncoding $AnsiEncoding
     [void]$ready.Set()
     while($true) {
         if(-not $go.WaitOne(1000)){if($null -ne $owner -and $owner.HasExited){break};continue}
         if($view.ReadInt32(0) -ne 0){break}
         $kind=$view.ReadInt32(76)
-        if($kind -eq 2){$ctx=Read-GameRenderAssets $Assets;$previousSnapshot=$null;[void]$done.Set();continue}
+        if($kind -eq 2){
+            $updated=Read-GameRenderAssets $Assets
+            if(-not [Linq.Enumerable]::SequenceEqual[byte]($ctx.PlayPal,$updated.PlayPal)){
+                $codecs=New-DoomPaletteCodecs $updated.PlayPal $Style -GlyphSet $GlyphSet -AnsiEncoding $AnsiEncoding
+            }
+            $ctx=$updated;$previousSnapshot=$null;[void]$done.Set();continue
+        }
         if($kind -notin 0,1,3,4){throw 'Unknown rendering job kind.'}
         $view.Write(48,[long][Diagnostics.Stopwatch]::GetTimestamp())
         $length=$view.ReadInt32(4);if($length -le 0 -or $length -gt 1048448){throw 'Invalid snapshot length.'}
@@ -34,9 +39,13 @@ try {
         if($kind -eq 0){
             $snapshot=Read-GameSnapshotBytes $bytes $previousSnapshot;$previousSnapshot=$snapshot
             $ctx.World=$snapshot;$ctx.Sectors=$snapshot.Sectors;$ctx.Sides=$snapshot.Sides;$tic=$snapshot.Tic
+            $paletteNumber=$snapshot.ConsolePlayer.PaletteNumber
         }else{
             if($length -ne 64000){throw 'Invalid screen pixel length.'};$tic=$view.ReadInt32(80)
+            $paletteNumber=$view.ReadInt32(84)
         }
+        if($paletteNumber -lt 0 -or $paletteNumber -ge $codecs.Length){throw 'Invalid rendering palette.'}
+        $codec=$codecs[$paletteNumber];$view.Write(36,[int]$paletteNumber)
         $view.Write(40,$decodeWatch.Elapsed.TotalMilliseconds)
         $watch=[Diagnostics.Stopwatch]::StartNew()
         if($kind -eq 0){Invoke-FastRender $ctx $FirstColumn $EndColumn}

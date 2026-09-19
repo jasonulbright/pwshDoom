@@ -1,0 +1,167 @@
+{
+  "GlyphSet": "Katakana",
+  "AudioCaptureRequested": true,
+  "TerminalOutput": "Strips",
+  "ReplaySha256": "6B0F729ACFEDD98EA97A0E281BD746186B7F7F955332315BDA6CC21FEF7C3511",
+  "TargetWasPreexisting": false,
+  "MusicCatalogSha256": null,
+  "TerminalPid": 23624,
+  "InputReplaySha256": "E83A0B63F00DE1973AD02B4D9D46B70959D0CD7156FC6F5C63A3ADB6D11F15C5",
+  "Ffmpeg": "local/tools/capture-build/FFmpeg-n9.0.1/ffmpeg.exe",
+  "QpcFrequency": 10000000,
+  "VideoSha256": "C23770A32F38BB1CB968495BD807EF8EA85102A2CD820BAB93D0B037D113B07C",
+  "Style": "AnsiArt",
+  "MediaFfmpegSha256": "72A489ECCD008C2EC2C0A5856C5C75BC3D8BBFA90166C4566865C246445E6AA3",
+  "SoundRequested": true,
+  "Arguments": [
+    "-hide_banner",
+    "-n",
+    "-filter_complex",
+    "gfxcapture=hwnd=13960302:max_framerate=240:capture_cursor=0:display_border=1:width=-2:height=-2",
+    "-an",
+    "-c:v",
+    "h264_nvenc",
+    "-preset",
+    "p4",
+    "-cq",
+    "18",
+    "-b:v",
+    "0",
+    "-r",
+    "60",
+    "-fps_mode",
+    "cfr",
+    "-movflags",
+    "+faststart",
+    "-t",
+    "295",
+    "C:\\projects\\pwshDoom\\local\\recordings\\palette-ansiart-third.mp4"
+  ],
+  "StartupTimeoutSeconds": 180,
+  "AudioCaptured": false,
+  "Meaning": "Actual game-window Windows.Graphics.Capture at the recorded capture ceiling, with D3D11 frames passed to external NVENC H.264 encoding. The ceiling exceeds 60 to avoid capture-rate aliasing; actual arrival rate is compositor-driven. Output is resampled to 60 FPS and can contain duplicates. Video includes startup and a short console return. Recording can affect game/presentation timing; encoded 60 FPS does not prove 60 distinct displayed game images. No microphone or desktop audio is captured. The input selects only the game window; inspect footage for occlusion or capture artifacts.",
+  "ExpectedExit": "ReplayEnd",
+  "AudioReport": "C:\\projects\\pwshDoom\\local\\recordings\\palette-ansiart-third-audio.json",
+  "Sources": [
+    {
+      "Sha256": "132F5C9435B7290A70B1A0FE64EAD25F8EFF103E816D1A0A2614EF749F1E0627",
+      "Path": "Start-Doom.ps1"
+    },
+    {
+      "Sha256": "EAA75B6B236F6481C7C15EF1D2DA82C536B27206FBCD005CB1C67BED305E03C2",
+      "Path": "scripts/Invoke-Doom.ps1"
+    },
+    {
+      "Sha256": "DAADAD0403CBD610BC629E3EDE77E1195545884923299A3D44F82263F2F0E49C",
+      "Path": "scripts/Record-DoomReplay.ps1"
+    },
+    {
+      "Sha256": "F50876284D3E3958F2183CB483F13179FABAF45B87B8BCC221BA7F7113EF38CD",
+      "Path": "scripts/Record-ProcessAudio.ps1"
+    },
+    {
+      "Sha256": "795D02E96FFC3373741E7970512D1D65CC777A43B834D5771F69EC81CF3AF2C4",
+      "Path": "scripts/Merge-DoomCaptureAudio.ps1"
+    },
+    {
+      "Sha256": "A747786A2428F71C907F86AD631983548AAE8C6450F422F64144D367B8E9E321",
+      "Path": "src/ProcessAudioCapture.ps1"
+    },
+    {
+      "Sha256": "CED03D531F7C129D9E079F1F3B548DD436EFD81782974A3752D4689FA3E45DFB",
+      "Path": "src/CaptureClock.ps1"
+    },
+    {
+      "Sha256": "EFA64468F234327E5D7682CE08FF5B8863EEEFC5D5B082DB9B74BE544D092E21",
+      "Path": "src/CaptureTimeline.ps1"
+    },
+    {
+      "Sha256": "54E40AABD82C633D640090CF823DA3677835C8C78FFC744CE5B762B48DE5B783",
+      "Path": "src/TerminalOutput.ps1"
+    },
+    {
+      "Sha256": "5370ABE79597E5E4FC629BBDE768DCA5F7A642200CFA31CF45AC1E7D4B46F4FA",
+      "Path": "src/AnsiColorState.ps1"
+    },
+    {
+      "Sha256": "E543D00540B54DBCAB9DC41F3034B788D4060786E49EFF6414BD013B73107539",
+      "Path": "src/TerminalCodec.ps1"
+    },
+    {
+      "Sha256": "A1CEA3BF32B01AEF4DAC5665A8478EBC3CAD7C4F4EE8605961A0782079202133",
+      "Path": "scripts/FrameCodec.ps1"
+    },
+    {
+      "Sha256": "6DF2288773DFFA5E05678F0EE05820FBB53B2F77D643C958334F3467CE54A9EA",
+      "Path": "src/FastRenderer.ps1"
+    },
+    {
+      "Sha256": "E8A776EF59F8A11CBB1FC1446DD629BDBF53D9CCFEA7E08D4B886094E100C5C2",
+      "Path": "src/RenderFuzz.ps1"
+    },
+    {
+      "Sha256": "3732C6A81C74F43451CB2A2E4ED342EBE303FC3EEB558B64C3658F78EAACB940",
+      "Path": "src/GameHost.ps1"
+    },
+    {
+      "Sha256": "A42B7E62F049D2EB5A798DDD1E2029629490D1E0441B62B6E954997EEE90E009",
+      "Path": "src/SnapshotTransport.ps1"
+    },
+    {
+      "Sha256": "61B600BB0F9A1F57DD0D41FEE877A25F5DAE156663428E396691E7D14AC1B6DD",
+      "Path": "src/InputReplay.ps1"
+    },
+    {
+      "Sha256": "1A144EC542C7E2F8C33EA022C39775698A64B683AECA8CBF4C74865FC3B421BB",
+      "Path": "src/PaletteCodec.ps1"
+    },
+    {
+      "Sha256": "78E3BF44DD0009FA3DE2B855FDD3B411BC6FFD21A62FBC04A0D9BA83E6A5CD78",
+      "Path": "src/CharacterCodec.ps1"
+    },
+    {
+      "Sha256": "B9658881622E4701CEAF29E26D3AB8FD4100C7EFF91C884AF24024980F0CFEAF",
+      "Path": "src/RenderAssets.ps1"
+    },
+    {
+      "Sha256": "00C95403011FBACE9830F6827FAA637E4D09B8D90235FAD2D1552921FF435E55",
+      "Path": "src/GameProcesses.ps1"
+    },
+    {
+      "Sha256": "1678407B4A408210EC4A930373EB9CF3FBDCBF30E78B47C6AFA6EAE9B8F1AB9F",
+      "Path": "src/SimulationProcess.ps1"
+    },
+    {
+      "Sha256": "0375B9F911BC59C52BF9DAFFDF6269238E123F55C625C1D6FA5E3BE0D76834AB",
+      "Path": "scripts/Invoke-SimulationWorker.ps1"
+    },
+    {
+      "Sha256": "FAEFD8FC305FFEEC5C4F2CDCF9CC8CDAE0B375111682A11E4C2FCDA579F76FE9",
+      "Path": "scripts/Invoke-GameRenderWorker.ps1"
+    }
+  ],
+  "FontFace": "MS Gothic",
+  "CaptureLimit": 240,
+  "ClockReport": "C:\\projects\\pwshDoom\\local\\recordings\\palette-ansiart-third-clock.json",
+  "AudioExitCode": 0,
+  "Video": "C:\\projects\\pwshDoom\\local\\recordings\\palette-ansiart-third.mp4",
+  "VideoFps": 60,
+  "EncoderExitCode": -1073741819,
+  "FfmpegSha256": "BD59EE9D861A9531AC289A8D9C0A02B8166A215A47D882605E372845324A1863",
+  "Error": "FFmpeg exited with code -1073741819.",
+  "AnsiEncoding": "Pairs",
+  "Maximized": true,
+  "WindowHandle": 13960302,
+  "MediaFfmpeg": "local/tools/ffmpeg/ffmpeg-9.0.1-essentials_build/bin/ffmpeg.exe",
+  "CaptureBackend": "GraphicsCapture",
+  "SourcesChangedDuringRun": [],
+  "SessionScheduleSha256": null,
+  "CaptureDeadlineSeconds": 295,
+  "GameReport": "C:\\projects\\pwshDoom\\local\\recordings\\palette-ansiart-third-game.json",
+  "SaveRoot": "local/palette-saves-second",
+  "CaptureStartQpc": 722343089205,
+  "FontSize": 12,
+  "PreexistingTerminalWindows": 0,
+  "ExitDelaySeconds": 3,
+  "FinishedUtc": "2026-09-19T16:55:27.4004715Z"
+}

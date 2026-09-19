@@ -1,0 +1,1740 @@
+{
+  "Meaning": "Independent ANSI decoding checks full coverage, truecolor bounds, partition equivalence, determinism, stable block HUD, green dominance, immutable source pixels and hand-defined contrast/edge cases. Not a perceptual readability or displayed-frame-rate test.",
+  "FullFrameCellsPerStyle": 8000,
+  "RejectedInvalidDimensions": 6,
+  "PartitionChecks": [
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 0,
+      "Pattern": "Coherent",
+      "Workers": 1,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 0,
+      "Pattern": "Coherent",
+      "Workers": 3,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 0,
+      "Pattern": "Coherent",
+      "Workers": 7,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 123,
+      "Pattern": "Coherent",
+      "Workers": 1,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 123,
+      "Pattern": "Coherent",
+      "Workers": 3,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 123,
+      "Pattern": "Coherent",
+      "Workers": 7,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 987,
+      "Pattern": "Coherent",
+      "Workers": 1,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 987,
+      "Pattern": "Coherent",
+      "Workers": 3,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 987,
+      "Pattern": "Coherent",
+      "Workers": 7,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 0,
+      "Pattern": "Coherent",
+      "Workers": 1,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 0,
+      "Pattern": "Coherent",
+      "Workers": 3,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 0,
+      "Pattern": "Coherent",
+      "Workers": 7,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 123,
+      "Pattern": "Coherent",
+      "Workers": 1,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 123,
+      "Pattern": "Coherent",
+      "Workers": 3,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 123,
+      "Pattern": "Coherent",
+      "Workers": 7,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 987,
+      "Pattern": "Coherent",
+      "Workers": 1,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 987,
+      "Pattern": "Coherent",
+      "Workers": 3,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 987,
+      "Pattern": "Coherent",
+      "Workers": 7,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 0,
+      "Pattern": "Entropy",
+      "Workers": 1,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 0,
+      "Pattern": "Entropy",
+      "Workers": 3,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 0,
+      "Pattern": "Entropy",
+      "Workers": 7,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 123,
+      "Pattern": "Entropy",
+      "Workers": 1,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 123,
+      "Pattern": "Entropy",
+      "Workers": 3,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 123,
+      "Pattern": "Entropy",
+      "Workers": 7,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 987,
+      "Pattern": "Entropy",
+      "Workers": 1,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 987,
+      "Pattern": "Entropy",
+      "Workers": 3,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 987,
+      "Pattern": "Entropy",
+      "Workers": 7,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 0,
+      "Pattern": "Entropy",
+      "Workers": 1,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 0,
+      "Pattern": "Entropy",
+      "Workers": 3,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 0,
+      "Pattern": "Entropy",
+      "Workers": 7,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 123,
+      "Pattern": "Entropy",
+      "Workers": 1,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 123,
+      "Pattern": "Entropy",
+      "Workers": 3,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 123,
+      "Pattern": "Entropy",
+      "Workers": 7,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 987,
+      "Pattern": "Entropy",
+      "Workers": 1,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 987,
+      "Pattern": "Entropy",
+      "Workers": 3,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 987,
+      "Pattern": "Entropy",
+      "Workers": 7,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 0,
+      "Pattern": "Coherent",
+      "Workers": 1,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 0,
+      "Pattern": "Coherent",
+      "Workers": 3,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 0,
+      "Pattern": "Coherent",
+      "Workers": 7,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 123,
+      "Pattern": "Coherent",
+      "Workers": 1,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 123,
+      "Pattern": "Coherent",
+      "Workers": 3,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 123,
+      "Pattern": "Coherent",
+      "Workers": 7,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 987,
+      "Pattern": "Coherent",
+      "Workers": 1,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 987,
+      "Pattern": "Coherent",
+      "Workers": 3,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 987,
+      "Pattern": "Coherent",
+      "Workers": 7,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 0,
+      "Pattern": "Coherent",
+      "Workers": 1,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 0,
+      "Pattern": "Coherent",
+      "Workers": 3,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 0,
+      "Pattern": "Coherent",
+      "Workers": 7,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 123,
+      "Pattern": "Coherent",
+      "Workers": 1,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 123,
+      "Pattern": "Coherent",
+      "Workers": 3,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 123,
+      "Pattern": "Coherent",
+      "Workers": 7,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 987,
+      "Pattern": "Coherent",
+      "Workers": 1,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 987,
+      "Pattern": "Coherent",
+      "Workers": 3,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 987,
+      "Pattern": "Coherent",
+      "Workers": 7,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 0,
+      "Pattern": "Entropy",
+      "Workers": 1,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 0,
+      "Pattern": "Entropy",
+      "Workers": 3,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 0,
+      "Pattern": "Entropy",
+      "Workers": 7,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 123,
+      "Pattern": "Entropy",
+      "Workers": 1,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 123,
+      "Pattern": "Entropy",
+      "Workers": 3,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 123,
+      "Pattern": "Entropy",
+      "Workers": 7,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 987,
+      "Pattern": "Entropy",
+      "Workers": 1,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 987,
+      "Pattern": "Entropy",
+      "Workers": 3,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 987,
+      "Pattern": "Entropy",
+      "Workers": 7,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 0,
+      "Pattern": "Entropy",
+      "Workers": 1,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 0,
+      "Pattern": "Entropy",
+      "Workers": 3,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 0,
+      "Pattern": "Entropy",
+      "Workers": 7,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 123,
+      "Pattern": "Entropy",
+      "Workers": 1,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 123,
+      "Pattern": "Entropy",
+      "Workers": 3,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 123,
+      "Pattern": "Entropy",
+      "Workers": 7,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 987,
+      "Pattern": "Entropy",
+      "Workers": 1,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 987,
+      "Pattern": "Entropy",
+      "Workers": 3,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Ascii",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 987,
+      "Pattern": "Entropy",
+      "Workers": 7,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 0,
+      "Pattern": "Coherent",
+      "Workers": 1,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 0,
+      "Pattern": "Coherent",
+      "Workers": 3,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 0,
+      "Pattern": "Coherent",
+      "Workers": 7,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 123,
+      "Pattern": "Coherent",
+      "Workers": 1,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 123,
+      "Pattern": "Coherent",
+      "Workers": 3,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 123,
+      "Pattern": "Coherent",
+      "Workers": 7,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 987,
+      "Pattern": "Coherent",
+      "Workers": 1,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 987,
+      "Pattern": "Coherent",
+      "Workers": 3,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 987,
+      "Pattern": "Coherent",
+      "Workers": 7,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 0,
+      "Pattern": "Coherent",
+      "Workers": 1,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 0,
+      "Pattern": "Coherent",
+      "Workers": 3,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 0,
+      "Pattern": "Coherent",
+      "Workers": 7,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 123,
+      "Pattern": "Coherent",
+      "Workers": 1,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 123,
+      "Pattern": "Coherent",
+      "Workers": 3,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 123,
+      "Pattern": "Coherent",
+      "Workers": 7,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 987,
+      "Pattern": "Coherent",
+      "Workers": 1,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 987,
+      "Pattern": "Coherent",
+      "Workers": 3,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 987,
+      "Pattern": "Coherent",
+      "Workers": 7,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 0,
+      "Pattern": "Entropy",
+      "Workers": 1,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 0,
+      "Pattern": "Entropy",
+      "Workers": 3,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 0,
+      "Pattern": "Entropy",
+      "Workers": 7,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 123,
+      "Pattern": "Entropy",
+      "Workers": 1,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 123,
+      "Pattern": "Entropy",
+      "Workers": 3,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 123,
+      "Pattern": "Entropy",
+      "Workers": 7,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 987,
+      "Pattern": "Entropy",
+      "Workers": 1,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 987,
+      "Pattern": "Entropy",
+      "Workers": 3,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 987,
+      "Pattern": "Entropy",
+      "Workers": 7,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 0,
+      "Pattern": "Entropy",
+      "Workers": 1,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 0,
+      "Pattern": "Entropy",
+      "Workers": 3,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 0,
+      "Pattern": "Entropy",
+      "Workers": 7,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 123,
+      "Pattern": "Entropy",
+      "Workers": 1,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 123,
+      "Pattern": "Entropy",
+      "Workers": 3,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 123,
+      "Pattern": "Entropy",
+      "Workers": 7,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 987,
+      "Pattern": "Entropy",
+      "Workers": 1,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 987,
+      "Pattern": "Entropy",
+      "Workers": 3,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 987,
+      "Pattern": "Entropy",
+      "Workers": 7,
+      "Style": "AnsiArt",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 0,
+      "Pattern": "Coherent",
+      "Workers": 1,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 0,
+      "Pattern": "Coherent",
+      "Workers": 3,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 0,
+      "Pattern": "Coherent",
+      "Workers": 7,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 123,
+      "Pattern": "Coherent",
+      "Workers": 1,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 123,
+      "Pattern": "Coherent",
+      "Workers": 3,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 123,
+      "Pattern": "Coherent",
+      "Workers": 7,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 987,
+      "Pattern": "Coherent",
+      "Workers": 1,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 987,
+      "Pattern": "Coherent",
+      "Workers": 3,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 987,
+      "Pattern": "Coherent",
+      "Workers": 7,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 0,
+      "Pattern": "Coherent",
+      "Workers": 1,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 0,
+      "Pattern": "Coherent",
+      "Workers": 3,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 0,
+      "Pattern": "Coherent",
+      "Workers": 7,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 123,
+      "Pattern": "Coherent",
+      "Workers": 1,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 123,
+      "Pattern": "Coherent",
+      "Workers": 3,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 123,
+      "Pattern": "Coherent",
+      "Workers": 7,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 987,
+      "Pattern": "Coherent",
+      "Workers": 1,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 987,
+      "Pattern": "Coherent",
+      "Workers": 3,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 987,
+      "Pattern": "Coherent",
+      "Workers": 7,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 0,
+      "Pattern": "Entropy",
+      "Workers": 1,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 0,
+      "Pattern": "Entropy",
+      "Workers": 3,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 0,
+      "Pattern": "Entropy",
+      "Workers": 7,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 123,
+      "Pattern": "Entropy",
+      "Workers": 1,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 123,
+      "Pattern": "Entropy",
+      "Workers": 3,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 123,
+      "Pattern": "Entropy",
+      "Workers": 7,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 987,
+      "Pattern": "Entropy",
+      "Workers": 1,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 987,
+      "Pattern": "Entropy",
+      "Workers": 3,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        0,
+        0
+      ],
+      "FrameNumber": 987,
+      "Pattern": "Entropy",
+      "Workers": 7,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 0,
+      "Pattern": "Entropy",
+      "Workers": 1,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 0,
+      "Pattern": "Entropy",
+      "Workers": 3,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 0,
+      "Pattern": "Entropy",
+      "Workers": 7,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 123,
+      "Pattern": "Entropy",
+      "Workers": 1,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 123,
+      "Pattern": "Entropy",
+      "Workers": 3,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 123,
+      "Pattern": "Entropy",
+      "Workers": 7,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 987,
+      "Pattern": "Entropy",
+      "Workers": 1,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 987,
+      "Pattern": "Entropy",
+      "Workers": 3,
+      "Style": "Matrix",
+      "Cells": 102
+    },
+    {
+      "GlyphSet": "Katakana",
+      "Origin": [
+        13,
+        9
+      ],
+      "FrameNumber": 987,
+      "Pattern": "Entropy",
+      "Workers": 7,
+      "Style": "Matrix",
+      "Cells": 102
+    }
+  ],
+  "CodecSha256": "78E3BF44DD0009FA3DE2B855FDD3B411BC6FFD21A62FBC04A0D9BA83E6A5CD78",
+  "FinishedUtc": "2026-09-19T16:49:52.0535030Z",
+  "ViewportCases": 10,
+  "FullFrameStyleAlphabetPairs": 4,
+  "IndependentBrightnessEdgeProbes": 8
+}

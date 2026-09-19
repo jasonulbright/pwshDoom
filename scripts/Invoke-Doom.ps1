@@ -35,8 +35,8 @@ function Start-DoomRenderJob {
     [byte[]]$bytes=if($screenPixels){$Snapshot.Pixels}else{Get-InterpolatedSnapshotBytes $Snapshot.Previous $Snapshot.Current $fraction}
     $InterpolationTimes.Add($watch.Elapsed.TotalMilliseconds)
     $qpc=[Diagnostics.Stopwatch]::GetTimestamp();$watch.Restart()
-    Submit-GameRender $Pool $bytes -ColumnOffset $Viewport.Left -RowOffset $Viewport.Top -FrameNumber ([int][Math]::Floor($Clock.Elapsed.TotalSeconds*60)) -ScreenPixels:$screenPixels -Tic $Snapshot.Tic -MenuPixels:($Snapshot.ScreenKind -eq 2) -AutomapPixels:($Snapshot.ScreenKind -eq 3)
-    return @{Tic=$Snapshot.Tic;Version=$Snapshot.Version;StartQpc=$qpc;SubmitMs=$watch.Elapsed.TotalMilliseconds;ViewportKey=$Viewport.Key;State=$Snapshot.State;Generation=$Snapshot.Generation;Episode=$Snapshot.Episode;Map=$Snapshot.Map;ScreenKind=$Snapshot.ScreenKind;MenuRevision=$Snapshot.MenuRevision;MenuScreen=$Snapshot.MenuScreen}
+    Submit-GameRender $Pool $bytes -ColumnOffset $Viewport.Left -RowOffset $Viewport.Top -FrameNumber ([int][Math]::Floor($Clock.Elapsed.TotalSeconds*60)) -ScreenPixels:$screenPixels -Tic $Snapshot.Tic -MenuPixels:($Snapshot.ScreenKind -eq 2) -AutomapPixels:($Snapshot.ScreenKind -eq 3) -PaletteNumber $Snapshot.PaletteNumber
+    return @{Tic=$Snapshot.Tic;Version=$Snapshot.Version;StartQpc=$qpc;SubmitMs=$watch.Elapsed.TotalMilliseconds;ViewportKey=$Viewport.Key;State=$Snapshot.State;Generation=$Snapshot.Generation;Episode=$Snapshot.Episode;Map=$Snapshot.Map;ScreenKind=$Snapshot.ScreenKind;MenuRevision=$Snapshot.MenuRevision;MenuScreen=$Snapshot.MenuScreen;PaletteNumber=$Snapshot.PaletteNumber}
 }
 $simulation=$null;$pool=$null;$consoleState=$null;$terminalActive=$false;$timerRequested=$false;$failure=$null
 $oldEncoding=[Console]::OutputEncoding;$esc=[char]27;$clock=[Diagnostics.Stopwatch]::new()
@@ -299,7 +299,10 @@ try {
                 $capture=[byte[]]::new(64000)
                 for($i=0;$i -lt $pool.Count;$i++){$worker=$pool.Workers[$i];for($y=0;$y -lt 200;$y++){[Array]::Copy($pool.Results[$i].Pixels,$y*320+$worker.First,$capture,$y*320+$worker.First,$worker.End-$worker.First)}}
                 [void][IO.Directory]::CreateDirectory($captureDirectory)
-                $capturePath=Join-Path $captureDirectory "capture-$lastFrameTic.bin";[IO.File]::WriteAllBytes($capturePath,$capture);$captures.Add([IO.Path]::GetFullPath($capturePath));$nextCapture+=$CaptureEveryTics
+                $capturePath=Join-Path $captureDirectory "capture-$lastFrameTic.bin";[IO.File]::WriteAllBytes($capturePath,$capture)
+                $capturePalette=[byte[]]::new(768);[Buffer]::BlockCopy($context.PlayPal,$present.PaletteNumber*768,$capturePalette,0,768)
+                [IO.File]::WriteAllBytes($capturePath+'.palette.bin',$capturePalette)
+                $captures.Add([IO.Path]::GetFullPath($capturePath));$nextCapture+=$CaptureEveryTics
             }
             # The next render overlaps the current console write. Results are copied
             # out of shared memory before this dispatch, so workers may reuse it.
@@ -319,7 +322,7 @@ try {
             $needsClear=$false
             $endQpc=[Diagnostics.Stopwatch]::GetTimestamp();$frameTimes.Add(($endQpc-$present.StartQpc)*1000.0/[Diagnostics.Stopwatch]::Frequency);$completed++
             $frameStats.Add(@{Tic=$lastFrameTic;State=$present.State;Generation=$present.Generation;Episode=$present.Episode;Map=$present.Map;SubmitMs=$present.SubmitMs;HarvestMs=$present.HarvestMs;OutputMs=$outputWatch.Elapsed.TotalMilliseconds;StartQpc=$present.StartQpc;EndQpc=$endQpc;ElapsedMs=$clock.Elapsed.TotalMilliseconds;
-                ScreenKind=$present.ScreenKind;MenuScreen=$present.MenuScreen;MenuRevision=$present.MenuRevision;
+                ScreenKind=$present.ScreenKind;MenuScreen=$present.MenuScreen;MenuRevision=$present.MenuRevision;PaletteNumber=$present.PaletteNumber;
                 Workers=@($present.Results | ForEach-Object {,@($_.RenderMs,$_.EncodeMs,$_.DecodeMs,$_.StartedQpc,$_.DoneQpc)})})
             $nextPresentation+=1000.0/60
         }
@@ -342,7 +345,12 @@ finally {
         try{Wait-GameRender $pool 30000 -ReadPixels}catch{}
         $image=[byte[]]::new(64000)
         for($i=0;$i -lt $pool.Count;$i++){$result=$pool.Results[$i];if($null -eq $result -or $null -eq $result.Pixels){continue};$worker=$pool.Workers[$i];for($y=0;$y -lt 200;$y++){[Array]::Copy($result.Pixels,$y*320+$worker.First,$image,$y*320+$worker.First,$worker.End-$worker.First)}}
-        [IO.File]::WriteAllBytes("$PSScriptRoot/../local/game-frame.bin",$image);Close-GameRenderPool $pool
+        [IO.File]::WriteAllBytes("$PSScriptRoot/../local/game-frame.bin",$image)
+        if($pool.Results[0]){
+            $finalPalette=[byte[]]::new(768);[Buffer]::BlockCopy($context.PlayPal,$pool.Results[0].PaletteNumber*768,$finalPalette,0,768)
+            [IO.File]::WriteAllBytes("$PSScriptRoot/../local/palette.bin",$finalPalette)
+        }
+        Close-GameRenderPool $pool
     }
     if($null -ne $simulation){Close-DoomSimulation $simulation -DrainAudio:($exitReason -eq 'ReplayEnd' -and -not $failure);if(Test-Path -LiteralPath $simulation.Report){$simulationReport=Get-Content -LiteralPath $simulation.Report -Raw | ConvertFrom-Json}}
     if($terminalActive){[Console]::Write("$esc[?2026l$esc[0m$esc[?25h$esc[?1049l")}

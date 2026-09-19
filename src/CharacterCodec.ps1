@@ -18,7 +18,9 @@ function ConvertTo-MenuStrip {
                 # Match normal gameplay HUD samples; brightest-region dilation
                 # is useful for map lines but obscures small HUD numbers.
                 [int]$top=$Pixels[$offset+$Width+1];[int]$bottom=$Pixels[$offset+3*$Width+1]
-                $chunks[$n++]=$cells[$top*256+$bottom];continue
+                [int]$pair=$top*256+$bottom
+                if($null -eq $cells[$pair]){$cells[$pair]=$Context.Hud.TopPrefixes[$top]+$Context.Hud.BottomSuffixes[$bottom]}
+                $chunks[$n++]=$cells[$pair];continue
             }
             [int]$top=$Pixels[$offset];[int]$bottom=$Pixels[$offset+2*$Width]
             # Preserve first-wins luminance ties without per-cell candidate arrays.
@@ -28,7 +30,9 @@ function ConvertTo-MenuStrip {
             $candidate=$Pixels[$offset+2*$Width+1];if($luma[$candidate] -gt $luma[$bottom]){$bottom=$candidate}
             $candidate=$Pixels[$offset+3*$Width];if($luma[$candidate] -gt $luma[$bottom]){$bottom=$candidate}
             $candidate=$Pixels[$offset+3*$Width+1];if($luma[$candidate] -gt $luma[$bottom]){$bottom=$candidate}
-            $chunks[$n++]=$cells[$top*256+$bottom]
+            [int]$pair=$top*256+$bottom
+            if($null -eq $cells[$pair]){$cells[$pair]=$Context.Hud.TopPrefixes[$top]+$Context.Hud.BottomSuffixes[$bottom]}
+            $chunks[$n++]=$cells[$pair]
         }
     }
     return ,([Text.Encoding]::UTF8.GetBytes([string]::Concat($chunks)))
@@ -63,7 +67,7 @@ function Test-CharacterConsoleWidth {
 
 function New-CharacterCodecContext {
     param([int[][]]$Palette,[ValidateSet('AnsiArt','Matrix')][string]$Style='Matrix',
-        [ValidateSet('Ascii','Katakana')][string]$GlyphSet='Ascii')
+        [ValidateSet('Ascii','Katakana')][string]$GlyphSet='Ascii',[switch]$LazyCells)
     if($Palette.Count -ne 256){throw 'A 256-color source palette is required.'}
     $luma=[int[]]::new(256);$tones=[int[]]::new(256);$colors=[string[]]::new(256)
     $matrixColors=[string[]]::new(1280);$greenPalette=[int[][]]::new(256);$esc=[char]27
@@ -88,7 +92,7 @@ function New-CharacterCodecContext {
     $hudPalette=if($Style -eq 'Matrix'){$greenPalette}else{$Palette}
     $alphabet=Get-CharacterAlphabet $GlyphSet
     return @{Style=$Style;GlyphSet=$GlyphSet;Luma=$luma;Tones=$tones;Colors=$colors;MatrixColors=$matrixColors;
-        Ramp=$alphabet.Ramp;Code=$alphabet.Code;Vertical=$alphabet.Vertical;Horizontal=$alphabet.Horizontal;Hud=(New-CodecContext $hudPalette)}
+        Ramp=$alphabet.Ramp;Code=$alphabet.Code;Vertical=$alphabet.Vertical;Horizontal=$alphabet.Horizontal;Hud=(New-CodecContext $hudPalette -LazyCells:$LazyCells)}
 }
 
 function ConvertTo-CharacterStrip {
@@ -112,7 +116,11 @@ function ConvertTo-CharacterStrip {
         for([int]$x=$FirstColumn;$x -lt $EndColumn;$x+=2) {
             [int]$a=$Pixels[$base+$x];[int]$b=$Pixels[$base+$x+1];[int]$c=$Pixels[$base+$Width+$x];[int]$d=$Pixels[$base+$Width+$x+1]
             [int]$e=$Pixels[$base+2*$Width+$x];[int]$f=$Pixels[$base+2*$Width+$x+1];[int]$g=$Pixels[$base+3*$Width+$x];[int]$h=$Pixels[$base+3*$Width+$x+1]
-            if($row -ge $sceneRows){$chunks[$n++]=$hud[$d*256+$h];continue}
+            if($row -ge $sceneRows){
+                [int]$pair=$d*256+$h
+                if($null -eq $hud[$pair]){$hud[$pair]=$Context.Hud.TopPrefixes[$d]+$Context.Hud.BottomSuffixes[$h]}
+                $chunks[$n++]=$hud[$pair];continue
+            }
             [int]$la=$lum[$a];[int]$lb=$lum[$b];[int]$lc=$lum[$c];[int]$ld=$lum[$d]
             [int]$le=$lum[$e];[int]$lf=$lum[$f];[int]$lg=$lum[$g];[int]$lh=$lum[$h]
             [int]$mean=($la+$lb+$lc+$ld+$le+$lf+$lg+$lh)/8

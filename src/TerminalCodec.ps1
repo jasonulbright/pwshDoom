@@ -10,7 +10,10 @@ function ConvertTo-AnsiStrip {
         [int]$top=$y*$Width; [int]$bottom=[Math]::Min($y+1,$Height-1)*$Width
         for([int]$x=$FirstColumn;$x -lt $EndColumn;$x++) {
             [int]$pair=[int]$Pixels[$top+$x]*$count+[int]$Pixels[$bottom+$x]
-            if($pair -eq $last){$chunks[$n++]=$block}else{$chunks[$n++]=$cells[$pair];$last=$pair}
+            if($pair -eq $last){$chunks[$n++]=$block}else{
+                if($null -eq $cells[$pair]){$cells[$pair]=$Context.TopPrefixes[$Pixels[$top+$x]]+$Context.BottomSuffixes[$Pixels[$bottom+$x]]}
+                $chunks[$n++]=$cells[$pair];$last=$pair
+            }
         }
     }
     # Preserve the byte array as one object: pipeline enumeration of every byte

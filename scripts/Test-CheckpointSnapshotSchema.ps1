@@ -39,6 +39,15 @@ try{
     Check 'New replay comparison rejects changed actor flags' (-not (Compare-DoomReplayCheckpoints @($original) @($changed) 0).Matched)
     Check 'New replay comparison accepts matching serialized checkpoints' ((Compare-DoomReplayCheckpoints @((($original|ConvertTo-Json -Depth 7)|ConvertFrom-Json)) @($original) 0).Matched)
     $actor.Flags=$flags
+    $v2=$original.Clone();$v2.CurrentRenderSnapshotVersion=2;$v2.CurrentRenderSnapshotSha256=$original.RenderSnapshotV2Sha256
+    Check 'Historical NumericV2 packet comparison remains accepted' ((Compare-DoomReplayCheckpoints @($v2) @($original) 0).Matched)
+    $player.DamageCount=64;$changed=Get-DoomReplayCheckpoint $game 0
+    Check 'New comparison rejects changed palette selection' (-not (Compare-DoomReplayCheckpoints @($original) @($changed) 0).Matched)
+    Check 'NumericV2 comparison retains its historical absence of palette selection' ((Compare-DoomReplayCheckpoints @($v2) @($changed) 0).Matched)
+    $missing=$original.Clone();$missing.Remove('RenderSnapshotV2Sha256')
+    Check 'Missing compatibility digest is not silently accepted' (-not (Compare-DoomReplayCheckpoints @($v2) @($missing) 0).Matched)
+    $changed.RenderSnapshotV2Sha256='0'*64
+    Check 'Incorrect compatibility digest is rejected' (-not (Compare-DoomReplayCheckpoints @($v2) @($changed) 0).Matched)
 }catch{$failure=$_.ToString()+"`n"+$_.ScriptStackTrace;throw}finally{
     if($content){$content.Dispose()}
     @{Error=$failure;Checks=$checks.ToArray();ReplaySha256=(Get-FileHash $Replay).Hash;BundleSha256=(Get-FileHash $bundle).Hash;WadSha256=(Get-FileHash $Wad).Hash;

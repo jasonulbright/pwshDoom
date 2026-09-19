@@ -13,3 +13,7 @@ September 19 weapon-lighting integration adds a discrete player-sector light in 
 ## NumericV2 visual-effect fields
 
 The fuzz implementation extends packets to version2: header44 contains the player's remaining invisibility timer and a trailing array contains actor flags, after all prior weapon records. Header43 still contains sector light. All position offsets are unchanged. The current packet clone carries these discrete fields through interpolation; endpoint pairing adjusts only positions. Version1 packets are rejected by the new decoder, and all host/worker processes must use the same checkout. Historical replay checkpoint compatibility is a separate canonicalization described in rendering-fidelity.md; new checkpoints compare a version-tagged complete packet digest.
+
+## NumericV3 presentation palette
+
+The palette follow-up now requires version3 packets and adds discrete header45 (PLAYPAL index0..13). Position offsets, invisibility and trailing actor flags remain unchanged. All endpoints preserve the current palette selector. V2 replay comparison uses a separately named compatibility digest; V3 comparison includes palette state. See palette-presentation.md for all-map, negative-control and actual-host evidence. Wire decoding requires matching current host/worker code; historical replay compatibility does not mean mixed-version worker processes are supported.

@@ -1,0 +1,178 @@
+{
+  "Video": {
+    "Height": 1392,
+    "Width": 3440,
+    "DurationSeconds": 60.383333
+  },
+  "SimulationLatenessMs": {
+    "Count": 700,
+    "Mean": 15.23596485714284,
+    "Median": 2.255235714286755,
+    "P95": 37.91399999999999,
+    "Max": 385.9930857142857
+  },
+  "SourceSha256": "1166454100F1F2B5ACE57C4BCFD75E93244DDADA59A229350B1785679D261AEC",
+  "Commands": 700,
+  "ConsoleWrites": 1198,
+  "WallSeconds": 31.7742654,
+  "LargestGaps": [
+    {
+      "Milliseconds": 3013.5702,
+      "Tic": 140,
+      "PreviousMap": 1,
+      "SameWorld": false,
+      "Map": 1,
+      "PreviousTic": 140,
+      "AfterWrite": 234
+    },
+    {
+      "Milliseconds": 2838.3485,
+      "Tic": 0,
+      "PreviousMap": 1,
+      "SameWorld": false,
+      "Map": 1,
+      "PreviousTic": 0,
+      "AfterWrite": 2
+    },
+    {
+      "Milliseconds": 2638.5184,
+      "Tic": 280,
+      "PreviousMap": 1,
+      "SameWorld": false,
+      "Map": 1,
+      "PreviousTic": 280,
+      "AfterWrite": 475
+    },
+    {
+      "Milliseconds": 2584.9608,
+      "Tic": 455,
+      "PreviousMap": 1,
+      "SameWorld": false,
+      "Map": 1,
+      "PreviousTic": 455,
+      "AfterWrite": 776
+    },
+    {
+      "Milliseconds": 571.8032,
+      "Tic": 0,
+      "PreviousMap": 1,
+      "SameWorld": true,
+      "Map": 1,
+      "PreviousTic": 0,
+      "AfterWrite": 1
+    },
+    {
+      "Milliseconds": 215.5146,
+      "Tic": 14,
+      "PreviousMap": 1,
+      "SameWorld": true,
+      "Map": 1,
+      "PreviousTic": 14,
+      "AfterWrite": 28
+    },
+    {
+      "Milliseconds": 75.1527,
+      "Tic": 14,
+      "PreviousMap": 1,
+      "SameWorld": true,
+      "Map": 1,
+      "PreviousTic": 14,
+      "AfterWrite": 29
+    },
+    {
+      "Milliseconds": 57.4028,
+      "Tic": 4,
+      "PreviousMap": 1,
+      "SameWorld": true,
+      "Map": 1,
+      "PreviousTic": 4,
+      "AfterWrite": 12
+    },
+    {
+      "Milliseconds": 40.4282,
+      "Tic": 455,
+      "PreviousMap": 1,
+      "SameWorld": true,
+      "Map": 1,
+      "PreviousTic": 453,
+      "AfterWrite": 775
+    },
+    {
+      "Milliseconds": 36.8611,
+      "Tic": 280,
+      "PreviousMap": 1,
+      "SameWorld": true,
+      "Map": 1,
+      "PreviousTic": 278,
+      "AfterWrite": 474
+    }
+  ],
+  "DiscoveryMs": {
+    "Count": 700,
+    "Mean": 6.2328094285714215,
+    "Median": 6.02895,
+    "P95": 7.9574,
+    "Max": 21.1069
+  },
+  "Meaning": "One recorded run, not an isolated benchmark or causal before/after comparison. Gaps are consecutive console-write completion QPC differences, not frame pipeline latency or displayed images. All gaps include transitions; SameWorld is an explicitly filtered companion series. Percentiles use nearest rank. No warm-up exclusions. Timeline zero fill reflects capture alignment; software empty-queue observations and returned buffers do not prove uninterrupted acoustic playback.",
+  "Receipts": [
+    {
+      "Path": "C:\\projects\\pwshDoom\\local\\recordings\\palette-matrix-third-game.json",
+      "Sha256": "3477669E4BC2E2F5752094CF431C8C76F31AA576D2B78D156B481472DCF57CE2"
+    },
+    {
+      "Path": "C:\\projects\\pwshDoom\\local\\recordings\\palette-matrix-third-av.json",
+      "Sha256": "AC43A38AA93D8F10CAA92623E7A40CAB284161EBF1ABBE02CADC3E98D5354700"
+    }
+  ],
+  "AllConsecutiveWriteGapsMs": {
+    "Max": 3013.5702,
+    "P50": 16.3316,
+    "Mean": 26.477824477861333,
+    "P99": 34.7961,
+    "P95": 23.7596,
+    "Count": 1197
+  },
+  "SnapshotMs": {
+    "Count": 704,
+    "Mean": 4.040222017045452,
+    "Median": 2.76775,
+    "P95": 9.0561,
+    "Max": 172.8457
+  },
+  "ActiveSeconds": 20.0300208,
+  "Error": null,
+  "SimulationUpdateMs": {
+    "Count": 700,
+    "Mean": 3.117003571428571,
+    "Median": 2.36055,
+    "P95": 6.5584,
+    "Max": 11.4166
+  },
+  "SameWorldWriteGapsMs": {
+    "Max": 571.8032,
+    "P50": 16.3203,
+    "Mean": 17.282948868399004,
+    "P99": 32.5755,
+    "P95": 23.2164,
+    "Count": 1193
+  },
+  "SimulationTicsPerActiveSecond": 34.947542341044404,
+  "Audio": {
+    "TimelineZeroFilledFrames": 1235028,
+    "SubmittedFrames": 882000,
+    "CancelledFramesUpperBound": 0,
+    "ReturnedFrames": 882000,
+    "InternalTimelineZeroFilledFrames": 1158.0,
+    "InternalTimelineFills": [
+      {
+        "Frames": 1158,
+        "Frame": 2648598,
+        "NextPacket": 3208
+      }
+    ],
+    "ApiDiscontinuityPackets": 0,
+    "QueueEmptyObservations": 3
+  },
+  "ConsoleWritesPerActiveSecond": 59.81022246367313
+}

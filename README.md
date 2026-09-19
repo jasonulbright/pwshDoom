@@ -109,3 +109,5 @@ Use **measured**, **source-inspected**, **author-reported**, **hypothesis**, or 
 Commercial WAD files remain user supplied. Do not commit game assets, extracted frames, downloaded binaries, or external source trees. Preserve upstream license terms before incorporating upstream code; inspection alone is not an adoption decision.
 
 All experiments must be finite and write their results to disk. Keep security settings unchanged. Record failures and changes to the protocol, including environment interference.
+
+Damage, pickup, berserk and radiation-suit palette effects now reach the terminal and automap. Classic and Matrix each pass 55 recorded integration checks; AnsiArt passes the game-state checks, with a capture-tool shutdown failure still to resolve. Matrix intentionally retains its green color mapping. See [palette evidence and remaining work](docs/palette-presentation.md).

@@ -11,18 +11,18 @@ function Assert-Rejected([byte[]]$bytes) {
     if(-not $rejected){throw 'A malformed snapshot was accepted.'}
 }
 # Pair from the same world update: discrete fields match, only positions differ.
-$old=[double[]]::new(70);$old[0]=2;$old[1]=42;$old[3]=1;$old[4]=1;$old[5]=1;$old[6]=1
+$old=[double[]]::new(70);$old[0]=3;$old[1]=42;$old[3]=1;$old[4]=1;$old[5]=1;$old[6]=1
 $old[8]=-120.25;$old[9]=490;$old[10]=6.27;$old[11]=41.5
 $old[12]=2;$old[15]=0;$old[16]=75;$old[18]=5;$old[20]=19;$old[24]=200;$old[28]=1;$old[34]=1
 $old[43]=97
-$old[44]=129;$old[69]=0x40000
+$old[44]=129;$old[45]=13;$old[69]=0x40000
 $old[48]=-24;$old[49]=128;$old[50]=3;$old[51]=4;$old[52]=255
 $old[53]=10;$old[54]=-8;$old[55]=9;$old[56]=11;$old[57]=12
 $old[58]=100;$old[59]=-400;$old[60]=8;$old[61]=1.7;$old[62]=4;$old[63]=32769;$old[64]=144
 $old[65]=2;$old[66]=1;$old[67]=160;$old[68]=100
 $current=[double[]]$old.Clone();$current[2]=1
 $current[43]=145
-$current[44]=128;$current[69]=0x40002
+$current[44]=128;$current[45]=8;$current[69]=0x40002
 foreach($i in 8,9,10,11,48,49,58,59,60){$current[$i]+=0.125}
 $checks=0
 foreach($fraction in 0,0.5,1) {

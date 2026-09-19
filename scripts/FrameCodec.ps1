@@ -37,8 +37,19 @@ function New-IndexedFrame {
 }
 
 function New-CodecContext {
-    param([int[][]]$Palette)
+    param([int[][]]$Palette,[switch]$LazyCells)
     $count = $Palette.Length
+    # Alternative game palettes need cells only, not standalone ANSI/Sixel tables.
+    # Cache encountered pairs instead of creating 65,536 strings per palette.
+    if($LazyCells){
+        $topPrefixes=[string[]]::new($count);$bottomSuffixes=[string[]]::new($count);$esc=[char]27
+        for($i=0;$i -lt $count;$i++){
+            $rgb=$Palette[$i]
+            $topPrefixes[$i]="$esc[38;2;$($rgb[0]);$($rgb[1]);$($rgb[2]);48;2;"
+            $bottomSuffixes[$i]="$($rgb[0]);$($rgb[1]);$($rgb[2])m$([char]0x2580)"
+        }
+        return @{Palette=$Palette;Count=$count;Cells=[string[]]::new($count*$count);TopPrefixes=$topPrefixes;BottomSuffixes=$bottomSuffixes}
+    }
     $pairs = [string[]]::new($count * $count)
     $esc = [char]27
     for ($top = 0; $top -lt $count; $top++) {

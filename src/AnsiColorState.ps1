@@ -1,8 +1,8 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 # Experimental truecolor encoder: update only the color component that changed.
 function New-AnsiColorStateContext {
-    param([int[][]]$Palette)
-    $context=New-CodecContext $Palette
+    param([int[][]]$Palette,[switch]$LazyCells)
+    $context=New-CodecContext $Palette -LazyCells:$LazyCells
     $foreground=[string[]]::new($Palette.Length);$background=[string[]]::new($Palette.Length)
     $esc=[char]27;$block=[char]0x2580
     for($i=0;$i -lt $Palette.Length;$i++){
@@ -28,7 +28,11 @@ function ConvertTo-AnsiColorStateStrip {
             if($t -eq $lastTop){
                 if($b -eq $lastBottom){$chunks[$n++]=$block}else{$chunks[$n++]=$bgCells[$b]}
             }elseif($b -eq $lastBottom){$chunks[$n++]=$fgCells[$t]}
-            else{$chunks[$n++]=$cells[$t*$count+$b]}
+            else{
+                [int]$pair=$t*$count+$b
+                if($null -eq $cells[$pair]){$cells[$pair]=$Context.TopPrefixes[$t]+$Context.BottomSuffixes[$b]}
+                $chunks[$n++]=$cells[$pair]
+            }
             $lastTop=$t;$lastBottom=$b
         }
     }

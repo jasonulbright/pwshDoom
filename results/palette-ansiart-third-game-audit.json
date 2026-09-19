@@ -1,0 +1,207 @@
+{
+  "Meaning": "Actual-host palette transport, effect expiry and automap checked against independently simulated fixture states and NumericV3 checkpoints. Optional recording adds source/media/audio/ownership checks. Artificial saves do not prove pickup mechanics, campaign completion, distinct displayed FPS or acoustic continuity.",
+  "HarnessSha256": "F4488CB3FB01D09F5118C2A9ADD6C42B7EC7E0A2913EB045AD2C1AFE7BEA8D30",
+  "Error": null,
+  "Checks": [
+    {
+      "Name": "Explicit four-state visual fixture",
+      "Passed": true
+    },
+    {
+      "Name": "Successful host and sound shutdown",
+      "Passed": true
+    },
+    {
+      "Name": "All 700 commands preserved",
+      "Passed": true
+    },
+    {
+      "Name": "All 52 independent NumericV3 checkpoints match",
+      "Passed": true
+    },
+    {
+      "Name": "Four exact saves loaded",
+      "Passed": true
+    },
+    {
+      "Name": "Save hash 0",
+      "Passed": true
+    },
+    {
+      "Name": "Save hash 1",
+      "Passed": true
+    },
+    {
+      "Name": "Save hash 2",
+      "Passed": true
+    },
+    {
+      "Name": "Save hash 3",
+      "Passed": true
+    },
+    {
+      "Name": "All eight automap controls preserved",
+      "Passed": true
+    },
+    {
+      "Name": "Damage: active world effect presented",
+      "Passed": true
+    },
+    {
+      "Name": "Damage: active automap effect presented",
+      "Passed": true
+    },
+    {
+      "Name": "Damage: world base palette restored",
+      "Passed": true
+    },
+    {
+      "Name": "Bonus: active world effect presented",
+      "Passed": true
+    },
+    {
+      "Name": "Bonus: active automap effect presented",
+      "Passed": true
+    },
+    {
+      "Name": "Bonus: world base palette restored",
+      "Passed": true
+    },
+    {
+      "Name": "Berserk: active world effect presented",
+      "Passed": true
+    },
+    {
+      "Name": "Berserk: active automap effect presented",
+      "Passed": true
+    },
+    {
+      "Name": "Berserk: world base palette restored",
+      "Passed": true
+    },
+    {
+      "Name": "Radiation: active world effect presented",
+      "Passed": true
+    },
+    {
+      "Name": "Radiation: active automap effect presented",
+      "Passed": true
+    },
+    {
+      "Name": "Radiation: world base palette restored",
+      "Passed": true
+    },
+    {
+      "Name": "Every presented fixture frame agrees with independent palette and automap state",
+      "Passed": true
+    },
+    {
+      "Name": "All effects audio frames consumed and returned",
+      "Passed": true
+    }
+  ],
+  "Details": {
+    "Commands": 700,
+    "QueueEmptyObservations": [
+      {
+        "WallMs": 19531.9567,
+        "AfterPacket": 14
+      },
+      {
+        "WallMs": 46931.7699,
+        "AfterPacket": 699
+      }
+    ],
+    "PaletteCounts": {
+      "Damage": [
+        {
+          "Frames": 66,
+          "Palette": 0
+        },
+        {
+          "Frames": 13,
+          "Palette": 2
+        },
+        {
+          "Frames": 13,
+          "Palette": 3
+        },
+        {
+          "Frames": 13,
+          "Palette": 4
+        },
+        {
+          "Frames": 12,
+          "Palette": 5
+        },
+        {
+          "Frames": 6,
+          "Palette": 6
+        },
+        {
+          "Frames": 7,
+          "Palette": 7
+        },
+        {
+          "Frames": 81,
+          "Palette": 8
+        }
+      ],
+      "Bonus": [
+        {
+          "Frames": 68,
+          "Palette": 0
+        },
+        {
+          "Frames": 14,
+          "Palette": 10
+        },
+        {
+          "Frames": 14,
+          "Palette": 11
+        },
+        {
+          "Frames": 146,
+          "Palette": 12
+        }
+      ],
+      "Radiation": [
+        {
+          "Frames": 170,
+          "Palette": 0
+        },
+        {
+          "Frames": 252,
+          "Palette": 13
+        }
+      ],
+      "Berserk": [
+        {
+          "Frames": 80,
+          "Palette": 0
+        },
+        {
+          "Frames": 221,
+          "Palette": 2
+        }
+      ]
+    },
+    "TicsPerSecond": 34.947164779456536,
+    "WorkerWorkingSetBytes": 5579108352,
+    "Checkpoints": 52,
+    "WritesPerSecond": 58.81108587171399,
+    "AudioFrames": 882000,
+    "VerifiedFrames": 1176,
+    "Style": "AnsiArt"
+  },
+  "Receipts": [
+    {
+      "Path": "results/palette-recording-fixture-second.json",
+      "Sha256": "6B0F729ACFEDD98EA97A0E281BD746186B7F7F955332315BDA6CC21FEF7C3511"
+    },
+    {
+      "Path": "local/recordings/palette-ansiart-third-game.json",
+      "Sha256": "31C169F00253EDFC75234685B1CD6367F967B6525ACAA7DA01C8A5CF67BF9004"
+    }
+  ]
+}

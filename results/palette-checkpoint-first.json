@@ -1,0 +1,99 @@
+{
+  "ReplaySha256": "F0DB742A0C1118ED3362C2F9E5E2185238E57F42ABB04AD27375018C4A12CE65",
+  "Error": null,
+  "Meaning": "Original Schema1 checkpoint digest preserved against an existing independent route; complete new packet digest retained. Negative controls demonstrate lighting and health changes remain detectable, with exact restoration. No campaign-completion claim.",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "Sources": [
+    {
+      "Path": "scripts/Test-CheckpointSnapshotSchema.ps1",
+      "Sha256": "78581399F3C696EE2146F87268A89BEAFA64BBAE49D85FB4B8670C5032E65EB9"
+    },
+    {
+      "Path": "src/InputReplay.ps1",
+      "Sha256": "61B600BB0F9A1F57DD0D41FEE877A25F5DAE156663428E396691E7D14AC1B6DD"
+    },
+    {
+      "Path": "src/GameHost.ps1",
+      "Sha256": "3732C6A81C74F43451CB2A2E4ED342EBE303FC3EEB558B64C3658F78EAACB940"
+    },
+    {
+      "Path": "src/SnapshotTransport.ps1",
+      "Sha256": "A42B7E62F049D2EB5A798DDD1E2029629490D1E0441B62B6E954997EEE90E009"
+    }
+  ],
+  "Checks": [
+    {
+      "Passed": true,
+      "Name": "Historical initial checkpoint hash is preserved exactly"
+    },
+    {
+      "Passed": true,
+      "Name": "Complete current packet hash is retained separately"
+    },
+    {
+      "Passed": true,
+      "Name": "Changing sector lighting still changes the historical-compatible hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Changing sector lighting changes the complete packet hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Changing health still changes the checkpoint hash"
+    },
+    {
+      "Passed": true,
+      "Name": "Restoring state restores both exact hashes"
+    },
+    {
+      "Passed": true,
+      "Name": "Invisibility is covered by the new packet digest"
+    },
+    {
+      "Passed": true,
+      "Name": "Schema1 retains its historical absence of invisibility"
+    },
+    {
+      "Passed": true,
+      "Name": "New replay comparison rejects changed invisibility"
+    },
+    {
+      "Passed": true,
+      "Name": "Actor flags are covered by the new packet digest"
+    },
+    {
+      "Passed": true,
+      "Name": "Schema1 retains its historical absence of actor flags"
+    },
+    {
+      "Passed": true,
+      "Name": "New replay comparison rejects changed actor flags"
+    },
+    {
+      "Passed": true,
+      "Name": "New replay comparison accepts matching serialized checkpoints"
+    },
+    {
+      "Passed": true,
+      "Name": "Historical NumericV2 packet comparison remains accepted"
+    },
+    {
+      "Passed": true,
+      "Name": "New comparison rejects changed palette selection"
+    },
+    {
+      "Passed": true,
+      "Name": "NumericV2 comparison retains its historical absence of palette selection"
+    },
+    {
+      "Passed": true,
+      "Name": "Missing compatibility digest is not silently accepted"
+    },
+    {
+      "Passed": true,
+      "Name": "Incorrect compatibility digest is rejected"
+    }
+  ],
+  "BundleSha256": "D57DF4DE73F7C8499436CE60F5F2EB284B833931A679D31A798A020C33339013"
+}

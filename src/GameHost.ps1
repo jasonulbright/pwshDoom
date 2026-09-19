@@ -39,7 +39,7 @@ function New-GameRenderSnapshot {
     return @{Tic=$world.LevelTime;Fraction=$Fraction;Sectors=$sectors;Sides=$sides;Actors=$actors.ToArray();ConsolePlayer=@{
         Mobj=@{X=($camera.OldX.Data+($camera.X.Data-$camera.OldX.Data)*$f)/65536.0;Y=($camera.OldY.Data+($camera.Y.Data-$camera.OldY.Data)*$f)/65536.0;Angle=$angleValue*(2*[Math]::PI/4294967296.0)};
         ViewZ=$viewZ;ExtraLight=$player.ExtraLight;FixedColorMap=$player.FixedColorMap;SectorLight=$camera.Subsector.Sector.LightLevel;Invisibility=$player.Powers[[int][PowerType]::Invisibility];
-        PlayerSprites=$weapon.ToArray();FaceIndex=$world.StatusBar.FaceIndex;AmmoType=[int][DoomInfo]::WeaponInfos[[int]$player.ReadyWeapon].Ammo;
+        PaletteNumber=[Renderer]::GetPaletteNumber($player);PlayerSprites=$weapon.ToArray();FaceIndex=$world.StatusBar.FaceIndex;AmmoType=[int][DoomInfo]::WeaponInfos[[int]$player.ReadyWeapon].Ammo;
         Ammo=$player.Ammo.Clone();MaxAmmo=$player.MaxAmmo.Clone();Cards=$player.Cards.Clone();WeaponOwned=$player.WeaponOwned.Clone();
         Health=$player.Health;ArmorPoints=$player.ArmorPoints;Kills=$player.KillCount;Secrets=$player.SecretCount}}
 }
@@ -49,7 +49,7 @@ function Set-GameRenderSnapshot {
     $Context.World=$Snapshot;$Context.Sectors=$Snapshot.Sectors;$Context.Sides=$Snapshot.Sides
 }
 
-# Same NumericV2 layout as ConvertTo-GameSnapshotBytes, packed directly from the
+# Same NumericV3 layout as ConvertTo-GameSnapshotBytes, packed directly from the
 # simulation-owned world. Keep the object path as an independent field oracle.
 function Get-GameRenderSnapshotBytes {
     param($Game,[double]$Fraction=1)
@@ -64,7 +64,7 @@ function Get-GameRenderSnapshotBytes {
     foreach($psp in $player.PlayerSprites){if($null -ne $psp.State){$weapon.Add($psp)}}
     $ns=$world.Map.Sectors.Length;$nd=$world.Map.Sides.Length
     [double[]]$v=[double[]]::new(48+5*$ns+5*$nd+8*$actors.Count+4*$weapon.Count)
-    $v[0]=2;$v[1]=$world.LevelTime;$v[2]=$Fraction;$v[3]=$ns;$v[4]=$nd;$v[5]=$actors.Count;$v[6]=$weapon.Count
+    $v[0]=3;$v[1]=$world.LevelTime;$v[2]=$Fraction;$v[3]=$ns;$v[4]=$nd;$v[5]=$actors.Count;$v[6]=$weapon.Count
     $f=if($camera.Interpolate){$Fraction}else{1}
     $v[8]=($camera.OldX.Data+($camera.X.Data-$camera.OldX.Data)*$f)/65536.0
     $v[9]=($camera.OldY.Data+($camera.Y.Data-$camera.OldY.Data)*$f)/65536.0
@@ -75,6 +75,7 @@ function Get-GameRenderSnapshotBytes {
     $v[12]=$player.ExtraLight;$v[13]=$player.FixedColorMap;$v[14]=$world.StatusBar.FaceIndex
     $v[43]=$camera.Subsector.Sector.LightLevel
     $v[44]=$player.Powers[[int][PowerType]::Invisibility]
+    $v[45]=[Renderer]::GetPaletteNumber($player)
     $v[15]=[int][DoomInfo]::WeaponInfos[[int]$player.ReadyWeapon].Ammo
     $v[16]=$player.Health;$v[17]=$player.ArmorPoints;$v[18]=$player.KillCount;$v[19]=$player.SecretCount
     for($i=0;$i -lt 4;$i++){$v[20+$i]=$player.Ammo[$i];$v[24+$i]=$player.MaxAmmo[$i]}

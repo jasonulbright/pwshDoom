@@ -51,7 +51,7 @@ function Test-GameRenderCompleted {
     return $true
 }
 function Submit-GameRender {
-    param($Pool,$Snapshot,[int]$ColumnOffset=0,[int]$RowOffset=0,[int]$FrameNumber=0,[switch]$ScreenPixels,[int]$Tic=0,[switch]$MenuPixels,[switch]$AutomapPixels)
+    param($Pool,$Snapshot,[int]$ColumnOffset=0,[int]$RowOffset=0,[int]$FrameNumber=0,[switch]$ScreenPixels,[int]$Tic=0,[switch]$MenuPixels,[switch]$AutomapPixels,[ValidateRange(0,13)][int]$PaletteNumber=0)
     if(-not (Test-GameRenderCompleted $Pool)){throw 'A render is already in progress.'}
     if($Snapshot -is [byte[]]){$bytes=$Snapshot}else{$bytes=ConvertTo-GameSnapshotBytes $Snapshot}
     if($bytes.Length -gt 1048448){throw 'Snapshot exceeds transport capacity.'}
@@ -59,7 +59,7 @@ function Submit-GameRender {
     foreach($worker in $Pool.Workers) {
         [void]$worker.Done.Reset();$worker.View.Write(4,$bytes.Length);$worker.View.WriteArray(128L,$bytes,0,$bytes.Length)
         $worker.View.Write(64,$ColumnOffset);$worker.View.Write(68,$RowOffset);$worker.View.Write(72,$FrameNumber)
-        $worker.View.Write(76,$(if($AutomapPixels){4}elseif($MenuPixels){3}else{[int][bool]$ScreenPixels}));$worker.View.Write(80,$Tic);[void]$worker.Go.Set()
+        $worker.View.Write(76,$(if($AutomapPixels){4}elseif($MenuPixels){3}else{[int][bool]$ScreenPixels}));$worker.View.Write(80,$Tic);$worker.View.Write(84,$PaletteNumber);[void]$worker.Go.Set()
     }
 }
 function Update-GameRenderAssets {
@@ -78,7 +78,7 @@ function Wait-GameRender {
         $view=$worker.View;$bytes=[byte[]]::new($view.ReadInt32(8));$pixels=$null
         [void]$view.ReadArray(1114112L,$bytes,0,$bytes.Length)
         if($ReadPixels -or $Pool.CopyPixels){$pixels=[byte[]]::new(64000);[void]$view.ReadArray(1048576L,$pixels,0,64000)}
-        $Pool.Results[$i]=@{Bytes=$bytes;Pixels=$pixels;RenderMs=$view.ReadDouble(16);EncodeMs=$view.ReadDouble(24);DecodeMs=$view.ReadDouble(40);StartedQpc=$view.ReadInt64(48);DoneQpc=$view.ReadInt64(56);Tic=$view.ReadInt32(32)}
+        $Pool.Results[$i]=@{Bytes=$bytes;Pixels=$pixels;RenderMs=$view.ReadDouble(16);EncodeMs=$view.ReadDouble(24);DecodeMs=$view.ReadDouble(40);StartedQpc=$view.ReadInt64(48);DoneQpc=$view.ReadInt64(56);Tic=$view.ReadInt32(32);PaletteNumber=$view.ReadInt32(36)}
     }
 }
 function Close-GameRenderPool {
