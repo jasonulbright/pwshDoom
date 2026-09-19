@@ -1,0 +1,84 @@
+{
+  "Views": [
+    {
+      "SceneComparedPixels": 53760,
+      "CurrentPixelSha256": "D2C51B96B312BE3206052A16A735B40832C580B9A776CA819385B159C66AD804",
+      "HudDifferentIndices": 171,
+      "Fraction": 1,
+      "SceneDifferentIndices": 42379,
+      "ViewZ": 41.0,
+      "MeanAbsoluteRgbChannelError": 15.27325,
+      "ImagePath": "C:\\projects\\pwshDoom\\local\\render-reference-e1m1-hud\\e1m1-0.png",
+      "Camera": {
+        "Angle": 0.0,
+        "X": 1056.0,
+        "Y": -3616.0
+      },
+      "Angle": 0,
+      "Tic": 36,
+      "ImageSha256": "5C4C146F40941987FC5DE3C7410B6C8684356BC86ABEB726DD38CD1D9A29DC24",
+      "HudComparedPixels": 10240,
+      "ReferencePixelSha256": "401F0EB8FA56C0178BDDB11A8277E184A625C940486DC6CCDEC28556A8545D35"
+    },
+    {
+      "SceneComparedPixels": 53760,
+      "CurrentPixelSha256": "D4DA372026DF5FADD41DBFCADAEDB2C0FC5D77341BAEA2838EAB585C62C04B46",
+      "HudDifferentIndices": 171,
+      "Fraction": 1,
+      "SceneDifferentIndices": 36380,
+      "ViewZ": 41.0,
+      "MeanAbsoluteRgbChannelError": 7.763802083333333,
+      "ImagePath": "C:\\projects\\pwshDoom\\local\\render-reference-e1m1-hud\\e1m1-90.png",
+      "Camera": {
+        "Angle": 1.5707963267948966,
+        "X": 1056.0,
+        "Y": -3616.0
+      },
+      "Angle": 90,
+      "Tic": 36,
+      "ImageSha256": "E0A1E2D5979306BBAD55884797DC5B70C51EE913CEB125297171F0730C390558",
+      "HudComparedPixels": 10240,
+      "ReferencePixelSha256": "9DD17ACE103150E8EF15C963671E1E4A46B21500CAD765F4CD603E7C0F91D6F8"
+    },
+    {
+      "SceneComparedPixels": 53760,
+      "CurrentPixelSha256": "CCED01693A23E15539B11B7009A9C78E6AF03E0415108F7537E1E9974E0E227F",
+      "HudDifferentIndices": 171,
+      "Fraction": 1,
+      "SceneDifferentIndices": 42700,
+      "ViewZ": 41.0,
+      "MeanAbsoluteRgbChannelError": 13.648963541666667,
+      "ImagePath": "C:\\projects\\pwshDoom\\local\\render-reference-e1m1-hud\\e1m1-180.png",
+      "Camera": {
+        "Angle": 3.141592653589793,
+        "X": 1056.0,
+        "Y": -3616.0
+      },
+      "Angle": 180,
+      "Tic": 36,
+      "ImageSha256": "0B5C4D7139A16F938E64AD4E51B3585CDA0202A8996ED04886321380352C5B20",
+      "HudComparedPixels": 10240,
+      "ReferencePixelSha256": "5A4551F7CF99B86309FD529ABBF0B6D4960586E0ED69A5FA2D050811F63E1178"
+    }
+  ],
+  "Episode": 1,
+  "Meaning": "Diagnostic comparison against the adopted, locally adapted PowerShell reference renderer at the same static simulation endpoint. This reference is not independently validated original Doom output. No fidelity pass threshold or performance claim. Images show reference, current, then white differing-index mask; base palette, square pixels, 320x168 scene plus HUD. Fixture changes only camera heading after 35 idle updates.",
+  "Sources": [
+    {
+      "Path": "scripts/Compare-RendererReference.ps1",
+      "Sha256": "74CFC7941E4AA1C9062047763F0AC41D37B7B96936DA6D4CF30BB311453D20D5"
+    },
+    {
+      "Path": "src/FastRenderer.ps1",
+      "Sha256": "5291D92CA56F730AB3A68184338B0956E2EB25B4BAE200F3B7918E6A62736880"
+    },
+    {
+      "Path": "src/GameHost.ps1",
+      "Sha256": "3E10CF9C03DEBB5D733477131DE6721824358155483DF8A11F0BCBD99ADBA03C"
+    }
+  ],
+  "Map": 1,
+  "Error": null,
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "BundleSha256": "A1AFAEE97606A57DF264A2E3ADCEBAB461577C3F132E2681D721B8F04D225B50"
+}

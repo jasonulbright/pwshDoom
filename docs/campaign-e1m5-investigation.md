@@ -32,3 +32,5 @@ The fifth failure independently reproduces all 5,895 inputs and 168 samples (`re
 These functional jobs overlap the finite E1M5 music preparation and provide no performance measurement. Live terminal rendering, recorded audio, complete-episode continuity and harder difficulties remain separate qualification work.
 
 Music preparation revalidated six existing tracks and passed the eight-second opening render (`results/music-e1m5-preparation-opening.json`). Its continuous three-period qualification covers 492 audio seconds; `local/music-prepared-seven.json` is usable only after successful atomic publication. Keep pinned synthesis sources unchanged and defer live recording/performance measurements until that job finishes.
+
+Seventh candidate (results/e1m5-route-seventh.json) ended after 8,369 ordinary commands at waypoint 272, around (499.35,699.33), before completing the central medkit detour. The final recorded samples had one health and ten shells. Completion remains unqualified; this bot failure alone does not justify an engine change. Rendering-fidelity work proceeds alongside the campaign investigation.

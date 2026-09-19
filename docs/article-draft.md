@@ -36,8 +36,10 @@ Other campaign failures did reveal engine defects: damaging-floor dispatch and s
 
 ## Audio and the remaining release work
 
-PowerShell synthesizes dry music from the user's IWAD and a separately supplied soundfont. Preparing a reusable loop means rendering continuous periods and checking both synthesizer state and output recurrence. An attractive eight-second opening is insufficient. Six tracks currently have qualified loops; E1M5 preparation is in progress. The [preparation workflow](music-preparation.md) publishes its catalog only after every requested track passes.
+PowerShell synthesizes dry music from the user's IWAD and a separately supplied soundfont. Preparing a reusable loop means rendering continuous periods and checking both synthesizer state and output recurrence. An attractive eight-second opening is insufficient. Seven tracks currently have qualified loops, including the completed 164-second E1M5 loop. The [preparation workflow](music-preparation.md) publishes its catalog only after every requested track passes.
 
 The complete release still needs more campaign routes and endings, continuous play, physical control checks, reference-image comparisons, acoustic review, repeated pacing measurements, display/DPI checks, a second hardware configuration, and clean-checkout packaging. Commercial WADs and generated media remain outside the source repository.
 
 The contribution so far is a working PowerShell terminal implementation with three visual styles and a growing body of reproducible evidence. Choosing it today means wanting this particular language-and-terminal experiment, with its measured costs and unfinished work visible. The final article will judge its advantages against maintained alternatives after the remaining comparisons are actually run.
+
+The first same-state comparison against the adopted PowerShell renderer exposed concrete HUD defects: missing weapon indicators, ignored patch offsets and incorrect number spacing. Those repairs now match the reference HUD across 64 varied states, including cached assets and split rendering. The 3D scene still differs substantially, so this is a bounded correctness improvement rather than a vanilla-fidelity claim. The [rendering investigation](rendering-fidelity.md) retains before/after results and the reference's limitations.

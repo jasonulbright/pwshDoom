@@ -64,6 +64,7 @@ function New-FastRenderContext {
     foreach($field in 'TallNumbers','ShortNumbers','Faces','Keys') {
         $ctx.Hud[$field]=@($hudPatches.$field | ForEach-Object {Get-RenderPatch $ctx $_})
     }
+    $ctx.Hud.Arms=@(foreach($pair in $hudPatches.Arms){foreach($patch in $pair){Get-RenderPatch $ctx $patch}})
     for($i=0;$i -lt $ctx.SpriteAtlas.Length;$i++){
         if($null -eq $Content.Sprites.spriteDefs[$i]){continue}
         $ctx.SpriteAtlas[$i]=@($Content.Sprites.spriteDefs[$i].Frames | ForEach-Object {
@@ -71,6 +72,7 @@ function New-FastRenderContext {
         })
     }
     $ctx.Hud.Percent=Get-RenderPatch $ctx $hudPatches.TallPercent
+    $ctx.Hud.Minus=Get-RenderPatch $ctx $hudPatches.TallMinus
     return $ctx
 }
 
@@ -102,15 +104,35 @@ function Draw-FastPatch {
     }
 }
 
+function Draw-FastHudPatch {
+    param($Context,$Patch,[int]$X,[int]$Y,[int]$FirstColumn,[int]$EndColumn)
+    # HUD coordinates name the patch origin, including WAD offsets. HUD pixels
+    # retain their palette indices rather than passing through world lighting.
+    [int]$left=$X-$Patch.Left;[int]$top=$Y-$Patch.Top;[int]$height=$Patch.Height
+    [int]$x0=[Math]::Max($FirstColumn,$left);[int]$x1=[Math]::Min($EndColumn,$left+$Patch.Width)
+    [int]$y0=[Math]::Max(0,$top);[int]$y1=[Math]::Min(200,$top+$height)
+    [int[]]$texels=$Patch.Data;[byte[]]$pixels=$Context.Pixels
+    for([int]$column=$x0;$column -lt $x1;$column++){
+        [int]$source=($column-$left)*$height+$y0-$top;[int]$destination=$y0*320+$column
+        for([int]$row=$y0;$row -lt $y1;$row++){
+            [int]$color=$texels[$source++];if($color -ge 0){$pixels[$destination]=$color};$destination+=320
+        }
+    }
+}
+
 function Draw-FastNumber {
     param($Context,[int]$Number,[int]$Right,[int]$Y,[bool]$Small,[int]$FirstColumn,[int]$EndColumn)
     $digits=if($Small){$Context.Hud.ShortNumbers}else{$Context.Hud.TallNumbers}
-    $Number=[Math]::Clamp($Number,0,999)
+    if($Number -eq 1994){return}
+    $negative=$Number -lt 0
+    if($negative){$Number=-[Math]::Max(-99,$Number)}
+    $remaining=3;$width=$digits[0].Width
     do {
-        $patch=$digits[$Number%10];$Right-=$patch.Width
-        Draw-FastPatch $Context $patch $Right $Y 1 0 $false 0 $FirstColumn $EndColumn
+        $patch=$digits[$Number%10];$Right-=$width
+        Draw-FastHudPatch $Context $patch $Right $Y $FirstColumn $EndColumn
         $Number=[Math]::Floor($Number/10)
-    } while($Number -gt 0)
+    } while($Number -gt 0 -and --$remaining -gt 0)
+    if($negative){Draw-FastHudPatch $Context $Context.Hud.Minus ($Right-8) $Y $FirstColumn $EndColumn}
 }
 
 function Invoke-FastRender {
@@ -286,14 +308,25 @@ function Invoke-FastRender {
         Draw-FastPatch $Context $patch ($psp.Sx-$patch.Left) ($psp.Sy-$patch.Top-16.25) 1 0 $frame.Flip[0] 0 $FirstColumn $EndColumn 168
     }
     $weaponMs=$phaseWatch.Elapsed.TotalMilliseconds;$phaseWatch.Restart()
-    Draw-FastPatch $Context $Context.Hud.Background 0 168 1 0 $false 0 $FirstColumn $EndColumn
-    Draw-FastPatch $Context $Context.Hud.ArmsBackground 104 168 1 0 $false 0 $FirstColumn $EndColumn
-    Draw-FastPatch $Context $Context.Hud.Faces[$player.FaceIndex] 143 168 1 0 $false 0 $FirstColumn $EndColumn
+    Draw-FastHud $Context $FirstColumn $EndColumn
+    $Context.Profile=@{GeometryMs=$geometryMs;ActorsMs=$actorMs;WeaponMs=$weaponMs;HudMs=$phaseWatch.Elapsed.TotalMilliseconds}
+}
+
+function Draw-FastHud {
+    param($Context,[int]$FirstColumn=0,[int]$EndColumn=320)
+    $player=$Context.World.ConsolePlayer
+    Draw-FastHudPatch $Context $Context.Hud.Background 0 168 $FirstColumn $EndColumn
+    Draw-FastHudPatch $Context $Context.Hud.ArmsBackground 104 168 $FirstColumn $EndColumn
+    for($i=0;$i -lt 6;$i++){
+        $owned=if($player.WeaponOwned[$i+1]){1}else{0}
+        Draw-FastHudPatch $Context $Context.Hud.Arms[2*$i+$owned] (111+12*($i%3)) (172+10*[Math]::Floor($i/3)) $FirstColumn $EndColumn
+    }
+    Draw-FastHudPatch $Context $Context.Hud.Faces[$player.FaceIndex] 143 168 $FirstColumn $EndColumn
     $ammoType=$player.AmmoType
     if($ammoType -lt 4){Draw-FastNumber $Context $player.Ammo[$ammoType] 44 171 $false $FirstColumn $EndColumn}
     Draw-FastNumber $Context $player.Health 90 171 $false $FirstColumn $EndColumn
     Draw-FastNumber $Context $player.ArmorPoints 221 171 $false $FirstColumn $EndColumn
-    foreach($x in 90,221){Draw-FastPatch $Context $Context.Hud.Percent $x 171 1 0 $false 0 $FirstColumn $EndColumn}
+    foreach($x in 90,221){Draw-FastHudPatch $Context $Context.Hud.Percent $x 171 $FirstColumn $EndColumn}
     for($i=0;$i -lt 4;$i++) {
         $y=@(173,179,191,185)[$i]
         Draw-FastNumber $Context $player.Ammo[$i] 288 $y $true $FirstColumn $EndColumn
@@ -301,7 +334,6 @@ function Invoke-FastRender {
     }
     for($i=0;$i -lt 3;$i++) {
         $key=-1;if($player.Cards[$i]){$key=$i};if($player.Cards[$i+3]){$key=$i+3}
-        if($key -ge 0){Draw-FastPatch $Context $Context.Hud.Keys[$key] 239 (171+10*$i) 1 0 $false 0 $FirstColumn $EndColumn}
+        if($key -ge 0){Draw-FastHudPatch $Context $Context.Hud.Keys[$key] 239 (171+10*$i) $FirstColumn $EndColumn}
     }
-    $Context.Profile=@{GeometryMs=$geometryMs;ActorsMs=$actorMs;WeaponMs=$weaponMs;HudMs=$phaseWatch.Elapsed.TotalMilliseconds}
 }
