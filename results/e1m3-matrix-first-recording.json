@@ -1,0 +1,101 @@
+{
+  "Style": "Matrix",
+  "ExitDelaySeconds": 3,
+  "SaveRoot": "",
+  "Sources": [
+    {
+      "Sha256": "3EC570EDED87DA4C7316B3CB2F567F580571BF2E6D10BF696DCC4D95D5C147EC",
+      "Path": "Start-Doom.ps1"
+    },
+    {
+      "Sha256": "05A86C46911204AE6BADA81EADE7C788E92F022F248F83B5E35063C22DF900FF",
+      "Path": "scripts/Invoke-Doom.ps1"
+    },
+    {
+      "Sha256": "349796E8739CC3FF5AFEE23D1085A9F58B4738F4A0961AE28A01D33F569FB666",
+      "Path": "scripts/Record-DoomReplay.ps1"
+    },
+    {
+      "Sha256": "41EE7E57F6703E7F7BC1FDCE53A1FD23F84A67A717CD647C703C5C1176004346",
+      "Path": "scripts/Record-ProcessAudio.ps1"
+    },
+    {
+      "Sha256": "795D02E96FFC3373741E7970512D1D65CC777A43B834D5771F69EC81CF3AF2C4",
+      "Path": "scripts/Merge-DoomCaptureAudio.ps1"
+    },
+    {
+      "Sha256": "A747786A2428F71C907F86AD631983548AAE8C6450F422F64144D367B8E9E321",
+      "Path": "src/ProcessAudioCapture.ps1"
+    },
+    {
+      "Sha256": "CED03D531F7C129D9E079F1F3B548DD436EFD81782974A3752D4689FA3E45DFB",
+      "Path": "src/CaptureClock.ps1"
+    },
+    {
+      "Sha256": "EFA64468F234327E5D7682CE08FF5B8863EEEFC5D5B082DB9B74BE544D092E21",
+      "Path": "src/CaptureTimeline.ps1"
+    }
+  ],
+  "Meaning": "Actual game-window Windows.Graphics.Capture at the recorded capture ceiling, with D3D11 frames passed to external NVENC H.264 encoding. The ceiling exceeds 60 to avoid capture-rate aliasing; actual arrival rate is compositor-driven. Output is resampled to 60 FPS and can contain duplicates. Video includes startup and a short console return. Recording can affect game/presentation timing; encoded 60 FPS does not prove 60 distinct displayed game images. No microphone or desktop audio is captured. The input selects only the game window; inspect footage for occlusion or capture artifacts.",
+  "AudioCaptured": false,
+  "MediaFfmpeg": "local/tools/ffmpeg/ffmpeg-9.0.1-essentials_build/bin/ffmpeg.exe",
+  "AudioReport": "C:\\projects\\pwshDoom\\local\\recordings\\e1m3-matrix-first-audio.json",
+  "Error": "Game/recording failed: Simulation command ring overflow.\nat Send-DoomSimulationCommand, C:\\projects\\pwshDoom\\src\\SimulationProcess.ps1: line 31\r\nat <ScriptBlock>, C:\\projects\\pwshDoom\\scripts\\Invoke-Doom.ps1: line 269 ",
+  "ClockReport": "C:\\projects\\pwshDoom\\local\\recordings\\e1m3-matrix-first-clock.json",
+  "Ffmpeg": "local/tools/capture-build/FFmpeg-n9.0.1/ffmpeg.exe",
+  "Video": "C:\\projects\\pwshDoom\\local\\recordings\\e1m3-matrix-first.mp4",
+  "CaptureStartQpc": 513337093820,
+  "WindowHandle": 13043362,
+  "FontFace": "MS Gothic",
+  "EncoderExitCode": 0,
+  "SessionScheduleSha256": null,
+  "AudioExitCode": 0,
+  "StartupTimeoutSeconds": 90,
+  "CaptureDeadlineSeconds": 345,
+  "PreexistingTerminalWindows": 0,
+  "VideoFps": 60,
+  "GameReport": "C:\\projects\\pwshDoom\\local\\recordings\\e1m3-matrix-first-game.json",
+  "FontSize": 12,
+  "AudioCaptureRequested": true,
+  "MediaFfmpegSha256": "72A489ECCD008C2EC2C0A5856C5C75BC3D8BBFA90166C4566865C246445E6AA3",
+  "CaptureBackend": "GraphicsCapture",
+  "MusicCatalogSha256": "34720E9255D7E7D51EFFD7C6050C59B95C6692033881DEE7305E84060A15D1CA",
+  "ReplaySha256": "A9E3E3E48DF5A483D904A412E3AF7A872ED5B5862713A331DC3310007AA09970",
+  "FfmpegSha256": "BD59EE9D861A9531AC289A8D9C0A02B8166A215A47D882605E372845324A1863",
+  "TerminalPid": 15012,
+  "GlyphSet": "Katakana",
+  "FinishedUtc": "2026-09-19T11:07:47.9433289Z",
+  "Arguments": [
+    "-hide_banner",
+    "-n",
+    "-filter_complex",
+    "gfxcapture=hwnd=13043362:max_framerate=240:capture_cursor=0:display_border=1:width=-2:height=-2",
+    "-an",
+    "-c:v",
+    "h264_nvenc",
+    "-preset",
+    "p4",
+    "-cq",
+    "18",
+    "-b:v",
+    "0",
+    "-r",
+    "60",
+    "-fps_mode",
+    "cfr",
+    "-movflags",
+    "+faststart",
+    "-t",
+    "345",
+    "C:\\projects\\pwshDoom\\local\\recordings\\e1m3-matrix-first.mp4"
+  ],
+  "Maximized": false,
+  "VideoSha256": "5B76673331B361FAC706B7D7396EA6F23133112025D05C898249DF23181375F7",
+  "CaptureLimit": 240,
+  "SourcesChangedDuringRun": [],
+  "ExpectedExit": "ReplayEnd",
+  "QpcFrequency": 10000000,
+  "TargetWasPreexisting": false,
+  "InputReplaySha256": "B354DD5800C97A5F063586E9840DC0F956E75AECC8668A6EE8F5FB7F0B7566EF",
+  "SoundRequested": true
+}

@@ -1,0 +1,81 @@
+{
+  "ScriptSha256": "DD3A545A6D946EA3FEAA45AC7744B2B8503FD83A0FFEF2BD055FCBC0547DA70A",
+  "HazardSectors": [
+    5,
+    7,
+    42,
+    95,
+    98,
+    107,
+    110,
+    135
+  ],
+  "Start": [
+    1360.0,
+    608.0
+  ],
+  "AvoidDamagingFloors": true,
+  "Error": null,
+  "Visited": 262,
+  "Radius": 16.1,
+  "End": [
+    1312.0,
+    800.0
+  ],
+  "Seconds": 0.3272475,
+  "Waypoints": [
+    [
+      1360,
+      608
+    ],
+    [
+      1400,
+      648
+    ],
+    [
+      1408,
+      648
+    ],
+    [
+      1432,
+      672
+    ],
+    [
+      1432,
+      720
+    ],
+    [
+      1384,
+      768
+    ],
+    [
+      1376,
+      768
+    ],
+    [
+      1368,
+      776
+    ],
+    [
+      1352,
+      776
+    ],
+    [
+      1336,
+      792
+    ],
+    [
+      1320,
+      792
+    ],
+    [
+      1312,
+      800
+    ]
+  ],
+  "Found": true,
+  "InitialObstacles": 36,
+  "GridSize": 8,
+  "GeometrySha256": "40624E79AB842AB3D271D2A939B98E675B07FA63C92E2A9D316866280CDDF8F0",
+  "Meaning": "PowerShell A* planning with declared grid size and point/midpoint axis-aligned square clearance from blocking linedefs and exported initial solid non-CountKill obstacles. Optional initial hazardous-sector boundaries are treated as walls, not a guarantee that endpoints are outside hazards. This is planar guidance only: sector heights, dynamic floors, doors, keys, moving actors, damage and timed triggers require actual ordinary-input validation. No engine state is moved or edited."
+}

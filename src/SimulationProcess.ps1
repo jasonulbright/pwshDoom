@@ -26,6 +26,12 @@ function New-DoomSimulation {
         return $state
     } catch {Close-DoomSimulation $state;throw}
 }
+function Test-DoomSimulationCommandWindow {
+    param($Simulation,[int]$Index,[ValidateRange(1,1024)][int]$Limit=2)
+    # Check before sampling input or advancing replay/automap indices. The sole
+    # consumer can only free slots between this check and the producer's write.
+    return ($Index-$Simulation.View.ReadInt32(20)) -lt $Limit
+}
 function Send-DoomSimulationCommand {
     param($Simulation,[int]$Index,[int[]]$Command,[ValidateRange(0,1023)][int]$AutomapMask=0)
     if($Index-$Simulation.View.ReadInt32(20) -ge 1024){throw 'Simulation command ring overflow.'}

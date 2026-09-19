@@ -17,6 +17,8 @@ The independent replay enters intermission at command 6,931, E1M4 at 7,047, and 
 
 No E1M3 live terminal recording, audio playback, display pacing, secret exit, E1M9 return, harder difficulty or human playthrough is qualified by this headless result. The current route wording remains provisional in its JSON to preserve the plan hash. The successful receipt establishes its narrower measured behavior.
 
+The September 19 Matrix recording failed with a full input-command ring after about 59.8 active seconds. The [command-admission investigation](command-admission.md) retains the footage and failure evidence, then verifies a bounded 1,200-command headless prefix with all four checkpoints and all audio frames returned. It still runs at only 19.424 ticks/sec; full recorded E1M3 completion remains open.
+
 Reproduce with fresh paths and PowerShell 7 (or supply another user-local IWAD with `-Wad`):
 
 ```powershell

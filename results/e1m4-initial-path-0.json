@@ -1,0 +1,173 @@
+{
+  "Found": true,
+  "Seconds": 1.1922814,
+  "Meaning": "PowerShell A* planning with declared grid size and point/midpoint axis-aligned square clearance from blocking linedefs and exported initial solid non-CountKill obstacles. Optional initial hazardous-sector boundaries are treated as walls, not a guarantee that endpoints are outside hazards. This is planar guidance only: sector heights, dynamic floors, doors, keys, moving actors, damage and timed triggers require actual ordinary-input validation. No engine state is moved or edited.",
+  "InitialObstacles": 36,
+  "HazardSectors": [
+    5,
+    7,
+    42,
+    95,
+    98,
+    107,
+    110,
+    135
+  ],
+  "AvoidDamagingFloors": true,
+  "Waypoints": [
+    [
+      2032,
+      1120
+    ],
+    [
+      2008,
+      1120
+    ],
+    [
+      2000,
+      1112
+    ],
+    [
+      1776,
+      1112
+    ],
+    [
+      1584,
+      920
+    ],
+    [
+      1568,
+      920
+    ],
+    [
+      1560,
+      912
+    ],
+    [
+      1552,
+      912
+    ],
+    [
+      1544,
+      904
+    ],
+    [
+      1536,
+      904
+    ],
+    [
+      1528,
+      896
+    ],
+    [
+      1520,
+      896
+    ],
+    [
+      1512,
+      888
+    ],
+    [
+      1504,
+      888
+    ],
+    [
+      1496,
+      880
+    ],
+    [
+      1480,
+      880
+    ],
+    [
+      1472,
+      872
+    ],
+    [
+      1464,
+      872
+    ],
+    [
+      1456,
+      864
+    ],
+    [
+      1448,
+      864
+    ],
+    [
+      1440,
+      856
+    ],
+    [
+      1432,
+      856
+    ],
+    [
+      1424,
+      848
+    ],
+    [
+      1416,
+      848
+    ],
+    [
+      1408,
+      840
+    ],
+    [
+      1392,
+      840
+    ],
+    [
+      1384,
+      832
+    ],
+    [
+      1376,
+      832
+    ],
+    [
+      1368,
+      824
+    ],
+    [
+      1360,
+      824
+    ],
+    [
+      1352,
+      816
+    ],
+    [
+      1344,
+      816
+    ],
+    [
+      1336,
+      808
+    ],
+    [
+      1320,
+      808
+    ],
+    [
+      1312,
+      800
+    ]
+  ],
+  "Error": null,
+  "ScriptSha256": "DD3A545A6D946EA3FEAA45AC7744B2B8503FD83A0FFEF2BD055FCBC0547DA70A",
+  "GridSize": 8,
+  "Radius": 16.1,
+  "Visited": 1380,
+  "Start": [
+    2032.0,
+    1120.0
+  ],
+  "GeometrySha256": "40624E79AB842AB3D271D2A939B98E675B07FA63C92E2A9D316866280CDDF8F0",
+  "End": [
+    1312.0,
+    800.0
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "AvoidDamagingFloors": true,
+  "InitialObstacles": 36,
+  "Seconds": 2.4089074,
+  "Meaning": "PowerShell A* planning with declared grid size and point/midpoint axis-aligned square clearance from blocking linedefs and exported initial solid non-CountKill obstacles. Optional initial hazardous-sector boundaries are treated as walls, not a guarantee that endpoints are outside hazards. This is planar guidance only: sector heights, dynamic floors, doors, keys, moving actors, damage and timed triggers require actual ordinary-input validation. No engine state is moved or edited.",
+  "Error": null,
+  "End": [
+    1528.0,
+    1728.0
+  ],
+  "Found": true,
+  "GridSize": 8,
+  "GeometrySha256": "40624E79AB842AB3D271D2A939B98E675B07FA63C92E2A9D316866280CDDF8F0",
+  "HazardSectors": [
+    5,
+    7,
+    42,
+    95,
+    98,
+    107,
+    110,
+    135
+  ],
+  "ScriptSha256": "DD3A545A6D946EA3FEAA45AC7744B2B8503FD83A0FFEF2BD055FCBC0547DA70A",
+  "Waypoints": [
+    [
+      2032,
+      1120
+    ],
+    [
+      2024,
+      1128
+    ],
+    [
+      1776,
+      1128
+    ],
+    [
+      1712,
+      1192
+    ],
+    [
+      1360,
+      1192
+    ],
+    [
+      1288,
+      1264
+    ],
+    [
+      1288,
+      1464
+    ],
+    [
+      1512,
+      1688
+    ],
+    [
+      1512,
+      1696
+    ],
+    [
+      1520,
+      1704
+    ],
+    [
+      1520,
+      1720
+    ],
+    [
+      1528,
+      1728
+    ]
+  ],
+  "Start": [
+    2032.0,
+    1120.0
+  ],
+  "Radius": 16.1,
+  "Visited": 2865
+}

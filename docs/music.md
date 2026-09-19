@@ -1,6 +1,6 @@
 # Music foundation
 
-Music is not yet audible in the game. The original PowerShell foundation now includes MUS decoding, sample scheduling, SF2 bank/region readers and an [offline dry synthesizer](music-synthesis.md). The existing `-Sound` option still plays effects only. A compiled synthesizer is used solely in a separately labeled comparison script.
+Opt-in music now plays through the host using qualified, prepared dry PowerShell synthesis and PowerShell mixing. Six tracks are qualified; see [music preparation](music-preparation.md) and [host integration](music-integration.md) for current evidence and limitations. The existing `-Sound` option alone still plays effects only. This document retains the earlier decoder, instrument-bank and oscillator investigation. A compiled synthesizer is used solely in a separately labeled comparison script.
 
 ## Decoder and timeline
 
@@ -32,7 +32,7 @@ The local `TimGM6mb.sf2` has SHA-256 `82475B91A76DE15CB28A104707D3247BA932E228BA
 
 All samples declare mono type. Headers exist for all 52 observed melodic program numbers in bank zero and eight percussion presets in bank 128, including program zero. Note/velocity-zone coverage remains to be checked. The inventory retains generator IDs and sample rates to scope envelopes, loops, tuning, filters, LFOs and controller handling. Finding a preset header does not prove that it sounds correct.
 
-ManagedDoomPowershell's retained README attributes this bank to Tim Brechbill under GPLv2 and carries `licenses/LICENSE_TimGM6mb.txt`. The bank's own inspected INFO metadata names TimGM6mb, EMU8000 and Awave Studio v8.5, without a copyright entry. Thus licensing attribution is presently upstream-reported; independent asset provenance still needs qualification before packaging. The bank and decoded samples remain ignored local assets.
+ManagedDoomPowershell's retained README attributes this bank to Tim Brechbill under GPLv2 and carries `licenses/LICENSE_TimGM6mb.txt`. The bank's own inspected INFO metadata names TimGM6mb, EMU8000 and Awave Studio v8.5, without a copyright entry. The subsequent [provenance investigation](music-bank-provenance.md) matches its exact bytes to an earlier MuseScore commit and distinguishes the later Alto Sax correction. Packaging notices and audio fidelity still need qualification. The bank and decoded samples remain ignored local assets.
 
 ## Evidence and preserved failures
 

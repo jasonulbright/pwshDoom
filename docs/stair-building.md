@@ -1,6 +1,6 @@
 # E1M3 exit-stair correction
 
-Measured 2026-09-12. The sixteenth HMP E1M3 input candidate survives the upper walkway, obtains the blue key, and reaches the exit area with 58 health and 43 kills. Crossing the stair trigger then throws in `SectorAction.BuildStairs`: the target has no `Number` property. The receipt retains 6,261 completed commands; the throwing update is not appended by the driver. This run is a retained failure, not a completion.
+Measured 2026-09-12. The sixteenth HMP E1M3 input candidate survives the upper walkway, obtains the blue key, and reaches the exit area with 58 health and 43 kills. Crossing the stair trigger then throws in `SectorAction.BuildStairs`: the target has no `Number` property. The receipt retains 6,261 attempted commands, including the throwing update: the driver appends its input before calling Game.Update. This run is a retained failure, not a completion.
 
 The adopted guard was:
 

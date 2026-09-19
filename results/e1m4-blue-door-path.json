@@ -1,0 +1,149 @@
+{
+  "Waypoints": [
+    [
+      160,
+      800
+    ],
+    [
+      152,
+      792
+    ],
+    [
+      -96,
+      792
+    ],
+    [
+      -256,
+      632
+    ],
+    [
+      -592,
+      632
+    ],
+    [
+      -600,
+      624
+    ],
+    [
+      -600,
+      584
+    ],
+    [
+      -704,
+      480
+    ],
+    [
+      -704,
+      -120
+    ],
+    [
+      -712,
+      -128
+    ],
+    [
+      -712,
+      -136
+    ],
+    [
+      -720,
+      -144
+    ],
+    [
+      -720,
+      -152
+    ],
+    [
+      -728,
+      -160
+    ],
+    [
+      -728,
+      -168
+    ],
+    [
+      -736,
+      -176
+    ],
+    [
+      -736,
+      -184
+    ],
+    [
+      -744,
+      -192
+    ],
+    [
+      -744,
+      -208
+    ],
+    [
+      -752,
+      -216
+    ],
+    [
+      -752,
+      -224
+    ],
+    [
+      -760,
+      -232
+    ],
+    [
+      -760,
+      -240
+    ],
+    [
+      -768,
+      -248
+    ],
+    [
+      -768,
+      -256
+    ],
+    [
+      -776,
+      -264
+    ],
+    [
+      -776,
+      -272
+    ],
+    [
+      -784,
+      -280
+    ],
+    [
+      -784,
+      -288
+    ]
+  ],
+  "Start": [
+    160.0,
+    800.0
+  ],
+  "HazardSectors": [
+    5,
+    7,
+    42,
+    95,
+    98,
+    107,
+    110,
+    135
+  ],
+  "Found": true,
+  "Error": null,
+  "GeometrySha256": "40624E79AB842AB3D271D2A939B98E675B07FA63C92E2A9D316866280CDDF8F0",
+  "GridSize": 8,
+  "InitialObstacles": 36,
+  "AvoidDamagingFloors": true,
+  "Radius": 16.1,
+  "ScriptSha256": "DD3A545A6D946EA3FEAA45AC7744B2B8503FD83A0FFEF2BD055FCBC0547DA70A",
+  "End": [
+    -784.0,
+    -288.0
+  ],
+  "Meaning": "PowerShell A* planning with declared grid size and point/midpoint axis-aligned square clearance from blocking linedefs and exported initial solid non-CountKill obstacles. Optional initial hazardous-sector boundaries are treated as walls, not a guarantee that endpoints are outside hazards. This is planar guidance only: sector heights, dynamic floors, doors, keys, moving actors, damage and timed triggers require actual ordinary-input validation. No engine state is moved or edited.",
+  "Visited": 9501,
+  "Seconds": 6.9706043
+}

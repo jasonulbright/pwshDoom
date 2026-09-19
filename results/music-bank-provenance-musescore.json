@@ -1,0 +1,23 @@
+{
+  "CopyrightReference": "https://metadata.ftp-master.debian.org/changelogs/main/t/timgm6mb-soundfont/timgm6mb-soundfont_1.3-5_copyright",
+  "Meaning": "Downloaded two exact primary MuseScore history files into ignored local/music-provenance and measured bytes/SHA-256. Current bank matches the parent of the Debian-referenced Alto Sax correction. No active bank replacement, PCM recomputation, acoustic comparison or new live qualification.",
+  "BaselineSha256": "82475B91A76DE15CB28A104707D3247BA932E228BADA3F47BBA63C6B31AAF7A1",
+  "Versions": [
+    {
+      "Bytes": 5994284,
+      "Commit": "930dbaf23b8432d897c3127a0ad1be176f7f1ebe",
+      "Url": "https://raw.githubusercontent.com/musescore/musescore-old/930dbaf23b8432d897c3127a0ad1be176f7f1ebe/mscore/share/sound/TimGM6mb.sf2",
+      "Sha256": "82475B91A76DE15CB28A104707D3247BA932E228BADA3F47BBA63C6B31AAF7A1",
+      "Role": "Exact byte match to current research bank"
+    },
+    {
+      "Bytes": 5969788,
+      "Commit": "90c33ef9d87b3f5ff92efd3b07d89eb455fb1fef",
+      "Url": "https://raw.githubusercontent.com/musescore/musescore-old/90c33ef9d87b3f5ff92efd3b07d89eb455fb1fef/mscore/share/sound/TimGM6mb.sf2",
+      "Sha256": "C5378B62028C920CB11E4803327983FEE2F2CDFF5DC89C708E39DA417E51C854",
+      "Role": "Subsequent Alto Sax correction referenced by Debian"
+    }
+  ],
+  "BaselineMatchesPriorMuseScoreCommit": true,
+  "BaselineBytes": 5994284
+}

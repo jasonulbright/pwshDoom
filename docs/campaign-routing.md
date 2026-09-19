@@ -27,7 +27,7 @@ The initial annotation reversed the blue and yellow keys. **Thing type 6 at (-26
 | `thirteenth` | Medkit detour blocked by a solid decorative column, raw thing type 48 at (-1760,-1056) |
 | `fourteenth` | Column bypass and health pickups work; fixed replay identifies a fall into the horseshoe pit and repeated type-7 floor damage. Earlier stationary-combat diagnosis corrected. |
 | `fifteenth` | Alternating combat strafing from the beginning causes an earlier death in the western approach; not an improvement |
-| `sixteenth` | Avoids the damaging pit, obtains blue and reaches the exit area; real stair-building exception after 6,261 completed commands |
+| `sixteenth` | Avoids the damaging pit, obtains blue and reaches the exit area; real stair-building exception on recorded command 6,261 |
 | `seventeenth` | Same route after stair fix completes in 6,931 commands with 66 health; independent continuation into E1M4 passes |
 | `secret-first` | Direct start-room route encounters an initially closed/raised corridor |
 | `secret-second` | Western pit-door approach fails in combat; not a secret exit |
@@ -56,4 +56,4 @@ Only after a route succeeds should it be independently qualified and recorded th
 
 The [damaging-floor investigation](sector-damage.md) adds an independent fixed-command diagnosis and repairs a separate type-16 gameplay defect. All 512 hazard checks and both completed route regressions pass. The optional conservative planner now avoids initial hazard boundaries; the sixteenth candidate follows the upper walkway and omits the pit medkit. The sixteenth outcome is the stair exception described below.
 
-Sixteenth reaches the blue key and exit-area approach with 58 health and 43 kills, then exposes a real [stair-building exception](stair-building.md), retained with 6,261 completed commands. Both direct stair variants reproduce it; a precedence correction passes 86 checks. Seventeenth completes the same route with that repair; all 198 trace samples and 24 checkpoints pass independent continuation into E1M4. Terminal playback and secret coverage remain open.
+Sixteenth reaches the blue key and exit-area approach with 58 health and 43 kills, then exposes a real [stair-building exception](stair-building.md), retained with 6,261 attempted commands including the throwing update. Both direct stair variants reproduce it; a precedence correction passes 86 checks. Seventeenth completes the same route with that repair; all 198 trace samples and 24 checkpoints pass independent continuation into E1M4. Terminal playback and secret coverage remain open.

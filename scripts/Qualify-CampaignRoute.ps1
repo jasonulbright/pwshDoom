@@ -36,6 +36,7 @@ try{
         if($expected.ContainsKey($log.Count)){
             $e=$expected[$log.Count]
             if($e.PSObject.Properties['Armor'] -and $p.ArmorPoints -ne $e.Armor){throw "Independent armor differs at command $($log.Count)."}
+            if($e.PSObject.Properties['Sector'] -and ($p.Mobj.Subsector.Sector.Number -ne $e.Sector -or [int]$p.Mobj.Subsector.Sector.Special -ne $e.SectorSpecial -or $p.Mobj.Subsector.Sector.FloorHeight.Data/65536.0 -ne $e.Floor)){throw "Independent sector/floor differs at command $($log.Count)."}
             if($pre.X -ne $e.X -or $pre.Y -ne $e.Y -or $p.Mobj.Z.Data/65536.0 -ne $e.Z -or $p.Health -ne $e.Health -or $p.KillCount -ne $e.Kills -or ($p.Ammo -join ',') -cne ($e.Ammo -join ',') -or ($p.Cards -join ',') -cne ($e.Cards -join ',') -or $p.ReadyWeapon.ToString() -cne $e.Weapon){throw "Independent route trace differs at command $($log.Count)."};$traceChecks++
         }
     }

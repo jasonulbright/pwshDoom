@@ -1,0 +1,101 @@
+{
+  "ScriptSha256": "DD3A545A6D946EA3FEAA45AC7744B2B8503FD83A0FFEF2BD055FCBC0547DA70A",
+  "HazardSectors": [
+    5,
+    7,
+    42,
+    95,
+    98,
+    107,
+    110,
+    135
+  ],
+  "Start": [
+    -1096.0,
+    968.0
+  ],
+  "AvoidDamagingFloors": true,
+  "Error": null,
+  "Visited": 210,
+  "Radius": 16.1,
+  "End": [
+    -1328.0,
+    1136.0
+  ],
+  "Seconds": 0.2163113,
+  "Waypoints": [
+    [
+      -1096,
+      968
+    ],
+    [
+      -1232,
+      968
+    ],
+    [
+      -1256,
+      992
+    ],
+    [
+      -1272,
+      992
+    ],
+    [
+      -1280,
+      1000
+    ],
+    [
+      -1280,
+      1032
+    ],
+    [
+      -1288,
+      1040
+    ],
+    [
+      -1288,
+      1056
+    ],
+    [
+      -1296,
+      1064
+    ],
+    [
+      -1296,
+      1072
+    ],
+    [
+      -1304,
+      1080
+    ],
+    [
+      -1304,
+      1088
+    ],
+    [
+      -1312,
+      1096
+    ],
+    [
+      -1312,
+      1104
+    ],
+    [
+      -1320,
+      1112
+    ],
+    [
+      -1320,
+      1128
+    ],
+    [
+      -1328,
+      1136
+    ]
+  ],
+  "Found": true,
+  "InitialObstacles": 36,
+  "GridSize": 8,
+  "GeometrySha256": "40624E79AB842AB3D271D2A939B98E675B07FA63C92E2A9D316866280CDDF8F0",
+  "Meaning": "PowerShell A* planning with declared grid size and point/midpoint axis-aligned square clearance from blocking linedefs and exported initial solid non-CountKill obstacles. Optional initial hazardous-sector boundaries are treated as walls, not a guarantee that endpoints are outside hazards. This is planar guidance only: sector heights, dynamic floors, doors, keys, moving actors, damage and timed triggers require actual ordinary-input validation. No engine state is moved or edited."
+}

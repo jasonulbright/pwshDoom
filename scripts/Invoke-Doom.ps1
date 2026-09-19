@@ -40,6 +40,7 @@ $wallClock=[Diagnostics.Stopwatch]::new();$viewport=$null;$viewportScheduleData=
 $outputColumns=if($Style -eq 'Classic'){320}else{160};$outputRows=if($Style -eq 'Classic'){100}else{50}
 $viewportChanges=[Collections.Generic.List[object]]::new();$pauseStart=$null;$pausedMs=0.0;$pauseCount=0;$resizeDiscarded=0
 $completed=0;$tics=0;$exitReason='Error';$terminalWidth=0;$terminalHeight=0;$workerMemory=0;$simMemory=0
+$commandWindow=2;$commandPressureStart=0L;$commandPressure=[Collections.Generic.List[object]]::new()
 $frameTimes=[Collections.Generic.List[double]]::new();$frameStats=[Collections.Generic.List[object]]::new()
 $captures=[Collections.Generic.List[string]]::new();$nextCapture=$CaptureEveryTics;$snapshot=$null;$replayData=$null
 $interpolationTimes=[Collections.Generic.List[double]]::new();$simulationReport=$null
@@ -254,7 +255,16 @@ try {
             $audioPause=[int](-not $clock.IsRunning)
             if($simulation.View.ReadInt32(84) -ne $audioPause){$simulation.View.Write(84,$audioPause);[void]$simulation.Go.Set()}
         }
-        if($viewport.Fits -and $menu.Screen -eq 0 -and $null -eq $pendingAction -and $now -ge ($tics+1)*1000.0/35) {
+        $commandDue=$viewport.Fits -and $menu.Screen -eq 0 -and $null -eq $pendingAction -and $now -ge ($tics+1)*1000.0/35
+        $commandWindowOpen=Test-DoomSimulationCommandWindow $simulation $tics $commandWindow
+        if($commandDue -and -not $commandWindowOpen){
+            if($commandPressureStart -eq 0){$commandPressureStart=[Diagnostics.Stopwatch]::GetTimestamp()}
+        }elseif($commandPressureStart -ne 0){
+            $pressureEnd=[Diagnostics.Stopwatch]::GetTimestamp()
+            $commandPressure.Add(@{BeforeCommand=$tics;StartQpc=$commandPressureStart;EndQpc=$pressureEnd;Milliseconds=($pressureEnd-$commandPressureStart)*1000.0/[Diagnostics.Stopwatch]::Frequency})
+            $commandPressureStart=0L
+        }
+        if($commandDue -and $commandWindowOpen) {
             $cmd.Clear();$send=$true;$automapMask=0
             if($null -ne $replayData) {
                 if($tics -ge $replayData.InputCommands.Count){$send=$false;if($simulation.View.ReadInt32(20) -ge $tics){$exitReason='ReplayEnd';break}}
@@ -360,6 +370,7 @@ finally {
         SessionSchedule=$SessionSchedule;SessionPausedSeconds=$sessionPausedMs/1000;SessionEvents=$sessionEvents.ToArray();SaveDirectory=$saveDirectory;
         SettingsPath=$SettingsPath;InitialSettings=$initialPreferences;FinalSettings=$preferences;SettingsLoadError=$preferencesLoadError;SettingsEvents=$preferencesEvents.ToArray();
         DurationSeconds=$clock.Elapsed.TotalSeconds;IssuedCommands=$tics;SimulationTics=$simTics;TicsPerSecond=$simTics/[Math]::Max(.001,$clock.Elapsed.TotalSeconds);
+        MaximumPendingCommands=$commandWindow;CommandBackpressure=$commandPressure.ToArray();IncompleteCommandBackpressureStartQpc=$commandPressureStart;
         WallDurationSeconds=$wallClock.Elapsed.TotalSeconds;ViewportPausedSeconds=$pausedMs/1000;ViewportPauseCount=$pauseCount;
         MapReloads=$mapReloads.ToArray();MapReloadPausedSeconds=$loadingMs/1000;DiscardedTransitionFrames=$transitionDiscarded;FinalAssetGeneration=$assetGeneration;
         CompletedUpdatesPerWallSecond=$completed/[Math]::Max(.001,$wallClock.Elapsed.TotalSeconds);DiscardedResizeFrames=$resizeDiscarded;

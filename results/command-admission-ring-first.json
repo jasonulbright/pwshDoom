@@ -1,0 +1,7 @@
+{
+  "Checks": [],
+  "Meaning": "Actual mapped memory and wake event with deterministic consumer-header fixture; 1200 distinct commands/masks cross the 1024-slot boundary. This isolates transport/admission semantics; actual-process pressure and gameplay are separate host checks.",
+  "HarnessSha256": "0480CD2DD2587A94E6ED424C5D78A3BA79BE391938F93F9B223F915F68C70459",
+  "Error": "Exception calling \"CreateNew\" with \"2\" argument(s): \"Map name cannot be an empty string.\"\nat <ScriptBlock>, C:\\projects\\pwshDoom\\scripts\\Test-CommandAdmission.ps1: line 16",
+  "TransportSha256": "C9D399374051AFF208807F16F8E58E9B7615EF87D586FF407898BFDA09B3D76E"
+}

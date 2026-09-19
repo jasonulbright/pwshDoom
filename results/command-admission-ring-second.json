@@ -1,0 +1,28 @@
+{
+  "Meaning": "Actual mapped memory and wake event with deterministic consumer-header fixture; 1200 distinct commands/masks cross the 1024-slot boundary. This isolates transport/admission semantics; actual-process pressure and gameplay are separate host checks.",
+  "HarnessSha256": "0E91713DB8E21C932398525FEB6DD058DCE79DD64320B9F67A8F0A17625B5F36",
+  "Error": null,
+  "TransportSha256": "C9D399374051AFF208807F16F8E58E9B7615EF87D586FF407898BFDA09B3D76E",
+  "Checks": [
+    {
+      "Name": "Empty default window admits the first command",
+      "Passed": true
+    },
+    {
+      "Name": "All 1200 commands and masks survive admission and physical ring wrap",
+      "Passed": true
+    },
+    {
+      "Name": "Drained window admits its exact next index",
+      "Passed": true
+    },
+    {
+      "Name": "Configured full transport window rejects index 1024",
+      "Passed": true
+    },
+    {
+      "Name": "Transport hard overflow guard remains and does not publish",
+      "Passed": true
+    }
+  ]
+}

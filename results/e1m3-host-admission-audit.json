@@ -1,0 +1,63 @@
+{
+  "RecordingSha256": "BECE62CBFE3B917B06F0D548F6A62E6ED909FE2C64813B435399DE0523E78BFE",
+  "ReplaySha256": "0831147553FFA4589062EC0EE1F969D6932E0E5DF3B7F4D300C6293CFDA1F4BB",
+  "Checks": [
+    {
+      "Passed": true,
+      "Name": "Host and simulation finish the complete supplied replay"
+    },
+    {
+      "Passed": true,
+      "Name": "Recorded input is complete and successful"
+    },
+    {
+      "Passed": true,
+      "Name": "Recorded Skill matches input"
+    },
+    {
+      "Passed": true,
+      "Name": "Recorded Episode matches input"
+    },
+    {
+      "Passed": true,
+      "Name": "Recorded Map matches input"
+    },
+    {
+      "Passed": true,
+      "Name": "Recorded ContinueCampaign matches input"
+    },
+    {
+      "Passed": true,
+      "Name": "Recorded SourceFingerprint matches input"
+    },
+    {
+      "Passed": true,
+      "Name": "Every command and field survives in order"
+    },
+    {
+      "Passed": true,
+      "Name": "Every supplied checkpoint matches the independently recorded replay"
+    },
+    {
+      "Passed": true,
+      "Name": "Host independently reports matching sources and all checkpoints"
+    },
+    {
+      "Passed": true,
+      "Name": "Two-command admission pressure occurs and finishes"
+    },
+    {
+      "Passed": true,
+      "Name": "Pressure intervals are ordered and bounded"
+    },
+    {
+      "Passed": true,
+      "Name": "All replay audio packets and frames return without cancellation"
+    }
+  ],
+  "Error": null,
+  "FinishedUtc": "2026-09-19T11:23:35.4580229Z",
+  "ReportSha256": "85043C035CC16813A31A3254C56977ECF83CF65EA8599562B011FCE406158ACB",
+  "HarnessSha256": "876DC36F7F548AC92D6567690D10DBA1130DF262B218853821FFDF1EDC3B4A10",
+  "Meaning": "Audit of completed real-host evidence and every recorded command, supplied checkpoint, pressure interval and digital audio frame accounting. Two is the configured admission limit, not a separately sampled maximum. No acoustic or displayed-rate claim."
+}
