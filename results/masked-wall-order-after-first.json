@@ -1,0 +1,38 @@
+{
+  "HarnessSha256": "2EBE1AE45BE57308BCADE3806D6F2E72BD7BCF536BB245DC5B6E5DDA94E90091",
+  "RendererSha256": "3A3B56FACC23282F8A937313397891B3447332CF01FEB91707645BDC210D278F",
+  "Error": "Could not find a suitable generic method overload for \"SequenceEqual\" with \"1\" type parameters, and the argument count: \"2\".",
+  "Meaning": "Authored synthetic geometry exercises the real whole-scene rasterizer: transparent fence before opaque wall/floor, billboard depth on either side and uneven strips. HUD/weapon calls replaced with no-ops. No game session, recording, WAD assets or performance claim.",
+  "Checks": [
+    {
+      "Passed": true,
+      "Expected": 200,
+      "Name": "Fence survives later opaque wall drawing",
+      "Actual": 200
+    },
+    {
+      "Passed": true,
+      "Expected": 64,
+      "Name": "Fence depth survives later wall drawing",
+      "Actual": 64.0
+    },
+    {
+      "Passed": true,
+      "Expected": 100,
+      "Name": "Fence hole reveals far wall",
+      "Actual": 100
+    },
+    {
+      "Passed": true,
+      "Expected": 200,
+      "Name": "Fence survives later floor drawing",
+      "Actual": 200
+    },
+    {
+      "Passed": true,
+      "Expected": 55,
+      "Name": "Fence hole reveals floor",
+      "Actual": 55
+    }
+  ]
+}

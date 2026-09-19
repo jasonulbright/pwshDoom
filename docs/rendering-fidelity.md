@@ -1,5 +1,15 @@
 # Rendering fidelity: first reference comparison and HUD repairs
 
+## Transparent-wall draw order correction (2026-09-19)
+
+The near-first geometry pass painted masked middle textures immediately while leaving their portal open. Farther walls and the subsequent plane fill could then replace solid fence pixels and their depth. The renderer now queues visible masked columns, draws opaque scenery first, and composites those columns with depth testing before actors. Texture coordinates, pegging and lighting selection are unchanged. Actors remain visible through holes and are hidden by nearer bars.
+
+`scripts/Test-MaskedWallOrder.ps1` exercises the actual whole-scene rasterizer with authored geometry and colors, without a game session or WAD. All 14 checks pass in `results/masked-wall-order-final.json`: wall/floor visibility, retained depth, actors on both sides, overlapping fences and seven uneven column partitions. The same final test fails against the preserved old renderer (`masked-wall-order-baseline-final.json`, expected fence color 200, actual far-wall color 100). The initial two candidate receipts contain test implementation errors (array typing and a flattened sprite atlas); they are preserved and do not represent renderer failures.
+
+Existing fuzz coverage passes 119 checks (`masked-wall-fuzz-regression.json`). The actual seven-process Matrix/katakana test matches 320,000 pixels and 35 encoded strips, including palettes and invisibility (`masked-wall-workers-matrix-first.json`). These are correctness checks, not new live effect tests.
+
+The offline adopted-reference comparison completes at E1M1 headings 0/90/180 (`masked-wall-reference-second.json`), with 16,789/17,088/16,613 differing scene indices out of 53,760 and no differing HUD indices. This is still substantial disagreement, not original Doom parity; it does not isolate a performance or whole-scene fidelity improvement from this fix. The first comparison invocation failed argument validation because native array argument passing was incorrect; the second uses the script's default headings. No game window or recording was opened. Deferred-column allocation and draw cost have not yet been performance-qualified.
+
 2026-09-19. These are offline image fixtures, not live terminal runs or performance measurements. The reference is the adopted, locally adapted PowerShell renderer. It is useful for finding disagreements with our new rasterizer, but it is not independently verified original-executable output.
 
 ## What the comparison establishes

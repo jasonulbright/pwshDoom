@@ -1,0 +1,50 @@
+{
+  "Checks": [
+    {
+      "Actual": 200,
+      "Passed": true,
+      "Name": "Fence survives later opaque wall drawing",
+      "Expected": 200
+    },
+    {
+      "Actual": 64.0,
+      "Passed": true,
+      "Name": "Fence depth survives later wall drawing",
+      "Expected": 64
+    },
+    {
+      "Actual": 100,
+      "Passed": true,
+      "Name": "Fence hole reveals far wall",
+      "Expected": 100
+    },
+    {
+      "Actual": 200,
+      "Passed": true,
+      "Name": "Fence survives later floor drawing",
+      "Expected": 200
+    },
+    {
+      "Actual": 55,
+      "Passed": true,
+      "Name": "Fence hole reveals floor",
+      "Expected": 55
+    },
+    {
+      "Actual": true,
+      "Passed": true,
+      "Name": "Seven uneven strips preserve scene pixels",
+      "Expected": true
+    },
+    {
+      "Actual": true,
+      "Passed": true,
+      "Name": "Seven uneven strips preserve scene depth",
+      "Expected": true
+    }
+  ],
+  "Meaning": "Authored synthetic geometry exercises the real whole-scene rasterizer: transparent fence before opaque wall/floor, billboard depth on either side and uneven strips. HUD/weapon calls replaced with no-ops. No game session, recording, WAD assets or performance claim.",
+  "RendererSha256": "3A3B56FACC23282F8A937313397891B3447332CF01FEB91707645BDC210D278F",
+  "HarnessSha256": "F4EB2AAA437DCF935D5C85DA5B7DB5399A0D9BAE7B2746FBB33688F297E72478",
+  "Error": "The property 'Rotate' cannot be found on this object. Verify that the property exists."
+}

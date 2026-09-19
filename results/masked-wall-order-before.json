@@ -1,0 +1,14 @@
+{
+  "HarnessSha256": "2EBE1AE45BE57308BCADE3806D6F2E72BD7BCF536BB245DC5B6E5DDA94E90091",
+  "RendererSha256": "6DF2288773DFFA5E05678F0EE05820FBB53B2F77D643C958334F3467CE54A9EA",
+  "Error": "Fence survives later opaque wall drawing : 100 != 200",
+  "Meaning": "Authored synthetic geometry exercises the real whole-scene rasterizer: transparent fence before opaque wall/floor, billboard depth on either side and uneven strips. HUD/weapon calls replaced with no-ops. No game session, recording, WAD assets or performance claim.",
+  "Checks": [
+    {
+      "Expected": 200,
+      "Actual": 100,
+      "Passed": false,
+      "Name": "Fence survives later opaque wall drawing"
+    }
+  ]
+}

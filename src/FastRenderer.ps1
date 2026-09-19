@@ -151,6 +151,7 @@ function Invoke-FastRender {
     [byte[]]$pixels=$Context.Pixels;[double[]]$depthBuffer=$Context.Depth
     [int[]]$planes=$Context.Planes
     [int[]]$topClip=$Context.TopClip;[int[]]$bottomClip=$Context.BottomClip
+    $maskedColumns=[Collections.Generic.List[object]]::new()
     [Array]::Clear($pixels);[Array]::Clear($planes);[Array]::Fill($depthBuffer,[double]::PositiveInfinity)
     [Array]::Clear($topClip);[Array]::Fill($bottomClip,167)
     [int]$open=$EndColumn-$FirstColumn
@@ -243,9 +244,14 @@ function Invoke-FastRender {
                     [int]$tu=([int][Math]::Floor($texU)%$tw+$tw)%$tw
                     [double]$vOrigin=$textureTop-$cz+$side.RowOffset
                     [int]$y0=[Math]::Max($clipT,$wy0);[int]$y1=[Math]::Min($clipB,$wy1)
+                    if(-not $solid -and $band -eq 2){
+                        # Portal openings remain visible to later geometry. Defer
+                        # their transparent textures so that geometry cannot erase them.
+                        if($y0 -le $y1){$maskedColumns.Add(@{X=$x;Y0=$y0;Y1=$y1;Distance=$distance;Origin=$vOrigin;U=$tu;Height=$th;Texels=$td;Colors=$wallColors})}
+                        continue
+                    }
                     for([int]$y=$y0;$y -le $y1;$y++) {
                         [double]$vf=$vOrigin+($y+0.5-84)*$distance/160;[int]$v=$vf;if($v -gt $vf){$v--}
-                        if(-not $solid -and $band -eq 2 -and ($v -lt 0 -or $v -ge $th)){continue}
                         $v=($v%$th+$th)%$th;[int]$color=$td[$tu*$th+$v]
                         if($color -ge 0){$p=$y*320+$x;$pixels[$p]=$wallColors[$color];$depthBuffer[$p]=$distance}
                     }
@@ -283,6 +289,18 @@ function Invoke-FastRender {
                 [int]$p=$row+$x;$pixels[$p]=$colors[$flatData[$v*64+$u]];$depthBuffer[$p]=$d
                 $x++
             } while($x -lt $EndColumn -and $planes[$row+$x] -eq $id)
+        }
+    }
+    foreach($column in $maskedColumns){
+        [int]$x=$column.X;[int]$height=$column.Height;[int]$source=$column.U*$height
+        [double]$distance=$column.Distance;[double]$origin=$column.Origin
+        [int[]]$texels=$column.Texels;[byte[]]$colors=$column.Colors
+        for([int]$y=$column.Y0;$y -le $column.Y1;$y++){
+            [int]$p=$y*320+$x;if($distance -ge $depthBuffer[$p]){continue}
+            [double]$vf=$origin+($y+0.5-84)*$distance/160;[int]$v=$vf;if($v -gt $vf){$v--}
+            if($v -lt 0 -or $v -ge $height){continue}
+            [int]$color=$texels[$source+$v]
+            if($color -ge 0){$pixels[$p]=$colors[$color];$depthBuffer[$p]=$distance}
         }
     }
     $geometryMs=$phaseWatch.Elapsed.TotalMilliseconds;$phaseWatch.Restart()

@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Preserve fence/grille pixels when drawing scenery behind two-sided transparent walls; retain actor occlusion through their holes.
+
 ## 0.1.0-preview.1
 
 First packaged playable preview for Windows Terminal and PowerShell 7.

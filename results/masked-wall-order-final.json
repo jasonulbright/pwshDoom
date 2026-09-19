@@ -1,0 +1,92 @@
+{
+  "Error": null,
+  "Checks": [
+    {
+      "Actual": 200,
+      "Expected": 200,
+      "Passed": true,
+      "Name": "Fence survives later opaque wall drawing"
+    },
+    {
+      "Actual": 64.0,
+      "Expected": 64,
+      "Passed": true,
+      "Name": "Fence depth survives later wall drawing"
+    },
+    {
+      "Actual": 100,
+      "Expected": 100,
+      "Passed": true,
+      "Name": "Fence hole reveals far wall"
+    },
+    {
+      "Actual": 200,
+      "Expected": 200,
+      "Passed": true,
+      "Name": "Fence survives later floor drawing"
+    },
+    {
+      "Actual": 55,
+      "Expected": 55,
+      "Passed": true,
+      "Name": "Fence hole reveals floor"
+    },
+    {
+      "Actual": true,
+      "Expected": true,
+      "Passed": true,
+      "Name": "Seven uneven strips preserve scene pixels"
+    },
+    {
+      "Actual": true,
+      "Expected": true,
+      "Passed": true,
+      "Name": "Seven uneven strips preserve scene depth"
+    },
+    {
+      "Actual": 200,
+      "Expected": 200,
+      "Passed": true,
+      "Name": "Fence hides actor behind opaque texel"
+    },
+    {
+      "Actual": 250,
+      "Expected": 250,
+      "Passed": true,
+      "Name": "Actor behind visible through hole"
+    },
+    {
+      "Actual": 250,
+      "Expected": 250,
+      "Passed": true,
+      "Name": "Closer actor covers fence"
+    },
+    {
+      "Actual": 100,
+      "Expected": 100,
+      "Passed": true,
+      "Name": "Far wall occludes farther actor through hole"
+    },
+    {
+      "Actual": 200,
+      "Expected": 200,
+      "Passed": true,
+      "Name": "Nearest fence wins when masked surfaces overlap"
+    },
+    {
+      "Actual": 201,
+      "Expected": 201,
+      "Passed": true,
+      "Name": "Second fence remains visible through nearer hole"
+    },
+    {
+      "Actual": 96.0,
+      "Expected": 96,
+      "Passed": true,
+      "Name": "Second fence depth retained through nearer hole"
+    }
+  ],
+  "Meaning": "Authored synthetic geometry exercises the real whole-scene rasterizer: transparent fence before opaque wall/floor, billboard depth on either side and uneven strips. HUD/weapon calls replaced with no-ops. No game session, recording, WAD assets or performance claim.",
+  "HarnessSha256": "F8A2F502C1FFBA5D0CF983DDFB94C783D27536AC9D62D0D2C355E4693CBE942D",
+  "RendererSha256": "3A3B56FACC23282F8A937313397891B3447332CF01FEB91707645BDC210D278F"
+}
