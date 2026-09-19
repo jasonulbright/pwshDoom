@@ -75,9 +75,9 @@ headless worker working set is5,239,996,416 bytes across16 processes, excluding
 simulation, coordinator and Terminal. It is a workload observation, not a
 matched before/after memory comparison.
 
-## Recorded validation and remaining capture work
+## Recorded validation
 
-Classic and Matrix each pass55 capture/integration checks, including all52
+Classic, Matrix and AnsiArt each pass55 capture/integration checks, including all52
 checkpoints, every presented frame's independently predicted palette/map state,
 complete input, all882,000 returned audio frames, unchanged pinned sources,
 movie decoding and owned-process/window cleanup. Their five extracted frames
@@ -89,6 +89,8 @@ the strongest damage tint; readability still needs human play review.
 | --- | ---: | ---: | ---: | ---: |
 | Classic | 34.940 | 58.999 | 25.329 / 508.240 ms | 5,216,206,848 bytes |
 | Matrix | 34.948 | 59.810 | 23.216 / 571.803 ms | 5,426,847,744 bytes |
+| AnsiArt (candidate recorder, first) | 34.937 | 55.051 | 27.284 / 550.397 ms | 5,400,592,384 bytes |
+| AnsiArt (candidate recorder, second) | 22.898 | 25.384 | 113.792 / 714.486 ms | 3,934,695,424 bytes |
 
 All-gap maxima including save handoffs are2.888/3.014 seconds. Both have three
 software audio queue-empty observations; interior capture alignment fills
@@ -97,14 +99,28 @@ speedup, uninterrupted audio or60-display certification. Receipts are
 `results/palette-{classic,matrix}-third-{recorded,timing,review}.json`; movies
 remain in `local/recordings/palette-{classic,matrix}-third-av.mp4`.
 
-AnsiArt's game run passes24 checks, including all palette states and52
-checkpoints, but its external capture encoder crashes on shutdown. Its full
-audiovisual qualification remains open. Two capture attempts (Classic second,
-AnsiArt third) exit with0xC0000005 after FFmpeg receives q; audio capture exits0.
-Preserve failed files/logs. Classic and Matrix retries succeed with unchanged
-runtime sources, so do not attribute the native shutdown crash to a proven
-PowerShell engine defect. Investigate recording cleanup and complete AnsiArt
-recording after the user's requested Codex update checkpoint.
+The first candidate-recorder AnsiArt run passes all55 checks and full movie
+decoding. All five extracted frames were inspected: red damage, gold automap,
+late berserk, radiation and base restoration are present. Strong damage greatly
+reduces scene/HUD contrast; large surrounding margins remain. The run retains
+three audio queue-empty observations,1,114 internal alignment-fill frames and
+a3.010-second maximum gap including save handoffs. No60-display or acoustic
+continuity claim follows. Receipts: `results/palette-ansiart-pinned-first-{recorded,timing,review}.json`;
+movie: `local/recordings/palette-ansiart-pinned-first-av.mp4`.
+
+The already-started repeat also passes55 integrity checks, but is substantially
+slower:22.898tics/25.384writes per active second,63 queue-empty observations,
+66,025 interior alignment-fill frames and5.895seconds maximum gap including
+handoffs. Retain `results/palette-ansiart-pinned-second-{recorded,timing}.json`
+and its original movie. Correct state/input/media accounting is not a pacing
+or playability pass. The cause of the run-to-run slowdown is not established.
+
+Two earlier captures (Classic second, AnsiArt third) crashed in external FFmpeg
+after receiving q; their failed media/logs remain. Both original and candidate
+recorders pass the subsequent short lifecycle trials, which do not reproduce
+the fault. The candidate pins the capture library until process exit, but a
+causal fix is unproven. See [capture disposition](capture-shutdown.md). This
+recording-tool issue no longer blocks gameplay or rendering work.
 
 The first Classic recording completes all700 commands at an actual688x151 grid,
 but its audit rejects missing expected transition metadata in the new fixture.

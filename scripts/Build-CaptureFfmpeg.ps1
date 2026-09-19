@@ -5,14 +5,18 @@
 param([string]$VisualStudio='C:\Program Files\Microsoft Visual Studio\18\Community',
     [string]$GitBash='C:\Program Files\Git\usr\bin\bash.exe',
     [string]$BuildRoot="$PSScriptRoot/../local/tools/capture-build",
+    [ValidatePattern('^[A-Za-z0-9._-]+$')][string]$SourceDirectory='FFmpeg-n9.0.1',
+    [switch]$PinCaptureModule,
     [Parameter(Mandatory)][string]$Output)
 $ErrorActionPreference='Stop';Set-StrictMode -Version Latest
 if(Test-Path $Output){throw 'Use a fresh build receipt path.'}
-$root=[IO.Path]::GetFullPath($BuildRoot);$src=Join-Path $root 'FFmpeg-n9.0.1';$make=Join-Path $root 'make-4.4.1/WinRel/gnumake.exe'
+if($SourceDirectory -in '.','..'){throw 'SourceDirectory must name a child directory.'}
+$root=[IO.Path]::GetFullPath($BuildRoot);$src=Join-Path $root $SourceDirectory;$make=Join-Path $root 'make-4.4.1/WinRel/gnumake.exe'
 $vcvars=Join-Path $VisualStudio 'VC/Auxiliary/Build/vcvars64.bat';$pkgconf=Join-Path $root 'pkgconf-wheel/pkgconf/.bin/pkgconf.exe'
 foreach($path in $root,$VisualStudio,$GitBash){if($path -match '[\r\n"%]'){throw 'Build paths cannot contain quotes, percent expansion or newlines.'}}
 foreach($path in $vcvars,$GitBash,$make,$pkgconf,(Join-Path $src 'configure'),(Join-Path $root 'nv-codec-headers-n13.0.19.0/ffnvcodec.pc.in')){if(-not (Test-Path $path)){throw "Missing documented build prerequisite: $path"}}
 $sourcePath=Join-Path $src 'libavfilter/vsrc_gfxcapture_winrt.cpp';$source=[IO.File]::ReadAllText($sourcePath)
+$inputSourceHash=(Get-FileHash $sourcePath).Hash
 $original="    if (!ctx->first_pts)`n        ctx->first_pts = frame->pts;"
 $replacement=@'
     if (!ctx->first_pts) {
@@ -22,6 +26,26 @@ $replacement=@'
 '@
 if($source.Contains($original)){[IO.File]::WriteAllText($sourcePath,$source.Replace($original,$replacement.TrimEnd()))}
 elseif(-not $source.Contains($replacement.TrimEnd())){throw 'Unexpected capture source; refusing an unreviewed patch.'}
+$source=[IO.File]::ReadAllText($sourcePath)
+$pinPatch=@'
+    LOAD_DLL(ctx->fn.graphicscapture_handle, "graphicscapture.dll");
+    // Recorder-local lifetime experiment: keep WGC code mapped until process exit.
+    HMODULE pinned_capture_module = nullptr;
+    if (!GetModuleHandleExW(GET_MODULE_HANDLE_EX_FLAG_PIN | GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS,
+                            reinterpret_cast<LPCWSTR>(ctx->fn.graphicscapture_handle.get()),
+                            &pinned_capture_module)) {
+        av_log(avctx, AV_LOG_ERROR, "PWSHDOOM_GFX_MODULE_PIN_FAILED=%lu\n", GetLastError());
+        return AVERROR_EXTERNAL;
+    }
+    av_log(avctx, AV_LOG_INFO, "PWSHDOOM_GFX_MODULE_PINNED=1\n");
+'@
+if($PinCaptureModule){
+    $anchor='    LOAD_DLL(ctx->fn.graphicscapture_handle, "graphicscapture.dll");'
+    if(-not $source.Contains($pinPatch.TrimEnd())){
+        if($source.Contains('PWSHDOOM_GFX_MODULE_PIN') -or ($source.Split($anchor).Length -ne 2)){throw 'Unexpected capture-module patch; refusing to modify source.'}
+        [IO.File]::WriteAllText($sourcePath,$source.Replace($anchor,$pinPatch.TrimEnd()))
+    }
+}elseif($source.Contains('PWSHDOOM_GFX_MODULE_PIN')){throw 'Pinned source requires explicit -PinCaptureModule.'}
 $includeRoot=(Join-Path $root 'nv-codec-headers-n13.0.19.0').Replace('\','/')
 $pc=[IO.File]::ReadAllText((Join-Path $includeRoot 'ffnvcodec.pc.in')).Replace('@@PREFIX@@',$includeRoot)
 [IO.File]::WriteAllText((Join-Path $includeRoot 'ffnvcodec.pc'),$pc)
@@ -67,8 +91,9 @@ try{
 }catch{$failure=$_.ToString();throw}finally{
     $binary=Join-Path $src 'ffmpeg.exe'
     @{Error=$failure;Seconds=$watch.Elapsed.TotalSeconds;VisualStudio=$VisualStudio;GitBash=$GitBash;SourceArchiveSha256=(Get-FileHash (Join-Path $root 'ffmpeg-n9.0.1.tar.gz')).Hash;
+      SourceDirectory=$SourceDirectory;PinCaptureModule=[bool]$PinCaptureModule;InputSourceSha256=$inputSourceHash;
       PatchedSourceSha256=(Get-FileHash $sourcePath).Hash;Binary=$binary;BinarySha256=if(Test-Path $binary){(Get-FileHash $binary).Hash}else{$null};
       RecipeSha256=(Get-FileHash $PSCommandPath).Hash;ConfigurationSha256=if(Test-Path (Join-Path $src 'ffbuild/config.mak')){(Get-FileHash (Join-Path $src 'ffbuild/config.mak')).Hash}else{$null};
-      Meaning='External FFmpeg 9.0.1 recorder built from prepared, pinned local prerequisites with one original-WGC-timestamp diagnostic and a generated dependency-command quoting adaptation. No game/engine/mixer algorithm is compiled. Compilation is not live capture qualification.'}|ConvertTo-Json -Depth 5|Set-Content $Output
+      Meaning='External FFmpeg 9.0.1 recorder built from prepared, pinned local prerequisites with an original-WGC-timestamp diagnostic and a generated dependency-command quoting adaptation. PinCaptureModule records whether the optional process-lifetime WGC module pin was applied. No game/engine/mixer algorithm is compiled. Compilation is not live capture qualification.'}|ConvertTo-Json -Depth 5|Set-Content $Output
 }
 $binary

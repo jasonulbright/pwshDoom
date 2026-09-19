@@ -110,4 +110,4 @@ Commercial WAD files remain user supplied. Do not commit game assets, extracted 
 
 All experiments must be finite and write their results to disk. Keep security settings unchanged. Record failures and changes to the protocol, including environment interference.
 
-Damage, pickup, berserk and radiation-suit palette effects now reach the terminal and automap. Classic and Matrix each pass 55 recorded integration checks; AnsiArt passes the game-state checks, with a capture-tool shutdown failure still to resolve. Matrix intentionally retains its green color mapping. See [palette evidence and remaining work](docs/palette-presentation.md).
+Damage, pickup, berserk and radiation-suit palette effects now reach the terminal and automap. Classic, Matrix and AnsiArt each pass 55 recorded integration checks. Matrix intentionally retains its green color mapping. A historical recorder shutdown crash was not reproduced in follow-up trials; its cause remains unconfirmed and does not block game work. See [palette evidence and remaining work](docs/palette-presentation.md).
