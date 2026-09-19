@@ -1,0 +1,22 @@
+{
+  "CaptureSourceSha256": "D18C8858CB504E9630BC16A0154E2FED48A0A750269C11997614F1286A2E07E6",
+  "CollectedUtc": "2026-09-19T17:02:22.1958252Z",
+  "Meaning": "Read-only Windows Application Error events for this project recorder. Reports unloaded graphicscapture.dll access violations; does not include a stack trace or prove the exact release/callback ordering.",
+  "BinarySha256": "BD59EE9D861A9531AC289A8D9C0A02B8166A215A47D882605E372845324A1863",
+  "Events": [
+    {
+      "TimeCreatedUtc": "2026-09-19T16:55:25.8679881Z",
+      "Message": "Faulting application name: ffmpeg.exe, version: 0.0.0.0, time stamp: 0x6aa542d0\r\nFaulting module name: graphicscapture.dll_unloaded, version: 10.0.26100.9278, time stamp: 0x6d822985\r\nException code: 0xc0000005\r\nFault offset: 0x000000000001115c\r\nFaulting process id: 0x81A4\r\nFaulting application start time: 0x1DD48578669748A\r\nFaulting application path: C:\\projects\\pwshDoom\\local\\tools\\capture-build\\FFmpeg-n9.0.1\\ffmpeg.exe\r\nFaulting module path: graphicscapture.dll\r\nReport Id: c7c5a207-7695-4d6f-af6f-81d3c09a1f8e\r\nFaulting package full name: \r\nFaulting package-relative application ID: ",
+      "RecordId": 79628,
+      "ProviderName": "Application Error",
+      "Id": 1000
+    },
+    {
+      "TimeCreatedUtc": "2026-09-19T16:51:42.0760741Z",
+      "Message": "Faulting application name: ffmpeg.exe, version: 0.0.0.0, time stamp: 0x6aa542d0\r\nFaulting module name: graphicscapture.dll_unloaded, version: 10.0.26100.9278, time stamp: 0x6d822985\r\nException code: 0xc0000005\r\nFault offset: 0x000000000001115c\r\nFaulting process id: 0x6390\r\nFaulting application start time: 0x1DD485701B6509D\r\nFaulting application path: C:\\projects\\pwshDoom\\local\\tools\\capture-build\\FFmpeg-n9.0.1\\ffmpeg.exe\r\nFaulting module path: graphicscapture.dll\r\nReport Id: bce1adc0-9d5b-487a-8c8f-988a2251dd37\r\nFaulting package full name: \r\nFaulting package-relative application ID: ",
+      "RecordId": 79626,
+      "ProviderName": "Application Error",
+      "Id": 1000
+    }
+  ]
+}
