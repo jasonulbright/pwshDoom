@@ -2,6 +2,8 @@
 
 The user approved implementation on 2026-09-10 and then requested a complete game and a substantial scientific/entertainment write-up. E1M1 is the baseline; follow `docs/roadmap.md` for the release milestones, acceptance criteria, current scope, and next work. Retain the feasibility record and distinguish implemented behavior from verified compatibility.
 
+Latest steering, 2026-09-19: ship a usable playable preview now, then continue development. Do not wait for the full Ultimate Doom certification gates to package this preview. The user explicitly forbids further recordings until the deliverable ships; this overrides the earlier recording requirement below. The user is ready to make the repository public once there is a shippable deliverable; complete package and publication checks first. External recorder investigations are deferred unless a recurrence affects useful game work. Prioritize user-visible game fixes and shipping over expanding test infrastructure.
+
 - Update `docs/ledger.md` as findings, failures, decisions, and corrections occur.
 - Keep author reports, source inspection, measured behavior, and hypotheses distinct.
 - Preserve raw results and exact parameters. Never call completed console writes displayed FPS.

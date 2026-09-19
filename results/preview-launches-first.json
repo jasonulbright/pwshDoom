@@ -1,0 +1,60 @@
+{
+  "Meaning": "Three finite live unrecorded launches through the extracted Play.cmd with effects enabled; each simulates/renders at the actual terminal grid and exits cleanly. No injected input, screen recording or acoustic verification. This is launch qualification, not map completion or sustained performance.",
+  "OwnedRuntimeProcessesRemaining": 0,
+  "Runs": [
+    {
+      "AudioDeviceClosed": true,
+      "Report": "local/preview-Classic-first-game.json",
+      "CompletedFrames": 274,
+      "Rows": 151,
+      "ReturnedFrames": 255780,
+      "ViewportPauses": 0,
+      "AudioError": null,
+      "AudioCleanupError": null,
+      "Style": "Classic",
+      "SubmittedFrames": 259560,
+      "SimulationTics": 209,
+      "Error": null,
+      "SourcePackage": "artifacts/preview-candidate-first/pwshDoom-0.1.0-preview.1.zip",
+      "Columns": 688,
+      "ExitReason": "Duration",
+      "ReportSha256": "EC8FEED618E76E11D717F9E4011157308B4622A597D6F4365FD12F33E8516FCB"
+    },
+    {
+      "AudioDeviceClosed": true,
+      "Report": "local/preview-Matrix-first-game.json",
+      "CompletedFrames": 331,
+      "Rows": 85,
+      "ReturnedFrames": 259560,
+      "ViewportPauses": 0,
+      "AudioError": null,
+      "AudioCleanupError": null,
+      "Style": "Matrix",
+      "SubmittedFrames": 263340,
+      "SimulationTics": 209,
+      "Error": null,
+      "SourcePackage": "artifacts/preview-candidate-first/pwshDoom-0.1.0-preview.1.zip",
+      "Columns": 430,
+      "ExitReason": "Duration",
+      "ReportSha256": "64E5592984DBB1588CBB7369335D887AA7841684369CF02112865C5DB7C785F3"
+    },
+    {
+      "AudioDeviceClosed": true,
+      "Report": "local/preview-AnsiArt-first-game.json",
+      "CompletedFrames": 310,
+      "Rows": 85,
+      "ReturnedFrames": 259560,
+      "ViewportPauses": 0,
+      "AudioError": null,
+      "AudioCleanupError": null,
+      "Style": "AnsiArt",
+      "SubmittedFrames": 263340,
+      "SimulationTics": 209,
+      "Error": null,
+      "SourcePackage": "artifacts/preview-candidate-first/pwshDoom-0.1.0-preview.1.zip",
+      "Columns": 430,
+      "ExitReason": "Duration",
+      "ReportSha256": "89F7D080708CF6A26D9BF3815DFACC8829ED809574143167E9D22EADD85C64E9"
+    }
+  ]
+}
