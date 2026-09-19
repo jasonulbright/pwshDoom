@@ -32,6 +32,7 @@ try{
         Check "Score $($names[$i]) pins a successful qualification" (-not $q.Error -and $q.Details.Qualified -and $a.Music.Reports.($names[$i]) -ceq (Get-FileHash $path).Hash)
     }
     Check 'All tic audio is consumed with no stale or unconsumed packet' ($a.Packets -eq $count -and $a.LastSequence -eq $count-1 -and $a.SubmittedFrames -eq $count*1260 -and $a.Music.Frames -eq $a.SubmittedFrames -and $a.UnconsumedPackets -eq 0 -and $a.StalePacketsDiscarded -eq 0)
+    Check 'All submitted audio frames return before device closure' ($a.ReturnedCompletedFrames -eq $a.SubmittedFrames -and $a.CancelledQueuedFramesUpperBound -eq 0)
     Check 'Music readers and the device close cleanly' ($a.Music.Closed -and $a.DeviceClosed)
     $b=$g.Simulation.LoadingBoundaries
     Check 'Old audio completes before the new world and asset handoff' ($b.Count -eq 1 -and $b[0].AudioDrain.ThroughSequence -eq $r.Transitions[2].Tic-2 -and $b[0].AudioDrain.CompletedFrames -eq $frames[2] -and $b[0].StartQpc -le $b[0].AudioDrain.AcknowledgedQpc -and $b[0].AudioDrain.AcknowledgedQpc -lt $b[0].EndQpc)

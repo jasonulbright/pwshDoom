@@ -64,11 +64,13 @@ function Read-DoomSimulationSnapshot {
     return @{Version=$version;Tic=$tic;Previous=$oldValues;Current=$newValues;Generation=$generation;State=$state;Episode=$episode;Map=$map;Health=$health;Kills=$kills;ScreenKind=$screenKind;MenuRevision=$menuRevision;MenuScreen=$menuScreen;AutomapVisible=$automapVisible}
 }
 function Close-DoomSimulation {
-    param($Simulation)
-    if($Simulation.ContainsKey('View')){$Simulation.View.Write(4,1)}
+    param($Simulation,[switch]$DrainAudio)
+    # Stop code 2 requests bounded completion of already-produced audio. Ordinary
+    # quit/error cleanup retains immediate stop code 1.
+    if($Simulation.ContainsKey('View')){$Simulation.View.Write(4,[int]$(if($DrainAudio){2}else{1}))}
     if($Simulation.ContainsKey('Go')){[void]$Simulation.Go.Set()}
     if($null -ne $Simulation.Process) {
-        if(-not $Simulation.Process.WaitForExit(5000)){$Simulation.Process.Kill();$Simulation.Process.WaitForExit()}
+        if(-not $Simulation.Process.WaitForExit($(if($DrainAudio){10000}else{5000}))){$Simulation.Process.Kill();$Simulation.Process.WaitForExit()}
         $Simulation.Process.Dispose()
     }
     foreach($key in 'Go','Ready','View','Map'){if($Simulation.ContainsKey($key)){$Simulation[$key].Dispose()}}

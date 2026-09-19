@@ -1,0 +1,7646 @@
+{
+  "Checks": [
+    {
+      "Name": "Menu acknowledges the first burst at its exact boundary",
+      "Passed": true
+    },
+    {
+      "Name": "Command index remains fixed while no further input is issued",
+      "Passed": true
+    },
+    {
+      "Name": "Resume acknowledges without advancing a command",
+      "Passed": true
+    },
+    {
+      "Name": "Second burst reaches the exact final command",
+      "Passed": true
+    },
+    {
+      "Name": "Simulation and audio close without error",
+      "Passed": true
+    },
+    {
+      "Name": "Actual queue pressure was exercised and stayed bounded",
+      "Passed": true
+    },
+    {
+      "Name": "Every ordinary command survives the two bursts unchanged",
+      "Passed": true
+    },
+    {
+      "Name": "All ordered audio packets are consumed and returned",
+      "Passed": true
+    },
+    {
+      "Name": "Shutdown drains an actually pending queue through the exact final packet",
+      "Passed": true
+    }
+  ],
+  "Error": null,
+  "Simulation": {
+    "LoadingBoundaries": [],
+    "Transitions": [
+      {
+        "Weapons": [
+          true,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "Episode": 1,
+        "DidSecret": false,
+        "Generation": 1,
+        "Kills": 0,
+        "Map": 1,
+        "Health": 100,
+        "Armor": 0,
+        "State": "Level",
+        "Keys": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "Ammo": [
+          50,
+          0,
+          0,
+          0
+        ],
+        "Tic": 0
+      }
+    ],
+    "ShutdownAudioDrain": {
+      "AcknowledgedQpc": 552111213006,
+      "PendingPacketsBefore": 31,
+      "CompletedFrames": 378000,
+      "WaitMilliseconds": 974.9695,
+      "ThroughSequence": 299,
+      "StartQpc": 552101508075
+    },
+    "Tics": 300,
+    "InputCommands": [
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "AudioEvents": 3,
+    "TickLatenessSamplesMs": [],
+    "IncompleteAudioBackpressureStartQpc": 0,
+    "AudioPublicationTrace": [
+      {
+        "State": 0,
+        "UpdateEndQpc": 552023374095,
+        "PresentationStartQpc": 552023542731,
+        "PresentationEndQpc": 552023708082,
+        "Sequence": 0,
+        "MapChanged": false,
+        "EnqueuedQpc": 552023542350
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552023850798,
+        "PresentationStartQpc": 552023854579,
+        "PresentationEndQpc": 552023984635,
+        "Sequence": 1,
+        "MapChanged": false,
+        "EnqueuedQpc": 552023854317
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552023999985,
+        "PresentationStartQpc": 552024001771,
+        "PresentationEndQpc": 552024120319,
+        "Sequence": 2,
+        "MapChanged": false,
+        "EnqueuedQpc": 552024001611
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552024135362,
+        "PresentationStartQpc": 552024137017,
+        "PresentationEndQpc": 552024230203,
+        "Sequence": 3,
+        "MapChanged": false,
+        "EnqueuedQpc": 552024136868
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552024247989,
+        "PresentationStartQpc": 552024249849,
+        "PresentationEndQpc": 552024415223,
+        "Sequence": 4,
+        "MapChanged": false,
+        "EnqueuedQpc": 552024249684
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552024607496,
+        "PresentationStartQpc": 552024609465,
+        "PresentationEndQpc": 552025018326,
+        "Sequence": 5,
+        "MapChanged": false,
+        "EnqueuedQpc": 552024609310
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552025034296,
+        "PresentationStartQpc": 552025036102,
+        "PresentationEndQpc": 552025210225,
+        "Sequence": 6,
+        "MapChanged": false,
+        "EnqueuedQpc": 552025035944
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552025230033,
+        "PresentationStartQpc": 552025231556,
+        "PresentationEndQpc": 552025323097,
+        "Sequence": 7,
+        "MapChanged": false,
+        "EnqueuedQpc": 552025231417
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552025341594,
+        "PresentationStartQpc": 552025343883,
+        "PresentationEndQpc": 552025460623,
+        "Sequence": 8,
+        "MapChanged": false,
+        "EnqueuedQpc": 552025343708
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552025486329,
+        "PresentationStartQpc": 552025488189,
+        "PresentationEndQpc": 552025585004,
+        "Sequence": 9,
+        "MapChanged": false,
+        "EnqueuedQpc": 552025488042
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552025607820,
+        "PresentationStartQpc": 552025609857,
+        "PresentationEndQpc": 552025721762,
+        "Sequence": 10,
+        "MapChanged": false,
+        "EnqueuedQpc": 552025609706
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552025777108,
+        "PresentationStartQpc": 552025779333,
+        "PresentationEndQpc": 552025876909,
+        "Sequence": 11,
+        "MapChanged": false,
+        "EnqueuedQpc": 552025779175
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552025892548,
+        "PresentationStartQpc": 552025894320,
+        "PresentationEndQpc": 552025985987,
+        "Sequence": 12,
+        "MapChanged": false,
+        "EnqueuedQpc": 552025894176
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552026035145,
+        "PresentationStartQpc": 552026037493,
+        "PresentationEndQpc": 552026145864,
+        "Sequence": 13,
+        "MapChanged": false,
+        "EnqueuedQpc": 552026037304
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552026160752,
+        "PresentationStartQpc": 552026162310,
+        "PresentationEndQpc": 552026251416,
+        "Sequence": 14,
+        "MapChanged": false,
+        "EnqueuedQpc": 552026162169
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552026266275,
+        "PresentationStartQpc": 552026267874,
+        "PresentationEndQpc": 552026369054,
+        "Sequence": 15,
+        "MapChanged": false,
+        "EnqueuedQpc": 552026267736
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552026410155,
+        "PresentationStartQpc": 552026412119,
+        "PresentationEndQpc": 552026514208,
+        "Sequence": 16,
+        "MapChanged": false,
+        "EnqueuedQpc": 552026411970
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552026568090,
+        "PresentationStartQpc": 552026570177,
+        "PresentationEndQpc": 552026674588,
+        "Sequence": 17,
+        "MapChanged": false,
+        "EnqueuedQpc": 552026570021
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552026691057,
+        "PresentationStartQpc": 552026692944,
+        "PresentationEndQpc": 552026797585,
+        "Sequence": 18,
+        "MapChanged": false,
+        "EnqueuedQpc": 552026692796
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552026823719,
+        "PresentationStartQpc": 552026825577,
+        "PresentationEndQpc": 552026924467,
+        "Sequence": 19,
+        "MapChanged": false,
+        "EnqueuedQpc": 552026825432
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552026946114,
+        "PresentationStartQpc": 552026947955,
+        "PresentationEndQpc": 552027053506,
+        "Sequence": 20,
+        "MapChanged": false,
+        "EnqueuedQpc": 552026947804
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552027107951,
+        "PresentationStartQpc": 552027109877,
+        "PresentationEndQpc": 552027211260,
+        "Sequence": 21,
+        "MapChanged": false,
+        "EnqueuedQpc": 552027109718
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552027226689,
+        "PresentationStartQpc": 552027228349,
+        "PresentationEndQpc": 552027321748,
+        "Sequence": 22,
+        "MapChanged": false,
+        "EnqueuedQpc": 552027228202
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552027339512,
+        "PresentationStartQpc": 552027341262,
+        "PresentationEndQpc": 552027439529,
+        "Sequence": 23,
+        "MapChanged": false,
+        "EnqueuedQpc": 552027341109
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552027455133,
+        "PresentationStartQpc": 552027456959,
+        "PresentationEndQpc": 552027549430,
+        "Sequence": 24,
+        "MapChanged": false,
+        "EnqueuedQpc": 552027456816
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552027564802,
+        "PresentationStartQpc": 552027566582,
+        "PresentationEndQpc": 552027672685,
+        "Sequence": 25,
+        "MapChanged": false,
+        "EnqueuedQpc": 552027566420
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552027716358,
+        "PresentationStartQpc": 552027718332,
+        "PresentationEndQpc": 552027827122,
+        "Sequence": 26,
+        "MapChanged": false,
+        "EnqueuedQpc": 552027718181
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552027882704,
+        "PresentationStartQpc": 552027884865,
+        "PresentationEndQpc": 552027980603,
+        "Sequence": 27,
+        "MapChanged": false,
+        "EnqueuedQpc": 552027884716
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552027997431,
+        "PresentationStartQpc": 552027999465,
+        "PresentationEndQpc": 552028104764,
+        "Sequence": 28,
+        "MapChanged": false,
+        "EnqueuedQpc": 552027999313
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552028132229,
+        "PresentationStartQpc": 552028134291,
+        "PresentationEndQpc": 552028225266,
+        "Sequence": 29,
+        "MapChanged": false,
+        "EnqueuedQpc": 552028134130
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552028250169,
+        "PresentationStartQpc": 552028252762,
+        "PresentationEndQpc": 552028367372,
+        "Sequence": 30,
+        "MapChanged": false,
+        "EnqueuedQpc": 552028252591
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552028424715,
+        "PresentationStartQpc": 552028427433,
+        "PresentationEndQpc": 552028549080,
+        "Sequence": 31,
+        "MapChanged": false,
+        "EnqueuedQpc": 552028427254
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552028565168,
+        "PresentationStartQpc": 552028566951,
+        "PresentationEndQpc": 552028667890,
+        "Sequence": 32,
+        "MapChanged": false,
+        "EnqueuedQpc": 552028566801
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552028683994,
+        "PresentationStartQpc": 552028685820,
+        "PresentationEndQpc": 552028803199,
+        "Sequence": 33,
+        "MapChanged": false,
+        "EnqueuedQpc": 552028685666
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552028818843,
+        "PresentationStartQpc": 552028820579,
+        "PresentationEndQpc": 552028922793,
+        "Sequence": 34,
+        "MapChanged": false,
+        "EnqueuedQpc": 552028820452
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552028938441,
+        "PresentationStartQpc": 552028939874,
+        "PresentationEndQpc": 552029046443,
+        "Sequence": 35,
+        "MapChanged": false,
+        "EnqueuedQpc": 552028939748
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552029090496,
+        "PresentationStartQpc": 552029092122,
+        "PresentationEndQpc": 552029193535,
+        "Sequence": 36,
+        "MapChanged": false,
+        "EnqueuedQpc": 552029091986
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552029255576,
+        "PresentationStartQpc": 552029257275,
+        "PresentationEndQpc": 552029350337,
+        "Sequence": 37,
+        "MapChanged": false,
+        "EnqueuedQpc": 552029257146
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552029365636,
+        "PresentationStartQpc": 552029367064,
+        "PresentationEndQpc": 552029470836,
+        "Sequence": 38,
+        "MapChanged": false,
+        "EnqueuedQpc": 552029366927
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552029495778,
+        "PresentationStartQpc": 552029497215,
+        "PresentationEndQpc": 552029589632,
+        "Sequence": 39,
+        "MapChanged": false,
+        "EnqueuedQpc": 552029497086
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552029610495,
+        "PresentationStartQpc": 552029612144,
+        "PresentationEndQpc": 552029717271,
+        "Sequence": 40,
+        "MapChanged": false,
+        "EnqueuedQpc": 552029611875
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552029770002,
+        "PresentationStartQpc": 552029771591,
+        "PresentationEndQpc": 552029878646,
+        "Sequence": 41,
+        "MapChanged": false,
+        "EnqueuedQpc": 552029771453
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552029894270,
+        "PresentationStartQpc": 552029895653,
+        "PresentationEndQpc": 552029988126,
+        "Sequence": 42,
+        "MapChanged": false,
+        "EnqueuedQpc": 552029895521
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552030003731,
+        "PresentationStartQpc": 552030005080,
+        "PresentationEndQpc": 552030101602,
+        "Sequence": 43,
+        "MapChanged": false,
+        "EnqueuedQpc": 552030004945
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552030118990,
+        "PresentationStartQpc": 552030120588,
+        "PresentationEndQpc": 552030213764,
+        "Sequence": 44,
+        "MapChanged": false,
+        "EnqueuedQpc": 552030120447
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552030229985,
+        "PresentationStartQpc": 552030231537,
+        "PresentationEndQpc": 552030339795,
+        "Sequence": 45,
+        "MapChanged": false,
+        "EnqueuedQpc": 552030231409
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552030382205,
+        "PresentationStartQpc": 552030383847,
+        "PresentationEndQpc": 552030474788,
+        "Sequence": 46,
+        "MapChanged": false,
+        "EnqueuedQpc": 552030383710
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552030533730,
+        "PresentationStartQpc": 552030535645,
+        "PresentationEndQpc": 552030625747,
+        "Sequence": 47,
+        "MapChanged": false,
+        "EnqueuedQpc": 552030535423
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552030640836,
+        "PresentationStartQpc": 552030642253,
+        "PresentationEndQpc": 552030746403,
+        "Sequence": 48,
+        "MapChanged": false,
+        "EnqueuedQpc": 552030642127
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552030771513,
+        "PresentationStartQpc": 552030773018,
+        "PresentationEndQpc": 552030869106,
+        "Sequence": 49,
+        "MapChanged": false,
+        "EnqueuedQpc": 552030772890
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552030889898,
+        "PresentationStartQpc": 552030891313,
+        "PresentationEndQpc": 552030994810,
+        "Sequence": 50,
+        "MapChanged": false,
+        "EnqueuedQpc": 552030891187
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552031049445,
+        "PresentationStartQpc": 552031051043,
+        "PresentationEndQpc": 552031140985,
+        "Sequence": 51,
+        "MapChanged": false,
+        "EnqueuedQpc": 552031050914
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552031156657,
+        "PresentationStartQpc": 552031158146,
+        "PresentationEndQpc": 552031255770,
+        "Sequence": 52,
+        "MapChanged": false,
+        "EnqueuedQpc": 552031158009
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552031270972,
+        "PresentationStartQpc": 552031272352,
+        "PresentationEndQpc": 552031368156,
+        "Sequence": 53,
+        "MapChanged": false,
+        "EnqueuedQpc": 552031272223
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552031383468,
+        "PresentationStartQpc": 552031384897,
+        "PresentationEndQpc": 552031487506,
+        "Sequence": 54,
+        "MapChanged": false,
+        "EnqueuedQpc": 552031384762
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552031502503,
+        "PresentationStartQpc": 552031503792,
+        "PresentationEndQpc": 552031594740,
+        "Sequence": 55,
+        "MapChanged": false,
+        "EnqueuedQpc": 552031503665
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552031654923,
+        "PresentationStartQpc": 552031656550,
+        "PresentationEndQpc": 552031744451,
+        "Sequence": 56,
+        "MapChanged": false,
+        "EnqueuedQpc": 552031656419
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552031789909,
+        "PresentationStartQpc": 552031791450,
+        "PresentationEndQpc": 552031891039,
+        "Sequence": 57,
+        "MapChanged": false,
+        "EnqueuedQpc": 552031791322
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552031907771,
+        "PresentationStartQpc": 552031909220,
+        "PresentationEndQpc": 552032009555,
+        "Sequence": 58,
+        "MapChanged": false,
+        "EnqueuedQpc": 552031909094
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552032035366,
+        "PresentationStartQpc": 552032036833,
+        "PresentationEndQpc": 552032145580,
+        "Sequence": 59,
+        "MapChanged": false,
+        "EnqueuedQpc": 552032036702
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552032166974,
+        "PresentationStartQpc": 552032168465,
+        "PresentationEndQpc": 552032256902,
+        "Sequence": 60,
+        "MapChanged": false,
+        "EnqueuedQpc": 552032168336
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552032320437,
+        "PresentationStartQpc": 552032322048,
+        "PresentationEndQpc": 552032410387,
+        "Sequence": 61,
+        "MapChanged": false,
+        "EnqueuedQpc": 552032321911
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552032426733,
+        "PresentationStartQpc": 552032428245,
+        "PresentationEndQpc": 552032528770,
+        "Sequence": 62,
+        "MapChanged": false,
+        "EnqueuedQpc": 552032428106
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552032544527,
+        "PresentationStartQpc": 552032545916,
+        "PresentationEndQpc": 552032634979,
+        "Sequence": 63,
+        "MapChanged": false,
+        "EnqueuedQpc": 552032545782
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552032735063,
+        "PresentationStartQpc": 552032736545,
+        "PresentationEndQpc": 552032836492,
+        "Sequence": 64,
+        "MapChanged": false,
+        "EnqueuedQpc": 552032736412
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552033037450,
+        "PresentationStartQpc": 552033038936,
+        "PresentationEndQpc": 552033132896,
+        "Sequence": 65,
+        "MapChanged": false,
+        "EnqueuedQpc": 552033038796
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552033439507,
+        "PresentationStartQpc": 552033441039,
+        "PresentationEndQpc": 552033529638,
+        "Sequence": 66,
+        "MapChanged": false,
+        "EnqueuedQpc": 552033440905
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552033734756,
+        "PresentationStartQpc": 552033736396,
+        "PresentationEndQpc": 552033843937,
+        "Sequence": 67,
+        "MapChanged": false,
+        "EnqueuedQpc": 552033736267
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552034010204,
+        "PresentationStartQpc": 552034011781,
+        "PresentationEndQpc": 552034102894,
+        "Sequence": 68,
+        "MapChanged": false,
+        "EnqueuedQpc": 552034011646
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552034206441,
+        "PresentationStartQpc": 552034209354,
+        "PresentationEndQpc": 552034317958,
+        "Sequence": 69,
+        "MapChanged": false,
+        "EnqueuedQpc": 552034209151
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552034501834,
+        "PresentationStartQpc": 552034503308,
+        "PresentationEndQpc": 552034591624,
+        "Sequence": 70,
+        "MapChanged": false,
+        "EnqueuedQpc": 552034503181
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552034850066,
+        "PresentationStartQpc": 552034851661,
+        "PresentationEndQpc": 552034940133,
+        "Sequence": 71,
+        "MapChanged": false,
+        "EnqueuedQpc": 552034851523
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552035101986,
+        "PresentationStartQpc": 552035103492,
+        "PresentationEndQpc": 552035208580,
+        "Sequence": 72,
+        "MapChanged": false,
+        "EnqueuedQpc": 552035103354
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552035405000,
+        "PresentationStartQpc": 552035406685,
+        "PresentationEndQpc": 552035495659,
+        "Sequence": 73,
+        "MapChanged": false,
+        "EnqueuedQpc": 552035406543
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552035704567,
+        "PresentationStartQpc": 552035705932,
+        "PresentationEndQpc": 552035805855,
+        "Sequence": 74,
+        "MapChanged": false,
+        "EnqueuedQpc": 552035705802
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552036009154,
+        "PresentationStartQpc": 552036010721,
+        "PresentationEndQpc": 552036099072,
+        "Sequence": 75,
+        "MapChanged": false,
+        "EnqueuedQpc": 552036010574
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552036227359,
+        "PresentationStartQpc": 552036229051,
+        "PresentationEndQpc": 552036316857,
+        "Sequence": 76,
+        "MapChanged": false,
+        "EnqueuedQpc": 552036228914
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552036524044,
+        "PresentationStartQpc": 552036525786,
+        "PresentationEndQpc": 552036637271,
+        "Sequence": 77,
+        "MapChanged": false,
+        "EnqueuedQpc": 552036525646
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552036798470,
+        "PresentationStartQpc": 552036800072,
+        "PresentationEndQpc": 552036889371,
+        "Sequence": 78,
+        "MapChanged": false,
+        "EnqueuedQpc": 552036799940
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552037111710,
+        "PresentationStartQpc": 552037113292,
+        "PresentationEndQpc": 552037214447,
+        "Sequence": 79,
+        "MapChanged": false,
+        "EnqueuedQpc": 552037113163
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552037469388,
+        "PresentationStartQpc": 552037470979,
+        "PresentationEndQpc": 552037568446,
+        "Sequence": 80,
+        "MapChanged": false,
+        "EnqueuedQpc": 552037470840
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552037818453,
+        "PresentationStartQpc": 552037820220,
+        "PresentationEndQpc": 552037908278,
+        "Sequence": 81,
+        "MapChanged": false,
+        "EnqueuedQpc": 552037820086
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552038075555,
+        "PresentationStartQpc": 552038077178,
+        "PresentationEndQpc": 552038179168,
+        "Sequence": 82,
+        "MapChanged": false,
+        "EnqueuedQpc": 552038077044
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552038194635,
+        "PresentationStartQpc": 552038196096,
+        "PresentationEndQpc": 552038283275,
+        "Sequence": 83,
+        "MapChanged": false,
+        "EnqueuedQpc": 552038195961
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552038552927,
+        "PresentationStartQpc": 552038554375,
+        "PresentationEndQpc": 552038653224,
+        "Sequence": 84,
+        "MapChanged": false,
+        "EnqueuedQpc": 552038554245
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552038859757,
+        "PresentationStartQpc": 552038861235,
+        "PresentationEndQpc": 552038953237,
+        "Sequence": 85,
+        "MapChanged": false,
+        "EnqueuedQpc": 552038861105
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552039241269,
+        "PresentationStartQpc": 552039243057,
+        "PresentationEndQpc": 552039331796,
+        "Sequence": 86,
+        "MapChanged": false,
+        "EnqueuedQpc": 552039242922
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552039375618,
+        "PresentationStartQpc": 552039377100,
+        "PresentationEndQpc": 552039483750,
+        "Sequence": 87,
+        "MapChanged": false,
+        "EnqueuedQpc": 552039376973
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552039643317,
+        "PresentationStartQpc": 552039644626,
+        "PresentationEndQpc": 552039731942,
+        "Sequence": 88,
+        "MapChanged": false,
+        "EnqueuedQpc": 552039644498
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552039957207,
+        "PresentationStartQpc": 552039958609,
+        "PresentationEndQpc": 552040061685,
+        "Sequence": 89,
+        "MapChanged": false,
+        "EnqueuedQpc": 552039958479
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552040257116,
+        "PresentationStartQpc": 552040258681,
+        "PresentationEndQpc": 552040348094,
+        "Sequence": 90,
+        "MapChanged": false,
+        "EnqueuedQpc": 552040258552
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552040491580,
+        "PresentationStartQpc": 552040493360,
+        "PresentationEndQpc": 552040585571,
+        "Sequence": 91,
+        "MapChanged": false,
+        "EnqueuedQpc": 552040493224
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552040737296,
+        "PresentationStartQpc": 552040738978,
+        "PresentationEndQpc": 552040846186,
+        "Sequence": 92,
+        "MapChanged": false,
+        "EnqueuedQpc": 552040738838
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552041039092,
+        "PresentationStartQpc": 552041040615,
+        "PresentationEndQpc": 552041128979,
+        "Sequence": 93,
+        "MapChanged": false,
+        "EnqueuedQpc": 552041040480
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552041341771,
+        "PresentationStartQpc": 552041343479,
+        "PresentationEndQpc": 552041445632,
+        "Sequence": 94,
+        "MapChanged": false,
+        "EnqueuedQpc": 552041343331
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552041645578,
+        "PresentationStartQpc": 552041648372,
+        "PresentationEndQpc": 552041739969,
+        "Sequence": 95,
+        "MapChanged": false,
+        "EnqueuedQpc": 552041648183
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552041980215,
+        "PresentationStartQpc": 552041981963,
+        "PresentationEndQpc": 552042088870,
+        "Sequence": 96,
+        "MapChanged": false,
+        "EnqueuedQpc": 552041981821
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552042162149,
+        "PresentationStartQpc": 552042163784,
+        "PresentationEndQpc": 552042267910,
+        "Sequence": 97,
+        "MapChanged": false,
+        "EnqueuedQpc": 552042163652
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552042431956,
+        "PresentationStartQpc": 552042433370,
+        "PresentationEndQpc": 552042524418,
+        "Sequence": 98,
+        "MapChanged": false,
+        "EnqueuedQpc": 552042433241
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552042744710,
+        "PresentationStartQpc": 552042746123,
+        "PresentationEndQpc": 552042848876,
+        "Sequence": 99,
+        "MapChanged": false,
+        "EnqueuedQpc": 552042745994
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552043048925,
+        "PresentationStartQpc": 552043050924,
+        "PresentationEndQpc": 552043145159,
+        "Sequence": 100,
+        "MapChanged": false,
+        "EnqueuedQpc": 552043050746
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552043454927,
+        "PresentationStartQpc": 552043456588,
+        "PresentationEndQpc": 552043552105,
+        "Sequence": 101,
+        "MapChanged": false,
+        "EnqueuedQpc": 552043456453
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552043704833,
+        "PresentationStartQpc": 552043706271,
+        "PresentationEndQpc": 552043806044,
+        "Sequence": 102,
+        "MapChanged": false,
+        "EnqueuedQpc": 552043706141
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552044008836,
+        "PresentationStartQpc": 552044010356,
+        "PresentationEndQpc": 552044099358,
+        "Sequence": 103,
+        "MapChanged": false,
+        "EnqueuedQpc": 552044010227
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552044190500,
+        "PresentationStartQpc": 552044192072,
+        "PresentationEndQpc": 552044303871,
+        "Sequence": 104,
+        "MapChanged": false,
+        "EnqueuedQpc": 552044191938
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552044497185,
+        "PresentationStartQpc": 552044498765,
+        "PresentationEndQpc": 552044588313,
+        "Sequence": 105,
+        "MapChanged": false,
+        "EnqueuedQpc": 552044498631
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552044827211,
+        "PresentationStartQpc": 552044828858,
+        "PresentationEndQpc": 552044928387,
+        "Sequence": 106,
+        "MapChanged": false,
+        "EnqueuedQpc": 552044828727
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552045128158,
+        "PresentationStartQpc": 552045129786,
+        "PresentationEndQpc": 552045229949,
+        "Sequence": 107,
+        "MapChanged": false,
+        "EnqueuedQpc": 552045129656
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552045401578,
+        "PresentationStartQpc": 552045403110,
+        "PresentationEndQpc": 552045490751,
+        "Sequence": 108,
+        "MapChanged": false,
+        "EnqueuedQpc": 552045402977
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552045717099,
+        "PresentationStartQpc": 552045718664,
+        "PresentationEndQpc": 552045825109,
+        "Sequence": 109,
+        "MapChanged": false,
+        "EnqueuedQpc": 552045718533
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552046017430,
+        "PresentationStartQpc": 552046018951,
+        "PresentationEndQpc": 552046108600,
+        "Sequence": 110,
+        "MapChanged": false,
+        "EnqueuedQpc": 552046018823
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552046242640,
+        "PresentationStartQpc": 552046244162,
+        "PresentationEndQpc": 552046337465,
+        "Sequence": 111,
+        "MapChanged": false,
+        "EnqueuedQpc": 552046244026
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552046493753,
+        "PresentationStartQpc": 552046495255,
+        "PresentationEndQpc": 552046594905,
+        "Sequence": 112,
+        "MapChanged": false,
+        "EnqueuedQpc": 552046495123
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552046796994,
+        "PresentationStartQpc": 552046798430,
+        "PresentationEndQpc": 552046896582,
+        "Sequence": 113,
+        "MapChanged": false,
+        "EnqueuedQpc": 552046798290
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552047100259,
+        "PresentationStartQpc": 552047102138,
+        "PresentationEndQpc": 552047213211,
+        "Sequence": 114,
+        "MapChanged": false,
+        "EnqueuedQpc": 552047101989
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552047467714,
+        "PresentationStartQpc": 552047469243,
+        "PresentationEndQpc": 552047563630,
+        "Sequence": 115,
+        "MapChanged": false,
+        "EnqueuedQpc": 552047469111
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552047765439,
+        "PresentationStartQpc": 552047767087,
+        "PresentationEndQpc": 552047871849,
+        "Sequence": 116,
+        "MapChanged": false,
+        "EnqueuedQpc": 552047766947
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552048104830,
+        "PresentationStartQpc": 552048106503,
+        "PresentationEndQpc": 552048213020,
+        "Sequence": 117,
+        "MapChanged": false,
+        "EnqueuedQpc": 552048106366
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552048227785,
+        "PresentationStartQpc": 552048229213,
+        "PresentationEndQpc": 552048318248,
+        "Sequence": 118,
+        "MapChanged": false,
+        "EnqueuedQpc": 552048229081
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552048567895,
+        "PresentationStartQpc": 552048569629,
+        "PresentationEndQpc": 552048674995,
+        "Sequence": 119,
+        "MapChanged": false,
+        "EnqueuedQpc": 552048569499
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552048863526,
+        "PresentationStartQpc": 552048865006,
+        "PresentationEndQpc": 552048956535,
+        "Sequence": 120,
+        "MapChanged": false,
+        "EnqueuedQpc": 552048864876
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552049215697,
+        "PresentationStartQpc": 552049217435,
+        "PresentationEndQpc": 552049308701,
+        "Sequence": 121,
+        "MapChanged": false,
+        "EnqueuedQpc": 552049217292
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552049463315,
+        "PresentationStartQpc": 552049465061,
+        "PresentationEndQpc": 552049574691,
+        "Sequence": 122,
+        "MapChanged": false,
+        "EnqueuedQpc": 552049464919
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552049644721,
+        "PresentationStartQpc": 552049646234,
+        "PresentationEndQpc": 552049735273,
+        "Sequence": 123,
+        "MapChanged": false,
+        "EnqueuedQpc": 552049646102
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552049949436,
+        "PresentationStartQpc": 552049951079,
+        "PresentationEndQpc": 552050053489,
+        "Sequence": 124,
+        "MapChanged": false,
+        "EnqueuedQpc": 552049950945
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552050250715,
+        "PresentationStartQpc": 552050252204,
+        "PresentationEndQpc": 552050340698,
+        "Sequence": 125,
+        "MapChanged": false,
+        "EnqueuedQpc": 552050251934
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552050460421,
+        "PresentationStartQpc": 552050461987,
+        "PresentationEndQpc": 552050564365,
+        "Sequence": 126,
+        "MapChanged": false,
+        "EnqueuedQpc": 552050461859
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552050764462,
+        "PresentationStartQpc": 552050765940,
+        "PresentationEndQpc": 552050874186,
+        "Sequence": 127,
+        "MapChanged": false,
+        "EnqueuedQpc": 552050765811
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552051038553,
+        "PresentationStartQpc": 552051040056,
+        "PresentationEndQpc": 552051130740,
+        "Sequence": 128,
+        "MapChanged": false,
+        "EnqueuedQpc": 552051039921
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552051352949,
+        "PresentationStartQpc": 552051354516,
+        "PresentationEndQpc": 552051456234,
+        "Sequence": 129,
+        "MapChanged": false,
+        "EnqueuedQpc": 552051354382
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552051650350,
+        "PresentationStartQpc": 552051651801,
+        "PresentationEndQpc": 552051746640,
+        "Sequence": 130,
+        "MapChanged": false,
+        "EnqueuedQpc": 552051651672
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552052002130,
+        "PresentationStartQpc": 552052004462,
+        "PresentationEndQpc": 552052098112,
+        "Sequence": 131,
+        "MapChanged": false,
+        "EnqueuedQpc": 552052004322
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552052251101,
+        "PresentationStartQpc": 552052252628,
+        "PresentationEndQpc": 552052351885,
+        "Sequence": 132,
+        "MapChanged": false,
+        "EnqueuedQpc": 552052252494
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552052433524,
+        "PresentationStartQpc": 552052435090,
+        "PresentationEndQpc": 552052527130,
+        "Sequence": 133,
+        "MapChanged": false,
+        "EnqueuedQpc": 552052434961
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552052735592,
+        "PresentationStartQpc": 552052737158,
+        "PresentationEndQpc": 552052837807,
+        "Sequence": 134,
+        "MapChanged": false,
+        "EnqueuedQpc": 552052737018
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552053041373,
+        "PresentationStartQpc": 552053043349,
+        "PresentationEndQpc": 552053137971,
+        "Sequence": 135,
+        "MapChanged": false,
+        "EnqueuedQpc": 552053043213
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552053367464,
+        "PresentationStartQpc": 552053368969,
+        "PresentationEndQpc": 552053473962,
+        "Sequence": 136,
+        "MapChanged": false,
+        "EnqueuedQpc": 552053368839
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552053738524,
+        "PresentationStartQpc": 552053740318,
+        "PresentationEndQpc": 552053844579,
+        "Sequence": 137,
+        "MapChanged": false,
+        "EnqueuedQpc": 552053740178
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552054012757,
+        "PresentationStartQpc": 552054014769,
+        "PresentationEndQpc": 552054107505,
+        "Sequence": 138,
+        "MapChanged": false,
+        "EnqueuedQpc": 552054014586
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552054144618,
+        "PresentationStartQpc": 552054146394,
+        "PresentationEndQpc": 552054268331,
+        "Sequence": 139,
+        "MapChanged": false,
+        "EnqueuedQpc": 552054146258
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552054502246,
+        "PresentationStartQpc": 552054503841,
+        "PresentationEndQpc": 552054601021,
+        "Sequence": 140,
+        "MapChanged": false,
+        "EnqueuedQpc": 552054503711
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552054851145,
+        "PresentationStartQpc": 552054852634,
+        "PresentationEndQpc": 552054943949,
+        "Sequence": 141,
+        "MapChanged": false,
+        "EnqueuedQpc": 552054852503
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552055100214,
+        "PresentationStartQpc": 552055101836,
+        "PresentationEndQpc": 552055203610,
+        "Sequence": 142,
+        "MapChanged": false,
+        "EnqueuedQpc": 552055101688
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552055404169,
+        "PresentationStartQpc": 552055405721,
+        "PresentationEndQpc": 552055501446,
+        "Sequence": 143,
+        "MapChanged": false,
+        "EnqueuedQpc": 552055405588
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552055707346,
+        "PresentationStartQpc": 552055709009,
+        "PresentationEndQpc": 552055810022,
+        "Sequence": 144,
+        "MapChanged": false,
+        "EnqueuedQpc": 552055708873
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552056009558,
+        "PresentationStartQpc": 552056011056,
+        "PresentationEndQpc": 552056099798,
+        "Sequence": 145,
+        "MapChanged": false,
+        "EnqueuedQpc": 552056010918
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552056219370,
+        "PresentationStartQpc": 552056221016,
+        "PresentationEndQpc": 552056322501,
+        "Sequence": 146,
+        "MapChanged": false,
+        "EnqueuedQpc": 552056220879
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552056526902,
+        "PresentationStartQpc": 552056528656,
+        "PresentationEndQpc": 552056630795,
+        "Sequence": 147,
+        "MapChanged": false,
+        "EnqueuedQpc": 552056528525
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552056797715,
+        "PresentationStartQpc": 552056799202,
+        "PresentationEndQpc": 552056890283,
+        "Sequence": 148,
+        "MapChanged": false,
+        "EnqueuedQpc": 552056799072
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552057109726,
+        "PresentationStartQpc": 552057111218,
+        "PresentationEndQpc": 552057211772,
+        "Sequence": 149,
+        "MapChanged": false,
+        "EnqueuedQpc": 552057111081
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552064696436,
+        "PresentationStartQpc": 552064698248,
+        "PresentationEndQpc": 552064824959,
+        "Sequence": 150,
+        "MapChanged": false,
+        "EnqueuedQpc": 552064698082
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552064879603,
+        "PresentationStartQpc": 552064881217,
+        "PresentationEndQpc": 552064983554,
+        "Sequence": 151,
+        "MapChanged": false,
+        "EnqueuedQpc": 552064881088
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552064999458,
+        "PresentationStartQpc": 552065000874,
+        "PresentationEndQpc": 552065091468,
+        "Sequence": 152,
+        "MapChanged": false,
+        "EnqueuedQpc": 552065000739
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552065107196,
+        "PresentationStartQpc": 552065108718,
+        "PresentationEndQpc": 552065265272,
+        "Sequence": 153,
+        "MapChanged": false,
+        "EnqueuedQpc": 552065108579
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552065280593,
+        "PresentationStartQpc": 552065281927,
+        "PresentationEndQpc": 552065370101,
+        "Sequence": 154,
+        "MapChanged": false,
+        "EnqueuedQpc": 552065281800
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552065385308,
+        "PresentationStartQpc": 552065386871,
+        "PresentationEndQpc": 552065491882,
+        "Sequence": 155,
+        "MapChanged": false,
+        "EnqueuedQpc": 552065386739
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552065534806,
+        "PresentationStartQpc": 552065536273,
+        "PresentationEndQpc": 552065622815,
+        "Sequence": 156,
+        "MapChanged": false,
+        "EnqueuedQpc": 552065536141
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552065672558,
+        "PresentationStartQpc": 552065673977,
+        "PresentationEndQpc": 552065761122,
+        "Sequence": 157,
+        "MapChanged": false,
+        "EnqueuedQpc": 552065673848
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552065775941,
+        "PresentationStartQpc": 552065777282,
+        "PresentationEndQpc": 552065875357,
+        "Sequence": 158,
+        "MapChanged": false,
+        "EnqueuedQpc": 552065777151
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552065900410,
+        "PresentationStartQpc": 552065901827,
+        "PresentationEndQpc": 552065991736,
+        "Sequence": 159,
+        "MapChanged": false,
+        "EnqueuedQpc": 552065901693
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552066012058,
+        "PresentationStartQpc": 552066013812,
+        "PresentationEndQpc": 552066108459,
+        "Sequence": 160,
+        "MapChanged": false,
+        "EnqueuedQpc": 552066013658
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552066161529,
+        "PresentationStartQpc": 552066162972,
+        "PresentationEndQpc": 552066261464,
+        "Sequence": 161,
+        "MapChanged": false,
+        "EnqueuedQpc": 552066162841
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552066276571,
+        "PresentationStartQpc": 552066277905,
+        "PresentationEndQpc": 552066365242,
+        "Sequence": 162,
+        "MapChanged": false,
+        "EnqueuedQpc": 552066277776
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552066380340,
+        "PresentationStartQpc": 552066381650,
+        "PresentationEndQpc": 552066475831,
+        "Sequence": 163,
+        "MapChanged": false,
+        "EnqueuedQpc": 552066381526
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552066491245,
+        "PresentationStartQpc": 552066492627,
+        "PresentationEndQpc": 552066580132,
+        "Sequence": 164,
+        "MapChanged": false,
+        "EnqueuedQpc": 552066492501
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552066595053,
+        "PresentationStartQpc": 552066596476,
+        "PresentationEndQpc": 552066689483,
+        "Sequence": 165,
+        "MapChanged": false,
+        "EnqueuedQpc": 552066596347
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552066733126,
+        "PresentationStartQpc": 552066734537,
+        "PresentationEndQpc": 552066823236,
+        "Sequence": 166,
+        "MapChanged": false,
+        "EnqueuedQpc": 552066734409
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552066868015,
+        "PresentationStartQpc": 552066869524,
+        "PresentationEndQpc": 552066973343,
+        "Sequence": 167,
+        "MapChanged": false,
+        "EnqueuedQpc": 552066869393
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552066989788,
+        "PresentationStartQpc": 552066991175,
+        "PresentationEndQpc": 552067081582,
+        "Sequence": 168,
+        "MapChanged": false,
+        "EnqueuedQpc": 552066991046
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552067118752,
+        "PresentationStartQpc": 552067120440,
+        "PresentationEndQpc": 552067224022,
+        "Sequence": 169,
+        "MapChanged": false,
+        "EnqueuedQpc": 552067120308
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552067246668,
+        "PresentationStartQpc": 552067248207,
+        "PresentationEndQpc": 552067355638,
+        "Sequence": 170,
+        "MapChanged": false,
+        "EnqueuedQpc": 552067248074
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552067409468,
+        "PresentationStartQpc": 552067411052,
+        "PresentationEndQpc": 552067504294,
+        "Sequence": 171,
+        "MapChanged": false,
+        "EnqueuedQpc": 552067410922
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552067523827,
+        "PresentationStartQpc": 552067525586,
+        "PresentationEndQpc": 552067625092,
+        "Sequence": 172,
+        "MapChanged": false,
+        "EnqueuedQpc": 552067525426
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552067641470,
+        "PresentationStartQpc": 552067642996,
+        "PresentationEndQpc": 552067731880,
+        "Sequence": 173,
+        "MapChanged": false,
+        "EnqueuedQpc": 552067642870
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552067747325,
+        "PresentationStartQpc": 552067748670,
+        "PresentationEndQpc": 552067843888,
+        "Sequence": 174,
+        "MapChanged": false,
+        "EnqueuedQpc": 552067748542
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552067860097,
+        "PresentationStartQpc": 552067861460,
+        "PresentationEndQpc": 552067949883,
+        "Sequence": 175,
+        "MapChanged": false,
+        "EnqueuedQpc": 552067861336
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552067999031,
+        "PresentationStartQpc": 552068001008,
+        "PresentationEndQpc": 552068089146,
+        "Sequence": 176,
+        "MapChanged": false,
+        "EnqueuedQpc": 552068000875
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552068138949,
+        "PresentationStartQpc": 552068140639,
+        "PresentationEndQpc": 552068246380,
+        "Sequence": 177,
+        "MapChanged": false,
+        "EnqueuedQpc": 552068140507
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552068261398,
+        "PresentationStartQpc": 552068262827,
+        "PresentationEndQpc": 552068354703,
+        "Sequence": 178,
+        "MapChanged": false,
+        "EnqueuedQpc": 552068262695
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552068381976,
+        "PresentationStartQpc": 552068383623,
+        "PresentationEndQpc": 552068485913,
+        "Sequence": 179,
+        "MapChanged": false,
+        "EnqueuedQpc": 552068383479
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552068507271,
+        "PresentationStartQpc": 552068508857,
+        "PresentationEndQpc": 552068598577,
+        "Sequence": 180,
+        "MapChanged": false,
+        "EnqueuedQpc": 552068508727
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552068658859,
+        "PresentationStartQpc": 552068660994,
+        "PresentationEndQpc": 552068750514,
+        "Sequence": 181,
+        "MapChanged": false,
+        "EnqueuedQpc": 552068660848
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552068765396,
+        "PresentationStartQpc": 552068766670,
+        "PresentationEndQpc": 552068861331,
+        "Sequence": 182,
+        "MapChanged": false,
+        "EnqueuedQpc": 552068766548
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552068876919,
+        "PresentationStartQpc": 552068878413,
+        "PresentationEndQpc": 552068975385,
+        "Sequence": 183,
+        "MapChanged": false,
+        "EnqueuedQpc": 552068878274
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552068990364,
+        "PresentationStartQpc": 552068992101,
+        "PresentationEndQpc": 552069091441,
+        "Sequence": 184,
+        "MapChanged": false,
+        "EnqueuedQpc": 552068991591
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552069107281,
+        "PresentationStartQpc": 552069108719,
+        "PresentationEndQpc": 552069196167,
+        "Sequence": 185,
+        "MapChanged": false,
+        "EnqueuedQpc": 552069108595
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552069237169,
+        "PresentationStartQpc": 552069238578,
+        "PresentationEndQpc": 552069336225,
+        "Sequence": 186,
+        "MapChanged": false,
+        "EnqueuedQpc": 552069238445
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552069380539,
+        "PresentationStartQpc": 552069382103,
+        "PresentationEndQpc": 552069480361,
+        "Sequence": 187,
+        "MapChanged": false,
+        "EnqueuedQpc": 552069381970
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552069646740,
+        "PresentationStartQpc": 552069648312,
+        "PresentationEndQpc": 552069737257,
+        "Sequence": 188,
+        "MapChanged": false,
+        "EnqueuedQpc": 552069648181
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552069960773,
+        "PresentationStartQpc": 552069962256,
+        "PresentationEndQpc": 552070057240,
+        "Sequence": 189,
+        "MapChanged": false,
+        "EnqueuedQpc": 552069962124
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552070257374,
+        "PresentationStartQpc": 552070258802,
+        "PresentationEndQpc": 552070346957,
+        "Sequence": 190,
+        "MapChanged": false,
+        "EnqueuedQpc": 552070258673
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552070478090,
+        "PresentationStartQpc": 552070479940,
+        "PresentationEndQpc": 552070573850,
+        "Sequence": 191,
+        "MapChanged": false,
+        "EnqueuedQpc": 552070479780
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552070737784,
+        "PresentationStartQpc": 552070739226,
+        "PresentationEndQpc": 552070834832,
+        "Sequence": 192,
+        "MapChanged": false,
+        "EnqueuedQpc": 552070739096
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552071039491,
+        "PresentationStartQpc": 552071041308,
+        "PresentationEndQpc": 552071134713,
+        "Sequence": 193,
+        "MapChanged": false,
+        "EnqueuedQpc": 552071041154
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552071342170,
+        "PresentationStartQpc": 552071343691,
+        "PresentationEndQpc": 552071442334,
+        "Sequence": 194,
+        "MapChanged": false,
+        "EnqueuedQpc": 552071343562
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552071648275,
+        "PresentationStartQpc": 552071649900,
+        "PresentationEndQpc": 552071742128,
+        "Sequence": 195,
+        "MapChanged": false,
+        "EnqueuedQpc": 552071649770
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552071854976,
+        "PresentationStartQpc": 552071856633,
+        "PresentationEndQpc": 552071954456,
+        "Sequence": 196,
+        "MapChanged": false,
+        "EnqueuedQpc": 552071856491
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552072220801,
+        "PresentationStartQpc": 552072222406,
+        "PresentationEndQpc": 552072317181,
+        "Sequence": 197,
+        "MapChanged": false,
+        "EnqueuedQpc": 552072222265
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552072434449,
+        "PresentationStartQpc": 552072436308,
+        "PresentationEndQpc": 552072529185,
+        "Sequence": 198,
+        "MapChanged": false,
+        "EnqueuedQpc": 552072436112
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552072748263,
+        "PresentationStartQpc": 552072749749,
+        "PresentationEndQpc": 552072845179,
+        "Sequence": 199,
+        "MapChanged": false,
+        "EnqueuedQpc": 552072749622
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552073047876,
+        "PresentationStartQpc": 552073050043,
+        "PresentationEndQpc": 552073144805,
+        "Sequence": 200,
+        "MapChanged": false,
+        "EnqueuedQpc": 552073049906
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552073376560,
+        "PresentationStartQpc": 552073378212,
+        "PresentationEndQpc": 552073467546,
+        "Sequence": 201,
+        "MapChanged": false,
+        "EnqueuedQpc": 552073378078
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552073707369,
+        "PresentationStartQpc": 552073708854,
+        "PresentationEndQpc": 552073798324,
+        "Sequence": 202,
+        "MapChanged": false,
+        "EnqueuedQpc": 552073708727
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552074016944,
+        "PresentationStartQpc": 552074018278,
+        "PresentationEndQpc": 552074106133,
+        "Sequence": 203,
+        "MapChanged": false,
+        "EnqueuedQpc": 552074018151
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552074191692,
+        "PresentationStartQpc": 552074193945,
+        "PresentationEndQpc": 552074289288,
+        "Sequence": 204,
+        "MapChanged": false,
+        "EnqueuedQpc": 552074193768
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552074495115,
+        "PresentationStartQpc": 552074496683,
+        "PresentationEndQpc": 552074593183,
+        "Sequence": 205,
+        "MapChanged": false,
+        "EnqueuedQpc": 552074496542
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552074829767,
+        "PresentationStartQpc": 552074831469,
+        "PresentationEndQpc": 552074931240,
+        "Sequence": 206,
+        "MapChanged": false,
+        "EnqueuedQpc": 552074831331
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552075194974,
+        "PresentationStartQpc": 552075196598,
+        "PresentationEndQpc": 552075286883,
+        "Sequence": 207,
+        "MapChanged": false,
+        "EnqueuedQpc": 552075196468
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552075522137,
+        "PresentationStartQpc": 552075523550,
+        "PresentationEndQpc": 552075611642,
+        "Sequence": 208,
+        "MapChanged": false,
+        "EnqueuedQpc": 552075523422
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552075635822,
+        "PresentationStartQpc": 552075637295,
+        "PresentationEndQpc": 552075731341,
+        "Sequence": 209,
+        "MapChanged": false,
+        "EnqueuedQpc": 552075637108
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552075896379,
+        "PresentationStartQpc": 552075897823,
+        "PresentationEndQpc": 552075999596,
+        "Sequence": 210,
+        "MapChanged": false,
+        "EnqueuedQpc": 552075897695
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552076230114,
+        "PresentationStartQpc": 552076231691,
+        "PresentationEndQpc": 552076329980,
+        "Sequence": 211,
+        "MapChanged": false,
+        "EnqueuedQpc": 552076231561
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552076555600,
+        "PresentationStartQpc": 552076557053,
+        "PresentationEndQpc": 552076644928,
+        "Sequence": 212,
+        "MapChanged": false,
+        "EnqueuedQpc": 552076556926
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552076805048,
+        "PresentationStartQpc": 552076806493,
+        "PresentationEndQpc": 552076894744,
+        "Sequence": 213,
+        "MapChanged": false,
+        "EnqueuedQpc": 552076806359
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552077102319,
+        "PresentationStartQpc": 552077104685,
+        "PresentationEndQpc": 552077199890,
+        "Sequence": 214,
+        "MapChanged": false,
+        "EnqueuedQpc": 552077104553
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552077471082,
+        "PresentationStartQpc": 552077472541,
+        "PresentationEndQpc": 552077570846,
+        "Sequence": 215,
+        "MapChanged": false,
+        "EnqueuedQpc": 552077472412
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552077612893,
+        "PresentationStartQpc": 552077614425,
+        "PresentationEndQpc": 552077721404,
+        "Sequence": 216,
+        "MapChanged": false,
+        "EnqueuedQpc": 552077614295
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552077919525,
+        "PresentationStartQpc": 552077921017,
+        "PresentationEndQpc": 552078008560,
+        "Sequence": 217,
+        "MapChanged": false,
+        "EnqueuedQpc": 552077920890
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552078201097,
+        "PresentationStartQpc": 552078202479,
+        "PresentationEndQpc": 552078289970,
+        "Sequence": 218,
+        "MapChanged": false,
+        "EnqueuedQpc": 552078202353
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552078564668,
+        "PresentationStartQpc": 552078566072,
+        "PresentationEndQpc": 552078666672,
+        "Sequence": 219,
+        "MapChanged": false,
+        "EnqueuedQpc": 552078565940
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552078864056,
+        "PresentationStartQpc": 552078865524,
+        "PresentationEndQpc": 552078953851,
+        "Sequence": 220,
+        "MapChanged": false,
+        "EnqueuedQpc": 552078865391
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552079200125,
+        "PresentationStartQpc": 552079201743,
+        "PresentationEndQpc": 552079298533,
+        "Sequence": 221,
+        "MapChanged": false,
+        "EnqueuedQpc": 552079201609
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552079465132,
+        "PresentationStartQpc": 552079466626,
+        "PresentationEndQpc": 552079555063,
+        "Sequence": 222,
+        "MapChanged": false,
+        "EnqueuedQpc": 552079466497
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552079570076,
+        "PresentationStartQpc": 552079571452,
+        "PresentationEndQpc": 552079665375,
+        "Sequence": 223,
+        "MapChanged": false,
+        "EnqueuedQpc": 552079571327
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552079948616,
+        "PresentationStartQpc": 552079949981,
+        "PresentationEndQpc": 552080037200,
+        "Sequence": 224,
+        "MapChanged": false,
+        "EnqueuedQpc": 552079949849
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552080263809,
+        "PresentationStartQpc": 552080265435,
+        "PresentationEndQpc": 552080363822,
+        "Sequence": 225,
+        "MapChanged": false,
+        "EnqueuedQpc": 552080265308
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552080581177,
+        "PresentationStartQpc": 552080582662,
+        "PresentationEndQpc": 552080678689,
+        "Sequence": 226,
+        "MapChanged": false,
+        "EnqueuedQpc": 552080582537
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552080769353,
+        "PresentationStartQpc": 552080771117,
+        "PresentationEndQpc": 552080869586,
+        "Sequence": 227,
+        "MapChanged": false,
+        "EnqueuedQpc": 552080770984
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552081044138,
+        "PresentationStartQpc": 552081045526,
+        "PresentationEndQpc": 552081151313,
+        "Sequence": 228,
+        "MapChanged": false,
+        "EnqueuedQpc": 552081045390
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552081415316,
+        "PresentationStartQpc": 552081416826,
+        "PresentationEndQpc": 552081515506,
+        "Sequence": 229,
+        "MapChanged": false,
+        "EnqueuedQpc": 552081416692
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552081543010,
+        "PresentationStartQpc": 552081544624,
+        "PresentationEndQpc": 552081633359,
+        "Sequence": 230,
+        "MapChanged": false,
+        "EnqueuedQpc": 552081544495
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552081987335,
+        "PresentationStartQpc": 552081989252,
+        "PresentationEndQpc": 552082089467,
+        "Sequence": 231,
+        "MapChanged": false,
+        "EnqueuedQpc": 552081989112
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552082310046,
+        "PresentationStartQpc": 552082311583,
+        "PresentationEndQpc": 552082399381,
+        "Sequence": 232,
+        "MapChanged": false,
+        "EnqueuedQpc": 552082311449
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552082673083,
+        "PresentationStartQpc": 552082675132,
+        "PresentationEndQpc": 552082772062,
+        "Sequence": 233,
+        "MapChanged": false,
+        "EnqueuedQpc": 552082674927
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552082787678,
+        "PresentationStartQpc": 552082789100,
+        "PresentationEndQpc": 552082876079,
+        "Sequence": 234,
+        "MapChanged": false,
+        "EnqueuedQpc": 552082788976
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552083038243,
+        "PresentationStartQpc": 552083039709,
+        "PresentationEndQpc": 552083135247,
+        "Sequence": 235,
+        "MapChanged": false,
+        "EnqueuedQpc": 552083039558
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552083427074,
+        "PresentationStartQpc": 552083428600,
+        "PresentationEndQpc": 552083525740,
+        "Sequence": 236,
+        "MapChanged": false,
+        "EnqueuedQpc": 552083428470
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552083571246,
+        "PresentationStartQpc": 552083572937,
+        "PresentationEndQpc": 552083666173,
+        "Sequence": 237,
+        "MapChanged": false,
+        "EnqueuedQpc": 552083572800
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552084006102,
+        "PresentationStartQpc": 552084007464,
+        "PresentationEndQpc": 552084105909,
+        "Sequence": 238,
+        "MapChanged": false,
+        "EnqueuedQpc": 552084007340
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552084199294,
+        "PresentationStartQpc": 552084200854,
+        "PresentationEndQpc": 552084289473,
+        "Sequence": 239,
+        "MapChanged": false,
+        "EnqueuedQpc": 552084200728
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552084504589,
+        "PresentationStartQpc": 552084506026,
+        "PresentationEndQpc": 552084594170,
+        "Sequence": 240,
+        "MapChanged": false,
+        "EnqueuedQpc": 552084505898
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552084833697,
+        "PresentationStartQpc": 552084835245,
+        "PresentationEndQpc": 552084929528,
+        "Sequence": 241,
+        "MapChanged": false,
+        "EnqueuedQpc": 552084835114
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552085098187,
+        "PresentationStartQpc": 552085099683,
+        "PresentationEndQpc": 552085187691,
+        "Sequence": 242,
+        "MapChanged": false,
+        "EnqueuedQpc": 552085099551
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552085401654,
+        "PresentationStartQpc": 552085403212,
+        "PresentationEndQpc": 552085500389,
+        "Sequence": 243,
+        "MapChanged": false,
+        "EnqueuedQpc": 552085403078
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552085584177,
+        "PresentationStartQpc": 552085586304,
+        "PresentationEndQpc": 552085674102,
+        "Sequence": 244,
+        "MapChanged": false,
+        "EnqueuedQpc": 552085586127
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552085887082,
+        "PresentationStartQpc": 552085888611,
+        "PresentationEndQpc": 552085984341,
+        "Sequence": 245,
+        "MapChanged": false,
+        "EnqueuedQpc": 552085888478
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552086220566,
+        "PresentationStartQpc": 552086222214,
+        "PresentationEndQpc": 552086326530,
+        "Sequence": 246,
+        "MapChanged": false,
+        "EnqueuedQpc": 552086222084
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552086520051,
+        "PresentationStartQpc": 552086521597,
+        "PresentationEndQpc": 552086609982,
+        "Sequence": 247,
+        "MapChanged": false,
+        "EnqueuedQpc": 552086521470
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552086795738,
+        "PresentationStartQpc": 552086797451,
+        "PresentationEndQpc": 552086896049,
+        "Sequence": 248,
+        "MapChanged": false,
+        "EnqueuedQpc": 552086797320
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552087110187,
+        "PresentationStartQpc": 552087111739,
+        "PresentationEndQpc": 552087207177,
+        "Sequence": 249,
+        "MapChanged": false,
+        "EnqueuedQpc": 552087111607
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552087354805,
+        "PresentationStartQpc": 552087356209,
+        "PresentationEndQpc": 552087452191,
+        "Sequence": 250,
+        "MapChanged": false,
+        "EnqueuedQpc": 552087356083
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552087623651,
+        "PresentationStartQpc": 552087625238,
+        "PresentationEndQpc": 552087721326,
+        "Sequence": 251,
+        "MapChanged": false,
+        "EnqueuedQpc": 552087625107
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552087889933,
+        "PresentationStartQpc": 552087891300,
+        "PresentationEndQpc": 552087979789,
+        "Sequence": 252,
+        "MapChanged": false,
+        "EnqueuedQpc": 552087891172
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552088253776,
+        "PresentationStartQpc": 552088255306,
+        "PresentationEndQpc": 552088354600,
+        "Sequence": 253,
+        "MapChanged": false,
+        "EnqueuedQpc": 552088255172
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552088552313,
+        "PresentationStartQpc": 552088553897,
+        "PresentationEndQpc": 552088645017,
+        "Sequence": 254,
+        "MapChanged": false,
+        "EnqueuedQpc": 552088553767
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552088857783,
+        "PresentationStartQpc": 552088859196,
+        "PresentationEndQpc": 552088966824,
+        "Sequence": 255,
+        "MapChanged": false,
+        "EnqueuedQpc": 552088859066
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552089187901,
+        "PresentationStartQpc": 552089189449,
+        "PresentationEndQpc": 552089295145,
+        "Sequence": 256,
+        "MapChanged": false,
+        "EnqueuedQpc": 552089189310
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552089489783,
+        "PresentationStartQpc": 552089491450,
+        "PresentationEndQpc": 552089581559,
+        "Sequence": 257,
+        "MapChanged": false,
+        "EnqueuedQpc": 552089491320
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552089597188,
+        "PresentationStartQpc": 552089598501,
+        "PresentationEndQpc": 552089694513,
+        "Sequence": 258,
+        "MapChanged": false,
+        "EnqueuedQpc": 552089598369
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552090016988,
+        "PresentationStartQpc": 552090018648,
+        "PresentationEndQpc": 552090112832,
+        "Sequence": 259,
+        "MapChanged": false,
+        "EnqueuedQpc": 552090018511
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552090134149,
+        "PresentationStartQpc": 552090135568,
+        "PresentationEndQpc": 552090230383,
+        "Sequence": 260,
+        "MapChanged": false,
+        "EnqueuedQpc": 552090135441
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552090468998,
+        "PresentationStartQpc": 552090470551,
+        "PresentationEndQpc": 552090566630,
+        "Sequence": 261,
+        "MapChanged": false,
+        "EnqueuedQpc": 552090470422
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552090836192,
+        "PresentationStartQpc": 552090838380,
+        "PresentationEndQpc": 552090934425,
+        "Sequence": 262,
+        "MapChanged": false,
+        "EnqueuedQpc": 552090838225
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552091041065,
+        "PresentationStartQpc": 552091042902,
+        "PresentationEndQpc": 552091141364,
+        "Sequence": 263,
+        "MapChanged": false,
+        "EnqueuedQpc": 552091042768
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552091403733,
+        "PresentationStartQpc": 552091405258,
+        "PresentationEndQpc": 552091495757,
+        "Sequence": 264,
+        "MapChanged": false,
+        "EnqueuedQpc": 552091405127
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552091642511,
+        "PresentationStartQpc": 552091643962,
+        "PresentationEndQpc": 552091739305,
+        "Sequence": 265,
+        "MapChanged": false,
+        "EnqueuedQpc": 552091643749
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552091974403,
+        "PresentationStartQpc": 552091976091,
+        "PresentationEndQpc": 552092081594,
+        "Sequence": 266,
+        "MapChanged": false,
+        "EnqueuedQpc": 552091975955
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552092343502,
+        "PresentationStartQpc": 552092345219,
+        "PresentationEndQpc": 552092439954,
+        "Sequence": 267,
+        "MapChanged": false,
+        "EnqueuedQpc": 552092345084
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552092454826,
+        "PresentationStartQpc": 552092456139,
+        "PresentationEndQpc": 552092558023,
+        "Sequence": 268,
+        "MapChanged": false,
+        "EnqueuedQpc": 552092456011
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552092743045,
+        "PresentationStartQpc": 552092744473,
+        "PresentationEndQpc": 552092831992,
+        "Sequence": 269,
+        "MapChanged": false,
+        "EnqueuedQpc": 552092744344
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552093042788,
+        "PresentationStartQpc": 552093044248,
+        "PresentationEndQpc": 552093142681,
+        "Sequence": 270,
+        "MapChanged": false,
+        "EnqueuedQpc": 552093044123
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552093438840,
+        "PresentationStartQpc": 552093440435,
+        "PresentationEndQpc": 552093538951,
+        "Sequence": 271,
+        "MapChanged": false,
+        "EnqueuedQpc": 552093440305
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552093556179,
+        "PresentationStartQpc": 552093557695,
+        "PresentationEndQpc": 552093649298,
+        "Sequence": 272,
+        "MapChanged": false,
+        "EnqueuedQpc": 552093557569
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552094008205,
+        "PresentationStartQpc": 552094009741,
+        "PresentationEndQpc": 552094109939,
+        "Sequence": 273,
+        "MapChanged": false,
+        "EnqueuedQpc": 552094009612
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552094313046,
+        "PresentationStartQpc": 552094314588,
+        "PresentationEndQpc": 552094403204,
+        "Sequence": 274,
+        "MapChanged": false,
+        "EnqueuedQpc": 552094314455
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552094553351,
+        "PresentationStartQpc": 552094555182,
+        "PresentationEndQpc": 552094654022,
+        "Sequence": 275,
+        "MapChanged": false,
+        "EnqueuedQpc": 552094555035
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552094820452,
+        "PresentationStartQpc": 552094821862,
+        "PresentationEndQpc": 552094909908,
+        "Sequence": 276,
+        "MapChanged": false,
+        "EnqueuedQpc": 552094821737
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552095132961,
+        "PresentationStartQpc": 552095134475,
+        "PresentationEndQpc": 552095223392,
+        "Sequence": 277,
+        "MapChanged": false,
+        "EnqueuedQpc": 552095134346
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552095400168,
+        "PresentationStartQpc": 552095401655,
+        "PresentationEndQpc": 552095497150,
+        "Sequence": 278,
+        "MapChanged": false,
+        "EnqueuedQpc": 552095401521
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552095596882,
+        "PresentationStartQpc": 552095598316,
+        "PresentationEndQpc": 552095686399,
+        "Sequence": 279,
+        "MapChanged": false,
+        "EnqueuedQpc": 552095598186
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552095891969,
+        "PresentationStartQpc": 552095893507,
+        "PresentationEndQpc": 552095989217,
+        "Sequence": 280,
+        "MapChanged": false,
+        "EnqueuedQpc": 552095893379
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552096227103,
+        "PresentationStartQpc": 552096228891,
+        "PresentationEndQpc": 552096331034,
+        "Sequence": 281,
+        "MapChanged": false,
+        "EnqueuedQpc": 552096228759
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552096495457,
+        "PresentationStartQpc": 552096496881,
+        "PresentationEndQpc": 552096596671,
+        "Sequence": 282,
+        "MapChanged": false,
+        "EnqueuedQpc": 552096496755
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552096795468,
+        "PresentationStartQpc": 552096797025,
+        "PresentationEndQpc": 552096892680,
+        "Sequence": 283,
+        "MapChanged": false,
+        "EnqueuedQpc": 552096796879
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552097036841,
+        "PresentationStartQpc": 552097038191,
+        "PresentationEndQpc": 552097125645,
+        "Sequence": 284,
+        "MapChanged": false,
+        "EnqueuedQpc": 552097038062
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552097468201,
+        "PresentationStartQpc": 552097469691,
+        "PresentationEndQpc": 552097569093,
+        "Sequence": 285,
+        "MapChanged": false,
+        "EnqueuedQpc": 552097469565
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552097611340,
+        "PresentationStartQpc": 552097613028,
+        "PresentationEndQpc": 552097709144,
+        "Sequence": 286,
+        "MapChanged": false,
+        "EnqueuedQpc": 552097612898
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552097925797,
+        "PresentationStartQpc": 552097927327,
+        "PresentationEndQpc": 552098015758,
+        "Sequence": 287,
+        "MapChanged": false,
+        "EnqueuedQpc": 552097927200
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552098193479,
+        "PresentationStartQpc": 552098195379,
+        "PresentationEndQpc": 552098292373,
+        "Sequence": 288,
+        "MapChanged": false,
+        "EnqueuedQpc": 552098195227
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552098563881,
+        "PresentationStartQpc": 552098565337,
+        "PresentationEndQpc": 552098653735,
+        "Sequence": 289,
+        "MapChanged": false,
+        "EnqueuedQpc": 552098565207
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552098861552,
+        "PresentationStartQpc": 552098862975,
+        "PresentationEndQpc": 552098959022,
+        "Sequence": 290,
+        "MapChanged": false,
+        "EnqueuedQpc": 552098862845
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552099202967,
+        "PresentationStartQpc": 552099205638,
+        "PresentationEndQpc": 552099314125,
+        "Sequence": 291,
+        "MapChanged": false,
+        "EnqueuedQpc": 552099205493
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552099329578,
+        "PresentationStartQpc": 552099330892,
+        "PresentationEndQpc": 552099422620,
+        "Sequence": 292,
+        "MapChanged": false,
+        "EnqueuedQpc": 552099330765
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552099645051,
+        "PresentationStartQpc": 552099646547,
+        "PresentationEndQpc": 552099744370,
+        "Sequence": 293,
+        "MapChanged": false,
+        "EnqueuedQpc": 552099646418
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552099946652,
+        "PresentationStartQpc": 552099948188,
+        "PresentationEndQpc": 552100035866,
+        "Sequence": 294,
+        "MapChanged": false,
+        "EnqueuedQpc": 552099948059
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552100251093,
+        "PresentationStartQpc": 552100252734,
+        "PresentationEndQpc": 552100361005,
+        "Sequence": 295,
+        "MapChanged": false,
+        "EnqueuedQpc": 552100252606
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552100457946,
+        "PresentationStartQpc": 552100459446,
+        "PresentationEndQpc": 552100548241,
+        "Sequence": 296,
+        "MapChanged": false,
+        "EnqueuedQpc": 552100459317
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552100775851,
+        "PresentationStartQpc": 552100778411,
+        "PresentationEndQpc": 552100875975,
+        "Sequence": 297,
+        "MapChanged": false,
+        "EnqueuedQpc": 552100778238
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552101036845,
+        "PresentationStartQpc": 552101039040,
+        "PresentationEndQpc": 552101139777,
+        "Sequence": 298,
+        "MapChanged": false,
+        "EnqueuedQpc": 552101038821
+      },
+      {
+        "State": 0,
+        "UpdateEndQpc": 552101351049,
+        "PresentationStartQpc": 552101352669,
+        "PresentationEndQpc": 552101440617,
+        "Sequence": 299,
+        "MapChanged": false,
+        "EnqueuedQpc": 552101352532
+      }
+    ],
+    "ReplayCheckpoints": [],
+    "SessionScreenMs": null,
+    "FinalGeneration": 1,
+    "Audio": {
+      "DeviceClosed": true,
+      "PauseTransitions": 1,
+      "RebufferCount": 0,
+      "WallSeconds": 9.7857753,
+      "QueueStarvationObservations": [],
+      "StalePacketsDiscarded": 0,
+      "LastSequence": 299,
+      "Music": {
+        "Transitions": [],
+        "Reports": {},
+        "Selected": null,
+        "Gain": 0.2,
+        "Frames": 0,
+        "Closed": true
+      },
+      "MaxVoices": 0,
+      "PacketAgeAtSubmissionMs": [
+        40.1018,
+        7.3217,
+        9.3246,
+        10.0805,
+        17.5785,
+        10.4499,
+        13.2651,
+        8.5076,
+        26.7322,
+        42.7223,
+        50.6195,
+        63.5429,
+        82.0988,
+        97.7512,
+        115.3114,
+        134.6521,
+        150.3601,
+        154.5942,
+        172.1433,
+        189.0723,
+        206.6599,
+        220.5495,
+        238.5931,
+        257.3876,
+        265.8191,
+        284.4248,
+        299.5823,
+        312.9439,
+        331.5315,
+        348.0576,
+        366.1768,
+        368.8015,
+        384.8205,
+        402.8841,
+        419.2952,
+        437.5001,
+        451.8118,
+        465.868,
+        474.9627,
+        491.7422,
+        510.3474,
+        524.3394,
+        541.994,
+        560.9951,
+        579.3443,
+        588.2611,
+        602.996,
+        617.9397,
+        637.202,
+        654.0296,
+        672.2784,
+        686.2644,
+        695.7287,
+        713.8238,
+        732.8827,
+        750.9868,
+        765.9607,
+        782.1862,
+        800.5422,
+        807.7777,
+        824.8936,
+        839.2823,
+        858.6405,
+        876.9738,
+        887.5805,
+        888.0206,
+        867.3779,
+        867.8086,
+        870.1654,
+        880.6121,
+        881.0768,
+        876.1427,
+        880.9587,
+        870.7314,
+        870.9762,
+        870.3301,
+        878.8181,
+        878.8429,
+        881.3849,
+        880.1163,
+        864.3491,
+        858.9965,
+        863.6665,
+        881.8758,
+        877.5887,
+        875.3956,
+        867.2846,
+        873.6888,
+        876.9511,
+        875.5563,
+        875.8602,
+        882.0182,
+        887.1795,
+        887.311,
+        877.0553,
+        876.575,
+        873.222,
+        885.0715,
+        888.1166,
+        886.9639,
+        886.3176,
+        865.7583,
+        870.9672,
+        870.3558,
+        882.1909,
+        881.5312,
+        878.4718,
+        878.644,
+        871.3136,
+        869.2084,
+        869.5361,
+        877.0039,
+        881.9489,
+        881.604,
+        881.2197,
+        864.4944,
+        864.9616,
+        860.6831,
+        878.435,
+        874.5024,
+        874.5914,
+        869.6876,
+        865.0969,
+        877.0325,
+        876.2625,
+        876.3241,
+        885.2441,
+        884.7733,
+        887.4038,
+        875.9162,
+        876.2132,
+        870.9756,
+        876.1551,
+        887.8263,
+        887.8268,
+        887.1218,
+        875.3859,
+        866.9579,
+        869.9321,
+        886.8028,
+        1023.5492,
+        1016.1626,
+        1021.2718,
+        1010.885,
+        1010.511,
+        1010.2531,
+        1019.3064,
+        1018.4993,
+        1021.4661,
+        1020.4896,
+        281.649,
+        293.4009,
+        311.4012,
+        330.9161,
+        343.2336,
+        362.7216,
+        377.8364,
+        384.0485,
+        403.7148,
+        421.3765,
+        439.9744,
+        455.0353,
+        473.7572,
+        493.2618,
+        502.2699,
+        521.9213,
+        538.048,
+        554.419,
+        572.2372,
+        589.2711,
+        606.6627,
+        610.5523,
+        628.8542,
+        647.0456,
+        666.489,
+        685.2965,
+        701.4074,
+        717.3386,
+        725.1617,
+        743.2669,
+        760.5558,
+        774.9413,
+        794.7247,
+        813.4883,
+        832.3651,
+        840.7132,
+        857.564,
+        873.2464,
+        876.6514,
+        875.2183,
+        875.512,
+        883.3773,
+        877.4887,
+        877.3422,
+        877.0356,
+        876.4683,
+        885.7543,
+        879.0767,
+        887.7918,
+        876.4628,
+        876.5593,
+        873.5942,
+        870.4097,
+        869.5364,
+        882.0607,
+        881.7338,
+        868.5436,
+        861.7431,
+        859.0477,
+        877.321,
+        881.613,
+        878.2492,
+        875.7628,
+        870.8083,
+        870.922,
+        864.3017,
+        879.9302,
+        879.2784,
+        881.1635,
+        874.8195,
+        864.7996,
+        861.2729,
+        864.7308,
+        884.2113,
+        876.3968,
+        874.7758,
+        873.0764,
+        874.4321,
+        877.0311,
+        869.8061,
+        886.9109,
+        872.5478,
+        870.3194,
+        863.9576,
+        872.4244,
+        877.4537,
+        868.5748,
+        883.8208,
+        870.6182,
+        881.2176,
+        880.8398,
+        867.9452,
+        871.4033,
+        871.1141,
+        882.7499,
+        882.5911,
+        879.2566,
+        879.2541,
+        871.6443,
+        870.3186,
+        875.7733,
+        878.9453,
+        882.3737,
+        876.0048,
+        876.264,
+        866.1576,
+        862.6435,
+        862.1632,
+        881.6199,
+        869.5566,
+        887.7964,
+        884.5254,
+        867.5579,
+        877.0779,
+        870.9343,
+        876.5931,
+        873.7801,
+        867.2412,
+        885.8341,
+        876.9321,
+        877.0745,
+        867.5156,
+        885.6585,
+        870.6083,
+        870.2322,
+        875.8992,
+        869.202,
+        867.9573,
+        871.353,
+        881.5723,
+        882.08,
+        878.6553,
+        881.7419,
+        871.7819,
+        877.6119,
+        864.4885,
+        880.0442,
+        878.6869,
+        881.9361,
+        875.277,
+        865.0671,
+        860.8091,
+        878.4268,
+        876.3846,
+        876.5912,
+        876.1872,
+        885.491,
+        874.5929,
+        877.5738,
+        876.0869
+      ],
+      "PendingPacket": null,
+      "MaxPacketQueue": 31,
+      "MutedPackets": 0,
+      "CancelledQueuedFramesUpperBound": 0,
+      "UnconsumedPackets": 0,
+      "RebufferResumes": [],
+      "FinalVolume": 1.0,
+      "VolumeChanges": [],
+      "EpochResets": 0,
+      "ReturnedCompletedFrames": 378000,
+      "CleanupError": null,
+      "MixSamplesMs": [
+        8.7992,
+        0.0903,
+        0.0723,
+        0.143,
+        0.0653,
+        0.0613,
+        8.1042,
+        0.0896,
+        0.0701,
+        0.0619,
+        0.0712,
+        0.0606,
+        0.0685,
+        0.0657,
+        0.0618,
+        0.068,
+        0.0669,
+        0.0608,
+        0.0557,
+        0.0585,
+        0.0661,
+        0.0669,
+        0.0562,
+        0.0576,
+        0.0636,
+        0.0594,
+        0.0616,
+        0.0567,
+        0.0568,
+        0.0591,
+        0.0827,
+        0.0769,
+        0.0673,
+        0.0788,
+        0.0542,
+        0.055,
+        0.0538,
+        0.0656,
+        0.0899,
+        0.0547,
+        0.0546,
+        0.0562,
+        0.0629,
+        0.0515,
+        0.0512,
+        0.0511,
+        0.0526,
+        0.054,
+        0.0497,
+        0.0513,
+        0.0546,
+        0.0534,
+        0.051,
+        0.0518,
+        0.0484,
+        0.0496,
+        0.0662,
+        0.0496,
+        0.0532,
+        0.0542,
+        0.0588,
+        0.0593,
+        0.0549,
+        0.0533,
+        0.0517,
+        0.1115,
+        0.0616,
+        0.0535,
+        0.0525,
+        0.0558,
+        0.0546,
+        0.049,
+        0.051,
+        0.0489,
+        0.0547,
+        0.0538,
+        0.0499,
+        0.051,
+        0.0527,
+        0.0515,
+        0.0505,
+        0.0518,
+        0.0522,
+        0.0554,
+        0.0769,
+        0.0582,
+        0.0541,
+        0.0502,
+        0.0535,
+        0.0529,
+        0.05,
+        0.0443,
+        0.0521,
+        0.0514,
+        0.0495,
+        0.0509,
+        0.0512,
+        0.056,
+        0.0537,
+        0.0537,
+        0.0787,
+        0.0504,
+        0.057,
+        0.0502,
+        0.054,
+        0.0513,
+        0.0516,
+        0.0586,
+        0.0762,
+        0.0527,
+        0.0514,
+        0.0511,
+        0.0531,
+        0.0541,
+        0.0519,
+        0.049,
+        0.056,
+        0.05,
+        0.0524,
+        0.0476,
+        0.0721,
+        0.0517,
+        0.0545,
+        0.0547,
+        0.0519,
+        0.0535,
+        0.0536,
+        0.0489,
+        0.05,
+        0.0507,
+        0.0527,
+        0.0522,
+        0.0517,
+        0.0529,
+        0.0538,
+        0.0547,
+        0.0601,
+        0.0468,
+        0.0481,
+        0.0483,
+        0.0514,
+        0.0521,
+        0.0488,
+        0.0557,
+        0.0547,
+        0.0474,
+        0.0456,
+        0.0476,
+        0.0462,
+        0.0534,
+        0.0461,
+        0.0547,
+        0.0817,
+        0.7819,
+        0.047,
+        0.0441,
+        0.0499,
+        0.0521,
+        0.0528,
+        0.052,
+        0.0482,
+        0.0512,
+        0.0533,
+        0.05,
+        0.0777,
+        0.0571,
+        0.0556,
+        0.0536,
+        0.0504,
+        0.0532,
+        0.0537,
+        0.063,
+        0.053,
+        0.0481,
+        0.0507,
+        0.0541,
+        0.0545,
+        0.0493,
+        0.0531,
+        0.0528,
+        0.052,
+        0.0522,
+        0.0497,
+        0.052,
+        0.0541,
+        0.1282,
+        0.0557,
+        0.0503,
+        0.0559,
+        0.053,
+        0.0486,
+        0.0479,
+        0.0549,
+        0.0516,
+        0.0545,
+        0.0563,
+        0.0518,
+        0.0498,
+        0.0496,
+        0.0609,
+        0.0684,
+        0.051,
+        0.0447,
+        0.0483,
+        0.0535,
+        0.0506,
+        0.0553,
+        0.0533,
+        0.0493,
+        0.0522,
+        0.0532,
+        0.0491,
+        0.0527,
+        0.0501,
+        0.0503,
+        0.0572,
+        0.0524,
+        0.0526,
+        0.0525,
+        0.0515,
+        0.0494,
+        0.0521,
+        0.0545,
+        0.0515,
+        0.0485,
+        0.0492,
+        0.0446,
+        0.0501,
+        0.0522,
+        0.0532,
+        0.0548,
+        0.0535,
+        0.0553,
+        0.0504,
+        0.0474,
+        0.0546,
+        0.0562,
+        0.0509,
+        0.0529,
+        0.0526,
+        0.0539,
+        0.057,
+        0.0511,
+        0.0505,
+        0.0504,
+        0.0519,
+        0.0501,
+        0.0514,
+        0.0461,
+        0.0619,
+        0.0552,
+        0.0577,
+        0.0545,
+        0.0522,
+        0.0535,
+        0.0511,
+        0.0538,
+        0.0504,
+        0.0526,
+        0.0485,
+        0.0497,
+        0.1006,
+        0.052,
+        0.0591,
+        0.0588,
+        0.0482,
+        0.0496,
+        0.056,
+        0.052,
+        0.0485,
+        0.0548,
+        0.0549,
+        0.0548,
+        0.052,
+        0.0539,
+        0.0522,
+        0.052,
+        0.0501,
+        0.0555,
+        0.0554,
+        0.0506,
+        0.0521,
+        0.0511,
+        0.0517,
+        0.0554,
+        0.0543,
+        0.052,
+        0.0542,
+        0.0522,
+        0.0521,
+        0.0506,
+        0.0529,
+        0.0554,
+        0.0549,
+        0.0503,
+        0.0529,
+        0.0532,
+        0.0516,
+        0.0545,
+        0.0521
+      ],
+      "SubmittedFrames": 378000,
+      "Error": null,
+      "PcmSha256": "1A69160ADCC422D848E3ED3240F6C28F5ECFF3F6C89266B22EFD1F209C4FCF21",
+      "RebufferSinglePacketDeadlineMs": 100,
+      "Meaning": "PowerShell runspace mixing and waveOut playback; packet age ends at submission, not audible output. Starvation is queue polling, not hardware telemetry. Reset/exit can cancel queued tail audio; cancelled frame count is an upper bound.",
+      "Packets": 300,
+      "LoadingDrains": [
+        {
+          "ThroughSequence": 299,
+          "Qpc": 552111213006,
+          "CompletedFrames": 378000
+        }
+      ],
+      "ClippedSamples": 0
+    },
+    "Map": 1,
+    "SaveDirectory": "C:\\Users\\jason\\AppData\\Local\\pwshDoom\\saves\\6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+    "AudioSourcePeak": 0,
+    "SessionScreenSamplesMs": [],
+    "AutomapRenderMs": null,
+    "AudioPacketSamplesMs": [
+      15.6117,
+      0.2736,
+      0.1176,
+      0.1099,
+      0.1221,
+      0.1211,
+      0.1174,
+      0.1014,
+      0.1511,
+      0.1232,
+      0.14,
+      0.1415,
+      0.1198,
+      0.1486,
+      0.1082,
+      0.1128,
+      0.1324,
+      0.1315,
+      0.1262,
+      0.1199,
+      0.1264,
+      0.1244,
+      0.1148,
+      0.1167,
+      0.1223,
+      0.1247,
+      0.1277,
+      0.1323,
+      0.1337,
+      0.1338,
+      0.1799,
+      0.201,
+      0.1216,
+      0.1198,
+      0.1243,
+      0.0948,
+      0.1065,
+      0.1043,
+      0.0948,
+      0.0943,
+      0.0946,
+      0.1011,
+      0.0925,
+      0.0901,
+      0.1014,
+      0.1067,
+      0.1018,
+      0.1141,
+      0.0972,
+      0.099,
+      0.0955,
+      0.1003,
+      0.0997,
+      0.0951,
+      0.0978,
+      0.0866,
+      0.0992,
+      0.0966,
+      0.0942,
+      0.0934,
+      0.0958,
+      0.0996,
+      0.1002,
+      0.0929,
+      0.0997,
+      0.0996,
+      0.0946,
+      0.1003,
+      0.1024,
+      0.2166,
+      0.0945,
+      0.0994,
+      0.0987,
+      0.1103,
+      0.09,
+      0.102,
+      0.1054,
+      0.1031,
+      0.0989,
+      0.1046,
+      0.0989,
+      0.1061,
+      0.0984,
+      0.098,
+      0.0896,
+      0.0938,
+      0.1128,
+      0.0918,
+      0.0856,
+      0.0914,
+      0.0981,
+      0.1089,
+      0.1057,
+      0.1016,
+      0.1166,
+      0.1383,
+      0.1046,
+      0.0999,
+      0.0963,
+      0.0903,
+      0.1231,
+      0.1059,
+      0.0977,
+      0.0952,
+      0.0995,
+      0.0998,
+      0.0994,
+      0.0997,
+      0.1061,
+      0.0992,
+      0.0948,
+      0.0959,
+      0.1025,
+      0.0917,
+      0.1361,
+      0.0979,
+      0.1041,
+      0.103,
+      0.096,
+      0.1054,
+      0.0934,
+      0.1029,
+      0.1181,
+      0.0936,
+      0.098,
+      0.0896,
+      0.0965,
+      0.0927,
+      0.0911,
+      0.0967,
+      0.0947,
+      0.1236,
+      0.1043,
+      0.099,
+      0.1054,
+      0.1417,
+      0.0955,
+      0.1072,
+      0.1289,
+      0.1106,
+      0.0991,
+      0.0937,
+      0.1111,
+      0.093,
+      0.107,
+      0.1001,
+      0.0996,
+      0.1052,
+      0.0904,
+      0.0935,
+      0.119,
+      0.1036,
+      0.0924,
+      0.1028,
+      0.0895,
+      0.103,
+      0.0965,
+      0.0906,
+      0.0887,
+      0.0887,
+      0.1278,
+      0.0925,
+      0.0871,
+      0.086,
+      0.0907,
+      0.0978,
+      0.0909,
+      0.0947,
+      0.0903,
+      0.1038,
+      0.0975,
+      0.0969,
+      0.1105,
+      0.104,
+      0.09,
+      0.0898,
+      0.1193,
+      0.1029,
+      0.0938,
+      0.1035,
+      0.1009,
+      0.1217,
+      0.0859,
+      0.0966,
+      0.0894,
+      0.089,
+      0.0899,
+      0.0965,
+      0.0951,
+      0.0949,
+      0.0937,
+      0.1149,
+      0.0972,
+      0.1324,
+      0.1025,
+      0.1023,
+      0.1043,
+      0.0999,
+      0.1347,
+      0.0961,
+      0.0949,
+      0.0997,
+      0.0974,
+      0.0878,
+      0.1746,
+      0.1085,
+      0.1024,
+      0.0996,
+      0.092,
+      0.0924,
+      0.0924,
+      0.0986,
+      0.0995,
+      0.0952,
+      0.185,
+      0.0942,
+      0.0957,
+      0.0968,
+      0.0895,
+      0.093,
+      0.0954,
+      0.1003,
+      0.1041,
+      0.0866,
+      0.0886,
+      0.0995,
+      0.0929,
+      0.1065,
+      0.0902,
+      0.0942,
+      0.0991,
+      0.1204,
+      0.093,
+      0.149,
+      0.0922,
+      0.092,
+      0.0952,
+      0.0998,
+      0.0897,
+      0.0989,
+      0.0924,
+      0.0961,
+      0.0999,
+      0.1103,
+      0.1207,
+      0.0983,
+      0.1007,
+      0.0949,
+      0.1001,
+      0.0967,
+      0.0897,
+      0.099,
+      0.0898,
+      0.1051,
+      0.11,
+      0.0899,
+      0.0954,
+      0.1002,
+      0.0877,
+      0.1016,
+      0.0914,
+      0.0951,
+      0.1658,
+      0.1244,
+      0.0977,
+      0.0896,
+      0.1015,
+      0.1021,
+      0.088,
+      0.0916,
+      0.0924,
+      0.0997,
+      0.0958,
+      0.0986,
+      0.096,
+      0.1344,
+      0.0907,
+      0.0955,
+      0.1033,
+      0.09,
+      0.0956,
+      0.1004,
+      0.0923,
+      0.099,
+      0.0879,
+      0.0932,
+      0.1045,
+      0.0955,
+      0.1374,
+      0.0944,
+      0.0918,
+      0.2046,
+      0.0868,
+      0.0964,
+      0.1063,
+      0.0998,
+      0.0952,
+      0.1088,
+      0.1673,
+      0.0984
+    ],
+    "SoundEnabled": true,
+    "SimulationMs": {
+      "Count": 300,
+      "Mean": 2.841310666666669,
+      "Median": 1.96155,
+      "P95": 5.8774,
+      "Max": 23.9584
+    },
+    "Outcome": "Stopped",
+    "Health": 100,
+    "Episode": 1,
+    "AutomapDiscoverySamplesMs": [
+      11.4222,
+      10.6807,
+      9.5246,
+      7.0784,
+      9.2981,
+      38.5231,
+      15.1329,
+      6.7432,
+      9.2236,
+      6.8381,
+      8.8679,
+      7.4227,
+      6.8651,
+      8.5241,
+      6.638,
+      7.8194,
+      7.3068,
+      7.9318,
+      7.9492,
+      7.5337,
+      8.2388,
+      7.6563,
+      6.9455,
+      7.5534,
+      6.9887,
+      8.1913,
+      7.8925,
+      7.2555,
+      8.1789,
+      6.7997,
+      8.9852,
+      7.3147,
+      7.5113,
+      9.2416,
+      7.5561,
+      8.2965,
+      7.7794,
+      6.9545,
+      8.0979,
+      6.8306,
+      8.1912,
+      6.9075,
+      6.9624,
+      6.6129,
+      6.995,
+      8.4464,
+      6.7418,
+      6.6668,
+      7.2553,
+      6.9942,
+      8.0412,
+      6.6663,
+      7.4288,
+      7.2527,
+      7.9984,
+      6.8319,
+      6.5983,
+      7.5259,
+      7.4579,
+      8.5877,
+      6.6527,
+      6.6224,
+      7.8139,
+      6.6283,
+      7.7577,
+      7.0899,
+      6.5748,
+      8.2631,
+      6.8281,
+      8.265,
+      6.629,
+      6.6223,
+      8.0688,
+      6.6334,
+      7.7671,
+      6.6003,
+      6.5408,
+      8.8497,
+      6.6949,
+      7.8442,
+      7.297,
+      6.5879,
+      7.927,
+      6.5006,
+      7.6694,
+      6.9567,
+      6.5123,
+      8.4217,
+      6.5495,
+      8.0743,
+      6.6428,
+      6.8286,
+      8.3458,
+      6.6071,
+      7.977,
+      6.7949,
+      8.3492,
+      8.057,
+      6.8802,
+      7.9735,
+      7.0989,
+      7.3252,
+      7.7547,
+      6.671,
+      8.7182,
+      6.7566,
+      7.7429,
+      7.7722,
+      6.5515,
+      8.358,
+      6.7221,
+      7.0741,
+      7.7239,
+      7.4932,
+      8.5545,
+      7.0122,
+      8.019,
+      8.4316,
+      6.6549,
+      8.244,
+      6.8926,
+      6.8542,
+      8.4648,
+      6.641,
+      7.9804,
+      6.5972,
+      7.9997,
+      6.6111,
+      6.8191,
+      7.9031,
+      7.2445,
+      7.0722,
+      6.5553,
+      6.9657,
+      7.8385,
+      7.2312,
+      8.2768,
+      6.7073,
+      6.9238,
+      9.8307,
+      7.3657,
+      6.9336,
+      6.6746,
+      7.3483,
+      7.8961,
+      6.625,
+      7.9509,
+      6.6485,
+      6.8798,
+      7.8455,
+      10.4099,
+      7.9355,
+      6.8208,
+      13.4078,
+      6.6135,
+      8.2589,
+      6.4849,
+      6.5011,
+      7.5829,
+      6.8288,
+      7.262,
+      6.5388,
+      6.5145,
+      6.6084,
+      6.5599,
+      6.4683,
+      6.6469,
+      7.7668,
+      6.8478,
+      7.7443,
+      7.6704,
+      7.0694,
+      7.7205,
+      6.6458,
+      7.3262,
+      6.5653,
+      6.6086,
+      8.303,
+      6.9067,
+      7.9648,
+      6.7839,
+      6.7604,
+      7.2193,
+      7.4167,
+      7.6992,
+      6.5709,
+      7.5351,
+      6.9835,
+      6.7204,
+      7.2656,
+      6.6277,
+      7.1488,
+      6.6464,
+      7.1228,
+      6.988,
+      6.9798,
+      7.3818,
+      6.5709,
+      7.0811,
+      7.3199,
+      7.2438,
+      6.6441,
+      6.7103,
+      6.5869,
+      6.6548,
+      7.4398,
+      7.6563,
+      6.7545,
+      6.5923,
+      6.5249,
+      7.8679,
+      7.5956,
+      6.5895,
+      6.57,
+      7.243,
+      7.5615,
+      8.5272,
+      6.5544,
+      6.5785,
+      7.0656,
+      6.613,
+      7.4629,
+      6.6747,
+      7.2193,
+      6.5233,
+      7.5079,
+      7.3319,
+      7.4127,
+      8.0443,
+      7.1657,
+      6.6329,
+      7.8301,
+      6.5648,
+      7.4539,
+      6.5027,
+      7.3676,
+      7.3377,
+      7.103,
+      7.5889,
+      6.6488,
+      6.5994,
+      7.2634,
+      6.6039,
+      7.5404,
+      6.5933,
+      7.3686,
+      8.1985,
+      6.5263,
+      7.6244,
+      7.1838,
+      7.3963,
+      7.4118,
+      6.6163,
+      7.6748,
+      6.919,
+      8.249,
+      8.2046,
+      6.7551,
+      7.3405,
+      7.0848,
+      7.2755,
+      7.3496,
+      7.3615,
+      7.6179,
+      6.8548,
+      7.3337,
+      7.0428,
+      7.2738,
+      7.9532,
+      6.5792,
+      7.616,
+      7.5964,
+      6.8405,
+      7.7645,
+      6.6414,
+      7.6837,
+      6.5533,
+      6.5722,
+      7.3684,
+      6.632,
+      7.417,
+      8.0108,
+      7.7373,
+      7.3999,
+      6.5408,
+      7.673,
+      7.2987,
+      6.5769,
+      7.4753,
+      6.6101,
+      7.38,
+      8.4047,
+      6.8238,
+      7.5526,
+      6.5802,
+      8.4127,
+      6.6074,
+      7.4513,
+      7.8804,
+      6.591
+    ],
+    "IncompleteLoadingBoundary": null,
+    "TickLatenessMs": null,
+    "SaveOperations": [],
+    "AutomapDiscoveryMs": {
+      "Count": 300,
+      "Mean": 7.4884986666666675,
+      "Median": 7.258749999999999,
+      "P95": 8.5877,
+      "Max": 38.5231
+    },
+    "MenuRevision": 2,
+    "StopAtLevelEnd": false,
+    "SnapshotPublishMs": {
+      "Count": 300,
+      "Mean": 2.337326333333332,
+      "Median": 2.2171000000000003,
+      "P95": 2.94,
+      "Max": 7.1957
+    },
+    "AutomapRenderSamplesMs": [],
+    "Error": null,
+    "WarmupTics": 140,
+    "SnapshotSamplesMs": [
+      3.397,
+      2.2787,
+      2.2906,
+      2.2023,
+      7.1957,
+      2.3172,
+      2.2414,
+      2.3717,
+      2.4047,
+      2.7972,
+      2.2794,
+      2.2927,
+      2.2609,
+      2.2493,
+      2.2349,
+      2.2602,
+      2.8581,
+      2.4635,
+      2.4703,
+      2.3079,
+      2.2744,
+      2.4386,
+      2.3358,
+      2.2307,
+      2.2178,
+      2.3713,
+      2.94,
+      2.2725,
+      2.3072,
+      2.253,
+      2.4268,
+      4.7814,
+      2.5396,
+      2.4534,
+      2.6227,
+      2.3221,
+      2.3203,
+      2.3116,
+      2.2417,
+      2.3713,
+      2.2801,
+      3.7562,
+      2.2453,
+      3.0023,
+      2.2823,
+      2.3278,
+      2.3104,
+      2.3017,
+      3.1213,
+      2.5686,
+      2.2688,
+      2.2862,
+      2.2939,
+      2.2889,
+      2.2219,
+      2.2241,
+      2.1527,
+      2.3914,
+      2.5331,
+      2.2456,
+      2.1517,
+      2.1717,
+      2.1982,
+      2.2381,
+      2.1961,
+      2.2667,
+      2.2455,
+      2.4485,
+      2.2416,
+      2.5471,
+      2.1648,
+      2.1834,
+      2.395,
+      2.2231,
+      2.1851,
+      2.1958,
+      2.1985,
+      2.2392,
+      2.1946,
+      2.2311,
+      2.3999,
+      2.1774,
+      2.2316,
+      2.1792,
+      2.1766,
+      2.2011,
+      2.3218,
+      2.2024,
+      2.1452,
+      2.1942,
+      2.258,
+      2.3377,
+      2.3299,
+      2.1903,
+      2.1977,
+      2.3164,
+      2.2909,
+      2.3112,
+      2.1862,
+      2.2619,
+      2.2806,
+      2.1857,
+      2.1847,
+      2.1896,
+      2.4196,
+      2.1587,
+      2.1702,
+      2.2044,
+      2.176,
+      2.2459,
+      2.2029,
+      2.2149,
+      2.2026,
+      2.2795,
+      2.5024,
+      2.3801,
+      2.4144,
+      2.18,
+      2.2015,
+      2.2503,
+      2.2102,
+      2.2321,
+      2.4526,
+      2.2234,
+      2.2133,
+      2.2111,
+      2.1974,
+      4.1744,
+      2.2069,
+      2.2272,
+      2.1985,
+      2.2477,
+      3.3298,
+      2.198,
+      2.1867,
+      2.1911,
+      2.1808,
+      3.6744,
+      2.3016,
+      2.3069,
+      2.31,
+      2.1592,
+      3.458,
+      2.1846,
+      2.1639,
+      2.2088,
+      2.1565,
+      3.5188,
+      2.1888,
+      2.1699,
+      2.2178,
+      2.2557,
+      2.1978,
+      2.2037,
+      2.166,
+      2.2029,
+      2.1328,
+      2.1763,
+      2.1871,
+      2.1244,
+      2.1634,
+      3.2728,
+      2.1818,
+      2.7731,
+      2.1546,
+      2.7957,
+      2.1861,
+      2.5708,
+      2.1531,
+      2.5695,
+      3.0313,
+      2.2135,
+      2.1887,
+      2.2023,
+      2.1582,
+      2.2402,
+      2.1669,
+      2.2292,
+      2.2419,
+      2.2218,
+      2.1491,
+      2.1532,
+      2.2089,
+      2.2373,
+      2.1929,
+      2.1368,
+      2.1903,
+      2.8014,
+      2.1346,
+      2.1944,
+      2.148,
+      2.2033,
+      2.8757,
+      2.1775,
+      2.8336,
+      2.2013,
+      2.3553,
+      2.8682,
+      2.1611,
+      2.1844,
+      2.1935,
+      2.2459,
+      2.1979,
+      2.1612,
+      2.8377,
+      2.1712,
+      2.2786,
+      2.2297,
+      2.177,
+      2.8415,
+      2.2681,
+      2.1939,
+      2.1584,
+      2.2163,
+      2.2391,
+      2.2259,
+      2.1325,
+      2.1612,
+      2.1347,
+      2.9545,
+      2.1807,
+      2.1765,
+      2.1338,
+      2.1365,
+      2.1601,
+      2.2904,
+      2.2327,
+      2.3868,
+      2.4956,
+      2.6618,
+      2.2027,
+      2.1518,
+      2.1773,
+      2.1959,
+      2.1592,
+      2.1449,
+      2.3375,
+      2.1802,
+      2.2149,
+      2.1739,
+      2.1739,
+      2.1288,
+      2.1587,
+      2.1395,
+      2.1491,
+      2.1635,
+      2.1935,
+      2.2722,
+      2.1944,
+      2.3175,
+      2.1639,
+      2.1576,
+      2.1931,
+      2.2139,
+      2.1534,
+      2.4736,
+      2.3249,
+      2.2164,
+      2.2205,
+      2.2845,
+      2.1669,
+      2.2179,
+      2.201,
+      2.1809,
+      2.1555,
+      2.1599,
+      3.465,
+      2.1595,
+      2.1938,
+      2.1354,
+      2.1798,
+      2.2154,
+      2.2779,
+      2.2147,
+      2.1811,
+      2.1618,
+      2.214,
+      2.2792,
+      2.1432,
+      2.1387,
+      2.1162,
+      2.1628,
+      2.2019,
+      2.1271,
+      2.168,
+      2.2284,
+      2.2717,
+      2.2275,
+      2.1832,
+      2.1907,
+      2.1857,
+      2.3114,
+      2.3085,
+      2.1878,
+      2.1499,
+      2.3692,
+      2.2328,
+      2.2646,
+      2.1509,
+      2.1659
+    ],
+    "AudioPacketMs": {
+      "Count": 300,
+      "Mean": 0.15695499999999987,
+      "Median": 0.0993,
+      "P95": 0.14,
+      "Max": 15.6117
+    },
+    "AutomapCommands": [],
+    "ControlEvents": [],
+    "MenuScreen": 0,
+    "ReplayCheckpointSamplesMs": [],
+    "Kills": 0,
+    "ReplayCheckpointMs": null,
+    "FinishedUtc": "2026-09-19T12:10:41.4098016Z",
+    "AudioBackpressure": [
+      {
+        "StartQpc": 552032639724,
+        "Milliseconds": 7.9874,
+        "BeforeTic": 64,
+        "EndQpc": 552032719598
+      },
+      {
+        "StartQpc": 552032837077,
+        "Milliseconds": 18.4804,
+        "BeforeTic": 65,
+        "EndQpc": 552033021881
+      },
+      {
+        "StartQpc": 552033133436,
+        "Milliseconds": 25.2503,
+        "BeforeTic": 66,
+        "EndQpc": 552033385939
+      },
+      {
+        "StartQpc": 552033530200,
+        "Milliseconds": 15.9487,
+        "BeforeTic": 67,
+        "EndQpc": 552033689687
+      },
+      {
+        "StartQpc": 552033844594,
+        "Milliseconds": 14.8511,
+        "BeforeTic": 68,
+        "EndQpc": 552033993105
+      },
+      {
+        "StartQpc": 552034103484,
+        "Milliseconds": 7.3124,
+        "BeforeTic": 69,
+        "EndQpc": 552034176608
+      },
+      {
+        "StartQpc": 552034318607,
+        "Milliseconds": 15.9065,
+        "BeforeTic": 70,
+        "EndQpc": 552034477672
+      },
+      {
+        "StartQpc": 552034592174,
+        "Milliseconds": 18.8682,
+        "BeforeTic": 71,
+        "EndQpc": 552034780856
+      },
+      {
+        "StartQpc": 552034940684,
+        "Milliseconds": 14.4807,
+        "BeforeTic": 72,
+        "EndQpc": 552035085491
+      },
+      {
+        "StartQpc": 552035209184,
+        "Milliseconds": 17.8901,
+        "BeforeTic": 73,
+        "EndQpc": 552035388085
+      },
+      {
+        "StartQpc": 552035496210,
+        "Milliseconds": 19.3073,
+        "BeforeTic": 74,
+        "EndQpc": 552035689283
+      },
+      {
+        "StartQpc": 552035806410,
+        "Milliseconds": 18.5587,
+        "BeforeTic": 75,
+        "EndQpc": 552035991997
+      },
+      {
+        "StartQpc": 552036099611,
+        "Milliseconds": 7.4653,
+        "BeforeTic": 76,
+        "EndQpc": 552036174264
+      },
+      {
+        "StartQpc": 552036317414,
+        "Milliseconds": 16.0047,
+        "BeforeTic": 77,
+        "EndQpc": 552036477461
+      },
+      {
+        "StartQpc": 552036638080,
+        "Milliseconds": 14.4119,
+        "BeforeTic": 78,
+        "EndQpc": 552036782199
+      },
+      {
+        "StartQpc": 552036889929,
+        "Milliseconds": 19.3228,
+        "BeforeTic": 79,
+        "EndQpc": 552037083157
+      },
+      {
+        "StartQpc": 552037215021,
+        "Milliseconds": 23.2487,
+        "BeforeTic": 80,
+        "EndQpc": 552037447508
+      },
+      {
+        "StartQpc": 552037569265,
+        "Milliseconds": 18.0947,
+        "BeforeTic": 81,
+        "EndQpc": 552037750212
+      },
+      {
+        "StartQpc": 552037908908,
+        "Milliseconds": 14.8248,
+        "BeforeTic": 82,
+        "EndQpc": 552038057156
+      },
+      {
+        "StartQpc": 552038283847,
+        "Milliseconds": 25.3726,
+        "BeforeTic": 84,
+        "EndQpc": 552038537573
+      },
+      {
+        "StartQpc": 552038653815,
+        "Milliseconds": 18.8414,
+        "BeforeTic": 85,
+        "EndQpc": 552038842229
+      },
+      {
+        "StartQpc": 552038953822,
+        "Milliseconds": 23.4324,
+        "BeforeTic": 86,
+        "EndQpc": 552039188146
+      },
+      {
+        "StartQpc": 552039484307,
+        "Milliseconds": 14.37,
+        "BeforeTic": 88,
+        "EndQpc": 552039628007
+      },
+      {
+        "StartQpc": 552039732470,
+        "Milliseconds": 20.0029,
+        "BeforeTic": 89,
+        "EndQpc": 552039932499
+      },
+      {
+        "StartQpc": 552040062240,
+        "Milliseconds": 17.2594,
+        "BeforeTic": 90,
+        "EndQpc": 552040234834
+      },
+      {
+        "StartQpc": 552040348694,
+        "Milliseconds": 6.8304,
+        "BeforeTic": 91,
+        "EndQpc": 552040416998
+      },
+      {
+        "StartQpc": 552040586231,
+        "Milliseconds": 13.4208,
+        "BeforeTic": 92,
+        "EndQpc": 552040720439
+      },
+      {
+        "StartQpc": 552040846789,
+        "Milliseconds": 17.6783,
+        "BeforeTic": 93,
+        "EndQpc": 552041023572
+      },
+      {
+        "StartQpc": 552041129536,
+        "Milliseconds": 19.6477,
+        "BeforeTic": 94,
+        "EndQpc": 552041326013
+      },
+      {
+        "StartQpc": 552041446476,
+        "Milliseconds": 18.3174,
+        "BeforeTic": 95,
+        "EndQpc": 552041629650
+      },
+      {
+        "StartQpc": 552041740620,
+        "Milliseconds": 19.2646,
+        "BeforeTic": 96,
+        "EndQpc": 552041933266
+      },
+      {
+        "StartQpc": 552042089501,
+        "Milliseconds": 2.5049,
+        "BeforeTic": 97,
+        "EndQpc": 552042114550
+      },
+      {
+        "StartQpc": 552042268594,
+        "Milliseconds": 14.7924,
+        "BeforeTic": 98,
+        "EndQpc": 552042416518
+      },
+      {
+        "StartQpc": 552042524964,
+        "Milliseconds": 19.4496,
+        "BeforeTic": 99,
+        "EndQpc": 552042719460
+      },
+      {
+        "StartQpc": 552042849451,
+        "Milliseconds": 17.3881,
+        "BeforeTic": 100,
+        "EndQpc": 552043023332
+      },
+      {
+        "StartQpc": 552043145801,
+        "Milliseconds": 24.0712,
+        "BeforeTic": 101,
+        "EndQpc": 552043386513
+      },
+      {
+        "StartQpc": 552043552654,
+        "Milliseconds": 13.6374,
+        "BeforeTic": 102,
+        "EndQpc": 552043689028
+      },
+      {
+        "StartQpc": 552043806586,
+        "Milliseconds": 18.5843,
+        "BeforeTic": 103,
+        "EndQpc": 552043992429
+      },
+      {
+        "StartQpc": 552044099971,
+        "Milliseconds": 7.4194,
+        "BeforeTic": 104,
+        "EndQpc": 552044174165
+      },
+      {
+        "StartQpc": 552044304457,
+        "Milliseconds": 17.368,
+        "BeforeTic": 105,
+        "EndQpc": 552044478137
+      },
+      {
+        "StartQpc": 552044588880,
+        "Milliseconds": 19.4221,
+        "BeforeTic": 106,
+        "EndQpc": 552044783101
+      },
+      {
+        "StartQpc": 552044928936,
+        "Milliseconds": 15.4283,
+        "BeforeTic": 107,
+        "EndQpc": 552045083219
+      },
+      {
+        "StartQpc": 552045230630,
+        "Milliseconds": 15.5287,
+        "BeforeTic": 108,
+        "EndQpc": 552045385917
+      },
+      {
+        "StartQpc": 552045491314,
+        "Milliseconds": 19.9975,
+        "BeforeTic": 109,
+        "EndQpc": 552045691289
+      },
+      {
+        "StartQpc": 552045825667,
+        "Milliseconds": 16.7897,
+        "BeforeTic": 110,
+        "EndQpc": 552045993564
+      },
+      {
+        "StartQpc": 552046109184,
+        "Milliseconds": 6.5397,
+        "BeforeTic": 111,
+        "EndQpc": 552046174581
+      },
+      {
+        "StartQpc": 552046338045,
+        "Milliseconds": 14.0107,
+        "BeforeTic": 112,
+        "EndQpc": 552046478152
+      },
+      {
+        "StartQpc": 552046595469,
+        "Milliseconds": 18.5512,
+        "BeforeTic": 113,
+        "EndQpc": 552046780981
+      },
+      {
+        "StartQpc": 552046897179,
+        "Milliseconds": 18.6979,
+        "BeforeTic": 114,
+        "EndQpc": 552047084158
+      },
+      {
+        "StartQpc": 552047213971,
+        "Milliseconds": 23.4777,
+        "BeforeTic": 115,
+        "EndQpc": 552047448748
+      },
+      {
+        "StartQpc": 552047564330,
+        "Milliseconds": 15.7123,
+        "BeforeTic": 116,
+        "EndQpc": 552047721453
+      },
+      {
+        "StartQpc": 552047872489,
+        "Milliseconds": 18.5672,
+        "BeforeTic": 117,
+        "EndQpc": 552048058161
+      },
+      {
+        "StartQpc": 552048318819,
+        "Milliseconds": 21.9971,
+        "BeforeTic": 119,
+        "EndQpc": 552048538790
+      },
+      {
+        "StartQpc": 552048675606,
+        "Milliseconds": 16.6158,
+        "BeforeTic": 120,
+        "EndQpc": 552048841764
+      },
+      {
+        "StartQpc": 552048957102,
+        "Milliseconds": 18.3707,
+        "BeforeTic": 121,
+        "EndQpc": 552049140809
+      },
+      {
+        "StartQpc": 552049309263,
+        "Milliseconds": 13.8045,
+        "BeforeTic": 122,
+        "EndQpc": 552049447308
+      },
+      {
+        "StartQpc": 552049575325,
+        "Milliseconds": 5.3778,
+        "BeforeTic": 123,
+        "EndQpc": 552049629103
+      },
+      {
+        "StartQpc": 552049735851,
+        "Milliseconds": 19.7369,
+        "BeforeTic": 124,
+        "EndQpc": 552049933220
+      },
+      {
+        "StartQpc": 552050054143,
+        "Milliseconds": 18.1301,
+        "BeforeTic": 125,
+        "EndQpc": 552050235444
+      },
+      {
+        "StartQpc": 552050341272,
+        "Milliseconds": 7.7733,
+        "BeforeTic": 126,
+        "EndQpc": 552050419005
+      },
+      {
+        "StartQpc": 552050564934,
+        "Milliseconds": 15.4871,
+        "BeforeTic": 127,
+        "EndQpc": 552050719805
+      },
+      {
+        "StartQpc": 552050874767,
+        "Milliseconds": 14.8377,
+        "BeforeTic": 128,
+        "EndQpc": 552051023144
+      },
+      {
+        "StartQpc": 552051131311,
+        "Milliseconds": 19.5498,
+        "BeforeTic": 129,
+        "EndQpc": 552051326809
+      },
+      {
+        "StartQpc": 552051456807,
+        "Milliseconds": 17.2209,
+        "BeforeTic": 130,
+        "EndQpc": 552051629016
+      },
+      {
+        "StartQpc": 552051747211,
+        "Milliseconds": 18.5492,
+        "BeforeTic": 131,
+        "EndQpc": 552051932703
+      },
+      {
+        "StartQpc": 552052098683,
+        "Milliseconds": 13.6727,
+        "BeforeTic": 132,
+        "EndQpc": 552052235410
+      },
+      {
+        "StartQpc": 552052352564,
+        "Milliseconds": 6.433,
+        "BeforeTic": 133,
+        "EndQpc": 552052416894
+      },
+      {
+        "StartQpc": 552052527687,
+        "Milliseconds": 19.2365,
+        "BeforeTic": 134,
+        "EndQpc": 552052720052
+      },
+      {
+        "StartQpc": 552052838360,
+        "Milliseconds": 18.5007,
+        "BeforeTic": 135,
+        "EndQpc": 552053023367
+      },
+      {
+        "StartQpc": 552053138535,
+        "Milliseconds": 18.7949,
+        "BeforeTic": 136,
+        "EndQpc": 552053326484
+      },
+      {
+        "StartQpc": 552053474533,
+        "Milliseconds": 21.6609,
+        "BeforeTic": 137,
+        "EndQpc": 552053691142
+      },
+      {
+        "StartQpc": 552053845197,
+        "Milliseconds": 14.8012,
+        "BeforeTic": 138,
+        "EndQpc": 552053993209
+      },
+      {
+        "StartQpc": 552054108178,
+        "Milliseconds": 0.6899,
+        "BeforeTic": 139,
+        "EndQpc": 552054115077
+      },
+      {
+        "StartQpc": 552054268922,
+        "Milliseconds": 21.0836,
+        "BeforeTic": 140,
+        "EndQpc": 552054479758
+      },
+      {
+        "StartQpc": 552054601613,
+        "Milliseconds": 17.964,
+        "BeforeTic": 141,
+        "EndQpc": 552054781253
+      },
+      {
+        "StartQpc": 552054944498,
+        "Milliseconds": 13.9978,
+        "BeforeTic": 142,
+        "EndQpc": 552055084476
+      },
+      {
+        "StartQpc": 552055204231,
+        "Milliseconds": 18.3625,
+        "BeforeTic": 143,
+        "EndQpc": 552055387856
+      },
+      {
+        "StartQpc": 552055502034,
+        "Milliseconds": 18.8418,
+        "BeforeTic": 144,
+        "EndQpc": 552055690452
+      },
+      {
+        "StartQpc": 552055810583,
+        "Milliseconds": 18.3218,
+        "BeforeTic": 145,
+        "EndQpc": 552055993801
+      },
+      {
+        "StartQpc": 552056100352,
+        "Milliseconds": 7.5197,
+        "BeforeTic": 146,
+        "EndQpc": 552056175549
+      },
+      {
+        "StartQpc": 552056323227,
+        "Milliseconds": 15.6426,
+        "BeforeTic": 147,
+        "EndQpc": 552056479653
+      },
+      {
+        "StartQpc": 552056631357,
+        "Milliseconds": 15.0935,
+        "BeforeTic": 148,
+        "EndQpc": 552056782292
+      },
+      {
+        "StartQpc": 552056890865,
+        "Milliseconds": 19.371,
+        "BeforeTic": 149,
+        "EndQpc": 552057084575
+      },
+      {
+        "StartQpc": 552069480882,
+        "Milliseconds": 14.9381,
+        "BeforeTic": 188,
+        "EndQpc": 552069630263
+      },
+      {
+        "StartQpc": 552069737856,
+        "Milliseconds": 19.6079,
+        "BeforeTic": 189,
+        "EndQpc": 552069933935
+      },
+      {
+        "StartQpc": 552070057766,
+        "Milliseconds": 17.8497,
+        "BeforeTic": 190,
+        "EndQpc": 552070236263
+      },
+      {
+        "StartQpc": 552070347475,
+        "Milliseconds": 6.9851,
+        "BeforeTic": 191,
+        "EndQpc": 552070417326
+      },
+      {
+        "StartQpc": 552070574375,
+        "Milliseconds": 14.7697,
+        "BeforeTic": 192,
+        "EndQpc": 552070722072
+      },
+      {
+        "StartQpc": 552070835369,
+        "Milliseconds": 18.8472,
+        "BeforeTic": 193,
+        "EndQpc": 552071023841
+      },
+      {
+        "StartQpc": 552071135242,
+        "Milliseconds": 19.1437,
+        "BeforeTic": 194,
+        "EndQpc": 552071326679
+      },
+      {
+        "StartQpc": 552071442899,
+        "Milliseconds": 18.7698,
+        "BeforeTic": 195,
+        "EndQpc": 552071630597
+      },
+      {
+        "StartQpc": 552071742643,
+        "Milliseconds": 6.9631,
+        "BeforeTic": 196,
+        "EndQpc": 552071812274
+      },
+      {
+        "StartQpc": 552071955004,
+        "Milliseconds": 22.133,
+        "BeforeTic": 197,
+        "EndQpc": 552072176334
+      },
+      {
+        "StartQpc": 552072317689,
+        "Milliseconds": 10.1123,
+        "BeforeTic": 198,
+        "EndQpc": 552072418812
+      },
+      {
+        "StartQpc": 552072529710,
+        "Milliseconds": 19.119,
+        "BeforeTic": 199,
+        "EndQpc": 552072720900
+      },
+      {
+        "StartQpc": 552072845704,
+        "Milliseconds": 17.8394,
+        "BeforeTic": 200,
+        "EndQpc": 552073024098
+      },
+      {
+        "StartQpc": 552073145349,
+        "Milliseconds": 16.9392,
+        "BeforeTic": 201,
+        "EndQpc": 552073314741
+      },
+      {
+        "StartQpc": 552073468079,
+        "Milliseconds": 22.3035,
+        "BeforeTic": 202,
+        "EndQpc": 552073691114
+      },
+      {
+        "StartQpc": 552073798857,
+        "Milliseconds": 20.231,
+        "BeforeTic": 203,
+        "EndQpc": 552074001167
+      },
+      {
+        "StartQpc": 552074106665,
+        "Milliseconds": 6.935,
+        "BeforeTic": 204,
+        "EndQpc": 552074176015
+      },
+      {
+        "StartQpc": 552074289799,
+        "Milliseconds": 18.9394,
+        "BeforeTic": 205,
+        "EndQpc": 552074479193
+      },
+      {
+        "StartQpc": 552074593719,
+        "Milliseconds": 18.876,
+        "BeforeTic": 206,
+        "EndQpc": 552074782479
+      },
+      {
+        "StartQpc": 552074931830,
+        "Milliseconds": 21.4688,
+        "BeforeTic": 207,
+        "EndQpc": 552075146518
+      },
+      {
+        "StartQpc": 552075287474,
+        "Milliseconds": 21.1241,
+        "BeforeTic": 208,
+        "EndQpc": 552075498715
+      },
+      {
+        "StartQpc": 552075731867,
+        "Milliseconds": 14.0851,
+        "BeforeTic": 210,
+        "EndQpc": 552075872718
+      },
+      {
+        "StartQpc": 552076000156,
+        "Milliseconds": 17.5937,
+        "BeforeTic": 211,
+        "EndQpc": 552076176093
+      },
+      {
+        "StartQpc": 552076330485,
+        "Milliseconds": 20.9733,
+        "BeforeTic": 212,
+        "EndQpc": 552076540218
+      },
+      {
+        "StartQpc": 552076645435,
+        "Milliseconds": 13.7032,
+        "BeforeTic": 213,
+        "EndQpc": 552076782467
+      },
+      {
+        "StartQpc": 552076895268,
+        "Milliseconds": 18.9479,
+        "BeforeTic": 214,
+        "EndQpc": 552077084747
+      },
+      {
+        "StartQpc": 552077200436,
+        "Milliseconds": 24.8554,
+        "BeforeTic": 215,
+        "EndQpc": 552077448990
+      },
+      {
+        "StartQpc": 552077721907,
+        "Milliseconds": 15.2493,
+        "BeforeTic": 217,
+        "EndQpc": 552077874400
+      },
+      {
+        "StartQpc": 552078009092,
+        "Milliseconds": 17.0574,
+        "BeforeTic": 218,
+        "EndQpc": 552078179666
+      },
+      {
+        "StartQpc": 552078290462,
+        "Milliseconds": 24.8831,
+        "BeforeTic": 219,
+        "EndQpc": 552078539293
+      },
+      {
+        "StartQpc": 552078667208,
+        "Milliseconds": 17.5762,
+        "BeforeTic": 220,
+        "EndQpc": 552078842970
+      },
+      {
+        "StartQpc": 552078954376,
+        "Milliseconds": 19.1129,
+        "BeforeTic": 221,
+        "EndQpc": 552079145505
+      },
+      {
+        "StartQpc": 552079299048,
+        "Milliseconds": 15.0054,
+        "BeforeTic": 222,
+        "EndQpc": 552079449102
+      },
+      {
+        "StartQpc": 552079665872,
+        "Milliseconds": 26.7274,
+        "BeforeTic": 224,
+        "EndQpc": 552079933146
+      },
+      {
+        "StartQpc": 552080037829,
+        "Milliseconds": 19.9189,
+        "BeforeTic": 225,
+        "EndQpc": 552080237018
+      },
+      {
+        "StartQpc": 552080364378,
+        "Milliseconds": 17.5418,
+        "BeforeTic": 226,
+        "EndQpc": 552080539796
+      },
+      {
+        "StartQpc": 552080679185,
+        "Milliseconds": 4.1813,
+        "BeforeTic": 227,
+        "EndQpc": 552080720998
+      },
+      {
+        "StartQpc": 552080870149,
+        "Milliseconds": 15.6898,
+        "BeforeTic": 228,
+        "EndQpc": 552081027047
+      },
+      {
+        "StartQpc": 552081151839,
+        "Milliseconds": 23.7529,
+        "BeforeTic": 229,
+        "EndQpc": 552081389368
+      },
+      {
+        "StartQpc": 552081634132,
+        "Milliseconds": 29.7845,
+        "BeforeTic": 231,
+        "EndQpc": 552081931977
+      },
+      {
+        "StartQpc": 552082090034,
+        "Milliseconds": 20.3618,
+        "BeforeTic": 232,
+        "EndQpc": 552082293652
+      },
+      {
+        "StartQpc": 552082399900,
+        "Milliseconds": 25.7523,
+        "BeforeTic": 233,
+        "EndQpc": 552082657423
+      },
+      {
+        "StartQpc": 552082876604,
+        "Milliseconds": 14.4446,
+        "BeforeTic": 235,
+        "EndQpc": 552083021050
+      },
+      {
+        "StartQpc": 552083135746,
+        "Milliseconds": 24.9543,
+        "BeforeTic": 236,
+        "EndQpc": 552083385289
+      },
+      {
+        "StartQpc": 552083666686,
+        "Milliseconds": 32.3673,
+        "BeforeTic": 238,
+        "EndQpc": 552083990359
+      },
+      {
+        "StartQpc": 552084106436,
+        "Milliseconds": 6.6982,
+        "BeforeTic": 239,
+        "EndQpc": 552084173418
+      },
+      {
+        "StartQpc": 552084290003,
+        "Milliseconds": 18.6195,
+        "BeforeTic": 240,
+        "EndQpc": 552084476198
+      },
+      {
+        "StartQpc": 552084594717,
+        "Milliseconds": 18.599,
+        "BeforeTic": 241,
+        "EndQpc": 552084780707
+      },
+      {
+        "StartQpc": 552084930040,
+        "Milliseconds": 15.2208,
+        "BeforeTic": 242,
+        "EndQpc": 552085082248
+      },
+      {
+        "StartQpc": 552085188198,
+        "Milliseconds": 19.7565,
+        "BeforeTic": 243,
+        "EndQpc": 552085385763
+      },
+      {
+        "StartQpc": 552085500874,
+        "Milliseconds": 6.6822,
+        "BeforeTic": 244,
+        "EndQpc": 552085567696
+      },
+      {
+        "StartQpc": 552085674601,
+        "Milliseconds": 19.5424,
+        "BeforeTic": 245,
+        "EndQpc": 552085870025
+      },
+      {
+        "StartQpc": 552085984869,
+        "Milliseconds": 18.863,
+        "BeforeTic": 246,
+        "EndQpc": 552086173499
+      },
+      {
+        "StartQpc": 552086327073,
+        "Milliseconds": 14.8488,
+        "BeforeTic": 247,
+        "EndQpc": 552086475561
+      },
+      {
+        "StartQpc": 552086610559,
+        "Milliseconds": 16.9107,
+        "BeforeTic": 248,
+        "EndQpc": 552086779666
+      },
+      {
+        "StartQpc": 552086896565,
+        "Milliseconds": 18.6313,
+        "BeforeTic": 249,
+        "EndQpc": 552087082878
+      },
+      {
+        "StartQpc": 552087207768,
+        "Milliseconds": 11.6415,
+        "BeforeTic": 250,
+        "EndQpc": 552087324183
+      },
+      {
+        "StartQpc": 552087452705,
+        "Milliseconds": 11.6784,
+        "BeforeTic": 251,
+        "EndQpc": 552087569489
+      },
+      {
+        "StartQpc": 552087721853,
+        "Milliseconds": 15.2442,
+        "BeforeTic": 252,
+        "EndQpc": 552087874295
+      },
+      {
+        "StartQpc": 552087980381,
+        "Milliseconds": 25.802,
+        "BeforeTic": 253,
+        "EndQpc": 552088238401
+      },
+      {
+        "StartQpc": 552088355308,
+        "Milliseconds": 18.1344,
+        "BeforeTic": 254,
+        "EndQpc": 552088536652
+      },
+      {
+        "StartQpc": 552088645528,
+        "Milliseconds": 19.4105,
+        "BeforeTic": 255,
+        "EndQpc": 552088839633
+      },
+      {
+        "StartQpc": 552088967373,
+        "Milliseconds": 17.5033,
+        "BeforeTic": 256,
+        "EndQpc": 552089142406
+      },
+      {
+        "StartQpc": 552089295656,
+        "Milliseconds": 14.7603,
+        "BeforeTic": 257,
+        "EndQpc": 552089443259
+      },
+      {
+        "StartQpc": 552089695062,
+        "Milliseconds": 29.4745,
+        "BeforeTic": 259,
+        "EndQpc": 552089989807
+      },
+      {
+        "StartQpc": 552090230917,
+        "Milliseconds": 18.4545,
+        "BeforeTic": 261,
+        "EndQpc": 552090415462
+      },
+      {
+        "StartQpc": 552090567166,
+        "Milliseconds": 25.3235,
+        "BeforeTic": 262,
+        "EndQpc": 552090820401
+      },
+      {
+        "StartQpc": 552090934978,
+        "Milliseconds": 8.9445,
+        "BeforeTic": 263,
+        "EndQpc": 552091024423
+      },
+      {
+        "StartQpc": 552091141883,
+        "Milliseconds": 24.527,
+        "BeforeTic": 264,
+        "EndQpc": 552091387153
+      },
+      {
+        "StartQpc": 552091496286,
+        "Milliseconds": 13.027,
+        "BeforeTic": 265,
+        "EndQpc": 552091626556
+      },
+      {
+        "StartQpc": 552091739839,
+        "Milliseconds": 19.1498,
+        "BeforeTic": 266,
+        "EndQpc": 552091931337
+      },
+      {
+        "StartQpc": 552092082200,
+        "Milliseconds": 21.2664,
+        "BeforeTic": 267,
+        "EndQpc": 552092294864
+      },
+      {
+        "StartQpc": 552092558539,
+        "Milliseconds": 15.9763,
+        "BeforeTic": 269,
+        "EndQpc": 552092718302
+      },
+      {
+        "StartQpc": 552092832491,
+        "Milliseconds": 18.8762,
+        "BeforeTic": 270,
+        "EndQpc": 552093021253
+      },
+      {
+        "StartQpc": 552093143335,
+        "Milliseconds": 24.2209,
+        "BeforeTic": 271,
+        "EndQpc": 552093385544
+      },
+      {
+        "StartQpc": 552093649862,
+        "Milliseconds": 34.1741,
+        "BeforeTic": 273,
+        "EndQpc": 552093991603
+      },
+      {
+        "StartQpc": 552094110522,
+        "Milliseconds": 18.4144,
+        "BeforeTic": 274,
+        "EndQpc": 552094294666
+      },
+      {
+        "StartQpc": 552094403763,
+        "Milliseconds": 13.3905,
+        "BeforeTic": 275,
+        "EndQpc": 552094537668
+      },
+      {
+        "StartQpc": 552094654532,
+        "Milliseconds": 12.4658,
+        "BeforeTic": 276,
+        "EndQpc": 552094779190
+      },
+      {
+        "StartQpc": 552094910440,
+        "Milliseconds": 17.1414,
+        "BeforeTic": 277,
+        "EndQpc": 552095081854
+      },
+      {
+        "StartQpc": 552095223969,
+        "Milliseconds": 16.0558,
+        "BeforeTic": 278,
+        "EndQpc": 552095384527
+      },
+      {
+        "StartQpc": 552095497664,
+        "Milliseconds": 6.9853,
+        "BeforeTic": 279,
+        "EndQpc": 552095567517
+      },
+      {
+        "StartQpc": 552095686912,
+        "Milliseconds": 18.27,
+        "BeforeTic": 280,
+        "EndQpc": 552095869612
+      },
+      {
+        "StartQpc": 552095989716,
+        "Milliseconds": 18.3159,
+        "BeforeTic": 281,
+        "EndQpc": 552096172875
+      },
+      {
+        "StartQpc": 552096331546,
+        "Milliseconds": 14.4513,
+        "BeforeTic": 282,
+        "EndQpc": 552096476059
+      },
+      {
+        "StartQpc": 552096597210,
+        "Milliseconds": 18.1744,
+        "BeforeTic": 283,
+        "EndQpc": 552096778954
+      },
+      {
+        "StartQpc": 552096893178,
+        "Milliseconds": 12.8343,
+        "BeforeTic": 284,
+        "EndQpc": 552097021521
+      },
+      {
+        "StartQpc": 552097126156,
+        "Milliseconds": 32.137,
+        "BeforeTic": 285,
+        "EndQpc": 552097447526
+      },
+      {
+        "StartQpc": 552097709693,
+        "Milliseconds": 16.4341,
+        "BeforeTic": 287,
+        "EndQpc": 552097874034
+      },
+      {
+        "StartQpc": 552098016263,
+        "Milliseconds": 16.1507,
+        "BeforeTic": 288,
+        "EndQpc": 552098177770
+      },
+      {
+        "StartQpc": 552098292893,
+        "Milliseconds": 24.5051,
+        "BeforeTic": 289,
+        "EndQpc": 552098537944
+      },
+      {
+        "StartQpc": 552098654260,
+        "Milliseconds": 18.6185,
+        "BeforeTic": 290,
+        "EndQpc": 552098840445
+      },
+      {
+        "StartQpc": 552098959536,
+        "Milliseconds": 18.4143,
+        "BeforeTic": 291,
+        "EndQpc": 552099143679
+      },
+      {
+        "StartQpc": 552099423176,
+        "Milliseconds": 20.4618,
+        "BeforeTic": 293,
+        "EndQpc": 552099627794
+      },
+      {
+        "StartQpc": 552099744889,
+        "Milliseconds": 18.6272,
+        "BeforeTic": 294,
+        "EndQpc": 552099931161
+      },
+      {
+        "StartQpc": 552100036371,
+        "Milliseconds": 19.7392,
+        "BeforeTic": 295,
+        "EndQpc": 552100233763
+      },
+      {
+        "StartQpc": 552100361673,
+        "Milliseconds": 5.4635,
+        "BeforeTic": 296,
+        "EndQpc": 552100416308
+      },
+      {
+        "StartQpc": 552100548765,
+        "Milliseconds": 16.9074,
+        "BeforeTic": 297,
+        "EndQpc": 552100717839
+      },
+      {
+        "StartQpc": 552100876488,
+        "Milliseconds": 14.4837,
+        "BeforeTic": 298,
+        "EndQpc": 552101021325
+      },
+      {
+        "StartQpc": 552101140290,
+        "Milliseconds": 18.461,
+        "BeforeTic": 299,
+        "EndQpc": 552101324900
+      }
+    ],
+    "Skill": 3,
+    "SimulationSamplesMs": [
+      23.9584,
+      13.9274,
+      1.36,
+      1.3263,
+      1.5407,
+      19.0253,
+      1.4204,
+      1.8264,
+      1.6376,
+      2.3757,
+      2.0722,
+      5.3583,
+      1.3849,
+      4.7323,
+      1.3258,
+      1.3347,
+      3.9453,
+      5.201,
+      1.45,
+      2.4285,
+      1.9803,
+      5.2686,
+      1.3613,
+      1.499,
+      1.3962,
+      1.3758,
+      4.1693,
+      5.3531,
+      1.4905,
+      2.5699,
+      2.3053,
+      5.5083,
+      1.4117,
+      1.4374,
+      1.4017,
+      1.3913,
+      4.2428,
+      6.0446,
+      1.3635,
+      2.3451,
+      1.9227,
+      5.1163,
+      1.3922,
+      1.4113,
+      1.5866,
+      1.4602,
+      4.0805,
+      5.7142,
+      1.3534,
+      2.3397,
+      1.9127,
+      5.3136,
+      1.4009,
+      1.3657,
+      1.3789,
+      1.3469,
+      5.8531,
+      4.3857,
+      1.5006,
+      2.4038,
+      1.9645,
+      6.1994,
+      1.4593,
+      1.4164,
+      1.3945,
+      1.4204,
+      5.1896,
+      4.3485,
+      1.5368,
+      2.8109,
+      2.2316,
+      6.7465,
+      1.464,
+      1.5291,
+      1.379,
+      1.551,
+      5.1574,
+      4.4465,
+      1.4745,
+      2.7008,
+      2.0144,
+      6.6283,
+      1.6878,
+      1.3844,
+      1.3868,
+      1.5974,
+      5.165,
+      4.2264,
+      1.3811,
+      2.3363,
+      2.0509,
+      7.3092,
+      1.532,
+      1.4161,
+      1.4241,
+      1.4429,
+      4.5336,
+      4.5455,
+      1.4,
+      2.3836,
+      2.3945,
+      6.6855,
+      1.4348,
+      1.4857,
+      1.4781,
+      1.7172,
+      4.2598,
+      4.3484,
+      1.418,
+      2.4218,
+      2.2232,
+      6.6428,
+      1.4086,
+      1.4308,
+      1.4643,
+      1.6957,
+      4.2513,
+      4.5109,
+      1.3323,
+      2.7604,
+      2.0253,
+      7.2429,
+      1.4448,
+      1.4279,
+      1.4709,
+      1.3794,
+      4.0142,
+      4.3291,
+      1.4083,
+      2.4348,
+      1.994,
+      6.8009,
+      1.4097,
+      1.5349,
+      1.4072,
+      1.6523,
+      3.9567,
+      4.5863,
+      1.7839,
+      2.7748,
+      2.0148,
+      6.8146,
+      1.4191,
+      1.4815,
+      1.5232,
+      1.4023,
+      4.2128,
+      4.5481,
+      1.3831,
+      2.3704,
+      2.7325,
+      5.3018,
+      1.4238,
+      1.4164,
+      1.3648,
+      1.365,
+      4.1417,
+      4.8323,
+      1.3313,
+      2.3567,
+      1.8709,
+      5.1564,
+      1.3634,
+      1.3514,
+      1.386,
+      1.3468,
+      4.2152,
+      4.332,
+      1.4547,
+      3.4407,
+      2.0677,
+      5.2285,
+      1.7925,
+      1.4818,
+      1.395,
+      1.4629,
+      4.7594,
+      4.8286,
+      1.3471,
+      2.4296,
+      1.9747,
+      5.8774,
+      1.3458,
+      1.4101,
+      1.347,
+      1.4305,
+      3.9622,
+      4.2607,
+      1.4944,
+      2.5427,
+      1.9638,
+      5.9346,
+      1.4324,
+      1.4247,
+      1.406,
+      1.6083,
+      4.1034,
+      4.2929,
+      1.408,
+      2.576,
+      2.2144,
+      6.0373,
+      1.4608,
+      1.4176,
+      1.4299,
+      1.4391,
+      4.5736,
+      4.6485,
+      2.1518,
+      2.268,
+      2.2122,
+      5.2132,
+      1.3889,
+      2.1086,
+      1.6107,
+      2.0527,
+      4.0534,
+      4.3602,
+      2.004,
+      2.3892,
+      1.9543,
+      5.3119,
+      1.4324,
+      1.3592,
+      1.394,
+      2.5087,
+      3.9763,
+      4.7119,
+      1.5644,
+      2.4374,
+      2.5966,
+      5.3504,
+      1.4482,
+      1.408,
+      1.4125,
+      1.5111,
+      4.0138,
+      4.4045,
+      1.4253,
+      2.4237,
+      2.6936,
+      5.1588,
+      1.4316,
+      1.4365,
+      1.4975,
+      1.5148,
+      4.546,
+      4.3002,
+      1.4473,
+      2.562,
+      2.923,
+      5.2408,
+      1.4159,
+      1.3928,
+      1.4149,
+      1.6669,
+      4.3831,
+      4.4841,
+      1.4068,
+      2.5067,
+      1.965,
+      5.2255,
+      1.4216,
+      1.5035,
+      1.4734,
+      1.4016,
+      4.1252,
+      4.6873,
+      1.337,
+      2.3418,
+      2.0063,
+      5.1759,
+      1.5649,
+      1.4774,
+      1.6861,
+      1.3707,
+      3.9831,
+      4.9685,
+      1.4136,
+      2.7852,
+      2.0904,
+      5.2492,
+      1.7592,
+      1.4932,
+      1.3969,
+      1.8234,
+      4.0721,
+      5.0246,
+      1.4206,
+      2.436,
+      1.9593,
+      5.7466,
+      1.4079,
+      1.5566,
+      1.4059,
+      1.5714,
+      4.0236,
+      5.6493,
+      1.3833,
+      2.4709
+    ]
+  },
+  "Actions": [
+    {
+      "Tic": 150,
+      "Response": {
+        "MessageTitle": "",
+        "MessageDetail": "",
+        "Action": "ShowMenu",
+        "Success": true,
+        "Screen": 1,
+        "Choice": 0,
+        "Skill": 3,
+        "ReturnScreen": 1,
+        "Episode": 1
+      },
+      "WaitMilliseconds": 3992.3623
+    },
+    {
+      "Tic": 150,
+      "Response": {
+        "MessageTitle": "",
+        "MessageDetail": "",
+        "Action": "ShowMenu",
+        "Success": true,
+        "Screen": 0,
+        "Choice": 0,
+        "Skill": 3,
+        "ReturnScreen": 1,
+        "Episode": 1
+      },
+      "WaitMilliseconds": 20.3642
+    }
+  ],
+  "Meaning": "Two unpaced 150-command bursts through the real simulation and audio device with menu/resume between them. DrainOnClose removes the artificial two-second tail sleep and requests actual bounded shutdown draining. No terminal renderer or live effect window. Bounded-queue/control regression, not a gameplay pacing or physical listening qualification.",
+  "WorkerSha256": "ECC5DFD30F814400A873EEDFD921F038F0C89C4066A8C331E71E3555B95431C0",
+  "HarnessSha256": "B495608F2BDD991E81B2D59659529CF95410184E59A1AA0903363ED43CA68A96",
+  "DrainOnClose": true,
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F"
+}

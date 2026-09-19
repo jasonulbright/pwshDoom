@@ -1,0 +1,104 @@
+{
+  "PreexistingTerminalWindows": 1,
+  "Meaning": "Actual game-window Windows.Graphics.Capture at the recorded capture ceiling, with D3D11 frames passed to external NVENC H.264 encoding. The ceiling exceeds 60 to avoid capture-rate aliasing; actual arrival rate is compositor-driven. Output is resampled to 60 FPS and can contain duplicates. Video includes startup and a short console return. Recording can affect game/presentation timing; encoded 60 FPS does not prove 60 distinct displayed game images. No microphone or unrelated application audio is captured. The input selects only the game window; inspect footage for occlusion or capture artifacts. Delivered movie includes scoped digital audio aligned by the retained capture timestamp and QPC clock model, with explicit zero-filled intervals in its audio/video report. Original silent video and raw captured PCM remain retained. This does not qualify acoustic output or physical A/V latency.",
+  "GlyphSet": "Katakana",
+  "CaptureBackend": "GraphicsCapture",
+  "AudioReport": "C:\\projects\\pwshDoom\\local\\recordings\\e1m3-matrix-third-audio.json",
+  "MusicCatalogSha256": "34720E9255D7E7D51EFFD7C6050C59B95C6692033881DEE7305E84060A15D1CA",
+  "ReplaySha256": "A9E3E3E48DF5A483D904A412E3AF7A872ED5B5862713A331DC3310007AA09970",
+  "ExitDelaySeconds": 3,
+  "AudioCaptured": true,
+  "Ffmpeg": "local/tools/capture-build/FFmpeg-n9.0.1/ffmpeg.exe",
+  "EncoderExitCode": 0,
+  "Video": "C:\\projects\\pwshDoom\\local\\recordings\\e1m3-matrix-third-av.mp4",
+  "WindowHandle": 13108422,
+  "CaptureStartQpc": 552557118359,
+  "SourcesChangedDuringRun": [],
+  "MediaFfmpeg": "local/tools/ffmpeg/ffmpeg-9.0.1-essentials_build/bin/ffmpeg.exe",
+  "Maximized": false,
+  "TerminalPid": 15012,
+  "AudioExitCode": 0,
+  "FontFace": "MS Gothic",
+  "MediaFfmpegSha256": "72A489ECCD008C2EC2C0A5856C5C75BC3D8BBFA90166C4566865C246445E6AA3",
+  "CaptureLimit": 240,
+  "Error": null,
+  "StartupTimeoutSeconds": 90,
+  "Arguments": [
+    "-hide_banner",
+    "-n",
+    "-filter_complex",
+    "gfxcapture=hwnd=13108422:max_framerate=240:capture_cursor=0:display_border=1:width=-2:height=-2",
+    "-an",
+    "-c:v",
+    "h264_nvenc",
+    "-preset",
+    "p4",
+    "-cq",
+    "18",
+    "-b:v",
+    "0",
+    "-r",
+    "60",
+    "-fps_mode",
+    "cfr",
+    "-movflags",
+    "+faststart",
+    "-t",
+    "405",
+    "C:\\projects\\pwshDoom\\local\\recordings\\e1m3-matrix-third.mp4"
+  ],
+  "SessionScheduleSha256": null,
+  "InputReplaySha256": "0907F96F7F8F1741CA9C08A135744A07AECC33399A1630ADBA4FF77B71E0B373",
+  "VideoFps": 60,
+  "FontSize": 12,
+  "QpcFrequency": 10000000,
+  "Style": "Matrix",
+  "GameReport": "C:\\projects\\pwshDoom\\local\\recordings\\e1m3-matrix-third-game.json",
+  "CaptureDeadlineSeconds": 405,
+  "ExpectedExit": "ReplayEnd",
+  "Sources": [
+    {
+      "Path": "Start-Doom.ps1",
+      "Sha256": "3EC570EDED87DA4C7316B3CB2F567F580571BF2E6D10BF696DCC4D95D5C147EC"
+    },
+    {
+      "Path": "scripts/Invoke-Doom.ps1",
+      "Sha256": "D82E1CE6373C25C7386816BAFA03DEB732E12B81B0C70FFDEC240988F9F9FC32"
+    },
+    {
+      "Path": "scripts/Record-DoomReplay.ps1",
+      "Sha256": "0002BBEE8688EF0AE9C772166447307F4DB63D24942FCA1205B2BE403D87A5CC"
+    },
+    {
+      "Path": "scripts/Record-ProcessAudio.ps1",
+      "Sha256": "F50876284D3E3958F2183CB483F13179FABAF45B87B8BCC221BA7F7113EF38CD"
+    },
+    {
+      "Path": "scripts/Merge-DoomCaptureAudio.ps1",
+      "Sha256": "795D02E96FFC3373741E7970512D1D65CC777A43B834D5771F69EC81CF3AF2C4"
+    },
+    {
+      "Path": "src/ProcessAudioCapture.ps1",
+      "Sha256": "A747786A2428F71C907F86AD631983548AAE8C6450F422F64144D367B8E9E321"
+    },
+    {
+      "Path": "src/CaptureClock.ps1",
+      "Sha256": "CED03D531F7C129D9E079F1F3B548DD436EFD81782974A3752D4689FA3E45DFB"
+    },
+    {
+      "Path": "src/CaptureTimeline.ps1",
+      "Sha256": "EFA64468F234327E5D7682CE08FF5B8863EEEFC5D5B082DB9B74BE544D092E21"
+    }
+  ],
+  "TargetWasPreexisting": false,
+  "FinishedUtc": "2026-09-19T12:16:09.2792766Z",
+  "ClockReport": "C:\\projects\\pwshDoom\\local\\recordings\\e1m3-matrix-third-clock.json",
+  "SaveRoot": "",
+  "AudioCaptureRequested": true,
+  "VideoSha256": "8ACB8B25D27138D375D71BE92D81A481B0E49D581034D51205FE888FF1D5D0EF",
+  "SoundRequested": true,
+  "FfmpegSha256": "BD59EE9D861A9531AC289A8D9C0A02B8166A215A47D882605E372845324A1863",
+  "RawSilentVideo": "C:\\projects\\pwshDoom\\local\\recordings\\e1m3-matrix-third.mp4",
+  "RawSilentVideoSha256": "58161076158E1CFD9C7A36D756C151F0186B1AAD008A86DAC1C36E7906E67A3C",
+  "AudioVideoReport": "C:\\projects\\pwshDoom\\local\\recordings\\e1m3-matrix-third-av.json"
+}

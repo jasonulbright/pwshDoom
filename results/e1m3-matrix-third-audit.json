@@ -1,0 +1,715 @@
+{
+  "Receipts": [
+    {
+      "Sha256": "A9E3E3E48DF5A483D904A412E3AF7A872ED5B5862713A331DC3310007AA09970",
+      "Path": "C:\\projects\\pwshDoom\\results\\e1m3-qualified-replay.json"
+    },
+    {
+      "Sha256": "05E6603A887B9A5E2406FADA55B9E248DFDA6CF9B3BE63C9D87CBA7D8B18BAB4",
+      "Path": "C:\\projects\\pwshDoom\\local\\recordings\\e1m3-matrix-third-game.json"
+    },
+    {
+      "Sha256": "8EBFF998BD9614D6A71AF00560AABF4579D75B93731A8D8BED555384A685FBF5",
+      "Path": "C:\\projects\\pwshDoom\\local\\recordings\\e1m3-matrix-third-recording.json"
+    },
+    {
+      "Sha256": "0F3931BEF83478422AB0CDC82EC897E1AB1D0378106EFBBD30B9FDFD40BEC353",
+      "Path": "C:\\projects\\pwshDoom\\local\\recordings\\e1m3-matrix-third-audio.json"
+    },
+    {
+      "Sha256": "7765315453D25AD261F60A457979408029CAC5497C94427AB1A4B82DEA8D58B4",
+      "Path": "C:\\projects\\pwshDoom\\local\\recordings\\e1m3-matrix-third-av.json"
+    },
+    {
+      "Sha256": "82E8D88866C5531FD3E0DA06562FB2A0B8270CCD8BE155AA63C6BA60C49C35C4",
+      "Path": "C:\\projects\\pwshDoom\\local\\recordings\\e1m3-matrix-third-route-sources.json"
+    },
+    {
+      "Sha256": "7C62B309CB58D61CB79921FD565EEE26C16C1DC3324216573986D3B1BEF49489",
+      "Path": "C:\\projects\\pwshDoom\\local\\recordings\\e1m3-matrix-third-host-ready.json"
+    },
+    {
+      "Sha256": "DF75B2743048D05106F500317127BA462D2A2BB3F0EE1A63D9CA1E3D0F1697B2",
+      "Path": "C:\\projects\\pwshDoom\\results\\music-loop-e1m3-prepared.json"
+    },
+    {
+      "Sha256": "084536988F462CD7C6718665FA53DCD6BB1009B3FCBCDD4556C50D51AC1B1778",
+      "Path": "C:\\projects\\pwshDoom\\results\\music-loop-inter-first.json"
+    },
+    {
+      "Sha256": "24CD95F078930A352DF57C5E609D75C587D9F156786EBC7AABBDE64C7BA9630C",
+      "Path": "C:\\projects\\pwshDoom\\local\\music-preparation-e1m3\\D_E1M4\\qualified.json"
+    },
+    {
+      "Sha256": "0907F96F7F8F1741CA9C08A135744A07AECC33399A1630ADBA4FF77B71E0B373",
+      "Path": "C:\\projects\\pwshDoom\\local\\recordings\\e1m3-matrix-third-input.json"
+    }
+  ],
+  "SourceSha256": "D6EF59A4AB559C7BBD7C0B23D9D98B2E91B51836273A4CE7C3EED93786981C2B",
+  "Details": {
+    "SubmittedFrames": 8968680,
+    "Checkpoints": 24,
+    "WallSeconds": 240.0070704,
+    "Loading": [
+      {
+        "AudioDrain": {
+          "WaitMilliseconds": 949.817,
+          "CompletedFrames": 8877960,
+          "AcknowledgedQpc": 555320576137,
+          "ThroughSequence": 7045
+        },
+        "Tic": 7046,
+        "Map": 4,
+        "BeforeAssetsMilliseconds": 1590.2684,
+        "EndQpc": 555337254240,
+        "StartQpc": 555311124079,
+        "Episode": 1,
+        "TotalMilliseconds": 2613.0161
+      }
+    ],
+    "ReturnedFrames": 8968680,
+    "Starvation": [
+      {
+        "AfterPacket": 5,
+        "WallMs": 23658.546
+      },
+      {
+        "AfterPacket": 14,
+        "WallMs": 24128.2507
+      },
+      {
+        "AfterPacket": 29,
+        "WallMs": 24728.7031
+      },
+      {
+        "AfterPacket": 33,
+        "WallMs": 24957.3981
+      },
+      {
+        "AfterPacket": 34,
+        "WallMs": 25178.1602
+      },
+      {
+        "AfterPacket": 37,
+        "WallMs": 25368.4403
+      },
+      {
+        "AfterPacket": 58,
+        "WallMs": 26357.7141
+      },
+      {
+        "AfterPacket": 68,
+        "WallMs": 26806.5445
+      },
+      {
+        "AfterPacket": 184,
+        "WallMs": 30488.6076
+      },
+      {
+        "AfterPacket": 212,
+        "WallMs": 31517.8398
+      },
+      {
+        "AfterPacket": 393,
+        "WallMs": 37417.735
+      },
+      {
+        "AfterPacket": 424,
+        "WallMs": 38908.6145
+      },
+      {
+        "AfterPacket": 437,
+        "WallMs": 39498.5742
+      },
+      {
+        "AfterPacket": 451,
+        "WallMs": 40308.517
+      },
+      {
+        "AfterPacket": 453,
+        "WallMs": 40497.9839
+      },
+      {
+        "AfterPacket": 462,
+        "WallMs": 40957.8611
+      },
+      {
+        "AfterPacket": 469,
+        "WallMs": 41357.8749
+      },
+      {
+        "AfterPacket": 472,
+        "WallMs": 41528.6834
+      },
+      {
+        "AfterPacket": 476,
+        "WallMs": 41757.8463
+      },
+      {
+        "AfterPacket": 484,
+        "WallMs": 42157.8688
+      },
+      {
+        "AfterPacket": 498,
+        "WallMs": 42877.9793
+      },
+      {
+        "AfterPacket": 512,
+        "WallMs": 43548.5369
+      },
+      {
+        "AfterPacket": 526,
+        "WallMs": 44238.2486
+      },
+      {
+        "AfterPacket": 534,
+        "WallMs": 44668.7091
+      },
+      {
+        "AfterPacket": 540,
+        "WallMs": 44948.4576
+      },
+      {
+        "AfterPacket": 568,
+        "WallMs": 46208.6137
+      },
+      {
+        "AfterPacket": 582,
+        "WallMs": 46882.3595
+      },
+      {
+        "AfterPacket": 589,
+        "WallMs": 47188.6151
+      },
+      {
+        "AfterPacket": 645,
+        "WallMs": 49378.0914
+      },
+      {
+        "AfterPacket": 659,
+        "WallMs": 49908.1551
+      },
+      {
+        "AfterPacket": 673,
+        "WallMs": 50468.5177
+      },
+      {
+        "AfterPacket": 683,
+        "WallMs": 50889.4783
+      },
+      {
+        "AfterPacket": 797,
+        "WallMs": 55037.9416
+      },
+      {
+        "AfterPacket": 839,
+        "WallMs": 56668.629
+      },
+      {
+        "AfterPacket": 853,
+        "WallMs": 57248.4972
+      },
+      {
+        "AfterPacket": 999,
+        "WallMs": 61917.8363
+      },
+      {
+        "AfterPacket": 1027,
+        "WallMs": 62977.821
+      },
+      {
+        "AfterPacket": 1044,
+        "WallMs": 63780.6782
+      },
+      {
+        "AfterPacket": 1178,
+        "WallMs": 68688.627
+      },
+      {
+        "AfterPacket": 1258,
+        "WallMs": 71418.7821
+      },
+      {
+        "AfterPacket": 1266,
+        "WallMs": 71769.7213
+      },
+      {
+        "AfterPacket": 1270,
+        "WallMs": 71957.845
+      },
+      {
+        "AfterPacket": 1278,
+        "WallMs": 72308.5082
+      },
+      {
+        "AfterPacket": 1366,
+        "WallMs": 75768.5556
+      },
+      {
+        "AfterPacket": 1378,
+        "WallMs": 76317.8624
+      },
+      {
+        "AfterPacket": 1398,
+        "WallMs": 77188.6837
+      },
+      {
+        "AfterPacket": 1418,
+        "WallMs": 78077.4478
+      },
+      {
+        "AfterPacket": 1501,
+        "WallMs": 81098.7605
+      },
+      {
+        "AfterPacket": 1516,
+        "WallMs": 81848.531
+      },
+      {
+        "AfterPacket": 1538,
+        "WallMs": 82683.7049
+      },
+      {
+        "AfterPacket": 2087,
+        "WallMs": 99008.6134
+      },
+      {
+        "AfterPacket": 2118,
+        "WallMs": 100248.7227
+      },
+      {
+        "AfterPacket": 2227,
+        "WallMs": 104308.5901
+      },
+      {
+        "AfterPacket": 2243,
+        "WallMs": 105228.4473
+      },
+      {
+        "AfterPacket": 2269,
+        "WallMs": 106458.6784
+      },
+      {
+        "AfterPacket": 2294,
+        "WallMs": 107388.7086
+      },
+      {
+        "AfterPacket": 2352,
+        "WallMs": 109717.7621
+      },
+      {
+        "AfterPacket": 2389,
+        "WallMs": 111148.5861
+      },
+      {
+        "AfterPacket": 2417,
+        "WallMs": 112168.4255
+      },
+      {
+        "AfterPacket": 2426,
+        "WallMs": 112508.5061
+      },
+      {
+        "AfterPacket": 2706,
+        "WallMs": 120905.6493
+      },
+      {
+        "AfterPacket": 2821,
+        "WallMs": 124757.8459
+      },
+      {
+        "AfterPacket": 2887,
+        "WallMs": 127088.5803
+      },
+      {
+        "AfterPacket": 2924,
+        "WallMs": 128357.7256
+      },
+      {
+        "AfterPacket": 2961,
+        "WallMs": 129668.5578
+      },
+      {
+        "AfterPacket": 3233,
+        "WallMs": 138148.5799
+      },
+      {
+        "AfterPacket": 3652,
+        "WallMs": 150437.8488
+      },
+      {
+        "AfterPacket": 3689,
+        "WallMs": 151688.0978
+      },
+      {
+        "AfterPacket": 5614,
+        "WallMs": 207088.5213
+      },
+      {
+        "AfterPacket": 5651,
+        "WallMs": 208538.0905
+      },
+      {
+        "AfterPacket": 5684,
+        "WallMs": 209658.6943
+      },
+      {
+        "AfterPacket": 5688,
+        "WallMs": 209837.7592
+      },
+      {
+        "AfterPacket": 5862,
+        "WallMs": 215308.5946
+      },
+      {
+        "AfterPacket": 5899,
+        "WallMs": 216557.9975
+      },
+      {
+        "AfterPacket": 6125,
+        "WallMs": 225148.5385
+      },
+      {
+        "AfterPacket": 6259,
+        "WallMs": 229788.602
+      },
+      {
+        "AfterPacket": 7054,
+        "WallMs": 262098.0812
+      }
+    ],
+    "CancelledFramesUpperBound": 0,
+    "MusicTransitions": [
+      {
+        "Loop": true,
+        "Kind": "Start",
+        "Track": "D_E1M3",
+        "AfterFrames": 0
+      },
+      {
+        "Loop": true,
+        "Kind": "Start",
+        "Track": "D_INTER",
+        "AfterFrames": 8733060
+      },
+      {
+        "Kind": "EpochReset",
+        "AfterFrames": 8877960
+      },
+      {
+        "Loop": true,
+        "Kind": "Start",
+        "Track": "D_E1M4",
+        "AfterFrames": 8877960
+      }
+    ],
+    "Transitions": [
+      {
+        "Kills": 0,
+        "Tic": 0,
+        "Map": 3,
+        "Keys": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "State": "Level",
+        "Health": 100,
+        "Armor": 0,
+        "Generation": 1,
+        "Weapons": [
+          true,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "DidSecret": false,
+        "Episode": 1,
+        "Ammo": [
+          50,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "Kills": 48,
+        "Tic": 6931,
+        "Map": 3,
+        "Keys": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "State": "Intermission",
+        "Health": 66,
+        "Armor": 80,
+        "Generation": 1,
+        "Weapons": [
+          true,
+          true,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "DidSecret": false,
+        "Episode": 1,
+        "Ammo": [
+          82,
+          4,
+          0,
+          0
+        ]
+      },
+      {
+        "Kills": 0,
+        "Tic": 7047,
+        "Map": 4,
+        "Keys": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "State": "Level",
+        "Health": 66,
+        "Armor": 80,
+        "Generation": 2,
+        "Weapons": [
+          true,
+          true,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "DidSecret": false,
+        "Episode": 1,
+        "Ammo": [
+          82,
+          4,
+          0,
+          0
+        ]
+      }
+    ],
+    "Commands": 7118,
+    "VideoSha256": "8ACB8B25D27138D375D71BE92D81A481B0E49D581034D51205FE888FF1D5D0EF",
+    "PcmSha256": "69DF9D5685974FF9EA1CE0C20AC82BCD6835A0338CE3E39D081B5FC1D8C1E4EB",
+    "Writes": 11387,
+    "ActiveSeconds": 237.4029417,
+    "Video": "C:\\projects\\pwshDoom\\local\\recordings\\e1m3-matrix-third-av.mp4"
+  },
+  "Checks": [
+    {
+      "Name": "Reference is a successful independently qualified two-level route",
+      "Passed": true
+    },
+    {
+      "Name": "Actual host and audio reach replay end without error",
+      "Passed": true
+    },
+    {
+      "Name": "Every ordinary command is consumed unchanged",
+      "Passed": true
+    },
+    {
+      "Name": "Every independent selected-state checkpoint matches directly",
+      "Passed": true
+    },
+    {
+      "Name": "Exit and destination transitions retain command timing and inventory",
+      "Passed": true
+    },
+    {
+      "Name": "Destination generation is actually submitted by the terminal host",
+      "Passed": true
+    },
+    {
+      "Name": "Three score starts and one epoch reset are recorded",
+      "Passed": true
+    },
+    {
+      "Name": "Score D_E1M3 begins at its expected packet",
+      "Passed": true
+    },
+    {
+      "Name": "Score D_E1M3 pins a successful qualification",
+      "Passed": true
+    },
+    {
+      "Name": "Score D_INTER begins at its expected packet",
+      "Passed": true
+    },
+    {
+      "Name": "Score D_INTER pins a successful qualification",
+      "Passed": true
+    },
+    {
+      "Name": "Score D_E1M4 begins at its expected packet",
+      "Passed": true
+    },
+    {
+      "Name": "Score D_E1M4 pins a successful qualification",
+      "Passed": true
+    },
+    {
+      "Name": "All tic audio is consumed with no stale or unconsumed packet",
+      "Passed": true
+    },
+    {
+      "Name": "All submitted audio frames return before device closure",
+      "Passed": true
+    },
+    {
+      "Name": "Music readers and the device close cleanly",
+      "Passed": true
+    },
+    {
+      "Name": "Old audio completes before the new world and asset handoff",
+      "Passed": true
+    },
+    {
+      "Name": "Source is unchanged: scripts/Invoke-SimulationWorker.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Source is unchanged: scripts/Invoke-AudioWorker.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Source is unchanged: src/MusicEvents.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Source is unchanged: src/MusicPlayback.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Source is unchanged: src/AudioRunspace.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Source is unchanged: src/AudioPackets.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Source is unchanged: src/AudioMixer.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Source is unchanged: src/SimulationProcess.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Source is unchanged: scripts/Test-CampaignRecording.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Source is unchanged: scripts/Invoke-GameRenderWorker.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Source is unchanged: src/CharacterCodec.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Source is unchanged: src/GameHost.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Source is unchanged: src/SnapshotTransport.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Source is unchanged: src/ManagedDoom/Doom/Game/DoomGame.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Source is unchanged: src/ManagedDoom/Doom/Math/Geometry.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Source is unchanged: src/ManagedDoom/Doom/World/Mobj.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Source is unchanged: Start-Doom.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Source is unchanged: scripts/Invoke-Doom.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Source is unchanged: scripts/Record-DoomReplay.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Source is unchanged: scripts/Record-ProcessAudio.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Source is unchanged: scripts/Merge-DoomCaptureAudio.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Source is unchanged: src/ProcessAudioCapture.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Source is unchanged: src/CaptureClock.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Source is unchanged: src/CaptureTimeline.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Capture pins the requested IWAD, replay and music catalog",
+      "Passed": true
+    },
+    {
+      "Name": "Fresh owned window and process-scoped audio capture complete",
+      "Passed": true
+    },
+    {
+      "Name": "Original PCM and delivered movie hashes remain intact",
+      "Passed": true
+    },
+    {
+      "Name": "Mux preserves original video packet timing and compressed frames",
+      "Passed": true
+    },
+    {
+      "Name": "Full delivered audiovisual movie decodes",
+      "Passed": true
+    },
+    {
+      "Name": "Captured input recording retains all original commands and start settings",
+      "Passed": true
+    }
+  ],
+  "Meaning": "Recorded independently qualified ordinary-input level/intermission/next-level route. Caller declares expected map scores; reference checkpoints and commands are compared directly. Buffer return, starvation, canceled tails and pacing are reported rather than treated as universal performance success. No full campaign or physical listening claim.",
+  "Error": null
+}

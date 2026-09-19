@@ -1,0 +1,815 @@
+{
+  "CreatedUtc": "2026-09-19T12:22:45.6957650Z",
+  "HarnessSha256": "B2B6FEA6CFA3CFFA49438170E79A94E4BC67642E2ADF7737868076322C7202A6",
+  "Runs": [
+    {
+      "Report": "results/e1m3-matrix-second-game.json",
+      "Sha256": "A078C34FE155370E6F2944FC60D3CC9A3A3616F8D857DAC2A66314A51A74C76F",
+      "SimulationTics": 7118,
+      "CompletedFrames": 14022,
+      "ActiveSeconds": 233.6967744,
+      "WallSeconds": 236.2107517,
+      "TicsPerSecond": 30.458272341477382,
+      "WritesPerActiveSecond": 60.000828150069665,
+      "WritesPerWallSecond": 59.36224282376728,
+      "Style": "Matrix",
+      "Workers": 16,
+      "TerminalColumns": 184,
+      "TerminalRows": 60,
+      "ViewportPausedSeconds": 0.0,
+      "MapReloadPausedSeconds": 2.5140558000000017,
+      "SimulationMs": {
+        "Count": 7118,
+        "Mean": 16.902834574318568,
+        "Median": 14.488949999999999,
+        "P95": 33.6367,
+        "Max": 1593.1888
+      },
+      "SnapshotMs": {
+        "Count": 7118,
+        "Mean": 9.137207277325096,
+        "Median": 8.61345,
+        "P95": 12.9271,
+        "Max": 158.9592
+      },
+      "AutomapDiscoveryMs": {
+        "Count": 7002,
+        "Mean": 5.054566281062573,
+        "Median": 4.2752,
+        "P95": 11.4957,
+        "Max": 23.5209
+      },
+      "Windows": [
+        {
+          "Window": "EntireRoute",
+          "Frames": 14022,
+          "OutputMs": {
+            "Count": 14022,
+            "Mean": 6.606179610611898,
+            "P50": 5.959,
+            "P95": 11.6765,
+            "P99": 13.8304,
+            "Maximum": 102.4663
+          },
+          "SubmitMs": {
+            "Count": 14022,
+            "Mean": 1.0144080730281,
+            "P50": 0.914,
+            "P95": 1.2503,
+            "P99": 2.1429,
+            "Maximum": 16.2107
+          },
+          "HarvestMs": {
+            "Count": 14022,
+            "Mean": 0.9695409499358215,
+            "P50": 0.9031,
+            "P95": 1.2039,
+            "P99": 1.8298,
+            "Maximum": 18.3168
+          },
+          "LifetimeMs": {
+            "Count": 14022,
+            "Mean": 24.261096519754535,
+            "P50": 23.6313,
+            "P95": 31.7238,
+            "P99": 37.0464,
+            "Maximum": 128.8388
+          },
+          "LastWorkerFromDispatchMs": {
+            "Count": 14022,
+            "Mean": 14.067829132791312,
+            "P50": 13.8544,
+            "P95": 18.4015,
+            "P99": 20.8058,
+            "Maximum": 65.7723
+          },
+          "CompletionGapMs": {
+            "Count": 14021,
+            "Mean": 16.842077091505573,
+            "P50": 16.6561,
+            "P95": 23.6392,
+            "P99": 27.8054,
+            "Maximum": 2542.0094
+          }
+        },
+        {
+          "Window": "Tics1To1200",
+          "Frames": 2528,
+          "OutputMs": {
+            "Count": 2528,
+            "Mean": 8.052231131329128,
+            "P50": 8.1432,
+            "P95": 13.4524,
+            "P99": 17.0623,
+            "Maximum": 102.4663
+          },
+          "SubmitMs": {
+            "Count": 2528,
+            "Mean": 1.0514191455696196,
+            "P50": 0.932,
+            "P95": 1.3845,
+            "P99": 2.5801,
+            "Maximum": 11.3915
+          },
+          "HarvestMs": {
+            "Count": 2528,
+            "Mean": 1.0122335443037962,
+            "P50": 0.9355,
+            "P95": 1.2773,
+            "P99": 1.9399,
+            "Maximum": 9.7901
+          },
+          "LifetimeMs": {
+            "Count": 2528,
+            "Mean": 27.181353797468326,
+            "P50": 26.5936,
+            "P95": 35.9479,
+            "P99": 44.9962,
+            "Maximum": 128.8388
+          },
+          "LastWorkerFromDispatchMs": {
+            "Count": 2528,
+            "Mean": 15.817964200949346,
+            "P50": 15.6712,
+            "P95": 19.8493,
+            "P99": 23.2767,
+            "Maximum": 65.7723
+          },
+          "CompletionGapMs": {
+            "Count": 2528,
+            "Mean": 18.096382990506335,
+            "P50": 17.9285,
+            "P95": 25.3064,
+            "P99": 29.7582,
+            "Maximum": 108.5483
+          }
+        },
+        {
+          "Window": "Tics1201To2400",
+          "Frames": 2458,
+          "OutputMs": {
+            "Count": 2458,
+            "Mean": 6.248795280716025,
+            "P50": 5.7923,
+            "P95": 10.7827,
+            "P99": 12.0915,
+            "Maximum": 14.1305
+          },
+          "SubmitMs": {
+            "Count": 2458,
+            "Mean": 1.0064287632221298,
+            "P50": 0.9137,
+            "P95": 1.2656,
+            "P99": 2.0977,
+            "Maximum": 3.956
+          },
+          "HarvestMs": {
+            "Count": 2458,
+            "Mean": 0.9530430838079769,
+            "P50": 0.9013,
+            "P95": 1.1595,
+            "P99": 1.8331,
+            "Maximum": 4.6923
+          },
+          "LifetimeMs": {
+            "Count": 2458,
+            "Mean": 22.480916273393024,
+            "P50": 21.9632,
+            "P95": 29.096,
+            "P99": 32.5162,
+            "Maximum": 36.5881
+          },
+          "LastWorkerFromDispatchMs": {
+            "Count": 2458,
+            "Mean": 12.837161757526427,
+            "P50": 12.4472,
+            "P95": 16.462,
+            "P99": 18.3216,
+            "Maximum": 21.4154
+          },
+          "CompletionGapMs": {
+            "Count": 2458,
+            "Mean": 15.247633401139145,
+            "P50": 15.3232,
+            "P95": 20.9386,
+            "P99": 24.0439,
+            "Maximum": 28.9659
+          }
+        },
+        {
+          "Window": "Tics2401To3600",
+          "Frames": 2390,
+          "OutputMs": {
+            "Count": 2390,
+            "Mean": 6.547252050209214,
+            "P50": 5.9633,
+            "P95": 11.2716,
+            "P99": 12.3866,
+            "Maximum": 14.5302
+          },
+          "SubmitMs": {
+            "Count": 2390,
+            "Mean": 0.9908034309623438,
+            "P50": 0.9076,
+            "P95": 1.2074,
+            "P99": 1.9011,
+            "Maximum": 4.0708
+          },
+          "HarvestMs": {
+            "Count": 2390,
+            "Mean": 0.9481266945606674,
+            "P50": 0.8985,
+            "P95": 1.1454,
+            "P99": 1.749,
+            "Maximum": 4.6157
+          },
+          "LifetimeMs": {
+            "Count": 2390,
+            "Mean": 24.098193263598315,
+            "P50": 23.832,
+            "P95": 30.1701,
+            "P99": 33.6147,
+            "Maximum": 57.1825
+          },
+          "LastWorkerFromDispatchMs": {
+            "Count": 2390,
+            "Mean": 14.387278451882862,
+            "P50": 13.9765,
+            "P95": 18.2619,
+            "P99": 19.7108,
+            "Maximum": 42.1447
+          },
+          "CompletionGapMs": {
+            "Count": 2390,
+            "Mean": 16.578719539748942,
+            "P50": 16.578,
+            "P95": 23.3769,
+            "P99": 27.3079,
+            "Maximum": 47.6155
+          }
+        },
+        {
+          "Window": "Tics3601To4800",
+          "Frames": 2035,
+          "OutputMs": {
+            "Count": 2035,
+            "Mean": 5.911464815724802,
+            "P50": 4.9901,
+            "P95": 11.7975,
+            "P99": 13.7031,
+            "Maximum": 15.8517
+          },
+          "SubmitMs": {
+            "Count": 2035,
+            "Mean": 0.998363046683046,
+            "P50": 0.9095,
+            "P95": 1.1892,
+            "P99": 1.8649,
+            "Maximum": 6.8667
+          },
+          "HarvestMs": {
+            "Count": 2035,
+            "Mean": 0.953987960687962,
+            "P50": 0.899,
+            "P95": 1.1787,
+            "P99": 1.7972,
+            "Maximum": 2.2772
+          },
+          "LifetimeMs": {
+            "Count": 2035,
+            "Mean": 23.674242063882048,
+            "P50": 22.848,
+            "P95": 31.7008,
+            "P99": 35.5716,
+            "Maximum": 37.2418
+          },
+          "LastWorkerFromDispatchMs": {
+            "Count": 2035,
+            "Mean": 14.314637690417687,
+            "P50": 14.1677,
+            "P95": 18.2237,
+            "P99": 20.0317,
+            "Maximum": 23.3826
+          },
+          "CompletionGapMs": {
+            "Count": 2035,
+            "Mean": 16.7891366093366,
+            "P50": 16.8998,
+            "P95": 23.5302,
+            "P99": 26.4855,
+            "Maximum": 30.9975
+          }
+        },
+        {
+          "Window": "Tics4801To6000",
+          "Frames": 2226,
+          "OutputMs": {
+            "Count": 2226,
+            "Mean": 6.144938858939792,
+            "P50": 5.4935,
+            "P95": 10.8426,
+            "P99": 11.7455,
+            "Maximum": 13.9785
+          },
+          "SubmitMs": {
+            "Count": 2226,
+            "Mean": 0.985589667565139,
+            "P50": 0.9086,
+            "P95": 1.184,
+            "P99": 1.8533,
+            "Maximum": 5.8147
+          },
+          "HarvestMs": {
+            "Count": 2226,
+            "Mean": 0.9583192273135674,
+            "P50": 0.8987,
+            "P95": 1.1716,
+            "P99": 1.8168,
+            "Maximum": 5.4339
+          },
+          "LifetimeMs": {
+            "Count": 2226,
+            "Mean": 23.75317704402516,
+            "P50": 23.2925,
+            "P95": 29.2286,
+            "P99": 32.0731,
+            "Maximum": 44.5676
+          },
+          "LastWorkerFromDispatchMs": {
+            "Count": 2226,
+            "Mean": 13.88654182389936,
+            "P50": 13.6588,
+            "P95": 17.099,
+            "P99": 19.2681,
+            "Maximum": 37.406
+          },
+          "CompletionGapMs": {
+            "Count": 2226,
+            "Mean": 16.64823526504939,
+            "P50": 16.7967,
+            "P95": 22.9572,
+            "P99": 25.5555,
+            "Maximum": 40.9299
+          }
+        },
+        {
+          "Window": "Tics6001To7118",
+          "Frames": 2381,
+          "OutputMs": {
+            "Count": 2381,
+            "Mean": 6.513377992440167,
+            "P50": 6.1654,
+            "P95": 10.9698,
+            "P99": 12.5962,
+            "Maximum": 29.2113
+          },
+          "SubmitMs": {
+            "Count": 2381,
+            "Mean": 1.0441337253254939,
+            "P50": 0.9207,
+            "P95": 1.3031,
+            "P99": 2.4663,
+            "Maximum": 16.2107
+          },
+          "HarvestMs": {
+            "Count": 2381,
+            "Mean": 0.9857597228055442,
+            "P50": 0.8991,
+            "P95": 1.2048,
+            "P99": 1.865,
+            "Maximum": 18.3168
+          },
+          "LifetimeMs": {
+            "Count": 2381,
+            "Mean": 24.09267471650568,
+            "P50": 23.7599,
+            "P95": 30.985,
+            "P99": 37.0448,
+            "Maximum": 70.253
+          },
+          "LastWorkerFromDispatchMs": {
+            "Count": 2381,
+            "Mean": 13.090282528349437,
+            "P50": 13.3132,
+            "P95": 19.1211,
+            "P99": 21.7687,
+            "Maximum": 41.0726
+          },
+          "CompletionGapMs": {
+            "Count": 2381,
+            "Mean": 17.62179706005878,
+            "P50": 16.3749,
+            "P95": 24.1674,
+            "P99": 29.4976,
+            "Maximum": 2542.0094
+          }
+        }
+      ]
+    },
+    {
+      "Report": "results/e1m3-matrix-third-game.json",
+      "Sha256": "05E6603A887B9A5E2406FADA55B9E248DFDA6CF9B3BE63C9D87CBA7D8B18BAB4",
+      "SimulationTics": 7118,
+      "CompletedFrames": 11387,
+      "ActiveSeconds": 237.4029417,
+      "WallSeconds": 240.0070704,
+      "TicsPerSecond": 29.982779274044688,
+      "WritesPerActiveSecond": 47.96486479257472,
+      "WritesPerWallSecond": 47.44443562025996,
+      "Style": "Matrix",
+      "Workers": 16,
+      "TerminalColumns": 184,
+      "TerminalRows": 60,
+      "ViewportPausedSeconds": 0.0,
+      "MapReloadPausedSeconds": 2.604342200000014,
+      "SimulationMs": {
+        "Count": 7118,
+        "Mean": 17.206607178982832,
+        "Median": 14.562100000000001,
+        "P95": 35.4173,
+        "Max": 1591.8777
+      },
+      "SnapshotMs": {
+        "Count": 7118,
+        "Mean": 9.338342048328197,
+        "Median": 8.37945,
+        "P95": 16.4958,
+        "Max": 148.0665
+      },
+      "AutomapDiscoveryMs": {
+        "Count": 7002,
+        "Mean": 5.505940788346208,
+        "Median": 4.44605,
+        "P95": 13.2468,
+        "Max": 39.3674
+      },
+      "Windows": [
+        {
+          "Window": "EntireRoute",
+          "Frames": 11387,
+          "OutputMs": {
+            "Count": 11387,
+            "Mean": 13.081343602353547,
+            "P50": 13.0864,
+            "P95": 16.852,
+            "P99": 18.9476,
+            "Maximum": 239.9612
+          },
+          "SubmitMs": {
+            "Count": 11387,
+            "Mean": 1.4776043734082698,
+            "P50": 1.096,
+            "P95": 3.2594,
+            "P99": 9.5792,
+            "Maximum": 15.2764
+          },
+          "HarvestMs": {
+            "Count": 11387,
+            "Mean": 1.2929830771932789,
+            "P50": 1.0466,
+            "P95": 1.8861,
+            "P99": 2.4385,
+            "Maximum": 17.3976
+          },
+          "LifetimeMs": {
+            "Count": 11387,
+            "Mean": 35.38141929393159,
+            "P50": 34.7856,
+            "P95": 43.9553,
+            "P99": 48.7796,
+            "Maximum": 306.7903
+          },
+          "LastWorkerFromDispatchMs": {
+            "Count": 11387,
+            "Mean": 18.06225209449371,
+            "P50": 17.8257,
+            "P95": 24.037,
+            "P99": 27.0725,
+            "Maximum": 55.4536
+          },
+          "CompletionGapMs": {
+            "Count": 11386,
+            "Mean": 21.070912322150082,
+            "P50": 20.2929,
+            "P95": 27.0377,
+            "P99": 30.7071,
+            "Maximum": 2659.5483
+          }
+        },
+        {
+          "Window": "Tics1To1200",
+          "Frames": 1990,
+          "OutputMs": {
+            "Count": 1990,
+            "Mean": 14.236536633165832,
+            "P50": 13.9056,
+            "P95": 17.6345,
+            "P99": 21.1463,
+            "Maximum": 239.9612
+          },
+          "SubmitMs": {
+            "Count": 1990,
+            "Mean": 1.592092914572861,
+            "P50": 1.2327,
+            "P95": 2.9996,
+            "P99": 10.3207,
+            "Maximum": 12.8143
+          },
+          "HarvestMs": {
+            "Count": 1990,
+            "Mean": 1.7599425125628116,
+            "P50": 1.6977,
+            "P95": 2.0892,
+            "P99": 2.6982,
+            "Maximum": 5.8097
+          },
+          "LifetimeMs": {
+            "Count": 1990,
+            "Mean": 38.92411668341701,
+            "P50": 38.1767,
+            "P95": 45.9031,
+            "P99": 52.8141,
+            "Maximum": 306.7903
+          },
+          "LastWorkerFromDispatchMs": {
+            "Count": 1990,
+            "Mean": 19.76926341708542,
+            "P50": 19.6661,
+            "P95": 25.0308,
+            "P99": 27.7207,
+            "Maximum": 51.3092
+          },
+          "CompletionGapMs": {
+            "Count": 1990,
+            "Mean": 23.100698442211087,
+            "P50": 22.5795,
+            "P95": 28.527,
+            "P99": 32.4983,
+            "Maximum": 248.9852
+          }
+        },
+        {
+          "Window": "Tics1201To2400",
+          "Frames": 2114,
+          "OutputMs": {
+            "Count": 2114,
+            "Mean": 12.048410974456017,
+            "P50": 12.0067,
+            "P95": 15.6841,
+            "P99": 17.9463,
+            "Maximum": 25.1664
+          },
+          "SubmitMs": {
+            "Count": 2114,
+            "Mean": 1.673137228003783,
+            "P50": 1.2348,
+            "P95": 5.9961,
+            "P99": 9.214,
+            "Maximum": 10.6436
+          },
+          "HarvestMs": {
+            "Count": 2114,
+            "Mean": 1.7379328287606461,
+            "P50": 1.685,
+            "P95": 2.037,
+            "P99": 2.5363,
+            "Maximum": 3.7819
+          },
+          "LifetimeMs": {
+            "Count": 2114,
+            "Mean": 33.64201996215709,
+            "P50": 32.9917,
+            "P95": 40.9714,
+            "P99": 45.1395,
+            "Maximum": 61.4589
+          },
+          "LastWorkerFromDispatchMs": {
+            "Count": 2114,
+            "Mean": 16.879241248817383,
+            "P50": 16.5762,
+            "P95": 21.7042,
+            "P99": 24.399,
+            "Maximum": 39.7218
+          },
+          "CompletionGapMs": {
+            "Count": 2114,
+            "Mean": 19.93393065279091,
+            "P50": 19.5178,
+            "P95": 24.7421,
+            "P99": 28.9864,
+            "Maximum": 42.5572
+          }
+        },
+        {
+          "Window": "Tics2401To3600",
+          "Frames": 1721,
+          "OutputMs": {
+            "Count": 1721,
+            "Mean": 13.434839395700148,
+            "P50": 13.3259,
+            "P95": 17.5822,
+            "P99": 19.3749,
+            "Maximum": 25.7514
+          },
+          "SubmitMs": {
+            "Count": 1721,
+            "Mean": 1.5405040674026718,
+            "P50": 1.0904,
+            "P95": 4.7345,
+            "P99": 9.9691,
+            "Maximum": 11.8241
+          },
+          "HarvestMs": {
+            "Count": 1721,
+            "Mean": 1.2314266705403831,
+            "P50": 1.0109,
+            "P95": 1.8124,
+            "P99": 2.2209,
+            "Maximum": 3.2138
+          },
+          "LifetimeMs": {
+            "Count": 1721,
+            "Mean": 36.33031255084251,
+            "P50": 35.4741,
+            "P95": 45.8131,
+            "P99": 49.9202,
+            "Maximum": 76.6227
+          },
+          "LastWorkerFromDispatchMs": {
+            "Count": 1721,
+            "Mean": 18.877412144102248,
+            "P50": 18.3751,
+            "P95": 25.2623,
+            "P99": 27.4693,
+            "Maximum": 47.9792
+          },
+          "CompletionGapMs": {
+            "Count": 1721,
+            "Mean": 21.38229436374196,
+            "P50": 20.8415,
+            "P95": 28.0784,
+            "P99": 31.0665,
+            "Maximum": 63.3257
+          }
+        },
+        {
+          "Window": "Tics3601To4800",
+          "Frames": 1664,
+          "OutputMs": {
+            "Count": 1664,
+            "Mean": 13.558224278846147,
+            "P50": 13.6172,
+            "P95": 16.9388,
+            "P99": 18.3875,
+            "Maximum": 22.9118
+          },
+          "SubmitMs": {
+            "Count": 1664,
+            "Mean": 1.3126460937500006,
+            "P50": 0.9266,
+            "P95": 2.2506,
+            "P99": 9.4746,
+            "Maximum": 15.2764
+          },
+          "HarvestMs": {
+            "Count": 1664,
+            "Mean": 0.9569124399038463,
+            "P50": 0.9031,
+            "P95": 1.2024,
+            "P99": 1.8,
+            "Maximum": 2.331
+          },
+          "LifetimeMs": {
+            "Count": 1664,
+            "Mean": 35.66065036057688,
+            "P50": 35.4389,
+            "P95": 43.6383,
+            "P99": 47.2345,
+            "Maximum": 51.7266
+          },
+          "LastWorkerFromDispatchMs": {
+            "Count": 1664,
+            "Mean": 18.6130405048077,
+            "P50": 18.4339,
+            "P95": 24.1668,
+            "P99": 26.7993,
+            "Maximum": 32.3207
+          },
+          "CompletionGapMs": {
+            "Count": 1664,
+            "Mean": 20.816738161057724,
+            "P50": 20.4968,
+            "P95": 26.5207,
+            "P99": 29.622,
+            "Maximum": 35.3214
+          }
+        },
+        {
+          "Window": "Tics4801To6000",
+          "Frames": 1849,
+          "OutputMs": {
+            "Count": 1849,
+            "Mean": 13.288056787452655,
+            "P50": 13.4079,
+            "P95": 15.9873,
+            "P99": 17.4208,
+            "Maximum": 23.2088
+          },
+          "SubmitMs": {
+            "Count": 1849,
+            "Mean": 1.3797500270416463,
+            "P50": 0.9377,
+            "P95": 2.6243,
+            "P99": 9.7978,
+            "Maximum": 11.9348
+          },
+          "HarvestMs": {
+            "Count": 1849,
+            "Mean": 0.967124770146027,
+            "P50": 0.9023,
+            "P95": 1.2372,
+            "P99": 1.8174,
+            "Maximum": 4.2843
+          },
+          "LifetimeMs": {
+            "Count": 1849,
+            "Mean": 35.02807301243914,
+            "P50": 34.7772,
+            "P95": 40.8083,
+            "P99": 46.1779,
+            "Maximum": 57.596
+          },
+          "LastWorkerFromDispatchMs": {
+            "Count": 1849,
+            "Mean": 18.104187993509992,
+            "P50": 17.8988,
+            "P95": 22.3538,
+            "P99": 25.7687,
+            "Maximum": 40.6307
+          },
+          "CompletionGapMs": {
+            "Count": 1849,
+            "Mean": 20.38590659816117,
+            "P50": 20.1323,
+            "P95": 24.9118,
+            "P99": 28.6506,
+            "Maximum": 40.6408
+          }
+        },
+        {
+          "Window": "Tics6001To7118",
+          "Frames": 2046,
+          "OutputMs": {
+            "Count": 2046,
+            "Mean": 12.132165835777132,
+            "P50": 12.3458,
+            "P95": 16.0735,
+            "P99": 18.7878,
+            "Maximum": 200.4963
+          },
+          "SubmitMs": {
+            "Count": 2046,
+            "Mean": 1.3315036656891506,
+            "P50": 0.9694,
+            "P95": 3.2379,
+            "P99": 8.6192,
+            "Maximum": 10.3675
+          },
+          "HarvestMs": {
+            "Count": 2046,
+            "Mean": 0.9974023460410566,
+            "P50": 0.9073,
+            "P95": 1.2683,
+            "P99": 1.9201,
+            "Maximum": 17.3976
+          },
+          "LifetimeMs": {
+            "Count": 2046,
+            "Mean": 32.96899633431094,
+            "P50": 32.647,
+            "P95": 42.0737,
+            "P99": 48.1242,
+            "Maximum": 219.3972
+          },
+          "LastWorkerFromDispatchMs": {
+            "Count": 2046,
+            "Mean": 16.425271016617806,
+            "P50": 16.5371,
+            "P95": 23.2163,
+            "P99": 27.7724,
+            "Maximum": 55.4536
+          },
+          "CompletionGapMs": {
+            "Count": 2046,
+            "Mean": 20.81270322580648,
+            "P50": 18.868,
+            "P95": 26.4497,
+            "P99": 31.542,
+            "Maximum": 2659.5483
+          }
+        }
+      ]
+    }
+  ],
+  "Meaning": "Descriptive comparison of retained recorded runs, not a controlled paired benchmark or displayed-FPS measurement. All frames retained in EntireRoute, including initial work and transition gaps. Tic windows select completed frame snapshots; output samples need not represent identical interpolated images. Completion gaps use monotonic QPC and include loading. Frame lifetimes and worker delays overlap pipelined output; do not add these means. No cause is established by correlation."
+}

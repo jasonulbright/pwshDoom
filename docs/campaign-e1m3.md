@@ -21,6 +21,8 @@ The September 19 Matrix recording failed with a full input-command ring after ab
 
 After shared snapshots and [numeric visibility calculations](numeric-visibility.md), the second Matrix recording completes all 7,118 commands and 24 original checkpoints through E1M4 at 30.458 ticks/sec. Its audiovisual qualification fails because 23 audio packets remain queued and four device buffers are cancelled at shutdown. This is recorded gameplay completion with an identified audio-tail defect, not an audio or 35/60 pass.
 
+The third recorded Matrix run passes all 47 integration checks after the [bounded shutdown drain](audio-shutdown.md) repair. All 7,118 commands, 24 checkpoints and 8,968,680 returned audio frames match the required accounting; score transitions and full movie decoding pass. Current source pins/input fingerprints match. The recording averages 29.983 simulation tics and 47.965 console writes/sec, with 77 pre-final audio queue-empty observations. This qualifies the recorded route and digital completion, not sustained 35/60, uninterrupted sound, acoustic fidelity or the untested secret route. Transition images were inspected: E1M4 and katakana are visible; intermission contrast still needs work. Portable receipts are `results/e1m3-matrix-third-*`; original media remain local.
+
 Reproduce with fresh paths and PowerShell 7 (or supply another user-local IWAD with `-Wad`):
 
 ```powershell

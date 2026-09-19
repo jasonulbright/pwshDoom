@@ -16,7 +16,7 @@ The integrated host also loads an intermission save, advances to E1M2, then load
 | --- | --- | --- | --- |
 | E1M1 | Pass | Pass, HMP | Pass: real intermission -> E1M2 |
 | E1M2 | Pass | Pass, HMP pistol start, normal exit | Pass: recorded AnsiArt intermission -> E1M3, 13 matching checkpoints |
-| E1M3 | Pass | Pass, HMP pistol start, normal exit; [evidence](campaign-e1m3.md) | Headless intermission -> E1M4 passes 198 samples/24 checkpoints; terminal host untested |
+| E1M3 | Pass | Pass, HMP pistol start, normal exit; [evidence](campaign-e1m3.md) | Recorded Matrix intermission -> E1M4 passes 24 checkpoints and all audio frames; 47 integration checks. Pacing/queue starvation remain open |
 | E1M4 | Pass | Untested | Untested in terminal host |
 | E1M5 | Pass | Untested | Untested in terminal host |
 | E1M6 | Pass | Untested | Untested in terminal host |
@@ -53,7 +53,7 @@ The integrated host also loads an intermission save, advances to E1M2, then load
 
 ## Current blockers and next work
 
-- [Recorded terminal session](../results/session-recorded-classic-game.json) verifies E1M1 intermission -> E1M2 and map-asset generation refresh. The [E1M2 route](campaign-e1m2.md) completes normally with 3,046 commands and independently continues into E1M3. Recorded AnsiArt playback passes all 42 integration checks after fixing an audio queue overflow. E1M3 normal/secret completion is next; audio starvation and below-target pacing remain open.
+- [Recorded terminal session](../results/session-recorded-classic-game.json) verifies E1M1 intermission -> E1M2 and map-asset generation refresh. The [E1M2 route](campaign-e1m2.md) completes normally with 3,046 commands and independently continues into E1M3. Recorded AnsiArt playback passes all 42 integration checks after fixing an audio queue overflow. E1M3 normal completion and recorded Matrix entry into E1M4 now pass; secret paths, audio starvation and below-target pacing remain open.
 - Isolated controller fixtures verify episode finales, all four secret returns, par units, secret-visit history, inventory carryover and death/respawn. See results/campaign-transitions-session.json. Fixtures do not qualify map playthroughs or boss-triggered exits.
 - Add ordinary-input recording and completion routes for the remaining maps, including normal/secret paths and boss-triggered effects. Keep targeted state fixtures separate from playthrough evidence.
 - Save/load has the bounded coverage above. Physical controls, audio, automap, harder scenes, visual fidelity, other difficulties, and 1080p hardware still need their own validation.
@@ -71,4 +71,4 @@ host restart/recovery coverage. Replays bypass preference-based command generati
 three settings-menu recordings preserve the existing control fixture checkpoints.
 This UI work adds no map completion to the matrix. See [settings](settings.md).
 
-Music integration currently has E1M1, E1M2, intermission, E1M3 and E1M4 qualified loops; E1M4 passes six offline reader checks but has not yet run in the full host. E1M1's requalification preserves prior samples; the three longer tracks each pass six actual reader checks. The 1,747-command/eight-checkpoint E1M1 route passes with music and recorded audio in Matrix/color-art, including the block intermission UI. The longer E1M2 route now completes with all 4,073,580 audio frames returned. Queue starvation remains an open timing issue. See [E1M2 qualification](campaign-e1m2.md), [campaign music](campaign-music.md), [preparation](music-preparation.md) and [audiovisual capture evidence](audiovisual-recording.md).
+Music integration currently has E1M1, E1M2, intermission, E1M3, E1M4 and E1M9 qualified dry loops. E1M4 now plays in the recorded host after E1M3; E1M9's campaign route remains unqualified. E1M1's requalification preserves prior samples; the three longer tracks each pass six actual reader checks. The 1,747-command/eight-checkpoint E1M1 route passes with music and recorded audio in Matrix/color-art, including the block intermission UI. The longer E1M2 route completes with all 4,073,580 audio frames returned; the third E1M3 recording returns all 8,968,680 frames after the bounded shutdown repair. Queue starvation remains an open timing issue. See [E1M2 qualification](campaign-e1m2.md), [E1M3 qualification](campaign-e1m3.md), [campaign music](campaign-music.md), [preparation](music-preparation.md) and [audiovisual capture evidence](audiovisual-recording.md).

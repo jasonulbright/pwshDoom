@@ -1,6 +1,6 @@
 #requires -Version 7.4
 # SPDX-License-Identifier: GPL-2.0-or-later
-param([Parameter(Mandatory)][string]$Output,
+param([Parameter(Mandatory)][string]$Output,[switch]$DrainOnClose,
     [string]$Wad='C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\base\DOOM.WAD')
 $ErrorActionPreference='Stop'
 if(Test-Path -LiteralPath $Output){throw 'Use a fresh report path.'}
@@ -40,16 +40,17 @@ try{
     }
     Check 'Second burst reaches the exact final command' ($simulation.View.ReadInt32(20) -eq 300)
     # A bounded tail allows the 31-packet reserve and device buffers to return.
-    [Threading.Thread]::Sleep(2000)
+    if(-not $DrainOnClose){[Threading.Thread]::Sleep(2000)}
 }catch{$failure=$_.ToString()+"`n"+$_.ScriptStackTrace}finally{
-    if($null -ne $simulation){Close-DoomSimulation $simulation;if(Test-Path $simulation.Report){$report=Get-Content $simulation.Report -Raw|ConvertFrom-Json}}
+    if($null -ne $simulation){Close-DoomSimulation $simulation -DrainAudio:($DrainOnClose -and -not $failure);if(Test-Path $simulation.Report){$report=Get-Content $simulation.Report -Raw|ConvertFrom-Json}}
     if(-not $failure){try{
         Check 'Simulation and audio close without error' (-not $report.Error -and -not $report.Audio.Error -and -not $report.Audio.CleanupError -and $report.Audio.DeviceClosed)
         Check 'Actual queue pressure was exercised and stayed bounded' ($report.AudioBackpressure.Count -gt 0 -and $report.Audio.MaxPacketQueue -eq 31 -and $report.IncompleteAudioBackpressureStartQpc -eq 0)
         Check 'Every ordinary command survives the two bursts unchanged' ($report.InputCommands.Count -eq 300 -and @($report.InputCommands|Where-Object {($_ -join ',') -cne '0,0,0,0'}).Count -eq 0)
         Check 'All ordered audio packets are consumed and returned' ($report.Audio.Packets -eq 300 -and $report.Audio.LastSequence -eq 299 -and $report.Audio.UnconsumedPackets -eq 0 -and $report.Audio.StalePacketsDiscarded -eq 0 -and $report.Audio.SubmittedFrames -eq 378000 -and $report.Audio.ReturnedCompletedFrames -eq 378000 -and $report.Audio.CancelledQueuedFramesUpperBound -eq 0)
+        if($DrainOnClose){Check 'Shutdown drains an actually pending queue through the exact final packet' ($report.ShutdownAudioDrain.PendingPacketsBefore -gt 0 -and $report.ShutdownAudioDrain.ThroughSequence -eq 299 -and $report.ShutdownAudioDrain.CompletedFrames -eq 378000)}
     }catch{$failure=$_.ToString()+"`n"+$_.ScriptStackTrace}}
-    @{Error=$failure;Checks=$checks.ToArray();Actions=$actions.ToArray();Simulation=$report;WadSha256=(Get-FileHash $Wad).Hash;HarnessSha256=(Get-FileHash $PSCommandPath).Hash;WorkerSha256=(Get-FileHash "$PSScriptRoot/Invoke-SimulationWorker.ps1").Hash;Meaning='Two unpaced 150-command bursts through the real simulation and audio device with menu/resume between them. No terminal renderer or live effect window. Bounded-queue/control regression, not a gameplay pacing or physical listening qualification.'}|ConvertTo-Json -Depth 12|Set-Content $Output
+    @{Error=$failure;DrainOnClose=[bool]$DrainOnClose;Checks=$checks.ToArray();Actions=$actions.ToArray();Simulation=$report;WadSha256=(Get-FileHash $Wad).Hash;HarnessSha256=(Get-FileHash $PSCommandPath).Hash;WorkerSha256=(Get-FileHash "$PSScriptRoot/Invoke-SimulationWorker.ps1").Hash;Meaning='Two unpaced 150-command bursts through the real simulation and audio device with menu/resume between them. DrainOnClose removes the artificial two-second tail sleep and requests actual bounded shutdown draining. No terminal renderer or live effect window. Bounded-queue/control regression, not a gameplay pacing or physical listening qualification.'}|ConvertTo-Json -Depth 12|Set-Content $Output
 }
 if($failure){throw $failure}
 "PASS: $($checks.Count) audio backpressure checks."
