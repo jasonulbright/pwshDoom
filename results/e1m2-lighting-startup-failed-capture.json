@@ -1,0 +1,101 @@
+{
+  "Meaning": "Actual game-window Windows.Graphics.Capture at the recorded capture ceiling, with D3D11 frames passed to external NVENC H.264 encoding. The ceiling exceeds 60 to avoid capture-rate aliasing; actual arrival rate is compositor-driven. Output is resampled to 60 FPS and can contain duplicates. Video includes startup and a short console return. Recording can affect game/presentation timing; encoded 60 FPS does not prove 60 distinct displayed game images. No microphone or desktop audio is captured. The input selects only the game window; inspect footage for occlusion or capture artifacts.",
+  "FontSize": 6,
+  "ReplaySha256": "F0DB742A0C1118ED3362C2F9E5E2185238E57F42ABB04AD27375018C4A12CE65",
+  "GlyphSet": "Katakana",
+  "Sources": [
+    {
+      "Path": "Start-Doom.ps1",
+      "Sha256": "3EC570EDED87DA4C7316B3CB2F567F580571BF2E6D10BF696DCC4D95D5C147EC"
+    },
+    {
+      "Path": "scripts/Invoke-Doom.ps1",
+      "Sha256": "D82E1CE6373C25C7386816BAFA03DEB732E12B81B0C70FFDEC240988F9F9FC32"
+    },
+    {
+      "Path": "scripts/Record-DoomReplay.ps1",
+      "Sha256": "0002BBEE8688EF0AE9C772166447307F4DB63D24942FCA1205B2BE403D87A5CC"
+    },
+    {
+      "Path": "scripts/Record-ProcessAudio.ps1",
+      "Sha256": "F50876284D3E3958F2183CB483F13179FABAF45B87B8BCC221BA7F7113EF38CD"
+    },
+    {
+      "Path": "scripts/Merge-DoomCaptureAudio.ps1",
+      "Sha256": "795D02E96FFC3373741E7970512D1D65CC777A43B834D5771F69EC81CF3AF2C4"
+    },
+    {
+      "Path": "src/ProcessAudioCapture.ps1",
+      "Sha256": "A747786A2428F71C907F86AD631983548AAE8C6450F422F64144D367B8E9E321"
+    },
+    {
+      "Path": "src/CaptureClock.ps1",
+      "Sha256": "CED03D531F7C129D9E079F1F3B548DD436EFD81782974A3752D4689FA3E45DFB"
+    },
+    {
+      "Path": "src/CaptureTimeline.ps1",
+      "Sha256": "EFA64468F234327E5D7682CE08FF5B8863EEEFC5D5B082DB9B74BE544D092E21"
+    }
+  ],
+  "EncoderExitCode": 0,
+  "ClockReport": "C:\\projects\\pwshDoom\\local\\recordings\\e1m2-classic-lighting-clock.json",
+  "WindowHandle": 11601318,
+  "MusicCatalogSha256": "6E1B3C7C1FE7F76DA58F638D809D7D1CFD2CD5F39E9481359D4C2FE49659C56D",
+  "AudioReport": "C:\\projects\\pwshDoom\\local\\recordings\\e1m2-classic-lighting-audio.json",
+  "MediaFfmpeg": "local/tools/ffmpeg/ffmpeg-9.0.1-essentials_build/bin/ffmpeg.exe",
+  "FontFace": "Cascadia Mono",
+  "Error": "Game did not reach the capture startup gate.",
+  "Style": "Classic",
+  "AudioExitCode": null,
+  "SessionScheduleSha256": null,
+  "PreexistingTerminalWindows": 0,
+  "VideoFps": 60,
+  "TargetWasPreexisting": false,
+  "SourcesChangedDuringRun": [],
+  "CaptureStartQpc": 635604817102,
+  "VideoSha256": "FC5CB71DAB4B89E52F53E46BAD3C17C9090566E5AE28F5AAB66ACB857AB2B521",
+  "Maximized": true,
+  "QpcFrequency": 10000000,
+  "MediaFfmpegSha256": "72A489ECCD008C2EC2C0A5856C5C75BC3D8BBFA90166C4566865C246445E6AA3",
+  "TerminalPid": 18640,
+  "ExpectedExit": "ReplayEnd",
+  "CaptureDeadlineSeconds": 375,
+  "CaptureLimit": 240,
+  "SoundRequested": true,
+  "Arguments": [
+    "-hide_banner",
+    "-n",
+    "-filter_complex",
+    "gfxcapture=hwnd=11601318:max_framerate=240:capture_cursor=0:display_border=1:width=-2:height=-2",
+    "-an",
+    "-c:v",
+    "h264_nvenc",
+    "-preset",
+    "p4",
+    "-cq",
+    "18",
+    "-b:v",
+    "0",
+    "-r",
+    "60",
+    "-fps_mode",
+    "cfr",
+    "-movflags",
+    "+faststart",
+    "-t",
+    "375",
+    "C:\\projects\\pwshDoom\\local\\recordings\\e1m2-classic-lighting.mp4"
+  ],
+  "Video": "C:\\projects\\pwshDoom\\local\\recordings\\e1m2-classic-lighting.mp4",
+  "FfmpegSha256": "BD59EE9D861A9531AC289A8D9C0A02B8166A215A47D882605E372845324A1863",
+  "SaveRoot": "",
+  "InputReplaySha256": "144194E19ECF6AB3122C97C9CA4E2C4776257A18BD69DA076C684863B1776098",
+  "Ffmpeg": "local/tools/capture-build/FFmpeg-n9.0.1/ffmpeg.exe",
+  "GameReport": "C:\\projects\\pwshDoom\\local\\recordings\\e1m2-classic-lighting-game.json",
+  "FinishedUtc": "2026-09-19T14:30:11.6132104Z",
+  "AudioCaptureRequested": true,
+  "StartupTimeoutSeconds": 180,
+  "ExitDelaySeconds": 3,
+  "CaptureBackend": "GraphicsCapture",
+  "AudioCaptured": false
+}

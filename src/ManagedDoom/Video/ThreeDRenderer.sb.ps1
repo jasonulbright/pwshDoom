@@ -1531,9 +1531,9 @@ class ThreeDRenderer {
         [uint32] $rwCenterAngleData = $rwCenterAngle.Data
 
         $wallLightLevel = ($frontSector.LightLevel -shr [ThreeDRenderer]::lightSegShift) + $this.extraLight
-        if ($seg.Vertex1.Y -eq $seg.Vertex2.Y) {
+        if ($seg.Vertex1.Y.Data -eq $seg.Vertex2.Y.Data) {
             $wallLightLevel--
-        } elseif ($seg.Vertex1.X -eq $seg.Vertex2.X) {
+        } elseif ($seg.Vertex1.X.Data -eq $seg.Vertex2.X.Data) {
             $wallLightLevel++
         }
 
@@ -1874,9 +1874,9 @@ class ThreeDRenderer {
             $rwCenterAngleData = $rwCenterAngle.Data
 
             $wallLightLevel = ($frontSector.LightLevel -shr [ThreeDRenderer]::lightSegShift) + $this.extraLight
-            if ($seg.Vertex1.Y -eq $seg.Vertex2.Y) {
+            if ($seg.Vertex1.Y.Data -eq $seg.Vertex2.Y.Data) {
                 $wallLightLevel--
-            } elseif ($seg.Vertex1.X -eq $seg.Vertex2.X) {
+            } elseif ($seg.Vertex1.X.Data -eq $seg.Vertex2.X.Data) {
                 $wallLightLevel++
             }
 
@@ -2236,9 +2236,9 @@ class ThreeDRenderer {
         $localClipData = $this.clipData
 
         $wallLightLevel = ($seg.FrontSector.LightLevel -shr [ThreeDRenderer]::lightSegShift) + $this.extraLight
-        if ($seg.Vertex1.Y -eq $seg.Vertex2.Y) {
+        if ($seg.Vertex1.Y.Data -eq $seg.Vertex2.Y.Data) {
             $wallLightLevel--
-        } elseif ($seg.Vertex1.X -eq $seg.Vertex2.X) {
+        } elseif ($seg.Vertex1.X.Data -eq $seg.Vertex2.X.Data) {
             $wallLightLevel++
         }
 

@@ -124,3 +124,13 @@ Modifications, 2026-09-19 (numeric movement gates):
   all 36 map starts also match with pixels/counters/other flags untouched.
   See `docs/automap-discovery-performance.md`, including the rejected slower
   dictionary experiment and separate loaded-host performance boundary.
+
+- `ThreeDRenderer` wall-light selection: six coordinate equality expressions
+  in solid, pass-wall and masked-wall rendering now compare Fixed.Data values.
+  PowerShell object equality skipped intended horizontal/vertical contrast for
+  equal coordinates stored in distinct Fixed objects. The explicit numeric
+  comparisons restore the existing algorithm's intended behavior, confirmed
+  against id Software's r_segs.c and a live equality reproduction. All 144
+  previous all-map discovery cases remain identical. See
+  `docs/rendering-fidelity.md`; the adopted reference itself is not assumed
+  infallible or equivalent to original-executable output.

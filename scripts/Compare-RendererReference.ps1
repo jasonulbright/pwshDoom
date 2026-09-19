@@ -5,6 +5,7 @@ param(
     [ValidateRange(1,4)][int]$Episode=1,[ValidateRange(1,9)][int]$Map=1,
     [int[]]$Angles=@(0,90,180),
     [ValidateRange(0,32)][int]$FixedColorMap=0,
+    [string]$Renderer="$PSScriptRoot/../src/FastRenderer.ps1",
     [Parameter(Mandatory)][string]$Images,
     [Parameter(Mandatory)][string]$Output
 )
@@ -12,9 +13,10 @@ $ErrorActionPreference='Stop'
 if((Test-Path -LiteralPath $Output) -or (Test-Path -LiteralPath $Images)){throw 'Use fresh report and image directory paths.'}
 $null=New-Item -ItemType Directory -Path $Images
 $bundle=& "$PSScriptRoot/Build-EngineBundle.ps1";. $bundle
-. "$PSScriptRoot/../src/FastRenderer.ps1";. "$PSScriptRoot/../src/GameHost.ps1"
+. $Renderer;. "$PSScriptRoot/../src/GameHost.ps1"
 Add-Type -AssemblyName System.Drawing
-$sources=@('scripts/Compare-RendererReference.ps1','src/FastRenderer.ps1','src/GameHost.ps1'|ForEach-Object {@{Path=$_;Sha256=(Get-FileHash "$PSScriptRoot/../$_").Hash}})
+$rendererRelative=[IO.Path]::GetRelativePath([IO.Path]::GetFullPath("$PSScriptRoot/.."),[IO.Path]::GetFullPath($Renderer)).Replace('\','/')
+$sources=@('scripts/Compare-RendererReference.ps1',$rendererRelative,'src/GameHost.ps1','src/RenderLighting.ps1'|ForEach-Object {@{Path=$_;Sha256=(Get-FileHash "$PSScriptRoot/../$_").Hash}})
 $content=$null;$failure=$null;$views=[Collections.Generic.List[object]]::new()
 function PixelHash([byte[]]$Pixels){[Convert]::ToHexString([Security.Cryptography.SHA256]::HashData($Pixels))}
 try{

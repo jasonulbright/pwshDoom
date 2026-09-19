@@ -3,6 +3,8 @@
 # Uses the adopted GPL Doom data model; see ManagedDoom/ORIGIN.md for attribution.
 Set-StrictMode -Version Latest
 
+. "$PSScriptRoot/RenderLighting.ps1"
+
 function ConvertTo-RenderPatch {
     param($Patch)
     $data=[int[]]::new($Patch.Width*$Patch.Height)
@@ -28,7 +30,7 @@ function Get-RenderPatch {
 function New-FastRenderContext {
     param($Content,$World)
     $map=$World.Map
-    $ctx=@{Content=$Content;World=$World;Pixels=[byte[]]::new(64000);Depth=[double[]]::new(64000);
+    $ctx=@{Content=$Content;World=$World;Lighting=(New-FastLightingTables);Pixels=[byte[]]::new(64000);Depth=[double[]]::new(64000);
         TopClip=[int[]]::new(320);BottomClip=[int[]]::new(320);Planes=[int[]]::new(53760);Patches=@{};Textures=@{};Hud=@{};
         Stack=[int[]]::new($map.Nodes.Length*2+4);Segments=[object[]]::new($map.Segs.Length);
         Nodes=[object[]]::new($map.Nodes.Length);Subsectors=$map.Subsectors;
@@ -190,7 +192,9 @@ function Invoke-FastRender {
             [bool]$isSky=$front.CeilingFlat -eq $Context.SkyFlat
             [bool]$joinedSky=$isSky -and -not $solid -and $back.CeilingFlat -eq $Context.SkyFlat
             if($joinedSky){$ch=$bc}
-            [int]$baseLight=[Math]::Max([double]0,[double]((255-$front.LightLevel)/8-($player.ExtraLight*2)))
+            [int]$contrast=if($seg.AY -eq $seg.BY){-1}elseif($seg.AX -eq $seg.BX){1}else{0}
+            [int]$baseLight=[Math]::Clamp(($front.LightLevel -shr 4)+$player.ExtraLight+$contrast,0,15)
+            [int[]]$wallLightTable=$Context.Lighting.Scale[$baseLight]
             [double]$iz1=1/$z1;[double]$iz2=1/$z2;[double]$uz1=$u1/$z1;[double]$uz2=$u2/$z2
             for([int]$x=$x0;$x -lt $x1;$x++) {
                 [int]$clipT=$topClip[$x];[int]$clipB=$bottomClip[$x];if($clipT -gt $clipB){continue}
@@ -214,7 +218,7 @@ function Invoke-FastRender {
                 }
                 [int]$portalT=[Math]::Ceiling(84-160*($bc-$cz)/$distance-0.5)
                 [int]$portalB=[Math]::Floor(84-160*($bf-$cz)/$distance-0.5)
-                [int]$wallLight=[Math]::Min(31,$baseLight+[int]($distance/256))
+                [int]$wallLight=$wallLightTable[[Math]::Min(47,[int][Math]::Floor(2560.0/$distance))]
                 if($player.FixedColorMap -gt 0){$wallLight=$player.FixedColorMap}
                 [byte[]]$wallColors=$Context.Colors[$wallLight]
                 for([int]$band=0;$band -lt 3;$band++) {
@@ -267,7 +271,7 @@ function Invoke-FastRender {
             if(($id-1) -band 1){$height=$sector.FloorHeight;$flat=$Context.Flats[$sector.FloorFlat].Data}
             else{$height=$sector.CeilingHeight;$flat=$Context.Flats[$sector.CeilingFlat].Data}
             [double]$d=($cz-$height)*160/($y+0.5-84)
-            [int]$light=[Math]::Clamp([int]((255-$sector.LightLevel)/8-$player.ExtraLight*2+[int]($d/128)),[int]0,[int]31)
+            [int]$light=$Context.Lighting.Distance[[Math]::Clamp(($sector.LightLevel -shr 4)+$player.ExtraLight,0,15)][[Math]::Clamp([int][Math]::Floor($d/16),0,127)]
             if($player.FixedColorMap -gt 0){$light=$player.FixedColorMap}
             [byte[]]$colors=$Context.Colors[$light];[byte[]]$flatData=$flat
             [double]$du=$si*$d/160;[double]$dv=-$co*$d/160
@@ -292,7 +296,7 @@ function Invoke-FastRender {
                 $patch=$frame.Patches[$rotation];[double]$scale=160/$d
                 [double]$left=160+($dx*$si-$dy*$co-$patch.Left)*$scale
                 if($left -lt $EndColumn -and $left+$patch.Width*$scale -gt $FirstColumn) {
-                    $light=if($actor.Frame -band 32768){0}else{[Math]::Min(31,[Math]::Max(0,(255-$actor.LightLevel)/8)+[int]($d/256))}
+                    $light=if($actor.Frame -band 32768){0}else{$Context.Lighting.Scale[[Math]::Clamp(($actor.LightLevel -shr 4)+$player.ExtraLight,0,15)][[Math]::Min(47,[int][Math]::Floor(2560.0/$d))]}
                     if($player.FixedColorMap -gt 0){$light=$player.FixedColorMap}
                     Draw-FastPatch $Context $patch $left (84-($actor.Z+$patch.Top-$cz)*$scale) $scale $d $frame.Flip[$rotation] $light $FirstColumn $EndColumn 168
                 }

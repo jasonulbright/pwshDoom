@@ -1,5 +1,6 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 # Private, disposable asset transport. Standard .NET bulk copies, no compiled algorithms.
+. "$PSScriptRoot/RenderLighting.ps1"
 function Write-GameRenderAssets {
     param($Context,[int[][]]$Palette,[string]$Path)
     $patchIds=[Collections.Generic.Dictionary[object,string]]::new();$patches=[Collections.Generic.List[object]]::new()
@@ -51,7 +52,7 @@ function Read-GameRenderAssets {
             [Buffer]::BlockCopy($bytes,0,$data,0,$bytes.Length)
             $patches[$i]=@{Width=$w;Height=$h;Left=$left;Top=$top;Data=$data}
         }
-        $ctx=@{Segments=$meta.Segments;Nodes=$meta.Nodes;Subsectors=$meta.Subsectors;SkyFlat=$meta.SkyFlat;Sky=$patches[[int]$meta.Sky];
+        $ctx=@{Segments=$meta.Segments;Nodes=$meta.Nodes;Subsectors=$meta.Subsectors;SkyFlat=$meta.SkyFlat;Sky=$patches[[int]$meta.Sky];Lighting=(New-FastLightingTables);
             Pixels=[byte[]]::new(64000);Depth=[double[]]::new(64000);Planes=[int[]]::new(53760);TopClip=[int[]]::new(320);BottomClip=[int[]]::new(320);
             Stack=[int[]]::new($meta.Nodes.Count*2+4);Textures=@{};Hud=@{};SpriteAtlas=[object[]]::new($meta.SpriteAtlas.Count);Palette=[int[][]]$meta.Palette}
         foreach($key in $meta.Textures.Keys){$ctx.Textures[[int]$key]=$patches[[int]$meta.Textures[$key]]}

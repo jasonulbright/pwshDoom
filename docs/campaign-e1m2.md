@@ -59,3 +59,5 @@ Use fresh output paths and the installed Steam IWAD, or supply `-Wad`:
 ```
 
 Recorded playback uses the [audiovisual capture prerequisites](audiovisual-recording.md) and a prepared catalog containing D_E1M2, D_INTER and D_E1M3. Both external capture and actual device playback have their explicitly documented boundaries; gameplay/rendering/mixing remain PowerShell.
+
+September 19 lighting regression: a new full Classic recording passes 53 integration checks, preserving all 3,233 ordinary commands and 13 checkpoints through E1M3. All4,073,580 audio frames return, with two queue-empty observations. It averages 34.9768 tics/sec and 50.5017 console writes/sec; these are recorded-run measurements, not sustained 60-display certification. The first attempt failed at startup from a newly introduced helper import dependency; that was fixed and retained in the evidence. See [lighting implementation and full-host evidence](rendering-fidelity.md) and `results/e1m2-classic-lighting-recorded.json`.
