@@ -42,8 +42,8 @@ function Publish-SimulationSnapshot {
     if($screenKind -eq 2){$current=$script:menuPixels;$old=$current}
     elseif($screenKind -eq 3){$mapWatch=[Diagnostics.Stopwatch]::StartNew();$current=Get-DoomAutomapScreen $automapGraphics $game;$old=$current;$automapTimes.Add($mapWatch.Elapsed.TotalMilliseconds)}
     elseif($state -eq 0){
-        $old=ConvertTo-GameSnapshotBytes (New-GameRenderSnapshot $game 0)
-        $current=ConvertTo-GameSnapshotBytes (New-GameRenderSnapshot $game 1)
+        $pair=Get-GameRenderSnapshotPair $game
+        $old=$pair.Previous;$current=$pair.Current
     }else{
         $uiWatch=[Diagnostics.Stopwatch]::StartNew();$current=Get-DoomSessionScreen $screens $game;$old=$current
         $uiTimes.Add($uiWatch.Elapsed.TotalMilliseconds)

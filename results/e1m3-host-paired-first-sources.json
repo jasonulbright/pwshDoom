@@ -1,0 +1,40 @@
+{
+  "CreatedUtc": "2026-09-19T11:31:36.5064124Z",
+  "Sources": [
+    {
+      "Sha256": "B9758C7FC2CE3F6A8F24DCBFD308489F3B5A81837F9880F00D4E603D359F2DD3",
+      "Path": "scripts/Invoke-Doom.ps1"
+    },
+    {
+      "Sha256": "8F81A3D2EF102E284CF08C8D886631F507A7BF35699BBF6E468D1DF835D26FEF",
+      "Path": "scripts/Invoke-SimulationWorker.ps1"
+    },
+    {
+      "Sha256": "C9D399374051AFF208807F16F8E58E9B7615EF87D586FF407898BFDA09B3D76E",
+      "Path": "src/SimulationProcess.ps1"
+    },
+    {
+      "Sha256": "3E10CF9C03DEBB5D733477131DE6721824358155483DF8A11F0BCBD99ADBA03C",
+      "Path": "src/GameHost.ps1"
+    },
+    {
+      "Sha256": "3BB8BCAB4462452647EC8E5881C387EE31BB7587FB755C11C5B0A14DC4580A28",
+      "Path": "src/SnapshotTransport.ps1"
+    },
+    {
+      "Sha256": "DF656735B564B0F27DC1628AFE78C6F8A2899C1A37F60FB1872CCBE69DF42112",
+      "Path": "scripts/Invoke-AudioWorker.ps1"
+    },
+    {
+      "Sha256": "C8B63D3E491C61F4A1BA85A32ECC5743DF317F5AC0AEB18D4D6D218E05998258",
+      "Path": "src/AudioMixer.ps1"
+    },
+    {
+      "Sha256": "1A4DFDE7531BEFC0B176CAC8566F82C28EF5CC03D30057B8943E25384E79B596",
+      "Path": "src/MusicPlayback.ps1"
+    }
+  ],
+  "CatalogSha256": "34720E9255D7E7D51EFFD7C6050C59B95C6692033881DEE7305E84060A15D1CA",
+  "Meaning": "Pre-run source snapshot for direct-pair host prefix; deliberately uses the original replay fingerprint so the source-change warning is retained.",
+  "ReplaySha256": "0831147553FFA4589062EC0EE1F969D6932E0E5DF3B7F4D300C6293CFDA1F4BB"
+}

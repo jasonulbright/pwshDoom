@@ -99,3 +99,31 @@ function Get-GameRenderSnapshotBytes {
     $bytes=[byte[]]::new($v.Length*8);[Buffer]::BlockCopy($v,0,$bytes,0,$bytes.Length)
     return ,$bytes
 }
+
+# Endpoints describe one frozen update, so discrete fields are identical. Pack
+# current once, then change only the old positions used by numeric interpolation.
+function Get-GameRenderSnapshotPair {
+    param($Game)
+    [byte[]]$current=Get-GameRenderSnapshotBytes $Game 1
+    [double[]]$v=[double[]]::new($current.Length/8);[Buffer]::BlockCopy($current,0,$v,0,$current.Length)
+    $v[2]=0
+    $world=$Game.World;$player=$world.ConsolePlayer;$camera=$player.Mobj
+    if($camera.Interpolate){$v[8]=$camera.OldX.Data/65536.0;$v[9]=$camera.OldY.Data/65536.0}
+    if($player.Interpolate){
+        $v[10]=$player.OldAngle.Data*(2*[Math]::PI/4294967296.0)
+        if($world.LevelTime -gt 1){$v[11]=$player.OldViewZ.Data/65536.0}
+    }
+    [int]$n=48
+    foreach($s in $world.Map.Sectors){$v[$n]=$s.OldFloorHeight.Data/65536.0;$v[$n+1]=$s.OldCeilingHeight.Data/65536.0;$n+=5}
+    $n+=5*$world.Map.Sides.Length
+    $cap=$world.Thinkers.Cap;$actor=$cap.Next
+    while(-not [object]::ReferenceEquals($actor,$cap)){
+        if($actor -is [Mobj] -and -not [object]::ReferenceEquals($actor,$camera)){
+            if($actor.Interpolate){$v[$n]=$actor.OldX.Data/65536.0;$v[$n+1]=$actor.OldY.Data/65536.0;$v[$n+2]=$actor.OldZ.Data/65536.0}
+            $n+=7
+        }
+        $actor=$actor.Next
+    }
+    $previous=[byte[]]::new($current.Length);[Buffer]::BlockCopy($v,0,$previous,0,$previous.Length)
+    return @{Previous=$previous;Current=$current}
+}

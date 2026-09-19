@@ -1,6 +1,6 @@
 #requires -Version 7.4
 # SPDX-License-Identifier: GPL-2.0-or-later
-param([Parameter(Mandatory)][string]$Replay,[Parameter(Mandatory)][string]$Output,[switch]$AllMaps,
+param([Parameter(Mandatory)][string]$Replay,[Parameter(Mandatory)][string]$Output,[switch]$AllMaps,[switch]$Pairs,
     [string]$Wad='C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\base\DOOM.WAD')
 $ErrorActionPreference='Stop'
 if(Test-Path -LiteralPath $Output){throw 'Use a fresh snapshot report.'}
@@ -15,14 +15,23 @@ $content=$null;$failure=$null;$sampleIndex=0;$completed=0
 $samples=[Collections.Generic.List[object]]::new();$points=[Collections.Generic.List[object]]::new();$transitions=[Collections.Generic.List[object]]::new()
 $verification=$null
 function Compare-Snapshot([string]$Label,[double]$Fraction){
+    if($Pairs -and $Fraction -ne 0){return}
     $watch=[Diagnostics.Stopwatch]::new()
     # Alternate order; retain every cold and warm observation without exclusions.
     foreach($kind in $(if($script:sampleIndex%2 -eq 0){@('Object','Direct')}else{@('Direct','Object')})){
         $watch.Restart()
-        if($kind -eq 'Object'){$expected=ConvertTo-GameSnapshotBytes (New-GameRenderSnapshot $game $Fraction);$objectMs=$watch.Elapsed.TotalMilliseconds}
-        else{$actual=Get-GameRenderSnapshotBytes $game $Fraction;$directMs=$watch.Elapsed.TotalMilliseconds}
+        if($kind -eq 'Object'){
+            $expected=ConvertTo-GameSnapshotBytes (New-GameRenderSnapshot $game $Fraction)
+            if($Pairs){$expectedCurrent=ConvertTo-GameSnapshotBytes (New-GameRenderSnapshot $game 1)}
+            $objectMs=$watch.Elapsed.TotalMilliseconds
+        }else{
+            if($Pairs){$pair=Get-GameRenderSnapshotPair $game;$actual=$pair.Previous}
+            else{$actual=Get-GameRenderSnapshotBytes $game $Fraction}
+            $directMs=$watch.Elapsed.TotalMilliseconds
+        }
     }
     if($actual -isnot [byte[]] -or -not [Linq.Enumerable]::SequenceEqual[byte]($expected,$actual)){throw "Snapshot bytes differ: $Label, fraction $Fraction."}
+    if($Pairs -and ($pair.Current -isnot [byte[]] -or -not [Linq.Enumerable]::SequenceEqual[byte]($expectedCurrent,$pair.Current))){throw "Current snapshot bytes differ: $Label."}
     $samples.Add(@{Label=$Label;Fraction=$Fraction;Bytes=$actual.Length;ObjectMilliseconds=$objectMs;DirectMilliseconds=$directMs;
         Sha256=[Convert]::ToHexString([Security.Cryptography.SHA256]::HashData($actual))})
     $script:sampleIndex++
@@ -64,10 +73,10 @@ try{
     if($content){$content.Dispose()}
     $report=@{Error=$failure;FinishedUtc=[DateTime]::UtcNow.ToString('o');PowerShell=$PSVersionTable.PSVersion.ToString();WadSha256=$wadHash;
         Sources=$sources;BundleSha256=(Get-FileHash $bundle).Hash;ReplaySha256=(Get-FileHash $Replay).Hash;AllMaps=[bool]$AllMaps;
-        Commands=$completed;ByteComparisons=$samples.Count;ReplayVerification=$verification;Transitions=$transitions.ToArray();Samples=$samples.ToArray();
-        Meaning='Exact complete NumericV1 byte equality against unchanged object snapshot + serializer, all requested fractions. Alternating in-process order includes all samples and cold calls; these microbenchmarks are not full-host or displayed FPS. Fixed replay checks original selected-state checkpoints.'}
+        Commands=$completed;ByteComparisons=$samples.Count*$(if($Pairs){2}else{1});Pairs=[bool]$Pairs;ReplayVerification=$verification;Transitions=$transitions.ToArray();Samples=$samples.ToArray();
+        Meaning='Exact complete NumericV1 byte equality against unchanged object snapshot + serializer. Pairs mode compares both endpoints once per state and times both together; otherwise times individual fractions. Alternating in-process order includes all samples and cold calls; these microbenchmarks are not full-host or displayed FPS. Fixed replay checks original selected-state checkpoints.'}
     if($samples.Count){$report.ObjectMs=Get-SampleStats ([double[]]$samples.ObjectMilliseconds);$report.DirectMs=Get-SampleStats ([double[]]$samples.DirectMilliseconds)}
     $report|ConvertTo-Json -Depth 8|Set-Content $Output
 }
 if($failure){throw $failure}
-"PASS: $($samples.Count) complete byte comparisons; $completed commands; $($verification.Checked) replay checkpoints."
+"PASS: $($report.ByteComparisons) complete byte comparisons; $completed commands; $($verification.Checked) replay checkpoints."
