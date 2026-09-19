@@ -1,4 +1,6 @@
-# Playable preview 0.1.0-preview.1
+# Playable preview 0.1.0-preview.2
+
+This update fixes a missile-collision crash and disappearing fence/grille pixels. It also repairs the adopted engine's external demo reader, which is not yet exposed by the launcher. See the [changelog](../CHANGELOG.md). Campaign and performance qualification remain incomplete.
 
 ## Start playing
 

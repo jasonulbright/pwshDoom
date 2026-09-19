@@ -1,6 +1,8 @@
 # Changelog
 
-## Unreleased
+## 0.1.0-preview.2
+
+Gameplay and rendering fixes following the first playable preview. Qualification also adds 97 boss-trigger checks; these do not certify ordinary-input boss victories.
 
 - Preserve fence/grille pixels when drawing scenery behind two-sided transparent walls; retain actor occlusion through their holes.
 - Fix a missile-collision crash caused by looking up the sky flat on the map instead of its flat collection.

@@ -1,6 +1,6 @@
 #requires -Version 7.4
 # SPDX-License-Identifier: GPL-2.0-or-later
-param([ValidatePattern('^[0-9]+\.[0-9]+\.[0-9]+-[A-Za-z0-9.]+$')][string]$Version='0.1.0-preview.1',
+param([ValidatePattern('^[0-9]+\.[0-9]+\.[0-9]+-[A-Za-z0-9.]+$')][string]$Version='0.1.0-preview.2',
     [Parameter(Mandatory)][string]$OutputDirectory)
 $ErrorActionPreference='Stop';Set-StrictMode -Version Latest
 $root=[IO.Path]::GetFullPath("$PSScriptRoot/..")

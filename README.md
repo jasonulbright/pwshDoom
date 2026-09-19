@@ -2,7 +2,7 @@
 
 **Doom, running in PowerShell. In your terminal. With a Matrix mode.**
 
-Playable preview **0.1.0-preview.1** for Windows Terminal. Gameplay, software rendering, terminal encoding and sound-effects mixing are PowerShell. Bring your own Ultimate Doom `DOOM.WAD`.
+Playable preview **0.1.0-preview.2** for Windows Terminal. Gameplay, software rendering, terminal encoding and sound-effects mixing are PowerShell. Bring your own Ultimate Doom `DOOM.WAD`.
 
 | Classic | Matrix | Color art |
 | --- | --- | --- |

@@ -10,7 +10,7 @@ Executing DEMO1 through `DoomGame` then exposed an actual gameplay exception aft
 
 ## Evidence boundaries
 
-The second built-in demo executes all 2,347 commands on E2M2 without an exception or observed player death (`results/vanilla-demo2-gameplay-first.json`). All 19 retained pre-crash E1M5 samples also match after the sky-flat fix (`vanilla-demo1-prefix-parity.json`). Neither result establishes original-engine synchronization. DEMO3 was decoded for file parity but has not been simulated in this investigation.
+The second built-in demo executes all 2,347 commands on E2M2 without an exception or observed player death (`results/vanilla-demo2-gameplay-first.json`). All 19 retained pre-crash E1M5 samples also match after the sky-flat fix (`vanilla-demo1-prefix-parity.json`). The third demo executes all 3,863 commands on E3M5 without an exception, with first death at command 3,822 (`vanilla-demo3-gameplay-first.json`). None of these results establishes original-engine synchronization or campaign completion.
 
 DEMO1 starts E1M5. The corrected run observes the player's first death at command 1,632. No original-engine trace has been compared, so completion of the input stream is not proof of synchronization, a successful map route, or intended player survival. Do not add it to the campaign completion column. The decoder's handling of malformed input is also not qualified by these valid-input checks.
 
