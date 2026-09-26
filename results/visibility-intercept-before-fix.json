@@ -1,0 +1,17 @@
+{
+  "Passed": false,
+  "VisibilitySourceSha256": "10AD04E6FB7B46F4795139A989282F9D6E44B4CF441E684DE689EA13311CE374",
+  "Meaning": "Actual VisibilityCheck.InterceptVector denominator-zero early-out and known nonparallel fraction. The zero case is the PowerShell Fixed object-equality boundary.",
+  "PowerShell": "7.6.5",
+  "Error": "Unexpected intercept fraction for Parallel separated rays return zero.\nat Check-Intercept, C:\\projects\\pwshDoom\\scripts\\Test-VisibilityInterceptVector.ps1: line 19\r\nat <ScriptBlock>, C:\\projects\\pwshDoom\\scripts\\Test-VisibilityInterceptVector.ps1: line 24",
+  "BundleSha256": "68A4E9FAB121F9E4029352BC28F730FFD15C063736C7DCB906ECC263F6969874",
+  "Cases": [
+    {
+      "Name": "Parallel separated rays return zero",
+      "Passed": false,
+      "ExpectedData": 0,
+      "ActualData": -2147483648
+    }
+  ],
+  "HarnessSha256": "862D17FBD75E913D7194FA9AE29834FFC94867BD6291891270AD2E88DC1AA569"
+}

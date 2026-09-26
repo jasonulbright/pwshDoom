@@ -1,0 +1,23 @@
+{
+  "Cases": [
+    {
+      "Name": "Parallel separated rays return zero",
+      "ExpectedData": 0,
+      "Passed": true,
+      "ActualData": 0
+    },
+    {
+      "Name": "Perpendicular segments intersect halfway",
+      "ExpectedData": 32768,
+      "Passed": true,
+      "ActualData": 32768
+    }
+  ],
+  "Error": null,
+  "Meaning": "Actual VisibilityCheck.InterceptVector denominator-zero early-out and known nonparallel fraction. The zero case is the PowerShell Fixed object-equality boundary.",
+  "BundleSha256": "61F6C9B2E6CE5B2316A363B81436A241ACEEF2B962B2CB4125596AD9DEA9BAE0",
+  "VisibilitySourceSha256": "94BDAF6DA82D378F79954D32AB41609A048B106675A494F26D0B9590EF76BFA3",
+  "Passed": true,
+  "HarnessSha256": "862D17FBD75E913D7194FA9AE29834FFC94867BD6291891270AD2E88DC1AA569",
+  "PowerShell": "7.6.5"
+}

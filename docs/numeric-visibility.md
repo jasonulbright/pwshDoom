@@ -12,7 +12,13 @@ The actual 1,200-command E1M3 deep-profiled replay also preserves all four origi
 
 The full original E1M3 replay passes all 7,118 commands and 24 checkpoints through E1M4 entry: `results/e1m3-numeric-divlineside-regression.json`. This establishes sampled gameplay/state preservation for that route. Complete host pacing, live capture and other campaign coverage remain separate gates.
 
-The existing `VisibilityCheck.InterceptVector` denominator identity comparison remains outside this optimization. It needs a separate correctness investigation; silently changing it here would mix a behavior change with the measured side-calculation replacement.
+At the time of this optimization, `VisibilityCheck.InterceptVector` still had a separate denominator comparison issue. It was isolated and fixed afterward; the change and its campaign regressions are recorded below.
+
+## Denominator-zero correction
+
+The focused check in `scripts/Test-VisibilityInterceptVector.ps1` reproduced a real sight-calculation defect. Two distinct `[Fixed]` wrappers can contain the same numeric zero, but comparing the wrapper objects with PowerShell `-eq` did not detect that equality here. The parallel-line denominator therefore skipped the intended zero return and produced `Int32.MinValue`. The check passed two cases after changing the guard to compare the wrappers' `.Data` values: separated parallel lines return zero, and a perpendicular segment crossing halfway returns 32768. Before/after receipts are `results/visibility-intercept-before-fix.json` and `results/visibility-intercept-after-fix.json`.
+
+After the correction, the four existing fixed-input route regressions all pass on the installed Ultimate Doom IWAD: E1M1 enters E1M2 after 1,747 commands with 8 checkpoints; E1M2 enters E1M3 after 3,233 commands with 87 route samples and 13 checkpoints; E1M3 enters E1M4 after 7,118 commands with 198 samples and 24 checkpoints; and E1M4 enters E1M5 after 6,348 commands with 176 samples and 22 checkpoints. The [compact regression index](../results/visibility-campaign-regressions.json) records parameters, transition summaries, and raw-report hashes; the full per-run reports remain under ignored `local/visibility-intercept-regressions/`. These preserve the existing route inputs; they do not establish complete vanilla compatibility or human playthrough coverage.
 
 ## Loaded host prefix
 

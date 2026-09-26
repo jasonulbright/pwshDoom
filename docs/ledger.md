@@ -1280,3 +1280,28 @@ Extend `scripts/Test-MusicEvents.ps1` with an Episode 1 finale assertion that
 selects D_VICTOR. The focused event suite passes all 12 checks on the installed
 IWAD, with no game window or device playback. This verifies track selection,
 not audible finale playback or full-session continuity.
+
+## 2026-09-26 — Fix sight-intercept zero comparison
+
+While keeping E1M1–E1M4's existing fixed inputs as regressions, a direct test
+of `VisibilityCheck.InterceptVector` reproduced an incorrect denominator-zero
+result for parallel separated lines: `Int32.MinValue` instead of zero. The
+PowerShell comparison was applied to distinct `[Fixed]` wrapper objects, not
+their numeric `.Data` values. Change the guard to compare `.Data`; retain the
+before/after receipts and focused test. Parallel lines now return zero and a
+perpendicular halfway crossing returns 32768.
+
+All four existing routes pass independent post-fix replay through their
+expected campaign transitions: E1M1 -> E1M2 (1,747 commands, 8 checkpoints),
+E1M2 -> E1M3 (3,233 commands, 87 samples, 13 checkpoints), E1M3 -> E1M4
+(7,118 commands, 198 samples, 24 checkpoints), and E1M4 -> E1M5 (6,348
+commands, 176 samples, 22 checkpoints). The first E1M1 adapter attempt omitted
+the route's final-health field; after adding it, the same stored route passes.
+This was an adapter correction, not a game defect or a reason to develop new
+routes. The post-fix nine-map Episode 1 smoke also passes: all maps load, run 35
+idle tics, and rasterize two 320x200 frames. The [compact regression index](../results/visibility-campaign-regressions.json) pins the pass and raw-report hashes. An initial invocation passed a
+comma-separated map list as one literal PowerShell argument; it stopped before
+any map loaded, and the corrected array invocation passed all nine. The failed
+invocation is retained under ignored `local/visibility-intercept-regressions/`.
+No window, recorder, or bot route was used. The
+D_VICTOR full-loop qualification remains in progress separately.

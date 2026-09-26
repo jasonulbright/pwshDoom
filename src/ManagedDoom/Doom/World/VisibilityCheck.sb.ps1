@@ -41,7 +41,7 @@ class VisibilityCheck {
     [Fixed] InterceptVector([DivLine] $v2, [DivLine] $v1) {
         $den = ($v1.Dy -shr 8) * $v2.Dx - ($v1.Dx -shr 8) * $v2.Dy
 
-        if ($den -eq [Fixed]::Zero) {
+        if ($den.Data -eq [Fixed]::Zero.Data) {
             return [Fixed]::Zero
         }
 

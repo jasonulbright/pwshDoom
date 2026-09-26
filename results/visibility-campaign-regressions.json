@@ -1,0 +1,335 @@
+{
+  "CreatedUtc": "2026-09-26T18:24:16.4251359Z",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "PowerShell": "7.6.5",
+  "VisibilitySourceSha256": "94BDAF6DA82D378F79954D32AB41609A048B106675A494F26D0B9590EF76BFA3",
+  "FocusedTest": {
+    "Script": "scripts/Test-VisibilityInterceptVector.ps1",
+    "ScriptSha256": "862D17FBD75E913D7194FA9AE29834FFC94867BD6291891270AD2E88DC1AA569",
+    "Passed": true,
+    "Cases": 2,
+    "Before": "results/visibility-intercept-before-fix.json",
+    "After": "results/visibility-intercept-after-fix.json"
+  },
+  "RouteRegressions": [
+    {
+      "Map": 1,
+      "Skill": 3,
+      "Episode": 1,
+      "ExpectedNextMap": 2,
+      "Commands": 1747,
+      "TraceSamples": 0,
+      "Checkpoints": 8,
+      "Transitions": [
+        {
+          "Health": 100,
+          "State": "Level",
+          "DidSecret": false,
+          "Episode": 1,
+          "Ammo": [
+            50,
+            0,
+            0,
+            0
+          ],
+          "Tic": 0,
+          "Map": 1,
+          "Armor": 0
+        },
+        {
+          "Health": 75,
+          "State": "Intermission",
+          "DidSecret": false,
+          "Episode": 1,
+          "Ammo": [
+            37,
+            4,
+            0,
+            0
+          ],
+          "Tic": 1560,
+          "Map": 1,
+          "Armor": 0
+        },
+        {
+          "Health": 75,
+          "State": "Level",
+          "DidSecret": false,
+          "Episode": 1,
+          "Ammo": [
+            37,
+            4,
+            0,
+            0
+          ],
+          "Tic": 1676,
+          "Map": 2,
+          "Armor": 0
+        }
+      ],
+      "Passed": true,
+      "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+      "SourceRoute": "results/e1m1-route-lineflags.json",
+      "SourceRouteSha256": "956E47F961685037602898216798F1F907CA425D2910E0FA8C51E8CE3ADC9193",
+      "QualificationSourceSha256": "D60559FDA66DA7F74C2629D87C8C06BF940D1112BEA401B424F6A2EABB4E136B",
+      "SourceFingerprint": "D8127E3712C32C529BB517CC1D1CCCB141B53D482B4BC40045764D50696E4143",
+      "RawReport": "e1m1-qualified-visibility-regression.json",
+      "RawReportSha256": "2DC30373585ADDC9A2600B6187222CFFCC052B68AFE91B27A396632CE421BAF8"
+    },
+    {
+      "Map": 2,
+      "Skill": 3,
+      "Episode": 1,
+      "ExpectedNextMap": 3,
+      "Commands": 3233,
+      "TraceSamples": 87,
+      "Checkpoints": 13,
+      "Transitions": [
+        {
+          "Map": 2,
+          "Ammo": [
+            50,
+            0,
+            0,
+            0
+          ],
+          "Health": 100,
+          "State": "Level",
+          "Tic": 0,
+          "Armor": 0,
+          "Episode": 1,
+          "DidSecret": false
+        },
+        {
+          "Map": 2,
+          "Ammo": [
+            122,
+            13,
+            0,
+            0
+          ],
+          "Health": 82,
+          "State": "Intermission",
+          "Tic": 3046,
+          "Armor": 0,
+          "Episode": 1,
+          "DidSecret": false
+        },
+        {
+          "Map": 3,
+          "Ammo": [
+            122,
+            13,
+            0,
+            0
+          ],
+          "Health": 82,
+          "State": "Level",
+          "Tic": 3162,
+          "Armor": 0,
+          "Episode": 1,
+          "DidSecret": false
+        }
+      ],
+      "Passed": true,
+      "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+      "SourceRoute": "results/e1m2-route-sixth.json",
+      "SourceRouteSha256": "7021CC1E77D620255AA4B19744CC0113781227251EE9D9233E4E5EE0B376616B",
+      "QualificationSourceSha256": "D60559FDA66DA7F74C2629D87C8C06BF940D1112BEA401B424F6A2EABB4E136B",
+      "SourceFingerprint": "D8127E3712C32C529BB517CC1D1CCCB141B53D482B4BC40045764D50696E4143",
+      "RawReport": "e1m2-qualified-visibility-regression.json",
+      "RawReportSha256": "90A844628601399FB68B23AB2DF25F3D4060BB2DCBE3933061506A4BE8172154"
+    },
+    {
+      "Map": 3,
+      "Skill": 3,
+      "Episode": 1,
+      "ExpectedNextMap": 4,
+      "Commands": 7118,
+      "TraceSamples": 198,
+      "Checkpoints": 24,
+      "Transitions": [
+        {
+          "DidSecret": false,
+          "Armor": 0,
+          "Tic": 0,
+          "Episode": 1,
+          "Health": 100,
+          "Map": 3,
+          "State": "Level",
+          "Ammo": [
+            50,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "DidSecret": false,
+          "Armor": 80,
+          "Tic": 6931,
+          "Episode": 1,
+          "Health": 66,
+          "Map": 3,
+          "State": "Intermission",
+          "Ammo": [
+            82,
+            4,
+            0,
+            0
+          ]
+        },
+        {
+          "DidSecret": false,
+          "Armor": 80,
+          "Tic": 7047,
+          "Episode": 1,
+          "Health": 66,
+          "Map": 4,
+          "State": "Level",
+          "Ammo": [
+            82,
+            4,
+            0,
+            0
+          ]
+        }
+      ],
+      "Passed": true,
+      "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+      "SourceRoute": "results/e1m3-route-seventeenth.json",
+      "SourceRouteSha256": "8308804724966B03BBF0026A9B0BE6F60A79EBE3167711C60540C6E934D42C1E",
+      "QualificationSourceSha256": "D60559FDA66DA7F74C2629D87C8C06BF940D1112BEA401B424F6A2EABB4E136B",
+      "SourceFingerprint": "D8127E3712C32C529BB517CC1D1CCCB141B53D482B4BC40045764D50696E4143",
+      "RawReport": "e1m3-qualified-visibility-regression.json",
+      "RawReportSha256": "443F97C05ADD5BBE88B49D3DFB70054E87761CB527F3CA0A4325BAC6145C31AC"
+    },
+    {
+      "Map": 4,
+      "Skill": 3,
+      "Episode": 1,
+      "ExpectedNextMap": 5,
+      "Commands": 6348,
+      "TraceSamples": 176,
+      "Checkpoints": 22,
+      "Transitions": [
+        {
+          "DidSecret": false,
+          "Map": 4,
+          "Tic": 0,
+          "State": "Level",
+          "Health": 100,
+          "Ammo": [
+            50,
+            0,
+            0,
+            0
+          ],
+          "Episode": 1,
+          "Armor": 0
+        },
+        {
+          "DidSecret": false,
+          "Map": 4,
+          "Tic": 6161,
+          "State": "Intermission",
+          "Health": 77,
+          "Ammo": [
+            0,
+            12,
+            0,
+            0
+          ],
+          "Episode": 1,
+          "Armor": 168
+        },
+        {
+          "DidSecret": false,
+          "Map": 5,
+          "Tic": 6277,
+          "State": "Level",
+          "Health": 77,
+          "Ammo": [
+            0,
+            12,
+            0,
+            0
+          ],
+          "Episode": 1,
+          "Armor": 168
+        }
+      ],
+      "Passed": true,
+      "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+      "SourceRoute": "results/e1m4-route-seventh.json",
+      "SourceRouteSha256": "E4ACD0AEA8F94A86784D989C30E60A4B7C1E073A361F29B01B9FC7474D01D35E",
+      "QualificationSourceSha256": "D60559FDA66DA7F74C2629D87C8C06BF940D1112BEA401B424F6A2EABB4E136B",
+      "SourceFingerprint": "D8127E3712C32C529BB517CC1D1CCCB141B53D482B4BC40045764D50696E4143",
+      "RawReport": "e1m4-qualified-visibility-regression.json",
+      "RawReportSha256": "1D47D9285084E14C8DD5241555E51A29F639180BF7C784189535A03F16F254DB"
+    }
+  ],
+  "Episode1MapSmoke": {
+    "Passed": 9,
+    "Failed": 0,
+    "Complete": true,
+    "Maps": [
+      "E1M1",
+      "E1M2",
+      "E1M3",
+      "E1M4",
+      "E1M5",
+      "E1M6",
+      "E1M7",
+      "E1M8",
+      "E1M9"
+    ],
+    "RequestedTics": 35,
+    "RenderSize": "320x200",
+    "FramesPerMap": 2,
+    "RawReport": "campaign-smoke-episode1-visibility-regression-corrected.json",
+    "RawReportSha256": "DBEBB3D220CE333FF99C7776C71FECBC392130C2C42D46C9A0604A42F1606D51"
+  },
+  "HarnessOnlyFailures": [
+    "The first E1M1 adapter omitted final health; corrected adapter replays the same stored input and passes.",
+    "The initial map-smoke invocation supplied one comma-separated string instead of a PowerShell string array; it failed before map loading."
+  ],
+  "RawReportsStoredUnder": "local/visibility-intercept-regressions/",
+  "RawReports": [
+    {
+      "Name": "e1m1-qualified-visibility-regression.json",
+      "Sha256": "2DC30373585ADDC9A2600B6187222CFFCC052B68AFE91B27A396632CE421BAF8",
+      "Bytes": 110180
+    },
+    {
+      "Name": "e1m1-qualified-visibility.json",
+      "Sha256": "D564B71E20471C380F184FF7E9837D709B8BCF2CD6D1B82760C1825A28CF81FF",
+      "Bytes": 97208
+    },
+    {
+      "Name": "e1m2-qualified-visibility-regression.json",
+      "Sha256": "90A844628601399FB68B23AB2DF25F3D4060BB2DCBE3933061506A4BE8172154",
+      "Bytes": 200607
+    },
+    {
+      "Name": "e1m3-qualified-visibility-regression.json",
+      "Sha256": "443F97C05ADD5BBE88B49D3DFB70054E87761CB527F3CA0A4325BAC6145C31AC",
+      "Bytes": 433943
+    },
+    {
+      "Name": "e1m4-qualified-visibility-regression.json",
+      "Sha256": "1D47D9285084E14C8DD5241555E51A29F639180BF7C784189535A03F16F254DB",
+      "Bytes": 388558
+    },
+    {
+      "Name": "campaign-smoke-episode1-visibility-regression.json",
+      "Sha256": "4674100B4783F6A1914814698DCDB1F61D4132480EAF0F0B973BFEA7BABB2813",
+      "Bytes": 41056
+    },
+    {
+      "Name": "campaign-smoke-episode1-visibility-regression-corrected.json",
+      "Sha256": "DBEBB3D220CE333FF99C7776C71FECBC392130C2C42D46C9A0604A42F1606D51",
+      "Bytes": 47299
+    }
+  ]
+}
