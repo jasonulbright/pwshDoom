@@ -144,4 +144,23 @@ The same pinned engine bundle and Steam IWAD were compared at E1M2 and E1M3 afte
 
 The fixed-colormap control reduces index disagreement in both maps, but it changes the palette lookup itself; the reduction cannot be assigned mathematically to lighting alone. It leaves 19.2–27.1% of scene indices different. Mean absolute RGB-channel error is much smaller (2.01–3.90 levels), showing that many changed indices are visually near neighbors without proving exact color or texture sampling. Detailed source pins, raw report hashes and limits are in `results/render-reference-e1m2-e1m3-fidelity.json`; individual reports are `render-reference-e1m{2,3}-fidelity-{baseline,fixed16}.json`. PNG comparisons remain under ignored `local/render-reference-e1m{2,3}-fidelity-*`. The reference is not independently verified original-executable output.
 
-The next code investigation is wall and plane texture-coordinate stepping versus the reference's fixed-point per-column path. Preserve the current implementation until one sampling discrepancy is isolated and a candidate matches the same paired scenes without breaking full render-worker equivalence.
+The wall and plane sampling follow-up below isolated a horizontal half-pixel offset against Doom's integer-column angle lookup. Other fixed-point projection, vertical sampling, moving-sector, and independent original-executable differences remain open.
+
+## Integer-column sampling correction (2026-09-26)
+
+The previous numeric path sampled wall perspective interpolation, screen rays, and horizontal floor/ceiling coordinates at `x+0.5`. The adopted Doom renderer chooses each ray from its integer `xToAngle[x]` table. For example, column 160 maps to 0 degrees in that table; the former analytic half-pixel ray was about -0.18 degrees. Change those four horizontal sampling expressions to use `x`, leaving raster edge coverage and vertical sampling unchanged.
+
+At the same E1M2/E1M3 map starts after 35 idle updates, compare the old and new renderer against the same adopted reference and IWAD. The HUD remains exact. All six views improve:
+
+| Map | Heading | Scene indices different before / 53,760 | After | Reduction | RGB-channel MAE before → after |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| E1M2 | 0° | 13,377 | 8,490 | 36.53% | 2.0075 → 1.3813 |
+| E1M2 | 90° | 19,024 | 12,695 | 33.27% | 3.8677 → 2.9297 |
+| E1M2 | 180° | 14,238 | 10,264 | 27.91% | 2.5775 → 2.0480 |
+| E1M3 | 0° | 19,434 | 13,014 | 33.03% | 3.6632 → 2.5512 |
+| E1M3 | 90° | 17,458 | 9,564 | 45.22% | 3.9025 → 2.3936 |
+| E1M3 | 180° | 18,440 | 11,511 | 37.58% | 3.2431 → 1.9118 |
+
+Across 322,560 scene pixels, differing palette indices fall from 101,971 to 65,538 (35.73% fewer); the new views still differ in 17.8–23.6% of scene indices. The bundle and IWAD hashes are pinned in [the combined receipt](../results/render-column-index-fidelity.json). Raw reports: [E1M2 before](../results/render-reference-e1m2-fidelity-baseline.json), [E1M2 after](../results/render-reference-column-index-e1m2.json), [E1M3 before](../results/render-reference-e1m3-fidelity-baseline.json), and [E1M3 after](../results/render-reference-column-index-e1m3.json). This is a static map-start comparison to the adopted PowerShell reference, not independent original-executable evidence, route completion, or a performance test.
+
+The change preserves exact serial/seven-strip output in five views for Classic, Matrix with Katakana, and AnsiArt with Katakana: 320,000 indexed pixels per style plus 35 encoded strip checks. A stored E1M1 fixed-input replay also passes through the actual headless host with 1,747 commands, eight checkpoints, and E1M2 entry. These verify worker and session integration; the headless frames are not displayed-FPS evidence. Remaining texture and projection differences need separate fixtures before further algorithm changes.

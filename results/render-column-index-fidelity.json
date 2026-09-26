@@ -1,0 +1,154 @@
+{
+  "CreatedUtc": "2026-09-26T19:23:21.8530679Z",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "EngineBundleSha256": "61F6C9B2E6CE5B2316A363B81436A241ACEEF2B962B2CB4125596AD9DEA9BAE0",
+  "PreviousRendererSha256": "3A3B56FACC23282F8A937313397891B3447332CF01FEB91707645BDC210D278F",
+  "CurrentRendererSha256": "1F0E9CF6F73F1517713855906346A4ACC4E1F315E824C9F8B65876ECA6869589",
+  "Change": "Sample wall perspective interpolation, screen rays, and floor/ceiling horizontal texture coordinates at Doom integer screen-column indices (x) instead of half-pixel centers (x+0.5). Raster coverage and vertical sampling are unchanged.",
+  "StaticComparisons": {
+    "UpdatesBeforeRender": 35,
+    "ReferenceLimit": "Adopted PowerShell renderer, not independently verified original-executable output. Static map-start images only; no navigation or performance claim.",
+    "HeadingsDegrees": [
+      0,
+      90,
+      180
+    ],
+    "Maps": [
+      {
+        "Map": 2,
+        "BeforeReport": "results/render-reference-e1m2-fidelity-baseline.json",
+        "BeforeReportSha256": "5AEAB07FC660EFDD17CE58A7C13F420AC1FBDC7DBDBF679041995EB5BBAC8177",
+        "AfterReport": "results/render-reference-column-index-e1m2.json",
+        "AfterReportSha256": "E30C9BDCCF46FE182E645187A677A648F59946DAA662640157105035F4541321",
+        "PreviousRendererSha256": "3A3B56FACC23282F8A937313397891B3447332CF01FEB91707645BDC210D278F",
+        "CurrentRendererSha256": "1F0E9CF6F73F1517713855906346A4ACC4E1F315E824C9F8B65876ECA6869589",
+        "Views": [
+          {
+            "AngleDegrees": 0,
+            "ComparedPixels": 53760,
+            "BeforeDifferentIndices": 13377,
+            "AfterDifferentIndices": 8490,
+            "ReductionPercent": 36.53,
+            "BeforeMeanAbsoluteRgbChannelError": 2.0075,
+            "AfterMeanAbsoluteRgbChannelError": 1.3813,
+            "HudDifferentIndices": 0
+          },
+          {
+            "AngleDegrees": 90,
+            "ComparedPixels": 53760,
+            "BeforeDifferentIndices": 19024,
+            "AfterDifferentIndices": 12695,
+            "ReductionPercent": 33.27,
+            "BeforeMeanAbsoluteRgbChannelError": 3.8677,
+            "AfterMeanAbsoluteRgbChannelError": 2.9297,
+            "HudDifferentIndices": 0
+          },
+          {
+            "AngleDegrees": 180,
+            "ComparedPixels": 53760,
+            "BeforeDifferentIndices": 14238,
+            "AfterDifferentIndices": 10264,
+            "ReductionPercent": 27.91,
+            "BeforeMeanAbsoluteRgbChannelError": 2.5775,
+            "AfterMeanAbsoluteRgbChannelError": 2.048,
+            "HudDifferentIndices": 0
+          }
+        ]
+      },
+      {
+        "Map": 3,
+        "BeforeReport": "results/render-reference-e1m3-fidelity-baseline.json",
+        "BeforeReportSha256": "608965E7F848908A8A19FDBDA28D2E34345316E3ECD5A2666E39389ED0D1678E",
+        "AfterReport": "results/render-reference-column-index-e1m3.json",
+        "AfterReportSha256": "0FE3710E03AF310C038F1D6416F09398045CC5029D498093E8101A787F48E78B",
+        "PreviousRendererSha256": "3A3B56FACC23282F8A937313397891B3447332CF01FEB91707645BDC210D278F",
+        "CurrentRendererSha256": "1F0E9CF6F73F1517713855906346A4ACC4E1F315E824C9F8B65876ECA6869589",
+        "Views": [
+          {
+            "AngleDegrees": 0,
+            "ComparedPixels": 53760,
+            "BeforeDifferentIndices": 19434,
+            "AfterDifferentIndices": 13014,
+            "ReductionPercent": 33.03,
+            "BeforeMeanAbsoluteRgbChannelError": 3.6632,
+            "AfterMeanAbsoluteRgbChannelError": 2.5512,
+            "HudDifferentIndices": 0
+          },
+          {
+            "AngleDegrees": 90,
+            "ComparedPixels": 53760,
+            "BeforeDifferentIndices": 17458,
+            "AfterDifferentIndices": 9564,
+            "ReductionPercent": 45.22,
+            "BeforeMeanAbsoluteRgbChannelError": 3.9025,
+            "AfterMeanAbsoluteRgbChannelError": 2.3936,
+            "HudDifferentIndices": 0
+          },
+          {
+            "AngleDegrees": 180,
+            "ComparedPixels": 53760,
+            "BeforeDifferentIndices": 18440,
+            "AfterDifferentIndices": 11511,
+            "ReductionPercent": 37.58,
+            "BeforeMeanAbsoluteRgbChannelError": 3.2431,
+            "AfterMeanAbsoluteRgbChannelError": 1.9118,
+            "HudDifferentIndices": 0
+          }
+        ]
+      }
+    ]
+  },
+  "WorkerEquivalence": [
+    {
+      "Style": "Classic",
+      "GlyphSet": "Ascii",
+      "Report": "results/render-column-index-workers-classic.json",
+      "ReportSha256": "68B231B29989F66C0B660193BEFBC8A2B5DD3D5AEF1415F525FBE7C65D3855F0",
+      "ViewsChecked": 5,
+      "PixelsCompared": 320000,
+      "Differences": 0.0,
+      "EncodedStripByteChecks": 35,
+      "CharacterStripByteChecks": 0,
+      "RendererSha256": "1F0E9CF6F73F1517713855906346A4ACC4E1F315E824C9F8B65876ECA6869589"
+    },
+    {
+      "Style": "Matrix",
+      "GlyphSet": "Katakana",
+      "Report": "results/render-column-index-workers-matrix-katakana.json",
+      "ReportSha256": "CAB918FA10355E5E57A699CEA59892466CAC55D4907FC0BD51179D39037E3344",
+      "ViewsChecked": 5,
+      "PixelsCompared": 320000,
+      "Differences": 0.0,
+      "EncodedStripByteChecks": 35,
+      "CharacterStripByteChecks": 35,
+      "RendererSha256": "1F0E9CF6F73F1517713855906346A4ACC4E1F315E824C9F8B65876ECA6869589"
+    },
+    {
+      "Style": "AnsiArt",
+      "GlyphSet": "Katakana",
+      "Report": "results/render-column-index-workers-ansiart-katakana.json",
+      "ReportSha256": "F56D03BF5670BBEF67EE8C9B280D9C078748CBC31CDBA80027963E23C7D6CC96",
+      "ViewsChecked": 5,
+      "PixelsCompared": 320000,
+      "Differences": 0.0,
+      "EncodedStripByteChecks": 35,
+      "CharacterStripByteChecks": 35,
+      "RendererSha256": "1F0E9CF6F73F1517713855906346A4ACC4E1F315E824C9F8B65876ECA6869589"
+    }
+  ],
+  "StoredHostReplay": {
+    "Map": 1,
+    "Replay": "local/visibility-intercept-regressions/e1m1-qualified-visibility-regression.json",
+    "Report": "local/column-index-host-e1m1.json",
+    "ReportSha256": "87AE4580A8988EC4F4DF03B295E9BEEE86FF6D7A6633ECF7AE4D4BCFF4780441",
+    "Passed": true,
+    "Commands": 1747,
+    "CheckpointsChecked": 8,
+    "CheckpointsMatched": true,
+    "ExitReason": "ReplayEnd",
+    "DestinationMap": 2,
+    "RenderFrames": 2808,
+    "WallSeconds": 51.749,
+    "Meaning": "Fixed-input replay through the actual headless game host. Frames are worker submissions, not displayed-FPS evidence."
+  }
+}

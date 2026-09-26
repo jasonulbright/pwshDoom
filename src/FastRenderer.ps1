@@ -200,9 +200,11 @@ function Invoke-FastRender {
             [double]$iz1=1/$z1;[double]$iz2=1/$z2;[double]$uz1=$u1/$z1;[double]$uz2=$u2/$z2
             for([int]$x=$x0;$x -lt $x1;$x++) {
                 [int]$clipT=$topClip[$x];[int]$clipB=$bottomClip[$x];if($clipT -gt $clipB){continue}
-                [double]$f=($x+0.5-$sx1)/($sx2-$sx1);[double]$distance=1/($iz1+($iz2-$iz1)*$f)
+                # Match Doom's xToAngle lookup: wall rays are defined at integer
+                # screen columns, not at the half-pixel used for edge coverage.
+                [double]$f=($x-$sx1)/($sx2-$sx1);[double]$distance=1/($iz1+($iz2-$iz1)*$f)
                 [double]$texU=($uz1+($uz2-$uz1)*$f)*$distance+$side.TextureOffset
-                [double]$ray=($x+0.5-160)/160;[double]$rayX=$co+$si*$ray;[double]$rayY=$si-$co*$ray
+                [double]$ray=($x-160)/160;[double]$rayX=$co+$si*$ray;[double]$rayY=$si-$co*$ray
                 [int]$wallT=[Math]::Ceiling(84-160*($ch-$cz)/$distance-0.5)
                 [int]$wallB=[Math]::Floor(84-160*($fh-$cz)/$distance-0.5)
                 # Draw the floor/ceiling exposed before this boundary. Near-first clip intervals
@@ -284,8 +286,8 @@ function Invoke-FastRender {
             [double]$du=$si*$d/160;[double]$dv=-$co*$d/160
             [double]$wu=$cx+$co*$d;[double]$wv=$cy+$si*$d
             do {
-                [double]$uf=$wu+($x+0.5-160)*$du;[int]$u=$uf;if($u -gt $uf){$u--};$u=$u -band 63
-                [double]$vf=-($wv+($x+0.5-160)*$dv);[int]$v=$vf;if($v -gt $vf){$v--};$v=$v -band 63
+                [double]$uf=$wu+($x-160)*$du;[int]$u=$uf;if($u -gt $uf){$u--};$u=$u -band 63
+                [double]$vf=-($wv+($x-160)*$dv);[int]$v=$vf;if($v -gt $vf){$v--};$v=$v -band 63
                 [int]$p=$row+$x;$pixels[$p]=$colors[$flatData[$v*64+$u]];$depthBuffer[$p]=$d
                 $x++
             } while($x -lt $EndColumn -and $planes[$row+$x] -eq $id)

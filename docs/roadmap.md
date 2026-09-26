@@ -37,14 +37,14 @@ it is documented and route automation is stopped for this milestone. The
 broader release acceptance gates below remain intact.
 
 While Jason's one Episode 1 route remains pending, continue independent M4
-fidelity work. New fixed-camera comparisons at E1M2 and E1M3 show 24.9–36.1%
-scene-index disagreement against the adopted renderer, with exact HUDs. The
-fixed-colormap control lowers it to 19.2–27.1% but cannot isolate a lighting
-share because the palette itself changes. The paired receipts and limits are
-in [rendering fidelity](rendering-fidelity.md). The next code investigation is
-texture/projection sampling; do not treat these idle-start views as campaign
-evidence. Sustained 35-tic/60-display performance and full-campaign music also
-remain open.
+fidelity work. Matching Doom's integer-column ray lookup to wall and plane
+sampling reduces differing scene indices by 35.73% across six fixed E1M2/E1M3
+views, with exact HUDs; 17.8–23.6% of scene indices still differ. The before,
+after, worker, and headless E1M1 replay receipts and their limits are in
+[rendering fidelity](rendering-fidelity.md). These idle-start images are not
+campaign evidence, and the headless replay is not a display-rate measurement.
+Other fixed-point projection and vertical sampling, sustained 35-tic/60-display
+performance, and full-campaign music remain open.
 
 "Best" means strongest demonstrated result for this particular combination of language boundary, terminal play, correctness, usability, and reproducible evidence. The study must publish losses and tradeoffs. A compiled source port may win performance, fidelity, portability, or ease of installation; that does not make it a PowerShell-engine implementation. Do not claim superiority over untested alternatives or present our adopted gameplay translation as original work.
 
@@ -76,7 +76,7 @@ Release acceptance requires:
 | M1 — Campaign foundation | Map inventory and failure matrix; correct state transitions; renderer asset refresh on level changes | Per-map smoke results, normal/secret routing tests, E1M1 → E1M2 through the real host, carryover/death checks | Foundation verified: 57 controller checks and recorded E1M1 → E1M2 in all three styles; broader campaign unqualified |
 | M2 — Complete single-player session | Menus, intermission/finale display, pause, save/load, automap, input recording | Scripted state-machine checks, save continuation, short user playtest | Intermission/finale, resume/new-game/quit menus, pause, six save/load slots and versioned input/control recording implemented; automap controls/save/replay integrated, with near-target averages recovered in a bounded test; input settings implemented; physical play and broader qualification remain |
 | M3 — Audio | PowerShell-controlled effects/music and declared device backend | Offline output correctness, real playback review, underrun/latency/load measurements | [Opt-in PowerShell effects and Windows playback](audio.md) integrated; volume/mute and full-host PCM identity verified; [dry PowerShell music](music-synthesis.md) has 55 synthesis tests; [bounded music workers](music-workers.md) preserve the entire E1M1 loop with nineteen current group/lifecycle checks; paced four/eight-worker runs fail 38/118 virtual deadlines, independently audited; [finite float64 cache](music-cache.md) preserves full-score PCM with 22 storage and 391 evidence checks; [E1M1 reusable loop](music-loops.md) qualifies full state/output recurrence and bounded reading; [E1M1 host music](music-integration.md) passes worker/save/headless/live-window checks; the eleven-track Episode 1 catalog including D_VICTOR now passes continuous-loop preparation, independent reader checks and 15 actual simulation/audio-worker checks; uninterrupted campaign playback, presentation pacing, underrun/latency, one-shot music and audible review remain |
-| M4 — Rendering fidelity | Reference comparisons and corrected effects/geometry/HUD | Golden states, categorized differences, regressions tested with animation and moving sectors | HUD parity, numeric world/weapon lighting and invisibility/Spectre fuzz implemented. Fuzz uses a documented per-column phase approximation; 119 focused checks and all three actual worker modes pass. Palette selection is implemented with focused/worker checks and Classic/Matrix captures; AnsiArt capture cleanup remains open. Texture/projection and independent original-executable comparisons remain |
+| M4 — Rendering fidelity | Reference comparisons and corrected effects/geometry/HUD | Golden states, categorized differences, regressions tested with animation and moving sectors | HUD parity, numeric world/weapon lighting and invisibility/Spectre fuzz implemented. Fuzz uses a documented per-column phase approximation; 119 focused checks and all three actual worker modes pass. Palette selection is implemented with focused/worker checks and Classic/Matrix captures; AnsiArt capture cleanup remains open. Integer-column wall/plane sampling reduces static E1M2/E1M3 disagreement, with worker equivalence in all styles; remaining fixed-point projection/vertical sampling and independent original-executable comparisons remain |
 | M5 — Campaign qualification | Complete first-target campaign with normal/secret paths and endings | Route evidence per map and transition, difficulty matrix, longer human sessions | E1M1–E1M4 normal routes qualified. One E1M4-continuation attempt ended in player death at E1M5 waypoint 316/414; exact suffix replay matched 212 samples without establishing an engine defect. The prepared handoff calls for one human E1M1–E1M8 playthrough through E1M9 and the finale; broad per-map/release qualification remains. All five Ultimate Doom boss-trigger cases pass 97 [behavioral checks](boss-progression.md), separate from ordinary-input boss victories and map completion. |
 | M6 — Performance and usability | Stable pacing, lower overhead, sensible worker/font defaults | Repeated paired trials including audio and hard scenes; second machine/display testing | Continuous work; final gate after feature load |
 | M7 — Release and paper | Reproducible package and substantial illustrated article | Clean-checkout test, license/asset audit, linked evidence for every comparison claim | Outline maintained throughout |

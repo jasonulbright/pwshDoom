@@ -1361,8 +1361,39 @@ map-start views against the adopted PowerShell reference, not ordinary
 gameplay, route, performance, or original-executable evidence. Four raw reports
 and a source/hash index are tracked; PNGs remain under ignored `local/`.
 
-No render algorithm changed. The next M4 code investigation is wall/plane
-texture-coordinate stepping versus the reference's fixed-point per-column
-path, followed by paired images and existing worker-equivalence checks. Keep
-the human playthrough pending as a single user milestone; no map-by-map user
-request or bot route was run.
+At that time, no render algorithm changed. The next M4 investigation was
+horizontal wall/plane sampling against the reference's fixed-point per-column
+path. Keep the human playthrough pending as a single user milestone; no
+map-by-map user request or bot route was run.
+
+## 2026-09-26 — Match horizontal samples to Doom's integer columns
+
+Source inspection found that the adopted renderer chooses each camera ray from
+`xToAngle[x]`, while the numeric renderer sampled wall perspective
+interpolation, screen rays, and flat U/V at `x+0.5`. At column 160 the
+reference angle is zero; the former half-pixel analytic ray is about -0.18
+degrees. Change those four horizontal samples to integer column `x`. Keep pixel
+coverage and vertical sampling unchanged.
+
+Use the same installed Ultimate Doom IWAD, pinned engine bundle, 35-idle-update
+endpoints, headings 0/90/180, and E1M2/E1M3 states as the prior comparison.
+Scene-index mismatches per 53,760 pixels fall from 13,377/19,024/14,238 to
+8,490/12,695/10,264 on E1M2, and 19,434/17,458/18,440 to
+13,014/9,564/11,511 on E1M3. Across all 322,560 pixels, this is 101,971 to
+65,538 differences (35.73% fewer); RGB-channel MAE decreases in every view and
+all HUD comparisons remain exact. Residual scene disagreement is 17.8–23.6%.
+The adopted PowerShell renderer is not independently verified original-engine
+output, and these static views do not establish navigation, full fidelity, or
+performance. Raw report hashes and the combined table are in
+`results/render-column-index-fidelity.json`.
+
+The production source passes actual seven-strip worker equivalence in Classic,
+Matrix/Katakana, and AnsiArt/Katakana: 320,000 pixels and 35 encoded strips per
+style. A previously stored E1M1 fixed-input replay also passes through the
+headless host: 1,747 commands, eight matching checkpoints, and E1M2 entry. This
+is a replay regression, not human coverage or displayed-FPS evidence. The
+attempted requalification that supplied an already-qualified replay to the
+route-driver qualifier is not counted; it reached E1M2 but lacked that
+qualifier's driver trace/final-health fields. The full-host replay report is
+retained locally and its hash is indexed in the combined result. Preserve the
+user's single complete Episode 1 run as the pending human milestone.
