@@ -50,7 +50,7 @@ function ConvertTo-RenderPatch {
             }
         }
     }
-    return @{Width=$Patch.Width;Height=$Patch.Height;Left=$Patch.LeftOffset;Top=$Patch.TopOffset;Data=$data}
+    return @{Width=$Patch.Width;Height=$Patch.Height;Left=$Patch.LeftOffset;Top=$Patch.TopOffset;Data=$data;Columns=$Patch.Columns}
 }
 
 function Get-RenderPatch {
@@ -114,7 +114,8 @@ function New-FastRenderContext {
 
 function Draw-FastPatch {
     param($Context,$Patch,[double]$Left,[double]$Top,[double]$Scale=1,[double]$Distance=0,
-        [bool]$Flip=$false,[int]$Light=0,[int]$FirstColumn=0,[int]$EndColumn=320,[int]$MaxY=200)
+        [bool]$Flip=$false,[int]$Light=0,[int]$FirstColumn=0,[int]$EndColumn=320,[int]$MaxY=200,
+    [int]$TextureAltData=0,[int]$CenterY=84,[switch]$FixedVerticalSampling)
     [int]$pw=$Patch.Width;[int]$ph=$Patch.Height;[int[]]$texels=$Patch.Data
     [byte[]]$pixels=$Context.Pixels;[double[]]$depth=$Context.Depth;[byte[]]$colors=$Context.Colors[$Light]
     if($pw -le 0 -or $ph -le 0 -or $Scale -le 0){return}
@@ -124,13 +125,46 @@ function Draw-FastPatch {
     [int]$screenLeft=[Math]::Floor($Left);[int]$screenEnd=[Math]::Floor($Left+$pw*$Scale)
     [int]$x0=[Math]::Max($FirstColumn,$screenLeft);[int]$x1=[Math]::Min($EndColumn,$screenEnd)
     [int]$y0=[Math]::Max(0,[Math]::Ceiling($Top));[int]$y1=[Math]::Min($MaxY,[Math]::Ceiling($Top+$ph*$Scale))
-    if($x0 -ge $x1 -or $y0 -ge $y1){return}
+    if($x0 -ge $x1 -or (-not $FixedVerticalSampling -and $y0 -ge $y1)){return}
     [int]$scaleData=[Math]::Truncate($Scale*65536.0)
     if($scaleData -le 0){return}
     [long]$invScaleData=[Math]::Truncate(4294967296.0/$scaleData)
     [long]$fracStep=if($Flip){-$invScaleData}else{$invScaleData}
     [long]$fracData=if($Flip){([long]$pw -shl 16)-1L}else{0L}
     $fracData+=([long]$x0-$screenLeft)*$fracStep
+    if($FixedVerticalSampling){
+        # Masked sprites are a sequence of posts, not a solid rectangle. Keep
+        # each post's fixed-point start/end so a texel ending exactly on a row
+        # boundary does not leak into the following transparent row.
+        if($null -eq $Patch.Columns){throw 'Fixed sprite sampling requires the original post columns.'}
+        [int]$topYData=[int](([long]$CenterY*65536)-(([long]$TextureAltData*$scaleData)-shr 16))
+        for([int]$x=$x0;$x -lt $x1;$x++) {
+            [int]$u=[Math]::Clamp([int]($fracData -shr 16),0,$pw-1)
+            foreach($post in $Patch.Columns[$u]){
+                if($post.TopDelta -eq 255){continue}
+                [long]$postTopData=$topYData+([long]$scaleData*$post.TopDelta)
+                [long]$postBottomData=$postTopData+([long]$scaleData*$post.Length)
+                [int]$postY0=[int](($postTopData+65535)-shr 16)
+                [int]$postY1=[int](($postBottomData-1)-shr 16)
+                $postY0=[Math]::Max(0,$postY0);$postY1=[Math]::Min($MaxY-1,$postY1)
+                if($postY0 -le $postY1){
+                    [long]$postAltData=[long]$TextureAltData-([long]$post.TopDelta -shl 16)
+                    [long]$verticalFracData=$postAltData+([long]($postY0-$CenterY)*$invScaleData)
+                    for([int]$y=$postY0;$y -le $postY1;$y++){
+                        [int]$p=$y*320+$x
+                        if($Distance -lt $depth[$p]){
+                            [int]$postRow=[int](($verticalFracData -shr 16) -band 127)
+                            [int]$color=$post.Data[$post.Offset+$postRow]
+                            if($color -ge 0){$pixels[$p]=$colors[$color];$depth[$p]=$Distance}
+                        }
+                        $verticalFracData+=$invScaleData
+                    }
+                }
+            }
+            $fracData+=$fracStep
+        }
+        return
+    }
     if($Scale -eq 1 -and $Distance -eq 0) {
         for([int]$x=$x0;$x -lt $x1;$x++) {
             [int]$u=[Math]::Clamp([int]($fracData -shr 16),0,$pw-1)
@@ -416,10 +450,12 @@ function Invoke-FastRender {
                 if($left -lt $EndColumn -and $left+$patch.Width*$scale -gt $FirstColumn) {
                     $light=if($actor.Frame -band 32768){0}else{$Context.Lighting.Scale[[Math]::Clamp(($actor.LightLevel -shr 4)+$player.ExtraLight,0,15)][[Math]::Min(47,[int][Math]::Floor(2560.0/$d))]}
                     if($player.FixedColorMap -gt 0){$light=$player.FixedColorMap}
+                    [int]$textureAltData=[Math]::Truncate(($actor.Z+$patch.Top-$cz)*65536.0)
                     if($actor.Flags -band 0x40000){
                         Draw-FastFuzzPatch $Context $patch $left (84-($actor.Z+$patch.Top-$cz)*$scale) $scale $d $frame.Flip[$rotation] $FirstColumn $EndColumn 168
                     }else{
-                        Draw-FastPatch $Context $patch $left (84-($actor.Z+$patch.Top-$cz)*$scale) $scale $d $frame.Flip[$rotation] $light $FirstColumn $EndColumn 168
+                        Draw-FastPatch $Context $patch $left (84-($actor.Z+$patch.Top-$cz)*$scale) $scale $d $frame.Flip[$rotation] $light $FirstColumn $EndColumn 168 `
+                            -TextureAltData $textureAltData -CenterY 84 -FixedVerticalSampling
                     }
                 }
             }

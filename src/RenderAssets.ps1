@@ -28,10 +28,31 @@ function Write-GameRenderAssets {
     }
     $writer=[IO.BinaryWriter]::new([IO.File]::Create($Path))
     try {
-        $writer.Write('pwshDoom-assets-v4');$writer.Write(($meta | ConvertTo-Json -Depth 12 -Compress));$writer.Write($patches.Count)
+        $writer.Write('pwshDoom-assets-v5');$writer.Write(($meta | ConvertTo-Json -Depth 12 -Compress));$writer.Write($patches.Count)
+        [byte[]]$sampleBlock=[byte[]]::new(128)
         foreach($p in $patches) {
             $writer.Write([int]$p.Width);$writer.Write([int]$p.Height);$writer.Write([int]$p.Left);$writer.Write([int]$p.Top)
             $bytes=[byte[]]::new($p.Data.Length*4);[Buffer]::BlockCopy($p.Data,0,$bytes,0,$bytes.Length);$writer.Write($bytes)
+            $columns=if($null -ne $p.Columns){$p.Columns}else{@()}
+            $sourceIds=[Collections.Generic.Dictionary[byte[],int]]::new()
+            $sources=[Collections.Generic.List[byte[]]]::new()
+            foreach($column in $columns){
+                foreach($post in $column){
+                    if($post.TopDelta -eq 255){continue}
+                    if(-not $sourceIds.ContainsKey($post.Data)){$sourceIds.Add($post.Data,$sources.Count);$sources.Add($post.Data)}
+                }
+            }
+            $writer.Write([int]$sources.Count)
+            foreach($source in $sources){$writer.Write([int]$source.Length);$writer.Write($source)}
+            $writer.Write([int]$columns.Length)
+            foreach($column in $columns){
+                $posts=@($column|Where-Object {$_.TopDelta -ne 255})
+                $writer.Write([int]$posts.Count)
+                foreach($post in $posts){
+                    $writer.Write([int]$post.TopDelta);$writer.Write([int]$post.Length)
+                    $writer.Write([int]$sourceIds[$post.Data]);$writer.Write([int]$post.Offset)
+                }
+            }
         }
         $writer.Write($Context.Flats.Length)
         foreach($flat in $Context.Flats) {
@@ -46,7 +67,7 @@ function Read-GameRenderAssets {
     param([string]$Path)
     $reader=[IO.BinaryReader]::new([IO.File]::OpenRead($Path))
     try {
-        if($reader.ReadString() -ne 'pwshDoom-assets-v4'){throw 'Unknown render asset format.'}
+        if($reader.ReadString() -ne 'pwshDoom-assets-v5'){throw 'Unknown render asset format.'}
         $meta=$reader.ReadString() | ConvertFrom-Json -AsHashtable
         $patches=[object[]]::new($reader.ReadInt32())
         for($i=0;$i -lt $patches.Length;$i++) {
@@ -54,7 +75,22 @@ function Read-GameRenderAssets {
             $data=[int[]]::new($w*$h);$bytes=$reader.ReadBytes($data.Length*4)
             if($bytes.Length -ne $data.Length*4){throw 'Truncated render asset cache.'}
             [Buffer]::BlockCopy($bytes,0,$data,0,$bytes.Length)
-            $patches[$i]=@{Width=$w;Height=$h;Left=$left;Top=$top;Data=$data}
+            $sourceBuffers=[byte[][]]::new($reader.ReadInt32())
+            for([int]$sourceIndex=0;$sourceIndex -lt $sourceBuffers.Length;$sourceIndex++){
+                $sourceLength=$reader.ReadInt32();$sourceBuffers[$sourceIndex]=$reader.ReadBytes($sourceLength)
+                if($sourceBuffers[$sourceIndex].Length -ne $sourceLength){throw 'Truncated masked sprite source data.'}
+            }
+            $columnCount=$reader.ReadInt32();$columns=[object[]]::new($columnCount)
+            for([int]$x=0;$x -lt $columnCount;$x++){
+                $posts=[object[]]::new($reader.ReadInt32())
+                for([int]$postIndex=0;$postIndex -lt $posts.Length;$postIndex++){
+                    $topDelta=$reader.ReadInt32();$length=$reader.ReadInt32();$sourceIndex=$reader.ReadInt32();$offset=$reader.ReadInt32()
+                    if($sourceIndex -lt 0 -or $sourceIndex -ge $sourceBuffers.Length -or $offset -lt 0 -or $offset -gt $sourceBuffers[$sourceIndex].Length){throw 'Invalid masked sprite source reference.'}
+                    $posts[$postIndex]=@{TopDelta=$topDelta;Length=$length;Offset=$offset;Data=$sourceBuffers[$sourceIndex]}
+                }
+                $columns[$x]=$posts
+            }
+            $patches[$i]=@{Width=$w;Height=$h;Left=$left;Top=$top;Data=$data;Columns=$columns}
         }
         $ctx=@{Segments=$meta.Segments;Nodes=$meta.Nodes;Subsectors=$meta.Subsectors;SkyFlat=$meta.SkyFlat;Sky=$patches[[int]$meta.Sky];Lighting=(New-FastLightingTables);
             Pixels=[byte[]]::new(64000);Depth=[double[]]::new(64000);Planes=[int[]]::new(53760);TopClip=[int[]]::new(320);BottomClip=[int[]]::new(320);
