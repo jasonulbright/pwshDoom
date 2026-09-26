@@ -78,6 +78,8 @@ The gameplay core is an attributed GPL PowerShell translation of ManagedDoom, wi
 pwsh -NoProfile -File scripts/Test-GameActions.ps1
 pwsh -NoProfile -File scripts/Test-E1M1Route.ps1
 pwsh -NoProfile -File scripts/Test-RenderPartitions.ps1
+pwsh -NoProfile -File scripts/Compare-WorldSpriteVerticalSampling.ps1 -Output .\local\my-world-sprite-sampling.json
+pwsh -NoProfile -File scripts/Test-CampaignSmoke.ps1 -Output .\local\my-campaign-smoke.json
 pwsh -NoProfile -File scripts/Test-ConsoleInput.ps1
 pwsh -NoProfile -File scripts/Test-AnsiStrips.ps1
 pwsh -NoProfile -File scripts/Test-CharacterCodec.ps1

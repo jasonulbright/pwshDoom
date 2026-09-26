@@ -13,10 +13,11 @@ Damage and berserk share the red-palette branch; bonus tint follows, then the
 radiation-suit timer/blink branch. The selected index remains discrete during
 camera/geometry interpolation. We do not change damage, pickup, or power rules.
 
-NumericV3 carries selection in header slot45. Disposable assets-v4 carries the
-complete user-supplied PLAYPAL bytes. The simulation header carries the same
-selection for indexed automap screens. Workers encode the complete selected
-image, including HUD colors. This project's full-screen menus deliberately use
+NumericV3 carries selection in header slot45. The current disposable assets-v5
+cache carries the complete user-supplied PLAYPAL bytes and per-post source
+references required by perspective world sprites. The simulation header carries
+the same selection for indexed automap screens. Workers encode the complete
+selected image, including HUD colors. This project's full-screen menus deliberately use
 palette0 for readability; intermission/finale also return to palette0. The
 menu choice is a presentation difference, not a claim of original-menu parity.
 

@@ -22,10 +22,14 @@ E1M8 exit and intermission.
 
 ## Build and launch
 
-Engine/source baseline: commit `6b229ccefaa2012626fa2c184ad1d4fff6c3e811`.
-The final handoff checks were run from repository commit
-`cdc59a9280fd649638a869210beb799c92cd49ec`; later changes in this handoff
-update only documentation and evidence, not gameplay or renderer source.
+Engine/source baseline: commit `f12334e9941e2917da9d4de1c66e92967b0d3967`.
+The 295 focused campaign, boss-trigger, session, menu, and synthetic-input
+assertions were run from repository commit
+`cdc59a9280fd649638a869210beb799c92cd49ec` on the preceding gameplay source.
+The pinned source commit above adds the verified world-sprite and worker-asset
+changes; its 36-map smoke and asset/worker checks are recorded in the current
+[readiness receipt](../results/episode1-playtest-readiness.json). Documentation
+updates after the source commit do not change the launchable game code.
 Run from the repository root in 64-bit PowerShell 7.4 or later on Windows,
 with Windows Terminal, the legally obtained Ultimate Doom `DOOM.WAD`, and the
 prepared local music catalog `local/music-prepared-episode1.json`. The tested Steam IWAD is
@@ -132,6 +136,19 @@ matches the adopted reference at seven fractional pistol offsets and reduces
 scene disagreement in ten E1M1/E1M2 views by a further 3.78%; it raises serial
 render medians slightly in the two measured maps. The readiness receipt links
 raw reports with source hashes and exact test scope.
+
+On 2026-09-26, a further world-sprite correction matched fixed-point masked
+post sampling in 40 real-IWAD scale/origin cases (838 differences before,
+zero after). The current source then passed the full 36-map smoke, exact
+16-worker output for Classic, Matrix/Katakana and AnsiArt/Katakana, 138 weapon
+lighting fixtures through asset format v5, and a live E1M1-to-E1M2 worker
+asset reload. This improves a low-level sprite raster path; it does not certify
+original-executable fidelity or map completion. The linked readiness receipt
+pins the source commit and raw reports. The current-source Classic launcher
+preflight also detects the installed IWAD, Windows Terminal, PowerShell 7.6.5,
+and prepared Episode 1 catalog; its [receipt](../results/episode1-launch-preflight-worldsprite.json)
+is path detection, while the separate audio-worker checks qualify catalog
+contents and playback integration.
 
 ### Jason's human result
 

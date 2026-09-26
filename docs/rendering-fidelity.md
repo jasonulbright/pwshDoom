@@ -296,3 +296,48 @@ individual masked posts, or establish original-executable parity. The
 [PowerShell harness](../scripts/Compare-WeaponPatchVerticalSampling.ps1) and
 [source-pinned receipt](../results/weapon-projection-vertical-offsets.json)
 preserve the exact scope and result.
+
+## Perspective world-sprite post sampling (2026-09-26)
+
+The numeric world-sprite path sampled flattened patches with floating-point
+division. Doom's adopted renderer instead advances a 16.16 row fraction from
+the projected origin, clips each opaque post at its fixed-point bounds, and
+masks the post-local source row to 128 entries. A first comparison on the real
+Steam `DOOM.WAD` `TROOA1` patch found 838 differing indices in five of 40
+scale/origin cases. Preserving just the fixed-point row step still disagreed at
+post boundaries; the final drawer retains each post and matches its clipping,
+fraction origin, and 128-entry source-row mask.
+
+The harness covers ten perspective scales (0.18 through 3.875) and four
+vertical texture origins (20, 20.125, 50.75, 100) on the 41x57 patch, including
+empty and multi-post columns. Both sides use the same fixed projected columns,
+screen bounds, and color map to isolate patch sampling. The final result is
+zero pixel-index differences in all 40 cases. Before/after raw receipts are
+[`world-sprite-vertical-sampling-before.json`](../results/world-sprite-vertical-sampling-before.json)
+and [`world-sprite-vertical-sampling-verified.json`](../results/world-sprite-vertical-sampling-verified.json);
+the reproducible harness is
+[`Compare-WorldSpriteVerticalSampling.ps1`](../scripts/Compare-WorldSpriteVerticalSampling.ps1).
+
+The first 16-process run revealed that the old disposable asset cache flattened
+away sprite posts. Asset format v5 now carries the opaque post bounds, each
+post's source-buffer reference, and its offset, so workers retain the same
+row-wrap behavior without duplicating a 128-byte window per post. A real-IWAD
+cache measured 37,924,656 bytes versus 29,222,789 bytes for v4 (29.8% larger);
+this is an asset-size observation, not a timing or working-set measurement.
+Validation after that change includes the 36-map, skill-3, 35-idle-tic,
+two-frame smoke; 320,000 exact serial/worker pixels across five views for
+Classic, Matrix/Katakana, and AnsiArt/Katakana; 138 player-weapon lighting
+images through the v5 asset round trip; and an E1M1-to-E1M2 reload in sixteen
+live workers with 256,000 matching pixels and 64 encoded strips. Receipts:
+[`campaign smoke`](../results/campaign-smoke-world-sprite-verified.json),
+[`Classic workers`](../results/render-worldsprite-classic-verified.json),
+[`Matrix workers`](../results/render-worldsprite-matrix-verified.json),
+[`AnsiArt workers`](../results/render-worldsprite-ansiart-verified.json),
+[`weapon lighting`](../results/weapon-lighting-assets-v5-verified.json), and
+[`E1M2 worker reload`](../results/worker-assets-v5-dedup-map-reload.json).
+
+These checks establish parity with the adopted PowerShell rasterizer's patch
+algorithm and exact output across this implementation's worker boundary. They
+do not test actor world projection or occlusion against the original
+executable, establish whole-game visual parity, certify campaign completion,
+or measure performance. No speed claim is made.

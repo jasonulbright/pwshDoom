@@ -62,8 +62,13 @@ proof. Horizontal actor/weapon patch sampling now follows the adopted
 renderer’s floored first column and fixed-point texture step: the direct pistol
 fixture matches at seven fractional offsets, and ten static E1M1/E1M2 views
 improve by 3.78% cumulatively. This does not establish original-executable
-parity; vertical/projective sprite details, sustained 35-tic/60-display
-performance, and full-campaign music remain open.
+parity. Perspective world-sprite sampling now matches the adopted renderer's
+fixed-point post bounds and row mask in 40 real-IWAD scale/origin cases, with
+zero differing pixels after an 838-pixel baseline. Asset format v5 preserves
+post data across workers; the current 36-map smoke, all three 16-worker output
+styles, 138 weapon-lighting images, and a live E1M1-to-E1M2 worker asset reload
+pass. Full actor projection parity, sustained 35-tic/60-display performance,
+and full-campaign music remain open.
 
 "Best" means strongest demonstrated result for this particular combination of language boundary, terminal play, correctness, usability, and reproducible evidence. The study must publish losses and tradeoffs. A compiled source port may win performance, fidelity, portability, or ease of installation; that does not make it a PowerShell-engine implementation. Do not claim superiority over untested alternatives or present our adopted gameplay translation as original work.
 

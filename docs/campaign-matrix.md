@@ -70,7 +70,7 @@ Current focused readiness evidence uses the same Ultimate Doom IWAD hash
 `6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F`:
 
 [Episode 1 playtest readiness summary](../results/episode1-playtest-readiness.json)
-uses renderer source baseline `6b229ccefaa2012626fa2c184ad1d4fff6c3e811`,
+uses renderer source baseline `f12334e9941e2917da9d4de1c66e92967b0d3967`,
 links the current renderer smoke and the focused game/session/input checks,
 and explicitly leaves the human route and physical keyboard input pending.
 
@@ -96,14 +96,15 @@ and explicitly leaves the human route and physical keyboard input pending.
   results. [Actual worker integration](../results/save-worker-episode1-music-after-catalog.json)
   passes 15 save/load/new-game checks with 97,020 music frames and clean device
   shutdown. This is not a full-campaign continuity check.
-- [Launcher preflight](../results/episode1-launch-preflight-music.json): the
-  Steam IWAD, 36 episode maps, PowerShell 7.6.5, Windows Terminal and exact
+- [Current-source launcher preflight](../results/episode1-launch-preflight-worldsprite.json):
+  the Steam IWAD, 36 episode maps, PowerShell 7.6.5, Windows Terminal and exact
   catalog path are detected. The separate audio-worker check validates the
   catalog contents; preflight itself does not launch the game.
 - [Launch parameter binding](../results/episode1-launch-binding.txt): the
   documented source entry point parses and exposes every playtest argument.
-- The current-source [36-map smoke](../results/weapon-projection-smoke-current.json)
-  passes after the latest renderer changes. The focused transition/finale,
+- The current-source [36-map smoke](../results/campaign-smoke-world-sprite-verified.json)
+  passes after the latest renderer changes: every Ultimate Doom map advances
+  35 idle tics and renders two frames using sixteen strips. The focused transition/finale,
   boss, menu/session, synthetic console-input, and menu-key checks were freshly
   rerun for the human-playthrough handoff; all 295 assertions passed. The
   [portable final-check receipt](../results/episode1-playtest-final-checks.json)
@@ -113,6 +114,13 @@ and explicitly leaves the human route and physical keyboard input pending.
   [integer-column receipt](../results/render-column-index-fidelity.json) retains
   the preceding correction. None of these substitutes for the one physical
   human playthrough.
+- Perspective [world-sprite post sampling](../results/world-sprite-vertical-sampling-verified.json)
+  now matches the adopted fixed-point masked-post path in 40 real-IWAD
+  scale/origin cases (838 palette-index differences before, zero after).
+  Asset format v5 preserves the required post sources across sixteen workers;
+  all three styles match serial output, 138 weapon-lighting fixtures pass, and
+  a live E1M1-to-E1M2 worker reload preserves all processes. This is a patch
+  raster and transport check, not original-executable parity or map completion.
 - Current-source [weapon/actor patch sampling](../results/weapon-projection-sampling-comparison.json)
   uses the adopted renderer's floored screen origin and fixed-point column
   stepping. Seven fractional pistol offsets match exactly, ten E1M1/E1M2

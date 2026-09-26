@@ -1,6 +1,6 @@
 {
   "Status": "ReadyForOneHumanEpisode1Playthrough",
-  "SourceBaseline": "6b229ccefaa2012626fa2c184ad1d4fff6c3e811",
+  "SourceBaseline": "f12334e9941e2917da9d4de1c66e92967b0d3967",
   "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
   "Scope": [
     "E1M1",
@@ -146,8 +146,9 @@
       "IdleTics": 35,
       "FullFramesPerMap": 2,
       "WorkerStrips": 16,
-      "Receipt": "results/weapon-projection-smoke-current.json",
-      "Meaning": "Current-source startup/render smoke for all 36 Ultimate Doom maps. Each map advances 35 idle tics and rasterizes two full frames in the 16-strip serial reference path. Not map completion or displayed-FPS evidence."
+      "Receipt": "results/campaign-smoke-world-sprite-verified.json",
+      "Meaning": "Current-source startup/render smoke for all 36 Ultimate Doom maps. Each map advances 35 idle tics and rasterizes two full frames in the 16-strip serial reference path. Not map completion or displayed-FPS evidence.",
+      "SourceCommit": "f12334e9941e2917da9d4de1c66e92967b0d3967"
     },
     "CurrentSourceCampaignTransitions": {
       "Passed": 57,
@@ -260,7 +261,6 @@
       "WorkerMemoryMeaning": "Combined working set observed across sixteen render workers during this headless replay."
     },
     "RendererSpriteSampling": {
-      "CurrentSourceCommit": "6b229ccefaa2012626fa2c184ad1d4fff6c3e811",
       "ComparisonReceipt": "results/weapon-projection-sampling-comparison.json",
       "ComparisonReceiptSha256": "89BCE436714FC7F5C8B90BD9F429759837B5D21262EB9A4BB0DFADC4B005C654",
       "BaselineSourceCommit": "4311cc619eefd1246fcaa7f13332d8330e3f5a5f",
@@ -285,7 +285,73 @@
         "E1M1": 2.95,
         "E1M2": 0.4
       },
-      "Reference": "Adopted PowerShell reference, not independently verified original-executable output."
+      "Reference": "Adopted PowerShell reference, not independently verified original-executable output.",
+      "CorrectionSourceCommit": "6b229ccefaa2012626fa2c184ad1d4fff6c3e811"
+    },
+    "RendererWorldSpritePostSampling": {
+      "MismatchingCasesBefore": 5,
+      "SourceCommit": "f12334e9941e2917da9d4de1c66e92967b0d3967",
+      "MismatchingCasesAfter": 0,
+      "Meaning": "Isolated masked-post rasterization with the same projected columns, screen bounds, and color map; not actor world projection or campaign evidence.",
+      "BeforeReceipt": "results/world-sprite-vertical-sampling-before.json",
+      "DifferentPixelsAfter": 0,
+      "PatchDimensions": "41x57",
+      "ScaleCount": 10,
+      "DifferentPixelsBefore": 838,
+      "Cases": 40,
+      "AfterReceipt": "results/world-sprite-vertical-sampling-verified.json",
+      "Patch": "TROOA1",
+      "Reference": "Adopted PowerShell renderer; not independently verified original-executable output.",
+      "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+      "TextureOriginCount": 4
+    },
+    "CurrentSourceWorkerValidation": {
+      "PixelComparisonsPerStyle": 320000,
+      "CacheBytesV5": 37924656,
+      "ViewsPerStyle": 5,
+      "EncodedStripChecksPerStyle": 80,
+      "Styles": [
+        {
+          "Style": "Classic",
+          "Receipt": "results/render-worldsprite-classic-verified.json"
+        },
+        {
+          "Style": "Matrix/Katakana",
+          "Receipt": "results/render-worldsprite-matrix-verified.json"
+        },
+        {
+          "Style": "AnsiArt/Katakana",
+          "Receipt": "results/render-worldsprite-ansiart-verified.json"
+        }
+      ],
+      "WeaponLighting": {
+        "Cases": 138,
+        "Receipt": "results/weapon-lighting-assets-v5-verified.json",
+        "PreviousImplementationMismatchCases": 88
+      },
+      "CacheGrowthPercent": 29.8,
+      "MapReload": {
+        "WorkersPreserved": true,
+        "From": "E1M1",
+        "EncodedStripChecks": 64,
+        "Receipt": "results/worker-assets-v5-dedup-map-reload.json",
+        "PixelComparisons": 256000,
+        "To": "E1M2"
+      },
+      "CacheSizeMeaning": "Temporary assets for the installed IWAD; file size only, not startup time or resident working set.",
+      "AssetFormat": "pwshDoom-assets-v5",
+      "WorkerCount": 16,
+      "CacheBytesV4": 29222789
+    },
+    "CurrentSourceLauncherCheck": {
+      "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+      "Meaning": "Current-source launcher path check for the documented Classic Episode 1 handoff. This confirms path, IWAD inventory, PowerShell and Windows Terminal detection; track/WAD qualification and playback are covered by the separate audio-worker evidence.",
+      "EpisodeMaps": 36,
+      "SourceCommit": "f12334e9941e2917da9d4de1c66e92967b0d3967",
+      "MusicCatalogSha256": "0E9C9542C75F4D5E2D7FC71E42FAFBB58F94321C3B8A49BA0C9AC5A93752EE58",
+      "PowerShell": "7.6.5",
+      "Receipt": "results/episode1-launch-preflight-worldsprite.json",
+      "Ready": true
     }
   },
   "HumanPlaythrough": {
@@ -525,6 +591,42 @@
     {
       "Sha256": "5F6B79DEC7634ED49657F501ADEC1610E0C4BCA7F38F45D2ECBEA70DB03C4F47",
       "Path": "results/episode1-playtest-final-checks.json"
+    },
+    {
+      "Path": "results/campaign-smoke-world-sprite-verified.json",
+      "Sha256": "666D702ACC92F9A64741C0F17F1EF977AC71BBC647A8ABEA559FFCC9D5DF7C85"
+    },
+    {
+      "Path": "results/render-worldsprite-classic-verified.json",
+      "Sha256": "D30D8A1F20EC9F2249F17E05DD0BCEF1C635D1AE2A56C18612114F6C15EC6B4F"
+    },
+    {
+      "Path": "results/render-worldsprite-matrix-verified.json",
+      "Sha256": "5B305F0ADC83076742AF8B8938E61018281AB843A7542BE9EEFC56502825BFEB"
+    },
+    {
+      "Path": "results/render-worldsprite-ansiart-verified.json",
+      "Sha256": "8CC2AF1F2D73F505E1DD026CF76DDD11FE3EB7649C81436650EDCB0A4717B89A"
+    },
+    {
+      "Path": "results/weapon-lighting-assets-v5-verified.json",
+      "Sha256": "EA9153D43E4168E10B2769C62ACC689A4DD7F72F607EB8771C6F54BEEED25D3F"
+    },
+    {
+      "Path": "results/worker-assets-v5-dedup-map-reload.json",
+      "Sha256": "96F92B43BC9F22FAA8945EBB99BD7A3DF71499BBBB446C5D250835E7F78C8BA1"
+    },
+    {
+      "Path": "results/world-sprite-vertical-sampling-before.json",
+      "Sha256": "5AB9A3098ED387724D8A4F57258C03B9143F28007406B5EB5E2CF5FEBC156E98"
+    },
+    {
+      "Path": "results/world-sprite-vertical-sampling-verified.json",
+      "Sha256": "253BDDEEE83F36E6D88BD1B2E46602D4634126F4BE5252168FA0BE66ED42DA8E"
+    },
+    {
+      "Path": "results/episode1-launch-preflight-worldsprite.json",
+      "Sha256": "36C556827730FFDBE1A88E42D818C68A405C96D8A4014FFD49F986743F8AAD31"
     }
   ]
 }

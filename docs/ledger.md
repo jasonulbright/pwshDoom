@@ -1604,3 +1604,28 @@ to agree on the complete music catalog and current verification. No game or
 renderer source changed during this handoff pass. The next campaign evidence
 is Jason's single complete human route; do not substitute more automated route
 work or recording experiments.
+
+## 2026-09-26 — Match perspective world-sprite post sampling
+
+The adopted renderer's fixed-point column code exposed a gap in our projected
+world-sprite drawer. A focused comparison of the installed Ultimate Doom
+`TROOA1` patch across ten scales and four vertical texture origins found five
+mismatching cases and 838 different palette indices. The first fixed-row-step
+revision still differed at opaque-post edges, so the final change preserves
+each post's fixed-point projected bounds, starts its row fraction at the
+clipped post row, and applies the reference's 128-entry source-row mask. The
+same 40 cases then match with zero differing pixels. Before/after receipts and
+limits are documented in [rendering fidelity](rendering-fidelity.md).
+
+The first process-worker run found that disposable asset transport discarded
+post-column metadata. Asset format v5 now carries each post's bounds and a
+reference to its shared source buffer and offset. This avoids repeating a
+128-byte sample window for every post. After the transport fix, all three 16-process display styles
+match serial output over five views, 138 weapon-lighting cases pass through a
+v5 round trip, and the E1M1-to-E1M2 worker reload passes without restarting
+the sixteen workers. The current 36-map, 35-idle-tic, two-frame smoke also
+passes. These are renderer and startup checks, not campaign completion or
+original-executable parity. Performance was not measured in this change.
+The renderer and asset-transport update is committed as
+`f12334e9941e2917da9d4de1c66e92967b0d3967`; the readiness receipt pins that
+source while retaining Jason's single complete Episode 1 route as pending.
