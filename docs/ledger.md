@@ -1452,3 +1452,13 @@ maps with 35 idle tics and two full frames per map. Raw comparisons, worker
 reports, smoke results, hashes and limits are in
 `results/render-integer-row-fidelity.json`. This smoke is not map completion;
 Jason's single complete Episode 1 playthrough remains pending.
+
+## 2026-09-26 — Pin the revised Episode 1 handoff
+
+The exact engine source baseline is now commit
+`2d3a6242421b708436392e453162ae2885c8d60c`. The post-change nine-map smoke,
+renderer comparisons, and all three worker-style reports are included in the
+readiness receipt. The focused transition, boss, menu/session and synthetic
+input checks remain valid: the renderer-only change did not modify their
+simulation or UI dependencies. The handoff retains one whole-episode human run
+as pending and makes no campaign-completion or physical-keyboard claim.

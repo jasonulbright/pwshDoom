@@ -1,6 +1,6 @@
 {
   "Status": "ReadyForOneHumanEpisode1Playthrough",
-  "SourceBaseline": "4e66cd36fe2f9f54c5a9e7e9bc7519e152289664",
+  "SourceBaseline": "2d3a6242421b708436392e453162ae2885c8d60c",
   "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
   "Scope": [
     "E1M1",
@@ -118,7 +118,7 @@
       "Skill": 3,
       "IdleTics": 35,
       "FullFramesPerMap": 2,
-      "Receipt": "results/episode1-playtest-smoke-current.json"
+      "Receipt": "results/episode1-render-integer-row-smoke-final.json"
     },
     "CurrentSourceCampaignTransitions": {
       "Passed": 57,
@@ -147,7 +147,7 @@
       "DesktopInputInjected": false,
       "Receipt": "results/episode1-playtest-console-input-current.txt"
     },
-    "RendererSamplingCorrection": {
+    "RendererHorizontalSamplingCorrection": {
       "Receipt": "results/render-column-index-fidelity.json",
       "Views": 6,
       "SceneIndicesBefore": 101971,
@@ -162,6 +162,25 @@
       ],
       "Reference": "Adopted PowerShell renderer, not independently verified original-executable output",
       "HostReplay": "E1M1 fixed-input headless replay: 1747 commands, 8 checkpoints, E1M2 entry; no displayed-FPS claim."
+    },
+    "RendererIntegerRowSampling": {
+      "Receipt": "results/render-integer-row-fidelity.json",
+      "Views": 6,
+      "SceneIndicesInitial": 101971,
+      "AfterHorizontal": 65538,
+      "AfterIntegerRows": 42750,
+      "CumulativeReductionPercent": 58.08,
+      "ResidualMinimumPercent": 9.59,
+      "ResidualMaximumPercent": 15.58,
+      "HudDifferences": 0,
+      "AllRgbErrorsImproved": true,
+      "WorkerStyles": [
+        "Classic",
+        "Matrix/Katakana",
+        "AnsiArt/Katakana"
+      ],
+      "Episode1Smoke": "results/episode1-render-integer-row-smoke-final.json",
+      "Reference": "Adopted PowerShell renderer, not independently verified original-executable output."
     }
   },
   "HumanPlaythrough": {
@@ -285,6 +304,34 @@
     {
       "Path": "results/render-column-index-workers-ansiart-katakana.json",
       "Sha256": "F56D03BF5670BBEF67EE8C9B280D9C078748CBC31CDBA80027963E23C7D6CC96"
+    },
+    {
+      "Path": "results/episode1-render-integer-row-smoke-final.json",
+      "Sha256": "F27ACA0040B0AA72BF0218AC5AD0ED592F99F2D0409082CD2C9CDCBB906C9E19"
+    },
+    {
+      "Path": "results/render-integer-row-fidelity.json",
+      "Sha256": "40C91C0446B04AB97AB188A75ACC5CB3CF2EF237A422DB4D521178934AC78FFB"
+    },
+    {
+      "Path": "results/render-reference-integer-row-e1m2.json",
+      "Sha256": "BC7E9582D21FDABB4F1B48A9D7198BBDB8ED11DE205823033636C595EC8971EB"
+    },
+    {
+      "Path": "results/render-reference-integer-row-e1m3.json",
+      "Sha256": "1DA53188FBBFC2DF80CBABACB8DF541BF19B5AD8C4652F2038BD7FE37D8009B7"
+    },
+    {
+      "Path": "results/render-integer-row-workers-classic.json",
+      "Sha256": "6308C7D4359E59CE72AAA02B238F7F4F07B720E5D6C461B50BA25CB73F510944"
+    },
+    {
+      "Path": "results/render-integer-row-workers-matrix-katakana.json",
+      "Sha256": "92BC20AF2EF8410514971DC923C97F2C513F68FD2F7574574C841A3C819D944F"
+    },
+    {
+      "Path": "results/render-integer-row-workers-ansiart-katakana.json",
+      "Sha256": "B5EB664891F43457F480985E2A7145C5E0AC4F8A82D837C017A603745B2D09AC"
     }
   ]
 }

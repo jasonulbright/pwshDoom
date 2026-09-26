@@ -64,9 +64,9 @@ Current focused readiness evidence uses the same Ultimate Doom IWAD hash
 `6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F`:
 
 [Episode 1 playtest readiness summary](../results/episode1-playtest-readiness.json)
-uses renderer source baseline `4e66cd36fe2f9f54c5a9e7e9bc7519e152289664`,
-links current-source readiness checks below, and explicitly leaves the human
-route and physical keyboard input pending.
+uses renderer source baseline `2d3a6242421b708436392e453162ae2885c8d60c`,
+links the current renderer smoke and the focused game/session/input checks,
+and explicitly leaves the human route and physical keyboard input pending.
 
 - [Visibility fix and route regressions](../results/visibility-campaign-regressions.json):
   two intercept checks, the original E1M1–E1M4 stored route replays, and a
@@ -96,15 +96,19 @@ route and physical keyboard input pending.
   catalog contents; preflight itself does not launch the game.
 - [Launch parameter binding](../results/episode1-launch-binding.txt): the
   documented source entry point parses and exposes every playtest argument.
-- Fresh source-matched [nine-map smoke](../results/episode1-playtest-smoke-current.json),
+- The current-source [nine-map smoke](../results/episode1-render-integer-row-smoke-final.json)
+  passes after the integer-row wall sampling change. The focused
   [transition/finale fixtures](../results/episode1-playtest-transitions-current.json),
   [boss progression fixtures](../results/episode1-playtest-bosses-current.json),
   [menu/session fixtures](../results/episode1-playtest-menus-current.json), and
   [synthetic console-input checks](../results/episode1-playtest-console-input-current.txt)
-  were rerun against the renderer source baseline above. The separate
-  [renderer receipt](../results/render-column-index-fidelity.json) captures the
-  sampling comparison and serial/worker equivalence. None of these substitutes
-  for the one physical human playthrough.
+  passed on the prior renderer source; this wall-only change leaves their game,
+  menu, and input code dependencies untouched. The separate
+  [integer-row renderer receipt](../results/render-integer-row-fidelity.json)
+  captures the latest sampling comparison and serial/worker equivalence; the
+  [integer-column receipt](../results/render-column-index-fidelity.json) retains
+  the preceding correction. None of these substitutes for the one physical
+  human playthrough.
 
 These checks support a normal playthrough attempt but do not certify route
 completion. E1M5's failed automated continuation ended in player death and

@@ -22,7 +22,7 @@ E1M8 exit and intermission.
 
 ## Build and launch
 
-Engine/source baseline: commit `4e66cd36fe2f9f54c5a9e7e9bc7519e152289664`.
+Engine/source baseline: commit `2d3a6242421b708436392e453162ae2885c8d60c`.
 Run from the repository root in 64-bit PowerShell 7.4 or later on Windows,
 with Windows Terminal, the legally obtained Ultimate Doom `DOOM.WAD`, and the
 prepared local music catalog `local/music-prepared-episode1.json`. The tested Steam IWAD is
@@ -95,13 +95,17 @@ replays and the nine-map smoke; full raw replay reports remain under ignored
 [`campaign-e1m5-investigation.md`](campaign-e1m5-investigation.md); it ended in
 player death and did not establish a repeatable engine defect.
 
-Fresh current-source checks pass: nine Episode 1 maps load and render after 35
-idle tics; 57 campaign transition/finale checks, 97 boss checks, 125 menu/session
-checks with 46 screen fixtures, and six synthetic console-input checks all pass.
-The renderer sampling correction reduces disagreements in six fixed E1M2/E1M3
-views by 35.73% against the adopted PowerShell reference; it does not establish
-original-executable parity or gameplay pacing. The readiness receipt links the
-raw reports with their source hashes and exact test scope.
+The current renderer passes smoke on all nine Episode 1 maps after 35 idle tics.
+Focused engine/session/input checks also pass: 57 campaign transition/finale
+checks, 97 boss checks, 125 menu/session checks with 46 screen fixtures, and
+six synthetic console-input checks. Those focused checks were run before the
+latest renderer-only change; their engine, menu, and input dependencies are
+unchanged.
+The renderer's horizontal-ray and integer-row wall sampling corrections reduce
+disagreements in six fixed E1M2/E1M3 views by 58.08% cumulatively against the
+adopted PowerShell reference; 9.59–15.58% still differ. This does not establish
+original-executable parity or gameplay pacing. The readiness receipt links raw
+reports with source hashes and exact test scope.
 
 ### Jason's human result
 
