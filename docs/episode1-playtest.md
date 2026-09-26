@@ -22,7 +22,7 @@ E1M8 exit and intermission.
 
 ## Build and launch
 
-Engine/source baseline: commit `2d3a6242421b708436392e453162ae2885c8d60c`.
+Engine/source baseline: commit `4311cc619eefd1246fcaa7f13332d8330e3f5a5f`.
 Run from the repository root in 64-bit PowerShell 7.4 or later on Windows,
 with Windows Terminal, the legally obtained Ultimate Doom `DOOM.WAD`, and the
 prepared local music catalog `local/music-prepared-episode1.json`. The tested Steam IWAD is
@@ -40,6 +40,14 @@ pwsh -NoProfile -File .\Start-Doom.ps1 `
   -RecordInput .\local\episode1-human-playthrough.json `
   -Report .\local\episode1-human-session.json -Maximized
 ```
+
+The build uses sixteen renderer processes by default. Leave that setting in
+place for this handoff. The first real-host map transition was verified with
+the v4 asset format and all sixteen workers stayed alive while E1M2 assets
+loaded. That headless run wrote no terminal frames, so it does not certify
+visible frame rate or full-campaign audio continuity.
+Those sixteen workers used about 4.0 GB of combined working memory in that
+headless run; mention any memory pressure or sluggish response during play.
 
 If Steam installed the IWAD elsewhere, replace only the `-Wad` value with the
 path to that same Ultimate Doom IWAD. The recording and session report paths
@@ -101,11 +109,15 @@ checks, 97 boss checks, 125 menu/session checks with 46 screen fixtures, and
 six synthetic console-input checks. Those focused checks were run before the
 latest renderer-only change; their engine, menu, and input dependencies are
 unchanged.
-The renderer's horizontal-ray and integer-row wall sampling corrections reduce
-disagreements in six fixed E1M2/E1M3 views by 58.08% cumulatively against the
-adopted PowerShell reference; 9.59–15.58% still differ. This does not establish
-original-executable parity or gameplay pacing. The readiness receipt links raw
-reports with source hashes and exact test scope.
+The latest fixed-point floor/ceiling mapping brings the six-view scene-index
+mismatch against the adopted PowerShell reference from 101,971 to 37,798
+(62.9% fewer than the original numeric baseline); 7.38–14.19% still differ.
+All three output styles match serial output exactly across 16 worker processes.
+Serial render medians increased 6–10.5% in the two measured maps, and the
+headless replay averaged 34.97 simulation tics/sec. These are not displayed-FPS
+measurements; they set realistic expectations for Jason's run. This does not
+establish original-executable parity. The readiness receipt links raw reports
+with source hashes and exact test scope.
 
 ### Jason's human result
 

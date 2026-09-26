@@ -1,6 +1,6 @@
 {
   "Status": "ReadyForOneHumanEpisode1Playthrough",
-  "SourceBaseline": "2d3a6242421b708436392e453162ae2885c8d60c",
+  "SourceBaseline": "4311cc619eefd1246fcaa7f13332d8330e3f5a5f",
   "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
   "Scope": [
     "E1M1",
@@ -118,7 +118,7 @@
       "Skill": 3,
       "IdleTics": 35,
       "FullFramesPerMap": 2,
-      "Receipt": "results/episode1-render-integer-row-smoke-final.json"
+      "Receipt": "results/episode1-render-fixed-plane-smoke-current.json"
     },
     "CurrentSourceCampaignTransitions": {
       "Passed": 57,
@@ -181,6 +181,54 @@
       ],
       "Episode1Smoke": "results/episode1-render-integer-row-smoke-final.json",
       "Reference": "Adopted PowerShell renderer, not independently verified original-executable output."
+    },
+    "RendererFixedPlaneMapping": {
+      "Receipt": "results/render-fixed-plane-fidelity.json",
+      "Views": 6,
+      "ScenePixelsCompared": 322560,
+      "OriginalNumericBaselineDifferentIndices": 101971,
+      "PriorWallCorrectedDifferentIndices": 42750,
+      "CurrentDifferentIndices": 37798,
+      "CumulativeReductionPercent": 62.94,
+      "IncrementalReductionPercent": 11.58,
+      "ResidualMismatchPercent": [
+        7.38,
+        14.19
+      ],
+      "HudDifferences": 0,
+      "WorkerCount": 16,
+      "WorkerStyles": [
+        "Classic",
+        "Matrix/Katakana",
+        "AnsiArt/Katakana"
+      ],
+      "PixelDifferences": 0,
+      "EncodedStripChecksPerStyle": 80,
+      "AssetFormat": "pwshDoom-assets-v4",
+      "Reference": "Adopted PowerShell renderer; not independently verified original-executable output.",
+      "SerialMedianMilliseconds": {
+        "E1M2Baseline": 46.4786,
+        "E1M2Current": 51.34925,
+        "E1M3Baseline": 43.457,
+        "E1M3Current": 46.07165,
+        "Interpretation": "Candidate medians increased; no speed improvement claimed."
+      },
+      "ReceiptMeaning": "Static fidelity comparison and worker parity; not a completed route or displayed-FPS measurement."
+    },
+    "CurrentSourceHostReplay": {
+      "Receipt": "results/renderer-assets-map-transition-fixed-plane.json",
+      "Commands": 1747,
+      "FinalMap": "E1M2",
+      "MapAssetGeneration": 2,
+      "WorkersPreserved": 16,
+      "CheckpointsMatched": 8,
+      "ReplaySourceMatched": false,
+      "SimulationTicsPerSecond": 34.973,
+      "ScheduledRenderUpdatesPerSecond": 59.177,
+      "TerminalFramesWritten": 0,
+      "Meaning": "Stored older-source E1M1 replay reached E1M2 and reloaded v4 assets in place. No displayed-FPS claim.",
+      "WorkerWorkingSetBytes": 4031377408,
+      "WorkerMemoryMeaning": "Combined working set observed across sixteen render workers during this headless replay."
     }
   },
   "HumanPlaythrough": {
@@ -194,7 +242,10 @@
     "Physical keyboard play remains pending.",
     "The full-campaign audio path and audible review of all tracks are not yet certified; only a short E1M1 playback integration was checked.",
     "35-tic/60-display pacing, vanilla pixel fidelity, and broader release gates remain open.",
-    "The E1M5 automated continuation died without establishing a reproducible engine defect; no route retry is part of this milestone."
+    "The E1M5 automated continuation died without establishing a reproducible engine defect; no route retry is part of this milestone.",
+    "The current headless host replay wrote zero terminal frames; visible frame rate and physical keyboard play remain unverified.",
+    "The fixed-point plane change improves the adopted reference comparison but raises single-process serial render medians in both measured maps.",
+    "The host replay averaged 34.97 simulation tics/sec and paused output for 1.91 seconds during the E1M2 asset reload."
   ],
   "Artifacts": [
     {
@@ -332,6 +383,50 @@
     {
       "Path": "results/render-integer-row-workers-ansiart-katakana.json",
       "Sha256": "B5EB664891F43457F480985E2A7145C5E0AC4F8A82D837C017A603745B2D09AC"
+    },
+    {
+      "Path": "results/render-fixed-plane-fidelity.json",
+      "Sha256": "FD8E9DF309314BC0880FEBACFD03D62FD4F3020FD7693F5A49B273565797058F"
+    },
+    {
+      "Path": "results/episode1-render-fixed-plane-smoke-current.json",
+      "Sha256": "0DEDBEFCA187833BD4F3B44B7C1F4635BA556ED3D091B1E3ECEF45E113684A27"
+    },
+    {
+      "Path": "results/renderer-assets-map-transition-fixed-plane.json",
+      "Sha256": "05EB4BAAE94F7FD253AB002A06A858F3088D24DC96E47EA3501B9D40E2D61417"
+    },
+    {
+      "Path": "results/render-fixed-plane-reference-e1m2-16.json",
+      "Sha256": "D72110486C458F7F00269AC44BC899EA0FCB17BB65A993528D5E81195EE89CC7"
+    },
+    {
+      "Path": "results/render-fixed-plane-reference-e1m3-16.json",
+      "Sha256": "C3237B493D15A83F499B31A49A42E076C0530DF36596E2BBA700CEEE72DF484C"
+    },
+    {
+      "Path": "results/render-fixed-plane-workers-classic-16.json",
+      "Sha256": "D62014AB03E9A7934506AB79142C2896859473A9B4E038C10353276C30926C71"
+    },
+    {
+      "Path": "results/render-fixed-plane-workers-matrix-katakana-16.json",
+      "Sha256": "969118A0BAAEA00D6FB0585E81850DA82CC661D748FD6AEE7E5AC135F739B55F"
+    },
+    {
+      "Path": "results/render-fixed-plane-workers-ansiart-katakana-16.json",
+      "Sha256": "CFA13421CAC43009718835B8FCEEB0B8FC661A7ED9C8FF6FF1BFD280DCE0E88C"
+    },
+    {
+      "Path": "results/render-fixed-plane-pair-e1m2.json",
+      "Sha256": "84F9A88B99B212A0D3C33F0245232D9CB2FB147B87F8BADF5133009D4F173BA9"
+    },
+    {
+      "Path": "results/render-fixed-plane-pair-e1m3.json",
+      "Sha256": "AD811DD600A7C07827E062F4752C333C64DBDC1C0E4B66389F30545AD182A9D0"
+    },
+    {
+      "Path": "results/session-worker-fixed-plane-16.json",
+      "Sha256": "D05C4CAAD15B36B0A996AB41150A90EE40E40F061AFB3B132DA4E2ED024704FE"
     }
   ]
 }

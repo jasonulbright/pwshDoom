@@ -1456,12 +1456,15 @@ Jason's single complete Episode 1 playthrough remains pending.
 ## 2026-09-26 — Pin the revised Episode 1 handoff
 
 The exact engine source baseline is now commit
-`2d3a6242421b708436392e453162ae2885c8d60c`. The post-change nine-map smoke,
-renderer comparisons, and all three worker-style reports are included in the
-readiness receipt. The focused transition, boss, menu/session and synthetic
-input checks remain valid: the renderer-only change did not modify their
-simulation or UI dependencies. The handoff retains one whole-episode human run
-as pending and makes no campaign-completion or physical-keyboard claim.
+`4311cc619eefd1246fcaa7f13332d8330e3f5a5f`. The current-source nine-map
+smoke, renderer comparisons, all three worker-style reports, and actual
+sixteen-process E1M1-to-E1M2 asset reload are indexed in the readiness receipt.
+The stored replay has eight matching checkpoints but an older source
+fingerprint, and wrote no terminal frames. The focused transition, boss,
+menu/session and synthetic input checks remain valid: the renderer-only
+change did not modify their simulation or UI dependencies. The handoff retains
+one whole-episode human run as pending and makes no campaign-completion,
+physical-keyboard, or displayed-FPS claim.
 
 ## 2026-09-26 — Fixed-point planes across render strips
 
@@ -1498,3 +1501,13 @@ identical; the corrected reports pin different hashes and no source changes
 during measurement. Results, parameters, and limits are indexed in
 [`rendering-fidelity.md`](rendering-fidelity.md). This does not change the
 pending human Episode 1 playthrough.
+
+## 2026-09-26 — Refresh the one-run Episode 1 handoff
+
+The launch handoff now pins engine/source commit
+`4311cc619eefd1246fcaa7f13332d8330e3f5a5f`, uses the tested Steam Ultimate
+Doom IWAD and locally prepared Episode 1 music catalog, and requests one
+complete E1M1 → E1M8 human playthrough including E1M3's E1M9 secret route and
+return, ending at the Episode 1 finale. Jason's result remains pending; no
+individual map test is requested. The full route's display, sound continuity,
+and human controls remain to be reported from that single playthrough.

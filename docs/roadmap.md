@@ -38,9 +38,13 @@ broader release acceptance gates below remain intact.
 
 After the integer-column and integer-row wall-sampling changes, the nine-map
 smoke and focused transition, boss, menu/session, and synthetic input checks
-were rerun on the renderer source. The [updated readiness receipt](../results/episode1-playtest-readiness.json)
+were rerun on the renderer source. The subsequent fixed-point plane mapping
+passes the same nine-map smoke, exact 16-process output checks for all three
+styles, and a real-host E1M1-to-E1M2 asset reload. It improves the adopted
+reference comparison but increases serial render medians and does not prove
+visible 60 FPS. The [updated readiness receipt](../results/episode1-playtest-readiness.json)
 and [playtest handoff](episode1-playtest.md) pin the source and preserve the
-human run as one pending milestone.
+single human route as one pending milestone.
 
 While Jason's one Episode 1 route remains pending, continue independent M4
 fidelity work. Matching integer-column rays and integer-row wall texels to the
