@@ -1,12 +1,22 @@
 #requires -Version 7.4
 # SPDX-License-Identifier: GPL-2.0-or-later
-param([Parameter(Mandatory)][string]$Route,[Parameter(Mandatory)][string]$Output,[int]$MaxTics=10000,[ValidateRange(1,32)][double]$ArrivalDistance=18,[switch]$CombatStrafe,[switch]$CollectDroppedWeapons,[switch]$ClearBarrels,[string]$Wad='C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\base\DOOM.WAD')
+param([Parameter(Mandatory)][string]$Route,[Parameter(Mandatory)][string]$Output,[int]$MaxTics=10000,[ValidateRange(1,32)][double]$ArrivalDistance=18,[switch]$CombatStrafe,[switch]$CollectDroppedWeapons,[switch]$ClearBarrels,[string]$StartingReplay,[string]$Wad='C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\base\DOOM.WAD')
 $ErrorActionPreference='Stop'
 if(Test-Path $Output){throw 'Use a fresh route result.'}
 $plan=Get-Content $Route -Raw|ConvertFrom-Json;$waypoints=$plan.Waypoints
 $planSha256=(Get-FileHash $Route).Hash;$driverSha256=(Get-FileHash $PSCommandPath).Hash
 if($waypoints.Count -lt 1){throw 'Expected at least one waypoint.'}
+$prior=$null;$priorHash=$null
+if($StartingReplay){
+    $prior=Get-Content -LiteralPath $StartingReplay -Raw|ConvertFrom-Json
+    $priorHash=(Get-FileHash -LiteralPath $StartingReplay).Hash
+    if($prior.Format -cne 'pwshDoom.InputReplay' -or -not $prior.Passed -or $prior.Error -or -not $prior.ContinueCampaign -or
+       $prior.Episode -ne $plan.Episode -or $prior.ExpectedNextMap -ne $plan.Map -or $prior.Skill -ne $plan.Skill -or
+       $prior.WadSha256 -cne (Get-FileHash -LiteralPath $Wad).Hash -or $prior.InputCommands.Count -lt 1 -or
+       $prior.Checkpoints.Count -lt 1 -or $prior.Checkpoints[-1].Tic -ne $prior.InputCommands.Count){throw 'Starting replay must be a qualified same-IWAD, same-skill continuation into this map.'}
+}
 $bundle=& "$PSScriptRoot/Build-EngineBundle.ps1";. $bundle
+. "$PSScriptRoot/../src/InputReplay.ps1";. "$PSScriptRoot/../src/GameHost.ps1";. "$PSScriptRoot/../src/SnapshotTransport.ps1"
 $bundleSha256=(Get-FileHash $bundle).Hash
 Set-StrictMode -Version Latest
 $content=$null;$game=$null;$failure=$null;$passed=$false;$waypoint=0;$reachedAt=0;$tic=0;$holdStarted=-1
@@ -18,7 +28,19 @@ try{
     $null=[DoomInfo]::SwitchNames;$content=[GameContent]::new(@('-iwad',$Wad));$options=[GameOptions]::new()
     $options.GameMode=$content.Wad.GameMode;$options.GameVersion=$content.Wad.GameVersion;$options.MissionPack=$content.Wad.MissionPack
     $game=[DoomGame]::new($content,$options);$commands=[TicCmd[]]::new(4);for($i=0;$i -lt 4;$i++){$commands[$i]=[TicCmd]::new()}
-    $game.DeferedInitNew([GameSkill]([int]$plan.Skill-1),$plan.Episode,$plan.Map);$null=$game.Update($commands)
+    if($prior){
+        $game.DeferedInitNew([GameSkill]([int]$prior.Skill-1),$prior.Episode,$prior.Map);$null=$game.Update($commands)
+        foreach($entry in $prior.InputCommands){
+            for($i=0;$i -lt 4;$i++){$commands[$i].Clear()}
+            $commands[0].ForwardMove=$entry[0];$commands[0].SideMove=$entry[1];$commands[0].AngleTurn=$entry[2];$commands[0].Buttons=$entry[3]
+            $null=$game.Update($commands)
+        }
+        $expected=$prior.Checkpoints[-1];$actual=Get-DoomReplayCheckpoint $game $prior.InputCommands.Count
+        $comparison=Compare-DoomReplayCheckpoints @($expected) @($actual) $prior.InputCommands.Count
+        if($game.State -ne [GameState]::Level -or $game.Options.Episode -ne $plan.Episode -or $game.Options.Map -ne $plan.Map -or
+           $game.World.LevelTime -ne $expected.State.LevelTime -or -not $comparison.Matched){throw 'Starting replay no longer reaches its recorded destination checkpoint.'}
+        for($i=0;$i -lt 4;$i++){$commands[$i].Clear()}
+    }else{$game.DeferedInitNew([GameSkill]([int]$plan.Skill-1),$plan.Episode,$plan.Map);$null=$game.Update($commands)}
     for($tic=0;$tic -lt $MaxTics;$tic++){
         $world=$game.World;$player=$world.ConsolePlayer;$mo=$player.Mobj
         $x=$mo.X.Data/65536.0;$y=$mo.Y.Data/65536.0;$angle=$mo.Angle.Data*(2*[Math]::PI/4294967296.0)
@@ -88,7 +110,7 @@ try{
     # proximity/targeting alone does not certify a safe explosion.
     $barrelStrategy=@{Enabled=[bool]$ClearBarrels;Events=$barrelEvents.ToArray();MinimumTargetDistance=160;MaximumTargetDistance=300;MaximumCommandsPerBarrel=140;PostDestructionHoldCommands=35}
     $finalPlayer=if($game -and $game.World){$p=$game.World.ConsolePlayer;$m=$p.Mobj;@{X=$m.X.Data/65536.0;Y=$m.Y.Data/65536.0;Z=$m.Z.Data/65536.0;Sector=$m.Subsector.Sector.Number;SectorSpecial=[int]$m.Subsector.Sector.Special;Floor=$m.Subsector.Sector.FloorHeight.Data/65536.0;Health=$p.Health;Armor=$p.ArmorPoints;LastAttacker=if($p.Attacker){$p.Attacker.Type.ToString()}else{$null}}}
-    @{BarrelStrategy=$barrelStrategy;FinishedUtc=[DateTime]::UtcNow.ToString('o');Passed=$passed;Error=$failure;Episode=$plan.Episode;Map=$plan.Map;Skill=$plan.Skill;ArrivalDistance=$ArrivalDistance;CombatStrafe=[bool]$CombatStrafe;CollectDroppedWeapons=[bool]$CollectDroppedWeapons;PickupEvents=$pickupEvents.ToArray();MaxIterations=$MaxTics;DriverIterations=$tic;SimulationCommands=$commandsLog.Count;CompletedUpdates=$completedUpdates;FailedUpdateCommand=if($completedUpdates -lt $commandsLog.Count){$commandsLog.Count}else{$null};Route=$waypoints;Reached=$reached.ToArray();Trace=$trace.ToArray();InputCommands=$commandsLog.ToArray();WadSha256=(Get-FileHash $Wad).Hash;PlanSha256=$planSha256;DriverSha256=$driverSha256;BundleSha256=$bundleSha256;FinalState=if($game){$game.State.ToString()};FinalHealth=if($game){$game.World.ConsolePlayer.Health};FinalPlayer=$finalPlayer;Meaning='Unpaced waypoint/combat driver with ordinary TicCmd movement, turns, attacks and use only. Optional combat strafing uses declared alternating player sidemove commands. Optional dropped-weapon collection seeks visible unowned shotgun/chaingun drops within 160 units and 24 height units, through ordinary movement only, at most 140 steering commands per drop; enemies closer than 64 units retain combat priority. No teleport, god mode, direct damage, direct specials or state edits. SimulationCommands counts attempted inputs; CompletedUpdates excludes a throwing update. Trace X/Y precede the update; other trace state and FinalPlayer follow it. LastAttacker is the most recent damage source, not necessarily from the final tic. Route planning reads geometry; view tests require separate recorded host replay.'}|ConvertTo-Json -Depth 8|Set-Content $Output
+    @{StartingReplaySha256=$priorHash;StartingReplayCommands=if($prior){$prior.InputCommands.Count}else{0};StartMode=if($prior){'QualifiedCampaignContinuation'}else{'PistolStart'};BarrelStrategy=$barrelStrategy;FinishedUtc=[DateTime]::UtcNow.ToString('o');Passed=$passed;Error=$failure;Episode=$plan.Episode;Map=$plan.Map;Skill=$plan.Skill;ArrivalDistance=$ArrivalDistance;CombatStrafe=[bool]$CombatStrafe;CollectDroppedWeapons=[bool]$CollectDroppedWeapons;PickupEvents=$pickupEvents.ToArray();MaxIterations=$MaxTics;DriverIterations=$tic;SimulationCommands=$commandsLog.Count;CompletedUpdates=$completedUpdates;FailedUpdateCommand=if($completedUpdates -lt $commandsLog.Count){$commandsLog.Count}else{$null};Route=$waypoints;Reached=$reached.ToArray();Trace=$trace.ToArray();InputCommands=$commandsLog.ToArray();WadSha256=(Get-FileHash $Wad).Hash;PlanSha256=$planSha256;DriverSha256=$driverSha256;BundleSha256=$bundleSha256;FinalState=if($game){$game.State.ToString()};FinalHealth=if($game){$game.World.ConsolePlayer.Health};FinalPlayer=$finalPlayer;Meaning='Unpaced waypoint/combat driver with ordinary TicCmd movement, turns, attacks and use only. Optional qualified starting replay uses real preceding-map commands and verifies its destination state before driving this map; recorded InputCommands contain only this map suffix and cannot independently reproduce a continuation without StartingReplaySha256. Optional combat strafing uses declared alternating player sidemove commands. Optional dropped-weapon collection seeks visible unowned shotgun/chaingun drops within 160 units and 24 height units, through ordinary movement only, at most 140 steering commands per drop; enemies closer than 64 units retain combat priority. No teleport, god mode, direct damage, direct specials or state edits. SimulationCommands counts attempted suffix inputs; CompletedUpdates excludes a throwing update. Trace X/Y precede the update; other trace state and FinalPlayer follow it. LastAttacker is the most recent damage source, not necessarily from the final tic. Route planning reads geometry; view tests require separate recorded host replay.'}|ConvertTo-Json -Depth 8|Set-Content $Output
     if($content){$content.Dispose()}
 }
 "PASS: E$($plan.Episode)M$($plan.Map) with $($commandsLog.Count) commands."

@@ -1,19 +1,45 @@
 #requires -Version 7.4
 # SPDX-License-Identifier: GPL-2.0-or-later
 param([Parameter(Mandatory)][string]$RouteResult,[Parameter(Mandatory)][string]$Output,
-    [string]$Wad='C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\base\DOOM.WAD')
+    [string]$StartingReplay,[string]$Wad='C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\base\DOOM.WAD')
 $ErrorActionPreference='Stop'
 if(Test-Path -LiteralPath $Output){throw 'Use a fresh diagnostic report.'}
 $reference=Get-Content $RouteResult -Raw|ConvertFrom-Json
 if($reference.WadSha256 -cne (Get-FileHash $Wad).Hash){throw 'IWAD differs from recorded input.'}
+$startingReplayData=$null;$startingReplayHash=$null
+if($reference.StartMode -eq 'QualifiedCampaignContinuation'){
+    if(-not $StartingReplay){throw 'This route failure requires its qualified StartingReplay.'}
+    $startingReplayHash=(Get-FileHash -LiteralPath $StartingReplay).Hash
+    if($startingReplayHash -cne $reference.StartingReplaySha256){throw 'Starting replay differs from the route receipt.'}
+    $startingReplayData=Get-Content -LiteralPath $StartingReplay -Raw|ConvertFrom-Json
+    if($startingReplayData.Format -cne 'pwshDoom.InputReplay' -or -not $startingReplayData.Passed -or $startingReplayData.Error -or
+       -not $startingReplayData.ContinueCampaign -or $startingReplayData.WadSha256 -cne $reference.WadSha256 -or
+       $startingReplayData.Skill -ne $reference.Skill -or $startingReplayData.Episode -ne $reference.Episode -or
+       $startingReplayData.ExpectedNextMap -ne $reference.Map -or $startingReplayData.Checkpoints[-1].Tic -ne $startingReplayData.InputCommands.Count){
+        throw 'Starting replay is not a qualified same-IWAD, same-skill continuation into this route.'
+    }
+}elseif($StartingReplay){throw 'StartingReplay was supplied for a pistol-start route receipt.'}
 $bundle=& "$PSScriptRoot/Build-EngineBundle.ps1";. $bundle
+. "$PSScriptRoot/../src/InputReplay.ps1";. "$PSScriptRoot/../src/GameHost.ps1";. "$PSScriptRoot/../src/SnapshotTransport.ps1"
 $content=$null;$failure=$null;$events=[Collections.Generic.List[object]]::new();$n=0;$traceChecks=0
 $nearbyActors=[Collections.Generic.List[object]]::new();$finalPlayer=$null
 try{
     $null=[DoomInfo]::SwitchNames;$content=[GameContent]::new(@('-iwad',$Wad));$options=[GameOptions]::new()
     $options.GameMode=$content.Wad.GameMode;$options.GameVersion=$content.Wad.GameVersion;$options.MissionPack=$content.Wad.MissionPack
     $game=[DoomGame]::new($content,$options);$commands=[TicCmd[]]::new(4);for($i=0;$i -lt 4;$i++){$commands[$i]=[TicCmd]::new()}
-    $game.DeferedInitNew([GameSkill]([int]$reference.Skill-1),$reference.Episode,$reference.Map);$null=$game.Update($commands)
+    if($startingReplayData){
+        $game.DeferedInitNew([GameSkill]([int]$startingReplayData.Skill-1),$startingReplayData.Episode,$startingReplayData.Map);$null=$game.Update($commands)
+        foreach($entry in $startingReplayData.InputCommands){
+            for($i=0;$i -lt 4;$i++){$commands[$i].Clear()}
+            $commands[0].ForwardMove=$entry[0];$commands[0].SideMove=$entry[1];$commands[0].AngleTurn=$entry[2];$commands[0].Buttons=$entry[3]
+            $null=$game.Update($commands)
+        }
+        $expectedCheckpoint=$startingReplayData.Checkpoints[-1];$actualCheckpoint=Get-DoomReplayCheckpoint $game $startingReplayData.InputCommands.Count
+        $comparison=Compare-DoomReplayCheckpoints @($expectedCheckpoint) @($actualCheckpoint) $startingReplayData.InputCommands.Count
+        if($game.State -ne [GameState]::Level -or $game.Options.Episode -ne $reference.Episode -or $game.Options.Map -ne $reference.Map -or
+           $game.World.LevelTime -ne $expectedCheckpoint.State.LevelTime -or -not $comparison.Matched){throw 'Starting replay no longer reaches its recorded destination checkpoint.'}
+        for($i=0;$i -lt 4;$i++){$commands[$i].Clear()}
+    }else{$game.DeferedInitNew([GameSkill]([int]$reference.Skill-1),$reference.Episode,$reference.Map);$null=$game.Update($commands)}
     $expected=@{};foreach($sample in $reference.Trace){$expected[[int]$sample.Command]=$sample}
     foreach($entry in $reference.InputCommands){
         $p=$game.World.ConsolePlayer;$health=$p.Health;$preX=$p.Mobj.X.Data/65536.0;$preY=$p.Mobj.Y.Data/65536.0;$preZ=$p.Mobj.Z.Data
@@ -43,7 +69,7 @@ try{
     }
 }catch{$failure=$_.ToString()+"`n"+$_.ScriptStackTrace}finally{
     if($content){$content.Dispose()}
-    @{Error=$failure;Commands=$n;TraceChecks=$traceChecks;Events=$events.ToArray();FinalPlayer=$finalPlayer;FinalActorsWithin192=$nearbyActors.ToArray();RouteResultSha256=(Get-FileHash $RouteResult).Hash;WadSha256=(Get-FileHash $Wad).Hash;BundleSha256=(Get-FileHash $bundle).Hash;HarnessSha256=(Get-FileHash $PSCommandPath).Hash;Meaning='Fixed ordinary-command replay of a retained failure. End-of-tic attacker identifies the last damage source only; multiple same-tic sources are not separately instrumented. Selected original trace positions/health/height must match. Final nearby actors are read from the live thinker list without advancing or changing the world; proximity alone does not prove collision.'}|ConvertTo-Json -Depth 6|Set-Content $Output
+    @{Error=$failure;Commands=$n;TraceChecks=$traceChecks;Events=$events.ToArray();FinalPlayer=$finalPlayer;FinalActorsWithin192=$nearbyActors.ToArray();StartMode=$reference.StartMode;StartingReplaySha256=$startingReplayHash;RouteResultSha256=(Get-FileHash $RouteResult).Hash;WadSha256=(Get-FileHash $Wad).Hash;BundleSha256=(Get-FileHash $bundle).Hash;HarnessSha256=(Get-FileHash $PSCommandPath).Hash;Meaning='Fixed ordinary-command replay of a retained failure. Qualified campaign continuations are reconstructed from their source input replay and full destination checkpoint before suffix inputs are applied. End-of-tic attacker identifies the last damage source only; multiple same-tic sources are not separately instrumented. Selected original trace positions/health/height must match. Final nearby actors are read from the live thinker list without advancing or changing the world; proximity alone does not prove collision.'}|ConvertTo-Json -Depth 6|Set-Content $Output
 }
 if($failure){throw $failure}
 "Reproduced $n commands and $traceChecks failure trace samples."

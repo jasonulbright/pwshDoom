@@ -18,7 +18,7 @@ The integrated host also loads an intermission save, advances to E1M2, then load
 | E1M2 | Pass | Pass, HMP pistol start, normal exit | Pass: recorded AnsiArt intermission -> E1M3, 13 matching checkpoints |
 | E1M3 | Pass | Pass, HMP pistol start, normal exit; [evidence](campaign-e1m3.md) | Recorded Matrix intermission -> E1M4 passes 24 checkpoints and all audio frames; 47 integration checks. Pacing/queue starvation remain open |
 | E1M4 | Pass | Pass, HMP pistol start, normal exit; [evidence](campaign-e1m4.md) | Recorded AnsiArt intermission -> E1M5 passes all 22 checkpoints and 51 integration checks; all audio frames return. Pacing and acoustic continuity remain open |
-| E1M5 | Pass | [Route development](campaign-e1m5-investigation.md); seventh candidate dies before the eastern medkit, eighth rejects blanket combat strafing after an earlier western-pit death; completion unqualified | Untested in terminal host |
+| E1M5 | Pass | [Route development](campaign-e1m5-investigation.md); HMP pistol-start candidates remain unqualified. A route from the qualified E1M4 replay reaches waypoint 316/414 and dies after 7,442 E1M5 inputs; exact suffix replay matches 212/212 trace samples | E1M4→E1M5 entry is qualified through headless replay; E1M5 terminal-host completion untested |
 | E1M6 | Pass | Untested | Untested in terminal host |
 | E1M7 | Pass | Untested | Untested in terminal host |
 | E1M8 | Pass | Untested | Untested in terminal host |
