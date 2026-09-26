@@ -1,4 +1,10 @@
-# E1M5 route development
+# E1M5 automated route investigation
+
+Status as of 2026-09-26: automated route development is paused for the user's
+single complete Episode 1 human playthrough milestone. The older candidate
+notes below preserve the investigation history; their suggested next route
+trials are superseded. The route remains unqualified by automation, and the
+recorded death alone is not a reproducible engine defect.
 
 2026-09-19. E1M5 has map-start smoke coverage and verified entry from E1M4, but no qualified completion yet. Route generation uses ordinary movement, turning, attacks and use commands from an HMP pistol start. The engine is not altered to accommodate the driver.
 
@@ -47,4 +53,4 @@ The first invocation mistakenly supplied a local path-planning segment rather th
 
 `results/e1m5-continuation-candidate1.json` starts from the qualified E1M4 replay (`results/e1m4-qualified-replay.json`, SHA-256 `3DDB764D06A8C54ADA8FA05EBAA803932433CB91BF4046D08E8755D9B8BF129B`). The recorded source continuation contains 6,348 commands, reaches E1M5 for its recorded 71 destination tics, and the new driver verifies that full checkpoint before proceeding. The E1M5 suffix completes 7,442 ordinary commands and reaches waypoint 316 of 414 before death near (1004,1402), sector 100/floor 88. At death the player has zero health and armor; 60 bullets and 12 shells remain. This is a failed route, not E1M5 completion.
 
-`results/e1m5-continuation-candidate1-diagnostic.json` independently replays that exact campaign start and all 7,442 suffix commands. All 212 recorded route trace samples match. The damage record attributes the late hits to a Troop at suffix commands 7,345, 7,421 and 7,442; health falls 11→6, then 6→1, then to zero. Several Troopshot projectiles remain near the final position, but the end-state observation does not prove which projectile caused each hit. No living shootable actor is within 192 units in the final thinker snapshot. This evidence explains the recorded route failure without identifying an engine defect or a successful human strategy. The route remains unqualified; a decision-guided playthrough remains useful follow-up work.
+`results/e1m5-continuation-candidate1-diagnostic.json` independently replays that exact campaign start and all 7,442 suffix commands. All 212 recorded route trace samples match. The damage record attributes the late hits to a Troop at suffix commands 7,345, 7,421 and 7,442; health falls 11→6, then 6→1, then to zero. Several Troopshot projectiles remain near the final position, but the end-state observation does not prove which projectile caused each hit. No living shootable actor is within 192 units in the final thinker snapshot. This evidence explains the recorded route failure without identifying an engine defect or a successful human strategy. The route remains unqualified by automation. No route retry is planned for this milestone; the complete human session is documented in `episode1-playtest.md`.

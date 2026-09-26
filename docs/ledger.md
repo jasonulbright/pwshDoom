@@ -1236,3 +1236,31 @@ Start finite Episode 1 preparation on original session3264 using the verified se
 Resume from repository evidence. The working tree contained an unfinished `-StartingReplay` change in `scripts/Test-CampaignRoute.ps1`. Strengthen it to compare the complete recorded destination checkpoint (including the render snapshot), then use the qualified `results/e1m4-qualified-replay.json` to start the documented E1M5 route. PowerShell parsing passes. The route replays 6,348 prior commands, verifies E1M5 entry, then issues 7,442 ordinary route commands and dies at waypoint316/414. Preserve the failed receipt at `results/e1m5-continuation-candidate1.json` rather than treating earlier progress as completion.
 
 Extend `scripts/Inspect-CampaignFailure.ps1` to reconstruct a qualified campaign continuation and verify its checkpoint before replaying only the failed map suffix. The failure receipt independently reproduces all 212 route samples. Damage is recorded at suffix commands7345,7421 and7442 from attacker type Troop, ending at zero health/armor. The final actor inventory includes nearby Troopshot projectiles but cannot identify the projectile responsible for a specific hit; this remains a route failure, not evidence of an engine defect. Update the E1M5 investigation, campaign matrix and roadmap with the unresolved outcome. The user's newly available JEV is not exposed in this task's connected tool/app inventory; continue without it until an interface is available. No recording or video harness was run.
+
+## 2026-09-26 — Prepare one complete Episode 1 human playthrough
+
+The user explicitly steers the next milestone to one complete human Episode 1
+playthrough, not Ultimate Doom release completion and not map-by-map user
+tests. Use the documented human-evidence option. Stop bot/waypoint route work;
+retain qualified E1M1–E1M4 route inputs as regressions, and use focused checks
+for mechanics and reproducible defects. Preserve the broader Ultimate Doom,
+Doom II, and MyHouse roadmap.
+
+The required human path is E1M1 -> E1M2 -> E1M3 secret exit -> E1M9 -> E1M4
+through E1M8 -> Episode 1 finale. Its instructions, controls, prerequisites,
+and single-result reporting path are in `docs/episode1-playtest.md`. The latest
+E1M5 continuation failure is already documented: death at waypoint 316/414,
+with a matching suffix trace and no reproducible engine defect. Do not retry
+or reinterpret that route failure as product evidence.
+
+Current focused checks on the installed Ultimate Doom IWAD
+`6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F` pass:
+all nine Episode 1 maps load, run 35 idle tics, and render two 320x200 frames;
+57 episode/secret/return/finale transition checks pass; 97 boss-trigger checks
+pass, including E1M8's tagged floor; and 125 menu/session checks with 46 screen
+fixtures pass. A separate fresh synthetic input receipt passes six field/key
+state checks and explicitly says desktop input was not injected. These are
+readiness checks, not map completions or human keyboard evidence. No live game
+window, gameplay recording, or bot route was run for this milestone.
+
+The soundtrack batch reused its seven qualified tracks and completed three-period loop and reader qualification for D_E1M6, D_E1M7 and D_E1M8. D_VICTOR's independent eight-second opening passed, but the full three-period loop was still rendering. Because full soundtrack qualification is an M3 gate, not a prerequisite for normal Episode 1 gameplay, stop that long batch and finish the playtest handoff with `-Sound` effects enabled and no `-MusicCatalog`. This assumes missing background music is an acceptable limitation for this focused gameplay milestone; record it plainly and keep the full music gate open. The preparation lock released, no atomic catalog was published, and verified/partial reports remain under ignored `local/` for a later resume. Copy the successful D_E1M6/D_E1M7/D_E1M8 qualification JSON into tracked `results/`. `Play.ps1 -Check` then passes with the exact Steam IWAD, 36 maps, PowerShell 7.6.5 and Windows Terminal, in effects-only mode; this is path/prerequisite validation and launches no game window. The launch destination paths are clear. No synthesis or game source was changed.

@@ -1,0 +1,593 @@
+{
+  "HarnessSha256": "4EE3871B7C52A3C46ABC08EA25AA3300D82667D9FF1C6A7E26A9CDB6CDAEFB2F",
+  "BundleSha256": "68A4E9FAB121F9E4029352BC28F730FFD15C063736C7DCB906ECC263F6969874",
+  "Passed": true,
+  "Errors": [],
+  "Reference": "https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/p_enemy.c",
+  "Checks": [
+    {
+      "Passed": true,
+      "Name": "E1M8 has expected boss",
+      "Actual": true,
+      "Expected": true
+    },
+    {
+      "Passed": true,
+      "Name": "E1M8 has tag 666 geometry",
+      "Actual": true,
+      "Expected": true
+    },
+    {
+      "Passed": true,
+      "Name": "E1M8 wrong actor no level exit",
+      "Actual": false,
+      "Expected": false
+    },
+    {
+      "Passed": true,
+      "Name": "E1M8 wrong actor no tagged mover",
+      "Actual": 0,
+      "Expected": 0
+    },
+    {
+      "Passed": true,
+      "Name": "E1M8 wrong map no level exit",
+      "Actual": false,
+      "Expected": false
+    },
+    {
+      "Passed": true,
+      "Name": "E1M8 wrong map no tagged mover",
+      "Actual": 0,
+      "Expected": 0
+    },
+    {
+      "Passed": true,
+      "Name": "E1M8 no living player no level exit",
+      "Actual": false,
+      "Expected": false
+    },
+    {
+      "Passed": true,
+      "Name": "E1M8 no living player no tagged mover",
+      "Actual": 0,
+      "Expected": 0
+    },
+    {
+      "Passed": true,
+      "Name": "E1M8 another living boss no level exit",
+      "Actual": false,
+      "Expected": false
+    },
+    {
+      "Passed": true,
+      "Name": "E1M8 another living boss no tagged mover",
+      "Actual": 0,
+      "Expected": 0
+    },
+    {
+      "Passed": true,
+      "Name": "E1M8 geometry trigger does not exit",
+      "Actual": false,
+      "Expected": false
+    },
+    {
+      "Passed": true,
+      "Name": "E1M8 sector 30 floor mover",
+      "Actual": true,
+      "Expected": true
+    },
+    {
+      "Passed": true,
+      "Name": "E1M8 sector 30 lower-to-lowest type",
+      "Actual": "LowerFloorToLowest",
+      "Expected": "LowerFloorToLowest"
+    },
+    {
+      "Passed": true,
+      "Name": "E1M8 sector 30 direction",
+      "Actual": -1,
+      "Expected": "-1"
+    },
+    {
+      "Passed": true,
+      "Name": "E1M8 sector 30 speed",
+      "Actual": 65536,
+      "Expected": 65536
+    },
+    {
+      "Passed": true,
+      "Name": "E1M8 sector 30 target",
+      "Actual": -8912896,
+      "Expected": -8912896
+    },
+    {
+      "Passed": true,
+      "Name": "E1M8 sector 30 mover completes",
+      "Actual": true,
+      "Expected": true
+    },
+    {
+      "Passed": true,
+      "Name": "E1M8 sector 30 final height",
+      "Actual": -8912896,
+      "Expected": -8912896
+    },
+    {
+      "Passed": true,
+      "Name": "E2M8 has expected boss",
+      "Actual": true,
+      "Expected": true
+    },
+    {
+      "Passed": true,
+      "Name": "E2M8 wrong actor no level exit",
+      "Actual": false,
+      "Expected": false
+    },
+    {
+      "Passed": true,
+      "Name": "E2M8 wrong actor no tagged mover",
+      "Actual": 0,
+      "Expected": 0
+    },
+    {
+      "Passed": true,
+      "Name": "E2M8 wrong map no level exit",
+      "Actual": false,
+      "Expected": false
+    },
+    {
+      "Passed": true,
+      "Name": "E2M8 wrong map no tagged mover",
+      "Actual": 0,
+      "Expected": 0
+    },
+    {
+      "Passed": true,
+      "Name": "E2M8 no living player no level exit",
+      "Actual": false,
+      "Expected": false
+    },
+    {
+      "Passed": true,
+      "Name": "E2M8 no living player no tagged mover",
+      "Actual": 0,
+      "Expected": 0
+    },
+    {
+      "Passed": true,
+      "Name": "E2M8 another living boss no level exit",
+      "Actual": false,
+      "Expected": false
+    },
+    {
+      "Passed": true,
+      "Name": "E2M8 another living boss no tagged mover",
+      "Actual": 0,
+      "Expected": 0
+    },
+    {
+      "Passed": true,
+      "Name": "E2M8 last boss exits",
+      "Actual": true,
+      "Expected": true
+    },
+    {
+      "Passed": true,
+      "Name": "E2M8 normal exit",
+      "Actual": false,
+      "Expected": false
+    },
+    {
+      "Passed": true,
+      "Name": "E3M8 has expected boss",
+      "Actual": true,
+      "Expected": true
+    },
+    {
+      "Passed": true,
+      "Name": "E3M8 wrong actor no level exit",
+      "Actual": false,
+      "Expected": false
+    },
+    {
+      "Passed": true,
+      "Name": "E3M8 wrong actor no tagged mover",
+      "Actual": 0,
+      "Expected": 0
+    },
+    {
+      "Passed": true,
+      "Name": "E3M8 wrong map no level exit",
+      "Actual": false,
+      "Expected": false
+    },
+    {
+      "Passed": true,
+      "Name": "E3M8 wrong map no tagged mover",
+      "Actual": 0,
+      "Expected": 0
+    },
+    {
+      "Passed": true,
+      "Name": "E3M8 no living player no level exit",
+      "Actual": false,
+      "Expected": false
+    },
+    {
+      "Passed": true,
+      "Name": "E3M8 no living player no tagged mover",
+      "Actual": 0,
+      "Expected": 0
+    },
+    {
+      "Passed": true,
+      "Name": "E3M8 another living boss no level exit",
+      "Actual": false,
+      "Expected": false
+    },
+    {
+      "Passed": true,
+      "Name": "E3M8 another living boss no tagged mover",
+      "Actual": 0,
+      "Expected": 0
+    },
+    {
+      "Passed": true,
+      "Name": "E3M8 last boss exits",
+      "Actual": true,
+      "Expected": true
+    },
+    {
+      "Passed": true,
+      "Name": "E3M8 normal exit",
+      "Actual": false,
+      "Expected": false
+    },
+    {
+      "Passed": true,
+      "Name": "E4M6 has expected boss",
+      "Actual": true,
+      "Expected": true
+    },
+    {
+      "Passed": true,
+      "Name": "E4M6 has tag 666 geometry",
+      "Actual": true,
+      "Expected": true
+    },
+    {
+      "Passed": true,
+      "Name": "E4M6 wrong actor no level exit",
+      "Actual": false,
+      "Expected": false
+    },
+    {
+      "Passed": true,
+      "Name": "E4M6 wrong actor no tagged mover",
+      "Actual": 0,
+      "Expected": 0
+    },
+    {
+      "Passed": true,
+      "Name": "E4M6 wrong map no level exit",
+      "Actual": false,
+      "Expected": false
+    },
+    {
+      "Passed": true,
+      "Name": "E4M6 wrong map no tagged mover",
+      "Actual": 0,
+      "Expected": 0
+    },
+    {
+      "Passed": true,
+      "Name": "E4M6 no living player no level exit",
+      "Actual": false,
+      "Expected": false
+    },
+    {
+      "Passed": true,
+      "Name": "E4M6 no living player no tagged mover",
+      "Actual": 0,
+      "Expected": 0
+    },
+    {
+      "Passed": true,
+      "Name": "E4M6 another living boss no level exit",
+      "Actual": false,
+      "Expected": false
+    },
+    {
+      "Passed": true,
+      "Name": "E4M6 another living boss no tagged mover",
+      "Actual": 0,
+      "Expected": 0
+    },
+    {
+      "Passed": true,
+      "Name": "E4M6 geometry trigger does not exit",
+      "Actual": false,
+      "Expected": false
+    },
+    {
+      "Passed": true,
+      "Name": "E4M6 sector 37 door mover",
+      "Actual": true,
+      "Expected": true
+    },
+    {
+      "Passed": true,
+      "Name": "E4M6 sector 37 blaze-open type",
+      "Actual": "BlazeOpen",
+      "Expected": "BlazeOpen"
+    },
+    {
+      "Passed": true,
+      "Name": "E4M6 sector 37 direction",
+      "Actual": 1,
+      "Expected": 1
+    },
+    {
+      "Passed": true,
+      "Name": "E4M6 sector 37 speed",
+      "Actual": 524288,
+      "Expected": 524288
+    },
+    {
+      "Passed": true,
+      "Name": "E4M6 sector 37 target",
+      "Actual": 5505024,
+      "Expected": 5505024
+    },
+    {
+      "Passed": true,
+      "Name": "E4M6 sector 37 mover completes",
+      "Actual": true,
+      "Expected": true
+    },
+    {
+      "Passed": true,
+      "Name": "E4M6 sector 37 final height",
+      "Actual": 5505024,
+      "Expected": 5505024
+    },
+    {
+      "Passed": true,
+      "Name": "E4M6 sector 38 door mover",
+      "Actual": true,
+      "Expected": true
+    },
+    {
+      "Passed": true,
+      "Name": "E4M6 sector 38 blaze-open type",
+      "Actual": "BlazeOpen",
+      "Expected": "BlazeOpen"
+    },
+    {
+      "Passed": true,
+      "Name": "E4M6 sector 38 direction",
+      "Actual": 1,
+      "Expected": 1
+    },
+    {
+      "Passed": true,
+      "Name": "E4M6 sector 38 speed",
+      "Actual": 524288,
+      "Expected": 524288
+    },
+    {
+      "Passed": true,
+      "Name": "E4M6 sector 38 target",
+      "Actual": 5505024,
+      "Expected": 5505024
+    },
+    {
+      "Passed": true,
+      "Name": "E4M6 sector 38 mover completes",
+      "Actual": true,
+      "Expected": true
+    },
+    {
+      "Passed": true,
+      "Name": "E4M6 sector 38 final height",
+      "Actual": 5505024,
+      "Expected": 5505024
+    },
+    {
+      "Passed": true,
+      "Name": "E4M6 sector 39 door mover",
+      "Actual": true,
+      "Expected": true
+    },
+    {
+      "Passed": true,
+      "Name": "E4M6 sector 39 blaze-open type",
+      "Actual": "BlazeOpen",
+      "Expected": "BlazeOpen"
+    },
+    {
+      "Passed": true,
+      "Name": "E4M6 sector 39 direction",
+      "Actual": 1,
+      "Expected": 1
+    },
+    {
+      "Passed": true,
+      "Name": "E4M6 sector 39 speed",
+      "Actual": 524288,
+      "Expected": 524288
+    },
+    {
+      "Passed": true,
+      "Name": "E4M6 sector 39 target",
+      "Actual": 5505024,
+      "Expected": 5505024
+    },
+    {
+      "Passed": true,
+      "Name": "E4M6 sector 39 mover completes",
+      "Actual": true,
+      "Expected": true
+    },
+    {
+      "Passed": true,
+      "Name": "E4M6 sector 39 final height",
+      "Actual": 5505024,
+      "Expected": 5505024
+    },
+    {
+      "Passed": true,
+      "Name": "E4M6 sector 41 door mover",
+      "Actual": true,
+      "Expected": true
+    },
+    {
+      "Passed": true,
+      "Name": "E4M6 sector 41 blaze-open type",
+      "Actual": "BlazeOpen",
+      "Expected": "BlazeOpen"
+    },
+    {
+      "Passed": true,
+      "Name": "E4M6 sector 41 direction",
+      "Actual": 1,
+      "Expected": 1
+    },
+    {
+      "Passed": true,
+      "Name": "E4M6 sector 41 speed",
+      "Actual": 524288,
+      "Expected": 524288
+    },
+    {
+      "Passed": true,
+      "Name": "E4M6 sector 41 target",
+      "Actual": 5505024,
+      "Expected": 5505024
+    },
+    {
+      "Passed": true,
+      "Name": "E4M6 sector 41 mover completes",
+      "Actual": true,
+      "Expected": true
+    },
+    {
+      "Passed": true,
+      "Name": "E4M6 sector 41 final height",
+      "Actual": 5505024,
+      "Expected": 5505024
+    },
+    {
+      "Passed": true,
+      "Name": "E4M8 has expected boss",
+      "Actual": true,
+      "Expected": true
+    },
+    {
+      "Passed": true,
+      "Name": "E4M8 has tag 666 geometry",
+      "Actual": true,
+      "Expected": true
+    },
+    {
+      "Passed": true,
+      "Name": "E4M8 wrong actor no level exit",
+      "Actual": false,
+      "Expected": false
+    },
+    {
+      "Passed": true,
+      "Name": "E4M8 wrong actor no tagged mover",
+      "Actual": 0,
+      "Expected": 0
+    },
+    {
+      "Passed": true,
+      "Name": "E4M8 wrong map no level exit",
+      "Actual": false,
+      "Expected": false
+    },
+    {
+      "Passed": true,
+      "Name": "E4M8 wrong map no tagged mover",
+      "Actual": 0,
+      "Expected": 0
+    },
+    {
+      "Passed": true,
+      "Name": "E4M8 no living player no level exit",
+      "Actual": false,
+      "Expected": false
+    },
+    {
+      "Passed": true,
+      "Name": "E4M8 no living player no tagged mover",
+      "Actual": 0,
+      "Expected": 0
+    },
+    {
+      "Passed": true,
+      "Name": "E4M8 another living boss no level exit",
+      "Actual": false,
+      "Expected": false
+    },
+    {
+      "Passed": true,
+      "Name": "E4M8 another living boss no tagged mover",
+      "Actual": 0,
+      "Expected": 0
+    },
+    {
+      "Passed": true,
+      "Name": "E4M8 geometry trigger does not exit",
+      "Actual": false,
+      "Expected": false
+    },
+    {
+      "Passed": true,
+      "Name": "E4M8 sector 75 floor mover",
+      "Actual": true,
+      "Expected": true
+    },
+    {
+      "Passed": true,
+      "Name": "E4M8 sector 75 lower-to-lowest type",
+      "Actual": "LowerFloorToLowest",
+      "Expected": "LowerFloorToLowest"
+    },
+    {
+      "Passed": true,
+      "Name": "E4M8 sector 75 direction",
+      "Actual": -1,
+      "Expected": "-1"
+    },
+    {
+      "Passed": true,
+      "Name": "E4M8 sector 75 speed",
+      "Actual": 65536,
+      "Expected": 65536
+    },
+    {
+      "Passed": true,
+      "Name": "E4M8 sector 75 target",
+      "Actual": -5242880,
+      "Expected": -5242880
+    },
+    {
+      "Passed": true,
+      "Name": "E4M8 sector 75 mover completes",
+      "Actual": true,
+      "Expected": true
+    },
+    {
+      "Passed": true,
+      "Name": "E4M8 sector 75 final height",
+      "Actual": -5242880,
+      "Expected": -5242880
+    }
+  ],
+  "Meaning": "HMP real-map boss-trigger fixtures: explicit health/type/map changes and a synthetic same-type thinker test guards, then actual final death-state dispatch and bounded tagged mover execution. Independent neighbor-height targets. No ordinary-input victory, full-world continuation, live rendering or performance claim.",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F"
+}

@@ -1,0 +1,110 @@
+{
+  "Status": "ReadyForOneHumanEpisode1Playthrough",
+  "SourceBaseline": "64f672ca478b27504e46d656f91bb875f398d2ea",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "Scope": [
+    "E1M1",
+    "E1M2",
+    "E1M3",
+    "E1M9",
+    "E1M4",
+    "E1M5",
+    "E1M6",
+    "E1M7",
+    "E1M8",
+    "Episode 1 finale"
+  ],
+  "Evidence": {
+    "MapSmoke": {
+      "Passed": 9,
+      "Failed": 0,
+      "Meaning": "35 idle tics and two rasterizations per E1 map; not route completion."
+    },
+    "CampaignTransitions": {
+      "Passed": 57,
+      "Failed": 0
+    },
+    "BossProgression": {
+      "Passed": 97,
+      "Failed": 0,
+      "Meaning": "Fixtures, not ordinary boss combat."
+    },
+    "MenuSession": {
+      "Passed": 125,
+      "Frames": 46
+    },
+    "SyntheticInput": {
+      "Passed": 6,
+      "DesktopInputInjected": false
+    },
+    "Launcher": {
+      "Ready": true,
+      "EpisodeMaps": 36,
+      "PowerShell": "7.6.5",
+      "MusicValidation": "Effects only; no music catalog requested."
+    },
+    "MusicLoops": [
+      {
+        "Track": "D_E1M6",
+        "Qualified": true,
+        "Report": "results\\music-loop-e1m6-prepared.json",
+        "Sha256": "4888C222F5ABFB5AC0992CA9329E01CA79042D4A13327523BD4BC68C1B612989"
+      },
+      {
+        "Track": "D_E1M7",
+        "Qualified": true,
+        "Report": "results\\music-loop-e1m7-prepared.json",
+        "Sha256": "2C0DEBC273BBBD7F9B63AA88E062C39DBA0AF17D91731F313ECB6C69752FAA41"
+      },
+      {
+        "Track": "D_E1M8",
+        "Qualified": true,
+        "Report": "results\\music-loop-e1m8-prepared.json",
+        "Sha256": "F4C079000EC9267066940ED33C8E07FFB4A8FFE7A555AC5F9FC827BD3EA4B09E"
+      }
+    ]
+  },
+  "HumanPlaythrough": {
+    "Status": "Pending",
+    "CompletedMaps": [],
+    "E1M9ReturnVerified": false,
+    "FinaleReached": false
+  },
+  "Limitations": [
+    "This receipt does not claim a completed human map route.",
+    "Physical keyboard play remains pending.",
+    "Sound effects are enabled for the handoff; background music is omitted because the complete episode catalog was not published.",
+    "35-tic/60-display pacing, full-session audio continuity, vanilla pixel fidelity, and broader release gates remain open.",
+    "The E1M5 automated continuation died without establishing a reproducible engine defect; no route retry is part of this milestone."
+  ],
+  "Artifacts": [
+    {
+      "Path": "results\\episode1-playtest-smoke.json",
+      "Sha256": "AAC672EE529320BDF8AF392FFC9B1798346D7F613102A4B7F6277E7492CB008B"
+    },
+    {
+      "Path": "results\\episode1-transition-readiness.json",
+      "Sha256": "40DFEA2C8D6E167000E4CCBF8C78B5307EAD5E677EF8144ED402ECAE2F27EEE1"
+    },
+    {
+      "Path": "results\\episode1-boss-readiness.json",
+      "Sha256": "3DFA639973A3458ADB10E1966AD807A4DBA9766779AA7C36C4E34A79EB2C52B3"
+    },
+    {
+      "Path": "results\\episode1-session-menu-readiness.json",
+      "Sha256": "284B033846F339415A8B222C67BDF0A9474300C9189457BD7FB96E2D84841FD0"
+    },
+    {
+      "Path": "results\\episode1-console-input-readiness.txt",
+      "Sha256": "699F8C14FD45B5AF941AE6C312C3D6F02139019CA6B51DD3D82E722D692D62ED"
+    },
+    {
+      "Path": "results\\episode1-launch-preflight.json",
+      "Sha256": "377583F0852505292070071CE2DD47C4493ED71E0D6DAEB1DE623BFEFBEB5BFF"
+    },
+    {
+      "Path": "results\\episode1-launch-binding.txt",
+      "Sha256": "164546DBD20ECF52E6C27F93400E126E566C18F6882D751F3D2A9B1CF9AD4B44"
+    }
+  ]
+}
