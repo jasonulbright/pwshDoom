@@ -19,6 +19,7 @@ try{
     Check 'One-shot flag and explicit stop are preserved' ($batch[0].Track -ceq 'D_INTRO' -and -not $batch[0].Loop -and $batch[1].Kind -ceq 'Stop')
     Sync-DoomMusicSession $events $game;$batch=$events.Drain();Check 'Loaded level synchronizes its actual map music' ($batch.Count -eq 1 -and $batch[0].Track -ceq 'D_E1M1')
     $fake=@{State=[GameState]::Intermission;Options=$options};Sync-DoomMusicSession $events $fake;Check 'Ultimate Doom intermission mapping' ($events.Drain()[0].Track -ceq 'D_INTER')
+    $options.Episode=1;$fake=@{State=[GameState]::Finale;Options=$options;Finale=@{stage=0}};Sync-DoomMusicSession $events $fake;Check 'Episode one finale restores victory score' ($events.Drain()[0].Track -ceq 'D_VICTOR')
     $options.Episode=3;$fake=@{State=[GameState]::Finale;Options=$options;Finale=@{stage=0}};Sync-DoomMusicSession $events $fake;Check 'Episode three text finale uses victory score' ($events.Drain()[0].Track -ceq 'D_VICTOR')
     $fake.Finale.stage=1;Sync-DoomMusicSession $events $fake;Check 'Episode three art stage restores bunny score' ($events.Drain()[0].Track -ceq 'D_BUNNY')
     $options.Episode=4;Sync-DoomMusicSession $events $fake;Check 'Other Ultimate Doom art finales retain victory score' ($events.Drain()[0].Track -ceq 'D_VICTOR')

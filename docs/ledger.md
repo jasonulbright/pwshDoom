@@ -1264,3 +1264,19 @@ readiness checks, not map completions or human keyboard evidence. No live game
 window, gameplay recording, or bot route was run for this milestone.
 
 The soundtrack batch reused its seven qualified tracks and completed three-period loop and reader qualification for D_E1M6, D_E1M7 and D_E1M8. D_VICTOR's independent eight-second opening passed, but the full three-period loop was still rendering. Because full soundtrack qualification is an M3 gate, not a prerequisite for normal Episode 1 gameplay, stop that long batch and finish the playtest handoff with `-Sound` effects enabled and no `-MusicCatalog`. This assumes missing background music is an acceptable limitation for this focused gameplay milestone; record it plainly and keep the full music gate open. The preparation lock released, no atomic catalog was published, and verified/partial reports remain under ignored `local/` for a later resume. Copy the successful D_E1M6/D_E1M7/D_E1M8 qualification JSON into tracked `results/`. `Play.ps1 -Check` then passes with the exact Steam IWAD, 36 maps, PowerShell 7.6.5 and Windows Terminal, in effects-only mode; this is path/prerequisite validation and launches no game window. The launch destination paths are clear. No synthesis or game source was changed.
+
+## 2026-09-26 — Resume the full Episode 1 music catalog
+
+The prior interruption was the earlier playtest-focused scoping choice, not a
+project blocker. The full release goal remains active, so resume the preserved
+atomic preparation job rather than leave the playable build effects-only. First
+verify no game session or music-preparation process is active, confirm the lock
+is released, and confirm the seven-track catalog plus the D_E1M6/D_E1M7/D_E1M8
+qualification receipts exist. The resumed invocation validates/reuses all ten
+tracks and runs only the missing D_VICTOR qualification; it is active on
+session 15715. Do not restart it on an observation timeout.
+
+Extend `scripts/Test-MusicEvents.ps1` with an Episode 1 finale assertion that
+selects D_VICTOR. The focused event suite passes all 12 checks on the installed
+IWAD, with no game window or device playback. This verifies track selection,
+not audible finale playback or full-session continuity.
