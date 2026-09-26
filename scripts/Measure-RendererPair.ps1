@@ -1,6 +1,7 @@
 #requires -Version 7.4
 # SPDX-License-Identifier: GPL-2.0-or-later
 param([Parameter(Mandatory)][string]$Baseline,[Parameter(Mandatory)][string]$Output,
+    [string[]]$BaselineRenamedFunctions=@(),
     [ValidateRange(1,4)][int]$Episode=1,[ValidateRange(1,9)][int]$Map=1,[ValidateRange(2,20)][int]$Rounds=4,
     [string]$Wad='C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\base\DOOM.WAD')
 $ErrorActionPreference='Stop';if(Test-Path $Output){throw 'Use a fresh report path.'}
@@ -15,7 +16,7 @@ foreach($path in $Baseline,$candidate){
     $functions[$path]=$mapFunctions
 }
 foreach($name in $functions[$Baseline].Keys){
-    if($name -notin @('Invoke-FastRender','New-FastRenderContext') -and $functions[$Baseline][$name] -cne $functions[$candidate][$name]){throw "Shared helper differs: $name. Use isolated runtimes for that comparison."}
+    if($name -notin (@('Invoke-FastRender','New-FastRenderContext')+$BaselineRenamedFunctions) -and $functions[$Baseline][$name] -cne $functions[$candidate][$name]){throw "Shared helper differs: $name. Use isolated runtimes for that comparison."}
 }
 $bundle=& "$PSScriptRoot/Build-EngineBundle.ps1";. $bundle;. "$PSScriptRoot/FrameCodec.ps1";. "$PSScriptRoot/../src/GameHost.ps1"
 $content=$null;$failure=$null;$samples=[Collections.Generic.List[object]]::new();$summary=$null
@@ -43,8 +44,8 @@ try{
     $summary|ConvertTo-Json -Depth 4
 }catch{$failure=$_.ToString()+"`n"+$_.ScriptStackTrace;throw}finally{
     if($content){$content.Dispose()}
-    @{Error=$failure;Episode=$Episode;Map=$Map;Rounds=$Rounds;Samples=$samples.ToArray();Summary=$summary;BaselineSha256=$baselineHash;CandidateSha256=$candidateHash;
+    @{Error=$failure;Episode=$Episode;Map=$Map;Rounds=$Rounds;BaselineRenamedFunctions=$BaselineRenamedFunctions;Samples=$samples.ToArray();Summary=$summary;BaselineSha256=$baselineHash;CandidateSha256=$candidateHash;
       LightingSha256=$lightingHash;SourcesChangedDuringRun=($baselineHash -cne (Get-FileHash $Baseline).Hash -or $candidateHash -cne (Get-FileHash $candidate).Hash -or $lightingHash -cne (Get-FileHash "$PSScriptRoot/../src/RenderLighting.ps1").Hash);
       BundleSha256=(Get-FileHash $bundle).Hash;WadSha256=(Get-FileHash $Wad).Hash;HarnessSha256=(Get-FileHash $PSCommandPath).Hash;
-      Meaning='Alternating-order serial full-frame renders at five static map headings. Every timed call retained, including first calls; no warm-up exclusion. Shared helper bodies must match; each renderer has its own context. Context construction and snapshot setup are outside timed calls. Not live simulation, audio, worker scaling, encoding, terminal output or displayed FPS.'}|ConvertTo-Json -Depth 7|Set-Content $Output
+      Meaning='Alternating-order serial full-frame renders at five static map headings. Every timed call retained, including first calls; no warm-up exclusion. Shared helper bodies must match; explicitly listed baseline functions are uniquely renamed so their calls stay isolated in PowerShell function scope. Each renderer has its own context. Context construction and snapshot setup are outside timed calls. Not live simulation, audio, worker scaling, encoding, terminal output or displayed FPS.'}|ConvertTo-Json -Depth 7|Set-Content $Output
 }

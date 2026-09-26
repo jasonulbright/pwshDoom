@@ -1,0 +1,263 @@
+{
+  "Format": "pwshDoom.WeaponProjectionSamplingComparison",
+  "Date": "2026-09-26",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "OriginalRendererSourceCommit": "4311cc619eefd1246fcaa7f13332d8330e3f5a5f",
+  "OriginalRendererSha256": "163B665D5658EBFFC31079D1AB129D9F5C19932D972BE3BF2D41018F282C7ACD",
+  "CurrentRendererSha256": "4F05E03458F6936EB8904A5ABCF5307B7DE930672733CE07CECE1E0D7D7416C4",
+  "Change": "Patch coverage now floors the projected left edge and advances source columns from that integer origin with a 16.16 reciprocal step, including flip direction and strip clipping.",
+  "WeaponContributionFixture": {
+    "BaselineReportPath": "local/weapon-patch-sampling-baseline-final.json",
+    "BaselineReportSha256": "8284298171F17D5EBD609748FA37D04AA6E4F72AD71CD988F880A6E54CBBBAA5",
+    "CurrentReportPath": "results/weapon-projection-sampling-final.json",
+    "CurrentReportSha256": "9837F48F1A88E8B9886CE456FC0E8323D97DE323C9AED6BE2795CD56CC6BE445",
+    "Offsets": [
+      -0.75,
+      -0.5,
+      -0.25,
+      0.0,
+      0.25,
+      0.5,
+      0.75
+    ],
+    "BaselineFinalPixelMismatches": 6483.0,
+    "CurrentFinalPixelMismatches": 0,
+    "CurrentCasesPassed": 7,
+    "CurrentPassed": true,
+    "Criterion": "Final pixel equality within the union of changed weapon coverage. Contributor masks can be ambiguous when a weapon texel equals its background."
+  },
+  "StaticReference": {
+    "Reference": "Adopted PowerShell renderer, not independent original-executable ground truth.",
+    "Views": [
+      {
+        "Map": "E1M1",
+        "AngleDegrees": 0,
+        "SceneDifferencesBefore": 4403,
+        "SceneDifferencesAfter": 4386,
+        "Reduction": 17,
+        "HudDifferences": 0,
+        "BeforePixelSha256": "E1CF551860876502A084AD901C8BE0573E88F95944896205DA96B801FC82BFE2",
+        "AfterPixelSha256": "41EEFE3DE559A44EF6FE1FE5E3A97E782A8C0108F5B8297F963AE6653363CB10"
+      },
+      {
+        "Map": "E1M1",
+        "AngleDegrees": 37,
+        "SceneDifferencesBefore": 3563,
+        "SceneDifferencesAfter": 3464,
+        "Reduction": 99,
+        "HudDifferences": 0,
+        "BeforePixelSha256": "C14A427D6328AC212A284D7BF85AD34C812EE94C76C254441C9F52565314EB81",
+        "AfterPixelSha256": "DA07B01AC0353F0BE58B2B40FB1FE8313B3FB113E960EC14169824823F824A3E"
+      },
+      {
+        "Map": "E1M1",
+        "AngleDegrees": 89,
+        "SceneDifferencesBefore": 4299,
+        "SceneDifferencesAfter": 4045,
+        "Reduction": 254,
+        "HudDifferences": 0,
+        "BeforePixelSha256": "51A0F7D136116D383E6E7E5CAD53BB8F2B76C239B3788ED597ACD169C6CC1C6C",
+        "AfterPixelSha256": "BCEC91D7864BF03994260F9125CABAD1C69564B9D0C4926BEEE5EC0405DF10DC"
+      },
+      {
+        "Map": "E1M1",
+        "AngleDegrees": 173,
+        "SceneDifferencesBefore": 4458,
+        "SceneDifferencesAfter": 4394,
+        "Reduction": 64,
+        "HudDifferences": 0,
+        "BeforePixelSha256": "9A4A55B5350B52B9925B80AA4C404186D536A742728A4E667BB8CE53185AC550",
+        "AfterPixelSha256": "E027076BA0A484B584FE3B74FD142B68618A00F5B3B5CE696FFB4B0E6C21EED8"
+      },
+      {
+        "Map": "E1M1",
+        "AngleDegrees": 269,
+        "SceneDifferencesBefore": 806,
+        "SceneDifferencesAfter": 806,
+        "Reduction": 0,
+        "HudDifferences": 0,
+        "BeforePixelSha256": "64CF286B4F7A2436CFE4E97EC7FC2D32360AF13FD42D4E7FE7FED42B91F4F402",
+        "AfterPixelSha256": "64CF286B4F7A2436CFE4E97EC7FC2D32360AF13FD42D4E7FE7FED42B91F4F402"
+      },
+      {
+        "Map": "E1M2",
+        "AngleDegrees": 0,
+        "SceneDifferencesBefore": 6389,
+        "SceneDifferencesAfter": 6269,
+        "Reduction": 120,
+        "HudDifferences": 0,
+        "BeforePixelSha256": "2280AC54537AA7B6CF01B0B72E5F6B4B1548EFE8B9850FEB78C28A815E936070",
+        "AfterPixelSha256": "72DEBF6A76FC16CB2BBEEF574EADCAF27F9C06854252B653E30E94ECB2F22291"
+      },
+      {
+        "Map": "E1M2",
+        "AngleDegrees": 37,
+        "SceneDifferencesBefore": 4383,
+        "SceneDifferencesAfter": 3981,
+        "Reduction": 402,
+        "HudDifferences": 0,
+        "BeforePixelSha256": "A74C447A7C4C542C2122D034CA4676C31B73454F860CCDBB69AD77CFC3C2509F",
+        "AfterPixelSha256": "C3943EC01D79B6ED276A810C75B1AACA4FAC8ADDC71BC579948D173CE8ACE756"
+      },
+      {
+        "Map": "E1M2",
+        "AngleDegrees": 89,
+        "SceneDifferencesBefore": 6491,
+        "SceneDifferencesAfter": 5979,
+        "Reduction": 512,
+        "HudDifferences": 0,
+        "BeforePixelSha256": "40D59B4D7DFC465314FD9F89A80D88F27EE8375396B914B79B3ADA530B94AC75",
+        "AfterPixelSha256": "0126F9B860238CDCFA4E9A19430064B47EAD2E4B6E59DBBF85701A3D51BAE1FB"
+      },
+      {
+        "Map": "E1M2",
+        "AngleDegrees": 173,
+        "SceneDifferencesBefore": 3463,
+        "SceneDifferencesAfter": 3397,
+        "Reduction": 66,
+        "HudDifferences": 0,
+        "BeforePixelSha256": "2C71DF232682FB5180D83AA06716819A69F2BBABEECE1153D00F9BD3225AB8DC",
+        "AfterPixelSha256": "6A89FA29EFAFAEFBF931D418A7779F56A4CFF39084BA706F35C95C20C760F5E1"
+      },
+      {
+        "Map": "E1M2",
+        "AngleDegrees": 269,
+        "SceneDifferencesBefore": 2377,
+        "SceneDifferencesAfter": 2377,
+        "Reduction": 0,
+        "HudDifferences": 0,
+        "BeforePixelSha256": "C3CDBAC12BC66CB4DFB79BE7BA013B107CCBA42DD883C646243A47FA3B56CE1E",
+        "AfterPixelSha256": "C3CDBAC12BC66CB4DFB79BE7BA013B107CCBA42DD883C646243A47FA3B56CE1E"
+      }
+    ],
+    "TotalViews": 10,
+    "SceneDifferencesBefore": 40632,
+    "SceneDifferencesAfter": 39098,
+    "SceneDifferenceReductionPercent": 3.78,
+    "HudDifferences": 0,
+    "Reports": [
+      {
+        "Map": "E1M1",
+        "Before": "local/sprite-projection-baseline.json",
+        "BeforeSha256": "62E035BEED35D57921B79D6FEDB2F180006920C3B21CDF909B8BE007866865F7",
+        "After": "local/weapon-projection-current-map1.json",
+        "AfterSha256": "C92E11A248E8586C7CA04FFA3A988A74B2162305B82CFD66E2BA9CF9D50D8CCA"
+      },
+      {
+        "Map": "E1M2",
+        "Before": "local/weapon-projection-baseline-map2.json",
+        "BeforeSha256": "27756B3C6C3B472BC878688C399F4050845B0A5654AACC118790DE3DEDE70834",
+        "After": "local/weapon-projection-current-map2.json",
+        "AfterSha256": "1CDBA5EAE24F6EFF76C5236CC83A751711927F28C8C0AB919A3BCB528680C793"
+      }
+    ]
+  },
+  "WorkerParity": {
+    "Workers": 16,
+    "Styles": [
+      {
+        "Style": "Classic",
+        "Workers": 16,
+        "Views": 5,
+        "ComparedPixelsPerView": 64000,
+        "PixelDifferences": 0.0,
+        "EncodedStripByteChecks": 80,
+        "Receipt": "results/weapon-projection-workers-classic.json",
+        "ReceiptSha256": "61853ECDE4FEE388138C3D5F380EBA73DFE062AFAD190FD0A407C53C104812E2"
+      },
+      {
+        "Style": "Matrix/Katakana",
+        "Workers": 16,
+        "Views": 5,
+        "ComparedPixelsPerView": 64000,
+        "PixelDifferences": 0.0,
+        "EncodedStripByteChecks": 80,
+        "Receipt": "results/weapon-projection-workers-matrix-katakana.json",
+        "ReceiptSha256": "3905A96F304C9978FD435AA344AD507330CEA3D70BDBF8200047F5F49B7FB698"
+      },
+      {
+        "Style": "AnsiArt/Katakana",
+        "Workers": 16,
+        "Views": 5,
+        "ComparedPixelsPerView": 64000,
+        "PixelDifferences": 0.0,
+        "EncodedStripByteChecks": 80,
+        "Receipt": "results/weapon-projection-workers-ansiart-katakana.json",
+        "ReceiptSha256": "372228F4F773C64F458607E4DB39B13070C30FE4CA6D240D22AC1078DA9DEFD7"
+      }
+    ],
+    "ComparedPixelsPerStyle": 320000,
+    "PixelDifferences": 0
+  },
+  "FullUltimateDoomSmoke": {
+    "Maps": 36,
+    "Passed": 36,
+    "Failed": 0,
+    "Skill": 3,
+    "IdleTics": 35,
+    "FramesPerMap": 2,
+    "WorkerStrips": 16,
+    "Receipt": "results/weapon-projection-smoke-current.json",
+    "ReceiptSha256": "2DA33DE4DD16F98BF3052A27E99726E311B806F97954B8571AACC0745201AEC7"
+  },
+  "WeaponLightingRegression": {
+    "Checks": 138,
+    "PreviousImplementationNegativeControlCases": 88,
+    "Receipt": "results/weapon-projection-lighting-current.json",
+    "ReceiptSha256": "B31B0A42468CCE6ABEAAE325A8CFC3F31D9119300D2DBB066A64DC401C87586C"
+  },
+  "SerialFullFrameTiming": {
+    "Map1": {
+      "Baseline": {
+        "Count": 20,
+        "Mean": 54.361485,
+        "Median": 44.9614,
+        "P95": 71.7843,
+        "Max": 94.311
+      },
+      "Candidate": {
+        "Count": 20,
+        "Mean": 55.23624000000001,
+        "Median": 46.2868,
+        "P95": 72.2773,
+        "Max": 111.6973
+      },
+      "BaselineSha256": "94DC5414EDECE9B50BA79D0A76E396FF8CEE09CE40D793185910A737DF6BF32E",
+      "CandidateSha256": "4F05E03458F6936EB8904A5ABCF5307B7DE930672733CE07CECE1E0D7D7416C4",
+      "Report": "results/weapon-projection-performance-map1.json",
+      "ReportSha256": "1541C6D80B9F784EBEC9089D379A85E196F57326ED199DFEE51C1AEC4863BCB5"
+    },
+    "Map2": {
+      "Baseline": {
+        "Count": 20,
+        "Mean": 50.54162,
+        "Median": 39.34985,
+        "P95": 80.7148,
+        "Max": 80.9632
+      },
+      "Candidate": {
+        "Count": 20,
+        "Mean": 51.61051,
+        "Median": 39.5058,
+        "P95": 83.3695,
+        "Max": 84.0515
+      },
+      "BaselineSha256": "94DC5414EDECE9B50BA79D0A76E396FF8CEE09CE40D793185910A737DF6BF32E",
+      "CandidateSha256": "4F05E03458F6936EB8904A5ABCF5307B7DE930672733CE07CECE1E0D7D7416C4",
+      "Report": "results/weapon-projection-performance-map2.json",
+      "ReportSha256": "2CF7AFCA0FD1C20F02E48658A2F06444DE012DFEA45E9548A89394717B2DB482"
+    },
+    "Interpretation": "No speedup is established. Median full-frame time rose about 2.9 percent on E1M1 and 0.4 percent on E1M2; fidelity is the measured benefit."
+  },
+  "Harness": {
+    "WeaponComparison": "scripts/Compare-WeaponPatchSampling.ps1",
+    "WeaponComparisonSha256": "84964DA5295A9C2723662E7E84AF2BE1E145D97D5E74974B6BC38587BF087902",
+    "Timing": "scripts/Measure-RendererPair.ps1",
+    "TimingSha256": "542A198C4E715657AB6578C8817A09316060E25E25B26D25565F043DAA9D53E6"
+  },
+  "Limits": [
+    "The reference is the locally adopted PowerShell renderer, not independently verified original-executable output.",
+    "Static view differences do not qualify campaign navigation or visible frame rate.",
+    "Full-frame timing is not worker end-to-end or Terminal presentation latency."
+  ]
+}

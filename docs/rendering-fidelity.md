@@ -246,3 +246,41 @@ The current-source Episode 1 smoke passes all nine maps at skill 3 after 35
 idle tics, with two rasterizations per map. The [smoke receipt](../results/episode1-render-fixed-plane-smoke-current.json)
 is not evidence of exits or human completion. Jason's single full Episode 1
 playthrough remains pending.
+
+## Fixed-point sprite column sampling (2026-09-26)
+
+`Draw-FastPatch` had been starting a projected actor or weapon at
+`Ceiling(left)` and deriving source columns from the fractional world-space
+edge. The adopted `ProjectSprite`/`DrawPlayerSprite` path floors the projected
+left edge to its first screen column, then advances the source fraction by a
+fixed-point inverse scale for each screen column. The numeric patch drawer now
+uses that integer anchor and 16.16 stepping, including mirrored sprites and
+worker-strip clipping. Vertical sampling, transparency, lighting, depth tests,
+and gameplay are unchanged.
+
+A real E1M1 pistol fixture shifted the active weapon through seven fractional
+horizontal offsets and compared its final pixels with and without the weapon
+in both renderers. The pre-change source differed in 6,483 pixels within the
+union of weapon coverage; the corrected renderer has zero final-pixel
+mismatches across all seven offsets. Its [focused receipt](../results/weapon-projection-sampling-final.json)
+and [comparison summary](../results/weapon-projection-sampling-comparison.json)
+explain why changed-pixel masks alone are ambiguous when a weapon texel equals
+the scene color behind it.
+
+The static map-start comparison at five headings each on E1M1 and E1M2 reduces
+scene-index disagreement with the adopted PowerShell reference from 40,632 to
+39,098 of 537,600 pixels (3.78% fewer); all ten HUDs remain exact. This
+reference is not independently verified original-executable output. Actual
+sixteen-process output remains pixel- and byte-exact for Classic,
+Matrix/Katakana and AnsiArt/Katakana, and the current renderer passes the
+36-map, skill-3, 35-idle-tic smoke. The [worker receipts](../results/weapon-projection-sampling-comparison.json),
+[smoke receipt](../results/weapon-projection-smoke-current.json), and
+[138-case weapon-lighting regression](../results/weapon-projection-lighting-current.json)
+are linked with hashes.
+
+Paired serial full-frame measurements retained 20 calls per version and map.
+Median time rose from 44.96 to 46.29 ms on E1M1 and from 39.35 to 39.51 ms on
+E1M2. This change has a measured fidelity benefit, not a performance claim;
+worker end-to-end and displayed frame rate remain open. The exact old and new
+source hashes, raw samples, and function-isolation method are recorded in the
+[comparison summary](../results/weapon-projection-sampling-comparison.json).

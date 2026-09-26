@@ -117,26 +117,40 @@ function Draw-FastPatch {
         [bool]$Flip=$false,[int]$Light=0,[int]$FirstColumn=0,[int]$EndColumn=320,[int]$MaxY=200)
     [int]$pw=$Patch.Width;[int]$ph=$Patch.Height;[int[]]$texels=$Patch.Data
     [byte[]]$pixels=$Context.Pixels;[double[]]$depth=$Context.Depth;[byte[]]$colors=$Context.Colors[$Light]
-    [int]$x0=[Math]::Max($FirstColumn,[Math]::Ceiling($Left));[int]$x1=[Math]::Min($EndColumn,[Math]::Ceiling($Left+$pw*$Scale))
+    if($pw -le 0 -or $ph -le 0 -or $Scale -le 0){return}
+    # Doom projects the left edge with a signed fixed-point shift, which floors
+    # it to the first screen column. Source stepping begins at that integer
+    # column rather than at the subpixel world-space edge.
+    [int]$screenLeft=[Math]::Floor($Left);[int]$screenEnd=[Math]::Floor($Left+$pw*$Scale)
+    [int]$x0=[Math]::Max($FirstColumn,$screenLeft);[int]$x1=[Math]::Min($EndColumn,$screenEnd)
     [int]$y0=[Math]::Max(0,[Math]::Ceiling($Top));[int]$y1=[Math]::Min($MaxY,[Math]::Ceiling($Top+$ph*$Scale))
+    if($x0 -ge $x1 -or $y0 -ge $y1){return}
+    [int]$scaleData=[Math]::Truncate($Scale*65536.0)
+    if($scaleData -le 0){return}
+    [long]$invScaleData=[Math]::Truncate(4294967296.0/$scaleData)
+    [long]$fracStep=if($Flip){-$invScaleData}else{$invScaleData}
+    [long]$fracData=if($Flip){([long]$pw -shl 16)-1L}else{0L}
+    $fracData+=([long]$x0-$screenLeft)*$fracStep
     if($Scale -eq 1 -and $Distance -eq 0) {
         for([int]$x=$x0;$x -lt $x1;$x++) {
-            [int]$u=[Math]::Floor($x-$Left);if($Flip){$u=$pw-1-$u}
+            [int]$u=[Math]::Clamp([int]($fracData -shr 16),0,$pw-1)
             [int]$t=$u*$ph+[int][Math]::Floor($y0-$Top);[int]$p=$y0*320+$x
             for([int]$y=$y0;$y -lt $y1;$y++) {
                 [int]$color=$texels[$t++];if($color -ge 0){$pixels[$p]=$colors[$color]};$p+=320
             }
+            $fracData+=$fracStep
         }
         return
     }
     for([int]$x=$x0;$x -lt $x1;$x++) {
-        [double]$uf=($x-$Left)/$Scale;[int]$u=$uf;if($u -gt $uf){$u--};if($u -ge $pw){$u=$pw-1};if($Flip){$u=$pw-1-$u}
+        [int]$u=[Math]::Clamp([int]($fracData -shr 16),0,$pw-1)
         for([int]$y=$y0;$y -lt $y1;$y++) {
             [int]$p=$y*320+$x
             if($Distance -gt 0 -and $Distance -ge $depth[$p]){continue}
             [double]$vf=($y-$Top)/$Scale;[int]$v=$vf;if($v -gt $vf){$v--};if($v -ge $ph){$v=$ph-1};[int]$color=$texels[$u*$ph+$v]
             if($color -ge 0){$pixels[$p]=$colors[$color];$depth[$p]=$Distance}
         }
+        $fracData+=$fracStep
     }
 }
 
