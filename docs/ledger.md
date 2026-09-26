@@ -1540,3 +1540,14 @@ ms on E1M2. This is a measured fidelity fix, not a speedup. Exact commands,
 source hashes, timing samples and caveats are in
 [`rendering-fidelity.md`](rendering-fidelity.md) and
 [`weapon-projection-sampling-comparison.json`](../results/weapon-projection-sampling-comparison.json).
+
+## 2026-09-26 — Check first-person weapon vertical sampling
+
+The focused E1M1 weapon-overlay comparison was repeated at seven fractional Y
+offsets (-0.75 through +0.75 pixels) against the adopted PowerShell reference.
+All seven final-pixel comparisons pass, so no scale-1 weapon-Y correction is
+indicated. This result does not cover perspective-scaled actor sprites, masked
+post boundaries at changing scales, or original-executable parity. The
+[harness](../scripts/Compare-WeaponPatchVerticalSampling.ps1) and
+[receipt](../results/weapon-projection-vertical-offsets.json) retain its
+source and IWAD hashes.

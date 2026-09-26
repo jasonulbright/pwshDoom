@@ -284,3 +284,15 @@ E1M2. This change has a measured fidelity benefit, not a performance claim;
 worker end-to-end and displayed frame rate remain open. The exact old and new
 source hashes, raw samples, and function-isolation method are recorded in the
 [comparison summary](../results/weapon-projection-sampling-comparison.json).
+
+## Weapon vertical-offset control (2026-09-26)
+
+After the horizontal correction, a separate E1M1 pistol fixture shifted the
+weapon vertically through seven fractional offsets from -0.75 to +0.75 pixels.
+The current renderer matched the adopted reference's final pixels in all seven
+cases. This rules out a simple subpixel-Y alignment defect for the scale-1
+first-person weapon; it does not test perspective-scaled world sprites, their
+individual masked posts, or establish original-executable parity. The
+[PowerShell harness](../scripts/Compare-WeaponPatchVerticalSampling.ps1) and
+[source-pinned receipt](../results/weapon-projection-vertical-offsets.json)
+preserve the exact scope and result.
