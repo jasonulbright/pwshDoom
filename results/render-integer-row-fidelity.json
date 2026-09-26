@@ -1,0 +1,193 @@
+{
+  "CreatedUtc": "2026-09-26T19:50:57.7809064Z",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "EngineBundleSha256": "61F6C9B2E6CE5B2316A363B81436A241ACEEF2B962B2CB4125596AD9DEA9BAE0",
+  "InitialRendererSha256": "3A3B56FACC23282F8A937313397891B3447332CF01FEB91707645BDC210D278F",
+  "PreviousRendererSha256": "1F0E9CF6F73F1517713855906346A4ACC4E1F315E824C9F8B65876ECA6869589",
+  "CurrentRendererSha256": "8C1E5BA8D632E80F8B92B061AF49B09D93B2E7248CC88D2EC1687BE866E190B8",
+  "Change": "Sample opaque and masked world-wall texels at integer screen rows, matching ThreeDRenderer.DrawColumnData (y1-centerY). Keep floor/ceiling plane mapping at its separate half-row centers.",
+  "Method": "Static E1M2 and E1M3 map starts after 35 idle updates, headings 0/90/180, same installed IWAD and adopted PowerShell reference. Not original-executable validation, navigation, or performance evidence.",
+  "Views": [
+    {
+      "Map": 2,
+      "AngleDegrees": 0,
+      "ComparedScenePixels": 53760,
+      "InitialDifferentIndices": 13377,
+      "AfterHorizontalCorrection": 8490,
+      "AfterIntegerRowSampling": 7189,
+      "AdditionalReductionPercent": 15.32,
+      "CumulativeReductionPercent": 46.26,
+      "InitialMeanAbsoluteRgbChannelError": 2.0075260416666665,
+      "PreviousMeanAbsoluteRgbChannelError": 1.3812552083333334,
+      "CurrentMeanAbsoluteRgbChannelError": 1.1657291666666667,
+      "HudDifferentIndices": 0
+    },
+    {
+      "Map": 2,
+      "AngleDegrees": 90,
+      "ComparedScenePixels": 53760,
+      "InitialDifferentIndices": 19024,
+      "AfterHorizontalCorrection": 12695,
+      "AfterIntegerRowSampling": 8343,
+      "AdditionalReductionPercent": 34.28,
+      "CumulativeReductionPercent": 56.14,
+      "InitialMeanAbsoluteRgbChannelError": 3.8676979166666667,
+      "PreviousMeanAbsoluteRgbChannelError": 2.9296875,
+      "CurrentMeanAbsoluteRgbChannelError": 1.8080729166666667,
+      "HudDifferentIndices": 0
+    },
+    {
+      "Map": 2,
+      "AngleDegrees": 180,
+      "ComparedScenePixels": 53760,
+      "InitialDifferentIndices": 14238,
+      "AfterHorizontalCorrection": 10264,
+      "AfterIntegerRowSampling": 6644,
+      "AdditionalReductionPercent": 35.27,
+      "CumulativeReductionPercent": 53.34,
+      "InitialMeanAbsoluteRgbChannelError": 2.57753125,
+      "PreviousMeanAbsoluteRgbChannelError": 2.0480104166666666,
+      "CurrentMeanAbsoluteRgbChannelError": 1.2046354166666666,
+      "HudDifferentIndices": 0
+    },
+    {
+      "Map": 3,
+      "AngleDegrees": 0,
+      "ComparedScenePixels": 53760,
+      "InitialDifferentIndices": 19434,
+      "AfterHorizontalCorrection": 13014,
+      "AfterIntegerRowSampling": 8378,
+      "AdditionalReductionPercent": 35.62,
+      "CumulativeReductionPercent": 56.89,
+      "InitialMeanAbsoluteRgbChannelError": 3.66321875,
+      "PreviousMeanAbsoluteRgbChannelError": 2.5511979166666667,
+      "CurrentMeanAbsoluteRgbChannelError": 1.63565625,
+      "HudDifferentIndices": 0
+    },
+    {
+      "Map": 3,
+      "AngleDegrees": 90,
+      "ComparedScenePixels": 53760,
+      "InitialDifferentIndices": 17458,
+      "AfterHorizontalCorrection": 9564,
+      "AfterIntegerRowSampling": 5153,
+      "AdditionalReductionPercent": 46.12,
+      "CumulativeReductionPercent": 70.48,
+      "InitialMeanAbsoluteRgbChannelError": 3.90253125,
+      "PreviousMeanAbsoluteRgbChannelError": 2.3936145833333335,
+      "CurrentMeanAbsoluteRgbChannelError": 1.02475,
+      "HudDifferentIndices": 0
+    },
+    {
+      "Map": 3,
+      "AngleDegrees": 180,
+      "ComparedScenePixels": 53760,
+      "InitialDifferentIndices": 18440,
+      "AfterHorizontalCorrection": 11511,
+      "AfterIntegerRowSampling": 7043,
+      "AdditionalReductionPercent": 38.82,
+      "CumulativeReductionPercent": 61.81,
+      "InitialMeanAbsoluteRgbChannelError": 3.2430625,
+      "PreviousMeanAbsoluteRgbChannelError": 1.9118333333333333,
+      "CurrentMeanAbsoluteRgbChannelError": 1.1646875,
+      "HudDifferentIndices": 0
+    }
+  ],
+  "Aggregate": {
+    "PixelsCompared": 322560,
+    "InitialDifferentIndices": 101971,
+    "AfterHorizontalCorrection": 65538,
+    "AfterIntegerRowSampling": 42750,
+    "AdditionalReductionPercent": 34.77,
+    "CumulativeReductionPercent": 58.08,
+    "CurrentResidualMinimumPercent": 9.59,
+    "CurrentResidualMaximumPercent": 15.58,
+    "AllHudDifferencesZero": true,
+    "AllRgbErrorsImproved": true
+  },
+  "WorkerEquivalence": [
+    {
+      "Style": "Classic",
+      "GlyphSet": "Ascii",
+      "Report": "results/render-integer-row-workers-classic.json",
+      "ReportSha256": "6308C7D4359E59CE72AAA02B238F7F4F07B720E5D6C461B50BA25CB73F510944",
+      "Views": 5,
+      "PixelsCompared": 320000.0,
+      "DifferentPixels": 0.0,
+      "EncodedStripByteChecks": 35,
+      "CharacterStripByteChecks": 0,
+      "RendererSha256": "8C1E5BA8D632E80F8B92B061AF49B09D93B2E7248CC88D2EC1687BE866E190B8"
+    },
+    {
+      "Style": "Matrix",
+      "GlyphSet": "Katakana",
+      "Report": "results/render-integer-row-workers-matrix-katakana.json",
+      "ReportSha256": "92BC20AF2EF8410514971DC923C97F2C513F68FD2F7574574C841A3C819D944F",
+      "Views": 5,
+      "PixelsCompared": 320000.0,
+      "DifferentPixels": 0.0,
+      "EncodedStripByteChecks": 35,
+      "CharacterStripByteChecks": 35,
+      "RendererSha256": "8C1E5BA8D632E80F8B92B061AF49B09D93B2E7248CC88D2EC1687BE866E190B8"
+    },
+    {
+      "Style": "AnsiArt",
+      "GlyphSet": "Katakana",
+      "Report": "results/render-integer-row-workers-ansiart-katakana.json",
+      "ReportSha256": "B5EB664891F43457F480985E2A7145C5E0AC4F8A82D837C017A603745B2D09AC",
+      "Views": 5,
+      "PixelsCompared": 320000.0,
+      "DifferentPixels": 0.0,
+      "EncodedStripByteChecks": 35,
+      "CharacterStripByteChecks": 35,
+      "RendererSha256": "8C1E5BA8D632E80F8B92B061AF49B09D93B2E7248CC88D2EC1687BE866E190B8"
+    }
+  ],
+  "Episode1Smoke": {
+    "Report": "results/episode1-render-integer-row-smoke-final.json",
+    "ReportSha256": "F27ACA0040B0AA72BF0218AC5AD0ED592F99F2D0409082CD2C9CDCBB906C9E19",
+    "Passed": 9,
+    "Failed": 0,
+    "Maps": [
+      "E1M1",
+      "E1M2",
+      "E1M3",
+      "E1M4",
+      "E1M5",
+      "E1M6",
+      "E1M7",
+      "E1M8",
+      "E1M9"
+    ],
+    "Skill": 3,
+    "IdleTics": 35,
+    "FramesPerMap": 2,
+    "Meaning": "Loading/idle/render smoke only; not route completion."
+  },
+  "RawComparisons": [
+    {
+      "Report": "results/render-reference-e1m2-fidelity-baseline.json",
+      "Sha256": "5AEAB07FC660EFDD17CE58A7C13F420AC1FBDC7DBDBF679041995EB5BBAC8177"
+    },
+    {
+      "Report": "results/render-reference-column-index-e1m2.json",
+      "Sha256": "E30C9BDCCF46FE182E645187A677A648F59946DAA662640157105035F4541321"
+    },
+    {
+      "Report": "results/render-reference-integer-row-e1m2.json",
+      "Sha256": "BC7E9582D21FDABB4F1B48A9D7198BBDB8ED11DE205823033636C595EC8971EB"
+    },
+    {
+      "Report": "results/render-reference-e1m3-fidelity-baseline.json",
+      "Sha256": "608965E7F848908A8A19FDBDA28D2E34345316E3ECD5A2666E39389ED0D1678E"
+    },
+    {
+      "Report": "results/render-reference-column-index-e1m3.json",
+      "Sha256": "0FE3710E03AF310C038F1D6416F09398045CC5029D498093E8101A787F48E78B"
+    },
+    {
+      "Report": "results/render-reference-integer-row-e1m3.json",
+      "Sha256": "1DA53188FBBFC2DF80CBABACB8DF541BF19B5AD8C4652F2038BD7FE37D8009B7"
+    }
+  ]
+}

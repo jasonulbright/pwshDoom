@@ -164,3 +164,22 @@ At the same E1M2/E1M3 map starts after 35 idle updates, compare the old and new 
 Across 322,560 scene pixels, differing palette indices fall from 101,971 to 65,538 (35.73% fewer); the new views still differ in 17.8–23.6% of scene indices. The bundle and IWAD hashes are pinned in [the combined receipt](../results/render-column-index-fidelity.json). Raw reports: [E1M2 before](../results/render-reference-e1m2-fidelity-baseline.json), [E1M2 after](../results/render-reference-column-index-e1m2.json), [E1M3 before](../results/render-reference-e1m3-fidelity-baseline.json), and [E1M3 after](../results/render-reference-column-index-e1m3.json). This is a static map-start comparison to the adopted PowerShell reference, not independent original-executable evidence, route completion, or a performance test.
 
 The change preserves exact serial/seven-strip output in five views for Classic, Matrix with Katakana, and AnsiArt with Katakana: 320,000 indexed pixels per style plus 35 encoded strip checks. A stored E1M1 fixed-input replay also passes through the actual headless host with 1,747 commands, eight checkpoints, and E1M2 entry. These verify worker and session integration; the headless frames are not displayed-FPS evidence. Remaining texture and projection differences need separate fixtures before further algorithm changes.
+
+## Integer-row wall texture sampling (2026-09-26)
+
+The adopted renderer's `ThreeDRenderer.DrawColumnData` starts a wall column's texture fraction at `(y1 - centerY) * invScale`, then advances one row at a time. The numeric renderer instead evaluated the wall fraction at `y+0.5`; its deferred masked-wall pass did the same. Change both opaque and masked world-wall samples to integer row `y`. Keep floor and ceiling planes on half-row centers: the reference's `ResetPlaneRendering` explicitly adds one half to its vertical offset, so this is a wall-only correction.
+
+Repeat the same static E1M2/E1M3 map-start comparison against the adopted reference at 0/90/180 degrees. Every view improves over the integer-column version, all HUD indices remain exact, and RGB-channel error decreases in all six views:
+
+| Map | Heading | Scene indices before / 53,760 | After | Further reduction | RGB-channel MAE before → after |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| E1M2 | 0° | 8,490 | 7,189 | 15.32% | 1.3813 → 1.1657 |
+| E1M2 | 90° | 12,695 | 8,343 | 34.28% | 2.9297 → 1.8081 |
+| E1M2 | 180° | 10,264 | 6,644 | 35.27% | 2.0480 → 1.2046 |
+| E1M3 | 0° | 13,014 | 8,378 | 35.62% | 2.5512 → 1.6357 |
+| E1M3 | 90° | 9,564 | 5,153 | 46.12% | 2.3936 → 1.0248 |
+| E1M3 | 180° | 11,511 | 7,043 | 38.82% | 1.9118 → 1.1647 |
+
+Across the six views, the combined horizontal and vertical wall corrections reduce disagreement from 101,971 to 42,750 of 322,560 scene pixels (58.08% fewer than the original numeric baseline). The corrected output still differs in 9.59–15.58% of scene indices. This is comparison to the adopted PowerShell renderer, not independently verified original-executable output; it establishes neither gameplay fidelity nor a frame-rate improvement. Raw reports and source/IWAD hashes are in [the combined receipt](../results/render-integer-row-fidelity.json), with [E1M2](../results/render-reference-integer-row-e1m2.json) and [E1M3](../results/render-reference-integer-row-e1m3.json) details.
+
+Seven-process output remains exact in five views for Classic, Matrix/Katakana, and AnsiArt/Katakana: each style matches 320,000 indexed pixels and 35 encoded strips. A fresh skill-3 smoke loads all nine Episode 1 maps, advances 35 idle tics and renders two full frames per map. These checks establish renderer/worker integrity and startup smoke only, not map completion or displayed FPS. Sprite and weapon sampling, fixed-point geometry, moving-world comparisons and an independent original-executable reference remain open.

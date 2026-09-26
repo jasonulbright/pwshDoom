@@ -1420,3 +1420,35 @@ smoke do not claim campaign completion. The exact IWAD and prepared music
 catalog were rechecked against their readiness hashes. The renderer comparison
 and limits remain separately recorded in
 `results/render-column-index-fidelity.json`.
+
+## 2026-09-26 — Align vertical wall texels to integer rows
+
+Inspection of `ThreeDRenderer.DrawColumnData` showed that it seeds a wall
+column's texture fraction at `(y1 - centerY) * invScale`. The numeric renderer
+sampled opaque and masked wall texels at `y+0.5`; change both to `y`. Keep plane
+mapping at half-row centers because the reference's `ResetPlaneRendering`
+explicitly adds one half. No simulation, HUD, sprite or weapon sampling changed.
+
+An isolated candidate improves all six E1M2/E1M3 static views after the prior
+integer-column correction. Differing indices fall from 8,490/12,695/10,264 to
+7,189/8,343/6,644 on E1M2 and 13,014/9,564/11,511 to 8,378/5,153/7,043 on
+E1M3. Every HUD remains exact and RGB-channel MAE decreases in all six. Across
+322,560 scene pixels, the cumulative comparison improves from 101,971 to
+42,750 differing indices (58.08% fewer than the original renderer baseline);
+9.59–15.58% remain different. The same adopted PowerShell reference and IWAD
+are used, so this is not independent original-executable evidence.
+
+The first isolated-comparison invocation failed before rendering because the
+candidate lived outside `src/`, while its shared `RenderLighting.ps1` import is
+resolved relative to its own `$PSScriptRoot`. Rerunning from a temporary source
+path and then with the production file succeeded; the failed invocation is a
+harness path issue, not a product failure. The production comparison receipts
+report no source changes during their runs.
+
+After adoption, actual seven-process rendering matches serial output across
+five views in Classic, Matrix/Katakana and AnsiArt/Katakana: 320,000 pixels and
+35 encoded strips per style. A fresh skill-3 Episode 1 smoke passes all nine
+maps with 35 idle tics and two full frames per map. Raw comparisons, worker
+reports, smoke results, hashes and limits are in
+`results/render-integer-row-fidelity.json`. This smoke is not map completion;
+Jason's single complete Episode 1 playthrough remains pending.

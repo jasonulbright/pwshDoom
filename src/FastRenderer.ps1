@@ -253,7 +253,9 @@ function Invoke-FastRender {
                         continue
                     }
                     for([int]$y=$y0;$y -le $y1;$y++) {
-                        [double]$vf=$vOrigin+($y+0.5-84)*$distance/160;[int]$v=$vf;if($v -gt $vf){$v--}
+                        # DrawColumnData anchors wall texels at integer row y1-centerY;
+                        # plane mapping separately uses half-row centers.
+                        [double]$vf=$vOrigin+($y-84)*$distance/160;[int]$v=$vf;if($v -gt $vf){$v--}
                         $v=($v%$th+$th)%$th;[int]$color=$td[$tu*$th+$v]
                         if($color -ge 0){$p=$y*320+$x;$pixels[$p]=$wallColors[$color];$depthBuffer[$p]=$distance}
                     }
@@ -299,7 +301,7 @@ function Invoke-FastRender {
         [int[]]$texels=$column.Texels;[byte[]]$colors=$column.Colors
         for([int]$y=$column.Y0;$y -le $column.Y1;$y++){
             [int]$p=$y*320+$x;if($distance -ge $depthBuffer[$p]){continue}
-            [double]$vf=$origin+($y+0.5-84)*$distance/160;[int]$v=$vf;if($v -gt $vf){$v--}
+            [double]$vf=$origin+($y-84)*$distance/160;[int]$v=$vf;if($v -gt $vf){$v--}
             if($v -lt 0 -or $v -ge $height){continue}
             [int]$color=$texels[$source+$v]
             if($color -ge 0){$pixels[$p]=$colors[$color];$depthBuffer[$p]=$distance}
