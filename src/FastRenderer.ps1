@@ -6,6 +6,37 @@ Set-StrictMode -Version Latest
 . "$PSScriptRoot/RenderLighting.ps1"
 . "$PSScriptRoot/RenderFuzz.ps1"
 
+$script:FastPlaneTables=$null
+function Get-FastPlaneTables {
+    if($null -ne $script:FastPlaneTables){return $script:FastPlaneTables}
+    [int[]]$angleToX=[int[]]::new([Trig]::FineAngleCount/2)
+    [int]$focalFine=([Trig]::FineAngleCount/4)+([ThreeDRenderer]::fineFov/2)
+    $focalAngle=[Angle]::new([uint32]($focalFine -shl [Trig]::AngleToFineShift))
+    $focalLength=[Fixed]::FromInt(160)/[Trig]::Tan($focalAngle)
+    for([int]$i=0;$i -lt $angleToX.Length;$i++){
+        $tan=[Trig]::TanFromInt($i);[int]$screenX=0
+        if($tan.Data -gt [Fixed]::FromInt(2).Data){$screenX=-1}
+        elseif($tan.Data -lt [Fixed]::FromInt(-2).Data){$screenX=321}
+        else{$screenX=[Math]::Clamp(([Fixed]::FromInt(160)-($tan*$focalLength)).ToIntCeiling(),-1,321)}
+        $angleToX[$i]=$screenX
+    }
+    [uint32[]]$columnAngle=[uint32[]]::new(320);[int[]]$distanceScale=[int[]]::new(320)
+    for([int]$x=0;$x -lt 320;$x++){
+        [int]$i=0;while($angleToX[$i] -gt $x){$i++}
+        $column=[Angle]::new([uint32]($i -shl [Trig]::AngleToFineShift))-[Angle]::Ang90
+        $columnAngle[$x]=$column.Data
+        $cos=[Fixed]::Abs([Trig]::Cos($column))
+        $distanceScale[$x]=([Fixed]::One/$cos).Data
+    }
+    [int[]]$rowSlope=[int[]]::new(168)
+    for([int]$y=0;$y -lt 168;$y++){
+        $dy=[Fixed]::Abs([Fixed]::FromInt($y-84)+([Fixed]::One/2))
+        $rowSlope[$y]=([Fixed]::FromInt(160)/$dy).Data
+    }
+    $script:FastPlaneTables=@{ColumnAngles=$columnAngle;DistanceScales=$distanceScale;RowSlopes=$rowSlope;FineSine=[int[]][Trig]::fineSine}
+    return $script:FastPlaneTables
+}
+
 function ConvertTo-RenderPatch {
     param($Patch)
     $data=[int[]]::new($Patch.Width*$Patch.Height)
@@ -76,6 +107,8 @@ function New-FastRenderContext {
     }
     $ctx.Hud.Percent=Get-RenderPatch $ctx $hudPatches.TallPercent
     $ctx.Hud.Minus=Get-RenderPatch $ctx $hudPatches.TallMinus
+    $planeTables=Get-FastPlaneTables
+    $ctx.PlaneColumnAngles=$planeTables.ColumnAngles;$ctx.PlaneDistanceScales=$planeTables.DistanceScales;$ctx.PlaneRowSlopes=$planeTables.RowSlopes;$ctx.PlaneFineSine=$planeTables.FineSine
     return $ctx
 }
 
@@ -143,6 +176,20 @@ function Invoke-FastRender {
     $phaseWatch=[Diagnostics.Stopwatch]::StartNew();$world=$Context.World;$player=$world.ConsolePlayer;$camera=$player.Mobj
     [double]$cx=$camera.X;[double]$cy=$camera.Y;[double]$cz=$player.ViewZ
     [double]$angle=$camera.Angle
+    [int]$viewXData=[Math]::Truncate(65536.0*$cx);[int]$viewYData=[Math]::Truncate(65536.0*$cy)
+    [int]$viewZData=[Math]::Truncate(65536.0*$cz)
+    [uint32]$viewAngleData=[uint32]([long][Math]::Round(4294967296.0*($angle/(2*[Math]::PI))) -band 0xFFFFFFFFL)
+    [uint32]$planeBaseAngleData=([long]$viewAngleData-0x40000000L) -band 0xFFFFFFFFL
+    [int]$planeBaseFine=$planeBaseAngleData -shr 19
+    [int[]]$fineSine=$Context.PlaneFineSine
+    [int]$planeBaseX=[Math]::Truncate($fineSine[$planeBaseFine+2048]/160.0)
+    [int]$planeBaseY=-[Math]::Truncate($fineSine[$planeBaseFine]/160.0)
+    [int[]]$raySin=[int[]]::new(320);[int[]]$rayCos=[int[]]::new(320)
+    for([int]$x=$FirstColumn;$x -lt $EndColumn;$x++){
+        [uint32]$rayData=([long]$viewAngleData+[long]$Context.PlaneColumnAngles[$x]) -band 0xFFFFFFFFL
+        [int]$fineIndex=$rayData -shr 19
+        $raySin[$x]=$fineSine[$fineIndex];$rayCos[$x]=$fineSine[$fineIndex+2048]
+    }
     [double]$co=[Math]::Cos($angle);[double]$si=[Math]::Sin($angle)
     [double]$ls=($FirstColumn-161)/160.0;[double]$rs=($EndColumn-159)/160.0
     [double]$lx=$si-$ls*$co;[double]$ly=-$co-$ls*$si;[double]$rx=$rs*$co-$si;[double]$ry=$rs*$si+$co
@@ -150,6 +197,8 @@ function Invoke-FastRender {
     [double]$aco=[Math]::Abs($co);[double]$asi=[Math]::Abs($si)
     [byte[]]$pixels=$Context.Pixels;[double[]]$depthBuffer=$Context.Depth
     [int[]]$planes=$Context.Planes
+    [int[]]$planeSpanBoundaries=[int[]]::new(0)
+    if($Context.ContainsKey('PlaneSpanBoundaries')){$planeSpanBoundaries=[int[]]$Context.PlaneSpanBoundaries}
     [int[]]$topClip=$Context.TopClip;[int[]]$bottomClip=$Context.BottomClip
     $maskedColumns=[Collections.Generic.List[object]]::new()
     [Array]::Clear($pixels);[Array]::Clear($planes);[Array]::Fill($depthBuffer,[double]::PositiveInfinity)
@@ -271,28 +320,52 @@ function Invoke-FastRender {
     }
     # PowerShell integer casts round to even. Correcting downward yields floor for
     # these finite Int32-range texture coordinates, avoiding a method binder per pixel.
-    # Visplane-style horizontal spans: distance and light are constant on each row.
-    # The ownership pass above handles clipping; this pass advances UV coordinates.
+    # Visplane-style horizontal spans with Doom's fixed-point plane rays. The
+    # standalone renderer also honors the process pool's strip boundaries so
+    # its spans begin at the same columns as independent render workers.
     for([int]$y=0;$y -lt 168;$y++) {
-        [int]$row=$y*320;[int]$x=$FirstColumn
+        [int]$row=$y*320;[int]$x=$FirstColumn;[int]$boundaryIndex=0
+        while($boundaryIndex -lt $planeSpanBoundaries.Length -and $planeSpanBoundaries[$boundaryIndex] -le $x){$boundaryIndex++}
+        [int]$planeSpanEnd=$EndColumn
+        if($boundaryIndex -lt $planeSpanBoundaries.Length -and $planeSpanBoundaries[$boundaryIndex] -lt $planeSpanEnd){$planeSpanEnd=$planeSpanBoundaries[$boundaryIndex]}
         while($x -lt $EndColumn) {
+            if($x -ge $planeSpanEnd){
+                while($boundaryIndex -lt $planeSpanBoundaries.Length -and $planeSpanBoundaries[$boundaryIndex] -le $x){$boundaryIndex++}
+                $planeSpanEnd=$EndColumn
+                if($boundaryIndex -lt $planeSpanBoundaries.Length -and $planeSpanBoundaries[$boundaryIndex] -lt $planeSpanEnd){$planeSpanEnd=$planeSpanBoundaries[$boundaryIndex]}
+            }
             [int]$id=$planes[$row+$x]
             if($id -eq 0){$x++;continue}
             $sector=$Context.Sectors[($id-1) -shr 1]
-            if(($id-1) -band 1){$height=$sector.FloorHeight;$flat=$Context.Flats[$sector.FloorFlat].Data}
-            else{$height=$sector.CeilingHeight;$flat=$Context.Flats[$sector.CeilingFlat].Data}
-            [double]$d=($cz-$height)*160/($y+0.5-84)
-            [int]$light=$Context.Lighting.Distance[[Math]::Clamp(($sector.LightLevel -shr 4)+$player.ExtraLight,0,15)][[Math]::Clamp([int][Math]::Floor($d/16),0,127)]
+            if(($id-1) -band 1){$heightData=[int][Math]::Truncate(65536.0*$sector.FloorHeight);$flat=[byte[]]$Context.Flats[$sector.FloorFlat].Data}
+            else{$heightData=[int][Math]::Truncate(65536.0*$sector.CeilingHeight);$flat=[byte[]]$Context.Flats[$sector.CeilingFlat].Data}
+            [long]$heightDelta=[long]$heightData-[long]$viewZData;if($heightDelta -lt 0){$heightDelta=-$heightDelta}
+            [int]$distanceData=($heightDelta*[long]$Context.PlaneRowSlopes[$y]) -shr 16
+            [int]$stepX=([long]$distanceData*[long]$planeBaseX) -shr 16
+            [int]$stepY=([long]$distanceData*[long]$planeBaseY) -shr 16
+            [int]$light=$Context.Lighting.Distance[[Math]::Clamp(($sector.LightLevel -shr 4)+$player.ExtraLight,0,15)][[Math]::Clamp(($distanceData -shr 20),0,127)]
             if($player.FixedColorMap -gt 0){$light=$player.FixedColorMap}
             [byte[]]$colors=$Context.Colors[$light];[byte[]]$flatData=$flat
-            [double]$du=$si*$d/160;[double]$dv=-$co*$d/160
-            [double]$wu=$cx+$co*$d;[double]$wv=$cy+$si*$d
+            [int]$lengthData=([long]$distanceData*[long]$Context.PlaneDistanceScales[$x]) -shr 16
+            [long]$xFracWide=[long]$viewXData+(([long]$rayCos[$x]*[long]$lengthData) -shr 16)
+            if($xFracWide -ge 2147483648L){$xFracWide-=4294967296L}elseif($xFracWide -lt -2147483648L){$xFracWide+=4294967296L}
+            [int]$xFrac=$xFracWide
+            [long]$negViewY=-[long]$viewYData
+            [long]$yFracWide=$negViewY-(([long]$raySin[$x]*[long]$lengthData) -shr 16)
+            if($yFracWide -ge 2147483648L){$yFracWide-=4294967296L}elseif($yFracWide -lt -2147483648L){$yFracWide+=4294967296L}
+            [int]$yFrac=$yFracWide
+            [double]$d=$distanceData/65536.0
             do {
-                [double]$uf=$wu+($x-160)*$du;[int]$u=$uf;if($u -gt $uf){$u--};$u=$u -band 63
-                [double]$vf=-($wv+($x-160)*$dv);[int]$v=$vf;if($v -gt $vf){$v--};$v=$v -band 63
-                [int]$p=$row+$x;$pixels[$p]=$colors[$flatData[$v*64+$u]];$depthBuffer[$p]=$d
+                [int]$u=($xFrac -shr 16) -band 63;[int]$v=($yFrac -shr 10) -band 4032
+                [int]$p=$row+$x;$pixels[$p]=$colors[$flatData[$v+$u]];$depthBuffer[$p]=$d
+                [long]$xFracWide=[long]$xFrac+[long]$stepX
+                if($xFracWide -ge 2147483648L){$xFracWide-=4294967296L}elseif($xFracWide -lt -2147483648L){$xFracWide+=4294967296L}
+                $xFrac=[int]$xFracWide
+                [long]$yFracWide=[long]$yFrac+[long]$stepY
+                if($yFracWide -ge 2147483648L){$yFracWide-=4294967296L}elseif($yFracWide -lt -2147483648L){$yFracWide+=4294967296L}
+                $yFrac=[int]$yFracWide
                 $x++
-            } while($x -lt $EndColumn -and $planes[$row+$x] -eq $id)
+            } while($x -lt $planeSpanEnd -and $planes[$row+$x] -eq $id)
         }
     }
     foreach($column in $maskedColumns){

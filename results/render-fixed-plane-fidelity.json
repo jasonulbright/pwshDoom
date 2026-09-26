@@ -1,0 +1,311 @@
+{
+  "Date": "2026-09-26",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "BaselineRevision": "601be10bbf488e2a9adeef83ad151c225c1969b9",
+  "BaselineRendererSha256": "8C1E5BA8D632E80F8B92B061AF49B09D93B2E7248CC88D2EC1687BE866E190B8",
+  "CandidateRendererSha256": "163B665D5658EBFFC31079D1AB129D9F5C19932D972BE3BF2D41018F282C7ACD",
+  "AssetFormat": "pwshDoom-assets-v4",
+  "Reference": "Adopted locally adapted PowerShell renderer; not independently verified original-executable output.",
+  "StaticReference": {
+    "ComparedScenePixels": 322560,
+    "DifferentIndicesAfter": 37798,
+    "DifferentIndicesBefore": 42750,
+    "ReductionPercent": 11.58,
+    "RemainingMismatchPercent": [
+      7.38,
+      14.19
+    ],
+    "HudDifferences": 0,
+    "Views": [
+      {
+        "HudDifferences": 0,
+        "Map": "E1M2",
+        "ReferencePixelSha256": "C2812DAD9D17194ABE7237C8A0191177903E5789A764F90148807C3A1E678DE8",
+        "ReductionPercent": 11.13,
+        "AngleDegrees": 0,
+        "AfterDifferentSceneIndices": 6389,
+        "CurrentPixelSha256": "2280AC54537AA7B6CF01B0B72E5F6B4B1548EFE8B9850FEB78C28A815E936070",
+        "MeanAbsoluteRgbChannelError": 1.0540833333333333,
+        "BeforeDifferentSceneIndices": 7189
+      },
+      {
+        "HudDifferences": 0,
+        "Map": "E1M2",
+        "ReferencePixelSha256": "6C02257D51181CFC6ABD3CDC1C2DE674F724399321346D84269883D9E03D87B7",
+        "ReductionPercent": 14.95,
+        "AngleDegrees": 90,
+        "AfterDifferentSceneIndices": 7096,
+        "CurrentPixelSha256": "2706EFE83FA457984540E989FDF9ABE9CCFBA8708234891988F52E34D98342D9",
+        "MeanAbsoluteRgbChannelError": 1.6446770833333333,
+        "BeforeDifferentSceneIndices": 8343
+      },
+      {
+        "HudDifferences": 0,
+        "Map": "E1M2",
+        "ReferencePixelSha256": "8A9413F2943D03FFFA3CE6811C16AA84B403A4B888B3E86315680282EAD836CB",
+        "ReductionPercent": 7.45,
+        "AngleDegrees": 180,
+        "AfterDifferentSceneIndices": 6149,
+        "CurrentPixelSha256": "BB47E5EC0A06ADD74188CFBEA06D52CB9AAE9FF4CC5CE873060F569DFC3B8B14",
+        "MeanAbsoluteRgbChannelError": 1.1426979166666666,
+        "BeforeDifferentSceneIndices": 6644
+      },
+      {
+        "HudDifferences": 0,
+        "Map": "E1M3",
+        "ReferencePixelSha256": "50F97B62C0FF0CF52B2BF4F5DC81E8815A9D94DC910E7FE436A40CF459080303",
+        "ReductionPercent": 8.93,
+        "AngleDegrees": 0,
+        "AfterDifferentSceneIndices": 7630,
+        "CurrentPixelSha256": "6A35BF659AD0673F8C0E8D32FBE756925A3C0B0E364FBD647BF68D464B9B5CC1",
+        "MeanAbsoluteRgbChannelError": 1.5362604166666667,
+        "BeforeDifferentSceneIndices": 8378
+      },
+      {
+        "HudDifferences": 0,
+        "Map": "E1M3",
+        "ReferencePixelSha256": "E720D84AC1F35BEE7D6A6CA5A9B977E151CFE89B0AB1E9CB6AFB83F53311013D",
+        "ReductionPercent": 23.04,
+        "AngleDegrees": 90,
+        "AfterDifferentSceneIndices": 3966,
+        "CurrentPixelSha256": "82AEDA0AF77C48267196AED355E74A8B4FB1291651823EFE72F9E11E30562921",
+        "MeanAbsoluteRgbChannelError": 0.8693854166666667,
+        "BeforeDifferentSceneIndices": 5153
+      },
+      {
+        "HudDifferences": 0,
+        "Map": "E1M3",
+        "ReferencePixelSha256": "ECC6BC41FE015F3F5E4EF2B31B21B84846CB9AB162E54C65E3123FCA543C9B88",
+        "ReductionPercent": 6.74,
+        "AngleDegrees": 180,
+        "AfterDifferentSceneIndices": 6568,
+        "CurrentPixelSha256": "13652C5FB2DCE0AC61A8BE4C0465FDD2DA566E4C2D832BCAA01E222ED7CCDF7D",
+        "MeanAbsoluteRgbChannelError": 1.1054375,
+        "BeforeDifferentSceneIndices": 7043
+      }
+    ]
+  },
+  "WorkerParity": {
+    "ViewsPerStyle": 5,
+    "Meaning": "Actual workers match the serial renderer using the same horizontal span restart boundaries; encoded output is also compared byte-for-byte.",
+    "PixelsPerStyle": 320000,
+    "PartitionCount": 16,
+    "Styles": [
+      {
+        "EncodedStripChecks": 80,
+        "PixelDifferences": 0,
+        "ComparedPixelsPerView": 64000,
+        "Style": "Classic",
+        "CharacterStripChecks": 0,
+        "ReportSha256": "D62014AB03E9A7934506AB79142C2896859473A9B4E038C10353276C30926C71",
+        "Views": 5,
+        "GlyphSet": "Ascii",
+        "Workers": 16
+      },
+      {
+        "EncodedStripChecks": 80,
+        "PixelDifferences": 0,
+        "ComparedPixelsPerView": 64000,
+        "Style": "Matrix",
+        "CharacterStripChecks": 80,
+        "ReportSha256": "969118A0BAAEA00D6FB0585E81850DA82CC661D748FD6AEE7E5AC135F739B55F",
+        "Views": 5,
+        "GlyphSet": "Katakana",
+        "Workers": 16
+      },
+      {
+        "EncodedStripChecks": 80,
+        "PixelDifferences": 0,
+        "ComparedPixelsPerView": 64000,
+        "Style": "AnsiArt",
+        "CharacterStripChecks": 80,
+        "ReportSha256": "CFA13421CAC43009718835B8FCEEB0B8FC661A7ED9C8FF6FF1BFD280DCE0E88C",
+        "Views": 5,
+        "GlyphSet": "Katakana",
+        "Workers": 16
+      }
+    ]
+  },
+  "SerialRenderTiming": {
+    "Pairs": [
+      {
+        "Candidate": {
+          "Count": 30,
+          "Mean": 57.80619333333332,
+          "Median": 51.34925,
+          "P95": 94.9451,
+          "Max": 120.5833
+        },
+        "BaselineSha256": "8C1E5BA8D632E80F8B92B061AF49B09D93B2E7248CC88D2EC1687BE866E190B8",
+        "Map": "E1M2",
+        "SourcesChangedDuringRun": false,
+        "Baseline": {
+          "Count": 30,
+          "Mean": 59.51626,
+          "Median": 46.4786,
+          "P95": 101.6481,
+          "Max": 196.2564
+        },
+        "CandidateSha256": "163B665D5658EBFFC31079D1AB129D9F5C19932D972BE3BF2D41018F282C7ACD",
+        "ReportSha256": "84F9A88B99B212A0D3C33F0245232D9CB2FB147B87F8BADF5133009D4F173BA9",
+        "Rounds": 6
+      },
+      {
+        "Candidate": {
+          "Count": 30,
+          "Mean": 46.827279999999995,
+          "Median": 46.07165,
+          "P95": 72.0052,
+          "Max": 95.332
+        },
+        "BaselineSha256": "8C1E5BA8D632E80F8B92B061AF49B09D93B2E7248CC88D2EC1687BE866E190B8",
+        "Map": "E1M3",
+        "SourcesChangedDuringRun": false,
+        "Baseline": {
+          "Count": 30,
+          "Mean": 47.484919999999995,
+          "Median": 43.457,
+          "P95": 71.4601,
+          "Max": 151.1945
+        },
+        "CandidateSha256": "163B665D5658EBFFC31079D1AB129D9F5C19932D972BE3BF2D41018F282C7ACD",
+        "ReportSha256": "AD811DD600A7C07827E062F4752C333C64DBDC1C0E4B66389F30545AD182A9D0",
+        "Rounds": 6
+      }
+    ],
+    "Meaning": "Alternating-order full-frame Invoke-FastRender only; not worker end-to-end latency or displayed FPS."
+  },
+  "Episode1Smoke": {
+    "Meaning": "Headless map loading, bounded idle simulation, and two full 320x200 rasterizations segmented at the configured worker-strip boundaries. Hashes are reproducibility fingerprints, not reference-image correctness. No navigation, exit, moving-special coverage, keyboard play, audio, parallel transport, or campaign completion is established. Stage timings include cold work and are not a gameplay FPS benchmark.",
+    "WorkerBoundaryCount": 16,
+    "Passed": 9,
+    "FramesPerMap": 2,
+    "Maps": [
+      "E1M1",
+      "E1M2",
+      "E1M3",
+      "E1M4",
+      "E1M5",
+      "E1M6",
+      "E1M7",
+      "E1M8",
+      "E1M9"
+    ],
+    "ReceiptSha256": "0DEDBEFCA187833BD4F3B44B7C1F4635BA556ED3D091B1E3ECEF45E113684A27",
+    "Skill": 3,
+    "Failed": 0,
+    "IdleTics": 35
+  },
+  "HeadlessHostReplay": {
+    "ScheduledRenderUpdatesPerSecond": 59.177,
+    "Meaning": "Stored E1M1 route reached E1M2 and reloaded v4 assets in place. Selected checkpoints match despite the recording being created from an older source. Headless host cadence is not monitor presentation.",
+    "Commands": 1747,
+    "FrameLatencyMs": {
+      "P95": 25.606,
+      "Median": 17.343,
+      "Count": 2956,
+      "Maximum": 58.197
+    },
+    "Replay": "local/input-recording-session.json",
+    "ReceiptSha256": "05EB4BAAE94F7FD253AB002A06A858F3088D24DC96E47EA3501B9D40E2D61417",
+    "ReplaySourceMatched": false,
+    "SimulationTicsPerSecond": 34.973,
+    "CheckpointMatched": true,
+    "TerminalFramesWritten": 0,
+    "WorkerCount": 16,
+    "MapReloadPauseSeconds": 1.914,
+    "MapReloads": [
+      {
+        "PauseMilliseconds": 1914.169,
+        "Tic": 1676,
+        "Episode": 1,
+        "Generation": 2,
+        "WorkerCount": 16,
+        "Map": 2
+      }
+    ],
+    "Checkpoints": 8,
+    "RawLocalReport": {
+      "Sha256": "E679D6D4EA369CAADF133EC12D2CBA8B13039DBC3978B11CCB087115AE256E28",
+      "Path": "local/renderer-assets-map-transition-fixed-plane-full.json"
+    }
+  },
+  "Reports": [
+    {
+      "Sha256": "D72110486C458F7F00269AC44BC899EA0FCB17BB65A993528D5E81195EE89CC7",
+      "Path": "results/render-fixed-plane-reference-e1m2-16.json"
+    },
+    {
+      "Sha256": "C3237B493D15A83F499B31A49A42E076C0530DF36596E2BBA700CEEE72DF484C",
+      "Path": "results/render-fixed-plane-reference-e1m3-16.json"
+    },
+    {
+      "Sha256": "D62014AB03E9A7934506AB79142C2896859473A9B4E038C10353276C30926C71",
+      "Path": "results/render-fixed-plane-workers-classic-16.json"
+    },
+    {
+      "Sha256": "969118A0BAAEA00D6FB0585E81850DA82CC661D748FD6AEE7E5AC135F739B55F",
+      "Path": "results/render-fixed-plane-workers-matrix-katakana-16.json"
+    },
+    {
+      "Sha256": "CFA13421CAC43009718835B8FCEEB0B8FC661A7ED9C8FF6FF1BFD280DCE0E88C",
+      "Path": "results/render-fixed-plane-workers-ansiart-katakana-16.json"
+    },
+    {
+      "Sha256": "84F9A88B99B212A0D3C33F0245232D9CB2FB147B87F8BADF5133009D4F173BA9",
+      "Path": "results/render-fixed-plane-pair-e1m2.json"
+    },
+    {
+      "Sha256": "AD811DD600A7C07827E062F4752C333C64DBDC1C0E4B66389F30545AD182A9D0",
+      "Path": "results/render-fixed-plane-pair-e1m3.json"
+    },
+    {
+      "Sha256": "0DEDBEFCA187833BD4F3B44B7C1F4635BA556ED3D091B1E3ECEF45E113684A27",
+      "Path": "results/episode1-render-fixed-plane-smoke-current.json"
+    },
+    {
+      "Sha256": "05EB4BAAE94F7FD253AB002A06A858F3088D24DC96E47EA3501B9D40E2D61417",
+      "Path": "results/renderer-assets-map-transition-fixed-plane.json"
+    },
+    {
+      "Sha256": "D05C4CAAD15B36B0A996AB41150A90EE40E40F061AFB3B132DA4E2ED024704FE",
+      "Path": "results/session-worker-fixed-plane-16.json"
+    }
+  ],
+  "Sources": [
+    {
+      "Sha256": "163B665D5658EBFFC31079D1AB129D9F5C19932D972BE3BF2D41018F282C7ACD",
+      "Path": "src/FastRenderer.ps1"
+    },
+    {
+      "Sha256": "A08AC2DF924057BACEFFEE2C38F2C46D8A80C89EC5CCA3FFC236D665920D1A18",
+      "Path": "src/GameProcesses.ps1"
+    },
+    {
+      "Sha256": "522C47F2DEF526DD9FF44BE0BC97012D94BAE424B4B96965DD169B9DA8531DC0",
+      "Path": "src/RenderAssets.ps1"
+    },
+    {
+      "Sha256": "AB1BCA2D5E9B691C047A9ED93C452C0B972DF5B07C3F2C9A1E063536E9A3ADA1",
+      "Path": "scripts/Compare-RendererReference.ps1"
+    },
+    {
+      "Sha256": "F4EF8BE9F484F25A4CF53CABE7CD65172F79DC88C73AAF0FCF1D848D6F5C3C66",
+      "Path": "scripts/Test-RenderPartitions.ps1"
+    },
+    {
+      "Sha256": "A279094428EEF90D744B1D7800061F5871F50C7166DA181A0AAEF57DD486C12C",
+      "Path": "scripts/Test-CampaignSmoke.ps1"
+    },
+    {
+      "Sha256": "9C183269F5C010C642C0CD90766EE5FB73DBF16823C9BEB0741B326DD8C1F3A5",
+      "Path": "scripts/Test-SessionWorker.ps1"
+    }
+  ],
+  "Limitations": [
+    "The static reference is not original-executable ground truth.",
+    "Serial renderer medians increased in both measured maps; no FPS improvement is claimed.",
+    "The headless host wrote zero terminal frames, so displayed update rate remains unverified.",
+    "The complete human Episode 1 playthrough is still pending."
+  ]
+}

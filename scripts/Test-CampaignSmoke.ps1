@@ -1,7 +1,7 @@
 #requires -Version 7.4
 # SPDX-License-Identifier: GPL-2.0-or-later
 param([string]$Wad='C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\base\DOOM.WAD',
-    [string[]]$Maps,[ValidateRange(1,5)][int]$Skill=3,[ValidateRange(1,350)][int]$Tics=35,
+    [string[]]$Maps,[ValidateRange(1,5)][int]$Skill=3,[ValidateRange(1,350)][int]$Tics=35,[ValidateRange(1,32)][int]$Workers=16,
     [string]$Output="$PSScriptRoot/../local/campaign-smoke.json")
 $ErrorActionPreference='Stop'
 $Output=[IO.Path]::GetFullPath($Output)
@@ -16,9 +16,9 @@ $sources=@(foreach($path in ($sourcePaths | Sort-Object -Unique)){@{Path=[IO.Pat
 function Write-CampaignSmokeReport([bool]$Complete) {
     $data=@{UpdatedUtc=[DateTime]::UtcNow.ToString('o');Complete=$Complete;FatalError=$fatal;ActiveCase=$active;
         WadSha256=$wadHash;PowerShell=$PSVersionTable.PSVersion.ToString();Skill=$Skill;RequestedTics=$Tics;
-        Maps=$mapNames;Cases=$cases.ToArray();SourceFiles=$sources;
+        Maps=$mapNames;Cases=$cases.ToArray();SourceFiles=$sources;WorkerStrips=$Workers;
         Passed=@($cases | Where-Object Passed).Count;Failed=@($cases | Where-Object {-not $_.Passed}).Count;
-        Meaning='Headless map loading, bounded idle simulation, and two full 320x200 serial rasterizations at the resulting player position. Hashes are reproducibility fingerprints, not reference-image correctness. No navigation, exit, moving-special coverage, keyboard play, audio, parallel transport, or campaign completion is established. Stage timings include cold work and are not a gameplay FPS benchmark.'}
+        Meaning='Headless map loading, bounded idle simulation, and two full 320x200 rasterizations segmented at the configured worker-strip boundaries. Hashes are reproducibility fingerprints, not reference-image correctness. No navigation, exit, moving-special coverage, keyboard play, audio, parallel transport, or campaign completion is established. Stage timings include cold work and are not a gameplay FPS benchmark.'}
     $data | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath $Output
 }
 try {
@@ -42,7 +42,10 @@ try {
             $record.SimulationMs=$watch.Elapsed.TotalMilliseconds;$record.Health=$game.World.ConsolePlayer.Health
             $record.TotalKills=$game.World.TotalKills;$record.Lines=$game.World.Map.Lines.Count;$record.Sectors=$game.World.Map.Sectors.Count
             $record.Stage='RenderContext';$active.Stage=$record.Stage;Write-CampaignSmokeReport $false;$watch.Restart()
-            $context=New-FastRenderContext $content $game.World;$record.ContextMs=$watch.Elapsed.TotalMilliseconds
+            $context=New-FastRenderContext $content $game.World
+            $planeSpanBoundaries=[Collections.Generic.List[int]]::new()
+            for([int]$i=1;$i -le $Workers;$i++){$planeSpanBoundaries.Add([int][Math]::Floor($i*320.0/$Workers))}
+            $context.PlaneSpanBoundaries=$planeSpanBoundaries.ToArray();$record.ContextMs=$watch.Elapsed.TotalMilliseconds
             $record.Stage='Render';$active.Stage=$record.Stage;Write-CampaignSmokeReport $false
             foreach($headingOffset in 0,90) {
                 $snapshot=New-GameRenderSnapshot $game;$snapshot.ConsolePlayer.Mobj.Angle+=$headingOffset*[Math]::PI/180

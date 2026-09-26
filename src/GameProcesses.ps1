@@ -9,6 +9,12 @@ function New-GameRenderPool {
     $root=Split-Path $PSScriptRoot
     $pool=@{Workers=[Collections.Generic.List[object]]::new();Results=[object[]]::new($Workers);Count=$Workers;Style=$Style;
         Assets=(Join-Path $root ('local/session-'+[guid]::NewGuid().ToString('N')+'.assets'))}
+    $planeSpanBoundaries=[Collections.Generic.List[int]]::new()
+    for([int]$i=1;$i -le $Workers;$i++){
+        $edge=if($Style -eq 'Classic'){[int][Math]::Floor($i*320.0/$Workers)}else{2*[int][Math]::Floor($i*160.0/$Workers)}
+        $planeSpanBoundaries.Add($edge)
+    }
+    $Context.PlaneSpanBoundaries=$planeSpanBoundaries.ToArray()
     $pool.OwnAssets=$false;$pool.CopyPixels=-not $Context.ContainsKey('AssetPath')
     try {
         if($Context.ContainsKey('AssetPath')){$pool.Assets=$Context.AssetPath}

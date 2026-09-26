@@ -183,3 +183,66 @@ Repeat the same static E1M2/E1M3 map-start comparison against the adopted refere
 Across the six views, the combined horizontal and vertical wall corrections reduce disagreement from 101,971 to 42,750 of 322,560 scene pixels (58.08% fewer than the original numeric baseline). The corrected output still differs in 9.59–15.58% of scene indices. This is comparison to the adopted PowerShell renderer, not independently verified original-executable output; it establishes neither gameplay fidelity nor a frame-rate improvement. Raw reports and source/IWAD hashes are in [the combined receipt](../results/render-integer-row-fidelity.json), with [E1M2](../results/render-reference-integer-row-e1m2.json) and [E1M3](../results/render-reference-integer-row-e1m3.json) details.
 
 Seven-process output remains exact in five views for Classic, Matrix/Katakana, and AnsiArt/Katakana: each style matches 320,000 indexed pixels and 35 encoded strips. A fresh skill-3 smoke loads all nine Episode 1 maps, advances 35 idle tics and renders two full frames per map. These checks establish renderer/worker integrity and startup smoke only, not map completion or displayed FPS. Sprite and weapon sampling, fixed-point geometry, moving-world comparisons and an independent original-executable reference remain open.
+
+## Fixed-point plane mapping and strip phase (2026-09-26)
+
+The adopted renderer's `ResetPlaneRendering` builds fixed-point floor/ceiling
+distance scales, and its plane drawers start each visible span from the current
+column's fine-angle ray before stepping texture coordinates horizontally. The
+numeric renderer had mapped floor and ceiling texels with continuous doubles.
+The replacement uses the engine's fine-sine table, per-column angle/distance
+tables, half-row slopes, and 16.16 span stepping. Gameplay rules, walls, sprites,
+weapons, and HUD rendering do not change.
+
+Independent render workers begin their spans at their own left edges. A first
+fixed-point candidate restarted its scanline spans at those edges while a
+full-frame render restarted at the actual plane-run start, so their flat texel
+indices differed near strip boundaries. Recomputing every sample from its
+absolute column restored exact output but lost the fidelity gain. The adopted
+path records the pool's strip boundaries in the disposable `assets-v4`
+transport and makes the serial comparison renderer restart at those same
+boundaries. The production workers still render only their assigned strips.
+
+At E1M2 and E1M3 map start after 35 idle updates, with sixteen Classic worker
+strips, the six views improve against the adopted PowerShell reference:
+
+| Map | Heading | Scene indices before / 53,760 | After | Reduction | RGB-channel MAE before → after |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| E1M2 | 0° | 7,189 | 6,389 | 11.13% | 1.1657 → 1.0541 |
+| E1M2 | 90° | 8,343 | 7,096 | 14.95% | 1.8081 → 1.6447 |
+| E1M2 | 180° | 6,644 | 6,149 | 7.45% | 1.2046 → 1.1427 |
+| E1M3 | 0° | 8,378 | 7,630 | 8.93% | 1.6357 → 1.5363 |
+| E1M3 | 90° | 5,153 | 3,966 | 23.04% | 1.0248 → 0.8694 |
+| E1M3 | 180° | 7,043 | 6,568 | 6.74% | 1.1647 → 1.1054 |
+
+Across 322,560 scene pixels, the prior integer-column plus integer-row result
+had 42,750 differing indices; fixed-point plane mapping has 37,798 (11.58%
+fewer). All six HUDs remain exact. The remaining scene mismatch is 7.38–14.19%.
+This is a static comparison to the adopted PowerShell renderer, not a verified
+original-executable image or a campaign-play result. See the [combined
+receipt](../results/render-fixed-plane-fidelity.json) and its [E1M2](../results/render-fixed-plane-reference-e1m2-16.json)
+and [E1M3](../results/render-fixed-plane-reference-e1m3-16.json) reports.
+
+With sixteen actual worker processes, Classic, Matrix/Katakana, and
+AnsiArt/Katakana each match serial output across five E1M1 views: 320,000
+palette indices and 80 encoded strips per style. The [worker receipts](../results/render-fixed-plane-fidelity.json)
+record the pixel and byte checks. An actual headless E1M1-to-E1M2 host replay
+also reloads the v4 assets without restarting workers; all eight available
+checkpoints match and the final asset generation is E1M2. The [session
+receipt](../results/renderer-assets-map-transition-fixed-plane.json) reports
+34.97 simulation tics/sec and 59.18 scheduled render updates/sec, with no
+terminal frames written. That does not measure monitor presentation.
+
+The alternating six-round serial-render comparison has 30 samples per map and
+different source hashes for baseline and candidate. Median full-frame render
+time rises from 46.48 to 51.35 ms on E1M2 and from 43.46 to 46.07 ms on E1M3;
+the p95 values are 101.65 to 94.95 ms and 71.46 to 72.01 ms respectively.
+These single-process timings are not end-to-end worker or displayed-FPS
+measurements. An earlier pair of timing files had identical baseline/candidate
+hashes and was rejected; no performance claim relies on them. The accepted
+timing receipts are linked from the [combined receipt](../results/render-fixed-plane-fidelity.json).
+
+The current-source Episode 1 smoke passes all nine maps at skill 3 after 35
+idle tics, with two rasterizations per map. The [smoke receipt](../results/episode1-render-fixed-plane-smoke-current.json)
+is not evidence of exits or human completion. Jason's single full Episode 1
+playthrough remains pending.

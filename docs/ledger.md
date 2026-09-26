@@ -1462,3 +1462,39 @@ readiness receipt. The focused transition, boss, menu/session and synthetic
 input checks remain valid: the renderer-only change did not modify their
 simulation or UI dependencies. The handoff retains one whole-episode human run
 as pending and makes no campaign-completion or physical-keyboard claim.
+
+## 2026-09-26 — Fixed-point planes across render strips
+
+I replaced continuous-double floor/ceiling texture mapping with the adopted
+engine's fixed-point row slopes, fine-angle rays, distance scales, and
+horizontal span steps. A first full-width comparison looked better, but an
+early worker test showed the independent processes restarted a span at their
+own left edges. The initial serial and worker spans therefore used different
+fixed-point phases. One attempted per-column formula restored exact worker
+output but erased the fidelity improvement. The retained design gives the
+serial comparison path the same strip boundaries used by its worker pool and
+starts each span at each strip edge. The asset transport now carries the
+lookup tables and strip boundaries in format v4; an empty boundary list is
+valid for the real simulation-created asset file.
+
+With sixteen Classic strip boundaries, scene disagreement against the adopted
+PowerShell reference falls from 42,750 to 37,798 of 322,560 pixels (11.58%
+fewer); all six HUDs stay exact. Actual sixteen-process output is byte/pixel
+exact with serial output for Classic, Matrix/Katakana, and AnsiArt/Katakana:
+320,000 indices and 80 encoded strips per style across five E1M1 headings.
+The current-source skill-3 smoke passes all nine Episode 1 maps. A headless
+replay of the stored 1,747-command E1M1 route matches its eight available
+checkpoints, reloads E1M2 assets in the same sixteen workers, and finishes at
+34.97 simulation tics/sec and 59.18 scheduled render updates/sec. It wrote no
+terminal frames, so those rates do not certify displayed FPS. Its map reload
+paused output for 1.91 seconds.
+
+The corrected alternating serial timings show median render time rising from
+46.48 to 51.35 ms on E1M2 and from 43.46 to 46.07 ms on E1M3; p95 changes from
+101.65 to 94.95 ms and 71.46 to 72.01 ms. These are single-process full-frame
+measurements, not worker end-to-end or display timings. An earlier pair of
+timing receipts was rejected when its baseline and candidate hashes proved
+identical; the corrected reports pin different hashes and no source changes
+during measurement. Results, parameters, and limits are indexed in
+[`rendering-fidelity.md`](rendering-fidelity.md). This does not change the
+pending human Episode 1 playthrough.

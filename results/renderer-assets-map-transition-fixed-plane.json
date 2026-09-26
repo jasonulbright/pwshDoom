@@ -1,0 +1,45 @@
+{
+  "Format": "pwshDoom.RenderWorkerMapTransition",
+  "FinishedUtc": "2026-09-26T20:58:07.7864112Z",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "PowerShell": "7.6.5",
+  "Architecture": "SeparateSimulation",
+  "Mode": "Headless replay through the normal 16-process rendering host",
+  "AssetFormat": "pwshDoom-assets-v4",
+  "Replay": "local/input-recording-session.json",
+  "ReplaySourceMatched": false,
+  "Commands": 1747,
+  "SimulationTics": 1747,
+  "ReplayCheckpoints": {
+    "Count": 8,
+    "Matched": true
+  },
+  "ExitReason": "ReplayEnd",
+  "FinalAssetGeneration": 2,
+  "MapReloads": [
+    {
+      "PauseMilliseconds": 1914.169,
+      "Tic": 1676,
+      "Episode": 1,
+      "Generation": 2,
+      "WorkerCount": 16,
+      "Map": 2
+    }
+  ],
+  "SimulationTicsPerSecond": 34.973,
+  "ScheduledRenderUpdatesPerSecond": 59.177,
+  "RenderToWriteLatencyMilliseconds": {
+    "P95": 25.606,
+    "Median": 17.343,
+    "Count": 2956,
+    "Maximum": 58.197
+  },
+  "Workers": 16,
+  "WorkerWorkingSetBytes": 4031377408,
+  "TerminalFramesWritten": 0,
+  "RawLocalReport": {
+    "Sha256": "E679D6D4EA369CAADF133EC12D2CBA8B13039DBC3978B11CCB087115AE256E28",
+    "Path": "local/renderer-assets-map-transition-fixed-plane-full.json"
+  },
+  "Meaning": "The stored E1M1 route replay reached E1M2 and the same workers loaded its new assets. Eight selected checkpoints match although the replay was recorded against an older source. Headless cadence and render-to-write latency are not monitor presentation measurements."
+}

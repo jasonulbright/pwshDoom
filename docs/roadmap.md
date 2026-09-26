@@ -44,13 +44,18 @@ human run as one pending milestone.
 
 While Jason's one Episode 1 route remains pending, continue independent M4
 fidelity work. Matching integer-column rays and integer-row wall texels to the
-adopted renderer reduces differing scene indices from 101,971 to 42,750 across
-six fixed E1M2/E1M3 views (58.08% fewer), with exact HUDs; 9.59–15.58% still
-differ. The before, after, worker, and smoke receipts and their limits are in
-[rendering fidelity](rendering-fidelity.md). These idle-start images are not
-campaign evidence or original-executable proof. Sprite/weapon sampling, further
-fixed-point projection, sustained 35-tic/60-display performance, and
-full-campaign music remain open.
+adopted renderer reduced differing scene indices from 101,971 to 42,750 across
+six fixed E1M2/E1M3 views (58.08% fewer). Doom-style fixed-point plane mapping
+now reduces those 42,750 differences to 37,798 (11.58% further), with exact
+HUDs; 7.38–14.19% of scene indices still differ. Sixteen-worker output is
+exact across Classic, Matrix/Katakana, and AnsiArt/Katakana, and an actual
+headless E1M1-to-E1M2 host replay verifies asset reload. Single-process median
+render times rise 6–10%, so the change is a fidelity tradeoff rather than a
+performance claim. The [rendering-fidelity record](rendering-fidelity.md)
+links source-pinned comparisons, worker checks, map smoke, host replay, and
+timings. These idle-start images are not campaign evidence or original-exe
+proof. Sprite/weapon sampling, further fixed-point projection, sustained
+35-tic/60-display performance, and full-campaign music remain open.
 
 "Best" means strongest demonstrated result for this particular combination of language boundary, terminal play, correctness, usability, and reproducible evidence. The study must publish losses and tradeoffs. A compiled source port may win performance, fidelity, portability, or ease of installation; that does not make it a PowerShell-engine implementation. Do not claim superiority over untested alternatives or present our adopted gameplay translation as original work.
 
@@ -82,7 +87,7 @@ Release acceptance requires:
 | M1 — Campaign foundation | Map inventory and failure matrix; correct state transitions; renderer asset refresh on level changes | Per-map smoke results, normal/secret routing tests, E1M1 → E1M2 through the real host, carryover/death checks | Foundation verified: 57 controller checks and recorded E1M1 → E1M2 in all three styles; broader campaign unqualified |
 | M2 — Complete single-player session | Menus, intermission/finale display, pause, save/load, automap, input recording | Scripted state-machine checks, save continuation, short user playtest | Intermission/finale, resume/new-game/quit menus, pause, six save/load slots and versioned input/control recording implemented; automap controls/save/replay integrated, with near-target averages recovered in a bounded test; input settings implemented; physical play and broader qualification remain |
 | M3 — Audio | PowerShell-controlled effects/music and declared device backend | Offline output correctness, real playback review, underrun/latency/load measurements | [Opt-in PowerShell effects and Windows playback](audio.md) integrated; volume/mute and full-host PCM identity verified; [dry PowerShell music](music-synthesis.md) has 55 synthesis tests; [bounded music workers](music-workers.md) preserve the entire E1M1 loop with nineteen current group/lifecycle checks; paced four/eight-worker runs fail 38/118 virtual deadlines, independently audited; [finite float64 cache](music-cache.md) preserves full-score PCM with 22 storage and 391 evidence checks; [E1M1 reusable loop](music-loops.md) qualifies full state/output recurrence and bounded reading; [E1M1 host music](music-integration.md) passes worker/save/headless/live-window checks; the eleven-track Episode 1 catalog including D_VICTOR now passes continuous-loop preparation, independent reader checks and 15 actual simulation/audio-worker checks; uninterrupted campaign playback, presentation pacing, underrun/latency, one-shot music and audible review remain |
-| M4 — Rendering fidelity | Reference comparisons and corrected effects/geometry/HUD | Golden states, categorized differences, regressions tested with animation and moving sectors | HUD parity, numeric world/weapon lighting and invisibility/Spectre fuzz implemented. Fuzz uses a documented per-column phase approximation; 119 focused checks and all three actual worker modes pass. Palette selection is implemented with focused/worker checks and Classic/Matrix captures; AnsiArt capture cleanup remains open. Integer-column rays plus integer-row wall sampling reduce static E1M2/E1M3 disagreement; worker equivalence and all-map smoke pass. Sprite/weapon projection, further fixed-point work and independent original-executable comparisons remain |
+| M4 — Rendering fidelity | Reference comparisons and corrected effects/geometry/HUD | Golden states, categorized differences, regressions tested with animation and moving sectors | HUD parity, numeric world/weapon lighting and invisibility/Spectre fuzz implemented. Fuzz uses a documented per-column phase approximation; 119 focused checks and all three actual worker modes pass. Palette selection is implemented with focused/worker checks and Classic/Matrix captures; AnsiArt capture cleanup remains open. Integer-column rays, integer-row walls, and fixed-point planes reduce static E1M2/E1M3 disagreement; exact 16-worker output and map asset refresh pass in all three visual modes. Sprite/weapon projection, further fixed-point work and independent original-executable comparisons remain |
 | M5 — Campaign qualification | Complete first-target campaign with normal/secret paths and endings | Route evidence per map and transition, difficulty matrix, longer human sessions | E1M1–E1M4 normal routes qualified. One E1M4-continuation attempt ended in player death at E1M5 waypoint 316/414; exact suffix replay matched 212 samples without establishing an engine defect. The prepared handoff calls for one human E1M1–E1M8 playthrough through E1M9 and the finale; broad per-map/release qualification remains. All five Ultimate Doom boss-trigger cases pass 97 [behavioral checks](boss-progression.md), separate from ordinary-input boss victories and map completion. |
 | M6 — Performance and usability | Stable pacing, lower overhead, sensible worker/font defaults | Repeated paired trials including audio and hard scenes; second machine/display testing | Continuous work; final gate after feature load |
 | M7 — Release and paper | Reproducible package and substantial illustrated article | Clean-checkout test, license/asset audit, linked evidence for every comparison claim | Outline maintained throughout |

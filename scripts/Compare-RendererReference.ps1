@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 param(
     [string]$Wad='C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\base\DOOM.WAD',
-    [ValidateRange(1,4)][int]$Episode=1,[ValidateRange(1,9)][int]$Map=1,
+    [ValidateRange(1,4)][int]$Episode=1,[ValidateRange(1,9)][int]$Map=1,[ValidateRange(1,32)][int]$Workers=16,
     [int[]]$Angles=@(0,90,180),
     [ValidateRange(0,32)][int]$FixedColorMap=0,
     [string]$Renderer="$PSScriptRoot/../src/FastRenderer.ps1",
@@ -31,6 +31,9 @@ try{
     $game.World.ConsolePlayer.FixedColorMap=$FixedColorMap
     $config=[Config]::new();$config.video_highresolution=$false;$config.video_gamescreensize=7;$config.video_gammacorrection=0
     $reference=[Renderer]::new($config,$content);$context=New-FastRenderContext $content $game.World
+    $planeSpanBoundaries=[Collections.Generic.List[int]]::new()
+    for([int]$i=1;$i -le $Workers;$i++){$planeSpanBoundaries.Add([int][Math]::Floor($i*320.0/$Workers))}
+    $context.PlaneSpanBoundaries=$planeSpanBoundaries.ToArray()
     foreach($angle in $Angles){
         if($angle -lt 0 -or $angle -ge 360){throw 'Fixture headings must be within 0..359 degrees.'}
         # An explicit static camera fixture, not an ordinary-input completion claim.
@@ -65,6 +68,6 @@ try{
     if($content){$content.Dispose()}
     @{Error=$failure;Episode=$Episode;Map=$Map;FixedColorMap=$FixedColorMap;Views=$views.ToArray();WadSha256=(Get-FileHash $Wad).Hash;BundleSha256=(Get-FileHash $bundle).Hash;
       Sources=$sources;SourcesChangedDuringRun=@($sources|Where-Object {$_.Sha256 -cne (Get-FileHash "$PSScriptRoot/../$($_.Path)").Hash}|ForEach-Object {$_.Path});
-      Meaning='Diagnostic comparison against the adopted, locally adapted PowerShell reference renderer at the same static simulation endpoint. This reference is not independently validated original Doom output. No fidelity pass threshold or performance claim. Images show reference, current, then white differing-index mask; base palette, square pixels, 320x168 scene plus HUD. Fixture changes camera heading and optionally the explicitly reported fixed colormap after 35 idle updates.'}|
+      Workers=$Workers;Meaning='Diagnostic comparison against the adopted, locally adapted PowerShell reference renderer at the same static simulation endpoint. This reference is not independently validated original Doom output. No fidelity pass threshold or performance claim. Images show reference, current, then white differing-index mask; base palette, square pixels, 320x168 scene plus HUD. Fixture changes camera heading and optionally the explicitly reported fixed colormap after 35 idle updates. The current renderer uses the same fixed horizontal strip boundaries as the reported worker count.'}|
       ConvertTo-Json -Depth 7|Set-Content -LiteralPath $Output
 }

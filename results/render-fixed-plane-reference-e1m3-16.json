@@ -1,0 +1,91 @@
+{
+  "Sources": [
+    {
+      "Sha256": "AB1BCA2D5E9B691C047A9ED93C452C0B972DF5B07C3F2C9A1E063536E9A3ADA1",
+      "Path": "scripts/Compare-RendererReference.ps1"
+    },
+    {
+      "Sha256": "163B665D5658EBFFC31079D1AB129D9F5C19932D972BE3BF2D41018F282C7ACD",
+      "Path": "src/FastRenderer.ps1"
+    },
+    {
+      "Sha256": "3732C6A81C74F43451CB2A2E4ED342EBE303FC3EEB558B64C3658F78EAACB940",
+      "Path": "src/GameHost.ps1"
+    },
+    {
+      "Sha256": "E9C47D9E4005509206EC13DA08267F95DB3AF7A1E86F14A743F1F27DE145BF9F",
+      "Path": "src/RenderLighting.ps1"
+    }
+  ],
+  "SourcesChangedDuringRun": [],
+  "Map": 3,
+  "BundleSha256": "61F6C9B2E6CE5B2316A363B81436A241ACEEF2B962B2CB4125596AD9DEA9BAE0",
+  "Episode": 1,
+  "Workers": 16,
+  "FixedColorMap": 0,
+  "Error": null,
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "Views": [
+    {
+      "CurrentPixelSha256": "6A35BF659AD0673F8C0E8D32FBE756925A3C0B0E364FBD647BF68D464B9B5CC1",
+      "SceneDifferentIndices": 7630,
+      "ReferencePixelSha256": "50F97B62C0FF0CF52B2BF4F5DC81E8815A9D94DC910E7FE436A40CF459080303",
+      "SceneComparedPixels": 53760,
+      "ImagePath": "C:\\projects\\pwshDoom\\local\\render-fixed-plane-worker16-final-e1m3\\e1m3-0.png",
+      "Angle": 0,
+      "HudDifferentIndices": 0,
+      "HudComparedPixels": 10240,
+      "Fraction": 1,
+      "Camera": {
+        "Angle": 0.0,
+        "Y": -3344.0,
+        "X": -1472.0
+      },
+      "MeanAbsoluteRgbChannelError": 1.5362604166666667,
+      "Tic": 36,
+      "ViewZ": 105.0,
+      "ImageSha256": "7A8C51C0D3CCDEEF5D0B860EA85902932A79AB037E1964705F077351E40C06DC"
+    },
+    {
+      "CurrentPixelSha256": "82AEDA0AF77C48267196AED355E74A8B4FB1291651823EFE72F9E11E30562921",
+      "SceneDifferentIndices": 3966,
+      "ReferencePixelSha256": "E720D84AC1F35BEE7D6A6CA5A9B977E151CFE89B0AB1E9CB6AFB83F53311013D",
+      "SceneComparedPixels": 53760,
+      "ImagePath": "C:\\projects\\pwshDoom\\local\\render-fixed-plane-worker16-final-e1m3\\e1m3-90.png",
+      "Angle": 90,
+      "HudDifferentIndices": 0,
+      "HudComparedPixels": 10240,
+      "Fraction": 1,
+      "Camera": {
+        "Angle": 1.5707963267948966,
+        "Y": -3344.0,
+        "X": -1472.0
+      },
+      "MeanAbsoluteRgbChannelError": 0.8693854166666667,
+      "Tic": 36,
+      "ViewZ": 105.0,
+      "ImageSha256": "1369CA9FBDC00983C5DAA1C102E2A8D75B9CD64D3A8E648CA6E133DBE9DE6369"
+    },
+    {
+      "CurrentPixelSha256": "13652C5FB2DCE0AC61A8BE4C0465FDD2DA566E4C2D832BCAA01E222ED7CCDF7D",
+      "SceneDifferentIndices": 6568,
+      "ReferencePixelSha256": "ECC6BC41FE015F3F5E4EF2B31B21B84846CB9AB162E54C65E3123FCA543C9B88",
+      "SceneComparedPixels": 53760,
+      "ImagePath": "C:\\projects\\pwshDoom\\local\\render-fixed-plane-worker16-final-e1m3\\e1m3-180.png",
+      "Angle": 180,
+      "HudDifferentIndices": 0,
+      "HudComparedPixels": 10240,
+      "Fraction": 1,
+      "Camera": {
+        "Angle": 3.141592653589793,
+        "Y": -3344.0,
+        "X": -1472.0
+      },
+      "MeanAbsoluteRgbChannelError": 1.1054375,
+      "Tic": 36,
+      "ViewZ": 105.0,
+      "ImageSha256": "57BD6343635F85FFF152336100B4260FE4E9C982874C7E1C14AB22D41A1CAFFC"
+    }
+  ],
+  "Meaning": "Diagnostic comparison against the adopted, locally adapted PowerShell reference renderer at the same static simulation endpoint. This reference is not independently validated original Doom output. No fidelity pass threshold or performance claim. Images show reference, current, then white differing-index mask; base palette, square pixels, 320x168 scene plus HUD. Fixture changes camera heading and optionally the explicitly reported fixed colormap after 35 idle updates. The current renderer uses the same fixed horizontal strip boundaries as the reported worker count."
+}

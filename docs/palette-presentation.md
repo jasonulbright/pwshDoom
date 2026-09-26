@@ -13,7 +13,7 @@ Damage and berserk share the red-palette branch; bonus tint follows, then the
 radiation-suit timer/blink branch. The selected index remains discrete during
 camera/geometry interpolation. We do not change damage, pickup, or power rules.
 
-NumericV3 carries selection in header slot45. Disposable assets-v2 carries the
+NumericV3 carries selection in header slot45. Disposable assets-v4 carries the
 complete user-supplied PLAYPAL bytes. The simulation header carries the same
 selection for indexed automap screens. Workers encode the complete selected
 image, including HUD colors. This project's full-screen menus deliberately use

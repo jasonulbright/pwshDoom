@@ -1,7 +1,7 @@
 #requires -Version 7.4
 # SPDX-License-Identifier: GPL-2.0-or-later
 param([string]$Wad='C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\base\DOOM.WAD',
-    [ValidateSet('Classic','Matrix','AnsiArt')][string]$Style='Classic',[string]$Output="$PSScriptRoot/../local/session-worker.json")
+    [ValidateSet('Classic','Matrix','AnsiArt')][string]$Style='Classic',[ValidateRange(1,32)][int]$Workers=16,[string]$Output="$PSScriptRoot/../local/session-worker.json")
 $ErrorActionPreference='Stop'
 if(Test-Path -LiteralPath $Output){throw 'Use a fresh result path.'}
 $bundle=& "$PSScriptRoot/Build-EngineBundle.ps1";. $bundle
@@ -30,7 +30,7 @@ try{
     $game.DeferedInitNew([GameSkill]::Medium,1,1);$null=$game.Update($cmds)
     $context=New-FastRenderContext $content $game.World;$palette=[int[][]]::new(256)
     for($i=0;$i -lt 256;$i++){$palette[$i]=@($content.Palette.Data[3*$i],$content.Palette.Data[3*$i+1],$content.Palette.Data[3*$i+2])}
-    $pool=New-GameRenderPool $context $null 7 -Style $Style -GlyphSet Katakana;$pids=@($pool.Workers.Process.Id)
+    $pool=New-GameRenderPool $context $null $Workers -Style $Style -GlyphSet Katakana;$pids=@($pool.Workers.Process.Id)
     $codec=if($Style -eq 'Classic'){New-CodecContext $palette}else{New-CharacterCodecContext $palette $Style -GlyphSet Katakana}
     $columns=[byte[]]::new(64000);$rows=[byte[]]::new(64000)
     for($x=0;$x -lt 320;$x++){for($y=0;$y -lt 200;$y++){$value=($x*17+$y*31)%256;$columns[$x*200+$y]=$value;$rows[$y*320+$x]=$value}}
@@ -42,7 +42,9 @@ try{
     Assert-WorkerImage $rows 989 -Automap
     $oldHash=(Get-FileHash -LiteralPath $pool.Assets).Hash
     $game.DeferedInitNew([GameSkill]::Medium,1,2);$null=$game.Update($cmds)
-    $context=New-FastRenderContext $content $game.World;Write-GameRenderAssets $context $palette $pool.Assets
+    $context=New-FastRenderContext $content $game.World
+    $context.PlaneSpanBoundaries=[int[]]@($pool.Workers|ForEach-Object {$_.End})
+    Write-GameRenderAssets $context $palette $pool.Assets
     if((Get-FileHash -LiteralPath $pool.Assets).Hash -eq $oldHash){throw 'Map asset test did not change geometry.'}
     Update-GameRenderAssets $pool
     $snapshot=New-GameRenderSnapshot $game;Set-GameRenderSnapshot $context $snapshot;Invoke-FastRender $context
@@ -50,8 +52,8 @@ try{
     Assert-WorkerImage $context.Pixels $snapshot.Tic
     if(($pids -join ',') -ne (@($pool.Workers.Process.Id) -join ',')){throw 'Worker processes restarted during reload.'}
 }catch{$failure=$_.ToString();throw}finally{
-    @{FinishedUtc=[DateTime]::UtcNow.ToString('o');Error=$failure;Style=$Style;GlyphSet='Katakana';Checks=$checks.ToArray();WorkerProcessesPreserved=$null -eq $failure;
-        Meaning='Seven actual workers: independently constructed column/row-major screen equivalence and encoded strip equivalence, then changed E1M2 assets and real rasterization against the serial reference without restarting workers. This is a transport/lifecycle check, not campaign completion or a performance benchmark.'}|ConvertTo-Json -Depth 6|Set-Content -LiteralPath $Output
+    @{FinishedUtc=[DateTime]::UtcNow.ToString('o');Error=$failure;Style=$Style;GlyphSet='Katakana';Workers=$Workers;Checks=$checks.ToArray();WorkerProcessesPreserved=$null -eq $failure;
+        Meaning='Actual worker processes: independently constructed column/row-major screen equivalence and encoded strip equivalence, then changed E1M2 assets and real rasterization against the serial reference without restarting workers. This is a transport/lifecycle check, not campaign completion or a performance benchmark.'}|ConvertTo-Json -Depth 6|Set-Content -LiteralPath $Output
     if($null -ne $pool){Close-GameRenderPool $pool};if($null -ne $content){$content.Dispose()}
 }
-"PASS: $Style screen/menu/automap transport and map reload, 256,000 pixels and 28 encoded strips."
+"PASS: $Style screen/menu/automap transport and map reload, 256,000 pixels and $($Workers*4) encoded strips."
