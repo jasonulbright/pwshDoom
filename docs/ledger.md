@@ -1335,11 +1335,13 @@ preflight and worker receipts are tracked. A fresh transition suite passes all
 correction, four old route regressions and nine-map Episode 1 smoke are pinned
 in the prior commit's regression index.
 
-Update the human handoff to source commit `9b5a7b45f9b5d299f8f1bbebc866abc84eee30a4`
-with the full catalog enabled. Jason's one complete playthrough is still
-pending. Neither uninterrupted campaign audio nor 35-tic/60-display pacing,
-audible review of every track, vanilla fidelity, or the broader release gates
-is established by these bounded checks.
+The handoff at that point named source commit
+`9b5a7b45f9b5d299f8f1bbebc866abc84eee30a4` with the full catalog enabled. It
+has since been refreshed to the renderer source and revalidated, as recorded
+below. Jason's one complete playthrough remains pending. Neither uninterrupted
+campaign audio nor 35-tic/60-display pacing, audible review of every track,
+vanilla fidelity, or the broader release gates is established by these bounded
+checks.
 
 ## 2026-09-26 — Extend renderer comparisons to E1M2 and E1M3
 
@@ -1397,3 +1399,24 @@ route-driver qualifier is not counted; it reached E1M2 but lacked that
 qualifier's driver trace/final-health fields. The full-host replay report is
 retained locally and its hash is indexed in the combined result. Preserve the
 user's single complete Episode 1 run as the pending human milestone.
+
+## 2026-09-26 — Refresh Episode 1 readiness on the renderer source
+
+After the integer-column renderer correction, rerun the Episode 1 readiness
+checks on source commit `4e66cd36fe2f9f54c5a9e7e9bc7519e152289664`. At skill 3,
+all nine E1 maps load, advance 35 idle tics, and render two complete frames.
+The current source also passes 57 transition/finale fixtures, 97 boss-trigger
+checks, 125 menu/session checks with 46 screen fixtures, and six synthetic
+console-input checks. The transition fixtures include E1M3's secret destination,
+E1M9's return to E1M4, intermission progression, the Episode 1 finale, and
+inventory/death handling. The boss checks include E1M8's tagged floor trigger.
+
+The five raw reports and updated machine-readable readiness index are tracked
+under `results/episode1-playtest-*current.*`. Their hashes are listed in
+`results/episode1-playtest-readiness.json`, which now pins the renderer source
+commit while keeping `HumanPlaythrough.Status=Pending`. Physical input and the
+single complete human route remain Jason's playtest; focused fixtures and map
+smoke do not claim campaign completion. The exact IWAD and prepared music
+catalog were rechecked against their readiness hashes. The renderer comparison
+and limits remain separately recorded in
+`results/render-column-index-fidelity.json`.

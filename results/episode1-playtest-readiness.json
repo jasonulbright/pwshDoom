@@ -1,6 +1,6 @@
 {
   "Status": "ReadyForOneHumanEpisode1Playthrough",
-  "SourceBaseline": "9b5a7b45f9b5d299f8f1bbebc866abc84eee30a4",
+  "SourceBaseline": "4e66cd36fe2f9f54c5a9e7e9bc7519e152289664",
   "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
   "Scope": [
     "E1M1",
@@ -100,6 +100,68 @@
       "Passed": 12,
       "Receipt": "results/episode1-music-event-readiness.json",
       "Meaning": "Episode 1 finale selects D_VICTOR; selection test, not audible finale playback."
+    },
+    "CurrentSourceMapSmoke": {
+      "Passed": 9,
+      "Failed": 0,
+      "Maps": [
+        "E1M1",
+        "E1M2",
+        "E1M3",
+        "E1M4",
+        "E1M5",
+        "E1M6",
+        "E1M7",
+        "E1M8",
+        "E1M9"
+      ],
+      "Skill": 3,
+      "IdleTics": 35,
+      "FullFramesPerMap": 2,
+      "Receipt": "results/episode1-playtest-smoke-current.json"
+    },
+    "CurrentSourceCampaignTransitions": {
+      "Passed": 57,
+      "Failed": 0,
+      "Receipt": "results/episode1-playtest-transitions-current.json",
+      "Includes": [
+        "E1 secret destination and return",
+        "Episode 1 finale state and text",
+        "Intermission advance to E1M2",
+        "Inventory carry-over",
+        "Death and respawn"
+      ]
+    },
+    "CurrentSourceBossProgression": {
+      "Passed": 97,
+      "Receipt": "results/episode1-playtest-bosses-current.json",
+      "Meaning": "Includes E1M8 trigger fixtures; does not simulate ordinary boss combat."
+    },
+    "CurrentSourceMenuSession": {
+      "Passed": 125,
+      "ScreenFixtures": 46,
+      "Receipt": "results/episode1-playtest-menus-current.json"
+    },
+    "CurrentSourceConsoleInput": {
+      "Passed": 6,
+      "DesktopInputInjected": false,
+      "Receipt": "results/episode1-playtest-console-input-current.txt"
+    },
+    "RendererSamplingCorrection": {
+      "Receipt": "results/render-column-index-fidelity.json",
+      "Views": 6,
+      "SceneIndicesBefore": 101971,
+      "SceneIndicesAfter": 65538,
+      "ReductionPercent": 35.73,
+      "HudDifferences": 0,
+      "RemainingRangePercent": "17.8-23.6",
+      "WorkerStyles": [
+        "Classic",
+        "Matrix/Katakana",
+        "AnsiArt/Katakana"
+      ],
+      "Reference": "Adopted PowerShell renderer, not independently verified original-executable output",
+      "HostReplay": "E1M1 fixed-input headless replay: 1747 commands, 8 checkpoints, E1M2 entry; no displayed-FPS claim."
     }
   },
   "HumanPlaythrough": {
@@ -179,6 +241,50 @@
     {
       "Path": "results/episode1-music-event-readiness.json",
       "Sha256": "DD4CD79199CE8B7050FB80E2C94C50CAA439C4763EDE80570EC16991D70A1723"
+    },
+    {
+      "Path": "results/episode1-playtest-smoke-current.json",
+      "Sha256": "EEA3E6C92CA216A61F4205E1D28C6BD63FDAD561AE4DEC37B37A69F3DD7EBFB1"
+    },
+    {
+      "Path": "results/episode1-playtest-transitions-current.json",
+      "Sha256": "C7A4E7CF8195A2B052BA96ACEA5D962D04854F95E6C41FB49831CAF584D26D0C"
+    },
+    {
+      "Path": "results/episode1-playtest-bosses-current.json",
+      "Sha256": "8A96174E492C71D1BB4AC4BAE2A8F2FE5AB28CCACC9692C8DBC0CE4F29BE5ABA"
+    },
+    {
+      "Path": "results/episode1-playtest-menus-current.json",
+      "Sha256": "ECC11C0C40A08778E9F5A97051668231EBF07C414ACFB9DF9F4C3C2F9862F3CC"
+    },
+    {
+      "Path": "results/episode1-playtest-console-input-current.txt",
+      "Sha256": "699F8C14FD45B5AF941AE6C312C3D6F02139019CA6B51DD3D82E722D692D62ED"
+    },
+    {
+      "Path": "results/render-column-index-fidelity.json",
+      "Sha256": "D4239C623B7CCA82613D8C5CD43DCF989BB504952086926BE8D96EE711F8D617"
+    },
+    {
+      "Path": "results/render-reference-column-index-e1m2.json",
+      "Sha256": "E30C9BDCCF46FE182E645187A677A648F59946DAA662640157105035F4541321"
+    },
+    {
+      "Path": "results/render-reference-column-index-e1m3.json",
+      "Sha256": "0FE3710E03AF310C038F1D6416F09398045CC5029D498093E8101A787F48E78B"
+    },
+    {
+      "Path": "results/render-column-index-workers-classic.json",
+      "Sha256": "68B231B29989F66C0B660193BEFBC8A2B5DD3D5AEF1415F525FBE7C65D3855F0"
+    },
+    {
+      "Path": "results/render-column-index-workers-matrix-katakana.json",
+      "Sha256": "CAB918FA10355E5E57A699CEA59892466CAC55D4907FC0BD51179D39037E3344"
+    },
+    {
+      "Path": "results/render-column-index-workers-ansiart-katakana.json",
+      "Sha256": "F56D03BF5670BBEF67EE8C9B280D9C078748CBC31CDBA80027963E23C7D6CC96"
     }
   ]
 }

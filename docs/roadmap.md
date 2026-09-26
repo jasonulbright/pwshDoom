@@ -36,6 +36,12 @@ route ended in player death and did not expose a reproducible product defect;
 it is documented and route automation is stopped for this milestone. The
 broader release acceptance gates below remain intact.
 
+After the integer-column renderer change, the nine-map smoke and focused
+transition, boss, menu/session, and synthetic input checks were rerun on the
+current renderer source. The [updated readiness receipt](../results/episode1-playtest-readiness.json)
+and [playtest handoff](episode1-playtest.md) pin this source and preserve the
+human run as one pending milestone.
+
 While Jason's one Episode 1 route remains pending, continue independent M4
 fidelity work. Matching Doom's integer-column ray lookup to wall and plane
 sampling reduces differing scene indices by 35.73% across six fixed E1M2/E1M3
