@@ -22,7 +22,7 @@ E1M8 exit and intermission.
 
 ## Build and launch
 
-Engine/source baseline: commit `4311cc619eefd1246fcaa7f13332d8330e3f5a5f`.
+Engine/source baseline: commit `6b229ccefaa2012626fa2c184ad1d4fff6c3e811`.
 Run from the repository root in 64-bit PowerShell 7.4 or later on Windows,
 with Windows Terminal, the legally obtained Ultimate Doom `DOOM.WAD`, and the
 prepared local music catalog `local/music-prepared-episode1.json`. The tested Steam IWAD is
@@ -103,8 +103,10 @@ replays and the nine-map smoke; full raw replay reports remain under ignored
 [`campaign-e1m5-investigation.md`](campaign-e1m5-investigation.md); it ended in
 player death and did not establish a repeatable engine defect.
 
-The current renderer passes smoke on all nine Episode 1 maps after 35 idle tics.
-Focused engine/session/input checks also pass: 57 campaign transition/finale
+The current renderer passes a 36-map Ultimate Doom smoke on the same IWAD:
+each map advances 35 idle tics and renders two full frames with sixteen strips.
+This covers E1M1–E1M9 as startup/render cases, not map completion. Focused
+engine/session/input checks also pass: 57 campaign transition/finale
 checks, 97 boss checks, 125 menu/session checks with 46 screen fixtures, and
 six synthetic console-input checks. Those focused checks were run before the
 latest renderer-only change; their engine, menu, and input dependencies are
@@ -116,8 +118,11 @@ All three output styles match serial output exactly across 16 worker processes.
 Serial render medians increased 6–10.5% in the two measured maps, and the
 headless replay averaged 34.97 simulation tics/sec. These are not displayed-FPS
 measurements; they set realistic expectations for Jason's run. This does not
-establish original-executable parity. The readiness receipt links raw reports
-with source hashes and exact test scope.
+establish original-executable parity. A subsequent sprite/weapon sampling fix
+matches the adopted reference at seven fractional pistol offsets and reduces
+scene disagreement in ten E1M1/E1M2 views by a further 3.78%; it raises serial
+render medians slightly in the two measured maps. The readiness receipt links
+raw reports with source hashes and exact test scope.
 
 ### Jason's human result
 

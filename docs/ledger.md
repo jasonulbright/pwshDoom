@@ -1511,3 +1511,32 @@ complete E1M1 → E1M8 human playthrough including E1M3's E1M9 secret route and
 return, ending at the Episode 1 finale. Jason's result remains pending; no
 individual map test is requested. The full route's display, sound continuity,
 and human controls remain to be reported from that single playthrough.
+
+## 2026-09-26 — Match projected sprite columns to Doom's fixed-point stepping
+
+The numeric patch drawer used `Ceiling(left)` and derived each texture column
+from the fractional projected edge. The adopted renderer floors the projected
+left edge and advances the source fraction from that integer screen column.
+`Draw-FastPatch` now uses floor-based coverage and an accumulated 16.16 inverse
+scale, with a signed step for flipped patches and advancement for clipped
+worker strips.
+
+A current-source E1M1 pistol fixture compares weapon-visible and weapon-hidden
+frames at seven fractional X offsets. The old renderer differed in 6,483 final
+pixels in the union of changed weapon coverage; the corrected output matches at
+all seven offsets. This accounting checks final pixels because contributor
+masks can mistake a weapon texel equal to its background for transparency.
+Ten static E1M1/E1M2 views at five headings improve against the adopted
+PowerShell reference from 40,632 to 39,098 differing scene indices; all HUDs
+remain exact. It is not original-executable ground truth.
+
+All 36 Ultimate Doom maps pass the current-source skill-3, 35-idle-tic smoke
+with two full rasterizations and sixteen worker strips. Actual 16-process
+output matches serial pixels and encoded strips in Classic, Matrix/Katakana,
+and AnsiArt/Katakana across five E1M1 views each. The 138-case weapon-lighting
+suite passes. The paired serial measurements have 20 calls per version/map;
+median full-frame times rise from 44.96 to 46.29 ms on E1M1 and 39.35 to 39.51
+ms on E1M2. This is a measured fidelity fix, not a speedup. Exact commands,
+source hashes, timing samples and caveats are in
+[`rendering-fidelity.md`](rendering-fidelity.md) and
+[`weapon-projection-sampling-comparison.json`](../results/weapon-projection-sampling-comparison.json).

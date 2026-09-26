@@ -1,6 +1,6 @@
 {
   "Status": "ReadyForOneHumanEpisode1Playthrough",
-  "SourceBaseline": "4311cc619eefd1246fcaa7f13332d8330e3f5a5f",
+  "SourceBaseline": "6b229ccefaa2012626fa2c184ad1d4fff6c3e811",
   "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
   "Scope": [
     "E1M1",
@@ -102,7 +102,7 @@
       "Meaning": "Episode 1 finale selects D_VICTOR; selection test, not audible finale playback."
     },
     "CurrentSourceMapSmoke": {
-      "Passed": 9,
+      "Passed": 36,
       "Failed": 0,
       "Maps": [
         "E1M1",
@@ -113,12 +113,41 @@
         "E1M6",
         "E1M7",
         "E1M8",
-        "E1M9"
+        "E1M9",
+        "E2M1",
+        "E2M2",
+        "E2M3",
+        "E2M4",
+        "E2M5",
+        "E2M6",
+        "E2M7",
+        "E2M8",
+        "E2M9",
+        "E3M1",
+        "E3M2",
+        "E3M3",
+        "E3M4",
+        "E3M5",
+        "E3M6",
+        "E3M7",
+        "E3M8",
+        "E3M9",
+        "E4M1",
+        "E4M2",
+        "E4M3",
+        "E4M4",
+        "E4M5",
+        "E4M6",
+        "E4M7",
+        "E4M8",
+        "E4M9"
       ],
       "Skill": 3,
       "IdleTics": 35,
       "FullFramesPerMap": 2,
-      "Receipt": "results/episode1-render-fixed-plane-smoke-current.json"
+      "WorkerStrips": 16,
+      "Receipt": "results/weapon-projection-smoke-current.json",
+      "Meaning": "Current-source startup/render smoke for all 36 Ultimate Doom maps. Each map advances 35 idle tics and rasterizes two full frames in the 16-strip serial reference path. Not map completion or displayed-FPS evidence."
     },
     "CurrentSourceCampaignTransitions": {
       "Passed": 57,
@@ -229,6 +258,34 @@
       "Meaning": "Stored older-source E1M1 replay reached E1M2 and reloaded v4 assets in place. No displayed-FPS claim.",
       "WorkerWorkingSetBytes": 4031377408,
       "WorkerMemoryMeaning": "Combined working set observed across sixteen render workers during this headless replay."
+    },
+    "RendererSpriteSampling": {
+      "CurrentSourceCommit": "6b229ccefaa2012626fa2c184ad1d4fff6c3e811",
+      "ComparisonReceipt": "results/weapon-projection-sampling-comparison.json",
+      "ComparisonReceiptSha256": "89BCE436714FC7F5C8B90BD9F429759837B5D21262EB9A4BB0DFADC4B005C654",
+      "BaselineSourceCommit": "4311cc619eefd1246fcaa7f13332d8330e3f5a5f",
+      "BaselineRendererSha256": "163B665D5658EBFFC31079D1AB129D9F5C19932D972BE3BF2D41018F282C7ACD",
+      "CurrentRendererSha256": "4F05E03458F6936EB8904A5ABCF5307B7DE930672733CE07CECE1E0D7D7416C4",
+      "FractionalWeaponOffsets": 7,
+      "WeaponFinalPixelMismatchesBefore": 6483,
+      "WeaponFinalPixelMismatchesAfter": 0,
+      "StaticViews": 10,
+      "StaticSceneIndicesBefore": 40632,
+      "StaticSceneIndicesAfter": 39098,
+      "CumulativeReductionPercent": 3.78,
+      "HudDifferences": 0,
+      "WorkerCount": 16,
+      "WorkerPixelDifferences": 0,
+      "WorkerStyles": [
+        "Classic",
+        "Matrix/Katakana",
+        "AnsiArt/Katakana"
+      ],
+      "SerialMedianIncreasePercent": {
+        "E1M1": 2.95,
+        "E1M2": 0.4
+      },
+      "Reference": "Adopted PowerShell reference, not independently verified original-executable output."
     }
   },
   "HumanPlaythrough": {
@@ -245,7 +302,8 @@
     "The E1M5 automated continuation died without establishing a reproducible engine defect; no route retry is part of this milestone.",
     "The current headless host replay wrote zero terminal frames; visible frame rate and physical keyboard play remain unverified.",
     "The fixed-point plane change improves the adopted reference comparison but raises single-process serial render medians in both measured maps.",
-    "The host replay averaged 34.97 simulation tics/sec and paused output for 1.91 seconds during the E1M2 asset reload."
+    "The host replay averaged 34.97 simulation tics/sec and paused output for 1.91 seconds during the E1M2 asset reload.",
+    "Sprite patch sampling improves the adopted-reference match but the paired serial render median rises 2.9% on E1M1 and 0.4% on E1M2; these full-frame timings do not measure worker end-to-end or visible FPS."
   ],
   "Artifacts": [
     {
@@ -427,6 +485,42 @@
     {
       "Path": "results/session-worker-fixed-plane-16.json",
       "Sha256": "D05C4CAAD15B36B0A996AB41150A90EE40E40F061AFB3B132DA4E2ED024704FE"
+    },
+    {
+      "Path": "results/weapon-projection-lighting-current.json",
+      "Sha256": "B31B0A42468CCE6ABEAAE325A8CFC3F31D9119300D2DBB066A64DC401C87586C"
+    },
+    {
+      "Path": "results/weapon-projection-performance-map1.json",
+      "Sha256": "1541C6D80B9F784EBEC9089D379A85E196F57326ED199DFEE51C1AEC4863BCB5"
+    },
+    {
+      "Path": "results/weapon-projection-performance-map2.json",
+      "Sha256": "2CF7AFCA0FD1C20F02E48658A2F06444DE012DFEA45E9548A89394717B2DB482"
+    },
+    {
+      "Path": "results/weapon-projection-sampling-comparison.json",
+      "Sha256": "89BCE436714FC7F5C8B90BD9F429759837B5D21262EB9A4BB0DFADC4B005C654"
+    },
+    {
+      "Path": "results/weapon-projection-sampling-final.json",
+      "Sha256": "9837F48F1A88E8B9886CE456FC0E8323D97DE323C9AED6BE2795CD56CC6BE445"
+    },
+    {
+      "Path": "results/weapon-projection-smoke-current.json",
+      "Sha256": "2DA33DE4DD16F98BF3052A27E99726E311B806F97954B8571AACC0745201AEC7"
+    },
+    {
+      "Path": "results/weapon-projection-workers-ansiart-katakana.json",
+      "Sha256": "372228F4F773C64F458607E4DB39B13070C30FE4CA6D240D22AC1078DA9DEFD7"
+    },
+    {
+      "Path": "results/weapon-projection-workers-classic.json",
+      "Sha256": "61853ECDE4FEE388138C3D5F380EBA73DFE062AFAD190FD0A407C53C104812E2"
+    },
+    {
+      "Path": "results/weapon-projection-workers-matrix-katakana.json",
+      "Sha256": "3905A96F304C9978FD435AA344AD507330CEA3D70BDBF8200047F5F49B7FB698"
     }
   ]
 }

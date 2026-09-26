@@ -6,6 +6,12 @@ Updated 2026-09-26. Release sequence remains Ultimate Doom, Doom II, then a MyHo
 
 Source/IWAD hashes and detailed results: [results/campaign-smoke-lineflags-fixed.json](../results/campaign-smoke-lineflags-fixed.json).
 
+The current sprite-sampling renderer also passes a fresh **36/36-map smoke**
+with 16 worker strips, 35 idle tics and two full 320×200 frames per map:
+[current receipt](../results/weapon-projection-smoke-current.json). This is
+startup/render coverage, not any of the ordinary-input completion evidence in
+the table below.
+
 E1M1 has an [input-only completion report](../results/e1m1-route-lineflags.json) with 1560 commands. That route ends at intermission; it does not qualify next-level presentation or a whole episode. E1M2 now has a separate [normal-route qualification](campaign-e1m2.md), including recorded continuation into E1M3. The remaining maps still need completion evidence. Source-version matching is checked separately from input/state equivalence.
 
 The [save/load core](save-load.md) now preserves the E1M1 → intermission → E1M2 input route across reconstruction and a fresh PowerShell process. Death/respawn and all four finale boundaries pass explicit save fixtures. These add state-continuation coverage; map-completion and terminal-host entries below retain their existing scope.
@@ -64,7 +70,7 @@ Current focused readiness evidence uses the same Ultimate Doom IWAD hash
 `6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F`:
 
 [Episode 1 playtest readiness summary](../results/episode1-playtest-readiness.json)
-uses renderer source baseline `2d3a6242421b708436392e453162ae2885c8d60c`,
+uses renderer source baseline `6b229ccefaa2012626fa2c184ad1d4fff6c3e811`,
 links the current renderer smoke and the focused game/session/input checks,
 and explicitly leaves the human route and physical keyboard input pending.
 
@@ -96,7 +102,7 @@ and explicitly leaves the human route and physical keyboard input pending.
   catalog contents; preflight itself does not launch the game.
 - [Launch parameter binding](../results/episode1-launch-binding.txt): the
   documented source entry point parses and exposes every playtest argument.
-- The current-source [nine-map smoke](../results/episode1-render-integer-row-smoke-final.json)
+- The earlier current-source [nine-map smoke](../results/episode1-render-integer-row-smoke-final.json)
   passes after the integer-row wall sampling change. The focused
   [transition/finale fixtures](../results/episode1-playtest-transitions-current.json),
   [boss progression fixtures](../results/episode1-playtest-bosses-current.json),
@@ -109,6 +115,12 @@ and explicitly leaves the human route and physical keyboard input pending.
   [integer-column receipt](../results/render-column-index-fidelity.json) retains
   the preceding correction. None of these substitutes for the one physical
   human playthrough.
+- Current-source [weapon/actor patch sampling](../results/weapon-projection-sampling-comparison.json)
+  uses the adopted renderer's floored screen origin and fixed-point column
+  stepping. Seven fractional pistol offsets match exactly, ten E1M1/E1M2
+  views improve cumulatively by 3.78%, and 16-worker output matches in Classic,
+  Matrix/Katakana and AnsiArt/Katakana. Its serial pair shows a small timing
+  cost; neither result establishes campaign completion or displayed FPS.
 
 These checks support a normal playthrough attempt but do not certify route
 completion. E1M5's failed automated continuation ended in player death and
