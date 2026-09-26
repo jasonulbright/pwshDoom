@@ -1,6 +1,6 @@
 {
   "Status": "ReadyForOneHumanEpisode1Playthrough",
-  "SourceBaseline": "64f672ca478b27504e46d656f91bb875f398d2ea",
+  "SourceBaseline": "9b5a7b45f9b5d299f8f1bbebc866abc84eee30a4",
   "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
   "Scope": [
     "E1M1",
@@ -18,11 +18,14 @@
     "MapSmoke": {
       "Passed": 9,
       "Failed": 0,
-      "Meaning": "35 idle tics and two rasterizations per E1 map; not route completion."
+      "Receipt": "results/visibility-campaign-regressions.json",
+      "Meaning": "Post-visibility-fix headless smoke: every Episode 1 map loads, advances 35 idle tics, and rasterizes two 320x200 frames. Not route completion."
     },
     "CampaignTransitions": {
       "Passed": 57,
-      "Failed": 0
+      "Failed": 0,
+      "Receipt": "results/campaign-transitions-episode1-after-visibility.json",
+      "Meaning": "Synthetic game-state transition fixtures include secret destination/return history, finale state/text, inventory carry-over and death/respawn behavior; not a human route."
     },
     "BossProgression": {
       "Passed": 97,
@@ -41,7 +44,8 @@
       "Ready": true,
       "EpisodeMaps": 36,
       "PowerShell": "7.6.5",
-      "MusicValidation": "Effects only; no music catalog requested."
+      "MusicValidation": "Exact catalog accepted by actual simulation/audio worker; Play.ps1 -Check itself checks path only.",
+      "Receipt": "results/episode1-launch-preflight-music.json"
     },
     "MusicLoops": [
       {
@@ -61,8 +65,42 @@
         "Qualified": true,
         "Report": "results\\music-loop-e1m8-prepared.json",
         "Sha256": "F4C079000EC9267066940ED33C8E07FFB4A8FFE7A555AC5F9FC827BD3EA4B09E"
+      },
+      {
+        "Track": "D_VICTOR",
+        "Qualified": true,
+        "Report": "results/music-loop-dvictor-prepared.json",
+        "Sha256": "0E57B8C583690AEB3E09625278311837784D6F8E70ACDC79D5ACF058A0D8A4F5"
       }
-    ]
+    ],
+    "VisibilityCorrection": {
+      "Passed": 2,
+      "Receipt": "results/visibility-campaign-regressions.json",
+      "RouteRegressions": 4,
+      "Meaning": "Parallel denominator-zero and perpendicular half-intercept cases pass; fixed E1M1-E1M4 inputs independently replay through expected transitions."
+    },
+    "MusicCatalog": {
+      "Prepared": true,
+      "TrackCount": 11,
+      "Catalog": "local/music-prepared-episode1.json",
+      "CatalogSha256": "0E9C9542C75F4D5E2D7FC71E42FAFBB58F94321C3B8A49BA0C9AC5A93752EE58",
+      "PreparationReport": "results/music-preparation-episode1-first.json",
+      "PreparationReportSha256": "FA196E5BFC87D4FBB0CAA1154A77832041C2425DDEA000732A3960B5485728F5",
+      "SimulationAudioWorker": {
+        "Passed": 15,
+        "Failed": 0,
+        "Receipt": "results/save-worker-episode1-music-after-catalog.json",
+        "MusicFrames": 97020,
+        "DeviceClosed": true
+      },
+      "VictorLongTrackReaderChecks": 6,
+      "VictorReaderReceipt": "results/music-loop-dvictor-reader-first.json"
+    },
+    "MusicEvents": {
+      "Passed": 12,
+      "Receipt": "results/episode1-music-event-readiness.json",
+      "Meaning": "Episode 1 finale selects D_VICTOR; selection test, not audible finale playback."
+    }
   },
   "HumanPlaythrough": {
     "Status": "Pending",
@@ -73,8 +111,8 @@
   "Limitations": [
     "This receipt does not claim a completed human map route.",
     "Physical keyboard play remains pending.",
-    "Sound effects are enabled for the handoff; background music is omitted because the complete episode catalog was not published.",
-    "35-tic/60-display pacing, full-session audio continuity, vanilla pixel fidelity, and broader release gates remain open.",
+    "The full-campaign audio path and audible review of all tracks are not yet certified; only a short E1M1 playback integration was checked.",
+    "35-tic/60-display pacing, vanilla pixel fidelity, and broader release gates remain open.",
     "The E1M5 automated continuation died without establishing a reproducible engine defect; no route retry is part of this milestone."
   ],
   "Artifacts": [
@@ -105,6 +143,42 @@
     {
       "Path": "results\\episode1-launch-binding.txt",
       "Sha256": "164546DBD20ECF52E6C27F93400E126E566C18F6882D751F3D2A9B1CF9AD4B44"
+    },
+    {
+      "Path": "results/visibility-campaign-regressions.json",
+      "Sha256": "B2AC3D3F249196F53DFA3E8B6C85D48D72EB724F5BA0FAA28BB0A7B0BF09456A"
+    },
+    {
+      "Path": "results/campaign-transitions-episode1-after-visibility.json",
+      "Sha256": "29DB14C73A9299A084E85A012CD5746ABE427F4CD1BAD4FF84A26BE4A84CD04B"
+    },
+    {
+      "Path": "results/music-preparation-episode1-first.json",
+      "Sha256": "FA196E5BFC87D4FBB0CAA1154A77832041C2425DDEA000732A3960B5485728F5"
+    },
+    {
+      "Path": "results/music-loop-dvictor-prepared.json",
+      "Sha256": "0E57B8C583690AEB3E09625278311837784D6F8E70ACDC79D5ACF058A0D8A4F5"
+    },
+    {
+      "Path": "results/music-loop-dvictor-opening-reference.json",
+      "Sha256": "2F5231B145390755014F0BE90899E86A88E76E92AA0F7E7E20671708AFC45FFE"
+    },
+    {
+      "Path": "results/music-loop-dvictor-reader-first.json",
+      "Sha256": "2CA93D344BE8D8E8631ECFE5D21CEA3A55B7F4E879E520B7BBDA2B4EECE82F83"
+    },
+    {
+      "Path": "results/save-worker-episode1-music-after-catalog.json",
+      "Sha256": "017B82CC50F7EB0775C78FD87F6E2718C6D2907844EA63FCFA5A9A464B56B44D"
+    },
+    {
+      "Path": "results/episode1-launch-preflight-music.json",
+      "Sha256": "95A7D01C0F356F4D29D06A523AE7BC265BABF79440965669E13F155A22BF6924"
+    },
+    {
+      "Path": "results/episode1-music-event-readiness.json",
+      "Sha256": "DD4CD79199CE8B7050FB80E2C94C50CAA439C4763EDE80570EC16991D70A1723"
     }
   ]
 }

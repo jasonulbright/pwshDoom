@@ -22,19 +22,21 @@ E1M8 exit and intermission.
 
 ## Build and launch
 
-Engine/source baseline: commit `64f672ca478b27504e46d656f91bb875f398d2ea`.
-The milestone commit containing these instructions and test receipts adds no
-engine-source changes. Run from the repository root in 64-bit PowerShell 7.4
-or later on Windows, with Windows Terminal and a legally obtained Ultimate
-Doom `DOOM.WAD`. The tested Steam IWAD is
+Engine/source baseline: commit `9b5a7b45f9b5d299f8f1bbebc866abc84eee30a4`.
+Run from the repository root in 64-bit PowerShell 7.4 or later on Windows,
+with Windows Terminal, the legally obtained Ultimate Doom `DOOM.WAD`, and the
+prepared local music catalog `local/music-prepared-episode1.json`. The tested Steam IWAD is
 `C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\base\DOOM.WAD`,
 SHA-256 `6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F`.
+The catalog SHA-256 is `0E9C9542C75F4D5E2D7FC71E42FAFBB58F94321C3B8A49BA0C9AC5A93752EE58`;
+it and its prepared audio files remain local and are not included in Git.
 Commercial game files are not included.
 
 ```powershell
 pwsh -NoProfile -File .\Start-Doom.ps1 `
   -Wad 'C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\base\DOOM.WAD' `
   -Episode 1 -Map 1 -Skill 3 -Style Classic -Sound `
+  -MusicCatalog .\local\music-prepared-episode1.json `
   -RecordInput .\local\episode1-human-playthrough.json `
   -Report .\local\episode1-human-session.json -Maximized
 ```
@@ -62,11 +64,12 @@ must not already exist.
 Hold the key briefly for movement, release it before changing direction, and
 use short discrete presses for switches. The game pauses when the Terminal
 viewport is too small; increase its usable rows/columns or reduce font size if
-the image does not fit. Whole-session 35-tic/60-display pacing and audio
-continuity are not certified; report visible stalls, delayed controls, or
-missing/dropout sound. Sound effects are enabled; background music is omitted
-because the complete Episode 1 catalog was not published. Rendering remains
-an approximation rather than vanilla pixel/demo compatibility.
+the image does not fit. The 11-track Episode 1 catalog is enabled. Its actual
+simulation/audio worker passed 15 save/load/new-game checks, including 97,020
+music frames and clean device shutdown; whole-campaign music continuity,
+35-tic/60-display pacing, and audible review of every track are not certified.
+Report visible stalls, delayed controls, or missing/dropout sound. Rendering
+remains an approximation rather than vanilla pixel/demo compatibility.
 
 ## Reporting
 
@@ -85,8 +88,10 @@ playthrough.
 
 The machine-readable [readiness receipt](../results/episode1-playtest-readiness.json)
 and [campaign matrix](campaign-matrix.md) link the fresh map smoke, transition,
-boss, menu/session, and synthetic input receipts. Existing E1M1–E1M4 route
-replays remain regressions. The failed E1M5 automated route is recorded in
+boss, menu/session, synthetic input, and music receipts. The latest
+visibility-fix regression index records all four existing E1M1–E1M4 route
+replays and the nine-map smoke; full raw replay reports remain under ignored
+`local/visibility-intercept-regressions/`. The failed E1M5 automated route is recorded in
 [`campaign-e1m5-investigation.md`](campaign-e1m5-investigation.md); it ended in
 player death and did not establish a repeatable engine defect.
 

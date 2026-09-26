@@ -1305,3 +1305,38 @@ any map loaded, and the corrected array invocation passed all nine. The failed
 invocation is retained under ignored `local/visibility-intercept-regressions/`.
 No window, recorder, or bot route was used. The
 D_VICTOR full-loop qualification remains in progress separately.
+
+## 2026-09-26 — Complete Episode 1 music and revalidate the handoff
+
+Resumed the preserved atomic preparation job and completed the eleven-track
+Episode 1 catalog: D_E1M1, D_INTER, D_E1M2–D_E1M9, and D_VICTOR. The catalog
+is local at `local/music-prepared-episode1.json`, hash
+`0E9C9542C75F4D5E2D7FC71E42FAFBB58F94321C3B8A49BA0C9AC5A93752EE58`; the
+qualification batch synthesized 2,032.318 score seconds. The original pinned
+synthesis/runtime sources and exact installed Steam IWAD were revalidated.
+
+D_VICTOR passed three-period state and float-output recurrence over 25,401,600
+frames (576 seconds). Its recurring period is 8,467,200 frames, with 62 voices
+and state SHA-256
+`433B5A35950B12F1FD3E9192E3281850988965194B05A25604C46B82DE74633D`. Its
+eight-second opening reference is exact, and the independent long-track reader
+suite passes all six checks. Portable qualification, opening-reference and
+reader receipts are in `results/music-loop-dvictor-prepared.json`,
+`results/music-loop-dvictor-opening-reference.json`, and
+`results/music-loop-dvictor-reader-first.json`.
+
+With the complete catalog, the actual simulation/audio worker passes 15
+save/load/new-game checks on Episode 1, returns 97,020 music frames, reports no
+audio error and closes the device. `Play.ps1 -Check` also confirms Windows
+Terminal, PowerShell 7.6.5, all 36 IWAD maps, and the catalog path; its music
+content validation is path-only, so the worker test is separate. The exact
+preflight and worker receipts are tracked. A fresh transition suite passes all
+57 fixtures, including E1M9/secret-history/finale cases. The focused visibility
+correction, four old route regressions and nine-map Episode 1 smoke are pinned
+in the prior commit's regression index.
+
+Update the human handoff to source commit `9b5a7b45f9b5d299f8f1bbebc866abc84eee30a4`
+with the full catalog enabled. Jason's one complete playthrough is still
+pending. Neither uninterrupted campaign audio nor 35-tic/60-display pacing,
+audible review of every track, vanilla fidelity, or the broader release gates
+is established by these bounded checks.

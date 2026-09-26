@@ -1,6 +1,6 @@
 # PowerShell audio investigation
 
-The terminal game has opt-in sound effects with `./Start-Doom.ps1 -Sound` and [qualified E1M1 music integration](music-integration.md) with an explicit `-MusicCatalog`. The default remains silent while integration is qualified. DMX decoding, stereo positioning, linear resampling, music synthesis and mixing run in PowerShell, with a standard Windows playback queue. Persistent [sound volume and mute](settings.md#sound-controls-qualification) are implemented. Remaining soundtrack preparation, one-shot music, synthesis fidelity, audible latency and broader session qualification remain open release requirements.
+The terminal game has opt-in sound effects with `./Start-Doom.ps1 -Sound` and [music integration](music-integration.md) with an explicit `-MusicCatalog`. The complete eleven-track Ultimate Doom Episode 1 looping catalog is qualified locally and its actual simulation/audio worker passes save/load/new-game integration checks. The default remains silent when calling the engine launcher without `-Sound` or a catalog. DMX decoding, stereo positioning, linear resampling, music synthesis and mixing run in PowerShell, with a standard Windows playback queue. Persistent [sound volume and mute](settings.md#sound-controls-qualification) are implemented. Broader soundtrack preparation, one-shot music, synthesis fidelity, audible latency and uninterrupted campaign qualification remain open release requirements.
 
 ## Implementation boundary
 

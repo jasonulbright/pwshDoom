@@ -1,0 +1,2586 @@
+{
+  "FinishedUtc": "2026-09-26T18:31:45.3472049Z",
+  "Meaning": "Actual simulation process and bounded session IPC. Numeric snapshots, command indices, asset generation handshake, failed candidate isolation, atomic replacement/backup and immutable replay saves. Rendering workers and live menus are qualified separately.",
+  "NewGameEpisode": 1,
+  "Simulation": {
+    "AudioSourcePeak": 0,
+    "SoundEnabled": true,
+    "IncompleteAudioBackpressureStartQpc": 0,
+    "AutomapDiscoverySamplesMs": [
+      17.3093,
+      18.4728,
+      5.4057,
+      8.3945,
+      6.053,
+      5.1201,
+      5.2884,
+      5.3487,
+      6.953,
+      3.9828,
+      4.0694,
+      5.3778,
+      3.9608,
+      4.1875,
+      4.2004,
+      3.6031,
+      3.4119,
+      3.4779,
+      3.8901,
+      3.3487,
+      3.5324,
+      4.1142,
+      3.7994,
+      3.9265,
+      3.4472,
+      3.5767,
+      3.4646,
+      3.7697,
+      4.2685,
+      3.412,
+      4.4279,
+      3.4686,
+      3.169,
+      3.4066,
+      3.1157,
+      3.9514,
+      2.9818,
+      2.6467,
+      2.6966,
+      3.0788,
+      2.4248,
+      2.3931,
+      2.4428,
+      2.3888,
+      2.8443,
+      3.1553,
+      3.7284,
+      2.6425,
+      2.4007,
+      2.4922,
+      2.1778,
+      2.1335,
+      2.1355,
+      2.8966,
+      2.242,
+      2.167,
+      2.0443,
+      2.0434,
+      2.143,
+      2.0119,
+      2.4765,
+      3.0756,
+      2.1358,
+      1.8648,
+      1.8709,
+      2.045,
+      2.0251,
+      1.8588,
+      1.8657,
+      1.6178,
+      2.765,
+      2.9167,
+      2.6086,
+      2.6233,
+      2.5572,
+      3.0235,
+      2.6345
+    ],
+    "MenuScreen": 0,
+    "AutomapRenderMs": null,
+    "TickLatenessMs": null,
+    "ReplayCheckpoints": [
+      {
+        "State": {
+          "Schema": 1,
+          "Tic": 0,
+          "State": "Level",
+          "Episode": 1,
+          "Map": 1,
+          "LevelTime": 1,
+          "RandomIndex": 144,
+          "Paused": false,
+          "PlayerState": "Live",
+          "Health": 100,
+          "Armor": 0,
+          "Position": [
+            69206016,
+            -236978176,
+            0,
+            1073741824
+          ],
+          "Ammo": [
+            50,
+            0,
+            0,
+            0
+          ],
+          "Weapons": [
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "Keys": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "DidSecret": false,
+          "RenderSnapshotSha256": "ED2A27F9B114FD60CB6F057F423C6AE068ED39F4207999CC8134DA6C95A35566",
+          "Intermission": null,
+          "Finale": null
+        },
+        "Tic": 0,
+        "CurrentRenderSnapshotSha256": "416AA912F3D02D1DCBBD465CC1E68D405F85FC6E171972BE709AB89534B3EC47",
+        "AutomapSha256": "683FBC3374C915C4FAFDB4CBFEE0CD8899B1AF9046A4B23140EE784EAC28A015",
+        "CurrentRenderSnapshotVersion": 3,
+        "RenderSnapshotV2Sha256": "CE97375A0D01A9EC986CC1FC1551D4D26AEE44C56E0DE12FFE3579BFE431169B",
+        "Sha256": "20931EDD7A9ABBC3B8E753795EB527C6F4E9C2D68F2D62E8A1EC3E20B84BF943"
+      },
+      {
+        "State": {
+          "Schema": 1,
+          "Tic": 70,
+          "State": "Level",
+          "Episode": 1,
+          "Map": 1,
+          "LevelTime": 36,
+          "RandomIndex": 144,
+          "Paused": false,
+          "PlayerState": "Live",
+          "Health": 100,
+          "Armor": 0,
+          "Position": [
+            69200415,
+            -222974830,
+            0,
+            1073741824
+          ],
+          "Ammo": [
+            50,
+            0,
+            0,
+            0
+          ],
+          "Weapons": [
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "Keys": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "DidSecret": false,
+          "RenderSnapshotSha256": "DAA91EE66F4BF1B3867938AD499FEAE5C32709C1D660AFCFDA409FD8E5C78ACC",
+          "Intermission": null,
+          "Finale": null
+        },
+        "Tic": 70,
+        "CurrentRenderSnapshotSha256": "78E05B4D90457752402BE31246D41BFDFF06D925D43F49436A8A7290A7EB6AFA",
+        "AutomapSha256": "D3B245C0328E83D4A11BE05C01CAF3174B9F85AB6A5047ECF5472E3B8DABFCA0",
+        "CurrentRenderSnapshotVersion": 3,
+        "RenderSnapshotV2Sha256": "4A3E759893C4866BF77323AA15C1F9FC8E02DDBF005EF3F219738DF63AAA885E",
+        "Sha256": "5C1AE4F1463F1CFF753EA6AFF76354076163B5B9943ADCA03BFA82E4A2BCA02C"
+      },
+      {
+        "State": {
+          "Schema": 1,
+          "Tic": 77,
+          "State": "Level",
+          "Episode": 1,
+          "Map": 1,
+          "LevelTime": 36,
+          "RandomIndex": 144,
+          "Paused": false,
+          "PlayerState": "Live",
+          "Health": 100,
+          "Armor": 0,
+          "Position": [
+            69200415,
+            -222974830,
+            0,
+            1073741824
+          ],
+          "Ammo": [
+            50,
+            0,
+            0,
+            0
+          ],
+          "Weapons": [
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "Keys": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "DidSecret": false,
+          "RenderSnapshotSha256": "DAA91EE66F4BF1B3867938AD499FEAE5C32709C1D660AFCFDA409FD8E5C78ACC",
+          "Intermission": null,
+          "Finale": null
+        },
+        "Tic": 77,
+        "CurrentRenderSnapshotSha256": "78E05B4D90457752402BE31246D41BFDFF06D925D43F49436A8A7290A7EB6AFA",
+        "AutomapSha256": "D3B245C0328E83D4A11BE05C01CAF3174B9F85AB6A5047ECF5472E3B8DABFCA0",
+        "CurrentRenderSnapshotVersion": 3,
+        "RenderSnapshotV2Sha256": "4A3E759893C4866BF77323AA15C1F9FC8E02DDBF005EF3F219738DF63AAA885E",
+        "Sha256": "D96C67D3DED90680C87DEFC9610D3324C8000A171194348C61789758FAC92E24"
+      }
+    ],
+    "Transitions": [
+      {
+        "Weapons": [
+          true,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "Health": 100,
+        "Episode": 1,
+        "Generation": 1,
+        "DidSecret": false,
+        "Ammo": [
+          50,
+          0,
+          0,
+          0
+        ],
+        "Map": 1,
+        "State": "Level",
+        "Kills": 0,
+        "Keys": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "Tic": 0,
+        "Armor": 0
+      },
+      {
+        "Weapons": [
+          true,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "Health": 100,
+        "Episode": 1,
+        "Generation": 2,
+        "DidSecret": false,
+        "Ammo": [
+          50,
+          0,
+          0,
+          0
+        ],
+        "Map": 1,
+        "State": "Level",
+        "Kills": 0,
+        "Keys": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "Tic": 70,
+        "Armor": 0
+      },
+      {
+        "Weapons": [
+          true,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "Health": 100,
+        "Episode": 1,
+        "Generation": 3,
+        "DidSecret": false,
+        "Ammo": [
+          50,
+          0,
+          0,
+          0
+        ],
+        "Map": 1,
+        "State": "Level",
+        "Kills": 0,
+        "Keys": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "Tic": 70,
+        "Armor": 0
+      },
+      {
+        "Weapons": [
+          true,
+          true,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "Health": 100,
+        "Episode": 1,
+        "Generation": 4,
+        "DidSecret": false,
+        "Ammo": [
+          50,
+          0,
+          0,
+          0
+        ],
+        "Map": 1,
+        "State": "Level",
+        "Kills": 0,
+        "Keys": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "Tic": 77,
+        "Armor": 0
+      }
+    ],
+    "AudioPacketMs": {
+      "Count": 77,
+      "Mean": 0.31640389610389613,
+      "Median": 0.1399,
+      "P95": 0.1792,
+      "Max": 13.4888
+    },
+    "AudioBackpressure": [],
+    "Skill": 3,
+    "TickLatenessSamplesMs": [],
+    "Health": 100,
+    "Audio": {
+      "ClippedSamples": 0,
+      "WallSeconds": 20.2771701,
+      "LoadingDrains": [
+        {
+          "Qpc": 1031487311924,
+          "CompletedFrames": 88200,
+          "ThroughSequence": 69
+        },
+        {
+          "Qpc": 1031517772921,
+          "CompletedFrames": 88200,
+          "ThroughSequence": 69
+        },
+        {
+          "Qpc": 1031556643308,
+          "CompletedFrames": 97020,
+          "ThroughSequence": 76
+        }
+      ],
+      "RebufferSinglePacketDeadlineMs": 100,
+      "PendingPacket": null,
+      "MixSamplesMs": [
+        46.677,
+        1.3284,
+        0.5344,
+        0.4943,
+        0.5797,
+        0.6187,
+        0.5419,
+        0.5304,
+        0.5752,
+        0.5825,
+        0.5204,
+        6.0528,
+        0.562,
+        1.3731,
+        0.574,
+        0.5178,
+        0.5458,
+        0.5077,
+        0.5242,
+        0.5349,
+        1.5272,
+        0.4838,
+        0.5233,
+        0.527,
+        1.188,
+        0.5344,
+        0.4937,
+        0.6272,
+        0.7084,
+        0.59,
+        0.6717,
+        0.5272,
+        0.521,
+        0.5983,
+        0.4987,
+        0.5193,
+        0.4936,
+        0.4699,
+        1.5369,
+        0.4918,
+        0.8329,
+        0.5198,
+        1.0515,
+        0.4888,
+        0.52,
+        0.6405,
+        0.7099,
+        0.5408,
+        0.6177,
+        0.6652,
+        0.5149,
+        0.4907,
+        0.5503,
+        0.5384,
+        0.47,
+        0.5042,
+        0.4649,
+        0.4849,
+        0.4948,
+        1.3208,
+        0.8637,
+        0.4683,
+        0.4764,
+        0.4594,
+        0.4804,
+        0.4748,
+        0.5723,
+        0.5041,
+        0.4861,
+        0.4718,
+        0.6311,
+        0.4882,
+        1.6955,
+        0.6144,
+        0.4475,
+        0.4968,
+        1.3098
+      ],
+      "SubmittedFrames": 97020,
+      "QueueStarvationObservations": [
+        {
+          "WallMs": 7492.7725,
+          "AfterPacket": 34
+        },
+        {
+          "WallMs": 10978.6957,
+          "AfterPacket": 69
+        }
+      ],
+      "UnconsumedPackets": 0,
+      "MaxVoices": 0,
+      "PauseTransitions": 3,
+      "RebufferCount": 2,
+      "VolumeChanges": [],
+      "PacketAgeAtSubmissionMs": [
+        80.5819,
+        49.8166,
+        26.9314,
+        16.7468,
+        53.7666,
+        70.3319,
+        60.3189,
+        59.6082,
+        69.4882,
+        70.3037,
+        56.4016,
+        56.1753,
+        70.4437,
+        67.5433,
+        69.8738,
+        69.4368,
+        69.6091,
+        58.5314,
+        55.1237,
+        67.9019,
+        70.6548,
+        64.6558,
+        69.6151,
+        72.0373,
+        62.0128,
+        54.0239,
+        67.3915,
+        65.0776,
+        69.9221,
+        69.1181,
+        65.8476,
+        57.1352,
+        54.2189,
+        70.0074,
+        68.7996,
+        3.0748,
+        3.1235,
+        10.0228,
+        4.8005,
+        2.7945,
+        6.2982,
+        3.4904,
+        10.0712,
+        12.7075,
+        2.7524,
+        4.3568,
+        15.7219,
+        1.5279,
+        4.1635,
+        4.3673,
+        12.9784,
+        7.9586,
+        4.0508,
+        4.5435,
+        6.7997,
+        1.1053,
+        6.7254,
+        6.9634,
+        2.7007,
+        4.0274,
+        2.2202,
+        2.4409,
+        9.2296,
+        9.3352,
+        12.2712,
+        2.6758,
+        1.0572,
+        9.6772,
+        4.8175,
+        5.8424,
+        12.51,
+        15.1871,
+        7.6702,
+        4.3733,
+        6.9313,
+        0.8252,
+        4.4359
+      ],
+      "ReturnedCompletedFrames": 97020,
+      "LastSequence": 76,
+      "DeviceClosed": true,
+      "PcmSha256": "4F0B618D0864D12E74865E168DEE81FDBD83CF73033597E09470DA7A5B4A18A2",
+      "MutedPackets": 0,
+      "RebufferResumes": [
+        {
+          "ReserveWaitMilliseconds": 30.294799999999668,
+          "AfterPacket": 36,
+          "QueuedBuffers": 2,
+          "WaitMilliseconds": 2385.5963999999994,
+          "Reason": "TwoPackets"
+        }
+      ],
+      "Music": {
+        "Gain": 0.2,
+        "Selected": null,
+        "Closed": true,
+        "Frames": 97020,
+        "Reports": {
+          "D_E1M2": "B2EBA683C99C515DE356A3D9E8E77824D775F59695F7CC14EC9F4D88B2D75518",
+          "D_VICTOR": "0E57B8C583690AEB3E09625278311837784D6F8E70ACDC79D5ACF058A0D8A4F5",
+          "D_E1M3": "DF75B2743048D05106F500317127BA462D2A2BB3F0EE1A63D9CA1E3D0F1697B2",
+          "D_E1M9": "6FE2388CEF624DC5B70F62A0DB73D4D7433280898B16FD29AB67779BE23F6F92",
+          "D_E1M6": "4888C222F5ABFB5AC0992CA9329E01CA79042D4A13327523BD4BC68C1B612989",
+          "D_E1M5": "97A289967303C2A9343BC84AEA3D08D4E05759976BCDA25954A2ED865D94F2DB",
+          "D_E1M7": "2C0DEBC273BBBD7F9B63AA88E062C39DBA0AF17D91731F313ECB6C69752FAA41",
+          "D_E1M4": "24CD95F078930A352DF57C5E609D75C587D9F156786EBC7AABBDE64C7BA9630C",
+          "D_E1M8": "F4C079000EC9267066940ED33C8E07FFB4A8FFE7A555AC5F9FC827BD3EA4B09E",
+          "D_INTER": "084536988F462CD7C6718665FA53DCD6BB1009B3FCBCDD4556C50D51AC1B1778",
+          "D_E1M1": "1D5A9D6D16E8CDCA74646D6AEF009CDB42EB59B87941B0EFE648F9D3A98C96CF"
+        },
+        "Transitions": [
+          {
+            "Kind": "Start",
+            "Loop": true,
+            "AfterFrames": 0,
+            "Track": "D_E1M1"
+          },
+          {
+            "Kind": "EpochReset",
+            "AfterFrames": 88200
+          },
+          {
+            "Kind": "EpochReset",
+            "AfterFrames": 88200
+          },
+          {
+            "Kind": "Start",
+            "Loop": true,
+            "AfterFrames": 88200,
+            "Track": "D_E1M1"
+          },
+          {
+            "Kind": "EpochReset",
+            "AfterFrames": 97020
+          }
+        ]
+      },
+      "StalePacketsDiscarded": 0,
+      "Packets": 77,
+      "Meaning": "PowerShell runspace mixing and waveOut playback; packet age ends at submission, not audible output. Starvation is queue polling, not hardware telemetry. Reset/exit can cancel queued tail audio; cancelled frame count is an upper bound.",
+      "FinalVolume": 1.0,
+      "CleanupError": null,
+      "Error": null,
+      "EpochResets": 3,
+      "MaxPacketQueue": 3,
+      "CancelledQueuedFramesUpperBound": 0
+    },
+    "Kills": 0,
+    "ReplayCheckpointMs": {
+      "Count": 4,
+      "Mean": 23.838849999999997,
+      "Median": 3.3419,
+      "P95": 85.4092,
+      "Max": 85.4092
+    },
+    "AudioEvents": 11,
+    "FinishedUtc": "2026-09-26T18:31:45.2526112Z",
+    "SimulationMs": {
+      "Count": 77,
+      "Mean": 3.984541558441558,
+      "Median": 3.0926,
+      "P95": 7.8233,
+      "Max": 10.9903
+    },
+    "SaveDirectory": "C:\\projects\\pwshDoom\\local\\save-worker-70a8038cf6264ca09a486e2862b8ee94\\6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+    "Map": 1,
+    "ShutdownAudioDrain": null,
+    "FinalGeneration": 4,
+    "Episode": 1,
+    "SnapshotPublishMs": {
+      "Count": 80,
+      "Mean": 2.5184287499999995,
+      "Median": 2.29265,
+      "P95": 3.6429,
+      "Max": 7.8321
+    },
+    "ControlEvents": [
+      {
+        "Skill": 3,
+        "Tic": 70,
+        "Map": 1,
+        "Action": "NewGame",
+        "Episode": 1
+      },
+      {
+        "Tic": 70,
+        "Action": "LoadGame",
+        "SaveHash": "36D86A07B7675A9DB64426FF6C5603EE3B13BFC17CBB36F9CBD73455969BA80C"
+      },
+      {
+        "Tic": 77,
+        "Action": "LoadGame",
+        "SaveHash": "36D86A07B7675A9DB64426FF6C5603EE3B13BFC17CBB36F9CBD73455969BA80C"
+      }
+    ],
+    "InputCommands": [
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        25,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "SaveOperations": [
+      {
+        "Request": {
+          "ExpectedHash": null,
+          "Action": "SaveGame",
+          "Slot": 1
+        },
+        "Tic": 35,
+        "Action": "SaveGame",
+        "Result": {
+          "Backup": null,
+          "Path": "C:\\projects\\pwshDoom\\local\\save-worker-70a8038cf6264ca09a486e2862b8ee94\\6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F\\slot-01.pds",
+          "Milliseconds": 1785.2367,
+          "Bytes": 395734,
+          "Nodes": 1845,
+          "Sha256": "36D86A07B7675A9DB64426FF6C5603EE3B13BFC17CBB36F9CBD73455969BA80C"
+        },
+        "Milliseconds": 2344.2595,
+        "Success": true,
+        "Error": null
+      },
+      {
+        "Request": {
+          "AllowSourceMismatch": false,
+          "ExpectedHash": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+          "Action": "LoadGame",
+          "Slot": 1
+        },
+        "Tic": 70,
+        "Action": "LoadGame",
+        "Result": null,
+        "Milliseconds": 93.2584,
+        "Success": false,
+        "Error": "Save changed after selection.\nat <ScriptBlock>, C:\\projects\\pwshDoom\\scripts\\Invoke-SimulationWorker.ps1: line 191"
+      },
+      {
+        "Request": {
+          "ExpectedHash": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+          "Action": "SaveGame",
+          "Slot": 1
+        },
+        "Tic": 70,
+        "Action": "SaveGame",
+        "Result": null,
+        "Milliseconds": 1393.6,
+        "Success": false,
+        "Error": "Save changed after overwrite confirmation.\nat Write-DoomSaveState, C:\\projects\\pwshDoom\\src\\SaveState.ps1: line 231\r\nat <ScriptBlock>, C:\\projects\\pwshDoom\\scripts\\Invoke-SimulationWorker.ps1: line 180"
+      },
+      {
+        "Request": {
+          "AllowSourceMismatch": false,
+          "ExpectedHash": "36D86A07B7675A9DB64426FF6C5603EE3B13BFC17CBB36F9CBD73455969BA80C",
+          "Action": "LoadGame",
+          "Slot": 1
+        },
+        "Tic": 70,
+        "Action": "LoadGame",
+        "Result": {
+          "Sha256": "36D86A07B7675A9DB64426FF6C5603EE3B13BFC17CBB36F9CBD73455969BA80C",
+          "Map": 1,
+          "GameTic": 177,
+          "SourceMatches": true,
+          "Episode": 1
+        },
+        "Milliseconds": 2542.8919,
+        "Success": true,
+        "Error": null
+      },
+      {
+        "Request": {
+          "ExpectedHash": "36D86A07B7675A9DB64426FF6C5603EE3B13BFC17CBB36F9CBD73455969BA80C",
+          "Action": "SaveGame",
+          "Slot": 1
+        },
+        "Tic": 77,
+        "Action": "SaveGame",
+        "Result": {
+          "Backup": "C:\\projects\\pwshDoom\\local\\save-worker-70a8038cf6264ca09a486e2862b8ee94\\6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F\\slot-01.pds.a8d47311a5bf4fa98bd65bb7752e93da.bak",
+          "Path": "C:\\projects\\pwshDoom\\local\\save-worker-70a8038cf6264ca09a486e2862b8ee94\\6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F\\slot-01.pds",
+          "Milliseconds": 1278.5826,
+          "Bytes": 395780,
+          "Nodes": 1845,
+          "Sha256": "648A96CFD30CA94E6A4EC45B752CA607CF5FC02E7FE08F26378DFC5B76374F27"
+        },
+        "Milliseconds": 1284.6521,
+        "Success": true,
+        "Error": null
+      },
+      {
+        "Request": {
+          "Action": "LoadGame",
+          "SaveHash": "36D86A07B7675A9DB64426FF6C5603EE3B13BFC17CBB36F9CBD73455969BA80C"
+        },
+        "Tic": 77,
+        "Action": "LoadGame",
+        "Result": {
+          "Sha256": "36D86A07B7675A9DB64426FF6C5603EE3B13BFC17CBB36F9CBD73455969BA80C",
+          "Map": 1,
+          "GameTic": 177,
+          "SourceMatches": true,
+          "Episode": 1
+        },
+        "Milliseconds": 2332.0096,
+        "Success": true,
+        "Error": null
+      }
+    ],
+    "SessionScreenMs": null,
+    "AudioPacketSamplesMs": [
+      13.4888,
+      0.1696,
+      0.143,
+      0.1528,
+      0.1427,
+      0.141,
+      0.1535,
+      0.1349,
+      0.1416,
+      0.1615,
+      0.1489,
+      0.1383,
+      0.1444,
+      0.164,
+      0.1399,
+      0.154,
+      0.1606,
+      0.1587,
+      0.1468,
+      0.1508,
+      0.1459,
+      0.1573,
+      0.1792,
+      0.1513,
+      0.1534,
+      0.147,
+      0.4022,
+      0.1736,
+      0.1552,
+      0.1485,
+      0.1432,
+      0.1611,
+      0.1556,
+      0.164,
+      0.1476,
+      0.1591,
+      0.139,
+      0.1374,
+      0.1274,
+      0.1179,
+      0.1342,
+      0.1287,
+      0.1194,
+      0.1247,
+      0.1331,
+      0.127,
+      0.1899,
+      0.1288,
+      0.1405,
+      0.163,
+      0.1204,
+      0.1288,
+      0.1168,
+      0.1174,
+      0.1522,
+      0.1287,
+      0.1274,
+      0.1388,
+      0.1205,
+      0.118,
+      0.118,
+      0.1274,
+      0.1261,
+      0.1201,
+      0.1258,
+      0.1211,
+      0.1413,
+      0.1364,
+      0.1199,
+      0.1265,
+      0.1365,
+      0.1109,
+      0.1126,
+      0.1164,
+      0.1154,
+      0.1244,
+      0.1243
+    ],
+    "WarmupTics": 140,
+    "IncompleteLoadingBoundary": null,
+    "SessionScreenSamplesMs": [],
+    "SimulationSamplesMs": [
+      10.9903,
+      7.1584,
+      2.1479,
+      2.7785,
+      2.1171,
+      2.1653,
+      2.4207,
+      3.0278,
+      2.2238,
+      3.2416,
+      5.5834,
+      6.2337,
+      2.1033,
+      5.4501,
+      2.2222,
+      2.2381,
+      4.8143,
+      5.9468,
+      2.1799,
+      4.6976,
+      2.7711,
+      7.235,
+      2.2076,
+      2.1898,
+      2.1657,
+      3.1486,
+      5.1298,
+      6.3942,
+      2.2955,
+      3.5409,
+      2.8416,
+      7.1356,
+      2.4467,
+      2.4439,
+      3.4544,
+      6.1861,
+      6.1216,
+      6.1773,
+      2.6188,
+      3.5728,
+      2.3195,
+      6.3404,
+      2.4936,
+      2.2216,
+      2.1611,
+      2.1794,
+      6.4958,
+      7.4965,
+      2.3554,
+      4.666,
+      2.2762,
+      7.8233,
+      2.3721,
+      2.2881,
+      2.4618,
+      2.2463,
+      5.083,
+      8.1931,
+      2.1755,
+      3.5284,
+      2.3043,
+      7.8566,
+      2.1722,
+      2.1663,
+      2.8105,
+      2.1658,
+      4.9184,
+      6.8999,
+      3.1663,
+      3.8166,
+      3.3232,
+      6.8278,
+      6.1182,
+      2.2098,
+      3.4863,
+      3.0926,
+      6.48
+    ],
+    "AutomapRenderSamplesMs": [],
+    "AudioPublicationTrace": [
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031426747329,
+        "PresentationStartQpc": 1031426747621,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031426603369,
+        "PresentationEndQpc": 1031426964091,
+        "Sequence": 0
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031427040969,
+        "PresentationStartQpc": 1031427041134,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031427038740,
+        "PresentationEndQpc": 1031427252692,
+        "Sequence": 1
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031427278035,
+        "PresentationStartQpc": 1031427278189,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031427276204,
+        "PresentationEndQpc": 1031427355354,
+        "Sequence": 2
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031427386874,
+        "PresentationStartQpc": 1031427387031,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031427384758,
+        "PresentationEndQpc": 1031427493873,
+        "Sequence": 3
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031427518443,
+        "PresentationStartQpc": 1031427518589,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031427516622,
+        "PresentationEndQpc": 1031427618217,
+        "Sequence": 4
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031427643512,
+        "PresentationStartQpc": 1031427643654,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031427641675,
+        "PresentationEndQpc": 1031427717563,
+        "Sequence": 5
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031428044959,
+        "PresentationStartQpc": 1031428045110,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031428042991,
+        "PresentationEndQpc": 1031428135242,
+        "Sequence": 6
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031428349638,
+        "PresentationStartQpc": 1031428349782,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031428347848,
+        "PresentationEndQpc": 1031428426262,
+        "Sequence": 7
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031428551302,
+        "PresentationStartQpc": 1031428551445,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031428549494,
+        "PresentationEndQpc": 1031428644510,
+        "Sequence": 8
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031428842507,
+        "PresentationStartQpc": 1031428842654,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031428840369,
+        "PresentationEndQpc": 1031428905416,
+        "Sequence": 9
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031429181054,
+        "PresentationStartQpc": 1031429181201,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031429178912,
+        "PresentationEndQpc": 1031429245549,
+        "Sequence": 10
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031429540103,
+        "PresentationStartQpc": 1031429540250,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031429538275,
+        "PresentationEndQpc": 1031429618126,
+        "Sequence": 11
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031429642781,
+        "PresentationStartQpc": 1031429642921,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031429640870,
+        "PresentationEndQpc": 1031429705045,
+        "Sequence": 12
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031429977978,
+        "PresentationStartQpc": 1031429978133,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031429975354,
+        "PresentationEndQpc": 1031430098750,
+        "Sequence": 13
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031430248582,
+        "PresentationStartQpc": 1031430248727,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031430246789,
+        "PresentationEndQpc": 1031430315936,
+        "Sequence": 14
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031430551914,
+        "PresentationStartQpc": 1031430552057,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031430549908,
+        "PresentationEndQpc": 1031430610465,
+        "Sequence": 15
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031430853181,
+        "PresentationStartQpc": 1031430853346,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031430851039,
+        "PresentationEndQpc": 1031430909844,
+        "Sequence": 16
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031431162366,
+        "PresentationStartQpc": 1031431162511,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031431160175,
+        "PresentationEndQpc": 1031431219625,
+        "Sequence": 17
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031431498097,
+        "PresentationStartQpc": 1031431498235,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031431496231,
+        "PresentationEndQpc": 1031431562005,
+        "Sequence": 18
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031431667248,
+        "PresentationStartQpc": 1031431667389,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031431665187,
+        "PresentationEndQpc": 1031431723439,
+        "Sequence": 19
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031431950088,
+        "PresentationStartQpc": 1031431950228,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031431948223,
+        "PresentationEndQpc": 1031432010774,
+        "Sequence": 20
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031432298449,
+        "PresentationStartQpc": 1031432298588,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031432296320,
+        "PresentationEndQpc": 1031432363315,
+        "Sequence": 21
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031432551120,
+        "PresentationStartQpc": 1031432551265,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031432548958,
+        "PresentationEndQpc": 1031432611791,
+        "Sequence": 22
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031432824488,
+        "PresentationStartQpc": 1031432824624,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031432822589,
+        "PresentationEndQpc": 1031432887828,
+        "Sequence": 23
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031433130889,
+        "PresentationStartQpc": 1031433131022,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031433128956,
+        "PresentationEndQpc": 1031433187721,
+        "Sequence": 24
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031433502537,
+        "PresentationStartQpc": 1031433502670,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031433500673,
+        "PresentationEndQpc": 1031433563434,
+        "Sequence": 25
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031433673204,
+        "PresentationStartQpc": 1031433673377,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031433668700,
+        "PresentationEndQpc": 1031433731071,
+        "Sequence": 26
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031433995449,
+        "PresentationStartQpc": 1031433995592,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031433993069,
+        "PresentationEndQpc": 1031434060662,
+        "Sequence": 27
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031434249708,
+        "PresentationStartQpc": 1031434249853,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031434247692,
+        "PresentationEndQpc": 1031434318707,
+        "Sequence": 28
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031434564339,
+        "PresentationStartQpc": 1031434564479,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031434562463,
+        "PresentationEndQpc": 1031434620671,
+        "Sequence": 29
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031434892551,
+        "PresentationStartQpc": 1031434892693,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031434890705,
+        "PresentationEndQpc": 1031434963065,
+        "Sequence": 30
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031435175327,
+        "PresentationStartQpc": 1031435175469,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031435173074,
+        "PresentationEndQpc": 1031435246974,
+        "Sequence": 31
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031435503385,
+        "PresentationStartQpc": 1031435503530,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031435501290,
+        "PresentationEndQpc": 1031435562825,
+        "Sequence": 32
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031435645297,
+        "PresentationStartQpc": 1031435645444,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031435643051,
+        "PresentationEndQpc": 1031435705984,
+        "Sequence": 33
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031435956802,
+        "PresentationStartQpc": 1031435956933,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031435954888,
+        "PresentationEndQpc": 1031436010813,
+        "Sequence": 34
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031461168189,
+        "PresentationStartQpc": 1031461168348,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031461166134,
+        "PresentationEndQpc": 1031461231379,
+        "Sequence": 35
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031461469565,
+        "PresentationStartQpc": 1031461469703,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031461467696,
+        "PresentationEndQpc": 1031461539594,
+        "Sequence": 36
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031461679323,
+        "PresentationStartQpc": 1031461679458,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031461677403,
+        "PresentationEndQpc": 1031461729409,
+        "Sequence": 37
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031461887739,
+        "PresentationStartQpc": 1031461887863,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031461886048,
+        "PresentationEndQpc": 1031461949679,
+        "Sequence": 38
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031462197998,
+        "PresentationStartQpc": 1031462198120,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031462196454,
+        "PresentationEndQpc": 1031462251780,
+        "Sequence": 39
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031462471371,
+        "PresentationStartQpc": 1031462471505,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031462469636,
+        "PresentationEndQpc": 1031462518965,
+        "Sequence": 40
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031462830568,
+        "PresentationStartQpc": 1031462830702,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031462828802,
+        "PresentationEndQpc": 1031462880524,
+        "Sequence": 41
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031463068836,
+        "PresentationStartQpc": 1031463068962,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031463067216,
+        "PresentationEndQpc": 1031463116281,
+        "Sequence": 42
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031463337029,
+        "PresentationStartQpc": 1031463337156,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031463335383,
+        "PresentationEndQpc": 1031463383952,
+        "Sequence": 43
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031463638904,
+        "PresentationStartQpc": 1031463639038,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031463637170,
+        "PresentationEndQpc": 1031463691249,
+        "Sequence": 44
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031463883363,
+        "PresentationStartQpc": 1031463883490,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031463881722,
+        "PresentationEndQpc": 1031463940691,
+        "Sequence": 45
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031464290487,
+        "PresentationStartQpc": 1031464290659,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031464288055,
+        "PresentationEndQpc": 1031464358850,
+        "Sequence": 46
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031464514548,
+        "PresentationStartQpc": 1031464514678,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031464512748,
+        "PresentationEndQpc": 1031464564573,
+        "Sequence": 47
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031464826136,
+        "PresentationStartQpc": 1031464826263,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031464824319,
+        "PresentationEndQpc": 1031464876442,
+        "Sequence": 48
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031465157305,
+        "PresentationStartQpc": 1031465157436,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031465155214,
+        "PresentationEndQpc": 1031465207226,
+        "Sequence": 49
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031465336236,
+        "PresentationStartQpc": 1031465336370,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031465334634,
+        "PresentationEndQpc": 1031465380507,
+        "Sequence": 50
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031465695236,
+        "PresentationStartQpc": 1031465695369,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031465693436,
+        "PresentationEndQpc": 1031465739011,
+        "Sequence": 51
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031465885379,
+        "PresentationStartQpc": 1031465885514,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031465883793,
+        "PresentationEndQpc": 1031465932049,
+        "Sequence": 52
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031466185109,
+        "PresentationStartQpc": 1031466185235,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031466183539,
+        "PresentationEndQpc": 1031466238270,
+        "Sequence": 53
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031466461646,
+        "PresentationStartQpc": 1031466461780,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031466459661,
+        "PresentationEndQpc": 1031466506104,
+        "Sequence": 54
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031466821544,
+        "PresentationStartQpc": 1031466821675,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031466819888,
+        "PresentationEndQpc": 1031466872082,
+        "Sequence": 55
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031467097884,
+        "PresentationStartQpc": 1031467098019,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031467096109,
+        "PresentationEndQpc": 1031467141301,
+        "Sequence": 56
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031467396072,
+        "PresentationStartQpc": 1031467396205,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031467394141,
+        "PresentationEndQpc": 1031467439161,
+        "Sequence": 57
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031467638287,
+        "PresentationStartQpc": 1031467638415,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031467636688,
+        "PresentationEndQpc": 1031467682825,
+        "Sequence": 58
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031467894148,
+        "PresentationStartQpc": 1031467894272,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031467892569,
+        "PresentationEndQpc": 1031467945846,
+        "Sequence": 59
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031468245713,
+        "PresentationStartQpc": 1031468245843,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031468244170,
+        "PresentationEndQpc": 1031468293076,
+        "Sequence": 60
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031468512019,
+        "PresentationStartQpc": 1031468512155,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031468510236,
+        "PresentationEndQpc": 1031468565759,
+        "Sequence": 61
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031468768449,
+        "PresentationStartQpc": 1031468768579,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031468766778,
+        "PresentationEndQpc": 1031468811753,
+        "Sequence": 62
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031469070497,
+        "PresentationStartQpc": 1031469070625,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031469068939,
+        "PresentationEndQpc": 1031469111208,
+        "Sequence": 63
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031469341825,
+        "PresentationStartQpc": 1031469341957,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031469340095,
+        "PresentationEndQpc": 1031469383046,
+        "Sequence": 64
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031469638436,
+        "PresentationStartQpc": 1031469638564,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031469636786,
+        "PresentationEndQpc": 1031469684327,
+        "Sequence": 65
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031469914639,
+        "PresentationStartQpc": 1031469914819,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031469912682,
+        "PresentationEndQpc": 1031469957726,
+        "Sequence": 66
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031470358005,
+        "PresentationStartQpc": 1031470358148,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031470356117,
+        "PresentationEndQpc": 1031470399015,
+        "Sequence": 67
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031470481621,
+        "PresentationStartQpc": 1031470481758,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031470480007,
+        "PresentationEndQpc": 1031470526087,
+        "Sequence": 68
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031470777277,
+        "PresentationStartQpc": 1031470777409,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031470775501,
+        "PresentationEndQpc": 1031470815468,
+        "Sequence": 69
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031526722680,
+        "PresentationStartQpc": 1031526722899,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031526720941,
+        "PresentationEndQpc": 1031526772758,
+        "Sequence": 70
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031526957081,
+        "PresentationStartQpc": 1031526957207,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031526955573,
+        "PresentationEndQpc": 1031527009034,
+        "Sequence": 71
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031527252155,
+        "PresentationStartQpc": 1031527252281,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031527250676,
+        "PresentationEndQpc": 1031527300837,
+        "Sequence": 72
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031527580746,
+        "PresentationStartQpc": 1031527580880,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031527579223,
+        "PresentationEndQpc": 1031527631735,
+        "Sequence": 73
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031527802678,
+        "PresentationStartQpc": 1031527802802,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031527801181,
+        "PresentationEndQpc": 1031527850069,
+        "Sequence": 74
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031528164731,
+        "PresentationStartQpc": 1031528165443,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031528163075,
+        "PresentationEndQpc": 1031528219153,
+        "Sequence": 75
+      },
+      {
+        "State": 0,
+        "EnqueuedQpc": 1031528435372,
+        "PresentationStartQpc": 1031528435505,
+        "MapChanged": false,
+        "UpdateEndQpc": 1031528433648,
+        "PresentationEndQpc": 1031528493993,
+        "Sequence": 76
+      }
+    ],
+    "Error": null,
+    "StopAtLevelEnd": false,
+    "AutomapCommands": [],
+    "MenuRevision": 15,
+    "LoadingBoundaries": [
+      {
+        "Episode": 1,
+        "AudioDrain": {
+          "CompletedFrames": 88200,
+          "AcknowledgedQpc": 1031487311924,
+          "ThroughSequence": 69,
+          "WaitMilliseconds": 21.2935
+        },
+        "TotalMilliseconds": 1311.0239,
+        "StartQpc": 1031487256244,
+        "Map": 1,
+        "BeforeAssetsMilliseconds": 395.1873,
+        "EndQpc": 1031500366483,
+        "Tic": 70
+      },
+      {
+        "Episode": 1,
+        "AudioDrain": {
+          "CompletedFrames": 88200,
+          "AcknowledgedQpc": 1031517772921,
+          "ThroughSequence": 69,
+          "WaitMilliseconds": 16.2075
+        },
+        "TotalMilliseconds": 820.1752,
+        "StartQpc": 1031517761264,
+        "Map": 1,
+        "BeforeAssetsMilliseconds": 16.294,
+        "EndQpc": 1031525963016,
+        "Tic": 70
+      },
+      {
+        "Episode": 1,
+        "AudioDrain": {
+          "CompletedFrames": 97020,
+          "AcknowledgedQpc": 1031556643308,
+          "ThroughSequence": 76,
+          "WaitMilliseconds": 19.5425
+        },
+        "TotalMilliseconds": 839.9693,
+        "StartQpc": 1031556600506,
+        "Map": 1,
+        "BeforeAssetsMilliseconds": 19.6136,
+        "EndQpc": 1031565000199,
+        "Tic": 77
+      }
+    ],
+    "ReplayCheckpointSamplesMs": [
+      85.4092,
+      3.353,
+      3.3308,
+      3.2624
+    ],
+    "Outcome": "Stopped",
+    "Tics": 77,
+    "SnapshotSamplesMs": [
+      3.1357,
+      2.6381,
+      2.2705,
+      2.2503,
+      3.8656,
+      2.2334,
+      3.6855,
+      2.2616,
+      2.3139,
+      2.2541,
+      2.325,
+      2.3694,
+      2.2139,
+      7.8321,
+      2.4821,
+      2.1994,
+      2.1975,
+      2.1742,
+      2.4509,
+      2.2195,
+      2.4849,
+      2.3212,
+      2.2162,
+      2.3536,
+      2.1836,
+      2.4623,
+      2.2598,
+      2.6921,
+      2.5778,
+      2.1631,
+      2.5659,
+      3.6429,
+      2.7135,
+      2.6049,
+      2.235,
+      2.3103,
+      3.9693,
+      2.3121,
+      3.4407,
+      2.2515,
+      2.2856,
+      2.5522,
+      2.2542,
+      2.254,
+      2.3399,
+      2.5173,
+      3.0429,
+      2.3108,
+      2.5814,
+      2.4508,
+      2.2004,
+      2.1933,
+      2.4833,
+      2.3719,
+      2.1516,
+      2.838,
+      2.2462,
+      2.2155,
+      2.2627,
+      3.1105,
+      2.2085,
+      2.2467,
+      2.1473,
+      2.1589,
+      2.2006,
+      2.4915,
+      2.2294,
+      2.1914,
+      2.5305,
+      2.1509,
+      2.1321,
+      2.1601,
+      2.186,
+      2.2264,
+      2.2085,
+      2.4257,
+      2.1364,
+      2.2997,
+      3.1414,
+      2.2064
+    ],
+    "AutomapDiscoveryMs": {
+      "Count": 77,
+      "Mean": 3.6491285714285713,
+      "Median": 3.0788,
+      "P95": 6.953,
+      "Max": 18.4728
+    }
+  },
+  "SaveRoot": "C:\\projects\\pwshDoom\\scripts\\..\\local\\save-worker-70a8038cf6264ca09a486e2862b8ee94",
+  "Error": null,
+  "Actions": [
+    {
+      "Response": {
+        "Action": "SaveGame",
+        "MessageDetail": "",
+        "Episode": 1,
+        "Skill": 3,
+        "Success": true,
+        "ReturnScreen": 1,
+        "Choice": 0,
+        "MessageTitle": "",
+        "Screen": 0
+      },
+      "Milliseconds": 2369.8343,
+      "Generations": [],
+      "Action": {
+        "ExpectedHash": null,
+        "Action": "SaveGame",
+        "Slot": 1
+      }
+    },
+    {
+      "Response": {
+        "Action": "LoadGame",
+        "MessageDetail": "SELECT SLOT AGAIN",
+        "Episode": 1,
+        "Skill": 3,
+        "Success": false,
+        "ReturnScreen": 9,
+        "Choice": 0,
+        "MessageTitle": "LOAD FAILED",
+        "Error": "Save changed after selection.\nat <ScriptBlock>, C:\\projects\\pwshDoom\\scripts\\Invoke-SimulationWorker.ps1: line 191",
+        "Screen": 12
+      },
+      "Milliseconds": 95.1828,
+      "Generations": [],
+      "Action": {
+        "AllowSourceMismatch": false,
+        "ExpectedHash": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "Action": "LoadGame",
+        "Slot": 1
+      }
+    },
+    {
+      "Response": {
+        "Action": "ShowMenu",
+        "MessageDetail": "",
+        "Episode": 1,
+        "Skill": 3,
+        "Success": true,
+        "ReturnScreen": 1,
+        "Choice": 0,
+        "MessageTitle": "",
+        "Screen": 0
+      },
+      "Milliseconds": 26.7037,
+      "Generations": [],
+      "Action": {
+        "Screen": 0,
+        "Choice": 0,
+        "Episode": 1,
+        "Action": "ShowMenu",
+        "Skill": 3
+      }
+    },
+    {
+      "Response": {
+        "Action": "SaveGame",
+        "MessageDetail": "SELECT SLOT AGAIN",
+        "Episode": 1,
+        "Skill": 3,
+        "Success": false,
+        "ReturnScreen": 8,
+        "Choice": 0,
+        "MessageTitle": "SAVE FAILED",
+        "Error": "Save changed after overwrite confirmation.\nat Write-DoomSaveState, C:\\projects\\pwshDoom\\src\\SaveState.ps1: line 231\r\nat <ScriptBlock>, C:\\projects\\pwshDoom\\scripts\\Invoke-SimulationWorker.ps1: line 180",
+        "Screen": 12
+      },
+      "Milliseconds": 1409.9117,
+      "Generations": [],
+      "Action": {
+        "ExpectedHash": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "Action": "SaveGame",
+        "Slot": 1
+      }
+    },
+    {
+      "Response": {
+        "Action": "ShowMenu",
+        "MessageDetail": "",
+        "Episode": 1,
+        "Skill": 3,
+        "Success": true,
+        "ReturnScreen": 1,
+        "Choice": 0,
+        "MessageTitle": "",
+        "Screen": 0
+      },
+      "Milliseconds": 13.4782,
+      "Generations": [],
+      "Action": {
+        "Screen": 0,
+        "Choice": 0,
+        "Episode": 1,
+        "Action": "ShowMenu",
+        "Skill": 3
+      }
+    },
+    {
+      "Response": {
+        "Action": "NewGame",
+        "MessageDetail": "",
+        "Episode": 1,
+        "Skill": 3,
+        "Success": true,
+        "ReturnScreen": 1,
+        "Choice": 0,
+        "MessageTitle": "",
+        "Screen": 0
+      },
+      "Milliseconds": 1341.095,
+      "Generations": [
+        {
+          "Episode": 1,
+          "AssetSha256": "5FF80356FE73DE9FD12BA6D24FEB7CF3B4175615993335B53872509672693CB2",
+          "Generation": 2,
+          "Map": 1
+        }
+      ],
+      "Action": {
+        "Skill": 3,
+        "Episode": 1,
+        "Action": "NewGame",
+        "Map": 1
+      }
+    },
+    {
+      "Response": {
+        "Action": "LoadGame",
+        "MessageDetail": "",
+        "Episode": 1,
+        "Skill": 3,
+        "Success": true,
+        "ReturnScreen": 1,
+        "Choice": 0,
+        "MessageTitle": "",
+        "Screen": 0
+      },
+      "Milliseconds": 2560.3477,
+      "Generations": [
+        {
+          "Episode": 1,
+          "AssetSha256": "2B7A5428D6406B320E02857242E1372347D302C75847F182D0EAA9DEAEA6BD97",
+          "Generation": 3,
+          "Map": 1
+        }
+      ],
+      "Action": {
+        "AllowSourceMismatch": false,
+        "ExpectedHash": "36D86A07B7675A9DB64426FF6C5603EE3B13BFC17CBB36F9CBD73455969BA80C",
+        "Action": "LoadGame",
+        "Slot": 1
+      }
+    },
+    {
+      "Response": {
+        "Action": "SaveGame",
+        "MessageDetail": "",
+        "Episode": 1,
+        "Skill": 3,
+        "Success": true,
+        "ReturnScreen": 1,
+        "Choice": 0,
+        "MessageTitle": "",
+        "Screen": 0
+      },
+      "Milliseconds": 1299.4511,
+      "Generations": [],
+      "Action": {
+        "ExpectedHash": "36D86A07B7675A9DB64426FF6C5603EE3B13BFC17CBB36F9CBD73455969BA80C",
+        "Action": "SaveGame",
+        "Slot": 1
+      }
+    },
+    {
+      "Response": {
+        "Action": "LoadGame",
+        "MessageDetail": "",
+        "Episode": 1,
+        "Skill": 3,
+        "Success": true,
+        "ReturnScreen": 1,
+        "Choice": 0,
+        "MessageTitle": "",
+        "Screen": 0
+      },
+      "Milliseconds": 2345.8521,
+      "Generations": [
+        {
+          "Episode": 1,
+          "AssetSha256": "2B7A5428D6406B320E02857242E1372347D302C75847F182D0EAA9DEAEA6BD97",
+          "Generation": 4,
+          "Map": 1
+        }
+      ],
+      "Action": {
+        "Action": "LoadGame",
+        "SaveHash": "36D86A07B7675A9DB64426FF6C5603EE3B13BFC17CBB36F9CBD73455969BA80C"
+      }
+    }
+  ],
+  "HarnessSha256": "19DC81FDFEEF33095D72BDE98986F661839834A40176C24E194409B310893C08",
+  "MusicCatalogSha256": "0E9C9542C75F4D5E2D7FC71E42FAFBB58F94321C3B8A49BA0C9AC5A93752EE58",
+  "Checks": [
+    {
+      "Name": "Empty slot saves and resumes without changing the command index",
+      "Passed": true
+    },
+    {
+      "Name": "Stale load selection shows a recoverable error",
+      "Passed": true
+    },
+    {
+      "Name": "Rejected load leaves current numeric game snapshot intact",
+      "Passed": true
+    },
+    {
+      "Name": "Stale save confirmation preserves the prior slot",
+      "Passed": true
+    },
+    {
+      "Name": "Requested episode installs generation two",
+      "Passed": true
+    },
+    {
+      "Name": "Slot load restores E1M1 at the monotonic input boundary",
+      "Passed": true
+    },
+    {
+      "Name": "Loaded numeric state equals the earlier saved state",
+      "Passed": true
+    },
+    {
+      "Name": "Load archives the exact selected bytes for replay",
+      "Passed": true
+    },
+    {
+      "Name": "Confirmed replacement creates a changed save",
+      "Passed": true
+    },
+    {
+      "Name": "Replacement retains exact previous save as backup",
+      "Passed": true
+    },
+    {
+      "Name": "Replay load restores the old state after slot overwrite",
+      "Passed": true
+    },
+    {
+      "Name": "Replay load does not modify the slot",
+      "Passed": true
+    },
+    {
+      "Name": "Audio device survives save/load/new-game and closes",
+      "Passed": true
+    },
+    {
+      "Name": "New game and both successful loads reset audio epochs",
+      "Passed": true
+    },
+    {
+      "Name": "Qualified music is consumed and closes across session operations",
+      "Passed": true
+    }
+  ]
+}

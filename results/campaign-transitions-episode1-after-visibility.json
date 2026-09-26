@@ -1,0 +1,396 @@
+{
+  "Sources": [
+    {
+      "Path": "src/ManagedDoom/Doom/Game/DoomGame.sb.ps1",
+      "Sha256": "EC3189377645405DF30D1E37841B0CAA7FA862B66BD54523DBEF68E83F895CAE"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Intermission/Finale.sb.ps1",
+      "Sha256": "DEF9697137CA6CADD3279146B3F5BD6DE8FEBBC45075E59C2FE9F621682FC6E3"
+    }
+  ],
+  "Failures": 0,
+  "Checks": [
+    {
+      "Actual": 2,
+      "Expected": 2,
+      "Name": "E1M1 normal destination",
+      "Passed": true
+    },
+    {
+      "Actual": 3,
+      "Expected": 3,
+      "Name": "E1M2 normal destination",
+      "Passed": true
+    },
+    {
+      "Actual": 4,
+      "Expected": 4,
+      "Name": "E1M3 normal destination",
+      "Passed": true
+    },
+    {
+      "Actual": 5,
+      "Expected": 5,
+      "Name": "E1M4 normal destination",
+      "Passed": true
+    },
+    {
+      "Actual": 6,
+      "Expected": 6,
+      "Name": "E1M5 normal destination",
+      "Passed": true
+    },
+    {
+      "Actual": 7,
+      "Expected": 7,
+      "Name": "E1M6 normal destination",
+      "Passed": true
+    },
+    {
+      "Actual": 8,
+      "Expected": 8,
+      "Name": "E1M7 normal destination",
+      "Passed": true
+    },
+    {
+      "Actual": 4,
+      "Expected": 4,
+      "Name": "E1M9 normal destination",
+      "Passed": true
+    },
+    {
+      "Actual": 9,
+      "Expected": 9,
+      "Name": "Episode 1 secret destination",
+      "Passed": true
+    },
+    {
+      "Actual": "Finale",
+      "Expected": "Finale",
+      "Name": "Episode 1 completion state",
+      "Passed": true
+    },
+    {
+      "Actual": "FLOOR4_8",
+      "Expected": "FLOOR4_8",
+      "Name": "Episode 1 finale flat",
+      "Passed": true
+    },
+    {
+      "Actual": "Once you beat the big badasses and\nclean out the moon base you're supposed\nto win, aren't you? Aren't you? Where's\nyour fat reward and ticket home? What\nthe hell is this? It's not supposed to\nend this way!\n\nIt stinks like rotten meat, but looks\nlike the lost Deimos base.  Looks like\nyou're stuck on The Shores of Hell.\nThe only way out is through.\n\nTo continue the DOOM experience, play\nThe Shores of Hell and its amazing\nsequel, Inferno!",
+      "Expected": "Once you beat the big badasses and\nclean out the moon base you're supposed\nto win, aren't you? Aren't you? Where's\nyour fat reward and ticket home? What\nthe hell is this? It's not supposed to\nend this way!\n\nIt stinks like rotten meat, but looks\nlike the lost Deimos base.  Looks like\nyou're stuck on The Shores of Hell.\nThe only way out is through.\n\nTo continue the DOOM experience, play\nThe Shores of Hell and its amazing\nsequel, Inferno!",
+      "Name": "Episode 1 finale text",
+      "Passed": true
+    },
+    {
+      "Actual": 2,
+      "Expected": 2,
+      "Name": "E2M1 normal destination",
+      "Passed": true
+    },
+    {
+      "Actual": 3,
+      "Expected": 3,
+      "Name": "E2M2 normal destination",
+      "Passed": true
+    },
+    {
+      "Actual": 4,
+      "Expected": 4,
+      "Name": "E2M3 normal destination",
+      "Passed": true
+    },
+    {
+      "Actual": 5,
+      "Expected": 5,
+      "Name": "E2M4 normal destination",
+      "Passed": true
+    },
+    {
+      "Actual": 6,
+      "Expected": 6,
+      "Name": "E2M5 normal destination",
+      "Passed": true
+    },
+    {
+      "Actual": 7,
+      "Expected": 7,
+      "Name": "E2M6 normal destination",
+      "Passed": true
+    },
+    {
+      "Actual": 8,
+      "Expected": 8,
+      "Name": "E2M7 normal destination",
+      "Passed": true
+    },
+    {
+      "Actual": 6,
+      "Expected": 6,
+      "Name": "E2M9 normal destination",
+      "Passed": true
+    },
+    {
+      "Actual": 9,
+      "Expected": 9,
+      "Name": "Episode 2 secret destination",
+      "Passed": true
+    },
+    {
+      "Actual": "Finale",
+      "Expected": "Finale",
+      "Name": "Episode 2 completion state",
+      "Passed": true
+    },
+    {
+      "Actual": "SFLR6_1",
+      "Expected": "SFLR6_1",
+      "Name": "Episode 2 finale flat",
+      "Passed": true
+    },
+    {
+      "Actual": "You've done it! The hideous cyber-\ndemon lord that ruled the lost Deimos\nmoon base has been slain and you\nare triumphant! But ... where are\nyou? You clamber to the edge of the\nmoon and look down to see the awful\ntruth.\n\nDeimos floats above Hell itself!\nYou've never heard of anyone escaping\nfrom Hell, but you'll make the bastards\nsorry they ever heard of you! Quickly,\nyou rappel down to  the surface of\nHell.\n\nNow, it's on to the final chapter of\nDOOM! -- Inferno.",
+      "Expected": "You've done it! The hideous cyber-\ndemon lord that ruled the lost Deimos\nmoon base has been slain and you\nare triumphant! But ... where are\nyou? You clamber to the edge of the\nmoon and look down to see the awful\ntruth.\n\nDeimos floats above Hell itself!\nYou've never heard of anyone escaping\nfrom Hell, but you'll make the bastards\nsorry they ever heard of you! Quickly,\nyou rappel down to  the surface of\nHell.\n\nNow, it's on to the final chapter of\nDOOM! -- Inferno.",
+      "Name": "Episode 2 finale text",
+      "Passed": true
+    },
+    {
+      "Actual": 2,
+      "Expected": 2,
+      "Name": "E3M1 normal destination",
+      "Passed": true
+    },
+    {
+      "Actual": 3,
+      "Expected": 3,
+      "Name": "E3M2 normal destination",
+      "Passed": true
+    },
+    {
+      "Actual": 4,
+      "Expected": 4,
+      "Name": "E3M3 normal destination",
+      "Passed": true
+    },
+    {
+      "Actual": 5,
+      "Expected": 5,
+      "Name": "E3M4 normal destination",
+      "Passed": true
+    },
+    {
+      "Actual": 6,
+      "Expected": 6,
+      "Name": "E3M5 normal destination",
+      "Passed": true
+    },
+    {
+      "Actual": 7,
+      "Expected": 7,
+      "Name": "E3M6 normal destination",
+      "Passed": true
+    },
+    {
+      "Actual": 8,
+      "Expected": 8,
+      "Name": "E3M7 normal destination",
+      "Passed": true
+    },
+    {
+      "Actual": 7,
+      "Expected": 7,
+      "Name": "E3M9 normal destination",
+      "Passed": true
+    },
+    {
+      "Actual": 9,
+      "Expected": 9,
+      "Name": "Episode 3 secret destination",
+      "Passed": true
+    },
+    {
+      "Actual": "Finale",
+      "Expected": "Finale",
+      "Name": "Episode 3 completion state",
+      "Passed": true
+    },
+    {
+      "Actual": "MFLR8_4",
+      "Expected": "MFLR8_4",
+      "Name": "Episode 3 finale flat",
+      "Passed": true
+    },
+    {
+      "Actual": "The loathsome spiderdemon that\nmasterminded the invasion of the moon\nbases and caused so much death has had\nits ass kicked for all time.\n\nA hidden doorway opens and you enter.\nYou've proven too tough for Hell to\ncontain, and now Hell at last plays\nfair -- for you emerge from the door\nto see the green fields of Earth!\nHome at last.\n\nYou wonder what's been happening on\nEarth while you were battling evil\nunleashed. It's good that no Hell-\nspawn could have come through that\ndoor with you ...",
+      "Expected": "The loathsome spiderdemon that\nmasterminded the invasion of the moon\nbases and caused so much death has had\nits ass kicked for all time.\n\nA hidden doorway opens and you enter.\nYou've proven too tough for Hell to\ncontain, and now Hell at last plays\nfair -- for you emerge from the door\nto see the green fields of Earth!\nHome at last.\n\nYou wonder what's been happening on\nEarth while you were battling evil\nunleashed. It's good that no Hell-\nspawn could have come through that\ndoor with you ...",
+      "Name": "Episode 3 finale text",
+      "Passed": true
+    },
+    {
+      "Actual": 2,
+      "Expected": 2,
+      "Name": "E4M1 normal destination",
+      "Passed": true
+    },
+    {
+      "Actual": 3,
+      "Expected": 3,
+      "Name": "E4M2 normal destination",
+      "Passed": true
+    },
+    {
+      "Actual": 4,
+      "Expected": 4,
+      "Name": "E4M3 normal destination",
+      "Passed": true
+    },
+    {
+      "Actual": 5,
+      "Expected": 5,
+      "Name": "E4M4 normal destination",
+      "Passed": true
+    },
+    {
+      "Actual": 6,
+      "Expected": 6,
+      "Name": "E4M5 normal destination",
+      "Passed": true
+    },
+    {
+      "Actual": 7,
+      "Expected": 7,
+      "Name": "E4M6 normal destination",
+      "Passed": true
+    },
+    {
+      "Actual": 8,
+      "Expected": 8,
+      "Name": "E4M7 normal destination",
+      "Passed": true
+    },
+    {
+      "Actual": 3,
+      "Expected": 3,
+      "Name": "E4M9 normal destination",
+      "Passed": true
+    },
+    {
+      "Actual": 9,
+      "Expected": 9,
+      "Name": "Episode 4 secret destination",
+      "Passed": true
+    },
+    {
+      "Actual": "Finale",
+      "Expected": "Finale",
+      "Name": "Episode 4 completion state",
+      "Passed": true
+    },
+    {
+      "Actual": "MFLR8_3",
+      "Expected": "MFLR8_3",
+      "Name": "Episode 4 finale flat",
+      "Passed": true
+    },
+    {
+      "Actual": "the spider mastermind must have sent forth\nits legions of hellspawn before your\nfinal confrontation with that terrible\nbeast from hell.  but you stepped forward\nand brought forth eternal damnation and\nsuffering upon the horde as a true hero\nwould in the face of something so evil.\n\nbesides, someone was gonna pay for what\nhappened to daisy, your pet rabbit.\n\nbut now, you see spread before you more\npotential pain and gibbitude as a nation\nof demons run amok among our cities.\n\nnext stop, hell on earth!",
+      "Expected": "the spider mastermind must have sent forth\nits legions of hellspawn before your\nfinal confrontation with that terrible\nbeast from hell.  but you stepped forward\nand brought forth eternal damnation and\nsuffering upon the horde as a true hero\nwould in the face of something so evil.\n\nbesides, someone was gonna pay for what\nhappened to daisy, your pet rabbit.\n\nbut now, you see spread before you more\npotential pain and gibbitude as a nation\nof demons run amok among our cities.\n\nnext stop, hell on earth!",
+      "Name": "Episode 4 finale text",
+      "Passed": true
+    },
+    {
+      "Actual": 1050,
+      "Expected": 1050,
+      "Name": "E1M1 par is 30 seconds in tics",
+      "Passed": true
+    },
+    {
+      "Actual": false,
+      "Expected": false,
+      "Name": "Exit clears keys",
+      "Passed": true
+    },
+    {
+      "Actual": [
+        "Level",
+        1,
+        2
+      ],
+      "Expected": [
+        "Level",
+        1,
+        2
+      ],
+      "Name": "Intermission advances to E1M2",
+      "Passed": true
+    },
+    {
+      "Actual": false,
+      "Expected": false,
+      "Name": "Map transition creates a fresh world",
+      "Passed": true
+    },
+    {
+      "Actual": [
+        73,
+        42,
+        37,
+        true,
+        11
+      ],
+      "Expected": [
+        73,
+        42,
+        37,
+        true,
+        11
+      ],
+      "Name": "Health armor weapons ammo carry over",
+      "Passed": true
+    },
+    {
+      "Actual": true,
+      "Expected": true,
+      "Name": "Intermission retains prior secret visit",
+      "Passed": true
+    },
+    {
+      "Actual": "Dead",
+      "Expected": "Dead",
+      "Name": "Lethal damage sets dead state",
+      "Passed": true
+    },
+    {
+      "Actual": [
+        "Level",
+        1,
+        false
+      ],
+      "Expected": [
+        "Level",
+        1,
+        false
+      ],
+      "Name": "Use after death recreates the current level",
+      "Passed": true
+    },
+    {
+      "Actual": [
+        100,
+        50,
+        false
+      ],
+      "Expected": [
+        100,
+        50,
+        false
+      ],
+      "Name": "Respawn restores health and pistol ammunition",
+      "Passed": true
+    }
+  ],
+  "FinishedUtc": "2026-09-26T18:29:07.8965096Z",
+  "Meaning": "Isolated controller/routing/finale fixtures plus real intermission input advancement and E1M2 world creation. Direct exit and inventory setup are test fixtures, not map playthrough evidence.",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F"
+}

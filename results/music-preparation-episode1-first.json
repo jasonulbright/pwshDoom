@@ -1,0 +1,152 @@
+{
+  "Published": true,
+  "Catalog": "C:\\projects\\pwshDoom\\local\\music-prepared-episode1.json",
+  "SoundFontSha256": "82475B91A76DE15CB28A104707D3247BA932E228BADA3F47BBA63C6B31AAF7A1",
+  "Seconds": 2032.3180303,
+  "Error": null,
+  "Meaning": "Finite sequential preparation of exactly the requested dry looping tracks. Existing/resumed tracks undergo source/runtime/complete payload and IWAD/SF2 identity checks. Catalog published only after all requests pass. Successful per-track reports survive failed/interrupted batches for explicit same-directory resume. No one-shot, full soundtrack, fidelity, live deadline or campaign completion claim.",
+  "RequestedTracks": [
+    "D_E1M1",
+    "D_INTER",
+    "D_E1M2",
+    "D_E1M3",
+    "D_E1M4",
+    "D_E1M5",
+    "D_E1M9",
+    "D_E1M6",
+    "D_E1M7",
+    "D_E1M8",
+    "D_VICTOR"
+  ],
+  "Sources": [
+    {
+      "Sha256": "CF581D4476F6C1DC990359CE23773A717D4FA65F21FF6A03914517540FCD439C",
+      "Path": "scripts/Prepare-DoomMusic.ps1"
+    },
+    {
+      "Sha256": "557C8BAFA2A234B9A1C816A37EB3F17D9D68DCCDC1FC02B69D60C8FDC290F7AB",
+      "Path": "scripts/Render-MusicScore.ps1"
+    },
+    {
+      "Sha256": "AEFD57579580D18A55FA7E43EFD2C48B002B18786C1C4B8BAE62FE541B2FB4A9",
+      "Path": "scripts/Qualify-MusicLoop.ps1"
+    },
+    {
+      "Sha256": "AD69EA0A78EA942C10BCC7433EE7DD1B06BAE98376816B589ED0CA0802CBB7CD",
+      "Path": "src/MusicLoopReader.ps1"
+    },
+    {
+      "Sha256": "66B87D1CDD3FAD62E493A0C50C9A5AEBFE27167C8CCCCA974CC80463B6D1BB33",
+      "Path": "src/MusScore.ps1"
+    },
+    {
+      "Sha256": "AF80287762169B5318F60FD719479137BAED1D3EEF39561513D2B34AC118A855",
+      "Path": "src/SoundFontBank.ps1"
+    },
+    {
+      "Sha256": "9D409332EB51B5B6FCBC4B259E0C5E243E561A3C0D6AD2040A772F46539B9D8E",
+      "Path": "src/SoundFontRegions.ps1"
+    },
+    {
+      "Sha256": "1D7911DC5CD2004D6DBBF27ECF43FFD652FAC8E4813943D9F8CFD5116332417B",
+      "Path": "src/MusicOscillator.ps1"
+    },
+    {
+      "Sha256": "30CC10D9118335FEC1C57653871B236B020FDBBA2D4103F89BA8EA672F1AF5D9",
+      "Path": "src/MusicControls.ps1"
+    },
+    {
+      "Sha256": "3CCA7492A9F809EB8D54C8BF7D3D9847A1EC29D5E8ED6923F72ECA7803A50B48",
+      "Path": "src/MusicSynth.ps1"
+    },
+    {
+      "Sha256": "6EA293142AD9A61661244DC5910CE264ACEE6E8A0CECE75F668CC55AC5A6E5DD",
+      "Path": "src/MusicGroup.ps1"
+    },
+    {
+      "Sha256": "9183717AE1384F2BEF103885A20AECF0EA66F6A8A80FFC311040C28E14155F7F",
+      "Path": "src/MusicLoopState.ps1"
+    }
+  ],
+  "Tracks": [
+    {
+      "Report": "C:\\projects\\pwshDoom\\results\\music-loop-e1m1-hour-bound.json",
+      "Track": "D_E1M1",
+      "Action": "VerifiedExistingCatalog",
+      "MusSha256": "8F4673A3210C9FAFFE7B654F0B8F604A193398809545D9561E142704820035BF",
+      "ReportSha256": "1D5A9D6D16E8CDCA74646D6AEF009CDB42EB59B87941B0EFE648F9D3A98C96CF"
+    },
+    {
+      "Report": "C:\\projects\\pwshDoom\\results\\music-loop-inter-first.json",
+      "Track": "D_INTER",
+      "Action": "VerifiedExistingCatalog",
+      "MusSha256": "F14E4C026C5BF73737E3DAC959747F626A67AF4E02FD4359B0E32D3EAD7CA639",
+      "ReportSha256": "084536988F462CD7C6718665FA53DCD6BB1009B3FCBCDD4556C50D51AC1B1778"
+    },
+    {
+      "Report": "C:\\projects\\pwshDoom\\results\\music-loop-e1m2-first.json",
+      "Track": "D_E1M2",
+      "Action": "VerifiedExistingCatalog",
+      "MusSha256": "E684FEE5BECB2A4738CE1AA37C3ECC415A670F786A069B31AD7D18F33CA74ADD",
+      "ReportSha256": "B2EBA683C99C515DE356A3D9E8E77824D775F59695F7CC14EC9F4D88B2D75518"
+    },
+    {
+      "Report": "C:\\projects\\pwshDoom\\results\\music-loop-e1m3-prepared.json",
+      "Track": "D_E1M3",
+      "Action": "VerifiedExistingCatalog",
+      "MusSha256": "D9466D9A81720108565A4F3ED8785F5A2AC1DFEFED027CF738E82372678E75B5",
+      "ReportSha256": "DF75B2743048D05106F500317127BA462D2A2BB3F0EE1A63D9CA1E3D0F1697B2"
+    },
+    {
+      "Report": "C:\\projects\\pwshDoom\\local\\music-preparation-e1m3\\D_E1M4\\qualified.json",
+      "Track": "D_E1M4",
+      "Action": "VerifiedExistingCatalog",
+      "MusSha256": "4CE28929EE92EE8301D024D8048D125E3AE8F773AD24A992165310835B473924",
+      "ReportSha256": "24CD95F078930A352DF57C5E609D75C587D9F156786EBC7AABBDE64C7BA9630C"
+    },
+    {
+      "Report": "C:\\projects\\pwshDoom\\local\\music-preparation-e1m5\\D_E1M5\\qualified.json",
+      "Track": "D_E1M5",
+      "Action": "VerifiedExistingCatalog",
+      "MusSha256": "181A0D51F355907044C5547F5B9237FAC6BD5A9FDD943FE431278B52A9C78910",
+      "ReportSha256": "97A289967303C2A9343BC84AEA3D08D4E05759976BCDA25954A2ED865D94F2DB"
+    },
+    {
+      "Report": "C:\\projects\\pwshDoom\\local\\music-preparation-e1m3\\D_E1M9\\qualified.json",
+      "Track": "D_E1M9",
+      "Action": "VerifiedExistingCatalog",
+      "MusSha256": "B1F950A70BAD49D504E5B41884CEC05B4A9A88B5D88834B3872D19B737D1A665",
+      "ReportSha256": "6FE2388CEF624DC5B70F62A0DB73D4D7433280898B16FD29AB67779BE23F6F92"
+    },
+    {
+      "Report": "C:\\projects\\pwshDoom\\local\\music-preparation-episode1\\D_E1M6\\qualified.json",
+      "Track": "D_E1M6",
+      "Action": "VerifiedPreviousPreparation",
+      "MusSha256": "2896BB2797CEF53DBB9949986E5A44061378B5D26B8A00CD2490690329573FD2",
+      "ReportSha256": "4888C222F5ABFB5AC0992CA9329E01CA79042D4A13327523BD4BC68C1B612989"
+    },
+    {
+      "Report": "C:\\projects\\pwshDoom\\local\\music-preparation-episode1\\D_E1M7\\qualified.json",
+      "Track": "D_E1M7",
+      "Action": "VerifiedPreviousPreparation",
+      "MusSha256": "F369257FB8BF77288E2AB3FD345739F06F01D1D42A836BE8A7509A04A0C51852",
+      "ReportSha256": "2C0DEBC273BBBD7F9B63AA88E062C39DBA0AF17D91731F313ECB6C69752FAA41"
+    },
+    {
+      "Report": "C:\\projects\\pwshDoom\\local\\music-preparation-episode1\\D_E1M8\\qualified.json",
+      "Track": "D_E1M8",
+      "Action": "VerifiedPreviousPreparation",
+      "MusSha256": "3118717CB94F58364199E838B2FDFC567023758CEFE1B7F31E2A554920ECB1E7",
+      "ReportSha256": "F4C079000EC9267066940ED33C8E07FFB4A8FFE7A555AC5F9FC827BD3EA4B09E"
+    },
+    {
+      "Report": "C:\\projects\\pwshDoom\\local\\music-preparation-episode1\\D_VICTOR\\qualified.json",
+      "Track": "D_VICTOR",
+      "Action": "PreparedAndQualified",
+      "MusSha256": "B930495456CDA263FF7E883456E602C9171EC9468EAB4970F1DABAE998971613",
+      "ReportSha256": "0E57B8C583690AEB3E09625278311837784D6F8E70ACDC79D5ACF058A0D8A4F5"
+    }
+  ],
+  "CatalogSha256": "0E9C9542C75F4D5E2D7FC71E42FAFBB58F94321C3B8A49BA0C9AC5A93752EE58",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F"
+}

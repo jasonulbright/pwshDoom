@@ -1,6 +1,6 @@
 # Qualified music in the audio worker and game host
 
-Music can now run through the persistent audio worker alongside effects using an explicitly supplied catalog of qualified tracks. E1M1, E1M2, intermission and E1M3 now have qualified real loops. This is opt-in integration, not a complete soundtrack release. The normal `-Sound` path remains effects-only. The established [campaign transition route](campaign-music.md) now passes with music in recorded Matrix/color-art runs, while queue starvation remains under investigation.
+Music can run through the persistent audio worker alongside effects using an explicitly supplied catalog of qualified tracks. The full eleven-track Episode 1 looping catalog now covers E1M1–E1M9, intermissions and the finale. Its actual simulation/audio worker passes 15 save/load/new-game checks on the installed IWAD, returns 97,020 music frames and closes the device cleanly. This remains opt-in integration, not a complete soundtrack release. The normal `-Sound` path remains effects-only. The established [campaign transition route](campaign-music.md) also passes in recorded Matrix/color-art runs, while long-session queue starvation and pacing remain under investigation.
 
 ## Catalog and commands
 
@@ -22,7 +22,7 @@ The reader caches one decoded page per opened track as it is used, at most 25,20
 
 An initial adapter used a backing property named `Volume`. In this PowerShell class, the generated property accessor bypassed the intended `set_Volume` method: diagnostic calls left the value at -5 and emitted no commands. The first two failed reports are retained. Renaming the backing field to `StoredVolume` fixes method dispatch; full-volume gain is also calculated as `.2 * (volume / 15)` to preserve the exact default .2 endpoint. Eleven adapter/catalog checks pass, including actual world initialization, destructive event draining, clamp/gain commands, Ultimate Doom finale-stage selection and active-IWAD identity rejection.
 
-One-shot opening music and Doom II finale restoration remain unqualified. Non-E1M1 selection tests verify callback routing only, not playback of those tracks. The incomplete catalog must be expanded before a normal campaign can run with music enabled throughout.
+One-shot opening music and Doom II finale restoration remain unqualified. Non-E1M1 selection tests verify callback routing only, not playback of those tracks. The current Episode 1 catalog supports its complete playthrough when passed explicitly; uninterrupted full-campaign audio and an audible review of every track still need qualification.
 
 ## Evidence so far
 
