@@ -30,7 +30,7 @@ One-shot opening music and Doom II finale restoration remain unqualified. Non-E1
 - Ten actual audio-worker checks pass. The fixture plays four seconds of submitted audio, starting near E1M1's 96-second boundary, with a quiet synthetic effect, packet/shared pauses, separate music gain, master mute, a future epoch packet, stop and restart. Every submitted PCM byte matches an independently scheduled offline result. All 140 packets and 176,400 submitted frames are accounted for; 161,280 music frames advance, including muted music. Device reset can cancel queued tails, so submitted PCM is not acoustic waveform evidence.
 - The existing six-check effects-only runspace test passes with the expanded worker.
 - A six-second headless Matrix host run completes without error. Its final simulation report records 209 tics/audio packets, all 263,340 submitted frames returned, and one initial E1M1 start. The host's earlier final snapshot reports 206 tics; these counters have different observation boundaries. Music and renderer workers execute concurrently, but this short run does not qualify sustained performance. Its maximum observed mix block is 54.041 ms; the single recorded starvation observation is after the final packet, during shutdown.
-- Fifteen actual save-worker checks pass with the E1M1 catalog and same-episode new game, including failed-save/load isolation, numeric save restoration, immutable replay archives, three epoch resets, music consumption and clean closure. This explicitly uses episode one because other music tracks are not yet qualified; the existing default test still switches to episode two for effects-only runs.
+- Fifteen actual save-worker checks pass with the complete eleven-track Episode 1 catalog and same-episode new game, including failed-save/load isolation, numeric save restoration, immutable replay archives, three epoch resets, 97,020 consumed music frames and clean device closure. The fixture stays in Episode 1, which is the full scope of this prepared catalog.
 
 Actual device tests exercise Windows `waveOut`. No microphone or desktop loopback is captured by those tests. Subsequent process-scoped [audiovisual recordings](audiovisual-recording.md) now cover all three styles. Acoustic latency, playback under longer game/render load and complete track availability remain open.
 
@@ -40,9 +40,9 @@ Original footage is `local/recordings/music-matrix-first.mp4`, SHA-256 `69E7B38F
 
 Byte-identical copies of the full live game report and recorder metadata are backed up as `results/music-live-game.json` and `results/music-live-capture.json`. Video/audio assets remain local; these portable measurements and hashes are included in Git.
 
-`music-integration-validation-final.json` passes 51 evidence checks covering targeted device/catalog/callback/save tests, complete independent worker PCM, host frame accounting, recorded window selection, media hashes, explicit silent-video labeling, current source checks and parses. All finite study processes and owned file/device handles close. This establishes E1M1 integration, not a complete soundtrack or campaign release.
+`music-integration-validation-final.json` passes 51 evidence checks covering targeted device/catalog/callback/save tests, complete independent worker PCM, host frame accounting, recorded window selection, media hashes, explicit silent-video labeling, current source checks and parses. All finite study processes and owned file/device handles close. Together with the later full-catalog worker run above, this establishes bounded Episode 1 audio integration, not uninterrupted campaign playback or the complete Ultimate Doom soundtrack.
 
-## Run the current E1M1 integration
+## Reproduce the original E1M1 integration fixture
 
 Create a local JSON catalog mapping `D_E1M1` to the absolute path of `results/music-loop-e1m1-hour-bound.json`. This is the current requalification after extending finite synthesis bounds; the original report remains historical. `Test-MusicEvents.ps1` uses a separate test catalog so it does not overwrite the playback catalog. Then:
 
@@ -50,7 +50,7 @@ Create a local JSON catalog mapping `D_E1M1` to the absolute path of `results/mu
 ./Start-Doom.ps1 -Style Matrix -MusicCatalog ./local/music-catalog-e1m1.json
 ```
 
-Supplying a catalog enables sound playback automatically. It does not prepare missing tracks, and leaving E1M1 will require the destination/intermission qualifications. Use ordinary `-Sound` for a session that should retain effects-only behavior while the soundtrack is completed.
+Supplying a catalog enables sound playback automatically; it does not prepare missing tracks. The current eleven-track Episode 1 catalog is described in [music preparation](music-preparation.md) and is passed by the full human-playthrough command in [episode1-playtest.md](episode1-playtest.md). `Play.ps1 -Check` verifies the catalog path only; audio startup and the actual worker perform content and IWAD checks. Use ordinary `-Sound` without `-MusicCatalog` for effects-only playback.
 
 `Record-DoomReplay.ps1` forwards the catalog and records its hash. Its window targeting excludes every preexisting visible Terminal window and selects the newly created `pwshDoom` window. Existing Terminal windows can remain open. The optional `-CaptureAudio` path now gates startup, captures the simulation process tree and places audio using the original WGC QPC clock; see the [recording recipe and evidence](audiovisual-recording.md). Earlier silent recordings remain labeled as such.
 

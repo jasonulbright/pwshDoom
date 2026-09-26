@@ -56,7 +56,7 @@ The integrated host also loads an intermission save, advances to E1M2, then load
 The next user milestone is a single HMP human playthrough from E1M1 through
 the Episode 1 finale, including E1M3's secret exit to E1M9 and the return to
 E1M4. Do not split this into per-map user tests. The exact scope, launch
-command, IWAD and sound-effects prerequisites, controls, and reporting
+command, IWAD and qualified music prerequisites, controls, and reporting
 instructions are in [episode1-playtest.md](episode1-playtest.md). The user
 result will be entered there only after it is reported.
 
@@ -64,15 +64,18 @@ Current focused readiness evidence uses the same Ultimate Doom IWAD hash
 `6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F`:
 
 [Episode 1 playtest readiness summary](../results/episode1-playtest-readiness.json)
-combines the passing receipts below and explicitly leaves the human route and
-physical keyboard input pending.
+uses source baseline `9b5a7b45f9b5d299f8f1bbebc866abc84eee30a4`, links the
+current checks below, and explicitly leaves the human route and physical
+keyboard input pending.
 
-- [Episode 1 smoke](../results/episode1-playtest-smoke.json): E1M1–E1M9,
-  35 idle tics and two 320x200 rasterizations per map; 9/9 passed. This is
-  loading/rendering smoke, not map completion.
-- [Transition fixtures](../results/episode1-transition-readiness.json):
-  57/57 checks, including normal episode progression, E1 secret destination
-  E1M9, E1M9 return to E1M4, and Episode 1 finale flat/text.
+- [Visibility fix and route regressions](../results/visibility-campaign-regressions.json):
+  two intercept checks, the original E1M1–E1M4 stored route replays, and a
+  fresh E1M1–E1M9 smoke. All nine maps load, run 35 idle tics, and render two
+  320x200 frames. Routes and smoke remain separate from human coverage.
+- [Transition fixtures](../results/campaign-transitions-episode1-after-visibility.json):
+  57/57 checks after the source correction, including normal-map destinations,
+  E1 secret destinations and history, finale states, inventory carry-over,
+  and death/respawn behavior.
 - [Boss progression fixtures](../results/episode1-boss-readiness.json):
   97/97 checks, including E1M8's tag-666 floor opening. Explicit boss-state
   fixtures are not an ordinary combat victory.
@@ -81,9 +84,16 @@ physical keyboard input pending.
 - [Synthetic keyboard-state checks](../results/episode1-console-input-readiness.txt):
   six checks passed. They do not inject desktop input or establish physical
   keyboard usability.
-- [Launcher preflight](../results/episode1-launch-preflight.json): the Steam
-  IWAD, 36 episode maps, PowerShell 7.6.5, and Windows Terminal are detected.
-  It explicitly selects effects-only mode and does not launch the game.
+- [Music preparation](../results/music-preparation-episode1-first.json) qualifies
+  the eleven local Episode 1 loops; D_VICTOR's three-period recurrence and
+  independent reader checks are recorded in adjacent `music-loop-dvictor-*`
+  results. [Actual worker integration](../results/save-worker-episode1-music-after-catalog.json)
+  passes 15 save/load/new-game checks with 97,020 music frames and clean device
+  shutdown. This is not a full-campaign continuity check.
+- [Launcher preflight](../results/episode1-launch-preflight-music.json): the
+  Steam IWAD, 36 episode maps, PowerShell 7.6.5, Windows Terminal and exact
+  catalog path are detected. The separate audio-worker check validates the
+  catalog contents; preflight itself does not launch the game.
 - [Launch parameter binding](../results/episode1-launch-binding.txt): the
   documented source entry point parses and exposes every playtest argument.
 

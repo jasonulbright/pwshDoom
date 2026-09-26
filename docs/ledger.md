@@ -1340,3 +1340,29 @@ with the full catalog enabled. Jason's one complete playthrough is still
 pending. Neither uninterrupted campaign audio nor 35-tic/60-display pacing,
 audible review of every track, vanilla fidelity, or the broader release gates
 is established by these bounded checks.
+
+## 2026-09-26 — Extend renderer comparisons to E1M2 and E1M3
+
+While the full human Episode 1 run remains pending, extend M4 with the existing
+same-endpoint reference harness, not a new route driver. Against the same
+installed IWAD and unchanged engine bundle, compare E1M2 and E1M3 map starts
+after 35 idle updates at headings 0/90/180, then repeat each with fixed
+colormap 16 on both renderers. All four reports use bundle SHA-256
+`61F6C9B2E6CE5B2316A363B81436A241ACEEF2B962B2CB4125596AD9DEA9BAE0`, record
+no source mutation, and produce exact HUD indices.
+
+Baseline scene-index differences per 53,760 pixels are E1M2 13,377 / 19,024 /
+14,238 and E1M3 19,434 / 17,458 / 18,440. With fixed colormap 16 they become
+10,326 / 14,553 / 10,514 and 14,134 / 13,068 / 14,125. The fixed control
+changes palette lookup, so its improvement cannot be attributed mathematically
+to lighting alone. The residual 19.2–27.1% index difference is substantial,
+while mean absolute RGB-channel error is 2.01–3.90 levels. These are static
+map-start views against the adopted PowerShell reference, not ordinary
+gameplay, route, performance, or original-executable evidence. Four raw reports
+and a source/hash index are tracked; PNGs remain under ignored `local/`.
+
+No render algorithm changed. The next M4 code investigation is wall/plane
+texture-coordinate stepping versus the reference's fixed-point per-column
+path, followed by paired images and existing worker-equivalence checks. Keep
+the human playthrough pending as a single user milestone; no map-by-map user
+request or bot route was run.

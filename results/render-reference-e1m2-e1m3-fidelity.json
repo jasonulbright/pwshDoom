@@ -1,0 +1,124 @@
+{
+  "CreatedUtc": "2026-09-26T18:54:24.7528908Z",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "EngineBundleSha256": "61F6C9B2E6CE5B2316A363B81436A241ACEEF2B962B2CB4125596AD9DEA9BAE0",
+  "SourceFiles": [
+    {
+      "Sha256": "C8DA432A5E716E616C194D7004FBF71EDC9F5CBB7B5581B594023B9D91C712A7",
+      "Path": "scripts/Compare-RendererReference.ps1"
+    },
+    {
+      "Sha256": "3A3B56FACC23282F8A937313397891B3447332CF01FEB91707645BDC210D278F",
+      "Path": "src/FastRenderer.ps1"
+    },
+    {
+      "Sha256": "3732C6A81C74F43451CB2A2E4ED342EBE303FC3EEB558B64C3658F78EAACB940",
+      "Path": "src/GameHost.ps1"
+    },
+    {
+      "Sha256": "E9C47D9E4005509206EC13DA08267F95DB3AF7A1E86F14A743F1F27DE145BF9F",
+      "Path": "src/RenderLighting.ps1"
+    }
+  ],
+  "SourcesChangedDuringAnyRun": false,
+  "Maps": [
+    {
+      "Episode": 1,
+      "Map": 2,
+      "Skill": 3,
+      "UpdatesBeforeRender": 35,
+      "Views": [
+        {
+          "AngleDegrees": 0,
+          "ScenePixels": 53760,
+          "BaselineDifferent": 13377,
+          "FixedColorMap16Different": 10326,
+          "BaselinePercent": 24.88,
+          "FixedColorMap16Percent": 19.21,
+          "BaselineMeanAbsoluteRgbChannelError": 2.0075,
+          "FixedColorMap16MeanAbsoluteRgbChannelError": 1.5363,
+          "HudDifferentBaseline": 0,
+          "HudDifferentFixedColorMap16": 0
+        },
+        {
+          "AngleDegrees": 90,
+          "ScenePixels": 53760,
+          "BaselineDifferent": 19024,
+          "FixedColorMap16Different": 14553,
+          "BaselinePercent": 35.39,
+          "FixedColorMap16Percent": 27.07,
+          "BaselineMeanAbsoluteRgbChannelError": 3.8677,
+          "FixedColorMap16MeanAbsoluteRgbChannelError": 2.4309,
+          "HudDifferentBaseline": 0,
+          "HudDifferentFixedColorMap16": 0
+        },
+        {
+          "AngleDegrees": 180,
+          "ScenePixels": 53760,
+          "BaselineDifferent": 14238,
+          "FixedColorMap16Different": 10514,
+          "BaselinePercent": 26.48,
+          "FixedColorMap16Percent": 19.56,
+          "BaselineMeanAbsoluteRgbChannelError": 2.5775,
+          "FixedColorMap16MeanAbsoluteRgbChannelError": 1.6243,
+          "HudDifferentBaseline": 0,
+          "HudDifferentFixedColorMap16": 0
+        }
+      ],
+      "BaselineReport": "results/render-reference-e1m2-fidelity-baseline.json",
+      "BaselineReportSha256": "5AEAB07FC660EFDD17CE58A7C13F420AC1FBDC7DBDBF679041995EB5BBAC8177",
+      "FixedColorMap16Report": "results/render-reference-e1m2-fidelity-fixed16.json",
+      "FixedColorMap16ReportSha256": "A4F411F2D22B0E5A153AF2D765CD028D0398517E0E0DEAE20D476D46906EC0E0"
+    },
+    {
+      "Episode": 1,
+      "Map": 3,
+      "Skill": 3,
+      "UpdatesBeforeRender": 35,
+      "Views": [
+        {
+          "AngleDegrees": 0,
+          "ScenePixels": 53760,
+          "BaselineDifferent": 19434,
+          "FixedColorMap16Different": 14134,
+          "BaselinePercent": 36.15,
+          "FixedColorMap16Percent": 26.29,
+          "BaselineMeanAbsoluteRgbChannelError": 3.6632,
+          "FixedColorMap16MeanAbsoluteRgbChannelError": 2.496,
+          "HudDifferentBaseline": 0,
+          "HudDifferentFixedColorMap16": 0
+        },
+        {
+          "AngleDegrees": 90,
+          "ScenePixels": 53760,
+          "BaselineDifferent": 17458,
+          "FixedColorMap16Different": 13068,
+          "BaselinePercent": 32.47,
+          "FixedColorMap16Percent": 24.31,
+          "BaselineMeanAbsoluteRgbChannelError": 3.9025,
+          "FixedColorMap16MeanAbsoluteRgbChannelError": 2.4657,
+          "HudDifferentBaseline": 0,
+          "HudDifferentFixedColorMap16": 0
+        },
+        {
+          "AngleDegrees": 180,
+          "ScenePixels": 53760,
+          "BaselineDifferent": 18440,
+          "FixedColorMap16Different": 14125,
+          "BaselinePercent": 34.3,
+          "FixedColorMap16Percent": 26.27,
+          "BaselineMeanAbsoluteRgbChannelError": 3.2431,
+          "FixedColorMap16MeanAbsoluteRgbChannelError": 2.5029,
+          "HudDifferentBaseline": 0,
+          "HudDifferentFixedColorMap16": 0
+        }
+      ],
+      "BaselineReport": "results/render-reference-e1m3-fidelity-baseline.json",
+      "BaselineReportSha256": "608965E7F848908A8A19FDBDA28D2E34345316E3ECD5A2666E39389ED0D1678E",
+      "FixedColorMap16Report": "results/render-reference-e1m3-fidelity-fixed16.json",
+      "FixedColorMap16ReportSha256": "3A6323F931E07D2D57E2DCE78DCA0671A1D8E899C1114CDFF74D41DE501F53D8"
+    }
+  ],
+  "Interpretation": "The fixed-colormap control lowers the observed scene index disagreement at both static map-start states, while exact HUD indices are preserved. The control changes palette mapping and therefore does not mathematically attribute a fraction of the error to lighting. Residual error includes projection/texture sampling and remains substantial. The adopted PowerShell reference is not independently validated original-executable output. No route completion or performance claim.",
+  "ImageFilesUnder": "local/render-reference-e1m2-fidelity-baseline/, local/render-reference-e1m2-fidelity-fixed16/, local/render-reference-e1m3-fidelity-baseline/, local/render-reference-e1m3-fidelity-fixed16/"
+}

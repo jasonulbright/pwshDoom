@@ -36,7 +36,7 @@ An intermediate diagnostic (`render-reference-e1m1-hud.json`) observed 171 remai
 
 ## Remaining work
 
-Compare additional real gameplay endpoints, moving sectors, sprites, sky, palettes and invisibility against an independently established reference. Diagnose sampling and lighting differences separately before changing 3D algorithms. Measure full-host pacing after presentation changes. Record the next E1M4-to-E1M5 terminal continuation with the completed seven-track catalog, retaining footage and audio evidence. Campaign completion, sound at the speakers and 35/60 pacing remain separate gates.
+Compare additional real gameplay states, moving sectors, sprites, sky, palettes and invisibility against the adopted reference, while pursuing an independently established original-executable reference. The E1M4-to-E1M5 terminal continuation is already recorded in [campaign E1M4](campaign-e1m4.md). Current fixed-camera E1M2/E1M3 diagnostics are summarized below; they do not replace gameplay, acoustic or 35/60 pacing evidence.
 
 ## Fixed-lighting diagnostic
 
@@ -132,3 +132,16 @@ The [fuzz performance follow-up](fuzz-performance.md) preserves the effect's ind
 ## Palette presentation, September 19
 
 The new [palette path](palette-presentation.md) carries damage, pickup bonus, berserk and radiation-suit selections through gameplay snapshots and indexed automap screens. Classic applies selected PLAYPAL RGB; AnsiArt applies its existing mapping to those colors; Matrix remains green while luminance changes. Full-screen menus deliberately use base colors. Selection/encoding/worker and headless-host checks pass; all three styles now pass the55-check recorded palette fixture. This corrects a missing effect without establishing full projection, gamma or original-executable equivalence.
+
+## Additional Episode 1 static views (2026-09-26)
+
+The same pinned engine bundle and Steam IWAD were compared at E1M2 and E1M3 after 35 idle updates, with the camera fixed at 0, 90 and 180 degrees. This exercises two new map-start scenes, not player navigation, moving sectors or map completion. The HUD is exact at every view. Scene disagreement against the adopted PowerShell reference is:
+
+| Map | Baseline scene differences / 53,760 (0°, 90°, 180°) | Fixed-colormap-16 differences / 53,760 (0°, 90°, 180°) | HUD differences |
+| --- | --- | --- | ---: |
+| E1M2 | 13,377 / 19,024 / 14,238 | 10,326 / 14,553 / 10,514 | 0 |
+| E1M3 | 19,434 / 17,458 / 18,440 | 14,134 / 13,068 / 14,125 | 0 |
+
+The fixed-colormap control reduces index disagreement in both maps, but it changes the palette lookup itself; the reduction cannot be assigned mathematically to lighting alone. It leaves 19.2–27.1% of scene indices different. Mean absolute RGB-channel error is much smaller (2.01–3.90 levels), showing that many changed indices are visually near neighbors without proving exact color or texture sampling. Detailed source pins, raw report hashes and limits are in `results/render-reference-e1m2-e1m3-fidelity.json`; individual reports are `render-reference-e1m{2,3}-fidelity-{baseline,fixed16}.json`. PNG comparisons remain under ignored `local/render-reference-e1m{2,3}-fidelity-*`. The reference is not independently verified original-executable output.
+
+The next code investigation is wall and plane texture-coordinate stepping versus the reference's fixed-point per-column path. Preserve the current implementation until one sampling discrepancy is isolated and a candidate matches the same paired scenes without breaking full render-worker equivalence.
