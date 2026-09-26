@@ -40,4 +40,10 @@ Each image averages about 614–618 kB of encoded bytes. Batch uses a 1 MiB reus
 
 The captures have no reported API discontinuity packets, but all contain a small interior alignment fill, and every run has software queue-empty observations. This does not certify uninterrupted sound at the speakers. The test machine was an active desktop; background workload, focus, CPU scheduling, thermals and compositor behavior were not controlled or independently logged. The observed temporal variation is not assigned a cause. The results do not certify 60 distinct displayed images/sec.
 
+A later [live Classic E1M1 host measurement](performance.md) uses the current
+source and retains separate completion-interval, worker, and terminal-write
+statistics. It likewise lacks monitor-presentation telemetry because the
+installed PresentMon CLI could not start its ETW trace under the current
+account's permissions.
+
 At 60 seconds in each original movie, the reviewed frames show centered Classic gameplay with the HUD and no visible external occlusion. Different startup durations mean those samples are not the same game state and are not pixel-equivalence evidence. The existing large margins and approximately 1600×900 physical image/aspect issue remain. Raw movies, PCM and extracted review PNGs remain in ignored `local/recordings`; portable receipts are backed up in Git.

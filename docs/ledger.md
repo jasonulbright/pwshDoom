@@ -1551,3 +1551,21 @@ post boundaries at changing scales, or original-executable parity. The
 [harness](../scripts/Compare-WeaponPatchVerticalSampling.ps1) and
 [receipt](../results/weapon-projection-vertical-offsets.json) retain its
 source and IWAD hashes.
+
+## 2026-09-26 — Measure a live Classic E1M1 host session
+
+A current-source, 28-second scripted E1M1 run used the normal Windows Terminal
+launcher with 16 workers, sound effects, and the prepared D_E1M1 catalog. It
+advanced 979 simulation tics and completed 1,671 terminal updates (59.67/sec),
+at 34.959 simulation tics/sec. The p95 terminal-completion interval was 23.09
+ms; p95 render-to-write latency was 34.90 ms. This is useful live-host evidence,
+not displayed-FPS or campaign evidence. The mixer closed without a reported
+device error or audio backpressure; one queue-starvation observation occurred
+after packet 978, and no acoustic review was performed.
+
+PresentMon 2.6.0 is installed, but its CLI could not start ETW because the
+account lacks administrative or Performance Log Users access. No security
+settings were changed. The full limitation, exact workload and measurements
+are in [`performance.md`](performance.md) and
+[`live-e1m1-classic-host-20260926.json`](../results/live-e1m1-classic-host-20260926.json);
+the raw host report remains in ignored `local/`.

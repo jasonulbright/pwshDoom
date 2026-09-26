@@ -1,0 +1,179 @@
+{
+  "Format": "pwshDoom.LiveE1M1HostRun",
+  "FinishedUtc": "2026-09-26T22:03:32.9077102Z",
+  "SourceCommit": "db8a68aff843b1993301c67434064e02e8a11c54",
+  "IWadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "MusicCatalogSha256": "0E9C9542C75F4D5E2D7FC71E42FAFBB58F94321C3B8A49BA0C9AC5A93752EE58",
+  "Runtime": "7.6.5",
+  "Sources": [
+    {
+      "Sha256": "132F5C9435B7290A70B1A0FE64EAD25F8EFF103E816D1A0A2614EF749F1E0627",
+      "Path": "Start-Doom.ps1"
+    },
+    {
+      "Sha256": "EAA75B6B236F6481C7C15EF1D2DA82C536B27206FBCD005CB1C67BED305E03C2",
+      "Path": "scripts/Invoke-Doom.ps1"
+    },
+    {
+      "Sha256": "0375B9F911BC59C52BF9DAFFDF6269238E123F55C625C1D6FA5E3BE0D76834AB",
+      "Path": "scripts/Invoke-SimulationWorker.ps1"
+    },
+    {
+      "Sha256": "DF656735B564B0F27DC1628AFE78C6F8A2899C1A37F60FB1872CCBE69DF42112",
+      "Path": "scripts/Invoke-AudioWorker.ps1"
+    },
+    {
+      "Sha256": "FAEFD8FC305FFEEC5C4F2CDCF9CC8CDAE0B375111682A11E4C2FCDA579F76FE9",
+      "Path": "scripts/Invoke-GameRenderWorker.ps1"
+    },
+    {
+      "Sha256": "E9CC3FF4728AD1DD55FC814D335F53DCFB33AF3DA5386C2F11C1522775F3FDED",
+      "Path": "scripts/Build-EngineBundle.ps1"
+    },
+    {
+      "Sha256": "4F05E03458F6936EB8904A5ABCF5307B7DE930672733CE07CECE1E0D7D7416C4",
+      "Path": "src/FastRenderer.ps1"
+    },
+    {
+      "Sha256": "3732C6A81C74F43451CB2A2E4ED342EBE303FC3EEB558B64C3658F78EAACB940",
+      "Path": "src/GameHost.ps1"
+    },
+    {
+      "Sha256": "A08AC2DF924057BACEFFEE2C38F2C46D8A80C89EC5CCA3FFC236D665920D1A18",
+      "Path": "src/GameProcesses.ps1"
+    },
+    {
+      "Sha256": "E543D00540B54DBCAB9DC41F3034B788D4060786E49EFF6414BD013B73107539",
+      "Path": "src/TerminalCodec.ps1"
+    },
+    {
+      "Sha256": "533815BF5984BD1C3033BFE21879A0B02ED0E419E7C52FB06F411B8C0FB1DAF6",
+      "Path": "src/Viewport.ps1"
+    },
+    {
+      "Sha256": "C8B63D3E491C61F4A1BA85A32ECC5743DF317F5AC0AEB18D4D6D218E05998258",
+      "Path": "src/AudioMixer.ps1"
+    },
+    {
+      "Sha256": "01865375DB878EFA137B3B5EF49437B4FFBF9B8C6F0359A2AA52580E0977801E",
+      "Path": "src/AudioPackets.ps1"
+    },
+    {
+      "Sha256": "A930314C31A8DC628E96266E4654ACE1E2222FE076519B98578663A165DE1AD4",
+      "Path": "src/AudioRunspace.ps1"
+    },
+    {
+      "Sha256": "1A4DFDE7531BEFC0B176CAC8566F82C28EF5CC03D30057B8943E25384E79B596",
+      "Path": "src/MusicPlayback.ps1"
+    },
+    {
+      "Sha256": "3CCA7492A9F809EB8D54C8BF7D3D9847A1EC29D5E8ED6923F72ECA7803A50B48",
+      "Path": "src/MusicSynth.ps1"
+    }
+  ],
+  "Workload": {
+    "Map": 1,
+    "Health": 100,
+    "Episode": 1,
+    "Kills": 0,
+    "SimulationTics": 979,
+    "Skill": 3,
+    "Scripted": true,
+    "ExitReason": "Duration",
+    "DurationSeconds": 28.0038622
+  },
+  "Terminal": {
+    "GlyphSet": "Blocks",
+    "SourcePixels": [
+      320,
+      200
+    ],
+    "OutputCells": [
+      320,
+      100
+    ],
+    "ViewportPauseCount": 0,
+    "Encoding": "Pairs",
+    "Columns": 688,
+    "FontSizePt": 6,
+    "ViewportTop": 25,
+    "Maximized": true,
+    "Style": "Classic",
+    "Workers": 16,
+    "OutputMode": "Strips",
+    "Rows": 151,
+    "ViewportLeft": 184,
+    "TerminalOutputFrames": 1671,
+    "TerminalOutputBytes": 856620591,
+    "TerminalWriteCalls": 30079,
+    "BytesPerFrame": 512639.49192100536
+  },
+  "Pacing": {
+    "CompletionIntervalMs": {
+      "Max": 95.8611,
+      "Count": 1670,
+      "P50": 16.6452,
+      "P99": 30.5143,
+      "P95": 23.0869
+    },
+    "Meaning": "These are host completion/write intervals, not displayed monitor frames.",
+    "SimulationTicsPerSecond": 34.959463555709114,
+    "TerminalWriteMs": {
+      "Max": 89.5593,
+      "Count": 1671,
+      "P50": 5.3154,
+      "P99": 23.4365,
+      "P95": 14.0318
+    },
+    "MaxWorkerRenderMs": {
+      "Max": 37.4074,
+      "Count": 1671,
+      "P50": 5.3842,
+      "P99": 20.2575,
+      "P95": 16.319
+    },
+    "CompletedTerminalUpdates": 1671,
+    "RenderToWriteMs": {
+      "Count": 1671,
+      "Mean": 24.448426570915636,
+      "Median": 23.0895,
+      "P95": 34.9022,
+      "Max": 118.3848
+    },
+    "CompletedTerminalUpdatesPerSecond": 59.67034075749737
+  },
+  "Audio": {
+    "MaxVoices": 2,
+    "SoundEnabled": true,
+    "MusicTrack": "D_E1M1",
+    "MusicFrames": 1233540,
+    "Meaning": "Playback and mixer telemetry only; no acoustic review.",
+    "SoundEvents": 63,
+    "QueueStarvationCount": 1,
+    "AudioBackpressureEvents": 0,
+    "ClippedSamples": 0,
+    "CleanupError": null,
+    "MusicPackets": 979,
+    "QueueStarvationObservations": [
+      {
+        "WallMs": 48533.7367,
+        "AfterPacket": 978
+      }
+    ],
+    "AudioError": null,
+    "StalePacketsDiscarded": 0,
+    "DeviceClosed": true
+  },
+  "DisplayTelemetry": {
+    "CaptureAttempted": true,
+    "Reason": "ETW trace access denied. PresentMon reports it requires administrative privileges or membership in Performance Log Users. No security settings were changed.",
+    "CaptureSucceeded": false,
+    "PresentMonVersion": "2.6.0"
+  },
+  "RawReport": {
+    "Sha256": "5177BC6866A19DD644F4DAEF203F6A495384ED71BE1945749321AE70C4B90D2F",
+    "Path": "local/game-session-live-classic-20260926.json",
+    "Bytes": 4680624
+  },
+  "Meaning": "One scripted E1M1 live Terminal run; not campaign completion or human playthrough evidence. The host reported 59.67 completed terminal updates/sec over 28 seconds; it does not establish 59.67 displayed frames/sec."
+}
