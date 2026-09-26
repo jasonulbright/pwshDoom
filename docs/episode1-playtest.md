@@ -23,6 +23,9 @@ E1M8 exit and intermission.
 ## Build and launch
 
 Engine/source baseline: commit `6b229ccefaa2012626fa2c184ad1d4fff6c3e811`.
+The final handoff checks were run from repository commit
+`cdc59a9280fd649638a869210beb799c92cd49ec`; later changes in this handoff
+update only documentation and evidence, not gameplay or renderer source.
 Run from the repository root in 64-bit PowerShell 7.4 or later on Windows,
 with Windows Terminal, the legally obtained Ultimate Doom `DOOM.WAD`, and the
 prepared local music catalog `local/music-prepared-episode1.json`. The tested Steam IWAD is
@@ -49,6 +52,10 @@ visible frame rate or full-campaign audio continuity.
 Those sixteen workers used about 4.0 GB of combined working memory in that
 headless run; mention any memory pressure or sluggish response during play.
 
+At the final preflight, `%LOCALAPPDATA%\pwshDoom\settings.json` did not exist,
+so built-in defaults apply: Always Run off, turn speed 100%, sound volume 100%,
+and mute off. The session report records the preferences actually loaded.
+
 If Steam installed the IWAD elsewhere, replace only the `-Wad` value with the
 path to that same Ultimate Doom IWAD. The recording and session report paths
 must not already exist.
@@ -70,9 +77,11 @@ must not already exist.
 | P / Pause | Pause / resume |
 
 Hold the key briefly for movement, release it before changing direction, and
-use short discrete presses for switches. The game pauses when the Terminal
-viewport is too small; increase its usable rows/columns or reduce font size if
-the image does not fit. The 11-track Episode 1 catalog is enabled. Its actual
+use short discrete presses for switches. Classic needs a Terminal viewport of
+at least 320 columns by 100 rows. The game pauses if it is smaller; reduce the
+font size or enlarge the window if needed. Larger viewports center the game
+image, so blank space around it is expected. The 11-track Episode 1 catalog is
+enabled. Its actual
 simulation/audio worker passed 15 save/load/new-game checks, including 97,020
 music frames and clean device shutdown; whole-campaign music continuity,
 35-tic/60-display pacing, and audible review of every track are not certified.
@@ -107,10 +116,10 @@ The current renderer passes a 36-map Ultimate Doom smoke on the same IWAD:
 each map advances 35 idle tics and renders two full frames with sixteen strips.
 This covers E1M1–E1M9 as startup/render cases, not map completion. Focused
 engine/session/input checks also pass: 57 campaign transition/finale
-checks, 97 boss checks, 125 menu/session checks with 46 screen fixtures, and
-six synthetic console-input checks. Those focused checks were run before the
-latest renderer-only change; their engine, menu, and input dependencies are
-unchanged.
+checks, 97 boss checks, 125 menu/session checks with 46 screen fixtures, six
+synthetic console-input checks, and ten menu-key checks. All were freshly
+rerun from the handoff checkout; the [final check receipt](../results/episode1-playtest-final-checks.json)
+records the counts and limits. The current IWAD/music-catalog preflight passes.
 The latest fixed-point floor/ceiling mapping brings the six-view scene-index
 mismatch against the adopted PowerShell reference from 101,971 to 37,798
 (62.9% fewer than the original numeric baseline); 7.38–14.19% still differ.

@@ -1569,3 +1569,38 @@ settings were changed. The full limitation, exact workload and measurements
 are in [`performance.md`](performance.md) and
 [`live-e1m1-classic-host-20260926.json`](../results/live-e1m1-classic-host-20260926.json);
 the raw host report remains in ignored `local/`.
+
+## 2026-09-26 — Recheck the complete Episode 1 human-playthrough handoff
+
+The user explicitly sets one complete human Episode 1 playthrough as the next
+qualification milestone, including E1M3's secret exit, E1M9 completion and
+return to E1M4, E1M8's boss-triggered exit, and the finale. Do not ask for
+map-by-map tests or resume route construction. Keep the full Ultimate Doom,
+Doom II, Final Doom, and later MyHouse roadmap intact.
+
+From checkout `cdc59a9280fd649638a869210beb799c92cd49ec` (engine/render source
+baseline `6b229ccefaa2012626fa2c184ad1d4fff6c3e811`), `Play.ps1 -Check` reports
+ready with the installed Steam IWAD, PowerShell 7.6.5, Windows Terminal, 36
+IWAD maps, and the local eleven-track catalog. The catalog hash remains
+`0E9C9542C75F4D5E2D7FC71E42FAFBB58F94321C3B8A49BA0C9AC5A93752EE58`; its
+actual simulation/audio-worker qualification is separate and passes 15
+save/load/new-game checks with 97,020 music frames and clean device shutdown.
+No user settings file existed at preflight, so startup defaults are Always Run
+off, turn speed 100%, volume 100%, and unmuted.
+
+Fresh focused checks pass 295 assertions: 57 campaign/secret-return/finale
+fixtures, 97 HMP boss-trigger checks, six synthetic console-input checks, ten
+menu-key checks, and 125 menu/session checks with 46 screen fixtures. These
+exercise transitions and controller/session behavior, not ordinary navigation
+through the maps. The [portable receipt](../results/episode1-playtest-final-checks.json)
+records evidence sources and limits. The current 36-map smoke and four stored
+E1M1–E1M4 route regressions remain in their separate receipts. No full human
+Episode 1 route or physical keyboard use is claimed. The handoff now asks for
+one run from E1M1 through the E1M3 secret-map return, E1M8 exit, and Episode 1
+finale; record Jason's result only as he reports it.
+
+Update `episode1-playtest.md`, the campaign matrix, and the development guide
+to agree on the complete music catalog and current verification. No game or
+renderer source changed during this handoff pass. The next campaign evidence
+is Jason's single complete human route; do not substitute more automated route
+work or recording experiments.

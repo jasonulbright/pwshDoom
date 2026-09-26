@@ -102,14 +102,12 @@ and explicitly leaves the human route and physical keyboard input pending.
   catalog contents; preflight itself does not launch the game.
 - [Launch parameter binding](../results/episode1-launch-binding.txt): the
   documented source entry point parses and exposes every playtest argument.
-- The earlier current-source [nine-map smoke](../results/episode1-render-integer-row-smoke-final.json)
-  passes after the integer-row wall sampling change. The focused
-  [transition/finale fixtures](../results/episode1-playtest-transitions-current.json),
-  [boss progression fixtures](../results/episode1-playtest-bosses-current.json),
-  [menu/session fixtures](../results/episode1-playtest-menus-current.json), and
-  [synthetic console-input checks](../results/episode1-playtest-console-input-current.txt)
-  passed on the prior renderer source; this wall-only change leaves their game,
-  menu, and input code dependencies untouched. The separate
+- The current-source [36-map smoke](../results/weapon-projection-smoke-current.json)
+  passes after the latest renderer changes. The focused transition/finale,
+  boss, menu/session, synthetic console-input, and menu-key checks were freshly
+  rerun for the human-playthrough handoff; all 295 assertions passed. The
+  [portable final-check receipt](../results/episode1-playtest-final-checks.json)
+  records their counts, exact IWAD, settings defaults and limits. The separate
   [integer-row renderer receipt](../results/render-integer-row-fidelity.json)
   captures the latest sampling comparison and serial/worker equivalence; the
   [integer-column receipt](../results/render-column-index-fidelity.json) retains
@@ -148,7 +146,7 @@ host restart/recovery coverage. Replays bypass preference-based command generati
 three settings-menu recordings preserve the existing control fixture checkpoints.
 This UI work adds no map completion to the matrix. See [settings](settings.md).
 
-Music integration currently has E1M1, E1M2, intermission, E1M3, E1M4 and E1M9 qualified dry loops. E1M4 now plays in the recorded host after E1M3; E1M9's campaign route remains unqualified. E1M1's requalification preserves prior samples; the three longer tracks each pass six actual reader checks. The 1,747-command/eight-checkpoint E1M1 route passes with music and recorded audio in Matrix/color-art, including the block intermission UI. The longer E1M2 route completes with all 4,073,580 audio frames returned; the third E1M3 recording returns all 8,968,680 frames after the bounded shutdown repair. Queue starvation remains an open timing issue. See [E1M2 qualification](campaign-e1m2.md), [E1M3 qualification](campaign-e1m3.md), [campaign music](campaign-music.md), [preparation](music-preparation.md) and [audiovisual capture evidence](audiovisual-recording.md).
+At the time of the E1M4/E1M3 host qualifications, dry loops were available for E1M1, E1M2, intermission, E1M3, E1M4 and E1M9. The later [Episode 1 music preparation](music-preparation.md) completed all eleven loops, including E1M5–E1M8 and D_VICTOR. E1M4 plays in the recorded host after E1M3; E1M9's campaign route remains unqualified. E1M1's requalification preserves prior samples; the three longer tracks each pass six actual reader checks. The 1,747-command/eight-checkpoint E1M1 route passes with music and recorded audio in Matrix/color-art, including the block intermission UI. The longer E1M2 route completes with all 4,073,580 audio frames returned; the third E1M3 recording returns all 8,968,680 frames after the bounded shutdown repair. Queue starvation remains an open timing issue. See [E1M2 qualification](campaign-e1m2.md), [E1M3 qualification](campaign-e1m3.md), [campaign music](campaign-music.md), [preparation](music-preparation.md) and [audiovisual capture evidence](audiovisual-recording.md).
 
 September 19 discovery optimization: all 36 map starts at four headings preserve fresh mapped-line bitsets and pixels/counters/other flags. The full E1M3 route preserves 7,002 fresh discovery states and all 24 gameplay checkpoints. This adds discovery coverage, not completion of additional maps. Loaded prefix pacing improves to 30.829 tics/sec; sustained 35/60 and E1M4 terminal-host qualification remain open. E1M4 subsequently passes independent headless completion as recorded above. See [discovery performance](automap-discovery-performance.md).
 

@@ -1,0 +1,121 @@
+{
+  "VerifiedUtc": "2026-09-26T22:34:20.5461368Z",
+  "RepositoryCommit": "cdc59a9280fd649638a869210beb799c92cd49ec",
+  "EngineSourceBaseline": "6b229ccefaa2012626fa2c184ad1d4fff6c3e811",
+  "Wad": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Ultimate Doom\\base\\DOOM.WAD",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "MusicCatalog": "local/music-prepared-episode1.json",
+  "MusicCatalogSha256": "0E9C9542C75F4D5E2D7FC71E42FAFBB58F94321C3B8A49BA0C9AC5A93752EE58",
+  "Preflight": {
+    "Meaning": "Play.ps1 -Check verifies launch paths and IWAD map inventory. Catalog payload correctness is separately covered by results/save-worker-episode1-music-after-catalog.json.",
+    "SettingsFileExists": false,
+    "Ready": true,
+    "EpisodeMaps": 36,
+    "DefaultSettings": {
+      "TurnSpeed": 100,
+      "AlwaysRun": false,
+      "SoundMuted": false,
+      "SoundVolume": 100
+    },
+    "WindowsTerminal": "C:\\Users\\jason\\AppData\\Local\\Microsoft\\WindowsApps\\wt.exe",
+    "PowerShell": "7.6.5",
+    "Is64Bit": true
+  },
+  "FocusedChecks": [
+    {
+      "Failures": 0,
+      "Name": "Campaign transitions, secret path/return and finale fixtures",
+      "Sha256": "B6A41B8A0AAC383FAE08AADC343227BD949FB6592EFD335ADA62E879F92B339F",
+      "Count": 57,
+      "LocalReport": "local/episode1-final-transitions.json"
+    },
+    {
+      "Failures": 0,
+      "Name": "HMP boss-trigger behavior including E1M8",
+      "Sha256": "4437D3D9F62E6FD9556677D1F22F1449D9029FED6F43288280B84CBF72D8F5A1",
+      "Count": 97,
+      "LocalReport": "local/episode1-final-bosses.json"
+    },
+    {
+      "Failures": 0,
+      "Name": "Synthetic menu key input",
+      "Sha256": "D7D537D33A418B779BC2C9CA230872537CA7D85C36353415230D3AF509201046",
+      "Count": 10,
+      "LocalReport": "local/episode1-final-menu-input.json"
+    },
+    {
+      "Failures": 0,
+      "Count": 125,
+      "Sha256": "BF5DC432E9337BCB929D0A5EA7B1415358E0C8ACD5F746C429A3B43072492FEA",
+      "LocalReport": "local/episode1-final-menus.json",
+      "ScreenFixtures": 46,
+      "Name": "Session menus and screen fixtures"
+    },
+    {
+      "Meaning": "scripts/Test-ConsoleInput.ps1 output: six synthetic structure/state checks passed; no desktop input injected.",
+      "Failures": 0,
+      "Name": "Console input structure and state transitions",
+      "ScriptSha256": "C75B19725F222DA8941C2144197E18B64FB64274CD5F644E1287668E066F5BAD",
+      "Count": 6
+    }
+  ],
+  "TotalAssertions": 295,
+  "ExistingCampaignEvidence": [
+    {
+      "Meaning": "36/36 current-renderer load, idle simulation and two-frame smoke; no map completion.",
+      "Path": "results/weapon-projection-smoke-current.json"
+    },
+    {
+      "Meaning": "Existing E1M1-E1M4 route regressions and nine-map smoke.",
+      "Path": "results/visibility-campaign-regressions.json"
+    },
+    {
+      "Meaning": "Actual simulation/audio worker: 15 save/load/new-game checks, 97,020 music frames, clean device shutdown.",
+      "Path": "results/save-worker-episode1-music-after-catalog.json"
+    }
+  ],
+  "HumanPlaythrough": {
+    "Meaning": "Automated fixtures and smoke are not a human campaign completion.",
+    "Status": "Pending",
+    "RequiredScope": "E1M1 -> E1M2 -> E1M3 secret exit -> E1M9 -> E1M4 -> E1M5 -> E1M6 -> E1M7 -> E1M8 -> Episode 1 finale"
+  },
+  "Limitations": [
+    "No full human playthrough has been reported.",
+    "The focused fixtures use explicit state changes and synthetic input, not ordinary map navigation.",
+    "The run does not qualify sustained 35 tics/sec, 60 displayed updates/sec, full-campaign audio continuity, or original-executable rendering parity."
+  ],
+  "Sources": [
+    {
+      "Sha256": "26D16D8548FE79E1F10695777525DEDE4B63073430DD7EF9EA51BDD401BF4D3C",
+      "Path": "scripts/Test-CampaignTransitions.ps1"
+    },
+    {
+      "Sha256": "4EE3871B7C52A3C46ABC08EA25AA3300D82667D9FF1C6A7E26A9CDB6CDAEFB2F",
+      "Path": "scripts/Test-BossProgression.ps1"
+    },
+    {
+      "Sha256": "C75B19725F222DA8941C2144197E18B64FB64274CD5F644E1287668E066F5BAD",
+      "Path": "scripts/Test-ConsoleInput.ps1"
+    },
+    {
+      "Sha256": "98C61D082E38A2266241141E9AB86C5BAFE64BB1FA6F73CF16976D57A92D8C1C",
+      "Path": "scripts/Test-MenuInput.ps1"
+    },
+    {
+      "Sha256": "B6493E0A3E56F5D2F83427951ACABA2B2D4A3612BA90AE8106C22D88A5630722",
+      "Path": "scripts/Test-SessionMenu.ps1"
+    },
+    {
+      "Sha256": "CA647B604FC51FE1981CD2045D14F90043314DFC09DC5EF298597307D433CAF8",
+      "Path": "src/SessionMenu.ps1"
+    },
+    {
+      "Sha256": "7DDFDC801009B2D6B02DDCD1E02B7E7A2C557E860B8DBB418AA44706AD6777C8",
+      "Path": "src/ConsoleInput.ps1"
+    },
+    {
+      "Sha256": "B8D4EF93831BB372048B3AEB7504E9A6AFDA645CC41BCA21375EDC546EFCF499",
+      "Path": "src/UserSettings.ps1"
+    }
+  ]
+}

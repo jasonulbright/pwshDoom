@@ -1,6 +1,6 @@
 # Music foundation
 
-Opt-in music now plays through the host using qualified, prepared dry PowerShell synthesis and PowerShell mixing. Six tracks are qualified; see [music preparation](music-preparation.md) and [host integration](music-integration.md) for current evidence and limitations. The existing `-Sound` option alone still plays effects only. This document retains the earlier decoder, instrument-bank and oscillator investigation. A compiled synthesizer is used solely in a separately labeled comparison script.
+Opt-in music now plays through the host using qualified, prepared dry PowerShell synthesis and PowerShell mixing. All eleven loops needed for an Episode 1 playthrough are qualified in the local catalog, including D_VICTOR; see [music preparation](music-preparation.md) and [host integration](music-integration.md) for current evidence and limitations. The existing `-Sound` option alone still plays effects only; pass `-MusicCatalog` to enable the prepared score. This document retains the earlier decoder, instrument-bank and oscillator investigation. A compiled synthesizer is used solely in a separately labeled comparison script.
 
 ## Decoder and timeline
 
