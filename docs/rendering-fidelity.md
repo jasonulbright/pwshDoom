@@ -665,3 +665,47 @@ difference: the adopted-renderer comparison still has 17 candidate-only actor
 pixels at tic 105. The finding is preserved in the [eight-endpoint comparison](../results/actor-occlusion-untextured-wall-20260927.json).
 That comparison is not an independently verified original-executable result,
 and no renderer-performance gain is claimed.
+
+## Clip world sprites to wall silhouettes (2026-09-27)
+
+Jason's interrupted human input exposed two visual symptoms in E1M1: objects
+appearing through walls, including pickups and bodies, and lower-level columns
+showing through an upper floor. A replay-prefix comparison localized one
+reproducible actor case. At tic 245, the fast renderer painted a BON1B0 bone
+decoration over pixels belonging to an upper-sector floor, while the adopted
+ThreeDRenderer collected the same sprite but clipped it completely behind a
+lower-wall silhouette. The candidate actor mask had 95 exclusive pixels and a
+68.3% intersection-over-union with the reference mask.
+
+FastRenderer now records each nearer wall's per-column open bounds and upper /
+lower silhouette heights during the BSP pass. Before drawing a world sprite,
+it applies those bounds only when the wall is nearer than the sprite and the
+sprite's world-space top or bottom crosses the corresponding sector edge.
+Opaque wall depth and transparent masked-wall holes keep their existing paths;
+floor fills still do not claim depth. The matching fuzz-sprite path receives
+the same clip bounds.
+
+The focused [sprite silhouette regression](../scripts/Test-SpriteSilhouetteOcclusion.ps1)
+uses the recorded camera transform and target map actor without replaying or
+shipping Jason's input file. Its receipt records zero changed scene pixels for
+the occluded BON1B0; the pre-fix renderer is a negative control and changes 93
+pixels in the same isolated view. In the full local replay-prefix comparison,
+the tic-245 candidate-only actor mask falls from 95 pixels to zero and mask
+overlap rises from 68.3% to 95.2%. At tic 140, candidate-only mask pixels fall
+from 44 to 3. The comparison uses the adopted PowerShell renderer, not the
+original executable; other checkpoints still differ, and the E1M1 raised-floor
+columns from Jason's screenshot have not been separately classified as actors
+or wall geometry.
+
+The updated source passes the 36-map load/simulation/two-render smoke and exact
+320,000-pixel serial/worker comparisons in Classic, Matrix/Katakana, and
+AnsiArt/Katakana across five views and seven uneven strips. Receipts:
+[focused actor case](../results/sprite-silhouette-occlusion-20260927.json),
+[replay-prefix actor masks](../results/actor-occlusion-human-prefix-245-20260927.json),
+[36-map smoke](../results/campaign-smoke-sprite-clips-20260927.json), and the
+[Classic](../results/render-partitions-sprite-clips-classic-20260927.json),
+[Matrix](../results/render-partitions-sprite-clips-matrix-20260927.json), and
+[AnsiArt](../results/render-partitions-sprite-clips-ansiart-20260927.json)
+worker checks. These checks establish the targeted visibility correction and
+worker consistency for their samples, not complete sprite parity, campaign
+completion, original-executable equivalence, or live frame rate.

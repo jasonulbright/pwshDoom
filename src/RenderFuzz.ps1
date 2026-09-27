@@ -8,7 +8,7 @@
 
 function Draw-FastFuzzPatch {
     param($Context,$Patch,[double]$Left,[double]$Top,[double]$Scale=1,[double]$Distance=0,
-        [bool]$Flip=$false,[int]$FirstColumn=0,[int]$EndColumn=320,[int]$MaxY=168)
+        [bool]$Flip=$false,[int]$FirstColumn=0,[int]$EndColumn=320,[int]$MaxY=168,[int[]]$ClipTopByColumn,[int[]]$ClipBottomByColumn)
     [int]$pw=$Patch.Width;[int]$ph=$Patch.Height;[int[]]$texels=$Patch.Data
     [byte[]]$pixels=$Context.Pixels;[double[]]$depth=$Context.Depth;[byte[]]$colors=$Context.Colors[6]
     [int]$x0=[Math]::Max($FirstColumn,[Math]::Ceiling($Left));[int]$x1=[Math]::Min($EndColumn,[Math]::Ceiling($Left+$pw*$Scale))
@@ -28,6 +28,8 @@ function Draw-FastFuzzPatch {
         [int]$phase=([long]$tic*7+[long]$x*168)%50
         [int]$textureColumn=$u*$ph
         for([int]$y=$y0;$y -lt $y1;$y++){
+            if($null -ne $ClipTopByColumn -and $y -lt $ClipTopByColumn[$x]){continue}
+            if($null -ne $ClipBottomByColumn -and $y -gt $ClipBottomByColumn[$x]){continue}
             [int]$p=$y*320+$x
             if($Distance -gt 0 -and $Distance -ge $depth[$p]){continue}
             if($texels[$textureColumn+$sourceRows[$y-$y0]] -lt 0){continue}

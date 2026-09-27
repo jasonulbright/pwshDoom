@@ -180,7 +180,7 @@ function New-FastRenderContext {
 function Draw-FastPatch {
     param($Context,$Patch,[double]$Left,[double]$Top,[double]$Scale=1,[double]$Distance=0,
         [bool]$Flip=$false,[int]$Light=0,[int]$FirstColumn=0,[int]$EndColumn=320,[int]$MaxY=200,
-    [int]$TextureAltData=0,[int]$CenterY=84,[switch]$FixedVerticalSampling)
+    [int]$TextureAltData=0,[int]$CenterY=84,[switch]$FixedVerticalSampling,[int[]]$ClipTopByColumn,[int[]]$ClipBottomByColumn)
     [int]$pw=$Patch.Width;[int]$ph=$Patch.Height;[int[]]$texels=$Patch.Data
     [byte[]]$pixels=$Context.Pixels;[double[]]$depth=$Context.Depth;[byte[]]$colors=$Context.Colors[$Light]
     if($pw -le 0 -or $ph -le 0 -or $Scale -le 0){return}
@@ -212,6 +212,8 @@ function Draw-FastPatch {
                 [int]$postY0=[int](($postTopData+65535)-shr 16)
                 [int]$postY1=[int](($postBottomData-1)-shr 16)
                 $postY0=[Math]::Max(0,$postY0);$postY1=[Math]::Min($MaxY-1,$postY1)
+                if($null -ne $ClipTopByColumn){$postY0=[Math]::Max($postY0,$ClipTopByColumn[$x])}
+                if($null -ne $ClipBottomByColumn){$postY1=[Math]::Min($postY1,$ClipBottomByColumn[$x])}
                 if($postY0 -le $postY1){
                     [long]$postAltData=[long]$TextureAltData-([long]$post.TopDelta -shl 16)
                     [long]$verticalFracData=$postAltData+([long]($postY0-$CenterY)*$invScaleData)
@@ -243,7 +245,10 @@ function Draw-FastPatch {
     }
     for([int]$x=$x0;$x -lt $x1;$x++) {
         [int]$u=[Math]::Clamp([int]($fracData -shr 16),0,$pw-1)
-        for([int]$y=$y0;$y -lt $y1;$y++) {
+        [int]$columnY0=$y0;[int]$columnY1=$y1
+        if($null -ne $ClipTopByColumn){$columnY0=[Math]::Max($columnY0,$ClipTopByColumn[$x])}
+        if($null -ne $ClipBottomByColumn){$columnY1=[Math]::Min($columnY1,$ClipBottomByColumn[$x]+1)}
+        for([int]$y=$columnY0;$y -lt $columnY1;$y++) {
             [int]$p=$y*320+$x
             if($Distance -gt 0 -and $Distance -ge $depth[$p]){continue}
             [double]$vf=($y-$Top)/$Scale;[int]$v=$vf;if($v -gt $vf){$v--};if($v -ge $ph){$v=$ph-1};[int]$color=$texels[$u*$ph+$v]
@@ -323,6 +328,13 @@ function Invoke-FastRender {
     [double]$aco=[Math]::Abs($co);[double]$asi=[Math]::Abs($si)
     [byte[]]$pixels=$Context.Pixels;[double[]]$depthBuffer=$Context.Depth
     [int[]]$planes=$Context.Planes
+    if(-not $Context.ContainsKey('SpriteClipWalls')){
+        [object[]]$spriteClipWalls=[object[]]::new(320)
+        for([int]$x=0;$x -lt 320;$x++){$spriteClipWalls[$x]=[Collections.Generic.List[object]]::new()}
+        $Context.SpriteClipWalls=$spriteClipWalls
+    }
+    [object[]]$spriteClipWalls=$Context.SpriteClipWalls
+    for([int]$x=$FirstColumn;$x -lt $EndColumn;$x++){$spriteClipWalls[$x].Clear()}
     [int[]]$planeSpanBoundaries=[int[]]::new(0)
     if($Context.ContainsKey('PlaneSpanBoundaries')){$planeSpanBoundaries=[int[]]$Context.PlaneSpanBoundaries}
     [int[]]$topClip=$Context.TopClip;[int[]]$bottomClip=$Context.BottomClip
@@ -365,6 +377,16 @@ function Invoke-FastRender {
             [double]$fh=$front.FloorHeight;[double]$ch=$front.CeilingHeight
             [bool]$solid=$null -eq $back;[double]$bf=$fh;[double]$bc=$ch
             if(-not $solid){$bf=$back.FloorHeight;$bc=$back.CeilingHeight}
+            [bool]$lowerSilhouette=$solid;[double]$lowerSilHeight=[double]::PositiveInfinity
+            [bool]$upperSilhouette=$solid;[double]$upperSilHeight=[double]::NegativeInfinity
+            if(-not $solid){
+                if($fh -gt $bf){$lowerSilhouette=$true;$lowerSilHeight=$fh}
+                elseif($bf -gt $cz){$lowerSilhouette=$true;$lowerSilHeight=[double]::PositiveInfinity}
+                if($front.CeilingHeight -lt $bc){$upperSilhouette=$true;$upperSilHeight=$front.CeilingHeight}
+                elseif($bc -lt $cz){$upperSilhouette=$true;$upperSilHeight=[double]::NegativeInfinity}
+                if($bc -le $fh){$lowerSilhouette=$true;$lowerSilHeight=[double]::PositiveInfinity}
+                if($bf -ge $front.CeilingHeight){$upperSilhouette=$true;$upperSilHeight=[double]::NegativeInfinity}
+            }
             [bool]$isSky=$front.CeilingFlat -eq $Context.SkyFlat
             [bool]$joinedSky=$isSky -and -not $solid -and $back.CeilingFlat -eq $Context.SkyFlat
             if($joinedSky){$ch=$bc}
@@ -477,6 +499,11 @@ function Invoke-FastRender {
                     }
                 }
                 $topClip[$x]=$nextTop;$bottomClip[$x]=$nextBottom
+                if($lowerSilhouette -or $upperSilhouette){
+                    $spriteClipWalls[$x].Add(@{Distance=$distance;Top=$nextTop;Bottom=$nextBottom;
+                        LowerSilhouette=$lowerSilhouette;LowerSilHeight=$lowerSilHeight;
+                        UpperSilhouette=$upperSilhouette;UpperSilHeight=$upperSilHeight})
+                }
                 if($nextTop -gt $nextBottom){$open--}
             }
         }
@@ -601,11 +628,28 @@ function Invoke-FastRender {
                 [int]$textureAltData=$actorZData+($patch.Top -shl $spriteFracBits)-$viewZData
                 [int]$topData=(84 -shl $spriteFracBits)-([long]$textureAltData*[long]$xScaleData -shr $spriteFracBits)
                 [double]$left=$leftFracData/65536.0;[double]$top=$topData/65536.0
+                [double]$actorTopZ=$actorZData/65536.0+$patch.Top
+                [double]$actorBottomZ=$actorTopZ-$patch.Height
+                [int[]]$actorClipTop=[int[]]::new(320);[int[]]$actorClipBottom=[int[]]::new(320)
+                [Array]::Fill($actorClipBottom,167)
+                [int]$clipFirst=[Math]::Max($FirstColumn,$firstSpriteColumn)
+                [int]$clipEnd=[Math]::Min($EndColumn,$lastSpriteColumn+1)
+                for([int]$x=$clipFirst;$x -lt $clipEnd;$x++){
+                    foreach($wallClip in $spriteClipWalls[$x]){
+                        if($wallClip.Distance -ge $distance){continue}
+                        if($wallClip.LowerSilhouette -and $actorBottomZ -lt $wallClip.LowerSilHeight){
+                            $actorClipBottom[$x]=[Math]::Min($actorClipBottom[$x],$wallClip.Bottom)
+                        }
+                        if($wallClip.UpperSilhouette -and $actorTopZ -gt $wallClip.UpperSilHeight){
+                            $actorClipTop[$x]=[Math]::Max($actorClipTop[$x],$wallClip.Top+1)
+                        }
+                    }
+                }
                 if($actor.Flags -band 0x40000){
-                    Draw-FastFuzzPatch $Context $patch $left $top $scale $distance $frame.Flip[$rotation] $FirstColumn $EndColumn 168
+                    Draw-FastFuzzPatch $Context $patch $left $top $scale $distance $frame.Flip[$rotation] $FirstColumn $EndColumn 168 $actorClipTop $actorClipBottom
                 }else{
                     Draw-FastPatch $Context $patch $left $top $scale $distance $frame.Flip[$rotation] $light $FirstColumn $EndColumn 168 `
-                        -TextureAltData $textureAltData -CenterY 84 -FixedVerticalSampling
+                        -TextureAltData $textureAltData -CenterY 84 -FixedVerticalSampling -ClipTopByColumn $actorClipTop -ClipBottomByColumn $actorClipBottom
                 }
             }
     }

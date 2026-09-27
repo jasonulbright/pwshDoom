@@ -1,0 +1,34 @@
+{
+  "FinishedUtc": "2026-09-27T13:05:10.6482860Z",
+  "Map": "E1M1",
+  "Camera": {
+    "X": 355.806793212891,
+    "Y": -3259.86231994629,
+    "AngleDegrees": 184.921875,
+    "ViewZ": 40.6085205078125
+  },
+  "OccludedActor": {
+    "X": 144.0,
+    "Type": "Misc2",
+    "Z": -8.0,
+    "Y": -3136.0,
+    "Sprite": "BON1"
+  },
+  "ChangedScenePixels": 0,
+  "ExpectedChangedScenePixels": 0,
+  "Passed": true,
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "BundleSha256": "189013E618B698CB2686260BC70FB4C26CAE27748409CC1DCD76ECBB7B1A546B",
+  "Sources": [
+    {
+      "Path": "src/FastRenderer.ps1",
+      "Sha256": "FD68C4FD08426F59BEF1514401A80B6B949D54DC2B9B62BAAE401C349BED1C2D"
+    },
+    {
+      "Path": "src/RenderFuzz.ps1",
+      "Sha256": "8D2B6B6B0DF30A1DD7E30D070F60A1EABBF12397BC9816A03481C6D6A659B882"
+    }
+  ],
+  "Error": null,
+  "Meaning": "At the recorded E1M1 view, an actor behind a nearer lower-wall silhouette must not paint over the upper floor. The no-actor frame is the local pixel baseline. Reference-renderer parity is separately measured by Compare-ActorOcclusion.ps1."
+}

@@ -2298,3 +2298,35 @@ homing turn. Both checks pass in
 Test-GameActions.ps1 regression also passes all nine checks. These are
 focused component checks; Jason's route remains incomplete and must be
 restarted from E1M1 on the fixed build.
+
+## 2026-09-27 — Clip world actors at wall silhouettes
+
+While preparing the single full Episode 1 human run, Jason reported E1M1
+objects visible through walls and lower-level columns visible through an upper
+floor. The notes remain recorded in his local playthrough tally. The replay
+prefix comparison reproduced a world-actor leak at tic 245: BON1B0 at
+(144,-3136,-8) changed 93 pixels over an upper-sector floor although the
+adopted ThreeDRenderer clipped that actor behind a lower-wall silhouette. The
+candidate actor-mask comparison at that checkpoint had 95 candidate-only
+pixels and 68.3% overlap.
+
+FastRenderer now saves per-column wall-silhouette clip bounds during its BSP
+walk and applies them to a sprite when that wall is in front of the sprite and
+the actor crosses the sector's upper or lower height boundary. This leaves
+plane fill depth unchanged and also clips fuzzed world sprites. The focused
+[regression](../scripts/Test-SpriteSilhouetteOcclusion.ps1) paints zero pixels
+for the isolated occluded BON1B0; the pre-fix renderer changed 93 pixels in
+the same view. At tic 245, the replay-prefix candidate-only actor mask drops
+from 95 to zero and overlap rises to 95.2%; at tic 140, candidate-only mask
+pixels drop from 44 to 3. The [full receipt](../results/actor-occlusion-human-prefix-245-20260927.json)
+is adopted-reference parity evidence, not a vanilla executable comparison.
+
+The updated renderer passes the 36-map load/simulation/two-frame smoke and
+matches serial output across five views and seven uneven process strips in
+Classic, Matrix/Katakana, and AnsiArt/Katakana (320,000 pixels per style).
+Focused, smoke, partition, and actor-mask receipts are linked from the
+[rendering-fidelity record](rendering-fidelity.md#clip-world-sprites-to-wall-silhouettes-2026-09-27).
+The symptom in Jason's screenshot has not been separately confirmed as a
+sprite or wall-geometry defect. Other camera states still show actor-mask
+differences. His Episode 1 run remains pending; start one fresh complete route
+from E1M1 when he has time.
