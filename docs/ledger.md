@@ -2757,3 +2757,28 @@ pin the IWAD and source state. Six Episode 2 map-track names now have
 qualifications; D_E2M1–D_E2M4 and D_E2M6 add five byte-distinct payloads, while
 D_E2M5 duplicates D_E1M7. Twelve other Episode 2/3 map-track names remain,
 representing ten not-yet-qualified payloads, along with two finite scores.
+
+## 2026-09-27 — Build and smoke-test a clean preview package candidate
+
+Updated `scripts/Build-PreviewPackage.ps1` to omit PDF references under `docs/`
+from the playable ZIP while continuing to reject other unrecognized file
+types. This lets the local Gebbdoom reference remain available in the checkout
+without entering the player download. Commit `eff3f14` was cloned into a clean
+source tree; its package manifest reports no working-tree changes and pins all
+533 included files. The local `0.1.0-preview.3` ZIP is 1,484,697 bytes with
+SHA-256
+`6676AAC3F26AB26DB4B871B8490CC639FA0717383809275D6AFAE94158FF3815`.
+
+The ZIP was extracted, every manifest file hash was rechecked, and the PDF was
+absent. `Play.ps1 -Check` on the extracted package found PowerShell 7.6.5,
+Windows Terminal, and the supplied Ultimate Doom IWAD with all 36 maps. A
+two-second headless Classic E1M1 host run from the extracted package reached
+69 simulation tics and 91 completed frames before its requested `Duration`
+exit, with no error. It used 16 PowerShell renderer workers (about 4.12 GB
+reported worker working set); headless mode wrote zero Terminal frames, so
+this is package/startup/render-worker integration evidence, not interactive
+play, displayed-frame performance, audio continuity, or campaign qualification.
+The [portable receipt](../results/preview3-package-candidate-validation-20260927.json)
+and ignored raw report pin these checks. This is a local, unpublished candidate;
+the complete human Episode 1 playthrough and broader Ultimate Doom release
+gates remain open.

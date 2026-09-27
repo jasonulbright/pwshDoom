@@ -1,0 +1,60 @@
+{
+  "Format": "pwshDoom.PreviewPackageCandidateValidation",
+  "Version": 1,
+  "RecordedUtc": "2026-09-27T21:09:10.5987876Z",
+  "CandidateVersion": "0.1.0-preview.3",
+  "CandidateStatus": "LocalDraftNotPublished",
+  "Passed": true,
+  "SourceCommit": "eff3f14491e84facd2bf712c786c3a7be2bb006e",
+  "WorkingTreeDirty": false,
+  "PackagedFileCount": 533,
+  "ZipSha256": "6676AAC3F26AB26DB4B871B8490CC639FA0717383809275D6AFAE94158FF3815",
+  "ZipBytes": 1484697,
+  "ResearchPdfExcluded": true,
+  "PlayPreflight": {
+    "Passed": true,
+    "PowerShell": "7.6.5",
+    "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+    "EpisodeMapCount": 36,
+    "WindowsTerminalFound": true
+  },
+  "HostSmoke": {
+    "Passed": true,
+    "Parameters": {
+      "Headless": true,
+      "Seconds": 2,
+      "Episode": 1,
+      "Map": 1,
+      "Style": "Classic",
+      "Workers": 16,
+      "Sound": false
+    },
+    "ExitReason": "Duration",
+    "SimulationTics": 69,
+    "CompletedFrames": 91,
+    "DurationSeconds": 2.0017754,
+    "TerminalBytes": 0,
+    "TerminalFrames": 0,
+    "TicsPerSecond": 34.46940151227755,
+    "CompletedUpdatesPerSecond": 45.459645472713866,
+    "WorkerWorkingSetBytes": 4117532672,
+    "Error": null,
+    "RawReport": "local/package-preview3-clean-e1m1-smoke-20260927.json",
+    "RawReportSha256": "77A8CAE72A08BDA86DD1DA233465EFA34BDFAA45662543D24A1A74263AB86E08"
+  },
+  "Sources": [
+    {
+      "Sha256": "E66A8B5BBE083716B7EF204A50DABFC2C58B8C30F606F6247915166D96605364",
+      "Path": "scripts/Build-PreviewPackage.ps1"
+    },
+    {
+      "Sha256": "BC26D8D09BE5107BC9CD3BAB67A6A7BDD008672C795F7E611AD8477CBA3461C3",
+      "Path": "Play.ps1"
+    },
+    {
+      "Sha256": "EAA75B6B236F6481C7C15EF1D2DA82C536B27206FBCD005CB1C67BED305E03C2",
+      "Path": "scripts/Invoke-Doom.ps1"
+    }
+  ],
+  "Meaning": "A clean checkout at the pinned commit produced a 533-file source ZIP whose manifest hashes were rechecked after extraction. The packaged launcher preflight recognized the supplied Ultimate Doom IWAD and all 36 maps. The extracted package completed a two-second headless E1M1 startup/render-worker smoke with 69 simulation tics, 91 completed frames, and no error. Headless mode wrote zero Terminal frames, so this is package/startup integration only, not interactive play, displayed-frame performance, audio, campaign, or full-release qualification. This preview.3 artifact is local and unpublished; the complete human Episode 1 playthrough and broader release gates remain open."
+}
