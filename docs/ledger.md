@@ -2921,3 +2921,27 @@ is a stop-boundary tail, not evidence of a mid-run audible interruption. It
 does not establish full-map/campaign continuity or acoustic quality. The raw
 host report and PCM/catalog remain under ignored `local/`; portable receipts
 are linked in [music-loop results](music-loops.md#d_e2m8-complete-state-recurrence-and-host-selection-september-27).
+
+## 2026-09-27 — Qualify D_E2M9 music and map selection
+
+The installed Ultimate Doom IWAD's D_E2M9 MUS hash is
+`A6F854BDC4EC0DE7B8E3EC19B2EC5B1B5C0CF8DC00AC52A45A0E7E4C47D219E6`.
+PowerShell 7.6.5 rendered an independent eight-second opening and two
+continuous 96-second aligned periods using complete-state recurrence mode. The
+opening PCM matches exactly. Both period boundaries have 127 live voices and
+normalized state SHA-256
+`A746B7B002D12F44F857D01CC46954477352EA72A640D9C07262F8DD3F94E789`.
+The proof has no third independently rendered output period. Render, write and
+snapshot took 859.227 seconds; total preparation took 877.463 seconds.
+
+The reader/mixer passes all six checks, the actual audio worker passes ten,
+and the engine callback/catalog test passes 14 for the E2M9-to-D_E2M9 mapping.
+A two-second actual headless E2M9 run emits that looping score. It submits
+86,940 frames across 69 packets and completes 84,420 before shutdown, with a
+2,520-frame upper bound on canceled queued audio. There is no queue-starvation
+observation, rebuffer, unconsumed packet, worker error or cleanup error, and
+the device closes. This is a stop-boundary tail, not evidence of a mid-run
+audible interruption. Full-map/campaign continuity, acoustics and sustained
+playback deadlines remain unqualified. The raw host report and PCM/catalog
+remain under ignored `local/`; portable results are linked in
+[music-loop evidence](music-loops.md#d_e2m9-complete-state-recurrence-and-host-selection-september-27).

@@ -1,0 +1,83 @@
+{
+  "RecordedUtc": "2026-09-27T23:36:17.6744248Z",
+  "Format": "pwshDoom.MusicHostTrackIntegration",
+  "RawHostReport": "local/episode2m9-music-integration-20260927.json",
+  "RawHostReportSha256": "5141649A1679FC7B4C398A6ED39E26004D190A4987AC7CCF5EADF536CB104124",
+  "Music": {
+    "DeviceClosed": true,
+    "ReturnedCompletedFrames": 84420,
+    "RebufferCount": 0,
+    "Meaning": "Two-second actual E2M9 game/audio-worker integration. The engine emits a D_E2M9 looping start from the one-track catalog. The device completed 84420 of 86940 submitted frames before shutdown; the reported upper bound on a canceled queued tail is 2520 frames. No queue-starvation observation or rebuffer was recorded, and all packets were consumed with no worker or cleanup error. This is a stop-boundary tail, not evidence of a mid-run audible interruption. It does not qualify full-map/campaign playback, acoustics, sustained deadlines, performance or monitor pacing.",
+    "CleanupError": null,
+    "RebufferObservations": [],
+    "MusicClosed": true,
+    "CancelledQueuedFramesUpperBound": 2520,
+    "WallSeconds": 7.5065942,
+    "SubmittedFrames": 86940,
+    "UnconsumedPackets": 0,
+    "Selected": "D_E2M9",
+    "RebufferResumes": [],
+    "AudioError": null,
+    "Transitions": [
+      {
+        "Track": "D_E2M9",
+        "Loop": true,
+        "Kind": "Start",
+        "AfterFrames": 0
+      }
+    ],
+    "Packets": 69
+  },
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "MapSelectionReceiptSha256": "F7729B68C44325D99758282871B70174610B5B39DD3960C3B1AC1C0141601BDA",
+  "Result": {
+    "ExitReason": "Duration",
+    "Error": null,
+    "Frames": 45,
+    "Tics": 69
+  },
+  "MapSelectionReceipt": "results/music-events-map-selection-e2m9-20260927.json",
+  "Meaning": "Two-second actual E2M9 game/audio-worker integration. The engine emits a D_E2M9 looping start from the one-track catalog. The device completed 84420 of 86940 submitted frames before shutdown; the reported upper bound on a canceled queued tail is 2520 frames. No queue-starvation observation or rebuffer was recorded, and all packets were consumed with no worker or cleanup error. This is a stop-boundary tail, not evidence of a mid-run audible interruption. It does not qualify full-map/campaign playback, acoustics, sustained deadlines, performance or monitor pacing.",
+  "TrackQualificationSha256": "83B6B3A726B22C8C900163B997DBA6A65A2D29BF75ECDBACD86C81DD7A6AD34A",
+  "Sources": [
+    {
+      "Path": "scripts/Invoke-Doom.ps1",
+      "Sha256": "EAA75B6B236F6481C7C15EF1D2DA82C536B27206FBCD005CB1C67BED305E03C2"
+    },
+    {
+      "Path": "scripts/Invoke-SimulationWorker.ps1",
+      "Sha256": "306A1DF019997C8227D2E7516C72DF3BA70624985227EB5D77EE5DC04FF28533"
+    },
+    {
+      "Path": "scripts/Invoke-AudioWorker.ps1",
+      "Sha256": "32E80F308BFAB71EDF7198CBA7FED196021FEEF6BDADF2EFBD3D4E7EDBFD1296"
+    },
+    {
+      "Path": "src/SimulationProcess.ps1",
+      "Sha256": "5BFE98A3379E5CC51B39DBDE2E17E12DD0406D3663A8CD041AEFE0FB29054B9D"
+    },
+    {
+      "Path": "src/AudioRunspace.ps1",
+      "Sha256": "A930314C31A8DC628E96266E4654ACE1E2222FE076519B98578663A165DE1AD4"
+    },
+    {
+      "Path": "src/MusicPlayback.ps1",
+      "Sha256": "C4B6FBE2C44AFB3FE2E13CEF968AD3EEAE7DD8FA85B993321FFDED5321B0A71F"
+    },
+    {
+      "Path": "src/MusicLoopReader.ps1",
+      "Sha256": "083079C548A2BB47F1DFE661C5C3CEAD21B7A0FED104062CE46740DAF1215D0B"
+    }
+  ],
+  "Version": 1,
+  "MusicCatalogSha256": "9352165A23E096843E045F9F61421972CEA73F0CD1E4B7A262416FA2F2385D0A",
+  "Parameters": {
+    "Seconds": 2.0025559,
+    "Workers": 4,
+    "Style": null,
+    "Episode": 2,
+    "Map": 9,
+    "PowerShell": "7.6.5",
+    "Headless": true
+  }
+}

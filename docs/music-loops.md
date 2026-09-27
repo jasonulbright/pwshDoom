@@ -332,6 +332,40 @@ and PCM remain under ignored `local/`. Portable receipts:
 [map callback/catalog checks](../results/music-events-map-selection-e2m8-20260927.json),
 and [host integration](../results/music-host-e2m8-integration-20260927.json).
 
+### D_E2M9 complete-state recurrence and host selection (September 27)
+
+D_E2M9 has a one-cycle period of 4,233,600 stereo frames (96 seconds). The
+complete-state proof rendered 8,467,200 frames (192 audio seconds) across two
+aligned periods. Both boundaries contain 127 live voices and normalized state
+`A746B7B002D12F44F857D01CC46954477352EA72A640D9C07262F8DD3F94E789`. The
+independent eight-second opening PCM matches exactly (352,800 frames; SHA-256
+`C5FEB0D6C40D1E8DEC644576B2C849DE55C0DC478E89A4657CB58F0FA2A4427F`). Each
+period file is 67,737,600 bytes. Rendering, writing and snapshotting took
+859.227 seconds; preparation took 877.463 seconds under PowerShell 7.6.5.
+This is offline qualification cost, not playback performance. The score is
+byte-distinct in the pinned IWAD (MUS SHA-256
+`A6F854BDC4EC0DE7B8E3EC19B2EC5B1B5C0CF8DC00AC52A45A0E7E4C47D219E6`). The
+two-period proof establishes normalized synthesizer-state recurrence; it does
+not claim a third independently rendered output period.
+
+The six-check reader/mixer test verifies the opening and exact recurrent seam.
+The ten-check actual waveOut worker test matches submitted PCM with its
+independent schedule. Fourteen engine callback/catalog checks confirm that
+E2M9 selects a looping D_E2M9 score and matches its IWAD bytes. A two-second
+headless E2M9 host session selects D_E2M9, submits 86,940 frames across 69
+packets and completes 84,420 frames before shutdown. Its 2,520-frame canceled
+queue-tail upper bound is at stop; all packets were consumed, with no observed
+queue starvation, rebuffer, worker error or cleanup error, and the device
+closed. This stop-boundary tail is not evidence of a mid-run audible
+interruption. The run does not establish full-map/campaign continuity,
+acoustic quality or sustained playback timing. The catalog and PCM remain
+under ignored `local/`. Portable receipts:
+[preparation](../results/music-preparation-ultimate-doom-e2m9-stateproof-20260927.json),
+[reader/mixer qualification](../results/music-track-qualification-d-e2m9-state-proof-20260927.json),
+[waveOut worker](../results/music-audio-worker-d-e2m9-state-proof-20260927.json),
+[map callback/catalog checks](../results/music-events-map-selection-e2m9-20260927.json),
+and [host integration](../results/music-host-e2m9-integration-20260927.json).
+
 ### PowerShell patch-version compatibility (September 27)
 
 Jason's first terminal launch exposed an exact-patch comparison in both the
