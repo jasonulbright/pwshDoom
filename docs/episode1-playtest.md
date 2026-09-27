@@ -22,14 +22,18 @@ E1M8 exit and intermission.
 
 ## Build and launch
 
-Engine/source baseline: commit `693cc061a2caa1fac36fc8a0e6d2e6830a6a4577`.
-It includes the verified world-sprite sampling, fixed-point actor projection,
-and Doom-exact rotated-frame selection. The 295 focused campaign, boss-trigger,
-session, menu, and synthetic-input checks were rerun on this baseline; all
-passed. Its 36-map smoke, 16-worker styles, exact tangent-angle parity, and
-launcher check are recorded in the current
-[readiness receipt](../results/episode1-playtest-readiness.json). Documentation
-updates after this source commit do not change the launchable game code.
+Run exact source build commit `68b1b82be1a1fcda0401fd454204e52f870e54d7` from
+the `codex/feasibility-study` branch. Its gameplay, renderer, session/menu and
+input source match the verified baseline `693cc061a2caa1fac36fc8a0e6d2e6830a6a4577`;
+the production change since that baseline is the separately qualified finite
+music playback path. The earlier baseline's 295 focused campaign,
+boss-trigger, session, menu and synthetic-input checks passed, as did its
+36-map smoke, 16-worker style checks, exact tangent-angle parity and launcher
+check. The [readiness receipt](../results/episode1-playtest-readiness.json)
+links that evidence and the current audio update. Fresh D_INTRO and Episode 1
+worker receipts verify finite playback and save/load compatibility on this
+build. No recorded or bot-driven full-campaign route is being treated as human
+playthrough evidence.
 Run from the repository root in 64-bit PowerShell 7.4 or later on Windows,
 with Windows Terminal, the legally obtained Ultimate Doom `DOOM.WAD`, and the
 prepared local music catalog `local/music-prepared-episode1.json`. The tested Steam IWAD is
@@ -88,10 +92,10 @@ use short discrete presses for switches. Classic needs a Terminal viewport of
 at least 320 columns by 100 rows. The game pauses if it is smaller; reduce the
 font size or enlarge the window if needed. Larger viewports center the game
 image, so blank space around it is expected. The 11-track Episode 1 catalog is
-enabled. Its actual
-simulation/audio worker passed 15 save/load/new-game checks, including 97,020
-music frames and clean device shutdown; whole-campaign music continuity,
-35-tic/60-display pacing, and audible review of every track are not certified.
+enabled. Its actual simulation/audio worker passed 15 save/load/new-game checks,
+including 97,020 music frames and clean device shutdown; the updated worker also
+passes on the current build. Whole-campaign music continuity, 35-tic/60-display
+pacing, and audible review of every track are not certified.
 Report visible stalls, delayed controls, or missing/dropout sound. Rendering
 remains an approximation rather than vanilla pixel/demo compatibility.
 
