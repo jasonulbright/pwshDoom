@@ -47,8 +47,12 @@ sighting near blue armor remains unreproduced. The earlier
 keeps its original `4ed3363` source pin, four retained E1M1–E1M4 route
 regressions, and fixed-input E1M2–E1M4 host replays. The E1M3 waypoint-driver
 attempt stopped short without a reproduced defect and route tuning remains
-stopped. These results prepare one human run; no automated test claims the
-remaining maps or finale were played.
+stopped. The exact recorded 26,731-command human attempt also replays through
+the chainsaw input without an exception, matching all 79 recorded gameplay and
+render checkpoints; its separate automap, audio, and terminal output are not
+replayed ([receipt](../results/episode1-human-crash-replay-20260927.json)).
+These results prepare one human run; no automated test claims the remaining
+maps or finale were played.
 
 The prior `e358741` renderer, `76b18ac` campaign/session, and `f5f404a`
 Episode 1 receipts remain available with their original source pins. Detailed

@@ -738,3 +738,19 @@ AnsiArt/Katakana across five views and seven uneven strips. Receipts:
 worker checks. These checks establish the targeted visibility correction and
 worker consistency for their samples, not complete sprite parity, campaign
 completion, original-executable equivalence, or live frame rate.
+
+### Sampled radioactive-pool views (2026-09-27)
+
+To investigate the separate report of pickups and corpses showing through
+walls near E1M1's blue armor, sixteen recorded camera states from tics 4,900
+through 10,098 were compared against the adopted `ThreeDRenderer`. The
+FastRenderer candidate-only actor mask ranges from zero to eleven pixels per
+sample; its largest value is at tic 6,300. No specific blue-armor corpse or
+pickup leak was isolated in those sampled views. The detailed positions,
+nearby actors, and mask counts are in the
+[sample receipt](../results/human-pool-occlusion-samples-20260927.json).
+
+This is a sparse comparison against our adapted PowerShell reference. It does
+not cover every frame, establish the exact camera state Jason saw, or compare
+against an independently run original executable. The reported corpse view
+remains open for the planned complete human playthrough.

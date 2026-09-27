@@ -2299,6 +2299,25 @@ Test-GameActions.ps1 regression also passes all nine checks. These are
 focused component checks; Jason's route remains incomplete and must be
 restarted from E1M1 on the fixed build.
 
+The exact saved human command stream is now a crash regression as well. The
+new [recorded-human replay check](../scripts/Test-RecordedHumanCrashReplay.ps1)
+consumes all 26,731 inputs, passes E1M1 intermission at tic 10,098, loads E1M2
+at tic 13,520, and reaches the end of the recording without an exception. All
+79 saved gameplay/render checkpoints match, including the initial state. The
+recorded source fingerprint differs because this replay tests the post-fix
+engine; the separately logged 185 automap commands are excluded. This is an
+in-process gameplay regression, not terminal/audio evidence or a completed
+human campaign. See the
+[replay receipt](../results/episode1-human-crash-replay-20260927.json).
+
+The pool sighting received a bounded 16-view comparison from tics 4,900–10,098
+of the same human E1M1 input. Candidate-only actor-mask pixels range from 0 to
+11 per sampled view against the adopted renderer, and no specific corpse leak
+was isolated. The blue-armor report remains open; sparse adopted-reference
+samples do not certify all camera angles or original-executable parity. See
+the [pool-view receipt](../results/human-pool-occlusion-samples-20260927.json)
+and [rendering-fidelity notes](rendering-fidelity.md#sampled-radioactive-pool-views-2026-09-27).
+
 ## 2026-09-27 — Clip world actors at wall silhouettes
 
 While preparing the single full Episode 1 human run, Jason reported E1M1

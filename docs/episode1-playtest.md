@@ -58,8 +58,13 @@ catalog reports open and clean audio-device shutdown. It is startup evidence,
 not campaign completion or an audible-quality check. The human run later
 exposed a PowerShell Angle comparison exception on a chainsaw hit in E1M2.
 The pinned build compares Doom binary-angle values explicitly; its focused
-E1M2 hit test and the existing nine-check gameplay suite pass. See the
-[crash fix ledger entry](ledger.md#2026-09-27--fix-the-chainsaw-crash-found-in-jasons-episode-1-attempt).
+E1M2 hit test and the existing nine-check gameplay suite pass. The complete
+26,731-command input from the interrupted attempt now replays through the
+chainsaw attack without error, matching all 79 saved gameplay/render
+checkpoints; automap, audio, and terminal presentation are outside this
+replay. See the
+[crash fix ledger entry](ledger.md#2026-09-27--fix-the-chainsaw-crash-found-in-jasons-episode-1-attempt)
+and [recorded replay receipt](../results/episode1-human-crash-replay-20260927.json).
 This does not certify a human campaign completion. The retained E1M1–E1M4
 routes and fixed-input E1M2–E1M4 replays remain linked in
 the earlier [renderer-guard receipt](../results/episode1-render-guard-evidence-20260927.json),
@@ -267,6 +272,20 @@ Attempt 1 (2026-09-27), on build 398022a8caa3b3e31d2a0d1c08642ecf6be7c1d0,
 was interrupted by the chainsaw attack crash in E1M2. Jason reported collecting
 the chainsaw and pressing Ctrl to attack an imp. The session record shows E1M1
 intermission followed by the E1M2 load; it ended at 26,731 tics with Error.
-The issue is fixed in the build pinned above. This attempt did not finish the
-episode or reach the secret-map path/finale. Start a fresh full run from E1M1;
-do not count the interrupted attempt as completion.
+The issue is fixed in the build pinned above. Replaying the saved 26,731-command
+input now completes without a simulation exception and matches all 79 saved
+gameplay/render checkpoints. This replay omits the separately recorded
+automap commands, audio, and terminal output; it is a crash regression, not
+human playthrough evidence.
+
+The E1M1 visual notes are still under investigation. One reproduced BON1 actor
+leak at tic 245 is fixed. The raised-floor columns in the screenshot are
+Techpillar sprites whose overlap matches classic Doom's documented plane/sprite
+draw order. Sixteen sampled radioactive-pool views did not isolate the reported
+corpse leak by the blue armor; that sighting remains open. See the
+[renderer issue details](rendering-fidelity.md#clip-world-sprites-to-wall-silhouettes-2026-09-27)
+and [pool comparison](../results/human-pool-occlusion-samples-20260927.json).
+
+Attempt 1 did not finish the episode or reach the secret-map path/finale. The
+one complete Episode 1 human playthrough remains pending; it starts fresh from
+E1M1 and ends at the Episode 1 finale.
