@@ -2276,3 +2276,25 @@ This is startup/integration evidence, not Jason's human playthrough, audible
 quality review, campaign audio continuity or an E1 completion claim. The
 playtest handoff now targets the fixed build; Jason's complete human route
 remains pending.
+
+## 2026-09-27 — Fix the chainsaw crash found in Jason's Episode 1 attempt
+
+Jason reported a crash in E1M2 after collecting the chainsaw and attacking an imp
+with Ctrl. The local human session recorded E1M1 intermission at tic 10,098 and
+the E1M2 level load at tic 13,520; it ended with 26,731 tics, 39,094 frames,
+and exit Error. This run is an interrupted human attempt, not Episode 1
+completion. The simulation report identifies the failure in WeaponBehavior.Saw:
+PowerShell's -gt tried to compare a custom Angle instance (16.89922378398478
+degrees), which does not implement IComparable. The hit had already occurred;
+player-facing adjustment crashed while processing it.
+
+The chainsaw and Doom II homing-turn code now compare wrapped binary-angle
+.Data values explicitly. The new focused [chainsaw/homing test](../scripts/Test-SawAttack.ps1)
+uses the installed Ultimate Doom IWAD (SHA-256
+6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F): it lands
+a real E1M2 imp hit on its first attempt (60 to 56 HP), then exercises the
+homing turn. Both checks pass in
+[saw-attack.json](../results/saw-attack.json). The existing
+Test-GameActions.ps1 regression also passes all nine checks. These are
+focused component checks; Jason's route remains incomplete and must be
+restarted from E1M1 on the fixed build.

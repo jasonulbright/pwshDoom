@@ -1087,14 +1087,14 @@ class MonsterBehavior {
         $exact = [Geometry]::PointToAngle($actor.X, $actor.Y, $dest.X, $dest.Y)
 
         if ($exact -ne $actor.Angle) {
-            if ($exact - $actor.Angle -gt [Angle]::Ang180) {
+            if (($exact - $actor.Angle).Data -gt [Angle]::Ang180.Data) {
                 $actor.Angle -= [MonsterBehavior]::traceAngle
-                if ($exact - $actor.Angle -lt [Angle]::Ang180) {
+                if (($exact - $actor.Angle).Data -lt [Angle]::Ang180.Data) {
                     $actor.Angle = $exact
                 }
             } else {
                 $actor.Angle += [MonsterBehavior]::traceAngle
-                if ($exact - $actor.Angle -gt [Angle]::Ang180) {
+                if (($exact - $actor.Angle).Data -gt [Angle]::Ang180.Data) {
                     $actor.Angle = $exact
                 }
             }

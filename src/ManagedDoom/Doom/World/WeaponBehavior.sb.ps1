@@ -312,7 +312,7 @@ class WeaponBehavior {
             $hs.LineTarget.X, $hs.LineTarget.Y
         )
 
-        if ($targetAngle - $player.Mobj.Angle -gt [Angle]::Ang180) {
+        if (($targetAngle - $player.Mobj.Angle).Data -gt [Angle]::Ang180.Data) {
             # The code below is based on Mocha Doom's implementation.
             # It is still unclear for me why this code works like the original version...
             if ([int]($targetAngle - $player.Mobj.Angle).Data -lt -([Angle]::Ang90.Data / 20)) {
@@ -321,7 +321,7 @@ class WeaponBehavior {
                 $player.Mobj.Angle -= ([Angle]::Ang90 / 20)
             }
         } else {
-            if ($targetAngle - $player.Mobj.Angle -gt ([Angle]::Ang90 / 20)) {
+            if (($targetAngle - $player.Mobj.Angle).Data -gt ([Angle]::Ang90 / 20).Data) {
                 $player.Mobj.Angle = $targetAngle - ([Angle]::Ang90 / 21)
             } else {
                 $player.Mobj.Angle += ([Angle]::Ang90 / 20)
