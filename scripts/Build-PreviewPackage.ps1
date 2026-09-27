@@ -13,6 +13,8 @@ foreach($path in 'Play.cmd','Play.ps1','Start-Doom.ps1','README.md','LICENSE','T
 foreach($directory in 'src','scripts','docs'){
     foreach($file in Get-ChildItem (Join-Path $root $directory) -Recurse -File){
         $relative=[IO.Path]::GetRelativePath($root,$file.FullName).Replace('\','/')
+        # Research PDFs belong in the checkout, not the playable source ZIP.
+        if($directory -eq 'docs' -and $file.Extension -eq '.pdf'){continue}
         if($file.Extension -notin '.ps1','.md','.json','.txt'){throw "Unexpected package input: $relative"}
         $files.Add($relative)
     }
