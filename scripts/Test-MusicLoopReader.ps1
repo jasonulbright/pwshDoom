@@ -10,14 +10,35 @@ function Check([string]$Name,[bool]$Passed){$checks.Add(@{Name=$Name;Passed=$Pas
 function Reject([string]$Name,[scriptblock]$Action){$rejected=$false;try{& $Action}catch{$rejected=$true};Check $Name $rejected}
 try{
     # Trusted synthetic receipt exercises the reader only; it is NOT loop qualification evidence.
-    $periods=@(for($i=0;$i -lt 3;$i++){
+    $periods=@(for($i=0;$i -lt 2;$i++){
         $samples=[double[]]::new(5040);for($n=0;$n -lt $samples.Length;$n++){$samples[$n]=if($i -eq 0){-$n-1.0}else{$n+.25}}
         $bytes=[byte[]]::new($samples.Length*8);[Buffer]::BlockCopy($samples,0,$bytes,0,$bytes.Length);$path=Join-Path $dir "period-$i.f64";[IO.File]::WriteAllBytes($path,$bytes)
         @{Index=$i;Frames=2520;Bytes=$bytes.Length;Path=$path;Sha256=(Get-FileHash $path).Hash}
     })
     $sources=@('MusScore','SoundFontBank','SoundFontRegions','MusicOscillator','MusicControls','MusicSynth','MusicGroup','MusicLoopState'|ForEach-Object {@{Path="src/$_.ps1";Sha256=(Get-FileHash "$PSScriptRoot/../src/$_.ps1").Hash}})
-    $receipt=@{Error=$null;Sources=$sources;Details=@{Qualified=$true;NormalizedStateRepeats=$true;NextPeriodFloatOutputRepeats=$true;Reference=@{Exact=$true};SourcesChangedDuringRun=@();PowerShell=$PSVersionTable.PSVersion.ToString();PeriodFrames=2520;LoopStartFrame=2520;LoopFrames=2520;Periods=$periods;Snapshots=@(1..4|ForEach-Object {@{StateSha256=('A'*64)}});MusSha256='synthetic';BankSha256='synthetic'}}
+    $receipt=@{Error=$null;Sources=$sources;Details=@{Qualified=$true;EvidenceMode='CompleteStateRecurrence';NormalizedStateRepeats=$true;NextPeriodFloatOutputRepeats=$null;Reference=@{Exact=$true};SourcesChangedDuringRun=@();PowerShell=$PSVersionTable.PSVersion.ToString();PeriodFrames=2520;LoopStartFrame=2520;LoopFrames=2520;Periods=$periods;Snapshots=@(1..3|ForEach-Object {@{StateSha256=('A'*64)}});MusSha256='synthetic';BankSha256='synthetic'}}
     $path=Join-Path $dir 'synthetic-reader-receipt.json';$receipt|ConvertTo-Json -Depth 8|Set-Content $path
+    $oversizedReceipt=$receipt|ConvertTo-Json -Depth 8|ConvertFrom-Json -AsHashtable
+    $oversizedReceipt.Details.PeriodFrames=52921260;$oversizedReceipt.Details.LoopStartFrame=52921260;$oversizedReceipt.Details.LoopFrames=52921260
+    $oversizedPath=Join-Path $dir 'over-reader-bound-receipt.json';$oversizedReceipt|ConvertTo-Json -Depth 8|Set-Content $oversizedPath
+    Reject 'Loop period above the reader bound is rejected before opening payload files' {$r=Open-DoomMusicLoopReader $oversizedPath;Close-DoomMusicLoopReader $r}
+    $qualifiedVersion=$PSVersionTable.PSVersion
+    $compatiblePatch=if($qualifiedVersion.Patch -gt 0){$qualifiedVersion.Patch-1}else{$qualifiedVersion.Patch+1}
+    $receipt.Details.PowerShell=([version]::new($qualifiedVersion.Major,$qualifiedVersion.Minor,$compatiblePatch)).ToString()
+    $compatiblePath=Join-Path $dir 'same-line-patch-receipt.json';$receipt|ConvertTo-Json -Depth 8|Set-Content $compatiblePath
+    $compatibleReader=Open-DoomMusicLoopReader $compatiblePath
+    Check 'Same major/minor qualification accepts a different PowerShell patch' ($compatibleReader.Files.Count -eq 2)
+    Close-DoomMusicLoopReader $compatibleReader
+    $receipt.Details.PowerShell=([version]::new($qualifiedVersion.Major,$qualifiedVersion.Minor+1,0)).ToString()
+    $incompatiblePath=Join-Path $dir 'different-minor-receipt.json';$receipt|ConvertTo-Json -Depth 8|Set-Content $incompatiblePath
+    Reject 'Different PowerShell minor line is rejected' {$r=Open-DoomMusicLoopReader $incompatiblePath;Close-DoomMusicLoopReader $r}
+    $receipt.Details.PowerShell=([version]::new($qualifiedVersion.Major+1,$qualifiedVersion.Minor,0)).ToString()
+    $incompatiblePath=Join-Path $dir 'different-major-receipt.json';$receipt|ConvertTo-Json -Depth 8|Set-Content $incompatiblePath
+    Reject 'Different PowerShell major line is rejected' {$r=Open-DoomMusicLoopReader $incompatiblePath;Close-DoomMusicLoopReader $r}
+    $receipt.Details.PowerShell='not-a-version'
+    $malformedPath=Join-Path $dir 'malformed-runtime-receipt.json';$receipt|ConvertTo-Json -Depth 8|Set-Content $malformedPath
+    Reject 'Malformed PowerShell version is rejected' {$r=Open-DoomMusicLoopReader $malformedPath;Close-DoomMusicLoopReader $r}
+    $receipt.Details.PowerShell=$qualifiedVersion.ToString()
     $reader=Open-DoomMusicLoopReader $path
     Reject 'Playback file cannot be opened for writing while reader holds it' {$f=[IO.File]::Open($periods[1].Path,[IO.FileMode]::Open,[IO.FileAccess]::Write,[IO.FileShare]::ReadWrite);$f.Dispose()}
     $result=Read-DoomMusicLoop $reader 9000;$exact=$true
@@ -37,6 +58,13 @@ try{
     $receipt.Sources[0].Sha256='wrong';$receipt|ConvertTo-Json -Depth 8|Set-Content $path;Reject 'Changed synthesis source rejected' {$r=Open-DoomMusicLoopReader $path;Close-DoomMusicLoopReader $r};$receipt.Sources[0].Sha256=(Get-FileHash "$PSScriptRoot/../src/MusScore.ps1").Hash
     $receipt.Details.Snapshots[2].StateSha256='different';$receipt|ConvertTo-Json -Depth 8|Set-Content $path;Reject 'Inconsistent state evidence rejected' {$r=Open-DoomMusicLoopReader $path;Close-DoomMusicLoopReader $r};$receipt.Details.Snapshots[2].StateSha256='A'*64
     $receipt|ConvertTo-Json -Depth 8|Set-Content $path
+    $legacyThird=@{Index=2;Frames=2520;Bytes=$periods[1].Bytes;Path=$periods[1].Path;Sha256=$periods[1].Sha256}
+    $legacyPeriods=@($periods)+@($legacyThird)
+    $legacyReceipt=@{Error=$null;Sources=$sources;Details=@{Qualified=$true;NormalizedStateRepeats=$true;NextPeriodFloatOutputRepeats=$true;Reference=@{Exact=$true};SourcesChangedDuringRun=@();PowerShell=$PSVersionTable.PSVersion.ToString();PeriodFrames=2520;LoopStartFrame=2520;LoopFrames=2520;Periods=$legacyPeriods;Snapshots=@(1..4|ForEach-Object {@{StateSha256=('A'*64)}});MusSha256='synthetic';BankSha256='synthetic'}}
+    $legacyPath=Join-Path $dir 'legacy-three-period-receipt.json';$legacyReceipt|ConvertTo-Json -Depth 8|Set-Content $legacyPath
+    $legacyReader=Open-DoomMusicLoopReader $legacyPath
+    Check 'Existing three-period receipt remains accepted and retains only intro plus loop readers' ($legacyReader.Files.Count -eq 2)
+    Close-DoomMusicLoopReader $legacyReader
     $bytes=[IO.File]::ReadAllBytes($periods[1].Path);$bytes[0]=$bytes[0] -bxor 1;[IO.File]::WriteAllBytes($periods[1].Path,$bytes)
     Reject 'Corrupt loop rejected at open' {$r=Open-DoomMusicLoopReader $path;Close-DoomMusicLoopReader $r}
     $f=[IO.File]::Open($periods[0].Path,[IO.FileMode]::Open,[IO.FileAccess]::Write,[IO.FileShare]::None);$f.Dispose();Check 'Failed open releases earlier handles' $true

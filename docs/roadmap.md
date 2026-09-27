@@ -36,6 +36,16 @@ route ended in player death and did not expose a reproducible product defect;
 it is documented and route automation is stopped for this milestone. The
 broader release acceptance gates below remain intact.
 
+Jason's first playtest launch exposed a PowerShell 7.6.6 startup failure:
+qualified loop and one-shot music reports were tied to the exact 7.6.5 patch
+string even though their source and payload hashes were current. The readers
+now accept the same major/minor runtime line, and the bounded simulation
+startup wait is 60 seconds for cold starts. A fresh headless 7.6.6 integration
+run loads all eleven Episode 1 music reports and advances E1M1 with clean audio
+shutdown; the [runtime receipt](../results/episode1-startup-runtime-compat-20260927.json)
+records its limits. The earlier source pin in the handoff has been superseded;
+Jason's single full HMP Episode 1 run remains pending on the fixed build.
+
 The preceding Episode 1 candidate was pinned to `f5f404a`. Replaying the
 retained E1M3 and E1M4 host inputs against the current working candidate exposed
 two renderer failures: a plane-distance cast beyond signed Int32 and an
@@ -183,9 +193,9 @@ Do not postpone all performance work until M6. Measure after a feature adds subs
 
 ## Active work queue (2026-09-27)
 
-- **Episode 1 human milestone:** ready for one complete human run on source build `0978112ef7b365f66b93770e1d98978e55b6d506`, detailed in [`episode1-playtest.md`](episode1-playtest.md). The expected path includes E1M3 → E1M9 → E1M4 and ends at the E1 finale. Jason's result is pending. Do not split it into map-by-map requests or spend this milestone constructing/tuning an AI route.
+- **Episode 1 human milestone:** ready for one complete human run on the fixed source build pinned in [`episode1-playtest.md`](episode1-playtest.md). The expected path includes E1M3 → E1M9 → E1M4 and ends at the E1 finale. Jason's result is pending. Do not split it into map-by-map requests or spend this milestone constructing/tuning an AI route.
 - **M4 rendering fidelity:** missing-texture wall bands now retain sprite occlusion depth, with a 20-check regression and current serial/worker checks. The separate tic-105 actor-visibility difference remains open. Continue specific renderer comparisons against the adopted PowerShell renderer and Doom behavior, especially moving geometry; preserve all three style checks and the 36-map smoke without treating them as original-executable or campaign-completion proof.
-- **M3 audio:** continue toward full-campaign continuity, audible quality and queue timing under renderer load. The Episode 1 loop catalog and finite D_INTRO path are prepared, but an actual-device queue-timing stall has been observed and the full campaign has not been heard through. The installed IWAD inventory has 27 unique map scores; Episode 1 covers nine. A sequential Episode 2 preparation was deferred after about 16 minutes at 49% of D_E2M1's three-period loop render; no new qualification was published. Keep the remaining 18 map scores and two finite scores visible, and resume only when this offline cost fits the active game work.
+- **M3 audio:** continue toward full-campaign continuity, audible quality and queue timing under renderer load. The Episode 1 loop catalog and finite D_INTRO path are prepared, but an actual-device queue-timing stall has been observed and the full campaign has not been heard through. The installed IWAD inventory has 27 unique map scores; Episode 1 covers nine and D_E2M1 now qualifies as one additional unique score. The optional two-period complete-state recurrence proof passed on real E1M1 and D_E2M1 scores, with the existing three-period independent-output mode retained as default. The earlier Episode 2 batch deferral remains historical; 17 unique Episode 2/3 scores and two finite scores remain. Continue only in track-sized preparation batches and keep their substantial offline cost in view.
 - **M6 performance:** the 35-tic/60-display goal remains open. Existing 59.67 terminal updates/sec is not monitor presentation; PresentMon ETW could not start under this account. A StringBuilder strip-assembly attempt is rejected after exact-output measurements showed 4.0–9.3x slower encoding and 83–103% more thread allocations; array-and-concatenate is restored. Keep isolated encoder/renderer/mixer timings separate from simulation, audio, output and displayed-frame claims; see [terminal output](terminal-output.md).
 - **M5/M7 release:** keep the broader Ultimate Doom release gates intact beyond the one Episode 1 playthrough, including the other maps, normal/secret behavior, independent compatibility boundaries, clean-checkout launch, licenses, package and write-up. Continue from reproducible product findings; a route death or slow/incomplete automated route alone is not an engine defect.
 

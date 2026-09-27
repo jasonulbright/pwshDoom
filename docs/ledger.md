@@ -2197,3 +2197,82 @@ restarted at the D_E2M1 track boundary. This leaves the Episode 1 catalog
 unchanged. Defer the full batch until its several-hour cost is better aligned
 with the active release work; keep the 18 uncovered map scores and finite
 score gaps visible in the audio roadmap.
+
+## 2026-09-27 — Prove deterministic music recurrence from complete state
+
+The three-period qualifier independently renders and compares the next loop's
+PCM. That evidence is strong but expensive: an interrupted Episode 2 batch had
+spent about 16 minutes before reaching half of D_E2M1's three-period render.
+The pinned synthesizer is deterministic, so the optional
+`-StateRecurrenceProof` mode now renders the intro and one complete candidate
+loop, then compares their normalized complete future-driving states at the
+aligned boundary. The serializer accepts only known synthesizer fields and
+fails closed on unknown fields. It preserves event/score phase and channel,
+voice, oscillator, envelope, filter and modulator state while normalizing
+absolute counters that do not alter future samples. Equal state at the same
+score phase with identical immutable assets entails recurrence for this
+specific deterministic model. The report explicitly does not claim a third
+independent PCM match. The old three-period check remains default and readable.
+
+The proof was first exercised on actual E1M1: its 96-second period repeats
+complete state at both loop boundaries with 35 voices. The exact separately
+rendered canonical opening PCM remains unchanged. After the later preflight
+bound guard, E1M1 was rerun against the current qualifier; two periods took
+314.031 seconds of render/write/snapshot work. The state-proof evidence audit
+passes 23 checks; reader compatibility passes 17, including the over-bound
+rejection; the real reader/mixer qualification passes six; simulation playback
+passes 17; and the actual waveOut worker passes ten, with the device closed.
+The D_E2M1 test then completed: its aligned period is 609.857 seconds across
+four score cycles, with 12 voices and recurrent state SHA-256
+`BBD41D41F1D2C43F7BB0DEFB4BCD0D2790644EE864561DC1F5932DBEB261413E`. It
+rendered two periods (1,219.714 audio seconds) in 1,320.515 seconds; the full
+preparation command took 1,341.522 seconds. Its independent opening PCM is
+exact. Six actual-reader/game-mixer checks and ten actual waveOut-worker checks
+pass; the worker's submitted PCM hash matches its independent schedule and
+the device closes. These device checks do not establish acoustic quality,
+audible delivery or in-game queue timing.
+
+The new qualified D_E2M1 result is the first newly covered Doom II map score;
+the experimental combined E1/E2M1 catalog remains in ignored `local/` and does
+not replace the unchanged Episode 1 catalog or constitute a full Episode 2
+catalog. Seventeen unique Episode 2/3 scores and the two finite title/finale
+scores remain open. Receipts are linked from [music loop evidence](music-loops.md#two-period-complete-state-recurrence-proof-september-27)
+and [music preparation](music-preparation.md).
+
+A bounds review found that the two-period mode's one-hour aggregate ceiling
+could otherwise spend time synthesizing a single period longer than the
+reader's 1,200-second playback maximum, then fail only when opening the loop.
+`Qualify-MusicLoop.ps1` now rejects such a period before any synthesis, and
+the reader's synthetic rejection test covers the boundary. The installed
+stock-score inventory tops out at 805.457 seconds (D_INTER), so this does not
+change any stock score. The D_E2M1 report predates this preflight-only guard;
+its 609.857-second period is below the limit, and its synthesizer, state
+normalizer, reader, and generated samples are unchanged.
+
+## 2026-09-27 — Accept qualified music across PowerShell patch updates
+
+Jason's first run of the Episode 1 handoff stopped at zero tics because the
+loop reader required the qualification report's exact PowerShell patch string.
+The report was valid on PowerShell 7.6.5; his launcher now resolves to 7.6.6.
+The finite D_INTRO one-shot reader had the same exact-version check and would
+also have failed once the loop reader passed. Both readers now accept a report
+from the same PowerShell major/minor line while still recording its exact
+qualification version and enforcing synthesis-source hashes, qualification
+checks and cached-PCM SHA-256/length verification. Other major/minor lines,
+malformed version strings, and invalid reports remain rejected.
+
+The loop-reader suite passes 21 checks, including same-line patch acceptance
+and major/minor rejection. Under the user's WindowsApps PowerShell 7.6.6
+launcher, the 17-check playback suite opens the actual qualified E1M1 loop and
+D_INTRO payloads; the state-proof reader/mixer evidence audit passes 23 checks.
+The first cold full-start attempt exceeded the old 30-second simulation-ready
+bound after all eleven catalog reports had opened without a music-reader
+error. That bound is now 60 seconds. A repeat under the same 7.6.6 launcher
+ran headless E1M1 for 2.002 seconds: 69 tics, 69 audio packets, 86,940
+submitted music frames, all eleven catalog entries opened, no worker error,
+and a clean device close. The compact [runtime-compatibility receipt](../results/episode1-startup-runtime-compat-20260927.json)
+links the tracked test outputs and hashes the ignored raw session reports.
+This is startup/integration evidence, not Jason's human playthrough, audible
+quality review, campaign audio continuity or an E1 completion claim. The
+playtest handoff now targets the fixed build; Jason's complete human route
+remains pending.

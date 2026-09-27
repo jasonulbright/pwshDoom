@@ -21,7 +21,7 @@ function New-DoomSimulation {
         if($CheckpointReplay){$info.ArgumentList.Add('-CheckpointReplay');$info.ArgumentList.Add([IO.Path]::GetFullPath($CheckpointReplay))}
         if($SaveRoot){$info.ArgumentList.Add('-SaveRoot');$info.ArgumentList.Add([IO.Path]::GetFullPath($SaveRoot))}
         $state.Process=[Diagnostics.Process]::Start($info);$state.Stdout=$state.Process.StandardOutput.ReadToEndAsync();$state.Stderr=$state.Process.StandardError.ReadToEndAsync()
-        if(-not $state.Ready.WaitOne(30000)){throw 'Simulation startup timed out.'}
+        if(-not $state.Ready.WaitOne(60000)){throw 'Simulation startup timed out after 60 seconds.'}
         if($state.View.ReadInt32(12) -eq 3){throw "Simulation startup failed. $($state.Stderr.Result)"}
         return $state
     } catch {Close-DoomSimulation $state;throw}

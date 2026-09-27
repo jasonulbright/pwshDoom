@@ -1,0 +1,77 @@
+{
+  "Date": "2026-09-27",
+  "Result": "Passed",
+  "Purpose": "Reproduced and fixed Episode 1 music startup failure reported under PowerShell 7.6.6",
+  "Runtime": {
+    "Launcher": "C:\\Users\\jason\\AppData\\Local\\Microsoft\\WindowsApps\\pwsh.exe",
+    "ReaderPolicy": "Accept qualification reports from the same PowerShell major/minor release; retain exact qualified version, source hashes, report checks and PCM payload SHA-256 verification.",
+    "Version": "7.6.6"
+  },
+  "InitialColdAttempt": {
+    "MusicReaderFailure": false,
+    "Report": "local/episode1-audio-startup-7.6.6.json",
+    "Outcome": "Timed out waiting for simulation startup within the previous 30-second bound",
+    "ReportSha256": "BA885E14BBFC972807C68969A9DB910AD86023571D887D87F694597E00F4CAFE"
+  },
+  "BoundedColdStartAdjustment": {
+    "Reason": "The first startup reached the old bound after opening the music catalog; repeat integration completed within the expanded bound.",
+    "CurrentTimeoutSeconds": 60,
+    "PreviousTimeoutSeconds": 30
+  },
+  "IntegrationRun": {
+    "SimulationReport": "simulation-a3504d916f7a485a8cd9832479fcffb0.json",
+    "SubmittedFrames": 86940,
+    "DeviceClosed": true,
+    "QualifiedCatalogTracks": [
+      "D_E1M1",
+      "D_E1M2",
+      "D_E1M3",
+      "D_E1M4",
+      "D_E1M5",
+      "D_E1M6",
+      "D_E1M7",
+      "D_E1M8",
+      "D_E1M9",
+      "D_INTER",
+      "D_VICTOR"
+    ],
+    "AudioError": null,
+    "SelectedTrack": "D_E1M1",
+    "ReportSha256": "E9C3E68D47BC92013245E5CC7EC44EFA0BBEC0F6CA80A7DCA7B4E964AC63E025",
+    "ExitReason": "Duration",
+    "SimulationReportSha256": "9075B47442917085FBA513F05B599FBAB8C1C6CBE7223E41113ABB029396FC1C",
+    "Report": "local/episode1-audio-startup-7.6.6-r2.json",
+    "SimulationTics": 69,
+    "MusicFrames": 86940,
+    "DurationSeconds": 2.0022327,
+    "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+    "CatalogSha256": "0E9C9542C75F4D5E2D7FC71E42FAFBB58F94321C3B8A49BA0C9AC5A93752EE58",
+    "AudioPackets": 69
+  },
+  "AutomatedChecks": {
+    "Playback": {
+      "Passed": true,
+      "Checks": 17,
+      "PowerShell": "7.6.6",
+      "Report": "results/music-playback-runtime-compat-20260927.json"
+    },
+    "LoopEvidence": {
+      "Passed": true,
+      "Checks": 23,
+      "PowerShell": "7.6.6",
+      "Report": "results/music-loop-evidence-state-proof-runtime-compat-7.6.6-r2-20260927.json"
+    },
+    "LoopReader": {
+      "Passed": true,
+      "Checks": 21,
+      "PowerShell": "7.6.6",
+      "Report": "results/music-loop-reader-runtime-compat-7.6.6-r2-20260927.json"
+    }
+  },
+  "Sources": {
+    "MusicLoopReader": "083079C548A2BB47F1DFE661C5C3CEAD21B7A0FED104062CE46740DAF1215D0B",
+    "MusicOneShotReader": "446171C237DABA7A1DC560F519C4460608CBAFFC165471251C6991CAE8790491",
+    "SimulationProcess": "5BFE98A3379E5CC51B39DBDE2E17E12DD0406D3663A8CD041AEFE0FB29054B9D"
+  },
+  "Limits": "Headless startup and two seconds of E1M1. It verifies reader/catalog initialization, simulation progression and device cleanup; it is not the full human Episode 1 playthrough, an audible-quality check or evidence of campaign-wide music continuity."
+}

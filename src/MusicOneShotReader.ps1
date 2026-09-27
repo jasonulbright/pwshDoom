@@ -6,9 +6,12 @@ function Open-DoomMusicOneShotReader {
     if(([IO.FileInfo]::new($Report)).Length -gt 16MB){throw 'One-shot report exceeds size bound.'}
     $r=[IO.File]::ReadAllText($Report)|ConvertFrom-Json -AsHashtable
     $d=$r.Details
+    $qualifiedRuntime=$null
+    $runtimeCompatible=[version]::TryParse([string]$d.PowerShell,[ref]$qualifiedRuntime)
+    if($runtimeCompatible){$runtimeCompatible=$qualifiedRuntime.Major -eq $PSVersionTable.PSVersion.Major -and $qualifiedRuntime.Minor -eq $PSVersionTable.PSVersion.Minor}
     if($r.Error -or -not $d.Qualified -or $d.Mode -cne 'OneShot' -or
-       $d.SourcesChangedDuringRun.Count -ne 0 -or $d.PowerShell -cne $PSVersionTable.PSVersion.ToString()){
-        throw 'One-shot report has no current successful qualification.'
+       $d.SourcesChangedDuringRun.Count -ne 0 -or -not $runtimeCompatible){
+        throw "One-shot report has no current successful qualification for PowerShell $($PSVersionTable.PSVersion.Major).$($PSVersionTable.PSVersion.Minor).x."
     }
     [long]$maxFrames=44100L*600
     if($d.Frames -le 0 -or $d.Frames -gt $maxFrames -or $d.ScoreFrames -le 0 -or

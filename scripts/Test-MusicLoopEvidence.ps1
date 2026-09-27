@@ -1,24 +1,29 @@
 #requires -Version 7.4
 # SPDX-License-Identifier: GPL-2.0-or-later
-param([Parameter(Mandatory)][string]$Output,[string]$Qualification='results/music-loop-e1m1-hour-bound.json',
-    [string]$StateReport='results/music-loop-state-hour-bound.json',[string]$ReaderReport='results/music-loop-reader-hour-bound.json',
-    [string]$MixerReport='results/music-effect-mix-unit-first.json')
+param([Parameter(Mandatory)][string]$Output,[string]$Qualification='results/music-loop-e1m1-state-proof-20260927.json',
+    [string]$StateReport='results/music-loop-state-hour-bound.json',[string]$ReaderReport='results/music-loop-reader-runtime-compat-7.6.6-r2-20260927.json',
+    [string]$MixerReport='results/music-effect-mix-state-proof-20260927.json')
 $ErrorActionPreference='Stop';Set-StrictMode -Version Latest
 if(Test-Path $Output){throw 'Use a fresh report path.'}
 $root=[IO.Path]::GetFullPath("$PSScriptRoot/..");. "$root/src/MusicLoopReader.ps1";. "$root/src/AudioMixer.ps1"
 $checks=[Collections.Generic.List[object]]::new();$failure=$null;$reader=$null;$digest=$null;$pcmDigest=$null;$details=$null
 function Check([string]$Name,[bool]$Passed){$checks.Add(@{Name=$Name;Passed=$Passed});if(-not $Passed){throw $Name}}
 try{
-    foreach($case in @(@($StateReport,23,'MusicLoopState'),@($ReaderReport,15,'MusicLoopReader'),@($MixerReport,9,'AudioMixer'))){
+    foreach($case in @(@($StateReport,23,'MusicLoopState'),@($ReaderReport,21,'MusicLoopReader'),@($MixerReport,9,'AudioMixer'))){
         $unit=Get-Content (Join-Path $root $case[0]) -Raw|ConvertFrom-Json
         Check "$($case[0]) checks pass" (-not $unit.Error -and $unit.Checks.Count -eq $case[1] -and @($unit.Checks|Where-Object {-not $_.Passed}).Count -eq 0)
         if($case[2] -ne 'MusicLoopState'){Check "$($case[2]) unit source is current" ($unit.SourceSha256 -ceq (Get-FileHash "$root/src/$($case[2]).ps1").Hash)}
         else{foreach($s in $unit.Sources){Check "State unit source current: $($s.Path)" ($s.Sha256 -ceq (Get-FileHash (Join-Path $root $s.Path)).Hash)}}
     }
     $r=Get-Content $Qualification -Raw|ConvertFrom-Json;$d=$r.Details
-    Check 'Full E1M1 qualification succeeded without source drift' (-not $r.Error -and $d.Qualified -and $d.SourcesChangedDuringRun.Count -eq 0 -and $d.Track -ceq 'D_E1M1' -and $d.PeriodFrames -eq 4233600 -and $d.RenderedFrames -eq 12700800)
+    $mode=if($d.PSObject.Properties.Name -contains 'EvidenceMode'){$d.EvidenceMode}else{'IndependentStateAndOutput'}
+    $periodCount=if($mode -ceq 'CompleteStateRecurrence'){2}else{3}
+    Check 'Full E1M1 qualification succeeded without source drift' (-not $r.Error -and $d.Qualified -and $d.SourcesChangedDuringRun.Count -eq 0 -and $d.Track -ceq 'D_E1M1' -and $d.PeriodFrames -eq 4233600 -and $d.RenderedFrames -eq $periodCount*4233600)
     Check 'Qualifier script is current' ($r.ScriptSha256 -ceq (Get-FileHash "$root/scripts/Qualify-MusicLoop.ps1").Hash)
-    Check 'Loop states retain 35 live voices and exact component hashes' ($d.Snapshots[1].VoiceCount -eq 35 -and $d.Snapshots[2].VoiceCount -eq 35 -and $d.Snapshots[3].VoiceCount -eq 35 -and $d.Snapshots[1].StateSha256 -ceq $d.Snapshots[2].StateSha256 -and $d.Snapshots[2].StateSha256 -ceq $d.Snapshots[3].StateSha256)
+    $stateSnapshots=@($d.Snapshots|Select-Object -Skip 1)
+    $allStateBoundaries=@($stateSnapshots|Where-Object {$_.VoiceCount -ne 35 -or $_.StateSha256 -cne $stateSnapshots[0].StateSha256}).Count -eq 0
+    $layoutMatches=if($mode -ceq 'CompleteStateRecurrence'){$d.Periods.Count -eq 2 -and $d.Snapshots.Count -eq 3 -and $null -eq $d.NextPeriodFloatOutputRepeats}else{$d.Periods.Count -eq 3 -and $d.Snapshots.Count -eq 4 -and $d.NextPeriodFloatOutputRepeats}
+    Check 'Loop state boundaries repeat under the declared evidence mode' ($layoutMatches -and $allStateBoundaries -and $d.NormalizedStateRepeats)
     $reader=Open-DoomMusicLoopReader $Qualification
     $reference=Get-Content "$root/results/music-e1m1-dry-numeric-loop.json" -Raw|ConvertFrom-Json;$ref=$reference.Details
     $refBytes=[IO.File]::ReadAllBytes($ref.WavPath);$refPcm=[byte[]]::new($refBytes.Length-44);[Buffer]::BlockCopy($refBytes,44,$refPcm,0,$refPcm.Length)
@@ -38,7 +43,7 @@ try{
             $maximum=[Math]::Max($maximum,$blockWatch.Elapsed.TotalMilliseconds)
         }
         $hash=[Convert]::ToHexString($digest.GetHashAndReset());$digest.Dispose();$digest=$null;$periodHashes.Add($hash)
-        $expected=if($period -eq 0){$d.Periods[0].Sha256}elseif($period -eq 2){$d.Periods[2].Sha256}else{$d.Periods[1].Sha256}
+        $expected=if($period -eq 0){$d.Periods[0].Sha256}elseif($mode -ceq 'IndependentStateAndOutput' -and $period -eq 2){$d.Periods[2].Sha256}else{$d.Periods[1].Sha256}
         Check "Reader period $period reproduces every float byte" ($hash -ceq $expected)
     }
     $elapsed=$watch.Elapsed.TotalSeconds;$actualPcm=[Convert]::ToHexString($pcmDigest.GetHashAndReset())

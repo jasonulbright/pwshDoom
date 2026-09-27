@@ -6,7 +6,8 @@ param([Parameter(Mandatory)][string[]]$Tracks,
     [Parameter(Mandatory)][string]$Output,
     [string]$ExistingCatalog,
     [string]$Wad='C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\base\DOOM.WAD',
-    [string]$SoundFont="$PSScriptRoot/../local/upstream/ManagedDoomPowershell/ManagedDoomPowershell/src/TimGM6mb.sf2")
+    [string]$SoundFont="$PSScriptRoot/../local/upstream/ManagedDoomPowershell/ManagedDoomPowershell/src/TimGM6mb.sf2",
+    [switch]$StateRecurrenceProof)
 $ErrorActionPreference='Stop';Set-StrictMode -Version Latest
 $root=[IO.Path]::GetFullPath("$PSScriptRoot/..")
 $directory=[IO.Path]::GetFullPath($OutputDirectory);$catalogPath=[IO.Path]::GetFullPath($Catalog);$outputPath=[IO.Path]::GetFullPath($Output)
@@ -61,12 +62,15 @@ try{
         }else{
             $attempt=Join-Path $trackRoot ([guid]::NewGuid().ToString('N'));$null=[IO.Directory]::CreateDirectory($attempt)
             $reference=Join-Path $attempt 'reference.json';$report=Join-Path $attempt 'qualification.json'
-            Write-Host "Preparing ${track}: independent opening, then three continuous aligned periods."
+            $periodDescription=if($StateRecurrenceProof){'two continuous aligned periods with complete-state recurrence proof'}else{'three continuous aligned periods with independent recurrent-output check'}
+            Write-Host "Preparing ${track}: independent opening, then $periodDescription."
             & (Get-Process -Id $PID).Path -NoProfile -File "$PSScriptRoot/Render-MusicScore.ps1" -Wad $Wad -SoundFont $SoundFont -Track $track -Seconds 8 -Output $reference | Out-Host
             if($LASTEXITCODE -ne 0){throw "Opening render failed: $track; retained $reference"}
             $ref=Get-Content $reference -Raw|ConvertFrom-Json
             if($ref.Error -or $ref.SourcesChangedDuringRun.Count){throw "Opening reference changed or failed: $track"}
-            & (Get-Process -Id $PID).Path -NoProfile -File "$PSScriptRoot/Qualify-MusicLoop.ps1" -Wad $Wad -SoundFont $SoundFont -Track $track -ReferenceReport $reference -Output $report | Out-Host
+            $qualifierArgs=@('-NoProfile','-File',"$PSScriptRoot/Qualify-MusicLoop.ps1",'-Wad',$Wad,'-SoundFont',$SoundFont,'-Track',$track,'-ReferenceReport',$reference,'-Output',$report)
+            if($StateRecurrenceProof){$qualifierArgs+='-StateRecurrenceProof'}
+            & (Get-Process -Id $PID).Path @qualifierArgs | Out-Host
             if($LASTEXITCODE -ne 0){throw "Continuous qualification failed: $track; retained $report"}
             Test-QualifiedTrack $report $track $musHashes[$track]
             [IO.File]::Copy($report,$resume,$false);$report=$resume;$action='PreparedAndQualified'
@@ -83,7 +87,7 @@ try{
     $published=$true
 }catch{$failure=$_.ToString()+"`n"+$_.ScriptStackTrace;throw}finally{
     if($archive){$archive.Dispose()};if($lock){$lock.Dispose()}
-    @{Error=$failure;RequestedTracks=$Tracks;Published=$published;Catalog=$catalogPath;CatalogSha256=if($published){(Get-FileHash $catalogPath).Hash}else{$null};
+    @{Error=$failure;RequestedTracks=$Tracks;QualificationModeForNewTracks=if($StateRecurrenceProof){'CompleteStateRecurrence'}else{'IndependentStateAndOutput'};Published=$published;Catalog=$catalogPath;CatalogSha256=if($published){(Get-FileHash $catalogPath).Hash}else{$null};
       WadSha256=$wadHash;SoundFontSha256=$bankHash;Tracks=$receipts.ToArray();Sources=$sources;Seconds=$watch.Elapsed.TotalSeconds;
       Meaning='Finite sequential preparation of exactly the requested dry looping tracks. Existing/resumed tracks undergo source/runtime/complete payload and IWAD/SF2 identity checks. Catalog published only after all requests pass. Successful per-track reports survive failed/interrupted batches for explicit same-directory resume. No one-shot, full soundtrack, fidelity, live deadline or campaign completion claim.'}|ConvertTo-Json -Depth 7|Set-Content -LiteralPath $outputPath
 }

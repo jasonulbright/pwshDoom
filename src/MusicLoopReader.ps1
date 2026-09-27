@@ -5,9 +5,17 @@ function Open-DoomMusicLoopReader {
     if(-not [BitConverter]::IsLittleEndian){throw 'Music loop payloads require little endian float64.'}
     if(([IO.FileInfo]::new($Report)).Length -gt 16MB){throw 'Loop report exceeds size bound.'}
     $r=[IO.File]::ReadAllText($Report)|ConvertFrom-Json -AsHashtable;$d=$r.Details
-    if($r.Error -or -not $d.Qualified -or -not $d.NormalizedStateRepeats -or -not $d.NextPeriodFloatOutputRepeats -or -not $d.Reference.Exact -or $d.SourcesChangedDuringRun.Count -ne 0 -or $d.PowerShell -cne $PSVersionTable.PSVersion.ToString()){throw 'Music loop has no current successful qualification.'}
-    if($d.PeriodFrames -le 0 -or $d.PeriodFrames -gt 52920000 -or $d.PeriodFrames%1260 -ne 0 -or $d.LoopStartFrame -ne $d.PeriodFrames -or $d.LoopFrames -ne $d.PeriodFrames -or $d.Periods.Count -ne 3 -or $d.Snapshots.Count -ne 4){throw 'Unsupported music loop layout.'}
-    if($d.Snapshots[1].StateSha256 -cne $d.Snapshots[2].StateSha256 -or $d.Snapshots[2].StateSha256 -cne $d.Snapshots[3].StateSha256 -or $d.Periods[1].Sha256 -cne $d.Periods[2].Sha256){throw 'Music loop evidence is inconsistent.'}
+    $qualifiedRuntime=$null
+    $runtimeCompatible=[version]::TryParse([string]$d.PowerShell,[ref]$qualifiedRuntime)
+    if($runtimeCompatible){$runtimeCompatible=$qualifiedRuntime.Major -eq $PSVersionTable.PSVersion.Major -and $qualifiedRuntime.Minor -eq $PSVersionTable.PSVersion.Minor}
+    $mode=if($d.ContainsKey('EvidenceMode')){$d['EvidenceMode']}else{'IndependentStateAndOutput'} # Existing three-period receipt.
+    if($r.Error -or -not $d.Qualified -or -not $d.NormalizedStateRepeats -or -not $d.Reference.Exact -or $d.SourcesChangedDuringRun.Count -ne 0 -or -not $runtimeCompatible){throw "Music loop has no current successful qualification for PowerShell $($PSVersionTable.PSVersion.Major).$($PSVersionTable.PSVersion.Minor).x."}
+    if($d.PeriodFrames -le 0 -or $d.PeriodFrames -gt 52920000 -or $d.PeriodFrames%1260 -ne 0 -or $d.LoopStartFrame -ne $d.PeriodFrames -or $d.LoopFrames -ne $d.PeriodFrames){throw 'Unsupported music loop layout.'}
+    if($mode -ceq 'CompleteStateRecurrence'){
+        if($d.Periods.Count -ne 2 -or $d.Snapshots.Count -ne 3 -or $d.NextPeriodFloatOutputRepeats -ne $null -or $d.Snapshots[1].StateSha256 -cne $d.Snapshots[2].StateSha256){throw 'State-recurrence evidence is inconsistent.'}
+    }elseif($mode -ceq 'IndependentStateAndOutput'){
+        if($d.Periods.Count -ne 3 -or $d.Snapshots.Count -ne 4 -or -not $d.NextPeriodFloatOutputRepeats -or $d.Snapshots[1].StateSha256 -cne $d.Snapshots[2].StateSha256 -or $d.Snapshots[2].StateSha256 -cne $d.Snapshots[3].StateSha256 -or $d.Periods[1].Sha256 -cne $d.Periods[2].Sha256){throw 'Independent-output evidence is inconsistent.'}
+    }else{throw 'Unsupported music loop evidence mode.'}
     $names='MusScore','SoundFontBank','SoundFontRegions','MusicOscillator','MusicControls','MusicSynth','MusicGroup','MusicLoopState'
     if($r.Sources.Count -ne $names.Count){throw 'Music loop source set differs.'}
     foreach($name in $names){
@@ -16,7 +24,7 @@ function Open-DoomMusicLoopReader {
     }
     $handles=[Collections.Generic.List[object]]::new()
     try{
-        for($i=0;$i -lt 3;$i++){
+        for($i=0;$i -lt $d.Periods.Count;$i++){
             $period=$d.Periods[$i]
             if($period.Index -ne $i -or $period.Frames -ne $d.PeriodFrames -or $period.Bytes -ne $d.PeriodFrames*16 -or $period.Sha256 -cnotmatch '^[0-9A-F]{64}$'){throw 'Invalid music loop payload metadata.'}
             # Keep playback files read-locked after hashing, so bytes cannot change underneath playback.
@@ -24,7 +32,7 @@ function Open-DoomMusicLoopReader {
             if($file.Length -ne $period.Bytes -or [Convert]::ToHexString([Security.Cryptography.SHA256]::HashData($file)) -cne $period.Sha256){throw 'Music loop payload checksum or length mismatch.'}
             $file.Position=0
         }
-        $handles[2].Dispose();$handles.RemoveAt(2)
+        if($handles.Count -eq 3){$handles[2].Dispose();$handles.RemoveAt(2)}
         return @{Files=$handles;Frame=0L;Paused=$false;Closed=$false;PeriodFrames=[long]$d.PeriodFrames;Loaded=$null;LoadedSegment=-1;LoadedFrame=-1L;DiskBytesRead=0L;ReportSha256=(Get-FileHash $Report).Hash;MusSha256=$d.MusSha256;BankSha256=$d.BankSha256}
     }catch{foreach($file in $handles){$file.Dispose()};throw}
 }

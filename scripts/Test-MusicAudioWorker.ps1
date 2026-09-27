@@ -9,6 +9,9 @@ $ErrorActionPreference='Stop';Set-StrictMode -Version Latest
 if(Test-Path $Output){throw 'Use a fresh report path.'}
 $root=[IO.Path]::GetFullPath("$PSScriptRoot/..");foreach($name in 'AudioMixer','AudioPackets','AudioRunspace','MusicLoopReader','MusicOneShotReader'){. "$root/src/$name.ps1"}
 $qualification=[IO.Path]::GetFullPath($Qualification);$oneShotQualification=[IO.Path]::GetFullPath($OneShotQualification);$audio=$null;$reader=$null;$oneShotReader=$null;$report=$null;$failure=$null;$expectedHash=$null;$checks=[Collections.Generic.List[object]]::new()
+$qualificationData=Get-Content $qualification -Raw|ConvertFrom-Json;$loopTrack=[string]$qualificationData.Details.Track
+[long]$loopStartFrame=[long]$qualificationData.Details.PeriodFrames-44100
+if($loopStartFrame -lt 0){throw 'Loop period must contain at least one second for the boundary worker fixture.'}
 function Check([string]$Name,[bool]$Passed){$checks.Add(@{Name=$Name;Passed=$Passed});if(-not $Passed){throw $Name}}
 function Wait-AudioValue([string]$Key,$Value){
     $wait=[Diagnostics.Stopwatch]::StartNew()
@@ -21,9 +24,9 @@ try{
         $events=@();if($n -in 0,70,105){$events+=@{Kind='Start';Sound=1;Source=1;Group=1;Volume=100}}
         if($n -eq 14){$events+=@{Kind='Pause'}};if($n -eq 16){$events+=@{Kind='Resume'}}
         $music=@();if($n -eq 0){$music+=@{Kind='Start';Track='D_INTRO';Loop=$false}}
-        if($n -eq 1){$music+=@{Kind='Start';Track='D_E1M1';Loop=$true;Frame=(95*44100)}}
+        if($n -eq 1){$music+=@{Kind='Start';Track=$loopTrack;Loop=$true;Frame=$loopStartFrame}}
         if($n -eq 35){$music+=@{Kind='Gain';Value=.1}}
-        if($n -in 70,130){$music+=@{Kind='Start';Track='D_E1M1';Loop=$true}}
+        if($n -in 70,130){$music+=@{Kind='Start';Track=$loopTrack;Loop=$true}}
         if($n -eq 120){$music+=@{Kind='Stop'}}
         $packets.Add(@{Sequence=$n;Epoch=if($n -lt 70){0}else{1};Qpc=0L;Events=$events;Gains=@{1=[double[]]@(.5,.25)};Music=$music})
     }
@@ -33,7 +36,7 @@ try{
     $expected=[int16[]]::new(140*2520)
     for($n=0;$n -lt 140;$n++){
         if($n -eq 0){$introActive=$true}
-        if($n -eq 1){$introActive=$false;$active=$true;$reader.Frame=95*44100}
+        if($n -eq 1){$introActive=$false;$active=$true;$reader.Frame=$loopStartFrame}
         if($n -eq 35){$gain=.1};if($n -eq 70){$m.Voices.Clear();$m.Paused=$false;$reader.Frame=0}
         if($n -eq 120){$active=$false};if($n -eq 130){$active=$true;$reader.Frame=0}
         $m.Volume=if($n -lt 70){1.0}elseif($n -lt 105){0.0}else{.5}
@@ -43,7 +46,7 @@ try{
     }
     Close-DoomMusicLoopReader $reader;$reader=$null;Close-DoomMusicOneShotReader $oneShotReader;$oneShotReader=$null;$bytes=[byte[]]::new($expected.Length*2);[Buffer]::BlockCopy($expected,0,$bytes,0,$bytes.Length)
     $expectedHash=[Convert]::ToHexString([Security.Cryptography.SHA256]::HashData($bytes))
-    $audio=Start-DoomAudioRunspace $clips -MusicReports @{'D_E1M1'=$qualification;'D_INTRO'=$oneShotQualification};Check 'Qualified loop and finite score open on the actual device' $audio.Shared.Ready
+    $audio=Start-DoomAudioRunspace $clips -MusicReports @{$loopTrack=$qualification;'D_INTRO'=$oneShotQualification};Check 'Qualified loop and finite score open on the actual device' $audio.Shared.Ready
     $audio.Shared.Paused=$false;$watch=[Diagnostics.Stopwatch]::StartNew();$offset=0.0
     for($n=0;$n -lt 140;$n++){
         while($watch.Elapsed.TotalSeconds -lt $n/35.0+$offset){[Threading.Thread]::Sleep(1)}
@@ -61,15 +64,15 @@ try{
     Wait-AudioValue LastSequence 139;[Threading.Thread]::Sleep(180);$report=Stop-DoomAudioRunspace $audio
     Check 'Worker, device and music handles close cleanly' (-not $report.Error -and -not $report.CleanupError -and $report.DeviceClosed -and $report.Music.Closed)
     Check 'Every submitted sample matches independent offline schedule' ($report.PcmSha256 -ceq $expectedHash -and $report.SubmittedFrames -eq 176400 -and $report.Packets -eq 140)
-    Check 'Music pause, mute advancement, stop and restart preserve frame accounting' ($report.Music.Frames -eq 161280 -and $report.Music.Selected -ceq 'D_E1M1' -and $report.Music.Gain -eq .1)
+    Check 'Music pause, mute advancement, stop and restart preserve frame accounting' ($report.Music.Frames -eq 161280 -and $report.Music.Selected -ceq $loopTrack -and $report.Music.Gain -eq .1)
     Check 'Master mute and volume applied to complete mix' ($report.MutedPackets -eq 35 -and $report.FinalVolume -eq .5 -and $report.VolumeChanges.Count -eq 2)
     Check 'Epoch transition retains future packet with no loss' ($report.EpochResets -eq 1 -and $report.StalePacketsDiscarded -eq 0 -and $null -eq $report.PendingPacket -and $report.UnconsumedPackets -eq 0)
-    Check 'Finite opening, loop commands and epoch reset are recorded' ($report.Music.Transitions.Count -eq 7 -and $report.Music.Reports.D_E1M1 -ceq (Get-FileHash $qualification).Hash -and $report.Music.Reports.D_INTRO -ceq (Get-FileHash $oneShotQualification).Hash)
+    Check 'Finite opening, loop commands and epoch reset are recorded' ($report.Music.Transitions.Count -eq 7 -and $report.Music.Reports[$loopTrack] -ceq (Get-FileHash $qualification).Hash -and $report.Music.Reports.D_INTRO -ceq (Get-FileHash $oneShotQualification).Hash)
     Check 'Device returns completed buffers with bounded packet queue' ($report.ReturnedCompletedFrames -gt 0 -and $report.MaxPacketQueue -le 32)
 }catch{$failure=$_.ToString()+"`n"+$_.ScriptStackTrace;throw}finally{
     if($reader){Close-DoomMusicLoopReader $reader};if($oneShotReader){Close-DoomMusicOneShotReader $oneShotReader};if($audio -and -not $audio.Closed){$report=Stop-DoomAudioRunspace $audio}
-    @{Error=$failure;Checks=$checks.ToArray();ExpectedPcmSha256=$expectedHash;Audio=$report;QualificationSha256=(Get-FileHash $qualification).Hash;OneShotQualificationSha256=(Get-FileHash $oneShotQualification).Hash;
+    @{Error=$failure;Track=$loopTrack;LoopStartFrame=$loopStartFrame;Checks=$checks.ToArray();ExpectedPcmSha256=$expectedHash;Audio=$report;QualificationSha256=(Get-FileHash $qualification).Hash;OneShotQualificationSha256=(Get-FileHash $oneShotQualification).Hash;
       Sources=@('src/AudioMixer.ps1','src/AudioPackets.ps1','src/AudioRunspace.ps1','src/WaveOutDevice.ps1','src/MusicLoopReader.ps1','src/MusicOneShotReader.ps1','src/MusicPlayback.ps1','scripts/Invoke-AudioWorker.ps1','scripts/Test-MusicAudioWorker.ps1'|ForEach-Object {@{Path=$_;Sha256=(Get-FileHash (Join-Path $root $_)).Hash}});
-      Meaning='Actual default waveOut device with qualified one-shot D_INTRO followed by looping E1M1, synthetic effect, packet/shared pauses, independent gains, master mute, epoch and restart. Complete submitted PCM compared with independent offline schedule. Reset may cancel queued device tail; submitted bytes do not prove acoustic output/latency or gameplay-load qualification. Audio-only test, no terminal effect run or screen capture.'}|ConvertTo-Json -Depth 8|Set-Content $Output
+      Meaning='Actual default waveOut device with a qualified looping track followed by finite D_INTRO, synthetic effect, packet/shared pauses, independent gains, master mute, epoch and restart. Complete submitted PCM compared with independent offline schedule. Reset may cancel queued device tail; submitted bytes do not prove acoustic output/latency or gameplay-load qualification. Audio-only test, no terminal effect run or screen capture.'}|ConvertTo-Json -Depth 8|Set-Content $Output
 }
 "PASS: $($checks.Count) music audio-worker checks."

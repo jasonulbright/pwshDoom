@@ -11,7 +11,7 @@ try{
     $r=Get-Content $Qualification -Raw|ConvertFrom-Json;$d=$r.Details;$ref=(Get-Content $Reference -Raw|ConvertFrom-Json).Details
     Check 'Continuous synthesis report qualified the matching score and bank' (-not $r.Error -and $d.Qualified -and $d.MusSha256 -ceq $ref.MusSha256 -and $d.BankSha256 -ceq $ref.SoundFontSha256 -and $d.SourcesChangedDuringRun.Count -eq 0)
     $reader=Open-DoomMusicLoopReader $Qualification
-    Check 'Actual period exceeds old reader limit and opens under the new bound' ($d.PeriodFrames -gt 4410000 -and $d.PeriodFrames -le 52920000)
+    Check 'Actual aligned period opens within the reader bound' ($d.PeriodFrames -gt 0 -and $d.PeriodFrames -le 52920000 -and $d.PeriodFrames%1260 -eq 0)
     $wav=[IO.File]::ReadAllBytes($ref.WavPath);$expected=[byte[]]::new($wav.Length-44);[Buffer]::BlockCopy($wav,44,$expected,0,$expected.Length)
     Check 'Independent reference WAV is intact and frame-aligned' ((Get-FileHash $ref.WavPath).Hash -ceq $ref.WavSha256 -and $expected.Length -eq $ref.Frames*4 -and $ref.Frames%1260 -eq 0)
     $mixer=New-DoomAudioMixer;$digest=[Security.Cryptography.IncrementalHash]::CreateHash([Security.Cryptography.HashAlgorithmName]::SHA256)
@@ -19,13 +19,18 @@ try{
     $actual=[Convert]::ToHexString($digest.GetHashAndReset());Check 'Reader plus game PCM mixer exactly reproduces independent opening' ($actual -ceq (Hash $expected))
     $reader.Frame=2L*$d.PeriodFrames-630;$block=Read-DoomMusicLoop $reader 1260
     $actualBytes=[byte[]]::new(20160);[Buffer]::BlockCopy($block.Mix,0,$actualBytes,0,20160);$expectedBytes=[byte[]]::new(20160)
-    $file=[IO.File]::OpenRead($d.Periods[1].Path);try{$file.Position=($d.PeriodFrames-630)*16;$file.ReadExactly($expectedBytes,0,10080)}finally{$file.Dispose()}
-    $file=[IO.File]::OpenRead($d.Periods[2].Path);try{$file.ReadExactly($expectedBytes,10080,10080)}finally{$file.Dispose()}
-    Check 'Reusable boundary equals independently continuous second-to-third period bytes' ((Hash $actualBytes) -ceq (Hash $expectedBytes) -and $reader.Frame -eq 2L*$d.PeriodFrames+630)
+    $mode=if($d.PSObject.Properties.Name -contains 'EvidenceMode'){$d.EvidenceMode}else{'IndependentStateAndOutput'}
+    $file=[IO.File]::OpenRead($d.Periods[1].Path)
+    try{
+        $file.Position=($d.PeriodFrames-630)*16;$file.ReadExactly($expectedBytes,0,10080)
+        if($mode -ceq 'CompleteStateRecurrence'){$file.Position=0;$file.ReadExactly($expectedBytes,10080,10080)}
+        else{$nextFile=[IO.File]::OpenRead($d.Periods[2].Path);try{$nextFile.ReadExactly($expectedBytes,10080,10080)}finally{$nextFile.Dispose()}}
+    }finally{$file.Dispose()}
+    Check 'Reusable loop boundary exactly wraps from the recurrent period tail to its start' ((Hash $actualBytes) -ceq (Hash $expectedBytes) -and $reader.Frame -eq 2L*$d.PeriodFrames+630)
     Close-DoomMusicLoopReader $reader;Check 'Qualified payload handles close' $reader.Closed
     $details=@{Track=$d.Track;PeriodFrames=$d.PeriodFrames;OpeningPcmSha256=$actual;BoundaryFloatSha256=(Hash $actualBytes);QualificationSha256=(Get-FileHash $Qualification).Hash;ReferenceSha256=(Get-FileHash $Reference).Hash}
 }catch{$failure=$_.ToString()+"`n"+$_.ScriptStackTrace;throw}finally{
     if($reader -and -not $reader.Closed){Close-DoomMusicLoopReader $reader};if($digest){$digest.Dispose()}
-    @{Error=$failure;Checks=$checks.ToArray();Details=$details;Sources=@('src/MusicLoopReader.ps1','src/AudioMixer.ps1','scripts/Test-MusicTrackQualification.ps1'|ForEach-Object {@{Path=$_;Sha256=(Get-FileHash "$PSScriptRoot/../$_").Hash}});Meaning='Actual long-period reader with source/payload verification, independent original-renderer opening PCM through the game mixer, and exact boundary bytes against the independently synthesized following period. No device, campaign completion or performance claim.'}|ConvertTo-Json -Depth 7|Set-Content $Output
+    @{Error=$failure;Checks=$checks.ToArray();Details=$details;Sources=@('src/MusicLoopReader.ps1','src/AudioMixer.ps1','scripts/Test-MusicTrackQualification.ps1'|ForEach-Object {@{Path=$_;Sha256=(Get-FileHash "$PSScriptRoot/../$_").Hash}});Meaning='Actual long-period reader with source/payload verification, independent opening PCM through the game mixer, and exact loop-seam bytes. The qualification report identifies whether recurrence uses a complete-state proof or an independently synthesized following period. No device, campaign completion or performance claim.'}|ConvertTo-Json -Depth 7|Set-Content $Output
 }
 "PASS: $($checks.Count) long-track reader checks."

@@ -19,15 +19,49 @@ Every other voice/channel field remains in the comparison. Unknown top-level syn
 
 ## Real qualification procedure
 
-`Qualify-MusicLoop.ps1` renders three continuous periods. A period comprises enough complete score cycles to align with the existing 1,260-frame subblock grid. For E1M1 it is one 96-second cycle. The finite harness currently rejects three-period fixtures longer than 300 seconds.
+By default, `Qualify-MusicLoop.ps1` renders three continuous periods. A period comprises enough complete score cycles to align with the existing 1,260-frame subblock grid. The finite harness limits total qualification to 3,600 audio seconds, and the playback reader limits any period to 1,200 seconds. The optional complete-state proof below renders two periods; it makes a narrower explicit recurrence inference and does not claim a third independently matched PCM period.
 
 The first period is the intro. The second is a candidate repeating segment. It qualifies only when the states at the ends of all three periods match, the entire second and third float64 files match, the canonical reference PCM remains exact, and sources remain unchanged. Files are written continuously from the synthesizer; voices and controllers are never reset to manufacture a match. E1M1 has 35 live voices at the first boundary, making a simple opening-file restart insufficient.
 
 Repeated normalized state plus identical periodic inputs is the basis for subsequent reuse under the inspected deterministic model. Rendering the full third period independently checks the predicted next output; this is stronger than comparing a short seam. The fourth and later cached periods are justified by that recurrence, not claimed as independently synthesized references. Counter normalization also avoids relying on eventual diagnostic-counter overflow behavior in an impossibly long continuously synthesized run.
 
+### Two-period complete-state proof
+
+The optional `-StateRecurrenceProof` path renders the intro and one complete
+candidate loop, then requires the exact normalized synthesis state at the end
+of both periods to match. The snapshot includes every recognized
+future-driving channel, voice, oscillator, envelope, filter, gain and timeline
+field; unknown synthesizer fields reject qualification. Identical score/event
+phase, immutable bank and full state imply deterministic recurrence, so the
+loop period can be reused without separately synthesizing a third copy. The
+canonical opening PCM and unchanged source/runtime checks remain mandatory.
+
+This is an explicit inference from the complete-state invariant: the report
+does **not** claim a third independently rendered output hash. It reduces new
+track synthesis and payload writing from three periods to two, while retaining
+the existing three-period mode for stronger empirical output recurrence and
+backward-compatible reports. Both report types identify their evidence mode;
+the reader validates the matching layout and keeps only intro/loop payloads
+open for playback. Existing three-period catalogs remain accepted unchanged.
+
+For example, a new track can use the shorter proof with:
+
+```powershell
+./scripts/Prepare-DoomMusic.ps1 -Tracks D_E2M1 `
+  -OutputDirectory ./local/music-preparation-episode2 `
+  -Catalog ./local/music-prepared-episodes1-2.json `
+  -ExistingCatalog ./local/music-prepared-episode1.json `
+  -Output ./local/music-preparation-episode2.json `
+  -StateRecurrenceProof
+```
+
+The three-period path remains the default until a batch explicitly selects the
+state proof. Runtime savings are expected to track the one-third reduction in
+rendered periods; verify actual wall time separately for each workload.
+
 ## Reader and mixing boundary
 
-`MusicLoopReader.ps1` accepts a locally trusted successful report, verifies its structure, runtime/source identity and all three payload hashes, then keeps the intro and loop files open with write-sharing disabled. Reports are scientific receipts, not cryptographically authenticated certificates. A fabricated report is not proof of valid synthesis; synthetic reader tests explicitly label their fabricated receipt as test data.
+`MusicLoopReader.ps1` accepts a locally trusted successful report, verifies its structure, PowerShell major/minor line, synthesis-source identity and every payload hash, then keeps the intro and loop files open with write-sharing disabled. The report retains its exact qualification patch version. Reports are scientific receipts, not cryptographically authenticated certificates. A fabricated report is not proof of valid synthesis; synthetic reader tests explicitly label their fabricated receipt as test data.
 
 The reader plays the intro once and maps later absolute frames into the qualified loop using integer remainder. It retains one decoded page of at most 25,200 stereo frames. Reads can cross page boundaries, the intro boundary and multiple loop boundaries. Pause emits silence without advancing the cursor. Corruption, inconsistent/unqualified reports, changed sources, invalid cursor positions and closed readers are rejected. Cleanup releases both file handles, including after a partially failed open.
 
@@ -72,6 +106,32 @@ The finite group horizon now permits 158,760,000 frames (one hour at 44.1 kHz), 
 `music-loop-e1m2-first.json` now qualifies E1M2. Its aligned period contains 27,406,260 frames (621.457 seconds), with four original score cycles. All three boundaries have 14 live voices and normalized state `F80B55073C21202481E89236461DCA33FDB0E3398F24FAC9B1B3D8AD4BADDB66`. Complete second/third files both hash to `89F9FA1444D4ACF67F427426404431C06C8086D24FBE55BAECEB4B81B0C9FEF7`, with 438,500,160 bytes each. Original opening eight-second PCM remains exact and sources do not drift. The 2,290.433-second wall time overlaps other work; it is not a performance comparison.
 
 `music-e1m2-reader-first.json` passes six checks using the actual long files: qualification/score/bank identity, the expanded period bound, reference WAV identity, exact opening PCM through the game mixer, the reused boundary against independently synthesized following-period bytes, and handle closure. This qualifies the dry synthesis model and reader, not musical fidelity or E1M2 completion. Intermission subsequently qualifies all three periods; see below.
+
+## Two-period complete-state recurrence proof (September 27)
+
+The optional `-StateRecurrenceProof` mode is now exercised against real IWAD scores. The original three-period method remains the default and retains its independent following-period PCM comparison. In the new mode the state serializer must recognize every synthesizer field; an unknown field type or synthesizer field rejects qualification. At the aligned boundary, the normalized state includes channels, voices, oscillators, envelopes, filters, modulators, score/event phase, playback configuration, and immutable bank/score identity. Absolute cycle/frame and diagnostic identifiers that cannot affect future samples are normalized while their future-driving relationships are retained. Under this pinned deterministic single-group dry model, equal complete normalized state plus the same score phase and immutable assets implies the next generated period repeats. This is a model-based recurrence inference, not an empirical third-period PCM comparison.
+
+The current-source E1M1 qualification completed in 314.031 seconds of render/write/snapshot time. Its 4,233,600-frame (96-second) period starts and ends at normalized state `0E6D546145CACE2EE20EB43451881B30F63351CF50F8B1CFEAEF33463C1F88AB`, with 35 voices. Two periods (192 audio seconds) were rendered, and the separately rendered canonical opening PCM remained exact at SHA-256 `E5C7539145FD3005C0BEBF10EF96C7EA5851231B73AD97C65536CE62AC02F03B`. The existing three-period E1M1 receipts and default mode remain unchanged. The reader accepts either report layout and still opens/retains the exact verified period files required for intro and loop playback. The state-proof evidence suite passes 23 checks; reader compatibility passes 17, including rejection above its 1,200-second bound; actual simulation/mixer and device-worker checks are recorded separately.
+
+The first new Doom II score, D_E2M1, also qualifies. Its period is 26,894,700 frames (609.857 seconds), aligned across four score cycles. Two periods (1,219.714 audio seconds) were rendered in 1,320.515 seconds of loop render/write/snapshot time; complete state repeats with 12 voices and SHA-256 `BBD41D41F1D2C43F7BB0DEFB4BCD0D2790644EE864561DC1F5932DBEB261413E`. The independent eight-second opening PCM matches exactly at `5912DBE8F0D9E23475854BFE3A6DF2F6016E17E15A31902BA1926D5B1479E2DC`. Actual reader/mixer checks pass all six checks. The waveOut worker submits PCM matching its independent offline schedule and closes the device cleanly across all ten checks; that verifies submitted data and worker/device handling, not what a listener hears or end-to-end gameplay timing. This D_E2M1 receipt predates the later 1,200-second preflight guard; its 609.857-second period is below that bound, and that guard does not change synthesis or normalization.
+
+### PowerShell patch-version compatibility (September 27)
+
+Jason's first terminal launch exposed an exact-patch comparison in both the
+loop and finite one-shot readers: the current catalog was qualified on 7.6.5,
+while his installed `pwsh` resolves to 7.6.6. The readers now accept the same
+major/minor version line and retain the existing source and payload-hash
+checks. Under the real 7.6.6 launcher, the loop-reader suite passes 21 checks,
+the saved E1M1/D_INTRO playback suite passes 17, and the recurrence/reader/
+mixer evidence suite passes 23. A two-second headless E1M1 integration run
+opened all eleven Episode 1 catalog reports, submitted 86,940 music frames,
+advanced 69 tics and closed waveOut without error. A cold-start bound was
+raised from 30 to 60 seconds after the first launch reached the former limit.
+The [runtime receipt](../results/episode1-startup-runtime-compat-20260927.json)
+links the 7.6.6 checks and hashes the ignored session reports. This does not
+qualify a human playthrough, audible quality or campaign-long audio.
+
+Portable receipts: E1M1 qualification and actual-reader/mixer audit ([qualification](../results/music-loop-e1m1-state-proof-20260927.json), [prior 23-check evidence audit](../results/music-loop-evidence-state-proof-final-20260927.json), [six-check actual-track reader test](../results/music-track-qualification-e1m1-state-proof-current-20260927.json), [prior 17-check simulation playback test](../results/music-playback-e1m1-state-proof-current-20260927.json), [10-check waveOut worker test](../results/music-audio-worker-e1m1-state-proof-current-20260927.json)); D_E2M1 qualification and preparation ([loop report](../results/music-loop-d-e2m1-state-recurrence-20260927.json), [preparation report](../results/music-preparation-episode2-e2m1-state-proof-20260927.json), [opening reference](../results/music-d-e2m1-opening-reference-state-proof-20260927.json), [six-check actual-track reader test](../results/music-track-qualification-d-e2m1-state-proof-20260927.json), [10-check waveOut worker test](../results/music-audio-worker-d-e2m1-state-proof-20260927.json)). The current [7.6.6 loop-reader suite](../results/music-loop-reader-runtime-compat-7.6.6-r2-20260927.json), [17-check playback test](../results/music-playback-runtime-compat-20260927.json), [23-check recurrence/reader/mixer audit](../results/music-loop-evidence-state-proof-runtime-compat-7.6.6-r2-20260927.json), and [full-start receipt](../results/episode1-startup-runtime-compat-20260927.json) qualify the patch-version update path. The synthetic [reader compatibility smoke](../results/music-loop-reader-period-limit-20260927.json) passes 17 checks, including legacy receipts and rejection above the reader's 1,200-second limit. The combined E1/E2M1 catalog and the large intro/loop payloads remain under ignored `local/`; the prepared Doom II receipt is not a complete E2 catalog. Both real qualifications use the pinned Ultimate Doom IWAD and soundfont recorded in their receipts. Neither score qualification establishes original-synth fidelity, acoustic quality, complete campaign audio, or a 35/60 gameplay guarantee.
 
 ## Intermission continuous recurrence
 
