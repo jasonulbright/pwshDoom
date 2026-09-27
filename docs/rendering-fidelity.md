@@ -532,3 +532,52 @@ The comparator is the adopted PowerShell reference, not an independently
 verified original executable, and these palette-index counts are not a
 perceptual quality or performance score. See the [sweep receipt](../results/moving-sector-e1m1-height-sweep-20260926.json)
 and [dynamic comparison receipt](../results/moving-sector-reference-e1m1-prefix-20260927.json).
+
+## Reuse per-context raster scratch (2026-09-27)
+
+`Invoke-FastRender` previously allocated two 320-entry ray arrays and a new
+masked-column list on every frame. Each visible deferred masked column also
+created a hashtable. Render contexts now own reusable `RaySin` and `RayCos`
+arrays plus a high-water list of masked-column records. The host and
+deserialized worker contexts initialize the same scratch fields. The renderer
+overwrites only records used by the current frame and draws only that prefix;
+pixel math, ordering, and texture inputs are unchanged.
+
+The source-pinned differential compares the pre-change renderer from commit
+`a8a8b9db0fdc724b19b99d90679238d0bc71570b` with the candidate at four headings
+on E1M1–E1M9 after 35 idle tics. All 36 full 320×200 indexed frames match
+exactly: 2,304,000 pixels, zero differences. Eight views exercise masked
+columns, with at most 91 records; all views confirm ray-array reuse and all
+deferred records confirm object reuse on the following render. The tests do
+not infer gameplay completion from idle map starts.
+
+The existing 16-process partition check also remains byte-identical to serial
+output in Classic, Matrix/Katakana, and AnsiArt/Katakana. Each style checks
+320,000 pixels over five headings with zero differences and 80 encoded strips;
+the character-based styles also check all 80 character strips. A fresh
+headless Ultimate Doom smoke passes all 36 maps at 35 idle tics and two
+320×200 renders per map. Its `WorkerStrips` field is configuration metadata;
+the smoke itself does not launch workers. These checks establish scratch
+reuse correctness and map load/render coverage, not campaign completion or
+display pacing.
+
+Six alternating-order rounds compare 30 serial full-frame renders per version
+at five static headings on each of E1M1, E1M3, and E1M4. Context and snapshot
+setup are outside the timer; first calls are retained. Times are milliseconds
+per render:
+
+| Map | Baseline mean / median / p95 / max | Candidate mean / median / p95 / max |
+| --- | --- | --- |
+| E1M1 | 60.28 / 51.10 / 86.39 / 249.94 | 55.38 / 49.45 / 88.10 / 119.73 |
+| E1M3 | 56.93 / 51.32 / 86.25 / 194.69 | 52.73 / 50.01 / 84.25 / 100.57 |
+| E1M4 | 61.67 / 47.07 / 108.37 / 328.18 | 51.96 / 45.85 / 87.78 / 136.84 |
+
+Candidate medians are 2.6–3.2% lower in these samples. The tail varies by
+map: E1M1 p95 is 2.0% higher, while E1M3/E1M4 p95s are 2.3%/19.0% lower.
+This is a modest isolated-render result, not an end-to-end speedup or a
+60-display/35-tic qualification: simulation, audio, worker transport,
+encoding, terminal writes, and physical presentation are outside the timer.
+
+The [summary receipt](../results/renderer-scratch-reuse-summary-20260927.json)
+links the raw differential, worker, smoke, and timing reports. No renderer
+golden-image claim against an original executable follows from this change.

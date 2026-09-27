@@ -21,6 +21,14 @@ is configuration metadata; this smoke does not start processes. Exact
 separately in the [rendering-fidelity record](rendering-fidelity.md#doom-sky-column-and-vertical-wrap-sampling-2026-09-26).
 This remains load/render smoke, not route or campaign completion.
 
+The 2026-09-27 per-context scratch-reuse candidate also passes **36/36 maps**
+at 35 idle tics and two 320×200 frames per map. Its full report is
+[here](../results/campaign-smoke-scratch-reuse-20260927.json); the smoke runs
+serially, and `WorkerStrips` is configuration metadata. Matching 16-process
+output in the three styles is recorded separately in the
+[renderer fidelity record](rendering-fidelity.md#reuse-per-context-raster-scratch-2026-09-27).
+This is load/render smoke, not route completion.
+
 The single Episode 1 human-playthrough handoff is pinned to source build
 `76b18ac538a96e40b8aab2127039cf1a59718bec`; its [current readiness
 receipt](../results/episode1-playtest-current-readiness-20260927.json) carries

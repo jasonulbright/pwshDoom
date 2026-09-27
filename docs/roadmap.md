@@ -136,9 +136,17 @@ Release acceptance requires:
 The 2026-09-27 PowerShell mixer index optimization preserves every tested PCM
 hash and lowers the isolated 16-voice block mean from 33.1 ms to 5.0–5.7 ms;
 all 80 measured candidate blocks stay below the 28.57 ms audio-block duration.
+
 This improves the loaded audio path but does not qualify renderer/device load,
 live campaign continuity, or acoustic quality. Details and raw receipts are in
 [audio](audio.md#per-sample-index-optimization-2026-09-27).
+
+The 2026-09-27 renderer scratch-reuse change matches 2.304 million pixels
+across 36 E1 map-start views, preserves exact 16-process output in all three
+styles, and passes a fresh 36-map smoke. Three static serial comparisons show
+2.6–3.2% lower median render time, with variable p95 changes. This does not
+measure full-host pacing; the 35-tic/60-display gate remains open. See the
+[rendering-fidelity record](rendering-fidelity.md#reuse-per-context-raster-scratch-2026-09-27).
 
 Do not postpone all performance work until M6. Measure after a feature adds substantial work; keep a known-good replay and compare against it. Prefer one bounded change and a targeted check over multiple simultaneous optimizations with ambiguous attribution.
 

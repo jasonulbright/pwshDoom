@@ -1878,3 +1878,36 @@ and full-campaign audio continuity remain unverified until Jason's one
 playthrough. The [current readiness receipt](../results/episode1-playtest-current-readiness-20260927.json)
 collects exact hashes, report links, limits, and launch command. This is a
 human-playtest handoff, not full Ultimate Doom release certification.
+
+## 2026-09-27 — Reuse PowerShell renderer scratch buffers
+
+The measured raster loop allocated its ray sine/cosine arrays, a masked-column
+list, and one hashtable per deferred masked column every frame. The production
+renderer now retains the two 320-entry arrays and a high-water pool of masked
+column records per render context. Both direct host contexts and reconstructed
+worker contexts initialize the scratch storage. No drawing equations or
+ordering changed.
+
+The pre-change renderer from `a8a8b9d` and current candidate match exactly at
+36 E1M1–E1M9 map-start views after 35 idle tics and four headings: 2,304,000
+indexed pixels, zero differences. Eight views exercise masked records (maximum
+91); all 36 verify array and record reuse. Classic, Matrix/Katakana, and
+AnsiArt/Katakana each pass five-heading, 16-process serial-equivalence checks:
+320,000 pixels and 80 encoded strips per style, all exact. A fresh Ultimate
+Doom smoke passes all 36 maps with two full renders after 35 idle tics.
+
+Paired isolated serial render samples on E1M1/E1M3/E1M4 show candidate median
+times 2.6–3.2% lower. p95 improves on E1M3/E1M4 but is 2.0% higher on E1M1;
+large maxima also fall in these finite samples. The runs exclude simulation,
+audio, workers, encoding, terminal output, and display presentation, so this
+is not a live frame-rate claim. The E1 human-playthrough source pin stays at
+`76b18ac538a96e40b8aab2127039cf1a59718bec`; this renderer work is later
+continuing development and does not alter the delivered playtest build.
+
+Evidence index: [scratch-reuse summary](../results/renderer-scratch-reuse-summary-20260927.json),
+[pixel differential](../results/render-scratch-reuse-differential-e1-20260927.json),
+[map smoke](../results/campaign-smoke-scratch-reuse-20260927.json),
+[Classic workers](../results/render-scratch-reuse-workers-classic-20260927.json),
+[Matrix workers](../results/render-scratch-reuse-workers-matrix-20260927.json),
+[AnsiArt workers](../results/render-scratch-reuse-workers-ansiart-20260927.json),
+and [paired timings](rendering-fidelity.md#reuse-per-context-raster-scratch-2026-09-27).

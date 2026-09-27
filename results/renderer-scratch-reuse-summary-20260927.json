@@ -1,0 +1,93 @@
+{
+  "UpdatedUtc": "2026-09-27T04:03:58Z",
+  "Change": "Reuse 320-entry ray sine/cosine arrays and a high-water pool of deferred masked-column records per render context.",
+  "Candidate": {
+    "FastRendererSha256": "94AC7263FADB522C9E1377F5B5694BEDED54A330C90191D8DC3BD7F67372517D",
+    "RenderAssetsSha256": "0189E1CEDCCFA9E928953FC66A7D248103006FEAEB6E21BDCF9311468FE0EB5F"
+  },
+  "Baseline": {
+    "Commit": "a8a8b9db0fdc724b19b99d90679238d0bc71570b",
+    "FastRendererSha256": "A121977A14B869484B5ACA97FECAE6797F34480A6287E74372D84AC1A1B68769"
+  },
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "PixelDifferential": {
+    "Maps": 9,
+    "Views": 36,
+    "HeadingsPerMap": 4,
+    "IdleTics": 35,
+    "PixelsPerView": 64000,
+    "PixelsCompared": 2304000,
+    "DifferingPixels": 0,
+    "ViewsWithMaskedRecords": 8,
+    "MaximumMaskedRecords": 91,
+    "AllRayArraysReused": true,
+    "AllMaskedRecordsReused": true,
+    "Report": "render-scratch-reuse-differential-e1-20260927.json"
+  },
+  "WorkerParity": [
+    {
+      "Style": "Classic",
+      "Workers": 16,
+      "Headings": 5,
+      "PixelsCompared": 320000,
+      "DifferingPixels": 0,
+      "EncodedStripChecks": 80,
+      "CharacterStripChecks": 0,
+      "Report": "render-scratch-reuse-workers-classic-20260927.json"
+    },
+    {
+      "Style": "Matrix/Katakana",
+      "Workers": 16,
+      "Headings": 5,
+      "PixelsCompared": 320000,
+      "DifferingPixels": 0,
+      "EncodedStripChecks": 80,
+      "CharacterStripChecks": 80,
+      "Report": "render-scratch-reuse-workers-matrix-20260927.json"
+    },
+    {
+      "Style": "AnsiArt/Katakana",
+      "Workers": 16,
+      "Headings": 5,
+      "PixelsCompared": 320000,
+      "DifferingPixels": 0,
+      "EncodedStripChecks": 80,
+      "CharacterStripChecks": 80,
+      "Report": "render-scratch-reuse-workers-ansiart-20260927.json"
+    }
+  ],
+  "CampaignSmoke": {
+    "Passed": 36,
+    "Failed": 0,
+    "IdleTicsPerMap": 35,
+    "FramesPerMap": 2,
+    "Resolution": "320x200",
+    "WorkersStarted": false,
+    "Report": "campaign-smoke-scratch-reuse-20260927.json"
+  },
+  "PairedSerialTimingMs": [
+    {
+      "Map": "E1M1",
+      "SamplesPerVersion": 30,
+      "Baseline": { "Mean": 60.283853, "Median": 51.09565, "P95": 86.3863, "Max": 249.9373 },
+      "Candidate": { "Mean": 55.37866, "Median": 49.44935, "P95": 88.1037, "Max": 119.7283 },
+      "Report": "renderer-scratch-reuse-timing-e1m1-20260927.json"
+    },
+    {
+      "Map": "E1M3",
+      "SamplesPerVersion": 30,
+      "Baseline": { "Mean": 56.933093, "Median": 51.31855, "P95": 86.2484, "Max": 194.6879 },
+      "Candidate": { "Mean": 52.72819, "Median": 50.00645, "P95": 84.2473, "Max": 100.5671 },
+      "Report": "renderer-scratch-reuse-timing-e1m3-20260927.json"
+    },
+    {
+      "Map": "E1M4",
+      "SamplesPerVersion": 30,
+      "Baseline": { "Mean": 61.67038, "Median": 47.065, "P95": 108.3689, "Max": 328.1773 },
+      "Candidate": { "Mean": 51.96478, "Median": 45.84885, "P95": 87.777, "Max": 136.8445 },
+      "Report": "renderer-scratch-reuse-timing-e1m4-20260927.json"
+    }
+  ],
+  "TimingBoundary": "Six alternating-order rounds at five static headings per map. Context and snapshot setup are outside the timer; first calls are retained. Includes only serial full-frame raster calls, not simulation, audio, worker transport, encoding, terminal writes, or display presentation.",
+  "Conclusion": "Candidate medians are 2.6-3.2% lower in these finite samples, with variable p95 changes. This is not a live frame-rate, 60-display/35-tic, campaign-completion, or original-executable fidelity qualification."
+}

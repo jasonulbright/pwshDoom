@@ -128,7 +128,8 @@ function New-FastRenderContext {
     $map=$World.Map
     $ctx=@{Content=$Content;World=$World;Lighting=(New-FastLightingTables);Pixels=[byte[]]::new(64000);Depth=[double[]]::new(64000);
         TopClip=[int[]]::new(320);BottomClip=[int[]]::new(320);Planes=[int[]]::new(53760);Patches=@{};Textures=@{};Hud=@{};
-        Stack=[int[]]::new($map.Nodes.Length*2+4);SkyColumns=[int[]]::new(320);Segments=[object[]]::new($map.Segs.Length);
+        Stack=[int[]]::new($map.Nodes.Length*2+4);SkyColumns=[int[]]::new(320);RaySin=[int[]]::new(320);RayCos=[int[]]::new(320);
+        MaskedColumns=[Collections.Generic.List[hashtable]]::new();Segments=[object[]]::new($map.Segs.Length);
         Nodes=[object[]]::new($map.Nodes.Length);Subsectors=$map.Subsectors;
         Flats=$Content.Flats.Flats;Colors=$Content.ColorMap.Data;SkyFlat=$Content.Flats.SkyFlatNumber;Sectors=$map.Sectors;Sides=$map.Sides;SpriteAtlas=[object[]]::new($Content.Sprites.spriteDefs.Length)}
     $sectorIndex=[Collections.Generic.Dictionary[object,int]]::new()
@@ -304,7 +305,7 @@ function Invoke-FastRender {
     [int[]]$fineSine=$Context.PlaneFineSine
     [int]$planeBaseX=[Math]::Truncate($fineSine[$planeBaseFine+2048]/160.0)
     [int]$planeBaseY=-[Math]::Truncate($fineSine[$planeBaseFine]/160.0)
-    [int[]]$raySin=[int[]]::new(320);[int[]]$rayCos=[int[]]::new(320)
+    [int[]]$raySin=$Context.RaySin;[int[]]$rayCos=$Context.RayCos
     $sky=$Context.Sky;[int[]]$skyData=$sky.Data;[int]$skyW=$sky.Width;[int]$skyH=$sky.Height
     [int[]]$skyColumns=$Context.SkyColumns
     for([int]$x=$FirstColumn;$x -lt $EndColumn;$x++){
@@ -325,7 +326,7 @@ function Invoke-FastRender {
     [int[]]$planeSpanBoundaries=[int[]]::new(0)
     if($Context.ContainsKey('PlaneSpanBoundaries')){$planeSpanBoundaries=[int[]]$Context.PlaneSpanBoundaries}
     [int[]]$topClip=$Context.TopClip;[int[]]$bottomClip=$Context.BottomClip
-    $maskedColumns=[Collections.Generic.List[object]]::new()
+    [Collections.Generic.List[hashtable]]$maskedColumns=$Context.MaskedColumns;[int]$maskedColumnCount=0
     [Array]::Clear($pixels);[Array]::Clear($planes);[Array]::Fill($depthBuffer,[double]::PositiveInfinity)
     [Array]::Clear($topClip);[Array]::Fill($bottomClip,167)
     [int]$open=$EndColumn-$FirstColumn
@@ -421,7 +422,16 @@ function Invoke-FastRender {
                     if(-not $solid -and $band -eq 2){
                         # Portal openings remain visible to later geometry. Defer
                         # their transparent textures so that geometry cannot erase them.
-                        if($y0 -le $y1){$maskedColumns.Add(@{X=$x;Y0=$y0;Y1=$y1;Distance=$distance;Origin=$vOrigin;U=$tu;Height=$th;Texels=$td;Colors=$wallColors})}
+                        if($y0 -le $y1){
+                            if($maskedColumnCount -lt $maskedColumns.Count){
+                                $maskedColumn=$maskedColumns[$maskedColumnCount]
+                                $maskedColumn.X=$x;$maskedColumn.Y0=$y0;$maskedColumn.Y1=$y1;$maskedColumn.Distance=$distance
+                                $maskedColumn.Origin=$vOrigin;$maskedColumn.U=$tu;$maskedColumn.Height=$th;$maskedColumn.Texels=$td;$maskedColumn.Colors=$wallColors
+                            }else{
+                                $maskedColumns.Add(@{X=$x;Y0=$y0;Y1=$y1;Distance=$distance;Origin=$vOrigin;U=$tu;Height=$th;Texels=$td;Colors=$wallColors})
+                            }
+                            $maskedColumnCount++
+                        }
                         continue
                     }
                     for([int]$y=$y0;$y -le $y1;$y++) {
@@ -491,7 +501,8 @@ function Invoke-FastRender {
             } while($x -lt $planeSpanEnd -and $planes[$row+$x] -eq $id)
         }
     }
-    foreach($column in $maskedColumns){
+    for([int]$columnIndex=0;$columnIndex -lt $maskedColumnCount;$columnIndex++){
+        $column=$maskedColumns[$columnIndex]
         [int]$x=$column.X;[int]$height=$column.Height;[int]$source=$column.U*$height
         [double]$distance=$column.Distance;[double]$origin=$column.Origin
         [int[]]$texels=$column.Texels;[byte[]]$colors=$column.Colors
