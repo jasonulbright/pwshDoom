@@ -1,0 +1,54 @@
+{
+  "EncodedStripByteChecks": 80,
+  "BaselineRendererSha256": "9496D650D07F4177DF77A70309E5F99D46C4F7A2F0C664D2C3B3E8FB4165F3FA",
+  "FuzzFixture": false,
+  "Checks": [
+    {
+      "PaletteNumber": 0,
+      "Invisibility": 0,
+      "AngleDegrees": 0,
+      "Differences": 0,
+      "ComparedPixels": 64000,
+      "OpaqueActorDifferences": 0
+    },
+    {
+      "PaletteNumber": 0,
+      "Invisibility": 0,
+      "AngleDegrees": 37,
+      "Differences": 0,
+      "ComparedPixels": 64000,
+      "OpaqueActorDifferences": 0
+    },
+    {
+      "PaletteNumber": 0,
+      "Invisibility": 0,
+      "AngleDegrees": 89,
+      "Differences": 0,
+      "ComparedPixels": 64000,
+      "OpaqueActorDifferences": 0
+    },
+    {
+      "PaletteNumber": 0,
+      "Invisibility": 0,
+      "AngleDegrees": 173,
+      "Differences": 0,
+      "ComparedPixels": 64000,
+      "OpaqueActorDifferences": 0
+    },
+    {
+      "PaletteNumber": 0,
+      "Invisibility": 0,
+      "AngleDegrees": 269,
+      "Differences": 0,
+      "ComparedPixels": 64000,
+      "OpaqueActorDifferences": 0
+    }
+  ],
+  "Style": "Classic",
+  "FinishedUtc": "2026-09-27T17:42:48.7572150Z",
+  "Workers": 16,
+  "GlyphSet": "Ascii",
+  "CharacterStripByteChecks": 0,
+  "Meaning": "Exact serial/partition equivalence, including binary assets and NumericV3 snapshots with drawseg silhouette depth. Fuzz fixtures explicitly place a shadow demon ahead of the camera and set the player invisibility timer; these are not ordinary gameplay completion evidence. All modes compare encoded bytes against serial encoding at a fixed time and viewport. No vanilla pixel-equivalence claim.",
+  "AnsiEncoding": "Pairs"
+}

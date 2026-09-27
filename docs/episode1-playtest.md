@@ -1,129 +1,41 @@
 # Ultimate Doom Episode 1 human playthrough
 
-This is one complete human playthrough milestone, not a request for separate
-map-by-map reports. It advances the wider roadmap toward the first release;
-it does not close the remaining Ultimate Doom, Doom II, performance, fidelity,
-or MyHouse audit gates.
+This is one complete human playthrough milestone, not a request for separate map-by-map reports. It advances the broader release roadmap without closing the remaining Ultimate Doom, Doom II, performance, fidelity, or MyHouse gates.
 
-## Scope
+## Playthrough scope
 
-Start a new game at HMP (skill 3) in Episode 1 and play through the finale. Take
-the E1M3 secret exit to E1M9, complete that secret map, and verify its return to
-E1M4. Continue E1M4 through E1M8, including the boss-triggered opening in
-E1M8, and advance the ending intermission until the Episode 1 finale appears.
-The expected map sequence is:
+Start a new game on HMP (skill 3) in Episode 1. Take E1M3's secret exit to E1M9, finish that map, verify the return to E1M4, then complete E1M4 through E1M8. In E1M8, defeat the boss to open the exit. Advance the ending intermission until the Episode 1 finale appears.
 
-`E1M1 -> E1M2 -> E1M3 -> E1M9 -> E1M4 -> E1M5 -> E1M6 -> E1M7 -> E1M8 -> Episode 1 finale`
+`E1M1 → E1M2 → E1M3 → E1M9 → E1M4 → E1M5 → E1M6 → E1M7 → E1M8 → Episode 1 finale`
 
-This asks for a normal completion, not 100% kills, items, or secrets. Note any
-deaths, reloads, deviations from the route, or places where progress stopped.
-The endpoint is the Episode 1 finale screen (`E1TEXT` / `CREDIT`), after the
-E1M8 exit and intermission.
+A normal completion is enough; 100% kills, items, and secrets are not required. The finish point is the E1 finale screen (`E1TEXT` / `CREDIT`).
 
-## Build and launch
+## Exact build and launch
 
-Run exact source build commit `d6e5a8dee0b09f6f600f0e4120471a67a0bc9e7e`.
-If your checkout is at a later branch tip, enter the pinned build from the
-repository root before launching:
+Run commit `d86ec2e1017edccad564764224c7d9e768453384` from `C:\projects\pwshDoom`. The source fingerprint is `D627BDF3D3605093095D9185EA564487ECE49A1FE2186134F2257191AB631682`. The full [candidate receipt](../results/episode1-human-playthrough-candidate-20260927-r7.json) lists current-source checks and their limits.
+
+If your checkout is at another revision, select the tested build from the repository root:
 
 ```powershell
-git switch --detach d6e5a8dee0b09f6f600f0e4120471a67a0bc9e7e
+git switch --detach d86ec2e1017edccad564764224c7d9e768453384
 ```
 
-After preserving the input and session reports under `local/`, return to the
-development branch with `git switch codex/feasibility-study`. The pinned build
-keeps gameplay, renderer, and audio algorithms in PowerShell. It includes the
-fixed-point sight-intercept and sight-bound integer paths, renderer guards for
-plane distance and wall-light lookup, and the actor-depth corrections described
-in the [background-plane entry](rendering-fidelity.md#keep-background-planes-out-of-actor-depth-2026-09-27),
-the [missing-texture wall-depth entry](rendering-fidelity.md#preserve-depth-for-untextured-wall-bands-2026-09-27),
-and the [world-sprite silhouette clipping](rendering-fidelity.md#clip-world-sprites-to-wall-silhouettes-2026-09-27)
-with per-context scratch reuse. The current incremental
-[candidate receipt](../results/episode1-human-playthrough-candidate-20260927-r6.json)
-pins the intermission/session-startup update to this exact build. It layers
-48 pixel/timing checks across all four episode backgrounds, 24 exact
-session-screen hashes including finale text/art, a simulation-worker
-new-game/save-load check, the saved crash replay, 69 campaign-transition
-checks and 97 boss-progression checks over the previous broad candidate. Its
-[base receipt](../results/episode1-human-playthrough-candidate-20260927-r5.json)
-retains the 36-map smoke, renderer-style worker equivalence, route regressions,
-fuzz/masked-wall checks, and earlier music/runtime qualification at its recorded
-source pin; those unchanged checks were not rerun at the incremental pin.
-The background warm-up moves the selected `WIMAP0`–`WIMAP2`/`INTERPIC` raster
-out of the first visible intermission screen; see the
-[timing and pixel record](intermission-background-warmup.md).
-The reproduced BON1 sprite leak has a focused correction. The bright fragments
-in the screenshot are two lower-sector `ELEC` Techpillar sprites; their overlap
-matches classic Doom's plane/sprite draw order in both repository renderers.
-The separate corpse-through-wall sighting near the blue armor remains
-unreproduced. Your first launch exposed an exact-patch version check: the catalog
-was prepared on PowerShell 7.6.5 but the user launcher runs 7.6.6. The loop
-and finite finale readers now accept the same major/minor line while retaining
-source and payload verification. The simulation startup wait is 60 seconds
-for cold starts. The [runtime receipt](../results/episode1-startup-runtime-compat-20260927.json)
-records a successful two-second headless E1M1 run under 7.6.6 with all eleven
-catalog reports open and clean audio-device shutdown. It is startup evidence,
-not campaign completion or an audible-quality check. The human run later
-exposed a PowerShell Angle comparison exception on a chainsaw hit in E1M2.
-The pinned build compares Doom binary-angle values explicitly; its focused
-E1M2 hit test and the existing nine-check gameplay suite pass. The complete
-26,731-command input from the interrupted attempt now replays through the
-chainsaw attack without error, matching all 79 saved gameplay/render
-checkpoints; automap, audio, and terminal presentation are outside this
-replay. The final replay at the current source pin is in the
-[crash fix ledger entry](ledger.md#2026-09-27--fix-the-chainsaw-crash-found-in-jasons-episode-1-attempt)
-and [recorded replay receipt](../results/episode1-human-crash-replay-warmup-20260927-r3.json).
-This does not certify a human campaign completion. The retained E1M1–E1M4
-routes and fixed-input E1M2–E1M4 replays remain linked in
-the earlier [renderer-guard receipt](../results/episode1-render-guard-evidence-20260927.json),
-which is pinned to its original source commit. Earlier
-[campaign/session](../results/episode1-playtest-current-readiness-20260927.json),
-[renderer](../results/episode1-playtest-readiness.json), and
-[prior E1 handoff](../results/episode1-playtest-intercept-candidate-readiness-20260927.json)
-receipts keep their original source pins. No automated route is treated as
-human playthrough evidence.
-Run from the repository root in 64-bit PowerShell 7.4 or later on Windows,
-with Windows Terminal, the legally obtained Ultimate Doom `DOOM.WAD`, and the
-prepared local music catalog `local/music-prepared-episode1.json`. The tested Steam IWAD is
-`C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\base\DOOM.WAD`,
-SHA-256 `6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F`.
-The catalog SHA-256 is `0E9C9542C75F4D5E2D7FC71E42FAFBB58F94321C3B8A49BA0C9AC5A93752EE58`;
-it and its prepared audio files remain local and are not included in Git.
-The catalog audio was prepared on PowerShell 7.6.5 and verified on the
-installed 7.6.6 runtime. Matching major/minor patch updates are accepted;
-reports from other major/minor lines need fresh qualification.
-Commercial game files are not included.
+Then start it with this command:
 
 ```powershell
 pwsh -NoProfile -File .\Start-Doom.ps1 `
   -Wad 'C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\base\DOOM.WAD' `
   -Episode 1 -Map 1 -Skill 3 -Style Classic -Sound `
   -MusicCatalog .\local\music-prepared-episode1.json `
-  -RecordInput .\local\episode1-human-playthrough-r3.json `
-  -Report .\local\episode1-human-session-r3.json -Maximized -FontSize 5
+  -RecordInput .\local\episode1-human-playthrough-r4.json `
+  -Report .\local\episode1-human-session-r4.json -Maximized -FontSize 5
 ```
 
-On first startup, give the simulation up to 60 seconds to initialize the game
-and music catalog before expecting the terminal viewport.
+Use 64-bit PowerShell 7.4 or later and Windows Terminal. This exact source was checked with PowerShell 7.6.5. The required Steam IWAD is `DOOM.WAD`, SHA-256 `6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F`; the prepared local Episode 1 music catalog has SHA-256 `0E9C9542C75F4D5E2D7FC71E42FAFBB58F94321C3B8A49BA0C9AC5A93752EE58`. The IWAD and audio catalog are not included in Git. At preflight, `%LOCALAPPDATA%\pwshDoom\settings.json` was absent, so the game's defaults apply. The [preflight receipt](../results/episode1-launch-preflight-current-candidate-20260927.json) records the detected paths and hashes.
 
-The build uses sixteen renderer processes by default. Leave that setting in
-place for this handoff. The current disposable worker-asset format is v6; the
-readiness receipt records current-format worker checks. A focused E1M1-to-E1M2
-reload writes new v6 assets, keeps all sixteen render workers alive, and
-matches 256,000 pixels and 64 encoded strips against serial output
-([receipt](../results/session-worker-sprite-rotation-classic.json)). An earlier
-headless host transition used v4 and wrote no terminal frames, so it does not
-certify visible frame rate or full-campaign audio continuity. Its sixteen
-workers used about 4.0 GB of combined working memory; mention any memory
-pressure or sluggish response during play.
+On a cold start, allow up to 60 seconds for simulation and music workers to initialize. Keep the default 16 renderer workers. A prior measurement used about 4 GB combined worker memory. The Classic view needs at least 320 columns by 100 rows; the 5-point font and maximized window are set to help fit it. If the viewport is short, enlarge the window or press Ctrl+- to reduce the font. Blank space around the centered image in a larger terminal is expected.
 
-At the final preflight, `%LOCALAPPDATA%\pwshDoom\settings.json` did not exist,
-so built-in defaults apply: Always Run off, turn speed 100%, sound volume 100%,
-and mute off. The session report records the preferences actually loaded.
-
-If Steam installed the IWAD elsewhere, replace only the `-Wad` value with the
-path to that same Ultimate Doom IWAD. The recording and session report paths
-must not already exist.
+Both output paths must be unused before launch. They are new (`r4`) names. After preserving the two generated files under `local/`, return to the development branch with `git switch codex/feasibility-study`.
 
 ## Controls
 
@@ -141,160 +53,20 @@ must not already exist.
 | Ctrl, E, Space, or Enter | Advance intermission |
 | P / Pause | Pause / resume |
 
-Hold the key briefly for movement, release it before changing direction, and
-use short discrete presses for switches. Classic needs a Terminal viewport of
-at least 320 columns by 100 rows. This command uses a 5-point font to help fit
-the required grid. If the game still reports too few rows, press Ctrl+- or
-enlarge the window. Larger viewports center the game image, so blank space
-around it is expected. The 11-track Episode 1 catalog is
-enabled. Its actual simulation/audio worker passed 15 save/load/new-game checks,
-including 97,020 music frames and clean device shutdown. The fixed build also
-passes the loop-reader, playback and full-start PowerShell 7.6.6 checks in the
-runtime receipt above. The current mixer also
-passes an actual waveOut worker check with submitted PCM matching an independent
-schedule and clean device shutdown; that finite run recorded one queue-timing
-stall. Whole-campaign music continuity, 35-tic/60-display pacing, and audible
-review of every track are not certified. Report any audible dropout.
-Report visible stalls, delayed controls, or missing/dropout sound. Rendering
-remains an approximation rather than vanilla pixel/demo compatibility.
+Use brief movement presses, release before changing direction, and tap switches. Report delayed controls or visible stalls.
 
-## Reporting
+## What to report
 
-At the end, report either **all clear** or the last map and what happened.
-For an issue, include the map, what you pressed or expected, what the game did,
-and whether you died, reloaded, paused, or resized the window. Preserve the
-input recording and session report until the result is documented; they can
-make a reported issue reproducible. Do not send WAD files.
+At the end, send **all clear** if you reached the finale. Otherwise report the last map, what you pressed or expected, what happened, and whether you died, reloaded, paused, or resized the window. Mention any audio dropout or prolonged stall. Keep the input recording and session report until the result is written down; they can help reproduce a problem. Do not send WAD files.
 
-The human result below records only the scope and outcomes Jason reports.
-Automated smoke, controller fixtures, synthetic keyboard records, and
-boss-trigger checks are separate evidence and are not substitutes for this
-playthrough.
+Your report will be recorded only for the scope and outcomes you state. Automated fixtures and route replays are not substitutes for this human playthrough.
 
-## Readiness evidence
+## Current evidence and limits
 
-The current playtest build is pinned to
-`d6e5a8dee0b09f6f600f0e4120471a67a0bc9e7e`. The
-[current incremental candidate receipt](../results/episode1-human-playthrough-candidate-20260927-r6.json)
-records the affected session-screen and worker delta. Its r5 base receipt at
-`193c386cc1a22feeb1bf7d269d9b2cc1d1ddaf73` retains the 36-map smoke,
-1,747-command E1M1 progression into E1M2, focused renderer checks, and exact
-serial/worker output across all three styles; it is separately source-pinned.
-The new clipping records and actor clip buffers are reused per context; workers
-initialize them on first render after asset loading. The full-start and
-PowerShell 7.6.6 reader checks were run on the preceding chainsaw-fix source;
-this build changes renderer scratch storage and worker first-use setup. The
-recorded replay prefix has zero candidate-only actor-mask pixels at tic 245
-(95 before the fix) and reduces tic 140 from 44 to 3. Reference-only actor
-pixels and broader scene differences remain, so this is a targeted correction,
-not full visual parity. The [paired render measurements](performance.md#world-sprite-clipping-cost-2026-09-27)
-show mixed map results and do not establish end-to-end throughput. The earlier
-[renderer-guard receipt](../results/episode1-render-guard-evidence-20260927.json)
-retains 50,200 sight-bound parity cases, 50,000 intercept parity cases, all
-four E1M1–E1M4 route regressions, and fixed-input E1M2–E1M4 replays at its
-original source pin. The smoke loads maps and renders them; it is not
-map-completion evidence. Synthetic key records do not certify physical
-keyboard play. The [campaign matrix](campaign-matrix.md) records the distinction
-between fixture, route, smoke, and human evidence.
+The [r7 candidate receipt](../results/episode1-human-playthrough-candidate-20260927-r7.json) pins this build and records the current-source checks: 36-map smoke, 69 campaign transitions including the secret return and finale state, 97 boss checks, 125 menu/session checks with 46 screen fixtures, 15 save/load/audio-worker checks, the chainsaw regression, and exact serial/16-worker output for Classic, Matrix/Katakana, and AnsiArt/Katakana. A current-source short sound-enabled host run and the fresh launcher preflight also pass. These establish startup and focused behavior, not full map completion.
 
-One extra waypoint-driver execution on E1M3 stopped before reaching its next
-waypoint without a crash; no repeatable engine defect was exposed, and route
-tuning was stopped. Its outcome is retained in the evidence index. The saved
-7,118-command E1M3 replay completes with all 24 recorded checkpoints matching.
+The earlier chainsaw crash happened after collecting the saw in E1M2 and pressing Ctrl against an imp. A focused real-world hit check passes on this build. The previous 26,731-command recording predates the math corrections and no longer reproduces the old exact route; its replay is documented as stale-source evidence, not as a new human test or confirmed defect. Existing E1M1–E1M4 automated route receipts are retained at their original source pins. One E1M3 waypoint driver stalled without exposing a reproducible product defect, and it was not tuned further.
 
-Earlier source-pinned results remain useful context. The visibility-fix
-regression index records the original E1M1–E1M4 route runs and a nine-map
-smoke; full raw reports for that earlier run remain under ignored
-`local/visibility-intercept-regressions/`. The failed E1M5 automated route is recorded in
-[`campaign-e1m5-investigation.md`](campaign-e1m5-investigation.md); it ended in
-player death and did not establish a repeatable engine defect.
+The raised-floor columns in Jason's E1M1 screenshot were lower-sector Techpillar sprites whose overlap matches classic Doom's plane/sprite draw order in both repository renderers. The separate corpse-through-wall sighting near the blue armor remains unreproduced at its exact view. Whole-episode audio continuity, audible quality under sustained renderer load, physical keyboard response, 35-tic simulation pacing, and 60 displayed updates/sec are not certified. Rendering remains an approximation; no independent original-executable parity is claimed.
 
-The current audio mixer passes 26 focused checks, nine music/effects checks,
-and ten actual-device worker checks. The worker matched its independent PCM
-schedule and closed the device; its finite run recorded one queue-timing stall.
-These checks prepare the human run but do not establish full-campaign audio
-continuity.
-
-The current renderer passes a 36-map Ultimate Doom smoke on the same IWAD:
-each map advances 35 idle tics and renders two full serial frames. The smoke's
-`WorkerStrips=16` field is configuration metadata and starts no processes;
-current 16-worker output is separately qualified per display style in the
-readiness receipt. This covers E1M1–E1M9 as startup/render cases, not map completion.
-The earlier 57 campaign transition/finale checks, 97 boss checks, 125
-menu/session checks with 46 screen fixtures, six synthetic console-input
-checks, and ten menu-key checks passed on the campaign/session source pin
-recorded in the prior receipt. The renderer build at `e358741` separately
-passed the direct sky sampler, 36-map smoke, and all three 16-worker
-display-style checks. Their distinct source pins and limits are in the
-[earlier readiness receipt](../results/episode1-playtest-readiness.json).
-The renderer-candidate IWAD/music-catalog preflight is recorded in
-[`episode1-launch-preflight-sky-sampling.json`](../results/episode1-launch-preflight-sky-sampling.json).
-That renderer build's `Play.ps1 -Check` result and exact hashes are in the
-[current-tip readiness receipt](../results/episode1-playtest-current-tip-readiness-20260927.json).
-The current `4ed3363` source pin has its own fresh launcher preflight in the
-readiness receipt above; it detects PowerShell 7.6.5, Windows Terminal, the
-36-map IWAD, and the prepared catalog path. Audio contents are validated
-separately by the worker receipts.
-The latest fixed-point floor/ceiling mapping brings the six-view scene-index
-mismatch against the adopted PowerShell reference from 101,971 to 37,798
-(62.9% fewer than the original numeric baseline); 7.38–14.19% still differ.
-All three output styles match serial output exactly across 16 worker processes.
-Serial render medians increased 6–10.5% in the two measured maps, and the
-headless replay averaged 34.97 simulation tics/sec. These are not displayed-FPS
-measurements; they set realistic expectations for Jason's run. This does not
-establish original-executable parity. A subsequent sprite/weapon sampling fix
-matches the adopted reference at seven fractional pistol offsets and reduces
-scene disagreement in ten E1M1/E1M2 views by a further 3.78%; it raises serial
-render medians slightly in the two measured maps. The readiness receipt links
-raw reports with source hashes and exact test scope.
-
-On 2026-09-26, a further world-sprite correction matched fixed-point masked
-post sampling in 40 real-IWAD scale/origin cases (838 differences before,
-zero after). The current source then passed the full 36-map smoke, exact
-16-worker output for Classic, Matrix/Katakana and AnsiArt/Katakana, 138 weapon
-lighting fixtures through asset format v5, and a live E1M1-to-E1M2 worker
-asset reload. This improves a low-level sprite raster path; it does not certify
-original-executable fidelity or map completion. The linked readiness receipt
-pins the source commit and raw reports. The current-source Classic launcher
-preflight also detects the installed IWAD, Windows Terminal, PowerShell 7.6.5,
-and prepared Episode 1 catalog; the source-pinned path check is in the readiness
-receipt, while the separate audio-worker checks qualify catalog contents and
-playback integration.
-
-The pinned source applies Doom-style 16.16 actor depth, scale, projected bounds,
-lighting, and vertical texture origin. Across six static E1M1/E1M2 views it
-reduces full-scene differences against the adopted PowerShell renderer by 538
-indices. Rotated-frame selection now matches the adopted Doom binary-angle rule:
-16,392 direction cases, 393,408 frame boundaries, six signed-int edge cases,
-and 100,000 angle conversions pass with no mismatches. The former floating
-calculation selected the wrong frame in 172,724 of the same boundary fixtures.
-This is synthetic math parity; moving-actor visuals, occlusion parity, and an
-independent original-executable comparison remain open. Classic,
-Matrix/Katakana, and AnsiArt/Katakana each match serial output across 16 workers
-(320,000 pixels and 80 encoded strips per style), and the exact source passes
-the 36-map smoke and launcher preflight. Isolated paired timings are mixed and
-do not establish a speedup or visible frame rate.
-
-### Jason's human result
-
-Attempt 1 (2026-09-27), on build 398022a8caa3b3e31d2a0d1c08642ecf6be7c1d0,
-was interrupted by the chainsaw attack crash in E1M2. Jason reported collecting
-the chainsaw and pressing Ctrl to attack an imp. The session record shows E1M1
-intermission followed by the E1M2 load; it ended at 26,731 tics with Error.
-The issue is fixed in the build pinned above. Replaying the saved 26,731-command
-input now completes without a simulation exception and matches all 79 saved
-gameplay/render checkpoints. This replay omits the separately recorded
-automap commands, audio, and terminal output; it is a crash regression, not
-human playthrough evidence.
-
-The E1M1 visual notes are still under investigation. One reproduced BON1 actor
-leak at tic 245 is fixed. The raised-floor columns in the screenshot are
-Techpillar sprites whose overlap matches classic Doom's documented plane/sprite
-draw order. Sixteen sampled radioactive-pool views did not isolate the reported
-corpse leak by the blue armor; that sighting remains open. See the
-[renderer issue details](rendering-fidelity.md#clip-world-sprites-to-wall-silhouettes-2026-09-27)
-and [pool comparison](../results/human-pool-occlusion-samples-20260927.json).
-
-Attempt 1 did not finish the episode or reach the secret-map path/finale. The
-one complete Episode 1 human playthrough remains pending; it starts fresh from
-E1M1 and ends at the Episode 1 finale.
+The [roadmap](roadmap.md) keeps the broader release gates open. The [reference audit](reference-audit.md) explains the original C# Managed Doom lineage and current source references; [`src/ManagedDoom/ORIGIN.md`](../src/ManagedDoom/ORIGIN.md) records the adopted PowerShell fork and local changes.

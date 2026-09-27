@@ -1,0 +1,119 @@
+{
+  "Format": "pwshDoom.Episode1HumanPlaythroughCandidate",
+  "Version": 1,
+  "RecordedUtc": "2026-09-27T17:47:39Z",
+  "Status": "ReadyForOneCompleteHumanEpisode1Playthrough",
+  "Notes": "Current-source candidate after narrow upstream arithmetic corrections. Jason's complete Episode 1 playthrough remains pending. Route bots were not tuned and no screen recordings were made.",
+  "Build": {
+    "Repository": "jasonulbright/pwshDoom",
+    "Branch": "codex/feasibility-study",
+    "Commit": "d86ec2e1017edccad564764224c7d9e768453384",
+    "PowerShell": "7.6.5",
+    "SourceFingerprint": "D627BDF3D3605093095D9185EA564487ECE49A1FE2186134F2257191AB631682",
+    "FastRendererSha256": "9496D650D07F4177DF77A70309E5F99D46C4F7A2F0C664D2C3B3E8FB4165F3FA",
+    "PreviousCandidate": "results/episode1-human-playthrough-candidate-20260927-r6.json"
+  },
+  "Prerequisites": {
+    "WindowsTerminal": "C:\\Users\\jason\\AppData\\Local\\Microsoft\\WindowsApps\\wt.exe",
+    "IWAD": {
+      "Path": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Ultimate Doom\\base\\DOOM.WAD",
+      "Sha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+      "EpisodeMaps": 36
+    },
+    "MusicCatalog": {
+      "Path": "local/music-prepared-episode1.json",
+      "Sha256": "0E9C9542C75F4D5E2D7FC71E42FAFBB58F94321C3B8A49BA0C9AC5A93752EE58"
+    },
+    "Settings": "No %LOCALAPPDATA%/pwshDoom/settings.json was present at preflight; built-in defaults apply."
+  },
+  "Checks": [
+    {
+      "Name": "Managed Doom upstream math parity",
+      "Result": "50,006 slope-div inputs plus bob-angle and death-turn constants match the C# integer rules.",
+      "Report": "results/upstream-math-parity-20260927.json"
+    },
+    {
+      "Name": "Ultimate Doom map load/render smoke",
+      "Result": "All 36 IWAD maps load, advance 35 idle tics, and render two serial 320x200 frames.",
+      "Report": "results/campaign-smoke-exact-math-20260927.json"
+    },
+    {
+      "Name": "Campaign transitions, secret return, and finale state",
+      "Result": "69 assertions pass, including E1M3 to E1M9, return to E1M4, intermission/world loads, secret history, and finale routing.",
+      "Report": "results/campaign-transitions-exact-math-20260927.json"
+    },
+    {
+      "Name": "Boss progression",
+      "Result": "97 progression assertions pass, including the E1M8 boss-triggered opening.",
+      "Report": "results/boss-progression-exact-math-20260927.json"
+    },
+    {
+      "Name": "Menus and session screens",
+      "Result": "125 menu/session assertions and 46 screen fixtures pass.",
+      "Report": "results/session-menu-exact-math-20260927.json"
+    },
+    {
+      "Name": "Simulation worker save/load and audio integration",
+      "Result": "15 worker checks pass with the prepared catalog, including new game, save/load, audio generation changes, and clean shutdown.",
+      "Report": "results/save-worker-exact-math-20260927.json"
+    },
+    {
+      "Name": "Chainsaw attack regression",
+      "Result": "Two focused checks pass, including an actual chainsaw hit on the E1M2 imp from Jason's crash report.",
+      "Report": "results/saw-attack.json"
+    },
+    {
+      "Name": "Current-source renderer worker equivalence",
+      "Result": "Classic, Matrix/Katakana, and AnsiArt/Katakana each match serial rendering byte-for-byte across 320,000 pixels and five views using 16 workers.",
+      "Reports": [
+        "results/render-partitions-current-candidate-classic-20260927.json",
+        "results/render-partitions-current-candidate-matrix-20260927.json",
+        "results/render-partitions-current-candidate-ansiart-20260927.json"
+      ]
+    },
+    {
+      "Name": "Launcher preflight",
+      "Result": "The current launcher detects PowerShell 7.6.5, Windows Terminal, the 36-map Steam IWAD, and the prepared catalog path. -Check validates paths, not music track contents.",
+      "Report": "results/episode1-launch-preflight-current-candidate-20260927.json"
+    },
+    {
+      "Name": "Current-source short sound-enabled host startup",
+      "Result": "A two-second headless run starts simulation and audio workers and exits without an error after 69 tics and 26 completed frames. It is not sustained audio or frame-rate evidence.",
+      "Report": "local/episode1-math-audio-host-20260927.json",
+      "Portable": false
+    }
+  ],
+  "RetainedRouteEvidence": {
+    "Receipt": "results/episode1-render-guard-evidence-20260927.json",
+    "Meaning": "The existing E1M1-E1M4 route-driver results and fixed-input E1M2-E1M4 replay results remain preserved at their original source pins. The E1M3 waypoint driver stalled without exposing a reproducible product defect; no route tuning was done. These are not current-source human completion evidence."
+  },
+  "KnownLimits": [
+    "No human has yet completed this Episode 1 route. The handoff requests one full run, not map-by-map reports.",
+    "The previous 26,731-command human input predates the math corrections. Its current-source comparison consumes the stream without a simulation exception but diverges at tic 350 and remains on E1M1; it is not a current exact replay regression or proof of a product defect.",
+    "The separate E1M1 corpse-through-wall sighting near the blue armor remains unreproduced at its exact view. The raised-floor columns screenshot shows lower-sector Techpillar sprites whose overlap matches classic Doom draw order in both repository renderers.",
+    "The short current-source sound-enabled run proves startup only. Whole-episode music continuity, audible quality, and queue timing under a full renderer load have not been qualified; report any dropout or audible stall.",
+    "Physical keyboard response during a full campaign has not been qualified. Report delayed controls or visible stalls.",
+    "Sustained 35 simulation tics/sec and 60 displayed updates/sec are not certified. Headless completion counts are not displayed-FPS measurements.",
+    "Sixteen renderer workers use about 4 GB combined working memory in the earlier measured run; report memory pressure or sluggishness.",
+    "Terminal rendering remains an approximation; independent original-executable pixel/demo parity is not claimed."
+  ],
+  "HumanPlaythrough": {
+    "Skill": 3,
+    "Start": "E1M1",
+    "ExpectedSequence": [
+      "E1M1",
+      "E1M2",
+      "E1M3",
+      "E1M9",
+      "E1M4",
+      "E1M5",
+      "E1M6",
+      "E1M7",
+      "E1M8",
+      "Episode 1 finale"
+    ],
+    "Finish": "Advance the E1M8 exit intermission until E1TEXT/CREDIT appears.",
+    "CompletionStatus": "Pending",
+    "EvidenceType": "One human playthrough; automated routes and fixtures are not substitutes."
+  }
+}

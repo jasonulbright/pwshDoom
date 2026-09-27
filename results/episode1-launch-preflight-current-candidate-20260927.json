@@ -1,0 +1,20 @@
+{
+  "Format": "pwshDoom.Episode1LaunchPreflight",
+  "RecordedUtc": "2026-09-27T17:47:39Z",
+  "Ready": true,
+  "PowerShell": "7.6.5",
+  "Root": "C:\\projects\\pwshDoom",
+  "WindowsTerminal": "C:\\Users\\jason\\AppData\\Local\\Microsoft\\WindowsApps\\wt.exe",
+  "IWAD": {
+    "Path": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Ultimate Doom\\base\\DOOM.WAD",
+    "Sha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+    "EpisodeMaps": 36
+  },
+  "MusicCatalog": {
+    "Path": "local/music-prepared-episode1.json",
+    "Sha256": "0E9C9542C75F4D5E2D7FC71E42FAFBB58F94321C3B8A49BA0C9AC5A93752EE58",
+    "Validation": "The -Check preflight verifies the catalog path only; the current-source audio worker separately starts successfully and validates qualified tracks."
+  },
+  "SettingsFilePresent": false,
+  "Command": "Play.ps1 -Check -Wad <installed Ultimate Doom DOOM.WAD> -MusicCatalog local/music-prepared-episode1.json"
+}

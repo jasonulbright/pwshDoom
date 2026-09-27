@@ -2574,3 +2574,19 @@ Receipts: [36-map smoke](../results/campaign-smoke-exact-math-20260927.json),
 [stale-input replay](../results/episode1-human-crash-replay-exact-math-20260927.json),
 and [upstream math parity](../results/upstream-math-parity-20260927.json).
 The short host startup report remains under ignored `local/`.
+
+Before freezing the human-test candidate, the renderer's existing partition
+check was rerun against the exact candidate source. Classic,
+Matrix/Katakana, and AnsiArt/Katakana each match the serial image and encoded
+strips across five headings, 320,000 pixels, and 16 uneven worker processes.
+This confirms current serial/worker equivalence only; it is not original Doom
+pixel parity or a performance result. `Play.ps1 -Check` also detects the
+installed Windows Terminal, the 36-map IWAD, and the prepared catalog path;
+that preflight does not validate the music contents. No per-user settings file
+was present. The [r7 candidate receipt](../results/episode1-human-playthrough-candidate-20260927-r7.json)
+pins these checks to the exact source build.
+
+Receipts: [launch preflight](../results/episode1-launch-preflight-current-candidate-20260927.json),
+[Classic](../results/render-partitions-current-candidate-classic-20260927.json),
+[Matrix/Katakana](../results/render-partitions-current-candidate-matrix-20260927.json),
+and [AnsiArt/Katakana](../results/render-partitions-current-candidate-ansiart-20260927.json).
