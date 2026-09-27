@@ -1,0 +1,63 @@
+{
+  "Format": "pwshDoom.RecordedHumanCrashReplay",
+  "Version": 1,
+  "FinishedUtc": "2026-09-27T15:32:50.4467634Z",
+  "SourceCommit": "a99ad57cfb21e9be359ece37d64c8679fc9d3a40",
+  "CurrentSourceFingerprint": "C047999056BB7D507E7A26690A1F13305209F48597C27A6CE18339CEDF6FF080",
+  "RecordedSourceFingerprint": "4AC9E2A5605EAE63F4BAB0802AF5CEF57B5D9EB0D96CEE9A1953878796F39B39",
+  "SourceFingerprintMatches": false,
+  "ReplayPath": "local/episode1-human-playthrough-r2.json",
+  "ReplaySha256": "F77C1228AD356AE205ED3060F0BAFC584CA9AFA0209F32E24294295D08846156",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "RecordedExitReason": "Error",
+  "RecordedError": "Simulation failed; see the simulation error in the session report.\nat <ScriptBlock>, C:\\projects\\pwshDoom\\scripts\\Invoke-Doom.ps1: line 142",
+  "RecordedCommands": 26731,
+  "ConsumedCommands": 26731,
+  "FailureTic": null,
+  "Failure": null,
+  "Checkpoints": {
+    "Checked": 79,
+    "Matched": true,
+    "Meaning": "Compared available recorded checkpoints through the consumed prefix. This samples selected state and render data, not every hidden game field.",
+    "Mismatches": []
+  },
+  "AutomapCheckpointsCompared": false,
+  "RecordedAutomapCommandCount": 185,
+  "Transitions": [
+    {
+      "Episode": 1,
+      "Map": 1,
+      "State": "Level",
+      "Tic": 1
+    },
+    {
+      "Episode": 1,
+      "Map": 1,
+      "State": "Intermission",
+      "Tic": 10098
+    },
+    {
+      "Episode": 1,
+      "Map": 2,
+      "State": "Level",
+      "Tic": 13520
+    }
+  ],
+  "FinalState": {
+    "State": "Level",
+    "Weapon": "Chainsaw",
+    "Armor": 96,
+    "Map": 2,
+    "LevelTime": 13211,
+    "Episode": 1,
+    "Position": [
+      -130190090,
+      69973284,
+      8388608,
+      4102029312
+    ],
+    "Health": 82
+  },
+  "Passed": true,
+  "Meaning": "Replays the complete saved human command stream through the current in-process PowerShell game simulation. It checks the recorded gameplay and render-snapshot checkpoints while excluding the separately recorded automap state/commands, and verifies that the original chainsaw-crash command stream completes without a simulation exception. It does not run renderer workers, terminal I/O, or audio, and it is not a human campaign completion."
+}

@@ -27,6 +27,15 @@ The trace records update-end, enqueue and presentation-start/end QPC for every t
 
 The actual simulation-worker save/menu/new-game/load fixture also passes its 15 checks with qualified music (`results/save-worker-early-audio.json`). That is control regression coverage, not additional map completion. Renderer code and the Classic/Matrix/color-art encoders are unchanged; this new full-window recording is Matrix only.
 
+The first intermission UI update was a large presentation spike in this single
+route. The selected episode background is now prewarmed during session setup;
+all four episodes' Stats/Next pixels match their earlier hashes, and a focused
+five-repeat comparison moves about 8 ms of first-screen raster work ahead of
+the intermission. See [intermission background warm-up](intermission-background-warmup.md)
+and its [portable receipt](../results/intermission-background-warmup-20260927-r4.json).
+This isolated renderer result does not requalify this audio route or prove
+continuous playback.
+
 ## Evidence and reproduction
 
 The portable results are `audio-publication-first.json`, `audio-route-early-audio-timing.json` and `music-route-early-audio-evidence.json`. Complete game/audio/capture/merge/source receipts are copied byte-identically into `results/music-route-early-audio-*.json`.

@@ -120,7 +120,7 @@ try {
     $context=New-FastRenderContext $content $game.World;$palette=[int[][]]::new(256)
     for($i=0;$i -lt 256;$i++){$palette[$i]=@($content.Palette.Data[3*$i],$content.Palette.Data[3*$i+1],$content.Palette.Data[3*$i+2])}
     Write-GameRenderAssets $context $palette $Assets
-    if(-not $StopAtLevelEnd){$screens=New-DoomSessionScreens $content}
+    if(-not $StopAtLevelEnd){$screens=New-DoomSessionScreens $content $game.Options.Episode}
     $automapGraphics=New-DoomAutomapGraphics $content
     $automapGraphics.Discovery.DiscoverMap($game.World.ConsolePlayer)
     if($Sound){
@@ -163,7 +163,9 @@ try {
                 $newSkill=$view.ReadInt32(60);$newEpisode=$view.ReadInt32(64);$newMap=$view.ReadInt32(68)
                 if($newSkill -lt 1 -or $newSkill -gt 5 -or $newEpisode -lt 1 -or $newEpisode -gt $episodeCount -or $newMap -ne 1){throw 'Invalid new-game selection.'}
                 $menuScreen=0;$menuPixels=$null;$game.Paused=$false;foreach($cmd in $commands){$cmd.Clear()}
-                $game.DeferedInitNew([GameSkill]($newSkill-1),$newEpisode,$newMap);$null=$game.Update($commands)
+                $game.DeferedInitNew([GameSkill]($newSkill-1),$newEpisode,$newMap)
+                if($null -ne $screens){$screens.Intermission.WarmupBackground($options.GameMode,$newEpisode)}
+                $null=$game.Update($commands)
                 $controlLog.Add(@{Tic=$tick;Action='NewGame';Skill=$newSkill;Episode=$newEpisode;Map=$newMap})
                 Publish-SimulationMapChange
             }elseif($kind -in 3,4){
@@ -217,7 +219,7 @@ try {
                         foreach($device in 'Video','Sound','Music','UserInput'){$candidate.Options.$device=$options.$device}
                         $game=$candidate;$options=$game.Options;$game.Paused=$false;foreach($cmd in $commands){$cmd.Clear()}
                         $game.BeforeLevelLoad={param($LoadingGame) Begin-SimulationLevelLoad}
-                        $screens=if($StopAtLevelEnd){$null}else{New-DoomSessionScreens $content}
+                        $screens=if($StopAtLevelEnd){$null}else{New-DoomSessionScreens $content $options.Episode}
                         $options.Sound.Reset();$options.Sound.SetListener($game.World.ConsolePlayer.Mobj);$options.Sound.Resume()
                         if($musicEvents){Sync-DoomMusicSession $musicEvents $game}
                         $controlLog.Add(@{Tic=$tick;Action='LoadGame';SaveHash=$saved.Sha256})

@@ -2413,3 +2413,27 @@ parity to that binary remains unmeasured. The separate corpse-through-wall
 sighting near the blue armor was not reproduced at this camera state and
 remains open. The source-pinned replay details are in
 [`raised-floor-techpillar-human-view-20260927.json`](../results/raised-floor-techpillar-human-view-20260927.json).
+
+## 2026-09-27 — Move intermission background work before the visible frame
+
+The earlier 1,747-command Matrix route measured 124.412 ms in its first
+intermission session-screen call. `IntermissionRenderer` lazily decoded and
+rasterized the selected full-screen background on that first call. Session
+setup now prewarms only the active episode's `WIMAP0`–`WIMAP2` or `INTERPIC`
+background and restores the shared screen bytes afterward. New-game selection
+and save-load reconstruction also select the correct episode.
+
+The first benchmark harness attempt stopped on a case-insensitive variable-name
+collision between its baseline path parameter and the hash table; its failed
+receipt is retained at `results/intermission-background-warmup-20260927.json`.
+The corrected [48-check comparison](../results/intermission-background-warmup-20260927-r4.json)
+passes for all four episodes and reproduces all eight previous Stats/Next
+image hashes. A separate full session-screen run also reproduces all 24 prior
+Stats, Next, finale-text and finale-art hashes. Five interleaved,
+JIT/patch-cache-primed renders per screen show
+7.84–8.88 ms lower first-render medians, moving about 8 ms into session setup.
+This is an isolated one-host measurement, not full-game pacing or audio proof.
+The actual simulation worker passes all 12 save/load checks while selecting
+Episode 2 and restoring an Episode 1 save; the complete saved 26,731-command
+chainsaw regression still matches all 79 available checkpoints. The user has
+not yet completed the single full Episode 1 human playthrough.

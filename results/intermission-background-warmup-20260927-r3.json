@@ -1,0 +1,797 @@
+{
+  "Error": null,
+  "BaselineSha256": "6CB4B0085555D1867710FC631DD3770BC49B0A2E7D0AA097A86AC4B2056A5636",
+  "FinishedUtc": "2026-09-27T15:28:42.2659317Z",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "Passed": true,
+  "Meaning": "For all four Ultimate Doom episodes, prewarmed intermission Stats/Next frames are hash-identical to the prior renderer and a fresh cold renderer. The probe confirms warm-up preserves existing screen bytes. Timings are one-host observations and do not prove campaign audio continuity, visual parity against the original executable, or a frame-rate target.",
+  "BaselinePath": "results\\session-screens-render-final-20260927.json",
+  "SourceSha256": {
+    "SessionScreens": "94E7DF088E6E725ECE623ADC1E1C7B117A2BF41D7B650F5899ACF8E4C4BD77D3",
+    "Harness": "4224F67194066A40D30681CC435AF1CFCFDFA22CF68F0C9A9901AAB7B300F57D",
+    "SimulationWorker": "7F48CA599EC80401D2441546AFF01348055334BC43A7866B904E68A9FCB7FD0C",
+    "IntermissionRenderer": "3E01CF851FD4F7843AFEAC932CCBE4466B7C31EDF5CA232B81469A1509C166E1"
+  },
+  "Checks": [
+    {
+      "Evidence": {
+        "CreationMilliseconds": 556.8859,
+        "CachedNames": [
+          "WIMAP0"
+        ]
+      },
+      "Name": "Episode 1 session preloads WIMAP0",
+      "Passed": true
+    },
+    {
+      "Evidence": {
+        "Sha256": "4F7988030A00D082FE445E00A2AC5DAB502300FF1B80E8592DD569867B60EF74"
+      },
+      "Name": "Episode 1 session leaves framebuffer clear",
+      "Passed": true
+    },
+    {
+      "Evidence": {
+        "WarmSha256": "D41A96F2770D32191A4FB7EBD948CEE10D3F676D3889E18E6069000BFB3DF797",
+        "Trials": [
+          {
+            "Warm": "D41A96F2770D32191A4FB7EBD948CEE10D3F676D3889E18E6069000BFB3DF797",
+            "Cold": "D41A96F2770D32191A4FB7EBD948CEE10D3F676D3889E18E6069000BFB3DF797"
+          },
+          {
+            "Warm": "D41A96F2770D32191A4FB7EBD948CEE10D3F676D3889E18E6069000BFB3DF797",
+            "Cold": "D41A96F2770D32191A4FB7EBD948CEE10D3F676D3889E18E6069000BFB3DF797"
+          },
+          {
+            "Warm": "D41A96F2770D32191A4FB7EBD948CEE10D3F676D3889E18E6069000BFB3DF797",
+            "Cold": "D41A96F2770D32191A4FB7EBD948CEE10D3F676D3889E18E6069000BFB3DF797"
+          },
+          {
+            "Warm": "D41A96F2770D32191A4FB7EBD948CEE10D3F676D3889E18E6069000BFB3DF797",
+            "Cold": "D41A96F2770D32191A4FB7EBD948CEE10D3F676D3889E18E6069000BFB3DF797"
+          },
+          {
+            "Warm": "D41A96F2770D32191A4FB7EBD948CEE10D3F676D3889E18E6069000BFB3DF797",
+            "Cold": "D41A96F2770D32191A4FB7EBD948CEE10D3F676D3889E18E6069000BFB3DF797"
+          }
+        ],
+        "ColdSha256": "D41A96F2770D32191A4FB7EBD948CEE10D3F676D3889E18E6069000BFB3DF797"
+      },
+      "Name": "Episode 1 Stats equals cold renderer across 5 interleaved trials",
+      "Passed": true
+    },
+    {
+      "Evidence": {
+        "ExpectedSha256": "D41A96F2770D32191A4FB7EBD948CEE10D3F676D3889E18E6069000BFB3DF797",
+        "ActualSha256": "D41A96F2770D32191A4FB7EBD948CEE10D3F676D3889E18E6069000BFB3DF797"
+      },
+      "Name": "Episode 1 Stats preserves prior frame",
+      "Passed": true
+    },
+    {
+      "Evidence": {
+        "Background": "WIMAP0",
+        "Sha256": "DE4BAA0C4AE5B83B0C2EA5CD92A56E367D041FAF43C95C3D9079A0C3ED436952"
+      },
+      "Name": "Episode 1 Stats background caches are identical",
+      "Passed": true
+    },
+    {
+      "Evidence": {
+        "BeforeSha256": "76E875D49A289A585DCA029C4AFE8C3CDDBAFC0775EBDBBAA7FB70F2F4F955A9",
+        "WarmupMilliseconds": 17.4187,
+        "AfterSha256": "76E875D49A289A585DCA029C4AFE8C3CDDBAFC0775EBDBBAA7FB70F2F4F955A9"
+      },
+      "Name": "Episode 1 Stats warm-up preserves an existing framebuffer",
+      "Passed": true
+    },
+    {
+      "Evidence": {
+        "ColdSamplesMilliseconds": [
+          17.403,
+          18.532,
+          19.6822,
+          18.5727,
+          18.7506
+        ],
+        "WarmSamplesMilliseconds": [
+          10.5718,
+          9.939,
+          10.1976,
+          9.5969,
+          10.316
+        ],
+        "Scope": "Five interleaved first-render trials after PowerShell render-path JIT and patch-cache priming; process startup, terminal presentation and full-game pacing are excluded.",
+        "WarmupSamplesMilliseconds": [
+          8.827,
+          9.0267,
+          8.1698,
+          8.3826,
+          8.2108
+        ],
+        "ColdMedianMilliseconds": 18.5727,
+        "WarmMedianMilliseconds": 10.1976,
+        "Pixels": 64000,
+        "SessionCreationMilliseconds": 556.8859,
+        "WarmupMedianMilliseconds": 8.3826,
+        "Ordering": "Alternated cold-first and warm-first renders after JIT and patch-cache priming."
+      },
+      "Name": "Episode 1 Stats first-frame timings",
+      "Passed": true
+    },
+    {
+      "Evidence": {
+        "WarmSha256": "B5FB4E4E225E0AB368C0F251BF5A669F7052DF7C108274752B87AB3EFBD89BB4",
+        "Trials": [
+          {
+            "Warm": "B5FB4E4E225E0AB368C0F251BF5A669F7052DF7C108274752B87AB3EFBD89BB4",
+            "Cold": "B5FB4E4E225E0AB368C0F251BF5A669F7052DF7C108274752B87AB3EFBD89BB4"
+          },
+          {
+            "Warm": "B5FB4E4E225E0AB368C0F251BF5A669F7052DF7C108274752B87AB3EFBD89BB4",
+            "Cold": "B5FB4E4E225E0AB368C0F251BF5A669F7052DF7C108274752B87AB3EFBD89BB4"
+          },
+          {
+            "Warm": "B5FB4E4E225E0AB368C0F251BF5A669F7052DF7C108274752B87AB3EFBD89BB4",
+            "Cold": "B5FB4E4E225E0AB368C0F251BF5A669F7052DF7C108274752B87AB3EFBD89BB4"
+          },
+          {
+            "Warm": "B5FB4E4E225E0AB368C0F251BF5A669F7052DF7C108274752B87AB3EFBD89BB4",
+            "Cold": "B5FB4E4E225E0AB368C0F251BF5A669F7052DF7C108274752B87AB3EFBD89BB4"
+          },
+          {
+            "Warm": "B5FB4E4E225E0AB368C0F251BF5A669F7052DF7C108274752B87AB3EFBD89BB4",
+            "Cold": "B5FB4E4E225E0AB368C0F251BF5A669F7052DF7C108274752B87AB3EFBD89BB4"
+          }
+        ],
+        "ColdSha256": "B5FB4E4E225E0AB368C0F251BF5A669F7052DF7C108274752B87AB3EFBD89BB4"
+      },
+      "Name": "Episode 1 Next equals cold renderer across 5 interleaved trials",
+      "Passed": true
+    },
+    {
+      "Evidence": {
+        "ExpectedSha256": "B5FB4E4E225E0AB368C0F251BF5A669F7052DF7C108274752B87AB3EFBD89BB4",
+        "ActualSha256": "B5FB4E4E225E0AB368C0F251BF5A669F7052DF7C108274752B87AB3EFBD89BB4"
+      },
+      "Name": "Episode 1 Next preserves prior frame",
+      "Passed": true
+    },
+    {
+      "Evidence": {
+        "Background": "WIMAP0",
+        "Sha256": "DE4BAA0C4AE5B83B0C2EA5CD92A56E367D041FAF43C95C3D9079A0C3ED436952"
+      },
+      "Name": "Episode 1 Next background caches are identical",
+      "Passed": true
+    },
+    {
+      "Evidence": {
+        "BeforeSha256": "76E875D49A289A585DCA029C4AFE8C3CDDBAFC0775EBDBBAA7FB70F2F4F955A9",
+        "WarmupMilliseconds": 17.3264,
+        "AfterSha256": "76E875D49A289A585DCA029C4AFE8C3CDDBAFC0775EBDBBAA7FB70F2F4F955A9"
+      },
+      "Name": "Episode 1 Next warm-up preserves an existing framebuffer",
+      "Passed": true
+    },
+    {
+      "Evidence": {
+        "ColdSamplesMilliseconds": [
+          13.8071,
+          13.9339,
+          13.8382,
+          13.8625,
+          14.306
+        ],
+        "WarmSamplesMilliseconds": [
+          5.8897,
+          5.8398,
+          5.8407,
+          6.2971,
+          5.7982
+        ],
+        "Scope": "Five interleaved first-render trials after PowerShell render-path JIT and patch-cache priming; process startup, terminal presentation and full-game pacing are excluded.",
+        "WarmupSamplesMilliseconds": [
+          8.4905,
+          8.3892,
+          8.693,
+          8.4811,
+          7.9928
+        ],
+        "ColdMedianMilliseconds": 13.8625,
+        "WarmMedianMilliseconds": 5.8407,
+        "Pixels": 64000,
+        "SessionCreationMilliseconds": 556.8859,
+        "WarmupMedianMilliseconds": 8.4811,
+        "Ordering": "Alternated cold-first and warm-first renders after JIT and patch-cache priming."
+      },
+      "Name": "Episode 1 Next first-frame timings",
+      "Passed": true
+    },
+    {
+      "Evidence": {
+        "CreationMilliseconds": 465.1247,
+        "CachedNames": [
+          "WIMAP1"
+        ]
+      },
+      "Name": "Episode 2 session preloads WIMAP1",
+      "Passed": true
+    },
+    {
+      "Evidence": {
+        "Sha256": "4F7988030A00D082FE445E00A2AC5DAB502300FF1B80E8592DD569867B60EF74"
+      },
+      "Name": "Episode 2 session leaves framebuffer clear",
+      "Passed": true
+    },
+    {
+      "Evidence": {
+        "WarmSha256": "A7D56CCA9E61C31E27BE194BE5922E0F280E8E714346EE430D1B97E2BCAAAF43",
+        "Trials": [
+          {
+            "Warm": "A7D56CCA9E61C31E27BE194BE5922E0F280E8E714346EE430D1B97E2BCAAAF43",
+            "Cold": "A7D56CCA9E61C31E27BE194BE5922E0F280E8E714346EE430D1B97E2BCAAAF43"
+          },
+          {
+            "Warm": "A7D56CCA9E61C31E27BE194BE5922E0F280E8E714346EE430D1B97E2BCAAAF43",
+            "Cold": "A7D56CCA9E61C31E27BE194BE5922E0F280E8E714346EE430D1B97E2BCAAAF43"
+          },
+          {
+            "Warm": "A7D56CCA9E61C31E27BE194BE5922E0F280E8E714346EE430D1B97E2BCAAAF43",
+            "Cold": "A7D56CCA9E61C31E27BE194BE5922E0F280E8E714346EE430D1B97E2BCAAAF43"
+          },
+          {
+            "Warm": "A7D56CCA9E61C31E27BE194BE5922E0F280E8E714346EE430D1B97E2BCAAAF43",
+            "Cold": "A7D56CCA9E61C31E27BE194BE5922E0F280E8E714346EE430D1B97E2BCAAAF43"
+          },
+          {
+            "Warm": "A7D56CCA9E61C31E27BE194BE5922E0F280E8E714346EE430D1B97E2BCAAAF43",
+            "Cold": "A7D56CCA9E61C31E27BE194BE5922E0F280E8E714346EE430D1B97E2BCAAAF43"
+          }
+        ],
+        "ColdSha256": "A7D56CCA9E61C31E27BE194BE5922E0F280E8E714346EE430D1B97E2BCAAAF43"
+      },
+      "Name": "Episode 2 Stats equals cold renderer across 5 interleaved trials",
+      "Passed": true
+    },
+    {
+      "Evidence": {
+        "ExpectedSha256": "A7D56CCA9E61C31E27BE194BE5922E0F280E8E714346EE430D1B97E2BCAAAF43",
+        "ActualSha256": "A7D56CCA9E61C31E27BE194BE5922E0F280E8E714346EE430D1B97E2BCAAAF43"
+      },
+      "Name": "Episode 2 Stats preserves prior frame",
+      "Passed": true
+    },
+    {
+      "Evidence": {
+        "Background": "WIMAP1",
+        "Sha256": "C10F2C7B7FBFB1AE3B6316F906FBBE5CCCBCF888DB5E40658581A1DED327B724"
+      },
+      "Name": "Episode 2 Stats background caches are identical",
+      "Passed": true
+    },
+    {
+      "Evidence": {
+        "BeforeSha256": "76E875D49A289A585DCA029C4AFE8C3CDDBAFC0775EBDBBAA7FB70F2F4F955A9",
+        "WarmupMilliseconds": 17.4018,
+        "AfterSha256": "76E875D49A289A585DCA029C4AFE8C3CDDBAFC0775EBDBBAA7FB70F2F4F955A9"
+      },
+      "Name": "Episode 2 Stats warm-up preserves an existing framebuffer",
+      "Passed": true
+    },
+    {
+      "Evidence": {
+        "ColdSamplesMilliseconds": [
+          19.24,
+          18.8434,
+          19.2138,
+          19.2011,
+          20.2242
+        ],
+        "WarmSamplesMilliseconds": [
+          10.7143,
+          11.5616,
+          10.7201,
+          11.8406,
+          10.7245
+        ],
+        "Scope": "Five interleaved first-render trials after PowerShell render-path JIT and patch-cache priming; process startup, terminal presentation and full-game pacing are excluded.",
+        "WarmupSamplesMilliseconds": [
+          8.0112,
+          8.0121,
+          8.5611,
+          7.961,
+          9.3013
+        ],
+        "ColdMedianMilliseconds": 19.2138,
+        "WarmMedianMilliseconds": 10.7245,
+        "Pixels": 64000,
+        "SessionCreationMilliseconds": 465.1247,
+        "WarmupMedianMilliseconds": 8.0121,
+        "Ordering": "Alternated cold-first and warm-first renders after JIT and patch-cache priming."
+      },
+      "Name": "Episode 2 Stats first-frame timings",
+      "Passed": true
+    },
+    {
+      "Evidence": {
+        "WarmSha256": "2BEB7611E3D8F7EF8EBED7CB1FDB79FFC127B3B513027B0C038098A9E0ABEAB1",
+        "Trials": [
+          {
+            "Warm": "2BEB7611E3D8F7EF8EBED7CB1FDB79FFC127B3B513027B0C038098A9E0ABEAB1",
+            "Cold": "2BEB7611E3D8F7EF8EBED7CB1FDB79FFC127B3B513027B0C038098A9E0ABEAB1"
+          },
+          {
+            "Warm": "2BEB7611E3D8F7EF8EBED7CB1FDB79FFC127B3B513027B0C038098A9E0ABEAB1",
+            "Cold": "2BEB7611E3D8F7EF8EBED7CB1FDB79FFC127B3B513027B0C038098A9E0ABEAB1"
+          },
+          {
+            "Warm": "2BEB7611E3D8F7EF8EBED7CB1FDB79FFC127B3B513027B0C038098A9E0ABEAB1",
+            "Cold": "2BEB7611E3D8F7EF8EBED7CB1FDB79FFC127B3B513027B0C038098A9E0ABEAB1"
+          },
+          {
+            "Warm": "2BEB7611E3D8F7EF8EBED7CB1FDB79FFC127B3B513027B0C038098A9E0ABEAB1",
+            "Cold": "2BEB7611E3D8F7EF8EBED7CB1FDB79FFC127B3B513027B0C038098A9E0ABEAB1"
+          },
+          {
+            "Warm": "2BEB7611E3D8F7EF8EBED7CB1FDB79FFC127B3B513027B0C038098A9E0ABEAB1",
+            "Cold": "2BEB7611E3D8F7EF8EBED7CB1FDB79FFC127B3B513027B0C038098A9E0ABEAB1"
+          }
+        ],
+        "ColdSha256": "2BEB7611E3D8F7EF8EBED7CB1FDB79FFC127B3B513027B0C038098A9E0ABEAB1"
+      },
+      "Name": "Episode 2 Next equals cold renderer across 5 interleaved trials",
+      "Passed": true
+    },
+    {
+      "Evidence": {
+        "ExpectedSha256": "2BEB7611E3D8F7EF8EBED7CB1FDB79FFC127B3B513027B0C038098A9E0ABEAB1",
+        "ActualSha256": "2BEB7611E3D8F7EF8EBED7CB1FDB79FFC127B3B513027B0C038098A9E0ABEAB1"
+      },
+      "Name": "Episode 2 Next preserves prior frame",
+      "Passed": true
+    },
+    {
+      "Evidence": {
+        "Background": "WIMAP1",
+        "Sha256": "C10F2C7B7FBFB1AE3B6316F906FBBE5CCCBCF888DB5E40658581A1DED327B724"
+      },
+      "Name": "Episode 2 Next background caches are identical",
+      "Passed": true
+    },
+    {
+      "Evidence": {
+        "BeforeSha256": "76E875D49A289A585DCA029C4AFE8C3CDDBAFC0775EBDBBAA7FB70F2F4F955A9",
+        "WarmupMilliseconds": 17.7162,
+        "AfterSha256": "76E875D49A289A585DCA029C4AFE8C3CDDBAFC0775EBDBBAA7FB70F2F4F955A9"
+      },
+      "Name": "Episode 2 Next warm-up preserves an existing framebuffer",
+      "Passed": true
+    },
+    {
+      "Evidence": {
+        "ColdSamplesMilliseconds": [
+          15.6093,
+          15.8707,
+          15.9576,
+          14.9301,
+          15.7219
+        ],
+        "WarmSamplesMilliseconds": [
+          6.8421,
+          6.9156,
+          6.7695,
+          7.7661,
+          6.7568
+        ],
+        "Scope": "Five interleaved first-render trials after PowerShell render-path JIT and patch-cache priming; process startup, terminal presentation and full-game pacing are excluded.",
+        "WarmupSamplesMilliseconds": [
+          8.0243,
+          8.298,
+          8.237,
+          8.2036,
+          8.1902
+        ],
+        "ColdMedianMilliseconds": 15.7219,
+        "WarmMedianMilliseconds": 6.8421,
+        "Pixels": 64000,
+        "SessionCreationMilliseconds": 465.1247,
+        "WarmupMedianMilliseconds": 8.2036,
+        "Ordering": "Alternated cold-first and warm-first renders after JIT and patch-cache priming."
+      },
+      "Name": "Episode 2 Next first-frame timings",
+      "Passed": true
+    },
+    {
+      "Evidence": {
+        "CreationMilliseconds": 452.0937,
+        "CachedNames": [
+          "WIMAP2"
+        ]
+      },
+      "Name": "Episode 3 session preloads WIMAP2",
+      "Passed": true
+    },
+    {
+      "Evidence": {
+        "Sha256": "4F7988030A00D082FE445E00A2AC5DAB502300FF1B80E8592DD569867B60EF74"
+      },
+      "Name": "Episode 3 session leaves framebuffer clear",
+      "Passed": true
+    },
+    {
+      "Evidence": {
+        "WarmSha256": "3D87B63024654FBFEDB298895163C88E541388A476E5A2D923001B897CAA7DD7",
+        "Trials": [
+          {
+            "Warm": "3D87B63024654FBFEDB298895163C88E541388A476E5A2D923001B897CAA7DD7",
+            "Cold": "3D87B63024654FBFEDB298895163C88E541388A476E5A2D923001B897CAA7DD7"
+          },
+          {
+            "Warm": "3D87B63024654FBFEDB298895163C88E541388A476E5A2D923001B897CAA7DD7",
+            "Cold": "3D87B63024654FBFEDB298895163C88E541388A476E5A2D923001B897CAA7DD7"
+          },
+          {
+            "Warm": "3D87B63024654FBFEDB298895163C88E541388A476E5A2D923001B897CAA7DD7",
+            "Cold": "3D87B63024654FBFEDB298895163C88E541388A476E5A2D923001B897CAA7DD7"
+          },
+          {
+            "Warm": "3D87B63024654FBFEDB298895163C88E541388A476E5A2D923001B897CAA7DD7",
+            "Cold": "3D87B63024654FBFEDB298895163C88E541388A476E5A2D923001B897CAA7DD7"
+          },
+          {
+            "Warm": "3D87B63024654FBFEDB298895163C88E541388A476E5A2D923001B897CAA7DD7",
+            "Cold": "3D87B63024654FBFEDB298895163C88E541388A476E5A2D923001B897CAA7DD7"
+          }
+        ],
+        "ColdSha256": "3D87B63024654FBFEDB298895163C88E541388A476E5A2D923001B897CAA7DD7"
+      },
+      "Name": "Episode 3 Stats equals cold renderer across 5 interleaved trials",
+      "Passed": true
+    },
+    {
+      "Evidence": {
+        "ExpectedSha256": "3D87B63024654FBFEDB298895163C88E541388A476E5A2D923001B897CAA7DD7",
+        "ActualSha256": "3D87B63024654FBFEDB298895163C88E541388A476E5A2D923001B897CAA7DD7"
+      },
+      "Name": "Episode 3 Stats preserves prior frame",
+      "Passed": true
+    },
+    {
+      "Evidence": {
+        "Background": "WIMAP2",
+        "Sha256": "6207966F88ACA114A621ECB77E5819ABBA63AFBBD181E7C6FE99ED1ECE8800D8"
+      },
+      "Name": "Episode 3 Stats background caches are identical",
+      "Passed": true
+    },
+    {
+      "Evidence": {
+        "BeforeSha256": "76E875D49A289A585DCA029C4AFE8C3CDDBAFC0775EBDBBAA7FB70F2F4F955A9",
+        "WarmupMilliseconds": 17.476,
+        "AfterSha256": "76E875D49A289A585DCA029C4AFE8C3CDDBAFC0775EBDBBAA7FB70F2F4F955A9"
+      },
+      "Name": "Episode 3 Stats warm-up preserves an existing framebuffer",
+      "Passed": true
+    },
+    {
+      "Evidence": {
+        "ColdSamplesMilliseconds": [
+          17.257,
+          17.4509,
+          19.3013,
+          17.9694,
+          17.7619
+        ],
+        "WarmSamplesMilliseconds": [
+          9.8342,
+          9.9077,
+          9.6622,
+          9.964,
+          9.2862
+        ],
+        "Scope": "Five interleaved first-render trials after PowerShell render-path JIT and patch-cache priming; process startup, terminal presentation and full-game pacing are excluded.",
+        "WarmupSamplesMilliseconds": [
+          8.0553,
+          8.8839,
+          8.1724,
+          8.2998,
+          7.9893
+        ],
+        "ColdMedianMilliseconds": 17.7619,
+        "WarmMedianMilliseconds": 9.8342,
+        "Pixels": 64000,
+        "SessionCreationMilliseconds": 452.0937,
+        "WarmupMedianMilliseconds": 8.1724,
+        "Ordering": "Alternated cold-first and warm-first renders after JIT and patch-cache priming."
+      },
+      "Name": "Episode 3 Stats first-frame timings",
+      "Passed": true
+    },
+    {
+      "Evidence": {
+        "WarmSha256": "F54C84279F7747E9129F040E18BDFB8466BF0FD25A1848391EC54A5BFE3E8D0A",
+        "Trials": [
+          {
+            "Warm": "F54C84279F7747E9129F040E18BDFB8466BF0FD25A1848391EC54A5BFE3E8D0A",
+            "Cold": "F54C84279F7747E9129F040E18BDFB8466BF0FD25A1848391EC54A5BFE3E8D0A"
+          },
+          {
+            "Warm": "F54C84279F7747E9129F040E18BDFB8466BF0FD25A1848391EC54A5BFE3E8D0A",
+            "Cold": "F54C84279F7747E9129F040E18BDFB8466BF0FD25A1848391EC54A5BFE3E8D0A"
+          },
+          {
+            "Warm": "F54C84279F7747E9129F040E18BDFB8466BF0FD25A1848391EC54A5BFE3E8D0A",
+            "Cold": "F54C84279F7747E9129F040E18BDFB8466BF0FD25A1848391EC54A5BFE3E8D0A"
+          },
+          {
+            "Warm": "F54C84279F7747E9129F040E18BDFB8466BF0FD25A1848391EC54A5BFE3E8D0A",
+            "Cold": "F54C84279F7747E9129F040E18BDFB8466BF0FD25A1848391EC54A5BFE3E8D0A"
+          },
+          {
+            "Warm": "F54C84279F7747E9129F040E18BDFB8466BF0FD25A1848391EC54A5BFE3E8D0A",
+            "Cold": "F54C84279F7747E9129F040E18BDFB8466BF0FD25A1848391EC54A5BFE3E8D0A"
+          }
+        ],
+        "ColdSha256": "F54C84279F7747E9129F040E18BDFB8466BF0FD25A1848391EC54A5BFE3E8D0A"
+      },
+      "Name": "Episode 3 Next equals cold renderer across 5 interleaved trials",
+      "Passed": true
+    },
+    {
+      "Evidence": {
+        "ExpectedSha256": "F54C84279F7747E9129F040E18BDFB8466BF0FD25A1848391EC54A5BFE3E8D0A",
+        "ActualSha256": "F54C84279F7747E9129F040E18BDFB8466BF0FD25A1848391EC54A5BFE3E8D0A"
+      },
+      "Name": "Episode 3 Next preserves prior frame",
+      "Passed": true
+    },
+    {
+      "Evidence": {
+        "Background": "WIMAP2",
+        "Sha256": "6207966F88ACA114A621ECB77E5819ABBA63AFBBD181E7C6FE99ED1ECE8800D8"
+      },
+      "Name": "Episode 3 Next background caches are identical",
+      "Passed": true
+    },
+    {
+      "Evidence": {
+        "BeforeSha256": "76E875D49A289A585DCA029C4AFE8C3CDDBAFC0775EBDBBAA7FB70F2F4F955A9",
+        "WarmupMilliseconds": 16.3938,
+        "AfterSha256": "76E875D49A289A585DCA029C4AFE8C3CDDBAFC0775EBDBBAA7FB70F2F4F955A9"
+      },
+      "Name": "Episode 3 Next warm-up preserves an existing framebuffer",
+      "Passed": true
+    },
+    {
+      "Evidence": {
+        "ColdSamplesMilliseconds": [
+          15.28,
+          15.3658,
+          15.3843,
+          15.6017,
+          14.4662
+        ],
+        "WarmSamplesMilliseconds": [
+          6.6581,
+          6.651,
+          6.6501,
+          6.7093,
+          7.4872
+        ],
+        "Scope": "Five interleaved first-render trials after PowerShell render-path JIT and patch-cache priming; process startup, terminal presentation and full-game pacing are excluded.",
+        "WarmupSamplesMilliseconds": [
+          7.9674,
+          7.9443,
+          7.9938,
+          8.0589,
+          8.0397
+        ],
+        "ColdMedianMilliseconds": 15.3658,
+        "WarmMedianMilliseconds": 6.6581,
+        "Pixels": 64000,
+        "SessionCreationMilliseconds": 452.0937,
+        "WarmupMedianMilliseconds": 7.9938,
+        "Ordering": "Alternated cold-first and warm-first renders after JIT and patch-cache priming."
+      },
+      "Name": "Episode 3 Next first-frame timings",
+      "Passed": true
+    },
+    {
+      "Evidence": {
+        "CreationMilliseconds": 444.4336,
+        "CachedNames": [
+          "INTERPIC"
+        ]
+      },
+      "Name": "Episode 4 session preloads INTERPIC",
+      "Passed": true
+    },
+    {
+      "Evidence": {
+        "Sha256": "4F7988030A00D082FE445E00A2AC5DAB502300FF1B80E8592DD569867B60EF74"
+      },
+      "Name": "Episode 4 session leaves framebuffer clear",
+      "Passed": true
+    },
+    {
+      "Evidence": {
+        "WarmSha256": "3AF6BC51E9BB9C4BF5EFDD9132F46CD71C5F120E21F03FB4658D9B38AE93B489",
+        "Trials": [
+          {
+            "Warm": "3AF6BC51E9BB9C4BF5EFDD9132F46CD71C5F120E21F03FB4658D9B38AE93B489",
+            "Cold": "3AF6BC51E9BB9C4BF5EFDD9132F46CD71C5F120E21F03FB4658D9B38AE93B489"
+          },
+          {
+            "Warm": "3AF6BC51E9BB9C4BF5EFDD9132F46CD71C5F120E21F03FB4658D9B38AE93B489",
+            "Cold": "3AF6BC51E9BB9C4BF5EFDD9132F46CD71C5F120E21F03FB4658D9B38AE93B489"
+          },
+          {
+            "Warm": "3AF6BC51E9BB9C4BF5EFDD9132F46CD71C5F120E21F03FB4658D9B38AE93B489",
+            "Cold": "3AF6BC51E9BB9C4BF5EFDD9132F46CD71C5F120E21F03FB4658D9B38AE93B489"
+          },
+          {
+            "Warm": "3AF6BC51E9BB9C4BF5EFDD9132F46CD71C5F120E21F03FB4658D9B38AE93B489",
+            "Cold": "3AF6BC51E9BB9C4BF5EFDD9132F46CD71C5F120E21F03FB4658D9B38AE93B489"
+          },
+          {
+            "Warm": "3AF6BC51E9BB9C4BF5EFDD9132F46CD71C5F120E21F03FB4658D9B38AE93B489",
+            "Cold": "3AF6BC51E9BB9C4BF5EFDD9132F46CD71C5F120E21F03FB4658D9B38AE93B489"
+          }
+        ],
+        "ColdSha256": "3AF6BC51E9BB9C4BF5EFDD9132F46CD71C5F120E21F03FB4658D9B38AE93B489"
+      },
+      "Name": "Episode 4 Stats equals cold renderer across 5 interleaved trials",
+      "Passed": true
+    },
+    {
+      "Evidence": {
+        "ExpectedSha256": "3AF6BC51E9BB9C4BF5EFDD9132F46CD71C5F120E21F03FB4658D9B38AE93B489",
+        "ActualSha256": "3AF6BC51E9BB9C4BF5EFDD9132F46CD71C5F120E21F03FB4658D9B38AE93B489"
+      },
+      "Name": "Episode 4 Stats preserves prior frame",
+      "Passed": true
+    },
+    {
+      "Evidence": {
+        "Background": "INTERPIC",
+        "Sha256": "F7CC5536424DCB4766812104C8E8970D7671CCE4F893252B68E8DB9BE6BBCE4D"
+      },
+      "Name": "Episode 4 Stats background caches are identical",
+      "Passed": true
+    },
+    {
+      "Evidence": {
+        "BeforeSha256": "76E875D49A289A585DCA029C4AFE8C3CDDBAFC0775EBDBBAA7FB70F2F4F955A9",
+        "WarmupMilliseconds": 16.7209,
+        "AfterSha256": "76E875D49A289A585DCA029C4AFE8C3CDDBAFC0775EBDBBAA7FB70F2F4F955A9"
+      },
+      "Name": "Episode 4 Stats warm-up preserves an existing framebuffer",
+      "Passed": true
+    },
+    {
+      "Evidence": {
+        "ColdSamplesMilliseconds": [
+          17.3021,
+          16.8469,
+          16.9295,
+          17.065,
+          17.1618
+        ],
+        "WarmSamplesMilliseconds": [
+          9.027,
+          9.3279,
+          9.2896,
+          9.0375,
+          9.0057
+        ],
+        "Scope": "Five interleaved first-render trials after PowerShell render-path JIT and patch-cache priming; process startup, terminal presentation and full-game pacing are excluded.",
+        "WarmupSamplesMilliseconds": [
+          7.909,
+          7.9198,
+          8.2224,
+          7.8933,
+          7.917
+        ],
+        "ColdMedianMilliseconds": 17.065,
+        "WarmMedianMilliseconds": 9.0375,
+        "Pixels": 64000,
+        "SessionCreationMilliseconds": 444.4336,
+        "WarmupMedianMilliseconds": 7.917,
+        "Ordering": "Alternated cold-first and warm-first renders after JIT and patch-cache priming."
+      },
+      "Name": "Episode 4 Stats first-frame timings",
+      "Passed": true
+    },
+    {
+      "Evidence": {
+        "WarmSha256": "BD752ED381563D877B3BCCC4B075134761F07830C0746B2BEEFC0C9B19FC94A7",
+        "Trials": [
+          {
+            "Warm": "BD752ED381563D877B3BCCC4B075134761F07830C0746B2BEEFC0C9B19FC94A7",
+            "Cold": "BD752ED381563D877B3BCCC4B075134761F07830C0746B2BEEFC0C9B19FC94A7"
+          },
+          {
+            "Warm": "BD752ED381563D877B3BCCC4B075134761F07830C0746B2BEEFC0C9B19FC94A7",
+            "Cold": "BD752ED381563D877B3BCCC4B075134761F07830C0746B2BEEFC0C9B19FC94A7"
+          },
+          {
+            "Warm": "BD752ED381563D877B3BCCC4B075134761F07830C0746B2BEEFC0C9B19FC94A7",
+            "Cold": "BD752ED381563D877B3BCCC4B075134761F07830C0746B2BEEFC0C9B19FC94A7"
+          },
+          {
+            "Warm": "BD752ED381563D877B3BCCC4B075134761F07830C0746B2BEEFC0C9B19FC94A7",
+            "Cold": "BD752ED381563D877B3BCCC4B075134761F07830C0746B2BEEFC0C9B19FC94A7"
+          },
+          {
+            "Warm": "BD752ED381563D877B3BCCC4B075134761F07830C0746B2BEEFC0C9B19FC94A7",
+            "Cold": "BD752ED381563D877B3BCCC4B075134761F07830C0746B2BEEFC0C9B19FC94A7"
+          }
+        ],
+        "ColdSha256": "BD752ED381563D877B3BCCC4B075134761F07830C0746B2BEEFC0C9B19FC94A7"
+      },
+      "Name": "Episode 4 Next equals cold renderer across 5 interleaved trials",
+      "Passed": true
+    },
+    {
+      "Evidence": {
+        "ExpectedSha256": "BD752ED381563D877B3BCCC4B075134761F07830C0746B2BEEFC0C9B19FC94A7",
+        "ActualSha256": "BD752ED381563D877B3BCCC4B075134761F07830C0746B2BEEFC0C9B19FC94A7"
+      },
+      "Name": "Episode 4 Next preserves prior frame",
+      "Passed": true
+    },
+    {
+      "Evidence": {
+        "Background": "INTERPIC",
+        "Sha256": "F7CC5536424DCB4766812104C8E8970D7671CCE4F893252B68E8DB9BE6BBCE4D"
+      },
+      "Name": "Episode 4 Next background caches are identical",
+      "Passed": true
+    },
+    {
+      "Evidence": {
+        "BeforeSha256": "76E875D49A289A585DCA029C4AFE8C3CDDBAFC0775EBDBBAA7FB70F2F4F955A9",
+        "WarmupMilliseconds": 16.7004,
+        "AfterSha256": "76E875D49A289A585DCA029C4AFE8C3CDDBAFC0775EBDBBAA7FB70F2F4F955A9"
+      },
+      "Name": "Episode 4 Next warm-up preserves an existing framebuffer",
+      "Passed": true
+    },
+    {
+      "Evidence": {
+        "ColdSamplesMilliseconds": [
+          13.0485,
+          12.9624,
+          12.9372,
+          13.5745,
+          12.9953
+        ],
+        "WarmSamplesMilliseconds": [
+          5.1598,
+          5.1132,
+          5.1724,
+          5.1586,
+          6.0069
+        ],
+        "Scope": "Five interleaved first-render trials after PowerShell render-path JIT and patch-cache priming; process startup, terminal presentation and full-game pacing are excluded.",
+        "WarmupSamplesMilliseconds": [
+          8.5503,
+          8.4172,
+          8.5058,
+          8.4646,
+          7.8975
+        ],
+        "ColdMedianMilliseconds": 12.9953,
+        "WarmMedianMilliseconds": 5.1598,
+        "Pixels": 64000,
+        "SessionCreationMilliseconds": 444.4336,
+        "WarmupMedianMilliseconds": 8.4646,
+        "Ordering": "Alternated cold-first and warm-first renders after JIT and patch-cache priming."
+      },
+      "Name": "Episode 4 Next first-frame timings",
+      "Passed": true
+    }
+  ]
+}

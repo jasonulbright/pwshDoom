@@ -2,9 +2,11 @@
 # Adopted PowerShell 2D renderers draw native WAD intermission/finale graphics.
 # Their indexed framebuffer is column-major; render workers transpose only their strips.
 function New-DoomSessionScreens {
-    param($Content)
+    param($Content,[int]$Episode=1)
     $screen=[DrawScreen]::new($Content.Wad,320,200)
-    return @{Screen=$screen;Intermission=[IntermissionRenderer]::new($Content.Wad,$screen);Finale=[FinaleRenderer]::new($Content,$screen)}
+    $intermission=[IntermissionRenderer]::new($Content.Wad,$screen)
+    $intermission.WarmupBackground($Content.Wad.GameMode,$Episode)
+    return @{Screen=$screen;Intermission=$intermission;Finale=[FinaleRenderer]::new($Content,$screen)}
 }
 function Get-DoomSessionScreen {
     param($Screens,$Game)

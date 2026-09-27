@@ -161,6 +161,33 @@ class IntermissionRenderer {
         }
     }
 
+    # Move the first selected episode-background decode and raster out of the
+    # visible intermission frame. Preserve the shared screen so startup does
+    # not publish a partially drawn menu/simulation image.
+    [void] WarmupBackground([GameMode] $gameMode, [int] $episode) {
+        if ($this.screen.Width -ne 320 -or $this.screen.Height -ne 200) {
+            return
+        }
+
+        $name = 'INTERPIC'
+        $episodeIndex = $episode - 1
+        if ($gameMode -ne [GameMode]::Commercial -and $episodeIndex -ge 0 -and $episodeIndex -lt 3) {
+            $name = [IntermissionRenderer]::mapPictures[$episodeIndex]
+        }
+        if ($this.backgroundFrames.ContainsKey($name)) {
+            return
+        }
+
+        $saved = $this.screen.Data.Clone()
+        try {
+            $this.DrawPatch($name, 0, 0)
+            $this.backgroundFrames[$name] = $this.screen.Data.Clone()
+        }
+        finally {
+            [Array]::Copy($saved, $this.screen.Data, $saved.Length)
+        }
+    }
+
     [void] DrawSinglePlayerStats([Intermission] $im) {
         $this.DrawBackground($im)
 
