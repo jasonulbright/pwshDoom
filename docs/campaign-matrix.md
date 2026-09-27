@@ -1,6 +1,6 @@
 # Campaign qualification matrix
 
-Updated 2026-09-26. Release sequence remains Ultimate Doom, Doom II, then a MyHouse-based audit. See [roadmap](roadmap.md).
+Updated 2026-09-27. Release sequence remains Ultimate Doom, Doom II, then a MyHouse-based audit. See [roadmap](roadmap.md).
 
 **Smoke: 36/36 passed at skill 3.** Each case loads the map, runs 35 idle simulation tics, and renders two complete 320×200 serial frames from two camera headings. A smoke pass is not a completed level or visual-reference match. Headless stage timings are not gameplay FPS.
 
@@ -20,6 +20,17 @@ is configuration metadata; this smoke does not start processes. Exact
 16-process serial parity for each of the three display styles is recorded
 separately in the [rendering-fidelity record](rendering-fidelity.md#doom-sky-column-and-vertical-wrap-sampling-2026-09-26).
 This remains load/render smoke, not route or campaign completion.
+
+The single Episode 1 human-playthrough handoff is pinned to source build
+`76b18ac538a96e40b8aab2127039cf1a59718bec`; its [current readiness
+receipt](../results/episode1-playtest-current-readiness-20260927.json) carries
+the older renderer qualification forward and adds current-source tests. The
+current build passes 57 campaign transition fixtures, 97 boss-progression
+fixtures, 125 menu/session checks with 46 screen fixtures, and the retained
+1,747-command E1M1-to-E1M2 session route. It also passes 26 audio-mixer checks,
+nine music/effects checks, and ten actual-device worker checks. The route does
+not advance beyond E1M2; remaining E1 map completion and the secret route are
+the human playthrough scope, not inferred from these fixtures.
 
 E1M1 has an [input-only completion report](../results/e1m1-route-lineflags.json) with 1560 commands. That route ends at intermission; it does not qualify next-level presentation or a whole episode. E1M2 now has a separate [normal-route qualification](campaign-e1m2.md), including recorded continuation into E1M3. The remaining maps still need completion evidence. Source-version matching is checked separately from input/state equivalence.
 

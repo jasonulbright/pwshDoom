@@ -1,0 +1,212 @@
+{
+  "Format": "pwshDoom.Episode1HumanPlaytestReadiness",
+  "CreatedUtc": "2026-09-27T03:33:48.1710077Z",
+  "Status": "ReadyForOneCompleteHumanEpisode1Playthrough",
+  "Build": {
+    "Commit": "76b18ac538a96e40b8aab2127039cf1a59718bec",
+    "Branch": "codex/feasibility-study",
+    "ProductionDelta": "PowerShell audio mixer index optimization only since prior renderer readiness; gameplay/session/menu/input and renderer sources are unchanged.",
+    "MixerSourceSha256": "95F0F9A8A004E4D42E313231BAF13A27BD5E7421EAF67F90220DBC5FF0B55276"
+  },
+  "Scope": [
+    "E1M1",
+    "E1M2",
+    "E1M3",
+    "E1M9",
+    "E1M4",
+    "E1M5",
+    "E1M6",
+    "E1M7",
+    "E1M8",
+    "Episode 1 finale screen"
+  ],
+  "Launch": {
+    "IWAD": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Ultimate Doom\\base\\DOOM.WAD",
+    "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+    "MusicCatalog": "local/music-prepared-episode1.json",
+    "MusicCatalogSha256": "0E9C9542C75F4D5E2D7FC71E42FAFBB58F94321C3B8A49BA0C9AC5A93752EE58",
+    "Skill": 3,
+    "Style": "Classic",
+    "Settings": "Built-in defaults; user settings file absent at preflight.",
+    "PowerShell": "7.6.5",
+    "WindowsTerminal": "C:\\Users\\jason\\AppData\\Local\\Microsoft\\WindowsApps\\wt.exe",
+    "TerminalMinimum": "320 columns by 100 rows",
+    "Command": "pwsh -NoProfile -File .\\Start-Doom.ps1 -Wad 'C:\\Program Files (x86)\\Steam\\steamapps\\common\\Ultimate Doom\\base\\DOOM.WAD' -Episode 1 -Map 1 -Skill 3 -Style Classic -Sound -MusicCatalog .\\local\\music-prepared-episode1.json -RecordInput .\\local\\episode1-human-playthrough.json -Report .\\local\\episode1-human-session.json -Maximized"
+  },
+  "CurrentSourceChecks": {
+    "CampaignTransitions": {
+      "Passed": 57,
+      "Failed": 0,
+      "Includes": "E1 secret destination/return history, map progression and finale controller fixtures."
+    },
+    "BossProgression": {
+      "Passed": 97,
+      "Failed": 0,
+      "Includes": "E1M8 tag-666 floor-opening trigger fixture; not an ordinary boss fight."
+    },
+    "MenuSession": {
+      "Passed": 125,
+      "Failed": 0,
+      "ScreenFixtures": 46
+    },
+    "OrdinaryInputSession": {
+      "Passed": true,
+      "InputCommands": 1747,
+      "Transitions": [
+        {
+          "Tic": 1,
+          "State": "Level",
+          "Episode": 1,
+          "Map": 1,
+          "Health": 100,
+          "Armor": 0,
+          "Kills": 0,
+          "Ammo": [
+            50,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "Tic": 1560,
+          "State": "Intermission",
+          "Episode": 1,
+          "Map": 1,
+          "Health": 75,
+          "Armor": 0,
+          "Kills": 5,
+          "Ammo": [
+            37,
+            4,
+            0,
+            0
+          ]
+        },
+        {
+          "Tic": 1676,
+          "State": "Level",
+          "Episode": 1,
+          "Map": 2,
+          "Health": 75,
+          "Armor": 0,
+          "Kills": 0,
+          "Ammo": [
+            37,
+            4,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "AudioWorker": {
+      "Passed": 10,
+      "Failed": 0,
+      "PcmMatchedIndependentSchedule": true,
+      "DeviceClosed": true,
+      "QueueTimingObservations": 1
+    },
+    "AudioMixer": {
+      "FocusedChecks": 26,
+      "MusicMixChecks": 9,
+      "SyntheticBenchmarkPcmExact": true,
+      "SixteenVoiceBaselineMeanMs": [
+        32.91145875000001,
+        33.260324999999995
+      ],
+      "SixteenVoiceCandidateMeanMs": [
+        5.6977875000000004,
+        5.012798750000001
+      ]
+    },
+    "Launcher": {
+      "Ready": true,
+      "PowerShell": "7.6.5",
+      "Wad": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Ultimate Doom\\base\\DOOM.WAD",
+      "EpisodeMaps": 36,
+      "Root": "C:\\projects\\pwshDoom",
+      "WindowsTerminal": "C:\\Users\\jason\\AppData\\Local\\Microsoft\\WindowsApps\\wt.exe",
+      "MusicCatalog": "C:\\projects\\pwshDoom\\local\\music-prepared-episode1.json",
+      "MusicValidation": "Track qualification and WAD identity are checked at audio startup; -Check verifies path only."
+    }
+  },
+  "PriorCampaignAndRendererEvidence": {
+    "Receipt": "results/episode1-playtest-readiness.json",
+    "SourceCommit": "0fbdc40a77214c68203745800ec0a51cfed9a8fa",
+    "MapSmoke": "36 Ultimate Doom map starts, 35 idle tics, two frames each",
+    "CurrentRouteRegressionReceipt": "results/visibility-campaign-regressions.json",
+    "ExistingE1M1ToE1M4RegressionRoutesRetained": true
+  },
+  "HumanPlaythrough": {
+    "Status": "Pending",
+    "ExpectedMapSequence": "E1M1 -> E1M2 -> E1M3 -> E1M9 -> E1M4 -> E1M5 -> E1M6 -> E1M7 -> E1M8 -> Episode 1 finale",
+    "ExpectedEndpoint": "E1TEXT / CREDIT finale screen after E1M8 exit/intermission",
+    "Result": "Record only Jason-reported maps, secret return, finale, deaths, reloads, deviations and defects."
+  },
+  "KnownLimits": [
+    "Full route remains unplayed by a human; map smoke and fixtures do not substitute for it.",
+    "Most map completion is not qualified as ordinary-input completion.",
+    "Current renderer is approximate; displayed FPS and sustained 35-tic pacing are not certified.",
+    "The finite actual-device audio worker matches submitted PCM and closes cleanly, but its test recorded a queue-timing stall; full campaign audio continuity and acoustic quality are not certified.",
+    "Sixteen render workers previously used about 4 GB combined working memory."
+  ],
+  "Receipts": [
+    {
+      "Path": "results/episode1-current-transitions-20260927.json",
+      "Name": "Transitions",
+      "Sha256": "29981C79A718053795B7B379DE6D8CDDF347D5BA157CB79A70D4BCD66EB3661C"
+    },
+    {
+      "Path": "results/episode1-current-bosses-20260927.json",
+      "Name": "Bosses",
+      "Sha256": "8835C157B8F3A819FE5128A2AAB00A14D493218B22229742DBCCBEBF552EA5C5"
+    },
+    {
+      "Path": "results/episode1-current-session-menu-20260927.json",
+      "Name": "MenuSession",
+      "Sha256": "B62C6F3E90DFE593951ACC84562B625A886D9DFDC1E0254AE9FD587AB0F78365"
+    },
+    {
+      "Path": "results/episode1-current-session-progression-20260927.json",
+      "Name": "SessionProgression",
+      "Sha256": "93F19AA0604C8B4574601C050BA608D888F8D632A8C5C75CD596F3C72DFFBB5B"
+    },
+    {
+      "Path": "results/audio-mixer-worker-current-20260927.json",
+      "Name": "AudioWorker",
+      "Sha256": "221100139E30414983E15ACA23C0EA30CF83F70CF9A89CA5C8772211219B024F"
+    },
+    {
+      "Path": "results/audio-mixer-hotloop-tests-final-20260927.json",
+      "Name": "MixerTests",
+      "Sha256": "307046D57A3AD8E729AFBE6656F55688FADC301C82C0D876856F5B9E712DDEC4"
+    },
+    {
+      "Path": "results/audio-mixer-hotloop-music-tests-20260927.json",
+      "Name": "MusicMixTests",
+      "Sha256": "76B0CC84258A8DAAF245D4DBFE8EA1294B13495A5F3FD280F59AB3030C5E0704"
+    },
+    {
+      "Path": "results/audio-mixer-hotloop-summary-20260927.json",
+      "Name": "MixerSummary",
+      "Sha256": "B2B5EB84075562C2E2480F08757EC72CC486545B09C4C0591763849B71708001"
+    },
+    {
+      "Path": "results/episode1-playtest-mixer-preflight-20260927.json",
+      "Name": "LauncherPreflight",
+      "Sha256": "BE6E5D3F4575ED3F7DAA72FCAAE29BC31464C1264BEDD7DA265A758ED3D544D1"
+    },
+    {
+      "Path": "results/episode1-playtest-readiness.json",
+      "Name": "ExistingReadiness",
+      "Sha256": "B98473EA606D7B379BA4ACE3F736C203CF024C4BE40637C5F3CBF305B6D388B7"
+    },
+    {
+      "Path": "results/visibility-campaign-regressions.json",
+      "Name": "RouteRegression",
+      "Sha256": "B2AC3D3F249196F53DFA3E8B6C85D48D72EB724F5BA0FAA28BB0A7B0BF09456A"
+    }
+  ],
+  "Meaning": "Readiness for the single complete human Episode 1 playthrough, not an Ultimate Doom release certification."
+}

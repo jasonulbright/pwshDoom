@@ -1853,3 +1853,28 @@ existing partition-invariance check. That failure is retained in
 voice position fixed it. These are synthetic isolated costs. Renderer/device
 load, live audio queue timing, speaker output, and acoustic continuity remain
 unqualified.
+
+## 2026-09-27 — Re-pin the single Episode 1 human-playthrough handoff
+
+The user clarified that readiness means one complete human Episode 1
+playthrough, including E1M3's secret route through E1M9, its return to E1M4,
+and the E1M8 finale. Do not request map-by-map playtests or spend the milestone
+on automated route construction. The four E1M1–E1M4 routes remain regressions;
+the prior E1M5 route failure is not a product defect.
+
+On source commit `76b18ac538a96e40b8aab2127039cf1a59718bec`, reran the focused
+campaign/session checks: 57 transition fixtures, 97 boss-progression fixtures,
+125 menu/session checks with 46 screens, and the 1,747-command ordinary-input
+E1M1-to-E1M2 session route. The current mixer passes 26 focused PCM checks,
+nine music/effects checks, and ten actual-device worker checks. The device
+worker's submitted PCM matches its independent schedule and cleanup succeeds;
+one queue-timing stall was logged. The 16-voice synthetic mixer case now stays
+under its 28.57 ms block duration in both paired runs. The current launcher
+preflight sees the installed IWAD, prepared catalog, PowerShell 7.6.5, and
+Windows Terminal; the local settings file and human-run output paths are absent.
+
+The exact human route, finale, actual secret-map traversal, dense-scene pacing,
+and full-campaign audio continuity remain unverified until Jason's one
+playthrough. The [current readiness receipt](../results/episode1-playtest-current-readiness-20260927.json)
+collects exact hashes, report links, limits, and launch command. This is a
+human-playtest handoff, not full Ultimate Doom release certification.
