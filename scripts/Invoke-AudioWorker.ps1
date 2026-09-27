@@ -3,7 +3,7 @@
 param($Queue,$Shared,[hashtable]$Clips,[hashtable]$MusicReports=@{})
 $ErrorActionPreference='Stop';Set-StrictMode -Version Latest
 . "$PSScriptRoot/../src/AudioMixer.ps1";. "$PSScriptRoot/../src/AudioPackets.ps1";. "$PSScriptRoot/../src/WaveOutDevice.ps1"
-. "$PSScriptRoot/../src/MusicLoopReader.ps1";. "$PSScriptRoot/../src/MusicPlayback.ps1"
+. "$PSScriptRoot/../src/MusicLoopReader.ps1";. "$PSScriptRoot/../src/MusicOneShotReader.ps1";. "$PSScriptRoot/../src/MusicPlayback.ps1"
 $music=$null
 $device=$null;$mixer=New-DoomAudioMixer 44100;$epoch=0;$started=$false;$devicePaused=$true
 $mixTimes=[Collections.Generic.List[double]]::new();$ages=[Collections.Generic.List[double]]::new()

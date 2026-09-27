@@ -1,16 +1,20 @@
 #requires -Version 7.4
 # SPDX-License-Identifier: GPL-2.0-or-later
-param([Parameter(Mandatory)][string]$Output,[string]$Qualification="$PSScriptRoot/../results/music-loop-e1m1-hour-bound.json")
+param(
+    [Parameter(Mandatory)][string]$Output,
+    [string]$Qualification="$PSScriptRoot/../results/music-loop-e1m1-hour-bound.json",
+    [string]$OneShotQualification="$PSScriptRoot/../results/music-one-shot-dintro-20260926.json"
+)
 $ErrorActionPreference='Stop';Set-StrictMode -Version Latest
 if(Test-Path $Output){throw 'Use a fresh report path.'}
-. "$PSScriptRoot/../src/MusicLoopReader.ps1";. "$PSScriptRoot/../src/MusicPlayback.ps1"
+. "$PSScriptRoot/../src/MusicLoopReader.ps1";. "$PSScriptRoot/../src/MusicOneShotReader.ps1";. "$PSScriptRoot/../src/MusicPlayback.ps1"
 $state=$null;$checks=[Collections.Generic.List[object]]::new();$failure=$null
-$report=[IO.Path]::GetFullPath($Qualification)
+$report=[IO.Path]::GetFullPath($Qualification);$oneShotReport=[IO.Path]::GetFullPath($OneShotQualification)
 function Check([string]$Name,[bool]$Passed){$checks.Add(@{Name=$Name;Passed=$Passed});if(-not $Passed){throw $Name}}
 function Reject([string]$Name,[scriptblock]$Action){$rejected=$false;try{& $Action}catch{$rejected=$true};Check $Name $rejected}
 try{
-    $state=New-DoomMusicPlayback @{'D_E1M1'=$report}
-    Check 'Catalog opens qualified track without selecting it' ($null -eq $state.Selected -and $null -eq (Read-DoomMusicPlayback $state 1260))
+    $state=New-DoomMusicPlayback @{'D_E1M1'=$report;'D_INTRO'=$oneShotReport}
+    Check 'Catalog opens qualified loop and finite score without selecting either' ($null -eq $state.Selected -and $null -eq (Read-DoomMusicPlayback $state 1260) -and $state.ReaderModes.D_INTRO -ceq 'OneShot')
     Update-DoomMusicPlayback $state @(@{Kind='Start';Track='D_E1M1';Loop=$true;Frame=4232970})
     $mix=Read-DoomMusicPlayback $state 1260
     $r=Get-Content $report -Raw|ConvertFrom-Json;$expected=[byte[]]::new(20160)
@@ -22,19 +26,30 @@ try{
     Check 'Explicit restart and gain applied' ($state.Readers.D_E1M1.Frame -eq 0 -and $state.Gain -eq .1)
     Reject 'Missing track packet rejected atomically' {Update-DoomMusicPlayback $state @(@{Kind='Gain';Value=.5},@{Kind='Start';Track='D_MISSING';Loop=$true})}
     Check 'Rejected packet preserves prior track and gain' ($state.Selected -ceq 'D_E1M1' -and $state.Gain -eq .1 -and $state.Readers.D_E1M1.Frame -eq 0)
-    Reject 'Unqualified one-shot command rejected' {Update-DoomMusicPlayback $state @(@{Kind='Start';Track='D_E1M1';Loop=$false})}
+    Reject 'Loop qualification rejects one-shot command mode' {Update-DoomMusicPlayback $state @(@{Kind='Start';Track='D_E1M1';Loop=$false})}
+    Reject 'One-shot qualification rejects loop command mode' {Update-DoomMusicPlayback $state @(@{Kind='Start';Track='D_INTRO';Loop=$true})}
+    $oneShot=Get-Content $oneShotReport -Raw|ConvertFrom-Json -AsHashtable
+    Reject 'One-shot offset past payload end rejected' {Update-DoomMusicPlayback $state @(@{Kind='Start';Track='D_INTRO';Loop=$false;Frame=[long]$oneShot.Details.Frames+1})}
+    Update-DoomMusicPlayback $state @(@{Kind='Start';Track='D_INTRO';Loop=$false;Frame=[long]$oneShot.Details.Frames-6})
+    $finiteMix=Read-DoomMusicPlayback $state 10
+    $expectedBytes=[byte[]]::new(160);$file=[IO.File]::OpenRead($oneShot.Details.Payload.Path)
+    try{$file.Position=([long]$oneShot.Details.Frames-6)*16;$file.ReadExactly($expectedBytes,0,96)}finally{$file.Dispose()}
+    $finiteBytes=[byte[]]::new(160);[Buffer]::BlockCopy($finiteMix,0,$finiteBytes,0,$finiteBytes.Length)
+    Check 'One-shot plays the final payload frames then zero pads' ([Convert]::ToHexString([Security.Cryptography.SHA256]::HashData($finiteBytes)) -ceq [Convert]::ToHexString([Security.Cryptography.SHA256]::HashData($expectedBytes)))
+    Check 'One-shot auto-stops exactly at end and next read is silent' ($state.Readers.D_INTRO.Frame -eq $oneShot.Details.Frames -and $state.Readers.D_INTRO.Finished -and $null -eq $state.Selected -and $null -eq (Read-DoomMusicPlayback $state 10))
     Reject 'Negative start frame rejected' {Update-DoomMusicPlayback $state @(@{Kind='Start';Track='D_E1M1';Loop=$true;Frame=-1})}
     Reject 'Nonfinite gain rejected' {Update-DoomMusicPlayback $state @(@{Kind='Gain';Value=[double]::NaN})}
     Reset-DoomMusicPlayback $state
-    Check 'Epoch reset stops selection while retaining gain' ($null -eq $state.Selected -and $state.Gain -eq .1 -and $state.Frames -eq 1260)
+    Check 'Epoch reset stops selection while retaining gain' ($null -eq $state.Selected -and $state.Gain -eq .1 -and $state.Frames -eq 1270)
     Update-DoomMusicPlayback $state @(@{Kind='Start';Track='D_E1M1';Loop=$true},@{Kind='Stop'})
     Check 'Stop leaves no music layer' ($null -eq (Read-DoomMusicPlayback $state 1260))
-    Close-DoomMusicPlayback $state;Check 'Catalog closes all qualified readers' ($state.Closed -and $state.Readers.D_E1M1.Closed)
+    Close-DoomMusicPlayback $state;Check 'Catalog closes loop and one-shot readers' ($state.Closed -and $state.Readers.D_E1M1.Closed -and $state.Readers.D_INTRO.Closed)
     Reject 'Closed playback rejects commands' {Update-DoomMusicPlayback $state @(@{Kind='Stop'})};$state=$null
     Reject 'Catalog rejects mismatched track label' {$s=New-DoomMusicPlayback @{'D_WRONG'=$report};Close-DoomMusicPlayback $s}
 }catch{$failure=$_.ToString()+"`n"+$_.ScriptStackTrace;throw}finally{
     if($state){Close-DoomMusicPlayback $state}
-    @{Error=$failure;Checks=$checks.ToArray();QualificationSha256=(Get-FileHash $report).Hash;Sources=@('MusicLoopReader','MusicPlayback'|ForEach-Object {@{Path="src/$_.ps1";Sha256=(Get-FileHash "$PSScriptRoot/../src/$_.ps1").Hash}});ScriptSha256=(Get-FileHash $PSCommandPath).Hash;
-      Meaning='Persistent catalog command/lifecycle checks using real qualified E1M1 samples and independent file slices at the intro seam. No playback device or host integration.'}|ConvertTo-Json -Depth 6|Set-Content $Output
+    $sourcePaths=@('src/MusicLoopReader.ps1','src/MusicOneShotReader.ps1','src/MusicPlayback.ps1','scripts/Qualify-MusicOneShot.ps1')
+    @{Error=$failure;Checks=$checks.ToArray();QualificationSha256=(Get-FileHash $report).Hash;OneShotQualificationSha256=(Get-FileHash $oneShotReport).Hash;Sources=@($sourcePaths|ForEach-Object {@{Path=$_;Sha256=(Get-FileHash "$PSScriptRoot/../$_").Hash}});ScriptSha256=(Get-FileHash $PSCommandPath).Hash;
+      Meaning='Persistent catalog command/lifecycle checks using real qualified E1M1 loop samples and D_INTRO finite samples, including automatic end and zero padding. No playback device or host integration.'}|ConvertTo-Json -Depth 6|Set-Content $Output
 }
 "PASS: $($checks.Count) music playback checks."

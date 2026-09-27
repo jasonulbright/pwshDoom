@@ -1745,3 +1745,41 @@ catalog identity plus 36-map smoke are pinned in the readiness receipt. The
 one full human Episode 1 route remains pending. Static math parity is not
 moving-actor visual/occlusion validation, and no recording or automated route
 work is part of this step.
+
+## 2026-09-26 — Qualify finite D_INTRO playback
+
+Loop playback already preserves its reader and source qualification. A separate
+finite path is needed for non-looping engine callbacks. Added a bounded
+PowerShell reader and report-based dispatch in `MusicPlayback.ps1`; loop reports
+continue through the unchanged loop reader. At finite EOF the last device block
+is zero-padded and the selection stops. Invalid loop-mode combinations and
+offsets beyond the payload reject before commands mutate playback state.
+
+The new `Qualify-MusicOneShot.ps1` renders the user's pinned D_INTRO score at
+44.1 kHz through its MUS end event, then retains synthesizer voices until the
+release tail ends. Two independent passes agree byte-for-byte: 471,240 stereo
+float64 frames (10.686 seconds), comprising a 302,400-frame score (6.857
+seconds) and 168,840-frame release tail (3.830 seconds), with 50 peak voices
+and zero clipped samples. Receipt:
+`results/music-one-shot-dintro-20260926.json`. The report pins the Ultimate Doom
+IWAD, soundfont, six synthesis sources, qualifier, and PowerShell 7.6.5. It
+does not establish original-synth fidelity or acoustic quality.
+
+The 17-check playback receipt compares exact real loop-boundary slices, tests
+D_INTRO's final six frames plus padding, confirms auto-stop, and checks invalid
+commands and cleanup. The ten-check actual Windows waveOut test starts from the
+D_INTRO finite report, switches to the E1M1 loop, and matches all 176,400
+submitted frames against a separately scheduled offline mix. The current
+12-check engine callback test still preserves the non-loop flag. A 15-check
+save/load/new-game audio worker run against the unchanged eleven-track Episode
+1 loop catalog passes on the updated worker. Receipts are
+`music-playback-one-shot-dintro-20260926.json`,
+`music-audio-worker-one-shot-dintro-20260926.json`,
+`music-events-one-shot-dintro-20260926.json`, and
+`save-worker-music-one-shot-dintro-20260926.json` under `results/`.
+
+The worker-device check verifies only the opening 1,260 D_INTRO frames; the
+reader's boundary test checks the final frames. Full-length device playback,
+other non-looping scores, acoustic review, continuous campaign playback, and
+Episode 1 human playthrough readiness remain open. No campaign route was added
+or tuned.
