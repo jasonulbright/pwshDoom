@@ -143,6 +143,24 @@ and music payloads remain ignored local files. Receipts: [preparation](../result
 [13-track catalog revalidation](../results/music-catalog-revalidation-e1-e2-20260927.json),
 and the local [headless integration report](../local/episode2m2-music-integration-20260927.json).
 
+### D_E2M3 recurrence and reader qualification (September 27)
+
+D_E2M3 qualifies with a one-cycle period of 8,811,180 frames (199.8 seconds).
+The two-period complete-state proof reaches the same normalized state at the
+boundary, with 17 voices and SHA-256
+`07039D68DD2F720BA3E82422476A64CB3FBA6007762DF2B134310FDA34216C0A`. Its
+independent eight-second opening reference matches through the actual loop
+reader and game mixer; the PCM hash is
+`3E5C985530423907A1DDA1D839F08B7B79ECBF0648C226D4072CC4AE9498EFCA`. All six
+long-track reader checks pass, including the exact recurrent-period seam.
+Preparation took 784.7 seconds, so this is a track qualification result, not
+a rendering-speed claim. The output is a separate one-track local catalog;
+the existing 13-track Episode 1/E2M1/E2M2 catalog remains unchanged. Receipts:
+[preparation](../results/music-preparation-ultimate-doom-e2m3-stateproof-20260927.json),
+[six-check reader/mixer qualification](../results/music-track-qualification-e2m3-stateproof-20260927.json).
+This does not qualify live E2M3 playback, acoustic fidelity, campaign continuity,
+or the 35/60 gameplay target.
+
 ### PowerShell patch-version compatibility (September 27)
 
 Jason's first terminal launch exposed an exact-patch comparison in both the

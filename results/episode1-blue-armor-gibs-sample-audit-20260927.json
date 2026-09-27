@@ -1,0 +1,99 @@
+{
+  "Format": "pwshDoom.StaticMapSpriteCoverageAudit",
+  "Version": 1,
+  "RecordedUtc": "2026-09-27",
+  "Map": "E1M1",
+  "Wad": {
+    "Path": "C:/Program Files (x86)/Steam/steamapps/common/Ultimate Doom/base/DOOM.WAD",
+    "Sha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F"
+  },
+  "MapThings": {
+    "BlueArmor": {
+      "DoomEdNum": 2019,
+      "ThingOrdinal": 14,
+      "X": 1824,
+      "Y": -3280
+    },
+    "GreenArmor": {
+      "DoomEdNum": 2018,
+      "ThingOrdinal": 69,
+      "X": -224,
+      "Y": -3232
+    },
+    "ClosestGibsToBlueArmor": {
+      "DoomEdNum": 24,
+      "MobjType": "Misc71",
+      "SpawnState": "Gibs",
+      "Sprite": "POL5",
+      "ThingOrdinal": 121,
+      "ThingFlags": 7,
+      "X": 2112,
+      "Y": -2688,
+      "DistanceFromBlueArmor": 658.3
+    },
+    "GibsNearSampleTic8750": {
+      "DoomEdNum": 24,
+      "MobjType": "Misc71",
+      "SpawnState": "Gibs",
+      "Sprite": "POL5",
+      "ThingOrdinal": 129,
+      "X": 2272,
+      "Y": -4000
+    }
+  },
+  "Sources": [
+    {
+      "Path": "src/ManagedDoom/Doom/Info/DoomInfo.MobjInfos.ps1",
+      "Sha256": "26BD78C3C286C8458D1BE92A7CBD60C8997058173574CB2AF0A4AD78C70B3F4B"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Info/DoomInfo.States.sb.ps1",
+      "Sha256": "7D1DA78D71177D84B532BB1506625D33E43A43F2E2C651784ABEA0ADA99ABFB4"
+    },
+    {
+      "Path": "results/human-pool-occlusion-samples-20260927.json",
+      "Sha256": "70E337BB9F9EFFD983F4CCA2F6C9390CA385405ED16EEFD525634A90B533A8CB"
+    }
+  ],
+  "PreviousSampleCoverage": {
+    "SampleCount": 16,
+    "TicRange": [
+      4900,
+      10098
+    ],
+    "NearestCameraToBlueArmor": {
+      "Tic": 8400,
+      "X": 1805.3,
+      "Y": -3250.3,
+      "Distance": 35.1,
+      "ReferenceActorPixels": 0,
+      "CandidateActorPixels": 0
+    },
+    "NearestCameraToClosestGibs": {
+      "Tic": 4900,
+      "X": 2045.5,
+      "Y": -2483.4,
+      "ThingOrdinal": 121,
+      "Distance": 215.1,
+      "CandidateOnlyActorPixels": 1,
+      "ReferenceActorPixels": 2644,
+      "CandidateActorPixels": 2521
+    },
+    "NearestCameraToAnotherGibs": {
+      "Tic": 8750,
+      "X": 2268,
+      "Y": -3989.3,
+      "ThingOrdinal": 129,
+      "GibsX": 2272,
+      "GibsY": -4000,
+      "Distance": 11.4,
+      "ReferenceActorPixels": 0,
+      "CandidateActorPixels": 0
+    },
+    "CandidateOnlyActorPixelRange": [
+      0,
+      11
+    ]
+  },
+  "Conclusion": "The earlier sixteen-view comparison includes a camera close to the actual blue armor and cameras near multiple static Gibs placements. At the near-armor camera, both renderers have zero visible actor pixels. The one candidate-only pixel at a nearby Gibs camera is not attributed to that object. These samples are relevant spatial context but do not reproduce the exact reported angle or establish original-executable parity. DoomEdNum 2019 is blue armor; 2018 is green armor."
+}

@@ -2310,13 +2310,16 @@ in-process gameplay regression, not terminal/audio evidence or a completed
 human campaign. See the
 [replay receipt](../results/episode1-human-crash-replay-20260927.json).
 
-The pool sighting received a bounded 16-view comparison from tics 4,900–10,098
-of the same human E1M1 input. Candidate-only actor-mask pixels range from 0 to
-11 per sampled view against the adopted renderer, and no specific corpse leak
-was isolated. The blue-armor report remains open; sparse adopted-reference
-samples do not certify all camera angles or original-executable parity. See
-the [pool-view receipt](../results/human-pool-occlusion-samples-20260927.json)
-and [rendering-fidelity notes](rendering-fidelity.md#sampled-radioactive-pool-views-2026-09-27).
+The earlier 16-view comparison used tics 4,900–10,098 from the same human E1M1
+input. Candidate-only actor-mask pixels range from 0 to 11 per sampled view
+against the adopted renderer, but the specific Gibs/pickup view was not
+isolated. A later map-data lookup confirmed these views include one camera
+near the blue armor and several near Gibs placements. At tic 8400 neither
+renderer showed actor pixels; at tic 4900 one candidate-only pixel was not
+attributed to a specific sprite. These counts provide sparse context, not a
+reproduction of Jason's exact angle. See the original
+[pixel receipt](../results/human-pool-occlusion-samples-20260927.json) and the
+[map-data audit](rendering-fidelity.md#audit-the-e1m1-pre-placed-gibs-report-2026-09-27).
 
 ## 2026-09-27 — Clip world actors at wall silhouettes
 
@@ -2409,9 +2412,11 @@ and [official sprite clipping](https://github.com/id-Software/DOOM/blob/master/l
 That source behavior explains the apparent overlap as classic Doom rendering,
 not a FastRenderer-only leak; no code change was made. We did not capture an
 independent DOSBox, Steam rerelease, or original-executable image, so visual
-parity to that binary remains unmeasured. The separate corpse-through-wall
-sighting near the blue armor was not reproduced at this camera state and
-remains open. The source-pinned replay details are in
+parity to that binary remains unmeasured. The separate pre-placed Gibs-through-
+wall sighting near the blue armor was not reproduced at this camera state and
+remains open; its object identity and the earlier sample coverage are clarified
+in the [later audit](rendering-fidelity.md#audit-the-e1m1-pre-placed-gibs-report-2026-09-27).
+The source-pinned replay details are in
 [`raised-floor-techpillar-human-view-20260927.json`](../results/raised-floor-techpillar-human-view-20260927.json).
 
 ## 2026-09-27 — Move intermission background work before the visible frame
@@ -2590,3 +2595,41 @@ Receipts: [launch preflight](../results/episode1-launch-preflight-current-candid
 [Classic](../results/render-partitions-current-candidate-classic-20260927.json),
 [Matrix/Katakana](../results/render-partitions-current-candidate-matrix-20260927.json),
 and [AnsiArt/Katakana](../results/render-partitions-current-candidate-ansiart-20260927.json).
+
+# 2026-09-27 — Correct the E1M1 blue-armor Gibs report and sample coverage
+
+Jason clarified that the object seen through a wall near the blue armor is
+pre-placed map scenery, not a body produced by combat. The installed Ultimate
+Doom IWAD (`DOOM.WAD`, SHA-256
+`6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F`) has blue
+armor (DoomEdNum 2019) at `(1824,-3280)`. A nearby E1M1 Thing type 24 is at
+`(2112,-2688)`, ordinal 121; the adopted MobjInfo maps it to `Misc71`/`Gibs`,
+whose state uses sprite `POL5`. DoomEdNum 2018 at `(-224,-3232)` is green armor.
+
+The earlier sixteen-view actor-mask receipt did include spatially relevant
+states: tic 8400 is 35.1 map units from the blue armor; tic 4900 is 215.1 units
+from the closest Gibs pile; and tic 8750 is 11.4 units from another Gibs pile
+at `(2272,-4000)`. Both renderers show zero actor pixels at tic 8400; at tic
+4900 there is one candidate-only actor pixel, not attributed to a specific
+sprite. The receipt therefore provides sparse context but does not reproduce
+the exact reported view. The first spatial audit confused green armor 2018
+with blue armor 2019; this entry and the corrected
+[spatial audit](../results/episode1-blue-armor-gibs-sample-audit-20260927.json)
+supersede that mistaken distance conclusion. No rendering code changed for
+this correction.
+
+## 2026-09-27 — Qualify D_E2M3 music loop
+
+Prepared the Ultimate Doom D_E2M3 score after D_E2M1 and D_E2M2. Its 8,811,180
+frame (199.8 second) period repeats complete normalized synth state across two
+continuous periods; the boundary has 17 voices and state hash
+`07039D68DD2F720BA3E82422476A64CB3FBA6007762DF2B134310FDA34216C0A`. The
+independent eight-second opening PCM matches through the actual loop reader and
+game mixer (`3E5C985530423907A1DDA1D839F08B7B79ECBF0648C226D4072CC4AE9498EFCA`),
+and six long-track reader/mixer checks pass. Preparation took 784.7 seconds.
+The preparer published a one-track D_E2M3 catalog; it did not merge this entry
+into the existing 13-track E1/E2M1/E2M2 catalog. This establishes offline loop
+recurrence and byte-exact reader behavior, not independent third-period output,
+live E2M3 play, acoustic quality, campaign continuity, or gameplay pacing.
+Receipts: [preparation](../results/music-preparation-ultimate-doom-e2m3-stateproof-20260927.json)
+and [reader/mixer checks](../results/music-track-qualification-e2m3-stateproof-20260927.json).

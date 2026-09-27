@@ -708,7 +708,7 @@ drawseg silhouettes, which explains this overlap as classic renderer behavior:
 [sprite clipping](https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/r_things.c#L3436-L3620).
 No change was made. This is source-level behavior evidence plus comparison to
 the adopted renderer, not a screenshot from an independently executed original
-binary. The separate corpse-near-blue-armor view remains open. See the
+binary. The pre-placed Gibs view near the blue armor remains open. See the
 [replay triage receipt](../results/raised-floor-techpillar-human-view-20260927.json).
 
 The first implementation allocated wall-clip hashtables and actor clip arrays
@@ -753,8 +753,9 @@ of the saved human E1M1 input pass eight actor-isolation comparisons, and the
 sampled actor masks at tics 35–245 are unchanged from the prior receipt. A
 fresh 36-map smoke and five-view/seven-strip worker checks pass in Classic,
 Matrix/Katakana, and AnsiArt/Katakana. This source-level consistency fix has
-not reproduced or resolved the separate corpse/pickup view near the blue
-armor; those sparse snapshots remain inconclusive. Receipts:
+not reproduced the separate pre-placed Gibs/pickup view at Jason's exact angle.
+The earlier samples include one camera close to the blue armor, but no actor
+pixels were visible at that view. Receipts:
 [actor-mask comparison](../results/actor-occlusion-human-prefix-world-z-20260927.json),
 [wall-silhouette test](../results/sprite-silhouette-world-z-20260927.json),
 [36-map smoke](../results/campaign-smoke-world-z-20260927.json), and
@@ -763,18 +764,32 @@ armor; those sparse snapshots remain inconclusive. Receipts:
 [AnsiArt](../results/render-partitions-world-z-ansiart-20260927.json)
 worker checks.
 
-### Sampled radioactive-pool views (2026-09-27)
+### Audit the E1M1 pre-placed Gibs report (2026-09-27)
 
-To investigate the separate report of pickups and corpses showing through
-walls near E1M1's blue armor, sixteen recorded camera states from tics 4,900
-through 10,098 were compared against the adopted `ThreeDRenderer`. The
-FastRenderer candidate-only actor mask ranges from zero to eleven pixels per
-sample; its largest value is at tic 6,300. No specific blue-armor corpse or
-pickup leak was isolated in those sampled views. The detailed positions,
-nearby actors, and mask counts are in the
-[sample receipt](../results/human-pool-occlusion-samples-20260927.json).
+Jason clarified that the object near the blue armor is a pre-existing Gibs
+decoration, not an enemy killed during play. The installed E1M1 `THINGS` lump
+contains seven DoomEdNum 24 placements; the local MobjInfo table maps these to
+`Misc71` with spawn state `Gibs`, whose sprite is `POL5`. Blue armor is
+DoomEdNum 2019 at `(1824,-3280)`; DoomEdNum 2018 at `(-224,-3232)` is green
+armor. The closest Gibs placement to blue armor is Thing ordinal 121 at
+`(2112,-2688)`, 658.3 map units away. The exact pile in Jason's view has not
+been localized among the map's placements.
 
-This is a sparse comparison against our adapted PowerShell reference. It does
-not cover every frame, establish the exact camera state Jason saw, or compare
-against an independently run original executable. The reported corpse view
-remains open for the planned complete human playthrough.
+The earlier sixteen-view comparison does include relevant spatial samples.
+Its tic-8400 camera was 35.1 map units from the blue armor, but both renderers
+had zero visible actor pixels at that view. The tic-4900 camera was 215.1
+units from the closest Gibs pile and showed one candidate-only actor pixel
+among 2,521 candidate actor pixels; the comparison does not identify that
+pixel as the Gibs sprite. Tic 8750 was 11.4 units from another Gibs placement
+at `(2272,-4000)`, with zero actor pixels in either renderer. The full
+0–11-per-view candidate-only range remains valid for the sixteen sampled
+views. These sparse adapted-renderer comparisons add context but do not
+reproduce Jason's exact angle or establish original-executable parity. The
+source-pinned [spatial audit](../results/episode1-blue-armor-gibs-sample-audit-20260927.json)
+records item identities, positions, source hashes, and distance calculations;
+the original [pixel comparison receipt](../results/human-pool-occlusion-samples-20260927.json)
+remains as the historical render comparison.
+
+The reported visibility remains unconfirmed. A focused follow-up should
+compare the static Gibs actors at the recorded near-armor/pile camera states
+and reproduce the reported angle before changing clipping code.

@@ -41,8 +41,10 @@ fuzz checks, and serial/worker equality in Classic, Matrix/Katakana, and
 AnsiArt/Katakana. The actor-occlusion replay prefix suppresses the reproduced
 tic-245 leak but retains actor-mask and broad scene differences. The receipt
 records the raised-floor view as classic Doom Techpillar sprite overlap and
-preserves the launcher preflight and remaining limits; the separate corpse
-sighting near blue armor remains unreproduced. The earlier
+preserves the launcher preflight and remaining limits. Jason clarified that
+the blue-armor object is a pre-placed Gibs decoration. The earlier 16-view
+receipt includes a camera near the blue armor and views near Gibs placements,
+but does not reproduce the exact sighting. The earlier
 [renderer-guard receipt](../results/episode1-render-guard-evidence-20260927.json)
 keeps its original `4ed3363` source pin, four retained E1M1–E1M4 route
 regressions, and fixed-input E1M2–E1M4 host replays. The E1M3 waypoint-driver
