@@ -2011,3 +2011,54 @@ Evidence: [current-tip readiness receipt](../results/episode1-playtest-current-t
 [encoder regression measurement](../results/ansi-strip-reuse-pinned-measurement-20260927.json),
 [restored encoder checks](../results/render-partitions-pairs-array-rollback-20260927.json),
 and the unchanged [campaign/session receipt](../results/episode1-playtest-current-readiness-20260927.json).
+
+## 2026-09-27 — Current Episode 1 candidate and secret-path readiness
+
+`VisibilityCheck.InterceptVector` now keeps Fixed-point intermediates in raw
+integers while preserving signed 32-bit wraparound, arithmetic shifts, division
+saturation, and truncation. Two analytic cases and 50,000 seeded raw-Int32
+comparisons against the previous Fixed-operator expression match exactly,
+including exception types. The code is PowerShell and makes no claim of a new
+renderer or a compiled gameplay helper. One instrumented 1,200-command profile
+pair reports Game.Update means of 14.287 ms before and 13.424 ms after, and
+Thinkers.Run means of 11.058 ms before and 10.400 ms after. Four selected
+checkpoints match in each run. This is a single unpaced simulation-only profile
+comparison, not repeated paired evidence, full-host pacing, or proof of 35
+simulation tics/sec / 60 displayed updates/sec.
+
+All four retained HMP route regressions pass on source commit
+`f5f404afee415c1deec817e6adf6372bc3f3a009`: the unchanged E1M1 driver exits
+after 1,560 commands with five kills; E1M2 completes 3,233 commands and 13
+checkpoints into E1M3; E1M3 completes 7,118 commands and 24 checkpoints into
+E1M4; and E1M4 completes 6,348 commands and 22 checkpoints into E1M5. These
+remain regression routes, not new campaign automation. A fresh smoke also
+passes all 36 Ultimate Doom maps with 35 idle tics and two serial frames per
+map.
+
+`Test-CampaignTransitions.ps1` now contains a focused session-state check for
+the documented secret branch. Starting from E1M3, it advances the actual game
+intermission, loads E1M9 from the IWAD, completes that map through the normal
+intermission path, and loads E1M4; it checks fresh worlds and secret-history
+state. The map exits themselves are fixture inputs, so this is not route
+completion. The full 69 campaign/finale checks pass. The current build also
+passes 97 boss checks, 125 menu/session checks with 46 screen fixtures, six
+synthetic console-input checks, ten synthetic menu-input checks, and the
+1,747-command E1M1-to-E1M2 ordinary-input session. `Play.ps1 -Check` finds the
+installed PowerShell 7.6.5, Windows Terminal, 36-map Steam IWAD, and local
+music catalog. The result is readiness for the single HMP Episode 1 human run,
+not campaign certification. The detailed
+[handoff](episode1-playtest.md),
+[machine-readable receipt](../results/episode1-playtest-intercept-candidate-readiness-20260927.json),
+and [campaign matrix](campaign-matrix.md) preserve scope and evidence limits.
+
+Two harness assumptions were corrected without a production defect. The new
+secret-path fixture first expected `DidSecret` to remain false at E1M9 entry;
+the existing `DoWorldDone` transition marks the visit when advancing from
+E1M3's secret exit. The test now checks that timing and passes all 69 checks.
+The old E1M1 route report also predates the current independent qualifier's
+Skill and complete checkpoint schema. `Qualify-CampaignRoute` could not replay
+that legacy report, and adding metadata alone still left its first recorded
+trace sample incompatible. I stopped adapting that report and ran the existing
+E1M1 route driver directly; it passes as recorded above. Intermediate failed
+reports remain under ignored `local/episode1-candidate-intermediate-20260927/`.
+They are test-input/schema outcomes, not engine failures.

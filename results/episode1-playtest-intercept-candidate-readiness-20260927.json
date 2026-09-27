@@ -1,0 +1,255 @@
+{
+  "Format": "pwshDoom.Episode1HumanPlaytestReadiness",
+  "CreatedUtc": "2026-09-27T05:40:48.1171207Z",
+  "Status": "ReadyForOneCompleteHumanEpisode1Playthrough",
+  "Build": {
+    "Branch": "codex/feasibility-study",
+    "ProductionChange": "VisibilityCheck.InterceptVector keeps Fixed-point wrap, shifts, division saturation, and truncation semantics while performing intermediate arithmetic on integers to reduce temporary Fixed wrappers.",
+    "Commit": "f5f404afee415c1deec817e6adf6372bc3f3a009",
+    "SourceSha256": [
+      {
+        "Path": "src/ManagedDoom/Doom/World/VisibilityCheck.sb.ps1",
+        "Sha256": "67838E62F6B7A1F955990B88C350A7C3AC8F6F12DF4E22D960CFBA61F4F65359"
+      },
+      {
+        "Path": "scripts/Test-VisibilityInterceptVector.ps1",
+        "Sha256": "9B177BFB55A71858A099337F7A72A21F8976EF48F714DFE951976961E209CA65"
+      },
+      {
+        "Path": "scripts/Test-CampaignTransitions.ps1",
+        "Sha256": "230DFC7BA855845637A46DD9E26DDA939050DBADE6C4C1A1E3F8D3738371A61A"
+      },
+      {
+        "Path": "scripts/Test-CampaignSmoke.ps1",
+        "Sha256": "BA08843A9F1DE4FF8AFCA20B0AB070031F74FD2C3F0B0D5F1E4BAB6F62027FC6"
+      },
+      {
+        "Path": "scripts/Test-BossProgression.ps1",
+        "Sha256": "4EE3871B7C52A3C46ABC08EA25AA3300D82667D9FF1C6A7E26A9CDB6CDAEFB2F"
+      },
+      {
+        "Path": "scripts/Test-SessionMenu.ps1",
+        "Sha256": "B6493E0A3E56F5D2F83427951ACABA2B2D4A3612BA90AE8106C22D88A5630722"
+      },
+      {
+        "Path": "scripts/Test-SessionProgression.ps1",
+        "Sha256": "7B9719841FBAB34CC41C59FD37F13F64F60F2F07D1E73173808D0841F8592996"
+      },
+      {
+        "Path": "scripts/Test-MenuInput.ps1",
+        "Sha256": "98C61D082E38A2266241141E9AB86C5BAFE64BB1FA6F73CF16976D57A92D8C1C"
+      },
+      {
+        "Path": "scripts/Test-ConsoleInput.ps1",
+        "Sha256": "C75B19725F222DA8941C2144197E18B64FB64274CD5F644E1287668E066F5BAD"
+      },
+      {
+        "Path": "Play.ps1",
+        "Sha256": "BC26D8D09BE5107BC9CD3BAB67A6A7BDD008672C795F7E611AD8477CBA3461C3"
+      },
+      {
+        "Path": "Start-Doom.ps1",
+        "Sha256": "132F5C9435B7290A70B1A0FE64EAD25F8EFF103E816D1A0A2614EF749F1E0627"
+      }
+    ]
+  },
+  "Game": {
+    "IWAD": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Ultimate Doom\\base\\DOOM.WAD",
+    "Style": "Classic",
+    "Skill": 3,
+    "MusicCatalog": "local/music-prepared-episode1.json",
+    "ControlsDocument": "docs/episode1-playtest.md#controls",
+    "WindowsTerminal": "C:\\Users\\jason\\AppData\\Local\\Microsoft\\WindowsApps\\wt.exe",
+    "MinimumTerminalGrid": "320 columns by 100 rows",
+    "IWADSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+    "PowerShell": "7.6.5",
+    "MusicCatalogSha256": "0E9C9542C75F4D5E2D7FC71E42FAFBB58F94321C3B8A49BA0C9AC5A93752EE58",
+    "LaunchCommand": "pwsh -NoProfile -File .\\Start-Doom.ps1 -Wad 'C:\\Program Files (x86)\\Steam\\steamapps\\common\\Ultimate Doom\\base\\DOOM.WAD' -Episode 1 -Map 1 -Skill 3 -Style Classic -Sound -MusicCatalog .\\local\\music-prepared-episode1.json -RecordInput .\\local\\episode1-human-playthrough.json -Report .\\local\\episode1-human-session.json -Maximized -FontSize 5",
+    "SettingsFilePresent": false,
+    "RenderWorkers": 16
+  },
+  "CurrentSourceChecks": {
+    "MapSmoke": {
+      "Maps": 36,
+      "Passed": 36,
+      "Failed": 0,
+      "Scope": "All 36 Ultimate Doom maps: 35 idle tics and two serial 320x200 renderings each; smoke is not map completion."
+    },
+    "ExistingE1M1ToE1M4RouteRegressions": [
+      {
+        "Map": "E1M1",
+        "Commands": 1560,
+        "Passed": true,
+        "Evidence": "results/intercept-candidate-e1m1-20260927-route.json",
+        "Kills": 5
+      },
+      {
+        "Map": "E1M2",
+        "Commands": 3233,
+        "NextMap": "E1M3",
+        "Evidence": "results/intercept-candidate-e1m2-20260927.json",
+        "Passed": true,
+        "Checkpoints": 13
+      },
+      {
+        "Map": "E1M3",
+        "Commands": 7118,
+        "NextMap": "E1M4",
+        "Evidence": "results/intercept-candidate-e1m3-20260927.json",
+        "Passed": true,
+        "Checkpoints": 24
+      },
+      {
+        "Map": "E1M4",
+        "Commands": 6348,
+        "NextMap": "E1M5",
+        "Evidence": "results/intercept-candidate-e1m4-20260927.json",
+        "Passed": true,
+        "Checkpoints": 22
+      }
+    ],
+    "SecretMapSessionPath": {
+      "Covered": "The test advances intermission from E1M3 to a real E1M9 load, then from E1M9 to a real E1M4 load; verifies fresh worlds and retained secret-visit history. Exit activation is a fixture, not a map route.",
+      "Failures": 0,
+      "Checks": 69
+    },
+    "BossProgression": {
+      "Passed": 97,
+      "Failed": 0
+    },
+    "OrdinaryInputSession": {
+      "Commands": 1747,
+      "Passed": true,
+      "Transitions": "E1M1 -> intermission -> E1M2; inventory retained."
+    },
+    "Launcher": {
+      "Passed": true,
+      "SettingsFilePresent": false,
+      "EpisodeMaps": 36,
+      "Command": "pwsh -NoProfile -File .\\Play.ps1 -Check -Wad 'C:\\Program Files (x86)\\Steam\\steamapps\\common\\Ultimate Doom\\base\\DOOM.WAD' -MusicCatalog .\\local\\music-prepared-episode1.json",
+      "MusicCatalogValidation": "The check confirms the catalog path; track contents and playback have separate evidence."
+    },
+    "InterceptVector": {
+      "DeterministicRawInt32Parity": 50000,
+      "AnalyticCases": 2,
+      "Mismatches": 0,
+      "Meaning": "Result data and exception type match the prior Fixed-operator expression; complements but does not replace route and campaign checks."
+    },
+    "MenuSession": {
+      "Passed": 125,
+      "ScreenFixtures": 46
+    },
+    "SyntheticInput": {
+      "ConsoleInput": 6,
+      "MenuInput": 10,
+      "DesktopKeyboardObserved": false
+    }
+  },
+  "DiagnosticSimulationProfile": {
+    "ReplaySha256": "A9E3E3E48DF5A483D904A412E3AF7A872ED5B5862713A331DC3310007AA09970",
+    "GameUpdateMeanMsAfter": 13.4241,
+    "Limit": "One unpaced simulation-only profile comparison with instrumentation; not a repeated paired benchmark, loaded terminal measurement, or 35-tic/60-display qualification.",
+    "ThinkersRunMeanMsBefore": 11.0583,
+    "GameUpdateMeanMsBefore": 14.2871,
+    "Commands": 1200,
+    "SelectedCheckpointsMatched": 4,
+    "ThinkersRunMeanMsAfter": 10.4004
+  },
+  "Audio": {
+    "Result": "The current mixer/device worker matched submitted PCM and closed the device; its finite test recorded one queue-timing stall.",
+    "Limits": "Whole-campaign music continuity, acoustic quality, and interruption-free playback remain unverified.",
+    "PriorWorkerReceipt": "results/audio-mixer-worker-current-20260927.json"
+  },
+  "HumanPlaythrough": {
+    "Scope": [
+      "E1M1",
+      "E1M2",
+      "E1M3",
+      "E1M9",
+      "E1M4",
+      "E1M5",
+      "E1M6",
+      "E1M7",
+      "E1M8",
+      "Episode 1 finale"
+    ],
+    "ExpectedEndpoint": "E1TEXT / CREDIT finale screen after the E1M8 exit/intermission.",
+    "RecordOnly": "Maps reached, E1M9 return, finale reached, deaths, reloads, deviations, and issues Jason reports.",
+    "Status": "Pending"
+  },
+  "KnownLimits": [
+    "This is readiness for one HMP Episode 1 human playthrough, not Ultimate Doom release certification.",
+    "Only E1M1-E1M4 have ordinary-input completion regressions; other map paths remain for the human run.",
+    "Synthetic input tests do not certify physical keyboard play.",
+    "The renderer remains an approximation. Visible frame rate and sustained 35-tic simulation pacing are not certified.",
+    "The finite audio worker recorded one queue-timing stall; whole-campaign audio continuity and acoustic quality are unverified.",
+    "Sixteen rendering workers previously used about 4 GB combined working memory."
+  ],
+  "Receipts": [
+    {
+      "Path": "results/intercept-candidate-visibility-focused-20260927.json",
+      "Sha256": "DFB70F6B92E856512EE0D037BCEFC6327587AEBB549F8D9CEA9DAF750C2841AD"
+    },
+    {
+      "Path": "results/episode1-secret-session-transition-verified-20260927.json",
+      "Sha256": "442BF38D5386E7134577DE09A6A15636365C548F12CDB6106FD453A15D7421B9"
+    },
+    {
+      "Path": "results/intercept-candidate-36map-smoke-20260927.json",
+      "Sha256": "318A3C75161DED642929AC5B98DCCA8E0795B06AB8E025A0ECEF1871400092B7"
+    },
+    {
+      "Path": "results/intercept-candidate-e1m1-20260927-route.json",
+      "Sha256": "3AB1ECC292A2E303B73BBE0256D24A51DE464DF12FADEC1032BAD4E5EEBBD587"
+    },
+    {
+      "Path": "results/intercept-candidate-e1m2-20260927.json",
+      "Sha256": "0AAE0B10EAF527A23E2EA3508E119548D20C0D07C6BBD4C744320705BC394EDA"
+    },
+    {
+      "Path": "results/intercept-candidate-e1m3-20260927.json",
+      "Sha256": "EE9FDBE962F72E7C61B4DE2373534D9DA81BEA8593B0A892B7ED76C4E70528F5"
+    },
+    {
+      "Path": "results/intercept-candidate-e1m4-20260927.json",
+      "Sha256": "FA7335E75C3355E54AE77EA7CF9A4C0BB99812527329B7303A86CFAE1747B741"
+    },
+    {
+      "Path": "results/intercept-candidate-bosses-20260927.json",
+      "Sha256": "32CB0F6457E674F26F5BF1E8CCCD4C5D6B43719BC38F4A631337684E87514F91"
+    },
+    {
+      "Path": "results/intercept-candidate-session-menu-20260927.json",
+      "Sha256": "315FC52CC03EC57473BB50E7C4145BFE5855669F84A293CE6FE9C82EB827FE96"
+    },
+    {
+      "Path": "results/intercept-candidate-menu-input-20260927.json",
+      "Sha256": "F0BA5B26C0075DC442F381690E690149C175829E8C039B0DBB88BCA04EC91553"
+    },
+    {
+      "Path": "results/intercept-candidate-session-progression-20260927.json",
+      "Sha256": "DE4DFD8E5F7CB2666DE3FECDAEA863DC02A04DFAB217A86F6B7E664D39362ECF"
+    },
+    {
+      "Path": "results/episode1-playtest-intercept-candidate-preflight-20260927.txt",
+      "Sha256": "E497D0AC397819915EDD38B12E33E7F498BCE2CB61EAC84DE55533496BA9AE43"
+    },
+    {
+      "Path": "results/intercept-candidate-console-input-20260927.txt",
+      "Sha256": "699F8C14FD45B5AF941AE6C312C3D6F02139019CA6B51DD3D82E722D692D62ED"
+    },
+    {
+      "Path": "results/simulation-stages-current-profile-20260927.json",
+      "Sha256": "48BA214BE586D659A034A32583815BFC67729E7C0E9AC472183CF4CFB3DDD426"
+    },
+    {
+      "Path": "results/simulation-stages-intercept-candidate-20260927.json",
+      "Sha256": "13574DF55CBE75C123E0D3569B3205881DA9ECC75C7CFDDA18A97BD3CBDC3618"
+    },
+    {
+      "Path": "results/audio-mixer-worker-current-20260927.json",
+      "Sha256": "221100139E30414983E15ACA23C0EA30CF83F70CF9A89CA5C8772211219B024F"
+    }
+  ],
+  "Meaning": "Readiness for the single complete HMP Episode 1 human playthrough, including E1M3 secret path and finale, not an Ultimate Doom release certification."
+}

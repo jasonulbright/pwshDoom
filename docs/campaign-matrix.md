@@ -29,17 +29,22 @@ output in the three styles is recorded separately in the
 [renderer fidelity record](rendering-fidelity.md#reuse-per-context-raster-scratch-2026-09-27).
 This is load/render smoke, not route completion.
 
-The single Episode 1 human-playthrough handoff is pinned to source build
-`e35874146856f00bc9568957982719ab0efdc909`; its [current-tip readiness
-receipt](../results/episode1-playtest-current-tip-readiness-20260927.json)
-adds current renderer/codec checks and a fresh launcher preflight to the tested
-campaign/session baseline. That baseline passes 57 campaign transition
-fixtures, 97 boss-progression fixtures, 125 menu/session checks with 46 screen
-fixtures, and the retained 1,747-command E1M1-to-E1M2 session route. It also
-passes 26 audio-mixer checks, nine music/effects checks, and ten actual-device
-worker checks. The route does not advance beyond E1M2; remaining E1 map
-completion and the secret route are the human playthrough scope, not inferred
-from these fixtures.
+The current Episode 1 human-playthrough handoff is pinned to source build
+`f5f404afee415c1deec817e6adf6372bc3f3a009`; its [readiness receipt](../results/episode1-playtest-intercept-candidate-readiness-20260927.json)
+links the fresh launcher check, 36-map smoke, and the four retained route
+regressions. The current source passes 69 campaign transition checks, including
+actual E1M3 intermission advancement to E1M9, its return to E1M4, fresh world
+creation, and retained secret history. It also passes 97 boss checks, 125
+menu/session checks with 46 screen fixtures, six synthetic console-input checks,
+ten synthetic menu-input checks, and the 1,747-command E1M1-to-E1M2 session
+route. Prior actual-device audio checks remain separately pinned and include
+one queue-timing stall. These results prepare the human run; only E1M1–E1M4
+have ordinary-input completion regressions, and no automated test claims the
+remaining map routes or finale as played.
+
+The prior `e358741` renderer receipt and `76b18ac` campaign/session receipt
+remain available with their original source pins. The latest route and smoke
+reports for `f5f404a` are listed in the current readiness receipt above.
 
 E1M1 has an [input-only completion report](../results/e1m1-route-lineflags.json) with 1560 commands. That route ends at intermission; it does not qualify next-level presentation or a whole episode. E1M2 now has a separate [normal-route qualification](campaign-e1m2.md), including recorded continuation into E1M3. The remaining maps still need completion evidence. Source-version matching is checked separately from input/state equivalence.
 

@@ -36,6 +36,19 @@ route ended in player death and did not expose a reproducible product defect;
 it is documented and route automation is stopped for this milestone. The
 broader release acceptance gates below remain intact.
 
+The refreshed Episode 1 candidate is pinned to
+`f5f404afee415c1deec817e6adf6372bc3f3a009`. A PowerShell integer fast path in
+`VisibilityCheck.InterceptVector` matches the prior fixed-point implementation
+in 50,000 deterministic raw-value cases. All four retained route regressions,
+the full 36-map load/simulation/render smoke, 97 boss checks, 125 menu/session
+checks, synthetic console/menu input checks, and a 1,747-command E1M1→E1M2
+session pass. The transition test now advances the actual intermission/world
+state from E1M3 to E1M9 and back to E1M4, verifying the fresh worlds and secret
+history; exit activation remains a focused fixture, not a map route. The fresh
+[readiness receipt](../results/episode1-playtest-intercept-candidate-readiness-20260927.json)
+prepares the single human playthrough. It does not certify the remaining routes,
+continuous audio, physical keyboard play, or the 35-tic/60-display target.
+
 After the integer-column and integer-row wall-sampling changes, the nine-map
 smoke and focused transition, boss, menu/session, and synthetic input checks
 were rerun on the renderer source. The subsequent fixed-point plane mapping
@@ -160,7 +173,7 @@ Do not postpone all performance work until M6. Measure after a feature adds subs
 - **M6 performance:** the 35-tic/60-display goal remains open. Existing 59.67 terminal updates/sec is not monitor presentation; PresentMon ETW could not start under this account. A StringBuilder strip-assembly attempt is rejected after exact-output measurements showed 4.0–9.3x slower encoding and 83–103% more thread allocations; array-and-concatenate is restored. Keep isolated encoder/renderer/mixer timings separate from simulation, audio, output and displayed-frame claims; see [terminal output](terminal-output.md).
 - **M5/M7 release:** keep the broader Ultimate Doom release gates intact beyond the one Episode 1 playthrough, including the other maps, normal/secret behavior, independent compatibility boundaries, clean-checkout launch, licenses, package and write-up. Continue from reproducible product findings; a route death or slow/incomplete automated route alone is not an engine defect.
 
-The current Episode 1 human-test pin is `e35874146856f00bc9568957982719ab0efdc909`. The 2026-09-27 renderer scratch-reuse change (`3113b68`) preserves all pixels across 36 E1 views, matches 16-process output in all three styles, and passes a 36/36 map smoke. The ANSI strip array-and-concatenate path is retained: the later StringBuilder alternative matched bytes but measured 4.0–9.3x slower and 83–103% more allocating, so it was reverted. Strict color and 16-worker checks pass on the restored code. See the [pinned build handoff](episode1-playtest.md), [current-tip readiness receipt](../results/episode1-playtest-current-tip-readiness-20260927.json), and [rejected encoder measurement](../results/ansi-strip-reuse-pinned-measurement-20260927.json).
+At that earlier checkpoint the Episode 1 human-test pin was `e35874146856f00bc9568957982719ab0efdc909`. The 2026-09-27 renderer scratch-reuse change (`3113b68`) preserves all pixels across 36 E1 views, matches 16-process output in all three styles, and passes a 36/36 map smoke. The ANSI strip array-and-concatenate path is retained: the later StringBuilder alternative matched bytes but measured 4.0–9.3x slower and 83–103% more allocating, so it was reverted. Strict color and 16-worker checks pass on the restored code. The newer handoff pin and readiness receipt are linked above; see also the [rejected encoder measurement](../results/ansi-strip-reuse-pinned-measurement-20260927.json).
 
 ### Historical milestone notes and task record
 

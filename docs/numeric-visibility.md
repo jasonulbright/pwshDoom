@@ -18,6 +18,31 @@ At the time of this optimization, `VisibilityCheck.InterceptVector` still had a 
 
 The focused check in `scripts/Test-VisibilityInterceptVector.ps1` reproduced a real sight-calculation defect. Two distinct `[Fixed]` wrappers can contain the same numeric zero, but comparing the wrapper objects with PowerShell `-eq` did not detect that equality here. The parallel-line denominator therefore skipped the intended zero return and produced `Int32.MinValue`. The check passed two cases after changing the guard to compare the wrappers' `.Data` values: separated parallel lines return zero, and a perpendicular segment crossing halfway returns 32768. Before/after receipts are `results/visibility-intercept-before-fix.json` and `results/visibility-intercept-after-fix.json`.
 
+## Fixed-point intercept hot path
+
+The current `VisibilityCheck.InterceptVector` keeps its intermediate values as
+raw signed 32-bit integers. It explicitly preserves the `[Fixed]` operators'
+wraparound, arithmetic shifts, division saturation check, double quotient, and
+truncate-to-zero conversion, while avoiding temporary `[Fixed]` wrappers in
+each sight-intercept calculation. The production source remains PowerShell.
+
+The updated focused test compares result data and exception type with the prior
+operator expression for two analytic cases and 50,000 deterministic raw-value
+pairs (seed `20260927`): zero mismatches. The retained E1M1–E1M4 routes pass on
+the candidate. A new 69-check campaign fixture also advances the actual game
+state through the E1M3 secret intermission, loads E1M9, advances its normal exit,
+and loads E1M4 with secret history retained. This checks session transitions;
+the map exits are explicit fixtures, not played routes. The 36-map smoke also
+passes. See the [current readiness receipt](../results/episode1-playtest-intercept-candidate-readiness-20260927.json)
+and its linked raw reports.
+
+One 1,200-command unpaced simulation profile reports `Game.Update` mean
+14.287 ms before and 13.424 ms after, and `Thinkers.Run` mean 11.058 ms before
+and 10.400 ms after. Both runs match four selected checkpoints. This is one
+instrumented before/after pair, not a repeated paired benchmark or a loaded
+terminal result. It does not establish 35 simulation tics/sec or 60 displayed
+updates/sec; those remain open release targets.
+
 After the correction, the four existing fixed-input route regressions all pass on the installed Ultimate Doom IWAD: E1M1 enters E1M2 after 1,747 commands with 8 checkpoints; E1M2 enters E1M3 after 3,233 commands with 87 route samples and 13 checkpoints; E1M3 enters E1M4 after 7,118 commands with 198 samples and 24 checkpoints; and E1M4 enters E1M5 after 6,348 commands with 176 samples and 22 checkpoints. The [compact regression index](../results/visibility-campaign-regressions.json) records parameters, transition summaries, and raw-report hashes; the full per-run reports remain under ignored `local/visibility-intercept-regressions/`. These preserve the existing route inputs; they do not establish complete vanilla compatibility or human playthrough coverage.
 
 ## Loaded host prefix
