@@ -1,6 +1,6 @@
 {
   "Status": "ReadyForOneHumanEpisode1Playthrough",
-  "SourceBaseline": "f12334e9941e2917da9d4de1c66e92967b0d3967",
+  "SourceBaseline": "f0e85ba5ba6095cb105a69346ad3dd7f8ba7554c",
   "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
   "Scope": [
     "E1M1",
@@ -146,9 +146,10 @@
       "IdleTics": 35,
       "FullFramesPerMap": 2,
       "WorkerStrips": 16,
-      "Receipt": "results/campaign-smoke-world-sprite-verified.json",
-      "Meaning": "Current-source startup/render smoke for all 36 Ultimate Doom maps. Each map advances 35 idle tics and rasterizes two full frames in the 16-strip serial reference path. Not map completion or displayed-FPS evidence.",
-      "SourceCommit": "f12334e9941e2917da9d4de1c66e92967b0d3967"
+      "Receipt": "results/campaign-smoke-actor-projection-final.json",
+      "Meaning": "Current source startup/render smoke: all 36 Ultimate Doom maps load, advance 35 idle tics, and rasterize two full 320x200 frames across sixteen worker strips. Not map completion or displayed-FPS evidence.",
+      "SourceCommit": "f0e85ba5ba6095cb105a69346ad3dd7f8ba7554c",
+      "ReportSha256": "D9F501463BAFBD5FAE04A697729B5AA1ABF5F987749B6A502C3C06F20678F7ED"
     },
     "CurrentSourceCampaignTransitions": {
       "Passed": 57,
@@ -347,11 +348,66 @@
       "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
       "Meaning": "Current-source launcher path check for the documented Classic Episode 1 handoff. This confirms path, IWAD inventory, PowerShell and Windows Terminal detection; track/WAD qualification and playback are covered by the separate audio-worker evidence.",
       "EpisodeMaps": 36,
-      "SourceCommit": "f12334e9941e2917da9d4de1c66e92967b0d3967",
+      "SourceCommit": "f0e85ba5ba6095cb105a69346ad3dd7f8ba7554c",
       "MusicCatalogSha256": "0E9C9542C75F4D5E2D7FC71E42FAFBB58F94321C3B8A49BA0C9AC5A93752EE58",
       "PowerShell": "7.6.5",
-      "Receipt": "results/episode1-launch-preflight-worldsprite.json",
-      "Ready": true
+      "Receipt": "results/episode1-launch-preflight-actor-projection.json",
+      "Ready": true,
+      "RendererSha256": "CA56DD04BAC258F9ACF12AEA0A7535CDFE36A69D8C1EF9DAF8BBD56C63DEE9C8",
+      "PreflightReportSha256": "9B1E11A7590EC5C3062581F8DF062FB25580F696511A1F909E93E408AAA5B2F4"
+    },
+    "RendererFixedPointActorProjection": {
+      "RendererSha256": "CA56DD04BAC258F9ACF12AEA0A7535CDFE36A69D8C1EF9DAF8BBD56C63DEE9C8",
+      "ComparisonReceipt": "results/actor-projection-fixedpoint-comparison.json",
+      "ComparisonReceiptSha256": "D1C672C5E105E80131766E759AE00C77EAED9742FE730FE27F97897FA5215323",
+      "Reference": "Adopted PowerShell ManagedDoom renderer, not independent original-executable output",
+      "Views": 6,
+      "SceneIndexDifferencesBefore": 35671,
+      "SceneIndexDifferencesAfter": 35133,
+      "SceneIndexReduction": 538,
+      "WorkerEquivalence": [
+        {
+          "Style": "Classic",
+          "Receipt": "results/render-partitions-actor-projection-classic-final.json",
+          "Sha256": "D40EFEA38EC931D8EF02E442E9865BBCCF4A7255CC20007C31842F2D9242A428"
+        },
+        {
+          "Style": "Matrix/Katakana",
+          "Receipt": "results/render-partitions-actor-projection-matrix-final.json",
+          "Sha256": "67E22C113950E4DD0A778AC3E8EAB7E7F63D9FB41E26B4B54082241175E45A7F"
+        },
+        {
+          "Style": "AnsiArt/Katakana",
+          "Receipt": "results/render-partitions-actor-projection-ansiart-final.json",
+          "Sha256": "BAD4363452BE063C845A74106A1AF81941020932CAFB00E90DD7372F6D7D43ED"
+        }
+      ],
+      "MapSmokeReceipt": "results/campaign-smoke-actor-projection-final.json",
+      "MapSmokeSha256": "D9F501463BAFBD5FAE04A697729B5AA1ABF5F987749B6A502C3C06F20678F7ED",
+      "PairedSerialPerformance": [
+        {
+          "PairedMedianDeltaPercent": 0.7834,
+          "BaselineMedianMs": 51.9111,
+          "CandidateMedianMs": 53.9954,
+          "Map": "E1M1",
+          "SamplesPerVersion": 15,
+          "PairedMedianDeltaMs": 0.5736
+        },
+        {
+          "PairedMedianDeltaPercent": 3.0046,
+          "BaselineMedianMs": 49.8602,
+          "CandidateMedianMs": 52.0009,
+          "Map": "E1M2",
+          "SamplesPerVersion": 15,
+          "PairedMedianDeltaMs": 1.3961
+        }
+      ],
+      "Limitations": [
+        "Static idle views; scene-index counts are for full scenes, not isolated actors.",
+        "Rotated-frame selection, moving actors, full occlusion, and independent original-executable parity remain open.",
+        "Serial kernel measurements are not whole-game pacing or visible FPS.",
+        "Map smoke does not test navigation, exits, or campaign completion."
+      ]
     }
   },
   "HumanPlaythrough": {
@@ -363,13 +419,14 @@
   "Limitations": [
     "This receipt does not claim a completed human map route.",
     "Physical keyboard play remains pending.",
-    "The full-campaign audio path and audible review of all tracks are not yet certified; only a short E1M1 playback integration was checked.",
+    "Full-campaign music continuity and audible review of every track remain open; the eleven-track Episode 1 catalog is prepared and the simulation/audio worker passed 15 save/load/new-game checks.",
     "35-tic/60-display pacing, vanilla pixel fidelity, and broader release gates remain open.",
     "The E1M5 automated continuation died without establishing a reproducible engine defect; no route retry is part of this milestone.",
     "The current headless host replay wrote zero terminal frames; visible frame rate and physical keyboard play remain unverified.",
     "The fixed-point plane change improves the adopted reference comparison but raises single-process serial render medians in both measured maps.",
     "The host replay averaged 34.97 simulation tics/sec and paused output for 1.91 seconds during the E1M2 asset reload.",
-    "Sprite patch sampling improves the adopted-reference match but the paired serial render median rises 2.9% on E1M1 and 0.4% on E1M2; these full-frame timings do not measure worker end-to-end or visible FPS."
+    "Sprite patch sampling improves the adopted-reference match but the paired serial render median rises 2.9% on E1M1 and 0.4% on E1M2; these full-frame timings do not measure worker end-to-end or visible FPS.",
+    "Fixed-point actor projection lowers adopted-reference scene differences by 538 across six static views, with small measured serial median costs; rotated-frame and occlusion fidelity remain incomplete."
   ],
   "Artifacts": [
     {
@@ -627,6 +684,70 @@
     {
       "Path": "results/episode1-launch-preflight-worldsprite.json",
       "Sha256": "36C556827730FFDBE1A88E42D818C68A405C96D8A4014FFD49F986743F8AAD31"
+    },
+    {
+      "Path": "results/actor-projection-fixedpoint-comparison.json",
+      "Sha256": "D1C672C5E105E80131766E759AE00C77EAED9742FE730FE27F97897FA5215323"
+    },
+    {
+      "Path": "results/campaign-smoke-actor-fixedpoint-20260926.json",
+      "Sha256": "F536F38624D0F50026FC96A962FD55E929A8BA0502718219017DF104E519F13F"
+    },
+    {
+      "Path": "results/campaign-smoke-actor-projection-final.json",
+      "Sha256": "D9F501463BAFBD5FAE04A697729B5AA1ABF5F987749B6A502C3C06F20678F7ED"
+    },
+    {
+      "Path": "results/episode1-launch-preflight-actor-projection.json",
+      "Sha256": "9B1E11A7590EC5C3062581F8DF062FB25580F696511A1F909E93E408AAA5B2F4"
+    },
+    {
+      "Path": "results/render-partitions-actor-fixed-16-retry-20260926.json",
+      "Sha256": "E22D9413CA4EAFB595E3E4BCDCDAF091AE17EBBBF752F8720499F925BF82333B"
+    },
+    {
+      "Path": "results/render-partitions-actor-fixed-ansiart-20260926.json",
+      "Sha256": "312824740D34D2D80C963E2675C91ECDEF78F269295E660CBA76B35CF96FD3B6"
+    },
+    {
+      "Path": "results/render-partitions-actor-fixed-matrix-20260926.json",
+      "Sha256": "70BCE8D3D64A27EAC21273F2BB30871189BCB27FE787F605006696162362BEAF"
+    },
+    {
+      "Path": "results/render-partitions-actor-projection-ansiart-final.json",
+      "Sha256": "BAD4363452BE063C845A74106A1AF81941020932CAFB00E90DD7372F6D7D43ED"
+    },
+    {
+      "Path": "results/render-partitions-actor-projection-classic-final.json",
+      "Sha256": "D40EFEA38EC931D8EF02E442E9865BBCCF4A7255CC20007C31842F2D9242A428"
+    },
+    {
+      "Path": "results/render-partitions-actor-projection-matrix-final.json",
+      "Sha256": "67E22C113950E4DD0A778AC3E8EAB7E7F63D9FB41E26B4B54082241175E45A7F"
+    },
+    {
+      "Path": "results/renderer-pair-actor-fixedpoint-20260926.json",
+      "Sha256": "36E9B2856673EEEE8DB6E99A7E92953A25388EA6CED0930E91B238621F705AFC"
+    },
+    {
+      "Path": "results/renderer-pair-actor-fixedpoint-fast-20260926.json",
+      "Sha256": "7C96196674D50E2FCF530B571CC8D28C59FAA9099996F44125BB1AD6B098AA28"
+    },
+    {
+      "Path": "results/renderer-pair-actor-fixedpoint-fast-e1m1-20260926.json",
+      "Sha256": "57904B445DEE525F7E154A9EF58BB483FB994AFE8D758C3B3A0BDAEB1A40F4C0"
+    },
+    {
+      "Path": "results/renderer-pair-actor-fixedpoint-final-20260926.json",
+      "Sha256": "3F8CE264FE08E144F65EF8E7A7A3A2BD8E648BE7C0C568C0BF6205390D2E7D1F"
+    },
+    {
+      "Path": "results/renderer-pair-actor-projection-e1m1-final.json",
+      "Sha256": "3D2CF9F5BC75E565CA7A153D9B91FB802A69F0643A1DF0FA8A951C1FC0A23810"
+    },
+    {
+      "Path": "results/renderer-pair-actor-projection-e1m2-final.json",
+      "Sha256": "1B0417D467ED07219052680134168ECF60DF69D9FFFF3C09CF3FAAF8D9BF99B4"
     }
   ]
 }

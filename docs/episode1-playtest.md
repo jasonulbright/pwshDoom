@@ -22,13 +22,13 @@ E1M8 exit and intermission.
 
 ## Build and launch
 
-Engine/source baseline: commit `f12334e9941e2917da9d4de1c66e92967b0d3967`.
+Engine/source baseline: commit `f0e85ba5ba6095cb105a69346ad3dd7f8ba7554c`.
 The 295 focused campaign, boss-trigger, session, menu, and synthetic-input
 assertions were run from repository commit
 `cdc59a9280fd649638a869210beb799c92cd49ec` on the preceding gameplay source.
-The pinned source commit above adds the verified world-sprite and worker-asset
-changes; its 36-map smoke and asset/worker checks are recorded in the current
-[readiness receipt](../results/episode1-playtest-readiness.json). Documentation
+The pinned source commit above adds the verified world-sprite, worker-asset,
+and fixed-point actor-projection changes; its 36-map smoke and asset/worker
+checks are recorded in the current [readiness receipt](../results/episode1-playtest-readiness.json). Documentation
 updates after the source commit do not change the launchable game code.
 Run from the repository root in 64-bit PowerShell 7.4 or later on Windows,
 with Windows Terminal, the legally obtained Ultimate Doom `DOOM.WAD`, and the
@@ -146,9 +146,18 @@ asset reload. This improves a low-level sprite raster path; it does not certify
 original-executable fidelity or map completion. The linked readiness receipt
 pins the source commit and raw reports. The current-source Classic launcher
 preflight also detects the installed IWAD, Windows Terminal, PowerShell 7.6.5,
-and prepared Episode 1 catalog; its [receipt](../results/episode1-launch-preflight-worldsprite.json)
-is path detection, while the separate audio-worker checks qualify catalog
-contents and playback integration.
+and prepared Episode 1 catalog; the source-pinned path check is in the readiness
+receipt, while the separate audio-worker checks qualify catalog contents and
+playback integration.
+
+The pinned source applies Doom-style 16.16 actor depth, scale, projected bounds,
+lighting, and vertical texture origin. Across six static E1M1/E1M2 views it
+reduces full-scene differences against the adopted PowerShell renderer by 538
+indices. Classic, Matrix/Katakana, and AnsiArt/Katakana each match serial output
+across 16 workers, and the exact source passes the 36-map smoke and launcher
+preflight. Paired serial medians show small costs of 0.57 ms on E1M1 and
+1.40 ms on E1M2; these are not whole-game timing or display-rate measurements.
+Rotated actor-frame and full occlusion parity remain open.
 
 ### Jason's human result
 

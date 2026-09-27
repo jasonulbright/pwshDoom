@@ -1660,3 +1660,26 @@ median was also substantially slower. Rewriting the transform as raw integer
 PowerShell arithmetic removed that dependency while retaining the image
 comparison result. Full rotation-boundary sweeps, moving-actor comparisons,
 occlusion parity, and original-executable comparisons remain open.
+
+## 2026-09-26 — Pin the Episode 1 playtest build
+
+Commit `f0e85ba5ba6095cb105a69346ad3dd7f8ba7554c` contains the actor-projection
+update and its portable comparison, raw paired timings, worker-equivalence,
+and all-map smoke reports. Its renderer SHA-256 is
+`CA56DD04BAC258F9ACF12AEA0A7535CDFE36A69D8C1EF9DAF8BBD56C63DEE9C8`.
+The current source passes all 36 load/idle/render cases, exact 16-worker output
+in Classic, Matrix/Katakana, and AnsiArt/Katakana, and a no-window launcher
+preflight using the installed Steam IWAD and local Episode 1 music catalog.
+
+The full-scene comparison against the adopted PowerShell renderer improves by
+538 indices across six static E1M1/E1M2 views. The paired serial receipts each
+contain 15 measurements per version; median paired costs are 0.57 ms (0.78%)
+and 1.40 ms (3.00%), respectively. The compact comparison receipt initially
+omitted sample counts and baseline/candidate medians; those fields now match
+the raw trials, without changing or regenerating test data.
+
+The one-run human handoff now pins this exact source commit. Its required scope
+remains E1M1 through E1M8, including E1M3's secret exit to E1M9 and return to
+E1M4, followed by the Episode 1 finale. Human route completion, physical input,
+continuous campaign music, displayed FPS, original-executable visual parity,
+and the broader release gates remain unclaimed.
