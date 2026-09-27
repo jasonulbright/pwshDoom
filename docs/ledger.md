@@ -2172,3 +2172,24 @@ performance gain is claimed. The PowerShell source and regression harness are
 committed as `0978112ef7b365f66b93770e1d98978e55b6d506`; the one complete HMP
 Episode 1 human playthrough remains pending. No new bot route or screen
 recording was run.
+
+## 2026-09-27 — Inventory full Ultimate Doom music coverage
+
+`Test-MusicInventory.ps1` parsed all 32 `D_` lumps in the installed Ultimate
+Doom IWAD and checked the scheduled event sample positions against an
+independent tick-times-315 projection. The IWAD maps reference 27 unique music
+lumps across 36 episode/map slots; the prepared Episode 1 catalog currently
+covers nine of those 27 unique map scores. Episode 4 reuses tracks from the
+first three episodes. Three score-lump pairs are byte-identical: E1M7/E2M5,
+E2M9/E3M1, and E1M8/E3M4. Only D_INTRO has a finite-score qualification;
+D_INTROA and D_BUNNY remain unqualified. These are inventory and scheduling
+results, not synthesis, playback, acoustic, or campaign evidence. The full
+[portable inventory](../results/ultimate-doom-music-inventory-20260927.json)
+pins the IWAD and source hashes.
+
+I started the resumable Episode 2 looping-score preparation with all nine E2
+map tracks and the qualified Episode 1 catalog as its base. Its payloads,
+catalog, and intermediate reports are under ignored `local/`; no track is
+counted as qualified until its loop, opening reference, reader and catalog
+checks finish. The Episode 1 human playthrough remains the active user-test
+milestone while this independent audio work proceeds.
