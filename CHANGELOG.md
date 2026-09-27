@@ -2,7 +2,26 @@
 
 ## Unreleased
 
-- Allow `Play.ps1 -MusicCatalog` to use an existing prepared music catalog. Reject combining it with `-Silent`; missing files fail before launch. Music preparation and full-track validation remain separate.
+### Added
+
+- Optional prepared-music playback through `Play.ps1 -MusicCatalog`. PowerShell synthesizes and mixes the score; users prepare catalogs from their own IWAD and soundfont. Missing catalogs fail before launch, and `-MusicCatalog` cannot be combined with `-Silent`. Music remains opt-in and is not bundled.
+- A complete Episode 1 human-playthrough handoff, pinned build evidence and a campaign/render/audio investigation ledger. The handoff is ready, but the human playthrough and broader campaign release gate are still pending.
+
+### Changed
+
+- Refined Doom-style rendering with integer-column wall rays, integer-row wall sampling, fixed-point plane and actor projection, sky sampling, sprite patch-column rules and wall-silhouette clipping. These changes improve specific reference comparisons; independent original-executable parity remains unmeasured, and the exact E1M1 pre-placed Gibs-through-wall sighting near the blue armor remains unreproduced.
+- Reduced selected renderer allocations and optimized the PowerShell music mixer while preserving tested output. The 35-tic/60-displayed-frame goal remains unverified; one bounded Classic E1M1 run reached 34.959 simulation tics/sec and 59.67 Terminal updates/sec, which is not a monitor-presentation measurement.
+- Warmed intermission backgrounds before their first visible frame and expanded source-pinned campaign, save/audio-worker, renderer and soundtrack checks.
+
+### Fixed
+
+- Corrected upstream arithmetic and angle-comparison behavior used by movement, weapons and homing actors; the E1M2 chainsaw-attack crash now passes a focused real-world hit regression.
+- Fixed reproduced actor visibility leaks and renderer range/plane-depth cases; broader scene differences and other unverified reports remain.
+
+### Qualification
+
+- All 36 Ultimate Doom maps pass load/simulation/render smoke checks. Ordinary-input normal exits are independently verified for E1M1–E1M4; the complete E1 human playthrough is pending.
+- Eleven Episode 1 loops are prepared locally. Four additional Episode 2 map scores have individual loop qualifications, with a short host-selection check for D_E2M4. Full-campaign playback, listener review and queue timing under sustained renderer load remain open.
 
 ## 0.1.0-preview.2
 

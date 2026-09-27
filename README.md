@@ -2,7 +2,7 @@
 
 **Doom, running in PowerShell. In your terminal. With a Matrix mode.**
 
-Playable preview **0.1.0-preview.2** for Windows Terminal. Gameplay, software rendering, terminal encoding and sound-effects mixing are PowerShell. Bring your own Ultimate Doom `DOOM.WAD`.
+**Latest packaged preview: 0.1.0-preview.2** for Windows Terminal. The repository source includes additional unreleased work listed in the [changelog](CHANGELOG.md); the preview ZIP does not contain those changes. Gameplay, software rendering, terminal encoding and sound-effects mixing are PowerShell. Bring your own Ultimate Doom `DOOM.WAD`.
 
 | Classic | Matrix | Color art |
 | --- | --- | --- |
@@ -23,7 +23,7 @@ Or, from PowerShell in the extracted folder:
 .\Play.ps1 -Style Matrix -Wad 'D:\Games\DOOM.WAD'
 ```
 
-Sound effects are enabled. Add `-Silent` to disable them or `-Ascii` if Japanese glyphs do not display correctly. Music is not included in the quick-start experience. No WADs, soundfonts or downloaded tools are distributed.
+Sound effects are enabled. Add `-Silent` to disable them or `-Ascii` if Japanese glyphs do not display correctly. The current source checkout also supports optional music: prepare a local catalog as described in [music preparation](docs/music-preparation.md), then pass it with `-MusicCatalog`. This post-preview feature is not in the 0.1.0-preview.2 ZIP. The catalog and soundfont are not packaged; current loop checks do not yet certify uninterrupted campaign playback or acoustic quality. No WADs, soundfonts or downloaded tools are distributed.
 
 [Installation, troubleshooting and preview limits](docs/preview.md) · [PowerShell installation](https://learn.microsoft.com/en-us/powershell/scripting/install/install-powershell-on-windows) · [Windows Terminal installation](https://learn.microsoft.com/en-us/windows/terminal/install)
 
@@ -33,14 +33,15 @@ Sound effects are enabled. Add `-Silent` to disable them or `-Ascii` if Japanese
 
 The game opens in a maximized Terminal window. If it asks for more space, reduce the font with **Ctrl+minus**. Classic needs 320×100 cells; character styles need 160×50. Extra space surrounds the centered image. Shrinking below the required grid pauses gameplay.
 
-## What ships
+## Current source status
 
-- Three display styles, menus, episode/difficulty selection, automap, save/load and sound effects.
-- All 36 Ultimate Doom maps have load/simulation/render smoke coverage. E1M1–E1M4 have independently verified ordinary-input normal-exit routes.
+- Three display styles, menus, episode/difficulty selection, automap, save/load and sound effects, with optional prepared music.
+- All 36 Ultimate Doom maps have load/simulation/render smoke coverage. E1M1–E1M4 have independently verified ordinary-input normal-exit routes; the complete Episode 1 human playthrough is still pending.
+- Recent rendering work improves Doom-style wall, plane and actor sampling and clips world sprites to wall silhouettes; full original-executable parity is not established.
 - Damage, pickup and power-up palettes; an approximate parallel invisibility effect.
 - Editable source, build/package scripts, attribution and the research ledger.
 
-**This is an early playable preview.** Full campaign completion, visual fidelity, audio continuity and sustained 35-tick/60-display performance are unfinished. Recent workloads range from roughly 23 to 35 simulation ticks/sec; terminal writes are not proof of distinct displayed frames. Doom II, Final Doom, MyHouse, arbitrary add-on WADs and multiplayer are not supported claims for this release. See [known limitations](docs/preview.md).
+**This is an early playable preview.** Full campaign completion, visual fidelity, audio continuity and sustained 35-tick/60-display performance are unfinished. In one bounded, maximized Classic E1M1 run, the game completed 59.67 Terminal updates/sec and 34.959 simulation ticks/sec; this does not prove 60 distinct displayed frames/sec, and heavier workloads run slower. Doom II, Final Doom, MyHouse, arbitrary add-on WADs and multiplayer are not supported claims for this release. See [known limitations](docs/preview.md) and the [measurement details](docs/performance.md).
 
 ## How it works—and who built the foundation
 
