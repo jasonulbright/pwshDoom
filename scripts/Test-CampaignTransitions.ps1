@@ -47,6 +47,36 @@ try {
     Check-Transition 'Health armor weapons ammo carry over' @($p.Health,$p.ArmorPoints,$p.Ammo[0],$p.WeaponOwned[2],$p.Ammo[1]) @(73,42,37,$true,11)
     $p.DidSecret=$true;$game.World.SecretExit=$false;$game.DoCompleted()
     Check-Transition 'Intermission retains prior secret visit' $options.IntermissionInfo.DidSecret $true
+
+    # Exercise the documented E1M3 -> E1M9 -> E1M4 branch through the live
+    # game/intermission state machine and real IWAD map loads. Exits are set
+    # directly as focused transition fixtures; this is not a map route.
+    $commands[0].Clear();$options.Players[$options.ConsolePlayer].DidSecret=$false
+    $options.IntermissionInfo.DidSecret=$false
+    $game.DeferedInitNew([GameSkill]::Medium,1,3);$null=$game.Update($commands)
+    $game.World.SecretExit=$true;$game.DoCompleted()
+    Check-Transition 'E1M3 secret exit enters intermission' $game.State.ToString() 'Intermission'
+    Check-Transition 'E1M3 secret exit targets E1M9' @($options.Episode,$options.IntermissionInfo.NextLevel) @(1,8)
+    Check-Transition 'E1M3 secret exit does not pre-mark E1M9 as visited' $options.IntermissionInfo.DidSecret $false
+    $e1m3World=$game.World
+    for($tic=0;$tic -lt 350 -and $game.State -eq [GameState]::Intermission;$tic++){
+        $commands[0].Clear();if($tic -in 1,4,8){$commands[0].Buttons=1};$null=$game.Update($commands)
+    }
+    Check-Transition 'Secret intermission loads E1M9' @($game.State.ToString(),$options.Episode,$options.Map) @('Level',1,9)
+    Check-Transition 'Secret entry creates a fresh world' ([object]::ReferenceEquals($e1m3World,$game.World)) $false
+    Check-Transition 'E1M9 entry records the secret visit' $game.World.ConsolePlayer.DidSecret $true
+
+    $e1m9World=$game.World;$game.World.SecretExit=$false;$game.DoCompleted()
+    Check-Transition 'E1M9 normal exit returns to E1M4' @($game.State.ToString(),$options.Episode,$options.IntermissionInfo.NextLevel) @('Intermission',1,3)
+    Check-Transition 'Completing E1M9 records secret history' $game.World.ConsolePlayer.DidSecret $true
+    Check-Transition 'E1M9 return intermission retains secret history' $options.IntermissionInfo.DidSecret $true
+    for($tic=0;$tic -lt 350 -and $game.State -eq [GameState]::Intermission;$tic++){
+        $commands[0].Clear();if($tic -in 1,4,8){$commands[0].Buttons=1};$null=$game.Update($commands)
+    }
+    Check-Transition 'Secret return loads E1M4' @($game.State.ToString(),$options.Episode,$options.Map) @('Level',1,4)
+    Check-Transition 'Secret return creates a fresh world' ([object]::ReferenceEquals($e1m9World,$game.World)) $false
+    Check-Transition 'E1M4 player retains secret history' $game.World.ConsolePlayer.DidSecret $true
+
     $commands[0].Clear();$game.DeferedInitNew([GameSkill]::Medium,1,1);$null=$game.Update($commands)
     $p=$game.World.ConsolePlayer;$p.WeaponOwned[2]=$true;$p.Ammo[0]=99;$oldWorld=$game.World
     # A lethal-damage fixture exercises the engine's death -> use -> rebirth path.
@@ -57,9 +87,11 @@ try {
     Check-Transition 'Respawn restores health and pistol ammunition' @($p.Health,$p.Ammo[0],$p.WeaponOwned[2]) @(100,50,$false)
 } finally {
     $failures=@($checks|Where-Object {-not $_.Passed})
+    $sourcePaths=@('src/ManagedDoom/Doom/Game/DoomGame.sb.ps1','src/ManagedDoom/Doom/Intermission/Finale.sb.ps1',
+        'src/ManagedDoom/Doom/World/VisibilityCheck.sb.ps1',[IO.Path]::GetRelativePath([IO.Path]::GetFullPath("$PSScriptRoot/.."),$PSCommandPath))
     @{FinishedUtc=[DateTime]::UtcNow.ToString('o');WadSha256=(Get-FileHash -LiteralPath $Wad).Hash;Checks=$checks.ToArray();Failures=$failures.Count;
-        Sources=@('src/ManagedDoom/Doom/Game/DoomGame.sb.ps1','src/ManagedDoom/Doom/Intermission/Finale.sb.ps1'|ForEach-Object {@{Path=$_;Sha256=(Get-FileHash -LiteralPath "$PSScriptRoot/../$_").Hash}});
-        Meaning='Isolated controller/routing/finale fixtures plus real intermission input advancement and E1M2 world creation. Direct exit and inventory setup are test fixtures, not map playthrough evidence.'}|ConvertTo-Json -Depth 8|Set-Content -LiteralPath $Output
+        Sources=@($sourcePaths|ForEach-Object {@{Path=$_;Sha256=(Get-FileHash -LiteralPath "$PSScriptRoot/../$_").Hash}});
+        Meaning='Controller/routing/finale fixtures plus real intermission advancement and IWAD world creation for E1M1->E1M2 and the E1M3->E1M9->E1M4 secret branch. Map exits and inventory are explicit fixtures; these checks do not claim map playthroughs.'}|ConvertTo-Json -Depth 8|Set-Content -LiteralPath $Output
     if($null -ne $content){$content.Dispose()}
 }
 $failures|ForEach-Object {Write-Host "FAIL: $($_.Name)"}

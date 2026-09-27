@@ -39,15 +39,36 @@ class VisibilityCheck {
     }
 
     [Fixed] InterceptVector([DivLine] $v2, [DivLine] $v1) {
-        $den = ($v1.Dy -shr 8) * $v2.Dx - ($v1.Dx -shr 8) * $v2.Dy
+        # Preserve each Fixed operator's signed 32-bit wrap and arithmetic
+        # shift while keeping its intermediate values in integers. Sight checks
+        # call this for crossed two-sided lines on every simulation tic.
+        [int]$v1DyShift = $v1.Dy.Data -shr 8
+        [int]$v1DxShift = $v1.Dx.Data -shr 8
+        [int]$denLeft = [Fixed]::ToInt32Unchecked(([long]$v1DyShift * [long]$v2.Dx.Data) -shr 16)
+        [int]$denRight = [Fixed]::ToInt32Unchecked(([long]$v1DxShift * [long]$v2.Dy.Data) -shr 16)
+        [int]$denData = [Fixed]::ToInt32Unchecked([long]$denLeft - [long]$denRight)
 
-        if ($den.Data -eq [Fixed]::Zero.Data) {
+        if ($denData -eq 0) {
             return [Fixed]::Zero
         }
 
-        $num = (($v1.X - $v2.X) -shr 8) * $v1.Dy + (($v2.Y - $v1.Y) -shr 8) * $v1.Dx
+        [int]$xDelta = [Fixed]::ToInt32Unchecked([long]$v1.X.Data - [long]$v2.X.Data)
+        [int]$yDelta = [Fixed]::ToInt32Unchecked([long]$v2.Y.Data - [long]$v1.Y.Data)
+        [int]$numLeft = [Fixed]::ToInt32Unchecked(([long]($xDelta -shr 8) * [long]$v1.Dy.Data) -shr 16)
+        [int]$numRight = [Fixed]::ToInt32Unchecked(([long]($yDelta -shr 8) * [long]$v1.Dx.Data) -shr 16)
+        [int]$numData = [Fixed]::ToInt32Unchecked([long]$numLeft + [long]$numRight)
 
-        return $num / $den
+        # Match Fixed.op_Division's saturation threshold and double/truncate
+        # path without allocating wrappers for the numerator and denominator.
+        if (([Fixed]::CIntAbs($numData) -shr 14) -ge [Fixed]::CIntAbs($denData)) {
+            $limit = if (($numData -bxor $denData) -lt 0) { [int]::MinValue } else { [int]::MaxValue }
+            return [Fixed]::new($limit)
+        }
+        $quotient = ([double]$numData / [double]$denData) * [Fixed]::FracUnit
+        if ($quotient -ge 2147483648.0 -or $quotient -lt -2147483648.0) {
+            throw [DivideByZeroException]::new()
+        }
+        return [Fixed]::new([int][Math]::Truncate($quotient))
     }
 
     [bool] CrossSubsector([int] $subsectorNumber, [int] $validCount) {
