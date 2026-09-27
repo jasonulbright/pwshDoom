@@ -43,6 +43,25 @@ instrumented before/after pair, not a repeated paired benchmark or a loaded
 terminal result. It does not establish 35 simulation tics/sec or 60 displayed
 updates/sec; those remain open release targets.
 
+## PowerShell `CheckSight` bounds fast path (2026-09-27)
+
+The three `Fixed` wrapper expressions that initialize `SightZStart`, `TopSlope`,
+and `BottomSlope` now use explicit signed 32-bit wraparound on integer
+intermediates. The work remains in PowerShell and preserves the original
+operator order and arithmetic right shift. `scripts/Test-VisibilitySightBounds.ps1`
+calls production initialization, returns before BSP traversal, and compares
+all three raw results with the former `Fixed` expressions for 200 boundary
+combinations and 50,000 seeded raw-Int32 inputs. All 50,200 cases match.
+
+One unpaced 1,200-command E1M3 actor-profile run preserves its four selected
+checkpoints. `Game.Update` mean is 12.974 ms, compared with 13.424 ms in the
+single earlier run of the intercept-only candidate; `Thinkers.Run` is 10.029
+ms compared with 10.400 ms. These are separate unpaired runs with profiler
+overhead. They support retaining this small allocation-reducing code path, but
+do not establish a repeatable speedup, loaded pacing, 35 simulation tics/sec,
+or 60 displayed updates/sec. The [readiness evidence index](../results/episode1-render-guard-evidence-20260927.json)
+records the report hashes and scope.
+
 After the correction, the four existing fixed-input route regressions all pass on the installed Ultimate Doom IWAD: E1M1 enters E1M2 after 1,747 commands with 8 checkpoints; E1M2 enters E1M3 after 3,233 commands with 87 route samples and 13 checkpoints; E1M3 enters E1M4 after 7,118 commands with 198 samples and 24 checkpoints; and E1M4 enters E1M5 after 6,348 commands with 176 samples and 22 checkpoints. The [compact regression index](../results/visibility-campaign-regressions.json) records parameters, transition summaries, and raw-report hashes; the full per-run reports remain under ignored `local/visibility-intercept-regressions/`. These preserve the existing route inputs; they do not establish complete vanilla compatibility or human playthrough coverage.
 
 ## Loaded host prefix

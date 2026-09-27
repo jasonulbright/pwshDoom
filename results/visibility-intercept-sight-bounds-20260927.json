@@ -1,0 +1,29 @@
+{
+  "VisibilitySourceSha256": "F18D547D25E42E907B05AB8CAB34E606094C0563863A5D8FCD23AA0291DA2C41",
+  "BundleSha256": "017B451FDFA32F39C5D7FB8267EDE7F89A01CD0CF4A4882B6F2AEEA823800619",
+  "RandomParity": {
+    "MismatchCount": 0,
+    "Seed": 20260927,
+    "Count": 50000,
+    "MismatchSamples": []
+  },
+  "HarnessSha256": "9B177BFB55A71858A099337F7A72A21F8976EF48F714DFE951976961E209CA65",
+  "Cases": [
+    {
+      "Name": "Parallel separated rays return zero",
+      "Passed": true,
+      "ExpectedData": 0,
+      "ActualData": 0
+    },
+    {
+      "Name": "Perpendicular segments intersect halfway",
+      "Passed": true,
+      "ExpectedData": 32768,
+      "ActualData": 32768
+    }
+  ],
+  "Passed": true,
+  "Meaning": "Actual VisibilityCheck.InterceptVector known cases plus deterministic raw-Int32 parity against the prior Fixed-operator expression. Random cases compare result data and exception type; they do not substitute for route, sight, or campaign tests.",
+  "PowerShell": "7.6.5",
+  "Error": null
+}

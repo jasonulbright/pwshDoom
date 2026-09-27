@@ -581,3 +581,31 @@ encoding, terminal writes, and physical presentation are outside the timer.
 The [summary receipt](../results/renderer-scratch-reuse-summary-20260927.json)
 links the raw differential, worker, smoke, and timing reports. No renderer
 golden-image claim against an original executable follows from this change.
+
+## Guard fixed-point plane and wall-light boundaries (2026-09-27)
+
+The retained E1M3 fixed-command host replay exposed a renderer worker failure
+at tic 2,680: a plane distance of `3,543,363,520` was cast to signed Int32
+instead of wrapping as Doom fixed-point arithmetic requires. The serial plane
+sampler now performs an explicit modulo-2^32 wrap. The retained E1M4 replay
+then exposed a negative wall-light index at tic 3,663; lookup selection is now
+saturated safely before indexing for nonpositive or invalid distances, while
+positive distances retain their normal lighting bucket. Both calculations and
+all rasterization remain PowerShell.
+
+On the corrected source, the 7,118-command E1M3 replay reaches `ReplayEnd` and
+matches all 24 saved checkpoints; the 6,348-command E1M4 replay also reaches
+`ReplayEnd` and matches all 22 checkpoints. Each retains the expected three
+session transitions. E1M2's 3,233-command host replay reaches `ReplayEnd` and
+matches all 13 checkpoints. These are fixed-input regressions, not human
+playthroughs or vanilla-demo compatibility claims. The original renderer
+failures, later successful replay receipts, map smoke, and source hashes are
+indexed in the [Episode 1 readiness evidence](../results/episode1-render-guard-evidence-20260927.json);
+large raw session reports remain under ignored `local/episode1-render-guard-raw-20260927/`.
+
+The final guard source passes the 36-map load/simulation/two-frame smoke. The
+renderer matches serial output across 320,000 pixels and five views with four
+process strips in Classic, Matrix/Katakana, and AnsiArt/Katakana; Classic also
+matches across sixteen strips. This confirms output consistency for these
+samples. It does not qualify every map's visual fidelity, live-device frame
+rate, or sustained 35-tic/60-display pacing.

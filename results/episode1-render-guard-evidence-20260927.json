@@ -1,0 +1,272 @@
+{
+  "Format": "pwshDoom.Episode1RenderGuardReadiness",
+  "CreatedUtc": "2026-09-27T06:54:17.9506071Z",
+  "Status": "ReadyForOneCompleteHumanEpisode1Playthrough",
+  "Build": {
+    "Branch": "codex/feasibility-study",
+    "Commit": "4ed33630dcb26bb6f04456448535edc01f9b4bd5",
+    "Sources": {
+      "SightBoundsHarness": "42E23F4F6AB802D43EF29FAB7FDB4CAEBE618890A8A7A5D0139B1ED36B927825",
+      "VisibilityCheck": "F18D547D25E42E907B05AB8CAB34E606094C0563863A5D8FCD23AA0291DA2C41",
+      "FastRenderer": "5E39811F733F118EA73F169F82CAF4D42992BF5351C88E7248710A5A4570F918"
+    }
+  },
+  "IWAD": {
+    "Sha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+    "Path": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Ultimate Doom\\base\\DOOM.WAD",
+    "EpisodeMaps": 36
+  },
+  "Music": {
+    "ValidationNote": "Track qualification and WAD identity are checked at audio startup; -Check verifies path only.",
+    "Sha256": "0E9C9542C75F4D5E2D7FC71E42FAFBB58F94321C3B8A49BA0C9AC5A93752EE58",
+    "Catalog": "C:\\projects\\pwshDoom\\local\\music-prepared-episode1.json"
+  },
+  "Arithmetic": {
+    "CheckSightBounds": {
+      "Report": {
+        "Path": "results/visibility-sight-bounds-final-20260927.json",
+        "Sha256": "CA73C2FC734CFBA631B1A5CF1C4F2A91EFC01DFC2A54B486D5CB31D14F902CFD"
+      },
+      "Cases": 50200,
+      "Seed": 20260927,
+      "BoundaryCases": 200,
+      "Passed": true,
+      "RandomCases": 50000,
+      "Mismatches": 0
+    },
+    "InterceptVector": {
+      "RandomCases": 50000,
+      "CaseCount": 50002,
+      "Report": {
+        "Path": "results/visibility-intercept-sight-bounds-20260927.json",
+        "Sha256": "EFF07026F5D961D4B1E2FEE32F358A3D7301D23A179D7B5E055F1D78F2E23012"
+      },
+      "Passed": true
+    }
+  },
+  "RetainedRouteDrivers": [
+    {
+      "Map": "E1M1",
+      "Commands": 1560,
+      "RawReport": {
+        "Sha256": "8F5A9C14FD4228BFA121FF3A808857BE8AFA8C88DD9D676AF271B1D44E98CA9D",
+        "Bytes": 96304,
+        "RawPath": "local/episode1-render-guard-raw-20260927/sight-bounds-e1m1-route-20260927.json",
+        "OriginalPath": "results/sight-bounds-e1m1-route-20260927.json"
+      },
+      "Passed": true
+    },
+    {
+      "Map": "E1M2",
+      "Commands": 3046,
+      "RawReport": {
+        "Sha256": "87E63DFE1C439D04546B669EE77A17BFCECC183583FD581F050E24A1292C99D4",
+        "Bytes": 224792,
+        "RawPath": "local/episode1-render-guard-raw-20260927/sight-bounds-e1m2-route-20260927.json",
+        "OriginalPath": "results/sight-bounds-e1m2-route-20260927.json"
+      },
+      "Passed": true
+    },
+    {
+      "RawReport": {
+        "Sha256": "8FA9276BBD41DA753153E5D2B1CCA4257DCD6F67F9D73D084C25171AE31F7F29",
+        "Bytes": 171794,
+        "RawPath": "local/episode1-render-guard-raw-20260927/sight-bounds-e1m3-route-20260927.json",
+        "OriginalPath": "results/sight-bounds-e1m3-route-20260927.json"
+      },
+      "Passed": false,
+      "Error": "Route stalled at waypoint 28 (-2071.99826049805,-1775.98887634277), target -2072,-1816.\nat <ScriptBlock>, C:\\projects\\pwshDoom\\scripts\\Test-CampaignRoute.ps1: line 105",
+      "Disposition": "This waypoint-driven execution stalled before its next waypoint without a crash. It did not expose a reproducible product defect; it is recorded and no route tuning was done.",
+      "LastPlayer": {
+        "SectorSpecial": 0,
+        "Sector": 168,
+        "LastAttacker": "Shotguy",
+        "X": -2071.9983520507812,
+        "Z": 176.0,
+        "Health": 51,
+        "Y": -1775.9888763427734,
+        "Floor": 176.0,
+        "Armor": 101
+      },
+      "Commands": 2293,
+      "Map": "E1M3",
+      "Iterations": 2320
+    },
+    {
+      "Map": "E1M4",
+      "Commands": 4726,
+      "RawReport": {
+        "Sha256": "D25134DEEF10D9BA3D81586E5367716B5AC17F5BE3E02C017268FCB8C2F3E806",
+        "Bytes": 372585,
+        "RawPath": "local/episode1-render-guard-raw-20260927/sight-bounds-e1m4-route-20260927.json",
+        "OriginalPath": "results/sight-bounds-e1m4-route-20260927.json"
+      },
+      "Passed": true
+    }
+  ],
+  "FixedInputHostReplays": [
+    {
+      "Commands": 3233,
+      "Map": "E1M2",
+      "Checkpoints": 13,
+      "Transitions": 3,
+      "Passed": true,
+      "Exit": "ReplayEnd",
+      "RawReport": {
+        "Sha256": "5A74CB010ADB7C75C56A20C6494264FE620AB830D8F32115D11A012A1D41EB65",
+        "Bytes": 1085715,
+        "RawPath": "local/episode1-render-guard-raw-20260927/episode1-renderer-final-e1m2-replay-20260927.json",
+        "OriginalPath": "results/episode1-renderer-final-e1m2-replay-20260927.json"
+      }
+    },
+    {
+      "Commands": 7118,
+      "Map": "E1M3",
+      "Checkpoints": 24,
+      "Transitions": 3,
+      "Passed": true,
+      "Exit": "ReplayEnd",
+      "RawReport": {
+        "Sha256": "1277A0750E82D4AABEAF6D264A3E1E10DD1F1F91DF18EA4EC737E19C13C6D503",
+        "Bytes": 2428692,
+        "RawPath": "local/episode1-render-guard-raw-20260927/episode1-renderer-guard-e1m3-replay-20260927.json",
+        "OriginalPath": "results/episode1-renderer-guard-e1m3-replay-20260927.json"
+      }
+    },
+    {
+      "Commands": 6348,
+      "Map": "E1M4",
+      "Checkpoints": 22,
+      "Transitions": 3,
+      "Passed": true,
+      "Exit": "ReplayEnd",
+      "RawReport": {
+        "Sha256": "F986F0617900303C0A92F931A6EFE9D1B6CA9A1DDFFD94C42A26FD676F4E78C0",
+        "Bytes": 2121510,
+        "RawPath": "local/episode1-render-guard-raw-20260927/episode1-renderer-guard-e1m4-replay-20260927.json",
+        "OriginalPath": "results/episode1-renderer-guard-e1m4-replay-20260927.json"
+      }
+    }
+  ],
+  "PriorReproducedRendererFailures": [
+    {
+      "Map": "E1M3",
+      "Failure": "PowerShell attempted to cast plane distance 3543363520 to Int32",
+      "RawReport": {
+        "Sha256": "477F838B6F834D8F7C2CE14A6E95C358FEA4D23FC1E95A8F290975AF89FDD687",
+        "Bytes": 10081844,
+        "RawPath": "local/episode1-render-guard-raw-20260927/sight-bounds-e1m3-fixed-replay-20260927.json",
+        "OriginalPath": "results/sight-bounds-e1m3-fixed-replay-20260927.json"
+      },
+      "Tic": 2680
+    },
+    {
+      "Map": "E1M4",
+      "Failure": "FastRenderer indexed wall-light table below its lower bound",
+      "RawReport": {
+        "Sha256": "6D27D0BA72460AF96F0E4FE05B41A966A79C5C52D8A73AFE7AC1091C1616A352",
+        "Bytes": 15468208,
+        "RawPath": "local/episode1-render-guard-raw-20260927/sight-bounds-e1m4-fixed-replay-20260927.json",
+        "OriginalPath": "results/sight-bounds-e1m4-fixed-replay-20260927.json"
+      },
+      "Tic": 3663
+    }
+  ],
+  "Campaign": {
+    "Smoke": {
+      "Report": {
+        "Path": "results/episode1-renderer-final-smoke-20260927.json",
+        "Sha256": "2A8B67E52DFB879DF7D96EEDC3F517BCE969ED2EBBC859B5C43ED425308C3CA5"
+      },
+      "Complete": true,
+      "Failures": 0,
+      "FullSerialFramesPerMap": 2,
+      "TicsPerMap": 35,
+      "Maps": 36,
+      "PixelsPerFrame": 64000
+    },
+    "SecretPath": "Actual intermission/state advance loads E1M9 and returns to E1M4 with secret history",
+    "Failures": 0,
+    "Report": {
+      "Path": "results/sight-bounds-campaign-transitions-20260927.json",
+      "Sha256": "87DA27B59F3FEB19363C4777A418939E9F0BA98A462C692BC5D205AC937F99D8"
+    },
+    "TransitionChecks": 69
+  },
+  "RendererPartitions": {
+    "Meaning": "Exact serial/worker pixel equality across five headings; four workers for all styles and sixteen workers for Classic.",
+    "Reports": [
+      {
+        "Report": {
+          "Path": "results/episode1-renderer-final-partitions-classic-20260927.json",
+          "Sha256": "4EF18AE2DBE89DF2FA2465EF4586C0AF38DADC971397BC6263CF80A3741CB3F5"
+        },
+        "DifferenceCount": 0.0,
+        "Views": 5,
+        "Workers": 4,
+        "Style": "Classic",
+        "ComparedPixelsPerView": 64000
+      },
+      {
+        "Report": {
+          "Path": "results/episode1-renderer-final-partitions-matrix-20260927.json",
+          "Sha256": "84645FEE1EBB9CE0CB73FDB9D3E0C83D8CC5E6A9CD0396E675680687865CF0B9"
+        },
+        "DifferenceCount": 0.0,
+        "Views": 5,
+        "Workers": 4,
+        "Style": "Matrix",
+        "ComparedPixelsPerView": 64000
+      },
+      {
+        "Report": {
+          "Path": "results/episode1-renderer-final-partitions-ansiart-20260927.json",
+          "Sha256": "F1FC74B0A99B6C8B84231025D1087C30D44607350C9C46C1A80AC2E48EC34BD8"
+        },
+        "DifferenceCount": 0.0,
+        "Views": 5,
+        "Workers": 4,
+        "Style": "AnsiArt",
+        "ComparedPixelsPerView": 64000
+      },
+      {
+        "Report": {
+          "Path": "results/episode1-renderer-final-partitions-classic-16-20260927.json",
+          "Sha256": "0E622574E6AE1CB56E036E26E8A8C3D1F59664BCE2B76C13BB927B4B4D6B42BA"
+        },
+        "DifferenceCount": 0.0,
+        "Views": 5,
+        "Workers": 16,
+        "Style": "Classic",
+        "ComparedPixelsPerView": 64000
+      }
+    ]
+  },
+  "SimulationProfile": {
+    "Path": "results/simulation-stages-sight-bounds-summary-20260927.json",
+    "Sha256": "8CD2631DB15001D752EEB45AD9D78649ACB92B5FD371856B34B35FAD35BA6238"
+  },
+  "LauncherPreflight": {
+    "PowerShell": "7.6.5",
+    "EpisodeMaps": 36,
+    "Ready": true,
+    "Report": {
+      "Path": "results/episode1-playtest-render-guard-preflight-20260927.json",
+      "Sha256": "6368203832D0A546FB92A560E266C988440A2A74881245FE03725A28A10F6CC6"
+    },
+    "WindowsTerminal": "C:\\Users\\jason\\AppData\\Local\\Microsoft\\WindowsApps\\wt.exe"
+  },
+  "RawReportIndex": {
+    "TotalBytes": 51482267.0,
+    "Reports": 23,
+    "Sha256": "172887527B32EEDD825315A798FA4C74A981A28B62BFB10F8A85D3AC3D7CB082",
+    "Path": "local/episode1-render-guard-raw-20260927/raw-report-index.json"
+  },
+  "KnownLimits": [
+    "Jason has not yet completed the requested human playthrough.",
+    "The automated smoke loads and renders maps; it is not route-completion evidence.",
+    "Whole-campaign audio continuity, audible review, and physical keyboard play remain unverified.",
+    "Renderer fidelity remains an approximation; 35 simulation tics/sec and 60 displayed updates/sec are not certified.",
+    "The launcher preflight checks the music catalog path; its contents are checked at audio startup."
+  ]
+}

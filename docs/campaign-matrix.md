@@ -30,21 +30,29 @@ output in the three styles is recorded separately in the
 This is load/render smoke, not route completion.
 
 The current Episode 1 human-playthrough handoff is pinned to source build
-`f5f404afee415c1deec817e6adf6372bc3f3a009`; its [readiness receipt](../results/episode1-playtest-intercept-candidate-readiness-20260927.json)
-links the fresh launcher check, 36-map smoke, and the four retained route
-regressions. The current source passes 69 campaign transition checks, including
-actual E1M3 intermission advancement to E1M9, its return to E1M4, fresh world
-creation, and retained secret history. It also passes 97 boss checks, 125
-menu/session checks with 46 screen fixtures, six synthetic console-input checks,
-ten synthetic menu-input checks, and the 1,747-command E1M1-to-E1M2 session
-route. Prior actual-device audio checks remain separately pinned and include
-one queue-timing stall. These results prepare the human run; only E1M1–E1M4
-have ordinary-input completion regressions, and no automated test claims the
-remaining map routes or finale as played.
+`4ed33630dcb26bb6f04456448535edc01f9b4bd5`; its [readiness receipt](../results/episode1-render-guard-evidence-20260927.json)
+links the fresh launcher check, 36-map smoke, four retained route regressions,
+and full fixed-input E1M2–E1M4 host replays. A renderer overflow discovered
+during replay is fixed, and all recorded checkpoints match on the corrected
+candidate. The current source also passes 69 campaign transition checks,
+including actual E1M3 intermission advancement to E1M9, its return to E1M4,
+fresh world creation, and retained secret history. Existing 97 boss checks,
+125 menu/session checks with 46 screen fixtures, six synthetic console-input
+checks, ten synthetic menu-input checks, and the 1,747-command E1M1-to-E1M2
+session route remain source-pinned in the prior receipt. Prior actual-device
+audio checks remain separately pinned and include one queue-timing stall.
+These results prepare one human run; no automated test claims the remaining
+map routes or finale as played.
 
-The prior `e358741` renderer receipt and `76b18ac` campaign/session receipt
-remain available with their original source pins. The latest route and smoke
-reports for `f5f404a` are listed in the current readiness receipt above.
+The prior `e358741` renderer, `76b18ac` campaign/session, and `f5f404a`
+Episode 1 receipts remain available with their original source pins. Detailed
+renderer failures and corrected route-replay reports are linked from the
+current readiness receipt above.
+
+An additional E1M3 waypoint-driver attempt stopped short of its next point
+without a crash or reproducible engine defect; route tuning was not continued.
+The retained 7,118-command E1M3 fixed-input replay reaches E1M4 with all 24
+checkpoints matching, and is the regression evidence for that map.
 
 E1M1 has an [input-only completion report](../results/e1m1-route-lineflags.json) with 1560 commands. That route ends at intermission; it does not qualify next-level presentation or a whole episode. E1M2 now has a separate [normal-route qualification](campaign-e1m2.md), including recorded continuation into E1M3. The remaining maps still need completion evidence. Source-version matching is checked separately from input/state equivalence.
 

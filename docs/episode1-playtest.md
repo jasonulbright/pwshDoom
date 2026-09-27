@@ -22,29 +22,28 @@ E1M8 exit and intermission.
 
 ## Build and launch
 
-Run exact source build commit `f5f404afee415c1deec817e6adf6372bc3f3a009`.
+Run exact source build commit `4ed33630dcb26bb6f04456448535edc01f9b4bd5`.
 If your checkout is at a later branch tip, enter the pinned build from the
 repository root before launching:
 
 ```powershell
-git switch --detach f5f404afee415c1deec817e6adf6372bc3f3a009
+git switch --detach 4ed33630dcb26bb6f04456448535edc01f9b4bd5
 ```
 
 After preserving the input and session reports under `local/`, return to the
 development branch with `git switch codex/feasibility-study`. The pinned build
-adds a PowerShell integer-arithmetic fast path for sight-intercept calculations
-to the previously tested renderer and session build. Its results exactly match
-the prior fixed-point operators across 50,000 deterministic raw-value cases.
-The current source also passes the existing E1M1–E1M4 route regressions and a
-fresh focused E1M3 → E1M9 → E1M4 intermission/world-load test. The
-[current readiness receipt](../results/episode1-playtest-intercept-candidate-readiness-20260927.json)
-pins this build and its source hashes, records the fresh IWAD/catalog/launcher
-preflight, and links current route, campaign, session, input, and map-smoke
-results. Earlier [campaign/session](../results/episode1-playtest-current-readiness-20260927.json),
+keeps gameplay, renderer, and audio algorithms in PowerShell. It includes the
+fixed-point sight-intercept and sight-bound integer paths, plus renderer fixes
+for plane-distance wrap and out-of-range wall-light lookup. The new
+[readiness evidence](../results/episode1-render-guard-evidence-20260927.json)
+pins the build and source hashes, records the IWAD/catalog/launcher preflight,
+links all four retained route regressions, complete fixed-input replays of
+E1M2–E1M4, the 69 campaign transition checks, 36-map smoke, and three-style
+worker output checks. Earlier [campaign/session](../results/episode1-playtest-current-readiness-20260927.json),
 [renderer](../results/episode1-playtest-readiness.json), and
-[renderer-current-tip](../results/episode1-playtest-current-tip-readiness-20260927.json)
-receipts retain their own source pins. No automated full-campaign route is
-treated as human playthrough evidence.
+[prior E1 handoff](../results/episode1-playtest-intercept-candidate-readiness-20260927.json)
+receipts keep their original source pins. No automated route is treated as
+human playthrough evidence.
 Run from the repository root in 64-bit PowerShell 7.4 or later on Windows,
 with Windows Terminal, the legally obtained Ultimate Doom `DOOM.WAD`, and the
 prepared local music catalog `local/music-prepared-episode1.json`. The tested Steam IWAD is
@@ -128,16 +127,21 @@ playthrough.
 
 ## Readiness evidence
 
-The current playtest build is pinned to `f5f404afee415c1deec817e6adf6372bc3f3a009`.
-Its [machine-readable readiness receipt](../results/episode1-playtest-intercept-candidate-readiness-20260927.json)
-links the current source hashes and passing checks: 50,000 fixed-point parity
-cases, all four retained route regressions, 69 campaign/session transition
-checks including real E1M9 and E1M4 world loads, the 36-map smoke, 97 boss
-checks, 125 menu checks, synthetic console/menu input, the 1,747-command
-E1M1-to-E1M2 session, and a fresh launcher preflight. The smoke loads maps and
-renders them; it is not map-completion evidence. Synthetic key records do not
-certify physical keyboard play. The [campaign matrix](campaign-matrix.md)
-records the distinction between fixture, route, smoke, and human evidence.
+The current playtest build is pinned to `4ed33630dcb26bb6f04456448535edc01f9b4bd5`.
+Its [machine-readable readiness receipt](../results/episode1-render-guard-evidence-20260927.json)
+records 50,200 sight-bound parity cases plus 50,000 intercept parity cases,
+all four retained E1M1–E1M4 route regressions, fixed-input E1M2–E1M4 replays,
+69 campaign transition checks including real E1M9 and E1M4 world loads, the
+36-map smoke, renderer worker comparisons in all three styles, and a fresh
+launcher preflight. The smoke loads maps and renders them; it is not
+map-completion evidence. Synthetic key records do not certify physical
+keyboard play. The [campaign matrix](campaign-matrix.md) records the distinction
+between fixture, route, smoke, and human evidence.
+
+One extra waypoint-driver execution on E1M3 stopped before reaching its next
+waypoint without a crash; no repeatable engine defect was exposed, and route
+tuning was stopped. Its outcome is retained in the evidence index. The saved
+7,118-command E1M3 replay completes with all 24 recorded checkpoints matching.
 
 Earlier source-pinned results remain useful context. The visibility-fix
 regression index records the original E1M1–E1M4 route runs and a nine-map
@@ -168,10 +172,10 @@ The renderer-candidate IWAD/music-catalog preflight is recorded in
 [`episode1-launch-preflight-sky-sampling.json`](../results/episode1-launch-preflight-sky-sampling.json).
 That renderer build's `Play.ps1 -Check` result and exact hashes are in the
 [current-tip readiness receipt](../results/episode1-playtest-current-tip-readiness-20260927.json).
-The new f5f404a source pin has its own fresh launcher preflight in the current
-readiness receipt above; both checks detect PowerShell 7.6.5, Windows Terminal,
-the 36-map IWAD and catalog path. Audio contents are validated separately by
-the worker receipts.
+The current `4ed3363` source pin has its own fresh launcher preflight in the
+readiness receipt above; it detects PowerShell 7.6.5, Windows Terminal, the
+36-map IWAD, and the prepared catalog path. Audio contents are validated
+separately by the worker receipts.
 The latest fixed-point floor/ceiling mapping brings the six-view scene-index
 mismatch against the adopted PowerShell reference from 101,971 to 37,798
 (62.9% fewer than the original numeric baseline); 7.38–14.19% still differ.

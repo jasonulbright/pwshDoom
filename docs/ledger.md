@@ -2062,3 +2062,52 @@ trace sample incompatible. I stopped adapting that report and ran the existing
 E1M1 route driver directly; it passes as recorded above. Intermediate failed
 reports remain under ignored `local/episode1-candidate-intermediate-20260927/`.
 They are test-input/schema outcomes, not engine failures.
+
+## 2026-09-27 — Fix renderer failures in retained E1M3/E1M4 replays
+
+The refreshed candidate's fixed-input host replay exposed two real renderer
+exceptions. E1M3 stopped at tic 2,680 when a plane-distance product of
+`3,543,363,520` was converted directly to signed Int32. E1M4 stopped at tic
+3,663 because the wall-light table lookup produced a negative index. The
+PowerShell plane sampler now applies Doom's signed modulo-2^32 wrap. Wall-light
+bucket selection now bounds the value before integer conversion for
+nonpositive or invalid distances, and preserves the ordinary positive-distance
+lookup. An intermediate patch called the engine's `[Fixed]` type from a render
+worker that does not load that type; the worker-start error was corrected to a
+local PowerShell wrap implementation before the successful route replays.
+
+On source commit `4ed33630dcb26bb6f04456448535edc01f9b4bd5`, the stored E1M2
+replay reaches `ReplayEnd` after 3,233 commands with all 13 checkpoints
+matching; E1M3 completes 7,118 commands and all 24 checkpoints; E1M4 completes
+6,348 commands and all 22 checkpoints. Each replay retains three session
+transitions. The current 36-map smoke passes all maps with 35 idle tics and two
+full serial frames per map. `Test-CampaignTransitions.ps1` passes 69 checks,
+including real E1M3-to-E1M9 and E1M9-to-E1M4 world changes. Five-view renderer
+parity is exact across 320,000 pixels with four workers in Classic,
+Matrix/Katakana, and AnsiArt/Katakana; Classic also matches with sixteen
+workers.
+
+The production `CheckSight` bound setup now uses raw PowerShell integer math.
+Its dedicated harness compares all three outputs with the prior `Fixed`
+operators over 50,000 seeded raw-Int32 vectors and 200 boundary combinations:
+50,200 calls, zero mismatches. One unpaired, instrumented 1,200-command profile
+has lower means than the earlier intercept-only run, but does not establish a
+repeatable performance improvement or qualify the 35-tic/60-display target.
+
+The existing route drivers pass E1M1 (1,560 commands), E1M2 (3,046), and E1M4
+(4,726). This pass's E1M3 waypoint-driver execution stopped at 2,293 commands
+at waypoint 28, short of its next point, without a crash; no product defect was
+reproduced and route tuning stopped. The retained 7,118-command E1M3 input
+replays successfully as noted above. The failure and exact state are recorded,
+not counted as route completion.
+
+The [source-pinned readiness evidence](../results/episode1-render-guard-evidence-20260927.json)
+prepares Jason's one complete HMP Episode 1 human playthrough; the [handoff](episode1-playtest.md)
+pins the exact source, IWAD, music catalog, controls, route through E1M9 and
+E1M4, and E1 finale. The [numeric visibility note](numeric-visibility.md) and
+[renderer fidelity note](rendering-fidelity.md) preserve implementation and
+limits. Compact reports remain tracked; 23 full raw route, replay, and
+intermediate renderer reports totaling 51,482,267 bytes remain under ignored
+`local/episode1-render-guard-raw-20260927/`, indexed by SHA-256 in the receipt.
+Jason's human run, continuous campaign audio, audible review, physical keyboard
+play, original-executable image parity, and sustained 35/60 pacing remain open.

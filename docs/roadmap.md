@@ -36,18 +36,22 @@ route ended in player death and did not expose a reproducible product defect;
 it is documented and route automation is stopped for this milestone. The
 broader release acceptance gates below remain intact.
 
-The refreshed Episode 1 candidate is pinned to
-`f5f404afee415c1deec817e6adf6372bc3f3a009`. A PowerShell integer fast path in
-`VisibilityCheck.InterceptVector` matches the prior fixed-point implementation
-in 50,000 deterministic raw-value cases. All four retained route regressions,
-the full 36-map load/simulation/render smoke, 97 boss checks, 125 menu/session
-checks, synthetic console/menu input checks, and a 1,747-command E1M1→E1M2
-session pass. The transition test now advances the actual intermission/world
-state from E1M3 to E1M9 and back to E1M4, verifying the fresh worlds and secret
-history; exit activation remains a focused fixture, not a map route. The fresh
-[readiness receipt](../results/episode1-playtest-intercept-candidate-readiness-20260927.json)
-prepares the single human playthrough. It does not certify the remaining routes,
-continuous audio, physical keyboard play, or the 35-tic/60-display target.
+The preceding Episode 1 candidate was pinned to `f5f404a`. Replaying the
+retained E1M3 and E1M4 host inputs against the current working candidate exposed
+two renderer failures: a plane-distance cast beyond signed Int32 and an
+out-of-range wall-light index. The PowerShell renderer now wraps the plane
+distance as fixed-point arithmetic requires and bounds light lookup before
+indexing. Full E1M2–E1M4 fixed-input host replays on source build
+`4ed33630dcb26bb6f04456448535edc01f9b4bd5` reach `ReplayEnd` with all saved
+checkpoints matching. The CheckSight integer path also matches 50,200 prior
+Fixed-expression cases; its short, unpaired profile is recorded without a
+performance claim. The corrected candidate passes the 36-map smoke, 69
+campaign transition checks including real E1M9 and E1M4 world loads, and
+serial/worker output checks in Classic, Matrix/Katakana, and AnsiArt/Katakana.
+The [current readiness evidence](../results/episode1-render-guard-evidence-20260927.json)
+prepares one complete human Episode 1 playthrough. It does not certify the
+remaining map routes, continuous campaign audio, physical keyboard play,
+visual parity, or the 35-tic/60-display target.
 
 After the integer-column and integer-row wall-sampling changes, the nine-map
 smoke and focused transition, boss, menu/session, and synthetic input checks
