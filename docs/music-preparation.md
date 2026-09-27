@@ -2,6 +2,17 @@
 
 September 26 current status: all eleven tracks required for an Episode 1 playthrough are qualified and published in the local `local/music-prepared-episode1.json` catalog (SHA-256 `0E9C9542C75F4D5E2D7FC71E42FAFBB58F94321C3B8A49BA0C9AC5A93752EE58`). It covers E1M1–E1M9, the intermission and finale. A 15-check simulation/audio-worker test consumed 97,020 music frames across new-game, save and load operations and closed the device cleanly; a post-change rerun is recorded in [`save-worker-music-one-shot-dintro-20260926.json`](../results/save-worker-music-one-shot-dintro-20260926.json). The catalog and PCM loop payloads remain local; commercial WAD and soundfont assets are not in the repository. This completes the Episode 1 looping-catalog preparation gate, not the broader audio M3 gate: continuous campaign playback, presentation pacing, the remaining finite scores, and acoustic review remain open.
 
+The installed Ultimate Doom inventory contains 27 distinct map scores; the
+Episode 1 catalog covers 9, leaving 18 unique scores across Episodes 2 and 3.
+Three map-lump pairs are byte-identical, and only D_INTRO has a finite-score
+qualification; D_INTROA and D_BUNNY remain open. An initial offline Episode 2
+batch passed D_E2M1's opening check but was deferred during its first
+three-period loop render (902.43/1,829.57 simulated audio seconds after about
+16 minutes). No new track or catalog qualified. Its ignored attempt directory
+is preserved, but resumption restarts that track. See the
+[source-pinned IWAD inventory](../results/ultimate-doom-music-inventory-20260927.json)
+and the [ledger entry](ledger.md#2026-09-27--inventory-full-ultimate-doom-music-coverage).
+
 `scripts/Prepare-DoomMusic.ps1` replaces manual opening-render, continuous-loop qualification and catalog editing. Gameplay and all synthesis/mixing algorithms stay PowerShell. This command prepares exactly the requested dry looping tracks from a user-supplied IWAD and soundfont; it does not provide assets or certify the full soundtrack. Finite tracks use the separate [`Qualify-MusicOneShot.ps1`](../scripts/Qualify-MusicOneShot.ps1) path and [`MusicOneShotReader.ps1`](../src/MusicOneShotReader.ps1) reader; only D_INTRO has passed that qualification so far.
 
 From PowerShell 7.6.5 in the repository root, with the existing local assets:

@@ -2187,9 +2187,13 @@ results, not synthesis, playback, acoustic, or campaign evidence. The full
 [portable inventory](../results/ultimate-doom-music-inventory-20260927.json)
 pins the IWAD and source hashes.
 
-I started the resumable Episode 2 looping-score preparation with all nine E2
-map tracks and the qualified Episode 1 catalog as its base. Its payloads,
-catalog, and intermediate reports are under ignored `local/`; no track is
-counted as qualified until its loop, opening reference, reader and catalog
-checks finish. The Episode 1 human playthrough remains the active user-test
-milestone while this independent audio work proceeds.
+An offline Episode 2 batch was attempted for all nine E2 map tracks, using the
+qualified Episode 1 catalog as its base. D_E2M1's independent opening check
+passed, but loop synthesis was stopped at 902.43 of 1,829.57 audio seconds in
+its three-period recurrence run, after about 16 minutes of wall time. No track
+qualification or combined catalog was published; the other eight tracks were
+not started. The incomplete attempt remains under ignored `local/` and must be
+restarted at the D_E2M1 track boundary. This leaves the Episode 1 catalog
+unchanged. Defer the full batch until its several-hour cost is better aligned
+with the active release work; keep the 18 uncovered map scores and finite
+score gaps visible in the audio roadmap.
