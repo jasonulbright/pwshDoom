@@ -21,6 +21,7 @@
 ### Qualification
 
 - All 36 Ultimate Doom maps pass load/simulation/render smoke checks. Ordinary-input normal exits are independently verified for E1M1–E1M4; the complete E1 human playthrough is pending.
+- The retained HMP E1M1 route driver passes again on current source in 1,560 commands. A separate maximized, no-audio PresentMon replay measured 47.73 display transitions/sec and 34.977 active tics/sec, but its older fixed input ended at `ReplayEnd` on E1M1; this is timing evidence, not route completion or a 35/60 FPS qualification. Repeated paired full-host trials remain open.
 - Eleven Episode 1 loops are prepared locally. Six Episode 2 map-track names have loop qualifications; D_E2M1–D_E2M4 and D_E2M6 add five byte-distinct payloads, while D_E2M5 is byte-identical to D_E1M7. Short host-selection checks cover D_E2M4–D_E2M6. Each recorded one queue-starvation observation after its final packet, with no resume; these stop-boundary metrics are not evidence of mid-run audible interruptions. Full-campaign playback, listener review and sustained queue timing remain open.
 
 ## 0.1.0-preview.2

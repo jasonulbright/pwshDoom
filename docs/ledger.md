@@ -2827,3 +2827,15 @@ artifact hashes are in
 with `-AllowReplayEnd`; its default still requires `LevelComplete`. This keeps
 route completion as the normal acceptance condition while allowing finite
 replay workloads to be analyzed honestly. No game or rendering code changed.
+
+## 2026-09-27 — Correct the release and PresentMon status summary
+
+The roadmap's M6 table still said PresentMon presentation was unverified, a
+statement superseded by the installed service capture and the current-source
+sample above. Updated it to preserve the initial standalone ETW denial as
+history while stating the actual remaining performance limits. The changelog's
+Unreleased qualification now includes the current E1M1 route regression and
+the separate `ReplayEnd` timing sample. The README continues to identify
+`0.1.0-preview.2` as the latest packaged release; the `.3` ZIP is a local
+candidate from `eff3f14`, so release metadata should change only when a final
+candidate is rebuilt and verified.
