@@ -22,12 +22,12 @@ E1M8 exit and intermission.
 
 ## Build and launch
 
-Run exact source build commit `0978112ef7b365f66b93770e1d98978e55b6d506`.
+Run exact source build commit `398022a8caa3b3e31d2a0d1c08642ecf6be7c1d0`.
 If your checkout is at a later branch tip, enter the pinned build from the
 repository root before launching:
 
 ```powershell
-git switch --detach 0978112ef7b365f66b93770e1d98978e55b6d506
+git switch --detach 398022a8caa3b3e31d2a0d1c08642ecf6be7c1d0
 ```
 
 After preserving the input and session reports under `local/`, return to the
@@ -37,10 +37,19 @@ fixed-point sight-intercept and sight-bound integer paths, renderer guards for
 plane distance and wall-light lookup, and the actor-depth corrections described
 in the [fidelity record](rendering-fidelity.md#keep-background-planes-out-of-actor-depth-2026-09-27)
 and [missing-texture wall-depth entry](rendering-fidelity.md#preserve-depth-for-untextured-wall-bands-2026-09-27).
-The current [candidate receipt](../results/episode1-human-playthrough-candidate-20260927-r2.json)
-pins the build, IWAD, music catalog, launcher preflight, 36-map smoke, secret
-path/finale transition checks, E1M8 boss-trigger fixtures, retained E1M1-to-E1M2
-session regression, 20 wall-order checks, and all three renderer styles. The
+The gameplay/renderer [candidate receipt](../results/episode1-human-playthrough-candidate-20260927-r2.json)
+is pinned to the earlier build `0978112ef7b365f66b93770e1d98978e55b6d506`;
+it records the IWAD, music catalog, launcher preflight, 36-map smoke,
+secret-path/finale transition checks, E1M8 boss-trigger fixtures, retained
+E1M1-to-E1M2 session regression, 20 wall-order checks, and all three renderer
+styles. Your first launch exposed an exact-patch version check: the catalog
+was prepared on PowerShell 7.6.5 but the user launcher runs 7.6.6. The loop
+and finite finale readers now accept the same major/minor line while retaining
+source and payload verification. The simulation startup wait is 60 seconds
+for cold starts. The [runtime receipt](../results/episode1-startup-runtime-compat-20260927.json)
+records a successful two-second headless E1M1 run under 7.6.6 with all eleven
+catalog reports open and clean audio-device shutdown. It is startup evidence,
+not campaign completion or an audible-quality check. The
 retained E1M1–E1M4 routes and fixed-input E1M2–E1M4 replays remain linked in
 the earlier [renderer-guard receipt](../results/episode1-render-guard-evidence-20260927.json),
 which is pinned to its original source commit. Earlier
@@ -56,6 +65,9 @@ prepared local music catalog `local/music-prepared-episode1.json`. The tested St
 SHA-256 `6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F`.
 The catalog SHA-256 is `0E9C9542C75F4D5E2D7FC71E42FAFBB58F94321C3B8A49BA0C9AC5A93752EE58`;
 it and its prepared audio files remain local and are not included in Git.
+The catalog audio was prepared on PowerShell 7.6.5 and verified on the
+installed 7.6.6 runtime. Matching major/minor patch updates are accepted;
+reports from other major/minor lines need fresh qualification.
 Commercial game files are not included.
 
 ```powershell
@@ -63,9 +75,12 @@ pwsh -NoProfile -File .\Start-Doom.ps1 `
   -Wad 'C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\base\DOOM.WAD' `
   -Episode 1 -Map 1 -Skill 3 -Style Classic -Sound `
   -MusicCatalog .\local\music-prepared-episode1.json `
-  -RecordInput .\local\episode1-human-playthrough.json `
-  -Report .\local\episode1-human-session.json -Maximized -FontSize 5
+  -RecordInput .\local\episode1-human-playthrough-r2.json `
+  -Report .\local\episode1-human-session-r2.json -Maximized -FontSize 5
 ```
+
+On first startup, give the simulation up to 60 seconds to initialize the game
+and music catalog before expecting the terminal viewport.
 
 The build uses sixteen renderer processes by default. Leave that setting in
 place for this handoff. The current disposable worker-asset format is v6; the
@@ -109,7 +124,9 @@ the required grid. If the game still reports too few rows, press Ctrl+- or
 enlarge the window. Larger viewports center the game image, so blank space
 around it is expected. The 11-track Episode 1 catalog is
 enabled. Its actual simulation/audio worker passed 15 save/load/new-game checks,
-including 97,020 music frames and clean device shutdown. The current mixer also
+including 97,020 music frames and clean device shutdown. The fixed build also
+passes the loop-reader, playback and full-start PowerShell 7.6.6 checks in the
+runtime receipt above. The current mixer also
 passes an actual waveOut worker check with submitted PCM matching an independent
 schedule and clean device shutdown; that finite run recorded one queue-timing
 stall. Whole-campaign music continuity, 35-tic/60-display pacing, and audible
@@ -133,11 +150,13 @@ playthrough.
 ## Readiness evidence
 
 The current playtest build is pinned to
-`0978112ef7b365f66b93770e1d98978e55b6d506`. Its
-[candidate receipt](../results/episode1-human-playthrough-candidate-20260927-r2.json)
+`398022a8caa3b3e31d2a0d1c08642ecf6be7c1d0`. The earlier
+[gameplay/renderer candidate receipt](../results/episode1-human-playthrough-candidate-20260927-r2.json)
 records the 36-map smoke, 69 transition checks, E1M8 boss-trigger fixtures,
 retained 1,747-command E1M1 session progression into E1M2, 20 focused wall
-checks, and exact serial/worker output across all three styles. The separate
+checks, and exact serial/worker output across all three styles at its own
+`0978112` source pin. The fixed build's PowerShell 7.6.6 reader, playback and
+full-start checks are in the runtime receipt above. The separate
 tic-105 actor-visibility difference remains open. The earlier
 [renderer-guard receipt](../results/episode1-render-guard-evidence-20260927.json)
 retains 50,200 sight-bound parity cases, 50,000 intercept parity cases, all

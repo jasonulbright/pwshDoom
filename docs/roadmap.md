@@ -63,16 +63,19 @@ prepared one complete human Episode 1 playthrough on that source. It does not ce
 remaining map routes, continuous campaign audio, physical keyboard play,
 visual parity, or the 35-tic/60-display target.
 
-The current playtest source is `0978112ef7b365f66b93770e1d98978e55b6d506`.
+The gameplay/renderer candidate receipt is pinned to
+`0978112ef7b365f66b93770e1d98978e55b6d506`.
 Its [candidate receipt](../results/episode1-human-playthrough-candidate-20260927-r2.json)
 records a fresh 36-map smoke, 69 Episode 1/secret/finale transition checks, 97
 boss progression checks, retained 1,747-command E1M1-to-E1M2 session evidence,
 menu and session-screen checks, and serial/worker equality across Classic,
-Matrix/Katakana, and AnsiArt/Katakana. The focused wall-order fixture now passes
-20 checks, including actor occlusion behind an untextured solid wall. The
-known 17-pixel actor-visibility difference at tic 105 and broader scene parity
-remain open. The build is ready for Jason's single complete HMP Episode 1
-playthrough; the route result is pending and must not be replaced by
+Matrix/Katakana, and AnsiArt/Katakana. The fixed playtest build is
+`398022a8caa3b3e31d2a0d1c08642ecf6be7c1d0`; its [7.6.6 full-start receipt](../results/episode1-startup-runtime-compat-20260927.json)
+and music-reader checks cover the later runtime failure. The focused wall-order
+fixture passes 20 checks, including actor occlusion behind an untextured solid
+wall. The known 17-pixel actor-visibility difference at tic 105 and broader
+scene parity remain open. The build is ready for Jason's single complete HMP
+Episode 1 playthrough; the route result is pending and must not be replaced by
 map-by-map requests or automated-route tuning.
 
 After the integer-column and integer-row wall-sampling changes, the nine-map
