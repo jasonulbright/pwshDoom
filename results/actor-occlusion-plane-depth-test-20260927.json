@@ -1,0 +1,1378 @@
+{
+  "FinishedUtc": "2026-09-27T07:21:05.6643424Z",
+  "Episode": 1,
+  "Map": 1,
+  "Skill": 3,
+  "Tics": 70,
+  "SampleInterval": 35,
+  "InputReplay": "C:\\projects\\pwshDoom\\results\\e1m1-route-lineflags.json",
+  "InputReplaySha256": "41CF35EDF94C1CABE8C96A1CEEFBCFBF41F20DF24093569B65A1A4C9C56C017B",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "BundleSha256": "017B451FDFA32F39C5D7FB8267EDE7F89A01CD0CF4A4882B6F2AEEA823800619",
+  "Sources": [
+    {
+      "Path": "scripts/Compare-ActorOcclusion.ps1",
+      "Sha256": "BF95ED1E9622ADC96B1F3313E229BE62D8AEE13437A26A1FE98950A1619BE1CC"
+    },
+    {
+      "Path": "src/FastRenderer.ps1",
+      "Sha256": "5E39811F733F118EA73F169F82CAF4D42992BF5351C88E7248710A5A4570F918"
+    },
+    {
+      "Path": "src/GameHost.ps1",
+      "Sha256": "3732C6A81C74F43451CB2A2E4ED342EBE303FC3EEB558B64C3658F78EAACB940"
+    },
+    {
+      "Path": "src/RenderLighting.ps1",
+      "Sha256": "E9C47D9E4005509206EC13DA08267F95DB3AF7A1E86F14A743F1F27DE145BF9F"
+    },
+    {
+      "Path": "src/RenderFuzz.ps1",
+      "Sha256": "E8A776EF59F8A11CBB1FC1446DD629BDBF53D9CCFEA7E08D4B886094E100C5C2"
+    }
+  ],
+  "SourcesChangedDuringRun": [],
+  "SameStateIsolationControlsPassed": true,
+  "Samples": [
+    {
+      "LevelTic": 35,
+      "ActorCount": 91,
+      "ReferenceVisibleWorldSprites": 5,
+      "ReferenceActorAffectedPixels": 1142,
+      "CandidateActorAffectedPixels": 898,
+      "ActorMaskIntersection": 895,
+      "ActorMaskUnion": 1145,
+      "ActorMaskIoU": 0.7816593886462883,
+      "CandidateOnlyActorPixels": 3,
+      "ReferenceOnlyActorPixels": 247,
+      "FullSceneMismatchPixels": 8451,
+      "BackgroundMismatchPixels": 8207,
+      "SharedActorRegionMismatchPixels": 0,
+      "CandidateOnlyRegionMismatchPixels": 0,
+      "ReferenceOnlyRegionMismatchPixels": 244,
+      "IndividuallyIsolatedSprites": [
+        {
+          "CandidateVisiblePixels": 780,
+          "ReferenceOnlyFullFrameMismatchPixels": 184,
+          "CandidateOnlyPixels": 0,
+          "Type": "Misc68",
+          "WorldXData": 67108864,
+          "MaskIntersection": 780,
+          "ReferenceOnlyPlaneDepthPixels": 184,
+          "Image": null,
+          "ReferenceOnlyDepthCloserPixels": 184,
+          "CandidateBounds": [
+            98,
+            119,
+            160,
+            137
+          ],
+          "WorldZData": -1048576,
+          "Patch": "PLAYN0",
+          "ReferenceX1": 161,
+          "ActualMismatchPixelsInActorUnion": 184,
+          "ReferenceVisiblePixels": 964,
+          "CandidateActorRecordIndex": 67,
+          "ReferenceOnlyDepthExamples": [
+            {
+              "Delta": -321.40459922326966,
+              "PlaneId": 56,
+              "SpriteDistance": 466.4069033004181,
+              "X": 103,
+              "Y": 138,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 145.00230407714844
+            },
+            {
+              "Delta": -321.40459922326966,
+              "PlaneId": 56,
+              "SpriteDistance": 466.4069033004181,
+              "X": 104,
+              "Y": 138,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 145.00230407714844
+            },
+            {
+              "Delta": -321.40459922326966,
+              "PlaneId": 56,
+              "SpriteDistance": 466.4069033004181,
+              "X": 105,
+              "Y": 138,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 145.00230407714844
+            },
+            {
+              "Delta": -321.40459922326966,
+              "PlaneId": 56,
+              "SpriteDistance": 466.4069033004181,
+              "X": 106,
+              "Y": 138,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 145.00230407714844
+            },
+            {
+              "Delta": -321.40459922326966,
+              "PlaneId": 56,
+              "SpriteDistance": 466.4069033004181,
+              "X": 107,
+              "Y": 138,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 145.00230407714844
+            },
+            {
+              "Delta": -321.40459922326966,
+              "PlaneId": 56,
+              "SpriteDistance": 466.4069033004181,
+              "X": 108,
+              "Y": 138,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 145.00230407714844
+            },
+            {
+              "Delta": -321.40459922326966,
+              "PlaneId": 56,
+              "SpriteDistance": 466.4069033004181,
+              "X": 109,
+              "Y": 138,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 145.00230407714844
+            },
+            {
+              "Delta": -321.40459922326966,
+              "PlaneId": 56,
+              "SpriteDistance": 466.4069033004181,
+              "X": 110,
+              "Y": 138,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 145.00230407714844
+            },
+            {
+              "Delta": -321.40459922326966,
+              "PlaneId": 56,
+              "SpriteDistance": 466.4069033004181,
+              "X": 111,
+              "Y": 138,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 145.00230407714844
+            },
+            {
+              "Delta": -321.40459922326966,
+              "PlaneId": 56,
+              "SpriteDistance": 466.4069033004181,
+              "X": 112,
+              "Y": 138,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 145.00230407714844
+            },
+            {
+              "Delta": -321.40459922326966,
+              "PlaneId": 56,
+              "SpriteDistance": 466.4069033004181,
+              "X": 113,
+              "Y": 138,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 145.00230407714844
+            },
+            {
+              "Delta": -321.40459922326966,
+              "PlaneId": 56,
+              "SpriteDistance": 466.4069033004181,
+              "X": 114,
+              "Y": 138,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 145.00230407714844
+            },
+            {
+              "Delta": -321.40459922326966,
+              "PlaneId": 56,
+              "SpriteDistance": 466.4069033004181,
+              "X": 115,
+              "Y": 138,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 145.00230407714844
+            },
+            {
+              "Delta": -321.40459922326966,
+              "PlaneId": 56,
+              "SpriteDistance": 466.4069033004181,
+              "X": 116,
+              "Y": 138,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 145.00230407714844
+            },
+            {
+              "Delta": -321.40459922326966,
+              "PlaneId": 56,
+              "SpriteDistance": 466.4069033004181,
+              "X": 117,
+              "Y": 138,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 145.00230407714844
+            },
+            {
+              "Delta": -321.40459922326966,
+              "PlaneId": 56,
+              "SpriteDistance": 466.4069033004181,
+              "X": 118,
+              "Y": 138,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 145.00230407714844
+            }
+          ],
+          "SharedMaskPaletteMismatches": 0,
+          "ReferenceBounds": [
+            98,
+            119,
+            160,
+            142
+          ],
+          "Sprite": 28,
+          "MaskIoU": 0.8091286307053942,
+          "WorldYData": -213909504,
+          "ReferenceOnlyNonPlaneDepthPixels": 0,
+          "MaskUnion": 964,
+          "ReferenceOnlyDepthFartherPixels": 0,
+          "ReferenceOnlyDepthTiedPixels": 0,
+          "ReferenceOnlyDepthInfinitePixels": 0,
+          "CandidateOnlyFullFrameMismatchPixels": 0,
+          "ReferenceOnlyBounds": [
+            103,
+            138,
+            159,
+            142
+          ],
+          "ReferenceScaleData": 22482,
+          "Frame": 22,
+          "SpriteDistance": 466.4069033004181,
+          "ReferenceOnlyPixels": 184,
+          "ReferenceX2": 178
+        },
+        {
+          "CandidateVisiblePixels": 26,
+          "ReferenceOnlyFullFrameMismatchPixels": 2,
+          "CandidateOnlyPixels": 0,
+          "Type": "Misc3",
+          "WorldXData": 49283072,
+          "MaskIntersection": 26,
+          "ReferenceOnlyPlaneDepthPixels": 3,
+          "Image": null,
+          "ReferenceOnlyDepthCloserPixels": 3,
+          "CandidateBounds": [
+            40,
+            92,
+            46,
+            96
+          ],
+          "WorldZData": 0,
+          "Patch": "BAR1A0",
+          "ReferenceX1": 187,
+          "ActualMismatchPixelsInActorUnion": 2,
+          "ReferenceVisiblePixels": 29,
+          "CandidateActorRecordIndex": 22,
+          "ReferenceOnlyDepthExamples": [
+            {
+              "Delta": -33.86671385230369,
+              "PlaneId": 60,
+              "SpriteDistance": 498.443694443124,
+              "X": 46,
+              "Y": 95,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 464.5769805908203
+            },
+            {
+              "Delta": -102.6933282321865,
+              "PlaneId": 60,
+              "SpriteDistance": 498.443694443124,
+              "X": 41,
+              "Y": 97,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 395.7503662109375
+            },
+            {
+              "Delta": -102.6933282321865,
+              "PlaneId": 60,
+              "SpriteDistance": 498.443694443124,
+              "X": 45,
+              "Y": 97,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 395.7503662109375
+            }
+          ],
+          "SharedMaskPaletteMismatches": 0,
+          "ReferenceBounds": [
+            40,
+            92,
+            46,
+            97
+          ],
+          "Sprite": 61,
+          "MaskIoU": 0.896551724137931,
+          "WorldYData": -196083712,
+          "ReferenceOnlyNonPlaneDepthPixels": 0,
+          "MaskUnion": 29,
+          "ReferenceOnlyDepthFartherPixels": 0,
+          "ReferenceOnlyDepthTiedPixels": 0,
+          "ReferenceOnlyDepthInfinitePixels": 0,
+          "CandidateOnlyFullFrameMismatchPixels": 0,
+          "ReferenceOnlyBounds": [
+            41,
+            95,
+            46,
+            97
+          ],
+          "ReferenceScaleData": 21037,
+          "Frame": 0,
+          "SpriteDistance": 498.443694443124,
+          "ReferenceOnlyPixels": 3,
+          "ReferenceX2": 193
+        },
+        {
+          "CandidateVisiblePixels": 22,
+          "ReferenceOnlyFullFrameMismatchPixels": 45,
+          "CandidateOnlyPixels": 0,
+          "Type": "Misc62",
+          "WorldXData": 71303168,
+          "MaskIntersection": 22,
+          "ReferenceOnlyPlaneDepthPixels": 46,
+          "Image": null,
+          "ReferenceOnlyDepthCloserPixels": 45,
+          "CandidateBounds": [
+            162,
+            93,
+            177,
+            94
+          ],
+          "WorldZData": 0,
+          "Patch": "BON2A0",
+          "ReferenceX1": 132,
+          "ActualMismatchPixelsInActorUnion": 45,
+          "ReferenceVisiblePixels": 68,
+          "CandidateActorRecordIndex": 68,
+          "ReferenceOnlyDepthExamples": [
+            {
+              "Delta": 10.449504721753954,
+              "PlaneId": 60,
+              "SpriteDistance": 498.3726235741445,
+              "X": 172,
+              "Y": 94,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 508.82212829589844
+            },
+            {
+              "Delta": -33.79564298332417,
+              "PlaneId": 60,
+              "SpriteDistance": 498.3726235741445,
+              "X": 161,
+              "Y": 95,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 464.5769805908203
+            },
+            {
+              "Delta": -33.79564298332417,
+              "PlaneId": 60,
+              "SpriteDistance": 498.3726235741445,
+              "X": 162,
+              "Y": 95,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 464.5769805908203
+            },
+            {
+              "Delta": -33.79564298332417,
+              "PlaneId": 60,
+              "SpriteDistance": 498.3726235741445,
+              "X": 163,
+              "Y": 95,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 464.5769805908203
+            },
+            {
+              "Delta": -33.79564298332417,
+              "PlaneId": 60,
+              "SpriteDistance": 498.3726235741445,
+              "X": 167,
+              "Y": 95,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 464.5769805908203
+            },
+            {
+              "Delta": -33.79564298332417,
+              "PlaneId": 60,
+              "SpriteDistance": 498.3726235741445,
+              "X": 168,
+              "Y": 95,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 464.5769805908203
+            },
+            {
+              "Delta": -33.79564298332417,
+              "PlaneId": 60,
+              "SpriteDistance": 498.3726235741445,
+              "X": 169,
+              "Y": 95,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 464.5769805908203
+            },
+            {
+              "Delta": -33.79564298332417,
+              "PlaneId": 60,
+              "SpriteDistance": 498.3726235741445,
+              "X": 170,
+              "Y": 95,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 464.5769805908203
+            },
+            {
+              "Delta": -33.79564298332417,
+              "PlaneId": 60,
+              "SpriteDistance": 498.3726235741445,
+              "X": 171,
+              "Y": 95,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 464.5769805908203
+            },
+            {
+              "Delta": -33.79564298332417,
+              "PlaneId": 60,
+              "SpriteDistance": 498.3726235741445,
+              "X": 172,
+              "Y": 95,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 464.5769805908203
+            },
+            {
+              "Delta": -33.79564298332417,
+              "PlaneId": 60,
+              "SpriteDistance": 498.3726235741445,
+              "X": 173,
+              "Y": 95,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 464.5769805908203
+            },
+            {
+              "Delta": -33.79564298332417,
+              "PlaneId": 60,
+              "SpriteDistance": 498.3726235741445,
+              "X": 174,
+              "Y": 95,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 464.5769805908203
+            },
+            {
+              "Delta": -33.79564298332417,
+              "PlaneId": 60,
+              "SpriteDistance": 498.3726235741445,
+              "X": 175,
+              "Y": 95,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 464.5769805908203
+            },
+            {
+              "Delta": -33.79564298332417,
+              "PlaneId": 60,
+              "SpriteDistance": 498.3726235741445,
+              "X": 176,
+              "Y": 95,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 464.5769805908203
+            },
+            {
+              "Delta": -33.79564298332417,
+              "PlaneId": 60,
+              "SpriteDistance": 498.3726235741445,
+              "X": 177,
+              "Y": 95,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 464.5769805908203
+            },
+            {
+              "Delta": -33.79564298332417,
+              "PlaneId": 60,
+              "SpriteDistance": 498.3726235741445,
+              "X": 178,
+              "Y": 95,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 464.5769805908203
+            }
+          ],
+          "SharedMaskPaletteMismatches": 0,
+          "ReferenceBounds": [
+            161,
+            93,
+            178,
+            97
+          ],
+          "Sprite": 28,
+          "MaskIoU": 0.3235294117647059,
+          "WorldYData": -192937984,
+          "ReferenceOnlyNonPlaneDepthPixels": 0,
+          "MaskUnion": 68,
+          "ReferenceOnlyDepthFartherPixels": 1,
+          "ReferenceOnlyDepthTiedPixels": 0,
+          "ReferenceOnlyDepthInfinitePixels": 0,
+          "CandidateOnlyFullFrameMismatchPixels": 0,
+          "ReferenceOnlyBounds": [
+            161,
+            94,
+            178,
+            97
+          ],
+          "ReferenceScaleData": 21040,
+          "Frame": 13,
+          "SpriteDistance": 498.3726235741445,
+          "ReferenceOnlyPixels": 46,
+          "ReferenceX2": 136
+        },
+        {
+          "CandidateVisiblePixels": 15,
+          "ReferenceOnlyFullFrameMismatchPixels": 4,
+          "CandidateOnlyPixels": 0,
+          "Type": "Misc3",
+          "WorldXData": 63963136,
+          "MaskIntersection": 15,
+          "ReferenceOnlyPlaneDepthPixels": 4,
+          "Image": null,
+          "ReferenceOnlyDepthCloserPixels": 0,
+          "CandidateBounds": [
+            132,
+            91,
+            136,
+            94
+          ],
+          "WorldZData": 0,
+          "Patch": "BON2A0",
+          "ReferenceX1": 40,
+          "ActualMismatchPixelsInActorUnion": 4,
+          "ReferenceVisiblePixels": 20,
+          "CandidateActorRecordIndex": 23,
+          "ReferenceOnlyDepthExamples": [
+            {
+              "Delta": 112.10869739944212,
+              "PlaneId": 0,
+              "SpriteDistance": 418.27595835494037,
+              "X": 133,
+              "Y": 91,
+              "DepthMatchesPlane": false,
+              "CandidateBackgroundDepth": 530.3846557543825
+            },
+            {
+              "Delta": 46.30102223587994,
+              "PlaneId": 60,
+              "SpriteDistance": 418.27595835494037,
+              "X": 133,
+              "Y": 95,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 464.5769805908203
+            },
+            {
+              "Delta": 46.30102223587994,
+              "PlaneId": 60,
+              "SpriteDistance": 418.27595835494037,
+              "X": 134,
+              "Y": 95,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 464.5769805908203
+            },
+            {
+              "Delta": 46.30102223587994,
+              "PlaneId": 60,
+              "SpriteDistance": 418.27595835494037,
+              "X": 135,
+              "Y": 95,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 464.5769805908203
+            },
+            {
+              "Delta": 46.30102223587994,
+              "PlaneId": 60,
+              "SpriteDistance": 418.27595835494037,
+              "X": 136,
+              "Y": 95,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 464.5769805908203
+            }
+          ],
+          "SharedMaskPaletteMismatches": 0,
+          "ReferenceBounds": [
+            132,
+            91,
+            136,
+            95
+          ],
+          "Sprite": 61,
+          "MaskIoU": 0.75,
+          "WorldYData": -190840832,
+          "ReferenceOnlyNonPlaneDepthPixels": 1,
+          "MaskUnion": 20,
+          "ReferenceOnlyDepthFartherPixels": 5,
+          "ReferenceOnlyDepthTiedPixels": 0,
+          "ReferenceOnlyDepthInfinitePixels": 0,
+          "CandidateOnlyFullFrameMismatchPixels": 0,
+          "ReferenceOnlyBounds": [
+            133,
+            91,
+            136,
+            95
+          ],
+          "ReferenceScaleData": 25069,
+          "Frame": 0,
+          "SpriteDistance": 418.27595835494037,
+          "ReferenceOnlyPixels": 5,
+          "ReferenceX2": 46
+        },
+        {
+          "CandidateVisiblePixels": 55,
+          "ReferenceOnlyFullFrameMismatchPixels": 9,
+          "CandidateOnlyPixels": 3,
+          "Type": "Barrel",
+          "WorldXData": 75497472,
+          "MaskIntersection": 52,
+          "ReferenceOnlyPlaneDepthPixels": 9,
+          "Image": null,
+          "ReferenceOnlyDepthCloserPixels": 9,
+          "CandidateBounds": [
+            187,
+            86,
+            193,
+            94
+          ],
+          "WorldZData": 0,
+          "Patch": "BAR1A0",
+          "ReferenceX1": 187,
+          "ActualMismatchPixelsInActorUnion": 9,
+          "ReferenceVisiblePixels": 61,
+          "CandidateActorRecordIndex": 25,
+          "ReferenceOnlyDepthExamples": [
+            {
+              "Delta": -33.86671385230369,
+              "PlaneId": 60,
+              "SpriteDistance": 498.443694443124,
+              "X": 187,
+              "Y": 95,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 464.5769805908203
+            },
+            {
+              "Delta": -33.86671385230369,
+              "PlaneId": 60,
+              "SpriteDistance": 498.443694443124,
+              "X": 188,
+              "Y": 95,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 464.5769805908203
+            },
+            {
+              "Delta": -33.86671385230369,
+              "PlaneId": 60,
+              "SpriteDistance": 498.443694443124,
+              "X": 189,
+              "Y": 95,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 464.5769805908203
+            },
+            {
+              "Delta": -33.86671385230369,
+              "PlaneId": 60,
+              "SpriteDistance": 498.443694443124,
+              "X": 190,
+              "Y": 95,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 464.5769805908203
+            },
+            {
+              "Delta": -33.86671385230369,
+              "PlaneId": 60,
+              "SpriteDistance": 498.443694443124,
+              "X": 193,
+              "Y": 95,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 464.5769805908203
+            },
+            {
+              "Delta": -71.0331719821865,
+              "PlaneId": 60,
+              "SpriteDistance": 498.443694443124,
+              "X": 188,
+              "Y": 96,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 427.4105224609375
+            },
+            {
+              "Delta": -71.0331719821865,
+              "PlaneId": 60,
+              "SpriteDistance": 498.443694443124,
+              "X": 191,
+              "Y": 96,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 427.4105224609375
+            },
+            {
+              "Delta": -71.0331719821865,
+              "PlaneId": 60,
+              "SpriteDistance": 498.443694443124,
+              "X": 192,
+              "Y": 96,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 427.4105224609375
+            },
+            {
+              "Delta": -71.0331719821865,
+              "PlaneId": 60,
+              "SpriteDistance": 498.443694443124,
+              "X": 193,
+              "Y": 96,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 427.4105224609375
+            }
+          ],
+          "SharedMaskPaletteMismatches": 0,
+          "ReferenceBounds": [
+            187,
+            86,
+            193,
+            96
+          ],
+          "Sprite": 57,
+          "MaskIoU": 0.8125,
+          "WorldYData": -190840832,
+          "ReferenceOnlyNonPlaneDepthPixels": 0,
+          "MaskUnion": 64,
+          "ReferenceOnlyDepthFartherPixels": 0,
+          "ReferenceOnlyDepthTiedPixels": 0,
+          "ReferenceOnlyDepthInfinitePixels": 0,
+          "CandidateOnlyFullFrameMismatchPixels": 0,
+          "ReferenceOnlyBounds": [
+            187,
+            95,
+            193,
+            96
+          ],
+          "ReferenceScaleData": 21037,
+          "Frame": 0,
+          "SpriteDistance": 498.443694443124,
+          "ReferenceOnlyPixels": 9,
+          "ReferenceX2": 193
+        }
+      ],
+      "CandidateIsolationRepeatDifferences": 0,
+      "ReferenceIsolationRepeatDifferences": 0,
+      "SectorListsRestored": true,
+      "ReferenceActorMaskSha256": "F00F419C1A2692C328EB6F68038170AEF5578A88E5593526231D1568E861EE21",
+      "CandidateActorMaskSha256": "52AA6B749604D27685D7F860FCA870E953A7E937CF0E5CA7137847654A4237CC"
+    },
+    {
+      "LevelTic": 70,
+      "ActorCount": 91,
+      "ReferenceVisibleWorldSprites": 3,
+      "ReferenceActorAffectedPixels": 1144,
+      "CandidateActorAffectedPixels": 801,
+      "ActorMaskIntersection": 800,
+      "ActorMaskUnion": 1145,
+      "ActorMaskIoU": 0.6986899563318777,
+      "CandidateOnlyActorPixels": 1,
+      "ReferenceOnlyActorPixels": 344,
+      "FullSceneMismatchPixels": 2318,
+      "BackgroundMismatchPixels": 1979,
+      "SharedActorRegionMismatchPixels": 0,
+      "CandidateOnlyRegionMismatchPixels": 0,
+      "ReferenceOnlyRegionMismatchPixels": 339,
+      "IndividuallyIsolatedSprites": [
+        {
+          "CandidateVisiblePixels": 293,
+          "ReferenceOnlyFullFrameMismatchPixels": 274,
+          "CandidateOnlyPixels": 0,
+          "Type": "Misc62",
+          "WorldXData": 71303168,
+          "MaskIntersection": 293,
+          "ReferenceOnlyPlaneDepthPixels": 274,
+          "Image": null,
+          "ReferenceOnlyDepthCloserPixels": 274,
+          "CandidateBounds": [
+            165,
+            104,
+            214,
+            111
+          ],
+          "WorldZData": 0,
+          "Patch": "PLAYN0",
+          "ReferenceX1": 165,
+          "ActualMismatchPixelsInActorUnion": 274,
+          "ReferenceVisiblePixels": 567,
+          "CandidateActorRecordIndex": 68,
+          "ReferenceOnlyDepthExamples": [
+            {
+              "Delta": -0.8938638996551447,
+              "PlaneId": 60,
+              "SpriteDistance": 160.73332617992858,
+              "X": 165,
+              "Y": 112,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 159.83946228027344
+            },
+            {
+              "Delta": -0.8938638996551447,
+              "PlaneId": 60,
+              "SpriteDistance": 160.73332617992858,
+              "X": 166,
+              "Y": 112,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 159.83946228027344
+            },
+            {
+              "Delta": -0.8938638996551447,
+              "PlaneId": 60,
+              "SpriteDistance": 160.73332617992858,
+              "X": 167,
+              "Y": 112,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 159.83946228027344
+            },
+            {
+              "Delta": -0.8938638996551447,
+              "PlaneId": 60,
+              "SpriteDistance": 160.73332617992858,
+              "X": 168,
+              "Y": 112,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 159.83946228027344
+            },
+            {
+              "Delta": -0.8938638996551447,
+              "PlaneId": 60,
+              "SpriteDistance": 160.73332617992858,
+              "X": 169,
+              "Y": 112,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 159.83946228027344
+            },
+            {
+              "Delta": -0.8938638996551447,
+              "PlaneId": 60,
+              "SpriteDistance": 160.73332617992858,
+              "X": 170,
+              "Y": 112,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 159.83946228027344
+            },
+            {
+              "Delta": -0.8938638996551447,
+              "PlaneId": 60,
+              "SpriteDistance": 160.73332617992858,
+              "X": 171,
+              "Y": 112,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 159.83946228027344
+            },
+            {
+              "Delta": -0.8938638996551447,
+              "PlaneId": 60,
+              "SpriteDistance": 160.73332617992858,
+              "X": 172,
+              "Y": 112,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 159.83946228027344
+            },
+            {
+              "Delta": -0.8938638996551447,
+              "PlaneId": 60,
+              "SpriteDistance": 160.73332617992858,
+              "X": 173,
+              "Y": 112,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 159.83946228027344
+            },
+            {
+              "Delta": -0.8938638996551447,
+              "PlaneId": 60,
+              "SpriteDistance": 160.73332617992858,
+              "X": 174,
+              "Y": 112,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 159.83946228027344
+            },
+            {
+              "Delta": -0.8938638996551447,
+              "PlaneId": 60,
+              "SpriteDistance": 160.73332617992858,
+              "X": 175,
+              "Y": 112,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 159.83946228027344
+            },
+            {
+              "Delta": -0.8938638996551447,
+              "PlaneId": 60,
+              "SpriteDistance": 160.73332617992858,
+              "X": 176,
+              "Y": 112,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 159.83946228027344
+            },
+            {
+              "Delta": -0.8938638996551447,
+              "PlaneId": 60,
+              "SpriteDistance": 160.73332617992858,
+              "X": 178,
+              "Y": 112,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 159.83946228027344
+            },
+            {
+              "Delta": -0.8938638996551447,
+              "PlaneId": 60,
+              "SpriteDistance": 160.73332617992858,
+              "X": 180,
+              "Y": 112,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 159.83946228027344
+            },
+            {
+              "Delta": -0.8938638996551447,
+              "PlaneId": 60,
+              "SpriteDistance": 160.73332617992858,
+              "X": 182,
+              "Y": 112,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 159.83946228027344
+            },
+            {
+              "Delta": -0.8938638996551447,
+              "PlaneId": 60,
+              "SpriteDistance": 160.73332617992858,
+              "X": 183,
+              "Y": 112,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 159.83946228027344
+            }
+          ],
+          "SharedMaskPaletteMismatches": 0,
+          "ReferenceBounds": [
+            165,
+            104,
+            214,
+            117
+          ],
+          "Sprite": 28,
+          "MaskIoU": 0.5167548500881834,
+          "WorldYData": -192937984,
+          "ReferenceOnlyNonPlaneDepthPixels": 0,
+          "MaskUnion": 567,
+          "ReferenceOnlyDepthFartherPixels": 0,
+          "ReferenceOnlyDepthTiedPixels": 0,
+          "ReferenceOnlyDepthInfinitePixels": 0,
+          "CandidateOnlyFullFrameMismatchPixels": 0,
+          "ReferenceOnlyBounds": [
+            165,
+            112,
+            214,
+            117
+          ],
+          "ReferenceScaleData": 65237,
+          "Frame": 13,
+          "SpriteDistance": 160.73332617992858,
+          "ReferenceOnlyPixels": 274,
+          "ReferenceX2": 214
+        },
+        {
+          "CandidateVisiblePixels": 394,
+          "ReferenceOnlyFullFrameMismatchPixels": 50,
+          "CandidateOnlyPixels": 1,
+          "Type": "Barrel",
+          "WorldXData": 75497472,
+          "MaskIntersection": 393,
+          "ReferenceOnlyPlaneDepthPixels": 53,
+          "Image": null,
+          "ReferenceOnlyDepthCloserPixels": 51,
+          "CandidateBounds": [
+            231,
+            85,
+            249,
+            107
+          ],
+          "WorldZData": 0,
+          "Patch": "BAR1A0",
+          "ReferenceX1": 231,
+          "ActualMismatchPixelsInActorUnion": 50,
+          "ReferenceVisiblePixels": 446,
+          "CandidateActorRecordIndex": 25,
+          "ReferenceOnlyDepthExamples": [
+            {
+              "Delta": 29.50897619123242,
+              "PlaneId": 60,
+              "SpriteDistance": 192.70688989763477,
+              "X": 245,
+              "Y": 104,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 222.2158660888672
+            },
+            {
+              "Delta": 29.50897619123242,
+              "PlaneId": 60,
+              "SpriteDistance": 192.70688989763477,
+              "X": 249,
+              "Y": 104,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 222.2158660888672
+            },
+            {
+              "Delta": -6.771083623220704,
+              "PlaneId": 60,
+              "SpriteDistance": 192.70688989763477,
+              "X": 231,
+              "Y": 108,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 185.93580627441406
+            },
+            {
+              "Delta": -6.771083623220704,
+              "PlaneId": 60,
+              "SpriteDistance": 192.70688989763477,
+              "X": 232,
+              "Y": 108,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 185.93580627441406
+            },
+            {
+              "Delta": -6.771083623220704,
+              "PlaneId": 60,
+              "SpriteDistance": 192.70688989763477,
+              "X": 233,
+              "Y": 108,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 185.93580627441406
+            },
+            {
+              "Delta": -6.771083623220704,
+              "PlaneId": 60,
+              "SpriteDistance": 192.70688989763477,
+              "X": 234,
+              "Y": 108,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 185.93580627441406
+            },
+            {
+              "Delta": -6.771083623220704,
+              "PlaneId": 60,
+              "SpriteDistance": 192.70688989763477,
+              "X": 235,
+              "Y": 108,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 185.93580627441406
+            },
+            {
+              "Delta": -6.771083623220704,
+              "PlaneId": 60,
+              "SpriteDistance": 192.70688989763477,
+              "X": 236,
+              "Y": 108,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 185.93580627441406
+            },
+            {
+              "Delta": -6.771083623220704,
+              "PlaneId": 60,
+              "SpriteDistance": 192.70688989763477,
+              "X": 237,
+              "Y": 108,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 185.93580627441406
+            },
+            {
+              "Delta": -6.771083623220704,
+              "PlaneId": 60,
+              "SpriteDistance": 192.70688989763477,
+              "X": 238,
+              "Y": 108,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 185.93580627441406
+            },
+            {
+              "Delta": -6.771083623220704,
+              "PlaneId": 60,
+              "SpriteDistance": 192.70688989763477,
+              "X": 239,
+              "Y": 108,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 185.93580627441406
+            },
+            {
+              "Delta": -6.771083623220704,
+              "PlaneId": 60,
+              "SpriteDistance": 192.70688989763477,
+              "X": 240,
+              "Y": 108,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 185.93580627441406
+            },
+            {
+              "Delta": -6.771083623220704,
+              "PlaneId": 60,
+              "SpriteDistance": 192.70688989763477,
+              "X": 241,
+              "Y": 108,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 185.93580627441406
+            },
+            {
+              "Delta": -6.771083623220704,
+              "PlaneId": 60,
+              "SpriteDistance": 192.70688989763477,
+              "X": 242,
+              "Y": 108,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 185.93580627441406
+            },
+            {
+              "Delta": -6.771083623220704,
+              "PlaneId": 60,
+              "SpriteDistance": 192.70688989763477,
+              "X": 243,
+              "Y": 108,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 185.93580627441406
+            },
+            {
+              "Delta": -6.771083623220704,
+              "PlaneId": 60,
+              "SpriteDistance": 192.70688989763477,
+              "X": 245,
+              "Y": 108,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 185.93580627441406
+            }
+          ],
+          "SharedMaskPaletteMismatches": 0,
+          "ReferenceBounds": [
+            231,
+            85,
+            249,
+            110
+          ],
+          "Sprite": 57,
+          "MaskIoU": 0.8791946308724832,
+          "WorldYData": -190840832,
+          "ReferenceOnlyNonPlaneDepthPixels": 0,
+          "MaskUnion": 447,
+          "ReferenceOnlyDepthFartherPixels": 2,
+          "ReferenceOnlyDepthTiedPixels": 0,
+          "ReferenceOnlyDepthInfinitePixels": 0,
+          "CandidateOnlyFullFrameMismatchPixels": 0,
+          "ReferenceOnlyBounds": [
+            231,
+            104,
+            249,
+            110
+          ],
+          "ReferenceScaleData": 54413,
+          "Frame": 0,
+          "SpriteDistance": 192.70688989763477,
+          "ReferenceOnlyPixels": 53,
+          "ReferenceX2": 249
+        },
+        {
+          "CandidateVisiblePixels": 114,
+          "ReferenceOnlyFullFrameMismatchPixels": 15,
+          "CandidateOnlyPixels": 0,
+          "Type": "Misc3",
+          "WorldXData": 63963136,
+          "MaskIntersection": 114,
+          "ReferenceOnlyPlaneDepthPixels": 15,
+          "Image": null,
+          "ReferenceOnlyDepthCloserPixels": 15,
+          "CandidateBounds": [
+            87,
+            97,
+            100,
+            107
+          ],
+          "WorldZData": 0,
+          "Patch": "BON2B0",
+          "ReferenceX1": 87,
+          "ActualMismatchPixelsInActorUnion": 15,
+          "ReferenceVisiblePixels": 131,
+          "CandidateActorRecordIndex": 23,
+          "ReferenceOnlyDepthExamples": [
+            {
+              "Delta": 31.971493984384693,
+              "PlaneId": 0,
+              "SpriteDistance": 192.77420303709968,
+              "X": 97,
+              "Y": 99,
+              "DepthMatchesPlane": false,
+              "CandidateBackgroundDepth": 224.74569702148438
+            },
+            {
+              "Delta": 31.971493984384693,
+              "PlaneId": 0,
+              "SpriteDistance": 192.77420303709968,
+              "X": 97,
+              "Y": 103,
+              "DepthMatchesPlane": false,
+              "CandidateBackgroundDepth": 224.74569702148438
+            },
+            {
+              "Delta": -6.838396762685619,
+              "PlaneId": 60,
+              "SpriteDistance": 192.77420303709968,
+              "X": 90,
+              "Y": 108,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 185.93580627441406
+            },
+            {
+              "Delta": -6.838396762685619,
+              "PlaneId": 60,
+              "SpriteDistance": 192.77420303709968,
+              "X": 92,
+              "Y": 108,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 185.93580627441406
+            },
+            {
+              "Delta": -6.838396762685619,
+              "PlaneId": 60,
+              "SpriteDistance": 192.77420303709968,
+              "X": 93,
+              "Y": 108,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 185.93580627441406
+            },
+            {
+              "Delta": -6.838396762685619,
+              "PlaneId": 60,
+              "SpriteDistance": 192.77420303709968,
+              "X": 94,
+              "Y": 108,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 185.93580627441406
+            },
+            {
+              "Delta": -6.838396762685619,
+              "PlaneId": 60,
+              "SpriteDistance": 192.77420303709968,
+              "X": 95,
+              "Y": 108,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 185.93580627441406
+            },
+            {
+              "Delta": -6.838396762685619,
+              "PlaneId": 60,
+              "SpriteDistance": 192.77420303709968,
+              "X": 97,
+              "Y": 108,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 185.93580627441406
+            },
+            {
+              "Delta": -6.838396762685619,
+              "PlaneId": 60,
+              "SpriteDistance": 192.77420303709968,
+              "X": 99,
+              "Y": 108,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 185.93580627441406
+            },
+            {
+              "Delta": -14.130022739248119,
+              "PlaneId": 60,
+              "SpriteDistance": 192.77420303709968,
+              "X": 89,
+              "Y": 109,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 178.64418029785156
+            },
+            {
+              "Delta": -14.130022739248119,
+              "PlaneId": 60,
+              "SpriteDistance": 192.77420303709968,
+              "X": 90,
+              "Y": 109,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 178.64418029785156
+            },
+            {
+              "Delta": -14.130022739248119,
+              "PlaneId": 60,
+              "SpriteDistance": 192.77420303709968,
+              "X": 92,
+              "Y": 109,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 178.64418029785156
+            },
+            {
+              "Delta": -14.130022739248119,
+              "PlaneId": 60,
+              "SpriteDistance": 192.77420303709968,
+              "X": 93,
+              "Y": 109,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 178.64418029785156
+            },
+            {
+              "Delta": -14.130022739248119,
+              "PlaneId": 60,
+              "SpriteDistance": 192.77420303709968,
+              "X": 94,
+              "Y": 109,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 178.64418029785156
+            },
+            {
+              "Delta": -14.130022739248119,
+              "PlaneId": 60,
+              "SpriteDistance": 192.77420303709968,
+              "X": 95,
+              "Y": 109,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 178.64418029785156
+            },
+            {
+              "Delta": -14.130022739248119,
+              "PlaneId": 60,
+              "SpriteDistance": 192.77420303709968,
+              "X": 97,
+              "Y": 109,
+              "DepthMatchesPlane": true,
+              "CandidateBackgroundDepth": 178.64418029785156
+            }
+          ],
+          "SharedMaskPaletteMismatches": 0,
+          "ReferenceBounds": [
+            87,
+            97,
+            100,
+            109
+          ],
+          "Sprite": 61,
+          "MaskIoU": 0.8702290076335878,
+          "WorldYData": -190840832,
+          "ReferenceOnlyNonPlaneDepthPixels": 2,
+          "MaskUnion": 131,
+          "ReferenceOnlyDepthFartherPixels": 2,
+          "ReferenceOnlyDepthTiedPixels": 0,
+          "ReferenceOnlyDepthInfinitePixels": 0,
+          "CandidateOnlyFullFrameMismatchPixels": 0,
+          "ReferenceOnlyBounds": [
+            89,
+            99,
+            99,
+            109
+          ],
+          "ReferenceScaleData": 54394,
+          "Frame": 1,
+          "SpriteDistance": 192.77420303709968,
+          "ReferenceOnlyPixels": 17,
+          "ReferenceX2": 100
+        }
+      ],
+      "CandidateIsolationRepeatDifferences": 0,
+      "ReferenceIsolationRepeatDifferences": 0,
+      "SectorListsRestored": true,
+      "ReferenceActorMaskSha256": "CFF56EE2AA156176A6E18B8A0022E82190A68BD72A3BFF79972517E913B5361A",
+      "CandidateActorMaskSha256": "0D219DA052D4B7538B0D11A3B99912893D664971876E26B950D1B38D7F85F178"
+    }
+  ],
+  "MaskImages": [],
+  "Error": null,
+  "Meaning": "Compares world-actor-affected pixel masks by rerendering the exact same saved-replay states with world actors suppressed in each renderer. Player weapon, HUD, geometry, and other scene state remain. This localizes full-scene differences to broad background, shared actor-affected, or renderer-exclusive actor-affected regions. It is adopted-reference parity evidence, not original-executable validation, gameplay completion, or performance."
+}

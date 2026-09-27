@@ -48,10 +48,22 @@ Fixed-expression cases; its short, unpaired profile is recorded without a
 performance claim. The corrected candidate passes the 36-map smoke, 69
 campaign transition checks including real E1M9 and E1M4 world loads, and
 serial/worker output checks in Classic, Matrix/Katakana, and AnsiArt/Katakana.
-The [current readiness evidence](../results/episode1-render-guard-evidence-20260927.json)
-prepares one complete human Episode 1 playthrough. It does not certify the
+The [renderer-guard evidence](../results/episode1-render-guard-evidence-20260927.json)
+prepared one complete human Episode 1 playthrough on that source. It does not certify the
 remaining map routes, continuous campaign audio, physical keyboard play,
 visual parity, or the 35-tic/60-display target.
+
+The current playtest source is `e8ffd6edbc089d047e5eb5807377f93221d933bd`.
+Its [candidate receipt](../results/episode1-human-playthrough-candidate-20260927.json)
+records fresh 36-map smoke, 69 Episode 1/secret/finale transition checks, 97
+boss progression checks, 1,747 ordinary E1M1 session commands through E1M2,
+synthetic menu controls, and worker equality across Classic, Matrix/Katakana,
+and AnsiArt/Katakana. The new plane-depth correction passes 18 focused
+background/masked-wall checks and substantially reduces actor pixels hidden
+by floor fills. One actor-visibility difference and broader scene parity remain
+open. The build is ready for Jason's single complete HMP Episode 1 playthrough;
+the route result is pending and must not be replaced by map-by-map requests or
+automated-route tuning.
 
 After the integer-column and integer-row wall-sampling changes, the nine-map
 smoke and focused transition, boss, menu/session, and synthetic input checks
@@ -171,7 +183,7 @@ Do not postpone all performance work until M6. Measure after a feature adds subs
 
 ## Active work queue (2026-09-27)
 
-- **Episode 1 human milestone:** ready for one complete human run on the exact pinned build in [`episode1-playtest.md`](episode1-playtest.md). The expected path includes E1M3 → E1M9 → E1M4 and ends at the E1 finale. Jason's result is pending. Do not split it into map-by-map requests or spend this milestone constructing/tuning an AI route.
+- **Episode 1 human milestone:** ready for one complete human run on source build `e8ffd6edbc089d047e5eb5807377f93221d933bd`, detailed in [`episode1-playtest.md`](episode1-playtest.md). The expected path includes E1M3 → E1M9 → E1M4 and ends at the E1 finale. Jason's result is pending. Do not split it into map-by-map requests or spend this milestone constructing/tuning an AI route.
 - **M4 rendering fidelity:** continue correcting specific world-scene mismatches against the adopted PowerShell renderer and Doom behavior, especially moving geometry and actor occlusion. Reuse existing replay states and source comparisons where they answer a concrete code question. Preserve all three style worker checks and the 36-map smoke; do not treat either as original-executable or campaign-completion proof.
 - **M3 audio:** continue toward full-campaign continuity, audible quality and queue timing under renderer load. The Episode 1 loop catalog and finite D_INTRO path are prepared, but an actual-device queue-timing stall has been observed and the full campaign has not been heard through.
 - **M6 performance:** the 35-tic/60-display goal remains open. Existing 59.67 terminal updates/sec is not monitor presentation; PresentMon ETW could not start under this account. A StringBuilder strip-assembly attempt is rejected after exact-output measurements showed 4.0–9.3x slower encoding and 83–103% more thread allocations; array-and-concatenate is restored. Keep isolated encoder/renderer/mixer timings separate from simulation, audio, output and displayed-frame claims; see [terminal output](terminal-output.md).

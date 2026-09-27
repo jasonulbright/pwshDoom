@@ -29,20 +29,23 @@ output in the three styles is recorded separately in the
 [renderer fidelity record](rendering-fidelity.md#reuse-per-context-raster-scratch-2026-09-27).
 This is load/render smoke, not route completion.
 
-The current Episode 1 human-playthrough handoff is pinned to source build
-`4ed33630dcb26bb6f04456448535edc01f9b4bd5`; its [readiness receipt](../results/episode1-render-guard-evidence-20260927.json)
-links the fresh launcher check, 36-map smoke, four retained route regressions,
-and full fixed-input E1M2–E1M4 host replays. A renderer overflow discovered
-during replay is fixed, and all recorded checkpoints match on the corrected
-candidate. The current source also passes 69 campaign transition checks,
-including actual E1M3 intermission advancement to E1M9, its return to E1M4,
-fresh world creation, and retained secret history. Existing 97 boss checks,
-125 menu/session checks with 46 screen fixtures, six synthetic console-input
-checks, ten synthetic menu-input checks, and the 1,747-command E1M1-to-E1M2
-session route remain source-pinned in the prior receipt. Prior actual-device
-audio checks remain separately pinned and include one queue-timing stall.
-These results prepare one human run; no automated test claims the remaining
-map routes or finale as played.
+The current Episode 1 human-playthrough build is source commit
+`e8ffd6edbc089d047e5eb5807377f93221d933bd`. Its
+[candidate receipt](../results/episode1-human-playthrough-candidate-20260927.json)
+links a fresh 36-map smoke, 69 current campaign transition checks, 97 boss
+progression checks, 10 menu-input checks, 24 session-screen checks, and the
+1,747-command E1M1-to-E1M2 session regression. The transition checks load real
+E1M9 and E1M4 worlds and verify the secret history and finale state; fixtures
+do not claim those maps were played. The current renderer also passes an
+18-check plane/masked-wall fixture and serial/worker equality in
+Classic, Matrix/Katakana, and AnsiArt/Katakana. The receipt preserves the
+launcher preflight and remaining limits. The earlier
+[renderer-guard receipt](../results/episode1-render-guard-evidence-20260927.json)
+keeps its original `4ed3363` source pin, four retained E1M1–E1M4 route
+regressions, and fixed-input E1M2–E1M4 host replays. The E1M3 waypoint-driver
+attempt stopped short without a reproduced defect and route tuning remains
+stopped. These results prepare one human run; no automated test claims the
+remaining maps or finale were played.
 
 The prior `e358741` renderer, `76b18ac` campaign/session, and `f5f404a`
 Episode 1 receipts remain available with their original source pins. Detailed

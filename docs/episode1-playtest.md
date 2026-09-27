@@ -22,24 +22,28 @@ E1M8 exit and intermission.
 
 ## Build and launch
 
-Run exact source build commit `4ed33630dcb26bb6f04456448535edc01f9b4bd5`.
+Run exact source build commit `e8ffd6edbc089d047e5eb5807377f93221d933bd`.
 If your checkout is at a later branch tip, enter the pinned build from the
 repository root before launching:
 
 ```powershell
-git switch --detach 4ed33630dcb26bb6f04456448535edc01f9b4bd5
+git switch --detach e8ffd6edbc089d047e5eb5807377f93221d933bd
 ```
 
 After preserving the input and session reports under `local/`, return to the
 development branch with `git switch codex/feasibility-study`. The pinned build
 keeps gameplay, renderer, and audio algorithms in PowerShell. It includes the
-fixed-point sight-intercept and sight-bound integer paths, plus renderer fixes
-for plane-distance wrap and out-of-range wall-light lookup. The new
-[readiness evidence](../results/episode1-render-guard-evidence-20260927.json)
-pins the build and source hashes, records the IWAD/catalog/launcher preflight,
-links all four retained route regressions, complete fixed-input replays of
-E1M2–E1M4, the 69 campaign transition checks, 36-map smoke, and three-style
-worker output checks. Earlier [campaign/session](../results/episode1-playtest-current-readiness-20260927.json),
+fixed-point sight-intercept and sight-bound integer paths, renderer guards for
+plane distance and wall-light lookup, and the actor-depth correction described
+in the [fidelity record](rendering-fidelity.md#keep-background-planes-out-of-actor-depth-2026-09-27).
+The current [candidate receipt](../results/episode1-human-playthrough-candidate-20260927.json)
+pins the build, IWAD, music catalog, launcher preflight, 36-map smoke, secret
+path/finale transition checks, E1M8 boss-trigger fixtures, current E1M1-to-E1M2
+session regression, actor-order test, and all three renderer styles. The
+retained E1M1–E1M4 routes and fixed-input E1M2–E1M4 replays remain linked in
+the earlier [renderer-guard receipt](../results/episode1-render-guard-evidence-20260927.json),
+which is pinned to its original source commit. Earlier
+[campaign/session](../results/episode1-playtest-current-readiness-20260927.json),
 [renderer](../results/episode1-playtest-readiness.json), and
 [prior E1 handoff](../results/episode1-playtest-intercept-candidate-readiness-20260927.json)
 receipts keep their original source pins. No automated route is treated as
@@ -127,13 +131,16 @@ playthrough.
 
 ## Readiness evidence
 
-The current playtest build is pinned to `4ed33630dcb26bb6f04456448535edc01f9b4bd5`.
-Its [machine-readable readiness receipt](../results/episode1-render-guard-evidence-20260927.json)
-records 50,200 sight-bound parity cases plus 50,000 intercept parity cases,
-all four retained E1M1–E1M4 route regressions, fixed-input E1M2–E1M4 replays,
-69 campaign transition checks including real E1M9 and E1M4 world loads, the
-36-map smoke, renderer worker comparisons in all three styles, and a fresh
-launcher preflight. The smoke loads maps and renders them; it is not
+The current playtest build is pinned to
+`e8ffd6edbc089d047e5eb5807377f93221d933bd`. Its
+[candidate receipt](../results/episode1-human-playthrough-candidate-20260927.json)
+records the 36-map smoke, current 69 transition checks, E1M8 boss-trigger
+fixtures, 1,747-command E1M1 session progression into E1M2, 18 focused renderer
+checks, and exact serial/worker output across all three styles. The earlier
+[renderer-guard receipt](../results/episode1-render-guard-evidence-20260927.json)
+retains 50,200 sight-bound parity cases, 50,000 intercept parity cases, all
+four E1M1–E1M4 route regressions, and fixed-input E1M2–E1M4 replays at its
+original source pin. The smoke loads maps and renders them; it is not
 map-completion evidence. Synthetic key records do not certify physical
 keyboard play. The [campaign matrix](campaign-matrix.md) records the distinction
 between fixture, route, smoke, and human evidence.

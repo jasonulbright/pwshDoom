@@ -609,3 +609,35 @@ process strips in Classic, Matrix/Katakana, and AnsiArt/Katakana; Classic also
 matches across sixteen strips. This confirms output consistency for these
 samples. It does not qualify every map's visual fidelity, live-device frame
 rate, or sustained 35-tic/60-display pacing.
+
+## Keep background planes out of actor depth (2026-09-27)
+
+The recorded E1M1 actor comparison isolated a second renderer issue. Floor and
+ceiling fills were assigned depth values, so later world sprites and masked
+walls were rejected when a floor happened to be closer to the viewer than the
+sprite. Doom uses those planes to fill the background; opaque walls and
+already-composited sprites own occlusion depth. The PowerShell renderer now
+writes plane color without claiming depth. Its plane-ID buffer still identifies
+the surface for texture mapping.
+
+The focused masked-wall fixture passes 18 checks, including a plane pixel
+whose depth remains infinite, a sprite sample composited over that background,
+and the sprite taking depth ownership. On the same E1M1 replay states, the
+reference-only actor mask shrinks from 247 to 3 pixels at tic 35 and from 344
+to 5 pixels at tic 70; the sprite comparison covers eight endpoints through
+tic 280. At tic 105 the reference draws no visible actor pixels while the
+candidate still affects 17 pixels, so world-sprite visibility is not fully
+matched. Whole-scene wall and floor differences also remain. The comparator is
+the adopted PowerShell renderer, not an independently verified original
+executable. See the [before](../results/actor-occlusion-plane-depth-test-20260927.json)
+and [after](../results/actor-occlusion-no-plane-depth-final-20260927.json)
+receipts.
+
+All three styles still match serial output across four uneven worker strips at
+five headings (320,000 pixels per style), and the 36-map smoke remains
+successful. An attempted actor-sector filter reduced stray pixels at one
+checkpoint but made output depend on worker strip visibility and failed serial
+equivalence; that filter was removed. The passing partition and smoke reports
+are linked from the [Episode 1 candidate receipt](../results/episode1-human-playthrough-candidate-20260927.json).
+The retained change improves sprite occlusion without claiming full actor
+parity or a performance gain.

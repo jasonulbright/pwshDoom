@@ -1,0 +1,104 @@
+{
+  "Format": "pwshDoom.Episode1HumanPlaythroughCandidate",
+  "Version": 1,
+  "Status": "ReadyForOneCompleteHumanEpisode1Playthrough",
+  "RecordedUtc": "2026-09-27",
+  "Build": {
+    "Repository": "jasonulbright/pwshDoom",
+    "Branch": "codex/feasibility-study",
+    "Commit": "e8ffd6edbc089d047e5eb5807377f93221d933bd",
+    "FastRendererSha256": "7D5DF913DE6B391E46EC4839BEE933835FB7FCFF886C2EAE5409C69F6FBC21BB",
+    "PowerShell": "7.6.5"
+  },
+  "Prerequisites": {
+    "IWAD": {
+      "Path": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Ultimate Doom\\base\\DOOM.WAD",
+      "Sha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+      "EpisodeMaps": 36
+    },
+    "MusicCatalog": {
+      "Path": "local/music-prepared-episode1.json",
+      "Sha256": "0E9C9542C75F4D5E2D7FC71E42FAFBB58F94321C3B8A49BA0C9AC5A93752EE58",
+      "Validation": "The launcher preflight verifies the catalog path; audio startup validates catalog tracks and IWAD identity."
+    },
+    "WindowsTerminal": "C:\\Users\\jason\\AppData\\Local\\Microsoft\\WindowsApps\\wt.exe"
+  },
+  "HumanPlaythrough": {
+    "Skill": 3,
+    "Start": "E1M1",
+    "ExpectedSequence": ["E1M1", "E1M2", "E1M3", "E1M9", "E1M4", "E1M5", "E1M6", "E1M7", "E1M8", "Episode 1 finale"],
+    "Finish": "Advance the E1M8 exit intermission until E1TEXT/CREDIT appears.",
+    "CompletionStatus": "Pending",
+    "EvidenceType": "One human playthrough; automated fixtures and routes are not substitutes."
+  },
+  "Checks": [
+    {
+      "Name": "Ultimate Doom map load/render smoke",
+      "Result": "36/36 passed; skill 3; 35 idle tics and two full serial frames per map.",
+      "Report": "results/campaign-smoke-no-plane-depth-20260927.json"
+    },
+    {
+      "Name": "Episode transitions, secret path, and finale state",
+      "Result": "69 checks passed, including real E1M3-to-E1M9 and E1M9-to-E1M4 intermission/world loads, secret history, and finale text/state fixtures.",
+      "Report": "results/campaign-transitions-render-final-20260927.json"
+    },
+    {
+      "Name": "Boss progression and E1M8 opening trigger fixtures",
+      "Result": "97 checks passed across Ultimate Doom boss exits and trigger behaviors.",
+      "Report": "results/boss-progression-render-final-20260927.json"
+    },
+    {
+      "Name": "Ordinary-input E1M1 session progression",
+      "Result": "1,747 commands reach the E1M1 intermission, advance to E1M2, preserve inventory, and advance 71 level tics.",
+      "RawReport": {
+        "Path": "local/episode1-candidate-raw-20260927/session-progression-render-final-20260927.json",
+        "Sha256": "8A2C13FCE6A8731F52B1D5BEEB096ED1B4D82560EC86B12E442EE4D96349CD4E"
+      }
+    },
+    {
+      "Name": "Synthetic menu controls and session screens",
+      "Result": "10 key-input checks and 24 rendered session-screen checks passed; physical keyboard use remains unverified.",
+      "Reports": ["results/menu-input-render-final-20260927.json", "results/session-screens-render-final-20260927.json"]
+    },
+    {
+      "Name": "Plane/background and masked-wall ordering",
+      "Result": "18 focused checks passed. Floor/ceiling pixels remain backgrounds, do not take sprite depth ownership, and sprites/masked walls retain their intended depth behavior.",
+      "Report": "results/masked-wall-order-no-plane-depth-e8ffd6e.json"
+    },
+    {
+      "Name": "Parallel rendering equivalence",
+      "Result": "Classic, Matrix/Katakana, and AnsiArt/Katakana each match serial output over 320,000 pixels and five views using four uneven worker strips.",
+      "Reports": [
+        "results/render-partitions-no-plane-depth-classic-20260927.json",
+        "results/render-partitions-no-plane-depth-matrix-20260927.json",
+        "results/render-partitions-no-plane-depth-ansiart-20260927.json",
+        "results/render-partitions-no-plane-depth-fuzz-20260927.json"
+      ]
+    },
+    {
+      "Name": "World-sprite occlusion comparison",
+      "Result": "Eight same-state E1M1 checkpoints from tics 35 through 280. Removing plane depth ownership reduces reference-only actor-mask pixels from 247 to 3 at tic 35 and from 344 to 5 at tic 70. Seventeen candidate-only sprite pixels remain at tic 105; scene-wide rendering differences remain.",
+      "Report": "results/actor-occlusion-no-plane-depth-final-20260927.json",
+      "BaselineReport": "results/actor-occlusion-plane-depth-test-20260927.json",
+      "Comparator": "The adopted PowerShell ThreeDRenderer; not an independently verified original executable."
+    },
+    {
+      "Name": "Launcher preflight",
+      "Result": "Ready; PowerShell 7.6.5, Windows Terminal, all 36 IWAD map markers, and the prepared catalog path are present.",
+      "Report": "results/episode1-launcher-preflight-render-final-20260927.json"
+    }
+  ],
+  "RetainedRouteEvidence": {
+    "Receipt": "results/episode1-render-guard-evidence-20260927.json",
+    "Meaning": "Four existing E1M1-E1M4 route regressions and E1M2-E1M4 fixed-input replays remain the retained regression set. The renderer-only e8ffd6e source change leaves the gameplay and input replay code unchanged."
+  },
+  "KnownLimits": [
+    "No human has completed the requested Episode 1 playthrough yet; the handoff requests one full run, not map-by-map tests.",
+    "Transition and boss fixtures verify state changes but do not claim ordinary playthroughs of E1M5-E1M8 or the finale.",
+    "The E1M3 waypoint driver previously stopped short of its next point without a crash or reproducible product defect; route tuning is stopped. Its retained 7,118-command fixed-input replay reaches E1M4 with all checkpoints matching.",
+    "Whole-campaign music continuity, audible review, and physical keyboard play have not been certified; a prior finite audio-device run recorded one queue-timing stall.",
+    "Sustained 35 simulation tics/sec and 60 displayed updates/sec are not certified.",
+    "Renderer comparisons are against the adopted PowerShell renderer. Original-executable pixel parity is unverified, and the tic-105 actor visibility difference plus broader scene differences remain open fidelity work."
+  ],
+  "Notes": "The candidate fixes a reproducible actor-occlusion error: floor/ceiling fill pixels had been written into the depth buffer even though Doom draws planes as backgrounds. An attempted sector-visibility cull was removed after it broke serial/worker strip equality. No bot or recording run was used for this readiness decision."
+}

@@ -2101,6 +2101,38 @@ reproduced and route tuning stopped. The retained 7,118-command E1M3 input
 replays successfully as noted above. The failure and exact state are recorded,
 not counted as route completion.
 
+## 2026-09-27 — Correct actor occlusion and prepare the full Episode 1 handoff
+
+The actor comparison found that `FastRenderer` wrote floor/ceiling fill depth
+before drawing world sprites. Those fills are backgrounds, not occluders, so
+lower sprite texels disappeared whenever a plane depth was nearer than the
+actor. Removed plane depth ownership while retaining the plane IDs and colors;
+opaque walls and composited sprites still own depth. The focused
+`Test-MaskedWallOrder` fixture passes 18 checks. Across the retained E1M1
+prefix, reference-only actor pixels fall from 247 to 3 at tic 35 and 344 to 5
+at tic 70. A tic-105 candidate-only 17-pixel actor difference and broader
+scene disagreement remain documented in the renderer-fidelity note.
+
+I tried culling candidate sprites by sectors touched during BSP traversal. It
+reduced one small off-screen difference, but Classic output from four worker
+strips stopped matching serial output because each strip visited a different
+set of sectors. The filter was removed; the no-plane-depth renderer passes
+320,000-pixel serial/worker checks at five views in Classic, Matrix/Katakana,
+and AnsiArt/Katakana. A fresh 36-map smoke, 69 transition checks, 97 boss
+checks, 1,747-command E1M1-to-E1M2 session, 10 menu-input checks, and 24
+session-screen checks also pass. `Play.ps1 -Check` finds PowerShell 7.6.5,
+Windows Terminal, the installed 36-map IWAD, and the prepared local music
+catalog. No bot routes or screen recordings were produced for this milestone.
+
+The renderer change and focused comparison are committed as build
+`e8ffd6edbc089d047e5eb5807377f93221d933bd`. The new
+[candidate receipt](../results/episode1-human-playthrough-candidate-20260927.json)
+and [human handoff](episode1-playtest.md) pin that build for one complete HMP
+playthrough: E1M1–E1M3, the secret E1M9 visit and return to E1M4, E1M4–E1M8,
+and the finale screen. Jason's result remains pending. This milestone does not
+close the broader Ultimate Doom, Doom II, audio-continuity, rendering-fidelity,
+performance, or MyHouse audit gates.
+
 The [source-pinned readiness evidence](../results/episode1-render-guard-evidence-20260927.json)
 prepares Jason's one complete HMP Episode 1 human playthrough; the [handoff](episode1-playtest.md)
 pins the exact source, IWAD, music catalog, controls, route through E1M9 and
