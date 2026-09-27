@@ -1,0 +1,274 @@
+{
+  "FinishedUtc": "2026-09-27T01:33:18.8455189Z",
+  "Episode": 1,
+  "Map": 1,
+  "Skill": 3,
+  "Input": "Recorded command prefix from C:\\projects\\pwshDoom\\results\\e1m1-route-lineflags.json; not a newly designed route.",
+  "InputReplaySha256": "41CF35EDF94C1CABE8C96A1CEEFBCFBF41F20DF24093569B65A1A4C9C56C017B",
+  "RequestedTics": 280,
+  "Interval": 35,
+  "Workers": 16,
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "BundleSha256": "61F6C9B2E6CE5B2316A363B81436A241ACEEF2B962B2CB4125596AD9DEA9BAE0",
+  "Sources": [
+    {
+      "Path": "scripts/Compare-MovingActorReference.ps1",
+      "Sha256": "8EE67AD20C4181BB54A84E20CF9E92904202DAC58F2D7B4C2B8387AA614B2DA5"
+    },
+    {
+      "Path": "src/FastRenderer.ps1",
+      "Sha256": "7BBCBCD87AC8D9474FC7C2E8EB5B115D96B79955A1196AFDF5E38C08864FC180"
+    },
+    {
+      "Path": "src/GameHost.ps1",
+      "Sha256": "3732C6A81C74F43451CB2A2E4ED342EBE303FC3EEB558B64C3658F78EAACB940"
+    },
+    {
+      "Path": "src/RenderLighting.ps1",
+      "Sha256": "E9C47D9E4005509206EC13DA08267F95DB3AF7A1E86F14A743F1F27DE145BF9F"
+    },
+    {
+      "Path": "src/RenderFuzz.ps1",
+      "Sha256": "E8A776EF59F8A11CBB1FC1446DD629BDBF53D9CCFEA7E08D4B886094E100C5C2"
+    }
+  ],
+  "SourcesChangedDuringRun": [],
+  "Samples": [
+    {
+      "LevelTic": 35,
+      "PlayerHealth": 100,
+      "ActorCount": 91,
+      "ReferenceVisibleWorldSprites": 5,
+      "VisibleSpriteStateSha256": "5E6E0A67E80AD02A99E7F385E5B623E4999E508E15FDF926E1FFD75685DA2CF2",
+      "VisibleSpriteStateChangedSinceFirst": false,
+      "VisibleSpritePositionSha256": "D963BD01EFCCD29B1DFF62BFC2C3375813DF3DA48B02D515CE502CA2D7B18560",
+      "VisibleSpritePositionChangedSinceFirst": false,
+      "ActorStateSha256": "446797A34D9FD95610F4855F494AF97C2A6E7274057AC3CD0680D22C00F016F5",
+      "ActorStateChangedSinceFirst": false,
+      "SceneComparedPixels": 53760,
+      "SceneDifferentIndices": 6251,
+      "SceneMismatchMaskSha256": "79BEED81491CAD6894990C4BB90C5068A5142AE844B45F4E71833C231DB43CC2",
+      "SceneMismatchLocationsChangedSincePrevious": null,
+      "HudComparedPixels": 10240,
+      "HudDifferentIndices": 0,
+      "MeanAbsoluteRgbChannelError": 1.7072291666666666,
+      "Image": {
+        "Panels": "Reference | Numeric | differing-pixel mask",
+        "Path": "C:\\projects\\pwshDoom\\local\\moving-actor-render-images-20260926-v3\\e1m1-tic35.png",
+        "Sha256": "F43AA18B9371154B81D4B592C394889BC00DCEB6B2EEBD626EC5A21A3F8EE3F8"
+      }
+    },
+    {
+      "LevelTic": 70,
+      "PlayerHealth": 100,
+      "ActorCount": 91,
+      "ReferenceVisibleWorldSprites": 3,
+      "VisibleSpriteStateSha256": "27384D7723184E6FC4A0F8AE0EE2926F623C205CB9ABBB536824F81C20DDB780",
+      "VisibleSpriteStateChangedSinceFirst": true,
+      "VisibleSpritePositionSha256": "DF38C2D81DF71096CC257AF8BC11F572F0FBB52333FC4A030F54556FE2329D7D",
+      "VisibleSpritePositionChangedSinceFirst": true,
+      "ActorStateSha256": "1FEBAA8B1647D0120635C5286900D7F705EFC18322D0BA1709059B7B9B199C46",
+      "ActorStateChangedSinceFirst": true,
+      "SceneComparedPixels": 53760,
+      "SceneDifferentIndices": 4421,
+      "SceneMismatchMaskSha256": "9CCBBB44A23BE49D368D2A88DCE7BD7192B65B45D9381227CB1368E7C3195861",
+      "SceneMismatchLocationsChangedSincePrevious": 9498,
+      "HudComparedPixels": 10240,
+      "HudDifferentIndices": 0,
+      "MeanAbsoluteRgbChannelError": 0.6794322916666666,
+      "Image": {
+        "Panels": "Reference | Numeric | differing-pixel mask",
+        "Path": "C:\\projects\\pwshDoom\\local\\moving-actor-render-images-20260926-v3\\e1m1-tic70.png",
+        "Sha256": "4CDD54747A2724B197747F31D4EAEE2F15B2F3CBE9C9EFC60429B4913500B75D"
+      }
+    },
+    {
+      "LevelTic": 105,
+      "PlayerHealth": 100,
+      "ActorCount": 91,
+      "ReferenceVisibleWorldSprites": 1,
+      "VisibleSpriteStateSha256": "E7B2963E33CD0EE15E88EDEEBA7591A0CB3679C58A3ACFA241ED329FC897FFB2",
+      "VisibleSpriteStateChangedSinceFirst": true,
+      "VisibleSpritePositionSha256": "52193ED33FCEE15EC374FF76AC3546C88B3A693FD1ADC036B1333F2099848E69",
+      "VisibleSpritePositionChangedSinceFirst": true,
+      "ActorStateSha256": "407E194495F4E25F0870DED7C825E3404F7A33A33733C62E77A94D0E3E79BBB0",
+      "ActorStateChangedSinceFirst": true,
+      "SceneComparedPixels": 53760,
+      "SceneDifferentIndices": 5105,
+      "SceneMismatchMaskSha256": "055446E62DE1159F626C61040E6325868D2D865864EE6EB3129A6A1AC1625402",
+      "SceneMismatchLocationsChangedSincePrevious": 8544,
+      "HudComparedPixels": 10240,
+      "HudDifferentIndices": 0,
+      "MeanAbsoluteRgbChannelError": 1.0131770833333333,
+      "Image": {
+        "Panels": "Reference | Numeric | differing-pixel mask",
+        "Path": "C:\\projects\\pwshDoom\\local\\moving-actor-render-images-20260926-v3\\e1m1-tic105.png",
+        "Sha256": "267D0E99BB55EB4358E5BF7A50CB1226954C07D078FFC5DA602AAD92FEEC9185"
+      }
+    },
+    {
+      "LevelTic": 140,
+      "PlayerHealth": 100,
+      "ActorCount": 91,
+      "ReferenceVisibleWorldSprites": 0,
+      "VisibleSpriteStateSha256": "4F53CDA18C2BAA0C0354BB5F9A3ECBE5ED12AB4D8E11BA873C2F11161202B945",
+      "VisibleSpriteStateChangedSinceFirst": true,
+      "VisibleSpritePositionSha256": "4F53CDA18C2BAA0C0354BB5F9A3ECBE5ED12AB4D8E11BA873C2F11161202B945",
+      "VisibleSpritePositionChangedSinceFirst": true,
+      "ActorStateSha256": "615BE64A03770E796C60AFD28291247765FBF964643B922D44FB8569635AC068",
+      "ActorStateChangedSinceFirst": true,
+      "SceneComparedPixels": 53760,
+      "SceneDifferentIndices": 4646,
+      "SceneMismatchMaskSha256": "95A118650AE07BB27C628090BC80FF9C7CAB2201501DDA4C1170DBC665E7B1C2",
+      "SceneMismatchLocationsChangedSincePrevious": 8947,
+      "HudComparedPixels": 10240,
+      "HudDifferentIndices": 0,
+      "MeanAbsoluteRgbChannelError": 0.7545208333333333,
+      "Image": {
+        "Panels": "Reference | Numeric | differing-pixel mask",
+        "Path": "C:\\projects\\pwshDoom\\local\\moving-actor-render-images-20260926-v3\\e1m1-tic140.png",
+        "Sha256": "56A0BFE5FC76BC253DB2DB76E755B32C5342D72AFAE49271CCDC09E80AF49A8E"
+      }
+    },
+    {
+      "LevelTic": 175,
+      "PlayerHealth": 100,
+      "ActorCount": 91,
+      "ReferenceVisibleWorldSprites": 0,
+      "VisibleSpriteStateSha256": "4F53CDA18C2BAA0C0354BB5F9A3ECBE5ED12AB4D8E11BA873C2F11161202B945",
+      "VisibleSpriteStateChangedSinceFirst": true,
+      "VisibleSpritePositionSha256": "4F53CDA18C2BAA0C0354BB5F9A3ECBE5ED12AB4D8E11BA873C2F11161202B945",
+      "VisibleSpritePositionChangedSinceFirst": true,
+      "ActorStateSha256": "A019ACE114D3CE9A263C39F4079B356930A1A5732E7C933FD8DE9D7BDA1540C5",
+      "ActorStateChangedSinceFirst": true,
+      "SceneComparedPixels": 53760,
+      "SceneDifferentIndices": 4189,
+      "SceneMismatchMaskSha256": "87EFF41DF719E391DDC23FF765DC4B5439024DD2BF27646D49D37B7F70BD03F2",
+      "SceneMismatchLocationsChangedSincePrevious": 7797,
+      "HudComparedPixels": 10240,
+      "HudDifferentIndices": 0,
+      "MeanAbsoluteRgbChannelError": 0.7059583333333334,
+      "Image": {
+        "Panels": "Reference | Numeric | differing-pixel mask",
+        "Path": "C:\\projects\\pwshDoom\\local\\moving-actor-render-images-20260926-v3\\e1m1-tic175.png",
+        "Sha256": "728D31A7B65F658E7D189CCE693400C1FE5F9C2C39765941912BEE0F08F29F32"
+      }
+    },
+    {
+      "LevelTic": 210,
+      "PlayerHealth": 100,
+      "ActorCount": 91,
+      "ReferenceVisibleWorldSprites": 1,
+      "VisibleSpriteStateSha256": "DDCB61D87B5EE7FEC338A7A69E3749AD699D67467D0E891C004C377AC455B851",
+      "VisibleSpriteStateChangedSinceFirst": true,
+      "VisibleSpritePositionSha256": "235D8A4CADBAD00BAAD6ABFF3D588A6450556804AA9F242F898C8304FA42C97B",
+      "VisibleSpritePositionChangedSinceFirst": true,
+      "ActorStateSha256": "7C90BAB9616705EFC080B09F7FBEE02AAF7875137A564800624649D0A3D9ADC6",
+      "ActorStateChangedSinceFirst": true,
+      "SceneComparedPixels": 53760,
+      "SceneDifferentIndices": 8917,
+      "SceneMismatchMaskSha256": "A7D182ADB10FFA02536D7267560F223245293E9F9F08CAAC55B57587A217227E",
+      "SceneMismatchLocationsChangedSincePrevious": 11890,
+      "HudComparedPixels": 10240,
+      "HudDifferentIndices": 0,
+      "MeanAbsoluteRgbChannelError": 1.92790625,
+      "Image": {
+        "Panels": "Reference | Numeric | differing-pixel mask",
+        "Path": "C:\\projects\\pwshDoom\\local\\moving-actor-render-images-20260926-v3\\e1m1-tic210.png",
+        "Sha256": "BE4C4D7892CCA59C23C8DE7B3020D035601A4882D17932DAF5253B080E1D6FDF"
+      }
+    },
+    {
+      "LevelTic": 245,
+      "PlayerHealth": 100,
+      "ActorCount": 91,
+      "ReferenceVisibleWorldSprites": 0,
+      "VisibleSpriteStateSha256": "4F53CDA18C2BAA0C0354BB5F9A3ECBE5ED12AB4D8E11BA873C2F11161202B945",
+      "VisibleSpriteStateChangedSinceFirst": true,
+      "VisibleSpritePositionSha256": "4F53CDA18C2BAA0C0354BB5F9A3ECBE5ED12AB4D8E11BA873C2F11161202B945",
+      "VisibleSpritePositionChangedSinceFirst": true,
+      "ActorStateSha256": "02861E761D5B9BD343F87586031DC8F8BF4ABE741ED9FF41168BE6B61DF46A33",
+      "ActorStateChangedSinceFirst": true,
+      "SceneComparedPixels": 53760,
+      "SceneDifferentIndices": 1089,
+      "SceneMismatchMaskSha256": "123141FF5B722758A44BDDA0292E41F081A4A2608109BCC800FF0A3121B303E0",
+      "SceneMismatchLocationsChangedSincePrevious": 9808,
+      "HudComparedPixels": 10240,
+      "HudDifferentIndices": 0,
+      "MeanAbsoluteRgbChannelError": 0.26169791666666664,
+      "Image": {
+        "Panels": "Reference | Numeric | differing-pixel mask",
+        "Path": "C:\\projects\\pwshDoom\\local\\moving-actor-render-images-20260926-v3\\e1m1-tic245.png",
+        "Sha256": "877D89793FBF4AF0FB9FBB90FBFCDAF0C3064DA93BF38E58F2A587A2AFA088ED"
+      }
+    },
+    {
+      "LevelTic": 280,
+      "PlayerHealth": 100,
+      "ActorCount": 91,
+      "ReferenceVisibleWorldSprites": 0,
+      "VisibleSpriteStateSha256": "4F53CDA18C2BAA0C0354BB5F9A3ECBE5ED12AB4D8E11BA873C2F11161202B945",
+      "VisibleSpriteStateChangedSinceFirst": true,
+      "VisibleSpritePositionSha256": "4F53CDA18C2BAA0C0354BB5F9A3ECBE5ED12AB4D8E11BA873C2F11161202B945",
+      "VisibleSpritePositionChangedSinceFirst": true,
+      "ActorStateSha256": "7C0F80B39E2D6E212B58FBBEFF67A4C81E30FF6207F17DB87D8DB9AE29EB4A68",
+      "ActorStateChangedSinceFirst": true,
+      "SceneComparedPixels": 53760,
+      "SceneDifferentIndices": 742,
+      "SceneMismatchMaskSha256": "D8C7E868E20C4BBEA453B046197A0C041A7E448EF087EB0A3ADC9ED6B82F3060",
+      "SceneMismatchLocationsChangedSincePrevious": 1831,
+      "HudComparedPixels": 10240,
+      "HudDifferentIndices": 0,
+      "MeanAbsoluteRgbChannelError": 0.24607291666666667,
+      "Image": {
+        "Panels": "Reference | Numeric | differing-pixel mask",
+        "Path": "C:\\projects\\pwshDoom\\local\\moving-actor-render-images-20260926-v3\\e1m1-tic280.png",
+        "Sha256": "CD34B5CE566B7B34B500A4F0A35743E50DF881417F6FAA0086D0F15B71F47B53"
+      }
+    }
+  ],
+  "Images": [
+    {
+      "Panels": "Reference | Numeric | differing-pixel mask",
+      "Path": "C:\\projects\\pwshDoom\\local\\moving-actor-render-images-20260926-v3\\e1m1-tic35.png",
+      "Sha256": "F43AA18B9371154B81D4B592C394889BC00DCEB6B2EEBD626EC5A21A3F8EE3F8"
+    },
+    {
+      "Panels": "Reference | Numeric | differing-pixel mask",
+      "Path": "C:\\projects\\pwshDoom\\local\\moving-actor-render-images-20260926-v3\\e1m1-tic70.png",
+      "Sha256": "4CDD54747A2724B197747F31D4EAEE2F15B2F3CBE9C9EFC60429B4913500B75D"
+    },
+    {
+      "Panels": "Reference | Numeric | differing-pixel mask",
+      "Path": "C:\\projects\\pwshDoom\\local\\moving-actor-render-images-20260926-v3\\e1m1-tic105.png",
+      "Sha256": "267D0E99BB55EB4358E5BF7A50CB1226954C07D078FFC5DA602AAD92FEEC9185"
+    },
+    {
+      "Panels": "Reference | Numeric | differing-pixel mask",
+      "Path": "C:\\projects\\pwshDoom\\local\\moving-actor-render-images-20260926-v3\\e1m1-tic140.png",
+      "Sha256": "56A0BFE5FC76BC253DB2DB76E755B32C5342D72AFAE49271CCDC09E80AF49A8E"
+    },
+    {
+      "Panels": "Reference | Numeric | differing-pixel mask",
+      "Path": "C:\\projects\\pwshDoom\\local\\moving-actor-render-images-20260926-v3\\e1m1-tic175.png",
+      "Sha256": "728D31A7B65F658E7D189CCE693400C1FE5F9C2C39765941912BEE0F08F29F32"
+    },
+    {
+      "Panels": "Reference | Numeric | differing-pixel mask",
+      "Path": "C:\\projects\\pwshDoom\\local\\moving-actor-render-images-20260926-v3\\e1m1-tic210.png",
+      "Sha256": "BE4C4D7892CCA59C23C8DE7B3020D035601A4882D17932DAF5253B080E1D6FDF"
+    },
+    {
+      "Panels": "Reference | Numeric | differing-pixel mask",
+      "Path": "C:\\projects\\pwshDoom\\local\\moving-actor-render-images-20260926-v3\\e1m1-tic245.png",
+      "Sha256": "877D89793FBF4AF0FB9FBB90FBFCDAF0C3064DA93BF38E58F2A587A2AFA088ED"
+    },
+    {
+      "Panels": "Reference | Numeric | differing-pixel mask",
+      "Path": "C:\\projects\\pwshDoom\\local\\moving-actor-render-images-20260926-v3\\e1m1-tic280.png",
+      "Sha256": "CD34B5CE566B7B34B500A4F0A35743E50DF881417F6FAA0086D0F15B71F47B53"
+    }
+  ],
+  "Error": null,
+  "Meaning": "Bounded dynamic actor/scene comparison between the numeric PowerShell renderer and the adopted PowerShell reference at matching live simulation states. Input may be a validated existing replay prefix or a single alerting attack followed by idle input. Pixel counts are full-scene diagnostics, not actor-only attribution, an original-executable comparison, map completion, worker-process equivalence, or a performance claim."
+}

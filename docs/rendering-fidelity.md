@@ -424,3 +424,45 @@ output, or visible FPS. The [parity](../results/sprite-rotation-parity.json),
 [map-smoke](../results/campaign-smoke-sprite-rotation.json), and
 [paired timing](../results/sprite-rotation-performance-e1m1.json) receipts keep
 the scope and hashes; the E1M2 timing is in the sibling receipt.
+
+## Moving actors on a recorded E1M1 prefix (2026-09-26)
+
+The static map-start diagnostics did not exercise changing visible actor
+positions, so a bounded comparison now reuses the first 280 commands from the
+already-qualified [E1M1 route regression](../results/e1m1-route-lineflags.json).
+It stops before the route's exit and does not construct a new route. At eight
+35-tic endpoints, the adopted PowerShell reference reports five visible world
+sprites at tic 35, three at tic 70, one at tic 105, and none at tic 140; at
+least one visible sprite changes projected position during the prefix. The
+numeric renderer and reference have identical HUD indices at all eight
+samples; full-scene disagreement ranges from 742 to 8,917 palette indices out
+of 53,760.
+
+The paired images show broad wall and floor differences; no actor-specific
+rendering defect is isolated in these frames. This is an inconclusive visual
+diagnostic, not proof of sprite parity: the receipt counts full-scene pixels
+and does not subtract each renderer's actor-free background. It compares with
+the adopted, locally adapted PowerShell renderer, not an independently
+validated original executable. Occlusion across more viewpoints, moving
+sectors, broader animation states, and independent original-engine comparison
+remain open.
+
+The PowerShell comparison harness is
+[`Compare-MovingActorReference.ps1`](../scripts/Compare-MovingActorReference.ps1);
+the source-pinned receipt is
+[`moving-actor-reference-e1m1-prefix-images-20260926.json`](../results/moving-actor-reference-e1m1-prefix-images-20260926.json).
+The eight diagnostic PNGs stay in ignored `local/` because they contain
+commercial game imagery; their paths and hashes are in the receipt. The
+intermediate idle-only attempts are retained under ignored
+`local/moving-actor-reference-iterations-20260926/` and are not counted as
+moving-actor coverage.
+
+Reproduce with the same Ultimate Doom IWAD and fresh result/image paths:
+
+```powershell
+pwsh -NoProfile -File .\scripts\Compare-MovingActorReference.ps1 `
+  -Episode 1 -Map 1 -Tics 280 -Interval 35 `
+  -InputReplay .\results\e1m1-route-lineflags.json `
+  -Images .\local\moving-actor-render-images `
+  -Output .\results\my-moving-actor-reference.json
+```

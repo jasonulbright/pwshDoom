@@ -1684,6 +1684,29 @@ E1M4, followed by the Episode 1 finale. Human route completion, physical input,
 continuous campaign music, displayed FPS, original-executable visual parity,
 and the broader release gates remain unclaimed.
 
+## 2026-09-26 — Compare moving actors on the existing E1M1 regression
+
+To extend fidelity evidence without building another gameplay route, replay
+the first 280 commands from the qualified E1M1 regression and compare the
+numeric renderer with the adopted PowerShell renderer every 35 simulation
+tics. Across eight endpoints, the reference reports five visible world sprites
+at tic 35, three at tic 70, one at tic 105, and none at tic 140; at least one
+visible sprite changes projected position. HUD palette indices match exactly
+at every endpoint. Full-scene disagreement ranges from 742 to 8,917 of 53,760
+pixels.
+
+The local triptych images show broad wall/floor differences; they do not
+isolate an actor defect. The changing mismatch masks cannot prove actor parity
+because the diagnostic does not subtract each renderer's actor-free
+background. No renderer source was changed. Preserve this as a narrow
+adopted-reference comparison, not original-executable fidelity, campaign
+completion, or an occlusion qualification. The harness, input-route hash, WAD
+hash, per-frame mismatch counts, and image hashes are in
+[`rendering-fidelity.md`](rendering-fidelity.md#moving-actors-on-a-recorded-e1m1-prefix)
+and [the receipt](../results/moving-actor-reference-e1m1-prefix-images-20260926.json).
+Earlier idle-only probes are retained under ignored `local/` and do not count
+as moving-actor checks.
+
 ## 2026-09-26 — Match Doom's rotated actor-frame arithmetic
 
 The numeric renderer had been using floating-point `Atan2` and `Floor` to
