@@ -133,6 +133,13 @@ Release acceptance requires:
 | M8 — Doom II qualification | Doom II campaign, actors/weapons, secret routes, text/cast endings | Expanded campaign matrix and complete route/play evidence with performance checks | After Ultimate Doom release |
 | M9 — MyHouse-based audit | Version-pinned requirements and compatibility/performance audit | Required-feature inventory, reference behavior, supported/unsupported/incorrect classification, scoped extension plan | After Doom II; full mod support not yet promised |
 
+The 2026-09-27 PowerShell mixer index optimization preserves every tested PCM
+hash and lowers the isolated 16-voice block mean from 33.1 ms to 5.0–5.7 ms;
+all 80 measured candidate blocks stay below the 28.57 ms audio-block duration.
+This improves the loaded audio path but does not qualify renderer/device load,
+live campaign continuity, or acoustic quality. Details and raw receipts are in
+[audio](audio.md#per-sample-index-optimization-2026-09-27).
+
 Do not postpone all performance work until M6. Measure after a feature adds substantial work; keep a known-good replay and compare against it. Prefer one bounded change and a targeted check over multiple simultaneous optimizations with ambiguous attribution.
 
 2026-09-26 campaign update: [E1M5 investigation](campaign-e1m5-investigation.md) now records the first ordinary-input continuation from the qualified E1M4 state. It dies after 7,442 E1M5 commands; the failure is exactly replayable, and the observed Troop damage does not by itself establish an engine defect. No E1M5 completion or full-campaign qualification is claimed.

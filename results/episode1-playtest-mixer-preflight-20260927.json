@@ -1,0 +1,50 @@
+{
+  "CheckedUtc": "2026-09-27T03:28:25.3721015Z",
+  "FocusedReceipts": [
+    "results/audio-mixer-hotloop-summary-20260927.json",
+    "results/audio-mixer-hotloop-tests-final-20260927.json",
+    "results/audio-mixer-hotloop-music-tests-20260927.json",
+    "results/audio-mixer-worker-current-20260927.json",
+    "results/episode1-current-session-menu-20260927.json",
+    "results/episode1-current-transitions-20260927.json",
+    "results/episode1-current-bosses-20260927.json",
+    "results/episode1-current-session-progression-20260927.json"
+  ],
+  "Readiness": {
+    "Ready": true,
+    "PowerShell": "7.6.5",
+    "Wad": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Ultimate Doom\\base\\DOOM.WAD",
+    "EpisodeMaps": 36,
+    "Root": "C:\\projects\\pwshDoom",
+    "WindowsTerminal": "C:\\Users\\jason\\AppData\\Local\\Microsoft\\WindowsApps\\wt.exe",
+    "MusicCatalog": "C:\\projects\\pwshDoom\\local\\music-prepared-episode1.json",
+    "MusicValidation": "Track qualification and WAD identity are checked at audio startup; -Check verifies path only."
+  },
+  "SourceHashes": [
+    {
+      "Path": "Play.ps1",
+      "Sha256": "BC26D8D09BE5107BC9CD3BAB67A6A7BDD008672C795F7E611AD8477CBA3461C3"
+    },
+    {
+      "Path": "src/AudioMixer.ps1",
+      "Sha256": "95F0F9A8A004E4D42E313231BAF13A27BD5E7421EAF67F90220DBC5FF0B55276"
+    },
+    {
+      "Path": "scripts/Test-AudioMixer.ps1",
+      "Sha256": "D602FE267B4586EB64C53B1B5AD557BC6DAEFE05D47D9120C89A35620FFD56EF"
+    },
+    {
+      "Path": "scripts/Test-MusicEffectMix.ps1",
+      "Sha256": "8515E15E57D125AF1A0EA3C2CE7AC92AEBFBB5C3BE0E73BFA3161EBB37D71A78"
+    },
+    {
+      "Path": "scripts/Test-MusicAudioWorker.ps1",
+      "Sha256": "A723B14E0E503F60594E5F9E838BEDB2671EEF9D581A0D00DAE1E09418304131"
+    }
+  ],
+  "MusicCatalogSha256": "0E9C9542C75F4D5E2D7FC71E42FAFBB58F94321C3B8A49BA0C9AC5A93752EE58",
+  "Launcher": "Play.ps1 -Check",
+  "Format": "pwshDoom.Episode1MixerPlaytestPreflight",
+  "Meaning": "Current-source Play.ps1 path/IWAD/Terminal check plus source hashes. Music track qualification and complete catalog validity are covered by linked prior receipts and focused current audio worker checks, not by -Check.",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F"
+}

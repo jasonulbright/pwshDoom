@@ -1,9 +1,14 @@
 #requires -Version 7.4
 # SPDX-License-Identifier: GPL-2.0-or-later
-param([Parameter(Mandatory)][string]$Output)
+param(
+    [Parameter(Mandatory)][string]$Output,
+    [string]$MixerSource=(Join-Path $PSScriptRoot '../src/AudioMixer.ps1')
+)
 $ErrorActionPreference='Stop';Set-StrictMode -Version Latest
 if(Test-Path $Output){throw 'Use a fresh report path.'}
-. "$PSScriptRoot/../src/AudioMixer.ps1"
+$MixerSource=[IO.Path]::GetFullPath($MixerSource)
+. $MixerSource
+$mixerSourceHash=(Get-FileHash -LiteralPath $MixerSource).Hash
 $results=[Collections.Generic.List[object]]::new();$failure=$null
 try{
     # Deterministic synthetic source: kept active throughout each finite trial.
@@ -25,6 +30,6 @@ try{
         }finally{$digest.Dispose()}
     }
 }catch{$failure=$_.ToString()+"`n"+$_.ScriptStackTrace;throw}finally{
-    @{FinishedUtc=[datetime]::UtcNow.ToString('o');Error=$failure;Cases=$results.ToArray();Sources=@('src/AudioMixer.ps1','scripts/Measure-AudioMixer.ps1'|ForEach-Object {@{Path=$_;Sha256=(Get-FileHash (Join-Path "$PSScriptRoot/.." $_)).Hash}});Meaning='Finite synthetic isolated mixer cost; ten warmup blocks then eighty timed blocks per voice count. Hashing and sample generation excluded. No renderer/device load or live scheduling qualification.'}|ConvertTo-Json -Depth 7|Set-Content $Output
+    @{FinishedUtc=[datetime]::UtcNow.ToString('o');Error=$failure;Cases=$results.ToArray();MixerSource=$MixerSource;Sources=@(@{Path=$MixerSource;Sha256=$mixerSourceHash},@{Path='scripts/Measure-AudioMixer.ps1';Sha256=(Get-FileHash $PSCommandPath).Hash});Meaning='Finite synthetic isolated mixer cost; ten warmup blocks then eighty timed blocks per voice count. Hashing and sample generation excluded. No renderer/device load or live scheduling qualification.'}|ConvertTo-Json -Depth 7|Set-Content $Output
 }
 $results|Select-Object Voices,MeanMs,P95Ms,MaxMs,BlocksOverAudioDuration|Format-Table

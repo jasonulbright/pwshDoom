@@ -1826,3 +1826,30 @@ local Episode 1 music-catalog path. The `%LOCALAPPDATA%\pwshDoom\settings.json`
 file is absent, so the documented defaults apply. The readiness receipt
 preserves the earlier focused gameplay check pins and the new renderer pins
 separately. Jason's one complete Episode 1 playthrough remains pending.
+
+## 2026-09-27 — Reduce PowerShell effect-mixer cost
+
+The isolated mixer stress case was a documented real-time problem: with
+sixteen sustained voices, all 80 measured 1,260-frame blocks took longer than
+their 28.57 ms audio duration. `Read-DoomAudioFrames` called `Math.Floor` for
+every resampled frame and recomputed stereo array offsets. The PowerShell mixer
+now initializes one integer source index from each voice's saved position,
+advances it as positive pitch steps cross samples, and increments the stereo
+index directly. Interpolation and all PCM arithmetic remain unchanged.
+
+Two before/after pairs, with the run order reversed for the second, preserve
+identical PCM digests for zero, one, five, and sixteen voices. The sixteen-voice
+mean drops from 32.91/33.26 ms to 5.70/5.01 ms; every candidate block remains
+below the audio duration. The five-voice means fall from 12.30/12.18 ms to
+1.63/2.06 ms. The pre-change mixer also remains byte-identical for non-binary
+pitch 0.97 and sample-skipping pitch 3.25, across split buffer reads. The final
+26 mixer checks and nine music/effects checks pass. See
+`results/audio-mixer-hotloop-summary-20260927.json` and the detailed record in
+[`audio.md`](audio.md#per-sample-index-optimization-2026-09-27).
+
+The first optimized draft reset the cached index at each read and failed the
+existing partition-invariance check. That failure is retained in
+`results/audio-mixer-hotloop-tests-20260927.json`; initializing from the saved
+voice position fixed it. These are synthetic isolated costs. Renderer/device
+load, live audio queue timing, speaker output, and acoustic continuity remain
+unqualified.

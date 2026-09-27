@@ -40,7 +40,48 @@ The first optimization skips empty-voice mixing, caches source bounds, replaces 
 
 Sources: `results/audio-mixer-cost-baseline.json` and `results/audio-mixer-cost-cast.json`. Each uses ten warmup blocks and eighty timed blocks per voice count, with the same deterministic 11.025 kHz source at 44.1 kHz output. Generation/hashing are excluded. These sequential isolated trials do not establish performance under renderer load. All eighty optimized sixteen-voice blocks still exceed their audio duration.
 
-The optimized real route (`results/audio-replay-cast.json`) preserves the entire WAV SHA-256, all 75 events and eight gameplay checkpoints. Mixing falls to 2.137 ms mean, 6.608 ms p95 and 12.271 ms maximum. Event processing averages 0.147 ms, with a 20.634 ms maximum. This is still an isolated offline route, not a live deadline test; sixteen-voice cost remains unresolved.
+The optimized real route (`results/audio-replay-cast.json`) preserves the entire WAV SHA-256, all 75 events and eight gameplay checkpoints. Mixing falls to 2.137 ms mean, 6.608 ms p95 and 12.271 ms maximum. Event processing averages 0.147 ms, with a 20.634 ms maximum. This is still an isolated offline route, not a live deadline test. The later [per-sample index optimization](#per-sample-index-optimization-2026-09-27) addresses the isolated sixteen-voice cost; live deadlines remain unverified.
+
+## Per-sample index optimization (2026-09-27)
+
+`Read-DoomAudioFrames` previously called `Math.Floor` for every output frame
+and multiplied each frame number by two for stereo indexing. Voice positions
+are nonnegative and their steps are positive, so the mixer now truncates the
+saved position once at each block boundary and advances an integer sample
+index as the fractional position crosses input samples. A `while` handles
+steps that skip more than one sample. Interpolation, pitch, gain, accumulation,
+clipping, and PCM conversion are unchanged.
+
+Two before/after pairs ran the same 90-block workload per voice count: ten
+warmups, then eighty timed 1,260-frame blocks at 44.1 kHz. Pair order was
+reversed on the second pass. The baseline is the pre-change mixer from commit
+`13e4301`; the candidate source is pinned in the [summary receipt](../results/audio-mixer-hotloop-summary-20260927.json).
+
+| Sustained voices | Baseline mean ms/block, two runs | Candidate mean ms/block, two runs | Reduction | Blocks slower than 28.57 ms, baseline → candidate |
+| ---: | ---: | ---: | ---: | ---: |
+| 0 | 0.0217 / 0.0212 | 0.0217 / 0.0209 | control | 0/0 → 0/0 |
+| 1 | 2.790 / 2.815 | 0.548 / 0.562 | 80.1–80.4% | 0/0 → 0/0 |
+| 5 | 12.302 / 12.179 | 1.633 / 2.064 | 83.1–86.7% | 0/0 → 0/0 |
+| 16 | 32.911 / 33.260 | 5.698 / 5.013 | 82.7–84.9% | 80/80 → 0/80 |
+
+All four voice-count PCM digests match in both pairs. The 26-check mixer suite
+also matches pre-change golden PCM at pitch 0.97 and pitch 3.25, including
+block splits; the nine music/effects-mix checks pass. Receipts include the
+[first pair](../results/audio-mixer-hotloop-paired-before-20260927.json) and
+[candidate](../results/audio-mixer-hotloop-paired-after-20260927.json), the
+[reversed-order candidate](../results/audio-mixer-hotloop-paired-after-repeat-20260927.json)
+and [baseline](../results/audio-mixer-hotloop-paired-before-repeat-20260927.json),
+and the [focused checks](../results/audio-mixer-hotloop-tests-final-20260927.json)
+and [music/effects checks](../results/audio-mixer-hotloop-music-tests-20260927.json).
+
+This is an isolated synthetic mixer measurement: it excludes asset decoding,
+the renderer, device submission, live scheduling, and speaker output. The
+improvement removes the prior 16-voice block overrun in this fixture; it does
+not certify dense-combat audio deadlines or eliminate the observed live queue
+starvation. The first candidate failed the existing block-boundary check
+because its cached index restarted at zero; that preserved failure is
+`audio-mixer-hotloop-tests-20260927.json`. Initializing from the voice's saved
+position fixed it, and the full focused suite then passed.
 
 ## Live worker integration
 

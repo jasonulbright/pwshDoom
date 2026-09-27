@@ -1,0 +1,48 @@
+{
+  "Meaning": "Deterministic synthetic DMX/PCM tests with explicit reference sample values, stereo geometry, voice lifecycle and block partitioning. No device playback or vanilla audio equivalence claim.",
+  "FinishedUtc": "2026-09-27T03:08:39.7027786Z",
+  "Checks": [
+    {
+      "Passed": true,
+      "Name": "DMX header/padding/unsigned conversion"
+    },
+    {
+      "Passed": true,
+      "Name": "Explicit unpadded decoding"
+    },
+    {
+      "Passed": true,
+      "Name": "Reject malformed DMX short"
+    },
+    {
+      "Passed": true,
+      "Name": "Reject malformed DMX format"
+    },
+    {
+      "Passed": true,
+      "Name": "Reject malformed DMX rate"
+    },
+    {
+      "Passed": true,
+      "Name": "Reject malformed DMX count"
+    },
+    {
+      "Passed": true,
+      "Name": "Reject malformed DMX minimum"
+    },
+    {
+      "Passed": true,
+      "Name": "Independent half-rate interpolation/tail/silence values"
+    },
+    {
+      "Passed": true,
+      "Name": "Completed voice removed"
+    },
+    {
+      "Passed": false,
+      "Name": "PCM is invariant to block boundaries"
+    }
+  ],
+  "SourceSha256": "E42786EEF3AD907C65E9B0327C4B67F97A2D0AE150804DDD800817CF77B7EA3A",
+  "Error": "PCM is invariant to block boundaries\nat Check, C:\\projects\\pwshDoom\\scripts\\Test-AudioMixer.ps1: line 8\r\nat <ScriptBlock>, C:\\projects\\pwshDoom\\scripts\\Test-AudioMixer.ps1: line 26"
+}

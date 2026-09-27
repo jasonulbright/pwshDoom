@@ -1,0 +1,78 @@
+{
+  "Meaning": "Finite synthetic isolated mixer cost; ten warmup blocks then eighty timed blocks per voice count. Hashing and sample generation excluded. No renderer/device load or live scheduling qualification.",
+  "Error": null,
+  "MixerSource": "C:\\projects\\pwshDoom\\local\\AudioMixer-before-index.ps1",
+  "FinishedUtc": "2026-09-27T03:13:37.7418409Z",
+  "Cases": [
+    {
+      "ClippedSamples": 0,
+      "PcmSha256": "046CFDBE4AC1E2B7FFBBBD4FBB131CC85E40426A4540F46FE808D695055E2D24",
+      "Rate": 44100,
+      "SampleCount": 80,
+      "WarmupBlocks": 10,
+      "FramesPerBlock": 1260,
+      "MaxMs": 0.1178,
+      "P95Ms": 0.0267,
+      "Voices": 0,
+      "BlocksOverAudioDuration": 0,
+      "MedianMs": 0.0196,
+      "RemainingVoices": 0,
+      "MeanMs": 0.021692499999999993
+    },
+    {
+      "ClippedSamples": 0,
+      "PcmSha256": "B6404EEAF49645E709617C1B5429DEA25A16265D5C751DB8FBBFE0FF4A01E05B",
+      "Rate": 44100,
+      "SampleCount": 80,
+      "WarmupBlocks": 10,
+      "FramesPerBlock": 1260,
+      "MaxMs": 9.3335,
+      "P95Ms": 3.3,
+      "Voices": 1,
+      "BlocksOverAudioDuration": 0,
+      "MedianMs": 2.5473,
+      "RemainingVoices": 1,
+      "MeanMs": 2.7903712500000006
+    },
+    {
+      "ClippedSamples": 0,
+      "PcmSha256": "A821226EC446CC1BCCCA33E147127DA96E038913B8C1914EAA6E8888336BD551",
+      "Rate": 44100,
+      "SampleCount": 80,
+      "WarmupBlocks": 10,
+      "FramesPerBlock": 1260,
+      "MaxMs": 13.9799,
+      "P95Ms": 13.6979,
+      "Voices": 5,
+      "BlocksOverAudioDuration": 0,
+      "MedianMs": 12.8489,
+      "RemainingVoices": 5,
+      "MeanMs": 12.302325
+    },
+    {
+      "ClippedSamples": 0,
+      "PcmSha256": "667549396CF6D44247B9B0925D9FFE06C17B173F9D2F3FD380D9E9B74E31FD26",
+      "Rate": 44100,
+      "SampleCount": 80,
+      "WarmupBlocks": 10,
+      "FramesPerBlock": 1260,
+      "MaxMs": 33.5874,
+      "P95Ms": 33.4888,
+      "Voices": 16,
+      "BlocksOverAudioDuration": 80,
+      "MedianMs": 33.1835,
+      "RemainingVoices": 16,
+      "MeanMs": 32.91145875000001
+    }
+  ],
+  "Sources": [
+    {
+      "Sha256": "CB1AD163BA0A4D25D43788FDEF5B613AA1238797A704896F585ADC2864E670E1",
+      "Path": "C:\\projects\\pwshDoom\\local\\AudioMixer-before-index.ps1"
+    },
+    {
+      "Sha256": "6B61C5C3E1DF4E81B65DADEDF3D7F20F3ED0E5C55021BFDEDB650C19C5E8D31A",
+      "Path": "scripts/Measure-AudioMixer.ps1"
+    }
+  ]
+}

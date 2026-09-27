@@ -1,0 +1,219 @@
+{
+  "Format": "pwshDoom.AudioMixerHotloopOptimization",
+  "FinishedUtc": "2026-09-27T03:19:56.4892984Z",
+  "BaselineSourceCommit": "13e430162324d03d48194892ff2ae8f80d4becf9",
+  "BaselineCopiedSourceSha256": "CB1AD163BA0A4D25D43788FDEF5B613AA1238797A704896F585ADC2864E670E1",
+  "CandidateSourcePath": "src/AudioMixer.ps1",
+  "CandidateSourceSha256": "95F0F9A8A004E4D42E313231BAF13A27BD5E7421EAF67F90220DBC5FF0B55276",
+  "MeasurementScriptPath": "scripts/Measure-AudioMixer.ps1",
+  "MeasurementScriptSha256": "6B61C5C3E1DF4E81B65DADEDF3D7F20F3ED0E5C55021BFDEDB650C19C5E8D31A",
+  "TestScriptSha256": "D602FE267B4586EB64C53B1B5AD557BC6DAEFE05D47D9120C89A35620FFD56EF",
+  "MusicEffectTestScriptSha256": "8515E15E57D125AF1A0EA3C2CE7AC92AEBFBB5C3BE0E73BFA3161EBB37D71A78",
+  "FramesPerBlock": 1260,
+  "SampleRate": 44100,
+  "AudioBlockDurationMs": 28.571428571428573,
+  "WarmupBlocks": 10,
+  "TimedBlocksPerCase": 80,
+  "SourceSampleRate": 11025,
+  "Cases": [
+    {
+      "Voices": 0,
+      "BeforeMeanMs": [
+        0.021692499999999993,
+        0.021228749999999994
+      ],
+      "AfterMeanMs": [
+        0.021679999999999994,
+        0.020902500000000004
+      ],
+      "MeanReductionPercent": 0,
+      "BeforeP95Ms": [
+        0.0267,
+        0.0259
+      ],
+      "AfterP95Ms": [
+        0.0258,
+        0.0268
+      ],
+      "BeforeMaxMs": [
+        0.1178,
+        0.097
+      ],
+      "AfterMaxMs": [
+        0.0918,
+        0.0859
+      ],
+      "PcmHashesMatch": true,
+      "BaselineBlocksOverDuration": [
+        0,
+        0
+      ],
+      "CandidateBlocksOverDuration": [
+        0,
+        0
+      ]
+    },
+    {
+      "Voices": 1,
+      "BeforeMeanMs": [
+        2.7903712500000006,
+        2.81518
+      ],
+      "AfterMeanMs": [
+        0.5475400000000001,
+        0.5616249999999999
+      ],
+      "MeanReductionPercent": 80.2,
+      "BeforeP95Ms": [
+        3.3,
+        3.1668
+      ],
+      "AfterP95Ms": [
+        0.5634,
+        0.6111
+      ],
+      "BeforeMaxMs": [
+        9.3335,
+        9.376
+      ],
+      "AfterMaxMs": [
+        6.9744,
+        7.4186
+      ],
+      "PcmHashesMatch": true,
+      "BaselineBlocksOverDuration": [
+        0,
+        0
+      ],
+      "CandidateBlocksOverDuration": [
+        0,
+        0
+      ]
+    },
+    {
+      "Voices": 5,
+      "BeforeMeanMs": [
+        12.302325,
+        12.179086250000001
+      ],
+      "AfterMeanMs": [
+        1.6333975000000005,
+        2.064027500000001
+      ],
+      "MeanReductionPercent": 84.9,
+      "BeforeP95Ms": [
+        13.6979,
+        13.6333
+      ],
+      "AfterP95Ms": [
+        1.7754,
+        2.4171
+      ],
+      "BeforeMaxMs": [
+        13.9799,
+        14.131
+      ],
+      "AfterMaxMs": [
+        1.9772,
+        5.4052
+      ],
+      "PcmHashesMatch": true,
+      "BaselineBlocksOverDuration": [
+        0,
+        0
+      ],
+      "CandidateBlocksOverDuration": [
+        0,
+        0
+      ]
+    },
+    {
+      "Voices": 16,
+      "BeforeMeanMs": [
+        32.91145875000001,
+        33.260324999999995
+      ],
+      "AfterMeanMs": [
+        5.6977875000000004,
+        5.012798750000001
+      ],
+      "MeanReductionPercent": 83.8,
+      "BeforeP95Ms": [
+        33.4888,
+        33.8442
+      ],
+      "AfterP95Ms": [
+        8.0925,
+        7.4839
+      ],
+      "BeforeMaxMs": [
+        33.5874,
+        34.7819
+      ],
+      "AfterMaxMs": [
+        9.4171,
+        8.4011
+      ],
+      "PcmHashesMatch": true,
+      "BaselineBlocksOverDuration": [
+        80,
+        80
+      ],
+      "CandidateBlocksOverDuration": [
+        0,
+        0
+      ]
+    }
+  ],
+  "RawPairedReports": [
+    {
+      "Path": "results/audio-mixer-hotloop-paired-before-20260927.json",
+      "Sha256": "E33D64AA90A0CE6ACE13256EA033507659D734D8AB77CC6740268DA94AE06E83",
+      "MixerSource": "C:\\projects\\pwshDoom\\local\\AudioMixer-before-index.ps1",
+      "MixerSourceSha256": "CB1AD163BA0A4D25D43788FDEF5B613AA1238797A704896F585ADC2864E670E1"
+    },
+    {
+      "Path": "results/audio-mixer-hotloop-paired-before-repeat-20260927.json",
+      "Sha256": "95EDF0B7AFDD69EB9625FF0487B191E6FDF2ABA4C2EBC77B20B0D67AFA59417B",
+      "MixerSource": "C:\\projects\\pwshDoom\\local\\AudioMixer-before-index.ps1",
+      "MixerSourceSha256": "CB1AD163BA0A4D25D43788FDEF5B613AA1238797A704896F585ADC2864E670E1"
+    },
+    {
+      "Path": "results/audio-mixer-hotloop-paired-after-20260927.json",
+      "Sha256": "3FDFBA6882E746C063E7AA1440364930E1CEF1D6B7D1A38C356FB74B60CEBE0B",
+      "MixerSource": "C:\\projects\\pwshDoom\\src\\AudioMixer.ps1",
+      "MixerSourceSha256": "95F0F9A8A004E4D42E313231BAF13A27BD5E7421EAF67F90220DBC5FF0B55276"
+    },
+    {
+      "Path": "results/audio-mixer-hotloop-paired-after-repeat-20260927.json",
+      "Sha256": "BDBAA3BD30BAFC41BB12EA81B52A0AA5ACE341DD4A4C23BB3B823700F4355BA0",
+      "MixerSource": "C:\\projects\\pwshDoom\\src\\AudioMixer.ps1",
+      "MixerSourceSha256": "95F0F9A8A004E4D42E313231BAF13A27BD5E7421EAF67F90220DBC5FF0B55276"
+    }
+  ],
+  "FocusedTests": [
+    {
+      "Path": "results/audio-mixer-hotloop-tests-final-20260927.json",
+      "Sha256": "307046D57A3AD8E729AFBE6656F55688FADC301C82C0D876856F5B9E712DDEC4",
+      "Checks": 26,
+      "Failed": 0,
+      "SourceSha256": "95F0F9A8A004E4D42E313231BAF13A27BD5E7421EAF67F90220DBC5FF0B55276"
+    },
+    {
+      "Path": "results/audio-mixer-hotloop-music-tests-20260927.json",
+      "Sha256": "76B0CC84258A8DAAF245D4DBFE8EA1294B13495A5F3FD280F59AB3030C5E0704",
+      "Checks": 9,
+      "Failed": 0,
+      "SourceSha256": "95F0F9A8A004E4D42E313231BAF13A27BD5E7421EAF67F90220DBC5FF0B55276"
+    }
+  ],
+  "PreservedInitialFailure": {
+    "Path": "results/audio-mixer-hotloop-tests-20260927.json",
+    "Sha256": "8972567E52BBAA294BE1214276E22957F4CC69C5F3CA1FF14C866B189FA57975",
+    "Error": "PCM is invariant to block boundaries\nat Check, C:\\projects\\pwshDoom\\scripts\\Test-AudioMixer.ps1: line 8\r\nat <ScriptBlock>, C:\\projects\\pwshDoom\\scripts\\Test-AudioMixer.ps1: line 26"
+  },
+  "PcmExact": true,
+  "ActualRendererLoadMeasured": false,
+  "ActualDeviceSchedulingMeasured": false,
+  "Interpretation": "Two before/after pairs, with order reversed for the second. Mixer output digests match across every voice count. The synthetic 16-voice case fell from 80/80 blocks over the 28.57 ms block duration to 0/80 in both candidate runs. This is isolated mixer cost, not live-host audio qualification."
+}

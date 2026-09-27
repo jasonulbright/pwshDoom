@@ -1,0 +1,78 @@
+{
+  "Sources": [
+    {
+      "Sha256": "95F0F9A8A004E4D42E313231BAF13A27BD5E7421EAF67F90220DBC5FF0B55276",
+      "Path": "C:\\projects\\pwshDoom\\src\\AudioMixer.ps1"
+    },
+    {
+      "Sha256": "6B61C5C3E1DF4E81B65DADEDF3D7F20F3ED0E5C55021BFDEDB650C19C5E8D31A",
+      "Path": "scripts/Measure-AudioMixer.ps1"
+    }
+  ],
+  "FinishedUtc": "2026-09-27T03:13:49.9100836Z",
+  "Error": null,
+  "Cases": [
+    {
+      "MeanMs": 0.020902500000000004,
+      "MaxMs": 0.0859,
+      "P95Ms": 0.0268,
+      "PcmSha256": "046CFDBE4AC1E2B7FFBBBD4FBB131CC85E40426A4540F46FE808D695055E2D24",
+      "SampleCount": 80,
+      "ClippedSamples": 0,
+      "WarmupBlocks": 10,
+      "Rate": 44100,
+      "Voices": 0,
+      "RemainingVoices": 0,
+      "BlocksOverAudioDuration": 0,
+      "MedianMs": 0.0191,
+      "FramesPerBlock": 1260
+    },
+    {
+      "MeanMs": 0.5616249999999999,
+      "MaxMs": 7.4186,
+      "P95Ms": 0.6111,
+      "PcmSha256": "B6404EEAF49645E709617C1B5429DEA25A16265D5C751DB8FBBFE0FF4A01E05B",
+      "SampleCount": 80,
+      "ClippedSamples": 0,
+      "WarmupBlocks": 10,
+      "Rate": 44100,
+      "Voices": 1,
+      "RemainingVoices": 1,
+      "BlocksOverAudioDuration": 0,
+      "MedianMs": 0.4469,
+      "FramesPerBlock": 1260
+    },
+    {
+      "MeanMs": 2.064027500000001,
+      "MaxMs": 5.4052,
+      "P95Ms": 2.4171,
+      "PcmSha256": "A821226EC446CC1BCCCA33E147127DA96E038913B8C1914EAA6E8888336BD551",
+      "SampleCount": 80,
+      "ClippedSamples": 0,
+      "WarmupBlocks": 10,
+      "Rate": 44100,
+      "Voices": 5,
+      "RemainingVoices": 5,
+      "BlocksOverAudioDuration": 0,
+      "MedianMs": 2.0805,
+      "FramesPerBlock": 1260
+    },
+    {
+      "MeanMs": 5.012798750000001,
+      "MaxMs": 8.4011,
+      "P95Ms": 7.4839,
+      "PcmSha256": "667549396CF6D44247B9B0925D9FFE06C17B173F9D2F3FD380D9E9B74E31FD26",
+      "SampleCount": 80,
+      "ClippedSamples": 0,
+      "WarmupBlocks": 10,
+      "Rate": 44100,
+      "Voices": 16,
+      "RemainingVoices": 16,
+      "BlocksOverAudioDuration": 0,
+      "MedianMs": 4.311,
+      "FramesPerBlock": 1260
+    }
+  ],
+  "MixerSource": "C:\\projects\\pwshDoom\\src\\AudioMixer.ps1",
+  "Meaning": "Finite synthetic isolated mixer cost; ten warmup blocks then eighty timed blocks per voice count. Hashing and sample generation excluded. No renderer/device load or live scheduling qualification."
+}

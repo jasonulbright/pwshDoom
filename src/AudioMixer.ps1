@@ -51,10 +51,13 @@ function Read-DoomAudioFrames {
         [single[]]$samples=$voice.Clip.Samples;[double]$position=$voice.Position;[double]$step=$voice.Step
         [int]$sampleCount=$samples.Length;[int]$last=$sampleCount-1
         [double]$left=$voice.Left*$Mixer.Volume;[double]$right=$voice.Right*$Mixer.Volume
+        [int]$index=[Math]::Truncate($position);[int]$mixIndex=0
         for([int]$frame=0;$frame -lt $Frames -and $position -lt $sampleCount;$frame++){
-            [int]$index=[Math]::Floor($position);[int]$next=$index+1;if($next -gt $last){$next=$last}
+            [int]$next=$index+1;if($next -gt $last){$next=$last}
             [double]$sample=$samples[$index]+($samples[$next]-$samples[$index])*($position-$index)
-            $mix[2*$frame]+=$sample*$left;$mix[2*$frame+1]+=$sample*$right;$position+=$step
+            $mix[$mixIndex]+=$sample*$left;$mix[$mixIndex+1]+=$sample*$right
+            $position+=$step;$mixIndex+=2
+            while($position -ge ($index+1)){$index++}
         }
         $voice.Position=$position
     }

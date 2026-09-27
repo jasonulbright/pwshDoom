@@ -24,6 +24,28 @@ try{
     $a=New-DoomAudioMixer 16000;$b=New-DoomAudioMixer 16000;$null=Add-DoomAudioVoice $a $clip;$null=Add-DoomAudioVoice $b $clip
     $whole=Read-DoomAudioFrames $a 12;$part1=Read-DoomAudioFrames $b 3;$part2=Read-DoomAudioFrames $b 9
     Check 'PCM is invariant to block boundaries' (($whole -join ',') -ceq ((@($part1)+@($part2)) -join ','))
+    # Golden digests were captured from the pre-optimization mixer at commit
+    # 13e4301 (AudioMixer source SHA-256 C8B63D3E...). They cover accumulated
+    # fractional positions and steps that skip multiple source samples.
+    [single[]]$pitchSamples=[single[]]::new(128)
+    for($i=0;$i -lt $pitchSamples.Length;$i++){$pitchSamples[$i]=[single]((($i*173)%401)-200)}
+    foreach($case in @(
+        @{Name='fractional pitch 0.97';Rate=11025;MixerRate=44100;Pitch=.97;Frames=512;Sha256='425AB96D1E5D911905B10B2E74E3D5E9347F597E0FA7CB465CDB20FF18E7097B';RemainingVoices=1},
+        @{Name='high pitch 3.25';Rate=48000;MixerRate=8000;Pitch=3.25;Frames=80;Sha256='B3F38AB79BCA99786A29B402961532210853A6A050FD11BD5190FD41C9142141';RemainingVoices=0}
+    )){
+        $pitchClip=@{Rate=$case.Rate;Samples=$pitchSamples}
+        $wholeMixer=New-DoomAudioMixer $case.MixerRate;$splitMixer=New-DoomAudioMixer $case.MixerRate
+        $null=Add-DoomAudioVoice $wholeMixer $pitchClip -Left .73 -Right .41 -Pitch $case.Pitch
+        $null=Add-DoomAudioVoice $splitMixer $pitchClip -Left .73 -Right .41 -Pitch $case.Pitch
+        $wholePcm=Read-DoomAudioFrames $wholeMixer $case.Frames
+        $split=[Collections.Generic.List[int16]]::new();$first=[Math]::Min(37,$case.Frames)
+        $split.AddRange([int16[]](Read-DoomAudioFrames $splitMixer $first))
+        if($first -lt $case.Frames){$split.AddRange([int16[]](Read-DoomAudioFrames $splitMixer ($case.Frames-$first)))}
+        [byte[]]$pitchBytes=[byte[]]::new($wholePcm.Length*2);[Buffer]::BlockCopy($wholePcm,0,$pitchBytes,0,$pitchBytes.Length)
+        $pitchHash=[Convert]::ToHexString([Security.Cryptography.SHA256]::HashData($pitchBytes))
+        Check "$($case.Name) preserves pre-optimization PCM" ($pitchHash -ceq $case.Sha256)
+        Check "$($case.Name) remains block-boundary invariant" ([string]::Join(',',$wholePcm) -ceq [string]::Join(',',$split.ToArray()) -and $wholeMixer.Voices.Count -eq $case.RemainingVoices)
+    }
     $clip=@{Name='constant';Rate=8000;Samples=[single[]]@(30000,30000,-30000,-30000)};$m=New-DoomAudioMixer 8000
     $null=Add-DoomAudioVoice $m $clip -Source 1 -Left 1 -Right 0;$null=Add-DoomAudioVoice $m $clip -Source 2 -Left 1 -Right 0
     $pcm=Read-DoomAudioFrames $m 4
