@@ -495,10 +495,14 @@ function Invoke-FastRender {
             [long]$yFracWide=$negViewY-(([long]$raySin[$x]*[long]$lengthData) -shr 16)
             if($yFracWide -ge 2147483648L){$yFracWide-=4294967296L}elseif($yFracWide -lt -2147483648L){$yFracWide+=4294967296L}
             [int]$yFrac=$yFracWide
-            [double]$d=$distanceData/65536.0
             do {
                 [int]$u=($xFrac -shr 16) -band 63;[int]$v=($yFrac -shr 10) -band 4032
-                [int]$p=$row+$x;$pixels[$p]=$colors[$flatData[$v+$u]];$depthBuffer[$p]=$d
+                [int]$p=$row+$x
+                # Planes are background surfaces in Doom's renderer. They fill
+                # uncovered pixels but do not occlude world sprites or masked
+                # walls drawn later; the depth buffer remains for opaque walls
+                # and already-composited sprites only.
+                $pixels[$p]=$colors[$flatData[$v+$u]]
                 [long]$xFracWide=[long]$xFrac+[long]$stepX
                 if($xFracWide -ge 2147483648L){$xFracWide-=4294967296L}elseif($xFracWide -lt -2147483648L){$xFracWide+=4294967296L}
                 $xFrac=[int]$xFracWide

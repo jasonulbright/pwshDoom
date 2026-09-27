@@ -2,6 +2,7 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 param([Parameter(Mandatory)][string]$Output,[string]$Renderer="$PSScriptRoot/../src/FastRenderer.ps1")
 $ErrorActionPreference='Stop';if(Test-Path $Output){throw 'Use a fresh result.'}
+$bundle=& "$PSScriptRoot/Build-EngineBundle.ps1";. $bundle
 . $Renderer
 # Test geometry with authored solid colors; no WAD or session is needed.
 function Draw-FastHud {}
@@ -19,8 +20,21 @@ $ctx=@{Pixels=[byte[]]::new(64000);Depth=[double[]]::new(64000);Planes=[int[]]::
     Textures=@{1=@{Width=64;Height=128;Data=$mask};2=@{Width=64;Height=128;Data=$wall}};
     Segments=@(@{AX=64;AY=32;BX=64;BY=-32;Length=64;Offset=0;Side=0;Front=0;Back=0;Flags=0;Sector=0},@{AX=128;AY=128;BX=128;BY=-128;Length=256;Offset=0;Side=1;Front=0;Back=-1;Flags=0;Sector=0});
     World=@{Actors=@();ConsolePlayer=@{Mobj=@{X=0;Y=0;Angle=0};ViewZ=41;ExtraLight=0;FixedColorMap=0}}}
+$planeTables=Get-FastPlaneTables
+$ctx.PlaneColumnAngles=$planeTables.ColumnAngles;$ctx.PlaneDistanceScales=$planeTables.DistanceScales
+$ctx.PlaneRowSlopes=$planeTables.RowSlopes;$ctx.PlaneFineSine=$planeTables.FineSine
+$ctx.TanToAngleTable=$planeTables.TanToAngle
+$ctx.SkyColumns=[int[]]::new(320);$ctx.RaySin=[int[]]::new(320);$ctx.RayCos=[int[]]::new(320)
+$ctx.MaskedColumns=[Collections.Generic.List[hashtable]]::new()
 try{
     Invoke-FastRender $ctx
+    Check 'Open floor pixel is marked as a plane' ($ctx.Planes[48174] -gt 0) $true
+    Check 'Floor backdrop does not occupy sprite depth' ([double]::IsPositiveInfinity($ctx.Depth[48174])) $true
+    $depthTestPatch=@{Width=1;Height=1;Data=[int[]]@(250)}
+    Draw-FastPatch -Context $ctx -Patch $depthTestPatch -Left 174 -Top 150 -Scale 1 -Distance 100 -Light 0 -FirstColumn 0 -EndColumn 320 -MaxY 168
+    Check 'Sprite sample composites over floor backdrop' $ctx.Pixels[48174] 250
+    Check 'Composited sprite takes depth ownership' $ctx.Depth[48174] 100
+    $ctx.Pixels[48174]=55;$ctx.Depth[48174]=[double]::PositiveInfinity
     Check 'Fence survives later opaque wall drawing' $ctx.Pixels[25760] 200 # (160,80)
     Check 'Fence depth survives later wall drawing' $ctx.Depth[25760] 64
     Check 'Fence hole reveals far wall' $ctx.Pixels[25774] 100 # (174,80)
@@ -31,7 +45,8 @@ try{
     for($i=6;$i -ge 0;$i--){Invoke-FastRender $ctx $bounds[$i] $bounds[$i+1];for($y=0;$y -lt 168;$y++){[Array]::Copy($ctx.Pixels,$y*320+$bounds[$i],$assembled,$y*320+$bounds[$i],$bounds[$i+1]-$bounds[$i]);[Array]::Copy($ctx.Depth,$y*320+$bounds[$i],$assembledDepth,$y*320+$bounds[$i],$bounds[$i+1]-$bounds[$i])}}
     Check 'Seven uneven strips preserve scene pixels' ([Linq.Enumerable]::SequenceEqual[byte]([byte[]]$serial[0..53759],[byte[]]$assembled[0..53759])) $true
     Check 'Seven uneven strips preserve scene depth' ([Linq.Enumerable]::SequenceEqual[double]([double[]]$serialDepth[0..53759],[double[]]$assembledDepth[0..53759])) $true
-    $patch=@{Width=32;Height=64;Left=16;Top=64;Data=[int[]]::new(2048)};[Array]::Fill($patch.Data,250)
+    $patch=@{Width=32;Height=64;Left=16;Top=64;Data=[int[]]::new(2048);Columns=[object[]]::new(32)};[Array]::Fill($patch.Data,250)
+    for([int]$x=0;$x -lt 32;$x++){$columnData=[int[]]::new(64);[Array]::Fill($columnData,250);$patch.Columns[$x]=@(@{TopDelta=0;Length=64;Data=$columnData;Offset=0})}
     $ctx.SpriteAtlas=[object[]]::new(1)
     $ctx.SpriteAtlas[0]=[object[]]@(@{Rotate=$false;Patches=@($patch);Flip=@($false)})
     $actor=@{X=96;Y=0;Z=0;Sprite=0;Frame=32768;Flags=0;LightLevel=255;Angle=0};$ctx.World.Actors=@($actor)
