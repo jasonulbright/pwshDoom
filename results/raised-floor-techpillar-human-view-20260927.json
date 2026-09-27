@@ -1,0 +1,100 @@
+{
+  "Format": "pwshDoom.RenderingObservation",
+  "Version": 1,
+  "RecordedUtc": "2026-09-27",
+  "Build": {
+    "SourceCommit": "193c386cc1a22feeb1bf7d269d9b2cc1d1ddaf73",
+    "FastRendererSha256": "F8C9478ECD3863F45C9A0D95E6A02442FA6BCC9A0DB87C3BD6278880CE489CE4",
+    "PowerShell": "7.6.5"
+  },
+  "Inputs": {
+    "HumanInputReplay": "local/episode1-human-playthrough-r2.json",
+    "HumanInputReplaySha256": "F77C1228AD356AE205ED3060F0BAFC584CA9AFA0209F32E24294295D08846156",
+    "IWAD": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Ultimate Doom\\base\\DOOM.WAD",
+    "IWadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F"
+  },
+  "Reproduction": {
+    "Episode": 1,
+    "Map": 1,
+    "Skill": 3,
+    "HumanRecordedTic": 700,
+    "PlayerPosition": [-81.11759948730469, -3266.777069091797, 104],
+    "PlayerAngleDegrees": 16.171875,
+    "Description": "Replaying the user's recorded first 700 gameplay tics reproduces the submitted raised-floor view."
+  },
+  "Actors": [
+    {
+      "DoomEdNumber": 48,
+      "MobjType": "Misc48 (Techpillar)",
+      "Sprite": "ELEC",
+      "Position": [288, -3104, 40],
+      "SectorFloor": 40,
+      "SectorCeiling": 184,
+      "PatchSize": [38, 128],
+      "PatchOffsets": [19, 123],
+      "ScreenBoundsApprox": [131, 76.8, 146.2, 128]
+    },
+    {
+      "DoomEdNumber": 48,
+      "MobjType": "Misc48 (Techpillar)",
+      "Sprite": "ELEC",
+      "Position": [288, -3360, 40],
+      "SectorFloor": 40,
+      "SectorCeiling": 184,
+      "PatchSize": [38, 128],
+      "PatchOffsets": [19, 123],
+      "ScreenBoundsApprox": [244.4, 75.2, 262.9, 137.6]
+    },
+    {
+      "DoomEdNumber": 2028,
+      "MobjType": "Misc31 (Column)",
+      "Sprite": "COLU",
+      "SectorFloor": -8,
+      "PatchSize": [23, 48],
+      "Note": "Two lower white column actors are also in the view; their projected spans are below the raised-floor panels."
+    }
+  ],
+  "AdoptedRendererActorMaskComparison": {
+    "Comparator": "The repository's adopted ThreeDRenderer, not an independently executed original game.",
+    "Regions": [
+      {
+        "Actor": "ELEC at (288,-3104,40)",
+        "FastRendererActorPixels": 354,
+        "ThreeDRendererActorPixels": 363,
+        "Shared": 354,
+        "FastRendererOnly": 0,
+        "ThreeDRendererOnly": 9
+      },
+      {
+        "Actor": "ELEC at (288,-3360,40)",
+        "FastRendererActorPixels": 576,
+        "ThreeDRendererActorPixels": 586,
+        "Shared": 573,
+        "FastRendererOnly": 3,
+        "ThreeDRendererOnly": 13
+      },
+      {
+        "Actor": "Visible COLU sprites",
+        "FastRendererActorPixels": 13,
+        "ThreeDRendererActorPixels": 17,
+        "Shared": 13,
+        "FastRendererOnly": 0,
+        "ThreeDRendererOnly": 4
+      }
+    ]
+  },
+  "ClassicDoomSourceBehavior": {
+    "RenderOrder": "R_RenderPlayerView calls R_DrawPlanes before R_DrawMasked.",
+    "SpriteClipping": "R_DrawSprite clips sprites using drawseg silhouette clips; it does not test sprite pixels against floor/ceiling plane depth.",
+    "Sources": [
+      "https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/r_main.c#L3334-L3368",
+      "https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/r_things.c#L3436-L3620"
+    ]
+  },
+  "Conclusion": "The submitted bright upper fragments are portions of lower-sector ELEC Techpillar sprites. Their visibility over the raised floor plane is consistent with classic Doom's documented draw order and is shared by both repository renderer paths in this reconstructed view. No renderer change was made.",
+  "Limits": [
+    "This is replay-based source/renderer analysis, not an independent DOSBox, Steam rerelease, or original-executable screenshot comparison.",
+    "The separate report of a corpse visible through a wall near the E1M1 blue armor was not reproduced at this camera state and remains open.",
+    "Actor-mask regions use the approximate projected sprite bounds recorded by the diagnostic; small adopted-renderer actor-pixel differences remain."
+  ]
+}

@@ -39,14 +39,16 @@ in the [background-plane entry](rendering-fidelity.md#keep-background-planes-out
 the [missing-texture wall-depth entry](rendering-fidelity.md#preserve-depth-for-untextured-wall-bands-2026-09-27),
 and the [world-sprite silhouette clipping](rendering-fidelity.md#clip-world-sprites-to-wall-silhouettes-2026-09-27)
 with per-context scratch reuse. The current
-[candidate receipt](../results/episode1-human-playthrough-candidate-20260927-r4.json)
+[candidate receipt](../results/episode1-human-playthrough-candidate-20260927-r5.json)
 is pinned to this exact build. It records the IWAD, music catalog, launcher
 preflight, 36-map smoke, secret-path/finale transition checks, E1M8 boss-trigger
 fixtures, retained E1M1-to-E1M2 session regression, the focused actor-occlusion
 reproduction, all three renderer styles, and paired single-frame timings.
-The user-reported sprite leak has a focused correction; the metal columns in
-the screenshot still need confirmation during the full run. Your first launch
-exposed an exact-patch version check: the catalog
+The reproduced BON1 sprite leak has a focused correction. The bright fragments
+in the screenshot are two lower-sector `ELEC` Techpillar sprites; their overlap
+matches classic Doom's plane/sprite draw order in both repository renderers.
+The separate corpse-through-wall sighting near the blue armor remains
+unreproduced. Your first launch exposed an exact-patch version check: the catalog
 was prepared on PowerShell 7.6.5 but the user launcher runs 7.6.6. The loop
 and finite finale readers now accept the same major/minor line while retaining
 source and payload verification. The simulation startup wait is 60 seconds
@@ -160,7 +162,7 @@ playthrough.
 
 The current playtest build is pinned to
 `193c386cc1a22feeb1bf7d269d9b2cc1d1ddaf73`. The
-[current candidate receipt](../results/episode1-human-playthrough-candidate-20260927-r4.json)
+[current candidate receipt](../results/episode1-human-playthrough-candidate-20260927-r5.json)
 records the 36-map smoke, 69 transition checks, E1M8 boss-trigger fixtures,
 retained 1,747-command E1M1 session progression into E1M2, focused wall and
 sprite-occlusion checks, and exact serial/worker output across all three styles.

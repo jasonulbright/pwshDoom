@@ -695,8 +695,21 @@ overlap rises from 68.3% to 95.2%. At tic 140, candidate-only mask pixels fall
 from 44 to 3; tic 140 still has 20 reference-only actor-mask pixels. At tic
 245, 11 reference-only pixels remain. The comparison uses the adopted
 PowerShell renderer, not the original executable; other checkpoints and broad
-background differences remain. The E1M1 raised-floor columns from Jason's
-screenshot have not been separately classified as actors or wall geometry.
+background differences remain. The raised-floor screenshot is now reproduced
+from the first 700 tics of Jason's input recording. Its bright upper fragments
+are two `ELEC` Techpillar actors (DoomEdNum 48) at floor height 40, below the
+camera's floor height 104; their 38×128 sprite patches extend across the
+projected floor boundary. In the two projected sprite regions, the FastRenderer
+has zero and three candidate-only actor pixels relative to the adopted
+ThreeDRenderer (354/363 and 576/586 actor pixels, respectively). The classic
+Doom 1.10 source draws planes before masked sprites and clips sprites using
+drawseg silhouettes, which explains this overlap as classic renderer behavior:
+[render order](https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/r_main.c#L3334-L3368),
+[sprite clipping](https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/r_things.c#L3436-L3620).
+No change was made. This is source-level behavior evidence plus comparison to
+the adopted renderer, not a screenshot from an independently executed original
+binary. The separate corpse-near-blue-armor view remains open. See the
+[replay triage receipt](../results/raised-floor-techpillar-human-view-20260927.json).
 
 The first implementation allocated wall-clip hashtables and actor clip arrays
 on every frame. Render contexts now retain a high-water pool of six-field

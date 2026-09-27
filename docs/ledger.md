@@ -2365,3 +2365,32 @@ to zero at tic 245 and from 44 to 3 at tic 140; reference-only pixels remain
 screenshot are still unclassified. The updated human-test build is
 `193c386cc1a22feeb1bf7d269d9b2cc1d1ddaf73`; Jason's one full Episode 1 route
 remains pending.
+
+## 2026-09-27 — Classify the raised-floor E1M1 screenshot
+
+Replayed the first 700 tics from Jason's own E1M1 input recording. The tic-700
+state reproduces the submitted camera view at `(-81.12, -3266.78, 104)` and
+16.171875 degrees. The bright upper fragments are two DoomEdNum 48 Techpillar
+actors (`ELEC`) in sectors with floor height 40 and ceiling height 184. Their
+38×128 patches project across the neighboring floor plane at height 104. The
+lower white `COLU` actors are separate DoomEdNum 2028 decorations.
+
+The two repository renderers show the same actor fragments at this view. In
+the projected Techpillar regions, FastRenderer versus the adopted
+ThreeDRenderer reports 354 versus 363 actor pixels (354 shared, zero
+FastRenderer-only) and 576 versus 586 (573 shared, three FastRenderer-only).
+The whole scene still has broader renderer differences; this is a focused
+actor-mask comparison, not full-frame equivalence.
+
+The original id Software Doom 1.10 renderer calls `R_DrawPlanes` before
+`R_DrawMasked`, and its `R_DrawSprite` clips sprites through drawseg silhouettes
+and their wall clips. It does not depth-test sprite pixels against floor-plane
+depth. See [official render order](https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/r_main.c#L3334-L3368)
+and [official sprite clipping](https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/r_things.c#L3436-L3620).
+That source behavior explains the apparent overlap as classic Doom rendering,
+not a FastRenderer-only leak; no code change was made. We did not capture an
+independent DOSBox, Steam rerelease, or original-executable image, so visual
+parity to that binary remains unmeasured. The separate corpse-through-wall
+sighting near the blue armor was not reproduced at this camera state and
+remains open. The source-pinned replay details are in
+[`raised-floor-techpillar-human-view-20260927.json`](../results/raised-floor-techpillar-human-view-20260927.json).

@@ -31,7 +31,7 @@ This is load/render smoke, not route completion.
 
 The current Episode 1 human-playthrough build is source commit
 `193c386cc1a22feeb1bf7d269d9b2cc1d1ddaf73`. Its
-[candidate receipt](../results/episode1-human-playthrough-candidate-20260927-r4.json)
+[candidate receipt](../results/episode1-human-playthrough-candidate-20260927-r5.json)
 links a fresh 36-map smoke, 69 campaign transition checks, 97 boss progression
 checks, 10 menu-input checks, 24 session-screen checks, and the 1,747-command
 E1M1-to-E1M2 session regression. The transition checks load real E1M9 and E1M4
@@ -40,7 +40,9 @@ maps were played. The current renderer also passes 20 masked-wall checks, 119
 fuzz checks, and serial/worker equality in Classic, Matrix/Katakana, and
 AnsiArt/Katakana. The actor-occlusion replay prefix suppresses the reproduced
 tic-245 leak but retains actor-mask and broad scene differences. The receipt
-preserves the launcher preflight and remaining limits. The earlier
+records the raised-floor view as classic Doom Techpillar sprite overlap and
+preserves the launcher preflight and remaining limits; the separate corpse
+sighting near blue armor remains unreproduced. The earlier
 [renderer-guard receipt](../results/episode1-render-guard-evidence-20260927.json)
 keeps its original `4ed3363` source pin, four retained E1M1–E1M4 route
 regressions, and fixed-input E1M2–E1M4 host replays. The E1M3 waypoint-driver
