@@ -1,24 +1,24 @@
 {
   "Format": "pwshDoom.MusicHostTrackIntegration",
   "Version": 1,
-  "RecordedUtc": "2026-09-27T20:03:47.5748392Z",
+  "RecordedUtc": "2026-09-27T20:46:24.9860069Z",
   "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
-  "MusicCatalogSha256": "1A1DC9687C8AF7FADE7D170C5170FED9C344CAAEE43899208BDD6DFDCAF28943",
-  "RawHostReport": "local/episode2m5-music-integration-20260927.json",
-  "RawHostReportSha256": "FAE1AE9E7EA66FD36E0771B91952D2C4559BABCB47F1BDF5F3869C7D6E619989",
+  "MusicCatalogSha256": "C70372E313CA10A09329DEA77C31414F8BDD4557382D197AEC27FF8C3C3E1D9C",
+  "RawHostReport": "local/episode2m6-music-integration-20260927.json",
+  "RawHostReportSha256": "5D8859C5F3713C5287128B856D4419B7FF8B64E2A76839B5CCA728E8A8205E09",
   "Parameters": {
     "PowerShell": "7.6.5",
     "Episode": 2,
     "Style": "Classic",
-    "Seconds": 2.0021872,
+    "Seconds": 2.0023695,
     "Headless": true,
     "Workers": 16,
-    "Map": 5
+    "Map": 6
   },
   "Result": {
     "ExitReason": "Duration",
     "Tics": 69,
-    "Frames": 61,
+    "Frames": 76,
     "Error": null
   },
   "Music": {
@@ -28,27 +28,27 @@
     "SubmittedFrames": 86940,
     "ReturnedCompletedFrames": 86940,
     "Packets": 69,
-    "Selected": "D_E2M5",
+    "Selected": "D_E2M6",
     "AudioError": null,
     "CleanupError": null,
     "Transitions": [
       {
-        "Loop": true,
         "AfterFrames": 0,
-        "Kind": "Start",
-        "Track": "D_E2M5"
+        "Track": "D_E2M6",
+        "Loop": true,
+        "Kind": "Start"
       }
     ],
     "RebufferCount": 1,
     "RebufferObservations": [
       {
-        "AfterPacket": 68,
-        "WallMs": 22884.0512
+        "WallMs": 23772.8885,
+        "AfterPacket": 68
       }
     ],
     "RebufferResumes": [],
-    "WallSeconds": 23.0102208,
-    "Meaning": "One queue-starvation observation followed the final packet; no resume followed it. This is a stop-boundary metric, not evidence of an audible mid-run interruption. Short host integration confirms catalog selection, packet return and device shutdown only; it does not qualify sustained playback."
+    "WallSeconds": 23.8884847,
+    "Meaning": "One queue-starvation observation followed packet 68 at 23.773 seconds on the audio-worker clock; no resume followed it. This is a stop-boundary metric, not evidence of an audible mid-run interruption. Short host integration confirms catalog selection, packet return and device shutdown only; it does not qualify sustained playback."
   },
   "Sources": [
     {
@@ -80,5 +80,5 @@
       "Sha256": "083079C548A2BB47F1DFE661C5C3CEAD21B7A0FED104062CE46740DAF1215D0B"
     }
   ],
-  "Meaning": "Short actual game/audio-worker integration: E2M5 selected D_E2M5 from the prepared catalog and returned all submitted 1260-frame packets before device shutdown. One rebuffer was recorded. This checks startup, map-to-track selection and short-run shutdown only; it does not qualify sustained audio deadlines, acoustics, full-map/campaign playback, performance or monitor pacing."
+  "Meaning": "Short actual game/audio-worker integration: E2M6 selected D_E2M6 from the prepared catalog and returned all 69 submitted 1260-frame packets (86,940 frames) before clean device shutdown. One queue-starvation observation followed the final packet, with no resume; this is a stop-boundary metric, not evidence of a mid-run audible interruption. This checks startup, map-to-track selection and short-run shutdown only; it does not qualify sustained audio deadlines, acoustics, full-map/campaign playback, performance or monitor pacing."
 }

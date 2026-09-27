@@ -38,7 +38,17 @@
         "Loop": true
       }
     ],
-    "CleanupError": null
+    "CleanupError": null,
+    "RebufferCount": 1,
+    "RebufferObservations": [
+      {
+        "AfterPacket": 68,
+        "WallMs": 23616.3895
+      }
+    ],
+    "RebufferResumes": [],
+    "WallSeconds": 23.7731547,
+    "Meaning": "One queue-starvation observation followed the final packet; no resume followed it. This is a stop-boundary metric, not evidence of an audible mid-run interruption. Short host integration confirms catalog selection, packet return and device shutdown only; it does not qualify sustained playback."
   },
   "Sources": [
     {

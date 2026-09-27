@@ -2711,10 +2711,10 @@ preparation cost, not a live audio deadline or performance result.
 
 A two-second headless E2M5 host run selected D_E2M5 at frame zero and submitted
 69 packets (86,940 frames); all frames returned, with zero unconsumed packets
-and no worker, audio or cleanup error. The audio report records one rebuffer
-after packet 68 at 22.884 seconds on the audio-worker clock as the run ended.
-This short run is not sustained
-queue-timing evidence, a listener review, or a full-map/campaign audio check.
+and no worker, audio or cleanup error. The audio report records one
+queue-starvation observation after packet 68 at 22.884 seconds on the
+audio-worker clock, with no subsequent resume. This is a stop-boundary metric,
+not evidence of a mid-run audible interruption or sustained queue timing.
 D_E2M5's one-track catalog and period payload stay local. The [preparation](../results/music-preparation-e2m5-20260927.json),
 [reader/mixer qualification](../results/music-track-qualification-d-e2m5-20260927.json),
 and [portable host receipt](../results/music-host-e2m5-integration-20260927.json)
@@ -2724,3 +2724,36 @@ payloads, while D_E2M5 is byte-identical to D_E1M7; its qualification verifies
 separate map-lump and catalog selection. Thirteen other Episode 2/3 map-track
 names remain, representing eleven score payloads without a qualification.
 Two finite title/finale scores remain open.
+
+## 2026-09-27 — Qualify D_E2M6 and check actual host selection
+
+Prepared the next byte-distinct Episode 2 map score with the default
+independent three-period qualification mode. D_E2M6 has a one-cycle period of
+7,815,780 frames (177.229 seconds); three continuous periods cover 23,447,340
+frames (531.686 audio seconds). The startup state differs from the recurring
+state. Periods two and three share complete normalized state hash
+`90044183CF416BA18FED79881F2D561220B14EE389F8F038DE27183312066B0C` with 52
+voices and identical float64 output hash
+`079789945B5DF82409FC52CB751F1B1303C8BEA3568015CD2F46C408F1E78C63`. The
+independent eight-second opening PCM matches through the actual loop reader and
+game mixer; all six long-track reader/mixer checks pass, including the exact
+loop seam. Rendering, writing and snapshotting took 1,503.712 seconds; total
+preparation took 1,523.711 seconds under PowerShell 7.6.5. The IWAD lump SHA
+`86BE00A645CB57EBE95C02B0FDFFC0F2F952A74C47752926400CF127E3116287` is
+byte-distinct from every other map-score lump. This is offline preparation
+cost, not a live audio deadline or performance result.
+
+A two-second headless E2M6 host run selected D_E2M6 at frame zero and submitted
+69 packets (86,940 frames); all frames returned, with zero unconsumed packets
+and no worker, audio or cleanup error. The queue monitor recorded one
+starvation observation after packet 68 at 23.773 seconds on its wall clock, with
+no subsequent resume. This is a stop-boundary metric, not evidence of a mid-run
+audible interruption. The short host run does not establish sustained queue
+timing, listener quality or full-map/campaign playback. D_E2M6's one-track
+catalog and period payload stay local. The [preparation](../results/music-preparation-e2m6-20260927.json),
+[reader/mixer qualification](../results/music-track-qualification-d-e2m6-20260927.json),
+and [portable host receipt](../results/music-host-e2m6-integration-20260927.json)
+pin the IWAD and source state. Six Episode 2 map-track names now have
+qualifications; D_E2M1–D_E2M4 and D_E2M6 add five byte-distinct payloads, while
+D_E2M5 duplicates D_E1M7. Twelve other Episode 2/3 map-track names remain,
+representing ten not-yet-qualified payloads, along with two finite scores.

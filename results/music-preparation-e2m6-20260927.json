@@ -1,0 +1,73 @@
+{
+  "Catalog": "C:\\projects\\pwshDoom\\local\\music-prepared-e2m6-20260927.json",
+  "Error": null,
+  "Published": true,
+  "QualificationModeForNewTracks": "IndependentStateAndOutput",
+  "Seconds": 1523.710899,
+  "Tracks": [
+    {
+      "MusSha256": "86BE00A645CB57EBE95C02B0FDFFC0F2F952A74C47752926400CF127E3116287",
+      "Report": "C:\\projects\\pwshDoom\\local\\music-preparation-e2m6-20260927\\D_E2M6\\qualified.json",
+      "Action": "PreparedAndQualified",
+      "Track": "D_E2M6",
+      "ReportSha256": "66A9B8E2C13E4A5109F5C4F7AAB42C10F992CFBEC9E37B7B2C51DDB7191D05B9"
+    }
+  ],
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "Meaning": "Finite sequential preparation of exactly the requested dry looping tracks. Existing/resumed tracks undergo source/runtime/complete payload and IWAD/SF2 identity checks. Catalog published only after all requests pass. Successful per-track reports survive failed/interrupted batches for explicit same-directory resume. No one-shot, full soundtrack, fidelity, live deadline or campaign completion claim.",
+  "CatalogSha256": "C70372E313CA10A09329DEA77C31414F8BDD4557382D197AEC27FF8C3C3E1D9C",
+  "Sources": [
+    {
+      "Sha256": "54140015EDBD5DAAA20C0BF8F349F01FFB2D78EBA603630EB5891185A24CDEEA",
+      "Path": "scripts/Prepare-DoomMusic.ps1"
+    },
+    {
+      "Sha256": "557C8BAFA2A234B9A1C816A37EB3F17D9D68DCCDC1FC02B69D60C8FDC290F7AB",
+      "Path": "scripts/Render-MusicScore.ps1"
+    },
+    {
+      "Sha256": "A9ECC5975C249360EEE442723F61AB6C216026F4E51FE3F418695E39CC73BF58",
+      "Path": "scripts/Qualify-MusicLoop.ps1"
+    },
+    {
+      "Sha256": "083079C548A2BB47F1DFE661C5C3CEAD21B7A0FED104062CE46740DAF1215D0B",
+      "Path": "src/MusicLoopReader.ps1"
+    },
+    {
+      "Sha256": "66B87D1CDD3FAD62E493A0C50C9A5AEBFE27167C8CCCCA974CC80463B6D1BB33",
+      "Path": "src/MusScore.ps1"
+    },
+    {
+      "Sha256": "AF80287762169B5318F60FD719479137BAED1D3EEF39561513D2B34AC118A855",
+      "Path": "src/SoundFontBank.ps1"
+    },
+    {
+      "Sha256": "9D409332EB51B5B6FCBC4B259E0C5E243E561A3C0D6AD2040A772F46539B9D8E",
+      "Path": "src/SoundFontRegions.ps1"
+    },
+    {
+      "Sha256": "1D7911DC5CD2004D6DBBF27ECF43FFD652FAC8E4813943D9F8CFD5116332417B",
+      "Path": "src/MusicOscillator.ps1"
+    },
+    {
+      "Sha256": "30CC10D9118335FEC1C57653871B236B020FDBBA2D4103F89BA8EA672F1AF5D9",
+      "Path": "src/MusicControls.ps1"
+    },
+    {
+      "Sha256": "3CCA7492A9F809EB8D54C8BF7D3D9847A1EC29D5E8ED6923F72ECA7803A50B48",
+      "Path": "src/MusicSynth.ps1"
+    },
+    {
+      "Sha256": "6EA293142AD9A61661244DC5910CE264ACEE6E8A0CECE75F668CC55AC5A6E5DD",
+      "Path": "src/MusicGroup.ps1"
+    },
+    {
+      "Sha256": "9183717AE1384F2BEF103885A20AECF0EA66F6A8A80FFC311040C28E14155F7F",
+      "Path": "src/MusicLoopState.ps1"
+    }
+  ],
+  "RequestedTracks": [
+    "D_E2M6"
+  ],
+  "SoundFontSha256": "82475B91A76DE15CB28A104707D3247BA932E228BADA3F47BBA63C6B31AAF7A1"
+}

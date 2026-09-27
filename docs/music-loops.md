@@ -180,8 +180,11 @@ qualification cost, not playback cost or a performance claim.
 A two-second headless E2M4 host run selected `D_E2M4`, sent 69 audio packets
 (86,940 frames), returned all 86,940 completed frames, and closed the audio
 device without worker or cleanup errors. It establishes catalog loading,
-map-to-track selection, short playback startup and shutdown only; no listener
-review, full-map audio continuity or pacing qualification was performed. The
+map-to-track selection, short playback startup and shutdown only; one
+queue-starvation observation followed packet 68 at 23.616 seconds on the
+audio-worker clock, with no subsequent resume. This stop-boundary metric is
+not evidence of a mid-run audible interruption. No listener review, full-map
+audio continuity or pacing qualification was performed. The
 one-track catalog and loop payload remain under ignored `local/`. Portable
 receipts: [three-period preparation](../results/music-preparation-e2m4-20260927.json),
 [six-check reader/mixer qualification](../results/music-track-qualification-d-e2m4-20260927.json),
@@ -212,14 +215,46 @@ musical payload.
 
 A two-second headless E2M5 host run selected `D_E2M5` and returned all 69
 submitted audio packets (86,940 frames), with no worker or cleanup errors.
-One queue rebuffer was observed after packet 68 at 22.884 seconds on the
-audio-worker clock, as the short run ended; this test does not establish
-sustained queue timing. It checks catalog loading,
+One queue-starvation observation followed packet 68 at 22.884 seconds on the
+audio-worker clock, with no subsequent resume. This stop-boundary metric is
+not evidence of a mid-run audible interruption or sustained queue behavior.
+It checks catalog loading,
 map-to-track selection and shutdown only, not full-map continuity, listener
 review or gameplay pacing. The one-track catalog and loop payload remain under
 ignored `local/`. Portable receipts: [three-period preparation](../results/music-preparation-e2m5-20260927.json),
 [six-check reader/mixer qualification](../results/music-track-qualification-d-e2m5-20260927.json),
 and [host track-selection evidence](../results/music-host-e2m5-integration-20260927.json).
+
+### D_E2M6 independent output qualification and host selection (September 27)
+
+D_E2M6 qualifies with a one-cycle period of 7,815,780 frames (177.229
+seconds). The default three-period independent-output mode rendered 23,447,340
+frames (531.686 audio seconds) and verified the separate eight-second opening
+reference through the actual reader and game mixer. Periods two and three have
+identical float64 output SHA-256
+`079789945B5DF82409FC52CB751F1B1303C8BEA3568015CD2F46C408F1E78C63`; their
+complete normalized boundary state has 52 voices and SHA-256
+`90044183CF416BA18FED79881F2D561220B14EE389F8F038DE27183312066B0C`. The
+startup period differs before the score reaches its recurring state. Six
+reader/mixer checks pass, including the exact recurrent-period seam. Rendering,
+writing and snapshotting took 1,503.712 seconds; total preparation took
+1,523.711 seconds under PowerShell 7.6.5. This is offline preparation cost,
+not playback cost or a performance claim.
+
+D_E2M6 is byte-distinct from all other map-score lumps in the pinned IWAD
+inventory (MUS SHA-256
+`86BE00A645CB57EBE95C02B0FDFFC0F2F952A74C47752926400CF127E3116287`). A
+two-second headless E2M6 host run selected the track and returned all 69
+submitted audio packets (86,940 frames), with no worker or cleanup errors.
+One queue-starvation observation followed packet 68 at 23.773 seconds on the
+audio-worker clock, with no subsequent resume; as with the E2M4/E2M5 checks,
+this is a stop-boundary metric, not evidence of a mid-run audible interruption.
+The brief run checks catalog loading, map-to-track selection and shutdown
+only, not sustained queue timing, full-map continuity, listener review or
+gameplay pacing. The one-track catalog and loop payload remain under ignored
+`local/`. Portable receipts: [three-period preparation](../results/music-preparation-e2m6-20260927.json),
+[six-check reader/mixer qualification](../results/music-track-qualification-d-e2m6-20260927.json),
+and [host track-selection evidence](../results/music-host-e2m6-integration-20260927.json).
 
 ### PowerShell patch-version compatibility (September 27)
 
