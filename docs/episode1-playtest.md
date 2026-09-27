@@ -22,17 +22,16 @@ E1M8 exit and intermission.
 
 ## Build and launch
 
-Run exact source build commit `68b1b82be1a1fcda0401fd454204e52f870e54d7` from
-the `codex/feasibility-study` branch. Its gameplay, renderer, session/menu and
-input source match the verified baseline `693cc061a2caa1fac36fc8a0e6d2e6830a6a4577`;
-the production change since that baseline is the separately qualified finite
-music playback path. The earlier baseline's 295 focused campaign,
-boss-trigger, session, menu and synthetic-input checks passed, as did its
-36-map smoke, 16-worker style checks, exact tangent-angle parity and launcher
-check. The [readiness receipt](../results/episode1-playtest-readiness.json)
-links that evidence and the current audio update. Fresh D_INTRO and Episode 1
-worker receipts verify finite playback and save/load compatibility on this
-build. No recorded or bot-driven full-campaign route is being treated as human
+Run exact source build commit `0fbdc40a77214c68203745800ec0a51cfed9a8fa` from
+the `codex/feasibility-study` branch. It builds on the verified gameplay
+baseline `693cc061a2caa1fac36fc8a0e6d2e6830a6a4577`, with qualified finite D_INTRO
+playback and the latest PowerShell sky-sampling correction. The baseline's 295
+focused campaign, boss-trigger, session, menu and synthetic-input checks passed;
+the current renderer source additionally passes the 36-map smoke, direct sky
+sampling, and exact 16-worker output checks for all three styles. The
+[readiness receipt](../results/episode1-playtest-readiness.json) pins the exact
+build and links both the earlier focused checks and current renderer evidence.
+No recorded or bot-driven full-campaign route is being treated as human
 playthrough evidence.
 Run from the repository root in 64-bit PowerShell 7.4 or later on Windows,
 with Windows Terminal, the legally obtained Ultimate Doom `DOOM.WAD`, and the
@@ -124,15 +123,20 @@ replays and the nine-map smoke; full raw replay reports remain under ignored
 player death and did not establish a repeatable engine defect.
 
 The current renderer passes a 36-map Ultimate Doom smoke on the same IWAD:
-each map advances 35 idle tics and renders two full frames with sixteen strips.
-This covers E1M1–E1M9 as startup/render cases, not map completion. Focused
-engine/session/input checks also pass: 57 campaign transition/finale
-checks, 97 boss checks, 125 menu/session checks with 46 screen fixtures, six
-synthetic console-input checks, and ten menu-key checks. All were freshly
-rerun on the pinned source; their individual receipts and limits are in the
-[readiness receipt](../results/episode1-playtest-readiness.json). The current
-IWAD/music-catalog preflight passes in
-[`episode1-launch-preflight-sprite-rotation.json`](../results/episode1-launch-preflight-sprite-rotation.json).
+each map advances 35 idle tics and renders two full serial frames. The smoke's
+`WorkerStrips=16` field is configuration metadata and starts no processes;
+current 16-worker output is separately qualified per display style in the
+readiness receipt. This covers E1M1–E1M9 as startup/render cases, not map completion.
+The 57 campaign transition/finale checks, 97 boss checks, 125 menu/session
+checks with 46 screen fixtures, six synthetic console-input checks, and ten
+menu-key checks passed on the matching gameplay baseline. The current build's
+renderer-only sky update separately passes the direct sky sampler, 36-map
+smoke, and all three 16-worker display-style checks. Their distinct source
+pins and limits are in the [readiness receipt](../results/episode1-playtest-readiness.json).
+The current IWAD/music-catalog preflight is recorded in
+[`episode1-launch-preflight-sky-sampling.json`](../results/episode1-launch-preflight-sky-sampling.json);
+it confirms PowerShell 7.6.5, Windows Terminal, the 36-map IWAD and catalog
+path, while audio contents are validated separately by the worker receipts.
 The latest fixed-point floor/ceiling mapping brings the six-view scene-index
 mismatch against the adopted PowerShell reference from 101,971 to 37,798
 (62.9% fewer than the original numeric baseline); 7.38–14.19% still differ.

@@ -2,9 +2,9 @@
   "Status": "ReadyForOneHumanEpisode1Playthrough",
   "SourceBaseline": "693cc061a2caa1fac36fc8a0e6d2e6830a6a4577",
   "CurrentLaunchBuild": {
-    "Commit": "68b1b82be1a1fcda0401fd454204e52f870e54d7",
+    "Commit": "0fbdc40a77214c68203745800ec0a51cfed9a8fa",
     "Branch": "codex/feasibility-study",
-    "ProductionDelta": "Finite music playback reader and audio-worker import; gameplay, renderer, session/menu, and input sources match SourceBaseline.",
+    "ProductionDelta": "Finite D_INTRO music playback plus Doom fixed-angle sky-column and 128-row texture sampling in the PowerShell rasterizer; gameplay simulation, session/menu, and input logic match SourceBaseline.",
     "AudioReceipts": [
       "results/music-one-shot-dintro-20260926.json",
       "results/music-playback-one-shot-dintro-20260926.json",
@@ -158,10 +158,10 @@
       "IdleTics": 35,
       "FullFramesPerMap": 2,
       "WorkerStrips": 16,
-      "Receipt": "results/campaign-smoke-sprite-rotation.json",
-      "ReportSha256": "502A63AEFC62503EB04655788B5EB3DAC4C541003892B16B82D08C25DC787437",
-      "SourceCommit": "693cc061a2caa1fac36fc8a0e6d2e6830a6a4577",
-      "Meaning": "Current-source Ultimate Doom smoke: all 36 maps load, advance 35 idle tics, and rasterize two full 320x200 frames across 16 strips. Not map completion or displayed-FPS evidence."
+      "Receipt": "results/campaign-smoke-sky-20260926.json",
+      "ReportSha256": "793F0484879CA4F972D2923F87017068B46943F79A9191C34C14AAC3C6F59714",
+      "SourceCommit": "0fbdc40a77214c68203745800ec0a51cfed9a8fa",
+      "Meaning": "Current-source smoke: all 36 maps load, advance 35 idle tics, and rasterize two full 320x200 serial frames. WorkerStrips=16 is configuration metadata; the smoke starts no renderer processes. Not map completion or displayed-FPS evidence."
     },
     "CurrentSourceCampaignTransitions": {
       "Passed": 57,
@@ -323,11 +323,11 @@
     "CurrentSourceLauncherCheck": {
       "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
       "EpisodeMaps": 36,
-      "SourceCommit": "693cc061a2caa1fac36fc8a0e6d2e6830a6a4577",
+      "SourceCommit": "0fbdc40a77214c68203745800ec0a51cfed9a8fa",
       "MusicCatalogSha256": "0E9C9542C75F4D5E2D7FC71E42FAFBB58F94321C3B8A49BA0C9AC5A93752EE58",
       "PowerShell": "7.6.5",
-      "Receipt": "results/episode1-launch-preflight-sprite-rotation.json",
-      "PreflightReportSha256": "7374C345E2607E531CF00855B303395E3B470F6C59F9BC36A749BFE1E684F79A",
+      "Receipt": "results/episode1-launch-preflight-sky-sampling.json",
+      "PreflightReportSha256": "224CE5DEFB5B01C25D97026721FB8D6EEFBE37A1B6056468CC437E20DF19B0CE",
       "Ready": true,
       "Meaning": "Play.ps1 -Check validates the Windows/PowerShell/Terminal/IWAD/catalog paths and IWAD map inventory; it does not launch the game or validate catalog audio content."
     },
@@ -422,55 +422,6 @@
       "WorkerCount": 16,
       "CacheBytesV4": 29222789
     },
-    "CurrentSourceWorkerValidation": {
-      "AssetFormat": "pwshDoom-assets-v6",
-      "WorkerCount": 16,
-      "Styles": [
-        {
-          "Style": "Classic",
-          "Receipt": "results/render-partitions-sprite-rotation-classic.json",
-          "Sha256": "654B0DF0B02F4A4B3542D3168ECC5EE006E5C3F762AC9B5C7EEAD96189CFD35A",
-          "Workers": 16,
-          "PixelComparisons": 320000.0,
-          "PixelDifferences": 0.0,
-          "EncodedStripChecks": 80
-        },
-        {
-          "Style": "Matrix/Katakana",
-          "Receipt": "results/render-partitions-sprite-rotation-matrix.json",
-          "Sha256": "94390A6EF6529FC86620DB7B03E44C0576150B974A4AE45FFE11A576BCF791B4",
-          "Workers": 16,
-          "PixelComparisons": 320000.0,
-          "PixelDifferences": 0.0,
-          "EncodedStripChecks": 80
-        },
-        {
-          "Style": "AnsiArt/Katakana",
-          "Receipt": "results/render-partitions-sprite-rotation-ansiart.json",
-          "Sha256": "EAC68ECD68D6C53C73E2905DCD17019D41478DA7588C4D00BB09876B2A346D82",
-          "Workers": 16,
-          "PixelComparisons": 320000.0,
-          "PixelDifferences": 0.0,
-          "EncodedStripChecks": 80
-        }
-      ],
-      "TangentAngleEntries": 2049,
-      "TangentAngleTableSha256": "BA4346CE3AC3DCB24C460BCF0ED98D3F8351203CA3BCC1DEC1CB822F9DEE7E11",
-      "MapSmokeReceipt": "results/campaign-smoke-sprite-rotation.json",
-      "Meaning": "Exact serial/worker pixel and encoded-strip equivalence for the fixed-angle renderer, with the tangent lookup transported and validated through v6 disposable assets.",
-      "MapReload": {
-        "WorkersPreserved": true,
-        "Workers": 16,
-        "Style": "Classic",
-        "From": "E1M1",
-        "To": "E1M2",
-        "PixelComparisons": 256000.0,
-        "EncodedStripChecks": 64.0,
-        "Receipt": "results/session-worker-sprite-rotation-classic.json",
-        "Sha256": "E23613A6E94B4894ADBA35CF452E5C76574E0F3AF14B7B9D8E717F004F97B978",
-        "Meaning": "Actual worker processes: independently constructed column/row-major screen equivalence and encoded strip equivalence, then changed E1M2 assets and real rasterization against the serial reference without restarting workers. This is a transport/lifecycle check, not campaign completion or a performance benchmark."
-      }
-    },
     "CurrentSourceSpriteRotationSelection": {
       "RendererSha256": "7BBCBCD87AC8D9474FC7C2E8EB5B115D96B79955A1196AFDF5E38C08864FC180",
       "AssetReaderSha256": "CE714979FB576708DEB4D5496734A9518B582C8FA385F94875FCE9B961975D93",
@@ -498,6 +449,42 @@
       "Receipt": "results/episode1-menu-input-sprite-rotation.json",
       "SourceCommit": "693cc061a2caa1fac36fc8a0e6d2e6830a6a4577",
       "Meaning": "Synthetic menu key transitions; no desktop keyboard injection."
+    },
+    "RendererSkySampling": {
+      "Headings": 8,
+      "SkyPixelsCompared": 430080,
+      "SkyPixelMismatches": 0,
+      "AngleMismatches": 0,
+      "Receipt": "results/sky-sampling-20260926-v3.json",
+      "ReportSha256": "5DAC8A088A5C2553C8FF83E29ADF5F24010D2E706CB69990C6975989FC60273C",
+      "SourceCommit": "0fbdc40a77214c68203745800ec0a51cfed9a8fa",
+      "Meaning": "Production sky-column map and source-row sampling match the adopted ThreeDRenderer.DrawSkyColumn output. This is isolated sampler evidence, not original-executable or whole-scene parity."
+    },
+    "CurrentSourceWorkerValidation": {
+      "Workers": 16,
+      "HeadingsPerStyle": 5,
+      "PixelsPerStyle": 320000,
+      "EncodedStripsPerStyle": 80,
+      "Mismatches": 0,
+      "Receipts": [
+        {
+          "Style": "Classic",
+          "Receipt": "results/render-partitions-sky-classic-20260926-v3.json",
+          "Sha256": "55F21CDB26B58DC35D48048B5D67530F7AD418540C24DE5F9D1F88A5E728FE98"
+        },
+        {
+          "Style": "Matrix/Katakana",
+          "Receipt": "results/render-partitions-sky-matrix-20260926-v3.json",
+          "Sha256": "3C269CE5B0046B0334E7314D9C3849EE611FF7E31325D4DC1BE185E342F2A85A"
+        },
+        {
+          "Style": "AnsiArt/Katakana",
+          "Receipt": "results/render-partitions-sky-ansiart-20260926-v3.json",
+          "Sha256": "8F4E365D3E776A86E43E42E0C8F590FABA9190A36F5C3AC8EC2B2D2E5D42652C"
+        }
+      ],
+      "SourceCommit": "0fbdc40a77214c68203745800ec0a51cfed9a8fa",
+      "Meaning": "Each display style exact-matches serial pixels and encoded output across five headings and sixteen worker processes; not vanilla pixel parity or displayed-FPS evidence."
     }
   },
   "HumanPlaythrough": {
@@ -894,6 +881,38 @@
     {
       "Path": "results/session-worker-sprite-rotation-classic.json",
       "Sha256": "E23613A6E94B4894ADBA35CF452E5C76574E0F3AF14B7B9D8E717F004F97B978"
+    },
+    {
+      "Path": "results/campaign-smoke-sky-20260926.json",
+      "Sha256": "793F0484879CA4F972D2923F87017068B46943F79A9191C34C14AAC3C6F59714"
+    },
+    {
+      "Path": "results/sky-sampling-20260926-v3.json",
+      "Sha256": "5DAC8A088A5C2553C8FF83E29ADF5F24010D2E706CB69990C6975989FC60273C"
+    },
+    {
+      "Path": "results/render-partitions-sky-classic-20260926-v3.json",
+      "Sha256": "55F21CDB26B58DC35D48048B5D67530F7AD418540C24DE5F9D1F88A5E728FE98"
+    },
+    {
+      "Path": "results/render-partitions-sky-matrix-20260926-v3.json",
+      "Sha256": "3C269CE5B0046B0334E7314D9C3849EE611FF7E31325D4DC1BE185E342F2A85A"
+    },
+    {
+      "Path": "results/render-partitions-sky-ansiart-20260926-v3.json",
+      "Sha256": "8F4E365D3E776A86E43E42E0C8F590FABA9190A36F5C3AC8EC2B2D2E5D42652C"
+    },
+    {
+      "Path": "results/render-reference-e1m1-sky-before-20260926.json",
+      "Sha256": "8F7AE63F6CA77320DC4B620FBD14359E73AD2B5EAB18DA76AC40098CEBC3A961"
+    },
+    {
+      "Path": "results/render-reference-e1m1-sky-after-current-20260926.json",
+      "Sha256": "565511CE73F9F3BC49D7969D4936E1993ACF1532FBA1FC6A9A3EC5C33B4B4560"
+    },
+    {
+      "Path": "results/episode1-launch-preflight-sky-sampling.json",
+      "Sha256": "224CE5DEFB5B01C25D97026721FB8D6EEFBE37A1B6056468CC437E20DF19B0CE"
     }
   ]
 }

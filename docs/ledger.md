@@ -1814,3 +1814,15 @@ The first worker attempt terminated before a frame because the reference
 call with the same local integer mask/modulo behavior and initialized scratch
 storage in both context constructors; reran Classic worker parity, then all
 three styles and the map sweep passed. No gameplay route was created or tuned.
+
+## 2026-09-26 — Refresh the Episode 1 launch pin
+
+The one-playthrough handoff now pins renderer build
+`0fbdc40a77214c68203745800ec0a51cfed9a8fa`. Its gameplay, session/menu, and
+input logic remain on the already-qualified baseline; the finite music path
+and sky sampler have separate current evidence. A fresh `Play.ps1 -Check`
+confirms Windows Terminal, PowerShell 7.6.5, the installed 36-map IWAD, and the
+local Episode 1 music-catalog path. The `%LOCALAPPDATA%\pwshDoom\settings.json`
+file is absent, so the documented defaults apply. The readiness receipt
+preserves the earlier focused gameplay check pins and the new renderer pins
+separately. Jason's one complete Episode 1 playthrough remains pending.
