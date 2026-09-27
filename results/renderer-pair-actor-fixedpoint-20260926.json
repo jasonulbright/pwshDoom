@@ -1,0 +1,423 @@
+{
+  "HarnessSha256": "542A198C4E715657AB6578C8817A09316060E25E25B26D25565F043DAA9D53E6",
+  "Meaning": "Alternating-order serial full-frame renders at five static map headings. Every timed call retained, including first calls; no warm-up exclusion. Shared helper bodies must match; explicitly listed baseline functions are uniquely renamed so their calls stay isolated in PowerShell function scope. Each renderer has its own context. Context construction and snapshot setup are outside timed calls. Not live simulation, audio, worker scaling, encoding, terminal output or displayed FPS.",
+  "BaselineRenamedFunctions": [],
+  "Error": null,
+  "Map": 2,
+  "Summary": {
+    "Candidate": {
+      "Count": 15,
+      "Mean": 92.57312666666668,
+      "Median": 77.7651,
+      "P95": 169.2665,
+      "Max": 169.2665
+    },
+    "Baseline": {
+      "Count": 15,
+      "Mean": 69.24541333333333,
+      "Median": 52.7207,
+      "P95": 218.8703,
+      "Max": 218.8703
+    }
+  },
+  "LightingSha256": "E9C47D9E4005509206EC13DA08267F95DB3AF7A1E86F14A743F1F27DE145BF9F",
+  "BaselineSha256": "BC8A3895FC8DAF3C489E30F355FCF85C4E4530D7DFE936EEB2C581E2C02E0FCF",
+  "SourcesChangedDuringRun": false,
+  "Episode": 1,
+  "BundleSha256": "61F6C9B2E6CE5B2316A363B81436A241ACEEF2B962B2CB4125596AD9DEA9BAE0",
+  "CandidateSha256": "BF756BB76109B1B0391B707346378F02CB3B22E3AC52B45B7E14A4327C931307",
+  "Rounds": 3,
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "Samples": [
+    {
+      "Round": 0,
+      "Profile": {
+        "WeaponMs": 11.7798,
+        "HudMs": 20.6748,
+        "ActorsMs": 31.5058,
+        "GeometryMs": 138.7149
+      },
+      "Milliseconds": 218.8703,
+      "Version": "Baseline",
+      "First": true,
+      "Angle": 0
+    },
+    {
+      "Round": 0,
+      "Profile": {
+        "WeaponMs": 0.4494,
+        "HudMs": 1.543,
+        "ActorsMs": 57.7511,
+        "GeometryMs": 94.6991
+      },
+      "Milliseconds": 169.2665,
+      "Version": "Candidate",
+      "First": false,
+      "Angle": 0
+    },
+    {
+      "Round": 0,
+      "Profile": {
+        "WeaponMs": 0.3806,
+        "HudMs": 1.3025,
+        "ActorsMs": 4.0341,
+        "GeometryMs": 74.3337
+      },
+      "Milliseconds": 80.1119,
+      "Version": "Baseline",
+      "First": true,
+      "Angle": 37
+    },
+    {
+      "Round": 0,
+      "Profile": {
+        "WeaponMs": 0.3855,
+        "HudMs": 1.2661,
+        "ActorsMs": 28.8694,
+        "GeometryMs": 65.1067
+      },
+      "Milliseconds": 95.6894,
+      "Version": "Candidate",
+      "First": false,
+      "Angle": 37
+    },
+    {
+      "Round": 0,
+      "Profile": {
+        "WeaponMs": 0.3793,
+        "HudMs": 1.501,
+        "ActorsMs": 5.8,
+        "GeometryMs": 85.3218
+      },
+      "Milliseconds": 93.0593,
+      "Version": "Baseline",
+      "First": true,
+      "Angle": 90
+    },
+    {
+      "Round": 0,
+      "Profile": {
+        "WeaponMs": 0.3931,
+        "HudMs": 1.3043,
+        "ActorsMs": 41.3009,
+        "GeometryMs": 85.0517
+      },
+      "Milliseconds": 128.1216,
+      "Version": "Candidate",
+      "First": false,
+      "Angle": 90
+    },
+    {
+      "Round": 0,
+      "Profile": {
+        "WeaponMs": 0.3944,
+        "HudMs": 1.2839,
+        "ActorsMs": 5.9968,
+        "GeometryMs": 36.4118
+      },
+      "Milliseconds": 44.1484,
+      "Version": "Baseline",
+      "First": true,
+      "Angle": 180
+    },
+    {
+      "Round": 0,
+      "Profile": {
+        "WeaponMs": 0.402,
+        "HudMs": 1.6339,
+        "ActorsMs": 40.0073,
+        "GeometryMs": 35.6563
+      },
+      "Milliseconds": 77.7651,
+      "Version": "Candidate",
+      "First": false,
+      "Angle": 180
+    },
+    {
+      "Round": 0,
+      "Profile": {
+        "WeaponMs": 0.3851,
+        "HudMs": 1.2261,
+        "ActorsMs": 2.421,
+        "GeometryMs": 39.8412
+      },
+      "Milliseconds": 43.9317,
+      "Version": "Baseline",
+      "First": true,
+      "Angle": 270
+    },
+    {
+      "Round": 0,
+      "Profile": {
+        "WeaponMs": 0.4222,
+        "HudMs": 1.2392,
+        "ActorsMs": 23.4021,
+        "GeometryMs": 39.4515
+      },
+      "Milliseconds": 64.5782,
+      "Version": "Candidate",
+      "First": false,
+      "Angle": 270
+    },
+    {
+      "Round": 1,
+      "Profile": {
+        "WeaponMs": 0.3911,
+        "HudMs": 2.037,
+        "ActorsMs": 25.9007,
+        "GeometryMs": 44.9069
+      },
+      "Milliseconds": 73.2999,
+      "Version": "Candidate",
+      "First": true,
+      "Angle": 0
+    },
+    {
+      "Round": 1,
+      "Profile": {
+        "WeaponMs": 0.3684,
+        "HudMs": 1.2198,
+        "ActorsMs": 3.9886,
+        "GeometryMs": 47.0834
+      },
+      "Milliseconds": 52.7207,
+      "Version": "Baseline",
+      "First": false,
+      "Angle": 0
+    },
+    {
+      "Round": 1,
+      "Profile": {
+        "WeaponMs": 0.413,
+        "HudMs": 1.2508,
+        "ActorsMs": 31.0092,
+        "GeometryMs": 78.5134
+      },
+      "Milliseconds": 111.2506,
+      "Version": "Candidate",
+      "First": true,
+      "Angle": 37
+    },
+    {
+      "Round": 1,
+      "Profile": {
+        "WeaponMs": 0.3621,
+        "HudMs": 1.2059,
+        "ActorsMs": 3.9842,
+        "GeometryMs": 76.8513
+      },
+      "Milliseconds": 82.463,
+      "Version": "Baseline",
+      "First": false,
+      "Angle": 37
+    },
+    {
+      "Round": 1,
+      "Profile": {
+        "WeaponMs": 0.364,
+        "HudMs": 1.2241,
+        "ActorsMs": 41.4014,
+        "GeometryMs": 97.2378
+      },
+      "Milliseconds": 140.296,
+      "Version": "Candidate",
+      "First": true,
+      "Angle": 90
+    },
+    {
+      "Round": 1,
+      "Profile": {
+        "WeaponMs": 0.3591,
+        "HudMs": 1.1836,
+        "ActorsMs": 5.0967,
+        "GeometryMs": 79.2149
+      },
+      "Milliseconds": 85.9205,
+      "Version": "Baseline",
+      "First": false,
+      "Angle": 90
+    },
+    {
+      "Round": 1,
+      "Profile": {
+        "WeaponMs": 0.3572,
+        "HudMs": 2.0359,
+        "ActorsMs": 38.571,
+        "GeometryMs": 32.7406
+      },
+      "Milliseconds": 73.7894,
+      "Version": "Candidate",
+      "First": true,
+      "Angle": 180
+    },
+    {
+      "Round": 1,
+      "Profile": {
+        "WeaponMs": 0.3485,
+        "HudMs": 1.7865,
+        "ActorsMs": 5.115,
+        "GeometryMs": 31.6347
+      },
+      "Milliseconds": 38.9449,
+      "Version": "Baseline",
+      "First": false,
+      "Angle": 180
+    },
+    {
+      "Round": 1,
+      "Profile": {
+        "WeaponMs": 0.3673,
+        "HudMs": 1.8546,
+        "ActorsMs": 21.6365,
+        "GeometryMs": 34.0074
+      },
+      "Milliseconds": 57.9299,
+      "Version": "Candidate",
+      "First": true,
+      "Angle": 270
+    },
+    {
+      "Round": 1,
+      "Profile": {
+        "WeaponMs": 0.3516,
+        "HudMs": 1.1101,
+        "ActorsMs": 2.0608,
+        "GeometryMs": 33.9188
+      },
+      "Milliseconds": 37.4989,
+      "Version": "Baseline",
+      "First": false,
+      "Angle": 270
+    },
+    {
+      "Round": 2,
+      "Profile": {
+        "WeaponMs": 0.3335,
+        "HudMs": 1.1205,
+        "ActorsMs": 3.3845,
+        "GeometryMs": 36.8191
+      },
+      "Milliseconds": 41.7231,
+      "Version": "Baseline",
+      "First": true,
+      "Angle": 0
+    },
+    {
+      "Round": 2,
+      "Profile": {
+        "WeaponMs": 0.3493,
+        "HudMs": 1.1739,
+        "ActorsMs": 24.3922,
+        "GeometryMs": 37.8305
+      },
+      "Milliseconds": 63.8258,
+      "Version": "Candidate",
+      "First": false,
+      "Angle": 0
+    },
+    {
+      "Round": 2,
+      "Profile": {
+        "WeaponMs": 0.3297,
+        "HudMs": 1.09,
+        "ActorsMs": 3.3489,
+        "GeometryMs": 56.3361
+      },
+      "Milliseconds": 61.1714,
+      "Version": "Baseline",
+      "First": true,
+      "Angle": 37
+    },
+    {
+      "Round": 2,
+      "Profile": {
+        "WeaponMs": 0.3512,
+        "HudMs": 1.1608,
+        "ActorsMs": 31.5206,
+        "GeometryMs": 57.279
+      },
+      "Milliseconds": 90.3801,
+      "Version": "Candidate",
+      "First": false,
+      "Angle": 37
+    },
+    {
+      "Round": 2,
+      "Profile": {
+        "WeaponMs": 0.3423,
+        "HudMs": 1.1533,
+        "ActorsMs": 5.3157,
+        "GeometryMs": 74.1486
+      },
+      "Milliseconds": 81.0231,
+      "Version": "Baseline",
+      "First": true,
+      "Angle": 90
+    },
+    {
+      "Round": 2,
+      "Profile": {
+        "WeaponMs": 0.3461,
+        "HudMs": 1.1345,
+        "ActorsMs": 37.7045,
+        "GeometryMs": 75.7894
+      },
+      "Milliseconds": 115.0488,
+      "Version": "Candidate",
+      "First": false,
+      "Angle": 90
+    },
+    {
+      "Round": 2,
+      "Profile": {
+        "WeaponMs": 0.3355,
+        "HudMs": 1.0737,
+        "ActorsMs": 5.0926,
+        "GeometryMs": 31.6325
+      },
+      "Milliseconds": 38.1878,
+      "Version": "Baseline",
+      "First": true,
+      "Angle": 180
+    },
+    {
+      "Round": 2,
+      "Profile": {
+        "WeaponMs": 0.9838,
+        "HudMs": 1.1063,
+        "ActorsMs": 37.853,
+        "GeometryMs": 30.731
+      },
+      "Milliseconds": 70.7334,
+      "Version": "Candidate",
+      "First": false,
+      "Angle": 180
+    },
+    {
+      "Round": 2,
+      "Profile": {
+        "WeaponMs": 0.3436,
+        "HudMs": 1.167,
+        "ActorsMs": 2.1163,
+        "GeometryMs": 35.2222
+      },
+      "Milliseconds": 38.9062,
+      "Version": "Baseline",
+      "First": true,
+      "Angle": 270
+    },
+    {
+      "Round": 2,
+      "Profile": {
+        "WeaponMs": 0.3958,
+        "HudMs": 1.1385,
+        "ActorsMs": 20.9656,
+        "GeometryMs": 34.0605
+      },
+      "Milliseconds": 56.6222,
+      "Version": "Candidate",
+      "First": false,
+      "Angle": 270
+    }
+  ]
+}

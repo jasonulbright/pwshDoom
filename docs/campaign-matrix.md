@@ -6,11 +6,11 @@ Updated 2026-09-26. Release sequence remains Ultimate Doom, Doom II, then a MyHo
 
 Source/IWAD hashes and detailed results: [results/campaign-smoke-lineflags-fixed.json](../results/campaign-smoke-lineflags-fixed.json).
 
-The current sprite-sampling renderer also passes a fresh **36/36-map smoke**
+The current actor-projection renderer also passes a fresh **36/36-map smoke**
 with 16 worker strips, 35 idle tics and two full 320×200 frames per map:
-[current receipt](../results/weapon-projection-smoke-current.json). This is
-startup/render coverage, not any of the ordinary-input completion evidence in
-the table below.
+[current receipt](../results/campaign-smoke-actor-projection-final.json). This
+is startup/render coverage, not any of the ordinary-input completion evidence
+in the table below.
 
 E1M1 has an [input-only completion report](../results/e1m1-route-lineflags.json) with 1560 commands. That route ends at intermission; it does not qualify next-level presentation or a whole episode. E1M2 now has a separate [normal-route qualification](campaign-e1m2.md), including recorded continuation into E1M3. The remaining maps still need completion evidence. Source-version matching is checked separately from input/state equivalence.
 
@@ -70,7 +70,7 @@ Current focused readiness evidence uses the same Ultimate Doom IWAD hash
 `6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F`:
 
 [Episode 1 playtest readiness summary](../results/episode1-playtest-readiness.json)
-uses renderer source baseline `f12334e9941e2917da9d4de1c66e92967b0d3967`,
+uses the source baseline recorded in the readiness receipt,
 links the current renderer smoke and the focused game/session/input checks,
 and explicitly leaves the human route and physical keyboard input pending.
 

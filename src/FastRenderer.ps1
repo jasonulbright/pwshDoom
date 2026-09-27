@@ -228,6 +228,14 @@ function Invoke-FastRender {
     [int]$viewZData=[Math]::Truncate(65536.0*$cz)
     [uint32]$viewAngleData=[uint32]([long][Math]::Round(4294967296.0*($angle/(2*[Math]::PI))) -band 0xFFFFFFFFL)
     [uint32]$planeBaseAngleData=([long]$viewAngleData-0x40000000L) -band 0xFFFFFFFFL
+    # Actor projection follows Doom's 16.16 transform. Keep the floating-point
+    # camera values above for the PowerShell BSP/plane path, but use the same
+    # angle lookup and fixed-point products as the adopted sprite projector.
+    [int[]]$spriteFineSine=$Context.PlaneFineSine
+    [int]$spriteFineIndex=$viewAngleData -shr 19
+    [int]$spriteViewSinData=$spriteFineSine[$spriteFineIndex]
+    [int]$spriteViewCosData=$spriteFineSine[$spriteFineIndex+2048]
+    [int]$spriteFracBits=16;[int]$spriteMinZData=4 -shl 16;[int]$spriteScaleLightShift=12
     [int]$planeBaseFine=$planeBaseAngleData -shr 19
     [int[]]$fineSine=$Context.PlaneFineSine
     [int]$planeBaseX=[Math]::Truncate($fineSine[$planeBaseFine+2048]/160.0)
@@ -439,28 +447,54 @@ function Invoke-FastRender {
         }
     }
     foreach($actor in $drawActors) {
-        if($true) {
-            [double]$dx=$actor.X-$cx;[double]$dy=$actor.Y-$cy
-            [double]$d=$dx*$co+$dy*$si
-            if($d -gt 1) {
-                $frame=$Context.SpriteAtlas[$actor.Sprite][$actor.Frame -band 32767];[int]$rotation=0
-                if($frame.Rotate){$a=[Math]::Atan2($dy,$dx)-$actor.Angle+9*[Math]::PI/8;$a=($a%(2*[Math]::PI)+2*[Math]::PI)%(2*[Math]::PI);$rotation=[Math]::Floor($a/( [Math]::PI/4))}
-                $patch=$frame.Patches[$rotation];[double]$scale=160/$d
-                [double]$left=160+($dx*$si-$dy*$co-$patch.Left)*$scale
-                if($left -lt $EndColumn -and $left+$patch.Width*$scale -gt $FirstColumn) {
-                    $light=if($actor.Frame -band 32768){0}else{$Context.Lighting.Scale[[Math]::Clamp(($actor.LightLevel -shr 4)+$player.ExtraLight,0,15)][[Math]::Min(47,[int][Math]::Floor(2560.0/$d))]}
-                    if($player.FixedColorMap -gt 0){$light=$player.FixedColorMap}
-                    [int]$textureAltData=[Math]::Truncate(($actor.Z+$patch.Top-$cz)*65536.0)
-                    if($actor.Flags -band 0x40000){
-                        Draw-FastFuzzPatch $Context $patch $left (84-($actor.Z+$patch.Top-$cz)*$scale) $scale $d $frame.Flip[$rotation] $FirstColumn $EndColumn 168
-                    }else{
-                        Draw-FastPatch $Context $patch $left (84-($actor.Z+$patch.Top-$cz)*$scale) $scale $d $frame.Flip[$rotation] $light $FirstColumn $EndColumn 168 `
-                            -TextureAltData $textureAltData -CenterY 84 -FixedVerticalSampling
-                    }
+        # Keep the adopted renderer's 16.16 truncation with worker-safe integer
+        # arithmetic, avoiding per-actor Fixed object dispatch.
+            [int]$actorXData=[Math]::Truncate($actor.X*65536.0);[int]$actorYData=[Math]::Truncate($actor.Y*65536.0)
+            [int]$trXData=$actorXData-$viewXData;[int]$trYData=$actorYData-$viewYData
+            [int]$gxtData=(([long]$trXData*[long]$spriteViewCosData)-shr $spriteFracBits)
+            [int]$gytData=(([long]$trYData*[long]$spriteViewSinData)-shr $spriteFracBits)
+            [int]$tzData=$gxtData+$gytData
+            if($tzData -lt $spriteMinZData){continue}
+            [int]$xScaleData=[Math]::Truncate((10485760.0/[double]$tzData)*65536.0)
+            [int]$gxtLateralData=-(([long]$trXData*[long]$spriteViewSinData)-shr $spriteFracBits)
+            [int]$gytLateralData=(([long]$trYData*[long]$spriteViewCosData)-shr $spriteFracBits)
+            [int]$txData=-($gytLateralData+$gxtLateralData)
+            [long]$tzLimitRaw=(([long]$tzData -shl 2) -band 0xFFFFFFFFL)
+            if($tzLimitRaw -ge 0x80000000L){$tzLimitRaw-=0x100000000L}
+            [int]$tzLimitData=$tzLimitRaw
+            if([Math]::Abs([long]$txData) -gt $tzLimitData){continue}
+
+            $frame=$Context.SpriteAtlas[$actor.Sprite][$actor.Frame -band 0x7F];[int]$rotation=0
+            if($null -eq $frame){continue}
+            if($frame.Rotate){
+                [double]$angleToActor=[Math]::Atan2($actor.Y-$cy,$actor.X-$cx)-$actor.Angle+9*[Math]::PI/8
+                $angleToActor=($angleToActor%(2*[Math]::PI)+2*[Math]::PI)%(2*[Math]::PI)
+                $rotation=[Math]::Floor($angleToActor/([Math]::PI/4))
+            }
+            $patch=$frame.Patches[$rotation]
+            if($null -eq $patch){continue}
+            [int]$leftOffsetData=$txData-($patch.Left -shl $spriteFracBits)
+            [int]$leftFracData=(160 -shl $spriteFracBits)+([long]$leftOffsetData*[long]$xScaleData -shr $spriteFracBits)
+            [int]$rightOffsetData=$leftOffsetData+($patch.Width -shl $spriteFracBits)
+            [int]$rightFracData=(160 -shl $spriteFracBits)+([long]$rightOffsetData*[long]$xScaleData -shr $spriteFracBits)
+            [int]$firstSpriteColumn=$leftFracData -shr $spriteFracBits
+            [int]$lastSpriteColumn=($rightFracData -shr $spriteFracBits)-1
+            if($firstSpriteColumn -lt $EndColumn -and $lastSpriteColumn -ge $FirstColumn){
+                [double]$scale=$xScaleData/65536.0;[double]$distance=$tzData/65536.0
+                [int]$lightIndex=($xScaleData -shr $spriteScaleLightShift)
+                $light=if($actor.Frame -band 32768){0}else{$Context.Lighting.Scale[[Math]::Clamp(($actor.LightLevel -shr 4)+$player.ExtraLight,0,15)][[Math]::Min(47,$lightIndex)]}
+                if($player.FixedColorMap -gt 0){$light=$player.FixedColorMap}
+                [int]$actorZData=[Math]::Truncate($actor.Z*65536.0)
+                [int]$textureAltData=$actorZData+($patch.Top -shl $spriteFracBits)-$viewZData
+                [int]$topData=(84 -shl $spriteFracBits)-([long]$textureAltData*[long]$xScaleData -shr $spriteFracBits)
+                [double]$left=$leftFracData/65536.0;[double]$top=$topData/65536.0
+                if($actor.Flags -band 0x40000){
+                    Draw-FastFuzzPatch $Context $patch $left $top $scale $distance $frame.Flip[$rotation] $FirstColumn $EndColumn 168
+                }else{
+                    Draw-FastPatch $Context $patch $left $top $scale $distance $frame.Flip[$rotation] $light $FirstColumn $EndColumn 168 `
+                        -TextureAltData $textureAltData -CenterY 84 -FixedVerticalSampling
                 }
             }
-        }
-
     }
     $actorMs=$phaseWatch.Elapsed.TotalMilliseconds;$phaseWatch.Restart()
     Draw-FastPlayerSprites $Context $FirstColumn $EndColumn

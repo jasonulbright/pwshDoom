@@ -1,0 +1,125 @@
+{
+  "Format": "pwshDoom.ActorProjectionFixedPointComparison",
+  "FinishedUtc": "2026-09-27T00:03:27.4990864Z",
+  "PowerShell": "7.6.5",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "BaselineRendererSha256": "A1613DD872334581ABB6BAC83B58386311CEF4D2516F2087413A1CF619196A9F",
+  "CandidateRendererSha256": "CA56DD04BAC258F9ACF12AEA0A7535CDFE36A69D8C1EF9DAF8BBD56C63DEE9C8",
+  "ReferenceRendererSha256": "108D7FC274EDE1A1AD64864C6BD273DCAB48FA5A160FFD91FAA1EFB1FCB43AC9",
+  "Cases": [
+    {
+      "Angles": [
+        0,
+        90,
+        180
+      ],
+      "After": [
+        4365,
+        4556,
+        5026
+      ],
+      "CurrentReportSha256": "6F9224F88C55703C6B7CFDC2BA1DEC7CFAD39C4751CED365B893BF91FD6F4286",
+      "ReferenceReportSha256": "4137DD08F45A434F552A6777D6B98C5F194D9C64C499E32737681FF3E9EFE24A",
+      "Before": [
+        4388,
+        4607,
+        5043
+      ],
+      "FixedColorMap": 0,
+      "Map": "E1M1",
+      "CurrentRawReport": "local/actor-projection-e1m1-final-current.json"
+    },
+    {
+      "Angles": [
+        0,
+        90,
+        180
+      ],
+      "After": [
+        6997,
+        7838,
+        6351
+      ],
+      "CurrentReportSha256": "5B97C49D61DD034A657B9DAE34E904F34A9982AE8FC79D0DE624D2582C6FBFCB",
+      "ReferenceReportSha256": "DCC86FB58D578FE807BFCC748C6ACE80F9CD8F80D963F73D7821028C32CAFB33",
+      "Before": [
+        7012,
+        8087,
+        6534
+      ],
+      "FixedColorMap": 1,
+      "Map": "E1M2"
+    }
+  ],
+  "PairedSerialPerformance": [
+    {
+      "Report": "results/renderer-pair-actor-projection-e1m1-final.json",
+      "CandidateMedianMs": null,
+      "ReportSha256": "3D2CF9F5BC75E565CA7A153D9B91FB802A69F0643A1DF0FA8A951C1FC0A23810",
+      "PairedMedianDeltaMs": 0.57,
+      "SamplesPerVersion": 0,
+      "PairedMedianDeltaPercent": 0.78,
+      "BaselineMedianMs": null,
+      "Map": 1
+    },
+    {
+      "Report": "results/renderer-pair-actor-projection-e1m2-final.json",
+      "CandidateMedianMs": null,
+      "ReportSha256": "1B0417D467ED07219052680134168ECF60DF69D9FFFF3C09CF3FAAF8D9BF99B4",
+      "PairedMedianDeltaMs": 1.4,
+      "SamplesPerVersion": 0,
+      "PairedMedianDeltaPercent": 3.0,
+      "BaselineMedianMs": null,
+      "Map": 2
+    }
+  ],
+  "Smoke": {
+    "ReportSha256": "D9F501463BAFBD5FAE04A697729B5AA1ABF5F987749B6A502C3C06F20678F7ED",
+    "FramesPerMap": 2,
+    "RequestedTics": 35,
+    "Passed": 36,
+    "Failed": 0,
+    "Report": "results/campaign-smoke-actor-projection-final.json"
+  },
+  "WorkerEquivalence": [
+    {
+      "Workers": 16,
+      "Style": "Classic",
+      "Passed": true,
+      "Differences": [
+        0.0
+      ],
+      "PixelsPerView": 64000,
+      "Views": 5
+    },
+    {
+      "Workers": 16,
+      "Style": "Matrix",
+      "Passed": true,
+      "Differences": [
+        0.0
+      ],
+      "PixelsPerView": 64000,
+      "Views": 5
+    },
+    {
+      "Workers": 16,
+      "Style": "AnsiArt",
+      "Passed": true,
+      "Differences": [
+        0.0
+      ],
+      "PixelsPerView": 64000,
+      "Views": 5
+    }
+  ],
+  "Meaning": "Current and pre-change serial renderers compared against the adopted PowerShell reference at idle E1M1/E1M2 starts. E1M2 uses explicit fixed colormap 1 to expose sprites. Paired serial timing contains 15 samples per version across three rounds and five headings; it is noisy and is not live gameplay or displayed-FPS evidence. Worker checks compare exact serial and process outputs in each style.",
+  "Limitations": [
+    "Reference is the locally adapted ManagedDoom PowerShell renderer, not independent original-executable ground truth.",
+    "Static idle starts only; no moving-actor animation sweep or original-executable pixel claim.",
+    "Scene-index reductions include the full scene, not an isolated actor-only mask.",
+    "Paired render timings are serial kernel timings, not whole-game performance or FPS.",
+    "36-map smoke does not test navigation, exits, or campaign completion.",
+    "A source-side missing-rotated-patch guard was added after the earlier full smoke; the final receipt is results/campaign-smoke-actor-projection-final.json."
+  ]
+}

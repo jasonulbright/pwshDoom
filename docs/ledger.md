@@ -1629,3 +1629,34 @@ original-executable parity. Performance was not measured in this change.
 The renderer and asset-transport update is committed as
 `f12334e9941e2917da9d4de1c66e92967b0d3967`; the readiness receipt pins that
 source while retaining Jason's single complete Episode 1 route as pending.
+
+## 2026-09-26 — Fixed-point actor projection
+
+The numeric actor drawer now performs Doom-style 16.16 camera transforms,
+near/side clipping, projected scale and patch bounds, light-table selection,
+and vertical texture-origin mapping using worker-safe PowerShell integer
+arithmetic. Rotated-frame selection retains the existing floating-point angle
+calculation, so this is a partial fidelity fix. A null rotated patch is skipped
+to follow the reference renderer's guard.
+
+Against the adopted PowerShell renderer, three static E1M1 views improve from
+14,038 to 13,947 differing scene indices. Three E1M2 views with diagnostic
+fixed colormap 1 improve from 21,633 to 21,186. This is a 538-index aggregate
+reduction across six views, measured over full scenes rather than an actor-only
+mask; it is not original-executable parity. The portable
+[comparison receipt](../results/actor-projection-fixedpoint-comparison.json)
+stores hashes and limits.
+
+The current source matches serial rendering across 16 workers in Classic,
+Matrix/Katakana, and AnsiArt/Katakana (320,000 pixels per style), and passes the
+36-map, 35-idle-tic, two-frame smoke. Three-round paired serial measurements
+show median paired deltas of +0.57 ms (+0.78%) on E1M1 and +1.40 ms (+3.00%) on
+E1M2, with large per-sample variance. No performance improvement is claimed.
+
+The first object-based fixed-point draft could not run in render workers because
+they do not load engine `Angle`/`Fixed` classes; the failure is retained at
+`results/render-partitions-actor-fixed-16-20260926.json`. Its paired E1M2
+median was also substantially slower. Rewriting the transform as raw integer
+PowerShell arithmetic removed that dependency while retaining the image
+comparison result. Full rotation-boundary sweeps, moving-actor comparisons,
+occlusion parity, and original-executable comparisons remain open.

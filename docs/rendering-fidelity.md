@@ -341,3 +341,38 @@ algorithm and exact output across this implementation's worker boundary. They
 do not test actor world projection or occlusion against the original
 executable, establish whole-game visual parity, certify campaign completion,
 or measure performance. No speed claim is made.
+
+## Fixed-point actor projection (2026-09-26)
+
+The numeric world-sprite path now uses the adopted renderer's 16.16 transform
+for actor depth, horizontal scale, projected patch bounds, light-table index,
+and vertical texture origin. The worker path expresses those operations as
+integer PowerShell arithmetic over its transferred sine table; it does not
+load engine class types into rendering workers. A null rotated patch is skipped
+as in the reference. Rotated-frame selection still uses the existing
+floating-point angle calculation, so this is a partial projection match rather
+than full actor parity.
+
+At three static idle views, the full-scene scene-index differences changed as
+follows against the adopted PowerShell reference:
+
+| Map and diagnostic state | Heading 0 | Heading 90 | Heading 180 | Total |
+| --- | ---: | ---: | ---: | ---: |
+| E1M1, normal colormap | 4,388 → 4,365 | 4,607 → 4,556 | 5,043 → 5,026 | 14,038 → 13,947 |
+| E1M2, fixed colormap 1 | 7,012 → 6,997 | 8,087 → 7,838 | 6,534 → 6,351 | 21,633 → 21,186 |
+
+The E1M2 diagnostic reduces total scene differences by 447 (2.07%); the E1M1
+set reduces them by 91 (0.65%). These are whole-scene counts, not an
+actor-only mask, and they do not prove original-executable pixel parity. The
+[portable receipt](../results/actor-projection-fixedpoint-comparison.json)
+includes the IWAD, source hashes, worker checks, and paired render measurements.
+
+Classic, Matrix/Katakana, and AnsiArt/Katakana each match their serial output
+exactly across 16 process workers and five views (320,000 pixels per style).
+The current renderer also passes a 36-map load/35-idle-tic/two-frame smoke.
+Neither result is a map completion test. Three-round paired serial timings
+show a median paired cost of 0.57 ms (0.78%) on E1M1 and 1.40 ms (3.00%) on
+E1M2. The individual samples vary substantially; this is a documented
+fidelity tradeoff, not a performance or displayed-FPS claim. Moving actors,
+all rotation boundaries, occlusion cases, and independent original-executable
+comparison remain open.
