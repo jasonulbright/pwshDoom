@@ -1,0 +1,55 @@
+{
+  "UpdatedUtc": "2026-09-27T04:21:52Z",
+  "BaselineCommit": "37391e3e391c465bbadc88f52cb1ba90c2d3fa6d",
+  "Sources": [
+    { "Path": "scripts/FrameCodec.ps1", "Sha256": "9A2923EEDACD0FC4B07EA0DE59EAE6C8217492EBA492419757AF5F346779C68A" },
+    { "Path": "src/TerminalCodec.ps1", "Sha256": "E0DC8287689FFAAB09582062BFB22D2A43F60707B3F8611C667B33F2CDB611C1" },
+    { "Path": "src/AnsiColorState.ps1", "Sha256": "7707624A9289C47FB7A94BA484F231338E1EBE3C36C38A37B8DDE938C15BBE53" }
+  ],
+  "Change": "Classic Pairs and ColorState strip encoders reuse a per-codec StringBuilder instead of allocating a per-strip string-reference array on every frame.",
+  "SourceDerivedAllocation": {
+    "Width": 320,
+    "Height": 200,
+    "Workers": 16,
+    "ColumnsPerWorker": 20,
+    "StringReferenceSlotsPerWorkerStrip": 2100,
+    "ReferenceSizeAssumptionBytes": 8,
+    "ReferenceArrayPayloadBytesPerWorkerCall": 16800,
+    "ReferenceArrayPayloadBytesAcrossWorkersPerImage": 268800,
+    "Meaning": "Calculated from the removed array length formula and 64-bit reference width. Excludes array headers, cursor strings, the output string/byte array, and runtime allocation behavior; it is not a measured GC or throughput result."
+  },
+  "StrictColorChecks": {
+    "Passed": 13,
+    "Failed": 0,
+    "Scope": "Independent ANSI parser checks every output RGB pixel, odd dimensions, uneven partitions, offsets and single-component color transitions; six actual E1M1/E1M3 raster views are included.",
+    "Report": "ansi-color-state-stringbuilder-verified-20260927.json"
+  },
+  "WorkerChecks": [
+    {
+      "AnsiEncoding": "Pairs",
+      "Style": "Classic",
+      "Workers": 16,
+      "Headings": 5,
+      "PixelsCompared": 320000,
+      "PixelDifferences": 0,
+      "EncodedStripChecks": 80,
+      "Report": "render-partitions-pairs-stringbuilder-20260927.json"
+    },
+    {
+      "AnsiEncoding": "ColorState",
+      "Style": "Classic",
+      "Workers": 16,
+      "Headings": 5,
+      "PixelsCompared": 320000,
+      "PixelDifferences": 0,
+      "EncodedStripChecks": 80,
+      "Report": "render-partitions-colorstate-stringbuilder-20260927.json"
+    }
+  ],
+  "FailedAttempt": {
+    "Report": "ansi-color-state-stringbuilder-20260927.json",
+    "Cause": "The test ran concurrently with another renderer test; both rebuilt local/engine-bundle.ps1 and one received a file-in-use error. The strict test was rerun sequentially and passed. This was a shared test-build artifact collision, not an encoder or product failure."
+  },
+  "Performance": "No before/after timing or GC allocation measurement was made for the buffer change. The source-level array allocation was removed; the passing codec/worker tests do not establish a frame-rate gain.",
+  "IWadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F"
+}

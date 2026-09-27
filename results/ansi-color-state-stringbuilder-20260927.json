@@ -1,0 +1,121 @@
+{
+  "PowerShell": "7.6.5",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "Summary": {},
+  "Samples": [],
+  "Error": "Exception calling \"WriteAllText\" with \"3\" argument(s): \"The process cannot access the file 'C:\\projects\\pwshDoom\\local\\engine-bundle.ps1' because it is being used by another process.\"\nat <ScriptBlock>, C:\\projects\\pwshDoom\\scripts\\Build-EngineBundle.ps1: line 44\r\nat <ScriptBlock>, C:\\projects\\pwshDoom\\scripts\\Test-AnsiColorState.ps1: line 73",
+  "Meaning": "Experimental foreground/background state compression. Independently parse the entire stream and compare every painted RGB pixel to its source palette; no unrecognized bytes or duplicate painting accepted. Odd dimensions, uneven partitions and offsets plus six real static views. Alternating-order 16-strip serial encoding, including UTF8 and memory-stream assembly; setup/rendering and preceding correctness checks excluded. All timed samples retained. No concurrent study workload, terminal output, audio, display or full-game performance claim.",
+  "Sources": [
+    {
+      "Path": "scripts/Test-AnsiColorState.ps1",
+      "Sha256": "DDFE8239D9C51E10095D7D7EE6D795FCE87CC70E6EF738CAF8F540008B20925F"
+    },
+    {
+      "Path": "scripts/FrameCodec.ps1",
+      "Sha256": "9A2923EEDACD0FC4B07EA0DE59EAE6C8217492EBA492419757AF5F346779C68A"
+    },
+    {
+      "Path": "src/TerminalCodec.ps1",
+      "Sha256": "E0DC8287689FFAAB09582062BFB22D2A43F60707B3F8611C667B33F2CDB611C1"
+    },
+    {
+      "Path": "src/AnsiColorState.ps1",
+      "Sha256": "7707624A9289C47FB7A94BA484F231338E1EBE3C36C38A37B8DDE938C15BBE53"
+    },
+    {
+      "Path": "src/FastRenderer.ps1",
+      "Sha256": "94AC7263FADB522C9E1377F5B5694BEDED54A330C90191D8DC3BD7F67372517D"
+    },
+    {
+      "Path": "src/RenderLighting.ps1",
+      "Sha256": "E9C47D9E4005509206EC13DA08267F95DB3AF7A1E86F14A743F1F27DE145BF9F"
+    }
+  ],
+  "SourcesChangedDuringRun": [],
+  "Checks": [
+    {
+      "CandidateBytes": 758,
+      "Both": 12,
+      "ForegroundOnly": 0,
+      "Parts": 1,
+      "Pixels": 221,
+      "Passed": true,
+      "BaselineBytes": 780,
+      "PixelSha256": "2CC23B7BA2386B2DCCC2193625B99FA7B3A63DC1950E63AA74FAE08BE1EDF859",
+      "BackgroundOnly": 2,
+      "Name": "synthetic-Coherent"
+    },
+    {
+      "CandidateBytes": 989,
+      "Both": 16,
+      "ForegroundOnly": 1,
+      "Parts": 3,
+      "Pixels": 221,
+      "Passed": true,
+      "BaselineBytes": 1023,
+      "PixelSha256": "2CC23B7BA2386B2DCCC2193625B99FA7B3A63DC1950E63AA74FAE08BE1EDF859",
+      "BackgroundOnly": 2,
+      "Name": "synthetic-Coherent"
+    },
+    {
+      "CandidateBytes": 1173,
+      "Both": 14,
+      "ForegroundOnly": 4,
+      "Parts": 7,
+      "Pixels": 221,
+      "Passed": true,
+      "BaselineBytes": 1221,
+      "PixelSha256": "2CC23B7BA2386B2DCCC2193625B99FA7B3A63DC1950E63AA74FAE08BE1EDF859",
+      "BackgroundOnly": 0,
+      "Name": "synthetic-Coherent"
+    },
+    {
+      "CandidateBytes": 4274,
+      "Both": 119,
+      "ForegroundOnly": 0,
+      "Parts": 1,
+      "Pixels": 221,
+      "Passed": true,
+      "BaselineBytes": 4274,
+      "PixelSha256": "3CB041EABA10D6270AD92613971A2B582FD47248B4AF2687BA1A10A8A78E145F",
+      "BackgroundOnly": 0,
+      "Name": "synthetic-Entropy"
+    },
+    {
+      "CandidateBytes": 4371,
+      "Both": 118,
+      "ForegroundOnly": 0,
+      "Parts": 3,
+      "Pixels": 221,
+      "Passed": true,
+      "BaselineBytes": 4386,
+      "PixelSha256": "3CB041EABA10D6270AD92613971A2B582FD47248B4AF2687BA1A10A8A78E145F",
+      "BackgroundOnly": 1,
+      "Name": "synthetic-Entropy"
+    },
+    {
+      "CandidateBytes": 4610,
+      "Both": 119,
+      "ForegroundOnly": 0,
+      "Parts": 7,
+      "Pixels": 221,
+      "Passed": true,
+      "BaselineBytes": 4610,
+      "PixelSha256": "3CB041EABA10D6270AD92613971A2B582FD47248B4AF2687BA1A10A8A78E145F",
+      "BackgroundOnly": 0,
+      "Name": "synthetic-Entropy"
+    },
+    {
+      "CandidateBytes": 141,
+      "Both": 2,
+      "ForegroundOnly": 2,
+      "Parts": 1,
+      "Pixels": 16,
+      "Passed": true,
+      "BaselineBytes": 189,
+      "PixelSha256": "457D9F9F6C2E726847D0690D8AA4F0F5CB509680B3EFFFE033A162CCCBDF6E6E",
+      "BackgroundOnly": 2,
+      "Name": "component-transitions"
+    }
+  ]
+}

@@ -152,7 +152,19 @@ Do not postpone all performance work until M6. Measure after a feature adds subs
 
 2026-09-26 campaign update: [E1M5 investigation](campaign-e1m5-investigation.md) now records the first ordinary-input continuation from the qualified E1M4 state. It dies after 7,442 E1M5 commands; the failure is exactly replayable, and the observed Troop damage does not by itself establish an engine defect. No E1M5 completion or full-campaign qualification is claimed.
 
-## Immediate work queue
+## Active work queue (2026-09-27)
+
+- **Episode 1 human milestone:** ready for one complete human run on the exact pinned build in [`episode1-playtest.md`](episode1-playtest.md). The expected path includes E1M3 → E1M9 → E1M4 and ends at the E1 finale. Jason's result is pending. Do not split it into map-by-map requests or spend this milestone constructing/tuning an AI route.
+- **M4 rendering fidelity:** continue correcting specific world-scene mismatches against the adopted PowerShell renderer and Doom behavior, especially moving geometry and actor occlusion. Reuse existing replay states and source comparisons where they answer a concrete code question. Preserve all three style worker checks and the 36-map smoke; do not treat either as original-executable or campaign-completion proof.
+- **M3 audio:** continue toward full-campaign continuity, audible quality and queue timing under renderer load. The Episode 1 loop catalog and finite D_INTRO path are prepared, but an actual-device queue-timing stall has been observed and the full campaign has not been heard through.
+- **M6 performance:** the 35-tic/60-display goal remains open. Existing 59.67 terminal updates/sec is not monitor presentation; PresentMon ETW could not start under this account. Keep isolated renderer/mixer timings separate from simulation, audio, output and displayed-frame claims.
+- **M5/M7 release:** keep the broader Ultimate Doom release gates intact beyond the one Episode 1 playthrough, including the other maps, normal/secret behavior, independent compatibility boundaries, clean-checkout launch, licenses, package and write-up. Continue from reproducible product findings; a route death or slow/incomplete automated route alone is not an engine defect.
+
+The current source branch includes the 2026-09-27 renderer scratch-reuse change (`3113b68`), with zero differing pixels across 36 E1 views, exact 16-process output in all three styles, and a 36/36 map smoke. The current encoder work also reuses per-codec string builders in Classic Pairs/ColorState strip assembly; strict color and 16-worker checks pass, but no before/after encoder performance result is claimed yet. The human-test pin remains `76b18ac538a96e40b8aab2127039cf1a59718bec`; see the [pinned build handoff](episode1-playtest.md), [renderer receipt](../results/renderer-scratch-reuse-summary-20260927.json), and [encoder receipt](../results/ansi-strip-buffer-reuse-summary-20260927.json). These later renderer/encoder changes do not alter or replace the human-test pin.
+
+### Historical milestone notes and task record
+
+The following dated notes preserve experiment history and previous queue decisions; they are not the current task queue.
 
 **Preview delivered, September 19:** `0.1.0-preview.1` was published with Classic/Matrix/AnsiArt, menus, saves, automap, sound effects, a simple launcher and source-inclusive asset-free ZIP. The repository is public and the preview remains a separate milestone from the full release. The Episode 1 handoff and the Ultimate Doom, Doom II, fidelity, audio and performance gates below remain active development work.
 

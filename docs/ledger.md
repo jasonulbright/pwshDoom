@@ -1911,3 +1911,45 @@ Evidence index: [scratch-reuse summary](../results/renderer-scratch-reuse-summar
 [Matrix workers](../results/render-scratch-reuse-workers-matrix-20260927.json),
 [AnsiArt workers](../results/render-scratch-reuse-workers-ansiart-20260927.json),
 and [paired timings](rendering-fidelity.md#reuse-per-context-raster-scratch-2026-09-27).
+
+## 2026-09-27 — Refresh the active release queue
+
+The Episode 1 playtest handoff is ready on the pinned `76b18ac` build; Jason's
+one full route remains pending. The current renderer scratch-reuse commit is
+later development and has separate pixel, worker, smoke, and timing evidence.
+Keep those pins separate so the test build remains reproducible. The route
+milestone covers E1M1–E1M8, the E1M3 secret detour through E1M9 and return to
+E1M4, and the E1 finale. Do not resume map-by-map requests or AI route tuning.
+
+The broader release queue remains active after handoff: M4 moving-world and
+actor-occlusion fidelity, M3 full-campaign audio continuity and audible
+quality, M5 Ultimate Doom campaign coverage, M6 repeated end-to-end pacing and
+presentation evidence, then clean-checkout packaging and the final write-up.
+`docs/roadmap.md` now separates this current queue from the September 19
+chronology so old recommendations do not read as current work.
+
+## 2026-09-27 — Reuse PowerShell truecolor strip builders
+
+Classic Pairs and ColorState encoding allocated one string-reference array per
+strip per image, concatenated it into a string, then encoded UTF-8 bytes. Each
+codec context now retains a StringBuilder; the PowerShell encoders clear and
+reuse that buffer and still return an owned byte array to the worker transport.
+No pixel, SGR selection, cursor, or glyph algorithm changed. For sixteen
+20-column strips at 320×200, the removed arrays contained 2,100 references
+each; the source-derived total is 268,800 reference-payload bytes per image on
+a 64-bit process, excluding headers and other strings/arrays. This is an
+allocation calculation, not measured GC reduction or a frame-rate result.
+
+The strict ANSI decoder passes 13 exact-color cases, including six real
+E1M1/E1M3 views. Classic Pairs and ColorState each match serial output across
+five views with sixteen workers: 320,000 pixels and 80 encoded strip checks,
+zero pixel differences. The first strict test overlapped a renderer test while
+both rewrote local/engine-bundle.ps1 and failed on that shared file lock; its
+report is retained, and the test passed on a sequential rerun. This was test
+build concurrency, not a product or encoder failure.
+
+Evidence: [summary](../results/ansi-strip-buffer-reuse-summary-20260927.json),
+[strict-color report](../results/ansi-color-state-stringbuilder-verified-20260927.json),
+[retained first failure](../results/ansi-color-state-stringbuilder-20260927.json),
+[Pairs workers](../results/render-partitions-pairs-stringbuilder-20260927.json),
+and [ColorState workers](../results/render-partitions-colorstate-stringbuilder-20260927.json).

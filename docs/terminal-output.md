@@ -47,3 +47,35 @@ installed PresentMon CLI could not start its ETW trace under the current
 account's permissions.
 
 At 60 seconds in each original movie, the reviewed frames show centered Classic gameplay with the HUD and no visible external occlusion. Different startup durations mean those samples are not the same game state and are not pixel-equivalence evidence. The existing large margins and approximately 1600×900 physical image/aspect issue remain. Raw movies, PCM and extracted review PNGs remain in ignored `local/recordings`; portable receipts are backed up in Git.
+
+## Reuse ANSI strip assembly buffers (2026-09-27)
+
+Both Classic truecolor strip encoders previously allocated a string array for
+every worker strip on every image, then concatenated it to a string before
+UTF-8 conversion. The 16-worker 320×200 layout creates 100 character rows per
+strip; for each 20-column strip the removed array held 2,100 string references.
+New-CodecContext now owns a StringBuilder, and ConvertTo-AnsiStrip and
+ConvertTo-AnsiColorStateStrip clear and reuse it. Each renderer process has
+its own codec context. SGR selection, glyphs, cursor placement, indexed pixels,
+and output bytes are produced by the same PowerShell loops; UTF-8 conversion
+still returns an owned byte array to the process transport.
+
+The source-derived reference-slot estimate is 268,800 bytes per 320×200 image
+across sixteen strips on a 64-bit process, excluding array headers, cursor
+strings, the concatenated output string, and the returned byte arrays. It is
+an allocation estimate from the former array-length formula, not a measured
+GC or frame-rate result.
+
+The strict color test passes all 13 cases, including six actual E1M1/E1M3
+raster views; its independent decoder verifies every output RGB pixel, odd
+dimensions, uneven strips, offsets, and foreground/background-only
+transitions. Classic Pairs and ColorState each pass exact serial/16-process
+partition output across five views (320,000 pixels and 80 encoded strips per
+mode). These establish encoder correctness and worker parity, not a measured
+allocation or throughput improvement. The [receipt](../results/ansi-strip-buffer-reuse-summary-20260927.json)
+links the raw reports and source hashes.
+
+The first strict-test invocation overlapped another existing test that rebuilds
+local/engine-bundle.ps1; the shared file was busy. The attempt is retained in
+the receipt, and the strict test passed when rerun sequentially. This was a
+test-build artifact collision, not a game or encoder failure.
