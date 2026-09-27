@@ -2598,9 +2598,9 @@ and [AnsiArt/Katakana](../results/render-partitions-current-candidate-ansiart-20
 
 # 2026-09-27 — Correct the E1M1 blue-armor Gibs report and sample coverage
 
-Jason clarified that the object seen through a wall near the blue armor is
-pre-placed map scenery, not a body produced by combat. The installed Ultimate
-Doom IWAD (`DOOM.WAD`, SHA-256
+Jason clarified that the object seen through a wall near the blue armor is a
+pre-existing Gibs pile from the map, not the remains of an enemy killed during
+play. The installed Ultimate Doom IWAD (`DOOM.WAD`, SHA-256
 `6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F`) has blue
 armor (DoomEdNum 2019) at `(1824,-3280)`. A nearby E1M1 Thing type 24 is at
 `(2112,-2688)`, ordinal 121; the adopted MobjInfo maps it to `Misc71`/`Gibs`,
@@ -2617,6 +2617,35 @@ with blue armor 2019; this entry and the corrected
 [spatial audit](../results/episode1-blue-armor-gibs-sample-audit-20260927.json)
 supersede that mistaken distance conclusion. No rendering code changed for
 this correction.
+
+## 2026-09-27 — Current-source isolation of the E1M1 pre-existing Gibs pile
+
+Ran the same recorded E1M1 input at command indices 8400 and 8750 through the
+current candidate and adopted renderers. The receipt records both input-command
+index and in-game level time: those commands correspond to level times 1648 and
+1998, respectively, because level time had restarted during the raw replay.
+Both sampled endpoints are in E1M1 gameplay. At input 8400 neither renderer
+produces world-actor pixels. At input 8750 the reference has no visible `POL5`
+Gibs sprite, and the candidate produces no affected `POL5` pixels. The actor
+masks have 98.7% IoU, with two candidate-only mask pixels (one `COLUA0` pillar
+and one `BAR1B0` barrel, neither a palette mismatch) and 10 reference-only
+`PLAYN0` pixels. Of 5,914 full-scene palette differences, 5,904 are outside
+actor masks; the other 10 are reference-only actor pixels. These results do not
+point to the Gibs pile as a visibility leak. The exact user-reported angle
+remains unreproduced, and no rendering fix is justified by these samples.
+
+The first current-source audit attempt exposed a harness error rather than a
+game defect: it restored the sector actor-list heads captured when the map
+started, not those present at each later sample, causing a false 2,007-pixel
+repeat-render difference. A subsequent attempt also selected game level time
+instead of the input-command indices used by the earlier sixteen-view receipt,
+so it reached no requested samples. The diagnostic now snapshots live actor
+heads at each selected command index, resets the reference renderer's fuzz phase
+for same-state controls, and reports both clocks. The final [source-pinned
+comparison](../results/human-pool-gibs-actor-audit-current-source-20260927.json)
+passes repeat and restoration checks at both sample states. This does not prove
+the historical report was mistaken; it only fails to reproduce it at the
+available recorded views.
 
 ## 2026-09-27 — Qualify D_E2M3 music loop
 

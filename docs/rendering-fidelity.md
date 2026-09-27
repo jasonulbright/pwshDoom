@@ -790,6 +790,27 @@ records item identities, positions, source hashes, and distance calculations;
 the original [pixel comparison receipt](../results/human-pool-occlusion-samples-20260927.json)
 remains as the historical render comparison.
 
-The reported visibility remains unconfirmed. A focused follow-up should
-compare the static Gibs actors at the recorded near-armor/pile camera states
-and reproduce the reported angle before changing clipping code.
+The reported visibility remains unconfirmed. A current-source follow-up has
+compared the recorded near-armor/pile camera states; reproducing the exact
+reported angle is still needed before changing clipping code.
+
+The current-source follow-up at the same recorded input-command indices is now
+available in the [actor-isolation receipt](../results/human-pool-gibs-actor-audit-current-source-20260927.json).
+Input tics 8400 and 8750 correspond to game level times 1648 and 1998 in this
+raw replay, so the audit now records both clocks. Both endpoints remained in
+E1M1 gameplay. At input tic 8400, both renderers had zero world-actor pixels.
+At input tic 8750, the reference had no visible `POL5` Gibs sprite and the
+candidate produced no affected `POL5` pixels. The overall actor-mask IoU was
+98.7%, with two candidate-only mask pixels (one `COLUA0` pillar and one
+`BAR1B0` barrel, neither a palette mismatch) and 10 reference-only `PLAYN0`
+pixels. Of 5,914 full-scene palette mismatches, 5,904 were outside actor masks;
+the remaining 10 were reference-only actor pixels. These differences do not
+identify the Gibs pile as a leak.
+
+This follow-up also repaired two audit controls: sector actor-list heads are
+captured at each sampled gameplay state, and the reference renderer's fuzz
+phase is reset before same-state rerenders. The earlier 2,007-pixel repeat
+failure came from restoring map-start actor heads after later gameplay; it was
+an invalid harness control, not a product finding. Same-state repeat controls
+now pass at all analyzed samples. The through-wall report remains unreproduced
+at its exact view, and this audit does not justify changing clipping code.

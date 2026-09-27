@@ -5,8 +5,10 @@ param(
     [Parameter(Mandatory)][string]$InputReplay,
     [Parameter(Mandatory)][string]$Output,
     [string]$Images,
-    [ValidateRange(35,280)][int]$Tics=280,
-    [switch]$AuditCandidateActors
+    [ValidateRange(2,1000000)][int]$Tics=280,
+    [Alias('SampleLevelTics')][int[]]$SampleInputTics=@(),
+    [switch]$AuditCandidateActors,
+    [Alias('CandidateAuditLevelTics')][int[]]$CandidateAuditInputTics=@()
 )
 
 $ErrorActionPreference='Stop'
@@ -22,10 +24,18 @@ if($Images){
 $InputReplay=[IO.Path]::GetFullPath($InputReplay)
 $replay=Get-Content -LiteralPath $InputReplay -Raw|ConvertFrom-Json
 $wadHash=(Get-FileHash -LiteralPath $Wad).Hash
-if(($Tics % 35) -ne 0){throw 'Tics must be a multiple of 35.'}
-if(-not $replay.Passed -or $replay.WadSha256 -cne $wadHash -or $replay.InputCommands.Count -lt $Tics){
-    throw 'Input must be a passing same-IWAD replay with enough recorded commands.'
+$passedReplayReport=($replay.PSObject.Properties.Name -contains 'Passed') -and $replay.Passed
+$rawEpisodeOneReplay=($replay.Format -ceq 'pwshDoom.InputReplay' -and $replay.Episode -eq 1 -and $replay.Map -eq 1)
+if((-not $passedReplayReport -and -not $rawEpisodeOneReplay) -or $replay.WadSha256 -cne $wadHash -or $replay.InputCommands.Count -lt $Tics){
+    throw 'Input must be a passing same-IWAD replay report or a raw E1M1 input prefix with enough commands.'
 }
+[int[]]$expectedSampleInputTics=if($SampleInputTics.Count){@($SampleInputTics)}else{@(for($inputTic=35;$inputTic -le $Tics;$inputTic+=35){$inputTic})}
+if(@($expectedSampleInputTics|Sort-Object -Unique).Count -ne $expectedSampleInputTics.Count){throw 'SampleInputTics must be distinct.'}
+foreach($sampleInputTic in $expectedSampleInputTics){if($sampleInputTic -lt 2 -or $sampleInputTic -gt $Tics){throw "Invalid selected input tic: $sampleInputTic"}}
+if($CandidateAuditInputTics.Count -and -not $AuditCandidateActors){throw 'CandidateAuditInputTics requires -AuditCandidateActors.'}
+[int[]]$candidateAuditInputTics=if($CandidateAuditInputTics.Count){@($CandidateAuditInputTics)}elseif($AuditCandidateActors){@($Tics)}else{@()}
+if(@($candidateAuditInputTics|Sort-Object -Unique).Count -ne $candidateAuditInputTics.Count){throw 'CandidateAuditInputTics must be distinct.'}
+foreach($auditInputTic in $candidateAuditInputTics){if($auditInputTic -notin $expectedSampleInputTics){throw "Candidate audit input tic $auditInputTic is not a selected sample tic."}}
 
 $bundle=& "$PSScriptRoot/Build-EngineBundle.ps1"
 . $bundle
@@ -56,6 +66,15 @@ function Get-PaletteMismatchCount {
     [int]$count=0
     for([int]$i=0;$i -lt 53760;$i++){if($Left[$i] -ne $Right[$i]){$count++}}
     return $count
+}
+
+function Invoke-ReferenceRenderAtFuzzSeed {
+    param($Reference,$Game,[int]$FuzzSeed)
+    # The adopted renderer advances this frame-global sequence while drawing
+    # Spectres. Reset it for each same-state control so a changing fuzz phase
+    # is not mistaken for a failure to restore the actor lists.
+    $Reference.ThreeD.fuzzPos=$FuzzSeed
+    $Reference.RenderGame($Game,[Fixed]::One)
 }
 
 try{
@@ -89,11 +108,15 @@ try{
         $commands[0].AngleTurn=[int16][int]$entry[2]
         $commands[0].Buttons=[byte][int]$entry[3]
         $null=$game.Update($commands)
+        if($tic -notin $expectedSampleInputTics){continue}
+        [int]$inputTic=$tic
         [int]$levelTic=$game.World.LevelTime
-        if(($levelTic % 35) -ne 0){continue}
-        if($game.State -ne [GameState]::Level){throw "Replay left gameplay at tic $levelTic ($($game.State))."}
+        if($game.State -ne [GameState]::Level){throw "Replay left gameplay at input tic $inputTic ($($game.State), level tic $levelTic)."}
 
         $snapshot=New-GameRenderSnapshot $game 1
+        # Sector actor heads change throughout play as objects spawn, move,
+        # and are removed. Capture the endpoint state, not the map-start heads.
+        for([int]$i=0;$i -lt $sectorCount;$i++){$sectorHeads[$i]=$game.World.Map.Sectors[$i].ThingList}
         Set-GameRenderSnapshot $context $snapshot
         Invoke-FastRender $context
         [byte[]]$candidateFull=$context.Pixels.Clone()
@@ -109,7 +132,8 @@ try{
         [byte[]]$candidateRepeat=$context.Pixels.Clone()
         [int]$candidateRepeatDifferences=Get-PaletteMismatchCount $candidateFull $candidateRepeat
 
-        $reference.RenderGame($game,[Fixed]::One)
+        [int]$referenceFuzzSeed=0
+        Invoke-ReferenceRenderAtFuzzSeed $reference $game $referenceFuzzSeed
         [byte[]]$referenceFull=Convert-ReferenceFrame $reference
         [int]$fullReferenceVisibleWorldSprites=$reference.ThreeD.visSpriteCount
         $referenceSprites=[Collections.Generic.List[object]]::new()
@@ -135,12 +159,12 @@ try{
         }
         try{
             for([int]$i=0;$i -lt $sectorCount;$i++){$game.World.Map.Sectors[$i].ThingList=$null}
-            $reference.RenderGame($game,[Fixed]::One)
+            Invoke-ReferenceRenderAtFuzzSeed $reference $game $referenceFuzzSeed
             [byte[]]$referenceBackground=Convert-ReferenceFrame $reference
         }finally{
             for([int]$i=0;$i -lt $sectorCount;$i++){$game.World.Map.Sectors[$i].ThingList=$sectorHeads[$i]}
         }
-        $reference.RenderGame($game,[Fixed]::One)
+        Invoke-ReferenceRenderAtFuzzSeed $reference $game $referenceFuzzSeed
         [byte[]]$referenceRepeat=Convert-ReferenceFrame $reference
         [int]$referenceRepeatDifferences=Get-PaletteMismatchCount $referenceFull $referenceRepeat
         [bool]$restored=$true
@@ -191,7 +215,7 @@ try{
                 for([int]$i=0;$i -lt $sectorCount;$i++){$game.World.Map.Sectors[$i].ThingList=$null}
                 $liveActor.SectorNext=$null
                 $liveActor.Subsector.Sector.ThingList=$liveActor
-                $reference.RenderGame($game,[Fixed]::One)
+                Invoke-ReferenceRenderAtFuzzSeed $reference $game $referenceFuzzSeed
                 [byte[]]$referenceSingle=Convert-ReferenceFrame $reference
             }finally{
                 for([int]$i=0;$i -lt $sectorCount;$i++){$game.World.Map.Sectors[$i].ThingList=$sectorHeads[$i]}
@@ -321,7 +345,7 @@ try{
             $actorIsolationIndex++
         }
         $candidateActorAudit=[Collections.Generic.List[object]]::new()
-        if($AuditCandidateActors -and $levelTic -eq $Tics){
+        if($AuditCandidateActors -and $inputTic -in $candidateAuditInputTics){
             $liveActors=[Collections.Generic.List[object]]::new();$cap=$game.World.Thinkers.Cap;$thinker=$cap.Next
             while(-not [object]::ReferenceEquals($thinker,$cap)){
                 if($thinker -is [Mobj] -and -not [object]::ReferenceEquals($thinker,$game.World.ConsolePlayer.Mobj)){$liveActors.Add($thinker)}
@@ -349,6 +373,7 @@ try{
             }
         }
         $sample=[ordered]@{
+            InputTic=$inputTic
             LevelTic=$levelTic
             ActorCount=@($snapshot.Actors).Count
             ReferenceVisibleWorldSprites=$fullReferenceVisibleWorldSprites
@@ -409,21 +434,25 @@ try{
         Map=1
         Skill=3
         Tics=$Tics
+        InputTicEndpoint=$Tics
         SampleInterval=35
+        SampleInputTics=$expectedSampleInputTics
+        CandidateAuditInputTics=$candidateAuditInputTics
         InputReplay=$InputReplay
         InputReplaySha256=(Get-FileHash -LiteralPath $InputReplay).Hash
+        InputReplayValidation=if($passedReplayReport){'Passing replay report'}else{'Raw E1M1 input prefix; requested endpoints checked for gameplay state'}
         WadSha256=$wadHash
         BundleSha256=(Get-FileHash -LiteralPath $bundle).Hash
         Sources=$sources
         SourcesChangedDuringRun=@($sources|Where-Object {$_.Sha256 -cne (Get-FileHash -LiteralPath (Join-Path "$PSScriptRoot/.." $_.Path)).Hash}|ForEach-Object {$_.Path})
-        SameStateIsolationControlsPassed=($blankSectorListsControl -and $samples.Count -eq ($Tics/35))
+        SameStateIsolationControlsPassed=($blankSectorListsControl -and $samples.Count -eq $expectedSampleInputTics.Count)
         Samples=$samples.ToArray()
         MaskImages=$maskImages.ToArray()
         Error=$failure
-        Meaning='Compares world-actor-affected pixel masks by rerendering the exact same saved-replay states with world actors suppressed in each renderer. Player weapon, HUD, geometry, and other scene state remain. This localizes full-scene differences to broad background, shared actor-affected, or renderer-exclusive actor-affected regions. It is adopted-reference parity evidence, not original-executable validation, gameplay completion, or performance.'
+        Meaning='Compares world-actor-affected pixel masks at selected recorded input-command indices by rerendering the exact same saved-replay states with world actors suppressed in each renderer. InputTic is distinct from in-game LevelTic, which can reset after death. Player weapon, HUD, geometry, and other scene state remain. This localizes full-scene differences to broad background, shared actor-affected, or renderer-exclusive actor-affected regions. It is adopted-reference parity evidence, not original-executable validation, gameplay completion, or performance.'
     }|ConvertTo-Json -Depth 8|Set-Content -LiteralPath $Output
 }
 
 if($failure){throw 'Actor-isolation comparison failed; the partial report is retained.'}
-if(-not $blankSectorListsControl -or $samples.Count -ne ($Tics/35)){throw 'The expected route-prefix endpoint count was not fully analyzed.'}
+if(-not $blankSectorListsControl -or $samples.Count -ne $expectedSampleInputTics.Count){throw 'The expected actor-isolation sample set was not fully analyzed.'}
 "Recorded $($samples.Count) actor-isolation comparisons."
