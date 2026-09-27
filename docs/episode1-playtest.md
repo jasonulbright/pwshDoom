@@ -22,12 +22,12 @@ E1M8 exit and intermission.
 
 ## Build and launch
 
-Run exact source build commit `d84861f4e1293ef581f73942867256243016b1fb`.
+Run exact source build commit `b99dc8af6017622c6f80998873e56f58616333fe`.
 If your checkout is at a later branch tip, enter the pinned build from the
 repository root before launching:
 
 ```powershell
-git switch --detach d84861f4e1293ef581f73942867256243016b1fb
+git switch --detach b99dc8af6017622c6f80998873e56f58616333fe
 ```
 
 After preserving the input and session reports under `local/`, return to the
@@ -35,14 +35,17 @@ development branch with `git switch codex/feasibility-study`. The pinned build
 keeps gameplay, renderer, and audio algorithms in PowerShell. It includes the
 fixed-point sight-intercept and sight-bound integer paths, renderer guards for
 plane distance and wall-light lookup, and the actor-depth corrections described
-in the [fidelity record](rendering-fidelity.md#keep-background-planes-out-of-actor-depth-2026-09-27)
-and [missing-texture wall-depth entry](rendering-fidelity.md#preserve-depth-for-untextured-wall-bands-2026-09-27).
-The gameplay/renderer [candidate receipt](../results/episode1-human-playthrough-candidate-20260927-r2.json)
-is pinned to the earlier build `0978112ef7b365f66b93770e1d98978e55b6d506`;
-it records the IWAD, music catalog, launcher preflight, 36-map smoke,
-secret-path/finale transition checks, E1M8 boss-trigger fixtures, retained
-E1M1-to-E1M2 session regression, 20 wall-order checks, and all three renderer
-styles. Your first launch exposed an exact-patch version check: the catalog
+in the [background-plane entry](rendering-fidelity.md#keep-background-planes-out-of-actor-depth-2026-09-27),
+the [missing-texture wall-depth entry](rendering-fidelity.md#preserve-depth-for-untextured-wall-bands-2026-09-27),
+and the new [world-sprite silhouette clipping](rendering-fidelity.md#clip-world-sprites-to-wall-silhouettes-2026-09-27).
+The current [candidate receipt](../results/episode1-human-playthrough-candidate-20260927-r3.json)
+is pinned to this exact build. It records the IWAD, music catalog, launcher
+preflight, 36-map smoke, secret-path/finale transition checks, E1M8 boss-trigger
+fixtures, retained E1M1-to-E1M2 session regression, the focused actor-occlusion
+reproduction, and all three renderer styles. The user-reported E1M1 objects
+through walls now have a focused sprite fix; the metal columns in the screenshot
+still need confirmation during the full run. Your first launch exposed an
+exact-patch version check: the catalog
 was prepared on PowerShell 7.6.5 but the user launcher runs 7.6.6. The loop
 and finite finale readers now accept the same major/minor line while retaining
 source and payload verification. The simulation startup wait is 60 seconds
@@ -155,14 +158,15 @@ playthrough.
 ## Readiness evidence
 
 The current playtest build is pinned to
-`d84861f4e1293ef581f73942867256243016b1fb`. The earlier
-[gameplay/renderer candidate receipt](../results/episode1-human-playthrough-candidate-20260927-r2.json)
+`b99dc8af6017622c6f80998873e56f58616333fe`. The
+[current candidate receipt](../results/episode1-human-playthrough-candidate-20260927-r3.json)
 records the 36-map smoke, 69 transition checks, E1M8 boss-trigger fixtures,
-retained 1,747-command E1M1 session progression into E1M2, 20 focused wall
-checks, and exact serial/worker output across all three styles at its own
-`0978112` source pin. The fixed build's PowerShell 7.6.6 reader, playback and
-full-start checks are in the runtime receipt above. The separate
-tic-105 actor-visibility difference remains open. The earlier
+retained 1,747-command E1M1 session progression into E1M2, focused wall and
+sprite-occlusion checks, and exact serial/worker output across all three styles.
+The full-start and PowerShell 7.6.6 reader checks were run on the preceding
+chainsaw-fix source; this build changes only rendering. The recorded replay
+prefix now matches the adopted reference at the formerly visible-through-floor
+BON1 example, but other actor-mask and whole-scene differences remain. The earlier
 [renderer-guard receipt](../results/episode1-render-guard-evidence-20260927.json)
 retains 50,200 sight-bound parity cases, 50,000 intercept parity cases, all
 four E1M1–E1M4 route regressions, and fixed-input E1M2–E1M4 replays at its

@@ -1,0 +1,128 @@
+{
+  "RendererSha256": "FD68C4FD08426F59BEF1514401A80B6B949D54DC2B9B62BAAE401C349BED1C2D",
+  "HarnessSha256": "623D5833AF62A98B9E4F72A4B3930C73AF322F97E14D67A58C53E7758A514E6F",
+  "Meaning": "Authored synthetic geometry exercises the real whole-scene rasterizer: transparent fence before opaque and untextured solid walls/floor, billboard depth on either side and uneven strips. HUD/weapon calls replaced with no-ops. No game session, recording, WAD assets or performance claim.",
+  "Checks": [
+    {
+      "Expected": true,
+      "Name": "Open floor pixel is marked as a plane",
+      "Passed": true,
+      "Actual": true
+    },
+    {
+      "Expected": true,
+      "Name": "Floor backdrop does not occupy sprite depth",
+      "Passed": true,
+      "Actual": true
+    },
+    {
+      "Expected": 250,
+      "Name": "Sprite sample composites over floor backdrop",
+      "Passed": true,
+      "Actual": 250
+    },
+    {
+      "Expected": 100,
+      "Name": "Composited sprite takes depth ownership",
+      "Passed": true,
+      "Actual": 100.0
+    },
+    {
+      "Expected": 200,
+      "Name": "Fence survives later opaque wall drawing",
+      "Passed": true,
+      "Actual": 200
+    },
+    {
+      "Expected": 64,
+      "Name": "Fence depth survives later wall drawing",
+      "Passed": true,
+      "Actual": 64.0
+    },
+    {
+      "Expected": 100,
+      "Name": "Fence hole reveals far wall",
+      "Passed": true,
+      "Actual": 100
+    },
+    {
+      "Expected": 200,
+      "Name": "Fence survives later floor drawing",
+      "Passed": true,
+      "Actual": 200
+    },
+    {
+      "Expected": 55,
+      "Name": "Fence hole reveals floor",
+      "Passed": true,
+      "Actual": 55
+    },
+    {
+      "Expected": true,
+      "Name": "Seven uneven strips preserve scene pixels",
+      "Passed": true,
+      "Actual": true
+    },
+    {
+      "Expected": true,
+      "Name": "Seven uneven strips preserve scene depth",
+      "Passed": true,
+      "Actual": true
+    },
+    {
+      "Expected": 200,
+      "Name": "Fence hides actor behind opaque texel",
+      "Passed": true,
+      "Actual": 200
+    },
+    {
+      "Expected": 250,
+      "Name": "Actor behind visible through hole",
+      "Passed": true,
+      "Actual": 250
+    },
+    {
+      "Expected": 250,
+      "Name": "Closer actor covers fence",
+      "Passed": true,
+      "Actual": 250
+    },
+    {
+      "Expected": 100,
+      "Name": "Far wall occludes farther actor through hole",
+      "Passed": true,
+      "Actual": 100
+    },
+    {
+      "Expected": 200,
+      "Name": "Nearest fence wins when masked surfaces overlap",
+      "Passed": true,
+      "Actual": 200
+    },
+    {
+      "Expected": 201,
+      "Name": "Second fence remains visible through nearer hole",
+      "Passed": true,
+      "Actual": 201
+    },
+    {
+      "Expected": 96,
+      "Name": "Second fence depth retained through nearer hole",
+      "Passed": true,
+      "Actual": 96.0
+    },
+    {
+      "Expected": true,
+      "Name": "Untextured solid wall retains sprite depth",
+      "Passed": true,
+      "Actual": true
+    },
+    {
+      "Expected": 0,
+      "Name": "Untextured solid wall still hides a farther sprite",
+      "Passed": true,
+      "Actual": 0
+    }
+  ],
+  "Error": null
+}

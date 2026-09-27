@@ -2329,4 +2329,6 @@ Focused, smoke, partition, and actor-mask receipts are linked from the
 The symptom in Jason's screenshot has not been separately confirmed as a
 sprite or wall-geometry defect. Other camera states still show actor-mask
 differences. His Episode 1 run remains pending; start one fresh complete route
-from E1M1 when he has time.
+from E1M1 when he has time. The implementation, focused regression, and
+receipts are pinned in source commit
+`b99dc8af6017622c6f80998873e56f58616333fe`.

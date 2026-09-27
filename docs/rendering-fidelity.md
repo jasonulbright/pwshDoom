@@ -703,9 +703,10 @@ AnsiArt/Katakana across five views and seven uneven strips. Receipts:
 [focused actor case](../results/sprite-silhouette-occlusion-20260927.json),
 [replay-prefix actor masks](../results/actor-occlusion-human-prefix-245-20260927.json),
 [36-map smoke](../results/campaign-smoke-sprite-clips-20260927.json), and the
-[Classic](../results/render-partitions-sprite-clips-classic-20260927.json),
-[Matrix](../results/render-partitions-sprite-clips-matrix-20260927.json), and
-[AnsiArt](../results/render-partitions-sprite-clips-ansiart-20260927.json)
+[20-check masked-wall regression](../results/masked-wall-order-sprite-clips-final-20260927.json),
+[Classic](../results/render-partitions-sprite-clips-final-classic-20260927.json),
+[Matrix](../results/render-partitions-sprite-clips-final-matrix-20260927.json), and
+[AnsiArt](../results/render-partitions-sprite-clips-final-ansiart-20260927.json)
 worker checks. These checks establish the targeted visibility correction and
 worker consistency for their samples, not complete sprite parity, campaign
 completion, original-executable equivalence, or live frame rate.
