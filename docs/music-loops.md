@@ -161,6 +161,32 @@ the existing 13-track Episode 1/E2M1/E2M2 catalog remains unchanged. Receipts:
 This does not qualify live E2M3 playback, acoustic fidelity, campaign continuity,
 or the 35/60 gameplay target.
 
+### D_E2M4 independent output qualification and host selection (September 27)
+
+D_E2M4 qualifies with a one-cycle period of 11,113,200 frames (252 seconds).
+The default three-period independent-output mode rendered 33,339,600 frames
+(756 audio seconds) and verified the separate eight-second opening reference
+through the actual reader and game mixer. Periods two and three have identical
+float64 output SHA-256
+`3595FDC15E49636FE2299749DD90735298B44A79B350B29170FFF40EA73CE2F3`; their
+complete normalized boundary state has 19 voices and SHA-256
+`71285BF154071DBFFA3D9182C9C8010C4DC3681396CC67C60048F352CE93906E`. The
+startup period differs, as expected, before the score reaches its recurring
+state. The independent opening PCM and six reader/mixer checks pass, including
+the exact recurrent-period seam. Loop rendering, writing and snapshotting took
+1,293.225 seconds; preparation took 1,309.288 seconds. This is offline
+qualification cost, not playback cost or a performance claim.
+
+A two-second headless E2M4 host run selected `D_E2M4`, sent 69 audio packets
+(86,940 frames), returned all 86,940 completed frames, and closed the audio
+device without worker or cleanup errors. It establishes catalog loading,
+map-to-track selection, short playback startup and shutdown only; no listener
+review, full-map audio continuity or pacing qualification was performed. The
+one-track catalog and loop payload remain under ignored `local/`. Portable
+receipts: [three-period preparation](../results/music-preparation-e2m4-20260927.json),
+[six-check reader/mixer qualification](../results/music-track-qualification-d-e2m4-20260927.json),
+and [host track-selection evidence](../results/music-host-e2m4-integration-20260927.json).
+
 ### PowerShell patch-version compatibility (September 27)
 
 Jason's first terminal launch exposed an exact-patch comparison in both the

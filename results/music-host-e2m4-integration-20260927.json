@@ -1,0 +1,74 @@
+{
+  "Format": "pwshDoom.MusicHostTrackIntegration",
+  "Version": 1,
+  "RecordedUtc": "2026-09-27T19:26:58.7817444Z",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "MusicCatalogSha256": "4412FBF7AE7F44731BB2F69FB39830C495CE6454FE5F7A4CBD8EAFF1B0D177A3",
+  "RawHostReport": "local/episode2m4-music-integration-20260927.json",
+  "RawHostReportSha256": "6438B316EE4E08E9FA2FFF3F82F0D67C6AF623811EC339806EE7A89B3ED971EB",
+  "Parameters": {
+    "PowerShell": "7.6.5",
+    "Episode": 2,
+    "Style": "Classic",
+    "Seconds": 2,
+    "Headless": true,
+    "Workers": 16,
+    "Map": 4
+  },
+  "Result": {
+    "ExitReason": "Duration",
+    "Tics": 69,
+    "CompletedFrames": 65,
+    "Error": null
+  },
+  "Music": {
+    "DeviceClosed": true,
+    "UnconsumedPackets": 0,
+    "MusicClosed": true,
+    "SubmittedFrames": 86940,
+    "Packets": 69,
+    "ReturnedCompletedFrames": 86940,
+    "Selected": "D_E2M4",
+    "AudioError": null,
+    "Transitions": [
+      {
+        "Track": "D_E2M4",
+        "AfterFrames": 0,
+        "Kind": "Start",
+        "Loop": true
+      }
+    ],
+    "CleanupError": null
+  },
+  "Sources": [
+    {
+      "Sha256": "EAA75B6B236F6481C7C15EF1D2DA82C536B27206FBCD005CB1C67BED305E03C2",
+      "Path": "scripts/Invoke-Doom.ps1"
+    },
+    {
+      "Sha256": "306A1DF019997C8227D2E7516C72DF3BA70624985227EB5D77EE5DC04FF28533",
+      "Path": "scripts/Invoke-SimulationWorker.ps1"
+    },
+    {
+      "Sha256": "32E80F308BFAB71EDF7198CBA7FED196021FEEF6BDADF2EFBD3D4E7EDBFD1296",
+      "Path": "scripts/Invoke-AudioWorker.ps1"
+    },
+    {
+      "Sha256": "5BFE98A3379E5CC51B39DBDE2E17E12DD0406D3663A8CD041AEFE0FB29054B9D",
+      "Path": "src/SimulationProcess.ps1"
+    },
+    {
+      "Sha256": "A930314C31A8DC628E96266E4654ACE1E2222FE076519B98578663A165DE1AD4",
+      "Path": "src/AudioRunspace.ps1"
+    },
+    {
+      "Sha256": "C4B6FBE2C44AFB3FE2E13CEF968AD3EEAE7DD8FA85B993321FFDED5321B0A71F",
+      "Path": "src/MusicPlayback.ps1"
+    },
+    {
+      "Sha256": "083079C548A2BB47F1DFE661C5C3CEAD21B7A0FED104062CE46740DAF1215D0B",
+      "Path": "src/MusicLoopReader.ps1"
+    }
+  ],
+  "Meaning": "Short actual game/audio-worker integration: E2M4 selected D_E2M4 from the prepared catalog and all 69 submitted 1260-frame packets completed and returned before clean device shutdown. This is startup/map-selection/shutdown evidence only, not a full-map or campaign audio run, acoustic review, performance qualification, or monitor-pacing result."
+}

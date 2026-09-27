@@ -2662,3 +2662,31 @@ recurrence and byte-exact reader behavior, not independent third-period output,
 live E2M3 play, acoustic quality, campaign continuity, or gameplay pacing.
 Receipts: [preparation](../results/music-preparation-ultimate-doom-e2m3-stateproof-20260927.json)
 and [reader/mixer checks](../results/music-track-qualification-e2m3-stateproof-20260927.json).
+
+## 2026-09-27 — Qualify D_E2M4 and check actual host selection
+
+Prepared the next unique Episode 2 map score with the default independent
+three-period qualification mode. D_E2M4 has a one-cycle period of 11,113,200
+frames (252 seconds); three continuous periods cover 33,339,600 frames (756
+audio seconds). The startup boundary settles from zero voices to 19. Periods
+two and three share complete normalized state hash
+`71285BF154071DBFFA3D9182C9C8010C4DC3681396CC67C60048F352CE93906E` and
+identical float64 output hash
+`3595FDC15E49636FE2299749DD90735298B44A79B350B29170FFF40EA73CE2F3`. The
+independent eight-second opening PCM matches through the real loop reader and
+game mixer; six long-track reader/mixer checks pass, including the wrap seam.
+Rendering, writing and snapshotting took 1,293.225 seconds; total preparation
+took 1,309.288 seconds under PowerShell 7.6.5. This is offline preparation
+cost, not a live audio deadline or performance result.
+
+A two-second headless E2M4 host run selected D_E2M4 at frame zero, sent all 69
+audio packets (86,940 frames), returned all 86,940 completed frames with zero
+unconsumed packets, and closed waveOut without worker or cleanup errors. It
+checks map-to-track selection and short-run shutdown only; there was no
+listener review, full-map audio run or campaign continuity claim. D_E2M4's
+one-track catalog and period payload stay local. The [preparation](../results/music-preparation-e2m4-20260927.json),
+[reader/mixer qualification](../results/music-track-qualification-d-e2m4-20260927.json),
+and [portable host receipt](../results/music-host-e2m4-integration-20260927.json)
+pin the IWAD and source state. Four Episode 2 score loops are now qualified;
+14 other unique Episode 2/3 map scores and two finite title/finale scores
+remain open.
