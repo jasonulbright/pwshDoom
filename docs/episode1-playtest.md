@@ -22,12 +22,12 @@ E1M8 exit and intermission.
 
 ## Build and launch
 
-Run exact source build commit `398022a8caa3b3e31d2a0d1c08642ecf6be7c1d0`.
+Run exact source build commit `d84861f4e1293ef581f73942867256243016b1fb`.
 If your checkout is at a later branch tip, enter the pinned build from the
 repository root before launching:
 
 ```powershell
-git switch --detach 398022a8caa3b3e31d2a0d1c08642ecf6be7c1d0
+git switch --detach d84861f4e1293ef581f73942867256243016b1fb
 ```
 
 After preserving the input and session reports under `local/`, return to the
@@ -49,8 +49,13 @@ source and payload verification. The simulation startup wait is 60 seconds
 for cold starts. The [runtime receipt](../results/episode1-startup-runtime-compat-20260927.json)
 records a successful two-second headless E1M1 run under 7.6.6 with all eleven
 catalog reports open and clean audio-device shutdown. It is startup evidence,
-not campaign completion or an audible-quality check. The
-retained E1M1–E1M4 routes and fixed-input E1M2–E1M4 replays remain linked in
+not campaign completion or an audible-quality check. The human run later
+exposed a PowerShell Angle comparison exception on a chainsaw hit in E1M2.
+The pinned build compares Doom binary-angle values explicitly; its focused
+E1M2 hit test and the existing nine-check gameplay suite pass. See the
+[crash fix ledger entry](ledger.md#2026-09-27--fix-the-chainsaw-crash-found-in-jasons-episode-1-attempt).
+This does not certify a human campaign completion. The retained E1M1–E1M4
+routes and fixed-input E1M2–E1M4 replays remain linked in
 the earlier [renderer-guard receipt](../results/episode1-render-guard-evidence-20260927.json),
 which is pinned to its original source commit. Earlier
 [campaign/session](../results/episode1-playtest-current-readiness-20260927.json),
@@ -75,8 +80,8 @@ pwsh -NoProfile -File .\Start-Doom.ps1 `
   -Wad 'C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\base\DOOM.WAD' `
   -Episode 1 -Map 1 -Skill 3 -Style Classic -Sound `
   -MusicCatalog .\local\music-prepared-episode1.json `
-  -RecordInput .\local\episode1-human-playthrough-r2.json `
-  -Report .\local\episode1-human-session-r2.json -Maximized -FontSize 5
+  -RecordInput .\local\episode1-human-playthrough-r3.json `
+  -Report .\local\episode1-human-session-r3.json -Maximized -FontSize 5
 ```
 
 On first startup, give the simulation up to 60 seconds to initialize the game
@@ -142,15 +147,15 @@ and whether you died, reloaded, paused, or resized the window. Preserve the
 input recording and session report until the result is documented; they can
 make a reported issue reproducible. Do not send WAD files.
 
-The human result will be recorded below with only the scope and outcomes Jason
-reports. Automated smoke, controller fixtures, synthetic keyboard records,
-and boss-trigger checks are separate evidence and are not substitutes for this
+The human result below records only the scope and outcomes Jason reports.
+Automated smoke, controller fixtures, synthetic keyboard records, and
+boss-trigger checks are separate evidence and are not substitutes for this
 playthrough.
 
 ## Readiness evidence
 
 The current playtest build is pinned to
-`398022a8caa3b3e31d2a0d1c08642ecf6be7c1d0`. The earlier
+`d84861f4e1293ef581f73942867256243016b1fb`. The earlier
 [gameplay/renderer candidate receipt](../results/episode1-human-playthrough-candidate-20260927-r2.json)
 records the 36-map smoke, 69 transition checks, E1M8 boss-trigger fixtures,
 retained 1,747-command E1M1 session progression into E1M2, 20 focused wall
@@ -246,5 +251,10 @@ do not establish a speedup or visible frame rate.
 
 ### Jason's human result
 
-Pending. Record only the maps reached, whether E1M9 returned to E1M4, finale
-reached/not reached, and any deaths, reloads, deviations, or reported defects.
+Attempt 1 (2026-09-27), on build 398022a8caa3b3e31d2a0d1c08642ecf6be7c1d0,
+was interrupted by the chainsaw attack crash in E1M2. Jason reported collecting
+the chainsaw and pressing Ctrl to attack an imp. The session record shows E1M1
+intermission followed by the E1M2 load; it ended at 26,731 tics with Error.
+The issue is fixed in the build pinned above. This attempt did not finish the
+episode or reach the secret-map path/finale. Start a fresh full run from E1M1;
+do not count the interrupted attempt as completion.
