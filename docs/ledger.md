@@ -2332,3 +2332,36 @@ differences. His Episode 1 run remains pending; start one fresh complete route
 from E1M1 when he has time. The implementation, focused regression, and
 receipts are pinned in source commit
 `b99dc8af6017622c6f80998873e56f58616333fe`.
+
+## 2026-09-27 — Reuse sprite-clipping scratch and measure its cost
+
+The focused E1M1 sprite-silhouette correction initially added a list of
+hashtable records for every visible wall/column and allocated two 320-entry
+clip arrays for every world actor. The renderer now retains per-column
+high-water clip records and reuses the actor buffers in each render context.
+Worker contexts rebuilt from serialized assets do not receive scratch arrays,
+so the first partition check failed with a missing `SpriteClipWalls` property.
+The renderer now initializes those fields on first render in the worker; the
+serial and worker paths then share the same reuse behavior.
+
+The first timing harness run was not used: it loaded both renderer versions
+into one PowerShell function scope, allowing an older render entry point to
+resolve the candidate patch helper. `Measure-RendererPair.ps1` now loads the
+versions in separate PowerShell modules and reports that isolation mode. The
+valid pair compares pre-clip source `703a1f7` with source `193c386` using six
+alternating-order rounds, 30 serial 320x200 renders per version/map, and five
+static E1M1/E1M3/E1M4 headings. The candidate medians are mixed (-0.9%, +2.0%,
+and +6.6% respectively); p95 improves on E1M3/E1M4 and is effectively flat on
+E1M1. This is renderer-only timing, not a full-host speedup or a 35-tic/60-
+display claim. Raw reports are linked in the [performance record](performance.md#world-sprite-clipping-cost-2026-09-27).
+
+The current source passes the 36-map load/render smoke, 119 fuzz checks, 20
+masked-wall checks, and exact serial/worker output in Classic,
+Matrix/Katakana, and AnsiArt/Katakana. The repeated-frame focused test confirms
+zero pixel differences and reuse of the records and clip buffers. In the
+retained E1M1 replay comparison, candidate-only actor-mask pixels fall from 95
+to zero at tic 245 and from 44 to 3 at tic 140; reference-only pixels remain
+(20 at tic 140 and 11 at tic 245). The raised-floor columns in Jason's
+screenshot are still unclassified. The updated human-test build is
+`193c386cc1a22feeb1bf7d269d9b2cc1d1ddaf73`; Jason's one full Episode 1 route
+remains pending.

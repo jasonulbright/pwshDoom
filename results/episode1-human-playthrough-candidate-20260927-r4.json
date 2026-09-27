@@ -1,0 +1,134 @@
+{
+  "Format": "pwshDoom.Episode1HumanPlaythroughCandidate",
+  "Version": 1,
+  "Status": "ReadyForOneCompleteHumanEpisode1Playthrough",
+  "RecordedUtc": "2026-09-27",
+  "Build": {
+    "Repository": "jasonulbright/pwshDoom",
+    "Branch": "codex/feasibility-study",
+    "Commit": "193c386cc1a22feeb1bf7d269d9b2cc1d1ddaf73",
+    "FastRendererSha256": "F8C9478ECD3863F45C9A0D95E6A02442FA6BCC9A0DB87C3BD6278880CE489CE4",
+    "PowerShell": "7.6.5",
+    "PreviousCandidate": "results/episode1-human-playthrough-candidate-20260927-r3.json"
+  },
+  "Prerequisites": {
+    "IWAD": {
+      "Path": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Ultimate Doom\\base\\DOOM.WAD",
+      "Sha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+      "EpisodeMaps": 36
+    },
+    "MusicCatalog": {
+      "Path": "local/music-prepared-episode1.json",
+      "Sha256": "0E9C9542C75F4D5E2D7FC71E42FAFBB58F94321C3B8A49BA0C9AC5A93752EE58",
+      "Validation": "The launcher preflight verifies the catalog path; audio startup validates catalog tracks and IWAD identity."
+    },
+    "WindowsTerminal": "C:\\Users\\jason\\AppData\\Local\\Microsoft\\WindowsApps\\wt.exe"
+  },
+  "HumanPlaythrough": {
+    "Skill": 3,
+    "Start": "E1M1",
+    "ExpectedSequence": [
+      "E1M1",
+      "E1M2",
+      "E1M3",
+      "E1M9",
+      "E1M4",
+      "E1M5",
+      "E1M6",
+      "E1M7",
+      "E1M8",
+      "Episode 1 finale"
+    ],
+    "Finish": "Advance the E1M8 exit intermission until E1TEXT/CREDIT appears.",
+    "CompletionStatus": "Pending",
+    "EvidenceType": "One human playthrough; automated fixtures and routes are not substitutes."
+  },
+  "Checks": [
+    {
+      "Name": "Ultimate Doom map load/render smoke",
+      "Result": "36/36 maps passed; skill 3; 35 idle tics and two full serial frames per map. This is load/render coverage, not map completion.",
+      "Report": "results/campaign-smoke-sprite-clip-final-20260927.json"
+    },
+    {
+      "Name": "Episode transitions, secret path, and finale state",
+      "Result": "69 checks passed with zero failures, including E1M3 to E1M9, E1M9 return to E1M4, real intermission/world loads, secret history, and finale state fixtures.",
+      "Report": "results/campaign-transitions-untextured-wall-20260927.json"
+    },
+    {
+      "Name": "Boss progression and E1M8 opening trigger fixtures",
+      "Result": "97 checks passed across Ultimate Doom boss exits and trigger behaviors.",
+      "Report": "results/boss-progression-untextured-wall-20260927.json"
+    },
+    {
+      "Name": "Ordinary-input E1M1 session progression (retained)",
+      "Result": "1,747 commands reach the E1M1 intermission, advance to E1M2, preserve inventory, and advance 71 level tics. This retained check ran at e8ffd6e, before later gameplay and renderer corrections; focused checks on the pinned source separately cover the chainsaw hit and renderer changes.",
+      "Report": "results/intercept-candidate-session-progression-20260927.json",
+      "SourceCommit": "e8ffd6edbc089d047e5eb5807377f93221d933bd"
+    },
+    {
+      "Name": "Synthetic menu controls and session screens",
+      "Result": "10 menu input checks and 24 rendered session-screen checks passed; physical keyboard play remains unverified.",
+      "Reports": [
+        "results/menu-input-untextured-wall-20260927.json",
+        "results/session-screens-untextured-wall-20260927.json"
+      ]
+    },
+    {
+      "Name": "Masked-wall ordering and missing-texture wall depth",
+      "Result": "20 focused checks passed, including opaque and missing-texture wall depth, with the current scratch representation.",
+      "Report": "results/masked-wall-order-sprite-clip-final-20260927.json"
+    },
+    {
+      "Name": "Parallel rendering equivalence",
+      "Result": "Classic, Matrix/Katakana, and AnsiArt/Katakana each match serial output across 320,000 pixels, five views, and seven uneven process strips per style. Worker scratch initializes on first render.",
+      "Reports": [
+        "results/render-partitions-sprite-clip-worker-init-classic-20260927.json",
+        "results/render-partitions-sprite-clip-final-matrix-20260927.json",
+        "results/render-partitions-sprite-clip-final-ansiart-20260927.json"
+      ]
+    },
+    {
+      "Name": "World-sprite occlusion comparison",
+      "Result": "Seven same-state E1M1 replay-prefix checkpoints through tic 245. Candidate-only actor-mask pixels fall from 95 to zero at tic 245 and from 44 to 3 at tic 140; the tic-140 mask still has 20 reference-only pixels and tic 245 has 11. This is adopted-PowerShell-renderer parity, not original-executable validation.",
+      "Report": "results/actor-occlusion-human-prefix-245-clip-reuse-20260927.json",
+      "Comparator": "The adopted PowerShell ThreeDRenderer; not an independently verified original executable."
+    },
+    {
+      "Name": "Launcher preflight",
+      "Result": "Ready; PowerShell 7.6.5, Windows Terminal, 36 IWAD map markers, writable local folder, and prepared music-catalog path are present. The check verifies catalog path only.",
+      "Report": "results/episode1-launcher-preflight-untextured-wall-20260927.json"
+    },
+    {
+      "Name": "E1M1 world-sprite wall-silhouette regression",
+      "Result": "The isolated BON1B0 changes zero scene pixels; a repeated same-state frame differs by zero pixels and reuses the clip record and actor buffers.",
+      "Report": "results/sprite-silhouette-occlusion-clip-reuse-20260927.json"
+    },
+    {
+      "Result": "Six alternating-order rounds compare 30 serial full-frame calls per version and map at five headings on E1M1, E1M3 and E1M4. Median changes are mixed (-0.9%, +2.0%, +6.6%); p95 is nearly flat on E1M1 and lower on E1M3/E1M4. Separate PowerShell modules isolate all renderer functions. This is not live-host throughput or displayed FPS.",
+      "Reports": [
+        "results/sprite-clip-final-performance-e1m1-20260927.json",
+        "results/sprite-clip-final-performance-e1m3-20260927.json",
+        "results/sprite-clip-final-performance-e1m4-20260927.json"
+      ],
+      "Name": "World-sprite clipping performance comparison"
+    },
+    {
+      "Result": "119 focused fuzz checks pass on the pinned source.",
+      "Report": "results/fuzz-rendering-sprite-clip-final-20260927.json",
+      "Name": "Fuzz rendering regressions"
+    }
+  ],
+  "RetainedRouteEvidence": {
+    "Receipt": "results/episode1-render-guard-evidence-20260927.json",
+    "Meaning": "The four existing E1M1-E1M4 route regressions and fixed-input E1M2-E1M4 replays remain the retained route evidence at their original source pins. Commit 193c386 changes world-sprite clipping scratch storage and worker first-render setup; it does not tune or replace those routes."
+  },
+  "KnownLimits": [
+    "No human has completed the requested Episode 1 playthrough; the handoff requests one full run, not map-by-map tests.",
+    "Transition and boss fixtures verify state changes but do not claim ordinary playthroughs of E1M5-E1M8 or the finale.",
+    "The E1M3 waypoint driver previously stopped short of its next point without a crash or reproducible product defect; route tuning is stopped. Its retained 7,118-command fixed-input replay reaches E1M4 with all checkpoints matching.",
+    "Whole-campaign music continuity, audible review, and physical keyboard play have not been certified; a prior finite audio-device run recorded one queue-timing stall.",
+    "Sustained 35 simulation tics/sec and 60 displayed updates/sec are not certified.",
+    "The user-reported raised-floor columns remain unclassified; other camera states still show reference-only actor-mask pixels and broad background differences. Comparisons use the adopted PowerShell renderer, and original-executable parity is unverified."
+  ],
+  "Notes": "This source retains per-context world-sprite silhouette records and actor clipping buffers, with worker contexts initializing on their first render. Focused occlusion, repeated-frame reuse, 36-map smoke, 119 fuzz checks, 20 masked-wall checks, three renderer styles, chainsaw crash fix, session startup, transitions, finale fixtures, and static renderer timings are documented separately. The full human Episode 1 playthrough remains pending; no bot route or screen recording was used for this readiness decision."
+}

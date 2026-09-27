@@ -692,21 +692,36 @@ the occluded BON1B0; the pre-fix renderer is a negative control and changes 93
 pixels in the same isolated view. In the full local replay-prefix comparison,
 the tic-245 candidate-only actor mask falls from 95 pixels to zero and mask
 overlap rises from 68.3% to 95.2%. At tic 140, candidate-only mask pixels fall
-from 44 to 3. The comparison uses the adopted PowerShell renderer, not the
-original executable; other checkpoints still differ, and the E1M1 raised-floor
-columns from Jason's screenshot have not been separately classified as actors
-or wall geometry.
+from 44 to 3; tic 140 still has 20 reference-only actor-mask pixels. At tic
+245, 11 reference-only pixels remain. The comparison uses the adopted
+PowerShell renderer, not the original executable; other checkpoints and broad
+background differences remain. The E1M1 raised-floor columns from Jason's
+screenshot have not been separately classified as actors or wall geometry.
+
+The first implementation allocated wall-clip hashtables and actor clip arrays
+on every frame. Render contexts now retain a high-water pool of six-field
+wall-clip records per screen column and reuse the actor top/bottom buffers.
+Contexts created by the simulation initialize the scratch directly; worker
+contexts that arrive from serialized assets allocate it on their first render.
+The focused regression renders the same view twice, confirms zero pixel
+differences, and confirms that clip records and actor buffers are reused. A
+first partition run caught the missing worker initialization; the current
+serial/worker checks exercise that repaired path. The paired static-frame
+measurements show mixed medians across E1M1/E1M3/E1M4, with lower p95 times on
+E1M3 and E1M4; see [performance](performance.md#world-sprite-clipping-cost-2026-09-27).
+They do not establish a live-frame speedup.
 
 The updated source passes the 36-map load/simulation/two-render smoke and exact
 320,000-pixel serial/worker comparisons in Classic, Matrix/Katakana, and
 AnsiArt/Katakana across five views and seven uneven strips. Receipts:
-[focused actor case](../results/sprite-silhouette-occlusion-20260927.json),
-[replay-prefix actor masks](../results/actor-occlusion-human-prefix-245-20260927.json),
-[36-map smoke](../results/campaign-smoke-sprite-clips-20260927.json), and the
-[20-check masked-wall regression](../results/masked-wall-order-sprite-clips-final-20260927.json),
-[Classic](../results/render-partitions-sprite-clips-final-classic-20260927.json),
-[Matrix](../results/render-partitions-sprite-clips-final-matrix-20260927.json), and
-[AnsiArt](../results/render-partitions-sprite-clips-final-ansiart-20260927.json)
+[focused actor case](../results/sprite-silhouette-occlusion-clip-reuse-20260927.json),
+[replay-prefix actor masks](../results/actor-occlusion-human-prefix-245-clip-reuse-20260927.json),
+[36-map smoke](../results/campaign-smoke-sprite-clip-final-20260927.json),
+[119 fuzz checks](../results/fuzz-rendering-sprite-clip-final-20260927.json),
+[20 masked-wall checks](../results/masked-wall-order-sprite-clip-final-20260927.json),
+[Classic](../results/render-partitions-sprite-clip-worker-init-classic-20260927.json),
+[Matrix](../results/render-partitions-sprite-clip-final-matrix-20260927.json), and
+[AnsiArt](../results/render-partitions-sprite-clip-final-ansiart-20260927.json)
 worker checks. These checks establish the targeted visibility correction and
 worker consistency for their samples, not complete sprite parity, campaign
 completion, original-executable equivalence, or live frame rate.

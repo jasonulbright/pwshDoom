@@ -22,12 +22,12 @@ E1M8 exit and intermission.
 
 ## Build and launch
 
-Run exact source build commit `b99dc8af6017622c6f80998873e56f58616333fe`.
+Run exact source build commit `193c386cc1a22feeb1bf7d269d9b2cc1d1ddaf73`.
 If your checkout is at a later branch tip, enter the pinned build from the
 repository root before launching:
 
 ```powershell
-git switch --detach b99dc8af6017622c6f80998873e56f58616333fe
+git switch --detach 193c386cc1a22feeb1bf7d269d9b2cc1d1ddaf73
 ```
 
 After preserving the input and session reports under `local/`, return to the
@@ -37,15 +37,16 @@ fixed-point sight-intercept and sight-bound integer paths, renderer guards for
 plane distance and wall-light lookup, and the actor-depth corrections described
 in the [background-plane entry](rendering-fidelity.md#keep-background-planes-out-of-actor-depth-2026-09-27),
 the [missing-texture wall-depth entry](rendering-fidelity.md#preserve-depth-for-untextured-wall-bands-2026-09-27),
-and the new [world-sprite silhouette clipping](rendering-fidelity.md#clip-world-sprites-to-wall-silhouettes-2026-09-27).
-The current [candidate receipt](../results/episode1-human-playthrough-candidate-20260927-r3.json)
+and the [world-sprite silhouette clipping](rendering-fidelity.md#clip-world-sprites-to-wall-silhouettes-2026-09-27)
+with per-context scratch reuse. The current
+[candidate receipt](../results/episode1-human-playthrough-candidate-20260927-r4.json)
 is pinned to this exact build. It records the IWAD, music catalog, launcher
 preflight, 36-map smoke, secret-path/finale transition checks, E1M8 boss-trigger
 fixtures, retained E1M1-to-E1M2 session regression, the focused actor-occlusion
-reproduction, and all three renderer styles. The user-reported E1M1 objects
-through walls now have a focused sprite fix; the metal columns in the screenshot
-still need confirmation during the full run. Your first launch exposed an
-exact-patch version check: the catalog
+reproduction, all three renderer styles, and paired single-frame timings.
+The user-reported sprite leak has a focused correction; the metal columns in
+the screenshot still need confirmation during the full run. Your first launch
+exposed an exact-patch version check: the catalog
 was prepared on PowerShell 7.6.5 but the user launcher runs 7.6.6. The loop
 and finite finale readers now accept the same major/minor line while retaining
 source and payload verification. The simulation startup wait is 60 seconds
@@ -83,8 +84,8 @@ pwsh -NoProfile -File .\Start-Doom.ps1 `
   -Wad 'C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\base\DOOM.WAD' `
   -Episode 1 -Map 1 -Skill 3 -Style Classic -Sound `
   -MusicCatalog .\local\music-prepared-episode1.json `
-  -RecordInput .\local\episode1-human-playthrough-r3.json `
-  -Report .\local\episode1-human-session-r3.json -Maximized -FontSize 5
+  -RecordInput .\local\episode1-human-playthrough-r4.json `
+  -Report .\local\episode1-human-session-r4.json -Maximized -FontSize 5
 ```
 
 On first startup, give the simulation up to 60 seconds to initialize the game
@@ -158,15 +159,20 @@ playthrough.
 ## Readiness evidence
 
 The current playtest build is pinned to
-`b99dc8af6017622c6f80998873e56f58616333fe`. The
-[current candidate receipt](../results/episode1-human-playthrough-candidate-20260927-r3.json)
+`193c386cc1a22feeb1bf7d269d9b2cc1d1ddaf73`. The
+[current candidate receipt](../results/episode1-human-playthrough-candidate-20260927-r4.json)
 records the 36-map smoke, 69 transition checks, E1M8 boss-trigger fixtures,
 retained 1,747-command E1M1 session progression into E1M2, focused wall and
 sprite-occlusion checks, and exact serial/worker output across all three styles.
-The full-start and PowerShell 7.6.6 reader checks were run on the preceding
-chainsaw-fix source; this build changes only rendering. The recorded replay
-prefix now matches the adopted reference at the formerly visible-through-floor
-BON1 example, but other actor-mask and whole-scene differences remain. The earlier
+The new clipping records and actor clip buffers are reused per context; workers
+initialize them on first render after asset loading. The full-start and
+PowerShell 7.6.6 reader checks were run on the preceding chainsaw-fix source;
+this build changes renderer scratch storage and worker first-use setup. The
+recorded replay prefix has zero candidate-only actor-mask pixels at tic 245
+(95 before the fix) and reduces tic 140 from 44 to 3. Reference-only actor
+pixels and broader scene differences remain, so this is a targeted correction,
+not full visual parity. The [paired render measurements](performance.md#world-sprite-clipping-cost-2026-09-27)
+show mixed map results and do not establish end-to-end throughput. The earlier
 [renderer-guard receipt](../results/episode1-render-guard-evidence-20260927.json)
 retains 50,200 sight-bound parity cases, 50,000 intercept parity cases, all
 four E1M1–E1M4 route regressions, and fixed-input E1M2–E1M4 replays at its

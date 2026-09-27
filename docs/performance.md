@@ -49,3 +49,33 @@ The next pacing evidence must include moving geometry and combat, repeated
 paired runs, a measured display path, and audio queue behavior across at least
 one map transition. The current 59.67 terminal updates/sec is a useful baseline,
 not release certification.
+
+## World-sprite clipping cost — September 27, 2026
+
+To check the E1M1 sprite-occlusion correction against its immediate pre-fix
+source, `Measure-RendererPair.ps1` renders both versions from the same
+35-tic map-start state at headings 0, 37, 90, 180 and 270 degrees. Six
+alternating-order rounds retain all 30 render calls per version and map,
+including each first call. Context creation and snapshot setup are outside the
+timer. Both versions run in separate PowerShell modules so the baseline does
+not accidentally call candidate private helpers. The workload is serial
+320×200 rendering under PowerShell 7.6.5; it excludes live simulation,
+parallel workers, encoding, terminal output, audio and display presentation.
+
+Baseline source is commit `703a1f7`; the clipped, scratch-reusing candidate is
+`193c386`. Times are milliseconds per full render:
+
+| Map | Baseline median / p95 | Candidate median / p95 |
+| --- | ---: | ---: |
+| E1M1 | 52.50 / 95.36 | 52.04 / 95.70 |
+| E1M3 | 51.42 / 104.71 | 52.46 / 95.72 |
+| E1M4 | 42.59 / 77.90 | 45.40 / 69.92 |
+
+The medians are mixed: E1M1 is 0.9% lower, E1M3 is 2.0% higher, and E1M4 is
+6.6% higher in this sample. The p95 is nearly unchanged on E1M1 and lower on
+E1M3/E1M4. Mean times move differently because long-tail outliers remain
+large. This is a measured fidelity cost with variable timing, not an overall
+speedup or a 35-tic/60-display claim. The raw source-pinned reports are
+[E1M1](../results/sprite-clip-final-performance-e1m1-20260927.json),
+[E1M3](../results/sprite-clip-final-performance-e1m3-20260927.json), and
+[E1M4](../results/sprite-clip-final-performance-e1m4-20260927.json).
