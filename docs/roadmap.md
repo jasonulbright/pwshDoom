@@ -85,6 +85,14 @@ full-campaign music remain open. The current source and evidence pin are in the
 [Episode 1 handoff](episode1-playtest.md) and
 [readiness receipt](../results/episode1-playtest-readiness.json).
 
+The current Doom sky path now matches the adopted renderer's fixed-angle
+column selection and 128-row vertical wrap. Direct comparison passes 430,080
+sky samples at eight headings; current Classic, Matrix/Katakana, and
+AnsiArt/Katakana output remains exact across sixteen workers, and the 36-map
+smoke passes. The E1M1 start-view whole-frame comparison is unchanged, so the
+isolated sampler check is the direct evidence. This does not close original-
+executable fidelity, 35/60 pacing, or the one human Episode 1 route.
+
 "Best" means strongest demonstrated result for this particular combination of language boundary, terminal play, correctness, usability, and reproducible evidence. The study must publish losses and tradeoffs. A compiled source port may win performance, fidelity, portability, or ease of installation; that does not make it a PowerShell-engine implementation. Do not claim superiority over untested alternatives or present our adopted gameplay translation as original work.
 
 ## Baseline and acceptance

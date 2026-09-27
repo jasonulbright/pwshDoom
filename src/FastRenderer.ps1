@@ -128,7 +128,7 @@ function New-FastRenderContext {
     $map=$World.Map
     $ctx=@{Content=$Content;World=$World;Lighting=(New-FastLightingTables);Pixels=[byte[]]::new(64000);Depth=[double[]]::new(64000);
         TopClip=[int[]]::new(320);BottomClip=[int[]]::new(320);Planes=[int[]]::new(53760);Patches=@{};Textures=@{};Hud=@{};
-        Stack=[int[]]::new($map.Nodes.Length*2+4);Segments=[object[]]::new($map.Segs.Length);
+        Stack=[int[]]::new($map.Nodes.Length*2+4);SkyColumns=[int[]]::new(320);Segments=[object[]]::new($map.Segs.Length);
         Nodes=[object[]]::new($map.Nodes.Length);Subsectors=$map.Subsectors;
         Flats=$Content.Flats.Flats;Colors=$Content.ColorMap.Data;SkyFlat=$Content.Flats.SkyFlatNumber;Sectors=$map.Sectors;Sides=$map.Sides;SpriteAtlas=[object[]]::new($Content.Sprites.spriteDefs.Length)}
     $sectorIndex=[Collections.Generic.Dictionary[object,int]]::new()
@@ -305,10 +305,15 @@ function Invoke-FastRender {
     [int]$planeBaseX=[Math]::Truncate($fineSine[$planeBaseFine+2048]/160.0)
     [int]$planeBaseY=-[Math]::Truncate($fineSine[$planeBaseFine]/160.0)
     [int[]]$raySin=[int[]]::new(320);[int[]]$rayCos=[int[]]::new(320)
+    $sky=$Context.Sky;[int[]]$skyData=$sky.Data;[int]$skyW=$sky.Width;[int]$skyH=$sky.Height
+    [int[]]$skyColumns=$Context.SkyColumns
     for([int]$x=$FirstColumn;$x -lt $EndColumn;$x++){
         [uint32]$rayData=([long]$viewAngleData+[long]$Context.PlaneColumnAngles[$x]) -band 0xFFFFFFFFL
         [int]$fineIndex=$rayData -shr 19
         $raySin[$x]=$fineSine[$fineIndex];$rayCos[$x]=$fineSine[$fineIndex+2048]
+        [int]$skyAngle=$rayData -shr 22
+        if(($skyW -band ($skyW-1)) -eq 0){$skyColumns[$x]=$skyAngle -band ($skyW-1)}
+        else{$skyColumns[$x]=$skyAngle%$skyW}
     }
     [double]$co=[Math]::Cos($angle);[double]$si=[Math]::Sin($angle)
     [double]$ls=($FirstColumn-161)/160.0;[double]$rs=($EndColumn-159)/160.0
@@ -325,7 +330,6 @@ function Invoke-FastRender {
     [Array]::Clear($topClip);[Array]::Fill($bottomClip,167)
     [int]$open=$EndColumn-$FirstColumn
     $stack=$Context.Stack;[int]$sp=1;$stack[0]=$Context.Nodes.Length-1
-    $sky=$Context.Sky;[int[]]$skyData=$sky.Data;[int]$skyW=$sky.Width;[int]$skyH=$sky.Height
     while($sp -gt 0 -and $open -gt 0) {
         [int]$nodeIndex=$stack[--$sp]
         if($nodeIndex -ge 0 -and $nodeIndex -lt 32768) {
@@ -382,10 +386,9 @@ function Invoke-FastRender {
                     if($plane -eq 0){$py0=$clipT;$py1=[Math]::Min($clipB,$wallT-1)}
                     else{$py0=[Math]::Max($clipT,$wallB+1);$py1=$clipB}
                     [int]$planeId=1+$seg.Sector*2+$plane
-                    if($plane -eq 0 -and $isSky){[int]$skyU=([int][Math]::Floor(($angle-[Math]::Atan($ray))*1024/(2*[Math]::PI))%$skyW+$skyW)%$skyW}
                     for([int]$y=$py0;$y -le $py1;$y++) {
                         [int]$p=$y*320+$x
-                        if($plane -eq 0 -and $isSky){$pixels[$p]=$skyData[$skyU*$skyH+[Math]::Clamp($y+16,0,$skyH-1)];continue}
+                        if($plane -eq 0 -and $isSky){$pixels[$p]=$skyData[$skyColumns[$x]*$skyH+(($y+16)-band 127)];continue}
                         $planes[$p]=$planeId
                     }
                 }

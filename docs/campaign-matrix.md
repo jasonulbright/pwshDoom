@@ -7,10 +7,19 @@ Updated 2026-09-26. Release sequence remains Ultimate Doom, Doom II, then a MyHo
 Source/IWAD hashes and detailed results: [results/campaign-smoke-lineflags-fixed.json](../results/campaign-smoke-lineflags-fixed.json).
 
 The current actor-projection and fixed-angle sprite renderer also passes a
-fresh **36/36-map smoke** with 16 worker strips, 35 idle tics and two full
-320×200 frames per map: [current receipt](../results/campaign-smoke-sprite-rotation.json).
-This is startup/render coverage, not any of the ordinary-input completion
-evidence in the table below.
+fresh **36/36-map smoke** at 35 idle tics and two full 320×200 serial frames
+per map: [receipt](../results/campaign-smoke-sprite-rotation.json). Its
+`WorkerStrips=16` field is configuration metadata; the smoke itself does not
+start render processes. This is startup/render coverage, not any of the
+ordinary-input completion evidence in the table below.
+
+The current Doom sky-sampling source passes a further **36/36-map smoke** with
+the same 35 idle tics and two 320×200 serial frames per map:
+[receipt](../results/campaign-smoke-sky-20260926.json). Its `WorkerStrips` value
+is configuration metadata; this smoke does not start processes. Exact
+16-process serial parity for each of the three display styles is recorded
+separately in the [rendering-fidelity record](rendering-fidelity.md#doom-sky-column-and-vertical-wrap-sampling-2026-09-26).
+This remains load/render smoke, not route or campaign completion.
 
 E1M1 has an [input-only completion report](../results/e1m1-route-lineflags.json) with 1560 commands. That route ends at intermission; it does not qualify next-level presentation or a whole episode. E1M2 now has a separate [normal-route qualification](campaign-e1m2.md), including recorded continuation into E1M3. The remaining maps still need completion evidence. Source-version matching is checked separately from input/state equivalence.
 

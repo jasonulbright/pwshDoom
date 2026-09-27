@@ -1,0 +1,98 @@
+{
+  "Headings": [
+    {
+      "Degrees": 0,
+      "AngleMismatches": 0,
+      "ProducedSkyColumnsCompared": 320,
+      "SkyPixelMismatches": 0,
+      "SourceTableAnglesCompared": 320,
+      "ComparedSkyPixels": 53760
+    },
+    {
+      "Degrees": 45,
+      "AngleMismatches": 0,
+      "ProducedSkyColumnsCompared": 320,
+      "SkyPixelMismatches": 0,
+      "SourceTableAnglesCompared": 320,
+      "ComparedSkyPixels": 53760
+    },
+    {
+      "Degrees": 90,
+      "AngleMismatches": 0,
+      "ProducedSkyColumnsCompared": 320,
+      "SkyPixelMismatches": 0,
+      "SourceTableAnglesCompared": 320,
+      "ComparedSkyPixels": 53760
+    },
+    {
+      "Degrees": 135,
+      "AngleMismatches": 0,
+      "ProducedSkyColumnsCompared": 320,
+      "SkyPixelMismatches": 0,
+      "SourceTableAnglesCompared": 320,
+      "ComparedSkyPixels": 53760
+    },
+    {
+      "Degrees": 180,
+      "AngleMismatches": 0,
+      "ProducedSkyColumnsCompared": 320,
+      "SkyPixelMismatches": 0,
+      "SourceTableAnglesCompared": 320,
+      "ComparedSkyPixels": 53760
+    },
+    {
+      "Degrees": 225,
+      "AngleMismatches": 0,
+      "ProducedSkyColumnsCompared": 320,
+      "SkyPixelMismatches": 0,
+      "SourceTableAnglesCompared": 320,
+      "ComparedSkyPixels": 53760
+    },
+    {
+      "Degrees": 270,
+      "AngleMismatches": 0,
+      "ProducedSkyColumnsCompared": 320,
+      "SkyPixelMismatches": 0,
+      "SourceTableAnglesCompared": 320,
+      "ComparedSkyPixels": 53760
+    },
+    {
+      "Degrees": 315,
+      "AngleMismatches": 0,
+      "ProducedSkyColumnsCompared": 320,
+      "SkyPixelMismatches": 0,
+      "SourceTableAnglesCompared": 320,
+      "ComparedSkyPixels": 53760
+    }
+  ],
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "SkyPixelMismatches": 0,
+  "Meaning": "Direct sky-sampler equivalence against the adopted, locally adapted PowerShell Doom renderer. This isolates sky sampling and does not establish full-frame vanilla Doom equivalence or original-executable parity.",
+  "AngleMismatches": 0,
+  "Passed": true,
+  "Fixture": "Ultimate Doom E1M1 sky texture, isolated DrawSkyColumn reference output, 320x200/320x168 viewport",
+  "FinishedUtc": "2026-09-27T02:29:09.7489097Z",
+  "BundleSha256": "61F6C9B2E6CE5B2316A363B81436A241ACEEF2B962B2CB4125596AD9DEA9BAE0",
+  "Sources": [
+    {
+      "Path": "scripts/Test-SkySampling.ps1",
+      "Sha256": "818AC95B3703F5BA5F267F045DD33E84DB9B9806D0BD6C24FAD76C3E9C602821"
+    },
+    {
+      "Path": "src/FastRenderer.ps1",
+      "Sha256": "54DE68548719A859691FE455E581E5F3123E343F5BB54B7BFD5A16D0621D9309"
+    },
+    {
+      "Path": "src/RenderAssets.ps1",
+      "Sha256": "A8FA9AFFAF00B5B4DE6B68AE00E8E4DBF8B7C4915F4D16310882C3E8B6E9AFD4"
+    },
+    {
+      "Path": "src/GameHost.ps1",
+      "Sha256": "3732C6A81C74F43451CB2A2E4ED342EBE303FC3EEB558B64C3658F78EAACB940"
+    },
+    {
+      "Path": "src/ManagedDoom/Video/ThreeDRenderer.sb.ps1",
+      "Sha256": "108D7FC274EDE1A1AD64864C6BD273DCAB48FA5A160FFD91FAA1EFB1FCB43AC9"
+    }
+  ]
+}

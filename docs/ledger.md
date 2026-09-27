@@ -1783,3 +1783,34 @@ reader's boundary test checks the final frames. Full-length device playback,
 other non-looping scores, acoustic review, continuous campaign playback, and
 Episode 1 human playthrough readiness remain open. No campaign route was added
 or tuned.
+
+## 2026-09-26 — Match Doom sky sampling
+
+The numeric renderer's sky path used an analytic angle and clamped the
+vertical coordinate. The adopted `ThreeDRenderer.DrawSkyColumn` instead uses
+the wrapped high bits of `viewAngleData + xToAngleData[x]` and fixed-point
+vertical sampling masked to 128 rows. The host viewport confirms a 256x128 sky,
+scale 65536, altitude 6553600, and centerY 84. The existing 320-column Doom
+angle table matches the reference at every column.
+
+The PowerShell rasterizer now reuses that table to calculate exact sky columns
+and wraps row `(y + 16)` with `& 127`. The precomputed sky column scratch array
+is initialized for host and deserialized worker contexts. No serialized asset
+format change was necessary. The source-pinned isolated test compares 320x168
+sky samples at eight headings against the actual adopted renderer: 430,080
+pixels, zero column-map mismatches, and zero pixel mismatches. Receipt:
+`results/sky-sampling-20260926-v3.json`.
+
+Classic, Matrix/Katakana, and AnsiArt/Katakana each retain exact serial output
+across 16 process workers at five headings (320,000 pixels and 80 encoded
+strips per style); the 36-map, 35-idle-tic/two-frame smoke passes. The final
+E1M1 map-start scene comparisons produce the same per-heading counts as the
+pre-change run, so they do not establish a full-frame sky difference. Retain
+the direct sky sampler test as the targeted evidence. The checks do not establish
+vanilla executable parity or 35-tic/60-display pacing.
+
+The first worker attempt terminated before a frame because the reference
+`ThreeDRenderer` class is not loaded in isolated render workers. Replaced that
+call with the same local integer mask/modulo behavior and initialized scratch
+storage in both context constructors; reran Classic worker parity, then all
+three styles and the map sweep passed. No gameplay route was created or tuned.

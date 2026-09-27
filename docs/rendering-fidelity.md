@@ -466,3 +466,50 @@ pwsh -NoProfile -File .\scripts\Compare-MovingActorReference.ps1 `
   -Images .\local\moving-actor-render-images `
   -Output .\results\my-moving-actor-reference.json
 ```
+
+## Doom sky-column and vertical-wrap sampling (2026-09-26)
+
+The numeric rasterizer selected sky columns with an analytic `Atan` expression
+and clamped vertical coordinates. The adopted renderer instead adds Doom's
+32-bit view angle to its per-column angle lookup, takes the high ten angle
+bits, wraps the column by sky width, and samples a 128-row texture with a
+fixed-point vertical fraction masked by 127. At this 320x200 viewport the
+reference uses scale 65536 and texture altitude 6553600, so source row is
+`(screenY + 16) & 127`.
+
+`Invoke-FastRender` now uses its existing Doom column-angle table and exact
+unsigned angle wrap for sky columns. The sky row wraps vertically instead of
+sticking to row 127. Power-of-two sky widths use a mask; other widths use
+positive modulo. The scratch column map is initialized in both the host render
+context and the deserialized worker context; no asset format change is needed.
+
+[`Test-SkySampling.ps1`](../scripts/Test-SkySampling.ps1) exercises the actual
+production sky-column map, then compares all 320 columns and 168 scene rows at
+eight headings with `ThreeDRenderer.DrawSkyColumn`. The Doom angle lookup has
+zero mismatches, and all 430,080 sampled sky pixels match the adopted renderer
+exactly. This directly qualifies the sky sampler against the locally adapted
+PowerShell reference; it is not original-executable or whole-engine pixel
+parity.
+
+The final source passes exact serial/16-process equivalence across five views
+in Classic, Matrix/Katakana, and AnsiArt/Katakana: 320,000 pixels and 80
+encoded strips per style. The current-source 36-map smoke also passes at 35
+idle tics and two frames per map. The before/after E1M1 map-start whole-frame
+comparisons are identical at the eight selected headings (HUD differences
+remain zero); those particular scene frames do not demonstrate a whole-frame
+sky delta. The isolated sampler receipt is the evidence for this correction.
+No 35-tic/60-display or performance claim follows from these checks.
+
+Receipts: [isolated sampling](../results/sky-sampling-20260926-v3.json),
+[Classic workers](../results/render-partitions-sky-classic-20260926-v3.json),
+[Matrix workers](../results/render-partitions-sky-matrix-20260926-v3.json),
+[AnsiArt workers](../results/render-partitions-sky-ansiart-20260926-v3.json),
+[36-map smoke](../results/campaign-smoke-sky-20260926.json), and the
+[before](../results/render-reference-e1m1-sky-before-20260926.json) / [after](../results/render-reference-e1m1-sky-after-current-20260926.json)
+full-frame comparisons. Diagnostic images remain in ignored `local/`.
+
+The first worker check stopped before rendering because the worker does not
+load the reference engine's `ThreeDRenderer` class. The production wrap was
+rewritten with PowerShell integer masking/modulo and the worker test was
+repeated successfully. That attempt found an implementation boundary, not a
+gameplay defect.

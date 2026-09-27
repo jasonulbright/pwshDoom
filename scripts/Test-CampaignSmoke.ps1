@@ -18,7 +18,7 @@ function Write-CampaignSmokeReport([bool]$Complete) {
         WadSha256=$wadHash;PowerShell=$PSVersionTable.PSVersion.ToString();Skill=$Skill;RequestedTics=$Tics;
         Maps=$mapNames;Cases=$cases.ToArray();SourceFiles=$sources;WorkerStrips=$Workers;
         Passed=@($cases | Where-Object Passed).Count;Failed=@($cases | Where-Object {-not $_.Passed}).Count;
-        Meaning='Headless map loading, bounded idle simulation, and two full 320x200 rasterizations segmented at the configured worker-strip boundaries. Hashes are reproducibility fingerprints, not reference-image correctness. No navigation, exit, moving-special coverage, keyboard play, audio, parallel transport, or campaign completion is established. Stage timings include cold work and are not a gameplay FPS benchmark.'}
+        Meaning='Headless map loading, bounded idle simulation, and two full 320x200 rasterizations in one process. WorkerStrips records the requested configuration only; this script does not start render workers or segment rasterization. Hashes are reproducibility fingerprints, not reference-image correctness. No navigation, exit, moving-special coverage, keyboard play, audio, parallel transport, or campaign completion is established. Stage timings include cold work and are not a gameplay FPS benchmark.'}
     $data | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath $Output
 }
 try {
