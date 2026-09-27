@@ -22,8 +22,17 @@ E1M8 exit and intermission.
 
 ## Build and launch
 
-Run exact source build commit `76b18ac538a96e40b8aab2127039cf1a59718bec` from
-the `codex/feasibility-study` branch. It builds on the renderer candidate
+Run exact source build commit `76b18ac538a96e40b8aab2127039cf1a59718bec`.
+Because the branch has continued advancing, if your checkout is at its current
+tip, enter the pinned build from the repository root before launching:
+
+```powershell
+git switch --detach 76b18ac538a96e40b8aab2127039cf1a59718bec
+```
+
+After preserving the input and session reports under `local/`, return to the
+development branch with `git switch codex/feasibility-study`. The pinned build
+is based on renderer candidate
 `0fbdc40a77214c68203745800ec0a51cfed9a8fa` and adds a PCM-exact PowerShell
 mixer index optimization; gameplay, session, menu, input, and renderer logic
 are unchanged from that candidate. The [current readiness
