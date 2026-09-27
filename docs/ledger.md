@@ -1954,24 +1954,60 @@ Evidence: [summary](../results/ansi-strip-buffer-reuse-summary-20260927.json),
 [Pairs workers](../results/render-partitions-pairs-stringbuilder-20260927.json),
 and [ColorState workers](../results/render-partitions-colorstate-stringbuilder-20260927.json).
 
+## 2026-09-27 — Reject the StringBuilder ANSI encoder change
+
+The first focused comparison used a short debug sample and hinted that the
+StringBuilder strip encoder was slower. I reran the measurement with the
+encoder functions pinned directly from pre-change commit `37391e3` and candidate
+commit `1fcda3d`, ten ABBA rounds, forty calls per measured block, and both
+synthetic coherent and high-entropy frames. Each call encoded the same
+320×200, 256-color strip of twenty columns; context construction and caches
+were outside the timer. Pairs and ColorState output matched byte-for-byte.
+
+Across those four cases, the candidate took 3.95–9.30 times the baseline
+median time and allocated 82.8–102.8% more bytes on the measured PowerShell
+thread. The removed reference-array estimate (16.8 KB per 20-column strip)
+missed the larger cost in the end-to-end PowerShell encoder. This isolated
+result does not prove whole-game pacing or identify one runtime operation as
+the cause. The StringBuilder production change was reverted; the current
+array-and-concatenate implementation matches the campaign/session baseline.
+
+After restoration, 13 independent exact-color cases pass, 24 synthetic strip
+round-trips pass, and both Pairs and ColorState match serial output across
+320,000 pixels and 80 encoded strips with sixteen workers. The current
+Episode 1 handoff pin is `e35874146856f00bc9568957982719ab0efdc909`; gameplay,
+campaign/session, menu, input, and audio source files remain unchanged from the
+tested campaign/session baseline `76b18ac`.
+
+Evidence: [pinned-source benchmark](../results/ansi-strip-reuse-pinned-measurement-20260927.json),
+[benchmark script](../scripts/Measure-AnsiStripReuse.ps1),
+[strict color checks](../results/ansi-color-state-array-rollback-verified-20260927.json),
+[synthetic round-trips](../results/ansi-strip-array-rollback-20260927.txt),
+[Pairs worker checks](../results/render-partitions-pairs-array-rollback-20260927.json),
+[ColorState worker checks](../results/render-partitions-colorstate-array-rollback-20260927.json),
+and the [superseded candidate readiness receipt](../results/episode1-playtest-stringbuilder-candidate-readiness-20260927.json).
+
 ## 2026-09-27 — Refresh the Episode 1 human-playtest build pin
 
-The original handoff pinned the campaign/session baseline `76b18ac`. Since
-then, the current branch changed only PowerShell renderer scratch reuse and
-Classic Pairs/ColorState ANSI strip assembly. Those changes have current-source
-pixel, worker, codec, and 36-map smoke evidence; no gameplay, campaign/session,
-menu, input, or audio source changed. A fresh `Play.ps1 -Check` finds PowerShell
-7.6.5, Windows Terminal, the 36-map Steam Ultimate Doom IWAD, and the prepared
-Episode 1 music catalog; both local content hashes match the handoff.
+The original handoff used the campaign/session baseline `76b18ac`; its current
+source retains the tested gameplay, session, menu, input and audio paths, plus
+PowerShell renderer scratch reuse. The StringBuilder ANSI-strip experiment was
+reverted after its pinned comparison measured worse time and allocation than
+the baseline array-and-concatenate implementation. Strict color, synthetic
+strip and sixteen-worker output checks pass on the restored encoder. A fresh
+`Play.ps1 -Check` finds PowerShell 7.6.5, Windows Terminal, the 36-map Steam
+Ultimate Doom IWAD, and the prepared Episode 1 music catalog; both local
+content hashes match the handoff.
 
-The human-test pin is refreshed to `1fcda3ddfef9bd135ebbc75ed5d03a4ddd2abeaa`.
-The current-tip readiness receipt links these checks to the inherited
-campaign/session test baseline and preserves each original source pin. The
-documented route remains one HMP playthrough from E1M1 through E1M3's secret
-exit, E1M9, return to E1M4, E1M8, and the finale. No individual map test is
-requested. Jason's human result remains pending.
+The current human-test pin is
+`e35874146856f00bc9568957982719ab0efdc909`. The current-tip readiness receipt
+links renderer and restored-encoder checks to the inherited campaign/session
+test baseline and preserves each evidence source pin. The route remains one
+HMP playthrough from E1M1 through E1M3's secret exit, E1M9, return to E1M4,
+E1M8, and the finale. Jason's result remains pending.
 
 Evidence: [current-tip readiness receipt](../results/episode1-playtest-current-tip-readiness-20260927.json),
 [renderer scratch reuse](../results/renderer-scratch-reuse-summary-20260927.json),
-[ANSI strip reuse](../results/ansi-strip-buffer-reuse-summary-20260927.json),
+[encoder regression measurement](../results/ansi-strip-reuse-pinned-measurement-20260927.json),
+[restored encoder checks](../results/render-partitions-pairs-array-rollback-20260927.json),
 and the unchanged [campaign/session receipt](../results/episode1-playtest-current-readiness-20260927.json).

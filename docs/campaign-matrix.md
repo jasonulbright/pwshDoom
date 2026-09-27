@@ -30,7 +30,7 @@ output in the three styles is recorded separately in the
 This is load/render smoke, not route completion.
 
 The single Episode 1 human-playthrough handoff is pinned to source build
-`1fcda3ddfef9bd135ebbc75ed5d03a4ddd2abeaa`; its [current-tip readiness
+`e35874146856f00bc9568957982719ab0efdc909`; its [current-tip readiness
 receipt](../results/episode1-playtest-current-tip-readiness-20260927.json)
 adds current renderer/codec checks and a fresh launcher preflight to the tested
 campaign/session baseline. That baseline passes 57 campaign transition

@@ -1,17 +1,18 @@
 {
   "Format": "pwshDoom.Episode1HumanPlaytestReadiness",
-  "CreatedUtc": "2026-09-27T04:29:56Z",
+  "CreatedUtc": "2026-09-27T04:54:42Z",
   "Status": "ReadyForOneCompleteHumanEpisode1Playthrough",
   "Build": {
-    "Commit": "1fcda3ddfef9bd135ebbc75ed5d03a4ddd2abeaa",
+    "Commit": "e35874146856f00bc9568957982719ab0efdc909",
+    "FullCommit": "e35874146856f00bc9568957982719ab0efdc909",
     "PreviousCampaignSessionBaseline": "76b18ac538a96e40b8aab2127039cf1a59718bec",
-    "ProductionDeltaSinceBaseline": "PowerShell rendering scratch reuse and ANSI strip buffer reuse only; gameplay, campaign/session, menu, input and audio source files are unchanged.",
+    "ProductionDeltaSinceBaseline": "PowerShell renderer scratch reuse only. The Classic Pairs and ColorState ANSI encoders retain the baseline array-and-concatenate implementation; the slower StringBuilder attempt was measured and reverted.",
     "SourceSha256": {
+      "scripts/FrameCodec.ps1": "A1CEA3BF32B01AEF4DAC5665A8478EBC3CAD7C4F4EE8605961A0782079202133",
+      "src/TerminalCodec.ps1": "AC8F875F5774B6F43E4011FA9592E0DED9B3FC0BDDD62E36A971FC663E39BB8A",
+      "src/AnsiColorState.ps1": "5370ABE79597E5E4FC629BBDE768DCA5F7A642200CFA31CF45AC1E7D4B46F4FA",
       "src/FastRenderer.ps1": "94AC7263FADB522C9E1377F5B5694BEDED54A330C90191D8DC3BD7F67372517D",
-      "src/RenderAssets.ps1": "0189E1CEDCCFA9E928953FC66A7D248103006FEAEB6E21BDCF9311468FE0EB5F",
-      "src/TerminalCodec.ps1": "E0DC8287689FFAAB09582062BFB22D2A43F60707B3F8611C667B33F2CDB611C1",
-      "src/AnsiColorState.ps1": "7707624A9289C47FB7A94BA484F231338E1EBE3C36C38A37B8DDE938C15BBE53",
-      "scripts/FrameCodec.ps1": "9A2923EEDACD0FC4B07EA0DE59EAE6C8217492EBA492419757AF5F346779C68A"
+      "src/RenderAssets.ps1": "0189E1CEDCCFA9E928953FC66A7D248103006FEAEB6E21BDCF9311468FE0EB5F"
     }
   },
   "Preflight": {
@@ -24,44 +25,55 @@
     "MusicCatalogSha256": "0E9C9542C75F4D5E2D7FC71E42FAFBB58F94321C3B8A49BA0C9AC5A93752EE58",
     "SettingsFilePresent": false,
     "RecordingAndReportDestinationsAvailable": true,
-    "Limit": "The launcher's -Check verifies the catalog path; catalog contents and actual-device audio have separate receipts."
+    "Limit": "The launcher check verifies the catalog path only; catalog contents and audio playback are covered by their separate receipts."
   },
   "CurrentBuildRenderingChecks": {
     "RendererScratchReuse": {
-      "MapSmoke": "36/36 maps; 35 idle tics and two 320x200 serial frames per map.",
-      "Differential": "36 E1M1-E1M9 views; 2,304,000 pixels; zero differing pixels against the pre-change renderer.",
+      "MapSmoke": "36/36 Ultimate Doom maps; 35 idle tics and two 320x200 serial frames per map.",
+      "Differential": "36 E1M1-E1M9 views; 2,304,000 pixels; zero differences against the pre-change renderer.",
       "Workers": "Classic, Matrix/Katakana and AnsiArt/Katakana each match serial output at 16 workers across five headings.",
       "Receipt": "results/renderer-scratch-reuse-summary-20260927.json"
     },
-    "AnsiStripBufferReuse": {
-      "StrictColorChecks": "13 passed, zero failed.",
-      "WorkerChecks": "Pairs and ColorState each match serial pixels/strips at 16 workers across five headings.",
-      "Receipt": "results/ansi-strip-buffer-reuse-summary-20260927.json",
-      "Limit": "The source-derived removed array allocation is documented; no before/after GC or throughput measurement is claimed."
+    "RestoredArrayEncoders": {
+      "StrictColorCases": 13,
+      "SyntheticRoundTripCases": 24,
+      "PairsWorker": "320,000 pixels and 80 encoded strip checks across five views; zero differences with sixteen processes.",
+      "ColorStateWorker": "320,000 pixels and 80 encoded strip checks across five views; zero differences with sixteen processes.",
+      "Receipts": [
+        "results/ansi-color-state-array-rollback-verified-20260927.json",
+        "results/ansi-strip-array-rollback-20260927.txt",
+        "results/render-partitions-pairs-array-rollback-20260927.json",
+        "results/render-partitions-colorstate-array-rollback-20260927.json"
+      ]
+    },
+    "MeasuredStringBuilderRegression": {
+      "Result": "Exact ANSI bytes, but 4.0-9.3x slower per strip and 83-103% more managed allocations than array-and-concatenate on the measured PowerShell thread.",
+      "Action": "Reverted in this build.",
+      "Receipt": "results/ansi-strip-reuse-pinned-measurement-20260927.json"
     }
   },
   "CampaignSessionAudioChecks": {
     "SourceCommit": "76b18ac538a96e40b8aab2127039cf1a59718bec",
-    "SourceRelation": "The current build has no changes to gameplay, campaign/session, menu, input or audio code since this tested baseline.",
+    "SourceRelation": "Gameplay, campaign/session, menu, input and audio source files are unchanged in this handoff build.",
     "CampaignTransitions": 57,
     "BossProgression": 97,
     "MenuSession": 125,
     "OrdinaryInputSession": "1,747 commands through E1M1 intermission into E1M2.",
-    "AudioMixer": "26 focused checks, 9 music/effects checks, 10 actual-device worker checks; PCM matched independent schedule and the device closed. One queue-timing stall was recorded.",
+    "AudioWorker": "26 focused mixer checks, 9 music/effects checks, and 10 actual-device worker checks; submitted PCM matched an independent schedule and the device closed. One queue-timing stall was recorded.",
     "Receipt": "results/episode1-playtest-current-readiness-20260927.json"
   },
   "HumanPlaythrough": {
     "Status": "Pending",
     "MapSequence": "E1M1 -> E1M2 -> E1M3 -> E1M9 -> E1M4 -> E1M5 -> E1M6 -> E1M7 -> E1M8 -> Episode 1 finale",
     "Endpoint": "E1TEXT / CREDIT finale screen after E1M8 exit/intermission.",
-    "EvidenceRule": "Record only the maps reached, E1M9 return, finale, deaths, reloads, deviations and defects Jason reports."
+    "EvidenceRule": "Record only Jason-reported maps, E1M9 return, finale, deaths, reloads, deviations and defects."
   },
   "KnownLimits": [
-    "This prepares one human Episode 1 playthrough; it is not full Ultimate Doom release certification.",
+    "This qualifies readiness for one HMP Episode 1 human playthrough, not full Ultimate Doom release certification.",
     "Most map completion is not qualified as ordinary-input completion; the user playthrough remains pending.",
     "Displayed FPS and sustained 35-tic simulation pacing are not certified.",
     "Full-campaign audio continuity and acoustic quality are not certified; the finite audio worker recorded one queue-timing stall.",
-    "The renderer remains an approximation, not vanilla pixel/demo compatibility. Sixteen render workers previously used about 4 GB combined working memory."
+    "The renderer remains an approximation rather than vanilla pixel/demo compatibility. Sixteen render workers previously used about 4 GB combined working memory."
   ],
   "Meaning": "Readiness for one complete HMP human Episode 1 playthrough, not an Ultimate Doom release certification."
 }

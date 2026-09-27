@@ -22,25 +22,26 @@ E1M8 exit and intermission.
 
 ## Build and launch
 
-Run exact source build commit `1fcda3ddfef9bd135ebbc75ed5d03a4ddd2abeaa`.
+Run exact source build commit `e35874146856f00bc9568957982719ab0efdc909`.
 If your checkout is at a later branch tip, enter the pinned build from the
 repository root before launching:
 
 ```powershell
-git switch --detach 1fcda3ddfef9bd135ebbc75ed5d03a4ddd2abeaa
+git switch --detach e35874146856f00bc9568957982719ab0efdc909
 ```
 
 After preserving the input and session reports under `local/`, return to the
 development branch with `git switch codex/feasibility-study`. The pinned build
-adds PowerShell renderer scratch reuse and Classic ANSI strip buffer reuse to
-the campaign/session baseline
-`76b18ac538a96e40b8aab2127039cf1a59718bec`. Pixel, worker, codec and map-smoke
-checks cover those renderer changes; gameplay, campaign/session, menu, input
-and audio source files are unchanged from the tested baseline. The [current-tip
-readiness receipt](../results/episode1-playtest-current-tip-readiness-20260927.json)
+adds PowerShell renderer scratch reuse to the campaign/session baseline
+`76b18ac538a96e40b8aab2127039cf1a59718bec`. Its ANSI strip encoders retain the
+baseline array-and-concatenate implementation; a measured StringBuilder
+attempt was slower and was reverted. Pixel, worker, codec and map-smoke checks
+cover the renderer and restored encoders. Gameplay, campaign/session, menu,
+input and audio source files are unchanged from the tested baseline. The
+[current-tip readiness receipt](../results/episode1-playtest-current-tip-readiness-20260927.json)
 pins this build and source hashes, records the fresh IWAD/catalog/launcher
-preflight, links the exact renderer and codec checks, and distinguishes the
-inherited session tests and their baseline commit. The earlier detailed
+preflight, and distinguishes the inherited session tests and their baseline
+commit. The earlier detailed
 [campaign/session receipt](../results/episode1-playtest-current-readiness-20260927.json)
 and [renderer readiness receipt](../results/episode1-playtest-readiness.json)
 retain their original source pins. No automated full-campaign route is treated
