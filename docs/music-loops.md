@@ -256,6 +256,49 @@ gameplay pacing. The one-track catalog and loop payload remain under ignored
 [six-check reader/mixer qualification](../results/music-track-qualification-d-e2m6-20260927.json),
 and [host track-selection evidence](../results/music-host-e2m6-integration-20260927.json).
 
+### D_E2M7 complete-state recurrence and host selection (September 27)
+
+D_E2M7 has a one-cycle period of 4,656,960 stereo frames (105.6 seconds).
+The two-period complete-state proof rendered 9,313,920 frames (211.2 audio
+seconds) and found the same normalized boundary state after both periods:
+102 live voices and SHA-256
+`CAF6AC9FE0D4FB0DD370C57F3418441807738DD84D15CD8AC62B8F3C1CFD48B7`.
+The independent eight-second opening PCM matches exactly. The two-period
+files are 74,511,360 bytes each; this mode proves recurrence from the complete
+state invariant and does not claim a third independently rendered output
+period. Rendering, writing and snapshotting took 856.254 seconds; total
+preparation took 886.966 seconds under PowerShell 7.6.5. This is offline
+qualification cost, not playback performance. D_E2M7 is byte-distinct in the
+pinned IWAD (MUS SHA-256
+`FA014D3E627B9F35D9042F5C044FEDD55ACC20B3EF723517C99ACE5CBEAAE7E6`).
+
+The six-check actual reader/mixer test verifies the opening PCM and exact
+recurrent-period seam. The ten-check waveOut test accepts the loop alongside
+the finite D_INTRO score and matches submitted PCM with its independent
+schedule. The engine callback check confirms E2M7 emits a looping D_E2M7
+start, and a two-second actual headless E2M7 session selects it from a
+one-track catalog, returns all 69 packets (86,940 frames), and closes the
+device without starvation, rebuffer or worker error. This short session does
+not establish full-map/campaign continuity, acoustics or sustained deadlines.
+The catalog and PCM remain under ignored `local/`. Portable receipts:
+[preparation](../results/music-preparation-ultimate-doom-e2m7-stateproof-20260927.json),
+[reader/mixer qualification](../results/music-track-qualification-d-e2m7-state-proof-20260927.json),
+[waveOut worker](../results/music-audio-worker-d-e2m7-state-proof-20260927.json),
+[map callback/catalog checks](../results/music-events-map-selection-e2m7-20260927.json),
+and [host integration](../results/music-host-e2m7-integration-20260927.json).
+
+Re-run the exact map callback/catalog check with a fresh output path:
+
+```powershell
+./scripts/Test-MusicEvents.ps1 -Output ./local/music-events-map-e2m7.json `
+  -MapQualification ./local/music-preparation-ultimate-doom-e2m7-stateproof-20260927/D_E2M7/qualified.json `
+  -Episode 2 -Map 7
+```
+
+The two-second `Invoke-Doom.ps1` integration uses the one-track local catalog
+and the current Windows audio device; it is a startup/shutdown check, not a
+listening test.
+
 ### PowerShell patch-version compatibility (September 27)
 
 Jason's first terminal launch exposed an exact-patch comparison in both the

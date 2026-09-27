@@ -1,0 +1,82 @@
+{
+  "MapSelectionReceipt": "results/music-events-map-selection-e2m7-20260927.json",
+  "Music": {
+    "Selected": "D_E2M7",
+    "MusicClosed": true,
+    "CleanupError": null,
+    "WallSeconds": 8.0656589,
+    "Meaning": "Two-second actual E2M7 game/audio-worker integration. The engine emits a D_E2M7 looping start, and the one-track catalog matches the installed IWAD. All 69 submitted 1260-frame packets (86,940 frames) return before clean device shutdown; no starvation or rebuffer was observed in this short run. This does not qualify full-map/campaign playback, acoustics, sustained deadlines, performance or monitor pacing.",
+    "AudioError": null,
+    "Transitions": [
+      {
+        "Kind": "Start",
+        "Loop": true,
+        "Track": "D_E2M7",
+        "AfterFrames": 0
+      }
+    ],
+    "RebufferResumes": [],
+    "RebufferCount": 0,
+    "UnconsumedPackets": 0,
+    "SubmittedFrames": 86940,
+    "DeviceClosed": true,
+    "Packets": 69,
+    "ReturnedCompletedFrames": 86940,
+    "RebufferObservations": []
+  },
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "MusicCatalogSha256": "B3FB0F4D77EEEF9F934CE18D24C07655655E1F498D23F66FEE4BF04DAF642B15",
+  "TrackQualificationSha256": "ED4045EDE6B47D772690A7C0BB815F3A9F965A4B81A73528DA960CB63DAAD5AA",
+  "RawHostReportSha256": "01B542F4B610B6AEA5E397CE66946C3E0534D52910AA3986AA29E4A075C2EDB2",
+  "RecordedUtc": "2026-09-27T22:34:33.2648643Z",
+  "Result": {
+    "Error": null,
+    "Tics": 69,
+    "ExitReason": "Duration",
+    "Frames": 35
+  },
+  "Parameters": {
+    "Map": 7,
+    "PowerShell": "7.6.5",
+    "Seconds": 2.0017165,
+    "Headless": true,
+    "Episode": 2,
+    "Style": "Classic",
+    "Workers": 4
+  },
+  "Meaning": "Two-second actual E2M7 game/audio-worker integration. The engine emits a D_E2M7 looping start, and the one-track catalog matches the installed IWAD. All 69 submitted 1260-frame packets (86,940 frames) return before clean device shutdown; no starvation or rebuffer was observed in this short run. This does not qualify full-map/campaign playback, acoustics, sustained deadlines, performance or monitor pacing.",
+  "Sources": [
+    {
+      "Path": "scripts/Invoke-Doom.ps1",
+      "Sha256": "EAA75B6B236F6481C7C15EF1D2DA82C536B27206FBCD005CB1C67BED305E03C2"
+    },
+    {
+      "Path": "scripts/Invoke-SimulationWorker.ps1",
+      "Sha256": "306A1DF019997C8227D2E7516C72DF3BA70624985227EB5D77EE5DC04FF28533"
+    },
+    {
+      "Path": "scripts/Invoke-AudioWorker.ps1",
+      "Sha256": "32E80F308BFAB71EDF7198CBA7FED196021FEEF6BDADF2EFBD3D4E7EDBFD1296"
+    },
+    {
+      "Path": "src/SimulationProcess.ps1",
+      "Sha256": "5BFE98A3379E5CC51B39DBDE2E17E12DD0406D3663A8CD041AEFE0FB29054B9D"
+    },
+    {
+      "Path": "src/AudioRunspace.ps1",
+      "Sha256": "A930314C31A8DC628E96266E4654ACE1E2222FE076519B98578663A165DE1AD4"
+    },
+    {
+      "Path": "src/MusicPlayback.ps1",
+      "Sha256": "C4B6FBE2C44AFB3FE2E13CEF968AD3EEAE7DD8FA85B993321FFDED5321B0A71F"
+    },
+    {
+      "Path": "src/MusicLoopReader.ps1",
+      "Sha256": "083079C548A2BB47F1DFE661C5C3CEAD21B7A0FED104062CE46740DAF1215D0B"
+    }
+  ],
+  "RawHostReport": "local/episode2m7-music-integration-20260927.json",
+  "MapSelectionReceiptSha256": "2B90BBCB9EB816CB63A1152F5177646655FE6BCD782E76398E049C046D915718",
+  "Version": 1,
+  "Format": "pwshDoom.MusicHostTrackIntegration"
+}

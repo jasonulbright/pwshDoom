@@ -2873,3 +2873,27 @@ established. Its raw [failed profile](../results/simulation-current-actors-profi
 is retained for audit (SHA-256
 `90FE4EF1B1BDA284F60413C36CFA53304D79A40DB0D6C28C1B079144619686D9`); its
 timings are not used. Do not retry this stale input as a route or profile.
+
+## 2026-09-27 — Qualify D_E2M7 music and map selection
+
+The installed Ultimate Doom IWAD's D_E2M7 MUS hash is
+`FA014D3E627B9F35D9042F5C044FEDD55ACC20B3EF723517C99ACE5CBEAAE7E6`.
+PowerShell 7.6.5 synthesized an independent eight-second opening and two
+complete aligned 105.6-second periods using the complete-state recurrence
+mode. Both period boundaries contain 102 voices and normalized state
+`CAF6AC9FE0D4FB0DD370C57F3418441807738DD84D15CD8AC62B8F3C1CFD48B7`.
+The opening PCM matches exactly. This proof does not render a third output
+period; the report labels that limit explicitly. Offline render/write/snapshot
+time was 856.254 seconds and total preparation was 886.966 seconds.
+
+The six-check reader/mixer test verifies the payload, opening and recurrent
+seam. The ten-check audio-worker test matches its submitted PCM to an
+independent schedule. A 14-check engine callback/catalog test emits the exact
+looping D_E2M7 start for E2M7 and validates the one-track catalog against the
+installed IWAD. The actual two-second headless E2M7 host selects D_E2M7,
+returns all 86,940 submitted frames across 69 packets, and closes the device
+without starvation, rebuffer or worker error. These tests do not establish
+full-map or campaign playback, audible quality or sustained timing. The raw
+host report and PCM/catalog files remain under ignored `local/`; portable
+receipts are the preparation, reader, worker, map callback and host reports
+linked in [music-loop results](music-loops.md#d_e2m7-complete-state-recurrence-and-host-selection-september-27).

@@ -1,11 +1,12 @@
 #requires -Version 7.4
 # SPDX-License-Identifier: GPL-2.0-or-later
 param([Parameter(Mandatory)][string]$Output,[string]$Wad='C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\base\DOOM.WAD',
-    [string]$Qualification="$PSScriptRoot/../results/music-loop-e1m1-hour-bound.json")
+    [string]$Qualification="$PSScriptRoot/../results/music-loop-e1m1-hour-bound.json",
+    [string]$MapQualification,[ValidateRange(1,4)][int]$Episode=2,[ValidateRange(1,9)][int]$Map=7)
 $ErrorActionPreference='Stop';Set-StrictMode -Version Latest
 if(Test-Path $Output){throw 'Use a fresh report path.'}
 $root=[IO.Path]::GetFullPath("$PSScriptRoot/..");$bundle=& "$PSScriptRoot/Build-EngineBundle.ps1" -Output "$root/local/music-events-$PID.ps1";. $bundle;. "$root/src/MusicEvents.ps1"
-$checks=[Collections.Generic.List[object]]::new();$failure=$null;$content=$null
+$checks=[Collections.Generic.List[object]]::new();$failure=$null;$content=$null;$mapSelection=$null
 function Check([string]$Name,[bool]$Passed){$checks.Add(@{Name=$Name;Passed=$Passed});if(-not $Passed){throw $Name}}
 function Reject([string]$Name,[scriptblock]$Action){$rejected=$false;try{& $Action}catch{$rejected=$true};Check $Name $rejected}
 try{
@@ -23,13 +24,25 @@ try{
     $options.Episode=3;$fake=@{State=[GameState]::Finale;Options=$options;Finale=@{stage=0}};Sync-DoomMusicSession $events $fake;Check 'Episode three text finale uses victory score' ($events.Drain()[0].Track -ceq 'D_VICTOR')
     $fake.Finale.stage=1;Sync-DoomMusicSession $events $fake;Check 'Episode three art stage restores bunny score' ($events.Drain()[0].Track -ceq 'D_BUNNY')
     $options.Episode=4;Sync-DoomMusicSession $events $fake;Check 'Other Ultimate Doom art finales retain victory score' ($events.Drain()[0].Track -ceq 'D_VICTOR')
+    if($MapQualification){
+        $mapReport=Get-Content -LiteralPath $MapQualification -Raw|ConvertFrom-Json
+        $mapTrack=[string]$mapReport.Details.Track
+        $mapOptions=[GameOptions]::new();$mapOptions.GameMode=$content.Wad.GameMode;$mapOptions.GameVersion=$content.Wad.GameVersion;$mapOptions.MissionPack=$content.Wad.MissionPack
+        $mapEvents=[DoomMusicEvents]::new();$mapOptions.Music=$mapEvents;$mapGame=[DoomGame]::new($content,$mapOptions)
+        $mapGame.InitNew([GameSkill]::Medium,$Episode,$Map);$mapBatch=$mapEvents.Drain()
+        Check "Actual E${Episode}M${Map} initialization emits the qualified music track" ($mapBatch.Count -eq 1 -and $mapBatch[0].Kind -ceq 'Start' -and $mapBatch[0].Track -ceq $mapTrack -and $mapBatch[0].Loop)
+        $mapCatalog="$root/local/music-catalog-map-$PID.json";@{$mapTrack=[IO.Path]::GetFullPath($MapQualification)}|ConvertTo-Json|Set-Content -LiteralPath $mapCatalog
+        $mapReports=Read-DoomMusicCatalog $mapCatalog $content
+        Check "Actual E${Episode}M${Map} score matches its one-track catalog" ($mapReports.Count -eq 1 -and $mapReports.ContainsKey($mapTrack))
+        $mapSelection=@{Episode=$Episode;Map=$Map;Kind=$mapBatch[0].Kind;Track=$mapBatch[0].Track;Loop=$mapBatch[0].Loop;QualificationSha256=(Get-FileHash -LiteralPath $MapQualification).Hash;CatalogSha256=(Get-FileHash -LiteralPath $mapCatalog).Hash}
+    }
     $catalog="$root/local/music-catalog-test-$PID.json";@{D_E1M1=[IO.Path]::GetFullPath($Qualification)}|ConvertTo-Json|Set-Content $catalog
     $reports=Read-DoomMusicCatalog $catalog $content;Check 'Catalog validates qualified score against actual IWAD bytes' ($reports.Count -eq 1 -and $reports.ContainsKey('D_E1M1'))
     $bad="$root/local/music-catalog-mismatch-$PID.json";@{D_E1M2=[IO.Path]::GetFullPath($Qualification)}|ConvertTo-Json|Set-Content $bad
     Reject 'Mismatched map/qualification catalog rejected' {$null=Read-DoomMusicCatalog $bad $content}
 }catch{$failure=$_.ToString()+"`n"+$_.ScriptStackTrace;throw}finally{
     if($content){$content.Dispose()}
-    @{Error=$failure;Checks=$checks.ToArray();WadSha256=(Get-FileHash $Wad).Hash;SourceSha256=(Get-FileHash "$root/src/MusicEvents.ps1").Hash;ScriptSha256=(Get-FileHash $PSCommandPath).Hash;
-      Meaning='Actual engine initialization callback plus isolated Ultimate Doom save-state music selection and IWAD/catalog identity checks. Non-E1M1 tracks are selection tests only; they are not playback qualifications.'}|ConvertTo-Json -Depth 6|Set-Content $Output
+    @{Error=$failure;Checks=$checks.ToArray();MapSelection=$mapSelection;WadSha256=(Get-FileHash $Wad).Hash;SourceSha256=(Get-FileHash "$root/src/MusicEvents.ps1").Hash;ScriptSha256=(Get-FileHash $PSCommandPath).Hash;
+      Meaning='Actual engine initialization callback plus isolated Ultimate Doom save-state music selection and IWAD/catalog identity checks. Optional map cases record the exact emitted track and catalog/qualification hashes. Non-E1M1 tracks are selection tests only; they are not playback qualifications.'}|ConvertTo-Json -Depth 6|Set-Content $Output
 }
 "PASS: $($checks.Count) music event checks."

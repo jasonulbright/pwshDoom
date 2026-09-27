@@ -1,0 +1,52 @@
+{
+  "Meaning": "Actual long-period reader with source/payload verification, independent opening PCM through the game mixer, and exact loop-seam bytes. The qualification report identifies whether recurrence uses a complete-state proof or an independently synthesized following period. No device, campaign completion or performance claim.",
+  "Error": null,
+  "Checks": [
+    {
+      "Passed": true,
+      "Name": "Continuous synthesis report qualified the matching score and bank"
+    },
+    {
+      "Passed": true,
+      "Name": "Actual aligned period opens within the reader bound"
+    },
+    {
+      "Passed": true,
+      "Name": "Independent reference WAV is intact and frame-aligned"
+    },
+    {
+      "Passed": true,
+      "Name": "Reader plus game PCM mixer exactly reproduces independent opening"
+    },
+    {
+      "Passed": true,
+      "Name": "Reusable loop boundary exactly wraps from the recurrent period tail to its start"
+    },
+    {
+      "Passed": true,
+      "Name": "Qualified payload handles close"
+    }
+  ],
+  "Sources": [
+    {
+      "Sha256": "083079C548A2BB47F1DFE661C5C3CEAD21B7A0FED104062CE46740DAF1215D0B",
+      "Path": "src/MusicLoopReader.ps1"
+    },
+    {
+      "Sha256": "95F0F9A8A004E4D42E313231BAF13A27BD5E7421EAF67F90220DBC5FF0B55276",
+      "Path": "src/AudioMixer.ps1"
+    },
+    {
+      "Sha256": "CE965BC1021953ECA290456585ADD8CEA45BEAB374094EADB94223AECD47024A",
+      "Path": "scripts/Test-MusicTrackQualification.ps1"
+    }
+  ],
+  "Details": {
+    "QualificationSha256": "ED4045EDE6B47D772690A7C0BB815F3A9F965A4B81A73528DA960CB63DAAD5AA",
+    "BoundaryFloatSha256": "BB768DC7D5A85876EE9FFFD0CE7F945307D9C71EBFF3BB487D6ADBB2E287E8AC",
+    "ReferenceSha256": "1D9A9CD58C8C1891A7EBBB3B0640F202F0CB25A3514F6810D8ABC8AAC6FE771B",
+    "PeriodFrames": 4656960,
+    "Track": "D_E2M7",
+    "OpeningPcmSha256": "F500F0E978006CC0B1BF6DB49D6C4903CDEDD5CE239813369361C59FC95E44A6"
+  }
+}
