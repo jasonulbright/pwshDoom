@@ -447,12 +447,37 @@ function Invoke-FastRender {
                         if($color -ge 0){$p=$y*320+$x;$pixels[$p]=$wallColors[$color];$depthBuffer[$p]=$distance}
                     }
                 }
-                if($solid){$topClip[$x]=168;$bottomClip[$x]=-1;$open--}
-                else {
-                    $topClip[$x]=[Math]::Max($clipT,[Math]::Max($wallT,$portalT))
-                    $bottomClip[$x]=[Math]::Min($clipB,[Math]::Min($wallB,$portalB))
-                    if($topClip[$x] -gt $bottomClip[$x]){$open--}
+                [int]$nextTop=168;[int]$nextBottom=-1
+                if(-not $solid){
+                    $nextTop=[Math]::Max($clipT,[Math]::Max($wallT,$portalT))
+                    $nextBottom=[Math]::Min($clipB,[Math]::Min($wallB,$portalB))
                 }
+                # Missing wall textures still close the BSP silhouette. Preserve
+                # those untextured wall bands for sprites without spending a second
+                # raster pass over wall textures that already wrote their depth.
+                if($solid){
+                    if($side.MiddleTexture -le 0){
+                        [int]$occTop=[Math]::Max($clipT,$wallT);[int]$occBottom=[Math]::Min($clipB,$wallB)
+                        for([int]$y=$occTop;$y -le $occBottom;$y++){
+                            [int]$p=$y*320+$x;if($distance -lt $depthBuffer[$p]){$depthBuffer[$p]=$distance}
+                        }
+                    }
+                }else{
+                    if($side.TopTexture -le 0){
+                        [int]$upperTop=[Math]::Max($clipT,$wallT);[int]$upperBottom=[Math]::Min($clipB,$portalT-1)
+                        for([int]$y=$upperTop;$y -le $upperBottom;$y++){
+                            [int]$p=$y*320+$x;if($distance -lt $depthBuffer[$p]){$depthBuffer[$p]=$distance}
+                        }
+                    }
+                    if($side.BottomTexture -le 0){
+                        [int]$lowerTop=[Math]::Max($clipT,$portalB+1);[int]$lowerBottom=[Math]::Min($clipB,$wallB)
+                        for([int]$y=$lowerTop;$y -le $lowerBottom;$y++){
+                            [int]$p=$y*320+$x;if($distance -lt $depthBuffer[$p]){$depthBuffer[$p]=$distance}
+                        }
+                    }
+                }
+                $topClip[$x]=$nextTop;$bottomClip[$x]=$nextBottom
+                if($nextTop -gt $nextBottom){$open--}
             }
         }
     }

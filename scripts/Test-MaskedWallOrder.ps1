@@ -66,7 +66,12 @@ try{
     Check 'Nearest fence wins when masked surfaces overlap' $ctx.Pixels[25760] 200
     Check 'Second fence remains visible through nearer hole' $ctx.Pixels[25774] 201
     Check 'Second fence depth retained through nearer hole' $ctx.Depth[25774] 96
+    $ctx.World.Actors=@();$solidWall=$ctx.Segments[-1];$ctx.Segments=@($solidWall);$ctx.Subsectors[32767].FirstSeg=0;$ctx.Subsectors[32767].SegCount=1
+    $ctx.Sides[1].MiddleTexture=0;Invoke-FastRender $ctx
+    Check 'Untextured solid wall retains sprite depth' ([Math]::Abs($ctx.Depth[25774]-128) -lt 0.01) $true
+    [byte]$untexturedBackground=$ctx.Pixels[25774];$actor.X=200;$ctx.World.Actors=@($actor);Invoke-FastRender $ctx
+    Check 'Untextured solid wall still hides a farther sprite' $ctx.Pixels[25774] $untexturedBackground
 }catch{$failure=$_.ToString();throw}finally{
-    @{Error=$failure;Checks=$checks.ToArray();RendererSha256=(Get-FileHash $Renderer).Hash;HarnessSha256=(Get-FileHash $PSCommandPath).Hash;Meaning='Authored synthetic geometry exercises the real whole-scene rasterizer: transparent fence before opaque wall/floor, billboard depth on either side and uneven strips. HUD/weapon calls replaced with no-ops. No game session, recording, WAD assets or performance claim.'}|ConvertTo-Json -Depth 5|Set-Content $Output
+    @{Error=$failure;Checks=$checks.ToArray();RendererSha256=(Get-FileHash $Renderer).Hash;HarnessSha256=(Get-FileHash $PSCommandPath).Hash;Meaning='Authored synthetic geometry exercises the real whole-scene rasterizer: transparent fence before opaque and untextured solid walls/floor, billboard depth on either side and uneven strips. HUD/weapon calls replaced with no-ops. No game session, recording, WAD assets or performance claim.'}|ConvertTo-Json -Depth 5|Set-Content $Output
 }
 "PASS: $($checks.Count) masked-wall checks."
