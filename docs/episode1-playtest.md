@@ -22,12 +22,12 @@ E1M8 exit and intermission.
 
 ## Build and launch
 
-Run exact source build commit `193c386cc1a22feeb1bf7d269d9b2cc1d1ddaf73`.
+Run exact source build commit `d6e5a8dee0b09f6f600f0e4120471a67a0bc9e7e`.
 If your checkout is at a later branch tip, enter the pinned build from the
 repository root before launching:
 
 ```powershell
-git switch --detach 193c386cc1a22feeb1bf7d269d9b2cc1d1ddaf73
+git switch --detach d6e5a8dee0b09f6f600f0e4120471a67a0bc9e7e
 ```
 
 After preserving the input and session reports under `local/`, return to the
@@ -38,12 +38,20 @@ plane distance and wall-light lookup, and the actor-depth corrections described
 in the [background-plane entry](rendering-fidelity.md#keep-background-planes-out-of-actor-depth-2026-09-27),
 the [missing-texture wall-depth entry](rendering-fidelity.md#preserve-depth-for-untextured-wall-bands-2026-09-27),
 and the [world-sprite silhouette clipping](rendering-fidelity.md#clip-world-sprites-to-wall-silhouettes-2026-09-27)
-with per-context scratch reuse. The current
-[candidate receipt](../results/episode1-human-playthrough-candidate-20260927-r5.json)
-is pinned to this exact build. It records the IWAD, music catalog, launcher
-preflight, 36-map smoke, secret-path/finale transition checks, E1M8 boss-trigger
-fixtures, retained E1M1-to-E1M2 session regression, the focused actor-occlusion
-reproduction, all three renderer styles, and paired single-frame timings.
+with per-context scratch reuse. The current incremental
+[candidate receipt](../results/episode1-human-playthrough-candidate-20260927-r6.json)
+pins the intermission/session-startup update to this exact build. It layers
+48 pixel/timing checks across all four episode backgrounds, 24 exact
+session-screen hashes including finale text/art, a simulation-worker
+new-game/save-load check, the saved crash replay, 69 campaign-transition
+checks and 97 boss-progression checks over the previous broad candidate. Its
+[base receipt](../results/episode1-human-playthrough-candidate-20260927-r5.json)
+retains the 36-map smoke, renderer-style worker equivalence, route regressions,
+fuzz/masked-wall checks, and earlier music/runtime qualification at its recorded
+source pin; those unchanged checks were not rerun at the incremental pin.
+The background warm-up moves the selected `WIMAP0`–`WIMAP2`/`INTERPIC` raster
+out of the first visible intermission screen; see the
+[timing and pixel record](intermission-background-warmup.md).
 The reproduced BON1 sprite leak has a focused correction. The bright fragments
 in the screenshot are two lower-sector `ELEC` Techpillar sprites; their overlap
 matches classic Doom's plane/sprite draw order in both repository renderers.
@@ -62,9 +70,9 @@ E1M2 hit test and the existing nine-check gameplay suite pass. The complete
 26,731-command input from the interrupted attempt now replays through the
 chainsaw attack without error, matching all 79 saved gameplay/render
 checkpoints; automap, audio, and terminal presentation are outside this
-replay. See the
+replay. The final replay at the current source pin is in the
 [crash fix ledger entry](ledger.md#2026-09-27--fix-the-chainsaw-crash-found-in-jasons-episode-1-attempt)
-and [recorded replay receipt](../results/episode1-human-crash-replay-20260927.json).
+and [recorded replay receipt](../results/episode1-human-crash-replay-warmup-20260927-r3.json).
 This does not certify a human campaign completion. The retained E1M1–E1M4
 routes and fixed-input E1M2–E1M4 replays remain linked in
 the earlier [renderer-guard receipt](../results/episode1-render-guard-evidence-20260927.json),
@@ -91,8 +99,8 @@ pwsh -NoProfile -File .\Start-Doom.ps1 `
   -Wad 'C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\base\DOOM.WAD' `
   -Episode 1 -Map 1 -Skill 3 -Style Classic -Sound `
   -MusicCatalog .\local\music-prepared-episode1.json `
-  -RecordInput .\local\episode1-human-playthrough-r4.json `
-  -Report .\local\episode1-human-session-r4.json -Maximized -FontSize 5
+  -RecordInput .\local\episode1-human-playthrough-r3.json `
+  -Report .\local\episode1-human-session-r3.json -Maximized -FontSize 5
 ```
 
 On first startup, give the simulation up to 60 seconds to initialize the game
@@ -166,11 +174,12 @@ playthrough.
 ## Readiness evidence
 
 The current playtest build is pinned to
-`193c386cc1a22feeb1bf7d269d9b2cc1d1ddaf73`. The
-[current candidate receipt](../results/episode1-human-playthrough-candidate-20260927-r5.json)
-records the 36-map smoke, 69 transition checks, E1M8 boss-trigger fixtures,
-retained 1,747-command E1M1 session progression into E1M2, focused wall and
-sprite-occlusion checks, and exact serial/worker output across all three styles.
+`d6e5a8dee0b09f6f600f0e4120471a67a0bc9e7e`. The
+[current incremental candidate receipt](../results/episode1-human-playthrough-candidate-20260927-r6.json)
+records the affected session-screen and worker delta. Its r5 base receipt at
+`193c386cc1a22feeb1bf7d269d9b2cc1d1ddaf73` retains the 36-map smoke,
+1,747-command E1M1 progression into E1M2, focused renderer checks, and exact
+serial/worker output across all three styles; it is separately source-pinned.
 The new clipping records and actor clip buffers are reused per context; workers
 initialize them on first render after asset loading. The full-start and
 PowerShell 7.6.6 reader checks were run on the preceding chainsaw-fix source;

@@ -1,0 +1,116 @@
+{
+  "Notes": "Incremental candidate receipt: r5 broad checks remain at their recorded source pin; this r6 receipt pins the intermission/session-startup delta to the current source commit. The requested complete human Episode 1 playthrough remains pending. No bot route or screen recording was used for this update.",
+  "Build": {
+    "PowerShell": "7.6.5",
+    "Repository": "jasonulbright/pwshDoom",
+    "Branch": "codex/feasibility-study",
+    "BaseCandidateCommit": "193c386cc1a22feeb1bf7d269d9b2cc1d1ddaf73",
+    "ModifiedRuntimeSourceSha256": {
+      "scripts/Invoke-SimulationWorker.ps1": "306A1DF019997C8227D2E7516C72DF3BA70624985227EB5D77EE5DC04FF28533",
+      "src/SessionScreens.ps1": "94E7DF088E6E725ECE623ADC1E1C7B117A2BF41D7B650F5899ACF8E4C4BD77D3",
+      "src/ManagedDoom/Video/IntermissionRenderer.sb.ps1": "3E01CF851FD4F7843AFEAC932CCBE4466B7C31EDF5CA232B81469A1509C166E1",
+      "scripts/Test-IntermissionBackgroundWarmup.ps1": "10174C7E16E530E0394531D492339B2141876D22B4B3CFC4D63D3C787585BA1D"
+    },
+    "Commit": "d6e5a8dee0b09f6f600f0e4120471a67a0bc9e7e",
+    "PreviousCandidate": "results/episode1-human-playthrough-candidate-20260927-r5.json",
+    "SourceFingerprint": "CA4EA22990953A2038703E469541B2B32BDA0892C82E798F1380978017D6BC00",
+    "FastRendererSha256": "F8C9478ECD3863F45C9A0D95E6A02442FA6BCC9A0DB87C3BD6278880CE489CE4"
+  },
+  "RecordedUtc": "2026-09-27T15:51:40.7155135Z",
+  "KnownLimits": [
+    "No human has completed the requested Episode 1 playthrough; the handoff requests one full run, not map-by-map tests.",
+    "Transition and boss fixtures verify state changes but do not claim ordinary playthroughs of E1M5-E1M8 or the finale.",
+    "The E1M3 waypoint driver previously stopped short of its next point without a crash or reproducible product defect; route tuning is stopped. Its retained 7,118-command fixed-input replay reaches E1M4 with all checkpoints matching.",
+    "Whole-campaign music continuity, audible review, and physical keyboard play have not been certified; a prior finite audio-device run recorded one queue-timing stall.",
+    "Sustained 35 simulation tics/sec and 60 displayed updates/sec are not certified.",
+    "The separate E1M1 corpse-near-blue-armor sighting remains unreproduced at its exact view. The raised-floor screenshot is traced to lower-sector ELEC Techpillar sprites and matches classic Doom draw order in both repository renderers; no independent original-executable frame was captured.",
+    "The new intermission timing comparison is an isolated one-host renderer measurement; it does not certify full-game pacing or continuous audio."
+  ],
+  "Checks": [
+    {
+      "Result": "48 checks pass on all four Ultimate Doom episodes. Five alternating-order first-render comparisons per Stats/Next screen reproduce prior pixels; median raster work moves about 8 ms into setup.",
+      "TestedSourceFingerprint": "CA4EA22990953A2038703E469541B2B32BDA0892C82E798F1380978017D6BC00",
+      "Report": "results/intermission-background-warmup-20260927-r4.json",
+      "Name": "Intermission background warm-up"
+    },
+    {
+      "Result": "All 24 Stats, Next, finale-text and finale-art outputs match the previous receipt byte-for-byte by SHA-256.",
+      "Report": "results/session-screens-intermission-warmup-20260927.json",
+      "Name": "Complete session-screen image regression"
+    },
+    {
+      "HarnessSha256": "19DC81FDFEEF33095D72BDE98986F661839834A40176C24E194409B310893C08",
+      "Result": "12 checks pass; the worker starts at E1, selects E2, then restores the E1 save and completes the save/replay integrity checks.",
+      "Report": "results/save-worker-intermission-warmup-20260927.json",
+      "Name": "Simulation worker startup, new game, and save/load"
+    },
+    {
+      "Result": "Consumes all 26,731 saved human commands through E1M1 intermission into E1M2 without a simulation exception; all 79 available checkpoints match. The separately recorded 185 automap commands, audio and terminal output are excluded.",
+      "Report": "results/episode1-human-crash-replay-warmup-20260927-r3.json",
+      "SourceFingerprint": "CA4EA22990953A2038703E469541B2B32BDA0892C82E798F1380978017D6BC00",
+      "SourceCommit": "d6e5a8dee0b09f6f600f0e4120471a67a0bc9e7e",
+      "Name": "Recorded chainsaw-crash regression"
+    },
+    {
+      "Result": "69 checks pass with zero failures, including E1M3 to E1M9, return to E1M4, real intermission/world loads, secret history and finale state.",
+      "Report": "results/campaign-transitions-intermission-warmup-20260927.json",
+      "Name": "Episode 1 transitions, secret return, and finale"
+    },
+    {
+      "Result": "97 Ultimate Doom boss progression checks pass.",
+      "Report": "results/boss-progression-intermission-warmup-20260927.json",
+      "Name": "Boss progression and E1M8 opening"
+    },
+    {
+      "MusicCatalogSha256": "0E9C9542C75F4D5E2D7FC71E42FAFBB58F94321C3B8A49BA0C9AC5A93752EE58",
+      "Result": "Ready on PowerShell 7.6.5 with Windows Terminal, the 36-map Ultimate Doom IWAD, and the prepared Episode 1 catalog path. -Check verifies catalog path only.",
+      "Command": "Play.ps1 -Check -Wad <installed Ultimate Doom DOOM.WAD> -MusicCatalog local/music-prepared-episode1.json",
+      "IWADSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+      "Name": "Launcher preflight"
+    }
+  ],
+  "RetainedRouteEvidence": {
+    "Receipt": "results/episode1-render-guard-evidence-20260927.json",
+    "Meaning": "Four existing E1M1-E1M4 route regressions and fixed-input E1M2-E1M4 replays remain at their original source pins; they are not human completion evidence."
+  },
+  "Format": "pwshDoom.Episode1HumanPlaythroughCandidate",
+  "Prerequisites": {
+    "MusicCatalog": {
+      "Path": "local/music-prepared-episode1.json",
+      "Sha256": "0E9C9542C75F4D5E2D7FC71E42FAFBB58F94321C3B8A49BA0C9AC5A93752EE58",
+      "Validation": "Launcher preflight verifies path only; music workers separately validate successful loop qualifications and IWAD identity."
+    },
+    "WindowsTerminal": "C:\\Users\\jason\\AppData\\Local\\Microsoft\\WindowsApps\\wt.exe",
+    "IWAD": {
+      "Path": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Ultimate Doom\\base\\DOOM.WAD",
+      "Sha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+      "EpisodeMaps": 36
+    }
+  },
+  "Status": "ReadyForOneCompleteHumanEpisode1Playthrough",
+  "Version": 1,
+  "HumanPlaythrough": {
+    "Skill": 3,
+    "Start": "E1M1",
+    "ExpectedSequence": [
+      "E1M1",
+      "E1M2",
+      "E1M3",
+      "E1M9",
+      "E1M4",
+      "E1M5",
+      "E1M6",
+      "E1M7",
+      "E1M8",
+      "Episode 1 finale"
+    ],
+    "Finish": "Advance the E1M8 exit intermission until E1TEXT/CREDIT appears.",
+    "CompletionStatus": "Pending",
+    "EvidenceType": "One human playthrough; automated fixtures and routes are not substitutes."
+  },
+  "InheritedEvidence": {
+    "Meaning": "Unchanged broad readiness evidence remains pinned to r5, including the 36-map load/render smoke, renderer-style worker equivalence, route regressions, fuzz/masked-wall checks and earlier music/runtime qualification. These were not rerun at r6; the current r6 delta is limited to intermission background/session setup and is covered by the checks above.",
+    "Receipt": "results/episode1-human-playthrough-candidate-20260927-r5.json",
+    "SourceCommit": "193c386cc1a22feeb1bf7d269d9b2cc1d1ddaf73"
+  }
+}
