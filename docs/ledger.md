@@ -2897,3 +2897,27 @@ full-map or campaign playback, audible quality or sustained timing. The raw
 host report and PCM/catalog files remain under ignored `local/`; portable
 receipts are the preparation, reader, worker, map callback and host reports
 linked in [music-loop results](music-loops.md#d_e2m7-complete-state-recurrence-and-host-selection-september-27).
+## 2026-09-27 — Qualify D_E2M8 music and map selection
+
+The installed Ultimate Doom IWAD's D_E2M8 MUS hash is
+`253A97E40D3909716DA51B066E4FEEC057EBC266C44509D168D6DBEBDDA5321A`.
+PowerShell 7.6.5 synthesized an independent eight-second opening and two
+complete aligned 176-second periods using the complete-state recurrence mode.
+Both boundaries contain six voices and normalized state
+`4E69A8C7F0641470B9CC86B7CBD9A1652C43090CE64353DEE8C830410951FB19`.
+The opening PCM matches exactly. The proof does not render a third output
+period. Offline render/write/snapshot time was 404.188 seconds; total
+preparation took 421.369 seconds.
+
+The six-check reader/mixer test verifies the payload, opening and recurrent
+seam. The ten-check audio-worker test matches its PCM to an independent
+schedule. A 14-check engine callback/catalog test emits the exact looping
+D_E2M8 start for E2M8 and validates the catalog against the installed IWAD.
+The actual two-second headless E2M8 host selects D_E2M8 and submits 86,940
+frames across 69 packets; 85,680 complete before shutdown, with a 1,260-frame
+upper bound on canceled queued audio. There was no queue-starvation
+observation, rebuffer, unconsumed packet, worker error or cleanup error. This
+is a stop-boundary tail, not evidence of a mid-run audible interruption. It
+does not establish full-map/campaign continuity or acoustic quality. The raw
+host report and PCM/catalog remain under ignored `local/`; portable receipts
+are linked in [music-loop results](music-loops.md#d_e2m8-complete-state-recurrence-and-host-selection-september-27).

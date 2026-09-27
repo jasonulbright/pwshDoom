@@ -299,6 +299,39 @@ The two-second `Invoke-Doom.ps1` integration uses the one-track local catalog
 and the current Windows audio device; it is a startup/shutdown check, not a
 listening test.
 
+### D_E2M8 complete-state recurrence and host selection (September 27)
+
+D_E2M8 has a one-cycle period of 7,761,600 stereo frames (176 seconds).
+The two-period complete-state proof rendered 15,523,200 frames (352 audio
+seconds) and found the same normalized boundary state after both periods:
+6 live voices and SHA-256
+`4E69A8C7F0641470B9CC86B7CBD9A1652C43090CE64353DEE8C830410951FB19`.
+The independent eight-second opening PCM matches exactly. The two-period
+files are 124,185,600 bytes each; the proof establishes recurrence from the
+complete state invariant and does not claim a third independently rendered
+output period. Rendering, writing and snapshotting took 404.188 seconds;
+total preparation took 421.369 seconds under PowerShell 7.6.5. This is offline
+qualification cost, not playback performance. D_E2M8 is byte-distinct in the
+pinned IWAD (MUS SHA-256
+`253A97E40D3909716DA51B066E4FEEC057EBC266C44509D168D6DBEBDDA5321A`).
+
+The six-check reader/mixer test verifies the opening PCM and exact recurrent
+seam. The ten-check waveOut test accepts the loop with D_INTRO and matches
+submitted PCM to its independent schedule. The engine callback check confirms
+E2M8 emits a looping D_E2M8 start, and a two-second actual headless E2M8
+session selects it from a one-track catalog. It submits 86,940 frames across
+69 packets; 85,680 completed before shutdown, and the report gives a 1,260-
+frame upper bound on canceled queued audio. No queue-starvation observation,
+rebuffer, unconsumed packet or worker error occurred. This is a stop-boundary
+tail, not evidence of a mid-run audible interruption or full-map/campaign
+continuity. Listener quality and sustained deadlines remain open. The catalog
+and PCM remain under ignored `local/`. Portable receipts:
+[preparation](../results/music-preparation-ultimate-doom-e2m8-stateproof-20260927.json),
+[reader/mixer qualification](../results/music-track-qualification-d-e2m8-state-proof-20260927.json),
+[waveOut worker](../results/music-audio-worker-d-e2m8-state-proof-20260927.json),
+[map callback/catalog checks](../results/music-events-map-selection-e2m8-20260927.json),
+and [host integration](../results/music-host-e2m8-integration-20260927.json).
+
 ### PowerShell patch-version compatibility (September 27)
 
 Jason's first terminal launch exposed an exact-patch comparison in both the
