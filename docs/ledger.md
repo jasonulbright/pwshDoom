@@ -2800,3 +2800,30 @@ comparison. The visual/source crosswalk and limits are in
 [`reference-audit.md`](reference-audit.md) and
 [`rendering-fidelity.md`](rendering-fidelity.md); the local reading PDF remains
 excluded from packages and ordinary source commits.
+
+## 2026-09-27 — Rerun E1M1 route and measure current-source presentation
+
+The retained HMP E1M1 route driver was rerun against gameplay source commit
+`1bd96b091a3202c534e4c36560d1e2ca529961a7` with the Steam Ultimate Doom IWAD
+under PowerShell 7.6.6. With no waypoint edits it issued 1,560 simulation
+commands, recorded five kills, and reached intermission. The source-pinned
+receipt and raw result are in
+[`e1m1-route-current-source-validation-20260927.json`](../results/e1m1-route-current-source-validation-20260927.json)
+and [`e1m1-route-current-source-20260927.json`](../results/e1m1-route-current-source-20260927.json).
+This confirms only the automated E1M1 route; Jason's documented full Episode 1
+human playthrough remains pending.
+
+A separate maximized Classic PresentMon run used the older fixed 1,560-command
+input stream, without sound or music. It produced 47.73 display transitions per
+second over 51.624 seconds, with 34.977 active simulation tics per second. A
+7.119-second same-map asset reload caused the longest display gap. The fixed
+input exhausted at `ReplayEnd` on E1M1, so this is a timing sample, not route
+completion. The sample was unpaired with the prior windowed run and does not
+establish a performance change or the 60-display goal. The exact run and raw
+artifact hashes are in
+[`presentmon-current-source-replay-20260927.json`](../results/presentmon-current-source-replay-20260927.json).
+
+`Analyze-PresentMonGame.ps1` now accepts `ReplayEnd` only when explicitly run
+with `-AllowReplayEnd`; its default still requires `LevelComplete`. This keeps
+route completion as the normal acceptance condition while allowing finite
+replay workloads to be analyzed honestly. No game or rendering code changed.

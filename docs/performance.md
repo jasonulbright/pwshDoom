@@ -79,3 +79,37 @@ speedup or a 35-tic/60-display claim. The raw source-pinned reports are
 [E1M1](../results/sprite-clip-final-performance-e1m1-20260927.json),
 [E1M3](../results/sprite-clip-final-performance-e1m3-20260927.json), and
 [E1M4](../results/sprite-clip-final-performance-e1m4-20260927.json).
+
+## Current-source E1M1 PresentMon replay — September 27, 2026
+
+The current game source was measured with the installed PresentMon 2.6 service
+through a maximized Classic Terminal window at 6-point font, PowerShell 7.6.6,
+16 render workers, the Steam Ultimate Doom IWAD, and the existing 1,560-command
+`results/e1m1-route.json` input. The harness isolated a new Terminal process;
+the capture returned 2,526 frame events and passed timestamp/interval
+cross-checks to better than `1.5e-14` ms.
+
+PresentMon observed 2,464 display transitions across its 51.624-second window,
+or **47.73 transitions/sec**. Median / p95 display interval was 18.18 / 30.31
+ms; 71 intervals exceeded 33.33 ms and 15 exceeded 50 ms. Six of 2,470
+submitted frames were marked dropped. Median / p95 present-to-display delay
+was 6.04 / 11.46 ms; median / p95 GPU-busy time was 2.31 / 4.34 ms. These
+are Terminal presentation measurements, not a one-to-one count of distinct
+Doom images on the monitor.
+
+The game advanced 1,560 simulation tics and 2,476 completed updates. Its active
+clock reports 34.977 tics/sec and 55.514 updates/sec over 44.601 seconds; the
+wall interval was 51.721 seconds because it included a 7.119-second asset
+reload at tic 1247. The saved input then ended as `ReplayEnd` while the report
+was still on E1M1, so this is **performance evidence only**, not a completed
+route. The same existing E1M1 route driver independently passed on current
+source in 1,560 commands; that does not convert this older input stream into a
+current-source route result. No engine defect was established by the replay
+outcome.
+
+This was one run, without audio, and it is not paired with the earlier windowed
+PresentMon run. The output and source runtime differ, so no performance change
+is attributed. The machine-readable
+[receipt](../results/presentmon-current-source-replay-20260927.json) records
+the exact source, workload, dropped-frame counts and local raw-artifact hashes;
+the 35-tic/60-display gate remains open.

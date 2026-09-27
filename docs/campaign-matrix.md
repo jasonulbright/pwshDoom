@@ -66,7 +66,7 @@ without a crash or reproducible engine defect; route tuning was not continued.
 The retained 7,118-command E1M3 fixed-input replay reaches E1M4 with all 24
 checkpoints matching, and is the regression evidence for that map.
 
-E1M1 has an [input-only completion report](../results/e1m1-route-lineflags.json) with 1560 commands. That route ends at intermission; it does not qualify next-level presentation or a whole episode. E1M2 now has a separate [normal-route qualification](campaign-e1m2.md), including recorded continuation into E1M3. The remaining maps still need completion evidence. Source-version matching is checked separately from input/state equivalence.
+E1M1 has an [input-only completion report](../results/e1m1-route-lineflags.json) with 1560 commands. That route ends at intermission; it does not qualify next-level presentation or a whole episode. The existing E1M1 driver was rerun without waypoint changes on current source commit `1bd96b0` and again reached intermission in 1560 commands; its [source-pinned receipt](../results/e1m1-route-current-source-validation-20260927.json) distinguishes this automated route from human play. The older fixed input in `results/e1m1-route.json` is not current-source completion evidence: its live replay ended at `ReplayEnd` on E1M1. E1M2 has a separate [normal-route qualification](campaign-e1m2.md), including recorded continuation into E1M3. The remaining maps still need completion evidence. Source-version matching is checked separately from input/state equivalence.
 
 The first 280 commands from that existing E1M1 report also supply eight
 dynamic scene checkpoints for the

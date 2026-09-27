@@ -1,13 +1,18 @@
 #requires -Version 7.4
 # SPDX-License-Identifier: GPL-2.0-or-later
-param([string]$Prefix="$PSScriptRoot/../results/presentmon-e1m1")
+# -AllowReplayEnd permits timing analysis of a clean finite input sample that
+# exhausted before level completion. The report always retains the actual exit.
+param([string]$Prefix="$PSScriptRoot/../results/presentmon-e1m1",[switch]$AllowReplayEnd)
 $ErrorActionPreference='Stop'
 . "$PSScriptRoot/FrameCodec.ps1"
 $Prefix=[IO.Path]::GetFullPath($Prefix)
 $capture=Get-Content -LiteralPath ($Prefix+'-capture.json') -Raw | ConvertFrom-Json
 $game=Get-Content -LiteralPath ($Prefix+'-game.json') -Raw | ConvertFrom-Json
 $raw=@(Import-Csv -LiteralPath ($Prefix+'-frames.csv'))
-if($capture.Error -or $game.Error -or $game.ExitReason -ne 'LevelComplete'){throw 'Capture or replay did not complete successfully.'}
+if($capture.Error){throw "PresentMon capture failed: $($capture.Error)"}
+if($game.Error){throw "Game run failed: $($game.Error)"}
+$acceptedExitReasons=if($AllowReplayEnd){@('LevelComplete','ReplayEnd')}else{@('LevelComplete')}
+if($game.ExitReason -notin $acceptedExitReasons){throw "Game exit reason '$($game.ExitReason)' is not accepted for this analysis."}
 if($capture.FrameRows -ne $raw.Count -or $capture.QpcFrequency -ne $game.QpcFrequency){throw 'Report row count/clock frequency mismatch.'}
 [long]$start=$game.FrameStats[0].EndQpc;[long]$end=$game.FrameStats[-1].EndQpc;[double]$frequency=$capture.QpcFrequency
 [double]$seconds=($end-$start)/$frequency

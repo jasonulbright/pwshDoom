@@ -1,0 +1,127 @@
+{
+  "Format": "pwshDoom.PresentMonCurrentSourceReplay",
+  "Version": 1,
+  "RecordedUtc": "2026-09-27T21:44:55.3304284Z",
+  "BuildCommit": "1bd96b091a3202c534e4c36560d1e2ca529961a7",
+  "PowerShell": "7.6.6",
+  "SourceFingerprint": "D627BDF3D3605093095D9185EA564487ECE49A1FE2186134F2257191AB631682",
+  "FastRendererSha256": "9496D650D07F4177DF77A70309E5F99D46C4F7A2F0C664D2C3B3E8FB4165F3FA",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "InputReplay": {
+    "Sha256": "DF62BD8CA80098BCEDC7C6803FBE13D041F57B02DDB788B278491492147BD296",
+    "Commands": 1560,
+    "OriginalFileUtc": "2026-09-10T20:12:43.6753578Z",
+    "Path": "results/e1m1-route.json"
+  },
+  "Launch": {
+    "Style": "Classic",
+    "GlyphSet": "Katakana",
+    "TerminalColumns": 688,
+    "FontSize": 6,
+    "TerminalRows": 151,
+    "SoundEnabled": false,
+    "OutputRows": 100,
+    "Workers": 16,
+    "Maximized": true,
+    "MusicCatalog": false
+  },
+  "Outcome": {
+    "Health": 100,
+    "CompletedFrames": 2476,
+    "Kills": 0,
+    "Episode": 1,
+    "SimulationTicsPerActiveSecond": 34.97671166458738,
+    "GameError": null,
+    "FullMeaning": "The fixed input stream exhausted at ReplayEnd while the game report remained on E1M1. The run is a timing sample, not route-completion evidence.",
+    "Map": 1,
+    "ExitReason": "ReplayEnd",
+    "MapReloads": [
+      {
+        "Map": 1,
+        "StartWallMs": 35643.6989,
+        "Generation": 2,
+        "Tic": 1247,
+        "EndWallMs": 42762.4375,
+        "Episode": 1,
+        "WorkerPids": [
+          20112,
+          18396,
+          34772,
+          30376,
+          7736,
+          31128,
+          24852,
+          11272,
+          6072,
+          35968,
+          29964,
+          3480,
+          34684,
+          32812,
+          27812,
+          23900
+        ]
+      }
+    ],
+    "ReplayEndedAtInputTic": 1560,
+    "MapReloadPausedSeconds": 7.118738599999997,
+    "WallSeconds": 51.7209944,
+    "CompletedTerminalUpdatesPerActiveSecond": 55.514319283024584,
+    "ActiveSeconds": 44.6011053
+  },
+  "PresentMon": {
+    "DisplayedTransitionsPerSecond": 47.72990508331121,
+    "PresentToDisplayMs": {
+      "Count": 2464,
+      "Mean": 6.285021306818181,
+      "Median": 6.038,
+      "P95": 11.4619,
+      "Max": 20.6937
+    },
+    "DisplayIntervalMs": {
+      "Count": 2463,
+      "Mean": 20.947538449045858,
+      "Median": 18.1773,
+      "P95": 30.3105,
+      "Max": 7181.7932
+    },
+    "IntervalsOver33_333ms": 71,
+    "DllSha256": "3164E9FB99E65B120D3C7B2A973239670F3134CF55034BDC89A56278362723DA",
+    "DisplayedTransitions": 2464,
+    "IntervalsOver50ms": 15,
+    "SubmittedFrames": 2470,
+    "MaximumPresentIntervalCheckErrorMs": 1.4210854715202004E-14,
+    "CaptureRows": 2526,
+    "GpuBusyMs": {
+      "Count": 2470,
+      "Mean": 2.677661700404861,
+      "Median": 2.3149,
+      "P95": 4.3405000000000005,
+      "Max": 7.0235
+    },
+    "MaximumDisplayIntervalCheckErrorMs": 7.105427357601002E-15,
+    "DroppedSubmittedFrames": 6,
+    "WindowSeconds": 51.6238194,
+    "DllVersion": "2.6.0.0"
+  },
+  "RawFiles": [
+    {
+      "Sha256": "8A51C2BB70306886862EF71E4719F44D16B214BA3F816ED6350C584F8863B529",
+      "Path": "local/presentmon-current-candidate-20260927-capture.json"
+    },
+    {
+      "Sha256": "7F198FFB1A86302C297E3093BF59865C1D2EEEC7BCC18A01E8628F934B8961D0",
+      "Path": "local/presentmon-current-candidate-20260927-frames.csv"
+    },
+    {
+      "Sha256": "3A78B227D8848ED61A3B7BA587E0E4969FCC6516A31BF01F6E3841687DD7203A",
+      "Path": "local/presentmon-current-candidate-20260927-game.json"
+    },
+    {
+      "Sha256": "B6932354037067136420F46E124B97ED9F8C56665160A7DF238EEF8B542F5E3F",
+      "Path": "local/presentmon-current-candidate-20260927-summary.json"
+    }
+  ],
+  "Repeatability": "Single run, not paired. The viewport was maximized and differs from the earlier PresentMon run; no performance improvement/regression is attributed.",
+  "Meaning": "Independent Windows PresentMon presentation telemetry for the current-source E1M1 fixed-input workload. It does not identify unique Doom frame contents or constitute a completed route, 60-FPS certification, full-campaign performance test, or audio test."
+}
