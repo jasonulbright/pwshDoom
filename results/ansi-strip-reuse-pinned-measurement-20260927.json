@@ -1,0 +1,1613 @@
+{
+  "Format": "pwshDoom.AnsiStripReuseMeasurement",
+  "CreatedUtc": "2026-09-27T04:48:47.0212401Z",
+  "BaselineCommit": "37391e3e391c465bbadc88f52cb1ba90c2d3fa6d",
+  "CandidateSourceCommit": "1fcda3ddfef9bd135ebbc75ed5d03a4ddd2abeaa",
+  "WorkingHead": "8ba1728f16f82709259348ed34ff49b2450058b1",
+  "PowerShell": "7.6.5",
+  "DotNet": "10.0.11",
+  "OS": "Microsoft Windows NT 10.0.26200.0",
+  "ProcessArchitecture": "X64",
+  "Processor": "Intel64 Family 6 Model 198 Stepping 2, GenuineIntel",
+  "SourceGitBlobs": {
+    "scripts/FrameCodec.ps1": {
+      "CandidateGitBlob": "c9e84eaba39bd1a25f9a3ef7394384c442b69610",
+      "BaselineGitBlob": "93102c337b8ac765bb939840e7bd402c218516e9"
+    },
+    "src/TerminalCodec.ps1": {
+      "CandidateGitBlob": "82e13a1d6f162b1151c9dc379d0cd2b2588f3e5f",
+      "BaselineGitBlob": "c2db1ba16bd36af0a2e62e3d411d0eb434d57175"
+    },
+    "src/AnsiColorState.ps1": {
+      "CandidateGitBlob": "46bb797bb52a0582dfa289d7e81af71efd49341c",
+      "BaselineGitBlob": "b8d50940825a56c73ea77f57c33c37bce2189ce0"
+    }
+  },
+  "Protocol": "Pinned pre-change functions and candidate functions are warmed, then measured in ABBA order on the same thread. Each call encodes one production-width 20-column by 200-pixel strip from the same 320x200 indexed frame. Context construction and caches are outside timed blocks. Managed allocation counts are GetAllocatedBytesForCurrentThread deltas. No workers, engine rendering, simulation, terminal writes, concurrent load or display pacing are included.",
+  "IterationsPerBlock": 40,
+  "Rounds": 10,
+  "WorkersRepresented": 16,
+  "Workloads": [
+    "Synthetic coherent tiled indexed frame",
+    "Synthetic high-entropy indexed frame"
+  ],
+  "Results": [
+    {
+      "Mode": "Pairs",
+      "Pattern": "Coherent",
+      "StripColumns": 20,
+      "Frame": "320x200",
+      "WarmupCallsPerVersion": 4,
+      "BaselineOutputSha256": "84EA126DDA7002F61E3AF3B93CCCC0AC9DBA47A9A4EB945B4D5968E66D7DD5EB",
+      "CandidateOutputSha256": "84EA126DDA7002F61E3AF3B93CCCC0AC9DBA47A9A4EB945B4D5968E66D7DD5EB",
+      "OutputsByteExact": true,
+      "Baseline": {
+        "Blocks": 20,
+        "CallsPerBlock": 40,
+        "MedianMsPerCall": 0.6231962499999999,
+        "P95MsPerCall": 0.7142649999999999,
+        "MaximumMsPerCall": 0.8128299999999999,
+        "MedianAllocatedBytesPerCall": 780894.8,
+        "P95AllocatedBytesPerCall": 780958.8,
+        "OutputBytes": 14889
+      },
+      "Candidate": {
+        "Blocks": 20,
+        "CallsPerBlock": 40,
+        "MedianMsPerCall": 5.4402025,
+        "P95MsPerCall": 5.52043,
+        "MaximumMsPerCall": 6.840917500000001,
+        "MedianAllocatedBytesPerCall": 1429054.8,
+        "P95AllocatedBytesPerCall": 1429118.8,
+        "OutputBytes": 14889
+      },
+      "MedianTimeReductionPercent": -772.9517387179402,
+      "MedianAllocationReductionPercent": -83.00221745617975,
+      "Samples": [
+        {
+          "Round": 1,
+          "Version": "Baseline",
+          "ElapsedMs": 32.5132,
+          "MsPerCall": 0.8128299999999999,
+          "AllocatedBytesPerCall": 783437.6,
+          "Calls": 40,
+          "OutputBytes": 14889
+        },
+        {
+          "Round": 1,
+          "Version": "Candidate",
+          "ElapsedMs": 273.6367,
+          "MsPerCall": 6.840917500000001,
+          "AllocatedBytesPerCall": 1429729.8,
+          "Calls": 40,
+          "OutputBytes": 14889
+        },
+        {
+          "Round": 1,
+          "Version": "Candidate",
+          "ElapsedMs": 220.8172,
+          "MsPerCall": 5.52043,
+          "AllocatedBytesPerCall": 1429116,
+          "Calls": 40,
+          "OutputBytes": 14889
+        },
+        {
+          "Round": 1,
+          "Version": "Baseline",
+          "ElapsedMs": 26.9528,
+          "MsPerCall": 0.67382,
+          "AllocatedBytesPerCall": 780956.4,
+          "Calls": 40,
+          "OutputBytes": 14889
+        },
+        {
+          "Round": 2,
+          "Version": "Candidate",
+          "ElapsedMs": 218.576,
+          "MsPerCall": 5.4643999999999995,
+          "AllocatedBytesPerCall": 1429116.8,
+          "Calls": 40,
+          "OutputBytes": 14889
+        },
+        {
+          "Round": 2,
+          "Version": "Baseline",
+          "ElapsedMs": 27.2164,
+          "MsPerCall": 0.68041,
+          "AllocatedBytesPerCall": 780957.2,
+          "Calls": 40,
+          "OutputBytes": 14889
+        },
+        {
+          "Round": 2,
+          "Version": "Baseline",
+          "ElapsedMs": 27.3213,
+          "MsPerCall": 0.6830325,
+          "AllocatedBytesPerCall": 780957.6,
+          "Calls": 40,
+          "OutputBytes": 14889
+        },
+        {
+          "Round": 2,
+          "Version": "Candidate",
+          "ElapsedMs": 219.6935,
+          "MsPerCall": 5.4923375,
+          "AllocatedBytesPerCall": 1429118,
+          "Calls": 40,
+          "OutputBytes": 14889
+        },
+        {
+          "Round": 3,
+          "Version": "Baseline",
+          "ElapsedMs": 27.9508,
+          "MsPerCall": 0.69877,
+          "AllocatedBytesPerCall": 780958.4,
+          "Calls": 40,
+          "OutputBytes": 14889
+        },
+        {
+          "Round": 3,
+          "Version": "Candidate",
+          "ElapsedMs": 219.385,
+          "MsPerCall": 5.484624999999999,
+          "AllocatedBytesPerCall": 1429118.8,
+          "Calls": 40,
+          "OutputBytes": 14889
+        },
+        {
+          "Round": 3,
+          "Version": "Candidate",
+          "ElapsedMs": 219.6193,
+          "MsPerCall": 5.490482500000001,
+          "AllocatedBytesPerCall": 1429118.8,
+          "Calls": 40,
+          "OutputBytes": 14889
+        },
+        {
+          "Round": 3,
+          "Version": "Baseline",
+          "ElapsedMs": 28.5706,
+          "MsPerCall": 0.7142649999999999,
+          "AllocatedBytesPerCall": 780958.8,
+          "Calls": 40,
+          "OutputBytes": 14889
+        },
+        {
+          "Round": 4,
+          "Version": "Candidate",
+          "ElapsedMs": 219.7098,
+          "MsPerCall": 5.492745,
+          "AllocatedBytesPerCall": 1429082,
+          "Calls": 40,
+          "OutputBytes": 14889
+        },
+        {
+          "Round": 4,
+          "Version": "Baseline",
+          "ElapsedMs": 24.9558,
+          "MsPerCall": 0.623895,
+          "AllocatedBytesPerCall": 780894.8,
+          "Calls": 40,
+          "OutputBytes": 14889
+        },
+        {
+          "Round": 4,
+          "Version": "Baseline",
+          "ElapsedMs": 24.4853,
+          "MsPerCall": 0.6121325,
+          "AllocatedBytesPerCall": 780894.8,
+          "Calls": 40,
+          "OutputBytes": 14889
+        },
+        {
+          "Round": 4,
+          "Version": "Candidate",
+          "ElapsedMs": 220.6743,
+          "MsPerCall": 5.5168574999999995,
+          "AllocatedBytesPerCall": 1429054.8,
+          "Calls": 40,
+          "OutputBytes": 14889
+        },
+        {
+          "Round": 5,
+          "Version": "Baseline",
+          "ElapsedMs": 24.8999,
+          "MsPerCall": 0.6224974999999999,
+          "AllocatedBytesPerCall": 780894.8,
+          "Calls": 40,
+          "OutputBytes": 14889
+        },
+        {
+          "Round": 5,
+          "Version": "Candidate",
+          "ElapsedMs": 217.8512,
+          "MsPerCall": 5.44628,
+          "AllocatedBytesPerCall": 1429054.8,
+          "Calls": 40,
+          "OutputBytes": 14889
+        },
+        {
+          "Round": 5,
+          "Version": "Candidate",
+          "ElapsedMs": 216.8068,
+          "MsPerCall": 5.420170000000001,
+          "AllocatedBytesPerCall": 1429054.8,
+          "Calls": 40,
+          "OutputBytes": 14889
+        },
+        {
+          "Round": 5,
+          "Version": "Baseline",
+          "ElapsedMs": 24.5944,
+          "MsPerCall": 0.61486,
+          "AllocatedBytesPerCall": 780894.8,
+          "Calls": 40,
+          "OutputBytes": 14889
+        },
+        {
+          "Round": 6,
+          "Version": "Candidate",
+          "ElapsedMs": 218.0134,
+          "MsPerCall": 5.450335,
+          "AllocatedBytesPerCall": 1429054.8,
+          "Calls": 40,
+          "OutputBytes": 14889
+        },
+        {
+          "Round": 6,
+          "Version": "Baseline",
+          "ElapsedMs": 25.3642,
+          "MsPerCall": 0.634105,
+          "AllocatedBytesPerCall": 780894.8,
+          "Calls": 40,
+          "OutputBytes": 14889
+        },
+        {
+          "Round": 6,
+          "Version": "Baseline",
+          "ElapsedMs": 24.4319,
+          "MsPerCall": 0.6107975,
+          "AllocatedBytesPerCall": 780894.8,
+          "Calls": 40,
+          "OutputBytes": 14889
+        },
+        {
+          "Round": 6,
+          "Version": "Candidate",
+          "ElapsedMs": 216.9778,
+          "MsPerCall": 5.424445,
+          "AllocatedBytesPerCall": 1429054.8,
+          "Calls": 40,
+          "OutputBytes": 14889
+        },
+        {
+          "Round": 7,
+          "Version": "Baseline",
+          "ElapsedMs": 24.6351,
+          "MsPerCall": 0.6158775000000001,
+          "AllocatedBytesPerCall": 780894.8,
+          "Calls": 40,
+          "OutputBytes": 14889
+        },
+        {
+          "Round": 7,
+          "Version": "Candidate",
+          "ElapsedMs": 217.2325,
+          "MsPerCall": 5.4308125,
+          "AllocatedBytesPerCall": 1429054.8,
+          "Calls": 40,
+          "OutputBytes": 14889
+        },
+        {
+          "Round": 7,
+          "Version": "Candidate",
+          "ElapsedMs": 217.2809,
+          "MsPerCall": 5.4320225,
+          "AllocatedBytesPerCall": 1429054.8,
+          "Calls": 40,
+          "OutputBytes": 14889
+        },
+        {
+          "Round": 7,
+          "Version": "Baseline",
+          "ElapsedMs": 24.4724,
+          "MsPerCall": 0.61181,
+          "AllocatedBytesPerCall": 780894.8,
+          "Calls": 40,
+          "OutputBytes": 14889
+        },
+        {
+          "Round": 8,
+          "Version": "Candidate",
+          "ElapsedMs": 216.7513,
+          "MsPerCall": 5.4187825,
+          "AllocatedBytesPerCall": 1429054.8,
+          "Calls": 40,
+          "OutputBytes": 14889
+        },
+        {
+          "Round": 8,
+          "Version": "Baseline",
+          "ElapsedMs": 25.2102,
+          "MsPerCall": 0.630255,
+          "AllocatedBytesPerCall": 780894.8,
+          "Calls": 40,
+          "OutputBytes": 14889
+        },
+        {
+          "Round": 8,
+          "Version": "Baseline",
+          "ElapsedMs": 24.3694,
+          "MsPerCall": 0.609235,
+          "AllocatedBytesPerCall": 780894.8,
+          "Calls": 40,
+          "OutputBytes": 14889
+        },
+        {
+          "Round": 8,
+          "Version": "Candidate",
+          "ElapsedMs": 217.1315,
+          "MsPerCall": 5.4282875,
+          "AllocatedBytesPerCall": 1429054.8,
+          "Calls": 40,
+          "OutputBytes": 14889
+        },
+        {
+          "Round": 9,
+          "Version": "Baseline",
+          "ElapsedMs": 25.3549,
+          "MsPerCall": 0.6338725000000001,
+          "AllocatedBytesPerCall": 780894.8,
+          "Calls": 40,
+          "OutputBytes": 14889
+        },
+        {
+          "Round": 9,
+          "Version": "Candidate",
+          "ElapsedMs": 217.3435,
+          "MsPerCall": 5.4335875,
+          "AllocatedBytesPerCall": 1429070.4,
+          "Calls": 40,
+          "OutputBytes": 14889
+        },
+        {
+          "Round": 9,
+          "Version": "Candidate",
+          "ElapsedMs": 217.365,
+          "MsPerCall": 5.434125,
+          "AllocatedBytesPerCall": 1429046.2,
+          "Calls": 40,
+          "OutputBytes": 14889
+        },
+        {
+          "Round": 9,
+          "Version": "Baseline",
+          "ElapsedMs": 24.3336,
+          "MsPerCall": 0.60834,
+          "AllocatedBytesPerCall": 780886.2,
+          "Calls": 40,
+          "OutputBytes": 14889
+        },
+        {
+          "Round": 10,
+          "Version": "Candidate",
+          "ElapsedMs": 216.9592,
+          "MsPerCall": 5.42398,
+          "AllocatedBytesPerCall": 1429046.2,
+          "Calls": 40,
+          "OutputBytes": 14889
+        },
+        {
+          "Round": 10,
+          "Version": "Baseline",
+          "ElapsedMs": 24.1217,
+          "MsPerCall": 0.6030425,
+          "AllocatedBytesPerCall": 780886.2,
+          "Calls": 40,
+          "OutputBytes": 14889
+        },
+        {
+          "Round": 10,
+          "Version": "Baseline",
+          "ElapsedMs": 23.8766,
+          "MsPerCall": 0.596915,
+          "AllocatedBytesPerCall": 780886.2,
+          "Calls": 40,
+          "OutputBytes": 14889
+        },
+        {
+          "Round": 10,
+          "Version": "Candidate",
+          "ElapsedMs": 217.3196,
+          "MsPerCall": 5.43299,
+          "AllocatedBytesPerCall": 1429046.2,
+          "Calls": 40,
+          "OutputBytes": 14889
+        }
+      ]
+    },
+    {
+      "Mode": "ColorState",
+      "Pattern": "Coherent",
+      "StripColumns": 20,
+      "Frame": "320x200",
+      "WarmupCallsPerVersion": 4,
+      "BaselineOutputSha256": "80889BDAB352DD37B19D64F0818BF44488DD2FD073ED5FAA224430740E172889",
+      "CandidateOutputSha256": "80889BDAB352DD37B19D64F0818BF44488DD2FD073ED5FAA224430740E172889",
+      "OutputsByteExact": true,
+      "Baseline": {
+        "Blocks": 20,
+        "CallsPerBlock": 40,
+        "MedianMsPerCall": 0.5847424999999999,
+        "P95MsPerCall": 0.5932375000000001,
+        "MaximumMsPerCall": 0.6495124999999999,
+        "MedianAllocatedBytesPerCall": 694742.2,
+        "P95AllocatedBytesPerCall": 694913.8,
+        "OutputBytes": 14537
+      },
+      "Candidate": {
+        "Blocks": 20,
+        "CallsPerBlock": 40,
+        "MedianMsPerCall": 5.4379025,
+        "P95MsPerCall": 5.471909999999999,
+        "MaximumMsPerCall": 5.4751525,
+        "MedianAllocatedBytesPerCall": 1339806.2,
+        "P95AllocatedBytesPerCall": 1339806.2,
+        "OutputBytes": 14537
+      },
+      "MedianTimeReductionPercent": -829.9653266181268,
+      "MedianAllocationReductionPercent": -92.84940514625426,
+      "Samples": [
+        {
+          "Round": 1,
+          "Version": "Baseline",
+          "ElapsedMs": 25.9805,
+          "MsPerCall": 0.6495124999999999,
+          "AllocatedBytesPerCall": 695495.4,
+          "Calls": 40,
+          "OutputBytes": 14537
+        },
+        {
+          "Round": 1,
+          "Version": "Candidate",
+          "ElapsedMs": 219.0061,
+          "MsPerCall": 5.4751525,
+          "AllocatedBytesPerCall": 1340439.6,
+          "Calls": 40,
+          "OutputBytes": 14537
+        },
+        {
+          "Round": 1,
+          "Version": "Candidate",
+          "ElapsedMs": 218.8764,
+          "MsPerCall": 5.471909999999999,
+          "AllocatedBytesPerCall": 1339806.2,
+          "Calls": 40,
+          "OutputBytes": 14537
+        },
+        {
+          "Round": 1,
+          "Version": "Baseline",
+          "ElapsedMs": 23.3637,
+          "MsPerCall": 0.5840925,
+          "AllocatedBytesPerCall": 694913.8,
+          "Calls": 40,
+          "OutputBytes": 14537
+        },
+        {
+          "Round": 2,
+          "Version": "Candidate",
+          "ElapsedMs": 217.6096,
+          "MsPerCall": 5.44024,
+          "AllocatedBytesPerCall": 1339806.2,
+          "Calls": 40,
+          "OutputBytes": 14537
+        },
+        {
+          "Round": 2,
+          "Version": "Baseline",
+          "ElapsedMs": 23.4556,
+          "MsPerCall": 0.58639,
+          "AllocatedBytesPerCall": 694742.2,
+          "Calls": 40,
+          "OutputBytes": 14537
+        },
+        {
+          "Round": 2,
+          "Version": "Baseline",
+          "ElapsedMs": 23.1677,
+          "MsPerCall": 0.5791925,
+          "AllocatedBytesPerCall": 694742.2,
+          "Calls": 40,
+          "OutputBytes": 14537
+        },
+        {
+          "Round": 2,
+          "Version": "Candidate",
+          "ElapsedMs": 217.5552,
+          "MsPerCall": 5.43888,
+          "AllocatedBytesPerCall": 1339806.2,
+          "Calls": 40,
+          "OutputBytes": 14537
+        },
+        {
+          "Round": 3,
+          "Version": "Baseline",
+          "ElapsedMs": 23.2303,
+          "MsPerCall": 0.5807575,
+          "AllocatedBytesPerCall": 694742.2,
+          "Calls": 40,
+          "OutputBytes": 14537
+        },
+        {
+          "Round": 3,
+          "Version": "Candidate",
+          "ElapsedMs": 217.4145,
+          "MsPerCall": 5.4353625,
+          "AllocatedBytesPerCall": 1339806.2,
+          "Calls": 40,
+          "OutputBytes": 14537
+        },
+        {
+          "Round": 3,
+          "Version": "Candidate",
+          "ElapsedMs": 217.319,
+          "MsPerCall": 5.432975,
+          "AllocatedBytesPerCall": 1339806.2,
+          "Calls": 40,
+          "OutputBytes": 14537
+        },
+        {
+          "Round": 3,
+          "Version": "Baseline",
+          "ElapsedMs": 23.4061,
+          "MsPerCall": 0.5851525,
+          "AllocatedBytesPerCall": 694742.2,
+          "Calls": 40,
+          "OutputBytes": 14537
+        },
+        {
+          "Round": 4,
+          "Version": "Candidate",
+          "ElapsedMs": 217.1274,
+          "MsPerCall": 5.428185,
+          "AllocatedBytesPerCall": 1339806.2,
+          "Calls": 40,
+          "OutputBytes": 14537
+        },
+        {
+          "Round": 4,
+          "Version": "Baseline",
+          "ElapsedMs": 22.9385,
+          "MsPerCall": 0.5734625,
+          "AllocatedBytesPerCall": 694742.2,
+          "Calls": 40,
+          "OutputBytes": 14537
+        },
+        {
+          "Round": 4,
+          "Version": "Baseline",
+          "ElapsedMs": 23.2419,
+          "MsPerCall": 0.5810475,
+          "AllocatedBytesPerCall": 694742.2,
+          "Calls": 40,
+          "OutputBytes": 14537
+        },
+        {
+          "Round": 4,
+          "Version": "Candidate",
+          "ElapsedMs": 217.0776,
+          "MsPerCall": 5.42694,
+          "AllocatedBytesPerCall": 1339806.2,
+          "Calls": 40,
+          "OutputBytes": 14537
+        },
+        {
+          "Round": 5,
+          "Version": "Baseline",
+          "ElapsedMs": 23.2777,
+          "MsPerCall": 0.5819425,
+          "AllocatedBytesPerCall": 694742.2,
+          "Calls": 40,
+          "OutputBytes": 14537
+        },
+        {
+          "Round": 5,
+          "Version": "Candidate",
+          "ElapsedMs": 217.8095,
+          "MsPerCall": 5.4452375,
+          "AllocatedBytesPerCall": 1339806.2,
+          "Calls": 40,
+          "OutputBytes": 14537
+        },
+        {
+          "Round": 5,
+          "Version": "Candidate",
+          "ElapsedMs": 217.4041,
+          "MsPerCall": 5.4351025,
+          "AllocatedBytesPerCall": 1339806.2,
+          "Calls": 40,
+          "OutputBytes": 14537
+        },
+        {
+          "Round": 5,
+          "Version": "Baseline",
+          "ElapsedMs": 23.6889,
+          "MsPerCall": 0.5922225,
+          "AllocatedBytesPerCall": 694742.2,
+          "Calls": 40,
+          "OutputBytes": 14537
+        },
+        {
+          "Round": 6,
+          "Version": "Candidate",
+          "ElapsedMs": 217.499,
+          "MsPerCall": 5.437475,
+          "AllocatedBytesPerCall": 1339806.2,
+          "Calls": 40,
+          "OutputBytes": 14537
+        },
+        {
+          "Round": 6,
+          "Version": "Baseline",
+          "ElapsedMs": 23.7295,
+          "MsPerCall": 0.5932375000000001,
+          "AllocatedBytesPerCall": 694742.2,
+          "Calls": 40,
+          "OutputBytes": 14537
+        },
+        {
+          "Round": 6,
+          "Version": "Baseline",
+          "ElapsedMs": 23.7125,
+          "MsPerCall": 0.5928125,
+          "AllocatedBytesPerCall": 694742.2,
+          "Calls": 40,
+          "OutputBytes": 14537
+        },
+        {
+          "Round": 6,
+          "Version": "Candidate",
+          "ElapsedMs": 217.1203,
+          "MsPerCall": 5.4280075,
+          "AllocatedBytesPerCall": 1339806.2,
+          "Calls": 40,
+          "OutputBytes": 14537
+        },
+        {
+          "Round": 7,
+          "Version": "Baseline",
+          "ElapsedMs": 23.3733,
+          "MsPerCall": 0.5843325,
+          "AllocatedBytesPerCall": 694742.2,
+          "Calls": 40,
+          "OutputBytes": 14537
+        },
+        {
+          "Round": 7,
+          "Version": "Candidate",
+          "ElapsedMs": 217.6639,
+          "MsPerCall": 5.4415975,
+          "AllocatedBytesPerCall": 1339806.2,
+          "Calls": 40,
+          "OutputBytes": 14537
+        },
+        {
+          "Round": 7,
+          "Version": "Candidate",
+          "ElapsedMs": 217.5346,
+          "MsPerCall": 5.438365,
+          "AllocatedBytesPerCall": 1339806.2,
+          "Calls": 40,
+          "OutputBytes": 14537
+        },
+        {
+          "Round": 7,
+          "Version": "Baseline",
+          "ElapsedMs": 23.4714,
+          "MsPerCall": 0.586785,
+          "AllocatedBytesPerCall": 694742.2,
+          "Calls": 40,
+          "OutputBytes": 14537
+        },
+        {
+          "Round": 8,
+          "Version": "Candidate",
+          "ElapsedMs": 216.6932,
+          "MsPerCall": 5.41733,
+          "AllocatedBytesPerCall": 1339806.2,
+          "Calls": 40,
+          "OutputBytes": 14537
+        },
+        {
+          "Round": 8,
+          "Version": "Baseline",
+          "ElapsedMs": 23.5055,
+          "MsPerCall": 0.5876375,
+          "AllocatedBytesPerCall": 694742.2,
+          "Calls": 40,
+          "OutputBytes": 14537
+        },
+        {
+          "Round": 8,
+          "Version": "Baseline",
+          "ElapsedMs": 23.258,
+          "MsPerCall": 0.58145,
+          "AllocatedBytesPerCall": 694742.2,
+          "Calls": 40,
+          "OutputBytes": 14537
+        },
+        {
+          "Round": 8,
+          "Version": "Candidate",
+          "ElapsedMs": 216.9031,
+          "MsPerCall": 5.4225775,
+          "AllocatedBytesPerCall": 1339806.2,
+          "Calls": 40,
+          "OutputBytes": 14537
+        },
+        {
+          "Round": 9,
+          "Version": "Baseline",
+          "ElapsedMs": 23.4746,
+          "MsPerCall": 0.586865,
+          "AllocatedBytesPerCall": 694742.2,
+          "Calls": 40,
+          "OutputBytes": 14537
+        },
+        {
+          "Round": 9,
+          "Version": "Candidate",
+          "ElapsedMs": 217.3534,
+          "MsPerCall": 5.433835,
+          "AllocatedBytesPerCall": 1339806.2,
+          "Calls": 40,
+          "OutputBytes": 14537
+        },
+        {
+          "Round": 9,
+          "Version": "Candidate",
+          "ElapsedMs": 217.5332,
+          "MsPerCall": 5.43833,
+          "AllocatedBytesPerCall": 1339806.2,
+          "Calls": 40,
+          "OutputBytes": 14537
+        },
+        {
+          "Round": 9,
+          "Version": "Baseline",
+          "ElapsedMs": 23.2806,
+          "MsPerCall": 0.582015,
+          "AllocatedBytesPerCall": 694742.2,
+          "Calls": 40,
+          "OutputBytes": 14537
+        },
+        {
+          "Round": 10,
+          "Version": "Candidate",
+          "ElapsedMs": 217.6093,
+          "MsPerCall": 5.4402325,
+          "AllocatedBytesPerCall": 1339806.2,
+          "Calls": 40,
+          "OutputBytes": 14537
+        },
+        {
+          "Round": 10,
+          "Version": "Baseline",
+          "ElapsedMs": 23.6231,
+          "MsPerCall": 0.5905775,
+          "AllocatedBytesPerCall": 694742.2,
+          "Calls": 40,
+          "OutputBytes": 14537
+        },
+        {
+          "Round": 10,
+          "Version": "Baseline",
+          "ElapsedMs": 23.1003,
+          "MsPerCall": 0.5775075000000001,
+          "AllocatedBytesPerCall": 694742.2,
+          "Calls": 40,
+          "OutputBytes": 14537
+        },
+        {
+          "Round": 10,
+          "Version": "Candidate",
+          "ElapsedMs": 217.9674,
+          "MsPerCall": 5.449185,
+          "AllocatedBytesPerCall": 1339806.2,
+          "Calls": 40,
+          "OutputBytes": 14537
+        }
+      ]
+    },
+    {
+      "Mode": "Pairs",
+      "Pattern": "Entropy",
+      "StripColumns": 20,
+      "Frame": "320x200",
+      "WarmupCallsPerVersion": 4,
+      "BaselineOutputSha256": "ECE52651BE2C4E0F7FE51D44EE227A1423472AF2E2960DAA8F6E81E99F7936AF",
+      "CandidateOutputSha256": "ECE52651BE2C4E0F7FE51D44EE227A1423472AF2E2960DAA8F6E81E99F7936AF",
+      "OutputsByteExact": true,
+      "Baseline": {
+        "Blocks": 20,
+        "CallsPerBlock": 40,
+        "MedianMsPerCall": 2.60524125,
+        "P95MsPerCall": 2.7549475,
+        "MaximumMsPerCall": 2.882785,
+        "MedianAllocatedBytesPerCall": 1294386.0,
+        "P95AllocatedBytesPerCall": 1294386.0,
+        "OutputBytes": 71923
+      },
+      "Candidate": {
+        "Blocks": 20,
+        "CallsPerBlock": 40,
+        "MedianMsPerCall": 11.53005625,
+        "P95MsPerCall": 11.784135000000001,
+        "MaximumMsPerCall": 11.8128225,
+        "MedianAllocatedBytesPerCall": 2625615.2,
+        "P95AllocatedBytesPerCall": 2625763.2,
+        "OutputBytes": 71923
+      },
+      "MedianTimeReductionPercent": -342.5715372808564,
+      "MedianAllocationReductionPercent": -102.84638430885379,
+      "Samples": [
+        {
+          "Round": 1,
+          "Version": "Baseline",
+          "ElapsedMs": 115.3114,
+          "MsPerCall": 2.882785,
+          "AllocatedBytesPerCall": 1294589.8,
+          "Calls": 40,
+          "OutputBytes": 71923
+        },
+        {
+          "Round": 1,
+          "Version": "Candidate",
+          "ElapsedMs": 460.1601,
+          "MsPerCall": 11.5040025,
+          "AllocatedBytesPerCall": 2625613.6,
+          "Calls": 40,
+          "OutputBytes": 71923
+        },
+        {
+          "Round": 1,
+          "Version": "Candidate",
+          "ElapsedMs": 453.9605,
+          "MsPerCall": 11.3490125,
+          "AllocatedBytesPerCall": 2625606.2,
+          "Calls": 40,
+          "OutputBytes": 71923
+        },
+        {
+          "Round": 1,
+          "Version": "Baseline",
+          "ElapsedMs": 104.2603,
+          "MsPerCall": 2.6065075,
+          "AllocatedBytesPerCall": 1294386,
+          "Calls": 40,
+          "OutputBytes": 71923
+        },
+        {
+          "Round": 2,
+          "Version": "Candidate",
+          "ElapsedMs": 467.0909,
+          "MsPerCall": 11.677272499999999,
+          "AllocatedBytesPerCall": 2625616.8,
+          "Calls": 40,
+          "OutputBytes": 71923
+        },
+        {
+          "Round": 2,
+          "Version": "Baseline",
+          "ElapsedMs": 103.8398,
+          "MsPerCall": 2.595995,
+          "AllocatedBytesPerCall": 1294386,
+          "Calls": 40,
+          "OutputBytes": 71923
+        },
+        {
+          "Round": 2,
+          "Version": "Baseline",
+          "ElapsedMs": 98.2991,
+          "MsPerCall": 2.4574775,
+          "AllocatedBytesPerCall": 1294386,
+          "Calls": 40,
+          "OutputBytes": 71923
+        },
+        {
+          "Round": 2,
+          "Version": "Candidate",
+          "ElapsedMs": 458.8343,
+          "MsPerCall": 11.4708575,
+          "AllocatedBytesPerCall": 2625606.2,
+          "Calls": 40,
+          "OutputBytes": 71923
+        },
+        {
+          "Round": 3,
+          "Version": "Baseline",
+          "ElapsedMs": 110.1979,
+          "MsPerCall": 2.7549475,
+          "AllocatedBytesPerCall": 1294386,
+          "Calls": 40,
+          "OutputBytes": 71923
+        },
+        {
+          "Round": 3,
+          "Version": "Candidate",
+          "ElapsedMs": 463.7484,
+          "MsPerCall": 11.59371,
+          "AllocatedBytesPerCall": 2625730.2,
+          "Calls": 40,
+          "OutputBytes": 71923
+        },
+        {
+          "Round": 3,
+          "Version": "Candidate",
+          "ElapsedMs": 471.3654,
+          "MsPerCall": 11.784135000000001,
+          "AllocatedBytesPerCall": 2625692.2,
+          "Calls": 40,
+          "OutputBytes": 71923
+        },
+        {
+          "Round": 3,
+          "Version": "Baseline",
+          "ElapsedMs": 100.2925,
+          "MsPerCall": 2.5073125000000003,
+          "AllocatedBytesPerCall": 1294182.2,
+          "Calls": 40,
+          "OutputBytes": 71923
+        },
+        {
+          "Round": 4,
+          "Version": "Candidate",
+          "ElapsedMs": 464.2139,
+          "MsPerCall": 11.6053475,
+          "AllocatedBytesPerCall": 2625606.2,
+          "Calls": 40,
+          "OutputBytes": 71923
+        },
+        {
+          "Round": 4,
+          "Version": "Baseline",
+          "ElapsedMs": 105.1118,
+          "MsPerCall": 2.627795,
+          "AllocatedBytesPerCall": 1294386,
+          "Calls": 40,
+          "OutputBytes": 71923
+        },
+        {
+          "Round": 4,
+          "Version": "Baseline",
+          "ElapsedMs": 101.0571,
+          "MsPerCall": 2.5264275,
+          "AllocatedBytesPerCall": 1294386,
+          "Calls": 40,
+          "OutputBytes": 71923
+        },
+        {
+          "Round": 4,
+          "Version": "Candidate",
+          "ElapsedMs": 454.8534,
+          "MsPerCall": 11.371335,
+          "AllocatedBytesPerCall": 2625606.2,
+          "Calls": 40,
+          "OutputBytes": 71923
+        },
+        {
+          "Round": 5,
+          "Version": "Baseline",
+          "ElapsedMs": 103.2059,
+          "MsPerCall": 2.5801475,
+          "AllocatedBytesPerCall": 1294386,
+          "Calls": 40,
+          "OutputBytes": 71923
+        },
+        {
+          "Round": 5,
+          "Version": "Candidate",
+          "ElapsedMs": 464.0398,
+          "MsPerCall": 11.600995000000001,
+          "AllocatedBytesPerCall": 2625760.2,
+          "Calls": 40,
+          "OutputBytes": 71923
+        },
+        {
+          "Round": 5,
+          "Version": "Candidate",
+          "ElapsedMs": 461.9187,
+          "MsPerCall": 11.5479675,
+          "AllocatedBytesPerCall": 2625618.4,
+          "Calls": 40,
+          "OutputBytes": 71923
+        },
+        {
+          "Round": 5,
+          "Version": "Baseline",
+          "ElapsedMs": 104.3501,
+          "MsPerCall": 2.6087525,
+          "AllocatedBytesPerCall": 1294386,
+          "Calls": 40,
+          "OutputBytes": 71923
+        },
+        {
+          "Round": 6,
+          "Version": "Candidate",
+          "ElapsedMs": 455.5662,
+          "MsPerCall": 11.389154999999999,
+          "AllocatedBytesPerCall": 2625606.2,
+          "Calls": 40,
+          "OutputBytes": 71923
+        },
+        {
+          "Round": 6,
+          "Version": "Baseline",
+          "ElapsedMs": 102.4534,
+          "MsPerCall": 2.561335,
+          "AllocatedBytesPerCall": 1294386,
+          "Calls": 40,
+          "OutputBytes": 71923
+        },
+        {
+          "Round": 6,
+          "Version": "Baseline",
+          "ElapsedMs": 104.5115,
+          "MsPerCall": 2.6127875,
+          "AllocatedBytesPerCall": 1294386,
+          "Calls": 40,
+          "OutputBytes": 71923
+        },
+        {
+          "Round": 6,
+          "Version": "Candidate",
+          "ElapsedMs": 472.5129,
+          "MsPerCall": 11.8128225,
+          "AllocatedBytesPerCall": 2625606.4,
+          "Calls": 40,
+          "OutputBytes": 71923
+        },
+        {
+          "Round": 7,
+          "Version": "Baseline",
+          "ElapsedMs": 104.159,
+          "MsPerCall": 2.603975,
+          "AllocatedBytesPerCall": 1294386,
+          "Calls": 40,
+          "OutputBytes": 71923
+        },
+        {
+          "Round": 7,
+          "Version": "Candidate",
+          "ElapsedMs": 454.4964,
+          "MsPerCall": 11.36241,
+          "AllocatedBytesPerCall": 2625606.2,
+          "Calls": 40,
+          "OutputBytes": 71923
+        },
+        {
+          "Round": 7,
+          "Version": "Candidate",
+          "ElapsedMs": 463.2218,
+          "MsPerCall": 11.580544999999999,
+          "AllocatedBytesPerCall": 2625650.4,
+          "Calls": 40,
+          "OutputBytes": 71923
+        },
+        {
+          "Round": 7,
+          "Version": "Baseline",
+          "ElapsedMs": 99.9895,
+          "MsPerCall": 2.4997375,
+          "AllocatedBytesPerCall": 1294386,
+          "Calls": 40,
+          "OutputBytes": 71923
+        },
+        {
+          "Round": 8,
+          "Version": "Candidate",
+          "ElapsedMs": 461.5592,
+          "MsPerCall": 11.538979999999999,
+          "AllocatedBytesPerCall": 2625739.2,
+          "Calls": 40,
+          "OutputBytes": 71923
+        },
+        {
+          "Round": 8,
+          "Version": "Baseline",
+          "ElapsedMs": 96.2214,
+          "MsPerCall": 2.405535,
+          "AllocatedBytesPerCall": 1294182.2,
+          "Calls": 40,
+          "OutputBytes": 71923
+        },
+        {
+          "Round": 8,
+          "Version": "Baseline",
+          "ElapsedMs": 103.2455,
+          "MsPerCall": 2.5811375,
+          "AllocatedBytesPerCall": 1294386,
+          "Calls": 40,
+          "OutputBytes": 71923
+        },
+        {
+          "Round": 8,
+          "Version": "Candidate",
+          "ElapsedMs": 460.8453,
+          "MsPerCall": 11.5211325,
+          "AllocatedBytesPerCall": 2625763.2,
+          "Calls": 40,
+          "OutputBytes": 71923
+        },
+        {
+          "Round": 9,
+          "Version": "Baseline",
+          "ElapsedMs": 106.8728,
+          "MsPerCall": 2.67182,
+          "AllocatedBytesPerCall": 1294386,
+          "Calls": 40,
+          "OutputBytes": 71923
+        },
+        {
+          "Round": 9,
+          "Version": "Candidate",
+          "ElapsedMs": 459.2111,
+          "MsPerCall": 11.4802775,
+          "AllocatedBytesPerCall": 2625782.8,
+          "Calls": 40,
+          "OutputBytes": 71923
+        },
+        {
+          "Round": 9,
+          "Version": "Candidate",
+          "ElapsedMs": 449.8035,
+          "MsPerCall": 11.2450875,
+          "AllocatedBytesPerCall": 2625606.2,
+          "Calls": 40,
+          "OutputBytes": 71923
+        },
+        {
+          "Round": 9,
+          "Version": "Baseline",
+          "ElapsedMs": 105.502,
+          "MsPerCall": 2.63755,
+          "AllocatedBytesPerCall": 1294386,
+          "Calls": 40,
+          "OutputBytes": 71923
+        },
+        {
+          "Round": 10,
+          "Version": "Candidate",
+          "ElapsedMs": 469.6736,
+          "MsPerCall": 11.74184,
+          "AllocatedBytesPerCall": 2625642.2,
+          "Calls": 40,
+          "OutputBytes": 71923
+        },
+        {
+          "Round": 10,
+          "Version": "Baseline",
+          "ElapsedMs": 106.9627,
+          "MsPerCall": 2.6740675,
+          "AllocatedBytesPerCall": 1294386,
+          "Calls": 40,
+          "OutputBytes": 71923
+        },
+        {
+          "Round": 10,
+          "Version": "Baseline",
+          "ElapsedMs": 105.4959,
+          "MsPerCall": 2.6373975,
+          "AllocatedBytesPerCall": 1294386,
+          "Calls": 40,
+          "OutputBytes": 71923
+        },
+        {
+          "Round": 10,
+          "Version": "Candidate",
+          "ElapsedMs": 447.2778,
+          "MsPerCall": 11.181945,
+          "AllocatedBytesPerCall": 2625606.2,
+          "Calls": 40,
+          "OutputBytes": 71923
+        }
+      ]
+    },
+    {
+      "Mode": "ColorState",
+      "Pattern": "Entropy",
+      "StripColumns": 20,
+      "Frame": "320x200",
+      "WarmupCallsPerVersion": 4,
+      "BaselineOutputSha256": "35E9DE842CD1170713E24EBCA6AA94710DA4183971F7734B2D8F1BF7AE3CD24E",
+      "CandidateOutputSha256": "35E9DE842CD1170713E24EBCA6AA94710DA4183971F7734B2D8F1BF7AE3CD24E",
+      "OutputsByteExact": true,
+      "Baseline": {
+        "Blocks": 20,
+        "CallsPerBlock": 40,
+        "MedianMsPerCall": 2.86798,
+        "P95MsPerCall": 2.982665,
+        "MaximumMsPerCall": 3.1155975000000002,
+        "MedianAllocatedBytesPerCall": 1294013.8,
+        "P95AllocatedBytesPerCall": 1294217.6,
+        "OutputBytes": 71846
+      },
+      "Candidate": {
+        "Blocks": 20,
+        "CallsPerBlock": 40,
+        "MedianMsPerCall": 11.331705,
+        "P95MsPerCall": 11.679885,
+        "MaximumMsPerCall": 11.6946425,
+        "MedianAllocatedBytesPerCall": 2623892.8,
+        "P95AllocatedBytesPerCall": 2624102.6,
+        "OutputBytes": 71846
+      },
+      "MedianTimeReductionPercent": -295.1110189052922,
+      "MedianAllocationReductionPercent": -102.77162422842783,
+      "Samples": [
+        {
+          "Round": 1,
+          "Version": "Baseline",
+          "ElapsedMs": 115.2756,
+          "MsPerCall": 2.88189,
+          "AllocatedBytesPerCall": 1293617.8,
+          "Calls": 40,
+          "OutputBytes": 71846
+        },
+        {
+          "Round": 1,
+          "Version": "Candidate",
+          "ElapsedMs": 448.4858,
+          "MsPerCall": 11.212145,
+          "AllocatedBytesPerCall": 2623923,
+          "Calls": 40,
+          "OutputBytes": 71846
+        },
+        {
+          "Round": 1,
+          "Version": "Candidate",
+          "ElapsedMs": 455.7546,
+          "MsPerCall": 11.393865,
+          "AllocatedBytesPerCall": 2623911.8,
+          "Calls": 40,
+          "OutputBytes": 71846
+        },
+        {
+          "Round": 1,
+          "Version": "Baseline",
+          "ElapsedMs": 104.647,
+          "MsPerCall": 2.616175,
+          "AllocatedBytesPerCall": 1294013.8,
+          "Calls": 40,
+          "OutputBytes": 71846
+        },
+        {
+          "Round": 2,
+          "Version": "Candidate",
+          "ElapsedMs": 452.3778,
+          "MsPerCall": 11.309445,
+          "AllocatedBytesPerCall": 2623838.6,
+          "Calls": 40,
+          "OutputBytes": 71846
+        },
+        {
+          "Round": 2,
+          "Version": "Baseline",
+          "ElapsedMs": 118.8645,
+          "MsPerCall": 2.9716125,
+          "AllocatedBytesPerCall": 1294013.8,
+          "Calls": 40,
+          "OutputBytes": 71846
+        },
+        {
+          "Round": 2,
+          "Version": "Baseline",
+          "ElapsedMs": 107.9638,
+          "MsPerCall": 2.6990950000000002,
+          "AllocatedBytesPerCall": 1294013.8,
+          "Calls": 40,
+          "OutputBytes": 71846
+        },
+        {
+          "Round": 2,
+          "Version": "Candidate",
+          "ElapsedMs": 467.1954,
+          "MsPerCall": 11.679885,
+          "AllocatedBytesPerCall": 2623958.8,
+          "Calls": 40,
+          "OutputBytes": 71846
+        },
+        {
+          "Round": 3,
+          "Version": "Baseline",
+          "ElapsedMs": 105.8887,
+          "MsPerCall": 2.6472175,
+          "AllocatedBytesPerCall": 1294013.8,
+          "Calls": 40,
+          "OutputBytes": 71846
+        },
+        {
+          "Round": 3,
+          "Version": "Candidate",
+          "ElapsedMs": 453.4301,
+          "MsPerCall": 11.3357525,
+          "AllocatedBytesPerCall": 2623944.4,
+          "Calls": 40,
+          "OutputBytes": 71846
+        },
+        {
+          "Round": 3,
+          "Version": "Candidate",
+          "ElapsedMs": 463.2705,
+          "MsPerCall": 11.5817625,
+          "AllocatedBytesPerCall": 2623829.4,
+          "Calls": 40,
+          "OutputBytes": 71846
+        },
+        {
+          "Round": 3,
+          "Version": "Baseline",
+          "ElapsedMs": 116.3593,
+          "MsPerCall": 2.9089825,
+          "AllocatedBytesPerCall": 1294217.6,
+          "Calls": 40,
+          "OutputBytes": 71846
+        },
+        {
+          "Round": 4,
+          "Version": "Candidate",
+          "ElapsedMs": 452.148,
+          "MsPerCall": 11.303700000000001,
+          "AllocatedBytesPerCall": 2623738.8,
+          "Calls": 40,
+          "OutputBytes": 71846
+        },
+        {
+          "Round": 4,
+          "Version": "Baseline",
+          "ElapsedMs": 117.3381,
+          "MsPerCall": 2.9334525,
+          "AllocatedBytesPerCall": 1294013.8,
+          "Calls": 40,
+          "OutputBytes": 71846
+        },
+        {
+          "Round": 4,
+          "Version": "Baseline",
+          "ElapsedMs": 114.8575,
+          "MsPerCall": 2.8714375,
+          "AllocatedBytesPerCall": 1294087.6,
+          "Calls": 40,
+          "OutputBytes": 71846
+        },
+        {
+          "Round": 4,
+          "Version": "Candidate",
+          "ElapsedMs": 453.1063,
+          "MsPerCall": 11.327657499999999,
+          "AllocatedBytesPerCall": 2623855.4,
+          "Calls": 40,
+          "OutputBytes": 71846
+        },
+        {
+          "Round": 5,
+          "Version": "Baseline",
+          "ElapsedMs": 107.7,
+          "MsPerCall": 2.6925,
+          "AllocatedBytesPerCall": 1293810.2,
+          "Calls": 40,
+          "OutputBytes": 71846
+        },
+        {
+          "Round": 5,
+          "Version": "Candidate",
+          "ElapsedMs": 458.7066,
+          "MsPerCall": 11.467665,
+          "AllocatedBytesPerCall": 2624125.2,
+          "Calls": 40,
+          "OutputBytes": 71846
+        },
+        {
+          "Round": 5,
+          "Version": "Candidate",
+          "ElapsedMs": 451.4928,
+          "MsPerCall": 11.28732,
+          "AllocatedBytesPerCall": 2623774.6,
+          "Calls": 40,
+          "OutputBytes": 71846
+        },
+        {
+          "Round": 5,
+          "Version": "Baseline",
+          "ElapsedMs": 108.5221,
+          "MsPerCall": 2.7130525,
+          "AllocatedBytesPerCall": 1293812.2,
+          "Calls": 40,
+          "OutputBytes": 71846
+        },
+        {
+          "Round": 6,
+          "Version": "Candidate",
+          "ElapsedMs": 449.6114,
+          "MsPerCall": 11.240285,
+          "AllocatedBytesPerCall": 2623694.4,
+          "Calls": 40,
+          "OutputBytes": 71846
+        },
+        {
+          "Round": 6,
+          "Version": "Baseline",
+          "ElapsedMs": 115.5491,
+          "MsPerCall": 2.8887275,
+          "AllocatedBytesPerCall": 1294217.6,
+          "Calls": 40,
+          "OutputBytes": 71846
+        },
+        {
+          "Round": 6,
+          "Version": "Baseline",
+          "ElapsedMs": 117.658,
+          "MsPerCall": 2.94145,
+          "AllocatedBytesPerCall": 1293877.6,
+          "Calls": 40,
+          "OutputBytes": 71846
+        },
+        {
+          "Round": 6,
+          "Version": "Candidate",
+          "ElapsedMs": 453.0293,
+          "MsPerCall": 11.325732499999999,
+          "AllocatedBytesPerCall": 2623767,
+          "Calls": 40,
+          "OutputBytes": 71846
+        },
+        {
+          "Round": 7,
+          "Version": "Baseline",
+          "ElapsedMs": 115.2528,
+          "MsPerCall": 2.8813199999999997,
+          "AllocatedBytesPerCall": 1293747.6,
+          "Calls": 40,
+          "OutputBytes": 71846
+        },
+        {
+          "Round": 7,
+          "Version": "Candidate",
+          "ElapsedMs": 453.5708,
+          "MsPerCall": 11.33927,
+          "AllocatedBytesPerCall": 2623742.2,
+          "Calls": 40,
+          "OutputBytes": 71846
+        },
+        {
+          "Round": 7,
+          "Version": "Candidate",
+          "ElapsedMs": 458.1029,
+          "MsPerCall": 11.452572499999999,
+          "AllocatedBytesPerCall": 2624004.2,
+          "Calls": 40,
+          "OutputBytes": 71846
+        },
+        {
+          "Round": 7,
+          "Version": "Baseline",
+          "ElapsedMs": 114.5809,
+          "MsPerCall": 2.8645225,
+          "AllocatedBytesPerCall": 1294013.8,
+          "Calls": 40,
+          "OutputBytes": 71846
+        },
+        {
+          "Round": 8,
+          "Version": "Candidate",
+          "ElapsedMs": 452.1495,
+          "MsPerCall": 11.3037375,
+          "AllocatedBytesPerCall": 2624102.6,
+          "Calls": 40,
+          "OutputBytes": 71846
+        },
+        {
+          "Round": 8,
+          "Version": "Baseline",
+          "ElapsedMs": 100.6413,
+          "MsPerCall": 2.5160325,
+          "AllocatedBytesPerCall": 1294013.8,
+          "Calls": 40,
+          "OutputBytes": 71846
+        },
+        {
+          "Round": 8,
+          "Version": "Baseline",
+          "ElapsedMs": 109.1172,
+          "MsPerCall": 2.7279299999999997,
+          "AllocatedBytesPerCall": 1294013.8,
+          "Calls": 40,
+          "OutputBytes": 71846
+        },
+        {
+          "Round": 8,
+          "Version": "Candidate",
+          "ElapsedMs": 467.7857,
+          "MsPerCall": 11.6946425,
+          "AllocatedBytesPerCall": 2624080.8,
+          "Calls": 40,
+          "OutputBytes": 71846
+        },
+        {
+          "Round": 9,
+          "Version": "Baseline",
+          "ElapsedMs": 108.9631,
+          "MsPerCall": 2.7240775,
+          "AllocatedBytesPerCall": 1294013.8,
+          "Calls": 40,
+          "OutputBytes": 71846
+        },
+        {
+          "Round": 9,
+          "Version": "Candidate",
+          "ElapsedMs": 452.4555,
+          "MsPerCall": 11.311387499999999,
+          "AllocatedBytesPerCall": 2623990.4,
+          "Calls": 40,
+          "OutputBytes": 71846
+        },
+        {
+          "Round": 9,
+          "Version": "Candidate",
+          "ElapsedMs": 450.2024,
+          "MsPerCall": 11.25506,
+          "AllocatedBytesPerCall": 2624007.6,
+          "Calls": 40,
+          "OutputBytes": 71846
+        },
+        {
+          "Round": 9,
+          "Version": "Baseline",
+          "ElapsedMs": 124.6239,
+          "MsPerCall": 3.1155975000000002,
+          "AllocatedBytesPerCall": 1294217.6,
+          "Calls": 40,
+          "OutputBytes": 71846
+        },
+        {
+          "Round": 10,
+          "Version": "Candidate",
+          "ElapsedMs": 455.7576,
+          "MsPerCall": 11.39394,
+          "AllocatedBytesPerCall": 2623657,
+          "Calls": 40,
+          "OutputBytes": 71846
+        },
+        {
+          "Round": 10,
+          "Version": "Baseline",
+          "ElapsedMs": 110.9637,
+          "MsPerCall": 2.7740925,
+          "AllocatedBytesPerCall": 1294013.8,
+          "Calls": 40,
+          "OutputBytes": 71846
+        },
+        {
+          "Round": 10,
+          "Version": "Baseline",
+          "ElapsedMs": 119.3066,
+          "MsPerCall": 2.982665,
+          "AllocatedBytesPerCall": 1294217.6,
+          "Calls": 40,
+          "OutputBytes": 71846
+        },
+        {
+          "Round": 10,
+          "Version": "Candidate",
+          "ElapsedMs": 458.746,
+          "MsPerCall": 11.46865,
+          "AllocatedBytesPerCall": 2623873.8,
+          "Calls": 40,
+          "OutputBytes": 71846
+        }
+      ]
+    }
+  ],
+  "Conclusion": "Isolated per-strip timing and current-thread allocation only; exact output is required. This does not establish whole-image, worker-contention, live game, terminal display, or 35-tic/60-display performance."
+}

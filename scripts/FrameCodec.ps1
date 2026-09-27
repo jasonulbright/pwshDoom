@@ -48,8 +48,7 @@ function New-CodecContext {
             $topPrefixes[$i]="$esc[38;2;$($rgb[0]);$($rgb[1]);$($rgb[2]);48;2;"
             $bottomSuffixes[$i]="$($rgb[0]);$($rgb[1]);$($rgb[2])m$([char]0x2580)"
         }
-        return @{Palette=$Palette;Count=$count;Cells=[string[]]::new($count*$count);TopPrefixes=$topPrefixes;BottomSuffixes=$bottomSuffixes;
-            StripBuilder=[Text.StringBuilder]::new()}
+        return @{Palette=$Palette;Count=$count;Cells=[string[]]::new($count*$count);TopPrefixes=$topPrefixes;BottomSuffixes=$bottomSuffixes}
     }
     $pairs = [string[]]::new($count * $count)
     $esc = [char]27
@@ -66,8 +65,7 @@ function New-CodecContext {
     }
     $cells = [string[]]::new($pairs.Length)
     for ($i=0; $i -lt $cells.Length; $i++) { $cells[$i] = $pairs[$i] + [char]0x2580 }
-    return @{ Palette = $Palette; Count = $count; Pairs = $pairs; Cells = $cells; Definitions = $defs.ToString();
-        StripBuilder=[Text.StringBuilder]::new() }
+    return @{ Palette = $Palette; Count = $count; Pairs = $pairs; Cells = $cells; Definitions = $defs.ToString() }
 }
 
 function ConvertTo-AnsiFastFrame {

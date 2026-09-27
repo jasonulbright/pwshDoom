@@ -48,34 +48,47 @@ account's permissions.
 
 At 60 seconds in each original movie, the reviewed frames show centered Classic gameplay with the HUD and no visible external occlusion. Different startup durations mean those samples are not the same game state and are not pixel-equivalence evidence. The existing large margins and approximately 1600×900 physical image/aspect issue remain. Raw movies, PCM and extracted review PNGs remain in ignored `local/recordings`; portable receipts are backed up in Git.
 
-## Reuse ANSI strip assembly buffers (2026-09-27)
+## Reject StringBuilder ANSI strip assembly (2026-09-27)
 
-Both Classic truecolor strip encoders previously allocated a string array for
-every worker strip on every image, then concatenated it to a string before
-UTF-8 conversion. The 16-worker 320×200 layout creates 100 character rows per
-strip; for each 20-column strip the removed array held 2,100 string references.
-New-CodecContext now owns a StringBuilder, and ConvertTo-AnsiStrip and
-ConvertTo-AnsiColorStateStrip clear and reuse it. Each renderer process has
-its own codec context. SGR selection, glyphs, cursor placement, indexed pixels,
-and output bytes are produced by the same PowerShell loops; UTF-8 conversion
-still returns an owned byte array to the process transport.
+The encoder change at `1fcda3d` replaced the per-strip string-reference array
+and `String.Concat` with repeated PowerShell calls to `StringBuilder.Append`.
+Its byte output was exactly unchanged, but the removed-array estimate did not
+predict total PowerShell cost. A pinned-source comparison loads the original
+functions from `37391e3` and the StringBuilder functions from `1fcda3d`, warms
+both, then measures ten alternating-order rounds of forty calls per block on
+one thread. Each call encodes one 20-column by 200-pixel strip from the same
+320×200, 256-color synthetic image. Context setup and caches are outside the
+timer. The two workloads are a coherent tiled pattern and a high-entropy
+pattern.
 
-The source-derived reference-slot estimate is 268,800 bytes per 320×200 image
-across sixteen strips on a 64-bit process, excluding array headers, cursor
-strings, the concatenated output string, and the returned byte arrays. It is
-an allocation estimate from the former array-length formula, not a measured
-GC or frame-rate result.
+| Encoder | Pattern | Array + Concat median ms/call | StringBuilder median ms/call | Array allocation bytes/call | StringBuilder allocation bytes/call |
+| --- | --- | ---: | ---: | ---: | ---: |
+| Pairs | Coherent | 0.62 | 5.44 | 780,895 | 1,429,055 |
+| ColorState | Coherent | 0.58 | 5.44 | 694,742 | 1,339,806 |
+| Pairs | High entropy | 2.61 | 11.53 | 1,294,386 | 2,625,615 |
+| ColorState | High entropy | 2.87 | 11.33 | 1,294,014 | 2,623,893 |
 
-The strict color test passes all 13 cases, including six actual E1M1/E1M3
-raster views; its independent decoder verifies every output RGB pixel, odd
-dimensions, uneven strips, offsets, and foreground/background-only
-transitions. Classic Pairs and ColorState each pass exact serial/16-process
-partition output across five views (320,000 pixels and 80 encoded strips per
-mode). These establish encoder correctness and worker parity, not a measured
-allocation or throughput improvement. The [receipt](../results/ansi-strip-buffer-reuse-summary-20260927.json)
-links the raw reports and source hashes.
+All four outputs match byte-for-byte. The StringBuilder path takes about 4.0–9.3
+times as long per strip and allocates 83–103% more on the measured thread.
+The measured arrays themselves were only 16.8 KB of reference payload per
+worker call under the 64-bit assumption; the larger PowerShell-level cost
+overwhelms that saving. The exact reason for the extra cost is not isolated,
+so this result rejects the change without attributing the regression to one
+specific runtime operation.
 
-The first strict-test invocation overlapped another existing test that rebuilds
-local/engine-bundle.ps1; the shared file was busy. The attempt is retained in
-the receipt, and the strict test passed when rerun sequentially. This was a
-test-build artifact collision, not a game or encoder failure.
+The array-and-concatenate implementation is restored. After the restoration,
+the independent truecolor decoder passes 13 strict cases (including six real
+E1M1/E1M3 frames), synthetic ANSI strip round-trips pass 24 cases, and Pairs
+and ColorState each match serial pixels and encoded bytes across five views
+with sixteen uneven render processes: 320,000 pixels per mode and zero
+differences. These are correctness checks. This isolated benchmark is not a
+whole-image, live-game, worker-contention, terminal-display, or 35-tic/60-display
+measurement.
+
+The [pinned measurement script](../scripts/Measure-AnsiStripReuse.ps1) can
+recreate the comparison directly from those commits. Its [raw receipt](../results/ansi-strip-reuse-pinned-measurement-20260927.json)
+retains all timed blocks and allocation counts. Post-restoration correctness
+receipts: [strict colors](../results/ansi-color-state-array-rollback-verified-20260927.json),
+[Pairs workers](../results/render-partitions-pairs-array-rollback-20260927.json),
+[ColorState workers](../results/render-partitions-colorstate-array-rollback-20260927.json),
+and the synthetic [strip round-trips](../results/ansi-strip-array-rollback-20260927.json).
