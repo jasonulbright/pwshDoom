@@ -2858,3 +2858,18 @@ are pinned in
 [`preview3-current-candidate-validation-20260927.json`](../results/preview3-current-candidate-validation-20260927.json).
 The candidate remains local and unpublished pending Jason's one complete
 Episode 1 human playthrough and the remaining scoped release checks.
+
+## 2026-09-27 — Reject a stale E1M3 replay for current-source profiling
+
+An attempted 1,200-command simulation profile used
+[`e1m3-qualified-replay.json`](../results/e1m3-qualified-replay.json), whose
+recorded source fingerprint is
+`C7AE7AD6A2B8A3FD360468974D32D8CF2A24750F1F5C937A03B1657E9FE982C8`; the
+current gameplay fingerprint is `D627BDF3D3605093095D9185EA564487ECE49A1FE2186134F2257191AB631682`.
+The replay reached all 1,200 requested commands without a crash, but selected
+checkpoints diverged at tics 350, 700, and 1050. This source-mismatched replay
+cannot serve as a current performance comparison, and no engine defect was
+established. Its raw [failed profile](../results/simulation-current-actors-profile-20260927.json)
+is retained for audit (SHA-256
+`90FE4EF1B1BDA284F60413C36CFA53304D79A40DB0D6C28C1B079144619686D9`); its
+timings are not used. Do not retry this stale input as a route or profile.
