@@ -33,6 +33,8 @@ pwsh -NoProfile -File .\Start-Doom.ps1 `
 
 Use 64-bit PowerShell 7.4 or later and Windows Terminal. This exact source was checked with PowerShell 7.6.5. The required Steam IWAD is `DOOM.WAD`, SHA-256 `6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F`; the prepared local Episode 1 music catalog has SHA-256 `0E9C9542C75F4D5E2D7FC71E42FAFBB58F94321C3B8A49BA0C9AC5A93752EE58`. The IWAD and audio catalog are not included in Git. At preflight, `%LOCALAPPDATA%\pwshDoom\settings.json` was absent, so the game's defaults apply. The [preflight receipt](../results/episode1-launch-preflight-current-candidate-20260927.json) records the detected paths and hashes.
 
+The runtime-specific startup failure reported under PowerShell 7.6.6 was fixed. The pinned build descends from that fix; a sound-enabled 7.6.6 startup reached 69 tics and closed the audio device cleanly in a two-second integration run. This verifies catalog/reader startup on that runtime, not full-session music continuity or listener quality ([receipt](../results/episode1-startup-runtime-compat-20260927.json)).
+
 On a cold start, allow up to 60 seconds for simulation and music workers to initialize. Keep the default 16 renderer workers. A prior measurement used about 4 GB combined worker memory. The Classic view needs at least 320 columns by 100 rows; the 5-point font and maximized window are set to help fit it. If the viewport is short, enlarge the window or press Ctrl+- to reduce the font. Blank space around the centered image in a larger terminal is expected.
 
 Both output paths must be unused before launch. They are new (`r4`) names. After preserving the two generated files under `local/`, return to the development branch with `git switch codex/feasibility-study`.
