@@ -2782,3 +2782,21 @@ The [portable receipt](../results/preview3-package-candidate-validation-20260927
 and ignored raw report pin these checks. This is a local, unpublished candidate;
 the complete human Episode 1 playthrough and broader Ultimate Doom release
 gates remain open.
+
+## 2026-09-27 — Cross-check the E1M1 renderer reports against GEBB
+
+Visually checked the local *Game Engine Black Book: DOOM* pages 197, 208, 214,
+240, and 242 against the current PowerShell renderer. The book describes
+near-to-far BSP wall traversal, column-specific portal occlusion, planes before
+masked sprites, and draw-segment silhouette clipping for actors. The
+`FastRenderer` uses per-column wall-open bounds and silhouette records, draws
+plane fills before world actors, and leaves plane fills out of the actor depth
+buffer; the adopted `ThreeDRenderer` also draws its visplanes before masked
+sprites. This corroborates the existing same-state classification of the
+raised-floor E1M1 Techpillars as classic sprite/plane overlap, not a newly found
+defect. The independent pre-placed `POL5` Gibs sighting near blue armor remains
+unreproduced at Jason's exact view, so no clipping change is justified by this
+comparison. The visual/source crosswalk and limits are in
+[`reference-audit.md`](reference-audit.md) and
+[`rendering-fidelity.md`](rendering-fidelity.md); the local reading PDF remains
+excluded from packages and ordinary source commits.
