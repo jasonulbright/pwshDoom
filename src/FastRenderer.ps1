@@ -129,9 +129,11 @@ function New-FastRenderContext {
     $ctx=@{Content=$Content;World=$World;Lighting=(New-FastLightingTables);Pixels=[byte[]]::new(64000);Depth=[double[]]::new(64000);
         TopClip=[int[]]::new(320);BottomClip=[int[]]::new(320);Planes=[int[]]::new(53760);Patches=@{};Textures=@{};Hud=@{};
         Stack=[int[]]::new($map.Nodes.Length*2+4);SkyColumns=[int[]]::new(320);RaySin=[int[]]::new(320);RayCos=[int[]]::new(320);
+        SpriteClipWalls=[object[]]::new(320);SpriteClipCounts=[int[]]::new(320);ActorClipTop=[int[]]::new(320);ActorClipBottom=[int[]]::new(320);
         MaskedColumns=[Collections.Generic.List[hashtable]]::new();Segments=[object[]]::new($map.Segs.Length);
         Nodes=[object[]]::new($map.Nodes.Length);Subsectors=$map.Subsectors;
         Flats=$Content.Flats.Flats;Colors=$Content.ColorMap.Data;SkyFlat=$Content.Flats.SkyFlatNumber;Sectors=$map.Sectors;Sides=$map.Sides;SpriteAtlas=[object[]]::new($Content.Sprites.spriteDefs.Length)}
+    for([int]$x=0;$x -lt 320;$x++){$ctx.SpriteClipWalls[$x]=[Collections.Generic.List[object[]]]::new()}
     $sectorIndex=[Collections.Generic.Dictionary[object,int]]::new()
     for($i=0;$i -lt $map.Sectors.Length;$i++){$sectorIndex[$map.Sectors[$i]]=$i}
     $sideIndex=[Collections.Generic.Dictionary[object,int]]::new()
@@ -330,11 +332,15 @@ function Invoke-FastRender {
     [int[]]$planes=$Context.Planes
     if(-not $Context.ContainsKey('SpriteClipWalls')){
         [object[]]$spriteClipWalls=[object[]]::new(320)
-        for([int]$x=0;$x -lt 320;$x++){$spriteClipWalls[$x]=[Collections.Generic.List[object]]::new()}
+        for([int]$x=0;$x -lt 320;$x++){$spriteClipWalls[$x]=[Collections.Generic.List[object[]]]::new()}
         $Context.SpriteClipWalls=$spriteClipWalls
+        $Context.SpriteClipCounts=[int[]]::new(320)
+        $Context.ActorClipTop=[int[]]::new(320)
+        $Context.ActorClipBottom=[int[]]::new(320)
     }
     [object[]]$spriteClipWalls=$Context.SpriteClipWalls
-    for([int]$x=$FirstColumn;$x -lt $EndColumn;$x++){$spriteClipWalls[$x].Clear()}
+    [int[]]$spriteClipCounts=$Context.SpriteClipCounts
+    for([int]$x=$FirstColumn;$x -lt $EndColumn;$x++){$spriteClipCounts[$x]=0}
     [int[]]$planeSpanBoundaries=[int[]]::new(0)
     if($Context.ContainsKey('PlaneSpanBoundaries')){$planeSpanBoundaries=[int[]]$Context.PlaneSpanBoundaries}
     [int[]]$topClip=$Context.TopClip;[int[]]$bottomClip=$Context.BottomClip
@@ -500,9 +506,15 @@ function Invoke-FastRender {
                 }
                 $topClip[$x]=$nextTop;$bottomClip[$x]=$nextBottom
                 if($lowerSilhouette -or $upperSilhouette){
-                    $spriteClipWalls[$x].Add(@{Distance=$distance;Top=$nextTop;Bottom=$nextBottom;
-                        LowerSilhouette=$lowerSilhouette;LowerSilHeight=$lowerSilHeight;
-                        UpperSilhouette=$upperSilhouette;UpperSilHeight=$upperSilHeight})
+                    [int]$recordIndex=$spriteClipCounts[$x];$wallClips=$spriteClipWalls[$x]
+                    if($recordIndex -lt $wallClips.Count){$wallClip=$wallClips[$recordIndex]}
+                    else{$wallClip=[object[]]::new(6);$wallClips.Add($wallClip)}
+                    [int]$silhouetteFlags=0
+                    if($lowerSilhouette){$silhouetteFlags=$silhouetteFlags -bor 1}
+                    if($upperSilhouette){$silhouetteFlags=$silhouetteFlags -bor 2}
+                    $wallClip[0]=$distance;$wallClip[1]=$nextTop;$wallClip[2]=$nextBottom;$wallClip[3]=$silhouetteFlags
+                    $wallClip[4]=$lowerSilHeight;$wallClip[5]=$upperSilHeight
+                    $spriteClipCounts[$x]=$recordIndex+1
                 }
                 if($nextTop -gt $nextBottom){$open--}
             }
@@ -630,18 +642,21 @@ function Invoke-FastRender {
                 [double]$left=$leftFracData/65536.0;[double]$top=$topData/65536.0
                 [double]$actorTopZ=$actorZData/65536.0+$patch.Top
                 [double]$actorBottomZ=$actorTopZ-$patch.Height
-                [int[]]$actorClipTop=[int[]]::new(320);[int[]]$actorClipBottom=[int[]]::new(320)
-                [Array]::Fill($actorClipBottom,167)
+                [int[]]$actorClipTop=$Context.ActorClipTop;[int[]]$actorClipBottom=$Context.ActorClipBottom
                 [int]$clipFirst=[Math]::Max($FirstColumn,$firstSpriteColumn)
                 [int]$clipEnd=[Math]::Min($EndColumn,$lastSpriteColumn+1)
                 for([int]$x=$clipFirst;$x -lt $clipEnd;$x++){
-                    foreach($wallClip in $spriteClipWalls[$x]){
-                        if($wallClip.Distance -ge $distance){continue}
-                        if($wallClip.LowerSilhouette -and $actorBottomZ -lt $wallClip.LowerSilHeight){
-                            $actorClipBottom[$x]=[Math]::Min($actorClipBottom[$x],$wallClip.Bottom)
+                    $actorClipTop[$x]=0;$actorClipBottom[$x]=167
+                    [int]$clipCount=$spriteClipCounts[$x];$wallClips=$spriteClipWalls[$x]
+                    for([int]$clipIndex=0;$clipIndex -lt $clipCount;$clipIndex++){
+                        $wallClip=$wallClips[$clipIndex]
+                        if([double]$wallClip[0] -ge $distance){continue}
+                        [int]$silhouetteFlags=$wallClip[3]
+                        if(($silhouetteFlags -band 1) -ne 0 -and $actorBottomZ -lt [double]$wallClip[4]){
+                            $actorClipBottom[$x]=[Math]::Min($actorClipBottom[$x],[int]$wallClip[2])
                         }
-                        if($wallClip.UpperSilhouette -and $actorTopZ -gt $wallClip.UpperSilHeight){
-                            $actorClipTop[$x]=[Math]::Max($actorClipTop[$x],$wallClip.Top+1)
+                        if(($silhouetteFlags -band 2) -ne 0 -and $actorTopZ -gt [double]$wallClip[5]){
+                            $actorClipTop[$x]=[Math]::Max($actorClipTop[$x],[int]$wallClip[1]+1)
                         }
                     }
                 }

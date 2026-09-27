@@ -14,12 +14,14 @@ $wall=[int[]]::new(64*128);[Array]::Fill($wall,100)
 $flat=[byte[]]::new(4096);[Array]::Fill($flat,[byte]55)
 $colors=@(for($i=0;$i -lt 33;$i++){,[byte[]](0..255)})
 $ctx=@{Pixels=[byte[]]::new(64000);Depth=[double[]]::new(64000);Planes=[int[]]::new(53760);TopClip=[int[]]::new(320);BottomClip=[int[]]::new(320);Stack=[int[]]::new(4);Nodes=@();
+    SpriteClipWalls=[object[]]::new(320);SpriteClipCounts=[int[]]::new(320);ActorClipTop=[int[]]::new(320);ActorClipBottom=[int[]]::new(320);
     Subsectors=@{32767=@{FirstSeg=0;SegCount=2}};Lighting=(New-FastLightingTables);Colors=$colors;SkyFlat=1;Sky=@{Data=[int[]]@(0);Width=1;Height=1};
     Sectors=@(@{FloorHeight=0;CeilingHeight=128;FloorFlat=0;CeilingFlat=0;LightLevel=255});Flats=@(@{Data=$flat});
     Sides=@(@{MiddleTexture=1;TopTexture=0;BottomTexture=0;TextureOffset=0;RowOffset=0},@{MiddleTexture=2;TopTexture=0;BottomTexture=0;TextureOffset=0;RowOffset=0});
     Textures=@{1=@{Width=64;Height=128;Data=$mask};2=@{Width=64;Height=128;Data=$wall}};
     Segments=@(@{AX=64;AY=32;BX=64;BY=-32;Length=64;Offset=0;Side=0;Front=0;Back=0;Flags=0;Sector=0},@{AX=128;AY=128;BX=128;BY=-128;Length=256;Offset=0;Side=1;Front=0;Back=-1;Flags=0;Sector=0});
     World=@{Actors=@();ConsolePlayer=@{Mobj=@{X=0;Y=0;Angle=0};ViewZ=41;ExtraLight=0;FixedColorMap=0}}}
+for([int]$x=0;$x -lt 320;$x++){$ctx.SpriteClipWalls[$x]=[Collections.Generic.List[object[]]]::new()}
 $planeTables=Get-FastPlaneTables
 $ctx.PlaneColumnAngles=$planeTables.ColumnAngles;$ctx.PlaneDistanceScales=$planeTables.DistanceScales
 $ctx.PlaneRowSlopes=$planeTables.RowSlopes;$ctx.PlaneFineSine=$planeTables.FineSine

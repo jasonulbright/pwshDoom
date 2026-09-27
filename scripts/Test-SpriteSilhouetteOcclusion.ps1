@@ -16,6 +16,9 @@ $bundle=& "$PSScriptRoot/Build-EngineBundle.ps1"; . $bundle
 $content=$null
 $failure=$null
 $affectedPixels=0
+$repeatFrameDifferences=0
+$clipRecordReused=$false
+$clipBuffersReused=$false
 $camera=@{X=355.806793212891;Y=-3259.86231994629;ViewZ=40.6085205078125;AngleDegrees=184.921875}
 $target=@{Type='Misc2';Sprite='BON1';X=144.0;Y=-3136.0;Z=-8.0}
 try{
@@ -43,6 +46,18 @@ try{
     Set-GameRenderSnapshot $context $isolated;Invoke-FastRender $context
     for([int]$i=0;$i -lt 53760;$i++){if($context.Pixels[$i] -ne $backgroundPixels[$i]){$affectedPixels++}}
     if($affectedPixels -ne 0){throw "Occluded $($target.Sprite) actor still changes $affectedPixels scene pixels."}
+    [byte[]]$firstPixels=$context.Pixels.Clone()
+    [int]$activeClipColumn=-1
+    for([int]$x=0;$x -lt 320;$x++){if($context.SpriteClipCounts[$x] -gt 0){$activeClipColumn=$x;break}}
+    if($activeClipColumn -lt 0){throw 'The target view produced no reusable sprite clip records.'}
+    $firstClipRecord=$context.SpriteClipWalls[$activeClipColumn][0]
+    $clipTopBuffer=$context.ActorClipTop;$clipBottomBuffer=$context.ActorClipBottom
+    Invoke-FastRender $context
+    for([int]$i=0;$i -lt $firstPixels.Length;$i++){if($context.Pixels[$i] -ne $firstPixels[$i]){$repeatFrameDifferences++}}
+    $clipRecordReused=[object]::ReferenceEquals($firstClipRecord,$context.SpriteClipWalls[$activeClipColumn][0])
+    $clipBuffersReused=[object]::ReferenceEquals($clipTopBuffer,$context.ActorClipTop) -and [object]::ReferenceEquals($clipBottomBuffer,$context.ActorClipBottom)
+    if($repeatFrameDifferences -ne 0){throw "A repeated identical render differs by $repeatFrameDifferences pixels."}
+    if(-not $clipRecordReused -or -not $clipBuffersReused){throw 'The repeated render did not reuse its clip records and actor buffers.'}
 }catch{
     $failure=$_.ToString()+"`n"+$_.ScriptStackTrace
     throw
@@ -56,12 +71,16 @@ try{
         OccludedActor=$target
         ChangedScenePixels=$affectedPixels
         ExpectedChangedScenePixels=0
+        RepeatedFrameDifferences=$repeatFrameDifferences
+        ExpectedRepeatedFrameDifferences=0
+        ClipRecordReused=$clipRecordReused
+        ActorClipBuffersReused=$clipBuffersReused
         Passed=($null -eq $failure -and $affectedPixels -eq 0)
         WadSha256=(Get-FileHash -LiteralPath $Wad).Hash
         BundleSha256=(Get-FileHash -LiteralPath $bundle).Hash
         Sources=@(@{Path='src/FastRenderer.ps1';Sha256=(Get-FileHash -LiteralPath $rendererPath).Hash},@{Path='src/RenderFuzz.ps1';Sha256=(Get-FileHash -LiteralPath $fuzzPath).Hash})
         Error=$failure
-        Meaning='At the recorded E1M1 view, an actor behind a nearer lower-wall silhouette must not paint over the upper floor. The no-actor frame is the local pixel baseline. Reference-renderer parity is separately measured by Compare-ActorOcclusion.ps1.'
+        Meaning='At the recorded E1M1 view, an actor behind a nearer lower-wall silhouette must not paint over the upper floor. The no-actor frame is the local pixel baseline. A repeated same-state render verifies stable pixels and reuse of per-context wall records and actor clip buffers. Reference-renderer parity is separately measured by Compare-ActorOcclusion.ps1.'
     }|ConvertTo-Json -Depth 6|Set-Content -LiteralPath $Output
     if($content){$content.Dispose()}
 }
