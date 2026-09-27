@@ -178,9 +178,18 @@ class VisibilityCheck {
             return $false
         }
 
-        $this.SightZStart = $looker.Z + $looker.Height - ($looker.Height -shr 2)
-        $this.TopSlope = ($target.Z + $target.Height) - $this.SightZStart
-        $this.BottomSlope = $target.Z - $this.SightZStart
+        # Compute the three fixed-point sight bounds directly, preserving each
+        # operator's signed 32-bit wrap without allocating intermediate Fixed
+        # wrappers on this per-monster sight-check path.
+        [int]$heightQuarter = $looker.Height.Data -shr 2
+        [int]$eyeOffset = [Fixed]::ToInt32Unchecked([long]$looker.Height.Data - [long]$heightQuarter)
+        [int]$sightZData = [Fixed]::ToInt32Unchecked([long]$looker.Z.Data + [long]$eyeOffset)
+        [int]$targetTopData = [Fixed]::ToInt32Unchecked([long]$target.Z.Data + [long]$target.Height.Data)
+        [int]$topSlopeData = [Fixed]::ToInt32Unchecked([long]$targetTopData - [long]$sightZData)
+        [int]$bottomSlopeData = [Fixed]::ToInt32Unchecked([long]$target.Z.Data - [long]$sightZData)
+        $this.SightZStart = [Fixed]::new($sightZData)
+        $this.TopSlope = [Fixed]::new($topSlopeData)
+        $this.BottomSlope = [Fixed]::new($bottomSlopeData)
 
         $this.Trace.X = $looker.X
         $this.Trace.Y = $looker.Y

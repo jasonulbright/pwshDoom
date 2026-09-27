@@ -1,0 +1,36 @@
+{
+  "Format": "pwshDoom.SimulationStageProfileSummary",
+  "CreatedUtc": "2026-09-27T06:49:25.8938459Z",
+  "Candidate": {
+    "ActorProfile": true,
+    "HarnessSha256": "6CE52137B6F978E17CD83993B84D31A2D27467510C08E9DA68AE8180EE612F0C",
+    "PowerShell": "7.6.5",
+    "Commands": 1200,
+    "ThinkersRunMeanMs": 10.028629916666668,
+    "ReplayMatched": true,
+    "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+    "Source": "CheckSight integer bounds candidate",
+    "GameUpdateMedianMs": 11.32465,
+    "ThinkersRunP95Ms": 19.0872,
+    "GameUpdateP95Ms": 25.3318,
+    "ThinkersRunMedianMs": 9.263349999999999,
+    "ExecutedBundleSha256": "A9F7C1D87E74D3CD278C09B88B7C55E8B56E0FB8B3B371345EB560D71E232DD7",
+    "ReplaySha256": "A9E3E3E48DF5A483D904A412E3AF7A872ED5B5862713A331DC3310007AA09970",
+    "GameUpdateMeanMs": 12.973762833333335,
+    "Checkpoints": 4
+  },
+  "Reference": {
+    "ReplaySha256": "A9E3E3E48DF5A483D904A412E3AF7A872ED5B5862713A331DC3310007AA09970",
+    "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+    "ExecutedBundleSha256": "59DA3EF6B57AA1104E15CD41315AD2879445FF217BF847AC2E214FCBA2CCD22C",
+    "ReplayMatched": true,
+    "Source": "Intercept-only candidate",
+    "GameUpdateMeanMs": 13.424054166666657,
+    "ThinkersRunMeanMs": 10.400379166666676
+  },
+  "RawReport": {
+    "Sha256": "AD3BB124970921C3DDDE4FBA6583668CD2E1A87437738B2993842F2CA7514EAF",
+    "Path": "local\\episode1-render-guard-raw-20260927\\simulation-stages-sight-bounds-candidate-20260927.json"
+  },
+  "Meaning": "Single unpaired 1,200-command actor-profile runs with profiling overhead; selected checkpoints match in both. Summary is not evidence of a repeatable speedup, loaded pacing, 35 simulation tics/sec, or 60 displayed updates/sec."
+}

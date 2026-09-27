@@ -395,7 +395,12 @@ function Invoke-FastRender {
                 }
                 [int]$portalT=[Math]::Ceiling(84-160*($bc-$cz)/$distance-0.5)
                 [int]$portalB=[Math]::Floor(84-160*($bf-$cz)/$distance-0.5)
-                [int]$wallLight=$wallLightTable[[Math]::Min(47,[int][Math]::Floor(2560.0/$distance))]
+                [int]$wallLightIndex=47
+                if($distance -gt 0){
+                    [double]$wallLightScale=2560.0/$distance
+                    if($wallLightScale -ge 0 -and $wallLightScale -lt 47){$wallLightIndex=[int][Math]::Floor($wallLightScale)}
+                }
+                [int]$wallLight=$wallLightTable[$wallLightIndex]
                 if($player.FixedColorMap -gt 0){$wallLight=$player.FixedColorMap}
                 [byte[]]$wallColors=$Context.Colors[$wallLight]
                 for([int]$band=0;$band -lt 3;$band++) {
@@ -473,7 +478,10 @@ function Invoke-FastRender {
             if(($id-1) -band 1){$heightData=[int][Math]::Truncate(65536.0*$sector.FloorHeight);$flat=[byte[]]$Context.Flats[$sector.FloorFlat].Data}
             else{$heightData=[int][Math]::Truncate(65536.0*$sector.CeilingHeight);$flat=[byte[]]$Context.Flats[$sector.CeilingFlat].Data}
             [long]$heightDelta=[long]$heightData-[long]$viewZData;if($heightDelta -lt 0){$heightDelta=-$heightDelta}
-            [int]$distanceData=($heightDelta*[long]$Context.PlaneRowSlopes[$y]) -shr 16
+            [long]$distanceDataWide=([long]$heightDelta*[long]$Context.PlaneRowSlopes[$y]) -shr 16
+            $distanceDataWide=$distanceDataWide -band 0xFFFFFFFFL
+            if($distanceDataWide -ge 0x80000000L){$distanceDataWide-=0x100000000L}
+            [int]$distanceData=$distanceDataWide
             [int]$stepX=([long]$distanceData*[long]$planeBaseX) -shr 16
             [int]$stepY=([long]$distanceData*[long]$planeBaseY) -shr 16
             [int]$light=$Context.Lighting.Distance[[Math]::Clamp(($sector.LightLevel -shr 4)+$player.ExtraLight,0,15)][[Math]::Clamp(($distanceData -shr 20),0,127)]
