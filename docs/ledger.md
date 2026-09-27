@@ -2177,9 +2177,9 @@ recording was run.
 
 `Test-MusicInventory.ps1` parsed all 32 `D_` lumps in the installed Ultimate
 Doom IWAD and checked the scheduled event sample positions against an
-independent tick-times-315 projection. The IWAD maps reference 27 unique music
-lumps across 36 episode/map slots; the prepared Episode 1 catalog currently
-covers nine of those 27 unique map scores. Episode 4 reuses tracks from the
+independent tick-times-315 projection. The IWAD maps reference 27 distinct
+music-lump names across 36 episode/map slots; the prepared Episode 1 catalog
+covers nine of those names and nine byte-distinct payloads. Episode 4 reuses tracks from the
 first three episodes. Three score-lump pairs are byte-identical: E1M7/E2M5,
 E2M9/E3M1, and E1M8/E3M4. Only D_INTRO has a finite-score qualification;
 D_INTROA and D_BUNNY remain unqualified. These are inventory and scheduling
@@ -2687,6 +2687,40 @@ listener review, full-map audio run or campaign continuity claim. D_E2M4's
 one-track catalog and period payload stay local. The [preparation](../results/music-preparation-e2m4-20260927.json),
 [reader/mixer qualification](../results/music-track-qualification-d-e2m4-20260927.json),
 and [portable host receipt](../results/music-host-e2m4-integration-20260927.json)
-pin the IWAD and source state. Four Episode 2 score loops are now qualified;
-14 other unique Episode 2/3 map scores and two finite title/finale scores
-remain open.
+pin the IWAD and source state. Four Episode 2 score loops were qualified at
+this checkpoint; 14 other map-track names remained. The later byte audit
+shows those names represent 11 unqualified score payloads because some tracks
+duplicate Episode 1 content and D_E2M9/D_E3M1 duplicate each other. Two finite
+title/finale scores remain open.
+
+## 2026-09-27 — Qualify D_E2M5 and check actual host selection
+
+Prepared the next uncovered Episode 2 map-track name with the default independent
+three-period qualification mode. D_E2M5 has a one-cycle period of 6,652,800
+frames (150.857 seconds); three continuous periods cover 19,958,400 frames
+(452.571 audio seconds). The startup state differs from the recurring state.
+Periods two and three share complete normalized state hash
+`363A9C7E1456AB895DFC7286A4199908BA9BFF63685C02475EE54EC9A38792D9` with 66
+voices and identical float64 output hash
+`6E387C31C06032BE535E6E231B13CEA8B827EDAF185487D9F4FE84D9DFE59E23`. The
+independent eight-second opening PCM matches through the actual loop reader and
+game mixer; all six long-track reader/mixer checks pass, including the exact
+loop seam. Rendering, writing and snapshotting took 1,673.010 seconds; total
+preparation took 1,692.499 seconds under PowerShell 7.6.5. This is offline
+preparation cost, not a live audio deadline or performance result.
+
+A two-second headless E2M5 host run selected D_E2M5 at frame zero and submitted
+69 packets (86,940 frames); all frames returned, with zero unconsumed packets
+and no worker, audio or cleanup error. The audio report records one rebuffer
+after packet 68 at 22.884 seconds on the audio-worker clock as the run ended.
+This short run is not sustained
+queue-timing evidence, a listener review, or a full-map/campaign audio check.
+D_E2M5's one-track catalog and period payload stay local. The [preparation](../results/music-preparation-e2m5-20260927.json),
+[reader/mixer qualification](../results/music-track-qualification-d-e2m5-20260927.json),
+and [portable host receipt](../results/music-host-e2m5-integration-20260927.json)
+pin the IWAD and source state. Five Episode 2 map-track names now have
+individual loop qualifications. D_E2M1–D_E2M4 add four byte-distinct score
+payloads, while D_E2M5 is byte-identical to D_E1M7; its qualification verifies
+separate map-lump and catalog selection. Thirteen other Episode 2/3 map-track
+names remain, representing eleven score payloads without a qualification.
+Two finite title/finale scores remain open.

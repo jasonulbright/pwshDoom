@@ -21,7 +21,7 @@
 ### Qualification
 
 - All 36 Ultimate Doom maps pass load/simulation/render smoke checks. Ordinary-input normal exits are independently verified for E1M1–E1M4; the complete E1 human playthrough is pending.
-- Eleven Episode 1 loops are prepared locally. Four additional Episode 2 map scores have individual loop qualifications, with a short host-selection check for D_E2M4. Full-campaign playback, listener review and queue timing under sustained renderer load remain open.
+- Eleven Episode 1 loops are prepared locally. Five Episode 2 map-track names have individual loop qualifications; D_E2M1–D_E2M4 add four byte-distinct score payloads, while D_E2M5 is byte-identical to D_E1M7. Short host-selection checks cover D_E2M4 and D_E2M5; the E2M5 run recorded a rebuffer after packet 68 at 22.884 seconds on the audio-worker clock as it ended. Full-campaign playback, listener review and queue timing under sustained renderer load remain open.
 
 ## 0.1.0-preview.2
 

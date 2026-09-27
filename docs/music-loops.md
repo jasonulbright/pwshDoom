@@ -187,6 +187,40 @@ receipts: [three-period preparation](../results/music-preparation-e2m4-20260927.
 [six-check reader/mixer qualification](../results/music-track-qualification-d-e2m4-20260927.json),
 and [host track-selection evidence](../results/music-host-e2m4-integration-20260927.json).
 
+### D_E2M5 independent output qualification and host selection (September 27)
+
+D_E2M5 qualifies with a one-cycle period of 6,652,800 frames (150.857
+seconds). The default three-period independent-output mode rendered 19,958,400
+frames (452.571 audio seconds) and verified the separate eight-second opening
+reference through the actual reader and game mixer. Periods two and three have
+identical float64 output SHA-256
+`6E387C31C06032BE535E6E231B13CEA8B827EDAF185487D9F4FE84D9DFE59E23`; their
+complete normalized boundary state has 66 voices and SHA-256
+`363A9C7E1456AB895DFC7286A4199908BA9BFF63685C02475EE54EC9A38792D9`. The
+startup period differs before the score reaches its recurring state. Six
+reader/mixer checks pass, including the exact recurrent-period seam. Rendering,
+writing and snapshotting took 1,673.010 seconds; total preparation took
+1,692.499 seconds. This is offline qualification cost, not playback cost or a
+performance claim.
+
+The IWAD's D_E2M5 lump is byte-identical to D_E1M7 (8,591 bytes; MUS SHA-256
+`F369257FB8BF77288E2AB3FD345739F06F01D1D42A836BE8A7509A04A0C51852`). The
+startup and recurring period hashes and all three recurring state boundaries
+also exactly match the existing D_E1M7 qualification. This separately proves
+the E2M5 map-selected lump name and supports catalog coverage; it is not a new
+musical payload.
+
+A two-second headless E2M5 host run selected `D_E2M5` and returned all 69
+submitted audio packets (86,940 frames), with no worker or cleanup errors.
+One queue rebuffer was observed after packet 68 at 22.884 seconds on the
+audio-worker clock, as the short run ended; this test does not establish
+sustained queue timing. It checks catalog loading,
+map-to-track selection and shutdown only, not full-map continuity, listener
+review or gameplay pacing. The one-track catalog and loop payload remain under
+ignored `local/`. Portable receipts: [three-period preparation](../results/music-preparation-e2m5-20260927.json),
+[six-check reader/mixer qualification](../results/music-track-qualification-d-e2m5-20260927.json),
+and [host track-selection evidence](../results/music-host-e2m5-integration-20260927.json).
+
 ### PowerShell patch-version compatibility (September 27)
 
 Jason's first terminal launch exposed an exact-patch comparison in both the

@@ -1,0 +1,82 @@
+{
+  "Format": "pwshDoom.MusicHostTrackIntegration",
+  "Version": 1,
+  "RecordedUtc": "2026-09-27T20:03:47.5748392Z",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "MusicCatalogSha256": "1A1DC9687C8AF7FADE7D170C5170FED9C344CAAEE43899208BDD6DFDCAF28943",
+  "RawHostReport": "local/episode2m5-music-integration-20260927.json",
+  "RawHostReportSha256": "FAE1AE9E7EA66FD36E0771B91952D2C4559BABCB47F1BDF5F3869C7D6E619989",
+  "Parameters": {
+    "PowerShell": "7.6.5",
+    "Episode": 2,
+    "Style": "Classic",
+    "Seconds": 2.0021872,
+    "Headless": true,
+    "Workers": 16,
+    "Map": 5
+  },
+  "Result": {
+    "ExitReason": "Duration",
+    "Tics": 69,
+    "Frames": 61,
+    "Error": null
+  },
+  "Music": {
+    "DeviceClosed": true,
+    "MusicClosed": true,
+    "UnconsumedPackets": 0,
+    "SubmittedFrames": 86940,
+    "ReturnedCompletedFrames": 86940,
+    "Packets": 69,
+    "RebufferCount": 1,
+    "WallSeconds": 23.0102208,
+    "Selected": "D_E2M5",
+    "AudioError": null,
+    "CleanupError": null,
+    "Transitions": [
+      {
+        "Loop": true,
+        "AfterFrames": 0,
+        "Kind": "Start",
+        "Track": "D_E2M5"
+      }
+    ],
+    "RebufferObservations": [
+      {
+        "AfterPacket": 68,
+        "WallMs": 22884.0512
+      }
+    ]
+  },
+  "Sources": [
+    {
+      "Path": "scripts/Invoke-Doom.ps1",
+      "Sha256": "EAA75B6B236F6481C7C15EF1D2DA82C536B27206FBCD005CB1C67BED305E03C2"
+    },
+    {
+      "Path": "scripts/Invoke-SimulationWorker.ps1",
+      "Sha256": "306A1DF019997C8227D2E7516C72DF3BA70624985227EB5D77EE5DC04FF28533"
+    },
+    {
+      "Path": "scripts/Invoke-AudioWorker.ps1",
+      "Sha256": "32E80F308BFAB71EDF7198CBA7FED196021FEEF6BDADF2EFBD3D4E7EDBFD1296"
+    },
+    {
+      "Path": "src/SimulationProcess.ps1",
+      "Sha256": "5BFE98A3379E5CC51B39DBDE2E17E12DD0406D3663A8CD041AEFE0FB29054B9D"
+    },
+    {
+      "Path": "src/AudioRunspace.ps1",
+      "Sha256": "A930314C31A8DC628E96266E4654ACE1E2222FE076519B98578663A165DE1AD4"
+    },
+    {
+      "Path": "src/MusicPlayback.ps1",
+      "Sha256": "C4B6FBE2C44AFB3FE2E13CEF968AD3EEAE7DD8FA85B993321FFDED5321B0A71F"
+    },
+    {
+      "Path": "src/MusicLoopReader.ps1",
+      "Sha256": "083079C548A2BB47F1DFE661C5C3CEAD21B7A0FED104062CE46740DAF1215D0B"
+    }
+  ],
+  "Meaning": "Short actual game/audio-worker integration: E2M5 selected D_E2M5 from the prepared catalog and returned all submitted 1260-frame packets before device shutdown. One rebuffer was recorded. This checks startup, map-to-track selection and short-run shutdown only; it does not qualify sustained audio deadlines, acoustics, full-map/campaign playback, performance or monitor pacing."
+}

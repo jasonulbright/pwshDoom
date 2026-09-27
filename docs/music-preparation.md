@@ -1,12 +1,8 @@
 # Preparing a local music catalog
 
-September 27 current status: all eleven tracks required for an Episode 1 playthrough are qualified and published in the local `local/music-prepared-episode1.json` catalog (SHA-256 `0E9C9542C75F4D5E2D7FC71E42FAFBB58F94321C3B8A49BA0C9AC5A93752EE58`). It covers E1M1–E1M9, the intermission and finale. A 15-check simulation/audio-worker test consumed 97,020 music frames across new-game, save and load operations and closed the device cleanly; a post-change rerun is recorded in [`save-worker-music-one-shot-dintro-20260926.json`](../results/save-worker-music-one-shot-dintro-20260926.json). Episode 2 scores D_E2M1–D_E2M3 have optional complete-state recurrence qualifications; D_E2M4 now has the default three-period independent-output qualification plus a short actual map-to-track/audio-worker check. The existing 13-track catalog still combines the eleven Episode 1 tracks with D_E2M1 and D_E2M2; D_E2M3 and D_E2M4 remain in separate one-track local catalogs. Fourteen other unique Episode 2/3 map scores and the two finite finale/title scores remain open. The catalogs and PCM payloads stay local; commercial WAD and soundfont assets are not in the repository. This does not alter the ready Episode 1 playtest handoff or close the broader audio M3 gate: continuous campaign playback, presentation pacing and acoustic review remain open.
+September 27 current status: all eleven tracks required for an Episode 1 playthrough are qualified and published in the local `local/music-prepared-episode1.json` catalog (SHA-256 `0E9C9542C75F4D5E2D7FC71E42FAFBB58F94321C3B8A49BA0C9AC5A93752EE58`). It covers E1M1–E1M9, the intermission and finale. A 15-check simulation/audio-worker test consumed 97,020 music frames across new-game, save and load operations and closed the device cleanly; a post-change rerun is recorded in [`save-worker-music-one-shot-dintro-20260926.json`](../results/save-worker-music-one-shot-dintro-20260926.json). Episode 2 scores D_E2M1–D_E2M3 have optional complete-state recurrence qualifications; D_E2M4 and D_E2M5 have the default three-period independent-output qualifications and short actual map-to-track/audio-worker checks. The existing 13-track catalog still combines the eleven Episode 1 tracks with D_E2M1 and D_E2M2; D_E2M3, D_E2M4 and D_E2M5 remain in separate one-track local catalogs. Thirteen other Episode 2/3 map-track names remain open, representing eleven byte-distinct score payloads; two finite finale/title scores also remain open. The catalogs and PCM payloads stay local; commercial WAD and soundfont assets are not in the repository. This does not alter the ready Episode 1 playtest handoff or close the broader audio M3 gate: continuous campaign playback, presentation pacing and acoustic review remain open.
 
-The installed Ultimate Doom inventory contains 27 distinct map scores. At the
-time of the initial inventory, the Episode 1 catalog covered 9, leaving 18
-unique scores across Episodes 2 and 3.
-Three map-lump pairs are byte-identical, and only D_INTRO has a finite-score
-qualification; D_INTROA and D_BUNNY remain open. An initial offline Episode 2
+The installed Ultimate Doom map table references 27 distinct music-lump names across 36 maps. Three pairs have byte-identical MUS data (D_E1M7/D_E2M5, D_E1M8/D_E3M4, and D_E2M9/D_E3M1), so the map table contains 24 distinct score payloads. At the initial inventory, the Episode 1 catalog covered nine names/payloads; 18 other names represented 15 other byte-distinct payloads. D_E2M5 is qualified above as a separate map-selected lump, but its score bytes and recurrent output exactly match D_E1M7. Only D_INTRO has a finite-score qualification; D_INTROA and D_BUNNY remain open. An initial offline Episode 2
 batch passed D_E2M1's opening check but was deferred during its first
 three-period loop render (902.43/1,829.57 simulated audio seconds after about
 16 minutes). No new track or catalog qualified. Its ignored attempt directory
@@ -17,7 +13,7 @@ and the [ledger entry](ledger.md#2026-09-27--inventory-full-ultimate-doom-music-
 September 27 update: a separately run `-StateRecurrenceProof` preparation
 successfully qualified D_E2M1 and published its local single-track catalog.
 The inventory count was then nine Episode 1 scores plus one Episode 2 score,
-leaving 17 unique map scores across Episodes 2 and 3. The earlier three-period
+leaving 17 other map-track names (14 additional byte-distinct payloads) across Episodes 2 and 3. The earlier three-period
 interruption remains a valid historical record; the new result uses two
 continuous periods and a complete normalized synthesis-state recurrence
 inference, with no third independently synthesized output period. Details and
