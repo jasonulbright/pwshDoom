@@ -1,0 +1,116 @@
+{
+  "Format": "pwshDoom.Episode1HumanPlaythroughCandidate",
+  "Version": 1,
+  "Status": "ReadyForOneCompleteHumanEpisode1Playthrough",
+  "RecordedUtc": "2026-09-27",
+  "Build": {
+    "Repository": "jasonulbright/pwshDoom",
+    "Branch": "codex/feasibility-study",
+    "Commit": "0978112ef7b365f66b93770e1d98978e55b6d506",
+    "FastRendererSha256": "20DB1D5DC86BDFCA7A2DF9C47993EA21508D4A68F1493F7359258ECF8279F3D5",
+    "PowerShell": "7.6.5",
+    "PreviousCandidate": "results/episode1-human-playthrough-candidate-20260927.json"
+  },
+  "Prerequisites": {
+    "IWAD": {
+      "Path": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Ultimate Doom\\base\\DOOM.WAD",
+      "Sha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+      "EpisodeMaps": 36
+    },
+    "MusicCatalog": {
+      "Path": "local/music-prepared-episode1.json",
+      "Sha256": "0E9C9542C75F4D5E2D7FC71E42FAFBB58F94321C3B8A49BA0C9AC5A93752EE58",
+      "Validation": "The launcher preflight verifies the catalog path; audio startup validates catalog tracks and IWAD identity."
+    },
+    "WindowsTerminal": "C:\\Users\\jason\\AppData\\Local\\Microsoft\\WindowsApps\\wt.exe"
+  },
+  "HumanPlaythrough": {
+    "Skill": 3,
+    "Start": "E1M1",
+    "ExpectedSequence": [
+      "E1M1",
+      "E1M2",
+      "E1M3",
+      "E1M9",
+      "E1M4",
+      "E1M5",
+      "E1M6",
+      "E1M7",
+      "E1M8",
+      "Episode 1 finale"
+    ],
+    "Finish": "Advance the E1M8 exit intermission until E1TEXT/CREDIT appears.",
+    "CompletionStatus": "Pending",
+    "EvidenceType": "One human playthrough; automated fixtures and routes are not substitutes."
+  },
+  "Checks": [
+    {
+      "Name": "Ultimate Doom map load/render smoke",
+      "Result": "36/36 maps passed; skill 3; 35 idle tics and two full serial frames per map. This is load/render coverage, not map completion.",
+      "Report": "results/campaign-smoke-untextured-wall-20260927.json"
+    },
+    {
+      "Name": "Episode transitions, secret path, and finale state",
+      "Result": "69 checks passed with zero failures, including E1M3 to E1M9, E1M9 return to E1M4, real intermission/world loads, secret history, and finale state fixtures.",
+      "Report": "results/campaign-transitions-untextured-wall-20260927.json"
+    },
+    {
+      "Name": "Boss progression and E1M8 opening trigger fixtures",
+      "Result": "97 checks passed across Ultimate Doom boss exits and trigger behaviors.",
+      "Report": "results/boss-progression-untextured-wall-20260927.json"
+    },
+    {
+      "Name": "Ordinary-input E1M1 session progression (retained)",
+      "Result": "1,747 commands reach the E1M1 intermission, advance to E1M2, preserve inventory, and advance 71 level tics. This retained check ran at e8ffd6e; the new commit changes only renderer depth handling.",
+      "Report": "results/intercept-candidate-session-progression-20260927.json",
+      "SourceCommit": "e8ffd6edbc089d047e5eb5807377f93221d933bd"
+    },
+    {
+      "Name": "Synthetic menu controls and session screens",
+      "Result": "10 menu input checks and 24 rendered session-screen checks passed; physical keyboard play remains unverified.",
+      "Reports": [
+        "results/menu-input-untextured-wall-20260927.json",
+        "results/session-screens-untextured-wall-20260927.json"
+      ]
+    },
+    {
+      "Name": "Masked-wall ordering and missing-texture wall depth",
+      "Result": "20 focused checks passed. Floor and ceiling remain background surfaces; an untextured solid wall retains depth and hides a farther sprite.",
+      "Report": "results/masked-wall-order-untextured-wall-20260927.json"
+    },
+    {
+      "Name": "Parallel rendering equivalence",
+      "Result": "All styles match serial output across 320,000 pixels and five views at four uneven strips; Classic also matches with sixteen strips.",
+      "Reports": [
+        "results/render-partitions-untextured-wall-classic-20260927.json",
+        "results/render-partitions-untextured-wall-matrix-20260927.json",
+        "results/render-partitions-untextured-wall-ansiart-20260927.json",
+        "results/render-partitions-untextured-wall-classic16-20260927.json"
+      ]
+    },
+    {
+      "Name": "World-sprite occlusion comparison",
+      "Result": "Eight same-state E1M1 checkpoints from tic 35 through 280. The known tic-105 difference remains: 17 candidate-only actor pixels. This untextured-wall change does not claim to resolve that separate mismatch.",
+      "Report": "results/actor-occlusion-untextured-wall-20260927.json",
+      "Comparator": "The adopted PowerShell ThreeDRenderer; not an independently verified original executable."
+    },
+    {
+      "Name": "Launcher preflight",
+      "Result": "Ready; PowerShell 7.6.5, Windows Terminal, 36 IWAD map markers, writable local folder, and prepared music-catalog path are present. The check verifies catalog path only.",
+      "Report": "results/episode1-launcher-preflight-untextured-wall-20260927.json"
+    }
+  ],
+  "RetainedRouteEvidence": {
+    "Receipt": "results/episode1-render-guard-evidence-20260927.json",
+    "Meaning": "The four existing E1M1-E1M4 route regressions and fixed-input E1M2-E1M4 replays remain the retained route evidence at their original source pins. Commit 0978112 changes only renderer wall-depth handling and test coverage; it does not tune or replace those routes."
+  },
+  "KnownLimits": [
+    "No human has completed the requested Episode 1 playthrough; the handoff requests one full run, not map-by-map tests.",
+    "Transition and boss fixtures verify state changes but do not claim ordinary playthroughs of E1M5-E1M8 or the finale.",
+    "The E1M3 waypoint driver previously stopped short of its next point without a crash or reproducible product defect; route tuning is stopped. Its retained 7,118-command fixed-input replay reaches E1M4 with all checkpoints matching.",
+    "Whole-campaign music continuity, audible review, and physical keyboard play have not been certified; a prior finite audio-device run recorded one queue-timing stall.",
+    "Sustained 35 simulation tics/sec and 60 displayed updates/sec are not certified.",
+    "One localized 17-pixel candidate-only actor visibility difference at E1M1 tic 105 and broader scene differences remain open. Comparisons use the adopted PowerShell renderer; original-executable pixel parity is unverified."
+  ],
+  "Notes": "The candidate preserves background planes as non-occluding surfaces and adds sprite-depth coverage for solid wall bands whose textures are missing. The focused synthetic fixture, all three visual styles, and 36-map smoke pass. The independent tic-105 actor visibility difference remains open. No bot route or screen recording was used for this readiness decision."
+}

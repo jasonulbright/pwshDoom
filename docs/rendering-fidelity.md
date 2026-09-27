@@ -641,3 +641,27 @@ equivalence; that filter was removed. The passing partition and smoke reports
 are linked from the [Episode 1 candidate receipt](../results/episode1-human-playthrough-candidate-20260927.json).
 The retained change improves sprite occlusion without claiming full actor
 parity or a performance gain.
+
+## Preserve depth for untextured wall bands (2026-09-27)
+
+The renderer's wall texture loop writes both color and depth. When a one-sided
+wall has no middle texture, or a two-sided wall has no upper/lower texture,
+the BSP still closes that projected wall band but the texture path has no
+texel to claim its depth. The sprite pass could then draw an actor through the
+untextured solid portion. `FastRenderer` now records depth only for the actual
+projected wall band when its matching texture is absent. Textured walls keep
+their existing depth path, and this does not assign depth to the full clipped
+column, so exposed floor/ceiling pixels remain sprite backgrounds.
+
+The authored whole-scene [masked-wall fixture](../results/masked-wall-order-untextured-wall-20260927.json)
+passes 20 checks, including a farther sprite hidden behind an untextured solid
+wall. The 36-map load/render smoke passes. Five-view renderer output is exact
+over 320,000 pixels in Classic, Matrix/Katakana, and AnsiArt/Katakana with four
+uneven strips; Classic also matches with sixteen. Receipts and source pin are
+indexed in the [current Episode 1 candidate](../results/episode1-human-playthrough-candidate-20260927-r2.json).
+
+This fix does not resolve the separate recorded E1M1 actor-visibility
+difference: the adopted-renderer comparison still has 17 candidate-only actor
+pixels at tic 105. The finding is preserved in the [eight-endpoint comparison](../results/actor-occlusion-untextured-wall-20260927.json).
+That comparison is not an independently verified original-executable result,
+and no renderer-performance gain is claimed.

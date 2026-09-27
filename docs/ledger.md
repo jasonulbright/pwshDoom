@@ -2143,3 +2143,32 @@ intermediate renderer reports totaling 51,482,267 bytes remain under ignored
 `local/episode1-render-guard-raw-20260927/`, indexed by SHA-256 in the receipt.
 Jason's human run, continuous campaign audio, audible review, physical keyboard
 play, original-executable image parity, and sustained 35/60 pacing remain open.
+
+## 2026-09-27 — Preserve actor occlusion at missing-texture walls
+
+The wall rasterizer normally assigns depth while sampling texture pixels. A
+solid wall with no texture still closes the BSP clip interval, but has no color
+sample to claim depth; farther sprites could therefore leak through that wall
+band. `FastRenderer` now records depth for the projected wall band only when
+its corresponding texture is absent. Existing textured walls keep their
+normal depth path. A first attempt wrote the entire newly closed screen
+interval and failed the floor-background regression; it was narrowed to the
+physical upper/lower or solid wall band before adoption.
+
+The authored whole-scene masked-wall test now passes 20 checks, including a
+sprite behind a textureless solid wall. The serial output also matches five
+views across 320,000 pixels in Classic, Matrix/Katakana, and AnsiArt/Katakana
+with four uneven strips; Classic passes the same with sixteen. The fresh
+36-map load/render smoke, all 69 campaign transition fixtures, all 97 boss
+fixtures, 24 session screens, 10 menu-input checks, and the local launcher
+preflight pass. Exact reports and the candidate are linked in the [updated
+Episode 1 receipt](../results/episode1-human-playthrough-candidate-20260927-r2.json).
+
+The eight-endpoint E1M1 actor comparison still reports 17 candidate-only
+pixels at tic 105 (and 3, 1, and 1 at other sampled tics). This wall change does
+not resolve that separate visibility difference. It is a comparison against
+the adopted PowerShell renderer, not an original-executable oracle. No
+performance gain is claimed. The PowerShell source and regression harness are
+committed as `0978112ef7b365f66b93770e1d98978e55b6d506`; the one complete HMP
+Episode 1 human playthrough remains pending. No new bot route or screen
+recording was run.

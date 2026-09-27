@@ -22,24 +22,25 @@ E1M8 exit and intermission.
 
 ## Build and launch
 
-Run exact source build commit `e8ffd6edbc089d047e5eb5807377f93221d933bd`.
+Run exact source build commit `0978112ef7b365f66b93770e1d98978e55b6d506`.
 If your checkout is at a later branch tip, enter the pinned build from the
 repository root before launching:
 
 ```powershell
-git switch --detach e8ffd6edbc089d047e5eb5807377f93221d933bd
+git switch --detach 0978112ef7b365f66b93770e1d98978e55b6d506
 ```
 
 After preserving the input and session reports under `local/`, return to the
 development branch with `git switch codex/feasibility-study`. The pinned build
 keeps gameplay, renderer, and audio algorithms in PowerShell. It includes the
 fixed-point sight-intercept and sight-bound integer paths, renderer guards for
-plane distance and wall-light lookup, and the actor-depth correction described
-in the [fidelity record](rendering-fidelity.md#keep-background-planes-out-of-actor-depth-2026-09-27).
-The current [candidate receipt](../results/episode1-human-playthrough-candidate-20260927.json)
+plane distance and wall-light lookup, and the actor-depth corrections described
+in the [fidelity record](rendering-fidelity.md#keep-background-planes-out-of-actor-depth-2026-09-27)
+and [missing-texture wall-depth entry](rendering-fidelity.md#preserve-depth-for-untextured-wall-bands-2026-09-27).
+The current [candidate receipt](../results/episode1-human-playthrough-candidate-20260927-r2.json)
 pins the build, IWAD, music catalog, launcher preflight, 36-map smoke, secret
-path/finale transition checks, E1M8 boss-trigger fixtures, current E1M1-to-E1M2
-session regression, actor-order test, and all three renderer styles. The
+path/finale transition checks, E1M8 boss-trigger fixtures, retained E1M1-to-E1M2
+session regression, 20 wall-order checks, and all three renderer styles. The
 retained E1M1–E1M4 routes and fixed-input E1M2–E1M4 replays remain linked in
 the earlier [renderer-guard receipt](../results/episode1-render-guard-evidence-20260927.json),
 which is pinned to its original source commit. Earlier
@@ -132,11 +133,12 @@ playthrough.
 ## Readiness evidence
 
 The current playtest build is pinned to
-`e8ffd6edbc089d047e5eb5807377f93221d933bd`. Its
-[candidate receipt](../results/episode1-human-playthrough-candidate-20260927.json)
-records the 36-map smoke, current 69 transition checks, E1M8 boss-trigger
-fixtures, 1,747-command E1M1 session progression into E1M2, 18 focused renderer
-checks, and exact serial/worker output across all three styles. The earlier
+`0978112ef7b365f66b93770e1d98978e55b6d506`. Its
+[candidate receipt](../results/episode1-human-playthrough-candidate-20260927-r2.json)
+records the 36-map smoke, 69 transition checks, E1M8 boss-trigger fixtures,
+retained 1,747-command E1M1 session progression into E1M2, 20 focused wall
+checks, and exact serial/worker output across all three styles. The separate
+tic-105 actor-visibility difference remains open. The earlier
 [renderer-guard receipt](../results/episode1-render-guard-evidence-20260927.json)
 retains 50,200 sight-bound parity cases, 50,000 intercept parity cases, all
 four E1M1–E1M4 route regressions, and fixed-input E1M2–E1M4 replays at its
