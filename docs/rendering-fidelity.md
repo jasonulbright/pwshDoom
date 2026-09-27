@@ -347,11 +347,10 @@ or measure performance. No speed claim is made.
 The numeric world-sprite path now uses the adopted renderer's 16.16 transform
 for actor depth, horizontal scale, projected patch bounds, light-table index,
 and vertical texture origin. The worker path expresses those operations as
-integer PowerShell arithmetic over its transferred sine table; it does not
+integer PowerShell arithmetic over its transferred lookup tables; it does not
 load engine class types into rendering workers. A null rotated patch is skipped
-as in the reference. Rotated-frame selection still uses the existing
-floating-point angle calculation, so this is a partial projection match rather
-than full actor parity.
+as in the reference. Fixed-point rotated-frame selection is now included; its
+focused mathematical scope and remaining visual limits are recorded below.
 
 At three static idle views, the full-scene scene-index differences changed as
 follows against the adopted PowerShell reference:
@@ -374,5 +373,54 @@ Neither result is a map completion test. Three-round paired serial timings
 show a median paired cost of 0.57 ms (0.78%) on E1M1 and 1.40 ms (3.00%) on
 E1M2. The individual samples vary substantially; this is a documented
 fidelity tradeoff, not a performance or displayed-FPS claim. Moving actors,
-all rotation boundaries, occlusion cases, and independent original-executable
-comparison remain open.
+occlusion cases, and independent original-executable comparison remain open.
+
+## Fixed-point rotated actor-frame selection (2026-09-26)
+
+The previous numeric renderer selected rotated sprite frames using floating-
+point `Atan2`, angle subtraction, and `Floor`. The adopted renderer uses
+`Geometry.PointToAngleData`'s Doom tangent lookup followed by unsigned
+32-bit-angle arithmetic and a three-bit frame selection. At exact rotation
+boundaries, the former formula selected a different frame in 172,724 of
+393,408 synthetic boundary cases.
+
+`Get-FastPointAngleData` and `Get-FastSpriteRotation` now reproduce that lookup
+and wrap behavior in PowerShell integer arithmetic. Asset format v6 transports
+the 2,049-entry tangent-to-angle lookup to render workers and checks its length
+and endpoints when reading it. This extends the prior v5 world-sprite-post
+payload; it does not introduce a compiled rendering helper.
+
+[`Test-SpriteRotation.ps1`](../scripts/Test-SpriteRotation.ps1) compares against
+the actual adopted `Geometry.PointToAngleData` and `ThreeDRenderer` logic. It
+passes 16,392 direction cases, all 393,408 boundary selections, six signed-int
+minimum edges, and 100,000 binary-angle round trips, with no candidate
+mismatches. The old `Atan2` expression reproduces its 172,724 boundary
+mismatches. This is focused math evidence; it is not a moving-monster visual,
+animation, occlusion, route, or original-executable test.
+
+Classic, Matrix/Katakana, and AnsiArt/Katakana each match serial output across
+16 workers and five views: 320,000 pixels and 80 encoded strips per style, with
+zero differences. The current v6 source also passes the 36-map load, 35-idle-
+tic, two-frame smoke. These checks prove asset transport and serial/worker
+agreement, not map completion or displayed frame rate.
+
+The focused E1M1-to-E1M2 asset-reload fixture rewrites v6 assets under a
+sixteen-process Classic render pool. All worker process IDs remain unchanged,
+and the post-reload E1M2 frame matches serial output across 256,000 pixels and
+64 encoded strips. This directly checks current-format worker refresh; it uses
+a synthetic map-change fixture rather than ordinary episode navigation. The
+[receipt](../results/session-worker-sprite-rotation-classic.json) records the
+scope.
+
+Paired serial renders used three alternating-order rounds at five static
+headings per map, retaining first calls and excluding setup from the timed
+calls. The median of the 15 paired deltas is -0.2551 ms (-0.40%) on E1M1 and
+-0.1845 ms (-0.41%) on E1M2. The separate aggregate medians disagree on E1M2
+(50.8199 ms baseline; 54.8397 ms candidate), showing enough sample variation
+that the paired statistic cannot support a speedup claim. These are isolated
+full-frame render timings, not simulation pacing, worker end-to-end, terminal
+output, or visible FPS. The [parity](../results/sprite-rotation-parity.json),
+[worker](../results/render-partitions-sprite-rotation-classic.json),
+[map-smoke](../results/campaign-smoke-sprite-rotation.json), and
+[paired timing](../results/sprite-rotation-performance-e1m1.json) receipts keep
+the scope and hashes; the E1M2 timing is in the sibling receipt.

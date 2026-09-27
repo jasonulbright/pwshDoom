@@ -44,7 +44,9 @@ styles, and a real-host E1M1-to-E1M2 asset reload. It improves the adopted
 reference comparison but increases serial render medians and does not prove
 visible 60 FPS. The [updated readiness receipt](../results/episode1-playtest-readiness.json)
 and [playtest handoff](episode1-playtest.md) pin the source and preserve the
-single human route as one pending milestone.
+single human route as one pending milestone. The later v6 actor-angle asset
+change also passes an E1M1-to-E1M2 reload with all sixteen workers preserved
+([receipt](../results/session-worker-sprite-rotation-classic.json)).
 
 While Jason's one Episode 1 route remains pending, continue independent M4
 fidelity work. Matching integer-column rays and integer-row wall texels to the
@@ -64,14 +66,19 @@ fixture matches at seven fractional offsets, and ten static E1M1/E1M2 views
 improve by 3.78% cumulatively. This does not establish original-executable
 parity. Perspective world-sprite sampling now matches the adopted renderer's
 fixed-point post bounds and row mask in 40 real-IWAD scale/origin cases, with
-zero differing pixels after an 838-pixel baseline. Asset format v5 preserves
-post data across workers; the current 36-map smoke, all three 16-worker output
-styles, 138 weapon-lighting images, and a live E1M1-to-E1M2 worker asset reload
-pass. Fixed-point world-actor projection now covers Doom-style depth, scale,
-screen bounds, lighting, and vertical texture origin; the same-state E1M1/E1M2
-scene-index comparison improves by 538 across six views, with exact worker output
-in all three styles. Rotated-frame selection and full actor/occlusion parity,
-sustained 35-tic/60-display performance, and full-campaign music remain open.
+zero differing pixels after an 838-pixel baseline. Asset format v5 first
+preserved post data across workers; format v6 also carries the Doom tangent-
+to-angle table for rotated actor frames. Fixed-point world-actor projection
+covers Doom-style depth, scale, screen bounds, lighting, and vertical texture
+origin; the same-state E1M1/E1M2 scene-index comparison improves by 538 across
+six views. The follow-up exact frame-selection port passes 393,408 synthetic
+rotation-boundary checks and 100,000 angle round trips, and all three 16-worker
+styles match serial pixels and encoded strips. The current 36-map smoke passes.
+Moving-actor visual comparisons, full actor occlusion parity, independent
+original-executable comparison, sustained 35-tic/60-display performance, and
+full-campaign music remain open. The current source and evidence pin are in the
+[Episode 1 handoff](episode1-playtest.md) and
+[readiness receipt](../results/episode1-playtest-readiness.json).
 
 "Best" means strongest demonstrated result for this particular combination of language boundary, terminal play, correctness, usability, and reproducible evidence. The study must publish losses and tradeoffs. A compiled source port may win performance, fidelity, portability, or ease of installation; that does not make it a PowerShell-engine implementation. Do not claim superiority over untested alternatives or present our adopted gameplay translation as original work.
 

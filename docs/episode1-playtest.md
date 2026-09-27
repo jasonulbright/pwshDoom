@@ -22,14 +22,14 @@ E1M8 exit and intermission.
 
 ## Build and launch
 
-Engine/source baseline: commit `f0e85ba5ba6095cb105a69346ad3dd7f8ba7554c`.
-The 295 focused campaign, boss-trigger, session, menu, and synthetic-input
-assertions were run from repository commit
-`cdc59a9280fd649638a869210beb799c92cd49ec` on the preceding gameplay source.
-The pinned source commit above adds the verified world-sprite, worker-asset,
-and fixed-point actor-projection changes; its 36-map smoke and asset/worker
-checks are recorded in the current [readiness receipt](../results/episode1-playtest-readiness.json). Documentation
-updates after the source commit do not change the launchable game code.
+Engine/source baseline: commit `693cc061a2caa1fac36fc8a0e6d2e6830a6a4577`.
+It includes the verified world-sprite sampling, fixed-point actor projection,
+and Doom-exact rotated-frame selection. The 295 focused campaign, boss-trigger,
+session, menu, and synthetic-input checks were rerun on this baseline; all
+passed. Its 36-map smoke, 16-worker styles, exact tangent-angle parity, and
+launcher check are recorded in the current
+[readiness receipt](../results/episode1-playtest-readiness.json). Documentation
+updates after this source commit do not change the launchable game code.
 Run from the repository root in 64-bit PowerShell 7.4 or later on Windows,
 with Windows Terminal, the legally obtained Ultimate Doom `DOOM.WAD`, and the
 prepared local music catalog `local/music-prepared-episode1.json`. The tested Steam IWAD is
@@ -49,12 +49,15 @@ pwsh -NoProfile -File .\Start-Doom.ps1 `
 ```
 
 The build uses sixteen renderer processes by default. Leave that setting in
-place for this handoff. The first real-host map transition was verified with
-the v4 asset format and all sixteen workers stayed alive while E1M2 assets
-loaded. That headless run wrote no terminal frames, so it does not certify
-visible frame rate or full-campaign audio continuity.
-Those sixteen workers used about 4.0 GB of combined working memory in that
-headless run; mention any memory pressure or sluggish response during play.
+place for this handoff. The current disposable worker-asset format is v6; the
+readiness receipt records current-format worker checks. A focused E1M1-to-E1M2
+reload writes new v6 assets, keeps all sixteen render workers alive, and
+matches 256,000 pixels and 64 encoded strips against serial output
+([receipt](../results/session-worker-sprite-rotation-classic.json)). An earlier
+headless host transition used v4 and wrote no terminal frames, so it does not
+certify visible frame rate or full-campaign audio continuity. Its sixteen
+workers used about 4.0 GB of combined working memory; mention any memory
+pressure or sluggish response during play.
 
 At the final preflight, `%LOCALAPPDATA%\pwshDoom\settings.json` did not exist,
 so built-in defaults apply: Always Run off, turn speed 100%, sound volume 100%,
@@ -122,8 +125,10 @@ This covers E1M1–E1M9 as startup/render cases, not map completion. Focused
 engine/session/input checks also pass: 57 campaign transition/finale
 checks, 97 boss checks, 125 menu/session checks with 46 screen fixtures, six
 synthetic console-input checks, and ten menu-key checks. All were freshly
-rerun from the handoff checkout; the [final check receipt](../results/episode1-playtest-final-checks.json)
-records the counts and limits. The current IWAD/music-catalog preflight passes.
+rerun on the pinned source; their individual receipts and limits are in the
+[readiness receipt](../results/episode1-playtest-readiness.json). The current
+IWAD/music-catalog preflight passes in
+[`episode1-launch-preflight-sprite-rotation.json`](../results/episode1-launch-preflight-sprite-rotation.json).
 The latest fixed-point floor/ceiling mapping brings the six-view scene-index
 mismatch against the adopted PowerShell reference from 101,971 to 37,798
 (62.9% fewer than the original numeric baseline); 7.38–14.19% still differ.
@@ -153,11 +158,16 @@ playback integration.
 The pinned source applies Doom-style 16.16 actor depth, scale, projected bounds,
 lighting, and vertical texture origin. Across six static E1M1/E1M2 views it
 reduces full-scene differences against the adopted PowerShell renderer by 538
-indices. Classic, Matrix/Katakana, and AnsiArt/Katakana each match serial output
-across 16 workers, and the exact source passes the 36-map smoke and launcher
-preflight. Paired serial medians show small costs of 0.57 ms on E1M1 and
-1.40 ms on E1M2; these are not whole-game timing or display-rate measurements.
-Rotated actor-frame and full occlusion parity remain open.
+indices. Rotated-frame selection now matches the adopted Doom binary-angle rule:
+16,392 direction cases, 393,408 frame boundaries, six signed-int edge cases,
+and 100,000 angle conversions pass with no mismatches. The former floating
+calculation selected the wrong frame in 172,724 of the same boundary fixtures.
+This is synthetic math parity; moving-actor visuals, occlusion parity, and an
+independent original-executable comparison remain open. Classic,
+Matrix/Katakana, and AnsiArt/Katakana each match serial output across 16 workers
+(320,000 pixels and 80 encoded strips per style), and the exact source passes
+the 36-map smoke and launcher preflight. Isolated paired timings are mixed and
+do not establish a speedup or visible frame rate.
 
 ### Jason's human result
 

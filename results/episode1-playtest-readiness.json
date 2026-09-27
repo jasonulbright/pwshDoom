@@ -1,6 +1,6 @@
 {
   "Status": "ReadyForOneHumanEpisode1Playthrough",
-  "SourceBaseline": "f0e85ba5ba6095cb105a69346ad3dd7f8ba7554c",
+  "SourceBaseline": "693cc061a2caa1fac36fc8a0e6d2e6830a6a4577",
   "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
   "Scope": [
     "E1M1",
@@ -146,37 +146,39 @@
       "IdleTics": 35,
       "FullFramesPerMap": 2,
       "WorkerStrips": 16,
-      "Receipt": "results/campaign-smoke-actor-projection-final.json",
-      "Meaning": "Current source startup/render smoke: all 36 Ultimate Doom maps load, advance 35 idle tics, and rasterize two full 320x200 frames across sixteen worker strips. Not map completion or displayed-FPS evidence.",
-      "SourceCommit": "f0e85ba5ba6095cb105a69346ad3dd7f8ba7554c",
-      "ReportSha256": "D9F501463BAFBD5FAE04A697729B5AA1ABF5F987749B6A502C3C06F20678F7ED"
+      "Receipt": "results/campaign-smoke-sprite-rotation.json",
+      "ReportSha256": "502A63AEFC62503EB04655788B5EB3DAC4C541003892B16B82D08C25DC787437",
+      "SourceCommit": "693cc061a2caa1fac36fc8a0e6d2e6830a6a4577",
+      "Meaning": "Current-source Ultimate Doom smoke: all 36 maps load, advance 35 idle tics, and rasterize two full 320x200 frames across 16 strips. Not map completion or displayed-FPS evidence."
     },
     "CurrentSourceCampaignTransitions": {
       "Passed": 57,
       "Failed": 0,
-      "Receipt": "results/episode1-playtest-transitions-current.json",
-      "Includes": [
-        "E1 secret destination and return",
-        "Episode 1 finale state and text",
-        "Intermission advance to E1M2",
-        "Inventory carry-over",
-        "Death and respawn"
-      ]
+      "Receipt": "results/episode1-transitions-sprite-rotation.json",
+      "SourceCommit": "693cc061a2caa1fac36fc8a0e6d2e6830a6a4577",
+      "Meaning": "Secret destination and return, finale state/text, intermission, inventory carry-over, and death/respawn fixtures; not an ordinary human route."
     },
     "CurrentSourceBossProgression": {
       "Passed": 97,
-      "Receipt": "results/episode1-playtest-bosses-current.json",
-      "Meaning": "Includes E1M8 trigger fixtures; does not simulate ordinary boss combat."
+      "Failed": 0,
+      "Receipt": "results/episode1-bosses-sprite-rotation.json",
+      "SourceCommit": "693cc061a2caa1fac36fc8a0e6d2e6830a6a4577",
+      "Meaning": "HMP boss-trigger fixtures including E1M8; not ordinary boss combat."
     },
     "CurrentSourceMenuSession": {
       "Passed": 125,
+      "Failed": 0,
       "ScreenFixtures": 46,
-      "Receipt": "results/episode1-playtest-menus-current.json"
+      "Receipt": "results/episode1-session-menu-sprite-rotation.json",
+      "SourceCommit": "693cc061a2caa1fac36fc8a0e6d2e6830a6a4577"
     },
     "CurrentSourceConsoleInput": {
       "Passed": 6,
       "DesktopInputInjected": false,
-      "Receipt": "results/episode1-playtest-console-input-current.txt"
+      "Receipt": "results/episode1-console-input-sprite-rotation.txt",
+      "SourceCommit": "693cc061a2caa1fac36fc8a0e6d2e6830a6a4577",
+      "ScriptSha256": "C75B19725F222DA8941C2144197E18B64FB64274CD5F644E1287668E066F5BAD",
+      "Meaning": "Synthetic input records and state checks only; Jason will supply physical keyboard evidence in one complete playthrough."
     },
     "RendererHorizontalSamplingCorrection": {
       "Receipt": "results/render-column-index-fidelity.json",
@@ -306,55 +308,16 @@
       "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
       "TextureOriginCount": 4
     },
-    "CurrentSourceWorkerValidation": {
-      "PixelComparisonsPerStyle": 320000,
-      "CacheBytesV5": 37924656,
-      "ViewsPerStyle": 5,
-      "EncodedStripChecksPerStyle": 80,
-      "Styles": [
-        {
-          "Style": "Classic",
-          "Receipt": "results/render-worldsprite-classic-verified.json"
-        },
-        {
-          "Style": "Matrix/Katakana",
-          "Receipt": "results/render-worldsprite-matrix-verified.json"
-        },
-        {
-          "Style": "AnsiArt/Katakana",
-          "Receipt": "results/render-worldsprite-ansiart-verified.json"
-        }
-      ],
-      "WeaponLighting": {
-        "Cases": 138,
-        "Receipt": "results/weapon-lighting-assets-v5-verified.json",
-        "PreviousImplementationMismatchCases": 88
-      },
-      "CacheGrowthPercent": 29.8,
-      "MapReload": {
-        "WorkersPreserved": true,
-        "From": "E1M1",
-        "EncodedStripChecks": 64,
-        "Receipt": "results/worker-assets-v5-dedup-map-reload.json",
-        "PixelComparisons": 256000,
-        "To": "E1M2"
-      },
-      "CacheSizeMeaning": "Temporary assets for the installed IWAD; file size only, not startup time or resident working set.",
-      "AssetFormat": "pwshDoom-assets-v5",
-      "WorkerCount": 16,
-      "CacheBytesV4": 29222789
-    },
     "CurrentSourceLauncherCheck": {
       "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
-      "Meaning": "Current-source launcher path check for the documented Classic Episode 1 handoff. This confirms path, IWAD inventory, PowerShell and Windows Terminal detection; track/WAD qualification and playback are covered by the separate audio-worker evidence.",
       "EpisodeMaps": 36,
-      "SourceCommit": "f0e85ba5ba6095cb105a69346ad3dd7f8ba7554c",
+      "SourceCommit": "693cc061a2caa1fac36fc8a0e6d2e6830a6a4577",
       "MusicCatalogSha256": "0E9C9542C75F4D5E2D7FC71E42FAFBB58F94321C3B8A49BA0C9AC5A93752EE58",
       "PowerShell": "7.6.5",
-      "Receipt": "results/episode1-launch-preflight-actor-projection.json",
+      "Receipt": "results/episode1-launch-preflight-sprite-rotation.json",
+      "PreflightReportSha256": "7374C345E2607E531CF00855B303395E3B470F6C59F9BC36A749BFE1E684F79A",
       "Ready": true,
-      "RendererSha256": "CA56DD04BAC258F9ACF12AEA0A7535CDFE36A69D8C1EF9DAF8BBD56C63DEE9C8",
-      "PreflightReportSha256": "9B1E11A7590EC5C3062581F8DF062FB25580F696511A1F909E93E408AAA5B2F4"
+      "Meaning": "Play.ps1 -Check validates the Windows/PowerShell/Terminal/IWAD/catalog paths and IWAD map inventory; it does not launch the game or validate catalog audio content."
     },
     "RendererFixedPointActorProjection": {
       "RendererSha256": "CA56DD04BAC258F9ACF12AEA0A7535CDFE36A69D8C1EF9DAF8BBD56C63DEE9C8",
@@ -408,6 +371,121 @@
         "Serial kernel measurements are not whole-game pacing or visible FPS.",
         "Map smoke does not test navigation, exits, or campaign completion."
       ]
+    },
+    "PreviousSourceWorkerValidationV5": {
+      "PixelComparisonsPerStyle": 320000,
+      "CacheBytesV5": 37924656,
+      "ViewsPerStyle": 5,
+      "EncodedStripChecksPerStyle": 80,
+      "Styles": [
+        {
+          "Style": "Classic",
+          "Receipt": "results/render-worldsprite-classic-verified.json"
+        },
+        {
+          "Style": "Matrix/Katakana",
+          "Receipt": "results/render-worldsprite-matrix-verified.json"
+        },
+        {
+          "Style": "AnsiArt/Katakana",
+          "Receipt": "results/render-worldsprite-ansiart-verified.json"
+        }
+      ],
+      "WeaponLighting": {
+        "Cases": 138,
+        "Receipt": "results/weapon-lighting-assets-v5-verified.json",
+        "PreviousImplementationMismatchCases": 88
+      },
+      "CacheGrowthPercent": 29.8,
+      "MapReload": {
+        "WorkersPreserved": true,
+        "From": "E1M1",
+        "EncodedStripChecks": 64,
+        "Receipt": "results/worker-assets-v5-dedup-map-reload.json",
+        "PixelComparisons": 256000,
+        "To": "E1M2"
+      },
+      "CacheSizeMeaning": "Temporary assets for the installed IWAD; file size only, not startup time or resident working set.",
+      "AssetFormat": "pwshDoom-assets-v5",
+      "WorkerCount": 16,
+      "CacheBytesV4": 29222789
+    },
+    "CurrentSourceWorkerValidation": {
+      "AssetFormat": "pwshDoom-assets-v6",
+      "WorkerCount": 16,
+      "Styles": [
+        {
+          "Style": "Classic",
+          "Receipt": "results/render-partitions-sprite-rotation-classic.json",
+          "Sha256": "654B0DF0B02F4A4B3542D3168ECC5EE006E5C3F762AC9B5C7EEAD96189CFD35A",
+          "Workers": 16,
+          "PixelComparisons": 320000.0,
+          "PixelDifferences": 0.0,
+          "EncodedStripChecks": 80
+        },
+        {
+          "Style": "Matrix/Katakana",
+          "Receipt": "results/render-partitions-sprite-rotation-matrix.json",
+          "Sha256": "94390A6EF6529FC86620DB7B03E44C0576150B974A4AE45FFE11A576BCF791B4",
+          "Workers": 16,
+          "PixelComparisons": 320000.0,
+          "PixelDifferences": 0.0,
+          "EncodedStripChecks": 80
+        },
+        {
+          "Style": "AnsiArt/Katakana",
+          "Receipt": "results/render-partitions-sprite-rotation-ansiart.json",
+          "Sha256": "EAC68ECD68D6C53C73E2905DCD17019D41478DA7588C4D00BB09876B2A346D82",
+          "Workers": 16,
+          "PixelComparisons": 320000.0,
+          "PixelDifferences": 0.0,
+          "EncodedStripChecks": 80
+        }
+      ],
+      "TangentAngleEntries": 2049,
+      "TangentAngleTableSha256": "BA4346CE3AC3DCB24C460BCF0ED98D3F8351203CA3BCC1DEC1CB822F9DEE7E11",
+      "MapSmokeReceipt": "results/campaign-smoke-sprite-rotation.json",
+      "Meaning": "Exact serial/worker pixel and encoded-strip equivalence for the fixed-angle renderer, with the tangent lookup transported and validated through v6 disposable assets.",
+      "MapReload": {
+        "WorkersPreserved": true,
+        "Workers": 16,
+        "Style": "Classic",
+        "From": "E1M1",
+        "To": "E1M2",
+        "PixelComparisons": 256000.0,
+        "EncodedStripChecks": 64.0,
+        "Receipt": "results/session-worker-sprite-rotation-classic.json",
+        "Sha256": "E23613A6E94B4894ADBA35CF452E5C76574E0F3AF14B7B9D8E717F004F97B978",
+        "Meaning": "Actual worker processes: independently constructed column/row-major screen equivalence and encoded strip equivalence, then changed E1M2 assets and real rasterization against the serial reference without restarting workers. This is a transport/lifecycle check, not campaign completion or a performance benchmark."
+      }
+    },
+    "CurrentSourceSpriteRotationSelection": {
+      "RendererSha256": "7BBCBCD87AC8D9474FC7C2E8EB5B115D96B79955A1196AFDF5E38C08864FC180",
+      "AssetReaderSha256": "CE714979FB576708DEB4D5496734A9518B582C8FA385F94875FCE9B961975D93",
+      "ParityReceipt": "results/sprite-rotation-parity.json",
+      "ParityReceiptSha256": "C8C8A14711011B91A22A07BA3F4E7F4D84C8671E17F4370C94C35793C283C6D8",
+      "DirectionCases": 16392,
+      "PointAngleMismatches": 0,
+      "BoundaryRotationCases": 393408,
+      "FixedRotationMismatches": 0,
+      "LegacyAtan2BoundaryMismatches": 172724,
+      "IntMinEdgeCases": 6,
+      "IntMinEdgeMismatches": 0,
+      "AngleDataRoundTrips": 100000,
+      "AngleDataRoundTripMismatches": 0,
+      "Reference": "Adopted PowerShell Geometry.PointToAngleData and ThreeDRenderer BAM selection; not an independent original-executable result.",
+      "Limitations": [
+        "Synthetic angle and boundary fixtures; no moving-actor image or animation test.",
+        "Full actor occlusion and independent original-executable parity remain open.",
+        "Serial paired timings are inconclusive and are not whole-game pacing or display FPS."
+      ]
+    },
+    "CurrentSourceMenuInput": {
+      "Passed": 10,
+      "Failed": 0,
+      "Receipt": "results/episode1-menu-input-sprite-rotation.json",
+      "SourceCommit": "693cc061a2caa1fac36fc8a0e6d2e6830a6a4577",
+      "Meaning": "Synthetic menu key transitions; no desktop keyboard injection."
     }
   },
   "HumanPlaythrough": {
@@ -426,7 +504,7 @@
     "The fixed-point plane change improves the adopted reference comparison but raises single-process serial render medians in both measured maps.",
     "The host replay averaged 34.97 simulation tics/sec and paused output for 1.91 seconds during the E1M2 asset reload.",
     "Sprite patch sampling improves the adopted-reference match but the paired serial render median rises 2.9% on E1M1 and 0.4% on E1M2; these full-frame timings do not measure worker end-to-end or visible FPS.",
-    "Fixed-point actor projection lowers adopted-reference scene differences by 538 across six static views, with small measured serial median costs; rotated-frame and occlusion fidelity remain incomplete."
+    "Fixed-point actor projection lowers adopted-reference scene differences by 538 across six static views. Synthetic rotated-frame arithmetic now matches the adopted source, but moving-actor visuals and full occlusion remain unverified; the paired serial timing is inconclusive."
   ],
   "Artifacts": [
     {
@@ -748,6 +826,62 @@
     {
       "Path": "results/renderer-pair-actor-projection-e1m2-final.json",
       "Sha256": "1B0417D467ED07219052680134168ECF60DF69D9FFFF3C09CF3FAAF8D9BF99B4"
+    },
+    {
+      "Path": "results/sprite-rotation-parity.json",
+      "Sha256": "C8C8A14711011B91A22A07BA3F4E7F4D84C8671E17F4370C94C35793C283C6D8"
+    },
+    {
+      "Path": "results/render-partitions-sprite-rotation-classic.json",
+      "Sha256": "654B0DF0B02F4A4B3542D3168ECC5EE006E5C3F762AC9B5C7EEAD96189CFD35A"
+    },
+    {
+      "Path": "results/render-partitions-sprite-rotation-matrix.json",
+      "Sha256": "94390A6EF6529FC86620DB7B03E44C0576150B974A4AE45FFE11A576BCF791B4"
+    },
+    {
+      "Path": "results/render-partitions-sprite-rotation-ansiart.json",
+      "Sha256": "EAC68ECD68D6C53C73E2905DCD17019D41478DA7588C4D00BB09876B2A346D82"
+    },
+    {
+      "Path": "results/campaign-smoke-sprite-rotation.json",
+      "Sha256": "502A63AEFC62503EB04655788B5EB3DAC4C541003892B16B82D08C25DC787437"
+    },
+    {
+      "Path": "results/sprite-rotation-performance-e1m1.json",
+      "Sha256": "377B540DE79BAE661CAB2E0DDDBBF87A8212EB8CE2F93843CA0BD6D18B7E4A3B"
+    },
+    {
+      "Path": "results/sprite-rotation-performance-e1m2.json",
+      "Sha256": "27A0F7BD6733F1182CCB8CC01E3CFAABF98E1C2B3D624F75A16CD92DA11F4549"
+    },
+    {
+      "Path": "results/episode1-launch-preflight-sprite-rotation.json",
+      "Sha256": "7374C345E2607E531CF00855B303395E3B470F6C59F9BC36A749BFE1E684F79A"
+    },
+    {
+      "Path": "results/episode1-transitions-sprite-rotation.json",
+      "Sha256": "4BB4FD046735AB8AB9C5A5C920F31BCA9B1C0460F501BED107BD23BE0BF5DA45"
+    },
+    {
+      "Path": "results/episode1-bosses-sprite-rotation.json",
+      "Sha256": "F2A98AA0D7FDE3FEA7A903271B2D534845B2D59D9D995674009F961A3A861CB0"
+    },
+    {
+      "Path": "results/episode1-menu-input-sprite-rotation.json",
+      "Sha256": "54CD51DC23F87B42F3656846D44F44049A17AB6C46B5415ECF0327B6BF8A76FC"
+    },
+    {
+      "Path": "results/episode1-session-menu-sprite-rotation.json",
+      "Sha256": "CB8B8345241EAF2157424EC8290383A398B21BC0D0291326A116F0785EBB984B"
+    },
+    {
+      "Path": "results/episode1-console-input-sprite-rotation.txt",
+      "Sha256": "699F8C14FD45B5AF941AE6C312C3D6F02139019CA6B51DD3D82E722D692D62ED"
+    },
+    {
+      "Path": "results/session-worker-sprite-rotation-classic.json",
+      "Sha256": "E23613A6E94B4894ADBA35CF452E5C76574E0F3AF14B7B9D8E717F004F97B978"
     }
   ]
 }

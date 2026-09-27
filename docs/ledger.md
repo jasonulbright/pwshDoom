@@ -1683,3 +1683,42 @@ remains E1M1 through E1M8, including E1M3's secret exit to E1M9 and return to
 E1M4, followed by the Episode 1 finale. Human route completion, physical input,
 continuous campaign music, displayed FPS, original-executable visual parity,
 and the broader release gates remain unclaimed.
+
+## 2026-09-26 — Match Doom's rotated actor-frame arithmetic
+
+The numeric renderer had been using floating-point `Atan2` and `Floor` to
+choose a rotated actor frame. A source-matched boundary sweep found 172,724
+wrong selections among 393,408 exact boundary cases. Replace it with a pure
+PowerShell numeric port of `Geometry.PointToAngleData` and the adopted
+renderer’s unsigned binary-angle wrap and three-bit frame selection. The
+2,049-entry tangent lookup travels through disposable render-asset format v6;
+the reader validates table size and endpoints. No compiled rendering helper
+was introduced.
+
+The new parity harness passes all 16,392 direction cases, 393,408 boundary
+cases, six signed-int-minimum edges, and 100,000 angle round trips. Three actual
+16-process styles each match serial pixels and encoded strips (320,000 pixels,
+80 strips, zero differences); the full 36-map load/35-idle-tic/two-frame smoke
+also passes. A focused direct E1M1-to-E1M2 map-change fixture rewrites v6
+assets under sixteen persistent Classic workers; the E1M2 result matches
+256,000 pixels and 64 encoded strips, with every worker PID unchanged. Raw
+receipts are in `results/sprite-rotation-parity.json`,
+`results/render-partitions-sprite-rotation-*.json`, and
+`results/campaign-smoke-sprite-rotation.json`.
+
+The 15-pair-per-map serial timing distributions do not support a performance
+claim. Their median paired differences are about -0.4%, but E1M2's separate
+candidate median is slower, illustrating the sample spread. The raw trials are
+`results/sprite-rotation-performance-e1m1.json` and
+`results/sprite-rotation-performance-e1m2.json`; they exclude setup, simulation,
+workers, audio, encoding, Terminal, and displayed frame rate.
+
+On exact source commit `693cc061a2caa1fac36fc8a0e6d2e6830a6a4577`, freshly rerun
+checks pass: 57 campaign transition/secret-return/finale assertions, 97 boss
+progression assertions, 10 menu-input assertions, 125 session-menu/screen
+assertions, and six synthetic console-input checks. `Play.ps1 -Check` accepts
+the installed Ultimate Doom IWAD and prepared Episode 1 music catalog, and the
+catalog identity plus 36-map smoke are pinned in the readiness receipt. The
+one full human Episode 1 route remains pending. Static math parity is not
+moving-actor visual/occlusion validation, and no recording or automated route
+work is part of this step.

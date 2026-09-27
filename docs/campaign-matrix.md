@@ -6,11 +6,11 @@ Updated 2026-09-26. Release sequence remains Ultimate Doom, Doom II, then a MyHo
 
 Source/IWAD hashes and detailed results: [results/campaign-smoke-lineflags-fixed.json](../results/campaign-smoke-lineflags-fixed.json).
 
-The current actor-projection renderer also passes a fresh **36/36-map smoke**
-with 16 worker strips, 35 idle tics and two full 320×200 frames per map:
-[current receipt](../results/campaign-smoke-actor-projection-final.json). This
-is startup/render coverage, not any of the ordinary-input completion evidence
-in the table below.
+The current actor-projection and fixed-angle sprite renderer also passes a
+fresh **36/36-map smoke** with 16 worker strips, 35 idle tics and two full
+320×200 frames per map: [current receipt](../results/campaign-smoke-sprite-rotation.json).
+This is startup/render coverage, not any of the ordinary-input completion
+evidence in the table below.
 
 E1M1 has an [input-only completion report](../results/e1m1-route-lineflags.json) with 1560 commands. That route ends at intermission; it does not qualify next-level presentation or a whole episode. E1M2 now has a separate [normal-route qualification](campaign-e1m2.md), including recorded continuation into E1M3. The remaining maps still need completion evidence. Source-version matching is checked separately from input/state equivalence.
 
@@ -78,16 +78,18 @@ and explicitly leaves the human route and physical keyboard input pending.
   two intercept checks, the original E1M1–E1M4 stored route replays, and a
   fresh E1M1–E1M9 smoke. All nine maps load, run 35 idle tics, and render two
   320x200 frames. Routes and smoke remain separate from human coverage.
-- [Transition fixtures](../results/campaign-transitions-episode1-after-visibility.json):
+- [Transition fixtures](../results/episode1-transitions-sprite-rotation.json):
   57/57 checks after the source correction, including normal-map destinations,
   E1 secret destinations and history, finale states, inventory carry-over,
   and death/respawn behavior.
-- [Boss progression fixtures](../results/episode1-boss-readiness.json):
+- [Boss progression fixtures](../results/episode1-bosses-sprite-rotation.json):
   97/97 checks, including E1M8's tag-666 floor opening. Explicit boss-state
   fixtures are not an ordinary combat victory.
-- [Menu/session checks](../results/episode1-session-menu-readiness.json):
+- [Menu/session checks](../results/episode1-session-menu-sprite-rotation.json):
   125/125 checks and 46 screen fixtures.
-- [Synthetic keyboard-state checks](../results/episode1-console-input-readiness.txt):
+- [Synthetic menu-key checks](../results/episode1-menu-input-sprite-rotation.json):
+  10/10 transitions pass; no desktop keyboard input was injected.
+- [Synthetic keyboard-state checks](../results/episode1-console-input-sprite-rotation.txt):
   six checks passed. They do not inject desktop input or establish physical
   keyboard usability.
 - [Music preparation](../results/music-preparation-episode1-first.json) qualifies
@@ -96,18 +98,18 @@ and explicitly leaves the human route and physical keyboard input pending.
   results. [Actual worker integration](../results/save-worker-episode1-music-after-catalog.json)
   passes 15 save/load/new-game checks with 97,020 music frames and clean device
   shutdown. This is not a full-campaign continuity check.
-- [Current-source launcher preflight](../results/episode1-launch-preflight-worldsprite.json):
+- [Current-source launcher preflight](../results/episode1-launch-preflight-sprite-rotation.json):
   the Steam IWAD, 36 episode maps, PowerShell 7.6.5, Windows Terminal and exact
   catalog path are detected. The separate audio-worker check validates the
   catalog contents; preflight itself does not launch the game.
 - [Launch parameter binding](../results/episode1-launch-binding.txt): the
   documented source entry point parses and exposes every playtest argument.
-- The current-source [36-map smoke](../results/campaign-smoke-world-sprite-verified.json)
+- The current-source [36-map smoke](../results/campaign-smoke-sprite-rotation.json)
   passes after the latest renderer changes: every Ultimate Doom map advances
   35 idle tics and renders two frames using sixteen strips. The focused transition/finale,
   boss, menu/session, synthetic console-input, and menu-key checks were freshly
   rerun for the human-playthrough handoff; all 295 assertions passed. The
-  [portable final-check receipt](../results/episode1-playtest-final-checks.json)
+  [current readiness receipt](../results/episode1-playtest-readiness.json)
   records their counts, exact IWAD, settings defaults and limits. The separate
   [integer-row renderer receipt](../results/render-integer-row-fidelity.json)
   captures the latest sampling comparison and serial/worker equivalence; the
@@ -121,6 +123,14 @@ and explicitly leaves the human route and physical keyboard input pending.
   all three styles match serial output, 138 weapon-lighting fixtures pass, and
   a live E1M1-to-E1M2 worker reload preserves all processes. This is a patch
   raster and transport check, not original-executable parity or map completion.
+- Exact rotated actor-frame arithmetic now matches the adopted Doom angle rule
+  across 393,408 synthetic sector-boundary cases; the former floating formula
+  disagreed in 172,724. Asset v6 carries its lookup to workers. The actual
+  three-style worker checks are exact, but moving-actor visual selection and
+  occlusion remain open. The current v6 E1M1-to-E1M2 reload preserves all
+  sixteen workers and matches 256,000 pixels and 64 strips against serial
+  output ([receipt](../results/session-worker-sprite-rotation-classic.json));
+  see [rendering fidelity](rendering-fidelity.md) for limits.
 - Current-source [weapon/actor patch sampling](../results/weapon-projection-sampling-comparison.json)
   uses the adopted renderer's floored screen origin and fixed-point column
   stepping. Seven fractional pistol offsets match exactly, ten E1M1/E1M2
