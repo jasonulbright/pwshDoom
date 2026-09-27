@@ -1,0 +1,15 @@
+{
+  "HarnessSha256": "7FA408FD106EEA2AB6905AF36B7A38AEFF0AD89C08A1ECF630B53901B1C528AB",
+  "Format": "pwshDoom.ManagedDoomMathParity",
+  "PlayerBehaviorSha256": "E135F7E46A1E369A4287065D9E7CB6044A067713444C7CB367D9D9C14201D095",
+  "GeometrySha256": "558811C9FB1E1C95D6632CF84AE2189BD5E8147F2BC6B22C72C41D3DE6546915",
+  "BundleSha256": "19DE3303C005C6BD6CF96F7A101C2D7AD34B43CA678E1D65FD2ECE7A1E5E7038",
+  "Version": 1,
+  "NegativeDeathTurnData": 4235314973,
+  "BobAngleStep": 409,
+  "Meaning": "Checks unsigned 32-bit C# SlopeDiv wrapping and integer division against a separate integer oracle over explicit boundary inputs and 50,000 deterministic random pairs; also checks the original player bob step and five-degree death turn constants.",
+  "SlopeDivCases": 50006,
+  "FinishedUtc": "2026-09-27T17:15:49.5396006Z",
+  "RandomSeed": 9272026,
+  "DeathTurnData": 59652323
+}

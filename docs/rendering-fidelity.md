@@ -739,6 +739,30 @@ worker checks. These checks establish the targeted visibility correction and
 worker consistency for their samples, not complete sprite parity, campaign
 completion, original-executable equivalence, or live frame rate.
 
+### Anchor lower sprite clipping at the actor's world Z (2026-09-27)
+
+The adopted renderer's `VisSprite.GlobalBottomZ` is the object's world Z; its
+top is the object Z plus the sprite patch's top offset. FastRenderer instead
+derived the lower boundary as `Z + patch.Top - patch.Height`. Stock E1M1
+patches such as `ELEC` (top offset 123, image height 128) and `BON1` (14 vs.
+18) make those values differ. FastRenderer now uses the object Z for the lower
+silhouette comparison, matching the renderer's world-space boundary.
+
+The existing hidden-BON1 wall-silhouette test still passes. The first 280 tics
+of the saved human E1M1 input pass eight actor-isolation comparisons, and the
+sampled actor masks at tics 35–245 are unchanged from the prior receipt. A
+fresh 36-map smoke and five-view/seven-strip worker checks pass in Classic,
+Matrix/Katakana, and AnsiArt/Katakana. This source-level consistency fix has
+not reproduced or resolved the separate corpse/pickup view near the blue
+armor; those sparse snapshots remain inconclusive. Receipts:
+[actor-mask comparison](../results/actor-occlusion-human-prefix-world-z-20260927.json),
+[wall-silhouette test](../results/sprite-silhouette-world-z-20260927.json),
+[36-map smoke](../results/campaign-smoke-world-z-20260927.json), and
+[Classic](../results/render-partitions-world-z-classic-20260927.json),
+[Matrix](../results/render-partitions-world-z-matrix-20260927.json),
+[AnsiArt](../results/render-partitions-world-z-ansiart-20260927.json)
+worker checks.
+
 ### Sampled radioactive-pool views (2026-09-27)
 
 To investigate the separate report of pickups and corpses showing through

@@ -57,13 +57,16 @@ class Geometry {
         return if ($dx -lt $dy) { $dx + $dy - ($dx / 2) } else { $dx + $dy - ($dy / 2) }
     }
     static [uint] SlopeDiv([int] $num, [int] $den) {
-        if ($den -lt 512) {
+        [uint64] $numUnsigned = [long]$num -band 0xFFFFFFFFL
+        [uint64] $denUnsigned = [long]$den -band 0xFFFFFFFFL
+        if ($denUnsigned -lt 512) {
             return [Geometry]::slopeRange
         }
 
-        [uint64] $numUnsigned = [uint32]$num
-        [uint64] $denUnsigned = [uint32]$den
-        [uint64] $ans = ($numUnsigned -shl 3) / ($denUnsigned -shr 8)
+        # Match C# uint overflow and integer division without PowerShell's rounding cast.
+        [uint64] $numerator = ($numUnsigned -shl 3) -band 0xFFFFFFFFL
+        [long] $remainder = 0
+        [uint64] $ans = [Math]::DivRem([long]$numerator, [long]($denUnsigned -shr 8), [ref]$remainder)
 
         if ($ans -gt [Geometry]::slopeRange) {
             return [Geometry]::slopeRange

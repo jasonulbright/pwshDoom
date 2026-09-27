@@ -1,0 +1,38 @@
+{
+  "FinishedUtc": "2026-09-27T16:41:04.9946814Z",
+  "Map": "E1M1",
+  "Camera": {
+    "X": 355.806793212891,
+    "ViewZ": 40.6085205078125,
+    "AngleDegrees": 184.921875,
+    "Y": -3259.86231994629
+  },
+  "OccludedActor": {
+    "X": 144.0,
+    "Type": "Misc2",
+    "Y": -3136.0,
+    "Sprite": "BON1",
+    "Z": -8.0
+  },
+  "ChangedScenePixels": 0,
+  "ExpectedChangedScenePixels": 0,
+  "RepeatedFrameDifferences": 0,
+  "ExpectedRepeatedFrameDifferences": 0,
+  "ClipRecordReused": true,
+  "ActorClipBuffersReused": true,
+  "Passed": true,
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "BundleSha256": "BFFE5C398DCB796183F133F58EAE0C178702EC0362F38284FF426F506E4F3CF2",
+  "Sources": [
+    {
+      "Path": "src/FastRenderer.ps1",
+      "Sha256": "9496D650D07F4177DF77A70309E5F99D46C4F7A2F0C664D2C3B3E8FB4165F3FA"
+    },
+    {
+      "Path": "src/RenderFuzz.ps1",
+      "Sha256": "8D2B6B6B0DF30A1DD7E30D070F60A1EABBF12397BC9816A03481C6D6A659B882"
+    }
+  ],
+  "Error": null,
+  "Meaning": "At the recorded E1M1 view, an actor behind a nearer lower-wall silhouette must not paint over the upper floor. The no-actor frame is the local pixel baseline. A repeated same-state render verifies stable pixels and reuse of per-context wall records and actor clip buffers. Reference-renderer parity is separately measured by Compare-ActorOcclusion.ps1."
+}

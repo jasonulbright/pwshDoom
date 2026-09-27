@@ -640,8 +640,10 @@ function Invoke-FastRender {
                 [int]$textureAltData=$actorZData+($patch.Top -shl $spriteFracBits)-$viewZData
                 [int]$topData=(84 -shl $spriteFracBits)-([long]$textureAltData*[long]$xScaleData -shr $spriteFracBits)
                 [double]$left=$leftFracData/65536.0;[double]$top=$topData/65536.0
+                # Doom clips sprite silhouettes using the world-object base Z
+                # and the patch top offset; patch pixel height is not its floor Z.
                 [double]$actorTopZ=$actorZData/65536.0+$patch.Top
-                [double]$actorBottomZ=$actorTopZ-$patch.Height
+                [double]$actorBottomZ=$actorZData/65536.0
                 [int[]]$actorClipTop=$Context.ActorClipTop;[int[]]$actorClipBottom=$Context.ActorClipBottom
                 [int]$clipFirst=[Math]::Max($FirstColumn,$firstSpriteColumn)
                 [int]$clipEnd=[Math]::Min($EndColumn,$lastSpriteColumn+1)

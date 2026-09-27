@@ -2437,3 +2437,140 @@ The actual simulation worker passes all 12 save/load checks while selecting
 Episode 2 and restoring an Episode 1 save; the complete saved 26,731-command
 chainsaw regression still matches all 79 available checkpoints. The user has
 not yet completed the single full Episode 1 human playthrough.
+
+## 2026-09-27 — Qualify and start Episode 2 map 2 music
+
+D_E2M2 now has a local complete-state recurrence qualification using the
+installed Ultimate Doom IWAD and pinned soundfont. Its loop period is
+6,703,200 frames (608 seconds, one score cycle); two aligned periods repeat
+the same complete normalized synthesizer state with 11 active voices and
+state SHA-256
+`59A1A22DE2725F04338DBA39D7F4F59D9087176E8BED60CFE5D3F92759C56BF4`.
+The independently rendered eight-second opening PCM matches exactly. Six
+reader/mixer checks pass, including the exact reusable loop seam. The
+two-period result infers the next period from complete state; there is no
+third independently rendered PCM comparison. Loop render/write/snapshot time
+was 510.113 seconds and total preparation took 525.2 seconds.
+
+The preparer then revalidated and published a 13-entry ignored local catalog:
+the eleven Episode 1 scores plus D_E2M1 and D_E2M2. A two-second headless
+Episode 2 map 2 run selected D_E2M2, submitted 86,940 music frames, returned
+85,680 completed frames, reported an upper bound of 1,260 queued frames
+canceled at shutdown, and closed the device without an audio-worker error.
+That is brief catalog/selection/playback-start integration evidence. No
+audible-quality or continuous-map/campaign conclusion follows.
+
+Receipts: [track preparation](../results/music-preparation-e2m2-state-proof-20260927.json),
+[six reader/mixer checks](../results/music-track-qualification-e2m2-state-proof-20260927.json),
+[13-track catalog revalidation](../results/music-catalog-revalidation-e1-e2-20260927.json),
+and the local [headless integration report](../local/episode2m2-music-integration-20260927.json).
+
+## 2026-09-27 — Use world Z for lower sprite silhouettes
+
+Code comparison found that FastRenderer derived a sprite's lower silhouette
+boundary from patch top offset minus patch pixel height. The adopted renderer
+uses the actor's world Z for `GlobalBottomZ` and uses the patch top offset only
+for `GlobalTopZ`. In the installed E1M1 actors these are real distinct values:
+the Techpillar patch is 123 units tall-offset over a 128-pixel image, and BON1
+is 14 over 18. FastRenderer now anchors the lower silhouette test to the
+actor's world Z.
+
+The focused hidden-BON1 regression passes. Eight recorded E1M1 actor-isolation
+views complete successfully; the actor masks at tics 35–245 are unchanged
+from the prior receipt. The exact raised-floor tic-700 view also returns the
+same isolated actor-pixel counts as its previous receipt, so this source
+correction did not alter that screenshot or resolve the separate pool
+visibility report; that tic-700 rerender used the ignored local
+`audit-human-view-occlusion.ps1` helper and has no new portable receipt. The
+fresh 36-map smoke passes, as do five-view/seven-strip
+pixel checks in Classic, Matrix/Katakana, and AnsiArt/Katakana (320,000 pixels
+per style). No performance or independent original-executable parity claim
+follows. The first parallel test invocation collided on the shared temporary
+engine-bundle filename; both renderer tests were rerun serially.
+
+Receipts: [actor-mask comparisons](../results/actor-occlusion-human-prefix-world-z-20260927.json),
+[focused wall-silhouette test](../results/sprite-silhouette-world-z-20260927.json),
+[36-map smoke](../results/campaign-smoke-world-z-20260927.json), and
+[Classic](../results/render-partitions-world-z-classic-20260927.json),
+[Matrix](../results/render-partitions-world-z-matrix-20260927.json),
+[AnsiArt](../results/render-partitions-world-z-ansiart-20260927.json)
+partition checks.
+
+## 2026-09-27 — Audit original Managed Doom references and apply narrow upstream math fixes
+
+Reviewed the vendored engine's provenance (`src/ManagedDoom/ORIGIN.md`), the
+original C# Managed Doom repository and its README references, the C# unit and
+compatibility test layout, the post-pin PowerShell fork commits, and the user's
+local GEBB PDF. The project clearly descends from the C# port through Oleyska's
+PowerShell translation; the original reference suite can help target future
+checks without becoming a runtime dependency. The new
+[reference audit](reference-audit.md) distinguishes active implementation
+references from secondary documents and future-only extensions. The GEBB
+sections on masked draw-segment clipping are relevant to the reported sprite
+visibility issue, but they do not diagnose it. The local PDF remains outside
+the release/commit set.
+
+The PowerShell fork's September 22 fix exposed three direct parity errors in
+our pinned code: `SlopeDiv(1,1280)` rounded to 2 instead of using C# integer
+division to produce 1; player bob-angle division rounded before multiplication;
+and death-turn used five binary-angle units rather than five degrees. Adapted
+only these narrow changes in `Geometry.SlopeDiv` and `PlayerBehavior`, leaving
+the wider geometry rewrite for a future evidence-based review. 50,006 slope
+inputs match unsigned 32-bit C# arithmetic; bob/death angle constants match.
+This check is reproducible with
+[`Test-ManagedDoomMathParity.ps1`](../scripts/Test-ManagedDoomMathParity.ps1).
+The original C# `GeometryTest.PointToAngle` passes as a reference-project test.
+The installed Ultimate Doom IWAD passes the 36-map load/render smoke and all 69
+campaign-transition assertions after the PowerShell fixes. Neither check is
+human campaign completion.
+
+Receipts: [math parity](../results/upstream-math-parity-20260927.json),
+[36-map smoke](../results/campaign-smoke-exact-math-20260927.json), and
+[campaign transitions](../results/campaign-transitions-exact-math-20260927.json).
+
+The retained 26,731-command human input recording was also replayed once as a
+regression after these behavior changes. All commands were consumed without a
+simulation exception, but the checker reported 134 mismatch entries across 79
+checked checkpoint records, beginning at tic 350; the stream remained on E1M1 rather
+than reaching the previously recorded E1M2 transition. Its captured source
+fingerprint predates the current engine. This establishes that the old input
+stream is no longer a valid exact replay baseline; it does not isolate a
+product defect or reproduce the original crash. No waypoints or input were
+retuned. Jason's fresh human playthrough remains the route-coverage oracle.
+
+Receipt: [old human input replay after math corrections](../results/episode1-human-crash-replay-exact-math-20260927.json).
+
+### Current-source Episode 1 requalification
+
+After the upstream arithmetic corrections, current-source focused checks pass:
+the 36-map Ultimate Doom load/render smoke; 69 campaign transition assertions
+including E1M3 → E1M9 → E1M4 and finale routing; 97 boss-progression checks;
+125 menu/session checks with 46 screen fixtures; 15 simulation-worker save,
+load, and new-game checks with the prepared Episode 1 music catalog; and two
+chainsaw-hit checks including the reproduced E1M2 imp case. A real two-second
+headless `Invoke-Doom.ps1 -Sound -MusicCatalog` run starts the simulation and
+audio workers and exits without an error (69 tics, 26 completed frames). This
+is startup and short integration evidence, not continuous audio, displayed
+frame rate, or campaign-completion evidence. The local C# reference test
+`GeometryTest.PointToAngle` also passes, separately from pwshDoom.
+
+The previous 26,731-command human input was replayed once against the changed
+math. All 79 checkpoints were inspected; 134 state/render mismatch entries
+begin at tic 350, and the old stream remains on E1M1 rather than reaching its
+recorded E1M2 transition. No simulation exception or isolated reproducible
+defect was exposed. Because its source fingerprint predates the arithmetic
+fix, this is a stale-input result, not evidence of a current route failure.
+Existing E1M1–E1M4 route receipts and fixed-input E1M2–E1M4 replays remain
+retained at their recorded source pins; the E1M3 waypoint stall remains
+documented without route tuning. These automated runs are not human campaign
+evidence. The next route-coverage step is Jason's one complete Episode 1 run.
+
+Receipts: [36-map smoke](../results/campaign-smoke-exact-math-20260927.json),
+[campaign transitions](../results/campaign-transitions-exact-math-20260927.json),
+[boss progression](../results/boss-progression-exact-math-20260927.json),
+[menu/session checks](../results/session-menu-exact-math-20260927.json),
+[save/audio worker](../results/save-worker-exact-math-20260927.json),
+[chainsaw regression](../results/saw-attack.json),
+[stale-input replay](../results/episode1-human-crash-replay-exact-math-20260927.json),
+and [upstream math parity](../results/upstream-math-parity-20260927.json).
+The short host startup report remains under ignored `local/`.

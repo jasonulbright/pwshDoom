@@ -10,7 +10,8 @@ library, launcher, or upstream build helper is included. The original checkout
 is kept separately under ignored `local/upstream/`.
 
 Copyright notices are retained in each file. This is a PowerShell translation
-by Oleyska of ManagedDoom by Nobuaki Tanaka, derived from id Software's Doom.
+by Oleyska of [Managed Doom by Nobuaki Tanaka](https://github.com/sinshu/managed-doom),
+itself manually translated from id Software's Linux Doom.
 The source is GPL-2.0-or-later; the complete GPL v2 text is at ../../LICENSE.
 pwshDoom's adaptations and integration code are also GPL-2.0-or-later.
 
@@ -83,6 +84,15 @@ map screens with a presentation-only HUD cache.
 Further adaptations and validation are recorded in `docs/ledger.md` at the
 repository root. This attribution does not claim vanilla compatibility.
 
+The original C# repository and its `ManagedDoomTest` project were reviewed as
+additional source and test references on 2026-09-27. The ignored local checkout
+is at revision `9365696eb44326a3aab72c4bab217f7db8a87c96`; it is not a runtime
+dependency. Its `GeometryTest.PointToAngle` MSTest passed. The broader test
+portfolio covers geometry, maps, player movement/weapons, monsters, sector
+actions, demos, and multi-level behavior; tests requiring IWADs or PWADs remain
+separately asset-dependent. See `docs/reference-audit.md` for the disposition
+of the original README's reference list and the reviewed book sections.
+
 Modifications, 2026-09-12 (damaging floors and stairs):
 
 - `PlayerBehavior.PlayerInSpecialSector`: select the existing type-4 damage
@@ -144,3 +154,25 @@ Modifications, 2026-09-19 (numeric movement gates):
   out of the first visible intermission update. The simulation warms the active
   episode at startup, new-game selection, and save load. See
   `docs/intermission-background-warmup.md` for equivalence and timing evidence.
+
+Modifications, 2026-09-27 (upstream parity review):
+
+- Compared the pinned PowerShell fork with its September 22 and 23 upstream
+  commits. Adopted only the narrow `Geometry.SlopeDiv` unsigned-wrap/integer-
+  division correction and `PlayerBehavior` bob/death-angle constants from
+  `e05c6f8511786d9813fc7aad7d03a34ecda87c5d`. The earlier code rounded the
+  quotient (`SlopeDiv(1,1280)` returned 2 instead of 1), truncated the bob
+  angle at the wrong point, and used 5 binary-angle units instead of five
+  degrees for the death turn. The broader upstream raw-geometry rewrite and
+  the author's later performance report were reviewed but not adopted or
+  independently reproduced.
+- 50,006 focused slope-division inputs match C# unsigned 32-bit arithmetic;
+  the bob step and signed death turn match the C# constants. The local C#
+  `GeometryTest.PointToAngle` passes, as do the current 36-map load/render
+  smoke and 69 campaign-routing assertions. Reproduce the PowerShell checks
+  with `scripts/Test-ManagedDoomMathParity.ps1`; math and campaign receipts are
+  linked from `docs/ledger.md`. These checks do not certify route completion
+  or full vanilla compatibility. Replaying the older 26,731-command human
+  recording consumes the full stream without exception but no longer matches
+  its checkpoints after tic 350 and does not reach E1M2; see the ledger for
+  this stale-input comparison.

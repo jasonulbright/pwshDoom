@@ -1,6 +1,6 @@
 # Preparing a local music catalog
 
-September 27 current status: all eleven tracks required for an Episode 1 playthrough are qualified and published in the local `local/music-prepared-episode1.json` catalog (SHA-256 `0E9C9542C75F4D5E2D7FC71E42FAFBB58F94321C3B8A49BA0C9AC5A93752EE58`). It covers E1M1–E1M9, the intermission and finale. A 15-check simulation/audio-worker test consumed 97,020 music frames across new-game, save and load operations and closed the device cleanly; a post-change rerun is recorded in [`save-worker-music-one-shot-dintro-20260926.json`](../results/save-worker-music-one-shot-dintro-20260926.json). The catalog and PCM loop payloads remain local; commercial WAD and soundfont assets are not in the repository. D_E2M1 has since been qualified into a separate experimental local combined catalog using the optional complete-state recurrence proof. The other 17 unique Episode 2/3 map scores remain uncovered; the two finite finale/title scores also remain open. This does not alter the ready Episode 1 playtest handoff or close the broader audio M3 gate: continuous campaign playback, presentation pacing and acoustic review remain open.
+September 27 current status: all eleven tracks required for an Episode 1 playthrough are qualified and published in the local `local/music-prepared-episode1.json` catalog (SHA-256 `0E9C9542C75F4D5E2D7FC71E42FAFBB58F94321C3B8A49BA0C9AC5A93752EE58`). It covers E1M1–E1M9, the intermission and finale. A 15-check simulation/audio-worker test consumed 97,020 music frames across new-game, save and load operations and closed the device cleanly; a post-change rerun is recorded in [`save-worker-music-one-shot-dintro-20260926.json`](../results/save-worker-music-one-shot-dintro-20260926.json). The catalog and PCM loop payloads remain local; commercial WAD and soundfont assets are not in the repository. Episode 2 scores D_E2M1 and D_E2M2 now have optional complete-state recurrence qualifications. A current local 13-track catalog combines the eleven Episode 1 tracks with those two scores. The other 16 unique Episode 2/3 map scores remain uncovered; the two finite finale/title scores also remain open. This does not alter the ready Episode 1 playtest handoff or close the broader audio M3 gate: continuous campaign playback, presentation pacing and acoustic review remain open.
 
 The installed Ultimate Doom inventory contains 27 distinct map scores. At the
 time of the initial inventory, the Episode 1 catalog covered 9, leaving 18
@@ -15,10 +15,9 @@ is preserved, but resumption restarts that track. See the
 and the [ledger entry](ledger.md#2026-09-27--inventory-full-ultimate-doom-music-coverage).
 
 September 27 update: a separately run `-StateRecurrenceProof` preparation
-successfully qualified D_E2M1 and published an experimental local catalog
-containing the existing Episode 1 entries plus that one new map score. The
-inventory count is now nine Episode 1 scores plus one Episode 2 score, leaving
-17 unique map scores across Episodes 2 and 3. The earlier three-period
+successfully qualified D_E2M1 and published its local single-track catalog.
+The inventory count was then nine Episode 1 scores plus one Episode 2 score,
+leaving 17 unique map scores across Episodes 2 and 3. The earlier three-period
 interruption remains a valid historical record; the new result uses two
 continuous periods and a complete normalized synthesis-state recurrence
 inference, with no third independently synthesized output period. Details and
@@ -63,4 +62,30 @@ E1M5 preparation completed on original handle 68091 on September 19. All seven r
 
 September 26 continuation completion: the preserved batch reused and revalidated the seven existing qualifications, then qualified D_E1M6, D_E1M7, D_E1M8 and D_VICTOR. D_VICTOR's 8,467,200-frame period is 192 seconds; the job independently rendered three periods (25,401,600 frames / 576 seconds), with normalized state and float output both repeating. The boundary has 62 voices and state SHA-256 `433B5A35950B12F1FD3E9192E3281850988965194B05A25604C46B82DE74633D`. Its eight-second opening reference matches exactly, and six independent long-track reader checks pass. Portable receipts are `results/music-loop-dvictor-prepared.json`, `results/music-loop-dvictor-opening-reference.json` and `results/music-loop-dvictor-reader-first.json`; the atomic catalog and loop payloads stay under ignored `local/`. The 15-check real simulation/audio-worker test accepts the catalog and closes playback cleanly. A full human campaign still has to assess uninterrupted music and in-game pacing.
 
-September 27 D_E2M1 state-proof completion: the independent eight-second opening and two complete aligned periods qualified against the pinned stock IWAD and soundfont. The loop period is 26,894,700 frames (609.857 seconds); both boundaries have 12 voices and normalized state SHA-256 `BBD41D41F1D2C43F7BB0DEFB4BCD0D2790644EE864561DC1F5932DBEB261413E`. Total loop rendering covered 1,219.714 audio seconds in 1,320.515 seconds, with the full sequential preparation taking 1,341.522 seconds. The actual long-track reader/mixer passes six checks. The actual waveOut worker passes ten checks, matches its full submitted PCM against its independent schedule, and closes the device. It does not establish acoustic output or game-load timing. This receipt predates the later preflight guard for periods over 1,200 seconds; at 609.857 seconds D_E2M1 was already within the current limit, and synthesis code was not changed. Portable evidence: `results/music-loop-d-e2m1-state-recurrence-20260927.json`, `results/music-preparation-episode2-e2m1-state-proof-20260927.json`, `results/music-d-e2m1-opening-reference-state-proof-20260927.json`, `results/music-track-qualification-d-e2m1-state-proof-20260927.json`, and `results/music-audio-worker-d-e2m1-state-proof-20260927.json`. The experimental combined catalog and payloads remain ignored under `local/`; the qualified E1 catalog remains unchanged.
+September 27 D_E2M1 state-proof completion: the independent eight-second opening and two complete aligned periods qualified against the pinned stock IWAD and soundfont. The loop period is 26,894,700 frames (609.857 seconds); both boundaries have 12 voices and normalized state SHA-256 `BBD41D41F1D2C43F7BB0DEFB4BCD0D2790644EE864561DC1F5932DBEB261413E`. Total loop rendering covered 1,219.714 audio seconds in 1,320.515 seconds, with the full sequential preparation taking 1,341.522 seconds. The actual long-track reader/mixer passes six checks. The actual waveOut worker passes ten checks, matches its full submitted PCM against its independent schedule, and closes the device. It does not establish acoustic output or game-load timing. This receipt predates the later preflight guard for periods over 1,200 seconds; at 609.857 seconds D_E2M1 was already within the current limit, and synthesis code was not changed. Portable evidence: `results/music-loop-d-e2m1-state-recurrence-20260927.json`, `results/music-preparation-episode2-e2m1-state-proof-20260927.json`, `results/music-d-e2m1-opening-reference-state-proof-20260927.json`, `results/music-track-qualification-d-e2m1-state-proof-20260927.json`, and `results/music-audio-worker-d-e2m1-state-proof-20260927.json`. The earlier one-track catalog and payloads remain ignored under `local/`; the qualified E1 catalog remains unchanged.
+
+September 27 D_E2M2 state-proof completion: the independent eight-second
+opening and two complete aligned periods qualified against the pinned stock
+IWAD and soundfont. The period is 6,703,200 frames (608 seconds, one score
+cycle); both boundaries have 11 voices and normalized state SHA-256
+`59A1A22DE2725F04338DBA39D7F4F59D9087176E8BED60CFE5D3F92759C56BF4`.
+The independent opening PCM matches exactly at
+`6F592E378D8DF90993F9285AF362D309E94151E5A95F2DD9247B08AA9DEB0316`.
+Two periods (1,216 audio seconds) took 510.113 seconds of loop render/write/
+snapshot time; total preparation took 525.2 seconds. The actual reader/mixer
+passes all six checks, including the exact reusable loop seam. The two-period
+proof infers the next output period from complete state recurrence rather
+than independently rendering a third period.
+
+A headless two-second E2M2 game integration selected D_E2M2, submitted
+86,940 music frames, returned 85,680 completed frames, and reported an upper
+bound of 1,260 queued frames canceled during shutdown. The device closed
+without a worker error. This verifies catalog loading, map-to-track selection,
+short playback startup and clean shutdown, not audible quality, full-map
+playback or campaign continuity. A local 13-entry catalog now
+combines the eleven Episode 1 tracks with D_E2M1 and D_E2M2. Its report paths
+and PCM payloads remain ignored local files. Portable evidence:
+`results/music-preparation-e2m2-state-proof-20260927.json` and
+`results/music-track-qualification-e2m2-state-proof-20260927.json`; the
+headless report is local at
+`local/episode2m2-music-integration-20260927.json`.

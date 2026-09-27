@@ -157,7 +157,8 @@ class PlayerBehavior {
             return
         }
 
-        $angle = (([Trig]::FineAngleCount / 20) * $this.World.LevelTime) -band [Trig]::FineMask
+        $bobAngleStep = [int][Math]::Truncate([Trig]::FineAngleCount / 20)
+        $angle = ($bobAngleStep * $this.World.LevelTime) -band [Trig]::FineMask
         $bob = ($player.Bob / 2) * [Trig]::SinFromInt($angle)
 
         if ($player.PlayerState -eq [PlayerState]::Live) {
@@ -301,8 +302,8 @@ class PlayerBehavior {
     [void] DeathThink([Player]$player) {
         $this.MovePlayerSprites($player)
         $deathViewHeight = [Fixed]::FromInt(6)
-        $deathTurn = [Angle]::new(5)
-        $negativeDeathTurn = [Angle]::new(-5)
+        $deathTurn = [Angle]::new([uint32][Math]::Truncate([Angle]::Ang90.Data / 18))
+        $negativeDeathTurn = -$deathTurn
     
         # Fall to the ground
         if ($player.ViewHeight.Data -gt $deathViewHeight.Data) {
