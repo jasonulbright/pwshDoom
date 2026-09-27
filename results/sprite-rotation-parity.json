@@ -1,0 +1,43 @@
+{
+  "Format": "pwshDoom.SpriteRotationParity",
+  "FinishedUtc": "2026-09-27T00:47:43.1986444Z",
+  "PowerShell": "7.6.5",
+  "TanToAngleEntries": 2049,
+  "TanToAngleTableSha256": "BA4346CE3AC3DCB24C460BCF0ED98D3F8351203CA3BCC1DEC1CB822F9DEE7E11",
+  "DirectionCases": 16392,
+  "PointAngleMismatches": 0,
+  "BoundaryRotationCases": 393408,
+  "FixedRotationMismatches": 0,
+  "LegacyAtan2BoundaryMismatches": 172724,
+  "IntMinEdgeCases": 6,
+  "IntMinEdgeMismatches": 0,
+  "AngleDataRoundTrips": 100000,
+  "AngleDataRoundTripMismatches": 0,
+  "Sources": [
+    {
+      "Sha256": "1720F17AC5A068FA27580CC1D3E8F52553C1C9DED51F7D59AC7B7873C8B6BFA9",
+      "Path": "scripts/Test-SpriteRotation.ps1"
+    },
+    {
+      "Sha256": "7BBCBCD87AC8D9474FC7C2E8EB5B115D96B79955A1196AFDF5E38C08864FC180",
+      "Path": "src/FastRenderer.ps1"
+    },
+    {
+      "Sha256": "CE714979FB576708DEB4D5496734A9518B582C8FA385F94875FCE9B961975D93",
+      "Path": "src/RenderAssets.ps1"
+    },
+    {
+      "Sha256": "EA627082DA764EF68C67D0C8532EEDBEC4EA45E77E0BF8EDA5263C87C9DCEFB3",
+      "Path": "src/ManagedDoom/Doom/Math/Geometry.sb.ps1"
+    },
+    {
+      "Sha256": "EBD2108E63D47BD99FA2F533A7D8948AA156530317C95523C98452810F2F876E",
+      "Path": "src/ManagedDoom/Doom/Math/Trig.ps1"
+    },
+    {
+      "Sha256": "E9CC3FF4728AD1DD55FC814D335F53DCFB33AF3DA5386C2F11C1522775F3FDED",
+      "Path": "scripts/Build-EngineBundle.ps1"
+    }
+  ],
+  "Meaning": "Exhaustive slope-table directions across eight octants, every angle-sector boundary at -1/0/+1 binary-angle units, and signed-int-minimum point differences. Fixed rotation is compared with the adopted Geometry.PointToAngleData and ThreeDRenderer unsigned sprite-frame selection. LegacyAtan2BoundaryMismatches replays the prior floating expression on the same boundary fixtures. Synthetic math conformance only; not actor image, animation, occlusion, gameplay, or original-executable evidence."
+}

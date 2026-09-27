@@ -10,7 +10,7 @@ function Write-GameRenderAssets {
         if(-not $patchIds.ContainsKey($patch)){$patchIds[$patch]=$patches.Count.ToString();$patches.Add($patch)}
     }
     $meta=@{Segments=$Context.Segments;Nodes=$Context.Nodes;SkyFlat=$Context.SkyFlat;Sky=$patchIds[$Context.Sky];
-        PlaneColumnAngles=$Context.PlaneColumnAngles;PlaneDistanceScales=$Context.PlaneDistanceScales;PlaneRowSlopes=$Context.PlaneRowSlopes;PlaneFineSine=$Context.PlaneFineSine;
+        PlaneColumnAngles=$Context.PlaneColumnAngles;PlaneDistanceScales=$Context.PlaneDistanceScales;PlaneRowSlopes=$Context.PlaneRowSlopes;PlaneFineSine=$Context.PlaneFineSine;TanToAngleTable=$Context.TanToAngleTable;
         PlaneSpanBoundaries=$planeSpanBoundaries;
         Subsectors=@($Context.Subsectors | ForEach-Object {@{FirstSeg=$_.FirstSeg;SegCount=$_.SegCount}});
         Palette=$Palette;PlayPal=if($Context.ContainsKey('PlayPal')){$Context.PlayPal}else{$Context.Content.Palette.Data};Hud=@{};Textures=@{};SpriteAtlas=[object[]]::new($Context.SpriteAtlas.Length)}
@@ -28,7 +28,7 @@ function Write-GameRenderAssets {
     }
     $writer=[IO.BinaryWriter]::new([IO.File]::Create($Path))
     try {
-        $writer.Write('pwshDoom-assets-v5');$writer.Write(($meta | ConvertTo-Json -Depth 12 -Compress));$writer.Write($patches.Count)
+        $writer.Write('pwshDoom-assets-v6');$writer.Write(($meta | ConvertTo-Json -Depth 12 -Compress));$writer.Write($patches.Count)
         [byte[]]$sampleBlock=[byte[]]::new(128)
         foreach($p in $patches) {
             $writer.Write([int]$p.Width);$writer.Write([int]$p.Height);$writer.Write([int]$p.Left);$writer.Write([int]$p.Top)
@@ -67,7 +67,7 @@ function Read-GameRenderAssets {
     param([string]$Path)
     $reader=[IO.BinaryReader]::new([IO.File]::OpenRead($Path))
     try {
-        if($reader.ReadString() -ne 'pwshDoom-assets-v5'){throw 'Unknown render asset format.'}
+        if($reader.ReadString() -ne 'pwshDoom-assets-v6'){throw 'Unknown render asset format.'}
         $meta=$reader.ReadString() | ConvertFrom-Json -AsHashtable
         $patches=[object[]]::new($reader.ReadInt32())
         for($i=0;$i -lt $patches.Length;$i++) {
@@ -115,9 +115,11 @@ function Read-GameRenderAssets {
         [int[]]$ctx.PlaneDistanceScales=$meta.PlaneDistanceScales
         [int[]]$ctx.PlaneRowSlopes=$meta.PlaneRowSlopes
         [int[]]$ctx.PlaneFineSine=$meta.PlaneFineSine
+        [uint32[]]$ctx.TanToAngleTable=$meta.TanToAngleTable
         [int[]]$ctx.PlaneSpanBoundaries=[int[]]::new(0)
         if($meta.ContainsKey('PlaneSpanBoundaries') -and $null -ne $meta.PlaneSpanBoundaries){$ctx.PlaneSpanBoundaries=[int[]]$meta.PlaneSpanBoundaries}
         if($ctx.PlaneColumnAngles.Length -ne 320 -or $ctx.PlaneDistanceScales.Length -ne 320 -or $ctx.PlaneRowSlopes.Length -ne 168 -or $ctx.PlaneFineSine.Length -lt 10240){throw 'Invalid fixed-point plane lookup tables.'}
+        if($ctx.TanToAngleTable.Length -ne 2049 -or $ctx.TanToAngleTable[0] -ne 0 -or $ctx.TanToAngleTable[2048] -ne 0x20000000){throw 'Invalid Doom tangent-to-angle lookup table.'}
         if($ctx.PlaneSpanBoundaries.Length -gt 320 -or @($ctx.PlaneSpanBoundaries|Where-Object {$_ -lt 0 -or $_ -gt 320}).Count -gt 0){throw 'Invalid plane span boundaries.'}
         for([int]$i=1;$i -lt $ctx.PlaneSpanBoundaries.Length;$i++){if($ctx.PlaneSpanBoundaries[$i] -lt $ctx.PlaneSpanBoundaries[$i-1]){throw 'Plane span boundaries must be ordered.'}}
         return $ctx
