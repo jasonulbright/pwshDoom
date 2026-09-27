@@ -59,6 +59,12 @@ try{
     for($i=0;$i -lt $commands.Length;$i++){$commands[$i]=[TicCmd]::new()}
     $game.DeferedInitNew([GameSkill]::Medium,$Episode,$Map)
     $null=$game.Update($commands)
+    [int[]]$initialSectorHeights=[int[]]::new($game.World.Map.Sectors.Length*2)
+    for([int]$sectorIndex=0;$sectorIndex -lt $game.World.Map.Sectors.Length;$sectorIndex++){
+        $initialSectorHeights[2*$sectorIndex]=$game.World.Map.Sectors[$sectorIndex].FloorHeight.Data
+        $initialSectorHeights[2*$sectorIndex+1]=$game.World.Map.Sectors[$sectorIndex].CeilingHeight.Data
+    }
+    [int[]]$previousSectorHeights=[int[]]$initialSectorHeights.Clone()
 
     $config=[Config]::new()
     $config.video_highresolution=$false
@@ -89,6 +95,20 @@ try{
         if($game.State -ne [GameState]::Level){throw "Idle-input fixture left gameplay at level tic $levelTic ($($game.State))."}
 
         $snapshot=New-GameRenderSnapshot $game 1
+        [int[]]$sectorHeights=[int[]]::new($snapshot.Sectors.Length*2)
+        [Collections.Generic.List[int]]$changedSectorsFromStart=[Collections.Generic.List[int]]::new()
+        [Collections.Generic.List[int]]$changedSectorsSincePrevious=[Collections.Generic.List[int]]::new()
+        for([int]$sectorIndex=0;$sectorIndex -lt $snapshot.Sectors.Length;$sectorIndex++){
+            $sector=$snapshot.Sectors[$sectorIndex]
+            $sectorHeights[2*$sectorIndex]=[int][Math]::Round($sector.FloorHeight*65536.0)
+            $sectorHeights[2*$sectorIndex+1]=[int][Math]::Round($sector.CeilingHeight*65536.0)
+            if($sectorHeights[2*$sectorIndex] -ne $initialSectorHeights[2*$sectorIndex] -or
+                $sectorHeights[2*$sectorIndex+1] -ne $initialSectorHeights[2*$sectorIndex+1]){$changedSectorsFromStart.Add($sectorIndex)}
+            if($sectorHeights[2*$sectorIndex] -ne $previousSectorHeights[2*$sectorIndex] -or
+                $sectorHeights[2*$sectorIndex+1] -ne $previousSectorHeights[2*$sectorIndex+1]){$changedSectorsSincePrevious.Add($sectorIndex)}
+        }
+        $sectorHeightsJson=ConvertTo-Json -InputObject $sectorHeights -Compress
+        $sectorHeightsHash=[Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([Text.Encoding]::UTF8.GetBytes($sectorHeightsJson)))
         $actorJson=ConvertTo-Json -InputObject @($snapshot.Actors) -Depth 4 -Compress
         $actorHash=[Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([Text.Encoding]::UTF8.GetBytes($actorJson)))
         if($null -eq $firstActorHash){$firstActorHash=$actorHash}
@@ -171,6 +191,10 @@ try{
         $samples.Add([ordered]@{
             LevelTic=$snapshot.Tic
             PlayerHealth=$snapshot.ConsolePlayer.Health
+            SectorHeightStateSha256=$sectorHeightsHash
+            ChangedSectorIndicesFromStart=$changedSectorsFromStart.ToArray()
+            ChangedSectorIndicesSincePrevious=$changedSectorsSincePrevious.ToArray()
+            ChangedSectorHeights=@($changedSectorsFromStart.ToArray()|ForEach-Object {@{Index=$_;FloorHeightData=$sectorHeights[2*$_];CeilingHeightData=$sectorHeights[2*$_+1]}})
             ActorCount=@($snapshot.Actors).Count
             ReferenceVisibleWorldSprites=$visibleWorldSprites
             VisibleSpriteStateSha256=$visibleSpriteHash
@@ -189,6 +213,7 @@ try{
             Image=$imageInfo
         })
         Write-Host ("Tic {0}: actors={1}; scene differences={2}/53760; HUD differences={3}/10240" -f $snapshot.Tic,@($snapshot.Actors).Count,$sceneDifferences,$hudDifferences)
+        [Array]::Copy($sectorHeights,$previousSectorHeights,$sectorHeights.Length)
         $previousMismatchMask=$mismatchMask
     }
 }catch{$failure=$_.ToString()+"`n"+$_.ScriptStackTrace;throw}

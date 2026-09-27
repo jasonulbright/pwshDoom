@@ -1,0 +1,74 @@
+{
+  "SchemaVersion": 1,
+  "FinishedUtc": "2026-09-27T02:58:45.7513409Z",
+  "Experiment": "Counterfactual render sweep of the E1M1 moving ceiling at one frozen, replay-derived game state",
+  "SourceCommit": "189a65ab78b366720f974318ee04b4d64a321a9e",
+  "Episode": 1,
+  "Map": 1,
+  "Skill": 3,
+  "LevelTic": 315,
+  "SectorIndex": 26,
+  "ReplayPath": "results/e1m1-route-lineflags.json",
+  "ReplaySha256": "41CF35EDF94C1CABE8C96A1CEEFBCFBF41F20DF24093569B65A1A4C9C56C017B",
+  "WadPath": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Ultimate Doom\\base\\DOOM.WAD",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "ActualState": {
+    "SectorCenterY": -2496.0,
+    "PlayerHeadingDegrees": 359.8,
+    "SectorCeilingHeightFixedData": 393216,
+    "PlayerX": 1520.0,
+    "SectorCeilingHeight": 6.0,
+    "SectorCenterX": 1544.0,
+    "PlayerY": -2495.5
+  },
+  "Cases": [
+    {
+      "CeilingHeight": 0,
+      "SceneDifferentIndices": 8,
+      "HudDifferentIndices": 0
+    },
+    {
+      "CeilingHeight": 6,
+      "SceneDifferentIndices": 1,
+      "HudDifferentIndices": 0
+    },
+    {
+      "CeilingHeight": 34,
+      "SceneDifferentIndices": 390,
+      "HudDifferentIndices": 0
+    },
+    {
+      "CeilingHeight": 68,
+      "SceneDifferentIndices": 4259,
+      "HudDifferentIndices": 0
+    }
+  ],
+  "ComparedScenePixels": 53760,
+  "ComparedHudPixels": 10240,
+  "MismatchMaskLocationsChangedBetween0And68": 4263,
+  "CandidatePixelsChangedBetween0And68": 50760,
+  "ReferencePixelsChangedBetween0And68": 50740,
+  "OnlyChangedSector26Ceiling": true,
+  "OtherSimulationStateHeldFixed": true,
+  "CandidateRendererSha256": "54DE68548719A859691FE455E581E5F3123E343F5BB54B7BFD5A16D0621D9309",
+  "SnapshotHostSha256": "3732C6A81C74F43451CB2A2E4ED342EBE303FC3EEB558B64C3658F78EAACB940",
+  "ComparisonHarnessPath": "scripts/Compare-MovingActorReference.ps1",
+  "ComparisonHarnessSha256": "74EE0076844EED26E3D3BCA2B35CA9990E143255EF86035BD7CED76B1BBFBF2A",
+  "MovingActorReportPath": "results/moving-sector-reference-e1m1-prefix-20260927.json",
+  "MovingActorReportSha256": "E72EBD2B9CE8F8AF69100C2066D37A3503A64E8E666CB1733098D810B2FC6C82",
+  "ProbePath": "local/Probe-MovingSector.ps1",
+  "ProbeSha256": "FC54FDDDB4ED7B7D754B104EA6C237D930A94499D404466D0F4165AD1E0C7AB6",
+  "DiagnosticImages": [
+    {
+      "Sha256": "D7F2089EB17F709B473D9832E18414B2D1FF3EDBA09114D4A18A464609E362D9",
+      "Path": "local/moving-sector-sweep-images/tic315-ceiling0.png"
+    },
+    {
+      "Sha256": "C9E421F9AEAA6BF5580F4BAF834A562B02F9A1155B1C984E6F34B8A490A528A0",
+      "Path": "local/moving-sector-sweep-images/tic315-ceiling68.png"
+    }
+  ],
+  "Reference": "Locally adapted PowerShell reference renderer",
+  "OriginalExecutableComparison": false,
+  "Interpretation": "At the real replay height of 6 units, the scene differs by one palette index. Raising only the ceiling reveals substantial additional adopted-reference disagreement (4259 indices at 68 units). The paired views retain the same corridor layout; this identifies scene-fidelity disagreement exposed by the opening, not a reproducible door-blocking, crash, or progression defect. It does not establish original Doom parity or terminal performance."
+}

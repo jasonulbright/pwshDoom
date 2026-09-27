@@ -513,3 +513,22 @@ load the reference engine's `ThreeDRenderer` class. The production wrap was
 rewritten with PowerShell integer masking/modulo and the worker test was
 repeated successfully. That attempt found an implementation boundary, not a
 gameplay defect.
+
+## E1M1 moving-ceiling scene comparison (2026-09-26)
+
+The existing E1M1 line-flags replay reaches sector 26 at level tic 315 with
+the player facing the moving ceiling, 24 units from the sector center. Its
+actual six-unit opening differs from the adopted PowerShell reference by one
+scene palette index, with an exact HUD. Holding that replay-derived camera,
+actors, and all other world state fixed while varying only sector 26's ceiling
+to 0, 6, 34, and 68 units yields 8, 1, 390, and 4,259 differing scene
+indices. The 68-unit view exposes more of the corridor; both rendered panels
+retain the same basic layout. This is renderer disagreement in newly exposed
+surfaces, not evidence of a stuck door, blocked route, or session crash.
+
+The sweep isolates a fidelity gap that becomes visible as the ceiling opens,
+but does not attribute every changed pixel to a door-specific raster defect.
+The comparator is the adopted PowerShell reference, not an independently
+verified original executable, and these palette-index counts are not a
+perceptual quality or performance score. See the [sweep receipt](../results/moving-sector-e1m1-height-sweep-20260926.json)
+and [dynamic comparison receipt](../results/moving-sector-reference-e1m1-prefix-20260927.json).
