@@ -2839,3 +2839,22 @@ the separate `ReplayEnd` timing sample. The README continues to identify
 `0.1.0-preview.2` as the latest packaged release; the `.3` ZIP is a local
 candidate from `eff3f14`, so release metadata should change only when a final
 candidate is rebuilt and verified.
+
+## 2026-09-27 — Rebuild and verify the current preview.3 package candidate
+
+Built a fresh `0.1.0-preview.3` ZIP from clean commit
+`e9c9f9d6f91f49a3a00d1f95f6505ecf60fffe07` in an isolated clean checkout. The
+533-file manifest and every extracted size/hash match; the ZIP is 1,488,635
+bytes with SHA-256
+`B8FC5C41F37F9A6F2AC588A4B3EFDCE0C7A18594BC934A7B834F3F33048225D1`. The
+research PDF and user IWAD are absent. The extracted `Play.ps1 -Check` passes
+under PowerShell 7.6.6 and recognizes the supplied 36-map IWAD.
+
+The packaged headless E1M1 host reaches its requested two-second duration with
+69 simulation tics, 76 completed frames, and no error; reported worker working
+set is 4,045,074,432 bytes. This run does not exercise visible Terminal
+presentation, audio, or a campaign route. The raw report and package details
+are pinned in
+[`preview3-current-candidate-validation-20260927.json`](../results/preview3-current-candidate-validation-20260927.json).
+The candidate remains local and unpublished pending Jason's one complete
+Episode 1 human playthrough and the remaining scoped release checks.

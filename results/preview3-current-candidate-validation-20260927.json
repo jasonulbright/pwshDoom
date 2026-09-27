@@ -1,0 +1,56 @@
+{
+  "Format": "pwshDoom.PreviewPackageCandidateValidation",
+  "Version": 1,
+  "RecordedUtc": "2026-09-27T22:01:05.7337303Z",
+  "CandidateVersion": "0.1.0-preview.3",
+  "CandidateStatus": "LocalDraftNotPublished",
+  "Passed": true,
+  "SourceCommit": "e9c9f9d6f91f49a3a00d1f95f6505ecf60fffe07",
+  "WorkingTreeDirty": false,
+  "ZipSha256": "B8FC5C41F37F9A6F2AC588A4B3EFDCE0C7A18594BC934A7B834F3F33048225D1",
+  "ZipBytes": 1488635,
+  "PackageFileCount": 533,
+  "ManifestHashesVerified": true,
+  "ResearchPdfExcluded": true,
+  "PlayPreflight": {
+    "Passed": true,
+    "PowerShell": "7.6.6",
+    "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+    "EpisodeMapCount": 36,
+    "WindowsTerminalFound": true
+  },
+  "HostSmoke": {
+    "Passed": true,
+    "Headless": true,
+    "Seconds": 2,
+    "ExitReason": "Duration",
+    "SimulationTics": 69,
+    "CompletedFrames": 76,
+    "DurationSeconds": 2.0013861,
+    "TicsPerSecond": 34.47610633450487,
+    "CompletedUpdatesPerSecond": 37.97368233945464,
+    "WorkerWorkingSetBytes": 4045074432,
+    "Error": null,
+    "RawReport": "local/preview3-package-current-host-smoke-e9c9f9d.json",
+    "RawReportSha256": "070BB48A57D4DB9F92268F9AF369D9A65A37E6F9C382B89F17EC424E48A7DBD3"
+  },
+  "Sources": [
+    {
+      "Path": "scripts/Build-PreviewPackage.ps1",
+      "Sha256": "E66A8B5BBE083716B7EF204A50DABFC2C58B8C30F606F6247915166D96605364"
+    },
+    {
+      "Path": "Play.ps1",
+      "Sha256": "BC26D8D09BE5107BC9CD3BAB67A6A7BDD008672C795F7E611AD8477CBA3461C3"
+    },
+    {
+      "Path": "Start-Doom.ps1",
+      "Sha256": "132F5C9435B7290A70B1A0FE64EAD25F8EFF103E816D1A0A2614EF749F1E0627"
+    },
+    {
+      "Path": "scripts/Invoke-Doom.ps1",
+      "Sha256": "EAA75B6B236F6481C7C15EF1D2DA82C536B27206FBCD005CB1C67BED305E03C2"
+    }
+  ],
+  "Meaning": "A clean current-source checkout at the pinned commit produced a 533-file ZIP. The archive checksum and every extracted manifest size/hash were verified; research PDF and user WAD are absent. Packaged launcher preflight found the supplied 36-map Ultimate Doom IWAD under PowerShell 7.6.6. The extracted package completed a 2-second headless E1M1 simulation/render-worker startup with 69 tics and 76 completed frames and no error. This does not test visible Terminal output, audio, campaign completion, or live performance. The complete Episode 1 human playthrough and broader release gates remain open."
+}
