@@ -1953,3 +1953,25 @@ Evidence: [summary](../results/ansi-strip-buffer-reuse-summary-20260927.json),
 [retained first failure](../results/ansi-color-state-stringbuilder-20260927.json),
 [Pairs workers](../results/render-partitions-pairs-stringbuilder-20260927.json),
 and [ColorState workers](../results/render-partitions-colorstate-stringbuilder-20260927.json).
+
+## 2026-09-27 — Refresh the Episode 1 human-playtest build pin
+
+The original handoff pinned the campaign/session baseline `76b18ac`. Since
+then, the current branch changed only PowerShell renderer scratch reuse and
+Classic Pairs/ColorState ANSI strip assembly. Those changes have current-source
+pixel, worker, codec, and 36-map smoke evidence; no gameplay, campaign/session,
+menu, input, or audio source changed. A fresh `Play.ps1 -Check` finds PowerShell
+7.6.5, Windows Terminal, the 36-map Steam Ultimate Doom IWAD, and the prepared
+Episode 1 music catalog; both local content hashes match the handoff.
+
+The human-test pin is refreshed to `1fcda3ddfef9bd135ebbc75ed5d03a4ddd2abeaa`.
+The current-tip readiness receipt links these checks to the inherited
+campaign/session test baseline and preserves each original source pin. The
+documented route remains one HMP playthrough from E1M1 through E1M3's secret
+exit, E1M9, return to E1M4, E1M8, and the finale. No individual map test is
+requested. Jason's human result remains pending.
+
+Evidence: [current-tip readiness receipt](../results/episode1-playtest-current-tip-readiness-20260927.json),
+[renderer scratch reuse](../results/renderer-scratch-reuse-summary-20260927.json),
+[ANSI strip reuse](../results/ansi-strip-buffer-reuse-summary-20260927.json),
+and the unchanged [campaign/session receipt](../results/episode1-playtest-current-readiness-20260927.json).

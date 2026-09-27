@@ -22,25 +22,29 @@ E1M8 exit and intermission.
 
 ## Build and launch
 
-Run exact source build commit `76b18ac538a96e40b8aab2127039cf1a59718bec`.
-Because the branch has continued advancing, if your checkout is at its current
-tip, enter the pinned build from the repository root before launching:
+Run exact source build commit `1fcda3ddfef9bd135ebbc75ed5d03a4ddd2abeaa`.
+If your checkout is at a later branch tip, enter the pinned build from the
+repository root before launching:
 
 ```powershell
-git switch --detach 76b18ac538a96e40b8aab2127039cf1a59718bec
+git switch --detach 1fcda3ddfef9bd135ebbc75ed5d03a4ddd2abeaa
 ```
 
 After preserving the input and session reports under `local/`, return to the
 development branch with `git switch codex/feasibility-study`. The pinned build
-is based on renderer candidate
-`0fbdc40a77214c68203745800ec0a51cfed9a8fa` and adds a PCM-exact PowerShell
-mixer index optimization; gameplay, session, menu, input, and renderer logic
-are unchanged from that candidate. The [current readiness
-receipt](../results/episode1-playtest-current-readiness-20260927.json) pins
-this build, current-source transition/session/audio checks, IWAD and catalog
-hashes, and remaining limits. Earlier renderer-specific checks remain in the
-[renderer readiness receipt](../results/episode1-playtest-readiness.json). No
-automated full-campaign route is treated as human playthrough evidence.
+adds PowerShell renderer scratch reuse and Classic ANSI strip buffer reuse to
+the campaign/session baseline
+`76b18ac538a96e40b8aab2127039cf1a59718bec`. Pixel, worker, codec and map-smoke
+checks cover those renderer changes; gameplay, campaign/session, menu, input
+and audio source files are unchanged from the tested baseline. The [current-tip
+readiness receipt](../results/episode1-playtest-current-tip-readiness-20260927.json)
+pins this build and source hashes, records the fresh IWAD/catalog/launcher
+preflight, links the exact renderer and codec checks, and distinguishes the
+inherited session tests and their baseline commit. The earlier detailed
+[campaign/session receipt](../results/episode1-playtest-current-readiness-20260927.json)
+and [renderer readiness receipt](../results/episode1-playtest-readiness.json)
+retain their original source pins. No automated full-campaign route is treated
+as human playthrough evidence.
 Run from the repository root in 64-bit PowerShell 7.4 or later on Windows,
 with Windows Terminal, the legally obtained Ultimate Doom `DOOM.WAD`, and the
 prepared local music catalog `local/music-prepared-episode1.json`. The tested Steam IWAD is
@@ -56,7 +60,7 @@ pwsh -NoProfile -File .\Start-Doom.ps1 `
   -Episode 1 -Map 1 -Skill 3 -Style Classic -Sound `
   -MusicCatalog .\local\music-prepared-episode1.json `
   -RecordInput .\local\episode1-human-playthrough.json `
-  -Report .\local\episode1-human-session.json -Maximized
+  -Report .\local\episode1-human-session.json -Maximized -FontSize 5
 ```
 
 The build uses sixteen renderer processes by default. Leave that setting in
@@ -96,9 +100,10 @@ must not already exist.
 
 Hold the key briefly for movement, release it before changing direction, and
 use short discrete presses for switches. Classic needs a Terminal viewport of
-at least 320 columns by 100 rows. The game pauses if it is smaller; reduce the
-font size or enlarge the window if needed. Larger viewports center the game
-image, so blank space around it is expected. The 11-track Episode 1 catalog is
+at least 320 columns by 100 rows. This command uses a 5-point font to help fit
+the required grid. If the game still reports too few rows, press Ctrl+- or
+enlarge the window. Larger viewports center the game image, so blank space
+around it is expected. The 11-track Episode 1 catalog is
 enabled. Its actual simulation/audio worker passed 15 save/load/new-game checks,
 including 97,020 music frames and clean device shutdown. The current mixer also
 passes an actual waveOut worker check with submitted PCM matching an independent
@@ -123,7 +128,7 @@ playthrough.
 
 ## Readiness evidence
 
-The machine-readable [current readiness receipt](../results/episode1-playtest-current-readiness-20260927.json)
+The machine-readable [current-tip readiness receipt](../results/episode1-playtest-current-tip-readiness-20260927.json)
 and [campaign matrix](campaign-matrix.md) link the fresh map smoke, transition,
 boss, menu/session, synthetic input, and music receipts. The latest
 visibility-fix regression index records all four existing E1M1–E1M4 route
@@ -132,14 +137,15 @@ replays and the nine-map smoke; full raw replay reports remain under ignored
 [`campaign-e1m5-investigation.md`](campaign-e1m5-investigation.md); it ended in
 player death and did not establish a repeatable engine defect.
 
-On the exact handoff source, 57 campaign transition checks, 97 boss-progression
-checks, 125 menu/session checks with 46 screen fixtures, and the 1,747-command
-E1M1-to-E1M2 ordinary-input session check pass. The current audio mixer passes
-26 focused checks, nine music/effects checks, and ten actual-device worker
-checks. The worker matched its independent PCM schedule and closed the device;
-its finite run recorded one queue-timing stall. These checks prepare the full
-human run but do not claim E1M5–E1M8 completion or full-campaign audio
-continuity.
+On the inherited campaign/session baseline, 57 campaign transition checks, 97
+boss-progression checks, 125 menu/session checks with 46 screen fixtures, and
+the 1,747-command E1M1-to-E1M2 ordinary-input session check pass. Those game
+and session sources are unchanged in the pinned handoff build. The current
+audio mixer passes 26 focused checks, nine music/effects checks, and ten
+actual-device worker checks. The worker matched its independent PCM schedule
+and closed the device; its finite run recorded one queue-timing stall. These
+checks prepare the full human run but do not claim E1M5–E1M8 completion or
+full-campaign audio continuity.
 
 The current renderer passes a 36-map Ultimate Doom smoke on the same IWAD:
 each map advances 35 idle tics and renders two full serial frames. The smoke's
@@ -155,7 +161,7 @@ pins and limits are in the [readiness receipt](../results/episode1-playtest-read
 The renderer-candidate IWAD/music-catalog preflight is recorded in
 [`episode1-launch-preflight-sky-sampling.json`](../results/episode1-launch-preflight-sky-sampling.json).
 The current source's `Play.ps1 -Check` result and exact hashes are in the
-[current readiness receipt](../results/episode1-playtest-current-readiness-20260927.json).
+[current-tip readiness receipt](../results/episode1-playtest-current-tip-readiness-20260927.json).
 Both checks detect PowerShell 7.6.5, Windows Terminal, the 36-map IWAD and
 catalog path; audio contents are validated separately by the worker receipts.
 The latest fixed-point floor/ceiling mapping brings the six-view scene-index
