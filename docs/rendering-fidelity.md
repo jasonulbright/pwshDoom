@@ -884,3 +884,17 @@ Matrix/Katakana and AnsiArt/Katakana also pass with seven workers, each
 matching 320,000 pixels across five views and 35 encoded strips:
 [Matrix](../results/render-partitions-fuzz-workers7-matrix-katakana-20260928.json),
 [AnsiArt](../results/render-partitions-fuzz-workers7-ansiart-katakana-20260928.json).
+
+### Inspect an E1M1 actor-mask edge (2026-09-28)
+
+An isolated replay of the first 140 commands in the local human E1M1 prefix
+finds thirteen reference-only `BON2B0` sprite-mask pixels at column 229.
+FastRenderer records a non-plane background depth of 236.735 map units there,
+while the sprite is 514.134 units from the camera, so the candidate suppresses
+the farther sprite. Those pixels are all reference-only in the full scene;
+the five candidate-only mask pixels match the reference background color and
+produce no candidate-only scene mismatch. This explains one narrow difference
+against the adopted PowerShell renderer. It neither reproduces the reported
+through-wall view nor validates the original executable. The compact
+[source-pinned audit](../results/actor-occlusion-depth-audit-human-prefix-tic140-20260928.json)
+contains no private recording or diagnostic image.

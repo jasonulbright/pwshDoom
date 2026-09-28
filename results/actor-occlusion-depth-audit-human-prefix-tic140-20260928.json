@@ -1,0 +1,59 @@
+{
+  "Format": "pwshDoom.ActorOcclusionDepthAudit",
+  "Version": 1,
+  "FinishedUtc": "2026-09-28T11:38:05.3992592Z",
+  "Map": "E1M1",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "InputScope": "First 140 commands of a local human E1M1 prefix; source input and diagnostic images are not included.",
+  "Sources": [
+    {
+      "Path": "scripts/Compare-ActorOcclusion.ps1",
+      "Sha256": "218656DC44480C8243AF46D28B76D87633A50F7E763B0C537759CFD8830D2085"
+    },
+    {
+      "Path": "src/FastRenderer.ps1",
+      "Sha256": "6E5B10FFE976179D04C4BA877739EEFC5892E1003403E3A9DED0E63D2817A8B4"
+    },
+    {
+      "Path": "src/GameHost.ps1",
+      "Sha256": "4F082542D9AE6D30ABE3B9D11CBBE26D94B3FFBA3D2B02E5117D69D86A2D06E9"
+    },
+    {
+      "Path": "src/RenderLighting.ps1",
+      "Sha256": "E9C47D9E4005509206EC13DA08267F95DB3AF7A1E86F14A743F1F27DE145BF9F"
+    },
+    {
+      "Path": "src/RenderFuzz.ps1",
+      "Sha256": "8D2B6B6B0DF30A1DD7E30D070F60A1EABBF12397BC9816A03481C6D6A659B882"
+    }
+  ],
+  "Sample": {
+    "InputTic": 140,
+    "LevelTic": 140,
+    "ActorCount": 91,
+    "ActorMaskIoU": 0.904761904761905,
+    "CandidateOnlyActorMaskPixels": 5,
+    "ReferenceOnlyActorMaskPixels": 13,
+    "FullSceneMismatchPixels": 5521,
+    "BackgroundMismatchPixels": 5508,
+    "CandidateOnlyRegionMismatchPixels": 0,
+    "ReferenceOnlyRegionMismatchPixels": 13
+  },
+  "ReferenceOnlySprite": {
+    "Patch": "BON2B0",
+    "SpriteDistance": 514.1338563373375,
+    "ReferenceOnlyBounds": [
+      229,
+      90,
+      229,
+      105
+    ],
+    "ReferenceOnlyPixels": 13,
+    "CandidateBackgroundDepth": 236.7346934476905,
+    "CandidateDepthMinusSpriteDistance": -277.3991628896471,
+    "ReferenceOnlyNonPlaneDepthPixels": 13,
+    "ReferenceOnlyPlaneDepthPixels": 0
+  },
+  "Meaning": "In this single state, all thirteen reference-only sprite-mask pixels occur at x=229 where the candidate records a nearer, non-plane background depth than the isolated sprite. The candidate omits them and none become candidate-only full-scene mismatches. This explains one adapted-renderer mask discrepancy; it does not reproduce the reported through-wall sighting or establish original-executable parity.",
+  "PrivateInputOrImagesIncluded": false
+}

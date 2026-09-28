@@ -3604,3 +3604,19 @@ Their receipts are
 [`Matrix`](../results/render-partitions-fuzz-workers7-matrix-katakana-20260928.json)
 and
 [`AnsiArt`](../results/render-partitions-fuzz-workers7-ansiart-katakana-20260928.json).
+
+## 2026-09-28 — Inspect an E1M1 actor-mask edge
+
+Replayed the first 140 commands of the local human E1M1 prefix and isolated
+the actor masks at input tic 140. The only reference-only sprite pixels in
+this view belong to patch `BON2B0`, at x=229, y=90–105 (13 opaque pixels).
+The candidate's background depth at that column is 236.735 map units, while
+the isolated sprite is 514.134 units away; the candidate therefore hides the
+sprite behind a nearer non-plane surface. These account for 13 reference-only
+mask and full-scene pixels, with zero candidate-only full-scene pixels in the
+actor region. This narrows one adapted-renderer difference but does not
+reproduce the reported through-wall view or establish original-executable
+parity. The compact, source-pinned
+[depth audit](../results/actor-occlusion-depth-audit-human-prefix-tic140-20260928.json)
+excludes both the private input recording and diagnostic images; those remain
+under `local/`.
