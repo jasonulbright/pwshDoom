@@ -15,8 +15,8 @@ try{
     $bank=ConvertTo-DoomSoundFontRegions (ConvertFrom-DoomSoundFont ([IO.File]::ReadAllBytes([IO.Path]::GetFullPath($SoundFont))))
     $archive=[Wad]::new([string[]]@($Wad));$score=ConvertFrom-DoomMus ($archive.ReadLump($archive.GetLumpNumber($Track))) -Name $Track
     $timeline=New-DoomMusicTimeline $score -Loop;$synth=New-DoomMusicSynth $bank;$synth.Volume=$Volume
-    if($Profile){$synth.Profile=@{ControlTicks=0L;ControlCalls=0L;FusedVoiceTicks=0L;FusedVoiceCalls=0L;EventTicks=0L;ReadTicks=0L;PcmTicks=0L;TimestampFrequency=[Diagnostics.Stopwatch]::Frequency;InstrumentedSourceSha256=$script:MusicInstrumentedSourceSha256}}
-    $samples=[int16[]]::new($Seconds*44100*2);$cursor=0;$watch=[Diagnostics.Stopwatch]::StartNew();$blockNumber=0
+    if($Profile){$synth.Profile=@{ControlTicks=0L;ControlCalls=0L;EnvelopeTicks=0L;EnvelopeCalls=0L;FilterTicks=0L;FilterCalls=0L;FusedVoiceTicks=0L;FusedVoiceCalls=0L;EventTicks=0L;ReadTicks=0L;PcmTicks=0L;TimestampFrequency=[Diagnostics.Stopwatch]::Frequency;InstrumentedSourceSha256=$script:MusicInstrumentedSourceSha256}}
+    $samples=[int16[]]::new($Seconds*44100*2);$cursor=0;$process=[Diagnostics.Process]::GetCurrentProcess();$cpuStart=$process.TotalProcessorTime.TotalSeconds;$watch=[Diagnostics.Stopwatch]::StartNew();$blockNumber=0
     while($synth.Frame -lt $Seconds*44100){
         $blockWatch=[Diagnostics.Stopwatch]::StartNew();$count=[Math]::Min(1260,$Seconds*44100-$synth.Frame);$block=Read-DoomMusicFrames $timeline $count
         foreach($event in $block.Events){
@@ -38,12 +38,12 @@ try{
         $times.Add($blockWatch.Elapsed.TotalMilliseconds);$blockNumber++
         if($blockNumber%35 -eq 0){"Rendered $([Math]::Round($synth.Frame/44100.0,2))/$Seconds seconds; peak voices $($synth.PeakVoices)."}
     }
-    $renderSeconds=$watch.Elapsed.TotalSeconds
+    $renderSeconds=$watch.Elapsed.TotalSeconds;$renderProcessCpuSeconds=$process.TotalProcessorTime.TotalSeconds-$cpuStart;$process.Dispose()
     $dir=Join-Path "$PSScriptRoot/../local" ('music-render-'+[guid]::NewGuid().ToString('N'));New-Item -ItemType Directory -Path $dir|Out-Null
     $wave=[IO.Path]::GetFullPath((Join-Path $dir ($Track+'-dry.wav')));Write-DoomPcmWave $wave $samples
     $peak=0;$sum=0.0;$nonzero=0;foreach($sample in $samples){$peak=[Math]::Max($peak,[Math]::Abs([int]$sample));$sum+=[double]$sample*$sample;if($sample -ne 0){$nonzero++}}
     $details=@{WavPath=$wave;WavSha256=(Get-FileHash $wave).Hash;SoundFontSha256=$bank.SourceSha256;MusSha256=$score.SourceSha256;Track=$Track;Seconds=$Seconds;Frames=$synth.Frame;
-        Volume=$Volume;RenderSeconds=$renderSeconds;AudioSecondsPerRenderSecond=$Seconds/$renderSeconds;PeakVoices=$synth.PeakVoices;NoteOns=$synth.NoteOns;ExclusiveCuts=$synth.ExclusiveCuts;
+        Volume=$Volume;RenderSeconds=$renderSeconds;RenderProcessCpuSeconds=$renderProcessCpuSeconds;AudioSecondsPerRenderSecond=$Seconds/$renderSeconds;PeakVoices=$synth.PeakVoices;NoteOns=$synth.NoteOns;ExclusiveCuts=$synth.ExclusiveCuts;
         ClippedSamples=$synth.ClippedSamples;PeakPcm=$peak;RmsPcm=[Math]::Sqrt($sum/$samples.Length);NonzeroSamples=$nonzero;ReverbVoices=$synth.NonzeroReverbVoices;ChorusVoices=$synth.NonzeroChorusVoices;
         MillisecondsPerBlock=$times.ToArray();Effects='Dry: chorus and reverb sends evaluated but not mixed';ControlFrames=32;Profile=if($Profile){$synth.Profile}else{$null}}
     if($cursor -ne $samples.Length -or $nonzero -eq 0){throw 'Incomplete or silent score render.'}

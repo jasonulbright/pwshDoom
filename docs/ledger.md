@@ -3182,3 +3182,69 @@ The actual engine callback/catalog test passes 14 checks and selects D_E3M3 on E
 A separate one-track D_E3M3 local catalog was published. The supplied Episode 1 catalog was an exact-payload alias lookup source, not a catalog-merge input, and the existing eleven-track Episode 1 catalog is unchanged. The current map-music preparation gap falls from six distinct track names to five (D_E3M5–D_E3M9), plus the two finite title/finale scores. All catalog and sound payload files remain local; no commercial assets were copied into Git.
 
 Receipts: [qualification and two period hashes](../results/music-loop-d-e3m3-state-proof-20260928.json), [opening reference](../results/music-e3m3-opening-reference-20260928.json), [six reader/mixer checks](../results/music-track-qualification-d-e3m3-state-proof-20260928.json), [ten audio-worker checks](../results/music-audio-worker-d-e3m3-state-proof-20260928.json), [14 map-selection checks](../results/music-events-map-selection-e3m3-stateproof-20260928.json), [two-second host integration](../results/music-host-e3m3-state-proof-integration-20260928.json), and [preparation/catalog receipt](../results/music-preparation-e3m3-state-proof-20260928.json).
+
+## 2026-09-28 — Profile and reject a music filter-update optimization
+
+Profiled the first 98 seconds of D_E3M3 under PowerShell 7.6.5. It took
+541.787 seconds with instrumentation, reached 97 voices, and spent
+369.804 inclusive seconds in 9,514,726 voice-control updates; PCM conversion
+took 0.668 seconds. This instrumented observation is not a live-playback or
+unprofiled throughput claim. The raw [profile receipt](../results/music-profile-d-e3m3-98s-current-20260928.json)
+pins all source hashes and the exact 98-second output.
+
+Tested reusing each voice's already allocated five-coefficient filter array
+instead of allocating a new array when its cutoff changed. The candidate
+preserved the E1M1 eight-second PCM hash and matched the D_E3M3 32-second hash
+`C8540C9480C0267330CA090746E4D7540E451DCDAE239DC2C09938CFDBC12329`.
+In one same-window comparison, the old first 32 seconds summed to 113.165
+seconds of block time and the candidate to 113.009 seconds (0.14%); this is
+below a demonstrated gain, so the source rewrite was reverted. The
+[E1M1 profile](../results/music-profile-e1m1-filter-reuse-8s-20260928.json)
+and [candidate profile](../results/music-profile-e3m3-filter-reuse-32s-20260928.json)
+retain those observations.
+
+Added detailed envelope/filter timers to the offline profiler and repeated
+the identical 32-second D_E3M3 render. The timers report 5,808,928 envelope
+evaluations taking 51.362 seconds (46.1% of inclusive control time), and
+618,011 filter updates taking 12.460 seconds (11.2%). Other control work
+accounts for 47.494 seconds. Instrumenting these inner calls raises total
+render time to 146.809 seconds, so these are within-profile attribution only.
+The output exactly matches the prior 32-second result, and no source file
+changed during the render. The [detailed receipt](../results/music-profile-e3m3-controls-32s-20260928.json)
+and [synthesis notes](music-synthesis.md#dense-control-path-profile--2026-09-28)
+identify envelope evaluation as the next measured optimization target. No
+gameplay or synthesizer algorithm changed in this entry.
+
+## 2026-09-28 — Measure and roll back dense-mix envelope reuse
+
+Prototyped exact adjacent-endpoint reuse suggested by the detailed profile.
+On the 32-frame control grid, a voice's interpolated `gainNext` can supply the
+next boundary's envelope value if its frame and release time still match.
+The candidate enabled reuse at 24 or more voices and left the original direct
+path below that threshold.
+
+The 55 dry-synthesis checks passed with the candidate. Same-command 32-second
+D_E1M5 renders match exactly at PCM hash
+`615663132F40145A20CC134EF6930E80DA614DC2102CB31E6650F745029309F1`; process
+CPU fell from 97.422 to 83.969 seconds (13.8%). D_E3M3 also matched exactly
+at `C8540C9480C0267330CA090746E4D7540E451DCDAE239DC2C09938CFDBC12329`, with
+process CPU falling from 116.141 to 91.375 seconds (21.3%). The complete
+prepared D_E1M5 track separately peaks at 170 voices; the tested opening
+peaked at 74. The eight-second D_E1M1 prefix used 4.7% more process CPU in a
+single pair while preserving hash
+`1BE9256376413BE07688B984E1EDF7D017A5E0D7BB9E493F5595868490EA9650`.
+These are offline preparation measurements, not live audio or frame pacing.
+
+Opened the actual current E1M5 qualification with the prototype still in
+`src/MusicSynth.ps1`. It failed with `Music loop source changed: MusicSynth`.
+Because the optimization only changes offline synthesis and would invalidate
+all existing source-pinned loops, it was rolled back rather than weakening
+the reader's hash check or implying unperformed full-track requalification.
+The working source was restored to its pinned hash; the qualified E1M5 report
+now opens successfully again. The exact
+baseline/candidate comparisons remain in the [D_E1M5 pair](../results/music-e1m5-envelope-cpu-base-32s-20260928.json)
+and [candidate](../results/music-e1m5-envelope-cpu-candidate-32s-20260928.json),
+[D_E3M3 pair](../results/music-e3m3-envelope-cpu-base-32s-20260928.json)
+and [candidate](../results/music-e3m3-envelope-cpu-candidate-32s-20260928.json),
+and [E1M1 pair](../results/music-e1m1-envelope-cpu-base-8s-20260928.json)
+and [candidate](../results/music-e1m1-envelope-cpu-candidate-8s-20260928.json).
