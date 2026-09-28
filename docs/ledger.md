@@ -3906,3 +3906,33 @@ The first optional unmasked phase profile exposed an uninitialized benchmark
 field under strict variable checking; the measurement script now initializes
 the absent mask statistics explicitly. That was a measurement-harness defect,
 not a renderer or gameplay failure.
+
+## 2026-09-28 — Measure the current renderer worker-count tradeoff
+
+After the actor-worker mask change, the current source was exercised in both a
+fixed-state renderer pool and a real sound-enabled E3M6 host. Fixed-state
+process-pool dispatch medians/p95 were 55.60/61.89, 44.22/49.71,
+43.39/49.49, and 45.93/55.47 ms at 4, 8, 12, and 16 workers. The 30-second
+host trials ran once each in 8/12/16 order: simulation reached 34.70/31.90/
+33.70 tics/sec, completed render jobs reached 29.30/30.60/30.30 per second,
+and worker working sets were 2.17/3.31/4.14 GiB. The 8-worker run had no
+queue-starvation observation and ended with a 1,260-frame canceled-tail upper
+bound; 12 and 16 had five and eight starvation/rebuffer observations. All
+devices closed cleanly, with no unconsumed audio packets or worker errors.
+
+This is one short, ordered set, not a reliable default-selection experiment.
+The 12-worker renderer also matched serial pixels and encoded strips over five
+E1M1 views in Classic, Matrix/Katakana, and AnsiArt/Katakana (320,000 pixels
+per style, zero differences). These tests establish internal partition
+equivalence, not original-engine parity. The 16-worker default stays in place;
+no setting reached 60 completed updates/sec, and this headless run says
+nothing about visible Terminal presentation or audible continuity. The
+[portable summary](../results/worker-count-host-render-comparison-20260928.json)
+indexes the source, IWAD, music catalog, exact parameters, and hashes of the
+full raw reports retained under ignored `local/` storage.
+
+An initial PowerShell wrapper saw an inherited native-process exit-code value
+after the 8-worker game report had already recorded `ExitReason=Duration`, and
+mistakenly labeled that completed run a failure. The remaining runs were
+checked against their own report status and error fields; no game failure was
+hidden by the wrapper correction.

@@ -1,0 +1,236 @@
+{
+  "Date": "2026-09-28",
+  "FinishedUtc": "2026-09-28T18:25:00.7427172Z",
+  "SourceCommit": "32400a85a256c6063960297fefeeb3f961a9349e",
+  "Runtime": {
+    "PowerShell": "7.6.5",
+    "OS": "Microsoft Windows 11 Pro",
+    "OSVersion": "10.0.26200",
+    "CPU": "Intel(R) Core(TM) Ultra 7 265K",
+    "LogicalProcessors": 20
+  },
+  "Workload": {
+    "Episode": 3,
+    "Map": 6,
+    "Skill": 3,
+    "Input": "None",
+    "HostRunsOrder": "8, 12, 16 workers",
+    "HostRunSeconds": 30,
+    "Headless": true,
+    "SoundEnabled": true,
+    "MusicCatalog": "C:\\projects\\pwshDoom\\local\\music-prepared-ultimate-doom-loops-20260928.json",
+    "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+    "MusicCatalogSha256": "24073D082C9CD89C7931521DDA567F76261CE8F67CBC6EB465730999EC27A2BF",
+    "InvokeDoomCommand": "pwsh -NoProfile -File scripts/Invoke-Doom.ps1 -Wad <Steam Ultimate Doom DOOM.WAD> -Workers <8|12|16> -Skill 3 -Episode 3 -Map 6 -Seconds 30 -Headless -Sound -MusicCatalog <prepared local catalog> -Report <unique path>"
+  },
+  "SourceHashes": {
+    "src/GameProcesses.ps1": "A242D2945E9B5595BC1C5DAF2A1865B5CCC6239F66933019E78F8173ED4C2BF5",
+    "scripts/Invoke-AudioWorker.ps1": "32E80F308BFAB71EDF7198CBA7FED196021FEEF6BDADF2EFBD3D4E7EDBFD1296",
+    "scripts/Invoke-SimulationWorker.ps1": "306A1DF019997C8227D2E7516C72DF3BA70624985227EB5D77EE5DC04FF28533",
+    "scripts/Invoke-Doom.ps1": "EAA75B6B236F6481C7C15EF1D2DA82C536B27206FBCD005CB1C67BED305E03C2",
+    "src/MusicPlayback.ps1": "C4B6FBE2C44AFB3FE2E13CEF968AD3EEAE7DD8FA85B993321FFDED5321B0A71F",
+    "src/MusicLoopReader.ps1": "3DD9DA660A8EB2BCC0A2053686C68B9EAC740CE0A13FE047BBA72CE0277A95A1",
+    "src/AudioMixer.ps1": "95F0F9A8A004E4D42E313231BAF13A27BD5E7421EAF67F90220DBC5FF0B55276",
+    "src/SnapshotTransport.ps1": "ACCE4C782D47736D0F79A825EF9434F7A30958FC78BA5DE83B34FF775CE8E80C",
+    "src/FastRenderer.ps1": "5E701091DDB6706727631BC93E200C553D7C81DDF391F028264DD7353A5FDCCF",
+    "scripts/Build-EngineBundle.ps1": "E9CC3FF4728AD1DD55FC814D335F53DCFB33AF3DA5386C2F11C1522775F3FDED",
+    "scripts/Measure-RenderWorkerMaskImpact.ps1": "5962C9FCC08F1F66C31BA9264A3B0268620BC0C6A8B1C39C5DBEC7D583E2A448",
+    "scripts/Test-RenderPartitions.ps1": "3092B5B0173A2F82B1399F42180448C9AC012C474B2C3C76DF0E8908184BB5E9",
+    "src/SpriteProjection.ps1": "A4D16CA9288223AB4A51629A4F0BA97108DEA3703BF4916CCBFF5390571E5D8A"
+  },
+  "HostRuns": [
+    {
+      "Workers": 8,
+      "DurationSeconds": 30.002,
+      "SimulationTics": 1041,
+      "SimulationTicsPerSecond": 34.698,
+      "CompletedHostUpdates": 879,
+      "CompletedHostUpdatesPerSecond": 29.298,
+      "FrameLatencyMedianMs": 37.19,
+      "FrameLatencyP95Ms": 57.29,
+      "WorkerWorkingSetGiB": 2.17,
+      "SimulationWorkingSetGiB": 0.46,
+      "AudioSubmittedFrames": 1314180,
+      "AudioReturnedFrames": 1312920,
+      "AudioUnconsumedPackets": 0,
+      "AudioQueueStarvationObservations": 0,
+      "AudioRebuffers": 0,
+      "AudioCancelledQueuedFramesUpperBound": 1260,
+      "AudioDeviceClosed": true,
+      "HostError": null,
+      "AudioError": null,
+      "RawReport": {
+        "Path": "local\\worker-count-host-sweep-e3m6-20260928\\current-host-worker-sweep-e3m6-8w-20260928.json",
+        "Bytes": 1941038,
+        "Sha256": "5E5E823E3B57CC18545F4F588DE367F634BC7EBB19A9F203C6CA9FF98DAF8485"
+      }
+    },
+    {
+      "Workers": 12,
+      "DurationSeconds": 30.002,
+      "SimulationTics": 957,
+      "SimulationTicsPerSecond": 31.897,
+      "CompletedHostUpdates": 918,
+      "CompletedHostUpdatesPerSecond": 30.598,
+      "FrameLatencyMedianMs": 37.7,
+      "FrameLatencyP95Ms": 52.49,
+      "WorkerWorkingSetGiB": 3.31,
+      "SimulationWorkingSetGiB": 0.41,
+      "AudioSubmittedFrames": 1208340,
+      "AudioReturnedFrames": 1208340,
+      "AudioUnconsumedPackets": 0,
+      "AudioQueueStarvationObservations": 5,
+      "AudioRebuffers": 5,
+      "AudioCancelledQueuedFramesUpperBound": 0,
+      "AudioDeviceClosed": true,
+      "HostError": null,
+      "AudioError": null,
+      "RawReport": {
+        "Path": "local\\worker-count-host-sweep-e3m6-20260928\\current-host-worker-sweep-e3m6-12w-20260928.json",
+        "Bytes": 2430142,
+        "Sha256": "081E2916677CEA3402FFB845781B4F5142C50CB526E003A99122D543FDAFCE1A"
+      }
+    },
+    {
+      "Workers": 16,
+      "DurationSeconds": 30.005,
+      "SimulationTics": 1011,
+      "SimulationTicsPerSecond": 33.695,
+      "CompletedHostUpdates": 909,
+      "CompletedHostUpdatesPerSecond": 30.295,
+      "FrameLatencyMedianMs": 37.63,
+      "FrameLatencyP95Ms": 59.18,
+      "WorkerWorkingSetGiB": 4.14,
+      "SimulationWorkingSetGiB": 0.39,
+      "AudioSubmittedFrames": 1275120,
+      "AudioReturnedFrames": 1275120,
+      "AudioUnconsumedPackets": 0,
+      "AudioQueueStarvationObservations": 8,
+      "AudioRebuffers": 8,
+      "AudioCancelledQueuedFramesUpperBound": 0,
+      "AudioDeviceClosed": true,
+      "HostError": null,
+      "AudioError": null,
+      "RawReport": {
+        "Path": "local\\worker-count-host-sweep-e3m6-20260928\\current-host-worker-sweep-e3m6-16w-20260928.json",
+        "Bytes": 2917937,
+        "Sha256": "B3052E09E16DD23703DBAADB5798BC2CED8AB7A2718C4F6DB1020A3FBB7A402D"
+      }
+    }
+  ],
+  "RendererPoolProfiles": {
+    "Order": "4, 8, 12, 16 workers",
+    "Input": "One fixed HMP E3M6 state; no simulation/audio/Terminal",
+    "Frames": "4 warmup and 24 measured per configuration",
+    "Runs": [
+      {
+        "Workers": 4,
+        "DispatchMedianMs": 55.6,
+        "DispatchP95Ms": 61.89,
+        "SubmitMedianMs": 5.5,
+        "PeakWorkerRenderMedianMs": 37.38,
+        "WarmupFrames": 4,
+        "MeasuredFrames": 24,
+        "RawReport": {
+          "Path": "local\\worker-count-render-pool-e3m6-20260928\\renderer-worker-count-mask-e3m6-4w-20260928.json",
+          "Bytes": 13145,
+          "Sha256": "89B1C7597AF2CB93033F3415CEBB807447E6514591D93CCC8F4DBD2287B78959"
+        }
+      },
+      {
+        "Workers": 8,
+        "DispatchMedianMs": 44.22,
+        "DispatchP95Ms": 49.71,
+        "SubmitMedianMs": 6.2,
+        "PeakWorkerRenderMedianMs": 27.79,
+        "WarmupFrames": 4,
+        "MeasuredFrames": 24,
+        "RawReport": {
+          "Path": "local\\worker-count-render-pool-e3m6-20260928\\renderer-worker-count-mask-e3m6-8w-20260928.json",
+          "Bytes": 13167,
+          "Sha256": "451AD365094ED1A2E15719C8C26BD0F37DE1ED2037AAE381401BDB5A582D3A4A"
+        }
+      },
+      {
+        "Workers": 12,
+        "DispatchMedianMs": 43.39,
+        "DispatchP95Ms": 49.49,
+        "SubmitMedianMs": 8.05,
+        "PeakWorkerRenderMedianMs": 23.37,
+        "WarmupFrames": 4,
+        "MeasuredFrames": 24,
+        "RawReport": {
+          "Path": "local\\worker-count-render-pool-e3m6-20260928\\renderer-worker-count-mask-e3m6-12w-20260928.json",
+          "Bytes": 13124,
+          "Sha256": "C997F6AB007E844CB80144BF73CA89F1853FEEE0E4A10C75B71DE75BBE2F474B"
+        }
+      },
+      {
+        "Workers": 16,
+        "DispatchMedianMs": 45.93,
+        "DispatchP95Ms": 55.47,
+        "SubmitMedianMs": 9.15,
+        "PeakWorkerRenderMedianMs": 19.38,
+        "WarmupFrames": 4,
+        "MeasuredFrames": 24,
+        "RawReport": {
+          "Path": "local\\worker-count-render-pool-e3m6-20260928\\renderer-worker-count-mask-e3m6-16w-20260928.json",
+          "Bytes": 13234,
+          "Sha256": "3B037A0BF05335B5A6032D1A30AFED9C395D966F23B4A33CCF5A76E2583D20ED"
+        }
+      }
+    ],
+    "Command": "pwsh -NoProfile -File scripts/Measure-RenderWorkerMaskImpact.ps1 -Workers <4|8|12|16> -WarmupFrames 4 -Frames 24 -Output <unique path>"
+  },
+  "Worker12SerialEquivalence": {
+    "Map": "E1M1",
+    "ViewsPerStyle": 5,
+    "ComparedPixelsPerStyle": 320000,
+    "Styles": [
+      {
+        "Style": "Classic",
+        "Workers": 12,
+        "ViewCount": 5,
+        "ComparedPixelsPerView": 64000,
+        "TotalComparedPixels": 320000,
+        "PixelDifferences": 0.0,
+        "EncodedStripByteChecks": 60,
+        "RawReport": {
+          "Path": "local\\worker-count-partitions-12w-20260928\\worker12-e1m1-Classic.json",
+          "Bytes": 3015,
+          "Sha256": "435B395A08E16A20F5CAF6ABF1A4D41483ED147C472D2710FAE897C0F58A6E65"
+        }
+      },
+      {
+        "Style": "Matrix",
+        "Workers": 12,
+        "ViewCount": 5,
+        "ComparedPixelsPerView": 64000,
+        "TotalComparedPixels": 320000,
+        "PixelDifferences": 0.0,
+        "EncodedStripByteChecks": 60,
+        "RawReport": {
+          "Path": "local\\worker-count-partitions-12w-20260928\\worker12-e1m1-Matrix.json",
+          "Bytes": 3015,
+          "Sha256": "59F555FE636C017DA1E0AFBD4CB3679E9D9F1CEC294336C7EEDDC71B868D3A3B"
+        }
+      },
+      {
+        "Style": "AnsiArt",
+        "Workers": 12,
+        "ViewCount": 5,
+        "ComparedPixelsPerView": 64000,
+        "TotalComparedPixels": 320000,
+        "PixelDifferences": 0.0,
+        "EncodedStripByteChecks": 60,
+        "RawReport": {
+          "Path": "local\\worker-count-partitions-12w-20260928\\worker12-e1m1-AnsiArt.json",
+          "Bytes": 3016,
+          "Sha256": "94F1CE7238F302308CC51E7195B784BFCA593718A25315AC86EB1C381C29F1B2"
+        }
+      }
+    ],
+    "Command": "pwsh -NoProfile -File scripts/Test-RenderPartitions.ps1 -Workers 12 -Style <Classic|Matrix|AnsiArt> -GlyphSet Katakana -Report <unique path>"
+  },
+  "Interpretation": "Single 30-second trials ran in fixed 8/12/16 order. Eight workers had the highest simulation rate and lowest memory, 12 had the most completed host updates, and 16 used the most memory while approaching the highest simulation rate. No clear setting wins both pacing and resource use; default remains 16 pending repeated randomized live-Terminal measurements. Headless updates are not Terminal writes or display presentations; this does not qualify 35 tics/sec or 60 displayed updates/sec. Audio device telemetry is not an acoustic review. These no-input E3M6 runs are not map-completion evidence. Full per-frame reports are retained under ignored local/ and identified by size and SHA-256; only this compact comparison is committed."
+}

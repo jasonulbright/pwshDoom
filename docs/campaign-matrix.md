@@ -6,6 +6,13 @@ Updated 2026-09-28. Release sequence remains Ultimate Doom, Doom II, then a MyHo
 
 Source/IWAD hashes and detailed results: [results/campaign-smoke-lineflags-fixed.json](../results/campaign-smoke-lineflags-fixed.json).
 
+A current-source, sound-enabled, 30-second headless E3M6 host comparison on
+September 28 reached 34.70, 31.90, and 33.70 simulation tics/sec at 8, 12,
+and 16 renderer workers; the corresponding completed render-job rates were
+29.30, 30.60, and 30.30/sec. This no-input run did not complete E3M6 and does
+not count Terminal or monitor presentations. It changes no campaign status;
+see the [worker-count comparison](../results/worker-count-host-render-comparison-20260928.json).
+
 The current actor-projection and fixed-angle sprite renderer also passes a
 fresh **36/36-map smoke** at 35 idle tics and two full 320×200 serial frames
 per map: [receipt](../results/campaign-smoke-sprite-rotation.json). Its

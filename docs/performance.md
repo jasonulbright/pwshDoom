@@ -247,6 +247,45 @@ pins source and raw-profile hashes; the [snapshot checks](../results/snapshot-ac
 [AnsiArt](../results/render-fuzz-actor-order-ansiart-20260928.json) receipts
 retain correctness results.
 
+## Current-source worker-count follow-up — September 28, 2026
+
+After adding actor-to-stripe culling, I compared worker counts on the current
+branch (`32400a8`) using PowerShell 7.6.5 on Windows 11 Pro with an Intel Core
+Ultra 7 265K (20 logical processors). Each run was a single 30-second,
+no-input, headless HMP E3M6 session with sound and the local Ultimate Doom music
+catalog enabled. The order was 8, 12, then 16 workers; the runs were not paired
+or randomized.
+
+| Workers | Simulation tics/sec | Completed host updates/sec | Frame latency median / p95 | Worker working set | Audio submitted / returned | Starvation / rebuffer observations |
+| ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 8 | 34.70 | 29.30 | 37.19 / 57.29 ms | 2.17 GiB | 1,314,180 / 1,312,920 | 0 / 0; one 1,260-frame shutdown-tail upper bound |
+| 12 | 31.90 | 30.60 | 37.70 / 52.49 ms | 3.31 GiB | 1,208,340 / 1,208,340 | 5 / 5 |
+| 16 | 33.70 | 30.30 | 37.63 / 59.18 ms | 4.14 GiB | 1,275,120 / 1,275,120 | 8 / 8 |
+
+In separate fixed-state E3M6 runs through the actual process pool, dispatch
+wall medians/p95 were 55.60/61.89 ms at four workers, 44.22/49.71 ms at
+eight, 43.39/49.49 ms at twelve, and 45.93/55.47 ms at sixteen. These runs
+used four warmups and 24 measured frames; they exclude simulation, audio,
+terminal output, and worker startup. Twelve workers had the lowest median in
+this single pass, while sixteen reduced the busiest worker's median render
+time the most. That does not establish a default-setting winner.
+
+Twelve-worker partition tests on E1M1 match the serial renderer for five views
+in each of Classic, Matrix/Katakana, and AnsiArt/Katakana: 320,000 pixels per
+style with zero differences and matching encoded strip checks. These are
+internal renderer equivalence tests, not original-Doom parity. Keep the
+16-worker default: the host comparison is one ordered sample per count, and
+all configurations remain far below 60 completed updates/sec. A repeated,
+randomized visible-Terminal comparison is still needed before changing the
+default or making a display-pacing claim.
+
+The compact [comparison receipt](../results/worker-count-host-render-comparison-20260928.json)
+records runtime, machine, workload, source hashes, summary values, and SHA-256
+identifiers for the full reports, which remain in ignored `local/` storage.
+Headless completed updates are not Terminal writes or monitor presentations;
+audio queue counters are not an acoustic review. These E3M6 sessions are not
+map-completion evidence.
+
 ## Project actors only to renderer stripes that can see them — September 28, 2026
 
 Each interpolated world snapshot now gets a render-only NumericV4 extension
