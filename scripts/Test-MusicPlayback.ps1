@@ -8,7 +8,7 @@ param(
 $ErrorActionPreference='Stop';Set-StrictMode -Version Latest
 if(Test-Path $Output){throw 'Use a fresh report path.'}
 . "$PSScriptRoot/../src/MusicLoopReader.ps1";. "$PSScriptRoot/../src/MusicOneShotReader.ps1";. "$PSScriptRoot/../src/MusicPlayback.ps1"
-$state=$null;$checks=[Collections.Generic.List[object]]::new();$failure=$null;$loopStartFrame=$null
+$state=$null;$proofProbe=$null;$proofProbePath=$null;$checks=[Collections.Generic.List[object]]::new();$failure=$null;$loopStartFrame=$null
 $report=[IO.Path]::GetFullPath($Qualification);$oneShotReport=[IO.Path]::GetFullPath($OneShotQualification)
 $loopData=Get-Content $report -Raw|ConvertFrom-Json -AsHashtable
 $loopTrack=[string]$loopData.Details.Track
@@ -22,6 +22,24 @@ try{
     $catalog=@{};$catalog[$loopTrack]=$report;$catalog[$oneShotTrack]=$oneShotReport
     $state=New-DoomMusicPlayback $catalog
     Check 'Catalog opens qualified loop and finite score without selecting either' ($null -eq $state.Selected -and $null -eq (Read-DoomMusicPlayback $state 1260) -and $state.ReaderModes[$loopTrack] -ceq 'Loop' -and $state.ReaderModes[$oneShotTrack] -ceq 'OneShot')
+    if($loopData.Details.Periods.Count -eq 3){
+        $loopReader=$state.Readers[$loopTrack]
+        Check 'Three-period qualification keeps its proof metadata but hashes only the two playback payloads' ($loopReader.QualificationPeriods -eq 3 -and $loopReader.PlaybackPeriods -eq 2 -and $loopReader.Files.Count -eq 2)
+        $root=[IO.Path]::GetFullPath("$PSScriptRoot/..")
+        $proofProbePath=[IO.Path]::GetFullPath("$root/local/music-reader-proof-period-probe-$([guid]::NewGuid().ToString('N')).json")
+        $missingProofPath=[IO.Path]::GetFullPath("$root/local/music-reader-proof-period-absent-$([guid]::NewGuid().ToString('N')).f64")
+        if((Test-Path -LiteralPath $proofProbePath) -or (Test-Path -LiteralPath $missingProofPath)){throw 'Use fresh proof-period fixture paths.'}
+        $proofCopy=Get-Content -LiteralPath $report -Raw|ConvertFrom-Json -AsHashtable
+        $proofCopy.Details.Periods[2].Path=$missingProofPath
+        $proofCopy|ConvertTo-Json -Depth 80|Set-Content -LiteralPath $proofProbePath
+        try{
+            $proofProbe=Open-DoomMusicLoopReader $proofProbePath;$proofBlock=Read-DoomMusicLoop $proofProbe 1260
+            Check 'Playback remains readable when the redundant third proof file is unavailable' ($proofProbe.Files.Count -eq 2 -and $proofProbe.QualificationPeriods -eq 3 -and $proofProbe.PlaybackPeriods -eq 2 -and $proofBlock.Mix.Length -eq 2520 -and $proofProbe.Frame -eq 1260)
+        }finally{
+            if($proofProbe){Close-DoomMusicLoopReader $proofProbe;$proofProbe=$null}
+            if(Test-Path -LiteralPath $proofProbePath){Remove-Item -LiteralPath $proofProbePath}
+        }
+    }
     [long]$loopStartFrame=[long]$loopData.Details.PeriodFrames-630
     if($loopStartFrame -lt 0 -or $loopData.Details.Periods.Count -lt 2){throw 'Loop qualification lacks two complete periods for the boundary fixture.'}
     Update-DoomMusicPlayback $state @(@{Kind='Start';Track=$loopTrack;Loop=$true;Frame=$loopStartFrame})
@@ -56,6 +74,8 @@ try{
     Reject 'Closed playback rejects commands' {Update-DoomMusicPlayback $state @(@{Kind='Stop'})};$state=$null
     Reject 'Catalog rejects mismatched track label' {$s=New-DoomMusicPlayback @{'D_WRONG'=$report};Close-DoomMusicPlayback $s}
 }catch{$failure=$_.ToString()+"`n"+$_.ScriptStackTrace;throw}finally{
+    if($proofProbe){Close-DoomMusicLoopReader $proofProbe}
+    if($proofProbePath -and (Test-Path -LiteralPath $proofProbePath)){Remove-Item -LiteralPath $proofProbePath}
     if($state){Close-DoomMusicPlayback $state}
     $sourcePaths=@('src/MusicLoopReader.ps1','src/MusicOneShotReader.ps1','src/MusicPlayback.ps1','scripts/Qualify-MusicOneShot.ps1')
     @{Error=$failure;LoopTrack=$loopTrack;OneShotTrack=$oneShotTrack;LoopStartFrame=$loopStartFrame;Checks=$checks.ToArray();QualificationSha256=(Get-FileHash $report).Hash;OneShotQualificationSha256=(Get-FileHash $oneShotReport).Hash;Sources=@($sourcePaths|ForEach-Object {@{Path=$_;Sha256=(Get-FileHash "$PSScriptRoot/../$_").Hash}});ScriptSha256=(Get-FileHash $PSCommandPath).Hash;

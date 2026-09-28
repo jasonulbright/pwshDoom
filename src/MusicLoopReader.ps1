@@ -41,13 +41,20 @@ function Open-DoomMusicLoopReader {
         for($i=0;$i -lt $d.Periods.Count;$i++){
             $period=$d.Periods[$i]
             if($period.Index -ne $i -or $period.Frames -ne $d.PeriodFrames -or $period.Bytes -ne $d.PeriodFrames*16 -or $period.Sha256 -cnotmatch '^[0-9A-F]{64}$'){throw 'Invalid music loop payload metadata.'}
+        }
+        # IndependentStateAndOutput stores a third period as proof that the loop
+        # repeats. Its hash must match the second period above, but playback uses
+        # only the initial period and that verified repeating period. Avoid hashing
+        # the redundant proof payload whenever a catalog opens.
+        $playbackPeriods=if($mode -ceq 'IndependentStateAndOutput'){2}else{$d.Periods.Count}
+        for($i=0;$i -lt $playbackPeriods;$i++){
+            $period=$d.Periods[$i]
             # Keep playback files read-locked after hashing, so bytes cannot change underneath playback.
             $file=[IO.File]::Open($period.Path,[IO.FileMode]::Open,[IO.FileAccess]::Read,[IO.FileShare]::Read);$handles.Add($file)
             if($file.Length -ne $period.Bytes -or [Convert]::ToHexString([Security.Cryptography.SHA256]::HashData($file)) -cne $period.Sha256){throw 'Music loop payload checksum or length mismatch.'}
             $file.Position=0
         }
-        if($handles.Count -eq 3){$handles[2].Dispose();$handles.RemoveAt(2)}
-        return @{Files=$handles;Frame=0L;Paused=$false;Closed=$false;PeriodFrames=[long]$d.PeriodFrames;Loaded=$null;LoadedSegment=-1;LoadedFrame=-1L;DiskBytesRead=0L;ReportSha256=(Get-FileHash $Report).Hash;MusSha256=$d.MusSha256;BankSha256=$d.BankSha256}
+        return @{Files=$handles;QualificationPeriods=$d.Periods.Count;PlaybackPeriods=$playbackPeriods;Frame=0L;Paused=$false;Closed=$false;PeriodFrames=[long]$d.PeriodFrames;Loaded=$null;LoadedSegment=-1;LoadedFrame=-1L;DiskBytesRead=0L;ReportSha256=(Get-FileHash $Report).Hash;MusSha256=$d.MusSha256;BankSha256=$d.BankSha256}
     }catch{foreach($file in $handles){$file.Dispose()};throw}
 }
 function Close-DoomMusicLoopReader {

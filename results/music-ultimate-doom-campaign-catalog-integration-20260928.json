@@ -1,0 +1,93 @@
+{
+  "CampaignIntegration": null,
+  "EngineBundleSha256": "19DE3303C005C6BD6CF96F7A101C2D7AD34B43CA678E1D65FD2ECE7A1E5E7038",
+  "SourceSha256": "7E59CFCC112C2FC8369F17077F40A391E56947FE4CD31354E6387D750102386E",
+  "EngineBundleBuilderSha256": "E9CC3FF4728AD1DD55FC814D335F53DCFB33AF3DA5386C2F11C1522775F3FDED",
+  "ScriptSha256": "FF5FB190C3F22871B1EE40DD71C61F41B0A89AA24E308AD3CEDA9AB08B69846C",
+  "Sources": [
+    {
+      "Path": "src/MusicEvents.ps1",
+      "Sha256": "7E59CFCC112C2FC8369F17077F40A391E56947FE4CD31354E6387D750102386E"
+    },
+    {
+      "Path": "src/MusicLoopReader.ps1",
+      "Sha256": "FB0983C89F721F5728EC683CFF5EF35DB5B475784681614FDDAC01C61971C6B9"
+    },
+    {
+      "Path": "src/MusicPlayback.ps1",
+      "Sha256": "C4B6FBE2C44AFB3FE2E13CEF968AD3EEAE7DD8FA85B993321FFDED5321B0A71F"
+    }
+  ],
+  "Meaning": "Actual engine initialization callback plus isolated Ultimate Doom save-state music selection and IWAD/catalog identity checks. Optional finale case sends the emitted looping Bunny event into the actual qualified music playback reader and records its real-mix output. Optional map cases record the exact emitted track and catalog/qualification hashes. Optional campaign catalog case opens all supplied qualified loop readers, advances every actual map callback and campaign intermission/finale callback through the persistent playback state, and records local payload verification cost; this does not prove campaign completion or acoustic continuity.",
+  "FinaleSourceSha256": "DEF9697137CA6CADD3279146B3F5BD6DE8FEBBC45075E59C2FE9F621682FC6E3",
+  "MapSelection": null,
+  "Checks": [
+    {
+      "Name": "Actual world initialization emits E1M1 music callback",
+      "Passed": true
+    },
+    {
+      "Name": "Draining callbacks is destructive exactly once",
+      "Passed": true
+    },
+    {
+      "Name": "Engine music volume clamps to conventional range and emits gain",
+      "Passed": true
+    },
+    {
+      "Name": "One-shot flag and explicit stop are preserved",
+      "Passed": true
+    },
+    {
+      "Name": "Loaded level synchronizes its actual map music",
+      "Passed": true
+    },
+    {
+      "Name": "Ultimate Doom intermission mapping",
+      "Passed": true
+    },
+    {
+      "Name": "Episode one finale restores victory score",
+      "Passed": true
+    },
+    {
+      "Name": "Episode three text finale uses victory score",
+      "Passed": true
+    },
+    {
+      "Name": "Actual Episode three finale constructor starts looping victory music",
+      "Passed": true
+    },
+    {
+      "Name": "Actual Episode three finale text-to-art transition starts Bunny in loop mode",
+      "Passed": true
+    },
+    {
+      "Name": "Other Ultimate Doom art finales retain victory score",
+      "Passed": true
+    },
+    {
+      "Name": "Catalog validates qualified score against actual IWAD bytes",
+      "Passed": true
+    },
+    {
+      "Name": "Mismatched map/qualification catalog rejected",
+      "Passed": true
+    },
+    {
+      "Name": "Campaign catalog contains D_INTER",
+      "Passed": true
+    },
+    {
+      "Name": "Campaign catalog contains D_VICTOR",
+      "Passed": true
+    },
+    {
+      "Name": "Campaign catalog contains D_BUNNY",
+      "Passed": true
+    }
+  ],
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "Error": "The property 'Mode' cannot be found on this object. Verify that the property exists.\nat <ScriptBlock>, C:\\projects\\pwshDoom\\scripts\\Test-MusicEvents.ps1: line 73",
+  "FinalePlayback": null
+}

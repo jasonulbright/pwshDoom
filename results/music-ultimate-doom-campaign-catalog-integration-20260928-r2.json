@@ -1,0 +1,289 @@
+{
+  "Meaning": "Actual engine initialization callback plus isolated Ultimate Doom save-state music selection and IWAD/catalog identity checks. Optional finale case sends the emitted looping Bunny event into the actual qualified music playback reader and records its real-mix output. Optional map cases record the exact emitted track and catalog/qualification hashes. Optional campaign catalog case opens all supplied qualified loop readers, advances every actual map callback and campaign intermission/finale callback through the persistent playback state, and records local payload verification cost; this does not prove campaign completion or acoustic continuity.",
+  "Sources": [
+    {
+      "Sha256": "7E59CFCC112C2FC8369F17077F40A391E56947FE4CD31354E6387D750102386E",
+      "Path": "src/MusicEvents.ps1"
+    },
+    {
+      "Sha256": "FB0983C89F721F5728EC683CFF5EF35DB5B475784681614FDDAC01C61971C6B9",
+      "Path": "src/MusicLoopReader.ps1"
+    },
+    {
+      "Sha256": "C4B6FBE2C44AFB3FE2E13CEF968AD3EEAE7DD8FA85B993321FFDED5321B0A71F",
+      "Path": "src/MusicPlayback.ps1"
+    }
+  ],
+  "MapSelection": null,
+  "EngineBundleSha256": "19DE3303C005C6BD6CF96F7A101C2D7AD34B43CA678E1D65FD2ECE7A1E5E7038",
+  "FinalePlayback": null,
+  "CampaignIntegration": null,
+  "EngineBundleBuilderSha256": "E9CC3FF4728AD1DD55FC814D335F53DCFB33AF3DA5386C2F11C1522775F3FDED",
+  "SourceSha256": "7E59CFCC112C2FC8369F17077F40A391E56947FE4CD31354E6387D750102386E",
+  "Error": "The variable cannot be validated because the value 10 is not a valid value for the Map variable.\nat <ScriptBlock>, C:\\projects\\pwshDoom\\scripts\\Test-MusicEvents.ps1: line 89",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "Checks": [
+    {
+      "Passed": true,
+      "Name": "Actual world initialization emits E1M1 music callback"
+    },
+    {
+      "Passed": true,
+      "Name": "Draining callbacks is destructive exactly once"
+    },
+    {
+      "Passed": true,
+      "Name": "Engine music volume clamps to conventional range and emits gain"
+    },
+    {
+      "Passed": true,
+      "Name": "One-shot flag and explicit stop are preserved"
+    },
+    {
+      "Passed": true,
+      "Name": "Loaded level synchronizes its actual map music"
+    },
+    {
+      "Passed": true,
+      "Name": "Ultimate Doom intermission mapping"
+    },
+    {
+      "Passed": true,
+      "Name": "Episode one finale restores victory score"
+    },
+    {
+      "Passed": true,
+      "Name": "Episode three text finale uses victory score"
+    },
+    {
+      "Passed": true,
+      "Name": "Actual Episode three finale constructor starts looping victory music"
+    },
+    {
+      "Passed": true,
+      "Name": "Actual Episode three finale text-to-art transition starts Bunny in loop mode"
+    },
+    {
+      "Passed": true,
+      "Name": "Other Ultimate Doom art finales retain victory score"
+    },
+    {
+      "Passed": true,
+      "Name": "Catalog validates qualified score against actual IWAD bytes"
+    },
+    {
+      "Passed": true,
+      "Name": "Mismatched map/qualification catalog rejected"
+    },
+    {
+      "Passed": true,
+      "Name": "Campaign catalog contains D_INTER"
+    },
+    {
+      "Passed": true,
+      "Name": "Campaign catalog contains D_VICTOR"
+    },
+    {
+      "Passed": true,
+      "Name": "Campaign catalog contains D_BUNNY"
+    },
+    {
+      "Passed": true,
+      "Name": "D_E1M9 qualification is a looping score"
+    },
+    {
+      "Passed": true,
+      "Name": "D_E3M4 qualification is a looping score"
+    },
+    {
+      "Passed": true,
+      "Name": "D_E3M2 qualification is a looping score"
+    },
+    {
+      "Passed": true,
+      "Name": "D_E3M9 qualification is a looping score"
+    },
+    {
+      "Passed": true,
+      "Name": "D_E2M1 qualification is a looping score"
+    },
+    {
+      "Passed": true,
+      "Name": "D_E1M7 qualification is a looping score"
+    },
+    {
+      "Passed": true,
+      "Name": "D_E2M5 qualification is a looping score"
+    },
+    {
+      "Passed": true,
+      "Name": "D_E2M3 qualification is a looping score"
+    },
+    {
+      "Passed": true,
+      "Name": "D_E1M3 qualification is a looping score"
+    },
+    {
+      "Passed": true,
+      "Name": "D_E2M8 qualification is a looping score"
+    },
+    {
+      "Passed": true,
+      "Name": "D_E2M4 qualification is a looping score"
+    },
+    {
+      "Passed": true,
+      "Name": "D_E3M3 qualification is a looping score"
+    },
+    {
+      "Passed": true,
+      "Name": "D_E1M2 qualification is a looping score"
+    },
+    {
+      "Passed": true,
+      "Name": "D_VICTOR qualification is a looping score"
+    },
+    {
+      "Passed": true,
+      "Name": "D_E2M7 qualification is a looping score"
+    },
+    {
+      "Passed": true,
+      "Name": "D_E1M1 qualification is a looping score"
+    },
+    {
+      "Passed": true,
+      "Name": "D_E1M6 qualification is a looping score"
+    },
+    {
+      "Passed": true,
+      "Name": "D_E1M4 qualification is a looping score"
+    },
+    {
+      "Passed": true,
+      "Name": "D_INTER qualification is a looping score"
+    },
+    {
+      "Passed": true,
+      "Name": "D_E2M6 qualification is a looping score"
+    },
+    {
+      "Passed": true,
+      "Name": "D_E1M8 qualification is a looping score"
+    },
+    {
+      "Passed": true,
+      "Name": "D_E2M9 qualification is a looping score"
+    },
+    {
+      "Passed": true,
+      "Name": "D_BUNNY qualification is a looping score"
+    },
+    {
+      "Passed": true,
+      "Name": "D_E3M1 qualification is a looping score"
+    },
+    {
+      "Passed": true,
+      "Name": "D_E2M2 qualification is a looping score"
+    },
+    {
+      "Passed": true,
+      "Name": "D_E3M7 qualification is a looping score"
+    },
+    {
+      "Passed": true,
+      "Name": "D_E3M5 qualification is a looping score"
+    },
+    {
+      "Passed": true,
+      "Name": "D_E1M5 qualification is a looping score"
+    },
+    {
+      "Passed": true,
+      "Name": "D_E3M6 qualification is a looping score"
+    },
+    {
+      "Passed": true,
+      "Name": "D_E3M8 qualification is a looping score"
+    },
+    {
+      "Passed": true,
+      "Name": "All campaign loop readers open together with loop mode"
+    },
+    {
+      "Passed": true,
+      "Name": "E1M1 actual initialization selects a qualified campaign loop"
+    },
+    {
+      "Passed": true,
+      "Name": "E1M1 callback advances its selected reader"
+    },
+    {
+      "Passed": true,
+      "Name": "E1M2 actual initialization selects a qualified campaign loop"
+    },
+    {
+      "Passed": true,
+      "Name": "E1M2 callback advances its selected reader"
+    },
+    {
+      "Passed": true,
+      "Name": "E1M3 actual initialization selects a qualified campaign loop"
+    },
+    {
+      "Passed": true,
+      "Name": "E1M3 callback advances its selected reader"
+    },
+    {
+      "Passed": true,
+      "Name": "E1M4 actual initialization selects a qualified campaign loop"
+    },
+    {
+      "Passed": true,
+      "Name": "E1M4 callback advances its selected reader"
+    },
+    {
+      "Passed": true,
+      "Name": "E1M5 actual initialization selects a qualified campaign loop"
+    },
+    {
+      "Passed": true,
+      "Name": "E1M5 callback advances its selected reader"
+    },
+    {
+      "Passed": true,
+      "Name": "E1M6 actual initialization selects a qualified campaign loop"
+    },
+    {
+      "Passed": true,
+      "Name": "E1M6 callback advances its selected reader"
+    },
+    {
+      "Passed": true,
+      "Name": "E1M7 actual initialization selects a qualified campaign loop"
+    },
+    {
+      "Passed": true,
+      "Name": "E1M7 callback advances its selected reader"
+    },
+    {
+      "Passed": true,
+      "Name": "E1M8 actual initialization selects a qualified campaign loop"
+    },
+    {
+      "Passed": true,
+      "Name": "E1M8 callback advances its selected reader"
+    },
+    {
+      "Passed": true,
+      "Name": "E1M9 actual initialization selects a qualified campaign loop"
+    },
+    {
+      "Passed": true,
+      "Name": "E1M9 callback advances its selected reader"
+    }
+  ],
+  "FinaleSourceSha256": "DEF9697137CA6CADD3279146B3F5BD6DE8FEBBC45075E59C2FE9F621682FC6E3",
+  "ScriptSha256": "90F7ED83741AE4CECC48B4D0056D3543B3AF6330A67ED3A91B81FB695AE760B3"
+}

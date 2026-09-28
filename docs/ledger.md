@@ -3385,3 +3385,56 @@ Receipts: [loop qualification](../results/music-loop-d-bunny-state-proof-2026092
 [audio-worker checks](../results/music-worker-dbunny-loop-20260928.json),
 [finale event-to-playback integration](../results/music-events-bunny-finale-playback-20260928-r2.json),
 and [preparation/catalog report](../results/music-preparation-dbunny-loop-20260928.json).
+
+## 2026-09-28 — Aggregate Ultimate Doom soundtrack and runtime verification
+
+Revalidated existing local qualifications into a 30-entry aggregate loop
+catalog: the 27 unique map-track names from the installed Ultimate Doom WAD,
+plus D_INTER, D_VICTOR and D_BUNNY. No track was re-synthesized. The atomic
+catalog publication took 12.055 seconds; its SHA-256 is
+`24073D082C9CD89C7931521DDA567F76261CE8F67CBC6EB465730999EC27A2BF`. The
+source WAD SHA-256 is
+`6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F`; the
+soundfont SHA-256 is
+`82475B91A76DE15CB28A104707D3247BA932E228BADA3F47BBA63C6B31AAF7A1`.
+
+All 30 readers opened together and a source-pinned engine integration passed
+126 checks. It initializes all 36 maps through the actual engine and checks
+each emitted music event against the same live catalog/playback state; it also
+advances D_INTER, the Episode 1 D_VICTOR callback, and the real Episode 3
+Finale.Update() transition from D_VICTOR to D_BUNNY. Every callback advances
+the selected reader. This is map music-selection and playback integration,
+not route completion or audible campaign coverage.
+
+Opening the three-period qualifications used another 2.958 GiB of output
+whose third period is already proved byte-identical to the second. The reader
+now validates metadata for all qualified periods but hashes only the first
+and repeating playback payloads. For this catalog that changes the bytes
+verified on each open from 13.09 GiB to 10.131 GiB; the proof-only PCM remains
+on disk and its original qualification is unchanged. A focused reader/mixer
+test passes 19 checks, including exact loop-boundary samples and a negative
+control whose redundant third-period file is missing; the actual waveOut
+worker passes ten. The all-catalog open-time samples (9.696 seconds before,
+10.726 seconds after, each after previous full payload scans) are noisy and do
+not support a wall-time speedup claim.
+
+A current-reader PowerShell 7.6.6 headless host run opens all 30 reports,
+starts E1M1/D_E1M1, advances 69 tics in 2.003 seconds, submits and returns all
+86,940 audio frames, closes the device, and reports no worker/cleanup error,
+unconsumed packet or canceled audio. One queue-empty/rebuffer observation
+occurred after the final packet at shutdown, with no mid-run observation or
+rebuffer resume. Its PCM digest matches the earlier full-catalog host run.
+This does not certify audible quality, full-session music under visible
+Terminal rendering load, uninterrupted campaign playback, or the campaign
+route. See the [19-check reader receipt](../results/music-playback-independent-period-open-20260928-r2.json),
+[portable optimized-host receipt](../results/music-host-full-campaign-catalog-optimized-20260928.json),
+[126-check integration](../results/music-ultimate-doom-campaign-catalog-integration-20260928-r5.json),
+and [aggregate preparation receipt](../results/music-preparation-ultimate-doom-loops-20260928.json).
+The local catalog and generated PCM remain out of Git.
+
+Two early aggregate-integration attempts stopped on test-script issues: an old
+qualification shape omitted the optional `Mode` property, and a loop counter
+collided with the script's validated `Map` parameter. Both raw failures are
+preserved in `results/music-ultimate-doom-campaign-catalog-integration-20260928.json`
+and `results/music-ultimate-doom-campaign-catalog-integration-20260928-r2.json`;
+neither was an engine defect.

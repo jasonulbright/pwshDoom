@@ -1,0 +1,814 @@
+{
+  "FinalePlayback": null,
+  "FinaleSourceSha256": "DEF9697137CA6CADD3279146B3F5BD6DE8FEBBC45075E59C2FE9F621682FC6E3",
+  "Sources": [
+    {
+      "Sha256": "7E59CFCC112C2FC8369F17077F40A391E56947FE4CD31354E6387D750102386E",
+      "Path": "src/MusicEvents.ps1"
+    },
+    {
+      "Sha256": "3DD9DA660A8EB2BCC0A2053686C68B9EAC740CE0A13FE047BBA72CE0277A95A1",
+      "Path": "src/MusicLoopReader.ps1"
+    },
+    {
+      "Sha256": "C4B6FBE2C44AFB3FE2E13CEF968AD3EEAE7DD8FA85B993321FFDED5321B0A71F",
+      "Path": "src/MusicPlayback.ps1"
+    }
+  ],
+  "MapSelection": null,
+  "SourceSha256": "7E59CFCC112C2FC8369F17077F40A391E56947FE4CD31354E6387D750102386E",
+  "Error": null,
+  "Checks": [
+    {
+      "Name": "Actual world initialization emits E1M1 music callback",
+      "Passed": true
+    },
+    {
+      "Name": "Draining callbacks is destructive exactly once",
+      "Passed": true
+    },
+    {
+      "Name": "Engine music volume clamps to conventional range and emits gain",
+      "Passed": true
+    },
+    {
+      "Name": "One-shot flag and explicit stop are preserved",
+      "Passed": true
+    },
+    {
+      "Name": "Loaded level synchronizes its actual map music",
+      "Passed": true
+    },
+    {
+      "Name": "Ultimate Doom intermission mapping",
+      "Passed": true
+    },
+    {
+      "Name": "Episode one finale restores victory score",
+      "Passed": true
+    },
+    {
+      "Name": "Episode three text finale uses victory score",
+      "Passed": true
+    },
+    {
+      "Name": "Actual Episode three finale constructor starts looping victory music",
+      "Passed": true
+    },
+    {
+      "Name": "Actual Episode three finale text-to-art transition starts Bunny in loop mode",
+      "Passed": true
+    },
+    {
+      "Name": "Other Ultimate Doom art finales retain victory score",
+      "Passed": true
+    },
+    {
+      "Name": "Catalog validates qualified score against actual IWAD bytes",
+      "Passed": true
+    },
+    {
+      "Name": "Mismatched map/qualification catalog rejected",
+      "Passed": true
+    },
+    {
+      "Name": "Campaign catalog contains D_INTER",
+      "Passed": true
+    },
+    {
+      "Name": "Campaign catalog contains D_VICTOR",
+      "Passed": true
+    },
+    {
+      "Name": "Campaign catalog contains D_BUNNY",
+      "Passed": true
+    },
+    {
+      "Name": "D_E2M4 qualification is a looping score",
+      "Passed": true
+    },
+    {
+      "Name": "D_E1M4 qualification is a looping score",
+      "Passed": true
+    },
+    {
+      "Name": "D_E3M8 qualification is a looping score",
+      "Passed": true
+    },
+    {
+      "Name": "D_E2M8 qualification is a looping score",
+      "Passed": true
+    },
+    {
+      "Name": "D_E3M2 qualification is a looping score",
+      "Passed": true
+    },
+    {
+      "Name": "D_E3M5 qualification is a looping score",
+      "Passed": true
+    },
+    {
+      "Name": "D_E3M4 qualification is a looping score",
+      "Passed": true
+    },
+    {
+      "Name": "D_INTER qualification is a looping score",
+      "Passed": true
+    },
+    {
+      "Name": "D_E2M9 qualification is a looping score",
+      "Passed": true
+    },
+    {
+      "Name": "D_VICTOR qualification is a looping score",
+      "Passed": true
+    },
+    {
+      "Name": "D_BUNNY qualification is a looping score",
+      "Passed": true
+    },
+    {
+      "Name": "D_E1M7 qualification is a looping score",
+      "Passed": true
+    },
+    {
+      "Name": "D_E2M6 qualification is a looping score",
+      "Passed": true
+    },
+    {
+      "Name": "D_E3M3 qualification is a looping score",
+      "Passed": true
+    },
+    {
+      "Name": "D_E2M5 qualification is a looping score",
+      "Passed": true
+    },
+    {
+      "Name": "D_E3M6 qualification is a looping score",
+      "Passed": true
+    },
+    {
+      "Name": "D_E3M7 qualification is a looping score",
+      "Passed": true
+    },
+    {
+      "Name": "D_E1M8 qualification is a looping score",
+      "Passed": true
+    },
+    {
+      "Name": "D_E1M6 qualification is a looping score",
+      "Passed": true
+    },
+    {
+      "Name": "D_E2M7 qualification is a looping score",
+      "Passed": true
+    },
+    {
+      "Name": "D_E2M1 qualification is a looping score",
+      "Passed": true
+    },
+    {
+      "Name": "D_E1M5 qualification is a looping score",
+      "Passed": true
+    },
+    {
+      "Name": "D_E3M9 qualification is a looping score",
+      "Passed": true
+    },
+    {
+      "Name": "D_E3M1 qualification is a looping score",
+      "Passed": true
+    },
+    {
+      "Name": "D_E1M3 qualification is a looping score",
+      "Passed": true
+    },
+    {
+      "Name": "D_E1M2 qualification is a looping score",
+      "Passed": true
+    },
+    {
+      "Name": "D_E1M9 qualification is a looping score",
+      "Passed": true
+    },
+    {
+      "Name": "D_E1M1 qualification is a looping score",
+      "Passed": true
+    },
+    {
+      "Name": "D_E2M2 qualification is a looping score",
+      "Passed": true
+    },
+    {
+      "Name": "D_E2M3 qualification is a looping score",
+      "Passed": true
+    },
+    {
+      "Name": "All campaign loop readers open together with loop mode",
+      "Passed": true
+    },
+    {
+      "Name": "Independent third periods remain proof-only while all playback readers use two verified payloads",
+      "Passed": true
+    },
+    {
+      "Name": "E1M1 actual initialization selects a qualified campaign loop",
+      "Passed": true
+    },
+    {
+      "Name": "E1M1 callback advances its selected reader",
+      "Passed": true
+    },
+    {
+      "Name": "E1M2 actual initialization selects a qualified campaign loop",
+      "Passed": true
+    },
+    {
+      "Name": "E1M2 callback advances its selected reader",
+      "Passed": true
+    },
+    {
+      "Name": "E1M3 actual initialization selects a qualified campaign loop",
+      "Passed": true
+    },
+    {
+      "Name": "E1M3 callback advances its selected reader",
+      "Passed": true
+    },
+    {
+      "Name": "E1M4 actual initialization selects a qualified campaign loop",
+      "Passed": true
+    },
+    {
+      "Name": "E1M4 callback advances its selected reader",
+      "Passed": true
+    },
+    {
+      "Name": "E1M5 actual initialization selects a qualified campaign loop",
+      "Passed": true
+    },
+    {
+      "Name": "E1M5 callback advances its selected reader",
+      "Passed": true
+    },
+    {
+      "Name": "E1M6 actual initialization selects a qualified campaign loop",
+      "Passed": true
+    },
+    {
+      "Name": "E1M6 callback advances its selected reader",
+      "Passed": true
+    },
+    {
+      "Name": "E1M7 actual initialization selects a qualified campaign loop",
+      "Passed": true
+    },
+    {
+      "Name": "E1M7 callback advances its selected reader",
+      "Passed": true
+    },
+    {
+      "Name": "E1M8 actual initialization selects a qualified campaign loop",
+      "Passed": true
+    },
+    {
+      "Name": "E1M8 callback advances its selected reader",
+      "Passed": true
+    },
+    {
+      "Name": "E1M9 actual initialization selects a qualified campaign loop",
+      "Passed": true
+    },
+    {
+      "Name": "E1M9 callback advances its selected reader",
+      "Passed": true
+    },
+    {
+      "Name": "E2M1 actual initialization selects a qualified campaign loop",
+      "Passed": true
+    },
+    {
+      "Name": "E2M1 callback advances its selected reader",
+      "Passed": true
+    },
+    {
+      "Name": "E2M2 actual initialization selects a qualified campaign loop",
+      "Passed": true
+    },
+    {
+      "Name": "E2M2 callback advances its selected reader",
+      "Passed": true
+    },
+    {
+      "Name": "E2M3 actual initialization selects a qualified campaign loop",
+      "Passed": true
+    },
+    {
+      "Name": "E2M3 callback advances its selected reader",
+      "Passed": true
+    },
+    {
+      "Name": "E2M4 actual initialization selects a qualified campaign loop",
+      "Passed": true
+    },
+    {
+      "Name": "E2M4 callback advances its selected reader",
+      "Passed": true
+    },
+    {
+      "Name": "E2M5 actual initialization selects a qualified campaign loop",
+      "Passed": true
+    },
+    {
+      "Name": "E2M5 callback advances its selected reader",
+      "Passed": true
+    },
+    {
+      "Name": "E2M6 actual initialization selects a qualified campaign loop",
+      "Passed": true
+    },
+    {
+      "Name": "E2M6 callback advances its selected reader",
+      "Passed": true
+    },
+    {
+      "Name": "E2M7 actual initialization selects a qualified campaign loop",
+      "Passed": true
+    },
+    {
+      "Name": "E2M7 callback advances its selected reader",
+      "Passed": true
+    },
+    {
+      "Name": "E2M8 actual initialization selects a qualified campaign loop",
+      "Passed": true
+    },
+    {
+      "Name": "E2M8 callback advances its selected reader",
+      "Passed": true
+    },
+    {
+      "Name": "E2M9 actual initialization selects a qualified campaign loop",
+      "Passed": true
+    },
+    {
+      "Name": "E2M9 callback advances its selected reader",
+      "Passed": true
+    },
+    {
+      "Name": "E3M1 actual initialization selects a qualified campaign loop",
+      "Passed": true
+    },
+    {
+      "Name": "E3M1 callback advances its selected reader",
+      "Passed": true
+    },
+    {
+      "Name": "E3M2 actual initialization selects a qualified campaign loop",
+      "Passed": true
+    },
+    {
+      "Name": "E3M2 callback advances its selected reader",
+      "Passed": true
+    },
+    {
+      "Name": "E3M3 actual initialization selects a qualified campaign loop",
+      "Passed": true
+    },
+    {
+      "Name": "E3M3 callback advances its selected reader",
+      "Passed": true
+    },
+    {
+      "Name": "E3M4 actual initialization selects a qualified campaign loop",
+      "Passed": true
+    },
+    {
+      "Name": "E3M4 callback advances its selected reader",
+      "Passed": true
+    },
+    {
+      "Name": "E3M5 actual initialization selects a qualified campaign loop",
+      "Passed": true
+    },
+    {
+      "Name": "E3M5 callback advances its selected reader",
+      "Passed": true
+    },
+    {
+      "Name": "E3M6 actual initialization selects a qualified campaign loop",
+      "Passed": true
+    },
+    {
+      "Name": "E3M6 callback advances its selected reader",
+      "Passed": true
+    },
+    {
+      "Name": "E3M7 actual initialization selects a qualified campaign loop",
+      "Passed": true
+    },
+    {
+      "Name": "E3M7 callback advances its selected reader",
+      "Passed": true
+    },
+    {
+      "Name": "E3M8 actual initialization selects a qualified campaign loop",
+      "Passed": true
+    },
+    {
+      "Name": "E3M8 callback advances its selected reader",
+      "Passed": true
+    },
+    {
+      "Name": "E3M9 actual initialization selects a qualified campaign loop",
+      "Passed": true
+    },
+    {
+      "Name": "E3M9 callback advances its selected reader",
+      "Passed": true
+    },
+    {
+      "Name": "E4M1 actual initialization selects a qualified campaign loop",
+      "Passed": true
+    },
+    {
+      "Name": "E4M1 callback advances its selected reader",
+      "Passed": true
+    },
+    {
+      "Name": "E4M2 actual initialization selects a qualified campaign loop",
+      "Passed": true
+    },
+    {
+      "Name": "E4M2 callback advances its selected reader",
+      "Passed": true
+    },
+    {
+      "Name": "E4M3 actual initialization selects a qualified campaign loop",
+      "Passed": true
+    },
+    {
+      "Name": "E4M3 callback advances its selected reader",
+      "Passed": true
+    },
+    {
+      "Name": "E4M4 actual initialization selects a qualified campaign loop",
+      "Passed": true
+    },
+    {
+      "Name": "E4M4 callback advances its selected reader",
+      "Passed": true
+    },
+    {
+      "Name": "E4M5 actual initialization selects a qualified campaign loop",
+      "Passed": true
+    },
+    {
+      "Name": "E4M5 callback advances its selected reader",
+      "Passed": true
+    },
+    {
+      "Name": "E4M6 actual initialization selects a qualified campaign loop",
+      "Passed": true
+    },
+    {
+      "Name": "E4M6 callback advances its selected reader",
+      "Passed": true
+    },
+    {
+      "Name": "E4M7 actual initialization selects a qualified campaign loop",
+      "Passed": true
+    },
+    {
+      "Name": "E4M7 callback advances its selected reader",
+      "Passed": true
+    },
+    {
+      "Name": "E4M8 actual initialization selects a qualified campaign loop",
+      "Passed": true
+    },
+    {
+      "Name": "E4M8 callback advances its selected reader",
+      "Passed": true
+    },
+    {
+      "Name": "E4M9 actual initialization selects a qualified campaign loop",
+      "Passed": true
+    },
+    {
+      "Name": "E4M9 callback advances its selected reader",
+      "Passed": true
+    },
+    {
+      "Name": "All 36 map callbacks are covered by 27 distinct IWAD map scores",
+      "Passed": true
+    },
+    {
+      "Name": "Intermission selects its qualified loop from the campaign catalog",
+      "Passed": true
+    },
+    {
+      "Name": "Episode 1 finale selects qualified victory loop from campaign catalog",
+      "Passed": true
+    },
+    {
+      "Name": "Actual Episode 3 finale constructor selects qualified victory loop",
+      "Passed": true
+    },
+    {
+      "Name": "Actual Episode 3 text-to-art callback selects qualified Bunny loop",
+      "Passed": true
+    },
+    {
+      "Name": "Map, intermission and finale events leave every catalog reader usable",
+      "Passed": true
+    }
+  ],
+  "Meaning": "Actual engine initialization callback plus isolated Ultimate Doom save-state music selection and IWAD/catalog identity checks. Optional finale case sends the emitted looping Bunny event into the actual qualified music playback reader and records its real-mix output. Optional map cases record the exact emitted track and catalog/qualification hashes. Optional campaign catalog case opens all supplied qualified loop readers, advances every actual map callback and campaign intermission/finale callback through the persistent playback state, and records local payload verification cost; this does not prove campaign completion or acoustic continuity.",
+  "CampaignIntegration": {
+    "PlaybackPayloadBytes": 10878255360,
+    "PlaybackFrames": 50400,
+    "TrackCount": 30,
+    "CatalogSha256": "24073D082C9CD89C7931521DDA567F76261CE8F67CBC6EB465730999EC27A2BF",
+    "MapTrackCount": 27,
+    "PlaybackOpenSeconds": 10.7255843,
+    "ProofOnlyPayloadBytes": 3176591040,
+    "Entries": [
+      {
+        "QualificationSha256": "951A61698AC3F911B8DCFF0E2C2B24E925E6F2E84FE42268BC3385DB38F9A659",
+        "Track": "D_BUNNY"
+      },
+      {
+        "QualificationSha256": "1D5A9D6D16E8CDCA74646D6AEF009CDB42EB59B87941B0EFE648F9D3A98C96CF",
+        "Track": "D_E1M1"
+      },
+      {
+        "QualificationSha256": "B2EBA683C99C515DE356A3D9E8E77824D775F59695F7CC14EC9F4D88B2D75518",
+        "Track": "D_E1M2"
+      },
+      {
+        "QualificationSha256": "DF75B2743048D05106F500317127BA462D2A2BB3F0EE1A63D9CA1E3D0F1697B2",
+        "Track": "D_E1M3"
+      },
+      {
+        "QualificationSha256": "24CD95F078930A352DF57C5E609D75C587D9F156786EBC7AABBDE64C7BA9630C",
+        "Track": "D_E1M4"
+      },
+      {
+        "QualificationSha256": "97A289967303C2A9343BC84AEA3D08D4E05759976BCDA25954A2ED865D94F2DB",
+        "Track": "D_E1M5"
+      },
+      {
+        "QualificationSha256": "4888C222F5ABFB5AC0992CA9329E01CA79042D4A13327523BD4BC68C1B612989",
+        "Track": "D_E1M6"
+      },
+      {
+        "QualificationSha256": "2C0DEBC273BBBD7F9B63AA88E062C39DBA0AF17D91731F313ECB6C69752FAA41",
+        "Track": "D_E1M7"
+      },
+      {
+        "QualificationSha256": "F4C079000EC9267066940ED33C8E07FFB4A8FFE7A555AC5F9FC827BD3EA4B09E",
+        "Track": "D_E1M8"
+      },
+      {
+        "QualificationSha256": "6FE2388CEF624DC5B70F62A0DB73D4D7433280898B16FD29AB67779BE23F6F92",
+        "Track": "D_E1M9"
+      },
+      {
+        "QualificationSha256": "ECC954BA00BD29633825222961C8809C40850B424BB8CF859041746F94EDE121",
+        "Track": "D_E2M1"
+      },
+      {
+        "QualificationSha256": "53DD2D3422486C752D6590729EAB0A1B717BF1D57B548353817F195128A7E237",
+        "Track": "D_E2M2"
+      },
+      {
+        "QualificationSha256": "03438DC692853F226B4B7997E7D4495F9E17BCAD0140D310C2B63FB537C41494",
+        "Track": "D_E2M3"
+      },
+      {
+        "QualificationSha256": "1CEAFA2E6E751F9E1949ED3905192A1A508399583C9577DE80914F1F786ACF87",
+        "Track": "D_E2M4"
+      },
+      {
+        "QualificationSha256": "94C5ACCBE2704EA52F26F301A022E9570C7D6679BF1275F055BCAE5FF7B60326",
+        "Track": "D_E2M5"
+      },
+      {
+        "QualificationSha256": "66A9B8E2C13E4A5109F5C4F7AAB42C10F992CFBEC9E37B7B2C51DDB7191D05B9",
+        "Track": "D_E2M6"
+      },
+      {
+        "QualificationSha256": "ED4045EDE6B47D772690A7C0BB815F3A9F965A4B81A73528DA960CB63DAAD5AA",
+        "Track": "D_E2M7"
+      },
+      {
+        "QualificationSha256": "312F848518D3C950D47F0FDA5661806DFBC54F04C09B946010E106FB4692FC77",
+        "Track": "D_E2M8"
+      },
+      {
+        "QualificationSha256": "83B6B3A726B22C8C900163B997DBA6A65A2D29BF75ECDBACD86C81DD7A6AD34A",
+        "Track": "D_E2M9"
+      },
+      {
+        "QualificationSha256": "578B7112AF3B14DB0CC19774F0698F963A0DDC1D77858CA7B8AD43B41340B152",
+        "Track": "D_E3M1"
+      },
+      {
+        "QualificationSha256": "27E67DF5610BAD508126DEE436A2D286CC6B45EC9A7C23EB8594AAE2FDFB11E2",
+        "Track": "D_E3M2"
+      },
+      {
+        "QualificationSha256": "C13D3FAA40D4CC38071559D9B617050F90D08C5347AE5CF377B9B3F75C737989",
+        "Track": "D_E3M3"
+      },
+      {
+        "QualificationSha256": "3D5FD93167D59FA815B80423A5EA8416CB8D50247AEF88FBB7361CA0FCFD10AD",
+        "Track": "D_E3M4"
+      },
+      {
+        "QualificationSha256": "DB5829C7F2BF335C57D0791A30ED42175E72F5E02723AEF3B85439ECB38EA448",
+        "Track": "D_E3M5"
+      },
+      {
+        "QualificationSha256": "4F644A1CB0DFD0715D1EB8132405C930D19AC3370CD3616AA763976193A370B5",
+        "Track": "D_E3M6"
+      },
+      {
+        "QualificationSha256": "A2720B3855312816BFB359603B30F07643D53D85044B9201B5D6C15957D25A87",
+        "Track": "D_E3M7"
+      },
+      {
+        "QualificationSha256": "C6B7FA52661410C6A4D80C27BBEF73E9CE8BCE30E0A31C096FB38762A125FA73",
+        "Track": "D_E3M8"
+      },
+      {
+        "QualificationSha256": "05E6B36FE6728B3E7C571256C3B040995F411EA8E9F6003578EC12F973A45F05",
+        "Track": "D_E3M9"
+      },
+      {
+        "QualificationSha256": "084536988F462CD7C6718665FA53DCD6BB1009B3FCBCDD4556C50D51AC1B1778",
+        "Track": "D_INTER"
+      },
+      {
+        "QualificationSha256": "0E57B8C583690AEB3E09625278311837784D6F8E70ACDC79D5ACF058A0D8A4F5",
+        "Track": "D_VICTOR"
+      }
+    ],
+    "MapSelections": [
+      {
+        "Map": "E1M1",
+        "Track": "D_E1M1"
+      },
+      {
+        "Map": "E1M2",
+        "Track": "D_E1M2"
+      },
+      {
+        "Map": "E1M3",
+        "Track": "D_E1M3"
+      },
+      {
+        "Map": "E1M4",
+        "Track": "D_E1M4"
+      },
+      {
+        "Map": "E1M5",
+        "Track": "D_E1M5"
+      },
+      {
+        "Map": "E1M6",
+        "Track": "D_E1M6"
+      },
+      {
+        "Map": "E1M7",
+        "Track": "D_E1M7"
+      },
+      {
+        "Map": "E1M8",
+        "Track": "D_E1M8"
+      },
+      {
+        "Map": "E1M9",
+        "Track": "D_E1M9"
+      },
+      {
+        "Map": "E2M1",
+        "Track": "D_E2M1"
+      },
+      {
+        "Map": "E2M2",
+        "Track": "D_E2M2"
+      },
+      {
+        "Map": "E2M3",
+        "Track": "D_E2M3"
+      },
+      {
+        "Map": "E2M4",
+        "Track": "D_E2M4"
+      },
+      {
+        "Map": "E2M5",
+        "Track": "D_E2M5"
+      },
+      {
+        "Map": "E2M6",
+        "Track": "D_E2M6"
+      },
+      {
+        "Map": "E2M7",
+        "Track": "D_E2M7"
+      },
+      {
+        "Map": "E2M8",
+        "Track": "D_E2M8"
+      },
+      {
+        "Map": "E2M9",
+        "Track": "D_E2M9"
+      },
+      {
+        "Map": "E3M1",
+        "Track": "D_E3M1"
+      },
+      {
+        "Map": "E3M2",
+        "Track": "D_E3M2"
+      },
+      {
+        "Map": "E3M3",
+        "Track": "D_E3M3"
+      },
+      {
+        "Map": "E3M4",
+        "Track": "D_E3M4"
+      },
+      {
+        "Map": "E3M5",
+        "Track": "D_E3M5"
+      },
+      {
+        "Map": "E3M6",
+        "Track": "D_E3M6"
+      },
+      {
+        "Map": "E3M7",
+        "Track": "D_E3M7"
+      },
+      {
+        "Map": "E3M8",
+        "Track": "D_E3M8"
+      },
+      {
+        "Map": "E3M9",
+        "Track": "D_E3M9"
+      },
+      {
+        "Map": "E4M1",
+        "Track": "D_E3M4"
+      },
+      {
+        "Map": "E4M2",
+        "Track": "D_E3M2"
+      },
+      {
+        "Map": "E4M3",
+        "Track": "D_E3M3"
+      },
+      {
+        "Map": "E4M4",
+        "Track": "D_E1M5"
+      },
+      {
+        "Map": "E4M5",
+        "Track": "D_E2M7"
+      },
+      {
+        "Map": "E4M6",
+        "Track": "D_E2M4"
+      },
+      {
+        "Map": "E4M7",
+        "Track": "D_E2M6"
+      },
+      {
+        "Map": "E4M8",
+        "Track": "D_E2M5"
+      },
+      {
+        "Map": "E4M9",
+        "Track": "D_E1M9"
+      }
+    ],
+    "UniquePayloadBytes": 13597617600,
+    "PlaybackTransitions": 40,
+    "QualifiedPeriodBytes": 14054846400,
+    "UniquePayloadCount": 70,
+    "CatalogValidationSeconds": 0.2767782
+  },
+  "EngineBundleBuilderSha256": "E9CC3FF4728AD1DD55FC814D335F53DCFB33AF3DA5386C2F11C1522775F3FDED",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "EngineBundleSha256": "19DE3303C005C6BD6CF96F7A101C2D7AD34B43CA678E1D65FD2ECE7A1E5E7038",
+  "ScriptSha256": "A9FF26D73E2694E1C647FB1F1D5928C6D013AEA20B41FFC303986837B3CADBE2"
+}
