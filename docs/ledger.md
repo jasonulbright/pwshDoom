@@ -3248,3 +3248,45 @@ and [candidate](../results/music-e1m5-envelope-cpu-candidate-32s-20260928.json),
 and [candidate](../results/music-e3m3-envelope-cpu-candidate-32s-20260928.json),
 and [E1M1 pair](../results/music-e1m1-envelope-cpu-base-8s-20260928.json)
 and [candidate](../results/music-e1m1-envelope-cpu-candidate-8s-20260928.json).
+
+## 2026-09-28 — Qualify D_E3M5 map music
+
+Before preparation, compared the five remaining Episode 3 score hashes with 65
+report entries in the local prepared catalogs using both exact MUS SHA-256 and
+the pinned soundfont SHA-256. None matched an existing qualification. D_E3M5
+was prepared as its own track-sized batch; the eleven-track Episode 1 catalog
+remains unchanged, and no WAD, soundfont or PCM payload was added to Git.
+
+The stock Steam Ultimate Doom score has MUS hash
+`1675CA9BD749027CDB4D0BC15A08BFCEF643616217D47BE43AA4073315182561`. Its
+loop period is 6,652,800 frames (150.857 seconds); two continuous periods
+rendered 13,305,600 frames. The complete normalized state at both boundaries
+matches with 66 voices and hash
+`310C820F065ABDA49F67D8A3280E386B1B122EFBA772F0E3EB5CA305DB268476`. The
+independent eight-second opening matches through the real reader and game PCM
+mixer. This is a two-period complete-state recurrence proof, not an
+independently rendered third output period. Preparation took 1,201.894 seconds
+under PowerShell 7.6.5; all pinned source and asset hashes remained unchanged.
+
+Six long-track reader/mixer checks and ten actual audio-worker checks pass.
+Fourteen music-event checks select D_E3M5 for E3M5. A two-second headless
+E3M5 host run reaches 69 tics, submits and returns all 86,940 PCM frames, has
+no simulation/audio/cleanup error, and closes both the device and music reader.
+Its one queue-empty poll is after final sequence 68; there are no active
+starvation observations and no canceled tail. This short startup/shutdown run
+does not qualify full-map continuity, sustained timing or acoustic quality.
+
+The distinct D_E3M5 payload is now one of the qualified Episode 3 tracks;
+D_E3M6–D_E3M9 and finite D_INTROA/D_BUNNY remain open. The exact one-track
+catalog SHA-256 is
+`F0AF1B0B406A048613573400D0F29171AC18F77C4FFD58C39FDB1ECB2034B1E3`.
+The current Episode 1 playtest package and its human-playthrough gate are
+unchanged.
+
+Receipts: [loop proof](../results/music-loop-d-e3m5-state-proof-20260928.json),
+[independent opening](../results/music-e3m5-opening-reference-20260928.json),
+[six reader/mixer checks](../results/music-track-qualification-d-e3m5-stateproof-20260928.json),
+[ten audio-worker checks](../results/music-audio-worker-e3m5-stateproof-20260928.json),
+[14 map-selection checks](../results/music-events-map-selection-e3m5-stateproof-20260928-r2.json),
+[two-second E3M5 host run](../results/music-host-e3m5-stateproof-integration-20260928.json),
+and [preparation/catalog receipt](../results/music-preparation-ultimate-doom-e3m5-stateproof-20260928.json).
