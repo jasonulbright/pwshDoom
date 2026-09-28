@@ -366,6 +366,33 @@ under ignored `local/`. Portable receipts:
 [map callback/catalog checks](../results/music-events-map-selection-e2m9-20260927.json),
 and [host integration](../results/music-host-e2m9-integration-20260927.json).
 
+### D_E3M2 complete-state recurrence and host selection (September 27)
+
+D_E3M2 has a 10,348,380-frame period (234.543 seconds). PowerShell rendered
+20,696,760 frames across two continuous aligned periods. Both boundaries have
+47 live voices and normalized state SHA-256
+`914CAF4F1FCCA364DCD3EAEBB8603286D207A3E02570D46B28C235C37D3683C3`. The
+independent eight-second opening matches exactly (352,800 frames; SHA-256
+`9F3AD1CCF33F532BCB32C86BD4F8E96E63829ACA8C99DEBF5D65AC46571831B2`). Each
+period file is 165,574,080 bytes. Render/write/snapshot took 892.403 seconds;
+total preparation took 907.672 seconds under PowerShell 7.6.5. This complete-
+state proof does not render a third independent output period.
+
+The six-check reader/mixer test validates the opening and loop seam. The
+ten-check waveOut worker matches submitted PCM to its independent schedule.
+Fourteen callback/catalog checks confirm E3M2 selects D_E3M2. In the actual
+two-second headless host run, the device completes 85,680 of 86,940 submitted
+frames before shutdown, with a 1,260-frame canceled-tail upper bound. All 69
+packets are consumed; no queue starvation, rebuffer, worker error or cleanup
+error occurs, and the device closes. The final tail is a stop-boundary metric,
+not evidence of a mid-run interruption. Full-map/campaign continuity, acoustic
+quality and sustained deadlines remain open. Portable receipts: [preparation]
+(../results/music-preparation-ultimate-doom-e3m2-stateproof-20260927.json),
+[reader/mixer qualification](../results/music-track-qualification-d-e3m2-state-proof-20260927.json),
+[waveOut worker](../results/music-audio-worker-d-e3m2-state-proof-20260927.json),
+[map selection](../results/music-events-map-selection-e3m2-stateproof-20260927.json),
+and [host integration](../results/music-host-e3m2-state-proof-integration-20260927.json).
+
 ### D_E3M1 exact-payload alias and host selection (September 27)
 
 The installed IWAD's D_E3M1 bytes exactly match qualified D_E2M9: both have

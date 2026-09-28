@@ -2999,3 +2999,29 @@ source D_E1M8 qualification SHA-256 is
 Portable results: [alias preparation](../results/music-preparation-ultimate-doom-e3m4-alias-20260927.json),
 [map selection](../results/music-events-map-selection-e3m4-alias-20260927.json),
 and [host integration](../results/music-host-e3m4-alias-integration-20260927.json).
+
+## 2026-09-27 — Qualify D_E3M2 music and map selection
+
+D_E3M2 is a byte-distinct Episode 3 score. Its 10,348,380-frame period is
+234.543 seconds; the complete-state method rendered two continuous periods
+(20,696,760 frames total). Both boundaries have 47 live voices and normalized
+state SHA-256
+`914CAF4F1FCCA364DCD3EAEBB8603286D207A3E02570D46B28C235C37D3683C3`. The
+independent eight-second opening PCM matches exactly. The proof infers the next
+period from complete state; it does not include a third independent output
+render. Render/write/snapshot took 892.403 seconds, and full preparation took
+907.672 seconds.
+
+The six-check reader/mixer audit verifies the exact opening and recurrent
+seam. The ten-check audio-worker test matches its submitted PCM to an
+independent schedule. Fourteen engine callback/catalog checks confirm E3M2
+selects D_E3M2. The actual two-second headless host selects it, consumes all
+69 packets, closes the music/device cleanly, and reports no queue starvation,
+rebuffer or worker/cleanup error. It completes 85,680 of 86,940 submitted
+frames before shutdown; the canceled-tail upper bound is 1,260 frames. This
+does not establish full-map/campaign continuity, acoustic quality or sustained
+deadlines. Portable receipts: [preparation](../results/music-preparation-ultimate-doom-e3m2-stateproof-20260927.json),
+[reader/mixer](../results/music-track-qualification-d-e3m2-state-proof-20260927.json),
+[audio worker](../results/music-audio-worker-d-e3m2-state-proof-20260927.json),
+[map selection](../results/music-events-map-selection-e3m2-stateproof-20260927.json),
+and [host integration](../results/music-host-e3m2-state-proof-integration-20260927.json).
