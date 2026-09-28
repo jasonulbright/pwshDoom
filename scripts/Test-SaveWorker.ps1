@@ -1,7 +1,7 @@
 #requires -Version 7.4
 # SPDX-License-Identifier: GPL-2.0-or-later
 param([string]$Wad='C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\base\DOOM.WAD',
-    [Parameter(Mandatory)][string]$Output,[switch]$Sound,[string]$MusicCatalog,[ValidateRange(1,4)][int]$NewGameEpisode=2)
+    [Parameter(Mandatory)][string]$Output,[switch]$Sound,[switch]$RealtimeAudio,[string]$MusicCatalog,[ValidateRange(1,4)][int]$NewGameEpisode=2)
 $ErrorActionPreference='Stop'
 if($MusicCatalog){$Sound=$true}
 if(Test-Path -LiteralPath $Output){throw 'Use a fresh report path.'}
@@ -43,7 +43,7 @@ function Send-Action($Action){
 }
 function Resume-Game {$null=Send-Action @{Action='ShowMenu';Screen=0;Choice=0;Episode=1;Skill=3}}
 try{
-    $simulation=New-DoomSimulation $Wad 3 1 1 -ReplayCheckpoints -SaveRoot $saveRoot -Sound:$Sound -MusicCatalog $MusicCatalog
+    $simulation=New-DoomSimulation $Wad 3 1 1 -ReplayCheckpoints -SaveRoot $saveRoot -Sound:$Sound -RealtimeAudio:$RealtimeAudio -MusicCatalog $MusicCatalog
     if($Sound){$simulation.View.Write(84,0);[void]$simulation.Go.Set()}
     Advance-Commands 35 25;$savedSnapshot=Snapshot-Hash $snapshot
     $reply=Send-Action @{Action='SaveGame';Slot=1;ExpectedHash=$null}
@@ -80,7 +80,7 @@ try{
             if($MusicCatalog){Assert-Worker 'Qualified music is consumed and closes across session operations' ($reportData.Audio.Music.Closed -and $reportData.Audio.Music.Frames -gt 0 -and @($reportData.Audio.Music.Transitions|Where-Object {$_.Kind -eq 'Start' -and $_.Track -ceq 'D_E1M1'}).Count -ge 2)}
         }catch{$failure=$_.ToString()}
     }
-    @{FinishedUtc=[DateTime]::UtcNow.ToString('o');Error=$failure;Checks=$checks.ToArray();Actions=$actions.ToArray();Simulation=$reportData;SaveRoot=$saveRoot;NewGameEpisode=$NewGameEpisode;MusicCatalogSha256=if($MusicCatalog){(Get-FileHash $MusicCatalog).Hash}else{$null};HarnessSha256=(Get-FileHash $PSCommandPath).Hash;Meaning='Actual simulation process and bounded session IPC. Numeric snapshots, command indices, asset generation handshake, failed candidate isolation, atomic replacement/backup and immutable replay saves. Rendering workers and live menus are qualified separately.'}|ConvertTo-Json -Depth 12|Set-Content $Output
+    @{FinishedUtc=[DateTime]::UtcNow.ToString('o');Error=$failure;Checks=$checks.ToArray();Actions=$actions.ToArray();Simulation=$reportData;RealtimeAudio=[bool]$RealtimeAudio;SaveRoot=$saveRoot;NewGameEpisode=$NewGameEpisode;MusicCatalogSha256=if($MusicCatalog){(Get-FileHash $MusicCatalog).Hash}else{$null};HarnessSha256=(Get-FileHash $PSCommandPath).Hash;Meaning='Actual simulation process and bounded session IPC. Numeric snapshots, command indices, asset generation handshake, failed candidate isolation, atomic replacement/backup and immutable replay saves. Optional realtime audio advances active music/effect state between simulation packets; rendering workers and live menus are qualified separately.'}|ConvertTo-Json -Depth 12|Set-Content $Output
 }
 if($failure){throw $failure}
 "PASS: $($checks.Count) save worker checks."

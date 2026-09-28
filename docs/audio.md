@@ -1,6 +1,6 @@
 # PowerShell audio investigation
 
-The terminal game has opt-in sound effects with `./Start-Doom.ps1 -Sound` and [music integration](music-integration.md) with an explicit `-MusicCatalog`. The complete eleven-track Ultimate Doom Episode 1 looping catalog is qualified locally and its actual simulation/audio worker passes save/load/new-game integration checks. A finite D_INTRO score now passes deterministic end/release-tail qualification, reader EOF checks and an actual worker first-block PCM comparison; other one-shot scores remain open. The default remains silent when calling the engine launcher without `-Sound` or a catalog. DMX decoding, stereo positioning, linear resampling, music synthesis and mixing run in PowerShell, with a standard Windows playback queue. Persistent [sound volume and mute](settings.md#sound-controls-qualification) are implemented. Broader soundtrack preparation, synthesis fidelity, audible latency and uninterrupted campaign qualification remain open release requirements.
+The terminal game has opt-in sound effects with `./Start-Doom.ps1 -Sound` and [music integration](music-integration.md) with an explicit `-MusicCatalog`. Interactive playback now advances active PowerShell music/effect state on the device clock between simulation packets; deterministic headless hosts remain packet-exact unless explicitly launched with `-RealtimeAudio`. The complete eleven-track Ultimate Doom Episode 1 looping catalog is qualified locally and its actual simulation/audio worker passes save/load/new-game integration checks. A finite D_INTRO score now passes deterministic end/release-tail qualification, reader EOF checks and an actual worker first-block PCM comparison; other one-shot scores remain open. The default remains silent when calling the engine launcher without `-Sound` or a catalog. DMX decoding, stereo positioning, linear resampling, music synthesis and mixing run in PowerShell, with a standard Windows playback queue. Persistent [sound volume and mute](settings.md#sound-controls-qualification) are implemented. Full-campaign continuity, audio-event delay during simulation backlog, audible latency, and acoustic quality remain open release requirements.
 
 ## Implementation boundary
 
@@ -88,6 +88,45 @@ position fixed it, and the full focused suite then passed.
 `src/AudioRunspace.ps1` starts a dedicated runspace for `scripts/Invoke-AudioWorker.ps1`. The simulation thread sends numeric sound events and gain snapshots using `src/AudioPackets.ps1`. Decoded sample arrays are shared read-only; game objects and PowerShell class method calls stay on the simulation thread. A bounded 32-packet collection rejects overflow explicitly. Nothing silently discards a gameplay tic to meet an audio target.
 
 The device uses four 1,260-frame buffers (114.3 ms nominal capacity), starts after two queued blocks, and responds to a shared pause flag. A dedicated host-memory field tracks active-clock pauses, including a too-small viewport. Menu pauses are also applied by the simulation. Map/new-game/load transitions advance an epoch and reset old-world queued sound; stale packets are counted. A packet from a newer epoch is retained until control catches up. Successful save loading resets the former sound state before replacing its listener. Device shutdown reports how much queued audio may have been cancelled. It does not pretend those frames were heard.
+
+## Interactive realtime fill (2026-09-28)
+
+The earlier worker consumed one 1,260-frame output block for every simulation
+packet. That tied music and effect playback to simulation scheduling: a
+67.42 ms packet interval under renderer load could empty the four-buffer queue
+and force a 54.17 ms rebuffer wait. The mixer itself took about 0.5–0.6 ms per
+block in that interval.
+
+Interactive launches now let the PowerShell audio worker fill a returned device
+slot from its current mixer and music-reader state when no new simulation
+packet is ready. It does not invent packet sequence numbers or game events.
+Music and active effect voices advance at 44.1 kHz until the next simulation
+packet updates events and gains. Shared pause, map-epoch reset, and an explicit
+packet-bounded drain prevent this fill. When no music or effect voice is active,
+the worker pauses instead of reporting idle time as active starvation. Headless
+hosts retain the one-packet/one-block path by default so existing replay PCM
+comparisons remain deterministic; `scripts/Invoke-Doom.ps1 -Headless
+-RealtimeAudio` enables the integrated output-clock path for a bounded test.
+
+The focused [continuity test](../scripts/Test-AudioRealtimeContinuity.ps1)
+passes eight actual-device checks: one qualified D_E1M1 start packet produces
+ten total blocks, music continues with no new packet, shared pause stops
+production, resume continues the cursor, and a drain stops at its requested
+packet. All 12,600 submitted frames return, with zero rebuffer/starvation and no
+worker error; its [source-pinned receipt](../results/audio-realtime-continuity-20260928.json)
+preserves the measured counters. The four-second D_E3M6 simulation-host check under PowerShell
+7.6.5 consumed 128 packets and generated 16 additional blocks; it submitted
+181,440 frames, returned 176,400 before shutdown, and reported a 5,040-frame
+canceled-tail upper bound, with no active queue starvation or rebuffer. The
+focused packet-exact music-worker (10 checks), rebuffer (7), load-boundary (9),
+runspace lifecycle (6), and simulation backpressure (8) regressions also pass.
+
+This removes gaps caused by short packet-production stalls in the tested
+interactive path; it cannot accelerate a simulation that stays below 35 tics
+per second. Packets still wait for free output slots, so these checks do not
+establish audible effect latency, absence of physical-device underruns, or
+full-campaign acoustic quality. Raw current-host reports remain under ignored
+`local/`; no recordings were made.
 
 `results/audio-packets-replay.json` preserves the entire earlier PCM hash and all eight checkpoints. `results/audio-packets-unit.json` independently checks numerical packet output, conservative source expiry, paused lifetime, reset and missing-asset rejection. `results/audio-runspace-future-epoch.json` checks an actual output device in a separate runspace, including a deliberately early future-epoch packet. Those synthetic tone tests are not audibility reviews.
 

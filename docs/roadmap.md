@@ -192,6 +192,19 @@ Release acceptance requires:
 | M8 — Doom II qualification | Doom II campaign, actors/weapons, secret routes, text/cast endings | Expanded campaign matrix and complete route/play evidence with performance checks | After Ultimate Doom release |
 | M9 — MyHouse-based audit | Version-pinned requirements and compatibility/performance audit | Required-feature inventory, reference behavior, supported/unsupported/incorrect classification, scoped extension plan | After Doom II; full mod support not yet promised |
 
+The 2026-09-28 audio output-clock change addresses the D_E3M6 packet-queue
+gaps seen in packet-exact headless runs. Interactive PowerShell playback now
+advances active music/effect state when the simulation has not yet published
+another packet; explicit pause, epoch reset, and drain still hold the clock.
+The focused actual-device check passes eight continuity/pause/resume/drain
+assertions. A four-second D_E3M6 host run passes through the real simulation
+process with 16 generated blocks and no queue starvation or rebuffer; a
+save/load/new-game worker run passes 15 checks across three audio epoch
+resets. These establish bounded device-queue continuity, not audible latency,
+physical-device underrun, or sustained full-campaign behavior. Packet-exact
+headless mode remains available for reproducible PCM checks. See
+[audio continuity](audio.md#interactive-realtime-fill-2026-09-28).
+
 The 2026-09-27 PowerShell mixer index optimization preserves every tested PCM
 hash and lowers the isolated 16-voice block mean from 33.1 ms to 5.0–5.7 ms;
 all 80 measured candidate blocks stay below the 28.57 ms audio-block duration.

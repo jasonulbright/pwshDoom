@@ -4055,3 +4055,43 @@ Focused checks pass: 20 masked-wall assertions; 36 Ultimate Doom map
 load/idle/render cases; five-view, 16-worker exact output in Classic,
 Matrix/Katakana, and AnsiArt/Katakana; and an E1M1-to-E1M2 reload with all
 worker processes preserved. See [performance details](performance.md#pack-per-map-bsp-geometry--september-28-2026) and the [compact receipt](../results/packed-map-geometry-profile-20260928.json).
+
+## 2026-09-28 — Keep interactive audio advancing across simulation packet gaps
+
+The four-buffer D_E3M6 host investigation recorded a 67.42 ms maximum
+simulation-packet interval around an active queue-empty event, while nearby
+PowerShell mix blocks took 0.5–0.6 ms. I changed interactive playback so the
+audio runspace can fill a free waveOut slot from its current active music/effect
+state when the packet queue is temporarily empty. It does not invent a game
+event or packet sequence. Shared pause, map-epoch reset and explicit drains
+still stop the fill. Headless hosts stay packet-exact unless
+`Invoke-Doom.ps1 -RealtimeAudio` is explicitly selected.
+
+The actual-device continuity test passes eight checks with one D_E1M1 packet:
+ten total blocks are submitted, music advances across a no-packet interval,
+pause stops production, resume continues the cursor, and a packet-bounded drain
+returns all 12,600 frames with no rebuffer/starvation. The first test invocation
+reached playback but exposed a report-writer path bug; after correcting the
+test harness, its rerun passed all eight checks.
+
+The four-second D_E3M6 simulation-host run under PowerShell 7.6.5 consumes 128
+packets and generates 16 additional blocks. It submits 181,440 frames; 176,400
+return before shutdown, with a 5,040-frame canceled-tail upper bound. The
+worker reports zero active starvation/rebuffer and no error. The realtime
+save/load/new-game worker run passes 15 checks over 77 packets, including three
+audio epoch resets; it generates 29 additional blocks, returns all 133,560
+submitted frames, and reports no starvation, rebuffer, or error. A fresh
+current-source all-map load/35-idle-tic/two-frame smoke passes 36/36 cases.
+
+The PowerShell 7.6.5 host command was `scripts/Invoke-Doom.ps1 -Wad
+<Steam DOOM.WAD> -Workers 12 -Seconds 4 -Headless -Sound -RealtimeAudio
+-MusicCatalog local/music-prepared-ultimate-doom-loops-20260928.json
+-Episode 3 -Map 6 -Skill 3 -Style Classic`. Current raw receipts are under
+ignored `local/`: `audio-realtime-continuity-poc-r2-20260928.json`,
+`audio-e3m6-realtime-host-20260928.json`,
+`save-worker-realtime-music-20260928.json`, and
+`campaign-smoke-realtime-audio-code-20260928.json`. These software queue
+checks do not measure acoustics, actual device underrun, event-to-speaker
+latency, or sustained full-campaign behavior; they also do not make a slow
+simulation keep pace with 35 tics per second. The focused result and candidate
+receipts will retain the portable summaries.

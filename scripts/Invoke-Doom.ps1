@@ -6,7 +6,7 @@ param([Parameter(Mandatory)][string]$Wad,[ValidateRange(1,32)][int]$Workers=16,
     [ValidateRange(0,10000)][int]$CaptureEveryTics=0,[ValidateRange(1,5)][int]$Skill=3,
     [ValidateRange(1,4)][int]$Episode=1,[ValidateRange(1,32)][int]$Map=1,
     [ValidateSet('Classic','AnsiArt','Matrix')][string]$Style='Classic',
-    [ValidateSet('Ascii','Katakana')][string]$GlyphSet='Katakana',
+    [ValidateSet('Ascii','Katakana')][string]$GlyphSet='Katakana',[switch]$RealtimeAudio,
     [ValidateSet('Strips','Batch')][string]$TerminalOutput='Strips',
     [ValidateSet('Pairs','ColorState')][string]$AnsiEncoding='Pairs',
     [string]$Report="$PSScriptRoot/../local/game-session.json",[string]$ReadyFile,[string]$CaptureStartFile,[string]$SaveRoot,[string]$SettingsPath,
@@ -102,7 +102,8 @@ try {
     # Existing single-map benchmark replays retain their first-exit stopping rule.
     # Session recordings explicitly carry ContinueCampaign=true.
     $stopAtLevelEnd=$null -ne $replayData -and -not $replayData.ContinueCampaign
-    $simulation=New-DoomSimulation $Wad $Skill $Episode $Map -StopAtLevelEnd:$stopAtLevelEnd -ReplayCheckpoints:$withCheckpoints -CheckpointReplay $(if($null -ne $replayData -and $replayData.Checkpoints){$Replay}else{''}) -SaveRoot $SaveRoot -Sound:$Sound -SoundVolume $(if($preferences.SoundMuted){0}else{$preferences.SoundVolume}) -MusicCatalog $MusicCatalog
+    $liveAudioClock=[bool]($RealtimeAudio -or (-not $Headless -and $Sound))
+    $simulation=New-DoomSimulation $Wad $Skill $Episode $Map -StopAtLevelEnd:$stopAtLevelEnd -ReplayCheckpoints:$withCheckpoints -CheckpointReplay $(if($null -ne $replayData -and $replayData.Checkpoints){$Replay}else{''}) -SaveRoot $SaveRoot -Sound:$Sound -RealtimeAudio:$liveAudioClock -SoundVolume $(if($preferences.SoundMuted){0}else{$preferences.SoundVolume}) -MusicCatalog $MusicCatalog
     $snapshot=Read-DoomSimulationSnapshot $simulation $null
     $menu=New-DoomMenuState ($simulation.View.ReadInt32(80)) $Episode $Skill
     $menu.Settings=Copy-DoomUserSettings $preferences

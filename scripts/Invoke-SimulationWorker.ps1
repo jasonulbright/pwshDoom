@@ -1,6 +1,6 @@
 #requires -Version 7.4
 # SPDX-License-Identifier: GPL-2.0-or-later
-param([string]$Wad,[int]$Skill,[int]$Episode,[int]$Map,[string]$Channel,[string]$Assets,[string]$Report,[int]$OwnerPid,[switch]$StopAtLevelEnd,[switch]$ReplayCheckpoints,[string]$CheckpointReplay,[string]$SaveRoot,[switch]$Sound,[string]$MusicCatalog)
+param([string]$Wad,[int]$Skill,[int]$Episode,[int]$Map,[string]$Channel,[string]$Assets,[string]$Report,[int]$OwnerPid,[switch]$StopAtLevelEnd,[switch]$ReplayCheckpoints,[string]$CheckpointReplay,[string]$SaveRoot,[switch]$Sound,[switch]$RealtimeAudio,[string]$MusicCatalog)
 $ErrorActionPreference='Stop'
 . "$PSScriptRoot/FrameCodec.ps1";. "$PSScriptRoot/../src/GameHost.ps1";. "$PSScriptRoot/../src/FastRenderer.ps1"
 . "$PSScriptRoot/../src/RenderAssets.ps1";. "$PSScriptRoot/../src/SnapshotTransport.ps1"
@@ -132,7 +132,7 @@ try {
             $musicReports=Read-DoomMusicCatalog $MusicCatalog $content
             $musicEvents=[DoomMusicEvents]::new();$options.Music=$musicEvents;Sync-DoomMusicSession $musicEvents $game
         }
-        $audio=Start-DoomAudioRunspace $audioClips -MusicReports $musicReports
+        $audio=Start-DoomAudioRunspace $audioClips -MusicReports $musicReports -Realtime:$RealtimeAudio
     }
     $game.BeforeLevelLoad={param($LoadingGame) Begin-SimulationLevelLoad}
     Record-SimulationTransition

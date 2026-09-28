@@ -1,0 +1,144 @@
+{
+  "Error": null,
+  "Checks": [
+    {
+      "Name": "One simulation packet starts actual qualified music output",
+      "Passed": true
+    },
+    {
+      "Name": "Active music advances while no additional simulation packet exists",
+      "Passed": true
+    },
+    {
+      "Name": "Shared pause stops realtime block production",
+      "Passed": true
+    },
+    {
+      "Name": "Music resumes from the retained cursor without a new game packet",
+      "Passed": true
+    },
+    {
+      "Name": "Explicit drain stops realtime fill at the requested packet",
+      "Passed": true
+    },
+    {
+      "Name": "Music advanced beyond the sole simulation block",
+      "Passed": true
+    },
+    {
+      "Name": "No active rebuffer occurred and drained device tail returned",
+      "Passed": true
+    },
+    {
+      "Name": "Worker and actual output device closed cleanly",
+      "Passed": true
+    }
+  ],
+  "Meaning": "Actual waveOut device with one PowerShell simulation packet, a deliberate no-packet interval, shared pause/resume and a packet-bounded drain. Verifies that active qualified music continues on the interactive output clock. Submitted PCM and driver counters do not prove acoustic quality or latency.",
+  "FinishedUtc": "2026-09-28T21:49:16.1594702Z",
+  "Audio": {
+    "MixedBlocks": 10,
+    "MixSamplesMs": [
+      46.4707,
+      1.865,
+      0.9226,
+      0.9149,
+      16.9525,
+      0.6488,
+      0.6183,
+      0.6667,
+      0.6457,
+      0.6688
+    ],
+    "MaxVoices": 0,
+    "DeviceClosed": true,
+    "GeneratedRealtimeBlocks": 9,
+    "SubmittedFrames": 12600,
+    "Meaning": "PowerShell mixes simulation packets. Interactive playback can keep active music/effect voices advancing while the packet producer is between updates; headless/test playback remains packet-exact. Packet age ends at submission, not audible output. Queue starvation is polling, not hardware telemetry. Reset/exit can cancel queued tail audio; cancelled frame count is an upper bound.",
+    "Music": {
+      "Reports": {
+        "D_E1M1": "1D5A9D6D16E8CDCA74646D6AEF009CDB42EB59B87941B0EFE648F9D3A98C96CF"
+      },
+      "Closed": true,
+      "Frames": 12600,
+      "Gain": 0.2,
+      "Selected": "D_E1M1",
+      "Transitions": [
+        {
+          "Track": "D_E1M1",
+          "Loop": true,
+          "AfterFrames": 0,
+          "Kind": "Start"
+        }
+      ]
+    },
+    "WallSeconds": 1.4645472,
+    "FinalVolume": 1.0,
+    "RebufferResumes": [],
+    "LoadingDrains": [
+      {
+        "CompletedFrames": 12600,
+        "ThroughSequence": 0,
+        "Qpc": 1249437550164
+      }
+    ],
+    "RebufferSinglePacketDeadlineMs": 100,
+    "PcmSha256": "550527F22231428F0862C92934CC617CE8C8460493B9580BBCA0DF891103A905",
+    "RebufferCount": 0,
+    "ReturnedCompletedFrames": 12600,
+    "Packets": 1,
+    "UnconsumedPackets": 0,
+    "MaxPacketQueue": 1,
+    "PauseTransitions": 1,
+    "PendingPacket": null,
+    "LastSequence": 0,
+    "VolumeChanges": [],
+    "StalePacketsDiscarded": 0,
+    "MutedPackets": 0,
+    "PacketAgeAtSubmissionMs": [
+      89.3521
+    ],
+    "QueueStarvationObservations": [],
+    "ClippedSamples": 0,
+    "Error": null,
+    "CleanupError": null,
+    "Realtime": true,
+    "CancelledQueuedFramesUpperBound": 0,
+    "EpochResets": 0
+  },
+  "Drain": {
+    "CompletedFrames": 12600,
+    "ThroughSequence": 0,
+    "AcknowledgedQpc": 1249437550164,
+    "WaitMilliseconds": 107.4528
+  },
+  "Sources": [
+    {
+      "Path": "src/AudioMixer.ps1",
+      "Sha256": "95F0F9A8A004E4D42E313231BAF13A27BD5E7421EAF67F90220DBC5FF0B55276"
+    },
+    {
+      "Path": "src/AudioRunspace.ps1",
+      "Sha256": "A733772166D771AC09E0DE26E192E0C9173EDC9A2C3298E4912CA2C150FDFA7D"
+    },
+    {
+      "Path": "src/MusicLoopReader.ps1",
+      "Sha256": "3DD9DA660A8EB2BCC0A2053686C68B9EAC740CE0A13FE047BBA72CE0277A95A1"
+    },
+    {
+      "Path": "src/MusicPlayback.ps1",
+      "Sha256": "C4B6FBE2C44AFB3FE2E13CEF968AD3EEAE7DD8FA85B993321FFDED5321B0A71F"
+    },
+    {
+      "Path": "scripts/Invoke-AudioWorker.ps1",
+      "Sha256": "96C1C2AFB05D6B26910BF1771E2EC1448BF7FBAB8860419DE2E04F710D51B734"
+    },
+    {
+      "Path": "scripts/Test-AudioRealtimeContinuity.ps1",
+      "Sha256": "517319A950159555716D97032600D49242050D6524C2A5E1B962F494546B2F1C"
+    }
+  ],
+  "QualificationSha256": "1D5A9D6D16E8CDCA74646D6AEF009CDB42EB59B87941B0EFE648F9D3A98C96CF",
+  "PowerShell": "7.6.5",
+  "Track": "D_E1M1"
+}
