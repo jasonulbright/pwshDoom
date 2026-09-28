@@ -1,0 +1,73 @@
+{
+  "Catalog": "C:\\projects\\pwshDoom\\local\\music-prepared-episode1-e3m3-state-proof-20260928.json",
+  "SoundFontSha256": "82475B91A76DE15CB28A104707D3247BA932E228BADA3F47BBA63C6B31AAF7A1",
+  "RequestedTracks": [
+    "D_E3M3"
+  ],
+  "CatalogSha256": "6397DA5E641FD752E7751E66E9661D12898D371683809EF3C80B8BD776525A7E",
+  "Error": null,
+  "Seconds": 4692.0034499,
+  "Published": true,
+  "Sources": [
+    {
+      "Sha256": "8B54F2CFF8D5219D2D4DCC562A365E0307F1C624C736FB009363ECF90AD6E08D",
+      "Path": "scripts/Prepare-DoomMusic.ps1"
+    },
+    {
+      "Sha256": "557C8BAFA2A234B9A1C816A37EB3F17D9D68DCCDC1FC02B69D60C8FDC290F7AB",
+      "Path": "scripts/Render-MusicScore.ps1"
+    },
+    {
+      "Sha256": "A9ECC5975C249360EEE442723F61AB6C216026F4E51FE3F418695E39CC73BF58",
+      "Path": "scripts/Qualify-MusicLoop.ps1"
+    },
+    {
+      "Sha256": "FB0983C89F721F5728EC683CFF5EF35DB5B475784681614FDDAC01C61971C6B9",
+      "Path": "src/MusicLoopReader.ps1"
+    },
+    {
+      "Sha256": "66B87D1CDD3FAD62E493A0C50C9A5AEBFE27167C8CCCCA974CC80463B6D1BB33",
+      "Path": "src/MusScore.ps1"
+    },
+    {
+      "Sha256": "AF80287762169B5318F60FD719479137BAED1D3EEF39561513D2B34AC118A855",
+      "Path": "src/SoundFontBank.ps1"
+    },
+    {
+      "Sha256": "9D409332EB51B5B6FCBC4B259E0C5E243E561A3C0D6AD2040A772F46539B9D8E",
+      "Path": "src/SoundFontRegions.ps1"
+    },
+    {
+      "Sha256": "1D7911DC5CD2004D6DBBF27ECF43FFD652FAC8E4813943D9F8CFD5116332417B",
+      "Path": "src/MusicOscillator.ps1"
+    },
+    {
+      "Sha256": "30CC10D9118335FEC1C57653871B236B020FDBBA2D4103F89BA8EA672F1AF5D9",
+      "Path": "src/MusicControls.ps1"
+    },
+    {
+      "Sha256": "3CCA7492A9F809EB8D54C8BF7D3D9847A1EC29D5E8ED6923F72ECA7803A50B48",
+      "Path": "src/MusicSynth.ps1"
+    },
+    {
+      "Sha256": "6EA293142AD9A61661244DC5910CE264ACEE6E8A0CECE75F668CC55AC5A6E5DD",
+      "Path": "src/MusicGroup.ps1"
+    },
+    {
+      "Sha256": "9183717AE1384F2BEF103885A20AECF0EA66F6A8A80FFC311040C28E14155F7F",
+      "Path": "src/MusicLoopState.ps1"
+    }
+  ],
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "QualificationModeForNewTracks": "CompleteStateRecurrence",
+  "Meaning": "Finite sequential preparation of exactly the requested dry looping tracks. Existing/resumed tracks undergo source/runtime/complete payload and IWAD/SF2 identity checks. Catalog published only after all requests pass. Successful per-track reports survive failed/interrupted batches for explicit same-directory resume. No one-shot, full soundtrack, fidelity, live deadline or campaign completion claim.",
+  "Tracks": [
+    {
+      "Report": "C:\\projects\\pwshDoom\\local\\music-track-e3m3-stateproof-20260928\\D_E3M3\\qualified.json",
+      "Track": "D_E3M3",
+      "ReportSha256": "C13D3FAA40D4CC38071559D9B617050F90D08C5347AE5CF377B9B3F75C737989",
+      "Action": "PreparedAndQualified",
+      "MusSha256": "C52AFC2550020AACFED4F4C1F3A2C3600041A4DC6AC30B57FBE518CE96062A6B"
+    }
+  ]
+}

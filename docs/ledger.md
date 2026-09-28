@@ -3056,8 +3056,9 @@ pending before release.
 ## 2026-09-28 — Defer the long D_E3M3 dry-loop proof
 
 Started D_E3M3 preparation with the two-period complete-state recurrence
-method. Its loop is 977.43 seconds; the run advanced through 91.43 seconds of
-score rendering before it was interrupted so the long CPU workload would not
+method. Its single loop period is 488.714 seconds; 977.429 seconds is the total
+two-period proof horizon. The run advanced through 91.43 seconds of that total
+score horizon before it was interrupted so the long CPU workload would not
 compete with Jason's pending full Episode 1 playthrough. No loop qualification,
 catalog or completed preparation report was produced. The independent opening
 and partial attempt files remain under
@@ -3169,3 +3170,15 @@ binary parity or performance. The reusable test is
 [`Compare-MovingSectorHeightSweep.ps1`](../scripts/Compare-MovingSectorHeightSweep.ps1);
 the [receipt](../results/moving-sector-e1m1-height-sweep-current-20260928.json)
 pins source commit `532f2e3a90ab675db537616d1c166d8794cf4697`, IWAD and replay.
+
+## 2026-09-28 — Qualify the D_E3M3 complete-state loop and host path
+
+Resumed the preserved `local/music-track-e3m3-stateproof-20260928/` batch after confirming its exclusive preparation lock was free. The earlier opening and partial attempt were preserved; the new attempt used fresh catalog/report paths and the current installed IWAD and soundfont. The qualification ran under PowerShell 7.6.5 with WAD SHA-256 `6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F`, soundfont SHA-256 `82475B91A76DE15CB28A104707D3247BA932E228BADA3F47BBA63C6B31AAF7A1`, and D_E3M3 MUS SHA-256 `C52AFC2550020AACFED4F4C1F3A2C3600041A4DC6AC30B57FBE518CE96062A6B`.
+
+D_E3M3’s period is 21,552,300 synth frames at 44,100 frames/sec (488.714 seconds) across four aligned cycles. The two-period proof rendered 43,104,600 frames (977.429 seconds total); period boundary snapshots at frames 21,552,300 and 43,104,600 both have 50 voices and normalized state SHA-256 `9809EC6D0C4873CEF5F3241AD767029D47C8DD09FCBF70E5E3E36F3D0B9D76E5`. The startup period and subsequent loop period have different float64 payload hashes; the matching state at the end of that loop period and one period later proves complete-state recurrence, but a third output period was not independently rendered. The exact eight-second opening reference and loop seam pass the six-check reader/mixer qualification. Render/write/snapshot took 4,674.868 seconds; full preparation took 4,692.003 seconds. The progress denominator `977.43 seconds` represents both proof periods, not one loop; this corrects the wording in the original deferral entry.
+
+The actual engine callback/catalog test passes 14 checks and selects D_E3M3 on E3M3. The audio-worker suite passes 10 checks. The real two-second headless host starts D_E3M3, reaches 69 simulation tics, submits all 86,940 music frames, and returns 84,420 before shutdown; the 2,520-frame canceled-tail value is an upper bound. The host reports zero queue starvation, rebuffer, unconsumed packets, worker/cleanup error, and closes the device. These checks do not establish acoustic quality, full-map playback, continuous campaign audio, performance under sustained rendering, or 35/60 pacing.
+
+A separate one-track D_E3M3 local catalog was published. The supplied Episode 1 catalog was an exact-payload alias lookup source, not a catalog-merge input, and the existing eleven-track Episode 1 catalog is unchanged. The current map-music preparation gap falls from six distinct track names to five (D_E3M5–D_E3M9), plus the two finite title/finale scores. All catalog and sound payload files remain local; no commercial assets were copied into Git.
+
+Receipts: [qualification and two period hashes](../results/music-loop-d-e3m3-state-proof-20260928.json), [opening reference](../results/music-e3m3-opening-reference-20260928.json), [six reader/mixer checks](../results/music-track-qualification-d-e3m3-state-proof-20260928.json), [ten audio-worker checks](../results/music-audio-worker-d-e3m3-state-proof-20260928.json), [14 map-selection checks](../results/music-events-map-selection-e3m3-stateproof-20260928.json), [two-second host integration](../results/music-host-e3m3-state-proof-integration-20260928.json), and [preparation/catalog receipt](../results/music-preparation-e3m3-state-proof-20260928.json).

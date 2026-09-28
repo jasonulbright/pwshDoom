@@ -393,6 +393,42 @@ quality and sustained deadlines remain open. Portable receipts: [preparation]
 [map selection](../results/music-events-map-selection-e3m2-stateproof-20260927.json),
 and [host integration](../results/music-host-e3m2-state-proof-integration-20260927.json).
 
+### D_E3M3 complete-state recurrence and host selection (September 28)
+
+D_E3M3 has a 21,552,300-frame period at 44,100 frames/second: 488.714
+seconds across four aligned score cycles. The earlier 977.43-second figure
+was the total two-period proof horizon, not one loop. Two continuous periods
+rendered 43,104,600 frames. The first period is startup; the loop begins at
+frame 21,552,300. The two boundaries of that recurring period have 50 live
+voices and the same normalized state SHA-256
+`9809EC6D0C4873CEF5F3241AD767029D47C8DD09FCBF70E5E3E36F3D0B9D76E5`.
+Each float64 stereo period is 344,836,800 bytes. The independent eight-second
+opening matches exactly; the six-check reader/mixer audit reproduces it and
+checks the loop seam. This is a complete-state recurrence proof, not a third
+independently rendered output period.
+
+Fourteen actual callback/catalog checks confirm E3M3 selects D_E3M3, and the
+ten-check audio-worker suite passes. A two-second headless game-host run on
+E3M3 starts the selected score, submits all 86,940 music frames and returns
+84,420 before clean shutdown. Its 2,520-frame canceled-tail upper bound is at
+the stop boundary; there are zero queue-starvation observations, rebuffer
+events, unconsumed packets, worker errors or cleanup errors. The device closes. The
+host run is a short integration check, not full-map continuity, acoustic
+review, or a 35-tic/60-display measurement. Rendering, mix quality under
+sustained load, and uninterrupted campaign audio remain open. Qualification
+render/write/snapshot work took 4,674.868 seconds; preparation took 4,692.003
+seconds under PowerShell 7.6.5.
+
+Portable receipts: [full loop qualification](../results/music-loop-d-e3m3-state-proof-20260928.json),
+[opening reference](../results/music-e3m3-opening-reference-20260928.json),
+[reader/mixer audit](../results/music-track-qualification-d-e3m3-state-proof-20260928.json),
+[audio worker](../results/music-audio-worker-d-e3m3-state-proof-20260928.json),
+[map selection](../results/music-events-map-selection-e3m3-stateproof-20260928.json),
+[host integration](../results/music-host-e3m3-state-proof-integration-20260928.json),
+and [preparation/catalog receipt](../results/music-preparation-e3m3-state-proof-20260928.json).
+The one-track D_E3M3 catalog and float64 payloads stay under ignored `local/`;
+the commercial IWAD and soundfont are not included.
+
 ### D_E3M1 exact-payload alias and host selection (September 27)
 
 The installed IWAD's D_E3M1 bytes exactly match qualified D_E2M9: both have
