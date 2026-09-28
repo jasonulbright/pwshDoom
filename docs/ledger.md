@@ -4026,3 +4026,15 @@ collision; it does not establish safety for unrelated shared test outputs or
 prove concurrent gameplay pacing.
 
 Evidence: [concurrent publication report](../results/engine-bundle-concurrent-publication-20260928.json).
+
+The human Episode 1 candidate receipt is refreshed against the committed tree
+`f612d839f74c598c086b91412593dff0fbe2bcbb`. A fresh Steam-IWAD smoke loads
+all 36 Ultimate Doom maps, advances 35 idle tics, and renders two serial
+320x200 frames per map (36 passed, zero failed). The E1M2 chainsaw fixture was
+also rerun on this checkout: the first real hit lowers the imp from 60 to 56
+health and the Doom II homing-angle check passes. These narrow checks do not
+replace Jason's one HMP Episode 1 playthrough.
+
+Evidence: [current human-playthrough candidate receipt](../results/episode1-current-human-candidate-20260928.json),
+[fresh map smoke](../results/episode1-map-smoke-current-candidate-20260928.json),
+and [chainsaw fixture](../results/saw-attack.json).

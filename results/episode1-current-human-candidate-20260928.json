@@ -1,8 +1,8 @@
 {
-  "PreparedUtc": "2026-09-28T19:21:19.1656841Z",
+  "PreparedUtc": "2026-09-28T20:30:27.9878665Z",
   "Status": "PreparedForOneHumanEpisode1Playthrough",
   "Branch": "codex/feasibility-study",
-  "VerifiedTreeCommit": "55ac69d1a227f702e46de96ea2c71b0058fce00d",
+  "VerifiedTreeCommit": "f612d839f74c598c086b91412593dff0fbe2bcbb",
   "LatestGameSourceCommit": "32400a85a256c6063960297fefeeb3f961a9349e",
   "PowerShell": "7.6.5",
   "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
@@ -24,9 +24,9 @@
       "Name": "All Ultimate Doom map smoke",
       "Meaning": "36 maps each load, simulate 35 idle tics, and render two complete 320x200 serial frames; not route completion.",
       "RawReport": {
-        "Sha256": "6CF619F83EEBB3940F4311ABBA61A980AABD0E77ADDA79680ECDE562E25B0799",
-        "Path": "local/episode1-current-candidate-20260928/episode1-current-20260928-map-smoke.json",
-        "Bytes": 67020
+        "Sha256": "CEA081FF8382CBDA67D55908CE4EC9D002F1A7EE1919B7C6C8D5E5D11BA912FC",
+        "Path": "results/episode1-map-smoke-current-candidate-20260928.json",
+        "Bytes": 67034
       },
       "Passed": 36
     },
@@ -58,7 +58,7 @@
       "Failed": 0,
       "Receipt": "results/saw-attack.json",
       "Name": "Chainsaw action regression",
-      "ReceiptSha256": "54BD9B838551FFBC90701328CF264EEBD4BE59B1C7EF50486EDA6FFB88DCC2F9"
+      "ReceiptSha256": "22A224A8A3AED6A7BEAF9EC2ADE359B9C9A61B2918C754E83AF6C827CC998711"
     },
     {
       "Failed": 0,
@@ -95,6 +95,17 @@
         "Bytes": 1198
       },
       "Passed": 4
+    },
+    {
+      "Name": "Concurrent engine bundle publication",
+      "Passed": 8,
+      "Failed": 0,
+      "Meaning": "Eight simultaneous PowerShell 7.6.5 builders produced identical parseable output atomically; tooling check, not gameplay pacing.",
+      "RawReport": {
+        "Sha256": "FD59EFA7123DD52C686D34C036B83EB2477C8E6268197FB2EDE1A8D00AD907BB",
+        "Path": "results/engine-bundle-concurrent-publication-20260928.json",
+        "Bytes": 473
+      }
     }
   ],
   "RendererPartitions": [
@@ -202,6 +213,11 @@
       "Sha256": "E3601A5C0036FEA5C2EB1ABA1A0C9905283B791FF6B3849D11D92B330D0FAE75",
       "Path": "local/episode1-current-candidate-20260928/episode1-current-20260928-transitions.json",
       "Bytes": 14712
+    },
+    {
+      "Sha256": "CEA081FF8382CBDA67D55908CE4EC9D002F1A7EE1919B7C6C8D5E5D11BA912FC",
+      "Path": "results/episode1-map-smoke-current-candidate-20260928.json",
+      "Bytes": 67034
     }
   ],
   "Limitations": [
