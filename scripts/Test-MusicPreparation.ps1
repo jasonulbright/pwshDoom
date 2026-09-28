@@ -28,6 +28,15 @@ try{
     $resumeRoot=Join-Path $dir 'resume';$null=[IO.Directory]::CreateDirectory((Join-Path $resumeRoot 'D_E1M1'));Copy-Item $qualification (Join-Path $resumeRoot 'D_E1M1/qualified.json')
     $p=Run 'resume' D_E1M1 $resumeRoot ''
     Check 'Interrupted-batch resume revalidates real qualified payload without a seed catalog' ($p.Code -eq 0 -and $p.Report.Published -and $p.Report.Tracks[0].Action -ceq 'VerifiedPreviousPreparation')
+    $episode1Catalog=Get-Content -LiteralPath (Join-Path $root 'local/music-prepared-episode1.json') -Raw|ConvertFrom-Json -AsHashtable
+    if(-not $episode1Catalog.ContainsKey('D_E1M7')){throw 'Episode 1 alias fixture is missing its qualified D_E1M7 report.'}
+    $aliasSeed=Join-Path $dir 'alias-seed.json';@{D_E1M7=$episode1Catalog['D_E1M7']}|ConvertTo-Json|Set-Content -LiteralPath $aliasSeed
+    $aliasRoot=Join-Path $dir 'alias';$p=Run 'alias' D_E2M5 $aliasRoot $aliasSeed
+    $aliasReportPath=Join-Path $aliasRoot 'D_E2M5/qualified.json';$aliasData=Get-Content -LiteralPath $aliasReportPath -Raw|ConvertFrom-Json -AsHashtable
+    $aliasSourceData=Get-Content -LiteralPath $episode1Catalog['D_E1M7'] -Raw|ConvertFrom-Json -AsHashtable
+    $aliasCatalog=Get-Content -LiteralPath $p.Catalog -Raw|ConvertFrom-Json -AsHashtable
+    Check 'Byte-identical WAD music reuses a current qualification without rendering' ($p.Code -eq 0 -and $p.Report.Published -and $p.Report.Tracks[0].Action -ceq 'ReusedIdenticalPayloadAlias' -and $p.Report.Tracks[0].AliasOf -ceq 'D_E1M7' -and @((Get-ChildItem -LiteralPath (Join-Path $aliasRoot 'D_E2M5') -Directory)).Count -eq 0)
+    Check 'Alias report records exact payload, bank, source report and target catalog identity' ($aliasData.Details.Track -ceq 'D_E2M5' -and $aliasData.AliasProvenance.SourceTrack -ceq 'D_E1M7' -and $aliasData.AliasProvenance.Method -ceq 'ExactMUSAndSoundFontHash' -and $aliasData.AliasProvenance.MusSha256 -ceq $aliasData.Details.MusSha256 -and $aliasData.Details.BankSha256 -ceq $aliasSourceData.Details.BankSha256 -and $aliasData.AliasProvenance.SoundFontSha256 -ceq $aliasData.Details.BankSha256 -and $aliasData.AliasProvenance.SourceQualificationSha256 -ceq (Get-FileHash $episode1Catalog['D_E1M7']).Hash -and $aliasCatalog.ContainsKey('D_E2M5') -and [IO.Path]::GetFullPath($aliasCatalog['D_E2M5']) -ceq [IO.Path]::GetFullPath($aliasReportPath))
     $p=Run 'missing' D_NOTREAL (Join-Path $dir 'missing') ''
     Check 'Missing WAD lump fails before track preparation or publication' ($p.Code -ne 0 -and -not $p.Report.Published -and $p.Report.Tracks.Count -eq 0 -and -not (Test-Path $p.Catalog) -and $p.Report.Error -match 'IWAD has no requested')
     $bad=Join-Path $dir 'wrong-bank.json';$data=Get-Content $qualification -Raw|ConvertFrom-Json -AsHashtable;$data.Details.BankSha256='0'*64;$data|ConvertTo-Json -Depth 12|Set-Content $bad

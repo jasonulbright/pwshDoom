@@ -1,0 +1,59 @@
+{
+  "Error": "The property 'Count' cannot be found on this object. Verify that the property exists.\nat <ScriptBlock>, C:\\projects\\pwshDoom\\scripts\\Test-MusicPreparation.ps1: line 37",
+  "Meaning": "Real qualified-file reuse/resume and fresh-catalog publication, missing-lump and bank mismatch rejection, no overwrite, exclusive live lock and released-lock recovery. Does not exercise new synthesis; that requires its own preparation run.",
+  "Checks": [
+    {
+      "Passed": true,
+      "Name": "Real current E1M1 payload verifies and publishes requested catalog"
+    },
+    {
+      "Passed": true,
+      "Name": "Existing catalog and receipt are protected from overwrite"
+    },
+    {
+      "Passed": true,
+      "Name": "Interrupted-batch resume revalidates real qualified payload without a seed catalog"
+    }
+  ],
+  "Attempts": [
+    {
+      "Error": "",
+      "ExitCode": 0,
+      "ReportSha256": "877F667727C5B2223D882EF2220B6547C5E3ADE0EA7FB1EB0624FDA5C3AA32D7",
+      "Name": "reuse",
+      "Report": "C:\\projects\\pwshDoom\\local\\music-prepare-test-6ce5f09eb1974a0bacd8c649304b7dcf\\reuse-report.json"
+    },
+    {
+      "Error": "Exception: C:\\projects\\pwshDoom\\scripts\\Prepare-DoomMusic.ps1:16\r\nLine |\r\n  16 |  . utputPath)){throw 'Choose distinct fresh catalog and preparation repo .\r\n     |                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n     | Choose distinct fresh catalog and preparation report paths.\r\n",
+      "ExitCode": 1,
+      "ReportSha256": "877F667727C5B2223D882EF2220B6547C5E3ADE0EA7FB1EB0624FDA5C3AA32D7",
+      "Name": "reuse",
+      "Report": "C:\\projects\\pwshDoom\\local\\music-prepare-test-6ce5f09eb1974a0bacd8c649304b7dcf\\reuse-report.json"
+    },
+    {
+      "Error": "",
+      "ExitCode": 0,
+      "ReportSha256": "189A8E154030518BB9AF0E546ADCAE72B0F1C2E566934214AFCE02EC5460A02C",
+      "Name": "resume",
+      "Report": "C:\\projects\\pwshDoom\\local\\music-prepare-test-6ce5f09eb1974a0bacd8c649304b7dcf\\resume-report.json"
+    },
+    {
+      "Error": "",
+      "ExitCode": 0,
+      "ReportSha256": "3F25E9406396EC908060B36F8088EE2595B9FC7152D034CF585D7B9A3A123B01",
+      "Name": "alias",
+      "Report": "C:\\projects\\pwshDoom\\local\\music-prepare-test-6ce5f09eb1974a0bacd8c649304b7dcf\\alias-report.json"
+    }
+  ],
+  "Directory": "C:\\projects\\pwshDoom\\local\\music-prepare-test-6ce5f09eb1974a0bacd8c649304b7dcf",
+  "Sources": [
+    {
+      "Sha256": "8B54F2CFF8D5219D2D4DCC562A365E0307F1C624C736FB009363ECF90AD6E08D",
+      "Path": "scripts/Prepare-DoomMusic.ps1"
+    },
+    {
+      "Sha256": "3341F6BD084923B5BCC3BB1720E3B40FDBCEE1B15888A0132E2954C7DA00B600",
+      "Path": "scripts/Test-MusicPreparation.ps1"
+    }
+  ]
+}

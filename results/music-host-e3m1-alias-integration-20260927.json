@@ -1,0 +1,99 @@
+{
+  "Version": 1,
+  "RecordedUtc": "2026-09-27T23:56:08.5032287Z",
+  "Format": "pwshDoom.MusicHostTrackIntegration",
+  "RawHostReport": "local/episode3m1-music-integration-alias-20260927.json",
+  "RawHostReportSha256": "F5DBD39959C2D38127EC624DDE8CE160CFF09CD9CBD9FD9EC0693B31087D0958",
+  "Music": {
+    "Selected": "D_E3M1",
+    "DeviceClosed": true,
+    "MusicClosed": true,
+    "SubmittedFrames": 86940,
+    "ReturnedCompletedFrames": 85680,
+    "CancelledQueuedFramesUpperBound": 1260,
+    "UnconsumedPackets": 0,
+    "Packets": 69,
+    "RebufferCount": 0,
+    "QueueStarvationObservations": 0,
+    "AudioError": null,
+    "CleanupError": null,
+    "Transitions": [
+      {
+        "Track": "D_E3M1",
+        "AfterFrames": 0,
+        "Kind": "Start",
+        "Loop": true
+      }
+    ],
+    "WallSeconds": 7.7448742,
+    "PcmSha256": "9E1482FCB51D74C2BC115B7869CCA19A5A82C0BE03B7C9A4395C816C2630BA26",
+    "Meaning": "Two-second actual E3M1 game/audio-worker integration selects the looping D_E3M1 score. Its exact MUS and soundfont hashes match the already-qualified D_E2M9 payload, so preparation writes target-track provenance without synthesizing another loop. The device completed 85680 of 86940 submitted frames before shutdown; the canceled queued tail upper bound is 1260 frames. All 69 packets were consumed, with zero queue-starvation observations or rebuffers and no worker/cleanup error. This stop-boundary tail does not establish full-map or campaign playback, audible quality, sustained timing, performance or monitor pacing."
+  },
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "MapSelectionReceipt": "results/music-events-map-selection-e3m1-alias-20260927.json",
+  "MapSelectionReceiptSha256": "FA1F833F6BEC004B0E26F6B24AD3FDE1C0B734E6767AFCF3D34DEE34F48C3AD5",
+  "TrackQualification": "local/music-track-e3m1-alias-20260927/D_E3M1/qualified.json",
+  "TrackQualificationSha256": "578B7112AF3B14DB0CC19774F0698F963A0DDC1D77858CA7B8AD43B41340B152",
+  "PreparationReceiptSha256": "0904E44711129AA2C57089FA3D71D77BF7904742470E27A2E42550E56049697E",
+  "AliasOf": "D_E2M9",
+  "AliasSourceQualificationSha256": "83B6B3A726B22C8C900163B997DBA6A65A2D29BF75ECDBACD86C81DD7A6AD34A",
+  "MusicCatalogSha256": "DD922755E323144FFC87E9901D402D3E42ECA2DFEFBA5DCBD1A11B69A0A43DD4",
+  "Result": {
+    "Error": null,
+    "Frames": 64,
+    "ExitReason": "Duration",
+    "Tics": 69
+  },
+  "Meaning": "Two-second actual E3M1 game/audio-worker integration selects the looping D_E3M1 score. Its exact MUS and soundfont hashes match the already-qualified D_E2M9 payload, so preparation writes target-track provenance without synthesizing another loop. The device completed 85680 of 86940 submitted frames before shutdown; the canceled queued tail upper bound is 1260 frames. All 69 packets were consumed, with zero queue-starvation observations or rebuffers and no worker/cleanup error. This stop-boundary tail does not establish full-map or campaign playback, audible quality, sustained timing, performance or monitor pacing.",
+  "Sources": [
+    {
+      "Sha256": "EAA75B6B236F6481C7C15EF1D2DA82C536B27206FBCD005CB1C67BED305E03C2",
+      "Path": "scripts/Invoke-Doom.ps1"
+    },
+    {
+      "Sha256": "306A1DF019997C8227D2E7516C72DF3BA70624985227EB5D77EE5DC04FF28533",
+      "Path": "scripts/Invoke-SimulationWorker.ps1"
+    },
+    {
+      "Sha256": "32E80F308BFAB71EDF7198CBA7FED196021FEEF6BDADF2EFBD3D4E7EDBFD1296",
+      "Path": "scripts/Invoke-AudioWorker.ps1"
+    },
+    {
+      "Sha256": "5BFE98A3379E5CC51B39DBDE2E17E12DD0406D3663A8CD041AEFE0FB29054B9D",
+      "Path": "src/SimulationProcess.ps1"
+    },
+    {
+      "Sha256": "A930314C31A8DC628E96266E4654ACE1E2222FE076519B98578663A165DE1AD4",
+      "Path": "src/AudioRunspace.ps1"
+    },
+    {
+      "Sha256": "C4B6FBE2C44AFB3FE2E13CEF968AD3EEAE7DD8FA85B993321FFDED5321B0A71F",
+      "Path": "src/MusicPlayback.ps1"
+    },
+    {
+      "Sha256": "083079C548A2BB47F1DFE661C5C3CEAD21B7A0FED104062CE46740DAF1215D0B",
+      "Path": "src/MusicLoopReader.ps1"
+    },
+    {
+      "Sha256": "8B54F2CFF8D5219D2D4DCC562A365E0307F1C624C736FB009363ECF90AD6E08D",
+      "Path": "scripts/Prepare-DoomMusic.ps1"
+    },
+    {
+      "Sha256": "BEB2AEDC569C13712D450E9B91094E94334701F88AA3E77BDDF0B87C944C7F82",
+      "Path": "scripts/Test-MusicPreparation.ps1"
+    },
+    {
+      "Sha256": "CB35237EDD31C3F39A8CB115A67C0CCACF74D561837C94FEE1CBC333B4B9234C",
+      "Path": "scripts/Test-MusicEvents.ps1"
+    }
+  ],
+  "Parameters": {
+    "Episode": 3,
+    "Style": null,
+    "PowerShell": "7.6.5",
+    "Headless": true,
+    "Seconds": 2.0020399,
+    "Map": 1,
+    "Workers": 4
+  }
+}

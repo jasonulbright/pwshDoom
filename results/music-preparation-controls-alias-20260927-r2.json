@@ -1,0 +1,111 @@
+{
+  "Sources": [
+    {
+      "Path": "scripts/Prepare-DoomMusic.ps1",
+      "Sha256": "8B54F2CFF8D5219D2D4DCC562A365E0307F1C624C736FB009363ECF90AD6E08D"
+    },
+    {
+      "Path": "scripts/Test-MusicPreparation.ps1",
+      "Sha256": "F7E73AB0EF9B11E8DD0BCFAD41CB85931AF53DB20A0307FE05509F97367FEFA0"
+    }
+  ],
+  "Checks": [
+    {
+      "Name": "Real current E1M1 payload verifies and publishes requested catalog",
+      "Passed": true
+    },
+    {
+      "Name": "Existing catalog and receipt are protected from overwrite",
+      "Passed": true
+    },
+    {
+      "Name": "Interrupted-batch resume revalidates real qualified payload without a seed catalog",
+      "Passed": true
+    },
+    {
+      "Name": "Byte-identical WAD music reuses a current qualification without rendering",
+      "Passed": true
+    },
+    {
+      "Name": "Alias report records exact payload, bank, source report and target catalog identity",
+      "Passed": true
+    },
+    {
+      "Name": "Missing WAD lump fails before track preparation or publication",
+      "Passed": true
+    },
+    {
+      "Name": "Different soundfont identity rejects reuse without publishing",
+      "Passed": true
+    },
+    {
+      "Name": "Live exclusive preparation lock prevents a competing batch",
+      "Passed": true
+    },
+    {
+      "Name": "Stale lock filename does not prevent a new owner after handle closure",
+      "Passed": true
+    }
+  ],
+  "Error": null,
+  "Attempts": [
+    {
+      "Name": "reuse",
+      "Report": "C:\\projects\\pwshDoom\\local\\music-prepare-test-a180e3c60d364d9d9b59415dd604afe3\\reuse-report.json",
+      "ReportSha256": "706C543E2E0A46008853C6C67855AFC56E2D7FACD689B8B9A070EAC84098D79E",
+      "Error": "",
+      "ExitCode": 0
+    },
+    {
+      "Name": "reuse",
+      "Report": "C:\\projects\\pwshDoom\\local\\music-prepare-test-a180e3c60d364d9d9b59415dd604afe3\\reuse-report.json",
+      "ReportSha256": "706C543E2E0A46008853C6C67855AFC56E2D7FACD689B8B9A070EAC84098D79E",
+      "Error": "Exception: C:\\projects\\pwshDoom\\scripts\\Prepare-DoomMusic.ps1:16\r\nLine |\r\n  16 |  . utputPath)){throw 'Choose distinct fresh catalog and preparation repo .\r\n     |                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n     | Choose distinct fresh catalog and preparation report paths.\r\n",
+      "ExitCode": 1
+    },
+    {
+      "Name": "resume",
+      "Report": "C:\\projects\\pwshDoom\\local\\music-prepare-test-a180e3c60d364d9d9b59415dd604afe3\\resume-report.json",
+      "ReportSha256": "56E277D7E3ACF961579BE277D4A5748BAA955A91A40F52CB611171FC295FA7E3",
+      "Error": "",
+      "ExitCode": 0
+    },
+    {
+      "Name": "alias",
+      "Report": "C:\\projects\\pwshDoom\\local\\music-prepare-test-a180e3c60d364d9d9b59415dd604afe3\\alias-report.json",
+      "ReportSha256": "8B288F5B040A67C0984CB2BF1D6522066C12ECA258C9402F6F2548AB5004E32B",
+      "Error": "",
+      "ExitCode": 0
+    },
+    {
+      "Name": "missing",
+      "Report": "C:\\projects\\pwshDoom\\local\\music-prepare-test-a180e3c60d364d9d9b59415dd604afe3\\missing-report.json",
+      "ReportSha256": "5A18DD34468A0EF595F75E51026276CDD1236949D35B897EBB1CBEE4EA46D080",
+      "Error": "Exception: C:\\projects\\pwshDoom\\scripts\\Prepare-DoomMusic.ps1:80\r\nLine |\r\n  80 |  .     if($lump -lt 0){throw \"IWAD has no requested music lump: $track\"}\r\n     |                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n     | IWAD has no requested music lump: D_NOTREAL\r\n",
+      "ExitCode": 1
+    },
+    {
+      "Name": "bank",
+      "Report": "C:\\projects\\pwshDoom\\local\\music-prepare-test-a180e3c60d364d9d9b59415dd604afe3\\bank-report.json",
+      "ReportSha256": "A6A760B70BDC1CA36054C6D1CC4A7DFD2B85A3030B5FF550E63D51B13E6D05EC",
+      "Error": "Exception: C:\\projects\\pwshDoom\\scripts\\Prepare-DoomMusic.ps1:25\r\nLine |\r\n  25 |  . Sha256 -cne $bankHash){throw \"Qualified track assets differ: $Track\"}\r\n     |                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n     | Qualified track assets differ: D_E1M1\r\n",
+      "ExitCode": 1
+    },
+    {
+      "Name": "locked",
+      "Report": "C:\\projects\\pwshDoom\\local\\music-prepare-test-a180e3c60d364d9d9b59415dd604afe3\\locked-report.json",
+      "ReportSha256": "E2DF74BB9510D51A6AAFACD1E2144254C1B7B8307C804B81343E15D738E88CEB",
+      "Error": "ParentContainsErrorRecordException: C:\\projects\\pwshDoom\\scripts\\Prepare-DoomMusic.ps1:61\r\nLine |\r\n  61 |      $lock=[IO.File]::Open((Join-Path $directory 'prepare.lock'),[IO.F .\r\n     |      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n     | Exception calling \"Open\" with \"4\" argument(s): \"The process cannot access the file\r\n     | 'C:\\projects\\pwshDoom\\local\\music-prepare-test-a180e3c60d364d9d9b59415dd604afe3\\locked\\prepare.lock' because it\r\n     | is being used by another process.\"\r\n",
+      "ExitCode": 1
+    },
+    {
+      "Name": "unlocked",
+      "Report": "C:\\projects\\pwshDoom\\local\\music-prepare-test-a180e3c60d364d9d9b59415dd604afe3\\unlocked-report.json",
+      "ReportSha256": "DF50165AA6116E637EBD7219123CF851E6BA81DFB7A70D1AB5F9515933690D77",
+      "Error": "",
+      "ExitCode": 0
+    }
+  ],
+  "Directory": "C:\\projects\\pwshDoom\\local\\music-prepare-test-a180e3c60d364d9d9b59415dd604afe3",
+  "Meaning": "Real qualified-file reuse/resume and fresh-catalog publication, missing-lump and bank mismatch rejection, no overwrite, exclusive live lock and released-lock recovery. Does not exercise new synthesis; that requires its own preparation run."
+}

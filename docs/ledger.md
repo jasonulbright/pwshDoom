@@ -2945,3 +2945,39 @@ audible interruption. Full-map/campaign continuity, acoustics and sustained
 playback deadlines remain unqualified. The raw host report and PCM/catalog
 remain under ignored `local/`; portable results are linked in
 [music-loop evidence](music-loops.md#d_e2m9-complete-state-recurrence-and-host-selection-september-27).
+
+## 2026-09-27 — Reuse the exact D_E3M1 music payload
+
+D_E3M1's MUS lump exactly matches the newly qualified D_E2M9 bytes, and the
+soundfont is the same. The preparation command now searches validated current
+catalog entries for an exact MUS/soundfont hash match, checks the source loop
+against current code/assets, and writes a separate target qualification with
+source-report and target-WAD provenance. The alias gets a D_E3M1 catalog entry
+and map-specific callback/host checks, but no redundant synthesis or claim of
+a newly distinct score payload.
+
+The preparation-control regression passes nine checks, including exact payload
+reuse without rendering, source report/catalog identity, mismatched-soundfont
+rejection, resume and lock handling. The first run's only failure was the test
+harness accessing `.Count` on an empty single-result enumeration under strict
+mode; its alias subprocess had succeeded. The assertion now counts an explicit
+array. The first corrected run passed; a second fresh run also explicitly
+asserts the source and target soundfont hashes match. The original
+[failed harness run](../results/music-preparation-controls-alias-20260927.json),
+[first passing rerun](../results/music-preparation-controls-alias-20260927-r2.json),
+and [soundfont-identity rerun](../results/music-preparation-controls-alias-20260927-r3.json)
+are all retained.
+
+The Steam IWAD alias report records source D_E2M9 qualification hash
+`83B6B3A726B22D4F857D01CC46954477352EA72A640D9C07262F8DD3F94E789`, target
+MUS hash `A6F854BDC4EC0DE7B8E3EC19B2EC5B1B5C0CF8DC00AC52A45A0E7E4C47D219E6`,
+and soundfont hash
+`82475B91A76DE15CB28A104707D3247BA932E228BADA3F47BBA63C6B31AAF7A1`.
+Fourteen map-selection checks pass. The actual two-second E3M1 host selects
+D_E3M1, closes the music/device, consumes all 69 packets without a queue
+starvation or rebuffer, and returns 85,680 of 86,940 submitted frames before
+shutdown. The canceled-tail upper bound is 1,260 frames. This remains a short
+startup/selection/shutdown check, not campaign continuity or acoustic evidence.
+Portable results: [alias preparation](../results/music-preparation-ultimate-doom-e3m1-alias-20260927.json),
+[map selection](../results/music-events-map-selection-e3m1-alias-20260927.json),
+and [host integration](../results/music-host-e3m1-alias-integration-20260927.json).

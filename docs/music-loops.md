@@ -366,6 +366,37 @@ under ignored `local/`. Portable receipts:
 [map callback/catalog checks](../results/music-events-map-selection-e2m9-20260927.json),
 and [host integration](../results/music-host-e2m9-integration-20260927.json).
 
+### D_E3M1 exact-payload alias and host selection (September 27)
+
+The installed IWAD's D_E3M1 bytes exactly match qualified D_E2M9: both have
+MUS SHA-256
+`A6F854BDC4EC0DE7B8E3EC19B2EC5B1B5C0CF8DC00AC52A45A0E7E4C47D219E6`, and
+the preparation uses the same pinned soundfont. Rather than spend another
+long render on identical input, the preparation tool validates the source
+qualification and current assets, then writes a distinct D_E3M1 qualification
+with the source report hash and target IWAD/MUS/soundfont identities. The
+alias remains qualified as its own map-selected track; it adds no distinct
+score payload or independently rendered period.
+
+Fourteen callback/catalog checks confirm E3M1 emits the looping D_E3M1 track.
+A two-second actual headless E3M1 host run selected it and closed both music
+and audio device cleanly. It consumed all 69 packets without queue starvation
+or rebuffer; 85,680 of 86,940 submitted frames completed before shutdown, with
+a 1,260-frame canceled-tail upper bound. This is only a stop-boundary tail,
+not evidence of audible quality or campaign-long playback. Preparation
+controls pass nine checks, including alias reuse without synthesis, explicit
+source/target soundfont identity, catalog identity, mismatch rejection, and
+existing resume/lock behavior. Portable receipts: [preparation]
+(../results/music-preparation-ultimate-doom-e3m1-alias-20260927.json),
+[preparation controls](../results/music-preparation-controls-alias-20260927-r3.json),
+[map selection](../results/music-events-map-selection-e3m1-alias-20260927.json),
+and [host integration](../results/music-host-e3m1-alias-integration-20260927.json).
+
+The first controls run exposed a strict-mode `.Count` assumption in the new
+test assertion after the alias subprocess had succeeded. The harness was
+corrected and the fresh rerun passed; the failed raw receipt is retained at
+`../results/music-preparation-controls-alias-20260927.json`.
+
 ### PowerShell patch-version compatibility (September 27)
 
 Jason's first terminal launch exposed an exact-patch comparison in both the
