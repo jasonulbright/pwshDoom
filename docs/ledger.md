@@ -3086,3 +3086,39 @@ local-path check and `git diff --check` passes. The draft is still not a
 finished publication: Jason's full Episode 1 result, final release state, and
 publication-ready illustrations remain outstanding. No new game recording
 or copyrighted WAD image was created.
+
+## 2026-09-28 — Repair and recheck the Preview.3 audio package
+
+The extracted Preview.3 candidate failed before tic 0 with `Music loop source
+changed: MusScore`. The qualification's raw file hash was being compared to
+the package's raw hash; the clean Windows checkout had the same PowerShell
+text with CRLF endings while the qualification used LF. This was a checkout
+format mismatch, not a synthesis-source change. `Open-DoomMusicLoopReader`
+now accepts the raw, canonical-LF or canonical-CRLF SHA-256 for a source file.
+The check still rejects altered source text. `scripts/Test-MusicLoopReader.ps1`
+passes all 22 reader checks under PowerShell 7.6.6, including those two cases.
+
+Commit `8fe7600febb51693b58524c4dccbdfeac654979e` was cloned into a clean
+Windows checkout and packaged with no working-tree changes. The extracted
+ZIP verifies all 533 manifest files and 534 ZIP entries; no WAD, soundfont,
+native binary or research PDF is included. The package SHA-256 is
+`08F3ACB53BE7714E3385BC4BC8FB429FBEF06BD2EA556DD0617F5A62DDDD91F0`.
+PowerShell 7.6.6 launcher preflight finds Windows Terminal and all 36 maps in
+the local Steam IWAD. A two-second headless sound-enabled run starts D_E1M1,
+reaches 69 tics and 74 frames, submits 86,940 PCM frames and closes the device
+without an error. It records one queue-starvation observation after the final
+packet; this is startup/shutdown evidence, not continuous campaign audio
+qualification. The [package receipt](../results/preview3-current-candidate-validation-8fe7600-20260928.json)
+and raw [host report](../local/preview3-package-8fe7600-audio-smoke-766.json)
+preserve the measurements.
+
+The Episode 1 handoff now pins this commit and fresh `r5` input/report paths.
+Preview.3 remains unpublished. The static license/asset audit for this
+candidate is complete: the archive contains GPL text and third-party notices,
+all 206 vendored PowerShell files retain the upstream GPL terms, and no WAD,
+soundfont, media, native binary or research PDF is present. Recheck if packaged
+source changes. The full E1 human playthrough is the main product gate;
+release-version README/changelog updates and publication-ready article
+illustrations are also outstanding.
+This is not waiting on Doom II, Final Doom, MyHouse, or the 35-tic/60-display
+performance target.

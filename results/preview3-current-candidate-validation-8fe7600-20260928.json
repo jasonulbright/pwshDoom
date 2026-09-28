@@ -1,0 +1,91 @@
+{
+  "Format": "pwshDoom.PreviewPackageCandidateValidation",
+  "Version": 3,
+  "RecordedUtc": "2026-09-27T21:23:38.0557459-04:00",
+  "CandidateVersion": "0.1.0-preview.3",
+  "CandidateStatus": "LocalDraftNotPublished",
+  "Passed": true,
+  "SourceCommit": "8fe7600febb51693b58524c4dccbdfeac654979e",
+  "WorkingTreeDirty": false,
+  "CleanCheckout": "local/preview3-clean-source-8fe7600",
+  "CleanCheckoutLineEndings": "CRLF for pinned PowerShell files, matching Windows checkout",
+  "ZipPath": "local/preview3-package-8fe7600/pwshDoom-0.1.0-preview.3.zip",
+  "ZipSha256": "08F3ACB53BE7714E3385BC4BC8FB429FBEF06BD2EA556DD0617F5A62DDDD91F0",
+  "ZipBytes": 1499162,
+  "ChecksumFileMatches": true,
+  "PackageFileCount": 533,
+  "ZipEntryCount": 534,
+  "ManifestSha256": "8744D1EC2D383ACA7638BA31F1B17DC25E36EA6C7B48B637E90BDD333662B90A",
+  "ManifestHashesVerified": true,
+  "ResearchPdfExcluded": true,
+  "GameAssetsAndNativeBinariesExcluded": true,
+  "SourceSha256": {
+    "scripts/Build-PreviewPackage.ps1": "265AB232E810BC0B7752EC96EF91B578971D9C64C0EB7EA1FFF71F28AD8FE19B",
+    "Play.ps1": "BBCE3A2040CFFAB59EC217702CF4357A1EFE92E030144302D16A14FD231A48EE",
+    "Start-Doom.ps1": "F528D1DADD0B3AFAE9B14E44812670B8C57AA6759BA7C6B080B13797D4E73743",
+    "scripts/Invoke-Doom.ps1": "0CB50E56C66E73E0286EDE1EEF09CB7F695A50E7450E2AEB99516B81A40A39B9",
+    "src/MusicLoopReader.ps1": "82AAF092F4C46F290002694D34D2EA30DC1F5E9B75F4E76F806E6F8E4DB36E00"
+  },
+  "ReaderRegression": {
+    "Passed": true,
+    "PowerShell": "7.6.6",
+    "Checks": 22,
+    "Report": "local/music-loop-reader-clean-crlf-test-766.json",
+    "ReportSha256": "F89F8639FCFEF0EFED080E841894BA13B3DA5ACA5CC9687A4E1191AB90E81719",
+    "SpecificCases": [
+      "Equivalent CRLF checkout source accepted",
+      "Changed synthesis text rejected"
+    ]
+  },
+  "PlayPreflight": {
+    "Passed": false,
+    "PowerShell": null,
+    "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+    "EpisodeMapCount": null,
+    "WindowsTerminalFound": false
+  },
+  "HostSmoke": {
+    "Passed": true,
+    "PowerShell": "7.6.6",
+    "Headless": true,
+    "SoundEnabled": true,
+    "SecondsRequested": 2,
+    "ExitReason": "Duration",
+    "SimulationTics": 69,
+    "CompletedFrames": 74,
+    "DurationSeconds": 2.0010682,
+    "MusicTrack": "D_E1M1",
+    "SubmittedPcmFrames": 86940,
+    "DeviceClosed": true,
+    "RebufferCount": 1,
+    "QueueStarvationObservation": [
+      {
+        "WallMs": 28424.7944,
+        "AfterPacket": 68
+      }
+    ],
+    "Error": null,
+    "RawReport": "local/preview3-package-8fe7600-audio-smoke-766.json",
+    "RawReportSha256": "B66B6125DE17846EC865B18006382A89B2EEE0406D6F4578B0A5564BD3F60DA7"
+  },
+  "Limitations": [
+    "Headless smoke does not qualify visible Terminal output, physical keyboard input, campaign completion, audible quality or sustained audio continuity.",
+    "One queue-starvation observation followed the final submitted audio packet; all 86,940 frames were returned and the device closed cleanly.",
+    "The complete Episode 1 human playthrough remains pending.",
+    "The independent final license/asset audit and publication release notes remain open."
+  ],
+  "LicenseAssetAudit": {
+    "Passed": true,
+    "ProjectLicense": "GPL-2.0-or-later",
+    "VendoredEngine": "ManagedDoomPowershell at the pinned GPLv2-derived revision; original headers retained",
+    "VendoredPowerShellFiles": 206,
+    "VendoredFilesWithUpstreamGPLTerms": 206,
+    "OriginAndModificationRecordIncluded": true,
+    "FullLicenseTextIncluded": true,
+    "ThirdPartyNoticesIncluded": true,
+    "ArchiveEntriesScanned": 534,
+    "ForbiddenWadSoundfontMediaOrNativeBinaryEntries": 0,
+    "ResearchPdfIncluded": false,
+    "ReviewBasis": "Tracked source inventory, retained per-file GPL terms, root license and notices, and exact candidate ZIP contents"
+  }
+}

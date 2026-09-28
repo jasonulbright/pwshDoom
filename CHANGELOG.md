@@ -17,6 +17,7 @@
 
 - Corrected upstream arithmetic and angle-comparison behavior used by movement, weapons and homing actors; the E1M2 chainsaw-attack crash now passes a focused real-world hit regression.
 - Fixed reproduced actor visibility leaks and renderer range/plane-depth cases; broader scene differences and other unverified reports remain.
+- Made prepared-music source checks accept identical PowerShell text across LF/CRLF checkouts while continuing to reject altered source content; verified the clean Windows package's audio startup on PowerShell 7.6.6.
 
 ### Qualification
 

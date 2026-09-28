@@ -12,12 +12,12 @@ A normal completion is enough; 100% kills, items, and secrets are not required. 
 
 ## Exact build and launch
 
-Run commit `d86ec2e1017edccad564764224c7d9e768453384` from `C:\projects\pwshDoom`. The source fingerprint is `D627BDF3D3605093095D9185EA564487ECE49A1FE2186134F2257191AB631682`. The full [candidate receipt](../results/episode1-human-playthrough-candidate-20260927-r7.json) lists current-source checks and their limits.
+Run commit `8fe7600febb51693b58524c4dccbdfeac654979e` from `C:\projects\pwshDoom`. Its gameplay/session fingerprint remains `D627BDF3D3605093095D9185EA564487ECE49A1FE2186134F2257191AB631682`; changes since the previous handoff fix music-source hash checks and update release evidence without changing the fingerprint's input files. The full [candidate receipt](../results/episode1-human-playthrough-candidate-20260927-r7.json) lists the gameplay checks and their limits. The fresh [Preview.3 package validation](../results/preview3-current-candidate-validation-8fe7600-20260928.json) also verifies sound-enabled startup under PowerShell 7.6.6 from a CRLF clean checkout.
 
 If your checkout is at another revision, select the tested build from the repository root:
 
 ```powershell
-git switch --detach d86ec2e1017edccad564764224c7d9e768453384
+git switch --detach 8fe7600febb51693b58524c4dccbdfeac654979e
 ```
 
 Then start it with this command:
@@ -27,13 +27,13 @@ pwsh -NoProfile -File .\Start-Doom.ps1 `
   -Wad 'C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\base\DOOM.WAD' `
   -Episode 1 -Map 1 -Skill 3 -Style Classic -Sound `
   -MusicCatalog .\local\music-prepared-episode1.json `
-  -RecordInput .\local\episode1-human-playthrough-r4.json `
-  -Report .\local\episode1-human-session-r4.json -Maximized -FontSize 5
+  -RecordInput .\local\episode1-human-playthrough-r5.json `
+  -Report .\local\episode1-human-session-r5.json -Maximized -FontSize 5
 ```
 
 Use 64-bit PowerShell 7.4 or later and Windows Terminal. This exact source was checked with PowerShell 7.6.5. The required Steam IWAD is `DOOM.WAD`, SHA-256 `6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F`; the prepared local Episode 1 music catalog has SHA-256 `0E9C9542C75F4D5E2D7FC71E42FAFBB58F94321C3B8A49BA0C9AC5A93752EE58`. The IWAD and audio catalog are not included in Git. At preflight, `%LOCALAPPDATA%\pwshDoom\settings.json` was absent, so the game's defaults apply. The [preflight receipt](../results/episode1-launch-preflight-current-candidate-20260927.json) records the detected paths and hashes.
 
-The runtime-specific startup failure reported under PowerShell 7.6.6 was fixed. The pinned build descends from that fix; a sound-enabled 7.6.6 startup reached 69 tics and closed the audio device cleanly in a two-second integration run. This verifies catalog/reader startup on that runtime, not full-session music continuity or listener quality ([receipt](../results/episode1-startup-runtime-compat-20260927.json)).
+The runtime-specific startup failures reported under PowerShell 7.6.6 are covered on this build. The music reader now tolerates equivalent LF/CRLF checkout formatting while still rejecting changed source text. A clean CRLF package starts the qualified Episode 1 music catalog under 7.6.6, reaches 69 tics in a two-second headless integration run, and closes the audio device. Its final submitted packet has one queue-starvation observation, so this does not verify full-session music continuity or listener quality ([package receipt](../results/preview3-current-candidate-validation-8fe7600-20260928.json)).
 
 On a cold start, allow up to 60 seconds for simulation and music workers to initialize. Keep the default 16 renderer workers. A prior measurement used about 4 GB combined worker memory. The Classic view needs at least 320 columns by 100 rows; the 5-point font and maximized window are set to help fit it. If the viewport is short, enlarge the window or press Ctrl+- to reduce the font. Blank space around the centered image in a larger terminal is expected.
 
