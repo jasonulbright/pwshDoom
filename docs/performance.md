@@ -470,3 +470,12 @@ The compact [comparison receipt](../results/renderer-visible-actor-filter-202609
 indexes source hashes and raw ignored reports. This profile excludes actual
 process scheduling, simulation, audio, ANSI output, and monitor presentation;
 the 35-tic/60-display goal remains open.
+
+A final five-second current-source `Invoke-Doom` run also starts the actual
+simulation process, all 16 render workers, sound output, and the prepared
+Episode 1 music catalog on E1M1. It exits at the requested duration without a
+host error after 174 tics (34.72 tics/sec) and 135 completed headless host
+updates (26.94/sec). Those updates are not Terminal writes or monitor frames;
+the short run does not establish acoustic quality or continuous audio
+underrun-free playback. See the [raw host report](../local/host-visible-actor-filter-e1m1-audio-20260928.json)
+and its hash in the [candidate profile receipt](../results/renderer-visible-actor-filter-20260928.json).

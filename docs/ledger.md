@@ -4148,3 +4148,11 @@ No additional map route or independent original-binary parity is claimed.
 The single-playthrough handoff now pins this candidate and uses fresh `r6`
 input, report, save, and settings paths. The local-state check found only
 Jason's earlier `r2` session report; no `r6` outputs exist.
+
+A five-second headless `Invoke-Doom` run with `-Sound`, the prepared Episode 1
+catalog, and 16 workers exercises the current simulation/audio/render-worker
+startup together. It reaches 174 tics and 135 completed host updates, then
+exits at the requested duration without a host error. The run is not a route,
+display-rate sample, or measurement of acoustic continuity. See the [raw
+report](../local/host-visible-actor-filter-e1m1-audio-20260928.json) and
+[candidate evidence index](../results/renderer-visible-actor-filter-20260928.json).

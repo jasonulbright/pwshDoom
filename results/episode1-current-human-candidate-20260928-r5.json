@@ -19,7 +19,7 @@
   "RendererChange": {
     "Description": "NumericV4 workers reuse a decoder-built list of actors whose projected sprites overlap their stripe; the full actor snapshot and packet format stay unchanged.",
     "ProfileReceipt": "results/renderer-visible-actor-filter-20260928.json",
-    "ProfileReceiptSha256": "5893D5CDB77A6B15A56AFA2B013C507CC81A87FBED95C050CF874548E0D7E2D0",
+    "ProfileReceiptSha256": "592A688F824000EC862142EAF69BC9A60EEF935AD2AB2BC82748203C6A55D722",
     "ActorPhaseReductionPercent": [29.9, 30.8],
     "DecodePlusRenderCpuReductionPercent": [4.1, 8.1],
     "OutputHash": "629A3A3CDA2B6365C0406A6BA70AC5A1EEFAD701BE926FD86A572AAD78F64D0C",
@@ -89,6 +89,22 @@
       "EncodedStripByteChecks": 64,
       "Report": "local/session-worker-visible-actor-filter-classic.json",
       "ReportSha256": "2CB5522E46032EDEE7A59F1FED244E7A7ADBE102B0D4ABFEC067385EC0243E1C"
+    },
+    "CurrentHostAudioStartup": {
+      "Map": "E1M1",
+      "Workers": 16,
+      "Sound": true,
+      "Episode1MusicCatalog": true,
+      "Headless": true,
+      "DurationSeconds": 5.0109,
+      "SimulationTics": 174,
+      "SimulationTicsPerSecond": 34.7242,
+      "CompletedHeadlessHostUpdates": 135,
+      "CompletedHeadlessHostUpdatesPerSecond": 26.9412,
+      "ExitReason": "Duration",
+      "Error": null,
+      "Report": "local/host-visible-actor-filter-e1m1-audio-20260928.json",
+      "ReportSha256": "B2647A8F596AB4EEDD4AFCDDA8D9F5D0D466D3409FAFFC4ED2CA1159C019C4AF"
     }
   },
   "SourceSha256": {
