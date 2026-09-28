@@ -533,6 +533,35 @@ verified original executable, and these palette-index counts are not a
 perceptual quality or performance score. See the [sweep receipt](../results/moving-sector-e1m1-height-sweep-20260926.json)
 and [dynamic comparison receipt](../results/moving-sector-reference-e1m1-prefix-20260927.json).
 
+### Refresh the moving-ceiling sweep on current source (2026-09-28)
+
+The same level-tic-315 state was rerendered on source commit
+`532f2e3a90ab675db537616d1c166d8794cf4697` with camera, actors and all other
+simulation state fixed. Only sector 26's ceiling height changes. At the actual
+six-unit opening, the candidate differs from the adopted renderer at 7 of
+53,760 scene indices and all 10,240 HUD indices match. Counterfactual heights
+0, 34 and 68 produce 10, 410 and 4,166 scene-index differences. Compared with
+the earlier source pin, exact counts shift from 8/1/390/4,259 to
+10/7/410/4,166 for those four heights; this mixed change is not an overall
+fidelity improvement claim. The rendered 68-unit views retain the same room
+layout, with scattered palette-index differences across the newly exposed
+surfaces. The sweep does not show a blocked door or gameplay progression bug.
+
+The check is now repeatable using
+[`Compare-MovingSectorHeightSweep.ps1`](../scripts/Compare-MovingSectorHeightSweep.ps1).
+Its [current-source receipt](../results/moving-sector-e1m1-height-sweep-current-20260928.json)
+pins the replay, IWAD, code hashes and local diagnostic-image hashes. The
+comparison remains against the adapted PowerShell renderer, not an original
+Doom executable, and says nothing about performance.
+
+From the repository root, rerun it with fresh destinations:
+
+```powershell
+pwsh -NoProfile -File .\scripts\Compare-MovingSectorHeightSweep.ps1 `
+  -Output .\results\moving-sector-rerun.json `
+  -Images .\local\moving-sector-rerun-images
+```
+
 ## Reuse per-context raster scratch (2026-09-27)
 
 `Invoke-FastRender` previously allocated two 320-entry ray arrays and a new

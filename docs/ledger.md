@@ -3152,3 +3152,20 @@ The renderer source was unchanged at commit
 The [eight-state receipt](../results/actor-occlusion-e1m1-prefix-current-20260928.json)
 and [per-actor tic-105 isolation receipt](../results/actor-occlusion-tic105-current-20260927.json)
 pin the evidence.
+
+## 2026-09-28 — Refresh the E1M1 moving-ceiling comparison
+
+Replayed the existing E1M1 line-flags input to level tic 315 and compared the
+FastRenderer with the locally adapted PowerShell ThreeDRenderer while holding
+the player, actor and other world state fixed. Only sector 26's ceiling height
+changed. At the actual six-unit opening, 7 of 53,760 scene palette indices
+differ; the HUD is exact. Counterfactual heights 0, 34 and 68 differ at 10,
+410 and 4,166 scene indices. The earlier source pin measured 8, 1, 390 and
+4,259 at those four heights, so the exact-pixel changes are mixed rather than
+a uniform improvement. The 68-unit panels retain the same corridor layout,
+with scattered palette differences across newly visible surfaces. This is a
+renderer fidelity observation, not evidence of blocked progression, original
+binary parity or performance. The reusable test is
+[`Compare-MovingSectorHeightSweep.ps1`](../scripts/Compare-MovingSectorHeightSweep.ps1);
+the [receipt](../results/moving-sector-e1m1-height-sweep-current-20260928.json)
+pins source commit `532f2e3a90ab675db537616d1c166d8794cf4697`, IWAD and replay.

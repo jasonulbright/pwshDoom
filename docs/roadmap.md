@@ -122,9 +122,11 @@ origin; the same-state E1M1/E1M2 scene-index comparison improves by 538 across
 six views. The follow-up exact frame-selection port passes 393,408 synthetic
 rotation-boundary checks and 100,000 angle round trips, and all three 16-worker
 styles match serial pixels and encoded strips. The current 36-map smoke passes.
-An E1M1 t315 moving-ceiling sweep exposes increasing adopted-reference pixel
-differences as the opening reveals more of the corridor, without demonstrating
-a door or progression defect; see the [moving-ceiling comparison](rendering-fidelity.md#e1m1-moving-ceiling-scene-comparison-2026-09-26).
+The current-source E1M1 t315 moving-ceiling sweep has 7 differing scene
+indices at the actual six-unit opening and 4,166 at a counterfactual 68-unit
+opening. Both panels retain the same layout; this is scattered render
+disagreement in newly exposed surfaces, not a door or progression defect. See
+the [moving-ceiling comparison](rendering-fidelity.md#refresh-the-moving-ceiling-sweep-on-current-source-2026-09-28).
 Moving-actor visual comparisons, full actor occlusion parity, independent
 original-executable comparison, sustained 35-tic/60-display performance, and
 full-campaign music remain open. The current source and evidence pin are in the
