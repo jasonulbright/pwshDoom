@@ -10,6 +10,8 @@ if(Test-Path $Output){throw 'Use a fresh report path.'}
 $root=[IO.Path]::GetFullPath("$PSScriptRoot/..");foreach($name in 'AudioMixer','AudioPackets','AudioRunspace','MusicLoopReader','MusicOneShotReader'){. "$root/src/$name.ps1"}
 $qualification=[IO.Path]::GetFullPath($Qualification);$oneShotQualification=[IO.Path]::GetFullPath($OneShotQualification);$audio=$null;$reader=$null;$oneShotReader=$null;$report=$null;$failure=$null;$expectedHash=$null;$checks=[Collections.Generic.List[object]]::new()
 $qualificationData=Get-Content $qualification -Raw|ConvertFrom-Json;$loopTrack=[string]$qualificationData.Details.Track
+$oneShotData=Get-Content $oneShotQualification -Raw|ConvertFrom-Json;$oneShotTrack=[string]$oneShotData.Details.Track
+if(-not $oneShotTrack){throw 'One-shot qualification has no track name.'}
 [long]$loopStartFrame=[long]$qualificationData.Details.PeriodFrames-44100
 if($loopStartFrame -lt 0){throw 'Loop period must contain at least one second for the boundary worker fixture.'}
 function Check([string]$Name,[bool]$Passed){$checks.Add(@{Name=$Name;Passed=$Passed});if(-not $Passed){throw $Name}}
@@ -23,7 +25,7 @@ try{
     for($n=0;$n -lt 140;$n++){
         $events=@();if($n -in 0,70,105){$events+=@{Kind='Start';Sound=1;Source=1;Group=1;Volume=100}}
         if($n -eq 14){$events+=@{Kind='Pause'}};if($n -eq 16){$events+=@{Kind='Resume'}}
-        $music=@();if($n -eq 0){$music+=@{Kind='Start';Track='D_INTRO';Loop=$false}}
+        $music=@();if($n -eq 0){$music+=@{Kind='Start';Track=$oneShotTrack;Loop=$false}}
         if($n -eq 1){$music+=@{Kind='Start';Track=$loopTrack;Loop=$true;Frame=$loopStartFrame}}
         if($n -eq 35){$music+=@{Kind='Gain';Value=.1}}
         if($n -in 70,130){$music+=@{Kind='Start';Track=$loopTrack;Loop=$true}}
@@ -46,7 +48,8 @@ try{
     }
     Close-DoomMusicLoopReader $reader;$reader=$null;Close-DoomMusicOneShotReader $oneShotReader;$oneShotReader=$null;$bytes=[byte[]]::new($expected.Length*2);[Buffer]::BlockCopy($expected,0,$bytes,0,$bytes.Length)
     $expectedHash=[Convert]::ToHexString([Security.Cryptography.SHA256]::HashData($bytes))
-    $audio=Start-DoomAudioRunspace $clips -MusicReports @{$loopTrack=$qualification;'D_INTRO'=$oneShotQualification};Check 'Qualified loop and finite score open on the actual device' $audio.Shared.Ready
+    $musicReports=@{$loopTrack=$qualification};$musicReports[$oneShotTrack]=$oneShotQualification
+    $audio=Start-DoomAudioRunspace $clips -MusicReports $musicReports;Check 'Qualified loop and finite score open on the actual device' $audio.Shared.Ready
     $audio.Shared.Paused=$false;$watch=[Diagnostics.Stopwatch]::StartNew();$offset=0.0
     for($n=0;$n -lt 140;$n++){
         while($watch.Elapsed.TotalSeconds -lt $n/35.0+$offset){[Threading.Thread]::Sleep(1)}
@@ -67,12 +70,12 @@ try{
     Check 'Music pause, mute advancement, stop and restart preserve frame accounting' ($report.Music.Frames -eq 161280 -and $report.Music.Selected -ceq $loopTrack -and $report.Music.Gain -eq .1)
     Check 'Master mute and volume applied to complete mix' ($report.MutedPackets -eq 35 -and $report.FinalVolume -eq .5 -and $report.VolumeChanges.Count -eq 2)
     Check 'Epoch transition retains future packet with no loss' ($report.EpochResets -eq 1 -and $report.StalePacketsDiscarded -eq 0 -and $null -eq $report.PendingPacket -and $report.UnconsumedPackets -eq 0)
-    Check 'Finite opening, loop commands and epoch reset are recorded' ($report.Music.Transitions.Count -eq 7 -and $report.Music.Reports[$loopTrack] -ceq (Get-FileHash $qualification).Hash -and $report.Music.Reports.D_INTRO -ceq (Get-FileHash $oneShotQualification).Hash)
+    Check 'Finite opening, loop commands and epoch reset are recorded' ($report.Music.Transitions.Count -eq 7 -and $report.Music.Reports[$loopTrack] -ceq (Get-FileHash $qualification).Hash -and $report.Music.Reports[$oneShotTrack] -ceq (Get-FileHash $oneShotQualification).Hash)
     Check 'Device returns completed buffers with bounded packet queue' ($report.ReturnedCompletedFrames -gt 0 -and $report.MaxPacketQueue -le 32)
 }catch{$failure=$_.ToString()+"`n"+$_.ScriptStackTrace;throw}finally{
     if($reader){Close-DoomMusicLoopReader $reader};if($oneShotReader){Close-DoomMusicOneShotReader $oneShotReader};if($audio -and -not $audio.Closed){$report=Stop-DoomAudioRunspace $audio}
-    @{Error=$failure;Track=$loopTrack;LoopStartFrame=$loopStartFrame;Checks=$checks.ToArray();ExpectedPcmSha256=$expectedHash;Audio=$report;QualificationSha256=(Get-FileHash $qualification).Hash;OneShotQualificationSha256=(Get-FileHash $oneShotQualification).Hash;
+    @{Error=$failure;Track=$loopTrack;OneShotTrack=$oneShotTrack;LoopStartFrame=$loopStartFrame;Checks=$checks.ToArray();ExpectedPcmSha256=$expectedHash;Audio=$report;QualificationSha256=(Get-FileHash $qualification).Hash;OneShotQualificationSha256=(Get-FileHash $oneShotQualification).Hash;
       Sources=@('src/AudioMixer.ps1','src/AudioPackets.ps1','src/AudioRunspace.ps1','src/WaveOutDevice.ps1','src/MusicLoopReader.ps1','src/MusicOneShotReader.ps1','src/MusicPlayback.ps1','scripts/Invoke-AudioWorker.ps1','scripts/Test-MusicAudioWorker.ps1'|ForEach-Object {@{Path=$_;Sha256=(Get-FileHash (Join-Path $root $_)).Hash}});
-      Meaning='Actual default waveOut device with a qualified looping track followed by finite D_INTRO, synthetic effect, packet/shared pauses, independent gains, master mute, epoch and restart. Complete submitted PCM compared with independent offline schedule. Reset may cancel queued device tail; submitted bytes do not prove acoustic output/latency or gameplay-load qualification. Audio-only test, no terminal effect run or screen capture.'}|ConvertTo-Json -Depth 8|Set-Content $Output
+      Meaning='Actual default waveOut device with a qualified looping track followed by the named finite score, synthetic effect, packet/shared pauses, independent gains, master mute, epoch and restart. Complete submitted PCM compared with independent offline schedule. Reset may cancel queued device tail; submitted bytes do not prove acoustic output/latency or gameplay-load qualification. Audio-only test, no terminal effect run or screen capture.'}|ConvertTo-Json -Depth 8|Set-Content $Output
 }
 "PASS: $($checks.Count) music audio-worker checks."

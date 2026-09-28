@@ -3320,3 +3320,68 @@ Compared D_E3M9 against the current Episode 1 and E3M5–E3M8 catalogs; its stoc
 Six reader/mixer checks, ten actual audio-worker checks and fourteen engine map-selection checks pass. The two-second E3M9 actual host selected D_E3M9, ran 69 tics, submitted and returned all 86,940 frames, and closed the device without worker/cleanup errors. Its only queue-empty poll followed the last packet; no active queue starvation was observed in this brief startup run. This does not qualify full-map playback, acoustic quality, sustained queue timing, or campaign continuity. All Episode 3 map scores are now qualified; D_INTROA and D_BUNNY remain as finite-score qualifications. The Episode 1 human-playtest build and release gate are unchanged.
 
 Receipts: [complete-state loop proof](../results/music-loop-d-e3m9-state-proof-20260928.json), [opening reference](../results/music-e3m9-opening-reference-20260928.json), [six reader/mixer checks](../results/music-track-qualification-d-e3m9-stateproof-20260928-r2.json), [audio-worker checks](../results/music-audio-worker-e3m9-stateproof-20260928.json), [map-selection checks](../results/music-events-map-selection-e3m9-stateproof-20260928.json), [actual host run](../results/music-host-e3m9-stateproof-integration-20260928.json), and [preparation/catalog report](../results/music-preparation-ultimate-doom-e3m9-stateproof-20260928.json).
+
+## 2026-09-28 — Qualify the Episode 3 finale's looping D_BUNNY score
+
+Reviewing the finale callback against the playback catalog exposed a mode
+mismatch in the evidence plan: `Finale.sb.ps1` starts `Bgm.BUNNY` with
+`loop = true`, while the recent exploratory qualification treated D_BUNNY as
+a finite one-shot ([finite qualification](../results/music-one-shot-dbunny-20260928.json),
+[mode-rejection check](../results/music-playback-one-shot-dbunny-20260928.json),
+and [finite-mode worker check](../results/music-audio-worker-one-shot-dbunny-20260928.json)).
+That report could not satisfy the real finale callback. The engine request is
+unchanged; this work qualifies the score in the mode the game actually
+requests.
+
+Using the installed Steam Ultimate Doom IWAD and the pinned soundfont, D_BUNNY
+has MUS hash `5A4CCE0F63CD3B42C1391D319AF418D9BEF241E4760C993A927D6DEC1C76A694`
+and a 62-second score period (2,734,200 frames at 44.1 kHz). Two continuously
+synthesized periods cover 124 seconds. Their complete normalized state matches
+at both boundaries with 12 voices and state hash
+`3F786BA8A1CD93BD27FE2FDA182572306A7C5A384A92990865E96BC7AC096780`. The
+independent eight-second opening is exact at PCM hash
+`80604CBA00AD0E701AC03D946B074AD3E308AA250904AB515110CD7ED5593A77`. This is
+a two-period complete-state recurrence proof, not a third independently
+rendered period. Preparation took 272.532 seconds (257.384 seconds rendering,
+writing and snapshotting) under PowerShell 7.6.5. The single-track catalog
+hash is `C075374CCC60CD75819C8C9824F414570688C7AF4BCAD1ED60D43243E77A7A71`.
+
+Six real-reader/mixer checks reproduce the independent opening and loop seam;
+17 persistent-playback checks accept Bunny as a loop; ten checks pass in the
+actual waveOut worker with independent PCM schedule comparison. The worker
+submitted 176,400 frames and returned 171,360 before its controlled shutdown,
+leaving a 5,040-frame queued-device tail unreturned; it closed without worker
+or cleanup errors. Its rebuffer counter reported one event. These short,
+synthetic worker checks do not certify uninterrupted finale playback or
+acoustic quality. Fifteen engine-event checks instantiate the actual `Finale`,
+advance `Finale.Update()` across the text-to-art transition, confirm its
+`D_BUNNY, Loop=true` event, validate that qualification against the installed
+IWAD, then send the event through the persistent playback reader and mix one
+second of nonzero Bunny audio. The event receipt pins the installed IWAD,
+generated engine bundle, bundle builder and finale source; the bundle SHA-256 is
+`19DE3303C005C6BD6CF96F7A101C2D7AD34B43CA678E1D65FD2ECE7A1E5E7038`. No
+gameplay or audio algorithm changed.
+
+The playback and worker harnesses now accept the track named by a one-shot
+qualification instead of hardcoding D_INTRO, and the playback harness accepts
+any current loop qualification rather than hardcoding D_E1M1. This lets tests
+exercise real Bunny loop samples alongside the already qualified D_INTRO
+one-shot. D_INTROA also has a deterministic finite-score qualification, but
+the current Ultimate Doom opening code does not request `Bgm.INTROA`. Its
+separate [one-shot qualification](../results/music-one-shot-dintroa-20260928.json)
+is tested by the current generalized [playback](../results/music-playback-introa-generalized-20260928.json)
+and [worker](../results/music-worker-introa-generalized-20260928.json) suites;
+the two-pass render is 438,480 frames (6.857-second score plus 3.086-second
+release tail), peaks at 15 voices, and clips no samples. It is inventory
+coverage, not an additional game path. The generalized tests
+also retain the default E1M1/D_INTRO behavior: [13 event checks](../results/music-events-default-regression-20260928.json),
+[17 playback checks](../results/music-playback-default-regression-20260928.json),
+and [10 waveOut worker checks](../results/music-worker-default-regression-20260928.json) pass.
+
+Receipts: [loop qualification](../results/music-loop-d-bunny-state-proof-20260928.json),
+[opening reference](../results/music-bunny-opening-reference-20260928.json),
+[reader/mixer checks](../results/music-reader-dbunny-loop-20260928.json),
+[playback checks](../results/music-playback-dbunny-loop-20260928.json),
+[audio-worker checks](../results/music-worker-dbunny-loop-20260928.json),
+[finale event-to-playback integration](../results/music-events-bunny-finale-playback-20260928-r2.json),
+and [preparation/catalog report](../results/music-preparation-dbunny-loop-20260928.json).

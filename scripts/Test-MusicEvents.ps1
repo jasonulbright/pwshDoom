@@ -2,11 +2,12 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 param([Parameter(Mandatory)][string]$Output,[string]$Wad='C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\base\DOOM.WAD',
     [string]$Qualification="$PSScriptRoot/../results/music-loop-e1m1-hour-bound.json",
+    [string]$FinaleQualification,
     [string]$MapQualification,[ValidateRange(1,4)][int]$Episode=2,[ValidateRange(1,9)][int]$Map=7)
 $ErrorActionPreference='Stop';Set-StrictMode -Version Latest
 if(Test-Path $Output){throw 'Use a fresh report path.'}
-$root=[IO.Path]::GetFullPath("$PSScriptRoot/..");$bundle=& "$PSScriptRoot/Build-EngineBundle.ps1" -Output "$root/local/music-events-$PID.ps1";. $bundle;. "$root/src/MusicEvents.ps1"
-$checks=[Collections.Generic.List[object]]::new();$failure=$null;$content=$null;$mapSelection=$null
+$root=[IO.Path]::GetFullPath("$PSScriptRoot/..");$bundle=& "$PSScriptRoot/Build-EngineBundle.ps1" -Output "$root/local/music-events-$PID.ps1";$bundleSha256=(Get-FileHash $bundle).Hash;$bundleBuilderSha256=(Get-FileHash "$root/scripts/Build-EngineBundle.ps1").Hash;. $bundle;. "$root/src/MusicEvents.ps1"
+$checks=[Collections.Generic.List[object]]::new();$failure=$null;$content=$null;$mapSelection=$null;$finalePlayback=$null;$musicPlayback=$null
 function Check([string]$Name,[bool]$Passed){$checks.Add(@{Name=$Name;Passed=$Passed});if(-not $Passed){throw $Name}}
 function Reject([string]$Name,[scriptblock]$Action){$rejected=$false;try{& $Action}catch{$rejected=$true};Check $Name $rejected}
 try{
@@ -22,7 +23,24 @@ try{
     $fake=@{State=[GameState]::Intermission;Options=$options};Sync-DoomMusicSession $events $fake;Check 'Ultimate Doom intermission mapping' ($events.Drain()[0].Track -ceq 'D_INTER')
     $options.Episode=1;$fake=@{State=[GameState]::Finale;Options=$options;Finale=@{stage=0}};Sync-DoomMusicSession $events $fake;Check 'Episode one finale restores victory score' ($events.Drain()[0].Track -ceq 'D_VICTOR')
     $options.Episode=3;$fake=@{State=[GameState]::Finale;Options=$options;Finale=@{stage=0}};Sync-DoomMusicSession $events $fake;Check 'Episode three text finale uses victory score' ($events.Drain()[0].Track -ceq 'D_VICTOR')
-    $fake.Finale.stage=1;Sync-DoomMusicSession $events $fake;Check 'Episode three art stage restores bunny score' ($events.Drain()[0].Track -ceq 'D_BUNNY')
+    $actualFinale=[Finale]::new($options);$initialFinaleMusic=$events.Drain()
+    Check 'Actual Episode three finale constructor starts looping victory music' ($initialFinaleMusic.Count -eq 1 -and $initialFinaleMusic[0].Track -ceq 'D_VICTOR' -and $initialFinaleMusic[0].Loop)
+    $actualFinale.TextSpeed=1;$actualFinale.TextWait=0;$actualFinale.count=$actualFinale.text.Length
+    $finaleUpdate=$actualFinale.Update();$batch=$events.Drain()
+    Check 'Actual Episode three finale text-to-art transition starts Bunny in loop mode' ($actualFinale.stage -eq 1 -and $finaleUpdate -eq [UpdateResult]::NeedWipe -and $batch.Count -eq 1 -and $batch[0].Track -ceq 'D_BUNNY' -and $batch[0].Loop)
+    if($FinaleQualification){
+        . "$root/src/MusicLoopReader.ps1";. "$root/src/MusicOneShotReader.ps1";. "$root/src/MusicPlayback.ps1"
+        $finaleReport=[IO.Path]::GetFullPath($FinaleQualification);$finaleCatalog="$root/local/music-catalog-bunny-finale-$PID.json"
+        @{D_BUNNY=$finaleReport}|ConvertTo-Json|Set-Content -LiteralPath $finaleCatalog
+        $finaleReports=Read-DoomMusicCatalog $finaleCatalog $content
+        Check 'Finale score catalog matches the installed Doom IWAD' ($finaleReports.Count -eq 1 -and $finaleReports.ContainsKey('D_BUNNY'))
+        $musicPlayback=New-DoomMusicPlayback $finaleReports
+        Update-DoomMusicPlayback $musicPlayback $batch
+        $bunnyMix=Read-DoomMusicPlayback $musicPlayback 44100
+        Check 'Finale loop callback starts verified Bunny playback and produces one second of music' ($musicPlayback.Selected -ceq 'D_BUNNY' -and $musicPlayback.ReaderModes.D_BUNNY -ceq 'Loop' -and $bunnyMix.Length -eq 88200 -and @($bunnyMix|Where-Object {$_ -ne 0}).Count -gt 0)
+        $finalePlayback=@{Track=$musicPlayback.Selected;Loop=$batch[0].Loop;Frames=$bunnyMix.Length/2;QualificationSha256=(Get-FileHash -LiteralPath $finaleReport).Hash;CatalogSha256=(Get-FileHash -LiteralPath $finaleCatalog).Hash}
+        Close-DoomMusicPlayback $musicPlayback;$musicPlayback=$null
+    }
     $options.Episode=4;Sync-DoomMusicSession $events $fake;Check 'Other Ultimate Doom art finales retain victory score' ($events.Drain()[0].Track -ceq 'D_VICTOR')
     if($MapQualification){
         $mapReport=Get-Content -LiteralPath $MapQualification -Raw|ConvertFrom-Json
@@ -41,8 +59,12 @@ try{
     $bad="$root/local/music-catalog-mismatch-$PID.json";@{D_E1M2=[IO.Path]::GetFullPath($Qualification)}|ConvertTo-Json|Set-Content $bad
     Reject 'Mismatched map/qualification catalog rejected' {$null=Read-DoomMusicCatalog $bad $content}
 }catch{$failure=$_.ToString()+"`n"+$_.ScriptStackTrace;throw}finally{
+    if($musicPlayback){Close-DoomMusicPlayback $musicPlayback}
     if($content){$content.Dispose()}
-    @{Error=$failure;Checks=$checks.ToArray();MapSelection=$mapSelection;WadSha256=(Get-FileHash $Wad).Hash;SourceSha256=(Get-FileHash "$root/src/MusicEvents.ps1").Hash;ScriptSha256=(Get-FileHash $PSCommandPath).Hash;
-      Meaning='Actual engine initialization callback plus isolated Ultimate Doom save-state music selection and IWAD/catalog identity checks. Optional map cases record the exact emitted track and catalog/qualification hashes. Non-E1M1 tracks are selection tests only; they are not playback qualifications.'}|ConvertTo-Json -Depth 6|Set-Content $Output
+    $sourcePaths=@('src/MusicEvents.ps1')
+    if($FinaleQualification){$sourcePaths+=@('src/MusicLoopReader.ps1','src/MusicOneShotReader.ps1','src/MusicPlayback.ps1')}
+    $sources=@($sourcePaths|ForEach-Object {@{Path=$_;Sha256=(Get-FileHash "$root/$_").Hash}})
+    @{Error=$failure;Checks=$checks.ToArray();MapSelection=$mapSelection;FinalePlayback=$finalePlayback;Sources=$sources;WadSha256=(Get-FileHash $Wad).Hash;EngineBundleSha256=$bundleSha256;EngineBundleBuilderSha256=$bundleBuilderSha256;FinaleSourceSha256=(Get-FileHash "$root/src/ManagedDoom/Doom/Intermission/Finale.sb.ps1").Hash;SourceSha256=(Get-FileHash "$root/src/MusicEvents.ps1").Hash;ScriptSha256=(Get-FileHash $PSCommandPath).Hash;
+      Meaning='Actual engine initialization callback plus isolated Ultimate Doom save-state music selection and IWAD/catalog identity checks. Optional finale case sends the emitted looping Bunny event into the actual qualified music playback reader and records its real-mix output. Optional map cases record the exact emitted track and catalog/qualification hashes; they do not prove campaign completion.'}|ConvertTo-Json -Depth 6|Set-Content $Output
 }
 "PASS: $($checks.Count) music event checks."

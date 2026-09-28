@@ -1,0 +1,79 @@
+{
+  "Error": null,
+  "Details": {
+    "PowerShell": "7.6.5",
+    "DeterministicPayload": true,
+    "RepeatPayload": {
+      "EndEventReached": true,
+      "NoteOns": 58,
+      "ScoreFrames": 302400,
+      "VoicesAtEnd": 0,
+      "Frames": 438480,
+      "PeakVoices": 15,
+      "Sha256": "54F7A568E83593AB7ABC1DFB4A0891A16193C2F9B4C5DF705DDF1F63067986FD",
+      "ClippedSamples": 0,
+      "TailFrames": 136080,
+      "Path": "C:\\projects\\pwshDoom\\local\\music-one-shot-d4a38b53354a4689a5f0e6ec87c0a21f\\D_INTROA-pass1.f64",
+      "Bytes": 7015680
+    },
+    "Qualified": true,
+    "SourcesChangedDuringRun": [],
+    "DeterministicFrames": true,
+    "Track": "D_INTROA",
+    "Payload": {
+      "EndEventReached": true,
+      "NoteOns": 58,
+      "ScoreFrames": 302400,
+      "VoicesAtEnd": 0,
+      "Frames": 438480,
+      "PeakVoices": 15,
+      "Sha256": "54F7A568E83593AB7ABC1DFB4A0891A16193C2F9B4C5DF705DDF1F63067986FD",
+      "ClippedSamples": 0,
+      "TailFrames": 136080,
+      "Path": "C:\\projects\\pwshDoom\\local\\music-one-shot-d4a38b53354a4689a5f0e6ec87c0a21f\\D_INTROA-pass0.f64",
+      "Bytes": 7015680
+    },
+    "ScoreFrames": 302400,
+    "TailLimitFrames": 882000,
+    "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+    "TailFrames": 136080,
+    "Frames": 438480,
+    "Mode": "OneShot",
+    "ScoreTicks": 960,
+    "SoundFontSha256": "82475B91A76DE15CB28A104707D3247BA932E228BADA3F47BBA63C6B31AAF7A1",
+    "MusSha256": "1D2B199C85A74836050399CFDE8D9F80122F333989BF1F3833B6AE3BA2EF81F3"
+  },
+  "Sources": [
+    {
+      "Sha256": "66B87D1CDD3FAD62E493A0C50C9A5AEBFE27167C8CCCCA974CC80463B6D1BB33",
+      "Path": "src/MusScore.ps1"
+    },
+    {
+      "Sha256": "AF80287762169B5318F60FD719479137BAED1D3EEF39561513D2B34AC118A855",
+      "Path": "src/SoundFontBank.ps1"
+    },
+    {
+      "Sha256": "9D409332EB51B5B6FCBC4B259E0C5E243E561A3C0D6AD2040A772F46539B9D8E",
+      "Path": "src/SoundFontRegions.ps1"
+    },
+    {
+      "Sha256": "1D7911DC5CD2004D6DBBF27ECF43FFD652FAC8E4813943D9F8CFD5116332417B",
+      "Path": "src/MusicOscillator.ps1"
+    },
+    {
+      "Sha256": "30CC10D9118335FEC1C57653871B236B020FDBBA2D4103F89BA8EA672F1AF5D9",
+      "Path": "src/MusicControls.ps1"
+    },
+    {
+      "Sha256": "3CCA7492A9F809EB8D54C8BF7D3D9847A1EC29D5E8ED6923F72ECA7803A50B48",
+      "Path": "src/MusicSynth.ps1"
+    },
+    {
+      "Sha256": "4778ED914B85F60A5A6057ABE3C97199481599CBD73C5A6F74BE5D4AB726695F",
+      "Path": "scripts/Qualify-MusicOneShot.ps1"
+    }
+  ],
+  "BundleSha256": "19DE3303C005C6BD6CF96F7A101C2D7AD34B43CA678E1D65FD2ECE7A1E5E7038",
+  "ScriptSha256": "4778ED914B85F60A5A6057ABE3C97199481599CBD73C5A6F74BE5D4AB726695F",
+  "Meaning": "Two exact dry PowerShell renders of one finite MUS score, including the MUS end event and all voices until release completion. Repeated payload equality establishes deterministic output for the pinned WAD, soundfont, source, and runtime; it is not original-synth fidelity, acoustic review, or live-deadline qualification."
+}
