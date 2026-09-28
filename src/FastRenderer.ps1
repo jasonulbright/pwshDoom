@@ -67,8 +67,9 @@ function New-FastRenderContext {
         TopClip=[int[]]::new(320);BottomClip=[int[]]::new(320);Planes=[int[]]::new(53760);Patches=@{};Textures=@{};Hud=@{};
         Stack=[int[]]::new($map.Nodes.Length*2+4);SkyColumns=[int[]]::new(320);RaySin=[int[]]::new(320);RayCos=[int[]]::new(320);
         SpriteClipWalls=[object[]]::new(320);SpriteClipCounts=[int[]]::new(320);ActorClipTop=[int[]]::new(320);ActorClipBottom=[int[]]::new(320);
-        MaskedColumns=[Collections.Generic.List[hashtable]]::new();Segments=[object[]]::new($map.Segs.Length);
-        Nodes=[object[]]::new($map.Nodes.Length);Subsectors=$map.Subsectors;
+        MaskedColumns=[Collections.Generic.List[hashtable]]::new();SegmentGeometry=[double[]]::new($map.Segs.Length*6);
+        SegmentMetadata=[int[]]::new($map.Segs.Length*4);NodeGeometry=[double[]]::new($map.Nodes.Length*12);
+        NodeChildren=[int[]]::new($map.Nodes.Length*2);Subsectors=$map.Subsectors;
         Flats=$Content.Flats.Flats;Colors=$Content.ColorMap.Data;SkyFlat=$Content.Flats.SkyFlatNumber;Sectors=$map.Sectors;Sides=$map.Sides;SpriteAtlas=[object[]]::new($Content.Sprites.spriteDefs.Length)}
     for([int]$x=0;$x -lt 320;$x++){$ctx.SpriteClipWalls[$x]=[Collections.Generic.List[object[]]]::new()}
     $sectorIndex=[Collections.Generic.Dictionary[object,int]]::new()
@@ -78,17 +79,28 @@ function New-FastRenderContext {
     for($i=0;$i -lt $map.Segs.Length;$i++) {
         $seg=$map.Segs[$i];$ax=$seg.Vertex1.X.Data/65536.0;$ay=$seg.Vertex1.Y.Data/65536.0
         $bx=$seg.Vertex2.X.Data/65536.0;$by=$seg.Vertex2.Y.Data/65536.0
-        $ctx.Segments[$i]=@{AX=$ax;AY=$ay;BX=$bx;BY=$by;Length=[Math]::Sqrt(($bx-$ax)*($bx-$ax)+($by-$ay)*($by-$ay));
-            Offset=$seg.Offset.Data/65536.0;Side=$sideIndex[$seg.SideDef];Front=$sectorIndex[$seg.FrontSector];Back=$(if($null -eq $seg.BackSector){-1}else{$sectorIndex[$seg.BackSector]});Flags=[int]$seg.LineDef.Flags;Sector=$sectorIndex[$seg.FrontSector]}
+        [int]$geometryOffset=$i*6;[int]$metadataOffset=$i*4
+        $ctx.SegmentGeometry[$geometryOffset]=$ax;$ctx.SegmentGeometry[$geometryOffset+1]=$ay
+        $ctx.SegmentGeometry[$geometryOffset+2]=$bx;$ctx.SegmentGeometry[$geometryOffset+3]=$by
+        $ctx.SegmentGeometry[$geometryOffset+4]=[Math]::Sqrt(($bx-$ax)*($bx-$ax)+($by-$ay)*($by-$ay))
+        $ctx.SegmentGeometry[$geometryOffset+5]=$seg.Offset.Data/65536.0
+        $ctx.SegmentMetadata[$metadataOffset]=$sideIndex[$seg.SideDef]
+        $ctx.SegmentMetadata[$metadataOffset+1]=$sectorIndex[$seg.FrontSector]
+        $ctx.SegmentMetadata[$metadataOffset+2]=if($null -eq $seg.BackSector){-1}else{$sectorIndex[$seg.BackSector]}
+        $ctx.SegmentMetadata[$metadataOffset+3]=[int]$seg.LineDef.Flags
     }
     for($i=0;$i -lt $map.Nodes.Length;$i++) {
-        $node=$map.Nodes[$i]
-        $ctx.Nodes[$i]=@{X=$node.X.Data/65536.0;Y=$node.Y.Data/65536.0;DX=$node.DX.Data/65536.0;DY=$node.DY.Data/65536.0;
-            C0=$node.Children[0];C1=$node.Children[1]}
+        $node=$map.Nodes[$i];[int]$geometryOffset=$i*12;[int]$childrenOffset=$i*2
+        $ctx.NodeGeometry[$geometryOffset]=$node.X.Data/65536.0;$ctx.NodeGeometry[$geometryOffset+1]=$node.Y.Data/65536.0
+        $ctx.NodeGeometry[$geometryOffset+2]=$node.DX.Data/65536.0;$ctx.NodeGeometry[$geometryOffset+3]=$node.DY.Data/65536.0
+        $ctx.NodeChildren[$childrenOffset]=$node.Children[0];$ctx.NodeChildren[$childrenOffset+1]=$node.Children[1]
         for($child=0;$child -lt 2;$child++) {
             $b=$node.BoundingBox[$child]
-            $ctx.Nodes[$i]['B'+$child]=@((($b[2].Data+$b[3].Data)/131072.0),(($b[0].Data+$b[1].Data)/131072.0),
-                (($b[3].Data-$b[2].Data)/131072.0),(($b[0].Data-$b[1].Data)/131072.0))
+            [int]$boxOffset=$geometryOffset+4+($child*4)
+            $ctx.NodeGeometry[$boxOffset]=($b[2].Data+$b[3].Data)/131072.0
+            $ctx.NodeGeometry[$boxOffset+1]=($b[0].Data+$b[1].Data)/131072.0
+            $ctx.NodeGeometry[$boxOffset+2]=($b[3].Data-$b[2].Data)/131072.0
+            $ctx.NodeGeometry[$boxOffset+3]=($b[0].Data-$b[1].Data)/131072.0
         }
     }
     # Prepare all wall textures once. No object-valued fixed point operations in pixel loops.
@@ -285,38 +297,44 @@ function Invoke-FastRender {
     [Array]::Clear($pixels);[Array]::Clear($planes);[Array]::Fill($depthBuffer,[double]::PositiveInfinity)
     [Array]::Clear($topClip);[Array]::Fill($bottomClip,167)
     [int]$open=$EndColumn-$FirstColumn
-    $stack=$Context.Stack;[int]$sp=1;$stack[0]=$Context.Nodes.Length-1
+    [double[]]$nodeGeometry=$Context.NodeGeometry;[int[]]$nodeChildren=$Context.NodeChildren
+    $stack=$Context.Stack;[int]$sp=1;$stack[0]=($nodeGeometry.Length/12)-1
     while($sp -gt 0 -and $open -gt 0) {
         [int]$nodeIndex=$stack[--$sp]
         if($nodeIndex -ge 0 -and $nodeIndex -lt 32768) {
-            $node=$Context.Nodes[$nodeIndex]
+            [int]$nodeGeometryOffset=$nodeIndex*12;[int]$nodeChildrenOffset=$nodeIndex*2
             # Doom child 0 is on the right of the partition vector.
-            [int]$near=0;if(($cx-$node.X)*$node.DY-($cy-$node.Y)*$node.DX -lt 0){$near=1}
+            [int]$near=0;if(($cx-$nodeGeometry[$nodeGeometryOffset])*$nodeGeometry[$nodeGeometryOffset+3]-($cy-$nodeGeometry[$nodeGeometryOffset+1])*$nodeGeometry[$nodeGeometryOffset+2] -lt 0){$near=1}
             for([int]$order=1;$order -ge 0;$order--) {
-                [int]$child=$near -bxor $order;$box=$node['B'+$child]
-                [double]$ox=$box[0]-$cx;[double]$oy=$box[1]-$cy;[double]$hw=$box[2];[double]$hh=$box[3]
+                [int]$child=$near -bxor $order;[int]$boxOffset=$nodeGeometryOffset+4+($child*4)
+                [double]$ox=$nodeGeometry[$boxOffset]-$cx;[double]$oy=$nodeGeometry[$boxOffset+1]-$cy
+                [double]$hw=$nodeGeometry[$boxOffset+2];[double]$hh=$nodeGeometry[$boxOffset+3]
                 if($ox*$co+$oy*$si+$hw*$aco+$hh*$asi -lt 1){continue}
                 if($ox*$lx+$oy*$ly+$hw*$alx+$hh*$aly -lt 0){continue}
                 if($ox*$rx+$oy*$ry+$hw*$arx+$hh*$ary -lt 0){continue}
-                $stack[$sp++]=$node['C'+$child]
+                $stack[$sp++]=$nodeChildren[$nodeChildrenOffset+$child]
             }
             continue
         }
         $ss=$Context.Subsectors[$nodeIndex -band 32767]
         for([int]$segIndex=$ss.FirstSeg;$segIndex -lt ($ss.FirstSeg+$ss.SegCount);$segIndex++) {
-            $seg=$Context.Segments[$segIndex]
-            [double]$ax=$seg.AX-$cx;[double]$ay=$seg.AY-$cy;[double]$bx=$seg.BX-$cx;[double]$by=$seg.BY-$cy
+            [int]$geometryOffset=$segIndex*6;[int]$metadataOffset=$segIndex*4
+            [double]$segAX=$Context.SegmentGeometry[$geometryOffset];[double]$segAY=$Context.SegmentGeometry[$geometryOffset+1]
+            [double]$segBX=$Context.SegmentGeometry[$geometryOffset+2];[double]$segBY=$Context.SegmentGeometry[$geometryOffset+3]
+            [int]$segSide=$Context.SegmentMetadata[$metadataOffset];[int]$segFront=$Context.SegmentMetadata[$metadataOffset+1]
+            [int]$segBack=$Context.SegmentMetadata[$metadataOffset+2];[int]$segFlags=$Context.SegmentMetadata[$metadataOffset+3]
+            [double]$ax=$segAX-$cx;[double]$ay=$segAY-$cy;[double]$bx=$segBX-$cx;[double]$by=$segBY-$cy
             if($ax*$by-$ay*$bx -ge 0){continue}
             [double]$z1=$ax*$co+$ay*$si;[double]$z2=$bx*$co+$by*$si
             if($z1 -lt 1 -and $z2 -lt 1){continue}
             [double]$r1=$ax*$si-$ay*$co;[double]$r2=$bx*$si-$by*$co
-            [double]$u1=$seg.Offset;[double]$u2=$u1+$seg.Length
+            [double]$u1=$Context.SegmentGeometry[$geometryOffset+5];[double]$u2=$u1+$Context.SegmentGeometry[$geometryOffset+4]
             if($z1 -lt 1){$f=(1-$z1)/($z2-$z1);$r1+=($r2-$r1)*$f;$u1+=($u2-$u1)*$f;$z1=1}
             if($z2 -lt 1){$f=(1-$z2)/($z1-$z2);$r2+=($r1-$r2)*$f;$u2+=($u1-$u2)*$f;$z2=1}
             [double]$sx1=160+160*$r1/$z1;[double]$sx2=160+160*$r2/$z2
             if($sx2 -le $sx1 -or $sx1 -ge $EndColumn -or $sx2 -le $FirstColumn){continue}
             [int]$x0=[Math]::Max($FirstColumn,[Math]::Ceiling($sx1-0.5));[int]$x1=[Math]::Min($EndColumn,[Math]::Ceiling($sx2-0.5))
-            $front=$Context.Sectors[$seg.Front];$back=if($seg.Back -ge 0){$Context.Sectors[$seg.Back]}else{$null};$side=$Context.Sides[$seg.Side]
+            $front=$Context.Sectors[$segFront];$back=if($segBack -ge 0){$Context.Sectors[$segBack]}else{$null};$side=$Context.Sides[$segSide]
             [double]$fh=$front.FloorHeight;[double]$ch=$front.CeilingHeight
             [bool]$solid=$null -eq $back;[double]$bf=$fh;[double]$bc=$ch
             if(-not $solid){$bf=$back.FloorHeight;$bc=$back.CeilingHeight}
@@ -333,7 +351,7 @@ function Invoke-FastRender {
             [bool]$isSky=$front.CeilingFlat -eq $Context.SkyFlat
             [bool]$joinedSky=$isSky -and -not $solid -and $back.CeilingFlat -eq $Context.SkyFlat
             if($joinedSky){$ch=$bc}
-            [int]$contrast=if($seg.AY -eq $seg.BY){-1}elseif($seg.AX -eq $seg.BX){1}else{0}
+            [int]$contrast=if($segAY -eq $segBY){-1}elseif($segAX -eq $segBX){1}else{0}
             [int]$baseLight=[Math]::Clamp(($front.LightLevel -shr 4)+$player.ExtraLight+$contrast,0,15)
             [int[]]$wallLightTable=$Context.Lighting.Scale[$baseLight]
             [double]$iz1=1/$z1;[double]$iz2=1/$z2;[double]$uz1=$u1/$z1;[double]$uz2=$u2/$z2
@@ -351,7 +369,7 @@ function Invoke-FastRender {
                 for([int]$plane=0;$plane -lt 2;$plane++) {
                     if($plane -eq 0){$py0=$clipT;$py1=[Math]::Min($clipB,$wallT-1)}
                     else{$py0=[Math]::Max($clipT,$wallB+1);$py1=$clipB}
-                    [int]$planeId=1+$seg.Sector*2+$plane
+                    [int]$planeId=1+$segFront*2+$plane
                     for([int]$y=$py0;$y -le $py1;$y++) {
                         [int]$p=$y*320+$x
                         if($plane -eq 0 -and $isSky){$pixels[$p]=$skyData[$skyColumns[$x]*$skyH+(($y+16)-band 127)];continue}
@@ -372,17 +390,17 @@ function Invoke-FastRender {
                     [int]$tex=0;[double]$textureTop=$ch
                     if($solid) {
                         if($band -gt 0){break};$tex=$side.MiddleTexture;$wy0=$wallT;$wy1=$wallB
-                        if($tex -gt 0 -and ($seg.Flags -band 16)){$textureTop=$fh+$Context.Textures[$tex].Height}
+                        if($tex -gt 0 -and ($segFlags -band 16)){$textureTop=$fh+$Context.Textures[$tex].Height}
                     } elseif($band -eq 0) {
                         if($bc -ge $ch -or $joinedSky){continue};$tex=$side.TopTexture;$wy0=$wallT;$wy1=$portalT-1
-                        if($tex -gt 0 -and -not ($seg.Flags -band 8)){$textureTop=$bc+$Context.Textures[$tex].Height}
+                        if($tex -gt 0 -and -not ($segFlags -band 8)){$textureTop=$bc+$Context.Textures[$tex].Height}
                     } elseif($band -eq 1) {
                         if($bf -le $fh){continue};$tex=$side.BottomTexture;$wy0=$portalB+1;$wy1=$wallB;$textureTop=$bf
-                        if($seg.Flags -band 16){$textureTop=$ch}
+                        if($segFlags -band 16){$textureTop=$ch}
                     } else {
                         $tex=$side.MiddleTexture;$wy0=[Math]::Max($wallT,$portalT);$wy1=[Math]::Min($wallB,$portalB)
                         $textureTop=[Math]::Min($ch,$bc)
-                        if($tex -gt 0 -and ($seg.Flags -band 16)){$textureTop=[Math]::Max($fh,$bf)+$Context.Textures[$tex].Height}
+                        if($tex -gt 0 -and ($segFlags -band 16)){$textureTop=[Math]::Max($fh,$bf)+$Context.Textures[$tex].Height}
                     }
                     if($tex -le 0){continue}
                     $texture=$Context.Textures[$tex];[int]$tw=$texture.Width;[int]$th=$texture.Height;[int[]]$td=$texture.Data

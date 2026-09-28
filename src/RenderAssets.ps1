@@ -9,7 +9,8 @@ function Write-GameRenderAssets {
     foreach($patch in @($Context.Patches.Values)+@($Context.Textures.Values)+@($Context.Sky)) {
         if(-not $patchIds.ContainsKey($patch)){$patchIds[$patch]=$patches.Count.ToString();$patches.Add($patch)}
     }
-    $meta=@{Segments=$Context.Segments;Nodes=$Context.Nodes;SkyFlat=$Context.SkyFlat;Sky=$patchIds[$Context.Sky];
+    $meta=@{SegmentGeometry=$Context.SegmentGeometry;SegmentMetadata=$Context.SegmentMetadata;NodeGeometry=$Context.NodeGeometry;NodeChildren=$Context.NodeChildren;
+        SkyFlat=$Context.SkyFlat;Sky=$patchIds[$Context.Sky];
         PlaneColumnAngles=$Context.PlaneColumnAngles;PlaneDistanceScales=$Context.PlaneDistanceScales;PlaneRowSlopes=$Context.PlaneRowSlopes;PlaneFineSine=$Context.PlaneFineSine;TanToAngleTable=$Context.TanToAngleTable;
         PlaneSpanBoundaries=$planeSpanBoundaries;
         Subsectors=@($Context.Subsectors | ForEach-Object {@{FirstSeg=$_.FirstSeg;SegCount=$_.SegCount}});
@@ -28,7 +29,7 @@ function Write-GameRenderAssets {
     }
     $writer=[IO.BinaryWriter]::new([IO.File]::Create($Path))
     try {
-        $writer.Write('pwshDoom-assets-v6');$writer.Write(($meta | ConvertTo-Json -Depth 12 -Compress));$writer.Write($patches.Count)
+        $writer.Write('pwshDoom-assets-v7');$writer.Write(($meta | ConvertTo-Json -Depth 12 -Compress));$writer.Write($patches.Count)
         [byte[]]$sampleBlock=[byte[]]::new(128)
         foreach($p in $patches) {
             $writer.Write([int]$p.Width);$writer.Write([int]$p.Height);$writer.Write([int]$p.Left);$writer.Write([int]$p.Top)
@@ -67,8 +68,12 @@ function Read-GameRenderAssets {
     param([string]$Path)
     $reader=[IO.BinaryReader]::new([IO.File]::OpenRead($Path))
     try {
-        if($reader.ReadString() -ne 'pwshDoom-assets-v6'){throw 'Unknown render asset format.'}
+        if($reader.ReadString() -ne 'pwshDoom-assets-v7'){throw 'Unknown render asset format.'}
         $meta=$reader.ReadString() | ConvertFrom-Json -AsHashtable
+        [double[]]$segmentGeometry=$meta.SegmentGeometry;[int[]]$segmentMetadata=$meta.SegmentMetadata
+        [double[]]$nodeGeometry=$meta.NodeGeometry;[int[]]$nodeChildren=$meta.NodeChildren
+        if($segmentGeometry.Length%6 -ne 0 -or $segmentMetadata.Length -ne ($segmentGeometry.Length/6)*4){throw 'Invalid packed segment geometry.'}
+        if($nodeGeometry.Length%12 -ne 0 -or $nodeChildren.Length -ne ($nodeGeometry.Length/12)*2){throw 'Invalid packed BSP node geometry.'}
         $patches=[object[]]::new($reader.ReadInt32())
         for($i=0;$i -lt $patches.Length;$i++) {
             $w=$reader.ReadInt32();$h=$reader.ReadInt32();$left=$reader.ReadInt32();$top=$reader.ReadInt32()
@@ -92,9 +97,10 @@ function Read-GameRenderAssets {
             }
             $patches[$i]=@{Width=$w;Height=$h;Left=$left;Top=$top;Data=$data;Columns=$columns}
         }
-        $ctx=@{Segments=$meta.Segments;Nodes=$meta.Nodes;Subsectors=$meta.Subsectors;SkyFlat=$meta.SkyFlat;Sky=$patches[[int]$meta.Sky];Lighting=(New-FastLightingTables);
+        $ctx=@{SegmentGeometry=$segmentGeometry;SegmentMetadata=$segmentMetadata;NodeGeometry=$nodeGeometry;NodeChildren=$nodeChildren;
+            Subsectors=$meta.Subsectors;SkyFlat=$meta.SkyFlat;Sky=$patches[[int]$meta.Sky];Lighting=(New-FastLightingTables);
             Pixels=[byte[]]::new(64000);Depth=[double[]]::new(64000);Planes=[int[]]::new(53760);TopClip=[int[]]::new(320);BottomClip=[int[]]::new(320);
-            Stack=[int[]]::new($meta.Nodes.Count*2+4);SkyColumns=[int[]]::new(320);RaySin=[int[]]::new(320);RayCos=[int[]]::new(320);
+            Stack=[int[]]::new(($nodeGeometry.Length/12)*2+4);SkyColumns=[int[]]::new(320);RaySin=[int[]]::new(320);RayCos=[int[]]::new(320);
             MaskedColumns=[Collections.Generic.List[hashtable]]::new();Textures=@{};Hud=@{};SpriteAtlas=[object[]]::new($meta.SpriteAtlas.Count);Palette=[int[][]]$meta.Palette;PlayPal=[byte[]]$meta.PlayPal}
         foreach($key in $meta.Textures.Keys){$ctx.Textures[[int]$key]=$patches[[int]$meta.Textures[$key]]}
         foreach($key in $meta.Hud.get_Keys()) {

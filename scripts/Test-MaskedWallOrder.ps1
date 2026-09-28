@@ -9,18 +9,30 @@ function Draw-FastHud {}
 function Draw-FastPlayerSprites {}
 $checks=[Collections.Generic.List[object]]::new();$failure=$null
 function Check($Name,$Actual,$Expected){$checks.Add(@{Name=$Name;Actual=$Actual;Expected=$Expected;Passed=($Actual -eq $Expected)});if($Actual -ne $Expected){throw "$Name : $Actual != $Expected"}}
+function Set-FixtureSegments($Context,[object[]]$SegmentValues) {
+    [double[]]$geometry=[double[]]::new($SegmentValues.Length*6);[int[]]$metadata=[int[]]::new($SegmentValues.Length*4)
+    for([int]$i=0;$i -lt $SegmentValues.Length;$i++) {
+        $segment=$SegmentValues[$i];[int]$g=$i*6;[int]$m=$i*4
+        $geometry[$g]=$segment.AX;$geometry[$g+1]=$segment.AY;$geometry[$g+2]=$segment.BX;$geometry[$g+3]=$segment.BY
+        $geometry[$g+4]=$segment.Length;$geometry[$g+5]=$segment.Offset
+        $metadata[$m]=$segment.Side;$metadata[$m+1]=$segment.Front;$metadata[$m+2]=$segment.Back;$metadata[$m+3]=$segment.Flags
+    }
+    $Context.SegmentGeometry=$geometry;$Context.SegmentMetadata=$metadata
+}
 $mask=[int[]]::new(64*128);for($u=0;$u -lt 64;$u++){for($v=0;$v -lt 128;$v++){$mask[$u*128+$v]=if(($u%8) -lt 4){200}else{-1}}}
 $wall=[int[]]::new(64*128);[Array]::Fill($wall,100)
 $flat=[byte[]]::new(4096);[Array]::Fill($flat,[byte]55)
 $colors=@(for($i=0;$i -lt 33;$i++){,[byte[]](0..255)})
-$ctx=@{Pixels=[byte[]]::new(64000);Depth=[double[]]::new(64000);Planes=[int[]]::new(53760);TopClip=[int[]]::new(320);BottomClip=[int[]]::new(320);Stack=[int[]]::new(4);Nodes=@();
+$ctx=@{Pixels=[byte[]]::new(64000);Depth=[double[]]::new(64000);Planes=[int[]]::new(53760);TopClip=[int[]]::new(320);BottomClip=[int[]]::new(320);Stack=[int[]]::new(4);NodeGeometry=[double[]]::new(0);NodeChildren=[int[]]::new(0);
     SpriteClipWalls=[object[]]::new(320);SpriteClipCounts=[int[]]::new(320);ActorClipTop=[int[]]::new(320);ActorClipBottom=[int[]]::new(320);
     Subsectors=@{32767=@{FirstSeg=0;SegCount=2}};Lighting=(New-FastLightingTables);Colors=$colors;SkyFlat=1;Sky=@{Data=[int[]]@(0);Width=1;Height=1};
     Sectors=@(@{FloorHeight=0;CeilingHeight=128;FloorFlat=0;CeilingFlat=0;LightLevel=255});Flats=@(@{Data=$flat});
     Sides=@(@{MiddleTexture=1;TopTexture=0;BottomTexture=0;TextureOffset=0;RowOffset=0},@{MiddleTexture=2;TopTexture=0;BottomTexture=0;TextureOffset=0;RowOffset=0});
     Textures=@{1=@{Width=64;Height=128;Data=$mask};2=@{Width=64;Height=128;Data=$wall}};
-    Segments=@(@{AX=64;AY=32;BX=64;BY=-32;Length=64;Offset=0;Side=0;Front=0;Back=0;Flags=0;Sector=0},@{AX=128;AY=128;BX=128;BY=-128;Length=256;Offset=0;Side=1;Front=0;Back=-1;Flags=0;Sector=0});
     World=@{Actors=@();ConsolePlayer=@{Mobj=@{X=0;Y=0;Angle=0};ViewZ=41;ExtraLight=0;FixedColorMap=0}}}
+$fenceSegment=@{AX=64;AY=32;BX=64;BY=-32;Length=64;Offset=0;Side=0;Front=0;Back=0;Flags=0}
+$solidSegment=@{AX=128;AY=128;BX=128;BY=-128;Length=256;Offset=0;Side=1;Front=0;Back=-1;Flags=0}
+Set-FixtureSegments $ctx @($fenceSegment,$solidSegment)
 for([int]$x=0;$x -lt 320;$x++){$ctx.SpriteClipWalls[$x]=[Collections.Generic.List[object[]]]::new()}
 $planeTables=Get-FastPlaneTables
 $ctx.PlaneColumnAngles=$planeTables.ColumnAngles;$ctx.PlaneDistanceScales=$planeTables.DistanceScales
@@ -63,12 +75,13 @@ try{
     for($i=0;$i -lt $secondMask.Length;$i++){if($secondMask[$i] -ge 0){$secondMask[$i]=201}}
     $ctx.Textures[3]=@{Width=64;Height=128;Data=$secondMask}
     $ctx.Sides+=@{MiddleTexture=3;TopTexture=0;BottomTexture=0;TextureOffset=0;RowOffset=0}
-    $ctx.Segments=@($ctx.Segments[0],@{AX=96;AY=32;BX=96;BY=-32;Length=64;Offset=0;Side=2;Front=0;Back=0;Flags=0;Sector=0},$ctx.Segments[1])
+    $middleSegment=@{AX=96;AY=32;BX=96;BY=-32;Length=64;Offset=0;Side=2;Front=0;Back=0;Flags=0}
+    Set-FixtureSegments -Context $ctx -SegmentValues ([object[]]@($fenceSegment,$middleSegment,$solidSegment))
     $ctx.Subsectors[32767].SegCount=3;Invoke-FastRender $ctx
     Check 'Nearest fence wins when masked surfaces overlap' $ctx.Pixels[25760] 200
     Check 'Second fence remains visible through nearer hole' $ctx.Pixels[25774] 201
     Check 'Second fence depth retained through nearer hole' $ctx.Depth[25774] 96
-    $ctx.World.Actors=@();$solidWall=$ctx.Segments[-1];$ctx.Segments=@($solidWall);$ctx.Subsectors[32767].FirstSeg=0;$ctx.Subsectors[32767].SegCount=1
+    $ctx.World.Actors=@();Set-FixtureSegments $ctx @($solidSegment);$ctx.Subsectors[32767].FirstSeg=0;$ctx.Subsectors[32767].SegCount=1
     $ctx.Sides[1].MiddleTexture=0;Invoke-FastRender $ctx
     Check 'Untextured solid wall retains sprite depth' ([Math]::Abs($ctx.Depth[25774]-128) -lt 0.01) $true
     [byte]$untexturedBackground=$ctx.Pixels[25774];$actor.X=200;$ctx.World.Actors=@($actor);Invoke-FastRender $ctx

@@ -4038,3 +4038,18 @@ replace Jason's one HMP Episode 1 playthrough.
 Evidence: [current human-playthrough candidate receipt](../results/episode1-current-human-candidate-20260928.json),
 [fresh map smoke](../results/episode1-map-smoke-current-candidate-20260928.json),
 and [chainsaw fixture](../results/saw-attack.json).
+
+## 2026-09-28 — Pack renderer map geometry
+
+The numeric renderer's BSP hot path and each render worker previously indexed
+per-seg/per-node hashtables. It now uses compact flat PowerShell arrays, carried
+through render-asset cache format v7. The E3M6 16-stripe profile preserves the
+full-frame hash; the first candidate run lowers median stripe time 7.5% versus
+the before-change run and a second short candidate run remains below that
+baseline. Treat this as directional pending randomized paired dispatch and
+memory measurement; it is not 60-FPS evidence.
+
+Focused checks pass: 20 masked-wall assertions; 36 Ultimate Doom map
+load/idle/render cases; five-view, 16-worker exact output in Classic,
+Matrix/Katakana, and AnsiArt/Katakana; and an E1M1-to-E1M2 reload with all
+worker processes preserved. See [performance details](performance.md#pack-per-map-bsp-geometry--september-28-2026) and the [compact receipt](../results/packed-map-geometry-profile-20260928.json).

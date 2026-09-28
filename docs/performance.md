@@ -381,3 +381,29 @@ I replaced the per-pixel division in wall texture sampling with a per-column pre
 Four alternating rounds at five headings measured 20 serial frames per version per map. On E1M1 the candidate median was 66.96 ms versus 67.75 ms baseline, but its p95 was 119.85 ms versus 108.77 ms, and paired candidate timings won only 5 of 20 comparisons. On E3M6 the candidate median was 86.61 ms versus 89.02 ms, while paired median change was effectively zero and candidate won 10 of 20. These small, inconsistent gains do not justify a source change; the optimization was reverted. This measures serial software-renderer calls only, not simulation, workers, terminal output, or displayed frame rate.
 
 Raw alternating-pair reports and the source patch are retained in ignored `local/renderer-vstep-incremental-ab-e3m6-20260928/`. Both reports pin the Steam IWAD SHA-256 `6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F`, baseline renderer `5E701091DDB6706727631BC93E200C553D7C81DDF391F028264DD7353A5FDCCF`, and candidate renderer `99025DD76D1BE4F1936D7C3FEA5DDF9686B034698EAD6870493CB01FCA06F7DA`. E1M1 report SHA-256: `0FAC4A78CC7D8D49EEB2601E72FD3EC789423C871FC65C3F8EBDA0A2A0F421DF`; E3M6 report SHA-256: `C3EFEE387E226263274774C651CFB1B8CB4FF146AACB7A6F8FE798BCEC509F16`; source patch SHA-256: `23824E50C25F103126CB6C2CE4A3EF7493F134660F9A01D294D340EE79B4463F`.
+
+## Pack per-map BSP geometry — September 28, 2026
+
+`New-FastRenderContext` previously built a PowerShell hashtable for every BSP
+node and seg, including separate child-bound arrays. Those immutable map
+records are now stored as flat typed PowerShell arrays: doubles for segment
+coordinates/length/offset and node coordinates/bounds, and integers for sector,
+side, flag, and child indexes. The asset transport writes and reconstructs the
+same arrays using cache format v7. The BSP traversal and rasterization remain
+PowerShell; the new layout changes storage and indexing only.
+
+The source-pinned E3M6 profile renders 16 worker-equivalent stripes sequentially
+in one process. Its baseline median/p95 total stripe time was 9.01/13.00 ms;
+the candidate measured 8.34/10.71 ms, and a repeat measured 7.66/10.84 ms.
+Geometry-phase median fell from 4.32 to 3.93 ms in the first candidate run.
+All runs produced the same full-frame SHA-256. The short, ordered baseline and
+candidate runs are directional evidence, not randomized paired timing; asset
+size and worker memory were not measured.
+
+The candidate also passes 36 Ultimate Doom map load/idle/render smokes, five
+serial-equivalent views in each of Classic, Matrix/Katakana, and
+AnsiArt/Katakana with sixteen processes (320,000 compared pixels and zero
+differences per style), and a real E1M1-to-E1M2 asset reload without restarting
+workers. These checks do not establish full campaign completion or 35-tic/60-
+display pacing. Raw report paths and SHA-256 values are indexed in the compact
+[profile receipt](../results/packed-map-geometry-profile-20260928.json).
