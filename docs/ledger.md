@@ -3666,3 +3666,26 @@ records each sample, source/WAD/catalog pins and raw-report hashes; the
 complete reports remain in ignored `local/`. Updated [performance notes](performance.md),
 the [article draft](article-draft.md) and [active roadmap](roadmap.md) now
 describe the repeated result and its limits.
+
+## 2026-09-28 — Reject visible-only Spectre sort optimization
+
+On source commit `214fc20`, test a renderer-only idea: because fuzz samples
+vertical neighbors in the same screen column, project only actors overlapping
+each worker stripe, then preserve stable far-to-near ordering among those
+sprites. Against the unmodified renderer on the Steam E3M6 HMP state, with four
+live shadow actors, the candidate matches indexed pixels and the depth buffer
+exactly in ten complete frames and 64 production-width stripes. The five view
+headings are 0, 37, 90, 180 and 270 degrees at captured tics 1 and 701; each
+heading was compared as a full frame, and headings 90 and 270 also cover all
+sixteen stripes.
+
+The alternating four-round static full-frame measurement retains twenty
+samples per renderer over five headings. Candidate median is 71.944 ms versus
+69.180 ms baseline (4.0% slower); P95 is 90.970 versus 97.830 ms and mean is
+75.007 versus 82.616 ms, with large outliers on both sides. This small sample
+does not establish a stable speedup, and the candidate adds projection
+descriptors. Reject it and restore the original production renderer. Exact
+parity and the full timed samples are in the
+[comparison receipt](../results/renderer-e3m6-fuzz-visible-order-pair-20260928.json).
+This was an isolated static renderer experiment, not a live-worker or game
+pacing result; no product performance claim follows.
