@@ -3994,3 +3994,7 @@ updated [human-playthrough handoff](episode1-playtest.md) now names the current
 source and uses fresh `r3` report/save/settings paths. Jason's complete HMP
 Episode 1 human route remains pending; no map completion is inferred from
 these fixtures or smoke tests.
+
+## 2026-09-28 — Reject wall texture-step precomputation
+
+A per-column wall texture scale produced exact serial/worker pixels across the tested E1M1 and E3M6 views, but paired timing was inconclusive: E1M1 regressed in 15/20 matched samples, and E3M6 had no median paired advantage. The source change was reverted. Timings, hashes, and the rejected patch are documented in [performance measurements](performance.md#rejected-wall-texture-step-precomputation--september-28-2026) and retained under ignored `local/renderer-vstep-incremental-ab-e3m6-20260928/`.
