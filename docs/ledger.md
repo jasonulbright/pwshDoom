@@ -3113,8 +3113,9 @@ qualification. The [package receipt](../results/preview3-current-candidate-valid
 and raw [host report](../local/preview3-package-8fe7600-audio-smoke-766.json)
 preserve the measurements.
 
-The Episode 1 handoff now pins this commit and fresh `r5` input/report paths.
-Preview.3 remains unpublished. The static license/asset audit for this
+At this checkpoint the Episode 1 handoff pinned this commit and fresh `r5`
+input/report paths; Preview.3 had not yet been published. It shipped later
+that day. The static license/asset audit for this
 candidate is complete: the archive contains GPL text and third-party notices,
 all 206 vendored PowerShell files retain the upstream GPL terms, and no WAD,
 soundfont, media, native binary or research PDF is present. Recheck if packaged
@@ -4120,3 +4121,30 @@ before/after full-frame hashes match. These sequential single-process stripe
 samples have material variation and do not prove a concurrent-host, live
 Terminal, or FPS gain. See the [measurement record](../results/renderer-prepared-actor-order-fastpath-20260928.json)
 and [current Episode 1 candidate receipt](../results/episode1-current-human-candidate-20260928-r4.json).
+
+## 2026-09-28 — Filter renderer actors during worker snapshot decoding
+
+After host-side projection had added exact stripe masks, every worker still
+walked all 311 E3M6 actors to test its mask. NumericV4 decoding now reuses a
+worker-local list containing only intersecting actors, and the PowerShell
+renderer draws that list directly. The full actor array is preserved; stable
+filtering keeps the prepared Spectre draw order. The simulation packet and
+wire format are unchanged.
+
+The source is pinned at `ab73eba07135fe0f834554be12aae279c151c314`. Snapshot
+transport passes 18 checks. Actual 16-process comparisons pass five E3M6 views
+in Classic, Matrix/Katakana, and AnsiArt/Katakana: 320,000 pixels and 80
+encoded strips per style with no differences. A fresh 36-map smoke passes;
+the 16-worker Classic session check matches 256,000 pixels and 64 encoded
+strips while reloading E1M2 without worker restart. The [compact profile
+receipt](../results/renderer-visible-actor-filter-20260928.json) indexes all
+source hashes and ignored raw reports.
+
+Two order-reversed 40-frame-per-stripe profiles lower actor-phase medians about
+30% and combined decode-plus-render CPU 4.1% / 8.1%. Snapshot decode cost rises
+12–13%, but both paired render totals also fall. The result is sequential
+worker-equivalent CPU accounting, not concurrent latency or displayed FPS.
+No additional map route or independent original-binary parity is claimed.
+The single-playthrough handoff now pins this candidate and uses fresh `r6`
+input, report, save, and settings paths. The local-state check found only
+Jason's earlier `r2` session report; no `r6` outputs exist.

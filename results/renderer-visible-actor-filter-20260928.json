@@ -1,0 +1,166 @@
+{
+  "Format": "pwshDoom.RendererVisibleActorFilterComparison",
+  "Version": 1,
+  "RecordedUtc": "2026-09-28T22:48:00Z",
+  "ImplementationCommit": "ab73eba07135fe0f834554be12aae279c151c314",
+  "PowerShell": "7.6.5",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "Change": "NumericV4 decoding reuses a per-worker visible-actor list from existing actor masks; the full actor snapshot remains intact. Renderer workers iterate only the selected list.",
+  "Workload": {
+    "Map": "E3M6",
+    "Skill": 3,
+    "Actors": 311,
+    "Workers": 16,
+    "IncludedActorWorkerPairs": 226,
+    "PossibleActorWorkerPairs": 4976,
+    "WarmupFramesPerStripe": 8,
+    "MeasuredFramesPerStripe": 40,
+    "TimingBoundary": "Each production-width worker-equivalent stripe is rendered sequentially in one PowerShell process. Decode and render are measured separately. Summed per-stripe medians approximate total CPU work for the pool; they are not concurrent latency or displayed frame rate."
+  },
+  "Comparisons": [
+    {
+      "Order": "full-array scan control, then visible-actor list",
+      "Control": {
+        "SumActorPhaseStripeMediansMs": 51.1727,
+        "SumRenderStripeMediansMs": 124.74,
+        "SumWorkerDecodeMediansMs": 22.2644,
+        "SumDecodeAndRenderMediansMs": 147.0044,
+        "SlowestStripeRenderPlusDecodeMedianMs": 11.9967,
+        "FullFrameSha256": "629A3A3CDA2B6365C0406A6BA70AC5A1EEFAD701BE926FD86A572AAD78F64D0C"
+      },
+      "Candidate": {
+        "SumActorPhaseStripeMediansMs": 35.8767,
+        "SumRenderStripeMediansMs": 115.8622,
+        "SumWorkerDecodeMediansMs": 25.1782,
+        "SumDecodeAndRenderMediansMs": 141.0404,
+        "SlowestStripeRenderPlusDecodeMedianMs": 11.6071,
+        "FullFrameSha256": "629A3A3CDA2B6365C0406A6BA70AC5A1EEFAD701BE926FD86A572AAD78F64D0C"
+      },
+      "ChangePercent": {
+        "ActorPhase": -29.9,
+        "RenderStripe": -7.1,
+        "WorkerDecode": 13.1,
+        "DecodeAndRender": -4.1,
+        "SlowestStripeRenderPlusDecode": -3.2
+      }
+    },
+    {
+      "Order": "visible-actor list, then full-array scan control",
+      "Control": {
+        "SumActorPhaseStripeMediansMs": 53.99,
+        "SumRenderStripeMediansMs": 133.52,
+        "SumWorkerDecodeMediansMs": 23.64,
+        "SumDecodeAndRenderMediansMs": 157.16,
+        "SlowestStripeRenderPlusDecodeMedianMs": 12.59,
+        "FullFrameSha256": "629A3A3CDA2B6365C0406A6BA70AC5A1EEFAD701BE926FD86A572AAD78F64D0C"
+      },
+      "Candidate": {
+        "SumActorPhaseStripeMediansMs": 37.34,
+        "SumRenderStripeMediansMs": 117.79,
+        "SumWorkerDecodeMediansMs": 26.59,
+        "SumDecodeAndRenderMediansMs": 144.38,
+        "SlowestStripeRenderPlusDecodeMedianMs": 11.85,
+        "FullFrameSha256": "629A3A3CDA2B6365C0406A6BA70AC5A1EEFAD701BE926FD86A572AAD78F64D0C"
+      },
+      "ChangePercent": {
+        "ActorPhase": -30.8,
+        "RenderStripe": -11.8,
+        "WorkerDecode": 12.5,
+        "DecodeAndRender": -8.1,
+        "SlowestStripeRenderPlusDecode": -5.9
+      }
+    }
+  ],
+  "ExactOutputChecks": [
+    {
+      "Style": "Classic",
+      "Workers": 16,
+      "Views": 5,
+      "PixelsCompared": 320000,
+      "PixelDifferences": 0,
+      "EncodedStripByteChecks": 80,
+      "Report": "local/render-partitions-filtered-e3m6-classic.json",
+      "ReportSha256": "DD4F989D3462BE52DEE97DC844EAB1F604173DE1BCEE8907B66CA5158B492756"
+    },
+    {
+      "Style": "Matrix",
+      "GlyphSet": "Katakana",
+      "Workers": 16,
+      "Views": 5,
+      "PixelsCompared": 320000,
+      "PixelDifferences": 0,
+      "EncodedStripByteChecks": 80,
+      "Report": "local/render-partitions-filtered-e3m6-matrix.json",
+      "ReportSha256": "4E8416382B39138D5BE2EF480D2A0A2B09BF223AC7246938E6D9D9B4C082C148"
+    },
+    {
+      "Style": "AnsiArt",
+      "GlyphSet": "Katakana",
+      "Workers": 16,
+      "Views": 5,
+      "PixelsCompared": 320000,
+      "PixelDifferences": 0,
+      "EncodedStripByteChecks": 80,
+      "Report": "local/render-partitions-filtered-e3m6-ansiart.json",
+      "ReportSha256": "37BA12163C6E1612AF52B86BEBF5659E0E3C0C8FE46B0426DADC5BBE7DFE17A9"
+    }
+  ],
+  "IntegrationChecks": {
+    "SnapshotTransport": {
+      "Checks": 18,
+      "Result": "Pass",
+      "Report": "local/snapshot-actor-filter-smoke-r2.json",
+      "ReportSha256": "05F95E4A2E7B0493C4BF45C6967FEACB2B6AAF3E1CFB96F9ECB51EB929C9D256"
+    },
+    "RendererFuzz": {
+      "Checks": 122,
+      "Result": "Pass",
+      "Report": "local/fuzz-rendering-visible-actor-filter-20260928.json",
+      "ReportSha256": "939F91E2BB54D725B5168BF761BDE421EF68ED8C7A4239D15B2E49C3760DC79E"
+    },
+    "AllUltimateDoomMaps": {
+      "Maps": 36,
+      "Passed": 36,
+      "Failed": 0,
+      "IdleTicsPerMap": 35,
+      "SerialFramesPerMap": 2,
+      "Report": "local/campaign-smoke-visible-actor-filter-20260928.json",
+      "ReportSha256": "AA1B27E71D588F06B13C36453C7F1E34E8DCE78E231C5F9BBC11630FD6CBCB1C"
+    },
+    "PersistentRendererPool": {
+      "Style": "Classic",
+      "Workers": 16,
+      "PixelsCompared": 256000,
+      "EncodedStripByteChecks": 64,
+      "MapReload": "E1M1 to E1M2 without restarting workers",
+      "Report": "local/session-worker-visible-actor-filter-classic.json",
+      "ReportSha256": "2CB5522E46032EDEE7A59F1FED244E7A7ADBE102B0D4ABFEC067385EC0243E1C"
+    }
+  },
+  "SourceSha256": {
+    "src/FastRenderer.ps1": "3DE4FEAA3597254C29C8E0CB49D940A619F036A8C068EA5E4750F3A9D007FA79",
+    "src/SnapshotTransport.ps1": "297D4409DAB345EB3BEB0AC57ECBAF6D3D1E038DF9F558DFD7A9729863F30F51",
+    "scripts/Invoke-GameRenderWorker.ps1": "063219D0653B3E7F8F8D0EF5749B85CAF80B626B029CE1697DDC556CCB9BBA2A",
+    "scripts/Measure-FastRendererPhases.ps1": "65C4D05C14DE98404344428536E5637E7518CBB0522FC94E86D82765592F2F98",
+    "scripts/Test-SnapshotTransport.ps1": "9D36AB7BE82E9676D9A281C88A6C76D01063560FCCB8345C60DFB3568C979A2D"
+  },
+  "RawProfileReports": [
+    {
+      "Path": "local/renderer-visible-actor-filter-control-e3m6-a.json",
+      "Sha256": "52232E829AE8945798334EE98F5406A22C8A6B3FCC074AF035C18A9B3CE6C05B"
+    },
+    {
+      "Path": "local/renderer-visible-actor-filter-candidate-e3m6-a.json",
+      "Sha256": "42CCE5CE6DFF49DA9F5E0130FE776DD57F95187CEAEEE2DC476523D11BD3BB7B"
+    },
+    {
+      "Path": "local/renderer-visible-actor-filter-candidate-e3m6-b.json",
+      "Sha256": "5C9684766C7F0E25ECD79AD99B0F2900D1FEF6FBF88FF282DB4CA4AD85AEAC52"
+    },
+    {
+      "Path": "local/renderer-visible-actor-filter-control-e3m6-b.json",
+      "Sha256": "C43F49774AD7D3BE925DA8FF45F279777318C32890C324E280E9B5F23CA0FC44"
+    }
+  ],
+  "TimingMeaning": "Two order-reversed fixed-state comparisons show lower actor rendering and decode-plus-render CPU, but they do not measure actual concurrent dispatch, terminal output, simulation, audio, monitor presentation, or frame rate. Exact worker output matches pwshDoom's serial renderer, not an independently executed original Doom binary. These results do not establish map completion or campaign playability."
+}

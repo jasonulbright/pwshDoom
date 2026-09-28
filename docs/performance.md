@@ -431,3 +431,42 @@ checks establish output consistency and map load/render coverage, not
 campaign completion or original-executable parity. See the [source-pinned
 profile receipt](../results/renderer-prepared-actor-order-fastpath-20260928.json)
 and [current Episode 1 candidate pin](../results/episode1-current-human-candidate-20260928-r4.json).
+
+## Decode worker-visible actors before rasterization — September 28, 2026
+
+NumericV4 packets already carry a projected-column mask for every actor, but
+each renderer process still walked the full actor array to test its own bit.
+The worker decoder now builds a reusable list of only the actors whose sprite
+patch intersects that worker's stripe. The full snapshot actor array remains
+available for state and compatibility; filtering preserves its order, including
+the host-prepared far-to-near order used by Spectre fuzz. No packet format or
+image algorithm changed.
+
+Two order-reversed fixed-state E3M6 comparisons used 311 actors, 16
+production-width stripes, eight warmups and 40 measured frames per stripe.
+Each stripe ran sequentially in one PowerShell process. The table sums each
+stripe's median render time and median decode time; it is a CPU-work comparison,
+not concurrent worker latency or a frame-rate result.
+
+| Pair order | Path | Actor phase sum / render sum / decode sum / combined (ms) | Slowest stripe render + decode medians (ms) |
+| --- | --- | ---: | ---: |
+| Full scan, then list | Full actor-array scan | 51.17 / 124.74 / 22.26 / 147.00 | 12.00 |
+| Full scan, then list | Per-worker visible list | 35.88 / 115.86 / 25.18 / 141.04 | 11.61 |
+| List, then full scan | Per-worker visible list | 37.34 / 117.79 / 26.59 / 144.38 | 11.85 |
+| List, then full scan | Full actor-array scan | 53.99 / 133.52 / 23.64 / 157.16 | 12.59 |
+
+The new decode adds 12–13% to measured snapshot-decode CPU, while actor-phase
+work falls about 30%; combined decode-plus-render CPU falls 4.1% and 8.1% in
+the two run orders. Every full-frame hash is
+`629A3A3CDA2B6365C0406A6BA70AC5A1EEFAD701BE926FD86A572AAD78F64D0C`.
+The current implementation also passes 16-process, five-view comparisons in
+Classic, Matrix/Katakana and AnsiArt/Katakana (320,000 pixels per style, zero
+differences), an 18-check snapshot transport suite, a 36/36 map load/render
+smoke, and a 16-worker E1M1-to-E1M2 reload with menus and automap pixels
+matching. Those checks establish worker output and lifecycle consistency, not
+campaign completion or original-executable parity.
+
+The compact [comparison receipt](../results/renderer-visible-actor-filter-20260928.json)
+indexes source hashes and raw ignored reports. This profile excludes actual
+process scheduling, simulation, audio, ANSI output, and monitor presentation;
+the 35-tic/60-display goal remains open.

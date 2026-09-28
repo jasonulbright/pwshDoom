@@ -7,18 +7,19 @@ Updated 2026-09-28. Release sequence remains Ultimate Doom, Doom II, then a MyHo
 Source/IWAD hashes and detailed results: [results/campaign-smoke-lineflags-fixed.json](../results/campaign-smoke-lineflags-fixed.json).
 
 The current Episode 1 human-playthrough candidate is implementation commit
-`da3829c8d980789de2fc95fd51d09c5488982d95`. The broad candidate receipt and
+`ab73eba07135fe0f834554be12aae279c151c314`. The broad candidate receipt and
 geometry/cache supplement retain the 36/36 map smoke and 69 transition
 fixtures, including real E1M9 and E1M4 loads on the secret branch. The latest
 audio supplement reruns a 36/36 load/idle/render smoke and records bounded
-realtime audio checks. The current renderer-only follow-up also passes a fresh
-36-map smoke and exact 16-worker output in all three styles. Transition exits
-are explicit fixtures and do not mark any map complete; audio continuity
-checks do not qualify campaign completion. See the [current candidate
-receipt](../results/episode1-current-human-candidate-20260928-r4.json),
+realtime audio checks. The current renderer change consumes per-worker actor
+masks during decoding and passes a fresh 36-map smoke, exact 16-worker output
+in all three styles, and a persistent-worker map reload. Transition exits are
+explicit fixtures and do not mark any map complete; audio continuity checks do
+not qualify campaign completion. See the [current candidate
+receipt](../results/episode1-current-human-candidate-20260928-r5.json),
 [broad receipt](../results/episode1-current-human-candidate-20260928.json),
 [geometry/cache supplement](../results/episode1-current-human-candidate-20260928-r2.json),
-and [realtime-audio supplement](../results/episode1-current-human-candidate-20260928-r3.json); the detailed [renderer profile](../results/renderer-prepared-actor-order-fastpath-20260928.json) does not claim a frame-rate gain.
+and [realtime-audio supplement](../results/episode1-current-human-candidate-20260928-r3.json); the [visible-actor profile](../results/renderer-visible-actor-filter-20260928.json) reports sequential worker-equivalent CPU and does not claim a frame-rate gain.
 
 A current-source, sound-enabled, 30-second headless E3M6 host comparison on
 September 28 reached 34.70, 31.90, and 33.70 simulation tics/sec at 8, 12,

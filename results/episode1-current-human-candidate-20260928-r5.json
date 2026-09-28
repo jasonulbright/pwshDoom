@@ -1,0 +1,100 @@
+{
+  "Format": "pwshDoom.Episode1CurrentHumanCandidate",
+  "Version": 1,
+  "RecordedUtc": "2026-09-28T22:49:00Z",
+  "Branch": "codex/feasibility-study",
+  "ImplementationCommit": "ab73eba07135fe0f834554be12aae279c151c314",
+  "PowerShell": "7.6.5",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "PreviousCandidate": {
+    "Path": "results/episode1-current-human-candidate-20260928-r4.json",
+    "Sha256": "88C376BC8E9F475933F036380AB407617BBD0C3677AEE4A047DFF86F71BBFA77"
+  },
+  "Lineage": [
+    "results/episode1-current-human-candidate-20260928.json",
+    "results/episode1-current-human-candidate-20260928-r2.json",
+    "results/episode1-current-human-candidate-20260928-r3.json",
+    "results/episode1-current-human-candidate-20260928-r4.json"
+  ],
+  "RendererChange": {
+    "Description": "NumericV4 workers reuse a decoder-built list of actors whose projected sprites overlap their stripe; the full actor snapshot and packet format stay unchanged.",
+    "ProfileReceipt": "results/renderer-visible-actor-filter-20260928.json",
+    "ProfileReceiptSha256": "5893D5CDB77A6B15A56AFA2B013C507CC81A87FBED95C050CF874548E0D7E2D0",
+    "ActorPhaseReductionPercent": [29.9, 30.8],
+    "DecodePlusRenderCpuReductionPercent": [4.1, 8.1],
+    "OutputHash": "629A3A3CDA2B6365C0406A6BA70AC5A1EEFAD701BE926FD86A572AAD78F64D0C",
+    "FrameRateClaim": false
+  },
+  "Validation": {
+    "SnapshotTransport": {
+      "Checks": 18,
+      "Result": "Pass",
+      "Report": "local/snapshot-actor-filter-smoke-r2.json",
+      "ReportSha256": "05F95E4A2E7B0493C4BF45C6967FEACB2B6AAF3E1CFB96F9ECB51EB929C9D256"
+    },
+    "RendererFuzz": {
+      "Checks": 122,
+      "Result": "Pass",
+      "Report": "local/fuzz-rendering-visible-actor-filter-20260928.json",
+      "ReportSha256": "939F91E2BB54D725B5168BF761BDE421EF68ED8C7A4239D15B2E49C3760DC79E"
+    },
+    "AllUltimateDoomMaps": {
+      "Maps": 36,
+      "Passed": 36,
+      "Failed": 0,
+      "IdleTicsPerMap": 35,
+      "SerialFramesPerMap": 2,
+      "Report": "local/campaign-smoke-visible-actor-filter-20260928.json",
+      "ReportSha256": "AA1B27E71D588F06B13C36453C7F1E34E8DCE78E231C5F9BBC11630FD6CBCB1C"
+    },
+    "WorkerStyles": [
+      {
+        "Style": "Classic",
+        "Workers": 16,
+        "Views": 5,
+        "PixelsCompared": 320000,
+        "PixelDifferences": 0,
+        "EncodedStripByteChecks": 80,
+        "Report": "local/render-partitions-filtered-e3m6-classic.json",
+        "ReportSha256": "DD4F989D3462BE52DEE97DC844EAB1F604173DE1BCEE8907B66CA5158B492756"
+      },
+      {
+        "Style": "Matrix",
+        "GlyphSet": "Katakana",
+        "Workers": 16,
+        "Views": 5,
+        "PixelsCompared": 320000,
+        "PixelDifferences": 0,
+        "EncodedStripByteChecks": 80,
+        "Report": "local/render-partitions-filtered-e3m6-matrix.json",
+        "ReportSha256": "4E8416382B39138D5BE2EF480D2A0A2B09BF223AC7246938E6D9D9B4C082C148"
+      },
+      {
+        "Style": "AnsiArt",
+        "GlyphSet": "Katakana",
+        "Workers": 16,
+        "Views": 5,
+        "PixelsCompared": 320000,
+        "PixelDifferences": 0,
+        "EncodedStripByteChecks": 80,
+        "Report": "local/render-partitions-filtered-e3m6-ansiart.json",
+        "ReportSha256": "37BA12163C6E1612AF52B86BEBF5659E0E3C0C8FE46B0426DADC5BBE7DFE17A9"
+      }
+    ],
+    "PersistentRendererPool": {
+      "Style": "Classic",
+      "Workers": 16,
+      "MapReload": "E1M1 to E1M2 without restarting workers",
+      "PixelsCompared": 256000,
+      "EncodedStripByteChecks": 64,
+      "Report": "local/session-worker-visible-actor-filter-classic.json",
+      "ReportSha256": "2CB5522E46032EDEE7A59F1FED244E7A7ADBE102B0D4ABFEC067385EC0243E1C"
+    }
+  },
+  "SourceSha256": {
+    "src/FastRenderer.ps1": "3DE4FEAA3597254C29C8E0CB49D940A619F036A8C068EA5E4750F3A9D007FA79",
+    "src/SnapshotTransport.ps1": "297D4409DAB345EB3BEB0AC57ECBAF6D3D1E038DF9F558DFD7A9729863F30F51",
+    "scripts/Invoke-GameRenderWorker.ps1": "063219D0653B3E7F8F8D0EF5749B85CAF80B626B029CE1697DDC556CCB9BBA2A"
+  },
+  "Meaning": "Current source pin for Jason's one complete Episode 1 human playthrough. Focused checks preserve output and worker lifecycle; the profiles are sequential CPU accounting. This receipt does not claim a completed human route, original-executable visual parity, audible quality, or sustained 35-tic/60-display pacing."
+}
