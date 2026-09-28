@@ -1,0 +1,67 @@
+{
+  "Format": "pwshDoom.PreviewPackageCandidateValidation",
+  "Version": 2,
+  "RecordedUtc": "2026-09-28T00:38:47.7251587Z",
+  "CandidateVersion": "0.1.0-preview.3",
+  "CandidateStatus": "LocalDraftNotPublished",
+  "Passed": true,
+  "SourceCommit": "d49cbc6e9a1e946bc1f3e15e1459c2106159573d",
+  "WorkingTreeDirty": false,
+  "ZipPath": "local/preview3-package-d49cbc6/pwshDoom-0.1.0-preview.3.zip",
+  "ZipSha256": "8CE9C39BD73A7879234B71B09E6D456A01FA29A66221873B71C512824052E11D",
+  "ZipBytes": 1497128,
+  "ChecksumFileMatches": true,
+  "PackageFileCount": 533,
+  "ZipEntryCount": 534,
+  "ManifestHashesVerified": true,
+  "ManifestSha256": "6F6A7566EDD7BE5702FDEB4A36F150AA224486FB37EC6296D1F50CA490AA019F",
+  "ResearchPdfExcluded": true,
+  "GameAssetsAndNativeBinariesExcluded": true,
+  "PlayPreflight": {
+    "WindowsTerminalFound": true,
+    "EpisodeMapCount": 36,
+    "PowerShell": "7.6.6",
+    "Passed": true,
+    "MusicCatalog": "",
+    "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+    "Meaning": "Play.ps1 -Check on the extracted candidate; IWAD supplied from the local Steam installation."
+  },
+  "HostSmoke": {
+    "Meaning": "Two-second, headless, silent package startup smoke. It is not a visible Terminal, audio, route-completion, performance or display-presentation qualification.",
+    "Passed": true,
+    "SimulationTics": 69,
+    "TicsPerSecond": 34.46874718692561,
+    "Headless": true,
+    "RawReport": "local/preview3-package-d49cbc6-host-smoke-766.json",
+    "Episode": 1,
+    "Map": 1,
+    "WorkerWorkingSetBytes": 4036415488,
+    "SoundEnabled": false,
+    "Error": null,
+    "CompletedUpdatesPerSecond": 35.46784130828578,
+    "SimulationWorkingSetBytes": 371351552,
+    "CompletedFrames": 71,
+    "RawReportSha256": "5001910B19F9EAC7D4DB58B0F0E9114AA188D5E2ACEBDDC25C755F5CDF7ED730",
+    "ExitReason": "Duration",
+    "Seconds": 2.0018134
+  },
+  "Sources": [
+    {
+      "Path": "scripts/Build-PreviewPackage.ps1",
+      "Sha256": "265AB232E810BC0B7752EC96EF91B578971D9C64C0EB7EA1FFF71F28AD8FE19B"
+    },
+    {
+      "Path": "Play.ps1",
+      "Sha256": "BBCE3A2040CFFAB59EC217702CF4357A1EFE92E030144302D16A14FD231A48EE"
+    },
+    {
+      "Path": "Start-Doom.ps1",
+      "Sha256": "F528D1DADD0B3AFAE9B14E44812670B8C57AA6759BA7C6B080B13797D4E73743"
+    },
+    {
+      "Path": "scripts/Invoke-Doom.ps1",
+      "Sha256": "0CB50E56C66E73E0286EDE1EEF09CB7F695A50E7450E2AEB99516B81A40A39B9"
+    }
+  ],
+  "Meaning": "Fresh shallow public clone at the pushed branch tip; clean source commit; source-inclusive preview ZIP built with the repository packaging script. All 533 manifest file sizes and hashes verified after extraction. The ZIP contains the manifest plus 533 packaged files and excludes user WAD/soundfont, native binaries, generated captures and research PDF. This is a local candidate only; full Episode 1 human playthrough, visible window/input checks, final license/asset audit, release notes and finished article remain open."
+}

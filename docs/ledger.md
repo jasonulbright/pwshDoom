@@ -3025,3 +3025,30 @@ deadlines. Portable receipts: [preparation](../results/music-preparation-ultimat
 [audio worker](../results/music-audio-worker-d-e3m2-state-proof-20260927.json),
 [map selection](../results/music-events-map-selection-e3m2-stateproof-20260927.json),
 and [host integration](../results/music-host-e3m2-state-proof-integration-20260927.json).
+
+## 2026-09-27 — Rebuild and verify the Preview.3 package candidate
+
+Cloned the pushed `codex/feasibility-study` branch into a clean local checkout
+at source commit `d49cbc6e9a1e946bc1f3e15e1459c2106159573d` and built a fresh,
+unpublished Preview.3 ZIP. All 533 manifest entries match their packaged byte
+lengths and SHA-256 hashes after extraction. The ZIP is 1,497,128 bytes with
+SHA-256
+`8CE9C39BD73A7879234B71B09E6D456A01FA29A66221873B71C512824052E11D`; its
+checksum file matches. The ZIP itself contains 534 entries including the
+manifest and contains no WAD, soundfont, native executable/library, generated
+binary or research PDF. GPL and third-party notices are included; the final
+release asset/license audit remains open.
+
+Under PowerShell 7.6.6, the extracted package's `Play.ps1 -Check` recognizes
+the installed IWAD, all 36 maps and Windows Terminal. A two-second silent,
+headless E1M1 host smoke reaches its duration with no error: 69 simulation
+tics, 71 completed frames, 34.469 tics/sec and 35.468 completed updates/sec.
+The 16-worker set uses 4,036,415,488 bytes; the simulation process uses
+371,351,552 bytes. These are short startup-smoke figures, not pacing claims.
+The run does not exercise visible Terminal output, audio or campaign play. It
+created `local/game-frame.bin` and `local/palette.bin` only in the extracted
+test directory after the package contents had been verified; neither file is
+present in the ZIP. The candidate-validation receipt is
+[`preview3-current-candidate-validation-d49cbc6-20260927.json`](../results/preview3-current-candidate-validation-d49cbc6-20260927.json).
+The complete Episode 1 human route and physical window/input checks remain
+pending before release.
