@@ -3711,3 +3711,30 @@ and mask disagreement, not evidence of the actor showing through a wall. The
 exact view Jason saw remains unknown, this comparison uses the adopted
 renderer rather than the original executable, and broader visual parity is
 still open. Pixel/depth/clipping detail is in the [focused receipt](../results/episode1-pool-gibs-angle0-detail-20260928.json).
+
+## 2026-09-28 — Publish Preview.3 for community testing
+
+At Jason's direction, publish the next playable preview now so other people
+can test it; do not hold publication for his complete Episode 1 playthrough.
+The public prerelease is [pwshDoom 0.1.0-preview.3](https://github.com/jasonulbright/pwshDoom/releases/tag/v0.1.0-preview.3),
+tagged at clean source commit `34e3d1755f458e5dbdc82e0c8458e0f1f51df634`.
+The source-inclusive ZIP is 1,544,921 bytes and contains 537 hash-manifested
+files plus the manifest. Its SHA-256 is
+`97293984A38CFDC9635EEA8DB63989C0C24068DFD063283CF4F474C74142DD5B`.
+Both article SVGs are included; the research PDF, IWAD, soundfont, recordings,
+media and native binaries are excluded. Every manifest hash was verified after
+extraction, and the freshly downloaded public ZIP matches the local archive.
+The adjacent checksum asset is `SHA256SUMS.txt`.
+
+The packaged launcher preflight passed under PowerShell 7.6.5 with the installed
+36-map Steam Ultimate Doom IWAD and Windows Terminal. All 22 packaged
+music-reader regression checks pass. A two-second sound-enabled, headless E1M1
+startup using the locally prepared Episode 1 catalog completed 69 simulation
+tics and 76 host frames in 2.003 seconds, with one audio event, no reported
+audio-backpressure observation and no host error. This is startup evidence;
+headless output frames are not displayed-frame performance, and the short run
+does not prove audible quality or campaign audio continuity. Full Episode 1
+human completion remains pending, along with broader campaign, fidelity,
+audio and pacing qualifications. The [publication receipt](../results/preview3-publication-20260928.json)
+records the asset digests and bounded checks. The user's research PDF remained
+outside the package and uncommitted.

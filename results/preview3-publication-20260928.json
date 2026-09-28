@@ -1,0 +1,77 @@
+{
+  "Format": "pwshDoom.PreviewReleaseValidation",
+  "Version": 1,
+  "RecordedUtc": "2026-09-28T14:06:53.8298461Z",
+  "Release": {
+    "Tag": "v0.1.0-preview.3",
+    "PublicZipDownloadVerified": true,
+    "Url": "https://github.com/jasonulbright/pwshDoom/releases/tag/v0.1.0-preview.3",
+    "Status": "PublishedPublicPrerelease",
+    "SourceCommit": "34e3d1755f458e5dbdc82e0c8458e0f1f51df634",
+    "Assets": [
+      {
+        "Bytes": 1544921,
+        "DownloadUrl": "https://github.com/jasonulbright/pwshDoom/releases/download/v0.1.0-preview.3/pwshDoom-0.1.0-preview.3.zip",
+        "Sha256": "sha256:97293984a38cfdc9635eea8db63989c0c24068dfd063283cf4f474c74142dd5b",
+        "Name": "pwshDoom-0.1.0-preview.3.zip"
+      },
+      {
+        "Bytes": 95,
+        "DownloadUrl": "https://github.com/jasonulbright/pwshDoom/releases/download/v0.1.0-preview.3/SHA256SUMS.txt",
+        "Sha256": "sha256:9eb8ce3a96b139cc63295eb37efbdb7fcf756d9f15003ab05671f3833d38f790",
+        "Name": "SHA256SUMS.txt"
+      }
+    ],
+    "Name": "pwshDoom 0.1.0-preview.3 — community test build"
+  },
+  "Package": {
+    "WorkingTreeDirty": false,
+    "ManifestFileCount": 537,
+    "ForbiddenAssetOrBinaryEntries": 0,
+    "ManifestHashesVerified": true,
+    "ZipSha256": "97293984A38CFDC9635EEA8DB63989C0C24068DFD063283CF4F474C74142DD5B",
+    "Zip": "pwshDoom-0.1.0-preview.3.zip",
+    "SvgFigureCount": 2,
+    "ManifestSha256": "E392AD8789E221015BF538E0447D3F676B1FA2A416E42DC141EB7FA4A855BC81",
+    "SourceCommit": "34e3d1755f458e5dbdc82e0c8458e0f1f51df634",
+    "ResearchPdfExcluded": true,
+    "ZipBytes": 1544921,
+    "ZipEntryCount": 538
+  },
+  "LauncherPreflight": {
+    "Passed": true,
+    "WindowsTerminalFound": true,
+    "IWadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+    "PowerShell": "7.6.5",
+    "EpisodeMapCount": 36
+  },
+  "MusicReaderRegression": {
+    "Passed": true,
+    "SourceSha256": "06FECE21F4C947C8C27360BBFAE1DD103891D929E67E80981030335ACE87104A",
+    "Meaning": "Synthetic reader/lifecycle regression; it is not soundtrack loop qualification.",
+    "Checks": 22,
+    "PowerShell": "7.6.5"
+  },
+  "SoundEnabledHeadlessSmoke": {
+    "SoundEnabled": true,
+    "Error": null,
+    "Meaning": "Two-second headless startup with a locally prepared Episode 1 catalog; no visible playback, full-session audio continuity, acoustic or performance qualification.",
+    "PowerShell": "7.6.5",
+    "SimulationTics": 69,
+    "DurationSeconds": 2.0027267,
+    "CompletedHostFrames": 76,
+    "Passed": true,
+    "Map": 1,
+    "AudioEvents": 1,
+    "Episode": 1,
+    "AudioBackpressureObservations": 0
+  },
+  "HumanEpisode1Playthrough": "Pending",
+  "Limitations": [
+    "One complete human Episode 1 route is pending.",
+    "Full-campaign audio continuity and acoustic quality are unqualified.",
+    "Original-executable visual parity is unmeasured.",
+    "The 35-tic/60-display targets are not certified.",
+    "Doom II, Final Doom, MyHouse and general PWAD compatibility are not claimed."
+  ]
+}

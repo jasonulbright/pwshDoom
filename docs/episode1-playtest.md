@@ -12,7 +12,7 @@ A normal completion is enough; 100% kills, items, and secrets are not required. 
 
 ## Build and launch
 
-Download **pwshDoom 0.1.0-preview.3** from the [public GitHub release](https://github.com/jasonulbright/pwshDoom/releases/tag/v0.1.0-preview.3), extract the ZIP, and verify it against the attached `SHA256SUMS.txt`. Preview.3 is released for community testing before a complete human Episode 1 playthrough has been recorded. It includes focused campaign, session, renderer, music-reader and startup checks, but does not claim that a full episode route or the broader campaign release gates have passed. The [prior candidate receipt](../results/preview3-current-candidate-validation-aeb6772-20260928.json) documents bounded package and startup evidence; the release archive's checksum is authoritative for the uploaded ZIP.
+Download **pwshDoom 0.1.0-preview.3** from the [public GitHub release](https://github.com/jasonulbright/pwshDoom/releases/tag/v0.1.0-preview.3), extract the ZIP, and verify it against the attached `SHA256SUMS.txt`. Preview.3 is released for community testing before a complete human Episode 1 playthrough has been recorded. It includes focused campaign, session, renderer, music-reader and startup checks, but does not claim that a full episode route or the broader campaign release gates have passed. The [publication receipt](../results/preview3-publication-20260928.json) verifies the uploaded ZIP against a fresh public download and records the package checks; the earlier [candidate receipt](../results/preview3-current-candidate-validation-aeb6772-20260928.json) documents its predecessor's more detailed test outputs.
 
 From PowerShell, set the extracted folder and the path to your own Ultimate Doom `DOOM.WAD`, then run:
 
