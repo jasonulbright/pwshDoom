@@ -4099,3 +4099,24 @@ retain portable summaries and source hashes. The receipt is implementation
 commit `41e167f04ab298c4af4c3f5150b2861ad8e3417c`; it records a new 36-map
 smoke and the bounded realtime checks without claiming human route completion
 or acoustic/device-underrun qualification.
+
+## 2026-09-28 — Skip repeated prepared actor-order scans
+
+The renderer now checks the interpolated packet's existing
+`ActorsDepthSortedForFuzz` flag before scanning the full actor list. Packets
+marked as prepared skip that repeated discovery loop in every render worker;
+direct snapshots retain the original Spectre detection and sort fallback.
+
+The change is pinned at `da3829c8d980789de2fc95fd51d09c5488982d95`. It passes
+122 focused fuzz checks, exact five-view E3M6 output in 16 worker processes for
+Classic, Matrix/Katakana, and AnsiArt/Katakana, and 36/36 map load/idle/render
+cases with the Steam Ultimate Doom IWAD. It does not add route-completion
+evidence.
+
+Two matched short E3M6 profile runs per version use the same 311-actor state
+and actor-worker masks. Mean actor-phase stripe medians move from 3.0211 ms to
+2.8863 ms; mean total stripe medians move from 7.6236 ms to 7.5026 ms. All
+before/after full-frame hashes match. These sequential single-process stripe
+samples have material variation and do not prove a concurrent-host, live
+Terminal, or FPS gain. See the [measurement record](../results/renderer-prepared-actor-order-fastpath-20260928.json)
+and [current Episode 1 candidate receipt](../results/episode1-current-human-candidate-20260928-r4.json).

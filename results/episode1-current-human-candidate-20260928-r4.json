@@ -1,0 +1,84 @@
+{
+  "Format": "pwshDoom.Episode1CurrentHumanCandidate",
+  "Version": 1,
+  "RecordedUtc": "2026-09-28T22:13:06.7080590Z",
+  "Branch": "codex/feasibility-study",
+  "ImplementationCommit": "da3829c8d980789de2fc95fd51d09c5488982d95",
+  "PowerShell": "7.6.5",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "Evidence": [
+    {
+      "Path": "results/episode1-current-human-candidate-20260928.json",
+      "Sha256": "3A9FAC8C5E281ECB29D47AB93B0B007C70E63692AD2FDCFBEB1C6418C3AF754C"
+    },
+    {
+      "Path": "results/episode1-current-human-candidate-20260928-r2.json",
+      "Sha256": "BF0FB2248B40CF32F8D2C4863FD1F933DC35FC96BE7A1351EEB37EBDA1E95A2F"
+    },
+    {
+      "Path": "results/episode1-current-human-candidate-20260928-r3.json",
+      "Sha256": "FEC5A70A283C3EB7D09E24BF0B1A053643A14CF3978D7CA93B5D2E74C483BF0B"
+    },
+    {
+      "Path": "results/renderer-prepared-actor-order-fastpath-20260928.json",
+      "Sha256": "D2AEEB33565A7B7221D5C02BF946DD97B3A0F9FFC76F19E8F808876F79BD1395"
+    }
+  ],
+  "RendererChange": {
+    "Description": "Skip the per-render actor-order discovery scan when the interpolated packet already marks its actor array sorted for Spectres; direct snapshots keep the existing scan/sort fallback.",
+    "TimingMeaning": "Before/after full-frame pixel hashes match. Mean of the two actor-phase stripe medians changes from 3.0211 to 2.8863 ms (-4.46%); mean of stripe total medians changes from 7.6236 to 7.5026 ms (-1.59%). Run-to-run variation is material; this does not establish lower live dispatch latency or a frame-rate gain.",
+    "FuzzPassed": 122,
+    "SourceSha256": "F891C9CC5F0C1EE263C663F73CA6F8FE074D7FBD500C48B1D140049F8B74F3CA",
+    "MapSmoke": {
+      "ReportSha256": "D3DBE6FB94D99B47BBF4ADA9928E64F66E4B45D8193D8AB754266F015126ECBE",
+      "Report": "local/campaign-smoke-render-scan-20260928.json",
+      "Maps": 36,
+      "Failed": 0,
+      "PerFrameSize": "320x200",
+      "FramesPerMap": 2,
+      "IdleTicsPerMap": 35,
+      "Passed": 36,
+      "Complete": true
+    },
+    "WorkerStyles": [
+      {
+        "Style": "Classic",
+        "Workers": 16,
+        "GlyphSet": "Ascii",
+        "Views": 5,
+        "PixelsCompared": 320000.0,
+        "PixelDifferences": 0.0,
+        "EncodedStripByteChecks": 80,
+        "CharacterStripByteChecks": 0,
+        "Report": "local/actor-order-scan-partitions-classic-20260928.json",
+        "ReportSha256": "69A6F2758FFC3EF49D45BC5AE8C5A25EC72CEB7EABB7AEA0385D4866217E6B9E"
+      },
+      {
+        "Style": "Matrix",
+        "Workers": 16,
+        "GlyphSet": "Katakana",
+        "Views": 5,
+        "PixelsCompared": 320000.0,
+        "PixelDifferences": 0.0,
+        "EncodedStripByteChecks": 80,
+        "CharacterStripByteChecks": 80,
+        "Report": "local/actor-order-scan-partitions-matrix-20260928.json",
+        "ReportSha256": "87F3567AABA6A6E6B62A9D7480AF62BD925A9AEEEC39712027A52A66743B6867"
+      },
+      {
+        "Style": "AnsiArt",
+        "Workers": 16,
+        "GlyphSet": "Katakana",
+        "Views": 5,
+        "PixelsCompared": 320000.0,
+        "PixelDifferences": 0.0,
+        "EncodedStripByteChecks": 80,
+        "CharacterStripByteChecks": 80,
+        "Report": "local/actor-order-scan-partitions-ansiart-20260928.json",
+        "ReportSha256": "F8B21B19EED54708F476F81F0715AB4492E4BFD46BFFFC02213315DA75733652"
+      }
+    ],
+    "FuzzTotal": 122
+  },
+  "Meaning": "Current source pin for the Episode 1 human-playthrough candidate. It carries forward the broad/session, geometry/cache and realtime-audio supplements, and adds the prepared actor-order scan optimization with exact-output, smoke and bounded profile evidence. It does not claim a completed human Episode 1 route, original-executable visual parity, audible quality, or sustained 35-tic/60-display pacing."
+}

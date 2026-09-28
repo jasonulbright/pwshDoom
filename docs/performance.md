@@ -360,9 +360,9 @@ prototypes were reverted, leaving the measured all-worker scan intact. The
 indexes exact run parameters, source patches, and raw-report hashes in ignored
 `local/` storage. These experiments are not displayed-frame measurements.
 
-## Current-source sound-and-music host startup — September 28, 2026
+## Five-second candidate sound-and-music host startup — September 28, 2026
 
-The current candidate source (`32400a8`) ran for 5.00 seconds on PowerShell
+The candidate pinned at source commit `32400a8` ran for 5.00 seconds on PowerShell
 7.6.5 with 16 renderer workers, sound effects, and the prepared eleven-track
 Episode 1 catalog. It completed 174 simulation tics and 226 headless render
 updates before exiting at the requested duration, with no host error. The
@@ -407,3 +407,27 @@ differences per style), and a real E1M1-to-E1M2 asset reload without restarting
 workers. These checks do not establish full campaign completion or 35-tic/60-
 display pacing. Raw report paths and SHA-256 values are indexed in the compact
 [profile receipt](../results/packed-map-geometry-profile-20260928.json).
+
+## Skip repeated prepared actor-order scans — September 28, 2026
+
+Interpolated worker packets already mark actor arrays sorted when they contain
+a Spectre. The renderer previously rescanned the actor array in each worker on
+every frame before noticing that marker. It now trusts that packet flag and
+keeps the prior scan/sort fallback for direct snapshots.
+
+Two short E3M6 profiles before and after the change use the same 311-actor
+state, 16 worker masks, six warmups, and 30 measured frames per production-
+width stripe. Each stripe runs sequentially in one PowerShell process. The two
+before runs average 3.0211 ms actor-phase median and 7.6236 ms total stripe
+median; the two candidate runs average 2.8863 and 7.5026 ms. Every profile has
+the same full-frame pixel hash. The changes are small and run-to-run variation
+is material; these measurements do not establish a live-dispatch gain or a
+display-rate improvement.
+
+The candidate passes 122 focused fuzz checks, five-view 16-worker comparisons
+in Classic, Matrix/Katakana, and AnsiArt/Katakana (320,000 pixels per style,
+zero differences), and a fresh 36-map load/35-idle-tic/two-frame smoke. These
+checks establish output consistency and map load/render coverage, not
+campaign completion or original-executable parity. See the [source-pinned
+profile receipt](../results/renderer-prepared-actor-order-fastpath-20260928.json)
+and [current Episode 1 candidate pin](../results/episode1-current-human-candidate-20260928-r4.json).

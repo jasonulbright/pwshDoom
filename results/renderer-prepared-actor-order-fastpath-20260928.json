@@ -1,0 +1,167 @@
+{
+  "Format": "pwshDoom.RendererPreparedActorOrderOptimization",
+  "Version": 1,
+  "RecordedUtc": "2026-09-28T22:12:27.1013363Z",
+  "ImplementationCommit": "da3829c8d980789de2fc95fd51d09c5488982d95",
+  "PowerShell": "7.6.5",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "Change": "Skip the per-render actor-order discovery scan when the interpolated packet already marks its actor array sorted for Spectres; direct snapshots keep the existing scan/sort fallback.",
+  "Source": {
+    "Sha256": "F891C9CC5F0C1EE263C663F73CA6F8FE074D7FBD500C48B1D140049F8B74F3CA",
+    "Path": "src/FastRenderer.ps1"
+  },
+  "Workload": {
+    "Actors": 311,
+    "Samples": "Six warmup and 30 measured frames per worker-equivalent stripe; stripe renderings run sequentially in one process, not as concurrent host dispatch.",
+    "Skill": 3,
+    "Episode": 3,
+    "WorkerCount": 16,
+    "Map": 6,
+    "Transport": "Prepared snapshot with worker actor visibility masks"
+  },
+  "ProfileRuns": [
+    {
+      "Variant": "Before",
+      "RendererSha256": "B10D653D700EA8D882346297D0AE73828EACFF85C8BCCAD801DC5FB2FCDAF708",
+      "ActorMedianMs": 3.2476,
+      "ActorP95Ms": 5.9407,
+      "StripeMedianMs": 8.0842,
+      "StripeP95Ms": 11.2006,
+      "FullFrameSha256": "629A3A3CDA2B6365C0406A6BA70AC5A1EEFAD701BE926FD86A572AAD78F64D0C",
+      "ActorCount": 311,
+      "WorkerCount": 16,
+      "IncludedActorWorkerPairs": 226,
+      "SkippedActorWorkerPairs": 4750,
+      "WarmupFrames": 6,
+      "MeasuredFramesPerStripe": 30,
+      "Report": "local/renderer-actor-prepare-scan-baseline-a.json",
+      "ReportSha256": "D8D019C279869F6A637BEF2CCDB8AE92A5FB9AB5735AEAF10FDE4CE73495D576"
+    },
+    {
+      "Variant": "Before",
+      "RendererSha256": "B10D653D700EA8D882346297D0AE73828EACFF85C8BCCAD801DC5FB2FCDAF708",
+      "ActorMedianMs": 2.7946,
+      "ActorP95Ms": 5.0273,
+      "StripeMedianMs": 7.1629,
+      "StripeP95Ms": 9.6514,
+      "FullFrameSha256": "629A3A3CDA2B6365C0406A6BA70AC5A1EEFAD701BE926FD86A572AAD78F64D0C",
+      "ActorCount": 311,
+      "WorkerCount": 16,
+      "IncludedActorWorkerPairs": 226,
+      "SkippedActorWorkerPairs": 4750,
+      "WarmupFrames": 6,
+      "MeasuredFramesPerStripe": 30,
+      "Report": "local/renderer-actor-prepare-scan-baseline-b.json",
+      "ReportSha256": "2362C999172BF3588D6B424B3740B6AF9B780C2678D7CD59E75A30D4D7416A38"
+    },
+    {
+      "Variant": "Candidate",
+      "RendererSha256": "F891C9CC5F0C1EE263C663F73CA6F8FE074D7FBD500C48B1D140049F8B74F3CA",
+      "ActorMedianMs": 2.9285,
+      "ActorP95Ms": 5.5169,
+      "StripeMedianMs": 7.6817,
+      "StripeP95Ms": 10.9716,
+      "FullFrameSha256": "629A3A3CDA2B6365C0406A6BA70AC5A1EEFAD701BE926FD86A572AAD78F64D0C",
+      "ActorCount": 311,
+      "WorkerCount": 16,
+      "IncludedActorWorkerPairs": 226,
+      "SkippedActorWorkerPairs": 4750,
+      "WarmupFrames": 6,
+      "MeasuredFramesPerStripe": 30,
+      "Report": "local/renderer-actor-prepare-scan-candidate-a.json",
+      "ReportSha256": "85777F142A846787B66A9A0A66E129E4E80E6581000731ED4CCE68E693375E9A"
+    },
+    {
+      "Variant": "Candidate",
+      "RendererSha256": "F891C9CC5F0C1EE263C663F73CA6F8FE074D7FBD500C48B1D140049F8B74F3CA",
+      "ActorMedianMs": 2.8441,
+      "ActorP95Ms": 5.0057,
+      "StripeMedianMs": 7.3234,
+      "StripeP95Ms": 9.6351,
+      "FullFrameSha256": "629A3A3CDA2B6365C0406A6BA70AC5A1EEFAD701BE926FD86A572AAD78F64D0C",
+      "ActorCount": 311,
+      "WorkerCount": 16,
+      "IncludedActorWorkerPairs": 226,
+      "SkippedActorWorkerPairs": 4750,
+      "WarmupFrames": 6,
+      "MeasuredFramesPerStripe": 30,
+      "Report": "local/renderer-actor-prepare-scan-candidate-b.json",
+      "ReportSha256": "EB4D34DADFE4A39F55257F98234002902570E4A6C09EA679067DAC4BA087D807"
+    }
+  ],
+  "ProfileInterpretation": "Before/after full-frame pixel hashes match. Mean of the two actor-phase stripe medians changes from 3.0211 to 2.8863 ms (-4.46%); mean of stripe total medians changes from 7.6236 to 7.5026 ms (-1.59%). Run-to-run variation is material; this does not establish lower live dispatch latency or a frame-rate gain.",
+  "Fuzz": {
+    "Report": "local/actor-order-scan-fuzz-20260928.json",
+    "Passed": 122,
+    "Total": 122,
+    "ReportSha256": "8D8807B547DC9F994477796A67771EFFBEA9A59A540DFC9D418E8033FEC25A63"
+  },
+  "WorkerPartitions": [
+    {
+      "Style": "Classic",
+      "Workers": 16,
+      "GlyphSet": "Ascii",
+      "Views": 5,
+      "PixelsCompared": 320000.0,
+      "PixelDifferences": 0.0,
+      "EncodedStripByteChecks": 80,
+      "CharacterStripByteChecks": 0,
+      "Report": "local/actor-order-scan-partitions-classic-20260928.json",
+      "ReportSha256": "69A6F2758FFC3EF49D45BC5AE8C5A25EC72CEB7EABB7AEA0385D4866217E6B9E"
+    },
+    {
+      "Style": "Matrix",
+      "Workers": 16,
+      "GlyphSet": "Katakana",
+      "Views": 5,
+      "PixelsCompared": 320000.0,
+      "PixelDifferences": 0.0,
+      "EncodedStripByteChecks": 80,
+      "CharacterStripByteChecks": 80,
+      "Report": "local/actor-order-scan-partitions-matrix-20260928.json",
+      "ReportSha256": "87F3567AABA6A6E6B62A9D7480AF62BD925A9AEEEC39712027A52A66743B6867"
+    },
+    {
+      "Style": "AnsiArt",
+      "Workers": 16,
+      "GlyphSet": "Katakana",
+      "Views": 5,
+      "PixelsCompared": 320000.0,
+      "PixelDifferences": 0.0,
+      "EncodedStripByteChecks": 80,
+      "CharacterStripByteChecks": 80,
+      "Report": "local/actor-order-scan-partitions-ansiart-20260928.json",
+      "ReportSha256": "F8B21B19EED54708F476F81F0715AB4492E4BFD46BFFFC02213315DA75733652"
+    }
+  ],
+  "CurrentSourceSmoke": {
+    "ReportSha256": "D3DBE6FB94D99B47BBF4ADA9928E64F66E4B45D8193D8AB754266F015126ECBE",
+    "Report": "local/campaign-smoke-render-scan-20260928.json",
+    "Maps": 36,
+    "Failed": 0,
+    "PerFrameSize": "320x200",
+    "FramesPerMap": 2,
+    "IdleTicsPerMap": 35,
+    "Passed": 36,
+    "Complete": true
+  },
+  "TestSources": [
+    {
+      "Sha256": "D1C7417F4142EE1DDFBCB3DF4B748A1EA3FD1EC9DDF7595D38969E455ECEA2FD",
+      "Path": "scripts/Measure-FastRendererPhases.ps1"
+    },
+    {
+      "Sha256": "3197AB9B70107ADECB45E5F80FCAEA6E81631099EFE587D1CAD9144CFDA945EF",
+      "Path": "scripts/Test-FuzzRendering.ps1"
+    },
+    {
+      "Sha256": "535C14A18A4AAFBD541B4F5D86647F8DC4E0AB58665BA170E57137FA58218A1B",
+      "Path": "scripts/Test-RenderPartitions.ps1"
+    },
+    {
+      "Sha256": "BA08843A9F1DE4FF8AFCA20B0AB070031F74FD2C3F0B0D5F1E4BAB6F62027FC6",
+      "Path": "scripts/Test-CampaignSmoke.ps1"
+    }
+  ],
+  "Meaning": "This removes repeated work from the PowerShell renderer. Fuzz correctness, three-style worker equivalence, and current-source all-map load/render smoke pass. The short serial stripe measurements are directionally favorable but noisy; no campaign completion, original-executable fidelity, visible pacing, or 60-FPS claim is made."
+}
