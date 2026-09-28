@@ -1,11 +1,11 @@
 # Changelog
 
-## Unreleased
+## 0.1.0-preview.3 — 2026-09-28
 
 ### Added
 
 - Optional prepared-music playback through `Play.ps1 -MusicCatalog`. PowerShell synthesizes and mixes the score; users prepare catalogs from their own IWAD and soundfont. Missing catalogs fail before launch, and `-MusicCatalog` cannot be combined with `-Silent`. Music remains opt-in and is not bundled.
-- A clean, local Preview.3 package candidate at commit `aeb6772`, with verified manifest hashes, the article's two SVG figures, and the research PDF and game assets excluded. Its launcher preflight, current music-reader checks and short sound-enabled startup pass; the complete Episode 1 human playthrough and broader campaign release gate remain pending. See the [playtest handoff](docs/episode1-playtest.md) and [candidate receipt](results/preview3-current-candidate-validation-aeb6772-20260928.json).
+- A source-inclusive Windows ZIP with a per-file manifest and separate SHA-256 checksum asset. The game IWAD, soundfont, research PDF and generated recordings are excluded.
 
 ### Changed
 
@@ -17,7 +17,7 @@
 
 - Corrected upstream arithmetic and angle-comparison behavior used by movement, weapons and homing actors; the E1M2 chainsaw-attack crash now passes a focused real-world hit regression.
 - Fixed reproduced actor visibility leaks and renderer range/plane-depth cases; broader scene differences and other unverified reports remain.
-- Made prepared-music source checks accept identical PowerShell text across LF/CRLF checkouts while continuing to reject altered source content; verified the clean Windows package's audio startup on PowerShell 7.6.6.
+- Made prepared-music source checks accept identical PowerShell text across LF/CRLF checkouts while continuing to reject altered source content; verified clean-package audio startup on PowerShell 7.6.6.
 
 ### Qualification
 
@@ -26,6 +26,8 @@
 - Eleven Episode 1 loops are prepared locally. All nine Episode 2 map-track names have loop qualifications: D_E2M1–D_E2M3 and D_E2M7–D_E2M9 use two-period complete-state proofs, while D_E2M4–D_E2M6 use independently matching three-period outputs. D_E2M1–D_E2M4 and D_E2M6–D_E2M9 add eight byte-distinct payloads; D_E2M5 is byte-identical to D_E1M7. D_E3M1 and D_E3M4 are qualified as exact MUS/soundfont-hash aliases of D_E2M9 and D_E1M8. D_E3M2 adds a byte-distinct score with a 234.54-second period and a two-period complete-state proof; the independent opening PCM matches, and six reader/mixer, ten actual waveOut worker, fourteen map-selection and two-second host checks pass. The D_E3M2 host completed 85,680 of 86,940 submitted frames before shutdown with a 1,260-frame canceled-tail upper bound and no starvation or rebuffer. The D_E3M1/D_E3M4 aliases also have their own map-selection and host checks. D_E3M3 and D_E3M5 have complete-state recurrence proofs with 488.714-second and 150.857-second periods and matching 50- and 66-voice boundary states. D_E3M5 passes six reader/mixer, ten worker, fourteen map-selection, and two-second actual-host checks; its host returns all 86,940 submitted frames, with one queue-empty observation after the final packet. Existing E2M4–E2M6 short host checks each reported one post-final-packet queue-starvation observation; E2M7 returned every frame; E2M8 completed 85,680 of 86,940 submitted frames with a 1,260-frame tail bound; E2M9 completed 84,420 of 86,940 with a 2,520-frame bound. E2M8/E2M9/E3M1/E3M2/E3M4 had no starvation or rebuffer. All Episode 3 map-track names are qualified. D_BUNNY now passes a 62-second complete-state loop proof plus the actual Finale.Update transition, qualified catalog playback and waveOut worker checks; D_INTROA has finite-score evidence but is not called by current Ultimate Doom code. These short checks do not establish full-campaign playback, acoustics or sustained queue timing.
 
 - D_E3M6–D_E3M9 now have complete-state loop qualifications and map-selection checks. D_E3M7 passes reader/mixer and actual-worker checks plus a clean two-second host start; D_E3M8 returns 85,680 of 86,940 frames with a bounded shutdown tail; D_E3M9 returns all 86,940 frames in its short host check. Longer D_E3M6 runs still show intermittent packet-queue starvation, so continuous music remains open.
+
+This is a community test preview, not full campaign certification. One complete human Episode 1 playthrough remains pending; Doom II, Final Doom, MyHouse, general PWAD compatibility, full-campaign audio continuity, original-executable visual parity and the 35-tic/60-display targets are not claimed.
 
 ## 0.1.0-preview.2
 

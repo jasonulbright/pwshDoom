@@ -2,9 +2,9 @@
 
 **Doom, running in PowerShell. In your terminal. With a Matrix mode.**
 
-**Latest packaged preview: 0.1.0-preview.2** for Windows Terminal. The repository source includes additional unreleased work listed in the [changelog](CHANGELOG.md); the preview ZIP does not contain those changes. Gameplay, software rendering, terminal encoding and sound-effects mixing are PowerShell. Bring your own Ultimate Doom `DOOM.WAD`.
+**Latest public preview: [0.1.0-preview.3](https://github.com/jasonulbright/pwshDoom/releases/tag/v0.1.0-preview.3)** for Windows Terminal. It adds optional prepared music and a series of gameplay, rendering and startup fixes. Gameplay, software rendering, terminal encoding and sound-effects mixing are PowerShell. Bring your own Ultimate Doom `DOOM.WAD`.
 
-The unpublished **Preview.3 candidate** is built from commit `aeb6772`. It is prepared for one complete Episode 1 human playthrough; the route is not yet recorded as complete. See the [exact candidate, launch steps and route](docs/episode1-playtest.md). The full Ultimate Doom release remains a broader milestone.
+Preview.3 is an early community test build. One complete Episode 1 human playthrough remains pending, and the full Ultimate Doom release remains a broader milestone. See the [playthrough scope and test instructions](docs/episode1-playtest.md).
 
 | Classic | Matrix | Color art |
 | --- | --- | --- |
@@ -25,7 +25,7 @@ Or, from PowerShell in the extracted folder:
 .\Play.ps1 -Style Matrix -Wad 'D:\Games\DOOM.WAD'
 ```
 
-Sound effects are enabled. Add `-Silent` to disable them or `-Ascii` if Japanese glyphs do not display correctly. The current source checkout also supports optional music: prepare a local catalog as described in [music preparation](docs/music-preparation.md), then pass it with `-MusicCatalog`. This post-preview feature is not in the 0.1.0-preview.2 ZIP. The catalog and soundfont are not packaged; current loop checks do not yet certify uninterrupted campaign playback or acoustic quality. No WADs, soundfonts or downloaded tools are distributed.
+Sound effects are enabled. Add `-Silent` to disable them or `-Ascii` if Japanese glyphs do not display correctly. Optional music requires a local catalog prepared from your own IWAD and soundfont as described in [music preparation](docs/music-preparation.md), then passed with `-MusicCatalog`. Neither assets nor prepared audio are packaged; continuous campaign playback and acoustic quality remain unqualified. No WADs, soundfonts or downloaded tools are distributed.
 
 [Installation, troubleshooting and preview limits](docs/preview.md) · [PowerShell installation](https://learn.microsoft.com/en-us/powershell/scripting/install/install-powershell-on-windows) · [Windows Terminal installation](https://learn.microsoft.com/en-us/windows/terminal/install)
 
@@ -38,7 +38,7 @@ The game opens in a maximized Terminal window. If it asks for more space, reduce
 ## Current source status
 
 - Three display styles, menus, episode/difficulty selection, automap, save/load and sound effects, with optional prepared music.
-- All 36 Ultimate Doom maps have load/simulation/render smoke coverage. E1M1–E1M4 have independently verified ordinary-input normal-exit routes; the complete Episode 1 human playthrough is still pending on the unpublished Preview.3 candidate.
+- All 36 Ultimate Doom maps have load/simulation/render smoke coverage. E1M1–E1M4 have independently verified ordinary-input normal-exit routes; the complete Episode 1 human playthrough is still pending on Preview.3.
 - Recent rendering work improves Doom-style wall, plane and actor sampling and clips world sprites to wall silhouettes; full original-executable parity is not established.
 - Damage, pickup and power-up palettes; an approximate parallel invisibility effect.
 - Editable source, build/package scripts, attribution and the research ledger.

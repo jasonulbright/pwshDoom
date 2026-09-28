@@ -10,34 +10,24 @@ Start a new game on HMP (skill 3) in Episode 1. Take E1M3's secret exit to E1M9,
 
 A normal completion is enough; 100% kills, items, and secrets are not required. The finish point is the E1 finale screen (`E1TEXT` / `CREDIT`).
 
-## Exact build and launch
+## Build and launch
 
-Run the extracted, unpublished Preview.3 package candidate built from commit
-`aeb6772a3ddac78b24782d95b4c7f1b738136ab6` at
-`C:\projects\pwshDoom\local\preview3-package-aeb6772-extracted\pwshDoom-0.1.0-preview.3`.
-Its ZIP SHA-256 is
-`DAFC42D13D9D754C26CB7EDC92CAED8D51DB2109A65D2081B6078A6F44C59579`.
-The [package receipt](../results/preview3-current-candidate-validation-aeb6772-20260928.json)
-records 537 verified source files, both article SVG figures, and exclusion of
-the research PDF and game assets. Its raw gameplay/session fingerprint is
-`861FA06A414183D7753C8EEF840FB402D0E8D3E8A12139D95772D67F461A6CF6`; it differs
-from the prior `r7` receipt only because of checkout line endings. All 216
-fingerprinted gameplay/session files have identical text after line-ending
-normalization. The [r7 candidate receipt](../results/episode1-human-playthrough-candidate-20260927-r7.json)
-records the focused game checks and their limits.
+Download **pwshDoom 0.1.0-preview.3** from the [public GitHub release](https://github.com/jasonulbright/pwshDoom/releases/tag/v0.1.0-preview.3), extract the ZIP, and verify it against the attached `SHA256SUMS.txt`. Preview.3 is released for community testing before a complete human Episode 1 playthrough has been recorded. It includes focused campaign, session, renderer, music-reader and startup checks, but does not claim that a full episode route or the broader campaign release gates have passed. The [prior candidate receipt](../results/preview3-current-candidate-validation-aeb6772-20260928.json) documents bounded package and startup evidence; the release archive's checksum is authoritative for the uploaded ZIP.
 
-Start it with this command:
+From PowerShell, set the extracted folder and the path to your own Ultimate Doom `DOOM.WAD`, then run:
 
 ```powershell
-pwsh -NoProfile -File 'C:\projects\pwshDoom\local\preview3-package-aeb6772-extracted\pwshDoom-0.1.0-preview.3\Start-Doom.ps1' `
-  -Wad 'C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\base\DOOM.WAD' `
-  -Episode 1 -Map 1 -Skill 3 -Style Classic -Sound `
-  -MusicCatalog 'C:\projects\pwshDoom\local\music-prepared-episode1.json' `
-  -RecordInput 'C:\projects\pwshDoom\local\episode1-human-playthrough-r6.json' `
-  -Report 'C:\projects\pwshDoom\local\episode1-human-session-r6.json' -Maximized -FontSize 5
+$installRoot = 'C:\Games\pwshDoom-0.1.0-preview.3'
+$wad = 'C:\Games\DOOM.WAD'
+$evidence = Join-Path $installRoot 'local'
+New-Item -ItemType Directory -Force -Path $evidence | Out-Null
+pwsh -NoProfile -File (Join-Path $installRoot 'Start-Doom.ps1') `
+  -Wad $wad -Episode 1 -Map 1 -Skill 3 -Style Classic -Sound `
+  -RecordInput (Join-Path $evidence 'episode1-human-input.json') `
+  -Report (Join-Path $evidence 'episode1-human-session.json') -Maximized -FontSize 5
 ```
 
-Use 64-bit PowerShell 7.6.x and Windows Terminal; PowerShell 7.4 or later is the project minimum. The clean package passed `Play.ps1 -Check` with the installed 36-map Steam IWAD and music-catalog path, then a two-second sound-enabled host startup under PowerShell 7.6.5. The reader accepts matching 7.6.x qualification reports, and its current-package regression passes 22 checks. The required Steam IWAD is `DOOM.WAD`, SHA-256 `6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F`; the prepared local Episode 1 music catalog has SHA-256 `0E9C9542C75F4D5E2D7FC71E42FAFBB58F94321C3B8A49BA0C9AC5A93752EE58`. Neither asset is included in the package. At the latest preflight, `%LOCALAPPDATA%\pwshDoom\settings.json` was absent, so game defaults apply. The [preflight and startup evidence](../results/preview3-current-candidate-validation-aeb6772-20260928.json) records the detected paths and hashes.
+Use 64-bit PowerShell 7.6.x and Windows Terminal; PowerShell 7.4 or later is the project minimum. The required IWAD is `DOOM.WAD`; it is not included. Sound effects are enabled. Music is optional and requires a catalog you prepare from your own IWAD and soundfont; see [music preparation](music-preparation.md). Add `-MusicCatalog '<path-to-your-prepared-catalog.json>'` to the launch command if you have one, otherwise the game runs without background music. The package smoke test and earlier candidate evidence are linked from the [release notes](../CHANGELOG.md); they do not certify full-session music continuity or a full campaign route.
 
 The startup failure reported under PowerShell 7.6.6 came from overly strict runtime-version and line-ending checks in qualified music reports. The reader now accepts equivalent PowerShell text across LF/CRLF checkouts and compatible 7.6.x patch versions while still rejecting changed source text. The current package passes 22 reader checks and starts the 11-track Episode 1 catalog in a two-second, sound-enabled headless run under PowerShell 7.6.5, advancing 69 tics with no host error or audio-backpressure sample. This brief run does not verify full-session music continuity, audible quality, or playback under visible Terminal load.
 
