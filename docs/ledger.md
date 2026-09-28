@@ -3438,3 +3438,38 @@ collided with the script's validated `Map` parameter. Both raw failures are
 preserved in `results/music-ultimate-doom-campaign-catalog-integration-20260928.json`
 and `results/music-ultimate-doom-campaign-catalog-integration-20260928-r2.json`;
 neither was an engine defect.
+
+## 2026-09-28 — Two-minute full-catalog waveOut host
+
+At commit `40924e7db9ac7171fd150c5e0de26f8b6512a9a5`, ran the real PowerShell
+simulation, 16 renderer workers and waveOut device headlessly for 120 seconds
+on HMP E1M1 with the full 30-track catalog and no input or screen capture. The
+120.001-second session advanced 4,199 tics (34.991 tics/sec) and completed
+5,791 host updates (48.258/sec). These are not Terminal writes or display
+presentations. The session stayed on D_E1M1 for 5,290,740 frames, crossing its
+96-second prepared music loop boundary.
+
+The audio worker submitted and returned all 5,290,740 frames, used at most
+three queued packets, clipped no samples, and closed without worker or cleanup
+errors. Mix time was 0.522 ms median, 1.174 ms p95, 1.592 ms p99 and 46.929 ms
+maximum; exactly one packet exceeded the 28.571 ms interval. Packet age at
+submission was 80.491 ms p95 and 97.303 ms maximum. One queue-empty/rebuffer
+observation occurred after the last packet at shutdown; there was no active-run
+queue-empty observation or recovery. This is a no-input, single-map device
+run, not full-campaign continuity, acoustic review or visible performance
+qualification. No recording was made.
+
+The [portable receipt](../results/music-host-e1m1-loop-seam-20260928.json)
+pins the catalog, IWAD, current sources and raw ignored report hash. The broader
+[performance record](performance.md#two-minute-audio-loaded-headless-e1m1-run--september-28-2026)
+keeps headless host updates distinct from PresentMon display transitions.
+
+## 2026-09-28 — Save/load audio regression on the optimized reader
+
+PowerShell 7.6.6 ran the real simulation and waveOut audio worker with the
+qualified Episode 1 catalog and the current two-period playback reader. All 15
+checks passed across save, rejected load, new game, successful load, slot
+replacement, replay-archive restoration, music epoch resets, D_E1M1 selection,
+and clean audio-device shutdown. This is focused session evidence, not a
+physical menu/playback review or campaign completion. The [portable receipt](../results/episode1-save-worker-reader-optimized-20260928.json)
+pins the harness, catalog and run result.

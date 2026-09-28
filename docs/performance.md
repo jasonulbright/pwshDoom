@@ -113,3 +113,29 @@ is attributed. The machine-readable
 [receipt](../results/presentmon-current-source-replay-20260927.json) records
 the exact source, workload, dropped-frame counts and local raw-artifact hashes;
 the 35-tic/60-display gate remains open.
+
+## Two-minute audio-loaded headless E1M1 run — September 28, 2026
+
+At commit `40924e7db9ac7171fd150c5e0de26f8b6512a9a5`, PowerShell 7.6.6 ran
+`Invoke-Doom.ps1` for 120 seconds in headless mode with the installed Ultimate
+Doom IWAD, the local 30-loop campaign catalog, sound enabled, and 16 rendering
+workers. It advanced 4,199 tics (34.991 tics/sec) and completed 5,791 host
+updates (48.258/sec). Because the session was headless, these updates are not
+Windows Terminal presentation or display-frame measurements.
+
+The actual waveOut worker selected D_E1M1 throughout its 96-second loop period
+and mixed 5,290,740 audio frames across 4,199 packets. It submitted and
+returned every frame, reported no clipping or worker/cleanup errors, and closed
+the device. The packet queue peaked at three. Mixer time was 0.522 ms median,
+1.174 ms p95, 1.592 ms p99, and 46.929 ms maximum; one block exceeded the
+28.571 ms packet interval. The sole queue-empty/rebuffer observation was after
+the final packet during shutdown; there was no mid-run queue-empty observation
+or recovery. Packet age at submission was 80.491 ms p95 and 97.303 ms maximum.
+The loop crossed its prepared seam, but this is one idle-map run, not a human
+route, audible-quality test, campaign-transition test, or continuous visual
+load measurement.
+
+The [portable receipt](../results/music-host-e1m1-loop-seam-20260928.json)
+includes the PCM digest and source hashes. The complete session report stays in
+ignored `local/`; no screen recording was made. The 35-tic/60-display gate
+remains open.
