@@ -3738,3 +3738,20 @@ human completion remains pending, along with broader campaign, fidelity,
 audio and pacing qualifications. The [publication receipt](../results/preview3-publication-20260928.json)
 records the asset digests and bounded checks. The user's research PDF remained
 outside the package and uncommitted.
+
+## 2026-09-28 — Recheck the chainsaw fix against current source
+
+The reported E1M2 crash came from PowerShell comparing wrapped `Angle`
+instances with `-gt` in `WeaponBehavior.Saw`; the fix compares their numeric
+`.Data` values. The focused current-source check against the installed Steam
+Ultimate Doom IWAD again passes both the real E1M2 chainsaw hit (imp health 60
+to 56 on the first attempt) and the homing-turn action. The refreshed portable
+result is [`saw-attack.json`](../results/saw-attack.json).
+
+I also replayed the retained 26,731-command human input through the current
+simulation. All commands were consumed without a simulation exception, but
+the saved source fingerprint differs, the first of 79 gameplay checkpoints
+diverges at tic 350, and the run remains in E1M1. This is not a passing
+full-session replay and does not reach the E1M2 attack; the focused saw check
+is the evidence that the corrected hit path still executes. The private replay
+and its diagnostic report remain under ignored `local/` and are not committed.
