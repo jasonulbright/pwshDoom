@@ -3052,3 +3052,16 @@ present in the ZIP. The candidate-validation receipt is
 [`preview3-current-candidate-validation-d49cbc6-20260927.json`](../results/preview3-current-candidate-validation-d49cbc6-20260927.json).
 The complete Episode 1 human route and physical window/input checks remain
 pending before release.
+
+## 2026-09-28 — Defer the long D_E3M3 dry-loop proof
+
+Started D_E3M3 preparation with the two-period complete-state recurrence
+method. Its loop is 977.43 seconds; the run advanced through 91.43 seconds of
+score rendering before it was interrupted so the long CPU workload would not
+compete with Jason's pending full Episode 1 playthrough. No loop qualification,
+catalog or completed preparation report was produced. The independent opening
+and partial attempt files remain under
+`local/music-track-e3m3-stateproof-20260928/`; resume later with fresh catalog
+and run-report paths according to [music preparation](music-preparation.md).
+This does not change the already qualified Episode 1 soundtrack or Preview.3
+candidate status.
