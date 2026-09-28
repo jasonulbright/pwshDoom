@@ -3620,3 +3620,18 @@ parity. The compact, source-pinned
 [depth audit](../results/actor-occlusion-depth-audit-human-prefix-tic140-20260928.json)
 excludes both the private input recording and diagnostic images; those remain
 under `local/`.
+
+## 2026-09-28 — Refresh the article against the current candidate
+
+The article's Preview.3 paragraph still carried figures from the previous
+package receipt. It now reports the current candidate's 537 verified files
+(538 ZIP entries with the manifest), PowerShell 7.6.5 reader/preflight checks,
+and 69 tics / 89 host updates in the two-second sound-enabled smoke, with no
+host error or audio-backpressure sample. The smoke does not record a returned
+PCM frame count, so the article no longer attributes the separate 86,940-frame
+result or post-final-packet observation to this package run. The rendering
+section now links the latest isolated actor-depth audit and preserves its
+scope limits. A local link check found 31 article links: all 26 local file
+targets and all three heading anchors resolve. See the updated
+[article draft](article-draft.md); the human episode result and release review
+are still pending.
