@@ -359,3 +359,17 @@ prototypes were reverted, leaving the measured all-worker scan intact. The
 [portable trial receipt](../results/actor-mask-bookkeeping-trials-20260928.json)
 indexes exact run parameters, source patches, and raw-report hashes in ignored
 `local/` storage. These experiments are not displayed-frame measurements.
+
+## Current-source sound-and-music host startup — September 28, 2026
+
+The current candidate source (`32400a8`) ran for 5.00 seconds on PowerShell
+7.6.5 with 16 renderer workers, sound effects, and the prepared eleven-track
+Episode 1 catalog. It completed 174 simulation tics and 226 headless render
+updates before exiting at the requested duration, with no host error. The
+single short sample reports 34.79 simulation tics/sec and 45.18 headless host
+updates/sec; combined worker working set was 4,155,396,096 bytes. These update
+counts are not Terminal writes or displayed frames. The run verifies startup
+with the qualified catalog but does not measure audio packet completion,
+audible output, campaign continuity, loaded pacing, or the 35-tic/60-display
+goal. The [candidate receipt](../results/episode1-current-human-candidate-20260928.json)
+indexes the raw host report and its hash under ignored `local/` storage.

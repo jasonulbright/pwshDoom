@@ -6,6 +6,13 @@ Updated 2026-09-28. Release sequence remains Ultimate Doom, Doom II, then a MyHo
 
 Source/IWAD hashes and detailed results: [results/campaign-smoke-lineflags-fixed.json](../results/campaign-smoke-lineflags-fixed.json).
 
+The current Episode 1 human-playthrough candidate, game-source commit
+`32400a85a256c6063960297fefeeb3f961a9349e`, passes a fresh 36/36 map smoke
+and 69 transition fixtures, including real E1M9 and E1M4 loads on the secret
+branch. The transition exits are explicit fixtures and do not mark any map
+complete. Current-source evidence is indexed in the
+[human-playthrough candidate receipt](../results/episode1-current-human-candidate-20260928.json).
+
 A current-source, sound-enabled, 30-second headless E3M6 host comparison on
 September 28 reached 34.70, 31.90, and 33.70 simulation tics/sec at 8, 12,
 and 16 renderer workers; the corresponding completed render-job rates were

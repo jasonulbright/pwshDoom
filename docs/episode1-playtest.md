@@ -12,28 +12,32 @@ A normal completion is enough; 100% kills, items, and secrets are not required. 
 
 ## Build and launch
 
-Download **pwshDoom 0.1.0-preview.3** from the [public GitHub release](https://github.com/jasonulbright/pwshDoom/releases/tag/v0.1.0-preview.3), extract the ZIP, and verify it against the attached `SHA256SUMS.txt`. Preview.3 is released for community testing before a complete human Episode 1 playthrough has been recorded. It includes focused campaign, session, renderer, music-reader and startup checks, but does not claim that a full episode route or the broader campaign release gates have passed. The [publication receipt](../results/preview3-publication-20260928.json) verifies the uploaded ZIP against a fresh public download and records the package checks; the earlier [candidate receipt](../results/preview3-current-candidate-validation-aeb6772-20260928.json) documents its predecessor's more detailed test outputs.
+Use the current development checkout on branch `codex/feasibility-study`. The verified game-source commit is `32400a85a256c6063960297fefeeb3f961a9349e`; the [current candidate receipt](../results/episode1-current-human-candidate-20260928.json) pins the tested tree, IWAD, focused checks, and raw-report hashes. The public [Preview.3 release](https://github.com/jasonulbright/pwshDoom/releases/tag/v0.1.0-preview.3) remains available for community testing, but this handoff is for the newer local source candidate.
 
-From PowerShell, set the extracted folder and the path to your own Ultimate Doom `DOOM.WAD`, then run:
+From PowerShell, use the existing checkout and your Steam Ultimate Doom `DOOM.WAD`:
 
 ```powershell
-$installRoot = 'C:\Games\pwshDoom-0.1.0-preview.3'
-$wad = 'C:\Games\DOOM.WAD'
-$evidence = Join-Path $installRoot 'local'
-New-Item -ItemType Directory -Force -Path $evidence | Out-Null
-pwsh -NoProfile -File (Join-Path $installRoot 'Start-Doom.ps1') `
-  -Wad $wad -Episode 1 -Map 1 -Skill 3 -Style Classic -Sound `
-  -RecordInput (Join-Path $evidence 'episode1-human-input.json') `
-  -Report (Join-Path $evidence 'episode1-human-session.json') -Maximized -FontSize 5
+$root = 'C:\projects\pwshDoom'
+$wad = 'C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\base\DOOM.WAD'
+$local = Join-Path $root 'local'
+$catalog = Join-Path $local 'music-prepared-episode1.json'
+$record = Join-Path $local 'episode1-human-input-r3.json'
+$report = Join-Path $local 'episode1-human-session-r3.json'
+$saves = Join-Path $local 'episode1-human-saves-r3'
+$settings = Join-Path $local 'episode1-human-settings-r3.json'
+pwsh -NoProfile -File (Join-Path $root 'Start-Doom.ps1') `
+  -Wad $wad -Workers 16 -Episode 1 -Map 1 -Skill 3 -Style Classic -Sound `
+  -MusicCatalog $catalog -RecordInput $record -Report $report `
+  -SaveRoot $saves -SettingsPath $settings -Maximized -FontSize 5
 ```
 
-Use 64-bit PowerShell 7.6.x and Windows Terminal; PowerShell 7.4 or later is the project minimum. The required IWAD is `DOOM.WAD`; it is not included. Sound effects are enabled. Music is optional and requires a catalog you prepare from your own IWAD and soundfont; see [music preparation](music-preparation.md). Add `-MusicCatalog '<path-to-your-prepared-catalog.json>'` to the launch command if you have one, otherwise the game runs without background music. The package smoke test and earlier candidate evidence are linked from the [release notes](../CHANGELOG.md); they do not certify full-session music continuity or a full campaign route.
+Use 64-bit PowerShell 7.6.x and Windows Terminal. The required Ultimate Doom IWAD is user-supplied and must match SHA-256 `6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F`. Sound effects and the prepared eleven-track Episode 1 music catalog are enabled. The catalog is local, built from the user's IWAD and soundfont; it is not included in the repository. If it is unavailable, omit `-MusicCatalog $catalog` to keep sound effects and play without background music. The candidate was launched headlessly for five seconds with that catalog under PowerShell 7.6.5 and exited at the requested duration without a startup error. This is startup evidence, not a full-session audio or audible-quality check.
 
-The startup failure reported under PowerShell 7.6.6 came from overly strict runtime-version and line-ending checks in qualified music reports. The reader now accepts equivalent PowerShell text across LF/CRLF checkouts and compatible 7.6.x patch versions while still rejecting changed source text. The current package passes 22 reader checks and starts the 11-track Episode 1 catalog in a two-second, sound-enabled headless run under PowerShell 7.6.5, advancing 69 tics with no host error or audio-backpressure sample. This brief run does not verify full-session music continuity, audible quality, or playback under visible Terminal load.
+The startup failure reported under PowerShell 7.6.6 came from overly strict runtime-version and line-ending checks in qualified music reports. The reader now accepts equivalent PowerShell text across LF/CRLF checkouts and compatible 7.6.x patch versions while still rejecting changed source text. The Preview.3 package passes 22 reader checks and starts the 11-track Episode 1 catalog in a two-second, sound-enabled headless run under PowerShell 7.6.5, advancing 69 tics with no host error or audio-backpressure sample. The current source candidate separately passes the five-second startup run linked above. Neither brief run verifies full-session music continuity, audible quality, or playback under visible Terminal load.
 
-On a cold start, allow up to 60 seconds for simulation and music workers to initialize. Keep the default 16 renderer workers. A prior measurement used about 4 GB combined worker memory. The Classic view needs at least 320 columns by 100 rows; the 5-point font and maximized window are set to help fit it. If the viewport is short, enlarge the window or press Ctrl+- to reduce the font. Blank space around the centered image in a larger terminal is expected.
+On a cold start, allow up to 60 seconds for simulation and music workers to initialize. Keep the 16 renderer workers. The five-second headless candidate run used about 4.16 GB combined worker memory. The Classic view needs at least 320 columns by 100 rows; the 5-point font and maximized window help fit it. If the viewport is short, enlarge the window or press Ctrl+- to reduce the font. Blank space around the centered image in a larger terminal is expected. The raw human input, session report, saves, and settings use fresh `r3` paths so the earlier attempt remains intact.
 
-Both output paths must be unused before launch. They are new (`r6`) names. Preserve the generated input and report under `C:\projects\pwshDoom\local`; they are local evidence and must not be committed or shared with the WAD.
+The `r3` input/report paths and dedicated save/settings locations preserve the earlier attempts. Confirm that the two output files do not already exist before launch; keep all generated data under `C:\projects\pwshDoom\local` and do not share it with the WAD.
 
 ## Controls
 
@@ -61,7 +65,7 @@ Your report will be recorded only for the scope and outcomes you state. Automate
 
 ## Current evidence and limits
 
-The [r7 candidate receipt](../results/episode1-human-playthrough-candidate-20260927-r7.json) records the current gameplay checks: 36-map smoke, 69 campaign transitions including the secret return and finale state, 97 boss checks, 125 menu/session checks with 46 screen fixtures, 15 save/load/audio-worker checks, the chainsaw regression, and exact serial/16-worker output for Classic, Matrix/Katakana, and AnsiArt/Katakana. The fresh package preflight and sound-enabled startup pass on the package candidate as recorded in the [current package receipt](../results/preview3-current-candidate-validation-aeb6772-20260928.json). These establish startup and focused behavior, not full map completion.
+The current-source receipt records a fresh 36-map smoke, 69 Episode 1 transition fixtures, 97 boss checks, ten menu-input checks, 24 screen fixtures, the chainsaw action regression, a 16-process map-reload check, and five-view serial/worker equality in Classic, Matrix/Katakana, and AnsiArt/Katakana. A five-second sound-and-music host launch completed at its requested duration. These establish current-source startup and focused behavior, not full map completion.
 
 The earlier chainsaw crash happened after collecting the saw in E1M2 and pressing Ctrl against an imp. The current focused real-world hit check passes: the saw damages a living E1M2 imp (60 to 56 HP) on its first attempt, and the homing-turn check passes. Replaying the saved 26,731-command human input against current source consumes every command without a simulation exception, but its recorded source fingerprint differs and the first of 79 checkpoints diverges at tic 350; the replay remains in E1M1, so it does not reach or independently verify the former E1M2 crash state. Treat that attempt as stale-source diagnostic evidence, not a current full-route regression or a new human test. The current focused chainsaw check and replay limits are recorded in the [ledger](ledger.md#2026-09-28--recheck-the-chainsaw-fix-against-current-source). Existing E1M1–E1M4 automated route receipts are retained at their original source pins. One E1M3 waypoint driver stalled without exposing a reproducible product defect, and it was not tuned further.
 

@@ -3962,3 +3962,35 @@ parity. The [portable trial receipt](../results/actor-mask-bookkeeping-trials-20
 stores hashes for its source patches and full raw reports under ignored
 `local/`. The current source remains the committed renderer path; the separate
 16-check snapshot transport receipt was refreshed against it.
+
+## 2026-09-28 — Revalidate the current Episode 1 playtest candidate
+
+The current renderer source commit `32400a85a256c6063960297fefeeb3f961a9349e`
+was checked against the installed Ultimate Doom IWAD
+`6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F` on
+PowerShell 7.6.5. The full 36-map load/idle/render smoke passes; the separate
+69-transition fixture reaches real E1M9 and E1M4 map loads for the secret
+return and checks finale state, but it does not complete those maps. The five
+real IWAD boss-trigger fixtures pass 97 checks. The focused chainsaw/homing
+action check passes twice, synthetic menu input passes ten checks, and all 24
+session-screen frames render without an error.
+
+The actual 16-process session worker preserves four screen/menu/automap/map-
+reload checkpoints over 256,000 indexed pixels and 64 encoded strips. Five
+E1M1 camera views in each of Classic, Matrix/Katakana, and AnsiArt/Katakana
+match the serial renderer exactly: 960,000 total compared pixels, zero
+differences. `Play.ps1 -Check` resolves the Steam IWAD, Windows Terminal, and
+local music catalog. A five-second headless host run with effects and the
+eleven-track Episode 1 catalog starts without an error and exits at its
+requested duration: 174 tics and 226 headless render updates, or 34.79 tics/sec
+and 45.18 updates/sec, with 4,155,396,096 bytes of combined worker working
+set. This short run is not audio continuity, audible review, or a pacing
+guarantee.
+
+The [current candidate receipt](../results/episode1-current-human-candidate-20260928.json)
+stores check counts, source and IWAD pins, and hashes for the full reports
+preserved under ignored `local/episode1-current-candidate-20260928/`. The
+updated [human-playthrough handoff](episode1-playtest.md) now names the current
+source and uses fresh `r3` report/save/settings paths. Jason's complete HMP
+Episode 1 human route remains pending; no map completion is inferred from
+these fixtures or smoke tests.

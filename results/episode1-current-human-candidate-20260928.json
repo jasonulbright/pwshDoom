@@ -1,0 +1,215 @@
+{
+  "PreparedUtc": "2026-09-28T19:21:19.1656841Z",
+  "Status": "PreparedForOneHumanEpisode1Playthrough",
+  "Branch": "codex/feasibility-study",
+  "VerifiedTreeCommit": "55ac69d1a227f702e46de96ea2c71b0058fce00d",
+  "LatestGameSourceCommit": "32400a85a256c6063960297fefeeb3f961a9349e",
+  "PowerShell": "7.6.5",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "Scope": [
+    "E1M1",
+    "E1M2",
+    "E1M3",
+    "E1M9",
+    "E1M4",
+    "E1M5",
+    "E1M6",
+    "E1M7",
+    "E1M8",
+    "Episode 1 finale"
+  ],
+  "Checks": [
+    {
+      "Failed": 0,
+      "Name": "All Ultimate Doom map smoke",
+      "Meaning": "36 maps each load, simulate 35 idle tics, and render two complete 320x200 serial frames; not route completion.",
+      "RawReport": {
+        "Sha256": "6CF619F83EEBB3940F4311ABBA61A980AABD0E77ADDA79680ECDE562E25B0799",
+        "Path": "local/episode1-current-candidate-20260928/episode1-current-20260928-map-smoke.json",
+        "Bytes": 67020
+      },
+      "Passed": 36
+    },
+    {
+      "Failed": 0,
+      "Name": "Episode and secret-return transitions",
+      "Meaning": "69 fixtures cover destination, real intermission advancement, real E1M9/E1M4 loads, secret history, inventory, death/respawn, and finale state; exits are fixtures, not map play.",
+      "RawReport": {
+        "Sha256": "E3601A5C0036FEA5C2EB1ABA1A0C9905283B791FF6B3849D11D92B330D0FAE75",
+        "Path": "local/episode1-current-candidate-20260928/episode1-current-20260928-transitions.json",
+        "Bytes": 14712
+      },
+      "Passed": 69
+    },
+    {
+      "Failed": 0,
+      "Name": "Boss progression",
+      "Meaning": "97 behavior fixtures including E1M8; not ordinary-input boss victories.",
+      "RawReport": {
+        "Sha256": "8A206942DAD6E9B7775446E0CABA288C3E344A2B9459BED79C3D62213951FD3E",
+        "Path": "local/episode1-current-candidate-20260928/episode1-current-20260928-bosses.json",
+        "Bytes": 13742
+      },
+      "Passed": 97
+    },
+    {
+      "Passed": 2,
+      "Meaning": "Real E1M2 imp hit and homing-angle action checks; player position is a fixture.",
+      "Failed": 0,
+      "Receipt": "results/saw-attack.json",
+      "Name": "Chainsaw action regression",
+      "ReceiptSha256": "54BD9B838551FFBC90701328CF264EEBD4BE59B1C7EF50486EDA6FFB88DCC2F9"
+    },
+    {
+      "Failed": 0,
+      "Name": "Menu input",
+      "Meaning": "Synthetic input-state checks; not desktop keyboard input.",
+      "RawReport": {
+        "Sha256": "464AD3AE2FB30BA1BF5F962A10599595B940BB107CC5C3AE41970488C1EBBC8C",
+        "Path": "local/episode1-current-candidate-20260928/episode1-current-20260928-menu-input.json",
+        "Bytes": 1384
+      },
+      "Passed": 10
+    },
+    {
+      "Failed": 0,
+      "Name": "Session screens",
+      "Meaning": "24 intermission/finale screen frame fixtures; not visible Terminal review.",
+      "RawReport": {
+        "Sha256": "96109BCBF7D2C395B5AD48887CF23830FFFE60FDDAE2F8B6429314B3375691AA",
+        "Path": "local/episode1-current-candidate-20260928/episode1-current-20260928-session-screens.json",
+        "Bytes": 4585
+      },
+      "Passed": 24
+    },
+    {
+      "EncodedStrips": 64.0,
+      "Meaning": "Actual 16-process screen/menu/automap transport and E1M1-to-E1M2 map reload.",
+      "ComparedPixels": 256000.0,
+      "Failed": 0,
+      "Name": "Session worker",
+      "ProcessesPreserved": true,
+      "RawReport": {
+        "Sha256": "998A6C32E88728CDCCE3A7C2F05D44DDC992FE8EC8B040CCAF022F6A56C8BE73",
+        "Path": "local/episode1-current-candidate-20260928/episode1-current-20260928-session-worker.json",
+        "Bytes": 1198
+      },
+      "Passed": 4
+    }
+  ],
+  "RendererPartitions": [
+    {
+      "Style": "Classic",
+      "Workers": 16,
+      "CharacterStripByteChecks": 0,
+      "PixelDifferences": 0.0,
+      "Views": 5,
+      "EncodedStripByteChecks": 80,
+      "ComparedPixels": 320000.0
+    },
+    {
+      "Style": "Matrix",
+      "Workers": 16,
+      "CharacterStripByteChecks": 80,
+      "PixelDifferences": 0.0,
+      "Views": 5,
+      "EncodedStripByteChecks": 80,
+      "ComparedPixels": 320000.0
+    },
+    {
+      "Style": "AnsiArt",
+      "Workers": 16,
+      "CharacterStripByteChecks": 80,
+      "PixelDifferences": 0.0,
+      "Views": 5,
+      "EncodedStripByteChecks": 80,
+      "ComparedPixels": 320000.0
+    }
+  ],
+  "LauncherPreflight": {
+    "Note": "Play.ps1 -Check confirms paths and launcher prerequisites only; the following actual host start was also run with the catalog.",
+    "PowerShell": "7.6.5",
+    "Ready": true,
+    "MusicCatalogSha256": "0E9C9542C75F4D5E2D7FC71E42FAFBB58F94321C3B8A49BA0C9AC5A93752EE58",
+    "EpisodeMaps": 36,
+    "WindowsTerminal": "C:\\Users\\jason\\AppData\\Local\\Microsoft\\WindowsApps\\wt.exe",
+    "MusicCatalog": "local/music-prepared-episode1.json"
+  },
+  "HeadlessAudioStartup": {
+    "RawReport": {
+      "Sha256": "F82BFA22462E4AB50040D2FEB1C37883BB77871948593A15B34940AE2EAA7489",
+      "Path": "local/episode1-current-candidate-20260928/episode1-current-20260928-audio-start.json",
+      "Bytes": 660308
+    },
+    "Command": "scripts/Invoke-Doom.ps1 -Workers 16 -Seconds 5 -Headless -Sound -MusicCatalog local/music-prepared-episode1.json -Episode 1 -Map 1 -Skill 3 -Style Classic",
+    "ExitReason": "Duration",
+    "HeadlessHostUpdatesPerSecond": 45.18,
+    "Meaning": "Actual bounded sound-and-music host start on PowerShell 7.6.5, ending normally at the requested duration. Headless updates are not Terminal writes or displayed frames; the short run does not establish packet starvation, full-session audio, acoustic quality, or pacing guarantees.",
+    "Seconds": 5.0017353,
+    "WorkerWorkingSetBytes": 4155396096,
+    "SimulationTics": 174,
+    "TicsPerSecond": 34.79,
+    "CompletedHostUpdates": 226,
+    "Error": null
+  },
+  "RawReports": [
+    {
+      "Sha256": "4376EBF3C64A95DE0D8028F97A70A610010F341298A2B4A12D70895C4060C538",
+      "Path": "local/episode1-current-candidate-20260928/episode1-current-20260928-ansiart-workers.json",
+      "Bytes": 3016
+    },
+    {
+      "Sha256": "F82BFA22462E4AB50040D2FEB1C37883BB77871948593A15B34940AE2EAA7489",
+      "Path": "local/episode1-current-candidate-20260928/episode1-current-20260928-audio-start.json",
+      "Bytes": 660308
+    },
+    {
+      "Sha256": "8A206942DAD6E9B7775446E0CABA288C3E344A2B9459BED79C3D62213951FD3E",
+      "Path": "local/episode1-current-candidate-20260928/episode1-current-20260928-bosses.json",
+      "Bytes": 13742
+    },
+    {
+      "Sha256": "9F59EB0BA5524C59AADCD6D9F1FF50EFBC1821C2C1795516D97CAA28D3697386",
+      "Path": "local/episode1-current-candidate-20260928/episode1-current-20260928-classic-workers.json",
+      "Bytes": 3012
+    },
+    {
+      "Sha256": "6CF619F83EEBB3940F4311ABBA61A980AABD0E77ADDA79680ECDE562E25B0799",
+      "Path": "local/episode1-current-candidate-20260928/episode1-current-20260928-map-smoke.json",
+      "Bytes": 67020
+    },
+    {
+      "Sha256": "0F0800CBCBE6221581AC040AE777044B5F14D3D04F15FDAB518DEDC4A5B892EE",
+      "Path": "local/episode1-current-candidate-20260928/episode1-current-20260928-matrix-workers.json",
+      "Bytes": 3015
+    },
+    {
+      "Sha256": "464AD3AE2FB30BA1BF5F962A10599595B940BB107CC5C3AE41970488C1EBBC8C",
+      "Path": "local/episode1-current-candidate-20260928/episode1-current-20260928-menu-input.json",
+      "Bytes": 1384
+    },
+    {
+      "Sha256": "96109BCBF7D2C395B5AD48887CF23830FFFE60FDDAE2F8B6429314B3375691AA",
+      "Path": "local/episode1-current-candidate-20260928/episode1-current-20260928-session-screens.json",
+      "Bytes": 4585
+    },
+    {
+      "Sha256": "998A6C32E88728CDCCE3A7C2F05D44DDC992FE8EC8B040CCAF022F6A56C8BE73",
+      "Path": "local/episode1-current-candidate-20260928/episode1-current-20260928-session-worker.json",
+      "Bytes": 1198
+    },
+    {
+      "Sha256": "E3601A5C0036FEA5C2EB1ABA1A0C9905283B791FF6B3849D11D92B330D0FAE75",
+      "Path": "local/episode1-current-candidate-20260928/episode1-current-20260928-transitions.json",
+      "Bytes": 14712
+    }
+  ],
+  "Limitations": [
+    "Jason has not yet completed the documented human Episode 1 route.",
+    "Transition, boss, map-smoke, and input checks are fixtures/regressions, not map-completion evidence.",
+    "Physical keyboard behavior on this candidate was not observed.",
+    "The audio smoke is bounded and headless; no full-episode continuity or audible review is claimed.",
+    "The one five-second headless throughput sample does not qualify 35-tic/60-display pacing.",
+    "The current renderer remains an approximation; independent original-executable visual parity is open."
+  ]
+}
