@@ -3122,3 +3122,13 @@ release-version README/changelog updates and publication-ready article
 illustrations are also outstanding.
 This is not waiting on Doom II, Final Doom, MyHouse, or the 35-tic/60-display
 performance target.
+
+## 2026-09-28 — Reconcile the Episode 1 handoff
+
+The handoff command names fresh `r5` recording/report paths. A consistency
+check found one stale sentence that still called them `r4`; it is now corrected.
+The runtime note separates the 7.6.5 gameplay qualification from the later
+7.6.6 clean-package audio startup check. The roadmap queue now uses the same
+tested `8fe7600` build pin as the handoff. The ignored local directory still
+contains only Jason's earlier `r2` E1M2 crash attempt and no `r5` outputs; no
+gameplay process is active. Therefore the complete human route remains pending.

@@ -31,13 +31,13 @@ pwsh -NoProfile -File .\Start-Doom.ps1 `
   -Report .\local\episode1-human-session-r5.json -Maximized -FontSize 5
 ```
 
-Use 64-bit PowerShell 7.4 or later and Windows Terminal. This exact source was checked with PowerShell 7.6.5. The required Steam IWAD is `DOOM.WAD`, SHA-256 `6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F`; the prepared local Episode 1 music catalog has SHA-256 `0E9C9542C75F4D5E2D7FC71E42FAFBB58F94321C3B8A49BA0C9AC5A93752EE58`. The IWAD and audio catalog are not included in Git. At preflight, `%LOCALAPPDATA%\pwshDoom\settings.json` was absent, so the game's defaults apply. The [preflight receipt](../results/episode1-launch-preflight-current-candidate-20260927.json) records the detected paths and hashes.
+Use 64-bit PowerShell 7.6.6 and Windows Terminal for this run; PowerShell 7.4 or later is the project minimum. The r7 gameplay qualification ran under 7.6.5, and the current sound-enabled clean-package startup was verified under 7.6.6. The required Steam IWAD is `DOOM.WAD`, SHA-256 `6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F`; the prepared local Episode 1 music catalog has SHA-256 `0E9C9542C75F4D5E2D7FC71E42FAFBB58F94321C3B8A49BA0C9AC5A93752EE58`. The IWAD and audio catalog are not included in Git. At preflight, `%LOCALAPPDATA%\pwshDoom\settings.json` was absent, so the game's defaults apply. The [preflight receipt](../results/episode1-launch-preflight-current-candidate-20260927.json) records the detected paths and hashes.
 
 The runtime-specific startup failures reported under PowerShell 7.6.6 are covered on this build. The music reader now tolerates equivalent LF/CRLF checkout formatting while still rejecting changed source text. A clean CRLF package starts the qualified Episode 1 music catalog under 7.6.6, reaches 69 tics in a two-second headless integration run, and closes the audio device. Its final submitted packet has one queue-starvation observation, so this does not verify full-session music continuity or listener quality ([package receipt](../results/preview3-current-candidate-validation-8fe7600-20260928.json)).
 
 On a cold start, allow up to 60 seconds for simulation and music workers to initialize. Keep the default 16 renderer workers. A prior measurement used about 4 GB combined worker memory. The Classic view needs at least 320 columns by 100 rows; the 5-point font and maximized window are set to help fit it. If the viewport is short, enlarge the window or press Ctrl+- to reduce the font. Blank space around the centered image in a larger terminal is expected.
 
-Both output paths must be unused before launch. They are new (`r4`) names. After preserving the two generated files under `local/`, return to the development branch with `git switch codex/feasibility-study`.
+Both output paths must be unused before launch. They are new (`r5`) names. After preserving the two generated files under `local/`, return to the development branch with `git switch codex/feasibility-study`.
 
 ## Controls
 
