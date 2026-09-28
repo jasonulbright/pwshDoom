@@ -3598,3 +3598,9 @@ rendering defect. The results are
 [`single-strip`](../results/render-partitions-fuzz-baseline-aeb6772-20260928.json)
 and
 [`16-worker`](../results/render-partitions-fuzz-workers16-20260928.json).
+The corrected path also passes Matrix/Katakana and AnsiArt/Katakana with seven
+workers: each matches 320,000 pixels over five views and 35 encoded strips.
+Their receipts are
+[`Matrix`](../results/render-partitions-fuzz-workers7-matrix-katakana-20260928.json)
+and
+[`AnsiArt`](../results/render-partitions-fuzz-workers7-ansiart-katakana-20260928.json).

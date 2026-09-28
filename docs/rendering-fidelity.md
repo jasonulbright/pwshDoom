@@ -880,3 +880,7 @@ five and 80 strips respectively. The renderer hash is
 receipts. This was a harness correction, not an engine fix or new vanilla
 parity claim: [one strip](../results/render-partitions-fuzz-baseline-aeb6772-20260928.json),
 [16 workers](../results/render-partitions-fuzz-workers16-20260928.json).
+Matrix/Katakana and AnsiArt/Katakana also pass with seven workers, each
+matching 320,000 pixels across five views and 35 encoded strips:
+[Matrix](../results/render-partitions-fuzz-workers7-matrix-katakana-20260928.json),
+[AnsiArt](../results/render-partitions-fuzz-workers7-ansiart-katakana-20260928.json).
