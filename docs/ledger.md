@@ -4093,5 +4093,9 @@ ignored `local/`: `audio-realtime-continuity-poc-r2-20260928.json`,
 `campaign-smoke-realtime-audio-code-20260928.json`. These software queue
 checks do not measure acoustics, actual device underrun, event-to-speaker
 latency, or sustained full-campaign behavior; they also do not make a slow
-simulation keep pace with 35 tics per second. The focused result and candidate
-receipts will retain the portable summaries.
+simulation keep pace with 35 tics per second. The focused result and [current
+Episode 1 candidate receipt](../results/episode1-current-human-candidate-20260928-r3.json)
+retain portable summaries and source hashes. The receipt is implementation
+commit `41e167f04ab298c4af4c3f5150b2861ad8e3417c`; it records a new 36-map
+smoke and the bounded realtime checks without claiming human route completion
+or acoustic/device-underrun qualification.

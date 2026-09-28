@@ -1,0 +1,133 @@
+{
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "AudioContinuity": {
+    "Track": "D_E1M1",
+    "RebufferCount": 0,
+    "SubmittedFrames": 12600,
+    "Realtime": true,
+    "Total": 8,
+    "Receipt": "results/audio-realtime-continuity-20260928.json",
+    "ReturnedFrames": 12600,
+    "QueueStarvationCount": 0,
+    "Packets": 1,
+    "ReceiptSha256": "05C36AE26685812338F9DE3F522093E6040455996888BCD6CF1F8FCFA71D0D8D",
+    "Passed": 8,
+    "GeneratedBlocks": 9
+  },
+  "Version": 1,
+  "SimulationHost": {
+    "ReturnedFrames": 176400,
+    "Episode": 3,
+    "Packets": 128,
+    "Realtime": true,
+    "CancelledFramesUpperBound": 5040,
+    "RawReportSha256": "C55DB66443338D6CCA8B6A459D6BC1EA06B7D1411DCA487D567770AA6AA66CBC",
+    "QueueStarvationCount": 0,
+    "GeneratedBlocks": 16,
+    "Error": null,
+    "RebufferCount": 0,
+    "Map": 6,
+    "SubmittedFrames": 181440,
+    "Seconds": 4.001993,
+    "RawReport": "local/audio-e3m6-realtime-host-20260928.json",
+    "Tics": 128
+  },
+  "RecordedUtc": "2026-09-28T21:51:41.5683117Z",
+  "CurrentSourceSmoke": {
+    "Failed": 0,
+    "RawReport": "local/campaign-smoke-realtime-audio-code-20260928.json",
+    "RequestedIdleTics": 35,
+    "Complete": true,
+    "Maps": 36,
+    "Passed": 36,
+    "RawReportSha256": "9BD7A478B62B8C3BF30DF5A16D010CB6B8D7C7C8B3CC4690674AE43B3AFDC7D5"
+  },
+  "PowerShell": "7.6.5",
+  "ImplementationCommit": "41e167f04ab298c4af4c3f5150b2861ad8e3417c",
+  "Sources": [
+    {
+      "Path": "src/AudioRunspace.ps1",
+      "Sha256": "A733772166D771AC09E0DE26E192E0C9173EDC9A2C3298E4912CA2C150FDFA7D"
+    },
+    {
+      "Path": "src/SimulationProcess.ps1",
+      "Sha256": "0B94B1C673877A0BD95BE2E64AB91833D06018E7CF829E425D32C4C89F0C9F8D"
+    },
+    {
+      "Path": "scripts/Invoke-SimulationWorker.ps1",
+      "Sha256": "F9EDD2CA190C423869EE31C7D626D68CDDA69FAC04A58A44DA31E64BC0B35E13"
+    },
+    {
+      "Path": "scripts/Invoke-Doom.ps1",
+      "Sha256": "FD45F8E3DFC2E758A78C54B39D9BC1954B17B0C4C036C224DF37B2D1E04186A2"
+    },
+    {
+      "Path": "scripts/Invoke-AudioWorker.ps1",
+      "Sha256": "96C1C2AFB05D6B26910BF1771E2EC1448BF7FBAB8860419DE2E04F710D51B734"
+    },
+    {
+      "Path": "scripts/Test-AudioRealtimeContinuity.ps1",
+      "Sha256": "517319A950159555716D97032600D49242050D6524C2A5E1B962F494546B2F1C"
+    },
+    {
+      "Path": "scripts/Test-SaveWorker.ps1",
+      "Sha256": "416F14C45D7883A8FE658684852E625C810D84C595D45185D054FD33D90C2112"
+    }
+  ],
+  "Meaning": "Portable summary of the current Episode 1 source candidate after adding interactive PowerShell output-clock audio. The map smoke is load/idle/render evidence only. Actual waveOut queue counters are not acoustic or physical-underrun measurements. No campaign completion or visible 35/60 pacing qualification is claimed.",
+  "PacketExactRegressions": [
+    {
+      "RawReportSha256": "F34758056A789883CF9284B9580ADBC0342F4FB31EF38D55C3760FFA47294FBC",
+      "Error": null,
+      "Total": 10,
+      "RawReport": "local/music-audio-worker-realtime-regression-20260928.json",
+      "Passed": 10
+    },
+    {
+      "RawReportSha256": "C65968BE81A7D6858D591402C8AD84D2493E24BC8E8EEF13C699DF44EFC67DB7",
+      "Error": null,
+      "Total": 7,
+      "RawReport": "local/audio-rebuffer-regression-realtime-20260928.json",
+      "Passed": 7
+    },
+    {
+      "RawReportSha256": "366B737143AC815252E999C66DB8377EBA86DBF47D248930E56FD1330D70C083",
+      "Error": null,
+      "Total": 9,
+      "RawReport": "local/audio-loading-boundary-regression-realtime-20260928.json",
+      "Passed": 9
+    },
+    {
+      "RawReportSha256": "00DFC38B5E1E307051537C5B205C88DCF6A3BC58D8C8D0F29F6A23606B9E4840",
+      "Error": null,
+      "Total": 6,
+      "RawReport": "local/audio-runspace-regression-realtime-20260928.json",
+      "Passed": 6
+    },
+    {
+      "RawReportSha256": "39C282653A201F2FEA0CA7CD168197F9EE19ABA56C01481747A60BCE8BE3C65D",
+      "Error": null,
+      "Total": 8,
+      "RawReport": "local/audio-backpressure-regression-realtime-20260928.json",
+      "Passed": 8
+    }
+  ],
+  "Branch": "codex/feasibility-study",
+  "RealtimeSession": {
+    "ReturnedFrames": 133560,
+    "Total": 15,
+    "Packets": 77,
+    "Passed": 15,
+    "Realtime": true,
+    "RawReportSha256": "BA43FE76FDF7990BDA42DBD96025F693979A2C514A7CAB46C03798F5470E25EC",
+    "QueueStarvationCount": 0,
+    "GeneratedBlocks": 29,
+    "Error": null,
+    "RebufferCount": 0,
+    "CancelledFramesUpperBound": 0,
+    "EpochResets": 3,
+    "SubmittedFrames": 133560,
+    "RawReport": "local/save-worker-realtime-music-20260928.json",
+    "Tics": 77
+  }
+}
