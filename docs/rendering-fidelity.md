@@ -867,6 +867,18 @@ an invalid harness control, not a product finding. Same-state repeat controls
 now pass at all analyzed samples. The through-wall report remains unreproduced
 at its exact view, and this audit does not justify changing clipping code.
 
+A follow-up sweep replays the same two camera states and isolates both
+documented `POL5` Gibs actors across sixteen headings per state (32 views, 64
+actor comparisons). It finds one candidate-only actor-mask pixel at input tic
+8400, heading 0 degrees. At screen `(223,97)`, the reference actor pixel and
+reference floor background are both palette index 8, so the sprite produces no
+visible reference change; the candidate floor is index 5 and the candidate
+sprite changes it to 8. The candidate pixel belongs to plane id 32, consistent
+with Doom's planes-before-sprites ordering, not a demonstrated wall leak. The
+exact view and independent original-executable comparison remain unknown. See
+the [sweep receipt](../results/episode1-pool-gibs-angle-sweep-20260928.json)
+and [pixel detail](../results/episode1-pool-gibs-angle0-detail-20260928.json).
+
 ### Fuzz partition fixture correction (2026-09-28)
 
 A five-view Classic fuzz comparison first reported a 13-pixel mismatch at

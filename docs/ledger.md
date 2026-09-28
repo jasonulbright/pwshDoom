@@ -3689,3 +3689,25 @@ parity and the full timed samples are in the
 [comparison receipt](../results/renderer-e3m6-fuzz-visible-order-pair-20260928.json).
 This was an isolated static renderer experiment, not a live-worker or game
 pacing result; no product performance claim follows.
+
+## 2026-09-28 — Sweep the E1M1 pool Gibs views
+
+To narrow Jason's report of pre-placed `POL5` Gibs showing through walls near
+the blue armor, replay the retained E1M1 human input to the two recorded camera
+states nearest the armor and pool Gibs (input tics 8400 and 8750). At each
+state, compare each of the two documented Gibs actors in isolation at sixteen
+headings, against the adopted `ThreeDRenderer`; this yields 32 camera views and
+64 isolated actor/view comparisons. The Steam IWAD, human input and current
+`FastRenderer.ps1` hashes are in the [portable sweep receipt](../results/episode1-pool-gibs-angle-sweep-20260928.json).
+
+There is one candidate-only actor-mask pixel across the sweep, for the Gibs
+actor at `(2112,-2688)`, input tic 8400, heading 0 degrees. A detail rerun found
+it at screen `(223,97)`. In the reference, both the actor and underlying floor
+pixel have palette index 8, so the reference actor mask does not change there;
+the candidate's floor index is 5 and changes to 8 when the actor is drawn.
+Candidate plane id 32 leaves plane depth at infinity, consistent with the
+book's planes-before-world-sprites pipeline. This is a one-pixel background
+and mask disagreement, not evidence of the actor showing through a wall. The
+exact view Jason saw remains unknown, this comparison uses the adopted
+renderer rather than the original executable, and broader visual parity is
+still open. Pixel/depth/clipping detail is in the [focused receipt](../results/episode1-pool-gibs-angle0-detail-20260928.json).

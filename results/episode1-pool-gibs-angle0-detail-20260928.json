@@ -1,0 +1,291 @@
+{
+  "Format": "pwshDoom.HumanPoolGibsAngleSweep",
+  "Version": 1,
+  "Error": null,
+  "PowerShell": "7.6.5",
+  "SourceCommit": "4a2ff83020fc915965f08bfe3ddcdab434537f93",
+  "InputReplaySha256": "F77C1228AD356AE205ED3060F0BAFC584CA9AFA0209F32E24294295D08846156",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "FastRendererSha256": "6E5B10FFE976179D04C4BA877739EEFC5892E1003403E3A9DED0E63D2817A8B4",
+  "ReferenceRendererSource": "src/ManagedDoom/Video/ThreeDRenderer.sb.ps1",
+  "InputTics": [
+    8400
+  ],
+  "ViewAnglesDegrees": [
+    0.0
+  ],
+  "ComparedViews": 1,
+  "ComparedActorViews": 2,
+  "Meaning": "At the two retained human camera positions near blue armor and the radioactive pool, individually isolates the two documented pre-placed POL5 Gibs actors in both renderers and sweeps sixteen headings. Candidate-only actor-mask pixels against the adopted renderer identify viewpoint-specific visibility disagreements; this is not independent original-executable validation.",
+  "Checks": [
+    {
+      "ActualActorFrameDifferencePixels": 4333,
+      "CandidateActorPixels": 26,
+      "SharedMaskPixels": 25,
+      "InputTic": 8400,
+      "ReferenceActorPixels": 25,
+      "GibsY": -2688.0,
+      "ReferenceOnlyMaskPixels": 0,
+      "MaskPixelDetails": [
+        {
+          "Y": 97,
+          "CandidateBackgroundDepth": "Infinity",
+          "X": 223,
+          "CandidateActorPixel": 8,
+          "CandidateSpriteForwardDepth": 543.9999389648438,
+          "ActorClipBottom": 167,
+          "ActorClipTop": 0,
+          "CandidateSceneDepth": 543.9000854492188,
+          "CandidateBackgroundPixel": 5,
+          "ReferenceActorPixel": 8,
+          "ReferenceBackgroundPixel": 8,
+          "CandidatePlaneId": 32
+        }
+      ],
+      "LevelTic": 8400,
+      "ViewAngleDegrees": 0.0,
+      "CandidateOnlyMaskPixels": 1,
+      "GibsX": 2112.0
+    },
+    {
+      "ActualActorFrameDifferencePixels": 4359,
+      "CandidateActorPixels": 0,
+      "SharedMaskPixels": 0,
+      "InputTic": 8400,
+      "ReferenceActorPixels": 25,
+      "GibsY": -4000.0,
+      "ReferenceOnlyMaskPixels": 25,
+      "MaskPixelDetails": [
+        {
+          "ReferenceActorPixel": 2,
+          "ReferenceOnly": true,
+          "X": 232,
+          "CandidateBackgroundPixel": 7,
+          "Y": 95,
+          "CandidateActorPixel": 7,
+          "ReferenceBackgroundPixel": 7
+        },
+        {
+          "ReferenceActorPixel": 2,
+          "ReferenceOnly": true,
+          "X": 233,
+          "CandidateBackgroundPixel": 7,
+          "Y": 95,
+          "CandidateActorPixel": 7,
+          "ReferenceBackgroundPixel": 7
+        },
+        {
+          "ReferenceActorPixel": 2,
+          "ReferenceOnly": true,
+          "X": 226,
+          "CandidateBackgroundPixel": 7,
+          "Y": 96,
+          "CandidateActorPixel": 7,
+          "ReferenceBackgroundPixel": 7
+        },
+        {
+          "ReferenceActorPixel": 8,
+          "ReferenceOnly": true,
+          "X": 227,
+          "CandidateBackgroundPixel": 7,
+          "Y": 96,
+          "CandidateActorPixel": 7,
+          "ReferenceBackgroundPixel": 7
+        },
+        {
+          "ReferenceActorPixel": 2,
+          "ReferenceOnly": true,
+          "X": 228,
+          "CandidateBackgroundPixel": 7,
+          "Y": 96,
+          "CandidateActorPixel": 7,
+          "ReferenceBackgroundPixel": 7
+        },
+        {
+          "ReferenceActorPixel": 8,
+          "ReferenceOnly": true,
+          "X": 229,
+          "CandidateBackgroundPixel": 6,
+          "Y": 96,
+          "CandidateActorPixel": 6,
+          "ReferenceBackgroundPixel": 6
+        },
+        {
+          "ReferenceActorPixel": 8,
+          "ReferenceOnly": true,
+          "X": 230,
+          "CandidateBackgroundPixel": 6,
+          "Y": 96,
+          "CandidateActorPixel": 6,
+          "ReferenceBackgroundPixel": 6
+        },
+        {
+          "ReferenceActorPixel": 2,
+          "ReferenceOnly": true,
+          "X": 231,
+          "CandidateBackgroundPixel": 7,
+          "Y": 96,
+          "CandidateActorPixel": 7,
+          "ReferenceBackgroundPixel": 7
+        },
+        {
+          "ReferenceActorPixel": 8,
+          "ReferenceOnly": true,
+          "X": 232,
+          "CandidateBackgroundPixel": 7,
+          "Y": 96,
+          "CandidateActorPixel": 7,
+          "ReferenceBackgroundPixel": 7
+        },
+        {
+          "ReferenceActorPixel": 2,
+          "ReferenceOnly": true,
+          "X": 233,
+          "CandidateBackgroundPixel": 8,
+          "Y": 96,
+          "CandidateActorPixel": 8,
+          "ReferenceBackgroundPixel": 8
+        },
+        {
+          "ReferenceActorPixel": 2,
+          "ReferenceOnly": true,
+          "X": 235,
+          "CandidateBackgroundPixel": 7,
+          "Y": 96,
+          "CandidateActorPixel": 7,
+          "ReferenceBackgroundPixel": 7
+        },
+        {
+          "ReferenceActorPixel": 2,
+          "ReferenceOnly": true,
+          "X": 224,
+          "CandidateBackgroundPixel": 7,
+          "Y": 97,
+          "CandidateActorPixel": 7,
+          "ReferenceBackgroundPixel": 7
+        },
+        {
+          "ReferenceActorPixel": 2,
+          "ReferenceOnly": true,
+          "X": 225,
+          "CandidateBackgroundPixel": 6,
+          "Y": 97,
+          "CandidateActorPixel": 6,
+          "ReferenceBackgroundPixel": 6
+        },
+        {
+          "ReferenceActorPixel": 2,
+          "ReferenceOnly": true,
+          "X": 226,
+          "CandidateBackgroundPixel": 7,
+          "Y": 97,
+          "CandidateActorPixel": 7,
+          "ReferenceBackgroundPixel": 7
+        },
+        {
+          "ReferenceActorPixel": 2,
+          "ReferenceOnly": true,
+          "X": 227,
+          "CandidateBackgroundPixel": 7,
+          "Y": 97,
+          "CandidateActorPixel": 7,
+          "ReferenceBackgroundPixel": 7
+        },
+        {
+          "ReferenceActorPixel": 2,
+          "ReferenceOnly": true,
+          "X": 228,
+          "CandidateBackgroundPixel": 8,
+          "Y": 97,
+          "CandidateActorPixel": 8,
+          "ReferenceBackgroundPixel": 8
+        },
+        {
+          "ReferenceActorPixel": 2,
+          "ReferenceOnly": true,
+          "X": 229,
+          "CandidateBackgroundPixel": 7,
+          "Y": 97,
+          "CandidateActorPixel": 7,
+          "ReferenceBackgroundPixel": 7
+        },
+        {
+          "ReferenceActorPixel": 2,
+          "ReferenceOnly": true,
+          "X": 230,
+          "CandidateBackgroundPixel": 7,
+          "Y": 97,
+          "CandidateActorPixel": 7,
+          "ReferenceBackgroundPixel": 7
+        },
+        {
+          "ReferenceActorPixel": 2,
+          "ReferenceOnly": true,
+          "X": 231,
+          "CandidateBackgroundPixel": 8,
+          "Y": 97,
+          "CandidateActorPixel": 8,
+          "ReferenceBackgroundPixel": 8
+        },
+        {
+          "ReferenceActorPixel": 2,
+          "ReferenceOnly": true,
+          "X": 232,
+          "CandidateBackgroundPixel": 8,
+          "Y": 97,
+          "CandidateActorPixel": 8,
+          "ReferenceBackgroundPixel": 8
+        },
+        {
+          "ReferenceActorPixel": 2,
+          "ReferenceOnly": true,
+          "X": 233,
+          "CandidateBackgroundPixel": 8,
+          "Y": 97,
+          "CandidateActorPixel": 8,
+          "ReferenceBackgroundPixel": 8
+        },
+        {
+          "ReferenceActorPixel": 2,
+          "ReferenceOnly": true,
+          "X": 234,
+          "CandidateBackgroundPixel": 7,
+          "Y": 97,
+          "CandidateActorPixel": 7,
+          "ReferenceBackgroundPixel": 7
+        },
+        {
+          "ReferenceActorPixel": 2,
+          "ReferenceOnly": true,
+          "X": 235,
+          "CandidateBackgroundPixel": 8,
+          "Y": 97,
+          "CandidateActorPixel": 8,
+          "ReferenceBackgroundPixel": 8
+        },
+        {
+          "ReferenceActorPixel": 2,
+          "ReferenceOnly": true,
+          "X": 236,
+          "CandidateBackgroundPixel": 8,
+          "Y": 97,
+          "CandidateActorPixel": 8,
+          "ReferenceBackgroundPixel": 8
+        },
+        {
+          "ReferenceActorPixel": 2,
+          "ReferenceOnly": true,
+          "X": 237,
+          "CandidateBackgroundPixel": 8,
+          "Y": 97,
+          "CandidateActorPixel": 8,
+          "ReferenceBackgroundPixel": 8
+        }
+      ],
+      "LevelTic": 8400,
+      "ViewAngleDegrees": 0.0,
+      "CandidateOnlyMaskPixels": 0,
+      "GibsX": 2272.0
+    }
+  ]
+}
