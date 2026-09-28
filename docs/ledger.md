@@ -3473,3 +3473,19 @@ replacement, replay-archive restoration, music epoch resets, D_E1M1 selection,
 and clean audio-device shutdown. This is focused session evidence, not a
 physical menu/playback review or campaign completion. The [portable receipt](../results/episode1-save-worker-reader-optimized-20260928.json)
 pins the harness, catalog and run result.
+
+## 2026-09-28 — Add evidence figures to the working article
+
+Refresh `docs/article-draft.md` with the two-minute full-catalog host result,
+the current save/load audio-worker receipt, and the qualified state of the
+30-entry Ultimate Doom music catalog. Correct the current-source actor-mask
+description: tic 35 has four candidate-only edge pixels; tics 70 through 280
+have none, and the captured sequence does not reproduce the Gibs-through-wall
+view. Add two original, WAD-free SVG figures: one explains the cell and pixel
+tradeoffs of Classic, Matrix and AnsiArt; the other distinguishes simulation,
+host-update, Terminal and display measurements while showing the measured
+runs. Both SVGs parse as XML and render through ImageMagick for visual review.
+The figures are diagrams based on documented architecture and measurements,
+not captured gameplay frames. The [article draft](article-draft.md) remains a
+working paper; the human route, editorial review, and final publication package
+remain open.

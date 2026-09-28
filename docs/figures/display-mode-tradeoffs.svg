@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="570" viewBox="0 0 1280 570" role="img" aria-labelledby="title desc">
+  <title id="title">Three terminal encodings of one 320 by 200 Doom frame</title>
+  <desc id="desc">An abstract sampled image is encoded as Classic truecolor half-block cells, a smaller green Japanese-glyph Matrix view, or a smaller colored character-art view. Classic preserves the most image samples; the character styles trade spatial detail for fewer terminal cells and stylized glyphs.</desc>
+  <defs>
+    <style>
+      .ink{fill:#17212b;font-family:'Segoe UI',Arial,sans-serif}
+      .muted{fill:#52616d;font-family:'Segoe UI',Arial,sans-serif}
+      .panel{fill:#f4f7f9;stroke:#cbd5dc;stroke-width:2}
+      .jp{font-family:'Yu Gothic','Meiryo','Noto Sans CJK JP',sans-serif;font-weight:700}
+    </style>
+  </defs>
+  <rect width="1280" height="570" fill="#fff"/>
+  <text class="ink" x="48" y="52" font-size="30" font-weight="700">One software-rendered scene, three terminal encodings</text>
+  <text class="muted" x="48" y="82" font-size="17">The game builds one 320 × 200 indexed-color image in PowerShell; each style converts it to terminal cells differently.</text>
+
+  <rect class="panel" x="48" y="112" width="350" height="400" rx="16"/>
+  <text class="ink" x="72" y="153" font-size="22" font-weight="700">Classic</text>
+  <text class="muted" x="72" y="181" font-size="15">Truecolor half-block pixels</text>
+  <rect x="72" y="205" width="302" height="166" rx="7" fill="#101317"/>
+  <g stroke="#151a1f" stroke-width="1">
+    <rect x="82" y="217" width="35" height="32" fill="#13263a"/><rect x="118" y="217" width="35" height="32" fill="#26354b"/><rect x="154" y="217" width="35" height="32" fill="#4d493d"/><rect x="190" y="217" width="35" height="32" fill="#5d4d39"/><rect x="226" y="217" width="35" height="32" fill="#403b32"/><rect x="262" y="217" width="35" height="32" fill="#1a2836"/><rect x="298" y="217" width="35" height="32" fill="#152030"/><rect x="334" y="217" width="30" height="32" fill="#111923"/>
+    <rect x="82" y="250" width="35" height="32" fill="#263b50"/><rect x="118" y="250" width="35" height="32" fill="#776446"/><rect x="154" y="250" width="35" height="32" fill="#9c7548"/><rect x="190" y="250" width="35" height="32" fill="#d19a59"/><rect x="226" y="250" width="35" height="32" fill="#98724c"/><rect x="262" y="250" width="35" height="32" fill="#39424b"/><rect x="298" y="250" width="35" height="32" fill="#24303c"/><rect x="334" y="250" width="30" height="32" fill="#1a2430"/>
+    <rect x="82" y="283" width="35" height="32" fill="#1d3041"/><rect x="118" y="283" width="35" height="32" fill="#55604c"/><rect x="154" y="283" width="35" height="32" fill="#8c7952"/><rect x="190" y="283" width="35" height="32" fill="#b78b56"/><rect x="226" y="283" width="35" height="32" fill="#615846"/><rect x="262" y="283" width="35" height="32" fill="#34404a"/><rect x="298" y="283" width="35" height="32" fill="#2b3540"/><rect x="334" y="283" width="30" height="32" fill="#19222d"/>
+    <rect x="82" y="316" width="35" height="32" fill="#171f29"/><rect x="118" y="316" width="35" height="32" fill="#272e35"/><rect x="154" y="316" width="35" height="32" fill="#44413a"/><rect x="190" y="316" width="35" height="32" fill="#69604d"/><rect x="226" y="316" width="35" height="32" fill="#4a443a"/><rect x="262" y="316" width="35" height="32" fill="#252d36"/><rect x="298" y="316" width="35" height="32" fill="#1a222c"/><rect x="334" y="316" width="30" height="32" fill="#121a22"/>
+  </g>
+  <text class="ink" x="72" y="410" font-size="16" font-weight="700">320 × 100 terminal cells</text>
+  <text class="muted" x="72" y="438" font-size="15">Each character cell carries two vertical pixels.</text>
+  <text class="muted" x="72" y="464" font-size="15">Most samples retained; highest output volume.</text>
+
+  <rect class="panel" x="465" y="112" width="350" height="400" rx="16"/>
+  <text class="ink" x="489" y="153" font-size="22" font-weight="700">Matrix</text>
+  <text class="muted" x="489" y="181" font-size="15">Green Japanese glyph field</text>
+  <rect x="489" y="205" width="302" height="166" rx="7" fill="#07110d"/>
+  <g class="jp" text-anchor="middle" font-size="29">
+    <text x="513" y="247" fill="#1e7b54">カ</text><text x="550" y="247" fill="#35c47a">タ</text><text x="587" y="247" fill="#176c49">ソ</text><text x="624" y="247" fill="#64e99a">メ</text><text x="661" y="247" fill="#329765">キ</text><text x="698" y="247" fill="#145c3b">ノ</text><text x="735" y="247" fill="#2ca66b">ツ</text><text x="772" y="247" fill="#0f4c33">リ</text>
+    <text x="513" y="287" fill="#14583a">リ</text><text x="550" y="287" fill="#2eab6c">メ</text><text x="587" y="287" fill="#7affad">カ</text><text x="624" y="287" fill="#d0ffe0">タ</text><text x="661" y="287" fill="#55d98a">ナ</text><text x="698" y="287" fill="#23945c">シ</text><text x="735" y="287" fill="#176c49">ク</text><text x="772" y="287" fill="#0d432d">ツ</text>
+    <text x="513" y="327" fill="#0f4b32">キ</text><text x="550" y="327" fill="#1e7b54">ノ</text><text x="587" y="327" fill="#319e65">サ</text><text x="624" y="327" fill="#56d78b">カ</text><text x="661" y="327" fill="#2fa56a">モ</text><text x="698" y="327" fill="#176c49">タ</text><text x="735" y="327" fill="#105438">ナ</text><text x="772" y="327" fill="#0a3928">ン</text>
+  </g>
+  <text class="ink" x="489" y="410" font-size="16" font-weight="700">160 × 50 terminal cells</text>
+  <text class="muted" x="489" y="438" font-size="15">Brightness selects green tones and glyphs.</text>
+  <text class="muted" x="489" y="464" font-size="15">Fewer cells; a deliberate Matrix aesthetic.</text>
+
+  <rect class="panel" x="882" y="112" width="350" height="400" rx="16"/>
+  <text class="ink" x="906" y="153" font-size="22" font-weight="700">AnsiArt</text>
+  <text class="muted" x="906" y="181" font-size="15">Color and brightness glyph art</text>
+  <rect x="906" y="205" width="302" height="166" rx="7" fill="#101317"/>
+  <g class="jp" text-anchor="middle" font-size="29">
+    <text x="930" y="247" fill="#315b8d">カ</text><text x="967" y="247" fill="#5c748b">·</text><text x="1004" y="247" fill="#9d7950">タ</text><text x="1041" y="247" fill="#d39b56">メ</text><text x="1078" y="247" fill="#99714a">キ</text><text x="1115" y="247" fill="#56636d">・</text><text x="1152" y="247" fill="#33516e">ナ</text><text x="1189" y="247" fill="#273c52">.</text>
+    <text x="930" y="287" fill="#3b7190">リ</text><text x="967" y="287" fill="#809457">ナ</text><text x="1004" y="287" fill="#c39155">カ</text><text x="1041" y="287" fill="#e2ad69">メ</text><text x="1078" y="287" fill="#af8451">ノ</text><text x="1115" y="287" fill="#68765d">タ</text><text x="1152" y="287" fill="#476a75">ツ</text><text x="1189" y="287" fill="#314557">·</text>
+    <text x="930" y="327" fill="#283d4e">.</text><text x="967" y="327" fill="#505c54">・</text><text x="1004" y="327" fill="#807354">キ</text><text x="1041" y="327" fill="#bd8e55">カ</text><text x="1078" y="327" fill="#8e704c">メ</text><text x="1115" y="327" fill="#59604e">サ</text><text x="1152" y="327" fill="#3a5260">タ</text><text x="1189" y="327" fill="#233545">.</text>
+  </g>
+  <text class="ink" x="906" y="410" font-size="16" font-weight="700">160 × 50 terminal cells</text>
+  <text class="muted" x="906" y="438" font-size="15">Color, edge and brightness choose glyphs.</text>
+  <text class="muted" x="906" y="464" font-size="15">Fewer cells; richer color, less detail.</text>
+
+  <text class="muted" x="48" y="548" font-size="15">Illustrative encoding diagram, not a captured Doom frame. All three modes start from the same PowerShell-rendered scene.</text>
+</svg>

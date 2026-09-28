@@ -31,19 +31,13 @@ The gameplay foundation is an attributed GPL PowerShell translation of ManagedDo
 
 The three styles trade pixel detail for different looks. Classic uses one terminal cell for two vertically stacked pixels, so its 320×200 image occupies 320 columns by 100 rows. Matrix and AnsiArt reduce that same scene to a 160×50 character field: Matrix maps brightness to green tones, Japanese glyphs and moving highlights; AnsiArt uses color and edge/brightness choices. These modes are intentionally lossy. The project keeps Classic as the visual-fidelity reference.
 
+![A conceptual comparison of the pixel-preserving Classic encoding and the two lower-resolution character styles.](figures/display-mode-tradeoffs.svg)
+
 ## Several clocks, not one FPS
 
 The game advances at 35 tics per second. Rendering workers produce images; the host writes ANSI data; Windows Terminal processes those writes; Windows may then present images to the display. A counter at one stage does not establish the rate at a later stage. In particular, a completed console write is not proof that a distinct frame reached the monitor.
 
-```mermaid
-flowchart LR
-    tic["35 Hz game tic"] --> frame["completed software frame"]
-    frame --> write["ANSI bytes written"]
-    write --> terminal["Terminal update processed"]
-    terminal --> present["Windows display presentation"]
-    write -. "queues and scheduling can add delay" .-> terminal
-    terminal -. "presentation may repeat, merge or miss updates" .-> present
-```
+![The measured rates come from separate points in the simulation-to-display path, and the runs below used different workloads.](figures/pacing-boundaries.svg)
 
 The strongest available readings are still workload-specific:
 
@@ -51,6 +45,7 @@ The strongest available readings are still workload-specific:
 | --- | --- | --- |
 | 28-second Classic E1M1 host run, with sound effects and music | 34.959 simulation tics/sec; 59.670 completed Terminal updates/sec | The updates were not measured as distinct monitor presentations. One queue-starvation observation occurred after the final music packet; no listener review was made. See [`performance.md`](performance.md#current-source-e1m1-run--september-26-2026). |
 | Maximized Classic E1M1 PresentMon sample, no audio | 34.977 active tics/sec; 47.73 display transitions/sec | It was one unpaired replay, ended on E1M1 rather than a completed route, and included a 7.119-second same-map asset reload. It does not certify the target. See [the current pacing record](performance.md). |
+| 120-second headless E1M1 host run, with full-catalog music | 34.991 simulation tics/sec; 48.258 completed host updates/sec; all 5,290,740 audio frames returned after crossing the 96-second music loop boundary | Headless host updates are not Terminal or monitor measurements. One mixer block exceeded the packet interval; no active-run queue starvation or audible review was observed. See [`performance.md`](performance.md#two-minute-audio-loaded-headless-e1m1-run--september-28-2026). |
 | Fixed 1,200-command E1M3 headless prefix | 30.829 tics/sec; 53.925 completed images/sec; all submitted audio frames returned | Headless image completion is not a display measurement or human playthrough. See [automap performance](automap-discovery-performance.md). |
 
 Those observations put the machine near Doom's simulation rate in lighter tests, but the combined 35-tic/60-display target remains unverified. They are not a controlled comparison against another engine.
@@ -71,13 +66,13 @@ Menus, pause, six save slots, load/overwrite confirmations, automap and intermis
 
 The renderer is a substantial PowerShell implementation, not yet an original-executable pixel match. It now follows Doom-style fixed-point plane mapping, integer wall sampling, sprite/weapon patch projection, sector lighting, palette changes and the major HUD layout. One reproduced wall-silhouette leak was clipped; the focused test suppresses the candidate-only BON1 actor pixels at its failing view. A more recent E1M1 screenshot of lower-level Techpillar columns crossing an upper floor was traced to Doom's plane/sprite draw order. Sanglard's discussion of visplanes and masked sprites (pp. 197, 208, 214, 240 and 242) describes the relevant ordering and wall-silhouette clipping; the [reference audit](reference-audit.md) cross-checks that model against the ported renderer. A historical 17-pixel actor-mask difference at E1M1 tic 105 no longer reproduces in the current-source eight-state regression comparison. The separate report of the pre-placed Gibs pile near blue armor has not reproduced at the exact camera angle, so it remains a watch item rather than a claimed fix.
 
-The adopted PowerShell reference was itself corrected after source inspection found object-equality behavior that skipped Doom's wall-orientation lighting. Comparisons against that reference have improved specific HUD, lighting and projection cases, but broad scene differences remain. No independent original Doom executable has been used for a full visual comparison. See the [rendering record](rendering-fidelity.md) for the individual controls and limitations.
+The adopted PowerShell reference was itself corrected after source inspection found object-equality behavior that skipped Doom's wall-orientation lighting. Comparisons against that reference have improved specific HUD, lighting and projection cases, but broad scene differences remain. The latest eight-state E1M1 actor comparison reports four candidate-only mask-edge pixels at tic 35 and none from tics 70 through 280; that replay does not reproduce the reported Gibs-through-wall view. No independent original Doom executable has been used for a full visual comparison. See the [rendering record](rendering-fidelity.md) for the individual controls and limitations.
 
 ## Sound is part of the test
 
-Sound effects are decoded and mixed in PowerShell; Windows APIs handle playback. Music is also synthesized and mixed in PowerShell from the user's IWAD and soundfont. The 11 scores needed for the Episode 1 route have local loop qualifications and a clean short save/load/new-game audio-worker test. Neither WADs nor soundfonts are included in the source package.
+Sound effects are decoded and mixed in PowerShell; Windows APIs handle playback. Music is also synthesized and mixed in PowerShell from the user's IWAD and soundfont. Eleven Episode 1 tracks have local loop qualifications. The full 30-entry Ultimate Doom catalog covers the 27 map-track names, intermission, the Episode 1 finale, and the E3 Bunny finale; actual map-selection callbacks and finale transitions pass 126 checks. On September 28, a 120-second headless E1M1 session crossed its music-loop boundary and returned all 5.29 million audio frames. The current reader also passes [15 save/load/new-game audio-worker checks](../results/episode1-save-worker-reader-optimized-20260928.json). Neither WADs nor soundfonts are included in the source package.
 
-The music work proves useful but bounded facts. A loop can be checked through repeated PCM output or a complete normalized synthesizer-state recurrence. A short audio-device launch verifies selection and shutdown, not that an entire episode plays without a dropout or sounds good to a listener. All nine Episode 2 map-track names are qualified. All Episode 3 map tracks D_E3M1–D_E3M9 now have qualifications, including two exact payload aliases; two finite title/finale scores remain open. Episode 4 reuses earlier episode tracks. Full-campaign audio continuity, sustained queue timing and listening review are still required. Details are in the [music qualification notes](music-preparation.md).
+The music work proves useful but bounded facts. A loop can be checked through repeated PCM output or a complete normalized synthesizer-state recurrence. Short audio-device checks verify selection and shutdown, not that an entire episode plays without a dropout or sounds good to a listener. All nine Episode 2 and all nine Episode 3 map-track names are qualified; D_BUNNY also has a complete-state loop proof, and finite D_INTRO and D_INTROA scores have reader qualifications. Episode 4 reuses earlier episode tracks. A two-minute single-map run crosses one loop seam, but full-campaign audio continuity, sustained loaded-device timing and listening review remain open. Details are in the [music qualification notes](music-preparation.md).
 
 ## Existing alternatives
 
