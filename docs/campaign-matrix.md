@@ -263,3 +263,13 @@ At the time of the E1M4/E1M3 host qualifications, dry loops were available for E
 September 19 discovery optimization: all 36 map starts at four headings preserve fresh mapped-line bitsets and pixels/counters/other flags. The full E1M3 route preserves 7,002 fresh discovery states and all 24 gameplay checkpoints. This adds discovery coverage, not completion of additional maps. Loaded prefix pacing improves to 30.829 tics/sec; sustained 35/60 and E1M4 terminal-host qualification remain open. E1M4 subsequently passes independent headless completion as recorded above. See [discovery performance](automap-discovery-performance.md).
 
 Boss-trigger coverage (2026-09-19): [97 checks](boss-progression.md) verify E1M8, E2M8, E3M8, E4M6 and E4M8 selection guards, final death-state action dispatch and tagged mover completion. These explicit-state fixtures do not change the input-only completion entries above.
+
+Current-source probes ran the existing HMP E1M1–E1M4 waypoint plans once with
+the present route drivers. E1M1 and E1M2 reached intermission; the E1M2
+independent replay matched 86 samples over 3,198 commands and entered E1M3.
+The current M3 and M4 route attempts ended in player death at waypoints 144 and
+172. Those plans match earlier successful route receipts, but the current M3
+and M4 driver hashes differ from the earlier runs. This does not establish an
+engine regression, and the drivers were not tuned. See the
+[current-source route report](../results/episode1-route-regressions-current-20260928.json);
+Jason's complete human playthrough remains pending.

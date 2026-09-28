@@ -1,0 +1,86 @@
+{
+  "GameSourceCommit": "32400a85a256c6063960297fefeeb3f961a9349e",
+  "Routes": [
+    {
+      "Map": "E1M1",
+      "RunnerSha256": "61E8AC98AC634E1760FE27C8EE7E6F4980F9AC7A373EA8697DD6096C874B67BF",
+      "Meaning": "Existing HMP ordinary-command driver reached intermission.",
+      "Commands": 1560,
+      "TraceSamples": 46,
+      "Runner": "scripts/Test-E1M1Route.ps1",
+      "Outcome": "Pass",
+      "Report": {
+        "Sha256": "E297BDA3D4044D762108B9936DED655EC895F46208D03BFF164D7E8C7164D259",
+        "Path": "local/current-source-e1m1-route-regression-20260928.json"
+      }
+    },
+    {
+      "Outcome": "Pass",
+      "FinalHealth": 67,
+      "DriverSha256": "DE52526712748DCF94C870B1AD2EFD03992B7CB862BA159ECBD5D2949EA89572",
+      "Plan": "routes/e1m2-normal.json",
+      "IndependentReplay": {
+        "TraceChecks": 86,
+        "Commands": 3198,
+        "Checkpoints": 13,
+        "Report": {
+          "Sha256": "37F01D7EA98DCD8985258B053E348E12B667A6D020334428AF8A2E66E683F991",
+          "Path": "local/current-source-e1m2-route-regression-replay-20260928.json"
+        },
+        "SourceFingerprint": "C77E45BECED32C27B3CE00080B8D2D92C96F95199E0FDA2B6C45A54D86C6888F",
+        "NextMap": 3,
+        "Passed": true
+      },
+      "Meaning": "Existing HMP ordinary-command driver reached intermission.",
+      "Map": "E1M2",
+      "PlanSha256": "E4E88B05EBB0C679F0B9F0995BCEB405A58A795019C462448122D0CFA83540F2",
+      "Commands": 3011,
+      "TraceSamples": 86,
+      "Report": {
+        "Sha256": "3EFD9CD496401E28144117EEB247A79CA0233451F865F163F5A33AC37FA64782",
+        "Path": "local/current-source-e1m2-route-regression-20260928.json"
+      },
+      "PriorSuccessfulDriverSha256": "44ED75422C75FDC6F55E9D78F109C17580F211B79A1F7C7AEBAF33674E09BF17",
+      "WaypointPlanMatchesPriorSuccess": true
+    },
+    {
+      "Outcome": "PlayerDeath",
+      "Error": "Player died at waypoint 144 (191.788330078125,-1630.04985046387).\nat <ScriptBlock>, C:\\projects\\pwshDoom\\scripts\\Test-CampaignRoute.ps1: line 104",
+      "DriverSha256": "DE52526712748DCF94C870B1AD2EFD03992B7CB862BA159ECBD5D2949EA89572",
+      "Plan": "routes/e1m3-normal.json",
+      "Meaning": "The unchanged existing driver ended in player death. No engine exception or reproducible game defect was identified; do not treat route death alone as an engine failure.",
+      "Map": "E1M3",
+      "PlanSha256": "D2A5AEB22EB408BF6A3469D5F143D1346511E8F2F25CB8B46A8F45D35F35150F",
+      "Commands": 6699,
+      "TraceSamples": 191,
+      "Report": {
+        "Sha256": "0B002F9FDDA27D6DABC72ECB4CC9AC6511D8C96E420FF941AECC852A91C56E30",
+        "Path": "local/current-source-e1m3-route-regression-20260928.json"
+      },
+      "PriorSuccessfulDriverSha256": "FC1F6909BC821B62936E618B303F6535A546A0901C958B3FCAFBCD14B54D2B69",
+      "WaypointPlanMatchesPriorSuccess": true
+    },
+    {
+      "Outcome": "PlayerDeath",
+      "Error": "Player died at waypoint 172 (-1054.56390380859,732.740844726562).\nat <ScriptBlock>, C:\\projects\\pwshDoom\\scripts\\Test-CampaignRoute.ps1: line 104",
+      "DriverSha256": "DE52526712748DCF94C870B1AD2EFD03992B7CB862BA159ECBD5D2949EA89572",
+      "Plan": "routes/e1m4-normal.json",
+      "Meaning": "The unchanged existing driver ended in player death. No engine exception or reproducible game defect was identified; do not treat route death alone as an engine failure.",
+      "Map": "E1M4",
+      "PlanSha256": "6D1C4F1413548998C8F5842C99877AC450A3A8FD5221BC3B976323C917E8E1D7",
+      "Commands": 4845,
+      "TraceSamples": 138,
+      "Report": {
+        "Sha256": "313311623413367A8F34955027BC369377AAA8CAA33387435BF232BE60785CA8",
+        "Path": "local/current-source-e1m4-route-regression-20260928.json"
+      },
+      "PriorSuccessfulDriverSha256": "A27836069435DCE6FEB7F51F87EC6F802067437B9CA9F6F00A6D8D95DD56E3CE",
+      "WaypointPlanMatchesPriorSuccess": true
+    }
+  ],
+  "Version": 1,
+  "Format": "pwshDoom.Episode1RouteRegressionSet",
+  "Meaning": "One current-source run of the existing E1M1-E1M4 ordinary-command HMP route plans. E1M1 and E1M2 completed; E1M2 independently replayed into E1M3. E1M3 and E1M4 ended in player death without an engine exception. The M3/M4 waypoint plans match earlier successful receipts, but their current route-driver hash differs from those earlier runs. A death on these automated drivers is not evidence of an engine defect. No waypoints or driver strategies were tuned; this is not the requested human Episode 1 playthrough.",
+  "RecordedUtc": "2026-09-28T20:02:23.6766865Z",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F"
+}

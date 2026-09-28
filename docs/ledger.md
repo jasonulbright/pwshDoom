@@ -3998,3 +3998,17 @@ these fixtures or smoke tests.
 ## 2026-09-28 — Reject wall texture-step precomputation
 
 A per-column wall texture scale produced exact serial/worker pixels across the tested E1M1 and E3M6 views, but paired timing was inconclusive: E1M1 regressed in 15/20 matched samples, and E3M6 had no median paired advantage. The source change was reverted. Timings, hashes, and the rejected patch are documented in [performance measurements](performance.md#rejected-wall-texture-step-precomputation--september-28-2026) and retained under ignored `local/renderer-vstep-incremental-ab-e3m6-20260928/`.
+
+## 2026-09-28 — Run the existing Episode 1 route regressions
+
+Against game-source commit 32400a85a256c6063960297fefeeb3f961a9349e and
+the installed Ultimate Doom IWAD, the current E1M1 and E1M2 HMP route runs
+reached intermission. The independent E1M2 replay matched 86 route samples and
+entered E1M3. The current E1M3 and E1M4 route runs ended in player death at
+waypoints 144 and 172. Their plans match the earlier successful receipts, but
+the current route-driver hashes differ, and neither death exposed a reproducible
+gameplay invariant failure. No route tuning or defect claim follows. Full inputs and
+traces are retained in ignored local/; the
+[portable regression receipt](../results/episode1-route-regressions-current-20260928.json)
+records their hashes and limits. This does not substitute for the complete
+human Episode 1 playthrough.
