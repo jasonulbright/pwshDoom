@@ -262,7 +262,7 @@ The first two harnesses refuse an existing output file. Their default IWAD is th
 | Compiled native/C# terminal Doom | Important practical control outside the language constraint | Show efficiency/fidelity/install tradeoffs openly; never label shell launching as a PowerShell engine |
 | Audio implementation routes | PowerShell effects mixer and integrated waveOut playback; MUS/SF2 readers verified offline | Qualify PowerShell synthesis against a reference, bank provenance and polyphony cost; integrate score/session controls and measure audiovisual latency |
 
-The [existing-offerings survey](existing-implementations.md) and earlier [experiment protocol](experiment-protocol.md) remain evidence, with their original dates and workload limitations. Refresh primary sources before a release comparison. No new competitor ranking has been established by this plan.
+The [existing-offerings survey](existing-implementations.md) and earlier [experiment protocol](experiment-protocol.md) remain evidence, with their original workload limitations. Primary README/source claims were refreshed on 2026-09-28; equivalent builds and workloads have not been benchmarked, so no new competitor ranking has been established.
 
 ## Visual-style exploration
 

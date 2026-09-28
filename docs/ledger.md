@@ -3065,3 +3065,24 @@ and partial attempt files remain under
 and run-report paths according to [music preparation](music-preparation.md).
 This does not change the already qualified Episode 1 soundtrack or Preview.3
 candidate status.
+
+## 2026-09-28 — Refresh terminal-Doom alternatives and article structure
+
+Rechecked the current primary repositories for ManagedDoomPowershell,
+nick0451/doom-powershell, spidychoipro/terminal-doom-pwsh,
+cryptocode/terminal-doom, and dcouple/terminal-doom. The survey now separates
+PowerShell engine code from PowerShell launch scripts and distinguishes
+Windows Terminal/ANSI output from Kitty-protocol and browser/WASM approaches.
+The newer compiled alternatives strengthen the case that Doom-in-a-terminal
+already exists; neither a universal-first nor overall-performance claim is
+supported. No alternative was built or measured against pwshDoom.
+
+Reorganized the article draft around the actual PowerShell/Terminal/audio
+boundary, rendering styles, separate pacing clocks, campaign evidence,
+remaining audio/fidelity gaps, and alternatives. It now includes two Mermaid
+diagrams and a workload-labeled measurement table. Existing source records
+support the reported numbers; links in both updated Markdown documents pass a
+local-path check and `git diff --check` passes. The draft is still not a
+finished publication: Jason's full Episode 1 result, final release state, and
+publication-ready illustrations remain outstanding. No new game recording
+or copyrighted WAD image was created.

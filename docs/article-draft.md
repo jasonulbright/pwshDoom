@@ -1,61 +1,114 @@
 # Doom in PowerShell: how far can a terminal go?
 
-Working article, September 27, 2026. This is a research prototype with a playable foundation and substantial unfinished qualification. Numbers below belong to named experiments; the release comparison and final conclusions are still open.
+Research article draft · Updated 2026-09-28. The Preview.3 package is still a local candidate. Jason's complete Episode 1 playthrough has not yet been reported, so this article describes measured progress rather than a finished campaign certification.
 
-## The experiment
+## The question
 
-The question began with Doom, matrix transforms and a fast desktop: could PowerShell itself run the game and draw it inside a modern terminal? The target was a 320×200 source image, Doom's 35 simulation tics per second, and 60 displayed updates per second. Then came another request: make it look like the Matrix, with Japanese characters. Both questions now have working implementations to investigate.
+Could PowerShell run Doom's game logic and draw its world inside Windows Terminal? The experiment uses a 320×200 Doom image, preserves the game's 35-tic simulation, and targets 60 displayed updates per second. A second goal grew out of it: turn the same world into a green Matrix view with Japanese characters, plus a full-color character-art mode.
 
-The language boundary matters. Gameplay, software rendering, terminal encoding, and audio synthesis/mixing algorithms remain PowerShell. Standard .NET collections, file operations, synchronization and Windows playback APIs provide the surrounding machinery. Small compiled declarations expose operating-system APIs. They do not contain a replacement game engine or renderer. The [source lineage](../src/ManagedDoom/ORIGIN.md) records what was adopted and changed.
+The answer is a qualified yes. A real Doom-derived game foundation, renderer, gameplay loop, terminal encoders and audio algorithms now run in PowerShell. The current source passes map-load and rendering smoke checks for all 36 Ultimate Doom maps, and it has focused tests for campaign transitions, menus, saves, boss progression and all three display styles. That is meaningful engine work, but it is not proof that a human can finish every map. The one continuous Episode 1 playthrough, including its secret-map detour and finale, remains the current human test.
 
-There was already real prior work. Our dated [survey](existing-implementations.md) identified a PowerShell translation of ManagedDoom, a separate PowerShell ANSI Doom implementation, and compiled terminal ports. This project adopts the attributed GPL PowerShell gameplay foundation and builds its terminal renderer and host around it. A final comparison must refresh those projects and test equivalent workloads. We have no basis for claiming a worldwide first or declaring a universal winner.
+## What runs where
 
-## Where the terminal fits
+PowerShell owns the game and presentation algorithms. Windows Terminal receives their text output and presents it. Its GPU can compose and draw the terminal surface; it does not automatically execute PowerShell's collision, enemy logic, rasterization or ANSI encoding on the GPU. The operating-system and audio APIs provide host services around those algorithms.
 
-PowerShell runs the program; Windows Terminal presents its output. Terminal's GPU acceleration helps draw and compose the terminal surface. It does not automatically run the PowerShell geometry, enemy thinking or pixel loops on the GPU. Those costs still have to be paid before output reaches the terminal. The [terminal investigation](terminal-architecture.md) separates those responsibilities.
+```mermaid
+flowchart LR
+    data["User supplies DOOM.WAD<br/>and optional soundfont"] --> game["PowerShell game simulation<br/>ManagedDoom lineage + pwshDoom changes"]
+    game --> raster["PowerShell software renderer<br/>320 × 200 indexed scene"]
+    raster --> classic["Classic<br/>320 × 100 truecolor half-block cells"]
+    raster --> matrix["Matrix<br/>green intensity + Japanese glyphs"]
+    raster --> art["AnsiArt<br/>color + brightness/edge glyphs"]
+    classic --> term["ANSI output and host coordination"]
+    matrix --> term
+    art --> term
+    term --> wt["Windows Terminal"]
+    game -. "sound events / MIDI score" .-> mix["PowerShell decoding,<br/>synthesis and mixing"]
+    mix --> audio["Windows audio playback API"]
+```
 
-Classic mode packs two vertically adjacent pixels into one upper-half-block character, using separate foreground and background colors. A 320×200 framebuffer therefore needs 320 columns and 100 rows. Font size and display scaling determine its physical size. When a resized test window had only 98 rows, the missing rows exposed a sizing problem, not a fundamental 1080p restriction. The launcher now checks the available grid, centers the image, and pauses when it cannot fit. See the [viewport evidence](viewport.md).
+The gameplay foundation is an attributed GPL PowerShell translation of ManagedDoom, itself derived from Doom. pwshDoom retains that lineage and adds integration, fixes and a terminal renderer; it is not a clean-room reimplementation. The source history and adopted changes are listed in [`ORIGIN.md`](../src/ManagedDoom/ORIGIN.md).
 
-Matrix and AnsiArt consume the same 320×200 scene and produce a deliberately lossy 160×50 character view. Matrix combines green intensity, stable katakana and moving highlights. AnsiArt retains image colors and selects glyphs from brightness and edges. A block HUD preserves more detail where it matters. These are PowerShell encoders; their [recordings and codec checks](character-modes.md) show what they do. Dark menus and small text still need fidelity work.
+The three styles trade pixel detail for different looks. Classic uses one terminal cell for two vertically stacked pixels, so its 320×200 image occupies 320 columns by 100 rows. Matrix and AnsiArt reduce that same scene to a 160×50 character field: Matrix maps brightness to green tones, Japanese glyphs and moving highlights; AnsiArt uses color and edge/brightness choices. These modes are intentionally lossy. The project keeps Classic as the visual-fidelity reference.
 
-## Four clocks, four different claims
+## Several clocks, not one FPS
 
-The simulation clock, completed framebuffer count, console-write count and displayed terminal presentations measure different events. A 60 fps movie adds another clock: it can contain repeated pictures. Finishing 60 writes per second does not prove the user saw 60 distinct game frames.
+The game advances at 35 tics per second. Rendering workers produce images; the host writes ANSI data; Windows Terminal processes those writes; Windows may then present images to the display. A counter at one stage does not establish the rate at a later stage. In particular, a completed console write is not proof that a distinct frame reached the monitor.
 
-Early E1M1 runs approached 35 simulation tics and 60 output updates per second. The newer loaded campaign workload is harder. After snapshot, numeric visibility and indexed automap improvements, a fixed 1,200-command E1M3 headless prefix completed at **30.829 tics/sec** and **53.925 completed images/sec**, returning every submitted audio frame. That result remains below the target and has no displayed-FPS claim. A newer maximized E1M1 PresentMon sample measured **34.977 active tics/sec** and **47.73 display transitions/sec**; it was a single no-audio run with an old input ending on E1M1 and a 7.119-second same-map asset reload. These measurements do not demonstrate the 35-tic/60-display target. The [raw comparisons and scope](automap-discovery-performance.md) and [PresentMon details](performance.md) retain the workload boundaries.
+```mermaid
+flowchart LR
+    tic["35 Hz game tic"] --> frame["completed software frame"]
+    frame --> write["ANSI bytes written"]
+    write --> terminal["Terminal update processed"]
+    terminal --> present["Windows display presentation"]
+    write -. "queues and scheduling can add delay" .-> terminal
+    terminal -. "presentation may repeat, merge or miss updates" .-> present
+```
 
-A separate full E1M3 Matrix recording completed the route and passed 47 integration checks, but averaged **29.983 tics/sec** and **47.965 console writes/sec**. It also recorded 77 pre-final empty-audio-queue observations. Those observations are useful software evidence; they are not measurements of what reached the speakers. The [shutdown and capture investigation](audio-shutdown.md) records the earlier failed run as well as the repair.
+The strongest available readings are still workload-specific:
 
-## Completing a level changes the test
+| Run | Observed result | What it does not establish |
+| --- | --- | --- |
+| 28-second Classic E1M1 host run, with sound effects and music | 34.959 simulation tics/sec; 59.670 completed Terminal updates/sec | The updates were not measured as distinct monitor presentations. One queue-starvation observation occurred after the final music packet; no listener review was made. See [`performance.md`](performance.md#current-source-e1m1-run--september-26-2026). |
+| Maximized Classic E1M1 PresentMon sample, no audio | 34.977 active tics/sec; 47.73 display transitions/sec | It was one unpaired replay, ended on E1M1 rather than a completed route, and included a 7.119-second same-map asset reload. It does not certify the target. See [the current pacing record](performance.md). |
+| Fixed 1,200-command E1M3 headless prefix | 30.829 tics/sec; 53.925 completed images/sec; all submitted audio frames returned | Headless image completion is not a display measurement or human playthrough. See [automap performance](automap-discovery-performance.md). |
 
-Fidelity work also found weapons being drawn full-bright regardless of room lighting or fixed-map power-up coloring. The corrected [weapon pass](rendering-fidelity.md) matches 138 isolated images from the adopted reference; reproducing the old behavior fails 88. It passes actual worker checks in all three styles and a recorded campaign continuation. Carrying the player's sector light exposed a replay-format dependency: historical checkpoints hashed reserved packet bytes. Preserving the old canonical hash, retaining the new packet hash separately, and testing that health/lighting changes still fail comparison kept the earlier campaign evidence useful.
+Those observations put the machine near Doom's simulation rate in lighter tests, but the combined 35-tic/60-display target remains unverified. They are not a controlled comparison against another engine.
 
-An [independent color-state encoder](ansi-color-state.md) now avoids resending an unchanged foreground or background. Exact decoded colors survive, and recorded Classic output shrinks by about 15%. A controlled serial encoding comparison is faster. The four full-game trials remain inconsistent, however, and the unchanged rasterizer also runs progressively faster across them. The result supports a lower-bandwidth option, not a universal game-speed claim. The next performance study needs to account better for changing execution conditions.
+## A room is not a campaign
 
-The later [four-run output comparison](terminal-output.md) illustrates another performance trap. Combining each Classic image into one write lowers the time spent in the host's output phase, yet the first pair's full-game rate drops slightly and the reversed repeat improves slightly. Rates vary from about 38.5 to 57.2 completed images/sec with the same route, assets, code and viewport. All four routes preserve their checkpoints and synthesized audio. That establishes correctness and a narrower output-time result; it does not establish a reliable whole-game speedup. The existing default remains in place.
+The all-map sweep loads each of the 36 Ultimate Doom maps, advances a short simulation, and renders frames. Separate HMP input routes complete E1M1–E1M4 through ordinary exits; transition tests cover the E1M3 secret path, return to E1M4, map-8 boss triggers and finale states. These checks find structural defects quickly, but none substitute for ordinary play across a complete episode.
 
-Loading a map and rendering a room is a useful smoke test. Campaign play exercises keys, doors, floor triggers, lifts, intermission, asset replacement, and inventory carryover. All 36 Ultimate Doom maps pass a short smoke sweep. E1M1 through E1M4 additionally have independently replayed HMP pistol-start normal exits and continuation into the next map. Those separate runs still do not constitute a continuous episode. The [campaign matrix](campaign-matrix.md) keeps that distinction explicit.
+The current human route is:
 
-E1M5 illustrates why route failures need diagnosis. The first candidate collected armor and a dropped shotgun, then stopped beside a barrel. A fresh fixed-input replay reproduced all 52 recorded samples. Combat had moved the barrel just far enough to obstruct the static plan. A wider path solved that obstacle. The next attempt reached a passage that only opens after a later switch. The following plan followed the key and moving-floor dependencies but exhausted its ammunition in the western area. These were planning failures, not reasons to weaken collision or enemy damage. The [investigation](campaign-e1m5-investigation.md) retains the commands and evidence.
+`E1M1 → E1M2 → E1M3 → E1M9 → E1M4 → E1M5 → E1M6 → E1M7 → E1M8 → Episode 1 finale`
 
-Other campaign failures did reveal engine defects: damaging-floor dispatch and stair-building logic required fixes, each followed by focused checks and route regressions. Keeping both kinds of failure prevents a successful bot run from becoming an excuse to change Doom's rules.
+It verifies continuous keyboard play, inventory and map transitions, the secret return, the boss-triggered exit, visible presentation, and whether sound stays usable during a real run. The exact build, controls and finish point are in the [playtest handoff](episode1-playtest.md). The old automated E1M5 continuation ended in player death without exposing a reproducible engine defect; the route was not tuned into a speedrun. A prior E1M2 chainsaw crash did reproduce as a focused hit defect and now passes its regression. The human run is still pending.
 
-## Audio and the remaining release work
+Menus, pause, six save slots, load/overwrite confirmations, automap and intermission/finale transitions have focused coverage. Five boss-trigger behaviors pass 97 checks, but trigger correctness is not evidence that ordinary combat reaches those triggers. The distinction between feature tests, route replays and human campaign evidence is retained in the [campaign matrix](campaign-matrix.md).
 
-PowerShell synthesizes dry music from the IWAD and a soundfont supplied by the user. Preparing a reusable loop means rendering continuous periods and checking both synthesizer state and output recurrence; an attractive eight-second opening is insufficient. All eleven tracks needed for an Episode 1 run have qualifications. Every Episode 2 map-track name is now qualified: most with complete-state recurrence proofs, three with independent three-period output comparisons. D_E2M5 shares D_E1M7's bytes, so it adds map-name coverage rather than another payload. D_E3M2 adds a new score with a 234.54-second period; two complete normalized state snapshots, 47 voices each, match at the boundary after 469.09 seconds of generated audio. Its independent eight-second opening is exact, and the reader, actual audio worker, E3M2 map selection and short host checks pass. D_E3M1 and D_E3M4 reuse identical payloads from D_E2M9 and D_E1M8; each has its own map-selection and short live-host startup/shutdown check without a redundant render. The two-second checks verify score selection and device lifecycle, not acoustic quality or campaign continuity. The Episode 1 catalog also passes actual simulation/audio-worker checks through save/load/new-game operations. D_INTRO has a separate finite-score qualification with a deterministic end/release tail and an actual-worker first-block PCM match; D_INTROA and D_BUNNY remain open. Six Episode 3 map-track names still lack qualifications, along with uninterrupted campaign audio and listener review. The [preparation workflow](music-preparation.md) separates measured evidence from those remaining claims.
+## Fidelity work has boundaries
 
-The current Episode 1 playtest is one complete human route through E1M1–E1M8, including the E1M3 secret visit to E1M9 and return, and the finale. That run has not yet been reported complete. A clean-checkout Preview.3 package candidate now verifies all 533 manifest entries and launches in a two-second silent headless smoke on PowerShell 7.6.6; this does not replace visible keyboard play or the full route. The broader release still needs additional route evidence, continuous audio and listening review, visual comparisons, repeated pacing measurements, physical display/input checks, a final license audit, and the finished article. Commercial WADs and local generated media remain outside the source repository.
+The renderer is a substantial PowerShell implementation, not yet an original-executable pixel match. It now follows Doom-style fixed-point plane mapping, integer wall sampling, sprite/weapon patch projection, sector lighting, palette changes and the major HUD layout. One reproduced wall-silhouette leak was clipped; the focused test suppresses the candidate-only BON1 actor pixels at its failing view. A more recent E1M1 screenshot of lower-level Techpillar columns crossing an upper floor was traced to Doom's plane/sprite draw order. The separate report of the pre-placed Gibs pile near blue armor has not reproduced at the exact camera angle, so it remains a watch item rather than a claimed fix.
 
-The contribution so far is a working PowerShell terminal implementation with three visual styles and a growing body of reproducible evidence. Choosing it today means wanting this particular language-and-terminal experiment, with its measured costs and unfinished work visible. The final article will judge its advantages against maintained alternatives after the remaining comparisons are actually run.
+The adopted PowerShell reference was itself corrected after source inspection found object-equality behavior that skipped Doom's wall-orientation lighting. Comparisons against that reference have improved specific HUD, lighting and projection cases, but broad scene differences remain. No independent original Doom executable has been used for a full visual comparison. See the [rendering record](rendering-fidelity.md) for the individual controls and limitations.
 
-The first same-state comparison against the adopted PowerShell renderer exposed concrete HUD defects: missing weapon indicators, ignored patch offsets and incorrect number spacing. Those repairs now match the reference HUD across 64 varied states, including cached assets and split rendering. The 3D scene still differs substantially, so this is a bounded correctness improvement rather than a vanilla-fidelity claim. The [rendering investigation](rendering-fidelity.md) retains before/after results and the reference's limitations.
-The later E1M4 color-art recording completes all 6,348 commands and matches 22 checkpoints through E1M5. Its seven-track catalog changes scores correctly and all submitted audio frames return. At 34.250 simulation tics and 50.491 console writes per second, it remains below the intended targets; its worst same-world write gap is 215 ms. The [recording evidence](campaign-e1m4.md) retains six queue-empty observations and the audio alignment gaps as well as the successful progression. A cropped viewing excerpt makes the character effect easier to see, while the full original capture remains available locally.
-Lighting comparisons also caught a defect in the adopted reference itself: PowerShell object equality skipped Doom's wall-orientation shading. Checking numeric coordinate values against id Software's original algorithm corrected that reference. Our new numeric lighting then reduced E1M1 scene disagreements from roughly 68–78% to 32% across three views, with exact HUDs; that remains far from full pixel equivalence. After repairing a host import dependency, a recorded Classic E1M2 replay passes all 53 integration checks and averages 34.98 simulation ticks and 50.50 terminal writes per second. The [lighting investigation](rendering-fidelity.md) preserves the source-level evidence, failed startup, successful recording, mixed timing results and remaining visual limitations.
+## Sound is part of the test
 
-Two additional static map-start comparisons first showed 24.9–36.1% scene-index disagreement from the adopted reference. Matching integer-column rays and integer-row wall texture samples reduced those six E1M2/E1M3 views from 101,971 to 42,750 differing indices, 58.08% fewer, while keeping every HUD exact and lowering RGB-channel error in every view. Residual disagreement remains 9.59–15.58%; these static tests use the adopted PowerShell reference, not an independently verified original executable. Sprite and weapon projection, further fixed-point work and independent original-engine comparison remain open.
+Sound effects are decoded and mixed in PowerShell; Windows APIs handle playback. Music is also synthesized and mixed in PowerShell from the user's IWAD and soundfont. The 11 scores needed for the Episode 1 route have local loop qualifications and a clean short save/load/new-game audio-worker test. Neither WADs nor soundfonts are included in the source package.
 
-Invisibility exposes a useful tradeoff in the parallel renderer. Doom's fuzzy weapon and Spectres distort the image behind their silhouettes; drawing dark monster textures is insufficient. The new PowerShell implementation transports the missing power timer and actor flags, samples vertical neighbours through Doom's darkening colormap, and preserves the final blinking period. Original Doom shares one advancing fuzz phase across drawing operations. Independent workers instead use an explicit phase for each column and game tic. That makes the output reproducible across worker schedules while retaining an acknowledged visual difference from the original. Tests compare the actual neighbour operation to the adopted renderer and check transparent holes, occlusion, clipping and all three terminal encoders. This is an implemented effect with a measured compatibility boundary, not a claim of complete visual fidelity.
+The music work proves useful but bounded facts. A loop can be checked through repeated PCM output or a complete normalized synthesizer-state recurrence. A short audio-device launch verifies selection and shutdown, not that an entire episode plays without a dropout or sounds good to a listener. All nine Episode 2 map-track names are qualified; three Episode 3 names have qualifications, including exact payload aliases, while six Episode 3 names and two finite title/finale scores remain open. Episode 4 reuses earlier episode tracks. Full-campaign audio continuity, sustained queue timing and listening review are still required. Details are in the [music qualification notes](music-preparation.md).
 
-Profiling the close-up Spectre scene separated geometry, actors, weapons and terminal output. One avoidable cost was repeated division/floor calculation for every fuzz pixel even though the source row does not vary across columns. Computing that row once preserves the full indexed image and depth buffer in 30 paired comparisons. Actor work drops substantially in the isolated tests; new recordings reach 41–46 image writes/sec while retaining roughly 35 game ticks/sec. The [performance report](fuzz-performance.md) separates that controlled local result from the less-controlled historical recording comparison and retains half-second pacing spikes. Faster averages have not closed the release's presentation gate.
+## Existing alternatives
 
-Palette work exposes another integration boundary: correct indexed pixels still look wrong when presentation always uses PLAYPAL's base colors. The new [palette transport](palette-presentation.md) connects Doom's existing damage, pickup, berserk and radiation selector to terminal encoders and the automap. Classic and color-art receive selected colors, while Matrix retains green through its luminance mapping. Focused tests cover all palette RGB entries and all Classic color pairs, followed by a live-world save/replay fixture. This remains distinct from proof of actual pickup behavior or complete visual fidelity.
+“Doom in a terminal” is no longer novel by itself, and the relevant projects take different paths. The [updated survey](existing-implementations.md) was checked against current repository sources on September 28, 2026.
+
+| Project | What it optimizes for | Relationship to this project |
+| --- | --- | --- |
+| [ManagedDoomPowershell](https://github.com/oleyska/ManagedDoomPowershell) | PowerShell gameplay with a Silk.NET/OpenGL window | Important engine lineage, but not a terminal renderer. Its maintainer reports poor Windows performance and documents known transition/frame-cap limitations. |
+| [doom-powershell](https://github.com/nick0451/doom-powershell) | A compact, single-file PowerShell WAD renderer and game | A closer language/display comparison. Its README still lists moving floors, walk-over triggers and sound as unfinished. We have not benchmarked its current source. |
+| [terminal-doom-pwsh](https://github.com/spidychoipro/terminal-doom-pwsh) | Original Doom engine in Windows Terminal | PowerShell builds and launches it, but the gameplay and half-block renderer are compiled C. It is outside the all-algorithms-in-PowerShell constraint. |
+| [cryptocode/terminal-doom](https://github.com/cryptocode/terminal-doom) | Original graphics and sound in modern terminals | C `doomgeneric` plus a Zig/`libvaxis` frontend and Kitty graphics. Its README reports macOS/Linux testing and says Windows compiles without a compatible local terminal. It is not benchmarked here. |
+| [dcouple/terminal-doom](https://github.com/dcouple/terminal-doom) | Shareware Doom in Kitty-protocol terminals | Chocolate Doom in WebAssembly through a local browser; the README targets macOS/Linux, has sound effects but no music, and keeps saves in the session. |
+
+For the narrow requirement “real Doom-derived gameplay in Windows Terminal, with gameplay/rendering/audio algorithms kept in PowerShell,” pwshDoom is the closest complete implementation found in this survey. That makes it the best fit to this experiment's constraint, not the best Doom port overall. The native ports choose compiled engines and protocols that can carry original pixels more directly; they are the sensible choice when broad compatibility, speed or pixel fidelity matters more than keeping algorithms in PowerShell. No equal-workload comparison has established a universal winner.
+
+## What a preview does and does not claim
+
+The local Preview.3 package candidate contains source and scripts but no IWAD, soundfont, compiled engine or generated recording. It passes clean extraction checks for all 533 files, a PowerShell 7.6.6 launcher preflight that recognizes all 36 IWAD maps, and a short silent headless launch. The package is not published; its README and release notes still need the final version update.
+
+The next public preview is gated on the one complete Episode 1 human run, the final license/asset audit, updated release documentation and a fresh package from the exact source being published. The paper also needs final illustrations and the playthrough result. This is not the end of the roadmap: presentation pacing, visual fidelity, sustained audio, and the wider Ultimate Doom qualification remain open. Doom II follows the Ultimate Doom release; the MyHouse audit follows Doom II. Neither is claimed by this preview.
+
+The current evidence supports a specific conclusion: PowerShell can run a real Doom-derived single-player engine and render it in Windows Terminal, including an intentionally stylized Japanese-glyph Matrix view and color art. The experiment has exposed where the shell/runtime/terminal boundary costs time, how character encodings trade detail for bandwidth, and how much campaign coverage matters beyond a pretty frame. Whether it can deliver the full Ultimate Doom experience at its target pace is still being tested.
+
+### Evidence and reproduction
+
+- [Roadmap and current release gates](roadmap.md)
+- [Episode 1 handoff and scope](episode1-playtest.md)
+- [Existing implementation survey](existing-implementations.md)
+- [Terminal architecture](terminal-architecture.md)
+- [Performance evidence](performance.md)
+- [Campaign matrix](campaign-matrix.md)
+- [Rendering fidelity](rendering-fidelity.md)
+- [Audio and music preparation](music-preparation.md)
+- [Source lineage and modifications](../src/ManagedDoom/ORIGIN.md)
