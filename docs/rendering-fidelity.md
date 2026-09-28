@@ -660,11 +660,34 @@ over 320,000 pixels in Classic, Matrix/Katakana, and AnsiArt/Katakana with four
 uneven strips; Classic also matches with sixteen. Receipts and source pin are
 indexed in the [current Episode 1 candidate](../results/episode1-human-playthrough-candidate-20260927-r2.json).
 
-This fix does not resolve the separate recorded E1M1 actor-visibility
-difference: the adopted-renderer comparison still has 17 candidate-only actor
-pixels at tic 105. The finding is preserved in the [eight-endpoint comparison](../results/actor-occlusion-untextured-wall-20260927.json).
-That comparison is not an independently verified original-executable result,
-and no renderer-performance gain is claimed.
+At the time of this change, a separate E1M1 comparison still had 17
+candidate-only actor pixels at tic 105. A later current-source rerender of all
+eight states no longer reproduces that actor delta; see [Recheck the E1M1
+actor-mask discrepancy](#recheck-the-e1m1-actor-mask-discrepancy-2026-09-27).
+The earlier comparison remains in the record as historical evidence. Neither
+comparison uses an independently verified original executable, and no
+renderer-performance gain is claimed.
+
+### Recheck the E1M1 actor-mask discrepancy (2026-09-27)
+
+The earlier eight-endpoint report showed 17 candidate-only actor pixels at
+input tic 105. Replaying the same 280-command, same-IWAD E1M1 regression on
+current source, with actor-isolation controls at tics 35 through 280, removes
+that discrepancy: both renderers affect zero actor pixels at tic 105. Across
+all eight samples, the candidate has zero candidate-only scene mismatches in
+actor-affected regions. Actor-mask IoU is 99.3%, 99.7%, and 99.8% at tics 35,
+70, and 210. Tic 35 has four candidate-only and four reference-only mask-edge
+pixels; the three and one edge pixels at tics 70 and 210 are reference-only.
+Full-scene differences remain in the background (363–8,498 pixels per sample),
+so this is a narrow actor-visibility correction, not scene parity.
+
+The replay used source commit `4427768372a4b0dc10ec5441dd69c1e748167ea8`,
+the existing `e1m1-route-lineflags.json` regression and the installed Ultimate
+Doom IWAD. Same-state actor suppression and repeat-render controls pass. This
+resolves the stale tic-105 discrepancy on current source;
+it does not reproduce Jason's exact blue-armor Gibs camera angle or prove
+original-executable behavior. See the [eight-state current-source receipt](../results/actor-occlusion-e1m1-prefix-current-20260928.json)
+and the [per-actor tic-105 isolation receipt](../results/actor-occlusion-tic105-current-20260927.json).
 
 ## Clip world sprites to wall silhouettes (2026-09-27)
 

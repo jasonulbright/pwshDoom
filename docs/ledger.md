@@ -3132,3 +3132,23 @@ The runtime note separates the 7.6.5 gameplay qualification from the later
 tested `8fe7600` build pin as the handoff. The ignored local directory still
 contains only Jason's earlier `r2` E1M2 crash attempt and no `r5` outputs; no
 gameplay process is active. Therefore the complete human route remains pending.
+
+## 2026-09-27 — Recheck the E1M1 actor-mask discrepancy
+
+The current renderer no longer reproduces the historical 17 candidate-only
+actor pixels at E1M1 input tic 105. Replayed the existing 280-command
+`e1m1-route-lineflags.json` regression against the installed Ultimate Doom
+IWAD and compared actor-affected masks at tics 35, 70, 105, 140, 175, 210,
+245 and 280. Same-state isolation and repeat-render controls passed. At tic
+105 both renderers affect zero actor pixels.
+Actor-mask IoU is 99.3%, 99.7%, and 99.8% at tics 35, 70 and 210. Tic 35 has
+four candidate-only and four reference-only mask-edge pixels; the three and
+one edge pixels at tics 70 and 210 are reference-only. Candidate-only scene
+mismatches within actor-affected regions are zero at all eight endpoints.
+Full-scene differences remain in the backgrounds, and this comparison does
+not establish original binary parity or reproduce Jason's exact Gibs view.
+The renderer source was unchanged at commit
+`4427768372a4b0dc10ec5441dd69c1e748167ea8` during both runs.
+The [eight-state receipt](../results/actor-occlusion-e1m1-prefix-current-20260928.json)
+and [per-actor tic-105 isolation receipt](../results/actor-occlusion-tic105-current-20260927.json)
+pin the evidence.

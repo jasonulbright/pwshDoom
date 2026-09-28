@@ -1,0 +1,126 @@
+{
+  "FinishedUtc": "2026-09-28T01:47:05.6429722Z",
+  "Episode": 1,
+  "Map": 1,
+  "Skill": 3,
+  "Tics": 105,
+  "InputTicEndpoint": 105,
+  "SampleInterval": 35,
+  "SampleInputTics": [
+    105
+  ],
+  "CandidateAuditInputTics": [
+    105
+  ],
+  "InputReplay": "C:\\projects\\pwshDoom\\results\\e1m1-route-lineflags.json",
+  "InputReplaySha256": "41CF35EDF94C1CABE8C96A1CEEFBCFBF41F20DF24093569B65A1A4C9C56C017B",
+  "InputReplayValidation": "Passing replay report",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "BundleSha256": "19DE3303C005C6BD6CF96F7A101C2D7AD34B43CA678E1D65FD2ECE7A1E5E7038",
+  "Sources": [
+    {
+      "Sha256": "218656DC44480C8243AF46D28B76D87633A50F7E763B0C537759CFD8830D2085",
+      "Path": "scripts/Compare-ActorOcclusion.ps1"
+    },
+    {
+      "Sha256": "9496D650D07F4177DF77A70309E5F99D46C4F7A2F0C664D2C3B3E8FB4165F3FA",
+      "Path": "src/FastRenderer.ps1"
+    },
+    {
+      "Sha256": "4F082542D9AE6D30ABE3B9D11CBBE26D94B3FFBA3D2B02E5117D69D86A2D06E9",
+      "Path": "src/GameHost.ps1"
+    },
+    {
+      "Sha256": "E9C47D9E4005509206EC13DA08267F95DB3AF7A1E86F14A743F1F27DE145BF9F",
+      "Path": "src/RenderLighting.ps1"
+    },
+    {
+      "Sha256": "8D2B6B6B0DF30A1DD7E30D070F60A1EABBF12397BC9816A03481C6D6A659B882",
+      "Path": "src/RenderFuzz.ps1"
+    }
+  ],
+  "SourcesChangedDuringRun": [],
+  "SameStateIsolationControlsPassed": true,
+  "Samples": [
+    {
+      "InputTic": 105,
+      "LevelTic": 105,
+      "ActorCount": 91,
+      "ReferenceVisibleWorldSprites": 1,
+      "ReferenceActorAffectedPixels": 0,
+      "CandidateActorAffectedPixels": 0,
+      "ActorMaskIntersection": 0,
+      "ActorMaskUnion": 0,
+      "ActorMaskIoU": 1.0,
+      "CandidateOnlyActorPixels": 0,
+      "ReferenceOnlyActorPixels": 0,
+      "FullSceneMismatchPixels": 4401,
+      "BackgroundMismatchPixels": 4401,
+      "SharedActorRegionMismatchPixels": 0,
+      "CandidateOnlyRegionMismatchPixels": 0,
+      "ReferenceOnlyRegionMismatchPixels": 0,
+      "IndividuallyIsolatedSprites": [
+        {
+          "ReferenceX2": 204,
+          "Frame": 0,
+          "WorldXData": 119537664,
+          "WorldZData": -5242880,
+          "ReferenceScaleData": 14093,
+          "ReferenceOnlyDepthTiedPixels": 0,
+          "ReferenceOnlyPlaneDepthPixels": 0,
+          "ReferenceOnlyDepthCloserPixels": 0,
+          "CandidateOnlyFullFrameMismatchPixels": 0,
+          "ReferenceVisiblePixels": 0,
+          "MaskUnion": 0,
+          "ReferenceOnlyDepthInfinitePixels": 0,
+          "ReferenceOnlyBounds": [
+            320,
+            168,
+            -1,
+            -1
+          ],
+          "SpriteDistance": 744.0403036968708,
+          "CandidateOnlyPixels": 0,
+          "MaskIoU": 1.0,
+          "MaskIntersection": 0,
+          "ReferenceOnlyFullFrameMismatchPixels": 0,
+          "CandidateActorRecordIndex": 7,
+          "Image": null,
+          "SharedMaskPaletteMismatches": 0,
+          "ReferenceOnlyDepthExamples": [],
+          "ReferenceOnlyDepthFartherPixels": 0,
+          "WorldYData": -214958080,
+          "CandidateBounds": [
+            320,
+            168,
+            -1,
+            -1
+          ],
+          "Type": "Misc1",
+          "ReferenceOnlyNonPlaneDepthPixels": 0,
+          "Sprite": 56,
+          "Patch": "ARM2A0",
+          "ReferenceOnlyPixels": 0,
+          "CandidateVisiblePixels": 0,
+          "ActualMismatchPixelsInActorUnion": 0,
+          "ReferenceBounds": [
+            320,
+            168,
+            -1,
+            -1
+          ],
+          "ReferenceX1": 198
+        }
+      ],
+      "CandidateActorsWithAffectedPixels": [],
+      "CandidateIsolationRepeatDifferences": 0,
+      "ReferenceIsolationRepeatDifferences": 0,
+      "SectorListsRestored": true,
+      "ReferenceActorMaskSha256": "3DD1B47DD95350A891906A22913DCFD6DD2DCF1C1A297B6B5321C1D66EED9C2C",
+      "CandidateActorMaskSha256": "3DD1B47DD95350A891906A22913DCFD6DD2DCF1C1A297B6B5321C1D66EED9C2C"
+    }
+  ],
+  "MaskImages": [],
+  "Error": null,
+  "Meaning": "Compares world-actor-affected pixel masks at selected recorded input-command indices by rerendering the exact same saved-replay states with world actors suppressed in each renderer. InputTic is distinct from in-game LevelTic, which can reset after death. Player weapon, HUD, geometry, and other scene state remain. This localizes full-scene differences to broad background, shared actor-affected, or renderer-exclusive actor-affected regions. It is adopted-reference parity evidence, not original-executable validation, gameplay completion, or performance."
+}

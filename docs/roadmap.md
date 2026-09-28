@@ -73,10 +73,11 @@ Matrix/Katakana, and AnsiArt/Katakana. The fixed playtest build is
 `398022a8caa3b3e31d2a0d1c08642ecf6be7c1d0`; its [7.6.6 full-start receipt](../results/episode1-startup-runtime-compat-20260927.json)
 and music-reader checks cover the later runtime failure. The focused wall-order
 fixture passes 20 checks, including actor occlusion behind an untextured solid
-wall. The known 17-pixel actor-visibility difference at tic 105 and broader
-scene parity remain open. The build is ready for Jason's single complete HMP
-Episode 1 playthrough; the route result is pending and must not be replaced by
-map-by-map requests or automated-route tuning.
+wall. A current-source comparison of eight E1M1 regression states no longer
+reproduces the historical 17-pixel candidate-only actor difference at tic
+105; broader scene parity remains open. The build is ready for Jason's single
+complete HMP Episode 1 playthrough; the route result is pending and must not
+be replaced by map-by-map requests or automated-route tuning.
 
 After the integer-column and integer-row wall-sampling changes, the nine-map
 smoke and focused transition, boss, menu/session, and synthetic input checks
