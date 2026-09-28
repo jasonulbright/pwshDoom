@@ -397,6 +397,26 @@ test assertion after the alias subprocess had succeeded. The harness was
 corrected and the fresh rerun passed; the failed raw receipt is retained at
 `../results/music-preparation-controls-alias-20260927.json`.
 
+### D_E3M4 exact-payload alias and host selection (September 27)
+
+The installed IWAD's D_E3M4 bytes exactly match qualified D_E1M8: both have
+MUS SHA-256
+`3118717CB94F58364199E838B2FDFC567023758CEFE1B7F31E2A554920ECB1E7`, with
+the same pinned soundfont. The preparation tool verifies the source
+qualification and current assets, then writes a distinct D_E3M4 report with
+the D_E1M8 report hash and target IWAD/MUS/soundfont identity. This qualifies
+the E3M4 map track without another long render or a new unique payload.
+
+Fourteen callback/catalog checks confirm E3M4 emits looping D_E3M4. The actual
+two-second headless host selected that track and closed both music and audio
+device cleanly. All 69 packets were consumed without starvation or rebuffer;
+85,680 of 86,940 submitted frames completed before shutdown, with a 1,260-frame
+canceled-tail upper bound. This is a stop-boundary measurement only. Portable
+receipts: [preparation]
+(../results/music-preparation-ultimate-doom-e3m4-alias-20260927.json),
+[map selection](../results/music-events-map-selection-e3m4-alias-20260927.json),
+and [host integration](../results/music-host-e3m4-alias-integration-20260927.json).
+
 ### PowerShell patch-version compatibility (September 27)
 
 Jason's first terminal launch exposed an exact-patch comparison in both the

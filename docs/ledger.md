@@ -2981,3 +2981,21 @@ startup/selection/shutdown check, not campaign continuity or acoustic evidence.
 Portable results: [alias preparation](../results/music-preparation-ultimate-doom-e3m1-alias-20260927.json),
 [map selection](../results/music-events-map-selection-e3m1-alias-20260927.json),
 and [host integration](../results/music-host-e3m1-alias-integration-20260927.json).
+
+## 2026-09-27 — Reuse the exact D_E3M4 music payload
+
+D_E3M4's MUS lump is byte-identical to the qualified D_E1M8 score. The
+hash-based alias path therefore writes D_E3M4 provenance from D_E1M8's current
+qualification rather than synthesizing an identical loop. Fourteen callback/
+catalog checks pass for E3M4 selection. The actual two-second headless host
+selects looping D_E3M4, closes the music/device, consumes all 69 packets, and
+reports zero queue starvation, zero rebuffer, and no worker or cleanup error.
+It completes 85,680 of 86,940 submitted frames before shutdown; the canceled
+tail upper bound is 1,260 frames. This does not establish full-map/campaign
+playback or acoustic quality. The target MUS hash is
+`3118717CB94F58364199E838B2FDFC567023758CEFE1B7F31E2A554920ECB1E7` and the
+source D_E1M8 qualification SHA-256 is
+`F4C079000EC9267066940ED33C8E07FFB4A8FFE7A555AC5F9FC827BD3EA4B09E`.
+Portable results: [alias preparation](../results/music-preparation-ultimate-doom-e3m4-alias-20260927.json),
+[map selection](../results/music-events-map-selection-e3m4-alias-20260927.json),
+and [host integration](../results/music-host-e3m4-alias-integration-20260927.json).
