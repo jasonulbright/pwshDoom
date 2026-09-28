@@ -5,7 +5,7 @@
 ### Added
 
 - Optional prepared-music playback through `Play.ps1 -MusicCatalog`. PowerShell synthesizes and mixes the score; users prepare catalogs from their own IWAD and soundfont. Missing catalogs fail before launch, and `-MusicCatalog` cannot be combined with `-Silent`. Music remains opt-in and is not bundled.
-- A complete Episode 1 human-playthrough handoff, pinned build evidence and a campaign/render/audio investigation ledger. The handoff is ready, but the human playthrough and broader campaign release gate are still pending.
+- A clean, local Preview.3 package candidate at commit `aeb6772`, with verified manifest hashes, the article's two SVG figures, and the research PDF and game assets excluded. Its launcher preflight, current music-reader checks and short sound-enabled startup pass; the complete Episode 1 human playthrough and broader campaign release gate remain pending. See the [playtest handoff](docs/episode1-playtest.md) and [candidate receipt](results/preview3-current-candidate-validation-aeb6772-20260928.json).
 
 ### Changed
 

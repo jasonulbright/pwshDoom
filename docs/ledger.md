@@ -3543,3 +3543,38 @@ demonstrated speedup. The source change was reverted. Its
 [candidate profile](../results/renderer-stripes-e3m6-projection-candidate-20260928.json)
 preserves the experimental source hash. The working renderer blob was checked
 against HEAD after the revert. No screen recording was made.
+
+## 2026-09-28 — Rebuild the Preview.3 candidate from current source
+
+A clean package build initially stopped at the new article SVGs because the
+package script allowed only PowerShell, Markdown, JSON and text files under
+`docs/`. The package input allowlist now accepts SVGs in documentation while
+continuing to reject other unknown file types. Its 22-check music-reader
+regression also passes on PowerShell 7.6.5; the portable result is
+[`music-loop-reader-head-fee5ea2-20260928.json`](../results/music-loop-reader-head-fee5ea2-20260928.json).
+
+Built and extracted a new local, unpublished Preview.3 ZIP from clean source
+commit `aeb6772a3ddac78b24782d95b4c7f1b738136ab6`. All 537 manifest entries
+match their extracted SHA-256 and length; the checksum file matches the
+1,537,992-byte ZIP at
+`DAFC42D13D9D754C26CB7EDC92CAED8D51DB2109A65D2081B6078A6F44C59579`. The
+archive contains both article SVGs and no research PDF, WAD, soundfont, media,
+or native binary. Its static license audit finds the root GPL license and
+third-party notices, the origin record, and GPL terms in all 206 vendored
+PowerShell files.
+
+The extracted launcher preflight under PowerShell 7.6.5 found Windows
+Terminal, the installed Steam Ultimate Doom IWAD, and all 36 maps. A
+two-second headless sound-enabled host run with the local Episode 1 catalog
+advanced 69 tics and completed 89 host updates with no host/simulation error
+or audio-backpressure sample. This is startup evidence, not a full audio or
+human campaign check. The [candidate receipt](../results/preview3-current-candidate-validation-aeb6772-20260928.json)
+records the package, license, reader, preflight and host results.
+
+The extracted clean package reports gameplay fingerprint
+`861FA06A414183D7753C8EEF840FB402D0E8D3E8A12139D95772D67F461A6CF6`, while
+the prior r7 receipt reports `D627BDF3D3605093095D9185EA564487ECE49A1FE2186134F2257191AB631682`.
+The fingerprint hashes raw files; line-ending normalization makes all 216
+gameplay/session input texts identical. The refreshed [Episode 1 handoff](episode1-playtest.md)
+therefore directs Jason to the exact extracted package and uses fresh r6
+record/report paths. The full human route and public release remain pending.

@@ -12,32 +12,38 @@ A normal completion is enough; 100% kills, items, and secrets are not required. 
 
 ## Exact build and launch
 
-Run commit `8fe7600febb51693b58524c4dccbdfeac654979e` from `C:\projects\pwshDoom`. Its gameplay/session fingerprint remains `D627BDF3D3605093095D9185EA564487ECE49A1FE2186134F2257191AB631682`; changes since the previous handoff fix music-source hash checks and update release evidence without changing the fingerprint's input files. The full [candidate receipt](../results/episode1-human-playthrough-candidate-20260927-r7.json) lists the gameplay checks and their limits. The fresh [Preview.3 package validation](../results/preview3-current-candidate-validation-8fe7600-20260928.json) also verifies sound-enabled startup under PowerShell 7.6.6 from a CRLF clean checkout.
+Run the extracted, unpublished Preview.3 package candidate built from commit
+`aeb6772a3ddac78b24782d95b4c7f1b738136ab6` at
+`C:\projects\pwshDoom\local\preview3-package-aeb6772-extracted\pwshDoom-0.1.0-preview.3`.
+Its ZIP SHA-256 is
+`DAFC42D13D9D754C26CB7EDC92CAED8D51DB2109A65D2081B6078A6F44C59579`.
+The [package receipt](../results/preview3-current-candidate-validation-aeb6772-20260928.json)
+records 537 verified source files, both article SVG figures, and exclusion of
+the research PDF and game assets. Its raw gameplay/session fingerprint is
+`861FA06A414183D7753C8EEF840FB402D0E8D3E8A12139D95772D67F461A6CF6`; it differs
+from the prior `r7` receipt only because of checkout line endings. All 216
+fingerprinted gameplay/session files have identical text after line-ending
+normalization. The [r7 candidate receipt](../results/episode1-human-playthrough-candidate-20260927-r7.json)
+records the focused game checks and their limits.
 
-If your checkout is at another revision, select the tested build from the repository root:
+Start it with this command:
 
 ```powershell
-git switch --detach 8fe7600febb51693b58524c4dccbdfeac654979e
-```
-
-Then start it with this command:
-
-```powershell
-pwsh -NoProfile -File .\Start-Doom.ps1 `
+pwsh -NoProfile -File 'C:\projects\pwshDoom\local\preview3-package-aeb6772-extracted\pwshDoom-0.1.0-preview.3\Start-Doom.ps1' `
   -Wad 'C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\base\DOOM.WAD' `
   -Episode 1 -Map 1 -Skill 3 -Style Classic -Sound `
-  -MusicCatalog .\local\music-prepared-episode1.json `
-  -RecordInput .\local\episode1-human-playthrough-r5.json `
-  -Report .\local\episode1-human-session-r5.json -Maximized -FontSize 5
+  -MusicCatalog 'C:\projects\pwshDoom\local\music-prepared-episode1.json' `
+  -RecordInput 'C:\projects\pwshDoom\local\episode1-human-playthrough-r6.json' `
+  -Report 'C:\projects\pwshDoom\local\episode1-human-session-r6.json' -Maximized -FontSize 5
 ```
 
-Use 64-bit PowerShell 7.6.6 and Windows Terminal for this run; PowerShell 7.4 or later is the project minimum. The r7 gameplay qualification ran under 7.6.5, and the current sound-enabled clean-package startup was verified under 7.6.6. The required Steam IWAD is `DOOM.WAD`, SHA-256 `6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F`; the prepared local Episode 1 music catalog has SHA-256 `0E9C9542C75F4D5E2D7FC71E42FAFBB58F94321C3B8A49BA0C9AC5A93752EE58`. The IWAD and audio catalog are not included in Git. At preflight, `%LOCALAPPDATA%\pwshDoom\settings.json` was absent, so the game's defaults apply. The [preflight receipt](../results/episode1-launch-preflight-current-candidate-20260927.json) records the detected paths and hashes.
+Use 64-bit PowerShell 7.6.x and Windows Terminal; PowerShell 7.4 or later is the project minimum. The clean package passed `Play.ps1 -Check` with the installed 36-map Steam IWAD and music-catalog path, then a two-second sound-enabled host startup under PowerShell 7.6.5. The reader accepts matching 7.6.x qualification reports, and its current-package regression passes 22 checks. The required Steam IWAD is `DOOM.WAD`, SHA-256 `6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F`; the prepared local Episode 1 music catalog has SHA-256 `0E9C9542C75F4D5E2D7FC71E42FAFBB58F94321C3B8A49BA0C9AC5A93752EE58`. Neither asset is included in the package. At the latest preflight, `%LOCALAPPDATA%\pwshDoom\settings.json` was absent, so game defaults apply. The [preflight and startup evidence](../results/preview3-current-candidate-validation-aeb6772-20260928.json) records the detected paths and hashes.
 
-The runtime-specific startup failures reported under PowerShell 7.6.6 are covered on this build. The music reader now tolerates equivalent LF/CRLF checkout formatting while still rejecting changed source text. A clean CRLF package starts the qualified Episode 1 music catalog under 7.6.6, reaches 69 tics in a two-second headless integration run, and closes the audio device. Its final submitted packet has one queue-starvation observation, so this does not verify full-session music continuity or listener quality ([package receipt](../results/preview3-current-candidate-validation-8fe7600-20260928.json)).
+The startup failure reported under PowerShell 7.6.6 came from overly strict runtime-version and line-ending checks in qualified music reports. The reader now accepts equivalent PowerShell text across LF/CRLF checkouts and compatible 7.6.x patch versions while still rejecting changed source text. The current package passes 22 reader checks and starts the 11-track Episode 1 catalog in a two-second, sound-enabled headless run under PowerShell 7.6.5, advancing 69 tics with no host error or audio-backpressure sample. This brief run does not verify full-session music continuity, audible quality, or playback under visible Terminal load.
 
 On a cold start, allow up to 60 seconds for simulation and music workers to initialize. Keep the default 16 renderer workers. A prior measurement used about 4 GB combined worker memory. The Classic view needs at least 320 columns by 100 rows; the 5-point font and maximized window are set to help fit it. If the viewport is short, enlarge the window or press Ctrl+- to reduce the font. Blank space around the centered image in a larger terminal is expected.
 
-Both output paths must be unused before launch. They are new (`r5`) names. After preserving the two generated files under `local/`, return to the development branch with `git switch codex/feasibility-study`.
+Both output paths must be unused before launch. They are new (`r6`) names. Preserve the generated input and report under `C:\projects\pwshDoom\local`; they are local evidence and must not be committed or shared with the WAD.
 
 ## Controls
 
@@ -65,7 +71,7 @@ Your report will be recorded only for the scope and outcomes you state. Automate
 
 ## Current evidence and limits
 
-The [r7 candidate receipt](../results/episode1-human-playthrough-candidate-20260927-r7.json) pins this build and records the current-source checks: 36-map smoke, 69 campaign transitions including the secret return and finale state, 97 boss checks, 125 menu/session checks with 46 screen fixtures, 15 save/load/audio-worker checks, the chainsaw regression, and exact serial/16-worker output for Classic, Matrix/Katakana, and AnsiArt/Katakana. A current-source short sound-enabled host run and the fresh launcher preflight also pass. These establish startup and focused behavior, not full map completion.
+The [r7 candidate receipt](../results/episode1-human-playthrough-candidate-20260927-r7.json) records the current gameplay checks: 36-map smoke, 69 campaign transitions including the secret return and finale state, 97 boss checks, 125 menu/session checks with 46 screen fixtures, 15 save/load/audio-worker checks, the chainsaw regression, and exact serial/16-worker output for Classic, Matrix/Katakana, and AnsiArt/Katakana. The fresh package preflight and sound-enabled startup pass on the package candidate as recorded in the [current package receipt](../results/preview3-current-candidate-validation-aeb6772-20260928.json). These establish startup and focused behavior, not full map completion.
 
 The earlier chainsaw crash happened after collecting the saw in E1M2 and pressing Ctrl against an imp. A focused real-world hit check passes on this build. The previous 26,731-command recording predates the math corrections and no longer reproduces the old exact route; its replay is documented as stale-source evidence, not as a new human test or confirmed defect. Existing E1M1–E1M4 automated route receipts are retained at their original source pins. One E1M3 waypoint driver stalled without exposing a reproducible product defect, and it was not tuned further.
 

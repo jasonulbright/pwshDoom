@@ -4,6 +4,8 @@
 
 **Latest packaged preview: 0.1.0-preview.2** for Windows Terminal. The repository source includes additional unreleased work listed in the [changelog](CHANGELOG.md); the preview ZIP does not contain those changes. Gameplay, software rendering, terminal encoding and sound-effects mixing are PowerShell. Bring your own Ultimate Doom `DOOM.WAD`.
 
+The unpublished **Preview.3 candidate** is built from commit `aeb6772`. It is prepared for one complete Episode 1 human playthrough; the route is not yet recorded as complete. See the [exact candidate, launch steps and route](docs/episode1-playtest.md). The full Ultimate Doom release remains a broader milestone.
+
 | Classic | Matrix | Color art |
 | --- | --- | --- |
 | 320×200 pixels using truecolor half-blocks | Green katakana and animated highlights | Colored katakana following the scene |
@@ -36,7 +38,7 @@ The game opens in a maximized Terminal window. If it asks for more space, reduce
 ## Current source status
 
 - Three display styles, menus, episode/difficulty selection, automap, save/load and sound effects, with optional prepared music.
-- All 36 Ultimate Doom maps have load/simulation/render smoke coverage. E1M1–E1M4 have independently verified ordinary-input normal-exit routes; the complete Episode 1 human playthrough is still pending.
+- All 36 Ultimate Doom maps have load/simulation/render smoke coverage. E1M1–E1M4 have independently verified ordinary-input normal-exit routes; the complete Episode 1 human playthrough is still pending on the unpublished Preview.3 candidate.
 - Recent rendering work improves Doom-style wall, plane and actor sampling and clips world sprites to wall silhouettes; full original-executable parity is not established.
 - Damage, pickup and power-up palettes; an approximate parallel invisibility effect.
 - Editable source, build/package scripts, attribution and the research ledger.
