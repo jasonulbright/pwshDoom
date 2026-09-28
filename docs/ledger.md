@@ -3635,3 +3635,34 @@ scope limits. A local link check found 31 article links: all 26 local file
 targets and all three heading anchors resolve. See the updated
 [article draft](article-draft.md); the human episode result and release review
 are still pending.
+
+## 2026-09-28 — Repeat the E3M6 loaded host across PowerShell versions
+
+The earlier E3M6 worker-count result showed 24.641 simulation tics/sec in a
+120-second PowerShell 7.6.6 run. To determine whether that low result
+reproduced, I ran the same 16-worker, headless HMP E3M6 workload with the
+Steam IWAD, full 30-entry catalog, sound enabled and no input, alternating
+two 30-second runs each on PowerShell 7.6.5 and 7.6.6. Both 7.6.6 samples
+were below both 7.6.5 samples: 27.632 / 28.365 versus 33.497 / 34.932
+tics/sec. A subsequent 120-second 7.6.5 run reached 34.366 tics/sec; the
+earlier 7.6.6 120-second run remains 24.641. Current source commit
+`9701f9b` and earlier pin `50d6190` have identical `src/` trees; intervening
+script edits are package and measurement/partition-test tooling. This
+supports a runtime-associated difference in these observations, not a claim
+that the PowerShell update caused a performance regression. Environmental
+load and scheduling are not fully controlled.
+
+Audio returned every submitted frame in four of the five current-source runs.
+The final 7.6.5 30-second run ended with one unconsumed packet and a 5,040-frame
+canceled-tail upper bound; the device still closed without errors. The
+120-second 7.6.5 run submitted and returned all 5,198,760 frames with zero
+unconsumed packets, while recording five rebuffer observations. Device queue
+polling cannot prove an audible interruption. These headless runs do not
+measure Terminal presentation or displayed FPS, and none meets or closes the
+35-tic/60-display gate. No worker default or product source changed.
+
+The [portable receipt](../results/music-host-e3m6-runtime-comparison-20260928.json)
+records each sample, source/WAD/catalog pins and raw-report hashes; the
+complete reports remain in ignored `local/`. Updated [performance notes](performance.md),
+the [article draft](article-draft.md) and [active roadmap](roadmap.md) now
+describe the repeated result and its limits.

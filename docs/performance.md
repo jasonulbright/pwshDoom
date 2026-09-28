@@ -181,3 +181,38 @@ after reverting it—within timing variation, with no demonstrated speedup. The
 edit was reverted. The [candidate profile](../results/renderer-stripes-e3m6-projection-candidate-20260928.json)
 preserves its distinct source hash and is not current game code. The complete
 raw host reports are retained in ignored `local/`; no recording was made.
+
+## PowerShell runtime comparison on E3M6 — September 28, 2026
+
+To check whether the 24.641-tic/sec 7.6.6 result reproduced, I alternated two
+30-second runs on PowerShell 7.6.5 with two on 7.6.6, then ran a 120-second
+7.6.5 session. All used the same 16-worker, headless, no-input HMP E3M6
+workload, Steam IWAD, 30-entry music catalog, and sound-enabled waveOut path.
+The 30-second order was 7.6.5, 7.6.6, 7.6.6, 7.6.5. The two current-source
+7.6.6 samples were run explicitly with that executable; every report records
+its PowerShell version. Current and earlier Git source pins have identical
+`src/` trees; only package/measurement/partition-test scripts differ. This
+helps isolate the runtime version, but does not control all system scheduling
+and load variation.
+
+| Runtime and duration | Simulation tics/sec | Completed host updates/sec | Frame latency median / p95 | Audio submitted / returned | Rebuffer observations; shutdown state |
+| --- | ---: | ---: | ---: | ---: | --- |
+| 7.6.5, two 30-second runs | 33.497 / 34.932 | 35.163 / 37.298 | 27.07 / 49.01 ms; 25.76 / 45.88 ms | 1,268,820 / 1,268,820; 1,320,480 / 1,315,440 | 4; 1. The latter ended with one unconsumed packet and a 5,040-frame canceled-tail upper bound. Device closed without errors. |
+| 7.6.6, two 30-second runs | 27.632 / 28.365 | 33.232 / 34.332 | 28.98 / 49.91 ms; 28.67 / 46.43 ms | 1,047,060 / 1,047,060; 1,073,520 / 1,073,520 | 13 / 7; both returned all frames and closed without errors. |
+| 7.6.5, 120-second run | 34.366 | 34.891 | 27.93 / 45.65 ms | 5,198,760 / 5,198,760 | 5; zero unconsumed packets, device closed without errors. |
+| Earlier 7.6.6, 120-second run | 24.641 | 34.075 | 28.27 / 49.47 ms | 3,728,340 / 3,728,340 | 280; zero unconsumed packets, device closed without errors. |
+
+Both current 7.6.6 short repeats were below both 7.6.5 repeats. The later
+7.6.5 long run also held near 34.4 tics/sec, unlike the earlier 7.6.6 long
+run. This is a runtime-associated difference in these trials, not proof that
+the 7.6.6 update caused a regression; background load and other machine state
+were not fully controlled. Queue/rebuffer telemetry counts device polling
+events and cannot establish that a listener heard a gap. All runs are
+headless: completed host updates are not Terminal writes or monitor
+presentations. No renderer or worker default was changed.
+
+The [portable comparison receipt](../results/music-host-e3m6-runtime-comparison-20260928.json)
+pins the workload and raw-report hashes. The complete per-session reports stay
+under ignored `local/`. These measurements narrow the performance question;
+they do not pass the 35-tic/60-display gate or qualify continuous audible
+music.
