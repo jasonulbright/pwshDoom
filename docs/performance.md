@@ -139,3 +139,45 @@ The [portable receipt](../results/music-host-e1m1-loop-seam-20260928.json)
 includes the PCM digest and source hashes. The complete session report stays in
 ignored `local/`; no screen recording was made. The 35-tic/60-display gate
 remains open.
+
+## E3M6 worker-count load comparison — September 28, 2026
+
+Three no-input HMP sessions started on E3M6 with PowerShell 7.6.6, the stock
+Steam Ultimate Doom IWAD, the local 30-track catalog, sound enabled, and
+headless output. The 16-worker run lasted 120 seconds; the 8- and 12-worker
+runs lasted 30 seconds each. All used source commit `50d6190`. Host updates
+below are completed render jobs, not terminal writes or monitor presentations.
+
+| Workers | Duration | Simulation tics/sec | Completed host updates/sec | Frame latency median / p95 | Worker working set | Queue starvation / rebuffer | Audio frames submitted / returned |
+| ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 16 | 120.001 s | 24.641 | 34.075 | 28.27 / 49.47 ms | 4.61 GiB | 280 / 280 | 3,728,340 / 3,728,340 |
+| 8 | 30.002 s | 28.432 | 30.665 | 30.12 / 56.07 ms | 2.32 GiB | 4 / 4 | 1,077,300 / 1,077,300 |
+| 12 | 30.001 s | 26.466 | 31.799 | 29.53 / 57.80 ms | 3.43 GiB | 25 / 25 | 1,002,960 / 1,002,960 |
+
+The 8-worker sample has the highest simulation rate and fewest queue-empty
+observations, while 16 workers complete the most render jobs per second. The
+12-worker sample lies between them on render throughput but below eight on
+simulation rate. The unequal durations and one trial per configuration make
+these exploratory comparisons; they do not justify changing the default.
+Every session returned all submitted audio frames, had zero unconsumed packets
+and clipped samples, and closed the device without a worker or cleanup error.
+Queue-starvation/rebuffer counters still expose serious continuity risk on
+E3M6. They do not tell us whether a listener heard a dropout. None of these
+headless measurements establishes a 35-tic/60-display result.
+
+A separate fixed-state PowerShell profile divides the E3M6 view into the same
+16 twenty-column stripes as production workers and measures them sequentially.
+Across 192 measured stripe renders, the total median/p95 was 14.92/17.71 ms;
+the actor phase was 9.75/12.22 ms and geometry was 4.07/5.22 ms. Individual
+stripe medians ranged from 11.27 to 17.85 ms. The actor scan runs in every
+worker, so this profile identifies repeated work worth investigating; it is
+not a concurrent worker or whole-host timing. See the [stripe profile](../results/renderer-stripes-e3m6-start-16w-current-20260928.json)
+and [portable session comparison](../results/music-host-e3m6-worker-scaling-20260928.json).
+
+An experiment moved the actor scale division after the frustum test. Its
+fixed-state pixel hashes matched all 16 current-source stripes exactly, but
+the actor/total medians were 9.73/14.77 ms for the candidate and 9.75/14.92 ms
+after reverting it—within timing variation, with no demonstrated speedup. The
+edit was reverted. The [candidate profile](../results/renderer-stripes-e3m6-projection-candidate-20260928.json)
+preserves its distinct source hash and is not current game code. The complete
+raw host reports are retained in ignored `local/`; no recording was made.

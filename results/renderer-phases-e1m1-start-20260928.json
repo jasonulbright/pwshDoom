@@ -1,0 +1,237 @@
+{
+  "FinishedUtc": "2026-09-28T10:00:22.2116323Z",
+  "Error": null,
+  "Episode": 1,
+  "Map": 1,
+  "Skill": 3,
+  "SetupTics": 0,
+  "WarmupFrames": 5,
+  "MeasuredFrames": 20,
+  "RenderMode": "Serial FastRenderer; fixed game state and view; no terminal, audio, or simulation timing",
+  "Camera": {
+    "Y": {
+      "Data": -236978176
+    },
+    "ViewZ": {
+      "Data": 2686976
+    },
+    "X": {
+      "Data": 69206016
+    },
+    "Angle": {
+      "Data": 1073741824
+    }
+  },
+  "ActorCount": 115,
+  "PhaseStats": {
+    "WeaponMs": {
+      "Mean": 0.08022,
+      "P95": 0.0914,
+      "Count": 20,
+      "P99": 0.0914,
+      "Max": 0.0948,
+      "Median": 0.0785
+    },
+    "TotalMs": {
+      "Mean": 93.58556499999999,
+      "P95": 101.1057,
+      "Count": 20,
+      "P99": 101.1057,
+      "Max": 103.7457,
+      "Median": 94.2545
+    },
+    "ActorsMs": {
+      "Mean": 4.456495,
+      "P95": 5.9594,
+      "Count": 20,
+      "P99": 5.9594,
+      "Max": 6.0389,
+      "Median": 4.2607
+    },
+    "HudMs": {
+      "Mean": 1.6442500000000002,
+      "P95": 3.0473,
+      "Count": 20,
+      "P99": 3.0473,
+      "Max": 3.1921,
+      "Median": 1.3233
+    },
+    "GeometryMs": {
+      "Mean": 87.30233000000001,
+      "P95": 95.5603,
+      "Count": 20,
+      "P99": 95.5603,
+      "Max": 96.2324,
+      "Median": 87.1993
+    }
+  },
+  "Samples": [
+    {
+      "Index": 0,
+      "ActorsMs": 4.3207,
+      "GeometryMs": 87.1993,
+      "WeaponMs": 0.0842,
+      "HudMs": 1.4055,
+      "TotalMs": 93.7224
+    },
+    {
+      "Index": 1,
+      "ActorsMs": 4.2891,
+      "GeometryMs": 89.1486,
+      "WeaponMs": 0.0844,
+      "HudMs": 1.3645,
+      "TotalMs": 95.005
+    },
+    {
+      "Index": 2,
+      "ActorsMs": 4.3028,
+      "GeometryMs": 90.0009,
+      "WeaponMs": 0.0863,
+      "HudMs": 1.3595,
+      "TotalMs": 95.8121
+    },
+    {
+      "Index": 3,
+      "ActorsMs": 4.2508,
+      "GeometryMs": 86.7946,
+      "WeaponMs": 0.0914,
+      "HudMs": 3.0473,
+      "TotalMs": 94.2545
+    },
+    {
+      "Index": 4,
+      "ActorsMs": 4.2607,
+      "GeometryMs": 86.7608,
+      "WeaponMs": 0.0948,
+      "HudMs": 1.3498,
+      "TotalMs": 92.5306
+    },
+    {
+      "Index": 5,
+      "ActorsMs": 4.3399,
+      "GeometryMs": 89.5574,
+      "WeaponMs": 0.0791,
+      "HudMs": 1.3426,
+      "TotalMs": 95.3818
+    },
+    {
+      "Index": 6,
+      "ActorsMs": 5.9124,
+      "GeometryMs": 87.7202,
+      "WeaponMs": 0.0768,
+      "HudMs": 1.3233,
+      "TotalMs": 95.1027
+    },
+    {
+      "Index": 7,
+      "ActorsMs": 4.237,
+      "GeometryMs": 86.2985,
+      "WeaponMs": 0.0778,
+      "HudMs": 2.9064,
+      "TotalMs": 93.5826
+    },
+    {
+      "Index": 8,
+      "ActorsMs": 4.2991,
+      "GeometryMs": 86.821,
+      "WeaponMs": 0.0765,
+      "HudMs": 1.3219,
+      "TotalMs": 92.5841
+    },
+    {
+      "Index": 9,
+      "ActorsMs": 4.2604,
+      "GeometryMs": 89.2719,
+      "WeaponMs": 0.0757,
+      "HudMs": 1.3309,
+      "TotalMs": 95.0057
+    },
+    {
+      "Index": 10,
+      "ActorsMs": 5.9594,
+      "GeometryMs": 87.4026,
+      "WeaponMs": 0.0766,
+      "HudMs": 1.2998,
+      "TotalMs": 94.8023
+    },
+    {
+      "Index": 11,
+      "ActorsMs": 4.2805,
+      "GeometryMs": 86.7899,
+      "WeaponMs": 0.08,
+      "HudMs": 3.1921,
+      "TotalMs": 94.4052
+    },
+    {
+      "Index": 12,
+      "ActorsMs": 4.2039,
+      "GeometryMs": 88.5168,
+      "WeaponMs": 0.0785,
+      "HudMs": 1.2948,
+      "TotalMs": 94.1806
+    },
+    {
+      "Index": 13,
+      "ActorsMs": 4.3697,
+      "GeometryMs": 92.9042,
+      "WeaponMs": 0.0772,
+      "HudMs": 1.3083,
+      "TotalMs": 98.7231
+    },
+    {
+      "Index": 14,
+      "ActorsMs": 6.0389,
+      "GeometryMs": 96.2324,
+      "WeaponMs": 0.0906,
+      "HudMs": 1.3004,
+      "TotalMs": 103.7457
+    },
+    {
+      "Index": 15,
+      "ActorsMs": 4.1243,
+      "GeometryMs": 95.5603,
+      "WeaponMs": 0.0787,
+      "HudMs": 1.2798,
+      "TotalMs": 101.1057
+    },
+    {
+      "Index": 16,
+      "ActorsMs": 4.0033,
+      "GeometryMs": 81.5121,
+      "WeaponMs": 0.0719,
+      "HudMs": 1.2409,
+      "TotalMs": 86.9037
+    },
+    {
+      "Index": 17,
+      "ActorsMs": 3.9582,
+      "GeometryMs": 80.1725,
+      "WeaponMs": 0.0681,
+      "HudMs": 1.2273,
+      "TotalMs": 85.4865
+    },
+    {
+      "Index": 18,
+      "ActorsMs": 3.8634,
+      "GeometryMs": 78.3313,
+      "WeaponMs": 0.0765,
+      "HudMs": 2.7582,
+      "TotalMs": 85.0935
+    },
+    {
+      "Index": 19,
+      "ActorsMs": 3.8554,
+      "GeometryMs": 79.0513,
+      "WeaponMs": 0.0793,
+      "HudMs": 1.2317,
+      "TotalMs": 84.2835
+    }
+  ],
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "BundleSha256": "19DE3303C005C6BD6CF96F7A101C2D7AD34B43CA678E1D65FD2ECE7A1E5E7038",
+  "RendererSha256": "9496D650D07F4177DF77A70309E5F99D46C4F7A2F0C664D2C3B3E8FB4165F3FA",
+  "GameHostSha256": "4F082542D9AE6D30ABE3B9D11CBBE26D94B3FFBA3D2B02E5117D69D86A2D06E9",
+  "HarnessSha256": "B4BEC686C52178422E31B1E2C2FFBE572C684A013FAB7E158D834FC1A789791A",
+  "PowerShell": "7.6.6",
+  "Meaning": "Attributes serial software-rendering time to the instrumented geometry, actor, player-weapon, and HUD phases at one fixed real-IWAD state. Does not model 16-worker contention or terminal output; use live host receipts for pacing."
+}

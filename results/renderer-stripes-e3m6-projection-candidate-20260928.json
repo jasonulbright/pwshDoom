@@ -1,0 +1,2960 @@
+{
+  "FinishedUtc": "2026-09-28T10:15:24.6479080Z",
+  "Error": null,
+  "Episode": 3,
+  "Map": 6,
+  "Skill": 3,
+  "SetupTics": 0,
+  "WarmupFrames": 3,
+  "MeasuredFrames": 12,
+  "RenderMode": "Fixed game state and view; renderer phases measured serially for each of 16 production-equivalent column stripe(s); no terminal, audio, or simulation timing",
+  "WorkerCount": 16,
+  "Camera": {
+    "ViewZ": {
+      "Data": 4259840
+    },
+    "Angle": {
+      "Data": 1610612736
+    },
+    "X": {
+      "Data": 112197632
+    },
+    "Y": {
+      "Data": -117440512
+    }
+  },
+  "ActorCount": 311,
+  "PhaseStats": {
+    "ActorsMs": {
+      "Max": 13.3694,
+      "P95": 12.2918,
+      "Median": 9.7305,
+      "Count": 192,
+      "Mean": 9.704350520833335,
+      "P99": 13.2288
+    },
+    "HudMs": {
+      "Max": 2.2212,
+      "P95": 0.8944,
+      "Median": 0.7418,
+      "Count": 192,
+      "Mean": 0.7878463541666666,
+      "P99": 2.0261
+    },
+    "WeaponMs": {
+      "Max": 0.1808,
+      "P95": 0.0992,
+      "Median": 0.0677,
+      "Count": 192,
+      "Mean": 0.07290208333333335,
+      "P99": 0.1252
+    },
+    "GeometryMs": {
+      "Max": 5.3814,
+      "P95": 5.2048,
+      "Median": 3.9081,
+      "Count": 192,
+      "Mean": 4.010584374999999,
+      "P99": 5.3044
+    },
+    "TotalMs": {
+      "Max": 19.1254,
+      "P95": 17.6488,
+      "Median": 14.766,
+      "Count": 192,
+      "Mean": 14.643519791666671,
+      "P99": 18.011
+    }
+  },
+  "WorkerPhaseStats": [
+    {
+      "WorkerIndex": 0,
+      "PhaseStats": {
+        "TotalMs": {
+          "Max": 16.6514,
+          "P95": 15.8474,
+          "Median": 14.6563,
+          "Count": 12,
+          "Mean": 14.943591666666668,
+          "P99": 15.8474
+        },
+        "GeometryMs": {
+          "Max": 4.4897,
+          "P95": 4.4803,
+          "Median": 3.8621,
+          "Count": 12,
+          "Mean": 4.085866666666666,
+          "P99": 4.4803
+        },
+        "ActorsMs": {
+          "Max": 11.1183,
+          "P95": 9.9867,
+          "Median": 9.2935,
+          "Count": 12,
+          "Mean": 9.534291666666666,
+          "P99": 9.9867
+        },
+        "WeaponMs": {
+          "Max": 0.1165,
+          "P95": 0.1071,
+          "Median": 0.0901,
+          "Count": 12,
+          "Mean": 0.09360833333333335,
+          "P99": 0.1071
+        },
+        "HudMs": {
+          "Max": 1.947,
+          "P95": 1.8294,
+          "Median": 0.8746,
+          "Count": 12,
+          "Mean": 1.0903333333333334,
+          "P99": 1.8294
+        }
+      },
+      "FirstColumn": 0,
+      "EndColumn": 20,
+      "OutputSha256": "DCF252A2B0F4AFBBBF72B778D5B4B9ADB587CDBAC1822D8598229B5AB5FC748A"
+    },
+    {
+      "WorkerIndex": 1,
+      "PhaseStats": {
+        "TotalMs": {
+          "Max": 15.6511,
+          "P95": 15.5733,
+          "Median": 14.8939,
+          "Count": 12,
+          "Mean": 14.966149999999999,
+          "P99": 15.5733
+        },
+        "GeometryMs": {
+          "Max": 4.0034,
+          "P95": 3.8223,
+          "Median": 3.7354,
+          "Count": 12,
+          "Mean": 3.7418083333333327,
+          "P99": 3.8223
+        },
+        "ActorsMs": {
+          "Max": 10.8699,
+          "P95": 10.7057,
+          "Median": 10.1536,
+          "Count": 12,
+          "Mean": 10.104633333333332,
+          "P99": 10.7057
+        },
+        "WeaponMs": {
+          "Max": 0.1177,
+          "P95": 0.0992,
+          "Median": 0.0923,
+          "Count": 12,
+          "Mean": 0.09518333333333333,
+          "P99": 0.0992
+        },
+        "HudMs": {
+          "Max": 2.0261,
+          "P95": 0.8882,
+          "Median": 0.8572,
+          "Count": 12,
+          "Mean": 0.9560083333333332,
+          "P99": 0.8882
+        }
+      },
+      "FirstColumn": 20,
+      "EndColumn": 40,
+      "OutputSha256": "57E6A869CC59CFD14723453FD50983FE76FBC9797A79A4AB95F0EC6E6599568F"
+    },
+    {
+      "WorkerIndex": 2,
+      "PhaseStats": {
+        "TotalMs": {
+          "Max": 16.5921,
+          "P95": 16.3733,
+          "Median": 15.9186,
+          "Count": 12,
+          "Mean": 15.975041666666664,
+          "P99": 16.3733
+        },
+        "GeometryMs": {
+          "Max": 5.0245,
+          "P95": 4.9952,
+          "Median": 4.92,
+          "Count": 12,
+          "Mean": 4.507458333333332,
+          "P99": 4.9952
+        },
+        "ActorsMs": {
+          "Max": 11.6381,
+          "P95": 11.3885,
+          "Median": 10.3225,
+          "Count": 12,
+          "Mean": 10.481483333333333,
+          "P99": 11.3885
+        },
+        "WeaponMs": {
+          "Max": 0.1087,
+          "P95": 0.0811,
+          "Median": 0.0771,
+          "Count": 12,
+          "Mean": 0.07874166666666667,
+          "P99": 0.0811
+        },
+        "HudMs": {
+          "Max": 0.8831,
+          "P95": 0.8785,
+          "Median": 0.8317,
+          "Count": 12,
+          "Mean": 0.8405833333333335,
+          "P99": 0.8785
+        }
+      },
+      "FirstColumn": 40,
+      "EndColumn": 60,
+      "OutputSha256": "A019449492147473FFCBA52FF4B1E0C39BDC1138A628805F993BEBE0DABAA5E9"
+    },
+    {
+      "WorkerIndex": 3,
+      "PhaseStats": {
+        "TotalMs": {
+          "Max": 16.2568,
+          "P95": 16.1637,
+          "Median": 15.9782,
+          "Count": 12,
+          "Mean": 16.000641666666667,
+          "P99": 16.1637
+        },
+        "GeometryMs": {
+          "Max": 3.9793,
+          "P95": 3.9744,
+          "Median": 3.6553,
+          "Count": 12,
+          "Mean": 3.7854000000000005,
+          "P99": 3.9744
+        },
+        "ActorsMs": {
+          "Max": 11.636,
+          "P95": 11.5542,
+          "Median": 11.2286,
+          "Count": 12,
+          "Mean": 11.253858333333334,
+          "P99": 11.5542
+        },
+        "WeaponMs": {
+          "Max": 0.0796,
+          "P95": 0.0782,
+          "Median": 0.0752,
+          "Count": 12,
+          "Mean": 0.07529166666666666,
+          "P99": 0.0782
+        },
+        "HudMs": {
+          "Max": 0.8458,
+          "P95": 0.8282,
+          "Median": 0.8196,
+          "Count": 12,
+          "Mean": 0.8217000000000002,
+          "P99": 0.8282
+        }
+      },
+      "FirstColumn": 60,
+      "EndColumn": 80,
+      "OutputSha256": "569DA5D9470E70A3CCEB71332A6C79DD709264642A8FC11E2FB06A78366F9FBB"
+    },
+    {
+      "WorkerIndex": 4,
+      "PhaseStats": {
+        "TotalMs": {
+          "Max": 16.9736,
+          "P95": 16.6735,
+          "Median": 15.9748,
+          "Count": 12,
+          "Mean": 16.024183333333333,
+          "P99": 16.6735
+        },
+        "GeometryMs": {
+          "Max": 4.5619,
+          "P95": 4.1569,
+          "Median": 3.9898,
+          "Count": 12,
+          "Mean": 4.060275,
+          "P99": 4.1569
+        },
+        "ActorsMs": {
+          "Max": 11.5482,
+          "P95": 11.3742,
+          "Median": 10.9604,
+          "Count": 12,
+          "Mean": 11.0137,
+          "P99": 11.3742
+        },
+        "WeaponMs": {
+          "Max": 0.1808,
+          "P95": 0.1285,
+          "Median": 0.0752,
+          "Count": 12,
+          "Mean": 0.09088333333333333,
+          "P99": 0.1285
+        },
+        "HudMs": {
+          "Max": 0.8487,
+          "P95": 0.8446,
+          "Median": 0.7787,
+          "Count": 12,
+          "Mean": 0.7927333333333335,
+          "P99": 0.8446
+        }
+      },
+      "FirstColumn": 80,
+      "EndColumn": 100,
+      "OutputSha256": "2E90F62B0BD692E1781060DEB198F10F7D6319028F00497C41A03F7ECF4B2D4B"
+    },
+    {
+      "WorkerIndex": 5,
+      "PhaseStats": {
+        "TotalMs": {
+          "Max": 15.8978,
+          "P95": 15.4621,
+          "Median": 14.8423,
+          "Count": 12,
+          "Mean": 15.028341666666662,
+          "P99": 15.4621
+        },
+        "GeometryMs": {
+          "Max": 4.3512,
+          "P95": 3.9846,
+          "Median": 3.9302,
+          "Count": 12,
+          "Mean": 3.970641666666666,
+          "P99": 3.9846
+        },
+        "ActorsMs": {
+          "Max": 10.614,
+          "P95": 10.1664,
+          "Median": 10.0515,
+          "Count": 12,
+          "Mean": 10.100058333333333,
+          "P99": 10.1664
+        },
+        "WeaponMs": {
+          "Max": 0.07,
+          "P95": 0.0697,
+          "Median": 0.0664,
+          "Count": 12,
+          "Mean": 0.06636666666666667,
+          "P99": 0.0697
+        },
+        "HudMs": {
+          "Max": 1.7894,
+          "P95": 0.7537,
+          "Median": 0.7389,
+          "Count": 12,
+          "Mean": 0.828675,
+          "P99": 0.7537
+        }
+      },
+      "FirstColumn": 100,
+      "EndColumn": 120,
+      "OutputSha256": "2582495085769DBD14C3399C66F8E0D7609CBA71BDDCE68E55C4AA454A5CDC78"
+    },
+    {
+      "WorkerIndex": 6,
+      "PhaseStats": {
+        "TotalMs": {
+          "Max": 14.2976,
+          "P95": 14.0932,
+          "Median": 13.8325,
+          "Count": 12,
+          "Mean": 13.927824999999999,
+          "P99": 14.0932
+        },
+        "GeometryMs": {
+          "Max": 4.3486,
+          "P95": 3.9912,
+          "Median": 3.9354,
+          "Count": 12,
+          "Mean": 3.9686166666666662,
+          "P99": 3.9912
+        },
+        "ActorsMs": {
+          "Max": 9.2319,
+          "P95": 9.2109,
+          "Median": 9.0249,
+          "Count": 12,
+          "Mean": 9.069441666666666,
+          "P99": 9.2109
+        },
+        "WeaponMs": {
+          "Max": 0.0768,
+          "P95": 0.0733,
+          "Median": 0.0671,
+          "Count": 12,
+          "Mean": 0.06890833333333334,
+          "P99": 0.0733
+        },
+        "HudMs": {
+          "Max": 0.7926,
+          "P95": 0.7864,
+          "Median": 0.7487,
+          "Count": 12,
+          "Mean": 0.7563166666666667,
+          "P99": 0.7864
+        }
+      },
+      "FirstColumn": 120,
+      "EndColumn": 140,
+      "OutputSha256": "35D208B730F9FEB7A3FF961D25411AF597F65B40D45A6E0619274552CF1B3E71"
+    },
+    {
+      "WorkerIndex": 7,
+      "PhaseStats": {
+        "TotalMs": {
+          "Max": 15.6499,
+          "P95": 14.7251,
+          "Median": 14.2115,
+          "Count": 12,
+          "Mean": 14.462458333333332,
+          "P99": 14.7251
+        },
+        "GeometryMs": {
+          "Max": 3.9257,
+          "P95": 3.911,
+          "Median": 3.5846,
+          "Count": 12,
+          "Mean": 3.694116666666666,
+          "P99": 3.911
+        },
+        "ActorsMs": {
+          "Max": 11.1884,
+          "P95": 10.4509,
+          "Median": 9.4627,
+          "Count": 12,
+          "Mean": 9.880650000000001,
+          "P99": 10.4509
+        },
+        "WeaponMs": {
+          "Max": 0.0751,
+          "P95": 0.0721,
+          "Median": 0.0686,
+          "Count": 12,
+          "Mean": 0.06909166666666666,
+          "P99": 0.0721
+        },
+        "HudMs": {
+          "Max": 0.7923,
+          "P95": 0.7606,
+          "Median": 0.7511,
+          "Count": 12,
+          "Mean": 0.7547583333333335,
+          "P99": 0.7606
+        }
+      },
+      "FirstColumn": 140,
+      "EndColumn": 160,
+      "OutputSha256": "E975C64B715FA9371A0D5D287E3B482E7B9E252B156BDD150565B7D7BE0ACDC7"
+    },
+    {
+      "WorkerIndex": 8,
+      "PhaseStats": {
+        "TotalMs": {
+          "Max": 19.1254,
+          "P95": 18.4007,
+          "Median": 17.7835,
+          "Count": 12,
+          "Mean": 17.9198,
+          "P99": 18.4007
+        },
+        "GeometryMs": {
+          "Max": 4.844,
+          "P95": 4.6863,
+          "Median": 3.6995,
+          "Count": 12,
+          "Mean": 4.11035,
+          "P99": 4.6863
+        },
+        "ActorsMs": {
+          "Max": 13.3694,
+          "P95": 13.2492,
+          "Median": 12.9113,
+          "Count": 12,
+          "Mean": 12.874200000000002,
+          "P99": 13.2492
+        },
+        "WeaponMs": {
+          "Max": 0.0795,
+          "P95": 0.0727,
+          "Median": 0.0676,
+          "Count": 12,
+          "Mean": 0.06880833333333332,
+          "P99": 0.0727
+        },
+        "HudMs": {
+          "Max": 1.5386,
+          "P95": 0.7662,
+          "Median": 0.7378,
+          "Count": 12,
+          "Mean": 0.8061500000000001,
+          "P99": 0.7662
+        }
+      },
+      "FirstColumn": 160,
+      "EndColumn": 180,
+      "OutputSha256": "4B9EC7168ED3436C50742C6D9DD7BF5F29799B385F4F3112409D5124551C1A07"
+    },
+    {
+      "WorkerIndex": 9,
+      "PhaseStats": {
+        "TotalMs": {
+          "Max": 17.9656,
+          "P95": 17.8096,
+          "Median": 17.2841,
+          "Count": 12,
+          "Mean": 17.288049999999995,
+          "P99": 17.8096
+        },
+        "GeometryMs": {
+          "Max": 5.3814,
+          "P95": 5.3124,
+          "Median": 5.2261,
+          "Count": 12,
+          "Mean": 5.231908333333333,
+          "P99": 5.3124
+        },
+        "ActorsMs": {
+          "Max": 11.8484,
+          "P95": 11.6253,
+          "Median": 11.2373,
+          "Count": 12,
+          "Mean": 11.165616666666665,
+          "P99": 11.6253
+        },
+        "WeaponMs": {
+          "Max": 0.0873,
+          "P95": 0.0827,
+          "Median": 0.0711,
+          "Count": 12,
+          "Mean": 0.07390833333333334,
+          "P99": 0.0827
+        },
+        "HudMs": {
+          "Max": 0.808,
+          "P95": 0.7758,
+          "Median": 0.7424,
+          "Count": 12,
+          "Mean": 0.7521749999999998,
+          "P99": 0.7758
+        }
+      },
+      "FirstColumn": 180,
+      "EndColumn": 200,
+      "OutputSha256": "857F66514DFF3740C47782C30CC6B76A8E21399C9E20ECCDC294ADDFF0AD3A9D"
+    },
+    {
+      "WorkerIndex": 10,
+      "PhaseStats": {
+        "TotalMs": {
+          "Max": 16.0263,
+          "P95": 15.3499,
+          "Median": 15.1008,
+          "Count": 12,
+          "Mean": 15.1678,
+          "P99": 15.3499
+        },
+        "GeometryMs": {
+          "Max": 5.2989,
+          "P95": 5.2455,
+          "Median": 5.1822,
+          "Count": 12,
+          "Mean": 4.928866666666667,
+          "P99": 5.2455
+        },
+        "ActorsMs": {
+          "Max": 10.7714,
+          "P95": 10.048,
+          "Median": 9.0542,
+          "Count": 12,
+          "Mean": 9.4379,
+          "P99": 10.048
+        },
+        "WeaponMs": {
+          "Max": 0.0674,
+          "P95": 0.0662,
+          "Median": 0.063,
+          "Count": 12,
+          "Mean": 0.06331666666666667,
+          "P99": 0.0662
+        },
+        "HudMs": {
+          "Max": 0.69,
+          "P95": 0.6834,
+          "Median": 0.674,
+          "Count": 12,
+          "Mean": 0.6735166666666667,
+          "P99": 0.6834
+        }
+      },
+      "FirstColumn": 200,
+      "EndColumn": 220,
+      "OutputSha256": "2D40B906255C804D70D3508EC6E6E04A9933A582A614118ACFC6BD776104FAFD"
+    },
+    {
+      "WorkerIndex": 11,
+      "PhaseStats": {
+        "TotalMs": {
+          "Max": 14.1748,
+          "P95": 13.9487,
+          "Median": 13.573,
+          "Count": 12,
+          "Mean": 13.671750000000001,
+          "P99": 13.9487
+        },
+        "GeometryMs": {
+          "Max": 5.0672,
+          "P95": 5.0101,
+          "Median": 4.7563,
+          "Count": 12,
+          "Mean": 4.809875,
+          "P99": 5.0101
+        },
+        "ActorsMs": {
+          "Max": 8.2975,
+          "P95": 8.1714,
+          "Median": 8.0201,
+          "Count": 12,
+          "Mean": 8.0535,
+          "P99": 8.1714
+        },
+        "WeaponMs": {
+          "Max": 0.067,
+          "P95": 0.0665,
+          "Median": 0.0651,
+          "Count": 12,
+          "Mean": 0.06485833333333334,
+          "P99": 0.0665
+        },
+        "HudMs": {
+          "Max": 0.6872,
+          "P95": 0.68,
+          "Median": 0.6731,
+          "Count": 12,
+          "Mean": 0.6741416666666668,
+          "P99": 0.68
+        }
+      },
+      "FirstColumn": 220,
+      "EndColumn": 240,
+      "OutputSha256": "8455004E7CA122BC2BA917296CB22246E01E7F497A282642BBE119894935D595"
+    },
+    {
+      "WorkerIndex": 12,
+      "PhaseStats": {
+        "TotalMs": {
+          "Max": 14.5389,
+          "P95": 14.1098,
+          "Median": 13.497,
+          "Count": 12,
+          "Mean": 13.643650000000003,
+          "P99": 14.1098
+        },
+        "GeometryMs": {
+          "Max": 4.1689,
+          "P95": 4.054,
+          "Median": 3.8016,
+          "Count": 12,
+          "Mean": 3.8561583333333336,
+          "P99": 4.054
+        },
+        "ActorsMs": {
+          "Max": 9.7875,
+          "P95": 9.1609,
+          "Median": 8.884,
+          "Count": 12,
+          "Mean": 8.995783333333334,
+          "P99": 9.1609
+        },
+        "WeaponMs": {
+          "Max": 0.1233,
+          "P95": 0.1165,
+          "Median": 0.0631,
+          "Count": 12,
+          "Mean": 0.07485833333333333,
+          "P99": 0.1165
+        },
+        "HudMs": {
+          "Max": 0.6824,
+          "P95": 0.6653,
+          "Median": 0.6492,
+          "Count": 12,
+          "Mean": 0.6533416666666666,
+          "P99": 0.6653
+        }
+      },
+      "FirstColumn": 240,
+      "EndColumn": 260,
+      "OutputSha256": "2D13A1EBD9FCA07CB7B5A4B765F09D86DAF03B523868B8CD781D5EEA2758CD7E"
+    },
+    {
+      "WorkerIndex": 13,
+      "PhaseStats": {
+        "TotalMs": {
+          "Max": 12.8345,
+          "P95": 12.4825,
+          "Median": 12.3979,
+          "Count": 12,
+          "Mean": 12.412816666666666,
+          "P99": 12.4825
+        },
+        "GeometryMs": {
+          "Max": 3.8174,
+          "P95": 3.8049,
+          "Median": 2.9529,
+          "Count": 12,
+          "Mean": 3.2257166666666666,
+          "P99": 3.8049
+        },
+        "ActorsMs": {
+          "Max": 9.1498,
+          "P95": 8.7743,
+          "Median": 8.6488,
+          "Count": 12,
+          "Mean": 8.430416666666666,
+          "P99": 8.7743
+        },
+        "WeaponMs": {
+          "Max": 0.0653,
+          "P95": 0.0647,
+          "Median": 0.0597,
+          "Count": 12,
+          "Mean": 0.06036666666666667,
+          "P99": 0.0647
+        },
+        "HudMs": {
+          "Max": 0.6475,
+          "P95": 0.6462,
+          "Median": 0.6396,
+          "Count": 12,
+          "Mean": 0.6400583333333334,
+          "P99": 0.6462
+        }
+      },
+      "FirstColumn": 260,
+      "EndColumn": 280,
+      "OutputSha256": "9DF6DBB347B5B7A55E2BF554D330D8509184C2684C08337A153E4B16A423A7EA"
+    },
+    {
+      "WorkerIndex": 14,
+      "PhaseStats": {
+        "TotalMs": {
+          "Max": 12.0264,
+          "P95": 11.833,
+          "Median": 11.5098,
+          "Count": 12,
+          "Mean": 11.496725,
+          "P99": 11.833
+        },
+        "GeometryMs": {
+          "Max": 3.9011,
+          "P95": 3.8537,
+          "Median": 2.9345,
+          "Count": 12,
+          "Mean": 3.232416666666667,
+          "P99": 3.8537
+        },
+        "ActorsMs": {
+          "Max": 7.8422,
+          "P95": 7.8374,
+          "Median": 7.2091,
+          "Count": 12,
+          "Mean": 7.369025000000001,
+          "P99": 7.8374
+        },
+        "WeaponMs": {
+          "Max": 0.0716,
+          "P95": 0.0708,
+          "Median": 0.0608,
+          "Count": 12,
+          "Mean": 0.06275833333333333,
+          "P99": 0.0708
+        },
+        "HudMs": {
+          "Max": 2.1648,
+          "P95": 0.6803,
+          "Median": 0.6472,
+          "Count": 12,
+          "Mean": 0.77865,
+          "P99": 0.6803
+        }
+      },
+      "FirstColumn": 280,
+      "EndColumn": 300,
+      "OutputSha256": "300D7F642DA0B7AB5739BDBFF1F61766064B0281FCB6EC8CFAB218B30EC1121C"
+    },
+    {
+      "WorkerIndex": 15,
+      "PhaseStats": {
+        "TotalMs": {
+          "Max": 11.9401,
+          "P95": 11.7537,
+          "Median": 11.3727,
+          "Count": 12,
+          "Mean": 11.367491666666666,
+          "P99": 11.7537
+        },
+        "GeometryMs": {
+          "Max": 3.1445,
+          "P95": 2.9902,
+          "Median": 2.9444,
+          "Count": 12,
+          "Mean": 2.9598750000000003,
+          "P99": 2.9902
+        },
+        "ActorsMs": {
+          "Max": 8.065,
+          "P95": 7.6938,
+          "Median": 7.6018,
+          "Count": 12,
+          "Mean": 7.50505,
+          "P99": 7.6938
+        },
+        "WeaponMs": {
+          "Max": 0.0633,
+          "P95": 0.0633,
+          "Median": 0.0586,
+          "Count": 12,
+          "Mean": 0.05948333333333333,
+          "P99": 0.0633
+        },
+        "HudMs": {
+          "Max": 2.2212,
+          "P95": 0.6626,
+          "Median": 0.656,
+          "Count": 12,
+          "Mean": 0.7864,
+          "P99": 0.6626
+        }
+      },
+      "FirstColumn": 300,
+      "EndColumn": 320,
+      "OutputSha256": "D280200AA2A951A2DF3F1B44960DF35E484E6008A4D12F367C04AA8BB9E67CDE"
+    }
+  ],
+  "Samples": [
+    {
+      "ActorsMs": 11.1183,
+      "TotalMs": 16.6514,
+      "HudMs": 0.9108,
+      "Index": 0,
+      "WorkerIndex": 0,
+      "EndColumn": 20,
+      "GeometryMs": 3.8585,
+      "WeaponMs": 0.0901,
+      "FirstColumn": 0
+    },
+    {
+      "ActorsMs": 9.9036,
+      "TotalMs": 14.835,
+      "HudMs": 0.8944,
+      "Index": 1,
+      "WorkerIndex": 0,
+      "EndColumn": 20,
+      "GeometryMs": 3.8524,
+      "WeaponMs": 0.0965,
+      "FirstColumn": 0
+    },
+    {
+      "ActorsMs": 9.9867,
+      "TotalMs": 14.8473,
+      "HudMs": 0.8958,
+      "Index": 2,
+      "WorkerIndex": 0,
+      "EndColumn": 20,
+      "GeometryMs": 3.8032,
+      "WeaponMs": 0.0983,
+      "FirstColumn": 0
+    },
+    {
+      "ActorsMs": 9.8047,
+      "TotalMs": 14.6563,
+      "HudMs": 0.8746,
+      "Index": 3,
+      "WorkerIndex": 0,
+      "EndColumn": 20,
+      "GeometryMs": 3.8105,
+      "WeaponMs": 0.1043,
+      "FirstColumn": 0
+    },
+    {
+      "ActorsMs": 9.1074,
+      "TotalMs": 14.6142,
+      "HudMs": 1.4377,
+      "Index": 4,
+      "WorkerIndex": 0,
+      "EndColumn": 20,
+      "GeometryMs": 3.9104,
+      "WeaponMs": 0.0933,
+      "FirstColumn": 0
+    },
+    {
+      "ActorsMs": 9.6565,
+      "TotalMs": 15.471,
+      "HudMs": 1.8294,
+      "Index": 5,
+      "WorkerIndex": 0,
+      "EndColumn": 20,
+      "GeometryMs": 3.8132,
+      "WeaponMs": 0.1071,
+      "FirstColumn": 0
+    },
+    {
+      "ActorsMs": 9.2935,
+      "TotalMs": 14.2049,
+      "HudMs": 0.8709,
+      "Index": 6,
+      "WorkerIndex": 0,
+      "EndColumn": 20,
+      "GeometryMs": 3.8621,
+      "WeaponMs": 0.1165,
+      "FirstColumn": 0
+    },
+    {
+      "ActorsMs": 9.6539,
+      "TotalMs": 15.1455,
+      "HudMs": 0.8548,
+      "Index": 7,
+      "WorkerIndex": 0,
+      "EndColumn": 20,
+      "GeometryMs": 4.4897,
+      "WeaponMs": 0.0857,
+      "FirstColumn": 0
+    },
+    {
+      "ActorsMs": 9.0177,
+      "TotalMs": 14.5164,
+      "HudMs": 0.8741,
+      "Index": 8,
+      "WorkerIndex": 0,
+      "EndColumn": 20,
+      "GeometryMs": 4.4803,
+      "WeaponMs": 0.0845,
+      "FirstColumn": 0
+    },
+    {
+      "ActorsMs": 8.9885,
+      "TotalMs": 14.3672,
+      "HudMs": 0.8458,
+      "Index": 9,
+      "WorkerIndex": 0,
+      "EndColumn": 20,
+      "GeometryMs": 4.3854,
+      "WeaponMs": 0.0859,
+      "FirstColumn": 0
+    },
+    {
+      "ActorsMs": 8.8315,
+      "TotalMs": 14.1665,
+      "HudMs": 0.8487,
+      "Index": 10,
+      "WorkerIndex": 0,
+      "EndColumn": 20,
+      "GeometryMs": 4.3451,
+      "WeaponMs": 0.0792,
+      "FirstColumn": 0
+    },
+    {
+      "ActorsMs": 9.0492,
+      "TotalMs": 15.8474,
+      "HudMs": 1.947,
+      "Index": 11,
+      "WorkerIndex": 0,
+      "EndColumn": 20,
+      "GeometryMs": 4.4196,
+      "WeaponMs": 0.0819,
+      "FirstColumn": 0
+    },
+    {
+      "ActorsMs": 10.8699,
+      "TotalMs": 15.6511,
+      "HudMs": 0.8668,
+      "Index": 0,
+      "WorkerIndex": 1,
+      "EndColumn": 40,
+      "GeometryMs": 3.7563,
+      "WeaponMs": 0.0944,
+      "FirstColumn": 20
+    },
+    {
+      "ActorsMs": 10.2925,
+      "TotalMs": 15.0894,
+      "HudMs": 0.8688,
+      "Index": 1,
+      "WorkerIndex": 1,
+      "EndColumn": 40,
+      "GeometryMs": 3.7603,
+      "WeaponMs": 0.0992,
+      "FirstColumn": 20
+    },
+    {
+      "ActorsMs": 10.1536,
+      "TotalMs": 14.8688,
+      "HudMs": 0.8572,
+      "Index": 2,
+      "WorkerIndex": 1,
+      "EndColumn": 40,
+      "GeometryMs": 3.688,
+      "WeaponMs": 0.0899,
+      "FirstColumn": 20
+    },
+    {
+      "ActorsMs": 10.4972,
+      "TotalMs": 15.2583,
+      "HudMs": 0.8882,
+      "Index": 3,
+      "WorkerIndex": 1,
+      "EndColumn": 40,
+      "GeometryMs": 3.6874,
+      "WeaponMs": 0.1177,
+      "FirstColumn": 20
+    },
+    {
+      "ActorsMs": 10.532,
+      "TotalMs": 15.3355,
+      "HudMs": 0.8578,
+      "Index": 4,
+      "WorkerIndex": 1,
+      "EndColumn": 40,
+      "GeometryMs": 3.778,
+      "WeaponMs": 0.0964,
+      "FirstColumn": 20
+    },
+    {
+      "ActorsMs": 10.4773,
+      "TotalMs": 15.4794,
+      "HudMs": 0.8384,
+      "Index": 5,
+      "WorkerIndex": 1,
+      "EndColumn": 40,
+      "GeometryMs": 4.0034,
+      "WeaponMs": 0.0949,
+      "FirstColumn": 20
+    },
+    {
+      "ActorsMs": 10.7057,
+      "TotalMs": 15.5733,
+      "HudMs": 0.8757,
+      "Index": 6,
+      "WorkerIndex": 1,
+      "EndColumn": 40,
+      "GeometryMs": 3.8223,
+      "WeaponMs": 0.091,
+      "FirstColumn": 20
+    },
+    {
+      "ActorsMs": 10.1408,
+      "TotalMs": 14.8939,
+      "HudMs": 0.8531,
+      "Index": 7,
+      "WorkerIndex": 1,
+      "EndColumn": 40,
+      "GeometryMs": 3.7354,
+      "WeaponMs": 0.0988,
+      "FirstColumn": 20
+    },
+    {
+      "ActorsMs": 9.9843,
+      "TotalMs": 14.6587,
+      "HudMs": 0.8536,
+      "Index": 8,
+      "WorkerIndex": 1,
+      "EndColumn": 40,
+      "GeometryMs": 3.6685,
+      "WeaponMs": 0.0866,
+      "FirstColumn": 20
+    },
+    {
+      "ActorsMs": 9.8945,
+      "TotalMs": 14.5199,
+      "HudMs": 0.8436,
+      "Index": 9,
+      "WorkerIndex": 1,
+      "EndColumn": 40,
+      "GeometryMs": 3.6294,
+      "WeaponMs": 0.0917,
+      "FirstColumn": 20
+    },
+    {
+      "ActorsMs": 8.8207,
+      "TotalMs": 14.6226,
+      "HudMs": 2.0261,
+      "Index": 10,
+      "WorkerIndex": 1,
+      "EndColumn": 40,
+      "GeometryMs": 3.6218,
+      "WeaponMs": 0.0923,
+      "FirstColumn": 20
+    },
+    {
+      "ActorsMs": 8.8871,
+      "TotalMs": 13.6429,
+      "HudMs": 0.8428,
+      "Index": 11,
+      "WorkerIndex": 1,
+      "EndColumn": 40,
+      "GeometryMs": 3.7509,
+      "WeaponMs": 0.0893,
+      "FirstColumn": 20
+    },
+    {
+      "ActorsMs": 10.3225,
+      "TotalMs": 16.3733,
+      "HudMs": 0.8831,
+      "Index": 0,
+      "WorkerIndex": 2,
+      "EndColumn": 60,
+      "GeometryMs": 4.9952,
+      "WeaponMs": 0.1087,
+      "FirstColumn": 40
+    },
+    {
+      "ActorsMs": 10.4117,
+      "TotalMs": 16.3472,
+      "HudMs": 0.8284,
+      "Index": 1,
+      "WorkerIndex": 2,
+      "EndColumn": 60,
+      "GeometryMs": 4.9625,
+      "WeaponMs": 0.0771,
+      "FirstColumn": 40
+    },
+    {
+      "ActorsMs": 9.9167,
+      "TotalMs": 15.9186,
+      "HudMs": 0.8319,
+      "Index": 2,
+      "WorkerIndex": 2,
+      "EndColumn": 60,
+      "GeometryMs": 5.0245,
+      "WeaponMs": 0.0781,
+      "FirstColumn": 40
+    },
+    {
+      "ActorsMs": 10.6452,
+      "TotalMs": 16.5921,
+      "HudMs": 0.8785,
+      "Index": 3,
+      "WorkerIndex": 2,
+      "EndColumn": 60,
+      "GeometryMs": 4.92,
+      "WeaponMs": 0.0811,
+      "FirstColumn": 40
+    },
+    {
+      "ActorsMs": 9.9482,
+      "TotalMs": 15.8811,
+      "HudMs": 0.8317,
+      "Index": 4,
+      "WorkerIndex": 2,
+      "EndColumn": 60,
+      "GeometryMs": 4.9556,
+      "WeaponMs": 0.077,
+      "FirstColumn": 40
+    },
+    {
+      "ActorsMs": 9.9864,
+      "TotalMs": 15.9195,
+      "HudMs": 0.8301,
+      "Index": 5,
+      "WorkerIndex": 2,
+      "EndColumn": 60,
+      "GeometryMs": 4.9569,
+      "WeaponMs": 0.0775,
+      "FirstColumn": 40
+    },
+    {
+      "ActorsMs": 9.7982,
+      "TotalMs": 15.6841,
+      "HudMs": 0.8176,
+      "Index": 6,
+      "WorkerIndex": 2,
+      "EndColumn": 60,
+      "GeometryMs": 4.9303,
+      "WeaponMs": 0.072,
+      "FirstColumn": 40
+    },
+    {
+      "ActorsMs": 9.7305,
+      "TotalMs": 15.4768,
+      "HudMs": 0.8306,
+      "Index": 7,
+      "WorkerIndex": 2,
+      "EndColumn": 60,
+      "GeometryMs": 4.7794,
+      "WeaponMs": 0.0723,
+      "FirstColumn": 40
+    },
+    {
+      "ActorsMs": 11.6381,
+      "TotalMs": 16.2226,
+      "HudMs": 0.831,
+      "Index": 8,
+      "WorkerIndex": 2,
+      "EndColumn": 60,
+      "GeometryMs": 3.6162,
+      "WeaponMs": 0.0732,
+      "FirstColumn": 40
+    },
+    {
+      "ActorsMs": 11.2268,
+      "TotalMs": 15.8382,
+      "HudMs": 0.8526,
+      "Index": 9,
+      "WorkerIndex": 2,
+      "EndColumn": 60,
+      "GeometryMs": 3.6198,
+      "WeaponMs": 0.0731,
+      "FirstColumn": 40
+    },
+    {
+      "ActorsMs": 10.765,
+      "TotalMs": 15.4443,
+      "HudMs": 0.839,
+      "Index": 10,
+      "WorkerIndex": 2,
+      "EndColumn": 60,
+      "GeometryMs": 3.6934,
+      "WeaponMs": 0.0775,
+      "FirstColumn": 40
+    },
+    {
+      "ActorsMs": 11.3885,
+      "TotalMs": 16.0027,
+      "HudMs": 0.8325,
+      "Index": 11,
+      "WorkerIndex": 2,
+      "EndColumn": 60,
+      "GeometryMs": 3.6357,
+      "WeaponMs": 0.0773,
+      "FirstColumn": 40
+    },
+    {
+      "ActorsMs": 11.5537,
+      "TotalMs": 16.1637,
+      "HudMs": 0.8192,
+      "Index": 0,
+      "WorkerIndex": 3,
+      "EndColumn": 80,
+      "GeometryMs": 3.6553,
+      "WeaponMs": 0.0714,
+      "FirstColumn": 60
+    },
+    {
+      "ActorsMs": 11.5542,
+      "TotalMs": 16.1437,
+      "HudMs": 0.8202,
+      "Index": 1,
+      "WorkerIndex": 3,
+      "EndColumn": 80,
+      "GeometryMs": 3.6324,
+      "WeaponMs": 0.0739,
+      "FirstColumn": 60
+    },
+    {
+      "ActorsMs": 11.5113,
+      "TotalMs": 16.0933,
+      "HudMs": 0.8242,
+      "Index": 2,
+      "WorkerIndex": 3,
+      "EndColumn": 80,
+      "GeometryMs": 3.6201,
+      "WeaponMs": 0.0754,
+      "FirstColumn": 60
+    },
+    {
+      "ActorsMs": 11.636,
+      "TotalMs": 16.2568,
+      "HudMs": 0.8458,
+      "Index": 3,
+      "WorkerIndex": 3,
+      "EndColumn": 80,
+      "GeometryMs": 3.6307,
+      "WeaponMs": 0.0796,
+      "FirstColumn": 60
+    },
+    {
+      "ActorsMs": 11.5371,
+      "TotalMs": 16.1134,
+      "HudMs": 0.8208,
+      "Index": 4,
+      "WorkerIndex": 3,
+      "EndColumn": 80,
+      "GeometryMs": 3.6097,
+      "WeaponMs": 0.0782,
+      "FirstColumn": 60
+    },
+    {
+      "ActorsMs": 11.4015,
+      "TotalMs": 15.9782,
+      "HudMs": 0.8178,
+      "Index": 5,
+      "WorkerIndex": 3,
+      "EndColumn": 80,
+      "GeometryMs": 3.6168,
+      "WeaponMs": 0.0744,
+      "FirstColumn": 60
+    },
+    {
+      "ActorsMs": 10.9057,
+      "TotalMs": 15.7669,
+      "HudMs": 0.8168,
+      "Index": 6,
+      "WorkerIndex": 3,
+      "EndColumn": 80,
+      "GeometryMs": 3.9013,
+      "WeaponMs": 0.0779,
+      "FirstColumn": 60
+    },
+    {
+      "ActorsMs": 10.9099,
+      "TotalMs": 15.8144,
+      "HudMs": 0.8196,
+      "Index": 7,
+      "WorkerIndex": 3,
+      "EndColumn": 80,
+      "GeometryMs": 3.9416,
+      "WeaponMs": 0.0743,
+      "FirstColumn": 60
+    },
+    {
+      "ActorsMs": 10.9115,
+      "TotalMs": 15.7835,
+      "HudMs": 0.8086,
+      "Index": 8,
+      "WorkerIndex": 3,
+      "EndColumn": 80,
+      "GeometryMs": 3.931,
+      "WeaponMs": 0.0707,
+      "FirstColumn": 60
+    },
+    {
+      "ActorsMs": 11.2286,
+      "TotalMs": 16.1585,
+      "HudMs": 0.8132,
+      "Index": 9,
+      "WorkerIndex": 3,
+      "EndColumn": 80,
+      "GeometryMs": 3.9793,
+      "WeaponMs": 0.0752,
+      "FirstColumn": 60
+    },
+    {
+      "ActorsMs": 10.9756,
+      "TotalMs": 15.9138,
+      "HudMs": 0.826,
+      "Index": 10,
+      "WorkerIndex": 3,
+      "EndColumn": 80,
+      "GeometryMs": 3.9744,
+      "WeaponMs": 0.0756,
+      "FirstColumn": 60
+    },
+    {
+      "ActorsMs": 10.9212,
+      "TotalMs": 15.8215,
+      "HudMs": 0.8282,
+      "Index": 11,
+      "WorkerIndex": 3,
+      "EndColumn": 80,
+      "GeometryMs": 3.9322,
+      "WeaponMs": 0.0769,
+      "FirstColumn": 60
+    },
+    {
+      "ActorsMs": 11.2113,
+      "TotalMs": 16.1021,
+      "HudMs": 0.8177,
+      "Index": 0,
+      "WorkerIndex": 4,
+      "EndColumn": 100,
+      "GeometryMs": 3.9376,
+      "WeaponMs": 0.074,
+      "FirstColumn": 80
+    },
+    {
+      "ActorsMs": 11.3742,
+      "TotalMs": 16.9736,
+      "HudMs": 0.8487,
+      "Index": 1,
+      "WorkerIndex": 4,
+      "EndColumn": 100,
+      "GeometryMs": 4.5619,
+      "WeaponMs": 0.1252,
+      "FirstColumn": 80
+    },
+    {
+      "ActorsMs": 11.3288,
+      "TotalMs": 16.4115,
+      "HudMs": 0.8446,
+      "Index": 2,
+      "WorkerIndex": 4,
+      "EndColumn": 100,
+      "GeometryMs": 4.0973,
+      "WeaponMs": 0.0782,
+      "FirstColumn": 80
+    },
+    {
+      "ActorsMs": 11.5482,
+      "TotalMs": 16.6735,
+      "HudMs": 0.8441,
+      "Index": 3,
+      "WorkerIndex": 4,
+      "EndColumn": 100,
+      "GeometryMs": 4.1361,
+      "WeaponMs": 0.0806,
+      "FirstColumn": 80
+    },
+    {
+      "ActorsMs": 11.3408,
+      "TotalMs": 16.3629,
+      "HudMs": 0.8246,
+      "Index": 4,
+      "WorkerIndex": 4,
+      "EndColumn": 100,
+      "GeometryMs": 3.9798,
+      "WeaponMs": 0.1285,
+      "FirstColumn": 80
+    },
+    {
+      "ActorsMs": 11.3248,
+      "TotalMs": 16.4422,
+      "HudMs": 0.8132,
+      "Index": 5,
+      "WorkerIndex": 4,
+      "EndColumn": 100,
+      "GeometryMs": 4.1569,
+      "WeaponMs": 0.0752,
+      "FirstColumn": 80
+    },
+    {
+      "ActorsMs": 10.7017,
+      "TotalMs": 15.6199,
+      "HudMs": 0.7787,
+      "Index": 6,
+      "WorkerIndex": 4,
+      "EndColumn": 100,
+      "GeometryMs": 3.9951,
+      "WeaponMs": 0.0758,
+      "FirstColumn": 80
+    },
+    {
+      "ActorsMs": 10.6882,
+      "TotalMs": 15.4598,
+      "HudMs": 0.7276,
+      "Index": 7,
+      "WorkerIndex": 4,
+      "EndColumn": 100,
+      "GeometryMs": 3.9111,
+      "WeaponMs": 0.0658,
+      "FirstColumn": 80
+    },
+    {
+      "ActorsMs": 10.7562,
+      "TotalMs": 15.7425,
+      "HudMs": 0.749,
+      "Index": 8,
+      "WorkerIndex": 4,
+      "EndColumn": 100,
+      "GeometryMs": 4.1062,
+      "WeaponMs": 0.0692,
+      "FirstColumn": 80
+    },
+    {
+      "ActorsMs": 10.5877,
+      "TotalMs": 15.3628,
+      "HudMs": 0.7385,
+      "Index": 9,
+      "WorkerIndex": 4,
+      "EndColumn": 100,
+      "GeometryMs": 3.9053,
+      "WeaponMs": 0.0701,
+      "FirstColumn": 80
+    },
+    {
+      "ActorsMs": 10.9604,
+      "TotalMs": 15.9748,
+      "HudMs": 0.7785,
+      "Index": 10,
+      "WorkerIndex": 4,
+      "EndColumn": 100,
+      "GeometryMs": 3.9898,
+      "WeaponMs": 0.1808,
+      "FirstColumn": 80
+    },
+    {
+      "ActorsMs": 10.3421,
+      "TotalMs": 15.1646,
+      "HudMs": 0.7476,
+      "Index": 11,
+      "WorkerIndex": 4,
+      "EndColumn": 100,
+      "GeometryMs": 3.9462,
+      "WeaponMs": 0.0672,
+      "FirstColumn": 80
+    },
+    {
+      "ActorsMs": 10.0471,
+      "TotalMs": 14.8423,
+      "HudMs": 0.7414,
+      "Index": 0,
+      "WorkerIndex": 5,
+      "EndColumn": 120,
+      "GeometryMs": 3.9302,
+      "WeaponMs": 0.0631,
+      "FirstColumn": 100
+    },
+    {
+      "ActorsMs": 9.9537,
+      "TotalMs": 14.7626,
+      "HudMs": 0.7389,
+      "Index": 1,
+      "WorkerIndex": 5,
+      "EndColumn": 120,
+      "GeometryMs": 3.942,
+      "WeaponMs": 0.0645,
+      "FirstColumn": 100
+    },
+    {
+      "ActorsMs": 9.9774,
+      "TotalMs": 14.766,
+      "HudMs": 0.7378,
+      "Index": 2,
+      "WorkerIndex": 5,
+      "EndColumn": 120,
+      "GeometryMs": 3.923,
+      "WeaponMs": 0.0668,
+      "FirstColumn": 100
+    },
+    {
+      "ActorsMs": 10.0515,
+      "TotalMs": 14.838,
+      "HudMs": 0.7385,
+      "Index": 3,
+      "WorkerIndex": 5,
+      "EndColumn": 120,
+      "GeometryMs": 3.9204,
+      "WeaponMs": 0.0657,
+      "FirstColumn": 100
+    },
+    {
+      "ActorsMs": 10.0009,
+      "TotalMs": 14.7448,
+      "HudMs": 0.7375,
+      "Index": 4,
+      "WorkerIndex": 5,
+      "EndColumn": 120,
+      "GeometryMs": 3.8808,
+      "WeaponMs": 0.0629,
+      "FirstColumn": 100
+    },
+    {
+      "ActorsMs": 10.1025,
+      "TotalMs": 15.3353,
+      "HudMs": 0.7521,
+      "Index": 5,
+      "WorkerIndex": 5,
+      "EndColumn": 120,
+      "GeometryMs": 4.3512,
+      "WeaponMs": 0.0697,
+      "FirstColumn": 100
+    },
+    {
+      "ActorsMs": 10.0677,
+      "TotalMs": 14.8684,
+      "HudMs": 0.7312,
+      "Index": 6,
+      "WorkerIndex": 5,
+      "EndColumn": 120,
+      "GeometryMs": 3.9381,
+      "WeaponMs": 0.0671,
+      "FirstColumn": 100
+    },
+    {
+      "ActorsMs": 10.0366,
+      "TotalMs": 14.8249,
+      "HudMs": 0.7324,
+      "Index": 7,
+      "WorkerIndex": 5,
+      "EndColumn": 120,
+      "GeometryMs": 3.9271,
+      "WeaponMs": 0.0677,
+      "FirstColumn": 100
+    },
+    {
+      "ActorsMs": 10.614,
+      "TotalMs": 15.4621,
+      "HudMs": 0.7537,
+      "Index": 8,
+      "WorkerIndex": 5,
+      "EndColumn": 120,
+      "GeometryMs": 3.9631,
+      "WeaponMs": 0.07,
+      "FirstColumn": 100
+    },
+    {
+      "ActorsMs": 10.1664,
+      "TotalMs": 15.0318,
+      "HudMs": 0.7478,
+      "Index": 9,
+      "WorkerIndex": 5,
+      "EndColumn": 120,
+      "GeometryMs": 3.9846,
+      "WeaponMs": 0.0659,
+      "FirstColumn": 100
+    },
+    {
+      "ActorsMs": 10.1147,
+      "TotalMs": 14.9661,
+      "HudMs": 0.7434,
+      "Index": 10,
+      "WorkerIndex": 5,
+      "EndColumn": 120,
+      "GeometryMs": 3.9771,
+      "WeaponMs": 0.0666,
+      "FirstColumn": 100
+    },
+    {
+      "ActorsMs": 10.0682,
+      "TotalMs": 15.8978,
+      "HudMs": 1.7894,
+      "Index": 11,
+      "WorkerIndex": 5,
+      "EndColumn": 120,
+      "GeometryMs": 3.9101,
+      "WeaponMs": 0.0664,
+      "FirstColumn": 100
+    },
+    {
+      "ActorsMs": 9.1948,
+      "TotalMs": 14.0678,
+      "HudMs": 0.7548,
+      "Index": 0,
+      "WorkerIndex": 6,
+      "EndColumn": 140,
+      "GeometryMs": 3.9811,
+      "WeaponMs": 0.0712,
+      "FirstColumn": 120
+    },
+    {
+      "ActorsMs": 8.9808,
+      "TotalMs": 13.8325,
+      "HudMs": 0.741,
+      "Index": 1,
+      "WorkerIndex": 6,
+      "EndColumn": 140,
+      "GeometryMs": 3.9687,
+      "WeaponMs": 0.0683,
+      "FirstColumn": 120
+    },
+    {
+      "ActorsMs": 9.2319,
+      "TotalMs": 14.0932,
+      "HudMs": 0.7926,
+      "Index": 2,
+      "WorkerIndex": 6,
+      "EndColumn": 140,
+      "GeometryMs": 3.9379,
+      "WeaponMs": 0.065,
+      "FirstColumn": 120
+    },
+    {
+      "ActorsMs": 9.004,
+      "TotalMs": 13.7832,
+      "HudMs": 0.7447,
+      "Index": 3,
+      "WorkerIndex": 6,
+      "EndColumn": 140,
+      "GeometryMs": 3.9081,
+      "WeaponMs": 0.0671,
+      "FirstColumn": 120
+    },
+    {
+      "ActorsMs": 8.9191,
+      "TotalMs": 13.7946,
+      "HudMs": 0.7458,
+      "Index": 4,
+      "WorkerIndex": 6,
+      "EndColumn": 140,
+      "GeometryMs": 3.9912,
+      "WeaponMs": 0.0733,
+      "FirstColumn": 120
+    },
+    {
+      "ActorsMs": 9.1517,
+      "TotalMs": 13.9733,
+      "HudMs": 0.738,
+      "Index": 5,
+      "WorkerIndex": 6,
+      "EndColumn": 140,
+      "GeometryMs": 3.9565,
+      "WeaponMs": 0.0661,
+      "FirstColumn": 120
+    },
+    {
+      "ActorsMs": 9.0521,
+      "TotalMs": 14.2976,
+      "HudMs": 0.7684,
+      "Index": 6,
+      "WorkerIndex": 6,
+      "EndColumn": 140,
+      "GeometryMs": 4.3486,
+      "WeaponMs": 0.0666,
+      "FirstColumn": 120
+    },
+    {
+      "ActorsMs": 9.0106,
+      "TotalMs": 13.8312,
+      "HudMs": 0.7509,
+      "Index": 7,
+      "WorkerIndex": 6,
+      "EndColumn": 140,
+      "GeometryMs": 3.9312,
+      "WeaponMs": 0.0768,
+      "FirstColumn": 120
+    },
+    {
+      "ActorsMs": 9.013,
+      "TotalMs": 13.8276,
+      "HudMs": 0.7425,
+      "Index": 8,
+      "WorkerIndex": 6,
+      "EndColumn": 140,
+      "GeometryMs": 3.9354,
+      "WeaponMs": 0.0668,
+      "FirstColumn": 120
+    },
+    {
+      "ActorsMs": 9.0249,
+      "TotalMs": 13.848,
+      "HudMs": 0.7864,
+      "Index": 9,
+      "WorkerIndex": 6,
+      "EndColumn": 140,
+      "GeometryMs": 3.9052,
+      "WeaponMs": 0.0705,
+      "FirstColumn": 120
+    },
+    {
+      "ActorsMs": 9.2109,
+      "TotalMs": 13.9864,
+      "HudMs": 0.762,
+      "Index": 10,
+      "WorkerIndex": 6,
+      "EndColumn": 140,
+      "GeometryMs": 3.8752,
+      "WeaponMs": 0.0719,
+      "FirstColumn": 120
+    },
+    {
+      "ActorsMs": 9.0395,
+      "TotalMs": 13.7985,
+      "HudMs": 0.7487,
+      "Index": 11,
+      "WorkerIndex": 6,
+      "EndColumn": 140,
+      "GeometryMs": 3.8843,
+      "WeaponMs": 0.0633,
+      "FirstColumn": 120
+    },
+    {
+      "ActorsMs": 9.4167,
+      "TotalMs": 14.1806,
+      "HudMs": 0.7466,
+      "Index": 0,
+      "WorkerIndex": 7,
+      "EndColumn": 160,
+      "GeometryMs": 3.8884,
+      "WeaponMs": 0.0674,
+      "FirstColumn": 140
+    },
+    {
+      "ActorsMs": 9.4083,
+      "TotalMs": 14.1702,
+      "HudMs": 0.7511,
+      "Index": 1,
+      "WorkerIndex": 7,
+      "EndColumn": 160,
+      "GeometryMs": 3.8801,
+      "WeaponMs": 0.0687,
+      "FirstColumn": 140
+    },
+    {
+      "ActorsMs": 9.4627,
+      "TotalMs": 14.2281,
+      "HudMs": 0.7526,
+      "Index": 2,
+      "WorkerIndex": 7,
+      "EndColumn": 160,
+      "GeometryMs": 3.8813,
+      "WeaponMs": 0.0663,
+      "FirstColumn": 140
+    },
+    {
+      "ActorsMs": 9.3979,
+      "TotalMs": 14.2115,
+      "HudMs": 0.7577,
+      "Index": 3,
+      "WorkerIndex": 7,
+      "EndColumn": 160,
+      "GeometryMs": 3.9257,
+      "WeaponMs": 0.068,
+      "FirstColumn": 140
+    },
+    {
+      "ActorsMs": 9.3909,
+      "TotalMs": 14.1888,
+      "HudMs": 0.7509,
+      "Index": 4,
+      "WorkerIndex": 7,
+      "EndColumn": 160,
+      "GeometryMs": 3.911,
+      "WeaponMs": 0.0695,
+      "FirstColumn": 140
+    },
+    {
+      "ActorsMs": 9.4069,
+      "TotalMs": 14.1845,
+      "HudMs": 0.7606,
+      "Index": 5,
+      "WorkerIndex": 7,
+      "EndColumn": 160,
+      "GeometryMs": 3.8845,
+      "WeaponMs": 0.069,
+      "FirstColumn": 140
+    },
+    {
+      "ActorsMs": 9.7824,
+      "TotalMs": 14.099,
+      "HudMs": 0.7567,
+      "Index": 6,
+      "WorkerIndex": 7,
+      "EndColumn": 160,
+      "GeometryMs": 3.4256,
+      "WeaponMs": 0.0721,
+      "FirstColumn": 140
+    },
+    {
+      "ActorsMs": 10.4509,
+      "TotalMs": 14.7251,
+      "HudMs": 0.7353,
+      "Index": 7,
+      "WorkerIndex": 7,
+      "EndColumn": 160,
+      "GeometryMs": 3.4081,
+      "WeaponMs": 0.0681,
+      "FirstColumn": 140
+    },
+    {
+      "ActorsMs": 10.0746,
+      "TotalMs": 14.5339,
+      "HudMs": 0.7449,
+      "Index": 8,
+      "WorkerIndex": 7,
+      "EndColumn": 160,
+      "GeometryMs": 3.5846,
+      "WeaponMs": 0.0687,
+      "FirstColumn": 140
+    },
+    {
+      "ActorsMs": 11.1884,
+      "TotalMs": 15.6499,
+      "HudMs": 0.7923,
+      "Index": 9,
+      "WorkerIndex": 7,
+      "EndColumn": 160,
+      "GeometryMs": 3.5245,
+      "WeaponMs": 0.0751,
+      "FirstColumn": 140
+    },
+    {
+      "ActorsMs": 10.2651,
+      "TotalMs": 14.6706,
+      "HudMs": 0.7509,
+      "Index": 10,
+      "WorkerIndex": 7,
+      "EndColumn": 160,
+      "GeometryMs": 3.521,
+      "WeaponMs": 0.0676,
+      "FirstColumn": 140
+    },
+    {
+      "ActorsMs": 10.323,
+      "TotalMs": 14.7073,
+      "HudMs": 0.7575,
+      "Index": 11,
+      "WorkerIndex": 7,
+      "EndColumn": 160,
+      "GeometryMs": 3.4946,
+      "WeaponMs": 0.0686,
+      "FirstColumn": 140
+    },
+    {
+      "ActorsMs": 12.2918,
+      "TotalMs": 17.9948,
+      "HudMs": 0.735,
+      "Index": 0,
+      "WorkerIndex": 8,
+      "EndColumn": 180,
+      "GeometryMs": 4.844,
+      "WeaponMs": 0.0637,
+      "FirstColumn": 160
+    },
+    {
+      "ActorsMs": 12.1022,
+      "TotalMs": 17.6488,
+      "HudMs": 0.7346,
+      "Index": 1,
+      "WorkerIndex": 8,
+      "EndColumn": 180,
+      "GeometryMs": 4.6863,
+      "WeaponMs": 0.0677,
+      "FirstColumn": 160
+    },
+    {
+      "ActorsMs": 12.9113,
+      "TotalMs": 18.4007,
+      "HudMs": 0.7378,
+      "Index": 2,
+      "WorkerIndex": 8,
+      "EndColumn": 180,
+      "GeometryMs": 4.6236,
+      "WeaponMs": 0.0692,
+      "FirstColumn": 160
+    },
+    {
+      "ActorsMs": 12.506,
+      "TotalMs": 18.011,
+      "HudMs": 0.7472,
+      "Index": 3,
+      "WorkerIndex": 8,
+      "EndColumn": 180,
+      "GeometryMs": 4.6243,
+      "WeaponMs": 0.0727,
+      "FirstColumn": 160
+    },
+    {
+      "ActorsMs": 12.8854,
+      "TotalMs": 19.1254,
+      "HudMs": 1.5386,
+      "Index": 4,
+      "WorkerIndex": 8,
+      "EndColumn": 180,
+      "GeometryMs": 4.574,
+      "WeaponMs": 0.0667,
+      "FirstColumn": 160
+    },
+    {
+      "ActorsMs": 13.0775,
+      "TotalMs": 17.6141,
+      "HudMs": 0.7398,
+      "Index": 5,
+      "WorkerIndex": 8,
+      "EndColumn": 180,
+      "GeometryMs": 3.6654,
+      "WeaponMs": 0.0727,
+      "FirstColumn": 160
+    },
+    {
+      "ActorsMs": 13.2288,
+      "TotalMs": 17.7003,
+      "HudMs": 0.7231,
+      "Index": 6,
+      "WorkerIndex": 8,
+      "EndColumn": 180,
+      "GeometryMs": 3.6255,
+      "WeaponMs": 0.0643,
+      "FirstColumn": 160
+    },
+    {
+      "ActorsMs": 13.3694,
+      "TotalMs": 17.89,
+      "HudMs": 0.7418,
+      "Index": 7,
+      "WorkerIndex": 8,
+      "EndColumn": 180,
+      "GeometryMs": 3.6601,
+      "WeaponMs": 0.063,
+      "FirstColumn": 160
+    },
+    {
+      "ActorsMs": 12.8928,
+      "TotalMs": 17.4102,
+      "HudMs": 0.7402,
+      "Index": 8,
+      "WorkerIndex": 8,
+      "EndColumn": 180,
+      "GeometryMs": 3.6407,
+      "WeaponMs": 0.071,
+      "FirstColumn": 160
+    },
+    {
+      "ActorsMs": 12.9627,
+      "TotalMs": 17.5256,
+      "HudMs": 0.7359,
+      "Index": 9,
+      "WorkerIndex": 8,
+      "EndColumn": 180,
+      "GeometryMs": 3.6995,
+      "WeaponMs": 0.0676,
+      "FirstColumn": 160
+    },
+    {
+      "ActorsMs": 13.2492,
+      "TotalMs": 17.7835,
+      "HudMs": 0.7662,
+      "Index": 10,
+      "WorkerIndex": 8,
+      "EndColumn": 180,
+      "GeometryMs": 3.6281,
+      "WeaponMs": 0.0795,
+      "FirstColumn": 160
+    },
+    {
+      "ActorsMs": 13.0133,
+      "TotalMs": 17.9332,
+      "HudMs": 0.7336,
+      "Index": 11,
+      "WorkerIndex": 8,
+      "EndColumn": 180,
+      "GeometryMs": 4.0527,
+      "WeaponMs": 0.0676,
+      "FirstColumn": 160
+    },
+    {
+      "ActorsMs": 10.848,
+      "TotalMs": 17.102,
+      "HudMs": 0.7402,
+      "Index": 0,
+      "WorkerIndex": 9,
+      "EndColumn": 200,
+      "GeometryMs": 5.3814,
+      "WeaponMs": 0.0685,
+      "FirstColumn": 180
+    },
+    {
+      "ActorsMs": 10.8245,
+      "TotalMs": 16.9456,
+      "HudMs": 0.7581,
+      "Index": 1,
+      "WorkerIndex": 9,
+      "EndColumn": 200,
+      "GeometryMs": 5.2261,
+      "WeaponMs": 0.0735,
+      "FirstColumn": 180
+    },
+    {
+      "ActorsMs": 11.8484,
+      "TotalMs": 17.9656,
+      "HudMs": 0.7657,
+      "Index": 2,
+      "WorkerIndex": 9,
+      "EndColumn": 200,
+      "GeometryMs": 5.2046,
+      "WeaponMs": 0.0827,
+      "FirstColumn": 180
+    },
+    {
+      "ActorsMs": 10.8451,
+      "TotalMs": 16.9796,
+      "HudMs": 0.7424,
+      "Index": 3,
+      "WorkerIndex": 9,
+      "EndColumn": 200,
+      "GeometryMs": 5.2564,
+      "WeaponMs": 0.0719,
+      "FirstColumn": 180
+    },
+    {
+      "ActorsMs": 11.3256,
+      "TotalMs": 17.4221,
+      "HudMs": 0.7758,
+      "Index": 4,
+      "WorkerIndex": 9,
+      "EndColumn": 200,
+      "GeometryMs": 5.1716,
+      "WeaponMs": 0.0873,
+      "FirstColumn": 180
+    },
+    {
+      "ActorsMs": 11.2494,
+      "TotalMs": 17.3919,
+      "HudMs": 0.7568,
+      "Index": 5,
+      "WorkerIndex": 9,
+      "EndColumn": 200,
+      "GeometryMs": 5.2462,
+      "WeaponMs": 0.0764,
+      "FirstColumn": 180
+    },
+    {
+      "ActorsMs": 10.9314,
+      "TotalMs": 17.0782,
+      "HudMs": 0.808,
+      "Index": 6,
+      "WorkerIndex": 9,
+      "EndColumn": 200,
+      "GeometryMs": 5.1995,
+      "WeaponMs": 0.0711,
+      "FirstColumn": 180
+    },
+    {
+      "ActorsMs": 11.359,
+      "TotalMs": 17.5699,
+      "HudMs": 0.7643,
+      "Index": 7,
+      "WorkerIndex": 9,
+      "EndColumn": 200,
+      "GeometryMs": 5.3124,
+      "WeaponMs": 0.0679,
+      "FirstColumn": 180
+    },
+    {
+      "ActorsMs": 11.6253,
+      "TotalMs": 17.8096,
+      "HudMs": 0.7337,
+      "Index": 8,
+      "WorkerIndex": 9,
+      "EndColumn": 200,
+      "GeometryMs": 5.3044,
+      "WeaponMs": 0.0806,
+      "FirstColumn": 180
+    },
+    {
+      "ActorsMs": 11.2791,
+      "TotalMs": 17.4243,
+      "HudMs": 0.736,
+      "Index": 9,
+      "WorkerIndex": 9,
+      "EndColumn": 200,
+      "GeometryMs": 5.2764,
+      "WeaponMs": 0.0674,
+      "FirstColumn": 180
+    },
+    {
+      "ActorsMs": 11.2373,
+      "TotalMs": 17.2841,
+      "HudMs": 0.7352,
+      "Index": 10,
+      "WorkerIndex": 9,
+      "EndColumn": 200,
+      "GeometryMs": 5.1797,
+      "WeaponMs": 0.0685,
+      "FirstColumn": 180
+    },
+    {
+      "ActorsMs": 10.6143,
+      "TotalMs": 16.4837,
+      "HudMs": 0.7099,
+      "Index": 11,
+      "WorkerIndex": 9,
+      "EndColumn": 200,
+      "GeometryMs": 5.0242,
+      "WeaponMs": 0.0711,
+      "FirstColumn": 180
+    },
+    {
+      "ActorsMs": 10.7714,
+      "TotalMs": 16.0263,
+      "HudMs": 0.69,
+      "Index": 0,
+      "WorkerIndex": 10,
+      "EndColumn": 220,
+      "GeometryMs": 4.4319,
+      "WeaponMs": 0.0674,
+      "FirstColumn": 200
+    },
+    {
+      "ActorsMs": 9.9838,
+      "TotalMs": 15.1147,
+      "HudMs": 0.6834,
+      "Index": 1,
+      "WorkerIndex": 10,
+      "EndColumn": 220,
+      "GeometryMs": 4.323,
+      "WeaponMs": 0.063,
+      "FirstColumn": 200
+    },
+    {
+      "ActorsMs": 9.9924,
+      "TotalMs": 15.1214,
+      "HudMs": 0.6771,
+      "Index": 2,
+      "WorkerIndex": 10,
+      "EndColumn": 220,
+      "GeometryMs": 4.3242,
+      "WeaponMs": 0.0655,
+      "FirstColumn": 200
+    },
+    {
+      "ActorsMs": 10.048,
+      "TotalMs": 15.2416,
+      "HudMs": 0.6749,
+      "Index": 3,
+      "WorkerIndex": 10,
+      "EndColumn": 220,
+      "GeometryMs": 4.3898,
+      "WeaponMs": 0.0662,
+      "FirstColumn": 200
+    },
+    {
+      "ActorsMs": 9.0862,
+      "TotalMs": 15.1148,
+      "HudMs": 0.6805,
+      "Index": 4,
+      "WorkerIndex": 10,
+      "EndColumn": 220,
+      "GeometryMs": 5.2195,
+      "WeaponMs": 0.0634,
+      "FirstColumn": 200
+    },
+    {
+      "ActorsMs": 9.0345,
+      "TotalMs": 15.0218,
+      "HudMs": 0.6634,
+      "Index": 5,
+      "WorkerIndex": 10,
+      "EndColumn": 220,
+      "GeometryMs": 5.1879,
+      "WeaponMs": 0.0634,
+      "FirstColumn": 200
+    },
+    {
+      "ActorsMs": 9.0122,
+      "TotalMs": 14.9537,
+      "HudMs": 0.6665,
+      "Index": 6,
+      "WorkerIndex": 10,
+      "EndColumn": 220,
+      "GeometryMs": 5.1518,
+      "WeaponMs": 0.0629,
+      "FirstColumn": 200
+    },
+    {
+      "ActorsMs": 9.0179,
+      "TotalMs": 15.0099,
+      "HudMs": 0.6752,
+      "Index": 7,
+      "WorkerIndex": 10,
+      "EndColumn": 220,
+      "GeometryMs": 5.1869,
+      "WeaponMs": 0.0612,
+      "FirstColumn": 200
+    },
+    {
+      "ActorsMs": 8.98,
+      "TotalMs": 14.9493,
+      "HudMs": 0.6636,
+      "Index": 8,
+      "WorkerIndex": 10,
+      "EndColumn": 220,
+      "GeometryMs": 5.1822,
+      "WeaponMs": 0.0622,
+      "FirstColumn": 200
+    },
+    {
+      "ActorsMs": 9.2547,
+      "TotalMs": 15.3499,
+      "HudMs": 0.67,
+      "Index": 9,
+      "WorkerIndex": 10,
+      "EndColumn": 220,
+      "GeometryMs": 5.2989,
+      "WeaponMs": 0.0612,
+      "FirstColumn": 200
+    },
+    {
+      "ActorsMs": 9.0195,
+      "TotalMs": 15.0094,
+      "HudMs": 0.6636,
+      "Index": 10,
+      "WorkerIndex": 10,
+      "EndColumn": 220,
+      "GeometryMs": 5.2048,
+      "WeaponMs": 0.0603,
+      "FirstColumn": 200
+    },
+    {
+      "ActorsMs": 9.0542,
+      "TotalMs": 15.1008,
+      "HudMs": 0.674,
+      "Index": 11,
+      "WorkerIndex": 10,
+      "EndColumn": 220,
+      "GeometryMs": 5.2455,
+      "WeaponMs": 0.0631,
+      "FirstColumn": 200
+    },
+    {
+      "ActorsMs": 7.9501,
+      "TotalMs": 13.4633,
+      "HudMs": 0.6764,
+      "Index": 0,
+      "WorkerIndex": 11,
+      "EndColumn": 240,
+      "GeometryMs": 4.7069,
+      "WeaponMs": 0.0665,
+      "FirstColumn": 220
+    },
+    {
+      "ActorsMs": 8.0201,
+      "TotalMs": 13.6527,
+      "HudMs": 0.67,
+      "Index": 1,
+      "WorkerIndex": 11,
+      "EndColumn": 240,
+      "GeometryMs": 4.8352,
+      "WeaponMs": 0.0645,
+      "FirstColumn": 220
+    },
+    {
+      "ActorsMs": 7.9958,
+      "TotalMs": 13.5637,
+      "HudMs": 0.6794,
+      "Index": 2,
+      "WorkerIndex": 11,
+      "EndColumn": 240,
+      "GeometryMs": 4.7635,
+      "WeaponMs": 0.0639,
+      "FirstColumn": 220
+    },
+    {
+      "ActorsMs": 8.0723,
+      "TotalMs": 13.8838,
+      "HudMs": 0.6702,
+      "Index": 3,
+      "WorkerIndex": 11,
+      "EndColumn": 240,
+      "GeometryMs": 5.0101,
+      "WeaponMs": 0.0651,
+      "FirstColumn": 220
+    },
+    {
+      "ActorsMs": 7.9727,
+      "TotalMs": 13.573,
+      "HudMs": 0.6729,
+      "Index": 4,
+      "WorkerIndex": 11,
+      "EndColumn": 240,
+      "GeometryMs": 4.8024,
+      "WeaponMs": 0.0638,
+      "FirstColumn": 220
+    },
+    {
+      "ActorsMs": 8.0284,
+      "TotalMs": 13.5511,
+      "HudMs": 0.6684,
+      "Index": 5,
+      "WorkerIndex": 11,
+      "EndColumn": 240,
+      "GeometryMs": 4.7258,
+      "WeaponMs": 0.0661,
+      "FirstColumn": 220
+    },
+    {
+      "ActorsMs": 8.0043,
+      "TotalMs": 13.5759,
+      "HudMs": 0.6732,
+      "Index": 6,
+      "WorkerIndex": 11,
+      "EndColumn": 240,
+      "GeometryMs": 4.7563,
+      "WeaponMs": 0.0653,
+      "FirstColumn": 220
+    },
+    {
+      "ActorsMs": 7.9906,
+      "TotalMs": 13.5004,
+      "HudMs": 0.6738,
+      "Index": 7,
+      "WorkerIndex": 11,
+      "EndColumn": 240,
+      "GeometryMs": 4.7084,
+      "WeaponMs": 0.0641,
+      "FirstColumn": 220
+    },
+    {
+      "ActorsMs": 8.0788,
+      "TotalMs": 13.6113,
+      "HudMs": 0.6872,
+      "Index": 8,
+      "WorkerIndex": 11,
+      "EndColumn": 240,
+      "GeometryMs": 4.7094,
+      "WeaponMs": 0.0659,
+      "FirstColumn": 220
+    },
+    {
+      "ActorsMs": 8.2975,
+      "TotalMs": 14.1748,
+      "HudMs": 0.68,
+      "Index": 9,
+      "WorkerIndex": 11,
+      "EndColumn": 240,
+      "GeometryMs": 5.0672,
+      "WeaponMs": 0.0651,
+      "FirstColumn": 220
+    },
+    {
+      "ActorsMs": 8.1714,
+      "TotalMs": 13.9487,
+      "HudMs": 0.6651,
+      "Index": 10,
+      "WorkerIndex": 11,
+      "EndColumn": 240,
+      "GeometryMs": 4.9274,
+      "WeaponMs": 0.067,
+      "FirstColumn": 220
+    },
+    {
+      "ActorsMs": 8.06,
+      "TotalMs": 13.5623,
+      "HudMs": 0.6731,
+      "Index": 11,
+      "WorkerIndex": 11,
+      "EndColumn": 240,
+      "GeometryMs": 4.7059,
+      "WeaponMs": 0.061,
+      "FirstColumn": 220
+    },
+    {
+      "ActorsMs": 8.7934,
+      "TotalMs": 13.2909,
+      "HudMs": 0.647,
+      "Index": 0,
+      "WorkerIndex": 12,
+      "EndColumn": 260,
+      "GeometryMs": 3.7303,
+      "WeaponMs": 0.0631,
+      "FirstColumn": 240
+    },
+    {
+      "ActorsMs": 8.884,
+      "TotalMs": 13.497,
+      "HudMs": 0.6653,
+      "Index": 1,
+      "WorkerIndex": 12,
+      "EndColumn": 260,
+      "GeometryMs": 3.7959,
+      "WeaponMs": 0.0919,
+      "FirstColumn": 240
+    },
+    {
+      "ActorsMs": 9.0381,
+      "TotalMs": 13.7056,
+      "HudMs": 0.649,
+      "Index": 2,
+      "WorkerIndex": 12,
+      "EndColumn": 260,
+      "GeometryMs": 3.895,
+      "WeaponMs": 0.0617,
+      "FirstColumn": 240
+    },
+    {
+      "ActorsMs": 9.7875,
+      "TotalMs": 14.5389,
+      "HudMs": 0.6824,
+      "Index": 3,
+      "WorkerIndex": 12,
+      "EndColumn": 260,
+      "GeometryMs": 3.8885,
+      "WeaponMs": 0.1165,
+      "FirstColumn": 240
+    },
+    {
+      "ActorsMs": 9.1609,
+      "TotalMs": 14.1098,
+      "HudMs": 0.6492,
+      "Index": 4,
+      "WorkerIndex": 12,
+      "EndColumn": 260,
+      "GeometryMs": 4.1689,
+      "WeaponMs": 0.0669,
+      "FirstColumn": 240
+    },
+    {
+      "ActorsMs": 9.0125,
+      "TotalMs": 13.6383,
+      "HudMs": 0.6515,
+      "Index": 5,
+      "WorkerIndex": 12,
+      "EndColumn": 260,
+      "GeometryMs": 3.8401,
+      "WeaponMs": 0.0649,
+      "FirstColumn": 240
+    },
+    {
+      "ActorsMs": 8.8136,
+      "TotalMs": 13.3673,
+      "HudMs": 0.6499,
+      "Index": 6,
+      "WorkerIndex": 12,
+      "EndColumn": 260,
+      "GeometryMs": 3.7794,
+      "WeaponMs": 0.0626,
+      "FirstColumn": 240
+    },
+    {
+      "ActorsMs": 9.0065,
+      "TotalMs": 13.6671,
+      "HudMs": 0.6606,
+      "Index": 7,
+      "WorkerIndex": 12,
+      "EndColumn": 260,
+      "GeometryMs": 3.7835,
+      "WeaponMs": 0.1233,
+      "FirstColumn": 240
+    },
+    {
+      "ActorsMs": 8.8209,
+      "TotalMs": 13.3882,
+      "HudMs": 0.6481,
+      "Index": 8,
+      "WorkerIndex": 12,
+      "EndColumn": 260,
+      "GeometryMs": 3.8016,
+      "WeaponMs": 0.0614,
+      "FirstColumn": 240
+    },
+    {
+      "ActorsMs": 8.8462,
+      "TotalMs": 13.3529,
+      "HudMs": 0.6547,
+      "Index": 9,
+      "WorkerIndex": 12,
+      "EndColumn": 260,
+      "GeometryMs": 3.7346,
+      "WeaponMs": 0.0631,
+      "FirstColumn": 240
+    },
+    {
+      "ActorsMs": 9.012,
+      "TotalMs": 13.8368,
+      "HudMs": 0.6455,
+      "Index": 10,
+      "WorkerIndex": 12,
+      "EndColumn": 260,
+      "GeometryMs": 4.054,
+      "WeaponMs": 0.0644,
+      "FirstColumn": 240
+    },
+    {
+      "ActorsMs": 8.7738,
+      "TotalMs": 13.331,
+      "HudMs": 0.6369,
+      "Index": 11,
+      "WorkerIndex": 12,
+      "EndColumn": 260,
+      "GeometryMs": 3.8021,
+      "WeaponMs": 0.0585,
+      "FirstColumn": 240
+    },
+    {
+      "ActorsMs": 7.8475,
+      "TotalMs": 12.3979,
+      "HudMs": 0.6364,
+      "Index": 0,
+      "WorkerIndex": 13,
+      "EndColumn": 280,
+      "GeometryMs": 3.8049,
+      "WeaponMs": 0.058,
+      "FirstColumn": 260
+    },
+    {
+      "ActorsMs": 7.7102,
+      "TotalMs": 12.151,
+      "HudMs": 0.6368,
+      "Index": 1,
+      "WorkerIndex": 13,
+      "EndColumn": 280,
+      "GeometryMs": 3.6939,
+      "WeaponMs": 0.0571,
+      "FirstColumn": 260
+    },
+    {
+      "ActorsMs": 7.7275,
+      "TotalMs": 12.272,
+      "HudMs": 0.63,
+      "Index": 2,
+      "WorkerIndex": 13,
+      "EndColumn": 280,
+      "GeometryMs": 3.8035,
+      "WeaponMs": 0.0574,
+      "FirstColumn": 260
+    },
+    {
+      "ActorsMs": 7.8205,
+      "TotalMs": 12.408,
+      "HudMs": 0.6438,
+      "Index": 3,
+      "WorkerIndex": 13,
+      "EndColumn": 280,
+      "GeometryMs": 3.8174,
+      "WeaponMs": 0.0653,
+      "FirstColumn": 260
+    },
+    {
+      "ActorsMs": 8.5751,
+      "TotalMs": 12.2577,
+      "HudMs": 0.6363,
+      "Index": 4,
+      "WorkerIndex": 13,
+      "EndColumn": 280,
+      "GeometryMs": 2.9358,
+      "WeaponMs": 0.0549,
+      "FirstColumn": 260
+    },
+    {
+      "ActorsMs": 9.1498,
+      "TotalMs": 12.8345,
+      "HudMs": 0.6462,
+      "Index": 5,
+      "WorkerIndex": 13,
+      "EndColumn": 280,
+      "GeometryMs": 2.9171,
+      "WeaponMs": 0.0634,
+      "FirstColumn": 260
+    },
+    {
+      "ActorsMs": 8.6488,
+      "TotalMs": 12.3505,
+      "HudMs": 0.6401,
+      "Index": 6,
+      "WorkerIndex": 13,
+      "EndColumn": 280,
+      "GeometryMs": 2.9457,
+      "WeaponMs": 0.0597,
+      "FirstColumn": 260
+    },
+    {
+      "ActorsMs": 8.6814,
+      "TotalMs": 12.3735,
+      "HudMs": 0.6376,
+      "Index": 7,
+      "WorkerIndex": 13,
+      "EndColumn": 280,
+      "GeometryMs": 2.9349,
+      "WeaponMs": 0.0622,
+      "FirstColumn": 260
+    },
+    {
+      "ActorsMs": 8.7158,
+      "TotalMs": 12.4728,
+      "HudMs": 0.6475,
+      "Index": 8,
+      "WorkerIndex": 13,
+      "EndColumn": 280,
+      "GeometryMs": 2.9879,
+      "WeaponMs": 0.0647,
+      "FirstColumn": 260
+    },
+    {
+      "ActorsMs": 8.768,
+      "TotalMs": 12.4791,
+      "HudMs": 0.6414,
+      "Index": 9,
+      "WorkerIndex": 13,
+      "EndColumn": 280,
+      "GeometryMs": 2.9529,
+      "WeaponMs": 0.0584,
+      "FirstColumn": 260
+    },
+    {
+      "ActorsMs": 8.7743,
+      "TotalMs": 12.4825,
+      "HudMs": 0.645,
+      "Index": 10,
+      "WorkerIndex": 13,
+      "EndColumn": 280,
+      "GeometryMs": 2.9451,
+      "WeaponMs": 0.0626,
+      "FirstColumn": 260
+    },
+    {
+      "ActorsMs": 8.7461,
+      "TotalMs": 12.4743,
+      "HudMs": 0.6396,
+      "Index": 11,
+      "WorkerIndex": 13,
+      "EndColumn": 280,
+      "GeometryMs": 2.9695,
+      "WeaponMs": 0.0607,
+      "FirstColumn": 260
+    },
+    {
+      "ActorsMs": 7.8422,
+      "TotalMs": 11.5098,
+      "HudMs": 0.6614,
+      "Index": 0,
+      "WorkerIndex": 14,
+      "EndColumn": 300,
+      "GeometryMs": 2.8881,
+      "WeaponMs": 0.0666,
+      "FirstColumn": 280
+    },
+    {
+      "ActorsMs": 7.8374,
+      "TotalMs": 11.5302,
+      "HudMs": 0.6452,
+      "Index": 1,
+      "WorkerIndex": 14,
+      "EndColumn": 300,
+      "GeometryMs": 2.9314,
+      "WeaponMs": 0.0603,
+      "FirstColumn": 280
+    },
+    {
+      "ActorsMs": 7.8232,
+      "TotalMs": 11.5144,
+      "HudMs": 0.6422,
+      "Index": 2,
+      "WorkerIndex": 14,
+      "EndColumn": 300,
+      "GeometryMs": 2.9345,
+      "WeaponMs": 0.0593,
+      "FirstColumn": 280
+    },
+    {
+      "ActorsMs": 7.6856,
+      "TotalMs": 11.4029,
+      "HudMs": 0.6321,
+      "Index": 3,
+      "WorkerIndex": 14,
+      "EndColumn": 300,
+      "GeometryMs": 2.9785,
+      "WeaponMs": 0.0562,
+      "FirstColumn": 280
+    },
+    {
+      "ActorsMs": 7.8072,
+      "TotalMs": 11.4414,
+      "HudMs": 0.6516,
+      "Index": 4,
+      "WorkerIndex": 14,
+      "EndColumn": 300,
+      "GeometryMs": 2.871,
+      "WeaponMs": 0.0608,
+      "FirstColumn": 280
+    },
+    {
+      "ActorsMs": 7.6362,
+      "TotalMs": 11.344,
+      "HudMs": 0.6602,
+      "Index": 5,
+      "WorkerIndex": 14,
+      "EndColumn": 300,
+      "GeometryMs": 2.9221,
+      "WeaponMs": 0.0716,
+      "FirstColumn": 280
+    },
+    {
+      "ActorsMs": 6.8589,
+      "TotalMs": 12.0264,
+      "HudMs": 2.1648,
+      "Index": 6,
+      "WorkerIndex": 14,
+      "EndColumn": 300,
+      "GeometryMs": 2.8959,
+      "WeaponMs": 0.0559,
+      "FirstColumn": 280
+    },
+    {
+      "ActorsMs": 6.9081,
+      "TotalMs": 10.6334,
+      "HudMs": 0.6427,
+      "Index": 7,
+      "WorkerIndex": 14,
+      "EndColumn": 300,
+      "GeometryMs": 2.9675,
+      "WeaponMs": 0.0602,
+      "FirstColumn": 280
+    },
+    {
+      "ActorsMs": 7.2091,
+      "TotalMs": 11.833,
+      "HudMs": 0.6449,
+      "Index": 8,
+      "WorkerIndex": 14,
+      "EndColumn": 300,
+      "GeometryMs": 3.8537,
+      "WeaponMs": 0.0708,
+      "FirstColumn": 280
+    },
+    {
+      "ActorsMs": 6.9609,
+      "TotalMs": 11.5838,
+      "HudMs": 0.6803,
+      "Index": 9,
+      "WorkerIndex": 14,
+      "EndColumn": 300,
+      "GeometryMs": 3.8228,
+      "WeaponMs": 0.0665,
+      "FirstColumn": 280
+    },
+    {
+      "ActorsMs": 6.9397,
+      "TotalMs": 11.6322,
+      "HudMs": 0.6712,
+      "Index": 10,
+      "WorkerIndex": 14,
+      "EndColumn": 300,
+      "GeometryMs": 3.9011,
+      "WeaponMs": 0.0626,
+      "FirstColumn": 280
+    },
+    {
+      "ActorsMs": 6.9198,
+      "TotalMs": 11.5092,
+      "HudMs": 0.6472,
+      "Index": 11,
+      "WorkerIndex": 14,
+      "EndColumn": 300,
+      "GeometryMs": 3.8224,
+      "WeaponMs": 0.0623,
+      "FirstColumn": 280
+    },
+    {
+      "ActorsMs": 8.065,
+      "TotalMs": 11.7537,
+      "HudMs": 0.6458,
+      "Index": 0,
+      "WorkerIndex": 15,
+      "EndColumn": 320,
+      "GeometryMs": 2.9304,
+      "WeaponMs": 0.057,
+      "FirstColumn": 300
+    },
+    {
+      "ActorsMs": 7.6339,
+      "TotalMs": 11.4109,
+      "HudMs": 0.6626,
+      "Index": 1,
+      "WorkerIndex": 15,
+      "EndColumn": 320,
+      "GeometryMs": 2.9902,
+      "WeaponMs": 0.0633,
+      "FirstColumn": 300
+    },
+    {
+      "ActorsMs": 7.6938,
+      "TotalMs": 11.423,
+      "HudMs": 0.6539,
+      "Index": 2,
+      "WorkerIndex": 15,
+      "EndColumn": 320,
+      "GeometryMs": 2.9548,
+      "WeaponMs": 0.0596,
+      "FirstColumn": 300
+    },
+    {
+      "ActorsMs": 7.5655,
+      "TotalMs": 11.2697,
+      "HudMs": 0.6614,
+      "Index": 3,
+      "WorkerIndex": 15,
+      "EndColumn": 320,
+      "GeometryMs": 2.9249,
+      "WeaponMs": 0.0612,
+      "FirstColumn": 300
+    },
+    {
+      "ActorsMs": 7.5298,
+      "TotalMs": 11.2301,
+      "HudMs": 0.6437,
+      "Index": 4,
+      "WorkerIndex": 15,
+      "EndColumn": 320,
+      "GeometryMs": 2.945,
+      "WeaponMs": 0.0574,
+      "FirstColumn": 300
+    },
+    {
+      "ActorsMs": 7.6018,
+      "TotalMs": 11.3111,
+      "HudMs": 0.6531,
+      "Index": 5,
+      "WorkerIndex": 15,
+      "EndColumn": 320,
+      "GeometryMs": 2.9414,
+      "WeaponMs": 0.0617,
+      "FirstColumn": 300
+    },
+    {
+      "ActorsMs": 7.6858,
+      "TotalMs": 11.411,
+      "HudMs": 0.662,
+      "Index": 6,
+      "WorkerIndex": 15,
+      "EndColumn": 320,
+      "GeometryMs": 2.9444,
+      "WeaponMs": 0.0599,
+      "FirstColumn": 300
+    },
+    {
+      "ActorsMs": 7.6863,
+      "TotalMs": 11.6096,
+      "HudMs": 0.6598,
+      "Index": 7,
+      "WorkerIndex": 15,
+      "EndColumn": 320,
+      "GeometryMs": 3.1445,
+      "WeaponMs": 0.0633,
+      "FirstColumn": 300
+    },
+    {
+      "ActorsMs": 7.6481,
+      "TotalMs": 11.3727,
+      "HudMs": 0.6625,
+      "Index": 8,
+      "WorkerIndex": 15,
+      "EndColumn": 320,
+      "GeometryMs": 2.9477,
+      "WeaponMs": 0.0575,
+      "FirstColumn": 300
+    },
+    {
+      "ActorsMs": 7.5942,
+      "TotalMs": 11.2939,
+      "HudMs": 0.6548,
+      "Index": 9,
+      "WorkerIndex": 15,
+      "EndColumn": 320,
+      "GeometryMs": 2.9327,
+      "WeaponMs": 0.0585,
+      "FirstColumn": 300
+    },
+    {
+      "ActorsMs": 6.6585,
+      "TotalMs": 11.9401,
+      "HudMs": 2.2212,
+      "Index": 10,
+      "WorkerIndex": 15,
+      "EndColumn": 320,
+      "GeometryMs": 2.9468,
+      "WeaponMs": 0.0558,
+      "FirstColumn": 300
+    },
+    {
+      "ActorsMs": 6.6979,
+      "TotalMs": 10.3841,
+      "HudMs": 0.656,
+      "Index": 11,
+      "WorkerIndex": 15,
+      "EndColumn": 320,
+      "GeometryMs": 2.9157,
+      "WeaponMs": 0.0586,
+      "FirstColumn": 300
+    }
+  ],
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "BundleSha256": "19DE3303C005C6BD6CF96F7A101C2D7AD34B43CA678E1D65FD2ECE7A1E5E7038",
+  "RendererSha256": "F1440008D8665F573B221543B0B5B3C5969A5D60F0E95EDD445F4E7834D373E5",
+  "GameHostSha256": "4F082542D9AE6D30ABE3B9D11CBBE26D94B3FFBA3D2B02E5117D69D86A2D06E9",
+  "HarnessSha256": "CDF754B2F00C5CF3F706563EBA55792AAF7AD012806B760FE40BF58E44AE4C37",
+  "PowerShell": "7.6.6",
+  "Meaning": "Attributes PowerShell software-rendering time to the instrumented geometry, actor, player-weapon, and HUD phases at one fixed real-IWAD state. When WorkerCount is greater than one, each production-equivalent column stripe is rendered sequentially in this process: these are not concurrent-worker timings and do not model process scheduling, IPC, or terminal output. Use live host receipts for pacing."
+}

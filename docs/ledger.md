@@ -3489,3 +3489,57 @@ The figures are diagrams based on documented architecture and measurements,
 not captured gameplay frames. The [article draft](article-draft.md) remains a
 working paper; the human route, editorial review, and final publication package
 remain open.
+
+## 2026-09-28 — E3M6 worker scaling under actual waveOut load
+
+At source commit `50d6190e8a212d74d2d7f18cf0fc4b5b2b0c7c58`, ran the real
+PowerShell simulation, software-rendering processes, full 30-track music
+catalog and waveOut device on HMP E3M6 with no input and headless output. The
+Steam IWAD SHA-256 is
+`6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F`; the
+catalog SHA-256 is
+`24073D082C9CD89C7931521DDA567F76261CE8F67CBC6EB465730999EC27A2BF`.
+Commands differed only in `-Workers`, `-Seconds`, and the report path. The
+16-worker 120.001-second run completed 2,957 tics (24.641/sec) and 4,089 host
+render updates (34.075/sec), with 28.266 ms median and 49.468 ms p95 frame
+latency. It observed 280 queue-starvation/rebuffer events; all 3,728,340
+submitted audio frames were returned, with no unconsumed packets, clipping,
+device error, or cleanup error. Worker working set was 4,946,075,648 bytes.
+
+Two follow-up 30-second runs tested eight and twelve workers. Eight workers
+completed 853 tics (28.432/sec) and 920 updates (30.665/sec), with 30.120/56.072
+ms median/p95 latency, four queue-starvation/rebuffer events, and 2,491,588,608
+bytes of worker working set. Twelve workers completed 794 tics (26.466/sec)
+and 954 updates (31.799/sec), with 29.534/57.804 ms latency, 25 queue events,
+and 3,682,467,840 bytes of worker working set. Both returned every submitted
+audio frame and closed cleanly. All three queues peaked at one packet. The
+first queue-empty observations occurred before shutdown, so these were active
+run events; telemetry alone does not establish an audible dropout.
+
+This is not a paired worker-count test: the 16-worker run lasted four times
+longer, and each count has only one sample. Eight workers led on simulation
+rate and queue continuity in these samples, while sixteen led on completed
+host updates. No worker default changes from this evidence. Host updates are
+not Terminal writes or display presentations. The portable
+[comparison receipt](../results/music-host-e3m6-worker-scaling-20260928.json)
+pins the metrics and hashes; full raw reports remain in ignored `local/`.
+
+To narrow renderer costs, added
+[`Measure-FastRendererPhases.ps1`](../scripts/Measure-FastRendererPhases.ps1)
+with an option to replay each production 20-column stripe sequentially at a
+fixed game state. On the 311-actor E3M6 start view, 192 calls across 16 stripes
+had 14.920 ms median / 17.710 ms p95 total, including 9.754 / 12.221 ms for
+actors and 4.075 / 5.219 ms for geometry. Stripe medians varied from 11.273 to
+17.850 ms. This isolates renderer work; it does not include concurrent worker
+scheduling, snapshot IPC, simulation, or audio. The
+[current-source profile](../results/renderer-stripes-e3m6-start-16w-current-20260928.json)
+stores per-stripe hashes and phase samples.
+
+One measured code experiment moved actor x-scale division after the lateral
+frustum rejection. All 16 fixed-state stripe pixel hashes matched exactly, but
+current-source reruns measured 9.754 ms median actor work and 14.920 ms total
+versus 9.730 and 14.770 ms for the candidate—within timing variation, with no
+demonstrated speedup. The source change was reverted. Its
+[candidate profile](../results/renderer-stripes-e3m6-projection-candidate-20260928.json)
+preserves the experimental source hash. The working renderer blob was checked
+against HEAD after the revert. No screen recording was made.
