@@ -13,6 +13,12 @@ and 16 renderer workers; the corresponding completed render-job rates were
 not count Terminal or monitor presentations. It changes no campaign status;
 see the [worker-count comparison](../results/worker-count-host-render-comparison-20260928.json).
 
+A later worker-mask span-lookup prototype also matched the serial E1M1 renderer
+for five views in each style at 12 workers and for a 16-worker Classic fuzz
+fixture. It was reverted after the longer dispatch comparison showed no speed
+gain. These fixed-view renderer checks do not qualify map completion; see the
+[bookkeeping trial record](../results/actor-mask-bookkeeping-trials-20260928.json).
+
 The current actor-projection and fixed-angle sprite renderer also passes a
 fresh **36/36-map smoke** at 35 idle tics and two full 320×200 serial frames
 per map: [receipt](../results/campaign-smoke-sprite-rotation.json). Its

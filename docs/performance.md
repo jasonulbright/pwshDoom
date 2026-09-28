@@ -325,3 +325,37 @@ The [measurement tool](../scripts/Measure-RenderWorkerMaskImpact.ps1),
 [reverse-order mask run](../results/renderer-worker-mask-impact-e3m6-candidate-reverse-final-20260928.json),
 and [reverse-order no-mask run](../results/renderer-worker-mask-impact-e3m6-baseline-reverse-final-20260928.json)
 pin the workload, output hashes, and source hashes.
+
+## Rejected actor-mask bookkeeping shortcuts — September 28, 2026
+
+Two PowerShell-only alternatives tried to reduce the host cost of assigning
+worker visibility masks. Both preserved output, but neither showed a
+repeatable improvement in full renderer-pool dispatch, so neither remains in
+the game source.
+
+The pre-encoding prototype generated masks from the interpolated numeric
+array before serializing it. This avoids a V3 byte-pack/decode/repack cycle,
+but mostly moved time from submission into interpolation. With 24-frame pairs,
+dispatch medians were 47.09 ms for baseline versus 46.08 ms for candidate, then
+44.78 versus 43.24 ms in reversed order. In the 96-frame reversed pair,
+candidate was slower: 41.10 versus 38.47 ms. Output hashes matched in all
+pairs; mixed end-to-end results did not justify keeping the extra path.
+
+The worker-span prototype replaced an all-worker scan with a table mapping the
+320 output columns to worker indexes and a contiguous bit-span calculation.
+Each of the six E3M6 runs assigned the same 206 of 4,480 possible actor-worker
+pairs and emitted the same encoded output hash. At 24 frames, one scan-first
+pair was dominated by worker scheduling noise (48.80 ms scan versus 75.60 ms
+lookup; lookup p95 193.28 ms); in the reversed pair, lookup was 46.89 ms and
+scan 44.14 ms. In the 96-frame lookup-first pair, lookup was 41.29 ms and scan
+36.83 ms. The longer run and reversed short pair do not support a speed claim.
+
+The lookup prototype also passed five-view E1M1 serial comparisons at 12
+workers in Classic, Matrix/Katakana, and AnsiArt/Katakana, with zero pixel
+differences and matching encoded strips. A 16-worker Classic fuzz fixture
+also matched across all five views. These checks establish partition
+correctness for the trial; they do not change map completion status. Both
+prototypes were reverted, leaving the measured all-worker scan intact. The
+[portable trial receipt](../results/actor-mask-bookkeeping-trials-20260928.json)
+indexes exact run parameters, source patches, and raw-report hashes in ignored
+`local/` storage. These experiments are not displayed-frame measurements.

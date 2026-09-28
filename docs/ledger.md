@@ -3936,3 +3936,29 @@ after the 8-worker game report had already recorded `ExitReason=Duration`, and
 mistakenly labeled that completed run a failure. The remaining runs were
 checked against their own report status and error fields; no game failure was
 hidden by the wrapper correction.
+
+## 2026-09-28 — Reject two actor-mask bookkeeping shortcuts
+
+After the committed actor-culling change, I tested two ways to lower its host
+bookkeeping cost. First, a pre-encoding path appended worker masks to the
+interpolated numeric array before producing bytes. It lowered the reported
+submit stage but moved the same projection work into interpolation; reversed
+24-frame dispatch pairs improved by only 1.01 and 1.54 ms, while the longer
+96-frame pair was 2.63 ms slower. The byte output remained identical, but the
+total result was not repeatable, so the path was reverted.
+
+Second, I replaced each actor's scan of every worker with a 320-column lookup
+and contiguous worker-bit calculation. The masks remained exactly 206 included
+and 4,274 skipped pairs out of 4,480, and all six process-pool runs had the same
+encoded output hash. One reversed 24-frame pair measured lookup 46.89 ms versus
+44.14 ms for the scan; the longer 96-frame pair measured 41.29 versus 36.83 ms.
+The first pair was heavily affected by scheduling variance, and neither short
+nor long evidence supports a full-dispatch gain. The mapping code was reverted.
+
+The trial's five-view serial comparisons still passed for all three styles at
+12 workers and for a 16-worker Classic fuzz fixture. These are correctness
+results for the rejected prototype, not campaign completion or original-Doom
+parity. The [portable trial receipt](../results/actor-mask-bookkeeping-trials-20260928.json)
+stores hashes for its source patches and full raw reports under ignored
+`local/`. The current source remains the committed renderer path; the separate
+16-check snapshot transport receipt was refreshed against it.

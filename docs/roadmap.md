@@ -228,6 +228,8 @@ At that earlier checkpoint the Episode 1 human-test pin was `e35874146856f00bc95
 
 - **M6 current-source worker comparison:** after actor culling, one 30-second sound-enabled, headless E3M6 run per worker count measured 34.70/31.90/33.70 simulation tics/sec and 29.30/30.60/30.30 completed host updates/sec for 8/12/16 workers. Eight used the least worker memory; twelve had the highest host-update rate; sixteen retained the highest simulation rate among the larger settings. Fixed-state process-pool medians were 55.60/44.22/43.39/45.93 ms at 4/8/12/16 workers. The samples were ordered, unpaired and headless, so they do not justify a default change or a 60-display claim. The 12-worker path matches serial output in five E1M1 views for all three styles. See the [performance entry](performance.md#current-source-worker-count-follow-up--september-28-2026) and [compact receipt](../results/worker-count-host-render-comparison-20260928.json).
 
+- **M6 actor-mask bookkeeping trials:** pre-encoding masks during interpolation and replacing the per-actor worker scan with a 320-column lookup both passed output-equivalence checks but failed to show a repeatable full-dispatch gain. Both prototypes were reverted. The current renderer retains its prior actor-culling implementation; see the [rejected-trial record](performance.md#rejected-actor-mask-bookkeeping-shortcuts--september-28-2026) and [receipt](../results/actor-mask-bookkeeping-trials-20260928.json).
+
 ### Historical milestone notes and task record
 
 The following dated notes preserve experiment history and previous queue decisions; they are not the current task queue.

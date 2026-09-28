@@ -1,0 +1,425 @@
+{
+  "Date": "2026-09-28",
+  "SourceCommit": "c6dfb8e007f95f1b5f2c8c3d7591a8c60d6e9b44",
+  "Runtime": {
+    "PowerShell": "7.6.5",
+    "OS": "Windows 11 Pro",
+    "CPU": "Intel(R) Core(TM) Ultra 7 265K",
+    "LogicalProcessors": 20
+  },
+  "Workload": {
+    "Episode": 3,
+    "Map": 6,
+    "Skill": 3,
+    "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+    "Workers": 16,
+    "FixedStateNoSimulation": true,
+    "Audio": false,
+    "Terminal": false,
+    "OutputHashCount": 1,
+    "EncodedOutputSha256": "01B755BFE74C38C59720B6B915B39249A2BE18273F21F0E66EAD6C6F9F51DC62"
+  },
+  "PreEncodingPrototype": {
+    "Purpose": "Generate NumericV4 masks from the interpolated double array before byte serialization, avoiding the V3 byte-pack/decode/repack round trip.",
+    "Disposition": "Rejected and reverted: paired end-to-end dispatch medians were inconsistent, and the 96-frame pair was slower; submit-only improvement mostly moved work into interpolation.",
+    "PrototypePatch": {
+      "Path": "local\\actor-mask-preencode-ab-e3m6-20260928\\preencode-mask-prototype.patch",
+      "Sha256": "E8BB8BD3ECE7E5DB1FB4A2A3413027931E3918321D3A79D5CE5049A324C72A21"
+    },
+    "Runs": [
+      {
+        "Run": "baseline-a",
+        "MaskPath": "NumericV4 masks appended after byte encoding",
+        "WarmupFrames": 4,
+        "MeasuredFrames": 24,
+        "InterpolationMedianMs": 4.1,
+        "SubmitMedianMs": 11.26,
+        "DispatchMedianMs": 47.09,
+        "DispatchP95Ms": 52.83,
+        "PeakWorkerRenderMedianMs": 21.54,
+        "ActorWorkerPairsIncluded": 206,
+        "ActorWorkerPairsSkipped": 4274,
+        "EncodedOutputSha256": "01B755BFE74C38C59720B6B915B39249A2BE18273F21F0E66EAD6C6F9F51DC62",
+        "Raw": {
+          "Path": "local\\actor-mask-preencode-ab-e3m6-20260928\\baseline-a.json",
+          "Bytes": 13403,
+          "Sha256": "F547DB625629442DF6D1E99371E48CFB158688DD189B6FC9EDF7ECE90DE75161"
+        }
+      },
+      {
+        "Run": "early-a",
+        "MaskPath": "NumericV4 masks appended before byte encoding",
+        "WarmupFrames": 4,
+        "MeasuredFrames": 24,
+        "InterpolationMedianMs": 8.54,
+        "SubmitMedianMs": 1.75,
+        "DispatchMedianMs": 46.08,
+        "DispatchP95Ms": 55.04,
+        "PeakWorkerRenderMedianMs": 25.09,
+        "ActorWorkerPairsIncluded": 206,
+        "ActorWorkerPairsSkipped": 4274,
+        "EncodedOutputSha256": "01B755BFE74C38C59720B6B915B39249A2BE18273F21F0E66EAD6C6F9F51DC62",
+        "Raw": {
+          "Path": "local\\actor-mask-preencode-ab-e3m6-20260928\\early-a.json",
+          "Bytes": 13374,
+          "Sha256": "E2E9953C1FCBE7ED0EC1BFF6621FA2474A216D82365A9911B7D9E38371367E78"
+        }
+      },
+      {
+        "Run": "early-b",
+        "MaskPath": "NumericV4 masks appended before byte encoding",
+        "WarmupFrames": 4,
+        "MeasuredFrames": 24,
+        "InterpolationMedianMs": 8.18,
+        "SubmitMedianMs": 1.49,
+        "DispatchMedianMs": 43.24,
+        "DispatchP95Ms": 55.29,
+        "PeakWorkerRenderMedianMs": 26.11,
+        "ActorWorkerPairsIncluded": 206,
+        "ActorWorkerPairsSkipped": 4274,
+        "EncodedOutputSha256": "01B755BFE74C38C59720B6B915B39249A2BE18273F21F0E66EAD6C6F9F51DC62",
+        "Raw": {
+          "Path": "local\\actor-mask-preencode-ab-e3m6-20260928\\early-b.json",
+          "Bytes": 13364,
+          "Sha256": "E5241146517DD9AF7BBDD1FD6456D1021E80D3A9DE5EA83A939423AE86533A12"
+        }
+      },
+      {
+        "Run": "baseline-b",
+        "MaskPath": "NumericV4 masks appended after byte encoding",
+        "WarmupFrames": 4,
+        "MeasuredFrames": 24,
+        "InterpolationMedianMs": 2.87,
+        "SubmitMedianMs": 8.47,
+        "DispatchMedianMs": 44.78,
+        "DispatchP95Ms": 52.76,
+        "PeakWorkerRenderMedianMs": 23.46,
+        "ActorWorkerPairsIncluded": 206,
+        "ActorWorkerPairsSkipped": 4274,
+        "EncodedOutputSha256": "01B755BFE74C38C59720B6B915B39249A2BE18273F21F0E66EAD6C6F9F51DC62",
+        "Raw": {
+          "Path": "local\\actor-mask-preencode-ab-e3m6-20260928\\baseline-b.json",
+          "Bytes": 13295,
+          "Sha256": "B0D9229C97414822967F9E81613A781B695F7698DAA776BC26178031CCE20173"
+        }
+      },
+      {
+        "Run": "early-long",
+        "MaskPath": "NumericV4 masks appended before byte encoding",
+        "WarmupFrames": 8,
+        "MeasuredFrames": 96,
+        "InterpolationMedianMs": 11.53,
+        "SubmitMedianMs": 1.92,
+        "DispatchMedianMs": 41.1,
+        "DispatchP95Ms": 53.89,
+        "PeakWorkerRenderMedianMs": 19.28,
+        "ActorWorkerPairsIncluded": 206,
+        "ActorWorkerPairsSkipped": 4274,
+        "EncodedOutputSha256": "01B755BFE74C38C59720B6B915B39249A2BE18273F21F0E66EAD6C6F9F51DC62",
+        "Raw": {
+          "Path": "local\\actor-mask-preencode-ab-e3m6-20260928\\early-long.json",
+          "Bytes": 45850,
+          "Sha256": "B1D0FDDB4CF281F28E81452C0601C5951C7CB8826FBA646FEAA6B64AD53D4D9A"
+        }
+      },
+      {
+        "Run": "baseline-long",
+        "MaskPath": "NumericV4 masks appended after byte encoding",
+        "WarmupFrames": 8,
+        "MeasuredFrames": 96,
+        "InterpolationMedianMs": 2.75,
+        "SubmitMedianMs": 7.71,
+        "DispatchMedianMs": 38.47,
+        "DispatchP95Ms": 60.64,
+        "PeakWorkerRenderMedianMs": 19.64,
+        "ActorWorkerPairsIncluded": 206,
+        "ActorWorkerPairsSkipped": 4274,
+        "EncodedOutputSha256": "01B755BFE74C38C59720B6B915B39249A2BE18273F21F0E66EAD6C6F9F51DC62",
+        "Raw": {
+          "Path": "local\\actor-mask-preencode-ab-e3m6-20260928\\baseline-long.json",
+          "Bytes": 45719,
+          "Sha256": "40A64398D913B66C3E306ED17D9A1147F5604ED8777ADCEC9B4E19584D81556A"
+        }
+      }
+    ]
+  },
+  "ColumnLookupPrototype": {
+    "Purpose": "Precompute a 320-column to renderer-worker table and form each clipped actor mask from the contiguous first/last worker span instead of checking every worker.",
+    "Disposition": "Rejected and reverted: identical masks/pixels, no repeatable dispatch improvement; the longer 96-frame pair was slower with the lookup.",
+    "PrototypePatch": {
+      "Path": "local\\worker-mask-span-lookup-ab-e3m6-20260928\\worker-mask-span-lookup.patch",
+      "Sha256": "B2AC40692D4CC6019B3B4940E711EAD63A390F59DBB002C270A05353E4E53B09"
+    },
+    "Runs": [
+      {
+        "Run": "scan-a",
+        "Assignment": "scan every worker for each actor",
+        "WarmupFrames": 4,
+        "MeasuredFrames": 24,
+        "SubmitMedianMs": 12.46,
+        "DispatchMedianMs": 48.8,
+        "DispatchP95Ms": 55.83,
+        "PeakWorkerRenderMedianMs": 20.25,
+        "ActorWorkerPairsIncluded": 206,
+        "ActorWorkerPairsSkipped": 4274,
+        "EncodedOutputSha256": "01B755BFE74C38C59720B6B915B39249A2BE18273F21F0E66EAD6C6F9F51DC62",
+        "Raw": {
+          "Path": "local\\worker-mask-span-lookup-ab-e3m6-20260928\\scan-a.json",
+          "Bytes": 13323,
+          "Sha256": "73E16B29A3B7EA9F39D8B36DFCDAD357FFC77F054434020047E7679C1DC10BC1"
+        }
+      },
+      {
+        "Run": "lookup-a",
+        "Assignment": "map clipped screen columns to a contiguous worker bit span",
+        "WarmupFrames": 4,
+        "MeasuredFrames": 24,
+        "SubmitMedianMs": 8.54,
+        "DispatchMedianMs": 75.6,
+        "DispatchP95Ms": 193.28,
+        "PeakWorkerRenderMedianMs": 44.53,
+        "ActorWorkerPairsIncluded": 206,
+        "ActorWorkerPairsSkipped": 4274,
+        "EncodedOutputSha256": "01B755BFE74C38C59720B6B915B39249A2BE18273F21F0E66EAD6C6F9F51DC62",
+        "Raw": {
+          "Path": "local\\worker-mask-span-lookup-ab-e3m6-20260928\\lookup-a.json",
+          "Bytes": 13354,
+          "Sha256": "0747B7932165EF1B1A1442F6EB22BD327B3A3A3F14C3E875196C740E82881770"
+        }
+      },
+      {
+        "Run": "lookup-b",
+        "Assignment": "map clipped screen columns to a contiguous worker bit span",
+        "WarmupFrames": 4,
+        "MeasuredFrames": 24,
+        "SubmitMedianMs": 8.56,
+        "DispatchMedianMs": 46.89,
+        "DispatchP95Ms": 55.08,
+        "PeakWorkerRenderMedianMs": 25.85,
+        "ActorWorkerPairsIncluded": 206,
+        "ActorWorkerPairsSkipped": 4274,
+        "EncodedOutputSha256": "01B755BFE74C38C59720B6B915B39249A2BE18273F21F0E66EAD6C6F9F51DC62",
+        "Raw": {
+          "Path": "local\\worker-mask-span-lookup-ab-e3m6-20260928\\lookup-b.json",
+          "Bytes": 13301,
+          "Sha256": "D50EF1586F21D4DD1617F6370285E7076D61EDE38AF8B634CE6C9D95A084A9BC"
+        }
+      },
+      {
+        "Run": "scan-b",
+        "Assignment": "scan every worker for each actor",
+        "WarmupFrames": 4,
+        "MeasuredFrames": 24,
+        "SubmitMedianMs": 7.61,
+        "DispatchMedianMs": 44.14,
+        "DispatchP95Ms": 50.63,
+        "PeakWorkerRenderMedianMs": 23.7,
+        "ActorWorkerPairsIncluded": 206,
+        "ActorWorkerPairsSkipped": 4274,
+        "EncodedOutputSha256": "01B755BFE74C38C59720B6B915B39249A2BE18273F21F0E66EAD6C6F9F51DC62",
+        "Raw": {
+          "Path": "local\\worker-mask-span-lookup-ab-e3m6-20260928\\scan-b.json",
+          "Bytes": 13244,
+          "Sha256": "27D50098DF3712E8CD8B31A4D00660CB1398D978ECB02BC847396AE28A1B3B19"
+        }
+      },
+      {
+        "Run": "lookup-long",
+        "Assignment": "map clipped screen columns to a contiguous worker bit span",
+        "WarmupFrames": 8,
+        "MeasuredFrames": 96,
+        "SubmitMedianMs": 10.96,
+        "DispatchMedianMs": 41.29,
+        "DispatchP95Ms": 55.26,
+        "PeakWorkerRenderMedianMs": 17.76,
+        "ActorWorkerPairsIncluded": 206,
+        "ActorWorkerPairsSkipped": 4274,
+        "EncodedOutputSha256": "01B755BFE74C38C59720B6B915B39249A2BE18273F21F0E66EAD6C6F9F51DC62",
+        "Raw": {
+          "Path": "local\\worker-mask-span-lookup-ab-e3m6-20260928\\lookup-long.json",
+          "Bytes": 45735,
+          "Sha256": "AD26E0D1D338EA9B50763978B9A3AA4F2A080CB018F03AD4F7C45DACD2ECCFB1"
+        }
+      },
+      {
+        "Run": "scan-long",
+        "Assignment": "scan every worker for each actor",
+        "WarmupFrames": 8,
+        "MeasuredFrames": 96,
+        "SubmitMedianMs": 7.52,
+        "DispatchMedianMs": 36.83,
+        "DispatchP95Ms": 52.51,
+        "PeakWorkerRenderMedianMs": 19.98,
+        "ActorWorkerPairsIncluded": 206,
+        "ActorWorkerPairsSkipped": 4274,
+        "EncodedOutputSha256": "01B755BFE74C38C59720B6B915B39249A2BE18273F21F0E66EAD6C6F9F51DC62",
+        "Raw": {
+          "Path": "local\\worker-mask-span-lookup-ab-e3m6-20260928\\scan-long.json",
+          "Bytes": 45589,
+          "Sha256": "1963701EDC8F3D0AD7EC096D6E6DC5F29C411B838963F3A53CA2298AEA2C8444"
+        }
+      }
+    ],
+    "SerialEquivalenceTests": [
+      {
+        "Style": "Classic",
+        "Workers": 12,
+        "FuzzFixture": false,
+        "Views": 5,
+        "ComparedPixels": 320000,
+        "PixelDifferences": 0.0,
+        "EncodedStripByteChecks": 60,
+        "Raw": {
+          "Path": "local/worker-mask-span-lookup-equivalence-20260928/e1m1-12w-Classic.json",
+          "Bytes": 3015,
+          "Sha256": "5EAE7AF0B5FC4E8FCEDAD012AEAE98505214546DF98DDAF398E00B89BF5D802F"
+        }
+      },
+      {
+        "Style": "Matrix",
+        "Workers": 12,
+        "FuzzFixture": false,
+        "Views": 5,
+        "ComparedPixels": 320000,
+        "PixelDifferences": 0.0,
+        "EncodedStripByteChecks": 60,
+        "Raw": {
+          "Path": "local/worker-mask-span-lookup-equivalence-20260928/e1m1-12w-Matrix.json",
+          "Bytes": 3015,
+          "Sha256": "A777A69E491D57114E83CF31C2EEE0F24C1F5581CCA41C8FF4E1353F65188CD5"
+        }
+      },
+      {
+        "Style": "AnsiArt",
+        "Workers": 12,
+        "FuzzFixture": false,
+        "Views": 5,
+        "ComparedPixels": 320000,
+        "PixelDifferences": 0.0,
+        "EncodedStripByteChecks": 60,
+        "Raw": {
+          "Path": "local/worker-mask-span-lookup-equivalence-20260928/e1m1-12w-AnsiArt.json",
+          "Bytes": 3016,
+          "Sha256": "4DF3AC065C115EBCD897F1E0901595490253FD077B528BF740EE762788624C11"
+        }
+      },
+      {
+        "Style": "Classic",
+        "Workers": 16,
+        "FuzzFixture": true,
+        "Views": 5,
+        "ComparedPixels": 320000,
+        "PixelDifferences": 0.0,
+        "EncodedStripByteChecks": 80,
+        "Raw": {
+          "Path": "local/worker-mask-span-lookup-equivalence-20260928/e1m1-16w-fuzz-classic.json",
+          "Bytes": 3038,
+          "Sha256": "E634A2C0949F86E9E840863251DD1E02D9E722C0F0C9FD4BF9838B6DAB83DBCB"
+        }
+      }
+    ]
+  },
+  "AllRawReports": [
+    {
+      "Path": "local\\actor-mask-preencode-ab-e3m6-20260928\\baseline-a.json",
+      "Bytes": 13403,
+      "Sha256": "F547DB625629442DF6D1E99371E48CFB158688DD189B6FC9EDF7ECE90DE75161"
+    },
+    {
+      "Path": "local\\actor-mask-preencode-ab-e3m6-20260928\\early-a.json",
+      "Bytes": 13374,
+      "Sha256": "E2E9953C1FCBE7ED0EC1BFF6621FA2474A216D82365A9911B7D9E38371367E78"
+    },
+    {
+      "Path": "local\\actor-mask-preencode-ab-e3m6-20260928\\early-b.json",
+      "Bytes": 13364,
+      "Sha256": "E5241146517DD9AF7BBDD1FD6456D1021E80D3A9DE5EA83A939423AE86533A12"
+    },
+    {
+      "Path": "local\\actor-mask-preencode-ab-e3m6-20260928\\baseline-b.json",
+      "Bytes": 13295,
+      "Sha256": "B0D9229C97414822967F9E81613A781B695F7698DAA776BC26178031CCE20173"
+    },
+    {
+      "Path": "local\\actor-mask-preencode-ab-e3m6-20260928\\early-long.json",
+      "Bytes": 45850,
+      "Sha256": "B1D0FDDB4CF281F28E81452C0601C5951C7CB8826FBA646FEAA6B64AD53D4D9A"
+    },
+    {
+      "Path": "local\\actor-mask-preencode-ab-e3m6-20260928\\baseline-long.json",
+      "Bytes": 45719,
+      "Sha256": "40A64398D913B66C3E306ED17D9A1147F5604ED8777ADCEC9B4E19584D81556A"
+    },
+    {
+      "Path": "local\\actor-mask-preencode-ab-e3m6-20260928\\preencode-mask-prototype.patch",
+      "Bytes": 13964,
+      "Sha256": "E8BB8BD3ECE7E5DB1FB4A2A3413027931E3918321D3A79D5CE5049A324C72A21"
+    },
+    {
+      "Path": "local\\worker-mask-span-lookup-ab-e3m6-20260928\\scan-a.json",
+      "Bytes": 13323,
+      "Sha256": "73E16B29A3B7EA9F39D8B36DFCDAD357FFC77F054434020047E7679C1DC10BC1"
+    },
+    {
+      "Path": "local\\worker-mask-span-lookup-ab-e3m6-20260928\\lookup-a.json",
+      "Bytes": 13354,
+      "Sha256": "0747B7932165EF1B1A1442F6EB22BD327B3A3A3F14C3E875196C740E82881770"
+    },
+    {
+      "Path": "local\\worker-mask-span-lookup-ab-e3m6-20260928\\lookup-b.json",
+      "Bytes": 13301,
+      "Sha256": "D50EF1586F21D4DD1617F6370285E7076D61EDE38AF8B634CE6C9D95A084A9BC"
+    },
+    {
+      "Path": "local\\worker-mask-span-lookup-ab-e3m6-20260928\\scan-b.json",
+      "Bytes": 13244,
+      "Sha256": "27D50098DF3712E8CD8B31A4D00660CB1398D978ECB02BC847396AE28A1B3B19"
+    },
+    {
+      "Path": "local\\worker-mask-span-lookup-ab-e3m6-20260928\\lookup-long.json",
+      "Bytes": 45735,
+      "Sha256": "AD26E0D1D338EA9B50763978B9A3AA4F2A080CB018F03AD4F7C45DACD2ECCFB1"
+    },
+    {
+      "Path": "local\\worker-mask-span-lookup-ab-e3m6-20260928\\scan-long.json",
+      "Bytes": 45589,
+      "Sha256": "1963701EDC8F3D0AD7EC096D6E6DC5F29C411B838963F3A53CA2298AEA2C8444"
+    },
+    {
+      "Path": "local\\worker-mask-span-lookup-ab-e3m6-20260928\\worker-mask-span-lookup.patch",
+      "Bytes": 5159,
+      "Sha256": "B2AC40692D4CC6019B3B4940E711EAD63A390F59DBB002C270A05353E4E53B09"
+    },
+    {
+      "Path": "local/worker-mask-span-lookup-equivalence-20260928/e1m1-12w-Classic.json",
+      "Bytes": 3015,
+      "Sha256": "5EAE7AF0B5FC4E8FCEDAD012AEAE98505214546DF98DDAF398E00B89BF5D802F"
+    },
+    {
+      "Path": "local/worker-mask-span-lookup-equivalence-20260928/e1m1-12w-Matrix.json",
+      "Bytes": 3015,
+      "Sha256": "A777A69E491D57114E83CF31C2EEE0F24C1F5581CCA41C8FF4E1353F65188CD5"
+    },
+    {
+      "Path": "local/worker-mask-span-lookup-equivalence-20260928/e1m1-12w-AnsiArt.json",
+      "Bytes": 3016,
+      "Sha256": "4DF3AC065C115EBCD897F1E0901595490253FD077B528BF740EE762788624C11"
+    },
+    {
+      "Path": "local/worker-mask-span-lookup-equivalence-20260928/e1m1-16w-fuzz-classic.json",
+      "Bytes": 3038,
+      "Sha256": "E634A2C0949F86E9E840863251DD1E02D9E722C0F0C9FD4BF9838B6DAB83DBCB"
+    },
+    {
+      "Path": "local/snapshot-mask-integration.json",
+      "Bytes": 333,
+      "Sha256": "DE8708C58A5295B3C50B9DF3D7929C56448E5F22AE712ABD8A60A5535FF0F36E"
+    },
+    {
+      "Path": "local/preencoded-launcher-smoke-e1m1-20260928.json",
+      "Bytes": 721499,
+      "Sha256": "558391FFA7224FA088EA6AB4FCC17BC6D60CEA36E890FF5EA2276192EC1EB3B2"
+    }
+  ],
+  "Interpretation": "Both prototypes were PowerShell-only. All six worker-mask assignment runs report 206 included and 4,274 skipped pairs out of 4,480, with one identical encoded output hash. The lookup also passes five-view E1M1 serial equivalence for Classic, Matrix/Katakana, and AnsiArt/Katakana at 12 workers, plus a 16-worker Classic fuzz fixture. No optimization from either trial remains in the working source; the source returns to the committed all-worker scan. Full raw reports and reconstructable patches remain in ignored local/ and are SHA-256 indexed here. These fixed-state profiles exclude Terminal presentation and do not establish 60 FPS."
+}
