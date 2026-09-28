@@ -3810,3 +3810,41 @@ fixture also rejects malformed markers and prepared endpoints; the ordinary
 direct renderer fallback remains covered. This improves repeated worker CPU
 for Spectre scenes only. It does not resolve actor-through-wall reports,
 qualify a campaign route, or demonstrate the 35-tic/60-display goal.
+
+
+## 2026-09-28 — Assemble the three-style social video set
+
+The user-requested Preview.3-era social asset is assembled from three
+successful earlier audiovisual effect-test recordings: Matrix/Katakana on
+E1M3 (September 19), Color Art/Katakana on E1M2 (September 12), and Classic
+on E1M2 (September 19). Each source receipt reports process-scoped audio
+capture and its original MP4 hash. A 30-second segment from each was cropped
+to its gameplay window, scaled without color enhancement, labeled, faded at
+the audio boundaries, and encoded as 1920×1080 H.264 at 30 fps with 48-kHz
+stereo AAC. The 90.021-second showcase is 132,384,922 bytes; separate
+30-second clips are also included. ffprobe confirms all four video/audio
+streams, and audio level analysis confirms non-silent sound. Six frames across
+each style and a 10-second image from each final clip were visually reviewed.
+
+The share-ready files and checksums are in ignored
+`local/social-assets-preview3-20260928/`; source footage remains untouched in
+`local/recordings/`. The [portable asset receipt](../results/preview3-social-video-assets-20260928.json)
+records source/output hashes, upload dimensions and the conservative X check.
+The montage is below X's currently documented non-Premium limit of 140 seconds
+and 512 MB, so upload fit does not depend on the user's subscription tier.
+No upload was performed. This uses older effect-test footage rather than a
+fresh current-branch capture; it is a demonstration asset, not release or
+performance qualification.
+
+## 2026-09-28 — Reject destination-index increment trial
+
+The fixed-vertical sprite raster loop computes each destination index as
+`y*320+x`. A trial initialized the index once per post and advanced it by 320
+per row. All six fixed-state E3M6 profiles retained the same full 64,000-pixel
+hash. Across three before/after pairs, actor-phase medians per 20-column
+stripe were 7.53/7.28 ms, 8.88/7.52 ms, then 8.05/9.28 ms; the last pair
+reversed direction, and that profile's total render median also rose from
+12.54 to 14.32 ms. Variation is too large for this sample to support a causal
+speed claim, so the source change was reverted. Raw profiles remain in ignored
+`local/renderer-fastpatch-index-*.json`; no timing result is committed as
+product evidence.

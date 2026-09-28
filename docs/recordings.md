@@ -20,7 +20,7 @@ MS Gothic is present on the test machine and is the default for the Japanese sty
 
 ## Recording implementation
 
-`scripts/Record-DoomReplay.ps1` launches one finite replay in an isolated Terminal process, selects that process's game window, and passes its actual window handle to FFmpeg's `gfxcapture` source. It records only that window, with no microphone or system audio. The game itself is still silent. The recorder's post-report window delay defaults to three seconds and can be set with `-ExitDelaySeconds`; the default interactive launcher has no delay. Later captures still encounter intermittent native teardown failures, even with a 15-second delay. A successful game/encoder exit plus visual inspection is required before accepting footage. The experimental `-CaptureBackend Gdi` option reproduces black Terminal frames on this setup and is not an accepted recording path here.
+`scripts/Record-DoomReplay.ps1` launches one finite replay in an isolated Terminal process, selects that process's game window, and passes its actual window handle to FFmpeg's `gfxcapture` source. Video capture is limited to that window. With `-CaptureAudio`, a separate recorder captures audio scoped to the simulation process; it does not capture a microphone or unrelated system audio. The PowerShell sound worker now produces game audio. Captures without `-CaptureAudio` are silent video. The recorder's post-report window delay defaults to three seconds and can be set with `-ExitDelaySeconds`; the default interactive launcher has no delay. Later captures still encounter intermittent native teardown failures, even with a 15-second delay. A successful game/encoder exit plus visual inspection is required before accepting footage. The experimental `-CaptureBackend Gdi` option reproduces black Terminal frames on this setup and is not an accepted recording path here.
 
 [FFmpeg documents `gfxcapture`](https://ffmpeg.org/ffmpeg-filters.html#gfxcapture) as Windows.Graphics.Capture producing D3D11 frames. We pass those frames to NVENC for external video encoding. The capture ceiling is 240 arrivals/sec; the MP4 is resampled to 60 FPS. This avoids imposing a second 60 Hz cap on compositor arrivals near the game's 60 Hz cadence, but it does not guarantee one unique game frame per video frame. Capture timestamps and encoder logs are retained, including duplication counts. Movie FPS is not a replacement for PresentMon or an optical/frame-identity experiment.
 
@@ -35,9 +35,23 @@ pwsh -NoProfile -File scripts/Record-DoomReplay.ps1 -Style AnsiArt -Maximized -O
 
 Run sequentially with no existing Terminal process for unambiguous window attribution. A fresh prefix is required. Pass `-Ffmpeg C:\path\ffmpeg.exe` if using another local build with `gfxcapture`/NVENC support. Each run retains the untrimmed MP4, FFmpeg log, game JSON and recording JSON. Hardware/font/display differences affect fit, capture support, and timing. Recorded-run timing must be identified separately from clean performance measurements. The earlier five PresentMon ASCII captures remain historical results, not katakana benchmarks.
 
+## Social style showcase — September 28, 2026
+
+The [local export package](../results/preview3-social-video-assets-20260928.json)
+contains a 90.021-second H.264 showcase and three separate 30-second excerpts
+with captured game audio: Matrix/Katakana, Color Art, and Classic. The 1080p
+30-fps montage has AAC stereo audio at 48 kHz, is 132,384,922 bytes, and stays
+within the conservative 140-second/512-MB X upload allowance. Each individual
+clip has the same resolution, frame rate and audio format. The footage comes
+from previously completed effect-test recordings on September 12 and 19; it
+is not a fresh recording of Preview.3 or the current branch, and it is not
+performance or campaign-completion evidence. Original full recordings remain
+under ignored `local/recordings/`; the share-ready copies, README, and checksum
+file are under ignored `local/social-assets-preview3-20260928/`.
+
 ## Completed recordings — 2026-09-10
 
-Both captures complete the same E1M1 route with 1,560 simulation tics, five kills, 75 health, no error and no viewport pause. They ran sequentially with the same runtime source, with no other study benchmark or video export running concurrently. The two viewing copies are actual Terminal footage, not offline framebuffer animations. They are silent because game audio remains unimplemented.
+Both captures complete the same E1M1 route with 1,560 simulation tics, five kills, 75 health, no error and no viewport pause. They ran sequentially with the same runtime source, with no other study benchmark or video export running concurrently. The two viewing copies are actual Terminal footage, not offline framebuffer animations. These historical files are silent because game audio had not yet been implemented.
 
 | Style | Viewing copy under `local/recordings/` | Duration | Active simulation tics/sec | Completed console writes/sec |
 |---|---|---:|---:|---:|
