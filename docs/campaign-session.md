@@ -66,7 +66,7 @@ Use fresh report paths:
 
 Each worker test checks 128,000 pixels and 14 encoded strips: independent row/column-major screen data, then real E1M2 rasterization after asset reload, using seven uneven workers whose process IDs must remain unchanged. Across three styles that is 384,000 pixels and 42 strips. Classic's 24 ANSI round trips and the character codec's 144 cases also pass. The first Classic worker harness attempt omitted the codec import; its failure report is retained separately.
 
-Run one engine-building test at a time: current harnesses share the generated engine-bundle cache. The two initial unpaced route/screen probes overlapped and are not clean paired performance measurements. Later host/capture runs are serialized.
+The generated engine bundle is now published through a unique same-directory temporary file and atomic replacement, so concurrent builders do not truncate the shared cache. Eight simultaneous PowerShell 7.6.5 builders produced the same parseable 1,587,533-byte bundle with no leftover temporary files ([receipt](../results/engine-bundle-concurrent-publication-20260928.json)). The two initial unpaced route/screen probes still overlapped and are not clean paired performance measurements; later host/capture runs are serialized.
 
 ## Remaining release work
 

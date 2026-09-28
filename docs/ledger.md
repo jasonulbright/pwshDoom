@@ -4012,3 +4012,17 @@ traces are retained in ignored local/; the
 [portable regression receipt](../results/episode1-route-regressions-current-20260928.json)
 records their hashes and limits. This does not substitute for the complete
 human Episode 1 playthrough.
+
+## 2026-09-28 — Publish generated engine bundle atomically
+
+The retained concurrent save-worker failure came from multiple harnesses
+writing the shared `local/engine-bundle.ps1` directly. The builder now writes
+UTF-8 bytes to a unique temporary file beside the cache, then atomically
+replaces the destination. Readers therefore see a complete prior or new
+bundle. Eight simultaneous PowerShell 7.6.5 builders all exit successfully;
+the final 1,587,533-byte bundle has the expected SHA-256, parses without
+errors, and leaves no temporary files. This removes the observed cache-write
+collision; it does not establish safety for unrelated shared test outputs or
+prove concurrent gameplay pacing.
+
+Evidence: [concurrent publication report](../results/engine-bundle-concurrent-publication-20260928.json).

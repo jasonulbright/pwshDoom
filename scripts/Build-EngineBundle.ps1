@@ -41,5 +41,16 @@ $null=[Management.Automation.Language.Parser]::ParseInput($text,[ref]$parseToken
 if($parseIssues.Count){throw ($parseIssues | ForEach-Object { "$($_.Extent.StartLineNumber): $($_.Message)" } | Out-String)}
 $destination=[IO.Path]::GetFullPath($Output)
 [void][IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName($destination))
-[IO.File]::WriteAllText($destination,$text,[Text.UTF8Encoding]::new($false))
+[byte[]]$bundleBytes=[Text.UTF8Encoding]::new($false).GetBytes($text)
+# Multiple harnesses can build the shared cache at once. Publish through a
+# unique same-directory file so readers see the old complete bundle or the
+# new complete bundle, never a partially written file.
+$temporary="$destination.$([guid]::NewGuid().ToString('N')).tmp"
+try {
+    [IO.File]::WriteAllBytes($temporary,$bundleBytes)
+    [IO.File]::Move($temporary,$destination,$true)
+}
+finally {
+    if([IO.File]::Exists($temporary)){[IO.File]::Delete($temporary)}
+}
 return $destination
