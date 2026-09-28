@@ -548,14 +548,16 @@ function Invoke-FastRender {
     $geometryMs=$phaseWatch.Elapsed.TotalMilliseconds;$phaseWatch.Restart()
     # Actor sprites share the geometry depth buffer, including masked wall holes.
     $drawActors=$world.Actors
-    foreach($candidate in $drawActors){
-        if($candidate.Flags -band 0x40000){
-            # Fuzz samples the actors behind it: draw farther sprites first.
-            # The interpolated worker packet already carries this shared order;
-            # direct renderer snapshots retain the local fallback.
-            $actorsPrepared=$world -is [Collections.IDictionary] -and $world.Contains('ActorsDepthSortedForFuzz') -and $world.ActorsDepthSortedForFuzz
-            if(-not $actorsPrepared){$drawActors=@($world.Actors|Sort-Object {($_.X-$cx)*$co+($_.Y-$cy)*$si} -Descending -Stable)}
-            break
+    # Interpolated worker packets explicitly mark their actors as sorted when
+    # they contain a Spectre. Avoid scanning the full actor list again in every
+    # renderer process; direct snapshots still detect and sort the fallback.
+    $actorsPrepared=$world -is [Collections.IDictionary] -and $world.Contains('ActorsDepthSortedForFuzz') -and $world.ActorsDepthSortedForFuzz
+    if(-not $actorsPrepared){
+        foreach($candidate in $drawActors){
+            if($candidate.Flags -band 0x40000){
+                $drawActors=@($world.Actors|Sort-Object {($_.X-$cx)*$co+($_.Y-$cy)*$si} -Descending -Stable)
+                break
+            }
         }
     }
     foreach($actor in $drawActors) {
