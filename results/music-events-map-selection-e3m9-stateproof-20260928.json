@@ -1,0 +1,74 @@
+{
+  "Checks": [
+    {
+      "Passed": true,
+      "Name": "Actual world initialization emits E1M1 music callback"
+    },
+    {
+      "Passed": true,
+      "Name": "Draining callbacks is destructive exactly once"
+    },
+    {
+      "Passed": true,
+      "Name": "Engine music volume clamps to conventional range and emits gain"
+    },
+    {
+      "Passed": true,
+      "Name": "One-shot flag and explicit stop are preserved"
+    },
+    {
+      "Passed": true,
+      "Name": "Loaded level synchronizes its actual map music"
+    },
+    {
+      "Passed": true,
+      "Name": "Ultimate Doom intermission mapping"
+    },
+    {
+      "Passed": true,
+      "Name": "Episode one finale restores victory score"
+    },
+    {
+      "Passed": true,
+      "Name": "Episode three text finale uses victory score"
+    },
+    {
+      "Passed": true,
+      "Name": "Episode three art stage restores bunny score"
+    },
+    {
+      "Passed": true,
+      "Name": "Other Ultimate Doom art finales retain victory score"
+    },
+    {
+      "Passed": true,
+      "Name": "Actual E3M9 initialization emits the qualified music track"
+    },
+    {
+      "Passed": true,
+      "Name": "Actual E3M9 score matches its one-track catalog"
+    },
+    {
+      "Passed": true,
+      "Name": "Catalog validates qualified score against actual IWAD bytes"
+    },
+    {
+      "Passed": true,
+      "Name": "Mismatched map/qualification catalog rejected"
+    }
+  ],
+  "MapSelection": {
+    "CatalogSha256": "C81132813D94A89E78625B5B58D993CD32D550D33DDDB5F68AF4F32EBC2D2BF0",
+    "Map": 9,
+    "Track": "D_E3M9",
+    "Kind": "Start",
+    "Loop": true,
+    "Episode": 3,
+    "QualificationSha256": "05E6B36FE6728B3E7C571256C3B040995F411EA8E9F6003578EC12F973A45F05"
+  },
+  "Meaning": "Actual engine initialization callback plus isolated Ultimate Doom save-state music selection and IWAD/catalog identity checks. Optional map cases record the exact emitted track and catalog/qualification hashes. Non-E1M1 tracks are selection tests only; they are not playback qualifications.",
+  "Error": null,
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "ScriptSha256": "CB35237EDD31C3F39A8CB115A67C0CCACF74D561837C94FEE1CBC333B4B9234C",
+  "SourceSha256": "7E59CFCC112C2FC8369F17077F40A391E56947FE4CD31354E6387D750102386E"
+}
