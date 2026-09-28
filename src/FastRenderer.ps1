@@ -560,8 +560,10 @@ function Invoke-FastRender {
             }
         }
     }
+    [bool]$actorsAlreadyFiltered=$world -is [Collections.IDictionary] -and $world.Contains('RenderActorsFiltered') -and $world.RenderActorsFiltered
+    if($actorsAlreadyFiltered){$drawActors=$world.RenderActors}
     foreach($actor in $drawActors) {
-        if($world -is [Collections.IDictionary] -and $world.Contains('RenderWorkerBit') -and
+        if(-not $actorsAlreadyFiltered -and $world -is [Collections.IDictionary] -and $world.Contains('RenderWorkerBit') -and
            (($actor.WorkerMask -band $world.RenderWorkerBit) -eq 0)){continue}
         # Keep the adopted renderer's 16.16 truncation with worker-safe integer
         # arithmetic, avoiding per-actor Fixed object dispatch.

@@ -107,7 +107,7 @@ function Add-GameRenderActorWorkerMasks {
 }
 
 function Read-GameSnapshotBytes {
-    param([byte[]]$Bytes,$Previous)
+    param([byte[]]$Bytes,$Previous,[long]$RenderWorkerBit=0L)
     if($Bytes.Length -lt 384 -or $Bytes.Length%8 -ne 0){throw 'Malformed snapshot byte length.'}
     [double[]]$v=[double[]]::new($Bytes.Length/8);[Buffer]::BlockCopy($Bytes,0,$v,0,$Bytes.Length)
     [int]$ns=$v[3];[int]$nd=$v[4];[int]$na=$v[5];[int]$nw=$v[6]
@@ -142,13 +142,24 @@ function Read-GameSnapshotBytes {
     foreach($s in $p.PlayerSprites){$s.Sprite=[int]$v[$n++];$s.Frame=[int]$v[$n++];$s.Sx=$v[$n++];$s.Sy=$v[$n++]}
     foreach($s in $state.Actors){$s.Flags=[int]$v[$n++]}
     if($version -eq 4){
+        # Keep the complete actor array for snapshot state, but reuse a compact
+        # per-worker list for rasterization. Its order is a stable subsequence,
+        # so prepared far-to-near Spectre order remains intact.
+        $filteredActors=$null
+        if($RenderWorkerBit -ne 0){
+            if($state['RenderActors'] -is [Collections.Generic.List[object]]){$filteredActors=$state['RenderActors'];$filteredActors.Clear()}
+            else{$filteredActors=[Collections.Generic.List[object]]::new()}
+        }
         for($i=0;$i -lt $na;$i++){
             [double]$workerMask=$v[$n++]
             if(-not [double]::IsFinite($workerMask) -or $workerMask -lt 0 -or $workerMask -gt 4294967295 -or $workerMask -ne [Math]::Floor($workerMask)){throw 'Invalid actor worker mask.'}
             $state.Actors[$i].WorkerMask=[long]$workerMask
+            if($RenderWorkerBit -ne 0 -and ($state.Actors[$i].WorkerMask -band $RenderWorkerBit) -ne 0){$filteredActors.Add($state.Actors[$i])}
         }
+        if($RenderWorkerBit -ne 0){$state.RenderActors=$filteredActors;$state.RenderActorsFiltered=$true}
+        else{$state.RenderActors=$state.Actors;$state.RenderActorsFiltered=$false}
     }
-    else{foreach($s in $state.Actors){$s.WorkerMask=-1L}}
+    else{foreach($s in $state.Actors){$s.WorkerMask=-1L};$state.RenderActors=$state.Actors;$state.RenderActorsFiltered=$false}
     if($n -ne $v.Length){throw 'Malformed snapshot payload length.'}
     return $state
 }

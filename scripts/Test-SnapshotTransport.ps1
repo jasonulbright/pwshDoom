@@ -50,10 +50,15 @@ if($state.Actors.Count -ne 0){throw 'Removed actor remained in decoded state.'};
 # Worker packets extend the fixed NumericV3 simulation fields with one mask per actor.
 $v3=ConvertTo-TestValues $bytes;$actorCount=[int]$v3[5]
 $v4=[double[]]::new($v3.Length+$actorCount);[Array]::Copy($v3,$v4,$v3.Length);$v4[0]=4
-for($i=0;$i -lt $actorCount;$i++){$v4[$v3.Length+$i]=3}
+for($i=0;$i -lt $actorCount;$i++){$v4[$v3.Length+$i]=1}
 $v4Bytes=[byte[]]::new($v4.Length*8);[Buffer]::BlockCopy($v4,0,$v4Bytes,0,$v4Bytes.Length)
 $v4State=Read-GameSnapshotBytes $v4Bytes $null
-if($v4State.Actors.Count -ne $actorCount -or $v4State.Actors[0].WorkerMask -ne 3){throw 'NumericV4 worker mask did not round-trip.'};$checks++
+if($v4State.Actors.Count -ne $actorCount -or $v4State.Actors[0].WorkerMask -ne 1 -or $v4State.RenderActors.Count -ne $actorCount -or $v4State.RenderActorsFiltered){throw 'NumericV4 worker mask did not round-trip.'};$checks++
+$filtered=Read-GameSnapshotBytes $v4Bytes $v4State 1L
+if(-not $filtered.RenderActorsFiltered -or $filtered.RenderActors.Count -ne $actorCount){throw 'Worker-visible actor selection omitted an included actor.'};$checks++
+$renderActorsBuffer=$filtered.RenderActors
+$filtered=Read-GameSnapshotBytes $v4Bytes $filtered 2L
+if(-not [object]::ReferenceEquals($renderActorsBuffer,$filtered.RenderActors) -or $filtered.RenderActors.Count -ne 0){throw 'Worker actor selection did not reuse and refresh its visible-actor list.'};$checks++
 $badV4=[double[]]$v4.Clone();$badV4[$v3.Length]=1.5
 $badV4Bytes=[byte[]]::new($badV4.Length*8);[Buffer]::BlockCopy($badV4,0,$badV4Bytes,0,$badV4Bytes.Length);Assert-Rejected $badV4Bytes;$checks++
 Assert-Rejected ([byte[]]::new(383));Assert-Rejected ([byte[]]::new(385));$checks+=2

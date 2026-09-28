@@ -38,7 +38,7 @@ try {
         $bytes=[byte[]]::new($length);[void]$view.ReadArray(128L,$bytes,0,$length)
         $decodeWatch=[Diagnostics.Stopwatch]::StartNew()
         if($kind -eq 0){
-            $snapshot=Read-GameSnapshotBytes $bytes $previousSnapshot;$previousSnapshot=$snapshot
+            $snapshot=Read-GameSnapshotBytes $bytes $previousSnapshot $workerBit;$previousSnapshot=$snapshot
             $snapshot.RenderWorkerBit=$workerBit
             $ctx.World=$snapshot;$ctx.Sectors=$snapshot.Sectors;$ctx.Sides=$snapshot.Sides;$tic=$snapshot.Tic
             $paletteNumber=$snapshot.ConsolePlayer.PaletteNumber
