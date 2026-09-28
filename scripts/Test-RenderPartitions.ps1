@@ -47,9 +47,15 @@ try {
         $expected=[byte[]]$serial.Pixels.Clone()
         $opaqueDifferences=0
         if($Fuzz){
+            # Keep the opaque control renders off the serial image context. Fuzz
+            # samples neighboring framebuffer rows, so an extra diagnostic frame
+            # would otherwise change the history seen by later worker comparisons.
+            $fixtureContext=New-FastRenderContext $content $game.World;$fixtureContext.PlaneSpanBoundaries=$context.PlaneSpanBoundaries
+            Set-GameRenderSnapshot $fixtureContext $snapshot;Invoke-FastRender $fixtureContext
+            [byte[]]$fuzzFixturePixels=$fixtureContext.Pixels.Clone()
             $flags=$snapshot.Actors[0].Flags;$snapshot.Actors[0].Flags=$flags -band (-bnot 0x40000)
-            Invoke-FastRender $serial
-            for($pixel=0;$pixel -lt 64000;$pixel++){if($serial.Pixels[$pixel] -ne $expected[$pixel]){$opaqueDifferences++}}
+            Set-GameRenderSnapshot $fixtureContext $snapshot;Invoke-FastRender $fixtureContext
+            for($pixel=0;$pixel -lt 64000;$pixel++){if($fixtureContext.Pixels[$pixel] -ne $fuzzFixturePixels[$pixel]){$opaqueDifferences++}}
             $snapshot.Actors[0].Flags=$flags
             if($opaqueDifferences -eq 0){throw 'The shadow actor fixture did not distinguish an opaque actor.'}
         }
@@ -69,7 +75,16 @@ try {
             }else{
                 $serialBytes=if($AnsiEncoding -eq 'ColorState'){ConvertTo-AnsiColorStateStrip $expected 320 200 $worker.First $worker.End $classicCodec -ColumnOffset 17 -RowOffset 5}
                     else{ConvertTo-AnsiStrip $expected 320 200 $worker.First $worker.End $classicCodec -ColumnOffset 17 -RowOffset 5}
-                if([Convert]::ToBase64String($result.Bytes) -cne [Convert]::ToBase64String($serialBytes)){throw 'Worker Classic output differs from the selected serial encoder.'}
+                if([Convert]::ToBase64String($result.Bytes) -cne [Convert]::ToBase64String($serialBytes)){
+                    [int]$pixelMismatchCount=0;[int]$firstPixelMismatch=-1;$pixelDetails=[Collections.Generic.List[string]]::new()
+                    for([int]$py=0;$py -lt 200;$py++){
+                        for([int]$px=$worker.First;$px -lt $worker.End;$px++){
+                            [int]$pixelIndex=$py*320+$px
+                            if($result.Pixels[$pixelIndex] -ne $expected[$pixelIndex]){$pixelMismatchCount++;if($firstPixelMismatch -lt 0){$firstPixelMismatch=$pixelIndex};if($pixelDetails.Count -lt 24){$pixelDetails.Add("$pixelIndex`($($pixelIndex%320),$([int]($pixelIndex/320))):$($expected[$pixelIndex])->$($result.Pixels[$pixelIndex])")}}
+                        }
+                    }
+                    throw "Worker Classic output differs at $angle degrees, columns [$($worker.First),$($worker.End)): $pixelMismatchCount pixels; first mismatch index $firstPixelMismatch; pixels $($pixelDetails -join '; ')."
+                }
             }
             for($y=0;$y -lt 200;$y++){[Array]::Copy($result.Pixels,$y*320+$worker.First,$actual,$y*320+$worker.First,$worker.End-$worker.First)}
         }

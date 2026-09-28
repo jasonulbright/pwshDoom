@@ -866,3 +866,17 @@ failure came from restoring map-start actor heads after later gameplay; it was
 an invalid harness control, not a product finding. Same-state repeat controls
 now pass at all analyzed samples. The through-wall report remains unreproduced
 at its exact view, and this audit does not justify changing clipping code.
+
+### Fuzz partition fixture correction (2026-09-28)
+
+A five-view Classic fuzz comparison first reported a 13-pixel mismatch at
+173 degrees with one worker strip. The opaque-actor negative-control render
+had reused the serial framebuffer; because fuzz samples neighboring rows,
+that extra diagnostic draw changed the framebuffer history. The test now
+renders that control in a separate context. The corrected one-strip and
+16-worker runs each match all 320,000 pixels; encoded output matches across
+five and 80 strips respectively. The renderer hash is
+`6E5B10FFE976179D04C4BA877739EEFC5892E1003403E3A9DED0E63D2817A8B4` in both
+receipts. This was a harness correction, not an engine fix or new vanilla
+parity claim: [one strip](../results/render-partitions-fuzz-baseline-aeb6772-20260928.json),
+[16 workers](../results/render-partitions-fuzz-workers16-20260928.json).

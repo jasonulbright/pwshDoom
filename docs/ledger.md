@@ -3578,3 +3578,23 @@ The fingerprint hashes raw files; line-ending normalization makes all 216
 gameplay/session input texts identical. The refreshed [Episode 1 handoff](episode1-playtest.md)
 therefore directs Jason to the exact extracted package and uses fresh r6
 record/report paths. The full human route and public release remain pending.
+
+## 2026-09-28 — Correct fuzz partition fixture contamination
+
+A Classic fuzz partition check initially reported a 13-pixel mismatch at
+173 degrees with a single worker strip. The renderer was unchanged. Inspection
+showed that the opaque-actor negative-control render reused the serial frame
+buffer; fuzz reads adjacent rows from that buffer, so the diagnostic render
+altered the next comparison's history. The control now uses its own render
+context, and encoded-byte failures report pixel coordinates and colors.
+
+The corrected baseline passes 320,000 pixel comparisons over five views with
+one worker strip and five encoded-strip checks. The normal 16-worker run also
+passes all 320,000 pixels over five views and 80 encoded-strip checks. Both
+receipts pin renderer hash
+`6E5B10FFE976179D04C4BA877739EEFC5892E1003403E3A9DED0E63D2817A8B4`; no game
+renderer code changed. This closes a test-fixture false alarm, not a product
+rendering defect. The results are
+[`single-strip`](../results/render-partitions-fuzz-baseline-aeb6772-20260928.json)
+and
+[`16-worker`](../results/render-partitions-fuzz-workers16-20260928.json).
