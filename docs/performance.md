@@ -246,3 +246,43 @@ pins source and raw-profile hashes; the [snapshot checks](../results/snapshot-ac
 [Matrix](../results/render-fuzz-actor-order-matrix-20260928.json), and
 [AnsiArt](../results/render-fuzz-actor-order-ansiart-20260928.json) receipts
 retain correctness results.
+
+## Project actors only to renderer stripes that can see them — September 28, 2026
+
+Each interpolated world snapshot now gets a render-only NumericV4 extension
+with one PowerShell-computed stripe-visibility mask per actor. The simulation
+still publishes NumericV3; the host applies Doom's fixed-point actor
+projection and rotated patch width once, and each process skips an actor only
+when its patch cannot overlap that process's columns. Missing sprite geometry
+uses a conservative all-worker mask. In the tested E3M6 view, 4,274 of 4,480
+possible actor-worker pairs were skipped (95.4%); the extra mask payload was
+2,240 bytes for 280 actors.
+
+The focused measurement uses the actual 16-process renderer pool at one fixed
+HMP E3M6 state on PowerShell 7.6.5, with four warmup and 24 measured frames per
+run. It includes endpoint interpolation, host submission, process rendering,
+blocking completion, and encoded-strip retrieval. Worker startup is excluded;
+simulation, audio, terminal output, and monitor presentation are not measured.
+The second pair reverses run order:
+
+| Pair order | No-mask dispatch median / p95 | Mask dispatch median / p95 | Submit median, no-mask / mask | Peak worker render median, no-mask / mask |
+| --- | ---: | ---: | ---: | ---: |
+| No-mask, then mask | 51.34 / 65.56 ms | 42.67 / 52.68 ms | 1.13 / 9.04 ms | 38.14 / 17.91 ms |
+| Mask, then no-mask | 50.24 / 57.85 ms | 43.07 / 48.83 ms | 1.19 / 8.85 ms | 37.65 / 18.84 ms |
+
+Both pairs return identical encoded-strip SHA-256 values. The host mask pass
+adds about 7.7–7.9 ms to median submission, while reducing the slowest worker's
+median render time; measured end-to-end dispatch medians fall 16.9% and 14.3%
+in the two runs. The result is promising but leaves E3M6 dispatch at 43 ms
+median, well above a 16.67 ms 60 Hz frame interval. It is not a 60 FPS
+qualification or a live-game pacing measurement. The normal launcher also
+completes a three-second, no-audio headless E3M6 run on this source with 83
+simulation tics and 94 host render updates; those updates are not displayed
+frames ([receipt](../results/actor-worker-mask-launcher-bootstrap-20260928.json)).
+
+The [measurement tool](../scripts/Measure-RenderWorkerMaskImpact.ps1),
+[first no-mask run](../results/renderer-worker-mask-impact-e3m6-baseline-final-20260928.json),
+[first mask run](../results/renderer-worker-mask-impact-e3m6-candidate-final-20260928.json),
+[reverse-order mask run](../results/renderer-worker-mask-impact-e3m6-candidate-reverse-final-20260928.json),
+and [reverse-order no-mask run](../results/renderer-worker-mask-impact-e3m6-baseline-reverse-final-20260928.json)
+pin the workload, output hashes, and source hashes.

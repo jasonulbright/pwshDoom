@@ -8,7 +8,7 @@ $bundle=& "$PSScriptRoot/Build-EngineBundle.ps1";. $bundle
 
 $table=[uint32[]][Trig]::tanToAngleTable
 $tableBytes=[byte[]]::new($table.Length*4);[Buffer]::BlockCopy($table,0,$tableBytes,0,$tableBytes.Length)
-$sourcePaths=@('scripts/Test-SpriteRotation.ps1','src/FastRenderer.ps1','src/RenderAssets.ps1',
+$sourcePaths=@('scripts/Test-SpriteRotation.ps1','src/FastRenderer.ps1','src/SpriteProjection.ps1','src/RenderAssets.ps1',
     'src/ManagedDoom/Doom/Math/Geometry.sb.ps1','src/ManagedDoom/Doom/Math/Trig.ps1',
     'scripts/Build-EngineBundle.ps1')
 $sources=@($sourcePaths|ForEach-Object {@{Path=$_;Sha256=(Get-FileHash "$PSScriptRoot/../$_").Hash}})

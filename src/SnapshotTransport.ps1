@@ -1,6 +1,7 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 # Versioned numeric wire format. PowerShell packs/unpacks fields; standard .NET
 # bulk copies transfer their bytes. No JSON/object serializer in the frame loop.
+. "$PSScriptRoot/SpriteProjection.ps1"
 function ConvertTo-GameSnapshotBytes {
     param($Snapshot)
     $p=$Snapshot.ConsolePlayer;$ns=$Snapshot.Sectors.Count;$nd=$Snapshot.Sides.Count;$na=$Snapshot.Actors.Count;$nw=$p.PlayerSprites.Count
@@ -29,12 +30,90 @@ function ConvertTo-GameSnapshotBytes {
     return ,$bytes
 }
 
+# A live renderer sends the same interpolated world snapshot to every process
+# stripe. Prepare a conservative, exact projected-column mask once in the host
+# so each stripe can skip actors that cannot touch its columns. Keep ordinary
+# simulation/object snapshots as NumericV3; the worker-only extension is V4.
+function Add-GameRenderActorWorkerMasks {
+    param([byte[]]$Bytes,$Pool)
+    if($Bytes.Length -lt 384 -or $Bytes.Length%8 -ne 0 -or $Bytes.Length -eq 64000 -or
+       $null -eq $Pool.SpriteAtlas -or $null -eq $Pool.PlaneFineSine -or $null -eq $Pool.TanToAngleTable -or
+       -not (Get-Command Get-FastSpriteRotation -ErrorAction SilentlyContinue)) { return ,$Bytes }
+    [double[]]$source=[double[]]::new($Bytes.Length/8);[Buffer]::BlockCopy($Bytes,0,$source,0,$Bytes.Length)
+    if($source[0] -ne 3){return ,$Bytes}
+    [int]$sectorCount=$source[3];[int]$sideCount=$source[4];[int]$actorCount=$source[5];[int]$weaponCount=$source[6]
+    [long]$expected=48L+5L*$sectorCount+5L*$sideCount+8L*$actorCount+4L*$weaponCount
+    if($sectorCount -lt 0 -or $sideCount -lt 0 -or $actorCount -lt 0 -or $weaponCount -lt 0 -or $expected -ne $source.Length){
+        throw 'Malformed NumericV3 render snapshot.'
+    }
+    [double[]]$values=[double[]]::new($source.Length+$actorCount)
+    [Array]::Copy($source,$values,$source.Length);$values[0]=4
+    [int]$actorStart=48+5*$sectorCount+5*$sideCount
+    [int]$actorFlagsStart=$actorStart+7*$actorCount+4*$weaponCount
+    [int]$workerMaskStart=$source.Length
+    [int[]]$fineSine=$Pool.PlaneFineSine
+    [uint32]$viewAngleData=[uint32]([long][Math]::Round(4294967296.0*($source[10]/(2*[Math]::PI))) -band 0xFFFFFFFFL)
+    [int]$spriteFineIndex=$viewAngleData -shr 19
+    [int]$viewSinData=$fineSine[$spriteFineIndex];[int]$viewCosData=$fineSine[$spriteFineIndex+2048]
+    [int]$viewXData=[Math]::Truncate(65536.0*$source[8]);[int]$viewYData=[Math]::Truncate(65536.0*$source[9])
+    [int]$spriteFracBits=16;[int]$spriteMinZData=4 -shl 16
+    [long]$allWorkersMask=0
+    for([int]$i=0;$i -lt $Pool.Workers.Count;$i++){$allWorkersMask=$allWorkersMask -bor (1L -shl $i)}
+    for([int]$i=0;$i -lt $actorCount;$i++){
+        [int]$actorOffset=$actorStart+7*$i
+        [int]$actorXData=[Math]::Truncate($source[$actorOffset]*65536.0);[int]$actorYData=[Math]::Truncate($source[$actorOffset+1]*65536.0)
+        [int]$trXData=$actorXData-$viewXData;[int]$trYData=$actorYData-$viewYData
+        [int]$gxtData=(([long]$trXData*[long]$viewCosData)-shr $spriteFracBits)
+        [int]$gytData=(([long]$trYData*[long]$viewSinData)-shr $spriteFracBits)
+        [int]$tzData=$gxtData+$gytData;[long]$workerMask=0
+        if($tzData -ge $spriteMinZData){
+            [int]$gxtLateralData=-(([long]$trXData*[long]$viewSinData)-shr $spriteFracBits)
+            [int]$gytLateralData=(([long]$trYData*[long]$viewCosData)-shr $spriteFracBits)
+            [int]$txData=-($gytLateralData+$gxtLateralData)
+            [long]$tzLimitRaw=(([long]$tzData -shl 2) -band 0xFFFFFFFFL)
+            if($tzLimitRaw -ge 0x80000000L){$tzLimitRaw-=0x100000000L}
+            [int]$tzLimitData=$tzLimitRaw
+            if([Math]::Abs([long]$txData) -le $tzLimitData){
+                [int]$xScaleData=[Math]::Truncate((10485760.0/[double]$tzData)*65536.0)
+                if($xScaleData -gt 0){
+                    [int]$sprite=[int]$source[$actorOffset+4];[int]$frameIndex=([int]$source[$actorOffset+5] -band 0x7F)
+                    $frame=$null
+                    if($sprite -ge 0 -and $sprite -lt $Pool.SpriteAtlas.Length -and $frameIndex -ge 0 -and $frameIndex -lt $Pool.SpriteAtlas[$sprite].Length){$frame=$Pool.SpriteAtlas[$sprite][$frameIndex]}
+                    if($null -eq $frame -or $null -eq $frame.Patches -or $frame.Patches.Count -eq 0){$workerMask=$allWorkersMask}
+                    else{
+                        [int]$rotation=0
+                        if($frame.Rotate){$rotation=Get-FastSpriteRotation $viewXData $viewYData $actorXData $actorYData $source[$actorOffset+3] $Pool.TanToAngleTable}
+                        if($rotation -lt 0 -or $rotation -ge $frame.Patches.Count -or $null -eq $frame.Patches[$rotation]){$workerMask=$allWorkersMask}
+                        else{
+                            $patch=$frame.Patches[$rotation]
+                            [int]$leftOffsetData=$txData-($patch.Left -shl $spriteFracBits)
+                            [int]$leftFracData=(160 -shl $spriteFracBits)+([long]$leftOffsetData*[long]$xScaleData -shr $spriteFracBits)
+                            [int]$rightOffsetData=$leftOffsetData+($patch.Width -shl $spriteFracBits)
+                            [int]$rightFracData=(160 -shl $spriteFracBits)+([long]$rightOffsetData*[long]$xScaleData -shr $spriteFracBits)
+                            [int]$firstSpriteColumn=$leftFracData -shr $spriteFracBits
+                            [int]$lastSpriteColumn=($rightFracData -shr $spriteFracBits)-1
+                            foreach($worker in $Pool.Workers){
+                                if($firstSpriteColumn -lt $worker.End -and $lastSpriteColumn -ge $worker.First){$workerMask=$workerMask -bor (1L -shl $worker.Index)}
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        $values[$workerMaskStart+$i]=$workerMask
+    }
+    [byte[]]$result=[byte[]]::new($values.Length*8);[Buffer]::BlockCopy($values,0,$result,0,$result.Length)
+    return ,$result
+}
+
 function Read-GameSnapshotBytes {
     param([byte[]]$Bytes,$Previous)
     if($Bytes.Length -lt 384 -or $Bytes.Length%8 -ne 0){throw 'Malformed snapshot byte length.'}
     [double[]]$v=[double[]]::new($Bytes.Length/8);[Buffer]::BlockCopy($Bytes,0,$v,0,$Bytes.Length)
     [int]$ns=$v[3];[int]$nd=$v[4];[int]$na=$v[5];[int]$nw=$v[6]
-    if($v[0] -ne 3 -or $v[7] -notin 0,1 -or $ns -lt 0 -or $nd -lt 0 -or $na -lt 0 -or $nw -lt 0 -or 48L+5L*$ns+5L*$nd+8L*$na+4L*$nw -ne $v.Length){throw 'Malformed snapshot header.'}
+    [double]$version=$v[0]
+    [long]$expectedLength=if($version -eq 4){48L+5L*$ns+5L*$nd+9L*$na+4L*$nw}else{48L+5L*$ns+5L*$nd+8L*$na+4L*$nw}
+    if($version -notin 3,4 -or $v[7] -notin 0,1 -or $ns -lt 0 -or $nd -lt 0 -or $na -lt 0 -or $nw -lt 0 -or $expectedLength -ne $v.Length){throw 'Malformed snapshot header.'}
     if(-not [double]::IsFinite($v[45]) -or $v[45] -lt 0 -or $v[45] -gt 13 -or $v[45] -ne [Math]::Floor($v[45])){throw 'Invalid snapshot palette.'}
     $state=$Previous
     if($null -eq $state) {$state=@{Sectors=@();Sides=@();Actors=@();ConsolePlayer=@{Mobj=@{};Ammo=[int[]]::new(4);MaxAmmo=[int[]]::new(4);Cards=[bool[]]::new(6);WeaponOwned=[bool[]]::new(9);PlayerSprites=@()}}}
@@ -62,6 +141,15 @@ function Read-GameSnapshotBytes {
     foreach($s in $state.Actors){$s.X=$v[$n++];$s.Y=$v[$n++];$s.Z=$v[$n++];$s.Angle=$v[$n++];$s.Sprite=[int]$v[$n++];$s.Frame=[int]$v[$n++];$s.LightLevel=[int]$v[$n++]}
     foreach($s in $p.PlayerSprites){$s.Sprite=[int]$v[$n++];$s.Frame=[int]$v[$n++];$s.Sx=$v[$n++];$s.Sy=$v[$n++]}
     foreach($s in $state.Actors){$s.Flags=[int]$v[$n++]}
+    if($version -eq 4){
+        for($i=0;$i -lt $na;$i++){
+            [double]$workerMask=$v[$n++]
+            if(-not [double]::IsFinite($workerMask) -or $workerMask -lt 0 -or $workerMask -gt 4294967295 -or $workerMask -ne [Math]::Floor($workerMask)){throw 'Invalid actor worker mask.'}
+            $state.Actors[$i].WorkerMask=[long]$workerMask
+        }
+    }
+    else{foreach($s in $state.Actors){$s.WorkerMask=-1L}}
+    if($n -ne $v.Length){throw 'Malformed snapshot payload length.'}
     return $state
 }
 

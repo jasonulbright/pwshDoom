@@ -3848,3 +3848,61 @@ reversed direction, and that profile's total render median also rose from
 speed claim, so the source change was reverted. Raw profiles remain in ignored
 `local/renderer-fastpatch-index-*.json`; no timing result is committed as
 product evidence.
+
+## 2026-09-28 — Cull actors before per-process projection
+
+Profiling showed that each render process repeated fixed-point projection for
+every actor even though a narrow column stripe can only contain a small part
+of the projected sprites. Added a render-only NumericV4 extension to the
+interpolated NumericV3 snapshot: the host computes each actor's conservative
+screen-column span once in PowerShell, sets the corresponding worker bits, and
+each process skips actors that cannot reach its stripe before projection and
+raster setup. Simulation packets remain NumericV3. Missing sprite/rotation
+geometry conservatively targets every worker, and the direct serial renderer
+keeps its original path.
+
+The first serial-stripe profile established that the work was reduced but did
+not capture production concurrency, so it was not used as the acceptance
+measurement. A paired 16-process E3M6 fixed-state profile includes interpolation,
+submission, concurrent software rendering, and encoded-strip retrieval. It
+compares four-warmup/24-frame runs in both orders. Median dispatch fell from
+51.34 to 42.67 ms in the first pair and 50.24 to 43.07 ms in the
+reverse-order pair; the corresponding p95 values fell from 65.56 to 52.68 ms
+and 57.85 to 48.83 ms. The mask pass raises median submit cost from about
+1.1–1.2 ms to 8.9–9.0 ms, but lowers the peak worker-render median from
+37.6–38.1 ms to 17.9–18.8 ms. All paired encoded-strip hashes match. At this
+view, 4,274 of 4,480 actor-worker pairs are skipped. The 42.7–43.1 ms dispatch
+median remains above 16.67 ms and is not a display-rate result. See the
+[measurement record](performance.md#project-actors-only-to-renderer-stripes-that-can-see-them--september-28-2026)
+and four final-source [receipts](../results/renderer-worker-mask-impact-e3m6-baseline-final-20260928.json),
+[candidate](../results/renderer-worker-mask-impact-e3m6-candidate-final-20260928.json),
+[reverse-order candidate](../results/renderer-worker-mask-impact-e3m6-candidate-reverse-final-20260928.json),
+and [reverse-order baseline](../results/renderer-worker-mask-impact-e3m6-baseline-reverse-final-20260928.json).
+
+A final launcher-scope review found that the ordinary host loads
+`SnapshotTransport.ps1` but not `FastRenderer.ps1`; the initial mask helper
+had therefore fallen back to NumericV3 in the real launcher even though the
+test profiles explicitly loaded the renderer. Moved the unchanged fixed-point
+angle helpers into `SpriteProjection.ps1`, sourced by both the renderer and
+snapshot transport. A new bootstrap assertion passes with `SnapshotTransport`
+loaded alone, and the normal launcher completes a three-second headless E3M6
+run with 83 tics and 94 host render updates. The measurement and partition
+receipts below were regenerated against this final source layout.
+
+Correctness passes include 16 NumericV4/bootstrap transport assertions; five-view,
+seven-worker Classic partition comparisons on E1M1–E1M4; five-view,
+16-worker fuzz comparisons in all three visual styles on E3M6; and the
+16-worker Classic session-worker test through screen/menu/automap transport
+and a live E1M1-to-E1M2 worker asset reload. The shared sprite math separately
+passes 16,392 direction cases, 393,408 rotation boundaries, six `int.MinValue`
+edges, and 100,000 angle round trips. Every partition comparison reports zero
+pixel differences and matching encoded bytes. These compare pwshDoom's own
+PowerShell render paths and do not claim original Doom pixel parity or map
+completion. Final-source receipts are indexed in
+[rendering fidelity](rendering-fidelity.md#skip-actors-outside-each-renderer-stripe-2026-09-28)
+and the [campaign matrix](campaign-matrix.md).
+
+The first optional unmasked phase profile exposed an uninitialized benchmark
+field under strict variable checking; the measurement script now initializes
+the absent mask statistics explicitly. That was a measurement-harness defect,
+not a renderer or gameplay failure.

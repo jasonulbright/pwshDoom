@@ -5,7 +5,8 @@ param([string]$Wad='C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\
     [ValidateSet('Classic','AnsiArt','Matrix')][string]$Style='Classic',
     [ValidateSet('Ascii','Katakana')][string]$GlyphSet='Ascii',
     [ValidateSet('Pairs','ColorState')][string]$AnsiEncoding='Pairs',
-    [string]$Report="$PSScriptRoot/../results/render-partitions.json",[switch]$Fuzz,[switch]$Palettes)
+    [string]$Report="$PSScriptRoot/../results/render-partitions.json",[switch]$Fuzz,[switch]$Palettes,
+    [ValidateRange(1,4)][int]$Episode=1,[ValidateRange(1,9)][int]$Map=1,[ValidateRange(1,5)][int]$Skill=3)
 $ErrorActionPreference='Stop'
 . "$PSScriptRoot/FrameCodec.ps1"
 . "$PSScriptRoot/../src/CharacterCodec.ps1"
@@ -19,7 +20,7 @@ try {
     $options.GameMode=$content.Wad.GameMode;$options.GameVersion=$content.Wad.GameVersion;$options.MissionPack=$content.Wad.MissionPack
     $game=[DoomGame]::new($content,$options);$commands=[TicCmd[]]::new(4)
     for($i=0;$i -lt 4;$i++){$commands[$i]=[TicCmd]::new()}
-    $game.DeferedInitNew([GameSkill]::Medium,1,1);$null=$game.Update($commands)
+    $game.DeferedInitNew([GameSkill]($Skill-1),$Episode,$Map);$null=$game.Update($commands)
     for($i=0;$i -lt 35;$i++){$null=$game.Update($commands)}
     $context=New-FastRenderContext $content $game.World
     $palette=[int[][]]::new(256)
@@ -66,7 +67,18 @@ try {
             [double[]]$endpointValues=[double[]]::new($endpoint.Length/8);[Buffer]::BlockCopy($endpoint,0,$endpointValues,0,$endpoint.Length)
             $workerInput=Get-InterpolatedSnapshotBytes $endpointValues $endpointValues 1
         }
-        Submit-GameRender $pool $workerInput -ColumnOffset 17 -RowOffset 5 -FrameNumber 123;Wait-GameRender $pool
+        [byte[]]$workerPacket=if($workerInput -is [byte[]]){$workerInput}else{ConvertTo-GameSnapshotBytes $workerInput}
+        [int]$unfilteredLength=$workerPacket.Length
+        $workerPacket=Add-GameRenderActorWorkerMasks $workerPacket $pool
+        [double[]]$workerValues=[double[]]::new($workerPacket.Length/8);[Buffer]::BlockCopy($workerPacket,0,$workerValues,0,$workerPacket.Length)
+        if($workerValues[0] -ne 4){throw 'Renderer pool did not receive a NumericV4 actor-visibility packet.'}
+        [int]$workerActorCount=$workerValues[5];[int]$workerMaskStart=$workerValues.Length-$workerActorCount
+        [long]$includedActorWorkerPairs=0;[long]$allActorWorkerPairs=[long]$workerActorCount*$Workers
+        for($actorIndex=0;$actorIndex -lt $workerActorCount;$actorIndex++){
+            [long]$mask=$workerValues[$workerMaskStart+$actorIndex]
+            for($workerIndex=0;$workerIndex -lt $Workers;$workerIndex++){if(($mask -band (1L -shl $workerIndex)) -ne 0){$includedActorWorkerPairs++}}
+        }
+        Submit-GameRender $pool $workerPacket -ColumnOffset 17 -RowOffset 5 -FrameNumber 123;Wait-GameRender $pool
         $actual=[byte[]]::new(64000)
         for($i=0;$i -lt $pool.Count;$i++) {
             $worker=$pool.Workers[$i];$result=$pool.Results[$i]
@@ -97,9 +109,10 @@ try {
         $differences=0
         for($i=0;$i -lt 64000;$i++){if($actual[$i] -ne $expected[$i]){$differences++}}
         if($differences -ne 0){throw "$differences pixels differ at $angle degrees between serial rendering and $Workers process strips."}
-        $checks.Add(@{AngleDegrees=$angle;ComparedPixels=64000;Differences=$differences;Invisibility=$snapshot.ConsolePlayer.Invisibility;OpaqueActorDifferences=$opaqueDifferences;PaletteNumber=$snapshot.ConsolePlayer.PaletteNumber})
+        $checks.Add(@{AngleDegrees=$angle;ComparedPixels=64000;Differences=$differences;Invisibility=$snapshot.ConsolePlayer.Invisibility;OpaqueActorDifferences=$opaqueDifferences;PaletteNumber=$snapshot.ConsolePlayer.PaletteNumber;
+            WorkerPacketVersion=$workerValues[0];ActorCount=$workerActorCount;ActorWorkerPairsIncluded=$includedActorWorkerPairs;ActorWorkerPairsSkipped=$allActorWorkerPairs-$includedActorWorkerPairs;UnfilteredPacketBytes=$unfilteredLength;FilteredPacketBytes=$workerPacket.Length})
     }
-    @{FinishedUtc=[DateTime]::UtcNow.ToString('o');Style=$Style;GlyphSet=$GlyphSet;AnsiEncoding=$AnsiEncoding;Workers=$Workers;FuzzFixture=[bool]$Fuzz;Checks=$checks.ToArray();EncodedStripByteChecks=$checks.Count*$Workers;CharacterStripByteChecks=if($Style -ne 'Classic'){$checks.Count*$Workers}else{0};BaselineRendererSha256=if($CompareRenderer){(Get-FileHash -LiteralPath $CompareRenderer).Hash}else{(Get-FileHash "$PSScriptRoot/../src/FastRenderer.ps1").Hash};Meaning='Exact serial/partition equivalence, including binary assets and NumericV3 snapshots with drawseg silhouette depth. Fuzz fixtures explicitly place a shadow demon ahead of the camera and set the player invisibility timer; worker transport receives the shared far-to-near actor order for those frames. These are not ordinary gameplay completion evidence. All modes compare encoded bytes against serial encoding at a fixed time and viewport. No vanilla pixel-equivalence claim.'} |
+    @{FinishedUtc=[DateTime]::UtcNow.ToString('o');Episode=$Episode;Map=$Map;Skill=$Skill;Style=$Style;GlyphSet=$GlyphSet;AnsiEncoding=$AnsiEncoding;Workers=$Workers;FuzzFixture=[bool]$Fuzz;Checks=$checks.ToArray();EncodedStripByteChecks=$checks.Count*$Workers;CharacterStripByteChecks=if($Style -ne 'Classic'){$checks.Count*$Workers}else{0};BaselineRendererSha256=if($CompareRenderer){(Get-FileHash -LiteralPath $CompareRenderer).Hash}else{(Get-FileHash "$PSScriptRoot/../src/FastRenderer.ps1").Hash};Meaning='Exact serial/partition equivalence, including NumericV4 worker visibility masks over the NumericV3 simulation snapshot and drawseg silhouette depth. The host projects each world actor once to identify the process stripes its actual rotated patch overlaps; workers skip other actors before fixed-point projection. Fuzz fixtures explicitly place a shadow demon ahead of the camera and set the player invisibility timer. These are not ordinary gameplay completion evidence. All modes compare encoded bytes against serial encoding at fixed viewports. No vanilla pixel-equivalence claim.'} |
         ConvertTo-Json -Depth 5 | Set-Content -LiteralPath $Report
     "PASS: 320,000 pixels match across five views and $Workers uneven process strips."
 } catch {[Console]::Error.WriteLine($_.ScriptStackTrace);throw}

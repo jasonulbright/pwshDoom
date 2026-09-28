@@ -1,6 +1,6 @@
 #requires -Version 7.4
 # SPDX-License-Identifier: GPL-2.0-or-later
-param([string]$Assets,[string]$Channel,[int]$FirstColumn,[int]$EndColumn,[int]$OwnerPid,
+param([string]$Assets,[string]$Channel,[int]$FirstColumn,[int]$EndColumn,[int]$OwnerPid,[ValidateRange(0,31)][int]$WorkerIndex=0,
     [ValidateSet('Classic','AnsiArt','Matrix')][string]$Style='Classic',
     [ValidateSet('Ascii','Katakana')][string]$GlyphSet='Ascii',
     [ValidateSet('Pairs','ColorState')][string]$AnsiEncoding='Pairs')
@@ -15,6 +15,7 @@ $ErrorActionPreference='Stop'
 . "$PSScriptRoot/../src/PaletteCodec.ps1"
 $map=[IO.MemoryMappedFiles.MemoryMappedFile]::OpenExisting($Channel);$view=$map.CreateViewAccessor()
 $ready=[Threading.EventWaitHandle]::OpenExisting($Channel+'-ready');$go=[Threading.EventWaitHandle]::OpenExisting($Channel+'-go');$done=[Threading.EventWaitHandle]::OpenExisting($Channel+'-done')
+[long]$workerBit=1L -shl $WorkerIndex
 try {
     $owner=if($OwnerPid -gt 0){[Diagnostics.Process]::GetProcessById($OwnerPid)}else{$null}
     $previousSnapshot=$null;$ctx=Read-GameRenderAssets $Assets
@@ -38,6 +39,7 @@ try {
         $decodeWatch=[Diagnostics.Stopwatch]::StartNew()
         if($kind -eq 0){
             $snapshot=Read-GameSnapshotBytes $bytes $previousSnapshot;$previousSnapshot=$snapshot
+            $snapshot.RenderWorkerBit=$workerBit
             $ctx.World=$snapshot;$ctx.Sectors=$snapshot.Sectors;$ctx.Sides=$snapshot.Sides;$tic=$snapshot.Tic
             $paletteNumber=$snapshot.ConsolePlayer.PaletteNumber
         }else{

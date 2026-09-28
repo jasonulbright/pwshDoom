@@ -930,3 +930,37 @@ sequential stripe renders, with exact 64,000-pixel equality. This is repeated
 worker CPU accounting, not concurrent worker latency, live game pacing,
 Terminal presentation, or original-executable parity. It adds no campaign
 completion evidence.
+
+### Skip actors outside each renderer stripe (2026-09-28)
+
+The render host extends interpolated NumericV3 packets to worker-only
+NumericV4 packets. It projects every actor with the renderer's fixed-point
+camera math and rotated sprite patch bounds, then sets one mask bit for every
+process stripe the patch can overlap. A worker skips only actors whose mask
+does not include its own stripe. The ordinary simulation snapshot remains
+NumericV3; old packets and incomplete sprite metadata conservatively render
+actors in every stripe.
+
+Exact serial-versus-process output passes for E1M1–E1M4 across five views each
+with seven Classic workers. E3M6 fuzz fixtures pass the same five-view check
+with sixteen workers in Classic, Matrix/Katakana, and AnsiArt/Katakana. Each
+receipt records 320,000 compared pixels and zero differences per mode/map;
+the encoded worker bytes also match their serial reference. A 16-check
+transport suite exercises V4 mask round-tripping, malformed-mask rejection,
+and confirms the ordinary host bootstrap loads shared sprite math without
+loading the renderer. The session-worker test passes screen/menu/automap
+transport plus an E1M1-to-E1M2 asset reload without restarting workers.
+
+This is exact-output agreement with pwshDoom's own serial PowerShell
+renderer—not original Doom pixel parity. It does not establish map completion,
+audio continuity, or 35-tic/60-display pacing. See the final-source E1M1–E1M4
+Classic [E1M1](../results/e1m1-worker-mask-partitions-classic-7w-final-20260928.json),
+[E1M2](../results/e1m2-worker-mask-partitions-classic-7w-final-20260928.json),
+[E1M3](../results/e1m3-worker-mask-partitions-classic-7w-final-20260928.json), and
+[E1M4](../results/e1m4-worker-mask-partitions-classic-7w-final-20260928.json)
+receipts; E3M6 fuzz output in [Classic](../results/e3m6-actor-mask-fuzz-classic-16w-final-20260928.json),
+[Matrix](../results/e3m6-actor-mask-fuzz-matrix-16w-final-20260928.json), and
+[AnsiArt](../results/e3m6-actor-mask-fuzz-ansiart-16w-final-20260928.json);
+[snapshot transport checks](../results/snapshot-actor-worker-v4-bootstrap-final-20260928.json);
+the source-pinned [sprite-angle regression](../results/sprite-projection-shared-helper-final-20260928.json);
+and the 16-process [session-worker lifecycle check](../results/session-worker-actor-mask-classic-16w-final-20260928.json).

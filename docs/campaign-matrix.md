@@ -1,6 +1,6 @@
 # Campaign qualification matrix
 
-Updated 2026-09-27. Release sequence remains Ultimate Doom, Doom II, then a MyHouse-based audit. See [roadmap](roadmap.md).
+Updated 2026-09-28. Release sequence remains Ultimate Doom, Doom II, then a MyHouse-based audit. See [roadmap](roadmap.md).
 
 **Smoke: 36/36 passed at skill 3.** Each case loads the map, runs 35 idle simulation tics, and renders two complete 320×200 serial frames from two camera headings. A smoke pass is not a completed level or visual-reference match. Headless stage timings are not gameplay FPS.
 
@@ -55,6 +55,13 @@ render checkpoints; its separate automap, audio, and terminal output are not
 replayed ([receipt](../results/episode1-human-crash-replay-20260927.json)).
 These results prepare one human run; no automated test claims the remaining
 maps or finale were played.
+
+The current renderer worker-mask change also passes exact serial/worker
+comparisons across five views each on E1M1–E1M4, and 16-worker Spectre/fuzz
+scenes across Classic, Matrix/Katakana, and AnsiArt/Katakana on E3M6. These
+renderer regressions do not add map-completion evidence or establish original
+Doom pixel parity; details and receipts are in the
+[rendering-fidelity record](rendering-fidelity.md#skip-actors-outside-each-renderer-stripe-2026-09-28).
 
 The prior `e358741` renderer, `76b18ac` campaign/session, and `f5f404a`
 Episode 1 receipts remain available with their original source pins. Detailed

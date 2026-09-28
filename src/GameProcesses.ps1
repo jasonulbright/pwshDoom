@@ -8,7 +8,8 @@ function New-GameRenderPool {
         [ValidateSet('Pairs','ColorState')][string]$AnsiEncoding='Pairs')
     $root=Split-Path $PSScriptRoot
     $pool=@{Workers=[Collections.Generic.List[object]]::new();Results=[object[]]::new($Workers);Count=$Workers;Style=$Style;
-        Assets=(Join-Path $root ('local/session-'+[guid]::NewGuid().ToString('N')+'.assets'))}
+        Assets=(Join-Path $root ('local/session-'+[guid]::NewGuid().ToString('N')+'.assets'));
+        SpriteAtlas=$Context.SpriteAtlas;PlaneFineSine=$Context.PlaneFineSine;TanToAngleTable=$Context.TanToAngleTable}
     $planeSpanBoundaries=[Collections.Generic.List[int]]::new()
     for([int]$i=1;$i -le $Workers;$i++){
         $edge=if($Style -eq 'Classic'){[int][Math]::Floor($i*320.0/$Workers)}else{2*[int][Math]::Floor($i*160.0/$Workers)}
@@ -34,9 +35,9 @@ function New-GameRenderPool {
             if($Style -ne 'Classic'){$first=2*[int][Math]::Floor($i*160.0/$Workers);$end=2*[int][Math]::Floor(($i+1)*160.0/$Workers)}
             $info=[Diagnostics.ProcessStartInfo]::new((Get-Process -Id $PID).Path);$info.UseShellExecute=$false;$info.CreateNoWindow=$true
             $info.RedirectStandardOutput=$true;$info.RedirectStandardError=$true
-            foreach($arg in @('-NoProfile','-File',"$root/scripts/Invoke-GameRenderWorker.ps1",'-Assets',$pool.Assets,'-OwnerPid',"$PID",'-Channel',$name,'-FirstColumn',"$first",'-EndColumn',"$end",'-Style',$Style,'-GlyphSet',$GlyphSet,'-AnsiEncoding',$AnsiEncoding)){$info.ArgumentList.Add($arg)}
+            foreach($arg in @('-NoProfile','-File',"$root/scripts/Invoke-GameRenderWorker.ps1",'-Assets',$pool.Assets,'-OwnerPid',"$PID",'-Channel',$name,'-FirstColumn',"$first",'-EndColumn',"$end",'-WorkerIndex',"$i",'-Style',$Style,'-GlyphSet',$GlyphSet,'-AnsiEncoding',$AnsiEncoding)){$info.ArgumentList.Add($arg)}
             $process=[Diagnostics.Process]::Start($info)
-            $pool.Workers.Add(@{Map=$map;View=$view;Ready=$ready;Go=$go;Done=$done;Process=$process;First=$first;End=$end;
+            $pool.Workers.Add(@{Map=$map;View=$view;Ready=$ready;Go=$go;Done=$done;Process=$process;First=$first;End=$end;Index=$i;
                 Stdout=$process.StandardOutput.ReadToEndAsync();Stderr=$process.StandardError.ReadToEndAsync()})
         }
         foreach($worker in $pool.Workers){if(-not $worker.Ready.WaitOne(30000)){throw 'Game renderer startup timed out.'};Get-GameWorkerError $worker}
@@ -60,6 +61,7 @@ function Submit-GameRender {
     param($Pool,$Snapshot,[int]$ColumnOffset=0,[int]$RowOffset=0,[int]$FrameNumber=0,[switch]$ScreenPixels,[int]$Tic=0,[switch]$MenuPixels,[switch]$AutomapPixels,[ValidateRange(0,13)][int]$PaletteNumber=0)
     if(-not (Test-GameRenderCompleted $Pool)){throw 'A render is already in progress.'}
     if($Snapshot -is [byte[]]){$bytes=$Snapshot}else{$bytes=ConvertTo-GameSnapshotBytes $Snapshot}
+    if($bytes.Length -ne 64000){$bytes=Add-GameRenderActorWorkerMasks $bytes $Pool}
     if($bytes.Length -gt 1048448){throw 'Snapshot exceeds transport capacity.'}
     if(($ScreenPixels -or $MenuPixels -or $AutomapPixels) -and $bytes.Length -ne 64000){throw 'Session screens require 320x200 indexed pixels.'}
     foreach($worker in $Pool.Workers) {

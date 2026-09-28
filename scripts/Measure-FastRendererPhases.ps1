@@ -11,10 +11,12 @@ param(
     [ValidateRange(1,32)][int]$WorkerCount=1,
     [switch]$TransportPrepared,
     [switch]$TransportLegacy,
+    [switch]$TransportWorkerMasks,
     [string]$Output="$PSScriptRoot/../results/renderer-phases.json"
 )
 $ErrorActionPreference='Stop'
 if($TransportPrepared -and $TransportLegacy){throw 'Choose one transport mode.'}
+if($TransportWorkerMasks -and (-not $TransportPrepared -or $TransportLegacy)){throw 'Worker masks require prepared transport.'}
 if(Test-Path -LiteralPath $Output){throw 'Use a fresh report path.'}
 $outputPath=[IO.Path]::GetFullPath($Output)
 [void][IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName($outputPath))
@@ -54,18 +56,30 @@ try{
     $context=New-FastRenderContext $content $game.World
     $snapshot=New-GameRenderSnapshot $game 1
     $snapshotPreparationSamples=[Collections.Generic.List[double]]::new()
+    $maskPool=$null;$actorWorkerMaskStats=$null
     if($TransportPrepared -or $TransportLegacy){
         $pair=Get-GameRenderSnapshotPair $game
         [double[]]$previousValues=[double[]]::new($pair.Previous.Length/8);[Buffer]::BlockCopy($pair.Previous,0,$previousValues,0,$pair.Previous.Length)
         [double[]]$currentValues=[double[]]::new($pair.Current.Length/8);[Buffer]::BlockCopy($pair.Current,0,$currentValues,0,$pair.Current.Length)
+        if($TransportWorkerMasks){
+            $renderWorkers=[Collections.Generic.List[object]]::new()
+            for([int]$i=0;$i -lt $WorkerCount;$i++){$renderWorkers.Add(@{Index=$i;First=[int][Math]::Floor($i*320.0/$WorkerCount);End=[int][Math]::Floor(($i+1)*320.0/$WorkerCount)})}
+            $maskPool=@{Workers=$renderWorkers;SpriteAtlas=$context.SpriteAtlas;PlaneFineSine=$context.PlaneFineSine;TanToAngleTable=$context.TanToAngleTable}
+        }
         [byte[]]$preparedBytes=$null
         for([int]$prepareIndex=0;$prepareIndex -lt ($WarmupFrames+$Frames);$prepareIndex++){
             $prepareWatch=[Diagnostics.Stopwatch]::StartNew()
             if($TransportLegacy){$preparedBytes=Get-InterpolatedSnapshotBytes $previousValues $currentValues 1 -DeferFuzzSort}
             else{$preparedBytes=Get-InterpolatedSnapshotBytes $previousValues $currentValues 1}
+            if($TransportWorkerMasks){$preparedBytes=Add-GameRenderActorWorkerMasks $preparedBytes $maskPool}
             $prepareWatch.Stop();$snapshotPreparationSamples.Add($prepareWatch.Elapsed.TotalMilliseconds)
         }
         $snapshot=Read-GameSnapshotBytes $preparedBytes $null
+        if($TransportWorkerMasks){
+            [int]$maskCount=$snapshot.Actors.Count;[long]$allPairs=[long]$maskCount*$WorkerCount;[long]$visiblePairs=0
+            foreach($actor in $snapshot.Actors){for([int]$wi=0;$wi -lt $WorkerCount;$wi++){if(($actor.WorkerMask -band (1L -shl $wi)) -ne 0){$visiblePairs++}}}
+            $actorWorkerMaskStats=@{Actors=$maskCount;PossibleActorWorkerPairs=$allPairs;IncludedActorWorkerPairs=$visiblePairs;SkippedActorWorkerPairs=$allPairs-$visiblePairs}
+        }
     }
     Set-GameRenderSnapshot $context $snapshot
     [int]$fuzzActorCount=@($snapshot.Actors|Where-Object {($_.Flags -band 0x40000) -ne 0}).Count
@@ -73,6 +87,8 @@ try{
         # Match the production worker's integer column partition exactly.
         [int]$first=[Math]::Floor($workerIndex*320.0/$WorkerCount)
         [int]$end=[Math]::Floor(($workerIndex+1)*320.0/$WorkerCount)
+        if($TransportWorkerMasks){$snapshot.RenderWorkerBit=1L -shl $workerIndex}
+        Set-GameRenderSnapshot $context $snapshot
         for($i=0;$i -lt $WarmupFrames;$i++){Invoke-FastRender $context $first $end}
         $workerSamples=[Collections.Generic.List[object]]::new()
         for($i=0;$i -lt $Frames;$i++){
@@ -99,6 +115,7 @@ try{
             PhaseStats=$workerPhases
         })
     }
+    if($TransportWorkerMasks){$null=$snapshot.Remove('RenderWorkerBit')}
     Set-GameRenderSnapshot $context $snapshot;Invoke-FastRender $context
     $frameSha256=[Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([byte[]]$context.Pixels))
     $phases=@{}
@@ -110,11 +127,11 @@ try{
         Error=$null
         Episode=$Episode;Map=$Map;Skill=$Skill;SetupTics=$Tics
         WarmupFrames=$WarmupFrames;MeasuredFrames=$Frames
-        TransportMode=if($TransportPrepared){'prepared shared actor order'}elseif($TransportLegacy){'legacy worker-side actor sort'}else{'object snapshot fallback'}
+        TransportMode=if($TransportWorkerMasks){'prepared shared actor order with worker actor visibility masks'}elseif($TransportPrepared){'prepared shared actor order'}elseif($TransportLegacy){'legacy worker-side actor sort'}else{'object snapshot fallback'}
         FullFramePixels=64000;FullFrameSha256=$frameSha256
         SnapshotPreparationStats=Get-PhaseStats ([double[]]$snapshotPreparationSamples.ToArray())
-        SnapshotPreparationSamples=$snapshotPreparationSamples.ToArray();FuzzActorCount=$fuzzActorCount
-        RenderMode="Fixed game state and view; renderer phases measured serially for each of $WorkerCount production-equivalent column stripe(s); no terminal, audio, or simulation timing"
+        SnapshotPreparationSamples=$snapshotPreparationSamples.ToArray();FuzzActorCount=$fuzzActorCount;ActorWorkerMaskStats=$actorWorkerMaskStats
+        RenderMode="Fixed game state and view; renderer phases measured serially for each of $WorkerCount production-equivalent column stripe(s); no terminal, audio, or simulation timing. Worker mask snapshot preparation includes host-side actor projection and mask generation."
         WorkerCount=$WorkerCount
         Camera=@{X=$camera.X;Y=$camera.Y;Angle=$camera.Angle;ViewZ=$game.World.ConsolePlayer.ViewZ}
         ActorCount=@($context.World.Actors).Count

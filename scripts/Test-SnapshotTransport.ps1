@@ -3,6 +3,7 @@
 param([string]$Output="$PSScriptRoot/../results/snapshot-correctness.json")
 $ErrorActionPreference='Stop'
 . "$PSScriptRoot/../src/SnapshotTransport.ps1"
+if(-not (Get-Command Get-FastSpriteRotation -ErrorAction SilentlyContinue)){throw 'Snapshot transport did not load the shared PowerShell sprite projection helper.'}
 function ConvertTo-TestValues([byte[]]$bytes) {
     $values=[double[]]::new($bytes.Length/8);[Buffer]::BlockCopy($bytes,0,$values,0,$bytes.Length);return ,$values
 }
@@ -24,7 +25,7 @@ $current=[double[]]$old.Clone();$current[2]=1
 $current[43]=145
 $current[44]=128;$current[45]=8;$current[69]=0x40002
 foreach($i in 8,9,10,11,48,49,58,59,60){$current[$i]+=0.125}
-$checks=0
+$checks=1
 foreach($fraction in 0,0.5,1) {
     $bytes=Get-InterpolatedSnapshotBytes $old $current $fraction
     if($bytes -isnot [byte[]]){throw 'Wire bytes were enumerated by the pipeline.'}
@@ -46,6 +47,15 @@ foreach($fraction in 0,0.5,1) {
 # Changing actor count must replace the private actor array without stale actors.
 $state.Actors=@();$empty=ConvertTo-GameSnapshotBytes $state;$state=Read-GameSnapshotBytes $empty $state
 if($state.Actors.Count -ne 0){throw 'Removed actor remained in decoded state.'};$checks++
+# Worker packets extend the fixed NumericV3 simulation fields with one mask per actor.
+$v3=ConvertTo-TestValues $bytes;$actorCount=[int]$v3[5]
+$v4=[double[]]::new($v3.Length+$actorCount);[Array]::Copy($v3,$v4,$v3.Length);$v4[0]=4
+for($i=0;$i -lt $actorCount;$i++){$v4[$v3.Length+$i]=3}
+$v4Bytes=[byte[]]::new($v4.Length*8);[Buffer]::BlockCopy($v4,0,$v4Bytes,0,$v4Bytes.Length)
+$v4State=Read-GameSnapshotBytes $v4Bytes $null
+if($v4State.Actors.Count -ne $actorCount -or $v4State.Actors[0].WorkerMask -ne 3){throw 'NumericV4 worker mask did not round-trip.'};$checks++
+$badV4=[double[]]$v4.Clone();$badV4[$v3.Length]=1.5
+$badV4Bytes=[byte[]]::new($badV4.Length*8);[Buffer]::BlockCopy($badV4,0,$badV4Bytes,0,$badV4Bytes.Length);Assert-Rejected $badV4Bytes;$checks++
 Assert-Rejected ([byte[]]::new(383));Assert-Rejected ([byte[]]::new(385));$checks+=2
 $bad=Get-InterpolatedSnapshotBytes $old $current 1;$bad[0]=1;Assert-Rejected $bad;$checks++
 $badValues=ConvertTo-TestValues (Get-InterpolatedSnapshotBytes $old $current 1);$badValues[7]=2
@@ -54,6 +64,6 @@ $preparedEndpoint=[double[]]$old.Clone();$preparedEndpoint[7]=1
 $rejectedPreparedEndpoint=$false;try{$null=Get-InterpolatedSnapshotBytes $preparedEndpoint $current 0.5}catch{$rejectedPreparedEndpoint=$true}
 if(-not $rejectedPreparedEndpoint){throw 'Already sorted endpoint was accepted for interpolation.'};$checks++
 $bad=[byte[]]::new(384);[Buffer]::BlockCopy($current,0,$bad,0,384);Assert-Rejected $bad;$checks++
-@{FinishedUtc=[DateTime]::UtcNow.ToString('o');Checks=$checks;Result='Pass';Meaning='Synthetic all-field wire round trips, interpolation endpoints/midpoint, private state reuse, actor removal, and malformed packet rejection. No game assets required.'} |
+@{FinishedUtc=[DateTime]::UtcNow.ToString('o');Checks=$checks;Result='Pass';Meaning='Shared PowerShell sprite-projection helper bootstrap plus synthetic all-field wire round trips, interpolation endpoints/midpoint, private state reuse, actor removal, and malformed packet rejection. No game assets required.'} |
     ConvertTo-Json | Set-Content $Output
 "PASS: $checks snapshot checks."

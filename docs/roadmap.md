@@ -46,6 +46,20 @@ shutdown; the [runtime receipt](../results/episode1-startup-runtime-compat-20260
 records its limits. The earlier source pin in the handoff has been superseded;
 Jason's single full HMP Episode 1 run remains pending on the fixed build.
 
+The latest PowerShell renderer change projects each actor once on the host and
+filters work to only those render processes whose stripe intersects the
+sprite. Exact output passes in the three visual styles, on E1M1–E1M4, and in
+16-worker Spectre/fuzz fixtures. Two fixed-state E3M6 comparisons reduced
+median 16-process render-dispatch time by 14–17%, but the measured 42.7–43.1 ms
+median still misses a 16.67 ms 60 Hz interval and excludes simulation, audio,
+terminal output, and display presentation. This improves rendering cost; it
+does not advance the human campaign route or pass the 35-tic/60-display gate.
+The sprite-angle math is now shared with the ordinary launcher host, and a
+three-second headless E3M6 smoke completes 83 tics and 94 host updates. That
+smoke is not a route or display-rate result.
+See the [performance measurements](performance.md#project-actors-only-to-renderer-stripes-that-can-see-them--september-28-2026)
+and [renderer regressions](rendering-fidelity.md#skip-actors-outside-each-renderer-stripe-2026-09-28).
+
 The preceding Episode 1 candidate was pinned to `f5f404a`. Replaying the
 retained E1M3 and E1M4 host inputs against the current working candidate exposed
 two renderer failures: a plane-distance cast beyond signed Int32 and an

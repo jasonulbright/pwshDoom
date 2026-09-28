@@ -1,0 +1,47 @@
+{
+  "Format": "pwshDoom.SpriteRotationParity",
+  "FinishedUtc": "2026-09-28T17:52:00.4517127Z",
+  "PowerShell": "7.6.5",
+  "TanToAngleEntries": 2049,
+  "TanToAngleTableSha256": "BA4346CE3AC3DCB24C460BCF0ED98D3F8351203CA3BCC1DEC1CB822F9DEE7E11",
+  "DirectionCases": 16392,
+  "PointAngleMismatches": 0,
+  "BoundaryRotationCases": 393408,
+  "FixedRotationMismatches": 0,
+  "LegacyAtan2BoundaryMismatches": 172724,
+  "IntMinEdgeCases": 6,
+  "IntMinEdgeMismatches": 0,
+  "AngleDataRoundTrips": 100000,
+  "AngleDataRoundTripMismatches": 0,
+  "Sources": [
+    {
+      "Sha256": "2BC662EE2853C6AE09174517D2532DA7662584033D40EAD513ACFFADAF33793B",
+      "Path": "scripts/Test-SpriteRotation.ps1"
+    },
+    {
+      "Sha256": "5E701091DDB6706727631BC93E200C553D7C81DDF391F028264DD7353A5FDCCF",
+      "Path": "src/FastRenderer.ps1"
+    },
+    {
+      "Sha256": "E9AE5E1073775B8F3F3DFB82263E55CCDB3D46656B1F4FC8B2EF43FB3A7F593F",
+      "Path": "src/SpriteProjection.ps1"
+    },
+    {
+      "Sha256": "0189E1CEDCCFA9E928953FC66A7D248103006FEAEB6E21BDCF9311468FE0EB5F",
+      "Path": "src/RenderAssets.ps1"
+    },
+    {
+      "Sha256": "558811C9FB1E1C95D6632CF84AE2189BD5E8147F2BC6B22C72C41D3DE6546915",
+      "Path": "src/ManagedDoom/Doom/Math/Geometry.sb.ps1"
+    },
+    {
+      "Sha256": "EBD2108E63D47BD99FA2F533A7D8948AA156530317C95523C98452810F2F876E",
+      "Path": "src/ManagedDoom/Doom/Math/Trig.ps1"
+    },
+    {
+      "Sha256": "E9CC3FF4728AD1DD55FC814D335F53DCFB33AF3DA5386C2F11C1522775F3FDED",
+      "Path": "scripts/Build-EngineBundle.ps1"
+    }
+  ],
+  "Meaning": "Exhaustive slope-table directions across eight octants, every angle-sector boundary at -1/0/+1 binary-angle units, and signed-int-minimum point differences. Fixed rotation is compared with the adopted Geometry.PointToAngleData and ThreeDRenderer unsigned sprite-frame selection. LegacyAtan2BoundaryMismatches replays the prior floating expression on the same boundary fixtures. Synthetic math conformance only; not actor image, animation, occlusion, gameplay, or original-executable evidence."
+}
