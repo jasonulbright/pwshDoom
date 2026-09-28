@@ -15,7 +15,9 @@ foreach($directory in 'src','scripts','docs'){
         $relative=[IO.Path]::GetRelativePath($root,$file.FullName).Replace('\','/')
         # Research PDFs belong in the checkout, not the playable source ZIP.
         if($directory -eq 'docs' -and $file.Extension -eq '.pdf'){continue}
-        if($file.Extension -notin '.ps1','.md','.json','.txt'){throw "Unexpected package input: $relative"}
+        $allowedExtensions=@('.ps1','.md','.json','.txt')
+        if($directory -eq 'docs'){$allowedExtensions+= '.svg'}
+        if($file.Extension -notin $allowedExtensions){throw "Unexpected package input: $relative"}
         $files.Add($relative)
     }
 }
