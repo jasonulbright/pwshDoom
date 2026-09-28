@@ -3755,3 +3755,23 @@ diverges at tic 350, and the run remains in E1M1. This is not a passing
 full-session replay and does not reach the E1M2 attack; the focused saw check
 is the evidence that the corrected hit path still executes. The private replay
 and its diagnostic report remain under ignored `local/` and are not committed.
+
+## 2026-09-28 — Reject low-value actor-phase optimizations
+
+A fixed E3M6 snapshot contained 280 actors. With one synthetic Shadow actor,
+the current renderer's 16 sequential production-width stripes measured an
+8.22 ms median actor phase per stripe and a 207.69 ms median for all 16 stripes
+in one process. A stable PowerShell merge sort produced the same actor order
+as `Sort-Object -Descending -Stable`, but was slower (1.23 ms versus 1.11 ms
+per 280-actor sort); keep the existing sort.
+
+Across 100 scans of those actors, converting X/Y doubles to 16.16 values took
+1.54 ms, versus 0.23 ms to read cached values. That is about 0.013 ms per
+280-actor scan, too small to justify enlarging and versioning the worker
+snapshot protocol. Clearing only one 20-column stripe through 200 per-row
+array operations took 1.85 ms per worker frame, versus 0.030 ms for the
+existing full-array bulk clear/fill; retain the bulk reset. These isolated
+PowerShell microbenchmarks exclude concurrent workers, terminal output, and
+display presentation. No renderer source change or frame-rate claim follows;
+the next useful performance investigation should isolate the actor patch
+raster work within the measured 8.22 ms phase.
