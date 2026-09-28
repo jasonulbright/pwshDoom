@@ -126,6 +126,13 @@ command, IWAD and qualified music prerequisites, controls, and reporting
 instructions are in [episode1-playtest.md](episode1-playtest.md). The user
 result will be entered there only after it is reported.
 
+The 2026-09-28 shared Spectre-order optimization preserves exact full-frame
+pixels and passes five-view 16-worker partition fixtures in all three visual
+styles. This renderer/transport check adds no map-route or campaign-completion
+coverage; the single human playthrough remains pending. See the
+[paired performance receipt](../results/renderer-shared-fuzz-order-20260928.json)
+and the [three-style worker receipts](rendering-fidelity.md#share-spectre-actor-order-across-renderer-workers-2026-09-28).
+
 Current focused readiness evidence uses the same Ultimate Doom IWAD hash
 `6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F`:
 

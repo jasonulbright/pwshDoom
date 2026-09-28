@@ -99,7 +99,20 @@ try{
     $snapshot.Actors=@($near,$far);Set-GameRenderSnapshot $context $snapshot;Invoke-FastRender $context;$foreground=[byte[]]$context.Pixels.Clone()
     $snapshot.Actors=@($far,$near);Invoke-FastRender $context
     Check 'Overlapping shadow and opaque actors ignore thinker order' ([Linq.Enumerable]::SequenceEqual[byte]($foreground,$context.Pixels))
-    $snapshot.Actors=@($near);Invoke-FastRender $context
+    [byte[]]$fuzzEndpoint=ConvertTo-GameSnapshotBytes $snapshot
+    [double[]]$fuzzEndpointValues=[double[]]::new($fuzzEndpoint.Length/8);[Buffer]::BlockCopy($fuzzEndpoint,0,$fuzzEndpointValues,0,$fuzzEndpoint.Length)
+    [byte[]]$fuzzFrame=Get-InterpolatedSnapshotBytes $fuzzEndpointValues $fuzzEndpointValues 1
+    $fuzzSnapshot=Read-GameSnapshotBytes $fuzzFrame $null
+    Check 'Interpolated packet marks the shared fuzz actor order' ([bool]$fuzzSnapshot.ActorsDepthSortedForFuzz)
+    [double]$viewX=$fuzzSnapshot.ConsolePlayer.Mobj.X;[double]$viewY=$fuzzSnapshot.ConsolePlayer.Mobj.Y
+    [double]$viewAngle=$fuzzSnapshot.ConsolePlayer.Mobj.Angle;$viewCos=[Math]::Cos($viewAngle);$viewSin=[Math]::Sin($viewAngle)
+    [double[]]$actorDepths=@(foreach($entry in $fuzzSnapshot.Actors){($entry.X-$viewX)*$viewCos+($entry.Y-$viewY)*$viewSin})
+    $depthOrderValid=$true
+    for([int]$i=1;$i -lt $actorDepths.Length;$i++){if($actorDepths[$i] -gt $actorDepths[$i-1]){$depthOrderValid=$false;break}}
+    Check 'Interpolated packet orders shadow input far-to-near' $depthOrderValid
+    Set-GameRenderSnapshot $context $fuzzSnapshot;Invoke-FastRender $context
+    Check 'Preordered transport frame is pixel-identical to renderer fallback' ([Linq.Enumerable]::SequenceEqual[byte]($foreground,$context.Pixels))
+    $snapshot.Actors=@($near);Set-GameRenderSnapshot $context $snapshot;Invoke-FastRender $context
     Check 'Spectre samples the actor behind it' (-not [Linq.Enumerable]::SequenceEqual[byte]($foreground,$context.Pixels))
 }catch{$failure=$_.ToString()+"`n"+$_.ScriptStackTrace;throw}finally{
     if($content){$content.Dispose()}

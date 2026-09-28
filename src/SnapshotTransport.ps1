@@ -6,6 +6,8 @@ function ConvertTo-GameSnapshotBytes {
     $p=$Snapshot.ConsolePlayer;$ns=$Snapshot.Sectors.Count;$nd=$Snapshot.Sides.Count;$na=$Snapshot.Actors.Count;$nw=$p.PlayerSprites.Count
     [double[]]$values=[double[]]::new(48+5*$ns+5*$nd+8*$na+4*$nw)
     $values[0]=3;$values[1]=$Snapshot.Tic;$values[2]=$Snapshot.Fraction;$values[3]=$ns;$values[4]=$nd;$values[5]=$na;$values[6]=$nw
+    # Header slot 7 marks an actor array whose far-to-near fuzz order is ready.
+    if($Snapshot -is [Collections.IDictionary] -and $Snapshot.Contains('ActorsDepthSortedForFuzz') -and $Snapshot.ActorsDepthSortedForFuzz){$values[7]=1}
     $values[8]=$p.Mobj.X;$values[9]=$p.Mobj.Y;$values[10]=$p.Mobj.Angle;$values[11]=$p.ViewZ
     $values[12]=$p.ExtraLight;$values[13]=$p.FixedColorMap;$values[14]=$p.FaceIndex;$values[15]=$p.AmmoType
     # Previously reserved header slot: discrete player-sector light, never interpolated.
@@ -32,7 +34,7 @@ function Read-GameSnapshotBytes {
     if($Bytes.Length -lt 384 -or $Bytes.Length%8 -ne 0){throw 'Malformed snapshot byte length.'}
     [double[]]$v=[double[]]::new($Bytes.Length/8);[Buffer]::BlockCopy($Bytes,0,$v,0,$Bytes.Length)
     [int]$ns=$v[3];[int]$nd=$v[4];[int]$na=$v[5];[int]$nw=$v[6]
-    if($v[0] -ne 3 -or $ns -lt 0 -or $nd -lt 0 -or $na -lt 0 -or $nw -lt 0 -or 48L+5L*$ns+5L*$nd+8L*$na+4L*$nw -ne $v.Length){throw 'Malformed snapshot header.'}
+    if($v[0] -ne 3 -or $v[7] -notin 0,1 -or $ns -lt 0 -or $nd -lt 0 -or $na -lt 0 -or $nw -lt 0 -or 48L+5L*$ns+5L*$nd+8L*$na+4L*$nw -ne $v.Length){throw 'Malformed snapshot header.'}
     if(-not [double]::IsFinite($v[45]) -or $v[45] -lt 0 -or $v[45] -gt 13 -or $v[45] -ne [Math]::Floor($v[45])){throw 'Invalid snapshot palette.'}
     $state=$Previous
     if($null -eq $state) {$state=@{Sectors=@();Sides=@();Actors=@();ConsolePlayer=@{Mobj=@{};Ammo=[int[]]::new(4);MaxAmmo=[int[]]::new(4);Cards=[bool[]]::new(6);WeaponOwned=[bool[]]::new(9);PlayerSprites=@()}}}
@@ -44,7 +46,7 @@ function Read-GameSnapshotBytes {
     }
     $p=$state.ConsolePlayer
     if($p.PlayerSprites.Count -ne $nw){$p.PlayerSprites=[object[]]::new($nw);for($i=0;$i -lt $nw;$i++){$p.PlayerSprites[$i]=@{}}}
-    $state.Tic=[int]$v[1];$state.Fraction=$v[2]
+    $state.Tic=[int]$v[1];$state.Fraction=$v[2];$state.ActorsDepthSortedForFuzz=($v[7] -eq 1)
     $p.Mobj.X=$v[8];$p.Mobj.Y=$v[9];$p.Mobj.Angle=$v[10];$p.ViewZ=$v[11]
     $p.ExtraLight=[int]$v[12];$p.FixedColorMap=[int]$v[13];$p.FaceIndex=[int]$v[14];$p.AmmoType=[int]$v[15]
     $p.SectorLight=[int]$v[43]
@@ -64,8 +66,14 @@ function Read-GameSnapshotBytes {
 }
 
 function Get-InterpolatedSnapshotBytes {
-    param([double[]]$Previous,[double[]]$Current,[double]$Fraction)
+    # DeferFuzzSort reproduces the previous worker-side sort only for paired profiling.
+    param([double[]]$Previous,[double[]]$Current,[double]$Fraction,[switch]$DeferFuzzSort)
     if($Previous.Length -ne $Current.Length){throw 'Interpolation snapshot sizes differ.'}
+    if($Previous.Length -lt 48){throw 'Malformed interpolation snapshot length.'}
+    if($Previous[0] -ne 3 -or $Current[0] -ne 3 -or $Previous[7] -ne 0 -or $Current[7] -ne 0){throw 'Interpolation endpoints must be unsorted NumericV3 snapshots.'}
+    if($Previous[3] -ne $Current[3] -or $Previous[4] -ne $Current[4] -or $Previous[5] -ne $Current[5] -or $Previous[6] -ne $Current[6]){throw 'Interpolation snapshot layouts differ.'}
+    [int]$expectedLength=48+5*[int]$Previous[3]+5*[int]$Previous[4]+8*[int]$Previous[5]+4*[int]$Previous[6]
+    if($Previous.Length -ne $expectedLength){throw 'Malformed interpolation snapshot length.'}
     $Fraction=[Math]::Clamp($Fraction,[double]0,[double]1)
     [double[]]$v=$Current.Clone();$v[2]=$Fraction
     for($i=8;$i -le 11;$i++){$v[$i]=$Previous[$i]+($Current[$i]-$Previous[$i])*$Fraction}
@@ -78,6 +86,35 @@ function Get-InterpolatedSnapshotBytes {
     for($i=0;$i -lt [int]$v[5];$i++) {
         for($axis=0;$axis -lt 3;$axis++){$v[$n]=$Previous[$n]+($Current[$n]-$Previous[$n])*$Fraction;$n++}
         $n+=4
+    }
+    # Spectre fuzz samples the already-rendered framebuffer, so its actor must
+    # be drawn after the actors behind it. All renderer processes receive this
+    # same final interpolated packet; sort once here instead of once per worker.
+    [int]$actorCount=$v[5];[int]$weaponCount=$v[6]
+    [int]$actorStart=48+5*[int]$v[3]+5*[int]$v[4]
+    [int]$actorFlagsStart=$actorStart+7*$actorCount+4*$weaponCount
+    [bool]$hasFuzzActor=$false
+    for([int]$i=0;$i -lt $actorCount;$i++){if(([int]$v[$actorFlagsStart+$i] -band 0x40000) -ne 0){$hasFuzzActor=$true;break}}
+    if($hasFuzzActor -and -not $DeferFuzzSort){
+        if($actorCount -gt 1){
+            [double]$viewX=$v[8];[double]$viewY=$v[9];[double]$viewAngle=$v[10]
+            [double]$cos=[Math]::Cos($viewAngle);[double]$sin=[Math]::Sin($viewAngle)
+            [double[]]$sortDepths=[double[]]::new($actorCount)
+            [int[]]$actorOrder=[int[]]::new($actorCount)
+            for([int]$i=0;$i -lt $actorCount;$i++){
+                [int]$actorOffset=$actorStart+7*$i
+                $sortDepths[$i]=($v[$actorOffset]-$viewX)*$cos+($v[$actorOffset+1]-$viewY)*$sin
+                $actorOrder[$i]=$i
+            }
+            $ordered=@($actorOrder|Sort-Object { $sortDepths[$_] } -Descending -Stable)
+            [double[]]$unsorted=$v.Clone()
+            for([int]$destination=0;$destination -lt $actorCount;$destination++){
+                [int]$source=[int]$ordered[$destination]
+                [Array]::Copy($unsorted,$actorStart+7*$source,$v,$actorStart+7*$destination,7)
+                $v[$actorFlagsStart+$destination]=$unsorted[$actorFlagsStart+$source]
+            }
+        }
+        $v[7]=1
     }
     $bytes=[byte[]]::new($v.Length*8);[Buffer]::BlockCopy($v,0,$bytes,0,$bytes.Length)
     return ,$bytes

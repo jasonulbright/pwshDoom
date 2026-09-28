@@ -596,7 +596,10 @@ function Invoke-FastRender {
     foreach($candidate in $drawActors){
         if($candidate.Flags -band 0x40000){
             # Fuzz samples the actors behind it: draw farther sprites first.
-            $drawActors=@($world.Actors|Sort-Object {($_.X-$cx)*$co+($_.Y-$cy)*$si} -Descending -Stable)
+            # The interpolated worker packet already carries this shared order;
+            # direct renderer snapshots retain the local fallback.
+            $actorsPrepared=$world -is [Collections.IDictionary] -and $world.Contains('ActorsDepthSortedForFuzz') -and $world.ActorsDepthSortedForFuzz
+            if(-not $actorsPrepared){$drawActors=@($world.Actors|Sort-Object {($_.X-$cx)*$co+($_.Y-$cy)*$si} -Descending -Stable)}
             break
         }
     }

@@ -32,10 +32,12 @@ foreach($fraction in 0,0.5,1) {
     for($i=0;$i -lt $actual.Length;$i++) {
         $expected=$current[$i]
         if($i -eq 2){$expected=$fraction}
+        elseif($i -eq 7){$expected=1}
         elseif($i -in 8,9,10,11,48,49,58,59,60){$expected=$old[$i]+0.125*$fraction}
         if([Math]::Abs($actual[$i]-$expected) -gt 1e-12){throw "Interpolation mismatch at $i, fraction $fraction."}
     }
     $state=Read-GameSnapshotBytes $bytes $null
+    if(-not $state.ActorsDepthSortedForFuzz){throw 'Interpolated fuzz packet did not preserve its prepared actor order.'};$checks++
     if(-not [Linq.Enumerable]::SequenceEqual[byte]($bytes,(ConvertTo-GameSnapshotBytes $state))){throw 'All-field wire round trip failed.'}
     $reused=Read-GameSnapshotBytes $bytes $state
     if(-not [object]::ReferenceEquals($state,$reused)){throw 'Decoder did not reuse its private state.'}
@@ -46,6 +48,11 @@ $state.Actors=@();$empty=ConvertTo-GameSnapshotBytes $state;$state=Read-GameSnap
 if($state.Actors.Count -ne 0){throw 'Removed actor remained in decoded state.'};$checks++
 Assert-Rejected ([byte[]]::new(383));Assert-Rejected ([byte[]]::new(385));$checks+=2
 $bad=Get-InterpolatedSnapshotBytes $old $current 1;$bad[0]=1;Assert-Rejected $bad;$checks++
+$badValues=ConvertTo-TestValues (Get-InterpolatedSnapshotBytes $old $current 1);$badValues[7]=2
+$bad=[byte[]]::new($badValues.Length*8);[Buffer]::BlockCopy($badValues,0,$bad,0,$bad.Length);Assert-Rejected $bad;$checks++
+$preparedEndpoint=[double[]]$old.Clone();$preparedEndpoint[7]=1
+$rejectedPreparedEndpoint=$false;try{$null=Get-InterpolatedSnapshotBytes $preparedEndpoint $current 0.5}catch{$rejectedPreparedEndpoint=$true}
+if(-not $rejectedPreparedEndpoint){throw 'Already sorted endpoint was accepted for interpolation.'};$checks++
 $bad=[byte[]]::new(384);[Buffer]::BlockCopy($current,0,$bad,0,384);Assert-Rejected $bad;$checks++
 @{FinishedUtc=[DateTime]::UtcNow.ToString('o');Checks=$checks;Result='Pass';Meaning='Synthetic all-field wire round trips, interpolation endpoints/midpoint, private state reuse, actor removal, and malformed packet rejection. No game assets required.'} |
     ConvertTo-Json | Set-Content $Output

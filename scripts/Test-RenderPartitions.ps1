@@ -60,7 +60,13 @@ try {
             if($opaqueDifferences -eq 0){throw 'The shadow actor fixture did not distinguish an opaque actor.'}
         }
         . "$PSScriptRoot/../src/FastRenderer.ps1"
-        Submit-GameRender $pool $snapshot -ColumnOffset 17 -RowOffset 5 -FrameNumber 123;Wait-GameRender $pool
+        $workerInput=$snapshot
+        if($Fuzz){
+            [byte[]]$endpoint=ConvertTo-GameSnapshotBytes $snapshot
+            [double[]]$endpointValues=[double[]]::new($endpoint.Length/8);[Buffer]::BlockCopy($endpoint,0,$endpointValues,0,$endpoint.Length)
+            $workerInput=Get-InterpolatedSnapshotBytes $endpointValues $endpointValues 1
+        }
+        Submit-GameRender $pool $workerInput -ColumnOffset 17 -RowOffset 5 -FrameNumber 123;Wait-GameRender $pool
         $actual=[byte[]]::new(64000)
         for($i=0;$i -lt $pool.Count;$i++) {
             $worker=$pool.Workers[$i];$result=$pool.Results[$i]
@@ -93,7 +99,7 @@ try {
         if($differences -ne 0){throw "$differences pixels differ at $angle degrees between serial rendering and $Workers process strips."}
         $checks.Add(@{AngleDegrees=$angle;ComparedPixels=64000;Differences=$differences;Invisibility=$snapshot.ConsolePlayer.Invisibility;OpaqueActorDifferences=$opaqueDifferences;PaletteNumber=$snapshot.ConsolePlayer.PaletteNumber})
     }
-    @{FinishedUtc=[DateTime]::UtcNow.ToString('o');Style=$Style;GlyphSet=$GlyphSet;AnsiEncoding=$AnsiEncoding;Workers=$Workers;FuzzFixture=[bool]$Fuzz;Checks=$checks.ToArray();EncodedStripByteChecks=$checks.Count*$Workers;CharacterStripByteChecks=if($Style -ne 'Classic'){$checks.Count*$Workers}else{0};BaselineRendererSha256=if($CompareRenderer){(Get-FileHash -LiteralPath $CompareRenderer).Hash}else{(Get-FileHash "$PSScriptRoot/../src/FastRenderer.ps1").Hash};Meaning='Exact serial/partition equivalence, including binary assets and NumericV3 snapshots with drawseg silhouette depth. Fuzz fixtures explicitly place a shadow demon ahead of the camera and set the player invisibility timer; these are not ordinary gameplay completion evidence. All modes compare encoded bytes against serial encoding at a fixed time and viewport. No vanilla pixel-equivalence claim.'} |
+    @{FinishedUtc=[DateTime]::UtcNow.ToString('o');Style=$Style;GlyphSet=$GlyphSet;AnsiEncoding=$AnsiEncoding;Workers=$Workers;FuzzFixture=[bool]$Fuzz;Checks=$checks.ToArray();EncodedStripByteChecks=$checks.Count*$Workers;CharacterStripByteChecks=if($Style -ne 'Classic'){$checks.Count*$Workers}else{0};BaselineRendererSha256=if($CompareRenderer){(Get-FileHash -LiteralPath $CompareRenderer).Hash}else{(Get-FileHash "$PSScriptRoot/../src/FastRenderer.ps1").Hash};Meaning='Exact serial/partition equivalence, including binary assets and NumericV3 snapshots with drawseg silhouette depth. Fuzz fixtures explicitly place a shadow demon ahead of the camera and set the player invisibility timer; worker transport receives the shared far-to-near actor order for those frames. These are not ordinary gameplay completion evidence. All modes compare encoded bytes against serial encoding at a fixed time and viewport. No vanilla pixel-equivalence claim.'} |
         ConvertTo-Json -Depth 5 | Set-Content -LiteralPath $Report
     "PASS: 320,000 pixels match across five views and $Workers uneven process strips."
 } catch {[Console]::Error.WriteLine($_.ScriptStackTrace);throw}

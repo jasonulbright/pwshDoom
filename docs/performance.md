@@ -216,3 +216,33 @@ pins the workload and raw-report hashes. The complete per-session reports stay
 under ignored `local/`. These measurements narrow the performance question;
 they do not pass the 35-tic/60-display gate or qualify continuous audible
 music.
+
+## Share Spectre actor ordering across renderer workers — September 28, 2026
+
+The legacy renderer sorted all actors far-to-near in every process whenever a
+Spectre was present. The interpolated NumericV3 snapshot now performs that
+stable PowerShell sort once and marks the prepared actor order in its existing
+reserved header slot; render workers skip only their duplicate sort. Direct
+object snapshots keep the old renderer fallback. This preserves the intended
+fuzz compositing order while removing repeated work from the actor phase.
+
+The paired fixed-state profile uses E3M6, HMP, the installed Steam IWAD, 311
+actors including four Spectres, and sixteen 20-column stripes. Each mode has
+two profiles with 24 measured frames apiece after five warmups. The stripes
+run sequentially in one PowerShell process, and the comparison adds snapshot
+preparation CPU to the summed stripe-render CPU. Median summed render CPU
+falls from 229.11 ms to 210.40 ms; including snapshot preparation, the median
+falls from 235.92 ms to 213.55 ms (9.48%). Combined p95 falls 7.28%. Median
+preparation rises from 0.23 ms to 3.54 ms, while actor-phase CPU summed across
+stripes falls 8.50%. The full 64,000-pixel output hashes match exactly.
+
+This isolates CPU work in one fixed state. The stripes are not concurrent
+worker wall time; no live host, terminal write, audio load, PresentMon sample,
+or displayed-frame rate was measured. The result does not establish a 60 FPS
+gain. The [portable paired receipt](../results/renderer-shared-fuzz-order-20260928.json)
+pins source and raw-profile hashes; the [snapshot checks](../results/snapshot-actor-order-20260928.json),
+[fuzz checks](../results/fuzz-rendering-actor-order-20260928.json), and
+16-worker [Classic](../results/render-fuzz-actor-order-classic-20260928.json),
+[Matrix](../results/render-fuzz-actor-order-matrix-20260928.json), and
+[AnsiArt](../results/render-fuzz-actor-order-ansiart-20260928.json) receipts
+retain correctness results.

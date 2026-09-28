@@ -1,0 +1,128 @@
+{
+  "Format": "pwshDoom.RendererSharedFuzzOrderComparison",
+  "Version": 1,
+  "FinishedUtc": "2026-09-28T16:05:34.0134597Z",
+  "Workload": {
+    "WarmupFrames": 5,
+    "RendererWorkers": 16,
+    "SetupTics": 0,
+    "ProfilesPerMode": 2,
+    "Map": 6,
+    "PowerShell": "7.6.5",
+    "Episode": 3,
+    "WADSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+    "Actors": 311,
+    "Skill": "HMP",
+    "ColumnsPerWorker": 20,
+    "Spectres": 4,
+    "FramesPerProfile": 24,
+    "Measurement": "Fixed-state PowerShell renderer CPU profile. The sixteen production-width stripes run sequentially in one process, not concurrently; no terminal, audio, input, PresentMon, or displayed-frame measurement."
+  },
+  "Sources": [
+    {
+      "Sha256": "1CD37BE22EDFEEA3EDFC5455066F6D94D4BEA64488691912851AAD71C2EE390E",
+      "Path": "src/FastRenderer.ps1"
+    },
+    {
+      "Sha256": "64DA5566137751E021AC0A2D02C6327A107BE093046535208E9EAC3CEF380964",
+      "Path": "src/SnapshotTransport.ps1"
+    },
+    {
+      "Sha256": "38F92BD189C2E8F928C2F3DE4DC7859DBB741B8C5A90C0C635A849393FFFBC66",
+      "Path": "scripts/Measure-FastRendererPhases.ps1"
+    }
+  ],
+  "FramePixels": {
+    "LegacyAndPreparedIdentical": true,
+    "Count": 64000,
+    "Sha256": "629A3A3CDA2B6365C0406A6BA70AC5A1EEFAD701BE926FD86A572AAD78F64D0C"
+  },
+  "Profiles": [
+    {
+      "Mode": "legacy worker-side sort",
+      "Path": "local\\renderer-phases-e3m6-sort-legacy-r3.json",
+      "Sha256": "3AB4B728C02BCB845EAF1CD90EEDACC0E1194E9483EB48552C51EC79A29F06CD"
+    },
+    {
+      "Mode": "legacy worker-side sort",
+      "Path": "local\\renderer-phases-e3m6-sort-legacy-r4.json",
+      "Sha256": "F4EED81465D8EF73F4974A780179A3E9AC03BD7549A2CA3D28855A2CF230ACE0"
+    },
+    {
+      "Mode": "shared interpolated actor order",
+      "Path": "local\\renderer-phases-e3m6-sort-prepared-r4.json",
+      "Sha256": "FE245D6BCDBBEDD2BB94E9FE5F828974E323C9FE137AE5016FC8B331B1439BC3"
+    },
+    {
+      "Mode": "shared interpolated actor order",
+      "Path": "local\\renderer-phases-e3m6-sort-prepared-r5.json",
+      "Sha256": "4DE2E63DE4978AD323725E40809C61A8FAF334C7EA0934A7703A69A2761DAB5C"
+    }
+  ],
+  "Legacy": {
+    "SnapshotPreparation": {
+      "Count": 48,
+      "MedianMs": 0.2281,
+      "P95Ms": 0.3657,
+      "MaxMs": 7.5155,
+      "MeanMs": 0.5166062499999999
+    },
+    "RenderCpu": {
+      "Count": 48,
+      "MedianMs": 229.1122,
+      "P95Ms": 260.726,
+      "MaxMs": 269.93039999999996,
+      "MeanMs": 235.68473958333325
+    },
+    "ActorCpu": {
+      "Count": 48,
+      "MedianMs": 150.2657,
+      "P95Ms": 177.15619999999998,
+      "MaxMs": 186.6015,
+      "MeanMs": 157.82857500000003
+    },
+    "CombinedCpu": {
+      "Count": 48,
+      "MedianMs": 235.9221,
+      "P95Ms": 261.0332,
+      "MaxMs": 270.10439999999994,
+      "MeanMs": 236.20134583333342
+    }
+  },
+  "Prepared": {
+    "SnapshotPreparation": {
+      "Count": 48,
+      "MedianMs": 3.5381,
+      "P95Ms": 4.879,
+      "MaxMs": 5.522,
+      "MeanMs": 3.6095416666666655
+    },
+    "RenderCpu": {
+      "Count": 48,
+      "MedianMs": 210.3959,
+      "P95Ms": 238.2701,
+      "MaxMs": 241.37420000000003,
+      "MeanMs": 217.7421645833334
+    },
+    "ActorCpu": {
+      "Count": 48,
+      "MedianMs": 137.49210000000002,
+      "P95Ms": 154.28570000000005,
+      "MaxMs": 156.42829999999998,
+      "MeanMs": 139.19937083333335
+    },
+    "CombinedCpu": {
+      "Count": 48,
+      "MedianMs": 213.54520000000002,
+      "P95Ms": 242.03040000000001,
+      "MaxMs": 246.52230000000003,
+      "MeanMs": 221.35170625000003
+    }
+  },
+  "DeltaPercent": {
+    "RenderCpuMedian": -8.17,
+    "CombinedCpuP95": -7.28,
+    "CombinedCpuMedian": -9.48,
+    "ActorCpuMedian": -8.5
+  }
+}

@@ -910,3 +910,23 @@ against the adopted PowerShell renderer. It neither reproduces the reported
 through-wall view nor validates the original executable. The compact
 [source-pinned audit](../results/actor-occlusion-depth-audit-human-prefix-tic140-20260928.json)
 contains no private recording or diagnostic image.
+
+### Share Spectre actor order across renderer workers (2026-09-28)
+
+The interpolated NumericV3 transport packet now carries one stable far-to-near
+actor order when its discrete flags include a Spectre. This is the same
+depth/order rule the worker renderer previously computed locally. The
+renderer direct-object path retains that local sort as a fallback. Snapshot
+transport checks pass 13 cases; the focused fuzz suite passes 122 checks,
+including packet ordering and pixel equality with the fallback. Actual
+16-process worker fixtures match all 320,000 pixels in five camera views for
+Classic, Matrix/Katakana, and AnsiArt/Katakana. See the [Classic](../results/render-fuzz-actor-order-classic-20260928.json),
+[Matrix](../results/render-fuzz-actor-order-matrix-20260928.json), and
+[AnsiArt](../results/render-fuzz-actor-order-ansiart-20260928.json) receipts.
+
+The source-pinned [fixed-state profile](../results/renderer-shared-fuzz-order-20260928.json)
+measures 9.48% lower median CPU after adding preparation to the sum of 16
+sequential stripe renders, with exact 64,000-pixel equality. This is repeated
+worker CPU accounting, not concurrent worker latency, live game pacing,
+Terminal presentation, or original-executable parity. It adds no campaign
+completion evidence.

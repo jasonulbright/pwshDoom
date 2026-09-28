@@ -3772,6 +3772,41 @@ snapshot protocol. Clearing only one 20-column stripe through 200 per-row
 array operations took 1.85 ms per worker frame, versus 0.030 ms for the
 existing full-array bulk clear/fill; retain the bulk reset. These isolated
 PowerShell microbenchmarks exclude concurrent workers, terminal output, and
-display presentation. No renderer source change or frame-rate claim follows;
-the next useful performance investigation should isolate the actor patch
-raster work within the measured 8.22 ms phase.
+display presentation. No renderer source change or frame-rate claim followed
+those trials; the later shared-order experiment below is a separate measured
+change.
+
+## 2026-09-28 — Share the Spectre actor sort across renderer workers
+
+Source inspection showed `Invoke-FastRender` repeats the same stable
+far-to-near `Sort-Object` over all actors in every worker whenever any actor
+has the Spectre fuzz flag. Move this ordering to `Get-InterpolatedSnapshotBytes`
+after camera/actor interpolation. Store a prepared-order bit in the existing
+NumericV3 reserved header slot, reorder seven interpolated actor fields and
+their appended discrete flags together, and let decoded transport snapshots
+skip the renderer's duplicate sort. Keep direct-object snapshots on the old
+fallback. Game, renderer, and transport algorithms remain PowerShell; the wire
+format version and packet length do not change.
+
+The first wrapper-based numeric sort increased preparation by about 85 ms and
+was discarded before acceptance. A numeric index array with the existing
+stable `Sort-Object` key/order removed that overhead. The [final paired receipt](../results/renderer-shared-fuzz-order-20260928.json)
+uses two 24-frame profiles per mode on one fixed HMP E3M6 state (311 actors,
+four Spectres), sixteen 20-column stripes, and five warmups. Summed stripe
+render CPU median is 229.11 ms legacy and 210.40 ms prepared. After adding
+snapshot preparation, the median is 235.92 ms versus 213.55 ms (9.48% lower);
+p95 is 7.28% lower. Preparation median itself rises from 0.23 ms to 3.54 ms.
+The legacy and prepared full-frame pixel hashes are identical. This is a
+sequential per-process CPU profile, not live or concurrent-worker latency,
+frame rate, audio load, or Terminal presentation.
+
+Correctness evidence: [13 snapshot transport checks](../results/snapshot-actor-order-20260928.json),
+[122 fuzz-rendering checks](../results/fuzz-rendering-actor-order-20260928.json),
+and five-view output equivalence through 16 processes in [Classic](../results/render-fuzz-actor-order-classic-20260928.json),
+[Matrix](../results/render-fuzz-actor-order-matrix-20260928.json), and
+[AnsiArt](../results/render-fuzz-actor-order-ansiart-20260928.json). Each
+worker report compares 320,000 pixels with zero differences. The transport
+fixture also rejects malformed markers and prepared endpoints; the ordinary
+direct renderer fallback remains covered. This improves repeated worker CPU
+for Spectre scenes only. It does not resolve actor-through-wall reports,
+qualify a campaign route, or demonstrate the 35-tic/60-display goal.
