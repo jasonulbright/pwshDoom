@@ -1,0 +1,132 @@
+{
+  "Date": "2026-09-28",
+  "Experiment": "E3M6 actual-host comparison of four versus eight waveOut buffers at 12 renderer workers",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "PowerShell": "7.6.5",
+  "BaselineWorkerSourceSha256": "32E80F308BFAB71EDF7198CBA7FED196021FEEF6BDADF2EFBD3D4E7EDBFD1296",
+  "TemporaryEightBufferWorkerSourceSha256": "D87B2D403DE8C4DF0972322412F0FA53360A1EB164983CEB5C80D0E8020E0EF2",
+  "RetainedSourceHasFourBuffers": true,
+  "WorkerSuiteEightBuffers": "music-audio-worker-e3m6-buffers8-experiment-20260928.json",
+  "WorkerSuiteRestoredFourBuffers": "music-audio-worker-e3m6-final-4buffers-20260928.json",
+  "Runs": [
+    {
+      "Report": "music-host-e3m6-stateproof-load-w12-8s-20260928.json",
+      "RendererWorkers": 12,
+      "Tics": 279,
+      "DurationSeconds": 8.0015688,
+      "Packets": 279,
+      "LastSequence": 278,
+      "ActiveQueueStarvation": [],
+      "QueueEmptyPolls": [
+        {
+          "WallMs": 19104.2971,
+          "AfterPacket": 278
+        }
+      ],
+      "RebufferCount": 1,
+      "RebufferResumes": [],
+      "SubmittedFrames": 351540,
+      "ReturnedFrames": 351540,
+      "CancelledTailUpperBound": 0,
+      "WorkerError": null,
+      "CleanupError": null
+    },
+    {
+      "Report": "music-host-e3m6-stateproof-load-w12-8s-20260928-r2.json",
+      "RendererWorkers": 12,
+      "Tics": 279,
+      "DurationSeconds": 8.0017473,
+      "Packets": 279,
+      "LastSequence": 278,
+      "ActiveQueueStarvation": [
+        {
+          "AfterPacket": 40,
+          "WallMs": 11335.8965
+        }
+      ],
+      "QueueEmptyPolls": [
+        {
+          "AfterPacket": 40,
+          "WallMs": 11335.8965
+        }
+      ],
+      "RebufferCount": 1,
+      "RebufferResumes": [
+        {
+          "AfterPacket": 42,
+          "Reason": "TwoPackets",
+          "WaitMilliseconds": 33.51650000000154,
+          "ReserveWaitMilliseconds": 16.273799999999028,
+          "QueuedBuffers": 2
+        }
+      ],
+      "SubmittedFrames": 351540,
+      "ReturnedFrames": 347760,
+      "CancelledTailUpperBound": 3780,
+      "WorkerError": null,
+      "CleanupError": null
+    },
+    {
+      "Report": "music-host-e3m6-buffers8-w12-8s-20260928.json",
+      "RendererWorkers": 12,
+      "Tics": 279,
+      "DurationSeconds": 8.0017039,
+      "Packets": 279,
+      "LastSequence": 278,
+      "ActiveQueueStarvation": [],
+      "QueueEmptyPolls": [
+        {
+          "WallMs": 19086.9003,
+          "AfterPacket": 278
+        }
+      ],
+      "RebufferCount": 1,
+      "RebufferResumes": [],
+      "SubmittedFrames": 351540,
+      "ReturnedFrames": 351540,
+      "CancelledTailUpperBound": 0,
+      "WorkerError": null,
+      "CleanupError": null
+    },
+    {
+      "Report": "music-host-e3m6-buffers8-w12-8s-20260928-r2.json",
+      "RendererWorkers": 12,
+      "Tics": 270,
+      "DurationSeconds": 8.0024994,
+      "Packets": 270,
+      "LastSequence": 269,
+      "ActiveQueueStarvation": [
+        {
+          "AfterPacket": 37,
+          "WallMs": 12176.7329
+        }
+      ],
+      "QueueEmptyPolls": [
+        {
+          "AfterPacket": 37,
+          "WallMs": 12176.7329
+        },
+        {
+          "AfterPacket": 269,
+          "WallMs": 18931.1358
+        }
+      ],
+      "RebufferCount": 2,
+      "RebufferResumes": [
+        {
+          "Reason": "TwoPackets",
+          "ReserveWaitMilliseconds": 33.28430000000117,
+          "AfterPacket": 39,
+          "QueuedBuffers": 2,
+          "WaitMilliseconds": 47.93189999999959
+        }
+      ],
+      "SubmittedFrames": 340200,
+      "ReturnedFrames": 340200,
+      "CancelledTailUpperBound": 0,
+      "WorkerError": null,
+      "CleanupError": null
+    }
+  ],
+  "Conclusion": "One active packet-queue starvation occurred in one of two runs at both buffer counts. The temporary eight-buffer source was reverted; no stable improvement was demonstrated. Queue polling is not hardware underrun telemetry."
+}
