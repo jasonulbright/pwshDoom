@@ -32,14 +32,14 @@
     "SnapshotTransportBothRuns": "F9D07B38C850D8DCDB590BDC9C150760223364BFD0329B51E6FDE2D18FA21B00"
   },
   "RawReports": {
-    "Before": { "Path": "../local/renderer-phases-e3m6-current-after-mask-20260928.json", "Sha256": "B4B9E9905429E91D85E734F62FCCC9838D9D22901E3CE7A185B3FC5C45A9F15C" },
-    "Candidate": { "Path": "../local/renderer-phases-e3m6-packed-map-geometry-20260928.json", "Sha256": "16E3F16AD01638AD0D5E3FAE28FEED4F98576214A9211EE7E8F1D96A087E00DF" },
-    "CandidateRepeat": { "Path": "../local/renderer-phases-e3m6-packed-map-geometry-repeat-20260928.json", "Sha256": "E46E709FFC3B37BE59604CE5C5DFD5C114D063DAD228C69D117DE4ACFEAE1FF5" },
-    "Classic16Worker": { "Path": "../local/packed-geometry-partitions-classic.json", "Sha256": "96A8F7D62CC9448C0AB46ACA9CC69CD8179BE429ED9BB26DF0F1FBD680787444" },
-    "MatrixKatakana16Worker": { "Path": "../local/packed-geometry-partitions-matrix.json", "Sha256": "32978BB7BDCA9DCF20BAD607F02FA212DE36EB7F3309C45340CFCF45F7C101FF" },
-    "ColorArtKatakana16Worker": { "Path": "../local/packed-geometry-partitions-ansiart.json", "Sha256": "5E8B2B778764678058790D6EF3ECDD0791EB8A96A51DD06018879AB2D6F5DB66" },
-    "All36MapSmoke": { "Path": "../local/campaign-smoke-packed-map-geometry-20260928.json", "Sha256": "2AFDC27C0F80BB9D74159DF39D925266956E4F19DC09C245E8D8E08030C7398B" },
-    "LiveWorkerMapReload": { "Path": "../local/session-worker-packed-map-geometry-20260928.json", "Sha256": "07B0082DAE36BE1E1B17FE0E5827FE4DC1A59FE10B44F01A5B951E7AE07EA011" }
+    "Before": { "Path": "local/renderer-phases-e3m6-current-after-mask-20260928.json", "Sha256": "B4B9E9905429E91D85E734F62FCCC9838D9D22901E3CE7A185B3FC5C45A9F15C" },
+    "Candidate": { "Path": "local/renderer-phases-e3m6-packed-map-geometry-20260928.json", "Sha256": "16E3F16AD01638AD0D5E3FAE28FEED4F98576214A9211EE7E8F1D96A087E00DF" },
+    "CandidateRepeat": { "Path": "local/renderer-phases-e3m6-packed-map-geometry-repeat-20260928.json", "Sha256": "E46E709FFC3B37BE59604CE5C5DFD5C114D063DAD228C69D117DE4ACFEAE1FF5" },
+    "Classic16Worker": { "Path": "local/packed-geometry-partitions-classic.json", "Sha256": "96A8F7D62CC9448C0AB46ACA9CC69CD8179BE429ED9BB26DF0F1FBD680787444" },
+    "MatrixKatakana16Worker": { "Path": "local/packed-geometry-partitions-matrix.json", "Sha256": "32978BB7BDCA9DCF20BAD607F02FA212DE36EB7F3309C45340CFCF45F7C101FF" },
+    "ColorArtKatakana16Worker": { "Path": "local/packed-geometry-partitions-ansiart.json", "Sha256": "5E8B2B778764678058790D6EF3ECDD0791EB8A96A51DD06018879AB2D6F5DB66" },
+    "All36MapSmoke": { "Path": "local/campaign-smoke-packed-map-geometry-20260928.json", "Sha256": "2AFDC27C0F80BB9D74159DF39D925266956E4F19DC09C245E8D8E08030C7398B" },
+    "LiveWorkerMapReload": { "Path": "local/session-worker-packed-map-geometry-20260928.json", "Sha256": "07B0082DAE36BE1E1B17FE0E5827FE4DC1A59FE10B44F01A5B951E7AE07EA011" }
   },
   "Correctness": {
     "Classic": { "Views": 5, "PixelsCompared": 320000, "PixelDifferences": 0 },
@@ -49,6 +49,6 @@
     "PersistentWorkers": { "ScreenMenuAutomapAndMapReloadChecks": 4, "ProcessesRestarted": false },
     "SoundAndMusicHostStart": { "DurationSeconds": 5.0026, "SimulationTics": 174, "HeadlessUpdates": 224, "ExitReason": "Duration", "Error": null, "WorkerWorkingSetBytes": 4066402304 }
   },
-  "AudioStartupReport": { "Path": "../local/packed-map-geometry-audio-start-20260928.json", "Sha256": "5D2F6E83874E301A22DD88D49E43555B990BB5B2C06C6F656366C08045DEB650" },
+  "AudioStartupReport": { "Path": "local/packed-map-geometry-audio-start-20260928.json", "Sha256": "5D2F6E83874E301A22DD88D49E43555B990BB5B2C06C6F656366C08045DEB650" },
   "Interpretation": "The before/after profile showed 7.5% lower median stripe-render time; a second candidate run was 15.0% below that single baseline. This is directional evidence from short, ordered runs, not a randomized paired benchmark. Stripes were rendered sequentially in one process; the numbers exclude simulation, concurrent scheduling, audio, terminal output, and display presentation. They do not establish 60 FPS or a worker-memory reduction."
 }

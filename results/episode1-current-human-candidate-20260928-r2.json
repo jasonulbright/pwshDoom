@@ -1,0 +1,79 @@
+{
+  "PreparedUtc": "2026-09-28T21:00:45Z",
+  "Status": "PreparedForOneHumanEpisode1Playthrough",
+  "Branch": "codex/feasibility-study",
+  "VerifiedTreeCommit": "d67b4b864dd7944623400115a52dbcf38cc00150",
+  "LatestGameplayCommit": "32400a85a256c6063960297fefeeb3f961a9349e",
+  "CurrentChange": "The candidate replaces renderer map-node and seg hashtables with flat typed arrays and render-asset cache format v7. It changes storage/indexing in the PowerShell renderer; game rules and the human-route scope are unchanged.",
+  "BaseCandidateReceipt": {
+    "Path": "results/episode1-current-human-candidate-20260928.json",
+    "VerifiedTreeCommit": "f612d839f74c598c086b91412593dff0fbe2bcbb",
+    "Sha256": "3A9FAC8C5E281ECB29D47AB93B0B007C70E63692AD2FDCFBEB1C6418C3AF754C",
+    "Use": "Carries the earlier transition, boss, menu, session-screen, chainsaw, and startup checks; see its source pins and stated limits."
+  },
+  "PowerShell": "7.6.5",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "Scope": ["E1M1", "E1M2", "E1M3", "E1M9", "E1M4", "E1M5", "E1M6", "E1M7", "E1M8", "Episode 1 finale"],
+  "CurrentTreeChecks": [
+    {
+      "Name": "Ultimate Doom map loading and rendering smoke",
+      "Passed": 36,
+      "Failed": 0,
+      "Meaning": "Every map loads, advances 35 idle tics, and renders two serial 320x200 frames; this is not map-completion evidence.",
+      "RawReport": { "Path": "local/campaign-smoke-packed-map-geometry-20260928.json", "Sha256": "2AFDC27C0F80BB9D74159DF39D925266956E4F19DC09C245E8D8E08030C7398B" }
+    },
+    {
+      "Name": "Serial/process output equality",
+      "Workers": 16,
+      "ViewsPerStyle": 5,
+      "ComparedPixelsPerStyle": 320000,
+      "PixelDifferencesPerStyle": 0,
+      "EncodedStripByteChecksPerStyle": 80,
+      "Styles": {
+        "Classic": { "RawReportPath": "local/packed-geometry-partitions-classic.json", "Sha256": "96A8F7D62CC9448C0AB46ACA9CC69CD8179BE429ED9BB26DF0F1FBD680787444" },
+        "MatrixKatakana": { "RawReportPath": "local/packed-geometry-partitions-matrix.json", "Sha256": "32978BB7BDCA9DCF20BAD607F02FA212DE36EB7F3309C45340CFCF45F7C101FF" },
+        "ColorArtKatakana": { "RawReportPath": "local/packed-geometry-partitions-ansiart.json", "Sha256": "5E8B2B778764678058790D6EF3ECDD0791EB8A96A51DD06018879AB2D6F5DB66" }
+      },
+      "Meaning": "Exact agreement with the same PowerShell renderer's serial output; not independent original-Doom pixel parity."
+    },
+    {
+      "Name": "Persistent renderer workers and map reload",
+      "Checks": 4,
+      "WorkersRestarted": false,
+      "Meaning": "Sixteen actual processes preserve screen/menu/automap strips and reload E1M2 geometry using render-asset format v7.",
+      "RawReport": { "Path": "local/session-worker-packed-map-geometry-20260928.json", "Sha256": "07B0082DAE36BE1E1B17FE0E5827FE4DC1A59FE10B44F01A5B951E7AE07EA011" }
+    },
+    {
+      "Name": "Masked wall ordering regression",
+      "Passed": 20,
+      "RawReport": { "Path": "local/packed-map-geometry-masked-wall-2.json", "Sha256": "4C9CA2E93B93502F7C21E5F09B22E2D272B91D9DE62330A7CB8698C568E3A993" }
+    },
+    {
+      "Name": "Sound and music host startup",
+      "DurationSeconds": 5.0026,
+      "SimulationTics": 174,
+      "HeadlessUpdates": 224,
+      "ExitReason": "Duration",
+      "Error": null,
+      "WorkerWorkingSetBytes": 4066402304,
+      "Meaning": "Actual sound-enabled host start with the prepared Episode 1 music catalog. This short headless run verifies startup only, not audible quality, full-session continuity, or display pacing.",
+      "RawReport": { "Path": "local/packed-map-geometry-audio-start-20260928.json", "Sha256": "5D2F6E83874E301A22DD88D49E43555B990BB5B2C06C6F656366C08045DEB650" }
+    },
+    {
+      "Name": "E3M6 renderer profile",
+      "SameFullFrameSha256": "629A3A3CDA2B6365C0406A6BA70AC5A1EEFAD701BE926FD86A572AAD78F64D0C",
+      "BeforeMedianMs": 9.0086,
+      "CandidateMedianMs": 8.3369,
+      "RepeatCandidateMedianMs": 7.6595,
+      "Meaning": "Sixteen stripes rendered sequentially in one process; short directional measurements, not a randomized paired or end-to-end FPS test.",
+      "Receipt": { "Path": "results/packed-map-geometry-profile-20260928.json", "Sha256": "4A520484DE1D99005BC034C99F24E437610EA2CEFE25D7CD95BBC1BC4A82F516" }
+    }
+  ],
+  "Limitations": [
+    "The human Episode 1 playthrough remains pending; automation has not completed the route.",
+    "No physical keyboard play was observed on this exact tree.",
+    "Audio startup was headless and brief; full-episode continuity and audible review remain open.",
+    "35-tic simulation pacing and 60 displayed updates per second remain unqualified.",
+    "Rendering remains an approximation without independent original-executable pixel parity."
+  ]
+}

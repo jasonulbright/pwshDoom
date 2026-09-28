@@ -12,7 +12,7 @@ A normal completion is enough; 100% kills, items, and secrets are not required. 
 
 ## Build and launch
 
-Use the current development checkout on branch `codex/feasibility-study`. The verified game-source commit is `32400a85a256c6063960297fefeeb3f961a9349e`; the exact tested checkout is `f612d839f74c598c086b91412593dff0fbe2bcbb`. The [current candidate receipt](../results/episode1-current-human-candidate-20260928.json) pins that tree, the IWAD, focused checks, and raw-report hashes. The public [Preview.3 release](https://github.com/jasonulbright/pwshDoom/releases/tag/v0.1.0-preview.3) remains available for community testing, but this handoff is for the newer local source candidate.
+Use the current development checkout on branch `codex/feasibility-study`. The latest gameplay commit is `32400a85a256c6063960297fefeeb3f961a9349e`; the exact tested renderer checkout is `d67b4b864dd7944623400115a52dbcf38cc00150`. Read the earlier [broad candidate receipt](../results/episode1-current-human-candidate-20260928.json) together with the [current-source supplement](../results/episode1-current-human-candidate-20260928-r2.json): the supplement pins the updated geometry/cache code and records fresh all-map smoke, three-style 16-worker output, live map reload, and sound/music startup. The public [Preview.3 release](https://github.com/jasonulbright/pwshDoom/releases/tag/v0.1.0-preview.3) remains available for community testing, but this handoff is for the newer local source candidate.
 
 From PowerShell, use the existing checkout and your Steam Ultimate Doom `DOOM.WAD`:
 
