@@ -1,5 +1,19 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 # Reader for a locally trusted qualification report; reports are evidence, not signatures.
+function Get-DoomMusicSourceHashes {
+    param([Parameter(Mandatory)][string]$Path)
+    $hashes=[Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
+    [void]$hashes.Add((Get-FileHash -LiteralPath $Path -Algorithm SHA256).Hash)
+    # Git may check out identical PowerShell text with LF or CRLF endings. Accept those
+    # canonical text forms while preserving every non-newline character in the comparison.
+    $text=[IO.File]::ReadAllText($Path)
+    $lf=[regex]::Replace($text,"`r`n|`r|`n","`n")
+    $utf8=[Text.UTF8Encoding]::new($false)
+    foreach($candidate in @($lf,$lf.Replace("`n","`r`n"))){
+        [void]$hashes.Add([Convert]::ToHexString([Security.Cryptography.SHA256]::HashData($utf8.GetBytes($candidate))))
+    }
+    return ,$hashes
+}
 function Open-DoomMusicLoopReader {
     param([string]$Report)
     if(-not [BitConverter]::IsLittleEndian){throw 'Music loop payloads require little endian float64.'}
@@ -20,7 +34,7 @@ function Open-DoomMusicLoopReader {
     if($r.Sources.Count -ne $names.Count){throw 'Music loop source set differs.'}
     foreach($name in $names){
         $entry=@($r.Sources|Where-Object {$_.Path -ceq "src/$name.ps1"})
-        if($entry.Count -ne 1 -or $entry[0].Sha256 -cne (Get-FileHash "$PSScriptRoot/$name.ps1").Hash){throw "Music loop source changed: $name"}
+        if($entry.Count -ne 1 -or -not (Get-DoomMusicSourceHashes "$PSScriptRoot/$name.ps1").Contains([string]$entry[0].Sha256)){throw "Music loop source changed: $name"}
     }
     $handles=[Collections.Generic.List[object]]::new()
     try{

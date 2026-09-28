@@ -55,7 +55,17 @@ try{
     Close-DoomMusicLoopReader $reader;Reject 'Closed reader rejected' {$null=Read-DoomMusicLoop $reader 1};Close-DoomMusicLoopReader $reader;$reader=$null
     $f=[IO.File]::Open($periods[1].Path,[IO.FileMode]::Open,[IO.FileAccess]::Write,[IO.FileShare]::None);$f.Dispose();Check 'Close releases playback file handles' $true
     $receipt.Details.Qualified=$false;$receipt|ConvertTo-Json -Depth 8|Set-Content $path;Reject 'Unqualified report rejected' {$r=Open-DoomMusicLoopReader $path;Close-DoomMusicLoopReader $r};$receipt.Details.Qualified=$true
-    $receipt.Sources[0].Sha256='wrong';$receipt|ConvertTo-Json -Depth 8|Set-Content $path;Reject 'Changed synthesis source rejected' {$r=Open-DoomMusicLoopReader $path;Close-DoomMusicLoopReader $r};$receipt.Sources[0].Sha256=(Get-FileHash "$PSScriptRoot/../src/MusScore.ps1").Hash
+    $sourceText=[IO.File]::ReadAllText("$PSScriptRoot/../src/MusScore.ps1")
+    $sourceLf=[regex]::Replace($sourceText,"`r`n|`r|`n","`n")
+    $crlfBytes=[Text.UTF8Encoding]::new($false).GetBytes($sourceLf.Replace("`n","`r`n"))
+    $receipt.Sources[0].Sha256=[Convert]::ToHexString([Security.Cryptography.SHA256]::HashData($crlfBytes));$receipt|ConvertTo-Json -Depth 8|Set-Content $path
+    $lineEndingReader=Open-DoomMusicLoopReader $path
+    Check 'Equivalent CRLF checkout source is accepted' ($lineEndingReader.Files.Count -eq 2)
+    Close-DoomMusicLoopReader $lineEndingReader
+    $changedBytes=[Text.UTF8Encoding]::new($false).GetBytes($sourceLf+"# altered content`n")
+    $receipt.Sources[0].Sha256=[Convert]::ToHexString([Security.Cryptography.SHA256]::HashData($changedBytes));$receipt|ConvertTo-Json -Depth 8|Set-Content $path
+    Reject 'Changed synthesis source rejected' {$r=Open-DoomMusicLoopReader $path;Close-DoomMusicLoopReader $r}
+    $receipt.Sources[0].Sha256=(Get-FileHash "$PSScriptRoot/../src/MusScore.ps1").Hash
     $receipt.Details.Snapshots[2].StateSha256='different';$receipt|ConvertTo-Json -Depth 8|Set-Content $path;Reject 'Inconsistent state evidence rejected' {$r=Open-DoomMusicLoopReader $path;Close-DoomMusicLoopReader $r};$receipt.Details.Snapshots[2].StateSha256='A'*64
     $receipt|ConvertTo-Json -Depth 8|Set-Content $path
     $legacyThird=@{Index=2;Frames=2520;Bytes=$periods[1].Bytes;Path=$periods[1].Path;Sha256=$periods[1].Sha256}
