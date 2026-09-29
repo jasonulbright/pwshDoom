@@ -2,9 +2,7 @@
 
 Updated 2026-09-29. Release sequence remains Ultimate Doom, Doom II, then a MyHouse-based audit. See [roadmap](roadmap.md).
 
-**Current-source smoke: 36/36 passed at skill 3 under PowerShell 7.6.6.** Each case loads the map, runs 35 idle simulation tics, and renders two complete 320×200 serial frames from two camera headings. A smoke pass is not a completed level or visual-reference match. Headless stage timings are not gameplay FPS.
-
-The latest run pins implementation commit `3e0b6308bac9dc152f9ae78fb8f23f70623b36e2` and the installed Ultimate Doom IWAD in [campaign-smoke-r16-20260929.json](../results/campaign-smoke-r16-20260929.json). Earlier smoke evidence remains available in [campaign-smoke-lineflags-fixed.json](../results/campaign-smoke-lineflags-fixed.json).
+**Last full load/render smoke: 36/36 passed on R16 source 3e0b6308bac9dc152f9ae78fb8f23f70623b36e2 under PowerShell 7.6.6.** Each case loaded a map, ran 35 idle simulation tics, and rendered two complete 320×200 serial frames from two headings. The current R17 source passes a focused 9/9 Episode 1 smoke. Its separate stationary-discovery comparison covers all 36 map starts at four headings (144 exact mapped-line bitsets). Smoke and bitset parity are not completed map routes or original-renderer fidelity. See the [full R16 smoke](../results/campaign-smoke-r16-20260929.json) and [R17 candidate receipt](../results/episode1-current-human-candidate-20260929-r17.json).
 
 **Skill behavior: 37/37 focused checks passed** on the installed Ultimate Doom IWAD under PowerShell 7.6.5. E1M1 kill totals match the skill flags decoded directly from its THINGS lump: Baby 4, Easy 4, Medium 6, Hard 29, Nightmare 29. Isolated real-player checks confirm Baby halves incoming damage and doubles shell pickup ammo; Nightmare doubles shell ammo, halves demon run-state tics, doubles Imp fireball speed, starts Imps with zero reaction delay, and enables timed monster respawn. The separate Fast Monsters option changes monster cadence/projectile speed but does not enable respawning; Respawn Monsters does. A deterministic thinker-boundary fixture qualifies the 420-tic respawn threshold. These are mechanic checks, not full routes at each difficulty or all-map difficulty certification. See the [37-check receipt](../results/difficulty-behavior-r1-20260929.json) and [test source](../scripts/Test-DifficultyBehavior.ps1).
 
@@ -23,28 +21,22 @@ receipt](../results/episode1-current-human-candidate-20260928-r5.json),
 [geometry/cache supplement](../results/episode1-current-human-candidate-20260928-r2.json),
 and [realtime-audio supplement](../results/episode1-current-human-candidate-20260928-r3.json); the [visible-actor profile](../results/renderer-visible-actor-filter-20260928.json) reports sequential worker-equivalent CPU and does not claim a frame-rate gain.
 
-The current single-playthrough handoff is R16 at game-source commit
-`3e0b6308bac9dc152f9ae78fb8f23f70623b36e2`; see the [candidate receipt](../results/episode1-current-human-candidate-20260929-r16.json)
-and the exact [complete Episode 1 scope](episode1-playtest.md). Under official
-portable PowerShell 7.6.6 x64, the current IWAD/catalog pass launcher
-preflight, a four-second actual-device D_E1M1 host check, and a fresh 36-map
-load/idle/render smoke. The audio worker drains all 3,780 queued shutdown
-frames in 68.8 ms with no cancellation, starvation, rebuffer, or device error.
-The focused chainsaw, campaign-transition, boss-progression, and menu-input
-checks pass 2, 69, 97, and 10 checks, respectively. Transition fixtures load
-real E1M9 and E1M4 worlds and verify secret history and finale state, but they
-do not complete maps. The E1M1/E1M2/E1M4 ordinary-input routes remain pinned at
-their original receipts. Jason's one complete human route remains pending,
-including the secret exit through E1M9, return to E1M4, and the E1M8 finale.
-Full-session audio, 35-tic simulation, 60 displayed updates/sec, and
-original-executable parity remain unqualified.
-
-A clean-checkout local development ZIP was also extracted and checked under
-PowerShell 7.6.6. Its manifest verifies all 543 packaged files; the short
-E1M1 audio host returns every submitted music frame and closes the device. One
-queue-empty observation occurs after the final packet. This validates package
-startup, adds no route or map-completion evidence, and does not qualify audio
-continuity or display pacing; see the [package receipt](../results/r16-playtest-package-validation-20260929.json).
+The current single-playthrough handoff is R17 at implementation commit
+00405deebef6b4e8477c9c9316987b82fbc9064d; see the [candidate receipt](../results/episode1-current-human-candidate-20260929-r17.json)
+and the exact [complete Episode 1 scope](episode1-playtest.md). The clean local
+package has 543 manifest-verified files, passes extracted PowerShell 7.6.6
+launcher preflight for 36 maps and 11 music qualifications, and excludes the
+local PDF and game assets. R17 passes its 9-map E1 smoke, all-map 144-view
+stationary-discovery bitset checks, and eight simulation-worker automap checks.
+Its four-second packaged E1M1 audio run returns all 175,140 frames and closes
+the device; one queue-starvation poll follows the last packet, with no rebuffer
+resume. The 2 chainsaw, 69 transition, 97 boss, and 10 menu-input checks remain
+valid from R16 because gameplay/session files did not change. These fixtures do
+not complete maps. Jason's one complete human HMP route remains pending,
+including the secret exit through E1M9, return to E1M4, and E1M8 finale. Full
+session audio, physical keyboard play, 35-tic/60-displayed-frame pacing, and
+original-executable parity remain unqualified. R17 is a development handoff,
+not a public release. See the [package validation](../results/r17-playtest-package-validation-20260929.json).
 
 The earlier R12 handoff was pinned at source commit
 `c29b24e8a1c06635f90423672cc74f28836b7095`; its measurement and qualification

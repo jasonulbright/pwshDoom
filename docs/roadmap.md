@@ -36,152 +36,13 @@ route ended in player death and did not expose a reproducible product defect;
 it is documented and route automation is stopped for this milestone. The
 broader release acceptance gates below remain intact.
 
-## Current Episode 1 handoff — R16 (2026-09-29)
+## Current Episode 1 handoff — R17 (2026-09-29)
 
-The candidate source is commit `3e0b6308bac9dc152f9ae78fb8f23f70623b36e2`, pinned in the [R16 receipt](../results/episode1-current-human-candidate-20260929-r16.json). It adds a bounded drain for queued Windows audio buffers at normal unpaused shutdown. Gameplay, renderer, and audio-mixing algorithms did not change in this revision.
+The current implementation candidate is commit 00405deebef6b4e8477c9c9316987b82fbc9064d. The clean development package and bounded R17 checks are pinned in the [candidate receipt](../results/episode1-current-human-candidate-20260929-r17.json) and [package receipt](../results/r17-playtest-package-validation-20260929.json). The archive has 543 manifest-verified files, excludes local assets and the research PDF, and passes extracted-package preflight under PowerShell 7.6.6.
 
-Under official portable PowerShell 7.6.6, `Play.ps1 -Check` accepts the 36-map Steam Ultimate Doom IWAD and eleven-track catalog. A four-second current-source E1M1 headless audio run selected D_E1M1, completed all 186,480 submitted frames, drained the final 3,780 in 68.8 ms, and closed without simulation/audio/cleanup errors, queue-starvation observations, or rebuffers. A fresh 36-map smoke loaded each map, advanced 35 idle tics, and rendered two serial 320x200 frames. These establish startup/audio shutdown and map load/rasterization only; they do not establish keyboard play, map completion, audible quality, campaign-length audio, or 35-tic/60-display pacing.
+R17 passes 144 all-map stationary-discovery bitset comparisons, eight simulation-worker automap checks, and the nine-map Episode 1 load/idle/render smoke. A four-second packaged E1M1 audio startup returns all 175,140 submitted frames and closes cleanly; a single queue-starvation observation follows the final packet, with no rebuffer resume. These checks do not complete a map or establish continuous audio or display pacing.
 
-A local, clean-checkout development archive was built from commit `bcfb85e`; its `src/` and `scripts/` are unchanged from the R16 game-source commit. The 543-file manifest and archive checksum verify, the research PDF and game assets are absent, and the extracted package passes launcher preflight under PowerShell 7.6.6. Its four-second audio smoke selects D_E1M1 and returns every submitted frame, with one queue-empty observation after the final packet. This validates the package handoff only; it adds no map completion, sound-effects coverage, sustained audio, human keyboard, or pacing evidence. See the [package receipt](../results/r16-playtest-package-validation-20260929.json).
-
-Focused campaign-transition, boss, menu, chainsaw, same-map, and worker-reload evidence remains pinned in the candidate receipt and earlier receipts. Human playthrough coverage is still required for one complete HMP route: E1M1 through E1M8, taking E1M3's secret exit through E1M9 and returning to E1M4, ending at the Episode 1 finale. Do not split this into map-by-map requests or substitute fixture/route automation for the human result. The public Preview.3 package remains an older snapshot; R16 is a development handoff, not a new release.
-
-The earlier R14/R12/R9 startup, audio, and renderer measurements remain historical and are preserved in the ledger, [audio study](audio.md), and [performance study](performance.md). The preceding 7.6.6 startup failure was caused by a catalog qualified under PowerShell 7.6.5 being rejected by an exact patch-version check; its [root-cause receipt](../results/music-startup-failure-rootcause-20260927.json) documents the correction and evidentiary limit.
-Jason's first playtest launch exposed a PowerShell 7.6.6 startup failure:
-qualified loop and one-shot music reports were tied to the exact 7.6.5 patch
-string even though their source and payload hashes were current. The readers
-now accept the same major/minor runtime line, and the bounded simulation
-startup wait is 60 seconds for cold starts. A fresh headless 7.6.6 integration
-run loads all eleven Episode 1 music reports and advances E1M1 with clean audio
-shutdown; the [runtime receipt](../results/episode1-startup-runtime-compat-20260927.json)
-records its limits. The earlier source pin in the handoff has been superseded;
-Jason's single full HMP Episode 1 run remains pending on the fixed build.
-
-The latest PowerShell renderer change projects each actor once on the host and
-filters work to only those render processes whose stripe intersects the
-sprite. Exact output passes in the three visual styles, on E1M1–E1M4, and in
-16-worker Spectre/fuzz fixtures. Two fixed-state E3M6 comparisons reduced
-median 16-process render-dispatch time by 14–17%, but the measured 42.7–43.1 ms
-median still misses a 16.67 ms 60 Hz interval and excludes simulation, audio,
-terminal output, and display presentation. This improves rendering cost; it
-does not advance the human campaign route or pass the 35-tic/60-display gate.
-The sprite-angle math is now shared with the ordinary launcher host, and a
-three-second headless E3M6 smoke completes 83 tics and 94 host updates. That
-smoke is not a route or display-rate result.
-See the [performance measurements](performance.md#project-actors-only-to-renderer-stripes-that-can-see-them--september-28-2026)
-and [renderer regressions](rendering-fidelity.md#skip-actors-outside-each-renderer-stripe-2026-09-28).
-
-A follow-up now reuses those fixed-point transforms in dense scenes. NumericV5
-worker packets carry typed projection fields at 200 or more actors; sparse
-views retain NumericV4. The 36-map smoke and 21 transport checks pass, and HMP
-E1M3 matches serial pixels across 16 workers in all three styles. Paired E3M6
-stress profiles show 6.65–13.09% lower sequential CPU work; HMP E1M3 timings
-reverse direction with run order, so no Episode 1 speed gain is established.
-The current source also passes 69 E1 progression/secret/finale fixtures and 97
-boss progression fixtures. A bounded sound-enabled E1M3 host run advances 174
-tics with D_E1M3 selected; the single rebuffer observation is retained in its
-receipt. The run records 155 headless host updates per five seconds, not
-displayed frames. This does not change the pending human playthrough or qualify
-35-tic/60-display pacing. Details and raw-report fingerprints are in the [projection-cache
-measurement](performance.md#reuse-typed-actor-projections-on-dense-scenes--september-28-2026)
-and [receipt](../results/renderer-projection-cache-20260928.json).
-
-The preceding Episode 1 candidate was pinned to `f5f404a`. Replaying the
-retained E1M3 and E1M4 host inputs against the current working candidate exposed
-two renderer failures: a plane-distance cast beyond signed Int32 and an
-out-of-range wall-light index. The PowerShell renderer now wraps the plane
-distance as fixed-point arithmetic requires and bounds light lookup before
-indexing. Full E1M2–E1M4 fixed-input host replays on source build
-`4ed33630dcb26bb6f04456448535edc01f9b4bd5` reach `ReplayEnd` with all saved
-checkpoints matching. The CheckSight integer path also matches 50,200 prior
-Fixed-expression cases; its short, unpaired profile is recorded without a
-performance claim. The corrected candidate passes the 36-map smoke, 69
-campaign transition checks including real E1M9 and E1M4 world loads, and
-serial/worker output checks in Classic, Matrix/Katakana, and AnsiArt/Katakana.
-The [renderer-guard evidence](../results/episode1-render-guard-evidence-20260927.json)
-prepared one complete human Episode 1 playthrough on that source. It does not certify the
-remaining map routes, continuous campaign audio, physical keyboard play,
-visual parity, or the 35-tic/60-display target.
-
-The gameplay/renderer candidate receipt is pinned to
-`0978112ef7b365f66b93770e1d98978e55b6d506`.
-Its [candidate receipt](../results/episode1-human-playthrough-candidate-20260927-r2.json)
-records a fresh 36-map smoke, 69 Episode 1/secret/finale transition checks, 97
-boss progression checks, retained 1,747-command E1M1-to-E1M2 session evidence,
-menu and session-screen checks, and serial/worker equality across Classic,
-Matrix/Katakana, and AnsiArt/Katakana. The fixed playtest build is
-`398022a8caa3b3e31d2a0d1c08642ecf6be7c1d0`; its [7.6.6 full-start receipt](../results/episode1-startup-runtime-compat-20260927.json)
-and music-reader checks cover the later runtime failure. The focused wall-order
-fixture passes 20 checks, including actor occlusion behind an untextured solid
-wall. A current-source comparison of eight E1M1 regression states no longer
-reproduces the historical 17-pixel candidate-only actor difference at tic
-105; broader scene parity remains open. The build is ready for Jason's single
-complete HMP Episode 1 playthrough; the route result is pending and must not
-be replaced by map-by-map requests or automated-route tuning.
-
-After the integer-column and integer-row wall-sampling changes, the nine-map
-smoke and focused transition, boss, menu/session, and synthetic input checks
-were rerun on the renderer source. The subsequent fixed-point plane mapping
-passes the same nine-map smoke, exact 16-process output checks for all three
-styles, and a real-host E1M1-to-E1M2 asset reload. It improves the adopted
-reference comparison but increases serial render medians and does not prove
-visible 60 FPS. The [updated readiness receipt](../results/episode1-playtest-readiness.json)
-and [playtest handoff](episode1-playtest.md) pin the source and preserve the
-single human route as one pending milestone. The later v6 actor-angle asset
-change also passes an E1M1-to-E1M2 reload with all sixteen workers preserved
-([receipt](../results/session-worker-sprite-rotation-classic.json)).
-
-While Jason's one Episode 1 route remains pending, continue independent M4
-fidelity work. A bounded eight-endpoint comparison over the existing E1M1
-route now exercises changing visible actor positions; HUD indices stay exact,
-and inspected differences remain broad wall/floor mismatches without an
-isolated actor defect. This is narrow evidence against the adopted PowerShell
-reference, not actor-parity qualification. Matching integer-column rays and
-integer-row wall texels to the adopted renderer reduced differing scene
-indices from 101,971 to 42,750 across
-six fixed E1M2/E1M3 views (58.08% fewer). Doom-style fixed-point plane mapping
-now reduces those 42,750 differences to 37,798 (11.58% further), with exact
-HUDs; 7.38–14.19% of scene indices still differ. Sixteen-worker output is
-exact across Classic, Matrix/Katakana, and AnsiArt/Katakana, and an actual
-headless E1M1-to-E1M2 host replay verifies asset reload. Single-process median
-render times rise 6–10%, so the change is a fidelity tradeoff rather than a
-performance claim. The [rendering-fidelity record](rendering-fidelity.md)
-links source-pinned comparisons, worker checks, map smoke, host replay, and
-timings. These idle-start images are not campaign evidence or original-exe
-proof. Horizontal actor/weapon patch sampling now follows the adopted
-renderer’s floored first column and fixed-point texture step: the direct pistol
-fixture matches at seven fractional offsets, and ten static E1M1/E1M2 views
-improve by 3.78% cumulatively. This does not establish original-executable
-parity. Perspective world-sprite sampling now matches the adopted renderer's
-fixed-point post bounds and row mask in 40 real-IWAD scale/origin cases, with
-zero differing pixels after an 838-pixel baseline. Asset format v5 first
-preserved post data across workers; format v6 also carries the Doom tangent-
-to-angle table for rotated actor frames. Fixed-point world-actor projection
-covers Doom-style depth, scale, screen bounds, lighting, and vertical texture
-origin; the same-state E1M1/E1M2 scene-index comparison improves by 538 across
-six views. The follow-up exact frame-selection port passes 393,408 synthetic
-rotation-boundary checks and 100,000 angle round trips, and all three 16-worker
-styles match serial pixels and encoded strips. The current 36-map smoke passes.
-The current-source E1M1 t315 moving-ceiling sweep has 7 differing scene
-indices at the actual six-unit opening and 4,166 at a counterfactual 68-unit
-opening. Both panels retain the same layout; this is scattered render
-disagreement in newly exposed surfaces, not a door or progression defect. See
-the [moving-ceiling comparison](rendering-fidelity.md#refresh-the-moving-ceiling-sweep-on-current-source-2026-09-28).
-Moving-actor visual comparisons, full actor occlusion parity, independent
-original-executable comparison, sustained 35-tic/60-display performance, and
-full-campaign music remain open. The current source and evidence pin are in the
-[Episode 1 handoff](episode1-playtest.md) and
-[readiness receipt](../results/episode1-playtest-readiness.json).
-
-The current Doom sky path now matches the adopted renderer's fixed-angle
-column selection and 128-row vertical wrap. Direct comparison passes 430,080
-sky samples at eight headings; current Classic, Matrix/Katakana, and
-AnsiArt/Katakana output remains exact across sixteen workers, and the 36-map
-smoke passes. The E1M1 start-view whole-frame comparison is unchanged, so the
-isolated sampler check is the direct evidence. This does not close original-
-executable fidelity, 35/60 pacing, or the one human Episode 1 route.
-
-"Best" means strongest demonstrated result for this particular combination of language boundary, terminal play, correctness, usability, and reproducible evidence. The study must publish losses and tradeoffs. A compiled source port may win performance, fidelity, portability, or ease of installation; that does not make it a PowerShell-engine implementation. Do not claim superiority over untested alternatives or present our adopted gameplay translation as original work.
+The focused R16 chainsaw, transition, boss, and menu-input evidence remains applicable because R17 changed renderer discovery and worker telemetry only. Physical keyboard play and Jason's complete HMP route remain pending: E1M1–E1M3, E1M3 secret exit through E1M9 and return to E1M4, E1M4–E1M8, defeat the E1M8 boss, and reach the Episode 1 finale. The R17 launch command, required IWAD/catalog, controls, limitations, and reporting steps are in [episode1-playtest.md](episode1-playtest.md). Do not split the human test into per-map requests. R17 is a local development handoff, not a new public release; the broader Ultimate Doom gates remain open.
 
 ## Baseline and acceptance
 
@@ -268,7 +129,7 @@ Do not postpone all performance work until M6. Measure after a feature adds subs
 
 - **M4 moving-ceiling current-source check:** the tic-315 E1M1 sweep under PowerShell 7.6.6 exactly matches the prior candidate's 10/7/410/4,166 scene-difference counts at ceiling heights 0/6/34/68 and retains an exact HUD. This narrows the stale-evidence gap but remains a comparison to the adapted PowerShell renderer, not an original Doom executable; no new source defect was isolated. See the [receipt](../results/moving-sector-e1m1-height-sweep-r9-20260929.json).
 
-- **Episode 1 human milestone:** R16 uses game source `3e0b6308bac9dc152f9ae78fb8f23f70623b36e2`. Under official portable PowerShell 7.6.6 x64, launcher preflight, current-source E1M1 audio startup/closure, and a fresh 36-map load/idle/render smoke pass. The 2 chainsaw checks, 69 campaign transitions, 97 boss checks, and 10 menu-input checks remain valid because game/session code did not change. These are not map completions; the E1M1/E1M2/E1M4 ordinary-input routes remain pinned at their original receipts. The one complete human HMP route remains pending through the E1M3 secret exit, E1M9 return to E1M4, and E1M8 finale. Use the [R16 candidate receipt](../results/episode1-current-human-candidate-20260929-r16.json) and [`episode1-playtest.md`](episode1-playtest.md); do not split the human run into map-by-map requests.
+- **Episode 1 human milestone:** R17 implementation commit 00405deebef6b4e8477c9c9316987b82fbc9064d passes a clean 543-file package check, 9/9 Episode 1 load/idle/render smoke, all-map 144-view stationary-discovery parity, and eight automap worker checks under official portable PowerShell 7.6.6. A four-second packaged E1M1 actual-device startup returns all 175,140 submitted frames and closes cleanly, with one queue-starvation observation after the final packet and no rebuffer resume. The 2 chainsaw, 69 transition, 97 boss, and 10 menu-input checks remain valid from R16 because R17 changes renderer discovery and telemetry, not gameplay/session code. These are not map completions. The one human HMP route remains pending through the E1M3 secret exit to E1M9, return to E1M4, and the E1M8 finale. Use the [R17 candidate receipt](../results/episode1-current-human-candidate-20260929-r17.json) and [playtest handoff](episode1-playtest.md); do not split the human run into map-by-map requests.
 - **M4 rendering fidelity:** missing-texture wall bands retain sprite depth, and the E1M1 BON1 leak now has focused wall-silhouette clipping. Lower sprite silhouettes now anchor to actor world Z, matching the adopted renderer; this did not change sampled E1M1 actor masks through tic 245. Reused per-context clip records and worker scratch initialization pass the 36-map smoke, 119 fuzz checks, 20 masked-wall checks, and serial/worker tests in Classic, Matrix, and AnsiArt. A separate input-tic-140 audit found 13 reference-only `BON2B0` mask pixels where FastRenderer's nearer background depth suppresses the farther sprite; there were zero candidate-only full-scene pixels in that actor region. This does not reproduce the reported through-wall view. Broad scene differences persist. The raised-floor screenshot replays as lower-sector Techpillar sprites with classic Doom draw-order overlap. The blue-armor sighting is a pre-placed Gibs decoration; a two-camera, sixteen-heading sweep compares the two documented piles in 64 isolated views. One candidate-only mask pixel is explained by the actor palette index matching the reference floor at that plane pixel; this does not reproduce a through-wall leak or the exact reported angle. Continue targeted comparisons, especially moving geometry, without claiming independent original-executable visual parity ([depth audit](../results/actor-occlusion-depth-audit-human-prefix-tic140-20260928.json); [Gibs sweep](../results/episode1-pool-gibs-angle-sweep-20260928.json)).
 - **M3 audio:** continue toward full-campaign continuity, audible quality and queue timing under renderer load. The Episode 1 loop catalog and finite D_INTRO path are prepared, but an actual-device queue-timing stall has been observed and the full campaign has not been heard through. The selected intermission background now warms during setup; four-episode Stats/Next images match their prior hashes, and isolated first-screen medians fall 7.84–8.88 ms after JIT/cache priming. This does not requalify audio continuity or the earlier single route. The IWAD map table references 27 distinct music-lump names with three byte-identical pairs (24 distinct payloads); Episode 1 covers nine. All D_E2M1–D_E2M9 are qualified, with eight new payloads because D_E2M5 duplicates D_E1M7. D_E3M1 and D_E3M4 are qualified aliases of D_E2M9 and D_E1M8. D_E3M2 is newly qualified with a two-period state recurrence proof and actual map/host checks. D_E3M3 now has a two-period recurrence qualification (488.714 seconds per period), matching 50-voice boundary states, and a verified E3M3 map/host path. D_E3M5 now has a two-period 150.857-second proof with 66 matching boundary voices and verified opening PCM. D_E3M6 has an 84-second complete-state proof, six reader/mixer checks, ten worker checks, fourteen map-selection checks, and a separate one-track local catalog. Its repeated actual-host trials still show intermittent packet-queue starvation, and doubling waveOut buffers did not stabilize the result. D_E3M7 adds a 105.6-second complete-state proof with 102 matching voices, an exact opening, focused worker/map-selection checks, and one clean two-second host startup. D_E3M8 adds a 96-second complete-state proof with 33 matching voices, an exact opening and focused tests; the two-second host returns 85,680 frames with a 1,260-frame canceled-tail upper bound. D_E3M9 adds a 549.457-second proof with 26 matching voices, an exact opening, focused tests and a clean two-second host start. Map-selection and short host checks now cover E2M4–E2M9 and E3M1–E3M9. These short checks do not qualify continuous campaign audio. D_E2M3–D_E2M9 each have separate one-track local catalogs; the prior 13-track E1/E2M1/E2M2 catalog is unchanged, and separate one-track D_E3M3, D_E3M5–D_E3M9 catalogs are qualified. All Episode 3 map-track names are qualified. D_BUNNY now has a 62-second complete-state loop proof and finale callback/playback checks; D_INTROA is finitely qualified but not selected by current Ultimate Doom code. Before long preparation, compare requested MUS hashes with existing qualifications; preserve alias map-name/catalog checks without repeating expensive output renders. Continue track-sized batches and keep offline costs visible.
 - **M3 full-campaign catalog:** a 30-entry aggregate catalog now covers all 27 map-track names plus D_INTER, D_VICTOR and D_BUNNY. A 126-check integration covers actual callbacks for all 36 maps and Episode 1/Episode 3 finale transitions. A PowerShell 7.6.6 two-second headless waveOut run opens all 30 reports and returns all 86,940 submitted frames. Runtime validation checks 10.131 GiB of playback payload instead of rereading another 2.958 GiB of third-period proof data; warm wall-time samples do not establish a launch-speed gain. One queue-empty/rebuffer observation followed the final packet, with no mid-run observation. This does not certify uninterrupted campaign audio, acoustics or loaded device timing. See [music preparation](music-preparation.md#preparing-a-local-music-catalog) and the [catalog integration evidence](../results/music-ultimate-doom-campaign-catalog-integration-20260928-r5.json).
