@@ -21,6 +21,7 @@ $loadingBoundary=$null;$loadingBoundaries=[Collections.Generic.List[object]]::ne
 $tickTimes=[Collections.Generic.List[double]]::new();$snapshotTimes=[Collections.Generic.List[double]]::new();$lateness=[Collections.Generic.List[double]]::new()
 $commandLog=[Collections.Generic.List[object]]::new()
 $transitions=[Collections.Generic.List[object]]::new();$uiTimes=[Collections.Generic.List[double]]::new();$generation=1;$screens=$null
+$script:rendererAssetMapKey=$null
 $checkpoints=[Collections.Generic.List[object]]::new();$checkpointTimes=[Collections.Generic.List[double]]::new();$extraCheckpoints=@{}
 $menuGraphics=$null;$menuPixels=$null;$menuScreen=0;$menuRevision=0;$episodeCount=4;$controlLog=[Collections.Generic.List[object]]::new()
 $saveOperations=[Collections.Generic.List[object]]::new()
@@ -90,7 +91,15 @@ function Publish-SimulationMapChange {
     $script:loadingBoundary.BeforeAssetsMilliseconds=([Diagnostics.Stopwatch]::GetTimestamp()-$script:loadingBoundary.StartQpc)*1000.0/[Diagnostics.Stopwatch]::Frequency
     if($null -ne $audio){$script:audioLoading=$true;$audio.Shared.Paused=$true;$audio.Shared.Epoch++}
     $view.Write(12,5);$script:generation++
-    $context=New-FastRenderContext $content $game.World;Write-GameRenderAssets $context $palette $Assets
+    $assetKey='{0}|{1}|{2}|{3}|{4}' -f $game.Options.GameMode,$game.Options.GameVersion,$game.Options.MissionPack,$game.Options.Episode,$game.Options.Map
+    $assetWatch=[Diagnostics.Stopwatch]::StartNew()
+    $assetsReused=$assetKey -eq $script:rendererAssetMapKey
+    if(-not $assetsReused){
+        $context=New-FastRenderContext $content $game.World;Write-GameRenderAssets $context $palette $Assets
+        $script:rendererAssetMapKey=$assetKey
+    }
+    $script:loadingBoundary.RendererAssetsReused=$assetsReused
+    $script:loadingBoundary.RendererAssetPreparationMilliseconds=$assetWatch.Elapsed.TotalMilliseconds
     $script:automapGraphics.HudKey=''
     if([int]$game.State -eq 0){$automapGraphics.Discovery.DiscoverMap($game.World.ConsolePlayer)}
     Record-SimulationTransition;Record-ReplayCheckpoint -Replace
@@ -120,6 +129,7 @@ try {
     $context=New-FastRenderContext $content $game.World;$palette=[int[][]]::new(256)
     for($i=0;$i -lt 256;$i++){$palette[$i]=@($content.Palette.Data[3*$i],$content.Palette.Data[3*$i+1],$content.Palette.Data[3*$i+2])}
     Write-GameRenderAssets $context $palette $Assets
+    $script:rendererAssetMapKey='{0}|{1}|{2}|{3}|{4}' -f $game.Options.GameMode,$game.Options.GameVersion,$game.Options.MissionPack,$game.Options.Episode,$game.Options.Map
     if(-not $StopAtLevelEnd){$screens=New-DoomSessionScreens $content $game.Options.Episode}
     $automapGraphics=New-DoomAutomapGraphics $content
     $automapGraphics.Discovery.DiscoverMap($game.World.ConsolePlayer)

@@ -49,7 +49,7 @@ $frameTimes=[Collections.Generic.List[double]]::new();$frameStats=[Collections.G
 $captures=[Collections.Generic.List[string]]::new();$nextCapture=$CaptureEveryTics;$snapshot=$null;$replayData=$null
 $interpolationTimes=[Collections.Generic.List[double]]::new();$simulationReport=$null
 $glyphProbe=$null
-$assetGeneration=1;$loadingStart=$null;$loadingMs=0.0;$loadingWasRunning=$false;$mapReloads=[Collections.Generic.List[object]]::new();$transitionDiscarded=0
+$assetGeneration=1;$loadingStart=$null;$loadingMs=0.0;$loadingWasRunning=$false;$mapReloads=[Collections.Generic.List[object]]::new();$rendererAssetsReused=0;$rendererAssetsReloaded=0;$transitionDiscarded=0
 $recordingPath=$null;$recordingError=$null;$replayVerification=$null;$sourceFingerprint=$null;$sourceMatches=$null
 $menu=$null;$pendingAction=$null;$sessionStart=$null;$sessionPausedMs=0.0;$sessionEvents=[Collections.Generic.List[object]]::new();$sessionScheduleData=@();$scheduleIndex=0;$controlIndex=0;$lastPresentedVersion=-1
 $compactMenuKey=''
@@ -153,12 +153,15 @@ try {
                 $needsClear=$true
             }
             if($status -eq 5){[Threading.Thread]::Sleep(10);continue}
-            Update-GameRenderAssets $pool
-            $snapshot=Read-DoomSimulationSnapshot $simulation $snapshot
-            $assetGeneration=$simulation.View.ReadInt32(24)
-            if($snapshot.Generation -ne $assetGeneration -or $snapshot.State -notin 0,1,2){throw 'Map assets and snapshot generations disagree.'}
+            [int]$nextAssetGeneration=$simulation.View.ReadInt32(24)
+            $nextSnapshot=Read-DoomSimulationSnapshot $simulation $snapshot
+            if($null -eq $nextSnapshot -or $nextSnapshot.Generation -ne $nextAssetGeneration -or $nextSnapshot.State -notin 0,1,2){throw 'Map assets and snapshot generations disagree.'}
+            $sameRendererMap=$null -ne $snapshot -and $snapshot.Episode -eq $nextSnapshot.Episode -and $snapshot.Map -eq $nextSnapshot.Map
+            if($sameRendererMap){$rendererAssetsReused++}
+            else{Update-GameRenderAssets $pool;$rendererAssetsReloaded++}
+            $snapshot=$nextSnapshot;$assetGeneration=$nextAssetGeneration
             $reloadEnd=$wallClock.Elapsed.TotalMilliseconds;$loadingMs+=$reloadEnd-$loadingStart
-            $mapReloads.Add(@{Generation=$assetGeneration;Episode=$snapshot.Episode;Map=$snapshot.Map;Tic=$snapshot.Tic;StartWallMs=$loadingStart;EndWallMs=$reloadEnd;WorkerPids=@($pool.Workers.Process.Id)})
+            $mapReloads.Add(@{Generation=$assetGeneration;Episode=$snapshot.Episode;Map=$snapshot.Map;Tic=$snapshot.Tic;StartWallMs=$loadingStart;EndWallMs=$reloadEnd;RendererAssetsReused=$sameRendererMap;WorkerPids=@($pool.Workers.Process.Id)})
             $loadingStart=$null
             $simulation.View.Write(40,[long]([Diagnostics.Stopwatch]::GetTimestamp()-$clock.ElapsedTicks))
             if($loadingWasRunning){$clock.Start()};$nextPresentation=$clock.Elapsed.TotalMilliseconds
@@ -385,7 +388,7 @@ finally {
         DurationSeconds=$clock.Elapsed.TotalSeconds;IssuedCommands=$tics;SimulationTics=$simTics;TicsPerSecond=$simTics/[Math]::Max(.001,$clock.Elapsed.TotalSeconds);
         MaximumPendingCommands=$commandWindow;CommandBackpressure=$commandPressure.ToArray();IncompleteCommandBackpressureStartQpc=$commandPressureStart;
         WallDurationSeconds=$wallClock.Elapsed.TotalSeconds;ViewportPausedSeconds=$pausedMs/1000;ViewportPauseCount=$pauseCount;
-        MapReloads=$mapReloads.ToArray();MapReloadPausedSeconds=$loadingMs/1000;DiscardedTransitionFrames=$transitionDiscarded;FinalAssetGeneration=$assetGeneration;
+        MapReloads=$mapReloads.ToArray();RendererAssetsReused=$rendererAssetsReused;RendererAssetsReloaded=$rendererAssetsReloaded;MapReloadPausedSeconds=$loadingMs/1000;DiscardedTransitionFrames=$transitionDiscarded;FinalAssetGeneration=$assetGeneration;
         CompletedUpdatesPerWallSecond=$completed/[Math]::Max(.001,$wallClock.Elapsed.TotalSeconds);DiscardedResizeFrames=$resizeDiscarded;
         Diagnostics=[bool]$Diagnostics;SyntheticViewport=[bool]$ViewportSchedule;ViewportChanges=$viewportChanges.ToArray();
         AnsiEncoding=if($Style -eq 'Classic'){$AnsiEncoding}else{'NotApplicable'};
