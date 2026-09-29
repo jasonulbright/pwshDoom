@@ -4610,3 +4610,13 @@ complete a human map route. E1M3's waypoint driver remains stopped after
 stalling without a reproduced defect. The complete HMP route through E1M9,
 back to E1M4, and through the finale is still pending; fresh R10 paths in the
 [playthrough handoff](episode1-playtest.md) preserve the earlier human attempt.
+
+## 2026-09-29 — Align the project summary with R10
+
+Update the article draft and README to distinguish the unchanged Preview.3
+package from the newer R10 development handoff. The article now identifies
+the R10 source pin, records the fresh nine-map Episode 1 smoke and five-second
+headless audio result with its near-shutdown starvation observation, and
+reports the Ansi256 same-frame byte reduction without treating it as a live
+speed gain. The human route and 35-tic/60-display goals remain explicitly
+unqualified. No game source changed.
