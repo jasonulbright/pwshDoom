@@ -41,7 +41,7 @@ Before it opens Windows Terminal, `Start-Doom.ps1` checks that every music catal
 
 The r3 audio receipt is pinned to implementation commit `41e167f` and records eight actual-waveOut continuity checks, a four-second E3M6 host run, and a save/load/new-game audio-worker run. The r6 receipt adds a current-source E1M3 sound-enabled host check along with map, route-transition, boss, and renderer-worker results. These bounded checks do not measure audible quality, physical device underruns, input-to-speaker latency, full-session continuity, or game/display pacing.
 
-The startup failure reported under PowerShell 7.6.6 came from overly strict runtime-version and line-ending checks in qualified music reports. The reader now accepts equivalent PowerShell text across LF/CRLF checkouts and compatible 7.6.x patch versions while still rejecting changed source text. The Preview.3 package passes 22 reader checks and starts the 11-track Episode 1 catalog in a two-second, sound-enabled headless run under PowerShell 7.6.5, advancing 69 tics with no host error or audio-backpressure sample. The five-second startup run is pinned to the earlier audio implementation commit `41e167f`; the r5 renderer change has separate all-map, three-style worker, and persistent-worker reload checks. Neither brief host run verifies full-session music continuity, audible quality, or playback under visible Terminal load.
+The retained failed session report records PowerShell 7.6.6 and zero tics. Jason ran the documented launch command with the 11-track catalog; every qualification in that catalog was generated under PowerShell 7.6.5. The reader at source commit `68a2033` required an exact PowerShell version string, so it rejected the first track, D_E1M1, before gameplay. Commit `398022a` changed the requirement to matching major/minor versions; later actual-device checks pass under 7.6.5 and 7.6.6. The separate LF/CRLF normalization fix came later and was not the cause of this startup failure. The session report itself did not record the catalog hash; the [root-cause receipt](../results/music-startup-failure-rootcause-20260927.json) pins the retained report, the documented catalog currently on disk, its qualifications, and the source/fix commits. The Preview.3 package passes 22 reader checks and starts the 11-track Episode 1 catalog in a two-second, sound-enabled headless run under PowerShell 7.6.5, advancing 69 tics with no host error or audio-backpressure sample. The five-second startup run is pinned to the earlier audio implementation commit `41e167f`; the r5 renderer change has separate all-map, three-style worker, and persistent-worker reload checks. Neither brief host run verifies full-session music continuity, audible quality, or playback under visible Terminal load.
 
 On a cold start, allow up to 60 seconds for simulation and music workers to initialize. Keep the 16 renderer workers. One r7 60-second headless run sampled a 3.77 GiB worker working set at shutdown; this is not a peak or time average. The Classic view needs at least 320 columns by 100 rows; the 5-point font and maximized window help fit it. If the viewport is short, enlarge the window or press Ctrl+- to reduce the font. Blank space around the centered image in a larger terminal is expected. The raw human input, session report, saves, and settings use fresh `r15` paths so earlier attempts remain intact.
 
@@ -56,9 +56,10 @@ or full-route continuity; see the [R15 receipt](../results/audio-e1m1-realtime-l
 The current catalog also passes `Play.ps1 -Check` and a three-second actual-
 device startup under PowerShell 7.6.5 and the official portable 7.6.6 x64
 release: both select D_E1M1, advance 104 tics, and close cleanly with no audio
-errors, queue-starvation observations, or rebuffer resumes. The original
-failed report and exact catalog snapshot are unavailable, so its cause remains
-unknown. See the [7.6.5 receipt](../results/current-music-startup-recheck-20260929.json)
+errors, queue-starvation observations, or rebuffer resumes. The retained
+failure report and the 7.6.5-to-7.6.6 exact-version mismatch are recorded in the
+[root-cause receipt](../results/music-startup-failure-rootcause-20260927.json);
+the session itself did not store the catalog hash. See the [7.6.5 receipt](../results/current-music-startup-recheck-20260929.json)
 and [7.6.6 receipt](../results/current-music-startup-recheck-7.6.6-20260929.json).
 
 ## Controls

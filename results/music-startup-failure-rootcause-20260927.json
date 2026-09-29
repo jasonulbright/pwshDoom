@@ -1,0 +1,47 @@
+{
+  "Version": 1,
+  "Name": "Episode 1 music-startup failure root-cause audit",
+  "RecordedUtc": "2026-09-29T15:14:59Z",
+  "Session": {
+    "Path": "local/episode1-human-session.json",
+    "Sha256": "538381DBEE33F57E71C846CA003EB6B606F07BA373BD5F043B191A83F7989BA7",
+    "FinishedUtc": "2026-09-27T10:18:11.1986202Z",
+    "PowerShell": "7.6.6",
+    "ExitReason": "Error",
+    "SimulationTics": 0,
+    "Error": "Music loop has no current successful qualification",
+    "ErrorLocation": "Open-DoomMusicLoopReader, src/MusicLoopReader.ps1:9"
+  },
+  "Catalog": {
+    "Path": "local/music-prepared-episode1.json",
+    "Sha256": "0E9C9542C75F4D5E2D7FC71E42FAFBB58F94321C3B8A49BA0C9AC5A93752EE58",
+    "TrackCount": 11,
+    "UsedBy": "The documented Episode 1 play command Jason said he ran.",
+    "SessionReportContainsCatalogPathOrHash": false
+  },
+  "Qualifications": [
+    {"Track":"D_E1M1","Path":"results/music-loop-e1m1-hour-bound.json","Sha256":"1D5A9D6D16E8CDCA74646D6AEF009CDB42EB59B87941B0EFE648F9D3A98C96CF","PowerShell":"7.6.5","Qualified":true},
+    {"Track":"D_E1M2","Path":"results/music-loop-e1m2-first.json","Sha256":"B2EBA683C99C515DE356A3D9E8E77824D775F59695F7CC14EC9F4D88B2D75518","PowerShell":"7.6.5","Qualified":true},
+    {"Track":"D_E1M3","Path":"results/music-loop-e1m3-prepared.json","Sha256":"DF75B2743048D05106F500317127BA462D2A2BB3F0EE1A63D9CA1E3D0F1697B2","PowerShell":"7.6.5","Qualified":true},
+    {"Track":"D_E1M4","Path":"local/music-preparation-e1m3/D_E1M4/qualified.json","Sha256":"24CD95F078930A352DF57C5E609D75C587D9F156786EBC7AABBDE64C7BA9630C","PowerShell":"7.6.5","Qualified":true},
+    {"Track":"D_E1M5","Path":"local/music-preparation-e1m5/D_E1M5/qualified.json","Sha256":"97A289967303C2A9343BC84AEA3D08D4E05759976BCDA25954A2ED865D94F2DB","PowerShell":"7.6.5","Qualified":true},
+    {"Track":"D_E1M6","Path":"local/music-preparation-episode1/D_E1M6/qualified.json","Sha256":"4888C222F5ABFB5AC0992CA9329E01CA79042D4A13327523BD4BC68C1B612989","PowerShell":"7.6.5","Qualified":true},
+    {"Track":"D_E1M7","Path":"local/music-preparation-episode1/D_E1M7/qualified.json","Sha256":"2C0DEBC273BBBD7F9B63AA88E062C39DBA0AF17D91731F313ECB6C69752FAA41","PowerShell":"7.6.5","Qualified":true},
+    {"Track":"D_E1M8","Path":"local/music-preparation-episode1/D_E1M8/qualified.json","Sha256":"F4C079000EC9267066940ED33C8E07FFB4A8FFE7A555AC5F9FC827BD3EA4B09E","PowerShell":"7.6.5","Qualified":true},
+    {"Track":"D_E1M9","Path":"local/music-preparation-e1m3/D_E1M9/qualified.json","Sha256":"6FE2388CEF624DC5B70F62A0DB73D4D7433280898B16FD29AB67779BE23F6F92","PowerShell":"7.6.5","Qualified":true},
+    {"Track":"D_INTER","Path":"results/music-loop-inter-first.json","Sha256":"084536988F462CD7C6718665FA53DCD6BB1009B3FCBCDD4556C50D51AC1B1778","PowerShell":"7.6.5","Qualified":true},
+    {"Track":"D_VICTOR","Path":"local/music-preparation-episode1/D_VICTOR/qualified.json","Sha256":"0E57B8C583690AEB3E09625278311837784D6F8E70ACDC79D5ACF058A0D8A4F5","PowerShell":"7.6.5","Qualified":true}
+  ],
+  "FailureSource": {
+    "Commit": "68a20339d2b5bb1d590506183e950829217834fa",
+    "RequiredRuntimeComparison": "$d.PowerShell -cne $PSVersionTable.PSVersion.ToString()",
+    "Result": "Every catalog qualification was 7.6.5; the game runtime was 7.6.6. The first sorted track, D_E1M1, was otherwise qualified, had repeating state/output, an exact reference result, and no synthesis sources changed. Exact patch-version matching was the sole failing qualification condition for that report."
+  },
+  "Fix": {
+    "Commit": "398022a8caa3b3e31d2a0d1c08642ecf6be7c1d0",
+    "Change": "Accept matching PowerShell major/minor versions across patch releases.",
+    "Timing": "Committed after the failed session; the current 7.6.5 and 7.6.6 catalog preflight and actual-device startup checks pass.",
+    "SeparateLaterFix": "Commit 8fe7600 additionally accepts equivalent LF/CRLF source text; line endings were not the cause established for this failure."
+  },
+  "ConfidenceAndLimits": "The retained session report does not embed the music-catalog path or hash. Jason reported running the documented Episode 1 command, and that command passes this catalog path; the catalog and qualification files predate the failure. This pins the failure mechanism and the documented catalog evidence without claiming the session report itself recorded those hashes. The short successful rechecks do not establish acoustic quality or full-session audio continuity."
+}

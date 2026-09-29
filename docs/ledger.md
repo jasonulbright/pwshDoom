@@ -4911,8 +4911,9 @@ the device without audio/cleanup error, clipped samples, queue-starvation
 observations, or rebuffer resumes. It submitted 139,860 frames and returned
 134,820; the remainder is the 5,040-frame shutdown-cancellation upper bound.
 The 7.6.6 archive was hash-checked against its upstream release digest. The
-original failed report and exact catalog snapshot are unavailable, so the
-historical cause remains unknown. The [7.6.6 receipt](../results/current-music-startup-recheck-7.6.6-20260929.json)
+I incorrectly recorded the original failed report as unavailable at this
+point; the later correction below recovers it and establishes the runtime-
+version cause. The [7.6.6 receipt](../results/current-music-startup-recheck-7.6.6-20260929.json)
 pins its archive, WAD, catalog, source, and raw-report hashes.
 
 ## 2026-09-29 — Requalify the Episode 1 handoff under PowerShell 7.6.6
@@ -4924,8 +4925,8 @@ ignored `local/` and verified against the upstream release SHA-256. The current
 WAD and 11-track catalog pass `Play.ps1 -Check`; a three-second actual-device
 E1M1 run selects D_E1M1 and closes without simulation/audio/cleanup error,
 queue-starvation observation, or rebuffer. The prior qualification failure
-does not reproduce, but the original failed report and exact catalog snapshot
-are unavailable, so its cause is unknown.
+does not reproduce under current source; the correction below establishes its
+historical runtime-version cause.
 
 Under this runtime, the E1M2 chainsaw action hits a real IWAD imp after four
 tics without the former angle-comparison exception. All 69 campaign transition
@@ -4950,3 +4951,26 @@ and its p95 is 1.11% worse. The geometry median changes by only 0.54%. The
 small result does not establish a useful pacing improvement, so the renderer
 was restored without a code change. See the [performance record](performance.md#reject-per-row-plane-boundary-scans--september-29-2026)
 and [receipt](../results/rejected-plane-boundary-scan-20260929.json).
+
+## 2026-09-29 — Correct the Episode 1 music-startup diagnosis
+
+An earlier R15 audit incorrectly said the failed startup report was unavailable
+and left its cause unknown. The report was present at
+`local/episode1-human-session.json`; I had failed to inspect it. It records
+PowerShell 7.6.6, zero simulation tics, and the generic music-qualification
+exception. The documented 11-track catalog on disk maps to reports qualified
+under 7.6.5. At the source snapshot in effect before `398022a`,
+`Open-DoomMusicLoopReader` compared the full runtime version string, so the
+7.6.5 D_E1M1 report was rejected by 7.6.6 even though its qualification flags,
+state recurrence, exact reference comparison, and source-stability check all
+passed. Commit `398022a` changed the gate to major/minor compatibility. A later
+LF/CRLF hash-normalization change is separate and did not cause this failure.
+
+The failed session report does not embed the catalog path/hash; Jason said he
+ran the documented command, which uses `local/music-prepared-episode1.json`.
+The [root-cause receipt](../results/music-startup-failure-rootcause-20260927.json)
+pins that retained report, the currently available documented catalog and
+qualification hashes, and both source commits while preserving that limit.
+Current 7.6.5/7.6.6 preflight and actual-device startup checks pass. This
+correction supersedes the earlier statements in the R15 entries that the cause
+was unknown and the report unavailable.

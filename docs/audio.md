@@ -307,9 +307,13 @@ audio, cleanup, queue-starvation, or rebuffer errors. The 5,040-frame tail is
 the shutdown-cancellation upper bound. The same preflight and three-second
 actual-device run also pass under the official portable PowerShell 7.6.6 x64
 release, selecting D_E1M1 with 120 render updates, no audio errors/starvation/
-rebuffer, and a clean device close. The original failed report and its exact
-catalog snapshot are no longer available, so the cause of that earlier failure
-is not established. These are short startup checks, not evidence of audible
-quality or full-session playback. See the [7.6.5 receipt](../results/current-music-startup-recheck-20260929.json),
+rebuffer, and a clean device close. A later audit recovered the zero-tic failed
+session report: the documented catalog's qualifications are 7.6.5, while the
+failed game ran under 7.6.6. The then-current reader required exact version
+equality; commit `398022a` relaxed this to the same major/minor line. The
+session report does not embed the catalog hash, so the [root-cause receipt](../results/music-startup-failure-rootcause-20260927.json)
+states that limit and pins the files now available. The later LF/CRLF fix was
+separate. These short startup checks are not evidence of audible quality or
+full-session playback. See the [7.6.5 receipt](../results/current-music-startup-recheck-20260929.json),
 [7.6.6 receipt](../results/current-music-startup-recheck-7.6.6-20260929.json),
 which pins the ignored raw report hash.
