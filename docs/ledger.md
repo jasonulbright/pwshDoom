@@ -5075,3 +5075,17 @@ source-touching commits. The current range adds three more result files and
 expands the documentation diff to 31 files (+7,676/−97). Thus the change in
 commit count since the R16 source pin is documentation and recorded evidence,
 not additional engine code.
+
+## 2026-09-29 — Recheck the full campaign music catalog on R16
+
+Under official portable PowerShell 7.6.6, `Play.ps1 -Check` reports `Ready`
+for the installed Ultimate Doom IWAD and the local 30-entry music catalog. A
+six-second R16 host run with realtime waveOut and 16 render workers selects
+D_E1M1, returns all 265,860 submitted audio frames, completes the bounded
+shutdown drain, and closes without simulation/audio/cleanup errors,
+queue-starvation observations, or rebuffering. It reaches 34.81 simulation
+tics/sec and 23.82 headless render updates/sec. These are not displayed frames;
+the short run exercises only the D_E1M1 playback path, not all tracks or
+campaign-length acoustics/continuity. See the [audio preparation record]
+(music-preparation.md#current-source-full-catalog-runtime-check--september-29-2026)
+and [portable receipt](../results/music-campaign-catalog-host-r16-20260929.json).

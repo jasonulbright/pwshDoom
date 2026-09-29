@@ -1,0 +1,57 @@
+{
+  "Format": "pwshDoom.UltimateDoomMusicCatalogHostR16",
+  "FinishedUtc": "2026-09-29T17:53:18.79866Z",
+  "RepositoryCommit": "94453aeb16179fe8c21230f8cd43e073f7625364",
+  "GameSourceCommit": "3e0b6308bac9dc152f9ae78fb8f23f70623b36e2",
+  "Runtime": "7.6.6",
+  "IWadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "Catalog": {
+    "Path": "local/music-prepared-ultimate-doom-loops-20260928.json",
+    "Sha256": "24073D082C9CD89C7931521DDA567F76261CE8F67CBC6EB465730999EC27A2BF",
+    "QualifiedLoopEntries": 30,
+    "LauncherPreflight": "Ready",
+    "LauncherPreflightMeaning": "All 30 qualification metadata entries match PowerShell 7.6.6 and current synthesis sources; the catalog is for the installed 36-map Ultimate Doom IWAD."
+  },
+  "Host": {
+    "Episode": 1,
+    "Map": 1,
+    "Skill": 3,
+    "Workers": 16,
+    "Headless": true,
+    "RealtimeAudio": true,
+    "RequestedSeconds": 6.0039639,
+    "ExitReason": "Duration",
+    "Error": null,
+    "SimulationTics": 209,
+    "TicsPerSecond": 34.81033588493096,
+    "CompletedRenderUpdates": 143,
+    "RenderUpdatesPerSecond": 23.81759823705802
+  },
+  "Audio": {
+    "SelectedTrack": "D_E1M1",
+    "SubmittedFrames": 265860,
+    "ReturnedCompletedFrames": 265860,
+    "DeviceClosed": true,
+    "QueueStarvationObservations": 0,
+    "RebufferCount": 0,
+    "RebufferResumes": [],
+    "UnconsumedPackets": 0,
+    "CleanupError": null,
+    "ShutdownDrain": {
+      "RemainingFrames": 0,
+      "TimedOut": false,
+      "CompletedFramesDuringWait": 5040,
+      "Completed": true,
+      "Attempted": true,
+      "CancelledFramesUpperBound": 0,
+      "PendingFramesAtStop": 5040,
+      "SkippedReason": null,
+      "WaitMilliseconds": 83.9784
+    }
+  },
+  "RawReport": {
+    "Path": "local/music-campaign-catalog-host-r16-20260929.json",
+    "Sha256": "70B6CF6C467D173E6C5DD1FE44C558E5FDC19A99324F35A1DF08FCCE02B77D31"
+  },
+  "Meaning": "Current-source, six-second headless actual-device startup using the 30-entry campaign catalog. The worker selected and played D_E1M1 only. This does not verify every catalog track in runtime, full-campaign continuity, acoustic quality, or displayed-frame rate; completed headless render updates are not display presentations."
+}

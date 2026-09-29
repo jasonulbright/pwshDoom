@@ -6,6 +6,23 @@ The Episode 1 catalog is local and ready for that playthrough. The 30-entry camp
 
 Portable receipts: [aggregate preparation and catalog](../results/music-preparation-ultimate-doom-loops-20260928.json), [all-map callback and playback integration](../results/music-ultimate-doom-campaign-catalog-integration-20260928-r5.json), [19 reader/playback checks](../results/music-playback-independent-period-open-20260928-r2.json), [audio worker regression checks](../results/music-worker-independent-period-open-20260928.json), [two-second full-catalog host startup](../results/music-host-full-campaign-catalog-optimized-20260928.json), and [120-second loop-boundary host run](../results/music-host-e1m1-loop-seam-20260928.json). The local 30-track catalog, IWAD, soundfont and generated PCM are not in Git. These checks do not establish uninterrupted full-campaign audio, acoustic quality or visible presentation rate.
 
+### Current-source full-catalog runtime check — September 29, 2026
+
+The official portable PowerShell 7.6.6 launcher preflight accepts the local
+30-entry campaign catalog with the installed 36-map Ultimate Doom IWAD. A
+six-second current-source R16 headless host run then selected D_E1M1 on the
+actual waveOut device, submitted and returned all 265,860 audio frames, and
+closed with no queue-starvation, rebuffer, unconsumed-packet, simulation, or
+cleanup errors. Normal shutdown drained the final 5,040 queued frames in
+83.98 ms.
+
+The run advanced 209 tics (34.81/sec) and 143 headless render updates
+(23.82/sec). It proves only the selected D_E1M1 path using the full-catalog
+configuration; it does not play all 30 entries, establish campaign-length
+continuity or acoustic quality, or measure displayed frames. The source-pinned
+[receipt](../results/music-campaign-catalog-host-r16-20260929.json) indexes the
+ignored raw host report and its hash.
+
 ### D_E3M3 complete-state recurrence and host checks (September 28)
 
 D_E3M3 is now qualified and published in a separate one-track local catalog; the supplied Episode 1 catalog was used only as an exact-payload alias lookup source. Its loop period is 488.714 seconds (21,552,300 frames at 44,100 Hz); the complete two-period proof covers 977.429 seconds and 43,104,600 rendered frames. The 50-voice normalized state hash matches at both boundaries. The independent eight-second opening and the reader/mixer loop-seam check match exactly. This proof relies on complete state recurrence, not an independently rendered third period.
