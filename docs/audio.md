@@ -218,3 +218,22 @@ compatibility on the patch version that previously failed; it does not
 qualify full-session or campaign continuity, visible Terminal performance,
 or the 35 Hz simulation / 60 displayed-update goals. The 176 headless render
 updates are not displayed frames.
+
+## Music qualification error diagnostics (2026-09-29)
+
+The first reported PowerShell 7.6.6 launch failed before the game began because
+the selected music report was not accepted as current. The earlier reader
+reported only that no current qualification existed, so it did not identify
+which qualification field caused the rejection or how to recover. The reader
+now names the track and report, lists failed qualification/runtime/source
+checks, and directs the user to requalify that track and update the catalog.
+Changed synthesis source files receive the same stale-report explanation. The
+integrity and runtime gates remain enforced; this change makes them actionable.
+
+The 40-check synthetic reader suite covers successful reads and rejection
+messages for runtime mismatch, unqualified or incomplete reports, failed
+recurrence/reference evidence, source changes during qualification, and stale
+synthesis source. The current real D_E1M1 report also opens under PowerShell
+7.6.6 and releases both locked payloads cleanly. This verifies reader behavior,
+not playback or acoustic quality. See the
+[portable test receipt](../results/music-loop-reader-actionable-rejections-20260929.json).

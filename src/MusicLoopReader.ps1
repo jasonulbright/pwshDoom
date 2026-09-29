@@ -18,12 +18,31 @@ function Open-DoomMusicLoopReader {
     param([string]$Report)
     if(-not [BitConverter]::IsLittleEndian){throw 'Music loop payloads require little endian float64.'}
     if(([IO.FileInfo]::new($Report)).Length -gt 16MB){throw 'Loop report exceeds size bound.'}
-    $r=[IO.File]::ReadAllText($Report)|ConvertFrom-Json -AsHashtable;$d=$r.Details
+    $r=[IO.File]::ReadAllText($Report)|ConvertFrom-Json -AsHashtable
+    if($r -isnot [Collections.IDictionary] -or -not $r.ContainsKey('Details') -or $r.Details -isnot [Collections.IDictionary]){
+        throw "Music loop report '$Report' is missing its qualification details. Re-run scripts/Prepare-DoomMusic.ps1 and update the catalog entry."
+    }
+    $d=$r.Details
+    $recordedPowerShell=if($d.ContainsKey('PowerShell')){[string]$d['PowerShell']}else{''}
     $qualifiedRuntime=$null
-    $runtimeCompatible=[version]::TryParse([string]$d.PowerShell,[ref]$qualifiedRuntime)
+    $runtimeCompatible=[version]::TryParse($recordedPowerShell,[ref]$qualifiedRuntime)
     if($runtimeCompatible){$runtimeCompatible=$qualifiedRuntime.Major -eq $PSVersionTable.PSVersion.Major -and $qualifiedRuntime.Minor -eq $PSVersionTable.PSVersion.Minor}
+    $rejectionReasons=[Collections.Generic.List[string]]::new()
+    if($r.ContainsKey('Error') -and $r.Error){$rejectionReasons.Add("qualifier recorded an error: $($r.Error)")}
+    if(-not $d.ContainsKey('Qualified')){$rejectionReasons.Add('report is missing its Qualified status')}
+    elseif(-not $d.Qualified){$rejectionReasons.Add('report is marked unqualified')}
+    if(-not $d.ContainsKey('NormalizedStateRepeats')){$rejectionReasons.Add('report is missing its loop-state recurrence result')}
+    elseif(-not $d.NormalizedStateRepeats){$rejectionReasons.Add('normalized loop state did not repeat')}
+    if(-not $d.ContainsKey('Reference') -or $d.Reference -isnot [Collections.IDictionary] -or -not $d.Reference.ContainsKey('Exact') -or -not $d.Reference.Exact){$rejectionReasons.Add('the independent reference comparison is not exact')}
+    if(-not $d.ContainsKey('SourcesChangedDuringRun')){$rejectionReasons.Add('report is missing its source-stability result')}
+    elseif(@($d.SourcesChangedDuringRun).Count -ne 0){$rejectionReasons.Add("$(@($d.SourcesChangedDuringRun).Count) synthesis source file(s) changed during qualification")}
+    if(-not $d.ContainsKey('PowerShell')){$rejectionReasons.Add('report is missing its PowerShell runtime')}
+    elseif(-not $runtimeCompatible){$rejectionReasons.Add("qualification uses PowerShell $recordedPowerShell; this runtime is $($PSVersionTable.PSVersion), and matching major/minor versions are required")}
+    if($rejectionReasons.Count -gt 0){
+        $trackName=if($d.ContainsKey('Track') -and $d.Track){[string]$d.Track}else{[IO.Path]::GetFileName($Report)}
+        throw "Music loop qualification '$trackName' ($Report) is not usable: $($rejectionReasons -join '; '). Re-run scripts/Prepare-DoomMusic.ps1 for this track and update the catalog entry."
+    }
     $mode=if($d.ContainsKey('EvidenceMode')){$d['EvidenceMode']}else{'IndependentStateAndOutput'} # Existing three-period receipt.
-    if($r.Error -or -not $d.Qualified -or -not $d.NormalizedStateRepeats -or -not $d.Reference.Exact -or $d.SourcesChangedDuringRun.Count -ne 0 -or -not $runtimeCompatible){throw "Music loop has no current successful qualification for PowerShell $($PSVersionTable.PSVersion.Major).$($PSVersionTable.PSVersion.Minor).x."}
     if($d.PeriodFrames -le 0 -or $d.PeriodFrames -gt 52920000 -or $d.PeriodFrames%1260 -ne 0 -or $d.LoopStartFrame -ne $d.PeriodFrames -or $d.LoopFrames -ne $d.PeriodFrames){throw 'Unsupported music loop layout.'}
     if($mode -ceq 'CompleteStateRecurrence'){
         if($d.Periods.Count -ne 2 -or $d.Snapshots.Count -ne 3 -or $d.NextPeriodFloatOutputRepeats -ne $null -or $d.Snapshots[1].StateSha256 -cne $d.Snapshots[2].StateSha256){throw 'State-recurrence evidence is inconsistent.'}
@@ -34,7 +53,10 @@ function Open-DoomMusicLoopReader {
     if($r.Sources.Count -ne $names.Count){throw 'Music loop source set differs.'}
     foreach($name in $names){
         $entry=@($r.Sources|Where-Object {$_.Path -ceq "src/$name.ps1"})
-        if($entry.Count -ne 1 -or -not (Get-DoomMusicSourceHashes "$PSScriptRoot/$name.ps1").Contains([string]$entry[0].Sha256)){throw "Music loop source changed: $name"}
+        if($entry.Count -ne 1 -or -not (Get-DoomMusicSourceHashes "$PSScriptRoot/$name.ps1").Contains([string]$entry[0].Sha256)){
+            $trackName=if($d.ContainsKey('Track') -and $d.Track){[string]$d.Track}else{[IO.Path]::GetFileName($Report)}
+            throw "Music loop qualification '$trackName' ($Report) is stale: synthesis source $name changed. Re-run scripts/Prepare-DoomMusic.ps1 for this track and update the catalog entry."
+        }
     }
     $handles=[Collections.Generic.List[object]]::new()
     try{

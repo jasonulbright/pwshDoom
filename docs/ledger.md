@@ -4488,3 +4488,20 @@ removed the optional patch encoder and retained full-frame output. The paired
 capture is a single workload and one wrapper timeout occurred after the game
 reached `ReplayEnd`; details and hashes are in the
 [portable receipt](../results/rejected-ansi-incremental-20260929.json).
+
+## 2026-09-29 — Explain music qualification startup failures
+
+The first PowerShell 7.6.6 Episode 1 launch failed before the first tic because
+the music reader rejected its qualification report. The old exception named
+only the broad “no current successful qualification” condition, leaving the
+specific report/runtime cause unclear. I updated the reader to report the
+track, report path, failed qualification checks, and requalification/catalog
+repair step; changed synthesis-source reports now identify the stale module.
+The validation gates still reject those reports.
+
+The focused synthetic reader suite passes 40 checks, including combined
+rejection reasons and the recommended recovery. The current real D_E1M1 report
+opens under PowerShell 7.6.6 and releases both payload locks. These checks do
+not claim playback quality or full-campaign continuity. Details are in the
+[audio investigation](audio.md#music-qualification-error-diagnostics-2026-09-29)
+and [test receipt](../results/music-loop-reader-actionable-rejections-20260929.json).

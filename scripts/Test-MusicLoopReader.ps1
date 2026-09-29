@@ -7,7 +7,11 @@ if(Test-Path $Output){throw 'Use a fresh report path.'}
 $checks=[Collections.Generic.List[object]]::new();$failure=$null;$reader=$null
 $dir=[IO.Path]::GetFullPath("$PSScriptRoot/../local/loop-reader-test-$([guid]::NewGuid().ToString('N'))");$null=[IO.Directory]::CreateDirectory($dir)
 function Check([string]$Name,[bool]$Passed){$checks.Add(@{Name=$Name;Passed=$Passed});if(-not $Passed){throw $Name}}
-function Reject([string]$Name,[scriptblock]$Action){$rejected=$false;try{& $Action}catch{$rejected=$true};Check $Name $rejected}
+function Reject([string]$Name,[scriptblock]$Action,[string[]]$MessageMustInclude=@()){
+    $message=$null;try{& $Action}catch{$message=$_.Exception.Message}
+    Check $Name ($null -ne $message)
+    foreach($fragment in $MessageMustInclude){Check "$Name explains $fragment" ($message.Contains($fragment))}
+}
 try{
     # Trusted synthetic receipt exercises the reader only; it is NOT loop qualification evidence.
     $periods=@(for($i=0;$i -lt 2;$i++){
@@ -31,7 +35,10 @@ try{
     Close-DoomMusicLoopReader $compatibleReader
     $receipt.Details.PowerShell=([version]::new($qualifiedVersion.Major,$qualifiedVersion.Minor+1,0)).ToString()
     $incompatiblePath=Join-Path $dir 'different-minor-receipt.json';$receipt|ConvertTo-Json -Depth 8|Set-Content $incompatiblePath
-    Reject 'Different PowerShell minor line is rejected' {$r=Open-DoomMusicLoopReader $incompatiblePath;Close-DoomMusicLoopReader $r}
+    Reject 'Different PowerShell minor line is rejected with a requalification hint' {$r=Open-DoomMusicLoopReader $incompatiblePath;Close-DoomMusicLoopReader $r} @("PowerShell $($receipt.Details.PowerShell)",'Re-run scripts/Prepare-DoomMusic.ps1')
+    $recordedVersion=$receipt.Details.PowerShell;$receipt.Details.Remove('PowerShell');$missingVersionPath=Join-Path $dir 'missing-runtime-receipt.json';$receipt|ConvertTo-Json -Depth 8|Set-Content $missingVersionPath
+    Reject 'Report without a PowerShell version is rejected with a preparation hint' {$r=Open-DoomMusicLoopReader $missingVersionPath;Close-DoomMusicLoopReader $r} @('report is missing its PowerShell runtime','Re-run scripts/Prepare-DoomMusic.ps1')
+    $receipt.Details.PowerShell=$recordedVersion
     $receipt.Details.PowerShell=([version]::new($qualifiedVersion.Major+1,$qualifiedVersion.Minor,0)).ToString()
     $incompatiblePath=Join-Path $dir 'different-major-receipt.json';$receipt|ConvertTo-Json -Depth 8|Set-Content $incompatiblePath
     Reject 'Different PowerShell major line is rejected' {$r=Open-DoomMusicLoopReader $incompatiblePath;Close-DoomMusicLoopReader $r}
@@ -54,7 +61,13 @@ try{
     $reader.Frame=-1;Reject 'Negative cursor rejected' {$null=Read-DoomMusicLoop $reader 1};$reader.Frame=[long]::MaxValue;Reject 'Cursor overflow rejected' {$null=Read-DoomMusicLoop $reader 1}
     Close-DoomMusicLoopReader $reader;Reject 'Closed reader rejected' {$null=Read-DoomMusicLoop $reader 1};Close-DoomMusicLoopReader $reader;$reader=$null
     $f=[IO.File]::Open($periods[1].Path,[IO.FileMode]::Open,[IO.FileAccess]::Write,[IO.FileShare]::None);$f.Dispose();Check 'Close releases playback file handles' $true
-    $receipt.Details.Qualified=$false;$receipt|ConvertTo-Json -Depth 8|Set-Content $path;Reject 'Unqualified report rejected' {$r=Open-DoomMusicLoopReader $path;Close-DoomMusicLoopReader $r};$receipt.Details.Qualified=$true
+    $receipt.Details.Qualified=$false;$receipt|ConvertTo-Json -Depth 8|Set-Content $path;Reject 'Unqualified report rejected with its reason and requalification hint' {$r=Open-DoomMusicLoopReader $path;Close-DoomMusicLoopReader $r} @('report is marked unqualified','Re-run scripts/Prepare-DoomMusic.ps1');$receipt.Details.Qualified=$true
+    $detailsMissingPath=Join-Path $dir 'missing-details-receipt.json';@{Format='pwshDoom.MusicLoopQualification'}|ConvertTo-Json|Set-Content $detailsMissingPath
+    Reject 'Report without qualification details is rejected with a preparation hint' {$r=Open-DoomMusicLoopReader $detailsMissingPath;Close-DoomMusicLoopReader $r} @('missing its qualification details','Re-run scripts/Prepare-DoomMusic.ps1')
+    $receipt.Error='synthetic qualification error';$receipt.Details.NormalizedStateRepeats=$false;$receipt.Details.Reference.Exact=$false;$receipt.Details.SourcesChangedDuringRun=@('src/MusicSynth.ps1')
+    $invalidPath=Join-Path $dir 'multiple-reasons-receipt.json';$receipt|ConvertTo-Json -Depth 8|Set-Content $invalidPath
+    Reject 'Qualification rejection reports all failed evidence checks together' {$r=Open-DoomMusicLoopReader $invalidPath;Close-DoomMusicLoopReader $r} @('qualifier recorded an error: synthetic qualification error','normalized loop state did not repeat','independent reference comparison is not exact','1 synthesis source file(s) changed during qualification','Re-run scripts/Prepare-DoomMusic.ps1')
+    $receipt.Error=$null;$receipt.Details.NormalizedStateRepeats=$true;$receipt.Details.Reference.Exact=$true;$receipt.Details.SourcesChangedDuringRun=@()
     $sourceText=[IO.File]::ReadAllText("$PSScriptRoot/../src/MusScore.ps1")
     $sourceLf=[regex]::Replace($sourceText,"`r`n|`r|`n","`n")
     $crlfBytes=[Text.UTF8Encoding]::new($false).GetBytes($sourceLf.Replace("`n","`r`n"))
@@ -64,7 +77,7 @@ try{
     Close-DoomMusicLoopReader $lineEndingReader
     $changedBytes=[Text.UTF8Encoding]::new($false).GetBytes($sourceLf+"# altered content`n")
     $receipt.Sources[0].Sha256=[Convert]::ToHexString([Security.Cryptography.SHA256]::HashData($changedBytes));$receipt|ConvertTo-Json -Depth 8|Set-Content $path
-    Reject 'Changed synthesis source rejected' {$r=Open-DoomMusicLoopReader $path;Close-DoomMusicLoopReader $r}
+    Reject 'Changed synthesis source rejected with a stale-report hint' {$r=Open-DoomMusicLoopReader $path;Close-DoomMusicLoopReader $r} @('synthesis source MusScore changed','Re-run scripts/Prepare-DoomMusic.ps1')
     $receipt.Sources[0].Sha256=(Get-FileHash "$PSScriptRoot/../src/MusScore.ps1").Hash
     $receipt.Details.Snapshots[2].StateSha256='different';$receipt|ConvertTo-Json -Depth 8|Set-Content $path;Reject 'Inconsistent state evidence rejected' {$r=Open-DoomMusicLoopReader $path;Close-DoomMusicLoopReader $r};$receipt.Details.Snapshots[2].StateSha256='A'*64
     $receipt|ConvertTo-Json -Depth 8|Set-Content $path
@@ -80,7 +93,7 @@ try{
     $f=[IO.File]::Open($periods[0].Path,[IO.FileMode]::Open,[IO.FileAccess]::Write,[IO.FileShare]::None);$f.Dispose();Check 'Failed open releases earlier handles' $true
 }catch{$failure=$_.ToString()+"`n"+$_.ScriptStackTrace;throw}finally{
     if($reader){Close-DoomMusicLoopReader $reader}
-    @{Error=$failure;Checks=$checks.ToArray();FixtureDirectory=$dir;SourceSha256=(Get-FileHash "$PSScriptRoot/../src/MusicLoopReader.ps1").Hash;ScriptSha256=(Get-FileHash $PSCommandPath).Hash;
+    @{FinishedUtc=[datetime]::UtcNow.ToString('o');PowerShell=$PSVersionTable.PSVersion.ToString();Error=$failure;Checks=$checks.ToArray();FixtureDirectory=$dir;SourceSha256=(Get-FileHash "$PSScriptRoot/../src/MusicLoopReader.ps1").Hash;ScriptSha256=(Get-FileHash $PSCommandPath).Hash;
       Meaning='Reader-only synthetic receipt and samples: intro/loop mapping, pause, long positions, bounded pages, file locking and rejection/cleanup. The fabricated receipt is test data and proves no real synthesizer loop.'}|ConvertTo-Json -Depth 6|Set-Content $Output
 }
 "PASS: $($checks.Count) loop-reader checks."
