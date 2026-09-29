@@ -689,3 +689,33 @@ sequential stripes without simulation, audio, Terminal output, or real worker
 concurrency; they are not live-frame or display-rate evidence. The
 [rejection receipt](../results/rejected-direct-plane-lookup-20260929.json)
 indexes all ten raw reports and their hashes.
+
+## Output-clock audio under E3M6 renderer load — September 28, 2026
+
+At current source commit dd3309e8c4cd9fb3d9c39edc85a44348e97c4449,
+PowerShell 7.6.5 ran HMP E3M6 for a requested 30 seconds with 16 PowerShell
+render workers, the full local Ultimate Doom music catalog, and the integrated
+device-clock audio path. The actual output device selected D_E3M6. This was
+one deterministic scripted, single-map headless stress sample using cyclic movement, turning, fire, and use; no Terminal presentation or campaign route was
+measured.
+
+The host advanced 719 tics in 23.244 active seconds (30.932 tics/sec), while
+the wall interval was 30.015 seconds. A same-map generation reload occurred around tic 420–421; its trigger is not established. The run reported 6.769 seconds in map reload,
+which is excluded from the active clock. Completed render updates were 35.106
+per active second and 27.186 per wall second. These are headless host updates,
+not Terminal writes or displayed frames.
+
+The audio worker mixed 824 blocks, including 104 output-clock fill blocks for
+gaps between simulation packets. It consumed 720 packets and reported zero
+rebuffer resumes, zero queue-starvation observations, and zero unconsumed
+packets. It submitted 1,038,240 frames; 1,033,200 were complete at shutdown,
+with 5,040 queued frames as the cancellation upper bound. Three clipped samples
+were counted. The device and music reader closed without an error.
+
+The scripted pattern is a repeatable stress input, not a human-playtest substitute. This result shows that the output-clock change avoided the earlier measured
+queue starvation during this one E3M6 load sample. It does not establish
+uninterrupted audible output, acoustic quality, effect latency, full-campaign
+continuity, or 35-tic/60-display pacing. The simulation remained below 35 tics
+per active second. See the [audio discussion](audio.md#e3m6-music-under-current-renderer-load-2026-09-28)
+and [portable receipt](../results/e3m6-realtime-audio-loaded-20260928.json);
+the ignored raw report is local/current-source-e3m6-realtime-audio-30s-w16-20260928.json.

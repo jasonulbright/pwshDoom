@@ -43,6 +43,13 @@ and 16 renderer workers; the corresponding completed render-job rates were
 not count Terminal or monitor presentations. It changes no campaign status;
 see the [worker-count comparison](../results/worker-count-host-render-comparison-20260928.json).
 
+A later 30-second output-clock audio follow-up on E3M6 selected D_E3M6 from
+the full local catalog and used 16 render workers. It reported zero rebuffer
+resumes and zero queue-starvation observations, with all simulation packets
+consumed and clean device shutdown. This single deterministic scripted headless sample
+does not complete the map, verify a campaign transition, or establish audible
+continuity; see the [audio-load receipt](../results/e3m6-realtime-audio-loaded-20260928.json).
+
 A later worker-mask span-lookup prototype also matched the serial E1M1 renderer
 for five views in each style at 12 workers and for a 16-worker Classic fuzz
 fixture. It was reverted after the longer dispatch comparison showed no speed

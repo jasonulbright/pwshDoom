@@ -144,6 +144,25 @@ The corrected controls run (`results/audio-host-controls.json`) pauses at twelve
 
 Next: broaden menu/save/load/new-game/viewport timing qualification, reduce queue delay without hiding starvation, measure audible latency, add music with documented synthesis/instrument provenance, and record actual audiovisual output. The recorder can launch with `-Sound`, but its existing `-an` video path does not capture playback audio; footage is explicitly silent video until loopback capture is implemented.
 
+## E3M6 music under current renderer load (2026-09-28)
+
+A 30-second current-source, 16-worker headless host used the actual Windows
+audio device, -RealtimeAudio, and the 30-report Ultimate Doom music catalog.
+It selected D_E3M6, produced 104 device-clock fill blocks alongside 720
+simulation packets, and reported zero rebuffer resumes or queue-starvation
+observations. The audio device closed without worker or cleanup error; no
+packets remained unconsumed. Of 1,038,240 submitted frames, 1,033,200 were
+reported complete at shutdown, leaving a 5,040-frame canceled-tail upper
+bound. The mixer counted three clipped samples.
+
+This is one deterministic scripted, single-map headless stress sample, not a campaign route, audible
+quality review, latency measurement, or proof against physical-device underruns.
+The built-in input cycles forward movement, turning, periodic fire, and use. One same-map generation reload occurred around tic 420–421; its trigger is not isolated. The game advanced 719 tics in 23.244 active seconds (30.93 tics/sec); the
+30.015-second wall interval also included 6.769 seconds of map reload. The
+headless update count is not Terminal presentation. See the
+[source-pinned receipt](../results/e3m6-realtime-audio-loaded-20260928.json)
+and raw report under ignored local/.
+
 ## Reproducing the bounded experiments
 
 Run in PowerShell 7.4 or newer from `C:\projects\pwshDoom`, using fresh report filenames:

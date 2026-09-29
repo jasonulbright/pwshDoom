@@ -1,0 +1,121 @@
+{
+  "Schema": "pwshDoom.realtime-audio-load.v1",
+  "RecordedUtc": "2026-09-29T03:15:02.6720715Z",
+  "SourceCommit": "dd3309e8c4cd9fb3d9c39edc85a44348e97c4449",
+  "SourceFiles": [
+    {
+      "Path": "scripts/Invoke-Doom.ps1",
+      "GitBlob": "b91e36c1e7be92071e23992ee286107ef16881c1",
+      "WorkingTreeSha256": "FD45F8E3DFC2E758A78C54B39D9BC1954B17B0C4C036C224DF37B2D1E04186A2"
+    },
+    {
+      "Path": "src/GameProcesses.ps1",
+      "GitBlob": "25bb89d13874001ebc46c5a624b6a321de80d179",
+      "WorkingTreeSha256": "36C28AE3946C3BBA210FE184309DCF23455E870D695631CDBF207FE7FFA8BDAB"
+    },
+    {
+      "Path": "src/SimulationProcess.ps1",
+      "GitBlob": "9a68337af78b8e3ffee9d6333dc1f263345d71b6",
+      "WorkingTreeSha256": "0B94B1C673877A0BD95BE2E64AB91833D06018E7CF829E425D32C4C89F0C9F8D"
+    },
+    {
+      "Path": "src/SnapshotTransport.ps1",
+      "GitBlob": "419de7fa8a90d544820b0b817f6e85c149e8078e",
+      "WorkingTreeSha256": "E88163E3D970A02F5D81B9EEDDEB9F7B1E0FE2A90AFCF4019733D423D69E8F8A"
+    },
+    {
+      "Path": "src/FastRenderer.ps1",
+      "GitBlob": "67666573b1838adcd9bda5a658e458e3d0ec10a5",
+      "WorkingTreeSha256": "05E1A848F6F92B6913970F7440258813760BE850C308CBBF495F79774F69F54F"
+    },
+    {
+      "Path": "src/AudioRunspace.ps1",
+      "GitBlob": "934659c4d25b94c5f737462822bad25a745fcccf",
+      "WorkingTreeSha256": "A733772166D771AC09E0DE26E192E0C9173EDC9A2C3298E4912CA2C150FDFA7D"
+    },
+    {
+      "Path": "scripts/Invoke-AudioWorker.ps1",
+      "GitBlob": "8cc87cd7bc9f35506d8a7c41c9ed4a835cf3dd39",
+      "WorkingTreeSha256": "96C1C2AFB05D6B26910BF1771E2EC1448BF7FBAB8860419DE2E04F710D51B734"
+    },
+    {
+      "Path": "src/MusicPlayback.ps1",
+      "GitBlob": "17c161f6c960abeb8b677068171b9872a2224517",
+      "WorkingTreeSha256": "C4B6FBE2C44AFB3FE2E13CEF968AD3EEAE7DD8FA85B993321FFDED5321B0A71F"
+    },
+    {
+      "Path": "src/MusicLoopReader.ps1",
+      "GitBlob": "cb4d4b524f64adf69819461af35c196f312a43e3",
+      "WorkingTreeSha256": "3DD9DA660A8EB2BCC0A2053686C68B9EAC740CE0A13FE047BBA72CE0277A95A1"
+    }
+  ],
+  "Environment": {
+    "PowerShell": "7.6.5",
+    "Architecture": "SeparateSimulation"
+  },
+  "Configuration": {
+    "Wad": "Steam Ultimate Doom DOOM.WAD",
+    "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+    "MusicCatalog": "local/music-prepared-ultimate-doom-loops-20260928.json",
+    "MusicCatalogSha256": "24073D082C9CD89C7931521DDA567F76261CE8F67CBC6EB465730999EC27A2BF",
+    "QualifiedMusicReportsLoaded": 30,
+    "Episode": 3,
+    "Map": 6,
+    "Skill": 3,
+    "Workers": 16,
+    "Headless": true,
+    "Scripted": true,
+    "RealtimeAudio": true,
+    "RequestedSeconds": 30,
+    "Command": "pwsh -NoProfile -File .\\scripts\\Invoke-Doom.ps1 -Wad <Steam Ultimate Doom DOOM.WAD> -Headless -Scripted -Episode 3 -Map 6 -Skill 3 -Workers 16 -Seconds 30 -MusicCatalog .\\local\\music-prepared-ultimate-doom-loops-20260928.json -RealtimeAudio",
+    "ScriptedInput": "Built-in deterministic pattern cycles forward movement, turning, periodic primary fire, and use"
+  },
+  "Outcome": {
+    "ExitReason": "Duration",
+    "Error": null,
+    "WallSeconds": 30.0149996,
+    "ActiveSeconds": 23.2441809,
+    "MapReloadPausedSeconds": 6.7686895000000025,
+    "SimulationTics": 719,
+    "ActiveTicsPerSecond": 30.932473081897243,
+    "WallTicsPerSecond": 23.955,
+    "CompletedFrames": 816,
+    "ActiveCompletedUpdatesPerSecond": 35.10556054913512,
+    "WallCompletedUpdatesPerSecond": 27.186407158905975,
+    "SameMapReloadBoundaryTic": 420,
+    "NextGenerationAtTic": 421,
+    "ReloadTriggerIsolated": false
+  },
+  "Audio": {
+    "SelectedMusic": "D_E3M6",
+    "MusicClosed": true,
+    "MusicFrames": 1038240,
+    "AudioRealtime": true,
+    "SimulationPackets": 720,
+    "MixedBlocks": 824,
+    "GeneratedRealtimeBlocks": 104,
+    "MaximumQueuedPackets": 4,
+    "RebufferCount": 0,
+    "QueueStarvationObservations": 0,
+    "SubmittedFrames": 1038240,
+    "ReturnedCompletedFrames": 1033200,
+    "CancelledQueuedFramesUpperBound": 5040,
+    "ClippedSamples": 3,
+    "DeviceClosed": true,
+    "Error": null,
+    "CleanupError": null,
+    "UnconsumedPackets": 0
+  },
+  "RawReport": {
+    "Path": "local/current-source-e3m6-realtime-audio-30s-w16-20260928.json",
+    "Sha256": "70547D767C452C92ED620DAD0C0126688C369D5C776088F65DD6F9800E911F99"
+  },
+  "Limitations": [
+    "One deterministic scripted, single-map, 30-second headless stress sample; the built-in input cycles movement, turning, fire, and use and is not a campaign route or human-playtest substitute.",
+    "A same-map generation reload occurred around tic 420–421; the triggering event was not isolated.",
+    "No active rebuffer or queue-starvation observations were reported, but this does not prove uninterrupted audible output or exclude physical-device underruns.",
+    "The run used the integrated Windows audio device but did not measure acoustic latency or sound quality.",
+    "The active simulation rate was below 35 tics/sec; headless host updates are not Terminal writes or displayed frames.",
+    "The 6.769-second map-reload pause is excluded from the active clock; wall-clock rates are also reported."
+  ]
+}

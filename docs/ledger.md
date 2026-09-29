@@ -4310,3 +4310,28 @@ the earlier precommit measurement workspace recorded
 blob SHA-256 is `D9CE1FBD6DAA19B8D8BB2612203D729925406CE8BB02E99BB0A40D2CD72C36BF`.
 Git reports no content diff; these raw hashes differ because of checkout
 newline conversion. See the [supplementary validation receipt](../results/episode1-r7-windows-checkout-validation-20260929.json).
+## 2026-09-29 — Check output-clock audio with full E3M6 renderer load
+
+A current-source HMP E3M6 host ran for 30 wall-clock seconds with 16 renderer
+workers, the integrated Windows audio device, -RealtimeAudio, and all 30
+qualified music reports in the local Ultimate Doom catalog. The output-clock
+path selected D_E3M6, generated 104 fill blocks beyond 720 simulation
+packets, and reported no rebuffer resumes, queue-starvation observations,
+unconsumed packets, worker errors, or cleanup errors. The device closed
+cleanly. It submitted 1,038,240 frames; 1,033,200 completed before shutdown,
+leaving a 5,040-frame canceled-tail upper bound. Three clipped samples were
+counted.
+
+A same-map generation reload occurred around tic 420–421; the trigger is not established. Performance: the host advanced 719 tics in 23.244 active seconds
+(30.932 tics/sec); the wall interval was 30.015 seconds and included a
+6.769-second map-reload pause. It completed 35.106 render updates per active
+second, or 27.186 per wall second. These are headless counts, not Terminal
+writes or displayed frames. This was one deterministic scripted, single-map stress sample using cyclic movement, turning, fire, and use; it does not prove
+audible continuity, acoustic quality, a completed map, or full-campaign audio.
+
+The run used committed source dd3309e8c4cd9fb3d9c39edc85a44348e97c4449.
+The [portable receipt](../results/e3m6-realtime-audio-loaded-20260928.json)
+pins source and input hashes; the raw report remains in ignored local/.
+See the [audio findings](audio.md#e3m6-music-under-current-renderer-load-2026-09-28),
+[performance results](performance.md#output-clock-audio-under-e3m6-renderer-load--september-28-2026),
+and [campaign matrix](campaign-matrix.md).
