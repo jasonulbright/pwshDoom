@@ -5,6 +5,8 @@
 ### Changed
 
 - Interactive audio now advances active music and effect voices from the PowerShell output clock across short simulation-packet gaps. Pause, map resets, and explicit drains still stop that fill; deterministic headless runs remain packet-exact by default. This reduces software queue starvation under transient load but does not claim measured acoustic latency or uninterrupted full-campaign playback.
+- Dense renderer snapshots now cache fixed-point actor projections for workers, and each worker skips sprites outside its output stripe. Serial/worker pixels remain exact in exercised Classic, Matrix/Katakana and AnsiArt/Katakana scenes. E3M6 sequential worker CPU improved in two reversed-order pairs; E1M3 timing remained inconclusive, and this does not qualify 60 Hz presentation.
+- Packed per-map BSP geometry reduces repeated object lookups in the PowerShell renderer, and engine-bundle publication is atomic before workers load it.
 
 ## 0.1.0-preview.3 — 2026-09-28
 
