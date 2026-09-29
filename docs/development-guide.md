@@ -78,6 +78,7 @@ The gameplay core is an attributed GPL PowerShell translation of ManagedDoom, wi
 
 ```powershell
 pwsh -NoProfile -File scripts/Test-GameActions.ps1
+pwsh -NoProfile -File scripts/Test-DifficultyBehavior.ps1 -Wad 'D:\Games\DOOM.WAD'
 pwsh -NoProfile -File scripts/Test-E1M1Route.ps1
 pwsh -NoProfile -File scripts/Test-RenderPartitions.ps1
 pwsh -NoProfile -File scripts/Compare-WorldSpriteVerticalSampling.ps1 -Output .\local\my-world-sprite-sampling.json

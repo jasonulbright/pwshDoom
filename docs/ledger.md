@@ -1,5 +1,11 @@
 # Investigation ledger
 
+## 2026-09-29 — Focused Ultimate Doom skill behavior matrix
+
+The roadmap requires difficulty-dependent gameplay behavior to be separately qualified, while existing campaign and transition coverage primarily exercises Medium. Added a real-IWAD check for all five settings and separate Medium-skill Fast Monsters / Respawn Monsters options. On the installed Steam DOOM.WAD (SHA-256 6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F), all 37 checks pass under PowerShell 7.6.5 at source commit 14feeab05c09cec4315f8060d2852b42008b2356. E1M1 kill counts are 4/4/6/29/29 from Baby through Nightmare; the expected counts are computed from the IWAD THINGS flags and monster kill flags. Ten damage costs five health only on Baby. One shell pickup gives eight shells on Baby/Nightmare and four on other skills. Demon run-state duration is one tic on Nightmare or Fast Monsters, otherwise two; Imp fireball speed doubles from 10 to 20 map units/tic under Nightmare or Fast Monsters. Imp startup reaction delay is zero on Nightmare and its normal eight tics otherwise. The 420-tic respawn boundary passes on Nightmare and with Respawn Monsters; Fast Monsters alone does not enable respawning.
+
+The first respawn fixture incorrectly made a still-solid living actor eligible, then treated the removed thinker as active until the next thinker-list cleanup. The final check kills a real spawned actor at a clear IWAD spawn location and asserts the engine's Removed state, which is the expected deferred-unlink behavior. This was a fixture correction, not an engine defect. The [portable receipt](../results/difficulty-behavior-r1-20260929.json) records all actual/expected values; [test source](../scripts/Test-DifficultyBehavior.ps1) reproduces them. Scope is focused E1M1 mechanics only; no map routes, every skill/map combination, or human playthrough are claimed.
+
 ## 2026-09-10 — Study established
 
 User authorized a feasibility study, documentation as work proceeds, and rendering experiments in `C:\projects\pwshDoom`. The earlier workspace was an empty Git repository under OneDrive. A new repository was initialized at the requested location; no existing project files were moved or deleted.

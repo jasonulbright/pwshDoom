@@ -6,6 +6,8 @@ Updated 2026-09-29. Release sequence remains Ultimate Doom, Doom II, then a MyHo
 
 Source/IWAD hashes and detailed results: [results/campaign-smoke-lineflags-fixed.json](../results/campaign-smoke-lineflags-fixed.json).
 
+**Skill behavior: 37/37 focused checks passed** on the installed Ultimate Doom IWAD under PowerShell 7.6.5. E1M1 kill totals match the skill flags decoded directly from its THINGS lump: Baby 4, Easy 4, Medium 6, Hard 29, Nightmare 29. Isolated real-player checks confirm Baby halves incoming damage and doubles shell pickup ammo; Nightmare doubles shell ammo, halves demon run-state tics, doubles Imp fireball speed, starts Imps with zero reaction delay, and enables timed monster respawn. The separate Fast Monsters option changes monster cadence/projectile speed but does not enable respawning; Respawn Monsters does. A deterministic thinker-boundary fixture qualifies the 420-tic respawn threshold. These are mechanic checks, not full routes at each difficulty or all-map difficulty certification. See the [37-check receipt](../results/difficulty-behavior-r1-20260929.json) and [test source](../scripts/Test-DifficultyBehavior.ps1).
+
 The preceding r5 Episode 1 human-playthrough candidate was implementation commit
 `ab73eba07135fe0f834554be12aae279c151c314`. The broad candidate receipt and
 geometry/cache supplement retain the 36/36 map smoke and 69 transition

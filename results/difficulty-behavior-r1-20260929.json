@@ -1,0 +1,462 @@
+{
+  "Format": "pwshDoom.DifficultyBehaviorQualification",
+  "Version": 1,
+  "RecordedUtc": "2026-09-29T13:38:43.3466521Z",
+  "SourceCommit": "14feeab05c09cec4315f8060d2852b42008b2356",
+  "PowerShellVersion": "7.6.5",
+  "EngineSourceTreeClean": true,
+  "ScriptSha256": "6E2B06F4919A9815EE992530CA761966D62795ACF8E0CB416B50D879B4293A91",
+  "WadPath": "DOOM.WAD",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "Map": "E1M1",
+  "Scope": "Five-skill real-IWAD checks for map thing filtering, player damage, shell ammo, fast-monster timing, Imp reaction/projectile behavior, and deterministic respawn thresholds. Medium-skill option overrides are checked independently.",
+  "Passed": true,
+  "CheckCount": 37,
+  "Checks": [
+    {
+      "Name": "Baby E1M1 skill-filtered kill count",
+      "Actual": 4,
+      "Expected": 4,
+      "Passed": true,
+      "Evidence": {
+        "SkillThingFlagsParsedIndependently": true,
+        "RawMapThingCount": 143
+      }
+    },
+    {
+      "Name": "Baby incoming player damage",
+      "Actual": 95,
+      "Expected": 95,
+      "Passed": true,
+      "Evidence": {
+        "AppliedDamage": 10,
+        "Armor": 0,
+        "GodMode": false
+      }
+    },
+    {
+      "Name": "Baby shell ammo amount",
+      "Actual": 8,
+      "Expected": 8,
+      "Passed": true,
+      "Evidence": {
+        "PickupAmount": 1,
+        "ShellClipSize": 4
+      }
+    },
+    {
+      "Name": "Baby fast-monster state cadence",
+      "Actual": 2,
+      "Expected": 2,
+      "Passed": true,
+      "Evidence": {
+        "State": "SargRun1",
+        "FastMonstersOption": false
+      }
+    },
+    {
+      "Name": "Baby Imp projectile speed",
+      "Actual": 655360,
+      "Expected": 655360,
+      "Passed": true,
+      "Evidence": {
+        "BaseSpeed": 655360,
+        "FastMonstersOption": false,
+        "Projectile": "Imp fireball"
+      }
+    },
+    {
+      "Name": "Baby Imp initial reaction time",
+      "Actual": 8,
+      "Expected": 8,
+      "Passed": true,
+      "Evidence": {
+        "Monster": "Imp",
+        "ReferenceReactionTime": 8
+      }
+    },
+    {
+      "Name": "Easy E1M1 skill-filtered kill count",
+      "Actual": 4,
+      "Expected": 4,
+      "Passed": true,
+      "Evidence": {
+        "SkillThingFlagsParsedIndependently": true,
+        "RawMapThingCount": 143
+      }
+    },
+    {
+      "Name": "Easy incoming player damage",
+      "Actual": 90,
+      "Expected": 90,
+      "Passed": true,
+      "Evidence": {
+        "AppliedDamage": 10,
+        "Armor": 0,
+        "GodMode": false
+      }
+    },
+    {
+      "Name": "Easy shell ammo amount",
+      "Actual": 4,
+      "Expected": 4,
+      "Passed": true,
+      "Evidence": {
+        "PickupAmount": 1,
+        "ShellClipSize": 4
+      }
+    },
+    {
+      "Name": "Easy fast-monster state cadence",
+      "Actual": 2,
+      "Expected": 2,
+      "Passed": true,
+      "Evidence": {
+        "State": "SargRun1",
+        "FastMonstersOption": false
+      }
+    },
+    {
+      "Name": "Easy Imp projectile speed",
+      "Actual": 655360,
+      "Expected": 655360,
+      "Passed": true,
+      "Evidence": {
+        "BaseSpeed": 655360,
+        "FastMonstersOption": false,
+        "Projectile": "Imp fireball"
+      }
+    },
+    {
+      "Name": "Easy Imp initial reaction time",
+      "Actual": 8,
+      "Expected": 8,
+      "Passed": true,
+      "Evidence": {
+        "Monster": "Imp",
+        "ReferenceReactionTime": 8
+      }
+    },
+    {
+      "Name": "Medium E1M1 skill-filtered kill count",
+      "Actual": 6,
+      "Expected": 6,
+      "Passed": true,
+      "Evidence": {
+        "SkillThingFlagsParsedIndependently": true,
+        "RawMapThingCount": 143
+      }
+    },
+    {
+      "Name": "Medium incoming player damage",
+      "Actual": 90,
+      "Expected": 90,
+      "Passed": true,
+      "Evidence": {
+        "AppliedDamage": 10,
+        "Armor": 0,
+        "GodMode": false
+      }
+    },
+    {
+      "Name": "Medium shell ammo amount",
+      "Actual": 4,
+      "Expected": 4,
+      "Passed": true,
+      "Evidence": {
+        "PickupAmount": 1,
+        "ShellClipSize": 4
+      }
+    },
+    {
+      "Name": "Medium fast-monster state cadence",
+      "Actual": 2,
+      "Expected": 2,
+      "Passed": true,
+      "Evidence": {
+        "State": "SargRun1",
+        "FastMonstersOption": false
+      }
+    },
+    {
+      "Name": "Medium Imp projectile speed",
+      "Actual": 655360,
+      "Expected": 655360,
+      "Passed": true,
+      "Evidence": {
+        "BaseSpeed": 655360,
+        "FastMonstersOption": false,
+        "Projectile": "Imp fireball"
+      }
+    },
+    {
+      "Name": "Medium Imp initial reaction time",
+      "Actual": 8,
+      "Expected": 8,
+      "Passed": true,
+      "Evidence": {
+        "Monster": "Imp",
+        "ReferenceReactionTime": 8
+      }
+    },
+    {
+      "Name": "Hard E1M1 skill-filtered kill count",
+      "Actual": 29,
+      "Expected": 29,
+      "Passed": true,
+      "Evidence": {
+        "SkillThingFlagsParsedIndependently": true,
+        "RawMapThingCount": 143
+      }
+    },
+    {
+      "Name": "Hard incoming player damage",
+      "Actual": 90,
+      "Expected": 90,
+      "Passed": true,
+      "Evidence": {
+        "AppliedDamage": 10,
+        "Armor": 0,
+        "GodMode": false
+      }
+    },
+    {
+      "Name": "Hard shell ammo amount",
+      "Actual": 4,
+      "Expected": 4,
+      "Passed": true,
+      "Evidence": {
+        "PickupAmount": 1,
+        "ShellClipSize": 4
+      }
+    },
+    {
+      "Name": "Hard fast-monster state cadence",
+      "Actual": 2,
+      "Expected": 2,
+      "Passed": true,
+      "Evidence": {
+        "State": "SargRun1",
+        "FastMonstersOption": false
+      }
+    },
+    {
+      "Name": "Hard Imp projectile speed",
+      "Actual": 655360,
+      "Expected": 655360,
+      "Passed": true,
+      "Evidence": {
+        "BaseSpeed": 655360,
+        "FastMonstersOption": false,
+        "Projectile": "Imp fireball"
+      }
+    },
+    {
+      "Name": "Hard Imp initial reaction time",
+      "Actual": 8,
+      "Expected": 8,
+      "Passed": true,
+      "Evidence": {
+        "Monster": "Imp",
+        "ReferenceReactionTime": 8
+      }
+    },
+    {
+      "Name": "Nightmare E1M1 skill-filtered kill count",
+      "Actual": 29,
+      "Expected": 29,
+      "Passed": true,
+      "Evidence": {
+        "SkillThingFlagsParsedIndependently": true,
+        "RawMapThingCount": 143
+      }
+    },
+    {
+      "Name": "Nightmare incoming player damage",
+      "Actual": 90,
+      "Expected": 90,
+      "Passed": true,
+      "Evidence": {
+        "AppliedDamage": 10,
+        "Armor": 0,
+        "GodMode": false
+      }
+    },
+    {
+      "Name": "Nightmare shell ammo amount",
+      "Actual": 8,
+      "Expected": 8,
+      "Passed": true,
+      "Evidence": {
+        "PickupAmount": 1,
+        "ShellClipSize": 4
+      }
+    },
+    {
+      "Name": "Nightmare fast-monster state cadence",
+      "Actual": 1,
+      "Expected": 1,
+      "Passed": true,
+      "Evidence": {
+        "State": "SargRun1",
+        "FastMonstersOption": false
+      }
+    },
+    {
+      "Name": "Nightmare Imp projectile speed",
+      "Actual": 1310720,
+      "Expected": 1310720,
+      "Passed": true,
+      "Evidence": {
+        "BaseSpeed": 655360,
+        "FastMonstersOption": false,
+        "Projectile": "Imp fireball"
+      }
+    },
+    {
+      "Name": "Nightmare Imp initial reaction time",
+      "Actual": 0,
+      "Expected": 0,
+      "Passed": true,
+      "Evidence": {
+        "Monster": "Imp",
+        "ReferenceReactionTime": 8
+      }
+    },
+    {
+      "Name": "Fast Monsters option halves demon run tics",
+      "Actual": 1,
+      "Expected": 1,
+      "Passed": true,
+      "Evidence": {
+        "Skill": "Medium",
+        "State": "SargRun1"
+      }
+    },
+    {
+      "Name": "Fast Monsters option doubles Imp projectile speed",
+      "Actual": 1310720,
+      "Expected": 1310720,
+      "Passed": true,
+      "Evidence": {
+        "Skill": "Medium",
+        "BaseSpeed": 655360
+      }
+    },
+    {
+      "Name": "Nightmare first respawn tick",
+      "Actual": {
+        "ReplacementAtSpawn": false,
+        "OldActorActive": true,
+        "MoveCount": 419
+      },
+      "Expected": {
+        "ReplacementAtSpawn": false,
+        "OldActorActive": true,
+        "MoveCount": 419
+      },
+      "Passed": true,
+      "Evidence": {
+        "InitialMoveCount": 418,
+        "RespawnMonsters": false,
+        "LevelTime": 32,
+        "SpawnSpotClearAfterDeath": true,
+        "RandomIndexSeededForImmediateSuccess": true,
+        "FastMonsters": false,
+        "Skill": "Nightmare"
+      }
+    },
+    {
+      "Name": "Nightmare respawn threshold tick",
+      "Actual": {
+        "ReplacementAtSpawn": true,
+        "OldActorActive": false,
+        "MoveCount": 420
+      },
+      "Expected": {
+        "ReplacementAtSpawn": true,
+        "OldActorActive": false,
+        "MoveCount": 420
+      },
+      "Passed": true,
+      "Evidence": {
+        "ThresholdTics": 420,
+        "SpawnSpotClearAfterDeath": true,
+        "RespawnMonsters": false,
+        "RandomIndexSeededForImmediateSuccess": true,
+        "FastMonsters": false,
+        "Skill": "Nightmare"
+      }
+    },
+    {
+      "Name": "Medium first respawn tick",
+      "Actual": {
+        "ReplacementAtSpawn": false,
+        "OldActorActive": true,
+        "MoveCount": 419
+      },
+      "Expected": {
+        "ReplacementAtSpawn": false,
+        "OldActorActive": true,
+        "MoveCount": 419
+      },
+      "Passed": true,
+      "Evidence": {
+        "InitialMoveCount": 419,
+        "RespawnMonsters": false,
+        "LevelTime": 32,
+        "SpawnSpotClearAfterDeath": true,
+        "RandomIndexSeededForImmediateSuccess": true,
+        "FastMonsters": false,
+        "Skill": "Medium"
+      }
+    },
+    {
+      "Name": "Fast Monsters option first respawn tick",
+      "Actual": {
+        "ReplacementAtSpawn": false,
+        "OldActorActive": true,
+        "MoveCount": 419
+      },
+      "Expected": {
+        "ReplacementAtSpawn": false,
+        "OldActorActive": true,
+        "MoveCount": 419
+      },
+      "Passed": true,
+      "Evidence": {
+        "InitialMoveCount": 419,
+        "RespawnMonsters": false,
+        "LevelTime": 32,
+        "SpawnSpotClearAfterDeath": true,
+        "RandomIndexSeededForImmediateSuccess": true,
+        "FastMonsters": true,
+        "Skill": "Medium"
+      }
+    },
+    {
+      "Name": "Respawn Monsters option first respawn tick",
+      "Actual": {
+        "ReplacementAtSpawn": true,
+        "OldActorActive": false,
+        "MoveCount": 420
+      },
+      "Expected": {
+        "ReplacementAtSpawn": true,
+        "OldActorActive": false,
+        "MoveCount": 420
+      },
+      "Passed": true,
+      "Evidence": {
+        "InitialMoveCount": 419,
+        "RespawnMonsters": true,
+        "LevelTime": 32,
+        "SpawnSpotClearAfterDeath": true,
+        "RandomIndexSeededForImmediateSuccess": true,
+        "FastMonsters": false,
+        "Skill": "Medium"
+      }
+    }
+  ],
+  "Meaning": "Focused component behavior qualification only. It does not claim complete campaign routes, every skill/map combination, or a human playthrough."
+}
