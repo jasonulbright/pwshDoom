@@ -546,22 +546,24 @@ function Invoke-FastRender {
             [long]$xFracWide=[long]$viewXData+(([long]$rayCos[$x]*[long]$lengthData) -shr 16)
             [long]$negViewY=-[long]$viewYData
             [long]$yFracWide=$negViewY-(([long]$raySin[$x]*[long]$lengthData) -shr 16)
-            # Flats repeat every 64 map units. Sampling reads only the low 22
-            # bits of each 16.16 world coordinate, so carry that wrapped texture
-            # phase directly instead of normalizing a signed 32-bit value on
-            # every pixel. This is equivalent because 2^22 divides 2^32.
-            [int]$xFrac=[long]$xFracWide -band 0x3FFFFF
-            [int]$yFrac=[long]$yFracWide -band 0x3FFFFF
+            # Flats repeat every 64 map units. The texel lookup consumes only
+            # coordinate bits 16..21 for X and 10..15 for Y. Carry the fixed
+            # coordinates in Int64 and select those bits at lookup time rather
+            # than masking the wrapped 22-bit phase after every pixel. Doom's
+            # signed 32-bit wrap cannot change these selected bits because the
+            # flat period (2^22) divides the fixed-point word size (2^32).
+            [long]$xFrac=$xFracWide
+            [long]$yFrac=$yFracWide
             do {
-                [int]$u=$xFrac -shr 16;[int]$v=($yFrac -shr 10) -band 4032
+                [int]$u=($xFrac -shr 16) -band 63;[int]$v=($yFrac -shr 10) -band 4032
                 [int]$p=$row+$x
                 # Planes are background surfaces in Doom's renderer. They fill
                 # uncovered pixels but do not occlude world sprites or masked
                 # walls drawn later; the depth buffer remains for opaque walls
                 # and already-composited sprites only.
                 $pixels[$p]=$colors[$flatData[$v+$u]]
-                $xFrac=([long]$xFrac+[long]$stepX) -band 0x3FFFFF
-                $yFrac=([long]$yFrac+[long]$stepY) -band 0x3FFFFF
+                $xFrac+=$stepX
+                $yFrac+=$stepY
                 $x++
             } while($x -lt $planeSpanEnd -and $planes[$row+$x] -eq $id)
         }
