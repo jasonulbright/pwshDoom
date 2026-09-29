@@ -14,6 +14,7 @@ $volumeChanges=[Collections.Generic.List[object]]::new();$mutedPackets=0
 $rebufferStart=-1.0;$rebufferFirstPacket=-1.0;$rebufferResumes=[Collections.Generic.List[object]]::new()
 $Shared.Rebuffering=$false;$Shared.RebufferCount=0;$Shared.RebufferResumeCount=0
 $Shared.DrainTarget=$null;$Shared.DrainReady=$false;$drains=[Collections.Generic.List[object]]::new()
+$shutdownDrain=@{Attempted=$false;Completed=$false;TimedOut=$false;SkippedReason=$null;WaitMilliseconds=0.0;PendingFramesAtStop=0L;CompletedFramesDuringWait=0L;RemainingFrames=0L;CancelledFramesUpperBound=0L}
 try{
     $music=New-DoomMusicPlayback $MusicReports
     $device=Open-DoomWaveOut -BufferFrames 1260 -Buffers 4;$Shared.DevicePaused=$true;$Shared.SubmittedFrames=0L;$Shared.Ready=$true
@@ -40,7 +41,7 @@ try{
             $Shared.DevicePaused=$true
             [Threading.Thread]::Sleep(2);continue
         }
-        $device.Event.Reset()|Out-Null;Update-DoomWaveOutBuffers $device
+        $device.Event.Reset()|Out-Null;Update-DoomWaveOutBuffers $device;$Shared.CompletedFrames=$device.CompletedFrames
         foreach($slot in $device.Buffers){
             if($slot.Queued){continue};$packet=$null
             if($null -ne $Shared.DrainTarget -and $lastSequence -ge $Shared.DrainTarget){break}
@@ -104,10 +105,29 @@ try{
         $null=$device.Event.WaitOne(2)
     }
 }catch{$failure=$_.ToString()+"`n"+$_.ScriptStackTrace;$Shared.Error=$failure}finally{
-    if($device){try{$cancelled+=Reset-DoomWaveOut $device;Close-DoomWaveOut $device}catch{$cleanup=$_.ToString();$Shared.Error=$cleanup}}
+    if($device){
+        try{
+            Update-DoomWaveOutBuffers $device
+            foreach($slot in $device.Buffers){if($slot.Queued){$shutdownDrain.PendingFramesAtStop+=$slot.Frames}}
+            if($shutdownDrain.PendingFramesAtStop -eq 0){$shutdownDrain.Completed=$true;$shutdownDrain.SkippedReason='NoQueuedAudio'}
+            elseif($null -ne $failure){$shutdownDrain.SkippedReason='WorkerFailed';$shutdownDrain.RemainingFrames=$shutdownDrain.PendingFramesAtStop}
+            elseif($Shared.Paused -or $mixer.Paused){$shutdownDrain.SkippedReason='PlaybackPaused';$shutdownDrain.RemainingFrames=$shutdownDrain.PendingFramesAtStop}
+            else{
+                $shutdownDrain.Attempted=$true
+                if($devicePaused){Set-DoomWaveOutPaused $device $false;$devicePaused=$false;$Shared.DevicePaused=$false}
+                $tail=Wait-DoomWaveOutBuffers $device 250
+                $shutdownDrain.Completed=$tail.Completed;$shutdownDrain.TimedOut=$tail.TimedOut
+                $shutdownDrain.WaitMilliseconds=$tail.WaitMilliseconds
+                $shutdownDrain.CompletedFramesDuringWait=$tail.CompletedFramesDuringWait
+                $shutdownDrain.RemainingFrames=$tail.RemainingFrames
+            }
+        }catch{$cleanup=$_.ToString();$Shared.Error=$cleanup;$shutdownDrain.SkippedReason='DrainError';$shutdownDrain.RemainingFrames=$shutdownDrain.PendingFramesAtStop}
+        try{$shutdownDrain.CancelledFramesUpperBound=Reset-DoomWaveOut $device;$cancelled+=$shutdownDrain.CancelledFramesUpperBound}catch{$cleanup=$_.ToString();$Shared.Error=$cleanup}
+        try{Close-DoomWaveOut $device}catch{$cleanup=$_.ToString();$Shared.Error=$cleanup}
+    }
     if($music){try{Close-DoomMusicPlayback $music}catch{$cleanup=$_.ToString();$Shared.Error=$cleanup}}
     $Shared.DevicePaused=$true
-    $Shared.Report=@{Error=$failure;CleanupError=$cleanup;Packets=$packets;LastSequence=$lastSequence;Realtime=[bool]$Shared.Realtime;GeneratedRealtimeBlocks=$syntheticBlocks;MixedBlocks=$packets+$syntheticBlocks;StalePacketsDiscarded=$stale;EpochResets=$resets;PauseTransitions=$pauses;MixSamplesMs=$mixTimes.ToArray();PacketAgeAtSubmissionMs=$ages.ToArray();QueueStarvationObservations=$starves.ToArray();MaxVoices=$maxVoices;ClippedSamples=$mixer.ClippedSamples;SubmittedFrames=if($device){$device.SubmittedFrames}else{0};ReturnedCompletedFrames=if($device){$device.CompletedFrames}else{0};CancelledQueuedFramesUpperBound=$cancelled;UnconsumedPackets=$Queue.Count;DeviceClosed=if($device){$device.Closed}else{$false};WallSeconds=$watch.Elapsed.TotalSeconds;Meaning='PowerShell mixes simulation packets. Interactive playback can keep active music/effect voices advancing while the packet producer is between updates; headless/test playback remains packet-exact. Packet age ends at submission, not audible output. Queue starvation is polling, not hardware telemetry. Reset/exit can cancel queued tail audio; cancelled frame count is an upper bound.'}
+    $Shared.Report=@{Error=$failure;CleanupError=$cleanup;Packets=$packets;LastSequence=$lastSequence;Realtime=[bool]$Shared.Realtime;GeneratedRealtimeBlocks=$syntheticBlocks;MixedBlocks=$packets+$syntheticBlocks;StalePacketsDiscarded=$stale;EpochResets=$resets;PauseTransitions=$pauses;MixSamplesMs=$mixTimes.ToArray();PacketAgeAtSubmissionMs=$ages.ToArray();QueueStarvationObservations=$starves.ToArray();MaxVoices=$maxVoices;ClippedSamples=$mixer.ClippedSamples;SubmittedFrames=if($device){$device.SubmittedFrames}else{0};ReturnedCompletedFrames=if($device){$device.CompletedFrames}else{0};CancelledQueuedFramesUpperBound=$cancelled;ShutdownDrain=$shutdownDrain;UnconsumedPackets=$Queue.Count;DeviceClosed=if($device){$device.Closed}else{$false};WallSeconds=$watch.Elapsed.TotalSeconds;Meaning='PowerShell mixes simulation packets. Interactive playback can keep active music/effect voices advancing while the packet producer is between updates; headless/test playback remains packet-exact. Packet age ends at submission, not audible output. Queue starvation is polling, not hardware telemetry. Normal unpaused exit drains submitted device buffers for up to 250 ms; paused/error exits cancel the remaining tail and report its upper bound.'}
     $Shared.Report.PcmSha256=[Convert]::ToHexString($digest.GetHashAndReset());$digest.Dispose()
     $Shared.Report.VolumeChanges=$volumeChanges.ToArray();$Shared.Report.MutedPackets=$mutedPackets;$Shared.Report.FinalVolume=$mixer.Volume
     $Shared.Report.PendingPacket=if($pending){$pending.Sequence}else{$null}

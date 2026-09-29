@@ -317,3 +317,34 @@ separate. These short startup checks are not evidence of audible quality or
 full-session playback. See the [7.6.5 receipt](../results/current-music-startup-recheck-20260929.json),
 [7.6.6 receipt](../results/current-music-startup-recheck-7.6.6-20260929.json),
 which pins the ignored raw report hash.
+
+## Bounded device-tail completion on normal exit — September 29, 2026
+
+An unpaused, error-free audio-worker shutdown now lets already-submitted
+waveOut buffers complete, with a 250 ms cap. A timeout still resets the device
+and reports the remaining queued frames as an upper bound. Exiting while
+playback is paused or after a worker error keeps the immediate-reset path;
+volume and world-epoch changes also retain their immediate reset behavior.
+Shutdown-tail counts are separate from frames canceled earlier by those
+intentional resets.
+
+The [nine-check runspace test](../results/audio-runspace-shutdown-drain-20260929.json)
+uses the default Windows device with muted synthetic PCM. It reaches shutdown
+with 3,780 frames queued; all 3,780 return complete during a 61.9 ms drain, and
+shutdown itself cancels zero frames. Its whole-run canceled-frame counter is
+5,040 from earlier epoch resets, and one packet-gap queue observation remains
+in the raw report; this test does not qualify continuous playback. The
+[eight-check music continuity run](../results/audio-realtime-continuity-shutdown-drain-20260929.json)
+also passes under PowerShell 7.6.6 and completes all 12,600 frames after its
+explicit packet-boundary drain. `Play.ps1 -Check` accepts the 36-map IWAD and
+all eleven qualified tracks on the same runtime. These checks verify API
+buffer completion and worker closure, not audibility, acoustics, or campaign
+continuity.
+
+Two earlier invocations are retained as test-harness failures, not game/audio
+failures: the first omitted a wait helper, and the second kept the former final
+packet number after adding the shutdown packets. The second report did record
+the successful device drain before its stale assertion failed. See
+[`audio-runspace-shutdown-drain-harness-failure-wait-helper-20260929.json`](../results/audio-runspace-shutdown-drain-harness-failure-wait-helper-20260929.json)
+and
+[`audio-runspace-shutdown-drain-harness-failure-packet-expectation-20260929.json`](../results/audio-runspace-shutdown-drain-harness-failure-packet-expectation-20260929.json).

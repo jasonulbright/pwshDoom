@@ -4974,3 +4974,31 @@ qualification hashes, and both source commits while preserving that limit.
 Current 7.6.5/7.6.6 preflight and actual-device startup checks pass. This
 correction supersedes the earlier statements in the R15 entries that the cause
 was unknown and the report unavailable.
+
+## 2026-09-29 — Drain queued audio on normal shutdown
+
+Normal unpaused, error-free exit now waits up to 250 ms for already-submitted
+waveOut buffers to complete before resetting and closing the device. The
+worker reports pending frames, completion wait, timeout and shutdown-only
+cancellation separately from intentional volume/world-epoch resets. Paused or
+failed workers still cancel immediately; this avoids replaying stale audio
+after a pause and preserves prompt cleanup on errors.
+
+The actual-device 7.6.6 [nine-check runspace test](../results/audio-runspace-shutdown-drain-20260929.json)
+queued 3,780 muted frames at shutdown and observed all of them return complete
+after 57.178 ms; the shutdown-specific canceled count is zero. The full-run
+counter includes 5,040 canceled frames from earlier epoch resets, and the test
+observed one packet-gap queue poll. The eight-check
+[D_E1M1 output-clock continuity test](../results/audio-realtime-continuity-shutdown-drain-20260929.json)
+also passes; its explicit drain leaves no queued frames for shutdown. The
+`Play.ps1 -Check` preflight accepts the installed 36-map IWAD and all eleven
+music qualifications on portable PowerShell 7.6.6. The updated worker/device/test
+files parse cleanly.
+
+The first test invocation failed because its new wait call had no local helper;
+the next failed only because the prior final packet assertion still expected
+sequence 105 after test packets 106–107 were added. Both raw
+[harness reports](audio.md#bounded-device-tail-completion-on-normal-exit--september-29-2026)
+are preserved and explicitly classified. The second report independently
+confirms the drain worked before the stale assertion fired. No gameplay,
+rendering, or mixing algorithm changed in this step.

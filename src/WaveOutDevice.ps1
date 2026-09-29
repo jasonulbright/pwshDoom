@@ -51,6 +51,34 @@ function Update-DoomWaveOutBuffers {
         }
     }
 }
+function Wait-DoomWaveOutBuffers {
+    param($Device,[ValidateRange(1,5000)][int]$TimeoutMilliseconds=250)
+    if($Device.Closed){throw 'Cannot drain a closed waveOut device.'}
+    $watch=[Diagnostics.Stopwatch]::StartNew()
+    [long]$pendingBefore=0
+    Update-DoomWaveOutBuffers $Device
+    foreach($slot in $Device.Buffers){if($slot.Queued){$pendingBefore+=$slot.Frames}}
+    [long]$completedBefore=$Device.CompletedFrames
+    while($true){
+        $Device.Event.Reset()|Out-Null
+        Update-DoomWaveOutBuffers $Device
+        [long]$remaining=0
+        foreach($slot in $Device.Buffers){if($slot.Queued){$remaining+=$slot.Frames}}
+        if($remaining -eq 0 -or $watch.ElapsedMilliseconds -ge $TimeoutMilliseconds){break}
+        [void]$Device.Event.WaitOne([Math]::Min(5,$TimeoutMilliseconds-[int]$watch.ElapsedMilliseconds))
+    }
+    $watch.Stop()
+    [long]$remaining=0
+    foreach($slot in $Device.Buffers){if($slot.Queued){$remaining+=$slot.Frames}}
+    return @{
+        Completed=($remaining -eq 0)
+        TimedOut=($remaining -gt 0)
+        WaitMilliseconds=$watch.Elapsed.TotalMilliseconds
+        PendingFramesAtStart=$pendingBefore
+        CompletedFramesDuringWait=$Device.CompletedFrames-$completedBefore
+        RemainingFrames=$remaining
+    }
+}
 function Submit-DoomWaveOut {
     param($Device,$Slot,[byte[]]$Pcm)
     if($Device.Closed -or $Slot.Queued -or $Pcm.Length -eq 0 -or $Pcm.Length%4 -or $Pcm.Length -gt $Device.BufferFrames*4){throw 'Invalid or occupied wave buffer.'}

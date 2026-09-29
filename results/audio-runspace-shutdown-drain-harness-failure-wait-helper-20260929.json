@@ -1,0 +1,93 @@
+{
+  "Error": "The term 'Wait-Audio' is not recognized as a name of a cmdlet, function, script file, or executable program.\r\nCheck the spelling of the name, or if a path was included, verify that the path is correct and try again.\nat <ScriptBlock>, C:\\projects\\pwshDoom\\scripts\\Test-AudioRunspace.ps1: line 14",
+  "Checks": [
+    {
+      "Name": "Worker initialized default device",
+      "Passed": true
+    }
+  ],
+  "Meaning": "Actual-device independent-runspace lifecycle with muted synthetic PCM, one pause, an epoch reset, and two queued packets at normal shutdown. Verifies that unpaused exit completes the submitted device tail within the bounded drain. No gameplay/render load or audibility claim.",
+  "Audio": {
+    "MaxPacketQueue": 0,
+    "PendingPacket": null,
+    "DeviceClosed": true,
+    "Music": {
+      "Reports": {},
+      "Frames": 0,
+      "Transitions": [],
+      "Selected": null,
+      "Gain": 0.2,
+      "Closed": true
+    },
+    "Meaning": "PowerShell mixes simulation packets. Interactive playback can keep active music/effect voices advancing while the packet producer is between updates; headless/test playback remains packet-exact. Packet age ends at submission, not audible output. Queue starvation is polling, not hardware telemetry. Normal unpaused exit drains submitted device buffers for up to 250 ms; paused/error exits cancel the remaining tail and report its upper bound.",
+    "LastSequence": -1,
+    "ReturnedCompletedFrames": 0,
+    "FinalVolume": 0.0,
+    "Realtime": false,
+    "QueueStarvationObservations": [],
+    "RebufferCount": 0,
+    "MutedPackets": 0,
+    "CleanupError": null,
+    "SubmittedFrames": 0,
+    "StalePacketsDiscarded": 0,
+    "UnconsumedPackets": 0,
+    "LoadingDrains": [],
+    "GeneratedRealtimeBlocks": 0,
+    "PauseTransitions": 0,
+    "Error": null,
+    "WallSeconds": 3.7896933,
+    "VolumeChanges": [
+      {
+        "CancelledFramesUpperBound": 0,
+        "WallMs": 1182.3291,
+        "AfterPacket": -1,
+        "Volume": 0.0
+      }
+    ],
+    "PcmSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "RebufferSinglePacketDeadlineMs": 100,
+    "RebufferResumes": [],
+    "PacketAgeAtSubmissionMs": [],
+    "CancelledQueuedFramesUpperBound": 0,
+    "ClippedSamples": 0,
+    "ShutdownDrain": {
+      "Completed": true,
+      "CancelledFramesUpperBound": 0,
+      "TimedOut": false,
+      "WaitMilliseconds": 0.0,
+      "SkippedReason": "NoQueuedAudio",
+      "RemainingFrames": 0,
+      "CompletedFramesDuringWait": 0,
+      "Attempted": false,
+      "PendingFramesAtStop": 0
+    },
+    "EpochResets": 0,
+    "MixSamplesMs": [],
+    "MaxVoices": 0,
+    "MixedBlocks": 0,
+    "Packets": 0
+  },
+  "Sources": [
+    {
+      "Sha256": "7907F76AEB92969F36252E86B36A970C359B0AE2D9EC3ACCF1514E2D6ABC7DEE",
+      "Path": "src/AudioRunspace.ps1"
+    },
+    {
+      "Sha256": "01865375DB878EFA137B3B5EF49437B4FFBF9B8C6F0359A2AA52580E0977801E",
+      "Path": "src/AudioPackets.ps1"
+    },
+    {
+      "Sha256": "B8447B4F701F8B1267E949F0BD114A2304049590B8371E449D8592F2478B0A49",
+      "Path": "src/WaveOutDevice.ps1"
+    },
+    {
+      "Sha256": "A8801752226773560DEC4AB1D9FC247AE8C886B2CEF3BDA4D216C8FCF12BD032",
+      "Path": "scripts/Invoke-AudioWorker.ps1"
+    },
+    {
+      "Sha256": "98E30C4F8540F00E7084E26D09A23EFDF642C330DCBBD77A45472CB6664F00AC",
+      "Path": "scripts/Test-AudioRunspace.ps1"
+    }
+  ],
+  "FinishedUtc": "2026-09-29T15:43:03.1512170Z"
+}

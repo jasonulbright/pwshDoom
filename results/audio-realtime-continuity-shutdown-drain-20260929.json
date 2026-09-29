@@ -1,0 +1,155 @@
+{
+  "QualificationSha256": "1D5A9D6D16E8CDCA74646D6AEF009CDB42EB59B87941B0EFE648F9D3A98C96CF",
+  "Sources": [
+    {
+      "Path": "src/AudioMixer.ps1",
+      "Sha256": "38E846CDF04317FBA6DE2EC598F3497EFB6ED97DEE9AB8EEC22D8A94E4421A0B"
+    },
+    {
+      "Path": "src/AudioRunspace.ps1",
+      "Sha256": "7907F76AEB92969F36252E86B36A970C359B0AE2D9EC3ACCF1514E2D6ABC7DEE"
+    },
+    {
+      "Path": "src/MusicLoopReader.ps1",
+      "Sha256": "A65FB5FA034E1A8DB2CCA59C0AEE7A6A0A5F132461BCA13CC06C337CB3DC859D"
+    },
+    {
+      "Path": "src/MusicPlayback.ps1",
+      "Sha256": "5050D3355A30692B67CF130594146FDDD0CB51B9843B2C79B65D68F55E7F11F8"
+    },
+    {
+      "Path": "scripts/Invoke-AudioWorker.ps1",
+      "Sha256": "275058038F919EB123EB294EE7B9E44E34B2DAE56C3A3513DEE9316294CDBE07"
+    },
+    {
+      "Path": "scripts/Test-AudioRealtimeContinuity.ps1",
+      "Sha256": "517319A950159555716D97032600D49242050D6524C2A5E1B962F494546B2F1C"
+    }
+  ],
+  "Meaning": "Actual waveOut device with one PowerShell simulation packet, a deliberate no-packet interval, shared pause/resume and a packet-bounded drain. Verifies that active qualified music continues on the interactive output clock. Submitted PCM and driver counters do not prove acoustic quality or latency.",
+  "Audio": {
+    "StalePacketsDiscarded": 0,
+    "MutedPackets": 0,
+    "CancelledQueuedFramesUpperBound": 0,
+    "ShutdownDrain": {
+      "PendingFramesAtStop": 0,
+      "RemainingFrames": 0,
+      "Completed": true,
+      "TimedOut": false,
+      "CompletedFramesDuringWait": 0,
+      "CancelledFramesUpperBound": 0,
+      "Attempted": false,
+      "WaitMilliseconds": 0.0,
+      "SkippedReason": "NoQueuedAudio"
+    },
+    "MixedBlocks": 10,
+    "GeneratedRealtimeBlocks": 9,
+    "MaxPacketQueue": 1,
+    "VolumeChanges": [],
+    "PendingPacket": null,
+    "SubmittedFrames": 12600,
+    "MaxVoices": 0,
+    "PauseTransitions": 1,
+    "WallSeconds": 1.5151185,
+    "Packets": 1,
+    "Error": null,
+    "MixSamplesMs": [
+      53.5814,
+      2.2393,
+      18.0029,
+      0.8304,
+      0.8847,
+      0.8573,
+      0.8304,
+      0.8767,
+      0.8235,
+      0.85
+    ],
+    "LastSequence": 0,
+    "Meaning": "PowerShell mixes simulation packets. Interactive playback can keep active music/effect voices advancing while the packet producer is between updates; headless/test playback remains packet-exact. Packet age ends at submission, not audible output. Queue starvation is polling, not hardware telemetry. Normal unpaused exit drains submitted device buffers for up to 250 ms; paused/error exits cancel the remaining tail and report its upper bound.",
+    "RebufferResumes": [],
+    "ReturnedCompletedFrames": 12600,
+    "RebufferCount": 0,
+    "ClippedSamples": 0,
+    "FinalVolume": 1.0,
+    "CleanupError": null,
+    "QueueStarvationObservations": [],
+    "PcmSha256": "550527F22231428F0862C92934CC617CE8C8460493B9580BBCA0DF891103A905",
+    "UnconsumedPackets": 0,
+    "LoadingDrains": [
+      {
+        "ThroughSequence": 0,
+        "CompletedFrames": 12600,
+        "Qpc": 1900205080094
+      }
+    ],
+    "Realtime": true,
+    "DeviceClosed": true,
+    "EpochResets": 0,
+    "PacketAgeAtSubmissionMs": [
+      102.082
+    ],
+    "Music": {
+      "Frames": 12600,
+      "Reports": {
+        "D_E1M1": "1D5A9D6D16E8CDCA74646D6AEF009CDB42EB59B87941B0EFE648F9D3A98C96CF"
+      },
+      "Selected": "D_E1M1",
+      "Transitions": [
+        {
+          "Loop": true,
+          "Kind": "Start",
+          "Track": "D_E1M1",
+          "AfterFrames": 0
+        }
+      ],
+      "Gain": 0.2,
+      "Closed": true
+    },
+    "RebufferSinglePacketDeadlineMs": 100
+  },
+  "Error": null,
+  "FinishedUtc": "2026-09-29T15:53:52.9014668Z",
+  "PowerShell": "7.6.6",
+  "Track": "D_E1M1",
+  "Checks": [
+    {
+      "Passed": true,
+      "Name": "One simulation packet starts actual qualified music output"
+    },
+    {
+      "Passed": true,
+      "Name": "Active music advances while no additional simulation packet exists"
+    },
+    {
+      "Passed": true,
+      "Name": "Shared pause stops realtime block production"
+    },
+    {
+      "Passed": true,
+      "Name": "Music resumes from the retained cursor without a new game packet"
+    },
+    {
+      "Passed": true,
+      "Name": "Explicit drain stops realtime fill at the requested packet"
+    },
+    {
+      "Passed": true,
+      "Name": "Music advanced beyond the sole simulation block"
+    },
+    {
+      "Passed": true,
+      "Name": "No active rebuffer occurred and drained device tail returned"
+    },
+    {
+      "Passed": true,
+      "Name": "Worker and actual output device closed cleanly"
+    }
+  ],
+  "Drain": {
+    "WaitMilliseconds": 92.3135,
+    "ThroughSequence": 0,
+    "CompletedFrames": 12600,
+    "AcknowledgedQpc": 1900205080094
+  }
+}
