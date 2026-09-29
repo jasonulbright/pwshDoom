@@ -6,12 +6,12 @@ Updated 2026-09-28. Release sequence remains Ultimate Doom, Doom II, then a MyHo
 
 Source/IWAD hashes and detailed results: [results/campaign-smoke-lineflags-fixed.json](../results/campaign-smoke-lineflags-fixed.json).
 
-The current Episode 1 human-playthrough candidate is implementation commit
+The preceding r5 Episode 1 human-playthrough candidate was implementation commit
 `ab73eba07135fe0f834554be12aae279c151c314`. The broad candidate receipt and
 geometry/cache supplement retain the 36/36 map smoke and 69 transition
 fixtures, including real E1M9 and E1M4 loads on the secret branch. The latest
 audio supplement reruns a 36/36 load/idle/render smoke and records bounded
-realtime audio checks. The current renderer change consumes per-worker actor
+realtime audio checks. That renderer change consumes per-worker actor
 masks during decoding and passes a fresh 36-map smoke, exact 16-worker output
 in all three styles, and a persistent-worker map reload. Transition exits are
 explicit fixtures and do not mark any map complete; audio continuity checks do
@@ -20,6 +20,14 @@ receipt](../results/episode1-current-human-candidate-20260928-r5.json),
 [broad receipt](../results/episode1-current-human-candidate-20260928.json),
 [geometry/cache supplement](../results/episode1-current-human-candidate-20260928-r2.json),
 and [realtime-audio supplement](../results/episode1-current-human-candidate-20260928-r3.json); the [visible-actor profile](../results/renderer-visible-actor-filter-20260928.json) reports sequential worker-equivalent CPU and does not claim a frame-rate gain.
+
+The current single-playthrough handoff is r6 at source commit
+`c31186896628a9ee9a4ea3b635c0d19fac65b40d`; see its [candidate receipt](../results/episode1-current-human-candidate-20260928-r6.json)
+and the exact [complete Episode 1 scope](episode1-playtest.md). Jason's human
+route remains pending. A separate current-source 60-second E1M1 sound-enabled
+worker-count comparison is recorded in the
+[performance receipt](../results/current-source-e1m1-worker-comparison-20260928.json).
+It is an idle headless workload and changes no campaign completion status.
 
 A current-source, sound-enabled, 30-second headless E3M6 host comparison on
 September 28 reached 34.70, 31.90, and 33.70 simulation tics/sec at 8, 12,

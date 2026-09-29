@@ -578,3 +578,49 @@ two experimental E1M3 reports have SHA-256 values
 `D91B6312A944A36497E10B5A1F1BC5243E749A05581A62CC51E1E55990252A30`. This
 experiment does not change the current renderer candidate or support an FPS
 claim.
+
+## Current-source E1M1 worker and encoder comparison
+
+Measured September 28, 2026.
+
+Four 60-second, no-input HMP E1M1 sessions used the Steam Ultimate Doom IWAD,
+the prepared Episode 1 music catalog, PowerShell 7.6.5, and an Intel Core Ultra
+7 265K with 20 logical processors. Sound and real-time music playback were
+enabled. The source tree is identical to the documented `c311868` Episode 1
+candidate; the measured checkout commit is `e44f44f`.
+
+| Renderer workers | ANSI encoder | Simulation tics/sec | Completed headless render updates/sec | Submit-to-host-completion median / p95 (ms) | End-run sampled worker + simulation working set (GiB) |
+| ---: | --- | ---: | ---: | ---: | ---: |
+| 8 | Pairs | 34.983 | 35.483 | 28.48 / 42.86 | 2.67 |
+| 16 | Pairs | 34.982 | 48.482 | 21.84 / 30.70 | 4.18 |
+| 20 | Pairs | 34.980 | 48.462 | 22.60 / 28.34 | 5.02 |
+| 16 | ColorState | 34.979 | 48.227 | 22.32 / 28.94 | 3.86 |
+
+The settings ran once each, in the table's order; this is a screening comparison,
+not a randomized repeated benchmark. Sixteen and twenty workers tie at about
+48.5 completed updates/sec, while twenty uses 0.84 GiB more in the end-run
+working-set sample. Eight workers reduce sampled memory but complete about 27%
+fewer updates. Keep the 16-worker default for this workload. Working set is a
+single end-run sample, not a peak or time average.
+
+ColorState reduces the median encoding time of the slowest worker from 3.07 ms
+to 2.63 ms compared with the single 16-worker Pairs run. The slowest-worker
+render median rises from 11.44 ms to 11.74 ms and decode median from 1.53 ms to
+1.71 ms; completed host updates do not improve. Keep Pairs as the default.
+This does not contradict its known reduction in encoded bytes: fewer bytes did
+not make this complete headless workload faster.
+
+All four sessions selected `D_E1M1`, reported no host/audio error, no software
+queue-starvation observation or rebuffer, zero unconsumed packets, and a closed
+audio device. The submitted/returned-frame differences (3,780–5,040 frames)
+equal the recorded canceled-queue upper bounds at duration shutdown; they are
+not mid-session underrun evidence. These counters are software polling, not
+speaker-loopback telemetry.
+
+Headless mode still runs the PowerShell renderer and encoder, but skips
+Windows Terminal writes. Completed host updates are not console writes or
+displayed frames. This quiet map-start workload does not qualify moving combat,
+campaign completion, audible quality, or the 35-tic/60-display goal. The
+[portable receipt](../results/current-source-e1m1-worker-comparison-20260928.json)
+indexes the exact settings and SHA-256 hashes for the raw reports, which remain
+under ignored `local/` storage.

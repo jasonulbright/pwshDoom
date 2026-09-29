@@ -4217,3 +4217,33 @@ All frame hashes matched, but evidence is too noisy to keep the extra decoder
 branch. The experimental source was reverted; the current branch source is
 unchanged. Raw reports and hashes are recorded in
 [`performance.md`](performance.md).
+
+## 2026-09-28 — Screen current E1M1 worker and ANSI-encoder settings
+
+Ran four 60-second HMP E1M1 no-input sessions from the same source tree with
+the Steam Ultimate Doom IWAD and prepared Episode 1 catalog, on PowerShell
+7.6.5 / Intel Core Ultra 7 265K (20 logical processors). Real-time audio was
+enabled. The source tree exactly matches the `c311868` human-playthrough
+candidate; the documentation checkout is `e44f44f`.
+
+Pairs encoding completed 35.483, 48.482, and 48.462 headless host render
+updates/sec with 8, 16, and 20 workers. All sessions advanced approximately
+34.98 simulation tics/sec. Sixteen and twenty workers were effectively tied;
+twenty used 0.84 GiB more in the single end-run worker/simulation working-set
+sample. Eight used about 1.51 GiB less than sixteen but completed about 27%
+fewer updates. Keep the 16-worker default for this E1M1 workload.
+
+At sixteen workers, ColorState completed 48.227 updates/sec versus 48.482 for
+Pairs. Its slowest-worker median encode stage was 2.63 ms versus 3.07 ms, but
+render and decode medians were slightly higher and whole-host updates did not
+improve. Keep Pairs as the default. The measurement order was 16-Pairs,
+8-Pairs, 20-Pairs, 16-ColorState, one session per setting; no randomized or
+repeated timing claim is made.
+
+All four sessions selected `D_E1M1`, reported no host/audio error, no software
+queue-starvation observation or rebuffer, zero unconsumed packets, and clean
+device closure. The final 3,780–5,040 unreturned frames match each report's
+canceled-queue upper bound at shutdown; they do not establish an audible gap.
+Headless mode skips Terminal writes, and these update rates are not display
+presentations or campaign-route evidence. See the [measurement](performance.md#current-source-e1m1-worker-and-encoder-comparison)
+and [portable receipt](../results/current-source-e1m1-worker-comparison-20260928.json).
