@@ -1,0 +1,46 @@
+{
+  "Format": "pwshDoom.FastRendererPhaseProfile",
+  "Version": 1,
+  "RecordedUtc": "2026-09-29T21:25:37.2380720Z",
+  "RepositoryCommit": "3080188a85830ad088382cce4089b6d91d7ea731",
+  "ImplementationCommit": "00405deebef6b4e8477c9c9316987b82fbc9064d",
+  "PowerShell": "7.6.6",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "SourceHashes": {
+    "FastRenderer": "15428F29AE3DFA45514EC428AAE5BCDE7FF32532249C07AC2571428967A500ED",
+    "GameHost": "CBADD9B913973D0442B4BE7A45F4C1069FA75B8DCAF78F4A550AE72C4ACED706",
+    "SnapshotTransport": "E88163E3D970A02F5D81B9EEDDEB9F7B1E0FE2A90AFCF4019733D423D69E8F8A",
+    "MeasurementHarness": "637C9DCC5AB9CF5E4B885F2E15EFE6B3BABCCABF7084457AEFD5E44228F1FB3F",
+    "GeneratedEngineBundle": "CDFCDF6A9E03298CE914E694F89C8BD0333F190AE4AE761B6984677AE9DBE327"
+  },
+  "Workload": {
+    "Episode": 1,
+    "Map": 1,
+    "Skill": 3,
+    "SetupTics": 0,
+    "WarmupFramesPerStripe": 5,
+    "MeasuredFramesPerStripe": 30,
+    "Workers": 16,
+    "StripeWidthPixels": 20,
+    "StripesRenderedSequentiallyInOnePowerShellProcess": true,
+    "TransportMode": "adaptive NumericV4 mask-only packet for a sparse scene",
+    "ActorCount": 91,
+    "FuzzActorCount": 0,
+    "PixelCount": 64000,
+    "FullFrameSha256": "B6B0A8899E495CA1A82658CBAF108D892F6E513B8CC87C7BA6DB99829C0DF67C"
+  },
+  "Samples": 480,
+  "PhaseTimingsMilliseconds": {
+    "Total": { "Median": 8.3639, "P95": 12.31, "P99": 13.4405, "Maximum": 14.4451 },
+    "Geometry": { "Median": 6.9352, "P95": 10.2476, "P99": 11.0962, "Maximum": 12.4079 },
+    "Actors": { "Median": 0.327, "P95": 0.7387, "P99": 0.9947, "Maximum": 1.7541 },
+    "PlayerWeapon": { "Median": 0.0856, "P95": 0.204, "P99": 0.2517, "Maximum": 0.4822 },
+    "Hud": { "Median": 0.8522, "P95": 1.5189, "P99": 2.5351, "Maximum": 3.2672 },
+    "SnapshotPreparation": { "Median": 1.6814, "P95": 2.7406 }
+  },
+  "RawReport": {
+    "Path": "local/r17-fast-renderer-profile-e1m1-ps766-20260929.json",
+    "Sha256": "1581FBA3300DD10B2FF5A830D0385AF07BFFFA8D51AF69E79C2FC131D3560EE3"
+  },
+  "Meaning": "A fixed-state profile of PowerShell rasterization with 16 production-equivalent column stripes rendered sequentially in one process. It identifies relative phase cost for this E1M1 view only; it is not concurrent worker timing, terminal output timing, displayed FPS, or a gameplay pacing result. Geometry is the largest measured phase, so the next renderer optimization should target the wall/plane path and be judged with exact framebuffer parity plus a paired performance comparison."
+}

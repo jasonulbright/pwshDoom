@@ -996,3 +996,31 @@ serial/worker equality on E3M6 in Classic, Matrix/Katakana, and
 AnsiArt/Katakana (320,000 pixels per style). See the
 [source-and-timing receipt](../results/rejected-worker-range-mask-20260929.json);
 raw profiles remain under ignored `local/`.
+
+## Current-source R17 E1M1 renderer phase profile — September 29, 2026
+
+The R17 FastRenderer was profiled under official portable PowerShell 7.6.6 at
+HMP E1M1's initial state, with 91 actors and no simulation tics advanced. The
+profile warmed five frames and measured 30 frames for each of the 16 production
+20-column stripes. It rendered the stripes sequentially in one PowerShell
+process; it did not launch worker processes or write to Terminal. The run's
+64,000-pixel output had SHA-256
+`B6B0A8899E495CA1A82658CBAF108D892F6E513B8CC87C7BA6DB99829C0DF67C`.
+
+| Phase | Median per stripe | P95 per stripe |
+| --- | ---: | ---: |
+| Geometry (wall and plane path) | 6.935 ms | 10.248 ms |
+| Actors | 0.327 ms | 0.739 ms |
+| Player weapon | 0.086 ms | 0.204 ms |
+| HUD | 0.852 ms | 1.519 ms |
+| Total | 8.364 ms | 12.310 ms |
+
+Geometry is about 83% of the median total in this fixed E1M1 view. Snapshot
+preparation has a 1.681 ms median and 2.741 ms p95 in the harness. This narrows
+the next code investigation to the wall/plane renderer; it does not identify a
+single inner-loop cause. The result is a descriptive profile, not a speedup or
+FPS claim, and it is not directly comparable to the earlier sector-cache trial
+because this run uses a different transport/runtime profile and was not paired.
+The [portable profile receipt](../results/r17-fast-renderer-phases-20260929.json)
+pins source and raw report hashes; the full report remains under ignored
+`local/` storage.

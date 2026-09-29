@@ -5188,3 +5188,40 @@ are not displayed frames, and the short run does not establish continuous
 campaign audio or map completion. The nine-map Episode 1 load/idle/render
 smoke passed 9/9; the human HMP route remains pending. The candidate and
 package receipts preserve the exact scope and raw report hashes.
+
+## 2026-09-29 — Profile the R17 FastRenderer phases
+
+On the R17 implementation under portable PowerShell 7.6.6, a fixed HMP E1M1
+view was warmed for five frames and measured for 30 frames in each of 16
+production-width stripes. The 480 stripes were rendered sequentially in one
+process and retained the expected full-frame hash. Median geometry work was
+6.935 ms per stripe (10.248 ms p95), versus 0.327 ms for actors, 0.086 ms for
+the weapon, and 0.852 ms for the HUD; total median was 8.364 ms. This points
+the next optimization at the wall/plane path but does not isolate an inner-loop
+cause or establish concurrent worker pacing. It is not an FPS result and is
+not directly comparable to earlier paired sector-cache runs. See the
+[phase profile](../results/r17-fast-renderer-phases-20260929.json); the
+complete 480-sample raw report and hash remain under ignored `local/`.
+
+The article draft was refreshed to distinguish R17's current nine-map Episode
+1 load/render smoke and all-map automap-bitset comparisons from the inherited
+R16 36-map load/render sweep. R17 did not rerun that broader smoke; the full
+Episode 1 human route remains the current playability milestone.
+
+## 2026-09-29 — Audit the post-Preview.3 commit volume
+
+At branch commit `3080188`, 78 commits followed `v0.1.0-preview.3`. The
+Preview.3 release-preparation commit itself (`34e3d17`) changed seven
+documentation/release files and no game source, which is the scope of the
+clean-package note. Across the later 78 commits, 18 changed files under `src/`
+(`+884/-186` lines), 30 changed files under `scripts/` (`+1,085/-103`), 100
+measurement/result receipts under `results/` (`+40,542/-12`), and 20
+documentation/release-note files (`+2,915/-170`). The `src/` changes are
+runtime code; `scripts/` combines launch/runtime helpers with tests and
+measurement tools. The 78-commit count therefore overstates feature work:
+most changed lines are machine-readable evidence, and most commits record or
+validate work. It is not accurate to call all post-preview work test harness,
+but the ledger and harness activity outweigh product-code additions. These
+counts compare the tagged release tree with `3080188` and count changed lines,
+including generated receipts; they are not a measure of net project size or
+human effort.
