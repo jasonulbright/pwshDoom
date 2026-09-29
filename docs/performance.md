@@ -894,3 +894,32 @@ launcher check reports `Ready` with the installed 36-map IWAD and qualified
 11-track catalog metadata. The compact [source-pinned receipt]
 (../results/renderer-same-map-reset-presentmon-20260929.json) stores all metrics
 and hashes; full game reports and PresentMon captures remain in ignored `local/`.
+
+## R14 current-source audio-loaded headless run — September 29, 2026
+
+The current R14 source was run for five active seconds on E1M1 under PowerShell
+7.6.5 with 16 renderer workers, the installed Ultimate Doom IWAD, the local
+11-track catalog, and realtime audio enabled. The actual Windows audio worker
+selected D_E1M1 and closed without a reported error. It submitted 231,840
+frames and completed 226,800, leaving a 5,040-frame shutdown-cancellation
+upper bound. No software queue-starvation or rebuffer observation occurred.
+
+The run advanced 174 simulation tics (34.777/sec) and completed 214 headless
+render updates (42.772/sec); it wrote nothing to Windows Terminal. It emitted
+no active sound-effect voice. This confirms startup and short music-worker
+operation only. It is below the 35-tic and 60-update goals, and says nothing
+about visible presentation, live sound effects, acoustics, sustained campaign
+playback, or a completed map. The
+[source-pinned receipt](../results/episode1-current-audio-startup-r14-20260929.json)
+links the portable summary to the ignored raw report.
+
+A second five-second run uses the launcher's scripted attack input with
+realtime audio enabled. It reaches 34.720 simulation tics/sec and 48.488
+completed headless updates/sec, submits 230,580 audio frames, and completes
+225,540 with the same 5,040-frame shutdown-cancellation upper bound. Fourteen
+audio events produce a peak of one active voice; there are no clipped samples,
+software queue-starvation observations, or rebuffer resumes. The actual audio
+device closes cleanly. This run exercises one brief game-effect path but does
+not measure monitor presentations, acoustics, or full-session audio. The
+[scripted-effect receipt](../results/episode1-current-audio-effects-r14-20260929.json)
+preserves the raw report hash and its limits.

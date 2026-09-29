@@ -239,3 +239,39 @@ synthesis source. The current real D_E1M1 report also opens under PowerShell
 7.6.6 and releases both locked payloads cleanly. This verifies reader behavior,
 not playback or acoustic quality. See the
 [portable test receipt](../results/music-loop-reader-actionable-rejections-20260929.json).
+
+## R14 current-source audio-worker startup — September 29, 2026
+
+The R14 source passes the 11-track catalog metadata check in PowerShell 7.6.5.
+A five-second, 16-worker, headless E1M1 run starts the actual Windows playback
+device, selects D_E1M1, mixes 174 simulation packets plus 10 realtime fill
+blocks, and closes without a simulation, audio, or cleanup error. The device
+reports 231,840 frames submitted and 226,800 completed; the remaining 5,040
+are the cancellation upper bound at duration exit. There are no software
+queue-starvation or rebuffer observations. No sound-effect voice became active,
+so this tests music-worker startup, not R14's effect arbitration.
+
+The [portable startup receipt](../results/episode1-current-audio-startup-r14-20260929.json)
+pins the source, catalog, IWAD, and ignored raw report. This is one short
+headless startup, not audible quality, full-session continuity, or campaign
+audio evidence. Device completion counters are not an acoustic measurement.
+
+## R14 scripted effect through the current audio worker — September 29, 2026
+
+A separate five-second E1M1 run uses the launcher's short scripted attack
+pattern with sound effects, D_E1M1 music, realtime mixing, and the real Windows
+audio device. The simulation reports 14 audio events and one active-source
+peak; the mixer reports one active voice peak, no clipped samples, no audio or
+cleanup error, and no software queue-starvation or rebuffer observation. The
+device closes cleanly. It submits 230,580 frames and completes 225,540, with a
+5,040-frame cancellation upper bound at duration exit.
+
+This demonstrates that sound-effect activity reaches the current packet mixer
+and device worker while music plays. The report does not identify the sound
+category or preserve an isolated effect waveform, and it does not test
+same-emitter cross-category arbitration at the device. The deterministic
+[27 mixer checks](../results/audio-mixer-emitter-replacement-20260929.json) and
+[7 packet-path checks](../results/audio-packets-emitter-replacement-20260929-r2.json)
+cover that rule in isolation. No audible review, campaign route, full-session
+continuity or visible Terminal pacing is established. See the
+[portable effect receipt](../results/episode1-current-audio-effects-r14-20260929.json).

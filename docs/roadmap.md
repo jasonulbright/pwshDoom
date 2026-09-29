@@ -40,12 +40,17 @@ The current handoff uses game source commit
 `cdd5fdd68734dbc663367f44117fd8a49ac17694`, pinned in the [R14 receipt]
 (../results/episode1-current-human-candidate-20260929-r14.json). R14 adds
 same-emitter sound replacement across categories, with 27 deterministic mixer
-checks and 7 production packet-path checks. It preserves R13's same-map asset
-reuse and does not change gameplay or rendering. The stored audio replay
-diverges from the current simulation at tic 350, so it does not qualify audio
-output. The complete human Episode 1 route remains pending; the PresentMon
-reset comparison does not qualify 35-tic simulation or 60 displayed
-transitions/sec.
+checks and 7 production packet-path checks. A current-source five-second
+headless run also starts the real Windows audio worker, selects D_E1M1, returns
+226,800 of 231,840 submitted frames, and closes without a reported error,
+rebuffer, or software queue-starvation observation. A separate five-second
+scripted attack produces 14 audio events and a one-voice peak through the same
+device path, again with clean closure. These short runs are not acoustic or
+full-session evidence. The stored route replay diverges from current gameplay
+at tic 350 and does not qualify its audio. R14 preserves R13's same-map asset reuse and
+does not change gameplay or rendering. The complete human Episode 1 route
+remains pending; the PresentMon reset comparison does not qualify 35-tic
+simulation or 60 displayed transitions/sec.
 The PowerShell plane sampler carries Int64 world coordinates between pixels
 and extracts only the 64×64 flat-index bits at lookup time. All 120 paired
 E1M1/E3M6 frames match exactly. Two fixed-state E1M1 serial medians improve

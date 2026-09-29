@@ -4825,8 +4825,47 @@ All 27 deterministic mixer checks and 7 production packet-path checks pass.
 `Play.ps1 -Check` reports Ready for the installed 36-map Ultimate Doom IWAD in
 effects-only mode. An attempted audio render from the old saved input replay
 diverges from the current gameplay state at tic 350 after eight checkpoint
-comparisons; its audio output is not qualification evidence. No live device or
-audible review was performed for this change. The source-pinned
+comparisons; its audio output is not qualification evidence. The initial
+handoff had no current-source device check; the following entry records one.
+The source-pinned
 [R14 receipt](../results/episode1-current-human-candidate-20260929-r14.json)
 updates the complete HMP Episode 1 human handoff path; the secret-map return,
 episode finale and full-session audio remain open.
+
+## 2026-09-29 — Verify current-source R14 audio startup
+
+`Play.ps1 -Check` under PowerShell 7.6.5 reports Ready for the installed
+36-map Ultimate Doom IWAD and all eleven local Episode 1 music qualification
+reports. A five-second, 16-worker, headless E1M1 run with realtime audio then
+starts the actual Windows audio device, selects D_E1M1, and exits on duration
+without simulation, audio, or cleanup errors. The worker processes 174
+simulation packets and ten realtime fill blocks. It submits 231,840 frames and
+reports 226,800 completed; 5,040 remaining is the shutdown-cancellation upper
+bound. Software polling reports zero queue-starvation observations and zero
+rebuffer resumes, and the device closes cleanly.
+
+The run records 174 simulation tics (34.777/sec), 214 completed headless render
+updates (42.772/sec), and zero active effect voices. It is music-startup
+evidence only: there was no Terminal output, acoustic review, live sound-effect
+audition, route completion, or 35-tic/60-displayed-update qualification. The
+[portable receipt](../results/episode1-current-audio-startup-r14-20260929.json)
+pins the source and catalog hashes; its raw report remains ignored under
+`local/`. The [R14 candidate receipt](../results/episode1-current-human-candidate-20260929-r14.json)
+now carries this bounded current-source result.
+
+## 2026-09-29 — Exercise sound effects through the R14 audio device
+
+The idle startup did not generate a sound-effect voice, so a second five-second
+current-source E1M1 run used the built-in scripted input's Attack bit while
+running the real Windows audio worker and D_E1M1 music. It generated 14 audio
+events and reached one active-source/voice peak. The worker submitted 230,580
+frames and completed 225,540; 5,040 is the shutdown-cancellation upper bound.
+There were no clipped samples, worker/cleanup errors, software queue-starvation
+observations, or rebuffer resumes, and the device closed cleanly.
+
+This exercises game-generated effect traffic through the live mixer/device
+path. It does not retain an isolated SFX waveform, establish which effect
+category reached the mix, test same-source cross-category replacement on the
+device, or replace an audible review. The
+[portable receipt](../results/episode1-current-audio-effects-r14-20260929.json)
+pins the source, workload, and ignored raw report hash.

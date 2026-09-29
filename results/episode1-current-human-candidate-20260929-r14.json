@@ -1,7 +1,7 @@
 {
   "Format": "pwshDoom.Episode1CurrentHumanCandidate",
   "Version": 1,
-  "RecordedUtc": "2026-09-29T12:52:10Z",
+  "RecordedUtc": "2026-09-29T13:09:28.0610543Z",
   "Branch": "codex/feasibility-study",
   "ImplementationCommit": "cdd5fdd68734dbc663367f44117fd8a49ac17694",
   "PreviousCandidate": {
@@ -106,6 +106,43 @@
       "SavedCheckpointsChecked": 8,
       "FirstMismatchTic": 350,
       "Result": "The stored gameplay replay diverges from current simulation at tic 350; its rendered audio output is not qualified."
+    },
+    "CurrentAudioWorkerStartup": {
+      "PortableReceipt": "results/episode1-current-audio-startup-r14-20260929.json",
+      "PortableReceiptSha256": "7ECD8E853855766C6AB2606EB6405AE45CD0AA54DB29AF07F65B24E2B12793A0",
+      "RawReport": "local/r14-current-source-audio-startup-20260929.json",
+      "RawReportSha256": "AFC8995E0D5835D3E01B520987C22A73B50C0CBE7901C49373AD821345D27960",
+      "SelectedMusic": "D_E1M1",
+      "SubmittedFrames": 231840,
+      "ReturnedCompletedFrames": 226800,
+      "CancelledQueuedFramesUpperBound": 5040,
+      "DeviceClosed": true,
+      "Error": null,
+      "CleanupError": null,
+      "QueueStarvationObservations": 0,
+      "RebufferResumes": 0,
+      "EffectsMaxVoices": 0,
+      "Meaning": "One five-second headless current-source music startup; no effect voice was active. This does not qualify audible quality, full-session continuity, or visible Terminal pacing."
+    },
+    "CurrentAudioEffectsSmoke": {
+      "PortableReceipt": "results/episode1-current-audio-effects-r14-20260929.json",
+      "PortableReceiptSha256": "754DF2CD5EF590D8364322200487423917F64C090A6BBAE1700334B0A9E65581",
+      "RawReport": "local/r14-current-source-audio-scripted-effects-20260929.json",
+      "RawReportSha256": "33AD6C4C7FAE3F9C26F07093B8EF5310D10B4ECDD72B80BB0F06F953CA3B92C8",
+      "Driver": "Five-second scripted attack input; no campaign route.",
+      "AudioEvents": 14,
+      "AudioSourcePeak": 1,
+      "ActiveMixerVoicesPeak": 1,
+      "SelectedMusic": "D_E1M1",
+      "SubmittedFrames": 230580,
+      "ReturnedCompletedFrames": 225540,
+      "CancelledQueuedFramesUpperBound": 5040,
+      "DeviceClosed": true,
+      "Error": null,
+      "CleanupError": null,
+      "QueueStarvationObservations": 0,
+      "RebufferResumes": 0,
+      "Meaning": "Current-source scripted attack produces active audio source activity through the real Windows audio worker. No acoustic review or exact cross-category source arbitration at the device was performed."
     }
   },
   "Playthrough": {

@@ -1,0 +1,60 @@
+{
+  "Schema": "pwshDoom.episode1-current-audio-effects.v1",
+  "RecordedUtc": "2026-09-29T13:09:28.0610543Z",
+  "ImplementationCommit": "cdd5fdd68734dbc663367f44117fd8a49ac17694",
+  "Environment": {
+    "PowerShell": "7.6.5",
+    "HostType": "Windows",
+    "Architecture": "SeparateSimulation"
+  },
+  "Configuration": {
+    "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+    "MusicCatalogSha256": "0E9C9542C75F4D5E2D7FC71E42FAFBB58F94321C3B8A49BA0C9AC5A93752EE58",
+    "Episode": 1,
+    "Map": 1,
+    "Skill": 3,
+    "Workers": 16,
+    "Sound": true,
+    "RealtimeAudio": true,
+    "Headless": true,
+    "ScriptedDriver": true,
+    "ScriptedAttack": "Attack bit (1) held for 7 of every 14 simulation tics; no map route intended.",
+    "RequestedSeconds": 5
+  },
+  "Outcome": {
+    "ExitReason": "Duration",
+    "Error": null,
+    "SimulationError": null,
+    "AudioError": null,
+    "AudioCleanupError": null,
+    "DurationSeconds": 5.011553,
+    "SimulationTics": 174,
+    "SimulationTicsPerSecond": 34.71977648445502,
+    "CompletedRenderUpdates": 243,
+    "HeadlessUpdatesPerWallSecond": 48.48793952296847,
+    "AudioEvents": 14,
+    "AudioSourcePeak": 1,
+    "ActiveMixerVoicesPeak": 1,
+    "ClippedSamples": 0,
+    "PcmSha256": "5257A83E500DCD4A00F24527FD54D330021BE23C67A5224D36C4ED6B7AE79AE4",
+    "SelectedMusic": "D_E1M1",
+    "MusicFrames": 230580,
+    "AudioPackets": 174,
+    "MixedBlocks": 183,
+    "GeneratedRealtimeBlocks": 9,
+    "SubmittedFrames": 230580,
+    "ReturnedCompletedFrames": 225540,
+    "CancelledQueuedFramesUpperBound": 5040,
+    "DeviceClosed": true,
+    "RebufferCount": 0,
+    "RebufferResumes": 0,
+    "QueueStarvationObservations": 0,
+    "MaxPacketQueue": 6
+  },
+  "RawReport": {
+    "Path": "local/r14-current-source-audio-scripted-effects-20260929.json",
+    "Sha256": "33AD6C4C7FAE3F9C26F07093B8EF5310D10B4ECDD72B80BB0F06F953CA3B92C8",
+    "Bytes": 704871
+  },
+  "Limits": "One five-second current-source headless scripted attack and realtime-audio run. Fourteen audio events and a one-voice peak reach the production mixer while music is active; sound category and acoustic output were not independently captured. It tests live packet/device integration only, not same-emitter cross-category device playback, sound quality, physical audibility, full-session continuity, a human route, Terminal presentation, or 35 Hz/60 displayed-update qualification. The 5,040-frame shutdown tail is an upper bound."
+}

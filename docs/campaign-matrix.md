@@ -27,8 +27,13 @@ and the exact [complete Episode 1 scope](episode1-playtest.md). Jason's human
 route remains pending. R14 makes a new sound stop the prior active sound from
 the same emitter regardless of category, while independent emitters continue
 to mix. All 27 deterministic mixer checks and 7 production packet-path checks
-pass. The stored route replay diverges from current gameplay at tic 350 and
-does not qualify audio output. R13's focused same-map/changed-map checks and
+pass. A fresh five-second current-source headless audio run selects D_E1M1,
+returns 226,800/231,840 submitted frames, closes cleanly, and has no software
+starvation or rebuffer observations. A separate scripted-attack run exercises
+14 audio events with one active voice through the same device worker and
+closes cleanly. Neither five-second run is an audible review or campaign
+continuity result. The stored route replay diverges from current gameplay at
+tic 350 and does not qualify that audio output. R13's focused same-map/changed-map checks and
 reset measurement remain in the [R13 receipt](../results/episode1-current-human-candidate-20260929-r13.json).
 The 36-map smoke, 69 transition fixtures, 97 boss checks and E1M1/E1M2/E1M4
 route regressions carry forward from their original pins. None completes the
