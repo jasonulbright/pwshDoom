@@ -4,10 +4,12 @@
 
 The development branch is ahead of the public Preview.3 package. The current
 Episode 1 handoff source is commit
-[`c29b24e`](https://github.com/jasonulbright/pwshDoom/commit/c29b24e8a1c06635f90423672cc74f28836b7095).
+[`8b48f99`](https://github.com/jasonulbright/pwshDoom/commit/8b48f994d19f055d1ce8ca2f06538bf37a92c2f3).
 R12 preserves the optional Classic ANSI 256-color encoder and exact truecolor
 default, and removes repeated per-pixel flat-coordinate masks from the
-PowerShell plane sampler with exact output. This is not a new tagged release.
+PowerShell plane sampler with exact output. The R13 handoff adds same-map
+renderer-asset reuse; one E1M1 replay reduced a reset pause from 6.178 to 0.358
+seconds, without qualifying general pacing. This is not a new tagged release.
 Jason's complete Episode 1 playthrough and the broader Ultimate Doom release
 gates remain open.
 

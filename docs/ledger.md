@@ -4764,3 +4764,29 @@ release-preparation commit is still only a seven-file docs/release diff because
 it packages the already-tested source at its parent. These counts are pinned to
 `ef6e750`; the later same-map renderer fix and its receipt are documented in the
 following entry.
+
+## 2026-09-29 — Pin the R13 Episode 1 human handoff
+
+The current game-source pin is `8b48f994d19f055d1ce8ca2f06538bf37a92c2f3`.
+R13 changes only the launcher and simulation worker behavior for same-map
+renderer-asset reuse; game, rasterizer, and audio source files are unchanged.
+The 36-map smoke and full rendering checks remain pinned to R12, and the
+current-source focused tests cover the affected host/worker paths: 12/12
+same-map save/new-game checks, 12/12 changed-episode checks, and four
+session-worker output cases with 256,000 exact pixel comparisons and preserved
+worker processes.
+
+A fresh current-source player action check still lands the E1M2 chainsaw hit in
+four tics (imp health 60 to 56) and passes the Doom II homing-turn check. The
+previous human-session error was a real comparison failure, fixed by comparing
+`Angle.Data`; the post-fix 26,731-command in-process replay consumed its full
+recording and matched 79 saved gameplay/render checkpoints on source
+`e13f407`. That is a simulation regression, not a full human Terminal session.
+
+The source-pinned [R13 receipt](../results/episode1-current-human-candidate-20260929-r13.json)
+sets fresh `r13` input, session, saves, and settings paths for one complete
+HMP Episode 1 run, including the E1M3 secret exit to E1M9, return to E1M4, and
+the finale. The current handoff is ready for that single human playthrough;
+all broader release gates remain open. The same-map PresentMon result is one
+non-audio pair and does not qualify 35-tic simulation, 60 display transitions,
+full-session audio, or original-executable parity.
