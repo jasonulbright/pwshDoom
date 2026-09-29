@@ -308,7 +308,9 @@ finally {
         AudioBackpressure=$audioBackpressure.ToArray();IncompleteAudioBackpressureStartQpc=$audioBackpressureStart;
         ReplayCheckpoints=$checkpoints.ToArray();ReplayCheckpointMs=(Get-SampleStats $checkpointTimes.ToArray());ReplayCheckpointSamplesMs=$checkpointTimes.ToArray();
         ControlEvents=$controlLog.ToArray();MenuScreen=$menuScreen;MenuRevision=$menuRevision;SaveOperations=$saveOperations.ToArray();SaveDirectory=$saveDirectory;
-        AutomapCommands=$automapCommands.ToArray();AutomapDiscoveryMs=(Get-SampleStats $discoveryTimes.ToArray());AutomapDiscoverySamplesMs=$discoveryTimes.ToArray();AutomapRenderMs=(Get-SampleStats $automapTimes.ToArray());AutomapRenderSamplesMs=$automapTimes.ToArray();
+        AutomapCommands=$automapCommands.ToArray();AutomapDiscoveryMs=(Get-SampleStats $discoveryTimes.ToArray());AutomapDiscoverySamplesMs=$discoveryTimes.ToArray();
+        AutomapDiscoveryCacheHits=if($automapGraphics){$automapGraphics.Discovery.DiscoveryCacheHits}else{0};AutomapDiscoveryTraversalPasses=if($automapGraphics){$automapGraphics.Discovery.DiscoveryCachePasses}else{0};
+        AutomapRenderMs=(Get-SampleStats $automapTimes.ToArray());AutomapRenderSamplesMs=$automapTimes.ToArray();
         StopAtLevelEnd=[bool]$StopAtLevelEnd;Transitions=$transitions.ToArray();FinalGeneration=$generation;SessionScreenMs=(Get-SampleStats $uiTimes.ToArray());SessionScreenSamplesMs=$uiTimes.ToArray();LoadingBoundaries=$loadingBoundaries.ToArray();IncompleteLoadingBoundary=$loadingBoundary;
         SimulationMs=(Get-SampleStats $tickTimes.ToArray());SnapshotPublishMs=(Get-SampleStats $snapshotTimes.ToArray());TickLatenessMs=(Get-SampleStats $lateness.ToArray());
         SimulationSamplesMs=$tickTimes.ToArray();SnapshotSamplesMs=$snapshotTimes.ToArray();TickLatenessSamplesMs=$lateness.ToArray();InputCommands=$commandLog.ToArray();

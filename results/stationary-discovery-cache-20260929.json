@@ -1,0 +1,62 @@
+{
+  "Format": "pwshDoom.StationaryDiscoveryCacheQualification",
+  "Version": 1,
+  "CompletedUtc": "2026-09-29T20:35:01Z",
+  "PowerShell": "7.6.6",
+  "BaseCommit": "a6f64f34bcf65ad3360712d56d1b9ef227e50a3c",
+  "WorkingTreeChangesPresent": true,
+  "IWadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "SourceSha256": {
+    "Renderer": "0BF9EA03595276F64933C5F93AC2F388937EC1FE10651E7B54507DB5BCCB2800",
+    "SimulationWorker": "D53DB65E7787F560717CE260922EC437BB975E8180370AB89C760277C6B4EFA2",
+    "MapTestHarness": "AE10781B9E1AFB652DE4C8C565F4477440DACBBE8646CFF357D4E0282302F3E9",
+    "WorkerTestHarness": "95B421D86F98E380619C1B652A24FB7D511DF3749010CDDFAD552D525D35A393",
+    "BundleBuilder": "981D457F5165EA41E940091E465D97731CAC34B9CBEA5F7FD7E296C81CE580EE"
+  },
+  "MapParity": {
+    "Maps": 36,
+    "HeadingsPerMap": 4,
+    "CompleteMappingBitsetMatches": 144,
+    "FramebuffersUnchanged": true,
+    "RendererCountersUnchanged": true,
+    "UnrelatedLineFlagsUnchanged": true,
+    "InvalidationCases": 11,
+    "Error": null
+  },
+  "SimulationWorkerFixture": {
+    "Checks": 8,
+    "Passed": 8,
+    "Error": null
+  },
+  "IdleHostRun": {
+    "DurationSeconds": 5.0010676,
+    "Workers": 2,
+    "Map": "E1M1",
+    "SimulationTics": 174,
+    "CompletedHeadlessFrames": 81,
+    "TicsPerSecond": 34.79257109022082,
+    "HeadlessFramesPerSecond": 16.19654171441314,
+    "DiscoveryTraversals": 1,
+    "DiscoveryCacheHits": 174,
+    "DiscoveryMeanMs": 0.17685977011494247,
+    "DiscoveryMedianMs": 0.1225,
+    "DiscoveryP95Ms": 0.1471,
+    "Error": null,
+    "HostReportSha256": "FA4926CB365307A5E715A68FD4AFB0A5498148444D4DD78ADBBC872B268C1DA9"
+  },
+  "StationaryMethodBenchmark": {
+    "Map": "E4M9",
+    "CallsPerPath": 120,
+    "BaselineMedianMsPerCall": 16.756895,
+    "CachedMedianMsPerCall": 0.082065,
+    "CachedP95MsPerCall": 0.112795,
+    "CachedBatchTraversalPasses": 0,
+    "MedianMethodSpeedup": 204.19051970998598,
+    "WorldUpdatedDuringBenchmark": false
+  },
+  "Limitations": [
+    "The method benchmark measures DiscoverMap only on a fixed synthetic view and is not a gameplay FPS result.",
+    "Headless frame completions are not terminal writes or displayed frames.",
+    "The idle host observation does not establish moving-view performance, 60 displayed frames/sec, or campaign completion."
+  ]
+}

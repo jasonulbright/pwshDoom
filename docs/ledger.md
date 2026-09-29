@@ -5142,3 +5142,27 @@ frames, and exercises no active sound effect. It adds no campaign completion,
 keyboard-play, acoustic, full-session audio, or pacing evidence. No recording
 was made. See the [portable package receipt](../results/r16-playtest-package-validation-20260929.json)
 and ignored raw host report `local/r16-package-audio-smoke-20260929.json`.
+
+## 2026-09-29 — Reuse stationary map discovery
+
+The renderer now skips repeated BSP discovery only when the camera/view key and
+the relevant visible world state still match. It watches projected segments'
+sectors and sides plus map-reset changes, so off-view sector animation does not
+invalidate a stationary view. Under PowerShell 7.6.6, all 144 mapping-bitset
+comparisons across 36 Ultimate Doom map starts match the uncached path, and
+the eight-check simulation-worker automap fixture passes. A five-second idle
+E1M1 host run records one traversal and 174 cache hits at 34.79 simulation
+tics/sec. Its 81 headless render completions are not displayed frames. The
+static E4M9 discovery-method benchmark is 0.082 ms cached versus 16.757 ms
+uncached median; it is not a gameplay-FPS claim. See
+[`automap-discovery-performance.md`](automap-discovery-performance.md#stationary-view-reuse-2026-09-29)
+and the [qualification receipt](../results/stationary-discovery-cache-20260929.json).
+
+The old 7,118-command E1M3 discovery replay was also run once with stationary
+reuse disabled as a control. It diverges from its stored gameplay checkpoints
+at tic 700 and ends without the old expected route transition. The checkpoint
+source is stale for the current game build, so this is not evidence of a
+stationary-cache defect or a newly reproducible gameplay bug. Per the
+playtesting plan, the route was not tuned or retried; the short result is
+retained in `results/e1m3-stale-discovery-replay-20260929.json` and the ignored
+raw report remains under `local/`.

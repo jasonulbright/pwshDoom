@@ -28,6 +28,189 @@ class ThreeDRenderer {
     [long[]] $DiscoveryAngleValues
     [bool[]] $DiscoveryAngleReady
     [Collections.Generic.List[double]] $DiscoveryCacheSetupSamples = [Collections.Generic.List[double]]::new()
+
+    # A fixed view maps the same lines unless moving sectors, lighting, switch
+    # textures or restored automap flags change. Keep the expensive BSP walk
+    # out of stationary simulation tics, while validating those inputs before
+    # reusing the prior result.
+    [bool] $CacheStationaryDiscovery = $true
+    [long] $DiscoveryCacheHits
+    [long] $DiscoveryCachePasses
+    [bool] $DiscoveryViewKeyValid
+    [bool] $DiscoveryStateValid
+    [Map] $DiscoveryCachedMap
+    [World] $DiscoveryCachedWorld
+    [DrawScreen] $DiscoveryCachedScreen
+    [LineDef[]] $DiscoveryCachedLines
+    [Sector[]] $DiscoveryCachedSectors
+    [SideDef[]] $DiscoveryCachedSides
+    [int] $DiscoveryCachedViewX
+    [int] $DiscoveryCachedViewY
+    [long] $DiscoveryCachedViewAngle
+    [int] $DiscoveryCachedFirstColumn
+    [int] $DiscoveryCachedEndColumn
+    [int] $DiscoveryCachedWindowX
+    [int] $DiscoveryCachedWindowWidth
+    [long] $DiscoveryCachedClipAngle
+    [long] $DiscoveryCachedClipAngle2
+    [Map] $DiscoveryStateIndexedMap
+    [int[]] $DiscoverySegmentSideIndices
+    [Collections.Generic.Dictionary[SideDef,int]] $DiscoverySideIndexLookup
+    [bool[]] $DiscoveryRelevantSectorFlags
+    [bool[]] $DiscoveryRelevantSideFlags
+    [Collections.Generic.List[int]] $DiscoveryRelevantSectorIndices = [Collections.Generic.List[int]]::new()
+    [Collections.Generic.List[int]] $DiscoveryRelevantSideIndices = [Collections.Generic.List[int]]::new()
+    [int[]] $DiscoverySectorFloorHeights
+    [int[]] $DiscoverySectorCeilingHeights
+    [int[]] $DiscoverySectorFloorFlats
+    [int[]] $DiscoverySectorCeilingFlats
+    [int[]] $DiscoverySectorLightLevels
+    [int[]] $DiscoverySideMiddleTextures
+    [bool[]] $DiscoveryLineMapped
+
+    [void] PrepareStationaryDiscoveryMap([Map] $map) {
+        if ([object]::ReferenceEquals($this.DiscoveryStateIndexedMap, $map)) { return }
+        $sides = $map.Sides
+        $this.DiscoverySideIndexLookup = [Collections.Generic.Dictionary[SideDef,int]]::new()
+        for ($i = 0; $i -lt $sides.Length; $i++) { $this.DiscoverySideIndexLookup.Add($sides[$i], $i) }
+        $this.DiscoverySegmentSideIndices = [int[]]::new($map.Segs.Length)
+        for ($i = 0; $i -lt $map.Segs.Length; $i++) {
+            $this.DiscoverySegmentSideIndices[$i] = $this.DiscoverySideIndexLookup[$map.Segs[$i].SideDef]
+        }
+        $this.DiscoveryRelevantSectorFlags = [bool[]]::new($map.Sectors.Length)
+        $this.DiscoveryRelevantSideFlags = [bool[]]::new($sides.Length)
+        $this.DiscoveryRelevantSectorIndices.Clear()
+        $this.DiscoveryRelevantSideIndices.Clear()
+        $this.DiscoveryStateIndexedMap = $map
+    }
+
+    [void] ResetStationaryDiscoveryRelevance() {
+        foreach ($index in $this.DiscoveryRelevantSectorIndices) { $this.DiscoveryRelevantSectorFlags[$index] = $false }
+        foreach ($index in $this.DiscoveryRelevantSideIndices) { $this.DiscoveryRelevantSideFlags[$index] = $false }
+        $this.DiscoveryRelevantSectorIndices.Clear()
+        $this.DiscoveryRelevantSideIndices.Clear()
+    }
+
+    [void] MarkStationaryDiscoverySegment([Sector] $front, [Sector] $back, [int] $sideIndex) {
+        if (-not $this.CacheStationaryDiscovery) { return }
+        $frontIndex = $front.Number
+        if (-not $this.DiscoveryRelevantSectorFlags[$frontIndex]) {
+            $this.DiscoveryRelevantSectorFlags[$frontIndex] = $true
+            $this.DiscoveryRelevantSectorIndices.Add($frontIndex)
+        }
+        if ($null -ne $back) {
+            $backIndex = $back.Number
+            if (-not $this.DiscoveryRelevantSectorFlags[$backIndex]) {
+                $this.DiscoveryRelevantSectorFlags[$backIndex] = $true
+                $this.DiscoveryRelevantSectorIndices.Add($backIndex)
+            }
+        }
+        if (-not $this.DiscoveryRelevantSideFlags[$sideIndex]) {
+            $this.DiscoveryRelevantSideFlags[$sideIndex] = $true
+            $this.DiscoveryRelevantSideIndices.Add($sideIndex)
+        }
+    }
+
+    [bool] MatchesDiscoveryView([Player] $player, [Map] $map, [World] $world) {
+        return $this.DiscoveryViewKeyValid -and
+            [object]::ReferenceEquals($this.DiscoveryCachedMap, $map) -and
+            [object]::ReferenceEquals($this.DiscoveryCachedWorld, $world) -and
+            [object]::ReferenceEquals($this.DiscoveryCachedScreen, $this.screen) -and
+            $this.DiscoveryCachedViewX -eq $player.Mobj.X.Data -and
+            $this.DiscoveryCachedViewY -eq $player.Mobj.Y.Data -and
+            $this.DiscoveryCachedViewAngle -eq $player.Mobj.Angle.Data -and
+            $this.DiscoveryCachedFirstColumn -eq $this.screen.FirstColumn -and
+            $this.DiscoveryCachedEndColumn -eq $this.screen.EndColumn -and
+            $this.DiscoveryCachedWindowX -eq $this.windowX -and
+            $this.DiscoveryCachedWindowWidth -eq $this.windowWidth -and
+            $this.DiscoveryCachedClipAngle -eq $this.clipAngle.Data -and
+            $this.DiscoveryCachedClipAngle2 -eq $this.clipAngle2.Data
+    }
+
+    [bool] StationaryDiscoveryStateMatches([Map] $map) {
+        if (-not $this.DiscoveryStateValid -or
+            -not [object]::ReferenceEquals($this.DiscoveryCachedMap, $map)) { return $false }
+
+        $sectors = $map.Sectors
+        $sides = $map.Sides
+        $lines = $map.Lines
+        if (-not [object]::ReferenceEquals($this.DiscoveryCachedSectors, $sectors) -or
+            -not [object]::ReferenceEquals($this.DiscoveryCachedSides, $sides) -or
+            -not [object]::ReferenceEquals($this.DiscoveryCachedLines, $lines) -or
+            $sectors.Length -ne $this.DiscoverySectorFloorHeights.Length -or
+            $sides.Length -ne $this.DiscoverySideMiddleTextures.Length -or
+            $lines.Length -ne $this.DiscoveryLineMapped.Length) { return $false }
+
+        foreach ($i in $this.DiscoveryRelevantSectorIndices) {
+            $sector = $sectors[$i]
+            if ($sector.FloorHeight.Data -ne $this.DiscoverySectorFloorHeights[$i] -or
+                $sector.CeilingHeight.Data -ne $this.DiscoverySectorCeilingHeights[$i] -or
+                $sector.FloorFlat -ne $this.DiscoverySectorFloorFlats[$i] -or
+                $sector.CeilingFlat -ne $this.DiscoverySectorCeilingFlats[$i] -or
+                $sector.LightLevel -ne $this.DiscoverySectorLightLevels[$i]) { return $false }
+        }
+        foreach ($i in $this.DiscoveryRelevantSideIndices) {
+            if ($sides[$i].MiddleTexture -ne $this.DiscoverySideMiddleTextures[$i]) { return $false }
+        }
+        for ($i = 0; $i -lt $lines.Length; $i++) {
+            if ($this.DiscoveryLineMapped[$i] -and
+                (($lines[$i].Flags -band [LineFlags]::Mapped) -eq 0)) { return $false }
+        }
+        return $true
+    }
+
+    [void] StoreDiscoveryView([Player] $player, [Map] $map, [World] $world) {
+        $this.DiscoveryCachedMap = $map
+        $this.DiscoveryCachedWorld = $world
+        $this.DiscoveryCachedScreen = $this.screen
+        $this.DiscoveryCachedViewX = $player.Mobj.X.Data
+        $this.DiscoveryCachedViewY = $player.Mobj.Y.Data
+        $this.DiscoveryCachedViewAngle = $player.Mobj.Angle.Data
+        $this.DiscoveryCachedFirstColumn = $this.screen.FirstColumn
+        $this.DiscoveryCachedEndColumn = $this.screen.EndColumn
+        $this.DiscoveryCachedWindowX = $this.windowX
+        $this.DiscoveryCachedWindowWidth = $this.windowWidth
+        $this.DiscoveryCachedClipAngle = $this.clipAngle.Data
+        $this.DiscoveryCachedClipAngle2 = $this.clipAngle2.Data
+        $this.DiscoveryViewKeyValid = $true
+    }
+
+    [void] StoreStationaryDiscoveryState([Map] $map) {
+        $sectors = $map.Sectors
+        $sides = $map.Sides
+        $lines = $map.Lines
+        if ($null -eq $this.DiscoverySectorFloorHeights -or $this.DiscoverySectorFloorHeights.Length -ne $sectors.Length) {
+            $this.DiscoverySectorFloorHeights = [int[]]::new($sectors.Length)
+            $this.DiscoverySectorCeilingHeights = [int[]]::new($sectors.Length)
+            $this.DiscoverySectorFloorFlats = [int[]]::new($sectors.Length)
+            $this.DiscoverySectorCeilingFlats = [int[]]::new($sectors.Length)
+            $this.DiscoverySectorLightLevels = [int[]]::new($sectors.Length)
+        }
+        if ($null -eq $this.DiscoverySideMiddleTextures -or $this.DiscoverySideMiddleTextures.Length -ne $sides.Length) {
+            $this.DiscoverySideMiddleTextures = [int[]]::new($sides.Length)
+        }
+        if ($null -eq $this.DiscoveryLineMapped -or $this.DiscoveryLineMapped.Length -ne $lines.Length) {
+            $this.DiscoveryLineMapped = [bool[]]::new($lines.Length)
+        }
+        foreach ($i in $this.DiscoveryRelevantSectorIndices) {
+            $sector = $sectors[$i]
+            $this.DiscoverySectorFloorHeights[$i] = $sector.FloorHeight.Data
+            $this.DiscoverySectorCeilingHeights[$i] = $sector.CeilingHeight.Data
+            $this.DiscoverySectorFloorFlats[$i] = $sector.FloorFlat
+            $this.DiscoverySectorCeilingFlats[$i] = $sector.CeilingFlat
+            $this.DiscoverySectorLightLevels[$i] = $sector.LightLevel
+        }
+        foreach ($i in $this.DiscoveryRelevantSideIndices) {
+            $this.DiscoverySideMiddleTextures[$i] = $sides[$i].MiddleTexture
+        }
+        for ($i = 0; $i -lt $lines.Length; $i++) {
+            $this.DiscoveryLineMapped[$i] = (($lines[$i].Flags -band [LineFlags]::Mapped) -ne 0)
+        }
+        $this.DiscoveryCachedSectors = $sectors
+        $this.DiscoveryCachedSides = $sides
+        $this.DiscoveryCachedLines = $lines
+        $this.DiscoveryStateValid = $true
+    }
     [void] DiscoverIndexedSeg([int] $index) {
         $seg=$this.world.Map.Segs[$index]
 
@@ -49,6 +232,9 @@ class ThreeDRenderer {
         if ($x2 -le $this.screen.FirstColumn - $this.windowX -or $x1 -ge $this.screen.EndColumn - $this.windowX) { return }
         $front = $seg.FrontSector
         $back = $seg.BackSector
+        if ($this.CacheStationaryDiscovery) {
+            $this.MarkStationaryDiscoverySegment($front, $back, $this.DiscoverySegmentSideIndices[$index])
+        }
         if ($null -eq $back -or $back.CeilingHeight.Data -le $front.FloorHeight.Data -or $back.FloorHeight.Data -ge $front.CeilingHeight.Data) {
             $this.DrawSolidWall($seg, [Angle]::Ang0, $x1, $x2 - 1)
             return
@@ -100,6 +286,9 @@ class ThreeDRenderer {
         if ($x2 -le $this.screen.FirstColumn - $this.windowX -or $x1 -ge $this.screen.EndColumn - $this.windowX) { return }
         $front = $seg.FrontSector
         $back = $seg.BackSector
+        if ($this.CacheStationaryDiscovery) {
+            $this.MarkStationaryDiscoverySegment($front, $back, $this.DiscoverySideIndexLookup[$seg.SideDef])
+        }
         if ($null -eq $back -or $back.CeilingHeight.Data -le $front.FloorHeight.Data -or $back.FloorHeight.Data -ge $front.CeilingHeight.Data) {
             $this.DrawSolidWall($seg, [Angle]::Ang0, $x1, $x2 - 1)
             return
@@ -810,10 +999,41 @@ class ThreeDRenderer {
     [long] $PerfThreeDVisSprites
 
     [void] DiscoverMap([Player] $player) {
+        $discoveryWorld = $player.Mobj.World
+        $map = $discoveryWorld.Map
+        $this.DiscoveryRanges = 0
+        $sameDiscoveryView = $false
+        $captureDiscoveryState = $false
+        if ($this.CacheStationaryDiscovery) {
+            $this.PrepareStationaryDiscoveryMap($map)
+            $sameDiscoveryView = $this.MatchesDiscoveryView($player, $map, $discoveryWorld)
+            if ($sameDiscoveryView -and $this.StationaryDiscoveryStateMatches($map)) {
+                $this.DiscoveryCacheHits++
+                return
+            }
+            if ($sameDiscoveryView) {
+                # The view is unchanged but geometry, sector appearance or
+                # mapped flags changed. Re-run discovery and refresh the full
+                # semantic snapshot below.
+                $captureDiscoveryState = $true
+            } else {
+                # A changed view already requires a BSP pass. Avoid scanning
+                # every sector and side while the player is moving. Capture
+                # their state on the first repeated view instead; that one
+                # extra pass prevents stale reuse after an unseen world change.
+                $captureDiscoveryState = -not $this.DiscoveryViewKeyValid -or
+                    -not [object]::ReferenceEquals($this.DiscoveryCachedMap, $map) -or
+                    -not [object]::ReferenceEquals($this.DiscoveryCachedWorld, $discoveryWorld)
+                $this.DiscoveryStateValid = $false
+            }
+        } else {
+            $this.DiscoveryViewKeyValid = $false
+            $this.DiscoveryStateValid = $false
+        }
+
         if ($this.CacheDiscoveryAngles) {
-            if (-not [object]::ReferenceEquals($this.DiscoveryIndexedMap, $player.Mobj.World.Map)) {
+            if (-not [object]::ReferenceEquals($this.DiscoveryIndexedMap, $map)) {
                 $setupWatch = [Diagnostics.Stopwatch]::StartNew()
-                $map = $player.Mobj.World.Map
                 $lookup = [Collections.Generic.Dictionary[Vertex,int]]::new()
                 for ($v = 0; $v -lt $map.Vertices.Length; $v++) { $lookup.Add($map.Vertices[$v], $v) }
                 $this.DiscoveryVertex1 = [int[]]::new($map.Segs.Length)
@@ -829,7 +1049,7 @@ class ThreeDRenderer {
             }
             [Array]::Clear($this.DiscoveryAngleReady)
         }
-        $this.world = $player.Mobj.World
+        $this.world = $discoveryWorld
         $this.frameFrac = [Fixed]::One
         $this.viewX = $player.Mobj.X
         $this.viewY = $player.Mobj.Y
@@ -846,10 +1066,21 @@ class ThreeDRenderer {
         $this.clipRanges[1].First = [Math]::Min($this.windowWidth, $this.screen.EndColumn - $this.windowX)
         $this.clipRanges[1].Last = 0x7fffffff
         $this.clipRangeCount = 2
-        $this.DiscoveryRanges = 0
+        if ($this.CacheStationaryDiscovery) { $this.ResetStationaryDiscoveryRelevance() }
         $this.DiscoveryOnly = $true
-        try { $this.RenderBspNode($this.world.Map.Nodes.Length - 1) }
+        $discoveryCompleted = $false
+        try {
+            $this.DiscoveryCachePasses++
+            $this.RenderBspNode($map.Nodes.Length - 1)
+            $discoveryCompleted = $true
+        }
         finally { $this.DiscoveryOnly = $false }
+        if ($discoveryCompleted -and $this.CacheStationaryDiscovery) {
+            $this.StoreDiscoveryView($player, $map, $discoveryWorld)
+            if ($captureDiscoveryState) {
+                $this.StoreStationaryDiscoveryState($map)
+            }
+        }
     }
 
     [void] Render([Player] $player, [Fixed] $frameFrac) {

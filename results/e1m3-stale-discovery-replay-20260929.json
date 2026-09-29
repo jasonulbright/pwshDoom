@@ -1,0 +1,16 @@
+{
+  "Format": "pwshDoom.StaleDiscoveryReplayControl",
+  "Version": 1,
+  "CompletedUtc": "2026-09-29",
+  "Replay": "E1M3 recorded discovery route",
+  "CommandsProcessed": 7118,
+  "StationaryCacheEnabled": false,
+  "Outcome": "Stored gameplay checkpoint mismatch",
+  "FirstMeaningfulGameStateMismatchTic": 700,
+  "FinalObservedState": "E1M3 Level at tic 7118",
+  "OldCheckpointRouteExpectedIntermissionTic": 6931,
+  "OldCheckpointRouteExpectedNextMapTic": 7047,
+  "Assessment": "The recorded route no longer matches the current gameplay checkpoint source. The control had stationary discovery reuse disabled, so it does not implicate the new cache. This is not treated as a reproducible product defect or automated playability evidence.",
+  "Disposition": "Recorded once and deferred under the human-playthrough plan; no route tuning or retry.",
+  "RawReport": "local/automap-stationary-baseline-20260929.json"
+}
