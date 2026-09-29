@@ -4692,14 +4692,25 @@ renderer receipt](../results/renderer-flat-texel-bit-extraction-20260929.json)
 retain portable evidence and hashes.
 
 The user asked why a release note could say only release metadata changed after
-a long run of commits. For the audited range, Preview.3's tag
-`v0.1.0-preview.3` points to `34e3d17`, whose parent-to-tag diff changes seven
-release/documentation files (+30/−38) and no game source. That is the final
-release-preparation commit, not a summary of development. The fixed range from
-that tag to R12 source `c29b24e` contains 53 commits: 15 touch game/runtime
-source files (+632/−184 across 16 files), 13 touch test/benchmark/experiment
-scripts (+501/−54 across 19 files), 38 touch checked-in evidence (+25,312/−15
-across 65 files), and 47 touch documentation (+2,080/−53 across 18 files).
-Commit-category totals overlap. This confirms that the intervening work is not
-all test harness; the release commit itself was metadata-only because it
-reused a tested source snapshot.
+a long run of commits. Preview.3's tag `v0.1.0-preview.3` points to `34e3d17`,
+whose parent-to-tag diff changes seven release/documentation files (+30/−38)
+and no game source. That is the final release-preparation commit, not a summary
+of development. The development branch then reached the R12 source candidate
+`c29b24e` (53 commits after the tag), followed by the current documentation pin
+`1ab6d16` (54 commits after the tag). A fresh directory-level diff from
+Preview.3 to current HEAD reports 125 changed files, +28,997/−333 lines:
+
+- `src/`: 14 PowerShell source files, +616/−180 (net +436); 15 commits touch
+  this tree.
+- `scripts/`: 24 files, +556/−81, mixing runtime workers/launchers with tests,
+  measurements, recording, and build tools.
+- `results/`: 67 JSON evidence files, +25,645/−15. These account for about
+  88% of additions and are measured output, not source code.
+- `docs/`: 16 files, +2,134/−48. The root changelog and README and two launcher
+  files account for the remaining changed paths.
+
+The earlier audit in this entry used inconsistent path groupings and stale
+totals; use the fresh figures above. The commit itself can still be
+metadata-only because it packages a source snapshot already tested at its
+parent. That does not mean the 54 commits since Preview.3 were all included in
+Preview.3; the current checkout has no later preview tag.
