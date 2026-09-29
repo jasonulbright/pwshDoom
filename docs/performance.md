@@ -923,3 +923,23 @@ device closes cleanly. This run exercises one brief game-effect path but does
 not measure monitor presentations, acoustics, or full-session audio. The
 [scripted-effect receipt](../results/episode1-current-audio-effects-r14-20260929.json)
 preserves the raw report hash and its limits.
+
+## Rejected masked-sprite post property hoist — September 29, 2026
+
+A small PowerShell candidate copied each masked sprite post's data-array and
+offset properties to locals before the inner vertical pixel loop. Two
+fixed-state E3M6 profiles per variant used the Steam IWAD, HMP, the prepared
+worker-mask snapshot, 16 production-equivalent stripes rendered serially, four
+warmup frames, and 20 measured frames per stripe. All 640 stripe samples per
+variant produced the same indexed framebuffer and per-worker pixel hashes.
+
+| Phase | Baseline median / p95 | Candidate median / p95 |
+| --- | ---: | ---: |
+| Actor phase | 1.950 / 4.215 ms | 1.971 / 4.265 ms |
+| Total stripe render | 7.145 / 9.846 ms | 7.130 / 10.062 ms |
+
+The actor phase was slightly slower; the 0.016 ms total-median difference is
+not a repeatable gain, and candidate p95 was worse. The edit was reverted.
+These are serial fixed-state phase timings, not concurrent-worker, host, or
+display performance. The [compact comparison receipt](../results/renderer-post-properties-hoist-rejected-20260929.json)
+indexes the ignored raw profiles and exact source hashes.

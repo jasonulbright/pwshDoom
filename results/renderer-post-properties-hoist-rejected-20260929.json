@@ -1,0 +1,66 @@
+{
+  "Version": 1,
+  "Name": "Rejected masked-sprite post property hoist",
+  "FinishedUtc": "2026-09-29T14:07:18.9542300Z",
+  "RepositoryCommit": "b2c78a19e9029e8e117681476730302130f71837",
+  "GameSourceCommit": "cdd5fdd68734dbc663367f44117fd8a49ac17694",
+  "PowerShell": "7.6.5",
+  "IWadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "Measurement": {
+    "Script": "scripts/Measure-FastRendererPhases.ps1",
+    "Episode": 3,
+    "Map": 6,
+    "Skill": 3,
+    "SetupTics": 0,
+    "Workers": 16,
+    "WarmupFrames": 4,
+    "MeasuredFramesPerRun": 20,
+    "RunsPerVariant": 2,
+    "AggregateStripeSamplesPerVariant": 640,
+    "Transport": "Prepared snapshot with worker masks",
+    "Meaning": "Fixed-state PowerShell renderer phases run serially as sixteen production-equivalent column stripes; excludes concurrent scheduling, simulation, audio, terminal output, and presentation.",
+    "HarnessSha256": "637C9DCC5AB9CF5E4B885F2E15EFE6B3BABCCABF7084457AEFD5E44228F1FB3F"
+  },
+  "Baseline": {
+    "RendererSha256": "15428F29AE3DFA45514EC428AAE5BCDE7FF32532249C07AC2571428967A500ED",
+    "ActorMedianMs": 1.9499,
+    "ActorP95Ms": 4.2147,
+    "TotalMedianMs": 7.1452,
+    "TotalP95Ms": 9.8459,
+    "Reports": [
+      {
+        "Path": "local/actor-post-hoist-baseline-20260929-a2-r2.json",
+        "Sha256": "20E16055D7FCB5E637A756277B114A02E75006301D7E3FAF5F37E54EC4AA7EFD"
+      },
+      {
+        "Path": "local/actor-post-hoist-baseline-20260929-a3.json",
+        "Sha256": "835427919A07B7EF88222A133E530271F6FF8F43B35DA0A1D08940FA5624DDC0"
+      }
+    ]
+  },
+  "Candidate": {
+    "Change": "Move Data and Offset reads out of each masked sprite pixel iteration into per-post locals.",
+    "RendererSha256": "FE547A5B756966A91CD7D71DFC6825B35B226EEDE84C78A40D89763A323B2192",
+    "ActorMedianMs": 1.9711,
+    "ActorP95Ms": 4.2649,
+    "TotalMedianMs": 7.1295,
+    "TotalP95Ms": 10.0621,
+    "Reports": [
+      {
+        "Path": "local/actor-post-hoist-candidate-20260929-b1.json",
+        "Sha256": "328C4A445FB7B8E3FB54D34EDCDC8943933C19EC7ABBCE50AF9E613AA7CBE589"
+      },
+      {
+        "Path": "local/actor-post-hoist-candidate-20260929-b2.json",
+        "Sha256": "D607A851F927FB26E378576BBF3D5A1AEADE14A3C8432D3B33F0F4312173AEAF"
+      }
+    ]
+  },
+  "Correctness": {
+    "FrameSha256": "92BFF34916AE31903A0A2A35A386940121EEE521346A3355543985E371561D82",
+    "PixelOutputMatches": true,
+    "PerWorkerOutputHashesMatch": true
+  },
+  "Decision": "Rejected: actor timing was slightly slower and total medians were effectively tied; no repeatable gain was demonstrated. The edit was reverted.",
+  "Meaning": "A focused rendering profile only; no whole-game or FPS claim."
+}

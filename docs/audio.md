@@ -275,3 +275,23 @@ same-emitter cross-category arbitration at the device. The deterministic
 cover that rule in isolation. No audible review, campaign route, full-session
 continuity or visible Terminal pacing is established. See the
 [portable effect receipt](../results/episode1-current-audio-effects-r14-20260929.json).
+
+## R15 E1M1 actual-device loop-boundary run — September 29, 2026
+
+The current game-source commit `cdd5fdd` ran headless for 100 seconds under
+PowerShell 7.6.5 with 16 renderer workers, the installed Ultimate Doom IWAD,
+the qualified Episode 1 music catalog, and realtime audio enabled. The actual
+Windows audio worker selected D_E1M1 and mixed 4,418,820 frames (100.2
+seconds), crossing the track's qualified 4,233,600-frame / 96-second loop
+period. It returned 4,413,780 frames; the 5,040-frame remainder is the
+shutdown-cancellation upper bound. There were no software queue-starvation or
+rebuffer observations, no clipped samples, and no simulation, audio, or
+cleanup error. The device closed cleanly.
+
+The session advanced 3,499 simulation tics (34.987/sec) and completed 4,029
+headless render updates (40.287/sec). These are below the 35-tic target and
+are not Terminal writes or displayed frames. This single idle E1M1 run
+strengthens loop-boundary and device-continuity evidence; it is not an
+acoustic review, active-combat test, full-campaign audio qualification, or
+human route. The [portable receipt](../results/audio-e1m1-realtime-loop-boundary-r15-20260929.json)
+pins the IWAD, catalog, source, and ignored raw report.

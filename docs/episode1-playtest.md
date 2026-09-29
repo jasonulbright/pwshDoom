@@ -47,6 +47,12 @@ On a cold start, allow up to 60 seconds for simulation and music workers to init
 
 The `r14` input/report paths and dedicated save/settings locations preserve earlier attempts. Confirm that the two output files do not already exist before launch; keep all generated data under `C:\projects\pwshDoom\local` and do not share it with the WAD.
 
+The current R14 game source also passes a 100-second headless realtime-audio
+run on E1M1. The actual device worker mixed 100.2 seconds of D_E1M1—past its
+qualified 96-second loop period—with no software starvation/rebuffer reports
+and clean shutdown. The run remains headless and does not assess sound quality
+or full-route continuity; see the [R15 receipt](../results/audio-e1m1-realtime-loop-boundary-r15-20260929.json).
+
 ## Controls
 
 | Key | Action |

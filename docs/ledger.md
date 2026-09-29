@@ -6,6 +6,14 @@ The roadmap requires difficulty-dependent gameplay behavior to be separately qua
 
 The first respawn fixture incorrectly made a still-solid living actor eligible, then treated the removed thinker as active until the next thinker-list cleanup. The final check kills a real spawned actor at a clear IWAD spawn location and asserts the engine's Removed state, which is the expected deferred-unlink behavior. This was a fixture correction, not an engine defect. The [portable receipt](../results/difficulty-behavior-r1-20260929.json) records all actual/expected values; [test source](../scripts/Test-DifficultyBehavior.ps1) reproduces them. Scope is focused E1M1 mechanics only; no map routes, every skill/map combination, or human playthrough are claimed.
 
+## 2026-09-29 — Verify one complete E1M1 music loop on the actual worker
+
+Ran the current R14 game source headless for 100 seconds on HMP E1M1 with 16 render workers, the Steam Ultimate Doom IWAD, the eleven-track local Episode 1 catalog, and realtime audio. The actual Windows device worker selected D_E1M1 and mixed 4,418,820 frames (100.2 seconds), beyond its qualified 4,233,600-frame / 96-second loop period. It returned 4,413,780 frames; the 5,040-frame tail is the shutdown-cancellation upper bound. Queue-starvation observations, rebuffer count, clipped samples, simulation/audio/cleanup errors were all zero; the device closed. The run advanced 3,499 tics at 34.987/sec and completed 4,029 headless render updates at 40.287/sec. This is one idle map and not acoustic, visible-presentation, full-campaign, or human-route evidence. The [portable receipt](../results/audio-e1m1-realtime-loop-boundary-r15-20260929.json) hashes the ignored raw report, IWAD, catalog, and qualification.
+
+## 2026-09-29 — Reject masked-sprite post property caching
+
+Tested a PowerShell candidate that moved each masked sprite post's data and offset property reads outside its inner vertical pixel loop. At a fixed HMP E3M6 state, two 20-frame samples per variant covered 640 serial production-equivalent stripe renders. The exact frame and per-worker pixel hashes matched. Pooled actor medians were 1.950 ms baseline and 1.971 ms candidate; total stripe medians were 7.145 and 7.130 ms, with no p95 improvement. This is within timing noise, not an optimization; the candidate was reverted. The [portable receipt](../results/renderer-post-properties-hoist-rejected-20260929.json) pins parameters, hashes, and local raw-profile hashes. No route or FPS claim follows.
+
 ## 2026-09-10 — Study established
 
 User authorized a feasibility study, documentation as work proceeds, and rendering experiments in `C:\projects\pwshDoom`. The earlier workspace was an empty Git repository under OneDrive. A new repository was initialized at the requested location; no existing project files were moved or deleted.

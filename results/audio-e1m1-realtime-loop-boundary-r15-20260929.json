@@ -1,0 +1,55 @@
+{
+  "Version": 1,
+  "Name": "R15 actual-worker E1M1 realtime music loop-boundary run",
+  "FinishedUtc": "2026-09-29T14:01:44.8656211Z",
+  "RepositoryCommit": "b2c78a19e9029e8e117681476730302130f71837",
+  "GameSourceCommit": "cdd5fdd68734dbc663367f44117fd8a49ac17694",
+  "PowerShell": "7.6.5",
+  "IWadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "MusicCatalogSha256": "0E9C9542C75F4D5E2D7FC71E42FAFBB58F94321C3B8A49BA0C9AC5A93752EE58",
+  "DoomE1M1QualificationSha256": "1D5A9D6D16E8CDCA74646D6AEF009CDB42EB59B87941B0EFE648F9D3A98C96CF",
+  "Workload": {
+    "Episode": 1,
+    "Map": 1,
+    "Skill": 3,
+    "RendererWorkers": 16,
+    "Headless": true,
+    "RealtimeAudio": true,
+    "RequestedSeconds": 100,
+    "Input": "Idle"
+  },
+  "Game": {
+    "Seconds": 100.0081573,
+    "SimulationTics": 3499,
+    "TicsPerSecond": 34.98714599353987,
+    "CompletedRenderUpdates": 4029,
+    "HeadlessRenderUpdatesPerSecond": 40.28671369190401,
+    "ExitReason": "Duration",
+    "Error": null
+  },
+  "Audio": {
+    "SelectedMusic": "D_E1M1",
+    "MusicFrames": 4418820,
+    "MusicSeconds": 100.2,
+    "QualifiedLoopPeriodFrames": 4233600,
+    "QualifiedLoopPeriodSeconds": 96,
+    "CrossedOneFullLoopBoundary": true,
+    "SubmittedFrames": 4418820,
+    "ReturnedCompletedFrames": 4413780,
+    "CancelledShutdownFramesUpperBound": 5040,
+    "MixedBlocks": 3507,
+    "RealtimeFillBlocks": 8,
+    "QueueStarvationObservations": 0,
+    "Rebuffers": 0,
+    "MaxPacketQueue": 5,
+    "ClippedSamples": 0,
+    "DeviceClosed": true,
+    "Error": null,
+    "CleanupError": null
+  },
+  "Evidence": {
+    "RawReport": "local/e1m1-audio-loop-boundary-r15.json",
+    "RawReportSha256": "4A4D66B7ACD540F037B2F83834D71EDCAB0B5DA57E87284AB2DC102528A55001",
+    "Meaning": "Headless actual-device and worker continuity across one qualified E1M1 loop period; not acoustic review, visible Terminal presentation, full campaign audio, or a map route."
+  }
+}
