@@ -1,0 +1,233 @@
+{
+  "Format": "pwshDoom.RejectedDirectPlaneLookupExperiment",
+  "Version": 1,
+  "RecordedUtc": "2026-09-29T02:52:06.6752414Z",
+  "Decision": "Rejected",
+  "BaselineCodeCommit": "e8fd50012c343a3e858001a086e2de7b5efac786",
+  "ExperimentBranchHead": "4fbdbcefe3977a5df4c898c8d996aa5b0022acf9",
+  "Runtime": "PowerShell 7.6.5",
+  "Cpu": "Intel Core Ultra 7 265K",
+  "LogicalProcessors": 20,
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "Workload": {
+    "Episode": 3,
+    "Map": 6,
+    "Skill": 3,
+    "Tics": 0,
+    "Workers": 16,
+    "WarmupFramesPerStripe": 5,
+    "MeasuredFramesPerStripe": 30,
+    "SequentialProductionWidthStripes": true,
+    "AudioSimulation": false,
+    "TerminalOutput": false
+  },
+  "CandidateDescription": "Replace sector-id decode, floor/ceiling branch, and multiple sector arrays with direct plane-id keyed height, flat-byte, and light typed arrays refreshed per decoded snapshot.",
+  "SourceFingerprints": {
+    "BaselineGitBlobSha256": "D9CE1FBD6DAA19B8D8BB2612203D729925406CE8BB02E99BB0A40D2CD72C36BF",
+    "BaselineWindowsCheckoutSha256": "05E1A848F6F92B6913970F7440258813760BE850C308CBBF495F79774F69F54F",
+    "BaselinePreRestoreWorkingTreeSha256": "16872550743A07D7AD071FB66B04AF2483F518477FBECA506A0DEE815735530C",
+    "CandidateWorkingTreeSha256": "50DF8E2676317EFEF157571972E4736D5E7FA53CB630C52669ADD71D5345D531",
+    "CheckoutNote": "core.autocrlf is true. Git reports no content diff for the baseline; its raw SHA changes with the working-tree newline form."
+  },
+  "RunOrder": "Three baseline runs, then three candidate runs, followed by adjacent counter-ordered pairs baseline/candidate and candidate/baseline.",
+  "Runs": [
+    {
+      "Set": "Baseline",
+      "Trial": "Baseline-1",
+      "Raw": {
+        "Path": "local/renderer-phases-e3m6-sector-cache-followup-20260929.json",
+        "Sha256": "D7E6AEEC85FE7FEFB14462759D2C191B535C6E77703582BA8B8D0B3072AF23EC"
+      },
+      "RendererSha256": "16872550743A07D7AD071FB66B04AF2483F518477FBECA506A0DEE815735530C",
+      "FullFrameSha256": "92BFF34916AE31903A0A2A35A386940121EEE521346A3355543985E371561D82",
+      "GeometryMedianMs": 3.7875,
+      "GeometryP95Ms": 5.6356,
+      "TotalMedianMs": 6.8002,
+      "TotalP95Ms": 9.4116,
+      "WorkerDecodeMedianMs": 0.6794
+    },
+    {
+      "Set": "Baseline",
+      "Trial": "Baseline-2",
+      "Raw": {
+        "Path": "local/renderer-phases-e3m6-sector-cache-baseline-b-20260929.json",
+        "Sha256": "548972D748E4CB01743F8368D7235297CEDD59268F4618BF0D96FFC01BA6BF6C"
+      },
+      "RendererSha256": "16872550743A07D7AD071FB66B04AF2483F518477FBECA506A0DEE815735530C",
+      "FullFrameSha256": "92BFF34916AE31903A0A2A35A386940121EEE521346A3355543985E371561D82",
+      "GeometryMedianMs": 3.5164,
+      "GeometryP95Ms": 5.008,
+      "TotalMedianMs": 5.9488,
+      "TotalP95Ms": 9.1616,
+      "WorkerDecodeMedianMs": 0.6248
+    },
+    {
+      "Set": "Baseline",
+      "Trial": "Baseline-3",
+      "Raw": {
+        "Path": "local/renderer-phases-e3m6-sector-cache-baseline-c-20260929.json",
+        "Sha256": "83F8482143C73592028CEF3D445AD163E44036791071C6972669EBA99CDEF895"
+      },
+      "RendererSha256": "16872550743A07D7AD071FB66B04AF2483F518477FBECA506A0DEE815735530C",
+      "FullFrameSha256": "92BFF34916AE31903A0A2A35A386940121EEE521346A3355543985E371561D82",
+      "GeometryMedianMs": 3.8906,
+      "GeometryP95Ms": 5.6781,
+      "TotalMedianMs": 6.7127,
+      "TotalP95Ms": 9.2428,
+      "WorkerDecodeMedianMs": 0.6868
+    },
+    {
+      "Set": "Baseline",
+      "Trial": "Baseline-4",
+      "Raw": {
+        "Path": "local/renderer-phases-e3m6-direct-plane-paired-a-baseline-20260929.json",
+        "Sha256": "7A52DB51D03B7C305309CA47FBD2A6A6849099C027A927B8E313D271A5AE2214"
+      },
+      "RendererSha256": "05E1A848F6F92B6913970F7440258813760BE850C308CBBF495F79774F69F54F",
+      "FullFrameSha256": "92BFF34916AE31903A0A2A35A386940121EEE521346A3355543985E371561D82",
+      "GeometryMedianMs": 3.7352,
+      "GeometryP95Ms": 5.4314,
+      "TotalMedianMs": 6.5455,
+      "TotalP95Ms": 9.5133,
+      "WorkerDecodeMedianMs": 0.6735
+    },
+    {
+      "Set": "Baseline",
+      "Trial": "Baseline-5",
+      "Raw": {
+        "Path": "local/renderer-phases-e3m6-direct-plane-paired-b-baseline-20260929.json",
+        "Sha256": "A5D3220A730C2D9A8518BE9348C71CFBAE866D840947023D728E602E73C3EF84"
+      },
+      "RendererSha256": "05E1A848F6F92B6913970F7440258813760BE850C308CBBF495F79774F69F54F",
+      "FullFrameSha256": "92BFF34916AE31903A0A2A35A386940121EEE521346A3355543985E371561D82",
+      "GeometryMedianMs": 3.4363,
+      "GeometryP95Ms": 5.1977,
+      "TotalMedianMs": 6.1893,
+      "TotalP95Ms": 8.7718,
+      "WorkerDecodeMedianMs": 0.6494
+    },
+    {
+      "Set": "Candidate",
+      "Trial": "Candidate-1",
+      "Raw": {
+        "Path": "local/renderer-phases-e3m6-direct-plane-lookup-candidate-a-20260929.json",
+        "Sha256": "9CFC0CB322F4403DB4813271C4BFBAE2AB7794405BB45AF5314CCE2D268015A6"
+      },
+      "RendererSha256": "50DF8E2676317EFEF157571972E4736D5E7FA53CB630C52669ADD71D5345D531",
+      "FullFrameSha256": "92BFF34916AE31903A0A2A35A386940121EEE521346A3355543985E371561D82",
+      "GeometryMedianMs": 3.7198,
+      "GeometryP95Ms": 5.4077,
+      "TotalMedianMs": 6.5125,
+      "TotalP95Ms": 9.7253,
+      "WorkerDecodeMedianMs": 0.7658
+    },
+    {
+      "Set": "Candidate",
+      "Trial": "Candidate-2",
+      "Raw": {
+        "Path": "local/renderer-phases-e3m6-direct-plane-lookup-candidate-b-20260929.json",
+        "Sha256": "C25A1D4FCBB573D16905C2E17548E88A9E0CC5697CB9BE25F0269624D589EAD8"
+      },
+      "RendererSha256": "50DF8E2676317EFEF157571972E4736D5E7FA53CB630C52669ADD71D5345D531",
+      "FullFrameSha256": "92BFF34916AE31903A0A2A35A386940121EEE521346A3355543985E371561D82",
+      "GeometryMedianMs": 3.576,
+      "GeometryP95Ms": 5.4959,
+      "TotalMedianMs": 6.3323,
+      "TotalP95Ms": 9.6087,
+      "WorkerDecodeMedianMs": 0.6425
+    },
+    {
+      "Set": "Candidate",
+      "Trial": "Candidate-3",
+      "Raw": {
+        "Path": "local/renderer-phases-e3m6-direct-plane-lookup-candidate-c-20260929.json",
+        "Sha256": "856AA7F2A55C2AA3174BB7A9F2D4738E7208FD85C1ED33C4FAD7449D777131BF"
+      },
+      "RendererSha256": "50DF8E2676317EFEF157571972E4736D5E7FA53CB630C52669ADD71D5345D531",
+      "FullFrameSha256": "92BFF34916AE31903A0A2A35A386940121EEE521346A3355543985E371561D82",
+      "GeometryMedianMs": 3.6317,
+      "GeometryP95Ms": 5.2214,
+      "TotalMedianMs": 6.3858,
+      "TotalP95Ms": 9.2364,
+      "WorkerDecodeMedianMs": 0.6536
+    },
+    {
+      "Set": "Candidate",
+      "Trial": "Candidate-4",
+      "Raw": {
+        "Path": "local/renderer-phases-e3m6-direct-plane-paired-a-candidate-20260929.json",
+        "Sha256": "13ABF7E75EEDF3328A4977C3AF8FD4E7F08057578D27C4476C55A3AFEE35E3E1"
+      },
+      "RendererSha256": "50DF8E2676317EFEF157571972E4736D5E7FA53CB630C52669ADD71D5345D531",
+      "FullFrameSha256": "92BFF34916AE31903A0A2A35A386940121EEE521346A3355543985E371561D82",
+      "GeometryMedianMs": 3.6983,
+      "GeometryP95Ms": 5.5797,
+      "TotalMedianMs": 6.4376,
+      "TotalP95Ms": 9.1891,
+      "WorkerDecodeMedianMs": 0.7233
+    },
+    {
+      "Set": "Candidate",
+      "Trial": "Candidate-5",
+      "Raw": {
+        "Path": "local/renderer-phases-e3m6-direct-plane-paired-b-candidate-20260929.json",
+        "Sha256": "2D59ED321A22E1BE35B2BBC956275ED12AC708E539BC74AE094C7CEB5588708A"
+      },
+      "RendererSha256": "50DF8E2676317EFEF157571972E4736D5E7FA53CB630C52669ADD71D5345D531",
+      "FullFrameSha256": "92BFF34916AE31903A0A2A35A386940121EEE521346A3355543985E371561D82",
+      "GeometryMedianMs": 3.4376,
+      "GeometryP95Ms": 5.3247,
+      "TotalMedianMs": 6.2808,
+      "TotalP95Ms": 8.6975,
+      "WorkerDecodeMedianMs": 0.6074
+    }
+  ],
+  "Summary": {
+    "Baseline": {
+      "GeometryMedianMs": 3.7352,
+      "GeometryP95Ms": 5.4314,
+      "TotalMedianMs": 6.5455,
+      "TotalP95Ms": 9.2428,
+      "WorkerDecodeMedianMs": 0.6735
+    },
+    "Candidate": {
+      "GeometryMedianMs": 3.6317,
+      "GeometryP95Ms": 5.4077,
+      "TotalMedianMs": 6.3858,
+      "TotalP95Ms": 9.2364,
+      "WorkerDecodeMedianMs": 0.6536
+    },
+    "MedianReductionsPercent": {
+      "GeometryMedianPercent": 2.77,
+      "GeometryP95Percent": 0.44,
+      "TotalMedianPercent": 2.44,
+      "TotalP95Percent": 0.07,
+      "WorkerDecodeMedianPercent": 2.95
+    },
+    "PairA": {
+      "BaselineTotalMedianMs": 6.5455,
+      "CandidateTotalMedianMs": 6.4376,
+      "CandidateReductionPercent": 1.65,
+      "BaselineGeometryMedianMs": 3.7352,
+      "CandidateGeometryMedianMs": 3.6983,
+      "CandidateGeometryReductionPercent": 0.99
+    },
+    "PairB": {
+      "CandidateTotalMedianMs": 6.2808,
+      "BaselineTotalMedianMs": 6.1893,
+      "CandidateReductionPercent": -1.48,
+      "CandidateGeometryMedianMs": 3.4376,
+      "BaselineGeometryMedianMs": 3.4363,
+      "CandidateGeometryReductionPercent": -0.04
+    },
+    "AllTenFullFrameHashesIdentical": true,
+    "FullFrameSha256": "92BFF34916AE31903A0A2A35A386940121EEE521346A3355543985E371561D82"
+  },
+  "Conclusion": "Median geometry and total stripe timings are modestly lower, but the counter-ordered pairs disagree on total median direction, aggregate p95 total is effectively unchanged, and isolated sequential stripes do not establish a live-host gain. Keep the existing sector-index cache and reject the extra direct plane-id tables.",
+  "Limitations": [
+    "One static E3M6 map-start state; no moving sector, combat, real concurrency, terminal write, audio, or full-host timing.",
+    "The first three runs per version were not paired; two counter-ordered pairs are too few to establish causality.",
+    "All measurements are sequential PowerShell renderer phases, not game FPS or monitor presentation.",
+    "Raw reports remain in ignored local/ storage and are indexed by SHA-256."
+  ]
+}

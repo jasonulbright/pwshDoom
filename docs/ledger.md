@@ -4276,3 +4276,37 @@ and [portable receipt](../results/performance-sector-render-cache-20260929.json)
 retain the workload, hashes, and limitations. The [r7 human-playthrough
 candidate](../results/episode1-current-human-candidate-20260929-r7.json) pins
 this source while carrying forward earlier progression and session fixtures.
+
+## 2026-09-29 — Reject direct plane-ID lookup tables
+
+A follow-up tried to remove plane-ID decoding and the floor/ceiling branch
+inside rasterization by precomputing height, flat-byte, and light arrays keyed
+directly by plane ID. Five baseline and five candidate E3M6 map-start trials
+preserve the same full-frame hash. The aggregate median geometry and total
+stripe times improve by 2.77% and 2.44%, but total p95 is unchanged and the two
+counter-ordered pairs disagree on the direction of the median change. Reject
+the extra arrays; no prototype code remains in the working tree.
+
+The [rejection record](performance.md#rejected-direct-plane-id-lookup--september-29-2026)
+and [receipt](../results/rejected-direct-plane-lookup-20260929.json) retain all
+ten timing reports, source fingerprints, image hash, and limits. A baseline raw
+file-hash change was caused by the Windows checkout's CRLF conversion; Git
+reported no source-content difference. The current candidate and pinned commit
+remain unchanged.
+
+## 2026-09-29 — Recheck the pinned renderer from a Windows checkout
+
+After rejecting the extra plane-ID tables, the committed renderer was restored
+from the existing implementation commit and rechecked under the Windows Git
+checkout. The 36-map skill-3 load/35-tic/two-render smoke passes; Classic,
+Matrix/Katakana, and AnsiArt/Katakana each match serial output over five E1M1
+views and 320,000 pixels using 16 worker strips. Twenty masked-wall checks
+pass. Tracked `src/` and `scripts/` compare cleanly to the pinned commit.
+
+With `core.autocrlf=true`, the current Windows working-copy hash for
+`FastRenderer.ps1` is `05E1A848F6F92B6913970F7440258813760BE850C308CBBF495F79774F69F54F`;
+the earlier precommit measurement workspace recorded
+`16872550743A07D7AD071FB66B04AF2483F518477FBECA506A0DEE815735530C`. The Git
+blob SHA-256 is `D9CE1FBD6DAA19B8D8BB2612203D729925406CE8BB02E99BB0A40D2CD72C36BF`.
+Git reports no content diff; these raw hashes differ because of checkout
+newline conversion. See the [supplementary validation receipt](../results/episode1-r7-windows-checkout-validation-20260929.json).

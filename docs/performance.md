@@ -663,3 +663,29 @@ cache refresh happens during decoding. Treat the isolated stripe result as a
 measured improvement and the whole-host result as inconclusive. Headless
 updates skip Terminal writes and are not monitor presentations; the 60-display
 target remains open. See the [portable sector-cache receipt](../results/performance-sector-render-cache-20260929.json).
+
+## Rejected direct plane-ID lookup — September 29, 2026
+
+A follow-up replaced per-pixel plane-ID decoding and the floor/ceiling branch
+with direct typed arrays for plane height, flat bytes, and light. Five baseline
+and five candidate runs measured the same static HMP E3M6 map-start frame with
+five warmups and 30 measured frames per each of 16 sequential production-width
+stripes. All ten full-frame hashes match
+(`92BFF34916AE31903A0A2A35A386940121EEE521346A3355543985E371561D82`).
+
+The median of run medians moved geometry from 3.7352 to 3.6317 ms per stripe
+(2.77% lower) and total measured renderer time from 6.5455 to 6.3858 ms
+(2.44% lower). Geometry p95 improved only 0.44%; total p95 was effectively
+unchanged at 9.2428/9.2364 ms. The two adjacent counter-ordered pairs disagree
+on median direction: one candidate total median was 1.65% lower, while the
+other was 1.48% higher. This does not establish a stable gain, so the additional
+plane-ID arrays were discarded and the existing sector-index cache remains.
+
+The baseline renderer's raw file hash changed across this experiment because
+the Windows checkout uses `core.autocrlf=true`; Git reported no content change,
+and the normalized baseline is the same committed renderer. This is why the
+receipt keeps both the Git blob and working-copy fingerprints. These runs use
+sequential stripes without simulation, audio, Terminal output, or real worker
+concurrency; they are not live-frame or display-rate evidence. The
+[rejection receipt](../results/rejected-direct-plane-lookup-20260929.json)
+indexes all ten raw reports and their hashes.

@@ -31,7 +31,10 @@ hashes; one matching 60-second headless host pair is unpaired and cannot assign
 the observed rate difference to the change. See the [sector-cache performance
 record](performance.md#cache-sector-plane-data-for-rasterization--september-29-2026)
 and [portable receipt](../results/performance-sector-render-cache-20260929.json).
-These checks do not complete any map or change campaign completion status.
+The [post-commit Windows checkout validation](../results/episode1-r7-windows-checkout-validation-20260929.json)
+also confirms 36/36 load/render cases, all three five-view worker styles, and 20
+masked-wall checks against the checked-out source. These checks do not complete
+any map or change campaign completion status.
 
 A current-source, sound-enabled, 30-second headless E3M6 host comparison on
 September 28 reached 34.70, 31.90, and 33.70 simulation tics/sec at 8, 12,

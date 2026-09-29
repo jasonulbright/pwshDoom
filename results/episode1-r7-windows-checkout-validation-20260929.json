@@ -1,0 +1,84 @@
+{
+  "Format": "pwshDoom.Episode1WindowsCheckoutValidation",
+  "Version": 1,
+  "RecordedUtc": "2026-09-29T02:57:36.2645343Z",
+  "ImplementationCommit": "e8fd50012c343a3e858001a086e2de7b5efac786",
+  "EvidenceHead": "4fbdbcefe3977a5df4c898c8d996aa5b0022acf9",
+  "PowerShell": "7.6.5",
+  "Runtime": "Windows 11 / Intel Core Ultra 7 265K / 20 logical processors",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "WindowsCheckout": {
+    "CoreAutoCrlf": "true",
+    "FastRendererWorkingTreeSha256": "05E1A848F6F92B6913970F7440258813760BE850C308CBBF495F79774F69F54F",
+    "FastRendererGitBlobOid": "67666573b1838adcd9bda5a658e458e3d0ec10a5",
+    "FastRendererGitBlobSha256": "D9CE1FBD6DAA19B8D8BB2612203D729925406CE8BB02E99BB0A40D2CD72C36BF",
+    "PreviousPrecommitWorkingTreeSha256": "16872550743A07D7AD071FB66B04AF2483F518477FBECA506A0DEE815735530C",
+    "NoTrackedSourceOrHarnessDiff": true,
+    "Note": "The raw renderer SHA changed when Git checked out newline-normalized text on Windows. The implementation commit is unchanged; tracked src/ and scripts/ compare cleanly to HEAD."
+  },
+  "CampaignSmoke": {
+    "Complete": true,
+    "Passed": 36,
+    "Failed": 0,
+    "Skill": 3,
+    "IdleTics": 35,
+    "FramesPerMap": 2,
+    "Raw": {
+      "Path": "local/post-direct-lookup-restore-campaign-smoke-20260929.json",
+      "Sha256": "8FF6F754C778DC073A2E93A324DC1890AD97687D6316FD1CA0884248AEA16449"
+    }
+  },
+  "WorkerPartitionChecks": [
+    {
+      "Style": "Classic",
+      "GlyphSet": "Ascii",
+      "Workers": 16,
+      "Views": 5,
+      "ComparedPixels": 320000.0,
+      "DifferingPixels": 0.0,
+      "EncodedStripByteChecks": 80,
+      "CharacterStripByteChecks": 0,
+      "Raw": {
+        "Path": "local/post-direct-lookup-restore-partitions-classic-20260929.json",
+        "Sha256": "DCE7D674EB87596A46CBA13EDA15C0CB76AEF24850339117DA7C68365BB67070"
+      }
+    },
+    {
+      "Style": "Matrix",
+      "GlyphSet": "Katakana",
+      "Workers": 16,
+      "Views": 5,
+      "ComparedPixels": 320000.0,
+      "DifferingPixels": 0.0,
+      "EncodedStripByteChecks": 80,
+      "CharacterStripByteChecks": 80,
+      "Raw": {
+        "Path": "local/post-direct-lookup-restore-partitions-matrix-20260929.json",
+        "Sha256": "A55BB508BE5B6ED5EA3AC8EAD42C3A97E5113419333DC2BDEC713D78BC17B95E"
+      }
+    },
+    {
+      "Style": "AnsiArt",
+      "GlyphSet": "Katakana",
+      "Workers": 16,
+      "Views": 5,
+      "ComparedPixels": 320000.0,
+      "DifferingPixels": 0.0,
+      "EncodedStripByteChecks": 80,
+      "CharacterStripByteChecks": 80,
+      "Raw": {
+        "Path": "local/post-direct-lookup-restore-partitions-ansiart-20260929.json",
+        "Sha256": "057D73E4978DA8C865B5FC2F76CCBA46AA0B0623147F3A7AE0C5A79CFFE955B6"
+      }
+    }
+  ],
+  "MaskedWallFixture": {
+    "Passed": true,
+    "Checks": 20,
+    "Raw": {
+      "Path": "local/post-direct-lookup-restore-masked-wall-20260929.json",
+      "Sha256": "DA9F665CE0928033F6C470F4A71DA3E8F6DBE53038F0CB052D8D1941C726DCA3"
+    }
+  },
+  "Meaning": "Validates the exact committed sector-cache renderer after checkout on Windows. Worker partition equality compares the PowerShell serial and 16-process renderers; it is not original-executable visual parity or campaign completion."
+}
