@@ -13,11 +13,13 @@ param(
     [switch]$TransportLegacy,
     [switch]$TransportWorkerMasks,
     [switch]$BaselineWorkerActorScan,
+    [switch]$LegacyWorkerProjection,
     [string]$Output="$PSScriptRoot/../results/renderer-phases.json"
 )
 $ErrorActionPreference='Stop'
 if($TransportPrepared -and $TransportLegacy){throw 'Choose one transport mode.'}
 if($TransportWorkerMasks -and (-not $TransportPrepared -or $TransportLegacy)){throw 'Worker masks require prepared transport.'}
+if($LegacyWorkerProjection -and -not $TransportWorkerMasks){throw 'The projection-cache control requires worker masks.'}
 if($BaselineWorkerActorScan -and -not $TransportWorkerMasks){throw 'The full-array actor-scan control requires worker masks.'}
 if(Test-Path -LiteralPath $Output){throw 'Use a fresh report path.'}
 $outputPath=[IO.Path]::GetFullPath($Output)
@@ -28,7 +30,7 @@ $bundle=& "$PSScriptRoot/Build-EngineBundle.ps1"
 . "$PSScriptRoot/../src/FastRenderer.ps1"
 . "$PSScriptRoot/../src/GameHost.ps1"
 . "$PSScriptRoot/../src/SnapshotTransport.ps1"
-$content=$null;$failure=$null;$report=$null;$samples=[Collections.Generic.List[object]]::new();$workerProfiles=[Collections.Generic.List[object]]::new()
+$content=$null;$failure=$null;$report=$null;$samples=[Collections.Generic.List[object]]::new();$workerProfiles=[Collections.Generic.List[object]]::new();$projectionPacketVersion=-1
 function Get-PhaseStats([double[]]$Values){
     [double[]]$sorted=@($Values|Sort-Object)
     if($sorted.Length -eq 0){return @{Count=0;Mean=0.0;Median=0.0;P95=0.0;P99=0.0;Max=0.0}}
@@ -51,7 +53,9 @@ try{
     $game=[DoomGame]::new($content,$options)
     $commands=[TicCmd[]]::new(4)
     for($i=0;$i -lt $commands.Length;$i++){$commands[$i]=[TicCmd]::new()}
-    $game.DeferedInitNew([GameSkill]$Skill,$Episode,$Map)
+    # Match the user-facing Doom skill selection used by the campaign and
+    # worker test scripts: 1=Baby through 5=Nightmare.
+    $game.DeferedInitNew([GameSkill]($Skill-1),$Episode,$Map)
     $null=$game.Update($commands)
     for($i=0;$i -lt $Tics;$i++){$null=$game.Update($commands)}
     $camera=$game.World.ConsolePlayer.Mobj
@@ -73,14 +77,17 @@ try{
             $prepareWatch=[Diagnostics.Stopwatch]::StartNew()
             if($TransportLegacy){$preparedBytes=Get-InterpolatedSnapshotBytes $previousValues $currentValues 1 -DeferFuzzSort}
             else{$preparedBytes=Get-InterpolatedSnapshotBytes $previousValues $currentValues 1}
-            if($TransportWorkerMasks){$preparedBytes=Add-GameRenderActorWorkerMasks $preparedBytes $maskPool}
+            if($TransportWorkerMasks){$preparedBytes=if($LegacyWorkerProjection){Add-GameRenderActorWorkerMasks $preparedBytes $maskPool -SkipProjectionCache}else{Add-GameRenderActorWorkerMasks $preparedBytes $maskPool}}
             $prepareWatch.Stop();$snapshotPreparationSamples.Add($prepareWatch.Elapsed.TotalMilliseconds)
         }
         $snapshot=Read-GameSnapshotBytes $preparedBytes $null
+        if($TransportWorkerMasks){$projectionPacketVersion=if($snapshot.RenderProjectionPrepared){5}else{4}}
         if($TransportWorkerMasks){
             [int]$maskCount=$snapshot.Actors.Count;[long]$allPairs=[long]$maskCount*$WorkerCount;[long]$visiblePairs=0
             foreach($actor in $snapshot.Actors){for([int]$wi=0;$wi -lt $WorkerCount;$wi++){if(($actor.WorkerMask -band (1L -shl $wi)) -ne 0){$visiblePairs++}}}
-            $actorWorkerMaskStats=@{Actors=$maskCount;PossibleActorWorkerPairs=$allPairs;IncludedActorWorkerPairs=$visiblePairs;SkippedActorWorkerPairs=$allPairs-$visiblePairs}
+            [int]$preparedProjectionActorCount=0
+            if($snapshot.RenderProjectionPrepared){for([int]$actorIndex=0;$actorIndex -lt $maskCount;$actorIndex++){if($snapshot.RenderProjectionData[5*$actorIndex] -eq 1){$preparedProjectionActorCount++}}}
+            $actorWorkerMaskStats=@{Actors=$maskCount;PossibleActorWorkerPairs=$allPairs;IncludedActorWorkerPairs=$visiblePairs;SkippedActorWorkerPairs=$allPairs-$visiblePairs;PreparedProjectionActors=$preparedProjectionActorCount}
         }
     }
     Set-GameRenderSnapshot $context $snapshot
@@ -142,7 +149,7 @@ try{
         Error=$null
         Episode=$Episode;Map=$Map;Skill=$Skill;SetupTics=$Tics
         WarmupFrames=$WarmupFrames;MeasuredFrames=$Frames
-        TransportMode=if($TransportWorkerMasks -and $BaselineWorkerActorScan){'prepared actor visibility masks with the full-array per-worker actor-scan control'}elseif($TransportWorkerMasks){'prepared actor visibility masks with decoded per-worker visible-actor lists'}elseif($TransportPrepared){'prepared shared actor order'}elseif($TransportLegacy){'legacy worker-side actor sort'}else{'object snapshot fallback'}
+        TransportMode=if($TransportWorkerMasks -and $LegacyWorkerProjection -and $BaselineWorkerActorScan){'NumericV4 worker masks, full actor-array scan, and worker-side projection control'}elseif($TransportWorkerMasks -and $LegacyWorkerProjection){'NumericV4 worker masks with worker-side fixed-point actor projection control'}elseif($TransportWorkerMasks -and $projectionPacketVersion -eq 5 -and $BaselineWorkerActorScan){'adaptive NumericV5 actor projections with the full-array per-worker actor-scan control'}elseif($TransportWorkerMasks -and $projectionPacketVersion -eq 5){'adaptive NumericV5 actor projections with decoded per-worker visible-actor lists'}elseif($TransportWorkerMasks){'adaptive NumericV4 mask-only packet for a sparse scene'}elseif($TransportPrepared){'prepared shared actor order'}elseif($TransportLegacy){'legacy worker-side actor sort'}else{'object snapshot fallback'}
         FullFramePixels=64000;FullFrameSha256=$frameSha256
         SnapshotPreparationStats=Get-PhaseStats ([double[]]$snapshotPreparationSamples.ToArray())
         SnapshotPreparationSamples=$snapshotPreparationSamples.ToArray();FuzzActorCount=$fuzzActorCount;ActorWorkerMaskStats=$actorWorkerMaskStats
@@ -160,7 +167,7 @@ try{
         GameHostSha256=(Get-FileHash -LiteralPath "$PSScriptRoot/../src/GameHost.ps1").Hash
         HarnessSha256=(Get-FileHash -LiteralPath $PSCommandPath).Hash
         PowerShell=$PSVersionTable.PSVersion.ToString()
-        Meaning='Attributes PowerShell software-rendering time to the instrumented geometry, actor, player-weapon, and HUD phases at one fixed real-IWAD state. When WorkerCount is greater than one, each production-equivalent column stripe is rendered sequentially in this process: these are not concurrent-worker timings and do not model process scheduling, IPC, or terminal output. TransportLegacy exercises unsorted interpolation followed by each worker sorting locally; TransportPrepared measures repeated interpolation with shared far-to-near fuzz actor order. Snapshot preparation statistics exclude packet decoding and use the same warmup/sample count as rendering. Use live host receipts for pacing.'
+        Meaning='Attributes PowerShell software-rendering time to the instrumented geometry, actor, player-weapon, and HUD phases at one fixed real-IWAD state. When WorkerCount is greater than one, each production-equivalent column stripe is rendered sequentially in this process: these are not concurrent-worker timings and do not model process scheduling, IPC, or terminal output. TransportLegacy exercises unsorted interpolation followed by each worker sorting locally; TransportPrepared measures repeated interpolation with shared far-to-near fuzz actor order. The LegacyWorkerProjection control forces the prior NumericV4 mask packet so workers repeat transforms locally; current production selects NumericV5 only for snapshots with at least 200 actors, otherwise it keeps the mask-only packet. Snapshot preparation includes host actor projection/mask generation; decode and render phases are reported separately with equal warmup/sample counts. Use live host receipts for pacing.'
     }
 }catch{
     $failure=$_.ToString()+"`n"+$_.ScriptStackTrace

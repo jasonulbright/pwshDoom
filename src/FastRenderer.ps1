@@ -562,29 +562,39 @@ function Invoke-FastRender {
     }
     [bool]$actorsAlreadyFiltered=$world -is [Collections.IDictionary] -and $world.Contains('RenderActorsFiltered') -and $world.RenderActorsFiltered
     if($actorsAlreadyFiltered){$drawActors=$world.RenderActors}
+    [int[]]$preparedProjectionData=[int[]]::new(0)
+    if($world -is [Collections.IDictionary] -and $world.Contains('RenderProjectionPrepared') -and $world.RenderProjectionPrepared){$preparedProjectionData=$world.RenderProjectionData}
     foreach($actor in $drawActors) {
         if(-not $actorsAlreadyFiltered -and $world -is [Collections.IDictionary] -and $world.Contains('RenderWorkerBit') -and
            (($actor.WorkerMask -band $world.RenderWorkerBit) -eq 0)){continue}
-        # Keep the adopted renderer's 16.16 truncation with worker-safe integer
-        # arithmetic, avoiding per-actor Fixed object dispatch.
-            [int]$actorXData=[Math]::Truncate($actor.X*65536.0);[int]$actorYData=[Math]::Truncate($actor.Y*65536.0)
-            [int]$trXData=$actorXData-$viewXData;[int]$trYData=$actorYData-$viewYData
-            [int]$gxtData=(([long]$trXData*[long]$spriteViewCosData)-shr $spriteFracBits)
-            [int]$gytData=(([long]$trYData*[long]$spriteViewSinData)-shr $spriteFracBits)
-            [int]$tzData=$gxtData+$gytData
-            if($tzData -lt $spriteMinZData){continue}
-            [int]$xScaleData=[Math]::Truncate((10485760.0/[double]$tzData)*65536.0)
-            [int]$gxtLateralData=-(([long]$trXData*[long]$spriteViewSinData)-shr $spriteFracBits)
-            [int]$gytLateralData=(([long]$trYData*[long]$spriteViewCosData)-shr $spriteFracBits)
-            [int]$txData=-($gytLateralData+$gxtLateralData)
-            [long]$tzLimitRaw=(([long]$tzData -shl 2) -band 0xFFFFFFFFL)
-            if($tzLimitRaw -ge 0x80000000L){$tzLimitRaw-=0x100000000L}
-            [int]$tzLimitData=$tzLimitRaw
-            if([Math]::Abs([long]$txData) -gt $tzLimitData){continue}
+        # The host prepares this fixed-point transform once in its worker
+        # visibility pass. Direct snapshots retain the local calculation.
+            [int]$projectionOffset=0
+            [bool]$projectionCached=$preparedProjectionData.Length -gt 0
+            if($projectionCached){$projectionOffset=5*[int]$actor.ProjectionIndex;$projectionCached=$preparedProjectionData[$projectionOffset] -eq 1}
+            if($projectionCached){
+                [int]$tzData=$preparedProjectionData[$projectionOffset+1];[int]$txData=$preparedProjectionData[$projectionOffset+2];[int]$xScaleData=$preparedProjectionData[$projectionOffset+3]
+            }else{
+                [int]$actorXData=[Math]::Truncate($actor.X*65536.0);[int]$actorYData=[Math]::Truncate($actor.Y*65536.0)
+                [int]$trXData=$actorXData-$viewXData;[int]$trYData=$actorYData-$viewYData
+                [int]$gxtData=(([long]$trXData*[long]$spriteViewCosData)-shr $spriteFracBits)
+                [int]$gytData=(([long]$trYData*[long]$spriteViewSinData)-shr $spriteFracBits)
+                [int]$tzData=$gxtData+$gytData
+                if($tzData -lt $spriteMinZData){continue}
+                [int]$xScaleData=[Math]::Truncate((10485760.0/[double]$tzData)*65536.0)
+                [int]$gxtLateralData=-(([long]$trXData*[long]$spriteViewSinData)-shr $spriteFracBits)
+                [int]$gytLateralData=(([long]$trYData*[long]$spriteViewCosData)-shr $spriteFracBits)
+                [int]$txData=-($gytLateralData+$gxtLateralData)
+                [long]$tzLimitRaw=(([long]$tzData -shl 2) -band 0xFFFFFFFFL)
+                if($tzLimitRaw -ge 0x80000000L){$tzLimitRaw-=0x100000000L}
+                [int]$tzLimitData=$tzLimitRaw
+                if([Math]::Abs([long]$txData) -gt $tzLimitData){continue}
+            }
 
-            $frame=$Context.SpriteAtlas[$actor.Sprite][$actor.Frame -band 0x7F];[int]$rotation=0
+            $frame=$Context.SpriteAtlas[$actor.Sprite][$actor.Frame -band 0x7F]
+            [int]$rotation=if($projectionCached){$preparedProjectionData[$projectionOffset+4]}else{0}
             if($null -eq $frame){continue}
-            if($frame.Rotate){
+            if($frame.Rotate -and -not $projectionCached){
                 $rotation=Get-FastSpriteRotation $viewXData $viewYData $actorXData $actorYData $actor.Angle $Context.TanToAngleTable
             }
             $patch=$frame.Patches[$rotation]

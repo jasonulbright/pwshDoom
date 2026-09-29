@@ -60,6 +60,21 @@ smoke is not a route or display-rate result.
 See the [performance measurements](performance.md#project-actors-only-to-renderer-stripes-that-can-see-them--september-28-2026)
 and [renderer regressions](rendering-fidelity.md#skip-actors-outside-each-renderer-stripe-2026-09-28).
 
+A follow-up now reuses those fixed-point transforms in dense scenes. NumericV5
+worker packets carry typed projection fields at 200 or more actors; sparse
+views retain NumericV4. The 36-map smoke and 21 transport checks pass, and HMP
+E1M3 matches serial pixels across 16 workers in all three styles. Paired E3M6
+stress profiles show 6.65–13.09% lower sequential CPU work; HMP E1M3 timings
+reverse direction with run order, so no Episode 1 speed gain is established.
+The current source also passes 69 E1 progression/secret/finale fixtures and 97
+boss progression fixtures. A bounded sound-enabled E1M3 host run advances 174
+tics with D_E1M3 selected; the single rebuffer observation is retained in its
+receipt. The run records 155 headless host updates per five seconds, not
+displayed frames. This does not change the pending human playthrough or qualify
+35-tic/60-display pacing. Details and raw-report fingerprints are in the [projection-cache
+measurement](performance.md#reuse-typed-actor-projections-on-dense-scenes--september-28-2026)
+and [receipt](../results/renderer-projection-cache-20260928.json).
+
 The preceding Episode 1 candidate was pinned to `f5f404a`. Replaying the
 retained E1M3 and E1M4 host inputs against the current working candidate exposed
 two renderer failures: a plane-distance cast beyond signed Int32 and an

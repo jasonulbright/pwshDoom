@@ -1,0 +1,531 @@
+{
+  "SchemaVersion": 1,
+  "UpdatedUtc": "2026-09-29T00:10:39.789686Z",
+  "ImplementationBaseCommit": "30f73d41a071d46ee21f9842ab6e6f2416158e89",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "PowerShell": "7.6.5",
+  "Optimization": {
+    "DenseSceneThresholdActors": 200,
+    "SparseFormat": "NumericV4: NumericV3 payload plus one double worker mask per actor",
+    "DenseFormat": "NumericV5: unchanged NumericV3 double payload plus uint32 worker masks and five int32 projection values per actor (valid, depth, lateral, scale, rotation)",
+    "ProjectionValuesReusedByWorkers": "Depth, lateral offset, scale, rotated-frame index",
+    "Purpose": "Avoid recalculating fixed-point actor transforms and rotated sprite frame selection in every render worker when scene actor count is dense."
+  },
+  "Episode1MediumActorCountInventory": {
+    "Method": "Actor count in New-GameRenderSnapshot after one initialization update, GameSkill::Medium (player-facing HMP selection 3), before idle-tic advancement.",
+    "Maps": {
+      "E1M1": 91,
+      "E1M2": 199,
+      "E1M3": 309,
+      "E1M4": 200,
+      "E1M5": 215,
+      "E1M6": 369,
+      "E1M7": 266,
+      "E1M8": 98,
+      "E1M9": 191
+    },
+    "ModesByThreshold": "E1M1, E1M2, E1M8, and E1M9 use V4; E1M3–E1M7 use V5 at this captured state."
+  },
+  "Profiles": [
+    {
+      "Name": "typed-e3m6-candidate-a",
+      "Episode": 3,
+      "Map": 6,
+      "SkillSelection": 3,
+      "ActorCount": 311,
+      "Workers": 16,
+      "WarmupFramesPerStripe": 8,
+      "MeasuredFramesPerStripe": 40,
+      "Mode": "adaptive NumericV5 actor projections with decoded per-worker visible-actor lists",
+      "PowerShell": "7.6.5",
+      "SequentialStripeRenderMedianSumMs": 93.1198,
+      "SequentialStripeDecodeMedianSumMs": 9.8989,
+      "ActorPhaseMedianSumMs": 24.7582,
+      "HostSnapshotPreparationMedianMs": 13.7818,
+      "CombinedMedianCpuWorkMs": 116.8005,
+      "FullFrameSha256": "629A3A3CDA2B6365C0406A6BA70AC5A1EEFAD701BE926FD86A572AAD78F64D0C",
+      "RawReportSha256": "C0B32A2FB93E93F6BC798D0A186907B1677B0D361209F317BA45DA152EF3665C",
+      "ProfileHarnessSha256": "3AC82E00C6DD764D3DCFAF62B940858E0120DD958EC98E71FE39FD020FF8F7DA",
+      "ProfileTransportSha256": "51B209C603D521CD9FF8EF60B4F37DFCA3B4A64928EB12470B5D3990CF1ADE4C",
+      "ProfileRendererSha256": "1F6D152CD9C50BD45A8EC6BC2E7F1D1DF8874C606B0C00CE9CB21DC2E7C915AB"
+    },
+    {
+      "Name": "typed-e3m6-control-a",
+      "Episode": 3,
+      "Map": 6,
+      "SkillSelection": 3,
+      "ActorCount": 311,
+      "Workers": 16,
+      "WarmupFramesPerStripe": 8,
+      "MeasuredFramesPerStripe": 40,
+      "Mode": "NumericV4 worker masks with worker-side fixed-point actor projection control",
+      "PowerShell": "7.6.5",
+      "SequentialStripeRenderMedianSumMs": 99.3946,
+      "SequentialStripeDecodeMedianSumMs": 21.903,
+      "ActorPhaseMedianSumMs": 30.1848,
+      "HostSnapshotPreparationMedianMs": 13.1015,
+      "CombinedMedianCpuWorkMs": 134.3991,
+      "FullFrameSha256": "629A3A3CDA2B6365C0406A6BA70AC5A1EEFAD701BE926FD86A572AAD78F64D0C",
+      "RawReportSha256": "D3D85554B94200578A405C53D0111E6F4475541F5EE95DD52E7212C7559850D9",
+      "ProfileHarnessSha256": "3AC82E00C6DD764D3DCFAF62B940858E0120DD958EC98E71FE39FD020FF8F7DA",
+      "ProfileTransportSha256": "51B209C603D521CD9FF8EF60B4F37DFCA3B4A64928EB12470B5D3990CF1ADE4C",
+      "ProfileRendererSha256": "1F6D152CD9C50BD45A8EC6BC2E7F1D1DF8874C606B0C00CE9CB21DC2E7C915AB"
+    },
+    {
+      "Name": "typed-e3m6-control-b",
+      "Episode": 3,
+      "Map": 6,
+      "SkillSelection": 3,
+      "ActorCount": 311,
+      "Workers": 16,
+      "WarmupFramesPerStripe": 8,
+      "MeasuredFramesPerStripe": 40,
+      "Mode": "NumericV4 worker masks with worker-side fixed-point actor projection control",
+      "PowerShell": "7.6.5",
+      "SequentialStripeRenderMedianSumMs": 97.7372,
+      "SequentialStripeDecodeMedianSumMs": 23.1896,
+      "ActorPhaseMedianSumMs": 30.0522,
+      "HostSnapshotPreparationMedianMs": 12.6779,
+      "CombinedMedianCpuWorkMs": 133.6047,
+      "FullFrameSha256": "629A3A3CDA2B6365C0406A6BA70AC5A1EEFAD701BE926FD86A572AAD78F64D0C",
+      "RawReportSha256": "D9B37D488128B01D008F13C65CB4F4874AC3CBFABFD7B11C79DC7783E2471C10",
+      "ProfileHarnessSha256": "3AC82E00C6DD764D3DCFAF62B940858E0120DD958EC98E71FE39FD020FF8F7DA",
+      "ProfileTransportSha256": "51B209C603D521CD9FF8EF60B4F37DFCA3B4A64928EB12470B5D3990CF1ADE4C",
+      "ProfileRendererSha256": "1F6D152CD9C50BD45A8EC6BC2E7F1D1DF8874C606B0C00CE9CB21DC2E7C915AB"
+    },
+    {
+      "Name": "typed-e3m6-candidate-b",
+      "Episode": 3,
+      "Map": 6,
+      "SkillSelection": 3,
+      "ActorCount": 311,
+      "Workers": 16,
+      "WarmupFramesPerStripe": 8,
+      "MeasuredFramesPerStripe": 40,
+      "Mode": "adaptive NumericV5 actor projections with decoded per-worker visible-actor lists",
+      "PowerShell": "7.6.5",
+      "SequentialStripeRenderMedianSumMs": 102.1099,
+      "SequentialStripeDecodeMedianSumMs": 10.5355,
+      "ActorPhaseMedianSumMs": 27.2326,
+      "HostSnapshotPreparationMedianMs": 12.0759,
+      "CombinedMedianCpuWorkMs": 124.7213,
+      "FullFrameSha256": "629A3A3CDA2B6365C0406A6BA70AC5A1EEFAD701BE926FD86A572AAD78F64D0C",
+      "RawReportSha256": "6C3ECA0843CA3C78AF3F853029EBF19658A24BF86A6BAE13666366B35CDF824F",
+      "ProfileHarnessSha256": "3AC82E00C6DD764D3DCFAF62B940858E0120DD958EC98E71FE39FD020FF8F7DA",
+      "ProfileTransportSha256": "51B209C603D521CD9FF8EF60B4F37DFCA3B4A64928EB12470B5D3990CF1ADE4C",
+      "ProfileRendererSha256": "1F6D152CD9C50BD45A8EC6BC2E7F1D1DF8874C606B0C00CE9CB21DC2E7C915AB"
+    },
+    {
+      "Name": "hmp-e1m3-candidate-a",
+      "Episode": 1,
+      "Map": 3,
+      "SkillSelection": 3,
+      "ActorCount": 309,
+      "Workers": 16,
+      "WarmupFramesPerStripe": 8,
+      "MeasuredFramesPerStripe": 40,
+      "Mode": "adaptive NumericV5 actor projections with decoded per-worker visible-actor lists",
+      "PowerShell": "7.6.5",
+      "SequentialStripeRenderMedianSumMs": 196.2505,
+      "SequentialStripeDecodeMedianSumMs": 21.847,
+      "ActorPhaseMedianSumMs": 45.9493,
+      "HostSnapshotPreparationMedianMs": 10.3882,
+      "CombinedMedianCpuWorkMs": 228.4857,
+      "FullFrameSha256": "8351F9034EAE4A6F13B2622689C9C82B556175DA7A11CB706500F271D8EE9EF5",
+      "RawReportSha256": "3B7AC0077C74F57268092EDFB004DE5AA7E50C04A4E4070566ED47A90B53DDF0",
+      "ProfileHarnessSha256": "F9C375612B6C27F86598AFD75969DB81FC09414C158E599345E7B8A6B2CA7283",
+      "ProfileTransportSha256": "51B209C603D521CD9FF8EF60B4F37DFCA3B4A64928EB12470B5D3990CF1ADE4C",
+      "ProfileRendererSha256": "1F6D152CD9C50BD45A8EC6BC2E7F1D1DF8874C606B0C00CE9CB21DC2E7C915AB"
+    },
+    {
+      "Name": "hmp-e1m3-control-a",
+      "Episode": 1,
+      "Map": 3,
+      "SkillSelection": 3,
+      "ActorCount": 309,
+      "Workers": 16,
+      "WarmupFramesPerStripe": 8,
+      "MeasuredFramesPerStripe": 40,
+      "Mode": "NumericV4 worker masks with worker-side fixed-point actor projection control",
+      "PowerShell": "7.6.5",
+      "SequentialStripeRenderMedianSumMs": 135.0972,
+      "SequentialStripeDecodeMedianSumMs": 28.8915,
+      "ActorPhaseMedianSumMs": 38.3913,
+      "HostSnapshotPreparationMedianMs": 9.5378,
+      "CombinedMedianCpuWorkMs": 173.5265,
+      "FullFrameSha256": "8351F9034EAE4A6F13B2622689C9C82B556175DA7A11CB706500F271D8EE9EF5",
+      "RawReportSha256": "CF6015CAD40068032E203F55E05A466887E658D363DD4595D7E28C42AEEAD4ED",
+      "ProfileHarnessSha256": "F9C375612B6C27F86598AFD75969DB81FC09414C158E599345E7B8A6B2CA7283",
+      "ProfileTransportSha256": "51B209C603D521CD9FF8EF60B4F37DFCA3B4A64928EB12470B5D3990CF1ADE4C",
+      "ProfileRendererSha256": "1F6D152CD9C50BD45A8EC6BC2E7F1D1DF8874C606B0C00CE9CB21DC2E7C915AB"
+    },
+    {
+      "Name": "hmp-e1m3-control-b",
+      "Episode": 1,
+      "Map": 3,
+      "SkillSelection": 3,
+      "ActorCount": 309,
+      "Workers": 16,
+      "WarmupFramesPerStripe": 8,
+      "MeasuredFramesPerStripe": 40,
+      "Mode": "NumericV4 worker masks with worker-side fixed-point actor projection control",
+      "PowerShell": "7.6.5",
+      "SequentialStripeRenderMedianSumMs": 136.5836,
+      "SequentialStripeDecodeMedianSumMs": 29.8443,
+      "ActorPhaseMedianSumMs": 38.8767,
+      "HostSnapshotPreparationMedianMs": 10.0164,
+      "CombinedMedianCpuWorkMs": 176.4443,
+      "FullFrameSha256": "8351F9034EAE4A6F13B2622689C9C82B556175DA7A11CB706500F271D8EE9EF5",
+      "RawReportSha256": "566662F8F01E2EAACDFFEDDD9DC50C937B0F761937302B21DF70162A580CE12C",
+      "ProfileHarnessSha256": "F9C375612B6C27F86598AFD75969DB81FC09414C158E599345E7B8A6B2CA7283",
+      "ProfileTransportSha256": "51B209C603D521CD9FF8EF60B4F37DFCA3B4A64928EB12470B5D3990CF1ADE4C",
+      "ProfileRendererSha256": "1F6D152CD9C50BD45A8EC6BC2E7F1D1DF8874C606B0C00CE9CB21DC2E7C915AB"
+    },
+    {
+      "Name": "hmp-e1m3-candidate-b",
+      "Episode": 1,
+      "Map": 3,
+      "SkillSelection": 3,
+      "ActorCount": 309,
+      "Workers": 16,
+      "WarmupFramesPerStripe": 8,
+      "MeasuredFramesPerStripe": 40,
+      "Mode": "adaptive NumericV5 actor projections with decoded per-worker visible-actor lists",
+      "PowerShell": "7.6.5",
+      "SequentialStripeRenderMedianSumMs": 117.6541,
+      "SequentialStripeDecodeMedianSumMs": 11.7701,
+      "ActorPhaseMedianSumMs": 27.3889,
+      "HostSnapshotPreparationMedianMs": 7.0433,
+      "CombinedMedianCpuWorkMs": 136.4675,
+      "FullFrameSha256": "8351F9034EAE4A6F13B2622689C9C82B556175DA7A11CB706500F271D8EE9EF5",
+      "RawReportSha256": "C0050E47F69123F0E330BE461151512B5E4D18238E98D838B0353E4FCE43AB45",
+      "ProfileHarnessSha256": "F9C375612B6C27F86598AFD75969DB81FC09414C158E599345E7B8A6B2CA7283",
+      "ProfileTransportSha256": "51B209C603D521CD9FF8EF60B4F37DFCA3B4A64928EB12470B5D3990CF1ADE4C",
+      "ProfileRendererSha256": "1F6D152CD9C50BD45A8EC6BC2E7F1D1DF8874C606B0C00CE9CB21DC2E7C915AB"
+    }
+  ],
+  "PairedComparisons": [
+    {
+      "Label": "Ultimate Doom E3M6, engine Hard enum stress state",
+      "OrderReversed": true,
+      "CandidateRuns": [
+        "typed-e3m6-candidate-a",
+        "typed-e3m6-candidate-b"
+      ],
+      "ControlRuns": [
+        "typed-e3m6-control-a",
+        "typed-e3m6-control-b"
+      ],
+      "CandidateMeanCombinedCpuWorkMs": 120.7609,
+      "ControlMeanCombinedCpuWorkMs": 134.0019,
+      "CandidateCpuWorkChangePercent": -9.88,
+      "CandidateReductionPercent": 9.88,
+      "OrderA_ReductionPercent": 13.09,
+      "OrderB_ReductionPercent": 6.65
+    },
+    {
+      "Label": "Ultimate Doom E1M3, HMP campaign scene",
+      "OrderReversed": true,
+      "CandidateRuns": [
+        "hmp-e1m3-candidate-a",
+        "hmp-e1m3-candidate-b"
+      ],
+      "ControlRuns": [
+        "hmp-e1m3-control-a",
+        "hmp-e1m3-control-b"
+      ],
+      "CandidateMeanCombinedCpuWorkMs": 182.4766,
+      "ControlMeanCombinedCpuWorkMs": 174.9854,
+      "CandidateCpuWorkChangePercent": 4.28,
+      "CandidateReductionPercent": -4.28,
+      "OrderA_ReductionPercent": -31.67,
+      "OrderB_ReductionPercent": 22.66
+    }
+  ],
+  "ExactnessChecks": {
+    "SnapshotTransportChecks": 21,
+    "SnapshotTransportResult": "Pass",
+    "MapSmoke": {
+      "Passed": 36,
+      "Total": 36,
+      "RequestedIdleTics": 35,
+      "Meaning": "Serial headless load, idle simulation, and two view renders per IWAD map; does not start render workers."
+    },
+    "WorkerPartitions": [
+      {
+        "WorkerPacketVersions": [
+          5
+        ],
+        "ActorCounts": [
+          280
+        ],
+        "Workers": 16,
+        "Fuzz": true,
+        "RawSha256": "4193A53A9AA46050FDF38F620CA0CBDED03C5FD148230B3379636FC7B9A2EC1F",
+        "Views": 5,
+        "Episode": 3,
+        "ComparedPixels": 320000.0,
+        "PixelDifferences": 0.0,
+        "Path": "local/render-partitions-projection-cache-typed-e3m6-classic.json",
+        "Style": "Classic",
+        "Map": 6
+      },
+      {
+        "WorkerPacketVersions": [
+          5
+        ],
+        "ActorCounts": [
+          280
+        ],
+        "Workers": 16,
+        "Fuzz": true,
+        "RawSha256": "5A0A0ABB4A08C66BD04E296828D56F3490C30D7EEA692977792E054CEE245A89",
+        "Views": 5,
+        "Episode": 3,
+        "ComparedPixels": 320000.0,
+        "PixelDifferences": 0.0,
+        "Path": "local/render-partitions-projection-cache-typed-e3m6-matrix.json",
+        "Style": "Matrix",
+        "Map": 6
+      },
+      {
+        "WorkerPacketVersions": [
+          5
+        ],
+        "ActorCounts": [
+          280
+        ],
+        "Workers": 16,
+        "Fuzz": true,
+        "RawSha256": "DC5390F058DEAA0AD9AD6D3CC387638C91A0EAC90DAE40F73EBC1C2F0962C8E9",
+        "Views": 5,
+        "Episode": 3,
+        "ComparedPixels": 320000.0,
+        "PixelDifferences": 0.0,
+        "Path": "local/render-partitions-projection-cache-typed-e3m6-ansiart.json",
+        "Style": "AnsiArt",
+        "Map": 6
+      },
+      {
+        "WorkerPacketVersions": [
+          4
+        ],
+        "ActorCounts": [
+          91
+        ],
+        "Workers": 16,
+        "Fuzz": true,
+        "RawSha256": "486A04C97BAD88D6B5144FF4FECDAE49C2C0348B1D569EAFC8EBAA748B95ADC1",
+        "Views": 5,
+        "Episode": 1,
+        "ComparedPixels": 320000.0,
+        "PixelDifferences": 0.0,
+        "Path": "local/render-partitions-projection-cache-typed-e1m1-classic.json",
+        "Style": "Classic",
+        "Map": 1
+      },
+      {
+        "WorkerPacketVersions": [
+          5
+        ],
+        "ActorCounts": [
+          309
+        ],
+        "Workers": 16,
+        "Fuzz": true,
+        "RawSha256": "1DCE29FEB2F096C1A3F6C387E59A8406F20279DA88590E31F2C2B3884510F0E8",
+        "Views": 5,
+        "Episode": 1,
+        "ComparedPixels": 320000.0,
+        "PixelDifferences": 0.0,
+        "Path": "local/render-partitions-projection-cache-hmp-e1m3-classic.json",
+        "Style": "Classic",
+        "Map": 3
+      },
+      {
+        "WorkerPacketVersions": [
+          5
+        ],
+        "ActorCounts": [
+          309
+        ],
+        "Workers": 16,
+        "Fuzz": true,
+        "RawSha256": "41C969E569CDFD2B2BF170B45270A9659A9A8B8E06F208FEEDB4F30D1C4BD145",
+        "Views": 5,
+        "Episode": 1,
+        "ComparedPixels": 320000.0,
+        "PixelDifferences": 0.0,
+        "Path": "local/render-partitions-projection-cache-hmp-e1m3-matrix.json",
+        "Style": "Matrix",
+        "Map": 3
+      },
+      {
+        "WorkerPacketVersions": [
+          5
+        ],
+        "ActorCounts": [
+          309
+        ],
+        "Workers": 16,
+        "Fuzz": true,
+        "RawSha256": "AB2BEA9882B511C3221D96EF81B728AA583168BE28B04593CC376F386B8FADAF",
+        "Views": 5,
+        "Episode": 1,
+        "ComparedPixels": 320000.0,
+        "PixelDifferences": 0.0,
+        "Path": "local/render-partitions-projection-cache-hmp-e1m3-ansiart.json",
+        "Style": "AnsiArt",
+        "Map": 3
+      }
+    ],
+    "CampaignTransitions": {
+      "Checks": 69,
+      "Failures": 0,
+      "RawSha256": "820F7896098253A26A26AEABD7519C6BC22B64534E90B4DF2786FEF8624A8EDC",
+      "Meaning": "Current-source focused fixtures include real E1M3 secret exit to E1M9, E1M9 return to E1M4, intermission advancement, world loads, secret history, and finale state; these do not complete the human route."
+    },
+    "BossProgression": {
+      "Checks": 97,
+      "Passed": true,
+      "RawSha256": "021919D897CC43A3799B8391D2E2D13FDD90A8778F97B5730D7E5759C490F527",
+      "Meaning": "Current-source boss/exit progression fixtures, not a human boss fight."
+    }
+  },
+  "CurrentSourceSha256": [
+    {
+      "Path": "src/SnapshotTransport.ps1",
+      "Sha256": "1AB58D42610DF4BD83859A66842B893A26C913E96017947B4AE63AC77A0C4CB6"
+    },
+    {
+      "Path": "src/FastRenderer.ps1",
+      "Sha256": "1F6D152CD9C50BD45A8EC6BC2E7F1D1DF8874C606B0C00CE9CB21DC2E7C915AB"
+    },
+    {
+      "Path": "scripts/Measure-FastRendererPhases.ps1",
+      "Sha256": "637C9DCC5AB9CF5E4B885F2E15EFE6B3BABCCABF7084457AEFD5E44228F1FB3F"
+    },
+    {
+      "Path": "scripts/Test-SnapshotTransport.ps1",
+      "Sha256": "2D8CD200F9A9EE2614EAFBEE15C5D69DEE5707EFDCBFE1E0F9AD5C11DC14A708"
+    },
+    {
+      "Path": "scripts/Test-RenderPartitions.ps1",
+      "Sha256": "B3DF81636C14C0B8A1CB650E53AB2B7061DB29E44F945B53F793D213B140454F"
+    }
+  ],
+  "RawEvidenceFiles": [
+    {
+      "Path": "local/renderer-projection-cache-typed-e3m6-candidate-a.json",
+      "Sha256": "C0B32A2FB93E93F6BC798D0A186907B1677B0D361209F317BA45DA152EF3665C"
+    },
+    {
+      "Path": "local/renderer-projection-cache-typed-e3m6-control-a.json",
+      "Sha256": "D3D85554B94200578A405C53D0111E6F4475541F5EE95DD52E7212C7559850D9"
+    },
+    {
+      "Path": "local/renderer-projection-cache-typed-e3m6-control-b.json",
+      "Sha256": "D9B37D488128B01D008F13C65CB4F4874AC3CBFABFD7B11C79DC7783E2471C10"
+    },
+    {
+      "Path": "local/renderer-projection-cache-typed-e3m6-candidate-b.json",
+      "Sha256": "6C3ECA0843CA3C78AF3F853029EBF19658A24BF86A6BAE13666366B35CDF824F"
+    },
+    {
+      "Path": "local/renderer-projection-cache-hmp-e1m3-candidate-a.json",
+      "Sha256": "3B7AC0077C74F57268092EDFB004DE5AA7E50C04A4E4070566ED47A90B53DDF0"
+    },
+    {
+      "Path": "local/renderer-projection-cache-hmp-e1m3-control-a.json",
+      "Sha256": "CF6015CAD40068032E203F55E05A466887E658D363DD4595D7E28C42AEEAD4ED"
+    },
+    {
+      "Path": "local/renderer-projection-cache-hmp-e1m3-control-b.json",
+      "Sha256": "566662F8F01E2EAACDFFEDDD9DC50C937B0F761937302B21DF70162A580CE12C"
+    },
+    {
+      "Path": "local/renderer-projection-cache-hmp-e1m3-candidate-b.json",
+      "Sha256": "C0050E47F69123F0E330BE461151512B5E4D18238E98D838B0353E4FCE43AB45"
+    },
+    {
+      "Path": "local/render-partitions-projection-cache-typed-e3m6-classic.json",
+      "Sha256": "4193A53A9AA46050FDF38F620CA0CBDED03C5FD148230B3379636FC7B9A2EC1F"
+    },
+    {
+      "Path": "local/render-partitions-projection-cache-typed-e3m6-matrix.json",
+      "Sha256": "5A0A0ABB4A08C66BD04E296828D56F3490C30D7EEA692977792E054CEE245A89"
+    },
+    {
+      "Path": "local/render-partitions-projection-cache-typed-e3m6-ansiart.json",
+      "Sha256": "DC5390F058DEAA0AD9AD6D3CC387638C91A0EAC90DAE40F73EBC1C2F0962C8E9"
+    },
+    {
+      "Path": "local/render-partitions-projection-cache-typed-e1m1-classic.json",
+      "Sha256": "486A04C97BAD88D6B5144FF4FECDAE49C2C0348B1D569EAFC8EBAA748B95ADC1"
+    },
+    {
+      "Path": "local/render-partitions-projection-cache-hmp-e1m3-classic.json",
+      "Sha256": "1DCE29FEB2F096C1A3F6C387E59A8406F20279DA88590E31F2C2B3884510F0E8"
+    },
+    {
+      "Path": "local/render-partitions-projection-cache-hmp-e1m3-matrix.json",
+      "Sha256": "41C969E569CDFD2B2BF170B45270A9659A9A8B8E06F208FEEDB4F30D1C4BD145"
+    },
+    {
+      "Path": "local/render-partitions-projection-cache-hmp-e1m3-ansiart.json",
+      "Sha256": "AB2BEA9882B511C3221D96EF81B728AA583168BE28B04593CC376F386B8FADAF"
+    },
+    {
+      "Path": "local/campaign-smoke-projection-cache-v5-20260928.json",
+      "Sha256": "8331DC697FEAB04BD84B14F3CF73F1720150E482F1463DB539A7A31C6B1A7317"
+    },
+    {
+      "Path": "local/snapshot-actor-projection-v5-typed-final.json",
+      "Sha256": "D9EF1A4AF46C8D1E4C053A253BFCECF8CAEBD6C9AB33CC0D0A8A96097E96A5C3"
+    },
+    {
+      "Sha256": "820F7896098253A26A26AEABD7519C6BC22B64534E90B4DF2786FEF8624A8EDC",
+      "Path": "local/campaign-transitions-projection-cache-20260928.json"
+    },
+    {
+      "Sha256": "021919D897CC43A3799B8391D2E2D13FDD90A8778F97B5730D7E5759C490F527",
+      "Path": "local/boss-progression-projection-cache-20260928.json"
+    },
+    {
+      "Sha256": "5FAE7611A1C0F17CE3F5036EBBA2D6E63717AB1EA91DDE2A3E72E44855AEBF88",
+      "Path": "local/renderer-projection-cache-e1m3-audio-host-20260928.json"
+    }
+  ],
+  "MeasurementLimits": [
+    "Profiles render sixteen production-width stripes sequentially in one PowerShell process; summed median CPU work is not concurrent worker latency.",
+    "Profiles exclude simulation time, audio, terminal writes, monitor presentation, and displayed frame rate.",
+    "The E3M6 pair is directionally positive in both run orders. The two HMP E1M3 pairs reverse direction, so no E1M3 speed gain is claimed.",
+    "Exact worker pixel equivalence is established for the listed fixed views and fixtures only; it is not original-executable parity, campaign completion, or 35-tic/60-display qualification.",
+    "The 200-actor cutoff is a simple adaptive policy supported by sparse/dense examples, not a fully measured optimal crossover."
+  ],
+  "AudioHostIntegration": {
+    "Report": "local/renderer-projection-cache-e1m3-audio-host-20260928.json",
+    "RawSha256": "5FAE7611A1C0F17CE3F5036EBBA2D6E63717AB1EA91DDE2A3E72E44855AEBF88",
+    "Map": "E1M3",
+    "SkillSelection": 3,
+    "Workers": 16,
+    "Headless": true,
+    "DurationSeconds": 5.0087987,
+    "WallDurationSeconds": 5.0088029,
+    "Tics": 174,
+    "TicsPerSecond": 34.74,
+    "CompletedHeadlessFrames": 155,
+    "CompletedHeadlessUpdatesPerSecond": 30.95,
+    "ExitReason": "Duration",
+    "HostError": null,
+    "SoundEnabled": true,
+    "MusicTrack": "D_E1M3",
+    "MusicFrames": 219240,
+    "AudioSubmittedFrames": 219240,
+    "AudioDeviceClosed": true,
+    "AudioWorkerError": null,
+    "AudioRealtime": false,
+    "RebufferCount": 1,
+    "Meaning": "Five-second no-input E1M3 integration startup with the prepared episode catalog, sound, simulation, and 16 workers. The headless update count is not Terminal output or displayed frame rate; this is not acoustic review or continuous-playback qualification."
+  }
+}

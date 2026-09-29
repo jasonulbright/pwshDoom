@@ -471,6 +471,74 @@ indexes source hashes and raw ignored reports. This profile excludes actual
 process scheduling, simulation, audio, ANSI output, and monitor presentation;
 the 35-tic/60-display goal remains open.
 
+## Reuse typed actor projections on dense scenes — September 28, 2026
+
+The worker visibility pass already computes each actor's fixed-point depth,
+lateral offset, horizontal scale, and rotated sprite frame to build conservative
+stripe masks. Dense scenes now carry those values to workers in a compact typed
+cache, so the PowerShell renderer can reuse them rather than repeat the
+transform for every worker. The ordinary NumericV3 simulation snapshot remains
+unchanged. Sparse scenes keep NumericV4's double-valued mask extension;
+snapshots with at least 200 actors use NumericV5, which stores `uint32` worker
+masks followed by five `int32` projection fields per actor. The projection flag
+lets workers retain the existing calculation for actors that could not be
+prepared safely.
+
+The 200-actor cutoff is an adaptive guard, not a measured optimal crossover.
+At the HMP initialization state, E1M1 has 91 actors and E1M2 has 199, so they
+keep V4; E1M3 through E1M7 have 200–369 and select V5; E1M8 and E1M9 keep V4.
+These are one-update map snapshots, not counts throughout a route. The renderer
+can switch packet format as actors are created or removed.
+
+Two order-reversed profiles used E3M6's 311-actor scene with the profiler's
+Hard setting, 16 production-width stripes, eight warmups, and 40 measured
+frames per stripe. Each stripe ran sequentially in one PowerShell process.
+Combined work sums each stripe's median render and decode CPU time plus one
+median host snapshot-preparation time:
+
+| Order | Path | Combined median CPU work |
+| --- | --- | ---: |
+| Candidate then control | NumericV5 typed projections | 116.80 ms |
+| Candidate then control | NumericV4 worker-side projections | 134.40 ms |
+| Control then candidate | NumericV4 worker-side projections | 133.60 ms |
+| Control then candidate | NumericV5 typed projections | 124.72 ms |
+
+The candidate reduced this summed CPU work by 13.09% and 6.65% in the two
+orders, averaging 9.88%. All four runs produced full-frame hash
+`629A3A3CDA2B6365C0406A6BA70AC5A1EEFAD701BE926FD86A572AAD78F64D0C`.
+However, the HMP E1M3 comparison did not reproduce a stable speed gain: the
+candidate/control order changed the sign, and the two-pair mean was 4.28% more
+CPU work for the candidate. Its four frame hashes were identical
+(`8351F9034EAE4A6F13B2622689C9C82B556175DA7A11CB706500F271D8EE9EF5`). Treat
+E3M6 as a positive dense stress result and E1M3 timing as inconclusive; do not
+claim an Episode 1 speedup from these samples.
+
+The current candidate passes 21 snapshot transport checks; a 36/36 Ultimate
+Doom map load, 35-idle-tic, two-view serial smoke; and exact 16-process,
+five-view worker output for E1M3 HMP in Classic, Matrix/Katakana, and
+AnsiArt/Katakana (320,000 pixels per style, zero pixel differences, NumericV5
+in each). Equivalent E3M6 checks pass in all three styles. A 91-actor E1M1
+check uses V4 and also matches 320,000 Classic pixels. These fixed views and
+fuzz fixtures prove only the exercised serial/worker cases, not original-game
+parity or route completion.
+
+Against the same current source, the 69 E1 transition fixtures (including
+E1M3→E1M9→E1M4 and finale state) and 97 boss progression fixtures pass. A
+five-second headless E1M3 run with sound and the local Episode 1 music catalog
+starts 16 workers, advances 174 simulation tics, and records 155 completed
+headless updates (30.95/sec). The audio report selects D_E1M3, mixes 219,240
+frames, closes the device, and has no worker error; it records one rebuffer
+observation with real-time mode disabled. This checks startup and bounded
+integration only, not acoustic quality or continuous playback. Headless update
+counts are not Terminal writes or monitor frames and do not pass the 60-display
+target.
+
+The compact [projection-cache receipt](../results/renderer-projection-cache-20260928.json)
+indexes source fingerprints and raw ignored reports. The profile is sequential
+worker-equivalent CPU accounting: it excludes concurrent process scheduling,
+simulation, audio, ANSI writes, terminal presentation, and monitor updates. It
+does not pass the 35-tic simulation or 60-displayed-update target.
+
 A final five-second current-source `Invoke-Doom` run also starts the actual
 simulation process, all 16 render workers, sound output, and the prepared
 Episode 1 music catalog on E1M1. It exits at the requested duration without a

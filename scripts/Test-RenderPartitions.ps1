@@ -70,12 +70,17 @@ try {
         [byte[]]$workerPacket=if($workerInput -is [byte[]]){$workerInput}else{ConvertTo-GameSnapshotBytes $workerInput}
         [int]$unfilteredLength=$workerPacket.Length
         $workerPacket=Add-GameRenderActorWorkerMasks $workerPacket $pool
-        [double[]]$workerValues=[double[]]::new($workerPacket.Length/8);[Buffer]::BlockCopy($workerPacket,0,$workerValues,0,$workerPacket.Length)
-        if($workerValues[0] -ne 4){throw 'Renderer pool did not receive a NumericV4 actor-visibility packet.'}
-        [int]$workerActorCount=$workerValues[5];[int]$workerMaskStart=$workerValues.Length-$workerActorCount
+        [double[]]$workerHeader=[double[]]::new(48);[Buffer]::BlockCopy($workerPacket,0,$workerHeader,0,384)
+        [int]$workerPacketVersion=$workerHeader[0];[int]$workerActorCount=$workerHeader[5]
+        [int]$expectedWorkerPacketVersion=if($workerActorCount -ge 200){5}else{4}
+        if($workerPacketVersion -ne $expectedWorkerPacketVersion){throw "Renderer pool selected NumericV$workerPacketVersion for $workerActorCount actors; expected adaptive NumericV$expectedWorkerPacketVersion."}
+        [int]$workerBaseLength=48+5*[int]$workerHeader[3]+5*[int]$workerHeader[4]+8*$workerActorCount+4*[int]$workerHeader[6]
+        [uint32[]]$workerMasks=$null
+        if($workerPacketVersion -eq 5){$workerMasks=[uint32[]]::new($workerActorCount);[Buffer]::BlockCopy($workerPacket,$workerBaseLength*8,$workerMasks,0,4*$workerActorCount)}
+        else{$workerMasks=[uint32[]]::new($workerActorCount);[double[]]$legacyMasks=[double[]]::new($workerActorCount);[Buffer]::BlockCopy($workerPacket,$workerBaseLength*8,$legacyMasks,0,8*$workerActorCount);for($actorIndex=0;$actorIndex -lt $workerActorCount;$actorIndex++){$workerMasks[$actorIndex]=[uint32]$legacyMasks[$actorIndex]}}
         [long]$includedActorWorkerPairs=0;[long]$allActorWorkerPairs=[long]$workerActorCount*$Workers
         for($actorIndex=0;$actorIndex -lt $workerActorCount;$actorIndex++){
-            [long]$mask=$workerValues[$workerMaskStart+$actorIndex]
+            [long]$mask=$workerMasks[$actorIndex]
             for($workerIndex=0;$workerIndex -lt $Workers;$workerIndex++){if(($mask -band (1L -shl $workerIndex)) -ne 0){$includedActorWorkerPairs++}}
         }
         Submit-GameRender $pool $workerPacket -ColumnOffset 17 -RowOffset 5 -FrameNumber 123;Wait-GameRender $pool
@@ -110,9 +115,9 @@ try {
         for($i=0;$i -lt 64000;$i++){if($actual[$i] -ne $expected[$i]){$differences++}}
         if($differences -ne 0){throw "$differences pixels differ at $angle degrees between serial rendering and $Workers process strips."}
         $checks.Add(@{AngleDegrees=$angle;ComparedPixels=64000;Differences=$differences;Invisibility=$snapshot.ConsolePlayer.Invisibility;OpaqueActorDifferences=$opaqueDifferences;PaletteNumber=$snapshot.ConsolePlayer.PaletteNumber;
-            WorkerPacketVersion=$workerValues[0];ActorCount=$workerActorCount;ActorWorkerPairsIncluded=$includedActorWorkerPairs;ActorWorkerPairsSkipped=$allActorWorkerPairs-$includedActorWorkerPairs;UnfilteredPacketBytes=$unfilteredLength;FilteredPacketBytes=$workerPacket.Length})
+            WorkerPacketVersion=$workerPacketVersion;ActorCount=$workerActorCount;ActorWorkerPairsIncluded=$includedActorWorkerPairs;ActorWorkerPairsSkipped=$allActorWorkerPairs-$includedActorWorkerPairs;UnfilteredPacketBytes=$unfilteredLength;FilteredPacketBytes=$workerPacket.Length})
     }
-    @{FinishedUtc=[DateTime]::UtcNow.ToString('o');Episode=$Episode;Map=$Map;Skill=$Skill;Style=$Style;GlyphSet=$GlyphSet;AnsiEncoding=$AnsiEncoding;Workers=$Workers;FuzzFixture=[bool]$Fuzz;Checks=$checks.ToArray();EncodedStripByteChecks=$checks.Count*$Workers;CharacterStripByteChecks=if($Style -ne 'Classic'){$checks.Count*$Workers}else{0};BaselineRendererSha256=if($CompareRenderer){(Get-FileHash -LiteralPath $CompareRenderer).Hash}else{(Get-FileHash "$PSScriptRoot/../src/FastRenderer.ps1").Hash};Meaning='Exact serial/partition equivalence, including NumericV4 worker visibility masks over the NumericV3 simulation snapshot and drawseg silhouette depth. The host projects each world actor once to identify the process stripes its actual rotated patch overlaps; workers skip other actors before fixed-point projection. Fuzz fixtures explicitly place a shadow demon ahead of the camera and set the player invisibility timer. These are not ordinary gameplay completion evidence. All modes compare encoded bytes against serial encoding at fixed viewports. No vanilla pixel-equivalence claim.'} |
+    @{FinishedUtc=[DateTime]::UtcNow.ToString('o');Episode=$Episode;Map=$Map;Skill=$Skill;Style=$Style;GlyphSet=$GlyphSet;AnsiEncoding=$AnsiEncoding;Workers=$Workers;FuzzFixture=[bool]$Fuzz;Checks=$checks.ToArray();EncodedStripByteChecks=$checks.Count*$Workers;CharacterStripByteChecks=if($Style -ne 'Classic'){$checks.Count*$Workers}else{0};BaselineRendererSha256=if($CompareRenderer){(Get-FileHash -LiteralPath $CompareRenderer).Hash}else{(Get-FileHash "$PSScriptRoot/../src/FastRenderer.ps1").Hash};Meaning='Exact serial/partition equivalence with adaptive NumericV4/V5 worker packets over the unchanged NumericV3 simulation snapshot. Snapshots below 200 actors keep the mask-only packet; dense snapshots carry host-prepared fixed-point projections so overlapping workers can reuse transforms. Workers select only intersecting actors and clip against BSP wall silhouettes. Fuzz fixtures place a shadow demon ahead of the camera and enable invisibility. These are not ordinary gameplay completion evidence. All modes compare encoded bytes against serial encoding at fixed viewports. No vanilla pixel-equivalence claim.'} |
         ConvertTo-Json -Depth 5 | Set-Content -LiteralPath $Report
     "PASS: 320,000 pixels match across five views and $Workers uneven process strips."
 } catch {[Console]::Error.WriteLine($_.ScriptStackTrace);throw}

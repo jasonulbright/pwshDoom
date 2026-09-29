@@ -4156,3 +4156,44 @@ exits at the requested duration without a host error. The run is not a route,
 display-rate sample, or measurement of acoustic continuity. See the [raw
 report](../local/host-visible-actor-filter-e1m1-audio-20260928.json) and
 [candidate evidence index](../results/renderer-visible-actor-filter-20260928.json).
+
+## 2026-09-28 — Cache fixed-point actor projections in dense worker packets
+
+After stripe masks were added, every renderer process repeated fixed-point
+depth/lateral transforms, scale calculation, and rotated-frame selection for
+the actors visible to its stripe. NumericV5 now transports those five
+PowerShell-prepared fields in typed arrays with `uint32` masks when a snapshot
+has at least 200 actors. Sparse scenes remain NumericV4, preserving the
+mask-only packet. This changes packet storage and reuses the host visibility
+pass; gameplay, sprite rasterization, and output encoding remain PowerShell.
+
+The 21-check snapshot suite passes. All 36 Ultimate Doom maps pass a fresh
+35-idle-tic/two-view serial smoke. HMP E1M3's 309-actor snapshot selects V5 and
+matches serial output across 16 processes, five angles, and all three display
+styles (zero differing pixels across 320,000 pixels per style). The E3M6
+dense-scene worker checks also pass in all three styles. The E1M1 sparse scene
+selects V4 and matches its Classic worker output.
+
+Two order-reversed E3M6 profiles at the profiler's Hard setting reduce summed
+sequential worker-equivalent CPU work by 13.09% and 6.65%, with identical
+frame hashes. Two order-reversed HMP E1M3 pairs disagree in direction; their
+average favors NumericV4 by 4.28%, so no Episode 1 speed improvement is
+claimed. These profiles sum per-stripe median decode/render work plus one
+snapshot-preparation median. They are not concurrent latency, FPS, live
+Terminal output, or evidence for the 35-tic/60-display gate. The 200-actor
+cutoff is a simple sparse/dense guard, not a measured optimal threshold.
+
+The [portable receipt](../results/renderer-projection-cache-20260928.json)
+indexes the current-source tests, profile fingerprints, raw ignored reports,
+and limits. The phase-profile harness now maps its user-facing skill selector
+1–5 to `GameSkill` enum 0–4, consistent with campaign and worker tests. The
+older typed-cache E3M6 stress receipts were recorded before that correction and
+use internal `Hard` enum value 3; the new Episode 1 comparison uses HMP.
+
+On this source, all 69 Episode 1 transition fixtures and 97 boss progression
+fixtures pass. A five-second, headless, sound-enabled E1M3 launch with the
+prepared episode catalog starts the simulation, 16 render workers, and audio;
+it advances 174 tics and 155 headless updates. The mixer selects D_E1M3, emits
+219,240 frames, closes without an error, and reports one rebuffer observation
+while real-time mode is disabled. This is bounded startup/integration evidence,
+not audible-quality, continuous-playback, or displayed-rate evidence.

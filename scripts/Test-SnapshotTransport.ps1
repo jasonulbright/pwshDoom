@@ -61,6 +61,22 @@ $filtered=Read-GameSnapshotBytes $v4Bytes $filtered 2L
 if(-not [object]::ReferenceEquals($renderActorsBuffer,$filtered.RenderActors) -or $filtered.RenderActors.Count -ne 0){throw 'Worker actor selection did not reuse and refresh its visible-actor list.'};$checks++
 $badV4=[double[]]$v4.Clone();$badV4[$v3.Length]=1.5
 $badV4Bytes=[byte[]]::new($badV4.Length*8);[Buffer]::BlockCopy($badV4,0,$badV4Bytes,0,$badV4Bytes.Length);Assert-Rejected $badV4Bytes;$checks++
+# NumericV5 carries the same visibility mask plus fixed-point projection data.
+$baseLength=$v3.Length;$v5Bytes=[byte[]]::new($bytes.Length+24*$actorCount);[Buffer]::BlockCopy($bytes,0,$v5Bytes,0,$bytes.Length)
+[Buffer]::BlockCopy([BitConverter]::GetBytes([double]5),0,$v5Bytes,0,8)
+[uint32[]]$v5Masks=[uint32[]]::new($actorCount);$v5Masks[0]=5
+[int[]]$v5Projection=[int[]]::new(5*$actorCount);$v5Projection[0]=1;$v5Projection[1]=123456;$v5Projection[2]=-23456;$v5Projection[3]=54321;$v5Projection[4]=3
+[Buffer]::BlockCopy($v5Masks,0,$v5Bytes,$bytes.Length,4*$actorCount)
+[Buffer]::BlockCopy($v5Projection,0,$v5Bytes,$bytes.Length+4*$actorCount,20*$actorCount)
+$v5State=Read-GameSnapshotBytes $v5Bytes $null
+if(-not $v5State.RenderProjectionPrepared -or $v5State.RenderProjectionData[0] -ne 1 -or
+   $v5State.Actors[0].ProjectionIndex -ne 0 -or $v5State.Actors[0].WorkerMask -ne 5 -or
+   $v5State.RenderProjectionData[1] -ne 123456 -or $v5State.RenderProjectionData[2] -ne -23456 -or
+   $v5State.RenderProjectionData[3] -ne 54321 -or $v5State.RenderProjectionData[4] -ne 3){throw 'NumericV5 actor projection did not round-trip.'};$checks++
+$filteredV5=Read-GameSnapshotBytes $v5Bytes $null 4L
+if($filteredV5.RenderActors.Count -ne 1 -or $filteredV5.RenderActors[0].ProjectionIndex -ne 0 -or $filteredV5.RenderProjectionData[4] -ne 3){throw 'NumericV5 worker filter lost its prepared projection.'};$checks++
+$badV5=[byte[]]$v5Bytes.Clone();[Buffer]::BlockCopy([BitConverter]::GetBytes([int]2),0,$badV5,$bytes.Length+4*$actorCount,4)
+Assert-Rejected $badV5;$checks++
 Assert-Rejected ([byte[]]::new(383));Assert-Rejected ([byte[]]::new(385));$checks+=2
 $bad=Get-InterpolatedSnapshotBytes $old $current 1;$bad[0]=1;Assert-Rejected $bad;$checks++
 $badValues=ConvertTo-TestValues (Get-InterpolatedSnapshotBytes $old $current 1);$badValues[7]=2
