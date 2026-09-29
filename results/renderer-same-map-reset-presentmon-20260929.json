@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "title": "PresentMon same-map renderer-asset reuse comparison",
+  "date": "2026-09-29",
+  "baselineSourceCommit": "ef6e750c8536e827509265cf98eaf7cf8092a762",
+  "candidateSourceCommit": "8b48f994d19f055d1ce8ca2f06538bf37a92c2f3",
+  "candidateSourceFiles": {
+    "scripts/Invoke-Doom.ps1": "B78A2A70D70327C42A0F044523A1CCE326315F79B4751CC59D0C37E8D43A36D6",
+    "scripts/Invoke-SimulationWorker.ps1": "D56EA25076CE6F5C3C64E8DE4FC950F82DD9F380E1CFA508F495C91B8EB3FBAA"
+  },
+  "workload": {
+    "powerShell": "7.6.5",
+    "architecture": "SeparateSimulation",
+    "iwad": "Ultimate Doom Steam DOOM.WAD",
+    "iwadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+    "replay": "results/e1m1-route.json",
+    "replaySha256": "DF62BD8CA80098BCEDC7C6803FBE13D041F57B02DDB788B278491492147BD296",
+    "output": "Classic ANSI Pairs, 320x200 truecolor half-blocks",
+    "workers": 16,
+    "terminal": "Windows Terminal maximized; Cascadia Mono 6; 151 rows by 688 columns",
+    "audio": "disabled",
+    "commands": 1560,
+    "exit": "ReplayEnd",
+    "scope": "Performance replay with a same-map E1M1 reload at tic 1247; it does not complete E1M1 or the campaign."
+  },
+  "runs": {
+    "baseline": {
+      "id": "r13",
+      "sameMapReloadPausedSeconds": 6.1781352,
+      "simulationTicsPerSecond": 34.971464741915,
+      "completedUpdatesPerSecond": 49.6998316236061,
+      "presentMonDisplayedTransitionsPerSecond": 43.6642277605323,
+      "presentMonDisplayIntervalsOver33_333ms": 101,
+      "presentMonDisplayIntervalsOver50ms": 14,
+      "droppedPresentations": 0,
+      "evidenceSha256": {
+        "gameReport": "1539A87F903430BF394CE47EFC1898417808006545466783A201276A411D346C",
+        "presentMonCaptureMetadata": "10F87817567FCB007223305C1216355A20A7AA3B2A691C9BAD52314F06D4505B",
+        "presentMonFramesCsv": "B53823C0F12000DE976299C7A9D825F26908ECFA48534736BBCB835217837C56",
+        "analysisSummary": "34544D1EBC607454B03F183EE011E3D0FCA8EC46332A1ECC60C3E8934D18E15C"
+      }
+    },
+    "candidate": {
+      "id": "r14",
+      "rendererAssetsReused": true,
+      "sameMapReloadPausedSeconds": 0.358314600000005,
+      "simulationTicsPerSecond": 34.9656040103342,
+      "completedUpdatesPerSecond": 46.21735607007,
+      "presentMonDisplayedTransitionsPerSecond": 45.8905294829911,
+      "presentMonDisplayIntervalsOver33_333ms": 80,
+      "presentMonDisplayIntervalsOver50ms": 12,
+      "droppedPresentations": 0,
+      "evidenceSha256": {
+        "gameReport": "06E1E94D819E067619312662AC86C5158F233BF427672BBB4AC2A9CF38A418E8",
+        "presentMonCaptureMetadata": "599C78399A71FAA2ED93A0BC94B622860FD2B0E397C8EF2545FF12552E8CE65E",
+        "presentMonFramesCsv": "A89715A9FB883AF01F21D6A7250A37A5D88EFCC4CBE1D7E1A2E8F67581331700",
+        "analysisSummary": "0EF2ED5AC1848A47A18AB9B2704B436BA5FC608D9D947442E7C4608EEC58AB89"
+      }
+    }
+  },
+  "interpretation": {
+    "sameMapReloadReductionPercent": 94.2,
+    "change": "On a same-map reset, reuse the persistent renderer workers' static map assets. Continue publishing dynamic world state through the simulation snapshots. Reload renderer assets on a changed-map transition.",
+    "pacingConclusion": "Not qualified. This is one sequential baseline/candidate pair. Active completed updates fell from 49.70 to 46.22 per second; the measured PresentMon transitions were 43.66 and 45.89 per second, both below 60. The simulation rates were 34.97 and 34.97 per second, slightly below 35.",
+    "limitations": [
+      "Single sequential, non-audio comparison; no randomized repeated A/B rounds.",
+      "The replay ends at ReplayEnd after 1,560 commands and does not finish E1M1.",
+      "PresentMon measures ETW presentation/display events, not optical monitor output or a one-to-one count of unique Doom framebuffers.",
+      "The remaining 0.358-second candidate handoff was not separately attributed.",
+      "Cold startup, other map loads, full-session audio, campaign completion, 35 Hz pacing and 60 displayed FPS remain unqualified."
+    ]
+  },
+  "focusedValidation": [
+    "PowerShell parser passed for both changed scripts.",
+    "Play.ps1 -Check reported Ready with the installed 36-map Ultimate Doom IWAD.",
+    "Same-map save/new-game worker suite passed 12 checks.",
+    "Changed-map E1M1-to-E1M2 worker/session checks passed; the changed-map asset reload path remained active.",
+    "git diff --check passed before the source commit."
+  ],
+  "rawEvidenceDirectory": "local/presentmon-same-map-reset-20260929"
+}

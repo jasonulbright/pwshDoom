@@ -853,3 +853,44 @@ shutdown tail is only a cancellation upper bound. None of these checks finishes
 a map, qualifies audible continuity, or establishes 35-tic/60-display pacing.
 See the [renderer comparison receipt](../results/renderer-flat-texel-bit-extraction-20260929.json)
 and [R12 candidate receipt](../results/episode1-current-human-candidate-20260929-r12.json).
+
+## Reuse renderer assets on same-map resets — September 29, 2026
+
+The persistent renderer workers need static map assets only when the map identity
+changes. A death/restart or same-map reload rebuilds dynamic simulation state,
+but it does not change the IWAD's map geometry or textures. The simulation worker
+now skips rebuilding the static renderer bundle for the same game mode, version,
+mission pack, episode, and map. Dynamic sectors and actors still arrive in the
+normal snapshots. The host validates the new snapshot generation and skips
+reloading worker assets only when the episode and map match; a changed map still
+reloads them.
+
+A source-pinned, sequential E1M1 replay pair compared baseline `ef6e750` with
+candidate `8b48f99` in maximized Windows Terminal, Classic truecolor, 16 workers,
+and PowerShell 7.6.5. Both runs consumed 1,560 commands and performed the same
+E1M1 reload at tic 1,247. The measured same-map handoff pause fell from 6.178
+seconds to 0.358 seconds (94.2% lower), and the candidate report confirms static
+assets were reused. The residual 0.358 seconds was not separately attributed.
+
+| Measurement | Baseline | Candidate |
+| --- | ---: | ---: |
+| Same-map reload pause | 6.178 s | 0.358 s |
+| Simulation rate | 34.971 tics/sec | 34.966 tics/sec |
+| Completed updates while active | 49.70/sec | 46.22/sec |
+| PresentMon displayed transitions | 43.66/sec | 45.89/sec |
+
+This is one sequential pair, not a repeated performance qualification. Active
+completed updates were lower in the candidate, so the pair does not establish a
+general speedup. Both simulation samples are slightly below 35 tics/sec, and
+both measured display rates are below 60/sec. The replay stops at `ReplayEnd`,
+does not finish E1M1, and had audio disabled. PresentMon is ETW presentation
+telemetry rather than an optical monitor measurement. This result only supports
+the targeted same-map reset improvement; it does not qualify other map loads,
+full-session audio, the campaign, or 35/60 pacing.
+
+The same-map save/new-game worker checks pass 12 focused assertions, and the
+changed-map E1M1-to-E1M2 session path continues to refresh worker assets. The
+launcher check reports `Ready` with the installed 36-map IWAD and qualified
+11-track catalog metadata. The compact [source-pinned receipt]
+(../results/renderer-same-map-reset-presentmon-20260929.json) stores all metrics
+and hashes; full game reports and PresentMon captures remain in ignored `local/`.

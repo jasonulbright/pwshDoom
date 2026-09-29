@@ -13,6 +13,8 @@ gates remain open.
 
 ### Changed
 
+- Same-map restarts now reuse unchanged static renderer assets while preserving dynamic snapshots. One E1M1 PresentMon pair measured the reset handoff at 0.358 seconds versus 6.178 seconds on baseline; overall pacing remains below target and the single comparison does not establish a general speedup. See [the source-pinned measurement](results/renderer-same-map-reset-presentmon-20260929.json).
+
 - The PowerShell floor/ceiling sampler now carries Int64 coordinates between pixels and extracts the 64×64 flat-index bits only when reading a texel. All 120 paired fixed-view frames across two E1M1 runs and one E3M6 run match pixel-for-pixel. E1M1 fixed-state serial medians improve 10.68% and 5.70% in the two repeats; E3M6 is effectively unchanged. A full-host A-B-B-A comparison was inconclusive, so this does not establish live pacing or the 35-tic/60-display targets. See the [measurement](results/renderer-flat-texel-bit-extraction-20260929.json).
 - Added an opt-in Classic `-AnsiEncoding Ansi256` path that maps Doom PLAYPAL colors to the nearest xterm 256-color entry. One same-frame measurement sends 28.65% fewer bytes than exact truecolor; live game timing is inconclusive, so `Pairs` remains the default. See the [experiment](docs/ansi-256-color.md).
 - Interactive audio now advances active music and effect voices from the PowerShell output clock across short simulation-packet gaps. Pause, map resets, and explicit drains still stop that fill; deterministic headless runs remain packet-exact by default. This reduces software queue starvation under transient load but does not claim measured acoustic latency or uninterrupted full-campaign playback.

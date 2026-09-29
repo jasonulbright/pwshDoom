@@ -4695,22 +4695,72 @@ The user asked why a release note could say only release metadata changed after
 a long run of commits. Preview.3's tag `v0.1.0-preview.3` points to `34e3d17`,
 whose parent-to-tag diff changes seven release/documentation files (+30/−38)
 and no game source. That is the final release-preparation commit, not a summary
-of development. The development branch then reached the R12 source candidate
-`c29b24e` (53 commits after the tag), followed by the current documentation pin
-`1ab6d16` (54 commits after the tag). A fresh directory-level diff from
-Preview.3 to current HEAD reports 125 changed files, +28,997/−333 lines:
+of development. At the time of this audit, the R12 source candidate `c29b24e` was 53 commits
+after the Preview.3 tag, and the documentation pin `1ab6d16` was 54 commits
+after it. At the audit correction commit `ef6e750`, the post-Preview.3 range
+contained 55 commits. A fresh diff pinned to that commit reported 125 changed
+files, +29,008/−333 lines:
 
 - `src/`: 14 PowerShell source files, +616/−180 (net +436); 15 commits touch
   this tree.
-- `scripts/`: 24 files, +556/−81, mixing runtime workers/launchers with tests,
-  measurements, recording, and build tools.
+- `scripts/`: 24 runtime, test, measurement, recording and build files,
+  +556/−81.
 - `results/`: 67 JSON evidence files, +25,645/−15. These account for about
   88% of additions and are measured output, not source code.
-- `docs/`: 16 files, +2,134/−48. The root changelog and README and two launcher
-  files account for the remaining changed paths.
+- `docs/`: 16 files, +2,145/−48. Root changelog, README and launcher files
+  account for the remaining changed paths.
 
-The earlier audit in this entry used inconsistent path groupings and stale
-totals; use the fresh figures above. The commit itself can still be
-metadata-only because it packages a source snapshot already tested at its
-parent. That does not mean the 54 commits since Preview.3 were all included in
-Preview.3; the current checkout has no later preview tag.
+The earlier audit used inconsistent path groupings and stale totals. This
+snapshot's counts are pinned to `ef6e750`; later development is recorded below.
+The Preview.3 release-preparation commit itself changed only seven
+release/documentation files and no `src/`. A metadata-only release commit can
+therefore follow substantial source work already present in its tested parent;
+that narrow release diff is not a summary of development.
+
+## 2026-09-29 — Reuse static renderer assets on same-map resets
+
+The prior source rebuilt and published every static renderer asset bundle on
+same-map restarts, then asked all 16 persistent rendering workers to reload
+that unchanged bundle. The simulation now keys static assets by game mode,
+version, mission pack, episode, and map, and reuses the bundle when that key is
+unchanged. Dynamic sector and actor state still travels in the usual snapshots.
+The host checks the new snapshot generation first; different-map transitions
+still refresh each worker's assets.
+
+A sequential PresentMon comparison pinned baseline source `ef6e750` and
+candidate source `8b48f99`. On the same 1,560-command E1M1 replay, the same-map
+reload at tic 1,247 fell from 6.178 to 0.358 seconds (94.2% lower); the
+candidate report records `RendererAssetsReused=True`. Active completed updates
+fell from 49.70 to 46.22/sec, so this does not support a general throughput
+gain. Measured display transitions were 43.66 and 45.89/sec, still below 60,
+and simulation ran at 34.97/sec in both runs. The audio-disabled replay ends at
+`ReplayEnd`, not at map completion. This one pair is not a pacing qualification;
+the remaining 0.358-second handoff is unattributed. Full reports and raw ETW
+rows are retained under ignored `local/presentmon-same-map-reset-20260929/`;
+the [portable receipt](../results/renderer-same-map-reset-presentmon-20260929.json)
+pins the code, workload, and report hashes.
+
+Focused verification passed: PowerShell parsing, `Play.ps1 -Check` with the
+Steam IWAD and current 11-track catalog metadata, 12 same-map save/new-game
+checks, and E1M1-to-E1M2 worker/session checks for the changed-map reload path.
+The complete Episode 1 human playthrough and the broader release gates remain
+open.
+
+## 2026-09-29 — Audit commits since the previous public preview
+
+To answer whether the week-plus after Preview.2 was all test-harness work, the
+pinned range `v0.1.0-preview.2..ef6e750` contains 169 commits (September 19–29).
+Forty-one commits touch `src/`; its 23 PowerShell source files change by
++1,236/−160 lines. Those include renderer/visibility and audio/runtime changes,
+not just test support. There are also 37 focused test/experiment tools
+(+1,999/−125) and 20 other runtime/measurement scripts (+1,549/−67).
+
+The repository's added-line count is nevertheless dominated by captured
+measurements: 537 `results/` files add 783,631 lines, about 98.5% of all added
+lines in that range. Documentation adds 7,076 lines across 31 files. The high
+commit count reflects many small code, test, result, and documentation updates;
+the enormous line count mostly reflects stored experiment output. Preview.3's
+release-preparation commit is still only a seven-file docs/release diff because
+it packages the already-tested source at its parent. These counts are pinned to
+`ef6e750`; the later same-map renderer fix and its receipt are documented in the
+following entry.
