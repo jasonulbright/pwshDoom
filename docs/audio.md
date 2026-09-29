@@ -175,3 +175,28 @@ Run in PowerShell 7.4 or newer from `C:\projects\pwshDoom`, using fresh report f
 ```
 
 The last command plays an eight-second segment through the current default output device. The replay script's default IWAD is the user's Steam Ultimate Doom installation; supply `-Wad` for a different legitimate path. It intentionally requires the existing eight-checkpoint route and has not been generalized to arbitrary save/new-game control-event fixtures.
+
+## Open qualified music readers concurrently — September 29, 2026
+
+The audio worker still validates every report, source set, playback-payload
+length and SHA-256 before it announces readiness, and it keeps each validated
+payload read-locked for playback. The change only opens independent tracks in a
+PowerShell runspace pool capped at four readers; it does not defer integrity
+checks until a later map. The current Episode 1 catalog opens all eleven tracks
+and preserves the exact sorted set of qualification-report hashes.
+
+The [paired reader-open receipt](../results/music-catalog-open-parallel-20260929.json)
+records baseline-candidate-candidate-baseline trials with a warm OS file cache.
+All [21 music-playback checks](../results/music-playback-parallel-tests-20260929.json)
+pass, including rejection of an invalid catalog entry while confirming that
+readers opened by other runspaces release their file handles. The [r9 host
+receipt](../results/episode1-r9-audio-smoke-20260929.json)
+records a five-second, sound-enabled E1M1 run under PowerShell 7.6.5: D_E1M1
+was selected, all 220,500 submitted frames returned, and the audio device
+closed without worker or cleanup error. Its only queue-empty observation was
+after the final packet; no rebuffer resume occurred.
+
+This is not a cold-start comparison, a full-campaign audio run, an acoustic
+review, or visible Terminal pacing evidence. The measured full process lasted
+46.81 seconds, but that single unpaired duration includes all startup and
+shutdown work and does not assign the remaining time to this audio change.

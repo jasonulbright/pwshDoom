@@ -754,3 +754,27 @@ its source fingerprint does not match current source. The mismatch cause is
 unresolved, so that old recording is not current-build completion evidence.
 The human Episode 1 route remains pending. These runs do not measure a loaded
 Terminal, audio output, displayed frames, or full-campaign behavior.
+
+## Open the qualified Episode 1 music catalog in parallel — September 29, 2026
+
+Startup validates and locks two playback periods for each of eleven music
+tracks, about 5,320,062,720 bytes (4.95469 GiB) in this local catalog. The
+previous loader hashed them one track at a time. The PowerShell audio reader
+now opens independent tracks through a runspace pool capped at four, while
+keeping eager validation, qualification/source checks, and read locks intact.
+
+Four baseline/candidate/candidate/baseline trials measured only catalog-reader
+initialization with the OS file cache already warm. The serial medians were
+4.665 seconds; the parallel medians were 2.050 seconds, a 56.06% reduction in
+this stage. Every trial opened all eleven readers, and the sorted report-hash
+sets matched. The focused suite passes 21 checks, including invalid-catalog
+failure and cleanup of readers opened by the other runspaces. See the
+[performance receipt](../results/music-catalog-open-parallel-20260929.json)
+and [the 21-check playback report](../results/music-playback-parallel-tests-20260929.json).
+
+One separate five-second sound-enabled headless E1M1 process completed in
+46.81 seconds end-to-end. That run was unpaired and includes startup, playback,
+and shutdown; it cannot establish the whole-game startup gain from the reader
+measurement. Headless completed updates are not terminal writes or displayed
+frames. Cold startup, full-campaign continuity, and the 35-tic/60-display
+targets remain open.

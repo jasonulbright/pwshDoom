@@ -1,0 +1,114 @@
+{
+  "ScriptSha256": "830ABF6EFEBBD55653381EF22C36F1AE9EEB6AAD39D83AD2C474187109A62AF5",
+  "Checks": [
+    {
+      "Name": "Catalog opens qualified loop and finite score without selecting either",
+      "Passed": true
+    },
+    {
+      "Name": "Three-period qualification keeps its proof metadata but hashes only the two playback payloads",
+      "Passed": true
+    },
+    {
+      "Name": "Playback remains readable when the redundant third proof file is unavailable",
+      "Passed": true
+    },
+    {
+      "Name": "Start offset crosses the qualified loop boundary with exact stored samples",
+      "Passed": true
+    },
+    {
+      "Name": "Explicit restart and gain applied",
+      "Passed": true
+    },
+    {
+      "Name": "Missing track packet rejected atomically",
+      "Passed": true
+    },
+    {
+      "Name": "Rejected packet preserves prior track and gain",
+      "Passed": true
+    },
+    {
+      "Name": "Loop qualification rejects one-shot command mode",
+      "Passed": true
+    },
+    {
+      "Name": "One-shot qualification rejects loop command mode",
+      "Passed": true
+    },
+    {
+      "Name": "One-shot offset past payload end rejected",
+      "Passed": true
+    },
+    {
+      "Name": "One-shot plays the final payload frames then zero pads",
+      "Passed": true
+    },
+    {
+      "Name": "One-shot auto-stops exactly at end and next read is silent",
+      "Passed": true
+    },
+    {
+      "Name": "Negative start frame rejected",
+      "Passed": true
+    },
+    {
+      "Name": "Nonfinite gain rejected",
+      "Passed": true
+    },
+    {
+      "Name": "Epoch reset stops selection while retaining gain",
+      "Passed": true
+    },
+    {
+      "Name": "Stop leaves no music layer",
+      "Passed": true
+    },
+    {
+      "Name": "Catalog closes loop and one-shot readers",
+      "Passed": true
+    },
+    {
+      "Name": "Closed playback rejects commands",
+      "Passed": true
+    },
+    {
+      "Name": "Catalog rejects mismatched track label",
+      "Passed": true
+    },
+    {
+      "Name": "An invalid parallel catalog member prevents playback initialization",
+      "Passed": true
+    },
+    {
+      "Name": "Parallel catalog failure closes every reader that opened successfully",
+      "Passed": true
+    }
+  ],
+  "OneShotTrack": "D_INTRO",
+  "OneShotQualificationSha256": "1A8D443F6758A094AE411C8F86C29345F28596239B87E8D8D283A73BDD7D7FCC",
+  "QualificationSha256": "1D5A9D6D16E8CDCA74646D6AEF009CDB42EB59B87941B0EFE648F9D3A98C96CF",
+  "Sources": [
+    {
+      "Sha256": "3DD9DA660A8EB2BCC0A2053686C68B9EAC740CE0A13FE047BBA72CE0277A95A1",
+      "Path": "src/MusicLoopReader.ps1"
+    },
+    {
+      "Sha256": "446171C237DABA7A1DC560F519C4460608CBAFFC165471251C6991CAE8790491",
+      "Path": "src/MusicOneShotReader.ps1"
+    },
+    {
+      "Sha256": "B5C3DC700ACF25AC2E0223B83934BDE86A6A5BB8B2F34FE0F1661E889E026EE9",
+      "Path": "src/MusicPlayback.ps1"
+    },
+    {
+      "Sha256": "4778ED914B85F60A5A6057ABE3C97199481599CBD73C5A6F74BE5D4AB726695F",
+      "Path": "scripts/Qualify-MusicOneShot.ps1"
+    }
+  ],
+  "Error": null,
+  "Meaning": "Persistent catalog command/lifecycle checks using real qualified loop samples across a period boundary and the named finite score, including automatic end and zero padding. No playback device or host integration.",
+  "LoopStartFrame": 4232970,
+  "LoopTrack": "D_E1M1"
+}

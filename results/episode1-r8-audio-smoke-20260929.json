@@ -1,0 +1,58 @@
+{
+  "Schema": "pwshDoom.episode1-r8-audio-smoke.v1",
+  "RecordedUtc": "2026-09-29T04:36:13.1220434Z",
+  "ImplementationCommit": "203ca553c3cf947b1099d73b1722711ae1b405c7",
+  "ExecutionCheckoutCommit": "f01f49ef1a134a179533bd3baf74d89216e57c0d",
+  "Environment": {
+    "PowerShell": "7.6.5",
+    "Architecture": "SeparateSimulation",
+    "Host": "Windows, Codex-managed PowerShell runtime"
+  },
+  "Configuration": {
+    "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+    "MusicCatalog": "local/music-prepared-episode1.json",
+    "MusicCatalogSha256": "0E9C9542C75F4D5E2D7FC71E42FAFBB58F94321C3B8A49BA0C9AC5A93752EE58",
+    "Episode": 1,
+    "Map": 1,
+    "Skill": 3,
+    "Workers": 16,
+    "Sound": true,
+    "RealtimeAudio": false,
+    "Headless": true,
+    "RequestedSeconds": 5,
+    "TerminalWrites": 0
+  },
+  "Outcome": {
+    "ExitReason": "Duration",
+    "Error": null,
+    "SimulationError": null,
+    "AudioError": null,
+    "AudioCleanupError": null,
+    "DurationSeconds": 5.0016498,
+    "SimulationTics": 174,
+    "CompletedRenderUpdates": 190,
+    "CompletedUpdatesPerSecond": 37.9874656558322,
+    "TicsPerSecond": 34.788521179551594,
+    "SelectedMusic": "D_E1M1",
+    "MusicFrames": 219240,
+    "MixedPackets": 174,
+    "SubmittedFrames": 219240,
+    "ReturnedCompletedFrames": 219240,
+    "CancelledQueuedFramesUpperBound": 0,
+    "DeviceClosed": true,
+    "RebufferResumes": 0,
+    "QueueStarvationObservations": [
+      {
+        "AfterPacket": 173,
+        "WallMs": 32300.9749
+      }
+    ],
+    "MaximumPacketQueue": 3,
+    "PcmSha256": "A9B184DCB16A7F30D1AA8357F7D87E74C254E6CD37E04312F8CC03E61B3B10C9"
+  },
+  "RawReport": {
+    "Path": "local/current-r8-audio-startup-20260929.json",
+    "Sha256": "D1523C4F026DED625F871702C7B35B0FCFF44B9F21B70DFD9A771A5431FFCF98"
+  },
+  "Limits": "Five-second headless E1M1 host after startup. Confirms current-source catalog qualification, D_E1M1 selection, real waveOut submission/completion, and clean worker/device shutdown under PowerShell 7.6.5. The only queue-empty observation follows the final packet; no rebuffer resume occurred. No Terminal writes or displayed-frame measurement; does not verify acoustic quality, full-session continuity, user PowerShell 7.6.6 execution, or campaign playthrough."
+}

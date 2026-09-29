@@ -1,0 +1,71 @@
+{
+  "Schema": "pwshDoom.music-catalog-open-parallel.v1",
+  "RecordedUtc": "2026-09-29T04:53:37.5234449Z",
+  "SourceCommit": "a26a0b439d0fee2e8ea0f1f1a3c785595bec1384",
+  "BaselineCommit": "f01f49ef1a134a179533bd3baf74d89216e57c0d",
+  "Environment": {
+    "PowerShell": "7.6.5",
+    "HostType": "Windows, Codex-managed runtime",
+    "WarmFileCache": true
+  },
+  "Configuration": {
+    "Catalog": "local/music-prepared-episode1.json",
+    "CatalogSha256": "0E9C9542C75F4D5E2D7FC71E42FAFBB58F94321C3B8A49BA0C9AC5A93752EE58",
+    "TrackCount": 11,
+    "VerifiedPlaybackPayloadBytes": 5320062720,
+    "VerifiedPlaybackPayloadGiB": 4.95469,
+    "ParallelRunspaceLimit": 4,
+    "TrialOrder": [
+      "Baseline",
+      "Candidate",
+      "Candidate",
+      "Baseline"
+    ],
+    "BaselineSourceGitBlob": "17c161f6c960abeb8b677068171b9872a2224517",
+    "CandidateSourceGitBlob": "10418cfc28c0f33271a7dcc5d3cd0feee5d0246d",
+    "CandidateSourceSha256": "B5C3DC700ACF25AC2E0223B83934BDE86A6A5BB8B2F34FE0F1661E889E026EE9"
+  },
+  "Trials": [
+    {
+      "Variant": "Baseline",
+      "OpenSeconds": 4.63
+    },
+    {
+      "Variant": "Candidate",
+      "OpenSeconds": 2.08
+    },
+    {
+      "Variant": "Candidate",
+      "OpenSeconds": 2.02
+    },
+    {
+      "Variant": "Baseline",
+      "OpenSeconds": 4.7
+    }
+  ],
+  "Summary": {
+    "BaselineMedianSeconds": 4.665,
+    "CandidateMedianSeconds": 2.05,
+    "OpenStageReductionPercent": 56.06,
+    "AllTracksOpened": true,
+    "TracksOpened": 11,
+    "QualificationReportHashSetsMatch": true,
+    "SortedReportHashSetSha256": "104BFBDE59AA79ADDD9B917B83C8775F5A1764891E4225DA78FC711136B10F8B",
+    "PlaybackSuitePassed": 21,
+    "PlaybackSuiteTotal": 21,
+    "PlaybackSuiteReceipt": "results/music-playback-parallel-tests-20260929.json",
+    "PlaybackSuiteReceiptSha256": "3208FF06C722FA1D1B86DEDB22E05334470A3A972022BAE687518AC64B9C083C",
+    "PlaybackSuiteScriptSha256": "830ABF6EFEBBD55653381EF22C36F1AE9EEB6AAD39D83AD2C474187109A62AF5"
+  },
+  "Inputs": {
+    "SerialHostReport": "local/current-r8-audio-startup-20260929.json",
+    "SerialHostReportSha256": "D1523C4F026DED625F871702C7B35B0FCFF44B9F21B70DFD9A771A5431FFCF98",
+    "ParallelHostReport": "local/current-music-parallel-startup-20260929.json",
+    "ParallelHostReportSha256": "C2A40F017771517F143AF8F7065C0ACBC92B95EE98CCAB770A59FA0AF4F05B50",
+    "BenchmarkScript": "local/Measure-MusicPlaybackOpen.ps1",
+    "BenchmarkScriptSha256": "970E6437EDD6A49E414717C1CF8D131FE0804E264BC640696BBE7CBC13330761",
+    "SerialHostSummaryReceipt": "results/episode1-r8-audio-smoke-20260929.json",
+    "SerialHostSummaryReceiptSha256": "F594BED86E828DB9F37B517885BF9AB26531C5840A9B5FD18C1524489439716A"
+  },
+  "Limits": "Measures only music-reader catalog open and qualification with a warm OS file cache, not cold launch. Eager qualification and file locking are preserved. Does not establish audible quality, campaign continuity, 35 Hz simulation, or displayed frame rate."
+}

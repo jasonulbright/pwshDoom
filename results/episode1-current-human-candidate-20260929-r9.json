@@ -1,0 +1,198 @@
+{
+  "Format": "pwshDoom.Episode1CurrentHumanCandidate",
+  "Version": 1,
+  "RecordedUtc": "2026-09-29T04:55:02.7027977Z",
+  "Branch": "codex/feasibility-study",
+  "ImplementationCommit": "a26a0b439d0fee2e8ea0f1f1a3c785595bec1384",
+  "PowerShell": "7.6.5",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "PreviousCandidate": {
+    "Path": "results/episode1-current-human-candidate-20260929-r8.json",
+    "Sha256": "E71119DB64A7F44AEAB1C902F8AA690C780A3BDF1CEBEEA851DACA9D8D142A9D",
+    "ImplementationCommit": "203ca553c3cf947b1099d73b1722711ae1b405c7"
+  },
+  "Readiness": "Prepared for one complete HMP Episode 1 human playthrough on the r9 candidate; the human route and result remain pending.",
+  "PlaythroughScope": [
+    "E1M1",
+    "E1M2",
+    "E1M3",
+    "E1M9",
+    "E1M4",
+    "E1M5",
+    "E1M6",
+    "E1M7",
+    "E1M8",
+    "E1 finale (E1TEXT/CREDIT)"
+  ],
+  "FreshHumanRunPaths": {
+    "Saves": "local/episode1-human-saves-r9",
+    "Settings": "local/episode1-human-settings-r9.json",
+    "Input": "local/episode1-human-input-r9.json",
+    "Report": "local/episode1-human-session-r9.json"
+  },
+  "Implementation": {
+    "Summary": "Qualified music loop and one-shot readers are still fully verified and file-locked before game readiness, but independent tracks now open in up to four PowerShell runspaces. Simulation, rendering, and mixing algorithms are unchanged.",
+    "Source": "src/MusicPlayback.ps1",
+    "SourceSha256": "B5C3DC700ACF25AC2E0223B83934BDE86A6A5BB8B2F34FE0F1661E889E026EE9",
+    "GitBlob": "10418cfc28c0f33271a7dcc5d3cd0feee5d0246d",
+    "PowerShellOnly": true,
+    "AudioCodeChanged": true,
+    "GameplayCodeChanged": false,
+    "RendererCodeChanged": false,
+    "MenuSaveCodeChanged": false
+  },
+  "Validation": {
+    "Arithmetic": {
+      "DirectInterceptCases": 2,
+      "RandomInterceptParityCases": 50000,
+      "FixedDivisionBoundaryCases": 121,
+      "FixedDivisionRandomParityCases": 50000,
+      "ProductionSightBoundsBoundaryCases": 200,
+      "ProductionSightBoundsRandomCases": 50000,
+      "Mismatches": 0,
+      "Receipt": "results/visibility-fixed-point-allocation-20260929.json",
+      "ReceiptSha256": "DE09017310B1D8E5196F609ABC218910A5E63E7133A8D8CDAF9F1DECE14EE6D7"
+    },
+    "UltimateDoomMapSmoke": {
+      "Passed": 36,
+      "Failed": 0,
+      "IdleTicsPerMap": 35,
+      "ReceiptSha256": "974C955FE784E2E0FD5853F9AC2862B5E4456E6C658160F909718105BDB892D5"
+    },
+    "Episode1Transitions": {
+      "Passed": 69,
+      "Failed": 0,
+      "ReceiptSha256": "DB83DA8851A667E0CCF0643AB8A0FD4B42197AB3C812D148117F67996972F2E6"
+    },
+    "BossProgression": {
+      "Passed": 97,
+      "Failed": 0,
+      "ReceiptSha256": "6C2CE4748EF91AADBEB286F344EED91ED79D03E3F940ABC458C181B85153D8AE"
+    },
+    "ExistingRouteRegressions": [
+      {
+        "Map": "E1M1",
+        "Passed": true,
+        "Commands": 1560,
+        "ReportSha256": "3DB73B824D7C56237EC8C42398C5069BF78C0C8CEC5E0B386681F8D8BE7DA9D8"
+      },
+      {
+        "Map": "E1M2",
+        "Passed": true,
+        "Commands": 3011,
+        "ReportSha256": "696B366AD620E1A8C58FEAC19048219B38220DF74BDB9BE9B4BB31783633ACDB"
+      },
+      {
+        "Map": "E1M3",
+        "Passed": false,
+        "Commands": 2302,
+        "Reason": "Existing waypoint driver stalled at waypoint 28; no reproducible engine defect. Route tuning remains stopped.",
+        "ReportSha256": "4538B566C6BFC1DF07A1AD9FFA7A884A33B8C90EF1E3F1A8B4B41D0360468C55"
+      },
+      {
+        "Map": "E1M4",
+        "Passed": true,
+        "Commands": 4726,
+        "ReportSha256": "27860D8F769B6C746AB6B4E692CD1FD556137420921FEB5AA70E721E3A1E1D89"
+      }
+    ],
+    "ArchivedE1M3Replay": {
+      "Commands": 7118,
+      "ReplaySha256": "A9E3E3E48DF5A483D904A412E3AF7A872ED5B5862713A331DC3310007AA09970",
+      "CurrentSourceFingerprintMatches": false,
+      "CheckpointsChecked": 24,
+      "CheckpointsMatched": false,
+      "MismatchCount": 23,
+      "FirstDivergenceTic": 350,
+      "PrechangeAndCandidateMismatchArraysIdentical": true,
+      "Meaning": "The archived replay was compared on the pre-change source and r8, with the same 23 mismatches from tic 350. It was not requalified on r9; r9 changes only music-reader initialization, so it is not used as current route evidence.",
+      "CandidateSource": "r8"
+    },
+    "CarriedForwardRendererEvidence": {
+      "PreviousCandidate": "r7",
+      "RendererAndSnapshotCodeChanged": false,
+      "Meaning": "r7 serial/worker output comparisons in Classic, Matrix/Katakana, and AnsiArt/Katakana carry forward because r8 and r9 changed no renderer or snapshot files.",
+      "PreviousCandidateReceiptSha256": "927ACC4D32D1D97D0EFA611E4A533314AFDE388AA8D5A2AC8AEBDA82E0DACFAE"
+    },
+    "MusicCatalogLoader": {
+      "Passed": 21,
+      "Total": 21,
+      "AllElevenReadersOpened": true,
+      "QualificationReportHashesMatch": true,
+      "MaximumParallelReaders": 4,
+      "Receipt": "results/music-catalog-open-parallel-20260929.json",
+      "ReceiptSha256": "FC31E5DA4AA50970F487338D8D49010FC5D8187B1B2842F339AFA70E0ACFF44C",
+      "PlaybackSuiteReceipt": "results/music-playback-parallel-tests-20260929.json",
+      "PlaybackSuiteReceiptSha256": "3208FF06C722FA1D1B86DEDB22E05334470A3A972022BAE687518AC64B9C083C"
+    },
+    "AudioStartup": {
+      "Passed": true,
+      "DurationSeconds": 5.0037721,
+      "SimulationTics": 174,
+      "CompletedRenderUpdates": 185,
+      "SelectedTrack": "D_E1M1",
+      "MixedPackets": 175,
+      "SubmittedAndCompletedFrames": 220500,
+      "DeviceClosed": true,
+      "AudioError": null,
+      "RebufferResumes": 0,
+      "OneQueueEmptyObservationAfterFinalPacket": true,
+      "Receipt": "results/episode1-r9-audio-smoke-20260929.json",
+      "ReceiptSha256": "6F28530DB496F8E7B2DD4CA19FC80E6DDF08888E2089F6F6F17257AE900083D6"
+    }
+  },
+  "Performance": {
+    "Receipt": "results/visibility-fixed-point-allocation-20260929.json",
+    "ReceiptSha256": "DE09017310B1D8E5196F609ABC218910A5E63E7133A8D8CDAF9F1DECE14EE6D7",
+    "Design": "Two baseline and two candidate runs in baseline-candidate-candidate-baseline order, using the same 420-command HMP E3M6 input; repeated once with stage instrumentation and once without it.",
+    "UnprofiledSimulationMedianMs": {
+      "Baseline": 15.2169,
+      "Candidate": 14.627,
+      "ChangePercent": -3.88
+    },
+    "UnprofiledSimulationP95Ms": {
+      "Baseline": 39.3711,
+      "Candidate": 39.735,
+      "ChangePercent": 0.92
+    },
+    "SightCallsPerRun": 7892,
+    "CheckpointsPerRun": 2,
+    "AllRunsCheckpointsMatched": true,
+    "Target35HzQualified": false,
+    "Target60PresentedFramesQualified": false,
+    "Note": "The unprofiled median improvement is modest and the p95 is unchanged/slightly higher; single-map synthetic stress evidence only.",
+    "MusicCatalogOpen": {
+      "BaselineMedianSeconds": 4.665,
+      "CandidateMedianSeconds": 2.05,
+      "OpenStageReductionPercent": 56.06,
+      "Tracks": 11,
+      "VerifiedPlaybackPayloadGiB": 4.95469,
+      "WarmFileCache": true,
+      "Receipt": "results/music-catalog-open-parallel-20260929.json",
+      "ReceiptSha256": "FC31E5DA4AA50970F487338D8D49010FC5D8187B1B2842F339AFA70E0ACFF44C",
+      "Meaning": "Warm-cache reader-open measurement only; not a cold-start, whole-game, or displayed-frame-rate result."
+    }
+  },
+  "HumanPlaythrough": {
+    "Pending": true,
+    "Scope": "One complete HMP Episode 1 run including the E1M3 secret exit to E1M9, return to E1M4, and the finale.",
+    "Instructions": "docs/episode1-playtest.md"
+  },
+  "KnownLimitations": [
+    "The complete human route has not been played; automated checks do not replace it.",
+    "The existing E1M3 waypoint route stalled without an independently reproduced game defect.",
+    "The old fixed-input E1M3 replay no longer matches current-source checkpoints and does not qualify current-source completion.",
+    "Full-campaign audio continuity, acoustic quality, original-executable visual parity, sustained 35 Hz simulation, and 60 displayed updates/sec remain unqualified.",
+    "The current-source five-second music smoke ran under PowerShell 7.6.5 only; it does not review audible quality or verify full-campaign continuity.",
+    "The music-catalog timing comparison uses a warm file cache and does not establish cold-start latency."
+  ],
+  "EvidenceLineage": [
+    "results/episode1-current-human-candidate-20260929-r7.json",
+    "results/visibility-fixed-point-allocation-20260929.json",
+    "results/episode1-current-human-candidate-20260929-r8.json",
+    "results/music-catalog-open-parallel-20260929.json",
+    "results/episode1-r9-audio-smoke-20260929.json",
+    "results/episode1-r8-audio-smoke-20260929.json"
+  ],
+  "Meaning": "Source-pinned handoff for one complete human Episode 1 playthrough. Automated evidence proves readiness checks only; it does not claim the route or finale have been completed."
+}

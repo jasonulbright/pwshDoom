@@ -1,0 +1,62 @@
+{
+  "Schema": "pwshDoom.episode1-r9-audio-smoke.v1",
+  "RecordedUtc": "2026-09-29T04:53:37.5234449Z",
+  "ImplementationCommit": "a26a0b439d0fee2e8ea0f1f1a3c785595bec1384",
+  "MusicPlaybackGitBlob": "10418cfc28c0f33271a7dcc5d3cd0feee5d0246d",
+  "MusicPlaybackSha256": "B5C3DC700ACF25AC2E0223B83934BDE86A6A5BB8B2F34FE0F1661E889E026EE9",
+  "Environment": {
+    "PowerShell": "7.6.5",
+    "Architecture": "SeparateSimulation",
+    "HostType": "Windows, Codex-managed PowerShell runtime"
+  },
+  "Configuration": {
+    "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+    "MusicCatalog": "local/music-prepared-episode1.json",
+    "MusicCatalogSha256": "0E9C9542C75F4D5E2D7FC71E42FAFBB58F94321C3B8A49BA0C9AC5A93752EE58",
+    "Episode": 1,
+    "Map": 1,
+    "Skill": 3,
+    "Workers": 16,
+    "Sound": true,
+    "RealtimeAudio": false,
+    "Headless": true,
+    "TerminalWrites": 0,
+    "RequestedSeconds": 5,
+    "HostProcessWallSeconds": 46.8063611
+  },
+  "Outcome": {
+    "ExitReason": "Duration",
+    "Error": null,
+    "SimulationError": null,
+    "AudioError": null,
+    "AudioCleanupError": null,
+    "DurationSeconds": 5.0037721,
+    "SimulationTics": 174,
+    "CompletedRenderUpdates": 185,
+    "HeadlessUpdatesPerSecond": 36.97210750265784,
+    "TicsPerSecond": 34.773765975472784,
+    "CatalogReports": 11,
+    "SelectedMusic": "D_E1M1",
+    "MusicFrames": 220500,
+    "MixedPackets": 175,
+    "SubmittedFrames": 220500,
+    "ReturnedCompletedFrames": 220500,
+    "CancelledQueuedFramesUpperBound": 0,
+    "DeviceClosed": true,
+    "RebufferCount": 1,
+    "RebufferResumes": 0,
+    "QueueStarvationObservations": [
+      {
+        "WallMs": 27858.1754,
+        "AfterPacket": 174
+      }
+    ],
+    "PcmSha256": "732379EA6C1AACAEE67CBFB7657EBC4E6A818740FC57FECDAA6B3B06E4E07C90",
+    "WorkerWallSeconds": 28.0359004
+  },
+  "RawReport": {
+    "Path": "local/current-music-parallel-startup-20260929.json",
+    "Sha256": "C2A40F017771517F143AF8F7065C0ACBC92B95EE98CCAB770A59FA0AF4F05B50"
+  },
+  "Limits": "Five-second headless sound-enabled E1M1 run on PowerShell 7.6.5. No Terminal writes or displayed-frame measurement. One queue-empty observation followed final packet 174, with no rebuffer resume; not mid-session underrun evidence. No acoustic quality or full-campaign audio continuity claim. Process-wall sample is unpaired."
+}

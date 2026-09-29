@@ -4379,3 +4379,34 @@ driver also stalls without a reproduced game defect; no route tuning was
 started. The candidate still passes the other three existing normal-route
 regressions, and Jason's complete human Episode 1 run remains the next route
 evidence.
+
+## 2026-09-29 — Reduce qualified music-catalog startup work
+
+The first current-source r8 audio run exposed a large catalog-open stage: the
+E1 catalog has eleven looping tracks, and startup verifies all playback-period
+payload hashes before declaring the audio worker ready. A first size estimate
+incorrectly included the redundant third proof period. The reader skips that
+period; the correct total for the two playback periods is 5,320,062,720 bytes
+(4.95469 GiB), not 7.43 GiB. The qualification and integrity checks remain
+eager.
+
+Commit `a26a0b439d0fee2e8ea0f1f1a3c785595bec1384` opens independent readers in
+up to four PowerShell runspaces. The focused playback suite passes 21 checks,
+including rejection of one invalid parallel catalog member and exclusive-open
+probes proving that other readers release their handles after that failure.
+On a warm OS file cache, baseline-candidate-candidate-baseline reader-open
+trials measured medians of 4.665 and 2.050 seconds. All eleven readers opened
+in every trial and the report-hash sets matched. This is a 56.06% reduction in
+the reader-open stage, not a cold-start or whole-game claim; the portable
+[performance receipt](../results/music-catalog-open-parallel-20260929.json)
+and [21-check report](../results/music-playback-parallel-tests-20260929.json)
+preserve the measurements.
+
+A separate five-second headless E1M1 host run with the complete catalog under
+PowerShell 7.6.5 selected D_E1M1, submitted and completed 220,500 audio frames,
+and closed the device without a worker error. One queue-empty observation came
+after the final packet; there was no rebuffer resume. Its 46.81-second total
+process duration is a single unpaired startup/playback/shutdown sample. This
+does not measure Terminal presentation, audible quality, full-campaign audio
+continuity, or the 35/60 pacing goal; the complete human Episode 1 run remains
+pending. See the [host receipt](../results/episode1-r9-audio-smoke-20260929.json).
