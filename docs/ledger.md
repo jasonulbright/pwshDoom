@@ -4441,3 +4441,18 @@ hardware underrun telemetry. It is not evidence of audible quality, sustained
 continuity, visible frame rate, or 35 Hz / 60 displayed-update qualification.
 The [portable host receipt](../results/episode1-r9-audio-smoke-7.6.6-20260929.json)
 pins the raw local report hash; the IWAD and music catalog remain local.
+
+## 2026-09-29 — Recheck the moving ceiling on current source
+
+The old fixed-state moving-ceiling comparison used renderer source commit
+`532f2e3`. I reran the same E1M1 input at tic 315 with sector 26 held at
+ceiling heights 0, 6, 34, and 68 on the current R9 source under PowerShell
+7.6.6. Candidate/reference scene-index differences remain 10, 7, 410, and
+4,166, with exact HUDs at every height and unchanged mismatch bounds versus
+the prior receipt. The rerun shows no new regression attributable to the
+intervening renderer cache and worker changes. It remains a static comparison
+against the adapted PowerShell renderer, not the original Doom executable or
+the exact camera in Jason's screenshot. No renderer code change is justified
+by this same-view check. See the
+[source-pinned receipt](../results/moving-sector-e1m1-height-sweep-r9-20260929.json);
+raw report and diagnostic images stay in ignored `local/`.

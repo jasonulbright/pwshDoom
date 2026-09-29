@@ -164,6 +164,18 @@
       "RebufferResumes": 0,
       "Receipt": "results/episode1-r9-audio-smoke-7.6.6-20260929.json",
       "ReceiptSha256": "76E1246B3E12D3A00DA25C74E65461F6D95A329662962886C10EFE6E4FA3114B"
+    },
+    "MovingSectorSweep": {
+      "Compared": true,
+      "PowerShell": "7.6.6",
+      "InputTic": 315,
+      "SectorIndex": 26,
+      "CeilingHeights": [0, 6, 34, 68],
+      "CandidateSceneDifferentIndices": [10, 7, 410, 4166],
+      "HudDifferentIndices": [0, 0, 0, 0],
+      "MatchesPreviousCandidate": true,
+      "Receipt": "results/moving-sector-e1m1-height-sweep-r9-20260929.json",
+      "ReceiptSha256": "4ED8A8DB788E8D95808E4357BD5E2082C4EB308C3643AD2DF9D525D94349883F"
     }
   },
   "Performance": {
@@ -219,6 +231,7 @@
     "results/episode1-r9-audio-smoke-20260929.json",
     "results/music-playback-runtime-7.6.6-20260929.json",
     "results/episode1-r9-audio-smoke-7.6.6-20260929.json",
+    "results/moving-sector-e1m1-height-sweep-r9-20260929.json",
     "results/episode1-r8-audio-smoke-20260929.json"
   ],
   "Meaning": "Source-pinned handoff for one complete human Episode 1 playthrough. Automated evidence proves readiness checks only; it does not claim the route or finale have been completed."

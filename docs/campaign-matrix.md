@@ -41,6 +41,10 @@ latency, continuous campaign audio, or game/display pacing. See the [visibility 
 [music-open measurement](../results/music-catalog-open-parallel-20260929.json),
 and the [R9 audio receipts for PowerShell 7.6.5](../results/episode1-r9-audio-smoke-20260929.json)
 and [7.6.6](../results/episode1-r9-audio-smoke-7.6.6-20260929.json).
+The moving-ceiling comparison was rerun on this source: the actual six-unit
+opening retains seven scene-index differences and an exact HUD against the
+adapted PowerShell reference, identical to the prior comparison. This is not
+original-executable parity; see the [current-source sweep](../results/moving-sector-e1m1-height-sweep-r9-20260929.json).
 The sector-plane cache passes a new 36-map load/idle/render
 smoke and five-view 16-worker equality in all three styles. An isolated
 PowerShell phase experiment shows lower geometry time with unchanged full-frame

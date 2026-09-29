@@ -562,6 +562,21 @@ pwsh -NoProfile -File .\scripts\Compare-MovingSectorHeightSweep.ps1 `
   -Images .\local\moving-sector-rerun-images
 ```
 
+### R9 renderer-source recheck (2026-09-29)
+
+The same frozen tic-315 state was rerendered under PowerShell 7.6.6 on the
+current R9 source. The actual six-unit ceiling opening still differs at 7
+scene indices, with an exact HUD. Heights 0, 34, and 68 differ at 10, 410,
+and 4,166 indices, matching the September 28 counts and mismatch bounds
+exactly despite the intervening renderer/cache changes. The candidate and
+reference change 50,761 and 50,733 pixels respectively between heights 0 and
+68, confirming that both render the opening while retaining small distributed
+differences. This does not reproduce the precise camera from Jason's screenshot
+or compare against an original executable; it exposes no new regression from
+the current changes, so no renderer code change follows from this check alone.
+Diagnostic images and the raw report remain under ignored `local/`. See the
+[R9 comparison receipt](../results/moving-sector-e1m1-height-sweep-r9-20260929.json).
+
 ## Reuse per-context raster scratch (2026-09-27)
 
 `Invoke-FastRender` previously allocated two 320-entry ray arrays and a new
