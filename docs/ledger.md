@@ -5166,3 +5166,25 @@ stationary-cache defect or a newly reproducible gameplay bug. Per the
 playtesting plan, the route was not tuned or retried; the short result is
 retained in `results/e1m3-stale-discovery-replay-20260929.json` and the ignored
 raw report remains under `local/`.
+
+## 2026-09-29 — Pin the R17 Episode 1 playtest package
+
+The local R17 archive is built from clean commit
+`260cbf00cc35df45c3ffc6c5d014f41247e88e60`; its game implementation matches
+the tested source at `00405deebef6b4e8477c9c9316987b82fbc9064d`. The 543
+manifest-listed payload files all match the extracted package, which passes
+the PowerShell 7.6.6 IWAD/music preflight for 36 maps and eleven prepared
+tracks. The archive excludes the research PDF, game assets, and local reports.
+Its SHA-256 is
+`5B71FEFFDFC9C323141CBB02446C79712F799F9659145850C0D4999855FA1981`; it is a
+local development handoff, not a new public release. See the
+[package validation receipt](../results/r17-playtest-package-validation-20260929.json).
+
+The final packaged four-second E1M1 smoke ran 139 simulation tics and 170
+headless updates. It selected D_E1M1, returned all 175,140 submitted music
+frames, and closed the device without errors. One queue-starvation poll came
+after the final audio packet, with no rebuffer resume. These headless updates
+are not displayed frames, and the short run does not establish continuous
+campaign audio or map completion. The nine-map Episode 1 load/idle/render
+smoke passed 9/9; the human HMP route remains pending. The candidate and
+package receipts preserve the exact scope and raw report hashes.

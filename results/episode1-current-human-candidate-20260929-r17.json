@@ -1,0 +1,160 @@
+{
+  "Format": "pwshDoom.Episode1CurrentHumanCandidate",
+  "Version": 1,
+  "RecordedUtc": "2026-09-29T21:13:28Z",
+  "Branch": "codex/feasibility-study",
+  "RepositoryCommit": "260cbf00cc35df45c3ffc6c5d014f41247e88e60",
+  "ImplementationCommit": "00405deebef6b4e8477c9c9316987b82fbc9064d",
+  "PackageSourceCommit": "260cbf00cc35df45c3ffc6c5d014f41247e88e60",
+  "PackageReceipt": "results/r17-playtest-package-validation-20260929.json",
+  "PreviousCandidate": {
+    "ImplementationCommit": "3e0b6308bac9dc152f9ae78fb8f23f70623b36e2",
+    "Path": "results/episode1-current-human-candidate-20260929-r16.json",
+    "Sha256": "5B90772F5791627AD33A037456AFECC18879CB600B82A0E5CC4772A076A2AC66"
+  },
+  "Runtime": {
+    "PowerShell": "7.6.6",
+    "Distribution": "Official portable x64 archive, used from ignored local/",
+    "ArchiveSha256": "02FE458BE20493FBDF43F61EA20610B811EE6C738AB1676C61B9CFCD1A33C860",
+    "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+    "MusicCatalogSha256": "0E9C9542C75F4D5E2D7FC71E42FAFBB58F94321C3B8A49BA0C9AC5A93752EE58"
+  },
+  "SourceDeltaFromR16": {
+    "BaseGameSourceCommit": "3e0b6308bac9dc152f9ae78fb8f23f70623b36e2",
+    "RuntimePaths": [
+      "scripts/Invoke-SimulationWorker.ps1",
+      "src/ManagedDoom/Video/ThreeDRenderer.sb.ps1"
+    ],
+    "TestPath": "scripts/Test-IndexedDiscoveryMaps.ps1",
+    "GameplayAndSessionTransitionsChanged": false,
+    "Meaning": "R17 adds stationary automap discovery reuse and worker telemetry. The focused R16 chainsaw, campaign-transition, boss, and menu-input evidence remains applicable because the R17 source delta does not change Doom gameplay or session-transition code."
+  },
+  "Validation": {
+    "StationaryDiscovery": {
+      "Receipt": "results/stationary-discovery-cache-20260929.json",
+      "ReceiptSha256": "2E9142390DBC310038DC6ACAE3607450C21391BEEF920AAF35C15C190D3A8833",
+      "PowerShell": "7.6.6",
+      "Maps": 36,
+      "HeadingsPerMap": 4,
+      "CompleteMappingBitsetMatches": 144,
+      "InvalidationCases": 11,
+      "FramebufferAndRendererCountersPreserved": true,
+      "WorkerFixture": {
+        "RawReport": "local/automap-worker-stationary-ps766-r1-20260929.json",
+        "RawReportSha256": "F897D089D67324DB0CB12C4EE61854045FA99C669C42A59E119FCF25E527F58D",
+        "Checks": 8,
+        "Passed": 8
+      }
+    },
+    "Episode1Smoke": {
+      "RawReport": "local/episode1-smoke-stationary-cache-20260929.json",
+      "RawReportSha256": "BCFBB6CE5F1035427B98BAA046754BBE054D96FC2452334162E7A029296A0DE3",
+      "PowerShell": "7.6.6",
+      "Skill": 3,
+      "Maps": ["E1M1", "E1M2", "E1M3", "E1M4", "E1M5", "E1M6", "E1M7", "E1M8", "E1M9"],
+      "Passed": 9,
+      "Failed": 0,
+      "IdleTicsPerMap": 35,
+      "Meaning": "All nine Episode 1 map starts load, idle, and render in the smoke harness. This is not map navigation or campaign completion evidence."
+    },
+    "IdleHost": {
+      "RawReport": "local/stationary-cache-host-idle-r1-20260929.json",
+      "RawReportSha256": "FA4926CB365307A5E715A68FD4AFB0A5498148444D4DD78ADBBC872B268C1DA9",
+      "PowerShell": "7.6.6",
+      "Map": "E1M1",
+      "Workers": 2,
+      "DurationSeconds": 5.0010676,
+      "SimulationTics": 174,
+      "SimulationTicsPerSecond": 34.7925710902208,
+      "CompletedHeadlessFrames": 81,
+      "HeadlessFramesPerSecond": 16.19654171441314,
+      "DiscoveryTraversals": 1,
+      "DiscoveryCacheHits": 174,
+      "Meaning": "Idle host measurement only. Headless completions are not terminal writes or displayed frames."
+    },
+    "StationaryMethodBenchmark": {
+      "Receipt": "results/stationary-discovery-cache-20260929.json",
+      "Map": "E4M9",
+      "CallsPerPath": 120,
+      "UncachedMedianMillisecondsPerCall": 16.756895,
+      "CachedMedianMillisecondsPerCall": 0.082065,
+      "MedianMethodSpeedup": 204.19051970998598,
+      "Meaning": "Fixed-view DiscoverMap method benchmark, not a gameplay frame-rate result."
+    },
+    "PackagedAudioHostSmoke": {
+      "RawReport": "local/r17-package-audio-smoke-20260929.json",
+      "RawReportSha256": "FAAB2CAF9A2CA625C811D82B909BDE92775A37257167DC746833830D1424E666",
+      "PowerShell": "7.6.6",
+      "Episode": 1,
+      "Map": 1,
+      "Workers": 16,
+      "DurationSeconds": 4.0010634,
+      "SimulationTics": 139,
+      "SimulationTicsPerSecond": 34.740764167846,
+      "CompletedHeadlessUpdates": 170,
+      "HeadlessUpdatesPerSecond": 42.4887043779411,
+      "ExitReason": "Duration",
+      "HostError": null,
+      "AudioError": null,
+      "CleanupError": null,
+      "SelectedMusic": "D_E1M1",
+      "AudioPackets": 139,
+      "SubmittedMusicFrames": 175140,
+      "ReturnedCompletedMusicFrames": 175140,
+      "DeviceClosed": true,
+      "ClippedSamples": 0,
+      "RebufferCount": 1,
+      "QueueStarvationObservations": 1,
+      "QueueStarvationAfterPacket": 138,
+      "StarvationWasAfterFinalPacket": true,
+      "RebufferResumes": 0,
+      "AudioPcmSha256": "330BE75D2583D73B59284ECAFCE953B8D70B4D867829478D44E41FA5706E1CEF",
+      "Meaning": "Short packaged E1M1 actual-device smoke. All submitted music frames were returned and the device closed without errors. One queue-starvation observation followed the final packet; this does not qualify sustained audio continuity or audible quality. Headless updates are not displayed frames."
+    },
+    "InheritedR16FocusedChecks": {
+      "ChainsawAttack": {
+        "Receipt": "results/saw-attack.json",
+        "ReceiptSha256": "72E8A5DBC380C480E90452218DEF0CC04738838371FDAC8057AFC16FBBFDAA6C",
+        "Checks": 2,
+        "E1M2ImpHealth": "60 to 56",
+        "TicsToHit": 4,
+        "Scope": "Fixed-position weapon-action regression, not a replay of the user's crash session or a map route."
+      },
+      "CampaignTransitions": {
+        "RawReport": "local/campaign-transitions-7.6.6-current-20260929.json",
+        "RawReportSha256": "1AB678099AF2A66FDA387AF66076C5D0CD5DD5402895751884C9B53F81D2146C",
+        "Checks": 69,
+        "Failures": 0,
+        "Scope": "Fixture-driven E1M9/E1M4 world loads, secret history, intermission progression, and finale state; no completed-map claim."
+      },
+      "BossProgression": {
+        "RawReport": "local/boss-progression-7.6.6-current-20260929.json",
+        "RawReportSha256": "2C83CE787C7E3A2C19FF50A8FE3125F8E96DDB4D8218F3887B2AFC702D729DC2",
+        "Checks": 97,
+        "Passed": 97
+      },
+      "MenuInput": {
+        "RawReport": "local/menu-input-7.6.6-current-20260929.json",
+        "RawReportSha256": "A76937E50DDFF9BC621943DC4F877DAFB1968A296E7F776233165786652B9CBF",
+        "Checks": 10,
+        "Passed": 10
+      },
+      "InheritedSourceCommit": "cdd5fdd68734dbc663367f44117fd8a49ac17694"
+    }
+  },
+  "Playthrough": {
+    "Status": "Pending",
+    "Skill": "HMP (3)",
+    "Scope": "E1M1 -> E1M2 -> E1M3 secret exit -> E1M9 -> return to E1M4 -> E1M5 -> E1M6 -> E1M7 -> E1M8 boss exit -> Episode 1 finale",
+    "FinishPoint": "E1TEXT/CREDIT finale screen",
+    "AutomatedFixturesAreNotClaimedAsMapPlaythroughs": true
+  },
+  "KnownLimitations": [
+    "The complete human Episode 1 route and physical keyboard play remain pending.",
+    "The candidate has not qualified 35 simulation tics/sec and 60 displayed frames/sec; headless updates are not terminal output or display telemetry.",
+    "The short audio smoke does not establish sound-effect playback, sustained campaign continuity, latency under human play, or audible quality.",
+    "Independent original-executable visual parity is incomplete. The raised-floor Techpillar overlap remains unverified against the original executable; the reported blue-armor Gibs wall leak was not reproduced in the bounded view sweep.",
+    "The R17 idle and map-load checks do not establish map completion, campaign-wide movement/special coverage, or human playability.",
+    "Doom II, Final Doom, and the MyHouse audit remain later roadmap scope; arbitrary PWAD compatibility is not claimed."
+  ]
+}
