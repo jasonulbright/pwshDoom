@@ -2,12 +2,14 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 param([Parameter(Mandatory)][string]$Replay,[Parameter(Mandatory)][string]$Output,[switch]$Profile,[switch]$ActorProfile,
     [ValidateRange(1,1260000)][int]$MaxCommands=1200,
+    [string]$SourceRoot=(Join-Path $PSScriptRoot '../src/ManagedDoom'),
     [string]$Wad='C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\base\DOOM.WAD')
 $ErrorActionPreference='Stop'
 if($ActorProfile){$Profile=$true}
 if(Test-Path -LiteralPath $Output){throw 'Use a fresh stage measurement report.'}
 $owned=Join-Path "$PSScriptRoot/../local" ('game-profile-'+[guid]::NewGuid().ToString('N'))
-$bundle=& "$PSScriptRoot/Build-EngineBundle.ps1" -Output "$owned/baseline.ps1"
+$sourceRootPath=[IO.Path]::GetFullPath($SourceRoot)
+$bundle=& "$PSScriptRoot/Build-EngineBundle.ps1" -SourceRoot $sourceRootPath -Output "$owned/baseline.ps1"
 $baselineHash=(Get-FileHash $bundle).Hash
 $labels=@('PlayerInterpolation','ThinkerInterpolation','SectorInterpolation','PlayerThink','ThinkersRun','Specials','RespawnSpecials','StatusBar','AutoMap')
 if($Profile){
@@ -105,7 +107,7 @@ try{
     }
     @{Error=$failure;Profile=[bool]$Profile;ActorProfile=[bool]$ActorProfile;ActorArrayOrder=@('XY','Z','StateActionInclusive','CheckSightInclusive');ActorCountOrder=@('XYCalls','ZCalls','NumericallyUnneededXY','NumericallyUnneededZ','StateActions','CheckSight');Commands=$completed;FinishedUtc=[DateTime]::UtcNow.ToString('o');PowerShell=$PSVersionTable.PSVersion.ToString();
         BaselineBundleSha256=$baselineHash;ExecutedBundleSha256=(Get-FileHash $bundle).Hash;HarnessSha256=(Get-FileHash $PSCommandPath).Hash;
-        ReplaySha256=(Get-FileHash $Replay).Hash;WadSha256=(Get-FileHash $Wad).Hash;Statistics=$stats;Samples=$samples.ToArray();
+        ReplaySha256=(Get-FileHash $Replay).Hash;WadSha256=(Get-FileHash $Wad).Hash;SourceRoot=$sourceRootPath;Statistics=$stats;Samples=$samples.ToArray();
         ReplayVerification=$verification;Checkpoints=$points.ToArray();OwnedBundle=$bundle;
         Meaning='Unpaced simulation-only replay. Diagnostic stage timers exist only in an owned bundle; gameplay sources are not instrumented. All cold/update samples retained. Times include profiling overhead and do not model the loaded rendering/audio host; checkpoints test selected-state compatibility.'}|ConvertTo-Json -Depth 10|Set-Content $Output
 }

@@ -7,7 +7,7 @@ $ErrorActionPreference='Stop'
 if(Test-Path -LiteralPath $Output){throw 'Use a fresh sight-bounds report.'}
 $bundle=& "$PSScriptRoot/Build-EngineBundle.ps1" -Output "$PSScriptRoot/../local/sight-bounds-$PID.ps1"
 $source=[IO.File]::ReadAllText($bundle)
-$marker='$this.BottomSlope = [Fixed]::new($bottomSlopeData)'
+$marker='$this.BottomSlope.Data = $bottomSlopeData'
 if([regex]::Matches($source,[regex]::Escape($marker)).Count -ne 1){throw 'Could not isolate the production sight-bound initialization.'}
 # Stop the owned test bundle immediately after production initialization so
 # randomized bound checks do not traverse or mutate a map's BSP line markers.

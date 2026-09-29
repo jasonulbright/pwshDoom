@@ -34,11 +34,16 @@ class VisibilityCheck {
 
     VisibilityCheck([World] $world) {
         $this.World = $world
+        # These wrappers are mutated in place by each CheckSight call.
+        # Give this instance owned values instead of the shared Fixed.Zero.
+        $this.SightZStart = [Fixed]::new(0)
+        $this.BottomSlope = [Fixed]::new(0)
+        $this.TopSlope = [Fixed]::new(0)
         $this.Trace = [DivLine]::new()
         $this.Occluder = [DivLine]::new()
     }
 
-    [Fixed] InterceptVector([DivLine] $v2, [DivLine] $v1) {
+    [int] InterceptVectorData([DivLine] $v2, [DivLine] $v1) {
         # Preserve each Fixed operator's signed 32-bit wrap and arithmetic
         # shift while keeping its intermediate values in integers. Sight checks
         # call this for crossed two-sided lines on every simulation tic.
@@ -49,7 +54,7 @@ class VisibilityCheck {
         [int]$denData = [Fixed]::ToInt32Unchecked([long]$denLeft - [long]$denRight)
 
         if ($denData -eq 0) {
-            return [Fixed]::Zero
+            return 0
         }
 
         [int]$xDelta = [Fixed]::ToInt32Unchecked([long]$v1.X.Data - [long]$v2.X.Data)
@@ -62,13 +67,30 @@ class VisibilityCheck {
         # path without allocating wrappers for the numerator and denominator.
         if (([Fixed]::CIntAbs($numData) -shr 14) -ge [Fixed]::CIntAbs($denData)) {
             $limit = if (($numData -bxor $denData) -lt 0) { [int]::MinValue } else { [int]::MaxValue }
-            return [Fixed]::new($limit)
+            return $limit
         }
         $quotient = ([double]$numData / [double]$denData) * [Fixed]::FracUnit
         if ($quotient -ge 2147483648.0 -or $quotient -lt -2147483648.0) {
             throw [DivideByZeroException]::new()
         }
-        return [Fixed]::new([int][Math]::Truncate($quotient))
+        return [int][Math]::Truncate($quotient)
+    }
+
+    [Fixed] InterceptVector([DivLine] $v2, [DivLine] $v1) {
+        return [Fixed]::new($this.InterceptVectorData($v2, $v1))
+    }
+
+    [int] DivideFixedData([int] $numerator, [int] $denominator) {
+        # Keep Fixed.op_Division's saturation and double/truncate semantics
+        # without allocating wrappers for visibility slope arithmetic.
+        if (([Fixed]::CIntAbs($numerator) -shr 14) -ge [Fixed]::CIntAbs($denominator)) {
+            return (($numerator -bxor $denominator) -lt 0) ? [int]::MinValue : [int]::MaxValue
+        }
+        $quotient = ([double]$numerator / [double]$denominator) * [Fixed]::FracUnit
+        if ($quotient -ge 2147483648.0 -or $quotient -lt -2147483648.0) {
+            throw [DivideByZeroException]::new()
+        }
+        return [int][Math]::Truncate($quotient)
     }
 
     [bool] CrossSubsector([int] $subsectorNumber, [int] $validCount) {
@@ -124,19 +146,21 @@ class VisibilityCheck {
 
             if ($openBottom.Data -ge $openTop.Data) { return $false }
 
-            $frac = $this.InterceptVector($this.Trace, $this.Occluder)
+            $fracData = $this.InterceptVectorData($this.Trace, $this.Occluder)
 
             if ($front.FloorHeight.Data -ne $back.FloorHeight.Data) {
-                $slope = ($openBottom - $this.SightZStart) / $frac
-                if ($slope.Data -gt $this.BottomSlope.Data) {
-                    $this.BottomSlope = $slope
+                $slopeNumerator = [Fixed]::ToInt32Unchecked([long]$openBottom.Data - [long]$this.SightZStart.Data)
+                $slopeData = $this.DivideFixedData($slopeNumerator, $fracData)
+                if ($slopeData -gt $this.BottomSlope.Data) {
+                    $this.BottomSlope.Data = $slopeData
                 }
             }
 
             if ($front.CeilingHeight.Data -ne $back.CeilingHeight.Data) {
-                $slope = ($openTop - $this.SightZStart) / $frac
-                if ($slope.Data -lt $this.TopSlope.Data) {
-                    $this.TopSlope = $slope
+                $slopeNumerator = [Fixed]::ToInt32Unchecked([long]$openTop.Data - [long]$this.SightZStart.Data)
+                $slopeData = $this.DivideFixedData($slopeNumerator, $fracData)
+                if ($slopeData -lt $this.TopSlope.Data) {
+                    $this.TopSlope.Data = $slopeData
                 }
             }
 
@@ -187,9 +211,9 @@ class VisibilityCheck {
         [int]$targetTopData = [Fixed]::ToInt32Unchecked([long]$target.Z.Data + [long]$target.Height.Data)
         [int]$topSlopeData = [Fixed]::ToInt32Unchecked([long]$targetTopData - [long]$sightZData)
         [int]$bottomSlopeData = [Fixed]::ToInt32Unchecked([long]$target.Z.Data - [long]$sightZData)
-        $this.SightZStart = [Fixed]::new($sightZData)
-        $this.TopSlope = [Fixed]::new($topSlopeData)
-        $this.BottomSlope = [Fixed]::new($bottomSlopeData)
+        $this.SightZStart.Data = $sightZData
+        $this.TopSlope.Data = $topSlopeData
+        $this.BottomSlope.Data = $bottomSlopeData
 
         $this.Trace.X = $looker.X
         $this.Trace.Y = $looker.Y
