@@ -4938,3 +4938,15 @@ carry forward from their pinned source receipts. The refreshed
 uses the same game-source commit and fresh R15 output paths. Jason's one
 complete Episode 1 HMP playthrough remains pending; no automated route or
 fixture is substituted for it.
+
+## 2026-09-29 — Reject plane-boundary scan removal
+
+The current renderer profile shows geometry as the largest E3M6 per-worker
+phase, so I tested removing the global plane-boundary scan from each row. Two
+short order-reversed baseline/candidate profiles preserve the exact full-frame
+hash and all sixteen worker hashes. The candidate lowers pooled total medians
+by 2.95%, but raises p95 by 1.58%; the slowest worker's median is 0.35% worse
+and its p95 is 1.11% worse. The geometry median changes by only 0.54%. The
+small result does not establish a useful pacing improvement, so the renderer
+was restored without a code change. See the [performance record](performance.md#reject-per-row-plane-boundary-scans--september-29-2026)
+and [receipt](../results/rejected-plane-boundary-scan-20260929.json).

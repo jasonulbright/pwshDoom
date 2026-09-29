@@ -957,3 +957,23 @@ the source was restored. Cache population cost and memory growth were not
 measured. These serial fixed-state timings do not establish host or display
 performance. The [compact comparison receipt](../results/rejected-flat-color-cache-20260929.json)
 indexes the ignored raw profiles and exact source hashes.
+
+## Reject per-row plane-boundary scans — September 29, 2026
+
+The plane rasterizer checked the global worker-boundary array on every row,
+although production calls already restrict each worker to its own
+`FirstColumn..EndColumn` stripe. A candidate removed that lookup and left the
+existing `EndColumn` limit in place. Two short E3M6 profiles per version used
+the prepared NumericV5 worker-mask path, 16 production-width stripes, three
+warmup frames and twelve measured frames per stripe. The order was baseline /
+candidate, then candidate / baseline.
+
+The full-frame hash and all sixteen per-worker hashes match exactly. Across the
+two run medians, total stripe-render median moved from 7.6949 to 7.4676 ms
+(2.95% lower), while total p95 moved from 10.0697 to 10.2294 ms (1.58%
+higher). Geometry median moved only 0.54%; the mean slowest-worker median was
+0.35% worse and its p95 1.11% worse. Given the small sample and no improvement
+in the worker that gates a completed frame, the change was reverted. This is
+not evidence of better host pacing or displayed frame rate. The
+[portable receipt](../results/rejected-plane-boundary-scan-20260929.json)
+indexes the four ignored raw profiles and their hashes.

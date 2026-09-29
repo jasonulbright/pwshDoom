@@ -1,0 +1,74 @@
+{
+  "Version": 1,
+  "Name": "Rejected plane-span worker-boundary scan removal",
+  "RecordedUtc": "2026-09-29T15:05:59Z",
+  "RepositoryCommit": "b7406442805a1c1f7c35fb9332c2910ed3a86425",
+  "GameSourceCommit": "cdd5fdd68734dbc663367f44117fd8a49ac17694",
+  "PowerShell": "7.6.6",
+  "IWadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "Measurement": {
+    "Script": "scripts/Measure-FastRendererPhases.ps1",
+    "Episode": 3,
+    "Map": 6,
+    "Skill": 3,
+    "SetupTics": 0,
+    "Workers": 16,
+    "Transport": "Adaptive NumericV5 with prepared actor projections and worker masks",
+    "WarmupFrames": 3,
+    "MeasuredFramesPerWorker": 12,
+    "RunsPerVariant": 2,
+    "Order": [
+      "baseline",
+      "candidate",
+      "candidate",
+      "baseline"
+    ],
+    "Execution": "Sixteen production-equivalent stripes rendered sequentially; excludes concurrent scheduling, simulation, audio, Terminal output, and display presentation."
+  },
+  "Baseline": {
+    "RendererSha256": "15428F29AE3DFA45514EC428AAE5BCDE7FF32532249C07AC2571428967A500ED",
+    "MeanRunMedianTotalMs": 7.6949,
+    "MeanRunP95TotalMs": 10.0697,
+    "MeanRunMedianGeometryMs": 4.0699,
+    "MeanRunP95GeometryMs": 5.9819,
+    "MeanSlowestWorkerMedianTotalMs": 10.035,
+    "MeanSlowestWorkerP95TotalMs": 10.84,
+    "Reports": [
+      {
+        "Path": "local/renderer-phases-e3m6-current-r16.json",
+        "Sha256": "6A1346FB0F466DF7B03FD7A26523DF67547A91D617797E3AEF24EF1FC6C9FFDD"
+      },
+      {
+        "Path": "local/renderer-phases-e3m6-plane-boundaries-baseline-r16-r2.json",
+        "Sha256": "E313204FEF636E193D1C8504F67FB67CDDA02AE7F50A498888E7428F827AAA07"
+      }
+    ]
+  },
+  "Candidate": {
+    "Change": "Remove per-row scans of PlaneSpanBoundaries; keep each stripe bounded by its existing EndColumn.",
+    "RendererSha256": "4ABE17B4F487CB6DDC6B60937174B299846276A21AA2BBCEFD9BE2704AB838C7",
+    "MeanRunMedianTotalMs": 7.4676,
+    "MeanRunP95TotalMs": 10.2294,
+    "MeanRunMedianGeometryMs": 4.0479,
+    "MeanRunP95GeometryMs": 5.6307,
+    "MeanSlowestWorkerMedianTotalMs": 10.07,
+    "MeanSlowestWorkerP95TotalMs": 10.96,
+    "Reports": [
+      {
+        "Path": "local/renderer-phases-e3m6-no-plane-boundaries-r16.json",
+        "Sha256": "BE7E412C5F56E3F257257F702FFAA2B2A7E87F63C2E531D23B62EDC12DBD07ED"
+      },
+      {
+        "Path": "local/renderer-phases-e3m6-no-plane-boundaries-r16-r2.json",
+        "Sha256": "2E5A73D93DEB8A6F83CF4F40495B70FBA10D77ED951EB121B94CDAECA3702925"
+      }
+    ]
+  },
+  "Correctness": {
+    "FullFrameSha256": "92BFF34916AE31903A0A2A35A386940121EEE521346A3355543985E371561D82",
+    "FrameOutputMatches": true,
+    "PerWorkerHashListsMatch": true
+  },
+  "Decision": "Rejected: the candidate lowers pooled run-median total time by 2.95%, but pooled p95 rises 1.58%. The slowest-worker median is 0.35% worse and its p95 is 1.11% worse. Geometry median differs by only 0.54%. This does not establish a useful pacing gain; the production source was restored.",
+  "Meaning": "A small order-reversed fixed-state profile screening, not a repeated live-host or Terminal presentation benchmark."
+}
