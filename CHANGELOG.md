@@ -4,7 +4,7 @@
 
 The development branch is ahead of the public Preview.3 package. The current
 Episode 1 handoff source is commit
-[`8b48f99`](https://github.com/jasonulbright/pwshDoom/commit/8b48f994d19f055d1ce8ca2f06538bf37a92c2f3).
+[`cdd5fdd`](https://github.com/jasonulbright/pwshDoom/commit/cdd5fdd68734dbc663367f44117fd8a49ac17694).
 R12 preserves the optional Classic ANSI 256-color encoder and exact truecolor
 default, and removes repeated per-pixel flat-coordinate masks from the
 PowerShell plane sampler with exact output. The R13 handoff adds same-map
@@ -16,6 +16,8 @@ gates remain open.
 ### Changed
 
 - Same-map restarts now reuse unchanged static renderer assets while preserving dynamic snapshots. One E1M1 PresentMon pair measured the reset handoff at 0.358 seconds versus 6.178 seconds on baseline; overall pacing remains below target and the single comparison does not establish a general speedup. See [the source-pinned measurement](results/renderer-same-map-reset-presentmon-20260929.json).
+
+- A new sound from an emitter now replaces that emitter's active sound across sound categories, following Linux Doom 1.10 arbitration. Independent emitters still mix together. Deterministic mixer and production packet-path checks pass; audible quality and sustained-session playback remain unqualified.
 
 - The PowerShell floor/ceiling sampler now carries Int64 coordinates between pixels and extracts the 64×64 flat-index bits only when reading a texel. All 120 paired fixed-view frames across two E1M1 runs and one E3M6 run match pixel-for-pixel. E1M1 fixed-state serial medians improve 10.68% and 5.70% in the two repeats; E3M6 is effectively unchanged. A full-host A-B-B-A comparison was inconclusive, so this does not establish live pacing or the 35-tic/60-display targets. See the [measurement](results/renderer-flat-texel-bit-extraction-20260929.json).
 - Added an opt-in Classic `-AnsiEncoding Ansi256` path that maps Doom PLAYPAL colors to the nearest xterm 256-color entry. One same-frame measurement sends 28.65% fewer bytes than exact truecolor; live game timing is inconclusive, so `Pairs` remains the default. See the [experiment](docs/ansi-256-color.md).

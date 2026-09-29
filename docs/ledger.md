@@ -4790,3 +4790,43 @@ the finale. The current handoff is ready for that single human playthrough;
 all broader release gates remain open. The same-map PresentMon result is one
 non-audio pair and does not qualify 35-tic simulation, 60 display transitions,
 full-session audio, or original-executable parity.
+
+## 2026-09-29 — Audit the Preview.3 commit gap
+
+The `v0.1.0-preview.3` tag points to release-preparation commit `34e3d17`.
+That commit changes seven release/documentation files (+30/−38 lines) for the
+version, download instructions and release notes; it contains no game-source
+change. The tag was cut from the already-tested candidate. Later development
+continued on this branch, so its present history is not the contents of that
+tag.
+
+From Preview.3 through source commit `cdd5fdd`, the branch contains 59 commits.
+Sixteen touch PowerShell product source (`src/`, `Play.ps1` or
+`Start-Doom.ps1`), for +636/−185 lines; sixteen touch project scripts, for
++595/−94 lines. Fifty-one commits touch documentation and 42 touch stored
+results/evidence; those categories overlap. The 74 changed files under
+`results/` account for +35,538/−10 lines, most of the total +39,072/−342
+diff. No C# source file changed in this post-release range. Thus the commit
+count is neither all test harness nor a measure of player-facing feature size:
+it includes product fixes and optimizations, focused tests, experiment tools,
+large machine-readable reports, and repeated evidence/documentation updates.
+
+## 2026-09-29 — Pin the R14 audio arbitration handoff
+
+Source commit `cdd5fdd68734dbc663367f44117fd8a49ac17694` changes PowerShell
+sound arbitration so a new sound stops any active sound from the same emitter,
+even when the categories differ. Sounds from distinct emitters remain mixed;
+when the configurable voice pool is full, the oldest voice is replaced. This
+implements the Linux Doom 1.10 same-origin stop and oldest-channel rules while
+keeping the existing 16-voice setting. Gameplay, rendering and random-state
+behavior do not change.
+
+All 27 deterministic mixer checks and 7 production packet-path checks pass.
+`Play.ps1 -Check` reports Ready for the installed 36-map Ultimate Doom IWAD in
+effects-only mode. An attempted audio render from the old saved input replay
+diverges from the current gameplay state at tic 350 after eight checkpoint
+comparisons; its audio output is not qualification evidence. No live device or
+audible review was performed for this change. The source-pinned
+[R14 receipt](../results/episode1-current-human-candidate-20260929-r14.json)
+updates the complete HMP Episode 1 human handoff path; the secret-map return,
+episode finale and full-session audio remain open.

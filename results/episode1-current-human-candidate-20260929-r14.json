@@ -1,0 +1,155 @@
+{
+  "Format": "pwshDoom.Episode1CurrentHumanCandidate",
+  "Version": 1,
+  "RecordedUtc": "2026-09-29T12:52:10Z",
+  "Branch": "codex/feasibility-study",
+  "ImplementationCommit": "cdd5fdd68734dbc663367f44117fd8a49ac17694",
+  "PreviousCandidate": {
+    "Path": "results/episode1-current-human-candidate-20260929-r13.json",
+    "Sha256": "432E3B20FC6FCB2DE1E1885D2424C7C13E75D445CD90811CE91EFD342AC95A5B",
+    "SourceCommit": "8b48f994d19f055d1ce8ca2f06538bf37a92c2f3"
+  },
+  "Runtime": {
+    "PowerShell": "7.6.5",
+    "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+    "MusicCatalogSha256": "0E9C9542C75F4D5E2D7FC71E42FAFBB58F94321C3B8A49BA0C9AC5A93752EE58",
+    "MusicTracks": 11,
+    "LauncherPreflight": "Ready; metadata for all 11 tracks matched the current PowerShell runtime and synthesis sources. Audio startup still rechecks payload hashes and the IWAD score identity."
+  },
+  "ChangesSinceR12": {
+    "Feature": "Same-map restarts reuse static renderer assets already loaded by the persistent workers. Dynamic world state still travels in full simulation snapshots; changed-map transitions continue to reload assets.",
+    "GameplayChanged": false,
+    "RendererAlgorithmChanged": false,
+    "AudioCodeChanged": false,
+    "FocusedResult": "12/12 same-map save/new-game checks and 12/12 changed-map save/new-game checks; a four-case E1M1-to-E1M2 session-worker check preserves worker processes and exact screen/menu/automap pixels.",
+    "PerformanceReceipt": "results/renderer-same-map-reset-presentmon-20260929.json"
+  },
+  "Validation": {
+    "CampaignSmokeInheritedFromR12": {
+      "Maps": 36,
+      "CasesPassed": 36,
+      "CasesFailed": 0,
+      "Meaning": "Map load, bounded simulation, and rendering only; not map completion.",
+      "Receipt": "results/episode1-current-human-candidate-20260929-r12.json",
+      "SourceCommit": "c29b24e8a1c06635f90423672cc74f28836b7095"
+    },
+    "MapAssetReloadCurrentSource": {
+      "SameMapChecks": 12,
+      "SameMapFailures": 0,
+      "ChangedEpisodeMapChecks": 12,
+      "ChangedEpisodeMapFailures": 0,
+      "SessionWorkerCases": 4,
+      "ComparedPixels": 256000,
+      "EncodedStripByteChecks": 64,
+      "WorkerProcessesPreserved": true,
+      "SameMapRawReport": {
+        "Path": "local/save-worker-same-map-r13.json",
+        "Sha256": "B86FA05FFF3E902A2AAD2571A4B52ED28E45933B87A24078735A7E2CFC25D833"
+      },
+      "ChangedMapRawReport": {
+        "Path": "local/save-worker-mapchange-r13.json",
+        "Sha256": "AD0534BBCB94269BE6FDE11318A7928A271C93C2AD17948A35AD29483BA72304"
+      },
+      "SessionRawReport": {
+        "Path": "local/session-worker-mapchange-r13.json",
+        "Sha256": "3E5C6F2E7BC46E8A8148A1228E545ED8C28FA4E5349230091D3149156425B363"
+      }
+    },
+    "ChainsawCrashRegression": {
+      "CurrentSourceCommit": "8b48f994d19f055d1ce8ca2f06538bf37a92c2f3",
+      "CurrentSourceChecks": 2,
+      "E1M2ImpHealth": "60 to 56 after four simulation tics",
+      "CurrentReceipt": "results/saw-attack.json",
+      "CurrentReceiptSha256": "6DC417746DAA5EE49076D1EA08918BB3F77651E79C266022658CDB9EECCF4D4D",
+      "OriginalHumanCommandStream": {
+        "RecordedCommandsConsumed": "26731/26731",
+        "GameplayAndRenderCheckpointsMatched": "79/79",
+        "Result": "No simulation exception after the Angle.Data comparison fix; the test was in-process and did not reproduce Terminal rendering or audio.",
+        "Receipt": "results/episode1-human-crash-replay-20260927.json",
+        "SourceCommit": "e13f407545c02d5657eb82065ec2bfe8a38594df",
+        "ReceiptSha256": "C7705643F5EF250CABBFF42DF750FA88446A193CC9505595BB2DA66E4BE8A18F"
+      }
+    },
+    "InheritedCampaignTransitions": {
+      "TransitionFixtures": 69,
+      "BossProgressionChecks": 97,
+      "NormalInputRouteRegressions": [
+        "E1M1",
+        "E1M2",
+        "E1M4"
+      ],
+      "SecretPath": {
+        "RequiredHumanScope": "E1M3 secret exit to E1M9, then return to E1M4.",
+        "AutomatedEvidenceLimit": "Fixtures load real E1M9 and E1M4 maps on the secret branch, but the complete secret-route progression remains unqualified and is explicitly part of the human playthrough."
+      }
+    },
+    "AudioEmitterArbitration": {
+      "MixerChecks": 27,
+      "MixerPassed": 27,
+      "MixerReceipt": "results/audio-mixer-emitter-replacement-20260929.json",
+      "MixerReceiptSha256": "302A3FD418AF24AC33D2C34178AAE82F64C3C7F424747A62886BD1E503FB275F",
+      "PacketChecks": 7,
+      "PacketPassed": 7,
+      "PacketReceipt": "results/audio-packets-emitter-replacement-20260929-r2.json",
+      "PacketReceiptSha256": "E705E3658B7FCC72B753F7D0D0EE26EAC3CDAA2A037D15A25D3BC171480CD602"
+    },
+    "LauncherCheck": {
+      "Result": "Ready",
+      "PowerShell": "7.6.5",
+      "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+      "MapCount": 36,
+      "MusicCatalog": "Not supplied; effects-only preflight."
+    },
+    "StoredRouteAudioAttempt": {
+      "Report": "results/audio-replay-emitter-replacement-20260929-r2.json",
+      "ReportSha256": "355D08E4E4F622DF7745EBBE93978366F5E0187AA322535CE1F21AF6FB7A4E68",
+      "SavedCheckpointsChecked": 8,
+      "FirstMismatchTic": 350,
+      "Result": "The stored gameplay replay diverges from current simulation at tic 350; its rendered audio output is not qualified."
+    }
+  },
+  "Playthrough": {
+    "Pending": true,
+    "Difficulty": "HMP (skill 3)",
+    "RequiredScope": [
+      "E1M1",
+      "E1M2",
+      "E1M3",
+      "E1M9",
+      "return to E1M4",
+      "E1M5",
+      "E1M6",
+      "E1M7",
+      "E1M8",
+      "Episode 1 finale"
+    ],
+    "Instructions": "docs/episode1-playtest.md",
+    "FreshRunSuffix": "r14"
+  },
+  "Performance": {
+    "SameMapReloadSeconds": "6.178 baseline to 0.358 candidate in one sequential replay pair",
+    "MeasuredDisplayTransitionsPerSecond": "43.66 baseline; 45.89 candidate",
+    "Target35TicsPerSecondQualified": false,
+    "Target60DisplayedFramesPerSecondQualified": false,
+    "Receipt": "results/renderer-same-map-reset-presentmon-20260929.json"
+  },
+  "KnownLimitations": [
+    "The full Episode 1 human playthrough is pending.",
+    "The complete E1M3-to-E1M9-to-E1M4 secret route is not established by the smoke/transition fixtures; it remains in the human handoff scope.",
+    "Full-session audio continuity and acoustic quality are not qualified.",
+    "35-tic simulation and 60 displayed-frame pacing targets remain unqualified.",
+    "A changed-map save/new-game test measured 4.38 and 5.08 seconds preparing assets; those isolated durations are not live Terminal transition measurements.",
+    "No independent original-executable rendering parity is claimed.",
+    "The new emitter replacement rule has deterministic mixer and production packet-path coverage only; audible playback and sustained-session behavior have not been reviewed.",
+    "The stored audio replay diverges from current gameplay at tic 350; it does not qualify audio for this source."
+  ],
+  "Meaning": "Source-pinned readiness handoff for one complete human Episode 1 playthrough. The 36-map smoke, focused transition checks, and short audio checks do not establish campaign completion.",
+  "ChangesSinceR13": {
+    "Feature": "A new sound from one emitter stops that emitter's currently active sound regardless of category; voices from other emitters continue mixing. When the configured voice pool is full, the oldest voice is replaced.",
+    "SourceBasis": "Linux Doom 1.10 s_sound.c same-origin stop rule and i_sound.c oldest-channel selection; pwshDoom keeps its configurable 16-voice pool.",
+    "GameplayChanged": false,
+    "RendererAlgorithmChanged": false,
+    "AudioCodeChanged": true,
+    "FocusedResult": "27 deterministic mixer checks and 7 production packet-path checks pass. No live device or audible review was performed."
+  }
+}

@@ -37,12 +37,15 @@ it is documented and route automation is stopped for this milestone. The
 broader release acceptance gates below remain intact.
 
 The current handoff uses game source commit
-`8b48f994d19f055d1ce8ca2f06538bf37a92c2f3`, pinned in the [R13 receipt]
-(../results/episode1-current-human-candidate-20260929-r13.json). R13 adds
-same-map renderer-asset reuse while preserving the R12 gameplay and rendering
-source; focused same-map and changed-map worker checks pass. One PresentMon pair
-lowers the observed same-map reload pause from 6.178 to 0.358 seconds but does
-not qualify 35-tic simulation or 60 displayed transitions/sec.
+`cdd5fdd68734dbc663367f44117fd8a49ac17694`, pinned in the [R14 receipt]
+(../results/episode1-current-human-candidate-20260929-r14.json). R14 adds
+same-emitter sound replacement across categories, with 27 deterministic mixer
+checks and 7 production packet-path checks. It preserves R13's same-map asset
+reuse and does not change gameplay or rendering. The stored audio replay
+diverges from the current simulation at tic 350, so it does not qualify audio
+output. The complete human Episode 1 route remains pending; the PresentMon
+reset comparison does not qualify 35-tic simulation or 60 displayed
+transitions/sec.
 The PowerShell plane sampler carries Int64 world coordinates between pixels
 and extracts only the 64×64 flat-index bits at lookup time. All 120 paired
 E1M1/E3M6 frames match exactly. Two fixed-state E1M1 serial medians improve
