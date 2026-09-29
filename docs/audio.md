@@ -341,6 +341,15 @@ all eleven qualified tracks on the same runtime. These checks verify API
 buffer completion and worker closure, not audibility, acoustics, or campaign
 continuity.
 
+A fresh four-second headless game-host run on the R16 source selects D_E1M1,
+submits and completes all 186,480 frames, and closes without simulation,
+audio, cleanup, starvation, or rebuffer errors. The final 3,780 frames finish
+in 68.8 ms of shutdown draining. It advances 139 simulation tics and 147
+headless updates; those rates do not measure displayed frames or certify the
+35/60 targets. The [source-pinned receipt](../results/episode1-audio-shutdown-r16-20260929.json)
+includes the ignored raw session report hash. This is a brief audio-path smoke,
+not an acoustic review or full-route continuity test.
+
 Two earlier invocations are retained as test-harness failures, not game/audio
 failures: the first omitted a wait helper, and the second kept the former final
 packet number after adding the shutdown packets. The second report did record

@@ -5002,3 +5002,64 @@ sequence 105 after test packets 106–107 were added. Both raw
 are preserved and explicitly classified. The second report independently
 confirms the drain worked before the stale assertion fired. No gameplay,
 rendering, or mixing algorithm changed in this step.
+
+## 2026-09-29 — Refresh the post-Preview.3 work audit at R16
+
+The release-preparation note describes only the difference between the tested
+candidate and the Preview.3 release commit. It is accurate that this final
+commit changes release/documentation text and contains no game-source change;
+it does not describe the work accumulated since the previous public preview.
+The annotated Preview.3 tag is dated September 28 in this checkout. Its tagged
+commit `34e3d17` changes seven release/documentation files (+30/−38) and no
+source. The development branch now has 68 commits after that tag.
+
+Nineteen of those commits touch PowerShell game source or runtime code; sixteen
+also touch test or measurement scripts, with overlap between the categories.
+Across the range, `src/` changes 16 files (+648/−181), while `scripts/` changes
+29 mixed runtime, test, build, and measurement files (+943/−98). Those changes
+include actor visibility/projection and sector-render caching, packed render
+geometry, fixed-point visibility allocation reduction, output-clock audio,
+same-emitter sound arbitration, music startup preflight, optional ANSI-256
+encoding, and the latest bounded audio shutdown drain. They are real engine and
+runtime changes, but do not amount to the complete Episode 1 human playthrough
+or finished Ultimate Doom release qualification.
+
+The same range changes 90 `results/` files by +37,716/−11 lines and 16
+documentation files by +2,712/−51 lines. Results account for about 90% of all
+added lines; most are machine-readable measurements and experiment output.
+The high commit count is a mixture of product code, test/measurement tooling,
+captured results, and documentation updates—not 68 test-harness commits and not
+68 player-facing features. The earlier count pinned through `cdd5fdd` remains a
+historical snapshot; this audit is pinned to R16 source `3e0b630`.
+
+The R16 handoff receipt pins the current source, PowerShell 7.6.6, the installed
+Ultimate Doom IWAD and music catalog. Current-source preflight and a four-second
+actual-device E1M1 audio run pass; all 36 maps pass the bounded load/idle/two-
+render smoke. Focused audio shutdown and continuity checks pass. Those results do
+not establish human map completion, audible quality, full-campaign continuity,
+or 60 displayed updates per second. Jason's one complete HMP Episode 1
+playthrough remains pending from E1M1 through the E1 finale, including E1M3's
+secret route through E1M9 and return to E1M4. See the [R16 receipt]
+(../results/episode1-current-human-candidate-20260929-r16.json) and [playtest
+handoff](episode1-playtest.md).
+
+## 2026-09-29 — Compare the nine-day Preview.2-to-Preview.3 interval
+
+The preceding post-Preview.3 audit starts at the wrong point for a question
+about the week before the release. Preview.2 is tagged September 19, Preview.3
+September 28, and current R16 source is September 29. The complete
+Preview.2-to-R16 range contains 182 commits. Forty-three touch `src/`, and 44
+touch focused test or measurement scripts; these groups overlap. The range
+changes 24 PowerShell source files (+1,268/−161), 61 mixed scripts
+(+3,935/−209), 560 result files (+795,706/−3), and 31 documentation files
+(+7,642/−95). Captured results account for about 98% of added lines.
+
+So the release-preparation commit being documentation-only is consistent with
+substantial work during the preceding nine days: it was a version/download/
+release-notes commit on top of the already-tested candidate. The interval was
+not all test harness; dozens of commits modified the PowerShell engine source,
+while many others added focused checks, measurements, recorded output and
+project documentation. The raw line total mostly measures retained experiment
+data, not engine size or player-facing feature count. Preview.3 itself remains
+the public package; R16 is the current development handoff and still awaits the
+single complete human HMP Episode 1 playthrough.

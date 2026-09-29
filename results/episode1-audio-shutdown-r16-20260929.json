@@ -1,0 +1,73 @@
+{
+  "Format": "pwshDoom.Episode1AudioShutdown",
+  "Version": 1,
+  "RecordedUtc": "2026-09-29T15:59:47.5743733Z",
+  "ImplementationCommit": "3e0b6308bac9dc152f9ae78fb8f23f70623b36e2",
+  "PowerShell": "7.6.6",
+  "Distribution": "Official portable x64 PowerShell archive from ignored local/",
+  "WAD": {
+    "Path": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Ultimate Doom\\base\\DOOM.WAD",
+    "Sha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F"
+  },
+  "MusicCatalog": {
+    "QualificationSha256": "1D5A9D6D16E8CDCA74646D6AEF009CDB42EB59B87941B0EFE648F9D3A98C96CF",
+    "Track": "D_E1M1",
+    "Path": "local/music-prepared-episode1.json",
+    "Sha256": "0E9C9542C75F4D5E2D7FC71E42FAFBB58F94321C3B8A49BA0C9AC5A93752EE58"
+  },
+  "Run": {
+    "DurationSeconds": 4.0025269,
+    "CompletedHostUpdates": 147,
+    "Mode": "Headless realtime audio",
+    "ExitReason": "Duration",
+    "Map": "E1M1",
+    "TicsPerSecond": 34.72806141540235,
+    "SimulationTics": 139,
+    "CompletedUpdatesPerSecond": 36.726798763051406,
+    "Episode": 1,
+    "Workers": 16
+  },
+  "Audio": {
+    "SubmittedFrames": 186480,
+    "RebufferCount": 0,
+    "Error": null,
+    "CleanupError": null,
+    "DeviceClosed": true,
+    "CompletedFrames": 186480,
+    "SimulationPackets": 139,
+    "QueueStarvationObservations": 0,
+    "CancelledFramesUpperBound": 0,
+    "SelectedTrack": "D_E1M1",
+    "ShutdownDrain": {
+      "WaitMilliseconds": 68.7979,
+      "CompletedFramesDuringWait": 3780,
+      "SkippedReason": null,
+      "Completed": true,
+      "PendingFramesAtStop": 3780,
+      "RemainingFrames": 0,
+      "CancelledFramesUpperBound": 0,
+      "TimedOut": false,
+      "Attempted": true
+    }
+  },
+  "Sources": [
+    {
+      "Path": "src/AudioRunspace.ps1",
+      "Sha256": "7907F76AEB92969F36252E86B36A970C359B0AE2D9EC3ACCF1514E2D6ABC7DEE"
+    },
+    {
+      "Path": "src/WaveOutDevice.ps1",
+      "Sha256": "B8447B4F701F8B1267E949F0BD114A2304049590B8371E449D8592F2478B0A49"
+    },
+    {
+      "Path": "scripts/Invoke-AudioWorker.ps1",
+      "Sha256": "275058038F919EB123EB294EE7B9E44E34B2DAE56C3A3513DEE9316294CDBE07"
+    }
+  ],
+  "RawReport": {
+    "Path": "local/episode1-audio-shutdown-r16-20260929.json",
+    "Sha256": "1F1DDC3AAF858AE33D826FD03AFA786508ED273FF2841B476B502E60871F02E8"
+  },
+  "Passed": true,
+  "Meaning": "Four-second current-source E1M1 headless run with the actual Windows waveOut device and qualified music catalog. Verifies current-source startup, music selection, packet flow, bounded final device-tail completion and clean shutdown. Does not establish audibility, full-session/campaign continuity, Terminal output pacing, or human playability."
+}

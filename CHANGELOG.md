@@ -4,7 +4,7 @@
 
 The development branch is ahead of the public Preview.3 package. The current
 Episode 1 handoff source is commit
-[`cdd5fdd`](https://github.com/jasonulbright/pwshDoom/commit/cdd5fdd68734dbc663367f44117fd8a49ac17694).
+[`3e0b630`](https://github.com/jasonulbright/pwshDoom/commit/3e0b6308bac9dc152f9ae78fb8f23f70623b36e2).
 R12 preserves the optional Classic ANSI 256-color encoder and exact truecolor
 default, and removes repeated per-pixel flat-coordinate masks from the
 PowerShell plane sampler with exact output. The R13 handoff adds same-map
@@ -14,6 +14,8 @@ Jason's complete Episode 1 playthrough and the broader Ultimate Doom release
 gates remain open.
 
 ### Changed
+
+- On normal, unpaused shutdown, the audio worker now waits briefly for queued Windows audio buffers to finish before closing the device. A current-source four-second E1M1 run completed all 186,480 submitted frames and drained its final 3,780 frames in 68.8 ms. This verifies clean buffer completion, not audible quality, campaign-length continuity, or player-facing audio fidelity. See the [R16 receipt](results/episode1-audio-shutdown-r16-20260929.json).
 
 - Same-map restarts now reuse unchanged static renderer assets while preserving dynamic snapshots. One E1M1 PresentMon pair measured the reset handoff at 0.358 seconds versus 6.178 seconds on baseline; overall pacing remains below target and the single comparison does not establish a general speedup. See [the source-pinned measurement](results/renderer-same-map-reset-presentmon-20260929.json).
 
