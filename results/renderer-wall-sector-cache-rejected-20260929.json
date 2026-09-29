@@ -1,0 +1,266 @@
+{
+  "Format": "pwshDoom.RendererOptimizationTrial",
+  "Version": 1,
+  "RecordedUtc": "2026-09-29T22:01:55.6029266Z",
+  "Decision": "Rejected",
+  "ImplementationCommit": "26b2848cdc787f1ed17ae1a486dd5b3b308d6907",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "PowerShell": "7.6.6",
+  "Change": "Added per-snapshot double arrays for interpolated sector floor and ceiling heights, then used the existing flat-index and light-level arrays in the visible-wall loop instead of per-seg snapshot hashtable property reads. Geometry/rasterization remained PowerShell.",
+  "BaselineRendererSha256": "15428F29AE3DFA45514EC428AAE5BCDE7FF32532249C07AC2571428967A500ED",
+  "CandidateFinalRendererSha256": "21D9B4BDA2A7240812069237371597B00BC0E915633EBEECA440D6FE43E3945A",
+  "CandidateSavedLocalPath": "local/fast-renderer-wall-sector-candidate-final.ps1",
+  "CandidateSavedLocalSha256": "21D9B4BDA2A7240812069237371597B00BC0E915633EBEECA440D6FE43E3945A",
+  "Workload": {
+    "NoSimulationAudioTerminalOrWorkerConcurrency": true,
+    "StripeWidthPixels": 20,
+    "MeasuredFramesPerStripe": 30,
+    "Skill": 3,
+    "WarmupFramesPerStripe": 5,
+    "Resolution": "320x200",
+    "Map": 1,
+    "Episode": 1,
+    "StripesRenderedSequentiallyInOnePowerShellProcess": true,
+    "Stripes": 16,
+    "SamplesPerProfile": 480,
+    "Tics": 0,
+    "Transport": "Prepared NumericV4 worker-mask packet; sparse E1M1 actor scene"
+  },
+  "ProfileRuns": [
+    {
+      "FullFrameSha256": "B6B0A8899E495CA1A82658CBAF108D892F6E513B8CC87C7BA6DB99829C0DF67C",
+      "RendererSha256": "15428F29AE3DFA45514EC428AAE5BCDE7FF32532249C07AC2571428967A500ED",
+      "RawSha256": "E901B4DFB5BD8DADAB596735B4926505250F7114CB619DEA2E719A2E5A05E188",
+      "TotalP95Ms": 11.6339,
+      "MatchesBaselineWorkerOutputs": true,
+      "TotalMedianMs": 7.2637,
+      "GeometryMedianMs": 6.0861,
+      "RawPath": "local/wall-sector-cache-baseline-a.json",
+      "MatchesBaselineFrame": true,
+      "Group": "baseline",
+      "GeometryP95Ms": 10.0827,
+      "Name": "baseline-a"
+    },
+    {
+      "FullFrameSha256": "B6B0A8899E495CA1A82658CBAF108D892F6E513B8CC87C7BA6DB99829C0DF67C",
+      "RendererSha256": "15428F29AE3DFA45514EC428AAE5BCDE7FF32532249C07AC2571428967A500ED",
+      "RawSha256": "6AC8240E8CAF5749122ECC2FE774BED39E1D93E9FC91B7B5723E2F89F63CF6C9",
+      "TotalP95Ms": 11.2027,
+      "MatchesBaselineWorkerOutputs": true,
+      "TotalMedianMs": 7.5595,
+      "GeometryMedianMs": 6.2976,
+      "RawPath": "local/wall-sector-cache-baseline-b.json",
+      "MatchesBaselineFrame": true,
+      "Group": "baseline",
+      "GeometryP95Ms": 9.4736,
+      "Name": "baseline-b"
+    },
+    {
+      "FullFrameSha256": "B6B0A8899E495CA1A82658CBAF108D892F6E513B8CC87C7BA6DB99829C0DF67C",
+      "RendererSha256": "15428F29AE3DFA45514EC428AAE5BCDE7FF32532249C07AC2571428967A500ED",
+      "RawSha256": "B6C88EFCCF16CF64C9D93E5FF877DEA0E25AF32ACCF0C90676BEE3AFB742F465",
+      "TotalP95Ms": 10.0548,
+      "MatchesBaselineWorkerOutputs": true,
+      "TotalMedianMs": 7.1479,
+      "GeometryMedianMs": 5.9926,
+      "RawPath": "local/wall-sector-cache-baseline-c.json",
+      "MatchesBaselineFrame": true,
+      "Group": "baseline",
+      "GeometryP95Ms": 8.6119,
+      "Name": "baseline-c"
+    },
+    {
+      "FullFrameSha256": "B6B0A8899E495CA1A82658CBAF108D892F6E513B8CC87C7BA6DB99829C0DF67C",
+      "RendererSha256": "15428F29AE3DFA45514EC428AAE5BCDE7FF32532249C07AC2571428967A500ED",
+      "RawSha256": "F368B41191375CC98286E31A119547C369261229C491D8016AEF11E6DCE1FC98",
+      "TotalP95Ms": 11.0113,
+      "MatchesBaselineWorkerOutputs": true,
+      "TotalMedianMs": 6.9957,
+      "GeometryMedianMs": 5.8999,
+      "RawPath": "local/wall-sector-cache-baseline-f.json",
+      "MatchesBaselineFrame": true,
+      "Group": "baseline",
+      "GeometryP95Ms": 9.1731,
+      "Name": "baseline-f"
+    },
+    {
+      "FullFrameSha256": "B6B0A8899E495CA1A82658CBAF108D892F6E513B8CC87C7BA6DB99829C0DF67C",
+      "RendererSha256": "156381B516A88F6CC345AF6032DB1FE3BCA7E4B6A423FA5C36B93D7346504451",
+      "RawSha256": "4900EE39D01668B0AFCE65184B5736156C48286838A768F618C8463638427825",
+      "TotalP95Ms": 8.8362,
+      "MatchesBaselineWorkerOutputs": true,
+      "TotalMedianMs": 6.7331,
+      "GeometryMedianMs": 5.7276,
+      "RawPath": "local/wall-sector-cache-candidate-a.json",
+      "MatchesBaselineFrame": true,
+      "Group": "candidate-before-final-guard",
+      "GeometryP95Ms": 7.4126,
+      "Name": "candidate-a"
+    },
+    {
+      "FullFrameSha256": "B6B0A8899E495CA1A82658CBAF108D892F6E513B8CC87C7BA6DB99829C0DF67C",
+      "RendererSha256": "156381B516A88F6CC345AF6032DB1FE3BCA7E4B6A423FA5C36B93D7346504451",
+      "RawSha256": "7996724E39D2E6DE3674C42CD16F205198366E398EA5DAD2B4131EE494969021",
+      "TotalP95Ms": 9.222,
+      "MatchesBaselineWorkerOutputs": true,
+      "TotalMedianMs": 7.1429,
+      "GeometryMedianMs": 5.8933,
+      "RawPath": "local/wall-sector-cache-candidate-b.json",
+      "MatchesBaselineFrame": true,
+      "Group": "candidate-before-final-guard",
+      "GeometryP95Ms": 8.0409,
+      "Name": "candidate-b"
+    },
+    {
+      "FullFrameSha256": "B6B0A8899E495CA1A82658CBAF108D892F6E513B8CC87C7BA6DB99829C0DF67C",
+      "RendererSha256": "156381B516A88F6CC345AF6032DB1FE3BCA7E4B6A423FA5C36B93D7346504451",
+      "RawSha256": "169EEC33920AF95384AD33767A84E11073C731C1A046A24458B7321B711EBBC6",
+      "TotalP95Ms": 9.207,
+      "MatchesBaselineWorkerOutputs": true,
+      "TotalMedianMs": 6.7658,
+      "GeometryMedianMs": 5.502,
+      "RawPath": "local/wall-sector-cache-candidate-c.json",
+      "MatchesBaselineFrame": true,
+      "Group": "candidate-before-final-guard",
+      "GeometryP95Ms": 7.804,
+      "Name": "candidate-c"
+    },
+    {
+      "FullFrameSha256": "B6B0A8899E495CA1A82658CBAF108D892F6E513B8CC87C7BA6DB99829C0DF67C",
+      "RendererSha256": "156381B516A88F6CC345AF6032DB1FE3BCA7E4B6A423FA5C36B93D7346504451",
+      "RawSha256": "F2D056763A0B213C089CA2598E0BBF0375F1EEE140B62F1E47576451CC0EBFC2",
+      "TotalP95Ms": 9.4086,
+      "MatchesBaselineWorkerOutputs": true,
+      "TotalMedianMs": 6.8224,
+      "GeometryMedianMs": 5.7789,
+      "RawPath": "local/wall-sector-cache-candidate-d.json",
+      "MatchesBaselineFrame": true,
+      "Group": "candidate-before-final-guard",
+      "GeometryP95Ms": 7.9386,
+      "Name": "candidate-d"
+    },
+    {
+      "FullFrameSha256": "B6B0A8899E495CA1A82658CBAF108D892F6E513B8CC87C7BA6DB99829C0DF67C",
+      "RendererSha256": "21D9B4BDA2A7240812069237371597B00BC0E915633EBEECA440D6FE43E3945A",
+      "RawSha256": "325382E74DEA5EC80A8E2FF18FB387EA0E5733783BD9FE258E07BC46156939DE",
+      "TotalP95Ms": 11.483,
+      "MatchesBaselineWorkerOutputs": true,
+      "TotalMedianMs": 7.5853,
+      "GeometryMedianMs": 6.2885,
+      "RawPath": "local/wall-sector-cache-candidate-e.json",
+      "MatchesBaselineFrame": true,
+      "Group": "candidate-final-source",
+      "GeometryP95Ms": 9.7722,
+      "Name": "candidate-e"
+    },
+    {
+      "FullFrameSha256": "B6B0A8899E495CA1A82658CBAF108D892F6E513B8CC87C7BA6DB99829C0DF67C",
+      "RendererSha256": "21D9B4BDA2A7240812069237371597B00BC0E915633EBEECA440D6FE43E3945A",
+      "RawSha256": "DE9201872034B059AC25C70CE18CC43908E94196AFFBDFD2CC6B49E5FDD001E8",
+      "TotalP95Ms": 10.4092,
+      "MatchesBaselineWorkerOutputs": true,
+      "TotalMedianMs": 6.9554,
+      "GeometryMedianMs": 5.8704,
+      "RawPath": "local/wall-sector-cache-candidate-g.json",
+      "MatchesBaselineFrame": true,
+      "Group": "candidate-final-source",
+      "GeometryP95Ms": 8.7135,
+      "Name": "candidate-g"
+    }
+  ],
+  "AdjacentFinalSourceRun": {
+    "Baseline": {
+      "TotalP95Ms": 11.0113,
+      "GeometryP95Ms": 9.1731,
+      "TotalMedianMs": 6.9957,
+      "GeometryMedianMs": 5.8999
+    },
+    "Conclusion": "The final-source adjacent run was only about 0.5% faster in median geometry and 0.6% faster in total median; one other final-source candidate run was slower. The apparent gains in earlier runs were not stable enough to justify extra per-snapshot copies. Snapshot-sector refresh overhead was not included in this renderer timing.",
+    "Order": "baseline-f then candidate-g",
+    "Candidate": {
+      "TotalP95Ms": 10.4092,
+      "GeometryP95Ms": 8.7135,
+      "TotalMedianMs": 6.9554,
+      "GeometryMedianMs": 5.8704
+    },
+    "MedianChangePercent": {
+      "Geometry": -0.5000084747199041,
+      "Total": -0.5760681561530645
+    }
+  },
+  "PixelParity": {
+    "MovingCeiling": {
+      "BaselineReportPath": "local/wall-sector-cache-moving-baseline-verified-r2.json",
+      "BothRunsHadNoError": true,
+      "CandidateReportPath": "local/wall-sector-cache-moving-candidate-verified-r2.json",
+      "SectorIndex": 26,
+      "DiagnosticImageHashesIdentical": true,
+      "Tic": 315,
+      "HeightResultsIdentical": true,
+      "ImageHashes": [
+        "3DD2409E220C1F3038D6335E75F1655790D2116647FE102246E0D4717428D1EC",
+        "9FDCBD836EF665E82421196542B5737871246E656520EAC2DDE1620057492649"
+      ],
+      "CandidateReportSha256": "B959D30AFEE4A60EE77877D46C9681D294103166B6D6A9E4725486613B36451B",
+      "CeilingHeights": [
+        0,
+        6,
+        34,
+        68
+      ],
+      "BaselineReportSha256": "4D6A6D847AFF89C5EE216699845D25CC849D4B954C58267AFA97B6A906C0843A"
+    },
+    "PartitionReports": [
+      {
+        "PassedViews": 5,
+        "Workers": 7,
+        "Style": "Classic",
+        "ReportPath": "local/wall-sector-cache-partitions-classic-r2.json",
+        "AllPassed": true,
+        "Views": 5,
+        "ReportSha256": "3F5E6E929379D791FB34AF83DD0E9459BF13C2ADB35DD0DA29149E7E261F6499",
+        "PixelsMatchedPerStyle": 320000
+      },
+      {
+        "PassedViews": 5,
+        "Workers": 7,
+        "Style": "Matrix",
+        "ReportPath": "local/wall-sector-cache-partitions-matrix.json",
+        "AllPassed": true,
+        "Views": 5,
+        "ReportSha256": "876D177EC5941C2AEFDDAB6BC0E8CF15633A33843BFF4AE9472DC9A2EA27B185",
+        "PixelsMatchedPerStyle": 320000
+      },
+      {
+        "PassedViews": 5,
+        "Workers": 7,
+        "Style": "AnsiArt",
+        "ReportPath": "local/wall-sector-cache-partitions-ansiart.json",
+        "AllPassed": true,
+        "Views": 5,
+        "ReportSha256": "0B8C3F9422EC136D111ADF20E4D1E566FA1C1D775C3CB57D1F72DAED14868CF9",
+        "PixelsMatchedPerStyle": 320000
+      }
+    ],
+    "EveryProfileMatchesBaselineFrame": true,
+    "EveryProfileMatchesBaselineWorkerOutputs": true,
+    "MaskedWall": {
+      "Checks": 20,
+      "Passed": 20,
+      "ReportSha256": "9A4AE9B16537D173889ACC068330EB3B7637F7D6787D1D8311C54616CB409474",
+      "ReportPath": "local/wall-sector-cache-masked-wall-final.json"
+    },
+    "FullFrameSha256": "B6B0A8899E495CA1A82658CBAF108D892F6E513B8CC87C7BA6DB99829C0DF67C",
+    "AllMapSmoke": {
+      "Meaning": "Map load/idle/render smoke only; not campaign completion.",
+      "ReportPath": "local/wall-sector-cache-campaign-smoke-20260929.json",
+      "TicsPerMap": 35,
+      "ReportSha256": "E11D91722F58CFC596794C14920E0FCA2293667041EE29B4AC59EACDF8BEA978",
+      "Failed": 0,
+      "HeadingsPerMap": 2,
+      "Passed": 36,
+      "Complete": true
+    }
+  },
+  "Meaning": "A bounded renderer optimization evaluation. All measured pixel buffers and worker stripes matched exactly. Static and moving-geometry fidelity checks passed. Timings are serial software-renderer work only and do not establish host pacing, terminal output, displayed FPS, or a game-level speedup. The candidate source was discarded because the final-source adjacent run did not demonstrate a material repeatable median improvement."
+}

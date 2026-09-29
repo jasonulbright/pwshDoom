@@ -5225,3 +5225,25 @@ but the ledger and harness activity outweigh product-code additions. These
 counts compare the tagged release tree with `3080188` and count changed lines,
 including generated receipts; they are not a measure of net project size or
 human effort.
+
+## 2026-09-29 — Reject cached wall-sector property reads
+
+Following the R17 phase profile, I replaced repeated wall-loop reads from
+sector snapshot hashtables with per-snapshot typed arrays for exact
+interpolated floor/ceiling heights, ceiling-flat indices, and light levels.
+Four initial candidate profiles looked faster than the four baseline profiles,
+but the final-source adjacent baseline/candidate run changed median geometry
+by only 0.5% and total renderer work by 0.6%; a second final-source candidate
+sample was slower. The renderer profile does not include the new arrays'
+snapshot-refresh cost. The result is not a sufficiently repeatable game-level
+gain, so the candidate was discarded and `src/FastRenderer.ps1` remains at its
+baseline source hash. The [receipt](../results/renderer-wall-sector-cache-rejected-20260929.json)
+preserves ten raw profile hashes and their exact source fingerprints.
+
+Correctness evidence from the discarded candidate is retained separately:
+the 320x200 frame and all 16 worker-stripe hashes match the baseline; five
+views across seven process strips match in Classic, Matrix/Katakana, and
+AnsiArt/Katakana; moving-ceiling diagnostic images match at heights 0, 6, 34,
+and 68; the 36-map load/idle/render smoke passes; and all 20 masked-wall
+checks pass. The smoke and image comparisons do not certify route completion,
+original-executable parity, live pacing, or a performance improvement.

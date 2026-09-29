@@ -1024,3 +1024,32 @@ because this run uses a different transport/runtime profile and was not paired.
 The [portable profile receipt](../results/r17-fast-renderer-phases-20260929.json)
 pins source and raw report hashes; the full report remains under ignored
 `local/` storage.
+
+## Reject cached wall-sector property reads — September 29, 2026
+
+The geometry timing above led to an inspection of the visible-wall loop. It
+read floor/ceiling heights, ceiling flats, and light levels from snapshot
+sector hashtables for every visible segment even though per-snapshot typed
+arrays already held the flat and light values. A candidate added exact-double
+interpolated wall-height arrays and used those arrays in the loop; all game and
+rendering algorithms remained PowerShell.
+
+Four baseline and four initial-candidate profiles used the same HMP E1M1
+tic-zero view under PowerShell 7.6.6, with five warmups and 30 measured renders
+for each of 16 production-width stripes. Two further profiles used the final
+candidate source. The closest final-source comparison ran baseline then
+candidate: geometry median was 5.900/5.870 ms per stripe, and total median was
+6.996/6.955 ms. One other final-source candidate run was slower than the
+baseline. The small median differences do not establish a repeatable gain;
+the profile also excludes the extra sector-cache refresh work. The candidate
+was reverted.
+
+All ten profile frame hashes and per-worker output hashes match the baseline.
+The candidate also matches the baseline across five views and seven uneven
+process strips in Classic, Matrix/Katakana, and AnsiArt/Katakana (320,000
+pixels per style); the moving-ceiling diagnostic images match at four tested
+heights. Its 36-map load/idle/two-heading smoke and 20 masked-wall checks pass.
+Those are correctness checks, not evidence of better live pacing or completed
+campaign play. The [rejection receipt](../results/renderer-wall-sector-cache-rejected-20260929.json)
+records the raw profile hashes, candidate source fingerprint, output parity,
+and limits; raw files remain under ignored `local/` storage.
