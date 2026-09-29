@@ -547,3 +547,34 @@ updates (26.94/sec). Those updates are not Terminal writes or monitor frames;
 the short run does not establish acoustic quality or continuous audio
 underrun-free playback. See the [raw host report](../local/host-visible-actor-filter-e1m1-audio-20260928.json)
 and its hash in the [candidate profile receipt](../results/renderer-visible-actor-filter-20260928.json).
+
+## Skip decoding actor render fields outside a worker stripe — rejected, September 28, 2026
+
+A follow-up tried to avoid assigning position, angle, sprite, frame, and light
+fields to actor objects whose existing worker mask excludes that renderer
+stripe. Worker masks, projection validation, actor ordering, and actor flags
+remained available. The first worker render exposed an interaction with the
+Spectre ordering path, which inspects actor flags before selecting the filtered
+list; decoding flags for every actor restored the expected behavior.
+
+The corrected experiment passes 21 snapshot transport checks and exact
+16-process E1M3 output for five views in Classic, Matrix/Katakana, and
+AnsiArt/Katakana: 320,000 pixels per style with no differences. A 16-process
+Classic fuzz-partition check also matches 320,000 pixels. These checks found no
+remaining output defect in the tested paths.
+
+Two fixed-state E1M3 profile runs per version used eight warmups, 40 measured
+frames per stripe, and 16 sequential production-width stripes. One run pair
+was effectively tied: summed decode-plus-render medians were 129.42 ms before
+and 129.85 ms with the change; decode alone rose from 11.77 ms to 14.63 ms.
+The other pair disagreed sharply because its earlier baseline render sum was
+196.25 ms versus 119.18 ms for the experiment. All full-frame hashes matched,
+but the timing variation is too large to establish a gain. The optimization
+was rejected and the decoder restored to the previously tested implementation.
+
+Raw trial reports remain in ignored `local/snapshot-decode-skip-*` files; the
+two experimental E1M3 reports have SHA-256 values
+`2287DD057CEA6CEB9F27981A3A6B4EDB82F1A4DC21DA8AFA020EB76607B1E1EB` and
+`D91B6312A944A36497E10B5A1F1BC5243E749A05581A62CC51E1E55990252A30`. This
+experiment does not change the current renderer candidate or support an FPS
+claim.

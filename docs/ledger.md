@@ -4197,3 +4197,23 @@ it advances 174 tics and 155 headless updates. The mixer selects D_E1M3, emits
 219,240 frames, closes without an error, and reports one rebuffer observation
 while real-time mode is disabled. This is bounded startup/integration evidence,
 not audible-quality, continuous-playback, or displayed-rate evidence.
+
+## 2026-09-28 — Reject skipping hidden actor field decoding
+
+Tried skipping worker snapshot assignments for an actor's position, angle,
+sprite, frame, and light when its mask excludes that renderer stripe. The first
+16-worker run found that the Spectre ordering path reads actor flags before it
+switches to the filtered actor list. Retaining flags for every actor fixed the
+test interaction. The corrected candidate passed the 21-check snapshot suite,
+five-view E1M3 pixel equality in Classic, Matrix/Katakana, and
+AnsiArt/Katakana (320,000 pixels per style), plus a Classic 16-worker fuzz
+partition check (320,000 pixels).
+
+Fixed-state E1M3 timing did not show a repeatable combined decode/render gain.
+One prior/candidate profile pair was 129.42/129.85 ms; candidate decoding was
+slower (11.77/14.63 ms). The other pair was dominated by a 196.25 ms earlier
+render-sum sample, inconsistent with the other three near 115–119 ms runs.
+All frame hashes matched, but evidence is too noisy to keep the extra decoder
+branch. The experimental source was reverted; the current branch source is
+unchanged. Raw reports and hashes are recorded in
+[`performance.md`](performance.md).
