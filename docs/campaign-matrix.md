@@ -1,6 +1,6 @@
 # Campaign qualification matrix
 
-Updated 2026-09-28. Release sequence remains Ultimate Doom, Doom II, then a MyHouse-based audit. See [roadmap](roadmap.md).
+Updated 2026-09-29. Release sequence remains Ultimate Doom, Doom II, then a MyHouse-based audit. See [roadmap](roadmap.md).
 
 **Smoke: 36/36 passed at skill 3.** Each case loads the map, runs 35 idle simulation tics, and renders two complete 320×200 serial frames from two camera headings. A smoke pass is not a completed level or visual-reference match. Headless stage timings are not gameplay FPS.
 
@@ -21,13 +21,17 @@ receipt](../results/episode1-current-human-candidate-20260928-r5.json),
 [geometry/cache supplement](../results/episode1-current-human-candidate-20260928-r2.json),
 and [realtime-audio supplement](../results/episode1-current-human-candidate-20260928-r3.json); the [visible-actor profile](../results/renderer-visible-actor-filter-20260928.json) reports sequential worker-equivalent CPU and does not claim a frame-rate gain.
 
-The current single-playthrough handoff is r6 at source commit
-`c31186896628a9ee9a4ea3b635c0d19fac65b40d`; see its [candidate receipt](../results/episode1-current-human-candidate-20260928-r6.json)
+The current single-playthrough handoff is r7 at source commit
+`e8fd50012c343a3e858001a086e2de7b5efac786`; see its [candidate receipt](../results/episode1-current-human-candidate-20260929-r7.json)
 and the exact [complete Episode 1 scope](episode1-playtest.md). Jason's human
-route remains pending. A separate current-source 60-second E1M1 sound-enabled
-worker-count comparison is recorded in the
-[performance receipt](../results/current-source-e1m1-worker-comparison-20260928.json).
-It is an idle headless workload and changes no campaign completion status.
+route remains pending. The sector-plane cache passes a new 36-map load/idle/render
+smoke and five-view 16-worker equality in all three styles. An isolated
+PowerShell phase experiment shows lower geometry time with unchanged full-frame
+hashes; one matching 60-second headless host pair is unpaired and cannot assign
+the observed rate difference to the change. See the [sector-cache performance
+record](performance.md#cache-sector-plane-data-for-rasterization--september-29-2026)
+and [portable receipt](../results/performance-sector-render-cache-20260929.json).
+These checks do not complete any map or change campaign completion status.
 
 A current-source, sound-enabled, 30-second headless E3M6 host comparison on
 September 28 reached 34.70, 31.90, and 33.70 simulation tics/sec at 8, 12,

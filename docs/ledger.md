@@ -4247,3 +4247,32 @@ canceled-queue upper bound at shutdown; they do not establish an audible gap.
 Headless mode skips Terminal writes, and these update rates are not display
 presentations or campaign-route evidence. See the [measurement](performance.md#current-source-e1m1-worker-and-encoder-comparison)
 and [portable receipt](../results/current-source-e1m1-worker-comparison-20260928.json).
+
+## 2026-09-29 — Cache sector plane data in the PowerShell renderer
+
+Profile results showed floor/ceiling geometry remained a large raster phase.
+The renderer now resolves flat pixel arrays once and stores each sector's
+fixed-point floor/ceiling height, current floor/ceiling flat index, and light
+level in typed arrays. `Set-GameRenderSnapshot` refreshes those arrays on each
+new snapshot, so moving sectors and changing light/flat state remain live.
+Renderer worker and runspace setup use the same prepared cache.
+
+The change is committed as `e8fd50012c343a3e858001a086e2de7b5efac786`.
+Three baseline and three candidate runs, each with five warmups and 40 measured
+frames across 16 sequential render stripes, preserve the exact same full-frame
+hash. Median geometry time per stripe falls 10.62% (6.8955 to 6.1631 ms), and
+total measured renderer work falls 9.80% (8.2215 to 7.4157 ms). The measured
+candidate passes the 36-map load/idle/render smoke, 16-worker equality for
+five views in each of the three styles, 20 masked-wall checks, and a focused
+moving-sector refresh sweep. A single 60-second headless, sound-enabled run
+observes 51.18 completed updates/sec versus 48.48 in one earlier run; the
+unpaired comparison cannot establish causality. Snapshot decoding includes
+cache refresh and its measured median rose, offsetting some raster gain.
+Neither headless rate demonstrates Terminal writes, monitor presentation, or
+the target frame rate. The human Episode 1 route remains pending.
+
+The [performance record](performance.md#cache-sector-plane-data-for-rasterization--september-29-2026)
+and [portable receipt](../results/performance-sector-render-cache-20260929.json)
+retain the workload, hashes, and limitations. The [r7 human-playthrough
+candidate](../results/episode1-current-human-candidate-20260929-r7.json) pins
+this source while carrying forward earlier progression and session fixtures.

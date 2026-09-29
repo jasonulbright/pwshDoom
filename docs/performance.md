@@ -624,3 +624,42 @@ campaign completion, audible quality, or the 35-tic/60-display goal. The
 [portable receipt](../results/current-source-e1m1-worker-comparison-20260928.json)
 indexes the exact settings and SHA-256 hashes for the raw reports, which remain
 under ignored `local/` storage.
+
+## Cache sector plane data for rasterization — September 29, 2026
+
+The PowerShell rasterizer previously resolved sector heights, flat objects,
+and light values repeatedly inside floor/ceiling sampling. The renderer now
+keeps these values in typed per-sector arrays, refreshes them from each decoded
+snapshot, and resolves flat indices through a direct byte-array table. This
+keeps moving heights, translated flats, and lighting current while reducing
+property lookup in the inner raster loop.
+
+Three baseline and three candidate trials used the same idle HMP E1M1 view at
+320×200. Each trial warmed five frames and measured 40 frames for each of 16
+production-width stripes, rendered sequentially in one PowerShell 7.6.5
+process on the Intel Core Ultra 7 265K. The median of the three run medians
+fell from 6.8955 to 6.1631 ms per stripe for geometry (10.62%) and from
+8.2215 to 7.4157 ms per stripe for the total measured renderer work (9.80%).
+The corresponding median p95 values fell from 10.4701 to 9.0836 ms for
+geometry (13.24%) and from 12.2528 to 10.6531 ms for total work (13.06%). All
+six baseline/candidate full-frame hashes are identical
+(`B6B0A8899E495CA1A82658CBAF108D892F6E513B8CC87C7BA6DB99829C0DF67C`).
+
+The candidate passes a 36-map load/idle/render smoke. Five E1M1 views match
+serial pixels across 16 workers in Classic, Matrix/Katakana, and
+AnsiArt/Katakana (320,000 pixels per style, zero differences); encoded strips
+also match. The masked-wall fixture passes 20 checks. A focused moving-sector
+sweep refreshes sector 26 at tic 315 across four ceiling heights with no
+render error or HUD difference. These are bounded renderer checks, not map
+completion or original-executable parity.
+
+One 60-second sound-enabled headless host run on the candidate completed
+51.18 render updates/sec versus 48.48 in one earlier matching run, while both
+advanced at about 34.98 simulation tics/sec. The runs were ordered and
+unpaired, so the 5.57% observed host-update difference is not attributable to
+this change. Worker profiling shows raster median down from 8.7437 to 8.3744
+ms, while snapshot-decode median rises from 0.7861 to 1.2142 ms because the
+cache refresh happens during decoding. Treat the isolated stripe result as a
+measured improvement and the whole-host result as inconclusive. Headless
+updates skip Terminal writes and are not monitor presentations; the 60-display
+target remains open. See the [portable sector-cache receipt](../results/performance-sector-render-cache-20260929.json).
