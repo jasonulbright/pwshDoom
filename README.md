@@ -2,9 +2,9 @@
 
 **Doom, running in PowerShell. In your terminal. With a Matrix mode.**
 
-**Latest tagged release: [0.1.0-preview.3](https://github.com/jasonulbright/pwshDoom/releases/tag/v0.1.0-preview.3).** The current Episode 1 handoff source is [`d5d1217`](https://github.com/jasonulbright/pwshDoom/commit/d5d1217108bfc3093db2e89a70c57215d481711f), based on R9 gameplay/rendering with an opt-in indexed-color Classic encoder; exact truecolor remains the default. It is a development build, not a replacement Preview.3 package. Gameplay, software rendering, terminal encoding and sound-effects mixing are PowerShell. Bring your own Ultimate Doom `DOOM.WAD`.
+**Latest tagged release: [0.1.0-preview.3](https://github.com/jasonulbright/pwshDoom/releases/tag/v0.1.0-preview.3).** The current Episode 1 handoff source is [`cafb337`](https://github.com/jasonulbright/pwshDoom/commit/cafb337e553939d35b3330843698b85eeb47fa52). R11 carries the low texture-phase bits directly in the PowerShell plane sampler; 80 paired frames remain pixel-identical, with a small fixed-state renderer timing improvement. It is a development build, not a replacement Preview.3 package. Gameplay, software rendering, terminal encoding and sound-effects mixing are PowerShell. Bring your own Ultimate Doom `DOOM.WAD`.
 
-The public Preview.3 is an early community test build. One complete Episode 1 human playthrough remains pending on the newer R10 handoff. Its nine-map smoke and short music startup pass; the brief audio check had one queue-starvation observation near shutdown. See the [playthrough scope and test instructions](docs/episode1-playtest.md) and its [source-pinned R10 evidence](results/episode1-current-human-candidate-20260929-r10.json). The full Ultimate Doom release remains a broader milestone.
+The public Preview.3 is an early community test build. One complete Episode 1 human playthrough remains pending on the newer R11 handoff. Its 36-map smoke and short music startup pass; the five-second headless audio check had no starvation or rebuffer observations but does not qualify full-session continuity. See the [playthrough scope and test instructions](docs/episode1-playtest.md) and its [source-pinned R11 evidence](results/episode1-current-human-candidate-20260929-r11.json). The full Ultimate Doom release remains a broader milestone.
 
 | Classic | Matrix | Color art |
 | --- | --- | --- |
@@ -40,8 +40,8 @@ Classic also accepts `-AnsiEncoding Ansi256` for an experimental indexed-color a
 ## Current source status
 
 - Three display styles, menus, episode/difficulty selection, automap, save/load and sound effects, with optional prepared music.
-- All 36 Ultimate Doom maps have load/simulation/render smoke coverage. E1M1, E1M2, and E1M4 ordinary-input routes pass on the current gameplay source; the E1M3 route driver stalls without a reproduced defect. These regressions do not replace the complete Episode 1 human playthrough, which remains pending on the R10 handoff.
-- Recent rendering work improves Doom-style wall, plane and actor sampling and clips world sprites to wall silhouettes; full original-executable parity is not established.
+- All 36 Ultimate Doom maps have load/simulation/render smoke coverage. E1M1, E1M2, and E1M4 ordinary-input routes pass on the current gameplay source; the E1M3 route driver stalls without a reproduced defect. These regressions do not replace the complete Episode 1 human playthrough, which remains pending on the R11 handoff.
+- Recent rendering work improves Doom-style wall, plane and actor sampling and clips world sprites to wall silhouettes. The R11 plane-sampler optimization preserves all compared pixels; full original-executable parity is not established.
 - The R9 music-reader tests pass 21 checks. Opening all eleven local Episode 1 tracks is 56.06% faster in a warm-cache, reader-only comparison; this is not a cold-start or whole-game measurement.
 - Damage, pickup and power-up palettes; an approximate parallel invisibility effect.
 - Editable source, build/package scripts, attribution and the research ledger.

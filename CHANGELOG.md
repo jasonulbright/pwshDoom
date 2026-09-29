@@ -4,14 +4,16 @@
 
 The development branch is ahead of the public Preview.3 package. The current
 Episode 1 handoff source is commit
-[`d5d1217`](https://github.com/jasonulbright/pwshDoom/commit/d5d1217108bfc3093db2e89a70c57215d481711f),
-based on the R9 gameplay/render candidate at `a26a0b4`, with an optional
-Classic ANSI 256-color encoder; exact truecolor remains the default. This is
-not a new tagged release. Jason's complete Episode 1 playthrough and the
-broader Ultimate Doom release gates remain open.
+[`cafb337`](https://github.com/jasonulbright/pwshDoom/commit/cafb337e553939d35b3330843698b85eeb47fa52).
+R11 preserves the optional Classic ANSI 256-color encoder and exact truecolor
+default, and reduces flat-coordinate wrap work in the PowerShell plane sampler
+with byte-identical output in the paired frames. This is not a new tagged
+release. Jason's complete Episode 1 playthrough and the broader Ultimate Doom
+release gates remain open.
 
 ### Changed
 
+- The PowerShell floor/ceiling sampler now carries the low 22 texture-phase bits for repeating 64×64 flats, avoiding repeated signed 32-bit normalization. All 80 paired fixed-view frames match pixel-for-pixel. Fixed-state serial medians improve 2.52% on E1M1 and 1.57% on E3M6; this does not establish live pacing or the 35-tic/60-display targets. See the [measurement](results/renderer-flat-phase-wrap-20260929.json).
 - Added an opt-in Classic `-AnsiEncoding Ansi256` path that maps Doom PLAYPAL colors to the nearest xterm 256-color entry. One same-frame measurement sends 28.65% fewer bytes than exact truecolor; live game timing is inconclusive, so `Pairs` remains the default. See the [experiment](docs/ansi-256-color.md).
 - Interactive audio now advances active music and effect voices from the PowerShell output clock across short simulation-packet gaps. Pause, map resets, and explicit drains still stop that fill; deterministic headless runs remain packet-exact by default. This reduces software queue starvation under transient load but does not claim measured acoustic latency or uninterrupted full-campaign playback.
 - The eleven-track Episode 1 music catalog opens its independent qualified readers through up to four PowerShell runspaces. Eager source/payload verification and read locks remain. Twenty-one focused checks pass; a warm-file-cache comparison cuts the reader-open stage median from 4.665 to 2.050 seconds (56.06%). This does not establish cold-launch or whole-game speedup.

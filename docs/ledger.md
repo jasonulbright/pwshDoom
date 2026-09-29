@@ -4637,3 +4637,23 @@ wall checks, and the occluded-BON1 scene regression. The [portable receipt]
 (../results/renderer-flat-phase-wrap-20260929.json) indexes exact report
 hashes. No gameplay behavior changed; the Episode 1 human route remains
 pending.
+
+## 2026-09-29 — Pin the R11 Episode 1 human-playthrough build
+
+The current handoff is source commit
+`cafb337e553939d35b3330843698b85eeb47fa52`. Its source-pinned [R11 receipt]
+(../results/episode1-current-human-candidate-20260929-r11.json) records the
+36-map load/idle/render smoke, current launcher music preflight, and the
+flat-phase renderer comparison. Every one of 80 paired frames matches the
+prior renderer. Fixed-state serial medians fall 2.52% on E1M1 and 1.57% on
+E3M6; these are isolated renderer calls, not live pacing.
+
+A five-second actual-worker headless audio run selects D_E1M1, advances 174
+tics, reports no starvation or rebuffer, and closes cleanly. Of 229,320
+submitted audio frames, 224,280 were returned; 5,040 is only the
+shutdown-cancellation upper bound. It does not establish audible quality or
+full-session continuity. Three-style 16-worker pixel checks, masked-wall
+checks, and the occluded-BON1 regression pass. Earlier transition, boss, and
+E1M1/E1M2/E1M4 route evidence carries forward because gameplay behavior did
+not change. The complete HMP Episode 1 human playthrough remains pending; the
+handoff uses fresh `r11` input, report, save, and settings paths.
