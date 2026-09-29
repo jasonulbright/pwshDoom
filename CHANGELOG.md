@@ -15,6 +15,7 @@ the broader Ultimate Doom release gates remain open.
 - Dense renderer snapshots now cache fixed-point actor projections for workers, and each worker skips sprites outside its output stripe. Serial/worker pixels remain exact in exercised Classic, Matrix/Katakana and AnsiArt/Katakana scenes. E3M6 sequential worker CPU improved in two reversed-order pairs; E1M3 timing remained inconclusive, and this does not qualify 60 Hz presentation.
 - Packed per-map BSP geometry reduces repeated object lookups in the PowerShell renderer, and engine-bundle publication is atomic before workers load it.
 - Fixed-point visibility math now avoids per-intercept and sight-bound wrapper allocations while preserving tested arithmetic. Its paired E3M6 replay lowered the uninstrumented median by 3.88%; p95 did not improve, so this does not qualify the 35-tic goal.
+- The launcher now rejects stale or unqualified music reports before opening Windows Terminal. It validates report metadata and source/runtime pins; the audio worker still verifies full payload hashes, and simulation startup still matches the score lumps to the active IWAD.
 
 ## 0.1.0-preview.3 — 2026-09-28
 

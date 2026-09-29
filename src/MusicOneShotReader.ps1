@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 # Bounded paged reader for a locally trusted finite one-shot qualification.
 function Open-DoomMusicOneShotReader {
-    param([string]$Report)
+    param([string]$Report,[switch]$MetadataOnly)
     if(-not [BitConverter]::IsLittleEndian){throw 'One-shot payloads require little endian float64.'}
     if(([IO.FileInfo]::new($Report)).Length -gt 16MB){throw 'One-shot report exceeds size bound.'}
     $r=[IO.File]::ReadAllText($Report)|ConvertFrom-Json -AsHashtable
@@ -32,6 +32,11 @@ function Open-DoomMusicOneShotReader {
     $qualifier=@($r.Sources|Where-Object {$_.Path -ceq 'scripts/Qualify-MusicOneShot.ps1'})
     if($qualifier.Count -ne 1 -or $qualifier[0].Sha256 -cne (Get-FileHash "$PSScriptRoot/../scripts/Qualify-MusicOneShot.ps1").Hash){throw 'One-shot qualifier source changed.'}
 
+    if($MetadataOnly){
+        return @{OneShot=$true;MetadataOnly=$true;File=$null;Frame=0L;FrameCount=[long]$d.Frames;Loaded=$null;LoadedFrame=-1L;
+            DiskBytesRead=0L;Finished=$false;Closed=$true;ReportSha256=(Get-FileHash $Report).Hash;Track=[string]$d.Track;
+            MusSha256=$d.MusSha256;BankSha256=$d.SoundFontSha256}
+    }
     $file=[IO.File]::Open($d.Payload.Path,[IO.FileMode]::Open,[IO.FileAccess]::Read,[IO.FileShare]::Read)
     try{
         if($file.Length -ne $d.Payload.Bytes -or [Convert]::ToHexString([Security.Cryptography.SHA256]::HashData($file)) -cne $d.Payload.Sha256){throw 'One-shot payload checksum or length mismatch.'}

@@ -54,6 +54,30 @@ function New-DoomMusicPlayback {
     }catch{Close-DoomMusicPlayback $state;throw}
     finally{if($pool){$pool.Close();$pool.Dispose()}}
 }
+function Test-DoomMusicCatalog {
+    param([Parameter(Mandatory)][string]$CatalogPath)
+    $path=[IO.Path]::GetFullPath($CatalogPath)
+    if(-not (Test-Path -LiteralPath $path -PathType Leaf)){throw "Music catalog not found: $path"}
+    if(([IO.FileInfo]::new($path)).Length -gt 1MB){throw 'Music catalog exceeds size bound.'}
+    $catalogSha256=(Get-FileHash -LiteralPath $path).Hash
+    try{$catalog=Get-Content -LiteralPath $path -Raw|ConvertFrom-Json -AsHashtable}catch{throw "Music catalog is not valid JSON: $($_.Exception.Message)"}
+    if($catalog -isnot [Collections.IDictionary] -or $catalog.Count -eq 0 -or $catalog.Count -gt 128){throw 'Music catalog must contain between 1 and 128 track entries.'}
+    $root=[IO.Path]::GetDirectoryName($path);$entries=[Collections.Generic.List[object]]::new()
+    foreach($track in @($catalog.Keys|Sort-Object)){
+        if($track -cnotmatch '^D_[A-Z0-9]+$' -or $catalog[$track] -isnot [string]){throw "Music catalog contains an invalid entry for '$track'."}
+        $reportPath=[IO.Path]::GetFullPath([string]$catalog[$track],$root)
+        if(-not (Test-Path -LiteralPath $reportPath -PathType Leaf)){throw "Music qualification report for $track was not found: $reportPath"}
+        try{$report=Get-Content -LiteralPath $reportPath -Raw|ConvertFrom-Json -AsHashtable}catch{throw "Music qualification report for $track is not valid JSON: $($_.Exception.Message)"}
+        if($report -isnot [Collections.IDictionary] -or $report.Details -isnot [Collections.IDictionary] -or $report.Details.Track -cne $track){throw "Music catalog entry '$track' does not match its qualification report: $reportPath"}
+        $mode=if($report.Details.ContainsKey('Mode') -and $report.Details.Mode -ceq 'OneShot'){'OneShot'}else{'Loop'}
+        $reader=if($mode -ceq 'OneShot'){Open-DoomMusicOneShotReader $reportPath -MetadataOnly}else{Open-DoomMusicLoopReader $reportPath -MetadataOnly}
+        if(-not $reader.MetadataOnly -or $reader.Track -cne $track -or $reader.ReportSha256 -cne (Get-FileHash -LiteralPath $reportPath).Hash){throw "Music qualification report changed during preflight: $reportPath"}
+        $entries.Add(@{Track=$track;Mode=$mode;Report=$reportPath;ReportSha256=$reader.ReportSha256})
+    }
+    if((Get-FileHash -LiteralPath $path).Hash -cne $catalogSha256){throw "Music catalog changed during preflight: $path"}
+    return @{Valid=$true;CatalogPath=$path;CatalogSha256=$catalogSha256;TrackCount=$entries.Count;Tracks=$entries.ToArray();
+        QualificationMetadataValidated=$true;PayloadIntegrityValidated=$false;IwadIdentityValidated=$false}
+}
 function Close-DoomMusicPlayback {
     param($State)
     if(-not $State.Closed){

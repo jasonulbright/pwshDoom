@@ -22,6 +22,12 @@ if(-not $Wad) {
     if(-not $Wad){throw 'Supply your own classic Doom IWAD: .\Start-Doom.ps1 -Wad C:\path\DOOM.WAD'}
 }
 $Wad=(Resolve-Path -LiteralPath $Wad).Path
+if($MusicCatalog){
+    $MusicCatalog=(Resolve-Path -LiteralPath $MusicCatalog -ErrorAction Stop).Path
+    . "$PSScriptRoot/src/MusicLoopReader.ps1";. "$PSScriptRoot/src/MusicOneShotReader.ps1";. "$PSScriptRoot/src/MusicPlayback.ps1"
+    $musicPreflight=Test-DoomMusicCatalog $MusicCatalog
+    Write-Host "Music preflight passed for $($musicPreflight.TrackCount) track qualifications; payload hashes and IWAD score identity will be rechecked by the audio worker."
+}
 if($Replay){
     . "$PSScriptRoot/src/InputReplay.ps1"
     $inputReplay=Read-DoomInputReplay $Replay (Get-FileHash -LiteralPath $Wad).Hash

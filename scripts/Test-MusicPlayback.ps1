@@ -8,7 +8,7 @@ param(
 $ErrorActionPreference='Stop';Set-StrictMode -Version Latest
 if(Test-Path $Output){throw 'Use a fresh report path.'}
 . "$PSScriptRoot/../src/MusicLoopReader.ps1";. "$PSScriptRoot/../src/MusicOneShotReader.ps1";. "$PSScriptRoot/../src/MusicPlayback.ps1"
-$state=$null;$proofProbe=$null;$proofProbePath=$null;$failureProbePath=$null;$checks=[Collections.Generic.List[object]]::new();$failure=$null;$loopStartFrame=$null
+$state=$null;$proofProbe=$null;$proofProbePath=$null;$failureProbePath=$null;$preflightCatalogPath=$null;$preflightInvalidCatalogPath=$null;$preflightInvalidReportPath=$null;$preflightStaleCatalogPath=$null;$preflightStaleReportPath=$null;$preflightMissingPayloadPath=$null;$checks=[Collections.Generic.List[object]]::new();$failure=$null;$loopStartFrame=$null
 $report=[IO.Path]::GetFullPath($Qualification);$oneShotReport=[IO.Path]::GetFullPath($OneShotQualification)
 $loopData=Get-Content $report -Raw|ConvertFrom-Json -AsHashtable
 $loopTrack=[string]$loopData.Details.Track
@@ -20,6 +20,26 @@ function Check([string]$Name,[bool]$Passed){$checks.Add(@{Name=$Name;Passed=$Pas
 function Reject([string]$Name,[scriptblock]$Action){$rejected=$false;try{& $Action}catch{$rejected=$true};Check $Name $rejected}
 try{
     $catalog=@{};$catalog[$loopTrack]=$report;$catalog[$oneShotTrack]=$oneShotReport
+    $preflightCatalogPath=[IO.Path]::GetFullPath((Join-Path "$PSScriptRoot/../local" "music-playback-preflight-$([guid]::NewGuid().ToString('N')).json"))
+    $catalog|ConvertTo-Json -Depth 4|Set-Content -LiteralPath $preflightCatalogPath -Encoding utf8NoBOM
+    $preflight=Test-DoomMusicCatalog $preflightCatalogPath
+    Check 'Launcher preflight validates loop and one-shot qualifications without claiming payload or IWAD checks' ($preflight.Valid -and $preflight.TrackCount -eq 2 -and $preflight.QualificationMetadataValidated -and -not $preflight.PayloadIntegrityValidated -and -not $preflight.IwadIdentityValidated)
+    $preflightMissingPayloadPath=[IO.Path]::GetFullPath((Join-Path "$PSScriptRoot/../local" "music-playback-preflight-missing-$([guid]::NewGuid().ToString('N')).f64"))
+    $preflightInvalidReportPath=[IO.Path]::GetFullPath((Join-Path "$PSScriptRoot/../local" "music-playback-preflight-invalid-$([guid]::NewGuid().ToString('N')).json"))
+    $preflightInvalidCatalogPath=[IO.Path]::GetFullPath((Join-Path "$PSScriptRoot/../local" "music-playback-preflight-invalid-$([guid]::NewGuid().ToString('N')).catalog.json"))
+    $invalidPreflightReport=$oneShotData|ConvertTo-Json -Depth 80|ConvertFrom-Json -AsHashtable
+    $invalidPreflightReport.Details.Track='D_PREFLIGHT';$invalidPreflightReport.Details.Payload.Path=$preflightMissingPayloadPath
+    $invalidPreflightReport|ConvertTo-Json -Depth 80|Set-Content -LiteralPath $preflightInvalidReportPath -Encoding utf8NoBOM
+    @{D_PREFLIGHT=$preflightInvalidReportPath}|ConvertTo-Json -Depth 4|Set-Content -LiteralPath $preflightInvalidCatalogPath -Encoding utf8NoBOM
+    $missingPayloadPreflight=Test-DoomMusicCatalog $preflightInvalidCatalogPath
+    Check 'Metadata-only preflight accepts current qualification metadata without opening the PCM payload' ($missingPayloadPreflight.Valid -and -not (Test-Path -LiteralPath $preflightMissingPayloadPath))
+    Reject 'Full playback open still rejects a missing PCM payload after metadata preflight' {$badState=New-DoomMusicPlayback @{D_PREFLIGHT=$preflightInvalidReportPath};Close-DoomMusicPlayback $badState}
+    $preflightStaleReportPath=[IO.Path]::GetFullPath((Join-Path "$PSScriptRoot/../local" "music-playback-preflight-stale-$([guid]::NewGuid().ToString('N')).json"))
+    $preflightStaleCatalogPath=[IO.Path]::GetFullPath((Join-Path "$PSScriptRoot/../local" "music-playback-preflight-stale-$([guid]::NewGuid().ToString('N')).catalog.json"))
+    $invalidPreflightReport.Details.Qualified=$false
+    $invalidPreflightReport|ConvertTo-Json -Depth 80|Set-Content -LiteralPath $preflightStaleReportPath -Encoding utf8NoBOM
+    @{D_PREFLIGHT=$preflightStaleReportPath}|ConvertTo-Json -Depth 4|Set-Content -LiteralPath $preflightStaleCatalogPath -Encoding utf8NoBOM
+    Reject 'Launcher preflight rejects an unqualified report before terminal launch' {Test-DoomMusicCatalog $preflightStaleCatalogPath}
     $state=New-DoomMusicPlayback $catalog
     Check 'Catalog opens qualified loop and finite score without selecting either' ($null -eq $state.Selected -and $null -eq (Read-DoomMusicPlayback $state 1260) -and $state.ReaderModes[$loopTrack] -ceq 'Loop' -and $state.ReaderModes[$oneShotTrack] -ceq 'OneShot')
     if($loopData.Details.Periods.Count -eq 3){
@@ -93,6 +113,7 @@ try{
     if($proofProbe){Close-DoomMusicLoopReader $proofProbe}
     if($proofProbePath -and (Test-Path -LiteralPath $proofProbePath)){Remove-Item -LiteralPath $proofProbePath}
     if($failureProbePath -and (Test-Path -LiteralPath $failureProbePath)){Remove-Item -LiteralPath $failureProbePath}
+    foreach($path in @($preflightCatalogPath,$preflightInvalidCatalogPath,$preflightInvalidReportPath,$preflightStaleCatalogPath,$preflightStaleReportPath)){if($path -and (Test-Path -LiteralPath $path)){Remove-Item -LiteralPath $path}}
     if($state){Close-DoomMusicPlayback $state}
     $sourcePaths=@('src/MusicLoopReader.ps1','src/MusicOneShotReader.ps1','src/MusicPlayback.ps1','scripts/Qualify-MusicOneShot.ps1')
     @{Error=$failure;LoopTrack=$loopTrack;OneShotTrack=$oneShotTrack;LoopStartFrame=$loopStartFrame;Checks=$checks.ToArray();QualificationSha256=(Get-FileHash $report).Hash;OneShotQualificationSha256=(Get-FileHash $oneShotReport).Hash;Sources=@($sourcePaths|ForEach-Object {@{Path=$_;Sha256=(Get-FileHash "$PSScriptRoot/../$_").Hash}});ScriptSha256=(Get-FileHash $PSCommandPath).Hash;

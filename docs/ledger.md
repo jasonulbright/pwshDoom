@@ -4505,3 +4505,25 @@ opens under PowerShell 7.6.6 and releases both payload locks. These checks do
 not claim playback quality or full-campaign continuity. Details are in the
 [audio investigation](audio.md#music-qualification-error-diagnostics-2026-09-29)
 and [test receipt](../results/music-loop-reader-actionable-rejections-20260929.json).
+
+## 2026-09-29 — Check music qualification metadata before game launch
+
+Jason's prior sound-enabled startup stopped at tic 0 when the audio worker found
+an unusable music qualification. The audio reader now explains the failure,
+and `Start-Doom.ps1` additionally checks the catalog and each report's
+qualification, runtime, synthesis-source pins, and track name before opening
+Windows Terminal or game workers. `Play.ps1 -Check` reports the same result.
+The fast preflight intentionally does not read/hash the potentially large PCM
+payloads or compare music lumps with the selected IWAD; the audio worker still
+hashes and read-locks payloads, and simulation startup still verifies IWAD
+score identity.
+
+The current local eleven-track Episode 1 catalog passes the user-facing
+`Play.ps1 -Check` under PowerShell 7.6.5. A direct `Start-Doom.ps1` probe with
+an unqualified one-shot report fails before terminal or game-worker launch.
+The focused playback suite passes 25 checks: both loop and finite-score
+metadata pass, missing PCM remains deferred to and is rejected by the actual
+playback open, and stale qualification metadata is rejected early. The
+[portable receipt](../results/music-playback-preflight-20260929.json) pins the
+reader, catalog, test source, and real local qualification reports; those PCM
+files and IWAD remain local. The public Preview.3 archive is unchanged.

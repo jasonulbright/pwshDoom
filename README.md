@@ -56,6 +56,6 @@ PowerShell workers draw portions of the framebuffer and encode terminal output. 
 
 The packaged preview is the first public milestone; the project remains in development. [Roadmap](docs/roadmap.md) · [Research/development guide](docs/development-guide.md) · [Campaign coverage](docs/campaign-matrix.md) · [Investigation ledger](docs/ledger.md) · [Existing alternatives](docs/existing-implementations.md).
 
-`Start-Doom.ps1` exposes advanced options. `Play.ps1 -Check -Wad 'D:\Games\DOOM.WAD'` checks prerequisites without starting a session. Research results live in the repository; the smaller release ZIP omits those large measurement files and all private local assets.
+`Start-Doom.ps1` exposes advanced options. `Play.ps1 -Check -Wad 'D:\Games\DOOM.WAD'` checks prerequisites and, when supplied, validates music qualification metadata without starting a session. Payload hashes and IWAD score identity are still checked when the audio workers start. Research results live in the repository; the smaller release ZIP omits those large measurement files and all private local assets.
 
 Report the version, map, style and reproduction steps in [Issues](https://github.com/jasonulbright/pwshDoom/issues). Inspect session reports for local paths before sharing, and never attach commercial WADs. Licensed **GPL-2.0-or-later**; see [LICENSE](LICENSE).

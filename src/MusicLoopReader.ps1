@@ -15,7 +15,7 @@ function Get-DoomMusicSourceHashes {
     return ,$hashes
 }
 function Open-DoomMusicLoopReader {
-    param([string]$Report)
+    param([string]$Report,[switch]$MetadataOnly)
     if(-not [BitConverter]::IsLittleEndian){throw 'Music loop payloads require little endian float64.'}
     if(([IO.FileInfo]::new($Report)).Length -gt 16MB){throw 'Loop report exceeds size bound.'}
     $r=[IO.File]::ReadAllText($Report)|ConvertFrom-Json -AsHashtable
@@ -64,11 +64,16 @@ function Open-DoomMusicLoopReader {
             $period=$d.Periods[$i]
             if($period.Index -ne $i -or $period.Frames -ne $d.PeriodFrames -or $period.Bytes -ne $d.PeriodFrames*16 -or $period.Sha256 -cnotmatch '^[0-9A-F]{64}$'){throw 'Invalid music loop payload metadata.'}
         }
+        $playbackPeriods=if($mode -ceq 'IndependentStateAndOutput'){2}else{$d.Periods.Count}
+        if($MetadataOnly){
+            return @{MetadataOnly=$true;Files=[Collections.Generic.List[object]]::new();QualificationPeriods=$d.Periods.Count;PlaybackPeriods=$playbackPeriods;
+                Frame=0L;Paused=$false;Closed=$true;PeriodFrames=[long]$d.PeriodFrames;Loaded=$null;LoadedSegment=-1;LoadedFrame=-1L;
+                DiskBytesRead=0L;ReportSha256=(Get-FileHash $Report).Hash;Track=[string]$d.Track;MusSha256=$d.MusSha256;BankSha256=$d.BankSha256}
+        }
         # IndependentStateAndOutput stores a third period as proof that the loop
         # repeats. Its hash must match the second period above, but playback uses
         # only the initial period and that verified repeating period. Avoid hashing
         # the redundant proof payload whenever a catalog opens.
-        $playbackPeriods=if($mode -ceq 'IndependentStateAndOutput'){2}else{$d.Periods.Count}
         for($i=0;$i -lt $playbackPeriods;$i++){
             $period=$d.Periods[$i]
             # Keep playback files read-locked after hashing, so bytes cannot change underneath playback.

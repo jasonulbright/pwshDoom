@@ -41,7 +41,12 @@ try{
     $probe=Join-Path $local ('write-check-'+[guid]::NewGuid().ToString('N'))
     try{[IO.File]::WriteAllText($probe,'');[IO.File]::Delete($probe)}catch{throw 'Extract the complete ZIP into a writable folder, such as Documents\pwshDoom.'}
     if($Check){
-        [pscustomobject]@{Ready=$true;PowerShell=$PSVersionTable.PSVersion.ToString();Wad=$Wad;EpisodeMaps=$maps.Count;Root=$PSScriptRoot;WindowsTerminal=(Get-Command wt.exe).Source;MusicCatalog=$MusicCatalog;MusicValidation=if($MusicCatalog){'Track qualification and WAD identity are checked at audio startup; -Check verifies path only.'}else{'Effects only; no music catalog requested.'}}
+        $musicValidation=if($MusicCatalog){
+            . "$PSScriptRoot/src/MusicLoopReader.ps1";. "$PSScriptRoot/src/MusicOneShotReader.ps1";. "$PSScriptRoot/src/MusicPlayback.ps1"
+            $musicPreflight=Test-DoomMusicCatalog $MusicCatalog
+            "Qualification metadata for $($musicPreflight.TrackCount) tracks matches this PowerShell runtime and current synthesis sources; payload hashes and IWAD score identity are rechecked at audio startup."
+        }else{'Effects only; no music catalog requested.'}
+        [pscustomobject]@{Ready=$true;PowerShell=$PSVersionTable.PSVersion.ToString();Wad=$Wad;EpisodeMaps=$maps.Count;Root=$PSScriptRoot;WindowsTerminal=(Get-Command wt.exe).Source;MusicCatalog=$MusicCatalog;MusicValidation=$musicValidation}
         return
     }
     Write-Host "`npwshDoom — playable preview" -ForegroundColor Green
