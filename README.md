@@ -2,7 +2,7 @@
 
 **Doom, running in PowerShell. In your terminal. With a Matrix mode.**
 
-**Latest tagged release: [0.1.0-preview.3](https://github.com/jasonulbright/pwshDoom/releases/tag/v0.1.0-preview.3).** The development branch has a newer R9 candidate at source commit [`a26a0b4`](https://github.com/jasonulbright/pwshDoom/commit/a26a0b439d0fee2e8ea0f1f1a3c785595bec1384); R9 opens the prepared Episode 1 music catalog in parallel while keeping eager verification. It is a development build, not a replacement Preview.3 package. Gameplay, software rendering, terminal encoding and sound-effects mixing are PowerShell. Bring your own Ultimate Doom `DOOM.WAD`.
+**Latest tagged release: [0.1.0-preview.3](https://github.com/jasonulbright/pwshDoom/releases/tag/v0.1.0-preview.3).** The current Episode 1 handoff build is [`b79b668`](https://github.com/jasonulbright/pwshDoom/commit/b79b668af98d51246c340cc2e3ae5673883cc894), based on R9 gameplay/rendering with an added music-qualification preflight. It is a development build, not a replacement Preview.3 package. Gameplay, software rendering, terminal encoding and sound-effects mixing are PowerShell. Bring your own Ultimate Doom `DOOM.WAD`.
 
 The public Preview.3 is an early community test build. One complete Episode 1 human playthrough remains pending on the newer R9 candidate, and the full Ultimate Doom release remains a broader milestone. See the [playthrough scope and test instructions](docs/episode1-playtest.md) and its [source-pinned R9 evidence](results/episode1-current-human-candidate-20260929-r9.json).
 

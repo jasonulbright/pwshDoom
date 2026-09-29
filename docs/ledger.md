@@ -4526,4 +4526,7 @@ metadata pass, missing PCM remains deferred to and is rejected by the actual
 playback open, and stale qualification metadata is rejected early. The
 [portable receipt](../results/music-playback-preflight-20260929.json) pins the
 reader, catalog, test source, and real local qualification reports; those PCM
-files and IWAD remain local. The public Preview.3 archive is unchanged.
+files and IWAD remain local. The [complete-playthrough handoff](episode1-playtest.md)
+now pins exact build `b79b668`, and the existing R9 gameplay/route evidence
+carries forward because no gameplay or rendering code changed. The public
+Preview.3 archive is unchanged.
