@@ -5063,3 +5063,15 @@ project documentation. The raw line total mostly measures retained experiment
 data, not engine size or player-facing feature count. Preview.3 itself remains
 the public package; R16 is the current development handoff and still awaits the
 single complete human HMP Episode 1 playthrough.
+
+### Current branch count after the R16 source pin
+
+The 182-commit Preview.2-to-R16 count above is pinned to game source
+`3e0b630`. The branch now ends at `958b2f5`, two documentation/evidence
+commits later, so the current counts are 184 commits from Preview.2 and 70
+commits after the Preview.3 tag. Those two commits do not change `src/` or
+`scripts/`; the source diff remains 24 files (+1,268/−161) across 43
+source-touching commits. The current range adds three more result files and
+expands the documentation diff to 31 files (+7,676/−97). Thus the change in
+commit count since the R16 source pin is documentation and recorded evidence,
+not additional engine code.
