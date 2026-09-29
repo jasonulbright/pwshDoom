@@ -12,18 +12,18 @@ A normal completion is enough; 100% kills, items, and secrets are not required. 
 
 ## Build and launch
 
-Use the development build with game source at commit `3e0b6308bac9dc152f9ae78fb8f23f70623b36e2` on branch `codex/feasibility-study`. R16 adds a bounded drain for queued device audio on normal unpaused exit. It rechecks current-source E1M1 audio startup and shutdown, all 36 map load/render smokes, and focused audio shutdown/continuity under PowerShell 7.6.6. Gameplay, rendering, and mixing algorithms are unchanged. The [R16 candidate receipt](../results/episode1-current-human-candidate-20260929-r16.json) pins the build, runtime, IWAD, catalog, and inherited progression evidence.
+Use the clean-checkout local test archive `pwshDoom-0.1.0-dev.20260929.zip` (SHA-256 `E4B171C22497C3923969A896BB3086D78DA15980D4D0B11B92149C8E3BD5F80D`). It was built from documentation/evidence commit `bcfb85e56cbe8ac4a7e14e0658bcae8b95a95a65`; its `src/` and `scripts/` are unchanged from R16 game-source commit `3e0b6308bac9dc152f9ae78fb8f23f70623b36e2`. The archive has 543 manifest-verified source/documentation files and excludes the untracked research PDF, WAD, soundfont, and private local reports. This is a local development build, not a tagged or published release. Its extracted launcher passes `Play.ps1 -Check` under PowerShell 7.6.6, and a four-second packaged E1M1 headless run selects D_E1M1 and returns all 175,140 submitted audio frames. That brief run has one queue-empty observation after its final packet and is not continuous-audio or pacing evidence. See the [package validation receipt](../results/r16-playtest-package-validation-20260929.json).
 
 The focused worker tests pass 12 checks on same-map save/new-game paths, 12 on changed-map paths, and four session-worker cases with exact screen/menu/automap output and persistent workers. One sequential PresentMon pair measured the same-map reload pause at 0.358 seconds versus 6.178 seconds before the change; overall update rate did not improve, and the observed display rate remains below 60. This is a targeted reset improvement, not a pacing qualification. See the [measurement receipt](../results/renderer-same-map-reset-presentmon-20260929.json).
 
 On current R16 source, `Play.ps1 -Check` reports Ready for the Steam IWAD's 36 maps and all 11 music reports under PowerShell 7.6.6. A four-second headless E1M1 host run selects D_E1M1 and completes all 186,480 submitted audio frames. It has no simulation/audio/cleanup errors, queue-starvation observations, or rebuffer; the last 3,780 frames drain in 68.8 ms, with no shutdown cancellation. The fresh 36-map smoke loads each map, runs 35 idle tics, and renders two full frames from two headings. Neither check is a route, acoustic review, or visible-pacing qualification. R14's 27 mixer checks and 7 packet-path checks still qualify same-emitter replacement across sound categories, and the focused chainsaw check still reaches an E1M2 imp without the former exception. See the [R16 receipt](../results/episode1-current-human-candidate-20260929-r16.json), [current-source audio host receipt](../results/episode1-audio-shutdown-r16-20260929.json), and [R14 scripted-effect receipt](../results/episode1-current-audio-effects-r14-20260929.json). A saved audio replay diverges from current gameplay at tic 350, so its PCM does not qualify this build's rendered audio. The chainsaw crash and fix are recorded under [current evidence and limits](#current-evidence-and-limits); 35-tic/60-display pacing remains unqualified.
 
-From PowerShell, use the existing checkout and your Steam Ultimate Doom `DOOM.WAD`:
+From PowerShell, use the extracted package folder (set `$root` to that folder) and your Steam Ultimate Doom `DOOM.WAD`. Keep `$local` pointed at the existing checkout's ignored `local` folder so the prepared catalog stays outside the archive:
 
 ```powershell
-$root = 'C:\projects\pwshDoom'
+$root = 'C:\projects\pwshDoom\local\r16-playtest-extracted-20260929\pwshDoom-0.1.0-dev.20260929'
 $wad = 'C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\base\DOOM.WAD'
-$local = Join-Path $root 'local'
+$local = 'C:\projects\pwshDoom\local'
 $catalog = Join-Path $local 'music-prepared-episode1.json'
 $record = Join-Path $local 'episode1-human-input-r16.json'
 $report = Join-Path $local 'episode1-human-session-r16.json'

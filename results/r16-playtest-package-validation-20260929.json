@@ -1,0 +1,62 @@
+{
+  "Format": "pwshDoom.LocalPlaytestPackageValidation",
+  "Version": 1,
+  "RecordedUtc": "2026-09-29T19:24:18.9905850Z",
+  "Package": {
+    "Version": "0.1.0-dev.20260929",
+    "Zip": "local/r16-playtest-package-20260929/pwshDoom-0.1.0-dev.20260929.zip",
+    "ZipSha256": "E4B171C22497C3923969A896BB3086D78DA15980D4D0B11B92149C8E3BD5F80D",
+    "Bytes": 1651070,
+    "ZipEntries": 544,
+    "ManifestFiles": 543,
+    "AllManifestHashesVerified": true,
+    "SourceCommit": "bcfb85e56cbe8ac4a7e14e0658bcae8b95a95a65",
+    "GameSourceCommit": "3e0b6308bac9dc152f9ae78fb8f23f70623b36e2",
+    "WorkingTreeDirty": false,
+    "SourceAndScriptPathsChangedSinceGameSource": [],
+    "ResearchPdfIncluded": false,
+    "CommercialWadIncluded": false,
+    "SoundFontIncluded": false,
+    "PrivateLocalReportsIncluded": false,
+    "OfficiallyTaggedOrPublished": false
+  },
+  "Preflight": {
+    "Passed": true,
+    "PowerShell": "7.6.6",
+    "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+    "MapCount": 36,
+    "MusicTrackCount": 11,
+    "WindowsTerminalFound": true
+  },
+  "PackagedHostSmoke": {
+    "Passed": true,
+    "PowerShell": "7.6.6",
+    "Episode": 1,
+    "Map": 1,
+    "Workers": 16,
+    "DurationSeconds": 4.0011155,
+    "SimulationTics": 139,
+    "SimulationTicsPerSecond": 34.74031179554802,
+    "HeadlessUpdates": 135,
+    "HeadlessUpdatesPerSecond": 33.74059059279843,
+    "ExitReason": "Duration",
+    "HostError": null,
+    "SelectedMusic": "D_E1M1",
+    "AudioPackets": 139,
+    "AudioFramesSubmitted": 175140,
+    "AudioFramesCompleted": 175140,
+    "AudioDeviceClosed": true,
+    "AudioError": null,
+    "AudioCleanupError": null,
+    "ClippedSamples": 0,
+    "RebufferCount": 1,
+    "QueueEmptyAfterPacket": 138,
+    "QueueEmptyWasAfterFinalPacket": true,
+    "AudioPcmSha256": "330BE75D2583D73B59284ECAFCE953B8D70B4D867829478D44E41FA5706E1CEF"
+  },
+  "RawReport": {
+    "Path": "local/r16-package-audio-smoke-20260929.json",
+    "Sha256": "B533B64619BB0BEF8B0DCE9F4D44176578CEFB20C2111026AE12F7D1740BCA03"
+  },
+  "Meaning": "The clean source archive has a complete, verified manifest and passes its PowerShell 7.6.6 IWAD/music preflight. Its four-second headless E1M1 run starts D_E1M1, returns every submitted audio frame, and closes the device without errors. The one queue-empty observation is after the final packet. This is package/startup evidence only; it does not establish sound-effect playback, uninterrupted music, acoustic quality, human keyboard play, route completion, or 35-tic/60-displayed-frame pacing. No recording was made."
+}

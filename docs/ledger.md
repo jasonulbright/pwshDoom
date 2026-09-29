@@ -5120,3 +5120,25 @@ rechecked against the installed 36-map IWAD and the documented 11-track
 Episode 1 catalog and reports `Ready`. The article draft now describes R16,
 the measured shutdown behavior, the interrupted human attempt, and the
 remaining campaign/fidelity/audio/pacing limits.
+
+## 2026-09-29 — Validate a clean R16 playtest package
+
+Built a local-only `0.1.0-dev.20260929` source archive from clean commit
+`bcfb85e56cbe8ac4a7e14e0658bcae8b95a95a65`. Its `src/` and `scripts/` have
+no path changes from R16 game-source commit `3e0b6308bac9dc152f9ae78fb8f23f70623b36e2`.
+The package manifest covers 543 files; all packaged file hashes and the ZIP
+checksum verify. The archive excludes `docs/gebbdoom.pdf`, IWADs, soundfonts,
+local reports, and recordings. Its ZIP remains under ignored `local/` and is
+not tagged or published.
+
+The extracted launcher passes `Play.ps1 -Check` under the installed PowerShell
+7.6.6, recognizing 36 maps and 11 prepared Episode 1 music tracks. A four-
+second headless E1M1 host run from the extracted package selects D_E1M1 and
+returns all 175,140 submitted audio frames before clean device close. One
+queue-empty/rebuffer observation occurs after the final packet; it is retained
+as a limitation rather than called continuous-playback success. The run
+advances 139 simulation tics and 135 headless render updates, not display
+frames, and exercises no active sound effect. It adds no campaign completion,
+keyboard-play, acoustic, full-session audio, or pacing evidence. No recording
+was made. See the [portable package receipt](../results/r16-playtest-package-validation-20260929.json)
+and ignored raw host report `local/r16-package-audio-smoke-20260929.json`.

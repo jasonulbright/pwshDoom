@@ -39,6 +39,13 @@ including the secret exit through E1M9, return to E1M4, and the E1M8 finale.
 Full-session audio, 35-tic simulation, 60 displayed updates/sec, and
 original-executable parity remain unqualified.
 
+A clean-checkout local development ZIP was also extracted and checked under
+PowerShell 7.6.6. Its manifest verifies all 543 packaged files; the short
+E1M1 audio host returns every submitted music frame and closes the device. One
+queue-empty observation occurs after the final packet. This validates package
+startup, adds no route or map-completion evidence, and does not qualify audio
+continuity or display pacing; see the [package receipt](../results/r16-playtest-package-validation-20260929.json).
+
 The earlier R12 handoff was pinned at source commit
 `c29b24e8a1c06635f90423672cc74f28836b7095`; its measurement and qualification
 history remains in the [R12 receipt](../results/episode1-current-human-candidate-20260929-r12.json),
