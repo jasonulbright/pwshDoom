@@ -4588,3 +4588,25 @@ that either encoding caused the difference. Neither qualifies 60 writes/sec
 or 35 simulation tics/sec, and Terminal writes do not measure monitor
 presentations. Keep the indexed mode experimental; a repeated matched-state
 comparison is still needed before making performance claims.
+
+## 2026-09-29 — Re-pin the Episode 1 human-playthrough handoff
+
+The development handoff now targets code commit `d5d1217108bfc3093db2e89a70c57215d481711f`.
+R10 adds the optional Classic Ansi256 output mode; gameplay behavior,
+FastRenderer's rasterization algorithm, and the default exact-truecolor `Pairs`
+path remain unchanged from R9. A fresh PowerShell 7.6.5 load/update/render
+smoke passes E1M1–E1M9 at HMP with 16 workers, including the secret map E1M9.
+`Play.ps1 -Check` accepts the local eleven-track catalog. A five-second
+headless sound/music run selects D_E1M1, advances 174 tics, returns all
+219,240 submitted audio frames, and closes the device without worker or
+cleanup error. It records one queue-starvation/rebuffer observation after
+packet 173 near shutdown; this does not establish continuous playback or
+acoustic quality. The smoke, audio report, previous R9 receipt, and source
+revision are pinned in the [R10 handoff receipt](../results/episode1-current-human-candidate-20260929-r10.json).
+
+The E1M1–E1M4 route evidence, transition and boss fixtures, and R7/R8 renderer
+evidence carry forward because game behavior did not change. They still do not
+complete a human map route. E1M3's waypoint driver remains stopped after
+stalling without a reproduced defect. The complete HMP route through E1M9,
+back to E1M4, and through the finale is still pending; fresh R10 paths in the
+[playthrough handoff](episode1-playtest.md) preserve the earlier human attempt.

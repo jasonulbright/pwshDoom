@@ -3,11 +3,12 @@
 ## Unreleased
 
 The development branch is ahead of the public Preview.3 package. The current
-Episode 1 handoff build is commit
-[`b79b668`](https://github.com/jasonulbright/pwshDoom/commit/b79b668af98d51246c340cc2e3ae5673883cc894),
-based on the R9 gameplay/render candidate at `a26a0b4`. This is not a new
-tagged release. Jason's complete Episode 1 playthrough and the broader
-Ultimate Doom release gates remain open.
+Episode 1 handoff source is commit
+[`d5d1217`](https://github.com/jasonulbright/pwshDoom/commit/d5d1217108bfc3093db2e89a70c57215d481711f),
+based on the R9 gameplay/render candidate at `a26a0b4`, with an optional
+Classic ANSI 256-color encoder; exact truecolor remains the default. This is
+not a new tagged release. Jason's complete Episode 1 playthrough and the
+broader Ultimate Doom release gates remain open.
 
 ### Changed
 

@@ -1,0 +1,88 @@
+{
+  "Format": "pwshDoom.Episode1CurrentHumanCandidate",
+  "Version": 1,
+  "RecordedUtc": "2026-09-29T09:44:46Z",
+  "Branch": "codex/feasibility-study",
+  "ImplementationCommit": "d5d1217108bfc3093db2e89a70c57215d481711f",
+  "PreviousCandidate": {
+    "Path": "results/episode1-current-human-candidate-20260929-r9.json",
+    "Sha256": "8B65C4FF64CA01449FE42CECF01F27FE1C3CA5F1E86F6ED36BD435AA7F381576",
+    "SourceCommit": "b79b668af98d51246c340cc2e3ae5673883cc894"
+  },
+  "Runtime": {
+    "PowerShell": "7.6.5",
+    "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+    "MusicCatalogSha256": "0E9C9542C75F4D5E2D7FC71E42FAFBB58F94321C3B8A49BA0C9AC5A93752EE58"
+  },
+  "ChangesSinceR9": {
+    "Feature": "Optional Classic Ansi256 terminal-color approximation and launcher/worker selection plumbing.",
+    "DefaultEncoding": "Pairs (exact truecolor)",
+    "GameplayChanged": false,
+    "RendererAlgorithmChanged": false,
+    "AudioMixingChanged": false,
+    "HumanPlaythroughScopeChanged": false,
+    "Evidence": "results/ansi256-runtime-20260929.json"
+  },
+  "Validation": {
+    "PlayPreflight": {
+      "Result": "Ready",
+      "MusicTrackQualifications": 11,
+      "UltimateDoomMaps": 36,
+      "AnsiEncoding": "Pairs",
+      "Report": "Play.ps1 -Check with the local Episode 1 catalog; game not started"
+    },
+    "Episode1MapSmoke": {
+      "Maps": ["E1M1", "E1M2", "E1M3", "E1M4", "E1M5", "E1M6", "E1M7", "E1M8", "E1M9"],
+      "Skill": 3,
+      "IdleTicsPerMap": 35,
+      "Workers": 16,
+      "CasesPassed": 9,
+      "Complete": true,
+      "PowerShell": "7.6.5",
+      "RawReport": "local/episode1-current-smoke-d5d1217.json",
+      "RawReportSha256": "54B679EBE4BB33CC3FD741F072118F688AF14D30D27A974696F95029E50E386F",
+      "Meaning": "All nine Episode 1 maps, including E1M9, load, idle and render. This is not route completion."
+    },
+    "HeadlessAudioStartup": {
+      "Map": "E1M1",
+      "Seconds": 5.0034,
+      "SimulationTics": 174,
+      "RenderUpdates": 197,
+      "SimulationTicsPerSecond": 34.7763,
+      "MusicSelected": "D_E1M1",
+      "SubmittedAudioFrames": 219240,
+      "ReturnedAudioFrames": 219240,
+      "DeviceClosed": true,
+      "WorkerError": null,
+      "CleanupError": null,
+      "QueueStarvationObservations": 1,
+      "QueueStarvationAfterPacket": 173,
+      "RebufferCount": 1,
+      "PowerShell": "7.6.5",
+      "RawReport": "local/episode1-current-audio-smoke-d5d1217.json",
+      "RawReportSha256": "384800359EB77A4E83860F2F4173EC34925D6E9D52323BB4B0AF52CEE5B8C366",
+      "Meaning": "The short headless startup completes and closes cleanly. One queue-empty/rebuffer observation occurred after packet 173 near the run's end; this is not evidence of uninterrupted audio or acoustics."
+    },
+    "InheritedFromR9": {
+      "36MapSmoke": true,
+      "CampaignTransitionFixtures": 69,
+      "BossProgressionChecks": 97,
+      "NormalInputRouteRegressions": ["E1M1", "E1M2", "E1M4"],
+      "E1M3RouteDriver": "Stalls without a reproduced product defect; not tuned for this milestone.",
+      "Source": "results/episode1-current-human-candidate-20260929-r9.json"
+    }
+  },
+  "Playthrough": {
+    "Pending": true,
+    "Difficulty": "HMP (skill 3)",
+    "RequiredScope": ["E1M1", "E1M2", "E1M3", "E1M9", "return to E1M4", "E1M5", "E1M6", "E1M7", "E1M8", "Episode 1 finale"],
+    "Instructions": "docs/episode1-playtest.md",
+    "FreshRunSuffix": "r10"
+  },
+  "Performance": {
+    "Target35TicsPerSecondQualified": false,
+    "Target60DisplayedFramesPerSecondQualified": false,
+    "Meaning": "The short audio smoke is headless; the separate Ansi256 live sample is not a controlled comparison and completed 43.12 terminal writes/sec. Terminal writes do not measure monitor presentation."
+  },
+  "Meaning": "Source-pinned readiness handoff for one complete human Episode 1 playthrough. Map smoke, transition fixtures, and startup checks are not human route completion."
+}

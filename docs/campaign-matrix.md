@@ -21,22 +21,22 @@ receipt](../results/episode1-current-human-candidate-20260928-r5.json),
 [geometry/cache supplement](../results/episode1-current-human-candidate-20260928-r2.json),
 and [realtime-audio supplement](../results/episode1-current-human-candidate-20260928-r3.json); the [visible-actor profile](../results/renderer-visible-actor-filter-20260928.json) reports sequential worker-equivalent CPU and does not claim a frame-rate gain.
 
-The current single-playthrough handoff is r9 at source commit
-`a26a0b439d0fee2e8ea0f1f1a3c785595bec1384`; see its [candidate receipt](../results/episode1-current-human-candidate-20260929-r9.json)
+The current single-playthrough handoff is R10 at source commit
+`d5d1217108bfc3093db2e89a70c57215d481711f`; see its [candidate receipt](../results/episode1-current-human-candidate-20260929-r10.json)
 and the exact [complete Episode 1 scope](episode1-playtest.md). Jason's human
-route remains pending. R9 changes qualified music-reader initialization only;
-the gameplay and renderer code is unchanged from r8, so the visibility
-arithmetic checks, 36-map smoke, 69 transition fixtures, 97 boss fixtures,
-and E1M1, E1M2, and E1M4 route results carry forward. The E1M3 waypoint
-driver stalls without a reproduced defect. Its archived 7,118-command
-fixed-input replay diverges at 23 of 24 checkpoints on both the pre-change
-source and r8, with identical actual hashes; the recorded fingerprint is
-stale and it was not requalified on r9. The warm-cache eleven-track reader
-open stage improves from a 4.665-second to 2.050-second median; 21 focused
-music checks pass on PowerShell 7.6.5 and 7.6.6. Five-second sound-enabled
-headless E1M1 host checks pass on both runtimes; the 7.6.6 run returns all
-219,240 submitted audio frames and closes cleanly, with one queue-starvation
-poll after packet 173 and no resume.
+route remains pending. R10 adds optional Ansi256 encoding while retaining exact
+truecolor as the default; gameplay behavior remains unchanged from R9. A fresh
+PowerShell 7.6.5 smoke loads, updates, and renders E1M1–E1M9, and current music
+preflight accepts all eleven catalog reports. Its five-second actual-worker
+audio check returns all submitted frames and closes the device, with one
+queue-starvation/rebuffer observation near shutdown. The R8 gameplay and R7
+renderer evidence, 69 transition fixtures, 97 boss fixtures, and E1M1, E1M2,
+and E1M4 routes carry forward. The E1M3 driver stalls without a reproduced
+defect; its archived fixed-input replay remains stale-source evidence. See the
+[R10 receipt](../results/episode1-current-human-candidate-20260929-r10.json),
+[R9 gameplay evidence](../results/episode1-current-human-candidate-20260929-r9.json),
+[startup timing](../results/music-catalog-open-parallel-20260929.json), and
+[music runtime checks](../results/music-playback-runtime-7.6.6-20260929.json).
 
 Play.ps1 -Check also returns Ready under 7.6.6 with the 36-map IWAD and
 11-track catalog. A fresh five-second realtime-audio run through the actual

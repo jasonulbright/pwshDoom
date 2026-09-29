@@ -2,9 +2,9 @@
 
 **Doom, running in PowerShell. In your terminal. With a Matrix mode.**
 
-**Latest tagged release: [0.1.0-preview.3](https://github.com/jasonulbright/pwshDoom/releases/tag/v0.1.0-preview.3).** The current Episode 1 handoff build is [`b79b668`](https://github.com/jasonulbright/pwshDoom/commit/b79b668af98d51246c340cc2e3ae5673883cc894), based on R9 gameplay/rendering with an added music-qualification preflight. It is a development build, not a replacement Preview.3 package. Gameplay, software rendering, terminal encoding and sound-effects mixing are PowerShell. Bring your own Ultimate Doom `DOOM.WAD`.
+**Latest tagged release: [0.1.0-preview.3](https://github.com/jasonulbright/pwshDoom/releases/tag/v0.1.0-preview.3).** The current Episode 1 handoff source is [`d5d1217`](https://github.com/jasonulbright/pwshDoom/commit/d5d1217108bfc3093db2e89a70c57215d481711f), based on R9 gameplay/rendering with an opt-in indexed-color Classic encoder; exact truecolor remains the default. It is a development build, not a replacement Preview.3 package. Gameplay, software rendering, terminal encoding and sound-effects mixing are PowerShell. Bring your own Ultimate Doom `DOOM.WAD`.
 
-The public Preview.3 is an early community test build. One complete Episode 1 human playthrough remains pending on the newer R9 candidate, and the full Ultimate Doom release remains a broader milestone. See the [playthrough scope and test instructions](docs/episode1-playtest.md) and its [source-pinned R9 evidence](results/episode1-current-human-candidate-20260929-r9.json).
+The public Preview.3 is an early community test build. One complete Episode 1 human playthrough remains pending on the newer R10 handoff. Its nine-map smoke and short music startup pass; the brief audio check had one queue-starvation observation near shutdown. See the [playthrough scope and test instructions](docs/episode1-playtest.md) and its [source-pinned R10 evidence](results/episode1-current-human-candidate-20260929-r10.json). The full Ultimate Doom release remains a broader milestone.
 
 | Classic | Matrix | Color art |
 | --- | --- | --- |
