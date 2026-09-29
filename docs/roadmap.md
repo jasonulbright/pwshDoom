@@ -36,55 +36,15 @@ route ended in player death and did not expose a reproducible product defect;
 it is documented and route automation is stopped for this milestone. The
 broader release acceptance gates below remain intact.
 
-The current handoff uses game source commit
-`cdd5fdd68734dbc663367f44117fd8a49ac17694`, pinned in the [R14 receipt]
-(../results/episode1-current-human-candidate-20260929-r14.json). R14 adds
-same-emitter sound replacement across categories, with 27 deterministic mixer
-checks and 7 production packet-path checks. A current-source five-second
-headless run also starts the real Windows audio worker, selects D_E1M1, returns
-226,800 of 231,840 submitted frames, and closes without a reported error,
-rebuffer, or software queue-starvation observation. A separate five-second
-scripted attack produces 14 audio events and a one-voice peak through the same
-device path, again with clean closure. These short runs are not acoustic or
-full-session evidence. The stored route replay diverges from current gameplay
-at tic 350 and does not qualify its audio. R14 preserves R13's same-map asset reuse and
-does not change gameplay or rendering. The complete human Episode 1 route
-remains pending; the PresentMon reset comparison does not qualify 35-tic
-simulation or 60 displayed transitions/sec.
-The PowerShell plane sampler carries Int64 world coordinates between pixels
-and extracts only the 64×64 flat-index bits at lookup time. All 120 paired
-E1M1/E3M6 frames match exactly. Two fixed-state E1M1 serial medians improve
-10.68% and 5.70%; E3M6 is effectively unchanged. The A-B-B-A live-host result
-is inconclusive, so these timings do not qualify whole-game or display pacing.
-The launcher preflight validates music report metadata before opening Terminal,
-while audio and simulation workers still verify payload integrity and
-active-IWAD score identity. Eleven qualified Episode 1 music readers open
-concurrently in up to four PowerShell runspaces; the warm-cache reader-open
-stage median falls from 4.665 to 2.050 seconds (56.06%), not a cold-start or
-whole-game result. The fresh 36-map smoke and `Play.ps1 -Check` pass. A
-five-second actual-worker headless audio run selects D_E1M1, advances 174
-simulation tics, returns 225,540 of 230,580 submitted frames, and observes no
-starvation or rebuffer before clean shutdown. The remaining 5,040 frames are a
-shutdown-cancellation upper bound. This does not qualify full-session audio,
-audible quality, or displayed pacing. The human route remains pending.
+## Current Episode 1 handoff — R16 (2026-09-29)
 
-Play.ps1 -Check also returns Ready under 7.6.6 with the 36-map IWAD and
-11-track catalog. A fresh current-checkout realtime-audio worker run selects
-D_E1M1, observes no queue starvation or rebuffer, and closes cleanly; the 5,040
-queued frames at duration exit are only a cancellation upper bound ([receipt](../results/episode1-current-audio-startup-7.6.6-20260929.json)). This resolves the prior startup failure through a five-second headless check, not full-session playback. The gameplay, renderer, save, menu, and campaign route code did not
-change from r8, so its map smoke, 69 transition fixtures, 97 boss fixtures,
-and E1M1, E1M2, and E1M4 route results carry forward. The E1M3 waypoint driver
-still stalls without a reproduced defect; its historical fixed-input replay
-remains stale-source evidence. Neither this optimization nor the bounded
-audio run qualifies 35 Hz simulation pacing, 60 displayed updates/sec, full
-campaign audio continuity, or Jason's pending complete human playthrough. See
-the [r9 candidate receipt](../results/episode1-current-human-candidate-20260929-r9.json),
-[music startup measurement](../results/music-catalog-open-parallel-20260929.json),
-[audio smoke](../results/episode1-r9-audio-smoke-20260929.json), and
-[human-playtest handoff](episode1-playtest.md). The public Preview.3 tag is an
-older release snapshot; it does not contain the post-release development
-commits described by these receipts.
+The candidate source is commit `3e0b6308bac9dc152f9ae78fb8f23f70623b36e2`, pinned in the [R16 receipt](../results/episode1-current-human-candidate-20260929-r16.json). It adds a bounded drain for queued Windows audio buffers at normal unpaused shutdown. Gameplay, renderer, and audio-mixing algorithms did not change in this revision.
 
+Under official portable PowerShell 7.6.6, `Play.ps1 -Check` accepts the 36-map Steam Ultimate Doom IWAD and eleven-track catalog. A four-second current-source E1M1 headless audio run selected D_E1M1, completed all 186,480 submitted frames, drained the final 3,780 in 68.8 ms, and closed without simulation/audio/cleanup errors, queue-starvation observations, or rebuffers. A fresh 36-map smoke loaded each map, advanced 35 idle tics, and rendered two serial 320x200 frames. These establish startup/audio shutdown and map load/rasterization only; they do not establish keyboard play, map completion, audible quality, campaign-length audio, or 35-tic/60-display pacing.
+
+Focused campaign-transition, boss, menu, chainsaw, same-map, and worker-reload evidence remains pinned in the candidate receipt and earlier receipts. Human playthrough coverage is still required for one complete HMP route: E1M1 through E1M8, taking E1M3's secret exit through E1M9 and returning to E1M4, ending at the Episode 1 finale. Do not split this into map-by-map requests or substitute fixture/route automation for the human result. The public Preview.3 package remains an older snapshot; R16 is a development handoff, not a new release.
+
+The earlier R14/R12/R9 startup, audio, and renderer measurements remain historical and are preserved in the ledger, [audio study](audio.md), and [performance study](performance.md). The preceding 7.6.6 startup failure was caused by a catalog qualified under PowerShell 7.6.5 being rejected by an exact patch-version check; its [root-cause receipt](../results/music-startup-failure-rootcause-20260927.json) documents the correction and evidentiary limit.
 Jason's first playtest launch exposed a PowerShell 7.6.6 startup failure:
 qualified loop and one-shot music reports were tied to the exact 7.6.5 patch
 string even though their source and payload hashes were current. The readers
