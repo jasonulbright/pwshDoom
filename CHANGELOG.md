@@ -11,6 +11,7 @@ Ultimate Doom release gates remain open.
 
 ### Changed
 
+- Added an opt-in Classic `-AnsiEncoding Ansi256` path that maps Doom PLAYPAL colors to the nearest xterm 256-color entry. One same-frame measurement sends 28.65% fewer bytes than exact truecolor; live game timing is inconclusive, so `Pairs` remains the default. See the [experiment](docs/ansi-256-color.md).
 - Interactive audio now advances active music and effect voices from the PowerShell output clock across short simulation-packet gaps. Pause, map resets, and explicit drains still stop that fill; deterministic headless runs remain packet-exact by default. This reduces software queue starvation under transient load but does not claim measured acoustic latency or uninterrupted full-campaign playback.
 - The eleven-track Episode 1 music catalog opens its independent qualified readers through up to four PowerShell runspaces. Eager source/payload verification and read locks remain. Twenty-one focused checks pass; a warm-file-cache comparison cuts the reader-open stage median from 4.665 to 2.050 seconds (56.06%). This does not establish cold-launch or whole-game speedup.
 - Dense renderer snapshots now cache fixed-point actor projections for workers, and each worker skips sprites outside its output stripe. Serial/worker pixels remain exact in exercised Classic, Matrix/Katakana and AnsiArt/Katakana scenes. E3M6 sequential worker CPU improved in two reversed-order pairs; E1M3 timing remained inconclusive, and this does not qualify 60 Hz presentation.

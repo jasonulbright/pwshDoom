@@ -5,7 +5,7 @@
 function New-GameRenderPool {
     param($Context,$Codec,[int]$Workers=16,[ValidateSet('Classic','AnsiArt','Matrix')][string]$Style='Classic',
         [ValidateSet('Ascii','Katakana')][string]$GlyphSet='Ascii',
-        [ValidateSet('Pairs','ColorState')][string]$AnsiEncoding='Pairs')
+        [ValidateSet('Pairs','ColorState','Ansi256')][string]$AnsiEncoding='Pairs')
     $root=Split-Path $PSScriptRoot
     $pool=@{Workers=[Collections.Generic.List[object]]::new();Results=[object[]]::new($Workers);Count=$Workers;Style=$Style;
         Assets=(Join-Path $root ('local/session-'+[guid]::NewGuid().ToString('N')+'.assets'));

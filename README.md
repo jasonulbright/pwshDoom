@@ -35,6 +35,8 @@ Sound effects are enabled. Add `-Silent` to disable them or `-Ascii` if Japanese
 
 The game opens in a maximized Terminal window. If it asks for more space, reduce the font with **Ctrl+minus**. Classic needs 320×100 cells; character styles need 160×50. Extra space surrounds the centered image. Shrinking below the required grid pauses gameplay.
 
+Classic also accepts `-AnsiEncoding Ansi256` for an experimental indexed-color approximation. For example, add it to the `Play.ps1` launch command above. Exact truecolor `Pairs` remains the default; the measured byte saving has not established a live speed increase. See the [Ansi256 findings](docs/ansi-256-color.md).
+
 ## Current source status
 
 - Three display styles, menus, episode/difficulty selection, automap, save/load and sound effects, with optional prepared music.

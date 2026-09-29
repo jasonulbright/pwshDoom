@@ -305,6 +305,7 @@ normal-exit routes remain regressions.
 
 ## Current blockers and next work
 
+- The optional Classic indexed-color (`Ansi256`) path is a display-encoding experiment, not new campaign evidence. It keeps the same 320×200 framebuffer and game logic; the complete E1 human playthrough handoff remains unchanged and pending. Its output-volume result and inconclusive timing are recorded in [ansi-256-color.md](ansi-256-color.md).
 - [Recorded terminal session](../results/session-recorded-classic-game.json) verifies E1M1 intermission -> E1M2 and map-asset generation refresh. The [E1M2 route](campaign-e1m2.md) completes normally with 3,046 commands and independently continues into E1M3. Recorded AnsiArt playback passes all 42 integration checks after fixing an audio queue overflow. E1M3 normal completion and recorded Matrix entry into E1M4 now pass; secret paths, audio starvation and below-target pacing remain open.
 - Isolated controller fixtures verify episode finales, all four secret returns, par units, secret-visit history, inventory carryover and death/respawn. See results/campaign-transitions-session.json. Fixtures do not qualify map playthroughs or boss-triggered exits.
 - Record this one complete human Episode 1 playthrough as the next campaign evidence. For the later Ultimate Doom and Doom II release matrix, continue using ordinary-input completion routes or documented human playthroughs; keep targeted state fixtures separate from either form of evidence.

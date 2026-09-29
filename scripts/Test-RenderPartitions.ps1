@@ -4,13 +4,13 @@ param([string]$Wad='C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\
     [ValidateRange(1,32)][int]$Workers=7,
     [ValidateSet('Classic','AnsiArt','Matrix')][string]$Style='Classic',
     [ValidateSet('Ascii','Katakana')][string]$GlyphSet='Ascii',
-    [ValidateSet('Pairs','ColorState')][string]$AnsiEncoding='Pairs',
+    [ValidateSet('Pairs','ColorState','Ansi256')][string]$AnsiEncoding='Pairs',
     [string]$Report="$PSScriptRoot/../results/render-partitions.json",[switch]$Fuzz,[switch]$Palettes,
     [ValidateRange(1,4)][int]$Episode=1,[ValidateRange(1,9)][int]$Map=1,[ValidateRange(1,5)][int]$Skill=3)
 $ErrorActionPreference='Stop'
 . "$PSScriptRoot/FrameCodec.ps1"
 . "$PSScriptRoot/../src/CharacterCodec.ps1"
-. "$PSScriptRoot/../src/TerminalCodec.ps1";. "$PSScriptRoot/../src/AnsiColorState.ps1"
+. "$PSScriptRoot/../src/TerminalCodec.ps1";. "$PSScriptRoot/../src/AnsiColorState.ps1";. "$PSScriptRoot/../src/Ansi256.ps1"
 . "$PSScriptRoot/../src/PaletteCodec.ps1"
 $bundle=& "$PSScriptRoot/Build-EngineBundle.ps1";. $bundle
 . "$PSScriptRoot/../src/FastRenderer.ps1";. "$PSScriptRoot/../src/GameHost.ps1";. "$PSScriptRoot/../src/GameProcesses.ps1"
@@ -26,14 +26,14 @@ try {
     $palette=[int[][]]::new(256)
     for($i=0;$i -lt 256;$i++){$palette[$i]=@($content.Palette.Data[3*$i],$content.Palette.Data[3*$i+1],$content.Palette.Data[3*$i+2])}
     $pool=New-GameRenderPool $context (New-CodecContext $palette) $Workers -Style $Style -GlyphSet $GlyphSet -AnsiEncoding $AnsiEncoding
-    $classicCodec=if($AnsiEncoding -eq 'ColorState'){New-AnsiColorStateContext $palette}else{New-CodecContext $palette}
+    $classicCodec=if($AnsiEncoding -eq 'ColorState'){New-AnsiColorStateContext $palette}elseif($AnsiEncoding -eq 'Ansi256'){New-Ansi256Context $palette}else{New-CodecContext $palette -LazyCells}
     $characterCodec=if($Style -ne 'Classic'){New-CharacterCodecContext $palette $Style -GlyphSet $GlyphSet}else{$null}
     foreach($angle in 0,37,89,173,269) {
         $snapshot=New-GameRenderSnapshot $game;$snapshot.ConsolePlayer.Mobj.Angle=$angle*[Math]::PI/180
         if($Palettes){
             $snapshot.ConsolePlayer.PaletteNumber=@{0=0;37=3;89=8;173=12;269=13}[$angle]
             $rgb=Get-DoomPaletteRgb $content.Palette.Data $snapshot.ConsolePlayer.PaletteNumber
-            $classicCodec=if($AnsiEncoding -eq 'ColorState'){New-AnsiColorStateContext $rgb}else{New-CodecContext $rgb}
+            $classicCodec=if($AnsiEncoding -eq 'ColorState'){New-AnsiColorStateContext $rgb}elseif($AnsiEncoding -eq 'Ansi256'){New-Ansi256Context $rgb}else{New-CodecContext $rgb -LazyCells}
             if($Style -ne 'Classic'){$characterCodec=New-CharacterCodecContext $rgb $Style -GlyphSet $GlyphSet}
         }
         if($Fuzz){

@@ -1,0 +1,92 @@
+{
+  "format": "pwshDoom.Ansi256RuntimeMeasurement",
+  "recordedUtc": "2026-09-29",
+  "sourceRevision": "5d20536b2a2f1f12876c0aabaf7f9f36bd444c4a plus the pinned working-tree sources below",
+  "implementation": {
+    "mode": "Ansi256",
+    "default": false,
+    "style": "Classic only",
+    "mapping": "For each Doom PLAYPAL RGB, choose the nearest xterm indexed entry 16..255 by squared Euclidean RGB distance.",
+    "sequence": "SGR 38;5;n foreground and 48;5;n background; documented by Microsoft Console Virtual Terminal Sequences.",
+    "source": "https://learn.microsoft.com/windows/console/console-virtual-terminal-sequences"
+  },
+  "sameFrameBytes": {
+    "width": 320,
+    "height": 200,
+    "strips": 16,
+    "sourceIndexedFrameSha256": "0AB74456F8C5F9535633BBC4085AF834B4DB04A2DFCC4EE9BD88764DF2A9B94C",
+    "paletteRgbSha256": "FD895921B5D0A394612BB29852ED003D44D69F76DEC31C0DC6B5D5FC7D63F7BB",
+    "pairsBytes": 666169,
+    "ansi256Bytes": 475310,
+    "bytesSaved": 190859,
+    "reductionPercent": 28.65,
+    "meaning": "Same indexed framebuffer and palette encoded through the production 16-strip functions. This is output volume only, not encoder timing or terminal throughput. Ansi256 approximates RGB."
+  },
+  "correctness": {
+    "ansiStripRoundTrips": 24,
+    "roundTripSource": "scripts/Test-AnsiStrips.ps1",
+    "roundTripSourceSha256": "9CDEDE698964EA8D3518263E0822BDC52099AD266541DAE6582FB6CDDA3F0560",
+    "partitionViews": 5,
+    "partitionWorkers": 16,
+    "sourcePixelsCompared": 320000,
+    "partitionReportSha256": "BC59F228F3F0763C1F3833053849A9314CC77286A533DE0FE0C8A2A7853C5B30",
+    "meaning": "Exact source-index and worker/serial equivalence within each selected encoder. It does not assert equality between indexed and truecolor RGB output."
+  },
+  "launcherPreflight": {
+    "entryPoint": "Play.ps1",
+    "ansiEncoding": "Ansi256",
+    "result": "Ready",
+    "powerShell": "7.6.5",
+    "ultimateDoomMapsFound": 36,
+    "gameStarted": false,
+    "playScriptSha256": "0DDC71A25E01E21A15A876A6F7F9A5C6A4672F52B4A95E419A75311F7EFEC3AF"
+  },
+  "liveRuns": [
+    {
+      "mode": "Ansi256",
+      "durationSeconds": 15.0044,
+      "completedTerminalWrites": 647,
+      "terminalWritesPerSecond": 43.1207,
+      "simulationTics": 524,
+      "simulationTicsPerSecond": 34.9231,
+      "frameLatencyMedianMs": 36.3968,
+      "frameLatencyP95Ms": 52.8507,
+      "workerWorkingSetBytesAtExit": 4006797312,
+      "rawReportSha256": "3DEBDEDBE4FB02C4906293514F487CCA20056D7866C8376A455AB6CF64F574F4"
+    },
+    {
+      "mode": "Pairs",
+      "durationSeconds": 15.0274,
+      "completedTerminalWrites": 156,
+      "terminalWritesPerSecond": 10.3810,
+      "simulationTics": 169,
+      "simulationTicsPerSecond": 11.2461,
+      "frameLatencyMedianMs": 88.2866,
+      "frameLatencyP95Ms": 628.1529,
+      "workerWorkingSetBytesAtExit": 1277841408,
+      "rawReportSha256": "5EAB58A25C320928229A26D2C2E1617626278E7234811537C6B0F3BE35C7DC10"
+    }
+  ],
+  "liveComparisonConclusion": "One sequential run per mode; no controlled or logged system-load conditions. The large throughput and working-set variation makes this comparison inconclusive and unsuitable for encoder speed attribution. Terminal writes are not monitor-presented frame counts. Neither run reaches the 35-tic/60-display target.",
+  "runtime": {
+    "powershell": "7.6.5",
+    "workers": 16,
+    "style": "Classic",
+    "sourceSize": "320x200",
+    "sound": false,
+    "iwadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F"
+  },
+  "pinnedSourceSha256": {
+    "src/Ansi256.ps1": "EA3FF6CC0EA380E0D7FF5069D4E7244DA984991681FF605BB8D3AC5AC8293A94",
+    "src/PaletteCodec.ps1": "E3EE226131E2AB3D4AAFE8F4686BE3594AD88D198A3EB756B317123DB24696D3",
+    "src/GameProcesses.ps1": "3210BA6CCDFA17BD41250619EDE281EA80ACC0BE5CDA10F1E6409DAC3DC0996F",
+    "src/TerminalCodec.ps1": "7110F9BBD86662C5FCC45CD9E3E7BF20415A4F6C3FA1EE2829A064EAD5497F7A",
+    "Play.ps1": "0DDC71A25E01E21A15A876A6F7F9A5C6A4672F52B4A95E419A75311F7EFEC3AF",
+    "Start-Doom.ps1": "7CE797D7E9A3A5F8167BF5CF949E674A25B97BC31B8F217549085E2BBE0E6082",
+    "scripts/Invoke-Doom.ps1": "A550A83BA11284BF977484D4E952A5E356A5EB643E8C1D56A81EE6A1CE721CEF",
+    "scripts/Invoke-GameRenderWorker.ps1": "0A90E06044E88ABFF24DC557E001172BE02E1D893E95CC00CF13DE8725DD6E4A",
+    "scripts/Test-RenderPartitions.ps1": "3FB1949F60B76257130A4704A8AB1FE0E7EFACB625F488BFC592625AEABCAF59"
+  },
+  "rawReports": "Ignored under local/ansi256-live-current-20260929.json and local/pairs-live-current-20260929.json; hashes are listed above.",
+  "status": "Optional experimental encoding; exact truecolor Pairs remains default."
+}

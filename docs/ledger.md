@@ -4560,3 +4560,31 @@ cancellation upper bound. This closes the reproduced startup blocker for the
 short integration path only; it does not qualify visible Terminal output,
 audible quality, or campaign continuity. The [compact receipt](../results/episode1-current-audio-startup-7.6.6-20260929.json)
 pins the [ignored raw report](../local/current-audio-startup-recheck-20260929.json).
+
+## 2026-09-29 — Add experimental indexed-color Classic output
+
+Added the PowerShell `Ansi256` encoder as an optional Classic mode and exposed
+it through `Play.ps1`, `Start-Doom.ps1`, the render workers and existing trial
+tools. It maps PLAYPAL colors to the nearest xterm indexed RGB value and emits
+indexed foreground/background SGR; the original half-block framebuffer and
+engine output remain unchanged. The terminal chooses actual indexed colors,
+so this mode intentionally gives up exact RGB. `Pairs` remains the default.
+Microsoft documents the [indexed SGR sequence](https://learn.microsoft.com/windows/console/console-virtual-terminal-sequences).
+
+The existing ANSI decoder suite passes 24 truecolor/indexed round-trips. A
+16-worker Classic render-partition check passes five E1M1 views and compares
+320,000 source pixels against serial output. On one identical 320×200 indexed
+frame and palette, the production 16-strip encoder emits 666,169 bytes with
+Pairs versus 475,310 with Ansi256 (28.65% fewer bytes). This is output volume,
+not a timing result. The hashes, trial settings and raw-report fingerprints
+are in the [measurement receipt](../results/ansi256-runtime-20260929.json).
+
+The live Windows Terminal Ansi256 run completes 647 writes/43.12 per second
+and 524 simulation tics/34.92 per second over 15 seconds. The later single
+Pairs run falls to 156 writes/10.38 per second and 169 tics/11.25 per second,
+with a much larger p95 frame latency. These unpaired sequential sessions
+have no controlled or recorded machine-load conditions, so they do not show
+that either encoding caused the difference. Neither qualifies 60 writes/sec
+or 35 simulation tics/sec, and Terminal writes do not measure monitor
+presentations. Keep the indexed mode experimental; a repeated matched-state
+comparison is still needed before making performance claims.

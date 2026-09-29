@@ -3,7 +3,7 @@
 # External window capture. FFmpeg is not an engine, renderer, or game dependency.
 param([ValidateSet('Classic','AnsiArt','Matrix')][string]$Style='Matrix',
     [ValidateSet('Strips','Batch')][string]$TerminalOutput='Strips',
-    [ValidateSet('Pairs','ColorState')][string]$AnsiEncoding='Pairs',
+    [ValidateSet('Pairs','ColorState','Ansi256')][string]$AnsiEncoding='Pairs',
     [ValidateSet('Ascii','Katakana')][string]$GlyphSet='Katakana',
     [string]$Wad='C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\base\DOOM.WAD',
     [string]$Replay="$PSScriptRoot/../results/e1m1-route.json",
@@ -47,7 +47,7 @@ if($RecordInput -and (Test-Path -LiteralPath ($prefix+'-input.json'))){throw 'In
 $recorder=$null;$target=$null;$failure=$null;$captureQpc=$null;$exitCode=$null;$stderr='';$game=$null
 $audioRecorder=$null;$audioExitCode=$null;$audioStdout=$null;$audioStderr=$null;$clockAnchors=[Collections.Generic.List[object]]::new()
 $sourceNames=@('Start-Doom.ps1','scripts/Invoke-Doom.ps1','scripts/Record-DoomReplay.ps1','scripts/Record-ProcessAudio.ps1','scripts/Merge-DoomCaptureAudio.ps1','src/ProcessAudioCapture.ps1','src/CaptureClock.ps1','src/CaptureTimeline.ps1','src/TerminalOutput.ps1')
-$sourceNames+=@('src/AnsiColorState.ps1','src/TerminalCodec.ps1','scripts/FrameCodec.ps1')
+$sourceNames+=@('src/AnsiColorState.ps1','src/Ansi256.ps1','src/TerminalCodec.ps1','scripts/FrameCodec.ps1')
 $sourceNames+=@('src/FastRenderer.ps1','src/RenderFuzz.ps1','src/GameHost.ps1','src/SnapshotTransport.ps1','src/InputReplay.ps1')
 $sourceNames+=@('src/PaletteCodec.ps1','src/CharacterCodec.ps1','src/RenderAssets.ps1','src/GameProcesses.ps1','src/SimulationProcess.ps1','scripts/Invoke-SimulationWorker.ps1','scripts/Invoke-GameRenderWorker.ps1')
 $sourceSnapshot=@($sourceNames|ForEach-Object {@{Path=$_;Sha256=(Get-FileHash "$PSScriptRoot/../$_").Hash}})

@@ -1,7 +1,8 @@
 #requires -Version 7.4
 $ErrorActionPreference='Stop'
-. "$PSScriptRoot/ParallelScene.ps1"
+. "$PSScriptRoot/FrameCodec.ps1"
 . "$PSScriptRoot/../src/TerminalCodec.ps1"
+. "$PSScriptRoot/../src/Ansi256.ps1"
 function Read-AnsiStripPixels {
     param([string]$Text,[int]$Width,[int]$Height,[int[][]]$TerminalPalette,[int]$ColumnOffset=0,[int]$RowOffset=0)
     $pixels=[int[]]::new($Width*$Height);[Array]::Fill($pixels,-1)
@@ -27,7 +28,7 @@ function Read-AnsiStripPixels {
 $cases=0
 foreach($mode in 'TrueColor','Ansi256'){
     $palette=New-TestPalette 256
-    $context=if($mode -eq 'TrueColor'){New-CodecContext $palette}else{New-Ansi256Context $palette}
+    $context=if($mode -eq 'TrueColor'){New-CodecContext $palette -LazyCells}else{New-Ansi256Context $palette}
     foreach($pattern in 'Coherent','Entropy'){
         $source=New-IndexedFrame 17 13 3 $pattern 256
         foreach($workers in 1,3,7){

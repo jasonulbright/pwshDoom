@@ -1,5 +1,9 @@
 # Terminal write granularity investigation
 
+The later optional indexed-color encoding is a separate tradeoff study; see
+the [Ansi256 experiment](ansi-256-color.md). It changes color precision, while
+the Strips/Batch comparison below preserves identical ANSI bytes.
+
 September 19, 2026. Full Ultimate Doom release requirements remain unchanged.
 
 The latest Classic E1M2 capture has 4,533 level-state frames. Mean host output time is 12.3991 ms (median 11.2826, p95 21.1499), compared with 1.3888 ms submission and 1.4522 ms collection. These phases identify output as a measurement target; they do not prove where Terminal itself spends that time.

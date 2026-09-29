@@ -1,7 +1,7 @@
 #requires -Version 7.4
 # SPDX-License-Identifier: GPL-2.0-or-later
 param([Parameter(Mandatory)][ValidateSet('Strips','Batch')][string]$Mode,
-    [ValidateSet('Pairs','ColorState')][string]$AnsiEncoding='Pairs',
+    [ValidateSet('Pairs','ColorState','Ansi256')][string]$AnsiEncoding='Pairs',
     [Parameter(Mandatory)][ValidatePattern('^[a-z0-9-]+$')][string]$Name)
 $ErrorActionPreference='Stop';Set-StrictMode -Version Latest
 $root=[IO.Path]::GetFullPath("$PSScriptRoot/..");Push-Location $root

@@ -10,7 +10,7 @@ function Get-DoomPaletteRgb {
 function New-DoomPaletteCodecs {
     param([byte[]]$Data,[ValidateSet('Classic','Matrix','AnsiArt')][string]$Style,
         [ValidateSet('Ascii','Katakana')][string]$GlyphSet='Ascii',
-        [ValidateSet('Pairs','ColorState')][string]$AnsiEncoding='Pairs')
+        [ValidateSet('Pairs','ColorState','Ansi256')][string]$AnsiEncoding='Pairs')
     if($Data.Length -lt 14*768 -or $Data.Length%768){throw 'PLAYPAL must contain the fourteen Doom palettes.'}
     # Only vanilla selection indices 0..13 are used. All small style tables are
     # prepared before ready; pair strings are populated on demand in each worker.
@@ -19,6 +19,7 @@ function New-DoomPaletteCodecs {
         $rgb=Get-DoomPaletteRgb $Data $number
         $codecs[$number]=if($Style -eq 'Classic'){
             if($AnsiEncoding -eq 'ColorState'){New-AnsiColorStateContext $rgb -LazyCells}
+            elseif($AnsiEncoding -eq 'Ansi256'){New-Ansi256Context $rgb}
             else{New-CodecContext $rgb -LazyCells}
         }else{New-CharacterCodecContext $rgb $Style -GlyphSet $GlyphSet -LazyCells}
     }

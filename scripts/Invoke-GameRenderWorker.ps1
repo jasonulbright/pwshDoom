@@ -3,7 +3,7 @@
 param([string]$Assets,[string]$Channel,[int]$FirstColumn,[int]$EndColumn,[int]$OwnerPid,[ValidateRange(0,31)][int]$WorkerIndex=0,
     [ValidateSet('Classic','AnsiArt','Matrix')][string]$Style='Classic',
     [ValidateSet('Ascii','Katakana')][string]$GlyphSet='Ascii',
-    [ValidateSet('Pairs','ColorState')][string]$AnsiEncoding='Pairs')
+    [ValidateSet('Pairs','ColorState','Ansi256')][string]$AnsiEncoding='Pairs')
 $ErrorActionPreference='Stop'
 . "$PSScriptRoot/../src/FastRenderer.ps1"
 . "$PSScriptRoot/../src/RenderAssets.ps1"
@@ -11,6 +11,7 @@ $ErrorActionPreference='Stop'
 . "$PSScriptRoot/../src/TerminalCodec.ps1"
 . "$PSScriptRoot/FrameCodec.ps1"
 . "$PSScriptRoot/../src/AnsiColorState.ps1"
+. "$PSScriptRoot/../src/Ansi256.ps1"
 . "$PSScriptRoot/../src/CharacterCodec.ps1"
 . "$PSScriptRoot/../src/PaletteCodec.ps1"
 $map=[IO.MemoryMappedFiles.MemoryMappedFile]::OpenExisting($Channel);$view=$map.CreateViewAccessor()

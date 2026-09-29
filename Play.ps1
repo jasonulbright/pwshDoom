@@ -3,7 +3,8 @@
 [CmdletBinding()]
 param([string]$Wad,[ValidateSet('Classic','Matrix','AnsiArt')][string]$Style,
     [ValidateRange(1,32)][int]$Workers=16,[switch]$Silent,[switch]$Ascii,
-    [switch]$Check,[ValidateRange(0,3600)][int]$Seconds=0,[string]$Report,[string]$MusicCatalog)
+    [switch]$Check,[ValidateRange(0,3600)][int]$Seconds=0,[string]$Report,[string]$MusicCatalog,
+    [ValidateSet('Pairs','ColorState','Ansi256')][string]$AnsiEncoding='Pairs')
 $ErrorActionPreference='Stop'
 try{
     if($Silent -and $MusicCatalog){throw 'Choose -Silent or -MusicCatalog, not both. Omit -MusicCatalog for sound effects only.'}
@@ -62,7 +63,7 @@ try{
     if($MusicCatalog){Write-Host 'Prepared music enabled. Your catalog must cover the maps, intermissions and endings you play.'}
     else{Write-Host 'Sound effects are on unless -Silent is supplied. Use -MusicCatalog with your prepared catalog to enable music.'}
     Write-Host 'If the game asks for more space, reduce Terminal font size with Ctrl+minus.'
-    $launch=@{Wad=$Wad;Style=$Style;Workers=$Workers;Maximized=$true;Sound=(-not $Silent);Seconds=$Seconds}
+    $launch=@{Wad=$Wad;Style=$Style;Workers=$Workers;Maximized=$true;Sound=(-not $Silent);Seconds=$Seconds;AnsiEncoding=$AnsiEncoding}
     if($Ascii){$launch.GlyphSet='Ascii'}
     if($Report){$launch.Report=[IO.Path]::GetFullPath($Report)}
     if($MusicCatalog){$launch.MusicCatalog=$MusicCatalog}
