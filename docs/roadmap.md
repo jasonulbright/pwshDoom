@@ -49,8 +49,12 @@ startup or whole-game measurement. All 21 focused music checks pass, and a
 five-second sound-enabled headless E1M1 run selects D_E1M1 and closes audio
 cleanly under PowerShell 7.6.5. All 21 focused checks also pass on 7.6.6; its
 five-second E1M1 run returns all 219,240 submitted audio frames and closes
-cleanly, with one queue-starvation poll after packet 173 and no resume. These
-checks verify short startup only. The gameplay, renderer, save, menu, and campaign route code did not
+cleanly, with one queue-starvation poll after packet 173 and no resume.
+
+Play.ps1 -Check also returns Ready under 7.6.6 with the 36-map IWAD and
+11-track catalog. A fresh current-checkout realtime-audio worker run selects
+D_E1M1, observes no queue starvation or rebuffer, and closes cleanly; the 5,040
+queued frames at duration exit are only a cancellation upper bound ([receipt](../results/episode1-current-audio-startup-7.6.6-20260929.json)). This resolves the prior startup failure through a five-second headless check, not full-session playback. The gameplay, renderer, save, menu, and campaign route code did not
 change from r8, so its map smoke, 69 transition fixtures, 97 boss fixtures,
 and E1M1, E1M2, and E1M4 route results carry forward. The E1M3 waypoint driver
 still stalls without a reproduced defect; its historical fixed-input replay

@@ -4545,3 +4545,18 @@ audible quality. The [campaign matrix](campaign-matrix.md) records its active
 timing and reiterates that the sample is not map completion. No product source
 or qualification status changed. Evidence: the
 [source-pinned E3M6 receipt](../results/e3m6-realtime-audio-loaded-20260928.json).
+
+## 2026-09-29 — Recheck the Episode 1 audio startup on PowerShell 7.6.6
+
+The user-reported music-qualification startup failure is now verified through
+the fast launcher preflight under both 7.6.5 and 7.6.6, followed by the actual simulation/audio workers on the
+same workstation. A five-second, 16-worker, headless E1M1 run opened the full
+local Episode 1 catalog under PowerShell 7.6.6, selected D_E1M1, advanced 174
+tics, mixed 181 blocks (seven output-clock fill blocks), and reported zero
+queue-starvation observations, zero rebuffer events, no worker or cleanup
+error, and clean waveOut shutdown. It submitted 228,060 frames and returned
+223,020; the remaining 5,040 queued frames are the duration-shutdown
+cancellation upper bound. This closes the reproduced startup blocker for the
+short integration path only; it does not qualify visible Terminal output,
+audible quality, or campaign continuity. The [compact receipt](../results/episode1-current-audio-startup-7.6.6-20260929.json)
+pins the [ignored raw report](../local/current-audio-startup-recheck-20260929.json).

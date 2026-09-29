@@ -36,7 +36,13 @@ open stage improves from a 4.665-second to 2.050-second median; 21 focused
 music checks pass on PowerShell 7.6.5 and 7.6.6. Five-second sound-enabled
 headless E1M1 host checks pass on both runtimes; the 7.6.6 run returns all
 219,240 submitted audio frames and closes cleanly, with one queue-starvation
-poll after packet 173 and no resume. These checks do not establish cold-start
+poll after packet 173 and no resume.
+
+Play.ps1 -Check also returns Ready under 7.6.6 with the 36-map IWAD and
+11-track catalog. A fresh five-second realtime-audio run through the actual
+workers under PowerShell 7.6.6 selects D_E1M1 with zero starvation or rebuffer
+observations and clean device shutdown ([receipt](../results/episode1-current-audio-startup-7.6.6-20260929.json)); this is a short headless check, not campaign or visible-output qualification.
+These checks do not establish cold-start
 latency, continuous campaign audio, or game/display pacing. See the [visibility receipt](../results/visibility-fixed-point-allocation-20260929.json),
 [music-open measurement](../results/music-catalog-open-parallel-20260929.json),
 and the [R9 audio receipts for PowerShell 7.6.5](../results/episode1-r9-audio-smoke-20260929.json)

@@ -1,0 +1,55 @@
+{
+  "Schema": "pwshDoom.current-audio-startup-recheck.v1",
+  "RecordedUtc": "2026-09-29T08:37:12.7739678Z",
+  "ImplementationCommit": "b79b668af98d51246c340cc2e3ae5673883cc894",
+  "CheckoutHead": "52f65fe76689dda3dac50244f3e29d1d3f1faf81",
+  "Runtime": "7.6.6",
+  "RuntimeExecutable": "C:\\Users\\jason\\AppData\\Local\\Microsoft\\WindowsApps\\Microsoft.PowerShell_8wekyb3d8bbwe\\pwsh.exe",
+  "Configuration": {
+    "Episode": 1,
+    "Map": 1,
+    "Skill": 3,
+    "Workers": 16,
+    "Sound": true,
+    "MusicCatalog": "local/music-prepared-episode1.json",
+    "Headless": true,
+    "RealtimeAudio": true,
+    "RequestedSeconds": 5,
+    "TerminalWrites": 0,
+    "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F"
+  },
+  "Outcome": {
+    "ExitReason": "Duration",
+    "DurationSeconds": 5.0011955,
+    "SimulationTics": 174,
+    "CompletedUpdates": 160,
+    "CompletedUpdatesPerSecond": 31.992350628964616,
+    "SelectedMusic": "D_E1M1",
+    "AudioPackets": 174,
+    "MixedBlocks": 181,
+    "GeneratedRealtimeBlocks": 7,
+    "SubmittedFrames": 228060,
+    "ReturnedCompletedFrames": 223020,
+    "CancelledQueuedFramesUpperBound": 5040,
+    "RebufferCount": 0,
+    "QueueStarvationObservations": 0,
+    "DeviceClosed": true,
+    "AudioError": null,
+    "AudioCleanupError": null,
+    "PcmSha256": "E7F44360F5079C2C1FD5A8FB402B8F6809B73A18BB81A7C4C89E2F61B5181900"
+  },
+  "RawReport": {
+    "Path": "local/current-audio-startup-recheck-20260929.json",
+    "Sha256": "8CBA1850BABC5A87487E9A8F0781CA8D69460649DB2198D4E15AC1E1F146D830",
+    "Bytes": 498409
+  },
+  "Limits": "One five-second headless worker integration run. The complete local audio catalog was opened and checked against the Steam Ultimate Doom IWAD. This is not Terminal presentation, acoustic review, campaign continuity, or a displayed-frame-rate result. The 5,040 queued frames are a shutdown cancellation upper bound, not an observed mid-session underrun.",
+  "LauncherPreflight": {
+    "Runtime": "7.6.6",
+    "Ready": true,
+    "EpisodeMaps": 36,
+    "MusicTrackReports": 11,
+    "WindowsTerminal": "C:\\Users\\jason\\AppData\\Local\\Microsoft\\WindowsApps\\wt.exe",
+    "Meaning": "Metadata-only preflight passed. Audio workers independently validated payload integrity and IWAD score identity during the run."
+  }
+}
