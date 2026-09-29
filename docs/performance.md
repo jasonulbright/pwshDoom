@@ -943,3 +943,17 @@ not a repeatable gain, and candidate p95 was worse. The edit was reverted.
 These are serial fixed-state phase timings, not concurrent-worker, host, or
 display performance. The [compact comparison receipt](../results/renderer-post-properties-hoist-rejected-20260929.json)
 indexes the ignored raw profiles and exact source hashes.
+
+## Rejected translated-flat color cache — September 29, 2026
+
+A candidate lazily cached each flat after translation through the selected
+colormap, keyed by flat and light. Two fixed-state E3M6 profiles per variant
+covered 640 serial production-equivalent stripe renders; the exact frame and
+per-worker hashes matched. Geometry median/p95 was 3.8148/5.3055 ms at
+baseline and 3.927/5.4123 ms with the cache. Total median/p95 was
+7.0278/9.2991 ms and 7.0181/9.3107 ms, respectively. The 0.14% total-median
+difference is noise, geometry was 2.9% slower, and candidate p95 was worse;
+the source was restored. Cache population cost and memory growth were not
+measured. These serial fixed-state timings do not establish host or display
+performance. The [compact comparison receipt](../results/rejected-flat-color-cache-20260929.json)
+indexes the ignored raw profiles and exact source hashes.

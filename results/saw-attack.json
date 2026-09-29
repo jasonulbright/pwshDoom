@@ -1,25 +1,29 @@
 {
-  "FinishedUtc": "2026-09-29T12:13:39.3813385Z",
   "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
-  "Scope": "Input-to-player-weapon-state integration check with a fixed E1M2 player/imp position; not a campaign route or replay of the human crash session.",
+  "FinishedUtc": "2026-09-29T14:39:29.6786266Z",
   "Checks": [
     {
       "Check": "E1M2 chainsaw attack-button path executes the player weapon action without comparison failure",
       "Evidence": {
-        "TargetType": "Troop",
         "PlayerAngleDegrees": 4.499999983236194,
+        "TargetHealthBefore": 60,
         "TargetHealthAfter": 56,
-        "SimulationTicsToHit": 4,
-        "TargetHealthBefore": 60
+        "TargetType": "Troop",
+        "SimulationTicsToHit": 4
       }
     },
     {
       "Check": "Doom II homing tracer angle adjustment executes",
       "Evidence": {
-        "AngleAfter": 4093640704,
+        "AngleBefore": 0,
         "TargetType": "Troop",
-        "AngleBefore": 0
+        "AngleAfter": 4093640704
       }
     }
-  ]
+  ],
+  "Scope": "Input-to-player-weapon-state integration check with a fixed E1M2 player/imp position; not a campaign route or replay of the human crash session.",
+  "PowerShell": "7.6.6",
+  "RepositoryCommit": "fe40b357dc297bf22292a6e0cb11329a7d0123d7",
+  "GameSourceCommit": "cdd5fdd68734dbc663367f44117fd8a49ac17694",
+  "RuntimeArchiveSha256": "02FE458BE20493FBDF43F61EA20610B811EE6C738AB1676C61B9CFCD1A33C860"
 }

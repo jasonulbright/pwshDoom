@@ -23,24 +23,18 @@ receipt](../results/episode1-current-human-candidate-20260928-r5.json),
 [geometry/cache supplement](../results/episode1-current-human-candidate-20260928-r2.json),
 and [realtime-audio supplement](../results/episode1-current-human-candidate-20260928-r3.json); the [visible-actor profile](../results/renderer-visible-actor-filter-20260928.json) reports sequential worker-equivalent CPU and does not claim a frame-rate gain.
 
-The current single-playthrough handoff is R14 at source commit
-`cdd5fdd68734dbc663367f44117fd8a49ac17694`; see its [candidate receipt](../results/episode1-current-human-candidate-20260929-r14.json)
-and the exact [complete Episode 1 scope](episode1-playtest.md). Jason's human
-route remains pending. R14 makes a new sound stop the prior active sound from
-the same emitter regardless of category, while independent emitters continue
-to mix. All 27 deterministic mixer checks and 7 production packet-path checks
-pass. A fresh five-second current-source headless audio run selects D_E1M1,
-returns 226,800/231,840 submitted frames, closes cleanly, and has no software
-starvation or rebuffer observations. A separate scripted-attack run exercises
-14 audio events with one active voice through the same device worker and
-closes cleanly. Neither five-second run is an audible review or campaign
-continuity result. The stored route replay diverges from current gameplay at
-tic 350 and does not qualify that audio output. R13's focused same-map/changed-map checks and
-reset measurement remain in the [R13 receipt](../results/episode1-current-human-candidate-20260929-r13.json).
-The 36-map smoke, 69 transition fixtures, 97 boss checks and E1M1/E1M2/E1M4
-route regressions carry forward from their original pins. None completes the
-required human route, including the E1M3 secret exit through E1M9 and back to
-E1M4. Full-session audio, 35-tic simulation, 60 displayed updates/sec, and
+The current single-playthrough handoff is R15 at game-source commit
+`cdd5fdd68734dbc663367f44117fd8a49ac17694`; see the [candidate receipt](../results/episode1-current-human-candidate-20260929-r15.json)
+and the exact [complete Episode 1 scope](episode1-playtest.md). Under the
+official portable PowerShell 7.6.6 x64 runtime, the current IWAD/catalog pass
+launcher preflight and a real-device D_E1M1 startup; the focused chainsaw,
+campaign-transition, boss-progression, and menu-input checks pass 2, 69, 97,
+and 10 checks, respectively. Transition fixtures load real E1M9 and E1M4
+worlds and verify secret history and finale state, but they do not complete
+maps. The 36-map smoke and E1M1/E1M2/E1M4 ordinary-input routes carry forward
+from their pinned receipts. Jason's one complete human route remains pending,
+including the secret exit through E1M9, return to E1M4, and the E1M8 finale.
+Full-session audio, 35-tic simulation, 60 displayed updates/sec, and
 original-executable parity remain unqualified.
 
 The earlier R12 handoff was pinned at source commit

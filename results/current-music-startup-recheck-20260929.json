@@ -1,0 +1,41 @@
+{
+  "FinishedUtc": "2026-09-29T14:33:11.2915078Z",
+  "RepositoryCommit": "fe40b357dc297bf22292a6e0cb11329a7d0123d7",
+  "GameSourceCommit": "cdd5fdd68734dbc663367f44117fd8a49ac17694",
+  "PowerShell": "7.6.5",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "MusicCatalogSha256": "0E9C9542C75F4D5E2D7FC71E42FAFBB58F94321C3B8A49BA0C9AC5A93752EE58",
+  "LauncherPreflight": {
+    "Ready": true,
+    "Maps": 36,
+    "MusicQualificationTracks": 11
+  },
+  "Session": {
+    "Mode": "Headless realtime audio",
+    "Episode": 1,
+    "Map": 1,
+    "Skill": 3,
+    "Seconds": 3.0010138,
+    "ExitReason": "Duration",
+    "SimulationTics": 104,
+    "RenderUpdates": 106,
+    "Error": null,
+    "AudioSelectedTrack": "D_E1M1",
+    "MusicFrames": 139860,
+    "SubmittedAudioFrames": 139860,
+    "ReturnedAudioFrames": 134820,
+    "CancelledQueuedFramesUpperBound": 5040,
+    "DeviceClosed": true,
+    "AudioError": null,
+    "RebufferCount": 0,
+    "QueueStarvationObservations": 0,
+    "ClippedSamples": 0,
+    "CleanupError": null
+  },
+  "RawReport": {
+    "Path": "local/episode1-audio-startup-current-20260929.json",
+    "Sha256": "1F160EE6C3923C713882107D251FD9C83BADF055964D25F2FDDB31A907BFA012"
+  },
+  "Result": "Current music-qualification startup failure did not reproduce; actual D_E1M1 playback initialized and closed cleanly.",
+  "Limits": "Verified with available PowerShell 7.6.5 only. This three-second one-map run does not verify PowerShell 7.6.6, acoustic quality, visible presentation, full-session continuity, or campaign playback."
+}

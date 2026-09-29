@@ -295,3 +295,21 @@ strengthens loop-boundary and device-continuity evidence; it is not an
 acoustic review, active-combat test, full-campaign audio qualification, or
 human route. The [portable receipt](../results/audio-e1m1-realtime-loop-boundary-r15-20260929.json)
 pins the IWAD, catalog, source, and ignored raw report.
+
+## Current music-qualification startup recheck — September 29, 2026
+
+The earlier `Music loop has no current successful qualification` startup error
+did not reproduce with the current catalog and the available PowerShell 7.6.5
+runtime. `Play.ps1 -Check` reports Ready for all 36 maps and 11 music tracks.
+A three-second headless realtime-audio E1M1 session selected D_E1M1, advanced
+104 tics, mixed 139,860 frames, and closed the audio device without simulation,
+audio, cleanup, queue-starvation, or rebuffer errors. The 5,040-frame tail is
+the shutdown-cancellation upper bound. The same preflight and three-second
+actual-device run also pass under the official portable PowerShell 7.6.6 x64
+release, selecting D_E1M1 with 120 render updates, no audio errors/starvation/
+rebuffer, and a clean device close. The original failed report and its exact
+catalog snapshot are no longer available, so the cause of that earlier failure
+is not established. These are short startup checks, not evidence of audible
+quality or full-session playback. See the [7.6.5 receipt](../results/current-music-startup-recheck-20260929.json),
+[7.6.6 receipt](../results/current-music-startup-recheck-7.6.6-20260929.json),
+which pins the ignored raw report hash.

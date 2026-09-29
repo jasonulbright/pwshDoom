@@ -12,11 +12,11 @@ A normal completion is enough; 100% kills, items, and secrets are not required. 
 
 ## Build and launch
 
-Use the development build with game source at commit `cdd5fdd68734dbc663367f44117fd8a49ac17694` on branch `codex/feasibility-study`. R14 adds same-emitter sound replacement across sound categories to R13; gameplay and rasterizer behavior are unchanged. The source-pinned [R14 candidate receipt](../results/episode1-current-human-candidate-20260929-r14.json) records focused checks and carried-forward Episode 1 readiness evidence.
+Use the development build with game source at commit `cdd5fdd68734dbc663367f44117fd8a49ac17694` on branch `codex/feasibility-study`. R15 is a verification refresh of the R14 code, not a new game-source revision. It rechecks audio startup, the chainsaw fix, Episode 1 transitions, boss progression, and menu input under PowerShell 7.6.6. The [R15 candidate receipt](../results/episode1-current-human-candidate-20260929-r15.json) pins the exact runtime, WAD, catalog, and focused evidence.
 
 The focused worker tests pass 12 checks on same-map save/new-game paths, 12 on changed-map paths, and four session-worker cases with exact screen/menu/automap output and persistent workers. One sequential PresentMon pair measured the same-map reload pause at 0.358 seconds versus 6.178 seconds before the change; overall update rate did not improve, and the observed display rate remains below 60. This is a targeted reset improvement, not a pacing qualification. See the [measurement receipt](../results/renderer-same-map-reset-presentmon-20260929.json).
 
-`Play.ps1 -Check` reports `Ready` for the Steam IWAD's 36 maps and all 11 catalog reports under PowerShell 7.6.5. R14 passes 27 deterministic mixer checks and 7 production packet-path checks for same-emitter replacement across sound categories. A five-second current-source headless scripted-attack run produced 14 audio events and a peak of one active voice through the real audio worker while D_E1M1 played; the device closed cleanly with no reported software queue-starvation or rebuffer observations. It submitted 230,580 frames and completed 225,540, with a 5,040-frame shutdown-cancellation upper bound. This verifies a short effect/mixer/device path, not sound quality or same-emitter cross-category playback at the device. The music-only startup check is also recorded [here](../results/episode1-current-audio-startup-r14-20260929.json). A saved audio replay diverges from the current gameplay state at tic 350, so its output cannot qualify this build's rendered audio. See the [scripted effect receipt](../results/episode1-current-audio-effects-r14-20260929.json). The chainsaw crash report and verified fix are recorded under [current evidence and limits](#current-evidence-and-limits); 35-tic/60-display pacing is not qualified.
+`Play.ps1 -Check` reports `Ready` for the Steam IWAD's 36 maps and all 11 catalog reports under PowerShell 7.6.5 and 7.6.6. R14's 27 deterministic mixer checks and 7 production packet-path checks pass for same-emitter replacement across sound categories. A five-second current-source headless scripted-attack run produced 14 audio events and a peak of one active voice through the real audio worker while D_E1M1 played; the device closed cleanly with no reported software queue-starvation or rebuffer observations. It submitted 230,580 frames and completed 225,540, with a 5,040-frame shutdown-cancellation upper bound. This verifies a short effect/mixer/device path, not sound quality or same-emitter cross-category playback at the device. The current 7.6.6 startup recheck and exact-runtime chainsaw action are in the [R15 receipt](../results/episode1-current-human-candidate-20260929-r15.json). A saved audio replay diverges from the current gameplay state at tic 350, so its output cannot qualify this build's rendered audio. See the [scripted effect receipt](../results/episode1-current-audio-effects-r14-20260929.json). The chainsaw crash report and verified fix are recorded under [current evidence and limits](#current-evidence-and-limits); 35-tic/60-display pacing is not qualified.
 
 From PowerShell, use the existing checkout and your Steam Ultimate Doom `DOOM.WAD`:
 
@@ -25,10 +25,10 @@ $root = 'C:\projects\pwshDoom'
 $wad = 'C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\base\DOOM.WAD'
 $local = Join-Path $root 'local'
 $catalog = Join-Path $local 'music-prepared-episode1.json'
-$record = Join-Path $local 'episode1-human-input-r14.json'
-$report = Join-Path $local 'episode1-human-session-r14.json'
-$saves = Join-Path $local 'episode1-human-saves-r14'
-$settings = Join-Path $local 'episode1-human-settings-r14.json'
+$record = Join-Path $local 'episode1-human-input-r15.json'
+$report = Join-Path $local 'episode1-human-session-r15.json'
+$saves = Join-Path $local 'episode1-human-saves-r15'
+$settings = Join-Path $local 'episode1-human-settings-r15.json'
 pwsh -NoProfile -File (Join-Path $root 'Start-Doom.ps1') `
   -Wad $wad -Workers 16 -Episode 1 -Map 1 -Skill 3 -Style Classic -Sound `
   -MusicCatalog $catalog -RecordInput $record -Report $report `
@@ -43,15 +43,23 @@ The r3 audio receipt is pinned to implementation commit `41e167f` and records ei
 
 The startup failure reported under PowerShell 7.6.6 came from overly strict runtime-version and line-ending checks in qualified music reports. The reader now accepts equivalent PowerShell text across LF/CRLF checkouts and compatible 7.6.x patch versions while still rejecting changed source text. The Preview.3 package passes 22 reader checks and starts the 11-track Episode 1 catalog in a two-second, sound-enabled headless run under PowerShell 7.6.5, advancing 69 tics with no host error or audio-backpressure sample. The five-second startup run is pinned to the earlier audio implementation commit `41e167f`; the r5 renderer change has separate all-map, three-style worker, and persistent-worker reload checks. Neither brief host run verifies full-session music continuity, audible quality, or playback under visible Terminal load.
 
-On a cold start, allow up to 60 seconds for simulation and music workers to initialize. Keep the 16 renderer workers. One r7 60-second headless run sampled a 3.77 GiB worker working set at shutdown; this is not a peak or time average. The Classic view needs at least 320 columns by 100 rows; the 5-point font and maximized window help fit it. If the viewport is short, enlarge the window or press Ctrl+- to reduce the font. Blank space around the centered image in a larger terminal is expected. The raw human input, session report, saves, and settings use fresh `r14` paths so earlier attempts remain intact.
+On a cold start, allow up to 60 seconds for simulation and music workers to initialize. Keep the 16 renderer workers. One r7 60-second headless run sampled a 3.77 GiB worker working set at shutdown; this is not a peak or time average. The Classic view needs at least 320 columns by 100 rows; the 5-point font and maximized window help fit it. If the viewport is short, enlarge the window or press Ctrl+- to reduce the font. Blank space around the centered image in a larger terminal is expected. The raw human input, session report, saves, and settings use fresh `r15` paths so earlier attempts remain intact.
 
-The `r14` input/report paths and dedicated save/settings locations preserve earlier attempts. Confirm that the two output files do not already exist before launch; keep all generated data under `C:\projects\pwshDoom\local` and do not share it with the WAD.
+The `r15` input/report paths and dedicated save/settings locations preserve earlier attempts. Confirm that the two output files do not already exist before launch; keep all generated data under `C:\projects\pwshDoom\local` and do not share it with the WAD.
 
 The current R14 game source also passes a 100-second headless realtime-audio
 run on E1M1. The actual device worker mixed 100.2 seconds of D_E1M1—past its
 qualified 96-second loop period—with no software starvation/rebuffer reports
 and clean shutdown. The run remains headless and does not assess sound quality
 or full-route continuity; see the [R15 receipt](../results/audio-e1m1-realtime-loop-boundary-r15-20260929.json).
+
+The current catalog also passes `Play.ps1 -Check` and a three-second actual-
+device startup under PowerShell 7.6.5 and the official portable 7.6.6 x64
+release: both select D_E1M1, advance 104 tics, and close cleanly with no audio
+errors, queue-starvation observations, or rebuffer resumes. The original
+failed report and exact catalog snapshot are unavailable, so its cause remains
+unknown. See the [7.6.5 receipt](../results/current-music-startup-recheck-20260929.json)
+and [7.6.6 receipt](../results/current-music-startup-recheck-7.6.6-20260929.json).
 
 ## Controls
 

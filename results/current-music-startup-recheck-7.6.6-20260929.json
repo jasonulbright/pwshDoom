@@ -1,0 +1,43 @@
+{
+  "FinishedUtc": "2026-09-29T14:37:45.7600187Z",
+  "RepositoryCommit": "fe40b357dc297bf22292a6e0cb11329a7d0123d7",
+  "GameSourceCommit": "cdd5fdd68734dbc663367f44117fd8a49ac17694",
+  "PowerShell": "7.6.6",
+  "Runtime": "Official portable x64 archive, extracted under ignored local/; no installed PowerShell was changed.",
+  "RuntimeArchiveSha256": "02FE458BE20493FBDF43F61EA20610B811EE6C738AB1676C61B9CFCD1A33C860",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "MusicCatalogSha256": "0E9C9542C75F4D5E2D7FC71E42FAFBB58F94321C3B8A49BA0C9AC5A93752EE58",
+  "LauncherPreflight": {
+    "Ready": true,
+    "Maps": 36,
+    "MusicQualificationTracks": 11
+  },
+  "Session": {
+    "Mode": "Headless realtime audio",
+    "Episode": 1,
+    "Map": 1,
+    "Skill": 3,
+    "DurationSeconds": 3.0017908,
+    "ExitReason": "Duration",
+    "SimulationTics": 104,
+    "RenderUpdates": 120,
+    "Error": null,
+    "AudioSelectedTrack": "D_E1M1",
+    "MusicFrames": 139860,
+    "SubmittedFrames": 139860,
+    "ReturnedCompletedFrames": 134820,
+    "CancelledQueuedFramesUpperBound": 5040,
+    "DeviceClosed": true,
+    "AudioError": null,
+    "RebufferCount": 0,
+    "QueueStarvationObservations": 0,
+    "ClippedSamples": 0,
+    "CleanupError": null
+  },
+  "RawReport": {
+    "Path": "local/episode1-audio-startup-7.6.6-current-20260929.json",
+    "Sha256": "CC20DEB074744FA5911E3578B77755836DB30887885B7ED1F3A5E619C29B85A2"
+  },
+  "Result": "Music-loop qualification startup succeeded; the reported failure did not reproduce with the current source and catalog under PowerShell 7.6.6.",
+  "Limits": "The original failed process and its exact catalog snapshot were not retained. This is a three-second headless one-map check; it does not establish audible quality, full-session continuity, or live Terminal performance."
+}

@@ -1,0 +1,65 @@
+{
+  "Version": 1,
+  "Name": "Rejected rendered-flat color cache",
+  "FinishedUtc": "2026-09-29T14:21:55.9855899Z",
+  "RepositoryCommit": "fe40b357dc297bf22292a6e0cb11329a7d0123d7",
+  "GameSourceCommit": "cdd5fdd68734dbc663367f44117fd8a49ac17694",
+  "PowerShell": "7.6.5",
+  "IWadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "Measurement": {
+    "Script": "scripts/Measure-FastRendererPhases.ps1",
+    "Episode": 3,
+    "Map": 6,
+    "Skill": 3,
+    "SetupTics": 0,
+    "Workers": 16,
+    "Transport": "Prepared snapshot with worker masks",
+    "WarmupFrames": 4,
+    "MeasuredFramesPerRun": 20,
+    "RunsPerVariant": 2,
+    "SamplesPerVariant": 640,
+    "Execution": "Sixteen production-equivalent stripes rendered serially; excludes concurrent scheduling, simulation, audio, terminal output, and presentation."
+  },
+  "Baseline": {
+    "RendererSha256": "15428F29AE3DFA45514EC428AAE5BCDE7FF32532249C07AC2571428967A500ED",
+    "GeometryMedianMs": 3.8148,
+    "GeometryP95Ms": 5.3055,
+    "TotalMedianMs": 7.0278,
+    "TotalP95Ms": 9.2991,
+    "Reports": [
+      {
+        "Path": "local/renderer-flat-color-cache-baseline-r1-20260929.json",
+        "Sha256": "CEE63F9AE225A1D1A9DBEE1A46FC99BFD5F950EAB00A79D0EC9FEF353E3480CC"
+      },
+      {
+        "Path": "local/renderer-flat-color-cache-baseline-r2-20260929.json",
+        "Sha256": "1FE2E5B07A15635756E9D9E1098B403C7978E526BC2E8640CDA3E6C280935D84"
+      }
+    ]
+  },
+  "Candidate": {
+    "Change": "Lazy cache of each flat translated through one COLORMAP, keyed by flat index and selected light.",
+    "RendererSha256": "EAECECF52E65759535EA3939D3EB08E36A8DCBA7CCC897CFB37D02C65C83797A",
+    "GeometryMedianMs": 3.927,
+    "GeometryP95Ms": 5.4123,
+    "TotalMedianMs": 7.0181,
+    "TotalP95Ms": 9.3107,
+    "Reports": [
+      {
+        "Path": "local/renderer-flat-color-cache-candidate-r1-20260929.json",
+        "Sha256": "68E2AAA0BEAB5166643807DAE8B11CB5D8A84E97ACB79BC25FAB6AB1BC5233AC"
+      },
+      {
+        "Path": "local/renderer-flat-color-cache-candidate-r2-20260929.json",
+        "Sha256": "E714181FFC6749883565BF82838BFB0878A23BD7B496A58327ED9EADA3150753"
+      }
+    ]
+  },
+  "Correctness": {
+    "FrameSha256": "92BFF34916AE31903A0A2A35A386940121EEE521346A3355543985E371561D82",
+    "FrameOutputMatches": true,
+    "PerWorkerHashListsMatch": true
+  },
+  "Decision": "Rejected: pooled total medians differ by 0.14%, geometry is 2.9% slower, and candidate p95 is not better. The renderer was restored to its original source hash.",
+  "Meaning": "Steady-state phase comparison after four warmup frames; cache population cost and process memory growth are not measured."
+}

@@ -1,0 +1,109 @@
+{
+  "Format": "pwshDoom.Episode1CurrentHumanCandidate",
+  "Version": 1,
+  "RecordedUtc": "2026-09-29T14:45:58.1559372Z",
+  "Branch": "codex/feasibility-study",
+  "RepositoryCommit": "fe40b357dc297bf22292a6e0cb11329a7d0123d7",
+  "ImplementationCommit": "cdd5fdd68734dbc663367f44117fd8a49ac17694",
+  "PreviousCandidate": {
+    "Path": "results/episode1-current-human-candidate-20260929-r14.json",
+    "Sha256": "0959DAE982114CA19687BCB4CC593383D30857182FEE1C1945A31896F3360DA5",
+    "ImplementationCommit": "cdd5fdd68734dbc663367f44117fd8a49ac17694"
+  },
+  "Runtime": {
+    "PowerShell": "7.6.6",
+    "Distribution": "Official portable x64 archive, used from ignored local/ without changing installed PowerShell",
+    "ReleaseUrl": "https://github.com/PowerShell/PowerShell/releases/tag/v7.6.6",
+    "ArchiveSha256": "02FE458BE20493FBDF43F61EA20610B811EE6C738AB1676C61B9CFCD1A33C860",
+    "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+    "MusicCatalogSha256": "0E9C9542C75F4D5E2D7FC71E42FAFBB58F94321C3B8A49BA0C9AC5A93752EE58"
+  },
+  "ChangesSinceR14": {
+    "GameSourceChanged": false,
+    "Scope": "Requalified the reported audio-startup and chainsaw blockers and Episode 1 progression handoff under PowerShell 7.6.6. No engine source changed."
+  },
+  "Validation": {
+    "LauncherPreflight": {
+      "Ready": true,
+      "Maps": 36,
+      "MusicQualificationTracks": 11
+    },
+    "AudioStartup": {
+      "Receipt": "results/current-music-startup-recheck-7.6.6-20260929.json",
+      "ReceiptSha256": "D198A9C9B8C4D4B66D7A952C52C8441703F37D6D93670CD92E5174B3B9F8C7C0",
+      "RawReport": "local/episode1-audio-startup-7.6.6-current-20260929.json",
+      "RawReportSha256": "CC20DEB074744FA5911E3578B77755836DB30887885B7ED1F3A5E619C29B85A2",
+      "DurationSeconds": 3.0017908,
+      "Track": "D_E1M1",
+      "SimulationTics": 104,
+      "RenderUpdates": 120,
+      "SubmittedFrames": 139860,
+      "ReturnedCompletedFrames": 134820,
+      "CancelledQueuedFramesUpperBound": 5040,
+      "DeviceClosed": true,
+      "Errors": 0,
+      "QueueStarvationObservations": 0,
+      "RebufferResumes": 0
+    },
+    "CampaignTransitions": {
+      "Checks": 69,
+      "Failures": 0,
+      "CurrentSourceCommit": "cdd5fdd68734dbc663367f44117fd8a49ac17694",
+      "RawReport": "local/campaign-transitions-7.6.6-current-20260929.json",
+      "RawReportSha256": "1AB678099AF2A66FDA387AF66076C5D0CD5DD5402895751884C9B53F81D2146C",
+      "Covers": "Real E1M9/E1M4 world loads along the E1M3 secret branch, secret history, ordinary intermission progression and finale state. Exit selection is fixture-driven; no map completion is claimed."
+    },
+    "BossProgression": {
+      "Checks": 97,
+      "Passed": 97,
+      "RawReport": "local/boss-progression-7.6.6-current-20260929.json",
+      "RawReportSha256": "2C83CE787C7E3A2C19FF50A8FE3125F8E96DDB4D8218F3887B2AFC702D729DC2"
+    },
+    "MenuInput": {
+      "Checks": 10,
+      "Passed": 10,
+      "RawReport": "local/menu-input-7.6.6-current-20260929.json",
+      "RawReportSha256": "A76937E50DDFF9BC621943DC4F877DAFB1968A296E7F776233165786652B9CBF"
+    },
+    "ChainsawCrashRegression": {
+      "Checks": 2,
+      "Passed": 2,
+      "Receipt": "results/saw-attack.json",
+      "ReceiptSha256": "72E8A5DBC380C480E90452218DEF0CC04738838371FDAC8057AFC16FBBFDAA6C",
+      "E1M2ImpHealth": "60 to 56",
+      "TicsToHit": 4
+    },
+    "InheritedCampaignEvidence": {
+      "MapSmoke": {
+        "Maps": 36,
+        "Passed": 36,
+        "Receipt": "results/episode1-current-human-candidate-20260929-r12.json",
+        "EvidenceSource": "c29b24e8a1c06635f90423672cc74f28836b7095",
+        "Meaning": "Load, bounded-idle, and render smoke only."
+      },
+      "SameMapAndChangedMap": {
+        "SameMapChecks": 12,
+        "ChangedMapChecks": 12,
+        "SessionWorkerCases": 4,
+        "Receipt": "results/episode1-current-human-candidate-20260929-r14.json"
+      },
+      "NormalInputRouteRegressions": [
+        "E1M1",
+        "E1M2",
+        "E1M4"
+      ]
+    }
+  },
+  "Playthrough": {
+    "Status": "Pending",
+    "Scope": "HMP E1M1 -> E1M2 -> E1M3 secret exit -> E1M9 -> return to E1M4 -> E1M5 -> E1M6 -> E1M7 -> E1M8 boss exit -> Episode 1 finale",
+    "FinishPoint": "E1TEXT/CREDIT finale screen",
+    "AutomatedFixturesAreNotClaimedAsMapPlaythroughs": true
+  },
+  "KnownLimitations": [
+    "Human Episode 1 route is not complete.",
+    "Historical user startup report and exact catalog snapshot are unavailable; current-source startup succeeds on 7.6.5 and 7.6.6, but the old failure cause is not established.",
+    "No 35-tic/60-displayed-update guarantee, acoustic review, full-route audio continuity, or independent original-executable visual parity is established.",
+    "The exact camera angle for reported E1M1 sprite/floor overlap has not been independently reproduced."
+  ]
+}

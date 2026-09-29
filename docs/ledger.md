@@ -14,6 +14,10 @@ Ran the current R14 game source headless for 100 seconds on HMP E1M1 with 16 ren
 
 Tested a PowerShell candidate that moved each masked sprite post's data and offset property reads outside its inner vertical pixel loop. At a fixed HMP E3M6 state, two 20-frame samples per variant covered 640 serial production-equivalent stripe renders. The exact frame and per-worker pixel hashes matched. Pooled actor medians were 1.950 ms baseline and 1.971 ms candidate; total stripe medians were 7.145 and 7.130 ms, with no p95 improvement. This is within timing noise, not an optimization; the candidate was reverted. The [portable receipt](../results/renderer-post-properties-hoist-rejected-20260929.json) pins parameters, hashes, and local raw-profile hashes. No route or FPS claim follows.
 
+## 2026-09-29 — Reject translated-flat color caching
+
+Tested a lazy cache of flat texels translated through the selected colormap, keyed by flat and light. Two fixed HMP E3M6 samples per variant covered 640 serial stripe renders and produced identical full-frame and per-worker hashes. Geometry median/p95 changed from 3.8148/5.3055 ms to 3.927/5.4123 ms; total median/p95 changed from 7.0278/9.2991 ms to 7.0181/9.3107 ms. The 0.14% total-median difference is timing noise, with slower geometry and worse candidate p95. The source was restored; cache construction cost and memory growth were not measured. The [portable receipt](../results/rejected-flat-color-cache-20260929.json) records source/frame hashes, parameters, and ignored raw-profile hashes.
+
 ## 2026-09-10 — Study established
 
 User authorized a feasibility study, documentation as work proceeds, and rendering experiments in `C:\projects\pwshDoom`. The earlier workspace was an empty Git repository under OneDrive. A new repository was initialized at the requested location; no existing project files were moved or deleted.
@@ -4883,3 +4887,54 @@ category reached the mix, test same-source cross-category replacement on the
 device, or replace an audible review. The
 [portable receipt](../results/episode1-current-audio-effects-r14-20260929.json)
 pins the source, workload, and ignored raw report hash.
+
+## 2026-09-29 — Recheck current music-catalog startup
+
+The reported `Music loop has no current successful qualification` failure did
+not reproduce with the current catalog under the available PowerShell 7.6.5
+runtime. `Play.ps1 -Check` reports Ready for the Steam Ultimate Doom IWAD's 36
+maps and eleven catalog qualifications. A three-second headless realtime-
+audio E1M1 session selected D_E1M1, advanced 104 tics and mixed 139,860 frames.
+It closed the real audio device with no simulation/audio/cleanup error,
+software queue-starvation observation, rebuffer resume, or clipped sample.
+It submitted 139,860 frames and returned 134,820; the 5,040-frame remainder is
+the shutdown-cancellation upper bound. This directly verifies the current
+catalog and source on PowerShell 7.6.5, not sound quality or sustained campaign
+playback. The [7.6.5 receipt](../results/current-music-startup-recheck-20260929.json)
+records the WAD/catalog/raw-report hashes; the raw session stays under ignored
+`local/`.
+
+The same current source, IWAD, and catalog then passed the preflight and actual
+audio startup under the official portable PowerShell 7.6.6 x64 release. It
+selected D_E1M1, advanced 104 tics, generated 120 headless updates and closed
+the device without audio/cleanup error, clipped samples, queue-starvation
+observations, or rebuffer resumes. It submitted 139,860 frames and returned
+134,820; the remainder is the 5,040-frame shutdown-cancellation upper bound.
+The 7.6.6 archive was hash-checked against its upstream release digest. The
+original failed report and exact catalog snapshot are unavailable, so the
+historical cause remains unknown. The [7.6.6 receipt](../results/current-music-startup-recheck-7.6.6-20260929.json)
+pins its archive, WAD, catalog, source, and raw-report hashes.
+
+## 2026-09-29 — Requalify the Episode 1 handoff under PowerShell 7.6.6
+
+The R14 game-source commit `cdd5fdd` has no later engine-code changes. To test
+the same runtime that produced the user-reported startup failure and chainsaw
+crash, the official PowerShell 7.6.6 x64 portable archive was extracted under
+ignored `local/` and verified against the upstream release SHA-256. The current
+WAD and 11-track catalog pass `Play.ps1 -Check`; a three-second actual-device
+E1M1 run selects D_E1M1 and closes without simulation/audio/cleanup error,
+queue-starvation observation, or rebuffer. The prior qualification failure
+does not reproduce, but the original failed report and exact catalog snapshot
+are unavailable, so its cause is unknown.
+
+Under this runtime, the E1M2 chainsaw action hits a real IWAD imp after four
+tics without the former angle-comparison exception. All 69 campaign transition
+fixtures, 97 boss-progression checks, and 10 menu-input checks pass. The secret
+branch fixtures load real E1M9 and E1M4 worlds and preserve secret history;
+finale state is checked. These are focused state/transition tests, not map
+completion. The 36-map load/render smoke and E1M1/E1M2/E1M4 normal-input routes
+carry forward from their pinned source receipts. The refreshed
+[R15 candidate](../results/episode1-current-human-candidate-20260929-r15.json)
+uses the same game-source commit and fresh R15 output paths. Jason's one
+complete Episode 1 HMP playthrough remains pending; no automated route or
+fixture is substituted for it.
