@@ -1,0 +1,26 @@
+{
+  "Format": "pwshDoom.MusicPlaybackRuntimeCheck",
+  "Version": 1,
+  "Date": "2026-09-29",
+  "Result": "Passed",
+  "Runtime": {
+    "Version": "7.6.6",
+    "Executable": "C:\\Users\\jason\\AppData\\Local\\Microsoft\\WindowsApps\\Microsoft.PowerShell_8wekyb3d8bbwe\\pwsh.exe"
+  },
+  "SourceCommit": "a26a0b439d0fee2e8ea0f1f1a3c785595bec1384",
+  "SourceHashes": {
+    "MusicLoopReader.ps1": "3DD9DA660A8EB2BCC0A2053686C68B9EAC740CE0A13FE047BBA72CE0277A95A1",
+    "MusicOneShotReader.ps1": "446171C237DABA7A1DC560F519C4460608CBAFFC165471251C6991CAE8790491",
+    "MusicPlayback.ps1": "B5C3DC700ACF25AC2E0223B83934BDE86A6A5BB8B2F34FE0F1661E889E026EE9"
+  },
+  "Test": {
+    "Script": "scripts/Test-MusicPlayback.ps1",
+    "ScriptSha256": "830ABF6EFEBBD55653381EF22C36F1AE9EEB6AAD39D83AD2C474187109A62AF5",
+    "Passed": 21,
+    "Total": 21,
+    "Error": null,
+    "RawReport": "local/musicplayback-r9-7.6.6-20260929.json",
+    "RawReportSha256": "1E222431B22560763745D66E6235C5168B0050F509F3849CC162FE95FB020CFC"
+  },
+  "Meaning": "Persistent catalog playback/lifecycle checks with real qualified loop and finite-score samples, including loop boundaries, one-shot termination, zero padding, rejection and cleanup. No playback device or simulation host integration."
+}

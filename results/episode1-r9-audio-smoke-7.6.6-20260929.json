@@ -1,0 +1,57 @@
+{
+  "Schema": "pwshDoom.episode1-r9-audio-smoke.v1",
+  "RecordedUtc": "2026-09-29T05:19:01.6811093Z",
+  "ImplementationCommit": "a26a0b439d0fee2e8ea0f1f1a3c785595bec1384",
+  "MusicPlaybackSha256": "B5C3DC700ACF25AC2E0223B83934BDE86A6A5BB8B2F34FE0F1661E889E026EE9",
+  "Environment": {
+    "PowerShell": "7.6.6",
+    "Executable": "C:\\Users\\jason\\AppData\\Local\\Microsoft\\WindowsApps\\Microsoft.PowerShell_8wekyb3d8bbwe\\pwsh.exe",
+    "Architecture": "SeparateSimulation",
+    "HostType": "Windows"
+  },
+  "Configuration": {
+    "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+    "MusicCatalog": "local/music-prepared-episode1.json",
+    "MusicCatalogSha256": "0E9C9542C75F4D5E2D7FC71E42FAFBB58F94321C3B8A49BA0C9AC5A93752EE58",
+    "Episode": 1,
+    "Map": 1,
+    "Skill": 3,
+    "Workers": 16,
+    "Sound": true,
+    "RealtimeAudio": false,
+    "Headless": true,
+    "TerminalWrites": 0,
+    "RequestedSeconds": 5
+  },
+  "Outcome": {
+    "ExitReason": "Duration",
+    "Error": null,
+    "SimulationError": null,
+    "AudioError": null,
+    "AudioCleanupError": null,
+    "DurationSeconds": 5.0102428,
+    "SimulationTics": 174,
+    "CompletedRenderUpdates": 176,
+    "SimulationTicsPerSecond": 34.72885585504958,
+    "HeadlessUpdatesPerWallSecond": 35.12801917590665,
+    "SelectedMusic": "D_E1M1",
+    "MusicFrames": 219240,
+    "SubmittedFrames": 219240,
+    "ReturnedCompletedFrames": 219240,
+    "DeviceClosed": true,
+    "RebufferCount": 1,
+    "RebufferResumes": 0,
+    "QueueStarvationObservations": [
+      {
+        "AfterPacket": 173,
+        "WallMs": 30975.1477
+      }
+    ]
+  },
+  "RawReport": {
+    "Path": "local/episode1-r9-7.6.6-audio-smoke-20260929.json",
+    "Sha256": "D5344B834349E550E0A1090BFC7268586B1E52254C42EE60F8B170E9A1F0902B",
+    "Bytes": 536864
+  },
+  "Limits": "One five-second headless sound-enabled startup/integration run. The sole queue-starvation poll occurred after packet 173 and did not resume; this counter is polling, not hardware underrun telemetry. Host updates are not displayed frames. This does not qualify acoustics, sustained continuity, visible Terminal performance, or the 35 Hz/60 displayed-update targets."
+}

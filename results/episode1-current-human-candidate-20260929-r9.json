@@ -139,6 +139,31 @@
       "OneQueueEmptyObservationAfterFinalPacket": true,
       "Receipt": "results/episode1-r9-audio-smoke-20260929.json",
       "ReceiptSha256": "6F28530DB496F8E7B2DD4CA19FC80E6DDF08888E2089F6F6F17257AE900083D6"
+    },
+    "MusicPlaybackRuntime766": {
+      "Passed": 21,
+      "Total": 21,
+      "PowerShell": "7.6.6",
+      "Error": null,
+      "Receipt": "results/music-playback-runtime-7.6.6-20260929.json",
+      "ReceiptSha256": "7F2D5FACDC9E8C3CE93A5D3B8D14FC29BA6DF3959B9B74560E74B093E2F54600"
+    },
+    "AudioStartupRuntime766": {
+      "Passed": true,
+      "PowerShell": "7.6.6",
+      "DurationSeconds": 5.0102428,
+      "SimulationTics": 174,
+      "CompletedRenderUpdates": 176,
+      "SelectedTrack": "D_E1M1",
+      "SubmittedAndCompletedFrames": 219240,
+      "DeviceClosed": true,
+      "AudioError": null,
+      "AudioCleanupError": null,
+      "RebufferCount": 1,
+      "QueueStarvationObservationAfterPacket": 173,
+      "RebufferResumes": 0,
+      "Receipt": "results/episode1-r9-audio-smoke-7.6.6-20260929.json",
+      "ReceiptSha256": "76E1246B3E12D3A00DA25C74E65461F6D95A329662962886C10EFE6E4FA3114B"
     }
   },
   "Performance": {
@@ -183,7 +208,7 @@
     "The existing E1M3 waypoint route stalled without an independently reproduced game defect.",
     "The old fixed-input E1M3 replay no longer matches current-source checkpoints and does not qualify current-source completion.",
     "Full-campaign audio continuity, acoustic quality, original-executable visual parity, sustained 35 Hz simulation, and 60 displayed updates/sec remain unqualified.",
-    "The current-source five-second music smoke ran under PowerShell 7.6.5 only; it does not review audible quality or verify full-campaign continuity.",
+    "The current-source five-second headless music smoke passed under PowerShell 7.6.5 and 7.6.6; it does not review audible quality, verify full-campaign continuity, or measure visible Terminal performance.",
     "The music-catalog timing comparison uses a warm file cache and does not establish cold-start latency."
   ],
   "EvidenceLineage": [
@@ -192,6 +217,8 @@
     "results/episode1-current-human-candidate-20260929-r8.json",
     "results/music-catalog-open-parallel-20260929.json",
     "results/episode1-r9-audio-smoke-20260929.json",
+    "results/music-playback-runtime-7.6.6-20260929.json",
+    "results/episode1-r9-audio-smoke-7.6.6-20260929.json",
     "results/episode1-r8-audio-smoke-20260929.json"
   ],
   "Meaning": "Source-pinned handoff for one complete human Episode 1 playthrough. Automated evidence proves readiness checks only; it does not claim the route or finale have been completed."

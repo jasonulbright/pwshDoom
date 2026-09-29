@@ -4422,3 +4422,22 @@ draft now name Preview.3 as the latest tagged package and describe R9 as a
 separate, untagged candidate. This corrects ambiguity between a clean checkout
 of the release tag and the newer branch; it does not change or rebuild the
 Preview.3 release asset.
+
+## 2026-09-29 — Recheck R9 startup on PowerShell 7.6.6
+
+The installed PowerShell 7.6.6 executable now passes the current R9 music
+playback suite: 21/21 focused reader, boundary, command, and cleanup checks.
+The test source and qualified playback files match the R9 pin. This closes the
+runtime-version gap for the focused suite after Jason's earlier startup error;
+the report and executable are identified in the
+[7.6.6 playback receipt](../results/music-playback-runtime-7.6.6-20260929.json).
+
+A separate five-second sound-enabled, headless E1M1 run under the same runtime
+exits by duration after 174 tics and 176 headless render updates. It selects
+D_E1M1, submits and returns all 219,240 audio frames, and closes the device
+without simulation, audio, or cleanup error. One queue-starvation poll appears
+after packet 173 with no rebuffer resume. This is queue polling rather than
+hardware underrun telemetry. It is not evidence of audible quality, sustained
+continuity, visible frame rate, or 35 Hz / 60 displayed-update qualification.
+The [portable host receipt](../results/episode1-r9-audio-smoke-7.6.6-20260929.json)
+pins the raw local report hash; the IWAD and music catalog remain local.

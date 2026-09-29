@@ -200,3 +200,21 @@ This is not a cold-start comparison, a full-campaign audio run, an acoustic
 review, or visible Terminal pacing evidence. The measured full process lasted
 46.81 seconds, but that single unpaired duration includes all startup and
 shutdown work and does not assign the remaining time to this audio change.
+
+## PowerShell 7.6.6 host recheck — September 29, 2026
+
+The same R9 source passes all 21 focused music-playback checks under the
+installed PowerShell 7.6.6 runtime. A five-second, sound-enabled, headless
+E1M1 host run then selects D_E1M1, advances 174 simulation tics, returns all
+219,240 submitted audio frames, and closes the device without worker or
+cleanup error. The host records one queue-starvation poll after packet 173
+with no rebuffer resume. The polling counter is not hardware underrun
+telemetry, and no acoustic review was performed.
+
+The [7.6.6 playback receipt](../results/music-playback-runtime-7.6.6-20260929.json)
+and [host receipt](../results/episode1-r9-audio-smoke-7.6.6-20260929.json)
+pin the runtime, source, and raw local report hashes. This confirms startup
+compatibility on the patch version that previously failed; it does not
+qualify full-session or campaign continuity, visible Terminal performance,
+or the 35 Hz simulation / 60 displayed-update goals. The 176 headless render
+updates are not displayed frames.

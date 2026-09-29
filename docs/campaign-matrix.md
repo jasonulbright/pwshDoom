@@ -33,11 +33,14 @@ fixed-input replay diverges at 23 of 24 checkpoints on both the pre-change
 source and r8, with identical actual hashes; the recorded fingerprint is
 stale and it was not requalified on r9. The warm-cache eleven-track reader
 open stage improves from a 4.665-second to 2.050-second median; 21 focused
-music checks pass, and a five-second sound-enabled E1M1 host run closes audio
-cleanly. These checks do not establish cold-start latency, continuous
-campaign audio, or game/display pacing. See the [visibility receipt](../results/visibility-fixed-point-allocation-20260929.json),
+music checks pass on PowerShell 7.6.5 and 7.6.6. Five-second sound-enabled
+headless E1M1 host checks pass on both runtimes; the 7.6.6 run returns all
+219,240 submitted audio frames and closes cleanly, with one queue-starvation
+poll after packet 173 and no resume. These checks do not establish cold-start
+latency, continuous campaign audio, or game/display pacing. See the [visibility receipt](../results/visibility-fixed-point-allocation-20260929.json),
 [music-open measurement](../results/music-catalog-open-parallel-20260929.json),
-and [R9 audio receipt](../results/episode1-r9-audio-smoke-20260929.json).
+and the [R9 audio receipts for PowerShell 7.6.5](../results/episode1-r9-audio-smoke-20260929.json)
+and [7.6.6](../results/episode1-r9-audio-smoke-7.6.6-20260929.json).
 The sector-plane cache passes a new 36-map load/idle/render
 smoke and five-view 16-worker equality in all three styles. An isolated
 PowerShell phase experiment shows lower geometry time with unchanged full-frame
