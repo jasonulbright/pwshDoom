@@ -1,0 +1,240 @@
+{
+  "Format": "pwshDoom.Episode1CurrentHumanCandidate",
+  "Version": 1,
+  "RecordedUtc": "2026-09-29T00:23:43.7697656Z",
+  "Branch": "codex/feasibility-study",
+  "ImplementationCommit": "c31186896628a9ee9a4ea3b635c0d19fac65b40d",
+  "PowerShell": "7.6.5",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "PreviousCandidate": {
+    "Path": "results/episode1-current-human-candidate-20260928-r5.json",
+    "Sha256": "901D4B91DDAB1AB5B000BF948AA7A2AA5311DDD57681A4BEEF2F175A4104F87F"
+  },
+  "Readiness": "Ready for one complete HMP Episode 1 human playthrough; human result remains pending.",
+  "PlaythroughScope": [
+    "E1M1",
+    "E1M2",
+    "E1M3",
+    "E1M9",
+    "E1M4",
+    "E1M5",
+    "E1M6",
+    "E1M7",
+    "E1M8",
+    "E1 finale (E1TEXT/CREDIT)"
+  ],
+  "FreshHumanRunPaths": {
+    "Saves": "local/episode1-human-saves-r7",
+    "Settings": "local/episode1-human-settings-r7.json",
+    "Input": "local/episode1-human-input-r7.json",
+    "Report": "local/episode1-human-session-r7.json"
+  },
+  "RendererChange": {
+    "Description": "Dense worker snapshots with at least 200 actors use NumericV5 typed actor projections; sparse snapshots retain NumericV4. The projection cache avoids repeated fixed-point actor transform and sprite-frame work while preserving the PowerShell renderer.",
+    "Episode1TimingConclusion": "HMP E1M3 profile order reversed the sign; no Episode 1 speed gain is claimed.",
+    "PerformanceReceipt": "results/renderer-projection-cache-20260928.json",
+    "PerformanceReceiptSha256": "45B40E29ECB835BFD3149DBE490C0DE4ED141E3B48EE494BB84D77746041A202",
+    "Target60HzQualified": false
+  },
+  "Validation": {
+    "SnapshotTransport": {
+      "Report": "local/snapshot-actor-projection-v5-typed-final.json",
+      "Result": "Pass",
+      "ReportSha256": "D9EF1A4AF46C8D1E4C053A253BFCECF8CAEBD6C9AB33CC0D0A8A96097E96A5C3",
+      "Checks": 21
+    },
+    "UltimateDoomMapSmoke": {
+      "SerialViewsPerMap": 2,
+      "Passed": 36,
+      "ReportSha256": "8331DC697FEAB04BD84B14F3CF73F1720150E482F1463DB539A7A31C6B1A7317",
+      "Report": "local/campaign-smoke-projection-cache-v5-20260928.json",
+      "IdleTicsPerMap": 35,
+      "Failed": 0,
+      "Maps": 36
+    },
+    "Episode1Transitions": {
+      "IncludesSecretPathAndFinale": true,
+      "Failures": 0,
+      "Report": "local/campaign-transitions-projection-cache-20260928.json",
+      "ReportSha256": "820F7896098253A26A26AEABD7519C6BC22B64534E90B4DF2786FEF8624A8EDC",
+      "Checks": 69
+    },
+    "BossProgression": {
+      "ReportSha256": "021919D897CC43A3799B8391D2E2D13FDD90A8778F97B5730D7E5759C490F527",
+      "Passed": true,
+      "Report": "local/boss-progression-projection-cache-20260928.json",
+      "Checks": 97
+    },
+    "DenseHmpE1M3WorkerStyles": [
+      {
+        "WorkerPacketVersions": [
+          5
+        ],
+        "ActorCounts": [
+          309
+        ],
+        "Workers": 16,
+        "Fuzz": true,
+        "RawSha256": "1DCE29FEB2F096C1A3F6C387E59A8406F20279DA88590E31F2C2B3884510F0E8",
+        "Views": 5,
+        "Episode": 1,
+        "ComparedPixels": 320000.0,
+        "PixelDifferences": 0.0,
+        "Path": "local/render-partitions-projection-cache-hmp-e1m3-classic.json",
+        "Style": "Classic",
+        "Map": 3
+      },
+      {
+        "WorkerPacketVersions": [
+          5
+        ],
+        "ActorCounts": [
+          309
+        ],
+        "Workers": 16,
+        "Fuzz": true,
+        "RawSha256": "41C969E569CDFD2B2BF170B45270A9659A9A8B8E06F208FEEDB4F30D1C4BD145",
+        "Views": 5,
+        "Episode": 1,
+        "ComparedPixels": 320000.0,
+        "PixelDifferences": 0.0,
+        "Path": "local/render-partitions-projection-cache-hmp-e1m3-matrix.json",
+        "Style": "Matrix",
+        "Map": 3
+      },
+      {
+        "WorkerPacketVersions": [
+          5
+        ],
+        "ActorCounts": [
+          309
+        ],
+        "Workers": 16,
+        "Fuzz": true,
+        "RawSha256": "AB2BEA9882B511C3221D96EF81B728AA583168BE28B04593CC376F386B8FADAF",
+        "Views": 5,
+        "Episode": 1,
+        "ComparedPixels": 320000.0,
+        "PixelDifferences": 0.0,
+        "Path": "local/render-partitions-projection-cache-hmp-e1m3-ansiart.json",
+        "Style": "AnsiArt",
+        "Map": 3
+      }
+    ],
+    "DenseE3M6WorkerStyles": [
+      {
+        "WorkerPacketVersions": [
+          5
+        ],
+        "ActorCounts": [
+          280
+        ],
+        "Workers": 16,
+        "Fuzz": true,
+        "RawSha256": "4193A53A9AA46050FDF38F620CA0CBDED03C5FD148230B3379636FC7B9A2EC1F",
+        "Views": 5,
+        "Episode": 3,
+        "ComparedPixels": 320000.0,
+        "PixelDifferences": 0.0,
+        "Path": "local/render-partitions-projection-cache-typed-e3m6-classic.json",
+        "Style": "Classic",
+        "Map": 6
+      },
+      {
+        "WorkerPacketVersions": [
+          5
+        ],
+        "ActorCounts": [
+          280
+        ],
+        "Workers": 16,
+        "Fuzz": true,
+        "RawSha256": "5A0A0ABB4A08C66BD04E296828D56F3490C30D7EEA692977792E054CEE245A89",
+        "Views": 5,
+        "Episode": 3,
+        "ComparedPixels": 320000.0,
+        "PixelDifferences": 0.0,
+        "Path": "local/render-partitions-projection-cache-typed-e3m6-matrix.json",
+        "Style": "Matrix",
+        "Map": 6
+      },
+      {
+        "WorkerPacketVersions": [
+          5
+        ],
+        "ActorCounts": [
+          280
+        ],
+        "Workers": 16,
+        "Fuzz": true,
+        "RawSha256": "DC5390F058DEAA0AD9AD6D3CC387638C91A0EAC90DAE40F73EBC1C2F0962C8E9",
+        "Views": 5,
+        "Episode": 3,
+        "ComparedPixels": 320000.0,
+        "PixelDifferences": 0.0,
+        "Path": "local/render-partitions-projection-cache-typed-e3m6-ansiart.json",
+        "Style": "AnsiArt",
+        "Map": 6
+      }
+    ],
+    "SparseE1M1WorkerFallback": [
+      {
+        "WorkerPacketVersions": [
+          4
+        ],
+        "ActorCounts": [
+          91
+        ],
+        "Workers": 16,
+        "Fuzz": true,
+        "RawSha256": "486A04C97BAD88D6B5144FF4FECDAE49C2C0348B1D569EAFC8EBAA748B95ADC1",
+        "Views": 5,
+        "Episode": 1,
+        "ComparedPixels": 320000.0,
+        "PixelDifferences": 0.0,
+        "Path": "local/render-partitions-projection-cache-typed-e1m1-classic.json",
+        "Style": "Classic",
+        "Map": 1
+      }
+    ],
+    "SoundEnabledE1M3Host": {
+      "RebufferCount": 1,
+      "MusicFrames": 219240,
+      "ExitReason": "Duration",
+      "AudioDeviceClosed": true,
+      "AudioWorkerError": null,
+      "CompletedHeadlessUpdatesPerSecond": 30.95,
+      "Report": "local/renderer-projection-cache-e1m3-audio-host-20260928.json",
+      "SimulationTics": 174,
+      "TicsPerSecond": 34.74,
+      "AudioSubmittedFrames": 219240,
+      "ReportSha256": "5FAE7611A1C0F17CE3F5036EBBA2D6E63717AB1EA91DDE2A3E72E44855AEBF88",
+      "DurationSeconds": 5.0087987,
+      "CompletedHeadlessUpdates": 155,
+      "MusicTrack": "D_E1M3",
+      "AudioRealtime": false,
+      "Workers": 16,
+      "Headless": true
+    }
+  },
+  "SourceSha256": {
+    "FastRenderer": "1F6D152CD9C50BD45A8EC6BC2E7F1D1DF8874C606B0C00CE9CB21DC2E7C915AB",
+    "SnapshotTransport": "1AB58D42610DF4BD83859A66842B893A26C913E96017947B4AE63AC77A0C4CB6",
+    "PhaseHarness": "637C9DCC5AB9CF5E4B885F2E15EFE6B3BABCCABF7084457AEFD5E44228F1FB3F"
+  },
+  "EvidenceLineage": [
+    "results/episode1-current-human-candidate-20260928-r5.json",
+    "results/episode1-human-playthrough-candidate-20260927-r2.json",
+    "results/episode1-startup-runtime-compat-20260927.json"
+  ],
+  "CarriedForwardEvidence": "Menu, session screen, save/load/new-game, focused chainsaw/homing checks, and persistent worker lifecycle are indexed by the prior candidate and receipt chain. This update touches renderer snapshot transport, the PowerShell renderer, measurement/tests, and documentation; session and save code did not change.",
+  "KnownLimitations": [
+    "The complete human E1 route and finale remain unplayed; automated fixtures do not substitute for the user playthrough.",
+    "The prior chainsaw crash replay diverges at tic 350 and remains in E1M1, so it does not independently reproduce the E1M2 crash point; the focused current-source first-hit check passes.",
+    "The five-second headless audio run reports one rebuffer with real-time mode disabled; it does not qualify acoustic quality or continuous audio.",
+    "Headless updates are not Terminal writes or presented monitor frames; the 60-displayed-update goal remains open.",
+    "No independent original-executable visual parity is claimed."
+  ],
+  "SourceAttribution": "All cache, gameplay, rendering, and audio algorithms remain PowerShell. Typed arrays and .NET bulk copies transport the cache.",
+  "Meaning": "Source-pinned handoff for one complete human Episode 1 playthrough. It records readiness evidence without claiming a finished route."
+}
