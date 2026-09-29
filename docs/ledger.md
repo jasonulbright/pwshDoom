@@ -4457,6 +4457,26 @@ by this same-view check. See the
 [source-pinned receipt](../results/moving-sector-e1m1-height-sweep-r9-20260929.json);
 raw report and diagnostic images stay in ignored `local/`.
 
+## 2026-09-29 — Exercise the chainsaw crash through the player command path
+
+The saved R2 human-session report records the failure Jason saw after pressing
+Ctrl with the E1M2 chainsaw: PowerShell attempted an ordered comparison on a
+custom `Angle` instance (reported as 16.8992 degrees), which does not implement
+`IComparable`. The stack enters `WeaponBehavior.Saw` through
+`ExecutePlayerAction`, `SetPlayerSprite`, `MovePlayerSprites`, and `PlayerThink`.
+The angle-turn comparisons were fixed in `d84861f` by comparing the signed
+`Angle.Data` values in the affected branches.
+
+I strengthened `Test-SawAttack.ps1` so it equips the fixture player, sets the
+Chainsaw ready state, supplies the Attack bit through `DoomGame.Update`, and
+lets the actual weapon-state/action chain run against a living E1M2 imp. On
+PowerShell 7.6.5 it completes the hit after four simulation tics, lowers the
+imp from 60 to 56 HP, and raises no comparison exception. The Doom II homing
+angle regression also passes. This verifies the formerly crashing action path
+on current source; its fixed player position and short duration do not replay
+the human route or prove the whole E1M2 session. The refreshed
+[focused receipt](../results/saw-attack.json) records both checks.
+
 ## 2026-09-29 — Reject changed-cell ANSI output
 
 A 16-worker Classic E1M1 live comparison on the 1,560-command replay reduced

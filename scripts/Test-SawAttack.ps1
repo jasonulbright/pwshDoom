@@ -54,13 +54,21 @@ try {
     $mobj.Angle=[Geometry]::PointToAngle($mobj.X,$mobj.Y,$target.X,$target.Y)
 
     $initialHealth=$target.Health
-    $hit=$false
-    for($attempt=1;$attempt -le 20 -and -not $hit;$attempt++) {
-        $world.WeaponBehavior.Saw($player)
+    $player.ReadyWeapon=[WeaponType]::Chainsaw
+    $player.PendingWeapon=[WeaponType]::NoChange
+    $player.WeaponOwned[[int][WeaponType]::Chainsaw]=$true
+    $player.AttackDown=$false
+    $player.Cmd.Buttons=0
+    $readyState=[DoomInfo]::WeaponInfos[[int][WeaponType]::Chainsaw].ReadyState
+    $world.PlayerBehavior.SetPlayerSprite($player,[int][PlayerSprite]::Weapon,$readyState)
+    $commands[0].Buttons=[TicCmdButtons]::Attack
+    $hit=$target.Health -lt $initialHealth
+    for($tic=1;$tic -le 32 -and -not $hit;$tic++) {
+        $null=$game.Update($commands)
         $hit=$target.Health -lt $initialHealth
     }
-    if(-not $hit){throw "Chainsaw fixture did not hit its E1M2 imp in 20 attempts (HP $initialHealth)."}
-    $checks.Add(@{Check='E1M2 chainsaw hit executes angle adjustment';Evidence=@{TargetType=$target.Type.ToString();TargetHealthBefore=$initialHealth;TargetHealthAfter=$target.Health;Attempts=$attempt-1;PlayerAngleDegrees=$mobj.Angle.ToDegree()}})
+    if(-not $hit){throw "Chainsaw attack-button path did not hit its E1M2 imp in 32 simulation tics (HP $initialHealth)."}
+    $checks.Add(@{Check='E1M2 chainsaw attack-button path executes the player weapon action without comparison failure';Evidence=@{TargetType=$target.Type.ToString();TargetHealthBefore=$initialHealth;TargetHealthAfter=$target.Health;SimulationTicsToHit=$tic-1;PlayerAngleDegrees=$mobj.Angle.ToDegree()}})
 
     # The same PowerShell comparison limitation affected Doom II's homing turn.
     $target.Tracer=$mobj
@@ -77,7 +85,7 @@ try {
         FinishedUtc=[DateTime]::UtcNow.ToString('o')
         Checks=$checks.ToArray()
         WadSha256=(Get-FileHash $Wad).Hash
-        Scope='Component integration check of a real chainsaw hit against a living E1M2 imp; player position is an explicit test fixture and is not a campaign route.'
+        Scope='Input-to-player-weapon-state integration check with a fixed E1M2 player/imp position; not a campaign route or replay of the human crash session.'
     }
     $result | ConvertTo-Json -Depth 6 | Set-Content -LiteralPath "$PSScriptRoot/../results/saw-attack.json"
     "PASS: $($checks.Count) gameplay action checks."

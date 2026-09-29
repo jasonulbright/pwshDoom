@@ -1,17 +1,15 @@
 {
-  "FinishedUtc": "2026-09-28T20:29:40.4879779Z",
-  "Scope": "Component integration check of a real chainsaw hit against a living E1M2 imp; player position is an explicit test fixture and is not a campaign route.",
-  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "Scope": "Input-to-player-weapon-state integration check with a fixed E1M2 player/imp position; not a campaign route or replay of the human crash session.",
   "Checks": [
     {
       "Evidence": {
         "TargetType": "Troop",
+        "SimulationTicsToHit": 4,
+        "PlayerAngleDegrees": 4.499999983236194,
         "TargetHealthAfter": 56,
-        "TargetHealthBefore": 60,
-        "Attempts": 1,
-        "PlayerAngleDegrees": 4.499999983236194
+        "TargetHealthBefore": 60
       },
-      "Check": "E1M2 chainsaw hit executes angle adjustment"
+      "Check": "E1M2 chainsaw attack-button path executes the player weapon action without comparison failure"
     },
     {
       "Evidence": {
@@ -21,5 +19,7 @@
       },
       "Check": "Doom II homing tracer angle adjustment executes"
     }
-  ]
+  ],
+  "FinishedUtc": "2026-09-29T06:50:08.3944927Z",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F"
 }
