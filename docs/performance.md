@@ -977,3 +977,22 @@ in the worker that gates a completed frame, the change was reverted. This is
 not evidence of better host pacing or displayed frame rate. The
 [portable receipt](../results/rejected-plane-boundary-scan-20260929.json)
 indexes the four ignored raw profiles and their hashes.
+
+## Reject worker-range mask lookup — September 29, 2026
+
+For 280-actor E3M6 snapshots, a candidate precomputed the worker owning each
+pixel column and a bit mask for every contiguous worker range. Snapshot
+preparation then resolved the first and last sprite columns and looked up the
+covering-worker mask, replacing the per-actor scan across all 16 workers.
+PowerShell 7.6.6 profiles used eight warmups and 40 measured frames in
+baseline/candidate/candidate/baseline order. All four fixed-view framebuffer
+hashes match. Across the two pairs, mean median preparation time fell from
+12.6644 to 11.9290 ms (5.8%), but mean p95 rose from 14.6085 to 15.5967 ms
+(6.8%); the second pair regressed in both median and p95. This does not show a
+stable worker-pacing gain, and the serial stripe profile does not measure
+concurrent completion, host pacing, terminal writes, or displayed frames. The
+candidate was reverted. The restored R16 source passes five-view, 16-worker
+serial/worker equality on E3M6 in Classic, Matrix/Katakana, and
+AnsiArt/Katakana (320,000 pixels per style). See the
+[source-and-timing receipt](../results/rejected-worker-range-mask-20260929.json);
+raw profiles remain under ignored `local/`.

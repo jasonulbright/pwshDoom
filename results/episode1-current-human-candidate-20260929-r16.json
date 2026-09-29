@@ -18,10 +18,6 @@
     "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
     "MusicCatalogSha256": "0E9C9542C75F4D5E2D7FC71E42FAFBB58F94321C3B8A49BA0C9AC5A93752EE58"
   },
-  "ChangesSinceR14": {
-    "GameSourceChanged": false,
-    "Scope": "Requalified the reported audio-startup and chainsaw blockers and Episode 1 progression handoff under PowerShell 7.6.6. No engine source changed."
-  },
   "Validation": {
     "LauncherPreflight": {
       "Passed": true,
@@ -174,7 +170,16 @@
     "Doom II, Final Doom, and general PWAD compatibility are not claimed."
   ],
   "ChangesSinceR15": {
-    "Scope": "Added a bounded waveOut drain at normal unpaused worker shutdown. The PowerShell gameplay, rendering, and mixing algorithms are unchanged; paused/error exits and map/volume reset behavior still cancel immediately. Requalified actual E1M1 audio startup/closure, a current-source 36-map load/idle/render smoke, and audio worker shutdown/continuity on official portable PowerShell 7.6.6.",
-    "GameSourceChanged": true
+    "Scope": "R16 changes device-audio shutdown only: it adds a bounded drain of already-submitted Windows audio buffers on normal unpaused exit. Current-source checks under PowerShell 7.6.6 cover audio startup/shutdown and the 36-map load/render smoke. Chainsaw and campaign-transition fixtures are inherited from cdd5fdd68734dbc663367f44117fd8a49ac17694; gameplay and renderer code did not change between that source and R16. The complete human Episode 1 route remains pending.",
+    "GameSourceChanged": true,
+    "GameplaySourceChanged": false,
+    "RendererSourceChanged": false,
+    "AudioMixingAlgorithmsChanged": false,
+    "AudioDeviceLifecycleChanged": true,
+    "ChangedRuntimeFiles": [
+      "src/AudioRunspace.ps1",
+      "src/WaveOutDevice.ps1",
+      "scripts/Invoke-AudioWorker.ps1"
+    ]
   }
 }

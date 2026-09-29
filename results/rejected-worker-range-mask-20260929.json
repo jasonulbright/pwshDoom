@@ -1,0 +1,59 @@
+{
+  "Format": "pwshDoom.RejectedRendererOptimization",
+  "Version": 1,
+  "RecordedUtc": "2026-09-29T18:48:21Z",
+  "GameSourceCommit": "3e0b6308bac9dc152f9ae78fb8f23f70623b36e2",
+  "MeasurementBaseCommit": "2c772fc879cd484c1fffb19441675cac5c1ff776",
+  "Workload": {
+    "Map": "E3M6",
+    "Skill": "HMP",
+    "PowerShell": "7.6.6",
+    "Workers": 16,
+    "Actors": 280,
+    "WarmupFramesExcluded": 8,
+    "MeasuredFramesPerRun": 40,
+    "Order": ["baseline-a", "candidate-a", "candidate-b", "baseline-b"],
+    "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F"
+  },
+  "Change": {
+    "Description": "Precompute pixel-to-worker lookup and contiguous worker-range masks, replacing a per-actor scan of all render workers during snapshot preparation.",
+    "BaselineSnapshotTransportSha256": "E88163E3D970A02F5D81B9EEDDEB9F7B1E0FE2A90AFCF4019733D423D69E8F8A",
+    "CandidateSnapshotTransportSha256": "EF34E3E291A5FDF7B983C9B73E92B595F37EABB337B8684E6BB4B704BC85C9FE",
+    "BaselineGameProcessesSha256": "D98620E60349CBFD5032A5389D99CA9737DD4276309AEBCA464E5D57056831AD",
+    "CandidateGameProcessesSha256": "C3371363FC19D80CCA3E93911459E6EA5D36177725E3B0EE6787D375DE4DDB61",
+    "Decision": "Rejected; the source changes were reverted."
+  },
+  "SnapshotPreparationMilliseconds": [
+    { "Run": "baseline-a", "Median": 13.3189, "P95": 15.2295, "Profile": "local/mask-range-7.6.6-baseline-a-20260929.json", "Sha256": "E6BA0AF5A9FD4B6E13B99EDCD76DC493F480B098F13CBD79B85B1D7C6563554F" },
+    { "Run": "candidate-a", "Median": 11.2688, "P95": 12.7371, "Profile": "local/mask-range-7.6.6-candidate-a-20260929.json", "Sha256": "117E993BEFFE8C3DA4503DEAAAA7F448FAD7B26B2888C3D32072DF187BDDAFB7" },
+    { "Run": "candidate-b", "Median": 12.5891, "P95": 18.4563, "Profile": "local/mask-range-7.6.6-candidate-b-20260929.json", "Sha256": "C22951B857C235419E5CA0A0564FF9B0E9ADB67988A4E863CB888E0BDF1FEFFE" },
+    { "Run": "baseline-b", "Median": 12.0099, "P95": 13.9875, "Profile": "local/mask-range-7.6.6-baseline-b-20260929.json", "Sha256": "3166E2A450331C2E8DACAD220BFB2A1D8BEA2F9C7C0B5B7987687F6096F43B32" }
+  ],
+  "PairedSummary": {
+    "BaselineAverageMedianMs": 12.6644,
+    "CandidateAverageMedianMs": 11.929,
+    "MedianChangePercent": -5.8,
+    "BaselineAverageP95Ms": 14.6085,
+    "CandidateAverageP95Ms": 15.5967,
+    "P95ChangePercent": 6.8,
+    "Interpretation": "The first pair improved; the second pair regressed. The candidate's average median was lower, but its average p95 was higher. The sequential stripe profile does not measure concurrent worker completion, the complete host, terminal writes, or displayed FPS."
+  },
+  "PixelCheck": {
+    "ComparedFrameSha256": "92BFF34916AE31903A0A2A35A386940121EEE521346A3355543985E371561D82",
+    "AllFourProfileFrameHashesMatch": true,
+    "Scope": "One fixed E3M6 view; this is not campaign-wide pixel-equivalence evidence."
+  },
+  "AfterRevert": {
+    "PowerShell": "7.6.6",
+    "Map": "E3M6",
+    "Workers": 16,
+    "ViewsPerStyle": 5,
+    "PixelsPerStyle": 320000,
+    "DifferencesPerStyle": 0,
+    "Reports": [
+      { "Path": "local/worker-range-baseline-classic-e3m6-16-20260929.json", "Sha256": "3D7D9A5CF0396411C50D6A132C4657611B267AEF431E347F9D7D33DACD0545DF" },
+      { "Path": "local/worker-range-baseline-matrix-e3m6-16-20260929.json", "Sha256": "D72CDC1C96B6401CACE9C4C888F9EB3C2A0DF6C9079B02FFD209EE75EA94FD42" },
+      { "Path": "local/worker-range-baseline-ansiart-e3m6-16-20260929.json", "Sha256": "544D3F1C4F45E1199FE35B3585C54286008C3AF21997E8D430F12682D9418BC0" }
+    ]
+  }
+}

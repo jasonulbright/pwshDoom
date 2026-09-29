@@ -5067,14 +5067,14 @@ single complete human HMP Episode 1 playthrough.
 ### Current branch count after the R16 source pin
 
 The 182-commit Preview.2-to-R16 count above is pinned to game source
-`3e0b630`. The branch now ends at `958b2f5`, two documentation/evidence
-commits later, so the current counts are 184 commits from Preview.2 and 70
-commits after the Preview.3 tag. Those two commits do not change `src/` or
-`scripts/`; the source diff remains 24 files (+1,268/−161) across 43
-source-touching commits. The current range adds three more result files and
-expands the documentation diff to 31 files (+7,676/−97). Thus the change in
-commit count since the R16 source pin is documentation and recorded evidence,
-not additional engine code.
+`3e0b630`. At the audit snapshot, HEAD was `2c772fc`, four
+documentation/evidence commits later: 186 commits from Preview.2 and 72 after
+the Preview.3 tag. Those four commits did not change `src/` or `scripts/`; the
+source diff remained 24 files (+1,268/−161) across 43 source-touching commits.
+The Preview.3-to-HEAD range at that snapshot changed 94 result files
+(+40,102/−11) and 19 documentation, README, or changelog files (+2,828/−58).
+Thus the increase since the R16 source pin was documentation and recorded
+evidence, not additional engine code.
 
 ## 2026-09-29 — Recheck the full campaign music catalog on R16
 
@@ -5089,3 +5089,34 @@ the short run exercises only the D_E1M1 playback path, not all tracks or
 campaign-length acoustics/continuity. See the [audio preparation record]
 (music-preparation.md#current-source-full-catalog-runtime-check--september-29-2026)
 and [portable receipt](../results/music-campaign-catalog-host-r16-20260929.json).
+
+## 2026-09-29 — Reject worker-range snapshot masks
+
+On the R16 source, a PowerShell candidate precomputed the 320-column
+pixel-to-worker map and every contiguous worker-index range mask, replacing
+the per-actor loop over renderer workers. Exact framebuffer output matched in
+all four fixed E3M6 profiles, with 280 actors and 16 workers. In a warmup-
+excluded baseline/candidate/candidate/baseline comparison under PowerShell
+7.6.6, the two-pair average snapshot-preparation median improved 5.8%, but the
+average p95 regressed 6.8%; the second candidate run was slower than its paired
+baseline in both median and p95. Since this serial profile does not establish
+concurrent worker or game-host pacing, the change was rejected and reverted.
+The restored R16 source passes exact five-view, 16-worker E3M6 output checks
+for Classic, Matrix/Katakana, and AnsiArt/Katakana. See the [measurement and
+parity receipt](../results/rejected-worker-range-mask-20260929.json). The
+separate source-count audit above is a snapshot pinned to commit `2c772fc`.
+
+## 2026-09-29 — Correct the R16 source-delta record
+
+The R16 candidate receipt carried forward a stale R15 source-change field. The
+receipt now gives the exact delta under `ChangesSinceR15`: the audio worker
+tracks completed Windows buffers and drains the normal unpaused shutdown tail.
+It lists the three changed runtime files and distinguishes that
+device-lifecycle change from unchanged gameplay, rendering, and mixing
+algorithms. Its chainsaw and campaign-transition fixtures remain explicitly
+pinned to the preceding `cdd5fdd` gameplay source; they are inherited evidence,
+not tests newly run at `3e0b630`. The current 7.6.6 launcher preflight was
+rechecked against the installed 36-map IWAD and the documented 11-track
+Episode 1 catalog and reports `Ready`. The article draft now describes R16,
+the measured shutdown behavior, the interrupted human attempt, and the
+remaining campaign/fidelity/audio/pacing limits.
