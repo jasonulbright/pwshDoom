@@ -21,10 +21,17 @@ receipt](../results/episode1-current-human-candidate-20260928-r5.json),
 [geometry/cache supplement](../results/episode1-current-human-candidate-20260928-r2.json),
 and [realtime-audio supplement](../results/episode1-current-human-candidate-20260928-r3.json); the [visible-actor profile](../results/renderer-visible-actor-filter-20260928.json) reports sequential worker-equivalent CPU and does not claim a frame-rate gain.
 
-The current single-playthrough handoff is r7 at source commit
-`e8fd50012c343a3e858001a086e2de7b5efac786`; see its [candidate receipt](../results/episode1-current-human-candidate-20260929-r7.json)
+The current single-playthrough handoff is r8 at source commit
+`203ca553c3cf947b1099d73b1722711ae1b405c7`; see its [candidate receipt](../results/episode1-current-human-candidate-20260929-r8.json)
 and the exact [complete Episode 1 scope](episode1-playtest.md). Jason's human
-route remains pending. The sector-plane cache passes a new 36-map load/idle/render
+route remains pending. The visibility arithmetic checks, 36-map smoke, 69
+transition fixtures, and 97 boss fixtures pass on this source. Current HMP
+route drivers pass E1M1, E1M2, and E1M4; the E1M3 waypoint driver stalls
+without a reproduced defect. Its archived 7,118-command fixed-input replay
+diverges at 23 of 24 checkpoints on both the pre-change source and r8, with
+identical actual hashes; the recorded fingerprint is stale. This does not
+qualify E1M3 on r8. See the [visibility receipt](../results/visibility-fixed-point-allocation-20260929.json).
+The sector-plane cache passes a new 36-map load/idle/render
 smoke and five-view 16-worker equality in all three styles. An isolated
 PowerShell phase experiment shows lower geometry time with unchanged full-frame
 hashes; one matching 60-second headless host pair is unpaired and cannot assign
@@ -118,10 +125,14 @@ Episode 1 receipts remain available with their original source pins. Detailed
 renderer failures and corrected route-replay reports are linked from the
 current readiness receipt above.
 
-An additional E1M3 waypoint-driver attempt stopped short of its next point
-without a crash or reproducible engine defect; route tuning was not continued.
-The retained 7,118-command E1M3 fixed-input replay reaches E1M4 with all 24
-checkpoints matching, and is the regression evidence for that map.
+An additional E1M3 waypoint-driver attempt stopped at waypoint 28 without a
+crash or reproducible engine defect; route tuning was not continued. The
+7,118-command fixed-input replay passed all 24 checkpoints when qualified at
+its original source pin. When replayed on pre-change source `e8fd500` and r8,
+both runs diverge from its old fingerprints at the same 23 checkpoints,
+beginning at tic 350. The source fingerprint does not match either build and
+the cause of this historical mismatch is unknown, so it is not current-source
+regression evidence. Jason's complete human run remains pending.
 
 E1M1 has an [input-only completion report](../results/e1m1-route-lineflags.json) with 1560 commands. That route ends at intermission; it does not qualify next-level presentation or a whole episode. The existing E1M1 driver was rerun without waypoint changes on current source commit `1bd96b0` and again reached intermission in 1560 commands; its [source-pinned receipt](../results/e1m1-route-current-source-validation-20260927.json) distinguishes this automated route from human play. The older fixed input in `results/e1m1-route.json` is not current-source completion evidence: its live replay ended at `ReplayEnd` on E1M1. E1M2 has a separate [normal-route qualification](campaign-e1m2.md), including recorded continuation into E1M3. The remaining maps still need completion evidence. Source-version matching is checked separately from input/state equivalence.
 
@@ -139,7 +150,7 @@ The integrated host also loads an intermission save, advances to E1M2, then load
 | --- | --- | --- | --- |
 | E1M1 | Pass | Pass, HMP | Pass: real intermission -> E1M2 |
 | E1M2 | Pass | Pass, HMP pistol start, normal exit | Pass: recorded AnsiArt intermission -> E1M3, 13 matching checkpoints |
-| E1M3 | Pass | Pass, HMP pistol start, normal exit; [evidence](campaign-e1m3.md) | Recorded Matrix intermission -> E1M4 passes 24 checkpoints and all audio frames; 47 integration checks. Pacing/queue starvation remain open |
+| E1M3 | Pass | Historical HMP normal-exit evidence at its original source pin; current r8 waypoint driver stalls and the old fixed-input replay is stale-source | Historical Matrix intermission -> E1M4 recording passed 24 checkpoints and audio accounting at its original source pin; it does not qualify r8. Pacing/queue starvation remain open |
 | E1M4 | Pass | Pass, HMP pistol start, normal exit; [evidence](campaign-e1m4.md) | Recorded AnsiArt intermission -> E1M5 passes all 22 checkpoints and 51 integration checks; all audio frames return. Pacing and acoustic continuity remain open |
 | E1M5 | Pass | [Automated route investigation](campaign-e1m5-investigation.md) is paused for the single human Episode 1 milestone; HMP completion remains unqualified. The qualified E1M4 continuation reaches waypoint 316/414 then dies; exact suffix replay matches 212/212 trace samples without reproducing an engine defect | E1M4→E1M5 entry is qualified through headless replay; E1M5 terminal-host completion untested |
 | E1M6 | Pass | Untested | Untested in terminal host |

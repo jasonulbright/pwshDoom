@@ -1,0 +1,150 @@
+{
+  "Format": "pwshDoom.Episode1CurrentHumanCandidate",
+  "Version": 1,
+  "RecordedUtc": "2026-09-29T04:18:56.8451456Z",
+  "Branch": "codex/feasibility-study",
+  "ImplementationCommit": "203ca553c3cf947b1099d73b1722711ae1b405c7",
+  "PowerShell": "7.6.5",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "PreviousCandidate": {
+    "Path": "results/episode1-current-human-candidate-20260929-r7.json",
+    "Sha256": "927ACC4D32D1D97D0EFA611E4A533314AFDE388AA8D5A2AC8AEBDA82E0DACFAE",
+    "ImplementationCommit": "e8fd50012c343a3e858001a086e2de7b5efac786"
+  },
+  "Readiness": "Prepared for one complete HMP Episode 1 human playthrough; the human route and result remain pending.",
+  "PlaythroughScope": [
+    "E1M1",
+    "E1M2",
+    "E1M3",
+    "E1M9",
+    "E1M4",
+    "E1M5",
+    "E1M6",
+    "E1M7",
+    "E1M8",
+    "E1 finale (E1TEXT/CREDIT)"
+  ],
+  "FreshHumanRunPaths": {
+    "Saves": "local/episode1-human-saves-r8",
+    "Settings": "local/episode1-human-settings-r8.json",
+    "Input": "local/episode1-human-input-r8.json",
+    "Report": "local/episode1-human-session-r8.json"
+  },
+  "Implementation": {
+    "Summary": "The PowerShell visibility checker now reuses per-instance fixed-point slope wrappers and keeps line-intercept and slope-divide calculations in raw Int32 values.",
+    "Source": "src/ManagedDoom/Doom/World/VisibilityCheck.sb.ps1",
+    "SourceSha256": "A78C645B8F2E8F80FE835C9F6F8E5F627ADA22122478DB08B9BA9A47240AFAEF",
+    "PowerShellOnly": true,
+    "AudioRendererMenuSaveCodeChanged": false
+  },
+  "Validation": {
+    "Arithmetic": {
+      "DirectInterceptCases": 2,
+      "RandomInterceptParityCases": 50000,
+      "FixedDivisionBoundaryCases": 121,
+      "FixedDivisionRandomParityCases": 50000,
+      "ProductionSightBoundsBoundaryCases": 200,
+      "ProductionSightBoundsRandomCases": 50000,
+      "Mismatches": 0,
+      "Receipt": "results/visibility-fixed-point-allocation-20260929.json",
+      "ReceiptSha256": "DE09017310B1D8E5196F609ABC218910A5E63E7133A8D8CDAF9F1DECE14EE6D7"
+    },
+    "UltimateDoomMapSmoke": {
+      "Passed": 36,
+      "Failed": 0,
+      "IdleTicsPerMap": 35,
+      "ReceiptSha256": "974C955FE784E2E0FD5853F9AC2862B5E4456E6C658160F909718105BDB892D5"
+    },
+    "Episode1Transitions": {
+      "Passed": 69,
+      "Failed": 0,
+      "ReceiptSha256": "DB83DA8851A667E0CCF0643AB8A0FD4B42197AB3C812D148117F67996972F2E6"
+    },
+    "BossProgression": {
+      "Passed": 97,
+      "Failed": 0,
+      "ReceiptSha256": "6C2CE4748EF91AADBEB286F344EED91ED79D03E3F940ABC458C181B85153D8AE"
+    },
+    "ExistingRouteRegressions": [
+      {
+        "Map": "E1M1",
+        "Passed": true,
+        "Commands": 1560,
+        "ReportSha256": "3DB73B824D7C56237EC8C42398C5069BF78C0C8CEC5E0B386681F8D8BE7DA9D8"
+      },
+      {
+        "Map": "E1M2",
+        "Passed": true,
+        "Commands": 3011,
+        "ReportSha256": "696B366AD620E1A8C58FEAC19048219B38220DF74BDB9BE9B4BB31783633ACDB"
+      },
+      {
+        "Map": "E1M3",
+        "Passed": false,
+        "Commands": 2302,
+        "Reason": "Existing waypoint driver stalled at waypoint 28; no reproducible engine defect. Route tuning remains stopped.",
+        "ReportSha256": "4538B566C6BFC1DF07A1AD9FFA7A884A33B8C90EF1E3F1A8B4B41D0360468C55"
+      },
+      {
+        "Map": "E1M4",
+        "Passed": true,
+        "Commands": 4726,
+        "ReportSha256": "27860D8F769B6C746AB6B4E692CD1FD556137420921FEB5AA70E721E3A1E1D89"
+      }
+    ],
+    "ArchivedE1M3Replay": {
+      "Commands": 7118,
+      "ReplaySha256": "A9E3E3E48DF5A483D904A412E3AF7A872ED5B5862713A331DC3310007AA09970",
+      "CurrentSourceFingerprintMatches": false,
+      "CheckpointsChecked": 24,
+      "CheckpointsMatched": false,
+      "MismatchCount": 23,
+      "FirstDivergenceTic": 350,
+      "PrechangeAndCandidateMismatchArraysIdentical": true,
+      "Meaning": "The recorded E1M3 replay is stale for both the pre-change source e8fd500 and this candidate. Both builds produce identical expected and actual hashes at all 24 checkpoints, with 23 mismatches beginning at tic 350. This is not evidence that this change caused the older route divergence."
+    },
+    "CarriedForwardRendererEvidence": {
+      "PreviousCandidate": "r7",
+      "RendererAndSnapshotCodeChanged": false,
+      "Meaning": "r7 serial/worker output comparisons in Classic, Matrix/Katakana, and AnsiArt/Katakana carry forward because no renderer or snapshot files changed.",
+      "PreviousCandidateReceiptSha256": "927ACC4D32D1D97D0EFA611E4A533314AFDE388AA8D5A2AC8AEBDA82E0DACFAE"
+    }
+  },
+  "Performance": {
+    "Receipt": "results/visibility-fixed-point-allocation-20260929.json",
+    "ReceiptSha256": "DE09017310B1D8E5196F609ABC218910A5E63E7133A8D8CDAF9F1DECE14EE6D7",
+    "Design": "Two baseline and two candidate runs in baseline-candidate-candidate-baseline order, using the same 420-command HMP E3M6 input; repeated once with stage instrumentation and once without it.",
+    "UnprofiledSimulationMedianMs": {
+      "Baseline": 15.2169,
+      "Candidate": 14.627,
+      "ChangePercent": -3.88
+    },
+    "UnprofiledSimulationP95Ms": {
+      "Baseline": 39.3711,
+      "Candidate": 39.735,
+      "ChangePercent": 0.92
+    },
+    "SightCallsPerRun": 7892,
+    "CheckpointsPerRun": 2,
+    "AllRunsCheckpointsMatched": true,
+    "Target35HzQualified": false,
+    "Target60PresentedFramesQualified": false,
+    "Note": "The unprofiled median improvement is modest and the p95 is unchanged/slightly higher; single-map synthetic stress evidence only."
+  },
+  "HumanPlaythrough": {
+    "Pending": true,
+    "Scope": "One complete HMP Episode 1 run including the E1M3 secret exit to E1M9, return to E1M4, and the finale.",
+    "Instructions": "docs/episode1-playtest.md"
+  },
+  "KnownLimitations": [
+    "The complete human route has not been played; automated checks do not replace it.",
+    "The existing E1M3 waypoint route stalled without an independently reproduced game defect.",
+    "The old fixed-input E1M3 replay no longer matches current-source checkpoints and does not qualify current-source completion.",
+    "Full-campaign audio continuity, acoustic quality, original-executable visual parity, sustained 35 Hz simulation, and 60 displayed updates/sec remain unqualified."
+  ],
+  "EvidenceLineage": [
+    "results/episode1-current-human-candidate-20260929-r7.json",
+    "results/visibility-fixed-point-allocation-20260929.json"
+  ],
+  "Meaning": "Source-pinned handoff for one complete human Episode 1 playthrough. Automated evidence proves readiness checks only; it does not claim the route or finale have been completed."
+}

@@ -4335,3 +4335,47 @@ pins source and input hashes; the raw report remains in ignored local/.
 See the [audio findings](audio.md#e3m6-music-under-current-renderer-load-2026-09-28),
 [performance results](performance.md#output-clock-audio-under-e3m6-renderer-load--september-28-2026),
 and [campaign matrix](campaign-matrix.md).
+
+## 2026-09-29 — Reduce fixed-point visibility allocations
+
+At implementation commit `203ca553c3cf947b1099d73b1722711ae1b405c7`,
+`VisibilityCheck` returns raw integer intercept fractions internally and
+computes sight-bound slopes without allocating intermediate `Fixed` wrappers.
+The slope wrappers are now private to each checker and are updated in place.
+Public `InterceptVector` still returns `Fixed`. The integer division preserves
+the existing `Fixed.op_Division` saturation, signed wrapping, truncation, and
+failure semantics.
+
+The focused parity suite passes two direct intercept checks, 50,000
+deterministic raw intercept comparisons, 121 fixed-point division boundary
+pairs, and 50,000 random division comparisons. The production CheckSight
+initialization passes 200 boundary and 50,000 random sight-bound comparisons.
+The 36-map skill-3 load/idle/render smoke, 69 campaign transition checks, and
+97 boss progression checks pass. Existing current-source route drivers pass
+E1M1 (1,560 commands), E1M2 (3,011), and E1M4 (4,726). The E1M3 waypoint
+driver stops at waypoint 28 after 2,302 commands; it exposed no crash or
+reproducible engine defect, and its route was not tuned.
+
+Performance uses the same 420-command HMP E3M6 input and two saved state
+checkpoints, run twice per variant in baseline-candidate-candidate-baseline
+order. In uninstrumented runs, the mean of each variant's two simulation
+medians moves from 15.2169 ms on source `e8fd500` to 14.6270 ms on the
+candidate, a 3.88% reduction; mean p95 moves from 39.3711 to 39.7350 ms. With
+diagnostic instrumentation, the sight-check median improves 8.24%; this
+inclusive timer adds overhead and is not the headline result. The measured
+benefit is modest and narrow. It does not qualify 35 Hz or displayed frame
+rate. All eight profiled/unprofiled runs match the same replay hash and both
+checkpoints; the [receipt](../results/visibility-fixed-point-allocation-20260929.json)
+pins raw-report hashes and the harness. Local raw data remain ignored in
+`local/`.
+
+The archived 7,118-command E1M3 fixed-input replay was also rerun against both
+the pre-change source and the candidate. Its recorded source fingerprint no
+longer matches; both builds diverge at the same 23 of 24 checkpoints beginning
+at tic 350, with identical expected/actual hashes at every checkpoint. The
+reason for that source-era mismatch is not established. The old report cannot
+be used as current-source E1M3 completion evidence. The separate E1M3 waypoint
+driver also stalls without a reproduced game defect; no route tuning was
+started. The candidate still passes the other three existing normal-route
+regressions, and Jason's complete human Episode 1 run remains the next route
+evidence.

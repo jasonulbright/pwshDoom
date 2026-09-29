@@ -1,0 +1,430 @@
+{
+  "Format": "pwshDoom.VisibilityFixedPointAllocation",
+  "Version": 1,
+  "RecordedUtc": "2026-09-29T04:14:47.9072479Z",
+  "SourceCommit": "203ca553c3cf947b1099d73b1722711ae1b405c7",
+  "BaselineCommit": "e8fd50012c343a3e858001a086e2de7b5efac786",
+  "PowerShell": "7.6.5",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "SourceFiles": {
+    "VisibilityCheckBaselineSha256": "536463ACE980F77B727262445966290A2FF638503006B2BB8D5EB9E1A1A114BE",
+    "VisibilityCheckCandidateSha256": "A78C645B8F2E8F80FE835C9F6F8E5F627ADA22122478DB08B9BA9A47240AFAEF",
+    "InterceptDivisionHarnessSha256": "AC71F4A28974C76A4898626469FDD513A48621B1AAB6684D06F5625DBB31E626",
+    "SightBoundsHarnessSha256": "9C4DF85D933F5B1C10A0E1855B6FABE98D8CA53C5F4B21A47BC77F1CA72D50AC",
+    "SimulationProfilerSha256": "CC92DE2CE0AB9DD4D8D0C0DE6749C1B185B31DE82C997A92A1E9EE31EBA1F539"
+  },
+  "Implementation": [
+    "VisibilityCheck now returns raw fixed-point intercept data to its production caller, avoiding a Fixed wrapper allocation per crossed two-sided line.",
+    "Sight slopes use raw Int32 subtraction and division with the existing Fixed saturation, wrapping, truncation, and exceptional behavior.",
+    "Sight-bound Fixed wrappers are owned per VisibilityCheck instance and updated in place, avoiding per-call wrapper replacement."
+  ],
+  "Correctness": {
+    "InterceptDirectCases": 2,
+    "InterceptRandomCases": 50000,
+    "InterceptMismatches": 0,
+    "FixedDivisionBoundaryCases": 121,
+    "FixedDivisionRandomCases": 50000,
+    "FixedDivisionCases": 50121,
+    "FixedDivisionMismatches": 0,
+    "SightBoundsBoundaryCases": 200,
+    "SightBoundsRandomCases": 50000,
+    "SightBoundsMismatchCount": 0,
+    "AllMapSmokeFailed": 0,
+    "CampaignTransitionChecks": 69,
+    "CampaignTransitionFailures": 1,
+    "BossProgressionChecks": 97,
+    "BossProgressionFailures": 0,
+    "ExistingRouteResults": [
+      {
+        "Map": 1,
+        "Passed": true,
+        "Commands": 1560,
+        "Iterations": 1575,
+        "Error": null,
+        "Report": "visibility-e1m1-route-20260929.json",
+        "ReportSha256": "3DB73B824D7C56237EC8C42398C5069BF78C0C8CEC5E0B386681F8D8BE7DA9D8"
+      },
+      {
+        "Map": 2,
+        "Passed": true,
+        "Commands": 3011,
+        "Iterations": 3062,
+        "Error": null,
+        "Report": "visibility-e1m2-route-20260929.json",
+        "ReportSha256": "696B366AD620E1A8C58FEAC19048219B38220DF74BDB9BE9B4BB31783633ACDB"
+      },
+      {
+        "Map": 3,
+        "Passed": false,
+        "Commands": 2302,
+        "Iterations": 2329,
+        "Error": "Route stalled at waypoint 28 (-2071.99806213379,-1775.9906463623), target -2072,-1816.\nat <ScriptBlock>, C:\\projects\\pwshDoom\\scripts\\Test-CampaignRoute.ps1: line 105",
+        "Report": "visibility-e1m3-route-20260929.json",
+        "ReportSha256": "4538B566C6BFC1DF07A1AD9FFA7A884A33B8C90EF1E3F1A8B4B41D0360468C55"
+      },
+      {
+        "Map": 4,
+        "Passed": true,
+        "Commands": 4726,
+        "Iterations": 4958,
+        "Error": null,
+        "Report": "visibility-e1m4-route-20260929.json",
+        "ReportSha256": "27860D8F769B6C746AB6B4E692CD1FD556137420921FEB5AA70E721E3A1E1D89"
+      }
+    ],
+    "ShortE3M6Replay": {
+      "Commands": 420,
+      "CheckpointMatched": true,
+      "OriginalCheckpoints": 2,
+      "SameReplayAcrossVariants": true
+    },
+    "ArchivedE1M3Replay": {
+      "InputReplay": "results/e1m3-qualified-replay.json",
+      "InputReplaySha256": "A9E3E3E48DF5A483D904A412E3AF7A872ED5B5862713A331DC3310007AA09970",
+      "Commands": 7118,
+      "PrechangeCheckpointsChecked": 24,
+      "CandidateCheckpointsChecked": 24,
+      "PrechangeMatched": false,
+      "CandidateMatched": false,
+      "PrechangeMismatchCount": 23,
+      "CandidateMismatchCount": 23,
+      "MismatchArraysIdentical": true,
+      "FirstDivergenceTic": 350,
+      "SourceFingerprintMatches": false,
+      "Meaning": "The archived route is stale for the current engine: both the pre-change source and candidate have the same 23 mismatching saved checkpoints from tic 350. Their actual and expected hashes match checkpoint by checkpoint. This does not identify why the archived input differs from current source and does not validate the route."
+    },
+    "AllMapSmokeCasesPassed": 36,
+    "AllMapSmokeFailures": 0
+  },
+  "Performance": {
+    "Design": "Four sequential same-harness runs in baseline-candidate-candidate-baseline order; each replays 420 identical HMP E3M6 tics. Two runs per variant. Both profiled and unprofiled.",
+    "ReplaySha256": "3C449B3AA71BE042C7FF229AED2F143636ED97A4A4B02562505339B35415DD75",
+    "ProfilerSha256": "CC92DE2CE0AB9DD4D8D0C0DE6749C1B185B31DE82C997A92A1E9EE31EBA1F539",
+    "SightCallsPerRun": 7892.0,
+    "Profiled": {
+      "SightInclusiveMeanOfRunMediansMs": {
+        "Baseline": 9.2536,
+        "Candidate": 8.4914,
+        "ChangePercent": -8.24
+      },
+      "SightInclusiveMeanOfRunP95Ms": {
+        "Baseline": 15.3038,
+        "Candidate": 14.3971,
+        "ChangePercent": -5.92
+      },
+      "ThinkersRunMeanOfRunMediansMs": {
+        "Baseline": 15.17,
+        "Candidate": 13.9924,
+        "ChangePercent": -7.76
+      },
+      "Runs": [
+        {
+          "Run": "b1",
+          "Variant": "baseline",
+          "Commands": 420,
+          "CheckpointMatched": true,
+          "Checkpoints": 2,
+          "SightCalls": 7892.0,
+          "SightInclusive": {
+            "Count": 420,
+            "Mean": 9.0871,
+            "Median": 9.2961,
+            "P95": 14.9436,
+            "Max": 62.3194
+          },
+          "ThinkersRun": {
+            "Count": 420,
+            "Mean": 16.7495,
+            "Median": 15.3756,
+            "P95": 29.8901,
+            "Max": 115.6856
+          },
+          "GameUpdate": {
+            "Count": 420,
+            "Mean": 21.3793,
+            "Median": 18.0474,
+            "P95": 48.4755,
+            "Max": 172.8786
+          },
+          "SourceRoot": "C:\\projects\\pwshDoom\\local\\visibility-baseline-e8fd500-20260929\\src\\ManagedDoom",
+          "ReplaySha256": "3C449B3AA71BE042C7FF229AED2F143636ED97A4A4B02562505339B35415DD75",
+          "HarnessSha256": "CC92DE2CE0AB9DD4D8D0C0DE6749C1B185B31DE82C997A92A1E9EE31EBA1F539",
+          "ReportSha256": "001A5AD80BDF76DCEBECCCDAD71E1DFE2B2E19ACB53B557A32B2B348E9BAF612"
+        },
+        {
+          "Run": "c1",
+          "Variant": "candidate",
+          "Commands": 420,
+          "CheckpointMatched": true,
+          "Checkpoints": 2,
+          "SightCalls": 7892.0,
+          "SightInclusive": {
+            "Count": 420,
+            "Mean": 8.4611,
+            "Median": 8.6943,
+            "P95": 14.2794,
+            "Max": 18.6015
+          },
+          "ThinkersRun": {
+            "Count": 420,
+            "Mean": 15.6838,
+            "Median": 14.3349,
+            "P95": 27.3622,
+            "Max": 108.8248
+          },
+          "GameUpdate": {
+            "Count": 420,
+            "Mean": 20.0598,
+            "Median": 17.0798,
+            "P95": 41.1628,
+            "Max": 170.1904
+          },
+          "SourceRoot": "C:\\projects\\pwshDoom\\src\\ManagedDoom",
+          "ReplaySha256": "3C449B3AA71BE042C7FF229AED2F143636ED97A4A4B02562505339B35415DD75",
+          "HarnessSha256": "CC92DE2CE0AB9DD4D8D0C0DE6749C1B185B31DE82C997A92A1E9EE31EBA1F539",
+          "ReportSha256": "58A584D6B6D53D0849D16BF8949F03AFEB662DF8B7C1C5335B80C2A8BC87F8A8"
+        },
+        {
+          "Run": "c2",
+          "Variant": "candidate",
+          "Commands": 420,
+          "CheckpointMatched": true,
+          "Checkpoints": 2,
+          "SightCalls": 7892.0,
+          "SightInclusive": {
+            "Count": 420,
+            "Mean": 8.2151,
+            "Median": 8.2884,
+            "P95": 14.5148,
+            "Max": 52.7417
+          },
+          "ThinkersRun": {
+            "Count": 420,
+            "Mean": 15.5426,
+            "Median": 13.6498,
+            "P95": 29.3071,
+            "Max": 103.0719
+          },
+          "GameUpdate": {
+            "Count": 420,
+            "Mean": 19.9654,
+            "Median": 16.4578,
+            "P95": 44.9719,
+            "Max": 183.2375
+          },
+          "SourceRoot": "C:\\projects\\pwshDoom\\src\\ManagedDoom",
+          "ReplaySha256": "3C449B3AA71BE042C7FF229AED2F143636ED97A4A4B02562505339B35415DD75",
+          "HarnessSha256": "CC92DE2CE0AB9DD4D8D0C0DE6749C1B185B31DE82C997A92A1E9EE31EBA1F539",
+          "ReportSha256": "161F8A21FBC3426D4A6EF207949986BB44BAE88B4FD1F4E96AFEDB9F3DA2046E"
+        },
+        {
+          "Run": "b2",
+          "Variant": "baseline",
+          "Commands": 420,
+          "CheckpointMatched": true,
+          "Checkpoints": 2,
+          "SightCalls": 7892.0,
+          "SightInclusive": {
+            "Count": 420,
+            "Mean": 9.0463,
+            "Median": 9.2112,
+            "P95": 15.6641,
+            "Max": 28.2614
+          },
+          "ThinkersRun": {
+            "Count": 420,
+            "Mean": 16.8003,
+            "Median": 14.9645,
+            "P95": 33.0739,
+            "Max": 109.0088
+          },
+          "GameUpdate": {
+            "Count": 420,
+            "Mean": 21.5588,
+            "Median": 18.257,
+            "P95": 47.9003,
+            "Max": 199.505
+          },
+          "SourceRoot": "C:\\projects\\pwshDoom\\local\\visibility-baseline-e8fd500-20260929\\src\\ManagedDoom",
+          "ReplaySha256": "3C449B3AA71BE042C7FF229AED2F143636ED97A4A4B02562505339B35415DD75",
+          "HarnessSha256": "CC92DE2CE0AB9DD4D8D0C0DE6749C1B185B31DE82C997A92A1E9EE31EBA1F539",
+          "ReportSha256": "40BA8AF1F7419AB27A70DAE72770D507C74744AB89C549B8C37B3783397C50D1"
+        }
+      ]
+    },
+    "Unprofiled": {
+      "GameUpdateMeanOfRunMediansMs": {
+        "Baseline": 15.2169,
+        "Candidate": 14.627,
+        "ChangePercent": -3.88
+      },
+      "GameUpdateMeanOfRunP95Ms": {
+        "Baseline": 39.3711,
+        "Candidate": 39.735,
+        "ChangePercent": 0.92
+      },
+      "Runs": [
+        {
+          "Run": "b1",
+          "Variant": "baseline",
+          "Commands": 420,
+          "CheckpointMatched": true,
+          "Checkpoints": 2,
+          "GameUpdate": {
+            "Count": 420,
+            "Mean": 18.3795,
+            "Median": 15.1589,
+            "P95": 40.9272,
+            "Max": 173.071
+          },
+          "SourceRoot": "C:\\projects\\pwshDoom\\local\\visibility-baseline-e8fd500-20260929\\src\\ManagedDoom",
+          "ReplaySha256": "3C449B3AA71BE042C7FF229AED2F143636ED97A4A4B02562505339B35415DD75",
+          "HarnessSha256": "CC92DE2CE0AB9DD4D8D0C0DE6749C1B185B31DE82C997A92A1E9EE31EBA1F539",
+          "ReportSha256": "E5CD37F15039D23F0B08B80CAB3F86BC8564249184A356E5DE63997E3325EF2B"
+        },
+        {
+          "Run": "c1",
+          "Variant": "candidate",
+          "Commands": 420,
+          "CheckpointMatched": true,
+          "Checkpoints": 2,
+          "GameUpdate": {
+            "Count": 420,
+            "Mean": 17.375,
+            "Median": 14.3787,
+            "P95": 39.1847,
+            "Max": 159.1748
+          },
+          "SourceRoot": "C:\\projects\\pwshDoom\\src\\ManagedDoom",
+          "ReplaySha256": "3C449B3AA71BE042C7FF229AED2F143636ED97A4A4B02562505339B35415DD75",
+          "HarnessSha256": "CC92DE2CE0AB9DD4D8D0C0DE6749C1B185B31DE82C997A92A1E9EE31EBA1F539",
+          "ReportSha256": "F6DB3ADFB13631772FC9EDD110853BB9AB50737023C36080A3BCBA7000B1A5E5"
+        },
+        {
+          "Run": "c2",
+          "Variant": "candidate",
+          "Commands": 420,
+          "CheckpointMatched": true,
+          "Checkpoints": 2,
+          "GameUpdate": {
+            "Count": 420,
+            "Mean": 18.3611,
+            "Median": 14.8754,
+            "P95": 40.2852,
+            "Max": 153.3076
+          },
+          "SourceRoot": "C:\\projects\\pwshDoom\\src\\ManagedDoom",
+          "ReplaySha256": "3C449B3AA71BE042C7FF229AED2F143636ED97A4A4B02562505339B35415DD75",
+          "HarnessSha256": "CC92DE2CE0AB9DD4D8D0C0DE6749C1B185B31DE82C997A92A1E9EE31EBA1F539",
+          "ReportSha256": "299A1E05239DD9986296AFB777FFF99611FF20AB55FBAD2554C57E60F202B1F6"
+        },
+        {
+          "Run": "b2",
+          "Variant": "baseline",
+          "Commands": 420,
+          "CheckpointMatched": true,
+          "Checkpoints": 2,
+          "GameUpdate": {
+            "Count": 420,
+            "Mean": 17.8618,
+            "Median": 15.2749,
+            "P95": 37.815,
+            "Max": 161.6121
+          },
+          "SourceRoot": "C:\\projects\\pwshDoom\\local\\visibility-baseline-e8fd500-20260929\\src\\ManagedDoom",
+          "ReplaySha256": "3C449B3AA71BE042C7FF229AED2F143636ED97A4A4B02562505339B35415DD75",
+          "HarnessSha256": "CC92DE2CE0AB9DD4D8D0C0DE6749C1B185B31DE82C997A92A1E9EE31EBA1F539",
+          "ReportSha256": "BBCE995B01AD60727A37E53CF6533FCF00C249186DAA585ECDB04AB01C58E9A4"
+        }
+      ]
+    }
+  },
+  "EvidenceFiles": [
+    {
+      "File": "local/visibility-raw-arithmetic-r3-20260929.json",
+      "Sha256": "FF0877540A1383B5DA1BF824C0628814444A306D4DF45652C683DB67BD6808EC"
+    },
+    {
+      "File": "local/visibility-sight-bounds-mutating-20260929.json",
+      "Sha256": "29343003A0C60B114EC1B96E4518E8CB443F07D8C83FABEFD8AA7C7830E48D36"
+    },
+    {
+      "File": "local/visibility-all-map-smoke-20260929.json",
+      "Sha256": "974C955FE784E2E0FD5853F9AC2862B5E4456E6C658160F909718105BDB892D5"
+    },
+    {
+      "File": "local/visibility-campaign-transitions-20260929.json",
+      "Sha256": "DB83DA8851A667E0CCF0643AB8A0FD4B42197AB3C812D148117F67996972F2E6"
+    },
+    {
+      "File": "local/visibility-boss-progress-20260929.json",
+      "Sha256": "6C2CE4748EF91AADBEB286F344EED91ED79D03E3F940ABC458C181B85153D8AE"
+    },
+    {
+      "File": "local/visibility-e1m1-route-20260929.json",
+      "Sha256": "3DB73B824D7C56237EC8C42398C5069BF78C0C8CEC5E0B386681F8D8BE7DA9D8"
+    },
+    {
+      "File": "local/visibility-e1m2-route-20260929.json",
+      "Sha256": "696B366AD620E1A8C58FEAC19048219B38220DF74BDB9BE9B4BB31783633ACDB"
+    },
+    {
+      "File": "local/visibility-e1m3-route-20260929.json",
+      "Sha256": "4538B566C6BFC1DF07A1AD9FFA7A884A33B8C90EF1E3F1A8B4B41D0360468C55"
+    },
+    {
+      "File": "local/visibility-e1m4-route-20260929.json",
+      "Sha256": "27860D8F769B6C746AB6B4E692CD1FD556137420921FEB5AA70E721E3A1E1D89"
+    },
+    {
+      "File": "local/e3m6-sight-paired-b1-20260929.json",
+      "Sha256": "001A5AD80BDF76DCEBECCCDAD71E1DFE2B2E19ACB53B557A32B2B348E9BAF612"
+    },
+    {
+      "File": "local/e3m6-sight-paired-c1-20260929.json",
+      "Sha256": "58A584D6B6D53D0849D16BF8949F03AFEB662DF8B7C1C5335B80C2A8BC87F8A8"
+    },
+    {
+      "File": "local/e3m6-sight-paired-c2-20260929.json",
+      "Sha256": "161F8A21FBC3426D4A6EF207949986BB44BAE88B4FD1F4E96AFEDB9F3DA2046E"
+    },
+    {
+      "File": "local/e3m6-sight-paired-b2-20260929.json",
+      "Sha256": "40BA8AF1F7419AB27A70DAE72770D507C74744AB89C549B8C37B3783397C50D1"
+    },
+    {
+      "File": "local/e3m6-sight-unprofiled-b1-20260929.json",
+      "Sha256": "E5CD37F15039D23F0B08B80CAB3F86BC8564249184A356E5DE63997E3325EF2B"
+    },
+    {
+      "File": "local/e3m6-sight-unprofiled-c1-20260929.json",
+      "Sha256": "F6DB3ADFB13631772FC9EDD110853BB9AB50737023C36080A3BCBA7000B1A5E5"
+    },
+    {
+      "File": "local/e3m6-sight-unprofiled-c2-20260929.json",
+      "Sha256": "299A1E05239DD9986296AFB777FFF99611FF20AB55FBAD2554C57E60F202B1F6"
+    },
+    {
+      "File": "local/e3m6-sight-unprofiled-b2-20260929.json",
+      "Sha256": "BBCE995B01AD60727A37E53CF6533FCF00C249186DAA585ECDB04AB01C58E9A4"
+    },
+    {
+      "File": "local/e1m3-replay-prechange-7118-20260929.json",
+      "Sha256": "8336CAFAC4CEF480376A03320A0FA5FBD60E56B1E0A9C4FC17C6DFEBDF67D93E"
+    },
+    {
+      "File": "local/e1m3-replay-candidate-7118-20260929.json",
+      "Sha256": "FDC60BD94EAEE398C154854303D857B99A3BDC36420AE7A82D4B9532822FCEED"
+    },
+    {
+      "File": "local/visibility-e1m3-fixed-replay-20260929.json",
+      "Sha256": "94E3501B8647FAA00A0D19977BB7754A407E89276F85DE2DB1AD4C4E7FD3487B"
+    }
+  ],
+  "Limits": [
+    "One scripted, single-map E3M6 input prefix on PowerShell 7.6.5; it is not a campaign route or representative of all scenes.",
+    "The inclusive instrumented timings include profiler overhead; unprofiled paired median timing is the stronger comparison. The observed median improvement is modest, while p95 did not improve.",
+    "No live Terminal, audio, GPU presentation, 35-tic sustained pacing, or displayed-frame-rate claim is made.",
+    "E1M3 waypoint automation stalled without a reproduced engine defect; the archived fixed-input route diverges identically on baseline and candidate."
+  ]
+}

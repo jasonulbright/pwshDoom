@@ -719,3 +719,38 @@ continuity, or 35-tic/60-display pacing. The simulation remained below 35 tics
 per active second. See the [audio discussion](audio.md#e3m6-music-under-current-renderer-load-2026-09-28)
 and [portable receipt](../results/e3m6-realtime-audio-loaded-20260928.json);
 the ignored raw report is local/current-source-e3m6-realtime-audio-30s-w16-20260928.json.
+
+## Reduce fixed-point visibility allocations — September 29, 2026
+
+The PowerShell `VisibilityCheck` now carries line-intercept fractions and
+slope divisions as raw signed 32-bit values through its hot path. It reuses
+per-instance `Fixed` slope wrappers, retaining the engine's wrap, saturation,
+arithmetic-shift, and truncation behavior. The change is pinned to source
+commit `203ca553c3cf947b1099d73b1722711ae1b405c7`.
+
+Correctness checks compare the raw operations with the existing `Fixed`
+implementation over two direct intercept cases, 50,000 deterministic random
+intercept inputs, 121 division boundary pairs, and 50,000 random division
+inputs. The production sight-bound path also matches 200 boundary and 50,000
+random cases. A 420-command E3M6 replay matches both saved state checkpoints in
+all baseline and candidate runs.
+
+For the paired performance comparison, each variant ran twice in
+baseline-candidate-candidate-baseline order on the same 420-command HMP E3M6
+input. Without stage instrumentation, the mean of the two simulation median
+times fell from 15.2169 ms to 14.6270 ms (3.88%); the corresponding p95 was
+39.3711 ms versus 39.7350 ms. Instrumented sight-check median time fell 8.24%,
+but that timing includes profiler overhead. The uninstrumented median is a
+modest single-scene result, not proof of the 35 Hz goal; the p95 did not
+improve. The [portable receipt](../results/visibility-fixed-point-allocation-20260929.json)
+contains every run hash and the exact test outcomes.
+
+The current-source 36-map smoke, 69 campaign-transition fixtures, and 97 boss
+progression checks pass. Existing HMP route drivers pass E1M1, E1M2, and E1M4;
+the E1M3 waypoint driver stalls without reproducing an engine defect. The
+archived 7,118-command E1M3 replay now diverges on 23 of 24 checkpoints against
+both the pre-change source and this candidate, with identical actual hashes;
+its source fingerprint does not match current source. The mismatch cause is
+unresolved, so that old recording is not current-build completion evidence.
+The human Episode 1 route remains pending. These runs do not measure a loaded
+Terminal, audio output, displayed frames, or full-campaign behavior.
