@@ -10,7 +10,7 @@ function New-GameRenderPool {
         . "$root/src/TerminalCodec.ps1"
         foreach($snapshot in $queue.GetConsumingEnumerable()) {
             try {
-                $ctx.World=$snapshot;$ctx.Sectors=$snapshot.Sectors;$ctx.Sides=$snapshot.Sides
+                $ctx.World=$snapshot;$ctx.Sectors=$snapshot.Sectors;$ctx.Sides=$snapshot.Sides;Update-FastRenderSectorData $ctx $snapshot.Sectors
                 $watch=[Diagnostics.Stopwatch]::StartNew()
                 Invoke-FastRender $ctx $first $end
                 $renderMs=$watch.Elapsed.TotalMilliseconds;$watch.Restart()

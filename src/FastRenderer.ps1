@@ -63,6 +63,10 @@ function Get-RenderPatch {
 function New-FastRenderContext {
     param($Content,$World)
     $map=$World.Map
+    [byte[][]]$planeFlatData=[byte[][]]::new($Content.Flats.Flats.Length)
+    for([int]$i=0;$i -lt $planeFlatData.Length;$i++){
+        if($null -ne $Content.Flats.Flats[$i]){$planeFlatData[$i]=[byte[]]$Content.Flats.Flats[$i].Data}
+    }
     $ctx=@{Content=$Content;World=$World;Lighting=(New-FastLightingTables);Pixels=[byte[]]::new(64000);Depth=[double[]]::new(64000);
         TopClip=[int[]]::new(320);BottomClip=[int[]]::new(320);Planes=[int[]]::new(53760);Patches=@{};Textures=@{};Hud=@{};
         Stack=[int[]]::new($map.Nodes.Length*2+4);SkyColumns=[int[]]::new(320);RaySin=[int[]]::new(320);RayCos=[int[]]::new(320);
@@ -70,7 +74,11 @@ function New-FastRenderContext {
         MaskedColumns=[Collections.Generic.List[hashtable]]::new();SegmentGeometry=[double[]]::new($map.Segs.Length*6);
         SegmentMetadata=[int[]]::new($map.Segs.Length*4);NodeGeometry=[double[]]::new($map.Nodes.Length*12);
         NodeChildren=[int[]]::new($map.Nodes.Length*2);Subsectors=$map.Subsectors;
-        Flats=$Content.Flats.Flats;Colors=$Content.ColorMap.Data;SkyFlat=$Content.Flats.SkyFlatNumber;Sectors=$map.Sectors;Sides=$map.Sides;SpriteAtlas=[object[]]::new($Content.Sprites.spriteDefs.Length)}
+        Flats=$Content.Flats.Flats;PlaneFlatData=$planeFlatData;
+        SectorFloorHeightData=[int[]]::new($map.Sectors.Length);SectorCeilingHeightData=[int[]]::new($map.Sectors.Length);
+        SectorFloorFlatIndex=[int[]]::new($map.Sectors.Length);SectorCeilingFlatIndex=[int[]]::new($map.Sectors.Length);
+        SectorLightLevels=[int[]]::new($map.Sectors.Length);SectorRenderDataReady=$false;
+        Colors=$Content.ColorMap.Data;SkyFlat=$Content.Flats.SkyFlatNumber;Sectors=$map.Sectors;Sides=$map.Sides;SpriteAtlas=[object[]]::new($Content.Sprites.spriteDefs.Length)}
     for([int]$x=0;$x -lt 320;$x++){$ctx.SpriteClipWalls[$x]=[Collections.Generic.List[object[]]]::new()}
     $sectorIndex=[Collections.Generic.Dictionary[object,int]]::new()
     for($i=0;$i -lt $map.Sectors.Length;$i++){$sectorIndex[$map.Sectors[$i]]=$i}
@@ -126,6 +134,32 @@ function New-FastRenderContext {
     $planeTables=Get-FastPlaneTables
     $ctx.PlaneColumnAngles=$planeTables.ColumnAngles;$ctx.PlaneDistanceScales=$planeTables.DistanceScales;$ctx.PlaneRowSlopes=$planeTables.RowSlopes;$ctx.PlaneFineSine=$planeTables.FineSine;$ctx.TanToAngleTable=$planeTables.TanToAngle
     return $ctx
+}
+
+function Update-FastRenderSectorData {
+    param($Context,[object[]]$Sectors)
+    if(-not $Context.ContainsKey('PlaneFlatData') -or $null -eq $Context.PlaneFlatData) {
+        [byte[][]]$Context.PlaneFlatData=[byte[][]]::new($Context.Flats.Length)
+        for([int]$i=0;$i -lt $Context.Flats.Length;$i++) {
+            if($null -ne $Context.Flats[$i]){$Context.PlaneFlatData[$i]=[byte[]]$Context.Flats[$i].Data}
+        }
+    }
+    if(-not $Context.ContainsKey('SectorFloorHeightData') -or $null -eq $Context.SectorFloorHeightData -or $Context.SectorFloorHeightData.Length -ne $Sectors.Length) {
+        $Context.SectorFloorHeightData=[int[]]::new($Sectors.Length)
+        $Context.SectorCeilingHeightData=[int[]]::new($Sectors.Length)
+        $Context.SectorFloorFlatIndex=[int[]]::new($Sectors.Length)
+        $Context.SectorCeilingFlatIndex=[int[]]::new($Sectors.Length)
+        $Context.SectorLightLevels=[int[]]::new($Sectors.Length)
+    }
+    for([int]$i=0;$i -lt $Sectors.Length;$i++) {
+        $sector=$Sectors[$i]
+        $Context.SectorFloorHeightData[$i]=[int][Math]::Truncate(65536.0*$sector.FloorHeight)
+        $Context.SectorCeilingHeightData[$i]=[int][Math]::Truncate(65536.0*$sector.CeilingHeight)
+        $Context.SectorFloorFlatIndex[$i]=[int]$sector.FloorFlat
+        $Context.SectorCeilingFlatIndex[$i]=[int]$sector.CeilingFlat
+        $Context.SectorLightLevels[$i]=[int]$sector.LightLevel
+    }
+    $Context.SectorRenderDataReady=$true
 }
 
 function Draw-FastPatch {
@@ -242,6 +276,7 @@ function Draw-FastNumber {
 
 function Invoke-FastRender {
     param($Context,[int]$FirstColumn=0,[int]$EndColumn=320)
+    if(-not $Context.ContainsKey('SectorRenderDataReady') -or -not $Context.SectorRenderDataReady){throw 'Update the render-sector cache for the current snapshot before rendering.'}
     $phaseWatch=[Diagnostics.Stopwatch]::StartNew();$world=$Context.World;$player=$world.ConsolePlayer;$camera=$player.Mobj
     [double]$cx=$camera.X;[double]$cy=$camera.Y;[double]$cz=$player.ViewZ
     [double]$angle=$camera.Angle
@@ -493,9 +528,10 @@ function Invoke-FastRender {
             }
             [int]$id=$planes[$row+$x]
             if($id -eq 0){$x++;continue}
-            $sector=$Context.Sectors[($id-1) -shr 1]
-            if(($id-1) -band 1){$heightData=[int][Math]::Truncate(65536.0*$sector.FloorHeight);$flat=[byte[]]$Context.Flats[$sector.FloorFlat].Data}
-            else{$heightData=[int][Math]::Truncate(65536.0*$sector.CeilingHeight);$flat=[byte[]]$Context.Flats[$sector.CeilingFlat].Data}
+            [int]$sectorIndex=($id-1) -shr 1
+            if(($id-1) -band 1){$heightData=$Context.SectorFloorHeightData[$sectorIndex];$flatIndex=$Context.SectorFloorFlatIndex[$sectorIndex]}
+            else{$heightData=$Context.SectorCeilingHeightData[$sectorIndex];$flatIndex=$Context.SectorCeilingFlatIndex[$sectorIndex]}
+            [byte[]]$flat=$Context.PlaneFlatData[$flatIndex];[int]$sectorLightLevel=$Context.SectorLightLevels[$sectorIndex]
             [long]$heightDelta=[long]$heightData-[long]$viewZData;if($heightDelta -lt 0){$heightDelta=-$heightDelta}
             [long]$distanceDataWide=([long]$heightDelta*[long]$Context.PlaneRowSlopes[$y]) -shr 16
             $distanceDataWide=$distanceDataWide -band 0xFFFFFFFFL
@@ -503,7 +539,7 @@ function Invoke-FastRender {
             [int]$distanceData=$distanceDataWide
             [int]$stepX=([long]$distanceData*[long]$planeBaseX) -shr 16
             [int]$stepY=([long]$distanceData*[long]$planeBaseY) -shr 16
-            [int]$light=$Context.Lighting.Distance[[Math]::Clamp(($sector.LightLevel -shr 4)+$player.ExtraLight,0,15)][[Math]::Clamp(($distanceData -shr 20),0,127)]
+            [int]$light=$Context.Lighting.Distance[[Math]::Clamp(($sectorLightLevel -shr 4)+$player.ExtraLight,0,15)][[Math]::Clamp(($distanceData -shr 20),0,127)]
             if($player.FixedColorMap -gt 0){$light=$player.FixedColorMap}
             [byte[]]$colors=$Context.Colors[$light];[byte[]]$flatData=$flat
             [int]$lengthData=([long]$distanceData*[long]$Context.PlaneDistanceScales[$x]) -shr 16

@@ -47,6 +47,7 @@ function New-GameRenderSnapshot {
 function Set-GameRenderSnapshot {
     param($Context,$Snapshot)
     $Context.World=$Snapshot;$Context.Sectors=$Snapshot.Sectors;$Context.Sides=$Snapshot.Sides
+    Update-FastRenderSectorData $Context $Snapshot.Sectors
 }
 
 # Same NumericV3 layout as ConvertTo-GameSnapshotBytes, packed directly from the

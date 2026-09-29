@@ -40,6 +40,7 @@ $ctx.PlaneRowSlopes=$planeTables.RowSlopes;$ctx.PlaneFineSine=$planeTables.FineS
 $ctx.TanToAngleTable=$planeTables.TanToAngle
 $ctx.SkyColumns=[int[]]::new(320);$ctx.RaySin=[int[]]::new(320);$ctx.RayCos=[int[]]::new(320)
 $ctx.MaskedColumns=[Collections.Generic.List[hashtable]]::new()
+Update-FastRenderSectorData $ctx $ctx.Sectors
 try{
     Invoke-FastRender $ctx
     Check 'Open floor pixel is marked as a plane' ($ctx.Planes[48174] -gt 0) $true

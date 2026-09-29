@@ -1,0 +1,313 @@
+{
+  "CampaignSmoke": {
+    "Raw": {
+      "Sha256": "6E376D78A51BC754BAE2E07273AFB0A491F2C59F3D81A671F65F9B7AE7C0D6F5",
+      "Path": "local/render-sector-cache-campaign-smoke-final-20260929.json"
+    },
+    "Passed": 36,
+    "SerialFramesPerMap": 2,
+    "MapCount": 36,
+    "Complete": true,
+    "Skill": 3,
+    "IdleTics": 35,
+    "Failed": 0
+  },
+  "MusicCatalogSha256": "0E9C9542C75F4D5E2D7FC71E42FAFBB58F94321C3B8A49BA0C9AC5A93752EE58",
+  "Version": 1,
+  "SourceBaseCommit": "11ddb2134182a4a3b3db7d71ca44cfaf0b42a56c",
+  "MovingSectorSweep": {
+    "Raw": {
+      "Sha256": "9F04B88108721FEE9A515B53C0D424607CCA9D4A2011FC0A97646FA4E1FFBD93",
+      "Path": "local/render-sector-arrays-moving-sector-sweep-20260929.json"
+    },
+    "TestedCeilingHeights": [
+      0,
+      6,
+      34,
+      68
+    ],
+    "ActualCeilingHeight": 6.0,
+    "HudDifferentIndices": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "Error": null,
+    "InputTic": 315,
+    "OriginalExecutableComparison": false,
+    "SectorIndex": 26
+  },
+  "RecordedUtc": "2026-09-29T02:19:35.7112520Z",
+  "ImplementationFiles": [
+    {
+      "Sha256": "16872550743A07D7AD071FB66B04AF2483F518477FBECA506A0DEE815735530C",
+      "Path": "src/FastRenderer.ps1"
+    },
+    {
+      "Sha256": "CBADD9B913973D0442B4BE7A45F4C1069FA75B8DCAF78F4A550AE72C4ACED706",
+      "Path": "src/GameHost.ps1"
+    },
+    {
+      "Sha256": "F43AD278BEE18EA712EDD89454C2526902AEBFB682A3F67F3A42286720BDF30D",
+      "Path": "scripts/Invoke-GameRenderWorker.ps1"
+    },
+    {
+      "Sha256": "076D506F512ED2CB4EAE97D234821F54191C6D22D0FAE8BAEB625308EDC4E691",
+      "Path": "scripts/RunspaceGameExperiment.ps1"
+    },
+    {
+      "Sha256": "FD12673BF57DD8DC4D4D6786102BB6FF0E77E5E1380B90DC5B36E7076BAAC291",
+      "Path": "scripts/Test-MaskedWallOrder.ps1"
+    }
+  ],
+  "Design": "Cache fixed-point sector floor/ceiling heights, current flat indices, and light levels in reusable typed arrays once per decoded snapshot; resolve current flat indices through a direct byte-array lookup table. Refresh snapshot values every frame so moving heights, changing light, and flat translation remain current.",
+  "PhaseExperiment": {
+    "FrameSha256": "B6B0A8899E495CA1A82658CBAF108D892F6E513B8CC87C7BA6DB99829C0DF67C",
+    "Method": "Three baseline then three candidate runs; 40 measured frames and 5 warmup frames per each of 16 production-width stripes; stripes rendered sequentially in one PowerShell process.",
+    "AllSixFramesIdentical": true,
+    "MedianOfRunMedians": {
+      "TotalP95ReductionPercent": 13.0558,
+      "TotalReductionPercent": 9.8011,
+      "BaselineGeometryMs": 6.8955,
+      "GeometryP95ReductionPercent": 13.2425,
+      "BaselineGeometryP95Ms": 10.4701,
+      "GeometryReductionPercent": 10.6214,
+      "CandidateGeometryP95Ms": 9.0836,
+      "CandidateGeometryMs": 6.1631,
+      "CandidateTotalMs": 7.4157,
+      "CandidateTotalP95Ms": 10.6531,
+      "BaselineTotalMs": 8.2215,
+      "BaselineTotalP95Ms": 12.2528
+    },
+    "Workload": {
+      "SourcePixels": "320x200 indexed",
+      "Tics": 0,
+      "TerminalAudioSimulationInTimer": false,
+      "Transport": "prepared actor-mask packet",
+      "Map": 1,
+      "Skill": 3,
+      "Episode": 1,
+      "Workers": 16
+    },
+    "CandidateTrials": [
+      {
+        "Raw": {
+          "Sha256": "3B9DE05BD512C2C49A7E2E53BBEAB644F235F8ED03BE7980EA3B754BE6A73144",
+          "Path": "local/render-sector-cache-final-a-20260929.json"
+        },
+        "TotalMedianMs": 7.3471,
+        "RendererSha256": "16872550743A07D7AD071FB66B04AF2483F518477FBECA506A0DEE815735530C",
+        "Trial": "final-a",
+        "GeometryP95Ms": 9.0836,
+        "TotalP95Ms": 10.6531,
+        "GeometryMedianMs": 6.0807,
+        "FullFrameSha256": "B6B0A8899E495CA1A82658CBAF108D892F6E513B8CC87C7BA6DB99829C0DF67C"
+      },
+      {
+        "Raw": {
+          "Sha256": "70D25F659C262C9FA40CFB965C2620D8F00D75205F94F05F91D22209B006AAC8",
+          "Path": "local/render-sector-cache-final-b-20260929.json"
+        },
+        "TotalMedianMs": 7.4157,
+        "RendererSha256": "16872550743A07D7AD071FB66B04AF2483F518477FBECA506A0DEE815735530C",
+        "Trial": "final-b",
+        "GeometryP95Ms": 8.9961,
+        "TotalP95Ms": 10.3646,
+        "GeometryMedianMs": 6.1631,
+        "FullFrameSha256": "B6B0A8899E495CA1A82658CBAF108D892F6E513B8CC87C7BA6DB99829C0DF67C"
+      },
+      {
+        "Raw": {
+          "Sha256": "D8F21B0EA13683DCC5D3C8B4C017D64A1E072EA16D9D850991A69739C7135A16",
+          "Path": "local/render-sector-cache-final-c-20260929.json"
+        },
+        "TotalMedianMs": 7.9735,
+        "RendererSha256": "16872550743A07D7AD071FB66B04AF2483F518477FBECA506A0DEE815735530C",
+        "Trial": "final-c",
+        "GeometryP95Ms": 9.2132,
+        "TotalP95Ms": 10.6785,
+        "GeometryMedianMs": 6.5565,
+        "FullFrameSha256": "B6B0A8899E495CA1A82658CBAF108D892F6E513B8CC87C7BA6DB99829C0DF67C"
+      }
+    ],
+    "BaselineTrials": [
+      {
+        "Raw": {
+          "Sha256": "0E6D0835C6549D3925BFCEEEB6D8C81F24B718F189372437B63D9CE7190A5D9C",
+          "Path": "local/render-flat-table-baseline-a-20260929.json"
+        },
+        "TotalMedianMs": 7.6554,
+        "RendererSha256": "1F6D152CD9C50BD45A8EC6BC2E7F1D1DF8874C606B0C00CE9CB21DC2E7C915AB",
+        "Trial": "baseline-a",
+        "GeometryP95Ms": 9.5696,
+        "TotalP95Ms": 11.2099,
+        "GeometryMedianMs": 6.277,
+        "FullFrameSha256": "B6B0A8899E495CA1A82658CBAF108D892F6E513B8CC87C7BA6DB99829C0DF67C"
+      },
+      {
+        "Raw": {
+          "Sha256": "F314482F794BCA41FDFB62D4620DB1CD9931FB09EF4D400B7033DC0214FE4E5B",
+          "Path": "local/render-flat-table-baseline-b-20260929.json"
+        },
+        "TotalMedianMs": 8.2215,
+        "RendererSha256": "1F6D152CD9C50BD45A8EC6BC2E7F1D1DF8874C606B0C00CE9CB21DC2E7C915AB",
+        "Trial": "baseline-b",
+        "GeometryP95Ms": 10.4701,
+        "TotalP95Ms": 12.2528,
+        "GeometryMedianMs": 6.8955,
+        "FullFrameSha256": "B6B0A8899E495CA1A82658CBAF108D892F6E513B8CC87C7BA6DB99829C0DF67C"
+      },
+      {
+        "Raw": {
+          "Sha256": "EB8EE63EA81E8C7275AFC8920F1D238250E273B3755C5D796804072A034BD25D",
+          "Path": "local/render-flat-table-baseline-c-20260929.json"
+        },
+        "TotalMedianMs": 8.6603,
+        "RendererSha256": "1F6D152CD9C50BD45A8EC6BC2E7F1D1DF8874C606B0C00CE9CB21DC2E7C915AB",
+        "Trial": "baseline-c",
+        "GeometryP95Ms": 10.743,
+        "TotalP95Ms": 12.4674,
+        "GeometryMedianMs": 7.1444,
+        "FullFrameSha256": "B6B0A8899E495CA1A82658CBAF108D892F6E513B8CC87C7BA6DB99829C0DF67C"
+      }
+    ]
+  },
+  "Runtime": {
+    "LogicalProcessors": 20,
+    "OS": "Windows 11 build 26200",
+    "CPU": "Intel Core Ultra 7 265K",
+    "PowerShell": "7.6.5"
+  },
+  "Format": "pwshDoom.PowerShellSectorRenderCacheComparison",
+  "WorkerPartitionChecks": [
+    {
+      "ComparedPixels": 320000.0,
+      "Views": 5,
+      "CharacterStripByteChecks": 0,
+      "GlyphSet": "Ascii",
+      "EncodedStripByteChecks": 80,
+      "Raw": {
+        "Sha256": "15B70A4FCC26AF000FB1819BCF25348BDF56B7418F17CB45B036D4568A9A8541",
+        "Path": "local/render-sector-cache-partitions-classic-final-20260929.json"
+      },
+      "Workers": 16,
+      "Style": "Classic",
+      "DifferingPixels": 0.0
+    },
+    {
+      "ComparedPixels": 320000.0,
+      "Views": 5,
+      "CharacterStripByteChecks": 80,
+      "GlyphSet": "Katakana",
+      "EncodedStripByteChecks": 80,
+      "Raw": {
+        "Sha256": "C227AB5965BC665795920E88A1601109958318D492DC143A3C634ECC27F89A76",
+        "Path": "local/render-sector-cache-partitions-matrix-katakana-final-20260929.json"
+      },
+      "Workers": 16,
+      "Style": "Matrix",
+      "DifferingPixels": 0.0
+    },
+    {
+      "ComparedPixels": 320000.0,
+      "Views": 5,
+      "CharacterStripByteChecks": 80,
+      "GlyphSet": "Katakana",
+      "EncodedStripByteChecks": 80,
+      "Raw": {
+        "Sha256": "86E69FF3C2E4632A143B5F7D38C5110E170F3F4C5F18937779FFBEA21E117B81",
+        "Path": "local/render-sector-cache-partitions-color-art-katakana-final-20260929.json"
+      },
+      "Workers": 16,
+      "Style": "AnsiArt",
+      "DifferingPixels": 0.0
+    }
+  ],
+  "Limitations": [
+    "Phase stripes run sequentially; no concurrent worker scheduling is included in that timer.",
+    "The whole-host comparison has one run per version and is unpaired; do not claim causal end-to-end speedup.",
+    "The HMP E1M1 host run has no input or moving combat; the phase workload is the idle map-start view.",
+    "The host uses sound/music but headless output skips Terminal writes; no display presentation or 35-tic/60-display gate is demonstrated.",
+    "The 36-map smoke is load/idle/render coverage and does not certify any map route or campaign progression.",
+    "Raw phase and host reports remain in ignored local/ storage; this receipt contains their SHA-256 fingerprints.",
+    "The complete human Episode 1 playthrough, including E1M9 return and finale, remains pending.",
+    "No screen recording was made for these measurements."
+  ],
+  "MaskedWallFixture": {
+    "CheckCount": 20,
+    "Passed": true,
+    "Raw": {
+      "Sha256": "8E3374753D3617AA42E5065A593F03FD7779B99B4A109F2920248FBB04AE28E7",
+      "Path": "local/render-sector-cache-masked-wall-final-20260929.json"
+    }
+  },
+  "LiveHeadlessHostComparison": {
+    "Interpretation": "One earlier and one current 60-second session under matching HMP E1M1, 16-worker, Classic-Pairs, sound/realtime, PowerShell 7.6.5 settings; ordered, unpaired observations. Candidate host-update rate rose, but this does not isolate the code change. Per-worker decode time includes cache refresh; render median fell while combined decode+render median was effectively tied. Headless updates are not Terminal writes or displayed frames.",
+    "ObservedCompletedUpdateChangePercent": 5.566939786468117,
+    "Baseline": {
+      "Raw": {
+        "Sha256": "5C36AFD913A1C37889A4823AFB843330C0D97E63EFBFB7A7DF99AEAF409C6308",
+        "Path": "local/current-source-e1m1-audio-60s-20260928.json"
+      },
+      "WorkerWorkingSetBytes": 4032724992,
+      "FrameP95Ms": 30.7048,
+      "SimulationTicsPerSecond": 34.98220200892036,
+      "Rebuffers": 0,
+      "Runtime": "7.6.5",
+      "FrameMedianMs": 21.8416,
+      "CompletedUpdates": 2909,
+      "SimulationTics": 2099,
+      "DurationSeconds": 60.0019404,
+      "AudioStarvations": 0,
+      "MusicSelected": "D_E1M1",
+      "CompletedUpdatesPerSecond": 48.48176543303923
+    },
+    "Candidate": {
+      "FrameP95Ms": 24.6791,
+      "SimulationTicsPerSecond": 34.98154449375307,
+      "AudioDeviceClosed": true,
+      "ReturnedAudioFrames": 2649780,
+      "Rebuffers": 0,
+      "MusicSelected": "D_E1M1",
+      "HostError": null,
+      "DurationSeconds": 60.0030682,
+      "Runtime": "7.6.5",
+      "CompletedUpdates": 3071,
+      "Raw": {
+        "Sha256": "CC6B7077F807FC133EDE92565116D723D7B02F93C0F25929CA33E1BB9632A71C",
+        "Path": "local/current-source-e1m1-sector-cache-audio-60s-20260929.json"
+      },
+      "SimulationTics": 2099,
+      "AudioError": null,
+      "CancelledTailUpperBound": 5040,
+      "SubmittedAudioFrames": 2654820,
+      "FrameMedianMs": 21.236,
+      "AudioStarvations": 0,
+      "WorkerWorkingSetBytes": 4050980864,
+      "CompletedUpdatesPerSecond": 51.18071612211323
+    },
+    "WorkerPhaseSamples": {
+      "Candidate": {
+        "SampleCount": 49136,
+        "EncodeP95Ms": 2.8412,
+        "DecodeMedianMs": 1.2142,
+        "RenderMedianMs": 8.3744,
+        "EncodeMedianMs": 2.2544,
+        "RenderP95Ms": 10.9285,
+        "DecodeP95Ms": 1.9377
+      },
+      "Baseline": {
+        "SampleCount": 46544,
+        "EncodeP95Ms": 2.9705,
+        "DecodeMedianMs": 0.7861,
+        "RenderMedianMs": 8.7437,
+        "EncodeMedianMs": 2.2452,
+        "RenderP95Ms": 11.8761,
+        "DecodeP95Ms": 1.4085
+      }
+    },
+    "WorkingSetChangeBytes": 18255872
+  },
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F"
+}

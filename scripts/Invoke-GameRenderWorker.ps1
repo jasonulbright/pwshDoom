@@ -40,7 +40,7 @@ try {
         if($kind -eq 0){
             $snapshot=Read-GameSnapshotBytes $bytes $previousSnapshot $workerBit;$previousSnapshot=$snapshot
             $snapshot.RenderWorkerBit=$workerBit
-            $ctx.World=$snapshot;$ctx.Sectors=$snapshot.Sectors;$ctx.Sides=$snapshot.Sides;$tic=$snapshot.Tic
+            $ctx.World=$snapshot;$ctx.Sectors=$snapshot.Sectors;$ctx.Sides=$snapshot.Sides;Update-FastRenderSectorData $ctx $snapshot.Sectors;$tic=$snapshot.Tic
             $paletteNumber=$snapshot.ConsolePlayer.PaletteNumber
         }else{
             if($length -ne 64000){throw 'Invalid screen pixel length.'};$tic=$view.ReadInt32(80)
