@@ -4410,3 +4410,15 @@ process duration is a single unpaired startup/playback/shutdown sample. This
 does not measure Terminal presentation, audible quality, full-campaign audio
 continuity, or the 35/60 pacing goal; the complete human Episode 1 run remains
 pending. See the [host receipt](../results/episode1-r9-audio-smoke-20260929.json).
+
+## 2026-09-29 — Distinguish Preview.3 from the R9 development candidate
+
+The public `v0.1.0-preview.3` tag remains pinned at `34e3d175`. That tagged
+commit changes release-facing documentation and version text; it contains no
+`src/` changes relative to parent `e9bbcee`. The later development history is
+on `codex/feasibility-study`; the R9 game-source pin is
+`a26a0b439d0fee2e8ea0f1f1a3c785595bec1384`. README, changelog, and the article
+draft now name Preview.3 as the latest tagged package and describe R9 as a
+separate, untagged candidate. This corrects ambiguity between a clean checkout
+of the release tag and the newer branch; it does not change or rebuild the
+Preview.3 release asset.

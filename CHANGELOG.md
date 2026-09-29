@@ -2,11 +2,19 @@
 
 ## Unreleased
 
+The development branch is ahead of the public Preview.3 package. The current
+Episode 1 handoff is candidate R9 at source commit
+[`a26a0b4`](https://github.com/jasonulbright/pwshDoom/commit/a26a0b439d0fee2e8ea0f1f1a3c785595bec1384);
+this is not a new tagged release. Jason's complete Episode 1 playthrough and
+the broader Ultimate Doom release gates remain open.
+
 ### Changed
 
 - Interactive audio now advances active music and effect voices from the PowerShell output clock across short simulation-packet gaps. Pause, map resets, and explicit drains still stop that fill; deterministic headless runs remain packet-exact by default. This reduces software queue starvation under transient load but does not claim measured acoustic latency or uninterrupted full-campaign playback.
+- The eleven-track Episode 1 music catalog opens its independent qualified readers through up to four PowerShell runspaces. Eager source/payload verification and read locks remain. Twenty-one focused checks pass; a warm-file-cache comparison cuts the reader-open stage median from 4.665 to 2.050 seconds (56.06%). This does not establish cold-launch or whole-game speedup.
 - Dense renderer snapshots now cache fixed-point actor projections for workers, and each worker skips sprites outside its output stripe. Serial/worker pixels remain exact in exercised Classic, Matrix/Katakana and AnsiArt/Katakana scenes. E3M6 sequential worker CPU improved in two reversed-order pairs; E1M3 timing remained inconclusive, and this does not qualify 60 Hz presentation.
 - Packed per-map BSP geometry reduces repeated object lookups in the PowerShell renderer, and engine-bundle publication is atomic before workers load it.
+- Fixed-point visibility math now avoids per-intercept and sight-bound wrapper allocations while preserving tested arithmetic. Its paired E3M6 replay lowered the uninstrumented median by 3.88%; p95 did not improve, so this does not qualify the 35-tic goal.
 
 ## 0.1.0-preview.3 — 2026-09-28
 
