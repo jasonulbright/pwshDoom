@@ -3,29 +3,66 @@
 function New-DoomMusicPlayback {
     param([hashtable]$Reports=@{})
     $state=@{Readers=@{};ReaderModes=@{};Reports=@{};Selected=$null;Gain=.2;Frames=0L;Transitions=[Collections.Generic.List[object]]::new();Closed=$false}
+    $catalog=[Collections.Generic.List[object]]::new();$pool=$null;$jobs=[Collections.Generic.List[object]]::new();$failure=$null
     try{
-        foreach($track in $Reports.Keys){
+        foreach($track in @($Reports.Keys|Sort-Object)){
             if($track -cnotmatch '^D_[A-Z0-9]+$'){throw 'Invalid music catalog track name.'}
-            $r=Get-Content $Reports[$track] -Raw|ConvertFrom-Json -AsHashtable
+            $path=[IO.Path]::GetFullPath([string]$Reports[$track])
+            $r=Get-Content -LiteralPath $path -Raw|ConvertFrom-Json -AsHashtable
             if($r.Details.Track -cne $track){throw 'Music catalog name does not match its qualification.'}
-            if($r.Details.ContainsKey('Mode') -and $r.Details.Mode -ceq 'OneShot'){
-                $state.Readers[$track]=Open-DoomMusicOneShotReader $Reports[$track]
-                $state.ReaderModes[$track]='OneShot'
-            }else{
-                $state.Readers[$track]=Open-DoomMusicLoopReader $Reports[$track]
-                $state.ReaderModes[$track]='Loop'
+            $mode=if($r.Details.ContainsKey('Mode') -and $r.Details.Mode -ceq 'OneShot'){'OneShot'}else{'Loop'}
+            $catalog.Add(@{Track=$track;Path=$path;Mode=$mode;ReportSha256=(Get-FileHash -LiteralPath $path).Hash})
+            $state.Readers[$track]=$null;$state.ReaderModes[$track]=$mode
+        }
+        if($catalog.Count -gt 0){
+            # Each reader verifies and locks its full playback payload. Open independent
+            # tracks concurrently so startup does not hash several GiB on one thread.
+            $readerModule=Join-Path $PSScriptRoot 'MusicLoopReader.ps1'
+            $oneShotModule=Join-Path $PSScriptRoot 'MusicOneShotReader.ps1'
+            $pool=[RunspaceFactory]::CreateRunspacePool(1,[Math]::Min(4,$catalog.Count));$pool.Open()
+            foreach($entry in $catalog){
+                $ps=[PowerShell]::Create();$ps.RunspacePool=$pool
+                if($entry.Mode -ceq 'OneShot'){
+                    $null=$ps.AddScript({param($Module,$Report);. $Module;Open-DoomMusicOneShotReader $Report}).AddArgument($oneShotModule).AddArgument($entry.Path)
+                }else{
+                    $null=$ps.AddScript({param($Module,$Report);. $Module;Open-DoomMusicLoopReader $Report}).AddArgument($readerModule).AddArgument($entry.Path)
+                }
+                try{$async=$ps.BeginInvoke();$jobs.Add(@{Track=$entry.Track;ExpectedReportSha256=$entry.ReportSha256;PowerShell=$ps;Async=$async})}
+                catch{$ps.Dispose();if(-not $failure){$failure=$_.Exception}}
             }
-            $state.Reports[$track]=$state.Readers[$track].ReportSha256
+            foreach($job in $jobs){
+                try{
+                    $opened=$job.PowerShell.EndInvoke($job.Async)
+                    if($job.PowerShell.Streams.Error.Count -gt 0){throw $job.PowerShell.Streams.Error[0].ToString()}
+                    if($opened.Count -ne 1){throw 'Music reader initialization returned an invalid result.'}
+                    $reader=$opened[0]
+                    if($reader -isnot [Collections.IDictionary]){throw 'Music reader initialization returned an invalid reader.'}
+                    if($reader.ReportSha256 -cne $job.ExpectedReportSha256){
+                        if($state.ReaderModes[$job.Track] -ceq 'OneShot'){Close-DoomMusicOneShotReader $reader}else{Close-DoomMusicLoopReader $reader}
+                        throw 'Music qualification report changed during catalog loading.'
+                    }
+                    $state.Readers[$job.Track]=$reader;$state.Reports[$job.Track]=$reader.ReportSha256
+                }catch{if(-not $failure){$failure=$_.Exception}}
+                finally{$job.PowerShell.Dispose()}
+            }
+        }
+        if($failure){throw $failure}
+        foreach($entry in $catalog){
+            if($null -eq $state.Readers[$entry.Track]){throw "Music reader failed to initialize: $($entry.Track)."}
         }
         return $state
     }catch{Close-DoomMusicPlayback $state;throw}
+    finally{if($pool){$pool.Close();$pool.Dispose()}}
 }
 function Close-DoomMusicPlayback {
     param($State)
     if(-not $State.Closed){
         foreach($track in $State.Readers.Keys){
-            if($State.ReaderModes[$track] -ceq 'OneShot'){Close-DoomMusicOneShotReader $State.Readers[$track]}
-            else{Close-DoomMusicLoopReader $State.Readers[$track]}
+            $reader=$State.Readers[$track]
+            if($null -ne $reader){
+                if($State.ReaderModes[$track] -ceq 'OneShot'){Close-DoomMusicOneShotReader $reader}
+                else{Close-DoomMusicLoopReader $reader}
+            }
         }
         $State.Closed=$true
     }

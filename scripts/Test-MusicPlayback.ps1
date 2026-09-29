@@ -8,7 +8,7 @@ param(
 $ErrorActionPreference='Stop';Set-StrictMode -Version Latest
 if(Test-Path $Output){throw 'Use a fresh report path.'}
 . "$PSScriptRoot/../src/MusicLoopReader.ps1";. "$PSScriptRoot/../src/MusicOneShotReader.ps1";. "$PSScriptRoot/../src/MusicPlayback.ps1"
-$state=$null;$proofProbe=$null;$proofProbePath=$null;$checks=[Collections.Generic.List[object]]::new();$failure=$null;$loopStartFrame=$null
+$state=$null;$proofProbe=$null;$proofProbePath=$null;$failureProbePath=$null;$checks=[Collections.Generic.List[object]]::new();$failure=$null;$loopStartFrame=$null
 $report=[IO.Path]::GetFullPath($Qualification);$oneShotReport=[IO.Path]::GetFullPath($OneShotQualification)
 $loopData=Get-Content $report -Raw|ConvertFrom-Json -AsHashtable
 $loopTrack=[string]$loopData.Details.Track
@@ -73,9 +73,26 @@ try{
     Close-DoomMusicPlayback $state;Check 'Catalog closes loop and one-shot readers' ($state.Closed -and $state.Readers[$loopTrack].Closed -and $state.Readers[$oneShotTrack].Closed)
     Reject 'Closed playback rejects commands' {Update-DoomMusicPlayback $state @(@{Kind='Stop'})};$state=$null
     Reject 'Catalog rejects mismatched track label' {$s=New-DoomMusicPlayback @{'D_WRONG'=$report};Close-DoomMusicPlayback $s}
+    $failureProbePath=[IO.Path]::GetFullPath((Join-Path "$PSScriptRoot/../local" "music-playback-invalid-parallel-$([guid]::NewGuid().ToString('N')).json"))
+    if(Test-Path -LiteralPath $failureProbePath){throw 'Use a fresh parallel-reader failure probe.'}
+    $invalidOneShot=($oneShotData|ConvertTo-Json -Depth 80|ConvertFrom-Json -AsHashtable)
+    $invalidOneShot.Details.Track='D_BAD';$invalidOneShot.Details.Qualified=$false
+    $invalidOneShot|ConvertTo-Json -Depth 80|Set-Content -LiteralPath $failureProbePath -Encoding utf8NoBOM
+    $badCatalog=@{};$badCatalog[$loopTrack]=$report;$badCatalog[$oneShotTrack]=$oneShotReport;$badCatalog.D_BAD=$failureProbePath
+    $parallelFailureObserved=$false
+    try{$badState=New-DoomMusicPlayback $badCatalog;Close-DoomMusicPlayback $badState}catch{$parallelFailureObserved=$true}
+    Check 'An invalid parallel catalog member prevents playback initialization' $parallelFailureObserved
+    $handlesReleased=$true
+    foreach($payloadPath in @($loopData.Details.Periods[0].Path,$loopData.Details.Periods[1].Path,$oneShotData.Details.Payload.Path)){
+        $exclusive=$null
+        try{$exclusive=[IO.File]::Open($payloadPath,[IO.FileMode]::Open,[IO.FileAccess]::Read,[IO.FileShare]::None)}catch{$handlesReleased=$false}
+        finally{if($exclusive){$exclusive.Dispose()}}
+    }
+    Check 'Parallel catalog failure closes every reader that opened successfully' $handlesReleased
 }catch{$failure=$_.ToString()+"`n"+$_.ScriptStackTrace;throw}finally{
     if($proofProbe){Close-DoomMusicLoopReader $proofProbe}
     if($proofProbePath -and (Test-Path -LiteralPath $proofProbePath)){Remove-Item -LiteralPath $proofProbePath}
+    if($failureProbePath -and (Test-Path -LiteralPath $failureProbePath)){Remove-Item -LiteralPath $failureProbePath}
     if($state){Close-DoomMusicPlayback $state}
     $sourcePaths=@('src/MusicLoopReader.ps1','src/MusicOneShotReader.ps1','src/MusicPlayback.ps1','scripts/Qualify-MusicOneShot.ps1')
     @{Error=$failure;LoopTrack=$loopTrack;OneShotTrack=$oneShotTrack;LoopStartFrame=$loopStartFrame;Checks=$checks.ToArray();QualificationSha256=(Get-FileHash $report).Hash;OneShotQualificationSha256=(Get-FileHash $oneShotReport).Hash;Sources=@($sourcePaths|ForEach-Object {@{Path=$_;Sha256=(Get-FileHash "$PSScriptRoot/../$_").Hash}});ScriptSha256=(Get-FileHash $PSCommandPath).Hash;
