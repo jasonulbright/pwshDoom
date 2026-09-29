@@ -820,3 +820,36 @@ Those checks protect output and regressions; they do not show the complete
 campaign or qualify the 35-tic/60-display target. See the [source-pinned
 receipt](../results/renderer-flat-phase-wrap-20260929.json); raw reports remain
 under ignored `local/` storage.
+
+## Defer flat-texture index-bit extraction — September 29, 2026
+
+R12 replaces the per-pixel 22-bit coordinate masks with carried Int64 plane
+coordinates. At each texel lookup, PowerShell extracts only X bits 16–21 and Y
+bits 10–15 for the 64×64 flat index. This preserves Doom's signed 32-bit wrap
+semantics for these bits because the flat period (2²²) divides 2³².
+
+Eight alternating baseline/candidate rounds rendered 40 full-width paired
+frames per sample at five fixed headings. Two independent HMP E1M1 samples
+show serial-render medians falling from 53.7246 to 47.9883 ms (10.68%) and
+from 59.0802 to 55.7099 ms (5.70%). The HMP E3M6 median is effectively flat:
+76.7806 to 77.0622 ms (0.37% slower). Across the three samples, all 120
+baseline/candidate frame pairs match exactly (7,680,000 compared pixels,
+zero differences). The percentile changes also vary by scene and repeat, so
+these isolated medians do not establish a general game-speed gain.
+
+A separate 15-second, 16-worker headless A-B-B-A host comparison is
+inconclusive. Baseline A and both candidate runs completed about 52.25, 53.98,
+and 57.33 headless updates/sec, while baseline B dropped to 19.52 updates/sec
+and 30.12 tics/sec with 247 command-backpressure events. No cause was isolated;
+do not attribute the difference to R12. This comparison is not a live Terminal
+test or display-rate result.
+
+The R12 source also passes 36-map load/idle/render smoke, exact five-view
+16-worker checks for Classic, Matrix/Katakana, and AnsiArt/Katakana, 100,000
+random-coordinate equivalence cases, `Play.ps1 -Check`, and a five-second
+actual-worker E1M1 audio startup with 174 tics, 198 headless updates, no
+starvation/rebuffer observations, and clean device shutdown. The 5,040-frame
+shutdown tail is only a cancellation upper bound. None of these checks finishes
+a map, qualifies audible continuity, or establishes 35-tic/60-display pacing.
+See the [renderer comparison receipt](../results/renderer-flat-texel-bit-extraction-20260929.json)
+and [R12 candidate receipt](../results/episode1-current-human-candidate-20260929-r12.json).

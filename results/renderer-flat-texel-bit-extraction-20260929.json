@@ -1,0 +1,176 @@
+{
+  "Format": "pwshDoom.RendererFlatTexelBitExtractionComparison",
+  "Version": 1,
+  "RecordedUtc": "2026-09-29T10:56:33.2918756Z",
+  "ImplementationCommit": "c29b24e8a1c06635f90423672cc74f28836b7095",
+  "BaselineCommit": "cafb337e553939d35b3330843698b85eeb47fa52",
+  "BaselineMeasuredFileSha256": "1978CE62BDE3AF880C48F0C6A500179CC2F9A9E2ED7051B7F61BFAEC167E41A5",
+  "CandidateFileSha256": "0947858F7674FF9777C7CF8685A0B3F7D2A3C0DE691F4E10A907DE5E9055D042",
+  "PowerShell": "7.6.5",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "Change": "Carry Int64 flat coordinates between pixels; derive only X bits 16..21 and Y bits 10..15 for the 64x64 flat index, instead of masking both coordinates after each pixel.",
+  "Equivalence": [
+    {
+      "Map": "E1M1",
+      "Rounds": 8,
+      "Headings": [
+        0,
+        37,
+        90,
+        180,
+        270
+      ],
+      "FramesPerVersion": 40,
+      "DifferentPixels": 0.0,
+      "BaselineMedianMs": 53.724599999999995,
+      "CandidateMedianMs": 47.988299999999995,
+      "MedianReductionPercent": 10.68,
+      "BaselineP95Ms": 93.9611,
+      "CandidateP95Ms": 85.0905,
+      "P95ReductionPercent": 9.44,
+      "BaselineRendererSha256": "1978CE62BDE3AF880C48F0C6A500179CC2F9A9E2ED7051B7F61BFAEC167E41A5",
+      "CandidateRendererSha256": "0947858F7674FF9777C7CF8685A0B3F7D2A3C0DE691F4E10A907DE5E9055D042",
+      "RawReport": {
+        "Path": "local/flat-phase-bit-timing-e1m1.json",
+        "Sha256": "577C6C3C70481FC8DA08156801D5F666C8DD0D697519D5BAA270B58A5B6B829A"
+      }
+    },
+    {
+      "Map": "E1M1",
+      "Rounds": 8,
+      "Headings": [
+        0,
+        37,
+        90,
+        180,
+        270
+      ],
+      "FramesPerVersion": 40,
+      "DifferentPixels": 0.0,
+      "BaselineMedianMs": 59.080200000000005,
+      "CandidateMedianMs": 55.70985,
+      "MedianReductionPercent": 5.7,
+      "BaselineP95Ms": 93.0658,
+      "CandidateP95Ms": 91.2264,
+      "P95ReductionPercent": 1.98,
+      "BaselineRendererSha256": "1978CE62BDE3AF880C48F0C6A500179CC2F9A9E2ED7051B7F61BFAEC167E41A5",
+      "CandidateRendererSha256": "0947858F7674FF9777C7CF8685A0B3F7D2A3C0DE691F4E10A907DE5E9055D042",
+      "RawReport": {
+        "Path": "local/flat-phase-bit-timing-e1m1-repeat.json",
+        "Sha256": "0349AB94486650549133B72B705D84B0D450FED754E5B7B4C0CE98FCAAE61678"
+      }
+    },
+    {
+      "Map": "E3M6",
+      "Rounds": 8,
+      "Headings": [
+        0,
+        37,
+        90,
+        180,
+        270
+      ],
+      "FramesPerVersion": 40,
+      "DifferentPixels": 0.0,
+      "BaselineMedianMs": 76.78059999999999,
+      "CandidateMedianMs": 77.06215,
+      "MedianReductionPercent": -0.37,
+      "BaselineP95Ms": 113.2266,
+      "CandidateP95Ms": 110.3905,
+      "P95ReductionPercent": 2.5,
+      "BaselineRendererSha256": "1978CE62BDE3AF880C48F0C6A500179CC2F9A9E2ED7051B7F61BFAEC167E41A5",
+      "CandidateRendererSha256": "0947858F7674FF9777C7CF8685A0B3F7D2A3C0DE691F4E10A907DE5E9055D042",
+      "RawReport": {
+        "Path": "local/flat-phase-bit-timing-e3m6.json",
+        "Sha256": "9A03B85354B7275356E3B12A825E1A19DC37CD2D034AC84F548F25C9E8C3184B"
+      }
+    }
+  ],
+  "CoordinateArithmetic": {
+    "Cases": 100000,
+    "Seed": 20260929,
+    "Mismatches": 0,
+    "RawReport": {
+      "Path": "local/flat-phase-coordinate-bits.json",
+      "Sha256": "13DD7FC941F012CB6A393E9FD268B655D29CCD235EB7EA4C219CB894F0D26A5E"
+    }
+  },
+  "LiveHostComparison": {
+    "Order": "Baseline A, Candidate A, Candidate B, Baseline B",
+    "SecondsPerRun": 15,
+    "Workers": 16,
+    "Audio": false,
+    "Interpretation": "INCONCLUSIVE. The final baseline run collapsed to 19.52 updates/sec and 30.12 tics/sec with 247 command-backpressure events, unlike baseline A at 52.25 updates/sec and both candidate runs at 53.98/57.33. No environmental cause was isolated; do not attribute the difference to this renderer change.",
+    "Runs": [
+      {
+        "Name": "baseline-a",
+        "Renderer": "Baseline",
+        "Tics": 524,
+        "CompletedUpdates": 784,
+        "TicsPerSecond": 34.922,
+        "UpdatesPerSecond": 52.25,
+        "FrameMedianMs": 18.1027,
+        "FrameP95Ms": 41.5712,
+        "ExitReason": "Duration",
+        "Error": null,
+        "RawReport": {
+          "Path": "local/flat-phase-host-pair/baseline-a.json",
+          "Sha256": "D8F508EED985D8D772B784067693D3E0BC75ED4AF8E517530244F0C948CF1E4A"
+        }
+      },
+      {
+        "Name": "candidate-a",
+        "Renderer": "Candidate",
+        "Tics": 524,
+        "CompletedUpdates": 810,
+        "TicsPerSecond": 34.92,
+        "UpdatesPerSecond": 53.979,
+        "FrameMedianMs": 17.34935,
+        "FrameP95Ms": 40.8425,
+        "ExitReason": "Duration",
+        "Error": null,
+        "RawReport": {
+          "Path": "local/flat-phase-host-pair/candidate-a.json",
+          "Sha256": "2E70AD457D93A9C60EF82C2876940EEE97E5B066D269999FD996A819BBCF458E"
+        }
+      },
+      {
+        "Name": "candidate-b",
+        "Renderer": "Candidate",
+        "Tics": 524,
+        "CompletedUpdates": 860,
+        "TicsPerSecond": 34.929,
+        "UpdatesPerSecond": 57.326,
+        "FrameMedianMs": 16.50545,
+        "FrameP95Ms": 33.3142,
+        "ExitReason": "Duration",
+        "Error": null,
+        "RawReport": {
+          "Path": "local/flat-phase-host-pair/candidate-b.json",
+          "Sha256": "328B2D76B79CB8653F027D6B1DD3A908047B1118291F584B5322FD1163F0ECF6"
+        }
+      },
+      {
+        "Name": "baseline-b",
+        "Renderer": "Baseline",
+        "Tics": 452,
+        "CompletedUpdates": 293,
+        "TicsPerSecond": 30.119,
+        "UpdatesPerSecond": 19.524,
+        "FrameMedianMs": 49.2358,
+        "FrameP95Ms": 123.4607,
+        "ExitReason": "Duration",
+        "Error": null,
+        "RawReport": {
+          "Path": "local/flat-phase-host-pair/baseline-b.json",
+          "Sha256": "A1815AFEFCE7A86A7D4E787482C7FD92E4BC57BD5F08A1CBC0E4D33AB1ED81BD"
+        }
+      }
+    ],
+    "RawSummary": {
+      "Path": "local/flat-phase-host-pair/summary.json",
+      "Sha256": "7B1A6E5225E777B4B31CC14F01DDC0E323BEE3C523B96EAED1A8A877876A8420"
+    }
+  },
+  "Meaning": "Serial fixed-state renderer timings only. All compared indexed pixels are exact. The two E1M1 runs improve the isolated median by 10.68% and 5.70%; E3M6 median is effectively unchanged (+0.37%); do not claim an overall game or displayed-frame gain."
+}

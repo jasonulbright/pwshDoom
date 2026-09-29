@@ -1,0 +1,157 @@
+{
+  "Format": "pwshDoom.Episode1CurrentHumanCandidate",
+  "Version": 1,
+  "RecordedUtc": "2026-09-29T10:56:33.3369714Z",
+  "Branch": "codex/feasibility-study",
+  "ImplementationCommit": "c29b24e8a1c06635f90423672cc74f28836b7095",
+  "PreviousCandidate": {
+    "Path": "results/episode1-current-human-candidate-20260929-r11.json",
+    "Sha256": "D3876C932138BA92E8433E720444DAF95F8F55120FD2180F4211A9BC6D4B03F0",
+    "SourceCommit": "cafb337e553939d35b3330843698b85eeb47fa52"
+  },
+  "Runtime": {
+    "PowerShell": "7.6.5",
+    "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+    "MusicCatalogSha256": "0E9C9542C75F4D5E2D7FC71E42FAFBB58F94321C3B8A49BA0C9AC5A93752EE58",
+    "RendererSha256": "0947858F7674FF9777C7CF8685A0B3F7D2A3C0DE691F4E10A907DE5E9055D042"
+  },
+  "ChangesSinceR11": {
+    "Feature": "Plane sampling carries unwrapped Int64 coordinates and extracts only the flat index bits at lookup time, eliminating the per-pixel phase masks.",
+    "GameplayChanged": false,
+    "AudioMixingChanged": false,
+    "StylesChanged": false,
+    "ExactPixels": "40/40 paired frames on each of two E1M1 runs and E3M6; zero differing pixels.",
+    "Measurement": "Two E1M1 paired runs show 10.68% and 5.70% lower serial renderer medians. E3M6 is statistically flat in this sample. Full-host A-B-B-A run is inconclusive.",
+    "Evidence": "results/renderer-flat-texel-bit-extraction-20260929.json"
+  },
+  "Validation": {
+    "LaunchPreflight": {
+      "Ready": true,
+      "EpisodeMaps": 36,
+      "MusicTracks": 11,
+      "PowerShell": "7.6.5",
+      "RawReport": {
+        "Path": "local/flat-phase-play-preflight.json",
+        "Sha256": "186AE2427A5AC4C43AA6EBD03354B6EACC87D9A834C36AAE411EEEE5D708EA14"
+      }
+    },
+    "CampaignSmoke": {
+      "Maps": 36,
+      "CasesPassed": 36,
+      "CasesFailed": 0,
+      "Skill": 3,
+      "IdleTicsPerMap": 35,
+      "Meaning": "Map load, bounded simulation and rendering only; not level completion.",
+      "RawReport": {
+        "Path": "local/flat-texel-campaign-smoke.json",
+        "Sha256": "E21D4820AD27F7D40E00967F863FC768E2650E054705A3FC1247418EC41A6292"
+      }
+    },
+    "SixteenWorkerPartitions": [
+      {
+        "Style": "Classic",
+        "GlyphSet": "Ascii",
+        "Workers": 16,
+        "Views": 5,
+        "ComparedPixels": 320000.0,
+        "DifferentPixels": 0.0,
+        "EncodedStripByteChecks": 80,
+        "RawReport": {
+          "Path": "local/flat-texel-partitions-classic.json",
+          "Sha256": "7435AB2098FA04200DAD16EEBF5F0FA2158DAFD6EFC1E625DB61F6CEE525849C"
+        }
+      },
+      {
+        "Style": "Matrix",
+        "GlyphSet": "Katakana",
+        "Workers": 16,
+        "Views": 5,
+        "ComparedPixels": 320000.0,
+        "DifferentPixels": 0.0,
+        "EncodedStripByteChecks": 80,
+        "RawReport": {
+          "Path": "local/flat-texel-partitions-matrix.json",
+          "Sha256": "BF34DAF93732589BC8453B6272553FA9863449043B5B130FD73BCFCAA749C75D"
+        }
+      },
+      {
+        "Style": "AnsiArt",
+        "GlyphSet": "Katakana",
+        "Workers": 16,
+        "Views": 5,
+        "ComparedPixels": 320000.0,
+        "DifferentPixels": 0.0,
+        "EncodedStripByteChecks": 80,
+        "RawReport": {
+          "Path": "local/flat-texel-partitions-ansiart.json",
+          "Sha256": "F62A1D9F890D9072955A6DBB8552EA08BD89D74F7D41906F28E89525D5ED468B"
+        }
+      }
+    ],
+    "HeadlessRealtimeAudio": {
+      "Map": "E1M1",
+      "Seconds": 5.0014637,
+      "Tics": 174,
+      "RenderUpdates": 198,
+      "TicsPerSecond": 34.789815629372654,
+      "HeadlessUpdatesPerSecond": 39.58841088859647,
+      "MusicSelected": "D_E1M1",
+      "RealtimeAudio": true,
+      "SubmittedAudioFrames": 230580,
+      "ReturnedCompletedFrames": 225540,
+      "CancelledTailUpperBound": 5040,
+      "QueueStarvationObservations": 0,
+      "RebufferCount": 0,
+      "DeviceClosed": true,
+      "WorkerError": null,
+      "CleanupError": null,
+      "Meaning": "Five-second actual-worker startup check, not terminal pacing, audible review or full-session continuity.",
+      "RawReport": {
+        "Path": "local/flat-phase-current-audio-startup.json",
+        "Sha256": "964D2350D159CD165EF017CD38AD96F0A5B86935CC955CA37B4A910F89E39B31"
+      }
+    },
+    "CoordinateArithmetic": {
+      "RandomInt64Cases": 100000,
+      "Mismatches": 0,
+      "RawReport": {
+        "Path": "local/flat-phase-coordinate-bits.json",
+        "Sha256": "13DD7FC941F012CB6A393E9FD268B655D29CCD235EB7EA4C219CB894F0D26A5E"
+      }
+    },
+    "InheritedFromR11": {
+      "CampaignTransitionFixtures": 69,
+      "BossProgressionChecks": 97,
+      "NormalInputRouteRegressions": [
+        "E1M1",
+        "E1M2",
+        "E1M4"
+      ],
+      "CarryForwardReason": "Only flat-plane texel coordinate arithmetic changed; simulation, input, saves, menu and audio sources are unchanged. These fixtures remain historical source pins, not a replay on the new renderer commit."
+    }
+  },
+  "Playthrough": {
+    "Pending": true,
+    "Difficulty": "HMP (skill 3)",
+    "RequiredScope": [
+      "E1M1",
+      "E1M2",
+      "E1M3",
+      "E1M9",
+      "return to E1M4",
+      "E1M5",
+      "E1M6",
+      "E1M7",
+      "E1M8",
+      "Episode 1 finale"
+    ],
+    "Instructions": "docs/episode1-playtest.md",
+    "FreshRunSuffix": "r12"
+  },
+  "Performance": {
+    "Target35TicsPerSecondQualified": false,
+    "Target60DisplayedFramesPerSecondQualified": false,
+    "Meaning": "Fixed-state serial and bounded headless measurements are not a full live terminal or display qualification."
+  },
+  "Meaning": "Source-pinned readiness handoff for one complete human Episode 1 playthrough. Map smoke and short audio/renderer checks do not establish campaign completion."
+}

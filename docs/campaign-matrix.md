@@ -21,20 +21,22 @@ receipt](../results/episode1-current-human-candidate-20260928-r5.json),
 [geometry/cache supplement](../results/episode1-current-human-candidate-20260928-r2.json),
 and [realtime-audio supplement](../results/episode1-current-human-candidate-20260928-r3.json); the [visible-actor profile](../results/renderer-visible-actor-filter-20260928.json) reports sequential worker-equivalent CPU and does not claim a frame-rate gain.
 
-The current single-playthrough handoff is R11 at source commit
-`cafb337e553939d35b3330843698b85eeb47fa52`; see its [candidate receipt](../results/episode1-current-human-candidate-20260929-r11.json)
+The current single-playthrough handoff is R12 at source commit
+`c29b24e8a1c06635f90423672cc74f28836b7095`; see its [candidate receipt](../results/episode1-current-human-candidate-20260929-r12.json)
 and the exact [complete Episode 1 scope](episode1-playtest.md). Jason's human
-route remains pending. R11 changes the PowerShell flat sampler's coordinate
-wrap work while preserving the exact output in all 80 paired frames. A fresh
-36-map smoke passes, and current music preflight accepts all eleven catalog
-reports. Its five-second actual-worker headless audio check has no starvation
-or rebuffer observations and shuts down cleanly; the 5,040-frame tail is a
-shutdown-cancellation upper bound. The fixed-state renderer median decreases
-2.52% on E1M1 and 1.57% on E3M6; no live pacing claim follows. The R8 gameplay
+route remains pending. R12 changes when the PowerShell flat sampler derives
+the 64×64 texture-index bits while preserving the exact output in all 120
+paired frames. A fresh 36-map smoke passes, and current music preflight accepts
+all eleven catalog reports. Its five-second actual-worker headless audio check
+has no starvation or rebuffer observations and shuts down cleanly; the
+5,040-frame tail is a shutdown-cancellation upper bound. Fixed-state E1M1
+medians improve 10.68% and 5.70% in repeated runs; E3M6 is effectively flat.
+The full-host A-B-B-A comparison is inconclusive, so no live pacing claim
+follows. The R8 gameplay
 and R7 renderer evidence, 69 transition fixtures, 97 boss fixtures, and E1M1,
 E1M2, and E1M4 routes carry forward. The E1M3 driver stalls without a reproduced
 defect; its archived fixed-input replay remains stale-source evidence. See the
-[R11 receipt](../results/episode1-current-human-candidate-20260929-r11.json),
+[R12 receipt](../results/episode1-current-human-candidate-20260929-r12.json),
 [R9 gameplay evidence](../results/episode1-current-human-candidate-20260929-r9.json),
 [startup timing](../results/music-catalog-open-parallel-20260929.json), and
 [music runtime checks](../results/music-playback-runtime-7.6.6-20260929.json).

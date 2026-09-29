@@ -4657,3 +4657,49 @@ checks, and the occluded-BON1 regression pass. Earlier transition, boss, and
 E1M1/E1M2/E1M4 route evidence carries forward because gameplay behavior did
 not change. The complete HMP Episode 1 human playthrough remains pending; the
 handoff uses fresh `r11` input, report, save, and settings paths.
+
+## 2026-09-29 — Defer flat-plane index-bit extraction and pin R12
+
+R12 changes only PowerShell flat-plane coordinate arithmetic. The sampler
+carries Int64 world coordinates between pixels and extracts X bits 16–21 and Y
+bits 10–15 when it reads a 64×64 flat texel. Since the repeating-flat period is
+2²² and divides the signed 32-bit coordinate period 2³², the selected texture
+index remains identical. The implementation is pinned at
+`c29b24e8a1c06635f90423672cc74f28836b7095`; the prior source is
+`cafb337e553939d35b3330843698b85eeb47fa52`.
+
+Three alternating-order fixed-state renderer samples each compare 40 frames
+across five headings, with zero pixel differences in all 120 frame pairs.
+E1M1 median renderer time fell 10.68% in one run and 5.70% in its repeat;
+E3M6 moved 0.37% slower, effectively unchanged in this sample. A 100,000-case
+random Int64 bit-selection check had no mismatches. The full-host A-B-B-A
+comparison is inconclusive: its last baseline run fell to 19.52 updates/sec
+and 30.12 tics/sec with 247 command-backpressure events, while baseline A and
+both candidate runs were near 52–57 updates/sec. No environmental cause was
+isolated, so the receipt makes no host-throughput claim.
+
+The current source passes the 36-map smoke and five-view 16-worker output
+checks in all three styles. A fresh five-second actual-worker headless E1M1
+audio run advanced 174 tics and 198 updates, selected D_E1M1, returned
+225,540/230,580 frames, observed no queue starvation or rebuffer, and closed
+the device without worker or cleanup error. The remaining 5,040 frames are a
+shutdown-cancellation upper bound. `Play.ps1 -Check` accepts the local catalog.
+These checks are not Terminal pacing, audible review, or a completed map.
+Jason's one complete Episode 1 route remains pending on fresh `r12` output,
+save, and settings paths. The [R12 candidate receipt]
+(../results/episode1-current-human-candidate-20260929-r12.json) and [focused
+renderer receipt](../results/renderer-flat-texel-bit-extraction-20260929.json)
+retain portable evidence and hashes.
+
+The user asked why a release note could say only release metadata changed after
+a long run of commits. For the audited range, Preview.3's tag
+`v0.1.0-preview.3` points to `34e3d17`, whose parent-to-tag diff changes seven
+release/documentation files (+30/−38) and no game source. That is the final
+release-preparation commit, not a summary of development. The fixed range from
+that tag to R12 source `c29b24e` contains 53 commits: 15 touch game/runtime
+source files (+632/−184 across 16 files), 13 touch test/benchmark/experiment
+scripts (+501/−54 across 19 files), 38 touch checked-in evidence (+25,312/−15
+across 65 files), and 47 touch documentation (+2,080/−53 across 18 files).
+Commit-category totals overlap. This confirms that the intervening work is not
+all test harness; the release commit itself was metadata-only because it
+reused a tested source snapshot.
