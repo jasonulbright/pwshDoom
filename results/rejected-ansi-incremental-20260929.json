@@ -1,0 +1,69 @@
+{
+  "title": "Rejected changed-cell ANSI frame output",
+  "date": "2026-09-29",
+  "sourceBaseCommit": "6c3e361",
+  "workload": {
+    "map": "E1M1",
+    "replayCommands": 1560,
+    "resolution": "320x200",
+    "style": "Classic truecolor ANSI",
+    "renderWorkers": 16,
+    "powershell": "7.6.6",
+    "terminal": "Windows Terminal, maximized, font size 6"
+  },
+  "correctness": {
+    "focusedCodecChecksPassed": 17,
+    "workerSmoke": {
+      "durationSeconds": 5,
+      "tics": 174,
+      "frames": 187,
+      "error": null
+    }
+  },
+  "comparison": {
+    "fullFrame": {
+      "completedUpdatesPerSecond": 38.4327,
+      "simulationTicsPerSecond": 34.9592,
+      "presentMonDisplayTransitionsPerSecond": 24.9489,
+      "frames": 1715,
+      "droppedFrames": 418,
+      "submittedFrames": 1711,
+      "bytesPerFrame": 604470.0,
+      "outputLatencyMs": { "median": 14.58, "p95": 21.78 },
+      "slowestWorkerEncodeMs": { "median": 3.50, "p95": 7.04 },
+      "gameReportSha256": "EF2F53685434A0E6FF9B2F810A02C28C816B4F0804FBE56884F0D6EFCAC6E5B9",
+      "captureSha256": "136E1481746C19AA6C29E46A948B11FB7D3BE719906F76846539B4B6A6148A9F",
+      "presentMonCsvSha256": "C22EB94F57CC6DD72F332690FB4AC51235947D254705C61094E6E54ED2B8A71B"
+    },
+    "changedCell": {
+      "completedUpdatesPerSecond": 26.0071,
+      "simulationTicsPerSecond": 28.4909,
+      "presentMonDisplayTransitionsPerSecond": 17.7575,
+      "frames": 1424,
+      "droppedFrames": 356,
+      "submittedFrames": 1459,
+      "bytesPerFrame": 375767.4,
+      "outputLatencyMs": { "median": 14.26, "p95": 60.26 },
+      "slowestWorkerEncodeMs": { "median": 4.53, "p95": 10.14 },
+      "gameReportSha256": "9CF0119985495D9483CE776A1C6CD610E95489B55A80D81EA3C727DE4E2D17BF",
+      "captureSha256": "CC8A451991BC52F4C7506F2B47045775F3B470C83F1F92A1199F3D537432471A",
+      "presentMonCsvSha256": "C768CB4A8A4CA492B22E35A8185D4BCD1A931698956ED956F6AFF0FF6584627B"
+    },
+    "bytesPerFrameReductionPercent": 37.8
+  },
+  "decision": "Rejected and reverted. Lower output volume did not offset patch comparison/encoding cost; measured live pacing regressed.",
+  "limitations": [
+    "One matched live workload; this is not repeated performance qualification.",
+    "The changed-cell capture wrapper timed out while draining the game report. The game itself reached ReplayEnd, all raw capture rows were present through game end, and native/derived PresentMon intervals agreed within 9.1e-13 ms.",
+    "The 17 focused checks establish codec correctness for tested cases, not performance."
+  ],
+  "experimentFileSha256": {
+    "src/TerminalCodec.ps1": "C358CF53721FC59AF20832B59C2E7288E95B0BCB431BD7169C0E9DDDF0163804",
+    "scripts/Test-AnsiIncremental.ps1": "43635DC1578D6A1C8E9F34F57B5542E461D01F33735E9A5A9042920C32BF26F1",
+    "Start-Doom.ps1": "972DCCCEF4F324758A9EF019DD054ED36DA28AEA0E19CC5C75A2D788F954637B",
+    "scripts/Invoke-Doom.ps1": "158C4A0D6387B30CF7CD24C325BE2CC87176D83D974C1FDED1504869F153057C",
+    "scripts/Invoke-GameRenderWorker.ps1": "5C7A8C8197A33A1FF718A984C090E019268F7E84FBD888FDBD74BFBFF64BAE6E",
+    "src/GameProcesses.ps1": "1BB704040C7990B8CDC32CC6B502E9304F97AA600E59951936EF3B8C9192BCBF",
+    "scripts/Measure-PresentMonGame.ps1": "0244C9CE56B8F793E012EC369359D44393616D3222CD523DD490A1BD270D9123"
+  }
+}

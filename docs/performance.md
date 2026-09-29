@@ -778,3 +778,19 @@ and shutdown; it cannot establish the whole-game startup gain from the reader
 measurement. Headless completed updates are not terminal writes or displayed
 frames. Cold startup, full-campaign continuity, and the 35-tic/60-display
 targets remain open.
+
+## Rejected changed-cell ANSI output — September 29, 2026
+
+On the same 1,560-command E1M1 replay, a 16-worker Classic run compared full
+320×200 ANSI output with changed-cell patches in maximized Windows Terminal
+using PowerShell 7.6.6. The patch path emitted 375,767 bytes/frame versus
+604,470 (37.8% fewer), but completed updates fell from 38.43 to 26.01/sec,
+simulation from 34.96 to 28.49 tics/sec, and PresentMon display transitions
+from 24.95 to 17.76/sec. Slowest-worker encode median/p95 rose from
+3.50/7.04 ms to 4.53/10.14 ms. A correctness suite passed 17 checks and a
+short worker smoke completed, but the live pacing regression rejects this
+implementation. The experiment and test code were removed; full-frame output
+remains the product path. One capture wrapper timed out while draining its
+report, though the game reached `ReplayEnd` and the raw PresentMon capture
+covered game end. This is one matched workload, not a repeated performance
+qualification. See the [portable receipt](../results/rejected-ansi-incremental-20260929.json).

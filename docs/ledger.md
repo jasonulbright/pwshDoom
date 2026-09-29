@@ -4456,3 +4456,15 @@ the exact camera in Jason's screenshot. No renderer code change is justified
 by this same-view check. See the
 [source-pinned receipt](../results/moving-sector-e1m1-height-sweep-r9-20260929.json);
 raw report and diagnostic images stay in ignored `local/`.
+
+## 2026-09-29 — Reject changed-cell ANSI output
+
+A 16-worker Classic E1M1 live comparison on the 1,560-command replay reduced
+output volume by 37.8%, but updates fell from 38.43 to 26.01/sec, simulation
+from 34.96 to 28.49 tics/sec, and measured display transitions from 24.95 to
+17.76/sec. Worker encode median/p95 also worsened. The 17-check codec suite
+and short worker smoke passed; they did not predict the live-output cost. I
+removed the optional patch encoder and retained full-frame output. The paired
+capture is a single workload and one wrapper timeout occurred after the game
+reached `ReplayEnd`; details and hashes are in the
+[portable receipt](../results/rejected-ansi-incremental-20260929.json).
