@@ -22,6 +22,13 @@ try{
     $mixer=New-DoomAudioMixer 44100;Update-DoomAudioPacket $mixer $packet $clips
     $pcm=Read-DoomAudioFrames $mixer 4
     Check 'Start volume, interpolation and stereo sample values' (($pcm -join ',') -eq '64,64,80,80,96,96,112,112')
+    $replaceEvents=[PacketTestEvents]::new();$replaceSource=[object]::new();$replaceEvents.Keys.Add($replaceSource,1);$replaceEvents.Sources.Add(1,$replaceSource)
+    $replaceState=New-DoomAudioPacketState;$replaceMixer=New-DoomAudioMixer 44100
+    $replaceEvents.Events.Add(@{Kind='Start';Sound=1;Source=1;Group=1;Volume=100})
+    $replacePacket=Get-DoomAudioPacket $replaceState $replaceEvents $clips;Update-DoomAudioPacket $replaceMixer $replacePacket $clips
+    $replaceEvents.Events.Add(@{Kind='Start';Sound=1;Source=1;Group=2;Volume=100})
+    $replacePacket=Get-DoomAudioPacket $replaceState $replaceEvents $clips;Update-DoomAudioPacket $replaceMixer $replacePacket $clips
+    Check 'Production packet path replaces the prior sound across emitter categories' ($replaceMixer.Voices.Count -eq 1 -and $replaceMixer.Voices[0].Source -eq 1 -and $replaceMixer.Voices[0].Group -eq 2 -and $replaceMixer.ReplacedVoices -eq 1)
     $events.Events.Add(@{Kind='Pause'});$null=Get-DoomAudioPacket $state $events $clips
     for($i=0;$i -lt 50;$i++){$null=Get-DoomAudioPacket $state $events $clips}
     Check 'Paused packets retain emitter lifetime' ($events.Sources.Count -eq 1 -and $state.Clock -eq 1 -and $state.Sequence -eq 52)

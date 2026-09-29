@@ -56,7 +56,11 @@ try{
         [Array]::Copy($block,0,$pcm,$tic*2520,$block.Length)
     }
     $comparison=Compare-DoomReplayCheckpoints $recorded.Checkpoints $checkpoints.ToArray() $recorded.InputCommands.Count
-    if(-not $comparison.Matched -or $comparison.Checked -ne 8){throw 'Audio event capture changed the qualified route.'}
+    if($comparison.Checked -ne 8){throw "Expected eight recorded gameplay checkpoints, but checked $($comparison.Checked)."}
+    if(-not $comparison.Matched){
+        $firstMismatch=@($comparison.Mismatches)[0]
+        throw "Saved gameplay checkpoint at tic $($firstMismatch.Tic) differs from the current simulation. This input is stale for the current engine; its audio output is not qualified."
+    }
     for($i=0;$i -lt $pcm.Length;$i++){if($pcm[$i]){$nonzero++};$peak=[Math]::Max($peak,[Math]::Abs([int]$pcm[$i]))}
     if($nonzero -eq 0){throw 'Audio output is entirely silent.'}
     $wav=Join-Path $directory replay.wav;Write-DoomPcmWave $wav $pcm

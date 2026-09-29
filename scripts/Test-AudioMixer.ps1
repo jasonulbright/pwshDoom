@@ -60,10 +60,12 @@ try{
     $m.Paused=$false;$m.Volume=0;$pcm=Read-DoomAudioFrames $m 2
     Check 'Mute emits silence while advancing voice' (($pcm -join ',') -ceq '0,0,0,0' -and $voice.Position -eq 2)
     $m=New-DoomAudioMixer 8000 -MaxVoices 2;$null=Add-DoomAudioVoice $m $clip -Source 1 -Group 1;$null=Add-DoomAudioVoice $m $clip -Source 1 -Group 1
-    Check 'Same emitter/group replaces prior voice' ($m.Voices.Count -eq 1 -and $m.ReplacedVoices -eq 1)
-    $null=Add-DoomAudioVoice $m $clip -Source 1 -Group 2;$null=Add-DoomAudioVoice $m $clip -Source 2 -Group 1
-    Check 'Voice limit replaces oldest rather than growing' ($m.Voices.Count -eq 2 -and $m.Voices[0].Group -eq 2 -and $m.ReplacedVoices -eq 2)
-    Remove-DoomAudioSource $m 1;Check 'Stop emitter preserves other emitters' ($m.Voices.Count -eq 1 -and $m.Voices[0].Source -eq 2)
+    Check 'Same emitter/same category replaces prior voice' ($m.Voices.Count -eq 1 -and $m.ReplacedVoices -eq 1)
+    $null=Add-DoomAudioVoice $m $clip -Source 1 -Group 2
+    Check 'New category from same emitter replaces its prior voice' ($m.Voices.Count -eq 1 -and $m.Voices[0].Group -eq 2 -and $m.ReplacedVoices -eq 2)
+    $null=Add-DoomAudioVoice $m $clip -Source 2 -Group 1;$null=Add-DoomAudioVoice $m $clip -Source 3 -Group 1
+    Check 'Voice limit replaces oldest rather than growing' ($m.Voices.Count -eq 2 -and $m.Voices[0].Source -eq 2 -and $m.Voices[1].Source -eq 3 -and $m.ReplacedVoices -eq 3)
+    Remove-DoomAudioSource $m 2;Check 'Stop emitter preserves other emitters' ($m.Voices.Count -eq 1 -and $m.Voices[0].Source -eq 3)
     $front=Get-DoomStereoGains 0 0 0 100 0;$left=Get-DoomStereoGains 0 0 0 0 100;$right=Get-DoomStereoGains 0 0 0 0 -100;$far=Get-DoomStereoGains 0 0 0 1200 0
     Check 'Front is centered and near field is full gain' ($front[0] -eq .5 -and $front[1] -eq .5)
     Check 'Left/right cardinal pans have correct handedness' ($left[0] -eq .875 -and $left[1] -eq .125 -and $right[0] -eq .125 -and $right[1] -eq .875)

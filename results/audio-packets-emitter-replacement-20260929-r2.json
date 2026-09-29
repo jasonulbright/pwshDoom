@@ -1,0 +1,44 @@
+{
+  "Checks": [
+    {
+      "Name": "Event batch drains and numeric center gains captured",
+      "Passed": true
+    },
+    {
+      "Name": "Start volume, interpolation and stereo sample values",
+      "Passed": true
+    },
+    {
+      "Name": "Production packet path replaces the prior sound across emitter categories",
+      "Passed": true
+    },
+    {
+      "Name": "Paused packets retain emitter lifetime",
+      "Passed": true
+    },
+    {
+      "Name": "Expired emitter removed from both registries",
+      "Passed": true
+    },
+    {
+      "Name": "Missing referenced clip rejected",
+      "Passed": true
+    },
+    {
+      "Name": "World reset clears voices and old pause",
+      "Passed": true
+    }
+  ],
+  "Meaning": "Independent numeric packet lifetime, pause/reset, conversion and malformed asset tests.",
+  "Error": null,
+  "Sources": [
+    {
+      "Path": "src/AudioPackets.ps1",
+      "Sha256": "01865375DB878EFA137B3B5EF49437B4FFBF9B8C6F0359A2AA52580E0977801E"
+    },
+    {
+      "Path": "scripts/Test-AudioPackets.ps1",
+      "Sha256": "B98FC6F608F5A0F8EDE72463AEC151B056F2EB75908AC81426CF343D4AA4CE38"
+    }
+  ]
+}

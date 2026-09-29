@@ -27,7 +27,10 @@ function New-DoomAudioMixer {
 function Add-DoomAudioVoice {
     param($Mixer,$Clip,[ValidateRange(0,1)][double]$Left=.5,[ValidateRange(0,1)][double]$Right=.5,[int]$Source=0,[int]$Group=0,[ValidateRange(.25,4)][double]$Pitch=1)
     if($Clip.Samples.Length -eq 0){throw 'Cannot play an empty sound.'}
-    for($i=$Mixer.Voices.Count-1;$i -ge 0;$i--){if($Mixer.Voices[$i].Source -eq $Source -and $Mixer.Voices[$i].Group -eq $Group){$Mixer.Voices.RemoveAt($i);$Mixer.ReplacedVoices++}}
+    # Doom stops the previous sound from an emitter before starting another,
+    # regardless of the new sound's category. Keep categories as metadata, not
+    # as independent channels for one world object.
+    for($i=$Mixer.Voices.Count-1;$i -ge 0;$i--){if($Mixer.Voices[$i].Source -eq $Source){$Mixer.Voices.RemoveAt($i);$Mixer.ReplacedVoices++}}
     if($Mixer.Voices.Count -ge $Mixer.MaxVoices){$Mixer.Voices.RemoveAt(0);$Mixer.ReplacedVoices++}
     $Mixer.NextId++
     $voice=@{Id=$Mixer.NextId;Clip=$Clip;Position=0.0;Step=$Clip.Rate*$Pitch/$Mixer.Rate;Left=$Left;Right=$Right;Source=$Source;Group=$Group}
