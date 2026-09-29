@@ -544,26 +544,24 @@ function Invoke-FastRender {
             [byte[]]$colors=$Context.Colors[$light];[byte[]]$flatData=$flat
             [int]$lengthData=([long]$distanceData*[long]$Context.PlaneDistanceScales[$x]) -shr 16
             [long]$xFracWide=[long]$viewXData+(([long]$rayCos[$x]*[long]$lengthData) -shr 16)
-            if($xFracWide -ge 2147483648L){$xFracWide-=4294967296L}elseif($xFracWide -lt -2147483648L){$xFracWide+=4294967296L}
-            [int]$xFrac=$xFracWide
             [long]$negViewY=-[long]$viewYData
             [long]$yFracWide=$negViewY-(([long]$raySin[$x]*[long]$lengthData) -shr 16)
-            if($yFracWide -ge 2147483648L){$yFracWide-=4294967296L}elseif($yFracWide -lt -2147483648L){$yFracWide+=4294967296L}
-            [int]$yFrac=$yFracWide
+            # Flats repeat every 64 map units. Sampling reads only the low 22
+            # bits of each 16.16 world coordinate, so carry that wrapped texture
+            # phase directly instead of normalizing a signed 32-bit value on
+            # every pixel. This is equivalent because 2^22 divides 2^32.
+            [int]$xFrac=[long]$xFracWide -band 0x3FFFFF
+            [int]$yFrac=[long]$yFracWide -band 0x3FFFFF
             do {
-                [int]$u=($xFrac -shr 16) -band 63;[int]$v=($yFrac -shr 10) -band 4032
+                [int]$u=$xFrac -shr 16;[int]$v=($yFrac -shr 10) -band 4032
                 [int]$p=$row+$x
                 # Planes are background surfaces in Doom's renderer. They fill
                 # uncovered pixels but do not occlude world sprites or masked
                 # walls drawn later; the depth buffer remains for opaque walls
                 # and already-composited sprites only.
                 $pixels[$p]=$colors[$flatData[$v+$u]]
-                [long]$xFracWide=[long]$xFrac+[long]$stepX
-                if($xFracWide -ge 2147483648L){$xFracWide-=4294967296L}elseif($xFracWide -lt -2147483648L){$xFracWide+=4294967296L}
-                $xFrac=[int]$xFracWide
-                [long]$yFracWide=[long]$yFrac+[long]$stepY
-                if($yFracWide -ge 2147483648L){$yFracWide-=4294967296L}elseif($yFracWide -lt -2147483648L){$yFracWide+=4294967296L}
-                $yFrac=[int]$yFracWide
+                $xFrac=([long]$xFrac+[long]$stepX) -band 0x3FFFFF
+                $yFrac=([long]$yFrac+[long]$stepY) -band 0x3FFFFF
                 $x++
             } while($x -lt $planeSpanEnd -and $planes[$row+$x] -eq $id)
         }

@@ -4620,3 +4620,20 @@ headless audio result with its near-shutdown starvation observation, and
 reports the Ansi256 same-frame byte reduction without treating it as a live
 speed gain. The human route and 35-tic/60-display goals remain explicitly
 unqualified. No game source changed.
+
+## 2026-09-29 — Reduce flat-coordinate wrap work in the renderer
+
+Replace per-pixel signed 32-bit wrap normalization in plane sampling with a
+PowerShell-maintained 22-bit texture phase. The 64×64 flat lookup reads only
+those low bits, so the sampled image remains exactly the same. Eight
+alternating rounds at five headings compare 40 baseline and candidate frames
+each on HMP E1M1 and E3M6; all 80 pairs match pixel-for-pixel. Median serial
+render time falls 2.52% and 1.57% respectively, with p95 reductions of 7.13%
+and 4.23%. These are fixed-state renderer timings, not live-game pacing.
+
+The current candidate also passes the full 36-map smoke, fuzzed 16-worker
+output checks in all three visual modes (320,000 pixels per mode), 20 masked-
+wall checks, and the occluded-BON1 scene regression. The [portable receipt]
+(../results/renderer-flat-phase-wrap-20260929.json) indexes exact report
+hashes. No gameplay behavior changed; the Episode 1 human route remains
+pending.

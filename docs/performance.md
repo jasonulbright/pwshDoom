@@ -794,3 +794,29 @@ remains the product path. One capture wrapper timed out while draining its
 report, though the game reached `ReplayEnd` and the raw PresentMon capture
 covered game end. This is one matched workload, not a repeated performance
 qualification. See the [portable receipt](../results/rejected-ansi-incremental-20260929.json).
+
+## Carry the flat-texture phase modulo 64 — September 29, 2026
+
+The plane sampler previously normalized each 16.16 world-coordinate step to a
+signed 32-bit value for every sampled pixel. A 64×64 flat repeats every 64 map
+units, and the lookup uses only the coordinate's low 22 bits. The PowerShell
+loop now carries those 22 texture-phase bits directly; modulo 2²² gives the
+same sampled texels because 2²² divides 2³².
+
+Eight alternating baseline/candidate rounds rendered 40 full-width frames per
+implementation at five fixed headings on each map. Every one of the 80 paired
+frames is pixel-identical. On HMP E1M1, median serial render time fell from
+52.4496 to 51.1285 ms (2.52%) and p95 from 93.6523 to 86.9725 ms (7.13%). On
+E3M6, the median fell from 72.2761 to 71.1417 ms (1.57%) and p95 from
+111.4349 to 106.7223 ms (4.23%). These are fixed-state renderer calls; they
+exclude simulation, audio, worker scheduling, Terminal output, and display
+presentation. The long-tail maxima varied and are not used to claim a pacing
+gain.
+
+The changed source passes the 36-map load/idle/render smoke, five-view fuzzed
+16-worker pixel/encoding comparisons in Classic, Matrix/Katakana, and
+AnsiArt/Katakana, all 20 masked-wall checks, and the occluded-BON1 scene check.
+Those checks protect output and regressions; they do not show the complete
+campaign or qualify the 35-tic/60-display target. See the [source-pinned
+receipt](../results/renderer-flat-phase-wrap-20260929.json); raw reports remain
+under ignored `local/` storage.

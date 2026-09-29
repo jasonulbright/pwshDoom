@@ -1,0 +1,117 @@
+{
+  "Format": "pwshDoom.RendererFlatPhaseWrapComparison",
+  "Version": 1,
+  "RecordedDate": "2026-09-29",
+  "Runtime": {
+    "PowerShell": "7.6.5",
+    "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+    "BaselineCommit": "d6dbc304e12a55175dfac4b72bffced4ef79bdfe",
+    "BaselineRendererSha256": "05E1A848F6F92B6913970F7440258813760BE850C308CBBF495F79774F69F54F",
+    "CandidateRendererSha256": "38B557D3ABF5A968A6A4324D80E293ACEE6DB917138E94BE847D13B07ABDBA84"
+  },
+  "Change": {
+    "File": "src/FastRenderer.ps1",
+    "Rule": "A 64x64 flat repeats every 64 map units. The sampler reads only the low 22 bits of each 16.16 world coordinate, so carrying that phase modulo 2^22 is identical to signed 32-bit wrap because 2^22 divides 2^32.",
+    "GameplayChanged": false,
+    "FramebufferChanged": false,
+    "WorkerOrEncodingChanged": false
+  },
+  "Method": "Eight alternating baseline/candidate rounds at five fixed headings on each HMP map after 35 idle tics. Forty full-width serial renderer calls per implementation per map. Module-qualified render-call timing includes first calls; context creation, simulation, worker scheduling, audio, Terminal output, and display presentation are outside the timed call. Every compared baseline/candidate frame is byte-identical.",
+  "Comparisons": [
+    {
+      "Map": "E1M1",
+      "Rounds": 8,
+      "HeadingsDegrees": [0, 37, 90, 180, 270],
+      "FramesPerVariant": 40,
+      "DifferentPixels": 0,
+      "BaselineMedianMs": 52.4496,
+      "CandidateMedianMs": 51.12845,
+      "MedianReductionPercent": 2.52,
+      "BaselineP95Ms": 93.6523,
+      "CandidateP95Ms": 86.9725,
+      "P95ReductionPercent": 7.13,
+      "BaselineMaximumMs": 315.7483,
+      "CandidateMaximumMs": 154.6172,
+      "RawPath": "local/renderer-fracwrap-pair-e1m1-r2.json",
+      "RawSha256": "D5E20EA8DD09F2CAB5243073B71CCC33D7BF443666826EA2596E59D819671BCA"
+    },
+    {
+      "Map": "E3M6",
+      "Rounds": 8,
+      "HeadingsDegrees": [0, 37, 90, 180, 270],
+      "FramesPerVariant": 40,
+      "DifferentPixels": 0,
+      "BaselineMedianMs": 72.2761,
+      "CandidateMedianMs": 71.1417,
+      "MedianReductionPercent": 1.57,
+      "BaselineP95Ms": 111.4349,
+      "CandidateP95Ms": 106.7223,
+      "P95ReductionPercent": 4.23,
+      "BaselineMaximumMs": 341.1208,
+      "CandidateMaximumMs": 160.716,
+      "RawPath": "local/renderer-fracwrap-pair-e3m6.json",
+      "RawSha256": "17538B0B51CCA2E4956564A8887731CB049ABD617CCE99F183FF33A7620A2990"
+    }
+  ],
+  "Correctness": {
+    "ComparedFrames": 80,
+    "DifferentPixels": 0,
+    "CampaignSmoke": {
+      "Cases": 36,
+      "Passed": 36,
+      "Failed": 0,
+      "IdleTicsPerMap": 35,
+      "RenderedFramesPerMap": 2,
+      "RawPath": "local/fracwrap-campaign-smoke.json",
+      "RawSha256": "C09FB62F052E188B6872D4EDAE03206ACDDAC875004269DD57B9654C7870D971",
+      "Meaning": "All 36 Ultimate Doom maps load, advance 35 idle tics, and render two serial frames. This is not route completion."
+    },
+    "FuzzedWorkerPartitions": [
+      {
+        "Style": "Classic",
+        "Workers": 16,
+        "Views": 5,
+        "ComparedPixels": 320000,
+        "DifferentPixels": 0,
+        "RawPath": "local/fracwrap-partitions-classic.json",
+        "RawSha256": "76FB8199CAA49C4BEB46C70D92E961FB5A6F5DC031AC79F1A23516CB2CCFA682"
+      },
+      {
+        "Style": "Matrix/Katakana",
+        "Workers": 16,
+        "Views": 5,
+        "ComparedPixels": 320000,
+        "DifferentPixels": 0,
+        "RawPath": "local/fracwrap-partitions-matrix.json",
+        "RawSha256": "E80D354815A510FBCC1C735CA79E6EAEAD1AA4FF78D1C6E0CC9F0A2431244E5F"
+      },
+      {
+        "Style": "AnsiArt/Katakana",
+        "Workers": 16,
+        "Views": 5,
+        "ComparedPixels": 320000,
+        "DifferentPixels": 0,
+        "RawPath": "local/fracwrap-partitions-ansiart.json",
+        "RawSha256": "4DAA52111531570B61D188480E679623A422F5FC97A61DAF847C38B851957AA6"
+      }
+    ],
+    "MaskedWall": {
+      "Checks": 20,
+      "Passed": true,
+      "RawPath": "local/fracwrap-masked-wall.json",
+      "RawSha256": "34DB12CBE190F13C116C904D48B3E0D0BBF415E1D9987EA8574F8C32F3B86936"
+    },
+    "OccludedSprite": {
+      "Passed": true,
+      "Result": "The occluded BON1 actor changes zero scene pixels.",
+      "RawPath": "local/fracwrap-sprite-silhouette.json",
+      "RawSha256": "9DBCBBEACCC2C909C05299E1C09183949FB52234E5D88234155718D6D157396E"
+    }
+  },
+  "Limitations": [
+    "These are fixed-state serial renderer timings, not concurrent worker latency or whole-host performance.",
+    "The two scenes do not establish an average gain across every WAD or game state.",
+    "No Terminal output, monitor frame rate, audio, or simulation performance was measured by the renderer-pair benchmark.",
+    "The 35-tic/60-displayed-frame target remains unqualified."
+  ]
+}
