@@ -67,9 +67,13 @@ see the [worker-count comparison](../results/worker-count-host-render-comparison
 A later 30-second output-clock audio follow-up on E3M6 selected D_E3M6 from
 the full local catalog and used 16 render workers. It reported zero rebuffer
 resumes and zero queue-starvation observations, with all simulation packets
-consumed and clean device shutdown. This single deterministic scripted headless sample
-does not complete the map, verify a campaign transition, or establish audible
-continuity; see the [audio-load receipt](../results/e3m6-realtime-audio-loaded-20260928.json).
+consumed and clean device shutdown. It advanced 719 tics in 23.244 active
+seconds (30.93 tics/sec) and completed 816 render updates in 23.244 active
+seconds (35.11/sec). A same-map reload paused active timing for 6.769 seconds
+around tic 420–421; its trigger was not isolated. This single deterministic
+scripted headless sample does not complete the map, verify a campaign
+transition, or establish audible continuity; see the
+[audio-load receipt](../results/e3m6-realtime-audio-loaded-20260928.json).
 
 A later worker-mask span-lookup prototype also matched the serial E1M1 renderer
 for five views in each style at 12 workers and for a 16-worker Classic fuzz

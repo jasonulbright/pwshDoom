@@ -4530,3 +4530,18 @@ files and IWAD remain local. The [complete-playthrough handoff](episode1-playtes
 now pins exact build `b79b668`, and the existing R9 gameplay/route evidence
 carries forward because no gameplay or rendering code changed. The public
 Preview.3 archive is unchanged.
+
+## 2026-09-29 — Correct the article's E3M6 audio chronology
+
+The article's sound section had described the earlier pre-output-clock E3M6
+queue-starvation trials as though they were the latest loaded result. It now
+distinguishes those failures from the current-source 30-second, 16-worker
+output-clock run, which reported zero queue-starvation and rebuffer
+observations, consumed 720 simulation packets plus 104 fill blocks, and closed
+the device cleanly. The article also preserves the sample's 6.769-second
+same-map reload pause, 30.93 active simulation tics/sec, and 5,040-frame
+canceled-tail upper bound; this does not establish campaign continuity or
+audible quality. The [campaign matrix](campaign-matrix.md) records its active
+timing and reiterates that the sample is not map completion. No product source
+or qualification status changed. Evidence: the
+[source-pinned E3M6 receipt](../results/e3m6-realtime-audio-loaded-20260928.json).
