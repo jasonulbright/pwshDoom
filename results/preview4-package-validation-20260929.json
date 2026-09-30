@@ -1,0 +1,59 @@
+{
+  "Format": "pwshDoom.Preview4PackageValidation",
+  "Date": "2026-09-29",
+  "SourceCommit": "8a1561d9b7e50e618db4c406d41f0424227594a3",
+  "ZipSha256": "A9210CCBD736578DFF5DE12DCFD5195560A11C838AD20511F35AC51D0D4B91DA",
+  "ZipBytes": 1648614,
+  "ManifestFilesVerified": 544,
+  "WorkingTreeDirty": true,
+  "DirtyExplanation": "Only excluded untracked docs/gebbdoom.pdf; tracked working tree was clean. All package manifest payloads verified.",
+  "Preflight": {
+    "Ready": true,
+    "PowerShell": "7.6.6",
+    "Wad": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Ultimate Doom\\base\\DOOM.WAD",
+    "EpisodeMaps": 36,
+    "Root": "C:\\projects\\pwshDoom\\local\\preview4-extracted\\pwshDoom-0.1.0-preview.4",
+    "WindowsTerminal": "C:\\Users\\jason\\AppData\\Local\\Microsoft\\WindowsApps\\wt.exe",
+    "MusicCatalog": "C:\\projects\\pwshDoom\\local\\music-prepared-ultimate-doom-loops-20260928.json",
+    "MusicValidation": "Qualification metadata for 30 tracks matches this PowerShell runtime and current synthesis sources; payload hashes and IWAD score identity are rechecked at audio startup."
+  },
+  "Host": {
+    "Seconds": 8.0035311,
+    "Tics": 279,
+    "HeadlessUpdates": 319,
+    "Exit": "Duration",
+    "SubmittedAudioFrames": 352800,
+    "ReturnedAudioFrames": 352800,
+    "QueueStarvationObservations": [
+      {
+        "WallMs": 33594.6214,
+        "AfterPacket": 279
+      }
+    ],
+    "DeviceClosed": true
+  },
+  "RawReceipts": [
+    {
+      "Path": "local/preview4-package-build.json",
+      "Sha256": "CDDB5465F7CAB490212F7CB5EC7A5820B09EF507B938573A58359C108790F9B7"
+    },
+    {
+      "Path": "local/preview4-package-preflight.json",
+      "Sha256": "9C06337BBADCA7DA31F7E2511606AB2362B3FD49C30164442951002A9319B235"
+    },
+    {
+      "Path": "local/preview4-package-host.json",
+      "Sha256": "1120C8C0F296EDB1D34FFE398404EC7ABB648BC943824E5A558711F3DF4ABCAB"
+    },
+    {
+      "Path": "local/preview4-save-edges.json",
+      "Sha256": "931FCF770544D6BBF351160D6E6F3B826766DFCEBEA0A53C9462788A5A67FC5A"
+    }
+  ],
+  "Meaning": "Source-inclusive 544-file ZIP verified after extraction, no WAD/font/binary/PDF/media payloads. Actual-device eight-second E1M1 startup with 30 catalog entries; only D_E1M1 plays. No acoustic or continuous-campaign qualification. Headless updates are not displayed frames.",
+  "Publication": {
+    "Url": "https://github.com/jasonulbright/pwshDoom/releases/tag/v0.1.0-preview.4",
+    "FreshDownloadSha256": "A9210CCBD736578DFF5DE12DCFD5195560A11C838AD20511F35AC51D0D4B91DA",
+    "Verified": true
+  }
+}
