@@ -27,6 +27,7 @@ $checkpoints=[Collections.Generic.List[object]]::new();$checkpointTimes=[Collect
 $menuGraphics=$null;$menuPixels=$null;$menuScreen=0;$menuRevision=0;$episodeCount=4;$controlLog=[Collections.Generic.List[object]]::new()
 $saveOperations=[Collections.Generic.List[object]]::new()
 $automapGraphics=$null;$automapCommands=[Collections.Generic.List[object]]::new();$discoveryTimes=[Collections.Generic.List[double]]::new();$automapTimes=[Collections.Generic.List[double]]::new()
+$messageGraphics=$null
 function Record-ReplayCheckpoint {
     param([switch]$Replace)
     if(-not $ReplayCheckpoints){return}
@@ -51,7 +52,7 @@ function Publish-SimulationSnapshot {
         $uiWatch=[Diagnostics.Stopwatch]::StartNew();$current=Get-DoomSessionScreen $screens $game;$old=$current
         $uiTimes.Add($uiWatch.Elapsed.TotalMilliseconds)
     }
-    if($old.Length -ne $current.Length -or $old.Length*2+576 -gt 1048576){throw 'Simulation snapshot exceeds slot capacity.'}
+    if($old.Length -ne $current.Length -or $old.Length*2+4160 -gt 1048576){throw 'Simulation snapshot exceeds slot capacity.'}
     $script:slot=1-$script:slot;$script:version+=2
     [long]$base=131072+$script:slot*1048576
     $view.Write($base,$script:version-1);[Threading.Thread]::MemoryBarrier()
@@ -67,7 +68,11 @@ function Publish-SimulationSnapshot {
     $message=Get-DoomPlayerMessageBytes $game.World.ConsolePlayer
     $view.Write($base+56,[int]$message.Length)
     $view.Write($base+60,[int]$(if($message.Length){$game.World.ConsolePlayer.MessageTime}else{0}))
-    if($message.Length){$view.WriteArray($base+1048064,$message,0,$message.Length)}
+    if($message.Length){
+        $view.WriteArray($base+1044480,$message,0,$message.Length)
+        $messagePixels=Get-DoomPlayerMessagePixels $messageGraphics $message
+        $view.WriteArray($base+1044992,$messagePixels,0,$messagePixels.Length)
+    }
     $view.WriteArray($base+64,$old,0,$old.Length);$view.WriteArray($base+64+$old.Length,$current,0,$current.Length)
     [Threading.Thread]::MemoryBarrier();$view.Write($base,$script:version);$view.Write(16,$script:slot);$view.Write(20,$script:tick)
 }
@@ -127,6 +132,7 @@ try {
     $options.GameMode=$content.Wad.GameMode;$options.GameVersion=$content.Wad.GameVersion;$options.MissionPack=$content.Wad.MissionPack
     $episodeCount=if($options.GameMode -in [GameMode]::Shareware,[GameMode]::Commercial){1}elseif($options.GameMode -eq [GameMode]::Retail){4}else{3};$view.Write(80,[int]$episodeCount)
     $game=[DoomGame]::new($content,$options);$commands=[TicCmd[]]::new(4)
+    $messageGraphics=@{Screen=[DrawScreen]::new($content.Wad,320,200);Text=$null;Pixels=[byte[]]::new(2560)}
     for($i=0;$i -lt 4;$i++){$commands[$i]=[TicCmd]::new()}
     $game.DeferedInitNew([GameSkill]($Skill-1),$Episode,$Map);$null=$game.Update($commands)
     for($i=0;$i -lt 140;$i++){$commands[0].ForwardMove=25;$commands[0].Buttons=1;if($i -gt 70){$commands[0].AngleTurn=640};$null=$game.Update($commands)}

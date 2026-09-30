@@ -1,0 +1,223 @@
+{
+  "SaveRoot": "local/player-messages-bitmap-saves-r7",
+  "Checks": [
+    {
+      "Passed": true,
+      "Name": "Bitmap notice contains original font pixels"
+    },
+    {
+      "Passed": true,
+      "Name": "Unchanged notice reuses bitmap without redrawing"
+    },
+    {
+      "Passed": true,
+      "Name": "Long bitmap notice clips to the source width"
+    },
+    {
+      "Passed": true,
+      "Name": "Locked-door handler emits PD_BLUEK for 140 tics"
+    },
+    {
+      "Passed": true,
+      "Name": "Locked-door handler emits PD_YELLOWK for 140 tics"
+    },
+    {
+      "Passed": true,
+      "Name": "Locked-door handler emits PD_REDK for 140 tics"
+    },
+    {
+      "Passed": true,
+      "Name": "Message transport strips controls and normalizes ASCII"
+    },
+    {
+      "Passed": true,
+      "Name": "Message payload is bounded to 512 bytes"
+    },
+    {
+      "Passed": true,
+      "Name": "Expired message has no payload"
+    },
+    {
+      "Passed": true,
+      "Name": "Classic notice fits centered viewport"
+    },
+    {
+      "Passed": true,
+      "Name": "Classic hides notices on screen kind 1"
+    },
+    {
+      "Passed": true,
+      "Name": "Classic hides notices on screen kind 2"
+    },
+    {
+      "Passed": true,
+      "Name": "Classic hides expired notice"
+    },
+    {
+      "Passed": true,
+      "Name": "Classic preserves notices on automap"
+    },
+    {
+      "Passed": true,
+      "Name": "Classic bitmap output occupies multiple readable rows"
+    },
+    {
+      "Passed": true,
+      "Name": "Classic Strips overlays notice after render bytes before frame end"
+    },
+    {
+      "Passed": true,
+      "Name": "Classic Batch overlays notice after render bytes before frame end"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix notice fits centered viewport"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix hides notices on screen kind 1"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix hides notices on screen kind 2"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix hides expired notice"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix preserves notices on automap"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix bitmap output occupies multiple readable rows"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix Strips overlays notice after render bytes before frame end"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix Batch overlays notice after render bytes before frame end"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt notice fits centered viewport"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt hides notices on screen kind 1"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt hides notices on screen kind 2"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt hides expired notice"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt preserves notices on automap"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt bitmap output occupies multiple readable rows"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt Strips overlays notice after render bytes before frame end"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt Batch overlays notice after render bytes before frame end"
+    },
+    {
+      "Passed": true,
+      "Name": "Fixture uses an actual E1M2 red locked door"
+    },
+    {
+      "Passed": true,
+      "Name": "RedLock expires after 140 simulation tics"
+    },
+    {
+      "Passed": true,
+      "Name": "Real armor pickup supplies message and inventory"
+    },
+    {
+      "Passed": true,
+      "Name": "ArmorPickup expires after 140 simulation tics"
+    },
+    {
+      "Passed": true,
+      "Name": "Actual simulation load publishes saved notice atomically"
+    },
+    {
+      "Passed": true,
+      "Name": "Actual worker transports exact original-font bitmap"
+    },
+    {
+      "Passed": true,
+      "Name": "Notice clock matches worker tic 1"
+    },
+    {
+      "Passed": true,
+      "Name": "Notice clock matches worker tic 35"
+    },
+    {
+      "Passed": true,
+      "Name": "Notice clock matches worker tic 36"
+    },
+    {
+      "Passed": true,
+      "Name": "Actual automap snapshot retains active notice"
+    },
+    {
+      "Passed": true,
+      "Name": "Notice clock matches worker tic 70"
+    },
+    {
+      "Passed": true,
+      "Name": "Notice clock matches worker tic 71"
+    },
+    {
+      "Passed": true,
+      "Name": "Notice clock matches worker tic 139"
+    },
+    {
+      "Passed": true,
+      "Name": "Notice clock matches worker tic 140"
+    },
+    {
+      "Passed": true,
+      "Name": "Actual worker clears expired message bytes"
+    }
+  ],
+  "Error": null,
+  "Meaning": "Real key-lock/pickup handlers; bounded ASCII notice, centered all-style overlay, Strips/Batch ordering, saved-message IPC and 140-tic expiry with actual simulation worker. Save fixtures are not ordinary-input routes.",
+  "Fixture": "local/player-messages-bitmap-fixture-r7.json",
+  "SourceFiles": [
+    {
+      "Path": "src/PlayerMessages.ps1",
+      "Sha256": "83DAE0101091CCC9AEFB341F487CE839DB9746FBA8C4BEAD33596AF2A989A1E7"
+    },
+    {
+      "Path": "src/SimulationProcess.ps1",
+      "Sha256": "472B67E534DBC1AB262439CCD57E481B472AD3F40761E1B9518B946067E7DEAE"
+    },
+    {
+      "Path": "scripts/Invoke-Doom.ps1",
+      "Sha256": "70B50F918677F8B170C8F7C6B55B17413EFE7A714D8987702AE4E6FE6B794E19"
+    },
+    {
+      "Path": "scripts/Invoke-SimulationWorker.ps1",
+      "Sha256": "344C4E55CCFDB73DAAC1BD117C6EA92E86309F3DF5CBE2BCF011AE49C0A69F13"
+    },
+    {
+      "Path": "scripts/Test-PlayerMessages.ps1",
+      "Sha256": "8E455B734CC270A96F1B563C2D8B0B13FF84BB14EFD353EF2E4AF443AD0473C1"
+    }
+  ],
+  "RawReportSha256": "5726778756069BE84B6A182DD3FF7DEBD9C01AA257832A4EFB1CB15EF277C90E"
+}

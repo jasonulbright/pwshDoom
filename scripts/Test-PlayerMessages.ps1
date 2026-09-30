@@ -6,7 +6,9 @@ param([Parameter(Mandatory)][string]$Output,[Parameter(Mandatory)][string]$Fixtu
 $ErrorActionPreference='Stop';Set-StrictMode -Version Latest
 foreach($path in $Output,$Fixture,$SaveRoot){if(Test-Path -LiteralPath $path){throw 'Use fresh message-test paths.'}}
 $bundle=& "$PSScriptRoot/Build-EngineBundle.ps1";. $bundle
-foreach($name in 'InputReplay','GameHost','SnapshotTransport','SaveState','SessionMenu','SimulationProcess','Viewport','TerminalOutput','AutomapSession'){
+. "$PSScriptRoot/FrameCodec.ps1"
+. "$PSScriptRoot/../src/TerminalCodec.ps1"
+foreach($name in 'InputReplay','GameHost','SnapshotTransport','SaveState','SessionMenu','SimulationProcess','Viewport','TerminalOutput','AutomapSession','PaletteCodec','CharacterCodec'){
     . "$PSScriptRoot/../src/$name.ps1"
 }
 $checks=[Collections.Generic.List[object]]::new();$content=$null;$simulation=$null;$failure=$null
@@ -30,6 +32,13 @@ try{
     $content=[GameContent]::new(@('-iwad',$Wad));$wadHash=(Get-FileHash $Wad).Hash
     $cmd=[TicCmd[]]::new(4);for($i=0;$i -lt 4;$i++){$cmd[$i]=[TicCmd]::new()}
     $g=New-MessageGame;$p=$g.World.ConsolePlayer
+    $font=@{Screen=[DrawScreen]::new($content.Wad,320,200);Text=$null;Pixels=[byte[]]::new(2560)}
+    $glyphs=Get-DoomPlayerMessagePixels $font ([Text.Encoding]::ASCII.GetBytes('YOU NEED A RED KEY'))
+    Check 'Bitmap notice contains original font pixels' (@($glyphs|Where-Object {$_ -ne 0}).Count -gt 40)
+    $cached=Get-DoomPlayerMessagePixels $font ([Text.Encoding]::ASCII.GetBytes('YOU NEED A RED KEY'))
+    Check 'Unchanged notice reuses bitmap without redrawing' ([object]::ReferenceEquals($glyphs,$cached))
+    $long=Get-DoomPlayerMessagePixels $font ([Text.Encoding]::ASCII.GetBytes('X'*512))
+    Check 'Long bitmap notice clips to the source width' ($long.Length -eq 2560)
     $line=$g.World.Map.Lines[0];$original=$line.Special
     foreach($lock in @(@(26,'PD_BLUEK'),@(27,'PD_YELLOWK'),@(28,'PD_REDK'))){
         try{$line.Special=[int]$lock[0];$g.World.SectorAction.DoLocalDoor($line,$p.Mobj)}finally{$line.Special=$original}
@@ -48,6 +57,10 @@ try{
         foreach($kind in 1,2){Check "$style hides notices on screen kind $kind" ((Get-DoomPlayerMessageOutput 'BLUE KEY' 1 $kind $vp -Style $style).Length -eq 0)}
         Check "$style hides expired notice" ((Get-DoomPlayerMessageOutput 'BLUE KEY' 0 0 $vp -Style $style).Length -eq 0)
         Check "$style preserves notices on automap" ((Get-DoomPlayerMessageOutput 'BLUE KEY' 1 3 $vp -Style $style).Length -gt 0)
+        $codecs=New-DoomPaletteCodecs $content.Palette.Data $style
+        $pixels=Get-DoomPlayerMessagePixels $font ([Text.Encoding]::ASCII.GetBytes('YOU NEED A RED KEY'))
+        $bitmapBytes=Get-DoomPlayerMessageOutput 'YOU NEED A RED KEY' 140 0 $vp -Style $style -Pixels $pixels -Codecs $codecs
+        Check "$style bitmap output occupies multiple readable rows" ([Text.Encoding]::UTF8.GetString($bitmapBytes).Contains("$([char]27)[$($vp.Top+2);$($vp.Left+1)H"))
         foreach($mode in 'Strips','Batch'){
             $stream=[IO.MemoryStream]::new();$context=New-DoomTerminalOutputContext
             Write-DoomTerminalFrame $context $stream @(@{Bytes=[byte[]]@(65,66)}) ([byte[]]@(1)) ([byte[]]@(2)) -Status $outputBytes -Mode $mode
@@ -99,6 +112,8 @@ try{
     }
     $reply=Read-DoomSessionPayload $simulation.View 65536;$s=Read-DoomSimulationSnapshot $simulation $null
     Check 'Actual simulation load publishes saved notice atomically' ($reply.Success -and $s.PlayerMessage -ceq $initialText -and $s.PlayerMessageTics -eq 140)
+    $expectedPixels=Get-DoomPlayerMessagePixels $font ([Text.Encoding]::ASCII.GetBytes($initialText))
+    Check 'Actual worker transports exact original-font bitmap' ([Linq.Enumerable]::SequenceEqual[byte]($expectedPixels,$s.PlayerMessagePixels))
     for($i=0;$i -lt 140;$i++){
         Send-DoomSimulationCommand $simulation $i @(0,0,0,0) -AutomapMask $(if($i -in 35,70){1}else{0})
         $s=Await-Simulation ($i+1)

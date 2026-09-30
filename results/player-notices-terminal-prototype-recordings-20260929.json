@@ -1,0 +1,47 @@
+{
+  "Runs": [
+    {
+      "Style": "classic",
+      "Commands": 350,
+      "CheckpointMatches": 11,
+      "Error": null,
+      "DeviceClosed": true,
+      "Video": "local/recordings/candidate-notices-classic-av.mp4",
+      "VideoSha256": "9F4A766DDB7E468513EBF3453B17590644A90FFE3C1EFF5C9DE165A10A13B420",
+      "SourcesChangedDuringRun": [],
+      "TicsPerSecond": 34.867863350333046,
+      "WritesPerSecond": 37.75691488507493,
+      "FrameCount": 379,
+      "Meaning": "Superseded terminal-font notice prototype. Digital A/V capture; excludes acoustic review. Native bitmap notices follow after visual inspection identified tiny Classic text."
+    },
+    {
+      "Style": "matrix",
+      "Commands": 350,
+      "CheckpointMatches": 11,
+      "Error": null,
+      "DeviceClosed": true,
+      "Video": "local/recordings/candidate-notices-matrix-av.mp4",
+      "VideoSha256": "74C0F08BD6BC76DA3CD05E74FB9A4CB4941379D33693B6E1825ADB2E9EE19B8A",
+      "SourcesChangedDuringRun": [],
+      "TicsPerSecond": 31.006366368886248,
+      "WritesPerSecond": 38.7136631520094,
+      "FrameCount": 437,
+      "Meaning": "Superseded terminal-font notice prototype. Digital A/V capture; excludes acoustic review. Native bitmap notices follow after visual inspection identified tiny Classic text."
+    },
+    {
+      "Style": "ansiart",
+      "Commands": 350,
+      "CheckpointMatches": 11,
+      "Error": null,
+      "DeviceClosed": true,
+      "Video": "local/recordings/candidate-notices-ansiart-av.mp4",
+      "VideoSha256": "92B6CFFFAB9C0FC87C0DE7AFB69F141A81A482E605260E94C43820F27846F2B6",
+      "SourcesChangedDuringRun": [],
+      "TicsPerSecond": 33.38806145376065,
+      "WritesPerSecond": 36.5360786765438,
+      "FrameCount": 383,
+      "Meaning": "Superseded terminal-font notice prototype. Digital A/V capture; excludes acoustic review. Native bitmap notices follow after visual inspection identified tiny Classic text."
+    }
+  ],
+  "Meaning": "All three prototype captures pass host checkpoints and digital audio/video merge. Their typography is superseded after inspecting Classic footage; original media stays local."
+}

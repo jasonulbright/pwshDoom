@@ -58,19 +58,23 @@ function Read-DoomSimulationSnapshot {
     [int]$messageLength=$view.ReadInt32($base+56);[int]$messageTics=$view.ReadInt32($base+60)
     if($messageLength -lt 0 -or $messageLength -gt 512 -or $messageTics -lt 0 -or $messageTics -gt 140){throw 'Invalid player message metadata.'}
     if($state -lt 0 -or $state -gt 2 -or $screenKind -lt 0 -or $screenKind -gt 3 -or ($screenKind -ne 0 -and $length -ne 64000)){throw 'Invalid session snapshot state.'}
-    if($length -lt 384 -or $length%8 -ne 0 -or $length*2+576 -gt 1048576){throw 'Invalid simulation snapshot size.'}
+    if($length -lt 384 -or $length%8 -ne 0 -or $length*2+4160 -gt 1048576){throw 'Invalid simulation snapshot size.'}
     $oldBytes=[byte[]]::new($length);$newBytes=[byte[]]::new($length)
     [void]$view.ReadArray($base+64,$oldBytes,0,$length);[void]$view.ReadArray($base+64+$length,$newBytes,0,$length)
     $messageBytes=[byte[]]::new($messageLength)
-    if($messageLength){[void]$view.ReadArray($base+1048064,$messageBytes,0,$messageLength)}
+    $messagePixels=$null
+    if($messageLength){
+        [void]$view.ReadArray($base+1044480,$messageBytes,0,$messageLength)
+        $messagePixels=[byte[]]::new(2560);[void]$view.ReadArray($base+1044992,$messagePixels,0,2560)
+    }
     $message=[Text.Encoding]::ASCII.GetString($messageBytes)
     [Threading.Thread]::MemoryBarrier()
     if($version -ne $view.ReadInt32($base)){return $Previous}
     if($paletteNumber -lt 0 -or $paletteNumber -gt 13){throw 'Invalid simulation palette.'}
-    if($screenKind -ne 0){return @{Version=$version;Tic=$tic;Generation=$generation;State=$state;Episode=$episode;Map=$map;Health=$health;Kills=$kills;Pixels=$newBytes;ScreenKind=$screenKind;MenuRevision=$menuRevision;MenuScreen=$menuScreen;AutomapVisible=$automapVisible;PaletteNumber=$paletteNumber;PlayerMessage=$message;PlayerMessageTics=$messageTics}}
+    if($screenKind -ne 0){return @{Version=$version;Tic=$tic;Generation=$generation;State=$state;Episode=$episode;Map=$map;Health=$health;Kills=$kills;Pixels=$newBytes;ScreenKind=$screenKind;MenuRevision=$menuRevision;MenuScreen=$menuScreen;AutomapVisible=$automapVisible;PaletteNumber=$paletteNumber;PlayerMessage=$message;PlayerMessageTics=$messageTics;PlayerMessagePixels=$messagePixels}}
     $oldValues=[double[]]::new($length/8);$newValues=[double[]]::new($length/8)
     [Buffer]::BlockCopy($oldBytes,0,$oldValues,0,$length);[Buffer]::BlockCopy($newBytes,0,$newValues,0,$length)
-    return @{Version=$version;Tic=$tic;Previous=$oldValues;Current=$newValues;Generation=$generation;State=$state;Episode=$episode;Map=$map;Health=$health;Kills=$kills;ScreenKind=$screenKind;MenuRevision=$menuRevision;MenuScreen=$menuScreen;AutomapVisible=$automapVisible;PaletteNumber=$paletteNumber;PlayerMessage=$message;PlayerMessageTics=$messageTics}
+    return @{Version=$version;Tic=$tic;Previous=$oldValues;Current=$newValues;Generation=$generation;State=$state;Episode=$episode;Map=$map;Health=$health;Kills=$kills;ScreenKind=$screenKind;MenuRevision=$menuRevision;MenuScreen=$menuScreen;AutomapVisible=$automapVisible;PaletteNumber=$paletteNumber;PlayerMessage=$message;PlayerMessageTics=$messageTics;PlayerMessagePixels=$messagePixels}
 }
 function Close-DoomSimulation {
     param($Simulation,[switch]$DrainAudio)

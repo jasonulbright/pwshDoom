@@ -18,6 +18,7 @@ if($MusicCatalog){$Sound=$true}
 . "$PSScriptRoot/../src/SimulationProcess.ps1";. "$PSScriptRoot/../src/ConsoleInput.ps1"
 . "$PSScriptRoot/../src/Viewport.ps1"
 . "$PSScriptRoot/../src/CharacterCodec.ps1"
+. "$PSScriptRoot/../src/PaletteCodec.ps1"
 . "$PSScriptRoot/../src/InputReplay.ps1"
 . "$PSScriptRoot/../src/SessionMenu.ps1"
 . "$PSScriptRoot/../src/TerminalOutput.ps1"
@@ -36,7 +37,7 @@ function Start-DoomRenderJob {
     $InterpolationTimes.Add($watch.Elapsed.TotalMilliseconds)
     $qpc=[Diagnostics.Stopwatch]::GetTimestamp();$watch.Restart()
     Submit-GameRender $Pool $bytes -ColumnOffset $Viewport.Left -RowOffset $Viewport.Top -FrameNumber ([int][Math]::Floor($Clock.Elapsed.TotalSeconds*60)) -ScreenPixels:$screenPixels -Tic $Snapshot.Tic -MenuPixels:($Snapshot.ScreenKind -eq 2) -AutomapPixels:($Snapshot.ScreenKind -eq 3) -PaletteNumber $Snapshot.PaletteNumber
-    return @{Tic=$Snapshot.Tic;Version=$Snapshot.Version;StartQpc=$qpc;SubmitMs=$watch.Elapsed.TotalMilliseconds;ViewportKey=$Viewport.Key;State=$Snapshot.State;Generation=$Snapshot.Generation;Episode=$Snapshot.Episode;Map=$Snapshot.Map;ScreenKind=$Snapshot.ScreenKind;MenuRevision=$Snapshot.MenuRevision;MenuScreen=$Snapshot.MenuScreen;PaletteNumber=$Snapshot.PaletteNumber;PlayerMessage=$Snapshot.PlayerMessage;PlayerMessageTics=$Snapshot.PlayerMessageTics}
+    return @{Tic=$Snapshot.Tic;Version=$Snapshot.Version;StartQpc=$qpc;SubmitMs=$watch.Elapsed.TotalMilliseconds;ViewportKey=$Viewport.Key;State=$Snapshot.State;Generation=$Snapshot.Generation;Episode=$Snapshot.Episode;Map=$Snapshot.Map;ScreenKind=$Snapshot.ScreenKind;MenuRevision=$Snapshot.MenuRevision;MenuScreen=$Snapshot.MenuScreen;PaletteNumber=$Snapshot.PaletteNumber;PlayerMessage=$Snapshot.PlayerMessage;PlayerMessageTics=$Snapshot.PlayerMessageTics;PlayerMessagePixels=$Snapshot.PlayerMessagePixels}
 }
 $simulation=$null;$pool=$null;$consoleState=$null;$terminalActive=$false;$timerRequested=$false;$failure=$null
 $oldEncoding=[Console]::OutputEncoding;$esc=[char]27;$clock=[Diagnostics.Stopwatch]::new()
@@ -108,7 +109,8 @@ try {
     $menu=New-DoomMenuState ($simulation.View.ReadInt32(80)) $Episode $Skill
     $menu.Settings=Copy-DoomUserSettings $preferences
     if($null -eq $snapshot){throw 'Initial simulation snapshot was not published.'}
-    $context=Read-GameRenderAssets $simulation.Assets;$context.AssetPath=$simulation.Assets
+    $context=Read-GameRenderAssets $simulation.Assets
+    $messageCodecs=New-DoomPaletteCodecs $context.PlayPal $Style -GlyphSet $GlyphSet;$context.AssetPath=$simulation.Assets
     $paletteBytes=[byte[]]::new(768)
     for($i=0;$i -lt 256;$i++){for($j=0;$j -lt 3;$j++){$paletteBytes[3*$i+$j]=$context.Palette[$i][$j]}}
     [IO.File]::WriteAllBytes("$PSScriptRoot/../local/palette.bin",$paletteBytes)
@@ -315,7 +317,7 @@ try {
             if(-not $Headless) {
                 [byte[]]$clearOutput=$emptyOutput
                 if($needsClear){$clearOutput=[Text.Encoding]::UTF8.GetBytes("$esc[0m$esc[2J")}
-                [byte[]]$statusOutput=Get-DoomPlayerMessageOutput $present.PlayerMessage $present.PlayerMessageTics $present.ScreenKind $viewport -Style $Style
+                [byte[]]$statusOutput=Get-DoomPlayerMessageOutput $present.PlayerMessage $present.PlayerMessageTics $present.ScreenKind $viewport -Style $Style -Pixels $present.PlayerMessagePixels -Codecs $messageCodecs
                 if($Diagnostics) {
                     $statusLine="$esc[$($viewport.StatusTop+1);$($viewport.Left+1)H$esc[0mpwshDoom | WASD move | arrows turn | Ctrl fire | E/Space use | Shift run | 1-7 weapons | P pause | Esc menu"
                     $statusLine+="$esc[$($viewport.StatusTop+2);$($viewport.Left+1)Htic $($snapshot.Tic) | $([Math]::Round($completed/[Math]::Max(.01,$clock.Elapsed.TotalSeconds),1)) completed updates/s | health $($snapshot.Health) | kills $($snapshot.Kills)       "
