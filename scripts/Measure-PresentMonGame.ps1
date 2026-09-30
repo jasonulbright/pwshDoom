@@ -6,7 +6,9 @@ param([string]$OutputPrefix="$PSScriptRoot/../results/presentmon-e1m1",
     [string]$Replay="$PSScriptRoot/../results/e1m1-route.json",
     [ValidateRange(4,24)][int]$FontSize=6,[switch]$Maximized,
     [ValidateSet('Classic','AnsiArt','Matrix')][string]$Style='Classic',
-    [ValidateSet('Ascii','Katakana')][string]$GlyphSet='Katakana',[string]$FontFace)
+    [ValidateSet('Ascii','Katakana')][string]$GlyphSet='Katakana',[string]$FontFace,
+    [ValidateRange(1,32)][int]$Workers=16,[ValidateRange(1,3600)][int]$Seconds=90,
+    [switch]$Sound,[string]$MusicCatalog,[string]$SaveRoot,[string]$SettingsPath,[string]$SessionSchedule)
 $ErrorActionPreference='Stop'
 if($Style -ne 'Classic' -and -not $PSBoundParameters.ContainsKey('FontSize')){$FontSize=12}
 if(-not $FontFace){$FontFace=if($Style -ne 'Classic' -and $GlyphSet -eq 'Katakana'){'MS Gothic'}else{'Cascadia Mono'}}
@@ -14,9 +16,18 @@ if(-not $FontFace){$FontFace=if($Style -ne 'Classic' -and $GlyphSet -eq 'Katakan
 Initialize-PresentMonApi
 $session=[IntPtr]::Zero;$query=[IntPtr]::Zero;$target=$null;$tracking=$false;$failure=$null
 $rows=[Collections.Generic.List[object]]::new();$fields=[Collections.Generic.List[object]]::new()
+$processSamples=[Collections.Generic.List[object]]::new();$ownedProcesses=@{};$lastProcessSample=-1000
+$sourceRoot=[IO.Path]::GetFullPath("$PSScriptRoot/..")
+$sourceLines=@(Get-ChildItem "$sourceRoot/src" -Recurse -File -Filter *.ps1|Sort-Object FullName|ForEach-Object {
+    [IO.Path]::GetRelativePath($sourceRoot,$_.FullName).Replace('\','/')+' '+(Get-FileHash -LiteralPath $_.FullName).Hash
+})
+$runtimeSourceSha256=[Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([Text.Encoding]::UTF8.GetBytes($sourceLines -join "`n")))
 $prefix=[IO.Path]::GetFullPath($OutputPrefix);$reportPath=$prefix+'-game.json'
+$readyPath=$prefix+'-ready.json'
 [void][IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName($prefix))
-if(Test-Path -LiteralPath $reportPath){throw 'Choose a fresh output prefix to preserve the earlier capture.'}
+foreach($path in $reportPath,$readyPath,($prefix+'-capture.json'),($prefix+'-frames.csv')){
+    if(Test-Path -LiteralPath $path){throw 'Choose a fresh output prefix to preserve the earlier capture.'}
+}
 $before=@(Get-Process WindowsTerminal -ErrorAction SilentlyContinue)
 if($before.Count -ne 0){throw 'A Terminal process is already running. This experiment requires an isolated new Terminal process for unambiguous attribution.'}
 $beforeQpc=[Diagnostics.Stopwatch]::GetTimestamp();$stopQpc=$null;$reason='Error';[uint32]$blobSize=0
@@ -46,7 +57,11 @@ try {
         if($elements[$i].DataSize -ne $size -or $elements[$i].DataOffset+$size -gt $blobSize){throw 'Returned field ABI/size mismatch.'}
         $fields.Add(@{Name=$spec[$i][0];Metric=$spec[$i][1];Id=$m.Id;Type=$m.FrameType;Unit=$m.Unit;Offset=$elements[$i].DataOffset;Size=$size})
     }
-    & "$PSScriptRoot/../Start-Doom.ps1" -Wad $Wad -Replay $Replay -Seconds 90 -Report $reportPath -FontSize $FontSize -Maximized:$Maximized -Style $Style -GlyphSet $GlyphSet -FontFace $FontFace
+    $launch=@{Wad=$Wad;Replay=$Replay;Seconds=$Seconds;Report=$reportPath;FontSize=$FontSize;Maximized=$Maximized;Style=$Style;GlyphSet=$GlyphSet;FontFace=$FontFace;Workers=$Workers;Sound=$Sound;ReadyFile=$readyPath}
+    foreach($name in 'MusicCatalog','SaveRoot','SettingsPath','SessionSchedule'){
+        $value=Get-Variable -Name $name -ValueOnly;if($value){$launch[$name]=$value}
+    }
+    & "$PSScriptRoot/../Start-Doom.ps1" @launch
     $watch=[Diagnostics.Stopwatch]::StartNew()
     while($null -eq $target) {
         $found=@(Get-Process WindowsTerminal -ErrorAction SilentlyContinue)
@@ -57,13 +72,27 @@ try {
     }
     Assert-PresentMonStatus ([PwshDoomMeasurement.PresentMonApi]::pmStartTrackingProcess($session,[uint32]$target.Id)) 'track Terminal'
     $tracking=$true;$watch.Restart();$completedAt=$null;$buffer=[byte[]]::new($blobSize*1024)
-    while($watch.Elapsed.TotalSeconds -lt 105) {
+    while($watch.Elapsed.TotalSeconds -lt $Seconds+90) {
         [uint32]$count=1024
         Assert-PresentMonStatus ([PwshDoomMeasurement.PresentMonApi]::pmConsumeFrames($query,[uint32]$target.Id,$buffer,[ref]$count)) 'consume frames'
         for($i=0;$i -lt $count;$i++) {
             $row=[ordered]@{ProcessId=$target.Id}
             foreach($field in $fields){$row[$field.Name]=Read-PresentMonField $buffer ([int]($i*$blobSize+$field.Offset)) $field.Type}
             $rows.Add([pscustomobject]$row)
+        }
+        if($ownedProcesses.Count -eq 0 -and (Test-Path -LiteralPath $readyPath)){
+            $ids=Get-Content -LiteralPath $readyPath -Raw|ConvertFrom-Json
+            foreach($entry in @(@{Id=$target.Id;Role='Terminal'},@{Id=$ids.HostPid;Role='Host'},@{Id=$ids.SimulationPid;Role='Simulation'})+@($ids.WorkerPids|ForEach-Object {@{Id=$_;Role='Renderer'}})){
+                $p=[Diagnostics.Process]::GetProcessById($entry.Id)
+                $ownedProcesses[$entry.Id]=@{Process=$p;Role=$entry.Role;StartUtc=$p.StartTime.ToUniversalTime()}
+            }
+        }
+        if($watch.Elapsed.TotalMilliseconds-$lastProcessSample -ge 1000){
+            $lastProcessSample=$watch.Elapsed.TotalMilliseconds
+            foreach($entry in $ownedProcesses.Values){
+                $p=$entry.Process
+                try{$p.Refresh();if(-not $p.HasExited){$processSamples.Add(@{Qpc=[Diagnostics.Stopwatch]::GetTimestamp();Pid=$p.Id;Role=$entry.Role;StartUtc=$entry.StartUtc.ToString('o');CpuMilliseconds=$p.TotalProcessorTime.TotalMilliseconds;WorkingSetBytes=$p.WorkingSet64;PrivateBytes=$p.PrivateMemorySize64})}}catch{if(-not $p.HasExited){throw}}
+            }
         }
         if($null -eq $completedAt -and (Test-Path -LiteralPath $reportPath)){$completedAt=$watch.Elapsed.TotalSeconds}
         if($null -ne $completedAt -and $watch.Elapsed.TotalSeconds-$completedAt -gt 3){$reason='GameReportAndDrain';break}
@@ -76,15 +105,20 @@ finally {
     if($query -ne [IntPtr]::Zero){$null=[PwshDoomMeasurement.PresentMonApi]::pmFreeFrameQuery($query)}
     if($tracking){$null=[PwshDoomMeasurement.PresentMonApi]::pmStopTrackingProcess($session,[uint32]$target.Id)}
     if($session -ne [IntPtr]::Zero){$null=[PwshDoomMeasurement.PresentMonApi]::pmCloseSession($session)}
+    foreach($entry in $ownedProcesses.Values){$entry.Process.Dispose()}
     $rows.ToArray() | Export-Csv -LiteralPath ($prefix+'-frames.csv') -NoTypeInformation
     @{FinishedUtc=[DateTime]::UtcNow.ToString('o');Error=$failure;ExitReason=$reason;FrameRows=$rows.Count;
         TerminalPid=if($null -ne $target){$target.Id}else{$null};Fields=$fields.ToArray();BlobSize=$blobSize;
         CaptureBeforeQpc=$beforeQpc;CaptureStopQpc=$stopQpc;QpcFrequency=[Diagnostics.Stopwatch]::Frequency;
         GameReport=[IO.Path]::GetFileName($reportPath);FramesFile=[IO.Path]::GetFileName($prefix+'-frames.csv');
         LaunchFontSize=$FontSize;LaunchMaximized=[bool]$Maximized;LaunchStyle=$Style;LaunchGlyphSet=$GlyphSet;LaunchFontFace=$FontFace;
+        LaunchWorkers=$Workers;LaunchSeconds=$Seconds;LaunchSound=[bool]($Sound -or $MusicCatalog);ProcessSamples=$processSamples.ToArray();
+        ReplaySha256=(Get-FileHash -LiteralPath $Replay).Hash;MusicCatalogSha256=if($MusicCatalog){(Get-FileHash -LiteralPath $MusicCatalog).Hash}else{$null};
+        SessionScheduleSha256=if($SessionSchedule){(Get-FileHash -LiteralPath $SessionSchedule).Hash}else{$null};HarnessSha256=(Get-FileHash -LiteralPath $PSCommandPath).Hash;
+        RuntimeSourceSha256=$runtimeSourceSha256;RuntimeSourceDigestMeaning='SHA-256 of sorted repository-relative src/*.ps1 paths and SHA-256 values separated by LF; measured before launch.';
         PresentMonDll='C:\Program Files\Intel\PresentMonSharedService\PresentMonAPI2.dll';
         PresentMonDllSha256=(Get-FileHash 'C:\Program Files\Intel\PresentMonSharedService\PresentMonAPI2.dll').Hash;
-        Meaning='PresentMon service frame events for the isolated Windows Terminal process. Includes startup/cleanup and potentially multiple swapchains; analyze within game write timestamps and per swapchain. Does not identify the Doom frame contents of each presentation.'} |
+        Meaning='PresentMon service frame events for the isolated Windows Terminal process. Includes startup/cleanup and potentially multiple swapchains; analyze within game write timestamps and per swapchain. Does not identify the Doom frame contents of each presentation. Once-per-second owned-process samples include cumulative CPU from process start and sampled memory, not continuously measured peak memory. Sampling overhead is part of the measured workload.'} |
         ConvertTo-Json -Depth 6 | Set-Content -LiteralPath ($prefix+'-capture.json')
     "PresentMon captured $($rows.Count) frame events: $prefix"
 }
