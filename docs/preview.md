@@ -1,6 +1,6 @@
-# Playable preview 0.1.0-preview.3
+# Playable preview 0.1.0-preview.4
 
-This update adds optional prepared music and gameplay, rendering and startup fixes. It also repairs the adopted engine's external demo reader, which is not exposed by the launcher. See the [changelog](../CHANGELOG.md). Campaign and performance qualification remain incomplete.
+This cumulative update adds audio continuity and shutdown fixes, renderer optimizations, stationary automap reuse and optional indexed-color output. It also repairs the adopted engine's external demo reader, which is not exposed by the launcher. See the [changelog](../CHANGELOG.md). Campaign and performance qualification remain incomplete.
 
 ## Start playing
 

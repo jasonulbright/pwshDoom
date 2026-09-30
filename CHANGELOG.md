@@ -2,16 +2,16 @@
 
 ## Unreleased
 
-The development branch is ahead of the public Preview.3 package. The current
-Episode 1 handoff source is commit
-[`3e0b630`](https://github.com/jasonulbright/pwshDoom/commit/3e0b6308bac9dc152f9ae78fb8f23f70623b36e2).
-R12 preserves the optional Classic ANSI 256-color encoder and exact truecolor
-default, and removes repeated per-pixel flat-coordinate masks from the
-PowerShell plane sampler with exact output. The R13 handoff adds same-map
-renderer-asset reuse; one E1M1 replay reduced a reset pause from 6.178 to 0.358
-seconds, without qualifying general pacing. This is not a new tagged release.
-Jason's complete Episode 1 playthrough and the broader Ultimate Doom release
-gates remain open.
+Ultimate Doom campaign qualification, physical play, acoustic review, independent rendering comparisons and repeated display-pacing measurements remain open.
+
+## 0.1.0-preview.4 — 2026-09-29
+
+Cumulative release after 80 commits since Preview.3. Classic, Matrix and color art remain available. This is a community preview; [release scope and validation](docs/release-preview4.md).
+
+### Fixed and added
+
+- Reuse stationary automap discovery while the camera and relevant visible world state match; all 144 map-start comparisons match the uncached path.
+- Fix the reproduced visibility-intercept zero denominator, with source-pinned regressions in the roadmap.
 
 ### Changed
 

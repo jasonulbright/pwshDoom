@@ -5247,3 +5247,9 @@ AnsiArt/Katakana; moving-ceiling diagnostic images match at heights 0, 6, 34,
 and 68; the 36-map load/idle/render smoke passes; and all 20 masked-wall
 checks pass. The smoke and image comparisons do not certify route completion,
 original-executable parity, live pacing, or a performance improvement.
+
+## 2026-09-29 — Prepare Preview.4 at the commit threshold
+
+The user requests a release whenever at least 35 commits have accumulated since the prior release. The branch had 80 commits since Preview.3 at ef5f487. Preview.4 packages the cumulative implementation without claiming the broader Ultimate Doom gates are complete. Fresh PowerShell 7.6.6 checks pass 36/36 map smokes, 69 campaign transitions, 97 boss assertions, 125 menu checks, 24 save checks, 27 mixer checks, 144 character-codec partition cases, and exact five-view/16-worker output in Classic, Matrix/Katakana and AnsiArt/Katakana with palettes and fuzz. The actual-device save worker passes 15 checks with the 30-entry music catalog; eight automap worker checks pass. Raw reports stay in ignored local/; the portable source/hash index is results/preview4-validation-20260929.json.
+
+The initial test launch used a nonexistent portable executable path and ran no game; the correct path is local/pwsh-7.6.6-portable/runtime/pwsh.exe. A codec test's default report overwrote its historical tracked receipt; its fresh output was copied to local/ and the historical receipt restored. No user file was overwritten. Physical play, campaign completion, acoustic review, original-executable comparisons, repeated pacing and second-hardware evidence remain open. Packaged startup is checked before publication.
