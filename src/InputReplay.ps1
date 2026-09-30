@@ -83,6 +83,7 @@ function Set-DoomReplaySettings {
 function Get-DoomReplaySourceFingerprint {
     $root=Split-Path $PSScriptRoot
     $paths=@('scripts/Build-EngineBundle.ps1','scripts/Invoke-SimulationWorker.ps1','src/GameHost.ps1','src/SnapshotTransport.ps1','src/SessionScreens.ps1','src/SessionMenu.ps1','src/InputReplay.ps1','src/SaveState.ps1','src/SaveSlots.ps1','src/AutomapSession.ps1')
+    $paths+='src/PlayerMessages.ps1'
     $paths+=@(Get-ChildItem -LiteralPath "$PSScriptRoot/ManagedDoom" -Filter *.ps1 -File -Recurse|ForEach-Object {[IO.Path]::GetRelativePath($root,$_.FullName).Replace('\','/')})
     $lines=@($paths|Sort-Object|ForEach-Object {$_+' '+(Get-FileHash -LiteralPath (Join-Path $root $_)).Hash})
     return [Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([Text.Encoding]::UTF8.GetBytes($lines -join "`n")))

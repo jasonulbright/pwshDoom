@@ -9,6 +9,7 @@ $ErrorActionPreference='Stop'
 . "$PSScriptRoot/../src/SessionMenu.ps1"
 . "$PSScriptRoot/../src/SaveState.ps1"
 . "$PSScriptRoot/../src/AutomapSession.ps1"
+. "$PSScriptRoot/../src/PlayerMessages.ps1"
 $channelMap=[IO.MemoryMappedFiles.MemoryMappedFile]::OpenExisting($Channel);$view=$channelMap.CreateViewAccessor()
 $ready=[Threading.EventWaitHandle]::OpenExisting($Channel+'-ready');$go=[Threading.EventWaitHandle]::OpenExisting($Channel+'-go')
 $content=$null;$game=$null;$tick=0;$version=0;$slot=0;$failure=$null;$outcome='Stopped'
@@ -50,7 +51,7 @@ function Publish-SimulationSnapshot {
         $uiWatch=[Diagnostics.Stopwatch]::StartNew();$current=Get-DoomSessionScreen $screens $game;$old=$current
         $uiTimes.Add($uiWatch.Elapsed.TotalMilliseconds)
     }
-    if($old.Length -ne $current.Length -or $old.Length*2+64 -gt 1048576){throw 'Simulation snapshot exceeds slot capacity.'}
+    if($old.Length -ne $current.Length -or $old.Length*2+576 -gt 1048576){throw 'Simulation snapshot exceeds slot capacity.'}
     $script:slot=1-$script:slot;$script:version+=2
     [long]$base=131072+$script:slot*1048576
     $view.Write($base,$script:version-1);[Threading.Thread]::MemoryBarrier()
@@ -63,6 +64,10 @@ function Publish-SimulationSnapshot {
     # automap retain the same gameplay palette, including the HUD.
     $paletteNumber=if($state -eq 0 -and $screenKind -ne 2){[Renderer]::GetPaletteNumber($game.World.ConsolePlayer)}else{0}
     $view.Write($base+52,[int]$paletteNumber)
+    $message=Get-DoomPlayerMessageBytes $game.World.ConsolePlayer
+    $view.Write($base+56,[int]$message.Length)
+    $view.Write($base+60,[int]$(if($message.Length){$game.World.ConsolePlayer.MessageTime}else{0}))
+    if($message.Length){$view.WriteArray($base+1048064,$message,0,$message.Length)}
     $view.WriteArray($base+64,$old,0,$old.Length);$view.WriteArray($base+64+$old.Length,$current,0,$current.Length)
     [Threading.Thread]::MemoryBarrier();$view.Write($base,$script:version);$view.Write(16,$script:slot);$view.Write(20,$script:tick)
 }

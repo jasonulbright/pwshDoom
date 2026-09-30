@@ -1,6 +1,7 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 # Command ring and double-buffered snapshots for the dedicated simulation process.
 . "$PSScriptRoot/SaveSlots.ps1"
+. "$PSScriptRoot/PlayerMessages.ps1"
 function New-DoomSimulation {
     param([string]$Wad,[int]$Skill,[int]$Episode,[int]$Map,[switch]$StopAtLevelEnd,[switch]$ReplayCheckpoints,[string]$CheckpointReplay,[string]$SaveRoot,[switch]$Sound,[switch]$RealtimeAudio,[ValidateRange(0,100)][int]$SoundVolume=100,[string]$MusicCatalog)
     $root=Split-Path $PSScriptRoot;$id=[guid]::NewGuid().ToString('N');$name='Local\pwshDoom-sim-'+$id
@@ -54,17 +55,22 @@ function Read-DoomSimulationSnapshot {
     [int]$screenKind=$view.ReadInt32($base+36);[int]$menuRevision=$view.ReadInt32($base+40);[int]$menuScreen=$view.ReadInt32($base+44)
     [bool]$automapVisible=$view.ReadInt32($base+48) -ne 0
     [int]$paletteNumber=$view.ReadInt32($base+52)
+    [int]$messageLength=$view.ReadInt32($base+56);[int]$messageTics=$view.ReadInt32($base+60)
+    if($messageLength -lt 0 -or $messageLength -gt 512 -or $messageTics -lt 0 -or $messageTics -gt 140){throw 'Invalid player message metadata.'}
     if($state -lt 0 -or $state -gt 2 -or $screenKind -lt 0 -or $screenKind -gt 3 -or ($screenKind -ne 0 -and $length -ne 64000)){throw 'Invalid session snapshot state.'}
-    if($length -lt 384 -or $length%8 -ne 0 -or $length*2+64 -gt 1048576){throw 'Invalid simulation snapshot size.'}
+    if($length -lt 384 -or $length%8 -ne 0 -or $length*2+576 -gt 1048576){throw 'Invalid simulation snapshot size.'}
     $oldBytes=[byte[]]::new($length);$newBytes=[byte[]]::new($length)
     [void]$view.ReadArray($base+64,$oldBytes,0,$length);[void]$view.ReadArray($base+64+$length,$newBytes,0,$length)
+    $messageBytes=[byte[]]::new($messageLength)
+    if($messageLength){[void]$view.ReadArray($base+1048064,$messageBytes,0,$messageLength)}
+    $message=[Text.Encoding]::ASCII.GetString($messageBytes)
     [Threading.Thread]::MemoryBarrier()
     if($version -ne $view.ReadInt32($base)){return $Previous}
     if($paletteNumber -lt 0 -or $paletteNumber -gt 13){throw 'Invalid simulation palette.'}
-    if($screenKind -ne 0){return @{Version=$version;Tic=$tic;Generation=$generation;State=$state;Episode=$episode;Map=$map;Health=$health;Kills=$kills;Pixels=$newBytes;ScreenKind=$screenKind;MenuRevision=$menuRevision;MenuScreen=$menuScreen;AutomapVisible=$automapVisible;PaletteNumber=$paletteNumber}}
+    if($screenKind -ne 0){return @{Version=$version;Tic=$tic;Generation=$generation;State=$state;Episode=$episode;Map=$map;Health=$health;Kills=$kills;Pixels=$newBytes;ScreenKind=$screenKind;MenuRevision=$menuRevision;MenuScreen=$menuScreen;AutomapVisible=$automapVisible;PaletteNumber=$paletteNumber;PlayerMessage=$message;PlayerMessageTics=$messageTics}}
     $oldValues=[double[]]::new($length/8);$newValues=[double[]]::new($length/8)
     [Buffer]::BlockCopy($oldBytes,0,$oldValues,0,$length);[Buffer]::BlockCopy($newBytes,0,$newValues,0,$length)
-    return @{Version=$version;Tic=$tic;Previous=$oldValues;Current=$newValues;Generation=$generation;State=$state;Episode=$episode;Map=$map;Health=$health;Kills=$kills;ScreenKind=$screenKind;MenuRevision=$menuRevision;MenuScreen=$menuScreen;AutomapVisible=$automapVisible;PaletteNumber=$paletteNumber}
+    return @{Version=$version;Tic=$tic;Previous=$oldValues;Current=$newValues;Generation=$generation;State=$state;Episode=$episode;Map=$map;Health=$health;Kills=$kills;ScreenKind=$screenKind;MenuRevision=$menuRevision;MenuScreen=$menuScreen;AutomapVisible=$automapVisible;PaletteNumber=$paletteNumber;PlayerMessage=$message;PlayerMessageTics=$messageTics}
 }
 function Close-DoomSimulation {
     param($Simulation,[switch]$DrainAudio)

@@ -1,0 +1,232 @@
+{
+  "SaveRoot": "local/player-messages-saves-r5",
+  "Checks": [
+    {
+      "Name": "Locked-door handler emits PD_BLUEK for 140 tics",
+      "Passed": true
+    },
+    {
+      "Name": "Locked-door handler emits PD_YELLOWK for 140 tics",
+      "Passed": true
+    },
+    {
+      "Name": "Locked-door handler emits PD_REDK for 140 tics",
+      "Passed": true
+    },
+    {
+      "Name": "Message transport strips controls and normalizes ASCII",
+      "Passed": true
+    },
+    {
+      "Name": "Message payload is bounded to 512 bytes",
+      "Passed": true
+    },
+    {
+      "Name": "Expired message has no payload",
+      "Passed": true
+    },
+    {
+      "Name": "Classic notice fits centered viewport",
+      "Passed": true
+    },
+    {
+      "Name": "Classic hides notices on screen kind 1",
+      "Passed": true
+    },
+    {
+      "Name": "Classic hides notices on screen kind 2",
+      "Passed": true
+    },
+    {
+      "Name": "Classic hides expired notice",
+      "Passed": true
+    },
+    {
+      "Name": "Classic preserves notices on automap",
+      "Passed": true
+    },
+    {
+      "Name": "Classic Strips overlays notice after render bytes before frame end",
+      "Passed": true
+    },
+    {
+      "Name": "Classic Batch overlays notice after render bytes before frame end",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix notice fits centered viewport",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix hides notices on screen kind 1",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix hides notices on screen kind 2",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix hides expired notice",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix preserves notices on automap",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix Strips overlays notice after render bytes before frame end",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix Batch overlays notice after render bytes before frame end",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt notice fits centered viewport",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt hides notices on screen kind 1",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt hides notices on screen kind 2",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt hides expired notice",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt preserves notices on automap",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt Strips overlays notice after render bytes before frame end",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt Batch overlays notice after render bytes before frame end",
+      "Passed": true
+    },
+    {
+      "Name": "Fixture uses an actual E1M2 red locked door",
+      "Passed": true
+    },
+    {
+      "Name": "RedLock expires after 140 simulation tics",
+      "Passed": true
+    },
+    {
+      "Name": "Real armor pickup supplies message and inventory",
+      "Passed": true
+    },
+    {
+      "Name": "ArmorPickup expires after 140 simulation tics",
+      "Passed": true
+    },
+    {
+      "Name": "Actual simulation load publishes saved notice atomically",
+      "Passed": true
+    },
+    {
+      "Name": "Notice clock matches worker tic 1",
+      "Passed": true
+    },
+    {
+      "Name": "Notice clock matches worker tic 35",
+      "Passed": true
+    },
+    {
+      "Name": "Notice clock matches worker tic 36",
+      "Passed": true
+    },
+    {
+      "Name": "Actual automap snapshot retains active notice",
+      "Passed": true
+    },
+    {
+      "Name": "Notice clock matches worker tic 70",
+      "Passed": true
+    },
+    {
+      "Name": "Notice clock matches worker tic 71",
+      "Passed": true
+    },
+    {
+      "Name": "Notice clock matches worker tic 139",
+      "Passed": true
+    },
+    {
+      "Name": "Notice clock matches worker tic 140",
+      "Passed": true
+    },
+    {
+      "Name": "Actual worker clears expired message bytes",
+      "Passed": true
+    }
+  ],
+  "Meaning": "Real key-lock/pickup handlers; bounded ASCII notice, centered all-style overlay, Strips/Batch ordering, saved-message IPC and 140-tic expiry with actual simulation worker. Save fixtures are not ordinary-input routes.",
+  "Error": null,
+  "Fixture": "local/player-messages-fixture-r5.json",
+  "SourceFiles": [
+    {
+      "Path": "src/PlayerMessages.ps1",
+      "Sha256": "8A8E91083B6D5A7AEB47A1A9CCF031BCE4DC5F6A67A4D231068C3B70C5272F66"
+    },
+    {
+      "Path": "src/SimulationProcess.ps1",
+      "Sha256": "807BF3C9A4BA3C4008304FCB0DDA408D87F5DA1A08D67C7CB760F7FF0A8F89D4"
+    },
+    {
+      "Path": "src/InputReplay.ps1",
+      "Sha256": "0C8ABF378AC10A78925408F1BCE74B365703ABDB7BBEA57F40A72F7ED5CF798C"
+    },
+    {
+      "Path": "scripts/Invoke-Doom.ps1",
+      "Sha256": "C7DF538FBEB6FB1EDD281EC1657F67BC3B0875EED527E95245BA8F98E2102084"
+    },
+    {
+      "Path": "scripts/Invoke-SimulationWorker.ps1",
+      "Sha256": "6BDAC4AD2640E1ED9D9B04B669CE458CF98BF9EF34A9C34CA90E7B9FB3845AE5"
+    },
+    {
+      "Path": "scripts/Test-PlayerMessages.ps1",
+      "Sha256": "EE6796886ED6C04F40A1CBE6F72CE98FA4811C2993B82D8AA0BBAEE79D9563E2"
+    }
+  ],
+  "RawReports": [
+    {
+      "Path": "local/player-messages-first.json",
+      "Sha256": "1D086A34A6EF7070F17ECD69200B22457F6939690AFA51E6BED2E1EBFEDE888F"
+    },
+    {
+      "Path": "local/player-messages-second.json",
+      "Sha256": "EE1F74C4D5D266B558D83991CF1599AA658E375319414EDDDA103419864F089F"
+    },
+    {
+      "Path": "local/player-messages-third.json",
+      "Sha256": "6D7CC6340B5E610B506432472DBF6B15D4204669051300F0F87F5F9C8771E0CB"
+    },
+    {
+      "Path": "local/player-messages-r4.json",
+      "Sha256": "78DA5FA9A0137AD64AFF5AD711689FBCB1575513C724C3796D265716F4E251DD"
+    },
+    {
+      "Path": "local/player-messages-r5.json",
+      "Sha256": "14669883964A5CEDC44EF01DA47C3680EADDA2C37D100FF5F66916D633E7A6BC"
+    },
+    {
+      "Path": "local/candidate-save-worker.json",
+      "Sha256": "A92F7E29EE54C7BA204137BA32B56E65FE6FA6F5EFCF5331DDF81A9A6AEFB0D5"
+    },
+    {
+      "Path": "local/candidate-input-replay.json",
+      "Sha256": "D083CDB6C5138CF62E56174068430F28CE244DC78BBFF6FC59DEEA93F315311F"
+    },
+    {
+      "Path": "local/recordings/candidate-messages-classic-game.json",
+      "Sha256": "AD32EF60FC15E486E1D3A4F958A60880DAAE48B0E4301F92221DDE76F677194B"
+    }
+  ]
+}

@@ -36,7 +36,7 @@ function Start-DoomRenderJob {
     $InterpolationTimes.Add($watch.Elapsed.TotalMilliseconds)
     $qpc=[Diagnostics.Stopwatch]::GetTimestamp();$watch.Restart()
     Submit-GameRender $Pool $bytes -ColumnOffset $Viewport.Left -RowOffset $Viewport.Top -FrameNumber ([int][Math]::Floor($Clock.Elapsed.TotalSeconds*60)) -ScreenPixels:$screenPixels -Tic $Snapshot.Tic -MenuPixels:($Snapshot.ScreenKind -eq 2) -AutomapPixels:($Snapshot.ScreenKind -eq 3) -PaletteNumber $Snapshot.PaletteNumber
-    return @{Tic=$Snapshot.Tic;Version=$Snapshot.Version;StartQpc=$qpc;SubmitMs=$watch.Elapsed.TotalMilliseconds;ViewportKey=$Viewport.Key;State=$Snapshot.State;Generation=$Snapshot.Generation;Episode=$Snapshot.Episode;Map=$Snapshot.Map;ScreenKind=$Snapshot.ScreenKind;MenuRevision=$Snapshot.MenuRevision;MenuScreen=$Snapshot.MenuScreen;PaletteNumber=$Snapshot.PaletteNumber}
+    return @{Tic=$Snapshot.Tic;Version=$Snapshot.Version;StartQpc=$qpc;SubmitMs=$watch.Elapsed.TotalMilliseconds;ViewportKey=$Viewport.Key;State=$Snapshot.State;Generation=$Snapshot.Generation;Episode=$Snapshot.Episode;Map=$Snapshot.Map;ScreenKind=$Snapshot.ScreenKind;MenuRevision=$Snapshot.MenuRevision;MenuScreen=$Snapshot.MenuScreen;PaletteNumber=$Snapshot.PaletteNumber;PlayerMessage=$Snapshot.PlayerMessage;PlayerMessageTics=$Snapshot.PlayerMessageTics}
 }
 $simulation=$null;$pool=$null;$consoleState=$null;$terminalActive=$false;$timerRequested=$false;$failure=$null
 $oldEncoding=[Console]::OutputEncoding;$esc=[char]27;$clock=[Diagnostics.Stopwatch]::new()
@@ -315,18 +315,18 @@ try {
             if(-not $Headless) {
                 [byte[]]$clearOutput=$emptyOutput
                 if($needsClear){$clearOutput=[Text.Encoding]::UTF8.GetBytes("$esc[0m$esc[2J")}
-                [byte[]]$statusOutput=$emptyOutput
+                [byte[]]$statusOutput=Get-DoomPlayerMessageOutput $present.PlayerMessage $present.PlayerMessageTics $present.ScreenKind $viewport -Style $Style
                 if($Diagnostics) {
                     $statusLine="$esc[$($viewport.StatusTop+1);$($viewport.Left+1)H$esc[0mpwshDoom | WASD move | arrows turn | Ctrl fire | E/Space use | Shift run | 1-7 weapons | P pause | Esc menu"
                     $statusLine+="$esc[$($viewport.StatusTop+2);$($viewport.Left+1)Htic $($snapshot.Tic) | $([Math]::Round($completed/[Math]::Max(.01,$clock.Elapsed.TotalSeconds),1)) completed updates/s | health $($snapshot.Health) | kills $($snapshot.Kills)       "
-                    $statusOutput=[Text.Encoding]::UTF8.GetBytes($statusLine)
+                    $statusOutput+= [Text.Encoding]::UTF8.GetBytes($statusLine)
                 }
                 Write-DoomTerminalFrame $terminalOutputContext $stdout $present.Results $frameStart $frameEnd $clearOutput $statusOutput -Mode $TerminalOutput
             }
             $needsClear=$false
             $endQpc=[Diagnostics.Stopwatch]::GetTimestamp();$frameTimes.Add(($endQpc-$present.StartQpc)*1000.0/[Diagnostics.Stopwatch]::Frequency);$completed++
             $frameStats.Add(@{Tic=$lastFrameTic;State=$present.State;Generation=$present.Generation;Episode=$present.Episode;Map=$present.Map;SubmitMs=$present.SubmitMs;HarvestMs=$present.HarvestMs;OutputMs=$outputWatch.Elapsed.TotalMilliseconds;StartQpc=$present.StartQpc;EndQpc=$endQpc;ElapsedMs=$clock.Elapsed.TotalMilliseconds;
-                ScreenKind=$present.ScreenKind;MenuScreen=$present.MenuScreen;MenuRevision=$present.MenuRevision;PaletteNumber=$present.PaletteNumber;
+                ScreenKind=$present.ScreenKind;MenuScreen=$present.MenuScreen;MenuRevision=$present.MenuRevision;PaletteNumber=$present.PaletteNumber;PlayerMessage=$present.PlayerMessage;PlayerMessageTics=$present.PlayerMessageTics;
                 Workers=@($present.Results | ForEach-Object {,@($_.RenderMs,$_.EncodeMs,$_.DecodeMs,$_.StartedQpc,$_.DoneQpc)})})
             $nextPresentation+=1000.0/60
         }
