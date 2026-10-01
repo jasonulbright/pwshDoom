@@ -264,3 +264,11 @@ Latest fidelity correction (2026-09-12): [type-16 damaging floors](sector-damage
 ## Current release instruction — September 29, 2026
 
 The user requested autonomous work across the full Ultimate Doom gates, retaining PowerShell gameplay/rendering/audio algorithms and all three styles, with reviewable commits, measurements, documentation and local effect-test footage. Cut a release at 35 or more commits since the prior release. Preview.4 preparation follows 80 commits after Preview.3. Its [scope](release-preview4.md) and [fresh validation](../results/preview4-validation-20260929.json) keep the unfinished campaign, acoustic, display and independent-fidelity gates explicit. Continue useful implementation/qualification between milestones; the pending human Episode 1 milestone does not block independent work.
+
+## Resumed development — October 1, 2026
+
+Preview.4 was published and its downloaded ZIP verified against the local archive; see the [package receipt](../results/preview4-package-validation-20260929.json). It supersedes the historical Preview.3 publication status in the milestone table above. The full release remains unqualified.
+
+Development now restores [pickup/key-lock notices](player-notices.md) with the original IWAD font in all three modes. The first actual Classic performance run exposed a missing host codec import despite passing focused/headless checks. That dependency is fixed, and three live save-fixture recordings now consume all 350 commands and match eleven checkpoints each. Their original media/audio/clock metadata remain local. They do not complete maps. The independent E1M1 route and continuation through intermission into E1M2 remain passing regressions.
+
+The next performance evidence uses the [frozen numerical protocol](release-performance-protocol.md): sequential live routes with audio, explicit launch timing, owned-process CPU/memory samples and ETW display events, including transition holds. Repeated pacing, full-campaign play, independent original-executable fidelity, acoustic/physical-input review and second-hardware/display qualification remain open. Keep the complete Ultimate Doom scope and the one full Episode 1 human route intact.

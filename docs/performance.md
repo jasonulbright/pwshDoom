@@ -1053,3 +1053,38 @@ Those are correctness checks, not evidence of better live pacing or completed
 campaign play. The [rejection receipt](../results/renderer-wall-sector-cache-rejected-20260929.json)
 records the raw profile hashes, candidate source fingerprint, output parity,
 and limits; raw files remain under ignored `local/` storage.
+## Loaded Classic route repeats — October 1, 2026
+
+Three retained PowerShell 7.6.6/16-worker/maximized Classic runs use the same
+1,747-command ordinary-input E1M1 completion, intermission advancement and
+71-tic E1M2 continuation, with the eleven-track Episode 1 catalog and actual
+audio device. They use the same runtime source at implementation commit
+`3bc0ccc`. The later Matrix-notice contrast change is absent. Startup is
+measured from the collector's explicit launch timestamp to the first completed
+game write. The global display window includes the entire map handoff.
+
+| Run | Active tics/sec | Global display transitions/sec | p95 / p99 / max display gap, ms | Launch to first write, sec | Peak sampled game private memory, GiB |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| R2, exploratory | 34.914 | 48.938 | 30.302 / 42.452 / 8,412.026 | 37.254 | 5.419 |
+| R3, sequential repeat | 34.969 | 50.849 | 30.301 / 42.422 / 6,836.352 | 39.498 | 5.440 |
+| R4, sequential repeat | 27.676 | 31.137 | 84.811 / 133.323 / 9,078.793 | 38.056 | 5.440 |
+
+R2 overlaps one PNG frame extraction and analyzer editing, so it is retained
+as exploratory evidence and does not count as a third clean qualification
+repeat. No recorder/export/other qualification ran during R3/R4. All three
+complete every command, enter E1M2 and return every submitted audio frame.
+They do not satisfy the frozen pacing gate. R4's large slowdown is retained;
+the source/runtime pins alone do not explain it. Simulation p99 lateness is
+186.862 / 180.207 / 14,144.137 ms, respectively. The command admission window
+remains bounded at two; it preserves commands rather than dropping overdue
+game tics.
+
+The extended analyzer reports contiguous world/intermission windows, p99 and
+the boundary gap without removing those holds from global timing. Independent
+CSV-derived display counts and p99 values match its output. The main Terminal
+swapchain is selected by the most observed display events, without independent
+Doom-frame content identity. Sampled memory omits unsampled peaks; CPU deltas
+omit startup before readiness and final unsampled tails. These tests measure
+software queue behavior, not acoustics or physical speaker latency. See the
+[source-pinned receipt](../results/loaded-classic-route-pacing-20261001.json)
+for all raw hashes, window/stage timing, CPU samples and audio counts.

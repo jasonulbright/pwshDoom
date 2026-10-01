@@ -22,6 +22,10 @@ $sourceLines=@(Get-ChildItem "$sourceRoot/src" -Recurse -File -Filter *.ps1|Sort
     [IO.Path]::GetRelativePath($sourceRoot,$_.FullName).Replace('\','/')+' '+(Get-FileHash -LiteralPath $_.FullName).Hash
 })
 $runtimeSourceSha256=[Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([Text.Encoding]::UTF8.GetBytes($sourceLines -join "`n")))
+$launchSources=@(foreach($name in 'Start-Doom.ps1','scripts/Invoke-Doom.ps1','scripts/Invoke-SimulationWorker.ps1'){
+    @{Path=$name;Sha256=(Get-FileHash -LiteralPath "$sourceRoot/$name").Hash}
+})
+$runtimeExecutable=(Get-Process -Id $PID).Path;$launchQpc=$null
 $prefix=[IO.Path]::GetFullPath($OutputPrefix);$reportPath=$prefix+'-game.json'
 $readyPath=$prefix+'-ready.json'
 [void][IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName($prefix))
@@ -61,6 +65,7 @@ try {
     foreach($name in 'MusicCatalog','SaveRoot','SettingsPath','SessionSchedule'){
         $value=Get-Variable -Name $name -ValueOnly;if($value){$launch[$name]=$value}
     }
+    $launchQpc=[Diagnostics.Stopwatch]::GetTimestamp()
     & "$PSScriptRoot/../Start-Doom.ps1" @launch
     $watch=[Diagnostics.Stopwatch]::StartNew()
     while($null -eq $target) {
@@ -110,6 +115,8 @@ finally {
     @{FinishedUtc=[DateTime]::UtcNow.ToString('o');Error=$failure;ExitReason=$reason;FrameRows=$rows.Count;
         TerminalPid=if($null -ne $target){$target.Id}else{$null};Fields=$fields.ToArray();BlobSize=$blobSize;
         CaptureBeforeQpc=$beforeQpc;CaptureStopQpc=$stopQpc;QpcFrequency=[Diagnostics.Stopwatch]::Frequency;
+        LaunchQpc=$launchQpc;RuntimeVersion=$PSVersionTable.PSVersion.ToString();RuntimeExecutable=$runtimeExecutable;RuntimeExecutableSha256=(Get-FileHash -LiteralPath $runtimeExecutable).Hash;
+        LaunchSources=$launchSources;SourcesChangedDuringRun=@($launchSources|Where-Object {$_.Sha256 -cne (Get-FileHash -LiteralPath "$sourceRoot/$($_.Path)").Hash});
         GameReport=[IO.Path]::GetFileName($reportPath);FramesFile=[IO.Path]::GetFileName($prefix+'-frames.csv');
         LaunchFontSize=$FontSize;LaunchMaximized=[bool]$Maximized;LaunchStyle=$Style;LaunchGlyphSet=$GlyphSet;LaunchFontFace=$FontFace;
         LaunchWorkers=$Workers;LaunchSeconds=$Seconds;LaunchSound=[bool]($Sound -or $MusicCatalog);ProcessSamples=$processSamples.ToArray();
