@@ -1160,3 +1160,21 @@ Because the host supplies simulation commands and writes output synchronously,
 this identifies a path through which Terminal stalls can slow the game. It
 does not yet establish their cause or qualify an asynchronous replacement.
 [Independent CSV/CPU/audio/load audit](../results/reader-cache-loaded-classic-20261001.json).
+
+An experimental `-TerminalOutput AsyncBatch` now lets the host keep supplying
+simulation commands while one ordinary .NET write task owns the frame buffer.
+Its completion count and timestamp come after actual task completion; dispatch
+time is separate. Strips remains the default. A completed next frame is bounded
+behind the pending write; loading and shutdown drain output. All formatting and
+buffer composition remain PowerShell over standard .NET I/O/copy APIs.
+
+The [transport receipt](../results/asynchronous-terminal-output-20261001.json)
+covers 108 byte-exact comparisons in all three styles and output paths, plus
+real pipe backpressure/error accounting. One native Classic/audio smoke
+completes all 1,747 commands and returns every submitted frame, but measures
+34.680 active tics/sec and 51.402 global Terminal display transitions/sec. It
+is exploratory, still fails the gate and supplies no paired speed claim.
+The collector now accepts `-TerminalOutput` and `-AnsiEncoding` to compare
+alternatives on otherwise identical source and input. Observed asynchronous
+completion time includes host polling delay and does not identify display
+content or physical output latency.

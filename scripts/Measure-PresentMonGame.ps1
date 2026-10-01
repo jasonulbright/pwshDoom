@@ -8,7 +8,9 @@ param([string]$OutputPrefix="$PSScriptRoot/../results/presentmon-e1m1",
     [ValidateSet('Classic','AnsiArt','Matrix')][string]$Style='Classic',
     [ValidateSet('Ascii','Katakana')][string]$GlyphSet='Katakana',[string]$FontFace,
     [ValidateRange(1,32)][int]$Workers=16,[ValidateRange(1,3600)][int]$Seconds=90,
-    [switch]$Sound,[string]$MusicCatalog,[string]$SaveRoot,[string]$SettingsPath,[string]$SessionSchedule)
+    [switch]$Sound,[string]$MusicCatalog,[string]$SaveRoot,[string]$SettingsPath,[string]$SessionSchedule,
+    [ValidateSet('Strips','Batch','AsyncBatch')][string]$TerminalOutput='Strips',
+    [ValidateSet('Pairs','ColorState','Ansi256')][string]$AnsiEncoding='Pairs')
 $ErrorActionPreference='Stop'
 if($Style -ne 'Classic' -and -not $PSBoundParameters.ContainsKey('FontSize')){$FontSize=12}
 if(-not $FontFace){$FontFace=if($Style -ne 'Classic' -and $GlyphSet -eq 'Katakana'){'MS Gothic'}else{'Cascadia Mono'}}
@@ -61,7 +63,7 @@ try {
         if($elements[$i].DataSize -ne $size -or $elements[$i].DataOffset+$size -gt $blobSize){throw 'Returned field ABI/size mismatch.'}
         $fields.Add(@{Name=$spec[$i][0];Metric=$spec[$i][1];Id=$m.Id;Type=$m.FrameType;Unit=$m.Unit;Offset=$elements[$i].DataOffset;Size=$size})
     }
-    $launch=@{Wad=$Wad;Replay=$Replay;Seconds=$Seconds;Report=$reportPath;FontSize=$FontSize;Maximized=$Maximized;Style=$Style;GlyphSet=$GlyphSet;FontFace=$FontFace;Workers=$Workers;Sound=$Sound;ReadyFile=$readyPath}
+    $launch=@{Wad=$Wad;Replay=$Replay;Seconds=$Seconds;Report=$reportPath;FontSize=$FontSize;Maximized=$Maximized;Style=$Style;GlyphSet=$GlyphSet;FontFace=$FontFace;Workers=$Workers;Sound=$Sound;ReadyFile=$readyPath;TerminalOutput=$TerminalOutput;AnsiEncoding=$AnsiEncoding}
     foreach($name in 'MusicCatalog','SaveRoot','SettingsPath','SessionSchedule'){
         $value=Get-Variable -Name $name -ValueOnly;if($value){$launch[$name]=$value}
     }
@@ -120,6 +122,7 @@ finally {
         GameReport=[IO.Path]::GetFileName($reportPath);FramesFile=[IO.Path]::GetFileName($prefix+'-frames.csv');
         LaunchFontSize=$FontSize;LaunchMaximized=[bool]$Maximized;LaunchStyle=$Style;LaunchGlyphSet=$GlyphSet;LaunchFontFace=$FontFace;
         LaunchWorkers=$Workers;LaunchSeconds=$Seconds;LaunchSound=[bool]($Sound -or $MusicCatalog);ProcessSamples=$processSamples.ToArray();
+        LaunchTerminalOutput=$TerminalOutput;LaunchAnsiEncoding=$AnsiEncoding;
         ReplaySha256=(Get-FileHash -LiteralPath $Replay).Hash;MusicCatalogSha256=if($MusicCatalog){(Get-FileHash -LiteralPath $MusicCatalog).Hash}else{$null};
         SessionScheduleSha256=if($SessionSchedule){(Get-FileHash -LiteralPath $SessionSchedule).Hash}else{$null};HarnessSha256=(Get-FileHash -LiteralPath $PSCommandPath).Hash;
         RuntimeSourceSha256=$runtimeSourceSha256;RuntimeSourceDigestMeaning='SHA-256 of sorted repository-relative src/*.ps1 paths and SHA-256 values separated by LF; measured before launch.';

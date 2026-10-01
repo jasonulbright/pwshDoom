@@ -10,7 +10,7 @@ if(Test-Path $Output){throw 'Use a fresh report path.'}
 $checks=[Collections.Generic.List[object]]::new();$failure=$null
 $esc=[char]27;$utf8=[Text.Encoding]::UTF8
 $start=$utf8.GetBytes("$esc[?2026h");$end=$utf8.GetBytes("$esc[0m$esc[?2026l")
-$contexts=@{Strips=(New-DoomTerminalOutputContext);Batch=(New-DoomTerminalOutputContext)}
+$contexts=@{Strips=(New-DoomTerminalOutputContext);Batch=(New-DoomTerminalOutputContext);AsyncBatch=(New-DoomTerminalOutputContext)}
 $total=0L;$frames=0L;$expectedStripWrites=0L
 try{
     $palette=New-TestPalette -Count 256;$classic=New-CodecContext $palette
@@ -42,13 +42,19 @@ try{
                     $expected=$reference.ToArray()
                 }finally{$reference.Dispose()}
                 $total+=$expected.Length;$frames++;$expectedStripWrites+=9+[int]($clear.Length -gt 0)+[int]($status.Length -gt 0)
-                foreach($mode in 'Strips','Batch'){
+                foreach($mode in 'Strips','Batch','AsyncBatch'){
                     $stream=[IO.MemoryStream]::new();$context=$contexts[$mode]
                     try{
-                        Write-DoomTerminalFrame $context $stream $strips $start $end $clear $status -Mode $mode
+                        if($mode -eq 'AsyncBatch'){
+                            $job=Start-DoomTerminalFrame $context $stream $strips $start $end $clear $status
+                            $rejected=$false;try{$null=Start-DoomTerminalFrame $context $stream $strips $start $end}catch{$rejected=$true}
+                            if(-not $rejected){throw 'Pending write did not retain exclusive buffer ownership.'}
+                            $done=Complete-DoomTerminalFrame $context $stream -Wait
+                            if(-not [object]::ReferenceEquals($done,$job) -or $null -ne $context.Pending){throw 'Asynchronous completion ownership differs.'}
+                        }else{Write-DoomTerminalFrame $context $stream $strips $start $end $clear $status -Mode $mode}
                         if([Convert]::ToBase64String($stream.ToArray()) -cne [Convert]::ToBase64String($expected)){throw "$mode output differs: $style/$width/$decorations"}
                         if($context.Bytes -ne $total -or $context.Frames -ne $frames){throw 'Output accounting differs.'}
-                        $expectedWrites=$expectedStripWrites;if($mode -eq 'Batch'){$expectedWrites=$frames}
+                        $expectedWrites=$expectedStripWrites;if($mode -ne 'Strips'){$expectedWrites=$frames}
                         if($context.Writes -ne $expectedWrites){throw 'Write-call accounting differs.'}
                         $checks.Add(@{Style=$style;Width=$width;Height=$height;Pattern=$fixture.Pattern;Decorations=$decorations;Mode=$mode;ComparedBytes=$expected.Length;Capacity=$context.Buffer.Length;Passed=$true})
                     }finally{$stream.Dispose()}
@@ -56,9 +62,40 @@ try{
             }
         }
     }
+    # A real asynchronous pipe supplies bounded backpressure that a memory
+    # stream cannot exercise. No custom stream/helper implementation is used.
+    $pipeName='pwshDoom-output-'+[guid]::NewGuid().ToString('N')
+    $server=[IO.Pipes.NamedPipeServerStream]::new($pipeName,[IO.Pipes.PipeDirection]::Out,1,[IO.Pipes.PipeTransmissionMode]::Byte,[IO.Pipes.PipeOptions]::Asynchronous,4096,4096)
+    $client=[IO.Pipes.NamedPipeClientStream]::new('.',$pipeName,[IO.Pipes.PipeDirection]::In,[IO.Pipes.PipeOptions]::Asynchronous)
+    try{
+        $connect=$server.WaitForConnectionAsync();$client.Connect(2000);[void]$connect.GetAwaiter().GetResult()
+        $payload=[byte[]]::new(2MB);for($i=0;$i -lt $payload.Length;$i+=256){$payload[$i]=[byte](($i/256)%256)}
+        $context=New-DoomTerminalOutputContext
+        $job=Start-DoomTerminalFrame $context $server @(@{Bytes=$payload}) $start $end
+        if($job.Task.IsCompleted -or $context.Frames -ne 0 -or $context.Bytes -ne 0){throw 'Blocked write was reported as completed.'}
+        if($null -ne (Complete-DoomTerminalFrame $context $server)){throw 'Polling blocked output falsely completed it.'}
+        $expected=[byte[]]::new($start.Length+$payload.Length+$end.Length)
+        [Buffer]::BlockCopy($start,0,$expected,0,$start.Length);[Buffer]::BlockCopy($payload,0,$expected,$start.Length,$payload.Length)
+        [Buffer]::BlockCopy($end,0,$expected,$start.Length+$payload.Length,$end.Length)
+        $actual=[byte[]]::new($expected.Length);$offset=0
+        while($offset -lt $actual.Length){
+            $read=$client.ReadAsync($actual,$offset,$actual.Length-$offset)
+            if(-not $read.Wait(5000)){throw 'Pipe fixture read timed out.'}
+            $count=$read.GetAwaiter().GetResult();if($count -le 0){throw 'Pipe fixture ended early.'};$offset+=$count
+        }
+        $done=Complete-DoomTerminalFrame $context $server -Wait
+        if(-not [Linq.Enumerable]::SequenceEqual([byte[]]$expected,[byte[]]$actual)){throw 'Backpressured output bytes differ.'}
+        if($context.Frames -ne 1 -or $context.Bytes -ne $actual.Length -or $context.Writes -ne 1){throw 'Backpressured completion accounting differs.'}
+        $checks.Add(@{Style='Transport';Mode='AsyncBatch';Fixture='Bounded named-pipe backpressure';ComparedBytes=$actual.Length;Passed=$true})
+        $job=Start-DoomTerminalFrame $context $server @(@{Bytes=$payload}) $start $end
+        $client.Dispose();$rejected=$false
+        try{$null=Complete-DoomTerminalFrame $context $server -Wait}catch{$rejected=$true}
+        if(-not $rejected -or $context.Frames -ne 1){throw 'Failed output was counted as a completed frame.'}
+        $checks.Add(@{Style='Transport';Mode='AsyncBatch';Fixture='Broken pipe propagates failure without counting a frame';Passed=$true})
+    }finally{$client.Dispose();$server.Dispose()}
 }catch{$failure=$_.ToString()+"`n"+$_.ScriptStackTrace;throw}finally{
     @{Error=$failure;Checks=$checks.ToArray();FramesPerMode=$frames;BytesPerMode=$total;
         Sources=@('scripts/Test-TerminalOutput.ps1','scripts/FrameCodec.ps1','src/TerminalCodec.ps1','src/CharacterCodec.ps1','src/TerminalOutput.ps1'|ForEach-Object {@{Path=$_;Sha256=(Get-FileHash "$PSScriptRoot/../$_").Hash}});
-        Meaning='Byte-exact comparison to the original stream-write sequence using actual Classic/Matrix/AnsiArt katakana codecs, seven uneven strips, viewport offsets, clear/status combinations and reused growing/shrinking buffers. Memory-stream correctness only; no terminal throughput or displayed-FPS claim.'}|ConvertTo-Json -Depth 6|Set-Content $Output
+        Meaning='Byte-exact comparison to the original stream-write sequence using actual Classic/Matrix/AnsiArt katakana codecs, seven uneven strips, viewport offsets, clear/status combinations and reused growing/shrinking buffers. AsyncBatch also requires exclusive buffer ownership, correct pending/completed accounting and real bounded named-pipe backpressure/failure propagation. No terminal throughput or displayed-FPS claim.'}|ConvertTo-Json -Depth 6|Set-Content $Output
 }
 "PASS: $($checks.Count) terminal byte-stream comparisons."

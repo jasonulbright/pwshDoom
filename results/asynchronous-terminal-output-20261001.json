@@ -1,0 +1,184 @@
+{
+  "PipeChecks": [
+    {
+      "ComparedBytes": 2097172,
+      "Style": "Transport",
+      "Passed": true,
+      "Fixture": "Bounded named-pipe backpressure",
+      "Mode": "AsyncBatch"
+    },
+    {
+      "Passed": true,
+      "Style": "Transport",
+      "Fixture": "Broken pipe propagates failure without counting a frame",
+      "Mode": "AsyncBatch"
+    }
+  ],
+  "Checks": 110,
+  "Meaning": "110 transport assertions include 108 exact codec/fixture byte comparisons and two real pipe backpressure/error cases. Native smoke is one exploratory Classic/audio route, not a paired performance comparison or release gate pass. Completion timestamps observe completed native I/O tasks, not dispatch or optical display. The initial prototype emitted a boxed void-await result into the PowerShell pipeline; explicit void suppression repaired ownership accounting. Original failed report is retained.",
+  "RawFiles": [
+    {
+      "Path": "local/terminal-output-async-20261001-r1.json",
+      "Sha256": "BB6487FD9DD350D3B3AFAE23D3F6EAF4EBDB45D57A31BACB9A481D2E5FB58448"
+    },
+    {
+      "Path": "local/terminal-output-async-20261001-r2.json",
+      "Sha256": "7E912BB936EDB20996B6EAFADCCEE7738B936DBAD10E492075212225577C6CB4"
+    },
+    {
+      "Path": "local/terminal-output-async-20261001-r3.json",
+      "Sha256": "D4B92FFBFAF5EFAFA39CE11A4F9ACC5C6DC38D912C40ADF0E308D87CE878CF4A"
+    },
+    {
+      "Path": "local/async-pacing-classic-max-smoke-r1-game.json",
+      "Sha256": "336730906E968FA00CD037C5F646F6DC6B8A28C38D6C1DA6D26B6742F0488BDA"
+    },
+    {
+      "Path": "local/async-pacing-classic-max-smoke-r1-capture.json",
+      "Sha256": "3D7047251E7C40E8443778D64F4FB81D40A419BAD47821C0ABC9A0BB4AA90E48"
+    },
+    {
+      "Path": "local/async-pacing-classic-max-smoke-r1-frames.csv",
+      "Sha256": "E86AC9EE97682F4516554421CD845EDC1B32331E6848EF303105943368148F78"
+    },
+    {
+      "Path": "local/async-pacing-classic-max-smoke-r1-summary.json",
+      "Sha256": "B5C5323C46F9F830CD4548EC373F775967981CCFA928F33EE2F1356F76EF0B66"
+    }
+  ],
+  "Styles": [
+    "Classic",
+    "Matrix",
+    "AnsiArt"
+  ],
+  "Modes": [
+    "Strips",
+    "Batch",
+    "AsyncBatch"
+  ],
+  "ByteComparisonsByMode": 36,
+  "NativeSmoke": {
+    "Commands": 1747,
+    "LaunchSources": [
+      {
+        "Sha256": "1C6860D24908ED7A3DE57B4F6EB8D83CDDB3EB26E45FD4040540CCF0C326B8CB",
+        "Path": "Start-Doom.ps1"
+      },
+      {
+        "Sha256": "F91B86B1D522348FC0C772C9A9F22C6DAC3E5BBECED0CF5523DBEF6118C9E3A9",
+        "Path": "scripts/Invoke-Doom.ps1"
+      },
+      {
+        "Sha256": "003395B53CE668E692476912D8E1F72165C7C322338B5B9E8F290A8DFFED3E3F",
+        "Path": "scripts/Invoke-SimulationWorker.ps1"
+      }
+    ],
+    "Tics": 1747,
+    "ActiveTicsPerSecond": 34.68014961536647,
+    "Output": {
+      "Frames": 2683,
+      "WriteCalls": 2683,
+      "Bytes": 1635875764,
+      "BufferCapacity": 1048576,
+      "Mode": "AsyncBatch"
+    },
+    "Error": null,
+    "Display": {
+      "SubmittedPerSecond": 51.459760845564766,
+      "DisplayIntervalsOver50ms": 16,
+      "MissingDisplayTimestampForNonDropped": 0,
+      "AllCapturedRows": 2733,
+      "PresentToDisplayMs": {
+        "Count": 2670,
+        "Mean": 5.535634943820225,
+        "Median": 5.390000000000001,
+        "P95": 8.5992,
+        "Max": 14.9001
+      },
+      "MaximumPresentIntervalCheckErrorMs": 7.105427357601002E-15,
+      "PresentModes": [
+        {
+          "Count": 102,
+          "Mode": 4
+        },
+        {
+          "Count": 2571,
+          "Mode": 8
+        }
+      ],
+      "SubmittedWithinWindow": 2673,
+      "GpuBusyMs": {
+        "Count": 2673,
+        "Mean": 2.422194799850356,
+        "Median": 2.4471000000000003,
+        "P95": 3.6777,
+        "Max": 5.4575000000000005
+      },
+      "MaximumDisplayIntervalCheckErrorMs": 2.2737367544323206E-13,
+      "DroppedAmongSubmitted": 3,
+      "DisplayTransitionsWithinWindow": 2670,
+      "PresentIntervalMs": {
+        "Count": 2672,
+        "Mean": 19.115087387724554,
+        "Median": 16.945149999999998,
+        "P95": 31.1645,
+        "Max": 1726.3821,
+        "P99": 46.4498
+      },
+      "DisplayedTransitionsPerSecond": 51.402005782887365,
+      "DisplayIntervalMs": {
+        "Count": 2669,
+        "Mean": 19.13549280629448,
+        "Median": 18.1764,
+        "P95": 30.3317,
+        "Max": 1727.2438,
+        "P99": 48.4634
+      },
+      "DisplayIntervalsOver33_333ms": 113,
+      "SwapChain": "2515791308000"
+    },
+    "CompletedUpdatesPerSecond": 53.26092811564295,
+    "StartupSeconds": 40.8864553,
+    "RuntimeSourceSha256": "5473682DBEAA516D2930E9FC1F2F7AEB6144617BF5F9CF89EA02F520BD1FB92D",
+    "TickLatenessMs": {
+      "Count": 1747,
+      "Mean": 8.717452269196185,
+      "Median": 3.567528571424191,
+      "P95": 35.67171428571419,
+      "Max": 169.41977142856922,
+      "P99": 107.41210000000137
+    },
+    "Audio": {
+      "Submitted": 2237760,
+      "Error": null,
+      "Rebuffers": 0,
+      "CleanupError": null,
+      "Returned": 2237760,
+      "Starvation": 0,
+      "Closed": true
+    },
+    "PerFrameByteSum": 1635875764.0
+  },
+  "SourceHashes": [
+    {
+      "Path": "scripts/Test-TerminalOutput.ps1",
+      "Sha256": "FA7557047C4DAC71873C677A3EFB4D7C7EC74A47C6C5F5DDE1CCCCD028712745"
+    },
+    {
+      "Path": "scripts/FrameCodec.ps1",
+      "Sha256": "A1CEA3BF32B01AEF4DAC5665A8478EBC3CAD7C4F4EE8605961A0782079202133"
+    },
+    {
+      "Path": "src/TerminalCodec.ps1",
+      "Sha256": "7110F9BBD86662C5FCC45CD9E3E7BF20415A4F6C3FA1EE2829A064EAD5497F7A"
+    },
+    {
+      "Path": "src/CharacterCodec.ps1",
+      "Sha256": "78E3BF44DD0009FA3DE2B855FDD3B411BC6FFD21A62FBC04A0D9BA83E6A5CD78"
+    },
+    {
+      "Path": "src/TerminalOutput.ps1",
+      "Sha256": "1E7C80F2B98C34C47FD3DAA9914F2425577121C63A35C88781E956369695EEAB"
+    }
+  ]
+}

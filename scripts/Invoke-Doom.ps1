@@ -7,7 +7,7 @@ param([Parameter(Mandatory)][string]$Wad,[ValidateRange(1,32)][int]$Workers=16,
     [ValidateRange(1,4)][int]$Episode=1,[ValidateRange(1,32)][int]$Map=1,
     [ValidateSet('Classic','AnsiArt','Matrix')][string]$Style='Classic',
     [ValidateSet('Ascii','Katakana')][string]$GlyphSet='Katakana',[switch]$RealtimeAudio,
-    [ValidateSet('Strips','Batch')][string]$TerminalOutput='Strips',
+    [ValidateSet('Strips','Batch','AsyncBatch')][string]$TerminalOutput='Strips',
     [ValidateSet('Pairs','ColorState','Ansi256')][string]$AnsiEncoding='Pairs',
     [string]$Report="$PSScriptRoot/../local/game-session.json",[string]$ReadyFile,[string]$CaptureStartFile,[string]$SaveRoot,[string]$SettingsPath,
     [switch]$Diagnostics,[string]$ViewportSchedule,[string]$SessionSchedule,[ValidateRange(0,30)][int]$ExitDelaySeconds=0)
@@ -39,6 +39,23 @@ function Start-DoomRenderJob {
     $qpc=[Diagnostics.Stopwatch]::GetTimestamp();$watch.Restart()
     Submit-GameRender $Pool $bytes -ColumnOffset $Viewport.Left -RowOffset $Viewport.Top -FrameNumber ([int][Math]::Floor($Clock.Elapsed.TotalSeconds*60)) -ScreenPixels:$screenPixels -Tic $Snapshot.Tic -MenuPixels:($Snapshot.ScreenKind -eq 2) -AutomapPixels:($Snapshot.ScreenKind -eq 3) -PaletteNumber $Snapshot.PaletteNumber
     return @{Tic=$Snapshot.Tic;Version=$Snapshot.Version;StartQpc=$qpc;SubmitMs=$watch.Elapsed.TotalMilliseconds;ViewportKey=$Viewport.Key;State=$Snapshot.State;Generation=$Snapshot.Generation;Episode=$Snapshot.Episode;Map=$Snapshot.Map;ScreenKind=$Snapshot.ScreenKind;MenuRevision=$Snapshot.MenuRevision;MenuScreen=$Snapshot.MenuScreen;PaletteNumber=$Snapshot.PaletteNumber;PlayerMessage=$Snapshot.PlayerMessage;PlayerMessageTics=$Snapshot.PlayerMessageTics;PlayerMessagePixels=$Snapshot.PlayerMessagePixels}
+}
+function Add-DoomCompletedFrame {
+    param($Present,[long]$EndQpc,[double]$OutputMs,[long]$OutputBytes,[double]$DispatchMs=0)
+    $frameTimes.Add(($EndQpc-$Present.StartQpc)*1000.0/[Diagnostics.Stopwatch]::Frequency)
+    $frameStats.Add(@{Tic=$Present.Tic;State=$Present.State;Generation=$Present.Generation;Episode=$Present.Episode;Map=$Present.Map;
+        SubmitMs=$Present.SubmitMs;HarvestMs=$Present.HarvestMs;OutputMs=$OutputMs;OutputBytes=$OutputBytes;OutputDispatchMs=$DispatchMs;
+        StartQpc=$Present.StartQpc;EndQpc=$EndQpc;ElapsedMs=$clock.Elapsed.TotalMilliseconds;
+        ScreenKind=$Present.ScreenKind;MenuScreen=$Present.MenuScreen;MenuRevision=$Present.MenuRevision;PaletteNumber=$Present.PaletteNumber;
+        PlayerMessage=$Present.PlayerMessage;PlayerMessageTics=$Present.PlayerMessageTics;
+        Workers=@($Present.Results | ForEach-Object {,@($_.RenderMs,$_.EncodeMs,$_.DecodeMs,$_.StartedQpc,$_.DoneQpc)})})
+}
+function Receive-DoomTerminalFrame {
+    param([switch]$Wait)
+    $job=Complete-DoomTerminalFrame $terminalOutputContext $stdout -Wait:$Wait
+    if($null -ne $job){
+        Add-DoomCompletedFrame $job.Present $job.EndQpc (($job.EndQpc-$job.StartQpc)*1000.0/[Diagnostics.Stopwatch]::Frequency) $job.Bytes (($job.DispatchQpc-$job.StartQpc)*1000.0/[Diagnostics.Stopwatch]::Frequency)
+    }
 }
 $simulation=$null;$pool=$null;$consoleState=$null;$terminalActive=$false;$timerRequested=$false;$failure=$null
 $oldEncoding=[Console]::OutputEncoding;$esc=[char]27;$clock=[Diagnostics.Stopwatch]::new()
@@ -142,6 +159,7 @@ try {
     }
     $startQpc=[Diagnostics.Stopwatch]::GetTimestamp();$simulation.View.Write(40,[long]$startQpc);$clock.Start();$wallClock.Start();$lastViewportCheck=-100.0;$exitReason='Quit'
     while($true) {
+        if($null -ne $terminalOutputContext.Pending -and $terminalOutputContext.Pending.Task.IsCompleted){Receive-DoomTerminalFrame;$completed=$frameStats.Count}
         $wallNow=$wallClock.Elapsed.TotalMilliseconds;$status=$simulation.View.ReadInt32(12)
         if($status -eq 3){throw 'Simulation failed; see the simulation error in the session report.'}
         if($status -eq 2){$exitReason='LevelComplete';break}
@@ -151,6 +169,7 @@ try {
             if($status -eq 4 -and $assetGeneration -eq $simulation.View.ReadInt32(24)){[Threading.Thread]::Sleep(1);continue}
             if($null -eq $loadingStart){
                 $loadingStart=$wallNow;$loadingWasRunning=$clock.IsRunning;$clock.Stop()
+                if($null -ne $terminalOutputContext.Pending){Receive-DoomTerminalFrame -Wait;$completed=$frameStats.Count}
                 if($inFlight){Wait-GameRender $pool;$inFlight=$false;$transitionDiscarded++}
                 if($null -ne $pendingFrame){$pendingFrame=$null;$transitionDiscarded++}
                 $needsClear=$true
@@ -296,12 +315,12 @@ try {
         if($inFlight -and (Test-GameRenderCompleted $pool)) {
             $captureDue=$CaptureEveryTics -gt 0 -and $activeFrame.Tic -ge $nextCapture
             $harvestWatch=[Diagnostics.Stopwatch]::StartNew();Wait-GameRender $pool 0 -ReadPixels:$captureDue;$harvestMs=$harvestWatch.Elapsed.TotalMilliseconds
-            $pendingFrame=$activeFrame;$pendingFrame.HarvestMs=$harvestMs;$pendingFrame.Results=$pool.Results
+            $pendingFrame=$activeFrame;$pendingFrame.HarvestMs=$harvestMs;$pendingFrame.Results=@($pool.Results)
             $inFlight=$false
         }
         if($null -ne $pendingFrame -and ($pendingFrame.ViewportKey -ne $viewport.Key -or -not $viewport.Fits)){$pendingFrame=$null;$resizeDiscarded++}
         if($null -ne $pendingFrame -and ($pendingFrame.State -ne $snapshot.State -or $pendingFrame.Generation -ne $snapshot.Generation -or $pendingFrame.MenuRevision -ne $snapshot.MenuRevision)){$pendingFrame=$null;$transitionDiscarded++}
-        if($viewport.Fits -and $null -ne $pendingFrame -and ($needsClear -or $clock.Elapsed.TotalMilliseconds -ge $nextPresentation -or ($snapshot.ScreenKind -eq 2 -and $lastPresentedVersion -ne $snapshot.Version))) {
+        if($null -eq $terminalOutputContext.Pending -and $viewport.Fits -and $null -ne $pendingFrame -and ($needsClear -or $clock.Elapsed.TotalMilliseconds -ge $nextPresentation -or ($snapshot.ScreenKind -eq 2 -and $lastPresentedVersion -ne $snapshot.Version))) {
             $present=$pendingFrame;$pendingFrame=$null;$lastFrameTic=$present.Tic;$lastPresentedVersion=$present.Version
             if($CaptureEveryTics -gt 0 -and $lastFrameTic -ge $nextCapture) {
                 $capture=[byte[]]::new(64000)
@@ -316,6 +335,7 @@ try {
             # out of shared memory before this dispatch, so workers may reuse it.
             if($menu.Screen -eq 0){$activeFrame=Start-DoomRenderJob $pool $snapshot $clock $interpolationTimes $viewport;$inFlight=$true}
             $outputWatch=[Diagnostics.Stopwatch]::StartNew()
+            $outputBytesBefore=$terminalOutputContext.Bytes
             if(-not $Headless) {
                 [byte[]]$clearOutput=$emptyOutput
                 if($needsClear){$clearOutput=[Text.Encoding]::UTF8.GetBytes("$esc[0m$esc[2J")}
@@ -325,13 +345,16 @@ try {
                     $statusLine+="$esc[$($viewport.StatusTop+2);$($viewport.Left+1)Htic $($snapshot.Tic) | $([Math]::Round($completed/[Math]::Max(.01,$clock.Elapsed.TotalSeconds),1)) completed updates/s | health $($snapshot.Health) | kills $($snapshot.Kills)       "
                     $statusOutput+= [Text.Encoding]::UTF8.GetBytes($statusLine)
                 }
-                Write-DoomTerminalFrame $terminalOutputContext $stdout $present.Results $frameStart $frameEnd $clearOutput $statusOutput -Mode $TerminalOutput
+                if($TerminalOutput -eq 'AsyncBatch'){
+                    $job=Start-DoomTerminalFrame $terminalOutputContext $stdout $present.Results $frameStart $frameEnd $clearOutput $statusOutput
+                    $job.Present=$present
+                }else{Write-DoomTerminalFrame $terminalOutputContext $stdout $present.Results $frameStart $frameEnd $clearOutput $statusOutput -Mode $TerminalOutput}
             }
             $needsClear=$false
-            $endQpc=[Diagnostics.Stopwatch]::GetTimestamp();$frameTimes.Add(($endQpc-$present.StartQpc)*1000.0/[Diagnostics.Stopwatch]::Frequency);$completed++
-            $frameStats.Add(@{Tic=$lastFrameTic;State=$present.State;Generation=$present.Generation;Episode=$present.Episode;Map=$present.Map;SubmitMs=$present.SubmitMs;HarvestMs=$present.HarvestMs;OutputMs=$outputWatch.Elapsed.TotalMilliseconds;StartQpc=$present.StartQpc;EndQpc=$endQpc;ElapsedMs=$clock.Elapsed.TotalMilliseconds;
-                ScreenKind=$present.ScreenKind;MenuScreen=$present.MenuScreen;MenuRevision=$present.MenuRevision;PaletteNumber=$present.PaletteNumber;PlayerMessage=$present.PlayerMessage;PlayerMessageTics=$present.PlayerMessageTics;
-                Workers=@($present.Results | ForEach-Object {,@($_.RenderMs,$_.EncodeMs,$_.DecodeMs,$_.StartedQpc,$_.DoneQpc)})})
+            if($null -eq $terminalOutputContext.Pending){
+                Add-DoomCompletedFrame $present ([Diagnostics.Stopwatch]::GetTimestamp()) $outputWatch.Elapsed.TotalMilliseconds ($terminalOutputContext.Bytes-$outputBytesBefore)
+                $completed=$frameStats.Count
+            }
             $nextPresentation+=1000.0/60
         }
         if($viewport.Fits -and -not $inFlight -and $null -eq $pendingFrame -and ($needsClear -or $menu.Screen -eq 0 -or $lastPresentedVersion -ne $snapshot.Version)) {
@@ -342,6 +365,10 @@ try {
     }
 } catch {$failure=$_.ToString()+"`n"+$_.ScriptStackTrace;$exitReason='Error';[Console]::Error.WriteLine($failure);throw}
 finally {
+    if($null -ne $terminalOutputContext.Pending){
+        try{Receive-DoomTerminalFrame -Wait;$completed=$frameStats.Count}
+        catch{if(-not $failure){$failure='Terminal output cleanup: '+$_.ToString();$exitReason='Error'}}
+    }
     $clock.Stop();$wallClock.Stop();if($null -ne $pauseStart){$pausedMs+=$wallClock.Elapsed.TotalMilliseconds-$pauseStart}
     if($null -ne $loadingStart){$loadingMs+=$wallClock.Elapsed.TotalMilliseconds-$loadingStart}
     if($null -ne $sessionStart){$sessionPausedMs+=$wallClock.Elapsed.TotalMilliseconds-$sessionStart}
@@ -401,7 +428,7 @@ finally {
         InterpolationMs=(Get-SampleStats $interpolationTimes.ToArray());FrameSamplesMs=$frameTimes.ToArray();FrameStats=$frameStats.ToArray();Simulation=$simulationReport;
         Requested1msTimer=$timerRequested;TerminalColumns=$terminalWidth;TerminalRows=$terminalHeight;WorkerWorkingSetBytes=$workerMemory;SimulationWorkingSetBytes=$simMemory;
         CaptureEveryTics=$CaptureEveryTics;Captures=$captures.ToArray();PowerShell=$PSVersionTable.PSVersion.ToString();
-        Meaning='35 Hz simulation and 60 Hz interpolated PowerShell rendering. Active duration excludes viewport, menu/control and asset-handoff holds; these wall intervals can overlap and are reported separately. Menus publish on change and do not continually redraw. Map loading inside a gameplay update remains in its tick cost. FrameMs is render-to-write latency, not output interval; writes do not measure monitor presentation.'}
+        Meaning='35 Hz simulation and 60 Hz interpolated PowerShell rendering. Active duration excludes viewport, menu/control and asset-handoff holds; these wall intervals can overlap and are reported separately. Menus publish on change and do not continually redraw. Map loading inside a gameplay update remains in its tick cost. FrameMs is render-to-write latency, not output interval; writes do not measure monitor presentation. AsyncBatch completion timestamps are host observations after the actual write task completes, never dispatch timestamps.'}
     [void][IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName([IO.Path]::GetFullPath($Report)))
     $data | ConvertTo-Json -Depth 10 | Set-Content -LiteralPath $Report
     [pscustomobject]@{Report=$Report;Tics=$simTics;Frames=$completed;Seconds=$clock.Elapsed.TotalSeconds;Exit=$exitReason} | Format-List
