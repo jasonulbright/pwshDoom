@@ -12,31 +12,31 @@ A normal completion is enough; 100% kills, items, and secrets are not required. 
 
 ## Build and launch
 
-The current handoff is the clean local development package pwshDoom-0.1.0-dev.20260929.r17.zip. Its implementation source is commit 00405deebef6b4e8477c9c9316987b82fbc9064d. The package contains 543 manifest-verified files and excludes WADs, soundfonts, reports, and the local research PDF. It is not a tagged or published release. The exact package source commit, ZIP checksum, and verification are in the R17 candidate receipt.
+The current handoff is the local development package `pwshDoom-0.1.0-dev.20261001.r18.zip`, with player-notice implementation at commit `2215250`. It retains the R17 gameplay/renderer and adds readable key-lock, pickup and automap notices. It excludes WADs, soundfonts, reports and the local research PDF. It is not a tagged release or a fully qualified Ultimate Doom release candidate. The [R18 package receipt](../results/r18-playtest-package-validation-20261001.json) pins the exact source, ZIP checksum, manifest and extracted startup checks. The older R17 package remains available locally for comparison; Preview.4 remains the public release.
 
-Extract it to C:\projects\pwshDoom\local\episode1-r17-final-extracted. The package root will be C:\projects\pwshDoom\local\episode1-r17-final-extracted\pwshDoom-0.1.0-dev.20260929.r17. Use the package from that exact implementation source.
+The checked extraction is `C:\projects\pwshDoom\local\episode1-r18-extracted\pwshDoom-0.1.0-dev.20261001.r18`. The ZIP is in `C:\projects\pwshDoom\local\episode1-r18-package`. Use that exact package and fresh recording/save paths.
 
 Use 64-bit PowerShell 7.6.x and Windows Terminal. Play.ps1 -Check passes on the extracted package with the Steam Ultimate Doom IWAD and the locally prepared eleven-track Episode 1 catalog. The required IWAD is user-supplied and must match SHA-256 6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F. The catalog and soundfont remain outside the archive; if the catalog is unavailable, omit -MusicCatalog to play with sound effects and no music. Audio startup rechecks the payload and IWAD score identity.
 
-The R17 source passes 144 complete automap-bitset comparisons across all 36 IWAD map starts, the eight-check automap worker fixture, and a 9/9 Episode 1 load/idle/render smoke. The four-second packaged E1M1 audio run advances 139 tics, returns all 175,140 submitted audio frames, selects D_E1M1, and closes the device without errors. One queue-starvation observation occurs after the final packet, with no rebuffer resume. Its 42.49 headless updates/sec are not terminal writes or displayed frames. These checks do not establish a completed map route, sustained audio continuity, or display pacing.
+The unchanged R17 game/renderer has the Preview.4 36-map load/idle/render smoke and focused transition, boss, menu and save evidence. The R18 notice integration adds fifty focused checks and actual Terminal/audio fixtures in all three styles. These load saved key/armor states, toggle automap and observe notice expiry; they do not complete maps. The [notice evidence](player-notices.md) separates rejected typography from the final choices.
 
-The focused chainsaw, campaign-transition, boss-progression, and menu-input checks remain valid from R16: their gameplay/session source files are unchanged in R17. They cover the former E1M2 chainsaw exception, 69 transitions, 97 boss checks, and 10 menu-input checks; none substitutes for the human route. The complete R17 source and package evidence is in results/episode1-current-human-candidate-20260929-r17.json and results/r17-playtest-package-validation-20260929.json in the repository checkout.
+The former E1M2 chainsaw exception remains repaired. Earlier evidence includes 69 transition and 97 boss assertions, separate from ordinary-input victories. The independent E1M1 continuation again preserves inventory into E1M2. Loaded Classic pacing repeats on the earlier notice host still miss the release threshold and include multi-second map handoffs; a same-source repeat falls to 27.676 tics/sec. The [performance record](performance.md#loaded-classic-route-repeats--october-1-2026) keeps that failure visible. None of these checks replaces the complete human route, acoustic review or broader Ultimate Doom qualification.
 
 From PowerShell, set these fresh output paths, then launch:
 
 ~~~powershell
-$root = 'C:\projects\pwshDoom\local\episode1-r17-final-extracted\pwshDoom-0.1.0-dev.20260929.r17'
+$root = 'C:\projects\pwshDoom\local\episode1-r18-extracted\pwshDoom-0.1.0-dev.20261001.r18'
 $wad = 'C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\base\DOOM.WAD'
 $local = 'C:\projects\pwshDoom\local'
 $catalog = Join-Path $local 'music-prepared-episode1.json'
-$record = Join-Path $local 'episode1-human-input-r17.json'
-$report = Join-Path $local 'episode1-human-session-r17.json'
-$saves = Join-Path $local 'episode1-human-saves-r17'
-$settings = Join-Path $local 'episode1-human-settings-r17.json'
+$record = Join-Path $local 'episode1-human-input-r18.json'
+$report = Join-Path $local 'episode1-human-session-r18.json'
+$saves = Join-Path $local 'episode1-human-saves-r18'
+$settings = Join-Path $local 'episode1-human-settings-r18.json'
 pwsh -NoProfile -File (Join-Path $root 'Start-Doom.ps1') -Wad $wad -Workers 16 -Episode 1 -Map 1 -Skill 3 -Style Classic -Sound -MusicCatalog $catalog -RecordInput $record -Report $report -SaveRoot $saves -SettingsPath $settings -Maximized -FontSize 5
 ~~~
 
-Allow up to 60 seconds for a cold start. Keep the 16 renderer workers and fit at least 320 columns by 100 rows; maximized with a 5-point font is the tested setting. If the viewport is short, enlarge the window or press Ctrl+- to reduce the font. Blank space around the centered image in a larger terminal is expected. Keep the generated input, report, saves, and settings under C:\projects\pwshDoom\local; the input/report and save/settings locations above are fresh for R17.
+Allow up to 60 seconds for startup. Keep the 16 renderer workers and fit at least 320 columns by 100 rows; maximized with a 5-point font is the tested setting. If the viewport is short, enlarge the window or press Ctrl+- to reduce the font. Blank space around the centered image in a larger terminal is expected. Keep generated input, reports, saves and settings under `C:\projects\pwshDoom\local`; the paths above are fresh for R18.
 
 ## Controls
 
