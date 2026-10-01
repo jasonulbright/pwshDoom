@@ -75,6 +75,9 @@ function Update-GameRenderAssets {
     if(-not (Test-GameRenderCompleted $Pool)){throw 'Drain rendering before changing map assets.'}
     foreach($worker in $Pool.Workers){[void]$worker.Done.Reset();$worker.View.Write(76,2);[void]$worker.Go.Set()}
     foreach($worker in $Pool.Workers){if(-not $worker.Done.WaitOne(30000)){throw 'Map asset reload timed out.'};Get-GameWorkerError $worker}
+    $Pool.AssetReloadResults=@(foreach($worker in $Pool.Workers){
+        @{Worker=$worker.Index;Pid=$worker.Process.Id;Milliseconds=$worker.View.ReadDouble(88);ResourceBodyReused=$worker.View.ReadInt32(96) -eq 1}
+    })
     $Pool.Results=[object[]]::new($Pool.Count)
 }
 function Wait-GameRender {

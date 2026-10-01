@@ -1128,3 +1128,15 @@ GiB. All submitted audio frames return cleanly. This single check fails the
 frozen gate, does not establish a causal full-route speedup and leaves worker
 deserialization as a measured remaining cost. See the
 [live receipt](../results/resource-cache-loaded-classic-20261001-r1.json).
+
+The next change reuses decoded immutable resources inside each persistent
+worker after hashing the actual v7 body bytes. Every reload still decodes new
+map/palette metadata and allocates private raster scratch. Changed bodies use
+the ordinary decoder. Three final-source ABBA cycles measure **1.295–1.505
+seconds** for ordinary read-back and **0.069–0.081 seconds** with verified
+reuse. All twelve images match. Actual workers in all three modes confirm the
+reuse decision and invalidate changed episode skies. Eighteen focused checks
+also cover body tampering, fresh geometry/palette metadata, private buffers and
+truncation; the truncation check exposed and repaired a pre-existing incomplete
+flat/color read. These are stage/functional results; loaded pacing follows
+separately. [Reader evidence](../results/render-asset-reader-reuse-20261001.json).

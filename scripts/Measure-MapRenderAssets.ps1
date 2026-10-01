@@ -23,6 +23,8 @@ try{
     $contextMs=$watch.Elapsed.TotalMilliseconds;$watch.Restart()
     Write-GameRenderAssets $resources $palette "$directory/map-assets-$PID-initial.assets"
     $initial=@{ContextMilliseconds=$contextMs;WriteMilliseconds=$watch.Elapsed.TotalMilliseconds;RetainedBodyBytes=$resources.RenderAssetCache.Body.Length}
+    $watch.Restart();$readerResources=Read-GameRenderAssets "$directory/map-assets-$PID-initial.assets" -CacheResources
+    $initial.ReaderCacheBuildMilliseconds=$watch.Elapsed.TotalMilliseconds
     $game.DeferedInitNew([GameSkill]::Medium,1,2);$null=$game.Update($commands);$snapshot=New-GameRenderSnapshot $game
     $referenceHash=$null
     for($repeat=0;$repeat -lt $Repeats;$repeat++){
@@ -33,7 +35,9 @@ try{
             $contextMs=$watch.Elapsed.TotalMilliseconds;$watch.Restart();$assets="$directory/map-assets-$PID-$($rows.Count).assets"
             Write-GameRenderAssets $ctx $palette $assets
             $writeMs=$watch.Elapsed.TotalMilliseconds;$watch.Restart()
-            $read=Read-GameRenderAssets $assets;$readMs=$watch.Elapsed.TotalMilliseconds
+            $read=if($variant -eq 'Reuse'){Read-GameRenderAssets $assets -Resources $readerResources}else{Read-GameRenderAssets $assets}
+            $readMs=$watch.Elapsed.TotalMilliseconds
+            if($variant -eq 'Reuse' -and -not $read.AssetBodyReused){throw 'Reader cache did not reuse the unchanged body.'}
             $process.Refresh();$cpuMs=$process.TotalProcessorTime.TotalMilliseconds-$cpuBefore;$process.Dispose()
             Set-GameRenderSnapshot $ctx $snapshot;Invoke-FastRender $ctx
             Set-GameRenderSnapshot $read $snapshot;Invoke-FastRender $read
@@ -49,7 +53,7 @@ try{
     @{FinishedUtc=[DateTime]::UtcNow.ToString('o');Error=$failure;Order='Fresh-Reuse-Reuse-Fresh';Repeats=$Repeats;InitialCacheBuild=$initial;
         Samples=$rows.ToArray();Runtime=$PSVersionTable.PSVersion.ToString();RuntimeExecutable=(Get-Process -Id $PID).Path;
         Sources=$sources;HarnessSha256=(Get-FileHash $PSCommandPath).Hash;WadSha256=(Get-FileHash $Wad).Hash;
-        Meaning='Sequential single-process ABBA repetitions on a fixed E1M2 snapshot. Resource cache is built once on E1M1 and its startup cost is retained. Includes exact fresh/reused/read-back frame hashes. This measures map asset stages, not campaign load, concurrent renderer reload or Terminal display pacing.'}|
+        Meaning='Sequential single-process ABBA repetitions on a fixed E1M2 snapshot. Writer and reader resource caches are built once on E1M1 and their startup costs are retained. Includes exact fresh/reused/read-back frame hashes and asserts reader body reuse. This measures map asset stages, not campaign load, concurrent renderer reload or Terminal display pacing.'}|
         ConvertTo-Json -Depth 6|Set-Content -LiteralPath $Output
     if($null -ne $content){$content.Dispose()}
 }

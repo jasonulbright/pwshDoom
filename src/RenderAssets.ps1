@@ -88,7 +88,10 @@ function Write-GameRenderAssetBody {
 }
 
 function Read-GameRenderAssets {
-    param([string]$Path)
+    param([string]$Path,$Resources,[switch]$CacheResources)
+    if($null -ne $Resources -and (-not $Resources.ContainsKey('AssetBodySha256') -or -not $Resources.ContainsKey('AssetPatches'))){
+        throw 'Render asset reuse requires an immutable cached reader context.'
+    }
     $reader=[IO.BinaryReader]::new([IO.File]::OpenRead($Path))
     try {
         if($reader.ReadString() -ne 'pwshDoom-assets-v7'){throw 'Unknown render asset format.'}
@@ -97,6 +100,16 @@ function Read-GameRenderAssets {
         [double[]]$nodeGeometry=$meta.NodeGeometry;[int[]]$nodeChildren=$meta.NodeChildren
         if($segmentGeometry.Length%6 -ne 0 -or $segmentMetadata.Length -ne ($segmentGeometry.Length/6)*4){throw 'Invalid packed segment geometry.'}
         if($nodeGeometry.Length%12 -ne 0 -or $nodeChildren.Length -ne ($nodeGeometry.Length/12)*2){throw 'Invalid packed BSP node geometry.'}
+        $bodyHash=$null;$reuse=$false
+        if($CacheResources -or $null -ne $Resources){
+            # Verify the actual remaining file bytes; metadata is always decoded
+            # anew, and neither a path nor a header claim can produce a hit.
+            $bodyStart=$reader.BaseStream.Position
+            $bodyHash=[Convert]::ToHexString([Security.Cryptography.SHA256]::HashData($reader.BaseStream))
+            $reader.BaseStream.Position=$bodyStart
+            $reuse=$null -ne $Resources -and $Resources.AssetBodySha256 -ceq $bodyHash
+        }
+        if($reuse){$patches=$Resources.AssetPatches}else{
         $patches=[object[]]::new($reader.ReadInt32())
         for($i=0;$i -lt $patches.Length;$i++) {
             $w=$reader.ReadInt32();$h=$reader.ReadInt32();$left=$reader.ReadInt32();$top=$reader.ReadInt32()
@@ -120,6 +133,7 @@ function Read-GameRenderAssets {
             }
             $patches[$i]=@{Width=$w;Height=$h;Left=$left;Top=$top;Data=$data;Columns=$columns}
         }
+        }
         $ctx=@{SegmentGeometry=$segmentGeometry;SegmentMetadata=$segmentMetadata;NodeGeometry=$nodeGeometry;NodeChildren=$nodeChildren;
             Subsectors=$meta.Subsectors;SkyFlat=$meta.SkyFlat;Sky=$patches[[int]$meta.Sky];Lighting=(New-FastLightingTables);
             Pixels=[byte[]]::new(64000);Depth=[double[]]::new(64000);Planes=[int[]]::new(53760);TopClip=[int[]]::new(320);BottomClip=[int[]]::new(320);
@@ -137,10 +151,22 @@ function Read-GameRenderAssets {
                 @{Rotate=$_.Rotate;Flip=[bool[]]$_.Flip;Patches=@($_.Patches | ForEach-Object {$patches[[int]$_]})}
             })
         }
+        if($reuse){
+            $ctx.Flats=$Resources.Flats;$ctx.Colors=$Resources.Colors;$ctx.Lighting=$Resources.Lighting
+        }else{
         $ctx.Flats=[object[]]::new($reader.ReadInt32())
-        for($i=0;$i -lt $ctx.Flats.Length;$i++){$ctx.Flats[$i]=@{Data=$reader.ReadBytes($reader.ReadInt32())}}
+        for($i=0;$i -lt $ctx.Flats.Length;$i++){
+            $length=$reader.ReadInt32();$data=$reader.ReadBytes($length)
+            if($data.Length -ne $length){throw 'Truncated render flat data.'}
+            $ctx.Flats[$i]=@{Data=$data}
+        }
         $ctx.Colors=[byte[][]]::new($reader.ReadInt32())
-        for($i=0;$i -lt $ctx.Colors.Length;$i++){$ctx.Colors[$i]=$reader.ReadBytes($reader.ReadInt32())}
+        for($i=0;$i -lt $ctx.Colors.Length;$i++){
+            $length=$reader.ReadInt32();$ctx.Colors[$i]=$reader.ReadBytes($length)
+            if($ctx.Colors[$i].Length -ne $length){throw 'Truncated render color data.'}
+        }
+        }
+        if($CacheResources -or $null -ne $Resources){$ctx.AssetBodySha256=$bodyHash;$ctx.AssetPatches=$patches;$ctx.AssetBodyReused=$reuse}
         [uint32[]]$ctx.PlaneColumnAngles=$meta.PlaneColumnAngles
         [int[]]$ctx.PlaneDistanceScales=$meta.PlaneDistanceScales
         [int[]]$ctx.PlaneRowSlopes=$meta.PlaneRowSlopes

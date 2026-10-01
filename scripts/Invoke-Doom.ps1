@@ -164,7 +164,8 @@ try {
             else{Update-GameRenderAssets $pool;$rendererAssetsReloaded++}
             $snapshot=$nextSnapshot;$assetGeneration=$nextAssetGeneration
             $reloadEnd=$wallClock.Elapsed.TotalMilliseconds;$loadingMs+=$reloadEnd-$loadingStart
-            $mapReloads.Add(@{Generation=$assetGeneration;Episode=$snapshot.Episode;Map=$snapshot.Map;Tic=$snapshot.Tic;StartWallMs=$loadingStart;EndWallMs=$reloadEnd;RendererAssetsReused=$sameRendererMap;WorkerPids=@($pool.Workers.Process.Id)})
+            $mapReloads.Add(@{Generation=$assetGeneration;Episode=$snapshot.Episode;Map=$snapshot.Map;Tic=$snapshot.Tic;StartWallMs=$loadingStart;EndWallMs=$reloadEnd;RendererAssetsReused=$sameRendererMap;WorkerPids=@($pool.Workers.Process.Id);
+                WorkerAssetReloads=if($sameRendererMap){@()}else{$pool.AssetReloadResults}})
             $loadingStart=$null
             $simulation.View.Write(40,[long]([Diagnostics.Stopwatch]::GetTimestamp()-$clock.ElapsedTicks))
             if($loadingWasRunning){$clock.Start()};$nextPresentation=$clock.Elapsed.TotalMilliseconds

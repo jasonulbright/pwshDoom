@@ -62,6 +62,11 @@ try{
     Write-GameRenderAssets $context $palette $pool.Assets
     if((Get-FileHash -LiteralPath $pool.Assets).Hash -eq $oldHash){throw 'Map asset test did not change geometry.'}
     Update-GameRenderAssets $pool
+    if($ResourceReuse){
+        $expectedReuse=[object]::ReferenceEquals($previous.SkyTextureReference,$context.SkyTextureReference)
+        foreach($reload in $pool.AssetReloadResults){if($reload.ResourceBodyReused -ne $expectedReuse){throw 'Worker body hash reuse/invalidation disagrees with the sky change.'}}
+        $checks.Add(@{Episode=$target[0];Map=$target[1];WorkerBodyReuseExpected=$expectedReuse;ReloadResults=$pool.AssetReloadResults})
+    }
     $snapshot=New-GameRenderSnapshot $game;Set-GameRenderSnapshot $context $snapshot;Invoke-FastRender $context
     if($ResourceReuse){
         $oracle=New-FastRenderContext $content $game.World

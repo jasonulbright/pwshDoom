@@ -19,7 +19,7 @@ $ready=[Threading.EventWaitHandle]::OpenExisting($Channel+'-ready');$go=[Threadi
 [long]$workerBit=1L -shl $WorkerIndex
 try {
     $owner=if($OwnerPid -gt 0){[Diagnostics.Process]::GetProcessById($OwnerPid)}else{$null}
-    $previousSnapshot=$null;$ctx=Read-GameRenderAssets $Assets
+    $previousSnapshot=$null;$ctx=Read-GameRenderAssets $Assets -CacheResources
     $codecs=New-DoomPaletteCodecs $ctx.PlayPal $Style -GlyphSet $GlyphSet -AnsiEncoding $AnsiEncoding
     [void]$ready.Set()
     while($true) {
@@ -27,11 +27,14 @@ try {
         if($view.ReadInt32(0) -ne 0){break}
         $kind=$view.ReadInt32(76)
         if($kind -eq 2){
-            $updated=Read-GameRenderAssets $Assets
+            $reloadWatch=[Diagnostics.Stopwatch]::StartNew()
+            $updated=Read-GameRenderAssets $Assets -Resources $ctx
             if(-not [Linq.Enumerable]::SequenceEqual[byte]($ctx.PlayPal,$updated.PlayPal)){
                 $codecs=New-DoomPaletteCodecs $updated.PlayPal $Style -GlyphSet $GlyphSet -AnsiEncoding $AnsiEncoding
             }
-            $ctx=$updated;$previousSnapshot=$null;[void]$done.Set();continue
+            $ctx=$updated;$previousSnapshot=$null
+            $view.Write(88,$reloadWatch.Elapsed.TotalMilliseconds);$view.Write(96,[int][bool]$ctx.AssetBodyReused)
+            [void]$done.Set();continue
         }
         if($kind -notin 0,1,3,4){throw 'Unknown rendering job kind.'}
         $view.Write(48,[long][Diagnostics.Stopwatch]::GetTimestamp())
