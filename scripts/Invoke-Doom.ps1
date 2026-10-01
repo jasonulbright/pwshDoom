@@ -259,7 +259,11 @@ try {
             if($null -eq $viewport -or $nextViewport.Key -ne $viewport.Key) {
                 $viewport=$nextViewport;$needsClear=$true
                 if(-not $viewport.Fits -and $null -eq $pauseStart){$clock.Stop();$pauseStart=$wallNow;$pauseCount++}
-                elseif($viewport.Fits -and $null -ne $pauseStart) {
+                # Direct compact/warning writes must never interleave with the
+                # outstanding synchronized frame. An undersized viewport's
+                # drain belongs to its already-started, reported pause.
+                if($null -ne $terminalOutputContext.Pending){Receive-DoomTerminalFrame -Wait;$completed=$frameStats.Count}
+                if($viewport.Fits -and $null -ne $pauseStart) {
                     $pausedMs+=$wallNow-$pauseStart;$pauseStart=$null
                     # Keep the simulation's lateness reference on the active game
                     # clock, so restoring the window does not queue paused tics.

@@ -49,6 +49,10 @@ try{
                             $job=Start-DoomTerminalFrame $context $stream $strips $start $end $clear $status
                             $rejected=$false;try{$null=Start-DoomTerminalFrame $context $stream $strips $start $end}catch{$rejected=$true}
                             if(-not $rejected){throw 'Pending write did not retain exclusive buffer ownership.'}
+                            foreach($syncMode in 'Strips','Batch'){
+                                $rejected=$false;try{Write-DoomTerminalFrame $context $stream $strips $start $end -Mode $syncMode}catch{$rejected=$true}
+                                if(-not $rejected){throw 'Synchronous output interleaved with a pending asynchronous frame.'}
+                            }
                             $done=Complete-DoomTerminalFrame $context $stream -Wait
                             if(-not [object]::ReferenceEquals($done,$job) -or $null -ne $context.Pending){throw 'Asynchronous completion ownership differs.'}
                         }else{Write-DoomTerminalFrame $context $stream $strips $start $end $clear $status -Mode $mode}

@@ -43,6 +43,7 @@ function Complete-DoomTerminalFrame {
 function Write-DoomTerminalFrame {
     param($Context,[IO.Stream]$Stream,$Results,[byte[]]$Start,[byte[]]$End,
         [byte[]]$Clear=[byte[]]::new(0),[byte[]]$Status=[byte[]]::new(0),[ValidateSet('Strips','Batch')][string]$Mode='Strips')
+    if($null -ne $Context.Pending){throw 'A terminal write already owns the frame buffer.'}
     [int]$length=$Start.Length+$End.Length+$Clear.Length+$Status.Length
     foreach($result in $Results){$length+=$result.Bytes.Length}
     if($Mode -eq 'Strips'){

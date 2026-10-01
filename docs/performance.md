@@ -1178,3 +1178,24 @@ The collector now accepts `-TerminalOutput` and `-AnsiEncoding` to compare
 alternatives on otherwise identical source and input. Observed asynchronous
 completion time includes host polling delay and does not identify display
 content or physical output latency.
+
+One clean same-source ABBA cycle at `06fb33b` compares Strips and AsyncBatch
+on the ordinary E1M1/intermission/E1M2 route, with identical sound, 16 workers,
+Pairs encoding and maximized five-point Classic output.
+
+| Order | Mode | Active simulation tics/sec | Global display transitions/sec | p99 / max tic lateness (ms) |
+| --- | --- | ---: | ---: | ---: |
+| A1 | Strips | 34.979 | 54.910 | 165.784 / 196.050 |
+| B1 | AsyncBatch | 34.978 | 54.868 | 65.145 / 138.118 |
+| B2 | AsyncBatch | 34.975 | 54.069 | 59.955 / 148.023 |
+| A2 | Strips | 34.979 | 50.610 | 273.078 / 300.819 |
+
+All commands and submitted audio frames complete, with zero software
+starvation/rebuffer. Per-frame byte sums equal output totals in every run.
+Async dispatch averages 0.230 / 0.253 ms and observed completion averages
+7.556 / 7.726 ms. It has lower simulation lateness in this cycle; this does
+not establish general superiority, a passing three-cycle qualification or
+59 display transitions/sec. The default remains Strips while asynchronous
+resize/menu/effect behavior is checked. The
+[independent ABBA receipt](../results/output-abba-classic-20261001.json)
+keeps all global/window/CPU/audio/load results and source hashes.

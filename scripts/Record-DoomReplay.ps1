@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 # External window capture. FFmpeg is not an engine, renderer, or game dependency.
 param([ValidateSet('Classic','AnsiArt','Matrix')][string]$Style='Matrix',
-    [ValidateSet('Strips','Batch')][string]$TerminalOutput='Strips',
+    [ValidateSet('Strips','Batch','AsyncBatch')][string]$TerminalOutput='Strips',
     [ValidateSet('Pairs','ColorState','Ansi256')][string]$AnsiEncoding='Pairs',
     [ValidateSet('Ascii','Katakana')][string]$GlyphSet='Katakana',
     [string]$Wad='C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\base\DOOM.WAD',
