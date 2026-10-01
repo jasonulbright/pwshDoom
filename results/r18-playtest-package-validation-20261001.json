@@ -1,0 +1,59 @@
+{
+  "FinishedUtc": "2026-10-01T22:50:08.3284435Z",
+  "Version": "0.1.0-dev.20261001.r18",
+  "PackageSourceCommit": "0918571067ec5506358dbe0499711c567fb3a43e",
+  "NoticeImplementationCommit": "2215250",
+  "Zip": {
+    "Sha256": "1DFE6A69257F804607137BCFF4D0C9CAF1CF42C85523D34E39261D7FC5A24EE3",
+    "Path": "local/episode1-r18-package/pwshDoom-0.1.0-dev.20261001.r18.zip",
+    "Bytes": 1674438
+  },
+  "ManifestSha256": "7F98BB31D23C5E5B41ADF4A01DC87D4AB21898876B074818856DA0A14070B235",
+  "PayloadHashesVerified": 548,
+  "RecordedSourceManifestMatches": 78,
+  "WorkingTreeDirty": true,
+  "DirtyExplanation": "The excluded untracked docs/gebbdoom.pdf was present. Tracked package inputs were committed at 0918571.",
+  "ExcludedExtensions": [
+    ".wad",
+    ".sf2",
+    ".exe",
+    ".dll",
+    ".pdf",
+    ".mp4",
+    ".wav"
+  ],
+  "Preflight": {
+    "CatalogTracks": 11,
+    "Sha256": "98A1C7C8496A2B121985EC762331BB3581952EB76B70AAD1B9AC0266AA516C3C",
+    "Runtime": "7.6.6",
+    "Path": "local/r18-package-preflight-r2.txt",
+    "Maps": 36
+  },
+  "RejectedPreflight": {
+    "Outcome": "Actionable missing-catalog error, nonzero exit. No game launched.",
+    "MissingCatalogArgument": "local/music-prepared-ultimate-doom.json"
+  },
+  "Runtime": {
+    "ReturnedAudioFrames": 351540,
+    "QueueStarvationObservations": [
+      {
+        "AfterPacket": 278,
+        "WallMs": 31976.6066
+      }
+    ],
+    "Tics": 279,
+    "HeadlessUpdates": 299,
+    "SubmittedAudioFrames": 351540,
+    "ShutdownDrain": null,
+    "Path": "local/r18-package-headless.json",
+    "Sha256": "1E63E7B08B0417925C9BE504045BE902F2CB2C21E76634719CF07B8F2E526F6B",
+    "DeviceClosed": true,
+    "Exit": "Duration",
+    "RebufferResumes": []
+  },
+  "LiveNoticeReceipt": {
+    "Sha256": "C4A0A83D092FFA3DBF727B9C4E159D03E3906C1E8818E08090EE67429EF85470",
+    "Path": "results/player-notices-live-readable-20261001.json"
+  },
+  "Meaning": "Local development candidate; every manifest payload hash verified and all recorded game-source entries match the package. Extracted actual-device startup, not sustained audio/acoustic/display or campaign certification. No new public release below the 35-commit threshold. Full Ultimate Doom qualification remains open."
+}
