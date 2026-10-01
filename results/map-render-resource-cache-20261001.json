@@ -1,0 +1,238 @@
+{
+  "Meaning": "Sequential single-process ABBA repetitions on a fixed E1M2 snapshot. Resource cache is built once on E1M1 and its startup cost is retained. Includes exact fresh/reused/read-back frame hashes. This measures map asset stages, not campaign load, concurrent renderer reload or Terminal display pacing.",
+  "Order": "Fresh-Reuse-Reuse-Fresh",
+  "FinishedUtc": "2026-10-01T23:05:39.4088855Z",
+  "RuntimeExecutable": "C:\\projects\\pwshDoom\\local\\pwsh-7.6.6-portable\\runtime\\pwsh.exe",
+  "Repeats": 3,
+  "Sources": [
+    {
+      "Path": "src/FastRenderer.ps1",
+      "Sha256": "C517F67D8E588BE2F97F4BFD8A5FAB3123AD7428598760FA2FA818BB816A2976"
+    },
+    {
+      "Path": "src/RenderAssets.ps1",
+      "Sha256": "2A23D50A579E19A084D65F2FD78BF58096DEA95673C44CD425E5D15F30303A80"
+    }
+  ],
+  "HarnessSha256": "E1769C329EE637D0822BA40674F3264E8E58AA210787BD4CE99CD2262FAD14FC",
+  "InitialCacheBuild": {
+    "ContextMilliseconds": 1172.8967,
+    "WriteMilliseconds": 3905.2949,
+    "RetainedBodyBytes": 37614992
+  },
+  "Runtime": "7.6.6",
+  "Samples": [
+    {
+      "ContextMilliseconds": 822.2078,
+      "CpuMilliseconds": 6218.75,
+      "FrameSha256": "D73C9535BC8339A265D4B268C7B1AEB400D07D36CFCE98B753AEDC8D3DABBB58",
+      "Variant": "Fresh",
+      "AssetBytes": 37931904,
+      "AssetSha256": "051F741220D66CBEE79A7F3C6642E158D3C283F037C399468C2D4EC020385643",
+      "Repeat": 0,
+      "AssetPath": "C:\\projects\\pwshDoom\\local/map-assets-34980-0.assets",
+      "WriteMilliseconds": 3680.2136,
+      "PreparationMilliseconds": 4502.4214,
+      "ReadMilliseconds": 1576.0766
+    },
+    {
+      "ContextMilliseconds": 20.5493,
+      "CpuMilliseconds": 1937.5,
+      "FrameSha256": "D73C9535BC8339A265D4B268C7B1AEB400D07D36CFCE98B753AEDC8D3DABBB58",
+      "Variant": "Reuse",
+      "AssetBytes": 37931904,
+      "AssetSha256": "051F741220D66CBEE79A7F3C6642E158D3C283F037C399468C2D4EC020385643",
+      "Repeat": 0,
+      "AssetPath": "C:\\projects\\pwshDoom\\local/map-assets-34980-1.assets",
+      "WriteMilliseconds": 91.738,
+      "PreparationMilliseconds": 112.2873,
+      "ReadMilliseconds": 1454.1472
+    },
+    {
+      "ContextMilliseconds": 17.5779,
+      "CpuMilliseconds": 1437.5,
+      "FrameSha256": "D73C9535BC8339A265D4B268C7B1AEB400D07D36CFCE98B753AEDC8D3DABBB58",
+      "Variant": "Reuse",
+      "AssetBytes": 37931904,
+      "AssetSha256": "051F741220D66CBEE79A7F3C6642E158D3C283F037C399468C2D4EC020385643",
+      "Repeat": 0,
+      "AssetPath": "C:\\projects\\pwshDoom\\local/map-assets-34980-2.assets",
+      "WriteMilliseconds": 63.3849,
+      "PreparationMilliseconds": 80.9628,
+      "ReadMilliseconds": 1357.0884
+    },
+    {
+      "ContextMilliseconds": 789.6416,
+      "CpuMilliseconds": 5656.25,
+      "FrameSha256": "D73C9535BC8339A265D4B268C7B1AEB400D07D36CFCE98B753AEDC8D3DABBB58",
+      "Variant": "Fresh",
+      "AssetBytes": 37931904,
+      "AssetSha256": "051F741220D66CBEE79A7F3C6642E158D3C283F037C399468C2D4EC020385643",
+      "Repeat": 0,
+      "AssetPath": "C:\\projects\\pwshDoom\\local/map-assets-34980-3.assets",
+      "WriteMilliseconds": 3434.1486,
+      "PreparationMilliseconds": 4223.7902,
+      "ReadMilliseconds": 1496.0433
+    },
+    {
+      "ContextMilliseconds": 838.8315,
+      "CpuMilliseconds": 6312.5,
+      "FrameSha256": "D73C9535BC8339A265D4B268C7B1AEB400D07D36CFCE98B753AEDC8D3DABBB58",
+      "Variant": "Fresh",
+      "AssetBytes": 37931904,
+      "AssetSha256": "051F741220D66CBEE79A7F3C6642E158D3C283F037C399468C2D4EC020385643",
+      "Repeat": 1,
+      "AssetPath": "C:\\projects\\pwshDoom\\local/map-assets-34980-4.assets",
+      "WriteMilliseconds": 4056.3975,
+      "PreparationMilliseconds": 4895.229,
+      "ReadMilliseconds": 1509.647
+    },
+    {
+      "ContextMilliseconds": 17.3381,
+      "CpuMilliseconds": 1390.625,
+      "FrameSha256": "D73C9535BC8339A265D4B268C7B1AEB400D07D36CFCE98B753AEDC8D3DABBB58",
+      "Variant": "Reuse",
+      "AssetBytes": 37931904,
+      "AssetSha256": "051F741220D66CBEE79A7F3C6642E158D3C283F037C399468C2D4EC020385643",
+      "Repeat": 1,
+      "AssetPath": "C:\\projects\\pwshDoom\\local/map-assets-34980-5.assets",
+      "WriteMilliseconds": 67.6675,
+      "PreparationMilliseconds": 85.0056,
+      "ReadMilliseconds": 1335.5325
+    },
+    {
+      "ContextMilliseconds": 17.7424,
+      "CpuMilliseconds": 1546.875,
+      "FrameSha256": "D73C9535BC8339A265D4B268C7B1AEB400D07D36CFCE98B753AEDC8D3DABBB58",
+      "Variant": "Reuse",
+      "AssetBytes": 37931904,
+      "AssetSha256": "051F741220D66CBEE79A7F3C6642E158D3C283F037C399468C2D4EC020385643",
+      "Repeat": 1,
+      "AssetPath": "C:\\projects\\pwshDoom\\local/map-assets-34980-6.assets",
+      "WriteMilliseconds": 69.0687,
+      "PreparationMilliseconds": 86.81110000000001,
+      "ReadMilliseconds": 1436.2712
+    },
+    {
+      "ContextMilliseconds": 709.7603,
+      "CpuMilliseconds": 5546.875,
+      "FrameSha256": "D73C9535BC8339A265D4B268C7B1AEB400D07D36CFCE98B753AEDC8D3DABBB58",
+      "Variant": "Fresh",
+      "AssetBytes": 37931904,
+      "AssetSha256": "051F741220D66CBEE79A7F3C6642E158D3C283F037C399468C2D4EC020385643",
+      "Repeat": 1,
+      "AssetPath": "C:\\projects\\pwshDoom\\local/map-assets-34980-7.assets",
+      "WriteMilliseconds": 3382.6274,
+      "PreparationMilliseconds": 4092.3876999999998,
+      "ReadMilliseconds": 1456.9839
+    },
+    {
+      "ContextMilliseconds": 782.1994,
+      "CpuMilliseconds": 6000.0,
+      "FrameSha256": "D73C9535BC8339A265D4B268C7B1AEB400D07D36CFCE98B753AEDC8D3DABBB58",
+      "Variant": "Fresh",
+      "AssetBytes": 37931904,
+      "AssetSha256": "051F741220D66CBEE79A7F3C6642E158D3C283F037C399468C2D4EC020385643",
+      "Repeat": 2,
+      "AssetPath": "C:\\projects\\pwshDoom\\local/map-assets-34980-8.assets",
+      "WriteMilliseconds": 3766.014,
+      "PreparationMilliseconds": 4548.213400000001,
+      "ReadMilliseconds": 1469.7327
+    },
+    {
+      "ContextMilliseconds": 17.2765,
+      "CpuMilliseconds": 1437.5,
+      "FrameSha256": "D73C9535BC8339A265D4B268C7B1AEB400D07D36CFCE98B753AEDC8D3DABBB58",
+      "Variant": "Reuse",
+      "AssetBytes": 37931904,
+      "AssetSha256": "051F741220D66CBEE79A7F3C6642E158D3C283F037C399468C2D4EC020385643",
+      "Repeat": 2,
+      "AssetPath": "C:\\projects\\pwshDoom\\local/map-assets-34980-9.assets",
+      "WriteMilliseconds": 73.0817,
+      "PreparationMilliseconds": 90.3582,
+      "ReadMilliseconds": 1358.618
+    },
+    {
+      "ContextMilliseconds": 18.8295,
+      "CpuMilliseconds": 1421.875,
+      "FrameSha256": "D73C9535BC8339A265D4B268C7B1AEB400D07D36CFCE98B753AEDC8D3DABBB58",
+      "Variant": "Reuse",
+      "AssetBytes": 37931904,
+      "AssetSha256": "051F741220D66CBEE79A7F3C6642E158D3C283F037C399468C2D4EC020385643",
+      "Repeat": 2,
+      "AssetPath": "C:\\projects\\pwshDoom\\local/map-assets-34980-10.assets",
+      "WriteMilliseconds": 64.4795,
+      "PreparationMilliseconds": 83.309,
+      "ReadMilliseconds": 1374.6355
+    },
+    {
+      "ContextMilliseconds": 777.8947,
+      "CpuMilliseconds": 6031.25,
+      "FrameSha256": "D73C9535BC8339A265D4B268C7B1AEB400D07D36CFCE98B753AEDC8D3DABBB58",
+      "Variant": "Fresh",
+      "AssetBytes": 37931904,
+      "AssetSha256": "051F741220D66CBEE79A7F3C6642E158D3C283F037C399468C2D4EC020385643",
+      "Repeat": 2,
+      "AssetPath": "C:\\projects\\pwshDoom\\local/map-assets-34980-11.assets",
+      "WriteMilliseconds": 3946.0352,
+      "PreparationMilliseconds": 4723.9299,
+      "ReadMilliseconds": 1431.1838
+    }
+  ],
+  "Error": null,
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "RawReport": {
+    "Path": "local/map-render-assets-abba-20261001-r1.json",
+    "Sha256": "BBE28CBE110DA340BAC7CE2694E5D84B9AC9B3060DDCA1CC8A4B81F489F285E7"
+  },
+  "WorkerChecks": [
+    {
+      "Reloads": [
+        "E1M2",
+        "E2M1",
+        "E3M1",
+        "E1M2"
+      ],
+      "EncodedStripsCompared": 112,
+      "ProcessesPreserved": true,
+      "Workers": 16,
+      "FreshResourcePixelsCompared": 256000,
+      "RawSha256": "0C6BB2012C7D0CC79D361FEFD9F21480F947D62448072342B6028593AAD1C45B",
+      "WorkerPixelsCompared": 448000,
+      "Style": "Classic",
+      "RawReport": "local/session-worker-resource-classic-20261001-r1.json"
+    },
+    {
+      "Reloads": [
+        "E1M2",
+        "E2M1",
+        "E3M1",
+        "E1M2"
+      ],
+      "EncodedStripsCompared": 112,
+      "ProcessesPreserved": true,
+      "Workers": 16,
+      "FreshResourcePixelsCompared": 256000,
+      "RawSha256": "F1CB0693B90DE0B9BA4897558BB6E9E06CDAED3240DC2D62F913D8DD06F52A02",
+      "WorkerPixelsCompared": 448000,
+      "Style": "Matrix",
+      "RawReport": "local/session-worker-resource-Matrix-20261001-r1.json"
+    },
+    {
+      "Reloads": [
+        "E1M2",
+        "E2M1",
+        "E3M1",
+        "E1M2"
+      ],
+      "EncodedStripsCompared": 112,
+      "ProcessesPreserved": true,
+      "Workers": 16,
+      "FreshResourcePixelsCompared": 256000,
+      "RawSha256": "25E445236C96C1C82432D1EBF953319EAFF23C11C3FC96CF7992DFFBE44F260E",
+      "WorkerPixelsCompared": 448000,
+      "Style": "AnsiArt",
+      "RawReport": "local/session-worker-resource-AnsiArt-20261001-r1.json"
+    }
+  ]
+}

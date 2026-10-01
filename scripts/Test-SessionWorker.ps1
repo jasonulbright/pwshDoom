@@ -1,7 +1,7 @@
 #requires -Version 7.4
 # SPDX-License-Identifier: GPL-2.0-or-later
 param([string]$Wad='C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\base\DOOM.WAD',
-    [ValidateSet('Classic','Matrix','AnsiArt')][string]$Style='Classic',[ValidateRange(1,32)][int]$Workers=16,[string]$Output="$PSScriptRoot/../local/session-worker.json")
+    [ValidateSet('Classic','Matrix','AnsiArt')][string]$Style='Classic',[ValidateRange(1,32)][int]$Workers=16,[switch]$ResourceReuse,[string]$Output="$PSScriptRoot/../local/session-worker.json")
 $ErrorActionPreference='Stop'
 if(Test-Path -LiteralPath $Output){throw 'Use a fresh result path.'}
 $bundle=& "$PSScriptRoot/Build-EngineBundle.ps1";. $bundle
@@ -28,7 +28,7 @@ try{
     $content=[GameContent]::new(@('-iwad',$Wad));$o=[GameOptions]::new();$o.GameMode=$content.Wad.GameMode
     $game=[DoomGame]::new($content,$o);$cmds=[TicCmd[]]::new(4);for($i=0;$i -lt 4;$i++){$cmds[$i]=[TicCmd]::new()}
     $game.DeferedInitNew([GameSkill]::Medium,1,1);$null=$game.Update($cmds)
-    $context=New-FastRenderContext $content $game.World;$palette=[int[][]]::new(256)
+    $context=New-FastRenderContext $content $game.World -CacheResources:$ResourceReuse;$palette=[int[][]]::new(256)
     for($i=0;$i -lt 256;$i++){$palette[$i]=@($content.Palette.Data[3*$i],$content.Palette.Data[3*$i+1],$content.Palette.Data[3*$i+2])}
     $pool=New-GameRenderPool $context $null $Workers -Style $Style -GlyphSet Katakana;$pids=@($pool.Workers.Process.Id)
     $codec=if($Style -eq 'Classic'){New-CodecContext $palette}else{New-CharacterCodecContext $palette $Style -GlyphSet Katakana}
@@ -40,20 +40,43 @@ try{
     Assert-WorkerImage $rows 988 -Menu
     Submit-GameRender $pool $columns -AutomapPixels -Tic 989 -ColumnOffset 11 -RowOffset 3 -FrameNumber 321;Wait-GameRender $pool -ReadPixels
     Assert-WorkerImage $rows 989 -Automap
-    $oldHash=(Get-FileHash -LiteralPath $pool.Assets).Hash
-    $game.DeferedInitNew([GameSkill]::Medium,1,2);$null=$game.Update($cmds)
-    $context=New-FastRenderContext $content $game.World
+    $maps=if($ResourceReuse){@(@(1,2),@(2,1),@(3,1),@(1,2))}else{@(,@(1,2))}
+    foreach($target in $maps){
+    $oldHash=(Get-FileHash -LiteralPath $pool.Assets).Hash;$previous=$context
+    $game.DeferedInitNew([GameSkill]::Medium,$target[0],$target[1]);$null=$game.Update($cmds)
+    $context=if($ResourceReuse){New-FastRenderContext $content $game.World -Resources $previous}else{New-FastRenderContext $content $game.World}
+    if($ResourceReuse){
+        foreach($field in 'Pixels','Depth','Planes','TopClip','BottomClip','SegmentGeometry','SectorFloorHeightData'){
+            if([object]::ReferenceEquals($context[$field],$previous[$field])){throw "Reused mutable $field"}
+        }
+        foreach($field in 'Textures','Patches','Hud','SpriteAtlas','RenderAssetCache'){
+            if(-not [object]::ReferenceEquals($context[$field],$previous[$field])){throw "Did not reuse immutable $field"}
+        }
+        $rejected=$false
+        try{$null=New-FastRenderContext ([object]::new()) $game.World -Resources $context}catch{
+            if($_.Exception.Message -ne 'Render resources must belong to the same GameContent instance.'){throw};$rejected=$true
+        }
+        if(-not $rejected){throw 'Accepted resources from a different content instance.'}
+    }
     $context.PlaneSpanBoundaries=[int[]]@($pool.Workers|ForEach-Object {$_.End})
     Write-GameRenderAssets $context $palette $pool.Assets
     if((Get-FileHash -LiteralPath $pool.Assets).Hash -eq $oldHash){throw 'Map asset test did not change geometry.'}
     Update-GameRenderAssets $pool
     $snapshot=New-GameRenderSnapshot $game;Set-GameRenderSnapshot $context $snapshot;Invoke-FastRender $context
+    if($ResourceReuse){
+        $oracle=New-FastRenderContext $content $game.World
+        $oracle.PlaneSpanBoundaries=$context.PlaneSpanBoundaries
+        Set-GameRenderSnapshot $oracle $snapshot;Invoke-FastRender $oracle
+        if(-not [Linq.Enumerable]::SequenceEqual([byte[]]$oracle.Pixels,[byte[]]$context.Pixels)){throw 'Reused resources differ from independently converted WAD resources.'}
+        $checks.Add(@{Episode=$target[0];Map=$target[1];FreshResourcePixelsCompared=64000;PrivateScratch=$true;ForeignContentRejected=$true})
+    }
     Submit-GameRender $pool $snapshot -ColumnOffset 11 -RowOffset 3 -FrameNumber 321;Wait-GameRender $pool -ReadPixels
     Assert-WorkerImage $context.Pixels $snapshot.Tic
     if(($pids -join ',') -ne (@($pool.Workers.Process.Id) -join ',')){throw 'Worker processes restarted during reload.'}
+    }
 }catch{$failure=$_.ToString();throw}finally{
-    @{FinishedUtc=[DateTime]::UtcNow.ToString('o');Error=$failure;Style=$Style;GlyphSet='Katakana';Workers=$Workers;Checks=$checks.ToArray();WorkerProcessesPreserved=$null -eq $failure;
-        Meaning='Actual worker processes: independently constructed column/row-major screen equivalence and encoded strip equivalence, then changed E1M2 assets and real rasterization against the serial reference without restarting workers. This is a transport/lifecycle check, not campaign completion or a performance benchmark.'}|ConvertTo-Json -Depth 6|Set-Content -LiteralPath $Output
+    @{FinishedUtc=[DateTime]::UtcNow.ToString('o');Error=$failure;Style=$Style;GlyphSet='Katakana';Workers=$Workers;ResourceReuse=[bool]$ResourceReuse;Checks=$checks.ToArray();WorkerProcessesPreserved=$null -eq $failure;
+        Meaning='Actual worker processes: independent column/row-major screen and encoded strip equivalence, then changed-map rasterization against the serial reference without restarting workers. ResourceReuse adds E1M2/E2M1/E3M1/E1M2 sky reloads, fresh-resource pixel oracles, private mutable scratch and foreign-content rejection. This is a transport/lifecycle check, not campaign completion or a performance benchmark.'}|ConvertTo-Json -Depth 6|Set-Content -LiteralPath $Output
     if($null -ne $pool){Close-GameRenderPool $pool};if($null -ne $content){$content.Dispose()}
 }
-"PASS: $Style screen/menu/automap transport and map reload, 256,000 pixels and $($Workers*4) encoded strips."
+"PASS: $Style screen/menu/automap transport and $($maps.Count) map reloads, $((3+$maps.Count)*64000) worker pixels and $($Workers*(3+$maps.Count)) encoded strips."

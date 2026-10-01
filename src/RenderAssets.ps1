@@ -27,9 +27,33 @@ function Write-GameRenderAssets {
             @{Rotate=$_.Rotate;Flip=$_.Flip;Patches=@($_.Patches | ForEach-Object {$patchIds[$_]})}
         })
     }
+    # Only contexts explicitly opting into immutable resource reuse may cache.
+    # Preserve v7 transport: regenerate map metadata, bulk-copy the static body.
+    $cache=if($Context.ContainsKey('RenderAssetCache')){$Context.RenderAssetCache}else{$null}
+    $hit=$null -ne $cache -and $cache.ContainsKey('Body') -and
+        [object]::ReferenceEquals($cache.Flats,$Context.Flats) -and
+        [object]::ReferenceEquals($cache.Colors,$Context.Colors) -and $cache.Patches.Count -eq $patches.Count
+    if($hit){for($i=0;$i -lt $patches.Count;$i++){
+        if(-not [object]::ReferenceEquals($cache.Patches[$i],$patches[$i])){$hit=$false;break}
+    }}
+    if($null -ne $cache -and -not $hit){
+        $stream=[IO.MemoryStream]::new();$bodyWriter=[IO.BinaryWriter]::new($stream)
+        try{
+            Write-GameRenderAssetBody $Context $patches $bodyWriter
+            $bodyWriter.Flush();$cache.Body=$stream.ToArray()
+            $cache.Patches=$patches.ToArray();$cache.Flats=$Context.Flats;$cache.Colors=$Context.Colors
+        }finally{$bodyWriter.Dispose();$stream.Dispose()}
+    }
     $writer=[IO.BinaryWriter]::new([IO.File]::Create($Path))
     try {
-        $writer.Write('pwshDoom-assets-v7');$writer.Write(($meta | ConvertTo-Json -Depth 12 -Compress));$writer.Write($patches.Count)
+        $writer.Write('pwshDoom-assets-v7');$writer.Write(($meta | ConvertTo-Json -Depth 12 -Compress))
+        if($null -ne $cache){$writer.Write([byte[]]$cache.Body)}else{Write-GameRenderAssetBody $Context $patches $writer}
+    } finally {$writer.Dispose()}
+}
+
+function Write-GameRenderAssetBody {
+    param($Context,$Patches,[IO.BinaryWriter]$Writer)
+        $writer.Write([int]$patches.Count)
         [byte[]]$sampleBlock=[byte[]]::new(128)
         foreach($p in $patches) {
             $writer.Write([int]$p.Width);$writer.Write([int]$p.Height);$writer.Write([int]$p.Left);$writer.Write([int]$p.Top)
@@ -61,7 +85,6 @@ function Write-GameRenderAssets {
         }
         $writer.Write($Context.Colors.Length)
         foreach($colors in $Context.Colors){$writer.Write($colors.Length);$writer.Write($colors)}
-    } finally {$writer.Dispose()}
 }
 
 function Read-GameRenderAssets {

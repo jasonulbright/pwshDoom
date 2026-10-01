@@ -105,7 +105,13 @@ function Publish-SimulationMapChange {
     $assetWatch=[Diagnostics.Stopwatch]::StartNew()
     $assetsReused=$assetKey -eq $script:rendererAssetMapKey
     if(-not $assetsReused){
-        $context=New-FastRenderContext $content $game.World;Write-GameRenderAssets $context $palette $Assets
+        $context=New-FastRenderContext $content $game.World -Resources $context
+        $script:loadingBoundary.RendererContextMilliseconds=$assetWatch.Elapsed.TotalMilliseconds
+        $bodyBefore=$context.RenderAssetCache.Body;$writeWatch=[Diagnostics.Stopwatch]::StartNew()
+        Write-GameRenderAssets $context $palette $Assets
+        $script:loadingBoundary.RendererAssetWriteMilliseconds=$writeWatch.Elapsed.TotalMilliseconds
+        $script:loadingBoundary.RendererResourceBodyReused=[object]::ReferenceEquals($bodyBefore,$context.RenderAssetCache.Body)
+        $script:loadingBoundary.RendererResourceCacheBytes=$context.RenderAssetCache.Body.Length
         $script:rendererAssetMapKey=$assetKey
     }
     $script:loadingBoundary.RendererAssetsReused=$assetsReused
@@ -137,7 +143,7 @@ try {
     $game.DeferedInitNew([GameSkill]($Skill-1),$Episode,$Map);$null=$game.Update($commands)
     for($i=0;$i -lt 140;$i++){$commands[0].ForwardMove=25;$commands[0].Buttons=1;if($i -gt 70){$commands[0].AngleTurn=640};$null=$game.Update($commands)}
     foreach($cmd in $commands){$cmd.Clear()};$game.DeferedInitNew([GameSkill]($Skill-1),$Episode,$Map);$null=$game.Update($commands)
-    $context=New-FastRenderContext $content $game.World;$palette=[int[][]]::new(256)
+    $context=New-FastRenderContext $content $game.World -CacheResources;$palette=[int[][]]::new(256)
     for($i=0;$i -lt 256;$i++){$palette[$i]=@($content.Palette.Data[3*$i],$content.Palette.Data[3*$i+1],$content.Palette.Data[3*$i+2])}
     Write-GameRenderAssets $context $palette $Assets
     $script:rendererAssetMapKey='{0}|{1}|{2}|{3}|{4}' -f $game.Options.GameMode,$game.Options.GameVersion,$game.Options.MissionPack,$game.Options.Episode,$game.Options.Map

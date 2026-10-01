@@ -61,7 +61,12 @@ function Get-RenderPatch {
 }
 
 function New-FastRenderContext {
-    param($Content,$World)
+    param($Content,$World,$Resources,[switch]$CacheResources)
+    # Resource reuse is opt-in: callers must treat this WAD-derived graph as
+    # immutable. Map geometry, sector state and all raster scratch stay private.
+    if($null -ne $Resources -and -not [object]::ReferenceEquals($Resources.Content,$Content)){
+        throw 'Render resources must belong to the same GameContent instance.'
+    }
     $map=$World.Map
     [byte[][]]$planeFlatData=[byte[][]]::new($Content.Flats.Flats.Length)
     for([int]$i=0;$i -lt $planeFlatData.Length;$i++){
@@ -111,6 +116,12 @@ function New-FastRenderContext {
             $ctx.NodeGeometry[$boxOffset+3]=($b[0].Data-$b[1].Data)/131072.0
         }
     }
+    if($null -ne $Resources){
+        foreach($field in 'Patches','Textures','Hud','SpriteAtlas','Lighting','PlaneFlatData'){$ctx[$field]=$Resources[$field]}
+        $ctx.Sky=if($Resources.ContainsKey('SkyTextureReference') -and [object]::ReferenceEquals($Resources.SkyTextureReference,$map.SkyTexture)){
+            $Resources.Sky
+        }else{ConvertTo-RenderPatch $map.SkyTexture.Composite}
+    }else{
     # Prepare all wall textures once. No object-valued fixed point operations in pixel loops.
     for($i=0;$i -lt $Content.Textures.Textures.Count;$i++) {
         $ctx.Textures[$i]=ConvertTo-RenderPatch $Content.Textures.Textures[$i].Composite
@@ -131,6 +142,11 @@ function New-FastRenderContext {
     }
     $ctx.Hud.Percent=Get-RenderPatch $ctx $hudPatches.TallPercent
     $ctx.Hud.Minus=Get-RenderPatch $ctx $hudPatches.TallMinus
+    }
+    $ctx.SkyTextureReference=$map.SkyTexture
+    if($CacheResources -or $null -ne $Resources){
+        $ctx.RenderAssetCache=if($null -ne $Resources -and $Resources.ContainsKey('RenderAssetCache')){$Resources.RenderAssetCache}else{@{}}
+    }
     $planeTables=Get-FastPlaneTables
     $ctx.PlaneColumnAngles=$planeTables.ColumnAngles;$ctx.PlaneDistanceScales=$planeTables.DistanceScales;$ctx.PlaneRowSlopes=$planeTables.RowSlopes;$ctx.PlaneFineSine=$planeTables.FineSine;$ctx.TanToAngleTable=$planeTables.TanToAngle
     return $ctx

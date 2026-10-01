@@ -1,0 +1,214 @@
+{
+  "FinishedUtc": "2026-10-01T19:08:54.377759-04:00",
+  "Runs": [
+    {
+      "Run": 1,
+      "SourceCommit": "c72856e plus working-tree resource cache; exact capture hashes authoritative",
+      "Role": "Sequential route repeat, no concurrent recording/export/qualification",
+      "RuntimeSourceSha256": "EDF42CED8AFF175AD95B19521D5BDAB229F496E7E194405073B2DC04F2AB7277",
+      "HostSources": [
+        {
+          "Sha256": "7CE797D7E9A3A5F8167BF5CF949E674A25B97BC31B8F217549085E2BBE0E6082",
+          "Path": "Start-Doom.ps1"
+        },
+        {
+          "Sha256": "F4EFA55C16503FD964693EA808A401FC6BF6DFBE13F4B07AAF90A4852F0AB9F7",
+          "Path": "scripts/Invoke-Doom.ps1"
+        },
+        {
+          "Sha256": "003395B53CE668E692476912D8E1F72165C7C322338B5B9E8F290A8DFFED3E3F",
+          "Path": "scripts/Invoke-SimulationWorker.ps1"
+        }
+      ],
+      "Settings": {
+        "Style": "Classic",
+        "FontSize": 5,
+        "Workers": 16,
+        "Maximized": true,
+        "Sound": true,
+        "PowerShell": "7.6.6"
+      },
+      "Commands": 1747,
+      "GameExit": "ReplayEnd",
+      "ActiveSimulationTicsPerSecond": 34.9798126235356,
+      "CompletedWritesPerActiveSecond": 56.68451604878609,
+      "StartupToFirstWriteSeconds": 40.1139453,
+      "GlobalDisplayTransitionsPerSecond": 51.53010411494723,
+      "GlobalDisplayGapMs": {
+        "Count": 2800,
+        "Mean": 19.400369214285735,
+        "Median": 18.1757,
+        "P95": 30.3064,
+        "Max": 4563.6257,
+        "P99": 42.447
+      },
+      "DroppedPresents": 3,
+      "PresentCount": 2804,
+      "TickLatenessMs": {
+        "Count": 1747,
+        "Mean": 14.221389533077135,
+        "Median": 7.972428571425553,
+        "P95": 31.920714285714325,
+        "Max": 243.29641428571426,
+        "P99": 213.06114285714284
+      },
+      "MaximumPendingCommands": 2,
+      "ContiguousWindows": [
+        {
+          "SwapChains": [
+            {
+              "DisplayTransitions": 2591,
+              "Submitted": 2594,
+              "DisplayTransitionsPerSecond": 57.99809408995661,
+              "DisplayIntervalMs": {
+                "Count": 2590,
+                "Mean": 17.23876243243244,
+                "Median": 18.1699,
+                "P95": 30.2641,
+                "Max": 139.3841,
+                "P99": 42.4357
+              },
+              "Dropped": 3,
+              "SwapChain": "2054117897440"
+            }
+          ],
+          "MenuScreen": 0,
+          "Seconds": 44.6738818,
+          "StartQpc": 1691454748092,
+          "LastTic": 1559,
+          "Map": 1,
+          "State": 0,
+          "BoundaryGapMs": null,
+          "Generation": 1,
+          "CompletedWrites": 2620,
+          "EndQpc": 1691901486910,
+          "FirstTic": 0,
+          "Episode": 1,
+          "ObservedTicProgressPerSecond": 34.89734800704066,
+          "ScreenKind": 0
+        },
+        {
+          "SwapChains": [
+            {
+              "DisplayTransitions": 135,
+              "Submitted": 135,
+              "DisplayTransitionsPerSecond": 43.19671981388421,
+              "DisplayIntervalMs": {
+                "Count": 134,
+                "Mean": 23.15680000000001,
+                "Median": 18.22365,
+                "P95": 36.3854,
+                "Max": 66.7582,
+                "P99": 48.5016
+              },
+              "Dropped": 0,
+              "SwapChain": "2054117897440"
+            }
+          ],
+          "MenuScreen": 0,
+          "Seconds": 3.1252373,
+          "StartQpc": 1691901882321,
+          "LastTic": 1675,
+          "Map": 1,
+          "State": 1,
+          "BoundaryGapMs": 39.5411,
+          "Generation": 1,
+          "CompletedWrites": 136,
+          "EndQpc": 1691933134694,
+          "FirstTic": 1560,
+          "Episode": 1,
+          "ObservedTicProgressPerSecond": 36.79720576738285,
+          "ScreenKind": 1
+        },
+        {
+          "SwapChains": [
+            {
+              "DisplayTransitions": 73,
+              "Submitted": 73,
+              "DisplayTransitionsPerSecond": 37.26413842249161,
+              "DisplayIntervalMs": {
+                "Count": 72,
+                "Mean": 26.767513888888885,
+                "Median": 24.273449999999997,
+                "P95": 36.3347,
+                "Max": 48.5123,
+                "P99": 48.5123
+              },
+              "Dropped": 0,
+              "SwapChain": "2054117897440"
+            }
+          ],
+          "MenuScreen": 0,
+          "Seconds": 1.958988,
+          "StartQpc": 1691978723968,
+          "LastTic": 1745,
+          "Map": 2,
+          "State": 0,
+          "BoundaryGapMs": 4558.9274,
+          "Generation": 2,
+          "CompletedWrites": 75,
+          "EndQpc": 1691998313848,
+          "FirstTic": 1676,
+          "Episode": 1,
+          "ObservedTicProgressPerSecond": 35.22226782399892,
+          "ScreenKind": 0
+        }
+      ],
+      "MapReloadPausedSeconds": 4.502245599999995,
+      "SessionPausedSeconds": 0.0,
+      "PeakSampledGamePrivateGiB": 5.487003326416016,
+      "PeakSampledGameWorkingSetGiB": 6.830654144287109,
+      "GameProcessSampleCpuSeconds": 473.859375,
+      "SamplingSpanSeconds": 54.3257556,
+      "SampleCpuUtilizationOf20LogicalCoresPercent": 43.612773514741505,
+      "SubmittedAndReturnedAudioFrames": 2222640,
+      "SoftwareStarvationObservations": 0,
+      "RebufferResumes": 0,
+      "Files": [
+        {
+          "Path": "local/resource-pacing-classic-max-r1-game.json",
+          "Sha256": "6A4A2C0F047F6AA6B06570255B335254464231E721A5E2455FF2B834919F4D73"
+        },
+        {
+          "Path": "local/resource-pacing-classic-max-r1-capture.json",
+          "Sha256": "AE41236C51E5BC087DB0017C00961584F07F769A2BF2FE28031F97BC132B0504"
+        },
+        {
+          "Path": "local/resource-pacing-classic-max-r1-frames.csv",
+          "Sha256": "5A2557FC8E6813643B1D333DCF24F88FB0FBF5520705910A8DD2FBAACAC3DF99"
+        },
+        {
+          "Path": "local/resource-pacing-classic-max-r1-summary.json",
+          "Sha256": "351FB17BC2D0CDCFF6A87A4E1201D89461C86227D84CC75EFA710E141A7CC1D3"
+        }
+      ],
+      "LoadingBoundaries": [
+        {
+          "RendererAssetPreparationMilliseconds": 102.2275,
+          "RendererAssetWriteMilliseconds": 80.4694,
+          "RendererAssetsReused": false,
+          "EndQpc": 1691978178390,
+          "Episode": 1,
+          "Map": 2,
+          "AudioDrain": {
+            "ThroughSequence": 1674,
+            "CompletedFrames": 2118060,
+            "WaitMilliseconds": 317.6567,
+            "AcknowledgedQpc": 1691936038024
+          },
+          "TotalMilliseconds": 4516.9649,
+          "RendererResourceBodyReused": true,
+          "RendererContextMilliseconds": 19.8727,
+          "StartQpc": 1691933008741,
+          "RendererResourceCacheBytes": 37614992,
+          "Tic": 1675,
+          "BeforeAssetsMilliseconds": 1187.9462
+        }
+      ]
+    }
+  ],
+  "AuditSha256": "D8FCF3B2295503FCF071F859A25AF762BD53D628D0F0D2FE4726CB877B60DB61",
+  "MachineInventorySha256": "8762EE91FFC252CCA36F6AE5A26D1C805D2D6971B7195FA4E9C7EDD5665326FF",
+  "ProtocolSha256": "CEE517AA1E07215033F69A02B6FAC8DDAB157C51C8F8FE4B5C06AFC6F6C4E26E",
+  "Meaning": "One retained actual-device Classic ordinary-input E1M1 completion/intermission/E1M2 continuations with identical runtime source. This is a single post-change check, not three-repeat qualification. No passing three-repeat qualification or causal speed comparison is claimed. Independent CSV display-count/p99 checks match the analyzer. CPU deltas omit startup before readiness and final unsampled tails; sampled memory is a lower bound on peak. Main swapchain is selected by most in-window display events; distinct Doom framebuffer identity, acoustics, second hardware and full-campaign pacing remain unverified. Includes the final readable notice host and the immutable asset-body cache."
+}

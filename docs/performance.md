@@ -1088,3 +1088,43 @@ omit startup before readiness and final unsampled tails. These tests measure
 software queue behavior, not acoustics or physical speaker latency. See the
 [source-pinned receipt](../results/loaded-classic-route-pacing-20261001.json)
 for all raw hashes, window/stage timing, CPU samples and audio counts.
+
+## Map asset preparation — October 1, 2026
+
+The simulation now reuses converted WAD textures, sprite/HUD patches and
+lighting tables, while each map gets fresh geometry and mutable render state.
+An opt-in immutable-resource cache retains the v7 binary body and regenerates
+its map/palette metadata. Its identity checks invalidate the body when patches,
+sky or flat/color-array identities change; callers that mutate resources must
+use the default uncached context. One body is retained, not a body per map.
+
+Three sequential ABBA stage trials compare a fixed E1M2 snapshot after initial
+E1M1 preparation. Fresh context/write preparation takes **4.09–4.90 seconds**;
+resource reuse takes **0.081–0.112 seconds**. All twelve direct and read-back
+frames have the same SHA-256. Initial cache construction still costs 1.173
+seconds for conversion and 3.905 seconds for serialization, and retains
+37,614,992 bytes (35.87 MiB). Read-back still takes 1.34–1.58 seconds in this
+single-process workload. These numbers do not measure concurrent worker
+reloads, total campaign load or Terminal display pacing.
+
+The sixteen-worker regression passes all three styles across E1M2, E2M1,
+E3M1 and a return to E1M2, including sky changes and independent fresh-resource
+pixel comparisons. Worker PIDs remain unchanged. See the
+[source-pinned stage and worker receipt](../results/map-render-resource-cache-20261001.json).
+Reproduce with official PowerShell 7.6.6, a fresh output path and no concurrent
+qualification or recording:
+
+~~~powershell
+pwsh -NoProfile -File scripts/Measure-MapRenderAssets.ps1 -Output local/map-render-assets-new.json
+pwsh -NoProfile -File scripts/Test-SessionWorker.ps1 -ResourceReuse -Style Classic -Output local/session-worker-resource-new.json
+~~~
+
+One subsequent live Classic/audio route completes all 1,747 commands and enters
+E1M2. Its context/write preparation takes 102 ms with the body cache reused;
+the total loading boundary remains **4.517 seconds**. Global Terminal display
+rate is 51.530 transitions/sec, active simulation 34.980 tics/sec, p99 tic
+lateness 213 ms, startup 40.114 seconds and sampled game private memory 5.487
+GiB. All submitted audio frames return cleanly. This single check fails the
+frozen gate, does not establish a causal full-route speedup and leaves worker
+deserialization as a measured remaining cost. See the
+[live receipt](../results/resource-cache-loaded-classic-20261001-r1.json).
