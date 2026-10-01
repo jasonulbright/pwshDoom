@@ -18,6 +18,7 @@ if($MusicCatalog){$Sound=$true}
 . "$PSScriptRoot/../src/SimulationProcess.ps1";. "$PSScriptRoot/../src/ConsoleInput.ps1"
 . "$PSScriptRoot/../src/Viewport.ps1"
 . "$PSScriptRoot/../src/CharacterCodec.ps1"
+. "$PSScriptRoot/../src/TerminalCodec.ps1"
 . "$PSScriptRoot/../src/PaletteCodec.ps1"
 . "$PSScriptRoot/../src/InputReplay.ps1"
 . "$PSScriptRoot/../src/SessionMenu.ps1"

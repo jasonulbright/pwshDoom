@@ -1,12 +1,12 @@
 # Doom in PowerShell: how far can a terminal go?
 
-Research article draft · Updated 2026-09-29. Preview.3 is the latest tagged public package; the local R17 development handoff uses implementation commit `00405deebef6b4e8477c9c9316987b82fbc9064d` and a clean package source at `260cbf00cc35df45c3ffc6c5d014f41247e88e60`. R17 adds stationary-view automap-discovery reuse, with exact map-bitset comparisons and a nine-map Episode 1 load/idle/render smoke. The four-second packaged audio check returns all submitted music frames but records a queue-starvation observation after the final packet. The complete post-fix human Episode 1 route remains pending; this article describes measured progress, not a finished campaign certification. See the [R17 candidate](../results/episode1-current-human-candidate-20260929-r17.json) and [package receipt](../results/r17-playtest-package-validation-20260929.json).
+Research article draft · Updated 2026-10-01. [Preview.4](https://github.com/jasonulbright/pwshDoom/releases/tag/v0.1.0-preview.4), pinned to `8a1561d`, is the latest public package. Its fresh validation covers all 36 Ultimate Doom map starts, campaign/session mechanics and all three rendering modes. The public ZIP was downloaded and verified against the local package, and an extracted eight-second actual-device startup returned all submitted audio frames. Later development restores the previously missing pickup/key-lock notices using the user's IWAD font; that work is undergoing live validation and is absent from Preview.4. The complete human Episode 1 route and broader release gates remain pending. See the [Preview.4 scope](release-preview4.md), [validation](../results/preview4-validation-20260929.json) and [public-package receipt](../results/preview4-package-validation-20260929.json).
 
 ## The question
 
 Could PowerShell run Doom's game logic and draw its world inside Windows Terminal? The experiment uses a 320×200 Doom image, preserves the game's 35-tic simulation, and targets 60 displayed updates per second. A second goal grew out of it: turn the same world into a green Matrix view with Japanese characters, plus a full-color character-art mode.
 
-The answer is a qualified yes. A real Doom-derived game foundation, renderer, gameplay loop, terminal encoders and audio algorithms now run in PowerShell. The R17 source passes a nine-map Episode 1 load/idle/render smoke and exact automap-discovery comparisons for all 36 Ultimate Doom map starts. The broader 36-map load/render smoke belongs to R16 and was not repeated after the R17 source change. Focused tests also cover campaign transitions, menus, saves, boss progression and all three display styles. That is meaningful engine work, but it is not proof that a human can finish every map. The one continuous Episode 1 playthrough, including its secret-map detour and finale, remains the current human test.
+The answer is a qualified yes. A real Doom-derived game foundation, renderer, gameplay loop, terminal encoders and audio algorithms now run in PowerShell. Preview.4 freshly passes the 36-map load/idle/render sweep under PowerShell 7.6.6. Focused tests cover campaign transitions, menus, saves, boss progression and all three display styles. That is meaningful engine work, but it is not proof that a human can finish every map. The one continuous Episode 1 playthrough, including its secret-map detour and finale, remains the current human test.
 
 ## What runs where
 
@@ -60,7 +60,7 @@ The machine approaches Doom's 35-tic simulation rate in some runs, but the E3M6 
 
 ## A room is not a campaign
 
-The all-map sweep loads each of the 36 Ultimate Doom maps, advances a short simulation, and renders frames. The R17 source freshly loads, idles, and renders all nine Episode 1 maps, including E1M9; broader 36-map smoke coverage is inherited from R16. Separate HMP input routes complete E1M1–E1M4 through ordinary exits; transition tests cover the E1M3 secret path, return to E1M4, map-8 boss triggers and finale states. These checks find structural defects quickly, but none substitute for ordinary play across a complete episode.
+The all-map sweep loads each of the 36 Ultimate Doom maps, advances a short simulation, and renders frames. Preview.4 repeats that sweep on its packaged implementation source. Separate HMP input routes complete E1M1–E1M4 through ordinary exits; transition tests cover the E1M3 secret path, return to E1M4, map-8 boss triggers and finale states. These checks find structural defects quickly, but none substitute for ordinary play across a complete episode.
 
 The R17 human route is:
 
