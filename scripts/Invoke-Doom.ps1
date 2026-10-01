@@ -111,7 +111,7 @@ try {
     $menu.Settings=Copy-DoomUserSettings $preferences
     if($null -eq $snapshot){throw 'Initial simulation snapshot was not published.'}
     $context=Read-GameRenderAssets $simulation.Assets
-    $messageCodecs=New-DoomPaletteCodecs $context.PlayPal $Style -GlyphSet $GlyphSet;$context.AssetPath=$simulation.Assets
+    $messageCodecs=New-DoomPlayerMessageCodecs $context.PlayPal $Style;$context.AssetPath=$simulation.Assets
     $paletteBytes=[byte[]]::new(768)
     for($i=0;$i -lt 256;$i++){for($j=0;$j -lt 3;$j++){$paletteBytes[3*$i+$j]=$context.Palette[$i][$j]}}
     [IO.File]::WriteAllBytes("$PSScriptRoot/../local/palette.bin",$paletteBytes)

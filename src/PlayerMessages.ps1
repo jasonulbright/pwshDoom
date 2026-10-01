@@ -1,5 +1,13 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 # Bounded terminal notices. Game message timing stays on the 35 Hz simulation.
+function New-DoomPlayerMessageCodecs {
+    param([byte[]]$PlayPal,[ValidateSet('Classic','Matrix','AnsiArt')][string]$Style)
+    $palette=Get-DoomPaletteRgb $PlayPal 0
+    if($Style -eq 'Classic'){return ,([object[]]@((New-CodecContext $palette -LazyCells)))}
+    # The 160-column styles use their larger terminal font for notices; reducing
+    # seven-pixel STCFN letters to four pixels makes their shapes unreadable.
+    return ,([object[]]@())
+}
 function Get-DoomPlayerMessagePixels {
     param($Graphics,[byte[]]$Message)
     $text=[Text.Encoding]::ASCII.GetString($Message)
@@ -33,10 +41,9 @@ function Get-DoomPlayerMessageOutput {
         [ValidateSet('Classic','Matrix','AnsiArt')][string]$Style='Classic',
         [byte[]]$Pixels,$Codecs)
     if($MessageTics -le 0 -or -not $Message -or $ScreenKind -notin 0,3 -or -not $Viewport.Fits){return ,([byte[]]::new(0))}
-    if($null -ne $Pixels){
+    if($null -ne $Pixels -and $Style -eq 'Classic'){
         if($Pixels.Length -ne 2560 -or $null -eq $Codecs){throw 'Player notice requires its 320x8 pixels and codec.'}
-        if($Style -eq 'Classic'){return ,(ConvertTo-AnsiStrip $Pixels 320 8 0 320 $Codecs[0] -ColumnOffset $Viewport.Left -RowOffset $Viewport.Top)}
-        return ,(ConvertTo-MenuStrip $Pixels 320 8 0 320 $Codecs[0] -ColumnOffset $Viewport.Left -RowOffset $Viewport.Top)
+        return ,(ConvertTo-AnsiStrip $Pixels 320 8 0 320 $Codecs[0] -ColumnOffset $Viewport.Left -RowOffset $Viewport.Top)
     }
     $text=($Message -replace '[^\x20-\x7e]',' ').ToUpperInvariant()
     if($text.Length -gt $Viewport.RequiredColumns){$text=$text.Substring(0,$Viewport.RequiredColumns)}

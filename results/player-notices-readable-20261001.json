@@ -1,0 +1,238 @@
+{
+  "FinishedUtc": "2026-10-01T22:42:04.9169605Z",
+  "Error": null,
+  "Checks": [
+    {
+      "Passed": true,
+      "Name": "Bitmap notice contains original font pixels"
+    },
+    {
+      "Passed": true,
+      "Name": "Unchanged notice reuses bitmap without redrawing"
+    },
+    {
+      "Passed": true,
+      "Name": "Long bitmap notice clips to the source width"
+    },
+    {
+      "Passed": true,
+      "Name": "Locked-door handler emits PD_BLUEK for 140 tics"
+    },
+    {
+      "Passed": true,
+      "Name": "Locked-door handler emits PD_YELLOWK for 140 tics"
+    },
+    {
+      "Passed": true,
+      "Name": "Locked-door handler emits PD_REDK for 140 tics"
+    },
+    {
+      "Passed": true,
+      "Name": "Message transport strips controls and normalizes ASCII"
+    },
+    {
+      "Passed": true,
+      "Name": "Message payload is bounded to 512 bytes"
+    },
+    {
+      "Passed": true,
+      "Name": "Expired message has no payload"
+    },
+    {
+      "Passed": true,
+      "Name": "Classic notice fits centered viewport"
+    },
+    {
+      "Passed": true,
+      "Name": "Classic hides notices on screen kind 1"
+    },
+    {
+      "Passed": true,
+      "Name": "Classic hides notices on screen kind 2"
+    },
+    {
+      "Passed": true,
+      "Name": "Classic hides expired notice"
+    },
+    {
+      "Passed": true,
+      "Name": "Classic preserves notices on automap"
+    },
+    {
+      "Passed": true,
+      "Name": "Classic bitmap output occupies multiple readable rows"
+    },
+    {
+      "Passed": true,
+      "Name": "Classic Strips overlays notice after render bytes before frame end"
+    },
+    {
+      "Passed": true,
+      "Name": "Classic Batch overlays notice after render bytes before frame end"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix notice fits centered viewport"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix hides notices on screen kind 1"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix hides notices on screen kind 2"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix hides expired notice"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix preserves notices on automap"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix notice preserves complete readable letter shapes"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix notice has bright style color and black background"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix Strips overlays notice after render bytes before frame end"
+    },
+    {
+      "Passed": true,
+      "Name": "Matrix Batch overlays notice after render bytes before frame end"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt notice fits centered viewport"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt hides notices on screen kind 1"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt hides notices on screen kind 2"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt hides expired notice"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt preserves notices on automap"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt notice preserves complete readable letter shapes"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt notice has bright style color and black background"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt Strips overlays notice after render bytes before frame end"
+    },
+    {
+      "Passed": true,
+      "Name": "AnsiArt Batch overlays notice after render bytes before frame end"
+    },
+    {
+      "Passed": true,
+      "Name": "Fixture uses an actual E1M2 red locked door"
+    },
+    {
+      "Passed": true,
+      "Name": "RedLock expires after 140 simulation tics"
+    },
+    {
+      "Passed": true,
+      "Name": "Real armor pickup supplies message and inventory"
+    },
+    {
+      "Passed": true,
+      "Name": "ArmorPickup expires after 140 simulation tics"
+    },
+    {
+      "Passed": true,
+      "Name": "Actual simulation load publishes saved notice atomically"
+    },
+    {
+      "Passed": true,
+      "Name": "Actual worker transports exact original-font bitmap"
+    },
+    {
+      "Passed": true,
+      "Name": "Notice clock matches worker tic 1"
+    },
+    {
+      "Passed": true,
+      "Name": "Notice clock matches worker tic 35"
+    },
+    {
+      "Passed": true,
+      "Name": "Notice clock matches worker tic 36"
+    },
+    {
+      "Passed": true,
+      "Name": "Actual automap snapshot retains active notice"
+    },
+    {
+      "Passed": true,
+      "Name": "Notice clock matches worker tic 70"
+    },
+    {
+      "Passed": true,
+      "Name": "Notice clock matches worker tic 71"
+    },
+    {
+      "Passed": true,
+      "Name": "Notice clock matches worker tic 139"
+    },
+    {
+      "Passed": true,
+      "Name": "Notice clock matches worker tic 140"
+    },
+    {
+      "Passed": true,
+      "Name": "Actual worker clears expired message bytes"
+    }
+  ],
+  "RawReport": {
+    "Path": "local/player-messages-readable-r1.json",
+    "Sha256": "B7E90EBF64716F0422663C432C149E3FA71546C472558C4659A7E9B0AFAE620C"
+  },
+  "Fixture": {
+    "Path": "local/player-messages-readable-fixture-r1.json",
+    "Sha256": "0E4EF47E9CDEF4C496602958BBA218A2C440FA4C75AC0B7C227AD83159ABAC00"
+  },
+  "SaveRoot": "local/player-messages-readable-saves-r1",
+  "Sources": [
+    {
+      "Path": "src/PlayerMessages.ps1",
+      "Sha256": "77CB7FFDBADF112F1A1B84642B9CD90DF304A9B779B2F22411E9C279D15FEA1A"
+    },
+    {
+      "Path": "src/SimulationProcess.ps1",
+      "Sha256": "472B67E534DBC1AB262439CCD57E481B472AD3F40761E1B9518B946067E7DEAE"
+    },
+    {
+      "Path": "scripts/Invoke-Doom.ps1",
+      "Sha256": "F4EFA55C16503FD964693EA808A401FC6BF6DFBE13F4B07AAF90A4852F0AB9F7"
+    },
+    {
+      "Path": "scripts/Invoke-SimulationWorker.ps1",
+      "Sha256": "344C4E55CCFDB73DAAC1BD117C6EA92E86309F3DF5CBE2BCF011AE49C0A69F13"
+    },
+    {
+      "Path": "scripts/Test-PlayerMessages.ps1",
+      "Sha256": "029611301B577EA9E4571F90C25B344F24CA53701D5F2EECF8838D182865565B"
+    }
+  ],
+  "Meaning": "Fifty focused checks on final style-specific readable typography, actual key/pickup handlers, snapshot transport and saved-worker expiry. Does not qualify campaign completion, physical input or performance."
+}

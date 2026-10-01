@@ -57,10 +57,16 @@ try{
         foreach($kind in 1,2){Check "$style hides notices on screen kind $kind" ((Get-DoomPlayerMessageOutput 'BLUE KEY' 1 $kind $vp -Style $style).Length -eq 0)}
         Check "$style hides expired notice" ((Get-DoomPlayerMessageOutput 'BLUE KEY' 0 0 $vp -Style $style).Length -eq 0)
         Check "$style preserves notices on automap" ((Get-DoomPlayerMessageOutput 'BLUE KEY' 1 3 $vp -Style $style).Length -gt 0)
-        $codecs=New-DoomPaletteCodecs $content.Palette.Data $style
+        $codecs=New-DoomPlayerMessageCodecs $content.Palette.Data $style
         $pixels=Get-DoomPlayerMessagePixels $font ([Text.Encoding]::ASCII.GetBytes('YOU NEED A RED KEY'))
         $bitmapBytes=Get-DoomPlayerMessageOutput 'YOU NEED A RED KEY' 140 0 $vp -Style $style -Pixels $pixels -Codecs $codecs
-        Check "$style bitmap output occupies multiple readable rows" ([Text.Encoding]::UTF8.GetString($bitmapBytes).Contains("$([char]27)[$($vp.Top+2);$($vp.Left+1)H"))
+        if($style -eq 'Classic'){
+            Check 'Classic bitmap output occupies multiple readable rows' ([Text.Encoding]::UTF8.GetString($bitmapBytes).Contains("$([char]27)[$($vp.Top+2);$($vp.Left+1)H"))
+        }else{
+            $notice=[Text.Encoding]::UTF8.GetString($bitmapBytes)
+            Check "$style notice preserves complete readable letter shapes" ($notice.Contains('YOU NEED A RED KEY'))
+            Check "$style notice has bright style color and black background" ($notice.Contains($(if($style -eq 'Matrix'){'38;2;32;255;80;48;2;0;0;0'}else{'38;2;255;80;80;48;2;0;0;0'})))
+        }
         foreach($mode in 'Strips','Batch'){
             $stream=[IO.MemoryStream]::new();$context=New-DoomTerminalOutputContext
             Write-DoomTerminalFrame $context $stream @(@{Bytes=[byte[]]@(65,66)}) ([byte[]]@(1)) ([byte[]]@(2)) -Status $outputBytes -Mode $mode

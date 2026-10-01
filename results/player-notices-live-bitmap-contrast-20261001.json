@@ -1,0 +1,269 @@
+{
+  "FinishedUtc": "2026-10-01T22:36:51.926779+00:00",
+  "Error": null,
+  "Checks": [
+    {
+      "Name": "Classic completes every fixture command",
+      "Passed": true
+    },
+    {
+      "Name": "Classic matches independent checkpoints",
+      "Passed": true
+    },
+    {
+      "Name": "Classic capture completes without source drift",
+      "Passed": true
+    },
+    {
+      "Name": "Classic closes device and returns submitted frames",
+      "Passed": true
+    },
+    {
+      "Name": "Classic captured audio closes cleanly",
+      "Passed": true
+    },
+    {
+      "Name": "Classic merged video and timestamps preserved",
+      "Passed": true
+    },
+    {
+      "Name": "Classic all observed notice text/timers match independent oracle",
+      "Passed": true
+    },
+    {
+      "Name": "Classic observes active and expired notices",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix completes every fixture command",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix matches independent checkpoints",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix capture completes without source drift",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix closes device and returns submitted frames",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix captured audio closes cleanly",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix merged video and timestamps preserved",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix all observed notice text/timers match independent oracle",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix observes active and expired notices",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt completes every fixture command",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt matches independent checkpoints",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt capture completes without source drift",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt closes device and returns submitted frames",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt captured audio closes cleanly",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt merged video and timestamps preserved",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt all observed notice text/timers match independent oracle",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt observes active and expired notices",
+      "Passed": true
+    }
+  ],
+  "Runs": [
+    {
+      "Style": "Classic",
+      "FramesChecked": 449,
+      "ActiveNoticeFrames": 378,
+      "ExpiredNoticeFrames": 71,
+      "Commands": 350,
+      "Checkpoints": 11,
+      "SubmittedAudioFrames": 473760,
+      "QueueStarvationObservations": 0,
+      "RebufferResumes": 0,
+      "ActiveSimulationTicsPerSecond": 33.581444881579976,
+      "CompletedWritesPerActiveSecond": 43.368037389926144,
+      "SessionPauseSeconds": 6.661682200000001,
+      "MapReloadPauseSeconds": 0.39969839999999884,
+      "Files": [
+        {
+          "Path": "local/recordings/candidate-bitmap-classic-r2-game.json",
+          "Sha256": "4700198CCBF60C4734D340A5DAC72E05784B67A73564D069F7C694E022273800"
+        },
+        {
+          "Path": "local/recordings/candidate-bitmap-classic-r2-recording.json",
+          "Sha256": "1377E7242DE07F63BF09A4B9ACAF280DABF26C2D80D55D468E633DD830FEB963"
+        },
+        {
+          "Path": "local/recordings/candidate-bitmap-classic-r2-input.json",
+          "Sha256": "456D00AA103359BC26AE7942FCD60B75928C45B84EF1FBC1E2D64AE719C4BC29"
+        },
+        {
+          "Path": "local/recordings/candidate-bitmap-classic-r2-audio.json",
+          "Sha256": "C05D1D868DFDCBEB91E65C3B003C9BA5688D35FFCC9B81DE7F0C778B67695740"
+        },
+        {
+          "Path": "local/recordings/candidate-bitmap-classic-r2-audio.wav",
+          "Sha256": "D26D44AF06F0DC4FA731A26AEB983E1C8C578E0189C420EF2FA8D6BA071ADB89"
+        },
+        {
+          "Path": "local/recordings/candidate-bitmap-classic-r2-av.json",
+          "Sha256": "93CF97FBDE7EAD2B1C9AE4CB1A91CAE804E73054996B7F5CCACB9AA04598E121"
+        },
+        {
+          "Path": "local/recordings/candidate-bitmap-classic-r2-av.mp4",
+          "Sha256": "3D917D6EB1D573993E0048FB32545348BB3E3B2B0309B69F01148E40565617DE"
+        },
+        {
+          "Path": "local/recordings/candidate-bitmap-classic-r2.mp4",
+          "Sha256": "E2340003E8DB6EEBA1B06A51A0407EEC6E40136953F37CC47B610E1CCAFF9B10"
+        },
+        {
+          "Path": "local/recordings/candidate-bitmap-classic-r2-ffmpeg.log",
+          "Sha256": "04A3D0C105174121E44486A786FBA37AF4D730C423D67619069DA9B796CBC77A"
+        }
+      ]
+    },
+    {
+      "Style": "Matrix",
+      "FramesChecked": 462,
+      "ActiveNoticeFrames": 386,
+      "ExpiredNoticeFrames": 76,
+      "Commands": 350,
+      "Checkpoints": 11,
+      "SubmittedAudioFrames": 472500,
+      "QueueStarvationObservations": 0,
+      "RebufferResumes": 0,
+      "ActiveSimulationTicsPerSecond": 33.94654534494661,
+      "CompletedWritesPerActiveSecond": 45.10041024400049,
+      "SessionPauseSeconds": 6.633563700000001,
+      "MapReloadPauseSeconds": 0.4425043000000005,
+      "Files": [
+        {
+          "Path": "local/recordings/candidate-bitmap-matrix-r2-game.json",
+          "Sha256": "A3226F7E98674170313E327D2525A4AAE1A060FC814A61DFD9E7274B6EBB3F3E"
+        },
+        {
+          "Path": "local/recordings/candidate-bitmap-matrix-r2-recording.json",
+          "Sha256": "F9E607145DA3D4C9AB70AEF457570CA1985E0BC9365ABC1696643E7F6FA9477A"
+        },
+        {
+          "Path": "local/recordings/candidate-bitmap-matrix-r2-input.json",
+          "Sha256": "029D523BB938B4C3BFC84610090C1ACC30F8FE2FD6559B701DD35C37CA002382"
+        },
+        {
+          "Path": "local/recordings/candidate-bitmap-matrix-r2-audio.json",
+          "Sha256": "0311F6B5C0C27D23B96A51D94E2BCC500C9D40C3EE3CAB9DEC82AF691E0043FB"
+        },
+        {
+          "Path": "local/recordings/candidate-bitmap-matrix-r2-audio.wav",
+          "Sha256": "ED3839E31F6B220C42C7AE48BE1EA9ABD50C4FF27FD3C33714F6224EE8D903C8"
+        },
+        {
+          "Path": "local/recordings/candidate-bitmap-matrix-r2-av.json",
+          "Sha256": "14F9BB9FB7FA643ADE446A86351E2718B802C1E93B340B7303D4997DCD59D913"
+        },
+        {
+          "Path": "local/recordings/candidate-bitmap-matrix-r2-av.mp4",
+          "Sha256": "5450349A49EE206A145BE6C9C56DC2468AF1CFD0BDB29C56B6DF6AC293DC1277"
+        },
+        {
+          "Path": "local/recordings/candidate-bitmap-matrix-r2.mp4",
+          "Sha256": "947B8E6FCB0F82BFC7298EF21C223BDBEE37CD195285B285BCF647C2AFF6F981"
+        },
+        {
+          "Path": "local/recordings/candidate-bitmap-matrix-r2-ffmpeg.log",
+          "Sha256": "2F26CB45B12F4BF0E99F831D0DA26CB67214287928DA5444CA3BD1A7A55ED7BA"
+        }
+      ]
+    },
+    {
+      "Style": "AnsiArt",
+      "FramesChecked": 447,
+      "ActiveNoticeFrames": 378,
+      "ExpiredNoticeFrames": 69,
+      "Commands": 350,
+      "Checkpoints": 11,
+      "SubmittedAudioFrames": 468720,
+      "QueueStarvationObservations": 0,
+      "RebufferResumes": 0,
+      "ActiveSimulationTicsPerSecond": 34.4979832774673,
+      "CompletedWritesPerActiveSecond": 44.35454992817225,
+      "SessionPauseSeconds": 6.671574699999999,
+      "MapReloadPauseSeconds": 0.5212020999999996,
+      "Files": [
+        {
+          "Path": "local/recordings/candidate-bitmap-ansiart-r2-game.json",
+          "Sha256": "E3D60D22DE7B20CFF3AD7A333D2180EF36C6CC0F087C70EEA8CDAA5261D409A1"
+        },
+        {
+          "Path": "local/recordings/candidate-bitmap-ansiart-r2-recording.json",
+          "Sha256": "692D3DDA14A3F21153A0BADD8122DD82BA41378257E815B51BA05C684DFF4BAB"
+        },
+        {
+          "Path": "local/recordings/candidate-bitmap-ansiart-r2-input.json",
+          "Sha256": "A9F296F1CACE7C6480D2BB8830EFAB2624D708B74E843ABA448981AEB2BEE4DB"
+        },
+        {
+          "Path": "local/recordings/candidate-bitmap-ansiart-r2-audio.json",
+          "Sha256": "11770F85556EBE02E6DD82B7AFE7ABBB503EED698452D1E9F0CDB7A90DB51596"
+        },
+        {
+          "Path": "local/recordings/candidate-bitmap-ansiart-r2-audio.wav",
+          "Sha256": "885C58E4E55ED40DA5ED444790248373CA6EE17071D61636B08502C1EA19B801"
+        },
+        {
+          "Path": "local/recordings/candidate-bitmap-ansiart-r2-av.json",
+          "Sha256": "073561DFE5245E64F6BB768BDA05D2FD09B1F2F0F362DDEBC3FDC86B6850AB59"
+        },
+        {
+          "Path": "local/recordings/candidate-bitmap-ansiart-r2-av.mp4",
+          "Sha256": "BDEFFEEE8F1932759375E52866756FE59B4B3FF54990187B60CDFF886947B055"
+        },
+        {
+          "Path": "local/recordings/candidate-bitmap-ansiart-r2.mp4",
+          "Sha256": "7F78CB05C085E69588B1DE69DC176D42057C1B6474930E503EB7BD190442D328"
+        },
+        {
+          "Path": "local/recordings/candidate-bitmap-ansiart-r2-ffmpeg.log",
+          "Sha256": "3A9D84ACCAE8C52B3A0B3190DA29C2505080B9615A22C36C00585A02D1BDA321"
+        }
+      ]
+    }
+  ],
+  "Fixture": {
+    "Path": "local/player-messages-contrast-fixture-r2.json",
+    "Sha256": "903CFF316F654DBF4D57DB7252F10FD581A3E1C0FA36BC726EF97224307B8970"
+  },
+  "AuditSha256": "67CD87727A7A01A9F13DD95E02775C65C8A1DA15F1682551F74DE7B4D216AFCE",
+  "Meaning": "Actual Windows Terminal recordings in all three styles with process-loopback game audio. Every observed world/automap notice is checked against independent saved-state fixture text/timer; eleven game checkpoints per run. Pixel typography is reviewed separately using samples. Recordings are loaded tests, not clean pacing trials, acoustic/device-latency measurements, or ordinary-input map completion."
+}
