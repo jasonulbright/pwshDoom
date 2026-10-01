@@ -1140,3 +1140,23 @@ also cover body tampering, fresh geometry/palette metadata, private buffers and
 truncation; the truncation check exposed and repaired a pre-existing incomplete
 flat/color read. These are stage/functional results; loaded pacing follows
 separately. [Reader evidence](../results/render-asset-reader-reuse-20261001.json).
+
+Three sequential live Classic/audio routes on committed `cfd8c26` complete
+every command, enter E1M2 and report all sixteen workers reusing the body. None
+has software audio starvation/rebuffer or lost submitted device frames.
+
+| Run | Active simulation tics/sec | Global Terminal display transitions/sec | Total map load (sec) | Sampled game private GiB | p99 tic lateness (ms) |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| R1 | 34.979 | 55.184 | 1.541 | 4.469 | 150.965 |
+| R2 | 34.882 | 53.750 | 1.997 | 4.598 | 186.411 |
+| R3 | 30.656 | 47.430 | 2.028 | 4.541 | 5,168.668 |
+
+These repeat measurements still fail the gate. They are not interleaved with
+the older implementation and do not establish a causal whole-route speedup.
+Startup is 39.876 / 39.120 / 37.403 seconds to first write. The third run's
+E1M2 output calls average 85.811 ms, versus 12.245 / 10.016 ms in R1/R2; its
+worker rasterization averages 10.197 ms and it has no audio backpressure.
+Because the host supplies simulation commands and writes output synchronously,
+this identifies a path through which Terminal stalls can slow the game. It
+does not yet establish their cause or qualify an asynchronous replacement.
+[Independent CSV/CPU/audio/load audit](../results/reader-cache-loaded-classic-20261001.json).

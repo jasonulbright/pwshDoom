@@ -34,3 +34,22 @@ On Windows, raw bytes written through a console handle still depend on its outpu
 - [DXGI Present1 semantics](https://learn.microsoft.com/en-us/windows/win32/api/dxgi1_2/nf-dxgi1_2-idxgiswapchain1-present1)
 
 For a faithful port, classic Doom uses BSP traversal and sectors rather than a simple grid raycaster: [original BSP source](https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/r_bsp.c).
+
+## Resource lifetime across map changes
+
+The simulation owns the WAD-derived texture, HUD and sprite resource graph.
+Production contexts share that graph explicitly; each map gets new BSP/segment
+geometry, sectors, pixel/depth/plane buffers and clipping scratch. The v7
+private asset file regenerates map and palette metadata and can bulk-copy one
+cached immutable resource body. Default callers remain uncached when they need
+to mutate resource data.
+
+Persistent workers separately retain decoded immutable resources. Before a
+reload can reuse them, the reader hashes the actual file body after its metadata
+and compares it with the previous validated body. It always decodes the new map
+and palette metadata and allocates new raster scratch. Changed body bytes take
+the ordinary reader path; complete flat/color payloads are required. The worker
+reports its reload duration and reuse decision through the existing IPC header,
+and the host retains these alongside the loading boundary. Hashing, bulk copy
+and IPC use standard .NET APIs; conversion, serialization, gameplay, rasterization
+and mixing algorithms remain PowerShell. [Stage and lifecycle evidence](../results/render-asset-reader-reuse-20261001.json).

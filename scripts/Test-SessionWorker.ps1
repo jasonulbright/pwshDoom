@@ -4,6 +4,10 @@ param([string]$Wad='C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\
     [ValidateSet('Classic','Matrix','AnsiArt')][string]$Style='Classic',[ValidateRange(1,32)][int]$Workers=16,[switch]$ResourceReuse,[string]$Output="$PSScriptRoot/../local/session-worker.json")
 $ErrorActionPreference='Stop'
 if(Test-Path -LiteralPath $Output){throw 'Use a fresh result path.'}
+$sourceRoot=[IO.Path]::GetFullPath("$PSScriptRoot/..")
+$sources=@(foreach($name in 'src/FastRenderer.ps1','src/RenderAssets.ps1','src/GameProcesses.ps1','src/GameHost.ps1','src/SnapshotTransport.ps1','scripts/Invoke-GameRenderWorker.ps1','scripts/Test-SessionWorker.ps1'){
+    @{Path=$name;Sha256=(Get-FileHash -LiteralPath "$sourceRoot/$name").Hash}
+})
 $bundle=& "$PSScriptRoot/Build-EngineBundle.ps1";. $bundle
 . "$PSScriptRoot/FrameCodec.ps1";. "$PSScriptRoot/../src/CharacterCodec.ps1";. "$PSScriptRoot/../src/FastRenderer.ps1"
 . "$PSScriptRoot/../src/TerminalCodec.ps1"
@@ -79,8 +83,10 @@ try{
     Assert-WorkerImage $context.Pixels $snapshot.Tic
     if(($pids -join ',') -ne (@($pool.Workers.Process.Id) -join ',')){throw 'Worker processes restarted during reload.'}
     }
+    foreach($source in $sources){if((Get-FileHash -LiteralPath "$sourceRoot/$($source.Path)").Hash -cne $source.Sha256){throw 'Source changed during worker qualification.'}}
 }catch{$failure=$_.ToString();throw}finally{
     @{FinishedUtc=[DateTime]::UtcNow.ToString('o');Error=$failure;Style=$Style;GlyphSet='Katakana';Workers=$Workers;ResourceReuse=[bool]$ResourceReuse;Checks=$checks.ToArray();WorkerProcessesPreserved=$null -eq $failure;
+        Sources=$sources;WadSha256=(Get-FileHash -LiteralPath $Wad).Hash;Runtime=$PSVersionTable.PSVersion.ToString();
         Meaning='Actual worker processes: independent column/row-major screen and encoded strip equivalence, then changed-map rasterization against the serial reference without restarting workers. ResourceReuse adds E1M2/E2M1/E3M1/E1M2 sky reloads, fresh-resource pixel oracles, private mutable scratch and foreign-content rejection. This is a transport/lifecycle check, not campaign completion or a performance benchmark.'}|ConvertTo-Json -Depth 6|Set-Content -LiteralPath $Output
     if($null -ne $pool){Close-GameRenderPool $pool};if($null -ne $content){$content.Dispose()}
 }

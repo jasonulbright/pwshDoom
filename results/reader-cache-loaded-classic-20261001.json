@@ -1,0 +1,1036 @@
+{
+  "FinishedUtc": "2026-10-01T23:26:08.469026+00:00",
+  "Runs": [
+    {
+      "Run": 1,
+      "SourceCommit": "cfd8c26",
+      "Role": "Sequential route repeat, no concurrent recording/export/qualification",
+      "RuntimeSourceSha256": "2F1D4BFB710F8AB602405F21FFB7CE5C63A3E6FBD324189354D44EA340B35BF1",
+      "HostSources": [
+        {
+          "Sha256": "7CE797D7E9A3A5F8167BF5CF949E674A25B97BC31B8F217549085E2BBE0E6082",
+          "Path": "Start-Doom.ps1"
+        },
+        {
+          "Sha256": "95FA9EDAD14E870D5EC1CF7140376D80B5F5E297773ECF0DE6609DF3B1298966",
+          "Path": "scripts/Invoke-Doom.ps1"
+        },
+        {
+          "Sha256": "003395B53CE668E692476912D8E1F72165C7C322338B5B9E8F290A8DFFED3E3F",
+          "Path": "scripts/Invoke-SimulationWorker.ps1"
+        }
+      ],
+      "Settings": {
+        "Style": "Classic",
+        "FontSize": 5,
+        "Workers": 16,
+        "Maximized": true,
+        "Sound": true,
+        "PowerShell": "7.6.6"
+      },
+      "Commands": 1747,
+      "GameExit": "ReplayEnd",
+      "ActiveSimulationTicsPerSecond": 34.97857360143905,
+      "CompletedWritesPerActiveSecond": 56.96281734178254,
+      "StartupToFirstWriteSeconds": 39.8763662,
+      "GlobalDisplayTransitionsPerSecond": 55.18361292190303,
+      "GlobalDisplayGapMs": {
+        "Count": 2834,
+        "Mean": 18.117619477769953,
+        "Median": 18.17425,
+        "P95": 30.308,
+        "Max": 1569.7032,
+        "P99": 42.4464
+      },
+      "DroppedPresents": 3,
+      "PresentCount": 2838,
+      "TickLatenessMs": {
+        "Count": 1747,
+        "Mean": 13.337291250306643,
+        "Median": 7.858399999999165,
+        "P95": 42.93302857142859,
+        "Max": 171.14115714285708,
+        "P99": 150.9651142857142
+      },
+      "MaximumPendingCommands": 2,
+      "ContiguousWindows": [
+        {
+          "Episode": 1,
+          "MenuScreen": 0,
+          "State": 0,
+          "Map": 1,
+          "ObservedTicProgressPerSecond": 34.90090998111939,
+          "FirstTic": 0,
+          "Seconds": 44.6693224,
+          "BoundaryGapMs": null,
+          "SwapChains": [
+            {
+              "Submitted": 2631,
+              "Dropped": 3,
+              "SwapChain": "2150084205264",
+              "DisplayTransitionsPerSecond": 58.8323229187824,
+              "DisplayIntervalMs": {
+                "Count": 2627,
+                "Mean": 16.99595938332699,
+                "Median": 18.169,
+                "P95": 24.2955,
+                "Max": 145.4844,
+                "P99": 42.4447
+              },
+              "DisplayTransitions": 2628
+            }
+          ],
+          "CompletedWrites": 2638,
+          "EndQpc": 1698412800899,
+          "StartQpc": 1697966107675,
+          "LastTic": 1559,
+          "ScreenKind": 0,
+          "Generation": 1
+        },
+        {
+          "Episode": 1,
+          "MenuScreen": 0,
+          "State": 1,
+          "Map": 1,
+          "ObservedTicProgressPerSecond": 36.461584857798066,
+          "FirstTic": 1560,
+          "Seconds": 3.1265783,
+          "BoundaryGapMs": 36.7532,
+          "SwapChains": [
+            {
+              "Submitted": 136,
+              "Dropped": 0,
+              "SwapChain": "2150084205264",
+              "DisplayTransitionsPerSecond": 43.49803105842576,
+              "DisplayIntervalMs": {
+                "Count": 135,
+                "Mean": 22.8957925925926,
+                "Median": 18.2172,
+                "P95": 36.3998,
+                "Max": 42.4295,
+                "P99": 42.4291
+              },
+              "DisplayTransitions": 136
+            }
+          ],
+          "CompletedWrites": 137,
+          "EndQpc": 1698444434214,
+          "StartQpc": 1698413168431,
+          "LastTic": 1674,
+          "ScreenKind": 1,
+          "Generation": 1
+        },
+        {
+          "Episode": 1,
+          "MenuScreen": 0,
+          "State": 0,
+          "Map": 2,
+          "ObservedTicProgressPerSecond": 34.95598509537589,
+          "FirstTic": 1676,
+          "Seconds": 1.9739109,
+          "BoundaryGapMs": 1567.3821,
+          "SwapChains": [
+            {
+              "Submitted": 69,
+              "Dropped": 0,
+              "SwapChain": "2150084205264",
+              "DisplayTransitionsPerSecond": 34.95598509537589,
+              "DisplayIntervalMs": {
+                "Count": 68,
+                "Mean": 28.608902941176474,
+                "Median": 30.22985,
+                "P95": 42.4122,
+                "Max": 48.4467,
+                "P99": 48.4467
+              },
+              "DisplayTransitions": 69
+            }
+          ],
+          "CompletedWrites": 70,
+          "EndQpc": 1698479847144,
+          "StartQpc": 1698460108035,
+          "LastTic": 1745,
+          "ScreenKind": 0,
+          "Generation": 2
+        }
+      ],
+      "MapReloads": [
+        {
+          "EndWallMs": 49430.1383,
+          "Map": 2,
+          "StartWallMs": 47913.42,
+          "WorkerPids": [
+            32832,
+            23572,
+            36432,
+            21868,
+            34456,
+            15708,
+            9724,
+            11584,
+            20988,
+            36436,
+            4596,
+            27056,
+            13604,
+            22672,
+            32952,
+            36976
+          ],
+          "Tic": 1676,
+          "Generation": 2,
+          "WorkerAssetReloads": [
+            {
+              "ResourceBodyReused": true,
+              "Pid": 32832,
+              "Milliseconds": 224.6866,
+              "Worker": 0
+            },
+            {
+              "ResourceBodyReused": true,
+              "Pid": 23572,
+              "Milliseconds": 223.7858,
+              "Worker": 1
+            },
+            {
+              "ResourceBodyReused": true,
+              "Pid": 36432,
+              "Milliseconds": 261.9708,
+              "Worker": 2
+            },
+            {
+              "ResourceBodyReused": true,
+              "Pid": 21868,
+              "Milliseconds": 222.7612,
+              "Worker": 3
+            },
+            {
+              "ResourceBodyReused": true,
+              "Pid": 34456,
+              "Milliseconds": 254.514,
+              "Worker": 4
+            },
+            {
+              "ResourceBodyReused": true,
+              "Pid": 15708,
+              "Milliseconds": 254.6293,
+              "Worker": 5
+            },
+            {
+              "ResourceBodyReused": true,
+              "Pid": 9724,
+              "Milliseconds": 261.8712,
+              "Worker": 6
+            },
+            {
+              "ResourceBodyReused": true,
+              "Pid": 11584,
+              "Milliseconds": 256.7171,
+              "Worker": 7
+            },
+            {
+              "ResourceBodyReused": true,
+              "Pid": 20988,
+              "Milliseconds": 212.1009,
+              "Worker": 8
+            },
+            {
+              "ResourceBodyReused": true,
+              "Pid": 36436,
+              "Milliseconds": 243.0551,
+              "Worker": 9
+            },
+            {
+              "ResourceBodyReused": true,
+              "Pid": 4596,
+              "Milliseconds": 252.7722,
+              "Worker": 10
+            },
+            {
+              "ResourceBodyReused": true,
+              "Pid": 27056,
+              "Milliseconds": 214.6467,
+              "Worker": 11
+            },
+            {
+              "ResourceBodyReused": true,
+              "Pid": 13604,
+              "Milliseconds": 257.8371,
+              "Worker": 12
+            },
+            {
+              "ResourceBodyReused": true,
+              "Pid": 22672,
+              "Milliseconds": 278.441,
+              "Worker": 13
+            },
+            {
+              "ResourceBodyReused": true,
+              "Pid": 32952,
+              "Milliseconds": 258.8642,
+              "Worker": 14
+            },
+            {
+              "ResourceBodyReused": true,
+              "Pid": 36976,
+              "Milliseconds": 252.5975,
+              "Worker": 15
+            }
+          ],
+          "RendererAssetsReused": false,
+          "Episode": 1
+        }
+      ],
+      "LoadingBoundaries": [
+        {
+          "RendererResourceCacheBytes": 37614992,
+          "RendererAssetsReused": false,
+          "EndQpc": 1698459630941,
+          "Map": 2,
+          "BeforeAssetsMilliseconds": 1148.1914,
+          "AudioDrain": {
+            "ThroughSequence": 1674,
+            "AcknowledgedQpc": 1698446849845,
+            "WaitMilliseconds": 275.9556,
+            "CompletedFrames": 2115540
+          },
+          "TotalMilliseconds": 1540.6464,
+          "RendererAssetWriteMilliseconds": 77.3471,
+          "Tic": 1675,
+          "StartQpc": 1698444224477,
+          "RendererResourceBodyReused": true,
+          "RendererAssetPreparationMilliseconds": 101.179,
+          "RendererContextMilliseconds": 22.0176,
+          "Episode": 1
+        }
+      ],
+      "MapReloadPausedSeconds": 1.5167183000000004,
+      "SessionPausedSeconds": 0.0,
+      "PeakSampledGamePrivateGiB": 4.468914031982422,
+      "PeakSampledGameWorkingSetGiB": 5.797611236572266,
+      "GameProcessSampleCpuSeconds": 476.703125,
+      "SamplingSpanSeconds": 51.2416958,
+      "SampleCpuUtilizationOf20LogicalCoresPercent": 46.51515894991125,
+      "SubmittedAndReturnedAudioFrames": 2218860,
+      "SoftwareStarvationObservations": 0,
+      "RebufferResumes": 0,
+      "Files": [
+        {
+          "Path": "local/reader-pacing-classic-max-r1-game.json",
+          "Sha256": "C1C5CE2B2204E84A04FF233D58EF3743F5145DBDBD8EDB273C6D6889E59A7E66"
+        },
+        {
+          "Path": "local/reader-pacing-classic-max-r1-capture.json",
+          "Sha256": "8EB452A647DBD343241092AA8932D04D25FF94705BA2730CD5261BE96E640E60"
+        },
+        {
+          "Path": "local/reader-pacing-classic-max-r1-frames.csv",
+          "Sha256": "0A59C48E4DB716FDCE71DF8132142AFE2748B7CDA1E3E56B86AD123169ADC7CA"
+        },
+        {
+          "Path": "local/reader-pacing-classic-max-r1-summary.json",
+          "Sha256": "C5438B057DC74E099ED1BD32680500434603557D6F30525BC7E5BCF1903E78EB"
+        }
+      ]
+    },
+    {
+      "Run": 2,
+      "SourceCommit": "cfd8c26",
+      "Role": "Sequential route repeat, no concurrent recording/export/qualification",
+      "RuntimeSourceSha256": "2F1D4BFB710F8AB602405F21FFB7CE5C63A3E6FBD324189354D44EA340B35BF1",
+      "HostSources": [
+        {
+          "Path": "Start-Doom.ps1",
+          "Sha256": "7CE797D7E9A3A5F8167BF5CF949E674A25B97BC31B8F217549085E2BBE0E6082"
+        },
+        {
+          "Path": "scripts/Invoke-Doom.ps1",
+          "Sha256": "95FA9EDAD14E870D5EC1CF7140376D80B5F5E297773ECF0DE6609DF3B1298966"
+        },
+        {
+          "Path": "scripts/Invoke-SimulationWorker.ps1",
+          "Sha256": "003395B53CE668E692476912D8E1F72165C7C322338B5B9E8F290A8DFFED3E3F"
+        }
+      ],
+      "Settings": {
+        "Style": "Classic",
+        "FontSize": 5,
+        "Workers": 16,
+        "Maximized": true,
+        "Sound": true,
+        "PowerShell": "7.6.6"
+      },
+      "Commands": 1747,
+      "GameExit": "ReplayEnd",
+      "ActiveSimulationTicsPerSecond": 34.88189018936975,
+      "CompletedWritesPerActiveSecond": 55.82699769288942,
+      "StartupToFirstWriteSeconds": 39.1203572,
+      "GlobalDisplayTransitionsPerSecond": 53.74985063151292,
+      "GlobalDisplayGapMs": {
+        "Count": 2792,
+        "Mean": 18.598569591690588,
+        "Median": 18.17655,
+        "P95": 30.3098,
+        "Max": 2048.4876,
+        "P99": 42.4518
+      },
+      "DroppedPresents": 3,
+      "PresentCount": 2796,
+      "TickLatenessMs": {
+        "Count": 1747,
+        "Mean": 18.135800008177277,
+        "Median": 7.969457142859028,
+        "P95": 125.48032857142971,
+        "Max": 217.46141428571423,
+        "P99": 186.4113142857143
+      },
+      "MaximumPendingCommands": 2,
+      "ContiguousWindows": [
+        {
+          "EndQpc": 1699363213472,
+          "Generation": 1,
+          "BoundaryGapMs": null,
+          "ObservedTicProgressPerSecond": 34.912222040908084,
+          "State": 0,
+          "ScreenKind": 0,
+          "MenuScreen": 0,
+          "Map": 1,
+          "Episode": 1,
+          "SwapChains": [
+            {
+              "Dropped": 3,
+              "DisplayTransitionsPerSecond": 57.73169238066776,
+              "DisplayTransitions": 2578,
+              "DisplayIntervalMs": {
+                "Count": 2577,
+                "Mean": 17.318676561893728,
+                "Median": 18.1716,
+                "P95": 24.3413,
+                "Max": 115.1214,
+                "P99": 42.4386
+              },
+              "Submitted": 2581,
+              "SwapChain": "2852663189520"
+            }
+          ],
+          "LastTic": 1559,
+          "FirstTic": 0,
+          "Seconds": 44.6548489,
+          "StartQpc": 1698916664983,
+          "CompletedWrites": 2581
+        },
+        {
+          "EndQpc": 1699394968247,
+          "Generation": 1,
+          "BoundaryGapMs": 40.9637,
+          "ObservedTicProgressPerSecond": 36.68830553561448,
+          "State": 1,
+          "ScreenKind": 1,
+          "MenuScreen": 0,
+          "Map": 1,
+          "Episode": 1,
+          "SwapChains": [
+            {
+              "Dropped": 0,
+              "DisplayTransitionsPerSecond": 44.34499538652533,
+              "DisplayTransitions": 139,
+              "DisplayIntervalMs": {
+                "Count": 138,
+                "Mean": 22.617504347826088,
+                "Median": 18.221049999999998,
+                "P95": 36.3781,
+                "Max": 48.4328,
+                "P99": 36.4655
+              },
+              "Submitted": 139,
+              "SwapChain": "2852663189520"
+            }
+          ],
+          "LastTic": 1675,
+          "FirstTic": 1560,
+          "Seconds": 3.1345138,
+          "StartQpc": 1699363623109,
+          "CompletedWrites": 140
+        },
+        {
+          "EndQpc": 1699436294334,
+          "Generation": 2,
+          "BoundaryGapMs": 2044.6658,
+          "ObservedTicProgressPerSecond": 33.04688073605845,
+          "State": 0,
+          "ScreenKind": 0,
+          "MenuScreen": 0,
+          "Map": 2,
+          "Episode": 1,
+          "SwapChains": [
+            {
+              "Dropped": 0,
+              "DisplayTransitionsPerSecond": 35.44158223867138,
+              "DisplayTransitions": 74,
+              "DisplayIntervalMs": {
+                "Count": 73,
+                "Mean": 28.227652054794518,
+                "Median": 24.287,
+                "P95": 42.4286,
+                "Max": 54.5435,
+                "P99": 54.5435
+              },
+              "Submitted": 74,
+              "SwapChain": "2852663189520"
+            }
+          ],
+          "LastTic": 1745,
+          "FirstTic": 1676,
+          "Seconds": 2.0879429,
+          "StartQpc": 1699415414905,
+          "CompletedWrites": 75
+        }
+      ],
+      "MapReloads": [
+        {
+          "WorkerAssetReloads": [
+            {
+              "Milliseconds": 243.7092,
+              "Pid": 14104,
+              "Worker": 0,
+              "ResourceBodyReused": true
+            },
+            {
+              "Milliseconds": 234.1875,
+              "Pid": 37620,
+              "Worker": 1,
+              "ResourceBodyReused": true
+            },
+            {
+              "Milliseconds": 226.8577,
+              "Pid": 32372,
+              "Worker": 2,
+              "ResourceBodyReused": true
+            },
+            {
+              "Milliseconds": 241.4247,
+              "Pid": 38636,
+              "Worker": 3,
+              "ResourceBodyReused": true
+            },
+            {
+              "Milliseconds": 252.8088,
+              "Pid": 4736,
+              "Worker": 4,
+              "ResourceBodyReused": true
+            },
+            {
+              "Milliseconds": 218.2972,
+              "Pid": 36740,
+              "Worker": 5,
+              "ResourceBodyReused": true
+            },
+            {
+              "Milliseconds": 213.5689,
+              "Pid": 10908,
+              "Worker": 6,
+              "ResourceBodyReused": true
+            },
+            {
+              "Milliseconds": 241.6607,
+              "Pid": 24032,
+              "Worker": 7,
+              "ResourceBodyReused": true
+            },
+            {
+              "Milliseconds": 237.5846,
+              "Pid": 38744,
+              "Worker": 8,
+              "ResourceBodyReused": true
+            },
+            {
+              "Milliseconds": 229.7893,
+              "Pid": 39572,
+              "Worker": 9,
+              "ResourceBodyReused": true
+            },
+            {
+              "Milliseconds": 220.8117,
+              "Pid": 36260,
+              "Worker": 10,
+              "ResourceBodyReused": true
+            },
+            {
+              "Milliseconds": 218.2501,
+              "Pid": 27888,
+              "Worker": 11,
+              "ResourceBodyReused": true
+            },
+            {
+              "Milliseconds": 237.5409,
+              "Pid": 12000,
+              "Worker": 12,
+              "ResourceBodyReused": true
+            },
+            {
+              "Milliseconds": 241.2678,
+              "Pid": 12192,
+              "Worker": 13,
+              "ResourceBodyReused": true
+            },
+            {
+              "Milliseconds": 240.2317,
+              "Pid": 28952,
+              "Worker": 14,
+              "ResourceBodyReused": true
+            },
+            {
+              "Milliseconds": 245.7485,
+              "Pid": 22340,
+              "Worker": 15,
+              "ResourceBodyReused": true
+            }
+          ],
+          "Episode": 1,
+          "WorkerPids": [
+            14104,
+            37620,
+            32372,
+            38636,
+            4736,
+            36740,
+            10908,
+            24032,
+            38744,
+            39572,
+            36260,
+            27888,
+            12000,
+            12192,
+            28952,
+            22340
+          ],
+          "StartWallMs": 47921.3941,
+          "EndWallMs": 49902.8434,
+          "Tic": 1676,
+          "Generation": 2,
+          "RendererAssetsReused": false,
+          "Map": 2
+        }
+      ],
+      "LoadingBoundaries": [
+        {
+          "EndQpc": 1699414810098,
+          "Map": 2,
+          "BeforeAssetsMilliseconds": 1613.3398,
+          "TotalMilliseconds": 1996.8837,
+          "StartQpc": 1699394841261,
+          "RendererResourceBodyReused": true,
+          "Episode": 1,
+          "RendererAssetPreparationMilliseconds": 107.9676,
+          "AudioDrain": {
+            "AcknowledgedQpc": 1699397826713,
+            "ThroughSequence": 1674,
+            "WaitMilliseconds": 303.268,
+            "CompletedFrames": 2115540
+          },
+          "RendererContextMilliseconds": 23.3145,
+          "RendererResourceCacheBytes": 37614992,
+          "RendererAssetsReused": false,
+          "Tic": 1675,
+          "RendererAssetWriteMilliseconds": 82.8765
+        }
+      ],
+      "MapReloadPausedSeconds": 1.9814493000000002,
+      "SessionPausedSeconds": 0.0,
+      "PeakSampledGamePrivateGiB": 4.598331451416016,
+      "PeakSampledGameWorkingSetGiB": 5.870220184326172,
+      "GameProcessSampleCpuSeconds": 464.609375,
+      "SamplingSpanSeconds": 51.7473114,
+      "SampleCpuUtilizationOf20LogicalCoresPercent": 44.89212699464035,
+      "SubmittedAndReturnedAudioFrames": 2223900,
+      "SoftwareStarvationObservations": 0,
+      "RebufferResumes": 0,
+      "Files": [
+        {
+          "Path": "local/reader-pacing-classic-max-r2-game.json",
+          "Sha256": "2976A7CCC41EC1FB49EA051F08A8C365838F63B0A97A20D72AF437CA3C2B574F"
+        },
+        {
+          "Path": "local/reader-pacing-classic-max-r2-capture.json",
+          "Sha256": "D50CEF56C672FE2381F2BC76EF37662DE13A174B4A95E2AA44D88EC425646007"
+        },
+        {
+          "Path": "local/reader-pacing-classic-max-r2-frames.csv",
+          "Sha256": "F9E2322638BED008AED92A3530C5F3B8E909C96ADD16840BD2D2BCAA1223F423"
+        },
+        {
+          "Path": "local/reader-pacing-classic-max-r2-summary.json",
+          "Sha256": "ADA7DC0BAC3A21DAAE92E87711454B5BA71AF98B0A61DFC7A1008A42373BB1EB"
+        }
+      ]
+    },
+    {
+      "Run": 3,
+      "SourceCommit": "cfd8c26",
+      "Role": "Sequential route repeat, no concurrent recording/export/qualification",
+      "RuntimeSourceSha256": "2F1D4BFB710F8AB602405F21FFB7CE5C63A3E6FBD324189354D44EA340B35BF1",
+      "HostSources": [
+        {
+          "Sha256": "7CE797D7E9A3A5F8167BF5CF949E674A25B97BC31B8F217549085E2BBE0E6082",
+          "Path": "Start-Doom.ps1"
+        },
+        {
+          "Sha256": "95FA9EDAD14E870D5EC1CF7140376D80B5F5E297773ECF0DE6609DF3B1298966",
+          "Path": "scripts/Invoke-Doom.ps1"
+        },
+        {
+          "Sha256": "003395B53CE668E692476912D8E1F72165C7C322338B5B9E8F290A8DFFED3E3F",
+          "Path": "scripts/Invoke-SimulationWorker.ps1"
+        }
+      ],
+      "Settings": {
+        "Style": "Classic",
+        "FontSize": 5,
+        "Workers": 16,
+        "Maximized": true,
+        "Sound": true,
+        "PowerShell": "7.6.6"
+      },
+      "Commands": 1747,
+      "GameExit": "ReplayEnd",
+      "ActiveSimulationTicsPerSecond": 30.656416882908175,
+      "CompletedWritesPerActiveSecond": 48.18690369803426,
+      "StartupToFirstWriteSeconds": 37.4028288,
+      "GlobalDisplayTransitionsPerSecond": 47.42981887389469,
+      "GlobalDisplayGapMs": {
+        "Count": 2786,
+        "Mean": 21.033708004307243,
+        "Median": 18.1802,
+        "P95": 36.3785,
+        "Max": 2218.1717,
+        "P99": 127.2846
+      },
+      "DroppedPresents": 3,
+      "PresentCount": 2791,
+      "TickLatenessMs": {
+        "Count": 1747,
+        "Mean": 202.5023941123558,
+        "Median": 8.844842857142794,
+        "P95": 605.3169714285759,
+        "Max": 6920.6873857142855,
+        "P99": 5168.6683714285755
+      },
+      "MaximumPendingCommands": 2,
+      "ContiguousWindows": [
+        {
+          "FirstTic": 0,
+          "MenuScreen": 0,
+          "CompletedWrites": 2561,
+          "Episode": 1,
+          "Generation": 1,
+          "ScreenKind": 0,
+          "ObservedTicProgressPerSecond": 34.92876278829328,
+          "Map": 1,
+          "EndQpc": 1700301378188,
+          "State": 0,
+          "StartQpc": 1699855041165,
+          "Seconds": 44.6337023,
+          "LastTic": 1559,
+          "SwapChains": [
+            {
+              "Submitted": 2560,
+              "Dropped": 3,
+              "DisplayTransitionsPerSecond": 57.28854807547524,
+              "DisplayTransitions": 2557,
+              "SwapChain": "1989592776016",
+              "DisplayIntervalMs": {
+                "Count": 2556,
+                "Mean": 17.453862676056332,
+                "Median": 18.1778,
+                "P95": 24.2931,
+                "Max": 127.2487,
+                "P99": 42.4166
+              }
+            },
+            {
+              "Submitted": 2,
+              "Dropped": 0,
+              "DisplayTransitionsPerSecond": 0.04480918895226847,
+              "DisplayTransitions": 2,
+              "SwapChain": "1989666088880",
+              "DisplayIntervalMs": {
+                "Count": 1,
+                "Mean": 55.3432,
+                "Median": 55.3432,
+                "P95": 55.3432,
+                "Max": 55.3432,
+                "P99": 55.3432
+              }
+            }
+          ],
+          "BoundaryGapMs": null
+        },
+        {
+          "FirstTic": 1560,
+          "MenuScreen": 0,
+          "CompletedWrites": 116,
+          "Episode": 1,
+          "Generation": 1,
+          "ScreenKind": 1,
+          "ObservedTicProgressPerSecond": 23.572685279135126,
+          "Map": 1,
+          "EndQpc": 1700350142976,
+          "State": 1,
+          "StartQpc": 1700301781918,
+          "Seconds": 4.8361058,
+          "LastTic": 1674,
+          "SwapChains": [
+            {
+              "Submitted": 121,
+              "Dropped": 0,
+              "DisplayTransitionsPerSecond": 25.02013086645044,
+              "DisplayTransitions": 121,
+              "SwapChain": "1989592776016",
+              "DisplayIntervalMs": {
+                "Count": 120,
+                "Mean": 39.29311500000001,
+                "Median": 30.24815,
+                "P95": 127.2846,
+                "Max": 163.6418,
+                "P99": 145.4624
+              }
+            },
+            {
+              "Submitted": 0,
+              "Dropped": 0,
+              "DisplayTransitionsPerSecond": 0.0,
+              "DisplayTransitions": 0,
+              "SwapChain": "1989666088880",
+              "DisplayIntervalMs": null
+            }
+          ],
+          "BoundaryGapMs": 40.373
+        },
+        {
+          "FirstTic": 1676,
+          "MenuScreen": 0,
+          "CompletedWrites": 69,
+          "Episode": 1,
+          "Generation": 2,
+          "ScreenKind": 0,
+          "ObservedTicProgressPerSecond": 10.022494836018476,
+          "Map": 2,
+          "EndQpc": 1700442646192,
+          "State": 0,
+          "StartQpc": 1700373801058,
+          "Seconds": 6.8845134,
+          "LastTic": 1745,
+          "SwapChains": [
+            {
+              "Submitted": 94,
+              "Dropped": 0,
+              "DisplayTransitionsPerSecond": 13.653833544720822,
+              "DisplayTransitions": 94,
+              "SwapChain": "1989592776016",
+              "DisplayIntervalMs": {
+                "Count": 93,
+                "Mean": 72.46666774193547,
+                "Median": 78.7872,
+                "P95": 163.6247,
+                "Max": 169.7044,
+                "P99": 169.7044
+              }
+            },
+            {
+              "Submitted": 0,
+              "Dropped": 0,
+              "DisplayTransitionsPerSecond": 0.0,
+              "DisplayTransitions": 0,
+              "SwapChain": "1989666088880",
+              "DisplayIntervalMs": null
+            }
+          ],
+          "BoundaryGapMs": 2365.8082
+        }
+      ],
+      "MapReloads": [
+        {
+          "WorkerAssetReloads": [
+            {
+              "Milliseconds": 331.0708,
+              "Worker": 0,
+              "ResourceBodyReused": true,
+              "Pid": 26124
+            },
+            {
+              "Milliseconds": 429.5207,
+              "Worker": 1,
+              "ResourceBodyReused": true,
+              "Pid": 24696
+            },
+            {
+              "Milliseconds": 401.5484,
+              "Worker": 2,
+              "ResourceBodyReused": true,
+              "Pid": 15268
+            },
+            {
+              "Milliseconds": 435.4791,
+              "Worker": 3,
+              "ResourceBodyReused": true,
+              "Pid": 22724
+            },
+            {
+              "Milliseconds": 361.3261,
+              "Worker": 4,
+              "ResourceBodyReused": true,
+              "Pid": 33268
+            },
+            {
+              "Milliseconds": 431.7339,
+              "Worker": 5,
+              "ResourceBodyReused": true,
+              "Pid": 25816
+            },
+            {
+              "Milliseconds": 376.9649,
+              "Worker": 6,
+              "ResourceBodyReused": true,
+              "Pid": 36980
+            },
+            {
+              "Milliseconds": 518.8176,
+              "Worker": 7,
+              "ResourceBodyReused": true,
+              "Pid": 36396
+            },
+            {
+              "Milliseconds": 365.273,
+              "Worker": 8,
+              "ResourceBodyReused": true,
+              "Pid": 10128
+            },
+            {
+              "Milliseconds": 450.794,
+              "Worker": 9,
+              "ResourceBodyReused": true,
+              "Pid": 31916
+            },
+            {
+              "Milliseconds": 399.987,
+              "Worker": 10,
+              "ResourceBodyReused": true,
+              "Pid": 15956
+            },
+            {
+              "Milliseconds": 385.6679,
+              "Worker": 11,
+              "ResourceBodyReused": true,
+              "Pid": 33544
+            },
+            {
+              "Milliseconds": 396.8597,
+              "Worker": 12,
+              "ResourceBodyReused": true,
+              "Pid": 14192
+            },
+            {
+              "Milliseconds": 499.6163,
+              "Worker": 13,
+              "ResourceBodyReused": true,
+              "Pid": 38036
+            },
+            {
+              "Milliseconds": 447.3455,
+              "Worker": 14,
+              "ResourceBodyReused": true,
+              "Pid": 10924
+            },
+            {
+              "Milliseconds": 322.5072,
+              "Worker": 15,
+              "ResourceBodyReused": true,
+              "Pid": 14440
+            }
+          ],
+          "Map": 2,
+          "Episode": 1,
+          "StartWallMs": 49650.965,
+          "RendererAssetsReused": false,
+          "WorkerPids": [
+            26124,
+            24696,
+            15268,
+            22724,
+            33268,
+            25816,
+            36980,
+            36396,
+            10128,
+            31916,
+            15956,
+            33544,
+            14192,
+            38036,
+            10924,
+            14440
+          ],
+          "EndWallMs": 51571.4945,
+          "Generation": 2,
+          "Tic": 1676
+        }
+      ],
+      "LoadingBoundaries": [
+        {
+          "Map": 2,
+          "RendererResourceCacheBytes": 37614992,
+          "RendererAssetPreparationMilliseconds": 120.9809,
+          "StartQpc": 1700349113816,
+          "BeforeAssetsMilliseconds": 1350.7537,
+          "Tic": 1675,
+          "Episode": 1,
+          "TotalMilliseconds": 2027.8277,
+          "AudioDrain": {
+            "WaitMilliseconds": 77.3821,
+            "CompletedFrames": 2179800,
+            "ThroughSequence": 1674,
+            "AcknowledgedQpc": 1700349851697
+          },
+          "RendererResourceBodyReused": true,
+          "RendererAssetWriteMilliseconds": 90.5692,
+          "RendererAssetsReused": false,
+          "EndQpc": 1700369392093,
+          "RendererContextMilliseconds": 28.3901
+        }
+      ],
+      "MapReloadPausedSeconds": 1.9205295000000042,
+      "SessionPausedSeconds": 0.0,
+      "PeakSampledGamePrivateGiB": 4.540931701660156,
+      "PeakSampledGameWorkingSetGiB": 5.892982482910156,
+      "GameProcessSampleCpuSeconds": 447.234375,
+      "SamplingSpanSeconds": 59.0595668,
+      "SampleCpuUtilizationOf20LogicalCoresPercent": 37.862991487435025,
+      "SubmittedAndReturnedAudioFrames": 2518740,
+      "SoftwareStarvationObservations": 0,
+      "RebufferResumes": 0,
+      "Files": [
+        {
+          "Path": "local/reader-pacing-classic-max-r3-game.json",
+          "Sha256": "ABE97327C5A2468B7A5AF634FD87A075544B9BE63BAB9652F67BEAB4511B34BA"
+        },
+        {
+          "Path": "local/reader-pacing-classic-max-r3-capture.json",
+          "Sha256": "2BF02EE90BF7BED1CF9A08220E3C3EA7199C705BE4FA333AD3152584D77467ED"
+        },
+        {
+          "Path": "local/reader-pacing-classic-max-r3-frames.csv",
+          "Sha256": "84996064CAC6DDF3F227829A5868623D0DE8A3525A7F2B65483DEEA7423F07D5"
+        },
+        {
+          "Path": "local/reader-pacing-classic-max-r3-summary.json",
+          "Sha256": "C147225F54C4D7FC0995223FF3FC20220A6ACB637BABE242289CCDD7F44196AF"
+        }
+      ]
+    }
+  ],
+  "AuditSha256": "BCE0212B2F2B6A4EDA3E6331E76B97B47E8680D69BC61C2E3CF11405BA863E1D",
+  "MachineInventorySha256": "8762EE91FFC252CCA36F6AE5A26D1C805D2D6971B7195FA4E9C7EDD5665326FF",
+  "ProtocolSha256": "CEE517AA1E07215033F69A02B6FAC8DDAB157C51C8F8FE4B5C06AFC6F6C4E26E",
+  "Meaning": "Three retained actual-device Classic ordinary-input E1M1 completion/intermission/E1M2 continuations with identical runtime source. All three are sequential repeats on the committed reader-cache implementation. No passing three-repeat qualification or causal speed comparison is claimed. Independent CSV display-count/p99 checks match the analyzer. CPU deltas omit startup before readiness and final unsampled tails; sampled memory is a lower bound on peak. Main swapchain is selected by most in-window display events; distinct Doom framebuffer identity, acoustics, second hardware and full-campaign pacing remain unverified. Final readable notices and both writer/reader asset-body caches are included."
+}
