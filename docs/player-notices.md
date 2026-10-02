@@ -18,3 +18,17 @@ style, every submitted audio frame returned, and preserved media timestamps.
 Sampled final Matrix and AnsiArt images show complete bright terminal-font
 letters. These are visual samples and digital audio captures; physical monitor
 readability and acoustic review remain separate human checks.
+# AsyncBatch follow-up — October 1, 2026
+
+The experimental asynchronous terminal path is checked against the same saved
+key-lock/armor/automap fixture in all three styles. Each final recording finishes
+350 commands and eleven checkpoints; 24 grouped assertions cover every observed
+notice text/timer, device/audio closure and retained media timestamps. Reviewed
+world samples preserve the readable typography choices above. See the
+[live receipt](../results/async-player-notices-live-20261001.json).
+
+Recording failures are retained: one WGC encoder finalization crash, a GDI
+attempt with a minimal build lacking that device, and a full-build GDI capture
+rejected for over 99% black video. Fresh WGC retries pass. These are recorder
+results; the game fixtures complete and the successful media stays separate
+from clean pacing tests and whole-campaign evidence. Strips remains the default.

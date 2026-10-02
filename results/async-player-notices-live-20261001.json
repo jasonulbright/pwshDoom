@@ -1,0 +1,321 @@
+{
+  "FinishedUtc": "2026-10-01T20:02:42.115949-04:00",
+  "Error": null,
+  "Checks": [
+    {
+      "Name": "Classic completes every fixture command",
+      "Passed": true
+    },
+    {
+      "Name": "Classic matches independent checkpoints",
+      "Passed": true
+    },
+    {
+      "Name": "Classic capture completes without source drift",
+      "Passed": true
+    },
+    {
+      "Name": "Classic closes device and returns submitted frames",
+      "Passed": true
+    },
+    {
+      "Name": "Classic captured audio closes cleanly",
+      "Passed": true
+    },
+    {
+      "Name": "Classic merged video and timestamps preserved",
+      "Passed": true
+    },
+    {
+      "Name": "Classic all observed notice text/timers match independent oracle",
+      "Passed": true
+    },
+    {
+      "Name": "Classic observes active and expired notices",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix completes every fixture command",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix matches independent checkpoints",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix capture completes without source drift",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix closes device and returns submitted frames",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix captured audio closes cleanly",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix merged video and timestamps preserved",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix all observed notice text/timers match independent oracle",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix observes active and expired notices",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt completes every fixture command",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt matches independent checkpoints",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt capture completes without source drift",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt closes device and returns submitted frames",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt captured audio closes cleanly",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt merged video and timestamps preserved",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt all observed notice text/timers match independent oracle",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt observes active and expired notices",
+      "Passed": true
+    }
+  ],
+  "Runs": [
+    {
+      "Style": "Classic",
+      "FramesChecked": 401,
+      "ActiveNoticeFrames": 331,
+      "ExpiredNoticeFrames": 70,
+      "Commands": 350,
+      "Checkpoints": 11,
+      "SubmittedAudioFrames": 466200,
+      "QueueStarvationObservations": 0,
+      "RebufferResumes": 0,
+      "ActiveSimulationTicsPerSecond": 34.85409483382947,
+      "CompletedWritesPerActiveSecond": 40.23158375104887,
+      "SessionPauseSeconds": 6.905357299999999,
+      "MapReloadPauseSeconds": 0.6134784000000004,
+      "Files": [
+        {
+          "Path": "local/recordings/async-readable-Classic-r1-game.json",
+          "Sha256": "99B9920F10A3C0F86BFDD98308C4E0BF3D51722B666125AE8E8B419036DEB300"
+        },
+        {
+          "Path": "local/recordings/async-readable-Classic-r1-recording.json",
+          "Sha256": "390538EF16C64190219F3AFA7B477B29FCF483CA2B39E54714C3AF8AF79680E6"
+        },
+        {
+          "Path": "local/recordings/async-readable-Classic-r1-input.json",
+          "Sha256": "CA26453697680690EED3F33B20DC3130BCFF5841009195C9222334D288019575"
+        },
+        {
+          "Path": "local/recordings/async-readable-Classic-r1-audio.json",
+          "Sha256": "DB203EB865A5051AAB8B1510608FBE4F0510403A88EF174D80BBFDC755A04DE0"
+        },
+        {
+          "Path": "local/recordings/async-readable-Classic-r1-audio.wav",
+          "Sha256": "8B9FFC2491AA45D38FA324F5C53D472F4A847100CE5032A5F8C22732EFD053DB"
+        },
+        {
+          "Path": "local/recordings/async-readable-Classic-r1-av.json",
+          "Sha256": "1470675CC6B5D9F632A36102A849BC0407B7D125294980E2687D99C52C634A56"
+        },
+        {
+          "Path": "local/recordings/async-readable-Classic-r1-av.mp4",
+          "Sha256": "38F8A42687735A5DE79C1C047F5364107B7135341E2A298DD60918AE0064ADAF"
+        },
+        {
+          "Path": "local/recordings/async-readable-Classic-r1.mp4",
+          "Sha256": "6B25A8C47908572AD3B0B6E3AF01D52F2D1637709DC1EF7A8C166055C8CD3182"
+        },
+        {
+          "Path": "local/recordings/async-readable-Classic-r1-ffmpeg.log",
+          "Sha256": "5049D19D091ABE4F20F80195B91EEE165D4789E87C8893D817817A819B38FF21"
+        }
+      ]
+    },
+    {
+      "Style": "Matrix",
+      "FramesChecked": 402,
+      "ActiveNoticeFrames": 335,
+      "ExpiredNoticeFrames": 67,
+      "Commands": 350,
+      "Checkpoints": 11,
+      "SubmittedAudioFrames": 472500,
+      "QueueStarvationObservations": 0,
+      "RebufferResumes": 0,
+      "ActiveSimulationTicsPerSecond": 34.88153672025215,
+      "CompletedWritesPerActiveSecond": 40.36292106200606,
+      "SessionPauseSeconds": 7.101350999999999,
+      "MapReloadPauseSeconds": 0.6947156999999988,
+      "Files": [
+        {
+          "Path": "local/recordings/async-readable-Matrix-r4-game.json",
+          "Sha256": "CB0BE57EC3982AE01A178CD03573516FC9420F85AB396EBD4D02AF0F8FA0010D"
+        },
+        {
+          "Path": "local/recordings/async-readable-Matrix-r4-recording.json",
+          "Sha256": "B279FBBDF08D0A8AD77328AB65F2A0061D37527A44B69EBC8112D2D2C4F4F845"
+        },
+        {
+          "Path": "local/recordings/async-readable-Matrix-r4-input.json",
+          "Sha256": "9F6311BBDD911B3ABB06193B550268595A5B90882FAAD9C650B1B40D7AC22DB5"
+        },
+        {
+          "Path": "local/recordings/async-readable-Matrix-r4-audio.json",
+          "Sha256": "43132714C17C48E4DD5A2AEB6DEBBB465ABF794857ABE57AC48F47396230D582"
+        },
+        {
+          "Path": "local/recordings/async-readable-Matrix-r4-audio.wav",
+          "Sha256": "C20AEEC24234189F9949A8D2A9965100BF87E4E86D111BBA7097DC60275197B3"
+        },
+        {
+          "Path": "local/recordings/async-readable-Matrix-r4-av.json",
+          "Sha256": "682A22893D4C9EE3648B8BC71908D16AD1056980803FA4E1AF03E78BE22E3232"
+        },
+        {
+          "Path": "local/recordings/async-readable-Matrix-r4-av.mp4",
+          "Sha256": "F3F60096B4D90B6A002BD251165DE7645D5FA1BDDBD66A243A9F7E032729586A"
+        },
+        {
+          "Path": "local/recordings/async-readable-Matrix-r4.mp4",
+          "Sha256": "E62A35576F919C3588E31001CA592AD646CEAEFCFD5665A08F8DAF717930C9E8"
+        },
+        {
+          "Path": "local/recordings/async-readable-Matrix-r4-ffmpeg.log",
+          "Sha256": "F2191F9D89AA77C51807DE917AD201CE0AC943FDC2D1107AD31C3B370CF482BB"
+        }
+      ]
+    },
+    {
+      "Style": "AnsiArt",
+      "FramesChecked": 398,
+      "ActiveNoticeFrames": 330,
+      "ExpiredNoticeFrames": 68,
+      "Commands": 350,
+      "Checkpoints": 11,
+      "SubmittedAudioFrames": 467460,
+      "QueueStarvationObservations": 0,
+      "RebufferResumes": 0,
+      "ActiveSimulationTicsPerSecond": 34.86420600944557,
+      "CompletedWritesPerActiveSecond": 39.94441888510764,
+      "SessionPauseSeconds": 6.7654958,
+      "MapReloadPauseSeconds": 0.5806763,
+      "Files": [
+        {
+          "Path": "local/recordings/async-readable-AnsiArt-r4-game.json",
+          "Sha256": "05BACA32B166CBA95A2706A603890488C3E9BF9B0B495AC23AA432FD77E52A5B"
+        },
+        {
+          "Path": "local/recordings/async-readable-AnsiArt-r4-recording.json",
+          "Sha256": "7A95A1608BA9F4A5BA36C948F41970011EE71B9578E8BAE5B741AC78D682DFF5"
+        },
+        {
+          "Path": "local/recordings/async-readable-AnsiArt-r4-input.json",
+          "Sha256": "9CA6DE7B9996043D995142936B237D9D6AA6C49052BEB62176900B158D3ABD70"
+        },
+        {
+          "Path": "local/recordings/async-readable-AnsiArt-r4-audio.json",
+          "Sha256": "6D41294D420A41114BF378ABD3F25C82BE5398004F2838AE90067BCE2A745EB2"
+        },
+        {
+          "Path": "local/recordings/async-readable-AnsiArt-r4-audio.wav",
+          "Sha256": "84DE33DBCE91CB012ED6DFEB1C1E58A76E3D3EA1C5B6F3FAD485DB5D41418F02"
+        },
+        {
+          "Path": "local/recordings/async-readable-AnsiArt-r4-av.json",
+          "Sha256": "9D7A4FB3AFAC2D93F3B3558A1FF9B834F1E9134AAA911A650803819184ECD28F"
+        },
+        {
+          "Path": "local/recordings/async-readable-AnsiArt-r4-av.mp4",
+          "Sha256": "6E2C65075DAE8F3712A7D79B3EB93F991AD14F222990524A299DD1B6AF30F8CF"
+        },
+        {
+          "Path": "local/recordings/async-readable-AnsiArt-r4.mp4",
+          "Sha256": "1D99AA648B5BB1B8A7C40CC39C9D53A168DF3D045EE2F5A573EEDBC761222462"
+        },
+        {
+          "Path": "local/recordings/async-readable-AnsiArt-r4-ffmpeg.log",
+          "Sha256": "8AEEE31EF0205ABA9B5E5CB34E44C0BFD67E9F29D857B3902D6A7B0CEBE03FED"
+        }
+      ]
+    }
+  ],
+  "Fixture": {
+    "Path": "local/player-messages-readable-fixture-r1.json",
+    "Sha256": "0E4EF47E9CDEF4C496602958BBA218A2C440FA4C75AC0B7C227AD83159ABAC00"
+  },
+  "AuditSha256": "27BDBB7CF0A1135910EA826C97EA22FD9D44D2456D19C13EC657A3440796B727",
+  "Meaning": "Actual Windows Terminal AsyncBatch recordings of final typography in all three styles with process-loopback game audio. Every observed world/automap notice is checked against independent saved-state fixture text/timer; eleven game checkpoints per run. Classic uses the IWAD bitmap; character styles use the terminal font. Typography is reviewed separately using samples. Recordings are loaded tests, not clean pacing trials, acoustic/device-latency measurements, or ordinary-input map completion.",
+  "CaptureFailures": [
+    {
+      "Meaning": "WGC FFmpeg access violation during finalization; game completed 350 commands and eleven checkpoints with clean audio.",
+      "Path": "local/recordings/async-readable-Matrix-r1-recording.json",
+      "EncoderExitCode": -1073741819,
+      "Error": "FFmpeg exited with code -1073741819.",
+      "GameReport": "C:\\projects\\pwshDoom\\local\\recordings\\async-readable-Matrix-r1-game.json",
+      "Sha256": "49772D70DBBDDAD99B27BC47F22620734AD761A9F13406EB4B99F64E705DB368",
+      "Backend": "GraphicsCapture"
+    },
+    {
+      "Meaning": "Minimal recorder lacks gdigrab/framerate; capture exits before readiness; owned host/worker processes later exit and only its recorded Terminal window is closed.",
+      "Path": "local/recordings/async-readable-Matrix-r2-recording.json",
+      "EncoderExitCode": -1414549496,
+      "Error": "Game did not reach the capture startup gate.",
+      "GameReport": "C:\\projects\\pwshDoom\\local\\recordings\\async-readable-Matrix-r2-game.json",
+      "Sha256": "E4A2452113DBA5323F46C585275000904D4244E2407DA52F9763C5DE5BBCC227",
+      "Backend": "Gdi"
+    },
+    {
+      "Meaning": "Full FFmpeg supports GDI, but merged capture is over 99% black and is rejected; game fixture completes.",
+      "Path": "local/recordings/async-readable-Matrix-r3-recording.json",
+      "EncoderExitCode": 0,
+      "Error": "Audio/video merge failed: Captured video is over 99 percent black; audiovisual gameplay capture is rejected.",
+      "GameReport": "C:\\projects\\pwshDoom\\local\\recordings\\async-readable-Matrix-r3-game.json",
+      "Sha256": "5599E53F52AB2D0615F8957B8F483D0B599CA14FF87F7EA9FF1AEF4CC95B38AE",
+      "Backend": "Gdi"
+    }
+  ],
+  "VisualSamples": [
+    {
+      "Path": "local/async-Classic-notice-review-r2.png",
+      "Sha256": "46F7561ED540B37FC3BDBA3DB818756DD41D10164D01D5E7BE471D8737D0F4DD",
+      "Review": "Readable complete key-lock text; Classic IWAD bitmap and character-mode terminal lettering. Earlier Classic first-frame sample still shows loading and is retained separately."
+    },
+    {
+      "Path": "local/async-Matrix-notice-review.png",
+      "Sha256": "ABC6E9B39EC582FB53E06DFCBBC8A109A49458EAE6C2F41529778299C8235140",
+      "Review": "Readable complete key-lock text; Classic IWAD bitmap and character-mode terminal lettering. Earlier Classic first-frame sample still shows loading and is retained separately."
+    },
+    {
+      "Path": "local/async-AnsiArt-notice-review.png",
+      "Sha256": "1EAEB19D0D4671360007374E7B8AE4573AAE344CBBCA3E37C029249E7D24D1C8",
+      "Review": "Readable complete key-lock text; Classic IWAD bitmap and character-mode terminal lettering. Earlier Classic first-frame sample still shows loading and is retained separately."
+    }
+  ],
+  "TransportChecks": {
+    "Path": "local/terminal-output-async-20261001-r4.json",
+    "Checks": 110,
+    "Sha256": "5229D7B5EA45E2E1A60C7D6B91F356CA9AD2888E825F44BCC940637208B3A8EE",
+    "Meaning": "Includes rejection of synchronous output while asynchronous output owns the buffer, after viewport/API guards."
+  }
+}
