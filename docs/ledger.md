@@ -6311,3 +6311,16 @@ native WAD screen fixtures, 10 held-key/menu-reset checks, and parsing of all si
 changed PowerShell files. These cover command generation and rendered menu
 bounds; they do not observe a physical keypress or qualify the campaign. This
 is commit 21 after Preview.6; the requested release threshold remains 35.
+
+### Renderer wall scratch reuse — October 2, 2026
+
+`Invoke-FastRender` now reuses its three wall-band IDs and three texture-row
+origins for the duration of its non-recursive BSP walk. The band array is
+allocated once per render instead of once per projected segment; texture origins
+use the same render scratch when a segment draws a textured band. Origin-valid
+bits reset for every segment. Against the pre-change serial renderer, four
+uneven worker strips produce exact frames on E3M6 after 35 idle tics at five
+headings: 320,000 pixels each in Classic, Matrix and AnsiArt. This is an
+image-equivalence check, not a timing or pacing claim. The first control run
+placed its temporary source outside the directory needed by relative helper
+imports; rerunning with a source-adjacent copy passed, and that copy was removed.

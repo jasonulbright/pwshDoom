@@ -407,6 +407,9 @@ function Invoke-FastRender {
     [int]$open=$EndColumn-$FirstColumn
     [double[]]$nodeGeometry=$Context.NodeGeometry;[int[]]$nodeChildren=$Context.NodeChildren
     $stack=$Context.Stack;[int]$sp=1;$stack[0]=($nodeGeometry.Length/12)-1
+    # Reuse segment-local scratch across this non-recursive BSP walk.
+    [int[]]$activeWallBandsScratch=[int[]]::new(3)
+    [double[]]$wallBandOriginsScratch=[double[]]::new(3)
     if($GeometryDetails){$wallsStartedQpc=[Diagnostics.Stopwatch]::GetTimestamp()}
     while($sp -gt 0 -and $open -gt 0) {
         [int]$nodeIndex=$stack[--$sp]
@@ -468,11 +471,11 @@ function Invoke-FastRender {
             [double]$iz1=1/$z1;[double]$iz2=1/$z2;[double]$uz1=$u1/$z1;[double]$uz2=$u2/$z2
             [bool]$wallUReady=$false;[int]$wallPerpData=0;[int]$wallOffsetData=0;[uint32]$wallCenterAngleData=0
             [bool]$wallScaleReady=$false;[int]$wallScaleStart=0;[int]$wallScaleStep=0
-            [double[]]$wallBandOrigins=$null;[int]$wallOriginBits=0
+            [double[]]$wallBandOrigins=$wallBandOriginsScratch;[int]$wallOriginBits=0
             [bool]$constantWallScale=$iz1 -eq $iz2;[double]$segmentTexelStep=0
             # Select eligible textured bands once per segment instead of
             # repeating all three eligibility branches for every column.
-            [int[]]$activeWallBands=[int[]]::new(3);[int]$activeWallBandCount=0
+            [int[]]$activeWallBands=$activeWallBandsScratch;[int]$activeWallBandCount=0
             if($solid){if($side.MiddleTexture -gt 0){$activeWallBands[$activeWallBandCount++]=0}}
             else{
                 if($bc -lt $ch -and -not $joinedSky -and $side.TopTexture -gt 0){$activeWallBands[$activeWallBandCount++]=0}
@@ -577,7 +580,6 @@ function Invoke-FastRender {
                     }
                     [int]$originBit=1 -shl $band
                     if(($wallOriginBits -band $originBit) -eq 0){
-                        if($null -eq $wallBandOrigins){$wallBandOrigins=[double[]]::new(3)}
                         $wallBandOrigins[$band]=[Math]::Truncate(($textureTop-$cz+$side.RowOffset)*65536.0)/65536.0
                         $wallOriginBits=$wallOriginBits -bor $originBit
                     }
