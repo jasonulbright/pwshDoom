@@ -6234,3 +6234,18 @@ in both save harnesses make the current-source input explicit. The save
 qualification was commit 9 after Preview.6, and the invocation correction was
 commit 10. This CLI-hardening test is commit 11; publish the next cumulative
 release at 35 commits.
+
+### Current-source progression replay diagnosis — October 2, 2026
+
+The old E1M1-to-E1M2 route no longer qualifies against runtime fingerprint
+`8118728A096802408F1138700488C711DB838FA41ED3C1B882B19CDF3956158F`. The
+current-source progression harness consumed 2,260 commands but recorded no
+intermission transition. A diagnostic replay of the preserved 1,747-command
+fixture shows repeated Troop damage and death at tic 1,245 (health 0), followed
+by a respawn and continued movement in E1M1. Later use inputs therefore do not
+test map advancement. The historical route passed on its older source; this
+replay alone does not demonstrate an engine defect, and the route was not
+tuned, following the human-playthrough guidance. Ordinary-input E1M1 completion
+and E1M2 entry are currently unqualified. The [diagnostic receipt](../results/current-source-session-progression-diagnostic-20261002.json)
+pins both local reports, the IWAD, fixture and current source fingerprint. This
+update follows 12 commits since Preview.6; publish again at35 commits.

@@ -1,0 +1,54 @@
+{
+  "CompletedUtc": "2026-10-02T21:07:52.2375238Z",
+  "CurrentSourceFingerprint": "8118728A096802408F1138700488C711DB838FA41ED3C1B882B19CDF3956158F",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "Objective": "Determine why the historical ordinary-input E1M1-to-E1M2 session fixture no longer qualifies on current source.",
+  "ProgressionHarness": {
+    "Report": "local/preview6-current-source-session-progression.json",
+    "ReportSha256": "63E4F60EE7FB4ADE791DAC1E249D5D7C8F70921E0CD03F7E95C90C39F14D6E41",
+    "Passed": false,
+    "InputCommands": 2260,
+    "Error": "Ordinary-input session did not enter and advance E1M2.",
+    "Transitions": [
+      {
+        "Tic": 1,
+        "State": "Level",
+        "Episode": 1,
+        "Map": 1,
+        "Health": 100
+      }
+    ],
+    "BaseRouteSha256": "DF62BD8CA80098BCEDC7C6803FBE13D041F57B02DDB788B278491492147BD296"
+  },
+  "RouteDiagnostic": {
+    "Report": "local/preview6-current-source-e1m1-route-diagnostic.json",
+    "ReportSha256": "7D4C966F0ACBD5992A27108F2088FBBAFBB47A740F0DF6D96A733DE202F0AA01",
+    "HistoricalSessionFixtureSha256": "2F8AFEDF6F37B1B36D8AD654580F087B28A140E2663890F0522022BB04D64EAE",
+    "InputCommands": 1747,
+    "Death": {
+      "Tic": 1245,
+      "Map": "E1M1",
+      "Health": 0,
+      "PlayerState": "Dead",
+      "Attacker": "Troop",
+      "X": 2953.03,
+      "Y": -4292.31
+    },
+    "Final": {
+      "Tic": 1747,
+      "Map": "E1M1",
+      "LevelTime": 501,
+      "PlayerState": "Live",
+      "Health": 100,
+      "X": 1113.33,
+      "Y": -2921.35
+    }
+  },
+  "Interpretation": "The recorded route takes repeated monster damage, dies at tic 1245, respawns in E1M1, and never reaches its exit. Later use presses cannot advance the campaign from that position. This shows that the historical automated route is stale for this source; it does not by itself establish a product defect. Per the campaign milestone guidance, no bot-route tuning was attempted. Current-source ordinary-input completion of E1M1 and entry into E1M2 remain unqualified.",
+  "Limits": [
+    "The diagnostic is a replay of an existing fixture, not a new route attempt.",
+    "Only one deterministic HMP route and IWAD were examined.",
+    "No human campaign completion or live desktop input is claimed.",
+    "The death state is expected gameplay behavior; no mechanic defect was isolated."
+  ]
+}

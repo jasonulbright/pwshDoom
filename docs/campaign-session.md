@@ -17,7 +17,7 @@ Ctrl or E/Space/Enter advances the intermission stages. The legacy E1M1 benchmar
 
 The behavioral reference is id Software's [game controller](https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/g_game.c) and [finale code](https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/f_finale.c). The existing adopted episode-4 par table is retained; the study does not reproduce or claim compatibility with the original episode-4 out-of-bounds lookup.
 
-The separate [1,747-command session route](../results/e1m1-e1m2-session-route.json) uses only ordinary `TicCmd` inputs. E1M1 exits at command 1,560 with five kills and 75 health. Three spaced use presses advance intermission; E1M2 starts at command 1,676 with matching health/armor/ammo and runs through command 1,747. This qualifies entry and continued simulation/rendering of E1M2, not its completion.
+Historically, the separate [1,747-command session route](../results/e1m1-e1m2-session-route.json) used only ordinary `TicCmd` inputs: E1M1 exited at command 1,560, three spaced use presses advanced intermission, and E1M2 ran through command 1,747. That result is not current-source evidence. Replaying the preserved input on the October 2 source takes repeated monster damage and dies at tic 1,245 in E1M1; the progression harness then fails to reach intermission. The replay respawns and remains in E1M1, so the later use presses do not exercise campaign advancement. No engine defect was isolated and the route was not tuned. See the [current-source diagnostic](../results/current-source-session-progression-diagnostic-20261002.json); ordinary-input completion of E1M1 and current-source entry into E1M2 remain unqualified.
 
 ## Map and screen transport
 
