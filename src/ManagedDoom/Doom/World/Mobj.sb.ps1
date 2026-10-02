@@ -216,7 +216,11 @@ class Mobj : Thinker {
             $this.frame = $st.Frame
 
             if ($null -ne $st.MobjAction) {
-                $st.MobjAction.Invoke($this.world, $this)
+                if ($st.MobjAction -is [scriptblock]) {
+                    $st.ExecuteMobjAction($this.world, $this)
+                } elseif (-not [DoomInfo]::MobjActions.InvokeStateAction($st.MobjAction.Name, $this.world, $this)) {
+                    $st.MobjAction.Invoke($this.world, $this)
+                }
             }
 
             $inState = $st.Next

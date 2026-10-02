@@ -1,0 +1,367 @@
+{
+  "Title": "PowerShell Mobj state-action dispatch performance and equivalence",
+  "Date": "2026-10-02",
+  "FinishedUtc": "2026-10-02T17:56:14.8123572Z",
+  "Runtime": {
+    "PowerShell": "7.6.6",
+    "RuntimePath": "local/pwsh-7.6.6-portable/runtime/pwsh.exe",
+    "Wad": "Ultimate Doom DOOM.WAD",
+    "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F"
+  },
+  "Candidate": {
+    "BaseCommit": "cd3207144d86d08351481daccacaf2107883242a",
+    "EngineBundleSha256": "C31873B175FC96634148978666E774474AF611A8D27B90B929E13A426035940E",
+    "SourceFiles": [
+      {
+        "Path": "src/ManagedDoom/Doom/Info/DoomInfo.MobjActions.ps1",
+        "Sha256": "B8F753CC1CFA01328EE5CCBE765FB09F5CD8DC4630AACCEF37101DB3DE2390F6"
+      },
+      {
+        "Path": "src/ManagedDoom/Doom/World/Mobj.sb.ps1",
+        "Sha256": "3BE0BC9D12C81FFE8E1CA89C45A6F7B2518AD954F2EC689272F9445232BD50AF"
+      },
+      {
+        "Path": "scripts/Test-MobjActionDispatch.ps1",
+        "Sha256": "24E5CE8000C68A0AD01168B4410571E8E724DB509E7C4C952A256D8DECB526BA"
+      },
+      {
+        "Path": "scripts/Build-EngineBundle.ps1",
+        "Sha256": "981D457F5165EA41E940091E465D97731CAC34B9CBEA5F7FD7E296C81CE580EE"
+      }
+    ]
+  },
+  "Implementation": "Mobj.SetState dispatches its 52 built-in PowerShell PSMethod state actions through a case-sensitive MobjActions.InvokeStateAction switch. Scriptblock actions still use MobjState.ExecuteMobjAction; names outside the vanilla router continue through PSMethod.Invoke.",
+  "Equivalence": {
+    "ReplaySha256": "3C449B3AA71BE042C7FF229AED2F143636ED97A4A4B02562505339B35415DD75",
+    "Commands": 420,
+    "TimelinePoints": 421,
+    "TicFirst": 0,
+    "TicLast": 420,
+    "ComparedFields": [
+      "combined checkpoint SHA256",
+      "current render snapshot SHA256",
+      "numeric render snapshot v2 SHA256",
+      "state render snapshot SHA256"
+    ],
+    "MismatchingTics": [],
+    "StoredRecordedCheckpoints": {
+      "Baseline": {
+        "Meaning": "Compared available recorded checkpoints through the consumed prefix. This samples selected state and render data, not every hidden game field.",
+        "Checked": 2,
+        "Mismatches": [],
+        "Matched": true
+      },
+      "Candidate": {
+        "Meaning": "Compared available recorded checkpoints through the consumed prefix. This samples selected state and render data, not every hidden game field.",
+        "Matched": true,
+        "Checked": 2,
+        "Mismatches": []
+      }
+    },
+    "Conclusion": true
+  },
+  "Performance": {
+    "Workload": "Dense E3M6 recorded 420-command prefix; headless Game.Update wall-time only; sample allocations and GC measured around the same 420 tics; no render workers, Terminal, audio mixer/device or display in the timer.",
+    "Trials": [
+      {
+        "Role": "Baseline",
+        "Pair": 1,
+        "Receipt": "local/game-update-gc-e3m6-r1.json",
+        "ReceiptSha256": "C98FD07C67A02CF401C7BB56EA6FCAB84344E62898ACC56C23D271F04E92AEC8",
+        "BundleSha256": "3DE77B4BD1758FD7B054919F1DB72E684DE318A3F22CC434A4E2CF98791AB3C9",
+        "Commands": 420,
+        "ReplaySha256": "3C449B3AA71BE042C7FF229AED2F143636ED97A4A4B02562505339B35415DD75",
+        "Error": null,
+        "StoredCheckpointsMatched": true,
+        "StoredCheckpointsChecked": 2,
+        "Stats": {
+          "Count": 420,
+          "MeanMs": 19.82866714285713,
+          "MedianMs": 16.84715,
+          "P95Ms": 42.6023,
+          "P99Ms": 64.3363
+        },
+        "AllocatedMiB": 5685.45,
+        "GcCollections": {
+          "Gen0": 381.0,
+          "Gen1": 10.0,
+          "Gen2": 1.0
+        },
+        "GcPauseMs": 513.1
+      },
+      {
+        "Role": "Candidate",
+        "Pair": 1,
+        "Receipt": "local/mobj-action-dispatch-e3m6-r1.json",
+        "ReceiptSha256": "37AD46BBCE23E1CB6F199D7B6C24075679E7683D880CEADA0776B0C49FF5A609",
+        "BundleSha256": "C31873B175FC96634148978666E774474AF611A8D27B90B929E13A426035940E",
+        "Commands": 420,
+        "ReplaySha256": "3C449B3AA71BE042C7FF229AED2F143636ED97A4A4B02562505339B35415DD75",
+        "Error": null,
+        "StoredCheckpointsMatched": true,
+        "StoredCheckpointsChecked": 2,
+        "Stats": {
+          "Count": 420,
+          "MeanMs": 19.3146526190476,
+          "MedianMs": 15.6991,
+          "P95Ms": 44.4408,
+          "P99Ms": 65.6261
+        },
+        "AllocatedMiB": 5742.92,
+        "GcCollections": {
+          "Gen1": 11.0,
+          "Gen2": 1.0,
+          "Gen0": 385.0
+        },
+        "GcPauseMs": 520.0
+      },
+      {
+        "Role": "Baseline",
+        "Pair": 2,
+        "Receipt": "local/mobj-action-baseline-r2.json",
+        "ReceiptSha256": "79C917E34FE1348AED57996322AFF68D513368A83C5FD0FC1DA6F43AB5D610E0",
+        "BundleSha256": "3DE77B4BD1758FD7B054919F1DB72E684DE318A3F22CC434A4E2CF98791AB3C9",
+        "Commands": 420,
+        "ReplaySha256": "3C449B3AA71BE042C7FF229AED2F143636ED97A4A4B02562505339B35415DD75",
+        "Error": null,
+        "StoredCheckpointsMatched": true,
+        "StoredCheckpointsChecked": 2,
+        "Stats": {
+          "Count": 420,
+          "MeanMs": 20.748993809523792,
+          "MedianMs": 18.158900000000003,
+          "P95Ms": 48.1589,
+          "P99Ms": 68.282
+        },
+        "AllocatedMiB": 5685.39,
+        "GcCollections": {
+          "Gen1": 10.0,
+          "Gen2": 1.0,
+          "Gen0": 380.0
+        },
+        "GcPauseMs": 445.9
+      },
+      {
+        "Role": "Candidate",
+        "Pair": 2,
+        "Receipt": "local/mobj-action-candidate-r2.json",
+        "ReceiptSha256": "F461CC6460830BEDF31CDB09E1C9507266D4D718EF058A83BEC3C72AB17861CA",
+        "BundleSha256": "C31873B175FC96634148978666E774474AF611A8D27B90B929E13A426035940E",
+        "Commands": 420,
+        "ReplaySha256": "3C449B3AA71BE042C7FF229AED2F143636ED97A4A4B02562505339B35415DD75",
+        "Error": null,
+        "StoredCheckpointsMatched": true,
+        "StoredCheckpointsChecked": 2,
+        "Stats": {
+          "Count": 420,
+          "MeanMs": 18.09170523809524,
+          "MedianMs": 15.59695,
+          "P95Ms": 39.5153,
+          "P99Ms": 67.1671
+        },
+        "AllocatedMiB": 5742.77,
+        "GcCollections": {
+          "Gen0": 385.0,
+          "Gen2": 1.0,
+          "Gen1": 14.0
+        },
+        "GcPauseMs": 350.0
+      }
+    ],
+    "Pooled": {
+      "Baseline": {
+        "Count": 840,
+        "MeanMs": 20.288830476190466,
+        "MedianMs": 17.426949999999998,
+        "P95Ms": 46.7765,
+        "P99Ms": 68.282
+      },
+      "Candidate": {
+        "Count": 840,
+        "MeanMs": 18.703178928571415,
+        "MedianMs": 15.681049999999999,
+        "P95Ms": 44.1304,
+        "P99Ms": 67.1671
+      },
+      "MedianReductionPercent": 10.02,
+      "MeanReductionPercent": 7.82,
+      "P95ReductionPercent": 5.66,
+      "P99ReductionPercent": 1.63,
+      "BaselineAllocatedMiB": 5685.42,
+      "CandidateAllocatedMiB": 5742.84,
+      "AllocationIncreasePercent": 1.01,
+      "QuarterMedians": [
+        {
+          "Quarter": 1,
+          "Tics": "0-104",
+          "BaselineMedianMs": 17.57555,
+          "CandidateMedianMs": 15.85825,
+          "MedianChangePercent": -9.77
+        },
+        {
+          "Quarter": 2,
+          "Tics": "105-209",
+          "BaselineMedianMs": 16.0432,
+          "CandidateMedianMs": 15.6892,
+          "MedianChangePercent": -2.21
+        },
+        {
+          "Quarter": 3,
+          "Tics": "210-314",
+          "BaselineMedianMs": 16.78135,
+          "CandidateMedianMs": 12.7973,
+          "MedianChangePercent": -23.74
+        },
+        {
+          "Quarter": 4,
+          "Tics": "315-419",
+          "BaselineMedianMs": 22.14345,
+          "CandidateMedianMs": 20.5173,
+          "MedianChangePercent": -7.34
+        }
+      ]
+    },
+    "Interpretation": "Pooled descriptions across two 420-tic runs per version show a 10.02% lower median and 7.81% lower mean. This is not a randomized/ABBA native-host comparison; per-tic observations within a run are not independent. P99 remains 67.17 ms, above the frozen 57.2 ms gate; it does not establish native pacing."
+  },
+  "AllocationDiagnostics": {
+    "GameUpdateAllocatedMiB": 5685.4,
+    "GameUpdateGcPauseMs": 513.1,
+    "HighestPhase": "ThinkerRun",
+    "ThinkerRunAllocatedMiB": 4549,
+    "HighFrequencyPath": "Mobj.SetState",
+    "EstimatedSetStateAllocatedMiB": 3707,
+    "AllocationEvidence": [
+      {
+        "Path": "local/world-phase-alloc-e3m6-r1.json",
+        "Sha256": "5B7FB4072CBDA17DAB549117AF9C0744961B198DAAB2FD09797FDCED4E4F389F"
+      },
+      {
+        "Path": "local/world-actor-alloc-e3m6-r1.json",
+        "Sha256": "1B2CB9217329DDBD56984A751B464A364D22CBDE2F65A58A3D12AA57C8D28014"
+      },
+      {
+        "Path": "local/mobj-action-alloc-e3m6-r1.json",
+        "Sha256": "5E7B1F04C15C6B59A557531379A9C6F863B785E70C04227B649C8C51A222CFE1"
+      },
+      {
+        "Path": "local/state-action-alloc-e3m6-r1.json",
+        "Sha256": "03A38D799608EAA5585E95CD2E8E94FC44928850D50B872EC35C80FF3CBC2A2C"
+      }
+    ],
+    "Caveat": "Allocation-attribution runs are separately instrumented and sampled; they locate likely dispatch overhead rather than prove exact allocation causality."
+  },
+  "RejectedAlternatives": [
+    {
+      "Outcome": "Rejected",
+      "Reason": "Exact selected replay checkpoints, but later-quarter Game.Update medians slowed as much as 11.69%.",
+      "Name": "Skip empty interpolation calls for non-Mobj thinkers"
+    },
+    {
+      "Outcome": "Rejected",
+      "Reason": "Exact checkpoints but about 1% more allocation and mixed/negative per-tic timing.",
+      "Name": "Replace PSMethod.Invoke with MobjState.ExecuteMobjAction"
+    }
+  ],
+  "RegressionReceipts": [
+    {
+      "Path": "results/mobj-action-dispatch-checks-20261002.json",
+      "Sha256": "E7538E8D90B9277EA38BE1547BF9F110D84DFBD89E487D306834F2C28EBECB1E",
+      "Checks": 6,
+      "Failed": 0
+    },
+    {
+      "Path": "local/campaign-transitions-dispatch-20261002.json",
+      "Sha256": "78299075DC8FDD19788D3AA4F8C9B8B29F0801146EFDF61278265336210C6EE4",
+      "Checks": 69,
+      "Failed": 0
+    },
+    {
+      "Path": "local/boss-progression-dispatch-20261002.json",
+      "Sha256": "B08B2C56798553BBDAB58A9A739C63EA9C371582E1125AECEAD34F706C62B6CD",
+      "Checks": 97,
+      "Failed": 0
+    },
+    {
+      "Path": "local/mobj-movement-dispatch-20261002.json",
+      "Sha256": "419FC63683D9CA866926EC8E47B65C17EE3006E3145889D493DC8AAA45D076BB",
+      "Checks": 27,
+      "Failed": 0
+    },
+    {
+      "Path": "local/game-actions-dispatch-20261002.json",
+      "Sha256": "7A89CE1406DCAA846DD4E3922EC29B7955B9BA0FC18DD5F53165F486A337791A",
+      "Checks": 9,
+      "Failed": 0
+    },
+    {
+      "Path": "local/session-menu-dispatch-20261002.json",
+      "Sha256": "77E59CA6AD9AEEDA7786BF5BAA7EFA4519D893B648231C9D1A95EAE9A361CFD6",
+      "Checks": 125,
+      "Failed": 0
+    },
+    {
+      "Path": "local/save-menus-dispatch-20261002.json",
+      "Sha256": "8C95D4DF4C487080E48628C308A1EB1D63B9174F0514C89D9DA044AD58418959",
+      "Checks": 16,
+      "Failed": 0
+    },
+    {
+      "Path": "local/menu-input-dispatch-20261002.json",
+      "Sha256": "FDDAF35AA0CBB7B7FEC1E919C83AAF32F555B3E86E0996754211D17F73311AA1",
+      "Checks": 10,
+      "Failed": 0
+    },
+    {
+      "Path": "local/save-state-dispatch-20261002.json",
+      "Sha256": "9AD26CA284E2151888C7C830FF731E9B7D4F9DDC5D36B8C329B5025897585EE1",
+      "Checks": 24,
+      "Failed": 0
+    },
+    {
+      "Path": "local/save-validation-dispatch-20261002.json",
+      "Sha256": "D739394FCDE7EA7490A3CA323BB63DA6585ACA954E313309FB8AA20DF90C8B68",
+      "Checks": 10,
+      "Failed": 0
+    },
+    {
+      "Path": "local/save-worker-dispatch-20261002.json",
+      "Sha256": "C05D698494080A612D42E2F8574C0F05DEAF2B406C7133EB6A45ED7670DFE794",
+      "Checks": 12,
+      "Failed": 0
+    }
+  ],
+  "AllRegressionReceiptsPassed": true,
+  "RawTimedReceipts": [
+    {
+      "Path": "local/game-update-gc-e3m6-r1.json",
+      "Sha256": "C98FD07C67A02CF401C7BB56EA6FCAB84344E62898ACC56C23D271F04E92AEC8"
+    },
+    {
+      "Path": "local/mobj-action-dispatch-e3m6-r1.json",
+      "Sha256": "37AD46BBCE23E1CB6F199D7B6C24075679E7683D880CEADA0776B0C49FF5A609"
+    },
+    {
+      "Path": "local/mobj-action-baseline-r2.json",
+      "Sha256": "79C917E34FE1348AED57996322AFF68D513368A83C5FD0FC1DA6F43AB5D610E0"
+    },
+    {
+      "Path": "local/mobj-action-candidate-r2.json",
+      "Sha256": "F461CC6460830BEDF31CDB09E1C9507266D4D718EF058A83BEC3C72AB17861CA"
+    }
+  ],
+  "RawTimelineReceipts": [
+    {
+      "Path": "local/mobj-action-baseline-timeline-r1.json",
+      "Sha256": "A21C078A2C654FB38B2C10ACBDCAC4B39C55711DA440F059CC9D0E078862546A"
+    },
+    {
+      "Path": "local/mobj-action-candidate-timeline-r1.json",
+      "Sha256": "779C60DF68A528D3CD311AA4229E7AEF93A3F1B61A75118DDEC2EF15DCA2C022"
+    }
+  ],
+  "Limitations": [
+    "This preserves state and render checkpoint hashes, not every hidden internal field.",
+    "The timings are headless Game.Update measurements; full-host pacing, display, audio continuity and completion gates remain separate and open.",
+    "Only default vanilla Ultimate Doom action names are directly routed; unknown actions retain a generic PSMethod fallback."
+  ]
+}

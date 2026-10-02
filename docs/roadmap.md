@@ -527,3 +527,15 @@ gates: median active tics/sec are 31.98/32.26/31.53 and display transitions/sec
 [Native evidence and sampling limits](../results/wall-u-native-pacing-20261002.json).
 Count reaches 19 after Preview.5. Investigate stage/lateness records for the next
 bounded improvement; keep frozen thresholds/defaults and release at 35 commits.
+
+The PowerShell Mobj action dispatcher now covers all 52 action methods used by
+the loaded Doom state table. Four 420-tic dense E3M6 samples reduce pooled
+headless `Game.Update` median 10.02%, while all 421 recorded state/render hashes
+and campaign, boss, menu, movement and save regressions pass. The 1.01% allocation
+increase and 67.17 ms p99 remain material; full-host behavior is not yet measured.
+[Evidence](../results/mobj-action-dispatch-20261002.json).
+
+Count reaches 20 after Preview.5. Rerun frozen all-style native pacing on this
+committed candidate, then resume ordinary-input Episode 1 route preparation and
+remaining fidelity, audio, physical-input and hardware qualification. Release at
+35 or more commits since Preview.5; do not narrow the Ultimate Doom scope.

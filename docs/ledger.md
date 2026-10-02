@@ -5923,3 +5923,39 @@ Do not turn the isolated serial sampling result into a native performance claim.
 This evidence commit reaches 19 after Preview.5. Investigate retained stage
 timings/lateness for a bounded product improvement, while keeping defaults,
 thresholds, all prior failures and full qualification gates. Release at 35 commits.
+
+### 2026-10-02 — Directly dispatch built-in state actions
+
+Allocation profiling localized much of the dense E3M6 update work to thinker
+state changes: the 420-tic headless replay allocated 5,685 MiB, with 4,549 MiB
+in `ThinkerRun` and a sampled estimate of 3,707 MiB attributable to
+`Mobj.SetState`. These are profiled attribution estimates, not an isolated
+allocation proof. Two earlier alternatives were rejected: skipping empty
+interpolation calls worsened later-quarter timings by as much as 11.69%; routing
+all action kinds through `ExecuteMobjAction` retained replay checkpoints but
+raised allocations about 1% with mixed or slower timings.
+
+The adopted PowerShell route maps each of the 52 built-in `MobjActions` names to
+the same-named method, using a case-sensitive switch. Ultimate Doom's loaded
+state table references all 52 and none are missing. Scriptblock state actions
+still use `ExecuteMobjAction`; unknown names retain `PSMethod.Invoke`. Campaign
+transitions (69), boss progression (97), movement (27), game actions (9), menu
+and screen fixtures (171), save/menu/input (26), save reconstruction and
+validation (34), simulation-worker saves (12), and route-coverage (6) checks
+pass. The saved E1M1 state at tic 700 reconstructs and continues identically to
+tic 840; worker load/save/new-game/replay behavior also passes.
+[Dispatch and regression evidence](../results/mobj-action-dispatch-20261002.json).
+
+Across two baseline and two candidate 420-command E3M6 runs, pooled per-tic
+headless `Game.Update` median falls 10.02% (17.43 to 15.68 ms), mean falls
+7.82% (20.29 to 18.70 ms), and p95 falls 5.66%. The pooled p99 remains 67.17 ms,
+above the frozen 57.2 ms threshold. Allocations rise 1.01% (5,685 to 5,743 MiB).
+All 421 tic-boundary player/state and numeric render hashes match the baseline,
+including the two stored replay checkpoints. These captures are not randomized
+ABBA native-host runs; they include no workers, terminal output, audio or
+presentation and do not establish release pacing or acoustic equivalence.
+
+This implementation and evidence commit reaches 20 after Preview.5. Measure the
+committed candidate in the full native configuration across all three styles;
+retain every miss and continue the human campaign, original-frame, audio,
+physical-input and second-display gates. Release again at 35 commits.

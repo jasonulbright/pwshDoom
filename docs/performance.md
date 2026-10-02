@@ -1540,3 +1540,41 @@ and startup/tail work. Display transitions do not identify distinct game frames.
 Historical rates are unpaired: lower current display medians neither isolate
 the wall change's cost nor establish a causal speed regression. Keep the frozen
 thresholds/defaults and investigate the retained stage/lateness records next.
+
+## Built-in state-action dispatch — October 2, 2026
+
+Allocation profiles of a dense 420-command E3M6 replay point to `Mobj.SetState`
+and `ThinkerRun` as hot paths. The baseline allocated 5,685 MiB across the
+timed headless `Game.Update` calls. The new implementation routes the 52 known
+PowerShell `PSMethod` actions through a same-name, case-sensitive switch in
+`MobjActions`; scriptblock actions keep their helper path and unknown methods
+keep the generic fallback. It adds no compiled game helper.
+
+Two baseline and two candidate 420-tic runs retain all samples. Pooled
+descriptive statistics are:
+
+| Per-tic `Game.Update` | Baseline | Direct dispatch |
+| --- | ---: | ---: |
+| Count | 840 | 840 |
+| Mean | 20.29 ms | 18.70 ms |
+| Median | 17.43 ms | 15.68 ms |
+| p95 | 46.78 ms | 44.13 ms |
+| p99 | 68.28 ms | 67.17 ms |
+| Allocated across two 420-tic runs | 5,685 MiB | 5,743 MiB |
+
+Median and mean decrease 10.02% and 7.82%, respectively; allocation increases
+1.01%. p99 still exceeds the frozen 57.2 ms gate. Pooled samples are descriptive,
+not independent observations: each run contributes 420 serial tics and the two
+baseline/candidate pairs were not randomized ABBA host captures. Timings exclude
+render workers, character encoding, Terminal, audio mixing/device work and
+display presentation. The prior nine current-source native captures still miss
+the release thresholds; this change needs a clean all-style native rerun before
+any host-level claim. No audio/acoustic equivalence claim follows.
+
+Behavior controls compare each tic from 0 through 420: all 421 combined state,
+current renderer and numeric render hashes match across builds, including the
+two stored replay checkpoints. Focused menu, save reconstruction/worker,
+campaign-transition, boss, movement and gameplay-action regressions also pass.
+The [source-pinned receipt](../results/mobj-action-dispatch-20261002.json)
+includes raw local sample hashes, runtime/IWAD pins, test receipts, allocation
+profiles, methods and known limits.

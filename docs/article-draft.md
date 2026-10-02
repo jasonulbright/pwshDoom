@@ -1,6 +1,6 @@
 # Doom in PowerShell: how far can a terminal go?
 
-Research article draft · Updated 2026-10-01. [Preview.4](https://github.com/jasonulbright/pwshDoom/releases/tag/v0.1.0-preview.4), pinned to `8a1561d`, is the latest public package. Its fresh validation covers all 36 Ultimate Doom map starts, campaign/session mechanics and all three rendering modes. The public ZIP was downloaded and verified against the local package, and an extracted eight-second actual-device startup returned all submitted audio frames. Later development restores pickup/key-lock notices with original IWAD lettering in Classic and readable terminal lettering in Matrix/color art. Final-source live fixtures pass in all three styles; those changes are absent from Preview.4. The complete human Episode 1 route and broader release gates remain pending. See the [Preview.4 scope](release-preview4.md), [validation](../results/preview4-validation-20260929.json) and [public-package receipt](../results/preview4-package-validation-20260929.json).
+Research article draft · Updated 2026-10-02. [Preview.5](https://github.com/jasonulbright/pwshDoom/releases/tag/v0.1.0-preview.5), pinned to `56e132a`, is the current playable community package. Its extracted validation covers all 36 map starts, three presentation modes, persistent render-worker reloads, menu/screen flows, music-enabled save/load, controlled audio recovery and an eight-second actual-device startup. Those checks do not navigate or finish maps. The recent package restores pickup/key-lock notices with original IWAD lettering in Classic and readable terminal lettering in Matrix/color art. The complete human Episode 1 route and broader Ultimate Doom release gates remain pending. See the [Preview.5 scope](release-preview5.md), [package validation](../results/preview5-package-validation-20261002.json) and [public-download receipt](../results/preview5-publication-20261002.json).
 
 Post-preview work also exposes the cost of repeatedly rebuilding static render resources. Three interleaved stage cycles reduce map-resource preparation from 4.09–4.90 seconds to 81–112 ms, and verified-body reuse reduces isolated worker read-back to 69–81 ms. Those isolated improvements do not predict the complete handoff: three live Classic/audio routes measure 1.54–2.03 seconds. One run slows badly during E1M2, with synchronous terminal output averaging 85.8 ms per call while the host also admits simulation commands. A bounded asynchronous output experiment improves p99 simulation lateness in one ABBA cycle, but its 54.1–54.9 display events/sec still miss the 59-event threshold and its 60–65 ms p99 lateness still exceeds the 57.2 ms limit. Strips remains the default; three paired cycles and broader workloads remain required. See the [performance record](performance.md), which separates byte delivery, ETW presentation events and unverified optical frame identity.
 
@@ -304,3 +304,13 @@ startup stays under 31 seconds. The full windows, source checks, CPU/memory limi
 and ended process identities remain recorded. These results preserve the
 difference between better sampling arithmetic and a qualified playable performance
 target. [Current measurements](../results/wall-u-native-pacing-20261002.json).
+
+The next bottleneck profile found repeated general PowerShell method invocation
+inside actor-state changes. Routing the 52 vanilla action names through a
+same-name PowerShell switch lowered pooled headless update medians 10.02% across
+two 420-command samples. Every recorded state and render hash matched at all 421
+tic boundaries; campaign, boss, menu and save checks also pass. This local
+improvement costs 1.01% more allocated bytes, and its 67.17 ms p99 remains above
+the 57.2 ms proposed gate. The measurement omits renderer workers, Terminal and
+audio, so it is a candidate for a clean live retest rather than a host-level
+performance claim. [Dispatch receipt and alternatives](../results/mobj-action-dispatch-20261002.json).

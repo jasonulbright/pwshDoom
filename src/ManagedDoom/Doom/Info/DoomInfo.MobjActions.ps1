@@ -80,4 +80,64 @@ class MobjActions {
     [void] SpawnSound($world, $actor) { $world.MonsterBehavior.SpawnSound($actor) }
     [void] SpawnFly($world, $actor) { $world.MonsterBehavior.SpawnFly($actor) }
     [void] BrainExplode($world, $actor) { $world.MonsterBehavior.BrainExplode($actor) }
+    # Resolve known built-in actions directly. PSMethod.Invoke creates a
+    # general PowerShell invocation pipeline for every state transition.
+    [bool] InvokeStateAction([string]$Name, $world, $actor) {
+        switch -CaseSensitive ($Name) {
+            'BabyMetal' { $this.BabyMetal($world, $actor); return $true }
+            'BFGSpray' { $this.BFGSpray($world, $actor); return $true }
+            'BossDeath' { $this.BossDeath($world, $actor); return $true }
+            'BrainAwake' { $this.BrainAwake($world, $actor); return $true }
+            'BrainDie' { $this.BrainDie($world, $actor); return $true }
+            'BrainExplode' { $this.BrainExplode($world, $actor); return $true }
+            'BrainPain' { $this.BrainPain($world, $actor); return $true }
+            'BrainScream' { $this.BrainScream($world, $actor); return $true }
+            'BrainSpit' { $this.BrainSpit($world, $actor); return $true }
+            'BruisAttack' { $this.BruisAttack($world, $actor); return $true }
+            'BspiAttack' { $this.BspiAttack($world, $actor); return $true }
+            'Chase' { $this.Chase($world, $actor); return $true }
+            'CPosAttack' { $this.CPosAttack($world, $actor); return $true }
+            'CPosRefire' { $this.CPosRefire($world, $actor); return $true }
+            'CyberAttack' { $this.CyberAttack($world, $actor); return $true }
+            'Explode' { $this.Explode($world, $actor); return $true }
+            'FaceTarget' { $this.FaceTarget($world, $actor); return $true }
+            'Fall' { $this.Fall($world, $actor); return $true }
+            'FatAttack1' { $this.FatAttack1($world, $actor); return $true }
+            'FatAttack2' { $this.FatAttack2($world, $actor); return $true }
+            'FatAttack3' { $this.FatAttack3($world, $actor); return $true }
+            'FatRaise' { $this.FatRaise($world, $actor); return $true }
+            'Fire' { $this.Fire($world, $actor); return $true }
+            'FireCrackle' { $this.FireCrackle($world, $actor); return $true }
+            'HeadAttack' { $this.HeadAttack($world, $actor); return $true }
+            'Hoof' { $this.Hoof($world, $actor); return $true }
+            'KeenDie' { $this.KeenDie($world, $actor); return $true }
+            'Look' { $this.Look($world, $actor); return $true }
+            'Metal' { $this.Metal($world, $actor); return $true }
+            'Pain' { $this.Pain($world, $actor); return $true }
+            'PainAttack' { $this.PainAttack($world, $actor); return $true }
+            'PainDie' { $this.PainDie($world, $actor); return $true }
+            'PlayerScream' { $this.PlayerScream($world, $actor); return $true }
+            'PosAttack' { $this.PosAttack($world, $actor); return $true }
+            'SargAttack' { $this.SargAttack($world, $actor); return $true }
+            'Scream' { $this.Scream($world, $actor); return $true }
+            'SkelFist' { $this.SkelFist($world, $actor); return $true }
+            'SkelMissile' { $this.SkelMissile($world, $actor); return $true }
+            'SkelWhoosh' { $this.SkelWhoosh($world, $actor); return $true }
+            'SkullAttack' { $this.SkullAttack($world, $actor); return $true }
+            'SpawnFly' { $this.SpawnFly($world, $actor); return $true }
+            'SpawnSound' { $this.SpawnSound($world, $actor); return $true }
+            'SpidRefire' { $this.SpidRefire($world, $actor); return $true }
+            'SPosAttack' { $this.SPosAttack($world, $actor); return $true }
+            'StartFire' { $this.StartFire($world, $actor); return $true }
+            'Tracer' { $this.Tracer($world, $actor); return $true }
+            'TroopAttack' { $this.TroopAttack($world, $actor); return $true }
+            'VileAttack' { $this.VileAttack($world, $actor); return $true }
+            'VileChase' { $this.VileChase($world, $actor); return $true }
+            'VileStart' { $this.VileStart($world, $actor); return $true }
+            'VileTarget' { $this.VileTarget($world, $actor); return $true }
+            'XScream' { $this.XScream($world, $actor); return $true }
+            default { return $false }
+        }
+        return $false
+    }
 }
