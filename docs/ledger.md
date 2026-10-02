@@ -6066,3 +6066,12 @@ and the corrected seven-check rerun passes. This verifies digital output, not
 acoustics or video. [Receipt](../results/live-effect-headless-20261002-r2.json).
 The next commit reaches 30 after Preview.5; keep the human route, acoustic
 listening, display and fidelity gates open, and release again at 35.
+
+A fresh fixed-state current-renderer audit measures E1M2 across 16 equal 20-pixel
+stripes and 80 observations per stripe. Wall/BSP work remains the largest phase
+(5.72 ms median); plane fill is1.91 ms median. The 160–180 center stripe is the
+most expensive in this one view (15.96 ms total median), while edge stripes are
+substantially cheaper. The harness measures stripes sequentially, so it does not
+establish concurrent-worker pacing. [Pinned profile](../results/renderer-phase-profile-current-wall-u-20261002.json).
+The profile/documentation commit reaches31 after Preview.5; isolate wall work
+counts next, and release again at35 or more.

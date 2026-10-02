@@ -609,3 +609,11 @@ receipt's check-count error is retained; the corrected seven-check run passes.
 This does not provide video or acoustic listening evidence. Count reaches 30
 after Preview.5; publish again by 35 and continue the human campaign, fidelity,
 performance and acoustic gates.
+
+The current-source fixed-state E1M2 renderer profile keeps all 16 production
+stripes and 80 samples per stripe. Wall/BSP traversal has a 5.72 ms median per
+stripe; plane fill is1.91 ms. Costs vary strongly by column, with the 160–180
+stripe highest for the captured view. These stripes were measured sequentially,
+not as live concurrent-worker latency. [Profile and limits](../results/renderer-phase-profile-current-wall-u-20261002.json).
+Count reaches31 after Preview.5; measure wall-operation counts before another
+candidate change and release at35 or more.

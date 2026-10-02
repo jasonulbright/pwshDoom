@@ -1681,3 +1681,23 @@ quadratic-ordering rewrite is not justified by these sizes, and no ordering
 change was made. Other maps and unusually dense traces may behave differently.
 The [source-pinned attribution receipt](../results/hitscan-path-profile-iterative-20261002.json)
 records raw-report hashes, every counter distribution and the profiling limits.
+
+### Current E1M2 renderer phase profile — October 2, 2026
+
+An 80-frame fixed-state E1M2 profile on the current wall-U renderer source
+measured the 16 production-equivalent 20-column stripes sequentially in one
+PowerShell process. Across 1,280 stripe observations, median total renderer
+time is 9.60 ms and median geometry time is 7.80 ms. Inside geometry, the BSP
+and wall stage takes 5.72 ms median / 11.51 ms p95, while plane filling takes
+1.91 ms median / 2.95 ms p95. The middle 160–180 stripe is most expensive in
+this view: its total median is 15.96 ms and wall p95 is 12.58 ms. The view has
+199 actors; the prepared masks include 75 actor/worker pairs and skip 3,109 of
+3,184 possible pairs.
+
+This fixed Classic view directs profiling toward work within BSP traversal and
+wall projection/rasterization. Sequential stripe times are not concurrent
+worker critical-path time and exclude the host, simulation, terminal, audio,
+device scheduling and presentation. One camera/state does not characterize all
+maps or headings, and this run has no independent pixel comparison. The
+[source-pinned phase receipt](../results/renderer-phase-profile-current-wall-u-20261002.json)
+retains 80 samples per stripe, per-stripe stage summaries, hashes and limits.
