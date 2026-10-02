@@ -261,15 +261,26 @@ try {
         $nextAction=$null;$fromReplay=$false
         if($null -eq $pendingAction){
             $key=$null
+            $captureVirtualKey=0
             if($null -ne $consoleState){
                 Read-DoomConsoleInput $consoleState
-                $keyCodes=if($menu.Screen -eq 0){@(27,80,19)}else{@(27,80,19,38,40,37,39,13,89,78)}
-                foreach($code in $keyCodes){if($consoleState.Pressed[$code]){$key=switch($code){27{'Escape'};80{'Pause'};19{'Pause'};38{'Up'};40{'Down'};37{'Left'};39{'Right'};13{'Enter'};89{'Yes'};78{'No'}};break}}
+                if($menu.Screen -eq 15 -and $menu.AwaitingBinding){
+                    if($consoleState.Pressed[27]){$key='Escape'}
+                    else{
+                        $reserved=Get-DoomReservedBindingKeys
+                        for($code=1;$code -lt $consoleState.Pressed.Length;$code++){
+                            if($consoleState.Pressed[$code] -and $code -notin $reserved){$captureVirtualKey=$code;$key='Capture';break}
+                        }
+                    }
+                }else{
+                    $keyCodes=if($menu.Screen -eq 0){@(27,80,19)}else{@(27,80,19,38,40,37,39,13,89,78)}
+                    foreach($code in $keyCodes){if($consoleState.Pressed[$code]){$key=switch($code){27{'Escape'};80{'Pause'};19{'Pause'};38{'Up'};40{'Down'};37{'Left'};39{'Right'};13{'Enter'};89{'Yes'};78{'No'}};break}}
+                }
             }
             if($null -eq $key -and $scheduleIndex -lt $sessionScheduleData.Count -and $sessionScheduleData[$scheduleIndex].AtSeconds*1000 -le $wallNow){$key=$sessionScheduleData[$scheduleIndex].Key;$scheduleIndex++}
             if($null -ne $key){
                 $priorMenuScreen=$menu.Screen
-                $nextAction=Invoke-DoomMenuKey $menu $key
+                $nextAction=Invoke-DoomMenuKey $menu $key -CaptureVirtualKey $captureVirtualKey
                 if($null -ne $nextAction -and $nextAction.Action -eq 'ShowMenu' -and $nextAction.SettingsChanged){
                     try{
                         if($SettingsPath){$preferencesHash=Write-DoomUserSettings $SettingsPath $menu.Settings $preferencesHash}
@@ -358,7 +369,7 @@ try {
                 if($tics -ge $replayData.InputCommands.Count){$send=$false;if($simulation.View.ReadInt32(20) -ge $tics){$exitReason='ReplayEnd';$replayFinished=$true}}
                 else{$entry=$replayData.InputCommands[$tics];$cmd.ForwardMove=$entry[0];$cmd.SideMove=$entry[1];$cmd.AngleTurn=$entry[2];$cmd.Buttons=$entry[3]}
                 if($replayData.Version -eq 4 -and $mapInputIndex -lt $replayData.AutomapCommands.Count -and $replayData.AutomapCommands[$mapInputIndex].Tic -eq $tics){$automapMask=[int]$replayData.AutomapCommands[$mapInputIndex].Mask;$mapInputIndex++}
-            } elseif($null -ne $consoleState){$automapMask=Get-DoomAutomapInputMask $consoleState $inputMapVisible;$inputMapVisible=$consoleState.AutomapVisible;Set-DoomInputCommand $consoleState $cmd -AutomapVisible:$inputMapVisible -AlwaysRun:$preferences.AlwaysRun -TurnSpeed $preferences.TurnSpeed}
+            } elseif($null -ne $consoleState){$automapMask=Get-DoomAutomapInputMask $consoleState $inputMapVisible;$inputMapVisible=$consoleState.AutomapVisible;Set-DoomInputCommand $consoleState $cmd -AutomapVisible:$inputMapVisible -AlwaysRun:$preferences.AlwaysRun -TurnSpeed $preferences.TurnSpeed -Bindings $preferences.Bindings}
             elseif($Scripted) {
                 $phase=$tics%700
                 if($phase -lt 120){$cmd.ForwardMove=25}elseif($phase -lt 260){$cmd.AngleTurn=640}elseif($phase -lt 430){$cmd.ForwardMove=25}

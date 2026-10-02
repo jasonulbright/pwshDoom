@@ -4,6 +4,13 @@ Open **Escape → Settings** to change preferences. Up/down chooses an
 item; Left/Right or Enter changes its value. Enter activates
 Reset Defaults or Back. Escape returns to the main menu.
 
+Choose **Configure Keys**, select an action, press Enter, then press the new
+key. Escape cancels a pending capture. Movement, strafe, turn, fire, use and run
+bindings persist with the other preferences. Menu, pause, weapon-select and
+automap keys stay reserved; duplicate action keys are rejected. The defaults
+remain W/S/A/D, arrow-key turning, Ctrl fire, E use and Shift run, with the
+existing arrow movement and Space/Enter use aliases retained.
+
 | Preference | Default | Behavior |
 | --- | --- | --- |
 | Always run | Off | Uses run movement by default; hold Shift to walk. When off, Shift runs. |
@@ -27,10 +34,12 @@ Ordinary interactive launches save to `%LOCALAPPDATA%\pwshDoom\settings.json`.
 Replay, scripted and headless runs use defaults unless explicitly supplied a
 settings file. Tests use fresh paths under ignored `local/`.
 
-Version-three JSON contains `Version`, `AlwaysRun`, `TurnSpeed`, `SoundVolume`,
-`MusicVolume` and `SoundMuted`. Version-one files gain default audio settings in
-memory. Version-two volume migrates to both new levels, preserving the prior mix.
-Older files remain unchanged until a successful edit saves version three.
+Version-four JSON contains `Version`, `AlwaysRun`, `TurnSpeed`, `SoundVolume`,
+`MusicVolume`, `SoundMuted` and the nine virtual-key `Bindings`. Version-one
+files gain default audio and key settings in memory. Version-two volume migrates
+to both new levels, preserving the prior mix; version-three files gain default
+key bindings. Older files remain unchanged until a successful edit saves
+version four.
 Only the documented types and choices are accepted. Invalid, unknown-version or
 oversized files produce a warning and default input preferences, preserving the
 file. If saving fails, the attempted change is rolled back and the game shows

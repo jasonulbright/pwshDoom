@@ -15,24 +15,25 @@ function Check([string]$Name,[bool]$Passed){$checks.Add(@{Name=$Name;Passed=$Pas
 try{
     $read=Read-DoomUserSettings $path
     Check 'Missing settings returns defaults without writing a file' (-not (Test-Path $path) -and -not $read.Values.AlwaysRun -and $read.Values.TurnSpeed -eq 100 -and $read.Values.MusicVolume -eq 100 -and $null -eq $read.Sha256)
-    $values=$read.Values;$copy=Copy-DoomUserSettings $values;$copy.AlwaysRun=$true;$copy.TurnSpeed=150
+    $values=$read.Values;$copy=Copy-DoomUserSettings $values;$copy.AlwaysRun=$true;$copy.TurnSpeed=150;$copy.Bindings.Forward=82
     Check 'Copy does not alias live preferences' (-not $values.AlwaysRun -and $values.TurnSpeed -eq 100)
     $hash=Write-DoomUserSettings $path $copy $null;$read=Read-DoomUserSettings $path
-    Check 'File round trip retains typed preferences and exact byte hash' ($read.Values.AlwaysRun -and $read.Values.TurnSpeed -eq 150 -and $read.Values.MusicVolume -eq 100 -and $read.Sha256 -ceq $hash -and $hash -ceq (Get-FileHash $path).Hash)
+    Check 'File round trip retains typed preferences, custom keys and exact byte hash' ($read.Values.AlwaysRun -and $read.Values.TurnSpeed -eq 150 -and $read.Values.MusicVolume -eq 100 -and $read.Values.Bindings.Forward -eq 82 -and $read.Sha256 -ceq $hash -and $hash -ceq (Get-FileHash $path).Hash)
     $wire=$copy|ConvertTo-Json|ConvertFrom-Json;$wireCopy=Copy-DoomUserSettings $wire
     Check 'Menu IPC object preserves typed preferences' ($wireCopy.AlwaysRun -and $wireCopy.TurnSpeed -eq 150)
     $legacy=Join-Path $directory legacy.json;[IO.File]::WriteAllText($legacy,'{"Version":1,"AlwaysRun":true,"TurnSpeed":150}');$legacyHash=(Get-FileHash $legacy).Hash
     $migrated=Read-DoomUserSettings $legacy
-    Check 'Version-one preferences migrate in memory without rewriting user file' ($migrated.Values.Version -eq 3 -and $migrated.Values.AlwaysRun -and $migrated.Values.SoundVolume -eq 100 -and $migrated.Values.MusicVolume -eq 100 -and -not $migrated.Values.SoundMuted -and (Get-FileHash $legacy).Hash -eq $legacyHash)
+    Check 'Version-one preferences migrate in memory without rewriting user file' ($migrated.Values.Version -eq 4 -and $migrated.Values.AlwaysRun -and $migrated.Values.SoundVolume -eq 100 -and $migrated.Values.MusicVolume -eq 100 -and $migrated.Values.Bindings.Forward -eq 87 -and -not $migrated.Values.SoundMuted -and (Get-FileHash $legacy).Hash -eq $legacyHash)
     $migrated.Values.SoundVolume=40;$migrated.Values.SoundMuted=$true;$null=Write-DoomUserSettings $legacy $migrated.Values $legacyHash
     $soundRead=Read-DoomUserSettings $legacy
-    Check 'Sound gain and mute persist in version three' ($soundRead.Values.SoundVolume -eq 40 -and $soundRead.Values.SoundMuted -and (Get-Content $legacy -Raw|ConvertFrom-Json).Version -eq 3)
+    Check 'Sound gain and mute persist alongside default keys' ($soundRead.Values.SoundVolume -eq 40 -and $soundRead.Values.SoundMuted -and (Get-Content $legacy -Raw|ConvertFrom-Json).Version -eq 4)
     $legacyV2=Join-Path $directory legacy-v2.json;[IO.File]::WriteAllText($legacyV2,'{"Version":2,"AlwaysRun":false,"TurnSpeed":100,"SoundVolume":40,"SoundMuted":true}');$legacyV2Hash=(Get-FileHash $legacyV2).Hash
     $migratedV2=Read-DoomUserSettings $legacyV2
-    Check 'Version-two gain migrates to both levels without rewrite' ($migratedV2.Values.Version -eq 3 -and $migratedV2.Values.SoundVolume -eq 40 -and $migratedV2.Values.MusicVolume -eq 40 -and (Get-FileHash $legacyV2).Hash -eq $legacyV2Hash)
+    Check 'Version-two gain migrates to both levels without rewrite' ($migratedV2.Values.Version -eq 4 -and $migratedV2.Values.SoundVolume -eq 40 -and $migratedV2.Values.MusicVolume -eq 40 -and (Get-FileHash $legacyV2).Hash -eq $legacyV2Hash)
     $migratedV2.Values.MusicVolume=70;$null=Write-DoomUserSettings $legacyV2 $migratedV2.Values $legacyV2Hash;$independent=Read-DoomUserSettings $legacyV2
     Check 'Effects and music levels persist independently' ($independent.Values.SoundVolume -eq 40 -and $independent.Values.MusicVolume -eq 70 -and $independent.Values.SoundMuted)
     foreach($badVolume in -1,101,'50',50.5,$true){$invalid=New-DoomUserSettings;$invalid.SoundVolume=$badVolume;$rejected=$false;try{$null=Copy-DoomUserSettings $invalid}catch{$rejected=$true};Check "Reject invalid sound volume $badVolume" $rejected}
+    $invalid=New-DoomUserSettings;$invalid.Bindings.Fire=$invalid.Bindings.Forward;$rejected=$false;try{$null=Copy-DoomUserSettings $invalid}catch{$rejected=$true};Check 'Reject conflicting persisted game keys' $rejected
     foreach($badVolume in -1,101,'50',50.5,$true){$invalid=New-DoomUserSettings;$invalid.MusicVolume=$badVolume;$rejected=$false;try{$null=Copy-DoomUserSettings $invalid}catch{$rejected=$true};Check "Reject invalid music volume $badVolume" $rejected}
     $invalid=New-DoomUserSettings;$invalid.SoundMuted='false';$rejected=$false;try{$null=Copy-DoomUserSettings $invalid}catch{$rejected=$true};Check 'Reject string mute value' $rejected
     $hash2=Write-DoomUserSettings $path $values $hash;$rejected=$false
@@ -69,11 +70,25 @@ try{
     $null=Invoke-DoomMenuKey $menu Down;$null=Invoke-DoomMenuKey $menu Enter
     Check 'Mute effects keeps independent levels' ($menu.Settings.SoundMuted -and $menu.Settings.SoundVolume -eq 100 -and $menu.Settings.MusicVolume -eq 100)
     $null=Invoke-DoomMenuKey $menu Down;$action=Invoke-DoomMenuKey $menu Enter
-    Check 'Reset restores both input defaults' (-not $menu.Settings.AlwaysRun -and $menu.Settings.TurnSpeed -eq 100 -and $action.SettingsChanged)
+    Check 'Settings opens the key configuration screen' ($menu.Screen -eq 15 -and -not $action.SettingsChanged)
+    $null=Invoke-DoomMenuKey $menu Enter;Check 'Selected action enters key capture mode' $menu.AwaitingBinding
+    $action=Invoke-DoomMenuKey $menu Capture -CaptureVirtualKey 82
+    Check 'Captured key remaps Forward and requests persistence' ($menu.Settings.Bindings.Forward -eq 82 -and $action.SettingsChanged -and -not $menu.AwaitingBinding)
+    $null=Invoke-DoomMenuKey $menu Enter;$action=Invoke-DoomMenuKey $menu Capture -CaptureVirtualKey 68
+    Check 'Conflicting key leaves both actions unchanged' ($menu.Settings.Bindings.Forward -eq 82 -and $menu.Settings.Bindings.StrafeRight -eq 68 -and -not $action.SettingsChanged)
+    $null=Invoke-DoomMenuKey $menu Enter;$action=Invoke-DoomMenuKey $menu Capture -CaptureVirtualKey 80
+    Check 'Pause key remains reserved' ($menu.Settings.Bindings.Forward -eq 82 -and -not $action.SettingsChanged -and $menu.MessageTitle -eq 'KEY NOT AVAILABLE')
+    $null=Invoke-DoomMenuKey $menu Escape
+    Check 'Key screen returns to settings' ($menu.Screen -eq 14 -and $menu.Choice -eq 5)
+    $null=Invoke-DoomMenuKey $menu Down;$action=Invoke-DoomMenuKey $menu Enter
+    Check 'Reset restores keyboard and gameplay option defaults' (-not $menu.Settings.AlwaysRun -and $menu.Settings.TurnSpeed -eq 100 -and $menu.Settings.Bindings.Forward -eq 87 -and $action.SettingsChanged)
     Check 'Reset also restores independent audio defaults' ($menu.Settings.SoundVolume -eq 100 -and $menu.Settings.MusicVolume -eq 100 -and -not $menu.Settings.SoundMuted)
     $null=Invoke-DoomMenuKey $menu Down;$action=Invoke-DoomMenuKey $menu Enter
     Check 'Back returns to selected settings item' ($menu.Screen -eq 1 -and $menu.Choice -eq 5 -and -not $action.SettingsChanged)
     $state=@{Keys=[bool[]]::new(256);Pressed=[bool[]]::new(256);Suppressed=[bool[]]::new(256)};$cmd=[SettingsTestCommand]::new()
+    $custom=New-DoomKeyBindings;$custom.Forward=82;$state.Keys[82]=$true;Set-DoomInputCommand $state $cmd -Bindings $custom
+    Check 'Custom key reaches gameplay command generation' ($cmd.ForwardMove -eq 25)
+    $state.Keys[82]=$false
     $state.Keys[87]=$true;$state.Keys[68]=$true;$state.Keys[37]=$true
     foreach($always in $false,$true){foreach($shift in $false,$true){foreach($turn in 50,100,150){
         $state.Keys[16]=$shift;Set-DoomInputCommand $state $cmd -AlwaysRun:$always -TurnSpeed $turn

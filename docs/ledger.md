@@ -6297,3 +6297,17 @@ cutoff, matching the original backend's channel stop instead of retaining a
 silent voice that could become audible again. The packet regression exercises
 near-to-far movement. The mixer and packet suites pass 27 and 10 checks; the
 MAP08 floor remains unaffected.
+
+### Editable game controls — October 2, 2026
+
+The Settings menu now remaps movement, strafe, turn, fire, use and run keys.
+Bindings save in settings JSON version 4; versions 1–3 migrate to the existing
+defaults when read. Menu, automap, pause and weapon-selection keys are reserved,
+conflicts are rejected, and WASD/arrows plus the Space/Enter use aliases remain
+available. The gameplay command generator and UI stay in PowerShell.
+
+Focused checks pass: 80 settings/input assertions, 139 menu checks with 59
+native WAD screen fixtures, 10 held-key/menu-reset checks, and parsing of all six
+changed PowerShell files. These cover command generation and rendered menu
+bounds; they do not observe a physical keypress or qualify the campaign. This
+is commit 21 after Preview.6; the requested release threshold remains 35.
