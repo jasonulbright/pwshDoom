@@ -1006,3 +1006,9 @@ all-mode16-worker palette/fuzz comparisons match960,000 pixels/240 strips
 against serial rendering. These establish the narrow math correction and
 worker consistency, with independent original-frame/moving-world evidence
 still open. New recording source manifests explicitly include SpriteProjection.
+
+Separate [current-build three-mode recordings](../results/sprite-slope-effects-live-20261002.json)
+now retain37 source pins and56 consistency checks. Six reviewed pickup/damage
+samples preserve the modes, HUD and notices. These do not independently
+exercise the synthetic rotation-bucket crossing or establish original-image
+parity; the exact helper tests cover that narrow arithmetic condition.

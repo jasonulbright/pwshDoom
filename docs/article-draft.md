@@ -229,3 +229,10 @@ PowerShell helper passes the expanded math and all-style worker checks.
 [Reproduction, test blind spot and limits](../results/sprite-slope-correction-20261002.json).
 This establishes the specific arithmetic correction, with independent moving
 original-game frames still required for broader fidelity claims.
+
+Separate recordings on the corrected build retain all three modes and source
+pins, with no uncovered audio interval inside their gameplay-write windows.
+Startup/post-game gaps and the prior-build Matrix gap remain explicit.
+[Current recording coverage](../results/sprite-slope-effects-live-20261002.json).
+Passing digital consistency still leaves acoustic continuity and independent
+moving-world original-image comparisons unqualified.

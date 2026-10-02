@@ -453,3 +453,13 @@ Count reaches11 after Preview.5. Record actual effects on the corrected
 committed source, then continue independent moving-world fidelity. Prior
 native measurements remain pinned to the earlier build; all full gates stay
 active.
+
+The corrected sprite build now has actual Classic/Matrix/color-art WGC/audio
+recordings with37 unchanged source pins and56 consistency checks. All420
+commands/two checkpoints/audio reconcile. Reviewed effect samples preserve
+the three styles; these runs have no uncovered interval inside gameplay
+writes, while startup/post-game gaps and the prior-build Matrix gap remain.
+[Current-build recording and limits](../results/sprite-slope-effects-live-20261002.json).
+Count reaches12 after Preview.5. Continue remaining fidelity, correctness and
+measured bottleneck work; full human campaign/physical/acoustic/DPI/hardware
+qualification remains open.

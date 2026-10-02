@@ -5649,3 +5649,32 @@ native rates and live recordings belong to97ff8d9, before this correction.
 Next record actual effects on the new committed build, then continue
 independent moving-world fidelity and remaining full-release work. Do not
 call helper math or serial/parallel equality original-framebuffer parity.
+
+### 2026-10-02 — Corrected sprite build recorded in all modes
+
+Three finite actual WGC/loopback runs on7cee1fc complete using the existing
+15sec post-report target hold. All37 recording sources, now including the
+shared SpriteProjection helper, match. All420 exact stress commands/two
+checkpoints,63 scheduled audio events, palette metadata and complete packet/
+credit/PCM shutdown accounting pass56 consistency checks. Submitted/returned
+frames are574,560 Classic,577,080 Matrix and574,560 AnsiArt. All57 recorded
+game/Terminal PIDs are absent after collection; no termination is needed.
+[Current-build media/source receipt](../results/sprite-slope-effects-live-20261002.json).
+
+Six reviewed full-window pickup/damage samples retain pixels, green Matrix
+glyphs, color-art glyphs, pistol/imp/HUD and notices; Classic/AnsiArt show red
+damage tint and Matrix remains green. Review uses2048x829 from3440x1392, not a
+whole-movie or independent original-frame comparison. Independent packet/QPC
+reconstruction finds no zero-filled interval overlapping gameplay writes in
+these three runs. Startup is outside capture coverage and24.7–25.7ms near-tail
+gaps occur after gameplay writes. The earlier97ff8d9 Matrix20ms active gap
+remains retained separately: no audio algorithm changed, and these unpaired
+successes do not isolate its cause or resolution. Acoustic continuity, physical
+A/V latency and full-campaign audio remain unqualified.
+
+This evidence commit reaches12 after Preview.5. Preserve the complete release
+scope and35-commit release rule. Continue independent moving-world fidelity,
+focused gameplay/session correctness and measured bottleneck work rather than
+repeating this same short recording matrix without a new reason. Whole human
+Episode1/Ultimate Doom campaign and physical/acoustic/DPI/second-hardware gates
+remain open; existing tests and synthetic fixtures do not substitute for them.
