@@ -1,7 +1,7 @@
 #requires -Version 7.4
 # SPDX-License-Identifier: GPL-2.0-or-later
 param([string]$Wad='C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\base\DOOM.WAD',
-    [ValidateSet('Classic','Matrix','AnsiArt')][string]$Style='Classic',[ValidateRange(1,32)][int]$Workers=16,[switch]$ResourceReuse,[string]$Output="$PSScriptRoot/../local/session-worker.json")
+    [ValidateSet('Classic','Matrix','AnsiArt')][string]$Style='Classic',[ValidateRange(1,32)][int]$Workers=16,[switch]$ResourceReuse,[switch]$NonblockingReload,[switch]$ReloadFailure,[string]$Output="$PSScriptRoot/../local/session-worker.json")
 $ErrorActionPreference='Stop'
 if(Test-Path -LiteralPath $Output){throw 'Use a fresh result path.'}
 $sourceRoot=[IO.Path]::GetFullPath("$PSScriptRoot/..")
@@ -65,7 +65,19 @@ try{
     $context.PlaneSpanBoundaries=[int[]]@($pool.Workers|ForEach-Object {$_.End})
     Write-GameRenderAssets $context $palette $pool.Assets
     if((Get-FileHash -LiteralPath $pool.Assets).Hash -eq $oldHash){throw 'Map asset test did not change geometry.'}
-    Update-GameRenderAssets $pool
+    if($NonblockingReload){
+        Start-GameRenderAssetReload $pool
+        $rejected=0
+        try{Start-GameRenderAssetReload $pool}catch{if($_.Exception.Message -ne 'A map asset reload is already in progress.'){throw};$rejected++}
+        try{Submit-GameRender $pool $columns -ScreenPixels}catch{if($_.Exception.Message -ne 'Finish map asset reload before rendering.'){throw};$rejected++}
+        try{Wait-GameRender $pool}catch{if($_.Exception.Message -ne 'Finish map asset reload before harvesting rendering.'){throw};$rejected++}
+        $polls=0;$unfinished=0
+        do{$ready=Complete-GameRenderAssetReload $pool;$polls++;if(-not $ready){$unfinished++;[Threading.Thread]::Sleep(1)}}while(-not $ready)
+        $missingRejected=$false
+        try{$null=Complete-GameRenderAssetReload $pool}catch{if($_.Exception.Message -ne 'No map asset reload is in progress.'){throw};$missingRejected=$true}
+        if($rejected -ne 3 -or -not $missingRejected -or $pool.AssetReloadPending){throw 'Nonblocking asset ownership guards failed.'}
+        $checks.Add(@{Episode=$target[0];Map=$target[1];ReloadPolls=$polls;UnfinishedPolls=$unfinished;OverlappingOperationsRejected=$rejected;DuplicateCompletionRejected=$missingRejected})
+    }else{Update-GameRenderAssets $pool}
     if($ResourceReuse){
         $expectedReuse=[object]::ReferenceEquals($previous.SkyTextureReference,$context.SkyTextureReference)
         foreach($reload in $pool.AssetReloadResults){if($reload.ResourceBodyReused -ne $expectedReuse){throw 'Worker body hash reuse/invalidation disagrees with the sky change.'}}
@@ -83,9 +95,21 @@ try{
     Assert-WorkerImage $context.Pixels $snapshot.Tic
     if(($pids -join ',') -ne (@($pool.Workers.Process.Id) -join ',')){throw 'Worker processes restarted during reload.'}
     }
+    if($ReloadFailure){
+        if(-not $NonblockingReload -or -not $pool.OwnAssets){throw 'Failure injection requires nonblocking reload and test-owned assets.'}
+        $writer=[IO.BinaryWriter]::new([IO.File]::Create($pool.Assets))
+        try{$writer.Write('invalid-test-only-format')}finally{$writer.Dispose()}
+        $watch=[Diagnostics.Stopwatch]::StartNew();$rejected=$false
+        Start-GameRenderAssetReload $pool
+        try{while(-not (Complete-GameRenderAssetReload $pool)){[Threading.Thread]::Sleep(1)}}catch{
+            if($_.Exception.Message -notlike '*Unknown render asset format.*'){throw};$rejected=$true
+        }
+        if(-not $rejected -or $watch.Elapsed.TotalSeconds -gt 5){throw 'Failed worker reload was not promptly propagated.'}
+        $checks.Add(@{CorruptOwnedAssetReloadRejected=$true;DetectionMilliseconds=$watch.Elapsed.TotalMilliseconds;PoolRemainsOwnedUntilCleanup=$pool.AssetReloadPending})
+    }
     foreach($source in $sources){if((Get-FileHash -LiteralPath "$sourceRoot/$($source.Path)").Hash -cne $source.Sha256){throw 'Source changed during worker qualification.'}}
 }catch{$failure=$_.ToString();throw}finally{
-    @{FinishedUtc=[DateTime]::UtcNow.ToString('o');Error=$failure;Style=$Style;GlyphSet='Katakana';Workers=$Workers;ResourceReuse=[bool]$ResourceReuse;Checks=$checks.ToArray();WorkerProcessesPreserved=$null -eq $failure;
+    @{FinishedUtc=[DateTime]::UtcNow.ToString('o');Error=$failure;Style=$Style;GlyphSet='Katakana';Workers=$Workers;ResourceReuse=[bool]$ResourceReuse;NonblockingReload=[bool]$NonblockingReload;ReloadFailure=[bool]$ReloadFailure;Checks=$checks.ToArray();WorkerProcessesPreserved=$null -eq $failure;
         Sources=$sources;WadSha256=(Get-FileHash -LiteralPath $Wad).Hash;Runtime=$PSVersionTable.PSVersion.ToString();
         Meaning='Actual worker processes: independent column/row-major screen and encoded strip equivalence, then changed-map rasterization against the serial reference without restarting workers. ResourceReuse adds E1M2/E2M1/E3M1/E1M2 sky reloads, fresh-resource pixel oracles, private mutable scratch and foreign-content rejection. This is a transport/lifecycle check, not campaign completion or a performance benchmark.'}|ConvertTo-Json -Depth 6|Set-Content -LiteralPath $Output
     if($null -ne $pool){Close-GameRenderPool $pool};if($null -ne $content){$content.Dispose()}

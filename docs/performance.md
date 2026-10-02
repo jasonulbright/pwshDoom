@@ -1263,3 +1263,8 @@ not a general winner or a release performance pass. Further work must reduce
 transition display gaps and repeat other styles, viewport sizes and heavier
 workloads. Optical frame identity, acoustic review and second hardware remain
 unqualified.
+
+
+## Loading feedback after R19
+
+[Pollable reloads and separate loading UI](loading-screen.md) now allow feedback during map preparation and worker reload. Four actual WGC/audio recordings qualify specific route/save/ownership behavior, with separate UI counters and no gameplay FPS credit. The ordinary route's first UI dispatch takes 7.15 ms but its completion observation takes 989.6 ms; later updates are about 100 ms apart. This is a recorded correctness/effect test, not a clean ETW comparison or a pause-free-display qualification. Native task completion, host observation delay and terminal backpressure need stronger separation before causal attribution. R19 and the twelve-run comparison remain frozen evidence from the earlier source.

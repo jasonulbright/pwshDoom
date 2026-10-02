@@ -1,0 +1,1000 @@
+{
+  "FinishedUtc": "2026-10-02T01:11:24.439720+00:00",
+  "Error": null,
+  "Checks": [
+    {
+      "Name": "Classic completes every fixture command",
+      "Passed": true
+    },
+    {
+      "Name": "Classic matches independent checkpoints",
+      "Passed": true
+    },
+    {
+      "Name": "Classic capture completes without source drift",
+      "Passed": true
+    },
+    {
+      "Name": "Classic closes device and returns submitted frames",
+      "Passed": true
+    },
+    {
+      "Name": "Classic captured audio closes cleanly",
+      "Passed": true
+    },
+    {
+      "Name": "Classic merged video and timestamps preserved",
+      "Passed": true
+    },
+    {
+      "Name": "Classic all observed notice text/timers match independent oracle",
+      "Passed": true
+    },
+    {
+      "Name": "Classic observes active and expired notices",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix completes every fixture command",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix matches independent checkpoints",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix capture completes without source drift",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix closes device and returns submitted frames",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix captured audio closes cleanly",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix merged video and timestamps preserved",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix all observed notice text/timers match independent oracle",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix observes active and expired notices",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt completes every fixture command",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt matches independent checkpoints",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt capture completes without source drift",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt closes device and returns submitted frames",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt captured audio closes cleanly",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt merged video and timestamps preserved",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt all observed notice text/timers match independent oracle",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt observes active and expired notices",
+      "Passed": true
+    }
+  ],
+  "Runs": [
+    {
+      "Style": "Classic",
+      "TerminalOutput": "Strips",
+      "FramesChecked": 414,
+      "ActiveNoticeFrames": 344,
+      "ExpiredNoticeFrames": 70,
+      "Commands": 350,
+      "Checkpoints": 11,
+      "SubmittedAudioFrames": 476280,
+      "QueueStarvationObservations": 0,
+      "RebufferResumes": 0,
+      "ActiveSimulationTicsPerSecond": 34.389146282369204,
+      "CompletedWritesPerActiveSecond": 40.972211427851306,
+      "SessionPauseSeconds": 6.906043600000001,
+      "MapReloadPauseSeconds": 0.6273555000000001,
+      "Files": [
+        {
+          "Path": "local/recordings/loading-notices-Classic-r1-game.json",
+          "Sha256": "65BB51E09A0B565F364F51B9996C625A938BD9661062E6EA71CC6032A57C9177"
+        },
+        {
+          "Path": "local/recordings/loading-notices-Classic-r1-recording.json",
+          "Sha256": "5007A3E0BAD9141BB8C98CDBA595009ECC09CC3A665368072CEA3D562720DEA0"
+        },
+        {
+          "Path": "local/recordings/loading-notices-Classic-r1-input.json",
+          "Sha256": "4F7C3CD27895929D982892D1D4C51CA235B1430CA4316B2C9B5336366512CC4A"
+        },
+        {
+          "Path": "local/recordings/loading-notices-Classic-r1-audio.json",
+          "Sha256": "7255598333686685CFEF0C3B7F91F44BE7356E622FB4025AA0C13890C1F6622D"
+        },
+        {
+          "Path": "local/recordings/loading-notices-Classic-r1-audio.wav",
+          "Sha256": "30B65A560B934C0A2FB2787585124989216F398045916E10DA6606A486AC1FB0"
+        },
+        {
+          "Path": "local/recordings/loading-notices-Classic-r1-av.json",
+          "Sha256": "59B5AFBE5D2F030F659E94CC141B6F6B5C4F72FF8B4DC6C8FD1A1C9EF6479DEA"
+        },
+        {
+          "Path": "local/recordings/loading-notices-Classic-r1-av.mp4",
+          "Sha256": "74AAEF467F9ADB04B55A7C2FDD793F4DF4D316D83D739EE4B16DAF1A5989CE31"
+        },
+        {
+          "Path": "local/recordings/loading-notices-Classic-r1.mp4",
+          "Sha256": "71B04BA2C957EF3AF061F9239B77419D3713AAE72F822EB2E6389EAF922A3C65"
+        },
+        {
+          "Path": "local/recordings/loading-notices-Classic-r1-ffmpeg.log",
+          "Sha256": "7905EF8FBF90DF2767D1C247BF967D01201326FE099125B0DE134D90AA3970F2"
+        }
+      ]
+    },
+    {
+      "Style": "Matrix",
+      "TerminalOutput": "AsyncBatch",
+      "FramesChecked": 463,
+      "ActiveNoticeFrames": 393,
+      "ExpiredNoticeFrames": 70,
+      "Commands": 350,
+      "Checkpoints": 11,
+      "SubmittedAudioFrames": 483840,
+      "QueueStarvationObservations": 0,
+      "RebufferResumes": 0,
+      "ActiveSimulationTicsPerSecond": 33.05598355708488,
+      "CompletedWritesPerActiveSecond": 44.01168096457587,
+      "SessionPauseSeconds": 6.6617359,
+      "MapReloadPauseSeconds": 0.29541259999999964,
+      "Files": [
+        {
+          "Path": "local/recordings/loading-notices-Matrix-r1-game.json",
+          "Sha256": "19FA7673828AAE72BB6F13A49385CA0B9DD311D8CAAAF6BC1A12E87F27730F1B"
+        },
+        {
+          "Path": "local/recordings/loading-notices-Matrix-r1-recording.json",
+          "Sha256": "E82EA794464E59ABBC8F84710C36BE1E5234CB3268CA8955CD6273B66099EB0E"
+        },
+        {
+          "Path": "local/recordings/loading-notices-Matrix-r1-input.json",
+          "Sha256": "ED501A8483425E1B4F54DD818F33AA312C5DA8DE7D57350D7F919C8B52D3CA80"
+        },
+        {
+          "Path": "local/recordings/loading-notices-Matrix-r1-audio.json",
+          "Sha256": "FAA4675F720BB39D63741FED5A4BFD48A6E02737C57922DE9F86B561D1F40763"
+        },
+        {
+          "Path": "local/recordings/loading-notices-Matrix-r1-audio.wav",
+          "Sha256": "92B0D3C76D8C1F9F530C0B6C987B2D2E9C57364DF7DB3ACB42381A835B282D35"
+        },
+        {
+          "Path": "local/recordings/loading-notices-Matrix-r1-av.json",
+          "Sha256": "E9EABFA7ACB937AC2FA7FB7DE117A0D71AD9812F1A1B9B34221D5315094410F3"
+        },
+        {
+          "Path": "local/recordings/loading-notices-Matrix-r1-av.mp4",
+          "Sha256": "85F31EB7F6E8625EEF279769D3B031B0DADA08D97A5BCF6D29B4E0D3FDFC470D"
+        },
+        {
+          "Path": "local/recordings/loading-notices-Matrix-r1.mp4",
+          "Sha256": "F7D2FE4095EB0CE3884E5DE45F03E831ED22FF0118CFD1C001EDA7E902BA40B6"
+        },
+        {
+          "Path": "local/recordings/loading-notices-Matrix-r1-ffmpeg.log",
+          "Sha256": "5D498B9C010D36EC907BD9BB3893EDA49E5EB59B93CBCC05C2422F1D7333DFD6"
+        }
+      ]
+    },
+    {
+      "Style": "AnsiArt",
+      "TerminalOutput": "Strips",
+      "FramesChecked": 398,
+      "ActiveNoticeFrames": 334,
+      "ExpiredNoticeFrames": 64,
+      "Commands": 350,
+      "Checkpoints": 11,
+      "SubmittedAudioFrames": 468720,
+      "QueueStarvationObservations": 0,
+      "RebufferResumes": 0,
+      "ActiveSimulationTicsPerSecond": 34.865428858272864,
+      "CompletedWritesPerActiveSecond": 39.945819920478336,
+      "SessionPauseSeconds": 6.8308573,
+      "MapReloadPauseSeconds": 0.5895285000000012,
+      "Files": [
+        {
+          "Path": "local/recordings/loading-notices-AnsiArt-r1-game.json",
+          "Sha256": "BE66568E3E6A3FDFA9DEE8EA530A414979295F0DEE053482BB12DFFA6D2773A9"
+        },
+        {
+          "Path": "local/recordings/loading-notices-AnsiArt-r1-recording.json",
+          "Sha256": "62547B6B9A975BC92286C00989101C16425BDFA27C129DEDCC572EAEB5F1FD56"
+        },
+        {
+          "Path": "local/recordings/loading-notices-AnsiArt-r1-input.json",
+          "Sha256": "46221367CE7C745AF7DE6567A0BF384A538EDB037533FAD8CC2E16E9B28FA66B"
+        },
+        {
+          "Path": "local/recordings/loading-notices-AnsiArt-r1-audio.json",
+          "Sha256": "87EEF84BA5BEA64D50772A5ED9F7073CF323DAE836FE1FE2079293D3BE26EFDE"
+        },
+        {
+          "Path": "local/recordings/loading-notices-AnsiArt-r1-audio.wav",
+          "Sha256": "B0EAEFBC45CACB28F92D30CDAF9777580EDE5F3CC41CE4738D8C32910BCAEC21"
+        },
+        {
+          "Path": "local/recordings/loading-notices-AnsiArt-r1-av.json",
+          "Sha256": "FF9B0EB6BDAD65AF07D8468B0726BA86D5D97E53CC5647E9393A144554B3B7DB"
+        },
+        {
+          "Path": "local/recordings/loading-notices-AnsiArt-r1-av.mp4",
+          "Sha256": "B5B0800108C4FFACE75DD8A008801C7CCB8F02E52DCF472985FEDDC70CC494C0"
+        },
+        {
+          "Path": "local/recordings/loading-notices-AnsiArt-r1.mp4",
+          "Sha256": "E2D48DBB8518C64F4524902777EA3D31CA8C2176B1B1DDAF7E92D0A9020C0761"
+        },
+        {
+          "Path": "local/recordings/loading-notices-AnsiArt-r1-ffmpeg.log",
+          "Sha256": "F475B68D6639431A2C6A71AF98979FA1CE24AC404FBC8F0D58DCC0F00AFC933E"
+        }
+      ]
+    }
+  ],
+  "Fixture": {
+    "Path": "local/player-messages-readable-fixture-r1.json",
+    "Sha256": "0E4EF47E9CDEF4C496602958BBA218A2C440FA4C75AC0B7C227AD83159ABAC00"
+  },
+  "AuditSha256": "D951C0982FBF8745FF30DB02B2E3BAF2637DE5C946C08627695AA073219C67FC",
+  "Meaning": "Actual Windows Terminal recordings of final typography and loading UI in all three styles; Classic/AnsiArt use Strips and Matrix uses AsyncBatch with process-loopback game audio. Every observed world/automap notice is checked against independent saved-state fixture text/timer; eleven game checkpoints per run. Classic uses the IWAD bitmap; character styles use the terminal font. Typography is reviewed separately using samples. Recordings are loaded tests, not clean pacing trials, acoustic/device-latency measurements, or ordinary-input map completion.",
+  "LoadingLifecycle": {
+    "Checks": [
+      {
+        "Name": "local/recordings/loading-route-Classic-r1 clean route/audio/media exit",
+        "Passed": true
+      },
+      {
+        "Name": "local/recordings/loading-route-Classic-r1 audio fully returned",
+        "Passed": true
+      },
+      {
+        "Name": "local/recordings/loading-route-Classic-r1 loading updates counted separately",
+        "Passed": true
+      },
+      {
+        "Name": "local/recordings/loading-route-Classic-r1 update numbers and phases valid",
+        "Passed": true
+      },
+      {
+        "Name": "local/recordings/loading-route-Classic-r1 reported output ownership intervals disjoint",
+        "Passed": true
+      },
+      {
+        "Name": "local/recordings/loading-route-Classic-r1 each completed handoff has loading updates",
+        "Passed": true
+      },
+      {
+        "Name": "Ordinary E1M1/intermission/E1M2 generation is acknowledged",
+        "Passed": true
+      },
+      {
+        "Name": "local/recordings/loading-notices-Classic-r1 clean route/audio/media exit",
+        "Passed": true
+      },
+      {
+        "Name": "local/recordings/loading-notices-Classic-r1 audio fully returned",
+        "Passed": true
+      },
+      {
+        "Name": "local/recordings/loading-notices-Classic-r1 loading updates counted separately",
+        "Passed": true
+      },
+      {
+        "Name": "local/recordings/loading-notices-Classic-r1 update numbers and phases valid",
+        "Passed": true
+      },
+      {
+        "Name": "local/recordings/loading-notices-Classic-r1 reported output ownership intervals disjoint",
+        "Passed": true
+      },
+      {
+        "Name": "local/recordings/loading-notices-Classic-r1 each completed handoff has loading updates",
+        "Passed": true
+      },
+      {
+        "Name": "local/recordings/loading-notices-Matrix-r1 clean route/audio/media exit",
+        "Passed": true
+      },
+      {
+        "Name": "local/recordings/loading-notices-Matrix-r1 audio fully returned",
+        "Passed": true
+      },
+      {
+        "Name": "local/recordings/loading-notices-Matrix-r1 loading updates counted separately",
+        "Passed": true
+      },
+      {
+        "Name": "local/recordings/loading-notices-Matrix-r1 update numbers and phases valid",
+        "Passed": true
+      },
+      {
+        "Name": "local/recordings/loading-notices-Matrix-r1 reported output ownership intervals disjoint",
+        "Passed": true
+      },
+      {
+        "Name": "local/recordings/loading-notices-Matrix-r1 each completed handoff has loading updates",
+        "Passed": true
+      },
+      {
+        "Name": "local/recordings/loading-notices-AnsiArt-r1 clean route/audio/media exit",
+        "Passed": true
+      },
+      {
+        "Name": "local/recordings/loading-notices-AnsiArt-r1 audio fully returned",
+        "Passed": true
+      },
+      {
+        "Name": "local/recordings/loading-notices-AnsiArt-r1 loading updates counted separately",
+        "Passed": true
+      },
+      {
+        "Name": "local/recordings/loading-notices-AnsiArt-r1 update numbers and phases valid",
+        "Passed": true
+      },
+      {
+        "Name": "local/recordings/loading-notices-AnsiArt-r1 reported output ownership intervals disjoint",
+        "Passed": true
+      },
+      {
+        "Name": "local/recordings/loading-notices-AnsiArt-r1 each completed handoff has loading updates",
+        "Passed": true
+      },
+      {
+        "Name": "Classic actual pollable workers preserve pixels and strips",
+        "Passed": true
+      },
+      {
+        "Name": "Classic reload polls and ownership guards",
+        "Passed": true
+      },
+      {
+        "Name": "Matrix actual pollable workers preserve pixels and strips",
+        "Passed": true
+      },
+      {
+        "Name": "Matrix reload polls and ownership guards",
+        "Passed": true
+      },
+      {
+        "Name": "AnsiArt actual pollable workers preserve pixels and strips",
+        "Passed": true
+      },
+      {
+        "Name": "AnsiArt reload polls and ownership guards",
+        "Passed": true
+      },
+      {
+        "Name": "Corrupted test-owned asset fails promptly",
+        "Passed": true
+      },
+      {
+        "Name": "Independent UI bounds/animation decoder",
+        "Passed": true
+      },
+      {
+        "Name": "Headless saves/checkpoints give no UI frame credit",
+        "Passed": true
+      }
+    ],
+    "Runs": [
+      {
+        "Prefix": "local/recordings/loading-route-Classic-r1",
+        "Style": "Classic",
+        "TerminalOutput": "Strips",
+        "Commands": 1747,
+        "GameplayWrites": 2739,
+        "LoadingUpdates": 7,
+        "LoadingBytes": 4603,
+        "LoadingObservedCompletionMs": [
+          989.561,
+          2.3141,
+          4.1865,
+          1.7127,
+          1.7061,
+          2.1044,
+          2.1055
+        ],
+        "LoadingCompletionGapMs": [
+          6.2675,
+          95.476,
+          97.8365,
+          101.6254,
+          101.0757,
+          101.8675
+        ],
+        "MapReloads": [
+          {
+            "Generation": 2,
+            "Tic": 1676,
+            "Map": 2,
+            "WorkerAssetReloads": [
+              {
+                "Worker": 0,
+                "Milliseconds": 223.5563,
+                "Pid": 33168,
+                "ResourceBodyReused": true
+              },
+              {
+                "Worker": 1,
+                "Milliseconds": 210.2349,
+                "Pid": 27292,
+                "ResourceBodyReused": true
+              },
+              {
+                "Worker": 2,
+                "Milliseconds": 251.9122,
+                "Pid": 37752,
+                "ResourceBodyReused": true
+              },
+              {
+                "Worker": 3,
+                "Milliseconds": 258.8016,
+                "Pid": 25612,
+                "ResourceBodyReused": true
+              },
+              {
+                "Worker": 4,
+                "Milliseconds": 248.7265,
+                "Pid": 27888,
+                "ResourceBodyReused": true
+              },
+              {
+                "Worker": 5,
+                "Milliseconds": 249.6441,
+                "Pid": 22832,
+                "ResourceBodyReused": true
+              },
+              {
+                "Worker": 6,
+                "Milliseconds": 259.38,
+                "Pid": 34660,
+                "ResourceBodyReused": true
+              },
+              {
+                "Worker": 7,
+                "Milliseconds": 241.0628,
+                "Pid": 21604,
+                "ResourceBodyReused": true
+              },
+              {
+                "Worker": 8,
+                "Milliseconds": 247.1573,
+                "Pid": 39192,
+                "ResourceBodyReused": true
+              },
+              {
+                "Worker": 9,
+                "Milliseconds": 232.102,
+                "Pid": 38124,
+                "ResourceBodyReused": true
+              },
+              {
+                "Worker": 10,
+                "Milliseconds": 219.3306,
+                "Pid": 4848,
+                "ResourceBodyReused": true
+              },
+              {
+                "Worker": 11,
+                "Milliseconds": 218.8061,
+                "Pid": 31144,
+                "ResourceBodyReused": true
+              },
+              {
+                "Worker": 12,
+                "Milliseconds": 217.1933,
+                "Pid": 27772,
+                "ResourceBodyReused": true
+              },
+              {
+                "Worker": 13,
+                "Milliseconds": 236.444,
+                "Pid": 15620,
+                "ResourceBodyReused": true
+              },
+              {
+                "Worker": 14,
+                "Milliseconds": 246.324,
+                "Pid": 21428,
+                "ResourceBodyReused": true
+              },
+              {
+                "Worker": 15,
+                "Milliseconds": 242.6021,
+                "Pid": 38240,
+                "ResourceBodyReused": true
+              }
+            ],
+            "LoadingUpdates": 7,
+            "Episode": 1,
+            "RendererAssetsReused": false,
+            "AssetReloadPolls": 118,
+            "EndWallMs": 49535.1505,
+            "WorkerPids": [
+              33168,
+              27292,
+              37752,
+              25612,
+              27888,
+              22832,
+              34660,
+              21604,
+              39192,
+              38124,
+              4848,
+              31144,
+              27772,
+              15620,
+              21428,
+              38240
+            ],
+            "StartWallMs": 47924.7747
+          }
+        ],
+        "Files": [
+          {
+            "Path": "local/recordings/loading-route-Classic-r1-game.json",
+            "Sha256": "B3CE29B2736D8C68237465F1D49D2F536FCC5A75D710E040CA7D384623FC5041"
+          },
+          {
+            "Path": "local/recordings/loading-route-Classic-r1-recording.json",
+            "Sha256": "039F3972260B241CB06C35C20D9D0A54453C09C112906783BB1B69388F78C156"
+          },
+          {
+            "Path": "local/recordings/loading-route-Classic-r1-av.json",
+            "Sha256": "62F481CA2B2AF0CBD8AB7CEEFBCA4FBD5FCB20A54882A542479C5B5599409F56"
+          },
+          {
+            "Path": "local/recordings/loading-route-Classic-r1-av.mp4",
+            "Sha256": "69209D9B5B349C396E5CECAC6F47A0F25FF36F5FC1E5C86F7DA66465753FC380"
+          },
+          {
+            "Path": "local/recordings/loading-route-Classic-r1-audio.json",
+            "Sha256": "CEC90C9D24717E87FD2E6EA1CF483DD86AB439165D83212AB3C2BA13F52060CC"
+          },
+          {
+            "Path": "local/recordings/loading-route-Classic-r1-input.json",
+            "Sha256": "F4FCE224988629505BD8856FF7017A3933BACC87F7B1E7F587C33BF33E3D8890"
+          }
+        ]
+      },
+      {
+        "Prefix": "local/recordings/loading-notices-Classic-r1",
+        "Style": "Classic",
+        "TerminalOutput": "Strips",
+        "Commands": 350,
+        "GameplayWrites": 417,
+        "LoadingUpdates": 8,
+        "LoadingBytes": 5264,
+        "LoadingObservedCompletionMs": [
+          11.9823,
+          2.1446,
+          3.5263,
+          1.761,
+          1.7355,
+          1.2543,
+          2.233,
+          1.2586
+        ],
+        "LoadingCompletionGapMs": [
+          81.1274,
+          7865.844,
+          99.789,
+          100.6016,
+          101.2317,
+          101.0714,
+          99.2276
+        ],
+        "MapReloads": [
+          {
+            "LoadingUpdates": 2,
+            "EndWallMs": 3717.8497,
+            "AssetReloadPolls": 0,
+            "Map": 2,
+            "WorkerAssetReloads": null,
+            "StartWallMs": 3610.8142,
+            "WorkerPids": [
+              27536,
+              21172,
+              21696,
+              23624,
+              23844,
+              26336,
+              13140,
+              27872,
+              34440,
+              12624,
+              21640,
+              28044,
+              22520,
+              18912,
+              35704,
+              2248
+            ],
+            "RendererAssetsReused": true,
+            "Episode": 1,
+            "Tic": 0,
+            "Generation": 2
+          },
+          {
+            "LoadingUpdates": 6,
+            "EndWallMs": 12097.4866,
+            "AssetReloadPolls": 0,
+            "Map": 2,
+            "WorkerAssetReloads": null,
+            "StartWallMs": 11577.1666,
+            "WorkerPids": [
+              27536,
+              21172,
+              21696,
+              23624,
+              23844,
+              26336,
+              13140,
+              27872,
+              34440,
+              12624,
+              21640,
+              28044,
+              22520,
+              18912,
+              35704,
+              2248
+            ],
+            "RendererAssetsReused": true,
+            "Episode": 1,
+            "Tic": 175,
+            "Generation": 3
+          }
+        ],
+        "Files": [
+          {
+            "Path": "local/recordings/loading-notices-Classic-r1-game.json",
+            "Sha256": "65BB51E09A0B565F364F51B9996C625A938BD9661062E6EA71CC6032A57C9177"
+          },
+          {
+            "Path": "local/recordings/loading-notices-Classic-r1-recording.json",
+            "Sha256": "5007A3E0BAD9141BB8C98CDBA595009ECC09CC3A665368072CEA3D562720DEA0"
+          },
+          {
+            "Path": "local/recordings/loading-notices-Classic-r1-av.json",
+            "Sha256": "59B5AFBE5D2F030F659E94CC141B6F6B5C4F72FF8B4DC6C8FD1A1C9EF6479DEA"
+          },
+          {
+            "Path": "local/recordings/loading-notices-Classic-r1-av.mp4",
+            "Sha256": "74AAEF467F9ADB04B55A7C2FDD793F4DF4D316D83D739EE4B16DAF1A5989CE31"
+          },
+          {
+            "Path": "local/recordings/loading-notices-Classic-r1-audio.json",
+            "Sha256": "7255598333686685CFEF0C3B7F91F44BE7356E622FB4025AA0C13890C1F6622D"
+          },
+          {
+            "Path": "local/recordings/loading-notices-Classic-r1-input.json",
+            "Sha256": "4F7C3CD27895929D982892D1D4C51CA235B1430CA4316B2C9B5336366512CC4A"
+          }
+        ]
+      },
+      {
+        "Prefix": "local/recordings/loading-notices-Matrix-r1",
+        "Style": "Matrix",
+        "TerminalOutput": "AsyncBatch",
+        "Commands": 350,
+        "GameplayWrites": 466,
+        "LoadingUpdates": 4,
+        "LoadingBytes": 2632,
+        "LoadingObservedCompletionMs": [
+          3.5058,
+          2.3253,
+          1.6375,
+          1.7485
+        ],
+        "LoadingCompletionGapMs": [
+          89.105,
+          8661.913,
+          100.4108
+        ],
+        "MapReloads": [
+          {
+            "Map": 2,
+            "EndWallMs": 3728.7708,
+            "RendererAssetsReused": true,
+            "WorkerPids": [
+              3576,
+              30712,
+              3600,
+              19380,
+              38624,
+              30984,
+              15080,
+              15220,
+              26072,
+              22440,
+              12308,
+              22912,
+              36184,
+              37248,
+              38772,
+              7588
+            ],
+            "LoadingUpdates": 2,
+            "StartWallMs": 3624.5411,
+            "Generation": 2,
+            "WorkerAssetReloads": null,
+            "Episode": 1,
+            "AssetReloadPolls": 0,
+            "Tic": 0
+          },
+          {
+            "Map": 2,
+            "EndWallMs": 12579.3213,
+            "RendererAssetsReused": true,
+            "WorkerPids": [
+              3576,
+              30712,
+              3600,
+              19380,
+              38624,
+              30984,
+              15080,
+              15220,
+              26072,
+              22440,
+              12308,
+              22912,
+              36184,
+              37248,
+              38772,
+              7588
+            ],
+            "LoadingUpdates": 2,
+            "StartWallMs": 12388.1384,
+            "Generation": 3,
+            "WorkerAssetReloads": null,
+            "Episode": 1,
+            "AssetReloadPolls": 0,
+            "Tic": 175
+          }
+        ],
+        "Files": [
+          {
+            "Path": "local/recordings/loading-notices-Matrix-r1-game.json",
+            "Sha256": "19FA7673828AAE72BB6F13A49385CA0B9DD311D8CAAAF6BC1A12E87F27730F1B"
+          },
+          {
+            "Path": "local/recordings/loading-notices-Matrix-r1-recording.json",
+            "Sha256": "E82EA794464E59ABBC8F84710C36BE1E5234CB3268CA8955CD6273B66099EB0E"
+          },
+          {
+            "Path": "local/recordings/loading-notices-Matrix-r1-av.json",
+            "Sha256": "E9EABFA7ACB937AC2FA7FB7DE117A0D71AD9812F1A1B9B34221D5315094410F3"
+          },
+          {
+            "Path": "local/recordings/loading-notices-Matrix-r1-av.mp4",
+            "Sha256": "85F31EB7F6E8625EEF279769D3B031B0DADA08D97A5BCF6D29B4E0D3FDFC470D"
+          },
+          {
+            "Path": "local/recordings/loading-notices-Matrix-r1-audio.json",
+            "Sha256": "FAA4675F720BB39D63741FED5A4BFD48A6E02737C57922DE9F86B561D1F40763"
+          },
+          {
+            "Path": "local/recordings/loading-notices-Matrix-r1-input.json",
+            "Sha256": "ED501A8483425E1B4F54DD818F33AA312C5DA8DE7D57350D7F919C8B52D3CA80"
+          }
+        ]
+      },
+      {
+        "Prefix": "local/recordings/loading-notices-AnsiArt-r1",
+        "Style": "AnsiArt",
+        "TerminalOutput": "Strips",
+        "Commands": 350,
+        "GameplayWrites": 401,
+        "LoadingUpdates": 7,
+        "LoadingBytes": 4607,
+        "LoadingObservedCompletionMs": [
+          12.2075,
+          2.2262,
+          3.6052,
+          1.7568,
+          1.7739,
+          1.7939,
+          1.7168
+        ],
+        "LoadingCompletionGapMs": [
+          80.2516,
+          7865.6506,
+          98.9684,
+          100.6287,
+          100.5475,
+          101.4275
+        ],
+        "MapReloads": [
+          {
+            "RendererAssetsReused": true,
+            "Map": 2,
+            "WorkerAssetReloads": null,
+            "StartWallMs": 3621.055,
+            "Episode": 1,
+            "WorkerPids": [
+              8020,
+              3132,
+              18856,
+              21440,
+              21636,
+              34832,
+              32528,
+              35112,
+              31092,
+              38164,
+              30220,
+              39492,
+              32228,
+              7984,
+              2292,
+              24860
+            ],
+            "EndWallMs": 3736.5826,
+            "Generation": 2,
+            "Tic": 0,
+            "LoadingUpdates": 2,
+            "AssetReloadPolls": 0
+          },
+          {
+            "RendererAssetsReused": true,
+            "Map": 2,
+            "WorkerAssetReloads": null,
+            "StartWallMs": 11586.05,
+            "Episode": 1,
+            "WorkerPids": [
+              8020,
+              3132,
+              18856,
+              21440,
+              21636,
+              34832,
+              32528,
+              35112,
+              31092,
+              38164,
+              30220,
+              39492,
+              32228,
+              7984,
+              2292,
+              24860
+            ],
+            "EndWallMs": 12060.0509,
+            "Generation": 3,
+            "Tic": 175,
+            "LoadingUpdates": 5,
+            "AssetReloadPolls": 0
+          }
+        ],
+        "Files": [
+          {
+            "Path": "local/recordings/loading-notices-AnsiArt-r1-game.json",
+            "Sha256": "BE66568E3E6A3FDFA9DEE8EA530A414979295F0DEE053482BB12DFFA6D2773A9"
+          },
+          {
+            "Path": "local/recordings/loading-notices-AnsiArt-r1-recording.json",
+            "Sha256": "62547B6B9A975BC92286C00989101C16425BDFA27C129DEDCC572EAEB5F1FD56"
+          },
+          {
+            "Path": "local/recordings/loading-notices-AnsiArt-r1-av.json",
+            "Sha256": "FF9B0EB6BDAD65AF07D8468B0726BA86D5D97E53CC5647E9393A144554B3B7DB"
+          },
+          {
+            "Path": "local/recordings/loading-notices-AnsiArt-r1-av.mp4",
+            "Sha256": "B5B0800108C4FFACE75DD8A008801C7CCB8F02E52DCF472985FEDDC70CC494C0"
+          },
+          {
+            "Path": "local/recordings/loading-notices-AnsiArt-r1-audio.json",
+            "Sha256": "87EEF84BA5BEA64D50772A5ED9F7073CF323DAE836FE1FE2079293D3BE26EFDE"
+          },
+          {
+            "Path": "local/recordings/loading-notices-AnsiArt-r1-input.json",
+            "Sha256": "46221367CE7C745AF7DE6567A0BF384A538EDB037533FAD8CC2E16E9B28FA66B"
+          }
+        ]
+      }
+    ],
+    "WorkerReports": [
+      {
+        "Path": "local/asset-reload-poll-Classic-r1.json",
+        "Sha256": "FEBBE076465DEEA44FE8B29788AC514687E81B5ADE5094D99596BB054037A405"
+      },
+      {
+        "Path": "local/asset-reload-poll-Matrix-r1.json",
+        "Sha256": "70D6FABCB56B0627CEC949A02192C2AE22A1259706E95A43BD208177EBE39B53"
+      },
+      {
+        "Path": "local/asset-reload-poll-AnsiArt-r1.json",
+        "Sha256": "A2C94A422A48B3489B1E047BD588777B99AA3696FAAC906281CC2039F2C39351"
+      },
+      {
+        "Path": "local/asset-reload-poll-failure-Classic-r2.json",
+        "Sha256": "F9C213502BF8571171E6892A17E0E8C88506B99229877A6366A4E20C9AE4CDAB"
+      }
+    ],
+    "ViewportTest": {
+      "Path": "local/loading-screen-bounds-r1.json",
+      "Sha256": "7A29269F66511BF4E8FDA34A3032E431033696EEF158D2DE1567C5932009CE81"
+    },
+    "HeadlessFixture": {
+      "Path": "local/loading-poll-headless-r1.json",
+      "Sha256": "F9A885BD359714EF023FB6B70672DC2475357FFF1B4C865185D7B2FB38330E28"
+    },
+    "SupplementAudit": {
+      "Path": "local/audit-loading-lifecycle.py",
+      "Sha256": "6BE96B0FC71C8CC4AEF7530ED8011E6606CBBB8B94C54FB225A1B3274F68B97A"
+    },
+    "Meaning": "Actual record captures test loading UI, save/checkpoint compatibility, ownership/accounting and changed-map worker acknowledgement. Reported output intervals are completion observations with 1 ms rounding tolerance, not optical frame identities or exact native I/O completion timestamps. The route first loading completion takes about 990 ms; no pause-free UI or pacing qualification is claimed. Headless fixture precedes only the added old-render error/deadline guard; actual recordings include it."
+  },
+  "VisualSamples": [
+    {
+      "Label": "RouteClassic",
+      "Path": "local/loading-RouteClassic-review-r1.png",
+      "Seconds": 89.14243300000001,
+      "LoadingFrame": 3,
+      "SelectedEndQpc": 1760268624710,
+      "Sha256": "551A73EC0CF55553B48CE8D5D91184008543FC56EEE9495A3D57A58718B976D1"
+    },
+    {
+      "Label": "Classic",
+      "Path": "local/loading-Classic-review-r1.png",
+      "Seconds": 52.2205733,
+      "LoadingFrame": 3,
+      "SelectedEndQpc": 1761811586971,
+      "Sha256": "898ECDBB94FCE0530FD988FEDE3659194FCBD183B41059D0DA2CC5038D6F3AB3"
+    },
+    {
+      "Label": "Matrix",
+      "Path": "local/loading-Matrix-review-r1.png",
+      "Seconds": 53.7877581,
+      "LoadingFrame": 3,
+      "SelectedEndQpc": 1762457049641,
+      "Sha256": "13199F463189B7C50EA2C8C22D7491790679B5181E23210C88C12E5AC6E49AAA"
+    },
+    {
+      "Label": "AnsiArt",
+      "Path": "local/loading-AnsiArt-review-r1.png",
+      "Seconds": 53.4469695,
+      "LoadingFrame": 3,
+      "SelectedEndQpc": 1763098544930,
+      "Sha256": "5FC8045C5D621EB5B6AB6016BC5949F1B323956A4674E60F26F72BCC39F1836E"
+    }
+  ],
+  "VisualReview": "The reviewed ordinary-route Classic, Matrix and AnsiArt samples show the centered custom LOADING banner; this is a terminal UI graphic, not an original IWAD menu patch. Samples do not qualify every transition frame or physical-input responsiveness.",
+  "MetadataCorrection": "The cloned first notice-audit description incorrectly said all runs used AsyncBatch. The retained initial audit is local/loading-ui-notice-audit-initial-r1.json; corrected per-run modes are Strips in Classic/AnsiArt, AsyncBatch in Matrix. Game/media checks pass unchanged."
+}

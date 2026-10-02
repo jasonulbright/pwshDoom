@@ -53,3 +53,6 @@ reports its reload duration and reuse decision through the existing IPC header,
 and the host retains these alongside the loading boundary. Hashing, bulk copy
 and IPC use standard .NET APIs; conversion, serialization, gameplay, rasterization
 and mixing algorithms remain PowerShell. [Stage and lifecycle evidence](../results/render-asset-reader-reuse-20261001.json).
+
+
+Map changes now have a pollable worker reload ownership phase. The host keeps loading UI output separate from gameplay output while waiting, then drains it and acknowledges the installed snapshot generation. UI writes have separate accounting and receive no gameplay FPS credit. [Lifecycle, footage and remaining timing limits](loading-screen.md).

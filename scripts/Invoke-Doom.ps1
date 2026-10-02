@@ -23,7 +23,11 @@ if($MusicCatalog){$Sound=$true}
 . "$PSScriptRoot/../src/InputReplay.ps1"
 . "$PSScriptRoot/../src/SessionMenu.ps1"
 . "$PSScriptRoot/../src/TerminalOutput.ps1"
+. "$PSScriptRoot/../src/LoadingScreen.ps1"
 $terminalOutputContext=New-DoomTerminalOutputContext;$emptyOutput=[byte[]]::new(0)
+$loadingOutputContext=New-DoomTerminalOutputContext;$loadingScreen=New-DoomLoadingScreen
+$loadingScreenStats=[Collections.Generic.List[object]]::new();$loadingNextPresentation=0.0;$loadingScreenKey='';$loadingFrameNumber=0
+$loadingSnapshot=$null;$loadingRendererReused=$false;$loadingReloadIssued=$false;$loadingAssetsReady=$false;$loadingReloadPolls=0;$loadingFirstUIFrame=0
 # Input values only; the actual TicCmd and Doom engine live in the simulation process.
 class HostInputCommand {
     [sbyte]$ForwardMove;[sbyte]$SideMove;[int16]$AngleTurn;[byte]$Buttons
@@ -56,6 +60,11 @@ function Receive-DoomTerminalFrame {
     if($null -ne $job){
         Add-DoomCompletedFrame $job.Present $job.EndQpc (($job.EndQpc-$job.StartQpc)*1000.0/[Diagnostics.Stopwatch]::Frequency) $job.Bytes (($job.DispatchQpc-$job.StartQpc)*1000.0/[Diagnostics.Stopwatch]::Frequency)
     }
+}
+function Receive-DoomLoadingFrame {
+    param([switch]$Wait)
+    $job=Complete-DoomTerminalFrame $loadingOutputContext $stdout -Wait:$Wait
+    if($null -ne $job){$loadingScreenStats.Add(@{StartQpc=$job.StartQpc;DispatchQpc=$job.DispatchQpc;EndQpc=$job.EndQpc;Bytes=$job.Bytes;Frame=$job.Frame;Columns=$job.Columns;Rows=$job.Rows;Status=$job.Status})}
 }
 $simulation=$null;$pool=$null;$consoleState=$null;$terminalActive=$false;$timerRequested=$false;$failure=$null
 $oldEncoding=[Console]::OutputEncoding;$esc=[char]27;$clock=[Diagnostics.Stopwatch]::new()
@@ -169,22 +178,57 @@ try {
             if($status -eq 4 -and $assetGeneration -eq $simulation.View.ReadInt32(24)){[Threading.Thread]::Sleep(1);continue}
             if($null -eq $loadingStart){
                 $loadingStart=$wallNow;$loadingWasRunning=$clock.IsRunning;$clock.Stop()
-                if($null -ne $terminalOutputContext.Pending){Receive-DoomTerminalFrame -Wait;$completed=$frameStats.Count}
-                if($inFlight){Wait-GameRender $pool;$inFlight=$false;$transitionDiscarded++}
                 if($null -ne $pendingFrame){$pendingFrame=$null;$transitionDiscarded++}
-                $needsClear=$true
+                $needsClear=$true;$loadingSnapshot=$null;$loadingRendererReused=$false;$loadingReloadIssued=$false;$loadingAssetsReady=$false;$loadingReloadPolls=0
+                $loadingNextPresentation=0;$loadingScreenKey='';$loadingFirstUIFrame=$loadingScreenStats.Count
             }
-            if($status -eq 5){[Threading.Thread]::Sleep(10);continue}
-            [int]$nextAssetGeneration=$simulation.View.ReadInt32(24)
-            $nextSnapshot=Read-DoomSimulationSnapshot $simulation $snapshot
-            if($null -eq $nextSnapshot -or $nextSnapshot.Generation -ne $nextAssetGeneration -or $nextSnapshot.State -notin 0,1,2){throw 'Map assets and snapshot generations disagree.'}
-            $sameRendererMap=$null -ne $snapshot -and $snapshot.Episode -eq $nextSnapshot.Episode -and $snapshot.Map -eq $nextSnapshot.Map
-            if($sameRendererMap){$rendererAssetsReused++}
-            else{Update-GameRenderAssets $pool;$rendererAssetsReloaded++}
-            $snapshot=$nextSnapshot;$assetGeneration=$nextAssetGeneration
+            # Keep pumping output while preparation/reload owns the game clock.
+            # Main frames and loading frames never concurrently own stdout.
+            if($null -ne $terminalOutputContext.Pending){
+                if(([Diagnostics.Stopwatch]::GetTimestamp()-$terminalOutputContext.Pending.StartQpc)/[Diagnostics.Stopwatch]::Frequency -gt 30){throw 'Terminal output drain timed out.'}
+                [Threading.Thread]::Sleep(1);continue
+            }
+            if($inFlight){
+                foreach($worker in $pool.Workers){Get-GameWorkerError $worker}
+                if(Test-GameRenderCompleted $pool){Wait-GameRender $pool;$inFlight=$false;$transitionDiscarded++}
+                elseif(([Diagnostics.Stopwatch]::GetTimestamp()-$activeFrame.StartQpc)/[Diagnostics.Stopwatch]::Frequency -gt 30){throw 'Renderer timed out while entering map load.'}
+            }
+            Receive-DoomLoadingFrame
+            $loadingReady=$false
+            if($status -eq 4){
+                if($null -eq $loadingSnapshot){
+                    [int]$nextAssetGeneration=$simulation.View.ReadInt32(24)
+                    $loadingSnapshot=Read-DoomSimulationSnapshot $simulation $snapshot
+                    if($null -eq $loadingSnapshot -or $loadingSnapshot.Generation -ne $nextAssetGeneration -or $loadingSnapshot.State -notin 0,1,2){throw 'Map assets and snapshot generations disagree.'}
+                    $loadingRendererReused=$null -ne $snapshot -and $snapshot.Episode -eq $loadingSnapshot.Episode -and $snapshot.Map -eq $loadingSnapshot.Map
+                }
+                if(-not $inFlight){
+                    if($loadingRendererReused){$loadingReady=$true}
+                    else{
+                        if(-not $loadingReloadIssued){Start-GameRenderAssetReload $pool;$loadingReloadIssued=$true}
+                        if(-not $loadingAssetsReady){$loadingReloadPolls++;$loadingAssetsReady=Complete-GameRenderAssetReload $pool}
+                        $loadingReady=$loadingAssetsReady
+                    }
+                }
+            }
+            if(-not $loadingReady){
+                if(-not $Headless -and $null -eq $loadingOutputContext.Pending -and $wallNow -ge $loadingNextPresentation){
+                    $columns=[Math]::Max(1,[Console]::WindowWidth);$rows=[Math]::Max(1,[Console]::WindowHeight);$key="$columns,$rows"
+                    $bytes=Get-DoomLoadingOutput $loadingScreen $columns $rows $loadingFrameNumber -Style $Style -Clear:($key -ne $loadingScreenKey)
+                    $job=Start-DoomTerminalFrame $loadingOutputContext $stdout @(@{Bytes=$bytes}) $frameStart $frameEnd
+                    $job.Frame=$loadingFrameNumber;$job.Columns=$columns;$job.Rows=$rows;$job.Status=$status
+                    $loadingFrameNumber++;$loadingScreenKey=$key;$loadingNextPresentation=$wallNow+100
+                }
+                [Threading.Thread]::Sleep(1);continue
+            }
+            # Do not issue another loading update once the generation is ready.
+            # Finish its last owned write before returning stdout to gameplay.
+            if($null -ne $loadingOutputContext.Pending){[Threading.Thread]::Sleep(1);continue}
+            if($loadingRendererReused){$rendererAssetsReused++}else{$rendererAssetsReloaded++}
+            $snapshot=$loadingSnapshot;$assetGeneration=$snapshot.Generation
             $reloadEnd=$wallClock.Elapsed.TotalMilliseconds;$loadingMs+=$reloadEnd-$loadingStart
-            $mapReloads.Add(@{Generation=$assetGeneration;Episode=$snapshot.Episode;Map=$snapshot.Map;Tic=$snapshot.Tic;StartWallMs=$loadingStart;EndWallMs=$reloadEnd;RendererAssetsReused=$sameRendererMap;WorkerPids=@($pool.Workers.Process.Id);
-                WorkerAssetReloads=if($sameRendererMap){@()}else{$pool.AssetReloadResults}})
+            $mapReloads.Add(@{Generation=$assetGeneration;Episode=$snapshot.Episode;Map=$snapshot.Map;Tic=$snapshot.Tic;StartWallMs=$loadingStart;EndWallMs=$reloadEnd;RendererAssetsReused=$loadingRendererReused;WorkerPids=@($pool.Workers.Process.Id);
+                WorkerAssetReloads=if($loadingRendererReused){@()}else{$pool.AssetReloadResults};AssetReloadPolls=$loadingReloadPolls;LoadingUpdates=$loadingScreenStats.Count-$loadingFirstUIFrame})
             $loadingStart=$null
             $simulation.View.Write(40,[long]([Diagnostics.Stopwatch]::GetTimestamp()-$clock.ElapsedTicks))
             if($loadingWasRunning){$clock.Start()};$nextPresentation=$clock.Elapsed.TotalMilliseconds
@@ -369,6 +413,10 @@ try {
     }
 } catch {$failure=$_.ToString()+"`n"+$_.ScriptStackTrace;$exitReason='Error';[Console]::Error.WriteLine($failure);throw}
 finally {
+    if($null -ne $loadingOutputContext.Pending){
+        try{Receive-DoomLoadingFrame -Wait}
+        catch{if(-not $failure){$failure='Loading output cleanup: '+$_.ToString();$exitReason='Error'}}
+    }
     if($null -ne $terminalOutputContext.Pending){
         try{Receive-DoomTerminalFrame -Wait;$completed=$frameStats.Count}
         catch{if(-not $failure){$failure='Terminal output cleanup: '+$_.ToString();$exitReason='Error'}}
@@ -428,6 +476,7 @@ finally {
         Diagnostics=[bool]$Diagnostics;SyntheticViewport=[bool]$ViewportSchedule;ViewportChanges=$viewportChanges.ToArray();
         AnsiEncoding=if($Style -eq 'Classic'){$AnsiEncoding}else{'NotApplicable'};
         TerminalOutput=@{Mode=$TerminalOutput;Frames=$terminalOutputContext.Frames;Bytes=$terminalOutputContext.Bytes;WriteCalls=$terminalOutputContext.Writes;BufferCapacity=$terminalOutputContext.Buffer.Length};
+        LoadingScreen=@{Frames=$loadingScreenStats.ToArray();CompletedUpdates=$loadingOutputContext.Frames;Bytes=$loadingOutputContext.Bytes;Mode='Bounded async UI, nominal 10 updates/sec; separate from gameplay frame accounting'};
         CompletedFrames=$completed;CompletedUpdatesPerSecond=$completed/[Math]::Max(.001,$clock.Elapsed.TotalSeconds);FrameMs=(Get-SampleStats $frameTimes.ToArray());
         InterpolationMs=(Get-SampleStats $interpolationTimes.ToArray());FrameSamplesMs=$frameTimes.ToArray();FrameStats=$frameStats.ToArray();Simulation=$simulationReport;
         Requested1msTimer=$timerRequested;TerminalColumns=$terminalWidth;TerminalRows=$terminalHeight;WorkerWorkingSetBytes=$workerMemory;SimulationWorkingSetBytes=$simMemory;

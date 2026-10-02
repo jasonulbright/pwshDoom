@@ -9,7 +9,7 @@ function New-GameRenderPool {
     $root=Split-Path $PSScriptRoot
     $pool=@{Workers=[Collections.Generic.List[object]]::new();Results=[object[]]::new($Workers);Count=$Workers;Style=$Style;
         Assets=(Join-Path $root ('local/session-'+[guid]::NewGuid().ToString('N')+'.assets'));
-        SpriteAtlas=$Context.SpriteAtlas;PlaneFineSine=$Context.PlaneFineSine;TanToAngleTable=$Context.TanToAngleTable}
+        SpriteAtlas=$Context.SpriteAtlas;PlaneFineSine=$Context.PlaneFineSine;TanToAngleTable=$Context.TanToAngleTable;AssetReloadPending=$false}
     $planeSpanBoundaries=[Collections.Generic.List[int]]::new()
     for([int]$i=1;$i -le $Workers;$i++){
         $edge=if($Style -eq 'Classic'){[int][Math]::Floor($i*320.0/$Workers)}else{2*[int][Math]::Floor($i*160.0/$Workers)}
@@ -59,6 +59,7 @@ function Test-GameRenderCompleted {
 }
 function Submit-GameRender {
     param($Pool,$Snapshot,[int]$ColumnOffset=0,[int]$RowOffset=0,[int]$FrameNumber=0,[switch]$ScreenPixels,[int]$Tic=0,[switch]$MenuPixels,[switch]$AutomapPixels,[ValidateRange(0,13)][int]$PaletteNumber=0)
+    if($Pool.AssetReloadPending){throw 'Finish map asset reload before rendering.'}
     if(-not (Test-GameRenderCompleted $Pool)){throw 'A render is already in progress.'}
     if($Snapshot -is [byte[]]){$bytes=$Snapshot}else{$bytes=ConvertTo-GameSnapshotBytes $Snapshot}
     if($bytes.Length -ne 64000){$bytes=Add-GameRenderActorWorkerMasks $bytes $Pool}
@@ -70,18 +71,41 @@ function Submit-GameRender {
         $worker.View.Write(76,$(if($AutomapPixels){4}elseif($MenuPixels){3}else{[int][bool]$ScreenPixels}));$worker.View.Write(80,$Tic);$worker.View.Write(84,$PaletteNumber);[void]$worker.Go.Set()
     }
 }
-function Update-GameRenderAssets {
+function Start-GameRenderAssetReload {
     param($Pool)
+    if($Pool.AssetReloadPending){throw 'A map asset reload is already in progress.'}
     if(-not (Test-GameRenderCompleted $Pool)){throw 'Drain rendering before changing map assets.'}
+    foreach($worker in $Pool.Workers){Get-GameWorkerError $worker}
+    $Pool.AssetReloadPending=$true;$Pool.AssetReloadStartedQpc=[Diagnostics.Stopwatch]::GetTimestamp()
     foreach($worker in $Pool.Workers){[void]$worker.Done.Reset();$worker.View.Write(76,2);[void]$worker.Go.Set()}
-    foreach($worker in $Pool.Workers){if(-not $worker.Done.WaitOne(30000)){throw 'Map asset reload timed out.'};Get-GameWorkerError $worker}
+}
+function Complete-GameRenderAssetReload {
+    param($Pool,[switch]$Wait,[ValidateRange(1,30000)][int]$TimeoutMs=30000)
+    if(-not $Pool.AssetReloadPending){throw 'No map asset reload is in progress.'}
+    do {
+        # Check every process on every poll. A failed worker must not hide
+        # behind a different worker whose completion event is still pending.
+        foreach($worker in $Pool.Workers){Get-GameWorkerError $worker}
+        $completed=Test-GameRenderCompleted $Pool
+        if($completed){break}
+        if(([Diagnostics.Stopwatch]::GetTimestamp()-$Pool.AssetReloadStartedQpc)*1000.0/[Diagnostics.Stopwatch]::Frequency -ge $TimeoutMs){throw 'Map asset reload timed out.'}
+        if(-not $Wait){return $false}
+        [Threading.Thread]::Sleep(1)
+    }while($true)
     $Pool.AssetReloadResults=@(foreach($worker in $Pool.Workers){
         @{Worker=$worker.Index;Pid=$worker.Process.Id;Milliseconds=$worker.View.ReadDouble(88);ResourceBodyReused=$worker.View.ReadInt32(96) -eq 1}
     })
-    $Pool.Results=[object[]]::new($Pool.Count)
+    $Pool.Results=[object[]]::new($Pool.Count);$Pool.AssetReloadPending=$false
+    return $true
+}
+function Update-GameRenderAssets {
+    param($Pool)
+    Start-GameRenderAssetReload $Pool
+    $null=Complete-GameRenderAssetReload $Pool -Wait
 }
 function Wait-GameRender {
     param($Pool,[int]$TimeoutMs=30000,[switch]$ReadPixels)
+    if($Pool.AssetReloadPending){throw 'Finish map asset reload before harvesting rendering.'}
     for($i=0;$i -lt $Pool.Count;$i++) {
         $worker=$Pool.Workers[$i]
         if(-not $worker.Done.WaitOne($TimeoutMs)){throw 'Game renderer timed out.'}
