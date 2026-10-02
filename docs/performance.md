@@ -1779,3 +1779,12 @@ pins source and all local raw reports. Its input is the tested Steam IWAD; none
 of the runs opens a game window or tests speaker output. The measured 2.88%
 fixed-view renderer median gain remains workload-specific; clean full-host
 pacing remains unqualified.
+
+### Fixed-point wall scale stepping — October 2, 2026
+
+An E1M2 serial ABBA profile (four rounds, forty calls per condition, five fixed
+headings) measures median render time at 54.50 ms before and 55.87 ms after;
+p95 is 116.12 ms and 119.22 ms. The small cost accompanies fewer reference
+mismatches on six E1M2/E3M6 views. This is a one-map renderer comparison, not
+concurrent-worker or live-host pacing evidence; see the [source-pinned
+receipt](../results/wall-fixed-scale-renderer-20261002.json).

@@ -1110,3 +1110,15 @@ This does not qualify acoustics, optical frame identity or original fidelity.
 the new angle/tangent metadata, menu/automap images and all-style workers through
 four map changes. PIDs stay stable; serial/fresh-resource controls and corrupt
 asset rejection pass. These are transport checks, not completed campaign routes.
+
+### Fixed-point wall scale stepping — October 2, 2026
+
+WAD segments with preserved angles now quantize projected scale at the visible
+span endpoints and advance it in 16.16 steps across columns, replacing per-column
+reciprocal-depth interpolation. Against the unchanged adapted reference, six fixed E1M2/E3M6
+views have 1,322 fewer differing scene indices; all six HUDs remain exact. The
+current Classic, Matrix and AnsiArt workers each match serial output across five
+E1M2 views with palette and fuzz effects; twenty masked-wall order checks pass.
+The [receipt](../results/wall-fixed-scale-renderer-20261002.json) records source
+hashes and limits. This narrows fixed-view disagreement but does not establish
+original-executable parity or moving-world fidelity.

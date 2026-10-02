@@ -699,3 +699,9 @@ fidelity, acoustic review and second-hardware test remain outstanding.
 The release is published as
 [v0.1.0-preview.6](https://github.com/jasonulbright/pwshDoom/releases/tag/v0.1.0-preview.6);
 its downloaded assets match the local validation package and checksum.
+
+Post-Preview.6 renderer work adds fixed-point wall scale stepping in PowerShell.
+It lowers disagreement by 1,322 indices across six E1M2/E3M6 reference views,
+preserves all three styles' worker parity, and costs 2.5% median/2.7% p95 in one
+serial E1M2 profile. The human Episode 1 route, moving/original-frame fidelity,
+live pacing and acoustic review remain open; see the [scale record](rendering-fidelity.md#fixed-point-wall-scale-stepping--october-2-2026).

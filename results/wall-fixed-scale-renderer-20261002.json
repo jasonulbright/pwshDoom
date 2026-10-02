@@ -1,0 +1,123 @@
+{
+  "Date": "2026-10-02",
+  "ProductionRendererSha256": "D49E3159891218B020F1DC12C4E5381688742C7DF01B11E8523A3E5B4A27A755",
+  "BaselineRendererSha256": "56F1EF31DF7A7E42E2FC58A2ACEAFB19A05DF6D5685A559A92DC4FACB14B429F",
+  "PowerShellVersion": "7.6.5",
+  "Views": [
+    {
+      "ComparedScenePixels": 53760,
+      "HudMismatch": 0,
+      "Angle": 0,
+      "CurrentMismatch": 1425,
+      "PreviousMismatch": 1907,
+      "Map": "E1M2"
+    },
+    {
+      "ComparedScenePixels": 53760,
+      "HudMismatch": 0,
+      "Angle": 90,
+      "CurrentMismatch": 4463,
+      "PreviousMismatch": 4580,
+      "Map": "E1M2"
+    },
+    {
+      "ComparedScenePixels": 53760,
+      "HudMismatch": 0,
+      "Angle": 180,
+      "CurrentMismatch": 1528,
+      "PreviousMismatch": 1719,
+      "Map": "E1M2"
+    },
+    {
+      "ComparedScenePixels": 53760,
+      "HudMismatch": 0,
+      "Angle": 0,
+      "CurrentMismatch": 3743,
+      "PreviousMismatch": 3789,
+      "Map": "E3M6"
+    },
+    {
+      "ComparedScenePixels": 53760,
+      "HudMismatch": 0,
+      "Angle": 90,
+      "CurrentMismatch": 3081,
+      "PreviousMismatch": 3198,
+      "Map": "E3M6"
+    },
+    {
+      "ComparedScenePixels": 53760,
+      "HudMismatch": 0,
+      "Angle": 180,
+      "CurrentMismatch": 2839,
+      "PreviousMismatch": 3208,
+      "Map": "E3M6"
+    }
+  ],
+  "Timing": {
+    "BaselineMedianMs": 54.5042,
+    "Map": "E1M2",
+    "Order": "ABBA",
+    "BaselineMeanMs": 76.88571249999995,
+    "SamplesPerCondition": 40,
+    "CandidateMedianMs": 55.868449999999996,
+    "CandidateP95Ms": 119.2223,
+    "CandidateMeanMs": 76.24943749999998,
+    "BaselineP95Ms": 116.1197,
+    "Rounds": 4
+  },
+  "WorkerChecks": [
+    {
+      "Workers": 8,
+      "Views": 5,
+      "MismatchPixels": 0,
+      "Pixels": 320000,
+      "Style": "Classic"
+    },
+    {
+      "Workers": 8,
+      "Views": 5,
+      "MismatchPixels": 0,
+      "Pixels": 320000,
+      "Style": "Matrix"
+    },
+    {
+      "Workers": 8,
+      "Views": 5,
+      "MismatchPixels": 0,
+      "Pixels": 320000,
+      "Style": "AnsiArt"
+    }
+  ],
+  "MaskedWallChecks": 20,
+  "Inputs": [
+    {
+      "Path": "local/wall-scale-projection-e1m2-20261002.json",
+      "Sha256": "DDCB2C915201081B961585D55BE737D4AFA08EB3F997D7C5B81ECB46F6CF9549"
+    },
+    {
+      "Path": "local/wall-scale-projection-e3m6-20261002.json",
+      "Sha256": "86741AF15976375ABDBEB370C78F93F1E606C1CA2A2E671366E1BC055B234385"
+    },
+    {
+      "Path": "local/fixed-wall-scale-projection-abba-20261002.json",
+      "Sha256": "0AF3E6FEC7B1A86169DAA9275EFE240694EF9CDB8E93D37EA4A2C078809BF434"
+    },
+    {
+      "Path": "local/projection-scale-classic-20261002.json",
+      "Sha256": "77970A95D5E3A0CB32CF189D812A7797481CC68097825B47BF4B57BD4B04330A"
+    },
+    {
+      "Path": "local/projection-scale-matrix-20261002.json",
+      "Sha256": "37412964F3CA7D8D00C6DD208F574AFE7D158F12F4BD2626B22FD5315103B5DB"
+    },
+    {
+      "Path": "local/projection-scale-ansiart-20261002.json",
+      "Sha256": "0F00334FB81F7B0AF372198C5DBE9186694912F537313EB38ECFDE590875C967"
+    },
+    {
+      "Path": "local/projection-scale-masked-order-20261002.json",
+      "Sha256": "7010130C2EE57F76BE6397B2DA9B238DD3BC59D63695739854E9EFAB0F73C878"
+    }
+  ],
+  "Meaning": "Fixed-point wall scale now steps between projected span endpoints. Across six E1M2/E3M6 fixed views it reduces candidate scene disagreement by 1322 indices (7.2%), with exact HUDs. One E1M2 serial ABBA sample shows a 2.5% higher median and 2.7% higher p95; this is a single-map renderer tradeoff, not a full-host pacing result or independent original-Doom parity. All three styles preserve serial/worker pixel identity."
+}

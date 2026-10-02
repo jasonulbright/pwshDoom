@@ -6276,3 +6276,9 @@ version-three preferences migrate the old shared volume to both levels. Focused
 rechecks pass: 72 settings checks, 126 menu checks/47 screen fixtures and 10
 audio-worker checks against the expected PCM schedule. This verifies persistence,
 menu fit and software mixing, not acoustic output or campaign qualification.
+
+### Wall projection scale — October 2, 2026
+
+Fixed-point span stepping reduces scene disagreement by 1,322 indices across
+six E1M2/E3M6 reference views. All three styles retain serial/worker parity;
+E1M2 median and p95 costs rise 2.5% and 2.7%. See the [renderer receipt](../results/wall-fixed-scale-renderer-20261002.json).

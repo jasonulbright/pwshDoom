@@ -442,6 +442,8 @@ function Invoke-FastRender {
             if($z2 -lt 1){$f=(1-$z2)/($z1-$z2);$r2+=($r1-$r2)*$f;$u2+=($u1-$u2)*$f;$z2=1}
             [double]$sx1=160+160*$r1/$z1;[double]$sx2=160+160*$r2/$z2
             if($sx2 -le $sx1 -or $sx1 -ge $EndColumn -or $sx2 -le $FirstColumn){continue}
+            [int]$screenScaleX0=[Math]::Clamp([int][Math]::Ceiling($sx1-0.5),0,319)
+            [int]$screenScaleX1=[Math]::Clamp([int][Math]::Ceiling($sx2-0.5)-1,0,319)
             [int]$x0=[Math]::Max($FirstColumn,[Math]::Ceiling($sx1-0.5));[int]$x1=[Math]::Min($EndColumn,[Math]::Ceiling($sx2-0.5))
             $front=$Context.Sectors[$segFront];$back=if($segBack -ge 0){$Context.Sectors[$segBack]}else{$null};$side=$Context.Sides[$segSide]
             [double]$fh=$front.FloorHeight;[double]$ch=$front.CeilingHeight
@@ -465,6 +467,7 @@ function Invoke-FastRender {
             [int[]]$wallLightTable=$Context.Lighting.Scale[$baseLight]
             [double]$iz1=1/$z1;[double]$iz2=1/$z2;[double]$uz1=$u1/$z1;[double]$uz2=$u2/$z2
             [bool]$wallUReady=$false;[int]$wallPerpData=0;[int]$wallOffsetData=0;[uint32]$wallCenterAngleData=0
+            [bool]$wallScaleReady=$false;[int]$wallScaleStart=0;[int]$wallScaleStep=0
             [double[]]$wallBandOrigins=$null;[int]$wallOriginBits=0
             [bool]$constantWallScale=$iz1 -eq $iz2;[double]$segmentTexelStep=0
             # Select eligible textured bands once per segment instead of
@@ -478,11 +481,21 @@ function Invoke-FastRender {
             }
             for([int]$x=$x0;$x -lt $x1;$x++) {
                 [int]$clipT=$topClip[$x];[int]$clipB=$bottomClip[$x];if($clipT -gt $clipB){continue}
+                if($wallAnglesReady -and -not $wallScaleReady){
+                    [double]$f0=($screenScaleX0-$sx1)/($sx2-$sx1);[double]$d0=1/($iz1+($iz2-$iz1)*$f0)
+                    [int]$wallScaleStart=[Math]::Clamp([int][Math]::Truncate(10485760.0/$d0),256,4194304)
+                    if($screenScaleX1 -gt $screenScaleX0){
+                        [double]$f1=($screenScaleX1-$sx1)/($sx2-$sx1);[double]$d1=1/($iz1+($iz2-$iz1)*$f1)
+                        [int]$wallScaleEnd=[Math]::Clamp([int][Math]::Truncate(10485760.0/$d1),256,4194304)
+                        $wallScaleStep=[int][Math]::Truncate(($wallScaleEnd-$wallScaleStart)/[double]($screenScaleX1-$screenScaleX0))
+                    }
+                    $wallScaleReady=$true
+                }
                 # Match Doom's xToAngle lookup: wall rays are defined at integer
                 # screen columns, not at the half-pixel used for edge coverage.
-                [double]$f=($x-$sx1)/($sx2-$sx1);[double]$distance=1/($iz1+($iz2-$iz1)*$f)
                 [double]$texU=0
-                if(-not $wallAnglesReady){$texU=($uz1+($uz2-$uz1)*$f)*$distance+$side.TextureOffset}
+                if($wallAnglesReady){[int]$wallScaleData=$wallScaleStart+($x-$screenScaleX0)*$wallScaleStep;$distance=10485760.0/$wallScaleData}
+                else{$f=($x-$sx1)/($sx2-$sx1);$distance=1/($iz1+($iz2-$iz1)*$f);$texU=($uz1+($uz2-$uz1)*$f)*$distance+$side.TextureOffset}
                 [double]$ray=($x-160)/160;[double]$rayX=$co+$si*$ray;[double]$rayY=$si-$co*$ray
                 [int]$wallT=[Math]::Ceiling(84-160*($ch-$cz)/$distance-0.5)
                 [int]$wallB=[Math]::Floor(84-160*($fh-$cz)/$distance-0.5)
@@ -534,13 +547,11 @@ function Invoke-FastRender {
                     [int]$tu=0
                     if($wallAnglesReady){
                         if(-not $wallUReady){
-                            # GPL reference wall-U math, outside the pixel loop.
                             [int]$wallAXData=[Math]::Truncate($segAX*65536.0);[int]$wallAYData=[Math]::Truncate($segAY*65536.0)
                             [int]$wallSegOffset=[Math]::Truncate($Context.SegmentGeometry[$geometryOffset+5]*65536.0)
                             [int]$wallSideOffset=[Math]::Truncate($side.TextureOffset*65536.0)
                             [long[]]$wallParameters=Get-FastWallUParameters $viewXData $viewYData $wallAXData $wallAYData $wallSegmentAngles[$segIndex] $viewAngleData $wallSegOffset $wallSideOffset $Context.TanToAngleTable $fineSine
-                            $wallPerpData=$wallParameters[0];$wallOffsetData=$wallParameters[1];$wallCenterAngleData=$wallParameters[2]
-                            $wallUReady=$true
+                            $wallPerpData=$wallParameters[0];$wallOffsetData=$wallParameters[1];$wallCenterAngleData=$wallParameters[2];$wallUReady=$true
                         }
                         if(-not $columnUReady){
                             [uint32]$wallTanAngleData=([long]$wallCenterAngleData+$Context.PlaneColumnAngles[$x]) -band 0x7fffffffL
