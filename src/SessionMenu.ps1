@@ -206,11 +206,14 @@ function Get-DoomMenuPixels {
             Draw-DoomMenuText $Graphics 'RESTORE DEFAULTS' 48 150
             Draw-DoomMenuText $Graphics 'BACK' 48 163
             $draw.DrawPatch($patches.M_SKULL1,16,(28+13*$Choice),1)
-            Draw-DoomMenuText $Graphics $(if($Details.AwaitingBinding){'PRESS A KEY / ESC CANCEL'}elseif($Details.MessageTitle){$Details.MessageTitle}else{'ENTER: REMAP  ESC: BACK'}) 0 181 -Center
         }
         default{throw 'Invalid visible menu screen.'}
     }
-    if($Screen -in 1,2,3,4,6,8,9,10,11,15){Draw-DoomMenuText $Graphics 'ARROWS: CHOOSE' 0 166 -Center;Draw-DoomMenuText $Graphics 'ENTER: OK  ESC: BACK' 0 184 -Center}
+    if($Screen -in 1,2,3,4,6,8,9,10,11,15){
+        if($Screen -ne 15){Draw-DoomMenuText $Graphics 'ARROWS: CHOOSE' 0 166 -Center}
+        $footer=if($Screen -eq 15 -and $Details.AwaitingBinding){'ESC: CANCEL'}else{'ENTER: OK  ESC: BACK'}
+        Draw-DoomMenuText $Graphics $footer 0 184 -Center
+    }
     return ,$draw.Data
 }
 

@@ -177,7 +177,8 @@ try {
             $response=@{Action=$action.Action;Success=$true;Screen=0;Choice=0;Episode=$options.Episode;Skill=[int]$options.Skill+1;MessageTitle='';MessageDetail='';ReturnScreen=1}
             if($kind -eq 1){
                 $menuScreen=$view.ReadInt32(60);$choice=$view.ReadInt32(64);$selectedEpisode=$view.ReadInt32(68);$selectedSkill=$view.ReadInt32(72)
-                if($menuScreen -lt 0 -or $menuScreen -gt 14 -or $choice -lt 0 -or $choice -gt 6 -or ($menuScreen -eq 14 -and $choice -gt 6)){throw 'Invalid menu request.'}
+                $choiceLimit=switch($menuScreen){14{7};15{10};default{6}}
+                if($menuScreen -lt 0 -or $menuScreen -gt 15 -or $choice -lt 0 -or $choice -gt $choiceLimit){throw 'Invalid menu request.'}
                 if($menuScreen -eq 0){$menuPixels=$null;$options.Sound.Resume()}
                 else{
                     $options.Sound.Pause()

@@ -6324,3 +6324,9 @@ headings: 320,000 pixels each in Classic, Matrix and AnsiArt. This is an
 image-equivalence check, not a timing or pacing claim. The first control run
 placed its temporary source outside the directory needed by relative helper
 imports; rerunning with a source-adjacent copy passed, and that copy was removed.
+
+### Settings menu worker integration — October 2, 2026
+
+A menu-only E3M6 host exposed stale IPC bounds and an overflowing duplicate
+footer in Configure Keys. Both are fixed; the actual worker rendered the screen
+and returned normally through the settings menu.
