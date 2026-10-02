@@ -6260,3 +6260,11 @@ Ultimate Doom IWAD hash is pinned in the [receipt](../results/current-source-dif
 This verifies component behavior after visibility/actor-dispatch changes. It
 does not qualify ordinary-input map routes or reconcile the old route failure.
 This evidence commit will be the 14th since Preview.6; release at35.
+
+### Matrix readability — October 2, 2026
+
+The Matrix HUD/menu green curve now uses exponent0.60 instead of0.75. The
+resulting green values rise from54/90/152 to73/111/169 at source luminance
+32/64/128; hue and the game rain are unchanged. Existing character-codec and
+menu checks pass (144 cases; 125 menu checks and46 screen fixtures). The code
+and these brief notes are commit15 after Preview.6; no new release is due.

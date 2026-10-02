@@ -76,7 +76,7 @@ function New-CharacterCodecContext {
         $tones[$i]=[int](255*[Math]::Pow($i/255.0,.6))
         $r=[Math]::Min(255,[int]($rgb[0]*1.35));$g=[Math]::Min(255,[int]($rgb[1]*1.35));$b=[Math]::Min(255,[int]($rgb[2]*1.35))
         $colors[$i]="$esc[38;2;$r;$g;$($b);48;2;$([int]($rgb[0]*.08));$([int]($rgb[1]*.08));$([int]($rgb[2]*.08))m"
-        $v=[int](255*[Math]::Pow($luma[$i]/255.0,.75));$greenPalette[$i]=@([int]($v*.08),$v,[int]($v*.25))
+        $v=[int](255*[Math]::Pow($luma[$i]/255.0,.60));$greenPalette[$i]=@([int]($v*.08),$v,[int]($v*.25))
     }
     for($i=0;$i -lt 256;$i++) {
         for($accent=0;$accent -lt 5;$accent++) {
