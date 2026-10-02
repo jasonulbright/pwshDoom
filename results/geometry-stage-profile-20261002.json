@@ -1,0 +1,4093 @@
+{
+  "FinishedUtc": "2026-10-02T04:28:03.667957+00:00",
+  "ParentCommit": "162689c",
+  "BaselineRendererProvenance": "git show162689c:src/FastRenderer.ps1, copied as text into an owned local directory with unchanged RenderLighting/RenderFuzz/SpriteProjection dependencies. Baseline file hash records the exported bytes, not the prior working-tree newline hash.",
+  "Sources": [
+    {
+      "Path": "src/FastRenderer.ps1",
+      "Sha256": "A6DB1AB19159C30DD72F0D8F0F5348ADCB993E68A6FFE7580B68B839F5E712A0"
+    },
+    {
+      "Path": "scripts/Measure-FastRendererPhases.ps1",
+      "Sha256": "BC996DCC59191EDDC3A459E504F97937D2CB88BE05B2951CFA4317A7E17F83DE"
+    },
+    {
+      "Path": "local/geometry-baseline-r2/FastRenderer.ps1",
+      "Sha256": "A3EC93F42458F0CE55125F8150D381AD1C18477695958D88F93AEB5D4387521A"
+    },
+    {
+      "Path": "src/RenderLighting.ps1",
+      "Sha256": "E9C47D9E4005509206EC13DA08267F95DB3AF7A1E86F14A743F1F27DE145BF9F"
+    },
+    {
+      "Path": "src/RenderFuzz.ps1",
+      "Sha256": "8D2B6B6B0DF30A1DD7E30D070F60A1EABBF12397BC9816A03481C6D6A659B882"
+    },
+    {
+      "Path": "src/SpriteProjection.ps1",
+      "Sha256": "A4D16CA9288223AB4A51629A4F0BA97108DEA3703BF4916CCBFF5390571E5D8A"
+    }
+  ],
+  "Profiles": [
+    {
+      "Report": {
+        "Path": "local/e1m2-frame-cost-phases-16w-r1.json",
+        "Sha256": "BD52CA269FF6DDDE56C18AF7C3E04FB9486FFFF83E139FAF6966C5FC51B8E6B1"
+      },
+      "FrameSha256": "D73C9535BC8339A265D4B268C7B1AEB400D07D36CFCE98B753AEDC8D3DABBB58",
+      "PhaseStats": {
+        "HudMs": {
+          "Mean": 0.7491353125000002,
+          "P99": 2.0612,
+          "P95": 1.3814,
+          "Max": 2.2734,
+          "Count": 320,
+          "Median": 0.6641
+        },
+        "ActorsMs": {
+          "Mean": 0.8405009375000004,
+          "P99": 2.2899,
+          "P95": 2.1043,
+          "Max": 2.9191,
+          "Count": 320,
+          "Median": 0.6978
+        },
+        "WeaponMs": {
+          "Mean": 0.06191531250000001,
+          "P99": 0.1104,
+          "P95": 0.0845,
+          "Max": 0.1792,
+          "Count": 320,
+          "Median": 0.0587
+        },
+        "GeometryMs": {
+          "Mean": 6.438473437500003,
+          "P99": 13.5653,
+          "P95": 12.3558,
+          "Max": 13.7383,
+          "Count": 320,
+          "Median": 6.3807
+        },
+        "TotalMs": {
+          "Mean": 8.155814687499994,
+          "P99": 15.1799,
+          "P95": 13.8887,
+          "Max": 15.2929,
+          "Count": 320,
+          "Median": 7.9331
+        }
+      },
+      "Workers": [
+        {
+          "DecodeStats": {
+            "Mean": 1.26601,
+            "P99": 1.4317,
+            "P95": 1.4317,
+            "Max": 3.1259,
+            "Count": 20,
+            "Median": 1.1204
+          },
+          "OutputSha256": "4DDD7A69A1DBA34C209000124A4FA0F206B0A5CA1A9E625E6E43A53145803C12",
+          "WorkerIndex": 0,
+          "PhaseStats": {
+            "TotalMs": {
+              "Mean": 6.280785,
+              "P99": 8.9761,
+              "P95": 8.9761,
+              "Max": 12.7894,
+              "Count": 20,
+              "Median": 5.7925
+            },
+            "GeometryMs": {
+              "Mean": 3.8670099999999996,
+              "P99": 6.0755,
+              "P95": 6.0755,
+              "Max": 10.3282,
+              "Count": 20,
+              "Median": 3.3139
+            },
+            "ActorsMs": {
+              "Mean": 1.2038250000000001,
+              "P99": 1.4715,
+              "P95": 1.4715,
+              "Max": 1.5633,
+              "Count": 20,
+              "Median": 1.1325
+            },
+            "WeaponMs": {
+              "Mean": 0.08771500000000002,
+              "P99": 0.1127,
+              "P95": 0.1127,
+              "Max": 0.1181,
+              "Count": 20,
+              "Median": 0.0845
+            },
+            "HudMs": {
+              "Mean": 1.0446250000000001,
+              "P99": 1.3272,
+              "P95": 1.3272,
+              "Max": 1.4095,
+              "Count": 20,
+              "Median": 0.9561
+            }
+          },
+          "FirstColumn": 0,
+          "EndColumn": 20
+        },
+        {
+          "DecodeStats": {
+            "Mean": 1.26664,
+            "P99": 1.2713,
+            "P95": 1.2713,
+            "Max": 3.9009,
+            "Count": 20,
+            "Median": 1.0856
+          },
+          "OutputSha256": "40FCD076D2514D557986B3685D240E5935479200510C2F8A28C437D453A1D821",
+          "WorkerIndex": 1,
+          "PhaseStats": {
+            "TotalMs": {
+              "Mean": 5.917839999999999,
+              "P99": 6.8787,
+              "P95": 6.8787,
+              "Max": 6.9644,
+              "Count": 20,
+              "Median": 5.4883
+            },
+            "GeometryMs": {
+              "Mean": 3.383175,
+              "P99": 4.4066,
+              "P95": 4.4066,
+              "Max": 4.4921,
+              "Count": 20,
+              "Median": 3.1149
+            },
+            "ActorsMs": {
+              "Mean": 1.3795799999999998,
+              "P99": 1.3859,
+              "P95": 1.3859,
+              "Max": 2.6003,
+              "Count": 20,
+              "Median": 1.3195
+            },
+            "WeaponMs": {
+              "Mean": 0.074525,
+              "P99": 0.1083,
+              "P95": 0.1083,
+              "Max": 0.1104,
+              "Count": 20,
+              "Median": 0.0664
+            },
+            "HudMs": {
+              "Mean": 0.970375,
+              "P99": 0.9424,
+              "P95": 0.9424,
+              "Max": 2.2655,
+              "Count": 20,
+              "Median": 0.9021
+            }
+          },
+          "FirstColumn": 20,
+          "EndColumn": 40
+        },
+        {
+          "DecodeStats": {
+            "Mean": 1.1894050000000003,
+            "P99": 1.1154,
+            "P95": 1.1154,
+            "Max": 3.3928,
+            "Count": 20,
+            "Median": 1.0699
+          },
+          "OutputSha256": "013990A171DEE2432A3680ACF73AF109A9A8118B13E0E08A0849C3595EDA3DE9",
+          "WorkerIndex": 2,
+          "PhaseStats": {
+            "TotalMs": {
+              "Mean": 7.583754999999999,
+              "P99": 8.4018,
+              "P95": 8.4018,
+              "Max": 8.483,
+              "Count": 20,
+              "Median": 7.5101
+            },
+            "GeometryMs": {
+              "Mean": 5.065114999999999,
+              "P99": 6.0076,
+              "P95": 6.0076,
+              "Max": 6.0535,
+              "Count": 20,
+              "Median": 4.7
+            },
+            "ActorsMs": {
+              "Mean": 1.392575,
+              "P99": 1.7151,
+              "P95": 1.7151,
+              "Max": 2.875,
+              "Count": 20,
+              "Median": 1.2803
+            },
+            "WeaponMs": {
+              "Mean": 0.0678,
+              "P99": 0.0768,
+              "P95": 0.0768,
+              "Max": 0.077,
+              "Count": 20,
+              "Median": 0.0663
+            },
+            "HudMs": {
+              "Mean": 0.9932799999999998,
+              "P99": 2.1193,
+              "P95": 2.1193,
+              "Max": 2.2734,
+              "Count": 20,
+              "Median": 0.8856
+            }
+          },
+          "FirstColumn": 40,
+          "EndColumn": 60
+        },
+        {
+          "DecodeStats": {
+            "Mean": 1.2622700000000002,
+            "P99": 1.5466,
+            "P95": 1.5466,
+            "Max": 3.7972,
+            "Count": 20,
+            "Median": 1.0842
+          },
+          "OutputSha256": "34FEDE0042989E86CB693CF688EC2B10F7D938B650EE8ABA69CB348B3449DFDE",
+          "WorkerIndex": 3,
+          "PhaseStats": {
+            "TotalMs": {
+              "Mean": 8.194245,
+              "P99": 9.2833,
+              "P95": 9.2833,
+              "Max": 9.4761,
+              "Count": 20,
+              "Median": 7.674
+            },
+            "GeometryMs": {
+              "Mean": 6.504085000000001,
+              "P99": 7.6326,
+              "P95": 7.6326,
+              "Max": 7.7973,
+              "Count": 20,
+              "Median": 6.0434
+            },
+            "ActorsMs": {
+              "Mean": 0.8228499999999999,
+              "P99": 0.9423,
+              "P95": 0.9423,
+              "Max": 0.9503,
+              "Count": 20,
+              "Median": 0.8074
+            },
+            "WeaponMs": {
+              "Mean": 0.06214000000000001,
+              "P99": 0.0659,
+              "P95": 0.0659,
+              "Max": 0.0757,
+              "Count": 20,
+              "Median": 0.0615
+            },
+            "HudMs": {
+              "Mean": 0.735835,
+              "P99": 0.6912,
+              "P95": 0.6912,
+              "Max": 1.9095,
+              "Count": 20,
+              "Median": 0.6752
+            }
+          },
+          "FirstColumn": 60,
+          "EndColumn": 80
+        },
+        {
+          "DecodeStats": {
+            "Mean": 1.4300650000000001,
+            "P99": 1.4308,
+            "P95": 1.4308,
+            "Max": 7.2611,
+            "Count": 20,
+            "Median": 1.0849
+          },
+          "OutputSha256": "637CB49493A5F2B5EBFE07099AF8BFD0F346A6EA230C4F0902D7717208DB3A57",
+          "WorkerIndex": 4,
+          "PhaseStats": {
+            "TotalMs": {
+              "Mean": 7.086065,
+              "P99": 7.577,
+              "P95": 7.577,
+              "Max": 8.6068,
+              "Count": 20,
+              "Median": 6.9526
+            },
+            "GeometryMs": {
+              "Mean": 5.350265,
+              "P99": 5.7583,
+              "P95": 5.7583,
+              "Max": 6.8196,
+              "Count": 20,
+              "Median": 5.2446
+            },
+            "ActorsMs": {
+              "Mean": 0.904435,
+              "P99": 1.0411,
+              "P95": 1.0411,
+              "Max": 1.6124,
+              "Count": 20,
+              "Median": 0.8398
+            },
+            "WeaponMs": {
+              "Mean": 0.05985,
+              "P99": 0.0699,
+              "P95": 0.0699,
+              "Max": 0.0741,
+              "Count": 20,
+              "Median": 0.0589
+            },
+            "HudMs": {
+              "Mean": 0.7045300000000001,
+              "P99": 0.9583,
+              "P95": 0.9583,
+              "Max": 0.9706,
+              "Count": 20,
+              "Median": 0.6685
+            }
+          },
+          "FirstColumn": 80,
+          "EndColumn": 100
+        },
+        {
+          "DecodeStats": {
+            "Mean": 1.1894,
+            "P99": 2.0568,
+            "P95": 2.0568,
+            "Max": 2.2972,
+            "Count": 20,
+            "Median": 1.0796
+          },
+          "OutputSha256": "8C4EDB56B6FAA7CE6E200CE7C0D4B1BF2CB58AA8E6C03F6D1DDA595F1C9DDA77",
+          "WorkerIndex": 5,
+          "PhaseStats": {
+            "TotalMs": {
+              "Mean": 8.49455,
+              "P99": 9.066,
+              "P95": 9.066,
+              "Max": 9.1428,
+              "Count": 20,
+              "Median": 8.4627
+            },
+            "GeometryMs": {
+              "Mean": 6.700510000000001,
+              "P99": 7.3103,
+              "P95": 7.3103,
+              "Max": 7.3405,
+              "Count": 20,
+              "Median": 6.5074
+            },
+            "ActorsMs": {
+              "Mean": 0.8936650000000002,
+              "P99": 0.957,
+              "P95": 0.957,
+              "Max": 1.6807,
+              "Count": 20,
+              "Median": 0.8478
+            },
+            "WeaponMs": {
+              "Mean": 0.05921000000000002,
+              "P99": 0.0698,
+              "P95": 0.0698,
+              "Max": 0.0763,
+              "Count": 20,
+              "Median": 0.0579
+            },
+            "HudMs": {
+              "Mean": 0.780415,
+              "P99": 1.4574,
+              "P95": 1.4574,
+              "Max": 1.5044,
+              "Count": 20,
+              "Median": 0.6641
+            }
+          },
+          "FirstColumn": 100,
+          "EndColumn": 120
+        },
+        {
+          "DecodeStats": {
+            "Mean": 1.2698800000000001,
+            "P99": 2.1331,
+            "P95": 2.1331,
+            "Max": 2.875,
+            "Count": 20,
+            "Median": 1.1341
+          },
+          "OutputSha256": "4EEFAE838A457CE4E57F5EF77D448B6DDAC13E4CA8F30E68406E424FFD8D2C54",
+          "WorkerIndex": 6,
+          "PhaseStats": {
+            "TotalMs": {
+              "Mean": 10.191115,
+              "P99": 10.6924,
+              "P95": 10.6924,
+              "Max": 11.1732,
+              "Count": 20,
+              "Median": 10.4035
+            },
+            "GeometryMs": {
+              "Mean": 7.136054999999999,
+              "P99": 7.7543,
+              "P95": 7.7543,
+              "Max": 8.1829,
+              "Count": 20,
+              "Median": 6.8037
+            },
+            "ActorsMs": {
+              "Mean": 2.17312,
+              "P99": 2.3689,
+              "P95": 2.3689,
+              "Max": 2.9191,
+              "Count": 20,
+              "Median": 2.1142
+            },
+            "WeaponMs": {
+              "Mean": 0.064335,
+              "P99": 0.0646,
+              "P95": 0.0646,
+              "Max": 0.1746,
+              "Count": 20,
+              "Median": 0.0578
+            },
+            "HudMs": {
+              "Mean": 0.752835,
+              "P99": 1.4468,
+              "P95": 1.4468,
+              "Max": 1.4712,
+              "Count": 20,
+              "Median": 0.6716
+            }
+          },
+          "FirstColumn": 120,
+          "EndColumn": 140
+        },
+        {
+          "DecodeStats": {
+            "Mean": 1.1487349999999998,
+            "P99": 1.4306,
+            "P95": 1.4306,
+            "Max": 2.1383,
+            "Count": 20,
+            "Median": 1.0447
+          },
+          "OutputSha256": "8864AB338755F755407C7635AB8D3B1E48D0F0E528112735EE9AB7ECF21DA1F8",
+          "WorkerIndex": 7,
+          "PhaseStats": {
+            "TotalMs": {
+              "Mean": 10.71623,
+              "P99": 11.3311,
+              "P95": 11.3311,
+              "Max": 11.421,
+              "Count": 20,
+              "Median": 10.3648
+            },
+            "GeometryMs": {
+              "Mean": 9.327814999999998,
+              "P99": 9.9372,
+              "P95": 9.9372,
+              "Max": 9.9996,
+              "Count": 20,
+              "Median": 8.993
+            },
+            "ActorsMs": {
+              "Mean": 0.542215,
+              "P99": 0.5701,
+              "P95": 0.5701,
+              "Max": 0.5755,
+              "Count": 20,
+              "Median": 0.541
+            },
+            "WeaponMs": {
+              "Mean": 0.06503,
+              "P99": 0.0684,
+              "P95": 0.0684,
+              "Max": 0.0697,
+              "Count": 20,
+              "Median": 0.0646
+            },
+            "HudMs": {
+              "Mean": 0.7112999999999999,
+              "P99": 0.6988,
+              "P95": 0.6988,
+              "Max": 1.4692,
+              "Count": 20,
+              "Median": 0.6663
+            }
+          },
+          "FirstColumn": 140,
+          "EndColumn": 160
+        },
+        {
+          "DecodeStats": {
+            "Mean": 3.97751,
+            "P99": 14.9675,
+            "P95": 14.9675,
+            "Max": 15.9111,
+            "Count": 20,
+            "Median": 1.0849
+          },
+          "OutputSha256": "06D4595DFD5B6CBCFB63B278185FE8AF9E7665602D520B4EE6C5D63F87AA88F6",
+          "WorkerIndex": 8,
+          "PhaseStats": {
+            "TotalMs": {
+              "Mean": 14.526374999999998,
+              "P99": 15.2927,
+              "P95": 15.2927,
+              "Max": 15.2929,
+              "Count": 20,
+              "Median": 14.5302
+            },
+            "GeometryMs": {
+              "Mean": 12.977069999999998,
+              "P99": 13.7257,
+              "P95": 13.7257,
+              "Max": 13.7383,
+              "Count": 20,
+              "Median": 13.0497
+            },
+            "ActorsMs": {
+              "Mean": 0.6913250000000002,
+              "P99": 0.7768,
+              "P95": 0.7768,
+              "Max": 1.0496,
+              "Count": 20,
+              "Median": 0.6667
+            },
+            "WeaponMs": {
+              "Mean": 0.07266500000000001,
+              "P99": 0.0711,
+              "P95": 0.0711,
+              "Max": 0.1792,
+              "Count": 20,
+              "Median": 0.0671
+            },
+            "HudMs": {
+              "Mean": 0.71272,
+              "P99": 0.9184,
+              "P95": 0.9184,
+              "Max": 0.9309,
+              "Count": 20,
+              "Median": 0.6755
+            }
+          },
+          "FirstColumn": 160,
+          "EndColumn": 180
+        },
+        {
+          "DecodeStats": {
+            "Mean": 1.029615,
+            "P99": 1.1294,
+            "P95": 1.1294,
+            "Max": 1.9625,
+            "Count": 20,
+            "Median": 0.9486
+          },
+          "OutputSha256": "32E196935A6C09333F00C1615754504B3AC23FE17F39892C9EBD4A5AAE0D0298",
+          "WorkerIndex": 9,
+          "PhaseStats": {
+            "TotalMs": {
+              "Mean": 8.456875,
+              "P99": 9.4199,
+              "P95": 9.4199,
+              "Max": 9.606,
+              "Count": 20,
+              "Median": 8.2347
+            },
+            "GeometryMs": {
+              "Mean": 7.494629999999999,
+              "P99": 8.374,
+              "P95": 8.374,
+              "Max": 8.4305,
+              "Count": 20,
+              "Median": 7.278
+            },
+            "ActorsMs": {
+              "Mean": 0.252015,
+              "P99": 0.2802,
+              "P95": 0.2802,
+              "Max": 0.2903,
+              "Count": 20,
+              "Median": 0.2451
+            },
+            "WeaponMs": {
+              "Mean": 0.0595,
+              "P99": 0.0674,
+              "P95": 0.0674,
+              "Max": 0.0701,
+              "Count": 20,
+              "Median": 0.0584
+            },
+            "HudMs": {
+              "Mean": 0.595345,
+              "P99": 0.6242,
+              "P95": 0.6242,
+              "Max": 0.7729,
+              "Count": 20,
+              "Median": 0.5824
+            }
+          },
+          "FirstColumn": 180,
+          "EndColumn": 200
+        },
+        {
+          "DecodeStats": {
+            "Mean": 1.0045199999999999,
+            "P99": 1.196,
+            "P95": 1.196,
+            "Max": 2.0424,
+            "Count": 20,
+            "Median": 0.9305
+          },
+          "OutputSha256": "32C3AA9313F8E4B0F16DBAE08ED9D3BFE2EB620B205518A75EF94F8F7BE243F3",
+          "WorkerIndex": 10,
+          "PhaseStats": {
+            "TotalMs": {
+              "Mean": 7.4595850000000015,
+              "P99": 8.1546,
+              "P95": 8.1546,
+              "Max": 8.2136,
+              "Count": 20,
+              "Median": 7.2164
+            },
+            "GeometryMs": {
+              "Mean": 6.352629999999999,
+              "P99": 7.0402,
+              "P95": 7.0402,
+              "Max": 7.0965,
+              "Count": 20,
+              "Median": 6.1026
+            },
+            "ActorsMs": {
+              "Mean": 0.34913500000000003,
+              "P99": 0.3721,
+              "P95": 0.3721,
+              "Max": 0.4288,
+              "Count": 20,
+              "Median": 0.3443
+            },
+            "WeaponMs": {
+              "Mean": 0.05597499999999998,
+              "P99": 0.0612,
+              "P95": 0.0612,
+              "Max": 0.0613,
+              "Count": 20,
+              "Median": 0.0553
+            },
+            "HudMs": {
+              "Mean": 0.6399199999999999,
+              "P99": 0.6226,
+              "P95": 0.6226,
+              "Max": 1.5586,
+              "Count": 20,
+              "Median": 0.5885
+            }
+          },
+          "FirstColumn": 200,
+          "EndColumn": 220
+        },
+        {
+          "DecodeStats": {
+            "Mean": 1.1703050000000002,
+            "P99": 2.3428,
+            "P95": 2.3428,
+            "Max": 2.7915,
+            "Count": 20,
+            "Median": 0.9898
+          },
+          "OutputSha256": "2E1D78D2D889234F940B23301B54307FB05E166254E4B98E0377517A75D6BD65",
+          "WorkerIndex": 11,
+          "PhaseStats": {
+            "TotalMs": {
+              "Mean": 7.695515,
+              "P99": 8.2934,
+              "P95": 8.2934,
+              "Max": 8.3401,
+              "Count": 20,
+              "Median": 7.62
+            },
+            "GeometryMs": {
+              "Mean": 6.217144999999999,
+              "P99": 6.7388,
+              "P95": 6.7388,
+              "Max": 6.8777,
+              "Count": 20,
+              "Median": 6.0474
+            },
+            "ActorsMs": {
+              "Mean": 0.6798050000000001,
+              "P99": 0.7024,
+              "P95": 0.7024,
+              "Max": 0.8575,
+              "Count": 20,
+              "Median": 0.6714
+            },
+            "WeaponMs": {
+              "Mean": 0.054360000000000006,
+              "P99": 0.0581,
+              "P95": 0.0581,
+              "Max": 0.0797,
+              "Count": 20,
+              "Median": 0.0533
+            },
+            "HudMs": {
+              "Mean": 0.6836,
+              "P99": 1.4403,
+              "P95": 1.4403,
+              "Max": 1.4897,
+              "Count": 20,
+              "Median": 0.5915
+            }
+          },
+          "FirstColumn": 220,
+          "EndColumn": 240
+        },
+        {
+          "DecodeStats": {
+            "Mean": 1.13922,
+            "P99": 2.7791,
+            "P95": 2.7791,
+            "Max": 2.7978,
+            "Count": 20,
+            "Median": 0.9393
+          },
+          "OutputSha256": "60C33AD2E1A347B9DA71C160D207F928E6397A9F58F85E40FDD0725967B2AEB2",
+          "WorkerIndex": 12,
+          "PhaseStats": {
+            "TotalMs": {
+              "Mean": 5.63703,
+              "P99": 6.0683,
+              "P95": 6.0683,
+              "Max": 6.3691,
+              "Count": 20,
+              "Median": 5.5745
+            },
+            "GeometryMs": {
+              "Mean": 4.6161900000000005,
+              "P99": 5.032,
+              "P95": 5.032,
+              "Max": 5.3374,
+              "Count": 20,
+              "Median": 4.544
+            },
+            "ActorsMs": {
+              "Mean": 0.33713499999999996,
+              "P99": 0.3429,
+              "P95": 0.3429,
+              "Max": 0.8555,
+              "Count": 20,
+              "Median": 0.3074
+            },
+            "WeaponMs": {
+              "Mean": 0.0514,
+              "P99": 0.0552,
+              "P95": 0.0552,
+              "Max": 0.0575,
+              "Count": 20,
+              "Median": 0.0514
+            },
+            "HudMs": {
+              "Mean": 0.58022,
+              "P99": 0.5924,
+              "P95": 0.5924,
+              "Max": 0.9038,
+              "Count": 20,
+              "Median": 0.5608
+            }
+          },
+          "FirstColumn": 240,
+          "EndColumn": 260
+        },
+        {
+          "DecodeStats": {
+            "Mean": 1.081415,
+            "P99": 2.1125,
+            "P95": 2.1125,
+            "Max": 2.3509,
+            "Count": 20,
+            "Median": 0.9248
+          },
+          "OutputSha256": "199CBE6260DDCAB55B1994924EFFECBE1D63C01512C6F546E0520131DFE23E56",
+          "WorkerIndex": 13,
+          "PhaseStats": {
+            "TotalMs": {
+              "Mean": 5.26817,
+              "P99": 5.8163,
+              "P95": 5.8163,
+              "Max": 5.9176,
+              "Count": 20,
+              "Median": 5.0682
+            },
+            "GeometryMs": {
+              "Mean": 4.158240000000001,
+              "P99": 4.7155,
+              "P95": 4.7155,
+              "Max": 4.7645,
+              "Count": 20,
+              "Median": 3.9427
+            },
+            "ActorsMs": {
+              "Mean": 0.426485,
+              "P99": 0.4909,
+              "P95": 0.4909,
+              "Max": 1.13,
+              "Count": 20,
+              "Median": 0.3694
+            },
+            "WeaponMs": {
+              "Mean": 0.052525,
+              "P99": 0.0589,
+              "P95": 0.0589,
+              "Max": 0.0857,
+              "Count": 20,
+              "Median": 0.0507
+            },
+            "HudMs": {
+              "Mean": 0.5807749999999998,
+              "P99": 0.7067,
+              "P95": 0.7067,
+              "Max": 0.7243,
+              "Count": 20,
+              "Median": 0.5674
+            }
+          },
+          "FirstColumn": 260,
+          "EndColumn": 280
+        },
+        {
+          "DecodeStats": {
+            "Mean": 1.090455,
+            "P99": 1.9142,
+            "P95": 1.9142,
+            "Max": 2.9662,
+            "Count": 20,
+            "Median": 0.9307
+          },
+          "OutputSha256": "29ABE71FF911C602F1CCD0783434BCA7DD49BB63A3340399D4CF8436FF213085",
+          "WorkerIndex": 14,
+          "PhaseStats": {
+            "TotalMs": {
+              "Mean": 8.515944999999999,
+              "P99": 9.2567,
+              "P95": 9.2567,
+              "Max": 9.7788,
+              "Count": 20,
+              "Median": 8.6669
+            },
+            "GeometryMs": {
+              "Mean": 6.823365,
+              "P99": 7.5842,
+              "P95": 7.5842,
+              "Max": 7.6281,
+              "Count": 20,
+              "Median": 6.6501
+            },
+            "ActorsMs": {
+              "Mean": 0.7958650000000003,
+              "P99": 1.4237,
+              "P95": 1.4237,
+              "Max": 1.5305,
+              "Count": 20,
+              "Median": 0.6996
+            },
+            "WeaponMs": {
+              "Mean": 0.052285000000000005,
+              "P99": 0.0602,
+              "P95": 0.0602,
+              "Max": 0.0622,
+              "Count": 20,
+              "Median": 0.0519
+            },
+            "HudMs": {
+              "Mean": 0.7863699999999999,
+              "P99": 1.4458,
+              "P95": 1.4458,
+              "Max": 2.0612,
+              "Count": 20,
+              "Median": 0.584
+            }
+          },
+          "FirstColumn": 280,
+          "EndColumn": 300
+        },
+        {
+          "DecodeStats": {
+            "Mean": 1.10513,
+            "P99": 1.261,
+            "P95": 1.261,
+            "Max": 2.8016,
+            "Count": 20,
+            "Median": 0.9741
+          },
+          "OutputSha256": "EB69F65EEB23154A445AB0128246E12E42299924C8F4A97A762E946C95D5BB73",
+          "WorkerIndex": 15,
+          "PhaseStats": {
+            "TotalMs": {
+              "Mean": 8.468955000000001,
+              "P99": 9.1143,
+              "P95": 9.1143,
+              "Max": 9.6328,
+              "Count": 20,
+              "Median": 8.5359
+            },
+            "GeometryMs": {
+              "Mean": 7.042274999999999,
+              "P99": 7.6272,
+              "P95": 7.6272,
+              "Max": 7.7146,
+              "Count": 20,
+              "Median": 6.8683
+            },
+            "ActorsMs": {
+              "Mean": 0.6039849999999999,
+              "P99": 0.6939,
+              "P95": 0.6939,
+              "Max": 0.7775,
+              "Count": 20,
+              "Median": 0.5906
+            },
+            "WeaponMs": {
+              "Mean": 0.05133000000000001,
+              "P99": 0.0551,
+              "P95": 0.0551,
+              "Max": 0.0591,
+              "Count": 20,
+              "Median": 0.0509
+            },
+            "HudMs": {
+              "Mean": 0.7140200000000001,
+              "P99": 1.3466,
+              "P95": 1.3466,
+              "Max": 2.0772,
+              "Count": 20,
+              "Median": 0.5861
+            }
+          },
+          "FirstColumn": 300,
+          "EndColumn": 320
+        }
+      ]
+    },
+    {
+      "Report": {
+        "Path": "local/e1m2-frame-cost-phases-16w-details-r1.json",
+        "Sha256": "6B9ED90FB9E98577B75645D588FF8ECB8FB5E7EDCC9CAF6A32D2C2F69C1F008C"
+      },
+      "FrameSha256": "D73C9535BC8339A265D4B268C7B1AEB400D07D36CFCE98B753AEDC8D3DABBB58",
+      "PhaseStats": {
+        "SetupMs": {
+          "Mean": 0.14756531250000005,
+          "Max": 1.2284000000000002,
+          "Count": 320,
+          "Median": 0.1432,
+          "P95": 0.183,
+          "P99": 0.22690000000000002
+        },
+        "PlanesMs": {
+          "Mean": 1.9367612499999993,
+          "Max": 27.611600000000003,
+          "Count": 320,
+          "Median": 1.8763,
+          "P95": 2.7646,
+          "P99": 3.2056
+        },
+        "WeaponMs": {
+          "Mean": 0.05735656249999997,
+          "Max": 0.1926,
+          "Count": 320,
+          "Median": 0.0542,
+          "P95": 0.0773,
+          "P99": 0.0975
+        },
+        "GeometryMs": {
+          "Mean": 6.51973375,
+          "Max": 45.2949,
+          "Count": 320,
+          "Median": 6.3233,
+          "P95": 12.4156,
+          "P99": 13.3791
+        },
+        "WallsMs": {
+          "Mean": 4.42597375,
+          "Max": 17.5012,
+          "Count": 320,
+          "Median": 4.2869,
+          "P95": 9.951,
+          "P99": 10.7797
+        },
+        "TotalMs": {
+          "Mean": 8.171503750000003,
+          "Max": 54.4784,
+          "Count": 320,
+          "Median": 7.6796,
+          "P95": 13.8631,
+          "P99": 14.9848
+        },
+        "HudMs": {
+          "Mean": 0.7321350000000002,
+          "Max": 8.7085,
+          "Count": 320,
+          "Median": 0.6573,
+          "P95": 1.1329,
+          "P99": 1.8164
+        },
+        "MaskedWallsMs": {
+          "Mean": 0.00404749999999999,
+          "Max": 0.016800000000000002,
+          "Count": 320,
+          "Median": 0.0039000000000000003,
+          "P95": 0.005200000000000001,
+          "P99": 0.0079
+        },
+        "ActorsMs": {
+          "Mean": 0.7937628124999996,
+          "Max": 3.0352,
+          "Count": 320,
+          "Median": 0.6734,
+          "P95": 2.1152,
+          "P99": 2.2071
+        }
+      },
+      "Workers": [
+        {
+          "OutputSha256": "4DDD7A69A1DBA34C209000124A4FA0F206B0A5CA1A9E625E6E43A53145803C12",
+          "FirstColumn": 0,
+          "PhaseStats": {
+            "TotalMs": {
+              "Mean": 6.335315,
+              "Max": 13.5728,
+              "Count": 20,
+              "Median": 5.7296,
+              "P95": 8.5306,
+              "P99": 8.5306
+            },
+            "GeometryMs": {
+              "Mean": 3.9295800000000005,
+              "Max": 10.8041,
+              "Count": 20,
+              "Median": 3.2135,
+              "P95": 5.9693,
+              "P99": 5.9693
+            },
+            "ActorsMs": {
+              "Mean": 1.2148600000000003,
+              "Max": 1.614,
+              "Count": 20,
+              "Median": 1.1652,
+              "P95": 1.4069,
+              "P99": 1.4069
+            },
+            "WeaponMs": {
+              "Mean": 0.091655,
+              "Max": 0.1926,
+              "Count": 20,
+              "Median": 0.0852,
+              "P95": 0.1051,
+              "P99": 0.1051
+            },
+            "HudMs": {
+              "Mean": 1.0062299999999997,
+              "Max": 1.3802,
+              "Count": 20,
+              "Median": 0.9645,
+              "P95": 1.2185,
+              "P99": 1.2185
+            },
+            "SetupMs": {
+              "Mean": 0.1809,
+              "Max": 0.2901,
+              "Count": 20,
+              "Median": 0.1733,
+              "P95": 0.2121,
+              "P99": 0.2121
+            },
+            "WallsMs": {
+              "Mean": 2.51624,
+              "Max": 9.2043,
+              "Count": 20,
+              "Median": 1.9139000000000002,
+              "P95": 4.721,
+              "P99": 4.721
+            },
+            "PlanesMs": {
+              "Mean": 1.2205300000000001,
+              "Max": 3.0780000000000003,
+              "Count": 20,
+              "Median": 1.0212,
+              "P95": 1.6031,
+              "P99": 1.6031
+            },
+            "MaskedWallsMs": {
+              "Mean": 0.005605000000000001,
+              "Max": 0.016800000000000002,
+              "Count": 20,
+              "Median": 0.0044,
+              "P95": 0.0097,
+              "P99": 0.0097
+            }
+          },
+          "EndColumn": 20,
+          "WorkerIndex": 0,
+          "DecodeStats": {
+            "Mean": 1.27056,
+            "Max": 3.5843,
+            "Count": 20,
+            "Median": 1.1126,
+            "P95": 1.4153,
+            "P99": 1.4153
+          }
+        },
+        {
+          "OutputSha256": "40FCD076D2514D557986B3685D240E5935479200510C2F8A28C437D453A1D821",
+          "FirstColumn": 20,
+          "PhaseStats": {
+            "TotalMs": {
+              "Mean": 5.863100000000001,
+              "Max": 6.9542,
+              "Count": 20,
+              "Median": 5.3977,
+              "P95": 6.7926,
+              "P99": 6.7926
+            },
+            "GeometryMs": {
+              "Mean": 3.4107700000000007,
+              "Max": 4.3351,
+              "Count": 20,
+              "Median": 3.0273,
+              "P95": 4.3265,
+              "P99": 4.3265
+            },
+            "ActorsMs": {
+              "Mean": 1.3678300000000003,
+              "Max": 2.6486,
+              "Count": 20,
+              "Median": 1.2912,
+              "P95": 1.3714,
+              "P99": 1.3714
+            },
+            "WeaponMs": {
+              "Mean": 0.06706,
+              "Max": 0.1041,
+              "Count": 20,
+              "Median": 0.0661,
+              "P95": 0.0752,
+              "P99": 0.0752
+            },
+            "HudMs": {
+              "Mean": 0.9554600000000001,
+              "Max": 2.0533,
+              "Count": 20,
+              "Median": 0.901,
+              "P95": 1.2492,
+              "P99": 1.2492
+            },
+            "SetupMs": {
+              "Mean": 0.13520500000000002,
+              "Max": 0.156,
+              "Count": 20,
+              "Median": 0.13140000000000002,
+              "P95": 0.1553,
+              "P99": 0.1553
+            },
+            "WallsMs": {
+              "Mean": 1.97369,
+              "Max": 3.0272,
+              "Count": 20,
+              "Median": 1.7005000000000001,
+              "P95": 2.9825,
+              "P99": 2.9825
+            },
+            "PlanesMs": {
+              "Mean": 1.293685,
+              "Max": 2.4887,
+              "Count": 20,
+              "Median": 1.1608,
+              "P95": 2.3146,
+              "P99": 2.3146
+            },
+            "MaskedWallsMs": {
+              "Mean": 0.003445,
+              "Max": 0.0056,
+              "Count": 20,
+              "Median": 0.0032,
+              "P95": 0.0044,
+              "P99": 0.0044
+            }
+          },
+          "EndColumn": 40,
+          "WorkerIndex": 1,
+          "DecodeStats": {
+            "Mean": 1.2535150000000002,
+            "Max": 4.0779,
+            "Count": 20,
+            "Median": 1.0998,
+            "P95": 1.2027,
+            "P99": 1.2027
+          }
+        },
+        {
+          "OutputSha256": "013990A171DEE2432A3680ACF73AF109A9A8118B13E0E08A0849C3595EDA3DE9",
+          "FirstColumn": 40,
+          "PhaseStats": {
+            "TotalMs": {
+              "Mean": 6.8438,
+              "Max": 7.8055,
+              "Count": 20,
+              "Median": 6.3571,
+              "P95": 7.5309,
+              "P99": 7.5309
+            },
+            "GeometryMs": {
+              "Mean": 4.764054999999999,
+              "Max": 5.6695,
+              "Count": 20,
+              "Median": 4.3758,
+              "P95": 5.5572,
+              "P99": 5.5572
+            },
+            "ActorsMs": {
+              "Mean": 1.1834399999999998,
+              "Max": 2.2216,
+              "Count": 20,
+              "Median": 1.118,
+              "P95": 1.2349,
+              "P99": 1.2349
+            },
+            "WeaponMs": {
+              "Mean": 0.054599999999999996,
+              "Max": 0.0647,
+              "Count": 20,
+              "Median": 0.0524,
+              "P95": 0.0611,
+              "P99": 0.0611
+            },
+            "HudMs": {
+              "Mean": 0.7823849999999999,
+              "Max": 1.8173,
+              "Count": 20,
+              "Median": 0.7225,
+              "P95": 0.7639,
+              "P99": 0.7639
+            },
+            "SetupMs": {
+              "Mean": 0.133465,
+              "Max": 0.183,
+              "Count": 20,
+              "Median": 0.12480000000000001,
+              "P95": 0.1754,
+              "P99": 0.1754
+            },
+            "WallsMs": {
+              "Mean": 2.71692,
+              "Max": 3.6755,
+              "Count": 20,
+              "Median": 2.4867,
+              "P95": 3.6365000000000003,
+              "P99": 3.6365000000000003
+            },
+            "PlanesMs": {
+              "Mean": 1.90533,
+              "Max": 2.9642,
+              "Count": 20,
+              "Median": 1.7391,
+              "P95": 2.8138,
+              "P99": 2.8138
+            },
+            "MaskedWallsMs": {
+              "Mean": 0.0035250000000000004,
+              "Max": 0.0047,
+              "Count": 20,
+              "Median": 0.0034000000000000002,
+              "P95": 0.0047,
+              "P99": 0.0047
+            }
+          },
+          "EndColumn": 60,
+          "WorkerIndex": 2,
+          "DecodeStats": {
+            "Mean": 1.26656,
+            "Max": 3.5713,
+            "Count": 20,
+            "Median": 1.1169,
+            "P95": 1.4273,
+            "P99": 1.4273
+          }
+        },
+        {
+          "OutputSha256": "34FEDE0042989E86CB693CF688EC2B10F7D938B650EE8ABA69CB348B3449DFDE",
+          "FirstColumn": 60,
+          "PhaseStats": {
+            "TotalMs": {
+              "Mean": 7.746510000000001,
+              "Max": 8.7244,
+              "Count": 20,
+              "Median": 7.2785,
+              "P95": 8.6864,
+              "P99": 8.6864
+            },
+            "GeometryMs": {
+              "Mean": 6.146324999999999,
+              "Max": 7.0729,
+              "Count": 20,
+              "Median": 5.7038,
+              "P95": 7.0556,
+              "P99": 7.0556
+            },
+            "ActorsMs": {
+              "Mean": 0.749115,
+              "Max": 0.814,
+              "Count": 20,
+              "Median": 0.7423,
+              "P95": 0.8064,
+              "P99": 0.8064
+            },
+            "WeaponMs": {
+              "Mean": 0.056220000000000006,
+              "Max": 0.0635,
+              "Count": 20,
+              "Median": 0.0566,
+              "P95": 0.0618,
+              "P99": 0.0618
+            },
+            "HudMs": {
+              "Mean": 0.7233750000000001,
+              "Max": 1.8164,
+              "Count": 20,
+              "Median": 0.6634,
+              "P95": 0.6996,
+              "P99": 0.6996
+            },
+            "SetupMs": {
+              "Mean": 0.21363000000000004,
+              "Max": 1.2284000000000002,
+              "Count": 20,
+              "Median": 0.1631,
+              "P95": 0.1711,
+              "P99": 0.1711
+            },
+            "WallsMs": {
+              "Mean": 3.7089850000000006,
+              "Max": 4.9209000000000005,
+              "Count": 20,
+              "Median": 3.504,
+              "P95": 4.8762,
+              "P99": 4.8762
+            },
+            "PlanesMs": {
+              "Mean": 2.2143000000000006,
+              "Max": 3.2056,
+              "Count": 20,
+              "Median": 1.9928000000000001,
+              "P95": 3.1771000000000003,
+              "P99": 3.1771000000000003
+            },
+            "MaskedWallsMs": {
+              "Mean": 0.003935,
+              "Max": 0.0045000000000000005,
+              "Count": 20,
+              "Median": 0.004,
+              "P95": 0.0044,
+              "P99": 0.0044
+            }
+          },
+          "EndColumn": 80,
+          "WorkerIndex": 3,
+          "DecodeStats": {
+            "Mean": 1.2542849999999999,
+            "Max": 3.15,
+            "Count": 20,
+            "Median": 1.0811,
+            "P95": 2.3982,
+            "P99": 2.3982
+          }
+        },
+        {
+          "OutputSha256": "637CB49493A5F2B5EBFE07099AF8BFD0F346A6EA230C4F0902D7717208DB3A57",
+          "FirstColumn": 80,
+          "PhaseStats": {
+            "TotalMs": {
+              "Mean": 6.949770000000001,
+              "Max": 7.5825,
+              "Count": 20,
+              "Median": 6.8643,
+              "P95": 7.4885,
+              "P99": 7.4885
+            },
+            "GeometryMs": {
+              "Mean": 5.2556449999999995,
+              "Max": 5.9599,
+              "Count": 20,
+              "Median": 5.1921,
+              "P95": 5.8045,
+              "P99": 5.8045
+            },
+            "ActorsMs": {
+              "Mean": 0.86113,
+              "Max": 1.1105,
+              "Count": 20,
+              "Median": 0.8452,
+              "P95": 0.9947,
+              "P99": 0.9947
+            },
+            "WeaponMs": {
+              "Mean": 0.056900000000000006,
+              "Max": 0.0769,
+              "Count": 20,
+              "Median": 0.0561,
+              "P95": 0.0668,
+              "P99": 0.0668
+            },
+            "HudMs": {
+              "Mean": 0.7019899999999999,
+              "Max": 1.1674,
+              "Count": 20,
+              "Median": 0.6686,
+              "P95": 0.8669,
+              "P99": 0.8669
+            },
+            "SetupMs": {
+              "Mean": 0.16601000000000002,
+              "Max": 0.23650000000000002,
+              "Count": 20,
+              "Median": 0.16290000000000002,
+              "P95": 0.22340000000000002,
+              "P99": 0.22340000000000002
+            },
+            "WallsMs": {
+              "Mean": 3.00494,
+              "Max": 3.5740000000000003,
+              "Count": 20,
+              "Median": 2.9071000000000002,
+              "P95": 3.4509000000000003,
+              "P99": 3.4509000000000003
+            },
+            "PlanesMs": {
+              "Mean": 2.07496,
+              "Max": 2.8427000000000002,
+              "Count": 20,
+              "Median": 1.9678,
+              "P95": 2.3688000000000002,
+              "P99": 2.3688000000000002
+            },
+            "MaskedWallsMs": {
+              "Mean": 0.0040550000000000004,
+              "Max": 0.0048000000000000004,
+              "Count": 20,
+              "Median": 0.004,
+              "P95": 0.0047,
+              "P99": 0.0047
+            }
+          },
+          "EndColumn": 100,
+          "WorkerIndex": 4,
+          "DecodeStats": {
+            "Mean": 1.201355,
+            "Max": 3.4342,
+            "Count": 20,
+            "Median": 1.0817,
+            "P95": 1.1301,
+            "P99": 1.1301
+          }
+        },
+        {
+          "OutputSha256": "8C4EDB56B6FAA7CE6E200CE7C0D4B1BF2CB58AA8E6C03F6D1DDA595F1C9DDA77",
+          "FirstColumn": 100,
+          "PhaseStats": {
+            "TotalMs": {
+              "Mean": 8.40077,
+              "Max": 9.5492,
+              "Count": 20,
+              "Median": 8.0988,
+              "P95": 8.8877,
+              "P99": 8.8877
+            },
+            "GeometryMs": {
+              "Mean": 6.795404999999998,
+              "Max": 7.9661,
+              "Count": 20,
+              "Median": 6.3987,
+              "P95": 7.2212,
+              "P99": 7.2212
+            },
+            "ActorsMs": {
+              "Mean": 0.8237200000000001,
+              "Max": 0.8966,
+              "Count": 20,
+              "Median": 0.8082,
+              "P95": 0.875,
+              "P99": 0.875
+            },
+            "WeaponMs": {
+              "Mean": 0.05434,
+              "Max": 0.0597,
+              "Count": 20,
+              "Median": 0.0537,
+              "P95": 0.0596,
+              "P99": 0.0596
+            },
+            "HudMs": {
+              "Mean": 0.6594249999999999,
+              "Max": 0.6819,
+              "Count": 20,
+              "Median": 0.6564,
+              "P95": 0.6739,
+              "P99": 0.6739
+            },
+            "SetupMs": {
+              "Mean": 0.15535000000000002,
+              "Max": 0.17420000000000002,
+              "Count": 20,
+              "Median": 0.1521,
+              "P95": 0.16840000000000002,
+              "P99": 0.16840000000000002
+            },
+            "WallsMs": {
+              "Mean": 4.407915,
+              "Max": 5.1459,
+              "Count": 20,
+              "Median": 4.2809,
+              "P95": 5.103000000000001,
+              "P99": 5.103000000000001
+            },
+            "PlanesMs": {
+              "Mean": 2.2229049999999995,
+              "Max": 3.5273000000000003,
+              "Count": 20,
+              "Median": 1.9137000000000002,
+              "P95": 2.75,
+              "P99": 2.75
+            },
+            "MaskedWallsMs": {
+              "Mean": 0.003975000000000001,
+              "Max": 0.0049,
+              "Count": 20,
+              "Median": 0.0038,
+              "P95": 0.0047,
+              "P99": 0.0047
+            }
+          },
+          "EndColumn": 120,
+          "WorkerIndex": 5,
+          "DecodeStats": {
+            "Mean": 1.18181,
+            "Max": 2.2841,
+            "Count": 20,
+            "Median": 1.0663,
+            "P95": 2.0583,
+            "P99": 2.0583
+          }
+        },
+        {
+          "OutputSha256": "4EEFAE838A457CE4E57F5EF77D448B6DDAC13E4CA8F30E68406E424FFD8D2C54",
+          "FirstColumn": 120,
+          "PhaseStats": {
+            "TotalMs": {
+              "Mean": 10.208825000000001,
+              "Max": 11.2021,
+              "Count": 20,
+              "Median": 10.0853,
+              "P95": 10.7848,
+              "P99": 10.7848
+            },
+            "GeometryMs": {
+              "Mean": 7.1172699999999995,
+              "Max": 7.9795,
+              "Count": 20,
+              "Median": 6.7928,
+              "P95": 7.7997,
+              "P99": 7.7997
+            },
+            "ActorsMs": {
+              "Mean": 2.19128,
+              "Max": 3.0352,
+              "Count": 20,
+              "Median": 2.1322,
+              "P95": 2.3897,
+              "P99": 2.3897
+            },
+            "WeaponMs": {
+              "Mean": 0.05981000000000001,
+              "Max": 0.0657,
+              "Count": 20,
+              "Median": 0.0587,
+              "P95": 0.0636,
+              "P99": 0.0636
+            },
+            "HudMs": {
+              "Mean": 0.75715,
+              "Max": 1.65,
+              "Count": 20,
+              "Median": 0.6847,
+              "P95": 0.966,
+              "P99": 0.966
+            },
+            "SetupMs": {
+              "Mean": 0.17682499999999998,
+              "Max": 0.2029,
+              "Count": 20,
+              "Median": 0.1754,
+              "P95": 0.1841,
+              "P99": 0.1841
+            },
+            "WallsMs": {
+              "Mean": 4.860705,
+              "Max": 5.7104,
+              "Count": 20,
+              "Median": 4.6686000000000005,
+              "P95": 5.5816,
+              "P99": 5.5816
+            },
+            "PlanesMs": {
+              "Mean": 2.06903,
+              "Max": 2.9104,
+              "Count": 20,
+              "Median": 1.9053,
+              "P95": 2.7016,
+              "P99": 2.7016
+            },
+            "MaskedWallsMs": {
+              "Mean": 0.004455000000000001,
+              "Max": 0.006,
+              "Count": 20,
+              "Median": 0.0044,
+              "P95": 0.0047,
+              "P99": 0.0047
+            }
+          },
+          "EndColumn": 140,
+          "WorkerIndex": 6,
+          "DecodeStats": {
+            "Mean": 1.198755,
+            "Max": 2.1452,
+            "Count": 20,
+            "Median": 1.1411,
+            "P95": 1.2245,
+            "P99": 1.2245
+          }
+        },
+        {
+          "OutputSha256": "8864AB338755F755407C7635AB8D3B1E48D0F0E528112735EE9AB7ECF21DA1F8",
+          "FirstColumn": 140,
+          "PhaseStats": {
+            "TotalMs": {
+              "Mean": 10.80662,
+              "Max": 11.4935,
+              "Count": 20,
+              "Median": 10.6677,
+              "P95": 11.4745,
+              "P99": 11.4745
+            },
+            "GeometryMs": {
+              "Mean": 9.371705,
+              "Max": 10.1399,
+              "Count": 20,
+              "Median": 9.1527,
+              "P95": 10.1264,
+              "P99": 10.1264
+            },
+            "ActorsMs": {
+              "Mean": 0.5322650000000001,
+              "Max": 0.7177,
+              "Count": 20,
+              "Median": 0.5001,
+              "P95": 0.6933,
+              "P99": 0.6933
+            },
+            "WeaponMs": {
+              "Mean": 0.059365,
+              "Max": 0.0675,
+              "Count": 20,
+              "Median": 0.0588,
+              "P95": 0.0669,
+              "P99": 0.0669
+            },
+            "HudMs": {
+              "Mean": 0.7710800000000001,
+              "Max": 1.9723,
+              "Count": 20,
+              "Median": 0.6598,
+              "P95": 1.5347,
+              "P99": 1.5347
+            },
+            "SetupMs": {
+              "Mean": 0.15918500000000002,
+              "Max": 0.23570000000000002,
+              "Count": 20,
+              "Median": 0.15360000000000001,
+              "P95": 0.1758,
+              "P99": 0.1758
+            },
+            "WallsMs": {
+              "Mean": 7.12035,
+              "Max": 7.933800000000001,
+              "Count": 20,
+              "Median": 6.9423,
+              "P95": 7.9198,
+              "P99": 7.9198
+            },
+            "PlanesMs": {
+              "Mean": 2.0826849999999997,
+              "Max": 2.7627,
+              "Count": 20,
+              "Median": 1.9616,
+              "P95": 2.7058,
+              "P99": 2.7058
+            },
+            "MaskedWallsMs": {
+              "Mean": 0.003934999999999999,
+              "Max": 0.0043,
+              "Count": 20,
+              "Median": 0.0039000000000000003,
+              "P95": 0.004200000000000001,
+              "P99": 0.004200000000000001
+            }
+          },
+          "EndColumn": 160,
+          "WorkerIndex": 7,
+          "DecodeStats": {
+            "Mean": 1.1419750000000002,
+            "Max": 2.7991,
+            "Count": 20,
+            "Median": 1.0355,
+            "P95": 1.3563,
+            "P99": 1.3563
+          }
+        },
+        {
+          "OutputSha256": "06D4595DFD5B6CBCFB63B278185FE8AF9E7665602D520B4EE6C5D63F87AA88F6",
+          "FirstColumn": 160,
+          "PhaseStats": {
+            "TotalMs": {
+              "Mean": 14.358600000000001,
+              "Max": 15.6072,
+              "Count": 20,
+              "Median": 14.2547,
+              "P95": 15.2546,
+              "P99": 15.2546
+            },
+            "GeometryMs": {
+              "Mean": 12.830770000000001,
+              "Max": 14.1695,
+              "Count": 20,
+              "Median": 12.7556,
+              "P95": 13.7556,
+              "P99": 13.7556
+            },
+            "ActorsMs": {
+              "Mean": 0.6735650000000002,
+              "Max": 1.447,
+              "Count": 20,
+              "Median": 0.6323,
+              "P95": 0.6804,
+              "P99": 0.6804
+            },
+            "WeaponMs": {
+              "Mean": 0.06403500000000001,
+              "Max": 0.0723,
+              "Count": 20,
+              "Median": 0.0639,
+              "P95": 0.0669,
+              "P99": 0.0669
+            },
+            "HudMs": {
+              "Mean": 0.70989,
+              "Max": 1.4911,
+              "Count": 20,
+              "Median": 0.6702,
+              "P95": 0.6982,
+              "P99": 0.6982
+            },
+            "SetupMs": {
+              "Mean": 0.17334000000000005,
+              "Max": 0.2147,
+              "Count": 20,
+              "Median": 0.1716,
+              "P95": 0.1774,
+              "P99": 0.1774
+            },
+            "WallsMs": {
+              "Mean": 10.266070000000001,
+              "Max": 11.057400000000001,
+              "Count": 20,
+              "Median": 10.120000000000001,
+              "P95": 10.8484,
+              "P99": 10.8484
+            },
+            "PlanesMs": {
+              "Mean": 2.3810449999999994,
+              "Max": 3.5225,
+              "Count": 20,
+              "Median": 2.2215000000000003,
+              "P95": 3.399,
+              "P99": 3.399
+            },
+            "MaskedWallsMs": {
+              "Mean": 0.004460000000000001,
+              "Max": 0.0051,
+              "Count": 20,
+              "Median": 0.0044,
+              "P95": 0.0048000000000000004,
+              "P99": 0.0048000000000000004
+            }
+          },
+          "EndColumn": 180,
+          "WorkerIndex": 8,
+          "DecodeStats": {
+            "Mean": 1.18487,
+            "Max": 2.9612,
+            "Count": 20,
+            "Median": 1.0726,
+            "P95": 1.3368,
+            "P99": 1.3368
+          }
+        },
+        {
+          "OutputSha256": "32E196935A6C09333F00C1615754504B3AC23FE17F39892C9EBD4A5AAE0D0298",
+          "FirstColumn": 180,
+          "PhaseStats": {
+            "TotalMs": {
+              "Mean": 11.254875,
+              "Max": 54.4784,
+              "Count": 20,
+              "Median": 8.7563,
+              "P95": 14.4254,
+              "P99": 14.4254
+            },
+            "GeometryMs": {
+              "Mean": 9.854355000000002,
+              "Max": 45.2949,
+              "Count": 20,
+              "Median": 7.7433,
+              "P95": 13.3791,
+              "P99": 13.3791
+            },
+            "ActorsMs": {
+              "Mean": 0.25858499999999995,
+              "Max": 0.3218,
+              "Count": 20,
+              "Median": 0.2572,
+              "P95": 0.3124,
+              "P99": 0.3124
+            },
+            "WeaponMs": {
+              "Mean": 0.061765000000000014,
+              "Max": 0.0743,
+              "Count": 20,
+              "Median": 0.0612,
+              "P95": 0.0743,
+              "P99": 0.0743
+            },
+            "HudMs": {
+              "Mean": 1.012,
+              "Max": 8.7085,
+              "Count": 20,
+              "Median": 0.5978,
+              "P95": 0.6799,
+              "P99": 0.6799
+            },
+            "SetupMs": {
+              "Mean": 0.13740499999999997,
+              "Max": 0.1826,
+              "Count": 20,
+              "Median": 0.129,
+              "P95": 0.18000000000000002,
+              "P99": 0.18000000000000002
+            },
+            "WallsMs": {
+              "Mean": 6.494674999999999,
+              "Max": 17.5012,
+              "Count": 20,
+              "Median": 5.6139,
+              "P95": 11.0206,
+              "P99": 11.0206
+            },
+            "PlanesMs": {
+              "Mean": 3.212065,
+              "Max": 27.611600000000003,
+              "Count": 20,
+              "Median": 1.8407,
+              "P95": 2.7253000000000003,
+              "P99": 2.7253000000000003
+            },
+            "MaskedWallsMs": {
+              "Mean": 0.0045850000000000005,
+              "Max": 0.0085,
+              "Count": 20,
+              "Median": 0.0044,
+              "P95": 0.0064,
+              "P99": 0.0064
+            }
+          },
+          "EndColumn": 200,
+          "WorkerIndex": 9,
+          "DecodeStats": {
+            "Mean": 1.11793,
+            "Max": 2.7961,
+            "Count": 20,
+            "Median": 1.0219,
+            "P95": 1.1121,
+            "P99": 1.1121
+          }
+        },
+        {
+          "OutputSha256": "32C3AA9313F8E4B0F16DBAE08ED9D3BFE2EB620B205518A75EF94F8F7BE243F3",
+          "FirstColumn": 200,
+          "PhaseStats": {
+            "TotalMs": {
+              "Mean": 7.321985000000001,
+              "Max": 8.4396,
+              "Count": 20,
+              "Median": 7.115,
+              "P95": 8.2374,
+              "P99": 8.2374
+            },
+            "GeometryMs": {
+              "Mean": 6.280099999999999,
+              "Max": 7.4382,
+              "Count": 20,
+              "Median": 6.0897,
+              "P95": 6.7329,
+              "P99": 6.7329
+            },
+            "ActorsMs": {
+              "Mean": 0.31981000000000004,
+              "Max": 0.4337,
+              "Count": 20,
+              "Median": 0.3153,
+              "P95": 0.3666,
+              "P99": 0.3666
+            },
+            "WeaponMs": {
+              "Mean": 0.050205,
+              "Max": 0.0605,
+              "Count": 20,
+              "Median": 0.0499,
+              "P95": 0.056,
+              "P99": 0.056
+            },
+            "HudMs": {
+              "Mean": 0.61054,
+              "Max": 1.375,
+              "Count": 20,
+              "Median": 0.5728,
+              "P95": 0.5908,
+              "P99": 0.5908
+            },
+            "SetupMs": {
+              "Mean": 0.128665,
+              "Max": 0.22690000000000002,
+              "Count": 20,
+              "Median": 0.12290000000000001,
+              "P95": 0.17980000000000002,
+              "P99": 0.17980000000000002
+            },
+            "WallsMs": {
+              "Mean": 4.470115000000001,
+              "Max": 5.1302,
+              "Count": 20,
+              "Median": 4.314,
+              "P95": 5.0831,
+              "P99": 5.0831
+            },
+            "PlanesMs": {
+              "Mean": 1.6717650000000002,
+              "Max": 2.9799,
+              "Count": 20,
+              "Median": 1.4715,
+              "P95": 2.2233,
+              "P99": 2.2233
+            },
+            "MaskedWallsMs": {
+              "Mean": 0.004314999999999999,
+              "Max": 0.0118,
+              "Count": 20,
+              "Median": 0.0037,
+              "P95": 0.0056,
+              "P99": 0.0056
+            }
+          },
+          "EndColumn": 220,
+          "WorkerIndex": 10,
+          "DecodeStats": {
+            "Mean": 1.035325,
+            "Max": 2.1413,
+            "Count": 20,
+            "Median": 0.9292,
+            "P95": 1.8161,
+            "P99": 1.8161
+          }
+        },
+        {
+          "OutputSha256": "2E1D78D2D889234F940B23301B54307FB05E166254E4B98E0377517A75D6BD65",
+          "FirstColumn": 220,
+          "PhaseStats": {
+            "TotalMs": {
+              "Mean": 7.581830000000001,
+              "Max": 8.0523,
+              "Count": 20,
+              "Median": 7.5222,
+              "P95": 8.0457,
+              "P99": 8.0457
+            },
+            "GeometryMs": {
+              "Mean": 6.148000000000001,
+              "Max": 6.6396,
+              "Count": 20,
+              "Median": 6.0899,
+              "P95": 6.5754,
+              "P99": 6.5754
+            },
+            "ActorsMs": {
+              "Mean": 0.6581750000000002,
+              "Max": 0.7102,
+              "Count": 20,
+              "Median": 0.6588,
+              "P95": 0.691,
+              "P99": 0.691
+            },
+            "WeaponMs": {
+              "Mean": 0.050575,
+              "Max": 0.0564,
+              "Count": 20,
+              "Median": 0.0511,
+              "P95": 0.0556,
+              "P99": 0.0556
+            },
+            "HudMs": {
+              "Mean": 0.6589449999999999,
+              "Max": 1.0361,
+              "Count": 20,
+              "Median": 0.5936,
+              "P95": 0.9033,
+              "P99": 0.9033
+            },
+            "SetupMs": {
+              "Mean": 0.13598000000000002,
+              "Max": 0.2069,
+              "Count": 20,
+              "Median": 0.13090000000000002,
+              "P95": 0.17470000000000002,
+              "P99": 0.17470000000000002
+            },
+            "WallsMs": {
+              "Mean": 4.31538,
+              "Max": 4.500900000000001,
+              "Count": 20,
+              "Median": 4.3237000000000005,
+              "P95": 4.4609000000000005,
+              "P99": 4.4609000000000005
+            },
+            "PlanesMs": {
+              "Mean": 1.687075,
+              "Max": 2.2943000000000002,
+              "Count": 20,
+              "Median": 1.5951000000000002,
+              "P95": 1.9666000000000001,
+              "P99": 1.9666000000000001
+            },
+            "MaskedWallsMs": {
+              "Mean": 0.003965000000000001,
+              "Max": 0.0051,
+              "Count": 20,
+              "Median": 0.0039000000000000003,
+              "P95": 0.0046,
+              "P99": 0.0046
+            }
+          },
+          "EndColumn": 240,
+          "WorkerIndex": 11,
+          "DecodeStats": {
+            "Mean": 1.083215,
+            "Max": 2.8978,
+            "Count": 20,
+            "Median": 0.9627,
+            "P95": 1.0846,
+            "P99": 1.0846
+          }
+        },
+        {
+          "OutputSha256": "60C33AD2E1A347B9DA71C160D207F928E6397A9F58F85E40FDD0725967B2AEB2",
+          "FirstColumn": 240,
+          "PhaseStats": {
+            "TotalMs": {
+              "Mean": 5.858420000000001,
+              "Max": 6.4619,
+              "Count": 20,
+              "Median": 5.7317,
+              "P95": 6.3947,
+              "P99": 6.3947
+            },
+            "GeometryMs": {
+              "Mean": 4.822975000000001,
+              "Max": 5.3917,
+              "Count": 20,
+              "Median": 4.5409,
+              "P95": 5.3704,
+              "P99": 5.3704
+            },
+            "ActorsMs": {
+              "Mean": 0.31121499999999996,
+              "Max": 0.3618,
+              "Count": 20,
+              "Median": 0.3074,
+              "P95": 0.3528,
+              "P99": 0.3528
+            },
+            "WeaponMs": {
+              "Mean": 0.05061,
+              "Max": 0.0581,
+              "Count": 20,
+              "Median": 0.0508,
+              "P95": 0.0553,
+              "P99": 0.0553
+            },
+            "HudMs": {
+              "Mean": 0.60694,
+              "Max": 1.3795,
+              "Count": 20,
+              "Median": 0.5588,
+              "P95": 0.6042,
+              "P99": 0.6042
+            },
+            "SetupMs": {
+              "Mean": 0.126105,
+              "Max": 0.1453,
+              "Count": 20,
+              "Median": 0.12890000000000001,
+              "P95": 0.1433,
+              "P99": 0.1433
+            },
+            "WallsMs": {
+              "Mean": 3.00448,
+              "Max": 3.6767000000000003,
+              "Count": 20,
+              "Median": 2.8476000000000004,
+              "P95": 3.6082,
+              "P99": 3.6082
+            },
+            "PlanesMs": {
+              "Mean": 1.6835550000000006,
+              "Max": 2.3904,
+              "Count": 20,
+              "Median": 1.5268000000000002,
+              "P95": 2.2696,
+              "P99": 2.2696
+            },
+            "MaskedWallsMs": {
+              "Mean": 0.0036849999999999995,
+              "Max": 0.0043,
+              "Count": 20,
+              "Median": 0.0036000000000000003,
+              "P95": 0.004200000000000001,
+              "P99": 0.004200000000000001
+            }
+          },
+          "EndColumn": 260,
+          "WorkerIndex": 12,
+          "DecodeStats": {
+            "Mean": 1.02118,
+            "Max": 2.7784,
+            "Count": 20,
+            "Median": 0.9255,
+            "P95": 0.9678,
+            "P99": 0.9678
+          }
+        },
+        {
+          "OutputSha256": "199CBE6260DDCAB55B1994924EFFECBE1D63C01512C6F546E0520131DFE23E56",
+          "FirstColumn": 260,
+          "PhaseStats": {
+            "TotalMs": {
+              "Mean": 5.0974699999999995,
+              "Max": 5.7002,
+              "Count": 20,
+              "Median": 4.8552,
+              "P95": 5.6556,
+              "P99": 5.6556
+            },
+            "GeometryMs": {
+              "Mean": 4.0663100000000005,
+              "Max": 4.5802,
+              "Count": 20,
+              "Median": 3.8135,
+              "P95": 4.5673,
+              "P99": 4.5673
+            },
+            "ActorsMs": {
+              "Mean": 0.34217499999999995,
+              "Max": 0.4442,
+              "Count": 20,
+              "Median": 0.3402,
+              "P95": 0.3796,
+              "P99": 0.3796
+            },
+            "WeaponMs": {
+              "Mean": 0.04615000000000001,
+              "Max": 0.054,
+              "Count": 20,
+              "Median": 0.0459,
+              "P95": 0.0516,
+              "P99": 0.0516
+            },
+            "HudMs": {
+              "Mean": 0.5896349999999999,
+              "Max": 1.3151,
+              "Count": 20,
+              "Median": 0.5502,
+              "P95": 0.6017,
+              "P99": 0.6017
+            },
+            "SetupMs": {
+              "Mean": 0.10843500000000002,
+              "Max": 0.1312,
+              "Count": 20,
+              "Median": 0.10650000000000001,
+              "P95": 0.1183,
+              "P99": 0.1183
+            },
+            "WallsMs": {
+              "Mean": 2.276375,
+              "Max": 2.9536000000000002,
+              "Count": 20,
+              "Median": 2.1613,
+              "P95": 2.9436,
+              "P99": 2.9436
+            },
+            "PlanesMs": {
+              "Mean": 1.6735099999999996,
+              "Max": 2.2801,
+              "Count": 20,
+              "Median": 1.4962,
+              "P95": 2.2110000000000003,
+              "P99": 2.2110000000000003
+            },
+            "MaskedWallsMs": {
+              "Mean": 0.0033650000000000012,
+              "Max": 0.004,
+              "Count": 20,
+              "Median": 0.0033,
+              "P95": 0.004,
+              "P99": 0.004
+            }
+          },
+          "EndColumn": 280,
+          "WorkerIndex": 13,
+          "DecodeStats": {
+            "Mean": 1.0484850000000001,
+            "Max": 2.5313,
+            "Count": 20,
+            "Median": 0.918,
+            "P95": 1.879,
+            "P99": 1.879
+          }
+        },
+        {
+          "OutputSha256": "29ABE71FF911C602F1CCD0783434BCA7DD49BB63A3340399D4CF8436FF213085",
+          "FirstColumn": 280,
+          "PhaseStats": {
+            "TotalMs": {
+              "Mean": 8.008219999999998,
+              "Max": 8.5558,
+              "Count": 20,
+              "Median": 7.9056,
+              "P95": 8.366,
+              "P99": 8.366
+            },
+            "GeometryMs": {
+              "Mean": 6.65028,
+              "Max": 7.2056,
+              "Count": 20,
+              "Median": 6.4905,
+              "P95": 6.9914,
+              "P99": 6.9914
+            },
+            "ActorsMs": {
+              "Mean": 0.671855,
+              "Max": 0.7318,
+              "Count": 20,
+              "Median": 0.6667,
+              "P95": 0.7291,
+              "P99": 0.7291
+            },
+            "WeaponMs": {
+              "Mean": 0.04981,
+              "Max": 0.0595,
+              "Count": 20,
+              "Median": 0.0499,
+              "P95": 0.0541,
+              "P99": 0.0541
+            },
+            "HudMs": {
+              "Mean": 0.569895,
+              "Max": 0.5858,
+              "Count": 20,
+              "Median": 0.5678,
+              "P95": 0.5852,
+              "P99": 0.5852
+            },
+            "SetupMs": {
+              "Mean": 0.12822000000000003,
+              "Max": 0.1395,
+              "Count": 20,
+              "Median": 0.1295,
+              "P95": 0.13920000000000002,
+              "P99": 0.13920000000000002
+            },
+            "WallsMs": {
+              "Mean": 4.687245000000001,
+              "Max": 4.7157,
+              "Count": 20,
+              "Median": 4.6893,
+              "P95": 4.7064,
+              "P99": 4.7064
+            },
+            "PlanesMs": {
+              "Mean": 1.8254750000000002,
+              "Max": 2.3762000000000003,
+              "Count": 20,
+              "Median": 1.6552,
+              "P95": 2.1589,
+              "P99": 2.1589
+            },
+            "MaskedWallsMs": {
+              "Mean": 0.00395,
+              "Max": 0.0046,
+              "Count": 20,
+              "Median": 0.004,
+              "P95": 0.0045000000000000005,
+              "P99": 0.0045000000000000005
+            }
+          },
+          "EndColumn": 300,
+          "WorkerIndex": 14,
+          "DecodeStats": {
+            "Mean": 1.1455799999999998,
+            "Max": 2.877,
+            "Count": 20,
+            "Median": 0.9253,
+            "P95": 2.5564,
+            "P99": 2.5564
+          }
+        },
+        {
+          "OutputSha256": "EB69F65EEB23154A445AB0128246E12E42299924C8F4A97A762E946C95D5BB73",
+          "FirstColumn": 300,
+          "PhaseStats": {
+            "TotalMs": {
+              "Mean": 8.107950000000002,
+              "Max": 8.7124,
+              "Count": 20,
+              "Median": 7.7456,
+              "P95": 8.6441,
+              "P99": 8.6441
+            },
+            "GeometryMs": {
+              "Mean": 6.872195,
+              "Max": 7.4491,
+              "Count": 20,
+              "Median": 6.5202,
+              "P95": 7.4099,
+              "P99": 7.4099
+            },
+            "ActorsMs": {
+              "Mean": 0.5411850000000002,
+              "Max": 0.6324,
+              "Count": 20,
+              "Median": 0.5355,
+              "P95": 0.5586,
+              "P99": 0.5586
+            },
+            "WeaponMs": {
+              "Mean": 0.044605000000000006,
+              "Max": 0.048,
+              "Count": 20,
+              "Median": 0.0445,
+              "P95": 0.0471,
+              "P99": 0.0471
+            },
+            "HudMs": {
+              "Mean": 0.5992200000000001,
+              "Max": 1.3479,
+              "Count": 20,
+              "Median": 0.5586,
+              "P95": 0.5694,
+              "P99": 0.5694
+            },
+            "SetupMs": {
+              "Mean": 0.102325,
+              "Max": 0.11080000000000001,
+              "Count": 20,
+              "Median": 0.1017,
+              "P95": 0.1085,
+              "P99": 0.1085
+            },
+            "WallsMs": {
+              "Mean": 4.991495000000001,
+              "Max": 5.6864,
+              "Count": 20,
+              "Median": 4.7419,
+              "P95": 5.6304,
+              "P99": 5.6304
+            },
+            "PlanesMs": {
+              "Mean": 1.7702649999999995,
+              "Max": 2.388,
+              "Count": 20,
+              "Median": 1.6629,
+              "P95": 2.3824,
+              "P99": 2.3824
+            },
+            "MaskedWallsMs": {
+              "Mean": 0.003505000000000001,
+              "Max": 0.0041,
+              "Count": 20,
+              "Median": 0.0034000000000000002,
+              "P95": 0.004,
+              "P99": 0.004
+            }
+          },
+          "EndColumn": 320,
+          "WorkerIndex": 15,
+          "DecodeStats": {
+            "Mean": 0.9797849999999999,
+            "Max": 1.929,
+            "Count": 20,
+            "Median": 0.9291,
+            "P95": 0.9524,
+            "P99": 0.9524
+          }
+        }
+      ]
+    },
+    {
+      "Report": {
+        "Path": "local/e3m6-frame-cost-phases-16w-details-r1.json",
+        "Sha256": "AB13E82F877D1F6ED013B0B0EC87A6A3659AD81B3C855365417CAA77F86724D1"
+      },
+      "FrameSha256": "92BFF34916AE31903A0A2A35A386940121EEE521346A3355543985E371561D82",
+      "PhaseStats": {
+        "MaskedWallsMs": {
+          "Median": 0.0037,
+          "Count": 320,
+          "Mean": 0.003958437500000004,
+          "Max": 0.0177,
+          "P95": 0.0058000000000000005,
+          "P99": 0.0099
+        },
+        "WallsMs": {
+          "Median": 1.7811000000000001,
+          "Count": 320,
+          "Mean": 2.0424565625000004,
+          "Max": 4.6417,
+          "P95": 2.9384,
+          "P99": 3.5356
+        },
+        "HudMs": {
+          "Median": 0.6809,
+          "Count": 320,
+          "Mean": 0.7625196875000003,
+          "Max": 1.8903,
+          "P95": 1.1261,
+          "P99": 1.4342
+        },
+        "WeaponMs": {
+          "Median": 0.0609,
+          "Count": 320,
+          "Mean": 0.06631437499999997,
+          "Max": 1.021,
+          "P95": 0.0909,
+          "P99": 0.11
+        },
+        "ActorsMs": {
+          "Median": 1.5075,
+          "Count": 320,
+          "Mean": 1.5735778125000004,
+          "Max": 4.03,
+          "P95": 3.1612,
+          "P99": 3.2291
+        },
+        "PlanesMs": {
+          "Median": 1.1891,
+          "Count": 320,
+          "Mean": 1.288546875,
+          "Max": 8.0115,
+          "P95": 1.9789,
+          "P99": 2.3192
+        },
+        "GeometryMs": {
+          "Median": 3.3218,
+          "Count": 320,
+          "Mean": 3.5003884375,
+          "Max": 10.1282,
+          "P95": 4.5582,
+          "P99": 5.4909
+        },
+        "SetupMs": {
+          "Median": 0.163,
+          "Count": 320,
+          "Mean": 0.15978749999999997,
+          "Max": 0.2604,
+          "P95": 0.20170000000000002,
+          "P99": 0.21480000000000002
+        },
+        "TotalMs": {
+          "Median": 6.023,
+          "Count": 320,
+          "Mean": 5.980528124999999,
+          "Max": 11.8107,
+          "P95": 7.8221,
+          "P99": 8.1316
+        }
+      },
+      "Workers": [
+        {
+          "PhaseStats": {
+            "TotalMs": {
+              "Median": 5.9005,
+              "Count": 20,
+              "Mean": 6.28545,
+              "Max": 11.8107,
+              "P95": 7.9454,
+              "P99": 7.9454
+            },
+            "GeometryMs": {
+              "Median": 3.7889,
+              "Count": 20,
+              "Mean": 4.45305,
+              "Max": 10.1282,
+              "P95": 6.2038,
+              "P99": 6.2038
+            },
+            "ActorsMs": {
+              "Median": 0.6252,
+              "Count": 20,
+              "Mean": 0.6260449999999999,
+              "Max": 0.957,
+              "P95": 0.8131,
+              "P99": 0.8131
+            },
+            "WeaponMs": {
+              "Median": 0.0947,
+              "Count": 20,
+              "Mean": 0.09696000000000002,
+              "Max": 0.1538,
+              "P95": 0.1146,
+              "P99": 0.1146
+            },
+            "HudMs": {
+              "Median": 0.9087,
+              "Count": 20,
+              "Mean": 0.9957500000000001,
+              "Max": 1.3012,
+              "P95": 1.2013,
+              "P99": 1.2013
+            },
+            "SetupMs": {
+              "Median": 0.2101,
+              "Count": 20,
+              "Mean": 0.20507000000000003,
+              "Max": 0.2604,
+              "P95": 0.2354,
+              "P99": 0.2354
+            },
+            "WallsMs": {
+              "Median": 2.0931,
+              "Count": 20,
+              "Mean": 2.375325,
+              "Max": 4.6417,
+              "P95": 3.979,
+              "P99": 3.979
+            },
+            "PlanesMs": {
+              "Median": 1.5110000000000001,
+              "Count": 20,
+              "Mean": 1.8569099999999998,
+              "Max": 8.0115,
+              "P95": 2.2030000000000003,
+              "P99": 2.2030000000000003
+            },
+            "MaskedWallsMs": {
+              "Median": 0.006200000000000001,
+              "Count": 20,
+              "Mean": 0.007475,
+              "Max": 0.0177,
+              "P95": 0.012400000000000001,
+              "P99": 0.012400000000000001
+            }
+          },
+          "FirstColumn": 0,
+          "EndColumn": 20,
+          "DecodeStats": {
+            "Median": 0.6393,
+            "Count": 20,
+            "Mean": 0.779895,
+            "Max": 2.5982,
+            "P95": 0.8927,
+            "P99": 0.8927
+          },
+          "OutputSha256": "DCF252A2B0F4AFBBBF72B778D5B4B9ADB587CDBAC1822D8598229B5AB5FC748A",
+          "WorkerIndex": 0
+        },
+        {
+          "PhaseStats": {
+            "TotalMs": {
+              "Median": 4.4388,
+              "Count": 20,
+              "Mean": 4.86415,
+              "Max": 6.0338,
+              "P95": 5.6549,
+              "P99": 5.6549
+            },
+            "GeometryMs": {
+              "Median": 3.1231,
+              "Count": 20,
+              "Mean": 3.464505,
+              "Max": 4.3444,
+              "P95": 4.2102,
+              "P99": 4.2102
+            },
+            "ActorsMs": {
+              "Median": 0.3322,
+              "Count": 20,
+              "Mean": 0.38168,
+              "Max": 1.3681,
+              "P95": 0.3714,
+              "P99": 0.3714
+            },
+            "WeaponMs": {
+              "Median": 0.0714,
+              "Count": 20,
+              "Mean": 0.07574000000000002,
+              "Max": 0.1194,
+              "P95": 0.0918,
+              "P99": 0.0918
+            },
+            "HudMs": {
+              "Median": 0.8557,
+              "Count": 20,
+              "Mean": 0.8690749999999999,
+              "Max": 1.1535,
+              "P95": 0.8947,
+              "P99": 0.8947
+            },
+            "SetupMs": {
+              "Median": 0.1628,
+              "Count": 20,
+              "Mean": 0.16403,
+              "Max": 0.20450000000000002,
+              "P95": 0.1807,
+              "P99": 0.1807
+            },
+            "WallsMs": {
+              "Median": 1.7045000000000001,
+              "Count": 20,
+              "Mean": 1.92158,
+              "Max": 2.9484000000000004,
+              "P95": 2.7237,
+              "P99": 2.7237
+            },
+            "PlanesMs": {
+              "Median": 1.2172,
+              "Count": 20,
+              "Mean": 1.369665,
+              "Max": 2.3192,
+              "P95": 2.2795,
+              "P99": 2.2795
+            },
+            "MaskedWallsMs": {
+              "Median": 0.0037,
+              "Count": 20,
+              "Mean": 0.0038399999999999997,
+              "Max": 0.005,
+              "P95": 0.0043,
+              "P99": 0.0043
+            }
+          },
+          "FirstColumn": 20,
+          "EndColumn": 40,
+          "DecodeStats": {
+            "Median": 0.6098,
+            "Count": 20,
+            "Mean": 0.7131700000000001,
+            "Max": 2.6186,
+            "P95": 0.6567,
+            "P99": 0.6567
+          },
+          "OutputSha256": "57E6A869CC59CFD14723453FD50983FE76FBC9797A79A4AB95F0EC6E6599568F",
+          "WorkerIndex": 1
+        },
+        {
+          "PhaseStats": {
+            "TotalMs": {
+              "Median": 5.3855,
+              "Count": 20,
+              "Mean": 5.73982,
+              "Max": 6.5482,
+              "P95": 6.3634,
+              "P99": 6.3634
+            },
+            "GeometryMs": {
+              "Median": 3.1718,
+              "Count": 20,
+              "Mean": 3.45171,
+              "Max": 4.1232,
+              "P95": 4.1182,
+              "P99": 4.1182
+            },
+            "ActorsMs": {
+              "Median": 1.1827,
+              "Count": 20,
+              "Mean": 1.183675,
+              "Max": 1.2286,
+              "P95": 1.2254,
+              "P99": 1.2254
+            },
+            "WeaponMs": {
+              "Median": 0.0679,
+              "Count": 20,
+              "Mean": 0.11679000000000002,
+              "Max": 1.021,
+              "P95": 0.0796,
+              "P99": 0.0796
+            },
+            "HudMs": {
+              "Median": 0.8479,
+              "Count": 20,
+              "Mean": 0.9061149999999998,
+              "Max": 1.8903,
+              "P95": 0.9864,
+              "P99": 0.9864
+            },
+            "SetupMs": {
+              "Median": 0.1695,
+              "Count": 20,
+              "Mean": 0.17024999999999998,
+              "Max": 0.2013,
+              "P95": 0.1902,
+              "P99": 0.1902
+            },
+            "WallsMs": {
+              "Median": 1.7583,
+              "Count": 20,
+              "Mean": 1.957895,
+              "Max": 2.7337000000000002,
+              "P95": 2.7269,
+              "P99": 2.7269
+            },
+            "PlanesMs": {
+              "Median": 1.2187000000000001,
+              "Count": 20,
+              "Mean": 1.313725,
+              "Max": 2.1674,
+              "P95": 2.1183,
+              "P99": 2.1183
+            },
+            "MaskedWallsMs": {
+              "Median": 0.004,
+              "Count": 20,
+              "Mean": 0.0041,
+              "Max": 0.0055000000000000005,
+              "P95": 0.0049,
+              "P99": 0.0049
+            }
+          },
+          "FirstColumn": 40,
+          "EndColumn": 60,
+          "DecodeStats": {
+            "Median": 0.6637,
+            "Count": 20,
+            "Mean": 0.76723,
+            "Max": 2.6481,
+            "P95": 0.7176,
+            "P99": 0.7176
+          },
+          "OutputSha256": "A019449492147473FFCBA52FF4B1E0C39BDC1138A628805F993BEBE0DABAA5E9",
+          "WorkerIndex": 2
+        },
+        {
+          "PhaseStats": {
+            "TotalMs": {
+              "Median": 6.4018,
+              "Count": 20,
+              "Mean": 6.815189999999999,
+              "Max": 8.0608,
+              "P95": 7.6473,
+              "P99": 7.6473
+            },
+            "GeometryMs": {
+              "Median": 3.1529,
+              "Count": 20,
+              "Mean": 3.4748849999999996,
+              "Max": 4.7481,
+              "P95": 4.1453,
+              "P99": 4.1453
+            },
+            "ActorsMs": {
+              "Median": 2.2262,
+              "Count": 20,
+              "Mean": 2.2806950000000006,
+              "Max": 3.1612,
+              "P95": 2.4938,
+              "P99": 2.4938
+            },
+            "WeaponMs": {
+              "Median": 0.0709,
+              "Count": 20,
+              "Mean": 0.07076,
+              "Max": 0.0742,
+              "P95": 0.074,
+              "P99": 0.074
+            },
+            "HudMs": {
+              "Median": 0.8519,
+              "Count": 20,
+              "Mean": 0.9017350000000001,
+              "Max": 1.833,
+              "P95": 0.8772,
+              "P99": 0.8772
+            },
+            "SetupMs": {
+              "Median": 0.1757,
+              "Count": 20,
+              "Mean": 0.179415,
+              "Max": 0.23220000000000002,
+              "P95": 0.187,
+              "P99": 0.187
+            },
+            "WallsMs": {
+              "Median": 1.7293,
+              "Count": 20,
+              "Mean": 1.92744,
+              "Max": 2.7193,
+              "P95": 2.7104,
+              "P99": 2.7104
+            },
+            "PlanesMs": {
+              "Median": 1.2269,
+              "Count": 20,
+              "Mean": 1.3574200000000003,
+              "Max": 2.8157,
+              "P95": 2.2219,
+              "P99": 2.2219
+            },
+            "MaskedWallsMs": {
+              "Median": 0.004,
+              "Count": 20,
+              "Mean": 0.004510000000000001,
+              "Max": 0.011600000000000001,
+              "P95": 0.005,
+              "P99": 0.005
+            }
+          },
+          "FirstColumn": 60,
+          "EndColumn": 80,
+          "DecodeStats": {
+            "Median": 0.762,
+            "Count": 20,
+            "Mean": 0.90044,
+            "Max": 2.5734,
+            "P95": 1.0902,
+            "P99": 1.0902
+          },
+          "OutputSha256": "569DA5D9470E70A3CCEB71332A6C79DD709264642A8FC11E2FB06A78366F9FBB",
+          "WorkerIndex": 3
+        },
+        {
+          "PhaseStats": {
+            "TotalMs": {
+              "Median": 6.5076,
+              "Count": 20,
+              "Mean": 6.568934999999999,
+              "Max": 7.5566,
+              "P95": 7.0624,
+              "P99": 7.0624
+            },
+            "GeometryMs": {
+              "Median": 3.0373,
+              "Count": 20,
+              "Mean": 3.1373450000000007,
+              "Max": 4.0977,
+              "P95": 3.3634,
+              "P99": 3.3634
+            },
+            "ActorsMs": {
+              "Median": 2.3452,
+              "Count": 20,
+              "Mean": 2.4152949999999995,
+              "Max": 2.903,
+              "P95": 2.7281,
+              "P99": 2.7281
+            },
+            "WeaponMs": {
+              "Median": 0.0686,
+              "Count": 20,
+              "Mean": 0.06795000000000001,
+              "Max": 0.0747,
+              "P95": 0.0737,
+              "P99": 0.0737
+            },
+            "HudMs": {
+              "Median": 0.8424,
+              "Count": 20,
+              "Mean": 0.8706799999999999,
+              "Max": 1.1737,
+              "P95": 1.0156,
+              "P99": 1.0156
+            },
+            "SetupMs": {
+              "Median": 0.16290000000000002,
+              "Count": 20,
+              "Mean": 0.162085,
+              "Max": 0.183,
+              "P95": 0.1804,
+              "P99": 0.1804
+            },
+            "WallsMs": {
+              "Median": 1.6398000000000001,
+              "Count": 20,
+              "Mean": 1.7257800000000003,
+              "Max": 2.6769000000000003,
+              "P95": 2.0113000000000003,
+              "P99": 2.0113000000000003
+            },
+            "PlanesMs": {
+              "Median": 1.192,
+              "Count": 20,
+              "Mean": 1.23916,
+              "Max": 1.4883000000000002,
+              "P95": 1.4627000000000001,
+              "P99": 1.4627000000000001
+            },
+            "MaskedWallsMs": {
+              "Median": 0.0039000000000000003,
+              "Count": 20,
+              "Mean": 0.004285,
+              "Max": 0.0095,
+              "P95": 0.006200000000000001,
+              "P99": 0.006200000000000001
+            }
+          },
+          "FirstColumn": 80,
+          "EndColumn": 100,
+          "DecodeStats": {
+            "Median": 0.7459,
+            "Count": 20,
+            "Mean": 0.84418,
+            "Max": 2.535,
+            "P95": 0.8647,
+            "P99": 0.8647
+          },
+          "OutputSha256": "2E90F62B0BD692E1781060DEB198F10F7D6319028F00497C41A03F7ECF4B2D4B",
+          "WorkerIndex": 4
+        },
+        {
+          "PhaseStats": {
+            "TotalMs": {
+              "Median": 6.1625,
+              "Count": 20,
+              "Mean": 6.317065000000001,
+              "Max": 7.0104,
+              "P95": 6.9421,
+              "P99": 6.9421
+            },
+            "GeometryMs": {
+              "Median": 3.036,
+              "Count": 20,
+              "Mean": 3.2594450000000004,
+              "Max": 3.8072,
+              "P95": 3.7614,
+              "P99": 3.7614
+            },
+            "ActorsMs": {
+              "Median": 2.0695,
+              "Count": 20,
+              "Mean": 2.08209,
+              "Max": 2.19,
+              "P95": 2.1625,
+              "P99": 2.1625
+            },
+            "WeaponMs": {
+              "Median": 0.0625,
+              "Count": 20,
+              "Mean": 0.063555,
+              "Max": 0.0804,
+              "P95": 0.0712,
+              "P99": 0.0712
+            },
+            "HudMs": {
+              "Median": 0.8246,
+              "Count": 20,
+              "Mean": 0.83909,
+              "Max": 1.62,
+              "P95": 0.8675,
+              "P99": 0.8675
+            },
+            "SetupMs": {
+              "Median": 0.1615,
+              "Count": 20,
+              "Mean": 0.160505,
+              "Max": 0.1819,
+              "P95": 0.1776,
+              "P99": 0.1776
+            },
+            "WallsMs": {
+              "Median": 1.6276000000000002,
+              "Count": 20,
+              "Mean": 1.7768950000000001,
+              "Max": 2.428,
+              "P95": 2.3541000000000003,
+              "P99": 2.3541000000000003
+            },
+            "PlanesMs": {
+              "Median": 1.1933,
+              "Count": 20,
+              "Mean": 1.3130099999999998,
+              "Max": 1.8358,
+              "P95": 1.8204,
+              "P99": 1.8204
+            },
+            "MaskedWallsMs": {
+              "Median": 0.0036000000000000003,
+              "Count": 20,
+              "Mean": 0.0037099999999999993,
+              "Max": 0.0051,
+              "P95": 0.0046,
+              "P99": 0.0046
+            }
+          },
+          "FirstColumn": 100,
+          "EndColumn": 120,
+          "DecodeStats": {
+            "Median": 0.7393,
+            "Count": 20,
+            "Mean": 0.81592,
+            "Max": 1.8896,
+            "P95": 0.9379,
+            "P99": 0.9379
+          },
+          "OutputSha256": "2582495085769DBD14C3399C66F8E0D7609CBA71BDDCE68E55C4AA454A5CDC78",
+          "WorkerIndex": 5
+        },
+        {
+          "PhaseStats": {
+            "TotalMs": {
+              "Median": 5.0775,
+              "Count": 20,
+              "Mean": 5.333400000000001,
+              "Max": 5.8956,
+              "P95": 5.834,
+              "P99": 5.834
+            },
+            "GeometryMs": {
+              "Median": 2.9282,
+              "Count": 20,
+              "Mean": 3.180945,
+              "Max": 3.7013,
+              "P95": 3.6551,
+              "P99": 3.6551
+            },
+            "ActorsMs": {
+              "Median": 1.2541,
+              "Count": 20,
+              "Mean": 1.2717299999999998,
+              "Max": 1.4193,
+              "P95": 1.3652,
+              "P99": 1.3652
+            },
+            "WeaponMs": {
+              "Median": 0.0577,
+              "Count": 20,
+              "Mean": 0.058679999999999996,
+              "Max": 0.0644,
+              "P95": 0.0635,
+              "P99": 0.0635
+            },
+            "HudMs": {
+              "Median": 0.7495,
+              "Count": 20,
+              "Mean": 0.7511249999999999,
+              "Max": 0.7891,
+              "P95": 0.7716,
+              "P99": 0.7716
+            },
+            "SetupMs": {
+              "Median": 0.1471,
+              "Count": 20,
+              "Mean": 0.15028999999999998,
+              "Max": 0.1738,
+              "P95": 0.1685,
+              "P99": 0.1685
+            },
+            "WallsMs": {
+              "Median": 1.6032000000000002,
+              "Count": 20,
+              "Mean": 1.74784,
+              "Max": 2.3581000000000003,
+              "P95": 2.326,
+              "P99": 2.326
+            },
+            "PlanesMs": {
+              "Median": 1.1502000000000001,
+              "Count": 20,
+              "Mean": 1.274435,
+              "Max": 1.8222,
+              "P95": 1.7870000000000001,
+              "P99": 1.7870000000000001
+            },
+            "MaskedWallsMs": {
+              "Median": 0.0032,
+              "Count": 20,
+              "Mean": 0.003245,
+              "Max": 0.0038,
+              "P95": 0.0038,
+              "P99": 0.0038
+            }
+          },
+          "FirstColumn": 120,
+          "EndColumn": 140,
+          "DecodeStats": {
+            "Median": 0.6093,
+            "Count": 20,
+            "Mean": 0.6875249999999999,
+            "Max": 2.0919,
+            "P95": 0.6517,
+            "P99": 0.6517
+          },
+          "OutputSha256": "F212B07459D4F2536B61D05EFD2F4F5626F7AC4CE4DD226400C8FC174668FA3D",
+          "WorkerIndex": 6
+        },
+        {
+          "PhaseStats": {
+            "TotalMs": {
+              "Median": 5.3786,
+              "Count": 20,
+              "Mean": 5.5786,
+              "Max": 6.2665,
+              "P95": 6.133,
+              "P99": 6.133
+            },
+            "GeometryMs": {
+              "Median": 2.9324,
+              "Count": 20,
+              "Mean": 3.15341,
+              "Max": 3.6935,
+              "P95": 3.6935,
+              "P99": 3.6935
+            },
+            "ActorsMs": {
+              "Median": 1.5782,
+              "Count": 20,
+              "Mean": 1.60643,
+              "Max": 2.2825,
+              "P95": 1.6612,
+              "P99": 1.6612
+            },
+            "WeaponMs": {
+              "Median": 0.0594,
+              "Count": 20,
+              "Mean": 0.058394999999999996,
+              "Max": 0.0735,
+              "P95": 0.0683,
+              "P99": 0.0683
+            },
+            "HudMs": {
+              "Median": 0.6749,
+              "Count": 20,
+              "Mean": 0.6881899999999999,
+              "Max": 0.7906,
+              "P95": 0.756,
+              "P99": 0.756
+            },
+            "SetupMs": {
+              "Median": 0.1575,
+              "Count": 20,
+              "Mean": 0.15587999999999996,
+              "Max": 0.1809,
+              "P95": 0.1772,
+              "P99": 0.1772
+            },
+            "WallsMs": {
+              "Median": 1.6278000000000001,
+              "Count": 20,
+              "Mean": 1.7645100000000002,
+              "Max": 2.3887,
+              "P95": 2.3658,
+              "P99": 2.3658
+            },
+            "PlanesMs": {
+              "Median": 1.1247,
+              "Count": 20,
+              "Mean": 1.2241950000000004,
+              "Max": 1.8145,
+              "P95": 1.8104,
+              "P99": 1.8104
+            },
+            "MaskedWallsMs": {
+              "Median": 0.0035,
+              "Count": 20,
+              "Mean": 0.003555,
+              "Max": 0.0046,
+              "P95": 0.0043,
+              "P99": 0.0043
+            }
+          },
+          "FirstColumn": 140,
+          "EndColumn": 160,
+          "DecodeStats": {
+            "Median": 0.656,
+            "Count": 20,
+            "Mean": 0.72571,
+            "Max": 1.9831,
+            "P95": 0.7363,
+            "P99": 0.7363
+          },
+          "OutputSha256": "E975C64B715FA9371A0D5D287E3B482E7B9E252B156BDD150565B7D7BE0ACDC7",
+          "WorkerIndex": 7
+        },
+        {
+          "PhaseStats": {
+            "TotalMs": {
+              "Median": 7.0412,
+              "Count": 20,
+              "Mean": 7.333264999999999,
+              "Max": 7.9961,
+              "P95": 7.9475,
+              "P99": 7.9475
+            },
+            "GeometryMs": {
+              "Median": 2.9963,
+              "Count": 20,
+              "Mean": 3.1910049999999996,
+              "Max": 3.9179,
+              "P95": 3.8874,
+              "P99": 3.8874
+            },
+            "ActorsMs": {
+              "Median": 3.1768,
+              "Count": 20,
+              "Mean": 3.265095,
+              "Max": 4.03,
+              "P95": 4.0053,
+              "P99": 4.0053
+            },
+            "WeaponMs": {
+              "Median": 0.0592,
+              "Count": 20,
+              "Mean": 0.059625,
+              "Max": 0.0653,
+              "P95": 0.0653,
+              "P99": 0.0653
+            },
+            "HudMs": {
+              "Median": 0.6618,
+              "Count": 20,
+              "Mean": 0.7383250000000002,
+              "Max": 1.495,
+              "P95": 1.4342,
+              "P99": 1.4342
+            },
+            "SetupMs": {
+              "Median": 0.1726,
+              "Count": 20,
+              "Mean": 0.17145000000000002,
+              "Max": 0.2144,
+              "P95": 0.1882,
+              "P99": 0.1882
+            },
+            "WallsMs": {
+              "Median": 1.7028,
+              "Count": 20,
+              "Mean": 1.863915,
+              "Max": 2.5716,
+              "P95": 2.5681000000000003,
+              "P99": 2.5681000000000003
+            },
+            "PlanesMs": {
+              "Median": 1.1046,
+              "Count": 20,
+              "Mean": 1.146355,
+              "Max": 1.8837000000000002,
+              "P95": 1.1526,
+              "P99": 1.1526
+            },
+            "MaskedWallsMs": {
+              "Median": 0.0034000000000000002,
+              "Count": 20,
+              "Mean": 0.0035100000000000005,
+              "Max": 0.0041,
+              "P95": 0.0041,
+              "P99": 0.0041
+            }
+          },
+          "FirstColumn": 160,
+          "EndColumn": 180,
+          "DecodeStats": {
+            "Median": 0.8047,
+            "Count": 20,
+            "Mean": 0.90981,
+            "Max": 1.9285,
+            "P95": 1.1221,
+            "P99": 1.1221
+          },
+          "OutputSha256": "4B9EC7168ED3436C50742C6D9DD7BF5F29799B385F4F3112409D5124551C1A07",
+          "WorkerIndex": 8
+        },
+        {
+          "PhaseStats": {
+            "TotalMs": {
+              "Median": 6.3916,
+              "Count": 20,
+              "Mean": 6.5194,
+              "Max": 7.052,
+              "P95": 6.9211,
+              "P99": 6.9211
+            },
+            "GeometryMs": {
+              "Median": 3.9303,
+              "Count": 20,
+              "Mean": 4.030235,
+              "Max": 4.5664,
+              "P95": 4.443,
+              "P99": 4.443
+            },
+            "ActorsMs": {
+              "Median": 1.6884,
+              "Count": 20,
+              "Mean": 1.698495,
+              "Max": 1.9861,
+              "P95": 1.7336,
+              "P99": 1.7336
+            },
+            "WeaponMs": {
+              "Median": 0.058,
+              "Count": 20,
+              "Mean": 0.0578,
+              "Max": 0.0625,
+              "P95": 0.0614,
+              "P99": 0.0614
+            },
+            "HudMs": {
+              "Median": 0.6366,
+              "Count": 20,
+              "Mean": 0.6566000000000003,
+              "Max": 0.9884,
+              "P95": 0.6559,
+              "P99": 0.6559
+            },
+            "SetupMs": {
+              "Median": 0.16440000000000002,
+              "Count": 20,
+              "Mean": 0.16151500000000002,
+              "Max": 0.1816,
+              "P95": 0.1797,
+              "P99": 0.1797
+            },
+            "WallsMs": {
+              "Median": 2.5947,
+              "Count": 20,
+              "Mean": 2.6708950000000007,
+              "Max": 3.1473,
+              "P95": 2.9737,
+              "P99": 2.9737
+            },
+            "PlanesMs": {
+              "Median": 1.1379000000000001,
+              "Count": 20,
+              "Mean": 1.188665,
+              "Max": 1.7918,
+              "P95": 1.4468,
+              "P99": 1.4468
+            },
+            "MaskedWallsMs": {
+              "Median": 0.0035,
+              "Count": 20,
+              "Mean": 0.003620000000000001,
+              "Max": 0.0041,
+              "P95": 0.0041,
+              "P99": 0.0041
+            }
+          },
+          "FirstColumn": 180,
+          "EndColumn": 200,
+          "DecodeStats": {
+            "Median": 0.6803,
+            "Count": 20,
+            "Mean": 0.76563,
+            "Max": 2.3561,
+            "P95": 0.7219,
+            "P99": 0.7219
+          },
+          "OutputSha256": "857F66514DFF3740C47782C30CC6B76A8E21399C9E20ECCDC294ADDFF0AD3A9D",
+          "WorkerIndex": 9
+        },
+        {
+          "PhaseStats": {
+            "TotalMs": {
+              "Median": 7.4203,
+              "Count": 20,
+              "Mean": 7.6253649999999995,
+              "Max": 8.8141,
+              "P95": 8.3344,
+              "P99": 8.3344
+            },
+            "GeometryMs": {
+              "Median": 4.1037,
+              "Count": 20,
+              "Mean": 4.336679999999999,
+              "Max": 5.4909,
+              "P95": 4.8736,
+              "P99": 4.8736
+            },
+            "ActorsMs": {
+              "Median": 2.4152,
+              "Count": 20,
+              "Mean": 2.4808550000000005,
+              "Max": 3.2291,
+              "P95": 2.7996,
+              "P99": 2.7996
+            },
+            "WeaponMs": {
+              "Median": 0.0573,
+              "Count": 20,
+              "Mean": 0.05651499999999998,
+              "Max": 0.063,
+              "P95": 0.0629,
+              "P99": 0.0629
+            },
+            "HudMs": {
+              "Median": 0.6497,
+              "Count": 20,
+              "Mean": 0.6789149999999999,
+              "Max": 1.3096,
+              "P95": 0.6744,
+              "P99": 0.6744
+            },
+            "SetupMs": {
+              "Median": 0.162,
+              "Count": 20,
+              "Mean": 0.15760499999999997,
+              "Max": 0.1898,
+              "P95": 0.183,
+              "P99": 0.183
+            },
+            "WallsMs": {
+              "Median": 2.7406,
+              "Count": 20,
+              "Mean": 2.8998850000000003,
+              "Max": 3.6243000000000003,
+              "P95": 3.5356,
+              "P99": 3.5356
+            },
+            "PlanesMs": {
+              "Median": 1.135,
+              "Count": 20,
+              "Mean": 1.2702350000000002,
+              "Max": 2.5466,
+              "P95": 1.7737,
+              "P99": 1.7737
+            },
+            "MaskedWallsMs": {
+              "Median": 0.0034000000000000002,
+              "Count": 20,
+              "Mean": 0.0035249999999999995,
+              "Max": 0.004200000000000001,
+              "P95": 0.004200000000000001,
+              "P99": 0.004200000000000001
+            }
+          },
+          "FirstColumn": 200,
+          "EndColumn": 220,
+          "DecodeStats": {
+            "Median": 0.7693,
+            "Count": 20,
+            "Mean": 0.8206300000000001,
+            "Max": 1.7621,
+            "P95": 0.801,
+            "P99": 0.801
+          },
+          "OutputSha256": "2D40B906255C804D70D3508EC6E6E04A9933A582A614118ACFC6BD776104FAFD",
+          "WorkerIndex": 10
+        },
+        {
+          "PhaseStats": {
+            "TotalMs": {
+              "Median": 5.963,
+              "Count": 20,
+              "Mean": 6.240525000000001,
+              "Max": 7.316,
+              "P95": 7.2003,
+              "P99": 7.2003
+            },
+            "GeometryMs": {
+              "Median": 3.729,
+              "Count": 20,
+              "Mean": 3.92255,
+              "Max": 5.063,
+              "P95": 4.6857,
+              "P99": 4.6857
+            },
+            "ActorsMs": {
+              "Median": 1.3928,
+              "Count": 20,
+              "Mean": 1.470055,
+              "Max": 2.1081,
+              "P95": 2.0703,
+              "P99": 2.0703
+            },
+            "WeaponMs": {
+              "Median": 0.0607,
+              "Count": 20,
+              "Mean": 0.06119500000000001,
+              "Max": 0.0742,
+              "P95": 0.0675,
+              "P99": 0.0675
+            },
+            "HudMs": {
+              "Median": 0.6553,
+              "Count": 20,
+              "Mean": 0.7073,
+              "Max": 1.3627,
+              "P95": 0.9181,
+              "P99": 0.9181
+            },
+            "SetupMs": {
+              "Median": 0.17020000000000002,
+              "Count": 20,
+              "Mean": 0.16782,
+              "Max": 0.1847,
+              "P95": 0.1791,
+              "P99": 0.1791
+            },
+            "WallsMs": {
+              "Median": 2.3984,
+              "Count": 20,
+              "Mean": 2.5457899999999998,
+              "Max": 3.3687,
+              "P95": 3.1326,
+              "P99": 3.1326
+            },
+            "PlanesMs": {
+              "Median": 1.1218000000000001,
+              "Count": 20,
+              "Mean": 1.1993199999999997,
+              "Max": 2.5359000000000003,
+              "P95": 1.1635,
+              "P99": 1.1635
+            },
+            "MaskedWallsMs": {
+              "Median": 0.0039000000000000003,
+              "Count": 20,
+              "Mean": 0.0038950000000000005,
+              "Max": 0.0045000000000000005,
+              "P95": 0.0045000000000000005,
+              "P99": 0.0045000000000000005
+            }
+          },
+          "FirstColumn": 220,
+          "EndColumn": 240,
+          "DecodeStats": {
+            "Median": 0.6104,
+            "Count": 20,
+            "Mean": 0.6804399999999999,
+            "Max": 1.967,
+            "P95": 0.6652,
+            "P99": 0.6652
+          },
+          "OutputSha256": "8455004E7CA122BC2BA917296CB22246E01E7F497A282642BBE119894935D595",
+          "WorkerIndex": 11
+        },
+        {
+          "PhaseStats": {
+            "TotalMs": {
+              "Median": 5.9414,
+              "Count": 20,
+              "Mean": 6.195079999999999,
+              "Max": 6.8368,
+              "P95": 6.7842,
+              "P99": 6.7842
+            },
+            "GeometryMs": {
+              "Median": 3.0666,
+              "Count": 20,
+              "Mean": 3.255675,
+              "Max": 3.9181,
+              "P95": 3.9003,
+              "P99": 3.9003
+            },
+            "ActorsMs": {
+              "Median": 2.0502,
+              "Count": 20,
+              "Mean": 2.09318,
+              "Max": 2.7562,
+              "P95": 2.1317,
+              "P99": 2.1317
+            },
+            "WeaponMs": {
+              "Median": 0.0573,
+              "Count": 20,
+              "Mean": 0.058589999999999996,
+              "Max": 0.0673,
+              "P95": 0.0632,
+              "P99": 0.0632
+            },
+            "HudMs": {
+              "Median": 0.6438,
+              "Count": 20,
+              "Mean": 0.6794150000000001,
+              "Max": 1.3568,
+              "P95": 0.6666,
+              "P99": 0.6666
+            },
+            "SetupMs": {
+              "Median": 0.1608,
+              "Count": 20,
+              "Mean": 0.1625,
+              "Max": 0.201,
+              "P95": 0.17750000000000002,
+              "P99": 0.17750000000000002
+            },
+            "WallsMs": {
+              "Median": 1.7512,
+              "Count": 20,
+              "Mean": 1.8775799999999996,
+              "Max": 2.6277,
+              "P95": 2.5528,
+              "P99": 2.5528
+            },
+            "PlanesMs": {
+              "Median": 1.1307,
+              "Count": 20,
+              "Mean": 1.2065800000000002,
+              "Max": 1.861,
+              "P95": 1.8210000000000002,
+              "P99": 1.8210000000000002
+            },
+            "MaskedWallsMs": {
+              "Median": 0.0035,
+              "Count": 20,
+              "Mean": 0.0035000000000000005,
+              "Max": 0.0039000000000000003,
+              "P95": 0.0039000000000000003,
+              "P99": 0.0039000000000000003
+            }
+          },
+          "FirstColumn": 240,
+          "EndColumn": 260,
+          "DecodeStats": {
+            "Median": 0.6063,
+            "Count": 20,
+            "Mean": 0.6608449999999999,
+            "Max": 1.5527,
+            "P95": 0.6607,
+            "P99": 0.6607
+          },
+          "OutputSha256": "2D13A1EBD9FCA07CB7B5A4B765F09D86DAF03B523868B8CD781D5EEA2758CD7E",
+          "WorkerIndex": 12
+        },
+        {
+          "PhaseStats": {
+            "TotalMs": {
+              "Median": 5.648,
+              "Count": 20,
+              "Mean": 5.963005000000001,
+              "Max": 6.7365,
+              "P95": 6.5868,
+              "P99": 6.5868
+            },
+            "GeometryMs": {
+              "Median": 3.4782,
+              "Count": 20,
+              "Mean": 3.784465,
+              "Max": 4.4373,
+              "P95": 4.4269,
+              "P99": 4.4269
+            },
+            "ActorsMs": {
+              "Median": 1.3972,
+              "Count": 20,
+              "Mean": 1.4063399999999997,
+              "Max": 1.5448,
+              "P95": 1.4744,
+              "P99": 1.4744
+            },
+            "WeaponMs": {
+              "Median": 0.0569,
+              "Count": 20,
+              "Mean": 0.05895,
+              "Max": 0.11,
+              "P95": 0.067,
+              "P99": 0.067
+            },
+            "HudMs": {
+              "Median": 0.6466,
+              "Count": 20,
+              "Mean": 0.6454100000000002,
+              "Max": 0.678,
+              "P95": 0.664,
+              "P99": 0.664
+            },
+            "SetupMs": {
+              "Median": 0.1545,
+              "Count": 20,
+              "Mean": 0.15372499999999997,
+              "Max": 0.1807,
+              "P95": 0.17420000000000002,
+              "P99": 0.17420000000000002
+            },
+            "WallsMs": {
+              "Median": 2.008,
+              "Count": 20,
+              "Mean": 2.1791899999999997,
+              "Max": 2.9384,
+              "P95": 2.8664,
+              "P99": 2.8664
+            },
+            "PlanesMs": {
+              "Median": 1.2921,
+              "Count": 20,
+              "Mean": 1.44273,
+              "Max": 2.1140000000000003,
+              "P95": 2.0696,
+              "P99": 2.0696
+            },
+            "MaskedWallsMs": {
+              "Median": 0.0034000000000000002,
+              "Count": 20,
+              "Mean": 0.0034000000000000002,
+              "Max": 0.004200000000000001,
+              "P95": 0.0039000000000000003,
+              "P99": 0.0039000000000000003
+            }
+          },
+          "FirstColumn": 260,
+          "EndColumn": 280,
+          "DecodeStats": {
+            "Median": 0.5384,
+            "Count": 20,
+            "Mean": 0.6295200000000001,
+            "Max": 1.5327,
+            "P95": 0.8048,
+            "P99": 0.8048
+          },
+          "OutputSha256": "9DF6DBB347B5B7A55E2BF554D330D8509184C2684C08337A153E4B16A423A7EA",
+          "WorkerIndex": 13
+        },
+        {
+          "PhaseStats": {
+            "TotalMs": {
+              "Median": 4.671,
+              "Count": 20,
+              "Mean": 4.674745000000001,
+              "Max": 5.2447,
+              "P95": 5.1315,
+              "P99": 5.1315
+            },
+            "GeometryMs": {
+              "Median": 3.3163,
+              "Count": 20,
+              "Mean": 3.3103749999999996,
+              "Max": 3.8045,
+              "P95": 3.7025,
+              "P99": 3.7025
+            },
+            "ActorsMs": {
+              "Median": 0.5791,
+              "Count": 20,
+              "Mean": 0.59304,
+              "Max": 0.8786,
+              "P95": 0.6264,
+              "P99": 0.6264
+            },
+            "WeaponMs": {
+              "Median": 0.0521,
+              "Count": 20,
+              "Mean": 0.05293,
+              "Max": 0.0618,
+              "P95": 0.0583,
+              "P99": 0.0583
+            },
+            "HudMs": {
+              "Median": 0.6305,
+              "Count": 20,
+              "Mean": 0.660255,
+              "Max": 1.2551,
+              "P95": 0.6647,
+              "P99": 0.6647
+            },
+            "SetupMs": {
+              "Median": 0.1232,
+              "Count": 20,
+              "Mean": 0.12469000000000001,
+              "Max": 0.1468,
+              "P95": 0.1379,
+              "P99": 0.1379
+            },
+            "WallsMs": {
+              "Median": 1.9463000000000001,
+              "Count": 20,
+              "Mean": 1.9425649999999997,
+              "Max": 2.4348,
+              "P95": 2.294,
+              "P99": 2.294
+            },
+            "PlanesMs": {
+              "Median": 1.23,
+              "Count": 20,
+              "Mean": 1.2348099999999997,
+              "Max": 1.497,
+              "P95": 1.3491,
+              "P99": 1.3491
+            },
+            "MaskedWallsMs": {
+              "Median": 0.0036000000000000003,
+              "Count": 20,
+              "Mean": 0.0035250000000000004,
+              "Max": 0.004200000000000001,
+              "P95": 0.0041,
+              "P99": 0.0041
+            }
+          },
+          "FirstColumn": 280,
+          "EndColumn": 300,
+          "DecodeStats": {
+            "Median": 0.5052,
+            "Count": 20,
+            "Mean": 0.68937,
+            "Max": 2.3965,
+            "P95": 2.1362,
+            "P99": 2.1362
+          },
+          "OutputSha256": "300D7F642DA0B7AB5739BDBFF1F61766064B0281FCB6EC8CFAB218B30EC1121C",
+          "WorkerIndex": 14
+        },
+        {
+          "PhaseStats": {
+            "TotalMs": {
+              "Median": 3.4429,
+              "Count": 20,
+              "Mean": 3.6344550000000004,
+              "Max": 4.2051,
+              "P95": 4.1906,
+              "P99": 4.1906
+            },
+            "GeometryMs": {
+              "Median": 2.4236,
+              "Count": 20,
+              "Mean": 2.599935,
+              "Max": 3.1388,
+              "P95": 3.1144,
+              "P99": 3.1144
+            },
+            "ActorsMs": {
+              "Median": 0.3162,
+              "Count": 20,
+              "Mean": 0.322545,
+              "Max": 0.3631,
+              "P95": 0.3473,
+              "P99": 0.3473
+            },
+            "WeaponMs": {
+              "Median": 0.0459,
+              "Count": 20,
+              "Mean": 0.046595,
+              "Max": 0.0533,
+              "P95": 0.0497,
+              "P99": 0.0497
+            },
+            "HudMs": {
+              "Median": 0.582,
+              "Count": 20,
+              "Mean": 0.6123350000000001,
+              "Max": 1.2059,
+              "P95": 0.6204,
+              "P99": 0.6204
+            },
+            "SetupMs": {
+              "Median": 0.10890000000000001,
+              "Count": 20,
+              "Mean": 0.10977000000000003,
+              "Max": 0.1431,
+              "P95": 0.12510000000000002,
+              "P99": 0.12510000000000002
+            },
+            "WallsMs": {
+              "Median": 1.3662,
+              "Count": 20,
+              "Mean": 1.5022199999999999,
+              "Max": 2.0786000000000002,
+              "P95": 2.0778000000000003,
+              "P99": 2.0778000000000003
+            },
+            "PlanesMs": {
+              "Median": 0.9193,
+              "Count": 20,
+              "Mean": 0.979535,
+              "Max": 1.5521,
+              "P95": 1.5441,
+              "P99": 1.5441
+            },
+            "MaskedWallsMs": {
+              "Median": 0.0033,
+              "Count": 20,
+              "Mean": 0.00364,
+              "Max": 0.0089,
+              "P95": 0.0039000000000000003,
+              "P99": 0.0039000000000000003
+            }
+          },
+          "FirstColumn": 300,
+          "EndColumn": 320,
+          "DecodeStats": {
+            "Median": 0.4523,
+            "Count": 20,
+            "Mean": 0.55556,
+            "Max": 1.5393,
+            "P95": 1.3565,
+            "P99": 1.3565
+          },
+          "OutputSha256": "D280200AA2A951A2DF3F1B44960DF35E484E6008A4D12F367C04AA8BB9E67CDE",
+          "WorkerIndex": 15
+        }
+      ]
+    }
+  ],
+  "DetailedProfileIndexedEquality": {
+    "FullFramePixels": 64000,
+    "FullFrameSha256": "D73C9535BC8339A265D4B268C7B1AEB400D07D36CFCE98B753AEDC8D3DABBB58",
+    "All16MeasuredStripeHashesEqual": true
+  },
+  "SlowestE1M2Stripe": {
+    "OutputSha256": "06D4595DFD5B6CBCFB63B278185FE8AF9E7665602D520B4EE6C5D63F87AA88F6",
+    "FirstColumn": 160,
+    "PhaseStats": {
+      "TotalMs": {
+        "Mean": 14.358600000000001,
+        "Max": 15.6072,
+        "Count": 20,
+        "Median": 14.2547,
+        "P95": 15.2546,
+        "P99": 15.2546
+      },
+      "GeometryMs": {
+        "Mean": 12.830770000000001,
+        "Max": 14.1695,
+        "Count": 20,
+        "Median": 12.7556,
+        "P95": 13.7556,
+        "P99": 13.7556
+      },
+      "ActorsMs": {
+        "Mean": 0.6735650000000002,
+        "Max": 1.447,
+        "Count": 20,
+        "Median": 0.6323,
+        "P95": 0.6804,
+        "P99": 0.6804
+      },
+      "WeaponMs": {
+        "Mean": 0.06403500000000001,
+        "Max": 0.0723,
+        "Count": 20,
+        "Median": 0.0639,
+        "P95": 0.0669,
+        "P99": 0.0669
+      },
+      "HudMs": {
+        "Mean": 0.70989,
+        "Max": 1.4911,
+        "Count": 20,
+        "Median": 0.6702,
+        "P95": 0.6982,
+        "P99": 0.6982
+      },
+      "SetupMs": {
+        "Mean": 0.17334000000000005,
+        "Max": 0.2147,
+        "Count": 20,
+        "Median": 0.1716,
+        "P95": 0.1774,
+        "P99": 0.1774
+      },
+      "WallsMs": {
+        "Mean": 10.266070000000001,
+        "Max": 11.057400000000001,
+        "Count": 20,
+        "Median": 10.120000000000001,
+        "P95": 10.8484,
+        "P99": 10.8484
+      },
+      "PlanesMs": {
+        "Mean": 2.3810449999999994,
+        "Max": 3.5225,
+        "Count": 20,
+        "Median": 2.2215000000000003,
+        "P95": 3.399,
+        "P99": 3.399
+      },
+      "MaskedWallsMs": {
+        "Mean": 0.004460000000000001,
+        "Max": 0.0051,
+        "Count": 20,
+        "Median": 0.0044,
+        "P95": 0.0048000000000000004,
+        "P99": 0.0048000000000000004
+      }
+    },
+    "EndColumn": 180,
+    "WorkerIndex": 8,
+    "DecodeStats": {
+      "Mean": 1.18487,
+      "Max": 2.9612,
+      "Count": 20,
+      "Median": 1.0726,
+      "P95": 1.3368,
+      "P99": 1.3368
+    }
+  },
+  "DefaultPathPriorRendererTests": [
+    {
+      "Report": {
+        "Path": "local/geometry-details-e1m2-Classic-16w-r2.json",
+        "Sha256": "904B149C4F8DB3EF1D82D27EB6817AE913D823BE17D4AD2A402DCF2FB8793DE3"
+      },
+      "ComparedPixels": 320000,
+      "EncodedStrips": 80,
+      "Differences": 0
+    },
+    {
+      "Report": {
+        "Path": "local/geometry-details-e1m2-Matrix-16w-r2.json",
+        "Sha256": "CC2D8FCB4562CAC01795ED57615CC09BF531D9453280B7D933F5404D19852E2D"
+      },
+      "ComparedPixels": 320000,
+      "EncodedStrips": 80,
+      "Differences": 0
+    },
+    {
+      "Report": {
+        "Path": "local/geometry-details-e1m2-AnsiArt-16w-r2.json",
+        "Sha256": "712BF98B3666A0831CB559D7CA451B7992A806ACE9C1DFEF0B28E35A02C0D674"
+      },
+      "ComparedPixels": 320000,
+      "EncodedStrips": 80,
+      "Differences": 0
+    }
+  ],
+  "RetainedHarnessFailure": {
+    "Path": "local/geometry-details-checks-r1.log",
+    "Sha256": "7D28C82478329FBCE5ED853771D9FC6AB6F2013F386D08BEC6E6059A9A59A137"
+  },
+  "SuccessfulTestsLog": {
+    "Path": "local/geometry-details-checks-r2.log",
+    "Sha256": "DED1E1842DFD899CAB1ECAF048470EC3BDA20393A5E1D44A05DEABAE0FE505C1"
+  },
+  "Meaning": "Opt-in PowerShell geometry profiling; production workers use the default without additional QPC reads. Rendering arithmetic is unchanged. Three warmup and twenty measured renders per16 stripes are sequential in one process. These fixed startup views do not recreate the entire moving live route or establish concurrent/display performance. All three default modes match the prior renderer over five real E1M2 views,960000 pixels and240 encoded strips total. First test failed because the exported baseline lacked relative dependencies; the failure is retained and corrected in a fresh owned directory. Walls dominate the slowest E1M2 stripe; E3M6 startup state is a different workload. No optimization gain or release gate pass is claimed."
+}

@@ -14,6 +14,7 @@ param(
     [switch]$TransportWorkerMasks,
     [switch]$BaselineWorkerActorScan,
     [switch]$LegacyWorkerProjection,
+    [switch]$GeometryDetails,
     [string]$Output="$PSScriptRoot/../results/renderer-phases.json"
 )
 $ErrorActionPreference='Stop'
@@ -31,6 +32,8 @@ $bundle=& "$PSScriptRoot/Build-EngineBundle.ps1"
 . "$PSScriptRoot/../src/GameHost.ps1"
 . "$PSScriptRoot/../src/SnapshotTransport.ps1"
 $content=$null;$failure=$null;$report=$null;$samples=[Collections.Generic.List[object]]::new();$workerProfiles=[Collections.Generic.List[object]]::new();$projectionPacketVersion=-1
+$phaseNames=@('TotalMs','GeometryMs','ActorsMs','WeaponMs','HudMs')
+if($GeometryDetails){$phaseNames+=@('SetupMs','WallsMs','PlanesMs','MaskedWallsMs')}
 function Get-PhaseStats([double[]]$Values){
     [double[]]$sorted=@($Values|Sort-Object)
     if($sorted.Length -eq 0){return @{Count=0;Mean=0.0;Median=0.0;P95=0.0;P99=0.0;Max=0.0}}
@@ -110,11 +113,11 @@ try{
             $workerSnapshot.RenderWorkerBit=1L -shl $workerIndex
         }
         Set-GameRenderSnapshot $context $workerSnapshot
-        for($i=0;$i -lt $WarmupFrames;$i++){Invoke-FastRender $context $first $end}
+        for($i=0;$i -lt $WarmupFrames;$i++){Invoke-FastRender $context $first $end -GeometryDetails:$GeometryDetails}
         $workerSamples=[Collections.Generic.List[object]]::new()
         for($i=0;$i -lt $Frames;$i++){
             $watch=[Diagnostics.Stopwatch]::StartNew()
-            Invoke-FastRender $context $first $end
+            Invoke-FastRender $context $first $end -GeometryDetails:$GeometryDetails
             $watch.Stop()
             $sample=@{
                 WorkerIndex=$workerIndex;FirstColumn=$first;EndColumn=$end;Index=$i
@@ -124,10 +127,11 @@ try{
                 WeaponMs=$context.Profile.WeaponMs
                 HudMs=$context.Profile.HudMs
             }
+            if($GeometryDetails){foreach($name in 'SetupMs','WallsMs','PlanesMs','MaskedWallsMs'){$sample[$name]=$context.Profile.GeometryDetails[$name]}}
             $workerSamples.Add($sample);$samples.Add($sample)
         }
         $workerPhases=[ordered]@{}
-        foreach($name in 'TotalMs','GeometryMs','ActorsMs','WeaponMs','HudMs'){
+        foreach($name in $phaseNames){
             $workerPhases[$name]=Get-PhaseStats ([double[]]@($workerSamples|ForEach-Object {$_.$name}))
         }
         $workerProfiles.Add(@{
@@ -141,7 +145,7 @@ try{
     Set-GameRenderSnapshot $context $snapshot;Invoke-FastRender $context
     $frameSha256=[Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([byte[]]$context.Pixels))
     $phases=@{}
-    foreach($name in 'TotalMs','GeometryMs','ActorsMs','WeaponMs','HudMs'){
+    foreach($name in $phaseNames){
         $phases[$name]=Get-PhaseStats ([double[]]@($samples|ForEach-Object {$_.$name}))
     }
     $report=[ordered]@{
@@ -149,6 +153,7 @@ try{
         Error=$null
         Episode=$Episode;Map=$Map;Skill=$Skill;SetupTics=$Tics
         WarmupFrames=$WarmupFrames;MeasuredFrames=$Frames
+        GeometryDetails=$GeometryDetails.IsPresent
         TransportMode=if($TransportWorkerMasks -and $LegacyWorkerProjection -and $BaselineWorkerActorScan){'NumericV4 worker masks, full actor-array scan, and worker-side projection control'}elseif($TransportWorkerMasks -and $LegacyWorkerProjection){'NumericV4 worker masks with worker-side fixed-point actor projection control'}elseif($TransportWorkerMasks -and $projectionPacketVersion -eq 5 -and $BaselineWorkerActorScan){'adaptive NumericV5 actor projections with the full-array per-worker actor-scan control'}elseif($TransportWorkerMasks -and $projectionPacketVersion -eq 5){'adaptive NumericV5 actor projections with decoded per-worker visible-actor lists'}elseif($TransportWorkerMasks){'adaptive NumericV4 mask-only packet for a sparse scene'}elseif($TransportPrepared){'prepared shared actor order'}elseif($TransportLegacy){'legacy worker-side actor sort'}else{'object snapshot fallback'}
         FullFramePixels=64000;FullFrameSha256=$frameSha256
         SnapshotPreparationStats=Get-PhaseStats ([double[]]$snapshotPreparationSamples.ToArray())

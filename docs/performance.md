@@ -1400,3 +1400,13 @@ displayed game frames/sec, all styles/workloads, campaign completion, acoustic
 review or second hardware. Further useful work includes reducing host/render
 frame costs, independent moving-world fidelity and broader workloads; more
 repeats of this same comparison alone will not close those gates.
+
+### Attribute live frame costs and split geometry profiling — October 2, 2026
+
+A [twelve-run stage audit](../results/host-frame-cost-audit-20261002.json) groups completed world frames by generation while preserving all release-gate windows. Median critical worker spans are12.18–13.24 ms in E1M1 and19.82–22.79 ms in E1M2. Median per-frame maximum render times are7.88–8.73 and14.43–17.09 ms. Submit medians are1.91–2.17 and3.40–4.54 ms, with harvest medians1.23–1.49 and1.10–1.50 ms. Component maxima may come from different workers; do not add them into an invented frame total. QPC spans include scheduling. AsyncBatch OutputMs is a completion observation, unlike synchronous Strips call duration.
+
+Workers always publish64,000 indexed bytes each, including when the host reads only encoded strips. However, the largest per-worker elapsed portion outside named phases has median0.17–0.20 ms, encompassing input/output copying, timing/writes and descheduling. This does not isolate publication cost or establish a useful gain from omitting it. Final-image/capture behavior would need an explicit replacement protocol. Defer that change and examine geometry first.
+
+Use `Measure-FastRendererPhases.ps1 -GeometryDetails -WorkerCount16 -TransportPrepared -TransportWorkerMasks` for opt-in setup, BSP/wall, plane and masked-wall boundaries. Default workers make no extra QPC reads. The [fixed-state profiles and equivalence checks](../results/geometry-stage-profile-20261002.json) identify wall traversal/drawing in E1M2's slowest stripe:10.12 ms median, versus2.22 ms planes and14.25 ms total. The detailed profile retains the full indexed hash and sixteen measured stripe hashes; default all-style16-worker comparisons match960,000 pixels and240 encoded strips against the prior renderer. One missing-relative-dependency harness failure remains recorded.
+
+These profiles render each stripe sequentially with three warmups/twenty samples. The E1M2 and E3M6 startup views do not recreate full live routes, measure concurrent scheduling, or establish an optimization gain. Use the wall-stage attribution to guide a bounded exact-output trial; all frozen release pacing gates remain open.

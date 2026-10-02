@@ -1,0 +1,1761 @@
+{
+  "FinishedUtc": "2026-10-02T04:20:53.930864+00:00",
+  "ImplementationParentCommit": "f87f8f51b7be705ac3c3cea32c5ffd17d2262ab0",
+  "Runs": [
+    {
+      "Path": "local/command-output-abba-c1-p1-Strips-game.json",
+      "Sha256": "F4DE72AE65B2EE122AD88BAC728114CCF8FEBB4E1E404231F4B3D6F0CC4CA1BE",
+      "Mode": "Strips",
+      "Cycle": 1,
+      "Position": 1,
+      "Groups": [
+        {
+          "Generation": 1,
+          "Episode": 1,
+          "Map": 1,
+          "Frames": 2583,
+          "Milliseconds": {
+            "SubmitMs": {
+              "Count": 2583,
+              "Median": 2.0086,
+              "P95": 2.7474,
+              "Maximum": 20.5699
+            },
+            "HarvestMs": {
+              "Count": 2583,
+              "Median": 1.4778,
+              "P95": 1.9595,
+              "Maximum": 12.1319
+            },
+            "OutputMs": {
+              "Count": 2583,
+              "Median": 7.4595,
+              "P95": 14.9002,
+              "Maximum": 126.459
+            },
+            "MaximumWorkerRenderMs": {
+              "Count": 2583,
+              "Median": 7.8794,
+              "P95": 14.6568,
+              "Maximum": 51.9076
+            },
+            "MaximumWorkerEncodeMs": {
+              "Count": 2583,
+              "Median": 2.8513,
+              "P95": 4.326,
+              "Maximum": 16.1201
+            },
+            "MaximumWorkerDecodeMs": {
+              "Count": 2583,
+              "Median": 1.9827,
+              "P95": 3.1571,
+              "Maximum": 34.6542
+            },
+            "WorkerCriticalSpanMs": {
+              "Count": 2583,
+              "Median": 12.2339,
+              "P95": 21.7231,
+              "Maximum": 87.2149
+            },
+            "StartSpreadMs": {
+              "Count": 2583,
+              "Median": 0.9028,
+              "P95": 1.9452,
+              "Maximum": 19.4305
+            },
+            "LastReadyFromSubmitStartMs": {
+              "Count": 2583,
+              "Median": 13.4918,
+              "P95": 23.1614,
+              "Maximum": 88.9021
+            },
+            "LargestWorkerUnattributedMs": {
+              "Count": 2583,
+              "Median": 0.18050000000000033,
+              "P95": 0.33479999999999954,
+              "Maximum": 8.2837
+            }
+          }
+        },
+        {
+          "Generation": 2,
+          "Episode": 1,
+          "Map": 2,
+          "Frames": 74,
+          "Milliseconds": {
+            "SubmitMs": {
+              "Count": 74,
+              "Median": 3.8579,
+              "P95": 5.3299,
+              "Maximum": 8.0619
+            },
+            "HarvestMs": {
+              "Count": 74,
+              "Median": 1.3981,
+              "P95": 2.0746,
+              "Maximum": 2.3819
+            },
+            "OutputMs": {
+              "Count": 74,
+              "Median": 8.1925,
+              "P95": 23.8327,
+              "Maximum": 31.4083
+            },
+            "MaximumWorkerRenderMs": {
+              "Count": 74,
+              "Median": 15.0583,
+              "P95": 20.5447,
+              "Maximum": 22.845
+            },
+            "MaximumWorkerEncodeMs": {
+              "Count": 74,
+              "Median": 3.37595,
+              "P95": 4.7225,
+              "Maximum": 13.287
+            },
+            "MaximumWorkerDecodeMs": {
+              "Count": 74,
+              "Median": 4.0398,
+              "P95": 8.0164,
+              "Maximum": 12.5662
+            },
+            "WorkerCriticalSpanMs": {
+              "Count": 74,
+              "Median": 20.13425,
+              "P95": 26.5362,
+              "Maximum": 28.4848
+            },
+            "StartSpreadMs": {
+              "Count": 74,
+              "Median": 0.92475,
+              "P95": 8.6817,
+              "Maximum": 12.7473
+            },
+            "LastReadyFromSubmitStartMs": {
+              "Count": 74,
+              "Median": 23.1476,
+              "P95": 29.7261,
+              "Maximum": 31.1334
+            },
+            "LargestWorkerUnattributedMs": {
+              "Count": 74,
+              "Median": 0.1880499999999996,
+              "P95": 0.22210000000000107,
+              "Maximum": 1.7325000000000017
+            }
+          }
+        }
+      ]
+    },
+    {
+      "Path": "local/command-output-abba-c1-p2-AsyncBatch-game.json",
+      "Sha256": "0FC2CE2D1C7836ED158431CF080E0C6B75FEC6A1191E828A5068994D2F4938A1",
+      "Mode": "AsyncBatch",
+      "Cycle": 1,
+      "Position": 2,
+      "Groups": [
+        {
+          "Generation": 1,
+          "Episode": 1,
+          "Map": 1,
+          "Frames": 2585,
+          "Milliseconds": {
+            "SubmitMs": {
+              "Count": 2585,
+              "Median": 2.165,
+              "P95": 2.9427,
+              "Maximum": 27.0436
+            },
+            "HarvestMs": {
+              "Count": 2585,
+              "Median": 1.4617,
+              "P95": 2.022,
+              "Maximum": 2.9009
+            },
+            "OutputMs": {
+              "Count": 2585,
+              "Median": 7.438,
+              "P95": 10.7059,
+              "Maximum": 73.6661
+            },
+            "MaximumWorkerRenderMs": {
+              "Count": 2585,
+              "Median": 7.907,
+              "P95": 16.5296,
+              "Maximum": 47.9309
+            },
+            "MaximumWorkerEncodeMs": {
+              "Count": 2585,
+              "Median": 2.8271,
+              "P95": 4.3176,
+              "Maximum": 52.5752
+            },
+            "MaximumWorkerDecodeMs": {
+              "Count": 2585,
+              "Median": 1.9641,
+              "P95": 3.1699,
+              "Maximum": 22.1772
+            },
+            "WorkerCriticalSpanMs": {
+              "Count": 2585,
+              "Median": 12.3179,
+              "P95": 23.7598,
+              "Maximum": 93.1227
+            },
+            "StartSpreadMs": {
+              "Count": 2585,
+              "Median": 1.0078,
+              "P95": 2.7499,
+              "Maximum": 26.4077
+            },
+            "LastReadyFromSubmitStartMs": {
+              "Count": 2585,
+              "Median": 13.6162,
+              "P95": 25.2243,
+              "Maximum": 96.549
+            },
+            "LargestWorkerUnattributedMs": {
+              "Count": 2585,
+              "Median": 0.17709999999999937,
+              "P95": 0.3274000000000008,
+              "Maximum": 32.535799999999995
+            }
+          }
+        },
+        {
+          "Generation": 2,
+          "Episode": 1,
+          "Map": 2,
+          "Frames": 74,
+          "Milliseconds": {
+            "SubmitMs": {
+              "Count": 74,
+              "Median": 4.459099999999999,
+              "P95": 10.0706,
+              "Maximum": 13.7526
+            },
+            "HarvestMs": {
+              "Count": 74,
+              "Median": 1.4533999999999998,
+              "P95": 2.2216,
+              "Maximum": 2.7227
+            },
+            "OutputMs": {
+              "Count": 74,
+              "Median": 7.60285,
+              "P95": 18.723,
+              "Maximum": 23.3993
+            },
+            "MaximumWorkerRenderMs": {
+              "Count": 74,
+              "Median": 15.3329,
+              "P95": 21.8806,
+              "Maximum": 24.2934
+            },
+            "MaximumWorkerEncodeMs": {
+              "Count": 74,
+              "Median": 3.2267,
+              "P95": 5.1984,
+              "Maximum": 10.3411
+            },
+            "MaximumWorkerDecodeMs": {
+              "Count": 74,
+              "Median": 4.2173,
+              "P95": 9.9416,
+              "Maximum": 15.7762
+            },
+            "WorkerCriticalSpanMs": {
+              "Count": 74,
+              "Median": 20.560200000000002,
+              "P95": 29.146,
+              "Maximum": 30.9457
+            },
+            "StartSpreadMs": {
+              "Count": 74,
+              "Median": 1.2504499999999998,
+              "P95": 8.1929,
+              "Maximum": 10.8542
+            },
+            "LastReadyFromSubmitStartMs": {
+              "Count": 74,
+              "Median": 23.869999999999997,
+              "P95": 32.5564,
+              "Maximum": 34.4059
+            },
+            "LargestWorkerUnattributedMs": {
+              "Count": 74,
+              "Median": 0.18744999999999923,
+              "P95": 0.23559999999999803,
+              "Maximum": 3.3305000000000007
+            }
+          }
+        }
+      ]
+    },
+    {
+      "Path": "local/command-output-abba-c1-p3-AsyncBatch-game.json",
+      "Sha256": "26D208D7F27C45D6A96984217E180115BC15EF906266A290CD61B23D6D0E5BA4",
+      "Mode": "AsyncBatch",
+      "Cycle": 1,
+      "Position": 3,
+      "Groups": [
+        {
+          "Generation": 1,
+          "Episode": 1,
+          "Map": 1,
+          "Frames": 2591,
+          "Milliseconds": {
+            "SubmitMs": {
+              "Count": 2591,
+              "Median": 2.0553,
+              "P95": 2.9509,
+              "Maximum": 15.0168
+            },
+            "HarvestMs": {
+              "Count": 2591,
+              "Median": 1.4582,
+              "P95": 2.0391,
+              "Maximum": 3.253
+            },
+            "OutputMs": {
+              "Count": 2591,
+              "Median": 7.504,
+              "P95": 11.2981,
+              "Maximum": 55.8012
+            },
+            "MaximumWorkerRenderMs": {
+              "Count": 2591,
+              "Median": 8.0925,
+              "P95": 16.8146,
+              "Maximum": 82.8561
+            },
+            "MaximumWorkerEncodeMs": {
+              "Count": 2591,
+              "Median": 2.8448,
+              "P95": 4.3628,
+              "Maximum": 43.6085
+            },
+            "MaximumWorkerDecodeMs": {
+              "Count": 2591,
+              "Median": 2.0725,
+              "P95": 3.3545,
+              "Maximum": 39.5271
+            },
+            "WorkerCriticalSpanMs": {
+              "Count": 2591,
+              "Median": 12.3701,
+              "P95": 23.3153,
+              "Maximum": 96.925
+            },
+            "StartSpreadMs": {
+              "Count": 2591,
+              "Median": 0.9028,
+              "P95": 2.2478,
+              "Maximum": 18.4848
+            },
+            "LastReadyFromSubmitStartMs": {
+              "Count": 2591,
+              "Median": 13.6215,
+              "P95": 25.0258,
+              "Maximum": 98.5628
+            },
+            "LargestWorkerUnattributedMs": {
+              "Count": 2591,
+              "Median": 0.1869999999999994,
+              "P95": 0.3525000000000009,
+              "Maximum": 4.768700000000003
+            }
+          }
+        },
+        {
+          "Generation": 2,
+          "Episode": 1,
+          "Map": 2,
+          "Frames": 72,
+          "Milliseconds": {
+            "SubmitMs": {
+              "Count": 72,
+              "Median": 4.2539,
+              "P95": 7.8558,
+              "Maximum": 18.7423
+            },
+            "HarvestMs": {
+              "Count": 72,
+              "Median": 1.4862,
+              "P95": 2.1267,
+              "Maximum": 3.0639
+            },
+            "OutputMs": {
+              "Count": 72,
+              "Median": 8.1476,
+              "P95": 16.2714,
+              "Maximum": 22.2472
+            },
+            "MaximumWorkerRenderMs": {
+              "Count": 72,
+              "Median": 15.4981,
+              "P95": 21.6237,
+              "Maximum": 25.4617
+            },
+            "MaximumWorkerEncodeMs": {
+              "Count": 72,
+              "Median": 3.62575,
+              "P95": 6.5501,
+              "Maximum": 11.5648
+            },
+            "MaximumWorkerDecodeMs": {
+              "Count": 72,
+              "Median": 4.1684,
+              "P95": 11.5692,
+              "Maximum": 14.8924
+            },
+            "WorkerCriticalSpanMs": {
+              "Count": 72,
+              "Median": 20.991,
+              "P95": 31.2593,
+              "Maximum": 42.8806
+            },
+            "StartSpreadMs": {
+              "Count": 72,
+              "Median": 1.0455999999999999,
+              "P95": 8.944,
+              "Maximum": 15.709
+            },
+            "LastReadyFromSubmitStartMs": {
+              "Count": 72,
+              "Median": 24.239600000000003,
+              "P95": 35.1165,
+              "Maximum": 45.489
+            },
+            "LargestWorkerUnattributedMs": {
+              "Count": 72,
+              "Median": 0.184499999999999,
+              "P95": 0.29990000000000094,
+              "Maximum": 1.0582999999999991
+            }
+          }
+        }
+      ]
+    },
+    {
+      "Path": "local/command-output-abba-c1-p4-Strips-game.json",
+      "Sha256": "EA4C0141AA0006D3CA2243584C0D296AE67D53E536D63190A0E91092AFC1E0F8",
+      "Mode": "Strips",
+      "Cycle": 1,
+      "Position": 4,
+      "Groups": [
+        {
+          "Generation": 1,
+          "Episode": 1,
+          "Map": 1,
+          "Frames": 2482,
+          "Milliseconds": {
+            "SubmitMs": {
+              "Count": 2482,
+              "Median": 2.07525,
+              "P95": 3.0768,
+              "Maximum": 25.4746
+            },
+            "HarvestMs": {
+              "Count": 2482,
+              "Median": 1.43545,
+              "P95": 1.9995,
+              "Maximum": 11.6384
+            },
+            "OutputMs": {
+              "Count": 2482,
+              "Median": 8.6263,
+              "P95": 16.9726,
+              "Maximum": 118.698
+            },
+            "MaximumWorkerRenderMs": {
+              "Count": 2482,
+              "Median": 8.21425,
+              "P95": 15.0555,
+              "Maximum": 86.9634
+            },
+            "MaximumWorkerEncodeMs": {
+              "Count": 2482,
+              "Median": 2.8760000000000003,
+              "P95": 4.3652,
+              "Maximum": 41.0336
+            },
+            "MaximumWorkerDecodeMs": {
+              "Count": 2482,
+              "Median": 2.07925,
+              "P95": 3.5186,
+              "Maximum": 36.8354
+            },
+            "WorkerCriticalSpanMs": {
+              "Count": 2482,
+              "Median": 12.67205,
+              "P95": 21.6193,
+              "Maximum": 96.5048
+            },
+            "StartSpreadMs": {
+              "Count": 2482,
+              "Median": 0.9045,
+              "P95": 3.901,
+              "Maximum": 23.9232
+            },
+            "LastReadyFromSubmitStartMs": {
+              "Count": 2482,
+              "Median": 13.99735,
+              "P95": 23.0955,
+              "Maximum": 97.8421
+            },
+            "LargestWorkerUnattributedMs": {
+              "Count": 2482,
+              "Median": 0.17650000000000032,
+              "P95": 0.35079999999999956,
+              "Maximum": 9.406100000000002
+            }
+          }
+        },
+        {
+          "Generation": 2,
+          "Episode": 1,
+          "Map": 2,
+          "Frames": 68,
+          "Milliseconds": {
+            "SubmitMs": {
+              "Count": 68,
+              "Median": 4.3896999999999995,
+              "P95": 6.2933,
+              "Maximum": 19.3482
+            },
+            "HarvestMs": {
+              "Count": 68,
+              "Median": 1.47195,
+              "P95": 1.988,
+              "Maximum": 2.432
+            },
+            "OutputMs": {
+              "Count": 68,
+              "Median": 15.4038,
+              "P95": 32.7433,
+              "Maximum": 50.5357
+            },
+            "MaximumWorkerRenderMs": {
+              "Count": 68,
+              "Median": 16.20665,
+              "P95": 18.9285,
+              "Maximum": 33.2054
+            },
+            "MaximumWorkerEncodeMs": {
+              "Count": 68,
+              "Median": 3.5109500000000002,
+              "P95": 4.4282,
+              "Maximum": 8.4706
+            },
+            "MaximumWorkerDecodeMs": {
+              "Count": 68,
+              "Median": 4.0899,
+              "P95": 6.1712,
+              "Maximum": 12.8085
+            },
+            "WorkerCriticalSpanMs": {
+              "Count": 68,
+              "Median": 21.90565,
+              "P95": 29.7429,
+              "Maximum": 38.3046
+            },
+            "StartSpreadMs": {
+              "Count": 68,
+              "Median": 1.0869499999999999,
+              "P95": 6.7457,
+              "Maximum": 16.1533
+            },
+            "LastReadyFromSubmitStartMs": {
+              "Count": 68,
+              "Median": 25.354750000000003,
+              "P95": 33.2484,
+              "Maximum": 41.2555
+            },
+            "LargestWorkerUnattributedMs": {
+              "Count": 68,
+              "Median": 0.1958000000000002,
+              "P95": 0.33869999999999933,
+              "Maximum": 1.5907
+            }
+          }
+        }
+      ]
+    },
+    {
+      "Path": "local/command-output-abba-c2-p1-Strips-game.json",
+      "Sha256": "0C1D4FA48CA29A3A32B2D8C72F272C54FEBCCE647CD91C86A677C448394EA122",
+      "Mode": "Strips",
+      "Cycle": 2,
+      "Position": 1,
+      "Groups": [
+        {
+          "Generation": 1,
+          "Episode": 1,
+          "Map": 1,
+          "Frames": 2475,
+          "Milliseconds": {
+            "SubmitMs": {
+              "Count": 2475,
+              "Median": 2.1163,
+              "P95": 2.9391,
+              "Maximum": 12.3549
+            },
+            "HarvestMs": {
+              "Count": 2475,
+              "Median": 1.4879,
+              "P95": 2.1332,
+              "Maximum": 11.416
+            },
+            "OutputMs": {
+              "Count": 2475,
+              "Median": 8.7713,
+              "P95": 15.9435,
+              "Maximum": 133.4771
+            },
+            "MaximumWorkerRenderMs": {
+              "Count": 2475,
+              "Median": 8.2672,
+              "P95": 16.5363,
+              "Maximum": 45.4601
+            },
+            "MaximumWorkerEncodeMs": {
+              "Count": 2475,
+              "Median": 2.8837,
+              "P95": 4.4197,
+              "Maximum": 40.6041
+            },
+            "MaximumWorkerDecodeMs": {
+              "Count": 2475,
+              "Median": 2.119,
+              "P95": 3.4527,
+              "Maximum": 20.0107
+            },
+            "WorkerCriticalSpanMs": {
+              "Count": 2475,
+              "Median": 12.6473,
+              "P95": 23.0238,
+              "Maximum": 55.8422
+            },
+            "StartSpreadMs": {
+              "Count": 2475,
+              "Median": 0.9083,
+              "P95": 2.4806,
+              "Maximum": 19.4015
+            },
+            "LastReadyFromSubmitStartMs": {
+              "Count": 2475,
+              "Median": 13.9826,
+              "P95": 24.8302,
+              "Maximum": 57.5548
+            },
+            "LargestWorkerUnattributedMs": {
+              "Count": 2475,
+              "Median": 0.18189999999999884,
+              "P95": 0.3703000000000003,
+              "Maximum": 8.4062
+            }
+          }
+        },
+        {
+          "Generation": 2,
+          "Episode": 1,
+          "Map": 2,
+          "Frames": 71,
+          "Milliseconds": {
+            "SubmitMs": {
+              "Count": 71,
+              "Median": 4.3372,
+              "P95": 5.6108,
+              "Maximum": 12.6578
+            },
+            "HarvestMs": {
+              "Count": 71,
+              "Median": 1.4598,
+              "P95": 1.7898,
+              "Maximum": 2.075
+            },
+            "OutputMs": {
+              "Count": 71,
+              "Median": 10.4129,
+              "P95": 19.4788,
+              "Maximum": 35.6767
+            },
+            "MaximumWorkerRenderMs": {
+              "Count": 71,
+              "Median": 15.4675,
+              "P95": 22.9054,
+              "Maximum": 24.7103
+            },
+            "MaximumWorkerEncodeMs": {
+              "Count": 71,
+              "Median": 3.7286,
+              "P95": 5.3892,
+              "Maximum": 12.7784
+            },
+            "MaximumWorkerDecodeMs": {
+              "Count": 71,
+              "Median": 4.1526,
+              "P95": 11.7018,
+              "Maximum": 18.5141
+            },
+            "WorkerCriticalSpanMs": {
+              "Count": 71,
+              "Median": 21.0635,
+              "P95": 30.8332,
+              "Maximum": 37.646
+            },
+            "StartSpreadMs": {
+              "Count": 71,
+              "Median": 1.0578,
+              "P95": 11.6865,
+              "Maximum": 15.0126
+            },
+            "LastReadyFromSubmitStartMs": {
+              "Count": 71,
+              "Median": 24.2238,
+              "P95": 34.598,
+              "Maximum": 40.2218
+            },
+            "LargestWorkerUnattributedMs": {
+              "Count": 71,
+              "Median": 0.19119999999999848,
+              "P95": 0.5170999999999992,
+              "Maximum": 8.799900000000001
+            }
+          }
+        }
+      ]
+    },
+    {
+      "Path": "local/command-output-abba-c2-p2-AsyncBatch-game.json",
+      "Sha256": "0ED3C9705F36CD199A0C2232D814AFD854FE85272C1901D63F630B73805A4B99",
+      "Mode": "AsyncBatch",
+      "Cycle": 2,
+      "Position": 2,
+      "Groups": [
+        {
+          "Generation": 1,
+          "Episode": 1,
+          "Map": 1,
+          "Frames": 2501,
+          "Milliseconds": {
+            "SubmitMs": {
+              "Count": 2501,
+              "Median": 2.0892,
+              "P95": 2.8735,
+              "Maximum": 35.0892
+            },
+            "HarvestMs": {
+              "Count": 2501,
+              "Median": 1.4444,
+              "P95": 2.0049,
+              "Maximum": 3.8449
+            },
+            "OutputMs": {
+              "Count": 2501,
+              "Median": 7.5243,
+              "P95": 10.9907,
+              "Maximum": 69.6764
+            },
+            "MaximumWorkerRenderMs": {
+              "Count": 2501,
+              "Median": 8.5992,
+              "P95": 17.4218,
+              "Maximum": 82.8985
+            },
+            "MaximumWorkerEncodeMs": {
+              "Count": 2501,
+              "Median": 2.9021,
+              "P95": 4.5923,
+              "Maximum": 23.4403
+            },
+            "MaximumWorkerDecodeMs": {
+              "Count": 2501,
+              "Median": 2.1707,
+              "P95": 3.9683,
+              "Maximum": 23.1903
+            },
+            "WorkerCriticalSpanMs": {
+              "Count": 2501,
+              "Median": 12.953,
+              "P95": 25.4187,
+              "Maximum": 102.0724
+            },
+            "StartSpreadMs": {
+              "Count": 2501,
+              "Median": 0.9107,
+              "P95": 3.9414,
+              "Maximum": 33.6737
+            },
+            "LastReadyFromSubmitStartMs": {
+              "Count": 2501,
+              "Median": 14.2968,
+              "P95": 27.1398,
+              "Maximum": 103.6275
+            },
+            "LargestWorkerUnattributedMs": {
+              "Count": 2501,
+              "Median": 0.17940000000000023,
+              "P95": 0.4015999999999993,
+              "Maximum": 19.0392
+            }
+          }
+        },
+        {
+          "Generation": 2,
+          "Episode": 1,
+          "Map": 2,
+          "Frames": 72,
+          "Milliseconds": {
+            "SubmitMs": {
+              "Count": 72,
+              "Median": 3.7224500000000003,
+              "P95": 5.1365,
+              "Maximum": 8.8641
+            },
+            "HarvestMs": {
+              "Count": 72,
+              "Median": 1.2361,
+              "P95": 1.9165,
+              "Maximum": 2.1185
+            },
+            "OutputMs": {
+              "Count": 72,
+              "Median": 8.1101,
+              "P95": 12.544,
+              "Maximum": 21.2168
+            },
+            "MaximumWorkerRenderMs": {
+              "Count": 72,
+              "Median": 16.62745,
+              "P95": 20.6749,
+              "Maximum": 25.2491
+            },
+            "MaximumWorkerEncodeMs": {
+              "Count": 72,
+              "Median": 3.6344000000000003,
+              "P95": 9.3851,
+              "Maximum": 12.6316
+            },
+            "MaximumWorkerDecodeMs": {
+              "Count": 72,
+              "Median": 4.17615,
+              "P95": 11.9022,
+              "Maximum": 14.0996
+            },
+            "WorkerCriticalSpanMs": {
+              "Count": 72,
+              "Median": 21.67655,
+              "P95": 33.2039,
+              "Maximum": 35.1245
+            },
+            "StartSpreadMs": {
+              "Count": 72,
+              "Median": 0.97965,
+              "P95": 12.9457,
+              "Maximum": 14.87
+            },
+            "LastReadyFromSubmitStartMs": {
+              "Count": 72,
+              "Median": 24.38805,
+              "P95": 36.561,
+              "Maximum": 39.5146
+            },
+            "LargestWorkerUnattributedMs": {
+              "Count": 72,
+              "Median": 0.18604999999999894,
+              "P95": 0.6054999999999993,
+              "Maximum": 10.884599999999999
+            }
+          }
+        }
+      ]
+    },
+    {
+      "Path": "local/command-output-abba-c2-p3-AsyncBatch-game.json",
+      "Sha256": "3C226D1F42376ADE4D77DDD7DA7F2B0F0D12229334D3896BCE005098A83F6E6A",
+      "Mode": "AsyncBatch",
+      "Cycle": 2,
+      "Position": 3,
+      "Groups": [
+        {
+          "Generation": 1,
+          "Episode": 1,
+          "Map": 1,
+          "Frames": 2583,
+          "Milliseconds": {
+            "SubmitMs": {
+              "Count": 2583,
+              "Median": 2.0054,
+              "P95": 2.6948,
+              "Maximum": 16.9387
+            },
+            "HarvestMs": {
+              "Count": 2583,
+              "Median": 1.4206,
+              "P95": 1.9352,
+              "Maximum": 12.2545
+            },
+            "OutputMs": {
+              "Count": 2583,
+              "Median": 7.5023,
+              "P95": 11.0404,
+              "Maximum": 83.5657
+            },
+            "MaximumWorkerRenderMs": {
+              "Count": 2583,
+              "Median": 8.1878,
+              "P95": 15.8457,
+              "Maximum": 41.4496
+            },
+            "MaximumWorkerEncodeMs": {
+              "Count": 2583,
+              "Median": 2.9121,
+              "P95": 4.3768,
+              "Maximum": 16.6673
+            },
+            "MaximumWorkerDecodeMs": {
+              "Count": 2583,
+              "Median": 2.1209,
+              "P95": 3.4335,
+              "Maximum": 18.8711
+            },
+            "WorkerCriticalSpanMs": {
+              "Count": 2583,
+              "Median": 12.5451,
+              "P95": 21.6707,
+              "Maximum": 47.7796
+            },
+            "StartSpreadMs": {
+              "Count": 2583,
+              "Median": 0.8957,
+              "P95": 2.1125,
+              "Maximum": 16.1688
+            },
+            "LastReadyFromSubmitStartMs": {
+              "Count": 2583,
+              "Median": 13.7834,
+              "P95": 23.1288,
+              "Maximum": 49.1778
+            },
+            "LargestWorkerUnattributedMs": {
+              "Count": 2583,
+              "Median": 0.18149999999999977,
+              "P95": 0.35350000000000037,
+              "Maximum": 8.7583
+            }
+          }
+        },
+        {
+          "Generation": 2,
+          "Episode": 1,
+          "Map": 2,
+          "Frames": 74,
+          "Milliseconds": {
+            "SubmitMs": {
+              "Count": 74,
+              "Median": 3.7134,
+              "P95": 4.8658,
+              "Maximum": 8.0541
+            },
+            "HarvestMs": {
+              "Count": 74,
+              "Median": 1.17285,
+              "P95": 1.6479,
+              "Maximum": 1.9463
+            },
+            "OutputMs": {
+              "Count": 74,
+              "Median": 7.7408,
+              "P95": 21.9095,
+              "Maximum": 24.0935
+            },
+            "MaximumWorkerRenderMs": {
+              "Count": 74,
+              "Median": 15.8202,
+              "P95": 21.4526,
+              "Maximum": 24.601
+            },
+            "MaximumWorkerEncodeMs": {
+              "Count": 74,
+              "Median": 3.7507,
+              "P95": 7.5362,
+              "Maximum": 12.2671
+            },
+            "MaximumWorkerDecodeMs": {
+              "Count": 74,
+              "Median": 4.03,
+              "P95": 11.4932,
+              "Maximum": 12.5091
+            },
+            "WorkerCriticalSpanMs": {
+              "Count": 74,
+              "Median": 20.956400000000002,
+              "P95": 29.0679,
+              "Maximum": 32.5245
+            },
+            "StartSpreadMs": {
+              "Count": 74,
+              "Median": 0.9524,
+              "P95": 9.1791,
+              "Maximum": 10.7384
+            },
+            "LastReadyFromSubmitStartMs": {
+              "Count": 74,
+              "Median": 23.8215,
+              "P95": 31.9819,
+              "Maximum": 35.9704
+            },
+            "LargestWorkerUnattributedMs": {
+              "Count": 74,
+              "Median": 0.20120000000000005,
+              "P95": 0.30209999999999937,
+              "Maximum": 1.8008999999999986
+            }
+          }
+        }
+      ]
+    },
+    {
+      "Path": "local/command-output-abba-c2-p4-Strips-game.json",
+      "Sha256": "0C44868AAB2A80BF394634A7E0B7D10B14BA1FFAA1B36289C1C0231A58483619",
+      "Mode": "Strips",
+      "Cycle": 2,
+      "Position": 4,
+      "Groups": [
+        {
+          "Generation": 1,
+          "Episode": 1,
+          "Map": 1,
+          "Frames": 2605,
+          "Milliseconds": {
+            "SubmitMs": {
+              "Count": 2605,
+              "Median": 1.9583,
+              "P95": 2.6238,
+              "Maximum": 17.0645
+            },
+            "HarvestMs": {
+              "Count": 2605,
+              "Median": 1.2251,
+              "P95": 1.8203,
+              "Maximum": 13.3268
+            },
+            "OutputMs": {
+              "Count": 2605,
+              "Median": 7.4547,
+              "P95": 14.055,
+              "Maximum": 74.2959
+            },
+            "MaximumWorkerRenderMs": {
+              "Count": 2605,
+              "Median": 8.2098,
+              "P95": 16.0009,
+              "Maximum": 44.8471
+            },
+            "MaximumWorkerEncodeMs": {
+              "Count": 2605,
+              "Median": 2.8514,
+              "P95": 4.3613,
+              "Maximum": 56.377
+            },
+            "MaximumWorkerDecodeMs": {
+              "Count": 2605,
+              "Median": 1.9667,
+              "P95": 3.2671,
+              "Maximum": 20.5238
+            },
+            "WorkerCriticalSpanMs": {
+              "Count": 2605,
+              "Median": 12.5339,
+              "P95": 21.6433,
+              "Maximum": 80.3385
+            },
+            "StartSpreadMs": {
+              "Count": 2605,
+              "Median": 0.8777,
+              "P95": 2.0267,
+              "Maximum": 14.8555
+            },
+            "LastReadyFromSubmitStartMs": {
+              "Count": 2605,
+              "Median": 13.7224,
+              "P95": 23.3722,
+              "Maximum": 81.6665
+            },
+            "LargestWorkerUnattributedMs": {
+              "Count": 2605,
+              "Median": 0.17249999999999943,
+              "P95": 0.3147999999999991,
+              "Maximum": 5.8659
+            }
+          }
+        },
+        {
+          "Generation": 2,
+          "Episode": 1,
+          "Map": 2,
+          "Frames": 67,
+          "Milliseconds": {
+            "SubmitMs": {
+              "Count": 67,
+              "Median": 4.5397,
+              "P95": 9.431,
+              "Maximum": 19.5825
+            },
+            "HarvestMs": {
+              "Count": 67,
+              "Median": 1.4978,
+              "P95": 1.9278,
+              "Maximum": 2.0823
+            },
+            "OutputMs": {
+              "Count": 67,
+              "Median": 15.4616,
+              "P95": 23.6905,
+              "Maximum": 31.9584
+            },
+            "MaximumWorkerRenderMs": {
+              "Count": 67,
+              "Median": 17.0858,
+              "P95": 21.071,
+              "Maximum": 24.4786
+            },
+            "MaximumWorkerEncodeMs": {
+              "Count": 67,
+              "Median": 3.4495,
+              "P95": 8.4305,
+              "Maximum": 10.1384
+            },
+            "MaximumWorkerDecodeMs": {
+              "Count": 67,
+              "Median": 4.415,
+              "P95": 11.1517,
+              "Maximum": 13.3115
+            },
+            "WorkerCriticalSpanMs": {
+              "Count": 67,
+              "Median": 22.7937,
+              "P95": 30.2382,
+              "Maximum": 37.3089
+            },
+            "StartSpreadMs": {
+              "Count": 67,
+              "Median": 1.1572,
+              "P95": 12.5171,
+              "Maximum": 15.3553
+            },
+            "LastReadyFromSubmitStartMs": {
+              "Count": 67,
+              "Median": 26.2929,
+              "P95": 33.576,
+              "Maximum": 40.5697
+            },
+            "LargestWorkerUnattributedMs": {
+              "Count": 67,
+              "Median": 0.2018000000000022,
+              "P95": 0.5995000000000008,
+              "Maximum": 1.6621999999999986
+            }
+          }
+        }
+      ]
+    },
+    {
+      "Path": "local/command-output-abba-c3-p1-Strips-game.json",
+      "Sha256": "2E9BC5B579FBD17D353A688E06D42029AE614399EDF928E77E51DB7A6DE475D3",
+      "Mode": "Strips",
+      "Cycle": 3,
+      "Position": 1,
+      "Groups": [
+        {
+          "Generation": 1,
+          "Episode": 1,
+          "Map": 1,
+          "Frames": 2214,
+          "Milliseconds": {
+            "SubmitMs": {
+              "Count": 2214,
+              "Median": 2.14195,
+              "P95": 3.6768,
+              "Maximum": 19.1463
+            },
+            "HarvestMs": {
+              "Count": 2214,
+              "Median": 1.4745499999999998,
+              "P95": 2.0977,
+              "Maximum": 12.5361
+            },
+            "OutputMs": {
+              "Count": 2214,
+              "Median": 11.3843,
+              "P95": 23.0078,
+              "Maximum": 157.2152
+            },
+            "MaximumWorkerRenderMs": {
+              "Count": 2214,
+              "Median": 8.72685,
+              "P95": 19.7302,
+              "Maximum": 59.43
+            },
+            "MaximumWorkerEncodeMs": {
+              "Count": 2214,
+              "Median": 2.9786,
+              "P95": 5.1754,
+              "Maximum": 25.7501
+            },
+            "MaximumWorkerDecodeMs": {
+              "Count": 2214,
+              "Median": 2.3164499999999997,
+              "P95": 5.6907,
+              "Maximum": 17.4436
+            },
+            "WorkerCriticalSpanMs": {
+              "Count": 2214,
+              "Median": 13.2386,
+              "P95": 27.5093,
+              "Maximum": 64.0279
+            },
+            "StartSpreadMs": {
+              "Count": 2214,
+              "Median": 1.0123000000000002,
+              "P95": 7.8816,
+              "Maximum": 21.4575
+            },
+            "LastReadyFromSubmitStartMs": {
+              "Count": 2214,
+              "Median": 14.569849999999999,
+              "P95": 29.2654,
+              "Maximum": 67.4442
+            },
+            "LargestWorkerUnattributedMs": {
+              "Count": 2214,
+              "Median": 0.18299999999999983,
+              "P95": 0.5344000000000015,
+              "Maximum": 11.793099999999999
+            }
+          }
+        },
+        {
+          "Generation": 2,
+          "Episode": 1,
+          "Map": 2,
+          "Frames": 70,
+          "Milliseconds": {
+            "SubmitMs": {
+              "Count": 70,
+              "Median": 4.4462,
+              "P95": 18.2945,
+              "Maximum": 27.0871
+            },
+            "HarvestMs": {
+              "Count": 70,
+              "Median": 1.2168999999999999,
+              "P95": 2.0245,
+              "Maximum": 2.2209
+            },
+            "OutputMs": {
+              "Count": 70,
+              "Median": 10.8753,
+              "P95": 23.033,
+              "Maximum": 36.8735
+            },
+            "MaximumWorkerRenderMs": {
+              "Count": 70,
+              "Median": 15.6414,
+              "P95": 19.2751,
+              "Maximum": 21.9613
+            },
+            "MaximumWorkerEncodeMs": {
+              "Count": 70,
+              "Median": 3.6498,
+              "P95": 8.003,
+              "Maximum": 12.5134
+            },
+            "MaximumWorkerDecodeMs": {
+              "Count": 70,
+              "Median": 3.9931,
+              "P95": 5.4507,
+              "Maximum": 7.9817
+            },
+            "WorkerCriticalSpanMs": {
+              "Count": 70,
+              "Median": 20.966,
+              "P95": 29.9994,
+              "Maximum": 31.2188
+            },
+            "StartSpreadMs": {
+              "Count": 70,
+              "Median": 1.0742,
+              "P95": 13.3546,
+              "Maximum": 15.162
+            },
+            "LastReadyFromSubmitStartMs": {
+              "Count": 70,
+              "Median": 24.26625,
+              "P95": 33.6068,
+              "Maximum": 35.5935
+            },
+            "LargestWorkerUnattributedMs": {
+              "Count": 70,
+              "Median": 0.18209999999999926,
+              "P95": 0.2637999999999998,
+              "Maximum": 6.957599999999999
+            }
+          }
+        }
+      ]
+    },
+    {
+      "Path": "local/command-output-abba-c3-p2-AsyncBatch-game.json",
+      "Sha256": "C5FD6DA0305573FA8E69D006954770F63C8EB92CF2B5FFE85E00CCA8954432BE",
+      "Mode": "AsyncBatch",
+      "Cycle": 3,
+      "Position": 2,
+      "Groups": [
+        {
+          "Generation": 1,
+          "Episode": 1,
+          "Map": 1,
+          "Frames": 2506,
+          "Milliseconds": {
+            "SubmitMs": {
+              "Count": 2506,
+              "Median": 2.0614,
+              "P95": 2.8095,
+              "Maximum": 23.8895
+            },
+            "HarvestMs": {
+              "Count": 2506,
+              "Median": 1.4246,
+              "P95": 2.0486,
+              "Maximum": 13.6167
+            },
+            "OutputMs": {
+              "Count": 2506,
+              "Median": 7.74,
+              "P95": 11.2458,
+              "Maximum": 47.9009
+            },
+            "MaximumWorkerRenderMs": {
+              "Count": 2506,
+              "Median": 8.4962,
+              "P95": 17.6391,
+              "Maximum": 52.9306
+            },
+            "MaximumWorkerEncodeMs": {
+              "Count": 2506,
+              "Median": 2.9118000000000004,
+              "P95": 4.5447,
+              "Maximum": 38.9543
+            },
+            "MaximumWorkerDecodeMs": {
+              "Count": 2506,
+              "Median": 2.17615,
+              "P95": 3.8634,
+              "Maximum": 16.693
+            },
+            "WorkerCriticalSpanMs": {
+              "Count": 2506,
+              "Median": 12.860299999999999,
+              "P95": 25.1736,
+              "Maximum": 63.0272
+            },
+            "StartSpreadMs": {
+              "Count": 2506,
+              "Median": 0.90725,
+              "P95": 4.9067,
+              "Maximum": 18.9149
+            },
+            "LastReadyFromSubmitStartMs": {
+              "Count": 2506,
+              "Median": 14.138349999999999,
+              "P95": 26.9792,
+              "Maximum": 66.8853
+            },
+            "LargestWorkerUnattributedMs": {
+              "Count": 2506,
+              "Median": 0.17360000000000042,
+              "P95": 0.3937000000000008,
+              "Maximum": 10.2103
+            }
+          }
+        },
+        {
+          "Generation": 2,
+          "Episode": 1,
+          "Map": 2,
+          "Frames": 70,
+          "Milliseconds": {
+            "SubmitMs": {
+              "Count": 70,
+              "Median": 4.40965,
+              "P95": 5.3969,
+              "Maximum": 15.4679
+            },
+            "HarvestMs": {
+              "Count": 70,
+              "Median": 1.50075,
+              "P95": 1.897,
+              "Maximum": 2.1147
+            },
+            "OutputMs": {
+              "Count": 70,
+              "Median": 8.352049999999998,
+              "P95": 12.7577,
+              "Maximum": 15.3551
+            },
+            "MaximumWorkerRenderMs": {
+              "Count": 70,
+              "Median": 16.39965,
+              "P95": 21.7594,
+              "Maximum": 25.7505
+            },
+            "MaximumWorkerEncodeMs": {
+              "Count": 70,
+              "Median": 3.12225,
+              "P95": 4.2716,
+              "Maximum": 12.9486
+            },
+            "MaximumWorkerDecodeMs": {
+              "Count": 70,
+              "Median": 4.0032499999999995,
+              "P95": 8.4511,
+              "Maximum": 12.3442
+            },
+            "WorkerCriticalSpanMs": {
+              "Count": 70,
+              "Median": 22.30135,
+              "P95": 29.1706,
+              "Maximum": 32.1323
+            },
+            "StartSpreadMs": {
+              "Count": 70,
+              "Median": 1.0852499999999998,
+              "P95": 12.2194,
+              "Maximum": 14.839
+            },
+            "LastReadyFromSubmitStartMs": {
+              "Count": 70,
+              "Median": 25.7307,
+              "P95": 32.6572,
+              "Maximum": 34.8825
+            },
+            "LargestWorkerUnattributedMs": {
+              "Count": 70,
+              "Median": 0.17429999999999968,
+              "P95": 0.23359999999999914,
+              "Maximum": 8.497800000000002
+            }
+          }
+        }
+      ]
+    },
+    {
+      "Path": "local/command-output-abba-c3-p3-AsyncBatch-game.json",
+      "Sha256": "C23B682218C9D82BCD11478031288F3387054801C67348F482F5BEABDAB6807C",
+      "Mode": "AsyncBatch",
+      "Cycle": 3,
+      "Position": 3,
+      "Groups": [
+        {
+          "Generation": 1,
+          "Episode": 1,
+          "Map": 1,
+          "Frames": 2539,
+          "Milliseconds": {
+            "SubmitMs": {
+              "Count": 2539,
+              "Median": 2.0167,
+              "P95": 3.0163,
+              "Maximum": 28.0962
+            },
+            "HarvestMs": {
+              "Count": 2539,
+              "Median": 1.4067,
+              "P95": 1.9919,
+              "Maximum": 13.7782
+            },
+            "OutputMs": {
+              "Count": 2539,
+              "Median": 7.6395,
+              "P95": 13.8075,
+              "Maximum": 65.035
+            },
+            "MaximumWorkerRenderMs": {
+              "Count": 2539,
+              "Median": 8.02,
+              "P95": 16.7816,
+              "Maximum": 43.5218
+            },
+            "MaximumWorkerEncodeMs": {
+              "Count": 2539,
+              "Median": 2.8719,
+              "P95": 4.4206,
+              "Maximum": 43.7095
+            },
+            "MaximumWorkerDecodeMs": {
+              "Count": 2539,
+              "Median": 2.0934,
+              "P95": 3.4042,
+              "Maximum": 29.984
+            },
+            "WorkerCriticalSpanMs": {
+              "Count": 2539,
+              "Median": 12.3994,
+              "P95": 26.0934,
+              "Maximum": 55.7137
+            },
+            "StartSpreadMs": {
+              "Count": 2539,
+              "Median": 0.904,
+              "P95": 3.4848,
+              "Maximum": 19.1207
+            },
+            "LastReadyFromSubmitStartMs": {
+              "Count": 2539,
+              "Median": 13.622,
+              "P95": 27.3829,
+              "Maximum": 61.9245
+            },
+            "LargestWorkerUnattributedMs": {
+              "Count": 2539,
+              "Median": 0.17569999999999908,
+              "P95": 0.33590000000000053,
+              "Maximum": 17.0569
+            }
+          }
+        },
+        {
+          "Generation": 2,
+          "Episode": 1,
+          "Map": 2,
+          "Frames": 79,
+          "Milliseconds": {
+            "SubmitMs": {
+              "Count": 79,
+              "Median": 3.4037,
+              "P95": 5.5826,
+              "Maximum": 18.1652
+            },
+            "HarvestMs": {
+              "Count": 79,
+              "Median": 1.0977,
+              "P95": 1.6295,
+              "Maximum": 1.8008
+            },
+            "OutputMs": {
+              "Count": 79,
+              "Median": 7.6483,
+              "P95": 14.1334,
+              "Maximum": 24.4272
+            },
+            "MaximumWorkerRenderMs": {
+              "Count": 79,
+              "Median": 14.4308,
+              "P95": 20.5145,
+              "Maximum": 26.4852
+            },
+            "MaximumWorkerEncodeMs": {
+              "Count": 79,
+              "Median": 2.9976,
+              "P95": 3.9042,
+              "Maximum": 5.8876
+            },
+            "MaximumWorkerDecodeMs": {
+              "Count": 79,
+              "Median": 3.9607,
+              "P95": 5.0345,
+              "Maximum": 12.3867
+            },
+            "WorkerCriticalSpanMs": {
+              "Count": 79,
+              "Median": 19.818,
+              "P95": 30.7013,
+              "Maximum": 31.6788
+            },
+            "StartSpreadMs": {
+              "Count": 79,
+              "Median": 0.9439,
+              "P95": 12.8051,
+              "Maximum": 15.5513
+            },
+            "LastReadyFromSubmitStartMs": {
+              "Count": 79,
+              "Median": 22.4925,
+              "P95": 33.3623,
+              "Maximum": 34.7582
+            },
+            "LargestWorkerUnattributedMs": {
+              "Count": 79,
+              "Median": 0.1767000000000003,
+              "P95": 0.28940000000000055,
+              "Maximum": 1.7705000000000002
+            }
+          }
+        }
+      ]
+    },
+    {
+      "Path": "local/command-output-abba-c3-p4-Strips-game.json",
+      "Sha256": "8A0D0652A718DDB84281E417DB720E47EF34B1BE04839BF36BD5EE220DBC7C86",
+      "Mode": "Strips",
+      "Cycle": 3,
+      "Position": 4,
+      "Groups": [
+        {
+          "Generation": 1,
+          "Episode": 1,
+          "Map": 1,
+          "Frames": 2651,
+          "Milliseconds": {
+            "SubmitMs": {
+              "Count": 2651,
+              "Median": 1.9055,
+              "P95": 2.6108,
+              "Maximum": 12.7266
+            },
+            "HarvestMs": {
+              "Count": 2651,
+              "Median": 1.3278,
+              "P95": 1.8898,
+              "Maximum": 12.606
+            },
+            "OutputMs": {
+              "Count": 2651,
+              "Median": 7.2432,
+              "P95": 12.7082,
+              "Maximum": 117.7572
+            },
+            "MaximumWorkerRenderMs": {
+              "Count": 2651,
+              "Median": 7.8798,
+              "P95": 17.1021,
+              "Maximum": 41.3136
+            },
+            "MaximumWorkerEncodeMs": {
+              "Count": 2651,
+              "Median": 2.837,
+              "P95": 4.2582,
+              "Maximum": 32.6013
+            },
+            "MaximumWorkerDecodeMs": {
+              "Count": 2651,
+              "Median": 1.9355,
+              "P95": 3.2133,
+              "Maximum": 15.4794
+            },
+            "WorkerCriticalSpanMs": {
+              "Count": 2651,
+              "Median": 12.1853,
+              "P95": 22.6928,
+              "Maximum": 67.0892
+            },
+            "StartSpreadMs": {
+              "Count": 2651,
+              "Median": 0.7862,
+              "P95": 1.9714,
+              "Maximum": 22.1538
+            },
+            "LastReadyFromSubmitStartMs": {
+              "Count": 2651,
+              "Median": 13.3653,
+              "P95": 24.2554,
+              "Maximum": 68.6492
+            },
+            "LargestWorkerUnattributedMs": {
+              "Count": 2651,
+              "Median": 0.17999999999999972,
+              "P95": 0.35809999999999853,
+              "Maximum": 24.951400000000007
+            }
+          }
+        },
+        {
+          "Generation": 2,
+          "Episode": 1,
+          "Map": 2,
+          "Frames": 75,
+          "Milliseconds": {
+            "SubmitMs": {
+              "Count": 75,
+              "Median": 3.4959,
+              "P95": 5.2545,
+              "Maximum": 8.8651
+            },
+            "HarvestMs": {
+              "Count": 75,
+              "Median": 1.1106,
+              "P95": 1.7262,
+              "Maximum": 3.6031
+            },
+            "OutputMs": {
+              "Count": 75,
+              "Median": 7.0077,
+              "P95": 17.2577,
+              "Maximum": 21.5202
+            },
+            "MaximumWorkerRenderMs": {
+              "Count": 75,
+              "Median": 15.1168,
+              "P95": 19.346,
+              "Maximum": 23.2288
+            },
+            "MaximumWorkerEncodeMs": {
+              "Count": 75,
+              "Median": 3.3364,
+              "P95": 4.5576,
+              "Maximum": 9.7389
+            },
+            "MaximumWorkerDecodeMs": {
+              "Count": 75,
+              "Median": 3.9291,
+              "P95": 7.6897,
+              "Maximum": 15.3536
+            },
+            "WorkerCriticalSpanMs": {
+              "Count": 75,
+              "Median": 20.6338,
+              "P95": 27.9932,
+              "Maximum": 33.4206
+            },
+            "StartSpreadMs": {
+              "Count": 75,
+              "Median": 0.9094,
+              "P95": 9.7852,
+              "Maximum": 12.0652
+            },
+            "LastReadyFromSubmitStartMs": {
+              "Count": 75,
+              "Median": 23.5575,
+              "P95": 31.0647,
+              "Maximum": 37.8084
+            },
+            "LargestWorkerUnattributedMs": {
+              "Count": 75,
+              "Median": 0.18590000000000018,
+              "P95": 0.2425000000000015,
+              "Maximum": 0.2887999999999984
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "SourceFiles": [
+    {
+      "Path": "src/GameProcesses.ps1",
+      "Sha256": "F70E59DCA050F89AD579E12D29070F753E063EFF465BA6758D3C18508E2BE2DA"
+    },
+    {
+      "Path": "scripts/Invoke-GameRenderWorker.ps1",
+      "Sha256": "6A432F98075973A988F232A234E21FDB262E7BB1990F80D04224A07E16E9D1E7"
+    },
+    {
+      "Path": "scripts/Invoke-Doom.ps1",
+      "Sha256": "3EA8E756F3ED2A96776EF57B36FF01B8BC71B36B22E1A729B3546B9315BABD2D"
+    }
+  ],
+  "Meaning": "Post-collection audit of all twelve retained clean runs. Only world frames are grouped by generation for diagnosis; no release gate denominator is changed. Worker render/encode/decode maxima can come from different workers and are not additive. Worker critical span includes start spread; recorded QPC spans include descheduling and transport. Unattributed elapsed time includes input copying before decode timer, indexed/encoded publication, timer/write overhead and scheduling, not pure pixel-copy cost. OutputMs means synchronous call duration for Strips and asynchronous completion observation for AsyncBatch, not equivalent host blocking. Sixteen workers currently publish 16*64000 indexed bytes per frame even when no host pixel read is requested; final image and explicit captures still require these pixels. No speedup or causal bottleneck is established by this audit."
+}

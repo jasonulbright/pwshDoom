@@ -291,9 +291,10 @@ function Draw-FastNumber {
 }
 
 function Invoke-FastRender {
-    param($Context,[int]$FirstColumn=0,[int]$EndColumn=320)
+    param($Context,[int]$FirstColumn=0,[int]$EndColumn=320,[switch]$GeometryDetails)
     if(-not $Context.ContainsKey('SectorRenderDataReady') -or -not $Context.SectorRenderDataReady){throw 'Update the render-sector cache for the current snapshot before rendering.'}
     $phaseWatch=[Diagnostics.Stopwatch]::StartNew();$world=$Context.World;$player=$world.ConsolePlayer;$camera=$player.Mobj
+    if($GeometryDetails){$geometryStartedQpc=[Diagnostics.Stopwatch]::GetTimestamp()}
     [double]$cx=$camera.X;[double]$cy=$camera.Y;[double]$cz=$player.ViewZ
     [double]$angle=$camera.Angle
     [int]$viewXData=[Math]::Truncate(65536.0*$cx);[int]$viewYData=[Math]::Truncate(65536.0*$cy)
@@ -350,6 +351,7 @@ function Invoke-FastRender {
     [int]$open=$EndColumn-$FirstColumn
     [double[]]$nodeGeometry=$Context.NodeGeometry;[int[]]$nodeChildren=$Context.NodeChildren
     $stack=$Context.Stack;[int]$sp=1;$stack[0]=($nodeGeometry.Length/12)-1
+    if($GeometryDetails){$wallsStartedQpc=[Diagnostics.Stopwatch]::GetTimestamp()}
     while($sp -gt 0 -and $open -gt 0) {
         [int]$nodeIndex=$stack[--$sp]
         if($nodeIndex -ge 0 -and $nodeIndex -lt 32768) {
@@ -526,6 +528,7 @@ function Invoke-FastRender {
             }
         }
     }
+    if($GeometryDetails){$planesStartedQpc=[Diagnostics.Stopwatch]::GetTimestamp()}
     # PowerShell integer casts round to even. Correcting downward yields floor for
     # these finite Int32-range texture coordinates, avoiding a method binder per pixel.
     # Visplane-style horizontal spans with Doom's fixed-point plane rays. The
@@ -584,6 +587,7 @@ function Invoke-FastRender {
             } while($x -lt $planeSpanEnd -and $planes[$row+$x] -eq $id)
         }
     }
+    if($GeometryDetails){$maskedStartedQpc=[Diagnostics.Stopwatch]::GetTimestamp()}
     for([int]$columnIndex=0;$columnIndex -lt $maskedColumnCount;$columnIndex++){
         $column=$maskedColumns[$columnIndex]
         [int]$x=$column.X;[int]$height=$column.Height;[int]$source=$column.U*$height
@@ -597,6 +601,7 @@ function Invoke-FastRender {
             if($color -ge 0){$pixels[$p]=$colors[$color];$depthBuffer[$p]=$distance}
         }
     }
+    if($GeometryDetails){$geometryDoneQpc=[Diagnostics.Stopwatch]::GetTimestamp()}
     $geometryMs=$phaseWatch.Elapsed.TotalMilliseconds;$phaseWatch.Restart()
     # Actor sprites share the geometry depth buffer, including masked wall holes.
     $drawActors=$world.Actors
@@ -701,6 +706,15 @@ function Invoke-FastRender {
     $weaponMs=$phaseWatch.Elapsed.TotalMilliseconds;$phaseWatch.Restart()
     Draw-FastHud $Context $FirstColumn $EndColumn
     $Context.Profile=@{GeometryMs=$geometryMs;ActorsMs=$actorMs;WeaponMs=$weaponMs;HudMs=$phaseWatch.Elapsed.TotalMilliseconds}
+    if($GeometryDetails){
+        $qpcToMs=1000.0/[Diagnostics.Stopwatch]::Frequency
+        $Context.Profile.GeometryDetails=@{
+            SetupMs=($wallsStartedQpc-$geometryStartedQpc)*$qpcToMs
+            WallsMs=($planesStartedQpc-$wallsStartedQpc)*$qpcToMs
+            PlanesMs=($maskedStartedQpc-$planesStartedQpc)*$qpcToMs
+            MaskedWallsMs=($geometryDoneQpc-$maskedStartedQpc)*$qpcToMs
+        }
+    }
 }
 
 function Draw-FastPlayerSprites {

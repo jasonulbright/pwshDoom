@@ -177,3 +177,11 @@ repeats the PowerShell candidate's indexed image. The retained original image
 is a lossy window screenshot; raw framebuffer and hidden-state parity remain
 unqualified. Original Doom's configuration rewrite is recorded separately from
 unchanged demo/image hashes. [Evidence and capture limits](../results/original-doom-frozen-fixture-20261002.json).
+
+The next frame-cost investigation distinguishes maps rather than treating one
+average as an engine property. Retained live worker spans rise from about12–13 ms
+in E1M1 to20–23 ms in E1M2. An opt-in fixed-state profile attributes the slowest
+E1M2 stripe mainly to wall traversal/drawing. Named timers leave copying and
+scheduling partly unclassified; they do not by themselves prove a speedup.
+Exact image/strip checks support using these diagnostics to select the next
+bounded optimization. [Attribution and boundaries](performance.md#attribute-live-frame-costs-and-split-geometry-profiling--october-2-2026).
