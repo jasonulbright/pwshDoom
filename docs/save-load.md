@@ -120,7 +120,9 @@ the same serialized graph hash. The exact save, replay, process-report and
 checkpoint hashes are in the [qualification receipt](../results/preview6-current-source-save-continuation-20261002.json).
 This proves one bounded current-source process continuation. It does not qualify
 menu-driven desktop interaction, arbitrary save boundaries, audio restoration
-or the human Episode 1 route. The two-point deep Test-SaveState rerun exceeded
-five minutes without producing an artifact and was stopped; the prior 32-check
-receipt remains the full-suite result, and the isolated process comparison is
-the evidence for this boundary.
+or the human Episode 1 route. One earlier deep-harness launch accidentally bound
+`-SaveAt 700,840` as the single integer 700840 through `pwsh -File`; it was
+stopped before reaching the save boundary. Calling the script from PowerShell
+with the array `@(700,840)` passes all 32 checks against the current-source
+replay. The raw report and harness hashes are pinned in the
+[qualification receipt](../results/preview6-current-source-save-continuation-20261002.json).

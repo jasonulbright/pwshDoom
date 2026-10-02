@@ -6213,16 +6213,17 @@ pins the save, replay, per-process reports, harness and hashes. This qualifies
 one bounded process boundary, not desktop menu use, arbitrary saves or the human
 campaign route; the earlier stale-oracle reports remain as historical evidence.
 
-I also reran the deeper two-point `Test-SaveState` harness with the current
-replay. It remained CPU-active for more than five minutes without writing its
-first save or report, so I stopped that test process. No exception was captured
-and the exact cause is unresolved. A focused tic-700 fixture separately passed
-save serialization and the load/reference comparison; retain the prior 32-check
-save receipt as suite-level evidence and investigate the slow deep-harness path
-before relying on another full rerun. The independent actor-state projection
-was timed at 0.223 seconds on the same fixture, which rules out that one step as
-the observed delay but does not identify the cause.
+An initial two-point `Test-SaveState` launch used `-SaveAt 700,840` through
+`pwsh -File`. PowerShell treated that comma form as one CLI string and bound the
+integer 700840; the process was still replaying commands and had not reached its
+first save when stopped. The script was not hung. Calling the script from
+PowerShell with the actual array `@(700,840)` completed the full 32 checks with
+zero failures. The misbound run had reached command 29,600 when stopped; its
+progress log and the direct argument-binding probe are retained under `local/`
+and hashed in the qualification receipt. The raw report and harness hashes are in the
+[qualification receipt](../results/preview6-current-source-save-continuation-20261002.json).
 
 The optional `-InputPath` parameter and input hash/source-fingerprint reporting
-in both save harnesses make the current-source input explicit. This is the
-ninth commit after Preview.6; publish the next cumulative release at 35 commits.
+in both save harnesses make the current-source input explicit. The save
+qualification was commit 9 after Preview.6; this invocation correction is commit
+10. Publish the next cumulative release at 35 commits.
