@@ -126,3 +126,6 @@ stopped before reaching the save boundary. Calling the script from PowerShell
 with the array `@(700,840)` passes all 32 checks against the current-source
 replay. The raw report and harness hashes are pinned in the
 [qualification receipt](../results/preview6-current-source-save-continuation-20261002.json).
+The runner now also normalizes comma-delimited values passed through `pwsh -File`
+and rejects negative, repeated or out-of-recording indexes. That exact command
+line form passes 32/32 as well.

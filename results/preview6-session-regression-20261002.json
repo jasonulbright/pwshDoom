@@ -191,12 +191,13 @@
     }
   ],
   "CurrentSourceSaveStateRegression": {
-    "Path": "local/preview6-current-source-save-state.json",
-    "ReportSha256": "E97311CE59833ACBD21087A8C99B8D098D2A51FA42173D2870D1D60E45568723",
-    "HarnessSha256": "D03D2432E76C9FCF35A316058E1A8E0DBECBAE4993C391BD227A8F9973F54A48",
+    "Path": "local/preview6-current-source-save-state-cli-final.json",
+    "ReportSha256": "2329FC87C0D62EFA20FB030A5AFB4BF27C9C416256CC13D2874CC565371B2AF5",
+    "HarnessSha256": "4EBC5537E3E18CFA4D96F8ED9FAA9ADD82A6BBB58D7DA3CB05E2D00616C77517",
     "InputReplaySha256": "222809AD2657D7AB3F3F58C187306C68B74D56CB45323AD49C1E7E29485A2BD2",
     "Passed": 32,
     "Failed": 0,
+    "Invocation": "pwsh -NoProfile -File Test-SaveState.ps1 -SaveAt 700,840",
     "Meaning": "The full two-point save test passes on a replay whose source fingerprint matches the current runtime. The command-700 save is separately used by the load/reference process comparison below."
   },
   "SupersedingCurrentSourceQualification": {

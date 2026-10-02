@@ -1,5 +1,5 @@
 {
-  "CompletedUtc": "2026-10-02T20:53:51Z",
+  "CompletedUtc": "2026-10-02T20:58:22Z",
   "Release": "v0.1.0-preview.6",
   "RuntimeBaseCommit": "5f7aaee92603795d8d8451ad0bdd5aaea53d8d3a",
   "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
@@ -29,11 +29,12 @@
     "Sha256": "7F8B960134CC48C3C9F6957572ACF2E25AF6254558DDB15B7B648A4C35608EE8"
   },
   "CurrentSourceSaveStateRegression": {
-    "ReportPath": "local/preview6-current-source-save-state.json",
-    "ReportSha256": "E97311CE59833ACBD21087A8C99B8D098D2A51FA42173D2870D1D60E45568723",
-    "HarnessSha256": "D03D2432E76C9FCF35A316058E1A8E0DBECBAE4993C391BD227A8F9973F54A48",
+    "ReportPath": "local/preview6-current-source-save-state-cli-final.json",
+    "ReportSha256": "2329FC87C0D62EFA20FB030A5AFB4BF27C9C416256CC13D2874CC565371B2AF5",
+    "HarnessSha256": "4EBC5537E3E18CFA4D96F8ED9FAA9ADD82A6BBB58D7DA3CB05E2D00616C77517",
     "SaveAt": [700, 840],
     "ContinuationTics": 140,
+    "Invocation": "pwsh -NoProfile -File Test-SaveState.ps1 -SaveAt 700,840 ...",
     "Passed": 32,
     "Failed": 0
   },
@@ -45,7 +46,7 @@
     "ProgressLogSha256": "91F4847EA7AFA9C67104043F056737A21A5A288553330A10E01BFBCC92B4E8AF",
     "BindingProbePath": "local/preview6-saveat-cli-binding.json",
     "BindingProbeSha256": "E08A22ECE2D41AB66CDEEDC048BB498787777B671D250FE8F43230CF945C4722",
-    "CorrectInvocation": "Call the script from a PowerShell host with -SaveAt @(700,840)."
+    "CorrectInvocation": "Test-SaveState now splits comma-delimited -SaveAt text supplied through pwsh -File, rejects negative/out-of-replay/duplicate indexes, and completed the exact 700,840 command-line form with 32 checks passed."
   },
   "LoadProcess": {
     "ReportPath": "local/preview6-current-source-save-load.json",
@@ -78,7 +79,7 @@
   "Limitations": [
     "The reused commands are an existing short regression prefix, not a human campaign route.",
     "Menu-driven desktop save/load, audio restoration, and arbitrary save boundaries are outside this probe.",
-    "An earlier rerun attempt passed `-SaveAt 700,840` through `pwsh -File`; that form binds as the single integer 700840. Its progress log records the test stopping at command 29600, before a save. The corrected PowerShell array invocation completed the full 32-check two-point regression recorded above."
+    "An earlier rerun attempt passed `-SaveAt 700,840` through `pwsh -File` with an int[] parameter; that form bound as the single integer 700840. Its progress log records the test stopping at command 29600, before a save. The harness now normalizes the comma-list and validates its range; the same command-line form completes the full 32-check two-point regression recorded above."
   ],
   "Performance": "Single fixture preparation observations (about 6.2 seconds for 700 tics and 2.25 seconds for serialization) are not benchmark results."
 }

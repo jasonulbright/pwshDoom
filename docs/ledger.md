@@ -6223,7 +6223,14 @@ progress log and the direct argument-binding probe are retained under `local/`
 and hashed in the qualification receipt. The raw report and harness hashes are in the
 [qualification receipt](../results/preview6-current-source-save-continuation-20261002.json).
 
+I hardened `Test-SaveState` to split comma-delimited command-line values and
+reject negative, repeated or out-of-recording save indexes. The original
+`pwsh -File ... -SaveAt 700,840` form now passes all 32 checks with two runs;
+its final report and harness hash replace the earlier array-host result in the
+current receipt.
+
 The optional `-InputPath` parameter and input hash/source-fingerprint reporting
 in both save harnesses make the current-source input explicit. The save
-qualification was commit 9 after Preview.6; this invocation correction is commit
-10. Publish the next cumulative release at 35 commits.
+qualification was commit 9 after Preview.6, and the invocation correction was
+commit 10. This CLI-hardening test is commit 11; publish the next cumulative
+release at 35 commits.

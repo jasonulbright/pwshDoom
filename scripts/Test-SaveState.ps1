@@ -1,7 +1,7 @@
 #requires -Version 7.4
 # SPDX-License-Identifier: GPL-2.0-or-later
 param([string]$Wad='C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\base\DOOM.WAD',
-    [int[]]$SaveAt=@(700),[int]$ContinueTics=140,[string]$Output="$PSScriptRoot/../results/save-state-first.json",
+    [object]$SaveAt=@(700),[int]$ContinueTics=140,[string]$Output="$PSScriptRoot/../results/save-state-first.json",
     [string]$InputPath="$PSScriptRoot/../results/input-session-replay.json")
 $ErrorActionPreference='Stop'
 if(Test-Path -LiteralPath $Output){throw 'Use a fresh report path.'}
@@ -32,8 +32,23 @@ function Apply-Input($Game,[int]$Index){
 }
 try{
     $content=[GameContent]::new(@('-iwad',$Wad));$wadHash=(Get-FileHash $Wad).Hash;$route=Read-DoomInputReplay $InputPath $wadHash
+    $savePoints=[Collections.Generic.List[int]]::new()
+    # `pwsh -File` supplies one string for `-SaveAt 700,840`; normalize it here.
+    foreach($value in @($SaveAt)){
+        if($null -eq $value){throw 'SaveAt cannot contain an empty value.'}
+        $values=if($value -is [string]){@($value -split ',')}else{@($value)}
+        foreach($entry in $values){
+            $token=([string]$entry).Trim();if($token -notmatch '^\d+$'){throw 'SaveAt values must be nonnegative command indexes.'}
+            $point=[int]::Parse($token,[Globalization.CultureInfo]::InvariantCulture)
+            if($point -lt 0 -or $point -gt $route.InputCommands.Count){throw 'SaveAt must be between zero and the input recording command count.'}
+            if($savePoints.Contains($point)){throw 'SaveAt values must be unique.'}
+            $savePoints.Add($point)
+        }
+    }
+    if($ContinueTics -lt 0){throw 'ContinueTics cannot be negative.'}
+    if($savePoints.Count -eq 0){throw 'At least one SaveAt command index is required.'}
     $commands=[TicCmd[]]::new(4);for($i=0;$i -lt 4;$i++){$commands[$i]=[TicCmd]::new()}
-    foreach($point in $SaveAt){
+    foreach($point in $savePoints){
         foreach($c in $commands){$c.Clear()}
         $options=[GameOptions]::new();$options.GameMode=$content.Wad.GameMode;$options.GameVersion=$content.Wad.GameVersion;$options.MissionPack=$content.Wad.MissionPack
         $game=[DoomGame]::new($content,$options);$game.DeferedInitNew([GameSkill]::Medium,1,1);$null=$game.Update($commands)
