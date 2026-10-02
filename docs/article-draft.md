@@ -254,3 +254,11 @@ the broader projection and edge differences remain. Serial ABBA measurements
 retain initial-call asymmetry and later dense cycles that are 4–6% slower.
 The change is adopted for its demonstrated arithmetic correction, with a native
 performance gain unqualified. [Evidence, alternatives and failures](../results/wall-vertical-sampling-20261002.json).
+
+The changed renderer also runs in separate actual Classic, Matrix and color-art
+recordings with unchanged source pins and complete replay/audio accounting.
+Reviewed effect frames preserve the modes, HUD and notices. No uncovered digital
+interval falls inside their gameplay-write windows; startup coverage and 15–26 ms
+post-game gaps remain. This preserves the evidence for earlier capture failures
+and leaves acoustic continuity and physical timing unqualified.
+[Committed-build recording receipt](../results/wall-vertical-effects-live-20261002.json).

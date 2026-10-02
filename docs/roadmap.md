@@ -482,3 +482,12 @@ arithmetic correction, with full fidelity/pacing/campaign gates open.
 [Production, alternatives and limits](../results/wall-vertical-sampling-20261002.json).
 Count reaches 14 after Preview.5. Record actual committed-source effects next;
 release again at 35 commits since the prior public release.
+
+Actual committed-source wall-build recordings now pass 56 digital consistency
+checks in all three modes, with 37 source pins and reviewed pickup/damage frames.
+Every stress command/checkpoint and audio credit reconciles; all owned PIDs end.
+Startup/post-game capture gaps and prior failures remain explicit. These recorded
+runs establish neither clean pacing nor acoustic/full-campaign qualification.
+[Recording evidence](../results/wall-vertical-effects-live-20261002.json).
+Count reaches 15 after Preview.5. Continue remaining campaign/fidelity/performance
+and physical qualification; release at 35 commits since the prior release.

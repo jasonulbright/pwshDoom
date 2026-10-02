@@ -5761,3 +5761,35 @@ This implementation/evidence commit reaches 14 after Preview.5. Record actual
 effects on the committed renderer next, then continue the remaining release
 gates. The whole human campaign, independent original moving frames, numerical
 pacing, physical/acoustic/DPI and second-hardware qualification remain open.
+
+### 2026-10-02 — Wall correction recorded in Classic, Matrix and color art
+
+Three finite WGC/loopback recordings complete on committed eb5e551 with the
+unchanged full 30-track catalog, primary 16 workers and Strips/Pairs. All 37
+source pins agree, including the new FastRenderer. Each executes all 420 stress
+commands and both checkpoints; player death remains. Independent input, credits,
+PCM reconstruction and media checks pass 56 conditions. Submitted/returned
+frames are 575,820 Classic, 580,860 Matrix and 628,740 AnsiArt. All 57 recorded
+game/Terminal PIDs are absent after collection; no termination is needed.
+[Raw-media hashes, source pins and coverage](../results/wall-vertical-effects-live-20261002.json).
+
+Six reviewed full-window samples preserve pickup notices, pistol/imp/HUD,
+Classic pixels, green Matrix glyphs and color-art glyphs. Classic/AnsiArt damage
+samples show red tint; Matrix remains green. Review displays 2048x829 from the
+original 3440x1392 frames, not exact optical write identity or a whole-movie
+review. The narrow row-pattern tests establish sampling arithmetic; these
+recordings do not independently qualify reference wall projection.
+
+Independent QPC/packet inspection finds no uncovered interval overlapping the
+first-to-last gameplay-write window in these runs. Startup is outside loopback
+coverage and 15.1–25.9 ms near-tail gaps occur after gameplay writes. Retain the
+earlier Matrix 20 ms active gap and all previous recorder failures. No mixer
+algorithm changed; unpaired successes do not isolate the prior gap's cause or
+prove acoustic continuity, physical A/V latency or full-campaign audio. These
+recordings add capture load and do not update clean pacing claims.
+
+This evidence commit reaches 15 after Preview.5. Continue useful release work
+without repeating this short recording matrix absent a new change. Whole human
+Episode 1/Ultimate Doom qualification, independent moving original frames,
+numerical pacing and physical/acoustic/DPI/second-hardware gates remain open.
+Cut the next public release at 35 commits since the prior release.

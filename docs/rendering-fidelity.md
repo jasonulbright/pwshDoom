@@ -1049,3 +1049,9 @@ by one index; E3M6 heading 90 worsens by 96. HUD stays exact. The frozen ceiling
 sweep now disagrees at 12/7/410/4,167 indices. Preserve those increases and all
 images: analytic BSP projection, edge coverage and full moving/original image
 fidelity remain open. Serial cost is a tradeoff, not a demonstrated pacing gain.
+
+Separate [committed-build effect recordings](../results/wall-vertical-effects-live-20261002.json)
+retain all three modes, 37 source pins and 56 digital consistency checks. Reviewed
+pickup/damage frames preserve the world, pistol, HUD and notices. This supports
+live effect review on the changed renderer; sampling arithmetic and broader
+reference-image qualification remain separate evidence.
