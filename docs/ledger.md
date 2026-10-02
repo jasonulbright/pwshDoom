@@ -6353,3 +6353,11 @@ output matches serial across five E3M6 views in Classic, Matrix and AnsiArt.
 One serial E3M6 ABBA sample set measures p50 +1.5% and p95 +6.1%; no speed gain
 is claimed. The adapted reference and fixed views do not qualify original-image
 or moving-world parity.
+
+### Share wall point-angle work — October 2, 2026
+
+Wall setup now reuses normalized point deltas when deriving fixed-point angle
+and distance. Existing wall-parameter comparisons pass 20,049 cases, including
+the eleven matching overflow errors; sixteen-worker Classic matches serial at
+five E3M6 views. In one fixed-state ABBA set, median render time is flat (+0.5%)
+and p95 is lower (−9%); this is not a live pacing result.

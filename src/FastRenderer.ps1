@@ -187,12 +187,12 @@ function Get-FastWallUParameters {
     # Numeric equivalent of the pinned GPL ThreeDRenderer wall-U formula.
     # Worker processes consume transported tables and need no engine classes.
     [uint32]$normal=([long]$SegmentAngle+0x40000000L) -band 0xffffffffL
-    [uint32]$angle1=Get-FastPointAngleData $ViewX $ViewY $VertexX $VertexY $TanToAngle
+    [long[]]$pointParameters=Get-FastPointAngleDistanceData $ViewX $ViewY $VertexX $VertexY $TanToAngle $FineSine
+    [uint32]$angle1=$pointParameters[0];[int]$hyp=$pointParameters[1]
     [uint32]$difference=([long]$normal-$angle1) -band 0xffffffffL
     [long]$absoluteAngle=$difference
     if($absoluteAngle -gt 0x80000000L){$absoluteAngle=0x100000000L-$absoluteAngle}
     if($absoluteAngle -gt 0x40000000L){$absoluteAngle=0x40000000L}
-    [int]$hyp=Get-FastPointDistData $ViewX $ViewY $VertexX $VertexY $TanToAngle $FineSine
     [long]$perp=(([long]$hyp*$FineSine[(0x40000000L-$absoluteAngle) -shr 19]) -shr 16) -band 0xffffffffL
     if($perp -ge 0x80000000L){$perp-=0x100000000L}
     [long]$offset=([long]$hyp*$FineSine[$absoluteAngle -shr 19]) -shr 16
