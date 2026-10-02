@@ -1,0 +1,170 @@
+{
+  "FinishedUtc": "2026-10-02T07:30:38.092290+00:00",
+  "BaseCommit": "115d3aa03f13dea43a16ffc7bc6dcec28102ecc3",
+  "CSharpReferenceCommit": "9365696eb44326a3aab72c4bab217f7db8a87c96",
+  "BaselineExpressionMismatches": 30024,
+  "CorrectedExpressionComparisons": 60066,
+  "CorrectedExpressionMismatches": 0,
+  "MovingCeilingBefore": [
+    {
+      "CeilingHeight": 0,
+      "SceneDifferentIndices": 10,
+      "HudDifferentIndices": 0,
+      "SceneMismatchBounds": [
+        278,
+        153,
+        314,
+        163
+      ]
+    },
+    {
+      "CeilingHeight": 6,
+      "SceneDifferentIndices": 7,
+      "HudDifferentIndices": 0,
+      "SceneMismatchBounds": [
+        308,
+        153,
+        314,
+        153
+      ]
+    },
+    {
+      "CeilingHeight": 34,
+      "SceneDifferentIndices": 410,
+      "HudDifferentIndices": 0,
+      "SceneMismatchBounds": [
+        0,
+        153,
+        319,
+        167
+      ]
+    },
+    {
+      "CeilingHeight": 68,
+      "SceneDifferentIndices": 4166,
+      "HudDifferentIndices": 0,
+      "SceneMismatchBounds": [
+        0,
+        0,
+        319,
+        167
+      ]
+    }
+  ],
+  "MovingCeilingCorrectedReference": [
+    {
+      "CeilingHeight": 0,
+      "SceneDifferentIndices": 19,
+      "HudDifferentIndices": 0,
+      "SceneMismatchBounds": [
+        278,
+        153,
+        318,
+        163
+      ]
+    },
+    {
+      "CeilingHeight": 6,
+      "SceneDifferentIndices": 11,
+      "HudDifferentIndices": 0,
+      "SceneMismatchBounds": [
+        308,
+        153,
+        318,
+        153
+      ]
+    },
+    {
+      "CeilingHeight": 34,
+      "SceneDifferentIndices": 410,
+      "HudDifferentIndices": 0,
+      "SceneMismatchBounds": [
+        0,
+        153,
+        319,
+        167
+      ]
+    },
+    {
+      "CeilingHeight": 68,
+      "SceneDifferentIndices": 4170,
+      "HudDifferentIndices": 0,
+      "SceneMismatchBounds": [
+        0,
+        0,
+        319,
+        167
+      ]
+    }
+  ],
+  "ImagePanelControls": [
+    {
+      "CeilingHeight": 0,
+      "CandidateRgbPanelChanges": 0,
+      "ReferenceRgbPanelChanges": 9
+    },
+    {
+      "CeilingHeight": 68,
+      "CandidateRgbPanelChanges": 0,
+      "ReferenceRgbPanelChanges": 4
+    }
+  ],
+  "DiscoveryMappedStateComparisons": 420,
+  "GameplayCheckpoints": 2,
+  "Files": [
+    {
+      "Path": "scripts/Test-WallInverseScale.ps1",
+      "Sha256": "5743CC6143868CB6B24CB28D90FFB90839D73486DA1004FCB2899FF916DAD9C2"
+    },
+    {
+      "Path": "src/ManagedDoom/Video/ThreeDRenderer.sb.ps1",
+      "Sha256": "9926E254F54250EEDD4F929681026BFF9ECEE7E6A9869FE99114F4FCD0CCF84B"
+    },
+    {
+      "Path": "local/wall-inverse-scale-baseline-r1.json",
+      "Sha256": "5D73439642424CDF153FFB9CB7539E0F17BC6D298CD71675E64049DEAB606753"
+    },
+    {
+      "Path": "local/wall-inverse-scale-baseline-r1.log",
+      "Sha256": "67F021D465F149ED3765A92F54A07FE9B994B6BFE37B6AF8E003868CFAE83F99"
+    },
+    {
+      "Path": "local/wall-inverse-scale-corrected-r1.json",
+      "Sha256": "796D597E61416C9DE48F11262FA048FC2662D2E49CCF0CE360123A169063325B"
+    },
+    {
+      "Path": "local/wall-inverse-scale-corrected-r1.log",
+      "Sha256": "1F9E0BE1C81CCEFCD8F3B00873AF13F35BA5AD95F09F0588E1E392396C9C3908"
+    },
+    {
+      "Path": "local/moving-sector-sprite-slope-r12-20261002.json",
+      "Sha256": "975402D1624566B9CD7C94E2D51D6F76DB6FC5AEF0DE98BB07240A3380D87172"
+    },
+    {
+      "Path": "local/moving-sector-reference-floor-r1-20261002.json",
+      "Sha256": "57FA12C6A38A19F8562405D6A5FBCCAA997D0912C96135510A7293734AFCECC9"
+    },
+    {
+      "Path": "local/reference-wall-inverse-discovery-r1.json",
+      "Sha256": "BCFF1CC89B88F351796B700326A4436E496D3D78EBB91830FB30BC62624485D7"
+    },
+    {
+      "Path": "local/e3m6-discovery-baseline-r1.json",
+      "Sha256": "D1D76BC9EC022933CEDC6AE482F1D7EB361862E729EADD31E461FEF70D05FC16"
+    },
+    {
+      "Path": "local/upstream/ManagedDoom-CSharp/ManagedDoom/src/Video/ThreeDRenderer.cs",
+      "Sha256": "696E90F87F91FC25B02D5D94E6966521158BC9B9593C89AC6BB9071B73583EA6"
+    },
+    {
+      "Path": "local/upstream/ManagedDoom-CSharp/licenses/LICENSE_ManagedDoom.txt",
+      "Sha256": "189B1AF95D661151E054CEA10C91B3D754E4DE4D3FECFB074C1FB29476F7167B"
+    },
+    {
+      "Path": "local/audit-reference-wall-inverse-r1.py",
+      "Sha256": "B1DA03D9CCB22223F0CAAD2F7C145444329D87F50038AFB2F2E89825E06442BC"
+    }
+  ],
+  "Decision": "Correct the three adopted-reference wall inverse-scale assignments to truncate exact unsigned division instead of PowerShell rounding. C# GPL source already local/pinned; no external source body copied or native production helper added. Keep prior image comparisons as history against the previous oracle; changing a reference is not candidate-fidelity improvement.",
+  "Meaning": "Scope is the solid/portal/masked wall inverse-scale scalar expressions in the locally adapted PowerShell comparator. Each tested on20022 valid256..4194304 scale values against independent exact DivRem. Reference RGB panels change while the two saved candidate RGB panels stay identical. Corrected-reference scene disagreement is19/11/410/4170 at counterfactual ceiling heights0/6/34/68, with exact HUD. This increases some mismatch counts and is not a candidate regression or full original-executable parity.420 fresh current discovery states equal the earlier unchanged path, with two current stress checkpoints retained. Full moving-world/reference fidelity remains open."
+}

@@ -191,3 +191,15 @@ Modifications, 2026-10-02 (numeric discovery slope):
   all-map headings, moving full-renderer views and save/automap worker checks
   are indexed in `results/discovery-slope-production-20261002.json`.
   Isolated method gains do not establish native release pacing or fidelity.
+
+Modifications, 2026-10-02 (reference wall inverse scale):
+
+- `ThreeDRenderer`: explicitly truncate the unsigned inverse-scale quotient in
+  the solid, portal and masked wall paths. PowerShell's prior integer cast
+  rounded where the pinned C# source performs integer division. The GPL notice
+  is preserved; the local C# commit is `9365696eb44326a3aab72c4bab217f7db8a87c96`.
+- The actual three source expressions pass 60,066 independent DivRem checks;
+  retained old-source expressions fail 30,024. This corrects the adopted
+  comparator and leaves FastRenderer unchanged. Frozen-ceiling mismatch counts
+  change with the oracle; whole original-frame fidelity remains unqualified.
+  See `results/reference-wall-inverse-scale-20261002.json`.

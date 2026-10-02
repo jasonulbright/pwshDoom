@@ -5678,3 +5678,28 @@ focused gameplay/session correctness and measured bottleneck work rather than
 repeating this same short recording matrix without a new reason. Whole human
 Episode1/Ultimate Doom campaign and physical/acoustic/DPI/second-hardware gates
 remain open; existing tests and synthetic fixtures do not substitute for them.
+
+### 2026-10-02 — Correct the wall inverse scale in the adopted reference
+
+The pinned GPL C# reference divides unsigned integers in three wall paths.
+The adapted PowerShell solid, portal and masked paths instead cast a floating
+quotient to int, which rounds. Apply explicit truncation to those three
+assignments; the production FastRenderer is unchanged. The new portable test
+evaluates the actual source expressions against independent integer DivRem.
+The retained old-source report fails 30,024 of 60,066 comparisons; corrected
+source passes all 60,066 across 20,022 valid scale values per path.
+[Source pins, failed baseline and controls](../results/reference-wall-inverse-scale-20261002.json).
+
+The frozen E1M1 input-315 counterfactual ceiling sweep now disagrees with the
+candidate at 19/11/410/4,170 indices for heights 0/6/34/68, versus the previous
+10/7/410/4,166. HUD remains exact. The saved height-0 and height-68 candidate
+RGB panels are unchanged while the reference panels change. This is a change
+to the oracle, not a candidate improvement or regression. Preserve both raw
+sweeps and images; do not rewrite historical mismatch counts. A fresh E3M6
+420-command check retains all mapped-state hashes and both stress checkpoints.
+The local C# source/license are pinned and no native production helper is added.
+
+This correction/evidence commit reaches 13 after Preview.5. Next isolate the
+candidate's wall texel stepping with a row-pattern fixture and test a bounded
+PowerShell fixed-point implementation. Full original-image, campaign, pacing,
+human input and acoustic qualification remain open. Release again at 35 commits.

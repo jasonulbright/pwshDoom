@@ -463,3 +463,12 @@ writes, while startup/post-game gaps and the prior-build Matrix gap remain.
 Count reaches12 after Preview.5. Continue remaining fidelity, correctness and
 measured bottleneck work; full human campaign/physical/acoustic/DPI/hardware
 qualification remains open.
+
+The adopted comparator now truncates unsigned inverse wall scale in its three
+wall paths, matching the pinned C# source and 60,066 independent integer checks.
+Its prior rounded expressions fail 30,024 cases. Retained frozen-ceiling images
+show changed reference panels and unchanged candidate panels; this is a comparator
+correction, not candidate-fidelity progress. Fresh discovery and stress endpoints
+remain exact. [Evidence and limits](../results/reference-wall-inverse-scale-20261002.json).
+Count reaches 13 after Preview.5. Isolate candidate wall vertical sampling next;
+all full-release gates remain active, with another release due at 35 commits.

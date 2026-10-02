@@ -1879,7 +1879,8 @@ class ThreeDRenderer {
                         if ($lightIndex -ge $localMaxScaleLight) {
                             $lightIndex = $localMaxScaleLight - 1
                         }
-                        $invScaleData = [int](0xFFFFFFFFu / [uint]$rwScaleData)
+                        # C# unsigned integer division floors; a PowerShell cast rounds.
+                        $invScaleData = [int][Math]::Truncate(0xFFFFFFFFu / [uint]$rwScaleData)
                         $this.DrawColumnData($source[0], $wallLights[$lightIndex], $x, $wy1, $wy2, $invScaleData, $middleTextureAltData)
                     }
                 }
@@ -2298,7 +2299,7 @@ class ThreeDRenderer {
                     $lightIndex = $localMaxScaleLight - 1
                 }
 
-                $invScaleData = [int](0xFFFFFFFFu / [uint]$rwScaleData)
+                $invScaleData = [int][Math]::Truncate(0xFFFFFFFFu / [uint]$rwScaleData)
             }
 
             if ($drawUpperWall) {
@@ -2519,7 +2520,7 @@ class ThreeDRenderer {
 
             if ($col -ne [short]::MaxValue) {
                 $topY = $this.centerYFrac - ($midTextureAlt * $scale)
-                $invScale = [Fixed]::new([int](0xFFFFFFFFu / [uint]$scale.Data))
+                $invScale = [Fixed]::new([int][Math]::Truncate(0xFFFFFFFFu / [uint]$scale.Data))
                 $ceilClip = $localClipData[$upperClipBase + $x]
                 $floorClip = $localClipData[$lowerClipBase + $x]
                 if ($wallWrapMask -ge 0) {

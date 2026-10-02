@@ -236,3 +236,11 @@ Startup/post-game gaps and the prior-build Matrix gap remain explicit.
 [Current recording coverage](../results/sprite-slope-effects-live-20261002.json).
 Passing digital consistency still leaves acoustic continuity and independent
 moving-world original-image comparisons unqualified.
+
+Reference code needs qualification too. Three wall paths in the adapted
+PowerShell comparator rounded a quotient that the pinned C# source floors.
+Correcting them passes 60,066 independent scalar checks and changes some frozen
+scene comparisons while leaving the candidate images unchanged. A higher mismatch
+count after this correction describes a changed oracle, not a new product defect.
+[Failed baseline, source pins and image controls](../results/reference-wall-inverse-scale-20261002.json).
+Historical comparisons remain attributable to their original reference version.

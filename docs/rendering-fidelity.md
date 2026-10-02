@@ -1012,3 +1012,18 @@ now retain37 source pins and56 consistency checks. Six reviewed pickup/damage
 samples preserve the modes, HUD and notices. These do not independently
 exercise the synthetic rotation-bucket crossing or establish original-image
 parity; the exact helper tests cover that narrow arithmetic condition.
+
+### Reference wall inverse scale (2026-10-02)
+
+Three adapted-reference wall paths rounded a floating quotient where the pinned
+C# source performs unsigned integer division. Explicit truncation now matches
+independent DivRem in 60,066 scalar comparisons; the previous expressions fail
+30,024. This changes the comparator, leaving FastRenderer unchanged.
+[Arithmetic test, source lineage and retained before/after sweeps](../results/reference-wall-inverse-scale-20261002.json).
+
+The frozen input-315 ceiling fixture changes its disagreement counts from
+10/7/410/4,166 to 19/11/410/4,170 at heights 0/6/34/68. HUD is exact, and the two
+saved candidate RGB panels are unchanged. These counterfactual scenes isolate
+rendering at a fixed camera; they do not qualify campaign progression or original
+executable state. Historical results retain their original comparator. Whole
+moving-world and original-frame fidelity remain open.
