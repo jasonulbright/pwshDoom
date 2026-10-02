@@ -5564,3 +5564,51 @@ the committed build live with the unchanged full-catalog dense stress input,
 primary16 workers and all styles, then record effects separately. Full
 Ultimate Doom campaign/fidelity/pacing/physical/acoustic/hardware gates remain
 open; no milestone approval is needed.
+
+### 2026-10-02 — Committed slope change measured and recorded
+
+Nine clean native runs on97ff8d9 retain all420 stress commands/two endpoints,
+the full30-track catalog/audio, primary16 workers and320x200 output. Runtime
+and launch hashes remain unchanged. Raw CSV display counts/p99, ordered/due
+command accounting, PCM credits and all171 owned process/start identities are
+independently checked after collection. Audio/music are included inside the
+simulation process. No concurrent tests/exports/recordings/analyzers run during
+collection; only low-frequency status reads.
+[Native evidence](../results/discovery-slope-native-pacing-20261002.json).
+
+Active rates are Classic32.136/32.822/32.721, Matrix31.200/30.747/32.034 and
+AnsiArt30.305/31.920/32.002 tics/sec. Display events are42.483/41.619/42.298,
+46.756/47.567/46.375 and43.398/42.237/43.257 per second. P99 tic lateness spans
+813–1869ms. No full numerical gate passes. Median run-mean discovery is about
+4.16ms in Classic/Matrix and4.17ms in AnsiArt. Historical earlier-build median
+tic rates are lower, but these batches are unpaired and do not establish a
+causal native speedup. Every window/outlier and player death remains; this is
+stress evidence, not map completion or optical distinct-frame qualification.
+
+Separate three-mode WGC/loopback recordings pass56 consistency checks on the
+same committed gameplay fingerprint, including the adopted Geometry source.
+Every command/checkpoint/audio frame reconciles; reviewed pickup/damage samples
+retain pixels, green Matrix glyphs, color-art glyphs, HUD and notices.
+[Recording receipt](../results/discovery-slope-effects-live-20261002.json).
+The first Classic recorder receives q then exits with0xC0000005; game and audio
+finish normally. Preserve its failed metadata/log/video. All19 recorded PIDs
+are absent before one bounded retry of actual effects with the existing15sec
+target hold instead of3sec. All three retries succeed, supporting that capture
+setting without proving the native crash cause or changing runtime algorithms.
+All57 retry game/Terminal PIDs are absent after collection.
+
+Do not confuse56 passing consistency checks with uninterrupted captured audio.
+Independent packet/QPC reconstruction retains startup outside coverage and
+24.8–25.6ms post-game near-tail gaps. Matrix additionally has882 uncovered
+frames (20ms) beginning1.114sec after the first gameplay write; adjacent raw
+packets have Flags0 and no API-discontinuity marker. Game-side starvation,
+rebuffer/backpressure remain zero, and all submitted/returned PCM reconciles.
+This is missing loopback timestamp coverage, not measured acoustic silence or
+an isolated mixer defect. Raw packets/timing and the pre-inspection receipt are
+retained. Acoustic and physical A/V continuity remain unqualified.
+
+This evidence commit reaches10 after Preview.5. Keep default16 workers and
+Strips/Pairs. Continue a focused rendering-fidelity arithmetic review; full
+Ultimate Doom campaign, independent moving-world/original-binary fidelity,
+numerical pacing, human input/acoustic/DPI and second-hardware gates remain
+active. Release again at35 or more commits since the prior public release.

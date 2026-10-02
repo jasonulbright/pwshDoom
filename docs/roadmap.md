@@ -434,3 +434,13 @@ batch time about55%; native pacing is still unmeasured for this change.
 Count reaches9 after Preview.5. Measure the committed primary16-worker build
 in all modes with the unchanged full-catalog dense input, then record effects
 separately. All full Ultimate Doom gates remain active.
+
+Nine committed-source dense repeats now retain all commands/endpoints/audio
+but fail the full numerical pacing gates in every style: active rates30.3–32.8
+tics/sec, display events41.6–47.6/sec. Historical comparisons are unpaired.
+[Native receipt](../results/discovery-slope-native-pacing-20261002.json).
+Separate actual effect recordings preserve all three modes and pass56
+consistency checks, with a failed first recorder and an active20ms Matrix
+loopback-coverage gap retained. [Recording receipt](../results/discovery-slope-effects-live-20261002.json).
+Count reaches10 after Preview.5. Continue focused rendering arithmetic and
+moving-world fidelity work; all full Ultimate Doom gates remain active.

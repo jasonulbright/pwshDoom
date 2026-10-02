@@ -210,3 +210,12 @@ isolated ABBA cycles reduce256-call batch cost about55%, with20,900 angles,
 The [receipt](../results/discovery-slope-production-20261002.json) also retains
 the failed harness and stale E1M3 input. Native pacing still needs a separate
 committed-source measurement; method gains do not establish60 displayed FPS.
+
+That measurement now retains all commands/checkpoints/audio but still fails
+full pacing gates: median active rates32.7/31.2/31.9 tics/sec across
+Classic/Matrix/color art, with42.3/46.8/43.3 display events/sec. The older
+batch is unpaired, so its lower rates do not prove a causal live speedup.
+[Full windows and source/accounting evidence](../results/discovery-slope-native-pacing-20261002.json).
+Current effect recordings retain styles, HUD and pickup/damage behavior;
+the external recorder failure and20ms active Matrix loopback coverage gap
+remain explicit. [Media and acoustic limits](../results/discovery-slope-effects-live-20261002.json).

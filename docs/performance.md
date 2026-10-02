@@ -1472,3 +1472,21 @@ unnecessary stale E1M3 run: all24 actual gameplay hashes equal a preexisting
 unchanged-runtime failure, but its23 historical mismatches remain failures.
 Exclude that run's timings/route outcome. Committed-source live pacing and
 separate effects recordings are next; every full release gate remains open.
+
+The committed build's [nine clean native repeats](../results/discovery-slope-native-pacing-20261002.json)
+now retain all420 commands/two endpoints/audio and fail every full pacing gate.
+Median active tics/sec are32.721 Classic,31.200 Matrix and31.920 color art;
+median display events/sec are42.298,46.756,43.257. P99 tic lateness spans
+813–1869ms. Median run-mean discovery is4.16–4.17ms. Earlier-build median tic
+rates are lower, but the historical batches are unpaired; a causal native
+gain is unqualified. All full windows, source/accounting checks and player
+death remain. Keep primary16 workers and the frozen thresholds.
+
+Separate [three-mode effect recordings](../results/discovery-slope-effects-live-20261002.json)
+pass56 consistency checks and retain style/HUD/pickup/damage behavior in six
+reviewed samples. One failed FFmpeg teardown is retained; fresh actual-effect
+retries use the existing15sec target hold and succeed. Matrix still has20ms
+of uncovered loopback timestamp coverage during gameplay, alongside startup
+and post-game tail gaps. Complete game-side PCM accounting and zero software
+starvation do not prove acoustic continuity. No recording replaces clean
+pacing, full campaign or independent original-binary fidelity evidence.
