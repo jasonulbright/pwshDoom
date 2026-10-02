@@ -1,0 +1,1378 @@
+{
+  "FinishedUtc": "2026-10-02T05:52:03.706526+00:00",
+  "Runs": [
+    {
+      "Cycle": 1,
+      "Position": 1,
+      "Workers": 16,
+      "Commands": 420,
+      "UpdateMs": {
+        "Count": 420,
+        "Mean": 18.08634880952381,
+        "Median": 15.273,
+        "P95": 40.0684,
+        "P99": 61.0233,
+        "Max": 74.9323,
+        "Min": 3.2937
+      },
+      "AutomapDiscoveryMs": {
+        "Count": 420,
+        "Mean": 5.70379119047619,
+        "Median": 5.77885,
+        "P95": 9.9608,
+        "P99": 14.3032,
+        "Max": 22.0798,
+        "Min": 1.6329
+      },
+      "SnapshotMs": {
+        "Count": 420,
+        "Mean": 7.08683,
+        "Median": 6.5840499999999995,
+        "P95": 9.0233,
+        "P99": 15.7822,
+        "Max": 52.4063,
+        "Min": 5.6188
+      },
+      "AudioEnqueueAfterUpdateMs": {
+        "Count": 420,
+        "Mean": 0.5174785714285715,
+        "Median": 0.2863,
+        "P95": 1.1558,
+        "P99": 3.0695,
+        "Max": 20.337,
+        "Min": 0.1622
+      },
+      "PresentationSpanMs": {
+        "Count": 420,
+        "Mean": 12.874073809523809,
+        "Median": 12.7956,
+        "P95": 18.1614,
+        "P99": 27.3564,
+        "Max": 62.4094,
+        "Min": 7.54
+      },
+      "PresentationOutsideDiscoverySnapshotMs": {
+        "Count": 420,
+        "Mean": 0.08345261904761905,
+        "Median": 0.04369999999999896,
+        "P95": 0.05510000000000126,
+        "P99": 0.08360000000000056,
+        "Max": 8.538900000000002,
+        "Min": 0.033199999999999896
+      },
+      "AdjacentUpdateEndCycleMs": {
+        "Count": 419,
+        "Mean": 32.22433890214797,
+        "Median": 29.3094,
+        "P95": 58.3851,
+        "P99": 88.108,
+        "Max": 109.6833,
+        "Min": 11.697
+      },
+      "BetweenPresentationAndNextUpdateExcludingNextMeasuredUpdateMs": {
+        "Count": 419,
+        "Mean": 0.7307365155131265,
+        "Median": 0.2073999999999998,
+        "P95": 0.41799999999999926,
+        "P99": 9.977799999999998,
+        "Max": 62.9335,
+        "Min": 0.15830000000000055
+      },
+      "CommandsSignaledBeforePriorPresentationEnd": 402,
+      "LargestResiduals": [
+        {
+          "Command": 30,
+          "AfterPriorPresentationMs": 62.9335,
+          "NextCommandSignalBeforePriorPresentationEnd": false
+        },
+        {
+          "Command": 14,
+          "AfterPriorPresentationMs": 56.4859,
+          "NextCommandSignalBeforePriorPresentationEnd": false
+        },
+        {
+          "Command": 34,
+          "AfterPriorPresentationMs": 33.115700000000004,
+          "NextCommandSignalBeforePriorPresentationEnd": false
+        },
+        {
+          "Command": 10,
+          "AfterPriorPresentationMs": 11.0345,
+          "NextCommandSignalBeforePriorPresentationEnd": false
+        },
+        {
+          "Command": 51,
+          "AfterPriorPresentationMs": 9.977799999999998,
+          "NextCommandSignalBeforePriorPresentationEnd": false
+        }
+      ],
+      "Files": [
+        {
+          "Path": "local/e3m6-workers-abba-c1-p1-w16-r1-game.json",
+          "Sha256": "7DAE18EB57EAF9B373B2FD21A7C22B235C92EA69BF783B36FE55876B882FED98"
+        }
+      ]
+    },
+    {
+      "Cycle": 1,
+      "Position": 2,
+      "Workers": 8,
+      "Commands": 420,
+      "UpdateMs": {
+        "Count": 420,
+        "Mean": 16.64382714285714,
+        "Median": 14.361,
+        "P95": 33.7035,
+        "P99": 56.4689,
+        "Max": 67.3609,
+        "Min": 3.2312
+      },
+      "AutomapDiscoveryMs": {
+        "Count": 420,
+        "Mean": 5.232168095238095,
+        "Median": 5.4132,
+        "P95": 9.134,
+        "P99": 9.9422,
+        "Max": 21.7808,
+        "Min": 1.7365
+      },
+      "SnapshotMs": {
+        "Count": 420,
+        "Mean": 6.554218571428572,
+        "Median": 6.2688500000000005,
+        "P95": 7.9007,
+        "P99": 8.7752,
+        "Max": 43.832,
+        "Min": 5.5679
+      },
+      "AudioEnqueueAfterUpdateMs": {
+        "Count": 420,
+        "Mean": 0.452965,
+        "Median": 0.2787,
+        "P95": 1.0039,
+        "P99": 2.0387,
+        "Max": 16.0613,
+        "Min": 0.1544
+      },
+      "PresentationSpanMs": {
+        "Count": 420,
+        "Mean": 11.87469261904762,
+        "Median": 11.93005,
+        "P95": 15.6741,
+        "P99": 17.4886,
+        "Max": 51.3817,
+        "Min": 7.5759
+      },
+      "PresentationOutsideDiscoverySnapshotMs": {
+        "Count": 420,
+        "Mean": 0.0883059523809524,
+        "Median": 0.04139999999999988,
+        "P95": 0.05030000000000001,
+        "P99": 0.07460000000000022,
+        "Max": 10.107000000000001,
+        "Min": 0.032099999999999795
+      },
+      "AdjacentUpdateEndCycleMs": {
+        "Count": 419,
+        "Mean": 29.470166348448686,
+        "Median": 27.6835,
+        "P95": 50.1044,
+        "P99": 66.967,
+        "Max": 81.5713,
+        "Min": 12.9855
+      },
+      "BetweenPresentationAndNextUpdateExcludingNextMeasuredUpdateMs": {
+        "Count": 419,
+        "Mean": 0.49569522673031025,
+        "Median": 0.21259999999999835,
+        "P95": 0.31489999999999974,
+        "P99": 9.3241,
+        "Max": 20.5179,
+        "Min": 0.17160000000000153
+      },
+      "CommandsSignaledBeforePriorPresentationEnd": 407,
+      "LargestResiduals": [
+        {
+          "Command": 45,
+          "AfterPriorPresentationMs": 20.5179,
+          "NextCommandSignalBeforePriorPresentationEnd": false
+        },
+        {
+          "Command": 238,
+          "AfterPriorPresentationMs": 19.083000000000002,
+          "NextCommandSignalBeforePriorPresentationEnd": false
+        },
+        {
+          "Command": 34,
+          "AfterPriorPresentationMs": 17.4307,
+          "NextCommandSignalBeforePriorPresentationEnd": false
+        },
+        {
+          "Command": 234,
+          "AfterPriorPresentationMs": 11.238299999999999,
+          "NextCommandSignalBeforePriorPresentationEnd": false
+        },
+        {
+          "Command": 235,
+          "AfterPriorPresentationMs": 9.3241,
+          "NextCommandSignalBeforePriorPresentationEnd": false
+        }
+      ],
+      "Files": [
+        {
+          "Path": "local/e3m6-workers-abba-c1-p2-w8-r1-game.json",
+          "Sha256": "F8318DF238B626D5EADB7C3C9FF095E659C8B1C4D2D0CB6048F51C3F5C1E0CBF"
+        }
+      ]
+    },
+    {
+      "Cycle": 1,
+      "Position": 3,
+      "Workers": 8,
+      "Commands": 420,
+      "UpdateMs": {
+        "Count": 420,
+        "Mean": 16.85732761904762,
+        "Median": 14.24285,
+        "P95": 35.9345,
+        "P99": 55.8515,
+        "Max": 65.0215,
+        "Min": 3.1393
+      },
+      "AutomapDiscoveryMs": {
+        "Count": 420,
+        "Mean": 5.337171428571429,
+        "Median": 5.597799999999999,
+        "P95": 9.1797,
+        "P99": 10.2606,
+        "Max": 20.0394,
+        "Min": 1.8255
+      },
+      "SnapshotMs": {
+        "Count": 420,
+        "Mean": 6.712485,
+        "Median": 6.3243,
+        "P95": 8.5503,
+        "P99": 10.6557,
+        "Max": 39.8784,
+        "Min": 5.5917
+      },
+      "AudioEnqueueAfterUpdateMs": {
+        "Count": 420,
+        "Mean": 0.45735619047619047,
+        "Median": 0.27690000000000003,
+        "P95": 1.1042,
+        "P99": 3.072,
+        "Max": 15.6303,
+        "Min": 0.1672
+      },
+      "PresentationSpanMs": {
+        "Count": 420,
+        "Mean": 12.142806666666667,
+        "Median": 12.18835,
+        "P95": 16.3183,
+        "P99": 20.1414,
+        "Max": 47.1374,
+        "Min": 7.7114
+      },
+      "PresentationOutsideDiscoverySnapshotMs": {
+        "Count": 420,
+        "Mean": 0.09315023809523808,
+        "Median": 0.04100000000000037,
+        "P95": 0.05230000000000068,
+        "P99": 0.2862,
+        "Max": 10.042300000000001,
+        "Min": 0.03300000000000036
+      },
+      "AdjacentUpdateEndCycleMs": {
+        "Count": 419,
+        "Mean": 29.90245369928401,
+        "Median": 27.6588,
+        "P95": 51.2178,
+        "P99": 67.7803,
+        "Max": 80.0042,
+        "Min": 12.0421
+      },
+      "BetweenPresentationAndNextUpdateExcludingNextMeasuredUpdateMs": {
+        "Count": 419,
+        "Mean": 0.4423305489260144,
+        "Median": 0.1943999999999999,
+        "P95": 0.27619999999999933,
+        "P99": 9.6658,
+        "Max": 19.4568,
+        "Min": 0.15830000000000055
+      },
+      "CommandsSignaledBeforePriorPresentationEnd": 406,
+      "LargestResiduals": [
+        {
+          "Command": 238,
+          "AfterPriorPresentationMs": 19.4568,
+          "NextCommandSignalBeforePriorPresentationEnd": false
+        },
+        {
+          "Command": 56,
+          "AfterPriorPresentationMs": 16.1678,
+          "NextCommandSignalBeforePriorPresentationEnd": false
+        },
+        {
+          "Command": 228,
+          "AfterPriorPresentationMs": 12.656300000000002,
+          "NextCommandSignalBeforePriorPresentationEnd": false
+        },
+        {
+          "Command": 234,
+          "AfterPriorPresentationMs": 12.368300000000001,
+          "NextCommandSignalBeforePriorPresentationEnd": false
+        },
+        {
+          "Command": 318,
+          "AfterPriorPresentationMs": 9.6658,
+          "NextCommandSignalBeforePriorPresentationEnd": false
+        }
+      ],
+      "Files": [
+        {
+          "Path": "local/e3m6-workers-abba-c1-p3-w8-r1-game.json",
+          "Sha256": "0932C382C38FAC224384BC5B920B22BCE50E37E65B4E7789CA09677BC43D2287"
+        }
+      ]
+    },
+    {
+      "Cycle": 1,
+      "Position": 4,
+      "Workers": 16,
+      "Commands": 420,
+      "UpdateMs": {
+        "Count": 420,
+        "Mean": 18.628452380952382,
+        "Median": 15.7984,
+        "P95": 39.5302,
+        "P99": 60.9158,
+        "Max": 75.5262,
+        "Min": 3.2741
+      },
+      "AutomapDiscoveryMs": {
+        "Count": 420,
+        "Mean": 6.018857142857143,
+        "Median": 5.91185,
+        "P95": 10.6648,
+        "P99": 20.6488,
+        "Max": 29.1833,
+        "Min": 1.7638
+      },
+      "SnapshotMs": {
+        "Count": 420,
+        "Mean": 7.413432142857143,
+        "Median": 6.6936,
+        "P95": 10.1482,
+        "P99": 18.8831,
+        "Max": 59.323,
+        "Min": 5.7205
+      },
+      "AudioEnqueueAfterUpdateMs": {
+        "Count": 420,
+        "Mean": 0.5356378571428572,
+        "Median": 0.30974999999999997,
+        "P95": 1.1601,
+        "P99": 3.2609,
+        "Max": 20.9479,
+        "Min": 0.178
+      },
+      "PresentationSpanMs": {
+        "Count": 420,
+        "Mean": 13.533793809523809,
+        "Median": 12.98935,
+        "P95": 21.2747,
+        "P99": 31.2288,
+        "Max": 76.0103,
+        "Min": 7.5671
+      },
+      "PresentationOutsideDiscoverySnapshotMs": {
+        "Count": 420,
+        "Mean": 0.10150452380952375,
+        "Median": 0.045399999999999885,
+        "P95": 0.05480000000000107,
+        "P99": 0.181499999999998,
+        "Max": 9.432799999999997,
+        "Min": 0.03489999999999949
+      },
+      "AdjacentUpdateEndCycleMs": {
+        "Count": 419,
+        "Mean": 33.40098281622912,
+        "Median": 30.327,
+        "P95": 56.5873,
+        "P99": 71.9163,
+        "Max": 154.9221,
+        "Min": 12.619
+      },
+      "BetweenPresentationAndNextUpdateExcludingNextMeasuredUpdateMs": {
+        "Count": 419,
+        "Mean": 0.6954315035799522,
+        "Median": 0.2203999999999997,
+        "P95": 0.7777999999999992,
+        "P99": 12.3568,
+        "Max": 89.0352,
+        "Min": 0.1766999999999994
+      },
+      "CommandsSignaledBeforePriorPresentationEnd": 400,
+      "LargestResiduals": [
+        {
+          "Command": 32,
+          "AfterPriorPresentationMs": 89.0352,
+          "NextCommandSignalBeforePriorPresentationEnd": false
+        },
+        {
+          "Command": 52,
+          "AfterPriorPresentationMs": 14.9314,
+          "NextCommandSignalBeforePriorPresentationEnd": false
+        },
+        {
+          "Command": 24,
+          "AfterPriorPresentationMs": 14.0507,
+          "NextCommandSignalBeforePriorPresentationEnd": true
+        },
+        {
+          "Command": 13,
+          "AfterPriorPresentationMs": 13.542000000000002,
+          "NextCommandSignalBeforePriorPresentationEnd": false
+        },
+        {
+          "Command": 45,
+          "AfterPriorPresentationMs": 12.3568,
+          "NextCommandSignalBeforePriorPresentationEnd": false
+        }
+      ],
+      "Files": [
+        {
+          "Path": "local/e3m6-workers-abba-c1-p4-w16-r1-game.json",
+          "Sha256": "2CE7C3448FD84C0F6F838CEF53EF6209E0AF0B03E99705607D32EA6B8D5A5B54"
+        }
+      ]
+    },
+    {
+      "Cycle": 2,
+      "Position": 1,
+      "Workers": 16,
+      "Commands": 420,
+      "UpdateMs": {
+        "Count": 420,
+        "Mean": 18.467157142857143,
+        "Median": 15.73345,
+        "P95": 39.6587,
+        "P99": 55.017,
+        "Max": 71.6231,
+        "Min": 3.6598
+      },
+      "AutomapDiscoveryMs": {
+        "Count": 420,
+        "Mean": 6.021240238095238,
+        "Median": 6.01815,
+        "P95": 10.7823,
+        "P99": 19.2263,
+        "Max": 25.6606,
+        "Min": 1.6886
+      },
+      "SnapshotMs": {
+        "Count": 420,
+        "Mean": 9.76074880952381,
+        "Median": 9.4665,
+        "P95": 11.7721,
+        "P99": 17.9176,
+        "Max": 57.1808,
+        "Min": 5.8365
+      },
+      "AudioEnqueueAfterUpdateMs": {
+        "Count": 420,
+        "Mean": 0.5423088095238096,
+        "Median": 0.32935000000000003,
+        "P95": 1.0823,
+        "P99": 3.6008,
+        "Max": 16.5309,
+        "Min": 0.2056
+      },
+      "PresentationSpanMs": {
+        "Count": 420,
+        "Mean": 15.889362857142856,
+        "Median": 15.5521,
+        "P95": 20.7349,
+        "P99": 26.9248,
+        "Max": 82.901,
+        "Min": 9.4344
+      },
+      "PresentationOutsideDiscoverySnapshotMs": {
+        "Count": 420,
+        "Mean": 0.10737380952380944,
+        "Median": 0.06319999999999926,
+        "P95": 0.07419999999999938,
+        "P99": 0.19329999999999892,
+        "Max": 10.265000000000002,
+        "Min": 0.038000000000001144
+      },
+      "AdjacentUpdateEndCycleMs": {
+        "Count": 419,
+        "Mean": 35.717593556085916,
+        "Median": 32.5619,
+        "P95": 59.0048,
+        "P99": 87.6784,
+        "Max": 166.1617,
+        "Min": 16.0454
+      },
+      "BetweenPresentationAndNextUpdateExcludingNextMeasuredUpdateMs": {
+        "Count": 419,
+        "Mean": 0.8065279236276851,
+        "Median": 0.21889999999999787,
+        "P95": 0.3855000000000004,
+        "P99": 13.8888,
+        "Max": 97.50800000000001,
+        "Min": 0.18559999999999732
+      },
+      "CommandsSignaledBeforePriorPresentationEnd": 403,
+      "LargestResiduals": [
+        {
+          "Command": 32,
+          "AfterPriorPresentationMs": 97.50800000000001,
+          "NextCommandSignalBeforePriorPresentationEnd": false
+        },
+        {
+          "Command": 13,
+          "AfterPriorPresentationMs": 32.9431,
+          "NextCommandSignalBeforePriorPresentationEnd": false
+        },
+        {
+          "Command": 37,
+          "AfterPriorPresentationMs": 20.9977,
+          "NextCommandSignalBeforePriorPresentationEnd": false
+        },
+        {
+          "Command": 15,
+          "AfterPriorPresentationMs": 15.9413,
+          "NextCommandSignalBeforePriorPresentationEnd": false
+        },
+        {
+          "Command": 39,
+          "AfterPriorPresentationMs": 13.8888,
+          "NextCommandSignalBeforePriorPresentationEnd": false
+        }
+      ],
+      "Files": [
+        {
+          "Path": "local/e3m6-workers-abba-c2-p1-w16-r1-game.json",
+          "Sha256": "C5A9D125FB47E5C16704E998D6BF348EF7A02107FE11A0D6CCAFB2D0A41577EC"
+        }
+      ]
+    },
+    {
+      "Cycle": 2,
+      "Position": 2,
+      "Workers": 8,
+      "Commands": 420,
+      "UpdateMs": {
+        "Count": 420,
+        "Mean": 17.78387142857143,
+        "Median": 14.85735,
+        "P95": 37.3096,
+        "P99": 60.0299,
+        "Max": 66.031,
+        "Min": 3.2381
+      },
+      "AutomapDiscoveryMs": {
+        "Count": 420,
+        "Mean": 5.514753571428572,
+        "Median": 5.53115,
+        "P95": 9.5065,
+        "P99": 10.6427,
+        "Max": 22.3525,
+        "Min": 1.7432
+      },
+      "SnapshotMs": {
+        "Count": 420,
+        "Mean": 6.72758880952381,
+        "Median": 6.5081500000000005,
+        "P95": 8.1973,
+        "P99": 9.0048,
+        "Max": 44.8439,
+        "Min": 5.5267
+      },
+      "AudioEnqueueAfterUpdateMs": {
+        "Count": 420,
+        "Mean": 0.45561619047619045,
+        "Median": 0.28845,
+        "P95": 0.926,
+        "P99": 2.2631,
+        "Max": 15.6735,
+        "Min": 0.1687
+      },
+      "PresentationSpanMs": {
+        "Count": 420,
+        "Mean": 12.321165238095238,
+        "Median": 12.244800000000001,
+        "P95": 16.2973,
+        "P99": 18.4586,
+        "Max": 53.8533,
+        "Min": 7.434
+      },
+      "PresentationOutsideDiscoverySnapshotMs": {
+        "Count": 420,
+        "Mean": 0.07882285714285713,
+        "Median": 0.04284999999999917,
+        "P95": 0.05339999999999989,
+        "P99": 0.15850000000000009,
+        "Max": 7.234399999999998,
+        "Min": 0.03289999999999971
+      },
+      "AdjacentUpdateEndCycleMs": {
+        "Count": 419,
+        "Mean": 30.87642649164678,
+        "Median": 28.5485,
+        "P95": 53.5771,
+        "P99": 71.4502,
+        "Max": 84.1941,
+        "Min": 11.3212
+      },
+      "BetweenPresentationAndNextUpdateExcludingNextMeasuredUpdateMs": {
+        "Count": 419,
+        "Mean": 0.2970837708830549,
+        "Median": 0.21080000000000076,
+        "P95": 0.2897999999999996,
+        "P99": 1.1052999999999997,
+        "Max": 25.144599999999997,
+        "Min": 0.1756000000000002
+      },
+      "CommandsSignaledBeforePriorPresentationEnd": 418,
+      "LargestResiduals": [
+        {
+          "Command": 34,
+          "AfterPriorPresentationMs": 25.144599999999997,
+          "NextCommandSignalBeforePriorPresentationEnd": false
+        },
+        {
+          "Command": 10,
+          "AfterPriorPresentationMs": 1.9140999999999995,
+          "NextCommandSignalBeforePriorPresentationEnd": true
+        },
+        {
+          "Command": 197,
+          "AfterPriorPresentationMs": 1.6405000000000012,
+          "NextCommandSignalBeforePriorPresentationEnd": true
+        },
+        {
+          "Command": 32,
+          "AfterPriorPresentationMs": 1.4247999999999976,
+          "NextCommandSignalBeforePriorPresentationEnd": true
+        },
+        {
+          "Command": 125,
+          "AfterPriorPresentationMs": 1.1052999999999997,
+          "NextCommandSignalBeforePriorPresentationEnd": true
+        }
+      ],
+      "Files": [
+        {
+          "Path": "local/e3m6-workers-abba-c2-p2-w8-r1-game.json",
+          "Sha256": "A0CDBDA9E86B0045B00BD4A1C0225DB3893EB746C696F464E1F9196F84D4900F"
+        }
+      ]
+    },
+    {
+      "Cycle": 2,
+      "Position": 3,
+      "Workers": 8,
+      "Commands": 420,
+      "UpdateMs": {
+        "Count": 420,
+        "Mean": 16.60135261904762,
+        "Median": 14.2215,
+        "P95": 34.978,
+        "P99": 52.0238,
+        "Max": 64.5029,
+        "Min": 3.2392
+      },
+      "AutomapDiscoveryMs": {
+        "Count": 420,
+        "Mean": 5.353283095238095,
+        "Median": 5.46815,
+        "P95": 9.1908,
+        "P99": 11.0676,
+        "Max": 20.0155,
+        "Min": 1.6656
+      },
+      "SnapshotMs": {
+        "Count": 420,
+        "Mean": 6.693191428571429,
+        "Median": 6.3252,
+        "P95": 8.4614,
+        "P99": 10.0442,
+        "Max": 44.6045,
+        "Min": 5.5901
+      },
+      "AudioEnqueueAfterUpdateMs": {
+        "Count": 420,
+        "Mean": 0.4625033333333333,
+        "Median": 0.28900000000000003,
+        "P95": 0.9092,
+        "P99": 1.8183,
+        "Max": 16.7274,
+        "Min": 0.1669
+      },
+      "PresentationSpanMs": {
+        "Count": 420,
+        "Mean": 12.119808809523809,
+        "Median": 12.14095,
+        "P95": 16.088,
+        "P99": 20.729,
+        "Max": 53.2791,
+        "Min": 7.6099
+      },
+      "PresentationOutsideDiscoverySnapshotMs": {
+        "Count": 420,
+        "Mean": 0.07333428571428571,
+        "Median": 0.04190000000000049,
+        "P95": 0.053500000000001435,
+        "P99": 0.07570000000000121,
+        "Max": 5.609900000000002,
+        "Min": 0.03390000000000093
+      },
+      "AdjacentUpdateEndCycleMs": {
+        "Count": 419,
+        "Mean": 29.54722124105012,
+        "Median": 27.8013,
+        "P95": 50.7656,
+        "P99": 67.9333,
+        "Max": 85.6997,
+        "Min": 12.3424
+      },
+      "BetweenPresentationAndNextUpdateExcludingNextMeasuredUpdateMs": {
+        "Count": 419,
+        "Mean": 0.3502725536992841,
+        "Median": 0.1990999999999996,
+        "P95": 0.31680000000000064,
+        "P99": 4.642799999999999,
+        "Max": 12.339499999999997,
+        "Min": 0.16570000000000018
+      },
+      "CommandsSignaledBeforePriorPresentationEnd": 410,
+      "LargestResiduals": [
+        {
+          "Command": 17,
+          "AfterPriorPresentationMs": 12.339499999999997,
+          "NextCommandSignalBeforePriorPresentationEnd": false
+        },
+        {
+          "Command": 34,
+          "AfterPriorPresentationMs": 11.5624,
+          "NextCommandSignalBeforePriorPresentationEnd": false
+        },
+        {
+          "Command": 60,
+          "AfterPriorPresentationMs": 10.466300000000004,
+          "NextCommandSignalBeforePriorPresentationEnd": false
+        },
+        {
+          "Command": 25,
+          "AfterPriorPresentationMs": 7.642600000000002,
+          "NextCommandSignalBeforePriorPresentationEnd": false
+        },
+        {
+          "Command": 55,
+          "AfterPriorPresentationMs": 4.642799999999999,
+          "NextCommandSignalBeforePriorPresentationEnd": false
+        }
+      ],
+      "Files": [
+        {
+          "Path": "local/e3m6-workers-abba-c2-p3-w8-r1-game.json",
+          "Sha256": "CB6C3AFE77905C4CDDB388D8C3C057333BEDDD6D17D5D2EBCA69BB698C71D40C"
+        }
+      ]
+    },
+    {
+      "Cycle": 2,
+      "Position": 4,
+      "Workers": 16,
+      "Commands": 420,
+      "UpdateMs": {
+        "Count": 420,
+        "Mean": 18.471552619047618,
+        "Median": 15.718599999999999,
+        "P95": 37.7672,
+        "P99": 58.0621,
+        "Max": 89.5443,
+        "Min": 3.2358
+      },
+      "AutomapDiscoveryMs": {
+        "Count": 420,
+        "Mean": 5.885890476190476,
+        "Median": 5.8933,
+        "P95": 10.1025,
+        "P99": 16.768,
+        "Max": 27.0036,
+        "Min": 1.6584
+      },
+      "SnapshotMs": {
+        "Count": 420,
+        "Mean": 7.091468571428571,
+        "Median": 6.590949999999999,
+        "P95": 9.4556,
+        "P99": 16.0832,
+        "Max": 48.2665,
+        "Min": 5.642
+      },
+      "AudioEnqueueAfterUpdateMs": {
+        "Count": 420,
+        "Mean": 0.5478695238095238,
+        "Median": 0.29905,
+        "P95": 1.1423,
+        "P99": 7.4059,
+        "Max": 17.0694,
+        "Min": 0.1694
+      },
+      "PresentationSpanMs": {
+        "Count": 420,
+        "Mean": 13.068345,
+        "Median": 12.8159,
+        "P95": 17.905,
+        "P99": 28.5053,
+        "Max": 55.4392,
+        "Min": 7.8319
+      },
+      "PresentationOutsideDiscoverySnapshotMs": {
+        "Count": 420,
+        "Mean": 0.09098595238095232,
+        "Median": 0.0456499999999993,
+        "P95": 0.05820000000000025,
+        "P99": 0.10609999999999964,
+        "Max": 8.4911,
+        "Min": 0.03229999999999933
+      },
+      "AdjacentUpdateEndCycleMs": {
+        "Count": 419,
+        "Mean": 33.026447732696894,
+        "Median": 30.3583,
+        "P95": 57.8107,
+        "P99": 84.1226,
+        "Max": 108.0172,
+        "Min": 11.749
+      },
+      "BetweenPresentationAndNextUpdateExcludingNextMeasuredUpdateMs": {
+        "Count": 419,
+        "Mean": 0.9240045346062054,
+        "Median": 0.21480000000000032,
+        "P95": 1.4593999999999987,
+        "P99": 21.628100000000003,
+        "Max": 82.0766,
+        "Min": 0.1747999999999994
+      },
+      "CommandsSignaledBeforePriorPresentationEnd": 398,
+      "LargestResiduals": [
+        {
+          "Command": 33,
+          "AfterPriorPresentationMs": 82.0766,
+          "NextCommandSignalBeforePriorPresentationEnd": false
+        },
+        {
+          "Command": 15,
+          "AfterPriorPresentationMs": 35.59440000000001,
+          "NextCommandSignalBeforePriorPresentationEnd": false
+        },
+        {
+          "Command": 48,
+          "AfterPriorPresentationMs": 34.3254,
+          "NextCommandSignalBeforePriorPresentationEnd": false
+        },
+        {
+          "Command": 13,
+          "AfterPriorPresentationMs": 21.919800000000002,
+          "NextCommandSignalBeforePriorPresentationEnd": false
+        },
+        {
+          "Command": 39,
+          "AfterPriorPresentationMs": 21.628100000000003,
+          "NextCommandSignalBeforePriorPresentationEnd": false
+        }
+      ],
+      "Files": [
+        {
+          "Path": "local/e3m6-workers-abba-c2-p4-w16-r1-game.json",
+          "Sha256": "4F88B8BDE497840E68FBE27644FD32E0B4B839B4CEF24A105F4645AE5A9E060E"
+        }
+      ]
+    },
+    {
+      "Cycle": 3,
+      "Position": 1,
+      "Workers": 16,
+      "Commands": 420,
+      "UpdateMs": {
+        "Count": 420,
+        "Mean": 18.94084380952381,
+        "Median": 15.5251,
+        "P95": 42.3704,
+        "P99": 59.5893,
+        "Max": 83.2532,
+        "Min": 3.1725
+      },
+      "AutomapDiscoveryMs": {
+        "Count": 420,
+        "Mean": 5.929654047619048,
+        "Median": 6.18665,
+        "P95": 10.6603,
+        "P99": 16.7868,
+        "Max": 24.5906,
+        "Min": 1.6441
+      },
+      "SnapshotMs": {
+        "Count": 420,
+        "Mean": 7.688150952380952,
+        "Median": 7.198,
+        "P95": 10.4518,
+        "P99": 16.7276,
+        "Max": 48.4709,
+        "Min": 5.5833
+      },
+      "AudioEnqueueAfterUpdateMs": {
+        "Count": 420,
+        "Mean": 0.5239566666666666,
+        "Median": 0.29095,
+        "P95": 1.1115,
+        "P99": 3.0662,
+        "Max": 21.3842,
+        "Min": 0.1656
+      },
+      "PresentationSpanMs": {
+        "Count": 420,
+        "Mean": 13.69929761904762,
+        "Median": 13.668700000000001,
+        "P95": 18.4266,
+        "P99": 27.8919,
+        "Max": 56.5344,
+        "Min": 7.8679
+      },
+      "PresentationOutsideDiscoverySnapshotMs": {
+        "Count": 420,
+        "Mean": 0.08149261904761904,
+        "Median": 0.044549999999999645,
+        "P95": 0.05689999999999884,
+        "P99": 0.10309999999999953,
+        "Max": 6.910699999999999,
+        "Min": 0.03329999999999966
+      },
+      "AdjacentUpdateEndCycleMs": {
+        "Count": 419,
+        "Mean": 34.05220071599045,
+        "Median": 30.2823,
+        "P95": 60.4607,
+        "P99": 81.9612,
+        "Max": 132.0136,
+        "Min": 13.1462
+      },
+      "BetweenPresentationAndNextUpdateExcludingNextMeasuredUpdateMs": {
+        "Count": 419,
+        "Mean": 0.8731622911694511,
+        "Median": 0.2110000000000003,
+        "P95": 0.6622000000000003,
+        "P99": 13.393,
+        "Max": 98.53869999999999,
+        "Min": 0.16900000000000048
+      },
+      "CommandsSignaledBeforePriorPresentationEnd": 401,
+      "LargestResiduals": [
+        {
+          "Command": 30,
+          "AfterPriorPresentationMs": 98.53869999999999,
+          "NextCommandSignalBeforePriorPresentationEnd": false
+        },
+        {
+          "Command": 13,
+          "AfterPriorPresentationMs": 45.8136,
+          "NextCommandSignalBeforePriorPresentationEnd": false
+        },
+        {
+          "Command": 40,
+          "AfterPriorPresentationMs": 22.969199999999997,
+          "NextCommandSignalBeforePriorPresentationEnd": false
+        },
+        {
+          "Command": 51,
+          "AfterPriorPresentationMs": 17.517799999999998,
+          "NextCommandSignalBeforePriorPresentationEnd": false
+        },
+        {
+          "Command": 4,
+          "AfterPriorPresentationMs": 13.393,
+          "NextCommandSignalBeforePriorPresentationEnd": false
+        }
+      ],
+      "Files": [
+        {
+          "Path": "local/e3m6-workers-abba-c3-p1-w16-r1-game.json",
+          "Sha256": "AAD9EFE065816A7761A456401D35F52BF59CC42DA5255B54367FEC6EB1C98FE9"
+        }
+      ]
+    },
+    {
+      "Cycle": 3,
+      "Position": 2,
+      "Workers": 8,
+      "Commands": 420,
+      "UpdateMs": {
+        "Count": 420,
+        "Mean": 16.69124976190476,
+        "Median": 14.35155,
+        "P95": 37.2513,
+        "P99": 57.9983,
+        "Max": 69.7928,
+        "Min": 3.4935
+      },
+      "AutomapDiscoveryMs": {
+        "Count": 420,
+        "Mean": 5.399865952380952,
+        "Median": 5.50125,
+        "P95": 9.3185,
+        "P99": 10.6271,
+        "Max": 20.0876,
+        "Min": 1.6396
+      },
+      "SnapshotMs": {
+        "Count": 420,
+        "Mean": 6.674133571428571,
+        "Median": 6.37425,
+        "P95": 8.136,
+        "P99": 8.9919,
+        "Max": 44.5719,
+        "Min": 5.6351
+      },
+      "AudioEnqueueAfterUpdateMs": {
+        "Count": 420,
+        "Mean": 0.4514909523809524,
+        "Median": 0.28735,
+        "P95": 0.9215,
+        "P99": 2.3836,
+        "Max": 14.8158,
+        "Min": 0.1548
+      },
+      "PresentationSpanMs": {
+        "Count": 420,
+        "Mean": 12.16464619047619,
+        "Median": 12.11845,
+        "P95": 16.1446,
+        "P99": 19.4083,
+        "Max": 51.1568,
+        "Min": 7.8242
+      },
+      "PresentationOutsideDiscoverySnapshotMs": {
+        "Count": 420,
+        "Mean": 0.09064666666666671,
+        "Median": 0.04209999999999958,
+        "P95": 0.052499999999999325,
+        "P99": 0.1512000000000011,
+        "Max": 9.590100000000001,
+        "Min": 0.03330000000000055
+      },
+      "AdjacentUpdateEndCycleMs": {
+        "Count": 419,
+        "Mean": 29.566821957040574,
+        "Median": 27.7161,
+        "P95": 51.0043,
+        "P99": 69.5945,
+        "Max": 84.1164,
+        "Min": 12.6301
+      },
+      "BetweenPresentationAndNextUpdateExcludingNextMeasuredUpdateMs": {
+        "Count": 419,
+        "Mean": 0.24793126491646772,
+        "Median": 0.20979999999999954,
+        "P95": 0.2900000000000009,
+        "P99": 0.7932000000000006,
+        "Max": 6.032899999999998,
+        "Min": 0.15909999999999513
+      },
+      "CommandsSignaledBeforePriorPresentationEnd": 417,
+      "LargestResiduals": [
+        {
+          "Command": 34,
+          "AfterPriorPresentationMs": 6.032899999999998,
+          "NextCommandSignalBeforePriorPresentationEnd": false
+        },
+        {
+          "Command": 416,
+          "AfterPriorPresentationMs": 2.1492000000000004,
+          "NextCommandSignalBeforePriorPresentationEnd": true
+        },
+        {
+          "Command": 32,
+          "AfterPriorPresentationMs": 2.090699999999991,
+          "NextCommandSignalBeforePriorPresentationEnd": true
+        },
+        {
+          "Command": 298,
+          "AfterPriorPresentationMs": 1.3757999999999981,
+          "NextCommandSignalBeforePriorPresentationEnd": true
+        },
+        {
+          "Command": 43,
+          "AfterPriorPresentationMs": 0.7932000000000006,
+          "NextCommandSignalBeforePriorPresentationEnd": true
+        }
+      ],
+      "Files": [
+        {
+          "Path": "local/e3m6-workers-abba-c3-p2-w8-r1-game.json",
+          "Sha256": "9244039B4DC72E4B91A139700DD59B44C4383C1C33930C85A0008CA7DCE7C8E7"
+        }
+      ]
+    },
+    {
+      "Cycle": 3,
+      "Position": 3,
+      "Workers": 8,
+      "Commands": 420,
+      "UpdateMs": {
+        "Count": 420,
+        "Mean": 17.021806428571427,
+        "Median": 14.582249999999998,
+        "P95": 34.4149,
+        "P99": 55.2797,
+        "Max": 66.8527,
+        "Min": 3.1714
+      },
+      "AutomapDiscoveryMs": {
+        "Count": 420,
+        "Mean": 5.398964047619048,
+        "Median": 5.5861,
+        "P95": 9.1642,
+        "P99": 10.6237,
+        "Max": 20.063,
+        "Min": 1.6516
+      },
+      "SnapshotMs": {
+        "Count": 420,
+        "Mean": 6.7474130952380955,
+        "Median": 6.45815,
+        "P95": 8.1471,
+        "P99": 9.6348,
+        "Max": 44.8644,
+        "Min": 5.6205
+      },
+      "AudioEnqueueAfterUpdateMs": {
+        "Count": 420,
+        "Mean": 0.4546342857142857,
+        "Median": 0.29075,
+        "P95": 0.934,
+        "P99": 1.9558,
+        "Max": 16.2688,
+        "Min": 0.1663
+      },
+      "PresentationSpanMs": {
+        "Count": 420,
+        "Mean": 12.220498571428571,
+        "Median": 12.24085,
+        "P95": 16.2498,
+        "P99": 19.986,
+        "Max": 52.2475,
+        "Min": 7.491
+      },
+      "PresentationOutsideDiscoverySnapshotMs": {
+        "Count": 420,
+        "Mean": 0.07412142857142856,
+        "Median": 0.04299999999999926,
+        "P95": 0.0522999999999989,
+        "P99": 0.09049999999999958,
+        "Max": 5.855700000000002,
+        "Min": 0.03489999999999949
+      },
+      "AdjacentUpdateEndCycleMs": {
+        "Count": 419,
+        "Mean": 29.99514797136038,
+        "Median": 27.9859,
+        "P95": 51.3421,
+        "P99": 68.1396,
+        "Max": 82.2497,
+        "Min": 11.542
+      },
+      "BetweenPresentationAndNextUpdateExcludingNextMeasuredUpdateMs": {
+        "Count": 419,
+        "Mean": 0.27863126491646784,
+        "Median": 0.2029999999999994,
+        "P95": 0.2840000000000007,
+        "P99": 0.856300000000001,
+        "Max": 9.811699999999998,
+        "Min": 0.17099999999999937
+      },
+      "CommandsSignaledBeforePriorPresentationEnd": 414,
+      "LargestResiduals": [
+        {
+          "Command": 69,
+          "AfterPriorPresentationMs": 9.811699999999998,
+          "NextCommandSignalBeforePriorPresentationEnd": false
+        },
+        {
+          "Command": 65,
+          "AfterPriorPresentationMs": 8.890100000000004,
+          "NextCommandSignalBeforePriorPresentationEnd": false
+        },
+        {
+          "Command": 4,
+          "AfterPriorPresentationMs": 4.519399999999999,
+          "NextCommandSignalBeforePriorPresentationEnd": false
+        },
+        {
+          "Command": 62,
+          "AfterPriorPresentationMs": 3.4784999999999986,
+          "NextCommandSignalBeforePriorPresentationEnd": false
+        },
+        {
+          "Command": 26,
+          "AfterPriorPresentationMs": 0.856300000000001,
+          "NextCommandSignalBeforePriorPresentationEnd": false
+        }
+      ],
+      "Files": [
+        {
+          "Path": "local/e3m6-workers-abba-c3-p3-w8-r1-game.json",
+          "Sha256": "6C058AE7FBD42144737E0B453E3A2F56CE51184D030BD50E2667FEA554F153C2"
+        }
+      ]
+    },
+    {
+      "Cycle": 3,
+      "Position": 4,
+      "Workers": 16,
+      "Commands": 420,
+      "UpdateMs": {
+        "Count": 420,
+        "Mean": 18.22452380952381,
+        "Median": 15.847249999999999,
+        "P95": 35.9771,
+        "P99": 57.8894,
+        "Max": 83.043,
+        "Min": 3.1908
+      },
+      "AutomapDiscoveryMs": {
+        "Count": 420,
+        "Mean": 5.867602142857143,
+        "Median": 5.693,
+        "P95": 10.7616,
+        "P99": 21.0451,
+        "Max": 34.5147,
+        "Min": 1.6992
+      },
+      "SnapshotMs": {
+        "Count": 420,
+        "Mean": 7.202682857142857,
+        "Median": 6.7315000000000005,
+        "P95": 10.1383,
+        "P99": 12.5028,
+        "Max": 46.4739,
+        "Min": 5.6829
+      },
+      "AudioEnqueueAfterUpdateMs": {
+        "Count": 420,
+        "Mean": 0.47078857142857145,
+        "Median": 0.28945,
+        "P95": 1.0939,
+        "P99": 1.9842,
+        "Max": 18.6602,
+        "Min": 0.1576
+      },
+      "PresentationSpanMs": {
+        "Count": 420,
+        "Mean": 13.170448095238095,
+        "Median": 12.65205,
+        "P95": 19.2587,
+        "P99": 28.6392,
+        "Max": 54.0082,
+        "Min": 7.8119
+      },
+      "PresentationOutsideDiscoverySnapshotMs": {
+        "Count": 420,
+        "Mean": 0.10016309523809526,
+        "Median": 0.046200000000000685,
+        "P95": 0.057599999999998985,
+        "P99": 0.2314999999999996,
+        "Max": 8.618599999999999,
+        "Min": 0.03620000000000001
+      },
+      "AdjacentUpdateEndCycleMs": {
+        "Count": 419,
+        "Mean": 32.73829331742243,
+        "Median": 30.074,
+        "P95": 57.2952,
+        "P99": 80.0713,
+        "Max": 119.453,
+        "Min": 13.4084
+      },
+      "BetweenPresentationAndNextUpdateExcludingNextMeasuredUpdateMs": {
+        "Count": 419,
+        "Mean": 0.8513930787589499,
+        "Median": 0.21669999999999945,
+        "P95": 0.49599999999999866,
+        "P99": 16.344,
+        "Max": 92.19869999999999,
+        "Min": 0.18529999999999802
+      },
+      "CommandsSignaledBeforePriorPresentationEnd": 400,
+      "LargestResiduals": [
+        {
+          "Command": 30,
+          "AfterPriorPresentationMs": 92.19869999999999,
+          "NextCommandSignalBeforePriorPresentationEnd": false
+        },
+        {
+          "Command": 51,
+          "AfterPriorPresentationMs": 42.086,
+          "NextCommandSignalBeforePriorPresentationEnd": false
+        },
+        {
+          "Command": 15,
+          "AfterPriorPresentationMs": 24.3776,
+          "NextCommandSignalBeforePriorPresentationEnd": false
+        },
+        {
+          "Command": 4,
+          "AfterPriorPresentationMs": 23.7622,
+          "NextCommandSignalBeforePriorPresentationEnd": false
+        },
+        {
+          "Command": 53,
+          "AfterPriorPresentationMs": 16.344,
+          "NextCommandSignalBeforePriorPresentationEnd": false
+        }
+      ],
+      "Files": [
+        {
+          "Path": "local/e3m6-workers-abba-c3-p4-w16-r1-game.json",
+          "Sha256": "E2901E5D2888F95792DD8A74DD70313780E74642AF50104A5741D32944A8A723"
+        }
+      ]
+    }
+  ],
+  "Summary": [
+    {
+      "Workers": 16,
+      "RunCount": 6,
+      "MedianRunMeanUpdateMs": 18.46935488095238,
+      "MedianRunMeanDiscoveryMs": 5.907772261904762,
+      "MedianRunMeanSnapshotMs": 7.3080575,
+      "MedianRunMeanAdjacentCycleMs": 33.213715274463006,
+      "MedianRunMeanBetweenPresentationAndNextUpdateResidualMs": 0.8289605011933174
+    },
+    {
+      "Workers": 8,
+      "RunCount": 6,
+      "MedianRunMeanUpdateMs": 16.77428869047619,
+      "MedianRunMeanDiscoveryMs": 5.376123571428572,
+      "MedianRunMeanSnapshotMs": 6.702838214285714,
+      "MedianRunMeanAdjacentCycleMs": 29.734637828162292,
+      "MedianRunMeanBetweenPresentationAndNextUpdateResidualMs": 0.3236781622911695
+    }
+  ],
+  "Audit": {
+    "Path": "local/audit-e3m6-command-stages-r1.py",
+    "Sha256": "30F357661B31B77A9998A20FE272BDAD313E23BAA62C49D77E52E785F7CD9063"
+  },
+  "PriorPairedReceipt": {
+    "Path": "results/e3m6-worker-count-abba-20261002.json",
+    "Sha256": "257FF73AE3962FD9852D8A736F489E8922C790EBAEA47119477787B19EB5CAD3"
+  },
+  "Meaning": "Reconstructs measured per-command stages from all twelve completed source-pinned clean worker-count captures. Automap discovery is paid each ordinary world tic even when the automap is hidden, preserving mapped lines.420 game updates/discovery/snapshot samples and420 ordered audio-publication QPC spans per run;419 adjacent command intervals. Presentation residual includes checkpoint work, observer overhead and descheduling; intercommand residual includes ready/control/read/host availability, not pure wait or exact update-start telemetry. Simulation stopwatch duration and QPC end are adjacent observations, so derived starts/residuals are approximate. Full release-gate denominators are unchanged; no whole-host improvement or causal scheduler attribution. Discovery5\u20136 ms remains substantial next optimization target; do not omit it or its mapped-line semantics."
+}

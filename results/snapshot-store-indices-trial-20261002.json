@@ -1,0 +1,209 @@
+{
+  "FinishedUtc": "2026-10-02T05:47:30.774526+00:00",
+  "TrialBaseCommit": "976acbd3ed712f676e66e753603262d31e2e0f64",
+  "EndpointComparisons": 2930,
+  "AllMaps": 36,
+  "ReplayCommands": 420,
+  "ReplayCheckpoints": 2,
+  "ABBAStates": 5,
+  "ABBACyclesPerState": 3,
+  "ABBAProfiles": 60,
+  "Cycles": [
+    {
+      "Tic": 0,
+      "Cycle": 1,
+      "BaselinePairMedianMs": 5.4018999999999995,
+      "CandidatePairMedianMs": 5.4503,
+      "CandidateChangePercent": 0.8959810437068505,
+      "CurrentSha256": "26E175E5D8E41C1B3E46D8A2325F3DF49EC7CF4BC2F8BB0E6669F1582C41A2EB",
+      "PreviousSha256": "CE63BAC47B5B97A0F3CD08DEB38437A64FF7A056E161F602EDEA874DB80D3CA0",
+      "BytesPerEndpoint": 61296
+    },
+    {
+      "Tic": 0,
+      "Cycle": 2,
+      "BaselinePairMedianMs": 5.277175,
+      "CandidatePairMedianMs": 5.243925,
+      "CandidateChangePercent": -0.6300719608502647,
+      "CurrentSha256": "26E175E5D8E41C1B3E46D8A2325F3DF49EC7CF4BC2F8BB0E6669F1582C41A2EB",
+      "PreviousSha256": "CE63BAC47B5B97A0F3CD08DEB38437A64FF7A056E161F602EDEA874DB80D3CA0",
+      "BytesPerEndpoint": 61296
+    },
+    {
+      "Tic": 0,
+      "Cycle": 3,
+      "BaselinePairMedianMs": 5.26125,
+      "CandidatePairMedianMs": 5.218325,
+      "CandidateChangePercent": -0.815870753148018,
+      "CurrentSha256": "26E175E5D8E41C1B3E46D8A2325F3DF49EC7CF4BC2F8BB0E6669F1582C41A2EB",
+      "PreviousSha256": "CE63BAC47B5B97A0F3CD08DEB38437A64FF7A056E161F602EDEA874DB80D3CA0",
+      "BytesPerEndpoint": 61296
+    },
+    {
+      "Tic": 70,
+      "Cycle": 1,
+      "BaselinePairMedianMs": 5.3336,
+      "CandidatePairMedianMs": 5.28515,
+      "CandidateChangePercent": -0.9083920803959811,
+      "CurrentSha256": "05F48512FA7811DE99EECC76DD527EC7798181076300D5DBF6A22DB87EDC2CA5",
+      "PreviousSha256": "B04C289103E46928C4349C27A114881F8EC157A03CE976DEFE41A3B98D587809",
+      "BytesPerEndpoint": 61488
+    },
+    {
+      "Tic": 70,
+      "Cycle": 2,
+      "BaselinePairMedianMs": 5.2942,
+      "CandidatePairMedianMs": 5.2554,
+      "CandidateChangePercent": -0.7328774885724032,
+      "CurrentSha256": "05F48512FA7811DE99EECC76DD527EC7798181076300D5DBF6A22DB87EDC2CA5",
+      "PreviousSha256": "B04C289103E46928C4349C27A114881F8EC157A03CE976DEFE41A3B98D587809",
+      "BytesPerEndpoint": 61488
+    },
+    {
+      "Tic": 70,
+      "Cycle": 3,
+      "BaselinePairMedianMs": 5.287375,
+      "CandidatePairMedianMs": 5.285825,
+      "CandidateChangePercent": -0.029315113832473205,
+      "CurrentSha256": "05F48512FA7811DE99EECC76DD527EC7798181076300D5DBF6A22DB87EDC2CA5",
+      "PreviousSha256": "B04C289103E46928C4349C27A114881F8EC157A03CE976DEFE41A3B98D587809",
+      "BytesPerEndpoint": 61488
+    },
+    {
+      "Tic": 210,
+      "Cycle": 1,
+      "BaselinePairMedianMs": 5.256125,
+      "CandidatePairMedianMs": 5.248075,
+      "CandidateChangePercent": -0.153154652904941,
+      "CurrentSha256": "37964883FE3E36550E4B9686D99846DC851F5ACF4E692241B9ADB990EFE7495F",
+      "PreviousSha256": "A09E20802CB55588C4BEAAD0D91B717730798FC40EF3AE5E62772269681091C3",
+      "BytesPerEndpoint": 61296
+    },
+    {
+      "Tic": 210,
+      "Cycle": 2,
+      "BaselinePairMedianMs": 5.2463750000000005,
+      "CandidatePairMedianMs": 5.2421999999999995,
+      "CandidateChangePercent": -0.0795787567606343,
+      "CurrentSha256": "37964883FE3E36550E4B9686D99846DC851F5ACF4E692241B9ADB990EFE7495F",
+      "PreviousSha256": "A09E20802CB55588C4BEAAD0D91B717730798FC40EF3AE5E62772269681091C3",
+      "BytesPerEndpoint": 61296
+    },
+    {
+      "Tic": 210,
+      "Cycle": 3,
+      "BaselinePairMedianMs": 5.2702,
+      "CandidatePairMedianMs": 5.231375,
+      "CandidateChangePercent": -0.7366893097036198,
+      "CurrentSha256": "37964883FE3E36550E4B9686D99846DC851F5ACF4E692241B9ADB990EFE7495F",
+      "PreviousSha256": "A09E20802CB55588C4BEAAD0D91B717730798FC40EF3AE5E62772269681091C3",
+      "BytesPerEndpoint": 61296
+    },
+    {
+      "Tic": 350,
+      "Cycle": 1,
+      "BaselinePairMedianMs": 5.2475000000000005,
+      "CandidatePairMedianMs": 5.234875000000001,
+      "CandidateChangePercent": -0.24059075750356707,
+      "CurrentSha256": "349576983E4F42C7799E0FE02B9AE4A339FA4B831C30A77ECCBCF9B8CBA56FD2",
+      "PreviousSha256": "DD90961EC7D4A1EE46F69596A5081367615E71A0E0E54A274BCC2D503E0BEC1E",
+      "BytesPerEndpoint": 61296
+    },
+    {
+      "Tic": 350,
+      "Cycle": 2,
+      "BaselinePairMedianMs": 5.281874999999999,
+      "CandidatePairMedianMs": 5.222425,
+      "CandidateChangePercent": -1.1255472725121174,
+      "CurrentSha256": "349576983E4F42C7799E0FE02B9AE4A339FA4B831C30A77ECCBCF9B8CBA56FD2",
+      "PreviousSha256": "DD90961EC7D4A1EE46F69596A5081367615E71A0E0E54A274BCC2D503E0BEC1E",
+      "BytesPerEndpoint": 61296
+    },
+    {
+      "Tic": 350,
+      "Cycle": 3,
+      "BaselinePairMedianMs": 5.255325,
+      "CandidatePairMedianMs": 5.2387,
+      "CandidateChangePercent": -0.31634580163929504,
+      "CurrentSha256": "349576983E4F42C7799E0FE02B9AE4A339FA4B831C30A77ECCBCF9B8CBA56FD2",
+      "PreviousSha256": "DD90961EC7D4A1EE46F69596A5081367615E71A0E0E54A274BCC2D503E0BEC1E",
+      "BytesPerEndpoint": 61296
+    },
+    {
+      "Tic": 420,
+      "Cycle": 1,
+      "BaselinePairMedianMs": 5.223675,
+      "CandidatePairMedianMs": 5.274425,
+      "CandidateChangePercent": 0.9715382369691827,
+      "CurrentSha256": "666CE67EB3D637C4D91F00763FC0D2DA9248601F2CD7DD87956C3CEDA99C59CC",
+      "PreviousSha256": "BB6E59ED280891376DDB8F59435FFA4AA0DEEFA8AC83A8DE061F7C36B16F4374",
+      "BytesPerEndpoint": 61296
+    },
+    {
+      "Tic": 420,
+      "Cycle": 2,
+      "BaselinePairMedianMs": 5.206250000000001,
+      "CandidatePairMedianMs": 5.197100000000001,
+      "CandidateChangePercent": -0.17575030012004778,
+      "CurrentSha256": "666CE67EB3D637C4D91F00763FC0D2DA9248601F2CD7DD87956C3CEDA99C59CC",
+      "PreviousSha256": "BB6E59ED280891376DDB8F59435FFA4AA0DEEFA8AC83A8DE061F7C36B16F4374",
+      "BytesPerEndpoint": 61296
+    },
+    {
+      "Tic": 420,
+      "Cycle": 3,
+      "BaselinePairMedianMs": 5.1968499999999995,
+      "CandidatePairMedianMs": 5.1888000000000005,
+      "CandidateChangePercent": -0.15490152688646397,
+      "CurrentSha256": "666CE67EB3D637C4D91F00763FC0D2DA9248601F2CD7DD87956C3CEDA99C59CC",
+      "PreviousSha256": "BB6E59ED280891376DDB8F59435FFA4AA0DEEFA8AC83A8DE061F7C36B16F4374",
+      "BytesPerEndpoint": 61296
+    }
+  ],
+  "Files": [
+    {
+      "Path": "local/snapshot-indices-candidate-r1.ps1",
+      "Sha256": "BC3989F88FC4D1FC0F2646042C9FCE135BD2BEBFD3ECBD37ACA475CA3FE7B906"
+    },
+    {
+      "Path": "local/prepare-snapshot-indices-trial-r1.py",
+      "Sha256": "371532018D64915E123F00560CC465A07CA0C4ADB4D7154C0C4C1AAEF794F6C3"
+    },
+    {
+      "Path": "local/Test-SnapshotIndicesTrial-r1.ps1",
+      "Sha256": "1CF588CA98AE3DD8019B9A766DD52D87C7AE70FA27FC9EE867AFC41A4DAA9BDC"
+    },
+    {
+      "Path": "local/snapshot-indices-equality-r1.json",
+      "Sha256": "1BF7A6CA88E9092DF56C3CE5A44A676C3EB0E61E11526CCAF7235624675B406C"
+    },
+    {
+      "Path": "local/snapshot-indices-equality-r1.log",
+      "Sha256": "6F8EF1CB69E868BE3F4938A6598E54467015F0A511EAA33B86E10879C3672181"
+    },
+    {
+      "Path": "local/Measure-SnapshotIndicesTrial-r1.ps1",
+      "Sha256": "03CD610301871BC2E2469FDB2B7BB1F545A7CFD7EC1D3B8CA6FE3C1159A6C602"
+    },
+    {
+      "Path": "local/snapshot-indices-abba-r1.json",
+      "Sha256": "1C7F539BF7958DC81BB0845E59B75FDE738317F2531FEF2D7E608E9FCC7345AF"
+    },
+    {
+      "Path": "local/snapshot-indices-abba-r1.log",
+      "Sha256": "EC95D7C790BA95C11C1C59449339FAA88B82DDF814027F99A8B36E0890AE1694"
+    },
+    {
+      "Path": "local/audit-snapshot-indices-trial-r1.py",
+      "Sha256": "14E71B9B78817BCB8059CD93F778879A50CC5A4F966D907B4738A934BA5605DD"
+    }
+  ],
+  "Meaning": "Ignored pure-PowerShell numeric-store offset trial replaces per-field postincrement with constant record offsets and one increment per sector/side/actor/weapon record. All fields, endpoint/fraction arithmetic, camera-angle unwrapping and actor flags remain unchanged. Both complete NumericV3 byte endpoints match the unchanged object/serializer oracle at85 map/replay states (170 comparisons), then baseline pair bytes match every one of1380 microbenchmark calls (2760 comparisons). Three in-process ABBA cycles per each of five unchanged dense replay states,first3 warmups retained separately and20 samples/profile. Source activation and byte comparison are outside timed intervals. These isolated warm measurements do not prove full-host/simulation/display gains or independent original-engine fidelity; further adoption/regressions/live qualification are separate.",
+  "Decision": "Do not adopt: median0.241% reduction with two positive regressions provides no material consistent gain.",
+  "ProductionAdopted": false,
+  "MedianCycleChangePercent": -0.24059075750356707,
+  "DecisionAudit": {
+    "Path": "local/finalize-snapshot-trials-r1.py",
+    "Sha256": "B38FEB560DE4AE77DEA0B7352C6D7454C5AF9CC2DD7EC4CC3F2E3506959F9EBE"
+  }
+}

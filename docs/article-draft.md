@@ -185,3 +185,20 @@ E1M2 stripe mainly to wall traversal/drawing. Named timers leave copying and
 scheduling partly unclassified; they do not by themselves prove a speedup.
 Exact image/strip checks support using these diagnostics to select the next
 bounded optimization. [Attribution and boundaries](performance.md#attribute-live-frame-costs-and-split-geometry-profiling--october-2-2026).
+
+Dense E3M6 subsequently fails the frozen pacing gates in all three modes despite
+retaining every command/checkpoint/audio frame. A paired16-versus8-worker study
+exposes a useful tradeoff: fewer workers raise simulation rate10–14% and reduce
+sampled game CPU/memory, while display-event rate falls8–10%. Audio/music run
+inside the sampled simulation process; the earlier separate-process inference
+is explicitly corrected. [Dense workload and worker evidence](performance.md#eight-worker-tradeoff-in-dense-e3m6--october-2-2026).
+Separate window/loopback recordings preserve the styles and pickup/damage
+effects, while retaining missing startup coverage and small near-tail digital
+capture gaps. They establish neither acoustic quality nor optical60 FPS.
+
+Three snapshot arithmetic/lookup/index trials preserve exact bytes but produce
+small or mixed gains and stay out of production. Complete command accounting
+reveals a larger omitted stage: discovering automap lines costs about5–6 ms per
+tic even when the automap is hidden. Removing that work would change gameplay
+evidence; the next optimization must preserve complete mapped-line states.
+[Stage accounting and rejected alternatives](../results/e3m6-command-stage-audit-20261002.json).

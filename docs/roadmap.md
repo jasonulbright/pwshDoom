@@ -406,3 +406,10 @@ sampled CPU/memory, but reduce display-event rate8–10%; no full gate passes.
 Keep16 primary/default. Continue the ignored current-endpoint snapshot trial
 with all-map/replay byte equality before adoption. Count reaches5 after Preview.5;
 all campaign/fidelity/physical/acoustic/hardware gates remain active.
+
+Three exact-byte snapshot packing trials are retained and rejected: small/mixed
+gains do not justify adoption. A [twelve-run command-stage audit](../results/e3m6-command-stage-audit-20261002.json)
+identifies5.4–5.9 ms/tic automap discovery omitted from the earlier update-plus-
+snapshot account. Discovery while hidden preserves mapped lines and must remain.
+Investigate that path with full mapped-state oracles next. Count reaches6 after
+Preview.5; full release gates remain active.
