@@ -377,7 +377,16 @@ Dense E3M6 qualification now retains nine clean source-pinned native stress
 captures across all modes. All420 commands/two checkpoints/audio accounting
 repeat, but the player dies and every numerical pacing gate fails: active rates
 28.6–30.8 tics/sec and39.5–47.2 display events/sec. [Receipt and scope](../results/preview5-e3m6-all-style-pacing-20261002.json).
-The resource sampler also omits the separate audio worker; earlier subset
-CPU/memory measurements cannot certify whole-game totals. Correct that gap,
-then investigate command publication/worker-count costs and record effects
-separately. Preview.5 stays frozen; new release count reaches2.
+Audio/music resource use is included inside the sampled simulation process;
+the earlier separate-process omission claim is corrected by source and live
+process-ID evidence. Sampling still omits unsampled startup/tails and excludes
+Terminal from game totals. Investigate command publication/worker-count costs
+and record effects separately. Preview.5 stays frozen; new release count reaches2.
+
+Audio ownership is now directly verified: its in-process runspace shares the
+simulation PID already sampled by PresentMon's collector. The earlier separate
+process omission claim was incorrect; reports/docs retain an explicit correction
+without changing the nine-run measurements. [Source/live identity and save checks](../results/audio-process-ownership-20261002.json).
+Additive PID/scope metadata passes the native420-command endpoint/PCM check
+and15 music-enabled save/load assertions. Continue worker-count/publication
+investigation and dense effect recordings. Release count reaches3 after Preview.5.

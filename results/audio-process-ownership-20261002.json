@@ -1,0 +1,70 @@
+{
+  "FinishedUtc": "2026-10-02T05:13:15.947417+00:00",
+  "ParentCommit": "bd25a35",
+  "Correction": "Earlier separate-audio-process omission inference was wrong. Invoke-AudioWorker is executed in an in-process PowerShell runspace owned by simulation. Collector simulation-process counters already include audio/music CPU and memory. Terminal remains separate, and unsampled startup/tails/peaks remain limitations.",
+  "LiveOwnership": {
+    "AudioProcessId": 19620,
+    "SimulationReportProcessId": 19620,
+    "SampledSimulationPids": [
+      19620
+    ],
+    "Packets": 420,
+    "MatchedCheckpoints": 2,
+    "SubmittedReturnedFrames": 611100,
+    "Game": {
+      "Path": "local/audio-process-identity-e3m6-r1-game.json",
+      "Sha256": "B69FDCC5D0ED4071E577BB98A9EF780421443D3A2C4FA46AC5C0C32682E4569B"
+    },
+    "Capture": {
+      "Path": "local/audio-process-identity-e3m6-r1-capture.json",
+      "Sha256": "385E5003C3F7B2F157B2E6D51C548C526813CE4FF7B7999C97A9DCC35D3104FB"
+    },
+    "Frames": {
+      "Path": "local/audio-process-identity-e3m6-r1-frames.csv",
+      "Sha256": "D7D8A1A5EFF089209AF59A55ED30B9E900F4FD591DCC6AE6962A37033219BFD7"
+    },
+    "RuntimeSrcDigestMatchesPriorNineRuns": true,
+    "Meaning": "Native resource-identity diagnostic, not a repeated performance comparison. Audio execution label initially described the production simulation owner; final label is generic caller ownership for standalone tests too."
+  },
+  "FinalMetadataSaveTest": {
+    "Report": {
+      "Path": "local/audio-process-identity-save-r1.json",
+      "Sha256": "6EF99C2E5E47CFCF7A4F5DEA0E0B2F63D1174FA1C13A400B2A44828628F1140C"
+    },
+    "Checks": 15,
+    "AudioAndSimulationProcessId": 36928,
+    "ExecutionModel": "RunspaceInCallerProcess"
+  },
+  "Sources": [
+    {
+      "Path": "src/AudioRunspace.ps1",
+      "Sha256": "7907F76AEB92969F36252E86B36A970C359B0AE2D9EC3ACCF1514E2D6ABC7DEE"
+    },
+    {
+      "Path": "scripts/Invoke-AudioWorker.ps1",
+      "Sha256": "E4D8D89A6A4095F95A1A9D293702ADD3A6A9F2E92622BA3469A08E576D12CF1B"
+    },
+    {
+      "Path": "scripts/Invoke-SimulationWorker.ps1",
+      "Sha256": "F253EA6D11C8351A1C589ECA4C96AFE316A70156C6CE071D151F0DBBBA3B8ED9"
+    },
+    {
+      "Path": "scripts/Measure-PresentMonGame.ps1",
+      "Sha256": "A24EEEAB8A784D1E1D6A391B8E51A62E5C19EB74CB1E8ED2D25E87C077A5976F"
+    }
+  ],
+  "PriorInterpretation": {
+    "Path": "local/preview5-e3m6-receipt-before-ownership-correction.json",
+    "Sha256": "809549C0A9A007F92DDF938720C443CA40FBED368127C51D341EC62E35AA9E44"
+  },
+  "CorrectedReceipt": {
+    "Path": "results/preview5-e3m6-all-style-pacing-20261002.json",
+    "Sha256": "608D44C3CAF1428E0E4DC8450D5871AEA919C7CAACD24F65171AF1C8083F585E"
+  },
+  "NineRunMeasurementsUnchanged": true,
+  "Audit": {
+    "Path": "local/audit-audio-process-ownership-r1.py",
+    "Sha256": "E7E95EA463E3C5EED8493A7CD7476A74B5B9912C5F905D74B4E8C699E0274273"
+  },
+  "Meaning": "Correct ownership interpretation and add additive process-ID/resource-scope metadata. No gameplay, rendering, audio algorithm, buffer or sampler behavior changes. Do not create duplicate Audio-role samples and double-count the simulation process. Prior exact commands/checkpoints/PCM and failed pacing remain unchanged."
+}

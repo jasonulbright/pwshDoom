@@ -166,6 +166,7 @@ try{
     $Shared.Report.ClearedTimelineCredits=$clearedTimelineCredits;$Shared.Report.MaximumTimelineCredits=$maximumTimelineCredits
     $Shared.Report.CompensatedControlEvents=$compensatedEvents;$Shared.Report.DrainEffectBlocks=$drainEffectBlocks
     $Shared.Report.PendingEffectOutput=$pendingEffectOutput
+    $Shared.Report.ProcessId=$PID;$Shared.Report.ExecutionModel='RunspaceInCallerProcess'
     $Shared.Report.FinalVoices=@(foreach($voice in $mixer.Voices){@{Source=$voice.Source;Position=$voice.Position;Step=$voice.Step}})
     $Shared.Report.PcmSha256=[Convert]::ToHexString($digest.GetHashAndReset());$digest.Dispose()
     $Shared.Report.VolumeChanges=$volumeChanges.ToArray();$Shared.Report.MutedPackets=$mutedPackets;$Shared.Report.FinalVolume=$mixer.Volume

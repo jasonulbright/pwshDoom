@@ -319,7 +319,7 @@ finally {
         if($audio.Shared.Error -and -not $failure){$failure=$audio.Shared.Error;$outcome='Error'}
     }
     if($null -ne $game -and $null -ne $game.World -and -not $failure){try{Record-ReplayCheckpoint}catch{$failure=$_.ToString();$outcome='Error'}}
-    @{FinishedUtc=[DateTime]::UtcNow.ToString('o');Outcome=$outcome;Error=$failure;Tics=$tick;WarmupTics=140;Skill=$Skill;Episode=$Episode;Map=$Map;
+    @{FinishedUtc=[DateTime]::UtcNow.ToString('o');ProcessId=$PID;Outcome=$outcome;Error=$failure;Tics=$tick;WarmupTics=140;Skill=$Skill;Episode=$Episode;Map=$Map;
         SoundEnabled=[bool]$Sound;Audio=$audioReport;AudioPacketMs=(Get-SampleStats $audioPacketTimes.ToArray());AudioPacketSamplesMs=$audioPacketTimes.ToArray();AudioSourcePeak=if($audioPackets){$audioPackets.MaxSources}else{0};AudioEvents=if($audioPackets){$audioPackets.Events}else{0};
         AudioPublicationTrace=$audioPublicationTrace.ToArray();ShutdownAudioDrain=$shutdownAudioDrain;
         AudioBackpressure=$audioBackpressure.ToArray();IncompleteAudioBackpressureStartQpc=$audioBackpressureStart;

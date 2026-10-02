@@ -122,6 +122,7 @@ finally {
         GameReport=[IO.Path]::GetFileName($reportPath);FramesFile=[IO.Path]::GetFileName($prefix+'-frames.csv');
         LaunchFontSize=$FontSize;LaunchMaximized=[bool]$Maximized;LaunchStyle=$Style;LaunchGlyphSet=$GlyphSet;LaunchFontFace=$FontFace;
         LaunchWorkers=$Workers;LaunchSeconds=$Seconds;LaunchSound=[bool]($Sound -or $MusicCatalog);ProcessSamples=$processSamples.ToArray();
+        ResourceSamplingScope='Host, simulation (including audio/music runspaces), render workers and Terminal are sampled. Game totals exclude Terminal when reported separately. Once-per-second samples omit unsampled startup/tails and are lower bounds on peaks; audio is not a separate process.';
         LaunchTerminalOutput=$TerminalOutput;LaunchAnsiEncoding=$AnsiEncoding;
         ReplaySha256=(Get-FileHash -LiteralPath $Replay).Hash;MusicCatalogSha256=if($MusicCatalog){(Get-FileHash -LiteralPath $MusicCatalog).Hash}else{$null};
         SessionScheduleSha256=if($SessionSchedule){(Get-FileHash -LiteralPath $SessionSchedule).Hash}else{$null};HarnessSha256=(Get-FileHash -LiteralPath $PSCommandPath).Hash;
