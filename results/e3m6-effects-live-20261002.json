@@ -1,0 +1,1012 @@
+{
+  "FinishedUtc": "2026-10-02T05:25:53.698497+00:00",
+  "Checks": [
+    {
+      "Name": "Classic complete actual replay and two stored endpoints",
+      "Passed": true
+    },
+    {
+      "Name": "Classic every ordinary command retained without control invention",
+      "Passed": true
+    },
+    {
+      "Name": "Classic due command ordering and observed queue window",
+      "Passed": true
+    },
+    {
+      "Name": "Classic actual WGC loopback recording closes cleanly",
+      "Passed": true
+    },
+    {
+      "Name": "Classic all36 frozen runtime sources match current checkout",
+      "Passed": true
+    },
+    {
+      "Name": "Classic input and final silent/audio movie hashes",
+      "Passed": true
+    },
+    {
+      "Name": "Classic audio lives in captured simulation process",
+      "Passed": true
+    },
+    {
+      "Name": "Classic full packet credits PCM and shutdown accounting",
+      "Passed": true
+    },
+    {
+      "Name": "Classic no active software audio starvation rebuffer or backpressure",
+      "Passed": true
+    },
+    {
+      "Name": "Classic compressed video and packet clocks preserved",
+      "Passed": true
+    },
+    {
+      "Name": "Classic game writes and UI have separate exact accounting",
+      "Passed": true
+    },
+    {
+      "Name": "Classic observed base pickup and damage palette metadata",
+      "Passed": true
+    },
+    {
+      "Name": "Classic PCM header and capture packet lengths agree",
+      "Passed": true
+    },
+    {
+      "Name": "Classic independently reconstructed aligned PCM and explicit zero gaps",
+      "Passed": true
+    },
+    {
+      "Name": "Classic scoped digital PCM contains nonzero content",
+      "Passed": true
+    },
+    {
+      "Name": "Classic pickup original full-window sample hash",
+      "Passed": true
+    },
+    {
+      "Name": "Classic damage original full-window sample hash",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix complete actual replay and two stored endpoints",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix every ordinary command retained without control invention",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix due command ordering and observed queue window",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix actual WGC loopback recording closes cleanly",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix all36 frozen runtime sources match current checkout",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix input and final silent/audio movie hashes",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix audio lives in captured simulation process",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix full packet credits PCM and shutdown accounting",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix no active software audio starvation rebuffer or backpressure",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix compressed video and packet clocks preserved",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix game writes and UI have separate exact accounting",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix observed base pickup and damage palette metadata",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix PCM header and capture packet lengths agree",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix independently reconstructed aligned PCM and explicit zero gaps",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix scoped digital PCM contains nonzero content",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix pickup original full-window sample hash",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix damage original full-window sample hash",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt complete actual replay and two stored endpoints",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt every ordinary command retained without control invention",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt due command ordering and observed queue window",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt actual WGC loopback recording closes cleanly",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt all36 frozen runtime sources match current checkout",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt input and final silent/audio movie hashes",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt audio lives in captured simulation process",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt full packet credits PCM and shutdown accounting",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt no active software audio starvation rebuffer or backpressure",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt compressed video and packet clocks preserved",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt game writes and UI have separate exact accounting",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt observed base pickup and damage palette metadata",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt PCM header and capture packet lengths agree",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt independently reconstructed aligned PCM and explicit zero gaps",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt scoped digital PCM contains nonzero content",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt pickup original full-window sample hash",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt damage original full-window sample hash",
+      "Passed": true
+    },
+    {
+      "Name": "all three frozen source manifests identical",
+      "Passed": true
+    },
+    {
+      "Name": "all57 recorded owned process IDs absent after collection",
+      "Passed": true
+    }
+  ],
+  "Runs": [
+    {
+      "Style": "Classic",
+      "SourceCommit": "b99bdf8",
+      "Sources": [
+        {
+          "Path": "Start-Doom.ps1",
+          "Sha256": "1C6860D24908ED7A3DE57B4F6EB8D83CDDB3EB26E45FD4040540CCF0C326B8CB"
+        },
+        {
+          "Path": "scripts/Invoke-Doom.ps1",
+          "Sha256": "3EA8E756F3ED2A96776EF57B36FF01B8BC71B36B22E1A729B3546B9315BABD2D"
+        },
+        {
+          "Path": "scripts/Record-DoomReplay.ps1",
+          "Sha256": "74FC9040BD602A15798A00F457F2FC7412D1FB34E3A4AEE9057AA551A727FF16"
+        },
+        {
+          "Path": "scripts/Record-ProcessAudio.ps1",
+          "Sha256": "F50876284D3E3958F2183CB483F13179FABAF45B87B8BCC221BA7F7113EF38CD"
+        },
+        {
+          "Path": "scripts/Merge-DoomCaptureAudio.ps1",
+          "Sha256": "795D02E96FFC3373741E7970512D1D65CC777A43B834D5771F69EC81CF3AF2C4"
+        },
+        {
+          "Path": "src/ProcessAudioCapture.ps1",
+          "Sha256": "A747786A2428F71C907F86AD631983548AAE8C6450F422F64144D367B8E9E321"
+        },
+        {
+          "Path": "src/CaptureClock.ps1",
+          "Sha256": "CED03D531F7C129D9E079F1F3B548DD436EFD81782974A3752D4689FA3E45DFB"
+        },
+        {
+          "Path": "src/CaptureTimeline.ps1",
+          "Sha256": "EFA64468F234327E5D7682CE08FF5B8863EEEFC5D5B082DB9B74BE544D092E21"
+        },
+        {
+          "Path": "src/TerminalOutput.ps1",
+          "Sha256": "7E81DCD8BED8A3EE6FE745BE5DCA8AB1BD808D90F6BC983BC0581C4153CAE0DB"
+        },
+        {
+          "Path": "src/LoadingScreen.ps1",
+          "Sha256": "4EAFCE04F1174689399F61C806FDC43A2FF09A8D44AD27B3FDCEA5E77B7F1D03"
+        },
+        {
+          "Path": "src/AnsiColorState.ps1",
+          "Sha256": "5370ABE79597E5E4FC629BBDE768DCA5F7A642200CFA31CF45AC1E7D4B46F4FA"
+        },
+        {
+          "Path": "src/Ansi256.ps1",
+          "Sha256": "EA3FF6CC0EA380E0D7FF5069D4E7244DA984991681FF605BB8D3AC5AC8293A94"
+        },
+        {
+          "Path": "src/TerminalCodec.ps1",
+          "Sha256": "7110F9BBD86662C5FCC45CD9E3E7BF20415A4F6C3FA1EE2829A064EAD5497F7A"
+        },
+        {
+          "Path": "scripts/FrameCodec.ps1",
+          "Sha256": "A1CEA3BF32B01AEF4DAC5665A8478EBC3CAD7C4F4EE8605961A0782079202133"
+        },
+        {
+          "Path": "src/FastRenderer.ps1",
+          "Sha256": "A6DB1AB19159C30DD72F0D8F0F5348ADCB993E68A6FFE7580B68B839F5E712A0"
+        },
+        {
+          "Path": "src/RenderFuzz.ps1",
+          "Sha256": "8D2B6B6B0DF30A1DD7E30D070F60A1EABBF12397BC9816A03481C6D6A659B882"
+        },
+        {
+          "Path": "src/GameHost.ps1",
+          "Sha256": "CBADD9B913973D0442B4BE7A45F4C1069FA75B8DCAF78F4A550AE72C4ACED706"
+        },
+        {
+          "Path": "src/SnapshotTransport.ps1",
+          "Sha256": "E88163E3D970A02F5D81B9EEDDEB9F7B1E0FE2A90AFCF4019733D423D69E8F8A"
+        },
+        {
+          "Path": "src/InputReplay.ps1",
+          "Sha256": "0C8ABF378AC10A78925408F1BCE74B365703ABDB7BBEA57F40A72F7ED5CF798C"
+        },
+        {
+          "Path": "src/PaletteCodec.ps1",
+          "Sha256": "E3EE226131E2AB3D4AAFE8F4686BE3594AD88D198A3EB756B317123DB24696D3"
+        },
+        {
+          "Path": "src/CharacterCodec.ps1",
+          "Sha256": "78E3BF44DD0009FA3DE2B855FDD3B411BC6FFD21A62FBC04A0D9BA83E6A5CD78"
+        },
+        {
+          "Path": "src/RenderAssets.ps1",
+          "Sha256": "DD7AAFBB6C27FC33FAA5761B0E194B4A4F6476013F81A59C5ECE646B928FC9B5"
+        },
+        {
+          "Path": "src/GameProcesses.ps1",
+          "Sha256": "F70E59DCA050F89AD579E12D29070F753E063EFF465BA6758D3C18508E2BE2DA"
+        },
+        {
+          "Path": "src/SimulationProcess.ps1",
+          "Sha256": "472B67E534DBC1AB262439CCD57E481B472AD3F40761E1B9518B946067E7DEAE"
+        },
+        {
+          "Path": "scripts/Invoke-SimulationWorker.ps1",
+          "Sha256": "F253EA6D11C8351A1C589ECA4C96AFE316A70156C6CE071D151F0DBBBA3B8ED9"
+        },
+        {
+          "Path": "scripts/Invoke-GameRenderWorker.ps1",
+          "Sha256": "6A432F98075973A988F232A234E21FDB262E7BB1990F80D04224A07E16E9D1E7"
+        },
+        {
+          "Path": "src/PlayerMessages.ps1",
+          "Sha256": "77CB7FFDBADF112F1A1B84642B9CD90DF304A9B779B2F22411E9C279D15FEA1A"
+        },
+        {
+          "Path": "scripts/Invoke-RenderWorkerWithLogs.ps1",
+          "Sha256": "798038D387AD85B31056120B2EC1A52CC026A210131CC70B9283BF7D063668D5"
+        },
+        {
+          "Path": "scripts/Invoke-AudioWorker.ps1",
+          "Sha256": "E4D8D89A6A4095F95A1A9D293702ADD3A6A9F2E92622BA3469A08E576D12CF1B"
+        },
+        {
+          "Path": "src/AudioMixer.ps1",
+          "Sha256": "38E846CDF04317FBA6DE2EC598F3497EFB6ED97DEE9AB8EEC22D8A94E4421A0B"
+        },
+        {
+          "Path": "src/AudioPackets.ps1",
+          "Sha256": "01865375DB878EFA137B3B5EF49437B4FFBF9B8C6F0359A2AA52580E0977801E"
+        },
+        {
+          "Path": "src/AudioRunspace.ps1",
+          "Sha256": "7907F76AEB92969F36252E86B36A970C359B0AE2D9EC3ACCF1514E2D6ABC7DEE"
+        },
+        {
+          "Path": "src/WaveOutDevice.ps1",
+          "Sha256": "B8447B4F701F8B1267E949F0BD114A2304049590B8371E449D8592F2478B0A49"
+        },
+        {
+          "Path": "src/MusicPlayback.ps1",
+          "Sha256": "5050D3355A30692B67CF130594146FDDD0CB51B9843B2C79B65D68F55E7F11F8"
+        },
+        {
+          "Path": "src/MusicLoopReader.ps1",
+          "Sha256": "A65FB5FA034E1A8DB2CCA59C0AEE7A6A0A5F132461BCA13CC06C337CB3DC859D"
+        },
+        {
+          "Path": "src/MusicOneShotReader.ps1",
+          "Sha256": "5C60101C3AFEB17A8DEE7CE5E39DA78F0A347F91BEF45DF0B19877453A47BF62"
+        }
+      ],
+      "Commands": 420,
+      "Checkpoints": 2,
+      "EndHealth": 0,
+      "EndKills": 0,
+      "PalettesObserved": [
+        0,
+        2,
+        3,
+        4,
+        10
+      ],
+      "AudioEvents": 63,
+      "AudioSourcePeak": 15,
+      "SubmittedAndReturnedAudioFrames": 602280,
+      "AudioProcessId": 31760,
+      "AudioProcessingAgeMedianMs": 14.46145,
+      "AudioProcessingAgeMaxMs": 37.6688,
+      "RawAudioSeconds": 15.07,
+      "VideoSeconds": 41.8,
+      "TimelineCopiedFrames": 639992,
+      "TimelineZeroFilledIntervals": [
+        {
+          "NextPacket": 0,
+          "Frame": 0,
+          "Frames": 1202331
+        },
+        {
+          "NextPacket": 1391,
+          "Frame": 1815762,
+          "Frames": 1057
+        }
+      ],
+      "ApiDiscontinuityPackets": 0,
+      "RawPcmNonzeroSamples": 1232873,
+      "RawPcmPeak": 30722,
+      "RawPcmRms": 3623.168146176361,
+      "Samples": [
+        {
+          "Kind": "pickup",
+          "File": {
+            "Path": "local/e3m6-effects-review-Classic-pickup-r1.png",
+            "Sha256": "788E3A459CD4F08DC4153EC0AA02428B5EB48BA0710F052914E08711ABC92379"
+          },
+          "VideoSeconds": 28.3896473,
+          "SelectedWriteTic": 22,
+          "SelectedWritePalette": 10,
+          "Review": "Visible bounded E3M6 world, pistol/HUD and pickup notice; Classic retains pixels, Matrix green glyphs and AnsiArt color glyphs. Damage sample shows red tint in Classic/AnsiArt; Matrix intentionally stays green. Reviewed resized2048x829 from original3440x1392. This does not establish exact optical write identity or original-binary fidelity."
+        },
+        {
+          "Kind": "damage",
+          "File": {
+            "Path": "local/e3m6-effects-review-Classic-damage-r1.png",
+            "Sha256": "8A9D22F6EB8CC1B355AD8BEE8A2C05165D3D4321735034466AFCC36C6B56C52F"
+          },
+          "VideoSeconds": 30.0051938,
+          "SelectedWriteTic": 69,
+          "SelectedWritePalette": 3,
+          "Review": "Visible bounded E3M6 world, pistol/HUD and pickup notice; Classic retains pixels, Matrix green glyphs and AnsiArt color glyphs. Damage sample shows red tint in Classic/AnsiArt; Matrix intentionally stays green. Reviewed resized2048x829 from original3440x1392. This does not establish exact optical write identity or original-binary fidelity."
+        }
+      ],
+      "Files": [
+        {
+          "Path": "local/recordings/e3m6-effects-Classic-r1-game.json",
+          "Sha256": "987FDD46709DBE0E717C01EF50D17A5811F3CBEEA0952632A115165DE9BBA08D"
+        },
+        {
+          "Path": "local/recordings/e3m6-effects-Classic-r1-recording.json",
+          "Sha256": "F17A80550B77BA63E4520E0FAD302A08C56650D01F265356BCCCA396CB7C58F8"
+        },
+        {
+          "Path": "local/recordings/e3m6-effects-Classic-r1-input.json",
+          "Sha256": "ED3094C3737F530CDE00F33DCEF4E97BF2E266A32698343D21058F1F5350B9AD"
+        },
+        {
+          "Path": "local/recordings/e3m6-effects-Classic-r1-audio.json",
+          "Sha256": "F6B9AD18F61EB478DC9B3ED6C3649CCEAA79C49BC5C25336CD4C922B96023240"
+        },
+        {
+          "Path": "local/recordings/e3m6-effects-Classic-r1-audio.wav",
+          "Sha256": "B8F56A1D4F27A4ACA02AA938EF286BFF8FAD4A04D2FC5B6A544F881220DBEBEC"
+        },
+        {
+          "Path": "local/recordings/e3m6-effects-Classic-r1-av.json",
+          "Sha256": "3222DAD6CBA049DF236C74D35A6C90B2304AC4AF3E80C5236FCAB1A9E4F9E58D"
+        },
+        {
+          "Path": "local/recordings/e3m6-effects-Classic-r1-av.mp4",
+          "Sha256": "21465A0BDB33A7AD2A355DF958CF6C95CA28FC9D181C07A79FA01638DB702B1A"
+        },
+        {
+          "Path": "local/recordings/e3m6-effects-Classic-r1-av.wav",
+          "Sha256": "F30EA935142847FCAB2C47BC6DE5AC0A4ADDB80BEE2762AE5FA663BBF7A81048"
+        },
+        {
+          "Path": "local/recordings/e3m6-effects-Classic-r1.mp4",
+          "Sha256": "660F0116F10E0769EEBC771C4043AEF5381955B5D9DFE113C08F853FE5124DA5"
+        },
+        {
+          "Path": "local/recordings/e3m6-effects-Classic-r1-ffmpeg.log",
+          "Sha256": "445040439850FE6233C69ABCB56042EAF1670E0207D7CF6292BAC650F81B3F1D"
+        },
+        {
+          "Path": "local/recordings/e3m6-effects-Classic-r1-clock.json",
+          "Sha256": "92CAEDA0FABB54781E628094EE39BA7D17B9247A94F34950DE6F43F08B075C7E"
+        }
+      ]
+    },
+    {
+      "Style": "Matrix",
+      "SourceCommit": "b99bdf8",
+      "Sources": [
+        {
+          "Path": "Start-Doom.ps1",
+          "Sha256": "1C6860D24908ED7A3DE57B4F6EB8D83CDDB3EB26E45FD4040540CCF0C326B8CB"
+        },
+        {
+          "Path": "scripts/Invoke-Doom.ps1",
+          "Sha256": "3EA8E756F3ED2A96776EF57B36FF01B8BC71B36B22E1A729B3546B9315BABD2D"
+        },
+        {
+          "Path": "scripts/Record-DoomReplay.ps1",
+          "Sha256": "74FC9040BD602A15798A00F457F2FC7412D1FB34E3A4AEE9057AA551A727FF16"
+        },
+        {
+          "Path": "scripts/Record-ProcessAudio.ps1",
+          "Sha256": "F50876284D3E3958F2183CB483F13179FABAF45B87B8BCC221BA7F7113EF38CD"
+        },
+        {
+          "Path": "scripts/Merge-DoomCaptureAudio.ps1",
+          "Sha256": "795D02E96FFC3373741E7970512D1D65CC777A43B834D5771F69EC81CF3AF2C4"
+        },
+        {
+          "Path": "src/ProcessAudioCapture.ps1",
+          "Sha256": "A747786A2428F71C907F86AD631983548AAE8C6450F422F64144D367B8E9E321"
+        },
+        {
+          "Path": "src/CaptureClock.ps1",
+          "Sha256": "CED03D531F7C129D9E079F1F3B548DD436EFD81782974A3752D4689FA3E45DFB"
+        },
+        {
+          "Path": "src/CaptureTimeline.ps1",
+          "Sha256": "EFA64468F234327E5D7682CE08FF5B8863EEEFC5D5B082DB9B74BE544D092E21"
+        },
+        {
+          "Path": "src/TerminalOutput.ps1",
+          "Sha256": "7E81DCD8BED8A3EE6FE745BE5DCA8AB1BD808D90F6BC983BC0581C4153CAE0DB"
+        },
+        {
+          "Path": "src/LoadingScreen.ps1",
+          "Sha256": "4EAFCE04F1174689399F61C806FDC43A2FF09A8D44AD27B3FDCEA5E77B7F1D03"
+        },
+        {
+          "Path": "src/AnsiColorState.ps1",
+          "Sha256": "5370ABE79597E5E4FC629BBDE768DCA5F7A642200CFA31CF45AC1E7D4B46F4FA"
+        },
+        {
+          "Path": "src/Ansi256.ps1",
+          "Sha256": "EA3FF6CC0EA380E0D7FF5069D4E7244DA984991681FF605BB8D3AC5AC8293A94"
+        },
+        {
+          "Path": "src/TerminalCodec.ps1",
+          "Sha256": "7110F9BBD86662C5FCC45CD9E3E7BF20415A4F6C3FA1EE2829A064EAD5497F7A"
+        },
+        {
+          "Path": "scripts/FrameCodec.ps1",
+          "Sha256": "A1CEA3BF32B01AEF4DAC5665A8478EBC3CAD7C4F4EE8605961A0782079202133"
+        },
+        {
+          "Path": "src/FastRenderer.ps1",
+          "Sha256": "A6DB1AB19159C30DD72F0D8F0F5348ADCB993E68A6FFE7580B68B839F5E712A0"
+        },
+        {
+          "Path": "src/RenderFuzz.ps1",
+          "Sha256": "8D2B6B6B0DF30A1DD7E30D070F60A1EABBF12397BC9816A03481C6D6A659B882"
+        },
+        {
+          "Path": "src/GameHost.ps1",
+          "Sha256": "CBADD9B913973D0442B4BE7A45F4C1069FA75B8DCAF78F4A550AE72C4ACED706"
+        },
+        {
+          "Path": "src/SnapshotTransport.ps1",
+          "Sha256": "E88163E3D970A02F5D81B9EEDDEB9F7B1E0FE2A90AFCF4019733D423D69E8F8A"
+        },
+        {
+          "Path": "src/InputReplay.ps1",
+          "Sha256": "0C8ABF378AC10A78925408F1BCE74B365703ABDB7BBEA57F40A72F7ED5CF798C"
+        },
+        {
+          "Path": "src/PaletteCodec.ps1",
+          "Sha256": "E3EE226131E2AB3D4AAFE8F4686BE3594AD88D198A3EB756B317123DB24696D3"
+        },
+        {
+          "Path": "src/CharacterCodec.ps1",
+          "Sha256": "78E3BF44DD0009FA3DE2B855FDD3B411BC6FFD21A62FBC04A0D9BA83E6A5CD78"
+        },
+        {
+          "Path": "src/RenderAssets.ps1",
+          "Sha256": "DD7AAFBB6C27FC33FAA5761B0E194B4A4F6476013F81A59C5ECE646B928FC9B5"
+        },
+        {
+          "Path": "src/GameProcesses.ps1",
+          "Sha256": "F70E59DCA050F89AD579E12D29070F753E063EFF465BA6758D3C18508E2BE2DA"
+        },
+        {
+          "Path": "src/SimulationProcess.ps1",
+          "Sha256": "472B67E534DBC1AB262439CCD57E481B472AD3F40761E1B9518B946067E7DEAE"
+        },
+        {
+          "Path": "scripts/Invoke-SimulationWorker.ps1",
+          "Sha256": "F253EA6D11C8351A1C589ECA4C96AFE316A70156C6CE071D151F0DBBBA3B8ED9"
+        },
+        {
+          "Path": "scripts/Invoke-GameRenderWorker.ps1",
+          "Sha256": "6A432F98075973A988F232A234E21FDB262E7BB1990F80D04224A07E16E9D1E7"
+        },
+        {
+          "Path": "src/PlayerMessages.ps1",
+          "Sha256": "77CB7FFDBADF112F1A1B84642B9CD90DF304A9B779B2F22411E9C279D15FEA1A"
+        },
+        {
+          "Path": "scripts/Invoke-RenderWorkerWithLogs.ps1",
+          "Sha256": "798038D387AD85B31056120B2EC1A52CC026A210131CC70B9283BF7D063668D5"
+        },
+        {
+          "Path": "scripts/Invoke-AudioWorker.ps1",
+          "Sha256": "E4D8D89A6A4095F95A1A9D293702ADD3A6A9F2E92622BA3469A08E576D12CF1B"
+        },
+        {
+          "Path": "src/AudioMixer.ps1",
+          "Sha256": "38E846CDF04317FBA6DE2EC598F3497EFB6ED97DEE9AB8EEC22D8A94E4421A0B"
+        },
+        {
+          "Path": "src/AudioPackets.ps1",
+          "Sha256": "01865375DB878EFA137B3B5EF49437B4FFBF9B8C6F0359A2AA52580E0977801E"
+        },
+        {
+          "Path": "src/AudioRunspace.ps1",
+          "Sha256": "7907F76AEB92969F36252E86B36A970C359B0AE2D9EC3ACCF1514E2D6ABC7DEE"
+        },
+        {
+          "Path": "src/WaveOutDevice.ps1",
+          "Sha256": "B8447B4F701F8B1267E949F0BD114A2304049590B8371E449D8592F2478B0A49"
+        },
+        {
+          "Path": "src/MusicPlayback.ps1",
+          "Sha256": "5050D3355A30692B67CF130594146FDDD0CB51B9843B2C79B65D68F55E7F11F8"
+        },
+        {
+          "Path": "src/MusicLoopReader.ps1",
+          "Sha256": "A65FB5FA034E1A8DB2CCA59C0AEE7A6A0A5F132461BCA13CC06C337CB3DC859D"
+        },
+        {
+          "Path": "src/MusicOneShotReader.ps1",
+          "Sha256": "5C60101C3AFEB17A8DEE7CE5E39DA78F0A347F91BEF45DF0B19877453A47BF62"
+        }
+      ],
+      "Commands": 420,
+      "Checkpoints": 2,
+      "EndHealth": 0,
+      "EndKills": 0,
+      "PalettesObserved": [
+        0,
+        2,
+        3,
+        4,
+        10
+      ],
+      "AudioEvents": 63,
+      "AudioSourcePeak": 15,
+      "SubmittedAndReturnedAudioFrames": 606060,
+      "AudioProcessId": 2392,
+      "AudioProcessingAgeMedianMs": 12.6101,
+      "AudioProcessingAgeMaxMs": 37.6881,
+      "RawAudioSeconds": 15.2,
+      "VideoSeconds": 41.883333,
+      "TimelineCopiedFrames": 644675,
+      "TimelineZeroFilledIntervals": [
+        {
+          "Frames": 1201225,
+          "Frame": 0,
+          "NextPacket": 0
+        },
+        {
+          "Frames": 1141,
+          "Frame": 1818184,
+          "NextPacket": 1399
+        }
+      ],
+      "ApiDiscontinuityPackets": 0,
+      "RawPcmNonzeroSamples": 1241318,
+      "RawPcmPeak": 30722,
+      "RawPcmRms": 3596.7274806284195,
+      "Samples": [
+        {
+          "Kind": "pickup",
+          "File": {
+            "Path": "local/e3m6-effects-review-Matrix-pickup-r1.png",
+            "Sha256": "409A3E1F7ADE0FAB1ED5AEFD4E0A52E237577E81F07FCF179D164DF316D0F972"
+          },
+          "VideoSeconds": 28.3621846,
+          "SelectedWriteTic": 22,
+          "SelectedWritePalette": 10,
+          "Review": "Visible bounded E3M6 world, pistol/HUD and pickup notice; Classic retains pixels, Matrix green glyphs and AnsiArt color glyphs. Damage sample shows red tint in Classic/AnsiArt; Matrix intentionally stays green. Reviewed resized2048x829 from original3440x1392. This does not establish exact optical write identity or original-binary fidelity."
+        },
+        {
+          "Kind": "damage",
+          "File": {
+            "Path": "local/e3m6-effects-review-Matrix-damage-r1.png",
+            "Sha256": "CFCFFA1BA2FFFE4C548AED7441A18CF2C5C1D885392D3819816943AB52AB97AE"
+          },
+          "VideoSeconds": 30.111368900000002,
+          "SelectedWriteTic": 69,
+          "SelectedWritePalette": 3,
+          "Review": "Visible bounded E3M6 world, pistol/HUD and pickup notice; Classic retains pixels, Matrix green glyphs and AnsiArt color glyphs. Damage sample shows red tint in Classic/AnsiArt; Matrix intentionally stays green. Reviewed resized2048x829 from original3440x1392. This does not establish exact optical write identity or original-binary fidelity."
+        }
+      ],
+      "Files": [
+        {
+          "Path": "local/recordings/e3m6-effects-Matrix-r1-game.json",
+          "Sha256": "1F325C2BA6E173D4D08F83AD829887588162591424A16A69BA0CF8D453A6C88C"
+        },
+        {
+          "Path": "local/recordings/e3m6-effects-Matrix-r1-recording.json",
+          "Sha256": "361C5D1A8079B9EACD8431FA271E2CF60232A8F9401B33D8A21F969B74D7A3DA"
+        },
+        {
+          "Path": "local/recordings/e3m6-effects-Matrix-r1-input.json",
+          "Sha256": "8114E06771570A18EBA92D2023F8827C1041B78392000BC2AA91BDCA45FD3165"
+        },
+        {
+          "Path": "local/recordings/e3m6-effects-Matrix-r1-audio.json",
+          "Sha256": "FDB7CCDE04D4630F031AF56144D4BE86452827F1A59E75E478777B374665ABB2"
+        },
+        {
+          "Path": "local/recordings/e3m6-effects-Matrix-r1-audio.wav",
+          "Sha256": "3DE4C17DA83BE031A2B703BD73222E093338770837AC6F6486B708E8121D7444"
+        },
+        {
+          "Path": "local/recordings/e3m6-effects-Matrix-r1-av.json",
+          "Sha256": "63CF333451662BEDFC9CBA945B7C73B351E58886C0203A070479FE629CC3DA03"
+        },
+        {
+          "Path": "local/recordings/e3m6-effects-Matrix-r1-av.mp4",
+          "Sha256": "69BF968176B57613A4698A929411310BD3222F74703E040ADADF1AA4FE27C465"
+        },
+        {
+          "Path": "local/recordings/e3m6-effects-Matrix-r1-av.wav",
+          "Sha256": "4D07651A6A7B267DD4D491D13B41249452F37BCC4FCB5A268CCD486F7DCBBF2E"
+        },
+        {
+          "Path": "local/recordings/e3m6-effects-Matrix-r1.mp4",
+          "Sha256": "17BA2BB8E80E4FC6979DD9765E1AAAC99D6F838A0DC8A0799400A1314A5A6837"
+        },
+        {
+          "Path": "local/recordings/e3m6-effects-Matrix-r1-ffmpeg.log",
+          "Sha256": "2D26BAB82587CE2F98CFBB3A8E3CA015CC39129E2B5C67F5DD771CBD389DB30B"
+        },
+        {
+          "Path": "local/recordings/e3m6-effects-Matrix-r1-clock.json",
+          "Sha256": "481832A0476981A0DD8EBB58227E4783FFD45A7275D51E14A6365C2D5A912DAA"
+        }
+      ]
+    },
+    {
+      "Style": "AnsiArt",
+      "SourceCommit": "b99bdf8",
+      "Sources": [
+        {
+          "Sha256": "1C6860D24908ED7A3DE57B4F6EB8D83CDDB3EB26E45FD4040540CCF0C326B8CB",
+          "Path": "Start-Doom.ps1"
+        },
+        {
+          "Sha256": "3EA8E756F3ED2A96776EF57B36FF01B8BC71B36B22E1A729B3546B9315BABD2D",
+          "Path": "scripts/Invoke-Doom.ps1"
+        },
+        {
+          "Sha256": "74FC9040BD602A15798A00F457F2FC7412D1FB34E3A4AEE9057AA551A727FF16",
+          "Path": "scripts/Record-DoomReplay.ps1"
+        },
+        {
+          "Sha256": "F50876284D3E3958F2183CB483F13179FABAF45B87B8BCC221BA7F7113EF38CD",
+          "Path": "scripts/Record-ProcessAudio.ps1"
+        },
+        {
+          "Sha256": "795D02E96FFC3373741E7970512D1D65CC777A43B834D5771F69EC81CF3AF2C4",
+          "Path": "scripts/Merge-DoomCaptureAudio.ps1"
+        },
+        {
+          "Sha256": "A747786A2428F71C907F86AD631983548AAE8C6450F422F64144D367B8E9E321",
+          "Path": "src/ProcessAudioCapture.ps1"
+        },
+        {
+          "Sha256": "CED03D531F7C129D9E079F1F3B548DD436EFD81782974A3752D4689FA3E45DFB",
+          "Path": "src/CaptureClock.ps1"
+        },
+        {
+          "Sha256": "EFA64468F234327E5D7682CE08FF5B8863EEEFC5D5B082DB9B74BE544D092E21",
+          "Path": "src/CaptureTimeline.ps1"
+        },
+        {
+          "Sha256": "7E81DCD8BED8A3EE6FE745BE5DCA8AB1BD808D90F6BC983BC0581C4153CAE0DB",
+          "Path": "src/TerminalOutput.ps1"
+        },
+        {
+          "Sha256": "4EAFCE04F1174689399F61C806FDC43A2FF09A8D44AD27B3FDCEA5E77B7F1D03",
+          "Path": "src/LoadingScreen.ps1"
+        },
+        {
+          "Sha256": "5370ABE79597E5E4FC629BBDE768DCA5F7A642200CFA31CF45AC1E7D4B46F4FA",
+          "Path": "src/AnsiColorState.ps1"
+        },
+        {
+          "Sha256": "EA3FF6CC0EA380E0D7FF5069D4E7244DA984991681FF605BB8D3AC5AC8293A94",
+          "Path": "src/Ansi256.ps1"
+        },
+        {
+          "Sha256": "7110F9BBD86662C5FCC45CD9E3E7BF20415A4F6C3FA1EE2829A064EAD5497F7A",
+          "Path": "src/TerminalCodec.ps1"
+        },
+        {
+          "Sha256": "A1CEA3BF32B01AEF4DAC5665A8478EBC3CAD7C4F4EE8605961A0782079202133",
+          "Path": "scripts/FrameCodec.ps1"
+        },
+        {
+          "Sha256": "A6DB1AB19159C30DD72F0D8F0F5348ADCB993E68A6FFE7580B68B839F5E712A0",
+          "Path": "src/FastRenderer.ps1"
+        },
+        {
+          "Sha256": "8D2B6B6B0DF30A1DD7E30D070F60A1EABBF12397BC9816A03481C6D6A659B882",
+          "Path": "src/RenderFuzz.ps1"
+        },
+        {
+          "Sha256": "CBADD9B913973D0442B4BE7A45F4C1069FA75B8DCAF78F4A550AE72C4ACED706",
+          "Path": "src/GameHost.ps1"
+        },
+        {
+          "Sha256": "E88163E3D970A02F5D81B9EEDDEB9F7B1E0FE2A90AFCF4019733D423D69E8F8A",
+          "Path": "src/SnapshotTransport.ps1"
+        },
+        {
+          "Sha256": "0C8ABF378AC10A78925408F1BCE74B365703ABDB7BBEA57F40A72F7ED5CF798C",
+          "Path": "src/InputReplay.ps1"
+        },
+        {
+          "Sha256": "E3EE226131E2AB3D4AAFE8F4686BE3594AD88D198A3EB756B317123DB24696D3",
+          "Path": "src/PaletteCodec.ps1"
+        },
+        {
+          "Sha256": "78E3BF44DD0009FA3DE2B855FDD3B411BC6FFD21A62FBC04A0D9BA83E6A5CD78",
+          "Path": "src/CharacterCodec.ps1"
+        },
+        {
+          "Sha256": "DD7AAFBB6C27FC33FAA5761B0E194B4A4F6476013F81A59C5ECE646B928FC9B5",
+          "Path": "src/RenderAssets.ps1"
+        },
+        {
+          "Sha256": "F70E59DCA050F89AD579E12D29070F753E063EFF465BA6758D3C18508E2BE2DA",
+          "Path": "src/GameProcesses.ps1"
+        },
+        {
+          "Sha256": "472B67E534DBC1AB262439CCD57E481B472AD3F40761E1B9518B946067E7DEAE",
+          "Path": "src/SimulationProcess.ps1"
+        },
+        {
+          "Sha256": "F253EA6D11C8351A1C589ECA4C96AFE316A70156C6CE071D151F0DBBBA3B8ED9",
+          "Path": "scripts/Invoke-SimulationWorker.ps1"
+        },
+        {
+          "Sha256": "6A432F98075973A988F232A234E21FDB262E7BB1990F80D04224A07E16E9D1E7",
+          "Path": "scripts/Invoke-GameRenderWorker.ps1"
+        },
+        {
+          "Sha256": "77CB7FFDBADF112F1A1B84642B9CD90DF304A9B779B2F22411E9C279D15FEA1A",
+          "Path": "src/PlayerMessages.ps1"
+        },
+        {
+          "Sha256": "798038D387AD85B31056120B2EC1A52CC026A210131CC70B9283BF7D063668D5",
+          "Path": "scripts/Invoke-RenderWorkerWithLogs.ps1"
+        },
+        {
+          "Sha256": "E4D8D89A6A4095F95A1A9D293702ADD3A6A9F2E92622BA3469A08E576D12CF1B",
+          "Path": "scripts/Invoke-AudioWorker.ps1"
+        },
+        {
+          "Sha256": "38E846CDF04317FBA6DE2EC598F3497EFB6ED97DEE9AB8EEC22D8A94E4421A0B",
+          "Path": "src/AudioMixer.ps1"
+        },
+        {
+          "Sha256": "01865375DB878EFA137B3B5EF49437B4FFBF9B8C6F0359A2AA52580E0977801E",
+          "Path": "src/AudioPackets.ps1"
+        },
+        {
+          "Sha256": "7907F76AEB92969F36252E86B36A970C359B0AE2D9EC3ACCF1514E2D6ABC7DEE",
+          "Path": "src/AudioRunspace.ps1"
+        },
+        {
+          "Sha256": "B8447B4F701F8B1267E949F0BD114A2304049590B8371E449D8592F2478B0A49",
+          "Path": "src/WaveOutDevice.ps1"
+        },
+        {
+          "Sha256": "5050D3355A30692B67CF130594146FDDD0CB51B9843B2C79B65D68F55E7F11F8",
+          "Path": "src/MusicPlayback.ps1"
+        },
+        {
+          "Sha256": "A65FB5FA034E1A8DB2CCA59C0AEE7A6A0A5F132461BCA13CC06C337CB3DC859D",
+          "Path": "src/MusicLoopReader.ps1"
+        },
+        {
+          "Sha256": "5C60101C3AFEB17A8DEE7CE5E39DA78F0A347F91BEF45DF0B19877453A47BF62",
+          "Path": "src/MusicOneShotReader.ps1"
+        }
+      ],
+      "Commands": 420,
+      "Checkpoints": 2,
+      "EndHealth": 0,
+      "EndKills": 0,
+      "PalettesObserved": [
+        0,
+        2,
+        3,
+        4,
+        10
+      ],
+      "AudioEvents": 63,
+      "AudioSourcePeak": 15,
+      "SubmittedAndReturnedAudioFrames": 594720,
+      "AudioProcessId": 26140,
+      "AudioProcessingAgeMedianMs": 14.1957,
+      "AudioProcessingAgeMaxMs": 44.2059,
+      "RawAudioSeconds": 15.05,
+      "VideoSeconds": 42.033333,
+      "TimelineCopiedFrames": 641839,
+      "TimelineZeroFilledIntervals": [
+        {
+          "NextPacket": 0,
+          "Frames": 1210750,
+          "Frame": 0
+        },
+        {
+          "NextPacket": 1373,
+          "Frames": 1067,
+          "Frame": 1816243
+        }
+      ],
+      "ApiDiscontinuityPackets": 0,
+      "RawPcmNonzeroSamples": 1220759,
+      "RawPcmPeak": 32279,
+      "RawPcmRms": 3618.209161654389,
+      "Samples": [
+        {
+          "Kind": "pickup",
+          "File": {
+            "Path": "local/e3m6-effects-review-AnsiArt-pickup-r1.png",
+            "Sha256": "95654719BC20CE105A1BE0F94F5652D43CC659A7C9326621AD9926D1DF5D4B94"
+          },
+          "VideoSeconds": 28.549845700000002,
+          "SelectedWriteTic": 22,
+          "SelectedWritePalette": 10,
+          "Review": "Visible bounded E3M6 world, pistol/HUD and pickup notice; Classic retains pixels, Matrix green glyphs and AnsiArt color glyphs. Damage sample shows red tint in Classic/AnsiArt; Matrix intentionally stays green. Reviewed resized2048x829 from original3440x1392. This does not establish exact optical write identity or original-binary fidelity."
+        },
+        {
+          "Kind": "damage",
+          "File": {
+            "Path": "local/e3m6-effects-review-AnsiArt-damage-r1.png",
+            "Sha256": "8565F9D7ECD5306FA938BEA7EC74942A5EC20013CAFDBCD44A2DF77E17127352"
+          },
+          "VideoSeconds": 30.2092649,
+          "SelectedWriteTic": 69,
+          "SelectedWritePalette": 3,
+          "Review": "Visible bounded E3M6 world, pistol/HUD and pickup notice; Classic retains pixels, Matrix green glyphs and AnsiArt color glyphs. Damage sample shows red tint in Classic/AnsiArt; Matrix intentionally stays green. Reviewed resized2048x829 from original3440x1392. This does not establish exact optical write identity or original-binary fidelity."
+        }
+      ],
+      "Files": [
+        {
+          "Path": "local/recordings/e3m6-effects-AnsiArt-r1-game.json",
+          "Sha256": "8C1CD168CEF29D771311AA1A0F539F0B70C715A2746F6DC69F5566AA50C9B5AB"
+        },
+        {
+          "Path": "local/recordings/e3m6-effects-AnsiArt-r1-recording.json",
+          "Sha256": "B811B6DE94DDD1DFAA8DD5A516054EC0D3B17E9F9253624D0001BC505C098944"
+        },
+        {
+          "Path": "local/recordings/e3m6-effects-AnsiArt-r1-input.json",
+          "Sha256": "FED50209BA04F07853B42595C5323F31854673FD80BDCEA91DE6CCF2CF8B67F8"
+        },
+        {
+          "Path": "local/recordings/e3m6-effects-AnsiArt-r1-audio.json",
+          "Sha256": "B35CF168FA5973D6802775209B44B0DF741BE0A53873094672AC83E6096F4F81"
+        },
+        {
+          "Path": "local/recordings/e3m6-effects-AnsiArt-r1-audio.wav",
+          "Sha256": "97CDFA032AFC1587792474B0F20CF81DC6A74A173CED8D25D5CF64C588CAB847"
+        },
+        {
+          "Path": "local/recordings/e3m6-effects-AnsiArt-r1-av.json",
+          "Sha256": "9785E5223616D92917D4303B5569CA2FBACBD8C069BF17A5C0FE5769C39D1F1F"
+        },
+        {
+          "Path": "local/recordings/e3m6-effects-AnsiArt-r1-av.mp4",
+          "Sha256": "BAF5EF739A5C29B06DA365E3AF91F7DA4EA0DE55C678BC24D42B0D043CCC1B7B"
+        },
+        {
+          "Path": "local/recordings/e3m6-effects-AnsiArt-r1-av.wav",
+          "Sha256": "9E83ACC4BA468558A725F2BAEADB2CEF4782766CA9AC9C64813E6A0D495CAACB"
+        },
+        {
+          "Path": "local/recordings/e3m6-effects-AnsiArt-r1.mp4",
+          "Sha256": "AE03E64E8242108B02335EEC52362CF0C4D50F18D3D3AA5FF8091FEB49EC6453"
+        },
+        {
+          "Path": "local/recordings/e3m6-effects-AnsiArt-r1-ffmpeg.log",
+          "Sha256": "C4E0308AA871AD6D2914CB622219EFEAF593622A48306115D6A1FF427E22EBA7"
+        },
+        {
+          "Path": "local/recordings/e3m6-effects-AnsiArt-r1-clock.json",
+          "Sha256": "6C5283FB4CC958FD3BF82A45DD936775979EA7CB336D061901DD438AC4EE5E8F"
+        }
+      ]
+    }
+  ],
+  "Replay": {
+    "Path": "local/e3m6-captured-stress-prefix-420-checkpointed-20260928.json",
+    "Sha256": "3C449B3AA71BE042C7FF229AED2F143636ED97A4A4B02562505339B35415DD75"
+  },
+  "Audit": {
+    "Path": "local/audit-e3m6-effects-recordings-r1.py",
+    "Sha256": "EFD55E0CA6560094E012D39A728084A7693C391813BFC16DA9A2A31E91827CB6"
+  },
+  "Runner": {
+    "Path": "local/run-e3m6-effects-recordings-r1.ps1",
+    "Sha256": "90D81D5E89F510B52607436E933B1DE62A1AE7D771F94AAF6E6C462F230911C3"
+  },
+  "CollectionLog": {
+    "Path": "local/e3m6-effects-recordings-r1.log",
+    "Sha256": "FF05BDD37F2E9168DC792D0409CB6256EC4B0B9979B1C0AA3DBC3DDA46FEFCF4"
+  },
+  "SampleSelection": {
+    "Path": "local/e3m6-effects-review-samples-r1.json",
+    "Sha256": "5011C5805A9772FAC373830AABB5042394FE7C2DBE2876E99DAA91BA59A9500E"
+  },
+  "Meaning": "Three separate actual WGC/NVENC recordings plus simulation-process loopback PCM on frozen b99bdf8, full30-track music catalog and default16-worker Strips. All420 ordinary stress commands and two endpoints retained; player dies, no map completion claim. Independent accounting reconstructs copied PCM and explicit zero gaps: startup is outside loopback coverage, and a small24\u201326 ms near-tail gap is retained rather than called silence. Nonzero digital PCM and63 scheduled effect events do not prove audible effect identity, microphone/acoustic quality or physical A/V latency. Six selected full-window frames reviewed; not whole-movie or independent reference fidelity. CFR60 recording may duplicate frames and affects timing, so no clean pacing/display FPS claims. Full campaign/fidelity/physical/hardware gates stay open.",
+  "OwnedProcessExit": {
+    "Path": "local/e3m6-effects-owned-process-exit-r1.json",
+    "Sha256": "B6AB0864DCA455C4AFA420A2AF68BDB8AAE15B7FEC30B85EF322C1B5D4F22FB5"
+  }
+}

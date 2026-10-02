@@ -390,3 +390,11 @@ without changing the nine-run measurements. [Source/live identity and save check
 Additive PID/scope metadata passes the native420-command endpoint/PCM check
 and15 music-enabled save/load assertions. Continue worker-count/publication
 investigation and dense effect recordings. Release count reaches3 after Preview.5.
+
+Dense effect recordings now finish in all three styles on frozen source, with420
+commands/two endpoints,36-source identity and complete packet/PCM accounting.
+Six reviewed movie samples preserve pickup/damage/HUD and each style. Startup
+outside loopback coverage and24–26 ms near-tail capture gaps remain explicit;
+these are loaded effect recordings, not clean pacing/acoustic/navigation proof.
+[Receipt](../results/e3m6-effects-live-20261002.json). Continue paired16/8-worker
+cost investigation; release count reaches4 after Preview.5.
