@@ -1,0 +1,122 @@
+{
+  "FinishedUtc": "2026-10-02T06:02:00.758126+00:00",
+  "SourceBaseCommit": "8e4c9552dde5af1904e4b9718bde6f28e30a6878 (runtime unchanged by concurrent documentation-only ec5660c)",
+  "Commands": 420,
+  "MappedLineComparisons": 420,
+  "ReplayCheckpoints": 2,
+  "UninstrumentedDiscoveryMs": {
+    "Count": 420,
+    "Mean": 4.746210714285715,
+    "Median": 5.152200000000001,
+    "P95": 7.8302,
+    "Max": 16.0083
+  },
+  "InstrumentedDiscoveryMs": {
+    "Count": 420,
+    "Mean": 5.670887380952382,
+    "Median": 5.96055,
+    "P95": 9.0962,
+    "Max": 17.9556
+  },
+  "Methods": [
+    {
+      "Method": "Geometry.PointOnSide",
+      "Calls": 13794,
+      "MeanCallsPerCommand": 32.84285714285714,
+      "MeanInclusiveMsPerCommand": 0.6571466666666667,
+      "MedianInclusiveMsPerCommand": 0.63435,
+      "TotalInclusiveMs": 276.0016,
+      "InclusiveMicrosecondsPerCall": 20.008815426997245
+    },
+    {
+      "Method": "Geometry.PointToAngleData",
+      "Calls": 39968,
+      "MeanCallsPerCommand": 95.16190476190476,
+      "MeanInclusiveMsPerCommand": 1.7605666666666666,
+      "MedianInclusiveMsPerCommand": 1.8392499999999998,
+      "TotalInclusiveMs": 739.438,
+      "InclusiveMicrosecondsPerCall": 18.500750600480384
+    },
+    {
+      "Method": "ThreeDRenderer.DiscoverSeg",
+      "Calls": 0,
+      "MeanCallsPerCommand": 0,
+      "MeanInclusiveMsPerCommand": 0.0,
+      "MedianInclusiveMsPerCommand": 0.0,
+      "TotalInclusiveMs": 0.0,
+      "InclusiveMicrosecondsPerCall": null
+    },
+    {
+      "Method": "ThreeDRenderer.ProjectDiscoveryAngles",
+      "Calls": 28148,
+      "MeanCallsPerCommand": 67.01904761904763,
+      "MeanInclusiveMsPerCommand": 0.16065809523809524,
+      "MedianInclusiveMsPerCommand": 0.1683,
+      "TotalInclusiveMs": 67.4764,
+      "InclusiveMicrosecondsPerCall": 2.3972005115816395
+    },
+    {
+      "Method": "ThreeDRenderer.IsPotentiallyVisible",
+      "Calls": 13794,
+      "MeanCallsPerCommand": 32.84285714285714,
+      "MeanInclusiveMsPerCommand": 2.095747380952381,
+      "MedianInclusiveMsPerCommand": 2.214,
+      "TotalInclusiveMs": 880.2139,
+      "InclusiveMicrosecondsPerCall": 63.81136001159925
+    },
+    {
+      "Method": "ThreeDRenderer.DrawSolidWall",
+      "Calls": 3028,
+      "MeanCallsPerCommand": 7.20952380952381,
+      "MeanInclusiveMsPerCommand": 0.10075690476190476,
+      "MedianInclusiveMsPerCommand": 0.09104999999999999,
+      "TotalInclusiveMs": 42.3179,
+      "InclusiveMicrosecondsPerCall": 13.975528401585205
+    },
+    {
+      "Method": "ThreeDRenderer.DrawPassWall",
+      "Calls": 2535,
+      "MeanCallsPerCommand": 6.035714285714286,
+      "MeanInclusiveMsPerCommand": 0.07834285714285714,
+      "MedianInclusiveMsPerCommand": 0.09075,
+      "TotalInclusiveMs": 32.904,
+      "InclusiveMicrosecondsPerCall": 12.979881656804734
+    },
+    {
+      "Method": "ThreeDRenderer.DiscoverIndexedSeg",
+      "Calls": 14890,
+      "MeanCallsPerCommand": 35.45238095238095,
+      "MeanInclusiveMsPerCommand": 1.851442380952381,
+      "MedianInclusiveMsPerCommand": 2.0205,
+      "TotalInclusiveMs": 777.6058,
+      "InclusiveMicrosecondsPerCall": 52.22335795836132
+    }
+  ],
+  "Files": [
+    {
+      "Path": "scripts/Measure-AutomapDiscovery.ps1",
+      "Sha256": "B383F75C7076C27EB56150BB61AC3EF91C8495AB73121343D8DCD2848CA3E57D"
+    },
+    {
+      "Path": "local/e3m6-discovery-baseline-r1.json",
+      "Sha256": "D1D76BC9EC022933CEDC6AE482F1D7EB361862E729EADD31E461FEF70D05FC16"
+    },
+    {
+      "Path": "local/e3m6-discovery-baseline-r1.log",
+      "Sha256": "24184D2BF98F78D654F6926D3BC89C5AE0858C43A947DE7B517D3F539FB2CFA9"
+    },
+    {
+      "Path": "local/e3m6-discovery-profile-r1.json",
+      "Sha256": "9A8B2550C333B3EAC51F7C367DE265FE8980088E6AE2AE8313D824436B399B4C"
+    },
+    {
+      "Path": "local/e3m6-discovery-profile-r1.log",
+      "Sha256": "37062B55E90F9988FC4BB63803190DFE4EE2FA8E5D75C7E4174CD1C1990E570E"
+    },
+    {
+      "Path": "local/audit-e3m6-discovery-profile-r1.py",
+      "Sha256": "E212292061961CF0EBECE8907334482CCE044226CE8C9A8CE01F3E30433C0B56"
+    }
+  ],
+  "Meaning": "Finite unpaced420-command E3M6 baseline and subsequent owned-bundle method-profile diagnostic. Every full mapped-line bitset and both stored gameplay endpoints match. Method timers add substantial overhead and inclusive scopes overlap: DiscoverIndexedSeg contains projection and wall methods; IsPotentiallyVisible includes geometry helpers. Do not sum method times or interpret instrumented durations as loaded native performance. Initial discovery is outside the per-command diagnostic timing and remains outside this separate denominator; native primary gates continue to include their full windows. No production instrumentation/adoption or speedup, original-binary fidelity, acoustic or map completion claim."
+}

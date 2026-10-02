@@ -419,3 +419,9 @@ states/two endpoints,144 all-map headings and11 invalidations, but reuses only27
 calls and has a slightly slower overall mean. [Retained unadopted trial](../results/discovery-position-angle-trial-20261002.json).
 Profile existing traversal before further cache changes. Count reaches7 after
 Preview.5; all full Ultimate Doom gates remain active.
+
+The dense discovery profile now preserves all420 mapped states/two endpoints
+and identifies bounding-box/angle work: about95 numeric angle calls per tic,
+with overlapping instrumented scopes and explicit overhead. [Receipt](../results/e3m6-discovery-method-profile-20261002.json).
+Continue a bounded exact slope/angle trial before any source adoption; count
+reaches8 after Preview.5. All full Ultimate Doom gates remain active.
