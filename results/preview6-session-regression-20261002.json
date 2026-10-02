@@ -1,5 +1,5 @@
 {
-  "CompletedUtc": "2026-10-02T20:14:10.9839341Z",
+  "CompletedUtc": "2026-10-02T20:21:23.300895Z",
   "Release": "v0.1.0-preview.6",
   "TestSourceCommit": "0145d751a6f846114eaa6f243296086a3c71dccb",
   "CurrentCheckoutRuntimeAndScriptsMatchPackage": true,
@@ -105,13 +105,64 @@
           "Path": "src/SaveState.ps1"
         }
       ]
+    },
+    {
+      "RuntimeSourceSha256": "87368E204F816634FEA245966529892438D698B5ACD8694E370AEC46FB4B6563",
+      "Meaning": "Keeping a second save point leaves at-700.pds intact for an independent-process probe.",
+      "FirstSaveUnchangedByOverwriteFixture": true,
+      "ReportSha256": "9A3CED269E307C60145811DBA97E9E37D17033C0479681FA2951B0D2BF82944E",
+      "Report": "local/preview6-save-state-process.json",
+      "RunCount": 2,
+      "Passed": 32,
+      "ContinuationTics": 140,
+      "HarnessSha256": "55E5C7CAF4A13B08FCA121C3E73B85C6C25B90038FC6A782B70D52B411D5523A",
+      "Name": "SaveStateTwoPoints",
+      "Failed": 0,
+      "SaveAt": [
+        700,
+        840
+      ]
     }
   ],
   "Boundaries": [
     "Menu input is synthetic KEY_EVENT processing, not desktop keyboard play",
-    "Same-process SaveState checks cover graph reconstruction and 140-command continuation; the SaveWorker check separately covers simulation-process IPC and atomic save transactions",
-    "Five death/finale save fixtures exercise state restoration near ending boundaries; they are not campaign playthrough or finale pixel-fidelity evidence",
+    "Same-process SaveState checks cover graph reconstruction and 140-command continuation; SaveWorker covers simulation-process IPC and atomic save transactions",
+    "Death/finale fixtures restore and continue state near ending boundaries; they are not campaign playthrough or finale pixel-fidelity evidence",
+    "The historical input-session-replay used by the fresh-PowerShell continuation harness has a different runtime fingerprint and a divergent tic-700 checkpoint, so current-source fresh-process continuation is not qualified by this batch",
     "Audio mixer tests are deterministic/offline and do not play through a device",
     "None of these tests completes the human campaign route"
+  ],
+  "CrossProcessContinuationProbes": [
+    {
+      "ExpectedGameTic": 701,
+      "ReportSha256": "C716605957695D78DD35E20EEAF0EB2947604BDA78C91D9ECC6C26440FCA9F33",
+      "LoadedGameTic": 841,
+      "Name": "Single-save boundary misuse",
+      "Error": "Save does not correspond to the declared ordinary-input boundary.",
+      "Meaning": "The single-save Test-SaveState invocation replaced at-700.pds at the end while checking overwrite behavior. The load harness correctly rejected the now-final save. The test source was not defective.",
+      "Path": "local/preview6-save-process-load.json",
+      "HarnessSha256": "839B66E063552A2EE045431C6D00D7D51FFBF7086ED81BBD1C785594642CCAD0",
+      "InputReplaySha256": "44E229AEFB44058B598D50F8EE260421762449E43332B17BC4CDF2FBF8A4AC13"
+    },
+    {
+      "Expected": "3F2203D1A62947B5508D33F8FA0098707C318E6FB52B6EB8118684816132D14E",
+      "Error": "Original recorded checkpoint diverged at 700.",
+      "StartCommand": 700,
+      "ReportSha256": "76FE3022E2D46B4281FDD25EB31698772A444547549D0B336E6A4CC5A7D07044",
+      "Meaning": "The saved game is correctly reconstructed at the declared boundary in a separate PowerShell process; the replay checkpoint oracle is pinned to another engine source fingerprint and fails at tic 700. Treat this route recording as stale for Preview.6, not as a current-source save defect. No current-source fresh-process route comparison is claimed.",
+      "CurrentSourceFingerprint": "8118728A096802408F1138700488C711DB838FA41ED3C1B882B19CDF3956158F",
+      "Actual": "BF7F917C372F8ED1F86515A6531FA82ACFFC6EC7795B21FA21BA3283DAAE7B17",
+      "RecordedSourceFingerprint": "5E32D438E78DFD8A4FEFB5B99874DFA46715DACE9BE7211DC1FF6B80D85F9AFB",
+      "ContinueTics": 140,
+      "Name": "Untouched save with stale recorded checkpoint",
+      "Path": "local/preview6-save-process-load-retry.json",
+      "CheckpointTic": 700,
+      "BoundaryCheckPassed": true,
+      "SaveHashMatchesCreatedBoundary": true,
+      "HarnessSha256": "839B66E063552A2EE045431C6D00D7D51FFBF7086ED81BBD1C785594642CCAD0",
+      "InputReplaySha256": "44E229AEFB44058B598D50F8EE260421762449E43332B17BC4CDF2FBF8A4AC13",
+      "SaveSha256": "0E0606AC0E447747D1E851068642D13CC7EA1A8E221B1E7B29AB9F86BB72CFCE",
+      "LoadedBoundaryGameTic": 701
+    }
   ]
 }

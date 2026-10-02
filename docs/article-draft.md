@@ -334,3 +334,12 @@ mixer passes 27/27. These regressions test menu mechanics, save graphs and
 mixing arithmetic, not physical keys, fresh-process loading, speaker quality or
 the full campaign. Their [source-pinned receipt](../results/preview6-session-regression-20261002.json)
 retains local raw-report hashes and exact boundaries. The simulation-worker IPC/atomic-save test adds 12 passing checks; death and finale save-edge fixtures add 20, without claiming that any campaign or ending was played.
+
+A fresh-PowerShell continuation probe correctly reconstructed an untouched
+command-700 save, then encountered a divergent checkpoint from an older input
+recording. Its runtime fingerprint (5E32D438) differs from Preview.6 (8118728A),
+so this did not establish a current-source save defect or a passing process-
+continuation gate. The first probe also used a save path that the harness later
+replaced during its overwrite test; a second save point preserved the target
+file and isolated the stale checkpoint. Both misses and corrections remain in
+the [session receipt](../results/preview6-session-regression-20261002.json).

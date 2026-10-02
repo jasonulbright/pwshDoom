@@ -6169,3 +6169,19 @@ restored and continued near their boundaries. This is state/save coverage, not
 map-route completion or finale-image parity. The session regression receipt is
 updated with the new local report hashes.
 This ledger update will be the sixth commit since Preview.6; release again at35 commits.
+### Preview.6 fresh-process save probe — October 2, 2026
+
+The first separate-PowerShell continuation attempt rejected the command-700
+boundary because a one-point Test-SaveState run had overwritten its only save
+with the final command-840 state while testing atomic replacement. Retaining a
+second save point left the command-700 file unchanged, and the second process
+reconstructed it at the expected game tic. The test then stopped at recorded tic
+700: input-session-replay.json pins source fingerprint
+5E32D438E78DFD8A4FEFB5B99874DFA46715DACE9BE7211DC1FF6B80D85F9AFB, while the
+Preview.6 runtime is 8118728A096802408F1138700488C711DB838FA41ED3C1B882B19CDF3956158F.
+This is a stale replay oracle, not a verified product regression. Preserve both
+process reports and the 32 passing two-point save checks in the
+[session receipt](../results/preview6-session-regression-20261002.json).
+Same-process continuation and actual simulation-worker IPC remain qualified;
+fresh-process continuation against a current-source replay remains open.
+This correction will be the seventh commit after Preview.6; the next public release is due at35 commits.

@@ -94,3 +94,17 @@ IPC checks covering generation handshakes, failed-candidate isolation, atomic
 replacement and immutable replay saves, plus 20 death/finale save-edge checks
 across the actual E1M1 and E1/E2/E3/E4M8 worlds. Those ending-state fixtures do
 not count as episode completions or finale visual-fidelity comparisons.
+### Fresh-process continuation probe and stale fixture — October 2, 2026
+
+A separate PowerShell load correctly restores the untouched command-700 save,
+but the continuation harness then rejects the historical checkpoint at tic 700.
+The input recording fingerprint is 5E32D438; the current Preview.6 runtime
+fingerprint is 8118728A. The checkpoint mismatch therefore does not qualify a
+current-source process-boundary defect. The first probe also exposed that a
+single-save test run overwrites its last path while checking replacement; a
+two-point rerun keeps the command-700 save untouched. Both failures and their
+report hashes are retained in the
+[Preview.6 regression receipt](../results/preview6-session-regression-20261002.json).
+The passing same-process, simulation-worker and ending-edge tests remain
+separate evidence; a current-source fresh-process route comparison is still
+open.
