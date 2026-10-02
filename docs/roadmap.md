@@ -413,3 +413,9 @@ identifies5.4–5.9 ms/tic automap discovery omitted from the earlier update-plu
 snapshot account. Discovery while hidden preserves mapped lines and must remain.
 Investigate that path with full mapped-state oracles next. Count reaches6 after
 Preview.5; full release gates remain active.
+
+The preliminary position-angle discovery trial now preserves420 fresh mapped
+states/two endpoints,144 all-map headings and11 invalidations, but reuses only27
+calls and has a slightly slower overall mean. [Retained unadopted trial](../results/discovery-position-angle-trial-20261002.json).
+Profile existing traversal before further cache changes. Count reaches7 after
+Preview.5; all full Ultimate Doom gates remain active.

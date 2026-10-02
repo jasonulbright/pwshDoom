@@ -1,0 +1,68 @@
+{
+  "FinishedUtc": "2026-10-02T05:59:52.497211+00:00",
+  "BaseCommit": "8e4c9552dde5af1904e4b9718bde6f28e30a6878",
+  "ProductionAdopted": false,
+  "Commands": 420,
+  "FreshMappedLineComparisons": 420,
+  "Checkpoints": 2,
+  "MapStarts": 36,
+  "HeadingCases": 144,
+  "SemanticInvalidationCases": 11,
+  "PositionAngleReusePasses": 27,
+  "BaselineDiscoveryMs": {
+    "Count": 420,
+    "Mean": 4.178932619047621,
+    "Median": 4.40395,
+    "P95": 6.9836,
+    "Max": 10.9989
+  },
+  "CandidateDiscoveryMs": {
+    "Count": 420,
+    "Mean": 4.227347142857143,
+    "Median": 4.3502,
+    "P95": 7.0491,
+    "Max": 29.8279
+  },
+  "MeanChangePercent": 1.1585380340627616,
+  "MedianChangePercent": -1.2204952372302125,
+  "Decision": "Do not adopt from this preliminary result. Exact fresh mapped-line equality passes, but only27/420 calls reuse positions; overall mean is slower and a single alternating stream is insufficient for a performance claim. Profile the existing discovery traversal before extending caches. Existing runtime/source stay unchanged.",
+  "Files": [
+    {
+      "Path": "local/New-DiscoveryPositionTrial-r1.ps1",
+      "Sha256": "DD09F676AE91BA2FA727C569061DE7B1D2819ECA8A3E667A2C6E40B5C54D9FD8"
+    },
+    {
+      "Path": "local/prepare-discovery-position-harness-r1.py",
+      "Sha256": "3A1EEF957D34510A2061089400079244453ACB090184D3E27558F5D9443D082A"
+    },
+    {
+      "Path": "local/Test-DiscoveryPositionReplay-r1.ps1",
+      "Sha256": "41F1358B2E253B3FB05F1EC350DDE0E1587FFED12ACD28AB0FEE69FE788E4E68"
+    },
+    {
+      "Path": "local/Test-DiscoveryPositionMaps-r1.ps1",
+      "Sha256": "DC8DC949BD824D81EE89EF2F3C9DBAA69C8B0564C5658CC1EC9A1973AB424534"
+    },
+    {
+      "Path": "local/discovery-position-e3m6-r1.json",
+      "Sha256": "737538B5783946EC59B7766074C09818353A1A4C69B3BED48AA0BD0E7C905EAB"
+    },
+    {
+      "Path": "local/discovery-position-e3m6-r1.log",
+      "Sha256": "52FD62212CAB9D805363F89C126583D9D40B3CB6FA4698983B7D6C70D14AD4F5"
+    },
+    {
+      "Path": "local/discovery-position-maps-r1.json",
+      "Sha256": "7FE7DFAA11EA8E84CFD8E68D7ED9A2540CB7AF044E9B81AC09DED3540D61127B"
+    },
+    {
+      "Path": "local/discovery-position-maps-r1.log",
+      "Sha256": "CDAD39460BD5F84B84314455843DFED6D3B3E69192A552ECE002B6D4FADEB144"
+    },
+    {
+      "Path": "local/audit-discovery-position-trial-r1.py",
+      "Sha256": "BF19C3889152694C57DCA62A4AAE48F5423BFACC76779C86EFE21C74512F1322"
+    }
+  ],
+  "Meaning": "An ignored GPL-derived pure-PowerShell owned-bundle trial reuses absolute vertex angles across discovery calls with unchanged exact camera X/Y and vanilla map identity. Heading, light and sector changes still run the visibility/BSP/occlusion pass; no cached visibility result is reused. It assumes static vanilla vertices, matching current implementation scope, not dynamic geometry or MyHouse/GZDoom. The alternating per-command E3M6 comparison disables stationary-view skipping on both paths and preserves all420 fresh bitsets/endpoints. All36 starts/four headings and11 existing stationary-cache invalidation cases pass independently with framebuffer, validity counters and other line flags checked by the retained harness. This is preliminary isolated method timing, not a three-cycle ABBA live performance result, original-engine fidelity or map completion."
+}
