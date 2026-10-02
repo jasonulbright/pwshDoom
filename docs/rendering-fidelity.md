@@ -979,3 +979,9 @@ receipts; E3M6 fuzz output in [Classic](../results/e3m6-actor-mask-fuzz-classic-
 [snapshot transport checks](../results/snapshot-actor-worker-v4-bootstrap-final-20260928.json);
 the source-pinned [sprite-angle regression](../results/sprite-projection-shared-helper-final-20260928.json);
 and the 16-process [session-worker lifecycle check](../results/session-worker-actor-mask-classic-16w-final-20260928.json).
+
+### Original executable: frozen input-315 view (2026-10-02)
+
+The diagnostic [fixture helper](../scripts/Prepare-OriginalDoomFixture.ps1) emits an exact vanilla109 demo from a quantized input prefix, then pauses the world for a finite capture interval. Four preparations independently decode315 commands, preserve LevelTime315 on pause, and repeat the candidate's64,000 indexed pixels. It preserves the emitted configuration because original Doom writes DEFAULT.CFG on exit. Fractional input and reused output directories are rejected.
+
+Four finite launches of the installed original DOS executable were observed. A retained642x512 JPEG shows the corresponding paused wall/pistol/health/ammo view. No raw capture file was produced, so this does not establish numerical pixel parity or original hidden world-state equality. Another visible capture launch was rejected by automatic approval review before execution, with no detailed reason; it was not retried. [Evidence, configuration mutation and limitations](../results/original-doom-frozen-fixture-20261002.json). Moving-world and whole-frame independent qualification remain open; the executable/emulator are diagnostic tools outside the production PowerShell path.

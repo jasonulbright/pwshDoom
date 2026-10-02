@@ -1,0 +1,349 @@
+{
+  "FinishedUtc": "2026-10-02T04:22:57.900183+00:00",
+  "ImplementationParentCommit": "f87f8f51b7be705ac3c3cea32c5ffd17d2262ab0",
+  "Runs": [
+    {
+      "Directory": "local/original-doom-frozen315-r2",
+      "Commands": 315,
+      "PausedCommands": 2100,
+      "Endpoint": {
+        "X": 16833575,
+        "PaletteNumber": 0,
+        "Armor": 0,
+        "Paused": true,
+        "Rng": 156,
+        "Y": -198181375,
+        "Kills": 0,
+        "Angle": 1828716544,
+        "SnapshotTic": 315,
+        "ViewZ": 2071605,
+        "Health": 100,
+        "LevelTime": 315,
+        "Z": -524288
+      },
+      "Sources": [
+        {
+          "Sha256": "C517F67D8E588BE2F97F4BFD8A5FAB3123AD7428598760FA2FA818BB816A2976",
+          "Path": "src/FastRenderer.ps1"
+        },
+        {
+          "Sha256": "CBADD9B913973D0442B4BE7A45F4C1069FA75B8DCAF78F4A550AE72C4ACED706",
+          "Path": "src/GameHost.ps1"
+        },
+        {
+          "Sha256": "EC3189377645405DF30D1E37841B0CAA7FA862B66BD54523DBEF68E83F895CAE",
+          "Path": "src/ManagedDoom/Doom/Game/DoomGame.sb.ps1"
+        },
+        {
+          "Sha256": "3EEBC718090A378318E8EA1002F5CEE3215C621EDF85B4AA35AAD6109365A95F",
+          "Path": "src/ManagedDoom/Doom/Game/Demo.sb.ps1"
+        }
+      ],
+      "HarnessAtGenerationSha256": "8F8E989966D74C4131C94D07E6E508117E19F0CE3E3992D385588A44099FFB91",
+      "ConfigurationChanges": [
+        {
+          "File": "DEFAULT.CFG",
+          "EmittedSha256": "0BC4D469CCEFDA5DDD52B74B9D08430F050E008BF4C2F189D7AF27D8975D27C4",
+          "AfterOriginalExitSha256": "9653B29AE06D232DF80C5946D298862649FB54BE47304138B3E721738821CE27",
+          "PristineEquivalent": {
+            "Path": "local/original-doom-frozen315-r3/DEFAULT.CFG",
+            "Sha256": "0BC4D469CCEFDA5DDD52B74B9D08430F050E008BF4C2F189D7AF27D8975D27C4"
+          },
+          "AllEightExplicitSettingsPreserved": true,
+          "Meaning": "Original binary rewrote its configuration on exit, adding defaults/formatting. Retained unchanged demo, renderer images and emulator config remain exact. Initial audit correctly detected this mutation; it is not silently waived."
+        }
+      ],
+      "Files": [
+        {
+          "Path": "local/original-doom-frozen315-r2/fixture.json",
+          "Sha256": "85574CD94A03BD8E03A7EB73ADA603A4177B758485FAED0C30C8F036CE2AA80F"
+        },
+        {
+          "Path": "local/original-doom-frozen315-r2/FROZEN.LMP",
+          "Sha256": "8C11B4D080925B64B89B8E3684535626E493B4CB2A118791AC8ACA9B22BB1A0F"
+        },
+        {
+          "Path": "local/original-doom-frozen315-r2/DEFAULT.CFG",
+          "Sha256": "9653B29AE06D232DF80C5946D298862649FB54BE47304138B3E721738821CE27"
+        },
+        {
+          "Path": "local/original-doom-frozen315-r2/reference.conf",
+          "Sha256": "27AE2638D71E3BA14F6DA6F4D6EAF6B00A14D64E93EA98B7DB032D29A8954ED5"
+        },
+        {
+          "Path": "local/original-doom-frozen315-r2/candidate-indexed.bin",
+          "Sha256": "0DC8D158357F6079474033A8B5D9B31FE96CCB06A79A0074BED11289EF6E27A7"
+        },
+        {
+          "Path": "local/original-doom-frozen315-r2/candidate.png",
+          "Sha256": "F4A4EBC87478A9B4D49F8FFB5BD183DF7990E6D643EF1468C011503A2E474EDF"
+        }
+      ]
+    },
+    {
+      "Directory": "local/original-doom-frozen315-r3",
+      "Commands": 315,
+      "PausedCommands": 10500,
+      "Endpoint": {
+        "Angle": 1828716544,
+        "Z": -524288,
+        "X": 16833575,
+        "Armor": 0,
+        "Y": -198181375,
+        "Paused": true,
+        "Kills": 0,
+        "SnapshotTic": 315,
+        "Rng": 156,
+        "ViewZ": 2071605,
+        "LevelTime": 315,
+        "Health": 100,
+        "PaletteNumber": 0
+      },
+      "Sources": [
+        {
+          "Path": "src/FastRenderer.ps1",
+          "Sha256": "C517F67D8E588BE2F97F4BFD8A5FAB3123AD7428598760FA2FA818BB816A2976"
+        },
+        {
+          "Path": "src/GameHost.ps1",
+          "Sha256": "CBADD9B913973D0442B4BE7A45F4C1069FA75B8DCAF78F4A550AE72C4ACED706"
+        },
+        {
+          "Path": "src/ManagedDoom/Doom/Game/DoomGame.sb.ps1",
+          "Sha256": "EC3189377645405DF30D1E37841B0CAA7FA862B66BD54523DBEF68E83F895CAE"
+        },
+        {
+          "Path": "src/ManagedDoom/Doom/Game/Demo.sb.ps1",
+          "Sha256": "3EEBC718090A378318E8EA1002F5CEE3215C621EDF85B4AA35AAD6109365A95F"
+        }
+      ],
+      "HarnessAtGenerationSha256": "B5F782FB13F7F986ED800F4787161B329AB9D252981E812C2AA5F8F0A1EB7CE9",
+      "ConfigurationChanges": [],
+      "Files": [
+        {
+          "Path": "local/original-doom-frozen315-r3/fixture.json",
+          "Sha256": "C5FCE255CE16BE369E8F7348DE9B97ABE6054511505BC3678CE7B6784D3FF8A0"
+        },
+        {
+          "Path": "local/original-doom-frozen315-r3/FROZEN.LMP",
+          "Sha256": "2A6E5638A83E5397E2A608DBC680BC8AA7ECE7FDD8C2244789C33692955CC99B"
+        },
+        {
+          "Path": "local/original-doom-frozen315-r3/DEFAULT.CFG",
+          "Sha256": "0BC4D469CCEFDA5DDD52B74B9D08430F050E008BF4C2F189D7AF27D8975D27C4"
+        },
+        {
+          "Path": "local/original-doom-frozen315-r3/reference.conf",
+          "Sha256": "27AE2638D71E3BA14F6DA6F4D6EAF6B00A14D64E93EA98B7DB032D29A8954ED5"
+        },
+        {
+          "Path": "local/original-doom-frozen315-r3/candidate-indexed.bin",
+          "Sha256": "0DC8D158357F6079474033A8B5D9B31FE96CCB06A79A0074BED11289EF6E27A7"
+        },
+        {
+          "Path": "local/original-doom-frozen315-r3/candidate.png",
+          "Sha256": "F4A4EBC87478A9B4D49F8FFB5BD183DF7990E6D643EF1468C011503A2E474EDF"
+        }
+      ]
+    },
+    {
+      "Directory": "local/original-doom-frozen315-r4",
+      "Commands": 315,
+      "PausedCommands": 2100,
+      "Endpoint": {
+        "Health": 100,
+        "Armor": 0,
+        "X": 16833575,
+        "Z": -524288,
+        "SnapshotTic": 315,
+        "Kills": 0,
+        "Rng": 156,
+        "PaletteNumber": 0,
+        "ViewZ": 2071605,
+        "Angle": 1828716544,
+        "Paused": true,
+        "Y": -198181375,
+        "LevelTime": 315
+      },
+      "Sources": [
+        {
+          "Path": "src/FastRenderer.ps1",
+          "Sha256": "C517F67D8E588BE2F97F4BFD8A5FAB3123AD7428598760FA2FA818BB816A2976"
+        },
+        {
+          "Path": "src/GameHost.ps1",
+          "Sha256": "CBADD9B913973D0442B4BE7A45F4C1069FA75B8DCAF78F4A550AE72C4ACED706"
+        },
+        {
+          "Path": "src/ManagedDoom/Doom/Game/DoomGame.sb.ps1",
+          "Sha256": "EC3189377645405DF30D1E37841B0CAA7FA862B66BD54523DBEF68E83F895CAE"
+        },
+        {
+          "Path": "src/ManagedDoom/Doom/Game/Demo.sb.ps1",
+          "Sha256": "3EEBC718090A378318E8EA1002F5CEE3215C621EDF85B4AA35AAD6109365A95F"
+        }
+      ],
+      "HarnessAtGenerationSha256": "A887B8335694887EFE7E5816511748143E2511191204B0A987CF1140998FF773",
+      "ConfigurationChanges": [],
+      "Files": [
+        {
+          "Path": "local/original-doom-frozen315-r4/fixture.json",
+          "Sha256": "D82055728ED2BB8358464C040A8ED01DE1C293F9C58AB331670B5F8F8356D4D0"
+        },
+        {
+          "Path": "local/original-doom-frozen315-r4/FROZEN.LMP",
+          "Sha256": "8C11B4D080925B64B89B8E3684535626E493B4CB2A118791AC8ACA9B22BB1A0F"
+        },
+        {
+          "Path": "local/original-doom-frozen315-r4/DEFAULT.CFG",
+          "Sha256": "0BC4D469CCEFDA5DDD52B74B9D08430F050E008BF4C2F189D7AF27D8975D27C4"
+        },
+        {
+          "Path": "local/original-doom-frozen315-r4/reference.conf",
+          "Sha256": "27AE2638D71E3BA14F6DA6F4D6EAF6B00A14D64E93EA98B7DB032D29A8954ED5"
+        },
+        {
+          "Path": "local/original-doom-frozen315-r4/candidate-indexed.bin",
+          "Sha256": "0DC8D158357F6079474033A8B5D9B31FE96CCB06A79A0074BED11289EF6E27A7"
+        },
+        {
+          "Path": "local/original-doom-frozen315-r4/candidate.png",
+          "Sha256": "F4A4EBC87478A9B4D49F8FFB5BD183DF7990E6D643EF1468C011503A2E474EDF"
+        }
+      ]
+    },
+    {
+      "Directory": "local/original-doom-frozen315-r5",
+      "Commands": 315,
+      "PausedCommands": 2100,
+      "Endpoint": {
+        "Angle": 1828716544,
+        "ViewZ": 2071605,
+        "Paused": true,
+        "LevelTime": 315,
+        "X": 16833575,
+        "Kills": 0,
+        "Armor": 0,
+        "Health": 100,
+        "Rng": 156,
+        "PaletteNumber": 0,
+        "SnapshotTic": 315,
+        "Z": -524288,
+        "Y": -198181375
+      },
+      "Sources": [
+        {
+          "Sha256": "C517F67D8E588BE2F97F4BFD8A5FAB3123AD7428598760FA2FA818BB816A2976",
+          "Path": "src/FastRenderer.ps1"
+        },
+        {
+          "Sha256": "CBADD9B913973D0442B4BE7A45F4C1069FA75B8DCAF78F4A550AE72C4ACED706",
+          "Path": "src/GameHost.ps1"
+        },
+        {
+          "Sha256": "EC3189377645405DF30D1E37841B0CAA7FA862B66BD54523DBEF68E83F895CAE",
+          "Path": "src/ManagedDoom/Doom/Game/DoomGame.sb.ps1"
+        },
+        {
+          "Sha256": "3EEBC718090A378318E8EA1002F5CEE3215C621EDF85B4AA35AAD6109365A95F",
+          "Path": "src/ManagedDoom/Doom/Game/Demo.sb.ps1"
+        }
+      ],
+      "HarnessAtGenerationSha256": "D1382FDC5C57E7587339BFE8F93648389AD317883CFBEC474752BE1F9F39C234",
+      "ConfigurationChanges": [],
+      "Files": [
+        {
+          "Path": "local/original-doom-frozen315-r5/fixture.json",
+          "Sha256": "25148BA033C4AE8E100399793D807B8A6801A819E3F2DD304F312FC5F14CD9F1"
+        },
+        {
+          "Path": "local/original-doom-frozen315-r5/FROZEN.LMP",
+          "Sha256": "8C11B4D080925B64B89B8E3684535626E493B4CB2A118791AC8ACA9B22BB1A0F"
+        },
+        {
+          "Path": "local/original-doom-frozen315-r5/DEFAULT.CFG",
+          "Sha256": "0BC4D469CCEFDA5DDD52B74B9D08430F050E008BF4C2F189D7AF27D8975D27C4"
+        },
+        {
+          "Path": "local/original-doom-frozen315-r5/reference.conf",
+          "Sha256": "27AE2638D71E3BA14F6DA6F4D6EAF6B00A14D64E93EA98B7DB032D29A8954ED5"
+        },
+        {
+          "Path": "local/original-doom-frozen315-r5/candidate-indexed.bin",
+          "Sha256": "0DC8D158357F6079474033A8B5D9B31FE96CCB06A79A0074BED11289EF6E27A7"
+        },
+        {
+          "Path": "local/original-doom-frozen315-r5/candidate.png",
+          "Sha256": "F4A4EBC87478A9B4D49F8FFB5BD183DF7990E6D643EF1468C011503A2E474EDF"
+        }
+      ]
+    }
+  ],
+  "IndependentObservedReference": {
+    "OriginalExecutableSha256": "4970B0D1FEFA45836A5723777D2BB41E7932965782678ACA6C2BBEEC705B38D4",
+    "EmulatorSha256": "9D69AC6A121EFA7D274C4F6AB4A5EC98B88D39BE6D1573289BF60A27E62113A3",
+    "EmulatorVersion": "DOSBox Staging0.81.2 from installed Steam distribution",
+    "WindowImage": {
+      "Path": "local/original-doom-frozen315-r2/window-reference-r2.jpg",
+      "Sha256": "A2AD8500288C5FF40717FEE70E9EECD6E9FF52EFE33B2B2B07D0C8F72554BBF0"
+    },
+    "WindowImagePixels": [
+      642,
+      512
+    ],
+    "Observed": "Original binary visibly paused in the same wall/health/ammo/pistol view as the candidate315 endpoint. Windowed640x400 nearest-neighbour, aspect off, shader none; retained JPEG screenshot is lossy. No raw framebuffer file was produced by observed shortcuts.",
+    "RawFramebufferQualified": false,
+    "OriginalWorldStateTraceQualified": false,
+    "WholeFramePixelParityQualified": false
+  },
+  "RetainedFailure": {
+    "Path": "local/original-doom-frozen315-r1/fixture.json",
+    "Sha256": "44DF0D71C98E3991C08E799AE7BC4957ACED5390CC872B06961684AF3C7D0BD0"
+  },
+  "EmulatorLogs": [
+    {
+      "Path": "local/original-doom-frozen315-r2/dosbox.stderr.txt",
+      "Sha256": "B27F90CB73DAAACD8DD83835030491E29E83C5C1CE76DEF2A1596A8AFA17D71F"
+    },
+    {
+      "Path": "local/original-doom-frozen315-r2/dosbox-visible.stderr.txt",
+      "Sha256": "9B6C24BDCDA5A5728293F491659D84527AD6EACC64FA55D72265EE4D2E10D14D"
+    },
+    {
+      "Path": "local/original-doom-frozen315-r2/dosbox-capture-r2.stderr.txt",
+      "Sha256": "878D2955FCE60E7B62D9860A41E05C12E27FB9951C2851B604CC2E29EEC67D2B"
+    },
+    {
+      "Path": "local/original-doom-frozen315-r2/dosbox-devparm-r1.stderr.txt",
+      "Sha256": "019D1EC80482D467AC4F19E9D64CEAF727EFCCE9081C357013AD856269C8B60C"
+    }
+  ],
+  "RejectedAction": {
+    "Action": "Another visible original-Doom launch with a300-second frozen capture interval",
+    "Result": "Automatic approval review rejected the combined launch/source-query tool call before execution; no detailed reason supplied. No process launched. Existing shorter attempts already exited.",
+    "NoBypassAttempted": true
+  },
+  "Input": {
+    "Path": "local/original-doom-reference-r1/quantized-input-replay.json",
+    "Sha256": "F1EDC525E6871F07FA06E9A8B95728B370391C2A6B523935E0004185F913C08F"
+  },
+  "Audit": {
+    "Path": "local/audit-original-frozen-fixtures-r1.py",
+    "Sha256": "DB6B4BB848E9374DD1EE447E8A558719AB3E44EBEDF48737C15AC93456A9836A"
+  },
+  "CurrentHarness": {
+    "Path": "scripts/Prepare-OriginalDoomFixture.ps1",
+    "Sha256": "D1382FDC5C57E7587339BFE8F93648389AD317883CFBEC474752BE1F9F39C234"
+  },
+  "Meaning": "Independent original-executable visual diagnostic plus exact authored/decoded vanilla fixture preparation, not a completed fidelity gate. Candidate uses DemoPlayback and no extra boot/idle command before the prefix; its pause and indexed endpoint repeat exactly. Original renderer is independent but the retained window image is JPEG, and hidden original state is not traced. Binary/emulator and all WAD/demo/images stay local; the production engine/rendering/audio remain PowerShell. Missing raw pixels and broad moving-world coverage remain open.",
+  "ValidationRejections": [
+    {
+      "Path": "local/original-doom-invalid-fraction.log",
+      "Sha256": "82C20845FCCEEFD09F2F10C7B679F2E3DF49B05F5C4BA1958329EFCFBD599BF2"
+    },
+    {
+      "Path": "local/original-doom-existing-output.log",
+      "Sha256": "776A07ADEC03392125FA5DC5D65A17147032C7B2E4C18BE3523C0735549A6440"
+    }
+  ]
+}

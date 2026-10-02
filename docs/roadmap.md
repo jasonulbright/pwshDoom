@@ -349,3 +349,5 @@ Defaults remain Strips/Pairs; continue concrete frame-cost, independent
 moving-world fidelity and broader-workload work rather than repeating this
 unchanged comparison. Public release count reaches30; the35-commit rule and
 all broader release gates remain active.
+
+An independent original-binary diagnostic now observes a matching paused input315 wall/pistol view. Exact demo preparation, candidate pause and repeated indexed images pass, but the retained original image is JPEG and no raw framebuffer or hidden state trace was captured. A further visible launch was rejected before execution by automatic approval review. [Receipt and limits](../results/original-doom-frozen-fixture-20261002.json). Full independent fidelity remains open. Public count reaches31; continue useful frame-cost/broader-workload work and publish at35 or more.

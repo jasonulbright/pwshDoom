@@ -170,3 +170,10 @@ The current evidence supports a specific conclusion: PowerShell can run a real D
 - [Rendering fidelity](rendering-fidelity.md)
 - [Audio and music preparation](music-preparation.md)
 - [Source lineage and modifications](../src/ManagedDoom/ORIGIN.md)
+
+Independent comparison now includes an observed original DOS executable paused
+at an authored315-command prefix. The preparation decodes every command and
+repeats the PowerShell candidate's indexed image. The retained original image
+is a lossy window screenshot; raw framebuffer and hidden-state parity remain
+unqualified. Original Doom's configuration rewrite is recorded separately from
+unchanged demo/image hashes. [Evidence and capture limits](../results/original-doom-frozen-fixture-20261002.json).
