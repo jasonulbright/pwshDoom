@@ -19,6 +19,10 @@
 
 class VisibilityCheck {
     [World] $World
+    # Scratch storage for the near-side-first BSP walk. It grows only when a
+    # loaded map has more nodes than the current capacity.
+    [int[]] $BspPendingNodeNumbers = [int[]]::new(64)
+    [int] $BspPendingCount = 0
 
     # Eye z of looker.
     [Fixed] $SightZStart = [Fixed]::Zero
@@ -171,28 +175,43 @@ class VisibilityCheck {
     }
 
     [bool] CrossBspNode([int] $nodeNumber, [int] $validCount) {
-        if ([Node]::IsSubsector($nodeNumber)) {
-            if ($nodeNumber -eq -1) {
-                return $this.CrossSubsector(0, $validCount)
-            } else {
-                return $this.CrossSubsector([Node]::GetSubsector($nodeNumber), $validCount)
+        $map = $this.World.Map
+        if ($this.BspPendingNodeNumbers.Length -lt $map.Nodes.Length + 1) {
+            $this.BspPendingNodeNumbers = [int[]]::new($map.Nodes.Length + 1)
+        }
+        $this.BspPendingCount = 0
+
+        while ($true) {
+            if ([Node]::IsSubsector($nodeNumber)) {
+                if ($nodeNumber -eq -1) {
+                    if (-not $this.CrossSubsector(0, $validCount)) { return $false }
+                } else {
+                    if (-not $this.CrossSubsector([Node]::GetSubsector($nodeNumber), $validCount)) { return $false }
+                }
+                if ($this.BspPendingCount -eq 0) { return $true }
+                $this.BspPendingCount--
+                $nodeNumber = $this.BspPendingNodeNumbers[$this.BspPendingCount]
+                continue
             }
+
+            $node = $map.Nodes[$nodeNumber]
+            $side = [Geometry]::DivLineSide($this.Trace.X, $this.Trace.Y, $node)
+            if ($side -eq 2) { $side = 0 }
+            $targetSide = [Geometry]::DivLineSide($this.TargetX, $this.TargetY, $node)
+
+            if ($side -ne $targetSide) {
+                if ($this.BspPendingCount -ge $this.BspPendingNodeNumbers.Length) {
+                    $grown = [int[]]::new($this.BspPendingNodeNumbers.Length * 2)
+                    [Array]::Copy($this.BspPendingNodeNumbers, $grown, $this.BspPendingCount)
+                    $this.BspPendingNodeNumbers = $grown
+                }
+                $this.BspPendingNodeNumbers[$this.BspPendingCount] = $node.Children[$side -bxor 1]
+                $this.BspPendingCount++
+            }
+            $nodeNumber = $node.Children[$side]
         }
 
-        $node = $this.World.Map.Nodes[$nodeNumber]
-        $side = [Geometry]::DivLineSide($this.Trace.X, $this.Trace.Y, $node)
-
-        if ($side -eq 2) { $side = 0 }
-
-        if (-not $this.CrossBspNode($node.Children[$side], $validCount)) {
-            return $false
-        }
-
-        if ($side -eq [Geometry]::DivLineSide($this.TargetX, $this.TargetY, $node)) {
-            return $true
-        }
-
-        return $this.CrossBspNode($node.Children[$side -bxor 1], $validCount)
+        return $false
     }
 
     [bool] CheckSight([Mobj] $looker, [Mobj] $target) {

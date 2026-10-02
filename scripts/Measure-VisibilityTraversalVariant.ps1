@@ -14,9 +14,12 @@ $owned=Join-Path "$PSScriptRoot/../local" ('visibility-variant-'+$Variant.ToLowe
 $sourceRootPath=[IO.Path]::GetFullPath($SourceRoot)
 $bundle=& "$PSScriptRoot/Build-EngineBundle.ps1" -SourceRoot $sourceRootPath -Output "$owned/engine.ps1"
 $engineHash=(Get-FileHash $bundle).Hash
-if($Variant -eq 'Iterative'){
-    $source=[IO.File]::ReadAllText($bundle)
+$source=[IO.File]::ReadAllText($bundle)
+$sourceHasTraversalStack=$source.Contains('BspPendingNodeNumbers')
+if($Variant -eq 'Iterative' -and -not $sourceHasTraversalStack){
     $source=$source.Replace('class VisibilityCheck {',"class VisibilityCheck {`n    [int[]]`$BspPendingNodeNumbers=[int[]]::new(64)`n    [int]`$BspPendingCount=0")
+}
+if($Variant -in @('Reference','Iterative')){
     $tokens=$null;$issues=$null
     $ast=[Management.Automation.Language.Parser]::ParseInput($source,[ref]$tokens,[ref]$issues)
     if($issues.Count){throw 'Cannot parse engine bundle before applying iterative BSP walk.'}
@@ -24,7 +27,10 @@ if($Variant -eq 'Iterative'){
     $method=@($type.Members|Where-Object {$_.Name -eq 'CrossBspNode' -and $_ -is [Management.Automation.Language.FunctionMemberAst]})
     if($method.Count -ne 1){throw 'Expected one visibility node walk method.'}
     $old=$method[0].Body.Extent.Text
-    $replacement=@'
+    if($Variant -eq 'Iterative' -and $sourceHasTraversalStack){
+        $replacement=$old
+    } elseif($Variant -eq 'Iterative'){
+        $replacement=@'
 {
         $map = $this.World.Map
         if ($this.BspPendingNodeNumbers.Length -lt $map.Nodes.Length + 1) {
@@ -62,10 +68,30 @@ if($Variant -eq 'Iterative'){
         return $false
     }
 '@
+    } else {
+        $replacement=@'
+{
+        if ([Node]::IsSubsector($nodeNumber)) {
+            if ($nodeNumber -eq -1) {
+                return $this.CrossSubsector(0, $validCount)
+            } else {
+                return $this.CrossSubsector([Node]::GetSubsector($nodeNumber), $validCount)
+            }
+        }
+
+        $node = $this.World.Map.Nodes[$nodeNumber]
+        $side = [Geometry]::DivLineSide($this.Trace.X, $this.Trace.Y, $node)
+        if ($side -eq 2) { $side = 0 }
+        if (-not $this.CrossBspNode($node.Children[$side], $validCount)) { return $false }
+        if ($side -eq [Geometry]::DivLineSide($this.TargetX, $this.TargetY, $node)) { return $true }
+        return $this.CrossBspNode($node.Children[$side -bxor 1], $validCount)
+    }
+'@
+    }
     $source=$source.Remove($method[0].Body.Extent.StartOffset,$old.Length).Insert($method[0].Body.Extent.StartOffset,$replacement.TrimEnd())
     $ast=[Management.Automation.Language.Parser]::ParseInput($source,[ref]$tokens,[ref]$issues)
-    if($issues.Count){$issueText=@($issues|ForEach-Object {$_.Message}) -join '; ';throw "Iterative visibility bundle parse failed: $issueText"}
-    $bundle="$owned/iterative-engine.ps1"
+    if($issues.Count){$issueText=@($issues|ForEach-Object {$_.Message}) -join '; ';throw "$Variant visibility bundle parse failed: $issueText"}
+    $bundle="$owned/$Variant-engine.ps1"
     [IO.File]::WriteAllText($bundle,$source,[Text.UTF8Encoding]::new($false))
 }
 $executedHash=(Get-FileHash $bundle).Hash
