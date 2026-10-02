@@ -1099,3 +1099,14 @@ The frozen ceiling sweep changes from 12/7/410/4,167 disagreements to
 and 240 encoded strips, including palette/fuzz; all 36 maps pass idle smoke.
 Analytic scale, edge coverage, lighting and full moving/original-image fidelity
 remain unqualified. These tests do not establish campaign navigation or completion.
+
+Separate [wall-U effect recordings](../results/wall-u-effects-live-20261002.json)
+now retain the committed source and all three display modes, with six reviewed
+pickup/damage images and 56 digital consistency checks. No uncovered capture
+interval overlaps gameplay writes; startup and post-game gaps remain explicit.
+This does not qualify acoustics, optical frame identity or original fidelity.
+
+[Actual session reloads](../results/wall-u-session-reload-20261002.json) preserve
+the new angle/tangent metadata, menu/automap images and all-style workers through
+four map changes. PIDs stay stable; serial/fresh-resource controls and corrupt
+asset rejection pass. These are transport checks, not completed campaign routes.

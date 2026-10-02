@@ -510,3 +510,12 @@ Final later serial cycles cost 0.18–1.56% more; native pacing remains unqualif
 [Production evidence and alternatives](../results/wall-horizontal-sampling-20261002.json).
 Count reaches 17 after Preview.5. Record committed-source effects next, then
 continue release work without waiting; cut another release at 35 commits.
+
+Current wall-U effects are recorded and reviewed in all three modes, with 56
+digital consistency checks and no uncovered audio interval during gameplay writes.
+Actual reused worker pools pass 60 menu/automap/map-reload checks and retain
+expected resource cache behavior and corrupt-asset failure propagation.
+[Recordings](../results/wall-u-effects-live-20261002.json),
+[session reloads](../results/wall-u-session-reload-20261002.json).
+Count reaches 18 after Preview.5. Collect current-source native pacing next;
+all full-release gates stay open and another release is due at 35 commits.

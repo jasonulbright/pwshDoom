@@ -5863,3 +5863,36 @@ This implementation commit reaches 17 after Preview.5. Record actual effects
 on the committed source next, then continue useful campaign/fidelity/performance
 work. Whole human Episode 1/Ultimate Doom, original-frame, native pacing and
 physical/acoustic/DPI/second-hardware gates remain open. Release at 35 commits.
+
+### 2026-10-02 — Review wall-U effects and session reloads
+
+Three actual committed-277edaf recordings preserve Classic, Matrix and color art,
+all 420 stress commands/two stored endpoints, 37 unchanged source pins and the
+full 30-track catalog. Reviewed six pickup/damage samples show the world, pistol,
+HUD and notices; Classic/color art show damage tint and Matrix stays green.
+The tool scales original 3440×1392 frames to 2048×829 for inspection. This reviews
+selected effects, not an entire movie or exact optical write identity.
+[Recording receipt](../results/wall-u-effects-live-20261002.json).
+
+All 56 independent digital checks pass, including reconstructed PCM and credits.
+Submitted/returned audio frames are 561,960/567,000/621,180 by style; each run has
+63 events and 15 peak sources. All 57 recorded game/Terminal PIDs are absent.
+Independent timeline inspection finds no uncovered interval inside gameplay
+writes. Startup lacks loopback coverage; 23.7/25.2/24.8 ms near-tail gaps follow
+the last writes by over 400 ms. Keep the older Matrix active gap and recorder
+failures. No mixer algorithm changed or acoustic continuity claim follows.
+
+On the same source, actual sixteen-process pools also pass 60 session checks:
+1,344,000 worker-image pixels/336 encoded strips and 768,000 additional fresh
+resource pixels. Screen/menu/automap and E1M2/E2M1/E3M1/E1M2 reloads match serial
+controls. Worker PIDs persist through reloads, expected resource body reuse/misses
+remain correct, private scratch stays separate and foreign content is rejected.
+Overlapping/duplicate operations and corrupt owned asset rejection pass; all 48
+recorded worker PIDs are absent afterward. This qualifies transport and reloads,
+not human controls, save continuation, route completion or clean timing.
+[Session receipt](../results/wall-u-session-reload-20261002.json).
+
+This evidence commit reaches 18 after Preview.5. Measure current-source native
+pacing separately, with no concurrent qualification/export/recording work. Keep
+all campaign, original-frame and physical/acoustic/hardware gates open; release
+again at 35 commits since the preceding release.

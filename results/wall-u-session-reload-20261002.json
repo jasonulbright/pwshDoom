@@ -1,0 +1,1408 @@
+{
+  "FinishedUtc": "2026-10-02T09:43:53.278293+00:00",
+  "ImplementationCommit": "277edaff12f579868dd9884955977652ef8876b0",
+  "ProductionRendererSha256": "9FCAF0CC8933D4BF562D32CFB172265D92CBEC197C633C0C314ABE1CA0D36E00",
+  "Runs": [
+    {
+      "Style": "Classic",
+      "Checks": 20,
+      "WorkerImagePixelsCompared": 448000,
+      "EncodedStripsCompared": 112,
+      "FreshResourceControlPixelsCompared": 256000,
+      "WorkerPidsPreserved": [
+        5740,
+        13144,
+        20720,
+        24344,
+        25416,
+        25692,
+        25868,
+        28976,
+        29612,
+        30836,
+        31716,
+        32024,
+        32464,
+        35620,
+        37656,
+        39068
+      ],
+      "MapReloads": [
+        {
+          "WorkerBodyReuseExpected": true,
+          "Episode": 1,
+          "Map": 2,
+          "ReloadResults": [
+            {
+              "Worker": 0,
+              "Milliseconds": 281.4175,
+              "Pid": 30836,
+              "ResourceBodyReused": true
+            },
+            {
+              "Worker": 1,
+              "Milliseconds": 246.6555,
+              "Pid": 25692,
+              "ResourceBodyReused": true
+            },
+            {
+              "Worker": 2,
+              "Milliseconds": 239.2874,
+              "Pid": 32024,
+              "ResourceBodyReused": true
+            },
+            {
+              "Worker": 3,
+              "Milliseconds": 255.985,
+              "Pid": 37656,
+              "ResourceBodyReused": true
+            },
+            {
+              "Worker": 4,
+              "Milliseconds": 250.9025,
+              "Pid": 39068,
+              "ResourceBodyReused": true
+            },
+            {
+              "Worker": 5,
+              "Milliseconds": 236.2136,
+              "Pid": 28976,
+              "ResourceBodyReused": true
+            },
+            {
+              "Worker": 6,
+              "Milliseconds": 272.4956,
+              "Pid": 20720,
+              "ResourceBodyReused": true
+            },
+            {
+              "Worker": 7,
+              "Milliseconds": 276.603,
+              "Pid": 25416,
+              "ResourceBodyReused": true
+            },
+            {
+              "Worker": 8,
+              "Milliseconds": 275.6427,
+              "Pid": 5740,
+              "ResourceBodyReused": true
+            },
+            {
+              "Worker": 9,
+              "Milliseconds": 264.3443,
+              "Pid": 13144,
+              "ResourceBodyReused": true
+            },
+            {
+              "Worker": 10,
+              "Milliseconds": 273.2611,
+              "Pid": 31716,
+              "ResourceBodyReused": true
+            },
+            {
+              "Worker": 11,
+              "Milliseconds": 259.455,
+              "Pid": 29612,
+              "ResourceBodyReused": true
+            },
+            {
+              "Worker": 12,
+              "Milliseconds": 250.2078,
+              "Pid": 24344,
+              "ResourceBodyReused": true
+            },
+            {
+              "Worker": 13,
+              "Milliseconds": 276.8398,
+              "Pid": 25868,
+              "ResourceBodyReused": true
+            },
+            {
+              "Worker": 14,
+              "Milliseconds": 274.6633,
+              "Pid": 32464,
+              "ResourceBodyReused": true
+            },
+            {
+              "Worker": 15,
+              "Milliseconds": 275.6775,
+              "Pid": 35620,
+              "ResourceBodyReused": true
+            }
+          ]
+        },
+        {
+          "WorkerBodyReuseExpected": false,
+          "Episode": 2,
+          "Map": 1,
+          "ReloadResults": [
+            {
+              "Worker": 0,
+              "Milliseconds": 1632.2013,
+              "Pid": 30836,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 1,
+              "Milliseconds": 1660.8701,
+              "Pid": 25692,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 2,
+              "Milliseconds": 1642.8005,
+              "Pid": 32024,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 3,
+              "Milliseconds": 1710.4052,
+              "Pid": 37656,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 4,
+              "Milliseconds": 1714.5305,
+              "Pid": 39068,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 5,
+              "Milliseconds": 1651.2228,
+              "Pid": 28976,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 6,
+              "Milliseconds": 1687.0002,
+              "Pid": 20720,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 7,
+              "Milliseconds": 1696.7872,
+              "Pid": 25416,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 8,
+              "Milliseconds": 1678.7966,
+              "Pid": 5740,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 9,
+              "Milliseconds": 1634.3171,
+              "Pid": 13144,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 10,
+              "Milliseconds": 1667.702,
+              "Pid": 31716,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 11,
+              "Milliseconds": 1716.3004,
+              "Pid": 29612,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 12,
+              "Milliseconds": 1645.5567,
+              "Pid": 24344,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 13,
+              "Milliseconds": 1678.1824,
+              "Pid": 25868,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 14,
+              "Milliseconds": 1662.2688,
+              "Pid": 32464,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 15,
+              "Milliseconds": 1715.9339,
+              "Pid": 35620,
+              "ResourceBodyReused": false
+            }
+          ]
+        },
+        {
+          "WorkerBodyReuseExpected": false,
+          "Episode": 3,
+          "Map": 1,
+          "ReloadResults": [
+            {
+              "Worker": 0,
+              "Milliseconds": 1610.6665,
+              "Pid": 30836,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 1,
+              "Milliseconds": 1638.2584,
+              "Pid": 25692,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 2,
+              "Milliseconds": 1579.5438,
+              "Pid": 32024,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 3,
+              "Milliseconds": 1615.6503,
+              "Pid": 37656,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 4,
+              "Milliseconds": 1635.0987,
+              "Pid": 39068,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 5,
+              "Milliseconds": 1678.199,
+              "Pid": 28976,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 6,
+              "Milliseconds": 1639.4129,
+              "Pid": 20720,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 7,
+              "Milliseconds": 1641.3761,
+              "Pid": 25416,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 8,
+              "Milliseconds": 1602.7142,
+              "Pid": 5740,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 9,
+              "Milliseconds": 1608.1176,
+              "Pid": 13144,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 10,
+              "Milliseconds": 1653.6358,
+              "Pid": 31716,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 11,
+              "Milliseconds": 1666.9781,
+              "Pid": 29612,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 12,
+              "Milliseconds": 1616.6142,
+              "Pid": 24344,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 13,
+              "Milliseconds": 1568.45,
+              "Pid": 25868,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 14,
+              "Milliseconds": 1610.0324,
+              "Pid": 32464,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 15,
+              "Milliseconds": 1635.7564,
+              "Pid": 35620,
+              "ResourceBodyReused": false
+            }
+          ]
+        },
+        {
+          "WorkerBodyReuseExpected": false,
+          "Episode": 1,
+          "Map": 2,
+          "ReloadResults": [
+            {
+              "Worker": 0,
+              "Milliseconds": 1703.0228,
+              "Pid": 30836,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 1,
+              "Milliseconds": 1667.741,
+              "Pid": 25692,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 2,
+              "Milliseconds": 1691.3463,
+              "Pid": 32024,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 3,
+              "Milliseconds": 1667.7473,
+              "Pid": 37656,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 4,
+              "Milliseconds": 1662.9691,
+              "Pid": 39068,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 5,
+              "Milliseconds": 1694.5013,
+              "Pid": 28976,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 6,
+              "Milliseconds": 1732.821,
+              "Pid": 20720,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 7,
+              "Milliseconds": 1667.9484,
+              "Pid": 25416,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 8,
+              "Milliseconds": 1657.944,
+              "Pid": 5740,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 9,
+              "Milliseconds": 1675.4691,
+              "Pid": 13144,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 10,
+              "Milliseconds": 1651.1557,
+              "Pid": 31716,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 11,
+              "Milliseconds": 1751.176,
+              "Pid": 29612,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 12,
+              "Milliseconds": 1699.4946,
+              "Pid": 24344,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 13,
+              "Milliseconds": 1701.1658,
+              "Pid": 25868,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 14,
+              "Milliseconds": 1705.1659,
+              "Pid": 32464,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 15,
+              "Milliseconds": 1728.7762,
+              "Pid": 35620,
+              "ResourceBodyReused": false
+            }
+          ]
+        }
+      ],
+      "InvalidOwnedAssetDetectionMs": 22.9333,
+      "Files": [
+        {
+          "Path": "local/wall-u-session-Classic-r1.json",
+          "Sha256": "100ABB6CDD74ADFEE18FA5CA072E9368110C3055B802DA86698320C7B4D2D375"
+        },
+        {
+          "Path": "local/wall-u-session-Classic-r1.log",
+          "Sha256": "A730150C72190F20E02B977D301AF1C9635F194F94DA5A15BB0AB3BDECD8A042"
+        }
+      ]
+    },
+    {
+      "Style": "Matrix",
+      "Checks": 20,
+      "WorkerImagePixelsCompared": 448000,
+      "EncodedStripsCompared": 112,
+      "FreshResourceControlPixelsCompared": 256000,
+      "WorkerPidsPreserved": [
+        8752,
+        11208,
+        12928,
+        13680,
+        19360,
+        21384,
+        28252,
+        28512,
+        31012,
+        31464,
+        32484,
+        32800,
+        34140,
+        36064,
+        36756,
+        38276
+      ],
+      "MapReloads": [
+        {
+          "WorkerBodyReuseExpected": true,
+          "Episode": 1,
+          "Map": 2,
+          "ReloadResults": [
+            {
+              "Pid": 12928,
+              "Worker": 0,
+              "Milliseconds": 277.7308,
+              "ResourceBodyReused": true
+            },
+            {
+              "Pid": 36756,
+              "Worker": 1,
+              "Milliseconds": 260.5326,
+              "ResourceBodyReused": true
+            },
+            {
+              "Pid": 19360,
+              "Worker": 2,
+              "Milliseconds": 248.9031,
+              "ResourceBodyReused": true
+            },
+            {
+              "Pid": 31464,
+              "Worker": 3,
+              "Milliseconds": 271.3991,
+              "ResourceBodyReused": true
+            },
+            {
+              "Pid": 32484,
+              "Worker": 4,
+              "Milliseconds": 233.3379,
+              "ResourceBodyReused": true
+            },
+            {
+              "Pid": 8752,
+              "Worker": 5,
+              "Milliseconds": 262.9339,
+              "ResourceBodyReused": true
+            },
+            {
+              "Pid": 11208,
+              "Worker": 6,
+              "Milliseconds": 277.2861,
+              "ResourceBodyReused": true
+            },
+            {
+              "Pid": 36064,
+              "Worker": 7,
+              "Milliseconds": 239.8278,
+              "ResourceBodyReused": true
+            },
+            {
+              "Pid": 34140,
+              "Worker": 8,
+              "Milliseconds": 266.0083,
+              "ResourceBodyReused": true
+            },
+            {
+              "Pid": 31012,
+              "Worker": 9,
+              "Milliseconds": 268.7696,
+              "ResourceBodyReused": true
+            },
+            {
+              "Pid": 38276,
+              "Worker": 10,
+              "Milliseconds": 274.9951,
+              "ResourceBodyReused": true
+            },
+            {
+              "Pid": 13680,
+              "Worker": 11,
+              "Milliseconds": 251.5847,
+              "ResourceBodyReused": true
+            },
+            {
+              "Pid": 28512,
+              "Worker": 12,
+              "Milliseconds": 287.7692,
+              "ResourceBodyReused": true
+            },
+            {
+              "Pid": 32800,
+              "Worker": 13,
+              "Milliseconds": 266.4741,
+              "ResourceBodyReused": true
+            },
+            {
+              "Pid": 28252,
+              "Worker": 14,
+              "Milliseconds": 289.1356,
+              "ResourceBodyReused": true
+            },
+            {
+              "Pid": 21384,
+              "Worker": 15,
+              "Milliseconds": 284.0215,
+              "ResourceBodyReused": true
+            }
+          ]
+        },
+        {
+          "WorkerBodyReuseExpected": false,
+          "Episode": 2,
+          "Map": 1,
+          "ReloadResults": [
+            {
+              "Pid": 12928,
+              "Worker": 0,
+              "Milliseconds": 1713.7801,
+              "ResourceBodyReused": false
+            },
+            {
+              "Pid": 36756,
+              "Worker": 1,
+              "Milliseconds": 1751.9208,
+              "ResourceBodyReused": false
+            },
+            {
+              "Pid": 19360,
+              "Worker": 2,
+              "Milliseconds": 1715.2847,
+              "ResourceBodyReused": false
+            },
+            {
+              "Pid": 31464,
+              "Worker": 3,
+              "Milliseconds": 1695.2701,
+              "ResourceBodyReused": false
+            },
+            {
+              "Pid": 32484,
+              "Worker": 4,
+              "Milliseconds": 1645.4227,
+              "ResourceBodyReused": false
+            },
+            {
+              "Pid": 8752,
+              "Worker": 5,
+              "Milliseconds": 1681.812,
+              "ResourceBodyReused": false
+            },
+            {
+              "Pid": 11208,
+              "Worker": 6,
+              "Milliseconds": 1681.0013,
+              "ResourceBodyReused": false
+            },
+            {
+              "Pid": 36064,
+              "Worker": 7,
+              "Milliseconds": 1723.9889,
+              "ResourceBodyReused": false
+            },
+            {
+              "Pid": 34140,
+              "Worker": 8,
+              "Milliseconds": 1697.3576,
+              "ResourceBodyReused": false
+            },
+            {
+              "Pid": 31012,
+              "Worker": 9,
+              "Milliseconds": 1747.9883,
+              "ResourceBodyReused": false
+            },
+            {
+              "Pid": 38276,
+              "Worker": 10,
+              "Milliseconds": 1698.4187,
+              "ResourceBodyReused": false
+            },
+            {
+              "Pid": 13680,
+              "Worker": 11,
+              "Milliseconds": 1691.9549,
+              "ResourceBodyReused": false
+            },
+            {
+              "Pid": 28512,
+              "Worker": 12,
+              "Milliseconds": 1723.7633,
+              "ResourceBodyReused": false
+            },
+            {
+              "Pid": 32800,
+              "Worker": 13,
+              "Milliseconds": 1656.4659,
+              "ResourceBodyReused": false
+            },
+            {
+              "Pid": 28252,
+              "Worker": 14,
+              "Milliseconds": 1706.195,
+              "ResourceBodyReused": false
+            },
+            {
+              "Pid": 21384,
+              "Worker": 15,
+              "Milliseconds": 1672.841,
+              "ResourceBodyReused": false
+            }
+          ]
+        },
+        {
+          "WorkerBodyReuseExpected": false,
+          "Episode": 3,
+          "Map": 1,
+          "ReloadResults": [
+            {
+              "Pid": 12928,
+              "Worker": 0,
+              "Milliseconds": 1618.5028,
+              "ResourceBodyReused": false
+            },
+            {
+              "Pid": 36756,
+              "Worker": 1,
+              "Milliseconds": 1534.2164,
+              "ResourceBodyReused": false
+            },
+            {
+              "Pid": 19360,
+              "Worker": 2,
+              "Milliseconds": 1555.2443,
+              "ResourceBodyReused": false
+            },
+            {
+              "Pid": 31464,
+              "Worker": 3,
+              "Milliseconds": 1603.2174,
+              "ResourceBodyReused": false
+            },
+            {
+              "Pid": 32484,
+              "Worker": 4,
+              "Milliseconds": 1543.8964,
+              "ResourceBodyReused": false
+            },
+            {
+              "Pid": 8752,
+              "Worker": 5,
+              "Milliseconds": 1620.8909,
+              "ResourceBodyReused": false
+            },
+            {
+              "Pid": 11208,
+              "Worker": 6,
+              "Milliseconds": 1613.764,
+              "ResourceBodyReused": false
+            },
+            {
+              "Pid": 36064,
+              "Worker": 7,
+              "Milliseconds": 1606.6233,
+              "ResourceBodyReused": false
+            },
+            {
+              "Pid": 34140,
+              "Worker": 8,
+              "Milliseconds": 1629.0903,
+              "ResourceBodyReused": false
+            },
+            {
+              "Pid": 31012,
+              "Worker": 9,
+              "Milliseconds": 1660.9378,
+              "ResourceBodyReused": false
+            },
+            {
+              "Pid": 38276,
+              "Worker": 10,
+              "Milliseconds": 1596.8944,
+              "ResourceBodyReused": false
+            },
+            {
+              "Pid": 13680,
+              "Worker": 11,
+              "Milliseconds": 1616.3783,
+              "ResourceBodyReused": false
+            },
+            {
+              "Pid": 28512,
+              "Worker": 12,
+              "Milliseconds": 1622.5152,
+              "ResourceBodyReused": false
+            },
+            {
+              "Pid": 32800,
+              "Worker": 13,
+              "Milliseconds": 1638.8082,
+              "ResourceBodyReused": false
+            },
+            {
+              "Pid": 28252,
+              "Worker": 14,
+              "Milliseconds": 1606.5593,
+              "ResourceBodyReused": false
+            },
+            {
+              "Pid": 21384,
+              "Worker": 15,
+              "Milliseconds": 1632.8758,
+              "ResourceBodyReused": false
+            }
+          ]
+        },
+        {
+          "WorkerBodyReuseExpected": false,
+          "Episode": 1,
+          "Map": 2,
+          "ReloadResults": [
+            {
+              "Pid": 12928,
+              "Worker": 0,
+              "Milliseconds": 1714.0204,
+              "ResourceBodyReused": false
+            },
+            {
+              "Pid": 36756,
+              "Worker": 1,
+              "Milliseconds": 1672.1019,
+              "ResourceBodyReused": false
+            },
+            {
+              "Pid": 19360,
+              "Worker": 2,
+              "Milliseconds": 1707.4582,
+              "ResourceBodyReused": false
+            },
+            {
+              "Pid": 31464,
+              "Worker": 3,
+              "Milliseconds": 1627.9917,
+              "ResourceBodyReused": false
+            },
+            {
+              "Pid": 32484,
+              "Worker": 4,
+              "Milliseconds": 1720.9977,
+              "ResourceBodyReused": false
+            },
+            {
+              "Pid": 8752,
+              "Worker": 5,
+              "Milliseconds": 1701.3338,
+              "ResourceBodyReused": false
+            },
+            {
+              "Pid": 11208,
+              "Worker": 6,
+              "Milliseconds": 1715.327,
+              "ResourceBodyReused": false
+            },
+            {
+              "Pid": 36064,
+              "Worker": 7,
+              "Milliseconds": 1667.0643,
+              "ResourceBodyReused": false
+            },
+            {
+              "Pid": 34140,
+              "Worker": 8,
+              "Milliseconds": 1674.1148,
+              "ResourceBodyReused": false
+            },
+            {
+              "Pid": 31012,
+              "Worker": 9,
+              "Milliseconds": 1774.6992,
+              "ResourceBodyReused": false
+            },
+            {
+              "Pid": 38276,
+              "Worker": 10,
+              "Milliseconds": 1757.1837,
+              "ResourceBodyReused": false
+            },
+            {
+              "Pid": 13680,
+              "Worker": 11,
+              "Milliseconds": 1681.5232,
+              "ResourceBodyReused": false
+            },
+            {
+              "Pid": 28512,
+              "Worker": 12,
+              "Milliseconds": 1689.2785,
+              "ResourceBodyReused": false
+            },
+            {
+              "Pid": 32800,
+              "Worker": 13,
+              "Milliseconds": 1685.4875,
+              "ResourceBodyReused": false
+            },
+            {
+              "Pid": 28252,
+              "Worker": 14,
+              "Milliseconds": 1734.9519,
+              "ResourceBodyReused": false
+            },
+            {
+              "Pid": 21384,
+              "Worker": 15,
+              "Milliseconds": 1721.2668,
+              "ResourceBodyReused": false
+            }
+          ]
+        }
+      ],
+      "InvalidOwnedAssetDetectionMs": 14.3868,
+      "Files": [
+        {
+          "Path": "local/wall-u-session-Matrix-r1.json",
+          "Sha256": "AEC25DB9D1DA5EA5189E2A7C2501F6872DAA1A87C5CA6A22F99F47C8F7FF5C09"
+        },
+        {
+          "Path": "local/wall-u-session-Matrix-r1.log",
+          "Sha256": "35C6E5E3EE4F53E957D09A3DDB2BD46703E5F8349318D2B772D5846237ECDB82"
+        }
+      ]
+    },
+    {
+      "Style": "AnsiArt",
+      "Checks": 20,
+      "WorkerImagePixelsCompared": 448000,
+      "EncodedStripsCompared": 112,
+      "FreshResourceControlPixelsCompared": 256000,
+      "WorkerPidsPreserved": [
+        2652,
+        6180,
+        6324,
+        9584,
+        13264,
+        19176,
+        20100,
+        25100,
+        27400,
+        30904,
+        33440,
+        33656,
+        34668,
+        34996,
+        35812,
+        39832
+      ],
+      "MapReloads": [
+        {
+          "WorkerBodyReuseExpected": true,
+          "Episode": 1,
+          "ReloadResults": [
+            {
+              "Worker": 0,
+              "Milliseconds": 287.4801,
+              "Pid": 25100,
+              "ResourceBodyReused": true
+            },
+            {
+              "Worker": 1,
+              "Milliseconds": 266.5483,
+              "Pid": 34996,
+              "ResourceBodyReused": true
+            },
+            {
+              "Worker": 2,
+              "Milliseconds": 265.7912,
+              "Pid": 20100,
+              "ResourceBodyReused": true
+            },
+            {
+              "Worker": 3,
+              "Milliseconds": 246.3475,
+              "Pid": 34668,
+              "ResourceBodyReused": true
+            },
+            {
+              "Worker": 4,
+              "Milliseconds": 241.5895,
+              "Pid": 2652,
+              "ResourceBodyReused": true
+            },
+            {
+              "Worker": 5,
+              "Milliseconds": 273.6465,
+              "Pid": 6180,
+              "ResourceBodyReused": true
+            },
+            {
+              "Worker": 6,
+              "Milliseconds": 293.2335,
+              "Pid": 27400,
+              "ResourceBodyReused": true
+            },
+            {
+              "Worker": 7,
+              "Milliseconds": 297.2056,
+              "Pid": 33656,
+              "ResourceBodyReused": true
+            },
+            {
+              "Worker": 8,
+              "Milliseconds": 291.3613,
+              "Pid": 19176,
+              "ResourceBodyReused": true
+            },
+            {
+              "Worker": 9,
+              "Milliseconds": 289.5895,
+              "Pid": 30904,
+              "ResourceBodyReused": true
+            },
+            {
+              "Worker": 10,
+              "Milliseconds": 284.2999,
+              "Pid": 13264,
+              "ResourceBodyReused": true
+            },
+            {
+              "Worker": 11,
+              "Milliseconds": 300.9633,
+              "Pid": 9584,
+              "ResourceBodyReused": true
+            },
+            {
+              "Worker": 12,
+              "Milliseconds": 276.3025,
+              "Pid": 39832,
+              "ResourceBodyReused": true
+            },
+            {
+              "Worker": 13,
+              "Milliseconds": 281.2584,
+              "Pid": 6324,
+              "ResourceBodyReused": true
+            },
+            {
+              "Worker": 14,
+              "Milliseconds": 303.2701,
+              "Pid": 35812,
+              "ResourceBodyReused": true
+            },
+            {
+              "Worker": 15,
+              "Milliseconds": 295.9411,
+              "Pid": 33440,
+              "ResourceBodyReused": true
+            }
+          ],
+          "Map": 2
+        },
+        {
+          "WorkerBodyReuseExpected": false,
+          "Episode": 2,
+          "ReloadResults": [
+            {
+              "Worker": 0,
+              "Milliseconds": 1725.9713,
+              "Pid": 25100,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 1,
+              "Milliseconds": 1697.1961,
+              "Pid": 34996,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 2,
+              "Milliseconds": 1710.6402,
+              "Pid": 20100,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 3,
+              "Milliseconds": 1731.0565,
+              "Pid": 34668,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 4,
+              "Milliseconds": 1677.7892,
+              "Pid": 2652,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 5,
+              "Milliseconds": 1711.5843,
+              "Pid": 6180,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 6,
+              "Milliseconds": 1652.3837,
+              "Pid": 27400,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 7,
+              "Milliseconds": 1695.6511,
+              "Pid": 33656,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 8,
+              "Milliseconds": 1692.9435,
+              "Pid": 19176,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 9,
+              "Milliseconds": 1682.7158,
+              "Pid": 30904,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 10,
+              "Milliseconds": 1696.2632,
+              "Pid": 13264,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 11,
+              "Milliseconds": 1701.7174,
+              "Pid": 9584,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 12,
+              "Milliseconds": 1664.3193,
+              "Pid": 39832,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 13,
+              "Milliseconds": 1721.048,
+              "Pid": 6324,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 14,
+              "Milliseconds": 1699.9508,
+              "Pid": 35812,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 15,
+              "Milliseconds": 1760.9139,
+              "Pid": 33440,
+              "ResourceBodyReused": false
+            }
+          ],
+          "Map": 1
+        },
+        {
+          "WorkerBodyReuseExpected": false,
+          "Episode": 3,
+          "ReloadResults": [
+            {
+              "Worker": 0,
+              "Milliseconds": 1586.2903,
+              "Pid": 25100,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 1,
+              "Milliseconds": 1551.8331,
+              "Pid": 34996,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 2,
+              "Milliseconds": 1606.2176,
+              "Pid": 20100,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 3,
+              "Milliseconds": 1601.2625,
+              "Pid": 34668,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 4,
+              "Milliseconds": 1596.2351,
+              "Pid": 2652,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 5,
+              "Milliseconds": 1613.3101,
+              "Pid": 6180,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 6,
+              "Milliseconds": 1608.3926,
+              "Pid": 27400,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 7,
+              "Milliseconds": 1584.7671,
+              "Pid": 33656,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 8,
+              "Milliseconds": 1621.7184,
+              "Pid": 19176,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 9,
+              "Milliseconds": 1657.6468,
+              "Pid": 30904,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 10,
+              "Milliseconds": 1599.8186,
+              "Pid": 13264,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 11,
+              "Milliseconds": 1555.4565,
+              "Pid": 9584,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 12,
+              "Milliseconds": 1600.7348,
+              "Pid": 39832,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 13,
+              "Milliseconds": 1615.2144,
+              "Pid": 6324,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 14,
+              "Milliseconds": 1590.7017,
+              "Pid": 35812,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 15,
+              "Milliseconds": 1625.1752,
+              "Pid": 33440,
+              "ResourceBodyReused": false
+            }
+          ],
+          "Map": 1
+        },
+        {
+          "WorkerBodyReuseExpected": false,
+          "Episode": 1,
+          "ReloadResults": [
+            {
+              "Worker": 0,
+              "Milliseconds": 1697.1882,
+              "Pid": 25100,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 1,
+              "Milliseconds": 1672.3824,
+              "Pid": 34996,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 2,
+              "Milliseconds": 1721.4276,
+              "Pid": 20100,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 3,
+              "Milliseconds": 1724.5082,
+              "Pid": 34668,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 4,
+              "Milliseconds": 1734.3015,
+              "Pid": 2652,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 5,
+              "Milliseconds": 1725.8552,
+              "Pid": 6180,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 6,
+              "Milliseconds": 1674.1084,
+              "Pid": 27400,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 7,
+              "Milliseconds": 1748.6542,
+              "Pid": 33656,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 8,
+              "Milliseconds": 1689.9689,
+              "Pid": 19176,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 9,
+              "Milliseconds": 1735.4715,
+              "Pid": 30904,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 10,
+              "Milliseconds": 1740.4271,
+              "Pid": 13264,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 11,
+              "Milliseconds": 1731.8453,
+              "Pid": 9584,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 12,
+              "Milliseconds": 1724.2491,
+              "Pid": 39832,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 13,
+              "Milliseconds": 1610.9862,
+              "Pid": 6324,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 14,
+              "Milliseconds": 1709.2702,
+              "Pid": 35812,
+              "ResourceBodyReused": false
+            },
+            {
+              "Worker": 15,
+              "Milliseconds": 1744.0053,
+              "Pid": 33440,
+              "ResourceBodyReused": false
+            }
+          ],
+          "Map": 2
+        }
+      ],
+      "InvalidOwnedAssetDetectionMs": 24.4183,
+      "Files": [
+        {
+          "Path": "local/wall-u-session-AnsiArt-r1.json",
+          "Sha256": "C761A45EEACBFE6CBD845DB28CDC788E009160578F90BB0F6C723652B30D9188"
+        },
+        {
+          "Path": "local/wall-u-session-AnsiArt-r1.log",
+          "Sha256": "9B8BBCA43D21E5C341E65722BD3B73EA9B70655DE5A145E29924E8FF23D160CC"
+        }
+      ]
+    }
+  ],
+  "Sources": [
+    {
+      "Path": "scripts/Invoke-GameRenderWorker.ps1",
+      "Sha256": "6A432F98075973A988F232A234E21FDB262E7BB1990F80D04224A07E16E9D1E7"
+    },
+    {
+      "Path": "scripts/Invoke-RenderWorkerWithLogs.ps1",
+      "Sha256": "798038D387AD85B31056120B2EC1A52CC026A210131CC70B9283BF7D063668D5"
+    },
+    {
+      "Path": "scripts/Test-SessionWorker.ps1",
+      "Sha256": "34EEEBA7DE6D4CB00AB87129BD5DF8E033D4830515853DD692969F38D4567C10"
+    },
+    {
+      "Path": "src/FastRenderer.ps1",
+      "Sha256": "9FCAF0CC8933D4BF562D32CFB172265D92CBEC197C633C0C314ABE1CA0D36E00"
+    },
+    {
+      "Path": "src/GameHost.ps1",
+      "Sha256": "CBADD9B913973D0442B4BE7A45F4C1069FA75B8DCAF78F4A550AE72C4ACED706"
+    },
+    {
+      "Path": "src/GameProcesses.ps1",
+      "Sha256": "F70E59DCA050F89AD579E12D29070F753E063EFF465BA6758D3C18508E2BE2DA"
+    },
+    {
+      "Path": "src/RenderAssets.ps1",
+      "Sha256": "CBEE2F476DE24862FA11231B09BBFF041884E6DBC0BFFF923BE1BF4A3536F76F"
+    },
+    {
+      "Path": "src/SnapshotTransport.ps1",
+      "Sha256": "E88163E3D970A02F5D81B9EEDDEB9F7B1E0FE2A90AFCF4019733D423D69E8F8A"
+    }
+  ],
+  "Cleanup": {
+    "Path": "local/wall-u-session-owned-process-exit-r1.json",
+    "Sha256": "AE54FC056BAF9AE4575CB23D9197DD4EAC298F001B4073FB3666C79FAA75E97F"
+  },
+  "Runner": {
+    "Path": "local/run-wall-u-session-reload-r1.ps1",
+    "Sha256": "233D83C3C373DFBF24C1348D0766633599D638C4C807F456B51F0FC0EA00C9A6"
+  },
+  "CollectionLog": {
+    "Path": "local/wall-u-session-reload-r1.log",
+    "Sha256": "5AFF6DDF3A0B0EF730DC87B77F7199A789A4D4556D245F096F719D7F22C69A57"
+  },
+  "Audit": {
+    "Path": "local/audit-wall-u-session-reload-r1.py",
+    "Sha256": "D7AECF8C8C4F7600A7ECE895B878806399329DFAA4D367FFCCF32EDA6E74EC6D"
+  },
+  "Meaning": "Actual16 processes per style preserve their PIDs through four map resource reloads. Screen, menu, automap and changed-map images/encoded strips match own serial source; fresh-resource controls additionally compare pixels and private scratch. Body reuse/misses match expected sky changes, additive segment-angle/tangent metadata reloads, overlapping/duplicate operations and corrupt owned asset failure remain tested. All48 recorded worker PIDs absent at inspection; absence is a conservative PID-only observation, not start-identity proof. No campaign navigation/completion, physical controls, original-image parity, save continuation or native performance claim. Reload timing is instrumented test behavior, not clean pacing."
+}

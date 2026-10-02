@@ -285,3 +285,13 @@ worker comparisons. Later serial cycles cost 0.2–1.6% more than the old render
 in this batch; the earlier alternatives' 4–17% increases remain recorded. Initial
 calls and outliers are retained. Better wall sampling does not yet establish
 original-game image parity, campaign completion or the native 35-tic/60-frame goals.
+
+Live recordings on that committed build retain all three modes and their HUD,
+pickup and damage effects. Digital audio accounting is complete, with capture
+coverage through gameplay writes and explicit startup/post-game gaps. Separate
+session checks preserve menus, automap and map resources across the existing
+render processes, including failure propagation from a corrupt test asset.
+[Effect recordings](../results/wall-u-effects-live-20261002.json) and
+[reload controls](../results/wall-u-session-reload-20261002.json) add bounded
+integration evidence; human campaign play, acoustics and native pacing remain
+separate qualifications.
