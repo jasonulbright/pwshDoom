@@ -93,6 +93,7 @@ function ConvertTo-DoomSaveGraph {
         $binding='';$null=$bindings.Bound.TryGetValue($value,[ref]$binding)
         $nodes.Add([ordered]@{Type=$key;Binding=$binding;Values=$values.ToArray()})
     }
+    Assert-DoomSaveGraph $Game $bindings $objects.ToArray()
     return [ordered]@{Root=$root;Nodes=$nodes.ToArray()}
 }
 function Restore-DoomSaveGraph {
@@ -226,7 +227,6 @@ function Write-DoomSaveState {
     $temporary=$destination+'.'+[guid]::NewGuid().ToString('N')+'.tmp';$backup=$null
     try{
         [IO.File]::WriteAllText($temporary,$json,[Text.UTF8Encoding]::new($false))
-        $null=Read-DoomSaveState $temporary $WadSha256
         if($ReplaceExpectedHash){
             if((Get-FileHash -LiteralPath $destination).Hash -ne $ReplaceExpectedHash){throw 'Save changed after overwrite confirmation.'}
             $backup=$destination+'.'+[guid]::NewGuid().ToString('N')+'.bak'

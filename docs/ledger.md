@@ -6337,3 +6337,9 @@ and returned normally through the settings menu.
 tests. It matches the prior method on 20,000 seeded inputs; E3M6 discovery
 matches the full renderer at four headings (12 checks). No host pacing gain is
 claimed.
+
+### Save writer validation — October 2, 2026
+
+Save creation validates its in-memory graph before encoding and no longer
+re-parses its own temporary file. The E3M6 menu save/load flow passed; its
+single before/after timing pair is too noisy for a performance claim.
