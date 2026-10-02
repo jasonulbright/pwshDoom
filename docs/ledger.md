@@ -5990,3 +5990,15 @@ next high-value gates.
 This documentation correction is commit22 after Preview.5. Resume the full
 native pacing matrix when an exclusive Terminal measurement session is available;
 the next public release remains due at35 commits.
+
+### 2026-10-02 — Refresh the Episode 1 human handoff
+
+The one-session playthrough guide now targets the tested local source candidate
+`5682bc4` directly, with fresh save/input/report/settings paths, the existing
+Ultimate Doom IWAD and prepared Episode 1 music catalog. Its route remains
+E1M1–E1M3, the E1M9 secret return to E1M4, E1M4–E1M8 and the finale. This is
+preparation for one human route, not route qualification; no game window was
+launched and the existing Terminal stays untouched. `Start-Doom.ps1`, the local
+catalog and PowerShell 7.6.6 are present. This handoff commit reaches23 after
+Preview.5. The native retest still needs an exclusive Terminal session; the
+human playthrough remains open.

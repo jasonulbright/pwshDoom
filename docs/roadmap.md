@@ -556,3 +556,10 @@ mode preservation against the internal serial reference only.
 The smoke and mode-parity receipts were committed together, at21 commits after
 Preview.5. This documentation correction brings the count to22. Keep the
 all-style live timing retest pending the isolated display resource; release at35.
+
+The one-session HMP Episode 1 handoff now launches the local `5682bc4` candidate
+with fresh input, save, report and settings paths. It covers the E1M3 secret
+route through E1M9, return to E1M4, E1M8 boss/exit and the finale. This is ready
+for a single human playthrough and makes no route-completion claim.
+[Human handoff](episode1-playtest.md). This documentation commit reaches23
+after Preview.5; the full campaign remains unqualified.
