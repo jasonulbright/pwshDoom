@@ -1353,3 +1353,50 @@ lower than the previous cohort. No run passes all numerical gates; p99 display
 gaps are60.6 /78.8 /54.5 ms and maximums169.7 /727.3 /951.6 ms. Keep failed
 whole-window measurements and investigate bounded asynchronous output on the
 current runtime before changing defaults. [Source/CSV/audio/scheduling receipt](../results/command-burst-loaded-classic-20261002.json).
+
+## Output comparison with the current scheduler
+
+Three full Strips–AsyncBatch–AsyncBatch–Strips cycles at cafa405 retain the
+f200220 runtime, Classic/maximized/font5, sixteen workers, Pairs, the same
+1747-command route and eleven-track actual-device audio. Twelve sequential
+runs complete, with no concurrent study recordings, exports, tests or timing
+analysis during collection. Routine collection-status reads remain possible.
+Independent raw-CSV display counts/p99, source manifests, command due/queue
+observations, separate UI/game accounting and all audio packets/credits/PCM
+reconcile. [Twelve-run receipt and retained outlier inspection](../results/command-output-abba-classic-20261002.json).
+
+| Cycle | Strips median display events/sec | AsyncBatch median display events/sec | Change | Strips median p99 tic lateness (ms) | AsyncBatch median p99 tic lateness (ms) |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| 1 | 53.110 | 54.850 | +3.28% | 77.33 | 61.03 |
+| 2 | 53.043 | 52.170 | −1.65% | 87.36 | 67.22 |
+| 3 | 51.671 | 53.462 | +3.47% | 151.35 | 91.14 |
+
+AsyncBatch lowers each cycle's median p99 tic lateness, but display-rate
+direction varies. Its six individual p99 values are55.85–95.86 ms; only one
+meets the57.2 ms limit. Strips values are70.54–232.16 ms. No run passes all
+numerical checks. Display rates across both modes are47.29–56.05 events/sec,
+below59. Active tics are34.960–34.980/sec; all1747 commands and packets finish.
+Startup is24.74–27.22 seconds, sampled private memory4.414–4.617 GiB and sampled
+game-process CPU41.6–47.6% of twenty logical cores. CPU excludes Terminal and
+sampling omits unsampled startup/tails. Software underflow/rebuffer and audio
+producer-backpressure remain zero; acoustic quality/latency remain open.
+
+Retain three different failures. Cycle3's first Strips run publishes command50
+336.1 ms late with zero queued commands observed and an approximate worker
+start0.39 ms after signaling; its preceding180.6 ms gap overlaps157.2 ms of
+synchronous output. Cycle2's first AsyncBatch run has a1575.75 ms display-event
+gap containing96 completed gameplay writes (maximum consecutive completion
+gap21.08 ms) and94 dropped present starts. These counters do not establish
+the physical display or OS/occlusion/thermal cause. Cycle3's first AsyncBatch
+run has a303.08 ms global display gap overlapping four loading observations
+and no gameplay completion. Each remains in the whole-window gate results.
+An asynchronous completion observation is not proof that the host blocked
+through its duration.
+
+Keep Strips/Pairs as defaults and AsyncBatch as an opt-in alternative. This
+paired study supports a specific tic-pacing benefit on one workload, with
+variable display results and retained failures. It does not qualify60 unique
+displayed game frames/sec, all styles/workloads, campaign completion, acoustic
+review or second hardware. Further useful work includes reducing host/render
+frame costs, independent moving-world fidelity and broader workloads; more
+repeats of this same comparison alone will not close those gates.

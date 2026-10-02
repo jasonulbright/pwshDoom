@@ -338,3 +338,14 @@ notice/style samples. [Clean evidence](../results/command-burst-loaded-classic-2
 [live coverage and limits](../results/command-burst-live-20261002.json).
 Three paired Strips/AsyncBatch ABBA cycles on this runtime follow before any
 default change. Public release count reaches29; publish at35 or more.
+
+The twelve-run paired study now completes. AsyncBatch lowers median p99 tic
+lateness in all three cycles, while display-rate changes vary−1.65% to+3.47%.
+No complete numerical gate passes; all commands/audio and source/accounting
+audits pass. A retained1.576-second display-event gap contains96 completed
+game writes and94 dropped presents, keeping writes distinct from display.
+[Paired receipt and investigated failures](../results/command-output-abba-classic-20261002.json).
+Defaults remain Strips/Pairs; continue concrete frame-cost, independent
+moving-world fidelity and broader-workload work rather than repeating this
+unchanged comparison. Public release count reaches30; the35-commit rule and
+all broader release gates remain active.

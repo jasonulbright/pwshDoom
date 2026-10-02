@@ -144,6 +144,15 @@ useful scheduling correction with retained compatibility evidence, rather
 than proof that the performance target is met. [Diagnostic](../results/command-publication-stall-diagnostic-20261002.json),
 [repeated measurements](../results/command-burst-loaded-classic-20261002.json).
 
+Three paired output-mode cycles then lower median p99 tic lateness with the
+bounded asynchronous option in every cycle, but display-event changes vary
+from−1.65% to+3.47%. None of twelve runs meets all numerical checks. One
+1.576-second display-event gap contains96 completed game writes and94 dropped
+presents, with no loading UI in that interval. A console-write counter alone
+would conceal that failure. The experiment retains startup, CPU, memory,
+audio accounting and whole-window outliers, while keeping the option distinct
+from the default. [Paired evidence and diagnostic limits](../results/command-output-abba-classic-20261002.json).
+
 The public Preview.3 community-test package is source-inclusive and excludes the IWAD, soundfont, compiled engine, generated recordings and research PDF. Its release archive has a per-file hash manifest and a separate SHA-256 checksum; the [publication receipt](../results/preview3-publication-20260928.json) verifies all 537 included file hashes and the uploaded ZIP against a fresh public download. The local R17 development archive is a later playtest candidate, not a tagged release: its 543 payload files pass manifest verification and the extracted launcher recognizes the installed 36-map IWAD and eleven prepared Episode 1 tracks under PowerShell 7.6.6. The [R17 candidate receipt](../results/episode1-current-human-candidate-20260929-r17.json) and [package receipt](../results/r17-playtest-package-validation-20260929.json) distinguish the tested implementation commit from the clean package-source commit. The complete E1 human playthrough remains pending.
 
 Preview.3 is a public community-test build released before the one complete Episode 1 human run. A static license/asset audit of its candidate found the GPL text and third-party notices included, all 206 vendored PowerShell files carrying the upstream GPL terms, and no WADs, soundfonts, media, native binaries or research PDF in the ZIP. The paper still needs the playthrough result and publication-ready illustrations. This is not the end of the roadmap: presentation pacing, visual fidelity, sustained audio, and the wider Ultimate Doom qualification remain open. Doom II follows the Ultimate Doom release; the MyHouse audit follows Doom II. Neither is claimed by this preview.
