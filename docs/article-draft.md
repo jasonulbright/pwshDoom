@@ -219,3 +219,13 @@ batch is unpaired, so its lower rates do not prove a causal live speedup.
 Current effect recordings retain styles, HUD and pickup/damage behavior;
 the external recorder failure and20ms active Matrix loopback coverage gap
 remain explicit. [Media and acoustic limits](../results/discovery-slope-effects-live-20261002.json).
+
+The review then exposes a fidelity defect that the older test missed: sprite
+slope division still rounded fractional values and omitted unsigned overflow.
+An ordinary-sized synthetic direction crosses to the wrong sprite rotation.
+Integer table-direction tests passed because those quotients were integral;
+fractional and wrapped-coordinate cases catch the mismatch. The corrected
+PowerShell helper passes the expanded math and all-style worker checks.
+[Reproduction, test blind spot and limits](../results/sprite-slope-correction-20261002.json).
+This establishes the specific arithmetic correction, with independent moving
+original-game frames still required for broader fidelity claims.

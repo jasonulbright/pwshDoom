@@ -2,10 +2,14 @@
 # Shared fixed-point PowerShell sprite-angle helpers for the host and renderer.
 function Get-FastSlopeDiv {
     param([long]$Numerator,[long]$Denominator)
-    if($Denominator -lt 512){return [uint32]2048}
-    [uint64]$numUnsigned=[uint32]$Numerator;[uint64]$denUnsigned=[uint32]$Denominator
+    # Match Geometry.SlopeDiv's uint32 operands, overflow and floor quotient.
+    # PowerShell's integer assignment rounds division; truncate explicitly.
+    [uint64]$numUnsigned=$Numerator -band 0xFFFFFFFFL
+    [uint64]$denUnsigned=$Denominator -band 0xFFFFFFFFL
+    if($denUnsigned -lt 512){return [uint32]2048}
     [uint64]$scaledDen=$denUnsigned -shr 8
-    [uint64]$answer=($numUnsigned -shl 3)/$scaledDen
+    [uint64]$wrappedNumerator=($numUnsigned -shl 3) -band 0xFFFFFFFFL
+    [uint64]$answer=[Math]::Truncate([double]$wrappedNumerator/$scaledDen)
     if($answer -gt 2048){return [uint32]2048}
     return [uint32]$answer
 }

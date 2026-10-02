@@ -1,0 +1,141 @@
+{
+  "FinishedUtc": "2026-10-02T06:57:35.364393+00:00",
+  "BaseCommit": "35346353a967837caa46dd07ec572eb42e75386b",
+  "ProductionAdopted": true,
+  "ReproducedCase": {
+    "ReferenceSlope": 848,
+    "FastSlope": 849,
+    "ReferenceRotation": 4,
+    "ActorAngle": 0,
+    "Num": 13901825,
+    "ReferenceAngle": 268347312,
+    "FastAngle": 268632192,
+    "FastRotation": 5,
+    "Den": 33554432
+  },
+  "Baseline": {
+    "IntMinEdgeMismatches": 1,
+    "FractionalAndWrappedDirectionCases": 20004,
+    "FractionalAndWrappedAngleMismatches": 15509,
+    "FractionalAndWrappedRotationMismatches": 9677
+  },
+  "Corrected": {
+    "DirectionCases": 16392,
+    "PointAngleMismatches": 0,
+    "BoundaryRotationCases": 393408,
+    "FixedRotationMismatches": 0,
+    "IntMinEdgeCases": 7,
+    "IntMinEdgeMismatches": 0,
+    "FractionalAndWrappedDirectionCases": 20004,
+    "FractionalAndWrappedAngleMismatches": 0,
+    "FractionalAndWrappedRotationMismatches": 0,
+    "AngleDataRoundTrips": 100000,
+    "AngleDataRoundTripMismatches": 0
+  },
+  "SnapshotTransportChecks": 21,
+  "AllStyleWorkerChecks": [
+    {
+      "Style": "Classic",
+      "ComparedPixels": 320000,
+      "EncodedStripChecks": 80,
+      "File": {
+        "Path": "local/sprite-slope-Classic-partitions-r1.json",
+        "Sha256": "9E5D6B5C95201A4E2544512D3DB1C0ECF5D7D9631AF93460D480926DEFFE094C"
+      }
+    },
+    {
+      "Style": "Matrix",
+      "ComparedPixels": 320000,
+      "EncodedStripChecks": 80,
+      "File": {
+        "Path": "local/sprite-slope-Matrix-partitions-r1.json",
+        "Sha256": "D21379616024B9C6B282458F78D7322A04026CE02953A3D61A54372BBDB84DEC"
+      }
+    },
+    {
+      "Style": "AnsiArt",
+      "ComparedPixels": 320000,
+      "EncodedStripChecks": 80,
+      "File": {
+        "Path": "local/sprite-slope-AnsiArt-partitions-r1.json",
+        "Sha256": "1AFDA8E01250EA86524250A5FF3A09C0CF57C88515A2BC30D732855ABBE74941"
+      }
+    }
+  ],
+  "Decision": "Correct the PowerShell sprite helper to preserve uint32 operands/numerator wrap and exact floor, including negative int-minimum fallback operands. Existing integer slope-table tests passed the incorrect helper; new fractional/wrapped directions expose the defect and remain portable. Recorder source manifests now include this shared helper.",
+  "Files": [
+    {
+      "Path": "local/Investigate-SpriteSlope-r1.ps1",
+      "Sha256": "AF5C0E20AD0A682F59D3B1011C7A315CEEB4D1AA451896C6BA3A5D645ADDB785"
+    },
+    {
+      "Path": "local/Investigate-SpriteSlope-r2.ps1",
+      "Sha256": "79A6A3548406A7B2627876971D4C8526EC9998B019CEE7E5CD49F126F5FBC609"
+    },
+    {
+      "Path": "local/sprite-slope-investigation-r1.json",
+      "Sha256": "2A06409DE0FE89336F1ED89A43889C791A8572C508735E09E5833FCABD643690"
+    },
+    {
+      "Path": "local/sprite-slope-investigation-r2.json",
+      "Sha256": "88AD8AA818F4C2EEB241E40E24BFBB300ECC2E5A9CE6F9E3CF7A7E7B45679025"
+    },
+    {
+      "Path": "local/sprite-projection-before-slope-fix-r1.ps1",
+      "Sha256": "A343007E418A0052778D7482D243851A94E8924A7642F9E6D0AE6CB7000AE7B1"
+    },
+    {
+      "Path": "local/prepare-sprite-slope-baseline-parity-r1.ps1",
+      "Sha256": "FB004F99FF691F3E0045F5B33CBEA94463EAFB08C04AC65C3F9D7D1EDBFAE4A8"
+    },
+    {
+      "Path": "local/Test-SpriteRotationBaseline-r1.ps1",
+      "Sha256": "EFA499EBAD7C3AFB114F2BD96207B3625BB3472F6702472D901EFA0B3B1BB44C"
+    },
+    {
+      "Path": "local/sprite-slope-baseline-parity-r1.json",
+      "Sha256": "C5F1F02AA361DB4F716011756B13BDC87E01E99C975B545CD38FC65873BE6A7E"
+    },
+    {
+      "Path": "local/sprite-slope-baseline-parity-r1.log",
+      "Sha256": "E3FEA20FB6A537BC871C903FC8623BE6027AD165A15CB5A87E494C74DF4C82B1"
+    },
+    {
+      "Path": "local/sprite-slope-production-parity-r1.json",
+      "Sha256": "F67A0F661C999E306A0034CB6F804D7404D3501A4D1FCC5B646A3EBBE8D6E8AD"
+    },
+    {
+      "Path": "local/sprite-slope-production-parity-r1.log",
+      "Sha256": "70786C254444187B6F2309342E2104F5D1A88152DF44C9062D404D92F87F44F9"
+    },
+    {
+      "Path": "local/test-sprite-slope-workers-r1.ps1",
+      "Sha256": "50CD86AE2E9C5FA109632A2CFADE4EFA8143B210CF304F670BA9F5A340B8F6EF"
+    },
+    {
+      "Path": "local/sprite-slope-workers-r1.log",
+      "Sha256": "15A12BEADE996A654E3CE41918FFF708FAB8A74FC14E5A044F7F583892964A41"
+    },
+    {
+      "Path": "local/sprite-slope-snapshot-transport-r1.json",
+      "Sha256": "3DAF8B851091D1F2DB1406CA4A5D6D310AA5DCA25C529C1EC0571227075FD964"
+    },
+    {
+      "Path": "scripts/Test-SpriteRotation.ps1",
+      "Sha256": "B0BF517A27BFE55E8C3466189E4AC2B2641A9436EF4446139DE74B3CDE533AE0"
+    },
+    {
+      "Path": "src/SpriteProjection.ps1",
+      "Sha256": "3C0BB4903C4325408BA54057EDDA74B1F7BFA7527BB7E3A964C9AACF14DD6D6D"
+    },
+    {
+      "Path": "scripts/Record-DoomReplay.ps1",
+      "Sha256": "FA2EFDBEE49B827812172F9058455F9B1FF8C6E2426DA84383426E7DCB3051CA"
+    },
+    {
+      "Path": "local/audit-sprite-slope-production-r1.py",
+      "Sha256": "BC150649E8F423F45E817D5E98B8998FB64352385C31801B330D7DCF947AA761"
+    }
+  ],
+  "Meaning": "Synthetic exact engine-math conformance and real16-worker palette/fuzz serial image/strip equality. The concrete ordinary-sized view vector512 x212.125015258789 units with actor yaw0 chooses rotation5 before correction,4 under exact engine arithmetic. This is a reproducible mathematical product defect, not a stock-map human sighting or independently captured original framebuffer.20k broad int32 seeded cases include values beyond ordinary stock-map geometry; mismatch counts are not observed gameplay frame rates. No gameplay or audio mixing changes. Prior native pacing/effects on97ff8d9 remain pinned to that pre-fix build; current live effect recording and independent moving-world fidelity remain next."
+}

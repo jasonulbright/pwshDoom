@@ -444,3 +444,12 @@ consistency checks, with a failed first recorder and an active20ms Matrix
 loopback-coverage gap retained. [Recording receipt](../results/discovery-slope-effects-live-20261002.json).
 Count reaches10 after Preview.5. Continue focused rendering arithmetic and
 moving-world fidelity work; all full Ultimate Doom gates remain active.
+
+Focused review now reproduces and corrects fractional rounding/unsigned wrap
+in the shared sprite-angle helper. Expanded old-source tests fail; corrected
+production passes exact angles/boundaries,21 snapshot checks and all-mode
+960,000 worker pixels/240 strips. [Correction evidence](../results/sprite-slope-correction-20261002.json).
+Count reaches11 after Preview.5. Record actual effects on the corrected
+committed source, then continue independent moving-world fidelity. Prior
+native measurements remain pinned to the earlier build; all full gates stay
+active.

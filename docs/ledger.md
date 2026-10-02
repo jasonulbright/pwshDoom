@@ -5612,3 +5612,40 @@ Strips/Pairs. Continue a focused rendering-fidelity arithmetic review; full
 Ultimate Doom campaign, independent moving-world/original-binary fidelity,
 numerical pacing, human input/acoustic/DPI and second-hardware gates remain
 active. Release again at35 or more commits since the prior public release.
+
+### 2026-10-02 — Correct fractional sprite slope and unsigned wrap
+
+Source review finds Get-FastSlopeDiv still assigning floating division to an
+integer, which rounds, and shifting its numerator without uint32 overflow.
+The exact engine SlopeDiv was corrected earlier, but this shared rendering
+helper was missed. Reproduce a real bucket-selection consequence with the
+synthetic fixed vector512 x212.125015 units and actor yaw0: exact slope848
+selects rotation4, while the previous helper rounds to849 and selects5. The
+uint32-wrap example and double-int-minimum fallback also diverge. This is a
+mathematical product defect, not a stock-map human sighting.
+
+Correct only the helper's operand normalization, denominator cutoff, wrapped
+numerator and truncated floor. It remains PowerShell/standard .NET. Gameplay,
+audio, tables, octants and sprite-selection convention stay unchanged. Add
+the shared helper to actual recording source manifests; its omission from
+earlier manifests is explicit, and older recordings retain their original pins.
+[Before/after source and checks](../results/sprite-slope-correction-20261002.json).
+
+The old exhaustive integer-table directions and393,408 boundary rotations
+still pass the incorrect helper because their quotients are integral. The
+expanded baseline test now retains a failing report: one int-min edge,
+15,509/20,004 fractional/wrapped angles and9,677 rotations differ. Broad seeded
+int32 inputs include values outside usual stock-map geometry; these counts
+are not observed gameplay-frame frequencies. Corrected production has zero
+mismatches across16,392 directions,393,408 boundary selections, seven int-min
+edges,20,004 fractional/wrapped directions and100,000 angle round trips.
+Twenty-one prepared-snapshot transport checks and actual16-worker all-style
+palette/fuzz comparisons pass960,000 pixels and240 encoded strips against
+serial rendering. The baseline failure and normalized-LF previous helper
+from3534635 remain ignored/raw; no failed expectations are rewritten.
+
+This implementation/evidence commit reaches11 after Preview.5. The preceding
+native rates and live recordings belong to97ff8d9, before this correction.
+Next record actual effects on the new committed build, then continue
+independent moving-world fidelity and remaining full-release work. Do not
+call helper math or serial/parallel equality original-framebuffer parity.

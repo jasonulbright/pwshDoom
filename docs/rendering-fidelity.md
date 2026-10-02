@@ -985,3 +985,24 @@ and the 16-process [session-worker lifecycle check](../results/session-worker-ac
 The diagnostic [fixture helper](../scripts/Prepare-OriginalDoomFixture.ps1) emits an exact vanilla109 demo from a quantized input prefix, then pauses the world for a finite capture interval. Four preparations independently decode315 commands, preserve LevelTime315 on pause, and repeat the candidate's64,000 indexed pixels. It preserves the emitted configuration because original Doom writes DEFAULT.CFG on exit. Fractional input and reused output directories are rejected.
 
 Four finite launches of the installed original DOS executable were observed. A retained642x512 JPEG shows the corresponding paused wall/pistol/health/ammo view. No raw capture file was produced, so this does not establish numerical pixel parity or original hidden world-state equality. Another visible capture launch was rejected by automatic approval review before execution, with no detailed reason; it was not retried. [Evidence, configuration mutation and limitations](../results/original-doom-frozen-fixture-20261002.json). Moving-world and whole-frame independent qualification remain open; the executable/emulator are diagnostic tools outside the production PowerShell path.
+
+### Fractional sprite direction and unsigned slope wrap (2026-10-02)
+
+The shared sprite helper still rounded floating division into an integer and
+omitted uint32 numerator overflow after the engine's slope fix. With a synthetic
+view-to-actor vector512 x212.125015 units and actor yaw0, it chooses rotation5
+instead of the exact engine's4. The corrected PowerShell helper normalizes
+unsigned operands, wraps the shifted numerator and truncates the exact floor.
+[Reproduction, retained baseline failure and source pins](../results/sprite-slope-correction-20261002.json).
+
+The old integral slope-table fixtures could not catch this defect. Expanded
+tests retain the old helper's15,509 angle/9,677 rotation mismatches across
+20,004 fractional/wrapped directions and one double-int-minimum edge mismatch.
+Production now has zero across those cases,16,392 table directions,393,408
+boundary selections, seven int-min edges and100,000 angle round trips. Broad
+int32 random coordinates exceed usual stock-map geometry; counts are not
+observed gameplay-frame frequencies. Twenty-one prepared-snapshot checks and
+all-mode16-worker palette/fuzz comparisons match960,000 pixels/240 strips
+against serial rendering. These establish the narrow math correction and
+worker consistency, with independent original-frame/moving-world evidence
+still open. New recording source manifests explicitly include SpriteProjection.

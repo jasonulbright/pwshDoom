@@ -48,7 +48,7 @@ $recorder=$null;$target=$null;$failure=$null;$captureQpc=$null;$exitCode=$null;$
 $audioRecorder=$null;$audioExitCode=$null;$audioStdout=$null;$audioStderr=$null;$clockAnchors=[Collections.Generic.List[object]]::new()
 $sourceNames=@('Start-Doom.ps1','scripts/Invoke-Doom.ps1','scripts/Record-DoomReplay.ps1','scripts/Record-ProcessAudio.ps1','scripts/Merge-DoomCaptureAudio.ps1','src/ProcessAudioCapture.ps1','src/CaptureClock.ps1','src/CaptureTimeline.ps1','src/TerminalOutput.ps1','src/LoadingScreen.ps1')
 $sourceNames+=@('src/AnsiColorState.ps1','src/Ansi256.ps1','src/TerminalCodec.ps1','scripts/FrameCodec.ps1')
-$sourceNames+=@('src/FastRenderer.ps1','src/RenderFuzz.ps1','src/GameHost.ps1','src/SnapshotTransport.ps1','src/InputReplay.ps1')
+$sourceNames+=@('src/FastRenderer.ps1','src/SpriteProjection.ps1','src/RenderFuzz.ps1','src/GameHost.ps1','src/SnapshotTransport.ps1','src/InputReplay.ps1')
 $sourceNames+=@('src/PaletteCodec.ps1','src/CharacterCodec.ps1','src/RenderAssets.ps1','src/GameProcesses.ps1','src/SimulationProcess.ps1','scripts/Invoke-SimulationWorker.ps1','scripts/Invoke-GameRenderWorker.ps1')
 $sourceNames+='src/PlayerMessages.ps1'
 $sourceNames+='scripts/Invoke-RenderWorkerWithLogs.ps1'

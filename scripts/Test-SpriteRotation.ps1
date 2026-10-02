@@ -47,13 +47,35 @@ for($octant=0;$octant -lt 8;$octant++){
 $edgeCases=@(
     @(0,0,-2147483648,0),@(0,0,0,-2147483648),
     @(0,0,-2147483648,1),@(0,0,1,-2147483648),
-    @(2147483647,0,-1,0),@(0,2147483647,0,-1)
+    @(2147483647,0,-1,0),@(0,2147483647,0,-1),
+    @(0,0,-2147483648,-2147483648)
 )
 $edgeMismatches=0
 foreach($p in $edgeCases){
     $reference=[Geometry]::PointToAngleData([int]$p[0],[int]$p[1],[int]$p[2],[int]$p[3])
     $candidate=Get-FastPointAngleData ([int]$p[0]) ([int]$p[1]) ([int]$p[2]) ([int]$p[3]) $table
     if($candidate -ne $reference){$edgeMismatches++}
+}
+
+# Integer slope-table directions above cannot expose rounding of a fractional
+# quotient. Include ordinary-sized bucket crossings and unsigned overflow.
+$fractionalPoints=@(@(0,0,1280,1),@(0,0,102400,42426),
+    @(0,0,33554432,13901825),@(0,0,1073741824,536870912))
+$fractionalRandom=[Random]::new(20261002)
+for($i=0;$i -lt 20000;$i++){
+    $fractionalPoints+=,@([int]$fractionalRandom.NextInt64(-2147483648L,2147483648L),
+        [int]$fractionalRandom.NextInt64(-2147483648L,2147483648L),
+        [int]$fractionalRandom.NextInt64(-2147483648L,2147483648L),
+        [int]$fractionalRandom.NextInt64(-2147483648L,2147483648L))
+}
+$fractionalMismatches=0;$fractionalRotationMismatches=0
+foreach($p in $fractionalPoints){
+    $reference=[Geometry]::PointToAngleData($p[0],$p[1],$p[2],$p[3])
+    $candidate=Get-FastPointAngleData $p[0] $p[1] $p[2] $p[3] $table
+    if($candidate -ne $reference){$fractionalMismatches++}
+    $expectedRotation=[int]((($reference+[long]$referenceOffset) -band 0xFFFFFFFFL) -shr 29)
+    $candidateRotation=Get-FastSpriteRotation $p[0] $p[1] $p[2] $p[3] 0 $table
+    if($candidateRotation -ne $expectedRotation){$fractionalRotationMismatches++}
 }
 
 $random=[Random]::new(911);$angleRoundTrips=0
@@ -77,12 +99,16 @@ $report=[ordered]@{
     LegacyAtan2BoundaryMismatches=$legacyMismatches
     IntMinEdgeCases=$edgeCases.Count
     IntMinEdgeMismatches=$edgeMismatches
+    FractionalAndWrappedDirectionCases=$fractionalPoints.Count
+    FractionalAndWrappedAngleMismatches=$fractionalMismatches
+    FractionalAndWrappedRotationMismatches=$fractionalRotationMismatches
+    FractionalSeed=20261002
     AngleDataRoundTrips=100000
     AngleDataRoundTripMismatches=$angleRoundTrips
     Sources=$sources
     Meaning='Exhaustive slope-table directions across eight octants, every angle-sector boundary at -1/0/+1 binary-angle units, and signed-int-minimum point differences. Fixed rotation is compared with the adopted Geometry.PointToAngleData and ThreeDRenderer unsigned sprite-frame selection. LegacyAtan2BoundaryMismatches replays the prior floating expression on the same boundary fixtures. Synthetic math conformance only; not actor image, animation, occlusion, gameplay, or original-executable evidence.'
 }
-if($pointMismatches -or $rotationMismatches -or $edgeMismatches -or $angleRoundTrips){throw 'Fixed sprite-rotation parity failed.'}
 $resolved=[IO.Path]::GetFullPath($Output);[void][IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName($resolved))
 $report|ConvertTo-Json -Depth 6|Set-Content -LiteralPath $resolved
+if($pointMismatches -or $rotationMismatches -or $edgeMismatches -or $angleRoundTrips -or $fractionalMismatches -or $fractionalRotationMismatches){throw 'Fixed sprite-rotation parity failed; report retained.'}
 "PASS: $pointCases directions, $boundaryCases rotation boundaries, $($edgeCases.Count) int-min edges, and 100000 angle round trips; legacy Atan2 boundary mismatches: $legacyMismatches."
