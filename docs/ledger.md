@@ -6022,3 +6022,12 @@ do not compare its milliseconds with the earlier profile.
 [Traversal evidence](../results/sight-traversal-dispatch-20261002.json).
 This instrumentation commit brings the count to25 after Preview.5. Continue
 with a source-preserving traversal alternative and exact replay comparison.
+
+The disposable iterative near-side-first BSP walk matches recursive reference
+hashes across all420 input tics and current renderer snapshots. Four process
+timing runs in ABBA order show pooled `Game.Update` mean −6.1%, median −12.0%
+and p95 −5.7%; p99 rises1.7% and remains over the 57.2 ms limit. This is
+simulation-only evidence for integration testing, not a native pacing claim.
+[All-tic/timing receipt](../results/visibility-iterative-dispatch-20261002.json).
+The test harness and this evidence commit reach26 after Preview.5. Trial the
+same walk in production PowerShell, then rerun broad state and rendering tests.

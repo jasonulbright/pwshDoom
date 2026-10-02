@@ -581,3 +581,11 @@ change timing, so use the receipt for attribution only.
 [Traversal evidence](../results/sight-traversal-dispatch-20261002.json).
 Count reaches25 after Preview.5. Probe a traversal alternative against exact
 replay controls; keep all movement, rendering and sound logic in PowerShell.
+
+The iterative near-side-first visibility walk in a disposable bundle now matches
+all420 recursive-reference state/current-render hashes. Four separate ABBA
+headless timings improve pooled mean6.1%, median12.0% and p955.7%; p99 is1.7%
+slower and still exceeds the frozen57.2 ms limit. Keep the exact timeline and
+all 1,680 update samples in the [trial receipt](../results/visibility-iterative-dispatch-20261002.json).
+Count reaches26 after Preview.5. Integrate this bounded candidate in PowerShell,
+repeat the full regression surface and retain the native performance gate.

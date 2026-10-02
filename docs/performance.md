@@ -1618,3 +1618,28 @@ traversal and line tests for continued profiling; they do not justify skipping
 a visibility query or reusing its result. This run adds counter overhead, so
 its reported timings are not compared with the preceding actor-only profile.
 [Traversal receipt](../results/sight-traversal-dispatch-20261002.json).
+
+### Iterative BSP traversal trial — October 2, 2026
+
+A PowerShell-only iterative near-side-first stack walk was tested in an owned
+engine bundle. Against the recursive implementation, a 420-command E3M6 replay
+produced no mismatches in the combined state/current-render hash timeline at
+any tic. Four separate headless timing runs in Reference, Iterative, Iterative,
+Reference order retain all 1,680 `Game.Update` samples and compare both stored
+checkpoints in each run.
+
+| Simulation-only `Game.Update` | Recursive | Iterative | Change |
+| --- | ---: | ---: | ---: |
+| Samples | 840 | 840 | — |
+| Mean | 20.46 ms | 19.21 ms | −6.1% |
+| Median | 17.70 ms | 15.58 ms | −12.0% |
+| p95 | 44.97 ms | 42.39 ms | −5.7% |
+| p99 | 68.21 ms | 69.36 ms | +1.7% |
+
+The run pairs do not improve uniformly, and samples are serial observations,
+not independent trials. The p99 remains above the frozen 57.2 ms limit. This
+is promising evidence for a production trial, not a release pacing result: the
+measurement excludes rendering workers, terminal, audio and presentation, and
+only one dense map/input sequence was exercised. The [source-pinned receipt
+and all-tic hashes](../results/visibility-iterative-dispatch-20261002.json)
+retain all samples, run order, gates and limitations.
