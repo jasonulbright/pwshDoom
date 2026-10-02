@@ -6013,3 +6013,12 @@ The action-dispatch test again passes all six checks across 52 actions. This
 profiler and evidence commit reaches24 after Preview.5; continue into the
 measured thinker/visibility paths while the clean native pacing and full human
 campaign gates remain open.
+
+A second diagnostic pass counts sight-query traversal work without changing
+the runtime. The same 420 commands matched both checkpoints and recorded 119,780
+BSP-node visits, 65,838 segment iterations and 4,765 intercept calculations.
+The added counters affect timing, so keep this receipt for attribution only and
+do not compare its milliseconds with the earlier profile.
+[Traversal evidence](../results/sight-traversal-dispatch-20261002.json).
+This instrumentation commit brings the count to25 after Preview.5. Continue
+with a source-preserving traversal alternative and exact replay comparison.

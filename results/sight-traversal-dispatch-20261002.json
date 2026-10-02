@@ -1,0 +1,184 @@
+{
+  "RecordedUtc": "2026-10-02T18:23:44.8248262Z",
+  "CandidateCommit": "13132c5b459dd64fe2cebd095daa25a8c725caa0",
+  "CandidateEngineBundleSha256": "111007C18747927C10A3C0F908EF3C7D36F6EAF6BD71C9CEEF823ADB65EAABAF",
+  "ProfilerInstrumentedBundleSha256": "4570F421A2A3E7463C31AD51DD1AAB8BB347C3485CAE452D2B970EF911A1B8BC",
+  "ReplaySha256": "3C449B3AA71BE042C7FF229AED2F143636ED97A4A4B02562505339B35415DD75",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "ProfilerHarnessSha256": "7F99A5EC89BFF3D19E0ADACA779863B4AECDF55FE9B9B15259A2A52272883E77",
+  "PowerShell": "7.6.5",
+  "Commands": 420,
+  "SelectedReplayCheckpoints": 2,
+  "ReplayMatched": true,
+  "GameUpdateWithInstrumentation": {
+    "Count": 420,
+    "Mean": 20.019231190476173,
+    "Median": 16.28265,
+    "P95": 43.8958,
+    "Max": 218.5926
+  },
+  "StageTimesWithInstrumentation": {
+    "ThinkersRun": {
+      "Count": 420,
+      "Mean": 15.491501428571421,
+      "Median": 13.87745,
+      "P95": 29.1921,
+      "Max": 99.5146
+    },
+    "PlayerThink": {
+      "Count": 420,
+      "Mean": 2.9142561904761872,
+      "Median": 0.31515,
+      "P95": 13.4912,
+      "Max": 197.0362
+    },
+    "PlayerInterpolation": {
+      "Count": 420,
+      "Mean": 0.011719285714285722,
+      "Median": 0.01105,
+      "P95": 0.0181,
+      "Max": 0.0264
+    },
+    "AutoMap": {
+      "Count": 420,
+      "Mean": 0.04717666666666664,
+      "Median": 0.0454,
+      "P95": 0.0629,
+      "Max": 0.0748
+    },
+    "Specials": {
+      "Count": 420,
+      "Mean": 0.12449595238095229,
+      "Median": 0.111,
+      "P95": 0.1483,
+      "Max": 1.4555
+    },
+    "StatusBar": {
+      "Count": 420,
+      "Mean": 0.07127404761904763,
+      "Median": 0.0419,
+      "P95": 0.223,
+      "Max": 4.8077
+    },
+    "GameUpdate": {
+      "Count": 420,
+      "Mean": 20.019231190476173,
+      "Median": 16.28265,
+      "P95": 43.8958,
+      "Max": 218.5926
+    },
+    "RespawnSpecials": {
+      "Count": 420,
+      "Mean": 0.010333095238095233,
+      "Median": 0.01,
+      "P95": 0.0136,
+      "Max": 0.0175
+    },
+    "ThinkerInterpolation": {
+      "Count": 420,
+      "Mean": 0.7695888095238089,
+      "Median": 0.7288,
+      "P95": 0.9055,
+      "Max": 2.9688
+    },
+    "SectorInterpolation": {
+      "Count": 420,
+      "Mean": 0.5328311904761911,
+      "Median": 0.5077,
+      "P95": 0.5426,
+      "Max": 2.0321
+    }
+  },
+  "InclusiveActorTimesWithCounters": {
+    "XY": {
+      "MeanMsPerTic": 2.2827,
+      "TotalMs": 958.744
+    },
+    "Z": {
+      "MeanMsPerTic": 0.1527,
+      "TotalMs": 64.142
+    },
+    "StateActionInclusive": {
+      "MeanMsPerTic": 12.1988,
+      "TotalMs": 5123.482
+    },
+    "CheckSightInclusive": {
+      "MeanMsPerTic": 8.4298,
+      "TotalMs": 3540.537
+    }
+  },
+  "ActorCallCounts": {
+    "XYCalls": 393,
+    "ZCalls": 1876,
+    "NumericallyUnneededXY": 0,
+    "NumericallyUnneededZ": 0,
+    "StateActions": 4501,
+    "CheckSight": 7892
+  },
+  "SightTraversalCounters": {
+    "BspNodeVisits": {
+      "PerTic": 285.19,
+      "Total": 119780
+    },
+    "SubsectorVisits": {
+      "PerTic": 53.76,
+      "Total": 22580
+    },
+    "SegmentIterations": {
+      "PerTic": 156.76,
+      "Total": 65838
+    },
+    "UniqueLines": {
+      "PerTic": 127.77,
+      "Total": 53662
+    },
+    "SightSideRejects": {
+      "PerTic": 100.02,
+      "Total": 42008
+    },
+    "OneSidedOrMissingBackBlocks": {
+      "PerTic": 10.63,
+      "Total": 4463
+    },
+    "ClosedPortals": {
+      "PerTic": 4.73,
+      "Total": 1986
+    },
+    "InterceptCalculations": {
+      "PerTic": 11.35,
+      "Total": 4765
+    },
+    "SlopeDivisions": {
+      "PerTic": 13.17,
+      "Total": 5531
+    },
+    "ClosedSlopeWindows": {
+      "PerTic": 2.38,
+      "Total": 999
+    },
+    "RejectMatrixCulls": {
+      "PerTic": 1.03,
+      "Total": 434
+    }
+  },
+  "SourcePins": [
+    {
+      "Sha256": "7F99A5EC89BFF3D19E0ADACA779863B4AECDF55FE9B9B15259A2A52272883E77",
+      "Path": "scripts/Measure-SimulationStages.ps1"
+    },
+    {
+      "Sha256": "A78C645B8F2E8F80FE835C9F6F8E5F627ADA22122478DB08B9BA9A47240AFAEF",
+      "Path": "src/ManagedDoom/Doom/World/VisibilityCheck.sb.ps1"
+    },
+    {
+      "Sha256": "B8F753CC1CFA01328EE5CCBE765FB09F5CD8DC4630AACCEF37101DB3DE2390F6",
+      "Path": "src/ManagedDoom/Doom/Info/DoomInfo.MobjActions.ps1"
+    },
+    {
+      "Sha256": "3BE0BC9D12C81FFE8E1CA89C45A6F7B2518AD954F2EC689272F9445232BD50AF",
+      "Path": "src/ManagedDoom/Doom/World/Mobj.sb.ps1"
+    }
+  ],
+  "RawDiagnosticSha256": "09595D9A34EBE97AF42A0DC24F962F085356EF35D482C3E40C26527468AC916E",
+  "Meaning": "Owned-bundle diagnostic instrumentation only. Every sample is retained; exact selected replay checkpoints matched. Traversal counts identify where sight queries spend work but are not wall-time measurements. Timings include per-node/per-segment counter overhead and sight/action categories overlap. This does not measure uninstrumented performance, live rendering/audio/device mixing, or native pacing."
+}

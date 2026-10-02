@@ -573,3 +573,11 @@ The direct action route remains covered by all six dispatch checks. Count
 reaches24 after Preview.5. Investigate the measured visibility path without
 loosening state fidelity; full pacing and campaign gates remain open, release
 at35 or more commits.
+
+Sight-traversal counters in a follow-up owned bundle report119,780 BSP visits,
+65,838 segment iterations, 53,662 unique lines and 4,765 intercept calculations
+over the same replay; both saved checkpoints still match. Additional counters
+change timing, so use the receipt for attribution only.
+[Traversal evidence](../results/sight-traversal-dispatch-20261002.json).
+Count reaches25 after Preview.5. Probe a traversal alternative against exact
+replay controls; keep all movement, rendering and sound logic in PowerShell.

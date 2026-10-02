@@ -1607,3 +1607,14 @@ receipt](../results/actor-hotspots-dispatch-20261002.json) records every sample,
 selected checkpoint result, hashes and limits. The profiler now instruments
 the direct dispatcher itself, rather than silently missing known actions after
 their routing changed.
+
+The follow-up adds counters at the BSP/subsector/line level in a second owned
+bundle. Across the same 420 commands it records 119,780 BSP visits, 65,838
+segment iterations, 53,662 unique-line visits and 4,765 intercept calculations
+(5,531 slope divisions). Only 434 sight queries exit at the reject matrix;
+1,986 crossed portals close the opening and 999 close the vertical slope
+window. Both stored checkpoints match. These counters point to repeated tree
+traversal and line tests for continued profiling; they do not justify skipping
+a visibility query or reusing its result. This run adds counter overhead, so
+its reported timings are not compared with the preceding actor-only profile.
+[Traversal receipt](../results/sight-traversal-dispatch-20261002.json).

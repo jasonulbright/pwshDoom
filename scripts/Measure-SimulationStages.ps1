@@ -23,6 +23,23 @@ if($Profile){
         if([regex]::Matches($Text,[regex]::Escape($Marker)).Count -ne 1){throw "Missing or ambiguous profiler marker: $Marker"}
         return $Text.Replace($Marker,$Replacement)
     }
+    function Replace-AllExpected([string]$Text,[string]$Marker,[string]$Replacement,[int]$Expected){
+        $count=[regex]::Matches($Text,[regex]::Escape($Marker)).Count
+        if($count -ne $Expected){throw "Unexpected profiler marker count ($count/$Expected): $Marker"}
+        return $Text.Replace($Marker,$Replacement)
+    }
+    function Edit-MethodBody([string]$Text,[string]$TypeName,[string]$MethodName,[scriptblock]$Edit){
+        $localTokens=$null;$localIssues=$null
+        $localAst=[Management.Automation.Language.Parser]::ParseInput($Text,[ref]$localTokens,[ref]$localIssues)
+        if($localIssues.Count){throw "Cannot parse source before profiling $TypeName.$MethodName."}
+        $localType=$localAst.Find({param($node) $node -is [Management.Automation.Language.TypeDefinitionAst] -and $node.Name -eq $TypeName},$false)
+        $localMethods=@($localType.Members|Where-Object {$_.Name -eq $MethodName -and $_ -is [Management.Automation.Language.FunctionMemberAst]})
+        if($localMethods.Count -ne 1){throw "Expected one $TypeName.$MethodName method."}
+        $oldBody=$localMethods[0].Body.Extent.Text
+        $newBody=& $Edit $oldBody
+        if($newBody -isnot [string]){throw "Profiler did not return a string for $TypeName.$MethodName."}
+        return $Text.Remove($localMethods[0].Body.Extent.StartOffset,$oldBody.Length).Insert($localMethods[0].Body.Extent.StartOffset,$newBody)
+    }
     function End-Stage([int]$Index){
         return ('$pfNow=[Diagnostics.Stopwatch]::GetTimestamp();$this.ProfileTicks['+$Index+']+=$pfNow-$pfStart;$pfStart=$pfNow;')
     }
@@ -39,7 +56,7 @@ if($Profile){
     }
     # Edit only this method body and the owned World's diagnostic property.
     $source=$source.Remove($method[0].Body.Extent.StartOffset,$body.Length).Insert($method[0].Body.Extent.StartOffset,$changed)
-    $source=Replace-Once $source 'class World {' ('class World {'+"`n"+'    [long[]]$ProfileTicks=[long[]]::new(9)'+"`n"+'    [long[]]$ProfileActorTicks=[long[]]::new(4)'+"`n"+'    [long[]]$ProfileActorCounts=[long[]]::new(6)'+"`n")
+    $source=Replace-Once $source 'class World {' ('class World {'+"`n"+'    [long[]]$ProfileTicks=[long[]]::new(9)'+"`n"+'    [long[]]$ProfileActorTicks=[long[]]::new(4)'+"`n"+'    [long[]]$ProfileActorCounts=[long[]]::new(6)'+"`n"+'    [long[]]$ProfileSightCounts=[long[]]::new(12)'+"`n")
     if($ActorProfile){
         $index=0
         foreach($axis in @('XY','Z')){
@@ -62,13 +79,26 @@ if($Profile){
             $source=Replace-Once $source $marker ('$this.world.ProfileActorCounts[4]++;[long]$pfActionStart=[Diagnostics.Stopwatch]::GetTimestamp();'+$marker+';$this.world.ProfileActorTicks[2]+=[Diagnostics.Stopwatch]::GetTimestamp()-$pfActionStart;')
             $actorActionInstrumentation='PSMethod.Invoke (inclusive)'
         }
-        $ast=[Management.Automation.Language.Parser]::ParseInput($source,[ref]$tokens,[ref]$issues)
-        $type=$ast.Find({param($node) $node -is [Management.Automation.Language.TypeDefinitionAst] -and $node.Name -eq 'VisibilityCheck'},$false)
-        $method=@($type.Members|Where-Object {$_.Name -eq 'CheckSight' -and $_ -is [Management.Automation.Language.FunctionMemberAst]})
-        if($method.Count -ne 1){throw 'Expected one visibility method.'}
-        $body=$method[0].Body.Extent.Text
-        $changed='{[long]$pfSightStart=[Diagnostics.Stopwatch]::GetTimestamp();$this.World.ProfileActorCounts[5]++;try{'+$body.Substring(1,$body.Length-2)+'}finally{$this.World.ProfileActorTicks[3]+=[Diagnostics.Stopwatch]::GetTimestamp()-$pfSightStart;}}'
-        $source=$source.Remove($method[0].Body.Extent.StartOffset,$body.Length).Insert($method[0].Body.Extent.StartOffset,$changed)
+        $source=Edit-MethodBody $source 'VisibilityCheck' 'CrossBspNode' {param($body) $body.Insert(1,'$this.World.ProfileSightCounts[0]++;')}
+        $source=Edit-MethodBody $source 'VisibilityCheck' 'CrossSubsector' {
+            param($body)
+            $body=$body.Insert(1,'$this.World.ProfileSightCounts[1]++;')
+            $body=Replace-Once $body 'for ($i = 0; $i -lt $count; $i++) {' 'for ($i = 0; $i -lt $count; $i++) {$this.World.ProfileSightCounts[2]++;'
+            $body=Replace-Once $body 'if ($line.ValidCount -eq $validCount) { continue }' 'if ($line.ValidCount -eq $validCount) { continue };$this.World.ProfileSightCounts[3]++;'
+            $body=Replace-AllExpected $body 'if ($s1 -eq $s2) { continue }' 'if ($s1 -eq $s2) {$this.World.ProfileSightCounts[4]++;continue}' 2
+            $body=Replace-Once $body 'if ($null -eq $line.BackSector) { return $false }' 'if ($null -eq $line.BackSector) {$this.World.ProfileSightCounts[5]++;return $false}'
+            $body=Replace-Once $body 'if (($line.Flags -band [LineFlags]::TwoSided) -eq 0) { return $false }' 'if (($line.Flags -band [LineFlags]::TwoSided) -eq 0) {$this.World.ProfileSightCounts[5]++;return $false}'
+            $body=Replace-Once $body 'if ($openBottom.Data -ge $openTop.Data) { return $false }' 'if ($openBottom.Data -ge $openTop.Data) {$this.World.ProfileSightCounts[6]++;return $false}'
+            $body=Replace-Once $body '$fracData = $this.InterceptVectorData($this.Trace, $this.Occluder)' '$this.World.ProfileSightCounts[7]++;$fracData = $this.InterceptVectorData($this.Trace, $this.Occluder)'
+            $body=Replace-AllExpected $body '$slopeData = $this.DivideFixedData($slopeNumerator, $fracData)' '$this.World.ProfileSightCounts[8]++;$slopeData = $this.DivideFixedData($slopeNumerator, $fracData)' 2
+            $body=Replace-Once $body 'if ($this.TopSlope.Data -le $this.BottomSlope.Data) { return $false }' 'if ($this.TopSlope.Data -le $this.BottomSlope.Data) {$this.World.ProfileSightCounts[9]++;return $false}'
+            return $body
+        }
+        $source=Edit-MethodBody $source 'VisibilityCheck' 'CheckSight' {
+            param($body)
+            $body=Replace-Once $body 'if ($map.Reject.Check($looker.Subsector.Sector, $target.Subsector.Sector)) {' 'if ($map.Reject.Check($looker.Subsector.Sector, $target.Subsector.Sector)) {$this.World.ProfileSightCounts[10]++;'
+            return '{[long]$pfSightStart=[Diagnostics.Stopwatch]::GetTimestamp();$this.World.ProfileActorCounts[5]++;try{'+$body.Substring(1,$body.Length-2)+'}finally{$this.World.ProfileActorTicks[3]+=[Diagnostics.Stopwatch]::GetTimestamp()-$pfSightStart;}}'
+        }
     }
     $bundle="$owned/instrumented.ps1";[IO.File]::WriteAllText($bundle,$source,[Text.UTF8Encoding]::new($false))
 }
@@ -89,7 +119,7 @@ try{
         $entry=$reference.InputCommands[$i];$cmd=$commands[0];$cmd.Clear()
         $cmd.ForwardMove=$entry[0];$cmd.SideMove=$entry[1];$cmd.AngleTurn=$entry[2];$cmd.Buttons=$entry[3]
         $beforeWorld=$game.World;$before=if($Profile){$beforeWorld.ProfileTicks.Clone()}
-        if($ActorProfile){$beforeActorTicks=$beforeWorld.ProfileActorTicks.Clone();$beforeActorCounts=$beforeWorld.ProfileActorCounts.Clone()}
+        if($ActorProfile){$beforeActorTicks=$beforeWorld.ProfileActorTicks.Clone();$beforeActorCounts=$beforeWorld.ProfileActorCounts.Clone();$beforeSightCounts=$beforeWorld.ProfileSightCounts.Clone()}
         $watch=[Diagnostics.Stopwatch]::StartNew();$null=$game.Update($commands);$elapsed=$watch.Elapsed.TotalMilliseconds;$completed++
         $sample=@{Command=$completed;GameUpdateMilliseconds=$elapsed;StagesMilliseconds=$null;MapChanged=(-not [object]::ReferenceEquals($beforeWorld,$game.World))}
         if($Profile){
@@ -100,9 +130,10 @@ try{
             }
         }
         if($ActorProfile){
-            $sample.ActorMilliseconds=@();$sample.ActorCounts=@()
+            $sample.ActorMilliseconds=@();$sample.ActorCounts=@();$sample.SightTraversalCounts=@()
             for($stage=0;$stage -lt 4;$stage++){$sample.ActorMilliseconds+=($game.World.ProfileActorTicks[$stage]-$(if($sample.MapChanged){0}else{$beforeActorTicks[$stage]}))*1000.0/[Diagnostics.Stopwatch]::Frequency}
             for($stage=0;$stage -lt 6;$stage++){$sample.ActorCounts+=($game.World.ProfileActorCounts[$stage]-$(if($sample.MapChanged){0}else{$beforeActorCounts[$stage]}))}
+            for($stage=0;$stage -lt 11;$stage++){$sample.SightTraversalCounts+=($game.World.ProfileSightCounts[$stage]-$(if($sample.MapChanged){0}else{$beforeSightCounts[$stage]}))}
         }
         $samples.Add($sample)
         if($expected.ContainsKey($completed)){$points.Add((Get-DoomReplayCheckpoint $game $completed))}
@@ -117,7 +148,7 @@ try{
         $stats.GameUpdate=Get-SampleStats ([double[]]$samples.GameUpdateMilliseconds)
         if($Profile){foreach($label in $labels){$stats[$label]=Get-SampleStats ([double[]]@($samples|ForEach-Object {$_.StagesMilliseconds[$label]}))}}
     }
-    @{Error=$failure;Profile=[bool]$Profile;ActorProfile=[bool]$ActorProfile;ActorActionInstrumentation=if($ActorProfile){$actorActionInstrumentation}else{$null};ActorArrayOrder=@('XY','Z','StateActionInclusive','CheckSightInclusive');ActorCountOrder=@('XYCalls','ZCalls','NumericallyUnneededXY','NumericallyUnneededZ','StateActions','CheckSight');Commands=$completed;FinishedUtc=[DateTime]::UtcNow.ToString('o');PowerShell=$PSVersionTable.PSVersion.ToString();
+    @{Error=$failure;Profile=[bool]$Profile;ActorProfile=[bool]$ActorProfile;ActorActionInstrumentation=if($ActorProfile){$actorActionInstrumentation}else{$null};ActorArrayOrder=@('XY','Z','StateActionInclusive','CheckSightInclusive');ActorCountOrder=@('XYCalls','ZCalls','NumericallyUnneededXY','NumericallyUnneededZ','StateActions','CheckSight');SightTraversalOrder=@('BspNodeVisits','SubsectorVisits','SegmentIterations','UniqueLines','SightSideRejects','OneSidedOrMissingBackBlocks','ClosedPortals','InterceptCalculations','SlopeDivisions','ClosedSlopeWindows','RejectMatrixCulls');Commands=$completed;FinishedUtc=(Get-Date).ToUniversalTime().ToString('o');PowerShell=$PSVersionTable.PSVersion.ToString();
         BaselineBundleSha256=$baselineHash;ExecutedBundleSha256=(Get-FileHash $bundle).Hash;HarnessSha256=(Get-FileHash $PSCommandPath).Hash;
         ReplaySha256=(Get-FileHash $Replay).Hash;WadSha256=(Get-FileHash $Wad).Hash;SourceRoot=$sourceRootPath;Statistics=$stats;Samples=$samples.ToArray();
         ReplayVerification=$verification;Checkpoints=$points.ToArray();OwnedBundle=$bundle;
