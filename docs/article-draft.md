@@ -322,3 +322,7 @@ smoke receipt](../results/campaign-smoke-dispatch-20261002.json), and exact
 serial/worker parity in five E1M1 views for Classic, Matrix and color art.
 [Mode receipt](../results/mobj-action-render-modes-20261002.json) checks the
 internal renderer and encoders; original-executable fidelity remains separate.
+
+### Preview.6 package and performance update
+
+Preview.6 followed 35 commits after Preview.5 and is now public. Its tested ZIP is 1,819,451 bytes and pins clean source commit 0145d75; extraction verified all 569 file hashes and the separate checksum asset. In the extracted build, all 36 maps pass 35 idle tics and each retained style matches serial rendering over five views and 320,000 pixels with 16 workers. A four-run fixed-view E1M2 ABBA experiment reduced median total renderer time by 2.88% and wall/BSP time by 5.03%, with exact pixels. This bounded renderer result is not a general frame-rate or full-host claim. [Preview.6 release scope](release-preview6.md), [package validation](../results/preview6-package-validation-20261002.json), and [publication verification](../results/preview6-publication-20261002.json) retain the source hashes and limits. The complete human Episode 1 route, moving-world original-renderer comparison, display pacing, physical/acoustic review and second hardware remain open.

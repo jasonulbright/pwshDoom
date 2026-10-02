@@ -12,7 +12,7 @@ A normal completion is enough; 100% kills, items, and secrets are not required. 
 
 ## Build and launch
 
-The current local playtest candidate uses repository source commit `05556ee` (PowerShell action dispatch, iterative visibility traversal and segment-level wall-band preselection), after Preview.5. It routes all52 vanilla state actions in PowerShell; the near-first BSP walk matches the recursive reference over420 tics. All36 maps pass the current load/idle/render smoke, and Classic, Matrix and AnsiArt each retain exact serial/16-worker parity at five E1M1 headings. These checks do not complete maps or establish original-executable fidelity. See the [wall-band integration receipt](../results/wall-band-renderer-integration-20261002.json), [traversal receipt](../results/visibility-iterative-integration-20261002.json), and [playthrough performance evidence](performance.md#active-wall-band-preselection-trial--october-2-2026). The reproducible public fallback is [`pwshDoom-0.1.0-preview.6.zip`](release-preview6.md); its package manifest records the exact preview source.
+Use the published Preview.6 package, whose manifest pins clean source commit 0145d751a6f846114eaa6f243296086a3c71dccb, or the matching current checkout. The packaged PowerShell renderer preselects eligible textured wall bands per segment; its fixed-view E1M2 ABBA trial reports a 2.88% lower median total-render time with exact output hashes. The extracted package passes 36 map-start/35-idle-tic smokes and, in each of Classic, Matrix and AnsiArt, five-view serial/16-worker parity over 320,000 pixels. These checks do not navigate or finish maps. See the [wall-band integration receipt](../results/wall-band-renderer-integration-20261002.json), [package validation](../results/preview6-package-validation-20261002.json), [traversal receipt](../results/visibility-iterative-integration-20261002.json), and [playthrough performance evidence](performance.md#active-wall-band-preselection-trial--october-2-2026). The public [Preview.6 package](https://github.com/jasonulbright/pwshDoom/releases/tag/v0.1.0-preview.6) is the stable handoff for this route.
 
 Use 64-bit PowerShell 7.6.x and Windows Terminal. The required user-owned Ultimate Doom IWAD has SHA-256 `6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F`. WADs, soundfonts, prepared music, media, tools and the research PDF are excluded. The local eleven-track Episode 1 catalog covers this route; omit `-MusicCatalog` for effects-only play. Audio startup rechecks payloads and IWAD score identity.
 
@@ -23,10 +23,10 @@ $root = 'C:\projects\pwshDoom'
 $wad = 'C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\base\DOOM.WAD'
 $local = 'C:\projects\pwshDoom\local'
 $catalog = Join-Path $local 'music-prepared-episode1.json'
-$record = Join-Path $local 'episode1-human-input-wall-band-candidate.json'
-$report = Join-Path $local 'episode1-human-session-wall-band-candidate.json'
-$saves = Join-Path $local 'episode1-human-saves-wall-band-candidate'
-$settings = Join-Path $local 'episode1-human-settings-wall-band-candidate.json'
+$record = Join-Path $local 'episode1-human-input-preview6.json'
+$report = Join-Path $local 'episode1-human-session-preview6.json'
+$saves = Join-Path $local 'episode1-human-saves-preview6'
+$settings = Join-Path $local 'episode1-human-settings-preview6.json'
 pwsh -NoProfile -File (Join-Path $root 'Start-Doom.ps1') -Wad $wad -Workers 16 -Episode 1 -Map 1 -Skill 3 -Style Classic -Sound -MusicCatalog $catalog -RecordInput $record -Report $report -SaveRoot $saves -SettingsPath $settings -Maximized -FontSize 5
 ~~~
 
@@ -60,11 +60,11 @@ Your report will be recorded only for the scope and outcomes you state. Automate
 
 ## Current evidence and limits
 
-The R17 candidate receipt pins implementation commit 00405deebef6b4e8477c9c9316987b82fbc9064d and the Steam IWAD hash. The exact package passes its manifest, launcher preflight, and four-second E1M1 actual-device startup. All 175,140 submitted music frames return and the device closes cleanly; one queue-starvation observation occurs after the final packet, with no rebuffer resume. This is not a sustained audio or audible-quality qualification.
+The Preview.6 package-validation receipt pins the exact tested archive, source commit and Steam IWAD-backed checks. Extracted-package preflight passes; all 175,140 submitted music frames from the earlier four-second E1M1 actual-device check returned and the device closed cleanly, with one queue-starvation observation after the final packet and no rebuffer resume. That older check is not a sustained audio or audible-quality qualification.
 
-R17 adds stationary automap discovery reuse. Its focused checks match the uncached mapped-line bitsets for all 36 map starts at four headings, pass the eight-check automap worker fixture, and pass a 9/9 Episode 1 load/idle/render smoke. These tests do not finish maps. The actual simulation host records 34.79 tics/sec in an idle five-second run; the packaged audio smoke records 42.49 headless updates/sec. Neither is a 35-tic/60-displayed-frame qualification. The receipts and their limits are linked in the candidate record.
+Preview.6 passes 36/36 map-start smokes at 35 idle tics and five-view 16-worker parity in each visual style. These tests do not finish maps. Earlier bounded simulation and audio-host rates were below the frozen 35-tic/60-display target, and neither Terminal writes nor worker parity establish distinct monitor presentations. See the [package receipt](../results/preview6-package-validation-20261002.json), [publication receipt](../results/preview6-publication-20261002.json), and [performance evidence](performance.md).
 
-The former E1M2 chainsaw crash was caused by ordering a custom Angle value that does not implement IComparable. The current wrapped binary-angle comparison passes the focused attack regression against an E1M2 imp, which loses 4 HP after four tics. It is a mechanic check, not a route. R17 does not change that gameplay code.
+The former E1M2 chainsaw crash was caused by ordering a custom Angle value that does not implement IComparable. The current wrapped binary-angle comparison passes the focused attack regression against an E1M2 imp, which loses 4 HP after four tics. It is a mechanic check, not a route; later renderer changes do not change that gameplay code.
 
 The raised-floor Techpillar overlap matches the plane/sprite draw order in the two repository renderers, but original-executable parity for that view remains unverified. Jason clarified that the apparent wall leak near blue armor was the pre-placed Gibs decoration. A 64-view sweep did not reproduce a wall leak; its one candidate-only mask pixel was explained by a background-color difference. If either visual issue recurs in the human run, note the map and viewing direction.
 

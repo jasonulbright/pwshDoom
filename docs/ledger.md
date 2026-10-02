@@ -6135,3 +6135,16 @@ pins the archive and test reports. Release threshold was reached at35 commits
 after Preview.5; [Preview.6 is published](https://github.com/jasonulbright/pwshDoom/releases/tag/v0.1.0-preview.6).
 The downloaded release assets match the tested ZIP and checksum file; the
 [publication receipt](../results/preview6-publication-20261002.json) pins both.
+
+### Preview.6 playthrough handoff refreshed — October 2, 2026
+
+The human Episode 1 guide and campaign matrix now point to the published
+Preview.6 package and its extracted-package evidence, replacing the stale R17
+handoff as the current build. The guided route remains one complete HMP session:
+E1M1–E1M3, secret exit through E1M9, return to E1M4, E1M4–E1M8 and the E1
+finale. The local eleven-track catalog is present, all newly named output paths
+are unused, and the current checkout runtime sources match the packaged source
+commit. No human route is claimed. The article draft now includes the public
+package, bounded renderer measurements and remaining limits. Windows Terminal
+PID 8020 is still user-owned and open, so native window testing and screen
+recording were not started.

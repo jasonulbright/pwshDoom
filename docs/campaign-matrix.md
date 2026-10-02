@@ -1,8 +1,8 @@
 # Campaign qualification matrix
 
-Updated 2026-09-29. Release sequence remains Ultimate Doom, Doom II, then a MyHouse-based audit. See [roadmap](roadmap.md).
+Updated 2026-10-02. Release sequence remains Ultimate Doom, Doom II, then a MyHouse-based audit. See [roadmap](roadmap.md).
 
-**Current full load/render smoke: 36/36 passed on the Preview.4 implementation under PowerShell 7.6.6.** Each map loads, runs 35 idle simulation tics, and renders two full 320×200 serial views. Fresh controller and boss checks pass 69 and 97 assertions. All three styles match five serial views against 16 actual render workers with palette/fuzz cases. These checks do not complete map routes or establish original-executable fidelity. See the [source-pinned release validation](../results/preview4-validation-20260929.json).
+**Current published package qualification: Preview.6.** The extracted archive passes launch preflight and all 36 maps load for 35 idle tics. Classic, Matrix, and AnsiArt each match serial rendering across five views with 16 worker strips (320,000 pixels per style; zero differences). This is map-start coverage and internal renderer parity, not route completion or original-executable fidelity. See the [source-pinned package receipt](../results/preview6-package-validation-20261002.json) and [publication receipt](../results/preview6-publication-20261002.json).
 
 **Skill behavior: 37/37 focused checks passed** on the installed Ultimate Doom IWAD under PowerShell 7.6.5. E1M1 kill totals match the skill flags decoded directly from its THINGS lump: Baby 4, Easy 4, Medium 6, Hard 29, Nightmare 29. Isolated real-player checks confirm Baby halves incoming damage and doubles shell pickup ammo; Nightmare doubles shell ammo, halves demon run-state tics, doubles Imp fireball speed, starts Imps with zero reaction delay, and enables timed monster respawn. The separate Fast Monsters option changes monster cadence/projectile speed but does not enable respawning; Respawn Monsters does. A deterministic thinker-boundary fixture qualifies the 420-tic respawn threshold. These are mechanic checks, not full routes at each difficulty or all-map difficulty certification. See the [37-check receipt](../results/difficulty-behavior-r1-20260929.json) and [test source](../scripts/Test-DifficultyBehavior.ps1).
 
@@ -15,28 +15,13 @@ realtime audio checks. That renderer change consumes per-worker actor
 masks during decoding and passes a fresh 36-map smoke, exact 16-worker output
 in all three styles, and a persistent-worker map reload. Transition exits are
 explicit fixtures and do not mark any map complete; audio continuity checks do
-not qualify campaign completion. See the [current candidate
+not qualify campaign completion. See the [r5 candidate
 receipt](../results/episode1-current-human-candidate-20260928-r5.json),
 [broad receipt](../results/episode1-current-human-candidate-20260928.json),
 [geometry/cache supplement](../results/episode1-current-human-candidate-20260928-r2.json),
 and [realtime-audio supplement](../results/episode1-current-human-candidate-20260928-r3.json); the [visible-actor profile](../results/renderer-visible-actor-filter-20260928.json) reports sequential worker-equivalent CPU and does not claim a frame-rate gain.
 
-The current single-playthrough handoff is R17 at implementation commit
-00405deebef6b4e8477c9c9316987b82fbc9064d; see the [candidate receipt](../results/episode1-current-human-candidate-20260929-r17.json)
-and the exact [complete Episode 1 scope](episode1-playtest.md). The clean local
-package has 543 manifest-verified files, passes extracted PowerShell 7.6.6
-launcher preflight for 36 maps and 11 music qualifications, and excludes the
-local PDF and game assets. R17 passes its 9-map E1 smoke, all-map 144-view
-stationary-discovery bitset checks, and eight simulation-worker automap checks.
-Its four-second packaged E1M1 audio run returns all 175,140 frames and closes
-the device; one queue-starvation poll follows the last packet, with no rebuffer
-resume. The 2 chainsaw, 69 transition, 97 boss, and 10 menu-input checks remain
-valid from R16 because gameplay/session files did not change. These fixtures do
-not complete maps. Jason's one complete human HMP route remains pending,
-including the secret exit through E1M9, return to E1M4, and E1M8 finale. Full
-session audio, physical keyboard play, 35-tic/60-displayed-frame pacing, and
-original-executable parity remain unqualified. R17 is a development handoff,
-not a public release. See the [package validation](../results/r17-playtest-package-validation-20260929.json).
+The current single-playthrough handoff is the published Preview.6 build, whose runtime source is pinned by the package manifest to 0145d751a6f846114eaa6f243296086a3c71dccb. The exact archive passes its 569-file manifest audit, launch preflight and 36-map smoke. Each of the three styles matches the serial renderer across five views and 16 worker strips. These fixtures do not complete maps. Jason's one complete human HMP route remains pending, including the secret exit through E1M9, return to E1M4, and E1M8 finale. Full-session audio, physical keyboard play, 35-tic/60-distinct-display pacing, and independent original-executable parity remain unqualified. See the [playthrough guide](episode1-playtest.md), [package validation](../results/preview6-package-validation-20261002.json), and [publication evidence](../results/preview6-publication-20261002.json).
 
 The earlier R12 handoff was pinned at source commit
 `c29b24e8a1c06635f90423672cc74f28836b7095`; its measurement and qualification
