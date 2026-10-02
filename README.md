@@ -41,6 +41,7 @@ Classic also accepts `-AnsiEncoding Ansi256` for an experimental indexed-color a
 
 - Three display styles, menus, episode/difficulty selection, automap, save/load and sound effects, with optional prepared music.
 - Development after Preview.4 restores pickup/key-lock notices: original IWAD text in Classic, larger readable terminal text in Matrix and color art. See the [notice validation and recorded typography decisions](docs/player-notices.md).
+- Development also reuses immutable render assets across map changes. Optional `Start-Doom.ps1 -TerminalOutput AsyncBatch` keeps a bounded asynchronous output task; Strips remains the default. The [performance evidence](docs/performance.md) retains unsuccessful pacing runs as well as stage improvements. These changes are absent from the public Preview.4 ZIP.
 - All 36 Ultimate Doom maps have load/simulation/render smoke coverage. E1M1, E1M2, and E1M4 ordinary-input routes pass on the current gameplay source; the E1M3 route driver stalls without a reproduced defect. These regressions do not replace the complete Episode 1 human playthrough, which remains pending on the current handoff.
 - Recent rendering work improves Doom-style wall, plane and actor sampling and clips world sprites to wall silhouettes. The R12 plane-sampler optimization preserves all compared pixels; full original-executable parity is not established.
 - The R9 music-reader tests pass 21 checks. Opening all eleven local Episode 1 tracks is 56.06% faster in a warm-cache, reader-only comparison; this is not a cold-start or whole-game measurement.

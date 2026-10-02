@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Restore key-lock, pickup and automap notices: original IWAD lettering in Classic, readable terminal lettering in Matrix and color art. All three actual Terminal/audio fixtures pass; physical/acoustic review remains open.
+- Reuse immutable render resources between maps and verified resource bodies in persistent workers. Three live Classic/audio routes measure 1.54–2.03-second map loads; repeated display pacing still misses the release thresholds.
+- Add optional `Start-Doom.ps1 -TerminalOutput AsyncBatch`, with bounded output ownership and resize guards. Byte/pipe tests and all-style live fixtures pass. One paired performance cycle supports lower simulation lateness, but does not establish a general speedup. Strips remains the default.
+
 Ultimate Doom campaign qualification, physical play, acoustic review, independent rendering comparisons and repeated display-pacing measurements remain open.
 
 ## 0.1.0-preview.4 — 2026-09-29

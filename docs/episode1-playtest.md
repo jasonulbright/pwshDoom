@@ -12,31 +12,27 @@ A normal completion is enough; 100% kills, items, and secrets are not required. 
 
 ## Build and launch
 
-The current handoff is the local development package `pwshDoom-0.1.0-dev.20261001.r18.zip`, with player-notice implementation at commit `2215250`. It retains the R17 gameplay/renderer and adds readable key-lock, pickup and automap notices. It excludes WADs, soundfonts, reports and the local research PDF. It is not a tagged release or a fully qualified Ultimate Doom release candidate. The [R18 package receipt](../results/r18-playtest-package-validation-20261001.json) pins the exact source, ZIP checksum, manifest and extracted startup checks. The older R17 package remains available locally for comparison; Preview.4 remains the public release.
+The current handoff is the local development package `pwshDoom-0.1.0-dev.20261001.r19.zip`. It follows the frozen R18 package, retains Classic/Matrix/color art, and includes readable notices, immutable map-resource reuse and optional bounded AsyncBatch output. Strips remains the default. This is a playable development candidate; it is not a tagged public release or a fully qualified Ultimate Doom release candidate. Preview.4 remains the public release. See the [R19 candidate scope](candidate-r19.md) and its external package-validation receipt for exact source/archive identity and extracted checks. R18 remains available locally for comparison.
 
-The checked extraction is `C:\projects\pwshDoom\local\episode1-r18-extracted\pwshDoom-0.1.0-dev.20261001.r18`. The ZIP is in `C:\projects\pwshDoom\local\episode1-r18-package`. Use that exact package and fresh recording/save paths.
+Use 64-bit PowerShell 7.6.x and Windows Terminal. The required user-owned Ultimate Doom IWAD has SHA-256 `6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F`. WADs, soundfonts, prepared music, media, tools and the research PDF are excluded. The local eleven-track Episode 1 catalog covers this route; omit `-MusicCatalog` for effects-only play. Audio startup rechecks payloads and IWAD score identity.
 
-Use 64-bit PowerShell 7.6.x and Windows Terminal. Play.ps1 -Check passes on the extracted package with the Steam Ultimate Doom IWAD and the locally prepared eleven-track Episode 1 catalog. The required IWAD is user-supplied and must match SHA-256 6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F. The catalog and soundfont remain outside the archive; if the catalog is unavailable, omit -MusicCatalog to play with sound effects and no music. Audio startup rechecks the payload and IWAD score identity.
-
-The unchanged R17 game/renderer has the Preview.4 36-map load/idle/render smoke and focused transition, boss, menu and save evidence. The R18 notice integration adds fifty focused checks and actual Terminal/audio fixtures in all three styles. These load saved key/armor states, toggle automap and observe notice expiry; they do not complete maps. The [notice evidence](player-notices.md) separates rejected typography from the final choices.
-
-The former E1M2 chainsaw exception remains repaired. Earlier evidence includes 69 transition and 97 boss assertions, separate from ordinary-input victories. The independent E1M1 continuation again preserves inventory into E1M2. Loaded Classic pacing repeats on the earlier notice host still miss the release threshold and include multi-second map handoffs; a same-source repeat falls to 27.676 tics/sec. The [performance record](performance.md#loaded-classic-route-repeats--october-1-2026) keeps that failure visible. None of these checks replaces the complete human route, acoustic review or broader Ultimate Doom qualification.
-
-From PowerShell, set these fresh output paths, then launch:
+From PowerShell, use the checked extraction and fresh output paths:
 
 ~~~powershell
-$root = 'C:\projects\pwshDoom\local\episode1-r18-extracted\pwshDoom-0.1.0-dev.20261001.r18'
+$root = 'C:\projects\pwshDoom\local\episode1-r19-extracted\pwshDoom-0.1.0-dev.20261001.r19'
 $wad = 'C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\base\DOOM.WAD'
 $local = 'C:\projects\pwshDoom\local'
 $catalog = Join-Path $local 'music-prepared-episode1.json'
-$record = Join-Path $local 'episode1-human-input-r18.json'
-$report = Join-Path $local 'episode1-human-session-r18.json'
-$saves = Join-Path $local 'episode1-human-saves-r18'
-$settings = Join-Path $local 'episode1-human-settings-r18.json'
+$record = Join-Path $local 'episode1-human-input-r19.json'
+$report = Join-Path $local 'episode1-human-session-r19.json'
+$saves = Join-Path $local 'episode1-human-saves-r19'
+$settings = Join-Path $local 'episode1-human-settings-r19.json'
 pwsh -NoProfile -File (Join-Path $root 'Start-Doom.ps1') -Wad $wad -Workers 16 -Episode 1 -Map 1 -Skill 3 -Style Classic -Sound -MusicCatalog $catalog -RecordInput $record -Report $report -SaveRoot $saves -SettingsPath $settings -Maximized -FontSize 5
 ~~~
 
-Allow up to 60 seconds for startup. Keep the 16 renderer workers and fit at least 320 columns by 100 rows; maximized with a 5-point font is the tested setting. If the viewport is short, enlarge the window or press Ctrl+- to reduce the font. Blank space around the centered image in a larger terminal is expected. Keep generated input, reports, saves and settings under `C:\projects\pwshDoom\local`; the paths above are fresh for R18.
+Allow up to 60 seconds for startup. Keep the 16 renderer workers and fit at least 320 columns by 100 rows; maximized with a 5-point font is the tested Classic setting. If the viewport is short, enlarge the window or press Ctrl+- to reduce the font. Blank space around the centered image is expected. Keep generated inputs, reports, saves and settings under the local directory. The launch above uses default Strips output; optional AsyncBatch is experimental and does not close the performance gates.
+
+Current development evidence includes fifty focused notice checks and final-source live fixtures in all three styles, each consuming 350 commands and eleven checkpoints. Fresh-cache render resources match independently converted resources, and worker reloads preserve the sixteen processes across three episode skies. Three same-source live Classic/audio routes measure map loads of 1.54–2.03 seconds but miss the frozen pacing thresholds; a single asynchronous ABBA cycle does not qualify sustained performance. See [notice evidence](player-notices.md) and [performance evidence](performance.md). None replaces the full human route or acoustic and physical-input review.
 
 ## Controls
 

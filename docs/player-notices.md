@@ -18,7 +18,7 @@ style, every submitted audio frame returned, and preserved media timestamps.
 Sampled final Matrix and AnsiArt images show complete bright terminal-font
 letters. These are visual samples and digital audio captures; physical monitor
 readability and acoustic review remain separate human checks.
-# AsyncBatch follow-up — October 1, 2026
+## AsyncBatch follow-up — October 1, 2026
 
 The experimental asynchronous terminal path is checked against the same saved
 key-lock/armor/automap fixture in all three styles. Each final recording finishes
