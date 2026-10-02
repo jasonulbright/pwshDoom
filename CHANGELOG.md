@@ -13,6 +13,11 @@ trial. The bounded E1M2 median improvement does not establish full-host pacing.
 [Scope and evidence](docs/release-preview6.md); the full Ultimate Doom route and
 release gates remain open.
 
+The extracted release package was checked against all569 manifest hashes and
+passed launch prerequisites, 36 map-start smokes, and serial/16-worker parity
+for 320,000 pixels per style across Classic, Matrix and AnsiArt. The 1,819,451-
+byte ZIP SHA-256 is `60b04f6e0cccb6da7326bef5edabd85dec3c25c5bc6687c691e10b27decd8243`.
+
 - Select eligible textured wall bands once per projected segment, reducing
   repeated wall-column branches while preserving band order and raster output.
   The fixed-view ABBA trial reports total renderer median −2.88% and wall-stage

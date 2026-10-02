@@ -55,3 +55,17 @@ The package manifest records its exact source commit and every payload hash.
 The public release and package-validation receipt are maintained in the
 repository; commercial IWADs, soundfonts, prepared music, local recordings,
 tools and the research PDF are excluded from the ZIP.
+
+## Extracted package verification
+
+The Preview.6 archive was built from clean source commit
+`0145d751a6f846114eaa6f243296086a3c71dccb`. Its 1,819,451-byte ZIP contains
+569 manifest-pinned payload files; every extracted file hash and the adjacent
+`SHA256SUMS.txt` entry match. The package prerequisite check passes against the
+locally licensed Steam IWAD. The extracted package also passes all36 map-start
+smokes (35 idle tics each) and all three five-view, 16-worker parity runs:
+320,000 compared pixels per style, zero differences. The source-pinned
+[package-validation receipt](../results/preview6-package-validation-20261002.json)
+records the hashes and limits. These package checks still do not qualify
+ordinary-input campaign completion, live pacing or original-framebuffer
+fidelity.

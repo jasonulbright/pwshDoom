@@ -6120,3 +6120,16 @@ internal worker parity, not route completion or original-framebuffer proof.
 [Source-pinned integration evidence](../results/wall-band-renderer-integration-20261002.json).
 Count reaches34 after Preview.5. Prepare the next cumulative community package
 at35 commits; the full Episode 1 route and original full-release gates stay open.
+
+### Preview.6 package qualification — October 2, 2026
+
+The clean `0145d75` Preview.6 source archive was extracted and audited: all569
+manifest payload hashes, the 1,819,451-byte archive checksum, and the adjacent
+checksum file match; no game or research assets are bundled. The extracted
+launch check passes with the local licensed IWAD. All36 maps pass35 idle tics,
+and Classic, Matrix and AnsiArt each match serial output across five views and
+16 worker strips (320,000 pixels, zero differences). This is package and
+internal parity evidence only, not human route completion, live pacing or
+external framebuffer qualification. The [package receipt](../results/preview6-package-validation-20261002.json)
+pins the archive and test reports. Release threshold was reached at35 commits
+after Preview.5; package verification is prepared for the Preview.6 release.

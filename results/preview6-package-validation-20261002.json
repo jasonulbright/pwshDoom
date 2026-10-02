@@ -1,0 +1,73 @@
+{
+  "CompletedUtc": "2026-10-02T19:58:41.2796958Z",
+  "Release": "0.1.0-preview.6",
+  "Package": {
+    "Path": "local/preview6-package/pwshDoom-0.1.0-preview.6.zip",
+    "Sha256": "60b04f6e0cccb6da7326bef5edabd85dec3c25c5bc6687c691e10b27decd8243",
+    "Bytes": 1819451,
+    "ManifestVersion": "0.1.0-preview.6",
+    "SourceCommit": "0145d751a6f846114eaa6f243296086a3c71dccb",
+    "WorkingTreeDirty": false,
+    "PayloadFiles": 569,
+    "ArchiveFileEntries": 570,
+    "ExtractedFilesVerified": 569,
+    "Mismatches": 0,
+    "ChecksumFileMatch": true,
+    "ExcludedRestrictedAssets": true,
+    "ChecksumFileSha256": "C991112E1224EBB8CE3BEA50636875A7B665107ABC33AA8BBF6EA1A77F9E4FCA"
+  },
+  "PrerequisiteCheck": {
+    "Command": "Play.ps1 -Check -Wad <licensed DOOM.WAD>",
+    "Passed": true,
+    "PowerShell": "7.6.5",
+    "EpisodeMaps": 36,
+    "WindowsTerminal": "C:\\Users\\jason\\AppData\\Local\\Microsoft\\WindowsApps\\wt.exe",
+    "MusicQualification": "Not requested; effects-only prerequisite check"
+  },
+  "CampaignSmoke": {
+    "Report": "local/preview6-package-campaign-smoke.json",
+    "ReportSha256": "189AC39BF3F87B180A74EE33F0E2A82521843534A879E1B0651E2DEFAF9680F4",
+    "Maps": 36,
+    "Passed": 36,
+    "IdleTicsPerMap": 35,
+    "WorkerStrips": 16,
+    "FrameHeadingHashesPerMap": 2,
+    "Meaning": "map-start/idle simulation smoke only; not gameplay route completion"
+  },
+  "RenderPartitionChecks": [
+    {
+      "Differences": 0.0,
+      "Style": "Classic",
+      "ReportSha256": "C7AB615F02BE437D3BC32252623339D7BB3FA0FF2BDF94D6EAFAB78B272C23DC",
+      "RendererSha256": "56F1EF31DF7A7E42E2FC58A2ACEAFB19A05DF6D5685A559A92DC4FACB14B429F",
+      "ComparedPixels": 320000.0,
+      "Workers": 16,
+      "Views": 5
+    },
+    {
+      "Differences": 0.0,
+      "Style": "Matrix",
+      "ReportSha256": "AC1D510ED34AB399CCDBFBF5415F0C46DCBCBD1CDACBE9DC214582A32A92C64D",
+      "RendererSha256": "56F1EF31DF7A7E42E2FC58A2ACEAFB19A05DF6D5685A559A92DC4FACB14B429F",
+      "ComparedPixels": 320000.0,
+      "Workers": 16,
+      "Views": 5
+    },
+    {
+      "Differences": 0.0,
+      "Style": "AnsiArt",
+      "ReportSha256": "D6A6271CAAF24F52C5B5DE198F07FD65734710C88CD7271E74934C671412726A",
+      "RendererSha256": "56F1EF31DF7A7E42E2FC58A2ACEAFB19A05DF6D5685A559A92DC4FACB14B429F",
+      "ComparedPixels": 320000.0,
+      "Workers": 16,
+      "Views": 5
+    }
+  ],
+  "Limitations": [
+    "No human campaign route completion or qualification",
+    "No independent original-game framebuffer parity evidence",
+    "No native displayed-frame pacing or full-host latency evidence",
+    "No new acoustic or second-hardware review"
+  ],
+  "EvidenceMeaning": "Checks were run from the extracted, manifest-verified release ZIP. Internal serial/worker parity, IWAD map loading, and launch prerequisites only; not a fully qualified Ultimate Doom release."
+}

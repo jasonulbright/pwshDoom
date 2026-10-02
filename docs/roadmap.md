@@ -663,3 +663,15 @@ establish external reference-frame parity. The ABBA performance gain remains
 limited to a fixed E1M2 camera. This code commit reaches34 after Preview.5; the
 new cumulative preview is due at35, while human route, live pacing, fidelity,
 acoustic and hardware gates remain open.
+
+### Preview.6 package verification — October 2, 2026
+
+Preview.6 was assembled from clean commit `0145d75` and the extracted ZIP
+passes all569 manifest hashes, launch prerequisites, 36 map-start idle smokes,
+and five-view serial/16-worker rendering checks for Classic, Matrix and
+AnsiArt. Each style compares 320,000 pixels with zero differences. The
+[validation receipt](../results/preview6-package-validation-20261002.json)
+records the archive checksum and retained test report hashes. This satisfies
+the next 35-commit community-preview cadence, not the full-release gates: the
+human Episode 1 route, live displayed-frame pacing, independent rendering
+fidelity, acoustic review and second-hardware test remain outstanding.
