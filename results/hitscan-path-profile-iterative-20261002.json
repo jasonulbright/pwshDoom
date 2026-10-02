@@ -1,0 +1,171 @@
+{
+  "RecordedUtc": "2026-10-02T18:58:38.033105Z",
+  "CandidateCommit": "2bbea84327ad5ad2755e3fb24a18d0ce31586a75",
+  "CommitsSincePreview5": 28,
+  "PowerShell": "7.6.5",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "ReplaySha256": "3C449B3AA71BE042C7FF229AED2F143636ED97A4A4B02562505339B35415DD75",
+  "ProfilerHarnessSha256": "ED587ADF89B2D17CCE0F691774FD4298FC224E818F7A9AA815BD72AF35CD617D",
+  "RawDiagnosticSha256": "5E982A655CA3F7F33EA4F0F7B08B683EEA70AAF734D67ABC56EE3AE9CBBA224E",
+  "EngineBundleSha256": "FDD5441D2B0BBB0B3D0EFE6B736D2FE7E7AEF7FBED1BAA7413B2CDF7E0CA4E93",
+  "Commands": 420,
+  "ReplayMatched": true,
+  "StoredCheckpoints": 2,
+  "GameUpdateProfiled": {
+    "Count": 420,
+    "Mean": 18.900533095238096,
+    "Median": 15.4192,
+    "P95": 40.7091,
+    "Max": 167.9468
+  },
+  "ThinkersRunProfiled": {
+    "Count": 420,
+    "Mean": 14.526936428571432,
+    "Median": 13.041350000000001,
+    "P95": 27.0525,
+    "Max": 98.0367
+  },
+  "TopStateActions": [
+    {
+      "Name": "Look",
+      "Calls": 3968,
+      "InclusiveMilliseconds": 3376.913,
+      "MeanMilliseconds": 0.851
+    },
+    {
+      "Name": "Chase",
+      "Calls": 520,
+      "InclusiveMilliseconds": 1148.503,
+      "MeanMilliseconds": 2.2087
+    },
+    {
+      "Name": "SPosAttack",
+      "Calls": 5,
+      "InclusiveMilliseconds": 204.009,
+      "MeanMilliseconds": 40.8019
+    },
+    {
+      "Name": "FaceTarget",
+      "Calls": 5,
+      "InclusiveMilliseconds": 3.432,
+      "MeanMilliseconds": 0.6864
+    },
+    {
+      "Name": "Pain",
+      "Calls": 3,
+      "InclusiveMilliseconds": 2.493,
+      "MeanMilliseconds": 0.8309
+    }
+  ],
+  "HitscanInclusive": [
+    {
+      "Name": "AimLineAttackInclusive",
+      "Calls": 92,
+      "InclusiveMilliseconds": 566.811,
+      "MeanMilliseconds": 6.161
+    },
+    {
+      "Name": "LineAttackInclusive",
+      "Calls": 44,
+      "InclusiveMilliseconds": 399.502,
+      "MeanMilliseconds": 9.0796
+    }
+  ],
+  "PathTraversalCounts": [
+    {
+      "Name": "PathTraverseCalls",
+      "Count": 297
+    },
+    {
+      "Name": "BlockIterations",
+      "Count": 2086
+    },
+    {
+      "Name": "InterceptsAtTraversalEnd",
+      "Count": 1162
+    },
+    {
+      "Name": "LineInterceptCandidates",
+      "Count": 3267
+    },
+    {
+      "Name": "ThingInterceptCandidates",
+      "Count": 537
+    },
+    {
+      "Name": "InterceptVectorCalls",
+      "Count": 1272
+    },
+    {
+      "Name": "SortComparisons",
+      "Count": 2553
+    }
+  ],
+  "InterceptDistribution": [
+    {
+      "Intercepts": "0",
+      "Traversals": 55
+    },
+    {
+      "Intercepts": "1-2",
+      "Traversals": 132
+    },
+    {
+      "Intercepts": "3-4",
+      "Traversals": 31
+    },
+    {
+      "Intercepts": "5-8",
+      "Traversals": 16
+    },
+    {
+      "Intercepts": "9-16",
+      "Traversals": 54
+    },
+    {
+      "Intercepts": "17-32",
+      "Traversals": 9
+    },
+    {
+      "Intercepts": "33-64",
+      "Traversals": 0
+    },
+    {
+      "Intercepts": "65+",
+      "Traversals": 0
+    }
+  ],
+  "MaximumIntercepts": 23,
+  "SelectionScanIterations": 2553,
+  "SourcePins": [
+    {
+      "Path": "scripts/Measure-SimulationStages.ps1",
+      "Sha256": "ED587ADF89B2D17CCE0F691774FD4298FC224E818F7A9AA815BD72AF35CD617D"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/World/VisibilityCheck.sb.ps1",
+      "Sha256": "6D7B348EBED8283B53C054D79709EA092AFA28C17A47CEBC721F80BF6207CE49"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/World/PathTraversal.sb.ps1",
+      "Sha256": "0F16AE92CD9057B52AF6C8F712EC724557B2E8701855084B1A05C627C5950F3E"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/World/Hitscan.sb.ps1",
+      "Sha256": "853EFAF9D8086DF4EE13951FE704145E91311759F6D7C0465F3C904695DDF704"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/World/MonsterBehavior.sb.ps1",
+      "Sha256": "3A7CD8AE8390DF58CA4243018E3559C6CF7610068A55DA566084CE2FE2764D29"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Info/DoomInfo.MobjActions.ps1",
+      "Sha256": "B8F753CC1CFA01328EE5CCBE765FB09F5CD8DC4630AACCEF37101DB3DE2390F6"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/World/Mobj.sb.ps1",
+      "Sha256": "3BE0BC9D12C81FFE8E1CA89C45A6F7B2518AD954F2EC689272F9445232BD50AF"
+    }
+  ],
+  "Meaning": "Single headless 420-command replay in an owned profiler-instrumented bundle. Timings include stopwatch and counter overhead. State-action, CheckSight and hitscan timings are inclusive and overlap. Path counts are diagnostic attribution only; this does not measure uninstrumented performance, native pacing, rendering, audio-device latency, or acoustic quality."
+}

@@ -56,7 +56,7 @@ if($Profile){
     }
     # Edit only this method body and the owned World's diagnostic property.
     $source=$source.Remove($method[0].Body.Extent.StartOffset,$body.Length).Insert($method[0].Body.Extent.StartOffset,$changed)
-    $source=Replace-Once $source 'class World {' ('class World {'+"`n"+'    [long[]]$ProfileTicks=[long[]]::new(9)'+"`n"+'    [long[]]$ProfileActorTicks=[long[]]::new(4)'+"`n"+'    [long[]]$ProfileActorCounts=[long[]]::new(6)'+"`n"+'    [long[]]$ProfileSightCounts=[long[]]::new(12)'+"`n")
+    $source=Replace-Once $source 'class World {' ('class World {'+"`n"+'    [long[]]$ProfileTicks=[long[]]::new(9)'+"`n"+'    [long[]]$ProfileActorTicks=[long[]]::new(4)'+"`n"+'    [long[]]$ProfileActorCounts=[long[]]::new(6)'+"`n"+'    [long[]]$ProfileSightCounts=[long[]]::new(12)'+"`n"+'    [long[]]$ProfileActionTicks=[long[]]::new(52)'+"`n"+'    [long[]]$ProfileActionCounts=[long[]]::new(52)'+"`n"+'    [long[]]$ProfileHitscanTicks=[long[]]::new(2)'+"`n"+'    [long[]]$ProfileHitscanCounts=[long[]]::new(2)'+"`n"+'    [long[]]$ProfilePathCounts=[long[]]::new(7)'+"`n"+'    [long[]]$ProfileInterceptBuckets=[long[]]::new(8)'+"`n"+'    [int]$ProfileMaxInterceptCount=0'+"`n")
     if($ActorProfile){
         $index=0
         foreach($axis in @('XY','Z')){
@@ -74,10 +74,52 @@ if($Profile){
             $changed='{'+('$world.ProfileActorCounts[4]++;[long]$pfActionStart=[Diagnostics.Stopwatch]::GetTimestamp();try{')+$body.Substring(1,$body.Length-2)+'}finally{$world.ProfileActorTicks[2]+=[Diagnostics.Stopwatch]::GetTimestamp()-$pfActionStart;}}'
             $source=$source.Remove($dispatch[0].Body.Extent.StartOffset,$body.Length).Insert($dispatch[0].Body.Extent.StartOffset,$changed)
             $actorActionInstrumentation='MobjActions.InvokeStateAction (inclusive)'
+
+            $ast=[Management.Automation.Language.Parser]::ParseInput($source,[ref]$tokens,[ref]$issues)
+            if($issues.Count){throw 'Cannot parse direct router before per-action profiling.'}
+            $actionType=$ast.Find({param($node) $node -is [Management.Automation.Language.TypeDefinitionAst] -and $node.Name -eq 'MobjActions'},$false)
+            $actionMethod=@($actionType.Members|Where-Object {$_.Name -eq 'InvokeStateAction' -and $_ -is [Management.Automation.Language.FunctionMemberAst]})
+            $actionSwitch=$actionMethod[0].Body.Find({param($node) $node -is [Management.Automation.Language.SwitchStatementAst]},$false)
+            if($null -eq $actionSwitch -or $actionSwitch.Clauses.Count -ne 52){throw 'Expected 52 action cases for per-action timing.'}
+            $actionNames=[Collections.Generic.List[string]]::new()
+            $actionEdits=[Collections.Generic.List[object]]::new()
+            for($actionIndex=0;$actionIndex -lt $actionSwitch.Clauses.Count;$actionIndex++){
+                $clause=$actionSwitch.Clauses[$actionIndex]
+                if($clause.Item1 -isnot [Management.Automation.Language.StringConstantExpressionAst]){throw 'Direct action case name is not a string constant.'}
+                $actionName=[string]$clause.Item1.Value
+                $actionNames.Add($actionName)
+                $branch=$clause.Item2.Extent.Text
+                $wrapped='{'+('$world.ProfileActionCounts['+$actionIndex+']++;[long]$pfOneActionStart=[Diagnostics.Stopwatch]::GetTimestamp();try{')+$branch.Substring(1,$branch.Length-2)+'}finally{$world.ProfileActionTicks['+$actionIndex+']+=[Diagnostics.Stopwatch]::GetTimestamp()-$pfOneActionStart;}}'
+                $actionEdits.Add(@{Offset=$clause.Item2.Extent.StartOffset;Length=$branch.Length;Text=$wrapped})
+            }
+            foreach($edit in ($actionEdits|Sort-Object Offset -Descending)){$source=$source.Remove($edit.Offset,$edit.Length).Insert($edit.Offset,$edit.Text)}
         }else{
             $marker='$st.MobjAction.Invoke($this.world, $this)'
             $source=Replace-Once $source $marker ('$this.world.ProfileActorCounts[4]++;[long]$pfActionStart=[Diagnostics.Stopwatch]::GetTimestamp();'+$marker+';$this.world.ProfileActorTicks[2]+=[Diagnostics.Stopwatch]::GetTimestamp()-$pfActionStart;')
             $actorActionInstrumentation='PSMethod.Invoke (inclusive)'
+            $actionNames=@()
+        }
+        $source=Edit-MethodBody $source 'Hitscan' 'AimLineAttack' {
+            param($body)
+            return '{[long]$pfHitscanStart=[Diagnostics.Stopwatch]::GetTimestamp();$this.World.ProfileHitscanCounts[0]++;try{'+$body.Substring(1,$body.Length-2)+'}finally{$this.World.ProfileHitscanTicks[0]+=[Diagnostics.Stopwatch]::GetTimestamp()-$pfHitscanStart;}}'
+        }
+        $source=Edit-MethodBody $source 'Hitscan' 'LineAttack' {
+            param($body)
+            return '{[long]$pfHitscanStart=[Diagnostics.Stopwatch]::GetTimestamp();$this.World.ProfileHitscanCounts[1]++;try{'+$body.Substring(1,$body.Length-2)+'}finally{$this.World.ProfileHitscanTicks[1]+=[Diagnostics.Stopwatch]::GetTimestamp()-$pfHitscanStart;}}'
+        }
+        $source=Edit-MethodBody $source 'PathTraversal' 'AddLineIntercepts' {param($body) $body.Insert(1,'$this.World.ProfilePathCounts[3]++;')}
+        $source=Edit-MethodBody $source 'PathTraversal' 'AddThingIntercepts' {param($body) $body.Insert(1,'$this.World.ProfilePathCounts[4]++;')}
+        $source=Edit-MethodBody $source 'PathTraversal' 'InterceptVector' {param($body) $body.Insert(1,'$this.World.ProfilePathCounts[5]++;')}
+        $source=Edit-MethodBody $source 'PathTraversal' 'TraverseIntercepts' {
+            param($body)
+            return (Replace-Once $body 'for ($i = 0; $i -lt $this.InterceptCount; $i++) {' 'for ($i = 0; $i -lt $this.InterceptCount; $i++) {$this.World.ProfilePathCounts[6]++;')
+        }
+        $source=Edit-MethodBody $source 'PathTraversal' 'PathTraverse' {
+            param($body)
+            $body=$body.Insert(1,'$this.World.ProfilePathCounts[0]++;')
+            $body=Replace-Once $body 'for ($count = 0; $count -lt 64; $count++) {' 'for ($count = 0; $count -lt 64; $count++) {$this.World.ProfilePathCounts[1]++;'
+            $body=Replace-Once $body 'return $this.TraverseIntercepts($trav, [Fixed]::One)' '$n=$this.InterceptCount;$this.World.ProfilePathCounts[2]+=$n;if($n -gt $this.World.ProfileMaxInterceptCount){$this.World.ProfileMaxInterceptCount=$n};$bucket=if($n -le 0){0}elseif($n -le 2){1}elseif($n -le 4){2}elseif($n -le 8){3}elseif($n -le 16){4}elseif($n -le 32){5}elseif($n -le 64){6}else{7};$this.World.ProfileInterceptBuckets[$bucket]++;return $this.TraverseIntercepts($trav, [Fixed]::One)'
+            return $body
         }
         $source=Edit-MethodBody $source 'VisibilityCheck' 'CrossBspNode' {param($body) $body.Insert(1,'$this.World.ProfileSightCounts[0]++;')}
         $source=Edit-MethodBody $source 'VisibilityCheck' 'CrossSubsector' {
@@ -119,7 +161,7 @@ try{
         $entry=$reference.InputCommands[$i];$cmd=$commands[0];$cmd.Clear()
         $cmd.ForwardMove=$entry[0];$cmd.SideMove=$entry[1];$cmd.AngleTurn=$entry[2];$cmd.Buttons=$entry[3]
         $beforeWorld=$game.World;$before=if($Profile){$beforeWorld.ProfileTicks.Clone()}
-        if($ActorProfile){$beforeActorTicks=$beforeWorld.ProfileActorTicks.Clone();$beforeActorCounts=$beforeWorld.ProfileActorCounts.Clone();$beforeSightCounts=$beforeWorld.ProfileSightCounts.Clone()}
+        if($ActorProfile){$beforeActorTicks=$beforeWorld.ProfileActorTicks.Clone();$beforeActorCounts=$beforeWorld.ProfileActorCounts.Clone();$beforeSightCounts=$beforeWorld.ProfileSightCounts.Clone();$beforeActionTicks=$beforeWorld.ProfileActionTicks.Clone();$beforeActionCounts=$beforeWorld.ProfileActionCounts.Clone();$beforeHitscanTicks=$beforeWorld.ProfileHitscanTicks.Clone();$beforeHitscanCounts=$beforeWorld.ProfileHitscanCounts.Clone();$beforePathCounts=$beforeWorld.ProfilePathCounts.Clone();$beforeInterceptBuckets=$beforeWorld.ProfileInterceptBuckets.Clone()}
         $watch=[Diagnostics.Stopwatch]::StartNew();$null=$game.Update($commands);$elapsed=$watch.Elapsed.TotalMilliseconds;$completed++
         $sample=@{Command=$completed;GameUpdateMilliseconds=$elapsed;StagesMilliseconds=$null;MapChanged=(-not [object]::ReferenceEquals($beforeWorld,$game.World))}
         if($Profile){
@@ -130,10 +172,20 @@ try{
             }
         }
         if($ActorProfile){
-            $sample.ActorMilliseconds=@();$sample.ActorCounts=@();$sample.SightTraversalCounts=@()
+            $sample.ActorMilliseconds=@();$sample.ActorCounts=@();$sample.SightTraversalCounts=@();$sample.ActionMilliseconds=@();$sample.ActionCounts=@();$sample.HitscanMilliseconds=@();$sample.HitscanCounts=@();$sample.PathCounts=@();$sample.InterceptBuckets=@()
             for($stage=0;$stage -lt 4;$stage++){$sample.ActorMilliseconds+=($game.World.ProfileActorTicks[$stage]-$(if($sample.MapChanged){0}else{$beforeActorTicks[$stage]}))*1000.0/[Diagnostics.Stopwatch]::Frequency}
             for($stage=0;$stage -lt 6;$stage++){$sample.ActorCounts+=($game.World.ProfileActorCounts[$stage]-$(if($sample.MapChanged){0}else{$beforeActorCounts[$stage]}))}
             for($stage=0;$stage -lt 11;$stage++){$sample.SightTraversalCounts+=($game.World.ProfileSightCounts[$stage]-$(if($sample.MapChanged){0}else{$beforeSightCounts[$stage]}))}
+            for($stage=0;$stage -lt $actionNames.Count;$stage++){
+                $sample.ActionMilliseconds+=($game.World.ProfileActionTicks[$stage]-$(if($sample.MapChanged){0}else{$beforeActionTicks[$stage]}))*1000.0/[Diagnostics.Stopwatch]::Frequency
+                $sample.ActionCounts+=($game.World.ProfileActionCounts[$stage]-$(if($sample.MapChanged){0}else{$beforeActionCounts[$stage]}))
+            }
+            for($stage=0;$stage -lt 2;$stage++){
+                $sample.HitscanMilliseconds+=($game.World.ProfileHitscanTicks[$stage]-$(if($sample.MapChanged){0}else{$beforeHitscanTicks[$stage]}))*1000.0/[Diagnostics.Stopwatch]::Frequency
+                $sample.HitscanCounts+=($game.World.ProfileHitscanCounts[$stage]-$(if($sample.MapChanged){0}else{$beforeHitscanCounts[$stage]}))
+            }
+            for($stage=0;$stage -lt 7;$stage++){$sample.PathCounts+=($game.World.ProfilePathCounts[$stage]-$(if($sample.MapChanged){0}else{$beforePathCounts[$stage]}))}
+            for($stage=0;$stage -lt 8;$stage++){$sample.InterceptBuckets+=($game.World.ProfileInterceptBuckets[$stage]-$(if($sample.MapChanged){0}else{$beforeInterceptBuckets[$stage]}))}
         }
         $samples.Add($sample)
         if($expected.ContainsKey($completed)){$points.Add((Get-DoomReplayCheckpoint $game $completed))}
@@ -148,7 +200,7 @@ try{
         $stats.GameUpdate=Get-SampleStats ([double[]]$samples.GameUpdateMilliseconds)
         if($Profile){foreach($label in $labels){$stats[$label]=Get-SampleStats ([double[]]@($samples|ForEach-Object {$_.StagesMilliseconds[$label]}))}}
     }
-    @{Error=$failure;Profile=[bool]$Profile;ActorProfile=[bool]$ActorProfile;ActorActionInstrumentation=if($ActorProfile){$actorActionInstrumentation}else{$null};ActorArrayOrder=@('XY','Z','StateActionInclusive','CheckSightInclusive');ActorCountOrder=@('XYCalls','ZCalls','NumericallyUnneededXY','NumericallyUnneededZ','StateActions','CheckSight');SightTraversalOrder=@('BspNodeVisits','SubsectorVisits','SegmentIterations','UniqueLines','SightSideRejects','OneSidedOrMissingBackBlocks','ClosedPortals','InterceptCalculations','SlopeDivisions','ClosedSlopeWindows','RejectMatrixCulls');Commands=$completed;FinishedUtc=(Get-Date).ToUniversalTime().ToString('o');PowerShell=$PSVersionTable.PSVersion.ToString();
+    @{Error=$failure;Profile=[bool]$Profile;ActorProfile=[bool]$ActorProfile;ActorActionInstrumentation=if($ActorProfile){$actorActionInstrumentation}else{$null};ActionNameOrder=if($ActorProfile){$actionNames}else{$null};ActorArrayOrder=@('XY','Z','StateActionInclusive','CheckSightInclusive');ActorCountOrder=@('XYCalls','ZCalls','NumericallyUnneededXY','NumericallyUnneededZ','StateActions','CheckSight');SightTraversalOrder=@('BspNodeVisits','SubsectorVisits','SegmentIterations','UniqueLines','SightSideRejects','OneSidedOrMissingBackBlocks','ClosedPortals','InterceptCalculations','SlopeDivisions','ClosedSlopeWindows','RejectMatrixCulls');HitscanArrayOrder=@('AimLineAttackInclusive','LineAttackInclusive');PathCounterOrder=@('PathTraverseCalls','BlockIterations','InterceptsAtTraversalEnd','LineInterceptCandidates','ThingInterceptCandidates','InterceptVectorCalls','SortComparisons');InterceptBucketOrder=@('0','1-2','3-4','5-8','9-16','17-32','33-64','65+');MaxInterceptCount=$game.World.ProfileMaxInterceptCount;Commands=$completed;FinishedUtc=(Get-Date).ToUniversalTime().ToString('o');PowerShell=$PSVersionTable.PSVersion.ToString();
         BaselineBundleSha256=$baselineHash;ExecutedBundleSha256=(Get-FileHash $bundle).Hash;HarnessSha256=(Get-FileHash $PSCommandPath).Hash;
         ReplaySha256=(Get-FileHash $Replay).Hash;WadSha256=(Get-FileHash $Wad).Hash;SourceRoot=$sourceRootPath;Statistics=$stats;Samples=$samples.ToArray();
         ReplayVerification=$verification;Checkpoints=$points.ToArray();OwnedBundle=$bundle;

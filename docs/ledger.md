@@ -6044,3 +6044,15 @@ No new live effect recording or completed human route is claimed, and native
 p99 remains open. This test/documentation commit reaches28 after Preview.5;
 resume the isolated three-style pacing and one-session Episode 1 route when the
 exclusive display resource is available. Cut a release at35 commits.
+
+The next profiling-only pass separates the 52 direct state actions and hitscan
+passes, then counts blockmap traversals and intercept-list sizes on the same
+420-tic dense E3M6 replay. Both stored checkpoints match. `Look` and `Chase`
+remain the largest inclusive action buckets. The quadratic intercept scan sees
+at most 23 entries in this trace (only 9 traversals fall in the 17–32 bucket),
+so it is retained without a speculative ordering rewrite. Counts include
+profiler instrumentation and do not measure native pacing or uninstrumented
+speed. [Attribution receipt](../results/hitscan-path-profile-iterative-20261002.json).
+The profiler/evidence/documentation commit reaches 29 after Preview.5. Native
+capture, human Episode 1 completion and current-source live effect review remain
+open; release is due again at 35 commits.

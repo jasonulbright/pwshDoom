@@ -1661,3 +1661,23 @@ receipt](../results/visibility-iterative-integration-20261002.json) retains the
 full production timeline and source/report pins. The measured p99 gate still
 fails, and no complete human route, current-source live effect recording,
 acoustic test or clean native pacing result follows from this regression pass.
+
+### Hitscan and blockmap traversal attribution — October 2, 2026
+
+The disposable profiler now attributes all 52 built-in state actions, both
+hitscan passes, and blockmap traversal/intercept work. One instrumented 420-tic
+E3M6 replay matches both stored checkpoints. `Look` accounts for 3,376.9 ms
+inclusive across 3,968 calls, `Chase` for 1,148.5 ms across 520 calls, and five
+`SPosAttack` calls for 204.0 ms. Those action totals include child work;
+`AimLineAttack` (92 calls, 566.8 ms) and `LineAttack` (44 calls, 399.5 ms) overlap
+their callers and must not be added to them. All timings include profiling
+overhead and do not establish a performance change.
+
+The same run records 297 `PathTraverse` calls and 1,162 accepted intercepts;
+the largest traversal has 23 intercepts. Fifty-five traversals have none, 132
+have one or two, and only nine fall in the 17–32 bucket. The existing repeated
+minimum scan performs 2,553 selection-loop iterations in this workload. A
+quadratic-ordering rewrite is not justified by these sizes, and no ordering
+change was made. Other maps and unusually dense traces may behave differently.
+The [source-pinned attribution receipt](../results/hitscan-path-profile-iterative-20261002.json)
+records raw-report hashes, every counter distribution and the profiling limits.
