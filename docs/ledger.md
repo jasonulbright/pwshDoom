@@ -6195,3 +6195,34 @@ episode boss triggers. These tests do not claim ordinary-input route completion
 or a human boss victory. The [session regression receipt](../results/preview6-session-regression-20261002.json)
 now pins both reports, harnesses and IWAD. This evidence update will be the
 eighth commit after Preview.6; release again at35.
+
+### Preview.6 current-source fresh-process save continuation — October 2, 2026
+
+The earlier cross-process attempt used a stale checkpoint oracle. I replayed its
+same 1,747 ordinary commands through the current Preview.6 runtime and recorded
+current-source checkpoints at commands 0, 700, 735, 770, 805 and 840. The replay
+fingerprint matches the runtime at
+`8118728A096802408F1138700488C711DB838FA41ED3C1B882B19CDF3956158F`. A save at
+command 700 reconstructs at game tic 701 in a fresh PowerShell process. The
+load process passes all five checkpoints available from its start; a distinct
+reference process passes all six from a new game. Both match at commands
+735/770/805/840 and have identical final serialized graph hash
+`361CF759A99F6A2C812354D6F676BBB84F1D49D55016B4C4C163F910C7AF751F`. The
+[qualification receipt](../results/preview6-current-source-save-continuation-20261002.json)
+pins the save, replay, per-process reports, harness and hashes. This qualifies
+one bounded process boundary, not desktop menu use, arbitrary saves or the human
+campaign route; the earlier stale-oracle reports remain as historical evidence.
+
+I also reran the deeper two-point `Test-SaveState` harness with the current
+replay. It remained CPU-active for more than five minutes without writing its
+first save or report, so I stopped that test process. No exception was captured
+and the exact cause is unresolved. A focused tic-700 fixture separately passed
+save serialization and the load/reference comparison; retain the prior 32-check
+save receipt as suite-level evidence and investigate the slow deep-harness path
+before relying on another full rerun. The independent actor-state projection
+was timed at 0.223 seconds on the same fixture, which rules out that one step as
+the observed delay but does not identify the cause.
+
+The optional `-InputPath` parameter and input hash/source-fingerprint reporting
+in both save harnesses make the current-source input explicit. This is the
+ninth commit after Preview.6; publish the next cumulative release at 35 commits.

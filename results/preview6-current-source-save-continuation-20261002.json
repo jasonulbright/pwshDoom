@@ -1,0 +1,65 @@
+{
+  "CompletedUtc": "2026-10-02T20:40:26Z",
+  "Release": "v0.1.0-preview.6",
+  "RuntimeBaseCommit": "5f7aaee92603795d8d8451ad0bdd5aaea53d8d3a",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "RuntimeSourceFingerprint": "8118728A096802408F1138700488C711DB838FA41ED3C1B882B19CDF3956158F",
+  "HistoricalReplay": {
+    "Path": "results/input-session-replay.json",
+    "Sha256": "44E229AEFB44058B598D50F8EE260421762449E43332B17BC4CDF2FBF8A4AC13",
+    "CommandsReused": 1747
+  },
+  "CurrentSourceReplay": {
+    "Path": "local/preview6-current-source-save-probe.json",
+    "Sha256": "222809AD2657D7AB3F3F58C187306C68B74D56CB45323AD49C1E7E29485A2BD2",
+    "SourceFingerprint": "8118728A0968024088F1138700488C711DB838FA41ED3C1B882B19CDF3956158F",
+    "CommandCount": 1747,
+    "CheckpointTics": [0, 700, 735, 770, 805, 840]
+  },
+  "Save": {
+    "Path": "local/preview6-current-source-save.pds",
+    "Sha256": "6AC765EAEBD312F99BCC34B967F99010F63AF12A577B08E8403C611A69D88389",
+    "OrdinaryInputBoundary": 700,
+    "LoadedGameTic": 701,
+    "Description": "Replay 700 current source"
+  },
+  "SaveGeneration": "The current replay was executed through command 700 in PowerShell and saved with Write-DoomSaveState.",
+  "ContinuationHarness": {
+    "Path": "scripts/Test-SaveProcessContinuation.ps1",
+    "Sha256": "7F8B960134CC48C3C9F6957572ACF2E25AF6254558DDB15B7B648A4C35608EE8"
+  },
+  "LoadProcess": {
+    "ReportPath": "local/preview6-current-source-save-load.json",
+    "ReportSha256": "85C7CE7D42FB7B0595AA011CF6F7EAD5463015DCDA7CE781DFED39A1FEDB44AF",
+    "ProcessId": 37128,
+    "Error": null,
+    "RecordedCheckpointsPassed": 5,
+    "ContinuationSampleTics": [735, 770, 805, 840],
+    "FinalGraphSha256": "361CF759A99F6A2C812354D6F676BBB84F1D49D55016B4C4C163F910C7AF751F"
+  },
+  "ReferenceProcess": {
+    "ReportPath": "local/preview6-current-source-save-reference.json",
+    "ReportSha256": "38EB4E614FDA9C07F1763A9E44E2C0D272A1614143E980891CD6F19C6C4A2367",
+    "ProcessId": 25456,
+    "Error": null,
+    "RecordedCheckpointsPassed": 6,
+    "ContinuationSampleTics": [735, 770, 805, 840],
+    "FinalGraphSha256": "361CF759A99F6A2C812354D6F676BBB84F1D49D55016B4C4C163F910C7AF751F"
+  },
+  "ComparedCheckpointSha256": {
+    "700": "BF7F917C372F8ED1F86515A6531FA82ACFFC6EC7795B21FA21BA3283DAAE7B17",
+    "735": "B00A9EC557511C4D29675923F22A2C243F445F81B7D1FC4377513822B1789EDF",
+    "770": "CA8C02AA70854C2B242EFDF86813A76B47CF8C32EF5DD6C42F97906C12ED9268",
+    "805": "52AC5F04A1410B2A9DC303FC7C03D420B1AD3FDC029D64AEC0A2C6580B49967E",
+    "840": "B4598E54A71ECC228D2C77DAB4771285A17074EC16C4D1524F29978FBEDEEA09"
+  },
+  "ComparedFinalGraphSha256": "361CF759A99F6A2C812354D6F676BBB84F1D49D55016B4C4C163F910C7AF751F",
+  "Passed": true,
+  "Meaning": "A fresh PowerShell process reconstructed the command-700 save, then matched a separate fresh-game run through 140 ordinary commands at four sampled boundaries and in the final serialized game graph. This is a bounded same-source process-continuation fixture, not campaign completion or arbitrary-save coverage.",
+  "Limitations": [
+    "The reused commands are an existing short regression prefix, not a human campaign route.",
+    "Menu-driven desktop save/load, audio restoration, and arbitrary save boundaries are outside this probe.",
+    "An additional full Test-SaveState two-point rerun did not reach its first save/report after more than five minutes of active CPU and was stopped. No exception was captured; the prior exact-source 32-check save receipt remains the suite-level evidence, while this focused fixture supplies cross-process evidence."
+  ],
+  "Performance": "Single fixture preparation observations (about 6.2 seconds for 700 tics and 2.25 seconds for serialization) are not benchmark results."
+}

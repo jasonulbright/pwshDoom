@@ -331,8 +331,11 @@ On that exact runtime source, the synthetic menu-key checks pass 10/10, the
 save-menu metadata/confirmation checks pass 16/16, same-process save/reconstruct
 and 140-command continuation pass 24/24, and the offline PowerShell audio
 mixer passes 27/27. These regressions test menu mechanics, save graphs and
-mixing arithmetic, not physical keys, fresh-process loading, speaker quality or
-the full campaign. Their [source-pinned receipt](../results/preview6-session-regression-20261002.json)
+mixing arithmetic, not physical keys, speaker quality or the full campaign. A
+separate-process save probe uses a current-source replay, restores command 700,
+and matches an uninterrupted process at four later checkpoints and in the final
+serialized graph. Its [qualification receipt](../results/preview6-current-source-save-continuation-20261002.json)
+retains the replay, save and process-report hashes. Their [source-pinned regression receipt](../results/preview6-session-regression-20261002.json)
 retains local raw-report hashes and exact boundaries. The simulation-worker IPC/atomic-save test adds 12 passing checks; death and finale save-edge fixtures add 20, without claiming that any campaign or ending was played.
 
 A fresh-PowerShell continuation probe correctly reconstructed an untouched
@@ -341,8 +344,10 @@ recording. Its runtime fingerprint (5E32D438) differs from Preview.6 (8118728A),
 so this did not establish a current-source save defect or a passing process-
 continuation gate. The first probe also used a save path that the harness later
 replaced during its overwrite test; a second save point preserved the target
-file and isolated the stale checkpoint. Both misses and corrections remain in
-the [session receipt](../results/preview6-session-regression-20261002.json).
+file and isolated the stale checkpoint. A replay regenerated from the same
+commands under the current Preview.6 fingerprint then passed the separate-
+process comparison. The initial misses remain in the [session receipt](../results/preview6-session-regression-20261002.json),
+and the successful result is retained in the [current-source receipt](../results/preview6-current-source-save-continuation-20261002.json).
 On the same Preview.6 runtime, the controller/routing suite passes 69 checks,
 including real map creation for the E1M3 secret branch through E1M9 and back to
 E1M4, and the boss-progression suite passes 97 checks across five boss-trigger

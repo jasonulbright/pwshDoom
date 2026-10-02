@@ -84,9 +84,9 @@ The first report supplies its unique save directory. Pass its untouched `at-1600
 
 The exact packaged source passes 16 save-menu confirmation/metadata checks and
 24 save-state checks. The latter saves at command 700, reconstructs the graph,
-and continues 140 commands. This is same-process state evidence; desktop menu
-play and cross-process continuation remain separate gates. Raw ignored reports
-and source/harness hashes are pinned by the
+and continues 140 commands. A separate-process load also passes a current-source
+140-command comparison at four checkpoints and the final serialized graph.
+Desktop menu play remains separate. Raw ignored reports and source/harness hashes are pinned by the
 [session regression receipt](../results/preview6-session-regression-20261002.json).
 
 The same current-source regression also passes 12 simulation-worker save/session
@@ -94,7 +94,7 @@ IPC checks covering generation handshakes, failed-candidate isolation, atomic
 replacement and immutable replay saves, plus 20 death/finale save-edge checks
 across the actual E1M1 and E1/E2/E3/E4M8 worlds. Those ending-state fixtures do
 not count as episode completions or finale visual-fidelity comparisons.
-### Fresh-process continuation probe and stale fixture — October 2, 2026
+### Initial stale-fixture attempts — October 2, 2026
 
 A separate PowerShell load correctly restores the untouched command-700 save,
 but the continuation harness then rejects the historical checkpoint at tic 700.
@@ -105,6 +105,22 @@ single-save test run overwrites its last path while checking replacement; a
 two-point rerun keeps the command-700 save untouched. Both failures and their
 report hashes are retained in the
 [Preview.6 regression receipt](../results/preview6-session-regression-20261002.json).
-The passing same-process, simulation-worker and ending-edge tests remain
-separate evidence; a current-source fresh-process route comparison is still
-open.
+These were stale-oracle and fixture-selection problems, not a demonstrated
+process-boundary defect. The current-source probe below supersedes the open
+qualification status while retaining these initial reports as historical evidence.
+
+### Current-source fresh-process continuation — October 2, 2026
+
+The 1,747-command regression fixture was replayed with fresh Preview.6
+checkpoints and source fingerprint `8118728A096802408F1138700488C711DB838FA41ED3C1B882B19CDF3956158F`.
+A save at command 700 loaded in one new PowerShell process at game tic 701. That
+process and a second process running the uninterrupted reference both pass all
+available boundary checkpoints, match at commands 735/770/805/840, and end with
+the same serialized graph hash. The exact save, replay, process-report and
+checkpoint hashes are in the [qualification receipt](../results/preview6-current-source-save-continuation-20261002.json).
+This proves one bounded current-source process continuation. It does not qualify
+menu-driven desktop interaction, arbitrary save boundaries, audio restoration
+or the human Episode 1 route. The two-point deep Test-SaveState rerun exceeded
+five minutes without producing an artifact and was stopped; the prior 32-check
+receipt remains the full-suite result, and the isolated process comparison is
+the evidence for this boundary.

@@ -52,6 +52,13 @@ Earlier renderer milestone (2026-09-19): transparent fence/grille pixels now sur
 
 The current baseline is a single-player session prototype, not a campaign-qualified game. It has an E1M1/HMP input-only completion route, intermission advancement into E1M2, 35 Hz simulation scheduling, parallel PowerShell rendering, truecolor ANSI output, keyboard handling, resize pauses, and independent presentation telemetry for earlier builds. Intermission/finale screens, map-specific asset refresh, new-game/quit menus and pause/resume are implemented. Six save slots, confirmed save/load and replayed loads are implemented. Automap controls, save/load and replay are integrated, with numeric discovery/encoding recovering near-target averages on the bounded map-control test; timing spikes remain. Persistent always-run and keyboard turn-speed settings are implemented. PowerShell sound decoding/mixing and Windows playback are integrated; full-campaign continuity, latency under renderer load and audible review remain unqualified. See [save/load](save-load.md), [automap investigation](automap.md), [menus](menus.md), [campaign session work](campaign-session.md), [audio](audio.md), [implementation](implementation.md), [viewport](viewport.md), and [provenance](../src/ManagedDoom/ORIGIN.md).
 
+Preview.6 also passes one current-source fresh-process save continuation: a
+command-700 save loaded at tic 701 and matched an uninterrupted 140-command
+reference at four checkpoints and the final save graph. This does not qualify
+the desktop menu flow or broader route boundaries; see the
+[source-pinned receipt](../results/preview6-current-source-save-continuation-20261002.json)
+and [save/load record](save-load.md).
+
 Release acceptance requires:
 
 - Every included map listed by exact IWAD hash has loading/rendering smoke coverage and a completed ordinary-input route or documented human playthrough. Record skill, secrets, deaths/reloads, and route provenance. A direct exit fixture or 35 idle tics is never campaign completion evidence.

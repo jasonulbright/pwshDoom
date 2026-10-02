@@ -189,5 +189,17 @@
       "SaveSha256": "0E0606AC0E447747D1E851068642D13CC7EA1A8E221B1E7B29AB9F86BB72CFCE",
       "LoadedBoundaryGameTic": 701
     }
-  ]
+  ],
+  "SupersedingCurrentSourceQualification": {
+    "Path": "results/preview6-current-source-save-continuation-20261002.json",
+    "Passed": true,
+    "RuntimeSourceFingerprint": "8118728A096802408F1138700488C711DB838FA41ED3C1B882B19CDF3956158F",
+    "LoadReportSha256": "85C7CE7D42FB7B0595AA011CF6F7EAD5463015DCDA7CE781DFED39A1FEDB44AF",
+    "ReferenceReportSha256": "38EB4E614FDA9C07F1763A9E44E2C0D272A1614143E980891CD6F19C6C4A2367",
+    "SaveSha256": "6AC765EAEBD312F99BCC34B967F99010F63AF12A577B08E8403C611A69D88389",
+    "InputReplaySha256": "222809AD2657D7AB3F3F58C187306C68B74D56CB45323AD49C1E7E29485A2BD2",
+    "MatchedContinuationSamples": 4,
+    "MatchedFinalGraph": true,
+    "Meaning": "The two earlier stale-fixture attempts remain historical evidence. A new replay with the current Preview.6 source fingerprint now qualifies one fresh-process load at command 700 and 140 subsequent commands against a separate reference process."
+  }
 }

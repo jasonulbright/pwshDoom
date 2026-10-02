@@ -1,9 +1,11 @@
 #requires -Version 7.4
 # SPDX-License-Identifier: GPL-2.0-or-later
 param([string]$Wad='C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\base\DOOM.WAD',
-    [int[]]$SaveAt=@(700),[int]$ContinueTics=140,[string]$Output="$PSScriptRoot/../results/save-state-first.json")
+    [int[]]$SaveAt=@(700),[int]$ContinueTics=140,[string]$Output="$PSScriptRoot/../results/save-state-first.json",
+    [string]$InputPath="$PSScriptRoot/../results/input-session-replay.json")
 $ErrorActionPreference='Stop'
 if(Test-Path -LiteralPath $Output){throw 'Use a fresh report path.'}
+$route=$null
 $bundle=& "$PSScriptRoot/Build-EngineBundle.ps1";. $bundle
 . "$PSScriptRoot/../src/InputReplay.ps1";. "$PSScriptRoot/../src/GameHost.ps1";. "$PSScriptRoot/../src/SnapshotTransport.ps1";. "$PSScriptRoot/../src/SaveState.ps1"
 Set-StrictMode -Version Latest
@@ -29,7 +31,7 @@ function Apply-Input($Game,[int]$Index){
     $null=$Game.Update($commands)
 }
 try{
-    $content=[GameContent]::new(@('-iwad',$Wad));$wadHash=(Get-FileHash $Wad).Hash;$route=Read-DoomInputReplay "$PSScriptRoot/../results/input-session-replay.json" $wadHash
+    $content=[GameContent]::new(@('-iwad',$Wad));$wadHash=(Get-FileHash $Wad).Hash;$route=Read-DoomInputReplay $InputPath $wadHash
     $commands=[TicCmd[]]::new(4);for($i=0;$i -lt 4;$i++){$commands[$i]=[TicCmd]::new()}
     foreach($point in $SaveAt){
         foreach($c in $commands){$c.Clear()}
@@ -81,7 +83,7 @@ try{
     }
     Assert-Save 'Failed loads leave live state unchanged' ((Get-IndependentState $game) -ceq $liveBefore)
 }catch{$failure=$_.ToString()+"`n"+$_.ScriptStackTrace;throw}finally{
-    @{FinishedUtc=[DateTime]::UtcNow.ToString('o');Error=$failure;Checks=$checks.ToArray();Runs=$runs.ToArray();SourceSha256=(Get-FileHash "$PSScriptRoot/../src/SaveState.ps1").Hash;SaveDirectory=$directory;Meaning='Same-process save reconstruction, independent actor/sector/player/HUD projection, canonical graph round trip and continued ordinary input. Corruption is tested against a separate candidate. This does not yet prove fresh-process loading or menu integration.'}|ConvertTo-Json -Depth 12|Set-Content $Output
+    @{FinishedUtc=[DateTime]::UtcNow.ToString('o');Error=$failure;Checks=$checks.ToArray();Runs=$runs.ToArray();InputReplayPath=[IO.Path]::GetFullPath($InputPath);InputReplaySha256=(Get-FileHash -LiteralPath $InputPath).Hash;InputSourceFingerprint=if($null -ne $route){$route.SourceFingerprint}else{$null};SourceSha256=(Get-FileHash "$PSScriptRoot/../src/SaveState.ps1").Hash;SaveDirectory=$directory;Meaning='Same-process save reconstruction, independent actor/sector/player/HUD projection, canonical graph round trip and continued ordinary input. Corruption is tested against a separate candidate. This does not yet prove fresh-process loading or menu integration.'}|ConvertTo-Json -Depth 12|Set-Content $Output
     if($null -ne $content){$content.Dispose()}
 }
 "PASS: $($checks.Count) save-state checks."
