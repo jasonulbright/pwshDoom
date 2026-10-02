@@ -1318,3 +1318,38 @@ remain; steady command350–1400 medians are about7–8 ms, but they do not repl
 the full-run gate denominator. No run passes all gates. The separate
 [actual WGC/audio recording](../results/audio-recovery-live-20261002.json)
 passes46 grouped source/lifecycle/media checks, with no clean-performance claim.
+
+## Bounded command catch-up
+
+A diagnostic route at bfc62c1 finds command62 published789 ms late with an
+empty observed queue; the worker starts its update about0.28 ms after signaling.
+The next host implementation, f200220, catches up already-due35-Hz commands
+within a four-command pass budget and the unchanged two-command window. It
+stops at recorded control boundaries and rechecks loading/clock status.
+
+Three sequential clean runs retain the same Classic/maximized/font5 route,
+sixteen workers, Strips/Pairs and eleven-track device audio:
+
+| Repeat | Catch-up bursts | Active tics/sec | Display events/sec | P99 tic lateness (ms) | Maximum lateness (ms) | Startup (s) | Sampled private GiB |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 1 | 33 | 34.972 | 48.922 | 105.64 | 173.35 | 27.43 | 4.546 |
+| 2 | 63 | 34.959 | 48.719 | 646.89 | 790.45 | 27.31 | 4.549 |
+| 3 | 34 | 34.979 | 50.376 | 79.41 | 157.27 | 25.57 | 4.609 |
+
+Every burst contains two commands in these runs; all1747 commands and audio
+packets finish. Independent traces verify due times, pass order and the
+pre-publication queue observations. All PCM and realtime credits reconcile;
+software starvation/rebuffer and producer-backpressure counts remain zero.
+Median all-packet processing ages are81.8 /164.6 /93.3 ms, excluding the
+device/acoustic tail.
+
+The second run retains substantial producer delay: command55 is issued788.4 ms
+late with zero observed queued commands and an approximate worker-start delay
+of0.31 ms. Its preceding167.5 ms publication gap overlaps155.1 ms of terminal
+output. The worst early gaps in repeats one/three also overlap output. Catch-up
+does not prevent synchronous output stalls. These successive source cohorts
+are not a paired A/B causal comparison, and the observed display rates are
+lower than the previous cohort. No run passes all numerical gates; p99 display
+gaps are60.6 /78.8 /54.5 ms and maximums169.7 /727.3 /951.6 ms. Keep failed
+whole-window measurements and investigate bounded asynchronous output on the
+current runtime before changing defaults. [Source/CSV/audio/scheduling receipt](../results/command-burst-loaded-classic-20261002.json).
