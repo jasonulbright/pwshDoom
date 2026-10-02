@@ -1294,3 +1294,27 @@ starvation/rebuffer counts remain zero, but those facts do not qualify latency.
 A controlled producer-gap/recovery test follows before changing timing policy.
 The [recorded route receipt](../results/renderer-file-logs-live-20261002.json)
 and original media stay separate from these clean measurements.
+
+## Clean loaded routes after audio recovery
+
+Three sequential 0dd795b Classic/maximized/font5 sessions retain the same
+1747-command route, sixteen workers, default Strips/Pairs and device audio.
+All packets and submitted PCM reconcile. Audio producer-backpressure waits
+fall to zero; median all-packet processing ages are 65–85 ms. The worker applies
+caught-up events on the current output clock instead of repeating elapsed
+filler duration. Prior submission-age medians included the mixing step;
+these new consumption ages precede it. Device/acoustic latency is unmeasured.
+
+| Repeat | Active tics/sec | Global display events/sec | P99 tic lateness (ms) | Startup (s) | Sampled private GiB |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| 1 | 34.810 | 53.795 | 461.97 | 26.92 | 4.531 |
+| 2 | 34.966 | 53.249 | 405.03 | 26.37 | 4.559 |
+| 3 | 34.972 | 52.619 | 550.24 | 27.61 | 4.469 |
+
+The [independent receipt](../results/audio-recovery-loaded-classic-20261002.json)
+preserves source manifests, CSV/display metrics, all packet-processing ages,
+timing credits and separate loading/game output accounting. Initial tic stalls
+remain; steady command350–1400 medians are about7–8 ms, but they do not replace
+the full-run gate denominator. No run passes all gates. The separate
+[actual WGC/audio recording](../results/audio-recovery-live-20261002.json)
+passes46 grouped source/lifecycle/media checks, with no clean-performance claim.

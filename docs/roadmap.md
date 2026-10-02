@@ -284,3 +284,29 @@ Final-source AsyncBatch recordings now pass in Classic, Matrix and AnsiArt: 350 
 Three subsequent live Classic encoding ABBA cycles retain every command/audio frame but pass no complete numerical pacing gate. With AsyncBatch fixed, ColorState reduces median observed bytes/frame 14.73% and raises median global display events from 51.668 to 53.750/sec; per-cycle gains vary from 0.03% to 8.86%. A slow ColorState run and final-drain rate failure are investigated and retained. Defaults remain Pairs/Strips. Transition display gaps (1.24–2.92 seconds), broader workloads/styles, original-executable fidelity, human campaign and physical/acoustic/second-hardware checks remain open. [Twelve-run evidence](../results/colorstate-abba-classic-r19-20261001.json).
 
 Later development adds [pollable worker reloads and separate loading feedback](loading-screen.md), with all-style worker/image/ownership tests, a corrupt-owned-asset failure check, 84 UI bounds cases and actual route/save recordings. Loading updates receive no gameplay FPS credit. The recorded ordinary route's first loading completion observation still takes about 990 ms; repeated clean display measurements and tighter task-completion observations remain needed. R19 and Preview.4 remain frozen. [Live lifecycle receipt](../results/loading-ui-live-20261001.json).
+
+## Continued qualification — October 2, 2026 (UTC)
+
+Completion brackets confirm the first loading Task stays pending for about983 ms
+in three clean repeats. Owned PowerShell renderer logs remove thirty-two idle
+host pipe readers; three corresponding upper bounds fall below2.72 ms and
+startup falls to about27 seconds. All-style reload/fault checks preserve images
+and process ownership. [Loading investigation](loading-screen.md).
+
+Controlled300/700 ms audio producer gaps reproduce permanent312.7/711.6 ms
+packet-age tails. Realtime output now credits already-covered intervals and
+applies caught-up controls/events on its current clock. Ninety-six existing
+audio/save assertions plus three recovery cases pass. Three final clean routes
+have zero producer-backpressure waits and65–85 ms median processing ages,
+but52.6–53.8 global display events/sec and early simulation stalls still fail
+the release gates. [Controlled evidence](../results/audio-realtime-recovery-20261002.json),
+[loaded measurements](../results/audio-recovery-loaded-classic-20261002.json),
+[actual recorded effects/handoff](../results/audio-recovery-live-20261002.json).
+
+The [R20 development handoff](candidate-r20.md) prepares these fixes for the
+whole E1 human route with fresh saves/input/reports and preserves R19. Extracted
+package validation follows. Continue broader workload/alternative pacing and
+initial-stall diagnosis, original-executable moving-world parity, physical
+input/resize/acoustics and remaining campaigns. Human E1 completion remains
+pending and does not prevent that useful work. Public release count reaches24
+with this preparation; publish a new release at35 or more, as requested.

@@ -122,6 +122,18 @@ and a playable route each establish different capabilities. The [clean measureme
 and [actual recorded handoff](../results/renderer-file-logs-live-20261002.json)
 retain those distinctions; neither qualifies the full release.
 
+A controlled audio experiment subsequently shows why zero starvation was
+insufficient: a700 ms producer gap leaves about712 ms of packet delay even
+after input resumes. Realtime filler kept playing, then caught-up packets added
+the same duration again. Accounting for those intervals while applying controls
+on the current output clock lowers controlled recovery maxima below30 ms.
+Three loaded routes have65–85 ms median processing ages and no producer
+backpressure. Late emitter updates can coalesce and cannot reconstruct past
+sounds; acoustic latency remains unmeasured. Display rates stay52.6–53.8/sec,
+with substantial early tic stalls. The [controlled proof](../results/audio-realtime-recovery-20261002.json)
+and [loaded evidence](../results/audio-recovery-loaded-classic-20261002.json)
+support this specific recovery behavior without closing the wider gates.
+
 The public Preview.3 community-test package is source-inclusive and excludes the IWAD, soundfont, compiled engine, generated recordings and research PDF. Its release archive has a per-file hash manifest and a separate SHA-256 checksum; the [publication receipt](../results/preview3-publication-20260928.json) verifies all 537 included file hashes and the uploaded ZIP against a fresh public download. The local R17 development archive is a later playtest candidate, not a tagged release: its 543 payload files pass manifest verification and the extracted launcher recognizes the installed 36-map IWAD and eleven prepared Episode 1 tracks under PowerShell 7.6.6. The [R17 candidate receipt](../results/episode1-current-human-candidate-20260929-r17.json) and [package receipt](../results/r17-playtest-package-validation-20260929.json) distinguish the tested implementation commit from the clean package-source commit. The complete E1 human playthrough remains pending.
 
 Preview.3 is a public community-test build released before the one complete Episode 1 human run. A static license/asset audit of its candidate found the GPL text and third-party notices included, all 206 vendored PowerShell files carrying the upstream GPL terms, and no WADs, soundfonts, media, native binaries or research PDF in the ZIP. The paper still needs the playthrough result and publication-ready illustrations. This is not the end of the roadmap: presentation pacing, visual fidelity, sustained audio, and the wider Ultimate Doom qualification remain open. Doom II follows the Ultimate Doom release; the MyHouse audit follows Doom II. Neither is claimed by this preview.

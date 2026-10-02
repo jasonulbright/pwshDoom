@@ -372,7 +372,42 @@ includes all these observations and raw hashes.
 Realtime filler keeps active music/effects playing through a producer gap.
 These sessions generate 30/42/45 such blocks, after which caught-up simulation
 packets still each produce another full block. Accumulated playout duration is
-a source-based explanation to test with a controlled gap and recovery, not an
-established acoustic diagnosis. Packet age ends at submission and excludes the
+a source-based explanation reproduced by the controlled recovery test below.
+Packet age ends at submission and excludes the
 device tail. Zero queue-starvation observations therefore cannot be treated as
 proof of responsive sound or continuous campaign qualification.
+
+## Recovery without replaying elapsed filler intervals
+
+The [controlled test](../results/audio-realtime-recovery-20261002.json) reproduces
+312.7/711.6 ms final packet ages after 300/700 ms producer gaps, despite two
+seconds of resumed input. The worker now accounts for intervals already covered
+by realtime output. Every caught-up packet applies its events and controls in
+order; its elapsed duration is not added again. New sounds begin on the current
+output clock. Successive emitter replacements may coalesce before the next
+block, and earlier audible output cannot be reconstructed. A pending final
+effect gets a fresh block before explicit drain acknowledgement. Epoch/volume
+resets and music Start/Stop clear old credits. Non-realtime playback remains
+packet-exact.
+
+Final controlled recovery reaches 17.8–29.7 ms maximum processing age and passes
+packet/credit/driver conservation, pause/resume, independent PCM, music and
+save/load checks: 96 existing assertions plus three recovery cases. The first
+prototype's harness failure is retained: it expected submission-age samples
+for packets now represented by filler. All-packet processing ages are the
+correct consumption measure; submission ages now describe only packets that
+produce a separate block. Both exclude device/acoustic tail.
+
+Three clean final-source Classic/audio routes consume every packet, return all
+submitted PCM, have zero producer-backpressure waits and zero software
+starvation/rebuffer. Median processing ages are 85.5 / 65.4 / 76.5 ms; maxima
+are 184.1 / 166.7 / 177.2 ms. The earlier all-packet submission medians were
+661.7 / 871.3 / 872.1 ms; their endpoint includes mixing, which the new
+processing endpoint does not. Typical mix blocks remain about 0.7 ms.
+[Loaded receipt](../results/audio-recovery-loaded-classic-20261002.json).
+
+A separate actual route recording passes 46 source/lifecycle/audio/media
+checks and retains all packet-processing ages, credited controls and original
+PCM/QPC footage. [Recording receipt](../results/audio-recovery-live-20261002.json).
+Early simulation stalls, event-to-speaker acoustics and complete campaigns
+remain unqualified. Timing recovery does not replace those gates.
