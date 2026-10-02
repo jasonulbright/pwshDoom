@@ -9,7 +9,7 @@ $runtime=(Get-Process -Id $PID).Path;$checks=[Collections.Generic.List[object]]:
 function Check([string]$Name,[bool]$Passed){$checks.Add(@{Name=$Name;Passed=$Passed});if(-not $Passed){throw $Name}}
 try{
     $keys=[Collections.Generic.List[object]]::new()
-    foreach($sequence in @(@{Start=12;Keys=@('Escape','Up','Up','Enter','Down','Down','Left','Left','Left','Down','Enter','Escape','Escape')},@{Start=18;Keys=@('Escape','Up','Up','Enter','Down','Down','Down','Enter','Escape','Escape')},@{Start=25;Keys=@('Escape','Up','Up','Enter','Down','Down','Down','Enter','Escape','Escape')})){
+    foreach($sequence in @(@{Start=12;Keys=@('Escape','Up','Up','Enter','Down','Down','Left','Left','Left','Down','Down','Enter','Escape','Escape')},@{Start=18;Keys=@('Escape','Up','Up','Enter','Down','Down','Down','Down','Enter','Escape','Escape')},@{Start=25;Keys=@('Escape','Up','Up','Enter','Down','Down','Down','Down','Enter','Escape','Escape')})){
         for($i=0;$i -lt $sequence.Keys.Count;$i++){$keys.Add(@{AtSeconds=$sequence.Start+.25*$i;Key=$sequence.Keys[$i]})}
     }
     ConvertTo-Json -InputObject $keys.ToArray()|Set-Content $schedule
@@ -25,7 +25,7 @@ try{
     & $runtime -NoProfile -File "$PSScriptRoot/Invoke-Doom.ps1" -Wad $Wad -Sound -Headless -Workers 4 -SettingsPath $settings -Seconds 1 -Report $restartPath|Out-Host
     if($LASTEXITCODE -ne 0){throw "Restart failed; inspect $restartPath"}
     $restart=Get-Content $restartPath -Raw|ConvertFrom-Json
-    Check 'Fresh host loads persistent version-two sound preferences' ($restart.InitialSettings.Version -eq 2 -and $restart.InitialSettings.SoundVolume -eq 70 -and $restart.InitialSettings.SoundMuted -and -not $restart.SettingsLoadError)
+    Check 'Fresh host loads persistent version-three sound preferences' ($restart.InitialSettings.Version -eq 3 -and $restart.InitialSettings.SoundVolume -eq 70 -and $restart.InitialSettings.MusicVolume -eq 100 -and $restart.InitialSettings.SoundMuted -and -not $restart.SettingsLoadError)
     Check 'Fresh audio worker starts muted and closes' ($restart.Simulation.Audio.FinalVolume -eq 0 -and $restart.Simulation.Audio.MutedPackets -gt 0 -and $restart.Simulation.Audio.DeviceClosed)
 }catch{$failure=$_.ToString()+"`n"+$_.ScriptStackTrace;throw}finally{
     @{FinishedUtc=[datetime]::UtcNow.ToString('o');Error=$failure;Checks=$checks.ToArray();Directory=$directory;Settings=$settings;Schedule=$schedule;ScheduleSha256=if(Test-Path $schedule){(Get-FileHash $schedule).Hash}else{$null};

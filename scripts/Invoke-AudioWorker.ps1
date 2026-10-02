@@ -24,6 +24,8 @@ try{
     while(-not $Shared.Stop){
         $volume=[double]$Shared.Volume
         if(-not [double]::IsFinite($volume) -or $volume -lt 0 -or $volume -gt 1){throw 'Invalid shared sound volume.'}
+        $musicVolume=[double]$Shared.MusicVolume
+        if(-not [double]::IsFinite($musicVolume) -or $musicVolume -lt 0 -or $musicVolume -gt 1){throw 'Invalid shared music volume.'}
         if($volume -ne $mixer.Volume){
             # Do not replay previously queued loud PCM after unpausing a muted
             # menu. Clear its device tail, while retaining advanced voice positions.
@@ -92,7 +94,7 @@ try{
             if(-not $outputReady){break}
             $mixWatch=[Diagnostics.Stopwatch]::StartNew()
             $musicFrames=if(-not $mixer.Paused){Read-DoomMusicPlayback $music 1260}else{$null}
-            $pcm=Read-DoomAudioFrames $mixer 1260 -Music $musicFrames -MusicGain ($music.Gain*$mixer.Volume);$mixTimes.Add($mixWatch.Elapsed.TotalMilliseconds)
+            $pcm=Read-DoomAudioFrames $mixer 1260 -Music $musicFrames -MusicGain ($music.Gain*$musicVolume);$mixTimes.Add($mixWatch.Elapsed.TotalMilliseconds)
             if($mixer.Volume -eq 0){$mutedPackets++}
             $bytes=[byte[]]::new(5040);[Buffer]::BlockCopy($pcm,0,$bytes,0,5040)
             # Epoch/pause can change during a block; next loop resets/pauses before

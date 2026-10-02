@@ -6268,3 +6268,11 @@ resulting green values rise from54/90/152 to73/111/169 at source luminance
 32/64/128; hue and the game rain are unchanged. Existing character-codec and
 menu checks pass (144 cases; 125 menu checks and46 screen fixtures). The code
 and these brief notes are commit15 after Preview.6; no new release is due.
+
+### Separate effects and music levels — October 2, 2026
+
+The settings menu now has independent effects/music levels and effects mute;
+version-three preferences migrate the old shared volume to both levels. Focused
+rechecks pass: 72 settings checks, 126 menu checks/47 screen fixtures and 10
+audio-worker checks against the expected PCM schedule. This verifies persistence,
+menu fit and software mixing, not acoustic output or campaign qualification.

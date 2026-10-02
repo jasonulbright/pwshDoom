@@ -34,17 +34,17 @@ try{
     }
     # Independent offline music control schedule; do not use the worker's command helper.
     $reader=Open-DoomMusicLoopReader $qualification;$oneShotReader=Open-DoomMusicOneShotReader $oneShotQualification
-    $reader.Frame=0;$m=New-DoomAudioMixer;$gain=.2;$active=$false;$introActive=$false
+    $reader.Frame=0;$m=New-DoomAudioMixer;$gain=.2;$musicVolume=1.0;$active=$false;$introActive=$false
     $expected=[int16[]]::new(140*2520)
     for($n=0;$n -lt 140;$n++){
         if($n -eq 0){$introActive=$true}
         if($n -eq 1){$introActive=$false;$active=$true;$reader.Frame=$loopStartFrame}
-        if($n -eq 35){$gain=.1};if($n -eq 70){$m.Voices.Clear();$m.Paused=$false;$reader.Frame=0}
-        if($n -eq 120){$active=$false};if($n -eq 130){$active=$true;$reader.Frame=0}
+        if($n -eq 35){$gain=.1};if($n -eq 70){$m.Voices.Clear();$m.Paused=$false;$reader.Frame=0;$musicVolume=.5}
+        if($n -eq 105){$musicVolume=.25};if($n -eq 120){$active=$false};if($n -eq 130){$active=$true;$reader.Frame=0}
         $m.Volume=if($n -lt 70){1.0}elseif($n -lt 105){0.0}else{.5}
         Update-DoomAudioPacket $m $packets[$n] $clips
         $layer=if($introActive -and -not $m.Paused){(Read-DoomMusicOneShot $oneShotReader 1260).Mix}elseif($active -and -not $m.Paused){(Read-DoomMusicLoop $reader 1260).Mix}else{$null}
-        $pcm=Read-DoomAudioFrames $m 1260 -Music $layer -MusicGain ($gain*$m.Volume);$pcm.CopyTo($expected,$n*2520)
+        $pcm=Read-DoomAudioFrames $m 1260 -Music $layer -MusicGain ($gain*$musicVolume);$pcm.CopyTo($expected,$n*2520)
     }
     Close-DoomMusicLoopReader $reader;$reader=$null;Close-DoomMusicOneShotReader $oneShotReader;$oneShotReader=$null;$bytes=[byte[]]::new($expected.Length*2);[Buffer]::BlockCopy($expected,0,$bytes,0,$bytes.Length)
     $expectedHash=[Convert]::ToHexString([Security.Cryptography.SHA256]::HashData($bytes))
@@ -54,21 +54,21 @@ try{
     for($n=0;$n -lt 140;$n++){
         while($watch.Elapsed.TotalSeconds -lt $n/35.0+$offset){[Threading.Thread]::Sleep(1)}
         if($n -eq 70){
-            Wait-AudioValue LastSequence 69;$audio.Shared.Paused=$true;$audio.Shared.Volume=0.0;Wait-AudioValue AppliedVolume 0.0
+            Wait-AudioValue LastSequence 69;$audio.Shared.Paused=$true;$audio.Shared.Volume=0.0;$audio.Shared.MusicVolume=.5;Wait-AudioValue AppliedVolume 0.0
             $packets[$n].Qpc=[Diagnostics.Stopwatch]::GetTimestamp();Send-DoomAudioPacket $audio $packets[$n];[Threading.Thread]::Sleep(80)
             Check 'Shared pause prevents consumption of queued music packet' ($audio.Shared.LastSequence -eq 69)
             $audio.Shared.Paused=$false;[Threading.Thread]::Sleep(30)
             Check 'Future epoch music packet waits for control epoch' ($audio.Shared.LastSequence -eq 69)
             $audio.Shared.Epoch=1;Wait-AudioValue LastSequence 70;$offset=$watch.Elapsed.TotalSeconds-$n/35.0;continue
         }
-        if($n -eq 105){Wait-AudioValue LastSequence 104;$audio.Shared.Paused=$true;$audio.Shared.Volume=.5;Wait-AudioValue AppliedVolume .5;$audio.Shared.Paused=$false;$offset=$watch.Elapsed.TotalSeconds-$n/35.0}
+        if($n -eq 105){Wait-AudioValue LastSequence 104;$audio.Shared.Paused=$true;$audio.Shared.Volume=.5;$audio.Shared.MusicVolume=.25;Wait-AudioValue AppliedVolume .5;$audio.Shared.Paused=$false;$offset=$watch.Elapsed.TotalSeconds-$n/35.0}
         $packets[$n].Qpc=[Diagnostics.Stopwatch]::GetTimestamp();Send-DoomAudioPacket $audio $packets[$n]
     }
     Wait-AudioValue LastSequence 139;[Threading.Thread]::Sleep(180);$report=Stop-DoomAudioRunspace $audio
     Check 'Worker, device and music handles close cleanly' (-not $report.Error -and -not $report.CleanupError -and $report.DeviceClosed -and $report.Music.Closed)
     Check 'Every submitted sample matches independent offline schedule' ($report.PcmSha256 -ceq $expectedHash -and $report.SubmittedFrames -eq 176400 -and $report.Packets -eq 140)
     Check 'Music pause, mute advancement, stop and restart preserve frame accounting' ($report.Music.Frames -eq 161280 -and $report.Music.Selected -ceq $loopTrack -and $report.Music.Gain -eq .1)
-    Check 'Master mute and volume applied to complete mix' ($report.MutedPackets -eq 35 -and $report.FinalVolume -eq .5 -and $report.VolumeChanges.Count -eq 2)
+    Check 'Effects mute preserves independently controlled music in the exact PCM stream' ($report.MutedPackets -eq 35 -and $report.FinalVolume -eq .5 -and $report.VolumeChanges.Count -eq 2)
     Check 'Epoch transition retains future packet with no loss' ($report.EpochResets -eq 1 -and $report.StalePacketsDiscarded -eq 0 -and $null -eq $report.PendingPacket -and $report.UnconsumedPackets -eq 0)
     Check 'Finite opening, loop commands and epoch reset are recorded' ($report.Music.Transitions.Count -eq 7 -and $report.Music.Reports[$loopTrack] -ceq (Get-FileHash $qualification).Hash -and $report.Music.Reports[$oneShotTrack] -ceq (Get-FileHash $oneShotQualification).Hash)
     Check 'Device returns completed buffers with bounded packet queue' ($report.ReturnedCompletedFrames -gt 0 -and $report.MaxPacketQueue -le 32)

@@ -31,7 +31,7 @@ try{
             Replay=$c.ReplaySha256;Wad=$g.WadSha256;Catalog=$c.MusicCatalogSha256;Pcm=$g.Simulation.Audio.PcmSha256;
             Style=$g.OutputStyle;FontFace=$c.FontFace;FontSize=$c.FontSize;Maximized=$c.Maximized;Columns=$g.TerminalColumns;Rows=$g.TerminalRows;
             Viewport=($g.ViewportChanges[0]|Select-Object Columns,Rows,Left,Top);Workers=$g.Workers;PowerShell=$g.PowerShell;
-            InitialSettings=($g.InitialSettings|Select-Object Version,AlwaysRun,TurnSpeed,SoundVolume,SoundMuted);Diagnostics=$g.Diagnostics;SourceWidth=$g.SourceWidth;SourceHeight=$g.SourceHeight;
+            InitialSettings=($g.InitialSettings|Select-Object Version,AlwaysRun,TurnSpeed,SoundVolume,MusicVolume,SoundMuted);Diagnostics=$g.Diagnostics;SourceWidth=$g.SourceWidth;SourceHeight=$g.SourceHeight;
             CaptureBackend=$c.CaptureBackend;CaptureLimit=$c.CaptureLimit;Recorder=$c.FfmpegSha256;Media=$c.MediaFfmpegSha256}
         if($Dimension -eq 'Encoding'){$signature['TerminalOutput']=$g.TerminalOutput.Mode}
         elseif($g.PSObject.Properties.Name -contains 'AnsiEncoding'){$signature['AnsiEncoding']=$g.AnsiEncoding}

@@ -135,7 +135,7 @@ try {
     # Session recordings explicitly carry ContinueCampaign=true.
     $stopAtLevelEnd=$null -ne $replayData -and -not $replayData.ContinueCampaign
     $liveAudioClock=[bool]($RealtimeAudio -or (-not $Headless -and $Sound))
-    $simulation=New-DoomSimulation $Wad $Skill $Episode $Map -StopAtLevelEnd:$stopAtLevelEnd -ReplayCheckpoints:$withCheckpoints -CheckpointReplay $(if($null -ne $replayData -and $replayData.Checkpoints){$Replay}else{''}) -SaveRoot $SaveRoot -Sound:$Sound -RealtimeAudio:$liveAudioClock -SoundVolume $(if($preferences.SoundMuted){0}else{$preferences.SoundVolume}) -MusicCatalog $MusicCatalog
+    $simulation=New-DoomSimulation $Wad $Skill $Episode $Map -StopAtLevelEnd:$stopAtLevelEnd -ReplayCheckpoints:$withCheckpoints -CheckpointReplay $(if($null -ne $replayData -and $replayData.Checkpoints){$Replay}else{''}) -SaveRoot $SaveRoot -Sound:$Sound -RealtimeAudio:$liveAudioClock -SoundVolume $(if($preferences.SoundMuted){0}else{$preferences.SoundVolume}) -MusicVolume $preferences.MusicVolume -MusicCatalog $MusicCatalog
     $snapshot=Read-DoomSimulationSnapshot $simulation $null
     $menu=New-DoomMenuState ($simulation.View.ReadInt32(80)) $Episode $Skill
     $menu.Settings=Copy-DoomUserSettings $preferences
@@ -337,6 +337,7 @@ try {
         if($Sound){
             $effectiveVolume=if($preferences.SoundMuted){0}else{$preferences.SoundVolume}
             if($simulation.View.ReadInt32(88) -ne $effectiveVolume){$simulation.View.Write(88,[int]$effectiveVolume);[void]$simulation.Go.Set()}
+            if($simulation.View.ReadInt32(92) -ne $preferences.MusicVolume){$simulation.View.Write(92,[int]$preferences.MusicVolume);[void]$simulation.Go.Set()}
             $audioPause=[int](-not $clock.IsRunning)
             if($simulation.View.ReadInt32(84) -ne $audioPause){$simulation.View.Write(84,$audioPause);[void]$simulation.Go.Set()}
         }

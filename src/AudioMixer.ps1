@@ -65,7 +65,7 @@ function Read-DoomAudioFrames {
         $voice.Position=$position
     }
     # Add the unquantized music layer after effects; saturate the combined result once.
-    # Effects volume and music gain are separate; the caller applies any shared master control.
+    # Effect volume and music gain are independent controls.
     if($null -ne $Music){for([int]$i=0;$i -lt $mix.Length;$i++){$mix[$i]+=$Music[$i]*$MusicGain}}
     for([int]$i=0;$i -lt $pcm.Length;$i++){
         # PowerShell's numeric cast rounds to even. Test the rounding boundaries

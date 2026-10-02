@@ -24,7 +24,7 @@ function Run-SettingsHost([string]$Name,[string]$Settings,[string[]]$Keys,[switc
 try{
     $settings=Join-Path $directory preferences.json
     # Toggle, change speed, reset, then choose on/150 as the persisted endpoint.
-    $r=Run-SettingsHost 'save' $settings @('Escape','Up','Up','Enter','Enter','Down','Right','Down','Down','Down','Enter','Up','Up','Up','Right','Up','Enter','Escape','Escape') -Replay
+    $r=Run-SettingsHost 'save' $settings @('Escape','Up','Up','Enter','Enter','Down','Right','Down','Down','Down','Down','Enter','Up','Up','Up','Up','Right','Up','Enter','Escape','Escape') -Replay
     Check 'Settings host preserves both gameplay/map checkpoints' ($r.ReplayVerification.Matched -and $r.ReplayVerification.Checked -eq 2)
     Check 'All five edits saved through the real host' ($r.SettingsEvents.Count -eq 5 -and @($r.SettingsEvents|Where-Object {-not $_.Success -or -not $_.Persisted}).Count -eq 0)
     Check 'Final host preferences reflect post-reset choices' ($r.FinalSettings.AlwaysRun -and $r.FinalSettings.TurnSpeed -eq 150)

@@ -23,16 +23,17 @@ function Invoke-DoomMenuKey {
             0 {$Menu.Settings.AlwaysRun=-not $Menu.Settings.AlwaysRun;$settingsChanged=$true}
             1 {$speeds=@(50,100,150);$index=[Array]::IndexOf($speeds,[int]$Menu.Settings.TurnSpeed);$delta=if($Key -eq 'Left'){-1}else{1};$Menu.Settings.TurnSpeed=$speeds[($index+$delta+3)%3];$settingsChanged=$true}
             2 {$delta=if($Key -eq 'Left'){-10}else{10};$level=[Math]::Clamp($Menu.Settings.SoundVolume+$delta,0,100);$settingsChanged=$level -ne $Menu.Settings.SoundVolume;$Menu.Settings.SoundVolume=$level}
-            3 {$Menu.Settings.SoundMuted=-not $Menu.Settings.SoundMuted;$settingsChanged=$true}
-            4 {if($Key -eq 'Enter'){$Menu.Settings=New-DoomUserSettings;$settingsChanged=$true}else{return $null}}
-            5 {if($Key -eq 'Enter'){$Menu.Screen=1;$Menu.Choice=5}else{return $null}}
+            3 {$delta=if($Key -eq 'Left'){-10}else{10};$level=[Math]::Clamp($Menu.Settings.MusicVolume+$delta,0,100);$settingsChanged=$level -ne $Menu.Settings.MusicVolume;$Menu.Settings.MusicVolume=$level}
+            4 {$Menu.Settings.SoundMuted=-not $Menu.Settings.SoundMuted;$settingsChanged=$true}
+            5 {if($Key -eq 'Enter'){$Menu.Settings=New-DoomUserSettings;$settingsChanged=$true}else{return $null}}
+            6 {if($Key -eq 'Enter'){$Menu.Screen=1;$Menu.Choice=5}else{return $null}}
         }
     }elseif($screen -eq 5){
         if($Key -eq 'Enter'){$Menu.Screen=1;$Menu.Choice=4}else{return $null}
     }elseif($screen -eq 12){
         if($Key -eq 'Enter'){$Menu.Screen=$Menu.ReturnScreen;$Menu.Choice=if($Menu.Screen -in 8,9){$Menu.SelectedSlot-1}else{0}}else{return $null}
     }elseif($Key -in 'Up','Down'){
-        $count=switch($screen){1{7};14{6};2{$Menu.Episodes};3{5};8{6};9{6};default{2}}
+        $count=switch($screen){1{7};14{7};2{$Menu.Episodes};3{5};8{6};9{6};default{2}}
         $delta=if($Key -eq 'Up'){-1}else{1};$Menu.Choice=($Menu.Choice+$delta+$count)%$count
     }elseif($Key -eq 'Enter' -or ($Key -eq 'Yes' -and $screen -in 4,6,10,11)){
         if($Key -eq 'Yes'){$Menu.Choice=1}
@@ -81,7 +82,7 @@ function Get-DoomCompactMenu {
         {$_ -in 8,9} {@($Menu.Slots|ForEach-Object {if($_.State -eq 'Ready'){"$($_.Slot)  E$($_.Episode)M$($_.Map)  $($_.Time)"}else{"$($_.Slot)  $($_.State)"}})}
         12 {@($Menu.MessageDetail,'Enter / Esc to return')}
         13 {@('Please wait...')}
-        14 {@("Always run: $(if($Menu.Settings.AlwaysRun){'On'}else{'Off'})","Turn speed: $($Menu.Settings.TurnSpeed)%","Sound volume: $($Menu.Settings.SoundVolume)%","Mute sound: $(if($Menu.Settings.SoundMuted){'On'}else{'Off'})",'Reset defaults','Back')}
+        14 {@("Always run: $(if($Menu.Settings.AlwaysRun){'On'}else{'Off'})","Turn speed: $($Menu.Settings.TurnSpeed)%","Effects volume: $($Menu.Settings.SoundVolume)%","Music volume: $($Menu.Settings.MusicVolume)%","Mute effects: $(if($Menu.Settings.SoundMuted){'On'}else{'Off'})",'Reset defaults','Back')}
     }
     $lines=@($title)
     for($i=0;$i -lt $items.Count;$i++){$marker=if($Menu.Screen -notin 5,7 -and $i -eq $Menu.Choice){'> '}else{'  '};$lines+=$marker+$items[$i]}
@@ -167,9 +168,9 @@ function Get-DoomMenuPixels {
         14 {
             $preferences=Copy-DoomUserSettings $Details.Settings
             Draw-DoomMenuText $Graphics 'SETTINGS' 0 16 -Center
-            $labels=@("ALWAYS RUN: $(if($preferences.AlwaysRun){'ON'}else{'OFF'})","TURN SPEED: $($preferences.TurnSpeed)%","SOUND: $($preferences.SoundVolume)%","MUTE SOUND: $(if($preferences.SoundMuted){'ON'}else{'OFF'})",'RESET DEFAULTS','BACK')
-            for($i=0;$i -lt $labels.Count;$i++){Draw-DoomMenuText $Graphics $labels[$i] 48 (48+18*$i)}
-            $draw.DrawPatch($patches.M_SKULL1,16,(46+18*$Choice),1)
+            $labels=@("ALWAYS RUN: $(if($preferences.AlwaysRun){'ON'}else{'OFF'})","TURN SPEED: $($preferences.TurnSpeed)%","EFFECTS: $($preferences.SoundVolume)%","MUSIC: $($preferences.MusicVolume)%","SFX MUTE: $(if($preferences.SoundMuted){'ON'}else{'OFF'})",'RESET DEFAULTS','BACK')
+            for($i=0;$i -lt $labels.Count;$i++){Draw-DoomMenuText $Graphics $labels[$i] 48 (42+17*$i)}
+            $draw.DrawPatch($patches.M_SKULL1,16,(40+17*$Choice),1)
             Draw-DoomMenuText $Graphics 'LEFT/RIGHT: CHANGE' 0 164 -Center
             Draw-DoomMenuText $Graphics 'ENTER: OK  ESC: BACK' 0 184 -Center
         }

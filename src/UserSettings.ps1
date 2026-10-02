@@ -1,21 +1,24 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 # Preferences are separate from saved worlds and recorded tic commands.
-function New-DoomUserSettings { return @{Version=2;AlwaysRun=$false;TurnSpeed=100;SoundVolume=100;SoundMuted=$false} }
+function New-DoomUserSettings { return @{Version=3;AlwaysRun=$false;TurnSpeed=100;SoundVolume=100;MusicVolume=100;SoundMuted=$false} }
 function Copy-DoomUserSettings {
     param($Settings)
     if($Settings -isnot [Collections.IDictionary] -and $Settings -is [pscustomobject]){$fields=@{};foreach($property in $Settings.PSObject.Properties){$fields[$property.Name]=$property.Value};$Settings=$fields}
     if($Settings -isnot [Collections.IDictionary] -or
         -not $Settings.Contains('Version') -or -not $Settings.Contains('AlwaysRun') -or -not $Settings.Contains('TurnSpeed')){throw 'Invalid settings fields.'}
-    if(($Settings.Version -isnot [int] -and $Settings.Version -isnot [long]) -or $Settings.Version -notin 1,2 -or
+    if(($Settings.Version -isnot [int] -and $Settings.Version -isnot [long]) -or $Settings.Version -notin 1,2,3 -or
         $Settings.AlwaysRun -isnot [bool] -or ($Settings.TurnSpeed -isnot [int] -and $Settings.TurnSpeed -isnot [long]) -or
         $Settings.TurnSpeed -notin 50,100,150){throw 'Unsupported settings values.'}
     if($Settings.Version -eq 1){
         if($Settings.Count -ne 3){throw 'Invalid legacy settings fields.'}
-        return @{Version=2;AlwaysRun=[bool]$Settings.AlwaysRun;TurnSpeed=[int]$Settings.TurnSpeed;SoundVolume=100;SoundMuted=$false}
+        return @{Version=3;AlwaysRun=[bool]$Settings.AlwaysRun;TurnSpeed=[int]$Settings.TurnSpeed;SoundVolume=100;MusicVolume=100;SoundMuted=$false}
     }
-    if($Settings.Count -ne 5 -or -not $Settings.Contains('SoundVolume') -or -not $Settings.Contains('SoundMuted') -or
+    $expectedCount=if($Settings.Version -eq 2){5}else{6}
+    if($Settings.Count -ne $expectedCount -or -not $Settings.Contains('SoundVolume') -or -not $Settings.Contains('SoundMuted') -or
         ($Settings.SoundVolume -isnot [int] -and $Settings.SoundVolume -isnot [long]) -or $Settings.SoundVolume -lt 0 -or $Settings.SoundVolume -gt 100 -or $Settings.SoundMuted -isnot [bool]){throw 'Invalid sound preferences.'}
-    return @{Version=2;AlwaysRun=[bool]$Settings.AlwaysRun;TurnSpeed=[int]$Settings.TurnSpeed;SoundVolume=[int]$Settings.SoundVolume;SoundMuted=[bool]$Settings.SoundMuted}
+    if($Settings.Version -eq 2){return @{Version=3;AlwaysRun=[bool]$Settings.AlwaysRun;TurnSpeed=[int]$Settings.TurnSpeed;SoundVolume=[int]$Settings.SoundVolume;MusicVolume=[int]$Settings.SoundVolume;SoundMuted=[bool]$Settings.SoundMuted}}
+    if(-not $Settings.Contains('MusicVolume') -or ($Settings.MusicVolume -isnot [int] -and $Settings.MusicVolume -isnot [long]) -or $Settings.MusicVolume -lt 0 -or $Settings.MusicVolume -gt 100){throw 'Invalid music volume preference.'}
+    return @{Version=3;AlwaysRun=[bool]$Settings.AlwaysRun;TurnSpeed=[int]$Settings.TurnSpeed;SoundVolume=[int]$Settings.SoundVolume;MusicVolume=[int]$Settings.MusicVolume;SoundMuted=[bool]$Settings.SoundMuted}
 }
 function Read-DoomUserSettings {
     param([Parameter(Mandatory)][string]$Path)
@@ -35,7 +38,7 @@ function Write-DoomUserSettings {
     $destination=[IO.Path]::GetFullPath($Path);$directory=[IO.Path]::GetDirectoryName($destination)
     [void][IO.Directory]::CreateDirectory($directory)
     $temporary=Join-Path $directory ('.settings-'+[guid]::NewGuid().ToString('N')+'.tmp')
-    $bytes=[Text.UTF8Encoding]::new($false).GetBytes(([ordered]@{Version=2;AlwaysRun=$values.AlwaysRun;TurnSpeed=$values.TurnSpeed;SoundVolume=$values.SoundVolume;SoundMuted=$values.SoundMuted}|ConvertTo-Json))
+    $bytes=[Text.UTF8Encoding]::new($false).GetBytes(([ordered]@{Version=3;AlwaysRun=$values.AlwaysRun;TurnSpeed=$values.TurnSpeed;SoundVolume=$values.SoundVolume;MusicVolume=$values.MusicVolume;SoundMuted=$values.SoundMuted}|ConvertTo-Json))
     try{
         [IO.File]::WriteAllBytes($temporary,$bytes)
         # Publish a complete file in the same directory. Refuse an unexpected file

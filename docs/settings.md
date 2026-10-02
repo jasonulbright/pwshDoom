@@ -8,27 +8,29 @@ Reset Defaults or Back. Escape returns to the main menu.
 | --- | --- | --- |
 | Always run | Off | Uses run movement by default; hold Shift to walk. When off, Shift runs. |
 | Turn speed | 100% | Scales keyboard turning to 50%, 100% or 150%; movement and strafing speeds are unaffected. |
-| Sound | 100% | Changes sound-effect volume in ten-percent steps, clamped to 0–100%. Applies when launched with `-Sound`. |
-| Mute sound | Off | Silences effects while retaining their selected volume and advancing their playback positions. |
+| Effects volume | 100% | Changes sound-effect volume in ten-percent steps, clamped to 0–100%. Applies when launched with `-Sound`. |
+| Music volume | 100% | Changes music gain independently, in ten-percent steps. Playback requires a music catalog. |
+| Mute effects | Off | Silences effects while retaining their selected volume and advancing their playback positions; music continues. |
 
 Changes apply after the settings action succeeds. Menus pause simulation and held
 gameplay keys must be released before acting again. Automap arrow capture remains
 in effect; WASD follows the chosen movement preference. Input preferences affect
 keyboard command generation, not monster speed, game physics or the 35 Hz clock.
-Sound preferences affect the PowerShell mixer. Changing effective volume clears
+Audio preferences affect the PowerShell mixer. Changing effects volume clears
 device buffers mixed at the previous gain, potentially cutting a short sound tail.
-This avoids replaying old loud samples after leaving a muted menu. Active voice
-positions remain advanced; unmuting does not restart effects. Gain changes apply
-at a worker boundary, not at a claimed zero-latency acoustic boundary.
+Active effect positions remain advanced; unmuting does not restart them. Music
+volume changes affect newly mixed blocks; already queued device audio can retain
+its previous gain. These are software boundaries, not acoustic-latency claims.
 
 Ordinary interactive launches save to `%LOCALAPPDATA%\pwshDoom\settings.json`.
 `Start-Doom.ps1 -SettingsPath C:\path\preferences.json` selects a separate file.
 Replay, scripted and headless runs use defaults unless explicitly supplied a
 settings file. Tests use fresh paths under ignored `local/`.
 
-Version-two JSON contains `Version`, `AlwaysRun`, `TurnSpeed`, `SoundVolume` and
-`SoundMuted`. Version-one files gain 100%/unmuted defaults in memory and remain
-unchanged on disk until a successful edit saves version two.
+Version-three JSON contains `Version`, `AlwaysRun`, `TurnSpeed`, `SoundVolume`,
+`MusicVolume` and `SoundMuted`. Version-one files gain default audio settings in
+memory. Version-two volume migrates to both new levels, preserving the prior mix.
+Older files remain unchanged until a successful edit saves version three.
 Only the documented types and choices are accepted. Invalid, unknown-version or
 oversized files produce a warning and default input preferences, preserving the
 file. If saving fails, the attempted change is rolled back and the game shows
@@ -49,9 +51,9 @@ twelve always-run/Shift/turn-speed combinations and held-key suppression. The
 fixtures, including all four settings choices. Real-host and live recording
 results follow as they are verified. Physical keyboard play remains unobserved.
 
-Music is not implemented yet. Display style,
-worker count, font and diagnostics remain launch parameters; this screen does
-not claim those additional options are already implemented.
+Music playback requires `-MusicCatalog`; this setting controls its level and
+does not select or prepare a catalog. Display style, worker count, font and
+diagnostics remain launch parameters rather than settings-menu options.
 
 The [three-host fixture](../results/settings-host-dictionary.json) passes nine
 checks: five persisted edits including reset, fresh-process reload, and a
@@ -87,7 +89,7 @@ Capture/export durations include approximate contrast-based trimming and possibl
 CFR duplicates. These UI demonstrations do not establish gameplay FPS, uniform
 pacing or physical keyboard interaction. Historical menu schedules belong to their
 recorded menu revisions; `results/settings-demo-schedule.json` belongs to the
-earlier four-item input menu and must not be used for the six-item version.
+earlier four-item input menu and must not be used for the seven-item version.
 
 ## Sound controls qualification
 

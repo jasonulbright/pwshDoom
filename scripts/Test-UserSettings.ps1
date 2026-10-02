@@ -14,25 +14,31 @@ $checks=[Collections.Generic.List[object]]::new();$failure=$null
 function Check([string]$Name,[bool]$Passed){$checks.Add(@{Name=$Name;Passed=$Passed});if(-not $Passed){throw $Name}}
 try{
     $read=Read-DoomUserSettings $path
-    Check 'Missing settings returns defaults without writing a file' (-not (Test-Path $path) -and -not $read.Values.AlwaysRun -and $read.Values.TurnSpeed -eq 100 -and $null -eq $read.Sha256)
+    Check 'Missing settings returns defaults without writing a file' (-not (Test-Path $path) -and -not $read.Values.AlwaysRun -and $read.Values.TurnSpeed -eq 100 -and $read.Values.MusicVolume -eq 100 -and $null -eq $read.Sha256)
     $values=$read.Values;$copy=Copy-DoomUserSettings $values;$copy.AlwaysRun=$true;$copy.TurnSpeed=150
     Check 'Copy does not alias live preferences' (-not $values.AlwaysRun -and $values.TurnSpeed -eq 100)
     $hash=Write-DoomUserSettings $path $copy $null;$read=Read-DoomUserSettings $path
-    Check 'File round trip retains typed preferences and exact byte hash' ($read.Values.AlwaysRun -and $read.Values.TurnSpeed -eq 150 -and $read.Sha256 -ceq $hash -and $hash -ceq (Get-FileHash $path).Hash)
+    Check 'File round trip retains typed preferences and exact byte hash' ($read.Values.AlwaysRun -and $read.Values.TurnSpeed -eq 150 -and $read.Values.MusicVolume -eq 100 -and $read.Sha256 -ceq $hash -and $hash -ceq (Get-FileHash $path).Hash)
     $wire=$copy|ConvertTo-Json|ConvertFrom-Json;$wireCopy=Copy-DoomUserSettings $wire
     Check 'Menu IPC object preserves typed preferences' ($wireCopy.AlwaysRun -and $wireCopy.TurnSpeed -eq 150)
     $legacy=Join-Path $directory legacy.json;[IO.File]::WriteAllText($legacy,'{"Version":1,"AlwaysRun":true,"TurnSpeed":150}');$legacyHash=(Get-FileHash $legacy).Hash
     $migrated=Read-DoomUserSettings $legacy
-    Check 'Legacy preferences migrate in memory without rewriting user file' ($migrated.Values.Version -eq 2 -and $migrated.Values.AlwaysRun -and $migrated.Values.SoundVolume -eq 100 -and -not $migrated.Values.SoundMuted -and (Get-FileHash $legacy).Hash -eq $legacyHash)
+    Check 'Version-one preferences migrate in memory without rewriting user file' ($migrated.Values.Version -eq 3 -and $migrated.Values.AlwaysRun -and $migrated.Values.SoundVolume -eq 100 -and $migrated.Values.MusicVolume -eq 100 -and -not $migrated.Values.SoundMuted -and (Get-FileHash $legacy).Hash -eq $legacyHash)
     $migrated.Values.SoundVolume=40;$migrated.Values.SoundMuted=$true;$null=Write-DoomUserSettings $legacy $migrated.Values $legacyHash
     $soundRead=Read-DoomUserSettings $legacy
-    Check 'Sound gain and mute persist independently in version two' ($soundRead.Values.SoundVolume -eq 40 -and $soundRead.Values.SoundMuted -and (Get-Content $legacy -Raw|ConvertFrom-Json).Version -eq 2)
+    Check 'Sound gain and mute persist in version three' ($soundRead.Values.SoundVolume -eq 40 -and $soundRead.Values.SoundMuted -and (Get-Content $legacy -Raw|ConvertFrom-Json).Version -eq 3)
+    $legacyV2=Join-Path $directory legacy-v2.json;[IO.File]::WriteAllText($legacyV2,'{"Version":2,"AlwaysRun":false,"TurnSpeed":100,"SoundVolume":40,"SoundMuted":true}');$legacyV2Hash=(Get-FileHash $legacyV2).Hash
+    $migratedV2=Read-DoomUserSettings $legacyV2
+    Check 'Version-two gain migrates to both levels without rewrite' ($migratedV2.Values.Version -eq 3 -and $migratedV2.Values.SoundVolume -eq 40 -and $migratedV2.Values.MusicVolume -eq 40 -and (Get-FileHash $legacyV2).Hash -eq $legacyV2Hash)
+    $migratedV2.Values.MusicVolume=70;$null=Write-DoomUserSettings $legacyV2 $migratedV2.Values $legacyV2Hash;$independent=Read-DoomUserSettings $legacyV2
+    Check 'Effects and music levels persist independently' ($independent.Values.SoundVolume -eq 40 -and $independent.Values.MusicVolume -eq 70 -and $independent.Values.SoundMuted)
     foreach($badVolume in -1,101,'50',50.5,$true){$invalid=New-DoomUserSettings;$invalid.SoundVolume=$badVolume;$rejected=$false;try{$null=Copy-DoomUserSettings $invalid}catch{$rejected=$true};Check "Reject invalid sound volume $badVolume" $rejected}
+    foreach($badVolume in -1,101,'50',50.5,$true){$invalid=New-DoomUserSettings;$invalid.MusicVolume=$badVolume;$rejected=$false;try{$null=Copy-DoomUserSettings $invalid}catch{$rejected=$true};Check "Reject invalid music volume $badVolume" $rejected}
     $invalid=New-DoomUserSettings;$invalid.SoundMuted='false';$rejected=$false;try{$null=Copy-DoomUserSettings $invalid}catch{$rejected=$true};Check 'Reject string mute value' $rejected
     $hash2=Write-DoomUserSettings $path $values $hash;$rejected=$false
     try{$null=Write-DoomUserSettings $path $copy $hash}catch{$rejected=$true}
     Check 'Stale writer rejected without changing newer file' ($rejected -and (Get-FileHash $path).Hash -ceq $hash2)
-    $cases=@('{','null','[]','{"Version":2,"AlwaysRun":false,"TurnSpeed":100}','{"Version":1,"AlwaysRun":"false","TurnSpeed":100}',
+    $cases=@('{','null','[]','{"Version":2,"AlwaysRun":false,"TurnSpeed":100}','{"Version":3,"AlwaysRun":false,"TurnSpeed":100,"SoundVolume":100,"SoundMuted":false}', '{"Version":1,"AlwaysRun":"false","TurnSpeed":100}',
         '{"Version":1,"AlwaysRun":false,"TurnSpeed":101}','{"Version":1,"AlwaysRun":false,"TurnSpeed":"100"}',
         '{"Version":1,"AlwaysRun":false}','{"Version":1,"AlwaysRun":false,"TurnSpeed":100,"Extra":0}',(' '*4097))
     for($i=0;$i -lt $cases.Count;$i++){
@@ -55,11 +61,16 @@ try{
     for($i=0;$i -lt 12;$i++){$null=Invoke-DoomMenuKey $menu Left};$action=Invoke-DoomMenuKey $menu Left
     Check 'Volume clamps to zero without redundant persistence' ($menu.Settings.SoundVolume -eq 0 -and -not $action.SettingsChanged)
     for($i=0;$i -lt 12;$i++){$null=Invoke-DoomMenuKey $menu Right};Check 'Volume clamps to one hundred' ($menu.Settings.SoundVolume -eq 100)
+    $null=Invoke-DoomMenuKey $menu Down;$action=Invoke-DoomMenuKey $menu Left
+    Check 'Music volume steps down independently' ($menu.Settings.MusicVolume -eq 90 -and $action.SettingsChanged -and $menu.Settings.SoundVolume -eq 100)
+    for($i=0;$i -lt 12;$i++){$null=Invoke-DoomMenuKey $menu Left};$action=Invoke-DoomMenuKey $menu Left
+    Check 'Music volume clamps to zero without redundant persistence' ($menu.Settings.MusicVolume -eq 0 -and -not $action.SettingsChanged)
+    for($i=0;$i -lt 12;$i++){$null=Invoke-DoomMenuKey $menu Right};Check 'Music volume clamps to one hundred' ($menu.Settings.MusicVolume -eq 100)
     $null=Invoke-DoomMenuKey $menu Down;$null=Invoke-DoomMenuKey $menu Enter
-    Check 'Mute keeps chosen volume' ($menu.Settings.SoundMuted -and $menu.Settings.SoundVolume -eq 100)
+    Check 'Mute effects keeps independent levels' ($menu.Settings.SoundMuted -and $menu.Settings.SoundVolume -eq 100 -and $menu.Settings.MusicVolume -eq 100)
     $null=Invoke-DoomMenuKey $menu Down;$action=Invoke-DoomMenuKey $menu Enter
     Check 'Reset restores both input defaults' (-not $menu.Settings.AlwaysRun -and $menu.Settings.TurnSpeed -eq 100 -and $action.SettingsChanged)
-    Check 'Reset also restores sound defaults' ($menu.Settings.SoundVolume -eq 100 -and -not $menu.Settings.SoundMuted)
+    Check 'Reset also restores independent audio defaults' ($menu.Settings.SoundVolume -eq 100 -and $menu.Settings.MusicVolume -eq 100 -and -not $menu.Settings.SoundMuted)
     $null=Invoke-DoomMenuKey $menu Down;$action=Invoke-DoomMenuKey $menu Enter
     Check 'Back returns to selected settings item' ($menu.Screen -eq 1 -and $menu.Choice -eq 5 -and -not $action.SettingsChanged)
     $state=@{Keys=[bool[]]::new(256);Pressed=[bool[]]::new(256);Suppressed=[bool[]]::new(256)};$cmd=[SettingsTestCommand]::new()
