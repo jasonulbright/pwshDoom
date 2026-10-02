@@ -53,7 +53,9 @@ try{
                                 $rejected=$false;try{Write-DoomTerminalFrame $context $stream $strips $start $end -Mode $syncMode}catch{$rejected=$true}
                                 if(-not $rejected){throw 'Synchronous output interleaved with a pending asynchronous frame.'}
                             }
+                            $firstObserved=$job.FirstCompletedObservationQpc
                             $done=Complete-DoomTerminalFrame $context $stream -Wait
+                            if($done.WriteStartQpc -gt $done.FirstCompletedObservationQpc -or $done.FirstCompletedObservationQpc -gt $done.EndQpc -or $done.PendingProbes -ne 0 -or $firstObserved -ne $done.FirstCompletedObservationQpc){throw 'Immediate task completion observations differ.'}
                             if(-not [object]::ReferenceEquals($done,$job) -or $null -ne $context.Pending){throw 'Asynchronous completion ownership differs.'}
                         }else{Write-DoomTerminalFrame $context $stream $strips $start $end $clear $status -Mode $mode}
                         if([Convert]::ToBase64String($stream.ToArray()) -cne [Convert]::ToBase64String($expected)){throw "$mode output differs: $style/$width/$decorations"}
@@ -78,6 +80,9 @@ try{
         $job=Start-DoomTerminalFrame $context $server @(@{Bytes=$payload}) $start $end
         if($job.Task.IsCompleted -or $context.Frames -ne 0 -or $context.Bytes -ne 0){throw 'Blocked write was reported as completed.'}
         if($null -ne (Complete-DoomTerminalFrame $context $server)){throw 'Polling blocked output falsely completed it.'}
+        $firstIncomplete=$job.LastIncompleteQpc
+        [Threading.Thread]::Sleep(20)
+        if($null -ne (Complete-DoomTerminalFrame $context $server) -or $job.LastIncompleteQpc -le $firstIncomplete -or $job.FirstCompletedObservationQpc -ne 0 -or $job.PendingProbes -lt 3){throw 'Blocked task observation did not retain its latest false probe.'}
         $expected=[byte[]]::new($start.Length+$payload.Length+$end.Length)
         [Buffer]::BlockCopy($start,0,$expected,0,$start.Length);[Buffer]::BlockCopy($payload,0,$expected,$start.Length,$payload.Length)
         [Buffer]::BlockCopy($end,0,$expected,$start.Length+$payload.Length,$end.Length)
@@ -87,7 +92,11 @@ try{
             if(-not $read.Wait(5000)){throw 'Pipe fixture read timed out.'}
             $count=$read.GetAwaiter().GetResult();if($count -le 0){throw 'Pipe fixture ended early.'};$offset+=$count
         }
+        if(-not $job.Task.Wait(5000)){throw 'Drained pipe task did not complete.'}
+        $knownCompleteQpc=[Diagnostics.Stopwatch]::GetTimestamp()
+        [Threading.Thread]::Sleep(20)
         $done=Complete-DoomTerminalFrame $context $server -Wait
+        if($done.LastIncompleteQpc -ge $knownCompleteQpc -or $done.FirstCompletedObservationQpc -lt $knownCompleteQpc -or $done.FirstCompletedObservationQpc -gt $done.EndQpc){throw 'Delayed task completion observation bounds differ.'}
         if(-not [Linq.Enumerable]::SequenceEqual([byte[]]$expected,[byte[]]$actual)){throw 'Backpressured output bytes differ.'}
         if($context.Frames -ne 1 -or $context.Bytes -ne $actual.Length -or $context.Writes -ne 1){throw 'Backpressured completion accounting differs.'}
         $checks.Add(@{Style='Transport';Mode='AsyncBatch';Fixture='Bounded named-pipe backpressure';ComparedBytes=$actual.Length;Passed=$true})

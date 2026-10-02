@@ -22,18 +22,33 @@ function Start-DoomTerminalFrame {
         [byte[]]$Clear=[byte[]]::new(0),[byte[]]$Status=[byte[]]::new(0))
     $startQpc=[Diagnostics.Stopwatch]::GetTimestamp()
     $length=Copy-DoomTerminalFrame $Context $Results $Start $End $Clear $Status
+    $writeStartQpc=[Diagnostics.Stopwatch]::GetTimestamp()
     $task=$Stream.WriteAsync($Context.Buffer,0,$length)
-    $job=@{Task=$task;Bytes=$length;StartQpc=$startQpc;DispatchQpc=[Diagnostics.Stopwatch]::GetTimestamp()}
+    $job=@{Task=$task;Bytes=$length;StartQpc=$startQpc;WriteStartQpc=$writeStartQpc;DispatchQpc=[Diagnostics.Stopwatch]::GetTimestamp();
+        LastIncompleteQpc=0L;FirstCompletedObservationQpc=0L;CompletionProbes=0;PendingProbes=0}
+    $null=Test-DoomTerminalTaskCompletion $job
     $Context.Pending=$job
     return $job
+}
+function Test-DoomTerminalTaskCompletion {
+    param($Job)
+    # A false read proves incompletion at the timestamp BEFORE that read.
+    # A true read proves completion by the timestamp AFTER it. Preserve the
+    # first true observation; later host/flush delay must not widen the bound.
+    $before=[Diagnostics.Stopwatch]::GetTimestamp();$done=$Job.Task.IsCompleted;$after=[Diagnostics.Stopwatch]::GetTimestamp()
+    $Job.CompletionProbes++
+    if(-not $done){$Job.PendingProbes++;$Job.LastIncompleteQpc=$before}
+    elseif($Job.FirstCompletedObservationQpc -eq 0){$Job.FirstCompletedObservationQpc=$after}
+    return $done
 }
 function Complete-DoomTerminalFrame {
     param($Context,[IO.Stream]$Stream,[switch]$Wait)
     $job=$Context.Pending
     if($null -eq $job){return $null}
-    if(-not $job.Task.IsCompleted){
+    if(-not (Test-DoomTerminalTaskCompletion $job)){
         if(-not $Wait){return $null}
         if(-not $job.Task.Wait(30000)){throw 'Terminal output drain timed out.'}
+        $null=Test-DoomTerminalTaskCompletion $job
     }
     [void]$job.Task.GetAwaiter().GetResult();$Stream.Flush()
     $job.EndQpc=[Diagnostics.Stopwatch]::GetTimestamp()

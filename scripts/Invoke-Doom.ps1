@@ -45,26 +45,28 @@ function Start-DoomRenderJob {
     return @{Tic=$Snapshot.Tic;Version=$Snapshot.Version;StartQpc=$qpc;SubmitMs=$watch.Elapsed.TotalMilliseconds;ViewportKey=$Viewport.Key;State=$Snapshot.State;Generation=$Snapshot.Generation;Episode=$Snapshot.Episode;Map=$Snapshot.Map;ScreenKind=$Snapshot.ScreenKind;MenuRevision=$Snapshot.MenuRevision;MenuScreen=$Snapshot.MenuScreen;PaletteNumber=$Snapshot.PaletteNumber;PlayerMessage=$Snapshot.PlayerMessage;PlayerMessageTics=$Snapshot.PlayerMessageTics;PlayerMessagePixels=$Snapshot.PlayerMessagePixels}
 }
 function Add-DoomCompletedFrame {
-    param($Present,[long]$EndQpc,[double]$OutputMs,[long]$OutputBytes,[double]$DispatchMs=0)
+    param($Present,[long]$EndQpc,[double]$OutputMs,[long]$OutputBytes,[double]$DispatchMs=0,$OutputJob=$null)
     $frameTimes.Add(($EndQpc-$Present.StartQpc)*1000.0/[Diagnostics.Stopwatch]::Frequency)
     $frameStats.Add(@{Tic=$Present.Tic;State=$Present.State;Generation=$Present.Generation;Episode=$Present.Episode;Map=$Present.Map;
         SubmitMs=$Present.SubmitMs;HarvestMs=$Present.HarvestMs;OutputMs=$OutputMs;OutputBytes=$OutputBytes;OutputDispatchMs=$DispatchMs;
         StartQpc=$Present.StartQpc;EndQpc=$EndQpc;ElapsedMs=$clock.Elapsed.TotalMilliseconds;
         ScreenKind=$Present.ScreenKind;MenuScreen=$Present.MenuScreen;MenuRevision=$Present.MenuRevision;PaletteNumber=$Present.PaletteNumber;
         PlayerMessage=$Present.PlayerMessage;PlayerMessageTics=$Present.PlayerMessageTics;
+        AsyncOutput=if($null -ne $OutputJob){@{WriteStartQpc=$OutputJob.WriteStartQpc;LastIncompleteQpc=$OutputJob.LastIncompleteQpc;FirstCompletedObservationQpc=$OutputJob.FirstCompletedObservationQpc;CompletionProbes=$OutputJob.CompletionProbes;PendingProbes=$OutputJob.PendingProbes}}else{$null};
         Workers=@($Present.Results | ForEach-Object {,@($_.RenderMs,$_.EncodeMs,$_.DecodeMs,$_.StartedQpc,$_.DoneQpc)})})
 }
 function Receive-DoomTerminalFrame {
     param([switch]$Wait)
     $job=Complete-DoomTerminalFrame $terminalOutputContext $stdout -Wait:$Wait
     if($null -ne $job){
-        Add-DoomCompletedFrame $job.Present $job.EndQpc (($job.EndQpc-$job.StartQpc)*1000.0/[Diagnostics.Stopwatch]::Frequency) $job.Bytes (($job.DispatchQpc-$job.StartQpc)*1000.0/[Diagnostics.Stopwatch]::Frequency)
+        Add-DoomCompletedFrame $job.Present $job.EndQpc (($job.EndQpc-$job.StartQpc)*1000.0/[Diagnostics.Stopwatch]::Frequency) $job.Bytes (($job.DispatchQpc-$job.StartQpc)*1000.0/[Diagnostics.Stopwatch]::Frequency) -OutputJob $job
     }
 }
 function Receive-DoomLoadingFrame {
     param([switch]$Wait)
     $job=Complete-DoomTerminalFrame $loadingOutputContext $stdout -Wait:$Wait
-    if($null -ne $job){$loadingScreenStats.Add(@{StartQpc=$job.StartQpc;DispatchQpc=$job.DispatchQpc;EndQpc=$job.EndQpc;Bytes=$job.Bytes;Frame=$job.Frame;Columns=$job.Columns;Rows=$job.Rows;Status=$job.Status})}
+    if($null -ne $job){$loadingScreenStats.Add(@{StartQpc=$job.StartQpc;WriteStartQpc=$job.WriteStartQpc;DispatchQpc=$job.DispatchQpc;EndQpc=$job.EndQpc;Bytes=$job.Bytes;Frame=$job.Frame;Columns=$job.Columns;Rows=$job.Rows;Status=$job.Status;
+        LastIncompleteQpc=$job.LastIncompleteQpc;FirstCompletedObservationQpc=$job.FirstCompletedObservationQpc;CompletionProbes=$job.CompletionProbes;PendingProbes=$job.PendingProbes})}
 }
 $simulation=$null;$pool=$null;$consoleState=$null;$terminalActive=$false;$timerRequested=$false;$failure=$null
 $oldEncoding=[Console]::OutputEncoding;$esc=[char]27;$clock=[Diagnostics.Stopwatch]::new()
@@ -168,7 +170,7 @@ try {
     }
     $startQpc=[Diagnostics.Stopwatch]::GetTimestamp();$simulation.View.Write(40,[long]$startQpc);$clock.Start();$wallClock.Start();$lastViewportCheck=-100.0;$exitReason='Quit'
     while($true) {
-        if($null -ne $terminalOutputContext.Pending -and $terminalOutputContext.Pending.Task.IsCompleted){Receive-DoomTerminalFrame;$completed=$frameStats.Count}
+        if($null -ne $terminalOutputContext.Pending){Receive-DoomTerminalFrame;$completed=$frameStats.Count}
         $wallNow=$wallClock.Elapsed.TotalMilliseconds;$status=$simulation.View.ReadInt32(12)
         if($status -eq 3){throw 'Simulation failed; see the simulation error in the session report.'}
         if($status -eq 2){$exitReason='LevelComplete';break}
