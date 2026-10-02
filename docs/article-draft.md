@@ -295,3 +295,12 @@ render processes, including failure propagation from a corrupt test asset.
 [reload controls](../results/wall-u-session-reload-20261002.json) add bounded
 integration evidence; human campaign play, acoustics and native pacing remain
 separate qualifications.
+
+The changed build's native measurements still miss the target. Across three
+repeats per mode, median active rates are about 32/32/32 tics/sec and display
+transitions about 37/40/42 per second. Tic p99 lateness exceeds a second in every
+run. Audio accounting remains complete, with zero software starvation/rebuffer;
+startup stays under 31 seconds. The full windows, source checks, CPU/memory limits
+and ended process identities remain recorded. These results preserve the
+difference between better sampling arithmetic and a qualified playable performance
+target. [Current measurements](../results/wall-u-native-pacing-20261002.json).

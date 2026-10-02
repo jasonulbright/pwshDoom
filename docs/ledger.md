@@ -5896,3 +5896,30 @@ This evidence commit reaches 18 after Preview.5. Measure current-source native
 pacing separately, with no concurrent qualification/export/recording work. Keep
 all campaign, original-frame and physical/acoustic/hardware gates open; release
 again at 35 commits since the preceding release.
+
+### 2026-10-02 — Measure current wall-U native pacing
+
+Nine sequential clean captures on committed e5c12f9 / implementation 277edaf
+retain three repeats in each mode, default sixteen workers, full source image,
+all 3,780 stress commands/18 endpoints, audio and thirty-track catalog. No study
+qualification, analysis, exports or recordings run during collection. Independent
+checks reconcile raw display counts/p99, unchanged source/input, audio credits,
+resource groups and all 171 ended PID/start identities.
+[Native receipt and full raw windows](../results/wall-u-native-pacing-20261002.json).
+
+All nine fail the full numerical pacing gates. Median active tics/sec are
+31.983/32.262/31.534 for Classic/Matrix/color art; median display transitions/sec
+are 37.363/39.603/41.562. Tic p99 lateness spans 1,025–1,576 ms. Zero software
+audio starvation/rebuffer and complete PCM credits establish bounded accounting,
+not acoustics. Every command and player death remain; no completion claim follows.
+
+Startup spans 26.77–30.60 sec, sampled game private totals 3.46–4.22 GiB and
+CPU 47.9–55.9% of twenty-core capacity. These include simulation-process audio
+and exclude separately sampled Terminal. Sampling misses some startup/tail and
+peak behavior. Historical current/previous display medians are lower, but those
+batches are unpaired and cannot isolate a causal wall cost or system effect.
+Do not turn the isolated serial sampling result into a native performance claim.
+
+This evidence commit reaches 19 after Preview.5. Investigate retained stage
+timings/lateness for a bounded product improvement, while keeping defaults,
+thresholds, all prior failures and full qualification gates. Release at 35 commits.

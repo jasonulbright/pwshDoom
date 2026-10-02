@@ -1524,3 +1524,19 @@ asymmetric initial calls. The implementation is adopted for measured sampling
 fidelity. These isolated calls exclude simulation, audio, worker contention and
 Terminal display; they establish no native pacing improvement. Historical clean
 captures and effect recordings remain pinned to their earlier builds.
+
+The [current nine native captures](../results/wall-u-native-pacing-20261002.json)
+retain three repeats per mode, all 3,780 commands/18 endpoints and all full
+windows. Median active rates are 31.983 Classic, 32.262 Matrix and 31.534 color art;
+median display transitions/sec are 37.363, 39.603 and 41.562. Tic p99 lateness
+spans 1,025–1,576 ms. Every run fails the full numerical gate set.
+
+Startup is 26.77–30.60 sec; sampled game private totals span 3.46–4.22 GiB and
+sampled CPU uses 47.9–55.9% of twenty logical-core capacity. Audio is inside the
+sampled simulation process and is not counted again; Terminal stays separate.
+Software starvation/rebuffer counts are zero and packet/PCM credits reconcile.
+All 171 recorded process start identities have ended. Sampling can miss peaks
+and startup/tail work. Display transitions do not identify distinct game frames.
+Historical rates are unpaired: lower current display medians neither isolate
+the wall change's cost nor establish a causal speed regression. Keep the frozen
+thresholds/defaults and investigate the retained stage/lateness records next.

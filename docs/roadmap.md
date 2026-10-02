@@ -519,3 +519,11 @@ expected resource cache behavior and corrupt-asset failure propagation.
 [session reloads](../results/wall-u-session-reload-20261002.json).
 Count reaches 18 after Preview.5. Collect current-source native pacing next;
 all full-release gates stay open and another release is due at 35 commits.
+
+Nine current-source native repeats retain every command/endpoints and full windows,
+with clean audio accounting and ended process identities. All fail the full pacing
+gates: median active tics/sec are 31.98/32.26/31.53 and display transitions/sec
+37.36/39.60/41.56 by mode, with tic p99 lateness over one second.
+[Native evidence and sampling limits](../results/wall-u-native-pacing-20261002.json).
+Count reaches 19 after Preview.5. Investigate stage/lateness records for the next
+bounded improvement; keep frozen thresholds/defaults and release at 35 commits.
