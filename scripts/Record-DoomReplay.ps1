@@ -52,6 +52,7 @@ $sourceNames+=@('src/FastRenderer.ps1','src/RenderFuzz.ps1','src/GameHost.ps1','
 $sourceNames+=@('src/PaletteCodec.ps1','src/CharacterCodec.ps1','src/RenderAssets.ps1','src/GameProcesses.ps1','src/SimulationProcess.ps1','scripts/Invoke-SimulationWorker.ps1','scripts/Invoke-GameRenderWorker.ps1')
 $sourceNames+='src/PlayerMessages.ps1'
 $sourceNames+='scripts/Invoke-RenderWorkerWithLogs.ps1'
+$sourceNames+=@('scripts/Invoke-AudioWorker.ps1','src/AudioMixer.ps1','src/AudioPackets.ps1','src/AudioRunspace.ps1','src/WaveOutDevice.ps1','src/MusicPlayback.ps1','src/MusicLoopReader.ps1','src/MusicOneShotReader.ps1')
 $sourceSnapshot=@($sourceNames|ForEach-Object {@{Path=$_;Sha256=(Get-FileHash "$PSScriptRoot/../$_").Hash}})
 try {
     $launch=@{Wad=$Wad;Replay=$Replay;Style=$Style;GlyphSet=$GlyphSet;Seconds=$Seconds;FontSize=$FontSize;FontFace=$FontFace;Maximized=$Maximized;ExitDelaySeconds=$ExitDelaySeconds;Report=$gamePath}

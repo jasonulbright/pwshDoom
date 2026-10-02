@@ -24,7 +24,7 @@ $sourceLines=@(Get-ChildItem "$sourceRoot/src" -Recurse -File -Filter *.ps1|Sort
     [IO.Path]::GetRelativePath($sourceRoot,$_.FullName).Replace('\','/')+' '+(Get-FileHash -LiteralPath $_.FullName).Hash
 })
 $runtimeSourceSha256=[Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([Text.Encoding]::UTF8.GetBytes($sourceLines -join "`n")))
-$launchSources=@(foreach($name in 'Start-Doom.ps1','scripts/Invoke-Doom.ps1','scripts/Invoke-SimulationWorker.ps1','scripts/Invoke-GameRenderWorker.ps1','scripts/Invoke-RenderWorkerWithLogs.ps1'){
+$launchSources=@(foreach($name in 'Start-Doom.ps1','scripts/Invoke-Doom.ps1','scripts/Invoke-SimulationWorker.ps1','scripts/Invoke-GameRenderWorker.ps1','scripts/Invoke-RenderWorkerWithLogs.ps1','scripts/Invoke-AudioWorker.ps1'){
     @{Path=$name;Sha256=(Get-FileHash -LiteralPath "$sourceRoot/$name").Hash}
 })
 $runtimeExecutable=(Get-Process -Id $PID).Path;$launchQpc=$null

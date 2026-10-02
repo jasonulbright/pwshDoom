@@ -1,0 +1,2188 @@
+{
+  "FinishedUtc": "2026-10-02T02:21:31.068318+00:00",
+  "BaselineRuntimeSourceCommit": "6229287",
+  "FinalWorkerSource": {
+    "Path": "scripts/Invoke-AudioWorker.ps1",
+    "Sha256": "8DB7EDCF7B012C8F4F798E7C6ACB93F60634398AE1329914AF8DFE667E844DA4"
+  },
+  "RecoveryTestSource": {
+    "Path": "scripts/Test-AudioRealtimeRecovery.ps1",
+    "Sha256": "5BD213D4DB6D8E7DA29DB7CEBC7FD2B3E51F44838F3B352D216616895A9357F3"
+  },
+  "BaselineTestSource": {
+    "Path": "local/audio-realtime-recovery-baseline-test.ps1",
+    "Sha256": "8F5F00D0F9BCEDFD8C578C7FB6AABD9E87571C4F3C9E3EE35E1743E43E453994"
+  },
+  "Baseline": [
+    {
+      "File": {
+        "Path": "local/audio-realtime-recovery-baseline-r1.json",
+        "Sha256": "F5E8B9E45684353AD5684391B59BEFB925F1B7191C48BCC119654821E20505FC"
+      },
+      "Gap": {
+        "AfterSubmittedFrames": 79380,
+        "LastSequenceBeforeCatchup": 35,
+        "ElapsedMilliseconds": 702.9823,
+        "RequestedMilliseconds": 700,
+        "BeforeSubmittedFrames": 47880
+      },
+      "RecoveredPacketAgeAtSubmission": {
+        "MedianMs": 702.7557999999999,
+        "MaximumMs": 711.6166,
+        "Count": 20
+      },
+      "GeneratedRealtimeBlocks": 27,
+      "Sources": [
+        {
+          "Path": "scripts/Test-AudioRealtimeRecovery.ps1",
+          "Sha256": "8F5F00D0F9BCEDFD8C578C7FB6AABD9E87571C4F3C9E3EE35E1743E43E453994"
+        },
+        {
+          "Path": "scripts/Invoke-AudioWorker.ps1",
+          "Sha256": "275058038F919EB123EB294EE7B9E44E34B2DAE56C3A3513DEE9316294CDBE07"
+        },
+        {
+          "Path": "src/AudioRunspace.ps1",
+          "Sha256": "7907F76AEB92969F36252E86B36A970C359B0AE2D9EC3ACCF1514E2D6ABC7DEE"
+        },
+        {
+          "Path": "src/AudioPackets.ps1",
+          "Sha256": "01865375DB878EFA137B3B5EF49437B4FFBF9B8C6F0359A2AA52580E0977801E"
+        },
+        {
+          "Path": "src/AudioMixer.ps1",
+          "Sha256": "38E846CDF04317FBA6DE2EC598F3497EFB6ED97DEE9AB8EEC22D8A94E4421A0B"
+        },
+        {
+          "Path": "src/MusicPlayback.ps1",
+          "Sha256": "5050D3355A30692B67CF130594146FDDD0CB51B9843B2C79B65D68F55E7F11F8"
+        },
+        {
+          "Path": "src/MusicLoopReader.ps1",
+          "Sha256": "A65FB5FA034E1A8DB2CCA59C0AEE7A6A0A5F132461BCA13CC06C337CB3DC859D"
+        },
+        {
+          "Path": "src/WaveOutDevice.ps1",
+          "Sha256": "B8447B4F701F8B1267E949F0BD114A2304049590B8371E449D8592F2478B0A49"
+        }
+      ]
+    },
+    {
+      "File": {
+        "Path": "local/audio-realtime-recovery-baseline-r2.json",
+        "Sha256": "BB723138A0DA430B8E60DEDB2EDAAB54D5D9C47B836F479E5C3814C00AE0AC0D"
+      },
+      "Gap": {
+        "LastSequenceBeforeCatchup": 35,
+        "AfterSubmittedFrames": 61740,
+        "RequestedMilliseconds": 300,
+        "BeforeSubmittedFrames": 47880,
+        "ElapsedMilliseconds": 302.8863
+      },
+      "RecoveredPacketAgeAtSubmission": {
+        "MaximumMs": 312.6605,
+        "Count": 20,
+        "MedianMs": 306.68039999999996
+      },
+      "GeneratedRealtimeBlocks": 13,
+      "Sources": [
+        {
+          "Path": "scripts/Test-AudioRealtimeRecovery.ps1",
+          "Sha256": "8F5F00D0F9BCEDFD8C578C7FB6AABD9E87571C4F3C9E3EE35E1743E43E453994"
+        },
+        {
+          "Path": "scripts/Invoke-AudioWorker.ps1",
+          "Sha256": "275058038F919EB123EB294EE7B9E44E34B2DAE56C3A3513DEE9316294CDBE07"
+        },
+        {
+          "Path": "src/AudioRunspace.ps1",
+          "Sha256": "7907F76AEB92969F36252E86B36A970C359B0AE2D9EC3ACCF1514E2D6ABC7DEE"
+        },
+        {
+          "Path": "src/AudioPackets.ps1",
+          "Sha256": "01865375DB878EFA137B3B5EF49437B4FFBF9B8C6F0359A2AA52580E0977801E"
+        },
+        {
+          "Path": "src/AudioMixer.ps1",
+          "Sha256": "38E846CDF04317FBA6DE2EC598F3497EFB6ED97DEE9AB8EEC22D8A94E4421A0B"
+        },
+        {
+          "Path": "src/MusicPlayback.ps1",
+          "Sha256": "5050D3355A30692B67CF130594146FDDD0CB51B9843B2C79B65D68F55E7F11F8"
+        },
+        {
+          "Path": "src/MusicLoopReader.ps1",
+          "Sha256": "A65FB5FA034E1A8DB2CCA59C0AEE7A6A0A5F132461BCA13CC06C337CB3DC859D"
+        },
+        {
+          "Path": "src/WaveOutDevice.ps1",
+          "Sha256": "B8447B4F701F8B1267E949F0BD114A2304049590B8371E449D8592F2478B0A49"
+        }
+      ]
+    }
+  ],
+  "FinalControlledRecovery": [
+    {
+      "File": {
+        "Path": "local/audio-realtime-recovery-final-300-r1.json",
+        "Sha256": "A2D39285C5ED7E8B70AE1CBA1818C00F3E3F660E75A8D76531FD25A5E65B50E2"
+      },
+      "Gap": {
+        "BeforeSubmittedFrames": 47880,
+        "RequestedMilliseconds": 300,
+        "AfterSubmittedFrames": 61740,
+        "ElapsedMilliseconds": 309.1036,
+        "LastSequenceBeforeCatchup": 35
+      },
+      "RecoveredPacketAgeAtProcessing": {
+        "MedianMs": 12.3559,
+        "MaximumMs": 19.9343,
+        "Count": 20
+      },
+      "Sources": [
+        {
+          "Path": "scripts/Test-AudioRealtimeRecovery.ps1",
+          "Sha256": "5BD213D4DB6D8E7DA29DB7CEBC7FD2B3E51F44838F3B352D216616895A9357F3"
+        },
+        {
+          "Path": "scripts/Invoke-AudioWorker.ps1",
+          "Sha256": "8DB7EDCF7B012C8F4F798E7C6ACB93F60634398AE1329914AF8DFE667E844DA4"
+        },
+        {
+          "Path": "src/AudioRunspace.ps1",
+          "Sha256": "7907F76AEB92969F36252E86B36A970C359B0AE2D9EC3ACCF1514E2D6ABC7DEE"
+        },
+        {
+          "Path": "src/AudioPackets.ps1",
+          "Sha256": "01865375DB878EFA137B3B5EF49437B4FFBF9B8C6F0359A2AA52580E0977801E"
+        },
+        {
+          "Path": "src/AudioMixer.ps1",
+          "Sha256": "38E846CDF04317FBA6DE2EC598F3497EFB6ED97DEE9AB8EEC22D8A94E4421A0B"
+        },
+        {
+          "Path": "src/MusicPlayback.ps1",
+          "Sha256": "5050D3355A30692B67CF130594146FDDD0CB51B9843B2C79B65D68F55E7F11F8"
+        },
+        {
+          "Path": "src/MusicLoopReader.ps1",
+          "Sha256": "A65FB5FA034E1A8DB2CCA59C0AEE7A6A0A5F132461BCA13CC06C337CB3DC859D"
+        },
+        {
+          "Path": "src/WaveOutDevice.ps1",
+          "Sha256": "B8447B4F701F8B1267E949F0BD114A2304049590B8371E449D8592F2478B0A49"
+        }
+      ],
+      "Audio": {
+        "GeneratedRealtimeBlocks": 118,
+        "CleanupError": null,
+        "Realtime": true,
+        "FinalVolume": 0.0,
+        "PacketAgeAtSubmissionMs": [
+          98.2618
+        ],
+        "MaxVoices": 0,
+        "VolumeChanges": [
+          {
+            "Volume": 0.0,
+            "CancelledFramesUpperBound": 0,
+            "WallMs": 530.9485,
+            "AfterPacket": -1
+          }
+        ],
+        "UnconsumedPackets": 0,
+        "DrainEffectBlocks": 0,
+        "SubmittedFrames": 149940,
+        "ShutdownDrain": {
+          "PendingFramesAtStop": 0,
+          "Completed": true,
+          "CompletedFramesDuringWait": 0,
+          "WaitMilliseconds": 0.0,
+          "CancelledFramesUpperBound": 0,
+          "SkippedReason": "NoQueuedAudio",
+          "TimedOut": false,
+          "Attempted": false,
+          "RemainingFrames": 0
+        },
+        "LoadingDrains": [
+          {
+            "Qpc": 1806351589239,
+            "ThroughSequence": 116,
+            "CompletedFrames": 149940
+          }
+        ],
+        "PauseTransitions": 0,
+        "QueueStarvationObservations": [],
+        "Music": {
+          "Gain": 0.2,
+          "Selected": "D_E1M1",
+          "Reports": {
+            "D_E1M1": "1D5A9D6D16E8CDCA74646D6AEF009CDB42EB59B87941B0EFE648F9D3A98C96CF"
+          },
+          "Frames": 149940,
+          "Closed": true,
+          "Transitions": [
+            {
+              "Track": "D_E1M1",
+              "Kind": "Start",
+              "AfterFrames": 0,
+              "Loop": true
+            }
+          ]
+        },
+        "PcmSha256": "42DED4BCDB2D4D51B0537E3CE1904C3C30245132F3B53A88A18E208EBB106027",
+        "MixedBlocks": 119,
+        "MaxPacketQueue": 11,
+        "CancelledQueuedFramesUpperBound": 0,
+        "RebufferCount": 0,
+        "ClearedTimelineCredits": 0,
+        "Packets": 117,
+        "PendingTimelineCredits": 2,
+        "EpochResets": 0,
+        "ClippedSamples": 0,
+        "MutedPackets": 119,
+        "LastSequence": 116,
+        "StalePacketsDiscarded": 0,
+        "PacketAgeAtProcessingMs": [
+          27.121,
+          1.0793,
+          6.6568,
+          0.1912,
+          11.9729,
+          11.5014,
+          8.1492,
+          7.306,
+          6.3846,
+          6.447,
+          0.1819,
+          11.9445,
+          14.158,
+          1.413,
+          7.325,
+          6.0652,
+          1.303,
+          6.1413,
+          12.2627,
+          1.4434,
+          5.2625,
+          7.1764,
+          6.607,
+          6.7924,
+          6.0759,
+          11.3324,
+          10.8591,
+          15.7572,
+          26.4419,
+          7.1518,
+          6.4346,
+          6.1272,
+          9.3568,
+          11.3068,
+          1.357,
+          7.3673,
+          17.9419,
+          17.939,
+          17.9745,
+          18.0134,
+          18.0527,
+          18.1019,
+          18.1448,
+          18.1893,
+          18.2374,
+          18.281,
+          18.3267,
+          11.3701,
+          17.5399,
+          21.2413,
+          1.7905,
+          12.5683,
+          15.5026,
+          14.8496,
+          11.523,
+          17.5515,
+          25.49,
+          12.9373,
+          8.251,
+          8.5479,
+          12.0376,
+          8.7604,
+          17.5424,
+          0.412,
+          12.8582,
+          12.7274,
+          7.0796,
+          11.685,
+          17.7615,
+          17.5902,
+          3.9217,
+          28.384,
+          2.4644,
+          14.46,
+          9.5209,
+          8.6378,
+          17.5854,
+          21.1393,
+          12.5115,
+          12.4804,
+          15.0046,
+          11.8185,
+          13.3934,
+          17.3803,
+          0.8136,
+          12.6689,
+          12.5455,
+          15.004,
+          11.9479,
+          17.2788,
+          8.101,
+          7.035,
+          12.7878,
+          13.4755,
+          15.2179,
+          9.0802,
+          8.9651,
+          15.439,
+          7.1404,
+          6.7922,
+          12.4775,
+          6.014,
+          12.353,
+          10.4178,
+          19.9343,
+          7.1116,
+          12.3588,
+          12.5171,
+          14.621,
+          11.1631,
+          10.8637,
+          17.5024,
+          7.1596,
+          12.8601,
+          12.4904,
+          14.0917,
+          8.6076
+        ],
+        "CompensatedPacketAgeMs": [
+          1.0793,
+          6.6568,
+          0.1912,
+          11.9729,
+          11.5014,
+          8.1492,
+          7.306,
+          6.3846,
+          6.447,
+          0.1819,
+          11.9445,
+          14.158,
+          1.413,
+          7.325,
+          6.0652,
+          1.303,
+          6.1413,
+          12.2627,
+          1.4434,
+          5.2625,
+          7.1764,
+          6.607,
+          6.7924,
+          6.0759,
+          11.3324,
+          10.8591,
+          15.7572,
+          26.4419,
+          7.1518,
+          6.4346,
+          6.1272,
+          9.3568,
+          11.3068,
+          1.357,
+          7.3673,
+          17.9419,
+          17.939,
+          17.9745,
+          18.0134,
+          18.0527,
+          18.1019,
+          18.1448,
+          18.1893,
+          18.2374,
+          18.281,
+          18.3267,
+          11.3701,
+          17.5399,
+          21.2413,
+          1.7905,
+          12.5683,
+          15.5026,
+          14.8496,
+          11.523,
+          17.5515,
+          25.49,
+          12.9373,
+          8.251,
+          8.5479,
+          12.0376,
+          8.7604,
+          17.5424,
+          0.412,
+          12.8582,
+          12.7274,
+          7.0796,
+          11.685,
+          17.7615,
+          17.5902,
+          3.9217,
+          28.384,
+          2.4644,
+          14.46,
+          9.5209,
+          8.6378,
+          17.5854,
+          21.1393,
+          12.5115,
+          12.4804,
+          15.0046,
+          11.8185,
+          13.3934,
+          17.3803,
+          0.8136,
+          12.6689,
+          12.5455,
+          15.004,
+          11.9479,
+          17.2788,
+          8.101,
+          7.035,
+          12.7878,
+          13.4755,
+          15.2179,
+          9.0802,
+          8.9651,
+          15.439,
+          7.1404,
+          6.7922,
+          12.4775,
+          6.014,
+          12.353,
+          10.4178,
+          19.9343,
+          7.1116,
+          12.3588,
+          12.5171,
+          14.621,
+          11.1631,
+          10.8637,
+          17.5024,
+          7.1596,
+          12.8601,
+          12.4904,
+          14.0917,
+          8.6076
+        ],
+        "DeviceClosed": true,
+        "PendingEffectOutput": false,
+        "RebufferSinglePacketDeadlineMs": 100,
+        "WallSeconds": 4.0835408,
+        "RebufferResumes": [],
+        "CompensatedControlEvents": 0,
+        "Error": null,
+        "ReturnedCompletedFrames": 149940,
+        "PendingPacket": null,
+        "MixSamplesMs": [
+          59.9995,
+          1.8095,
+          0.8126,
+          0.7047,
+          0.8734,
+          0.7964,
+          1.0873,
+          0.7907,
+          3.7238,
+          0.8303,
+          0.7641,
+          0.7934,
+          3.0556,
+          0.9705,
+          0.8087,
+          0.7977,
+          0.9044,
+          0.8831,
+          2.5059,
+          0.8276,
+          0.9879,
+          0.9104,
+          0.769,
+          0.7653,
+          0.7482,
+          0.7981,
+          0.991,
+          8.64,
+          0.9935,
+          0.9177,
+          0.8378,
+          0.8773,
+          0.951,
+          0.9739,
+          1.2459,
+          1.4784,
+          2.1321,
+          0.9187,
+          0.8644,
+          0.884,
+          1.1643,
+          0.8953,
+          0.8813,
+          0.8631,
+          0.9023,
+          0.9061,
+          1.363,
+          0.9547,
+          0.9786,
+          0.9485,
+          0.9256,
+          1.0325,
+          0.93,
+          0.9198,
+          1.0387,
+          1.0109,
+          1.0458,
+          1.2763,
+          1.0762,
+          1.1018,
+          1.3978,
+          1.0984,
+          1.0892,
+          1.0563,
+          1.0169,
+          1.4909,
+          1.0396,
+          1.0684,
+          1.0308,
+          1.033,
+          0.9967,
+          1.0709,
+          0.9796,
+          1.0036,
+          0.9956,
+          1.4267,
+          1.0314,
+          0.9666,
+          0.967,
+          0.8753,
+          1.063,
+          0.7841,
+          0.7825,
+          0.7409,
+          0.6817,
+          0.9735,
+          0.5482,
+          0.5227,
+          0.5202,
+          0.5719,
+          0.5045,
+          0.5371,
+          0.5071,
+          0.5209,
+          0.4919,
+          0.8937,
+          0.5094,
+          0.5091,
+          0.4768,
+          0.448,
+          0.7962,
+          0.4424,
+          0.4289,
+          0.4312,
+          0.5098,
+          0.4358,
+          0.4287,
+          0.4285,
+          0.4861,
+          0.4293,
+          0.4432,
+          0.4711,
+          0.5171,
+          0.438,
+          0.8713,
+          0.4202,
+          0.4295,
+          0.4322,
+          0.4414
+        ],
+        "CompensatedRealtimePackets": 116,
+        "Meaning": "PowerShell mixes simulation packets. Interactive playback continues active music/effects through producer gaps. Caught-up packets apply every control/event in order without repeating intervals already covered by filler; new sounds start on the current output clock, and past audible output is not reconstructed. Headless/test playback remains packet-exact. Submission ages exclude compensated packets; processing ages include every consumed packet. Neither measures audible output. Queue starvation is polling, not hardware telemetry. Normal unpaused exit drains submitted device buffers for up to 250 ms; paused/error exits cancel the remaining tail and report its upper bound.",
+        "MaximumTimelineCredits": 13,
+        "FinalVoices": []
+      },
+      "EffectEvents": false
+    },
+    {
+      "File": {
+        "Path": "local/audio-realtime-recovery-final-700-r1.json",
+        "Sha256": "B38A7B4B6B7BE00A6E2A6728C59477180695CE5212CD4426BC322BCADB5962C3"
+      },
+      "Gap": {
+        "BeforeSubmittedFrames": 47880,
+        "RequestedMilliseconds": 700,
+        "LastSequenceBeforeCatchup": 35,
+        "ElapsedMilliseconds": 705.8406,
+        "AfterSubmittedFrames": 79380
+      },
+      "RecoveredPacketAgeAtProcessing": {
+        "MedianMs": 10.5328,
+        "MaximumMs": 17.8008,
+        "Count": 20
+      },
+      "Sources": [
+        {
+          "Sha256": "5BD213D4DB6D8E7DA29DB7CEBC7FD2B3E51F44838F3B352D216616895A9357F3",
+          "Path": "scripts/Test-AudioRealtimeRecovery.ps1"
+        },
+        {
+          "Sha256": "8DB7EDCF7B012C8F4F798E7C6ACB93F60634398AE1329914AF8DFE667E844DA4",
+          "Path": "scripts/Invoke-AudioWorker.ps1"
+        },
+        {
+          "Sha256": "7907F76AEB92969F36252E86B36A970C359B0AE2D9EC3ACCF1514E2D6ABC7DEE",
+          "Path": "src/AudioRunspace.ps1"
+        },
+        {
+          "Sha256": "01865375DB878EFA137B3B5EF49437B4FFBF9B8C6F0359A2AA52580E0977801E",
+          "Path": "src/AudioPackets.ps1"
+        },
+        {
+          "Sha256": "38E846CDF04317FBA6DE2EC598F3497EFB6ED97DEE9AB8EEC22D8A94E4421A0B",
+          "Path": "src/AudioMixer.ps1"
+        },
+        {
+          "Sha256": "5050D3355A30692B67CF130594146FDDD0CB51B9843B2C79B65D68F55E7F11F8",
+          "Path": "src/MusicPlayback.ps1"
+        },
+        {
+          "Sha256": "A65FB5FA034E1A8DB2CCA59C0AEE7A6A0A5F132461BCA13CC06C337CB3DC859D",
+          "Path": "src/MusicLoopReader.ps1"
+        },
+        {
+          "Sha256": "B8447B4F701F8B1267E949F0BD114A2304049590B8371E449D8592F2478B0A49",
+          "Path": "src/WaveOutDevice.ps1"
+        }
+      ],
+      "Audio": {
+        "CancelledQueuedFramesUpperBound": 0,
+        "FinalVolume": 0.0,
+        "PauseTransitions": 0,
+        "MixSamplesMs": [
+          58.7011,
+          1.696,
+          0.7595,
+          0.6465,
+          1.0651,
+          0.7339,
+          0.7171,
+          0.7077,
+          3.9887,
+          0.7662,
+          0.7095,
+          0.7326,
+          0.7429,
+          0.8998,
+          1.2791,
+          0.9576,
+          1.0677,
+          1.1009,
+          3.0396,
+          1.1384,
+          1.1524,
+          0.9397,
+          0.9483,
+          0.9156,
+          0.9198,
+          0.8869,
+          0.8468,
+          0.8501,
+          0.8741,
+          0.904,
+          0.8457,
+          0.8437,
+          0.9624,
+          0.9601,
+          1.0379,
+          1.2768,
+          2.1553,
+          0.7689,
+          0.7681,
+          0.7857,
+          1.1171,
+          0.7775,
+          0.7837,
+          0.8502,
+          0.8048,
+          0.8087,
+          1.4214,
+          0.9623,
+          1.1057,
+          0.9557,
+          1.0042,
+          1.0657,
+          1.1126,
+          1.0393,
+          1.0312,
+          1.0623,
+          2.0016,
+          1.0204,
+          0.9935,
+          1.0255,
+          1.2491,
+          1.0078,
+          1.1957,
+          1.1599,
+          1.121,
+          1.1119,
+          1.1418,
+          1.067,
+          1.088,
+          1.066,
+          1.0446,
+          1.0224,
+          1.0207,
+          1.0187,
+          1.0532,
+          1.534,
+          1.0756,
+          1.0351,
+          1.0595,
+          1.0621,
+          1.3393,
+          1.0251,
+          1.0182,
+          1.1902,
+          1.0086,
+          1.4471,
+          1.0264,
+          1.0328,
+          1.0515,
+          0.8988,
+          0.8711,
+          0.8754,
+          0.9092,
+          0.8972,
+          0.9045,
+          1.1617,
+          0.7138,
+          0.5523,
+          0.625,
+          0.5513,
+          0.855,
+          0.5558,
+          0.525,
+          0.57,
+          0.5131,
+          0.8969,
+          0.4895,
+          0.4869,
+          0.4616,
+          0.4704,
+          0.4681,
+          0.4404,
+          0.4262,
+          0.4438,
+          0.8516,
+          0.4117,
+          0.4501,
+          0.4375,
+          0.4166,
+          0.4359,
+          0.7289,
+          0.4299,
+          0.4349,
+          0.4212,
+          0.8189,
+          0.4377,
+          0.4363,
+          0.4175,
+          0.4151,
+          0.4197,
+          0.4255,
+          0.4388,
+          0.4261
+        ],
+        "DeviceClosed": true,
+        "Music": {
+          "Gain": 0.2,
+          "Transitions": [
+            {
+              "Loop": true,
+              "Track": "D_E1M1",
+              "AfterFrames": 0,
+              "Kind": "Start"
+            }
+          ],
+          "Closed": true,
+          "Selected": "D_E1M1",
+          "Reports": {
+            "D_E1M1": "1D5A9D6D16E8CDCA74646D6AEF009CDB42EB59B87941B0EFE648F9D3A98C96CF"
+          },
+          "Frames": 167580
+        },
+        "PcmSha256": "C55A8E5434EADCC3C76253523EBAA70564415D4933CA55D511A405C499A4A122",
+        "VolumeChanges": [
+          {
+            "WallMs": 529.5079,
+            "AfterPacket": -1,
+            "CancelledFramesUpperBound": 0,
+            "Volume": 0.0
+          }
+        ],
+        "SubmittedFrames": 167580,
+        "MaximumTimelineCredits": 27,
+        "ReturnedCompletedFrames": 167580,
+        "QueueStarvationObservations": [],
+        "PendingTimelineCredits": 2,
+        "RebufferResumes": [],
+        "CleanupError": null,
+        "Error": null,
+        "WallSeconds": 4.4811642,
+        "PendingEffectOutput": false,
+        "EpochResets": 0,
+        "RebufferSinglePacketDeadlineMs": 100,
+        "ClearedTimelineCredits": 0,
+        "MixedBlocks": 133,
+        "UnconsumedPackets": 0,
+        "FinalVoices": [],
+        "CompensatedRealtimePackets": 130,
+        "PendingPacket": null,
+        "ShutdownDrain": {
+          "SkippedReason": "NoQueuedAudio",
+          "CompletedFramesDuringWait": 0,
+          "WaitMilliseconds": 0.0,
+          "PendingFramesAtStop": 0,
+          "CancelledFramesUpperBound": 0,
+          "RemainingFrames": 0,
+          "Attempted": false,
+          "Completed": true,
+          "TimedOut": false
+        },
+        "PacketAgeAtSubmissionMs": [
+          98.5138
+        ],
+        "LoadingDrains": [
+          {
+            "ThroughSequence": 130,
+            "CompletedFrames": 167580,
+            "Qpc": 1806400839845
+          }
+        ],
+        "MutedPackets": 133,
+        "Meaning": "PowerShell mixes simulation packets. Interactive playback continues active music/effects through producer gaps. Caught-up packets apply every control/event in order without repeating intervals already covered by filler; new sounds start on the current output clock, and past audible output is not reconstructed. Headless/test playback remains packet-exact. Submission ages exclude compensated packets; processing ages include every consumed packet. Neither measures audible output. Queue starvation is polling, not hardware telemetry. Normal unpaused exit drains submitted device buffers for up to 250 ms; paused/error exits cancel the remaining tail and report its upper bound.",
+        "CompensatedPacketAgeMs": [
+          14.2981,
+          7.7595,
+          7.3165,
+          15.7799,
+          21.0526,
+          15.6171,
+          11.137,
+          6.4454,
+          16.3859,
+          3.9758,
+          16.0147,
+          21.7836,
+          13.886,
+          13.5683,
+          15.2862,
+          16.0926,
+          15.8581,
+          15.3639,
+          15.3947,
+          21.2507,
+          14.7073,
+          4.0289,
+          7.6769,
+          1.2427,
+          19.8768,
+          21.7633,
+          15.2437,
+          13.3657,
+          13.0738,
+          6.9667,
+          6.5969,
+          15.8573,
+          15.261,
+          21.2292,
+          4.9377,
+          18.8982,
+          18.901,
+          18.9307,
+          18.9619,
+          18.9937,
+          19.0258,
+          19.0625,
+          19.1042,
+          19.1395,
+          19.2042,
+          19.2439,
+          19.2819,
+          19.3214,
+          19.3254,
+          19.3598,
+          19.2995,
+          19.2856,
+          19.311,
+          19.3419,
+          19.3747,
+          19.4066,
+          19.4437,
+          19.4807,
+          19.5191,
+          19.5579,
+          15.1718,
+          15.2554,
+          10.3584,
+          4.3859,
+          9.3456,
+          7.0137,
+          5.2585,
+          15.6868,
+          15.2233,
+          10.872,
+          10.4196,
+          10.3642,
+          11.763,
+          5.0704,
+          15.561,
+          15.0995,
+          1.0926,
+          4.0677,
+          10.0731,
+          12.9619,
+          11.4412,
+          15.4962,
+          15.275,
+          10.839,
+          11.4013,
+          7.1046,
+          12.713,
+          15.7955,
+          15.1721,
+          15.2384,
+          10.7614,
+          4.3784,
+          10.2909,
+          6.6796,
+          12.0327,
+          15.5258,
+          15.2297,
+          11.8971,
+          12.2649,
+          12.9014,
+          6.7159,
+          15.8651,
+          17.5163,
+          15.2609,
+          10.7677,
+          10.1841,
+          10.2458,
+          7.2533,
+          15.6583,
+          11.5424,
+          15.0311,
+          4.8522,
+          10.6662,
+          3.0831,
+          10.0665,
+          9.6192,
+          15.0544,
+          15.2063,
+          10.5273,
+          10.6391,
+          4.1267,
+          6.9911,
+          3.6994,
+          17.8008,
+          15.2065,
+          10.8117,
+          10.5383,
+          10.354,
+          5.4221,
+          15.7614
+        ],
+        "ClippedSamples": 0,
+        "MaxPacketQueue": 25,
+        "CompensatedControlEvents": 0,
+        "PacketAgeAtProcessingMs": [
+          29.536,
+          14.2981,
+          7.7595,
+          7.3165,
+          15.7799,
+          21.0526,
+          15.6171,
+          11.137,
+          6.4454,
+          16.3859,
+          3.9758,
+          16.0147,
+          21.7836,
+          13.886,
+          13.5683,
+          15.2862,
+          16.0926,
+          15.8581,
+          15.3639,
+          15.3947,
+          21.2507,
+          14.7073,
+          4.0289,
+          7.6769,
+          1.2427,
+          19.8768,
+          21.7633,
+          15.2437,
+          13.3657,
+          13.0738,
+          6.9667,
+          6.5969,
+          15.8573,
+          15.261,
+          21.2292,
+          4.9377,
+          18.8982,
+          18.901,
+          18.9307,
+          18.9619,
+          18.9937,
+          19.0258,
+          19.0625,
+          19.1042,
+          19.1395,
+          19.2042,
+          19.2439,
+          19.2819,
+          19.3214,
+          19.3254,
+          19.3598,
+          19.2995,
+          19.2856,
+          19.311,
+          19.3419,
+          19.3747,
+          19.4066,
+          19.4437,
+          19.4807,
+          19.5191,
+          19.5579,
+          15.1718,
+          15.2554,
+          10.3584,
+          4.3859,
+          9.3456,
+          7.0137,
+          5.2585,
+          15.6868,
+          15.2233,
+          10.872,
+          10.4196,
+          10.3642,
+          11.763,
+          5.0704,
+          15.561,
+          15.0995,
+          1.0926,
+          4.0677,
+          10.0731,
+          12.9619,
+          11.4412,
+          15.4962,
+          15.275,
+          10.839,
+          11.4013,
+          7.1046,
+          12.713,
+          15.7955,
+          15.1721,
+          15.2384,
+          10.7614,
+          4.3784,
+          10.2909,
+          6.6796,
+          12.0327,
+          15.5258,
+          15.2297,
+          11.8971,
+          12.2649,
+          12.9014,
+          6.7159,
+          15.8651,
+          17.5163,
+          15.2609,
+          10.7677,
+          10.1841,
+          10.2458,
+          7.2533,
+          15.6583,
+          11.5424,
+          15.0311,
+          4.8522,
+          10.6662,
+          3.0831,
+          10.0665,
+          9.6192,
+          15.0544,
+          15.2063,
+          10.5273,
+          10.6391,
+          4.1267,
+          6.9911,
+          3.6994,
+          17.8008,
+          15.2065,
+          10.8117,
+          10.5383,
+          10.354,
+          5.4221,
+          15.7614
+        ],
+        "GeneratedRealtimeBlocks": 132,
+        "StalePacketsDiscarded": 0,
+        "LastSequence": 130,
+        "Realtime": true,
+        "Packets": 131,
+        "RebufferCount": 0,
+        "MaxVoices": 0,
+        "DrainEffectBlocks": 0
+      },
+      "EffectEvents": false
+    },
+    {
+      "File": {
+        "Path": "local/audio-realtime-recovery-final-effects-r1.json",
+        "Sha256": "7A421DC2CDAEDC83BC33959B6B7E14A94D713377950CF46991322812EB0A9195"
+      },
+      "Gap": {
+        "AfterSubmittedFrames": 79380,
+        "BeforeSubmittedFrames": 49140,
+        "RequestedMilliseconds": 700,
+        "LastSequenceBeforeCatchup": 35,
+        "ElapsedMilliseconds": 705.7695
+      },
+      "RecoveredPacketAgeAtProcessing": {
+        "MedianMs": 8.4359,
+        "MaximumMs": 29.6806,
+        "Count": 20
+      },
+      "Sources": [
+        {
+          "Path": "scripts/Test-AudioRealtimeRecovery.ps1",
+          "Sha256": "5BD213D4DB6D8E7DA29DB7CEBC7FD2B3E51F44838F3B352D216616895A9357F3"
+        },
+        {
+          "Path": "scripts/Invoke-AudioWorker.ps1",
+          "Sha256": "8DB7EDCF7B012C8F4F798E7C6ACB93F60634398AE1329914AF8DFE667E844DA4"
+        },
+        {
+          "Path": "src/AudioRunspace.ps1",
+          "Sha256": "7907F76AEB92969F36252E86B36A970C359B0AE2D9EC3ACCF1514E2D6ABC7DEE"
+        },
+        {
+          "Path": "src/AudioPackets.ps1",
+          "Sha256": "01865375DB878EFA137B3B5EF49437B4FFBF9B8C6F0359A2AA52580E0977801E"
+        },
+        {
+          "Path": "src/AudioMixer.ps1",
+          "Sha256": "38E846CDF04317FBA6DE2EC598F3497EFB6ED97DEE9AB8EEC22D8A94E4421A0B"
+        },
+        {
+          "Path": "src/MusicPlayback.ps1",
+          "Sha256": "5050D3355A30692B67CF130594146FDDD0CB51B9843B2C79B65D68F55E7F11F8"
+        },
+        {
+          "Path": "src/MusicLoopReader.ps1",
+          "Sha256": "A65FB5FA034E1A8DB2CCA59C0AEE7A6A0A5F132461BCA13CC06C337CB3DC859D"
+        },
+        {
+          "Path": "src/WaveOutDevice.ps1",
+          "Sha256": "B8447B4F701F8B1267E949F0BD114A2304049590B8371E449D8592F2478B0A49"
+        }
+      ],
+      "Audio": {
+        "CleanupError": null,
+        "VolumeChanges": [
+          {
+            "Volume": 0.0,
+            "CancelledFramesUpperBound": 0,
+            "WallMs": 949.8659,
+            "AfterPacket": -1
+          }
+        ],
+        "MixedBlocks": 134,
+        "MaxVoices": 2,
+        "CancelledQueuedFramesUpperBound": 0,
+        "DrainEffectBlocks": 1,
+        "MutedPackets": 134,
+        "RebufferCount": 0,
+        "MaxPacketQueue": 25,
+        "PendingTimelineCredits": 3,
+        "FinalVolume": 0.0,
+        "Meaning": "PowerShell mixes simulation packets. Interactive playback continues active music/effects through producer gaps. Caught-up packets apply every control/event in order without repeating intervals already covered by filler; new sounds start on the current output clock, and past audible output is not reconstructed. Headless/test playback remains packet-exact. Submission ages exclude compensated packets; processing ages include every consumed packet. Neither measures audible output. Queue starvation is polling, not hardware telemetry. Normal unpaused exit drains submitted device buffers for up to 250 ms; paused/error exits cancel the remaining tail and report its upper bound.",
+        "GeneratedRealtimeBlocks": 133,
+        "ReturnedCompletedFrames": 168840,
+        "UnconsumedPackets": 0,
+        "FinalVoices": [
+          {
+            "Step": 1.0,
+            "Position": 89460.0,
+            "Source": 2
+          },
+          {
+            "Step": 1.0,
+            "Position": 1260.0,
+            "Source": 3
+          }
+        ],
+        "Error": null,
+        "ClippedSamples": 0,
+        "LoadingDrains": [
+          {
+            "CompletedFrames": 168840,
+            "Qpc": 1806135269517,
+            "ThroughSequence": 130
+          }
+        ],
+        "StalePacketsDiscarded": 0,
+        "DeviceClosed": true,
+        "WallSeconds": 4.9382355,
+        "PcmSha256": "389415CE4710DB6DB6DA2D9B025820D3C0AF66194B7D617A5A2BA7E0EE9AC66D",
+        "Music": {
+          "Closed": true,
+          "Frames": 168840,
+          "Transitions": [
+            {
+              "AfterFrames": 0,
+              "Track": "D_E1M1",
+              "Kind": "Start",
+              "Loop": true
+            }
+          ],
+          "Gain": 0.2,
+          "Reports": {
+            "D_E1M1": "1D5A9D6D16E8CDCA74646D6AEF009CDB42EB59B87941B0EFE648F9D3A98C96CF"
+          },
+          "Selected": "D_E1M1"
+        },
+        "Realtime": true,
+        "CompensatedControlEvents": 4,
+        "QueueStarvationObservations": [],
+        "CompensatedRealtimePackets": 130,
+        "RebufferResumes": [],
+        "CompensatedPacketAgeMs": [
+          6.3133,
+          5.1985,
+          12.2039,
+          12.5589,
+          15.8755,
+          11.0407,
+          25.3547,
+          11.7868,
+          11.1585,
+          10.7929,
+          13.1994,
+          16.2812,
+          6.2834,
+          5.375,
+          11.3596,
+          5.9592,
+          6.4711,
+          16.6835,
+          13.3726,
+          11.2727,
+          25.8684,
+          11.1037,
+          5.1975,
+          10.546,
+          16.4243,
+          13.5136,
+          7.1153,
+          26.5802,
+          11.5119,
+          5.0758,
+          12.5655,
+          13.3421,
+          3.6424,
+          7.0344,
+          28.807,
+          25.4115,
+          26.6779,
+          26.8405,
+          26.8658,
+          26.887,
+          26.9049,
+          26.924,
+          26.9444,
+          26.9674,
+          26.9907,
+          27.0142,
+          27.0275,
+          27.051,
+          27.0732,
+          27.0963,
+          27.1047,
+          27.115,
+          27.1375,
+          27.1599,
+          27.1819,
+          27.2057,
+          27.2283,
+          27.2495,
+          27.2721,
+          27.295,
+          3.6992,
+          7.1934,
+          25.3099,
+          5.5962,
+          5.1068,
+          4.8765,
+          10.5019,
+          28.1438,
+          6.3047,
+          29.5911,
+          5.5758,
+          1.3413,
+          30.0982,
+          10.599,
+          6.2324,
+          6.1516,
+          26.3769,
+          25.2723,
+          7.304,
+          4.9185,
+          10.4474,
+          11.6103,
+          8.9135,
+          29.3512,
+          5.5692,
+          5.1356,
+          4.8442,
+          10.4012,
+          9.8802,
+          6.3562,
+          26.6117,
+          5.5211,
+          1.5699,
+          4.8671,
+          26.7075,
+          4.2312,
+          10.0583,
+          2.1508,
+          5.3826,
+          0.6202,
+          4.8497,
+          4.3714,
+          10.3334,
+          0.5855,
+          29.4048,
+          29.4659,
+          5.2483,
+          4.2859,
+          4.3748,
+          9.8089,
+          2.7861,
+          23.1656,
+          5.2938,
+          5.1948,
+          28.7732,
+          10.4162,
+          9.7931,
+          0.5628,
+          29.6806,
+          5.5296,
+          4.5745,
+          7.0787,
+          29.3884,
+          10.0038,
+          11.4354,
+          23.5822,
+          5.4978,
+          5.0778,
+          4.8338,
+          10.9001
+        ],
+        "PendingEffectOutput": false,
+        "PendingPacket": null,
+        "ClearedTimelineCredits": 0,
+        "PauseTransitions": 0,
+        "MixSamplesMs": [
+          71.0518,
+          1.8024,
+          0.8231,
+          0.7353,
+          0.8974,
+          0.8169,
+          0.8481,
+          0.8,
+          4.4415,
+          0.8532,
+          1.063,
+          0.7786,
+          0.7782,
+          0.7663,
+          0.7913,
+          0.7768,
+          0.7208,
+          0.8001,
+          5.9521,
+          0.8419,
+          1.0008,
+          0.7832,
+          0.7737,
+          0.7769,
+          0.7784,
+          0.7783,
+          0.7534,
+          8.7389,
+          0.7666,
+          0.9323,
+          0.8029,
+          0.9304,
+          1.0715,
+          0.9027,
+          1.177,
+          1.2386,
+          2.1407,
+          0.732,
+          0.7542,
+          0.7266,
+          1.1564,
+          0.7417,
+          0.7374,
+          0.7275,
+          0.7362,
+          0.7865,
+          1.2719,
+          0.7396,
+          0.7287,
+          0.7211,
+          0.745,
+          0.7358,
+          0.746,
+          0.758,
+          0.8935,
+          0.9049,
+          1.9932,
+          0.9015,
+          0.9115,
+          0.9973,
+          1.3152,
+          0.9822,
+          0.9574,
+          11.1057,
+          2.6347,
+          1.4686,
+          1.5899,
+          1.6741,
+          1.5212,
+          1.43,
+          1.8914,
+          1.3801,
+          1.4056,
+          1.5498,
+          1.4197,
+          1.3231,
+          2.5725,
+          1.8393,
+          1.6622,
+          1.6021,
+          1.9193,
+          1.8567,
+          1.8959,
+          1.6629,
+          1.7589,
+          1.5648,
+          1.5747,
+          1.6741,
+          1.569,
+          1.8653,
+          1.5552,
+          1.5989,
+          1.4416,
+          1.4417,
+          1.4697,
+          1.9003,
+          1.4938,
+          1.6424,
+          1.4679,
+          1.5313,
+          1.7555,
+          2.0038,
+          1.3208,
+          1.1995,
+          1.1322,
+          1.0853,
+          1.0757,
+          1.4427,
+          1.1238,
+          1.0865,
+          1.116,
+          1.0736,
+          1.0632,
+          1.4244,
+          1.0491,
+          1.0414,
+          0.8402,
+          1.0083,
+          0.8284,
+          0.7197,
+          0.9811,
+          0.7213,
+          0.743,
+          0.7919,
+          0.6559,
+          0.643,
+          1.0449,
+          0.6546,
+          0.6457,
+          0.7147,
+          0.6623,
+          0.6479,
+          1.0559,
+          0.8321
+        ],
+        "MaximumTimelineCredits": 27,
+        "LastSequence": 130,
+        "Packets": 131,
+        "PacketAgeAtProcessingMs": [
+          41.4,
+          6.3133,
+          5.1985,
+          12.2039,
+          12.5589,
+          15.8755,
+          11.0407,
+          25.3547,
+          11.7868,
+          11.1585,
+          10.7929,
+          13.1994,
+          16.2812,
+          6.2834,
+          5.375,
+          11.3596,
+          5.9592,
+          6.4711,
+          16.6835,
+          13.3726,
+          11.2727,
+          25.8684,
+          11.1037,
+          5.1975,
+          10.546,
+          16.4243,
+          13.5136,
+          7.1153,
+          26.5802,
+          11.5119,
+          5.0758,
+          12.5655,
+          13.3421,
+          3.6424,
+          7.0344,
+          28.807,
+          25.4115,
+          26.6779,
+          26.8405,
+          26.8658,
+          26.887,
+          26.9049,
+          26.924,
+          26.9444,
+          26.9674,
+          26.9907,
+          27.0142,
+          27.0275,
+          27.051,
+          27.0732,
+          27.0963,
+          27.1047,
+          27.115,
+          27.1375,
+          27.1599,
+          27.1819,
+          27.2057,
+          27.2283,
+          27.2495,
+          27.2721,
+          27.295,
+          3.6992,
+          7.1934,
+          25.3099,
+          5.5962,
+          5.1068,
+          4.8765,
+          10.5019,
+          28.1438,
+          6.3047,
+          29.5911,
+          5.5758,
+          1.3413,
+          30.0982,
+          10.599,
+          6.2324,
+          6.1516,
+          26.3769,
+          25.2723,
+          7.304,
+          4.9185,
+          10.4474,
+          11.6103,
+          8.9135,
+          29.3512,
+          5.5692,
+          5.1356,
+          4.8442,
+          10.4012,
+          9.8802,
+          6.3562,
+          26.6117,
+          5.5211,
+          1.5699,
+          4.8671,
+          26.7075,
+          4.2312,
+          10.0583,
+          2.1508,
+          5.3826,
+          0.6202,
+          4.8497,
+          4.3714,
+          10.3334,
+          0.5855,
+          29.4048,
+          29.4659,
+          5.2483,
+          4.2859,
+          4.3748,
+          9.8089,
+          2.7861,
+          23.1656,
+          5.2938,
+          5.1948,
+          28.7732,
+          10.4162,
+          9.7931,
+          0.5628,
+          29.6806,
+          5.5296,
+          4.5745,
+          7.0787,
+          29.3884,
+          10.0038,
+          11.4354,
+          23.5822,
+          5.4978,
+          5.0778,
+          4.8338,
+          10.9001
+        ],
+        "PacketAgeAtSubmissionMs": [
+          124.5245
+        ],
+        "ShutdownDrain": {
+          "TimedOut": false,
+          "PendingFramesAtStop": 0,
+          "SkippedReason": "NoQueuedAudio",
+          "CancelledFramesUpperBound": 0,
+          "Completed": true,
+          "RemainingFrames": 0,
+          "CompletedFramesDuringWait": 0,
+          "Attempted": false,
+          "WaitMilliseconds": 0.0
+        },
+        "RebufferSinglePacketDeadlineMs": 100,
+        "SubmittedFrames": 168840,
+        "EpochResets": 0
+      },
+      "EffectEvents": true
+    }
+  ],
+  "Regressions": [
+    {
+      "Test": "AudioMixer",
+      "File": {
+        "Path": "local/recovery-regression-AudioMixer-r1.json",
+        "Sha256": "BFC80581A8DB5B07AA45184E1D2B65941AEC40BF187DD9AC70469A3E94E60FD5"
+      },
+      "Checks": [
+        {
+          "Passed": true,
+          "Name": "DMX header/padding/unsigned conversion"
+        },
+        {
+          "Passed": true,
+          "Name": "Explicit unpadded decoding"
+        },
+        {
+          "Passed": true,
+          "Name": "Reject malformed DMX short"
+        },
+        {
+          "Passed": true,
+          "Name": "Reject malformed DMX format"
+        },
+        {
+          "Passed": true,
+          "Name": "Reject malformed DMX rate"
+        },
+        {
+          "Passed": true,
+          "Name": "Reject malformed DMX count"
+        },
+        {
+          "Passed": true,
+          "Name": "Reject malformed DMX minimum"
+        },
+        {
+          "Passed": true,
+          "Name": "Independent half-rate interpolation/tail/silence values"
+        },
+        {
+          "Passed": true,
+          "Name": "Completed voice removed"
+        },
+        {
+          "Passed": true,
+          "Name": "PCM is invariant to block boundaries"
+        },
+        {
+          "Passed": true,
+          "Name": "fractional pitch 0.97 preserves pre-optimization PCM"
+        },
+        {
+          "Passed": true,
+          "Name": "fractional pitch 0.97 remains block-boundary invariant"
+        },
+        {
+          "Passed": true,
+          "Name": "high pitch 3.25 preserves pre-optimization PCM"
+        },
+        {
+          "Passed": true,
+          "Name": "high pitch 3.25 remains block-boundary invariant"
+        },
+        {
+          "Passed": true,
+          "Name": "Overlapping channels saturate without signed wrap"
+        },
+        {
+          "Passed": true,
+          "Name": "To-even cast and asymmetric saturation boundaries"
+        },
+        {
+          "Passed": true,
+          "Name": "Pause emits silence without advancing voice"
+        },
+        {
+          "Passed": true,
+          "Name": "Mute emits silence while advancing voice"
+        },
+        {
+          "Passed": true,
+          "Name": "Same emitter/same category replaces prior voice"
+        },
+        {
+          "Passed": true,
+          "Name": "New category from same emitter replaces its prior voice"
+        },
+        {
+          "Passed": true,
+          "Name": "Voice limit replaces oldest rather than growing"
+        },
+        {
+          "Passed": true,
+          "Name": "Stop emitter preserves other emitters"
+        },
+        {
+          "Passed": true,
+          "Name": "Front is centered and near field is full gain"
+        },
+        {
+          "Passed": true,
+          "Name": "Left/right cardinal pans have correct handedness"
+        },
+        {
+          "Passed": true,
+          "Name": "Cutoff emits no energy"
+        },
+        {
+          "Passed": true,
+          "Name": "Mid attenuation point is half volume"
+        },
+        {
+          "Passed": true,
+          "Name": "Listener rotation changes pan"
+        }
+      ]
+    },
+    {
+      "Test": "AudioPackets",
+      "File": {
+        "Path": "local/recovery-regression-AudioPackets-r1.json",
+        "Sha256": "F47CBDE7BB78752F547A8D7086CB1E96B4F48D273FF35791EDF20FCC436F66F7"
+      },
+      "Checks": [
+        {
+          "Passed": true,
+          "Name": "Event batch drains and numeric center gains captured"
+        },
+        {
+          "Passed": true,
+          "Name": "Start volume, interpolation and stereo sample values"
+        },
+        {
+          "Passed": true,
+          "Name": "Production packet path replaces the prior sound across emitter categories"
+        },
+        {
+          "Passed": true,
+          "Name": "Paused packets retain emitter lifetime"
+        },
+        {
+          "Passed": true,
+          "Name": "Expired emitter removed from both registries"
+        },
+        {
+          "Passed": true,
+          "Name": "Missing referenced clip rejected"
+        },
+        {
+          "Passed": true,
+          "Name": "World reset clears voices and old pause"
+        }
+      ]
+    },
+    {
+      "Test": "AudioRunspace",
+      "File": {
+        "Path": "local/recovery-regression-AudioRunspace-r1.json",
+        "Sha256": "90BDA390CD9CC9D74A0DD3846D87EC768C5AE57A9EFEDBD8563924D19DED3C7D"
+      },
+      "Checks": [
+        {
+          "Passed": true,
+          "Name": "Worker initialized default device"
+        },
+        {
+          "Passed": true,
+          "Name": "Worker and cleanup report no error"
+        },
+        {
+          "Passed": true,
+          "Name": "Real packets mixed in independent runspace"
+        },
+        {
+          "Passed": true,
+          "Name": "Pause observed"
+        },
+        {
+          "Passed": true,
+          "Name": "Epoch reset and future packet retained"
+        },
+        {
+          "Passed": true,
+          "Name": "Bounded queue and returned buffers"
+        },
+        {
+          "Passed": true,
+          "Name": "Shutdown began with queued audio"
+        },
+        {
+          "Passed": true,
+          "Name": "Normal unpaused shutdown drains its queued tail"
+        },
+        {
+          "Passed": true,
+          "Name": "Queued tail completes before clean device close"
+        }
+      ]
+    },
+    {
+      "Test": "AudioVolume",
+      "File": {
+        "Path": "local/recovery-regression-AudioVolume-r1.json",
+        "Sha256": "5C972E4D66E092269AF8125B8A8A590343C3AA11E74C3EAC761465EB3EDEFFC7"
+      },
+      "Checks": [
+        {
+          "Passed": true,
+          "Name": "Device and worker close cleanly"
+        },
+        {
+          "Passed": true,
+          "Name": "Submitted PCM matches independent gain and timeline vector"
+        },
+        {
+          "Passed": true,
+          "Name": "Mute produces three packets without resetting the active voice"
+        },
+        {
+          "Passed": true,
+          "Name": "Gain acknowledgements retain selected quarter volume"
+        }
+      ]
+    },
+    {
+      "Test": "AudioRebuffer",
+      "File": {
+        "Path": "local/recovery-regression-AudioRebuffer-r1.json",
+        "Sha256": "FF09CD8B69EF04569F70A4CDB1C308493DA33E608A7B45CAE88DAF72A5CF2309"
+      },
+      "Checks": [
+        {
+          "Passed": true,
+          "Name": "Drained device enters recovery after the initial four packets"
+        },
+        {
+          "Passed": true,
+          "Name": "One recovery packet is held briefly for a reserve"
+        },
+        {
+          "Passed": true,
+          "Name": "Exactly two packets restart the first recovery"
+        },
+        {
+          "Passed": true,
+          "Name": "Final single packet restarts after the bounded deadline"
+        },
+        {
+          "Passed": true,
+          "Name": "All literal PCM samples retain their original sequence and values"
+        },
+        {
+          "Passed": true,
+          "Name": "Every frame completes with no discarded packets or cancelled tail"
+        },
+        {
+          "Passed": true,
+          "Name": "Device and worker close without error"
+        }
+      ]
+    },
+    {
+      "Test": "AudioLoadingBoundary",
+      "File": {
+        "Path": "local/recovery-regression-AudioLoadingBoundary-r1.json",
+        "Sha256": "33421E9C44BCDFE23837F810F0A13ADF7C69A6DA0EE2699F66A1F32D32FA3ADD"
+      },
+      "Checks": [
+        {
+          "Passed": true,
+          "Name": "Empty startup boundary acknowledges without invented audio"
+        },
+        {
+          "Passed": true,
+          "Name": "A single initial packet plays completely before pause"
+        },
+        {
+          "Passed": true,
+          "Name": "Acknowledged boundary holds later queued packets"
+        },
+        {
+          "Passed": true,
+          "Name": "Overlapping boundary is rejected"
+        },
+        {
+          "Passed": true,
+          "Name": "All remaining packets complete before the next acknowledgement"
+        },
+        {
+          "Passed": true,
+          "Name": "Distinct literal PCM values and ordering remain exact"
+        },
+        {
+          "Passed": true,
+          "Name": "All submitted frames return with no canceled tail or stale packets"
+        },
+        {
+          "Passed": true,
+          "Name": "Intentional drains are reported separately from starvation"
+        },
+        {
+          "Passed": true,
+          "Name": "Held device and worker close cleanly"
+        }
+      ]
+    },
+    {
+      "Test": "MusicAudioWorker",
+      "File": {
+        "Path": "local/recovery-regression-MusicAudioWorker-r1.json",
+        "Sha256": "ECACCA1ECF8806109766406B3844820514E93BA8D984D3158D8F20CCD25F4C99"
+      },
+      "Checks": [
+        {
+          "Passed": true,
+          "Name": "Qualified loop and finite score open on the actual device"
+        },
+        {
+          "Passed": true,
+          "Name": "Shared pause prevents consumption of queued music packet"
+        },
+        {
+          "Passed": true,
+          "Name": "Future epoch music packet waits for control epoch"
+        },
+        {
+          "Passed": true,
+          "Name": "Worker, device and music handles close cleanly"
+        },
+        {
+          "Passed": true,
+          "Name": "Every submitted sample matches independent offline schedule"
+        },
+        {
+          "Passed": true,
+          "Name": "Music pause, mute advancement, stop and restart preserve frame accounting"
+        },
+        {
+          "Passed": true,
+          "Name": "Master mute and volume applied to complete mix"
+        },
+        {
+          "Passed": true,
+          "Name": "Epoch transition retains future packet with no loss"
+        },
+        {
+          "Passed": true,
+          "Name": "Finite opening, loop commands and epoch reset are recorded"
+        },
+        {
+          "Passed": true,
+          "Name": "Device returns completed buffers with bounded packet queue"
+        }
+      ]
+    },
+    {
+      "Test": "AudioRealtimeContinuity",
+      "File": {
+        "Path": "local/recovery-regression-AudioRealtimeContinuity-r1.json",
+        "Sha256": "5CFDC927AF0FCE8704C14C8AA359975321623366F34CBE9677233E00D7791EE2"
+      },
+      "Checks": [
+        {
+          "Name": "One simulation packet starts actual qualified music output",
+          "Passed": true
+        },
+        {
+          "Name": "Active music advances while no additional simulation packet exists",
+          "Passed": true
+        },
+        {
+          "Name": "Shared pause stops realtime block production",
+          "Passed": true
+        },
+        {
+          "Name": "Music resumes from the retained cursor without a new game packet",
+          "Passed": true
+        },
+        {
+          "Name": "Explicit drain stops realtime fill at the requested packet",
+          "Passed": true
+        },
+        {
+          "Name": "Music advanced beyond the sole simulation block",
+          "Passed": true
+        },
+        {
+          "Name": "No active rebuffer occurred and drained device tail returned",
+          "Passed": true
+        },
+        {
+          "Name": "Worker and actual output device closed cleanly",
+          "Passed": true
+        }
+      ]
+    },
+    {
+      "Test": "Actual music/realtime save/load/new-game worker",
+      "File": {
+        "Path": "local/audio-recovery-save-worker-r1.json",
+        "Sha256": "79485B421715ECE00648F6BDEAD1DE15A4A741767C78BDF0E0814670B8B9E99E"
+      },
+      "Checks": [
+        {
+          "Name": "Empty slot saves and resumes without changing the command index",
+          "Passed": true
+        },
+        {
+          "Name": "Stale load selection shows a recoverable error",
+          "Passed": true
+        },
+        {
+          "Name": "Rejected load leaves current numeric game snapshot intact",
+          "Passed": true
+        },
+        {
+          "Name": "Stale save confirmation preserves the prior slot",
+          "Passed": true
+        },
+        {
+          "Name": "Requested episode installs generation two",
+          "Passed": true
+        },
+        {
+          "Name": "Slot load restores E1M1 at the monotonic input boundary",
+          "Passed": true
+        },
+        {
+          "Name": "Loaded numeric state equals the earlier saved state",
+          "Passed": true
+        },
+        {
+          "Name": "Load archives the exact selected bytes for replay",
+          "Passed": true
+        },
+        {
+          "Name": "Confirmed replacement creates a changed save",
+          "Passed": true
+        },
+        {
+          "Name": "Replacement retains exact previous save as backup",
+          "Passed": true
+        },
+        {
+          "Name": "Replay load restores the old state after slot overwrite",
+          "Passed": true
+        },
+        {
+          "Name": "Replay load does not modify the slot",
+          "Passed": true
+        },
+        {
+          "Name": "Audio device survives save/load/new-game and closes",
+          "Passed": true
+        },
+        {
+          "Name": "New game and both successful loads reset audio epochs",
+          "Passed": true
+        },
+        {
+          "Name": "Qualified music is consumed and closes across session operations",
+          "Passed": true
+        }
+      ]
+    }
+  ],
+  "RegressionChecks": 96,
+  "RetainedIntermediateHarnessFailure": {
+    "File": {
+      "Path": "local/audio-realtime-recovery-fixed-r1.json",
+      "Sha256": "1A92FB2AD5C66442C5180CA9E5570384E106F7A67B1E2A9D9ABE3F3C1C960BB4"
+    },
+    "Error": "Insufficient recovered packet ages.\nat <ScriptBlock>, C:\\projects\\pwshDoom\\scripts\\Test-AudioRealtimeRecovery.ps1: line 60",
+    "Meaning": "Initial worker already compensated 130/131 packet intervals. The old harness expected twenty submission-age samples; credited packets do not submit separate PCM. Test now measures all packet-processing ages and checks timing-credit/driver conservation, rather than treating absence of submission samples as recovery failure."
+  },
+  "Audit": {
+    "Path": "local/audit-audio-recovery-r1.py",
+    "Sha256": "CA77C2302881D67F289EC25776DB018A6B5C9B2181B30157022A8A1B3D4C8AC7"
+  },
+  "Meaning": "PowerShell realtime output accounts for already-played filler intervals and applies caught-up controls/events in order on the current output clock. Late sounds cannot be reconstructed at past times; successive emitter replacements may coalesce before the next output block. A pending final effect gets one fresh block before explicit drain. Epoch, volume reset and music Start/Stop clear credits. Packet-exact non-realtime audio remains verified by independent PCM tests. Baseline submission ages include mixing; final processing ages precede the next current-clock output block and exclude device/acoustic tail. Controlled results are not clean loaded-route, physical input, acoustic or full campaign qualification."
+}
