@@ -6132,4 +6132,6 @@ and Classic, Matrix and AnsiArt each match serial output across five views and
 internal parity evidence only, not human route completion, live pacing or
 external framebuffer qualification. The [package receipt](../results/preview6-package-validation-20261002.json)
 pins the archive and test reports. Release threshold was reached at35 commits
-after Preview.5; package verification is prepared for the Preview.6 release.
+after Preview.5; [Preview.6 is published](https://github.com/jasonulbright/pwshDoom/releases/tag/v0.1.0-preview.6).
+The downloaded release assets match the tested ZIP and checksum file; the
+[publication receipt](../results/preview6-publication-20261002.json) pins both.

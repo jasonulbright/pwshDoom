@@ -69,3 +69,12 @@ smokes (35 idle tics each) and all three five-view, 16-worker parity runs:
 records the hashes and limits. These package checks still do not qualify
 ordinary-input campaign completion, live pacing or original-framebuffer
 fidelity.
+
+## Publication
+
+Published as [v0.1.0-preview.6](https://github.com/jasonulbright/pwshDoom/releases/tag/v0.1.0-preview.6).
+The release ZIP and `SHA256SUMS.txt` were downloaded and their hashes verified;
+the [publication receipt](../results/preview6-publication-20261002.json) pins
+the public tag commit and both assets. The tag points to validation commit
+`b92cf51`; the packaged source is the clean renderer commit recorded in its
+manifest.

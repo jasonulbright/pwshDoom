@@ -12,6 +12,7 @@ Matrix and AnsiArt and integrates the tested PowerShell wall-band preselection
 trial. The bounded E1M2 median improvement does not establish full-host pacing.
 [Scope and evidence](docs/release-preview6.md); the full Ultimate Doom route and
 release gates remain open.
+Published package: [v0.1.0-preview.6](https://github.com/jasonulbright/pwshDoom/releases/tag/v0.1.0-preview.6).
 
 The extracted release package was checked against all569 manifest hashes and
 passed launch prerequisites, 36 map-start smokes, and serial/16-worker parity

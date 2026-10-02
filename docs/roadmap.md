@@ -675,3 +675,6 @@ records the archive checksum and retained test report hashes. This satisfies
 the next 35-commit community-preview cadence, not the full-release gates: the
 human Episode 1 route, live displayed-frame pacing, independent rendering
 fidelity, acoustic review and second-hardware test remain outstanding.
+The release is published as
+[v0.1.0-preview.6](https://github.com/jasonulbright/pwshDoom/releases/tag/v0.1.0-preview.6);
+its downloaded assets match the local validation package and checksum.
