@@ -553,5 +553,6 @@ headings in Classic, Matrix and color art, with 320,000 pixels per mode and
 zero differences; both character encoders pass 80 strip-byte checks. This is
 mode preservation against the internal serial reference only.
 [Worker-mode receipt](../results/mobj-action-render-modes-20261002.json).
-Evidence count reaches22 after Preview.5. Keep the all-style live timing retest
-pending the isolated display resource.
+The smoke and mode-parity receipts were committed together, at21 commits after
+Preview.5. This documentation correction brings the count to22. Keep the
+all-style live timing retest pending the isolated display resource; release at35.

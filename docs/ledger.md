@@ -5982,6 +5982,11 @@ each against the serial renderer with zero differences using sixteen uneven
 strips; Matrix and AnsiArt each add 80 exact character-strip checks. This is
 serial/worker and encoder parity, not original-game pixel equivalence. See the
 [mode comparison receipt](../results/mobj-action-render-modes-20261002.json).
-The source-pinned dispatch evidence now includes this run; the added evidence
-commit count reaches 22 after Preview.5. Native pacing and a complete human
-Episode 1 remain the next high-value gates.
+The source-pinned dispatch evidence now includes this run. The map-smoke and
+mode-parity receipts were combined in the same follow-up evidence commit, which
+is 21 after Preview.5. Native pacing and a complete human Episode 1 remain the
+next high-value gates.
+
+This documentation correction is commit22 after Preview.5. Resume the full
+native pacing matrix when an exclusive Terminal measurement session is available;
+the next public release remains due at35 commits.
