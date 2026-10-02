@@ -5,7 +5,7 @@ param([string]$Wad='C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\
 $ErrorActionPreference='Stop'
 if(Test-Path -LiteralPath $Output){throw 'Use a fresh result path.'}
 $sourceRoot=[IO.Path]::GetFullPath("$PSScriptRoot/..")
-$sources=@(foreach($name in 'src/FastRenderer.ps1','src/RenderAssets.ps1','src/GameProcesses.ps1','src/GameHost.ps1','src/SnapshotTransport.ps1','scripts/Invoke-GameRenderWorker.ps1','scripts/Test-SessionWorker.ps1'){
+$sources=@(foreach($name in 'src/FastRenderer.ps1','src/RenderAssets.ps1','src/GameProcesses.ps1','src/GameHost.ps1','src/SnapshotTransport.ps1','scripts/Invoke-GameRenderWorker.ps1','scripts/Invoke-RenderWorkerWithLogs.ps1','scripts/Test-SessionWorker.ps1'){
     @{Path=$name;Sha256=(Get-FileHash -LiteralPath "$sourceRoot/$name").Hash}
 })
 $bundle=& "$PSScriptRoot/Build-EngineBundle.ps1";. $bundle
@@ -44,7 +44,7 @@ try{
     Assert-WorkerImage $rows 988 -Menu
     Submit-GameRender $pool $columns -AutomapPixels -Tic 989 -ColumnOffset 11 -RowOffset 3 -FrameNumber 321;Wait-GameRender $pool -ReadPixels
     Assert-WorkerImage $rows 989 -Automap
-    $maps=if($ResourceReuse){@(@(1,2),@(2,1),@(3,1),@(1,2))}else{@(,@(1,2))}
+    if($ResourceReuse){$maps=@(@(1,2),@(2,1),@(3,1),@(1,2))}else{$maps=,@(1,2)}
     foreach($target in $maps){
     $oldHash=(Get-FileHash -LiteralPath $pool.Assets).Hash;$previous=$context
     $game.DeferedInitNew([GameSkill]::Medium,$target[0],$target[1]);$null=$game.Update($cmds)

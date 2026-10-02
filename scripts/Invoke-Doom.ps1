@@ -66,7 +66,7 @@ function Receive-DoomLoadingFrame {
     param([switch]$Wait)
     $job=Complete-DoomTerminalFrame $loadingOutputContext $stdout -Wait:$Wait
     if($null -ne $job){$loadingScreenStats.Add(@{StartQpc=$job.StartQpc;WriteStartQpc=$job.WriteStartQpc;DispatchQpc=$job.DispatchQpc;EndQpc=$job.EndQpc;Bytes=$job.Bytes;Frame=$job.Frame;Columns=$job.Columns;Rows=$job.Rows;Status=$job.Status;
-        LastIncompleteQpc=$job.LastIncompleteQpc;FirstCompletedObservationQpc=$job.FirstCompletedObservationQpc;CompletionProbes=$job.CompletionProbes;PendingProbes=$job.PendingProbes})}
+        LastIncompleteQpc=$job.LastIncompleteQpc;FirstCompletedObservationQpc=$job.FirstCompletedObservationQpc;CompletionProbes=$job.CompletionProbes;PendingProbes=$job.PendingProbes;ThreadPoolBeforeWrite=$job.ThreadPoolBeforeWrite})}
 }
 $simulation=$null;$pool=$null;$consoleState=$null;$terminalActive=$false;$timerRequested=$false;$failure=$null
 $oldEncoding=[Console]::OutputEncoding;$esc=[char]27;$clock=[Diagnostics.Stopwatch]::new()
@@ -217,7 +217,9 @@ try {
                 if(-not $Headless -and $null -eq $loadingOutputContext.Pending -and $wallNow -ge $loadingNextPresentation){
                     $columns=[Math]::Max(1,[Console]::WindowWidth);$rows=[Math]::Max(1,[Console]::WindowHeight);$key="$columns,$rows"
                     $bytes=Get-DoomLoadingOutput $loadingScreen $columns $rows $loadingFrameNumber -Style $Style -Clear:($key -ne $loadingScreenKey)
+                    $threadPoolBeforeWrite=Get-DoomOutputThreadPoolState
                     $job=Start-DoomTerminalFrame $loadingOutputContext $stdout @(@{Bytes=$bytes}) $frameStart $frameEnd
+                    $job.ThreadPoolBeforeWrite=$threadPoolBeforeWrite
                     $job.Frame=$loadingFrameNumber;$job.Columns=$columns;$job.Rows=$rows;$job.Status=$status
                     $loadingFrameNumber++;$loadingScreenKey=$key;$loadingNextPresentation=$wallNow+100
                 }

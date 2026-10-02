@@ -3,6 +3,13 @@
 function New-DoomTerminalOutputContext {
     return @{Buffer=[byte[]]::new(0);Frames=0L;Bytes=0L;Writes=0L;Pending=$null}
 }
+function Get-DoomOutputThreadPoolState {
+    [int]$available=0;[int]$availableIO=0;[int]$maximum=0;[int]$maximumIO=0;[int]$minimum=0;[int]$minimumIO=0
+    [Threading.ThreadPool]::GetAvailableThreads([ref]$available,[ref]$availableIO)
+    [Threading.ThreadPool]::GetMaxThreads([ref]$maximum,[ref]$maximumIO)
+    [Threading.ThreadPool]::GetMinThreads([ref]$minimum,[ref]$minimumIO)
+    return @{MinWorkerThreads=$minimum;WorkerThreads=[Threading.ThreadPool]::ThreadCount;BusyWorkerThreads=$maximum-$available;PendingWorkItems=[Threading.ThreadPool]::PendingWorkItemCount}
+}
 function Copy-DoomTerminalFrame {
     param($Context,$Results,[byte[]]$Start,[byte[]]$End,[byte[]]$Clear,[byte[]]$Status)
     if($null -ne $Context.Pending){throw 'A terminal write already owns the frame buffer.'}

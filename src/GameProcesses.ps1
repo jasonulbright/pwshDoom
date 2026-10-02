@@ -26,7 +26,8 @@ function New-GameRenderPool {
             Write-GameRenderAssets $Context $palette $pool.Assets
         }
         for($i=0;$i -lt $Workers;$i++) {
-            $name='Local\pwshDoom-game-'+[guid]::NewGuid().ToString('N')
+            $workerId=[guid]::NewGuid().ToString('N');$name='Local\pwshDoom-game-'+$workerId
+            $logPrefix=Join-Path "$root/local" ('render-worker-'+$workerId)
             $map=[IO.MemoryMappedFiles.MemoryMappedFile]::CreateNew($name,4194304);$view=$map.CreateViewAccessor()
             $ready=[Threading.EventWaitHandle]::new($false,[Threading.EventResetMode]::ManualReset,$name+'-ready')
             $go=[Threading.EventWaitHandle]::new($false,[Threading.EventResetMode]::AutoReset,$name+'-go')
@@ -34,11 +35,10 @@ function New-GameRenderPool {
             $first=[int][Math]::Floor($i*320.0/$Workers);$end=[int][Math]::Floor(($i+1)*320.0/$Workers)
             if($Style -ne 'Classic'){$first=2*[int][Math]::Floor($i*160.0/$Workers);$end=2*[int][Math]::Floor(($i+1)*160.0/$Workers)}
             $info=[Diagnostics.ProcessStartInfo]::new((Get-Process -Id $PID).Path);$info.UseShellExecute=$false;$info.CreateNoWindow=$true
-            $info.RedirectStandardOutput=$true;$info.RedirectStandardError=$true
-            foreach($arg in @('-NoProfile','-File',"$root/scripts/Invoke-GameRenderWorker.ps1",'-Assets',$pool.Assets,'-OwnerPid',"$PID",'-Channel',$name,'-FirstColumn',"$first",'-EndColumn',"$end",'-WorkerIndex',"$i",'-Style',$Style,'-GlyphSet',$GlyphSet,'-AnsiEncoding',$AnsiEncoding)){$info.ArgumentList.Add($arg)}
+            foreach($arg in @('-NoProfile','-File',"$root/scripts/Invoke-RenderWorkerWithLogs.ps1",'-Assets',$pool.Assets,'-OwnerPid',"$PID",'-Channel',$name,'-FirstColumn',"$first",'-EndColumn',"$end",'-WorkerIndex',"$i",'-Style',$Style,'-GlyphSet',$GlyphSet,'-AnsiEncoding',$AnsiEncoding,'-LogPrefix',$logPrefix)){$info.ArgumentList.Add($arg)}
             $process=[Diagnostics.Process]::Start($info)
             $pool.Workers.Add(@{Map=$map;View=$view;Ready=$ready;Go=$go;Done=$done;Process=$process;First=$first;End=$end;Index=$i;
-                Stdout=$process.StandardOutput.ReadToEndAsync();Stderr=$process.StandardError.ReadToEndAsync()})
+                StdoutPath=$logPrefix+'-stdout.txt';StderrPath=$logPrefix+'-stderr.txt';ErrorObserved=$false})
         }
         foreach($worker in $pool.Workers){if(-not $worker.Ready.WaitOne(30000)){throw 'Game renderer startup timed out.'};Get-GameWorkerError $worker}
         return $pool
@@ -47,10 +47,15 @@ function New-GameRenderPool {
 function Get-GameWorkerError {
     param($Worker)
     if($Worker.View.ReadInt32(12) -ne 0) {
+        $Worker.ErrorObserved=$true
         $bytes=[byte[]]::new($Worker.View.ReadInt32(8));[void]$Worker.View.ReadArray(1114112L,$bytes,0,$bytes.Length)
         throw [Text.Encoding]::UTF8.GetString($bytes)
     }
-    if($Worker.Process.HasExited){throw "Game worker exited: $($Worker.Stderr.Result)"}
+    if($Worker.Process.HasExited){
+        $Worker.ErrorObserved=$true
+        $detail=if(Test-Path -LiteralPath $Worker.StderrPath){[IO.File]::ReadAllText($Worker.StderrPath)}else{'No worker error log was created.'}
+        throw "Game worker exited: $detail"
+    }
 }
 function Test-GameRenderCompleted {
     param($Pool)
@@ -121,6 +126,10 @@ function Close-GameRenderPool {
     foreach($worker in $Pool.Workers){$worker.View.Write(0,1);[void]$worker.Go.Set()}
     foreach($worker in $Pool.Workers) {
         if(-not $worker.Process.WaitForExit(5000)){$worker.Process.Kill();$worker.Process.WaitForExit()}
+        $keepLogs=$worker.ErrorObserved -or $worker.View.ReadInt32(12) -ne 0 -or $worker.Process.ExitCode -ne 0
+        if(-not $keepLogs){
+            foreach($path in $worker.StdoutPath,$worker.StderrPath){if((Test-Path -LiteralPath $path) -and (Get-Item -LiteralPath $path).Length -eq 0){Remove-Item -LiteralPath $path}}
+        }
         $worker.Process.Dispose();$worker.View.Dispose();$worker.Map.Dispose();$worker.Go.Dispose();$worker.Done.Dispose();$worker.Ready.Dispose()
     }
     if($Pool.OwnAssets -and (Test-Path -LiteralPath $Pool.Assets)){Remove-Item -LiteralPath $Pool.Assets}
