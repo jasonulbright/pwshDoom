@@ -310,3 +310,12 @@ initial-stall diagnosis, original-executable moving-world parity, physical
 input/resize/acoustics and remaining campaigns. Human E1 completion remains
 pending and does not prevent that useful work. Public release count reaches24
 with this preparation; publish a new release at35 or more, as requested.
+
+R20 extracted validation now passes: 557 manifest hashes and exact archive
+contents, final recorded source matching, 36-map/eleven-track preflight under
+PowerShell7.6.6, output/resource/menu/save/recovery checks, all-style actual
+sixteen-worker reload/fault/image oracles and an eight-second actual-device
+startup with every submitted frame returned. The [package receipt](../results/r20-playtest-package-validation-20261002.json)
+and [whole-E1 guide](episode1-playtest.md) identify the checked archive/extraction.
+Public release count is25 after this validation commit; Preview.4 remains the
+latest public release and the35-commit rule remains active.

@@ -37,3 +37,23 @@ Preview.4 remains the public release. Local packaging does not reset the
 35-commit public release count. Continue the whole human E1 secret-map/finale
 route, remaining campaigns, independent moving-world fidelity, broader pacing
 and physical/acoustic/second-hardware qualification in the [roadmap](roadmap.md).
+
+## Extracted validation completed
+
+The [package receipt](../results/r20-playtest-package-validation-20261002.json)
+pins source `c4175ef6f628a0639efe71a482f5c668d924e0af`, all 557 verified payloads
+and the 1,723,727-byte ZIP. SHA-256:
+`45AED018D4B6679066D31906345575C9928F110892E2AA2B05DAE5D3C3D8FC82`.
+Only the excluded untracked research PDF accounts for the manifest dirty flag.
+Every final Classic recording source matches the extracted package.
+
+Official PowerShell 7.6.6 preflight recognizes all 36 maps and eleven Episode 1
+tracks. Extracted checks pass 110 terminal output/ownership/pipe cases,
+18 resource boundaries, 125 menu assertions with 46 screens, 15 actual
+music-enabled realtime save/load/new-game assertions, and the recovery/final
+effect drain test. Each style's sixteen-worker nonblocking reload/fault case
+compares 448,000 worker pixels, 112 strips and 256,000 fresh-resource oracle
+pixels across four maps. The eight-second actual-device startup consumes 279
+tics and returns every submitted audio frame before clean closure. These
+checks qualify this development handoff's stated behaviors; broader gates
+remain open.

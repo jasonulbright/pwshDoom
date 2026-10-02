@@ -1,0 +1,2972 @@
+{
+  "FinishedUtc": "2026-10-02T02:39:07.635486+00:00",
+  "Error": null,
+  "Version": "0.1.0-dev.20261002.r20",
+  "PackageSourceCommit": "c4175ef6f628a0639efe71a482f5c668d924e0af",
+  "Zip": {
+    "Path": "local/episode1-r20-package/pwshDoom-0.1.0-dev.20261002.r20.zip",
+    "Sha256": "45AED018D4B6679066D31906345575C9928F110892E2AA2B05DAE5D3C3D8FC82",
+    "Bytes": 1723727
+  },
+  "Manifest": {
+    "Path": "local/episode1-r20-extracted/pwshDoom-0.1.0-dev.20261002.r20/package-manifest.json",
+    "Sha256": "54EDCDD9E5D08624D3EBA7528AF0C57DE17472FAC32E68A047D8005D90220C65"
+  },
+  "PayloadHashesVerified": 557,
+  "WorkingTreeDirty": true,
+  "DirtyExplanation": "Only excluded untracked docs/gebbdoom.pdf was present; tracked package inputs were committed at the package source commit.",
+  "ExcludedExtensions": [
+    ".dll",
+    ".exe",
+    ".mp4",
+    ".pdf",
+    ".sf2",
+    ".wad",
+    ".wav"
+  ],
+  "LiveSourceMatches": [
+    {
+      "Style": "Classic",
+      "SourceFilesMatched": 36,
+      "Capture": {
+        "Path": "local/recordings/audio-recovery-route-Classic-r1-recording.json",
+        "Sha256": "7EE4FB2E8840BF11191D160410D8A9E6C6C11152D15D43064AE9518B9ED01391"
+      }
+    }
+  ],
+  "Preflight": {
+    "Path": "local/r20-package-preflight-r1.json",
+    "Sha256": "F1C5D6506CF4BCE01D9C30DD3AC1AA7052FD13FE0F099BE5C6B840A4E4241A67",
+    "CatalogTracks": 11,
+    "Maps": 36,
+    "Runtime": "7.6.6"
+  },
+  "ExtractedTests": [
+    {
+      "Test": "Test-TerminalOutput",
+      "Checks": 110,
+      "Report": {
+        "Path": "local/r20-Test-TerminalOutput-r1.json",
+        "Sha256": "FCF2D14FB906B6A6BB6C27C3270FA4CC39CC0C9D6D12F132021022CFA1304578"
+      }
+    },
+    {
+      "Test": "Test-RenderAssetResourceReuse",
+      "Checks": 18,
+      "Report": {
+        "Path": "local/r20-Test-RenderAssetResourceReuse-r1.json",
+        "Sha256": "95B66EBE67DBD072A37285F8CDF519AE07525D6CA2C4887C0252F72C3AA47D92"
+      }
+    },
+    {
+      "Test": "Test-SessionMenu",
+      "Checks": 125,
+      "Report": {
+        "Path": "local/r20-Test-SessionMenu-r1.json",
+        "Sha256": "D218F05708A6681EC7FEF67B285334F48B7B500182FDEBA518C882DE43D8997E"
+      },
+      "ScreenFixtures": 46
+    },
+    {
+      "Test": "save-worker",
+      "Checks": 15,
+      "Report": {
+        "Path": "local/r20-save-worker-r1.json",
+        "Sha256": "22F5122690DD04679DAC418499C80FB424BED96F8B28627BEDEC1346855E5D77"
+      },
+      "NewGameEpisode": 1,
+      "AudioEpochResets": 3,
+      "Meaning": "Episode 1 new game and saved-state restores with eleven-track music; cross-episode skies are covered by separate actual render-worker checks."
+    },
+    {
+      "Test": "SessionWorker",
+      "Style": "Classic",
+      "Checks": 20,
+      "WorkerPixelsCompared": 448000,
+      "FreshResourcePixelsCompared": 256000,
+      "Report": {
+        "Path": "local/r20-session-worker-Classic-r1.json",
+        "Sha256": "1A150585A620BDF500E4246BDDA038F039BD0E0AF3A179B2C2210FC9F015C18D"
+      }
+    },
+    {
+      "Test": "SessionWorker",
+      "Style": "Matrix",
+      "Checks": 20,
+      "WorkerPixelsCompared": 448000,
+      "FreshResourcePixelsCompared": 256000,
+      "Report": {
+        "Path": "local/r20-session-worker-Matrix-r1.json",
+        "Sha256": "2C3474B203F55DFBA9B6F339FC83C10ADAE7C544C30733D1E42AB97967F67198"
+      }
+    },
+    {
+      "Test": "SessionWorker",
+      "Style": "AnsiArt",
+      "Checks": 20,
+      "WorkerPixelsCompared": 448000,
+      "FreshResourcePixelsCompared": 256000,
+      "Report": {
+        "Path": "local/r20-session-worker-AnsiArt-r1.json",
+        "Sha256": "4330924BAB221884E0C0469F944F98CDC6AD7F200422F565E2AC67440AD12FDB"
+      }
+    },
+    {
+      "Test": "Realtime audio recovery/final effect drain",
+      "Report": {
+        "Path": "local/r20-audio-recovery-r1.json",
+        "Sha256": "87350D22E4A18651955A1278BB0E0B3DCD030ECADAB40931FB7F27BE25FCA842"
+      },
+      "RecoveredPacketAge": {
+        "MedianMs": 13.89055,
+        "Count": 20,
+        "MaximumMs": 29.5129
+      },
+      "Audio": {
+        "MaxVoices": 2,
+        "Music": {
+          "Closed": true,
+          "Reports": {
+            "D_E1M1": "1D5A9D6D16E8CDCA74646D6AEF009CDB42EB59B87941B0EFE648F9D3A98C96CF"
+          },
+          "Transitions": [
+            {
+              "Track": "D_E1M1",
+              "Kind": "Start",
+              "AfterFrames": 0,
+              "Loop": true
+            }
+          ],
+          "Gain": 0.2,
+          "Frames": 168840,
+          "Selected": "D_E1M1"
+        },
+        "Error": null,
+        "EpochResets": 0,
+        "CompensatedPacketAgeMs": [
+          14.7913,
+          14.0236,
+          13.3969,
+          16.5294,
+          6.4435,
+          18.2204,
+          8.3728,
+          14.3258,
+          13.4243,
+          13.3039,
+          12.8133,
+          18.8181,
+          18.7364,
+          8.1938,
+          13.9625,
+          13.924,
+          13.4894,
+          12.9382,
+          18.8951,
+          15.3931,
+          8.3721,
+          13.6824,
+          13.7058,
+          14.3015,
+          18.3239,
+          18.9188,
+          18.5163,
+          8.2269,
+          14.2007,
+          4.2881,
+          13.2887,
+          6.8633,
+          6.3933,
+          21.4266,
+          8.5122,
+          32.5535,
+          33.9001,
+          34.0673,
+          34.099,
+          34.1202,
+          34.142,
+          34.165,
+          34.1954,
+          34.2168,
+          34.2395,
+          34.2611,
+          34.2833,
+          34.306,
+          34.3289,
+          34.3494,
+          34.3713,
+          34.3786,
+          34.3995,
+          34.4216,
+          34.4343,
+          34.4547,
+          34.4734,
+          34.4937,
+          34.5151,
+          34.5361,
+          7.8055,
+          9.5515,
+          0.1524,
+          14.2034,
+          13.9544,
+          13.3452,
+          15.9293,
+          15.5862,
+          9.5156,
+          29.1461,
+          14.111,
+          13.9235,
+          13.2719,
+          16.8264,
+          12.2092,
+          9.7498,
+          4.908,
+          13.6062,
+          1.5348,
+          13.4177,
+          15.8665,
+          13.2431,
+          9.8475,
+          29.6532,
+          14.2245,
+          1.6959,
+          13.1928,
+          15.466,
+          15.2748,
+          9.8091,
+          28.6375,
+          14.1732,
+          13.8028,
+          13.2258,
+          18.6028,
+          18.5036,
+          9.72,
+          13.8919,
+          13.9953,
+          1.2859,
+          13.38,
+          15.5718,
+          15.7811,
+          9.7627,
+          28.9147,
+          13.8364,
+          13.7482,
+          7.6186,
+          16.3891,
+          15.2029,
+          8.7728,
+          2.1086,
+          14.0532,
+          13.7296,
+          13.2701,
+          5.7365,
+          16.5444,
+          15.2617,
+          29.5129,
+          14.1403,
+          13.9043,
+          13.3157,
+          12.9291,
+          15.7335,
+          14.0249,
+          29.2835,
+          7.9958,
+          13.8768,
+          13.1831,
+          15.7359
+        ],
+        "PacketAgeAtProcessingMs": [
+          31.1718,
+          14.7913,
+          14.0236,
+          13.3969,
+          16.5294,
+          6.4435,
+          18.2204,
+          8.3728,
+          14.3258,
+          13.4243,
+          13.3039,
+          12.8133,
+          18.8181,
+          18.7364,
+          8.1938,
+          13.9625,
+          13.924,
+          13.4894,
+          12.9382,
+          18.8951,
+          15.3931,
+          8.3721,
+          13.6824,
+          13.7058,
+          14.3015,
+          18.3239,
+          18.9188,
+          18.5163,
+          8.2269,
+          14.2007,
+          4.2881,
+          13.2887,
+          6.8633,
+          6.3933,
+          21.4266,
+          8.5122,
+          32.5535,
+          33.9001,
+          34.0673,
+          34.099,
+          34.1202,
+          34.142,
+          34.165,
+          34.1954,
+          34.2168,
+          34.2395,
+          34.2611,
+          34.2833,
+          34.306,
+          34.3289,
+          34.3494,
+          34.3713,
+          34.3786,
+          34.3995,
+          34.4216,
+          34.4343,
+          34.4547,
+          34.4734,
+          34.4937,
+          34.5151,
+          34.5361,
+          7.8055,
+          9.5515,
+          0.1524,
+          14.2034,
+          13.9544,
+          13.3452,
+          15.9293,
+          15.5862,
+          9.5156,
+          29.1461,
+          14.111,
+          13.9235,
+          13.2719,
+          16.8264,
+          12.2092,
+          9.7498,
+          4.908,
+          13.6062,
+          1.5348,
+          13.4177,
+          15.8665,
+          13.2431,
+          9.8475,
+          29.6532,
+          14.2245,
+          1.6959,
+          13.1928,
+          15.466,
+          15.2748,
+          9.8091,
+          28.6375,
+          14.1732,
+          13.8028,
+          13.2258,
+          18.6028,
+          18.5036,
+          9.72,
+          13.8919,
+          13.9953,
+          1.2859,
+          13.38,
+          15.5718,
+          15.7811,
+          9.7627,
+          28.9147,
+          13.8364,
+          13.7482,
+          7.6186,
+          16.3891,
+          15.2029,
+          8.7728,
+          2.1086,
+          14.0532,
+          13.7296,
+          13.2701,
+          5.7365,
+          16.5444,
+          15.2617,
+          29.5129,
+          14.1403,
+          13.9043,
+          13.3157,
+          12.9291,
+          15.7335,
+          14.0249,
+          29.2835,
+          7.9958,
+          13.8768,
+          13.1831,
+          15.7359
+        ],
+        "MaxPacketQueue": 25,
+        "RebufferSinglePacketDeadlineMs": 100,
+        "LastSequence": 130,
+        "DeviceClosed": true,
+        "Meaning": "PowerShell mixes simulation packets. Interactive playback continues active music/effects through producer gaps. Caught-up packets apply every control/event in order without repeating intervals already covered by filler; new sounds start on the current output clock, and past audible output is not reconstructed. Headless/test playback remains packet-exact. Submission ages exclude compensated packets; processing ages include every consumed packet. Neither measures audible output. Queue starvation is polling, not hardware telemetry. Normal unpaused exit drains submitted device buffers for up to 250 ms; paused/error exits cancel the remaining tail and report its upper bound.",
+        "RebufferResumes": [],
+        "ClippedSamples": 0,
+        "PendingEffectOutput": false,
+        "PcmSha256": "389415CE4710DB6DB6DA2D9B025820D3C0AF66194B7D617A5A2BA7E0EE9AC66D",
+        "PendingPacket": null,
+        "FinalVolume": 0.0,
+        "MaximumTimelineCredits": 27,
+        "ShutdownDrain": {
+          "RemainingFrames": 0,
+          "Completed": true,
+          "WaitMilliseconds": 0.0,
+          "CancelledFramesUpperBound": 0,
+          "CompletedFramesDuringWait": 0,
+          "PendingFramesAtStop": 0,
+          "SkippedReason": "NoQueuedAudio",
+          "Attempted": false,
+          "TimedOut": false
+        },
+        "PendingTimelineCredits": 3,
+        "UnconsumedPackets": 0,
+        "WallSeconds": 5.1492392,
+        "MutedPackets": 134,
+        "FinalVoices": [
+          {
+            "Position": 89460.0,
+            "Step": 1.0,
+            "Source": 2
+          },
+          {
+            "Position": 1260.0,
+            "Step": 1.0,
+            "Source": 3
+          }
+        ],
+        "RebufferCount": 0,
+        "StalePacketsDiscarded": 0,
+        "PauseTransitions": 0,
+        "QueueStarvationObservations": [],
+        "MixedBlocks": 134,
+        "ReturnedCompletedFrames": 168840,
+        "LoadingDrains": [
+          {
+            "ThroughSequence": 130,
+            "Qpc": 1816071639941,
+            "CompletedFrames": 168840
+          }
+        ],
+        "DrainEffectBlocks": 1,
+        "VolumeChanges": [
+          {
+            "Volume": 0.0,
+            "WallMs": 1169.7346,
+            "CancelledFramesUpperBound": 0,
+            "AfterPacket": -1
+          }
+        ],
+        "MixSamplesMs": [
+          63.13,
+          1.6876,
+          0.7621,
+          0.6592,
+          0.8118,
+          0.7498,
+          0.732,
+          0.7497,
+          3.6708,
+          0.7762,
+          0.9122,
+          0.7252,
+          0.7035,
+          0.646,
+          0.7603,
+          0.7451,
+          0.7753,
+          0.8103,
+          0.7914,
+          0.8003,
+          1.1498,
+          0.7325,
+          0.7906,
+          0.7912,
+          0.7625,
+          0.8172,
+          0.8547,
+          0.7934,
+          0.7659,
+          0.7785,
+          1.0506,
+          0.9789,
+          1.0015,
+          1.2236,
+          1.3358,
+          2.3578,
+          0.8833,
+          0.8652,
+          0.8588,
+          0.8833,
+          1.1243,
+          0.8586,
+          0.8545,
+          0.8287,
+          0.9264,
+          1.6032,
+          0.9181,
+          1.0446,
+          1.0362,
+          1.0627,
+          0.9844,
+          1.0109,
+          1.0608,
+          1.0629,
+          1.0595,
+          1.9979,
+          1.0224,
+          1.0094,
+          1.0093,
+          1.0023,
+          1.279,
+          1.0045,
+          1.028,
+          12.0359,
+          1.5493,
+          1.5194,
+          1.5674,
+          1.5105,
+          1.4867,
+          2.7124,
+          1.4942,
+          1.5138,
+          1.4796,
+          1.5686,
+          1.4863,
+          2.638,
+          1.5048,
+          1.5198,
+          1.4964,
+          1.4831,
+          1.9106,
+          2.564,
+          1.47,
+          1.4035,
+          1.421,
+          1.4705,
+          1.4078,
+          1.4286,
+          1.4415,
+          1.4242,
+          1.377,
+          1.2437,
+          1.271,
+          1.1901,
+          2.3903,
+          0.9656,
+          0.9246,
+          0.8875,
+          0.9062,
+          0.9378,
+          2.4816,
+          0.8567,
+          0.895,
+          0.8527,
+          0.8546,
+          0.8499,
+          1.9471,
+          0.8248,
+          0.8758,
+          0.8146,
+          0.8273,
+          0.86,
+          2.1271,
+          0.7744,
+          0.7278,
+          0.7214,
+          0.7444,
+          0.7244,
+          1.755,
+          0.6451,
+          0.8662,
+          0.6349,
+          0.6361,
+          0.6515,
+          1.7778,
+          0.6209,
+          0.6152,
+          0.6176,
+          0.6443,
+          0.6339,
+          1.7307,
+          0.6209,
+          0.6126,
+          0.7917
+        ],
+        "GeneratedRealtimeBlocks": 133,
+        "CompensatedRealtimePackets": 130,
+        "SubmittedFrames": 168840,
+        "CleanupError": null,
+        "CompensatedControlEvents": 4,
+        "CancelledQueuedFramesUpperBound": 0,
+        "Packets": 131,
+        "PacketAgeAtSubmissionMs": [
+          105.7516
+        ],
+        "ClearedTimelineCredits": 0,
+        "Realtime": true
+      }
+    }
+  ],
+  "Runtime": {
+    "Path": "local/r20-package-headless-r1.json",
+    "Sha256": "E1ED73FB54B1FF6AD9CF27ED27450B1DA13D593B36F3D24E6B1FB0FDF1A39C16",
+    "Tics": 279,
+    "HeadlessUpdates": 340,
+    "SubmittedAudioFrames": 361620,
+    "ReturnedAudioFrames": 361620,
+    "DeviceClosed": true,
+    "QueueStarvationObservations": [],
+    "RebufferResumes": [],
+    "ShutdownDrain": {
+      "CancelledFramesUpperBound": 0,
+      "WaitMilliseconds": 86.6777,
+      "RemainingFrames": 0,
+      "PendingFramesAtStop": 5040,
+      "TimedOut": false,
+      "CompletedFramesDuringWait": 5040,
+      "SkippedReason": null,
+      "Attempted": true,
+      "Completed": true
+    }
+  },
+  "Checks": [
+    {
+      "Name": "Correct version",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: CHANGELOG.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/ansi-256-color.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/ansi-color-state.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/article-draft.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/audio-publication.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/audio-recovery.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/audio-shutdown.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/audio.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/audiovisual-recording.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/automap-discovery-performance.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/automap.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/boss-progression.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/campaign-e1m2.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/campaign-e1m3.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/campaign-e1m4-investigation.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/campaign-e1m4.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/campaign-e1m5-investigation.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/campaign-matrix.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/campaign-music.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/campaign-routing.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/campaign-session.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/candidate-r19.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/candidate-r20.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/capture-shutdown.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/character-modes.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/command-admission.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/development-guide.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/direct-snapshots.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/engine-defaults.json",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/episode1-playtest.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/existing-implementations.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/experiment-protocol.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/figures/display-mode-tradeoffs.svg",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/figures/pacing-boundaries.svg",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/findings-2026-09-10.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/fuzz-performance.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/implementation.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/input-recording.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/intermission-background-warmup.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/ledger.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/loading-boundary.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/loading-screen.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/menus.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/mobj-movement-gates.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/music-bank-provenance.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/music-cache.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/music-integration.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/music-loops.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/music-preparation.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/music-synthesis.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/music-workers.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/music.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/numeric-visibility.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/palette-presentation.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/performance.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/player-notices.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/presentmon-validation.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/preview.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/process-audio-capture.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/recordings.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/reference-audit.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/release-performance-protocol.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/release-preview4.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/rendering-fidelity.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/reproduce.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/roadmap.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/save-load.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/sector-damage.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/settings.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/simulation-profiling.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/sixty-fps-investigation.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/snapshot-fractions.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/stair-building.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/terminal-architecture.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/terminal-output.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/vanilla-demo-investigation.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: docs/viewport.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: LICENSE",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: Play.cmd",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: Play.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: README.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Analyze-AudioPublication.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Analyze-AudioRouteTiming.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Analyze-CharacterPresentation.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Analyze-PresentMonGame.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Build-CaptureFfmpeg.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Build-EngineBundle.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Build-MusicCache.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Build-PreviewPackage.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Compare-ActorOcclusion.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Compare-MovingActorReference.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Compare-MovingSectorHeightSweep.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Compare-MusicPcm.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Compare-RecordedRoutePacing.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Compare-RendererReference.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Compare-TerminalOutputTrials.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Compare-WeaponPatchSampling.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Compare-WeaponPatchVerticalSampling.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Compare-WorldSpriteVerticalSampling.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Enable-MusicProfiler.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/experiments/Add-DiscoveryAngleCache.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/experiments/Add-IndexedDiscoveryCache.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Export-CampaignMap.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Export-DoomRecording.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Export-MusicRouteClip.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Export-PreviewClips.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Find-CampaignPath.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/fixtures/DivLineSideReference.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/fixtures/FuzzReference.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/FrameCodec.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Get-TerminalProbe.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Inspect-CampaignFailure.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Inspect-WadDemo.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Invoke-AudioWorker.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Invoke-CaptureTestTone.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Invoke-CaptureTestWindow.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Invoke-Doom.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Invoke-DoomSingleHost.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Invoke-GameRenderWorker.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Invoke-LiveTerminalBench.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Invoke-MusicGroupWorker.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Invoke-RenderWorkerWithLogs.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Invoke-SceneWorker.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Invoke-SimulationWorker.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Invoke-TerminalBench.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Invoke-TerminalOutputTrial.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Measure-AnsiOptimization.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Measure-AnsiStripReuse.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Measure-AudioMixer.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Measure-AutomapDiscovery.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Measure-CameraTransforms.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Measure-DoomScene.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Measure-Encoding.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Measure-EngineBaseline.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Measure-FastRendererPhases.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Measure-FuzzRenderer.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Measure-LiveProcessScene.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Measure-MapRenderAssets.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Measure-MusicMathDispatch.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Measure-MusicNumericPrimitives.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Measure-MusicOscillator.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Measure-MusicStateAccess.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Measure-ParallelScene.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Measure-PixelFloor.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Measure-PresentMonGame.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Measure-ProcessScene.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Measure-RendererPair.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Measure-RenderWorkerMaskImpact.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Measure-SessionCadence.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Measure-SimulationStages.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Measure-SixelOptimization.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Measure-SnapshotTransport.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Merge-DoomCaptureAudio.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/New-FuzzRecordingFixture.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/New-PaletteRecordingFixture.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/New-ReplayPlan.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/ParallelScene.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Prepare-DoomMusic.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/PresentMonApi.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/ProcessScene.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Qualify-CampaignRoute.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Qualify-MusicLoop.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Qualify-MusicOneShot.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Record-DoomReplay.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Record-ProcessAudio.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Remove-BenchmarkProfile.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Remove-GameProfile.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Render-AudioReplay.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Render-MusicGroups.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Render-MusicReference.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Render-MusicScore.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Review-PaletteRecording.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/RunspaceGameExperiment.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Save-FramePreview.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Save-StylePreview.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Start-BenchmarkWindow.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Summarize-CampaignCapture.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-AnsiColorState.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-AnsiStrips.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-AudioBackpressure.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-AudioEvidence.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-AudioIntegration.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-AudioLoadingBoundary.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-AudioMixer.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-AudioPackets.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-AudioRealtimeContinuity.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-AudioRealtimeRecovery.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-AudioRebuffer.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-AudioRunspace.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-AudiovisualEvidence.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-AudioVolume.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-AutomapFoundation.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-AutomapSession.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-AutomapWorker.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-BossProgression.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-CampaignDriverParity.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-CampaignRecording.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-CampaignRoute.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-CampaignSmoke.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-CampaignTransitions.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-CaptureShutdown.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-CaptureTimeline.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-CharacterCodec.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-CheckpointSnapshotSchema.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-Codecs.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-CommandAdmission.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-CommandAdmissionEvidence.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-ConsoleInput.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-DemoReader.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-DifficultyBehavior.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-DirectSnapshots.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-DiscoveryAngleCache.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-DryMusicEvidence.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-E1M1Route.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-FastRenderer.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-FuzzRecording.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-FuzzRendering.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-GameActions.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-GameLifecycle.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-GameSnapshotFractions.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-HudReference.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-IndexedDiscoveryMaps.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-InheritedSave.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-InputReplay.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-IntermissionBackgroundWarmup.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-LevelLoadBoundary.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-LineFlags.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-LoadingScreen.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-ManagedDoomMathParity.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-MaskedWallOrder.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-MenuInput.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-MobjMovementGates.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-MusicAudioWorker.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-MusicBankInventory.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-MusicCache.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-MusicCacheEvidence.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-MusicCaptureEvidence.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-MusicEffectMix.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-MusicEvents.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-MusicFoundationEvidence.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-MusicGroupEvidence.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-MusicGroups.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-MusicIntegrationEvidence.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-MusicInventory.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-MusicLoopEvidence.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-MusicLoopReader.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-MusicLoopState.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-MusicNoteCoverage.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-MusicOptimizationEvidence.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-MusicOscillator.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-MusicPacingEvidence.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-MusicPlayback.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-MusicPreparation.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-MusicRouteEvidence.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-MusicSynth.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-MusicTrackQualification.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-MusicVoiceEvidence.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-MusScore.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-NumericDiscovery.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-NumericDivLineSide.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-PalettePresentation.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-PaletteSession.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-PlayerMessages.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-ProcessAudioCapture.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-RecordedHumanCrashReplay.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-RenderAssetResourceReuse.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-RenderLighting.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-RenderPartitions.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-SaveMenus.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-SaveProcessContinuation.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-SaveSessionEdges.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-SaveSpecials.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-SaveState.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-SaveValidation.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-SaveWorker.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-SawAttack.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-SectorDamage.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-SessionMenu.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-SessionProgression.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-SessionScreens.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-SessionWorker.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-SettingsHost.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-SixelRoundTrip.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-SkySampling.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-SnapshotTransport.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-SoundFontBank.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-SoundFontRegions.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-SoundSettingsEvidence.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-SoundSettingsHost.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-SpriteRotation.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-SpriteSilhouetteOcclusion.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-StairBuild.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-TerminalOutput.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-UserSettings.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-Viewport.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-VisibilityInterceptVector.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-VisibilitySightBounds.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-WaveOutPlayback.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Test-WeaponLighting.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/Update-CampaignMatrix.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: scripts/WindowCaptureTargets.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/Ansi256.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/AnsiColorState.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/AudioEvents.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/AudioMixer.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/AudioPackets.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/AudioRunspace.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/AutomapSession.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/CaptureClock.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/CaptureTimeline.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/CharacterCodec.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ConsoleInput.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/FastRenderer.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/GameHost.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/GameProcesses.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/InputReplay.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/LoadingScreen.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/ApplicationInfo.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Audio/Bgm.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Audio/IMusic.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Audio/ISound.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Audio/NullMusic.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Audio/NullSound.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Audio/sfx.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Audio/SfxType.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/CommandLineArgs.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Config.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/ConfigUtilities.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Common/DoomDebug.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Common/DoomInterop.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Common/DoomRandom.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Common/DoomString.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/DeHackEd.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Doom.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/DoomState.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Event/DoomEvent.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Event/EventType.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Game/Demo.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Game/DoomGame.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Game/GameConst.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Game/GameContent.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Game/GameMode.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Game/GameOptions.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Game/GameSkill.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Game/GameState.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Game/GameVersion.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Game/MissionPack.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Game/Player.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Game/PlayerState.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Game/SaveAndLoad.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Game/TicCmd.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Game/TicCmdButtons.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Game/UpdateResult.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Graphics/AnimationDef.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Graphics/ColorMap.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Graphics/Column.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Graphics/Dummy/DummyData.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Graphics/Dummy/DummyFlatLookup.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Graphics/Dummy/DummySpriteLookup.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Graphics/Dummy/DummyTextureLookup.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Graphics/Flat.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Graphics/FlatLookup.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Graphics/IFlatLookup.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Graphics/ISpriteLookup.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Graphics/ITextureLookup.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Graphics/Palette.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Graphics/Patch.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Graphics/PatchCache.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Graphics/Sprite.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Graphics/SpriteDef.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Graphics/SpriteFrame.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Graphics/SpriteLookup.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Graphics/Texture.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Graphics/TextureAnimation.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Graphics/TextureAnimationInfo.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Graphics/TextureLookup.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Graphics/TexturePatch.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Info/DoomInfo.AmmoInfos.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Info/DoomInfo.DeHackEdConst.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Info/DoomInfo.MapTitles.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Info/DoomInfo.MobjActions.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Info/DoomInfo.MobjInfos.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Info/DoomInfo.ParTimes.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Info/DoomInfo.PlayerActions.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Info/DoomInfo.PowerDuration.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Info/DoomInfo.QuitMessages.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Info/DoomInfo.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Info/DoomInfo.SfxNames.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Info/DoomInfo.SpriteNames.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Info/DoomInfo.States.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Info/DoomInfo.Strings.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Info/DoomInfo.SwitchNames.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Info/DoomInfo.TextureAnimation.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Info/DoomInfo.WeaponInfos.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Intermission/Animation.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Intermission/AnimationInfo.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Intermission/AnimationType.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Intermission/Finale.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Intermission/Intermission.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Intermission/IntermissionInfo.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Intermission/IntermissionState.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Intermission/PlayerScores.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Intermission/WorldMap.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Map/BlockMap.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Map/LineDef.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Map/LineFlags.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Map/LineSpecial.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Map/Map.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Map/MapThing.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Map/Node.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Map/Reject.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Map/Sector.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Map/SectorSpecial.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Map/Seg.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Map/SideDef.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Map/SlopeType.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Map/Subsector.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Map/ThingFlags.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Map/Vertex.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Math/Angle.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Math/Fixed.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Math/Geometry.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Math/Trig.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Math/Trig.Tables.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Menu/DoomMenu.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Menu/HelpScreen.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Menu/LoadMenu.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Menu/MenuDef.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Menu/MenuItem.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Menu/PressAnyKey.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Menu/QuitConfirm.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Menu/SaveMenu.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Menu/SaveSlots.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Menu/SelectableMenu.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Menu/SimpleMenuItem.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Menu/SliderMenuItem.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Menu/TextBoxMenuItem.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Menu/TextInput.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Menu/TextInputState.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Menu/ToggleMenuItem.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Menu/YesNoConfirm.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Opening/DemoPlayback.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Opening/OpeningSequence.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Opening/OpeningSequenceState.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Wad/LumpInfo.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/Wad/Wad.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/World/AmmoType.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/World/AutoMap.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/World/AutoMapState.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/World/Box.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/World/BoxEx.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/World/Button.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/World/ButtonPosition.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/World/CardType.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/World/CeilingMove.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/World/CeilingMoveType.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/World/Cheat.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/World/CheatFlags.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/World/Direction.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/World/DivLine.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/World/FireFlicker.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/World/FloorMove.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/World/FloorMoveType.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/World/GlowingLight.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/World/Hitscan.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/World/Intercept.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/World/ItemPickup.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/World/LightFlash.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/World/LightingChange.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/World/MapCollision.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/World/MapInteraction.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/World/Mobj.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/World/MobjFlags.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/World/MobjInfo.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/World/MobjState.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/World/MobjStateDef.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/World/MobjType.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/World/MonsterBehavior.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/World/PathTraversal.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/World/PathTraverseFlags.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/World/Platform.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/World/PlatformState.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/World/PlatformType.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/World/PlayerBehavior.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/World/PlayerSprite.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/World/PlayerSpriteDef.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/World/PowerType.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/World/SectorAction.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/World/SectorActionResult.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/World/Specials.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/World/StairType.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/World/StatusBar.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/World/StrobeFlash.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/World/ThingAllocation.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/World/ThingInteraction.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/World/ThingMovement.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/World/Thinker.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/World/Thinkers.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/World/ThinkerState.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/World/VerticalDoor.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/World/VerticalDoorType.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/World/VisibilityCheck.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/World/WeaponBehavior.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/World/WeaponInfo.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/World/WeaponType.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Doom/World/World.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/ORIGIN.md",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/UserInput/DoomKey.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/UserInput/DoomMouseButton.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/UserInput/IUserInput.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/UserInput/KeyBinding.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/UserInput/NullUserInput.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Video/AutoMapRenderer.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Video/DrawScreen.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Video/FinaleRenderer.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Video/IntermissionRenderer.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Video/IVideo.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Video/MenuRenderer.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Video/NullVideo.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Video/OpeningSequenceRenderer.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Video/Renderer.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Video/StatusBarRenderer.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Video/ThreeDRenderer.sb.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ManagedDoom/Video/WipeEffect.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/MusicCache.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/MusicControls.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/MusicEvents.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/MusicGroup.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/MusicLoopReader.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/MusicLoopState.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/MusicOneShotReader.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/MusicOscillator.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/MusicPlayback.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/MusicSynth.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/MusScore.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/PaletteCodec.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/PlayerMessages.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/ProcessAudioCapture.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/RenderAssets.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/RenderFuzz.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/RenderLighting.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/SaveSlots.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/SaveState.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/SessionMenu.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/SessionScreens.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/SimulationProcess.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/SnapshotTransport.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/SoundFontBank.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/SoundFontRegions.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/SpriteProjection.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/TerminalCodec.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/TerminalOutput.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/UserSettings.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/Viewport.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: src/WaveOutDevice.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: Start-Doom.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Payload identity: THIRD-PARTY-NOTICES.md",
+      "Passed": true
+    },
+    {
+      "Name": "Excluded assets/tools/media",
+      "Passed": true
+    },
+    {
+      "Name": "Archive contains exactly manifest payload and manifest",
+      "Passed": true
+    },
+    {
+      "Name": "Final Classic live sources match extracted package",
+      "Passed": true
+    },
+    {
+      "Name": "Extracted launcher preflight",
+      "Passed": true
+    },
+    {
+      "Name": "Test-TerminalOutput completes expected checks",
+      "Passed": true
+    },
+    {
+      "Name": "Test-RenderAssetResourceReuse completes expected checks",
+      "Passed": true
+    },
+    {
+      "Name": "Test-SessionMenu completes expected checks",
+      "Passed": true
+    },
+    {
+      "Name": "Menu has 46 saved screen fixtures",
+      "Passed": true
+    },
+    {
+      "Name": "save-worker completes expected checks",
+      "Passed": true
+    },
+    {
+      "Name": "Classic worker lifecycle/oracles pass",
+      "Passed": true
+    },
+    {
+      "Name": "Classic compares complete images",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix worker lifecycle/oracles pass",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix compares complete images",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt worker lifecycle/oracles pass",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt compares complete images",
+      "Passed": true
+    },
+    {
+      "Name": "Extracted actual-device startup closes successfully",
+      "Passed": true
+    },
+    {
+      "Name": "Extracted startup returns every submitted audio frame",
+      "Passed": true
+    },
+    {
+      "Name": "Catalog has eleven Episode 1 tracks",
+      "Passed": true
+    },
+    {
+      "Name": "Extracted realtime recovery and final effect drain",
+      "Passed": true
+    },
+    {
+      "Name": "Extracted recovery sources match manifest payload",
+      "Passed": true
+    }
+  ],
+  "Audit": {
+    "Path": "local/audit-r20-package.py",
+    "Sha256": "78DC23EB9F9761F6841A4CC466D7FB28053E19C0FD4A91466B7B4CDCC6405E45"
+  },
+  "Runner": {
+    "Path": "local/run-r20-validation.ps1",
+    "Sha256": "0EC3758C1DBA188DB5B1AA4A85B784B0FE39323A5775F3D09FB6DB2D610E062E"
+  },
+  "ValidationLog": {
+    "Path": "local/r20-package-validation-r1.log",
+    "Sha256": "ABC5708A9546FA7CA8985C911B90912386943D6237DF898A3D1A273BA0E707EB"
+  },
+  "Meaning": "Local development candidate, exact extracted files and source-matched live fixtures. Actual-device startup and focused mechanics/transport checks do not qualify full campaign, acoustic/physical input, optical frame identity, repeated pacing or second hardware. This local handoff does not reset the 35-commit public-release count."
+}

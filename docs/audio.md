@@ -390,6 +390,10 @@ effect gets a fresh block before explicit drain acknowledgement. Epoch/volume
 resets and music Start/Stop clear old credits. Non-realtime playback remains
 packet-exact.
 
+Credits cover produced PCM, including queued device buffers. They do not prove
+that those intervals have already reached the speaker; new events still wait
+for the remaining device tail.
+
 Final controlled recovery reaches 17.8–29.7 ms maximum processing age and passes
 packet/credit/driver conservation, pause/resume, independent PCM, music and
 save/load checks: 96 existing assertions plus three recovery cases. The first
