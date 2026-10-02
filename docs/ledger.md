@@ -6291,3 +6291,9 @@ and packet tests pass (27 and 9 checks). A real E4M8 audio session advances
 104 tics, packages four sound events, submits 131,040 frames and closes cleanly.
 This does not qualify acoustic output or a campaign route. The behavior comes
 from id Software's original [`S_AdjustSoundParams`](https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/s_sound.c).
+
+Normal-map voices also stop when their moving source crosses the distance
+cutoff, matching the original backend's channel stop instead of retaining a
+silent voice that could become audible again. The packet regression exercises
+near-to-far movement. The mixer and packet suites pass 27 and 10 checks; the
+MAP08 floor remains unaffected.

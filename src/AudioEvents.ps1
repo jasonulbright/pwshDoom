@@ -44,10 +44,12 @@ function Update-DoomAudioEvents {
         }
     }
     $listener=$Events.Listener
-    foreach($voice in $Mixer.Voices){
+    for([int]$voiceIndex=$Mixer.Voices.Count-1;$voiceIndex -ge 0;$voiceIndex--){
+        $voice=$Mixer.Voices[$voiceIndex]
         $source=if($Events.Sources.ContainsKey([int]$voice.Source)){$Events.Sources[[int]$voice.Source]}else{$null}
         if($null -eq $listener -or $null -eq $source -or [object]::ReferenceEquals($listener,$source)){$gains=Get-DoomStereoGains -Local -Volume $voice.BaseVolume}
         else{$gains=Get-DoomStereoGains ($listener.X.Data/65536.0) ($listener.Y.Data/65536.0) ($listener.Angle.Data*(2*[Math]::PI/4294967296.0)) ($source.X.Data/65536.0) ($source.Y.Data/65536.0) -Volume $voice.BaseVolume -Map $Events.LevelMap}
+        if($gains[0] -eq 0 -and $gains[1] -eq 0){$Mixer.Voices.RemoveAt($voiceIndex);continue}
         $voice.Left=$gains[0];$voice.Right=$gains[1]
     }
 }

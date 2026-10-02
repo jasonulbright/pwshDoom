@@ -31,6 +31,11 @@ try{
     $farEvents.LevelMap=7;$farEvents.Events.Add(@{Kind='Start';Sound=1;Source=1;Group=1;Volume=100})
     $normalFar=Get-DoomAudioPacket (New-DoomAudioPacketState) $farEvents $clips
     Check 'Other maps retain Doom distance clipping' ($normalFar.Gains[1][0] -eq 0 -and $normalFar.Gains[1][1] -eq 0)
+    $rangeSource=@{X=@{Data=100L*65536};Y=@{Data=0L}};$rangeEvents=[PacketTestEvents]::new();$rangeEvents.Listener=$listener;$rangeEvents.Keys.Add($rangeSource,1);$rangeEvents.Sources.Add(1,$rangeSource)
+    $rangeState=New-DoomAudioPacketState;$rangeMixer=New-DoomAudioMixer 44100;$rangeEvents.Events.Add(@{Kind='Start';Sound=1;Source=1;Group=1;Volume=100})
+    $packet=Get-DoomAudioPacket $rangeState $rangeEvents $clips;Update-DoomAudioPacket $rangeMixer $packet $clips
+    $rangeSource.X.Data=1201L*65536;$packet=Get-DoomAudioPacket $rangeState $rangeEvents $clips;Update-DoomAudioPacket $rangeMixer $packet $clips
+    Check 'An active sound stops when its normal-map emitter leaves range' ($rangeMixer.Voices.Count -eq 0)
     $replaceEvents=[PacketTestEvents]::new();$replaceSource=[object]::new();$replaceEvents.Keys.Add($replaceSource,1);$replaceEvents.Sources.Add(1,$replaceSource)
     $replaceState=New-DoomAudioPacketState;$replaceMixer=New-DoomAudioMixer 44100
     $replaceEvents.Events.Add(@{Kind='Start';Sound=1;Source=1;Group=1;Volume=100})

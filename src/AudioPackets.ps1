@@ -61,8 +61,10 @@ function Update-DoomAudioPacket {
             Resume {$Mixer.Paused=$false}
         }
     }
-    foreach($voice in $Mixer.Voices){
+    for([int]$voiceIndex=$Mixer.Voices.Count-1;$voiceIndex -ge 0;$voiceIndex--){
+        $voice=$Mixer.Voices[$voiceIndex]
         $gain=if($Packet.Gains.ContainsKey([int]$voice.Source)){$Packet.Gains[[int]$voice.Source]}else{@(.5,.5)}
+        if($gain[0] -eq 0 -and $gain[1] -eq 0){$Mixer.Voices.RemoveAt($voiceIndex);continue}
         $voice.Left=$gain[0]*$voice.BaseVolume;$voice.Right=$gain[1]*$voice.BaseVolume
     }
 }
