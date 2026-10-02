@@ -1,0 +1,229 @@
+{
+  "Title": "Committed-candidate serial and process-renderer parity by presentation mode",
+  "Date": "2026-10-02",
+  "FinishedUtc": "2026-10-02T18:06:22.5236273Z",
+  "SourceCommit": "5682bc48d23b419f57849fa045780fbd7ab9fa36",
+  "EngineBundleSha256": "C31873B175FC96634148978666E774474AF611A8D27B90B929E13A426035940E",
+  "Runtime": "PowerShell 7.6.6",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "RendererSource": {
+    "Path": "src/FastRenderer.ps1",
+    "Sha256": "9FCAF0CC8933D4BF562D32CFB172265D92CBEC197C633C0C314ABE1CA0D36E00"
+  },
+  "WorkerConfiguration": "16 process strips; E1M1 at 35 idle tics; five camera headings (0, 37, 89, 173, 269 degrees); Serial frame compared with partitioned workers and mode encoders.",
+  "Modes": [
+    {
+      "Style": "Classic",
+      "GlyphSet": "Katakana",
+      "Workers": 16,
+      "Episode": 1,
+      "Map": 1,
+      "Skill": 3,
+      "ViewCount": 5,
+      "ComparedPixels": 320000.0,
+      "DifferingPixels": 0.0,
+      "EncodedStripByteChecks": 80,
+      "CharacterStripByteChecks": 0,
+      "Views": [
+        {
+          "PaletteNumber": 0,
+          "Invisibility": 0,
+          "ComparedPixels": 64000,
+          "AngleDegrees": 0,
+          "WorkerPacketVersion": 4,
+          "Differences": 0,
+          "ActorCount": 91,
+          "OpaqueActorDifferences": 0
+        },
+        {
+          "PaletteNumber": 0,
+          "Invisibility": 0,
+          "ComparedPixels": 64000,
+          "AngleDegrees": 37,
+          "WorkerPacketVersion": 4,
+          "Differences": 0,
+          "ActorCount": 91,
+          "OpaqueActorDifferences": 0
+        },
+        {
+          "PaletteNumber": 0,
+          "Invisibility": 0,
+          "ComparedPixels": 64000,
+          "AngleDegrees": 89,
+          "WorkerPacketVersion": 4,
+          "Differences": 0,
+          "ActorCount": 91,
+          "OpaqueActorDifferences": 0
+        },
+        {
+          "PaletteNumber": 0,
+          "Invisibility": 0,
+          "ComparedPixels": 64000,
+          "AngleDegrees": 173,
+          "WorkerPacketVersion": 4,
+          "Differences": 0,
+          "ActorCount": 91,
+          "OpaqueActorDifferences": 0
+        },
+        {
+          "PaletteNumber": 0,
+          "Invisibility": 0,
+          "ComparedPixels": 64000,
+          "AngleDegrees": 269,
+          "WorkerPacketVersion": 4,
+          "Differences": 0,
+          "ActorCount": 91,
+          "OpaqueActorDifferences": 0
+        }
+      ],
+      "RawReceipt": {
+        "Path": "local/render-dispatch-classic-20261002.json",
+        "Sha256": "8C4A1050C32AAFA94DB884276EADCB080AC7602ED177A950F2698660CB49AA8D"
+      }
+    },
+    {
+      "Style": "Matrix",
+      "GlyphSet": "Katakana",
+      "Workers": 16,
+      "Episode": 1,
+      "Map": 1,
+      "Skill": 3,
+      "ViewCount": 5,
+      "ComparedPixels": 320000.0,
+      "DifferingPixels": 0.0,
+      "EncodedStripByteChecks": 80,
+      "CharacterStripByteChecks": 80,
+      "Views": [
+        {
+          "PaletteNumber": 0,
+          "Invisibility": 0,
+          "ComparedPixels": 64000,
+          "AngleDegrees": 0,
+          "WorkerPacketVersion": 4,
+          "Differences": 0,
+          "ActorCount": 91,
+          "OpaqueActorDifferences": 0
+        },
+        {
+          "PaletteNumber": 0,
+          "Invisibility": 0,
+          "ComparedPixels": 64000,
+          "AngleDegrees": 37,
+          "WorkerPacketVersion": 4,
+          "Differences": 0,
+          "ActorCount": 91,
+          "OpaqueActorDifferences": 0
+        },
+        {
+          "PaletteNumber": 0,
+          "Invisibility": 0,
+          "ComparedPixels": 64000,
+          "AngleDegrees": 89,
+          "WorkerPacketVersion": 4,
+          "Differences": 0,
+          "ActorCount": 91,
+          "OpaqueActorDifferences": 0
+        },
+        {
+          "PaletteNumber": 0,
+          "Invisibility": 0,
+          "ComparedPixels": 64000,
+          "AngleDegrees": 173,
+          "WorkerPacketVersion": 4,
+          "Differences": 0,
+          "ActorCount": 91,
+          "OpaqueActorDifferences": 0
+        },
+        {
+          "PaletteNumber": 0,
+          "Invisibility": 0,
+          "ComparedPixels": 64000,
+          "AngleDegrees": 269,
+          "WorkerPacketVersion": 4,
+          "Differences": 0,
+          "ActorCount": 91,
+          "OpaqueActorDifferences": 0
+        }
+      ],
+      "RawReceipt": {
+        "Path": "local/render-dispatch-matrix-20261002.json",
+        "Sha256": "5CD3052D963AC9969E78D83230F5B3AFD5860BAE90752AA9B5F9F6045B050CE6"
+      }
+    },
+    {
+      "Style": "AnsiArt",
+      "GlyphSet": "Katakana",
+      "Workers": 16,
+      "Episode": 1,
+      "Map": 1,
+      "Skill": 3,
+      "ViewCount": 5,
+      "ComparedPixels": 320000.0,
+      "DifferingPixels": 0.0,
+      "EncodedStripByteChecks": 80,
+      "CharacterStripByteChecks": 80,
+      "Views": [
+        {
+          "PaletteNumber": 0,
+          "Invisibility": 0,
+          "ComparedPixels": 64000,
+          "AngleDegrees": 0,
+          "WorkerPacketVersion": 4,
+          "Differences": 0,
+          "ActorCount": 91,
+          "OpaqueActorDifferences": 0
+        },
+        {
+          "PaletteNumber": 0,
+          "Invisibility": 0,
+          "ComparedPixels": 64000,
+          "AngleDegrees": 37,
+          "WorkerPacketVersion": 4,
+          "Differences": 0,
+          "ActorCount": 91,
+          "OpaqueActorDifferences": 0
+        },
+        {
+          "PaletteNumber": 0,
+          "Invisibility": 0,
+          "ComparedPixels": 64000,
+          "AngleDegrees": 89,
+          "WorkerPacketVersion": 4,
+          "Differences": 0,
+          "ActorCount": 91,
+          "OpaqueActorDifferences": 0
+        },
+        {
+          "PaletteNumber": 0,
+          "Invisibility": 0,
+          "ComparedPixels": 64000,
+          "AngleDegrees": 173,
+          "WorkerPacketVersion": 4,
+          "Differences": 0,
+          "ActorCount": 91,
+          "OpaqueActorDifferences": 0
+        },
+        {
+          "PaletteNumber": 0,
+          "Invisibility": 0,
+          "ComparedPixels": 64000,
+          "AngleDegrees": 269,
+          "WorkerPacketVersion": 4,
+          "Differences": 0,
+          "ActorCount": 91,
+          "OpaqueActorDifferences": 0
+        }
+      ],
+      "RawReceipt": {
+        "Path": "local/render-dispatch-colorart-20261002.json",
+        "Sha256": "FB0B9CB4AF2A23DD775982EF905C58D377E5066D1E78D0281F6BFB39378A36F5"
+      }
+    }
+  ],
+  "AllPass": true,
+  "Limitations": [
+    "Parity is against the current source serial raster and byte encoding; it does not establish vanilla/original-executable pixel equivalence.",
+    "Five static E1M1 views are not moving-world or full-route coverage.",
+    "PresentMon and optical frame identity are separate; the native pacing retest remains blocked by an existing user Terminal process."
+  ]
+}

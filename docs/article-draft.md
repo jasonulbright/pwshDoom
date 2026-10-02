@@ -313,4 +313,12 @@ tic boundaries; campaign, boss, menu and save checks also pass. This local
 improvement costs 1.01% more allocated bytes, and its 67.17 ms p99 remains above
 the 57.2 ms proposed gate. The measurement omits renderer workers, Terminal and
 audio, so it is a candidate for a clean live retest rather than a host-level
-performance claim. [Dispatch receipt and alternatives](../results/mobj-action-dispatch-20261002.json).
+performance claim. The committed candidate also loads all 36 maps for 35 idle
+tics and two serial rasterizations each. A user-owned Windows Terminal prevented
+the isolated PresentMon retest from starting; the harness preserved the window
+and the native pacing effect remains unknown. [Dispatch evidence and
+alternatives](../results/mobj-action-dispatch-20261002.json), the [36-map
+smoke receipt](../results/campaign-smoke-dispatch-20261002.json), and exact
+serial/worker parity in five E1M1 views for Classic, Matrix and color art.
+[Mode receipt](../results/mobj-action-render-modes-20261002.json) checks the
+internal renderer and encoders; original-executable fidelity remains separate.

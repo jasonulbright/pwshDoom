@@ -1575,6 +1575,17 @@ Behavior controls compare each tic from 0 through 420: all 421 combined state,
 current renderer and numeric render hashes match across builds, including the
 two stored replay checkpoints. Focused menu, save reconstruction/worker,
 campaign-transition, boss, movement and gameplay-action regressions also pass.
+The committed candidate also loads all 36 maps, advances 35 idle tics and
+renders two serial frames per map; this does not qualify navigation or completion.
 The [source-pinned receipt](../results/mobj-action-dispatch-20261002.json)
 includes raw local sample hashes, runtime/IWAD pins, test receipts, allocation
-profiles, methods and known limits.
+profiles, methods and known limits. A fresh three-style PresentMon retest could
+not start because a user Windows Terminal was already running; its isolation
+guard remains in force, and the existing window was left untouched.
+
+The current source also passes exact serial/worker checks in all three styles:
+five E1M1 camera headings per mode compare 320,000 pixels each with zero
+difference through sixteen uneven process strips. Matrix and AnsiArt each pass
+80 additional character-strip checks. This verifies internal raster/encoder
+parity for that static scene, not the original game's pixels, moving-world
+fidelity or native display rate. [Mode evidence](../results/mobj-action-render-modes-20261002.json).

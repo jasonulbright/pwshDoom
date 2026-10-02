@@ -539,3 +539,19 @@ Count reaches 20 after Preview.5. Rerun frozen all-style native pacing on this
 committed candidate, then resume ordinary-input Episode 1 route preparation and
 remaining fidelity, audio, physical-input and hardware qualification. Release at
 35 or more commits since Preview.5; do not narrow the Ultimate Doom scope.
+
+The committed candidate passes all36 map starts, with35 idle tics and two serial
+renderings per map. This establishes smoke coverage only. A native rerun cannot
+start while the existing user Terminal is open because the frozen PresentMon
+harness requires an isolated Terminal process; that window remains untouched.
+[Candidate smoke receipt](../results/campaign-smoke-dispatch-20261002.json).
+Evidence count reaches21 after Preview.5; keep native pacing unqualified until
+an exclusive measurement session is available.
+
+Sixteen actual worker processes now match the serial raster at five E1M1
+headings in Classic, Matrix and color art, with 320,000 pixels per mode and
+zero differences; both character encoders pass 80 strip-byte checks. This is
+mode preservation against the internal serial reference only.
+[Worker-mode receipt](../results/mobj-action-render-modes-20261002.json).
+Evidence count reaches22 after Preview.5. Keep the all-style live timing retest
+pending the isolated display resource.

@@ -5959,3 +5959,29 @@ This implementation and evidence commit reaches 20 after Preview.5. Measure the
 committed candidate in the full native configuration across all three styles;
 retain every miss and continue the human campaign, original-frame, audio,
 physical-input and second-display gates. Release again at 35 commits.
+
+The committed dispatcher also passes the candidate-source 36-map smoke: each
+map loads, runs 35 idle tics and renders two full serial frames. This is startup,
+bounded simulation and rasterization coverage only; it does not establish player
+navigation or completion. The first native retest was blocked before launch by
+the already-running user Windows Terminal, which the isolated PresentMon
+harness correctly refuses to attribute as a fresh game window. No existing
+Terminal was closed. The [smoke receipt](../results/campaign-smoke-dispatch-20261002.json)
+is retained; clean native performance remains open pending an isolated display
+session.
+
+The all-map smoke extends the committed-source regression set without converting
+it into a route claim. This follow-up evidence commit reaches 21 after Preview.5.
+Resume clean native capture once Windows Terminal is available for exclusive
+measurement, while continuing the documented Episode 1 human route and other
+independent release gates. Release at 35 commits.
+
+The committed candidate also retains exact actual process-worker rendering in
+Classic, Matrix and AnsiArt. Five E1M1 headings per mode compare 320,000 pixels
+each against the serial renderer with zero differences using sixteen uneven
+strips; Matrix and AnsiArt each add 80 exact character-strip checks. This is
+serial/worker and encoder parity, not original-game pixel equivalence. See the
+[mode comparison receipt](../results/mobj-action-render-modes-20261002.json).
+The source-pinned dispatch evidence now includes this run; the added evidence
+commit count reaches 22 after Preview.5. Native pacing and a complete human
+Episode 1 remain the next high-value gates.

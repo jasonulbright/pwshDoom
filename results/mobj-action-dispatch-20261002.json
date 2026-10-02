@@ -1,7 +1,7 @@
 {
   "Title": "PowerShell Mobj state-action dispatch performance and equivalence",
   "Date": "2026-10-02",
-  "FinishedUtc": "2026-10-02T17:56:14.8123572Z",
+  "FinishedUtc": "2026-10-02T18:07:10.9451878Z",
   "Runtime": {
     "PowerShell": "7.6.6",
     "RuntimePath": "local/pwsh-7.6.6-portable/runtime/pwsh.exe",
@@ -9,7 +9,7 @@
     "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F"
   },
   "Candidate": {
-    "BaseCommit": "cd3207144d86d08351481daccacaf2107883242a",
+    "BaseCommit": "5682bc48d23b419f57849fa045780fbd7ab9fa36",
     "EngineBundleSha256": "C31873B175FC96634148978666E774474AF611A8D27B90B929E13A426035940E",
     "SourceFiles": [
       {
@@ -252,14 +252,14 @@
   },
   "RejectedAlternatives": [
     {
-      "Outcome": "Rejected",
       "Reason": "Exact selected replay checkpoints, but later-quarter Game.Update medians slowed as much as 11.69%.",
-      "Name": "Skip empty interpolation calls for non-Mobj thinkers"
+      "Name": "Skip empty interpolation calls for non-Mobj thinkers",
+      "Outcome": "Rejected"
     },
     {
-      "Outcome": "Rejected",
       "Reason": "Exact checkpoints but about 1% more allocation and mixed/negative per-tic timing.",
-      "Name": "Replace PSMethod.Invoke with MobjState.ExecuteMobjAction"
+      "Name": "Replace PSMethod.Invoke with MobjState.ExecuteMobjAction",
+      "Outcome": "Rejected"
     }
   ],
   "RegressionReceipts": [
@@ -331,6 +331,52 @@
     }
   ],
   "AllRegressionReceiptsPassed": true,
+  "CampaignSmoke": {
+    "Path": "results/campaign-smoke-dispatch-20261002.json",
+    "Sha256": "FB23C3B78792672EF452FC589A74302A6E56E2A367B908F37845E0186E030633",
+    "Complete": true,
+    "Maps": 36,
+    "Passed": 36,
+    "Failed": 0,
+    "RequestedTicsPerMap": 35,
+    "RenderHeadingsPerMap": 2,
+    "Meaning": "Headless map loading, bounded idle simulation, and two full 320x200 rasterizations in one process. WorkerStrips records the requested configuration only; this script does not start render workers or segment rasterization. Hashes are reproducibility fingerprints, not reference-image correctness. No navigation, exit, moving-special coverage, keyboard play, audio, parallel transport, or campaign completion is established. Stage timings include cold work and are not a gameplay FPS benchmark."
+  },
+  "RenderModeEvidence": {
+    "Path": "results/mobj-action-render-modes-20261002.json",
+    "Sha256": "59717CB182CFAFFD130459C85390405DE8B95F7E36B432F94840F822012483D6",
+    "SourceCommit": "5682bc48d23b419f57849fa045780fbd7ab9fa36",
+    "AllPass": true,
+    "Modes": [
+      {
+        "ComparedPixels": 320000.0,
+        "DifferingPixels": 0.0,
+        "Style": "Classic",
+        "Workers": 16,
+        "EncodedStripByteChecks": 80,
+        "CharacterStripByteChecks": 0,
+        "ViewCount": 5
+      },
+      {
+        "ComparedPixels": 320000.0,
+        "DifferingPixels": 0.0,
+        "Style": "Matrix",
+        "Workers": 16,
+        "EncodedStripByteChecks": 80,
+        "CharacterStripByteChecks": 80,
+        "ViewCount": 5
+      },
+      {
+        "ComparedPixels": 320000.0,
+        "DifferingPixels": 0.0,
+        "Style": "AnsiArt",
+        "Workers": 16,
+        "EncodedStripByteChecks": 80,
+        "CharacterStripByteChecks": 80,
+        "ViewCount": 5
+      }
+    ]
+  },
   "RawTimedReceipts": [
     {
       "Path": "local/game-update-gc-e3m6-r1.json",
