@@ -1,0 +1,154 @@
+{
+  "RecordedUtc": "2026-10-02T18:14:18.9764157Z",
+  "CandidateCommit": "a000249cb8b6637ce1c1b95e13fc860ed1e466b3",
+  "CandidateEngineBundleSha256": "111007C18747927C10A3C0F908EF3C7D36F6EAF6BD71C9CEEF823ADB65EAABAF",
+  "InstrumentedBundleSha256": "591E949DE35F08139BA3AE51524851F1A30BA6DAC6811DF41081779A373F9B61",
+  "ProfilerHarnessSha256": "3705A30F03DF273AE1BA19E4DB8AE2EED6409250262AF5DB2F40A592F987807B",
+  "ReplaySha256": "3C449B3AA71BE042C7FF229AED2F143636ED97A4A4B02562505339B35415DD75",
+  "IwADSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "PowerShell": "7.6.6",
+  "Commands": 420,
+  "SelectedReplayCheckpoints": 2,
+  "ReplayMatched": true,
+  "GameUpdate": {
+    "Count": 420,
+    "Mean": 19.703540238095236,
+    "Median": 16.30855,
+    "P95": 41.5439,
+    "Max": 170.0139
+  },
+  "Stages": {
+    "SectorInterpolation": {
+      "Count": 420,
+      "Mean": 0.5255564285714285,
+      "Median": 0.5068,
+      "P95": 0.5471,
+      "Max": 2.2499
+    },
+    "StatusBar": {
+      "Count": 420,
+      "Mean": 0.0726716666666666,
+      "Median": 0.0411,
+      "P95": 0.2279,
+      "Max": 5.3992
+    },
+    "ThinkerInterpolation": {
+      "Count": 420,
+      "Mean": 0.7917076190476194,
+      "Median": 0.7308,
+      "P95": 1.1475,
+      "Max": 6.557
+    },
+    "RespawnSpecials": {
+      "Count": 420,
+      "Mean": 0.01047619047619047,
+      "Median": 0.0101,
+      "P95": 0.0137,
+      "Max": 0.0257
+    },
+    "PlayerInterpolation": {
+      "Count": 420,
+      "Mean": 0.012099285714285715,
+      "Median": 0.0114,
+      "P95": 0.0187,
+      "Max": 0.0327
+    },
+    "ThinkersRun": {
+      "Count": 420,
+      "Mean": 15.278197857142855,
+      "Median": 13.856950000000001,
+      "P95": 28.2737,
+      "Max": 108.6274
+    },
+    "GameUpdate": {
+      "Count": 420,
+      "Mean": 19.703540238095236,
+      "Median": 16.30855,
+      "P95": 41.5439,
+      "Max": 170.0139
+    },
+    "AutoMap": {
+      "Count": 420,
+      "Mean": 0.04669142857142857,
+      "Median": 0.044950000000000004,
+      "P95": 0.0617,
+      "Max": 0.0781
+    },
+    "PlayerThink": {
+      "Count": 420,
+      "Mean": 2.7956445238095218,
+      "Median": 0.31955,
+      "P95": 13.618,
+      "Max": 144.2987
+    },
+    "Specials": {
+      "Count": 420,
+      "Mean": 0.1268573809523809,
+      "Median": 0.10975,
+      "P95": 0.1505,
+      "Max": 1.5596
+    }
+  },
+  "ActorTimingInclusive": {
+    "Z": {
+      "Count": 420,
+      "Mean": 0.151,
+      "Median": 0.1286,
+      "P95": 0.2127,
+      "Max": 1.9786
+    },
+    "StateActionInclusive": {
+      "Count": 420,
+      "Mean": 12.0138,
+      "Median": 10.9248,
+      "P95": 24.964,
+      "Max": 104.7066
+    },
+    "CheckSightInclusive": {
+      "Count": 420,
+      "Mean": 8.1993,
+      "Median": 8.6047,
+      "P95": 13.3061,
+      "Max": 20.7401
+    },
+    "XY": {
+      "Count": 420,
+      "Mean": 2.2203,
+      "Median": 1.5007,
+      "P95": 5.444,
+      "Max": 48.0241
+    }
+  },
+  "ActorCallCounts": {
+    "NumericallyUnneededZ": 0,
+    "XYCalls": 393,
+    "StateActions": 4501,
+    "NumericallyUnneededXY": 0,
+    "CheckSight": 7892,
+    "ZCalls": 1876
+  },
+  "SourcePins": [
+    {
+      "Sha256": "3705A30F03DF273AE1BA19E4DB8AE2EED6409250262AF5DB2F40A592F987807B",
+      "Path": "scripts/Measure-SimulationStages.ps1"
+    },
+    {
+      "Sha256": "24E5CE8000C68A0AD01168B4410571E8E724DB509E7C4C952A256D8DECB526BA",
+      "Path": "scripts/Test-MobjActionDispatch.ps1"
+    },
+    {
+      "Sha256": "B8F753CC1CFA01328EE5CCBE765FB09F5CD8DC4630AACCEF37101DB3DE2390F6",
+      "Path": "src/ManagedDoom/Doom/Info/DoomInfo.MobjActions.ps1"
+    },
+    {
+      "Sha256": "7D1DA78D71177D84B532BB1506625D33E43A43F2E2C651784ABEA0ADA99ABFB4",
+      "Path": "src/ManagedDoom/Doom/Info/DoomInfo.States.sb.ps1"
+    },
+    {
+      "Sha256": "3BE0BC9D12C81FFE8E1CA89C45A6F7B2518AD954F2EC689272F9445232BD50AF",
+      "Path": "src/ManagedDoom/Doom/World/Mobj.sb.ps1"
+    }
+  ],
+  "RawDiagnosticSha256": "104E07D464BFB2F89B6FA72417EB8332A502F9FED3438453BB00A3C3E0E71A56",
+  "Meaning": "Unpaced simulation-only diagnostic profile. All 420 update samples retained. Stopwatch instrumentation runs in an owned bundle; timing includes its overhead. Actor categories are inclusive and overlap (for example, CheckSight can run inside a state action), so they must not be summed. These timings do not represent live rendering, audio, terminal output, device mixing, or native pacing. Selected replay checkpoints only check sampled state, not every hidden game field."
+}

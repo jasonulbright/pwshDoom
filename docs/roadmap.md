@@ -563,3 +563,13 @@ route through E1M9, return to E1M4, E1M8 boss/exit and the finale. This is ready
 for a single human playthrough and makes no route-completion claim.
 [Human handoff](episode1-playtest.md). This documentation commit reaches23
 after Preview.5; the full campaign remains unqualified.
+
+Simulation-stage attribution on the direct-dispatch candidate retains all 420
+tic samples and matches both replay endpoints. `ThinkersRun` averages 15.28 ms
+per tic, with inclusive state actions at12.01 ms and sight checks at8.20 ms;
+the latter run inside the former and these profiled slices include timing
+overhead. [Source-pinned attribution](../results/actor-hotspots-dispatch-20261002.json).
+The direct action route remains covered by all six dispatch checks. Count
+reaches24 after Preview.5. Investigate the measured visibility path without
+loosening state fidelity; full pacing and campaign gates remain open, release
+at35 or more commits.

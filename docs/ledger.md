@@ -6002,3 +6002,14 @@ launched and the existing Terminal stays untouched. `Start-Doom.ps1`, the local
 catalog and PowerShell 7.6.6 are present. This handoff commit reaches23 after
 Preview.5. The native retest still needs an exclusive Terminal session; the
 human playthrough remains open.
+
+The dense 420-command candidate replay now attributes simulation work using
+the direct state-action router. Thinkers average 15.28 ms/tic under profiling;
+state actions average 12.01 ms inclusive, with 7,892 `CheckSight` calls and
+8.20 ms inclusive. Those slices overlap and include instrumentation overhead,
+so they direct investigation but do not establish a performance gain. Both
+stored replay checkpoints match. [Profile receipt](../results/actor-hotspots-dispatch-20261002.json).
+The action-dispatch test again passes all six checks across 52 actions. This
+profiler and evidence commit reaches24 after Preview.5; continue into the
+measured thinker/visibility paths while the clean native pacing and full human
+campaign gates remain open.

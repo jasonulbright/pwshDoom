@@ -48,8 +48,20 @@ if($Profile){
             $replacement='$this.world.ProfileActorCounts['+$index+']++;if('+$redundant+'){$this.world.ProfileActorCounts['+($index+2)+']++};[long]$pfActorStart=[Diagnostics.Stopwatch]::GetTimestamp();'+$marker+';$this.world.ProfileActorTicks['+$index+']+=[Diagnostics.Stopwatch]::GetTimestamp()-$pfActorStart;'
             $source=Replace-Once $source $marker $replacement;$index++
         }
-        $marker='$st.MobjAction.Invoke($this.world, $this)'
-        $source=Replace-Once $source $marker ('$this.world.ProfileActorCounts[4]++;[long]$pfActionStart=[Diagnostics.Stopwatch]::GetTimestamp();'+$marker+';$this.world.ProfileActorTicks[2]+=[Diagnostics.Stopwatch]::GetTimestamp()-$pfActionStart;')
+        $ast=[Management.Automation.Language.Parser]::ParseInput($source,[ref]$tokens,[ref]$issues)
+        if($issues.Count){throw 'Cannot parse the staged actor profiler source.'}
+        $directActions=$ast.Find({param($node) $node -is [Management.Automation.Language.TypeDefinitionAst] -and $node.Name -eq 'MobjActions'},$false)
+        $dispatch=@($directActions.Members|Where-Object {$_.Name -eq 'InvokeStateAction' -and $_ -is [Management.Automation.Language.FunctionMemberAst]})
+        if($dispatch.Count -eq 1){
+            $body=$dispatch[0].Body.Extent.Text
+            $changed='{'+('$world.ProfileActorCounts[4]++;[long]$pfActionStart=[Diagnostics.Stopwatch]::GetTimestamp();try{')+$body.Substring(1,$body.Length-2)+'}finally{$world.ProfileActorTicks[2]+=[Diagnostics.Stopwatch]::GetTimestamp()-$pfActionStart;}}'
+            $source=$source.Remove($dispatch[0].Body.Extent.StartOffset,$body.Length).Insert($dispatch[0].Body.Extent.StartOffset,$changed)
+            $actorActionInstrumentation='MobjActions.InvokeStateAction (inclusive)'
+        }else{
+            $marker='$st.MobjAction.Invoke($this.world, $this)'
+            $source=Replace-Once $source $marker ('$this.world.ProfileActorCounts[4]++;[long]$pfActionStart=[Diagnostics.Stopwatch]::GetTimestamp();'+$marker+';$this.world.ProfileActorTicks[2]+=[Diagnostics.Stopwatch]::GetTimestamp()-$pfActionStart;')
+            $actorActionInstrumentation='PSMethod.Invoke (inclusive)'
+        }
         $ast=[Management.Automation.Language.Parser]::ParseInput($source,[ref]$tokens,[ref]$issues)
         $type=$ast.Find({param($node) $node -is [Management.Automation.Language.TypeDefinitionAst] -and $node.Name -eq 'VisibilityCheck'},$false)
         $method=@($type.Members|Where-Object {$_.Name -eq 'CheckSight' -and $_ -is [Management.Automation.Language.FunctionMemberAst]})
@@ -105,7 +117,7 @@ try{
         $stats.GameUpdate=Get-SampleStats ([double[]]$samples.GameUpdateMilliseconds)
         if($Profile){foreach($label in $labels){$stats[$label]=Get-SampleStats ([double[]]@($samples|ForEach-Object {$_.StagesMilliseconds[$label]}))}}
     }
-    @{Error=$failure;Profile=[bool]$Profile;ActorProfile=[bool]$ActorProfile;ActorArrayOrder=@('XY','Z','StateActionInclusive','CheckSightInclusive');ActorCountOrder=@('XYCalls','ZCalls','NumericallyUnneededXY','NumericallyUnneededZ','StateActions','CheckSight');Commands=$completed;FinishedUtc=[DateTime]::UtcNow.ToString('o');PowerShell=$PSVersionTable.PSVersion.ToString();
+    @{Error=$failure;Profile=[bool]$Profile;ActorProfile=[bool]$ActorProfile;ActorActionInstrumentation=if($ActorProfile){$actorActionInstrumentation}else{$null};ActorArrayOrder=@('XY','Z','StateActionInclusive','CheckSightInclusive');ActorCountOrder=@('XYCalls','ZCalls','NumericallyUnneededXY','NumericallyUnneededZ','StateActions','CheckSight');Commands=$completed;FinishedUtc=[DateTime]::UtcNow.ToString('o');PowerShell=$PSVersionTable.PSVersion.ToString();
         BaselineBundleSha256=$baselineHash;ExecutedBundleSha256=(Get-FileHash $bundle).Hash;HarnessSha256=(Get-FileHash $PSCommandPath).Hash;
         ReplaySha256=(Get-FileHash $Replay).Hash;WadSha256=(Get-FileHash $Wad).Hash;SourceRoot=$sourceRootPath;Statistics=$stats;Samples=$samples.ToArray();
         ReplayVerification=$verification;Checkpoints=$points.ToArray();OwnedBundle=$bundle;

@@ -1589,3 +1589,21 @@ difference through sixteen uneven process strips. Matrix and AnsiArt each pass
 80 additional character-strip checks. This verifies internal raster/encoder
 parity for that static scene, not the original game's pixels, moving-world
 fidelity or native display rate. [Mode evidence](../results/mobj-action-render-modes-20261002.json).
+
+### Simulation hot-path attribution — October 2, 2026
+
+An owned diagnostic bundle replayed the same 420-command E3M6 input on the
+committed direct-dispatch candidate and matched both stored endpoints. Stage
+timers put `ThinkersRun` at 15.28 ms mean / 13.86 ms median / 28.27 ms p95 per
+tic, against 19.70 / 16.31 / 41.54 ms for the whole profiled update. Additional
+inclusive timers measured 12.01 ms for built-in state-action dispatch, 8.20 ms
+inside `CheckSight`, 2.22 ms in XY movement and 0.15 ms in Z movement. The
+replay observed 4,501 state actions, 7,892 sight checks, 393 XY calls and 1,876
+Z calls. `CheckSight` can execute inside a state action, so actor slices
+overlap and must not be summed. All values include profiler overhead; they are
+hot-path attribution, not an uninstrumented speed comparison or a live pacing
+result. No gameplay code changed for this measurement. The [source-pinned
+receipt](../results/actor-hotspots-dispatch-20261002.json) records every sample,
+selected checkpoint result, hashes and limits. The profiler now instruments
+the direct dispatcher itself, rather than silently missing known actions after
+their routing changed.
