@@ -1,0 +1,272 @@
+{
+  "FormatVersion": 1,
+  "Title": "PowerShell wall-band preselection trial",
+  "Date": "2026-10-02",
+  "SourceCommit": "acfb338296ea1c74625963c647f1a480863eacd7",
+  "ProductionRendererSha256": "9FCAF0CC8933D4BF562D32CFB172265D92CBEC197C633C0C314ABE1CA0D36E00",
+  "VariantRendererSha256": "AEE5F2AD396DA8EAE5AF72F7DB3CB2E4434B7BE61F41EED21CA46392BE737361",
+  "HarnessSha256": "4E49CBE0BFAA9137CFD17B1B162339301F1F63AB5FABFAD829ABB278BAA06036",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "Configuration": "E1M2, skill 3, tic 0, fixed Classic state; 16 production-equivalent 20-column stripes rendered sequentially in one PowerShell process; 10 warmup and 20 measured frames per stripe; ABBA order A1 baseline, B1 preselection, B2 preselection, A2 baseline.",
+  "MeasurementCountPerRun": 320,
+  "TimingAndAllocationStats": {
+    "TotalMs": {
+      "Baseline": {
+        "Count": 640,
+        "Mean": 9.9026,
+        "Median": 10.0327,
+        "P95": 15.0675,
+        "P99": 16.0597,
+        "Max": 16.3394
+      },
+      "Variant": {
+        "Count": 640,
+        "Mean": 9.5786,
+        "Median": 9.7438,
+        "P95": 14.3352,
+        "P99": 15.3855,
+        "Max": 15.8976
+      },
+      "MeanChangePercent": -3.27,
+      "MedianChangePercent": -2.88,
+      "P95ChangePercent": -4.86,
+      "P99ChangePercent": -4.2
+    },
+    "GeometryMs": {
+      "Baseline": {
+        "Count": 640,
+        "Mean": 8.0778,
+        "Median": 8.2359,
+        "P95": 13.6074,
+        "P99": 14.582,
+        "Max": 14.8557
+      },
+      "Variant": {
+        "Count": 640,
+        "Mean": 7.7397,
+        "Median": 7.9709,
+        "P95": 12.8617,
+        "P99": 13.8132,
+        "Max": 14.3641
+      },
+      "MeanChangePercent": -4.19,
+      "MedianChangePercent": -3.22,
+      "P95ChangePercent": -5.48,
+      "P99ChangePercent": -5.27
+    },
+    "WallsMs": {
+      "Baseline": {
+        "Count": 640,
+        "Mean": 5.7939,
+        "Median": 6.0235,
+        "P95": 11.4513,
+        "P99": 12.4395,
+        "Max": 12.6996
+      },
+      "Variant": {
+        "Count": 640,
+        "Mean": 5.5365,
+        "Median": 5.7205,
+        "P95": 10.6788,
+        "P99": 11.6411,
+        "Max": 12.2261
+      },
+      "MeanChangePercent": -4.44,
+      "MedianChangePercent": -5.03,
+      "P95ChangePercent": -6.75,
+      "P99ChangePercent": -6.42
+    },
+    "PlanesMs": {
+      "Baseline": {
+        "Count": 640,
+        "Mean": 2.1117,
+        "Median": 1.9858,
+        "P95": 3.1302,
+        "P99": 3.5129,
+        "Max": 4.0279
+      },
+      "Variant": {
+        "Count": 640,
+        "Mean": 2.0374,
+        "Median": 1.9902,
+        "P95": 2.7994,
+        "P99": 3.2002,
+        "Max": 3.8106
+      },
+      "MeanChangePercent": -3.52,
+      "MedianChangePercent": 0.22,
+      "P95ChangePercent": -10.57,
+      "P99ChangePercent": -8.9
+    },
+    "ActorsMs": {
+      "Baseline": {
+        "Count": 640,
+        "Mean": 0.8744,
+        "Median": 0.7265,
+        "P95": 2.2609,
+        "P99": 2.4255,
+        "Max": 3.4186
+      },
+      "Variant": {
+        "Count": 640,
+        "Mean": 0.8655,
+        "Median": 0.7306,
+        "P95": 2.2232,
+        "P99": 2.4756,
+        "Max": 3.4801
+      },
+      "MeanChangePercent": -1.02,
+      "MedianChangePercent": 0.56,
+      "P95ChangePercent": -1.67,
+      "P99ChangePercent": 2.07
+    },
+    "HudMs": {
+      "Baseline": {
+        "Count": 640,
+        "Mean": 0.8076,
+        "Median": 0.7336,
+        "P95": 1.0625,
+        "P99": 1.8872,
+        "Max": 3.0753
+      },
+      "Variant": {
+        "Count": 640,
+        "Mean": 0.8299,
+        "Median": 0.7452,
+        "P95": 1.5321,
+        "P99": 1.9335,
+        "Max": 2.2168
+      },
+      "MeanChangePercent": 2.76,
+      "MedianChangePercent": 1.58,
+      "P95ChangePercent": 44.2,
+      "P99ChangePercent": 2.45
+    },
+    "AllocatedBytes": {
+      "Baseline": {
+        "Count": 640,
+        "Mean": 8031065.2,
+        "Median": 8002640.0,
+        "P95": 10018408.0,
+        "P99": 10018576.0,
+        "Max": 10018576.0
+      },
+      "Variant": {
+        "Count": 640,
+        "Mean": 8034946.525,
+        "Median": 7994192.0,
+        "P95": 9938152.0,
+        "P99": 9938320.0,
+        "Max": 9938320.0
+      },
+      "MeanChangePercent": 0.05,
+      "MedianChangePercent": -0.11,
+      "P95ChangePercent": -0.8,
+      "P99ChangePercent": -0.8
+    }
+  },
+  "FrameParity": {
+    "FullFrameSha256": "AB8F19A519D7F6E3FD89FD5439E9E053FEF5C88188FD0DCDB72662631CFA7A08",
+    "DistinctFullFrameHashes": 1,
+    "WorkerOutputHashMismatchCount": 0,
+    "AllReportsErrorFree": true
+  },
+  "ModeParity": [
+    {
+      "Style": "Classic",
+      "Map": "E1M1",
+      "Headings": 5,
+      "ComparedPixels": 320000.0,
+      "DifferentPixels": 0.0,
+      "Workers": 16,
+      "EncodedStripByteChecks": 80,
+      "CharacterStripByteChecks": 0,
+      "Report": "local/wall-band-parity-classic-r2-20261002.json",
+      "ReportSha256": "DFD6CC01FE86678766AAAC4BEA902EE9E78A02239B7676628F44A80C760D9259"
+    },
+    {
+      "Style": "Matrix",
+      "Map": "E1M1",
+      "Headings": 5,
+      "ComparedPixels": 320000.0,
+      "DifferentPixels": 0.0,
+      "Workers": 16,
+      "EncodedStripByteChecks": 80,
+      "CharacterStripByteChecks": 80,
+      "Report": "local/wall-band-parity-matrix-r2-20261002.json",
+      "ReportSha256": "6D48DFEBA7AEE3806D824FCCF4073E48B4DED19DAD5CBF4F2D34B853B3EA2B18"
+    },
+    {
+      "Style": "AnsiArt",
+      "Map": "E1M1",
+      "Headings": 5,
+      "ComparedPixels": 320000.0,
+      "DifferentPixels": 0.0,
+      "Workers": 16,
+      "EncodedStripByteChecks": 80,
+      "CharacterStripByteChecks": 80,
+      "Report": "local/wall-band-parity-ansiart-r2-20261002.json",
+      "ReportSha256": "646180D7EADB1E3F37E41006CABF539E6DD5E1EE4E76967EED4131593ECF184D"
+    }
+  ],
+  "InitialSmoke": {
+    "FullFrameSha256": "AB8F19A519D7F6E3FD89FD5439E9E053FEF5C88188FD0DCDB72662631CFA7A08",
+    "VariantHash": "AEE5F2AD396DA8EAE5AF72F7DB3CB2E4434B7BE61F41EED21CA46392BE737361",
+    "ExactMatch": true
+  },
+  "HarnessCorrection": "The first renderer comparison attempt could not resolve FastRenderer relative imports when the retained copy was dot-sourced under local/. Copying the generated variant temporarily beside its renderer dependencies fixed the test setup; the temporary source-folder copy was removed after the three completed style comparisons.",
+  "Decision": "Proceed to production integration and broad regression only after exact full-frame, per-stripe, and Classic/Matrix/AnsiArt parity succeeded. The performance gain is bounded and does not establish native pacing.",
+  "Limitations": [
+    "One fixed E1M2 Classic camera/state for performance.",
+    "Measurements are serial stripe work in one process, not concurrent workers, game-host frame latency, terminal writes, ETW transitions, or displayed frames.",
+    "Instrumentation-free timing runs contain 640 samples per variant; system load and one workload limit generalization.",
+    "Allocation bytes are thread-local managed deltas outside the render timer and include common renderer/harness call allocations; compare relative results only.",
+    "Mode parity covers E1M1 at five headings with current process workers, not a complete campaign or independent original Doom framebuffer."
+  ],
+  "RawRuns": [
+    {
+      "Run": "A1",
+      "Path": "local/e1m2-wallbands-alloc-A1-baseline-20261002.json",
+      "Sha256": "E4D27F07CB60849150ED60BFCA14CCECCB8C5C2B70451FEA43297CA0BD4CD180",
+      "FullFrameSha256": "AB8F19A519D7F6E3FD89FD5439E9E053FEF5C88188FD0DCDB72662631CFA7A08",
+      "HarnessSha256": "4E49CBE0BFAA9137CFD17B1B162339301F1F63AB5FABFAD829ABB278BAA06036",
+      "RendererSha256": "9FCAF0CC8933D4BF562D32CFB172265D92CBEC197C633C0C314ABE1CA0D36E00",
+      "VariantSha256": null,
+      "MeasuredStripeSamples": 320,
+      "ManagedAllocationMedianBytes": 8002640.0
+    },
+    {
+      "Run": "B1",
+      "Path": "local/e1m2-wallbands-alloc-B1-variant-20261002.json",
+      "Sha256": "54B6C02087B2FD5E8468C1F453F6FE037479222AF691032E2A02C24D9C38935D",
+      "FullFrameSha256": "AB8F19A519D7F6E3FD89FD5439E9E053FEF5C88188FD0DCDB72662631CFA7A08",
+      "HarnessSha256": "4E49CBE0BFAA9137CFD17B1B162339301F1F63AB5FABFAD829ABB278BAA06036",
+      "RendererSha256": "9FCAF0CC8933D4BF562D32CFB172265D92CBEC197C633C0C314ABE1CA0D36E00",
+      "VariantSha256": "AEE5F2AD396DA8EAE5AF72F7DB3CB2E4434B7BE61F41EED21CA46392BE737361",
+      "MeasuredStripeSamples": 320,
+      "ManagedAllocationMedianBytes": 7994192.0
+    },
+    {
+      "Run": "B2",
+      "Path": "local/e1m2-wallbands-alloc-B2-variant-20261002.json",
+      "Sha256": "6A0DAAF95CE5951D49DBB96CFAB05D3A86EBA2990C85977EA3AC125B76EADA99",
+      "FullFrameSha256": "AB8F19A519D7F6E3FD89FD5439E9E053FEF5C88188FD0DCDB72662631CFA7A08",
+      "HarnessSha256": "4E49CBE0BFAA9137CFD17B1B162339301F1F63AB5FABFAD829ABB278BAA06036",
+      "RendererSha256": "9FCAF0CC8933D4BF562D32CFB172265D92CBEC197C633C0C314ABE1CA0D36E00",
+      "VariantSha256": "AEE5F2AD396DA8EAE5AF72F7DB3CB2E4434B7BE61F41EED21CA46392BE737361",
+      "MeasuredStripeSamples": 320,
+      "ManagedAllocationMedianBytes": 7994192.0
+    },
+    {
+      "Run": "A2",
+      "Path": "local/e1m2-wallbands-alloc-A2-baseline-20261002.json",
+      "Sha256": "275E0BC1D57C80EE07BDF251AFBE32E18BCA98C4706BF75532954A108185366E",
+      "FullFrameSha256": "AB8F19A519D7F6E3FD89FD5439E9E053FEF5C88188FD0DCDB72662631CFA7A08",
+      "HarnessSha256": "4E49CBE0BFAA9137CFD17B1B162339301F1F63AB5FABFAD829ABB278BAA06036",
+      "RendererSha256": "9FCAF0CC8933D4BF562D32CFB172265D92CBEC197C633C0C314ABE1CA0D36E00",
+      "VariantSha256": null,
+      "MeasuredStripeSamples": 320,
+      "ManagedAllocationMedianBytes": 8002640.0
+    }
+  ]
+}

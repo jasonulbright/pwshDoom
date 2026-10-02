@@ -1728,3 +1728,36 @@ links the raw run, generated renderer, uninstrumented comparison, hashes,
 per-stripe counts and limitations. Counters add execution overhead; all timing
 inside that run is excluded from performance comparisons. It is a fixed Classic
 state, sequential stripe profile, not a live host or presentation measurement.
+
+### Active wall-band preselection trial — October 2, 2026
+
+A PowerShell-only disposable variant builds the eligible textured-band list
+once for each projected segment, then iterates only those bands for its
+columns. A four-run ABBA comparison on the same E1M2 state retains 640 samples
+per condition (10 warmups and 20 measured frames for each of 16 serial stripes
+per run). All four full-frame hashes and all 64 per-stripe output hashes match.
+Pooling the two baseline and two variant runs gives:
+
+| Phase | Baseline median | Variant median | Median change | Baseline p95 | Variant p95 |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Total renderer | 10.033 ms | 9.744 ms | −2.88% | 15.068 ms | 14.335 ms |
+| Geometry | 8.236 ms | 7.971 ms | −3.22% | 13.607 ms | 12.862 ms |
+| BSP/wall stage | 6.024 ms | 5.721 ms | −5.03% | 11.451 ms | 10.679 ms |
+
+Total-renderer p99 changed from 16.060 to 15.386 ms (−4.20%); wall p99 changed
+from 12.440 to 11.641 ms (−6.42%). Median allocated bytes per stripe render
+were 8,002,640 baseline and 7,994,192 variant (−0.11%); means differed by
+0.05%. This allocation counter includes common renderer and stopwatch call
+allocations and is only a relative comparison. The candidate also matches the
+current production worker path at five E1M1 headings in Classic, Matrix and
+AnsiArt: zero differing pixels across 960,000 compared pixels. Each style uses
+16 process strips; the character modes also match their encoded strips.
+
+The setup initially could not resolve renderer imports when the retained
+variant was dot-sourced from `local/`; staging a temporary copy beside the
+relative dependencies fixed the test, and that copy was removed. The [pinned
+trial receipt](../results/wall-band-preselection-trial-20261002.json) retains
+ABBA sample hashes, the generated variant, per-mode comparisons, and correction
+details. This is a small win on one fixed map and does not establish broader
+map behavior or live pacing. Production integration remains gated on all-map
+smoke and renderer regressions.

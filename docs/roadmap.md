@@ -634,3 +634,18 @@ This evidence commit reaches32 after Preview.5; three commits remain before the
 next scheduled release. The human Episode 1 route, clean current-source native
 pacing, independent original-renderer comparison, and acoustic review remain
 open.
+
+### Active wall-band trial — October 2, 2026
+
+A generated PowerShell variant preselecting eligible textured wall bands once
+per segment matches the current renderer's four full-frame hashes and every
+worker-stripe hash in an E1M2 ABBA trial. With 640 samples per condition, the
+fixed-state renderer median improves2.88%, wall median5.03%, and renderer p99
+4.20%; thread-local allocation median is flat within0.11%. Classic, Matrix
+and AnsiArt match the production workers at five E1M1 headings, totaling
+960,000 pixels with zero differences. This is one-map headless evidence, not
+live pacing. The initial comparator import-path error was corrected with a
+temporary source-folder copy; no product test was skipped. See the [trial
+receipt](../results/wall-band-preselection-trial-20261002.json). Move the
+bounded optimization into production and rerun all-map/mode regressions before
+the next 35-commit release. This evidence commit reaches33 after Preview.5.

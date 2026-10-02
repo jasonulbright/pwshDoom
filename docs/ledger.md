@@ -6093,3 +6093,17 @@ timings are discarded. See the [counter receipt](../results/renderer-work-counte
 Count reaches32 after Preview.5. The human campaign, clean live pacing,
 independent renderer fidelity and acoustic review remain open; release is due
 again at35 commits.
+
+An ABBA E1M2 fixed-view trial preselects eligible wall-texture bands in a
+generated PowerShell renderer variant. Two baseline and two variant runs retain
+640 measured stripe samples each, match all four full-frame hashes and all 64
+per-stripe hashes, and reduce pooled total-render median2.88% and wall median
+5.03%. Total p99 falls4.20%; wall p99 falls6.42%. Relative managed allocation
+median is effectively flat (−0.11%). Classic, Matrix and AnsiArt each match
+the production worker path at five E1M1 headings, 320,000 pixels per mode, with
+zero differences. A failed comparison launch from `local/` was a relative-import
+path issue; a temporary copy beside renderer dependencies passed and was
+removed. The trial is source-pinned [here](../results/wall-band-preselection-trial-20261002.json).
+These are bounded headless results, not native pacing. The modest win moves to
+production qualification; count reaches33 after Preview.5, with two commits
+until the next release. The human campaign and remaining release gates stay open.

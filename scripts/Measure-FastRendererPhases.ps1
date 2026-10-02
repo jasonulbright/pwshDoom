@@ -16,6 +16,8 @@ param(
     [switch]$LegacyWorkerProjection,
     [switch]$GeometryDetails,
     [switch]$GeometryWorkCounters,
+    [switch]$PreselectVisibleWallBands,
+    [switch]$MeasureRendererAllocations,
     [string]$Output="$PSScriptRoot/../results/renderer-phases.json"
 )
 $ErrorActionPreference='Stop'
@@ -24,6 +26,7 @@ if($TransportWorkerMasks -and (-not $TransportPrepared -or $TransportLegacy)){th
 if($LegacyWorkerProjection -and -not $TransportWorkerMasks){throw 'The projection-cache control requires worker masks.'}
 if($BaselineWorkerActorScan -and -not $TransportWorkerMasks){throw 'The full-array actor-scan control requires worker masks.'}
 if($GeometryWorkCounters -and -not $GeometryDetails){throw 'Geometry work counters require GeometryDetails.'}
+if($GeometryWorkCounters -and $PreselectVisibleWallBands){throw 'Run work counters and the wall-band variant separately to avoid counter-dependent timings.'}
 if(Test-Path -LiteralPath $Output){throw 'Use a fresh report path.'}
 $outputPath=[IO.Path]::GetFullPath($Output)
 [void][IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName($outputPath))
@@ -34,13 +37,28 @@ $rendererSourcePath=[IO.Path]::GetFullPath("$PSScriptRoot/../src/FastRenderer.ps
 $rendererSourceText=[IO.File]::ReadAllText($rendererSourcePath)
 $rendererSourceSha256=[Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([Text.Encoding]::UTF8.GetBytes($rendererSourceText)))
 $rendererToLoad=$rendererSourcePath;$instrumentedRendererPath=$null;$instrumentedRendererArtifact=$null
+function Set-ExpectedRendererLiteral([string]$Text,[string]$Search,[string]$Replacement,[int]$ExpectedCount=1){
+    $count=0;$offset=0
+    while(($found=$Text.IndexOf($Search,$offset,[StringComparison]::Ordinal)) -ge 0){$count++;$offset=$found+$Search.Length}
+    if($count -ne $ExpectedCount){throw "Expected $ExpectedCount renderer marker(s), found ${count}: $Search"}
+    return $Text.Replace($Search,$Replacement)
+}
+if($PreselectVisibleWallBands){
+    $bandSetupSearch='            [bool]$constantWallScale=$iz1 -eq $iz2;[double]$segmentTexelStep=0'
+    $bandSetupReplacement=@'
+            [bool]$constantWallScale=$iz1 -eq $iz2;[double]$segmentTexelStep=0
+            [int[]]$activeWallBands=[int[]]::new(3);[int]$activeWallBandCount=0
+            if($solid){if($side.MiddleTexture -gt 0){$activeWallBands[$activeWallBandCount++]=0}}
+            else{
+                if($bc -lt $ch -and -not $joinedSky -and $side.TopTexture -gt 0){$activeWallBands[$activeWallBandCount++]=0}
+                if($bf -gt $fh -and $side.BottomTexture -gt 0){$activeWallBands[$activeWallBandCount++]=1}
+                if($side.MiddleTexture -gt 0){$activeWallBands[$activeWallBandCount++]=2}
+            }
+'@
+    $rendererSourceText=Set-ExpectedRendererLiteral $rendererSourceText $bandSetupSearch $bandSetupReplacement
+    $rendererSourceText=Set-ExpectedRendererLiteral $rendererSourceText '                for([int]$band=0;$band -lt 3;$band++) {' '                for([int]$bandIndex=0;$bandIndex -lt $activeWallBandCount;$bandIndex++) {[int]$band=$activeWallBands[$bandIndex]'
+}
 if($GeometryWorkCounters){
-    function Set-ExpectedRendererLiteral([string]$Text,[string]$Search,[string]$Replacement,[int]$ExpectedCount=1){
-        $count=0;$offset=0
-        while(($found=$Text.IndexOf($Search,$offset,[StringComparison]::Ordinal)) -ge 0){$count++;$offset=$found+$Search.Length}
-        if($count -ne $ExpectedCount){throw "Expected $ExpectedCount renderer instrumentation marker(s), found ${count}: $Search"}
-        return $Text.Replace($Search,$Replacement)
-    }
     $instrumentation=@(
         @{
             Search='    [int]$open=$EndColumn-$FirstColumn'
@@ -109,11 +127,14 @@ if($GeometryWorkCounters){
         }
     )
     foreach($edit in $instrumentation){$rendererSourceText=Set-ExpectedRendererLiteral $rendererSourceText $edit.Search $edit.Replace ([int]$(if($edit.ContainsKey('Expected')){$edit.Expected}else{1}))}
+}
+if($GeometryWorkCounters -or $PreselectVisibleWallBands){
     $parseTokens=$null;$parseIssues=$null
     $null=[Management.Automation.Language.Parser]::ParseInput($rendererSourceText,[ref]$parseTokens,[ref]$parseIssues)
     if($parseIssues.Count){throw ($parseIssues|ForEach-Object {"Instrumented renderer $($_.Extent.StartLineNumber): $($_.Message)"}|Out-String)}
     $rendererDirectory=[IO.Path]::GetDirectoryName($rendererSourcePath)
-    $instrumentedRendererArtifact=[IO.Path]::ChangeExtension($outputPath,'.renderer.instrumented.ps1')
+    $artifactSuffix=if($GeometryWorkCounters){'.renderer.instrumented.ps1'}else{'.renderer.variant.ps1'}
+    $instrumentedRendererArtifact=[IO.Path]::ChangeExtension($outputPath,$artifactSuffix)
     if(Test-Path -LiteralPath $instrumentedRendererArtifact){throw 'Instrumented renderer artifact path already exists; use a fresh output path.'}
     $instrumentedRendererPath=Join-Path $rendererDirectory "FastRenderer.instrumented-$PID-$([guid]::NewGuid().ToString('N')).ps1"
     [IO.File]::WriteAllText($instrumentedRendererPath,$rendererSourceText,[Text.UTF8Encoding]::new($false))
@@ -207,6 +228,7 @@ try{
         for($i=0;$i -lt $WarmupFrames;$i++){Invoke-FastRender $context $first $end -GeometryDetails:$GeometryDetails}
         $workerSamples=[Collections.Generic.List[object]]::new()
         for($i=0;$i -lt $Frames;$i++){
+            $allocatedBefore=if($MeasureRendererAllocations){[GC]::GetAllocatedBytesForCurrentThread()}else{0L}
             $watch=[Diagnostics.Stopwatch]::StartNew()
             Invoke-FastRender $context $first $end -GeometryDetails:$GeometryDetails
             $watch.Stop()
@@ -218,6 +240,7 @@ try{
                 WeaponMs=$context.Profile.WeaponMs
                 HudMs=$context.Profile.HudMs
             }
+            if($MeasureRendererAllocations){$sample.AllocatedBytes=[GC]::GetAllocatedBytesForCurrentThread()-$allocatedBefore}
             if($GeometryDetails){foreach($name in 'SetupMs','WallsMs','PlanesMs','MaskedWallsMs'){$sample[$name]=$context.Profile.GeometryDetails[$name]}}
             if($GeometryWorkCounters){$sample.GeometryWorkCounters=$context.Profile.GeometryWorkCounters}
             $workerSamples.Add($sample);$samples.Add($sample)
@@ -248,6 +271,8 @@ try{
         WarmupFrames=$WarmupFrames;MeasuredFrames=$Frames
         GeometryDetails=$GeometryDetails.IsPresent
         GeometryWorkCounters=$GeometryWorkCounters.IsPresent
+        PreselectVisibleWallBands=$PreselectVisibleWallBands.IsPresent
+        MeasureRendererAllocations=$MeasureRendererAllocations.IsPresent
         TransportMode=if($TransportWorkerMasks -and $LegacyWorkerProjection -and $BaselineWorkerActorScan){'NumericV4 worker masks, full actor-array scan, and worker-side projection control'}elseif($TransportWorkerMasks -and $LegacyWorkerProjection){'NumericV4 worker masks with worker-side fixed-point actor projection control'}elseif($TransportWorkerMasks -and $projectionPacketVersion -eq 5 -and $BaselineWorkerActorScan){'adaptive NumericV5 actor projections with the full-array per-worker actor-scan control'}elseif($TransportWorkerMasks -and $projectionPacketVersion -eq 5){'adaptive NumericV5 actor projections with decoded per-worker visible-actor lists'}elseif($TransportWorkerMasks){'adaptive NumericV4 mask-only packet for a sparse scene'}elseif($TransportPrepared){'prepared shared actor order'}elseif($TransportLegacy){'legacy worker-side actor sort'}else{'object snapshot fallback'}
         FullFramePixels=64000;FullFrameSha256=$frameSha256
         SnapshotPreparationStats=Get-PhaseStats ([double[]]$snapshotPreparationSamples.ToArray())
@@ -259,16 +284,19 @@ try{
         PhaseStats=$phases
         WorkerPhaseStats=$workerProfiles.ToArray()
         FullViewportGeometryWorkCounters=if($GeometryWorkCounters){$context.Profile.GeometryWorkCounters}else{$null}
+        RendererAllocationBytesStats=if($MeasureRendererAllocations){Get-PhaseStats ([double[]]@($samples|ForEach-Object {$_.AllocatedBytes}))}else{$null}
         Samples=$samples.ToArray()
         WadSha256=(Get-FileHash -LiteralPath $Wad).Hash
         BundleSha256=(Get-FileHash -LiteralPath $bundle).Hash
         RendererSha256=(Get-FileHash -LiteralPath "$PSScriptRoot/../src/FastRenderer.ps1").Hash
         InstrumentedRendererSha256=if($GeometryWorkCounters){(Get-FileHash -LiteralPath $rendererToLoad).Hash}else{$null}
+        RendererVariantSha256=if($PreselectVisibleWallBands){(Get-FileHash -LiteralPath $rendererToLoad).Hash}else{$null}
+        RendererVariantArtifact=if($PreselectVisibleWallBands){[IO.Path]::GetRelativePath((Get-Location).Path,$instrumentedRendererArtifact)}else{$null}
         SnapshotTransportSha256=(Get-FileHash -LiteralPath "$PSScriptRoot/../src/SnapshotTransport.ps1").Hash
         GameHostSha256=(Get-FileHash -LiteralPath "$PSScriptRoot/../src/GameHost.ps1").Hash
         HarnessSha256=(Get-FileHash -LiteralPath $PSCommandPath).Hash
         PowerShell=$PSVersionTable.PSVersion.ToString()
-        Meaning='Attributes PowerShell software-rendering time to the instrumented geometry, actor, player-weapon, and HUD phases at one fixed real-IWAD state. When WorkerCount is greater than one, each production-equivalent column stripe is rendered sequentially in this process: these are not concurrent-worker timings and do not model process scheduling, IPC, or terminal output. GeometryWorkCounters adds counters only to a retained disposable FastRenderer copy; its timings are diagnostic overhead and are not comparable with uninstrumented profiles. TransportLegacy exercises unsorted interpolation followed by each worker sorting locally; TransportPrepared measures repeated interpolation with shared far-to-near fuzz actor order. The LegacyWorkerProjection control forces the prior NumericV4 mask packet so workers repeat transforms locally; current production selects NumericV5 only for snapshots with at least 200 actors, otherwise it keeps the mask-only packet. Snapshot preparation includes host actor projection/mask generation; decode and render phases are reported separately with equal warmup/sample counts. Use live host receipts for pacing.'
+        Meaning='Attributes PowerShell software-rendering time to the instrumented geometry, actor, player-weapon, and HUD phases at one fixed real-IWAD state. When WorkerCount is greater than one, each production-equivalent column stripe is rendered sequentially in this process: these are not concurrent-worker timings and do not model process scheduling, IPC, or terminal output. GeometryWorkCounters adds counters only to a retained disposable FastRenderer copy; its timings are diagnostic overhead and are not comparable with uninstrumented profiles. PreselectVisibleWallBands is a disposable source variant that selects eligible textured bands once per projected segment; it is an experiment and is not production code unless separately integrated and qualified. MeasureRendererAllocations records per-render thread-local managed-byte deltas outside the timed interval; setup and report allocations are excluded. TransportLegacy exercises unsorted interpolation followed by each worker sorting locally; TransportPrepared measures repeated interpolation with shared far-to-near fuzz actor order. The LegacyWorkerProjection control forces the prior NumericV4 mask packet so workers repeat transforms locally; current production selects NumericV5 only for snapshots with at least 200 actors, otherwise it keeps the mask-only packet. Snapshot preparation includes host actor projection/mask generation; decode and render phases are reported separately with equal warmup/sample counts. Use live host receipts for pacing.'
     }
 }catch{
     $failure=$_.ToString()+"`n"+$_.ScriptStackTrace
