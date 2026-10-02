@@ -1,0 +1,2180 @@
+{
+  "FinishedUtc": "2026-10-02T03:20:07.299436+00:00",
+  "Error": null,
+  "Checks": [
+    {
+      "Name": "Classic completes every fixture command",
+      "Passed": true
+    },
+    {
+      "Name": "Classic matches independent checkpoints",
+      "Passed": true
+    },
+    {
+      "Name": "Classic capture completes without source drift",
+      "Passed": true
+    },
+    {
+      "Name": "Classic closes device and returns submitted frames",
+      "Passed": true
+    },
+    {
+      "Name": "Classic captured audio closes cleanly",
+      "Passed": true
+    },
+    {
+      "Name": "Classic merged video and timestamps preserved",
+      "Passed": true
+    },
+    {
+      "Name": "Classic all observed notice text/timers match independent oracle",
+      "Passed": true
+    },
+    {
+      "Name": "Classic observes active and expired notices",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix completes every fixture command",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix matches independent checkpoints",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix capture completes without source drift",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix closes device and returns submitted frames",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix captured audio closes cleanly",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix merged video and timestamps preserved",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix all observed notice text/timers match independent oracle",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix observes active and expired notices",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt completes every fixture command",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt matches independent checkpoints",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt capture completes without source drift",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt closes device and returns submitted frames",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt captured audio closes cleanly",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt merged video and timestamps preserved",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt all observed notice text/timers match independent oracle",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt observes active and expired notices",
+      "Passed": true
+    }
+  ],
+  "Runs": [
+    {
+      "Style": "Classic",
+      "TerminalOutput": "Strips",
+      "FramesChecked": 449,
+      "ActiveNoticeFrames": 374,
+      "ExpiredNoticeFrames": 75,
+      "Commands": 350,
+      "Checkpoints": 11,
+      "SubmittedAudioFrames": 477540,
+      "QueueStarvationObservations": 0,
+      "RebufferResumes": 0,
+      "ActiveSimulationTicsPerSecond": 33.01731112716025,
+      "CompletedWritesPerActiveSecond": 42.63949894136124,
+      "SessionPauseSeconds": 6.555182599999999,
+      "MapReloadPauseSeconds": 0.2482812999999992,
+      "Files": [
+        {
+          "Path": "local/recordings/command-burst-readable-Classic-r1-game.json",
+          "Sha256": "7AD21E2A12ABF941F5BA9A01BE0DD50E821C419E2724033BF0054C03A5154663"
+        },
+        {
+          "Path": "local/recordings/command-burst-readable-Classic-r1-recording.json",
+          "Sha256": "C415581494077CAC0C1F6826B34AEB82A23490ED2BAF9587CD9E70DEFDE693FA"
+        },
+        {
+          "Path": "local/recordings/command-burst-readable-Classic-r1-input.json",
+          "Sha256": "64347FE079890D2718B18C94D286EBE8C16DF914DF71EE8049E242254034F14E"
+        },
+        {
+          "Path": "local/recordings/command-burst-readable-Classic-r1-audio.json",
+          "Sha256": "B6362D71814402AFC110B21FACC19F6AFB58569455501CD31198DD18AD47CEEC"
+        },
+        {
+          "Path": "local/recordings/command-burst-readable-Classic-r1-audio.wav",
+          "Sha256": "37247FA203D954D10D5F3F4046A342D248CE612D5B50E33ABE762F5B784EB186"
+        },
+        {
+          "Path": "local/recordings/command-burst-readable-Classic-r1-av.json",
+          "Sha256": "77FD78A294BBA95EEB9C697F74EB77CB771DDEF33BDCFA52F2D49E522CC95537"
+        },
+        {
+          "Path": "local/recordings/command-burst-readable-Classic-r1-av.mp4",
+          "Sha256": "A26149EC43CC3A3E87910E1FD535F2CD8FBD728B742D96E436109B1DEF67D7BF"
+        },
+        {
+          "Path": "local/recordings/command-burst-readable-Classic-r1.mp4",
+          "Sha256": "FA4028F9F995DC36C09F4FAC447388228841EF530B4ACD277AA05F51BDBBCE17"
+        },
+        {
+          "Path": "local/recordings/command-burst-readable-Classic-r1-ffmpeg.log",
+          "Sha256": "EE16F57901BEE39AB1405ADB1CE6251D9EE435A687D82F062576AA96BA02EFDC"
+        }
+      ]
+    },
+    {
+      "Style": "Matrix",
+      "TerminalOutput": "Strips",
+      "FramesChecked": 406,
+      "ActiveNoticeFrames": 342,
+      "ExpiredNoticeFrames": 64,
+      "Commands": 350,
+      "Checkpoints": 11,
+      "SubmittedAudioFrames": 469980,
+      "QueueStarvationObservations": 0,
+      "RebufferResumes": 0,
+      "ActiveSimulationTicsPerSecond": 33.99506805380401,
+      "CompletedWritesPerActiveSecond": 39.72566524001669,
+      "SessionPauseSeconds": 6.9127426,
+      "MapReloadPauseSeconds": 0.25466300000000003,
+      "Files": [
+        {
+          "Path": "local/recordings/command-burst-readable-Matrix-r1-game.json",
+          "Sha256": "4EE2E1DB2EA06D3232BC8A57A494B400E074926A30FF7BD4362575DCFC847742"
+        },
+        {
+          "Path": "local/recordings/command-burst-readable-Matrix-r1-recording.json",
+          "Sha256": "6DEAE23CA0E5FA3055439628B0E563E63C8BA00C4FBFCC698D288D1A7E205E63"
+        },
+        {
+          "Path": "local/recordings/command-burst-readable-Matrix-r1-input.json",
+          "Sha256": "99DDE4381C9178C1FF64032CD9D83F1A58452DDBA62798F51BB9F8C7C7739D43"
+        },
+        {
+          "Path": "local/recordings/command-burst-readable-Matrix-r1-audio.json",
+          "Sha256": "DBC72FAC6E1B29734B0FC4836C8063921E279826CE874FC764427BB73DD0279F"
+        },
+        {
+          "Path": "local/recordings/command-burst-readable-Matrix-r1-audio.wav",
+          "Sha256": "E875EE484C410634111EE0D830D96E94149CA8A0B6F072D2345907A181D01C9A"
+        },
+        {
+          "Path": "local/recordings/command-burst-readable-Matrix-r1-av.json",
+          "Sha256": "B81DE2B24E7A3351A10684769FADBC39A0695237C7DEBDA4C4208BA7FE14502E"
+        },
+        {
+          "Path": "local/recordings/command-burst-readable-Matrix-r1-av.mp4",
+          "Sha256": "247F779D0E3D56E8D98FF7CE3EB5F10E9A4C66DE3DE3839674E558ACED5BEA19"
+        },
+        {
+          "Path": "local/recordings/command-burst-readable-Matrix-r1.mp4",
+          "Sha256": "6BCF03DE9A6D6E33D895B049E31533EC1E4058BE7E14FAC4FAFF8493ACBDDBDB"
+        },
+        {
+          "Path": "local/recordings/command-burst-readable-Matrix-r1-ffmpeg.log",
+          "Sha256": "E6FDF34971796793674CDB360C4597FDA6E255C8D5766D849A1093DFC5AA2B7C"
+        }
+      ]
+    },
+    {
+      "Style": "AnsiArt",
+      "TerminalOutput": "Strips",
+      "FramesChecked": 375,
+      "ActiveNoticeFrames": 316,
+      "ExpiredNoticeFrames": 59,
+      "Commands": 350,
+      "Checkpoints": 11,
+      "SubmittedAudioFrames": 458640,
+      "QueueStarvationObservations": 0,
+      "RebufferResumes": 0,
+      "ActiveSimulationTicsPerSecond": 34.59625136766395,
+      "CompletedWritesPerActiveSecond": 37.36395147707707,
+      "SessionPauseSeconds": 6.599447,
+      "MapReloadPauseSeconds": 0.24390930000000025,
+      "Files": [
+        {
+          "Path": "local/recordings/command-burst-readable-AnsiArt-r1-game.json",
+          "Sha256": "DE2159E234A8FFD7F60A7CA7F14A241F904B178E53F3CF06EA945637ACB13932"
+        },
+        {
+          "Path": "local/recordings/command-burst-readable-AnsiArt-r1-recording.json",
+          "Sha256": "C2F61B48A17CA579F20345E735C88771376AEBB8368332705E129D9E2389A69D"
+        },
+        {
+          "Path": "local/recordings/command-burst-readable-AnsiArt-r1-input.json",
+          "Sha256": "8381C8198ADEFA0439FF65BF53F8551D13FB7CE02EA7DB5D12B428B327807439"
+        },
+        {
+          "Path": "local/recordings/command-burst-readable-AnsiArt-r1-audio.json",
+          "Sha256": "C0679A71062C7E4F7756B4A827FA09FAAE52C8BC3500EC2C73CB1D74580B1799"
+        },
+        {
+          "Path": "local/recordings/command-burst-readable-AnsiArt-r1-audio.wav",
+          "Sha256": "3A6D6AA6A0BBB16127528EA49853A7BE3E48B24F222084F0EAA2ACCAE9BCBA8D"
+        },
+        {
+          "Path": "local/recordings/command-burst-readable-AnsiArt-r1-av.json",
+          "Sha256": "6B05046DE79CED403073A048DE53E0225EA7DE351996B4631316AD565D89E5E9"
+        },
+        {
+          "Path": "local/recordings/command-burst-readable-AnsiArt-r1-av.mp4",
+          "Sha256": "6CBA5434D453E9A1377F09CA48E5471F313B2DECABBE51290CE4D94A2BA3651F"
+        },
+        {
+          "Path": "local/recordings/command-burst-readable-AnsiArt-r1.mp4",
+          "Sha256": "19B0ACB847A764B82D7580E780369B8F4A7BCBA252CAEAAE0A4B864C7D0EF792"
+        },
+        {
+          "Path": "local/recordings/command-burst-readable-AnsiArt-r1-ffmpeg.log",
+          "Sha256": "26155B562CE8411026CBA4863E203A7C694495F5797C121408DD701B61BDC0CB"
+        }
+      ]
+    }
+  ],
+  "Fixture": {
+    "Path": "local/player-messages-readable-fixture-r1.json",
+    "Sha256": "0E4EF47E9CDEF4C496602958BBA218A2C440FA4C75AC0B7C227AD83159ABAC00"
+  },
+  "AuditSha256": "3A85AB69DA1020F9842296E56941CA4E2870E0020BF1A1C055FEEA6BB2547041",
+  "Meaning": "Actual Windows Terminal recordings of bounded command scheduling, typography and loading UI in all three styles; all styles use Strips with process-loopback game audio. Every observed world/automap notice is checked against independent saved-state fixture text/timer; eleven game checkpoints per run. Classic uses the IWAD bitmap; character styles use the terminal font. Typography is reviewed separately using samples. Recordings are loaded tests, not clean pacing trials, acoustic/device-latency measurements, or ordinary-input map completion.",
+  "SchedulingLifecycle": {
+    "FinishedUtc": "2026-10-02T03:20:07.396490+00:00",
+    "Checks": [
+      {
+        "Name": "Classic complete command/audio audit",
+        "Passed": true
+      },
+      {
+        "Name": "Classic every command and exact control preserved",
+        "Passed": true
+      },
+      {
+        "Name": "Classic exact requested and acknowledged control tics",
+        "Passed": true
+      },
+      {
+        "Name": "Classic all36 recorded source hashes match audit and clean collector",
+        "Passed": true
+      },
+      {
+        "Name": "Classic clean host/audio source identity preserved",
+        "Passed": true
+      },
+      {
+        "Name": "Classic default Strips/Pairs and separate UI/game accounting",
+        "Passed": true
+      },
+      {
+        "Name": "Classic all packets PCM and timing credits reconcile",
+        "Passed": true
+      },
+      {
+        "Name": "Classic all trace commands ordered already due and queue bound observed",
+        "Passed": true
+      },
+      {
+        "Name": "Classic pass order budget and exact control-boundary guard",
+        "Passed": true
+      },
+      {
+        "Name": "Classic burst report agrees with dispatch trace",
+        "Passed": true
+      },
+      {
+        "Name": "Classic each loading operation counted",
+        "Passed": true
+      },
+      {
+        "Name": "Classic completion brackets ordered",
+        "Passed": true
+      },
+      {
+        "Name": "Matrix complete command/audio audit",
+        "Passed": true
+      },
+      {
+        "Name": "Matrix every command and exact control preserved",
+        "Passed": true
+      },
+      {
+        "Name": "Matrix exact requested and acknowledged control tics",
+        "Passed": true
+      },
+      {
+        "Name": "Matrix all36 recorded source hashes match audit and clean collector",
+        "Passed": true
+      },
+      {
+        "Name": "Matrix clean host/audio source identity preserved",
+        "Passed": true
+      },
+      {
+        "Name": "Matrix default Strips/Pairs and separate UI/game accounting",
+        "Passed": true
+      },
+      {
+        "Name": "Matrix all packets PCM and timing credits reconcile",
+        "Passed": true
+      },
+      {
+        "Name": "Matrix all trace commands ordered already due and queue bound observed",
+        "Passed": true
+      },
+      {
+        "Name": "Matrix pass order budget and exact control-boundary guard",
+        "Passed": true
+      },
+      {
+        "Name": "Matrix burst report agrees with dispatch trace",
+        "Passed": true
+      },
+      {
+        "Name": "Matrix each loading operation counted",
+        "Passed": true
+      },
+      {
+        "Name": "Matrix completion brackets ordered",
+        "Passed": true
+      },
+      {
+        "Name": "AnsiArt complete command/audio audit",
+        "Passed": true
+      },
+      {
+        "Name": "AnsiArt every command and exact control preserved",
+        "Passed": true
+      },
+      {
+        "Name": "AnsiArt exact requested and acknowledged control tics",
+        "Passed": true
+      },
+      {
+        "Name": "AnsiArt all36 recorded source hashes match audit and clean collector",
+        "Passed": true
+      },
+      {
+        "Name": "AnsiArt clean host/audio source identity preserved",
+        "Passed": true
+      },
+      {
+        "Name": "AnsiArt default Strips/Pairs and separate UI/game accounting",
+        "Passed": true
+      },
+      {
+        "Name": "AnsiArt all packets PCM and timing credits reconcile",
+        "Passed": true
+      },
+      {
+        "Name": "AnsiArt all trace commands ordered already due and queue bound observed",
+        "Passed": true
+      },
+      {
+        "Name": "AnsiArt pass order budget and exact control-boundary guard",
+        "Passed": true
+      },
+      {
+        "Name": "AnsiArt burst report agrees with dispatch trace",
+        "Passed": true
+      },
+      {
+        "Name": "AnsiArt each loading operation counted",
+        "Passed": true
+      },
+      {
+        "Name": "AnsiArt completion brackets ordered",
+        "Passed": true
+      },
+      {
+        "Name": "all three recorded source manifests identical",
+        "Passed": true
+      }
+    ],
+    "Runs": [
+      {
+        "Style": "Classic",
+        "SourceCommit": "f200220 (runtime); c9bebcb (documentation at recording)",
+        "Sources": [
+          {
+            "Sha256": "1C6860D24908ED7A3DE57B4F6EB8D83CDDB3EB26E45FD4040540CCF0C326B8CB",
+            "Path": "Start-Doom.ps1"
+          },
+          {
+            "Sha256": "3EA8E756F3ED2A96776EF57B36FF01B8BC71B36B22E1A729B3546B9315BABD2D",
+            "Path": "scripts/Invoke-Doom.ps1"
+          },
+          {
+            "Sha256": "74FC9040BD602A15798A00F457F2FC7412D1FB34E3A4AEE9057AA551A727FF16",
+            "Path": "scripts/Record-DoomReplay.ps1"
+          },
+          {
+            "Sha256": "F50876284D3E3958F2183CB483F13179FABAF45B87B8BCC221BA7F7113EF38CD",
+            "Path": "scripts/Record-ProcessAudio.ps1"
+          },
+          {
+            "Sha256": "795D02E96FFC3373741E7970512D1D65CC777A43B834D5771F69EC81CF3AF2C4",
+            "Path": "scripts/Merge-DoomCaptureAudio.ps1"
+          },
+          {
+            "Sha256": "A747786A2428F71C907F86AD631983548AAE8C6450F422F64144D367B8E9E321",
+            "Path": "src/ProcessAudioCapture.ps1"
+          },
+          {
+            "Sha256": "CED03D531F7C129D9E079F1F3B548DD436EFD81782974A3752D4689FA3E45DFB",
+            "Path": "src/CaptureClock.ps1"
+          },
+          {
+            "Sha256": "EFA64468F234327E5D7682CE08FF5B8863EEEFC5D5B082DB9B74BE544D092E21",
+            "Path": "src/CaptureTimeline.ps1"
+          },
+          {
+            "Sha256": "7E81DCD8BED8A3EE6FE745BE5DCA8AB1BD808D90F6BC983BC0581C4153CAE0DB",
+            "Path": "src/TerminalOutput.ps1"
+          },
+          {
+            "Sha256": "4EAFCE04F1174689399F61C806FDC43A2FF09A8D44AD27B3FDCEA5E77B7F1D03",
+            "Path": "src/LoadingScreen.ps1"
+          },
+          {
+            "Sha256": "5370ABE79597E5E4FC629BBDE768DCA5F7A642200CFA31CF45AC1E7D4B46F4FA",
+            "Path": "src/AnsiColorState.ps1"
+          },
+          {
+            "Sha256": "EA3FF6CC0EA380E0D7FF5069D4E7244DA984991681FF605BB8D3AC5AC8293A94",
+            "Path": "src/Ansi256.ps1"
+          },
+          {
+            "Sha256": "7110F9BBD86662C5FCC45CD9E3E7BF20415A4F6C3FA1EE2829A064EAD5497F7A",
+            "Path": "src/TerminalCodec.ps1"
+          },
+          {
+            "Sha256": "A1CEA3BF32B01AEF4DAC5665A8478EBC3CAD7C4F4EE8605961A0782079202133",
+            "Path": "scripts/FrameCodec.ps1"
+          },
+          {
+            "Sha256": "C517F67D8E588BE2F97F4BFD8A5FAB3123AD7428598760FA2FA818BB816A2976",
+            "Path": "src/FastRenderer.ps1"
+          },
+          {
+            "Sha256": "8D2B6B6B0DF30A1DD7E30D070F60A1EABBF12397BC9816A03481C6D6A659B882",
+            "Path": "src/RenderFuzz.ps1"
+          },
+          {
+            "Sha256": "CBADD9B913973D0442B4BE7A45F4C1069FA75B8DCAF78F4A550AE72C4ACED706",
+            "Path": "src/GameHost.ps1"
+          },
+          {
+            "Sha256": "E88163E3D970A02F5D81B9EEDDEB9F7B1E0FE2A90AFCF4019733D423D69E8F8A",
+            "Path": "src/SnapshotTransport.ps1"
+          },
+          {
+            "Sha256": "0C8ABF378AC10A78925408F1BCE74B365703ABDB7BBEA57F40A72F7ED5CF798C",
+            "Path": "src/InputReplay.ps1"
+          },
+          {
+            "Sha256": "E3EE226131E2AB3D4AAFE8F4686BE3594AD88D198A3EB756B317123DB24696D3",
+            "Path": "src/PaletteCodec.ps1"
+          },
+          {
+            "Sha256": "78E3BF44DD0009FA3DE2B855FDD3B411BC6FFD21A62FBC04A0D9BA83E6A5CD78",
+            "Path": "src/CharacterCodec.ps1"
+          },
+          {
+            "Sha256": "DD7AAFBB6C27FC33FAA5761B0E194B4A4F6476013F81A59C5ECE646B928FC9B5",
+            "Path": "src/RenderAssets.ps1"
+          },
+          {
+            "Sha256": "F70E59DCA050F89AD579E12D29070F753E063EFF465BA6758D3C18508E2BE2DA",
+            "Path": "src/GameProcesses.ps1"
+          },
+          {
+            "Sha256": "472B67E534DBC1AB262439CCD57E481B472AD3F40761E1B9518B946067E7DEAE",
+            "Path": "src/SimulationProcess.ps1"
+          },
+          {
+            "Sha256": "003395B53CE668E692476912D8E1F72165C7C322338B5B9E8F290A8DFFED3E3F",
+            "Path": "scripts/Invoke-SimulationWorker.ps1"
+          },
+          {
+            "Sha256": "6A432F98075973A988F232A234E21FDB262E7BB1990F80D04224A07E16E9D1E7",
+            "Path": "scripts/Invoke-GameRenderWorker.ps1"
+          },
+          {
+            "Sha256": "77CB7FFDBADF112F1A1B84642B9CD90DF304A9B779B2F22411E9C279D15FEA1A",
+            "Path": "src/PlayerMessages.ps1"
+          },
+          {
+            "Sha256": "798038D387AD85B31056120B2EC1A52CC026A210131CC70B9283BF7D063668D5",
+            "Path": "scripts/Invoke-RenderWorkerWithLogs.ps1"
+          },
+          {
+            "Sha256": "8DB7EDCF7B012C8F4F798E7C6ACB93F60634398AE1329914AF8DFE667E844DA4",
+            "Path": "scripts/Invoke-AudioWorker.ps1"
+          },
+          {
+            "Sha256": "38E846CDF04317FBA6DE2EC598F3497EFB6ED97DEE9AB8EEC22D8A94E4421A0B",
+            "Path": "src/AudioMixer.ps1"
+          },
+          {
+            "Sha256": "01865375DB878EFA137B3B5EF49437B4FFBF9B8C6F0359A2AA52580E0977801E",
+            "Path": "src/AudioPackets.ps1"
+          },
+          {
+            "Sha256": "7907F76AEB92969F36252E86B36A970C359B0AE2D9EC3ACCF1514E2D6ABC7DEE",
+            "Path": "src/AudioRunspace.ps1"
+          },
+          {
+            "Sha256": "B8447B4F701F8B1267E949F0BD114A2304049590B8371E449D8592F2478B0A49",
+            "Path": "src/WaveOutDevice.ps1"
+          },
+          {
+            "Sha256": "5050D3355A30692B67CF130594146FDDD0CB51B9843B2C79B65D68F55E7F11F8",
+            "Path": "src/MusicPlayback.ps1"
+          },
+          {
+            "Sha256": "A65FB5FA034E1A8DB2CCA59C0AEE7A6A0A5F132461BCA13CC06C337CB3DC859D",
+            "Path": "src/MusicLoopReader.ps1"
+          },
+          {
+            "Sha256": "5C60101C3AFEB17A8DEE7CE5E39DA78F0A347F91BEF45DF0B19877453A47BF62",
+            "Path": "src/MusicOneShotReader.ps1"
+          }
+        ],
+        "Limits": {
+          "Meaning": "Only already-due 35-Hz commands; stop at the two-command window, four-per-pass budget, loading status or exact recorded control boundary. No future command is issued for catch-up.",
+          "MaximumCommandsPerPass": 2,
+          "OutstandingCommandLimit": 2,
+          "CatchupBursts": [
+            {
+              "Commands": 2,
+              "FirstCommand": 3,
+              "LastSignalQpc": 1842031235434,
+              "Pass": 4
+            },
+            {
+              "Commands": 2,
+              "FirstCommand": 7,
+              "LastSignalQpc": 1842032436969,
+              "Pass": 7
+            },
+            {
+              "Commands": 2,
+              "FirstCommand": 11,
+              "LastSignalQpc": 1842033691763,
+              "Pass": 10
+            },
+            {
+              "Commands": 2,
+              "FirstCommand": 16,
+              "LastSignalQpc": 1842035369987,
+              "Pass": 14
+            },
+            {
+              "Commands": 2,
+              "FirstCommand": 28,
+              "LastSignalQpc": 1842039875620,
+              "Pass": 25
+            },
+            {
+              "Commands": 2,
+              "FirstCommand": 32,
+              "LastSignalQpc": 1842041201773,
+              "Pass": 28
+            },
+            {
+              "Commands": 2,
+              "FirstCommand": 175,
+              "LastSignalQpc": 1842113161589,
+              "Pass": 170
+            }
+          ],
+          "CommandsPerPassLimit": 4
+        },
+        "ExactControls": [
+          {
+            "Tic": 0,
+            "Action": "LoadGame",
+            "SaveHash": "CBF3FD7457D43EACA5D988638FCA69A33504604EFC6A70CB2537276D0A2A4989"
+          },
+          {
+            "Tic": 175,
+            "Action": "LoadGame",
+            "SaveHash": "63A4358575231D428AC0E523AEB6C93A138EF3D9CB9E6E6C519C1A9278C1F531"
+          }
+        ],
+        "SessionEvents": [
+          {
+            "Action": "LoadGame",
+            "WallMs": 0.417,
+            "Tic": 0,
+            "Phase": "Requested",
+            "Sequence": 1,
+            "MenuScreen": 13
+          },
+          {
+            "Phase": "Acknowledged",
+            "Tic": 0,
+            "Sequence": 1,
+            "Map": 2,
+            "Episode": 1,
+            "Generation": 2,
+            "MenuScreen": 0,
+            "Action": "LoadGame",
+            "WallMs": 3689.8922
+          },
+          {
+            "Action": "LoadGame",
+            "WallMs": 9271.3639,
+            "Tic": 175,
+            "Phase": "Requested",
+            "Sequence": 2,
+            "MenuScreen": 13
+          },
+          {
+            "Phase": "Acknowledged",
+            "Tic": 175,
+            "Sequence": 2,
+            "Map": 2,
+            "Episode": 1,
+            "Generation": 3,
+            "MenuScreen": 0,
+            "Action": "LoadGame",
+            "WallMs": 12137.0713
+          }
+        ],
+        "LoadingUpdates": 3,
+        "FirstLoadingTaskUpperBoundMs": 2.0481,
+        "ReportedAudioFrames": 477540,
+        "Files": [
+          {
+            "Path": "local/recordings/command-burst-readable-Classic-r1-evidence.json",
+            "Sha256": "48C8E8E44EF2DFE2B59DC98EBDB8A7A4C3B4C7C413E2C0B9B4397116FFCE569C"
+          },
+          {
+            "Path": "local/recordings/command-burst-readable-Classic-r1-input.json",
+            "Sha256": "64347FE079890D2718B18C94D286EBE8C16DF914DF71EE8049E242254034F14E"
+          },
+          {
+            "Path": "local/recordings/command-burst-readable-Classic-r1-clock.json",
+            "Sha256": "1F82FBC141F180B7D1FA684A48EEC67CE18C9705D3653CBE4C9A57677A8DC147"
+          },
+          {
+            "Path": "local/recordings/command-burst-readable-Classic-r1-ffmpeg.log",
+            "Sha256": "EE16F57901BEE39AB1405ADB1CE6251D9EE435A687D82F062576AA96BA02EFDC"
+          }
+        ],
+        "ControlBoundaryEndsMultiCommandPass": false
+      },
+      {
+        "Style": "Matrix",
+        "SourceCommit": "f200220 (runtime); c9bebcb (documentation at recording)",
+        "Sources": [
+          {
+            "Sha256": "1C6860D24908ED7A3DE57B4F6EB8D83CDDB3EB26E45FD4040540CCF0C326B8CB",
+            "Path": "Start-Doom.ps1"
+          },
+          {
+            "Sha256": "3EA8E756F3ED2A96776EF57B36FF01B8BC71B36B22E1A729B3546B9315BABD2D",
+            "Path": "scripts/Invoke-Doom.ps1"
+          },
+          {
+            "Sha256": "74FC9040BD602A15798A00F457F2FC7412D1FB34E3A4AEE9057AA551A727FF16",
+            "Path": "scripts/Record-DoomReplay.ps1"
+          },
+          {
+            "Sha256": "F50876284D3E3958F2183CB483F13179FABAF45B87B8BCC221BA7F7113EF38CD",
+            "Path": "scripts/Record-ProcessAudio.ps1"
+          },
+          {
+            "Sha256": "795D02E96FFC3373741E7970512D1D65CC777A43B834D5771F69EC81CF3AF2C4",
+            "Path": "scripts/Merge-DoomCaptureAudio.ps1"
+          },
+          {
+            "Sha256": "A747786A2428F71C907F86AD631983548AAE8C6450F422F64144D367B8E9E321",
+            "Path": "src/ProcessAudioCapture.ps1"
+          },
+          {
+            "Sha256": "CED03D531F7C129D9E079F1F3B548DD436EFD81782974A3752D4689FA3E45DFB",
+            "Path": "src/CaptureClock.ps1"
+          },
+          {
+            "Sha256": "EFA64468F234327E5D7682CE08FF5B8863EEEFC5D5B082DB9B74BE544D092E21",
+            "Path": "src/CaptureTimeline.ps1"
+          },
+          {
+            "Sha256": "7E81DCD8BED8A3EE6FE745BE5DCA8AB1BD808D90F6BC983BC0581C4153CAE0DB",
+            "Path": "src/TerminalOutput.ps1"
+          },
+          {
+            "Sha256": "4EAFCE04F1174689399F61C806FDC43A2FF09A8D44AD27B3FDCEA5E77B7F1D03",
+            "Path": "src/LoadingScreen.ps1"
+          },
+          {
+            "Sha256": "5370ABE79597E5E4FC629BBDE768DCA5F7A642200CFA31CF45AC1E7D4B46F4FA",
+            "Path": "src/AnsiColorState.ps1"
+          },
+          {
+            "Sha256": "EA3FF6CC0EA380E0D7FF5069D4E7244DA984991681FF605BB8D3AC5AC8293A94",
+            "Path": "src/Ansi256.ps1"
+          },
+          {
+            "Sha256": "7110F9BBD86662C5FCC45CD9E3E7BF20415A4F6C3FA1EE2829A064EAD5497F7A",
+            "Path": "src/TerminalCodec.ps1"
+          },
+          {
+            "Sha256": "A1CEA3BF32B01AEF4DAC5665A8478EBC3CAD7C4F4EE8605961A0782079202133",
+            "Path": "scripts/FrameCodec.ps1"
+          },
+          {
+            "Sha256": "C517F67D8E588BE2F97F4BFD8A5FAB3123AD7428598760FA2FA818BB816A2976",
+            "Path": "src/FastRenderer.ps1"
+          },
+          {
+            "Sha256": "8D2B6B6B0DF30A1DD7E30D070F60A1EABBF12397BC9816A03481C6D6A659B882",
+            "Path": "src/RenderFuzz.ps1"
+          },
+          {
+            "Sha256": "CBADD9B913973D0442B4BE7A45F4C1069FA75B8DCAF78F4A550AE72C4ACED706",
+            "Path": "src/GameHost.ps1"
+          },
+          {
+            "Sha256": "E88163E3D970A02F5D81B9EEDDEB9F7B1E0FE2A90AFCF4019733D423D69E8F8A",
+            "Path": "src/SnapshotTransport.ps1"
+          },
+          {
+            "Sha256": "0C8ABF378AC10A78925408F1BCE74B365703ABDB7BBEA57F40A72F7ED5CF798C",
+            "Path": "src/InputReplay.ps1"
+          },
+          {
+            "Sha256": "E3EE226131E2AB3D4AAFE8F4686BE3594AD88D198A3EB756B317123DB24696D3",
+            "Path": "src/PaletteCodec.ps1"
+          },
+          {
+            "Sha256": "78E3BF44DD0009FA3DE2B855FDD3B411BC6FFD21A62FBC04A0D9BA83E6A5CD78",
+            "Path": "src/CharacterCodec.ps1"
+          },
+          {
+            "Sha256": "DD7AAFBB6C27FC33FAA5761B0E194B4A4F6476013F81A59C5ECE646B928FC9B5",
+            "Path": "src/RenderAssets.ps1"
+          },
+          {
+            "Sha256": "F70E59DCA050F89AD579E12D29070F753E063EFF465BA6758D3C18508E2BE2DA",
+            "Path": "src/GameProcesses.ps1"
+          },
+          {
+            "Sha256": "472B67E534DBC1AB262439CCD57E481B472AD3F40761E1B9518B946067E7DEAE",
+            "Path": "src/SimulationProcess.ps1"
+          },
+          {
+            "Sha256": "003395B53CE668E692476912D8E1F72165C7C322338B5B9E8F290A8DFFED3E3F",
+            "Path": "scripts/Invoke-SimulationWorker.ps1"
+          },
+          {
+            "Sha256": "6A432F98075973A988F232A234E21FDB262E7BB1990F80D04224A07E16E9D1E7",
+            "Path": "scripts/Invoke-GameRenderWorker.ps1"
+          },
+          {
+            "Sha256": "77CB7FFDBADF112F1A1B84642B9CD90DF304A9B779B2F22411E9C279D15FEA1A",
+            "Path": "src/PlayerMessages.ps1"
+          },
+          {
+            "Sha256": "798038D387AD85B31056120B2EC1A52CC026A210131CC70B9283BF7D063668D5",
+            "Path": "scripts/Invoke-RenderWorkerWithLogs.ps1"
+          },
+          {
+            "Sha256": "8DB7EDCF7B012C8F4F798E7C6ACB93F60634398AE1329914AF8DFE667E844DA4",
+            "Path": "scripts/Invoke-AudioWorker.ps1"
+          },
+          {
+            "Sha256": "38E846CDF04317FBA6DE2EC598F3497EFB6ED97DEE9AB8EEC22D8A94E4421A0B",
+            "Path": "src/AudioMixer.ps1"
+          },
+          {
+            "Sha256": "01865375DB878EFA137B3B5EF49437B4FFBF9B8C6F0359A2AA52580E0977801E",
+            "Path": "src/AudioPackets.ps1"
+          },
+          {
+            "Sha256": "7907F76AEB92969F36252E86B36A970C359B0AE2D9EC3ACCF1514E2D6ABC7DEE",
+            "Path": "src/AudioRunspace.ps1"
+          },
+          {
+            "Sha256": "B8447B4F701F8B1267E949F0BD114A2304049590B8371E449D8592F2478B0A49",
+            "Path": "src/WaveOutDevice.ps1"
+          },
+          {
+            "Sha256": "5050D3355A30692B67CF130594146FDDD0CB51B9843B2C79B65D68F55E7F11F8",
+            "Path": "src/MusicPlayback.ps1"
+          },
+          {
+            "Sha256": "A65FB5FA034E1A8DB2CCA59C0AEE7A6A0A5F132461BCA13CC06C337CB3DC859D",
+            "Path": "src/MusicLoopReader.ps1"
+          },
+          {
+            "Sha256": "5C60101C3AFEB17A8DEE7CE5E39DA78F0A347F91BEF45DF0B19877453A47BF62",
+            "Path": "src/MusicOneShotReader.ps1"
+          }
+        ],
+        "Limits": {
+          "OutstandingCommandLimit": 2,
+          "CommandsPerPassLimit": 4,
+          "CatchupBursts": [
+            {
+              "LastSignalQpc": 1842563835096,
+              "Commands": 2,
+              "Pass": 4,
+              "FirstCommand": 3
+            },
+            {
+              "LastSignalQpc": 1842565322457,
+              "Commands": 2,
+              "Pass": 6,
+              "FirstCommand": 6
+            },
+            {
+              "LastSignalQpc": 1842566762306,
+              "Commands": 2,
+              "Pass": 10,
+              "FirstCommand": 11
+            },
+            {
+              "LastSignalQpc": 1842567717543,
+              "Commands": 2,
+              "Pass": 12,
+              "FirstCommand": 14
+            },
+            {
+              "LastSignalQpc": 1842569108536,
+              "Commands": 2,
+              "Pass": 16,
+              "FirstCommand": 19
+            },
+            {
+              "LastSignalQpc": 1842574741001,
+              "Commands": 2,
+              "Pass": 29,
+              "FirstCommand": 33
+            },
+            {
+              "LastSignalQpc": 1842586348477,
+              "Commands": 2,
+              "Pass": 59,
+              "FirstCommand": 64
+            },
+            {
+              "LastSignalQpc": 1842646236925,
+              "Commands": 2,
+              "Pass": 169,
+              "FirstCommand": 175
+            }
+          ],
+          "MaximumCommandsPerPass": 2,
+          "Meaning": "Only already-due 35-Hz commands; stop at the two-command window, four-per-pass budget, loading status or exact recorded control boundary. No future command is issued for catch-up."
+        },
+        "ExactControls": [
+          {
+            "Action": "LoadGame",
+            "Tic": 0,
+            "SaveHash": "CBF3FD7457D43EACA5D988638FCA69A33504604EFC6A70CB2537276D0A2A4989"
+          },
+          {
+            "Action": "LoadGame",
+            "Tic": 175,
+            "SaveHash": "63A4358575231D428AC0E523AEB6C93A138EF3D9CB9E6E6C519C1A9278C1F531"
+          }
+        ],
+        "SessionEvents": [
+          {
+            "Tic": 0,
+            "Sequence": 1,
+            "Phase": "Requested",
+            "WallMs": 0.4294,
+            "Action": "LoadGame",
+            "MenuScreen": 13
+          },
+          {
+            "Sequence": 1,
+            "Tic": 0,
+            "Map": 2,
+            "Generation": 2,
+            "WallMs": 3904.5951,
+            "MenuScreen": 0,
+            "Action": "LoadGame",
+            "Episode": 1,
+            "Phase": "Acknowledged"
+          },
+          {
+            "Tic": 175,
+            "Sequence": 2,
+            "Phase": "Requested",
+            "WallMs": 9316.7877,
+            "Action": "LoadGame",
+            "MenuScreen": 13
+          },
+          {
+            "Sequence": 2,
+            "Tic": 175,
+            "Map": 2,
+            "Generation": 3,
+            "WallMs": 12325.3646,
+            "MenuScreen": 0,
+            "Action": "LoadGame",
+            "Episode": 1,
+            "Phase": "Acknowledged"
+          }
+        ],
+        "LoadingUpdates": 3,
+        "FirstLoadingTaskUpperBoundMs": 2.2598,
+        "ReportedAudioFrames": 469980,
+        "Files": [
+          {
+            "Path": "local/recordings/command-burst-readable-Matrix-r1-evidence.json",
+            "Sha256": "CDBB45E78B9CD8762092D4ACD4649BE120CA156AA3364670626227DBE7C40ACB"
+          },
+          {
+            "Path": "local/recordings/command-burst-readable-Matrix-r1-input.json",
+            "Sha256": "99DDE4381C9178C1FF64032CD9D83F1A58452DDBA62798F51BB9F8C7C7739D43"
+          },
+          {
+            "Path": "local/recordings/command-burst-readable-Matrix-r1-clock.json",
+            "Sha256": "322C490239718EA89ADB9FCEBA27D82DA95898EA0A883A67325A9D7C6234076A"
+          },
+          {
+            "Path": "local/recordings/command-burst-readable-Matrix-r1-ffmpeg.log",
+            "Sha256": "E6FDF34971796793674CDB360C4597FDA6E255C8D5766D849A1093DFC5AA2B7C"
+          }
+        ],
+        "ControlBoundaryEndsMultiCommandPass": false
+      },
+      {
+        "Style": "AnsiArt",
+        "SourceCommit": "f200220 (runtime); c9bebcb (documentation at recording)",
+        "Sources": [
+          {
+            "Sha256": "1C6860D24908ED7A3DE57B4F6EB8D83CDDB3EB26E45FD4040540CCF0C326B8CB",
+            "Path": "Start-Doom.ps1"
+          },
+          {
+            "Sha256": "3EA8E756F3ED2A96776EF57B36FF01B8BC71B36B22E1A729B3546B9315BABD2D",
+            "Path": "scripts/Invoke-Doom.ps1"
+          },
+          {
+            "Sha256": "74FC9040BD602A15798A00F457F2FC7412D1FB34E3A4AEE9057AA551A727FF16",
+            "Path": "scripts/Record-DoomReplay.ps1"
+          },
+          {
+            "Sha256": "F50876284D3E3958F2183CB483F13179FABAF45B87B8BCC221BA7F7113EF38CD",
+            "Path": "scripts/Record-ProcessAudio.ps1"
+          },
+          {
+            "Sha256": "795D02E96FFC3373741E7970512D1D65CC777A43B834D5771F69EC81CF3AF2C4",
+            "Path": "scripts/Merge-DoomCaptureAudio.ps1"
+          },
+          {
+            "Sha256": "A747786A2428F71C907F86AD631983548AAE8C6450F422F64144D367B8E9E321",
+            "Path": "src/ProcessAudioCapture.ps1"
+          },
+          {
+            "Sha256": "CED03D531F7C129D9E079F1F3B548DD436EFD81782974A3752D4689FA3E45DFB",
+            "Path": "src/CaptureClock.ps1"
+          },
+          {
+            "Sha256": "EFA64468F234327E5D7682CE08FF5B8863EEEFC5D5B082DB9B74BE544D092E21",
+            "Path": "src/CaptureTimeline.ps1"
+          },
+          {
+            "Sha256": "7E81DCD8BED8A3EE6FE745BE5DCA8AB1BD808D90F6BC983BC0581C4153CAE0DB",
+            "Path": "src/TerminalOutput.ps1"
+          },
+          {
+            "Sha256": "4EAFCE04F1174689399F61C806FDC43A2FF09A8D44AD27B3FDCEA5E77B7F1D03",
+            "Path": "src/LoadingScreen.ps1"
+          },
+          {
+            "Sha256": "5370ABE79597E5E4FC629BBDE768DCA5F7A642200CFA31CF45AC1E7D4B46F4FA",
+            "Path": "src/AnsiColorState.ps1"
+          },
+          {
+            "Sha256": "EA3FF6CC0EA380E0D7FF5069D4E7244DA984991681FF605BB8D3AC5AC8293A94",
+            "Path": "src/Ansi256.ps1"
+          },
+          {
+            "Sha256": "7110F9BBD86662C5FCC45CD9E3E7BF20415A4F6C3FA1EE2829A064EAD5497F7A",
+            "Path": "src/TerminalCodec.ps1"
+          },
+          {
+            "Sha256": "A1CEA3BF32B01AEF4DAC5665A8478EBC3CAD7C4F4EE8605961A0782079202133",
+            "Path": "scripts/FrameCodec.ps1"
+          },
+          {
+            "Sha256": "C517F67D8E588BE2F97F4BFD8A5FAB3123AD7428598760FA2FA818BB816A2976",
+            "Path": "src/FastRenderer.ps1"
+          },
+          {
+            "Sha256": "8D2B6B6B0DF30A1DD7E30D070F60A1EABBF12397BC9816A03481C6D6A659B882",
+            "Path": "src/RenderFuzz.ps1"
+          },
+          {
+            "Sha256": "CBADD9B913973D0442B4BE7A45F4C1069FA75B8DCAF78F4A550AE72C4ACED706",
+            "Path": "src/GameHost.ps1"
+          },
+          {
+            "Sha256": "E88163E3D970A02F5D81B9EEDDEB9F7B1E0FE2A90AFCF4019733D423D69E8F8A",
+            "Path": "src/SnapshotTransport.ps1"
+          },
+          {
+            "Sha256": "0C8ABF378AC10A78925408F1BCE74B365703ABDB7BBEA57F40A72F7ED5CF798C",
+            "Path": "src/InputReplay.ps1"
+          },
+          {
+            "Sha256": "E3EE226131E2AB3D4AAFE8F4686BE3594AD88D198A3EB756B317123DB24696D3",
+            "Path": "src/PaletteCodec.ps1"
+          },
+          {
+            "Sha256": "78E3BF44DD0009FA3DE2B855FDD3B411BC6FFD21A62FBC04A0D9BA83E6A5CD78",
+            "Path": "src/CharacterCodec.ps1"
+          },
+          {
+            "Sha256": "DD7AAFBB6C27FC33FAA5761B0E194B4A4F6476013F81A59C5ECE646B928FC9B5",
+            "Path": "src/RenderAssets.ps1"
+          },
+          {
+            "Sha256": "F70E59DCA050F89AD579E12D29070F753E063EFF465BA6758D3C18508E2BE2DA",
+            "Path": "src/GameProcesses.ps1"
+          },
+          {
+            "Sha256": "472B67E534DBC1AB262439CCD57E481B472AD3F40761E1B9518B946067E7DEAE",
+            "Path": "src/SimulationProcess.ps1"
+          },
+          {
+            "Sha256": "003395B53CE668E692476912D8E1F72165C7C322338B5B9E8F290A8DFFED3E3F",
+            "Path": "scripts/Invoke-SimulationWorker.ps1"
+          },
+          {
+            "Sha256": "6A432F98075973A988F232A234E21FDB262E7BB1990F80D04224A07E16E9D1E7",
+            "Path": "scripts/Invoke-GameRenderWorker.ps1"
+          },
+          {
+            "Sha256": "77CB7FFDBADF112F1A1B84642B9CD90DF304A9B779B2F22411E9C279D15FEA1A",
+            "Path": "src/PlayerMessages.ps1"
+          },
+          {
+            "Sha256": "798038D387AD85B31056120B2EC1A52CC026A210131CC70B9283BF7D063668D5",
+            "Path": "scripts/Invoke-RenderWorkerWithLogs.ps1"
+          },
+          {
+            "Sha256": "8DB7EDCF7B012C8F4F798E7C6ACB93F60634398AE1329914AF8DFE667E844DA4",
+            "Path": "scripts/Invoke-AudioWorker.ps1"
+          },
+          {
+            "Sha256": "38E846CDF04317FBA6DE2EC598F3497EFB6ED97DEE9AB8EEC22D8A94E4421A0B",
+            "Path": "src/AudioMixer.ps1"
+          },
+          {
+            "Sha256": "01865375DB878EFA137B3B5EF49437B4FFBF9B8C6F0359A2AA52580E0977801E",
+            "Path": "src/AudioPackets.ps1"
+          },
+          {
+            "Sha256": "7907F76AEB92969F36252E86B36A970C359B0AE2D9EC3ACCF1514E2D6ABC7DEE",
+            "Path": "src/AudioRunspace.ps1"
+          },
+          {
+            "Sha256": "B8447B4F701F8B1267E949F0BD114A2304049590B8371E449D8592F2478B0A49",
+            "Path": "src/WaveOutDevice.ps1"
+          },
+          {
+            "Sha256": "5050D3355A30692B67CF130594146FDDD0CB51B9843B2C79B65D68F55E7F11F8",
+            "Path": "src/MusicPlayback.ps1"
+          },
+          {
+            "Sha256": "A65FB5FA034E1A8DB2CCA59C0AEE7A6A0A5F132461BCA13CC06C337CB3DC859D",
+            "Path": "src/MusicLoopReader.ps1"
+          },
+          {
+            "Sha256": "5C60101C3AFEB17A8DEE7CE5E39DA78F0A347F91BEF45DF0B19877453A47BF62",
+            "Path": "src/MusicOneShotReader.ps1"
+          }
+        ],
+        "Limits": {
+          "Meaning": "Only already-due 35-Hz commands; stop at the two-command window, four-per-pass budget, loading status or exact recorded control boundary. No future command is issued for catch-up.",
+          "OutstandingCommandLimit": 2,
+          "CommandsPerPassLimit": 4,
+          "CatchupBursts": [
+            {
+              "FirstCommand": 2,
+              "Pass": 3,
+              "LastSignalQpc": 1843108576256,
+              "Commands": 2
+            },
+            {
+              "FirstCommand": 5,
+              "Pass": 5,
+              "LastSignalQpc": 1843110146611,
+              "Commands": 2
+            },
+            {
+              "FirstCommand": 8,
+              "Pass": 7,
+              "LastSignalQpc": 1843111168971,
+              "Commands": 2
+            },
+            {
+              "FirstCommand": 11,
+              "Pass": 9,
+              "LastSignalQpc": 1843112075993,
+              "Commands": 2
+            },
+            {
+              "FirstCommand": 15,
+              "Pass": 12,
+              "LastSignalQpc": 1843113639838,
+              "Commands": 2
+            },
+            {
+              "FirstCommand": 18,
+              "Pass": 14,
+              "LastSignalQpc": 1843114425351,
+              "Commands": 2
+            },
+            {
+              "FirstCommand": 33,
+              "Pass": 28,
+              "LastSignalQpc": 1843118342343,
+              "Commands": 2
+            },
+            {
+              "FirstCommand": 36,
+              "Pass": 30,
+              "LastSignalQpc": 1843121511319,
+              "Commands": 2
+            },
+            {
+              "FirstCommand": 99,
+              "Pass": 92,
+              "LastSignalQpc": 1843139552407,
+              "Commands": 2
+            },
+            {
+              "FirstCommand": 107,
+              "Pass": 99,
+              "LastSignalQpc": 1843141597173,
+              "Commands": 2
+            },
+            {
+              "FirstCommand": 127,
+              "Pass": 118,
+              "LastSignalQpc": 1843146555065,
+              "Commands": 2
+            },
+            {
+              "FirstCommand": 164,
+              "Pass": 154,
+              "LastSignalQpc": 1843155905342,
+              "Commands": 2
+            },
+            {
+              "FirstCommand": 175,
+              "Pass": 164,
+              "LastSignalQpc": 1843186454238,
+              "Commands": 2
+            }
+          ],
+          "MaximumCommandsPerPass": 2
+        },
+        "ExactControls": [
+          {
+            "Tic": 0,
+            "Action": "LoadGame",
+            "SaveHash": "CBF3FD7457D43EACA5D988638FCA69A33504604EFC6A70CB2537276D0A2A4989"
+          },
+          {
+            "Tic": 175,
+            "Action": "LoadGame",
+            "SaveHash": "63A4358575231D428AC0E523AEB6C93A138EF3D9CB9E6E6C519C1A9278C1F531"
+          }
+        ],
+        "SessionEvents": [
+          {
+            "Sequence": 1,
+            "MenuScreen": 13,
+            "Phase": "Requested",
+            "Tic": 0,
+            "WallMs": 0.5478,
+            "Action": "LoadGame"
+          },
+          {
+            "Tic": 0,
+            "MenuScreen": 0,
+            "Map": 2,
+            "WallMs": 3791.1042,
+            "Action": "LoadGame",
+            "Sequence": 1,
+            "Phase": "Acknowledged",
+            "Episode": 1,
+            "Generation": 2
+          },
+          {
+            "Sequence": 2,
+            "MenuScreen": 13,
+            "Phase": "Requested",
+            "Tic": 175,
+            "WallMs": 8953.1324,
+            "Action": "LoadGame"
+          },
+          {
+            "Tic": 175,
+            "MenuScreen": 0,
+            "Map": 2,
+            "WallMs": 11762.023,
+            "Action": "LoadGame",
+            "Sequence": 2,
+            "Phase": "Acknowledged",
+            "Episode": 1,
+            "Generation": 3
+          }
+        ],
+        "LoadingUpdates": 3,
+        "FirstLoadingTaskUpperBoundMs": 2.6855,
+        "ReportedAudioFrames": 458640,
+        "Files": [
+          {
+            "Path": "local/recordings/command-burst-readable-AnsiArt-r1-evidence.json",
+            "Sha256": "EA90DA36BCA46E11410C22364BBBE03A897872A34063AFD007430CECA3F50B1A"
+          },
+          {
+            "Path": "local/recordings/command-burst-readable-AnsiArt-r1-input.json",
+            "Sha256": "8381C8198ADEFA0439FF65BF53F8551D13FB7CE02EA7DB5D12B428B327807439"
+          },
+          {
+            "Path": "local/recordings/command-burst-readable-AnsiArt-r1-clock.json",
+            "Sha256": "C603A781398B3E3D89F35A949480256B75D495F68F10BEF75798BF8625327ACC"
+          },
+          {
+            "Path": "local/recordings/command-burst-readable-AnsiArt-r1-ffmpeg.log",
+            "Sha256": "26155B562CE8411026CBA4863E203A7C694495F5797C121408DD701B61BDC0CB"
+          }
+        ],
+        "ControlBoundaryEndsMultiCommandPass": false
+      }
+    ],
+    "Audit": {
+      "Path": "local/audit-command-burst-live-lifecycle-r1.py",
+      "Sha256": "6C4696E979798E04930D03C5427E9A981214A507962802C9D16095BE9D695B4E"
+    },
+    "Meaning": "Actual WGC/loopback saves in every style, ordered input and exact control/checkpoint coverage on the frozen scheduler. Source manifests match clean collector scripts and current source hashes. Passes do not cross control tics, but a guard reached at the end of a multi-command burst is separately identified only if present in traces. Queue reads precede publication, not atomic maxima. Realtime credits cover produced PCM rather than proof of speaker output. No clean pacing, acoustic, physical-input/resize, independent moving-world or campaign qualification claim."
+  },
+  "VisualReview": {
+    "FinishedUtc": "2026-10-02T03:21:52.031854+00:00",
+    "Samples": [
+      {
+        "Style": "Classic",
+        "SampleKind": "Red-lock notice in automap",
+        "Path": "C:\\projects\\pwshDoom/local/command-burst-review-Classic-r1.png",
+        "Sha256": "49A5C9997FB61E639AE87DC8A30106B7DA524FD527F045425CBCB38E033ED2FA",
+        "VideoSeconds": 34.5643192,
+        "SelectedHostFrame": {
+          "Generation": 2,
+          "EndQpc": 1842049118402,
+          "HarvestMs": 0.9622,
+          "MenuScreen": 0,
+          "Episode": 1,
+          "ElapsedMs": 2037.0808,
+          "AsyncOutput": null,
+          "Workers": [
+            [
+              1.2411,
+              0.8598,
+              0.0193,
+              1842048864270,
+              1842048886800
+            ],
+            [
+              1.22,
+              3.0149,
+              0.0209,
+              1842048864817,
+              1842048908798
+            ],
+            [
+              1.3322,
+              0.8567,
+              0.0192,
+              1842048865387,
+              1842048888966
+            ],
+            [
+              1.2945,
+              0.8723,
+              0.0199,
+              1842048865874,
+              1842048889164
+            ],
+            [
+              1.2555,
+              0.8378,
+              0.0195,
+              1842048866374,
+              1842048888907
+            ],
+            [
+              1.2625,
+              0.8759,
+              0.0211,
+              1842048866968,
+              1842048890080
+            ],
+            [
+              3.7123,
+              0.764,
+              0.02,
+              1842048867414,
+              1842048913618
+            ],
+            [
+              1.6608,
+              1.2108,
+              0.0229,
+              1842048868475,
+              1842048898935
+            ],
+            [
+              1.6125,
+              1.1556,
+              0.0228,
+              1842048870115,
+              1842048899560
+            ],
+            [
+              1.7303,
+              1.0973,
+              0.022,
+              1842048870052,
+              1842048900160
+            ],
+            [
+              1.7113,
+              1.1927,
+              0.0222,
+              1842048870602,
+              1842048901508
+            ],
+            [
+              3.5398,
+              0.7179,
+              0.0235,
+              1842048871472,
+              1842048915729
+            ],
+            [
+              1.7388,
+              0.8167,
+              0.0276,
+              1842048872934,
+              1842048900293
+            ],
+            [
+              1.6537,
+              1.0747,
+              0.0235,
+              1842048872578,
+              1842048901796
+            ],
+            [
+              1.6736,
+              0.9414,
+              0.0262,
+              1842048876273,
+              1842048904282
+            ],
+            [
+              1.4256,
+              0.7337,
+              0.0236,
+              1842048886792,
+              1842048909991
+            ]
+          ],
+          "MenuRevision": 2,
+          "State": 0,
+          "OutputBytes": 286646,
+          "Map": 2,
+          "PaletteNumber": 0,
+          "PlayerMessageTics": 90,
+          "PlayerMessage": "YOU NEED A RED KEY TO OPEN THIS DOOR",
+          "SubmitMs": 1.1896,
+          "OutputDispatchMs": 0.0,
+          "StartQpc": 1842048862088,
+          "OutputMs": 5.5293,
+          "ScreenKind": 3,
+          "Tic": 50
+        },
+        "Review": "Visible notice at top and bounded game/HUD view. Classic retains bitmap lettering; Matrix and AnsiArt retain terminal lettering and their glyph representation. Sample review is at2048x829 resized from3440x1392, not a whole-movie/human playability/fidelity qualification."
+      },
+      {
+        "Style": "Matrix",
+        "SampleKind": "Red-lock notice in automap",
+        "Path": "C:\\projects\\pwshDoom/local/command-burst-review-Matrix-r1.png",
+        "Sha256": "393CC0816346526C7FB1B87BE8C964B0F0E8A681AC822047B29A5F4E7E365DD9",
+        "VideoSeconds": 35.267480899999995,
+        "SelectedHostFrame": {
+          "HarvestMs": 1.3749,
+          "PlayerMessage": "YOU NEED A RED KEY TO OPEN THIS DOOR",
+          "SubmitMs": 1.4996,
+          "ScreenKind": 3,
+          "PlayerMessageTics": 90,
+          "Episode": 1,
+          "ElapsedMs": 2045.6014,
+          "AsyncOutput": null,
+          "OutputBytes": 231094,
+          "Generation": 2,
+          "MenuScreen": 0,
+          "Tic": 50,
+          "State": 0,
+          "EndQpc": 1842582512318,
+          "Map": 2,
+          "OutputDispatchMs": 0.0,
+          "StartQpc": 1842581985244,
+          "MenuRevision": 2,
+          "Workers": [
+            [
+              1.3331,
+              0.7765,
+              0.0239,
+              1842581989542,
+              1842582012609
+            ],
+            [
+              3.5732,
+              1.0511,
+              0.0236,
+              1842581990310,
+              1842582038463
+            ],
+            [
+              3.4417,
+              1.0193,
+              0.0231,
+              1842581991001,
+              1842582037624
+            ],
+            [
+              1.5352,
+              1.1029,
+              0.0231,
+              1842581991752,
+              1842582019966
+            ],
+            [
+              1.2449,
+              2.7386,
+              0.0218,
+              1842581992479,
+              1842582033803
+            ],
+            [
+              3.0957,
+              1.0496,
+              0.0236,
+              1842581993159,
+              1842582036520
+            ],
+            [
+              2.9741,
+              0.7395,
+              0.0226,
+              1842581993927,
+              1842582032663
+            ],
+            [
+              1.249,
+              0.8071,
+              0.0227,
+              1842581994837,
+              1842582016919
+            ],
+            [
+              1.5931,
+              1.0495,
+              0.0226,
+              1842581995951,
+              1842582024910
+            ],
+            [
+              1.5428,
+              1.1225,
+              0.0231,
+              1842581996780,
+              1842582025361
+            ],
+            [
+              3.072,
+              0.7067,
+              0.0342,
+              1842581997278,
+              1842582037123
+            ],
+            [
+              1.263,
+              0.7759,
+              0.0217,
+              1842581998085,
+              1842582019967
+            ],
+            [
+              1.6722,
+              1.0895,
+              0.0256,
+              1842581998713,
+              1842582028242
+            ],
+            [
+              1.6179,
+              0.9796,
+              0.0384,
+              1842581999685,
+              1842582027719
+            ],
+            [
+              1.3772,
+              0.7409,
+              0.0234,
+              1842582000686,
+              1842582023336
+            ],
+            [
+              2.8394,
+              1.0014,
+              0.0255,
+              1842582003325,
+              1842582043764
+            ]
+          ],
+          "OutputMs": 37.4887,
+          "PaletteNumber": 0
+        },
+        "Review": "Visible notice at top and bounded game/HUD view. Classic retains bitmap lettering; Matrix and AnsiArt retain terminal lettering and their glyph representation. Sample review is at2048x829 resized from3440x1392, not a whole-movie/human playability/fidelity qualification."
+      },
+      {
+        "Style": "AnsiArt",
+        "SampleKind": "Red-lock notice in automap",
+        "Path": "C:\\projects\\pwshDoom/local/command-burst-review-AnsiArt-r1.png",
+        "Sha256": "12364FF72F50328F263E9A013AF14638A70AAA3852E3CC82AE06ED036AAD9D97",
+        "VideoSeconds": 37.024778,
+        "SelectedHostFrame": {
+          "SubmitMs": 1.3418,
+          "Episode": 1,
+          "OutputDispatchMs": 0.0,
+          "EndQpc": 1843126508428,
+          "OutputMs": 4.9932,
+          "ElapsedMs": 1974.368,
+          "ScreenKind": 3,
+          "Workers": [
+            [
+              1.6059,
+              1.0882,
+              0.0274,
+              1843126216918,
+              1843126246742
+            ],
+            [
+              1.5748,
+              1.071,
+              0.0249,
+              1843126217625,
+              1843126247319
+            ],
+            [
+              1.5319,
+              1.0665,
+              0.0244,
+              1843126218799,
+              1843126247566
+            ],
+            [
+              1.7833,
+              1.0437,
+              0.0324,
+              1843126219143,
+              1843126250108
+            ],
+            [
+              2.0054,
+              1.0378,
+              0.0249,
+              1843126219804,
+              1843126252937
+            ],
+            [
+              1.9304,
+              1.0411,
+              0.0255,
+              1843126220505,
+              1843126252979
+            ],
+            [
+              1.604,
+              1.806,
+              0.025,
+              1843126221191,
+              1843126258152
+            ],
+            [
+              1.2213,
+              0.7909,
+              0.0224,
+              1843126221825,
+              1843126244202
+            ],
+            [
+              1.9536,
+              1.1014,
+              0.0235,
+              1843126222612,
+              1843126255907
+            ],
+            [
+              1.6873,
+              1.1993,
+              0.0249,
+              1843126223269,
+              1843126255027
+            ],
+            [
+              1.5604,
+              1.0151,
+              0.0347,
+              1843126230292,
+              1843126258847
+            ],
+            [
+              1.4806,
+              1.0297,
+              0.0243,
+              1843126248160,
+              1843126275966
+            ],
+            [
+              1.2706,
+              0.7316,
+              0.0212,
+              1843126248615,
+              1843126270826
+            ],
+            [
+              1.579,
+              1.0261,
+              0.0225,
+              1843126253042,
+              1843126281752
+            ],
+            [
+              1.4536,
+              1.0302,
+              0.0221,
+              1843126253791,
+              1843126281425
+            ],
+            [
+              1.7129,
+              1.0388,
+              0.0248,
+              1843126256157,
+              1843126286503
+            ]
+          ],
+          "State": 0,
+          "MenuScreen": 0,
+          "PlayerMessageTics": 90,
+          "Tic": 50,
+          "AsyncOutput": null,
+          "MenuRevision": 2,
+          "Generation": 2,
+          "HarvestMs": 1.3929,
+          "StartQpc": 1843126213444,
+          "OutputBytes": 232898,
+          "PaletteNumber": 0,
+          "Map": 2,
+          "PlayerMessage": "YOU NEED A RED KEY TO OPEN THIS DOOR"
+        },
+        "Review": "Visible notice at top and bounded game/HUD view. Classic retains bitmap lettering; Matrix and AnsiArt retain terminal lettering and their glyph representation. Sample review is at2048x829 resized from3440x1392, not a whole-movie/human playability/fidelity qualification."
+      },
+      {
+        "Style": "Classic",
+        "SampleKind": "Armor pickup notice in world/style view",
+        "Path": "C:\\projects\\pwshDoom/local/command-burst-world-review-Classic-r1.png",
+        "Sha256": "F61713AE54F1B583725C5C909D051783B2A9B868D24A78262C95E0B4B4A5D9BC",
+        "VideoSeconds": 41.452041099999995,
+        "SelectedHostFrame": {
+          "Generation": 3,
+          "EndQpc": 1842117995621,
+          "HarvestMs": 1.3342,
+          "MenuScreen": 0,
+          "Episode": 1,
+          "ElapsedMs": 6058.854,
+          "AsyncOutput": null,
+          "Workers": [
+            [
+              10.5201,
+              1.4861,
+              2.5054,
+              1842117561841,
+              1842117708311
+            ],
+            [
+              4.5912,
+              1.5198,
+              3.7498,
+              1842117562408,
+              1842117662243
+            ],
+            [
+              8.835,
+              1.6018,
+              2.1597,
+              1842117562942,
+              1842117690336
+            ],
+            [
+              8.6518,
+              1.7057,
+              4.704,
+              1842117563491,
+              1842117715416
+            ],
+            [
+              7.7892,
+              2.4139,
+              3.3987,
+              1842117564203,
+              1842117701768
+            ],
+            [
+              7.5641,
+              1.6904,
+              2.1884,
+              1842117564598,
+              1842117680262
+            ],
+            [
+              14.4112,
+              1.626,
+              3.8565,
+              1842117566270,
+              1842117766575
+            ],
+            [
+              11.5971,
+              1.6569,
+              2.2226,
+              1842117567679,
+              1842117723752
+            ],
+            [
+              16.385,
+              1.7756,
+              2.4689,
+              1842117567979,
+              1842117775684
+            ],
+            [
+              12.0281,
+              1.9054,
+              2.443,
+              1842117568706,
+              1842117734034
+            ],
+            [
+              10.496,
+              2.3696,
+              2.6341,
+              1842117569344,
+              1842117725968
+            ],
+            [
+              11.7647,
+              1.7045,
+              2.99,
+              1842117569808,
+              1842117736041
+            ],
+            [
+              5.9485,
+              1.5565,
+              3.6956,
+              1842117570453,
+              1842117683739
+            ],
+            [
+              5.2275,
+              1.5654,
+              2.1709,
+              1842117570947,
+              1842117661866
+            ],
+            [
+              10.9205,
+              1.5373,
+              2.4174,
+              1842117571566,
+              1842117721920
+            ],
+            [
+              10.0209,
+              3.5602,
+              2.3576,
+              1842117575945,
+              1842117736826
+            ]
+          ],
+          "MenuRevision": 4,
+          "State": 0,
+          "OutputBytes": 680669,
+          "Map": 2,
+          "PaletteNumber": 0,
+          "PlayerMessageTics": 125,
+          "PlayerMessage": "PICKED UP THE ARMOR.",
+          "SubmitMs": 4.0861,
+          "OutputDispatchMs": 0.0,
+          "StartQpc": 1842117530712,
+          "OutputMs": 14.6884,
+          "ScreenKind": 0,
+          "Tic": 190
+        },
+        "Review": "Visible notice at top and bounded game/HUD view. Classic retains bitmap lettering; Matrix and AnsiArt retain terminal lettering and their glyph representation. Sample review is at2048x829 resized from3440x1392, not a whole-movie/human playability/fidelity qualification."
+      },
+      {
+        "Style": "Matrix",
+        "SampleKind": "Armor pickup notice in world/style view",
+        "Path": "C:\\projects\\pwshDoom/local/command-burst-world-review-Matrix-r1.png",
+        "Sha256": "CA68980E8E08EB990EC111C641F03F75B7E12894B2C8132B58B6582F7536AE42",
+        "VideoSeconds": 42.100688999999996,
+        "SelectedHostFrame": {
+          "HarvestMs": 1.1543,
+          "PlayerMessage": "PICKED UP THE ARMOR.",
+          "SubmitMs": 4.2434,
+          "ScreenKind": 0,
+          "PlayerMessageTics": 125,
+          "Episode": 1,
+          "ElapsedMs": 5869.9449,
+          "AsyncOutput": null,
+          "OutputBytes": 246854,
+          "Generation": 3,
+          "MenuScreen": 0,
+          "Tic": 190,
+          "State": 0,
+          "EndQpc": 1842650844399,
+          "Map": 2,
+          "OutputDispatchMs": 0.0,
+          "StartQpc": 1842650385677,
+          "MenuRevision": 4,
+          "Workers": [
+            [
+              7.0797,
+              1.2184,
+              2.2966,
+              1842650419575,
+              1842650526983
+            ],
+            [
+              7.3161,
+              3.6571,
+              2.5362,
+              1842650420077,
+              1842650556785
+            ],
+            [
+              7.4331,
+              1.3573,
+              4.7025,
+              1842650420629,
+              1842650556939
+            ],
+            [
+              7.2668,
+              1.1726,
+              2.3884,
+              1842650421162,
+              1842650532396
+            ],
+            [
+              11.6347,
+              1.508,
+              2.3336,
+              1842650421677,
+              1842650577823
+            ],
+            [
+              12.8326,
+              1.6713,
+              2.5756,
+              1842650422277,
+              1842650594663
+            ],
+            [
+              13.9444,
+              1.2674,
+              2.6714,
+              1842650422779,
+              1842650602979
+            ],
+            [
+              12.5898,
+              1.597,
+              2.4128,
+              1842650423357,
+              1842650590916
+            ],
+            [
+              15.2623,
+              1.5512,
+              5.0839,
+              1842650423901,
+              1842650644987
+            ],
+            [
+              12.5543,
+              1.1646,
+              2.5471,
+              1842650425086,
+              1842650589170
+            ],
+            [
+              8.1604,
+              1.0916,
+              2.3072,
+              1842650425802,
+              1842650542757
+            ],
+            [
+              9.6758,
+              1.283,
+              2.2802,
+              1842650426414,
+              1842650560250
+            ],
+            [
+              11.361,
+              1.0796,
+              2.5448,
+              1842650427011,
+              1842650579022
+            ],
+            [
+              6.9312,
+              1.6117,
+              2.5191,
+              1842650427573,
+              1842650539775
+            ],
+            [
+              10.581,
+              1.5459,
+              2.5378,
+              1842650428068,
+              1842650576224
+            ],
+            [
+              8.6365,
+              1.8938,
+              2.0751,
+              1842650430749,
+              1842650558568
+            ]
+          ],
+          "OutputMs": 13.646,
+          "PaletteNumber": 0
+        },
+        "Review": "Visible notice at top and bounded game/HUD view. Classic retains bitmap lettering; Matrix and AnsiArt retain terminal lettering and their glyph representation. Sample review is at2048x829 resized from3440x1392, not a whole-movie/human playability/fidelity qualification."
+      },
+      {
+        "Style": "AnsiArt",
+        "SampleKind": "Armor pickup notice in world/style view",
+        "Path": "C:\\projects\\pwshDoom/local/command-burst-world-review-AnsiArt-r1.png",
+        "Sha256": "21115AD3E575CF7D83F0F441664E331757F95A20974EF12725506A5C67067717",
+        "VideoSeconds": 43.508766699999995,
+        "SelectedHostFrame": {
+          "SubmitMs": 4.3826,
+          "Episode": 1,
+          "OutputDispatchMs": 0.0,
+          "EndQpc": 1843191348315,
+          "OutputMs": 16.7115,
+          "ElapsedMs": 5649.1033,
+          "ScreenKind": 0,
+          "Workers": [
+            [
+              7.4682,
+              2.8226,
+              2.4661,
+              1843190835775,
+              1843190964875
+            ],
+            [
+              8.0011,
+              2.7521,
+              2.5145,
+              1843190836481,
+              1843190970693
+            ],
+            [
+              7.2911,
+              5.1012,
+              2.5197,
+              1843190837279,
+              1843190988119
+            ],
+            [
+              8.8642,
+              2.1181,
+              2.1069,
+              1843190837811,
+              1843190969893
+            ],
+            [
+              10.7258,
+              2.1665,
+              2.391,
+              1843190838559,
+              1843190992755
+            ],
+            [
+              9.4305,
+              5.2319,
+              2.5034,
+              1843190839366,
+              1843191012625
+            ],
+            [
+              14.8185,
+              2.8382,
+              2.63,
+              1843190840109,
+              1843191044633
+            ],
+            [
+              13.944,
+              2.6813,
+              2.2095,
+              1843190840795,
+              1843191030520
+            ],
+            [
+              20.6777,
+              2.5802,
+              2.4925,
+              1843190841474,
+              1843191100841
+            ],
+            [
+              8.3269,
+              2.5845,
+              3.877,
+              1843190842445,
+              1843190991736
+            ],
+            [
+              11.0314,
+              2.1553,
+              2.1181,
+              1843190842793,
+              1843190997033
+            ],
+            [
+              7.6044,
+              2.2217,
+              2.1495,
+              1843190843542,
+              1843190964617
+            ],
+            [
+              5.9748,
+              2.158,
+              4.5208,
+              1843190844236,
+              1843190972043
+            ],
+            [
+              10.6092,
+              2.7863,
+              2.3588,
+              1843190844965,
+              1843191004100
+            ],
+            [
+              8.4294,
+              2.0851,
+              2.1383,
+              1843190845980,
+              1843190973783
+            ],
+            [
+              15.3519,
+              2.8008,
+              3.6632,
+              1843190852991,
+              1843191072666
+            ]
+          ],
+          "State": 0,
+          "MenuScreen": 0,
+          "PlayerMessageTics": 125,
+          "Tic": 190,
+          "AsyncOutput": null,
+          "MenuRevision": 4,
+          "Generation": 3,
+          "HarvestMs": 1.2916,
+          "StartQpc": 1843190801983,
+          "OutputBytes": 256557,
+          "PaletteNumber": 0,
+          "Map": 2,
+          "PlayerMessage": "PICKED UP THE ARMOR."
+        },
+        "Review": "Visible notice at top and bounded game/HUD view. Classic retains bitmap lettering; Matrix and AnsiArt retain terminal lettering and their glyph representation. Sample review is at2048x829 resized from3440x1392, not a whole-movie/human playability/fidelity qualification."
+      }
+    ],
+    "Selections": [
+      {
+        "Path": "local/command-burst-review-samples-r1.json",
+        "Sha256": "30CF604EA29C983862768FE28E80DBE4A5790B63CB51BEDD09203D209A290B2C"
+      },
+      {
+        "Path": "local/command-burst-world-review-samples-r1.json",
+        "Sha256": "DCCF376C4BD71342F37B92A9ADEC05140CE3F29B40ABCDE1A0137944785DBEAA"
+      }
+    ],
+    "Audit": {
+      "Path": "local/audit-command-burst-review-r1.py",
+      "Sha256": "9C93CC19711FF34FBE012953141E6DED54EE351E5BC32E972DD172685C72AE42"
+    },
+    "CoverageLimit": "All styles exercise multi-command passes, but command174 remains the first command in its pass in every recorded run. Thus the control-boundary guard is inspected and no crossing occurs, but the branch that stops a multi-command pass at175 is not directly exercised."
+  }
+}

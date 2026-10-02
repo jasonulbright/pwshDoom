@@ -329,3 +329,12 @@ checks pass; Matrix exercises one two-command burst. Native repeated pacing
 and live control qualification follow. [Diagnostic](../results/command-publication-stall-diagnostic-20261002.json),
 [fixture coverage and limits](../results/command-burst-fixtures-20261002.json).
 Public release count reaches27 with this change; R20 remains frozen.
+
+Three clean native repeats retain all commands/audio but fail full numerical
+pacing gates; the second preserves substantial synchronous-output overlap
+at its worst producer delay. Subsequent all-style WGC/audio save fixtures pass
+350 commands, eleven checkpoints, all-input/credit/PCM accounting and reviewed
+notice/style samples. [Clean evidence](../results/command-burst-loaded-classic-20261002.json),
+[live coverage and limits](../results/command-burst-live-20261002.json).
+Three paired Strips/AsyncBatch ABBA cycles on this runtime follow before any
+default change. Public release count reaches29; publish at35 or more.

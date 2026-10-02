@@ -72,3 +72,13 @@ The exporter checks the original hash and successful stable-viewport game report
 The updated codec passes 144 serial/partition cases across both styles and both alphabets, eight independent brightness/edge probes, six invalid-dimension guards and ten viewport cases. Each katakana style also passes five real worker views: 320,000 source pixels and 35 encoded strip comparisons. Classic's 24 ANSI round trips pass. [The final validation record](../results/katakana-validation.json) records source hashes, syntax checks, result hashes and process cleanup. The recording request is also retained in `AGENTS.md` for future live effect tests.
 
 The newer [menu recordings](menus.md#actual-terminal-recordings) demonstrate all three styles with episode/difficulty selection, pause, readable instructions, and quit confirmation. Their viewing copies are `menu-verified-classic.mp4`, `menu-verified-matrix.mp4` and `menu-verified-ansiart.mp4` under `local/recordings/`. These are finite UI tests with static-menu holds and no audio; their aggregate writes are not gameplay performance measurements. Earlier captures remain available as historical evidence.
+
+The October2 scheduler fixtures record current Classic, Matrix and AnsiArt
+with actual game loopback audio, two save loads, automap and notice effects.
+Each consumes350 commands, matches eleven checkpoints and exercises catch-up
+bursts. Original movies are `command-burst-readable-{Style}-r1-av.mp4` under
+ignored `local/recordings/`. [Portable validation, media/source hashes and six
+reviewed samples](../results/command-burst-live-20261002.json) retain exact
+control/input/audio accounting and the unexercised multi-command boundary
+branch. These recorded tests do not qualify acoustic latency, campaign
+completion, human playability or clean displayed-game-frame performance.
