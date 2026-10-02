@@ -75,6 +75,7 @@ $outputColumns=if($Style -eq 'Classic'){320}else{160};$outputRows=if($Style -eq 
 $viewportChanges=[Collections.Generic.List[object]]::new();$pauseStart=$null;$pausedMs=0.0;$pauseCount=0;$resizeDiscarded=0
 $completed=0;$tics=0;$exitReason='Error';$terminalWidth=0;$terminalHeight=0;$workerMemory=0;$simMemory=0
 $commandWindow=2;$commandPressureStart=0L;$commandPressure=[Collections.Generic.List[object]]::new()
+$commandDispatchTrace=[Collections.Generic.List[object]]::new()
 $frameTimes=[Collections.Generic.List[double]]::new();$frameStats=[Collections.Generic.List[object]]::new()
 $captures=[Collections.Generic.List[string]]::new();$nextCapture=$CaptureEveryTics;$snapshot=$null;$replayData=$null
 $interpolationTimes=[Collections.Generic.List[double]]::new();$simulationReport=$null
@@ -359,7 +360,14 @@ try {
                 if($phase -lt 120){$cmd.ForwardMove=25}elseif($phase -lt 260){$cmd.AngleTurn=640}elseif($phase -lt 430){$cmd.ForwardMove=25}
                 if(($tics%14) -lt 7){$cmd.Buttons=1};if(($tics%70) -eq 69){$cmd.Buttons=$cmd.Buttons -bor 2}
             }
-            if($send){Send-DoomSimulationCommand $simulation $tics @($cmd.ForwardMove,$cmd.SideMove,$cmd.AngleTurn,$cmd.Buttons) -AutomapMask $automapMask;$tics++}
+            if($send){
+                $issueActiveMs=$clock.Elapsed.TotalMilliseconds;$consumedBefore=$simulation.View.ReadInt32(20);$issueQpc=[Diagnostics.Stopwatch]::GetTimestamp()
+                Send-DoomSimulationCommand $simulation $tics @($cmd.ForwardMove,$cmd.SideMove,$cmd.AngleTurn,$cmd.Buttons) -AutomapMask $automapMask
+                $signalQpc=[Diagnostics.Stopwatch]::GetTimestamp()
+                $commandDispatchTrace.Add(@{Command=$tics;IssueStartQpc=$issueQpc;SignalCompletedQpc=$signalQpc;DecisionActiveMs=$now;IssueActiveMs=$issueActiveMs;
+                    DueActiveMs=($tics+1)*1000.0/35;ConsumedBeforeIssue=$consumedBefore;CompletedFramesBeforeIssue=$completed})
+                $tics++
+            }
         }
         $snapshot=Read-DoomSimulationSnapshot $simulation $snapshot
         if($snapshot.Tic -eq $tics){$inputMapVisible=$snapshot.AutomapVisible}
@@ -474,6 +482,7 @@ finally {
         SettingsPath=$SettingsPath;InitialSettings=$initialPreferences;FinalSettings=$preferences;SettingsLoadError=$preferencesLoadError;SettingsEvents=$preferencesEvents.ToArray();
         DurationSeconds=$clock.Elapsed.TotalSeconds;IssuedCommands=$tics;SimulationTics=$simTics;TicsPerSecond=$simTics/[Math]::Max(.001,$clock.Elapsed.TotalSeconds);
         MaximumPendingCommands=$commandWindow;CommandBackpressure=$commandPressure.ToArray();IncompleteCommandBackpressureStartQpc=$commandPressureStart;
+        CommandDispatchTrace=$commandDispatchTrace.ToArray();CommandDispatchTraceMeaning='Host timestamps immediately around command-ring publication/signal. IssueActiveMs uses the active game clock; DecisionActiveMs precedes input sampling. ConsumedBeforeIssue is an earlier observation, not an atomic queue-depth measurement. Publication can precede native worker wakeup; this is not an OS scheduler or physical-input trace.';
         WallDurationSeconds=$wallClock.Elapsed.TotalSeconds;ViewportPausedSeconds=$pausedMs/1000;ViewportPauseCount=$pauseCount;
         MapReloads=$mapReloads.ToArray();RendererAssetsReused=$rendererAssetsReused;RendererAssetsReloaded=$rendererAssetsReloaded;MapReloadPausedSeconds=$loadingMs/1000;DiscardedTransitionFrames=$transitionDiscarded;FinalAssetGeneration=$assetGeneration;
         CompletedUpdatesPerWallSecond=$completed/[Math]::Max(.001,$wallClock.Elapsed.TotalSeconds);DiscardedResizeFrames=$resizeDiscarded;
