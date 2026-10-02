@@ -467,6 +467,15 @@ function Invoke-FastRender {
             [bool]$wallUReady=$false;[int]$wallPerpData=0;[int]$wallOffsetData=0;[uint32]$wallCenterAngleData=0
             [double[]]$wallBandOrigins=$null;[int]$wallOriginBits=0
             [bool]$constantWallScale=$iz1 -eq $iz2;[double]$segmentTexelStep=0
+            # Select eligible textured bands once per segment instead of
+            # repeating all three eligibility branches for every column.
+            [int[]]$activeWallBands=[int[]]::new(3);[int]$activeWallBandCount=0
+            if($solid){if($side.MiddleTexture -gt 0){$activeWallBands[$activeWallBandCount++]=0}}
+            else{
+                if($bc -lt $ch -and -not $joinedSky -and $side.TopTexture -gt 0){$activeWallBands[$activeWallBandCount++]=0}
+                if($bf -gt $fh -and $side.BottomTexture -gt 0){$activeWallBands[$activeWallBandCount++]=1}
+                if($side.MiddleTexture -gt 0){$activeWallBands[$activeWallBandCount++]=2}
+            }
             for([int]$x=$x0;$x -lt $x1;$x++) {
                 [int]$clipT=$topClip[$x];[int]$clipB=$bottomClip[$x];if($clipT -gt $clipB){continue}
                 # Match Doom's xToAngle lookup: wall rays are defined at integer
@@ -501,7 +510,8 @@ function Invoke-FastRender {
                 [byte[]]$wallColors=$Context.Colors[$wallLight]
                 [bool]$wallStepReady=$false;[double]$wallTexelStep=0
                 [bool]$columnUReady=$false;[int]$wallTextureColumn=0
-                for([int]$band=0;$band -lt 3;$band++) {
+                for([int]$bandIndex=0;$bandIndex -lt $activeWallBandCount;$bandIndex++) {
+                    [int]$band=$activeWallBands[$bandIndex]
                     [int]$tex=0;[double]$textureTop=$ch
                     if($solid) {
                         if($band -gt 0){break};$tex=$side.MiddleTexture;$wy0=$wallT;$wy1=$wallB
