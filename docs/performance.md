@@ -1268,3 +1268,29 @@ unqualified.
 ## Loading feedback after R19
 
 [Pollable reloads and separate loading UI](loading-screen.md) now allow feedback during map preparation and worker reload. Four actual WGC/audio recordings qualify specific route/save/ownership behavior, with separate UI counters and no gameplay FPS credit. The ordinary route's first UI dispatch takes 7.15 ms but its completion observation takes 989.6 ms; later updates are about 100 ms apart. This is a recorded correctness/effect test, not a clean ETW comparison or a pause-free-display qualification. Native task completion, host observation delay and terminal backpressure need stronger separation before causal attribution. R19 and the twelve-run comparison remain frozen evidence from the earlier source.
+
+Three later clean cb7731d repeats bracket the first loading Task completion at
+981.8–985.7 ms, excluding host observation delay alone. Replacing thirty-two idle
+renderer pipe readers with owned PowerShell logs reduces corresponding 22219c8
+first-write upper bounds to 2.664–2.720 ms. Startup falls from 40.22–42.76 to
+26.97–27.22 seconds. Sequential before/after cohorts support this specific
+change; they do not establish a general pacing winner. All three styles pass
+actual worker/resource/fault checks, and a separate WGC route passes 36 grouped
+source/accounting/media checks with a reviewed loading sample.
+
+The [clean receipt](../results/renderer-file-logs-pacing-classic-20261002.json)
+retains global display rates 52.397 / 50.541 / 50.908/sec and active tics
+34.977 / 34.975 / 34.851/sec. P99 tic lateness is 624.1 / 920.7 / 795.7 ms;
+maximums are 666.4 / 942.4 / 880.0 ms. Sampled private memory is 4.519–4.553 GiB.
+No run passes all gates. ETW intervals include the separately accounted loading
+feedback, so reduced global gaps do not prove smoother distinct gameplay frames.
+
+Early command 58–73 delays precede sustained audio packet age. Median age from
+packet construction to submission is 661.7 / 871.3 / 872.1 ms, while median
+mix blocks take about 0.7 ms. Runs two/three retain 1159/1220 producer-backpressure
+intervals, starting at command 162/157. Realtime filler generated 30/42/45 blocks
+while packets were unavailable. All submitted frames return and software
+starvation/rebuffer counts remain zero, but those facts do not qualify latency.
+A controlled producer-gap/recovery test follows before changing timing policy.
+The [recorded route receipt](../results/renderer-file-logs-live-20261002.json)
+and original media stay separate from these clean measurements.

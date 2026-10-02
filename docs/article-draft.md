@@ -104,11 +104,23 @@ For the narrow requirement “real Doom-derived gameplay in Windows Terminal, wi
 
 ## What a preview does and does not claim
 
-The current public package is [Preview.4](https://github.com/jasonulbright/pwshDoom/releases/tag/v0.1.0-preview.4), with 544 manifest-verified payload files and a matching fresh public download. The local R18 handoff adds the final readable player notices and extracted startup/audio checks; its [receipt](../results/r18-playtest-package-validation-20261001.json) separates that development archive from a tagged release. Neither closes the full campaign and performance gates. The earlier Preview.3/R17 package evidence below remains historical.
+The current public package is [Preview.4](https://github.com/jasonulbright/pwshDoom/releases/tag/v0.1.0-preview.4), with 544 manifest-verified payload files and a matching fresh public download. The local R19 handoff adds readable notices, immutable-resource reuse and optional asynchronous output; its [receipt](../results/r19-playtest-package-validation-20261001.json) pins 551 payload files and extracted startup/audio checks. This development archive is separate from a tagged release. Neither closes the full campaign and performance gates. The earlier Preview.3/R17 package evidence below remains historical.
 
 Later map-handoff profiling identifies repeated WAD-resource conversion and serialization as a concrete cost. Three paired ABBA stage cycles reduce preparation from 4.09–4.90 seconds to 81–112 ms by retaining immutable resource data, with identical direct/read-back frame hashes. Initial cache construction still costs about five seconds and retains 35.87 MiB; each map gets private geometry and raster scratch. A complete live audio route then measures a 102 ms preparation stage but still a 4.517-second total load, with worker-side deserialization remaining. This demonstrates a specific optimization under the PowerShell constraint; it does not establish 60 displayed game frames/sec. [Stage and worker evidence](../results/map-render-resource-cache-20261001.json), [live timing](../results/resource-cache-loaded-classic-20261001-r1.json).
 
 Verified resource-body reuse in persistent workers subsequently reduces isolated read-back from 1.30–1.51 seconds to 69–81 ms. Three live Classic/audio routes measure 1.54–2.03-second map loads, clean software audio and 4.47–4.60 GiB sampled private memory. Their 55.18 / 53.75 / 47.43 Terminal display transitions/sec still miss the release gate, and the last run falls to 30.66 simulation tics/sec. Its E1M2 output calls average 85.8 ms while the same host supplies game commands. This exposes a remaining coupling between terminal stalls and gameplay; it does not establish their cause or a 60-frame solution. [Three-run evidence](../results/reader-cache-loaded-classic-20261001.json).
+
+Loading feedback then exposes another boundary cost. In three clean repeats,
+the first asynchronous banner write stays pending for about 983 ms. Redirecting
+renderer logs within PowerShell removes thirty-two idle host pipe-reader Tasks;
+three corresponding first-write completion bounds fall below 2.72 ms, and
+startup falls from 40–43 seconds to about 27. This targeted result still leaves
+50.5–52.4 global Terminal display events/sec and 624–921 ms p99 tic lateness.
+It also exposes 662–872 ms median audio packet age despite zero software
+starvation observations. A responsive loading banner, a healthy queue counter
+and a playable route each establish different capabilities. The [clean measurements](../results/renderer-file-logs-pacing-classic-20261002.json)
+and [actual recorded handoff](../results/renderer-file-logs-live-20261002.json)
+retain those distinctions; neither qualifies the full release.
 
 The public Preview.3 community-test package is source-inclusive and excludes the IWAD, soundfont, compiled engine, generated recordings and research PDF. Its release archive has a per-file hash manifest and a separate SHA-256 checksum; the [publication receipt](../results/preview3-publication-20260928.json) verifies all 537 included file hashes and the uploaded ZIP against a fresh public download. The local R17 development archive is a later playtest candidate, not a tagged release: its 543 payload files pass manifest verification and the extracted launcher recognizes the installed 36-map IWAD and eleven prepared Episode 1 tracks under PowerShell 7.6.6. The [R17 candidate receipt](../results/episode1-current-human-candidate-20260929-r17.json) and [package receipt](../results/r17-playtest-package-validation-20260929.json) distinguish the tested implementation commit from the clean package-source commit. The complete E1 human playthrough remains pending.
 

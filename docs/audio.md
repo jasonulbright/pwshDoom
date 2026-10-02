@@ -357,3 +357,22 @@ the successful device drain before its stale assertion failed. See
 [`audio-runspace-shutdown-drain-harness-failure-wait-helper-20260929.json`](../results/audio-runspace-shutdown-drain-harness-failure-wait-helper-20260929.json)
 and
 [`audio-runspace-shutdown-drain-harness-failure-packet-expectation-20260929.json`](../results/audio-runspace-shutdown-drain-harness-failure-packet-expectation-20260929.json).
+
+## Packet backlog after an early simulation stall — October 2, 2026
+
+Three clean Classic/default Strips sessions consume all 1747 ordinary-route
+commands, return every submitted frame and close without software starvation
+or rebuffer. Nevertheless, packet construction-to-submission median ages are
+662 / 871 / 872 ms. Runs two/three retain 1159/1220 producer-backpressure waits;
+median mix blocks are only about 0.7 ms. The largest tic lateness occurs at
+commands 58–73, before the persistent queue pressure begins. The
+[source-pinned receipt](../results/renderer-file-logs-pacing-classic-20261002.json)
+includes all these observations and raw hashes.
+
+Realtime filler keeps active music/effects playing through a producer gap.
+These sessions generate 30/42/45 such blocks, after which caught-up simulation
+packets still each produce another full block. Accumulated playout duration is
+a source-based explanation to test with a controlled gap and recovery, not an
+established acoustic diagnosis. Packet age ends at submission and excludes the
+device tail. Zero queue-starvation observations therefore cannot be treated as
+proof of responsive sound or continuous campaign qualification.

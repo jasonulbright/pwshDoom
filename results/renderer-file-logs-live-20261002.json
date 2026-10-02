@@ -1,0 +1,902 @@
+{
+  "FinishedUtc": "2026-10-02T02:04:21.989160+00:00",
+  "SourceCommit": "22219c8",
+  "Checks": [
+    {
+      "Name": "All ordinary route input consumed; clean media/game exit",
+      "Passed": true
+    },
+    {
+      "Name": "Audio fully returned and device closed",
+      "Passed": true
+    },
+    {
+      "Name": "Separate loading/game output totals reconcile",
+      "Passed": true
+    },
+    {
+      "Name": "Renderer log wrapper source included",
+      "Passed": true
+    },
+    {
+      "Name": "Final source hash Start-Doom.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Final source hash scripts/Invoke-Doom.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Final source hash scripts/Record-DoomReplay.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Final source hash scripts/Record-ProcessAudio.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Final source hash scripts/Merge-DoomCaptureAudio.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Final source hash src/ProcessAudioCapture.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Final source hash src/CaptureClock.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Final source hash src/CaptureTimeline.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Final source hash src/TerminalOutput.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Final source hash src/LoadingScreen.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Final source hash src/AnsiColorState.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Final source hash src/Ansi256.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Final source hash src/TerminalCodec.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Final source hash scripts/FrameCodec.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Final source hash src/FastRenderer.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Final source hash src/RenderFuzz.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Final source hash src/GameHost.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Final source hash src/SnapshotTransport.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Final source hash src/InputReplay.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Final source hash src/PaletteCodec.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Final source hash src/CharacterCodec.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Final source hash src/RenderAssets.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Final source hash src/GameProcesses.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Final source hash src/SimulationProcess.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Final source hash scripts/Invoke-SimulationWorker.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Final source hash scripts/Invoke-GameRenderWorker.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Final source hash src/PlayerMessages.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "Final source hash scripts/Invoke-RenderWorkerWithLogs.ps1",
+      "Passed": true
+    },
+    {
+      "Name": "One real changed-map handoff; all sixteen workers reused",
+      "Passed": true
+    },
+    {
+      "Name": "UI task brackets ordered",
+      "Passed": true
+    },
+    {
+      "Name": "Recorded first loading task completed within 10ms observation bound",
+      "Passed": true
+    },
+    {
+      "Name": "Reported game/UI ownership intervals disjoint to 1ms rounding tolerance",
+      "Passed": true
+    }
+  ],
+  "Sources": [
+    {
+      "Path": "Start-Doom.ps1",
+      "Sha256": "1C6860D24908ED7A3DE57B4F6EB8D83CDDB3EB26E45FD4040540CCF0C326B8CB"
+    },
+    {
+      "Path": "scripts/Invoke-Doom.ps1",
+      "Sha256": "8B863945D8389F35CB008D3694FF603D6BAE22EF646C642EF805142EF776C12D"
+    },
+    {
+      "Path": "scripts/Record-DoomReplay.ps1",
+      "Sha256": "74867FD4A987FECDD922026C84209078DAFD598186152491C7842C022AD78C28"
+    },
+    {
+      "Path": "scripts/Record-ProcessAudio.ps1",
+      "Sha256": "F50876284D3E3958F2183CB483F13179FABAF45B87B8BCC221BA7F7113EF38CD"
+    },
+    {
+      "Path": "scripts/Merge-DoomCaptureAudio.ps1",
+      "Sha256": "795D02E96FFC3373741E7970512D1D65CC777A43B834D5771F69EC81CF3AF2C4"
+    },
+    {
+      "Path": "src/ProcessAudioCapture.ps1",
+      "Sha256": "A747786A2428F71C907F86AD631983548AAE8C6450F422F64144D367B8E9E321"
+    },
+    {
+      "Path": "src/CaptureClock.ps1",
+      "Sha256": "CED03D531F7C129D9E079F1F3B548DD436EFD81782974A3752D4689FA3E45DFB"
+    },
+    {
+      "Path": "src/CaptureTimeline.ps1",
+      "Sha256": "EFA64468F234327E5D7682CE08FF5B8863EEEFC5D5B082DB9B74BE544D092E21"
+    },
+    {
+      "Path": "src/TerminalOutput.ps1",
+      "Sha256": "7E81DCD8BED8A3EE6FE745BE5DCA8AB1BD808D90F6BC983BC0581C4153CAE0DB"
+    },
+    {
+      "Path": "src/LoadingScreen.ps1",
+      "Sha256": "4EAFCE04F1174689399F61C806FDC43A2FF09A8D44AD27B3FDCEA5E77B7F1D03"
+    },
+    {
+      "Path": "src/AnsiColorState.ps1",
+      "Sha256": "5370ABE79597E5E4FC629BBDE768DCA5F7A642200CFA31CF45AC1E7D4B46F4FA"
+    },
+    {
+      "Path": "src/Ansi256.ps1",
+      "Sha256": "EA3FF6CC0EA380E0D7FF5069D4E7244DA984991681FF605BB8D3AC5AC8293A94"
+    },
+    {
+      "Path": "src/TerminalCodec.ps1",
+      "Sha256": "7110F9BBD86662C5FCC45CD9E3E7BF20415A4F6C3FA1EE2829A064EAD5497F7A"
+    },
+    {
+      "Path": "scripts/FrameCodec.ps1",
+      "Sha256": "A1CEA3BF32B01AEF4DAC5665A8478EBC3CAD7C4F4EE8605961A0782079202133"
+    },
+    {
+      "Path": "src/FastRenderer.ps1",
+      "Sha256": "C517F67D8E588BE2F97F4BFD8A5FAB3123AD7428598760FA2FA818BB816A2976"
+    },
+    {
+      "Path": "src/RenderFuzz.ps1",
+      "Sha256": "8D2B6B6B0DF30A1DD7E30D070F60A1EABBF12397BC9816A03481C6D6A659B882"
+    },
+    {
+      "Path": "src/GameHost.ps1",
+      "Sha256": "CBADD9B913973D0442B4BE7A45F4C1069FA75B8DCAF78F4A550AE72C4ACED706"
+    },
+    {
+      "Path": "src/SnapshotTransport.ps1",
+      "Sha256": "E88163E3D970A02F5D81B9EEDDEB9F7B1E0FE2A90AFCF4019733D423D69E8F8A"
+    },
+    {
+      "Path": "src/InputReplay.ps1",
+      "Sha256": "0C8ABF378AC10A78925408F1BCE74B365703ABDB7BBEA57F40A72F7ED5CF798C"
+    },
+    {
+      "Path": "src/PaletteCodec.ps1",
+      "Sha256": "E3EE226131E2AB3D4AAFE8F4686BE3594AD88D198A3EB756B317123DB24696D3"
+    },
+    {
+      "Path": "src/CharacterCodec.ps1",
+      "Sha256": "78E3BF44DD0009FA3DE2B855FDD3B411BC6FFD21A62FBC04A0D9BA83E6A5CD78"
+    },
+    {
+      "Path": "src/RenderAssets.ps1",
+      "Sha256": "DD7AAFBB6C27FC33FAA5761B0E194B4A4F6476013F81A59C5ECE646B928FC9B5"
+    },
+    {
+      "Path": "src/GameProcesses.ps1",
+      "Sha256": "F70E59DCA050F89AD579E12D29070F753E063EFF465BA6758D3C18508E2BE2DA"
+    },
+    {
+      "Path": "src/SimulationProcess.ps1",
+      "Sha256": "472B67E534DBC1AB262439CCD57E481B472AD3F40761E1B9518B946067E7DEAE"
+    },
+    {
+      "Path": "scripts/Invoke-SimulationWorker.ps1",
+      "Sha256": "003395B53CE668E692476912D8E1F72165C7C322338B5B9E8F290A8DFFED3E3F"
+    },
+    {
+      "Path": "scripts/Invoke-GameRenderWorker.ps1",
+      "Sha256": "6A432F98075973A988F232A234E21FDB262E7BB1990F80D04224A07E16E9D1E7"
+    },
+    {
+      "Path": "src/PlayerMessages.ps1",
+      "Sha256": "77CB7FFDBADF112F1A1B84642B9CD90DF304A9B779B2F22411E9C279D15FEA1A"
+    },
+    {
+      "Path": "scripts/Invoke-RenderWorkerWithLogs.ps1",
+      "Sha256": "798038D387AD85B31056120B2EC1A52CC026A210131CC70B9283BF7D063668D5"
+    }
+  ],
+  "LoadingScreen": {
+    "Bytes": 13801,
+    "CompletedUpdates": 21,
+    "Frames": [
+      {
+        "CompletionProbes": 2,
+        "PendingProbes": 0,
+        "WriteStartQpc": 1796569303994,
+        "EndQpc": 1796569411329,
+        "Bytes": 661,
+        "StartQpc": 1796569247305,
+        "Frame": 0,
+        "LastIncompleteQpc": 0,
+        "FirstCompletedObservationQpc": 1796569337565,
+        "Rows": 170,
+        "Status": 5,
+        "ThreadPoolBeforeWrite": {
+          "MinWorkerThreads": 20,
+          "PendingWorkItems": 0,
+          "BusyWorkerThreads": 2,
+          "WorkerThreads": 4
+        },
+        "Columns": 860,
+        "DispatchQpc": 1796569318751
+      },
+      {
+        "CompletionProbes": 2,
+        "PendingProbes": 1,
+        "WriteStartQpc": 1796570013097,
+        "EndQpc": 1796570037788,
+        "Bytes": 657,
+        "StartQpc": 1796570012232,
+        "Frame": 1,
+        "LastIncompleteQpc": 1796570013597,
+        "FirstCompletedObservationQpc": 1796570037377,
+        "Rows": 170,
+        "Status": 5,
+        "ThreadPoolBeforeWrite": {
+          "MinWorkerThreads": 20,
+          "PendingWorkItems": 0,
+          "BusyWorkerThreads": 2,
+          "WorkerThreads": 4
+        },
+        "Columns": 860,
+        "DispatchQpc": 1796570013424
+      },
+      {
+        "CompletionProbes": 2,
+        "PendingProbes": 1,
+        "WriteStartQpc": 1796571027239,
+        "EndQpc": 1796571048338,
+        "Bytes": 657,
+        "StartQpc": 1796571026571,
+        "Frame": 2,
+        "LastIncompleteQpc": 1796571027638,
+        "FirstCompletedObservationQpc": 1796571047940,
+        "Rows": 170,
+        "Status": 5,
+        "ThreadPoolBeforeWrite": {
+          "MinWorkerThreads": 20,
+          "PendingWorkItems": 0,
+          "BusyWorkerThreads": 4,
+          "WorkerThreads": 5
+        },
+        "Columns": 860,
+        "DispatchQpc": 1796571027496
+      },
+      {
+        "CompletionProbes": 2,
+        "PendingProbes": 1,
+        "WriteStartQpc": 1796572043544,
+        "EndQpc": 1796572064607,
+        "Bytes": 657,
+        "StartQpc": 1796572042885,
+        "Frame": 3,
+        "LastIncompleteQpc": 1796572044027,
+        "FirstCompletedObservationQpc": 1796572064264,
+        "Rows": 170,
+        "Status": 5,
+        "ThreadPoolBeforeWrite": {
+          "MinWorkerThreads": 20,
+          "PendingWorkItems": 0,
+          "BusyWorkerThreads": 2,
+          "WorkerThreads": 5
+        },
+        "Columns": 860,
+        "DispatchQpc": 1796572043878
+      },
+      {
+        "CompletionProbes": 2,
+        "PendingProbes": 1,
+        "WriteStartQpc": 1796573051176,
+        "EndQpc": 1796573067245,
+        "Bytes": 657,
+        "StartQpc": 1796573050497,
+        "Frame": 4,
+        "LastIncompleteQpc": 1796573051582,
+        "FirstCompletedObservationQpc": 1796573066921,
+        "Rows": 170,
+        "Status": 5,
+        "ThreadPoolBeforeWrite": {
+          "MinWorkerThreads": 20,
+          "PendingWorkItems": 0,
+          "BusyWorkerThreads": 2,
+          "WorkerThreads": 5
+        },
+        "Columns": 860,
+        "DispatchQpc": 1796573051443
+      },
+      {
+        "CompletionProbes": 2,
+        "PendingProbes": 1,
+        "WriteStartQpc": 1796574065342,
+        "EndQpc": 1796574081079,
+        "Bytes": 657,
+        "StartQpc": 1796574064637,
+        "Frame": 5,
+        "LastIncompleteQpc": 1796574065734,
+        "FirstCompletedObservationQpc": 1796574080759,
+        "Rows": 170,
+        "Status": 5,
+        "ThreadPoolBeforeWrite": {
+          "MinWorkerThreads": 20,
+          "PendingWorkItems": 0,
+          "BusyWorkerThreads": 2,
+          "WorkerThreads": 5
+        },
+        "Columns": 860,
+        "DispatchQpc": 1796574065601
+      },
+      {
+        "CompletionProbes": 2,
+        "PendingProbes": 1,
+        "WriteStartQpc": 1796575067532,
+        "EndQpc": 1796575083075,
+        "Bytes": 657,
+        "StartQpc": 1796575066831,
+        "Frame": 6,
+        "LastIncompleteQpc": 1796575067957,
+        "FirstCompletedObservationQpc": 1796575082667,
+        "Rows": 170,
+        "Status": 5,
+        "ThreadPoolBeforeWrite": {
+          "MinWorkerThreads": 20,
+          "PendingWorkItems": 0,
+          "BusyWorkerThreads": 2,
+          "WorkerThreads": 5
+        },
+        "Columns": 860,
+        "DispatchQpc": 1796575067805
+      },
+      {
+        "CompletionProbes": 2,
+        "PendingProbes": 1,
+        "WriteStartQpc": 1796576081431,
+        "EndQpc": 1796576097992,
+        "Bytes": 657,
+        "StartQpc": 1796576080763,
+        "Frame": 7,
+        "LastIncompleteQpc": 1796576081826,
+        "FirstCompletedObservationQpc": 1796576097615,
+        "Rows": 170,
+        "Status": 5,
+        "ThreadPoolBeforeWrite": {
+          "MinWorkerThreads": 20,
+          "PendingWorkItems": 0,
+          "BusyWorkerThreads": 2,
+          "WorkerThreads": 5
+        },
+        "Columns": 860,
+        "DispatchQpc": 1796576081690
+      },
+      {
+        "CompletionProbes": 2,
+        "PendingProbes": 1,
+        "WriteStartQpc": 1796577089394,
+        "EndQpc": 1796577104971,
+        "Bytes": 657,
+        "StartQpc": 1796577088548,
+        "Frame": 8,
+        "LastIncompleteQpc": 1796577089857,
+        "FirstCompletedObservationQpc": 1796577104508,
+        "Rows": 170,
+        "Status": 5,
+        "ThreadPoolBeforeWrite": {
+          "MinWorkerThreads": 20,
+          "PendingWorkItems": 0,
+          "BusyWorkerThreads": 2,
+          "WorkerThreads": 5
+        },
+        "Columns": 860,
+        "DispatchQpc": 1796577089685
+      },
+      {
+        "CompletionProbes": 2,
+        "PendingProbes": 1,
+        "WriteStartQpc": 1796578093562,
+        "EndQpc": 1796578108851,
+        "Bytes": 657,
+        "StartQpc": 1796578092694,
+        "Frame": 9,
+        "LastIncompleteQpc": 1796578093978,
+        "FirstCompletedObservationQpc": 1796578108482,
+        "Rows": 170,
+        "Status": 5,
+        "ThreadPoolBeforeWrite": {
+          "MinWorkerThreads": 20,
+          "PendingWorkItems": 0,
+          "BusyWorkerThreads": 2,
+          "WorkerThreads": 6
+        },
+        "Columns": 860,
+        "DispatchQpc": 1796578093840
+      },
+      {
+        "CompletionProbes": 2,
+        "PendingProbes": 1,
+        "WriteStartQpc": 1796579107898,
+        "EndQpc": 1796579121918,
+        "Bytes": 657,
+        "StartQpc": 1796579107155,
+        "Frame": 10,
+        "LastIncompleteQpc": 1796579108402,
+        "FirstCompletedObservationQpc": 1796579121533,
+        "Rows": 170,
+        "Status": 5,
+        "ThreadPoolBeforeWrite": {
+          "MinWorkerThreads": 20,
+          "PendingWorkItems": 0,
+          "BusyWorkerThreads": 2,
+          "WorkerThreads": 6
+        },
+        "Columns": 860,
+        "DispatchQpc": 1796579108232
+      },
+      {
+        "CompletionProbes": 2,
+        "PendingProbes": 1,
+        "WriteStartQpc": 1796580127030,
+        "EndQpc": 1796580141752,
+        "Bytes": 657,
+        "StartQpc": 1796580126187,
+        "Frame": 11,
+        "LastIncompleteQpc": 1796580127537,
+        "FirstCompletedObservationQpc": 1796580141351,
+        "Rows": 170,
+        "Status": 5,
+        "ThreadPoolBeforeWrite": {
+          "MinWorkerThreads": 20,
+          "PendingWorkItems": 0,
+          "BusyWorkerThreads": 2,
+          "WorkerThreads": 6
+        },
+        "Columns": 860,
+        "DispatchQpc": 1796580127366
+      },
+      {
+        "CompletionProbes": 2,
+        "PendingProbes": 1,
+        "WriteStartQpc": 1796581132687,
+        "EndQpc": 1796581148050,
+        "Bytes": 657,
+        "StartQpc": 1796581131877,
+        "Frame": 12,
+        "LastIncompleteQpc": 1796581133153,
+        "FirstCompletedObservationQpc": 1796581147634,
+        "Rows": 170,
+        "Status": 5,
+        "ThreadPoolBeforeWrite": {
+          "MinWorkerThreads": 20,
+          "PendingWorkItems": 0,
+          "BusyWorkerThreads": 2,
+          "WorkerThreads": 6
+        },
+        "Columns": 860,
+        "DispatchQpc": 1796581133005
+      },
+      {
+        "CompletionProbes": 2,
+        "PendingProbes": 1,
+        "WriteStartQpc": 1796582151880,
+        "EndQpc": 1796582165839,
+        "Bytes": 657,
+        "StartQpc": 1796582151230,
+        "Frame": 13,
+        "LastIncompleteQpc": 1796582152285,
+        "FirstCompletedObservationQpc": 1796582165467,
+        "Rows": 170,
+        "Status": 5,
+        "ThreadPoolBeforeWrite": {
+          "MinWorkerThreads": 20,
+          "PendingWorkItems": 0,
+          "BusyWorkerThreads": 2,
+          "WorkerThreads": 6
+        },
+        "Columns": 860,
+        "DispatchQpc": 1796582152152
+      },
+      {
+        "CompletionProbes": 2,
+        "PendingProbes": 1,
+        "WriteStartQpc": 1796583163869,
+        "EndQpc": 1796583176876,
+        "Bytes": 657,
+        "StartQpc": 1796583163070,
+        "Frame": 14,
+        "LastIncompleteQpc": 1796583164337,
+        "FirstCompletedObservationQpc": 1796583176478,
+        "Rows": 170,
+        "Status": 5,
+        "ThreadPoolBeforeWrite": {
+          "MinWorkerThreads": 20,
+          "PendingWorkItems": 0,
+          "BusyWorkerThreads": 2,
+          "WorkerThreads": 6
+        },
+        "Columns": 860,
+        "DispatchQpc": 1796583164162
+      },
+      {
+        "CompletionProbes": 2,
+        "PendingProbes": 1,
+        "WriteStartQpc": 1796584170148,
+        "EndQpc": 1796584185114,
+        "Bytes": 657,
+        "StartQpc": 1796584169262,
+        "Frame": 15,
+        "LastIncompleteQpc": 1796584170629,
+        "FirstCompletedObservationQpc": 1796584184678,
+        "Rows": 170,
+        "Status": 5,
+        "ThreadPoolBeforeWrite": {
+          "MinWorkerThreads": 20,
+          "PendingWorkItems": 0,
+          "BusyWorkerThreads": 2,
+          "WorkerThreads": 6
+        },
+        "Columns": 860,
+        "DispatchQpc": 1796584170453
+      },
+      {
+        "CompletionProbes": 2,
+        "PendingProbes": 1,
+        "WriteStartQpc": 1796585173999,
+        "EndQpc": 1796585189476,
+        "Bytes": 657,
+        "StartQpc": 1796585173224,
+        "Frame": 16,
+        "LastIncompleteQpc": 1796585174475,
+        "FirstCompletedObservationQpc": 1796585189018,
+        "Rows": 170,
+        "Status": 5,
+        "ThreadPoolBeforeWrite": {
+          "MinWorkerThreads": 20,
+          "PendingWorkItems": 0,
+          "BusyWorkerThreads": 2,
+          "WorkerThreads": 6
+        },
+        "Columns": 860,
+        "DispatchQpc": 1796585174295
+      },
+      {
+        "CompletionProbes": 2,
+        "PendingProbes": 1,
+        "WriteStartQpc": 1796586189633,
+        "EndQpc": 1796586205245,
+        "Bytes": 657,
+        "StartQpc": 1796586188980,
+        "Frame": 17,
+        "LastIncompleteQpc": 1796586190078,
+        "FirstCompletedObservationQpc": 1796586204891,
+        "Rows": 170,
+        "Status": 5,
+        "ThreadPoolBeforeWrite": {
+          "MinWorkerThreads": 20,
+          "PendingWorkItems": 0,
+          "BusyWorkerThreads": 2,
+          "WorkerThreads": 6
+        },
+        "Columns": 860,
+        "DispatchQpc": 1796586189915
+      },
+      {
+        "CompletionProbes": 2,
+        "PendingProbes": 1,
+        "WriteStartQpc": 1796587195884,
+        "EndQpc": 1796587212066,
+        "Bytes": 657,
+        "StartQpc": 1796587194894,
+        "Frame": 18,
+        "LastIncompleteQpc": 1796587196267,
+        "FirstCompletedObservationQpc": 1796587211751,
+        "Rows": 170,
+        "Status": 4,
+        "ThreadPoolBeforeWrite": {
+          "MinWorkerThreads": 20,
+          "PendingWorkItems": 0,
+          "BusyWorkerThreads": 2,
+          "WorkerThreads": 6
+        },
+        "Columns": 860,
+        "DispatchQpc": 1796587196126
+      },
+      {
+        "CompletionProbes": 2,
+        "PendingProbes": 1,
+        "WriteStartQpc": 1796588203330,
+        "EndQpc": 1796588221559,
+        "Bytes": 657,
+        "StartQpc": 1796588202398,
+        "Frame": 19,
+        "LastIncompleteQpc": 1796588203730,
+        "FirstCompletedObservationQpc": 1796588221182,
+        "Rows": 170,
+        "Status": 4,
+        "ThreadPoolBeforeWrite": {
+          "MinWorkerThreads": 20,
+          "PendingWorkItems": 0,
+          "BusyWorkerThreads": 2,
+          "WorkerThreads": 6
+        },
+        "Columns": 860,
+        "DispatchQpc": 1796588203588
+      },
+      {
+        "CompletionProbes": 2,
+        "PendingProbes": 1,
+        "WriteStartQpc": 1796589215323,
+        "EndQpc": 1796589231681,
+        "Bytes": 657,
+        "StartQpc": 1796589214224,
+        "Frame": 20,
+        "LastIncompleteQpc": 1796589215795,
+        "FirstCompletedObservationQpc": 1796589231318,
+        "Rows": 170,
+        "Status": 4,
+        "ThreadPoolBeforeWrite": {
+          "MinWorkerThreads": 20,
+          "PendingWorkItems": 0,
+          "BusyWorkerThreads": 2,
+          "WorkerThreads": 6
+        },
+        "Columns": 860,
+        "DispatchQpc": 1796589215620
+      }
+    ],
+    "Mode": "Bounded async UI, nominal 10 updates/sec; separate from gameplay frame accounting"
+  },
+  "MapReloads": [
+    {
+      "EndWallMs": 49964.4011,
+      "WorkerAssetReloads": [
+        {
+          "ResourceBodyReused": true,
+          "Pid": 2396,
+          "Milliseconds": 292.9442,
+          "Worker": 0
+        },
+        {
+          "ResourceBodyReused": true,
+          "Pid": 5884,
+          "Milliseconds": 294.9554,
+          "Worker": 1
+        },
+        {
+          "ResourceBodyReused": true,
+          "Pid": 29312,
+          "Milliseconds": 295.001,
+          "Worker": 2
+        },
+        {
+          "ResourceBodyReused": true,
+          "Pid": 27980,
+          "Milliseconds": 249.2477,
+          "Worker": 3
+        },
+        {
+          "ResourceBodyReused": true,
+          "Pid": 34376,
+          "Milliseconds": 255.1011,
+          "Worker": 4
+        },
+        {
+          "ResourceBodyReused": true,
+          "Pid": 28712,
+          "Milliseconds": 284.495,
+          "Worker": 5
+        },
+        {
+          "ResourceBodyReused": true,
+          "Pid": 37980,
+          "Milliseconds": 267.4839,
+          "Worker": 6
+        },
+        {
+          "ResourceBodyReused": true,
+          "Pid": 38888,
+          "Milliseconds": 290.6714,
+          "Worker": 7
+        },
+        {
+          "ResourceBodyReused": true,
+          "Pid": 10700,
+          "Milliseconds": 285.4899,
+          "Worker": 8
+        },
+        {
+          "ResourceBodyReused": true,
+          "Pid": 34364,
+          "Milliseconds": 241.8725,
+          "Worker": 9
+        },
+        {
+          "ResourceBodyReused": true,
+          "Pid": 14508,
+          "Milliseconds": 295.93,
+          "Worker": 10
+        },
+        {
+          "ResourceBodyReused": true,
+          "Pid": 21028,
+          "Milliseconds": 303.0162,
+          "Worker": 11
+        },
+        {
+          "ResourceBodyReused": true,
+          "Pid": 12416,
+          "Milliseconds": 303.3719,
+          "Worker": 12
+        },
+        {
+          "ResourceBodyReused": true,
+          "Pid": 23168,
+          "Milliseconds": 256.7361,
+          "Worker": 13
+        },
+        {
+          "ResourceBodyReused": true,
+          "Pid": 31716,
+          "Milliseconds": 303.5135,
+          "Worker": 14
+        },
+        {
+          "ResourceBodyReused": true,
+          "Pid": 32544,
+          "Milliseconds": 306.5808,
+          "Worker": 15
+        }
+      ],
+      "Map": 2,
+      "LoadingUpdates": 21,
+      "Tic": 1676,
+      "AssetReloadPolls": 142,
+      "RendererAssetsReused": false,
+      "StartWallMs": 47930.9069,
+      "Episode": 1,
+      "WorkerPids": [
+        2396,
+        5884,
+        29312,
+        27980,
+        34376,
+        28712,
+        37980,
+        38888,
+        10700,
+        34364,
+        14508,
+        21028,
+        12416,
+        23168,
+        31716,
+        32544
+      ],
+      "Generation": 2
+    }
+  ],
+  "Audio": {
+    "SubmittedAndReturnedFrames": 2241540,
+    "QueueStarvationObservations": [],
+    "RebufferResumes": []
+  },
+  "Files": [
+    {
+      "Path": "local/recordings/file-log-route-Classic-r1-game.json",
+      "Sha256": "383244A2EBC29848AD08E15001F63E739F12A080680EAE21F7628D72EBB8CA23"
+    },
+    {
+      "Path": "local/recordings/file-log-route-Classic-r1-recording.json",
+      "Sha256": "D5F8D38CC11629C4032479E227DBBF26625BCD2EAF8D449A1B8CA59E69AFAE32"
+    },
+    {
+      "Path": "local/recordings/file-log-route-Classic-r1-av.json",
+      "Sha256": "57DD82926FB25A4419024E3A6D106F142A03217D9F4A00530542F0782021C97A"
+    },
+    {
+      "Path": "local/recordings/file-log-route-Classic-r1-audio.json",
+      "Sha256": "DA299F520C6C7F89AC2091C53B981A416F0098D03123B22FEB46A534BCF189EB"
+    },
+    {
+      "Path": "local/recordings/file-log-route-Classic-r1-clock.json",
+      "Sha256": "4203A51737C01522422336AA8C60716EA2362C8A0292027307BDA660F3FFF4EC"
+    },
+    {
+      "Path": "local/recordings/file-log-route-Classic-r1.mp4",
+      "Sha256": "DB67F7EB511145AD9DAC4CED824B9A16AF9809E4B8392B26476CF58DA15D9D1C"
+    },
+    {
+      "Path": "local/recordings/file-log-route-Classic-r1-audio.wav",
+      "Sha256": "25838F6B20E97F40AD70666B02B341865A54491C12672BE284C6E8BDE870ACE4"
+    },
+    {
+      "Path": "local/recordings/file-log-route-Classic-r1-av.mp4",
+      "Sha256": "8F1F0BE52F2682C30A8D886AFCC9254974B70BBCFD74AB8E4902F979B763AC05"
+    },
+    {
+      "Path": "local/recordings/file-log-route-Classic-r1-av.wav",
+      "Sha256": "42ACCB2081D03A0B3B803791366ABC16CAA212F4D1B963B3D4DD1B6552535986"
+    }
+  ],
+  "VisualSample": {
+    "Selection": {
+      "VideoSha256": "8F1F0BE52F2682C30A8D886AFCC9254974B70BBCFD74AB8E4902F979B763AC05",
+      "SampleSeconds": 76.1325886,
+      "SampleSha256": "6697321255095E9928150A76E68B7096D761ABAC74ACB5168F77440567556B73",
+      "QpcSelection": "First loading completed write + 250 ms"
+    },
+    "File": {
+      "Path": "local/file-log-loading-review-r1.png",
+      "Sha256": "6697321255095E9928150A76E68B7096D761ABAC74ACB5168F77440567556B73"
+    },
+    "Review": "Centered legible red LOADING banner in actual window capture at 3440x1392; viewed resized to 2048x829. Sample is 250 ms after first loading write, not optical latency measurement."
+  },
+  "Audit": {
+    "Path": "local/audit-file-log-recording-r1.py",
+    "Sha256": "87768595B08B2046D6EA7DB0E68B4E49074D55FBA8E5FE5FDCD0B61822765245"
+  },
+  "Meaning": "Actual ordinary-input E1M1/intermission/E1M2 WGC recording with scoped digital game audio and default Strips/Pairs. Separate from clean performance runs. All commands/audio/ownership and final source hashes checked. This does not qualify physical input, acoustic device output, optical distinct-frame timing or a complete Episode 1 human route."
+}
