@@ -343,3 +343,10 @@ continuation gate. The first probe also used a save path that the harness later
 replaced during its overwrite test; a second save point preserved the target
 file and isolated the stale checkpoint. Both misses and corrections remain in
 the [session receipt](../results/preview6-session-regression-20261002.json).
+On the same Preview.6 runtime, the controller/routing suite passes 69 checks,
+including real map creation for the E1M3 secret branch through E1M9 and back to
+E1M4, and the boss-progression suite passes 97 checks across five boss-trigger
+cases. They establish state-machine paths and trigger behavior, not ordinary-
+input victories, full map routes, or an E1 finale reached by the player. The
+[regression receipt](../results/preview6-session-regression-20261002.json)
+links local reports and source hashes.

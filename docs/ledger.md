@@ -6185,3 +6185,13 @@ process reports and the 32 passing two-point save checks in the
 Same-process continuation and actual simulation-worker IPC remain qualified;
 fresh-process continuation against a current-source replay remains open.
 This correction will be the seventh commit after Preview.6; the next public release is due at35 commits.
+
+### Preview.6 campaign state-machine regression — October 2, 2026
+
+The exact packaged runtime passes 69 campaign controller/transition checks and
+97 boss-progression checks against the installed IWAD. Transition fixtures
+create the E1M3 secret branch worlds E1M9 and E1M4; boss fixtures cover five
+episode boss triggers. These tests do not claim ordinary-input route completion
+or a human boss victory. The [session regression receipt](../results/preview6-session-regression-20261002.json)
+now pins both reports, harnesses and IWAD. This evidence update will be the
+eighth commit after Preview.6; release again at35.

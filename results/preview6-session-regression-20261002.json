@@ -1,5 +1,5 @@
 {
-  "CompletedUtc": "2026-10-02T20:21:23.300895Z",
+  "CompletedUtc": "2026-10-02T20:24:34.9033574Z",
   "Release": "v0.1.0-preview.6",
   "TestSourceCommit": "0145d751a6f846114eaa6f243296086a3c71dccb",
   "CurrentCheckoutRuntimeAndScriptsMatchPackage": true,
@@ -122,6 +122,30 @@
         700,
         840
       ]
+    },
+    {
+      "RuntimeSourceSha256": null,
+      "Meaning": "Controller/routing/finale fixtures plus real intermission advancement and IWAD world creation for E1M1->E1M2 and the E1M3->E1M9->E1M4 secret branch. Map exits and inventory are explicit fixtures; these checks do not claim map playthroughs.",
+      "Report": "local/preview6-campaign-transitions.json",
+      "HarnessRecordedSha256": null,
+      "Name": "CampaignTransitions",
+      "ReportSha256": "C4C84514D92E77D708C912ECDCD46FCB0C1C9B7ACB42C12B4D5657E04CFE1D87",
+      "HarnessSha256": "230DFC7BA855845637A46DD9E26DDA939050DBADE6C4C1A1E3F8D3738371A61A",
+      "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+      "Failed": 0,
+      "Passed": 69
+    },
+    {
+      "RuntimeSourceSha256": null,
+      "Meaning": "HMP real-map boss-trigger fixtures: explicit health/type/map changes and a synthetic same-type thinker test guards, then actual final death-state dispatch and bounded tagged mover execution. Independent neighbor-height targets. No ordinary-input victory, full-world continuation, live rendering or performance claim.",
+      "Report": "local/preview6-boss-progression.json",
+      "HarnessRecordedSha256": "4EE3871B7C52A3C46ABC08EA25AA3300D82667D9FF1C6A7E26A9CDB6CDAEFB2F",
+      "Name": "BossProgression",
+      "ReportSha256": "7C53E3E1D98F7372F8D75A925AAD397AD62AB95DFF2B13D6C5E7575D85B688C9",
+      "HarnessSha256": "4EE3871B7C52A3C46ABC08EA25AA3300D82667D9FF1C6A7E26A9CDB6CDAEFB2F",
+      "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+      "Failed": 0,
+      "Passed": 97
     }
   ],
   "Boundaries": [
@@ -130,7 +154,8 @@
     "Death/finale fixtures restore and continue state near ending boundaries; they are not campaign playthrough or finale pixel-fidelity evidence",
     "The historical input-session-replay used by the fresh-PowerShell continuation harness has a different runtime fingerprint and a divergent tic-700 checkpoint, so current-source fresh-process continuation is not qualified by this batch",
     "Audio mixer tests are deterministic/offline and do not play through a device",
-    "None of these tests completes the human campaign route"
+    "None of these tests completes the human campaign route",
+    "Campaign transition and boss checks are state/route fixtures only; they do not qualify human map completion or ordinary-input boss victory"
   ],
   "CrossProcessContinuationProbes": [
     {
