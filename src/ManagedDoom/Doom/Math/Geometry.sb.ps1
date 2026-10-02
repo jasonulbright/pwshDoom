@@ -115,32 +115,32 @@ class Geometry {
     ### 0 (front) or 1 (back).
     ### </returns>
     static [int] PointOnSide([Fixed] $x, [Fixed] $y, $node) {
-        if ($node.Dx.Data -eq [Fixed]::Zero.Data) {
-            if ($x.Data -le $node.X.Data) {
-                return $(if ($node.Dy.Data -gt [Fixed]::Zero.Data) { 1 } else { 0 })
-            } else {
-                return $(if ($node.Dy.Data -lt [Fixed]::Zero.Data) { 1 } else { 0 })
-            }
+        [int]$xData = $x.Data
+        [int]$yData = $y.Data
+        [int]$nodeX = $node.X.Data
+        [int]$nodeY = $node.Y.Data
+        [int]$nodeDx = $node.Dx.Data
+        [int]$nodeDy = $node.Dy.Data
+        if ($nodeDx -eq 0) {
+            if ($xData -le $nodeX) { if ($nodeDy -gt 0) { return 1 }; return 0 }
+            if ($nodeDy -lt 0) { return 1 }; return 0
+        }
+        if ($nodeDy -eq 0) {
+            if ($yData -le $nodeY) { if ($nodeDx -lt 0) { return 1 }; return 0 }
+            if ($nodeDx -gt 0) { return 1 }; return 0
         }
 
-        if ($node.Dy.Data -eq [Fixed]::Zero.Data) {
-            if ($y.Data -le $node.Y.Data) {
-                return $(if ($node.Dx.Data -lt [Fixed]::Zero.Data) { 1 } else { 0 })
-            } else {
-                return $(if ($node.Dx.Data -gt [Fixed]::Zero.Data) { 1 } else { 0 })
-            }
+        [int]$dx = [Fixed]::ToInt32Unchecked(([long]$xData) - ([long]$nodeX))
+        [int]$dy = [Fixed]::ToInt32Unchecked(([long]$yData) - ([long]$nodeY))
+        if ((([int]$nodeDy -bxor [int]$nodeDx -bxor $dx -bxor $dy) -band 0x80000000) -ne 0) {
+            if ((([int]$nodeDy -bxor $dx) -band 0x80000000) -ne 0) { return 1 }
+            return 0
         }
 
-        $dx = ($x - $node.X)
-        $dy = ($y - $node.Y)
-        if ((([int]$node.Dy.data -bxor [int]$node.Dx.data -bxor [int]$dx.data -bxor [int]$dy.data) -band 0x80000000) -ne 0) {
-            return $(if ((($node.Dy.data -bxor $dx.data) -band 0x80000000) -ne 0) { 1 } else { 0 })
-        }
-
-        $left = [Fixed]::new($node.Dy.Data -shr [Fixed]::FracBits) * $dx
-        $right = $dy * [Fixed]::new($node.Dx.Data -shr [Fixed]::FracBits)
-
-        return $(if ($right.Data -lt $left.Data) { 0 } else { 1 })
+        [int]$left = [Fixed]::ToInt32Unchecked((([long]($nodeDy -shr [Fixed]::FracBits) * [long]$dx) -shr [Fixed]::FracBits))
+        [int]$right = [Fixed]::ToInt32Unchecked((([long]$dy * [long]($nodeDx -shr [Fixed]::FracBits)) -shr [Fixed]::FracBits))
+        if ($right -lt $left) { return 0 }
+        return 1
     }
     ### <summary>
     ### Calculate the angle of the line passing through the two points.

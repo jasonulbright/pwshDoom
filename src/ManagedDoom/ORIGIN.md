@@ -192,6 +192,14 @@ Modifications, 2026-10-02 (numeric discovery slope):
   are indexed in `results/discovery-slope-production-20261002.json`.
   Isolated method gains do not establish native release pacing or fidelity.
 
+Modifications, 2026-10-02 (numeric BSP-side test):
+
+- `Geometry.PointOnSide` now keeps wrapped coordinate differences and fixed
+  products in integer locals, avoiding six temporary `Fixed` wrappers on its
+  non-axis path. Seeded signed-32-bit comparisons match the former expression;
+  E3M6 discovery still matches the full renderer at four headings. This change
+  has no measured full-host pacing claim.
+
 Modifications, 2026-10-02 (reference wall inverse scale):
 
 - `ThreeDRenderer`: explicitly truncate the unsigned inverse-scale quotient in

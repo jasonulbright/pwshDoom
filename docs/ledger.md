@@ -6330,3 +6330,10 @@ imports; rerunning with a source-adjacent copy passed, and that copy was removed
 A menu-only E3M6 host exposed stale IPC bounds and an overflowing duplicate
 footer in Configure Keys. Both are fixed; the actual worker rendered the screen
 and returned normally through the settings menu.
+
+### Numeric BSP side checks — October 2, 2026
+
+`Geometry.PointOnSide` now avoids six temporary `Fixed` wrappers in diagonal
+tests. It matches the prior method on 20,000 seeded inputs; E3M6 discovery
+matches the full renderer at four headings (12 checks). No host pacing gain is
+claimed.
