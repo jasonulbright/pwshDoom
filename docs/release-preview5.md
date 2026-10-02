@@ -63,3 +63,33 @@ Continue the [roadmap](roadmap.md) after publication. Doom II, MyHouse,
 multiplayer and general PWAD compatibility remain later scopes. The
 [article](article-draft.md) retains capabilities, alternatives and measured
 limitations without unmeasured competitor rankings.
+
+## Extracted validation completed
+
+The [repository receipt](../results/preview5-package-validation-20261002.json)
+pins package source1681532d0ea63fd4fcdd95e153f74694a3cbb446. All559 payloads
+match their manifest and that Git commit after checkout newline normalization.
+The ZIP is1,735,913 bytes; SHA-256:
+`3B767865F367A51D00F09BFEC1ECAA8CF9B4E6BDED28943375DA3C69FAEEED0C`.
+The release tag adds this validation evidence to the package-source commit;
+the manifest remains authoritative for the archive's exact source.
+
+Extracted preflight recognizes36 maps and eleven prepared E1 tracks under
+PowerShell7.6.6. Checks pass110 output,18 resource,125 menu/46 screen and15
+music-enabled save/load assertions. Each style passes20 persistent16-worker
+reload/fault checks with448,000 worker pixels and256,000 fresh-reference pixels.
+Controlled audio recovery reaches19.4 ms maximum processing age. An eight-second
+actual-device startup advances279 tics and returns all360,360 submitted frames.
+Its short headless rate is not a release pacing qualification.
+
+All36 maps pass35 idle tics and two indexed headings each. Three actual extracted
+save/control fixtures retain350 commands, eleven checkpoints and14 admission/
+audio checks per style. These checks do not navigate or finish maps. Retained
+live footage matches35 of36 packaged sources; the differing renderer adds
+opt-in profiling, with separately verified default image/strip equivalence.
+The footage is not labeled as fully byte-identical final-source recording.
+
+A wrapper initially captured the build summary as text and failed extraction.
+The failure remains local; the existing archive was verified/extracted directly,
+with no silent rebuild. Publication and fresh public-download verification
+follow this35th commit. The full Ultimate Doom goal remains active.

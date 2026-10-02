@@ -1,0 +1,448 @@
+{
+  "FinishedUtc": "2026-10-02T04:47:05.628087+00:00",
+  "Version": "0.1.0-preview.5",
+  "PackageSourceCommit": "1681532d0ea63fd4fcdd95e153f74694a3cbb446",
+  "Zip": {
+    "Path": "local/preview5-package/pwshDoom-0.1.0-preview.5.zip",
+    "Sha256": "3B767865F367A51D00F09BFEC1ECAA8CF9B4E6BDED28943375DA3C69FAEEED0C",
+    "Bytes": 1735913
+  },
+  "Manifest": {
+    "Path": "local/preview5-extracted/pwshDoom-0.1.0-preview.5/package-manifest.json",
+    "Sha256": "D32FA08675F39251E40BC754A98C46C5C3543E62DF4441CDF2BF4856DFA7F0B9"
+  },
+  "PayloadHashesVerified": 559,
+  "GitSourcePayloadsVerified": 559,
+  "WorkingTreeDirty": true,
+  "DirtyExplanation": "Only excluded untracked docs/gebbdoom.pdf at build; each tracked payload independently agrees with the pinned commit after checkout newline normalization.",
+  "Preflight": {
+    "Path": "local/preview5-package-preflight-r1.json",
+    "Sha256": "9DFAED45D565FC820005C4ADCC502270B569A4EB8476495518FEA98363C41A14"
+  },
+  "ExtractedTests": [
+    {
+      "Name": "Test-TerminalOutput",
+      "Checks": 110,
+      "Report": {
+        "Path": "local/preview5-Test-TerminalOutput-r1.json",
+        "Sha256": "F151F59E275069E57BF61A123EC567CD3EE6866D88C2AE46FC2015C13447DAF3"
+      }
+    },
+    {
+      "Name": "Test-RenderAssetResourceReuse",
+      "Checks": 18,
+      "Report": {
+        "Path": "local/preview5-Test-RenderAssetResourceReuse-r1.json",
+        "Sha256": "034273A020045A077D27450F65417565DEE26A742BA9DD7EB6BA330D30566259"
+      }
+    },
+    {
+      "Name": "Test-SessionMenu",
+      "Checks": 125,
+      "Report": {
+        "Path": "local/preview5-Test-SessionMenu-r1.json",
+        "Sha256": "D3C9E72E31655357A921BC4D9BEAEFB4E0DA1D7D1E6CA7DA603FE6B786CB1485"
+      },
+      "Frames": 46
+    },
+    {
+      "Name": "save-worker",
+      "Checks": 15,
+      "Report": {
+        "Path": "local/preview5-save-worker-r1.json",
+        "Sha256": "0F934A16E8055222935E512E1BFB1AE2095B01BDE5BFF52DE4DED69173A3DEE7"
+      }
+    },
+    {
+      "Name": "SessionWorker",
+      "Style": "Classic",
+      "Checks": 20,
+      "WorkerPixels": 448000,
+      "FreshOraclePixels": 256000,
+      "Report": {
+        "Path": "local/preview5-session-worker-Classic-r1.json",
+        "Sha256": "1BEA3874C2C99EAB37D14EBBE9AFB5E90E549278AD5448E0AAD500AD0AE46429"
+      }
+    },
+    {
+      "Name": "SessionWorker",
+      "Style": "Matrix",
+      "Checks": 20,
+      "WorkerPixels": 448000,
+      "FreshOraclePixels": 256000,
+      "Report": {
+        "Path": "local/preview5-session-worker-Matrix-r1.json",
+        "Sha256": "4F1F2573194DB4AA1A96D41D6DE4BAB989B79FEF3039DDDA81303A3290929ABA"
+      }
+    },
+    {
+      "Name": "SessionWorker",
+      "Style": "AnsiArt",
+      "Checks": 20,
+      "WorkerPixels": 448000,
+      "FreshOraclePixels": 256000,
+      "Report": {
+        "Path": "local/preview5-session-worker-AnsiArt-r1.json",
+        "Sha256": "651F1250DB630E68AFCCD104A8981856757E1B4D0F71B23B3C1B11F227E1A04E"
+      }
+    },
+    {
+      "Name": "RealtimeRecovery",
+      "Report": {
+        "Path": "local/preview5-audio-recovery-r1.json",
+        "Sha256": "73326F863D0B2427FD880AAA354B613E4466B9023A1BE32F7BC0BCDCB23B9355"
+      },
+      "RecoveredPacketAge": {
+        "MaximumMs": 19.4071,
+        "MedianMs": 13.4616,
+        "Count": 20
+      }
+    },
+    {
+      "Name": "AllMapSmoke",
+      "Maps": 36,
+      "IndexedFrames": 72,
+      "Report": {
+        "Path": "local/preview5-campaign-smoke-r1.json",
+        "Sha256": "84CC3C874BAAC46AB2B666F0D2A8278DF1D846322E132C84BF83F817D5330742"
+      },
+      "Meaning": "Headless map loading, bounded idle simulation, and two full 320x200 rasterizations in one process. WorkerStrips records the requested configuration only; this script does not start render workers or segment rasterization. Hashes are reproducibility fingerprints, not reference-image correctness. No navigation, exit, moving-special coverage, keyboard play, audio, parallel transport, or campaign completion is established. Stage timings include cold work and are not a gameplay FPS benchmark."
+    },
+    {
+      "Name": "CommandRing",
+      "Checks": 5,
+      "Report": {
+        "Path": "local/preview5-command-ring-r1.json",
+        "Sha256": "EEB56644A5BBE6E3C9B8CCF6F9C350B20BBCDC13C08D178D445667568838D3FE"
+      }
+    }
+  ],
+  "ActualDeviceStartup": {
+    "Report": {
+      "Path": "local/preview5-package-headless-r1.json",
+      "Sha256": "E73075B581031791C4DE273C30272025EB499C59E4E4A7F241ECE8604C4A0480"
+    },
+    "Tics": 279,
+    "SubmittedFrames": 360360,
+    "ReturnedFrames": 360360,
+    "QueueStarvationObservations": [],
+    "RebufferResumes": [],
+    "ShutdownDrain": {
+      "PendingFramesAtStop": 3780,
+      "RemainingFrames": 0,
+      "TimedOut": false,
+      "SkippedReason": null,
+      "Attempted": true,
+      "CancelledFramesUpperBound": 0,
+      "Completed": true,
+      "WaitMilliseconds": 77.5164,
+      "CompletedFramesDuringWait": 3780
+    }
+  },
+  "AllStylePackagedFixtures": [
+    {
+      "Style": "Classic",
+      "Report": {
+        "Path": "local/preview5-readable-Classic-r1.json",
+        "Sha256": "6138ECBA77D1715D2DF47C7EA626BE91AB76C216FF63F713BC5507EE050F673C"
+      },
+      "Evidence": {
+        "Path": "local/preview5-readable-Classic-r1-evidence.json",
+        "Sha256": "45BE9827DEBCE25F8A5B94D818A2C9E8F4D1BB1A6B99D667598E3521044F8562"
+      },
+      "Input": {
+        "Path": "local/preview5-readable-Classic-r1-input.json",
+        "Sha256": "A840E1F62BCC913CA278C4E9D3AE1879938BA19AE41AB14232611E0503E80361"
+      },
+      "Commands": 350,
+      "MatchedCheckpoints": 11,
+      "AdmissionChecks": 14,
+      "CommandScheduling": {
+        "OutstandingCommandLimit": 2,
+        "CatchupBursts": [
+          {
+            "Pass": 176,
+            "Commands": 2,
+            "FirstCommand": 175,
+            "LastSignalQpc": 1894579619020
+          }
+        ],
+        "Meaning": "Only already-due 35-Hz commands; stop at the two-command window, four-per-pass budget, loading status or exact recorded control boundary. No future command is issued for catch-up.",
+        "CommandsPerPassLimit": 4,
+        "MaximumCommandsPerPass": 2
+      }
+    },
+    {
+      "Style": "Matrix",
+      "Report": {
+        "Path": "local/preview5-readable-Matrix-r1.json",
+        "Sha256": "AFC9AA23687062E7198E997B0175943586B082BE5610F4D5D3AE3661D28CC9BD"
+      },
+      "Evidence": {
+        "Path": "local/preview5-readable-Matrix-r1-evidence.json",
+        "Sha256": "65C600AE6412DCC4C69224B28BF7170D12C426679C41DECD26BA63BFBCCC2649"
+      },
+      "Input": {
+        "Path": "local/preview5-readable-Matrix-r1-input.json",
+        "Sha256": "7B98709F2D6FB503CB14797D08B84163B11033EB2CC91B3B7B4918335E44A096"
+      },
+      "Commands": 350,
+      "MatchedCheckpoints": 11,
+      "AdmissionChecks": 14,
+      "CommandScheduling": {
+        "CatchupBursts": [
+          {
+            "FirstCommand": 175,
+            "Commands": 2,
+            "LastSignalQpc": 1895031228558,
+            "Pass": 176
+          }
+        ],
+        "OutstandingCommandLimit": 2,
+        "Meaning": "Only already-due 35-Hz commands; stop at the two-command window, four-per-pass budget, loading status or exact recorded control boundary. No future command is issued for catch-up.",
+        "CommandsPerPassLimit": 4,
+        "MaximumCommandsPerPass": 2
+      }
+    },
+    {
+      "Style": "AnsiArt",
+      "Report": {
+        "Path": "local/preview5-readable-AnsiArt-r1.json",
+        "Sha256": "BA28B605C15D8D3BB4CA763E001E0B7A9BBA074E91308ED89F43DD70A777C1C8"
+      },
+      "Evidence": {
+        "Path": "local/preview5-readable-AnsiArt-r1-evidence.json",
+        "Sha256": "0A867A4C7237624644865CABF60552E1405B131C55DB915C0F331B6B65B62ECD"
+      },
+      "Input": {
+        "Path": "local/preview5-readable-AnsiArt-r1-input.json",
+        "Sha256": "86ADAFB2DCFD4E072AD4E886E2E1D20CA7031F89F5DBBDD66AE75CFAD96DD6A3"
+      },
+      "Commands": 350,
+      "MatchedCheckpoints": 11,
+      "AdmissionChecks": 14,
+      "CommandScheduling": {
+        "MaximumCommandsPerPass": 2,
+        "CommandsPerPassLimit": 4,
+        "CatchupBursts": [
+          {
+            "LastSignalQpc": 1895465000017,
+            "Commands": 2,
+            "Pass": 176,
+            "FirstCommand": 175
+          }
+        ],
+        "OutstandingCommandLimit": 2,
+        "Meaning": "Only already-due 35-Hz commands; stop at the two-command window, four-per-pass budget, loading status or exact recorded control boundary. No future command is issued for catch-up."
+      }
+    }
+  ],
+  "RetainedLiveSourceMatches": [
+    {
+      "Style": "Classic",
+      "RecordingMetadata": {
+        "Path": "local/recordings/command-burst-readable-Classic-r1-recording.json",
+        "Sha256": "C415581494077CAC0C1F6826B34AEB82A23490ED2BAF9587CD9E70DEFDE693FA"
+      },
+      "TotalPinnedSources": 36,
+      "MatchingSources": 35,
+      "ChangedSources": [
+        "src/FastRenderer.ps1"
+      ],
+      "Meaning": "Retained live source is prior to opt-in geometry profiling. Default prior-renderer image/strip equality is separately verified; this recording is not mislabeled as all-byte-identical final-source footage."
+    },
+    {
+      "Style": "Matrix",
+      "RecordingMetadata": {
+        "Path": "local/recordings/command-burst-readable-Matrix-r1-recording.json",
+        "Sha256": "6DEAE23CA0E5FA3055439628B0E563E63C8BA00C4FBFCC698D288D1A7E205E63"
+      },
+      "TotalPinnedSources": 36,
+      "MatchingSources": 35,
+      "ChangedSources": [
+        "src/FastRenderer.ps1"
+      ],
+      "Meaning": "Retained live source is prior to opt-in geometry profiling. Default prior-renderer image/strip equality is separately verified; this recording is not mislabeled as all-byte-identical final-source footage."
+    },
+    {
+      "Style": "AnsiArt",
+      "RecordingMetadata": {
+        "Path": "local/recordings/command-burst-readable-AnsiArt-r1-recording.json",
+        "Sha256": "C2F61B48A17CA579F20345E735C88771376AEBB8368332705E129D9E2389A69D"
+      },
+      "TotalPinnedSources": 36,
+      "MatchingSources": 35,
+      "ChangedSources": [
+        "src/FastRenderer.ps1"
+      ],
+      "Meaning": "Retained live source is prior to opt-in geometry profiling. Default prior-renderer image/strip equality is separately verified; this recording is not mislabeled as all-byte-identical final-source footage."
+    }
+  ],
+  "RetainedWrapperFailure": {
+    "Path": "local/preview5-package-build.json",
+    "Sha256": "E31A72170590F50A457655D45E26B0B428FA1D5366DD89B11875ED1056ADC09B"
+  },
+  "CorrectedBuildMetadata": {
+    "Path": "local/preview5-package-build-corrected.json",
+    "Sha256": "8AF56DB5A6FAE0FB133C5B22189E1DC5CB07FB94977268DDB26C1621397D650F"
+  },
+  "ValidationLogs": [
+    {
+      "Path": "local/preview5-package-validation-r1.log",
+      "Sha256": "310A6150D9217FBEDBB3A89A64F205D1712A6656279D0BEFD5C54F6DCB070195"
+    },
+    {
+      "Path": "local/preview5-admission-validation-r1.log",
+      "Sha256": "F2F162EFF619EC282902DD3B2F1D6DB45B1EE5E41CCCE99DDA2E56055C67CDA8"
+    }
+  ],
+  "Runners": [
+    {
+      "Path": "local/run-preview5-validation.ps1",
+      "Sha256": "A621475C67822E8976CBA69EC09DE85445F37F957064898C28C6D2898920C6A8"
+    },
+    {
+      "Path": "local/run-preview5-admission-validation.ps1",
+      "Sha256": "3E1CB52362049C22FC5C185DA3B95E10BD794C1B32F7A1CDBEC88DB909D0FDA9"
+    }
+  ],
+  "Audit": {
+    "Path": "local/audit-preview5-package.py",
+    "Sha256": "DDFBDE0D16142AB86B59B6D5D7779F066918282A200FA548563CB3F0E0D473EE"
+  },
+  "Checks": [
+    {
+      "Name": "Version and committed package source",
+      "Passed": true
+    },
+    {
+      "Name": "All559 extracted payload hashes and lengths",
+      "Passed": true
+    },
+    {
+      "Name": "No local assets/native tools/media/research PDF",
+      "Passed": true
+    },
+    {
+      "Name": "Every payload matches pinned Git source modulo checkout CRLF",
+      "Passed": true
+    },
+    {
+      "Name": "Exact archive contents",
+      "Passed": true
+    },
+    {
+      "Name": "Checksum asset identifies exact ZIP",
+      "Passed": true
+    },
+    {
+      "Name": "License and source attribution included",
+      "Passed": true
+    },
+    {
+      "Name": "All adopted PowerShell sources retain GPL terms",
+      "Passed": true
+    },
+    {
+      "Name": "Extracted preflight",
+      "Passed": true
+    },
+    {
+      "Name": "Test-TerminalOutput",
+      "Passed": true
+    },
+    {
+      "Name": "Test-RenderAssetResourceReuse",
+      "Passed": true
+    },
+    {
+      "Name": "Test-SessionMenu",
+      "Passed": true
+    },
+    {
+      "Name": "Menu46 fixtures",
+      "Passed": true
+    },
+    {
+      "Name": "save-worker",
+      "Passed": true
+    },
+    {
+      "Name": "Classic persistent reload/fault/cleanup",
+      "Passed": true
+    },
+    {
+      "Name": "Classic image oracle scope",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix persistent reload/fault/cleanup",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix image oracle scope",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt persistent reload/fault/cleanup",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt image oracle scope",
+      "Passed": true
+    },
+    {
+      "Name": "Recovery effects and credited controls",
+      "Passed": true
+    },
+    {
+      "Name": "Recovery source bytes match package",
+      "Passed": true
+    },
+    {
+      "Name": "Actual device startup clean",
+      "Passed": true
+    },
+    {
+      "Name": "Startup PCM return and packet completion",
+      "Passed": true
+    },
+    {
+      "Name": "All36 load/idle/two-heading renders",
+      "Passed": true
+    },
+    {
+      "Name": "Smoke source pins match extraction",
+      "Passed": true
+    },
+    {
+      "Name": "Ring1200 wrap/overflow boundaries",
+      "Passed": true
+    },
+    {
+      "Name": "Classic actual packaged admission/audio",
+      "Passed": true
+    },
+    {
+      "Name": "Classic retained live provenance difference bounded",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix actual packaged admission/audio",
+      "Passed": true
+    },
+    {
+      "Name": "Matrix retained live provenance difference bounded",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt actual packaged admission/audio",
+      "Passed": true
+    },
+    {
+      "Name": "AnsiArt retained live provenance difference bounded",
+      "Passed": true
+    }
+  ],
+  "Meaning": "Validated playable community preview at cadence, not full Ultimate Doom RC qualification. All-map smoke and save/control fixtures are not navigation/completion. Digital PCM completion/recovery is not acoustic latency. Retained live recordings differ in one opt-in profiler source; final extracted all-style worker/admission checks and prior-renderer equality bound that difference. Repeated loaded pacing remains below frozen gates. Original raw-framebuffer parity, physical input/resize/1080-DPI, full campaigns and second hardware remain open. Publish when validation commit reaches35 since Preview.4; local packaging alone does not reset the counter."
+}

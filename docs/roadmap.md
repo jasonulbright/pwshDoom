@@ -357,3 +357,11 @@ Frame-cost attribution now finds longer E1M2 worker spans and isolates wall trav
 A local power-of-two wall-wrapping trial now retains all twelve fixed-state image/stripe hashes across three ABBA cycles, but all cycle median stripe totals regress and the final slowest stripe is6.61% worse. The trial is rejected and never enters production. [Retained failure to improve](../results/rejected-wall-texture-wrap-20261002.json). Continue a different investigation or broader qualification; public count reaches33, with a new public release due at35 or more.
 
 Preview.5 preparation now packages the accumulated post-Preview.4 fixes with explicit limits, refreshed play instructions and fresh whole-E1 output paths. [Scope](release-preview5.md). Count reaches34 with preparation; extracted validation and immediate public release at35 follow. This cadence release remains a playable community preview; the complete Ultimate Doom objective and acceptance gates remain active.
+
+Preview.5 extracted validation completes:559 manifest/Git payloads,36-map smoke,
+output/resource/menu/save/recovery checks, all-style persistent worker oracles
+and350-command/eleven-checkpoint admission fixtures. Actual device startup
+returns every submitted frame. [Receipt and exact boundaries](../results/preview5-package-validation-20261002.json).
+Count reaches35 with this evidence; tag/publish now and verify the public assets.
+The archive pins preparation source34, while tag35 adds validation. This is a
+cadence community preview; all full Ultimate Doom gates remain active.
