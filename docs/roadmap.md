@@ -67,6 +67,12 @@ fails to reach intermission. No reproducible mechanic defect was isolated and
 the automated route was not tuned; current-source E1M1 route completion remains
 unqualified. See the [replay diagnostic](../results/current-source-session-progression-diagnostic-20261002.json).
 
+The five-skill E1M1 behavior matrix was rerun on current source after the
+visibility and actor-dispatch changes: all37 spawn-filter, damage/ammo,
+monster-behavior, option-override and respawn-threshold checks pass. This is
+component regression evidence and does not restore the stale route's campaign
+qualification. See the [source-pinned receipt](../results/current-source-difficulty-20261002.json).
+
 Release acceptance requires:
 
 - Every included map listed by exact IWAD hash has loading/rendering smoke coverage and a completed ordinary-input route or documented human playthrough. Record skill, secrets, deaths/reloads, and route provenance. A direct exit fixture or 35 idle tics is never campaign completion evidence.

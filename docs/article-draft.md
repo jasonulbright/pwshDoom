@@ -363,3 +363,10 @@ intermission. This invalidates that automated route for the current build but
 does not establish that E1M1 is generally impossible or isolate an engine
 defect. We did not tune the replay. The complete Episode 1 human route remains
 the campaign milestone. [Current-source diagnostic and raw-report hashes](../results/current-source-session-progression-diagnostic-20261002.json).
+
+As a gameplay regression control, the same candidate passes 37 focused E1M1
+checks across all five skills for spawn filtering, damage, ammunition, monster
+behavior, option overrides and respawn thresholds. This narrows the route
+failure to the old input sequence; it does not show that the route would
+complete with human play or that other maps behave correctly. [Source-pinned
+difficulty receipt](../results/current-source-difficulty-20261002.json).

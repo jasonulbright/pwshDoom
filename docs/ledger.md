@@ -6249,3 +6249,14 @@ tuned, following the human-playthrough guidance. Ordinary-input E1M1 completion
 and E1M2 entry are currently unqualified. The [diagnostic receipt](../results/current-source-session-progression-diagnostic-20261002.json)
 pins both local reports, the IWAD, fixture and current source fingerprint. This
 update follows 12 commits since Preview.6; publish again at35 commits.
+
+### Current-source difficulty behavior regression — October 2, 2026
+
+The five-skill E1M1 difficulty matrix passes all37 checks on current source
+commit `5d1b015`: skill-filtered things, player damage, shell ammo, fast-monster
+cadence, Imp reactions/projectiles, respawn thresholds and medium-skill option
+overrides. The runtime engine source tree was clean during the run; the installed
+Ultimate Doom IWAD hash is pinned in the [receipt](../results/current-source-difficulty-20261002.json).
+This verifies component behavior after visibility/actor-dispatch changes. It
+does not qualify ordinary-input map routes or reconcile the old route failure.
+This evidence commit will be the 14th since Preview.6; release at35.
