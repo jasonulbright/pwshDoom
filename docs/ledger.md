@@ -6148,3 +6148,16 @@ commit. No human route is claimed. The article draft now includes the public
 package, bounded renderer measurements and remaining limits. Windows Terminal
 PID 8020 is still user-owned and open, so native window testing and screen
 recording were not started.
+
+### Preview.6 menu, save and mixer regression — October 2, 2026
+
+Headless checks on the exact packaged code pass 10 synthetic menu-input tests,
+16 save-menu confirmation/metadata tests, 24 save-state reconstruction checks
+with a save at command 700 and 140 commands of continuation, and 27 offline
+PowerShell mixer tests. All four reports have zero failed assertions. Runtime
+sources and harnesses match the Preview.6 package; per-file and report hashes
+are in the [session regression receipt](../results/preview6-session-regression-20261002.json).
+The menu test does not inject physical keys, the save test is same-process, and
+the mixer does not open an audio device. These results do not satisfy the
+pending human Episode 1 route, cross-process save integration, acoustics or
+full-campaign playback gates.

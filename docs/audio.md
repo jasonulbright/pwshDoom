@@ -439,3 +439,12 @@ The rerun adds an explicit WAV header/frame-integrity check and passes all
 seven. These process-loopback files confirm non-silent digital output on this
 device; they are not a video recording, human listening/acoustic review,
 full-campaign continuity or native pacing qualification.
+
+## Preview.6 offline mixer regression — October 2, 2026
+
+The packaged PowerShell mixer passes 27 deterministic decode, interpolation,
+stereo, overlap, lifecycle and block-partition checks. This run uses synthetic
+audio and opens no playback device; the live effect capture above is separate.
+Audible quality and speaker latency remain unqualified. Source, harness and
+local report hashes are in the
+[session regression receipt](../results/preview6-session-regression-20261002.json).

@@ -79,3 +79,12 @@ Reproduce core checks from the repository in PowerShell 7 using fresh output pat
 ```
 
 The first report supplies its unique save directory. Pass its untouched `at-1600.pds` to `Test-SaveProcessContinuation.ps1` in two separate `pwsh` invocations, with `-Mode Load` and `-Mode Reference`, `-StartCommand 1600 -ContinueTics 147`, and distinct `-Output` paths. Compare sample hashes and the final graph hash, not process IDs or timing. `Test-SaveValidation.ps1` takes the untouched `at-700.pds` and another fresh output path.
+
+## Preview.6 save regression — October 2, 2026
+
+The exact packaged source passes 16 save-menu confirmation/metadata checks and
+24 save-state checks. The latter saves at command 700, reconstructs the graph,
+and continues 140 commands. This is same-process state evidence; desktop menu
+play and cross-process continuation remain separate gates. Raw ignored reports
+and source/harness hashes are pinned by the
+[session regression receipt](../results/preview6-session-regression-20261002.json).

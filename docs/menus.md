@@ -56,3 +56,11 @@ Persistent input preferences and the current seven-item main menu are covered by
 [settings validation](settings.md). It records 123 menu checks/44 screen fixtures,
 three actual settings captures and their remaining presentation limitations. The
 older schedules and movies above are historical evidence for their menu revisions.
+
+## Preview.6 input regression — October 2, 2026
+
+The packaged source passes all ten synthetic menu-input event checks. This
+rechecks pause-key press/release handling and menu input reset on the current
+release source; it does not inject desktop keys or replace the complete human
+playthrough. The [session regression receipt](../results/preview6-session-regression-20261002.json)
+pins the source and harness hashes.

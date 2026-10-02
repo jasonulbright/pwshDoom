@@ -326,3 +326,11 @@ internal renderer and encoders; original-executable fidelity remains separate.
 ### Preview.6 package and performance update
 
 Preview.6 followed 35 commits after Preview.5 and is now public. Its tested ZIP is 1,819,451 bytes and pins clean source commit 0145d75; extraction verified all 569 file hashes and the separate checksum asset. In the extracted build, all 36 maps pass 35 idle tics and each retained style matches serial rendering over five views and 320,000 pixels with 16 workers. A four-run fixed-view E1M2 ABBA experiment reduced median total renderer time by 2.88% and wall/BSP time by 5.03%, with exact pixels. This bounded renderer result is not a general frame-rate or full-host claim. [Preview.6 release scope](release-preview6.md), [package validation](../results/preview6-package-validation-20261002.json), and [publication verification](../results/preview6-publication-20261002.json) retain the source hashes and limits. The complete human Episode 1 route, moving-world original-renderer comparison, display pacing, physical/acoustic review and second hardware remain open.
+
+On that exact runtime source, the synthetic menu-key checks pass 10/10, the
+save-menu metadata/confirmation checks pass 16/16, same-process save/reconstruct
+and 140-command continuation pass 24/24, and the offline PowerShell audio
+mixer passes 27/27. These regressions test menu mechanics, save graphs and
+mixing arithmetic, not physical keys, fresh-process loading, speaker quality or
+the full campaign. Their [source-pinned receipt](../results/preview6-session-regression-20261002.json)
+retains local raw-report hashes and exact boundaries.

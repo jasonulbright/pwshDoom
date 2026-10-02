@@ -1,0 +1,58 @@
+{
+  "CompletedUtc": "2026-10-02T20:08:19.8542262Z",
+  "Release": "v0.1.0-preview.6",
+  "TestSourceCommit": "0145d751a6f846114eaa6f243296086a3c71dccb",
+  "CurrentCheckoutRuntimeAndScriptsMatchPackage": true,
+  "Tests": [
+    {
+      "ReportSha256": "BFF76BDFB3A00A983A0C4946BC8FE81C8F3A437DCA9FE70AA0DDC7326CF48C07",
+      "Report": "local/preview6-menu-input.json",
+      "Name": "MenuInput",
+      "HarnessRecordedSha256": null,
+      "Passed": 10,
+      "RunCount": 0,
+      "HarnessSha256": "98C61D082E38A2266241141E9AB86C5BAFE64BB1FA6F73CF16976D57A92D8C1C",
+      "RuntimeSourceSha256": "7DDFDC801009B2D6B02DDCD1E02B7E7A2C557E860B8DBB418AA44706AD6777C8",
+      "Failed": 0
+    },
+    {
+      "ReportSha256": "9D0593AE3DED1F0A94C5E24C110797C128AB9C78719920416AA0C0D0B75A8463",
+      "Report": "local/preview6-save-menus.json",
+      "Name": "SaveMenus",
+      "HarnessRecordedSha256": "1A0B30B774DD807C36A14485D7E220E373C64A15FC95CB00E76E21432CFD6F53",
+      "Passed": 16,
+      "RunCount": 0,
+      "HarnessSha256": "1A0B30B774DD807C36A14485D7E220E373C64A15FC95CB00E76E21432CFD6F53",
+      "RuntimeSourceSha256": null,
+      "Failed": 0
+    },
+    {
+      "ReportSha256": "53DE0738EF02226872F26004F85F076283AF27631F9592B606FA62C98554E282",
+      "Report": "local/preview6-save-state.json",
+      "Name": "SaveState",
+      "HarnessRecordedSha256": null,
+      "Passed": 24,
+      "RunCount": 1,
+      "HarnessSha256": "55E5C7CAF4A13B08FCA121C3E73B85C6C25B90038FC6A782B70D52B411D5523A",
+      "RuntimeSourceSha256": "87368E204F816634FEA245966529892438D698B5ACD8694E370AEC46FB4B6563",
+      "Failed": 0
+    },
+    {
+      "ReportSha256": "33A723F15F4CB2A67F0245EE5528A3268026EFB99F72480E164FEE9CC1B9FFA5",
+      "Report": "local/preview6-audio-mixer.json",
+      "Name": "AudioMixer",
+      "HarnessRecordedSha256": null,
+      "Passed": 27,
+      "RunCount": 0,
+      "HarnessSha256": "2ACBF4E8414BFDF99DE52A6C80F3838CBC6DA9137513167B2DBCDBCD2030B820",
+      "RuntimeSourceSha256": "38E846CDF04317FBA6DE2EC598F3497EFB6ED97DEE9AB8EEC22D8A94E4421A0B",
+      "Failed": 0
+    }
+  ],
+  "Boundaries": [
+    "Menu input is synthetic KEY_EVENT processing, not desktop keyboard play",
+    "SaveState checks same-process graph reconstruction and 140 continuation commands; process-boundary/menu integration have separate existing evidence",
+    "Audio mixer tests are deterministic/offline and do not play through a device",
+    "The check set does not finish a human campaign route"
+  ]
+}
