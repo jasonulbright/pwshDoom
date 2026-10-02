@@ -5,6 +5,7 @@ param(
     [string]$Replay = "$PSScriptRoot/../results/e1m1-route-lineflags.json",
     [Parameter(Mandatory)][string]$Output,
     [string]$Images,
+    [string]$Renderer = "$PSScriptRoot/../src/FastRenderer.ps1",
     [ValidateRange(2,100000)][int]$InputTic = 315,
     [ValidateRange(0,32767)][int]$SectorIndex = 26,
     [ValidateRange(-4096,4096)][int[]]$Heights = @(0, 6, 34, 68)
@@ -39,10 +40,10 @@ if ($replayData.PSObject.Properties.Name -notcontains 'InputCommands' -or
 
 $bundle = & "$PSScriptRoot/Build-EngineBundle.ps1"
 . $bundle
-. "$PSScriptRoot/../src/FastRenderer.ps1"
+. $Renderer
 . "$PSScriptRoot/../src/GameHost.ps1"
 $sourcePaths = @(
-    'src/FastRenderer.ps1',
+    [IO.Path]::GetRelativePath($root, [IO.Path]::GetFullPath($Renderer)).Replace('\', '/'),
     'src/GameHost.ps1',
     'src/ManagedDoom/Video/ThreeDRenderer.sb.ps1',
     'scripts/Compare-MovingSectorHeightSweep.ps1'

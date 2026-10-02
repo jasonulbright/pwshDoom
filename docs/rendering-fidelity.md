@@ -1027,3 +1027,25 @@ saved candidate RGB panels are unchanged. These counterfactual scenes isolate
 rendering at a fixed camera; they do not qualify campaign progression or original
 executable state. Historical results retain their original comparator. Whole
 moving-world and original-frame fidelity remain open.
+
+### Candidate wall vertical sampling (2026-10-02)
+
+The playable renderer now samples opaque and finite masked wall textures using
+quantized 16.16 anchors and the floored unsigned inverse scale. Exact binary
+fractions evaluate the column fraction without iterative rounding. Visible-band
+preparation retains pegging, depth, texture wrapping and the three modes.
+[Failed old renderer, production tests and retained alternatives](../results/wall-vertical-sampling-20261002.json).
+
+The retained baseline fails 293,120/7,029,760 authored samples. Production passes
+28,119,040 across four texture heights, with transparent rows and negative
+offsets, plus 20 depth/order checks. Fifteen static views match the first correct
+accumulator trial in 960,000 pixels and depth entries. Actual all-style workers
+match their own serial renderer in 960,000 pixels/240 strips, and all 36 maps
+pass bounded idle smoke. These isolate sampling and consistency; fixture edges
+still follow candidate coverage rather than independently qualified original posts.
+
+E1M2 improves overall against the unchanged reference, while heading 37 worsens
+by one index; E3M6 heading 90 worsens by 96. HUD stays exact. The frozen ceiling
+sweep now disagrees at 12/7/410/4,167 indices. Preserve those increases and all
+images: analytic BSP projection, edge coverage and full moving/original image
+fidelity remain open. Serial cost is a tradeoff, not a demonstrated pacing gain.

@@ -472,3 +472,13 @@ correction, not candidate-fidelity progress. Fresh discovery and stress endpoint
 remain exact. [Evidence and limits](../results/reference-wall-inverse-scale-20261002.json).
 Count reaches 13 after Preview.5. Isolate candidate wall vertical sampling next;
 all full-release gates remain active, with another release due at 35 commits.
+
+Candidate opaque/masked wall texels now use quantized anchors and inverse scale.
+The retained baseline fails 293,120 authored samples; production passes 28.1
+million across four heights, 20 depth/order checks, all-style actual workers and
+36-map idle smoke. Static comparisons improve overall in E1M2 but worsen selected
+views; later dense serial cost cycles remain 4–6% slower. This qualifies a narrow
+arithmetic correction, with full fidelity/pacing/campaign gates open.
+[Production, alternatives and limits](../results/wall-vertical-sampling-20261002.json).
+Count reaches 14 after Preview.5. Record actual committed-source effects next;
+release again at 35 commits since the prior public release.

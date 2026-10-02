@@ -1490,3 +1490,20 @@ of uncovered loopback timestamp coverage during gameplay, alongside startup
 and post-game tail gaps. Complete game-side PCM accounting and zero software
 starvation do not prove acoustic continuity. No recording replaces clean
 pacing, full campaign or independent original-binary fidelity evidence.
+
+### Wall sampling correctness and cost — October 2, 2026
+
+The [wall sampling receipt](../results/wall-vertical-sampling-20261002.json)
+retains nine isolated baseline-versus-trial datasets, each with three ABBA
+cycles at five static headings and all 60 calls. A long accumulator and wrapping
+mask do not solve the cost regression. The adopted exact binary-fraction version
+prepares anchors/scale only for visible textured bands and reuses a constant
+step within a front-parallel segment. No persistent lookup cache is added.
+
+Whole-run mean changes are −2.80% in E1M2 and −1.81% in E3M6, with asymmetric
+initial calls retained. Later dense-cycle means are 5.61% and 4.47% slower.
+This is an arithmetic fidelity correction with a measured serial cost, not a
+native pacing improvement. All failed alternatives and setup errors remain
+attributable. Module-qualified dispatch is included; snapshots/context creation,
+simulation, audio, worker contention and Terminal display are outside these calls.
+The frozen 35-tic/60-display gates remain unchanged and unpassed.

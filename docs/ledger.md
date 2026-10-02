@@ -5703,3 +5703,61 @@ This correction/evidence commit reaches 13 after Preview.5. Next isolate the
 candidate's wall texel stepping with a row-pattern fixture and test a bounded
 PowerShell fixed-point implementation. Full original-image, campaign, pacing,
 human input and acoustic qualification remain open. Release again at 35 commits.
+
+### 2026-10-02 — Correct vertical wall sampling in the playable renderer
+
+A numbered-row texture reproduces the candidate's continuous-distance sampling
+error against the adopted reference column drawer. The retained old renderer
+fails 293,120 of 7,029,760 texel/depth samples. Quantize projection scale and
+texture anchors to 16.16, floor the unsigned inverse scale, and use that step
+for solid, upper, lower and finite masked textures. Keep pegging, depth/order,
+edge coverage and arbitrary-height wrapping. All algorithms remain PowerShell.
+[Production checks, source pins and all trial results](../results/wall-vertical-sampling-20261002.json).
+
+The implementation evaluates exact binary fractions instead of incrementing a
+long accumulator. Signed fixed coordinates and the visible row range keep the
+integer numerator far below double's exact-integer limit; division by 65,536
+is exact. It matches the first correct accumulator trial across 960,000 pixels
+and depth entries in 15 E1M1/E1M2/E3M6 views. Cache anchors only within a segment,
+and reuse a front-parallel step only after a visible textured band needs it.
+Angled walls still calculate their own step per column. No persistent cache,
+native helper, omitted actors or reduced resolution is introduced.
+
+Production passes 28,119,040 authored samples across heights 64/96/128/256,
+including negative offsets, clipped starts and finite masked rows/holes. At
+height 128 the oracle calls the adopted reference DrawColumn; other heights
+use independent Floor/DivRem wrapping. Twenty existing masked-wall depth/order
+checks pass. Actual 16-worker Classic, Matrix and AnsiArt output matches its
+serial reference over 960,000 pixels and 240 encoded strips with palette/fuzz
+fixtures. All 36 maps load, execute 35 idle tics and render twice. These checks
+qualify their narrow conditions, not navigation or original-image parity.
+
+Real-map comparisons are mixed and retained. E1M2 scene mismatch counts change
+9,111/3,822/6,468/6,577/9,013 to 5,847/3,823/6,301/4,616/5,223 at headings
+0/37/90/180/270. E3M6 changes 5,049/4,166/7,312/4,570/4,026 to
+5,049/4,163/7,408/4,493/4,016. The reference pixels are identical within each
+pair and HUD is exact. The moving-ceiling fixture now has 12/7/410/4,167 scene
+mismatches at heights 0/6/34/68. The analytic geometry and masked-post edges
+still differ from the reference; do not claim monotonic or full fidelity.
+
+Nine finite serial datasets each retain 60 calls in three ABBA cycles at five
+headings, with initial calls/outliers included and no concurrent study work.
+The accumulator, wrapping-mask and eager-preparation alternatives are retained.
+The adopted lazy version's whole-run mean is lower by 2.80% in E1M2 and 1.81%
+in E3M6, but initial baseline calls are asymmetric. Later cycle means are still
+slower, including 5.61%/4.47% in dense E3M6. Adopt for arithmetic correctness;
+no native pacing gain or full gate pass is inferred. Keep all cost evidence.
+
+Retain three setup failures: comma-string angle binding before the static test;
+the old cost harness resolving a module-private helper outside its module, with
+zero timed calls; and a masked fixture whose supposed backdrop was too short.
+Correct the fixture sector before baseline/production comparison. The receipt
+auditor also initially expects 21 existing order checks; the actual 20 all pass,
+and its failing source/count diagnosis is retained. No failed product result is
+rewritten. The pair harness now supports explicit candidates/ABBA and performs
+snapshot setup inside each renderer's module.
+
+This implementation/evidence commit reaches 14 after Preview.5. Record actual
+effects on the committed renderer next, then continue the remaining release
+gates. The whole human campaign, independent original moving frames, numerical
+pacing, physical/acoustic/DPI and second-hardware qualification remain open.

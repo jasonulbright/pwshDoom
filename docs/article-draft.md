@@ -244,3 +244,13 @@ scene comparisons while leaving the candidate images unchanged. A higher mismatc
 count after this correction describes a changed oracle, not a new product defect.
 [Failed baseline, source pins and image controls](../results/reference-wall-inverse-scale-20261002.json).
 Historical comparisons remain attributable to their original reference version.
+
+Correctness also has a cost. Numbered texture rows expose the playable renderer's
+continuous-distance wall sampling; quantized inverse scale fixes the isolated
+texel error in solid and transparent walls. Production passes over 28 million
+authored samples and preserves all three display modes in actual worker checks.
+Real-map comparisons improve overall in E1M2 but worsen selected views, because
+the broader projection and edge differences remain. Serial ABBA measurements
+retain initial-call asymmetry and later dense cycles that are 4–6% slower.
+The change is adopted for its demonstrated arithmetic correction, with a native
+performance gain unqualified. [Evidence, alternatives and failures](../results/wall-vertical-sampling-20261002.json).

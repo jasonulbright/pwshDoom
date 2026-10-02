@@ -408,6 +408,8 @@ function Invoke-FastRender {
             [int]$baseLight=[Math]::Clamp(($front.LightLevel -shr 4)+$player.ExtraLight+$contrast,0,15)
             [int[]]$wallLightTable=$Context.Lighting.Scale[$baseLight]
             [double]$iz1=1/$z1;[double]$iz2=1/$z2;[double]$uz1=$u1/$z1;[double]$uz2=$u2/$z2
+            [double[]]$wallBandOrigins=$null;[int]$wallOriginBits=0
+            [bool]$constantWallScale=$iz1 -eq $iz2;[double]$segmentTexelStep=0
             for([int]$x=$x0;$x -lt $x1;$x++) {
                 [int]$clipT=$topClip[$x];[int]$clipB=$bottomClip[$x];if($clipT -gt $clipB){continue}
                 # Match Doom's xToAngle lookup: wall rays are defined at integer
@@ -439,6 +441,7 @@ function Invoke-FastRender {
                 [int]$wallLight=$wallLightTable[$wallLightIndex]
                 if($player.FixedColorMap -gt 0){$wallLight=$player.FixedColorMap}
                 [byte[]]$wallColors=$Context.Colors[$wallLight]
+                [bool]$wallStepReady=$false;[double]$wallTexelStep=0
                 for([int]$band=0;$band -lt 3;$band++) {
                     [int]$tex=0;[double]$textureTop=$ch
                     if($solid) {
@@ -458,8 +461,26 @@ function Invoke-FastRender {
                     if($tex -le 0){continue}
                     $texture=$Context.Textures[$tex];[int]$tw=$texture.Width;[int]$th=$texture.Height;[int[]]$td=$texture.Data
                     [int]$tu=([int][Math]::Floor($texU)%$tw+$tw)%$tw
-                    [double]$vOrigin=$textureTop-$cz+$side.RowOffset
                     [int]$y0=[Math]::Max($clipT,$wy0);[int]$y1=[Math]::Min($clipB,$wy1)
+                    if($y0 -gt $y1){continue}
+                    # Only prepare sampling for a visible textured band. Empty
+                    # portals and clipped walls need neither anchors nor scale.
+                    if(-not $wallStepReady){
+                        if($constantWallScale -and $segmentTexelStep -gt 0){$wallTexelStep=$segmentTexelStep}
+                        else{
+                            [int]$wallScaleData=[Math]::Clamp([int][Math]::Truncate(10485760.0/$distance),256,4194304)
+                            $wallTexelStep=[Math]::Truncate(4294967295.0/$wallScaleData)/65536.0
+                            if($constantWallScale){$segmentTexelStep=$wallTexelStep}
+                        }
+                        $wallStepReady=$true
+                    }
+                    [int]$originBit=1 -shl $band
+                    if(($wallOriginBits -band $originBit) -eq 0){
+                        if($null -eq $wallBandOrigins){$wallBandOrigins=[double[]]::new(3)}
+                        $wallBandOrigins[$band]=[Math]::Truncate(($textureTop-$cz+$side.RowOffset)*65536.0)/65536.0
+                        $wallOriginBits=$wallOriginBits -bor $originBit
+                    }
+                    [double]$vOrigin=$wallBandOrigins[$band]
                     if(-not $solid -and $band -eq 2){
                         # Portal openings remain visible to later geometry. Defer
                         # their transparent textures so that geometry cannot erase them.
@@ -467,18 +488,18 @@ function Invoke-FastRender {
                             if($maskedColumnCount -lt $maskedColumns.Count){
                                 $maskedColumn=$maskedColumns[$maskedColumnCount]
                                 $maskedColumn.X=$x;$maskedColumn.Y0=$y0;$maskedColumn.Y1=$y1;$maskedColumn.Distance=$distance
-                                $maskedColumn.Origin=$vOrigin;$maskedColumn.U=$tu;$maskedColumn.Height=$th;$maskedColumn.Texels=$td;$maskedColumn.Colors=$wallColors
+                                $maskedColumn.TexelStep=$wallTexelStep;$maskedColumn.Origin=$vOrigin;$maskedColumn.U=$tu;$maskedColumn.Height=$th;$maskedColumn.Texels=$td;$maskedColumn.Colors=$wallColors
                             }else{
-                                $maskedColumns.Add(@{X=$x;Y0=$y0;Y1=$y1;Distance=$distance;Origin=$vOrigin;U=$tu;Height=$th;Texels=$td;Colors=$wallColors})
+                                $maskedColumns.Add(@{X=$x;Y0=$y0;Y1=$y1;Distance=$distance;TexelStep=$wallTexelStep;Origin=$vOrigin;U=$tu;Height=$th;Texels=$td;Colors=$wallColors})
                             }
                             $maskedColumnCount++
                         }
                         continue
                     }
                     for([int]$y=$y0;$y -le $y1;$y++) {
-                        # DrawColumnData anchors wall texels at integer row y1-centerY;
-                        # plane mapping separately uses half-row centers.
-                        [double]$vf=$vOrigin+($y-84)*$distance/160;[int]$v=$vf;if($v -gt $vf){$v--}
+                        # Binary fractions of 1/65536 are exact here: this evaluates
+                        # the integer column fraction without accumulating roundoff.
+                        [double]$vf=$vOrigin+($y-84)*$wallTexelStep;[int]$v=$vf;if($v -gt $vf){$v--}
                         $v=($v%$th+$th)%$th;[int]$color=$td[$tu*$th+$v]
                         if($color -ge 0){$p=$y*320+$x;$pixels[$p]=$wallColors[$color];$depthBuffer[$p]=$distance}
                     }
@@ -593,9 +614,10 @@ function Invoke-FastRender {
         [int]$x=$column.X;[int]$height=$column.Height;[int]$source=$column.U*$height
         [double]$distance=$column.Distance;[double]$origin=$column.Origin
         [int[]]$texels=$column.Texels;[byte[]]$colors=$column.Colors
+        [double]$maskedTexelStep=$column.TexelStep
         for([int]$y=$column.Y0;$y -le $column.Y1;$y++){
             [int]$p=$y*320+$x;if($distance -ge $depthBuffer[$p]){continue}
-            [double]$vf=$origin+($y-84)*$distance/160;[int]$v=$vf;if($v -gt $vf){$v--}
+            [double]$vf=$origin+($y-84)*$maskedTexelStep;[int]$v=$vf;if($v -gt $vf){$v--}
             if($v -lt 0 -or $v -ge $height){continue}
             [int]$color=$texels[$source+$v]
             if($color -ge 0){$pixels[$p]=$colors[$color];$depthBuffer[$p]=$distance}

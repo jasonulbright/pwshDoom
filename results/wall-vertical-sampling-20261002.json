@@ -1,0 +1,1085 @@
+{
+  "FinishedUtc": "2026-10-02T08:12:51.965071+00:00",
+  "BaseCommit": "eb5d7e6f120498323c59807497d19e834332969b",
+  "BaselineMismatchSamples": 293120,
+  "BaselineCompared": 7029760,
+  "ProductionHeights": [
+    {
+      "Height": 128,
+      "Fixtures": 176,
+      "Compared": 7029760,
+      "Mismatches": 0
+    },
+    {
+      "Height": 64,
+      "Fixtures": 176,
+      "Compared": 7029760,
+      "Mismatches": 0
+    },
+    {
+      "Height": 96,
+      "Fixtures": 176,
+      "Compared": 7029760,
+      "Mismatches": 0
+    },
+    {
+      "Height": 256,
+      "Fixtures": 176,
+      "Compared": 7029760,
+      "Mismatches": 0
+    }
+  ],
+  "ProductionComparisonEach": 960000,
+  "MaskedOrderChecks": 20,
+  "WorkerChecks": [
+    {
+      "Style": "Classic",
+      "Checks": [
+        {
+          "FilteredPacketBytes": 68016,
+          "AngleDegrees": 0,
+          "WorkerPacketVersion": 5,
+          "Differences": 0,
+          "ComparedPixels": 64000,
+          "ActorCount": 280,
+          "Invisibility": 129,
+          "UnfilteredPacketBytes": 61296,
+          "OpaqueActorDifferences": 21575,
+          "PaletteNumber": 0,
+          "ActorWorkerPairsSkipped": 4439,
+          "ActorWorkerPairsIncluded": 41
+        },
+        {
+          "FilteredPacketBytes": 68016,
+          "AngleDegrees": 37,
+          "WorkerPacketVersion": 5,
+          "Differences": 0,
+          "ComparedPixels": 64000,
+          "ActorCount": 280,
+          "Invisibility": 128,
+          "UnfilteredPacketBytes": 61296,
+          "OpaqueActorDifferences": 17771,
+          "PaletteNumber": 3,
+          "ActorWorkerPairsSkipped": 4414,
+          "ActorWorkerPairsIncluded": 66
+        },
+        {
+          "FilteredPacketBytes": 68016,
+          "AngleDegrees": 89,
+          "WorkerPacketVersion": 5,
+          "Differences": 0,
+          "ComparedPixels": 64000,
+          "ActorCount": 280,
+          "Invisibility": 120,
+          "UnfilteredPacketBytes": 61296,
+          "OpaqueActorDifferences": 18615,
+          "PaletteNumber": 8,
+          "ActorWorkerPairsSkipped": 4298,
+          "ActorWorkerPairsIncluded": 182
+        },
+        {
+          "FilteredPacketBytes": 68016,
+          "AngleDegrees": 173,
+          "WorkerPacketVersion": 5,
+          "Differences": 0,
+          "ComparedPixels": 64000,
+          "ActorCount": 280,
+          "Invisibility": 8,
+          "UnfilteredPacketBytes": 61296,
+          "OpaqueActorDifferences": 21545,
+          "PaletteNumber": 12,
+          "ActorWorkerPairsSkipped": 4321,
+          "ActorWorkerPairsIncluded": 159
+        },
+        {
+          "FilteredPacketBytes": 68016,
+          "AngleDegrees": 269,
+          "WorkerPacketVersion": 5,
+          "Differences": 0,
+          "ComparedPixels": 64000,
+          "ActorCount": 280,
+          "Invisibility": 0,
+          "UnfilteredPacketBytes": 61296,
+          "OpaqueActorDifferences": 19394,
+          "PaletteNumber": 13,
+          "ActorWorkerPairsSkipped": 4461,
+          "ActorWorkerPairsIncluded": 19
+        }
+      ],
+      "EncodedStripByteChecks": 80
+    },
+    {
+      "Style": "Matrix",
+      "Checks": [
+        {
+          "AngleDegrees": 0,
+          "ActorCount": 280,
+          "ActorWorkerPairsIncluded": 41,
+          "Differences": 0,
+          "OpaqueActorDifferences": 21575,
+          "UnfilteredPacketBytes": 61296,
+          "ActorWorkerPairsSkipped": 4439,
+          "Invisibility": 129,
+          "PaletteNumber": 0,
+          "FilteredPacketBytes": 68016,
+          "WorkerPacketVersion": 5,
+          "ComparedPixels": 64000
+        },
+        {
+          "AngleDegrees": 37,
+          "ActorCount": 280,
+          "ActorWorkerPairsIncluded": 66,
+          "Differences": 0,
+          "OpaqueActorDifferences": 17771,
+          "UnfilteredPacketBytes": 61296,
+          "ActorWorkerPairsSkipped": 4414,
+          "Invisibility": 128,
+          "PaletteNumber": 3,
+          "FilteredPacketBytes": 68016,
+          "WorkerPacketVersion": 5,
+          "ComparedPixels": 64000
+        },
+        {
+          "AngleDegrees": 89,
+          "ActorCount": 280,
+          "ActorWorkerPairsIncluded": 182,
+          "Differences": 0,
+          "OpaqueActorDifferences": 18615,
+          "UnfilteredPacketBytes": 61296,
+          "ActorWorkerPairsSkipped": 4298,
+          "Invisibility": 120,
+          "PaletteNumber": 8,
+          "FilteredPacketBytes": 68016,
+          "WorkerPacketVersion": 5,
+          "ComparedPixels": 64000
+        },
+        {
+          "AngleDegrees": 173,
+          "ActorCount": 280,
+          "ActorWorkerPairsIncluded": 159,
+          "Differences": 0,
+          "OpaqueActorDifferences": 21545,
+          "UnfilteredPacketBytes": 61296,
+          "ActorWorkerPairsSkipped": 4321,
+          "Invisibility": 8,
+          "PaletteNumber": 12,
+          "FilteredPacketBytes": 68016,
+          "WorkerPacketVersion": 5,
+          "ComparedPixels": 64000
+        },
+        {
+          "AngleDegrees": 269,
+          "ActorCount": 280,
+          "ActorWorkerPairsIncluded": 19,
+          "Differences": 0,
+          "OpaqueActorDifferences": 19394,
+          "UnfilteredPacketBytes": 61296,
+          "ActorWorkerPairsSkipped": 4461,
+          "Invisibility": 0,
+          "PaletteNumber": 13,
+          "FilteredPacketBytes": 68016,
+          "WorkerPacketVersion": 5,
+          "ComparedPixels": 64000
+        }
+      ],
+      "EncodedStripByteChecks": 80
+    },
+    {
+      "Style": "AnsiArt",
+      "Checks": [
+        {
+          "FilteredPacketBytes": 68016,
+          "WorkerPacketVersion": 5,
+          "UnfilteredPacketBytes": 61296,
+          "ActorCount": 280,
+          "ComparedPixels": 64000,
+          "Invisibility": 129,
+          "AngleDegrees": 0,
+          "PaletteNumber": 0,
+          "ActorWorkerPairsIncluded": 41,
+          "Differences": 0,
+          "ActorWorkerPairsSkipped": 4439,
+          "OpaqueActorDifferences": 21575
+        },
+        {
+          "FilteredPacketBytes": 68016,
+          "WorkerPacketVersion": 5,
+          "UnfilteredPacketBytes": 61296,
+          "ActorCount": 280,
+          "ComparedPixels": 64000,
+          "Invisibility": 128,
+          "AngleDegrees": 37,
+          "PaletteNumber": 3,
+          "ActorWorkerPairsIncluded": 66,
+          "Differences": 0,
+          "ActorWorkerPairsSkipped": 4414,
+          "OpaqueActorDifferences": 17771
+        },
+        {
+          "FilteredPacketBytes": 68016,
+          "WorkerPacketVersion": 5,
+          "UnfilteredPacketBytes": 61296,
+          "ActorCount": 280,
+          "ComparedPixels": 64000,
+          "Invisibility": 120,
+          "AngleDegrees": 89,
+          "PaletteNumber": 8,
+          "ActorWorkerPairsIncluded": 182,
+          "Differences": 0,
+          "ActorWorkerPairsSkipped": 4298,
+          "OpaqueActorDifferences": 18615
+        },
+        {
+          "FilteredPacketBytes": 68016,
+          "WorkerPacketVersion": 5,
+          "UnfilteredPacketBytes": 61296,
+          "ActorCount": 280,
+          "ComparedPixels": 64000,
+          "Invisibility": 8,
+          "AngleDegrees": 173,
+          "PaletteNumber": 12,
+          "ActorWorkerPairsIncluded": 159,
+          "Differences": 0,
+          "ActorWorkerPairsSkipped": 4321,
+          "OpaqueActorDifferences": 21545
+        },
+        {
+          "FilteredPacketBytes": 68016,
+          "WorkerPacketVersion": 5,
+          "UnfilteredPacketBytes": 61296,
+          "ActorCount": 280,
+          "ComparedPixels": 64000,
+          "Invisibility": 0,
+          "AngleDegrees": 269,
+          "PaletteNumber": 13,
+          "ActorWorkerPairsIncluded": 19,
+          "Differences": 0,
+          "ActorWorkerPairsSkipped": 4461,
+          "OpaqueActorDifferences": 19394
+        }
+      ],
+      "EncodedStripByteChecks": 80
+    }
+  ],
+  "SmokeMaps": 36,
+  "SmokeFrames": 72,
+  "MovingCeiling": [
+    {
+      "CeilingHeight": 0,
+      "SceneDifferentIndices": 12,
+      "HudDifferentIndices": 0,
+      "SceneMismatchBounds": [
+        281,
+        153,
+        318,
+        163
+      ]
+    },
+    {
+      "CeilingHeight": 6,
+      "SceneDifferentIndices": 7,
+      "HudDifferentIndices": 0,
+      "SceneMismatchBounds": [
+        312,
+        153,
+        318,
+        153
+      ]
+    },
+    {
+      "CeilingHeight": 34,
+      "SceneDifferentIndices": 410,
+      "HudDifferentIndices": 0,
+      "SceneMismatchBounds": [
+        0,
+        153,
+        319,
+        167
+      ]
+    },
+    {
+      "CeilingHeight": 68,
+      "SceneDifferentIndices": 4167,
+      "HudDifferentIndices": 0,
+      "SceneMismatchBounds": [
+        0,
+        0,
+        319,
+        167
+      ]
+    }
+  ],
+  "StaticReferenceViews": [
+    {
+      "Map": "E1M2",
+      "Angle": 0,
+      "Before": 9111,
+      "After": 5847,
+      "Change": -3264
+    },
+    {
+      "Map": "E1M2",
+      "Angle": 37,
+      "Before": 3822,
+      "After": 3823,
+      "Change": 1
+    },
+    {
+      "Map": "E1M2",
+      "Angle": 90,
+      "Before": 6468,
+      "After": 6301,
+      "Change": -167
+    },
+    {
+      "Map": "E1M2",
+      "Angle": 180,
+      "Before": 6577,
+      "After": 4616,
+      "Change": -1961
+    },
+    {
+      "Map": "E1M2",
+      "Angle": 270,
+      "Before": 9013,
+      "After": 5223,
+      "Change": -3790
+    },
+    {
+      "Map": "E3M6",
+      "Angle": 0,
+      "Before": 5049,
+      "After": 5049,
+      "Change": 0
+    },
+    {
+      "Map": "E3M6",
+      "Angle": 37,
+      "Before": 4166,
+      "After": 4163,
+      "Change": -3
+    },
+    {
+      "Map": "E3M6",
+      "Angle": 90,
+      "Before": 7312,
+      "After": 7408,
+      "Change": 96
+    },
+    {
+      "Map": "E3M6",
+      "Angle": 180,
+      "Before": 4570,
+      "After": 4493,
+      "Change": -77
+    },
+    {
+      "Map": "E3M6",
+      "Angle": 270,
+      "Before": 4026,
+      "After": 4016,
+      "Change": -10
+    }
+  ],
+  "SerialCostTrials": [
+    {
+      "Raw": {
+        "Path": "local/wall-vertical-cost-e1m2-r2.json",
+        "Sha256": "5F06E7B780977DEE9D8101CC3963657EE7AFE99AECA6004246649ED729CDA804"
+      },
+      "Cycles": [
+        {
+          "Cycle": 0,
+          "BaselineMeanMs": 81.39384,
+          "CandidateMeanMs": 76.18722,
+          "ChangePercent": -6.396823150253139
+        },
+        {
+          "Cycle": 1,
+          "BaselineMeanMs": 51.71578,
+          "CandidateMeanMs": 56.88571,
+          "ChangePercent": 9.996813351746802
+        },
+        {
+          "Cycle": 2,
+          "BaselineMeanMs": 51.888619999999996,
+          "CandidateMeanMs": 57.24961,
+          "ChangePercent": 10.331725916010104
+        }
+      ],
+      "Summary": {
+        "Baseline": {
+          "Count": 30,
+          "Mean": 61.666080000000015,
+          "Median": 39.3121,
+          "P95": 107.8375,
+          "Max": 253.7237
+        },
+        "Candidate": {
+          "Count": 30,
+          "Mean": 63.44084666666666,
+          "Median": 41.53805,
+          "P95": 119.7644,
+          "Max": 131.4601
+        }
+      },
+      "ColdCallsRetained": true
+    },
+    {
+      "Raw": {
+        "Path": "local/wall-vertical-wrap-cost-e1m2-r1.json",
+        "Sha256": "8709397ADE0BCE56072F54333736FD6DE3FF4FFD9C24C58B94A7C83482082E67"
+      },
+      "Cycles": [
+        {
+          "Cycle": 0,
+          "BaselineMeanMs": 84.41517999999999,
+          "CandidateMeanMs": 77.42629,
+          "ChangePercent": -8.279186279055494
+        },
+        {
+          "Cycle": 1,
+          "BaselineMeanMs": 51.60657,
+          "CandidateMeanMs": 56.57678,
+          "ChangePercent": 9.630963654433922
+        },
+        {
+          "Cycle": 2,
+          "BaselineMeanMs": 51.41321,
+          "CandidateMeanMs": 56.30941,
+          "ChangePercent": 9.523233425806321
+        }
+      ],
+      "Summary": {
+        "Baseline": {
+          "Count": 30,
+          "Mean": 62.47832000000001,
+          "Median": 38.9521,
+          "P95": 114.0673,
+          "Max": 259.84
+        },
+        "Candidate": {
+          "Count": 30,
+          "Mean": 63.43749333333333,
+          "Median": 40.97175,
+          "P95": 120.2342,
+          "Max": 136.5897
+        }
+      },
+      "ColdCallsRetained": true
+    },
+    {
+      "Raw": {
+        "Path": "local/wall-vertical-wrap-cost-e3m6-r1.json",
+        "Sha256": "42767B4ABD77FFA706A0A261F8DF8ABB8C53D69C11221C77276423DFD5840000"
+      },
+      "Cycles": [
+        {
+          "Cycle": 0,
+          "BaselineMeanMs": 96.43733,
+          "CandidateMeanMs": 88.20513,
+          "ChangePercent": -8.536320945426434
+        },
+        {
+          "Cycle": 1,
+          "BaselineMeanMs": 61.69086,
+          "CandidateMeanMs": 69.7486,
+          "ChangePercent": 13.061481068670467
+        },
+        {
+          "Cycle": 2,
+          "BaselineMeanMs": 59.0232,
+          "CandidateMeanMs": 66.0517,
+          "ChangePercent": 11.908029385055352
+        }
+      ],
+      "Summary": {
+        "Candidate": {
+          "Count": 30,
+          "Mean": 74.66847666666666,
+          "Median": 74.48245,
+          "P95": 88.3849,
+          "Max": 158.9837
+        },
+        "Baseline": {
+          "Count": 30,
+          "Mean": 72.38379666666667,
+          "Median": 64.8005,
+          "P95": 90.7875,
+          "Max": 282.436
+        }
+      },
+      "ColdCallsRetained": true
+    },
+    {
+      "Raw": {
+        "Path": "local/wall-vertical-binary-cost-e1m2-r1.json",
+        "Sha256": "DBA8E9FFF5FADA17272C67B746478F519BAE85B56DA637CF240007402D9B564E"
+      },
+      "Cycles": [
+        {
+          "Cycle": 0,
+          "BaselineMeanMs": 86.04941,
+          "CandidateMeanMs": 78.01631,
+          "ChangePercent": -9.335450411571667
+        },
+        {
+          "Cycle": 1,
+          "BaselineMeanMs": 51.51312,
+          "CandidateMeanMs": 57.55252,
+          "ChangePercent": 11.724003515997472
+        },
+        {
+          "Cycle": 2,
+          "BaselineMeanMs": 51.93126,
+          "CandidateMeanMs": 58.474740000000004,
+          "ChangePercent": 12.600271974914534
+        }
+      ],
+      "Summary": {
+        "Candidate": {
+          "Count": 30,
+          "Mean": 64.68119000000002,
+          "Median": 53.86045,
+          "P95": 109.7496,
+          "Max": 132.3919
+        },
+        "Baseline": {
+          "Count": 30,
+          "Mean": 63.164596666666654,
+          "Median": 51.168099999999995,
+          "P95": 102.4008,
+          "Max": 258.1997
+        }
+      },
+      "ColdCallsRetained": true
+    },
+    {
+      "Raw": {
+        "Path": "local/wall-vertical-binary-cost-e3m6-r1.json",
+        "Sha256": "AB67F218989F24BA07D3E6EA6367046685B8ED0E033EE2C6AA9B342C685D24CC"
+      },
+      "Cycles": [
+        {
+          "Cycle": 0,
+          "BaselineMeanMs": 94.35568,
+          "CandidateMeanMs": 88.84766,
+          "ChangePercent": -5.837507609504799
+        },
+        {
+          "Cycle": 1,
+          "BaselineMeanMs": 57.96959,
+          "CandidateMeanMs": 64.58238,
+          "ChangePercent": 11.407343056937268
+        },
+        {
+          "Cycle": 2,
+          "BaselineMeanMs": 58.2752,
+          "CandidateMeanMs": 64.14263,
+          "ChangePercent": 10.068485393443517
+        }
+      ],
+      "Summary": {
+        "Baseline": {
+          "Count": 30,
+          "Mean": 70.20015666666667,
+          "Median": 64.48935,
+          "P95": 83.9485,
+          "Max": 281.9264
+        },
+        "Candidate": {
+          "Count": 30,
+          "Mean": 72.52422333333334,
+          "Median": 71.7694,
+          "P95": 93.2195,
+          "Max": 159.9941
+        }
+      },
+      "ColdCallsRetained": true
+    },
+    {
+      "Raw": {
+        "Path": "local/wall-vertical-final-cost-e1m2-r1.json",
+        "Sha256": "0DB0A033A90F89AABE147B5E1950C72E8292F8596139F787DF8927CE657B1E6B"
+      },
+      "Cycles": [
+        {
+          "Cycle": 0,
+          "BaselineMeanMs": 100.93547000000001,
+          "CandidateMeanMs": 97.07283,
+          "ChangePercent": -3.826841050029306
+        },
+        {
+          "Cycle": 1,
+          "BaselineMeanMs": 68.71346,
+          "CandidateMeanMs": 77.5843,
+          "ChangePercent": 12.909901495281995
+        },
+        {
+          "Cycle": 2,
+          "BaselineMeanMs": 65.48972,
+          "CandidateMeanMs": 73.77759,
+          "ChangePercent": 12.655222834973179
+        }
+      ],
+      "Summary": {
+        "Candidate": {
+          "Count": 30,
+          "Mean": 82.81157333333334,
+          "Median": 56.97515,
+          "P95": 150.0082,
+          "Max": 153.4837
+        },
+        "Baseline": {
+          "Count": 30,
+          "Mean": 78.37955000000002,
+          "Median": 51.769,
+          "P95": 143.4573,
+          "Max": 262.7667
+        }
+      },
+      "ColdCallsRetained": true
+    },
+    {
+      "Raw": {
+        "Path": "local/wall-vertical-final-cost-e3m6-r1.json",
+        "Sha256": "E640A3FDADD817E76C57DD46120417A7E5E2321EBECA7B7BE78C0A0B26A7F0A9"
+      },
+      "Cycles": [
+        {
+          "Cycle": 0,
+          "BaselineMeanMs": 96.46529,
+          "CandidateMeanMs": 88.93683,
+          "ChangePercent": -7.804320082384031
+        },
+        {
+          "Cycle": 1,
+          "BaselineMeanMs": 62.08538,
+          "CandidateMeanMs": 68.29139,
+          "ChangePercent": 9.995928187924452
+        },
+        {
+          "Cycle": 2,
+          "BaselineMeanMs": 58.78693,
+          "CandidateMeanMs": 63.77019,
+          "ChangePercent": 8.476816190265435
+        }
+      ],
+      "Summary": {
+        "Candidate": {
+          "Count": 30,
+          "Mean": 73.66613666666667,
+          "Median": 72.3415,
+          "P95": 88.681,
+          "Max": 154.9777
+        },
+        "Baseline": {
+          "Count": 30,
+          "Mean": 72.44586666666667,
+          "Median": 66.67645,
+          "P95": 89.4821,
+          "Max": 280.9958
+        }
+      },
+      "ColdCallsRetained": true
+    },
+    {
+      "Raw": {
+        "Path": "local/wall-vertical-lazy-cost-e1m2-r1.json",
+        "Sha256": "1895001BD9A362575687AC6D47FF45E246DB9BEA5639B74CD964BA0C0535259C"
+      },
+      "Cycles": [
+        {
+          "Cycle": 0,
+          "BaselineMeanMs": 88.27698,
+          "CandidateMeanMs": 77.47887,
+          "ChangePercent": -12.232079076561064
+        },
+        {
+          "Cycle": 1,
+          "BaselineMeanMs": 52.39174,
+          "CandidateMeanMs": 54.85848,
+          "ChangePercent": 4.708261264084768
+        },
+        {
+          "Cycle": 2,
+          "BaselineMeanMs": 51.31524,
+          "CandidateMeanMs": 54.27791,
+          "ChangePercent": 5.77347002566877
+        }
+      ],
+      "Summary": {
+        "Baseline": {
+          "Count": 30,
+          "Mean": 63.99465333333334,
+          "Median": 53.3393,
+          "P95": 108.7449,
+          "Max": 262.2709
+        },
+        "Candidate": {
+          "Count": 30,
+          "Mean": 62.205086666666666,
+          "Median": 54.44225,
+          "P95": 108.8998,
+          "Max": 140.1066
+        }
+      },
+      "ColdCallsRetained": true
+    },
+    {
+      "Raw": {
+        "Path": "local/wall-vertical-lazy-cost-e3m6-r1.json",
+        "Sha256": "F699EF151754856E5D132FFB90C65E05864A3578CFC0E5E2FF6EFAF1532CDB7F"
+      },
+      "Cycles": [
+        {
+          "Cycle": 0,
+          "BaselineMeanMs": 94.61013,
+          "CandidateMeanMs": 84.92748,
+          "ChangePercent": -10.23426349799963
+        },
+        {
+          "Cycle": 1,
+          "BaselineMeanMs": 57.91376,
+          "CandidateMeanMs": 61.16556,
+          "ChangePercent": 5.614900500330133
+        },
+        {
+          "Cycle": 2,
+          "BaselineMeanMs": 58.35173,
+          "CandidateMeanMs": 60.95887,
+          "ChangePercent": 4.467973785867185
+        }
+      ],
+      "Summary": {
+        "Candidate": {
+          "Count": 30,
+          "Mean": 69.01730333333333,
+          "Median": 68.5029,
+          "P95": 87.1184,
+          "Max": 153.1058
+        },
+        "Baseline": {
+          "Count": 30,
+          "Mean": 70.29187333333333,
+          "Median": 64.14085,
+          "P95": 89.5407,
+          "Max": 276.2133
+        }
+      },
+      "ColdCallsRetained": true
+    }
+  ],
+  "Files": [
+    {
+      "Path": "src/FastRenderer.ps1",
+      "Sha256": "5F50BD8A78B30B863A0E294C600735F13A6539B383F1F7C2B0FFF967B7462CF2"
+    },
+    {
+      "Path": "scripts/Test-WallVerticalSampling.ps1",
+      "Sha256": "0B8E47DE99E70804EB15EED46EA614D8262784F5DEAA2642D73E959E1B92E224"
+    },
+    {
+      "Path": "scripts/Measure-RendererPair.ps1",
+      "Sha256": "0636194DC759C13A6F2EBFAF633D3206A70B7BE13449E05F3E2DF3ABA985794F"
+    },
+    {
+      "Path": "scripts/Compare-MovingSectorHeightSweep.ps1",
+      "Sha256": "AD48835C7D6FCF337EFCFE7D2D00F2CB505BC87115BAD24A07887850B8D9D186"
+    },
+    {
+      "Path": "local/audit-wall-vertical-production-r1.py",
+      "Sha256": "E47382F756DA39D739B56E97F817CD86631404A1A750ADA89B58D2A1B6A1D281"
+    },
+    {
+      "Path": "local/adopt-wall-vertical-r1.py",
+      "Sha256": "EAF22590881470DDC294BFFC2D9D13051078F83BEF6B566048F97C59D0CE177E"
+    },
+    {
+      "Path": "local/wall-vertical-retained-baseline-r1.json",
+      "Sha256": "241294BC73BD1B362EC4B8317CCE45B3D2DB0BAA2ED4EC93832C4BEDA30D1CD3"
+    },
+    {
+      "Path": "local/wall-vertical-retained-baseline-r1.log",
+      "Sha256": "B15AB3CFFC6B47D80BEFCEE3E0C64E55C89AFF56047DAE82BCD6B127EA2B43BD"
+    },
+    {
+      "Path": "local/wall-vertical-baseline-src-r1/FastRenderer.ps1",
+      "Sha256": "A6DB1AB19159C30DD72F0D8F0F5348ADCB993E68A6FFE7580B68B839F5E712A0"
+    },
+    {
+      "Path": "local/wall-vertical-production-height128-r1.json",
+      "Sha256": "257D796231C4B0F2037ADC3B12B66719EAC21720C28E496CD20C20743D4C65FE"
+    },
+    {
+      "Path": "local/wall-vertical-production-height128-r1.log",
+      "Sha256": "D3063D424A731FB3A6CBC1CB9B2AF433ED307ED02919FFE314FFAFDA3D670AC2"
+    },
+    {
+      "Path": "local/wall-vertical-production-height64-r1.json",
+      "Sha256": "EAD7BC4CD8C628E82F923F7C499CC7464568D0CC91BB9B0C3337437CF14C7A7B"
+    },
+    {
+      "Path": "local/wall-vertical-production-height64-r1.log",
+      "Sha256": "D3063D424A731FB3A6CBC1CB9B2AF433ED307ED02919FFE314FFAFDA3D670AC2"
+    },
+    {
+      "Path": "local/wall-vertical-production-height96-r1.json",
+      "Sha256": "787625110AF3B37CF71688F2E474F7B488E8756AF149B2402343E0123D3925D0"
+    },
+    {
+      "Path": "local/wall-vertical-production-height96-r1.log",
+      "Sha256": "D3063D424A731FB3A6CBC1CB9B2AF433ED307ED02919FFE314FFAFDA3D670AC2"
+    },
+    {
+      "Path": "local/wall-vertical-production-height256-r1.json",
+      "Sha256": "420C6EF37964B2478C38A3A8D31BB72A98DDA484273327096FD2DF2D8F42AF62"
+    },
+    {
+      "Path": "local/wall-vertical-production-height256-r1.log",
+      "Sha256": "D3063D424A731FB3A6CBC1CB9B2AF433ED307ED02919FFE314FFAFDA3D670AC2"
+    },
+    {
+      "Path": "local/wall-vertical-production-equivalence-r1.json",
+      "Sha256": "3AD57F994D009F40776CB62DF98B8F3941015F6459DD9F21FF0259C5A5ABC9AC"
+    },
+    {
+      "Path": "local/wall-vertical-production-order-r1.json",
+      "Sha256": "9BBDFD7640E5589F176D4ED69B81BEDA1441C973DC255048E15409D9606E03BF"
+    },
+    {
+      "Path": "local/Test-WallVerticalEquivalence-r1.ps1",
+      "Sha256": "B45CDCD6DFDC61BD3E9F9681DBC27F4E7371AE2053B5082374E7E4723063A19F"
+    },
+    {
+      "Path": "local/test-wall-vertical-production-r1.ps1",
+      "Sha256": "1D4FD38D62041783A1FEBC7B3A200F445447C77084135A387908DB04A8278BD7"
+    },
+    {
+      "Path": "local/wall-vertical-production-r1.log",
+      "Sha256": "BC49C21596BBD3CC2CFBFA706D7549D555F84D556F2B160EA2082D6E92AE3F6D"
+    },
+    {
+      "Path": "local/wall-vertical-Classic-partitions-r1.json",
+      "Sha256": "E666CF7482E632D5E7CF984AB980CA5EB3AE1100D3F763CBCA41B1F17659EA77"
+    },
+    {
+      "Path": "local/wall-vertical-Classic-partitions-r1.log",
+      "Sha256": "73A89254DE135952A7DCFAA7AA089A6B2E1A5E8041F9F3CFDA2E56203A8A3B19"
+    },
+    {
+      "Path": "local/wall-vertical-Matrix-partitions-r1.json",
+      "Sha256": "BBC0E17B7B1E1975940597EE9BDF887722738E11FC4ED40FB6A89C470D88AC4D"
+    },
+    {
+      "Path": "local/wall-vertical-Matrix-partitions-r1.log",
+      "Sha256": "73A89254DE135952A7DCFAA7AA089A6B2E1A5E8041F9F3CFDA2E56203A8A3B19"
+    },
+    {
+      "Path": "local/wall-vertical-AnsiArt-partitions-r1.json",
+      "Sha256": "37BF3053CFB92586E59932732443BCEEA8A21FB8DC4F7D7E78EA0F5D2A7C091C"
+    },
+    {
+      "Path": "local/wall-vertical-AnsiArt-partitions-r1.log",
+      "Sha256": "73A89254DE135952A7DCFAA7AA089A6B2E1A5E8041F9F3CFDA2E56203A8A3B19"
+    },
+    {
+      "Path": "local/wall-vertical-campaign-smoke-r1.json",
+      "Sha256": "DF858B2EA6E5406D976296356E39F6A9BD93A5CA977CE4A90D9DA3F6F25DF908"
+    },
+    {
+      "Path": "local/wall-vertical-campaign-smoke-r1.log",
+      "Sha256": "9FDEC0A06C35EF34E27C9689D78B2BA9392503015712DFAF331297180F1408EB"
+    },
+    {
+      "Path": "local/wall-vertical-production-moving-r1.json",
+      "Sha256": "C3A3EB1756A2532EAAA3A70D1288CEA92E0B7D8A3E325ED4DA7FFEF8D73A5DD8"
+    },
+    {
+      "Path": "local/wall-vertical-production-moving-r1.log",
+      "Sha256": "C5444895EED7579BBACEC17991380FA46174590F4DE53B40AA850E396AE45884"
+    },
+    {
+      "Path": "local/wall-vertical-reference-baseline-e1m2-r2.json",
+      "Sha256": "9FF075EC0BA6EFCBDDA90BA3D6092F3C3F913A29F9684ED202462E24638EC2EF"
+    },
+    {
+      "Path": "local/wall-vertical-reference-trial-e1m2-r2.json",
+      "Sha256": "470D10543D20DADB47DB65BCFB50D419B63DA200AFAC6DCA6F33BFF419F11FA3"
+    },
+    {
+      "Path": "local/wall-vertical-reference-baseline-e3m6-r1.json",
+      "Sha256": "015F827207015C69A3E232A704B13650389C0DF1EF03619070C548A600D52315"
+    },
+    {
+      "Path": "local/wall-vertical-reference-trial-e3m6-r1.json",
+      "Sha256": "854808CCF4D5643A3C81C8E1190462021BDDAE2C8AC5CAA5F93AE960B51B957D"
+    },
+    {
+      "Path": "local/wall-vertical-cost-e1m2-r2.json",
+      "Sha256": "5F06E7B780977DEE9D8101CC3963657EE7AFE99AECA6004246649ED729CDA804"
+    },
+    {
+      "Path": "local/wall-vertical-cost-e1m2-r2.log",
+      "Sha256": "FC5954F9CD2890717A97DA83FE7421C97372C3252AF136CFDB00A7EC614B7E6A"
+    },
+    {
+      "Path": "local/wall-vertical-wrap-cost-e1m2-r1.json",
+      "Sha256": "8709397ADE0BCE56072F54333736FD6DE3FF4FFD9C24C58B94A7C83482082E67"
+    },
+    {
+      "Path": "local/wall-vertical-wrap-cost-e1m2-r1.log",
+      "Sha256": "77FA56A88A11AA75D62312AFDECEBE6A7A16B271F757ED95248BD10AFB677F87"
+    },
+    {
+      "Path": "local/wall-vertical-wrap-cost-e3m6-r1.json",
+      "Sha256": "42767B4ABD77FFA706A0A261F8DF8ABB8C53D69C11221C77276423DFD5840000"
+    },
+    {
+      "Path": "local/wall-vertical-wrap-cost-e3m6-r1.log",
+      "Sha256": "88B75554192E2A1EF5DE9E46E14A8AB8D0B84D3F72D62FCFDCD5140DE34DFFF3"
+    },
+    {
+      "Path": "local/wall-vertical-binary-cost-e1m2-r1.json",
+      "Sha256": "DBA8E9FFF5FADA17272C67B746478F519BAE85B56DA637CF240007402D9B564E"
+    },
+    {
+      "Path": "local/wall-vertical-binary-cost-e1m2-r1.log",
+      "Sha256": "394461AF9AF53C0CA9F525CA039AA698E5F9D046A3C3753F9D8FD74C0D3BC628"
+    },
+    {
+      "Path": "local/wall-vertical-binary-cost-e3m6-r1.json",
+      "Sha256": "AB67F218989F24BA07D3E6EA6367046685B8ED0E033EE2C6AA9B342C685D24CC"
+    },
+    {
+      "Path": "local/wall-vertical-binary-cost-e3m6-r1.log",
+      "Sha256": "09E2A056A58C46D2396C5E9891582B0EBE5802243266A25D751A4232605DE96D"
+    },
+    {
+      "Path": "local/wall-vertical-final-cost-e1m2-r1.json",
+      "Sha256": "0DB0A033A90F89AABE147B5E1950C72E8292F8596139F787DF8927CE657B1E6B"
+    },
+    {
+      "Path": "local/wall-vertical-final-cost-e1m2-r1.log",
+      "Sha256": "E868F01F38DAEA2D6ADAE7A3FEB7A21BFCD10BA6EC3AB0E8BE8C57F09131DAEC"
+    },
+    {
+      "Path": "local/wall-vertical-final-cost-e3m6-r1.json",
+      "Sha256": "E640A3FDADD817E76C57DD46120417A7E5E2321EBECA7B7BE78C0A0B26A7F0A9"
+    },
+    {
+      "Path": "local/wall-vertical-final-cost-e3m6-r1.log",
+      "Sha256": "DC53350C33B026499B39F87E7F708E9628D2B71C53071A6D7E26E0754EBC9AD7"
+    },
+    {
+      "Path": "local/wall-vertical-lazy-cost-e1m2-r1.json",
+      "Sha256": "1895001BD9A362575687AC6D47FF45E246DB9BEA5639B74CD964BA0C0535259C"
+    },
+    {
+      "Path": "local/wall-vertical-lazy-cost-e1m2-r1.log",
+      "Sha256": "FE472D4AE5167455D4021A301C370FEAAEE8ADBCBA4A980A16C6A9A88E719751"
+    },
+    {
+      "Path": "local/wall-vertical-lazy-cost-e3m6-r1.json",
+      "Sha256": "F699EF151754856E5D132FFB90C65E05864A3578CFC0E5E2FF6EFAF1532CDB7F"
+    },
+    {
+      "Path": "local/wall-vertical-lazy-cost-e3m6-r1.log",
+      "Sha256": "D27FB56D21441B00105B1CE51171B370A64FFCA2F9F77D9866E40BB81D71020F"
+    },
+    {
+      "Path": "local/prepare-wall-vertical-trial-r1.py",
+      "Sha256": "6E29CB991684956E3472FCA5EAFCB5F837212DB58F5B3FA1D7897C32CF671959"
+    },
+    {
+      "Path": "local/FastRenderer-wall-vertical-trial-r1.ps1",
+      "Sha256": "6BF27DC808F992C4BEB72DA8D7FC38765708F4907CC507D67F1B07C701B74494"
+    },
+    {
+      "Path": "local/prepare-wall-vertical-trial-r2.py",
+      "Sha256": "9ABC48F53E254B3328FB04DFF546BD59DAA46AD6CDDC24376BA5C8CDF04C9F5C"
+    },
+    {
+      "Path": "local/FastRenderer-wall-vertical-trial-r2.ps1",
+      "Sha256": "CFFB790F009C26797AE94C149A1716F4525CE4B800FBAA5B960E5C97735EEA68"
+    },
+    {
+      "Path": "local/prepare-wall-vertical-trial-r3.py",
+      "Sha256": "21A763A4B45D8B430E56B3FECB7EEFA44E9F3538575D51243C92655F320D788A"
+    },
+    {
+      "Path": "local/FastRenderer-wall-vertical-trial-r3.ps1",
+      "Sha256": "EEAE988F274D1B79451B75C3C19C65F3E09345A0741368FAC0D0A14382B8D2FE"
+    },
+    {
+      "Path": "local/prepare-wall-vertical-trial-r4.py",
+      "Sha256": "90020C89E587505428A76ACC6D38D332791635043DD0A86858A166918D39ABFC"
+    },
+    {
+      "Path": "local/FastRenderer-wall-vertical-trial-r4.ps1",
+      "Sha256": "99CD5354DA97776665DDE00983FD09608702DC3C12EC4F26B07201CB81213DB8"
+    },
+    {
+      "Path": "local/prepare-wall-vertical-trial-r5.py",
+      "Sha256": "935527F14D0010BA3EB55F181C9BAB3BF0B1404DDC766D1C6E34CCDFD901AB14"
+    },
+    {
+      "Path": "local/FastRenderer-wall-vertical-trial-r5.ps1",
+      "Sha256": "85DCEC07F97F5FB71FF3EDC8C025FA7DF8784F5FE56477A846805F593AF83ACD"
+    },
+    {
+      "Path": "local/prepare-wall-vertical-trial-r6.py",
+      "Sha256": "FEF950AA6D99A5C61B19C38F9E267E1DB9920DE73C572B563A2B48BBC0F5B08F"
+    },
+    {
+      "Path": "local/FastRenderer-wall-vertical-trial-r6.ps1",
+      "Sha256": "8B2052A47B7008345F1E2350EDE7E795F110534E1856376206CC1C2A5838E08F"
+    },
+    {
+      "Path": "local/prepare-wall-vertical-trial-r7.py",
+      "Sha256": "E1A1DDD064AE964329A648849734E1D28D3D72D54A7EE87803EF9F4FBB5ECF31"
+    },
+    {
+      "Path": "local/FastRenderer-wall-vertical-trial-r7.ps1",
+      "Sha256": "025DB2CDB44FD83C802AB0FFF5358300C830974610642F573F56156DDC0317FC"
+    }
+  ],
+  "RetainedFailures": [
+    {
+      "Path": "local/wall-vertical-cost-e1m2-r1.json",
+      "Sha256": "DE291F9968D61738988A750DD252EBCA870ED72AAB19EA7D4284999D8687D748"
+    },
+    {
+      "Path": "local/wall-vertical-cost-e1m2-r1.log",
+      "Sha256": "0E8991D44A0886C06B5DCE230BB93C766C73D22B548BEF6360C31111BD2562F7"
+    },
+    {
+      "Path": "local/wall-vertical-reference-baseline-e1m2-r1.log",
+      "Sha256": "4950FDBC875DB29769C841B17A7653E7175737D4CDD175C3E13BE604C3CEE755"
+    },
+    {
+      "Path": "local/wall-vertical-trial-r2.json",
+      "Sha256": "28946623FD203B65156911EA68F8BB4DCFF3379FAE0B32FB9B8E6F837C7CA1CF"
+    },
+    {
+      "Path": "local/wall-vertical-trial-r2.log",
+      "Sha256": "9E72B33660F23F562EC09D9ADD43E239A6749A44030B411A29CFCA4773471DFA"
+    },
+    {
+      "Path": "local/Test-WallVerticalSampling-fixture-before-r3.ps1",
+      "Sha256": "F238F5674C268F3ACB361CE0617196C0EE2FF49C5B8F9AA80BB6C813FCFE4BC8"
+    },
+    {
+      "Path": "local/audit-wall-vertical-production-before-order-count-r1.py",
+      "Sha256": "9E4891489E1CD1F2F72F6EE1C2A44B7ABA9FF69A5CE5B3A04E1997643F645794"
+    },
+    {
+      "Path": "local/wall-vertical-audit-order-count-error-r1.json",
+      "Sha256": "E6B09B8683EC858368516930040E4DD177711F64796F88C83D8FD69BCD81B0AD"
+    }
+  ],
+  "Decision": "Adopt exact fixed-point wall vertical sampling for opaque bands and masked textures, with lazy visible-band preparation. Keep analytic geometry/coverage, pegging, depth/order, non-power-of-two wrapping and the three display modes. No compiled production helper. Accumulator, wrapping-mask, exact-binary and eager/lazy preparations retained as bounded alternatives.",
+  "ArithmeticMeaning": "Scale is quantized/clamped to16.16; inverse uintMax/scale floors and texture anchor truncates to16.16. Evaluating origin+(y-84)*step in binary double is exact for these integer fractions of1/65536: signed fixed map/view/offset values and screen-row delta times valid inverse scale stay far below2^53. It equals the checked accumulator without accumulated roundoff. This does not fix the analytic geometry/angle scale differences from the reference.",
+  "Limits": "28,119,040 authored texel/depth samples across four heights qualify scalar sampling/finite row holes within candidate-defined coverage; not original masked-post edges or arbitrary BSP projection.960,000 pixels and depths repeat the first correct trial at fifteen views; actual all-style workers match960,000 pixels/240strips with their own serial reference.36-map idle smoke is not campaign completion. Static image comparisons improve overall in E1M2 but worsen one E1M2 view by1 and one E3M6 view by96; full original/moving image fidelity remains open. All nine serial ABBA datasets retain cold calls/outliers and compare baseline to each trial within one process. Final lazy later dense cycles remain about4\u20136% slower although whole-run means are lower owing to initial-call asymmetry; no causal native gain/60FPS claim. Full campaign/pacing/physical/acoustic/DPI/hardware qualification remains open.",
+  "FailureMeaning": "First static launch rejected comma-string Angles before running; correct explicit array retained separately. First cost harness failed resolving the module-private sector-cache helper with zero timed calls; snapshot setup now runs inside each renderer module. Masked fixture initially expected a tall backdrop but authored a short wall; all153600 mismatches belonged to masked cases. Its source/report are retained, then the backdrop sector is corrected before baseline and production comparison; no expected product pixels rewritten."
+}
