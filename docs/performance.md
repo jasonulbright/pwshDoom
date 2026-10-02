@@ -1199,3 +1199,67 @@ not establish general superiority, a passing three-cycle qualification or
 resize/menu/effect behavior is checked. The
 [independent ABBA receipt](../results/output-abba-classic-20261001.json)
 keeps all global/window/CPU/audio/load results and source hashes.
+
+
+## Three live exact-color ABBA cycles — October 1, 2026
+
+Twelve sequential sessions at checkout `61c7f7e` use the frozen R19 runtime
+source (`f0a16af`), PowerShell 7.6.6, sixteen renderer workers, maximized Classic
+at font size 5, and the same 1,747-command E1M1/intermission/E1M2 route, settings,
+IWAD and eleven-track music catalog. Both encoders use AsyncBatch. Each cycle
+runs Pairs, ColorState, ColorState, Pairs; no other study qualification,
+recording, export or analyzer overlaps collection. The [portable receipt](../results/colorstate-abba-classic-r19-20261001.json)
+pins all raw reports/CSVs, source hashes, protocol and audits. Startup, loading
+holds and asynchronous output completion observations remain in the evidence.
+
+| Cycle / position | Encoder | Active tics/sec | Global display events/sec | Tick lateness p99 (ms) | Mean bytes per observed frame |
+| --- | --- | ---: | ---: | ---: | ---: |
+| 1 / 1 | Pairs | 34.967 | 52.196 | 83.330 | 613,387 |
+| 1 / 2 | ColorState | 34.966 | 52.460 | 78.452 | 524,510 |
+| 1 / 3 | ColorState | 34.978 | 53.806 | 80.825 | 519,614 |
+| 1 / 4 | Pairs | 34.641 | 51.585 | 94.820 | 612,893 |
+| 2 / 1 | Pairs | 34.979 | 51.669 | 69.174 | 614,585 |
+| 2 / 2 | ColorState | 34.979 | 55.022 | 73.488 | 523,743 |
+| 2 / 3 | ColorState | 34.972 | 56.696 | 72.765 | 521,901 |
+| 2 / 4 | Pairs | 34.973 | 50.958 | 85.279 | 612,720 |
+| 3 / 1 | Pairs | 34.978 | 51.667 | 68.474 | 614,190 |
+| 3 / 2 | ColorState | 34.976 | 53.693 | 67.162 | 524,003 |
+| 3 / 3 | ColorState | 34.672 | 51.665 | 370.199 | 520,977 |
+| 3 / 4 | Pairs | 34.979 | 53.661 | 57.104 | 612,296 |
+
+ColorState's median mean bytes per observed frame is 14.73% lower. The median
+global display-event rate is 53.750/sec versus 51.668/sec. Within-cycle mean
+rate differences are +2.39%, +8.86% and +0.03%; the third cycle is effectively
+tied and includes the slow ColorState run. Identical inputs do not establish
+identical rendered/interpolated frame samples, so these byte ratios describe
+observed sessions rather than an identical-image compression ratio. The fresh
+thirteen-case codec test independently parses every painted RGB pixel and
+retains its six real static views and alternating-order isolated samples.
+
+Peak sampled game private memory has medians of 4.105 GiB for ColorState and
+4.534 GiB for Pairs; these sampled values are lower bounds on actual peaks.
+First completed writes occur 38.55–53.29 seconds after launch. All runs consume
+all commands, close audio cleanly and return every submitted frame, with zero
+software queue-starvation observations and rebuffer resumes. The independent
+CSV audit confirms display counts/p99 gaps, and per-frame byte totals reconcile
+with completed-output accounting. Its first attempt incorrectly compared
+source dictionaries by property order; sorted actual path/hash pairs confirm
+one identical host-source set. That failed auditor and corrected receipt are
+retained separately.
+
+None passes all frozen numerical gates. Every global display rate is below
+59/sec, and maximum display gaps are 1.24–2.92 seconds. The 1/4 run's reported
+active rate includes a 741.6 ms final observed output drain; that failed rate is
+retained. In 3/3, E1M2's mean slowest-worker raster is 19.0 ms, snapshot
+publication 9.0 ms, game update 6.8 ms and observed output completion 15.0 ms;
+audio packet production averages 0.175 ms with no audio backpressure. Its
+2.9-second intermission completion observation overlaps map loading and does
+not prove native I/O blocked for that duration. System/scheduling/thermal cause
+remains unestablished. Neither the failed rate nor the outlier is discarded.
+
+Keep Pairs and Strips as defaults. ColorState remains an exact-color opt-in;
+this experiment supports a modest workload-specific benefit with AsyncBatch,
+not a general winner or a release performance pass. Further work must reduce
+transition display gaps and repeat other styles, viewport sizes and heavier
+workloads. Optical frame identity, acoustic review and second hardware remain
+unqualified.
