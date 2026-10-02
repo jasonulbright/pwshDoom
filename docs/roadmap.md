@@ -372,3 +372,12 @@ pass, and all478 runtime payloads match the release tag. [Publication receipt](.
 The cadence resets at Preview.5; the evidence commit starts the next count at1.
 The full Ultimate Doom release goal remains active, with the explicit remaining
 campaign/fidelity/pacing/physical/acoustic/hardware gates unchanged.
+
+Dense E3M6 qualification now retains nine clean source-pinned native stress
+captures across all modes. All420 commands/two checkpoints/audio accounting
+repeat, but the player dies and every numerical pacing gate fails: active rates
+28.6–30.8 tics/sec and39.5–47.2 display events/sec. [Receipt and scope](../results/preview5-e3m6-all-style-pacing-20261002.json).
+The resource sampler also omits the separate audio worker; earlier subset
+CPU/memory measurements cannot certify whole-game totals. Correct that gap,
+then investigate command publication/worker-count costs and record effects
+separately. Preview.5 stays frozen; new release count reaches2.

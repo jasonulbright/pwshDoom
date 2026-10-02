@@ -1416,3 +1416,19 @@ These profiles render each stripe sequentially with three warmups/twenty samples
 A local candidate masks signed texel coordinates for power-of-two wall texture heights, retains normalized modulo otherwise, and hoists the column source offset. All twelve profiles in three fixed-E1M2 ABBA cycles retain identical full-frame and sixteen measured-stripe hashes. However, median stripe totals regress3.62%,0.77%,1.61%, and summed stripe medians regress2.95%,0.33%,1.54%. The slowest-stripe gains in cycles1/2 reverse to6.61% worse in cycle3; total p95 also regresses6.998% in that cycle. [Exact source/run metrics and rejection](../results/rejected-wall-texture-wrap-20261002.json).
 
 The candidate remains ignored and was never adopted into production. Exact image equality is necessary but does not establish speed. These sequential isolated startup-view profiles do not measure live display performance or confidence intervals. Stop this path and retain the current renderer; further broad tests for the rejected change would add no release coverage.
+
+### Dense E3M6 stress across all styles — October 2, 2026
+
+The [nine-run Preview.5-runtime receipt](../results/preview5-e3m6-all-style-pacing-20261002.json) retains three sequential maximized16-worker/audio stress runs per mode, the full30-track catalog and Strips defaults. All420 commands and two stored checkpoints match. The player dies in every run; this is a captured stress workload, not ordinary route or map-completion evidence.
+
+| Mode | Active tics/sec, three repeats | Display events/sec, three repeats |
+| --- | --- | --- |
+| Classic |30.537 /30.502 /30.392 |40.041 /39.478 /39.660 |
+| Matrix |30.811 /28.582 /29.761 |47.249 /45.288 /44.785 |
+| Color art |30.049 /29.648 /29.922 |42.803 /42.668 /42.306 |
+
+P99 tic lateness is1.646–2.707 seconds. None passes all numerical gates; every whole window/outlier remains. Classic uses Pairs/font5, character modes use Katakana/MS Gothic12 and report encoding NotApplicable. Sequential style groups and different fonts are not a paired causal ranking. Audio packet/credit/PCM accounting passes with zero producer backpressure/software starvation/rebuffer; processing medians13.9–15.4 ms exclude speaker/device latency.
+
+Startup is28.05–30.13 seconds. Reported private memory3.46–4.16 GiB and CPU48.1–54.0% cover only host, simulation and16 renderers. The current collector omits the separate audio worker and excludes Terminal. These are lower subset measurements, including in earlier cohorts, and do not qualify total game-process budgets. Fix that omission before total resource claims. All recorded PIDs exit before analysis; recordings/exports/tests/analyzers do not overlap clean capture.
+
+A first Classic diagnostic has18.18 ms mean game update and7.12 ms snapshot publication, leaving other stages/scheduling unclassified. Further work should investigate the command pipeline and worker-count alternatives with exact commands/images, then qualify effects separately. It should not tune this stress input into a map route or change failed gate denominators.
