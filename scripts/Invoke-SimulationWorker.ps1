@@ -284,7 +284,7 @@ try {
         $start=$view.ReadInt64(40)
         if($start -gt 0){$lateness.Add(([Diagnostics.Stopwatch]::GetTimestamp()-$start)*1000.0/[Diagnostics.Stopwatch]::Frequency-($tick+1)*1000.0/35)}
         $priorWorld=$game.World;$priorState=$game.State
-        if($null -ne $audioEvents){$audioEvents.Tic=$tick}
+        if($null -ne $audioEvents){$audioEvents.Tic=$tick;$audioEvents.LevelMap=$game.Options.Map}
         $watch=[Diagnostics.Stopwatch]::StartNew();$null=$game.Update($commands);$tickTimes.Add($watch.Elapsed.TotalMilliseconds);$tick++
         $updateEndQpc=[Diagnostics.Stopwatch]::GetTimestamp()
         $mapChanged=-not [object]::ReferenceEquals($priorWorld,$game.World)

@@ -7,6 +7,7 @@ class DoomSoundEvents : ISound {
     [Mobj]$Listener
     [int]$NextSource
     [int]$Tic
+    [int]$LevelMap=1
     [int] Register([Mobj]$source){
         if($null -eq $source){return 0}
         if(-not $this.Keys.ContainsKey($source)){$this.NextSource++;$this.Keys.Add($source,$this.NextSource);$this.Sources.Add($this.NextSource,$source)}
@@ -46,7 +47,7 @@ function Update-DoomAudioEvents {
     foreach($voice in $Mixer.Voices){
         $source=if($Events.Sources.ContainsKey([int]$voice.Source)){$Events.Sources[[int]$voice.Source]}else{$null}
         if($null -eq $listener -or $null -eq $source -or [object]::ReferenceEquals($listener,$source)){$gains=Get-DoomStereoGains -Local -Volume $voice.BaseVolume}
-        else{$gains=Get-DoomStereoGains ($listener.X.Data/65536.0) ($listener.Y.Data/65536.0) ($listener.Angle.Data*(2*[Math]::PI/4294967296.0)) ($source.X.Data/65536.0) ($source.Y.Data/65536.0) -Volume $voice.BaseVolume}
+        else{$gains=Get-DoomStereoGains ($listener.X.Data/65536.0) ($listener.Y.Data/65536.0) ($listener.Angle.Data*(2*[Math]::PI/4294967296.0)) ($source.X.Data/65536.0) ($source.Y.Data/65536.0) -Volume $voice.BaseVolume -Map $Events.LevelMap}
         $voice.Left=$gains[0];$voice.Right=$gains[1]
     }
 }

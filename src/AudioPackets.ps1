@@ -38,7 +38,7 @@ function Get-DoomAudioPacket {
     foreach($key in $State.Expires.Keys){
         $source=if($Events.Sources.ContainsKey([int]$key)){$Events.Sources[[int]$key]}else{$null}
         if($null -eq $listener -or $null -eq $source -or [object]::ReferenceEquals($listener,$source)){$gain=@(.5,.5)}
-        else{$gain=Get-DoomStereoGains ($listener.X.Data/65536.0) ($listener.Y.Data/65536.0) ($listener.Angle.Data*(2*[Math]::PI/4294967296.0)) ($source.X.Data/65536.0) ($source.Y.Data/65536.0)}
+        else{$gain=Get-DoomStereoGains ($listener.X.Data/65536.0) ($listener.Y.Data/65536.0) ($listener.Angle.Data*(2*[Math]::PI/4294967296.0)) ($source.X.Data/65536.0) ($source.Y.Data/65536.0) -Map $Events.LevelMap}
         $gains[[int]$key]=[double[]]$gain
     }
     $State.MaxSources=[Math]::Max($State.MaxSources,$Events.Sources.Count)

@@ -12,11 +12,14 @@ function ConvertFrom-DoomDmxSound {
     return @{Name=$Name;Rate=$rate;Samples=$samples;Padding=$Padding;SourceBytes=$Data.Length}
 }
 function Get-DoomStereoGains {
-    param([double]$ListenerX,[double]$ListenerY,[double]$AngleRadians,[double]$SourceX,[double]$SourceY,[ValidateRange(0,1)][double]$Volume=1,[switch]$Local)
+    param([double]$ListenerX,[double]$ListenerY,[double]$AngleRadians,[double]$SourceX,[double]$SourceY,[ValidateRange(0,1)][double]$Volume=1,[ValidateRange(1,32)][int]$Map=1,[switch]$Local)
     if($Local){return @(($Volume*.5),($Volume*.5))}
     [double]$dx=$SourceX-$ListenerX;[double]$dy=$SourceY-$ListenerY
     [double]$distance=[Math]::Max([Math]::Abs($dx),[Math]::Abs($dy))+.5*[Math]::Min([Math]::Abs($dx),[Math]::Abs($dy))
     [double]$gain=$Volume*[Math]::Clamp((1200-$distance)/1040,0.0,1.0)
+    # Doom map 8 intentionally keeps distant effects at 15/127 instead of
+    # clipping them. The original S_AdjustSoundParams applies this to MAP08.
+    if($Map -eq 8){$gain=[Math]::Max($gain,$Volume*(15.0/127.0))}
     [double]$pan=.75*[Math]::Sin([Math]::Atan2($dy,$dx)-$AngleRadians)
     return @(($gain*(1+$pan)*.5),($gain*(1-$pan)*.5))
 }

@@ -39,6 +39,7 @@ try{
     $events=[DoomSoundEvents]::new();$options.Sound=$events;$mixer=New-DoomAudioMixer 44100
     $game=[DoomGame]::new($content,$options);$commands=[TicCmd[]]::new(4);for($i=0;$i -lt 4;$i++){$commands[$i]=[TicCmd]::new()}
     $game.DeferedInitNew([GameSkill]([int]$recorded.Skill-1),[int]$recorded.Episode,[int]$recorded.Map);$null=$game.Update($commands)
+    $events.LevelMap=$game.Options.Map
     if($PacketMix){$packet=Get-DoomAudioPacket $packetState $events $clips;foreach($event in $packet.Events){$eventsLog.Add($event)};Update-DoomAudioPacket $mixer $packet $clips}
     else{Update-DoomAudioEvents $mixer $events $clips $eventsLog}
     $checkpointTics=@{};foreach($point in $recorded.Checkpoints){$checkpointTics[[int]$point.Tic]=$true}
@@ -48,7 +49,7 @@ try{
         if($tic -eq $recorded.InputCommands.Count){break}
         while($volumeIndex -lt $volumePoints.Count -and $volumePoints[$volumeIndex].AfterPacket -lt $tic){$mixer.Volume=[double]$volumePoints[$volumeIndex].Volume;$volumeIndex++}
         $events.Tic=$tic;$entry=$recorded.InputCommands[$tic];$cmd=$commands[0];$cmd.Clear();$cmd.ForwardMove=$entry[0];$cmd.SideMove=$entry[1];$cmd.AngleTurn=$entry[2];$cmd.Buttons=$entry[3]
-        $null=$game.Update($commands);$watch.Restart()
+        $null=$game.Update($commands);$events.LevelMap=$game.Options.Map;$watch.Restart()
         if($PacketMix){$packet=Get-DoomAudioPacket $packetState $events $clips;foreach($event in $packet.Events){$eventsLog.Add($event)};Update-DoomAudioPacket $mixer $packet $clips}
         else{Update-DoomAudioEvents $mixer $events $clips $eventsLog}
         $eventTimes.Add($watch.Elapsed.TotalMilliseconds)

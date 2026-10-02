@@ -9,6 +9,7 @@ class PacketTestEvents {
     [Collections.Generic.Dictionary[object,int]]$Keys=[Collections.Generic.Dictionary[object,int]]::new()
     [Collections.Generic.Dictionary[int,object]]$Sources=[Collections.Generic.Dictionary[int,object]]::new()
     [object]$Listener
+    [int]$LevelMap=1
     [object[]]Drain(){$items=$this.Events.ToArray();$this.Events.Clear();return $items}
 }
 $checks=[Collections.Generic.List[object]]::new();$failure=$null
@@ -22,6 +23,14 @@ try{
     $mixer=New-DoomAudioMixer 44100;Update-DoomAudioPacket $mixer $packet $clips
     $pcm=Read-DoomAudioFrames $mixer 4
     Check 'Start volume, interpolation and stereo sample values' (($pcm -join ',') -eq '64,64,80,80,96,96,112,112')
+    $farSource=@{X=@{Data=1201L*65536};Y=@{Data=0L}};$listener=@{X=@{Data=0L};Y=@{Data=0L};Angle=@{Data=0L}}
+    $farEvents=[PacketTestEvents]::new();$farEvents.Listener=$listener;$farEvents.LevelMap=8;$farEvents.Keys.Add($farSource,1);$farEvents.Sources.Add(1,$farSource)
+    $farEvents.Events.Add(@{Kind='Start';Sound=1;Source=1;Group=1;Volume=100})
+    $farPacket=Get-DoomAudioPacket (New-DoomAudioPacketState) $farEvents $clips
+    Check 'Map 8 packet keeps distant effect at Doom minimum volume' ([Math]::Abs($farPacket.Gains[1][0]-(15.0/254.0)) -lt 1e-12 -and [Math]::Abs($farPacket.Gains[1][1]-(15.0/254.0)) -lt 1e-12)
+    $farEvents.LevelMap=7;$farEvents.Events.Add(@{Kind='Start';Sound=1;Source=1;Group=1;Volume=100})
+    $normalFar=Get-DoomAudioPacket (New-DoomAudioPacketState) $farEvents $clips
+    Check 'Other maps retain Doom distance clipping' ($normalFar.Gains[1][0] -eq 0 -and $normalFar.Gains[1][1] -eq 0)
     $replaceEvents=[PacketTestEvents]::new();$replaceSource=[object]::new();$replaceEvents.Keys.Add($replaceSource,1);$replaceEvents.Sources.Add(1,$replaceSource)
     $replaceState=New-DoomAudioPacketState;$replaceMixer=New-DoomAudioMixer 44100
     $replaceEvents.Events.Add(@{Kind='Start';Sound=1;Source=1;Group=1;Volume=100})

@@ -6282,3 +6282,12 @@ menu fit and software mixing, not acoustic output or campaign qualification.
 Fixed-point span stepping reduces scene disagreement by 1,322 indices across
 six E1M2/E3M6 reference views. All three styles retain serial/worker parity;
 E1M2 median and p95 costs rise 2.5% and 2.7%. See the [renderer receipt](../results/wall-fixed-scale-renderer-20261002.json).
+
+### MAP08 distant sound level — October 2, 2026
+
+The PowerShell effects path now keeps MAP08 sources at Doom's 15/127 minimum
+volume past the normal distance cutoff; other maps still clip. Existing mixer
+and packet tests pass (27 and 9 checks). A real E4M8 audio session advances
+104 tics, packages four sound events, submits 131,040 frames and closes cleanly.
+This does not qualify acoustic output or a campaign route. The behavior comes
+from id Software's original [`S_AdjustSoundParams`](https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/s_sound.c).
