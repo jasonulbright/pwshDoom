@@ -2,9 +2,9 @@
 
 **Doom, running in PowerShell. In your terminal. With a Matrix mode.**
 
-**Latest tagged release: [0.1.0-preview.4](https://github.com/jasonulbright/pwshDoom/releases/tag/v0.1.0-preview.4).** This cumulative update adds audio continuity and shutdown fixes, renderer optimizations, stationary automap reuse and optional indexed-color output. Gameplay, software rendering, terminal encoding, decoding, music synthesis and mixing remain PowerShell. Bring your own Ultimate Doom `DOOM.WAD`.
+**Release: [0.1.0-preview.5](https://github.com/jasonulbright/pwshDoom/releases/tag/v0.1.0-preview.5).** This cumulative update adds readable pickup/key notices, loading feedback, map-resource reuse, audio recovery and bounded command catch-up. Gameplay, software rendering, terminal encoding, decoding, music synthesis and mixing remain PowerShell. Bring your own Ultimate Doom `DOOM.WAD`.
 
-This is a playable community preview. The complete Episode 1 human playthrough and broader Ultimate Doom qualification remain open. See the [playthrough instructions](docs/episode1-playtest.md), [release evidence](docs/release-preview4.md), and [roadmap](docs/roadmap.md).
+This is a playable community preview. The complete Episode 1 human playthrough and broader Ultimate Doom qualification remain open. See the [playthrough instructions](docs/episode1-playtest.md), [release evidence](docs/release-preview5.md), and [roadmap](docs/roadmap.md).
 
 | Classic | Matrix | Color art |
 | --- | --- | --- |
@@ -40,8 +40,9 @@ Classic also accepts `-AnsiEncoding Ansi256` for an experimental indexed-color a
 ## Current source status
 
 - Three display styles, menus, episode/difficulty selection, automap, save/load and sound effects, with optional prepared music.
-- Development after Preview.4 restores pickup/key-lock notices: original IWAD text in Classic, larger readable terminal text in Matrix and color art. See the [notice validation and recorded typography decisions](docs/player-notices.md).
-- Development also reuses immutable render assets across map changes. Optional `Start-Doom.ps1 -TerminalOutput AsyncBatch` keeps a bounded asynchronous output task; Strips remains the default. The [performance evidence](docs/performance.md) retains unsuccessful pacing runs as well as stage improvements. These changes are absent from the public Preview.4 ZIP.
+- Pickup/key-lock notices use original IWAD text in Classic and larger readable terminal text in Matrix and color art. See the [notice validation and recorded typography decisions](docs/player-notices.md).
+- Immutable render assets are reused across map changes, with loading feedback while workers prepare the next map. Optional `Start-Doom.ps1 -TerminalOutput AsyncBatch` keeps a bounded asynchronous output task; Strips remains the default. The [performance evidence](docs/performance.md) retains unsuccessful pacing runs as well as stage improvements.
+- Interactive audio recovers after producer gaps by accounting for output already generated on its current clock. Caught-up emitter changes can coalesce; digital timing does not establish speaker latency. Bounded command catch-up preserves the input queue and replay controls.
 - All 36 Ultimate Doom maps have load/simulation/render smoke coverage. E1M1, E1M2, and E1M4 ordinary-input routes pass on the current gameplay source; the E1M3 route driver stalls without a reproduced defect. These regressions do not replace the complete Episode 1 human playthrough, which remains pending on the current handoff.
 - Recent rendering work improves Doom-style wall, plane and actor sampling and clips world sprites to wall silhouettes. The R12 plane-sampler optimization preserves all compared pixels; full original-executable parity is not established.
 - The R9 music-reader tests pass 21 checks. Opening all eleven local Episode 1 tracks is 56.06% faster in a warm-cache, reader-only comparison; this is not a cold-start or whole-game measurement.

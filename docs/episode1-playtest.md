@@ -12,21 +12,21 @@ A normal completion is enough; 100% kills, items, and secrets are not required. 
 
 ## Build and launch
 
-The current handoff is the local development package `pwshDoom-0.1.0-dev.20261002.r20.zip`. It follows frozen R19, retaining Classic/Matrix/color art, readable notices, immutable map-resource reuse and optional AsyncBatch. R20 adds loading feedback, faster worker startup and recovery from audio packet gaps. Strips/Pairs remain the defaults. This is a playable development candidate with open qualification gates. Preview.4 remains the public release. See the [R20 candidate scope](candidate-r20.md) and its external package-validation receipt for exact source/archive identity and extracted checks. R19 and earlier packages remain locally available for comparison.
+The current handoff is `pwshDoom-0.1.0-preview.5.zip`, prepared from the fixes after frozen R20. It retains Classic/Matrix/color art, readable notices, immutable map-resource reuse, loading feedback, audio recovery and optional AsyncBatch, and adds bounded command catch-up. Strips/Pairs remain defaults. The [Preview.5 scope](release-preview5.md) and repository package receipt identify the archive/extracted checks; R20 and earlier packages remain available for comparison. This is a playable community preview with open full-release gates.
 
 Use 64-bit PowerShell 7.6.x and Windows Terminal. The required user-owned Ultimate Doom IWAD has SHA-256 `6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F`. WADs, soundfonts, prepared music, media, tools and the research PDF are excluded. The local eleven-track Episode 1 catalog covers this route; omit `-MusicCatalog` for effects-only play. Audio startup rechecks payloads and IWAD score identity.
 
 From PowerShell, use the checked extraction and fresh output paths:
 
 ~~~powershell
-$root = 'C:\projects\pwshDoom\local\episode1-r20-extracted\pwshDoom-0.1.0-dev.20261002.r20'
+$root = 'C:\projects\pwshDoom\local\preview5-extracted\pwshDoom-0.1.0-preview.5'
 $wad = 'C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\base\DOOM.WAD'
 $local = 'C:\projects\pwshDoom\local'
 $catalog = Join-Path $local 'music-prepared-episode1.json'
-$record = Join-Path $local 'episode1-human-input-r20.json'
-$report = Join-Path $local 'episode1-human-session-r20.json'
-$saves = Join-Path $local 'episode1-human-saves-r20'
-$settings = Join-Path $local 'episode1-human-settings-r20.json'
+$record = Join-Path $local 'episode1-human-input-preview5.json'
+$report = Join-Path $local 'episode1-human-session-preview5.json'
+$saves = Join-Path $local 'episode1-human-saves-preview5'
+$settings = Join-Path $local 'episode1-human-settings-preview5.json'
 pwsh -NoProfile -File (Join-Path $root 'Start-Doom.ps1') -Wad $wad -Workers 16 -Episode 1 -Map 1 -Skill 3 -Style Classic -Sound -MusicCatalog $catalog -RecordInput $record -Report $report -SaveRoot $saves -SettingsPath $settings -Maximized -FontSize 5
 ~~~
 

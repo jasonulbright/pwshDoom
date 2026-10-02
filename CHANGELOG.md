@@ -2,13 +2,30 @@
 
 ## Unreleased
 
+Full Ultimate Doom campaign, independent fidelity, physical/acoustic review,
+display pacing and second-hardware qualification continue after Preview.5.
+
+## 0.1.0-preview.5 — 2026-10-02
+
+Community preview following the requested35-commit release cadence. All three
+styles and PowerShell gameplay/rendering/mixing remain. [Scope and package
+validation](docs/release-preview5.md); full release gates remain open.
+
+- Catch up already-due simulation commands within a bounded pass and unchanged
+  two-command window, stopping at exact replay control boundaries. All-style
+  input/checkpoint/audio fixtures pass; repeated display pacing still fails.
+- Add opt-in geometry-stage profiling and reproducible original-executable
+  comparison fixtures. Original-game window evidence remains lossy; independent
+  raw-framebuffer and moving-world parity are unqualified. Rejected wall-loop
+  and output/encoding trials remain documented; defaults stay Strips/Pairs.
+
 - Show separately counted loading feedback while map preparation/reloads remain pollable. Preserve renderer processes and propagate owned worker failures.
 - Replace idle renderer pipe readers with owned PowerShell logs. Three clean loading-task upper bounds fall from about983 ms to below2.72 ms; startup is about27 seconds on the measured machine. Broader pacing remains below target.
 - Recover interactive audio after producer gaps by accounting for intervals already covered by filler and applying caught-up controls on the current output clock. Ninety-six audio/save checks and three controlled recovery cases pass; final clean routes have no audio producer-backpressure waits. Acoustic/campaign qualification remains open.
 
 - Restore key-lock, pickup and automap notices: original IWAD lettering in Classic, readable terminal lettering in Matrix and color art. All three actual Terminal/audio fixtures pass; physical/acoustic review remains open.
 - Reuse immutable render resources between maps and verified resource bodies in persistent workers. Three live Classic/audio routes measure 1.54–2.03-second map loads; repeated display pacing still misses the release thresholds.
-- Add optional `Start-Doom.ps1 -TerminalOutput AsyncBatch`, with bounded output ownership and resize guards. Byte/pipe tests and all-style live fixtures pass. One paired performance cycle supports lower simulation lateness, but does not establish a general speedup. Strips remains the default.
+- Add optional `Start-Doom.ps1 -TerminalOutput AsyncBatch`, with bounded output ownership and resize guards. Byte/pipe tests and all-style live fixtures pass. Three paired cycles lower median p99 simulation lateness, while display-rate changes vary from−1.65% to+3.47% and no run passes all pacing gates. Strips remains the default.
 
 Ultimate Doom campaign qualification, physical play, acoustic review, independent rendering comparisons and repeated display-pacing measurements remain open.
 
