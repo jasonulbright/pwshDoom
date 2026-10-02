@@ -26,7 +26,13 @@ try{
     foreach($interval in $reportData.CommandBackpressure){if($interval.StartQpc -lt $previousEnd -or $interval.EndQpc -lt $interval.StartQpc -or $interval.Milliseconds -lt 0 -or $interval.BeforeCommand -gt $count){throw 'Malformed admission interval.'};$previousEnd=$interval.EndQpc}
     Check 'Pressure intervals are ordered and bounded' $true
     $audio=$reportData.Simulation.Audio
-    Check 'All replay audio packets and frames return without cancellation' ($null -eq $audio.Error -and $audio.Packets -eq $count -and $audio.SubmittedFrames -eq $count*1260 -and $audio.ReturnedCompletedFrames -eq $count*1260 -and $audio.CancelledQueuedFramesUpperBound -eq 0 -and $audio.UnconsumedPackets -eq 0)
+    $filler=if($null -ne $audio.PSObject.Properties['GeneratedRealtimeBlocks']){[long]$audio.GeneratedRealtimeBlocks}else{0L}
+    $credited=if($null -ne $audio.PSObject.Properties['CompensatedRealtimePackets']){[long]$audio.CompensatedRealtimePackets}else{0L}
+    $expectedFrames=($count+$filler-$credited)*1260
+    Check 'All replay audio packets and produced frames return without cancellation' ($null -eq $audio.Error -and $audio.Packets -eq $count -and $audio.SubmittedFrames -eq $expectedFrames -and $audio.ReturnedCompletedFrames -eq $expectedFrames -and $audio.CancelledQueuedFramesUpperBound -eq 0 -and $audio.UnconsumedPackets -eq 0)
+    if($null -ne $audio.PSObject.Properties['CompensatedRealtimePackets']){
+        Check 'All realtime timing credits and processing-age samples reconcile' ($audio.PacketAgeAtProcessingMs.Count -eq $count -and $filler -eq $credited+$audio.PendingTimelineCredits+$audio.ClearedTimelineCredits)
+    }
 }catch{$failure=$_.ToString()+"`n"+$_.ScriptStackTrace}finally{
     @{Error=$failure;Checks=$checks.ToArray();ReportSha256=(Get-FileHash $Report).Hash;ReplaySha256=(Get-FileHash $Replay).Hash;RecordingSha256=(Get-FileHash $Recording).Hash;
         ExpectSourceChange=[bool]$ExpectSourceChange;HarnessSha256=(Get-FileHash $PSCommandPath).Hash;FinishedUtc=[DateTime]::UtcNow.ToString('o');

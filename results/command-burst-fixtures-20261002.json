@@ -1,0 +1,221 @@
+{
+  "FinishedUtc": "2026-10-02T03:09:28.725087+00:00",
+  "ParentCommit": "bfc62c1",
+  "Runs": [
+    {
+      "Style": "Classic",
+      "Commands": 350,
+      "Checkpoints": 11,
+      "EvidenceChecks": 14,
+      "MaximumCommandsPerPass": 1,
+      "CatchupBursts": [],
+      "ExactControlEvents": [
+        {
+          "Tic": 0,
+          "Action": "LoadGame",
+          "SaveHash": "CBF3FD7457D43EACA5D988638FCA69A33504604EFC6A70CB2537276D0A2A4989"
+        },
+        {
+          "Tic": 175,
+          "Action": "LoadGame",
+          "SaveHash": "63A4358575231D428AC0E523AEB6C93A138EF3D9CB9E6E6C519C1A9278C1F531"
+        }
+      ],
+      "Files": [
+        {
+          "Path": "local/command-burst-readable-Classic-r1.json",
+          "Sha256": "D1220E568691B7D6302811704BEDE26774269094F042F9614A6DC0EC3D3AD383"
+        },
+        {
+          "Path": "local/command-burst-readable-Classic-r1-input.json",
+          "Sha256": "3F41F49FD73B8181938386DA2872E5BF43DC280D794980F1790EB6CA0ABDF381"
+        },
+        {
+          "Path": "local/command-burst-readable-Classic-r1-evidence.json",
+          "Sha256": "5A97BEB61013AE175761183B4AA39B1336AA3C10C013F412246D9BD3B0836603"
+        }
+      ]
+    },
+    {
+      "Style": "Matrix",
+      "Commands": 350,
+      "Checkpoints": 11,
+      "EvidenceChecks": 14,
+      "MaximumCommandsPerPass": 2,
+      "CatchupBursts": [
+        {
+          "FirstCommand": 244,
+          "LastSignalQpc": 1830430095656,
+          "Pass": 245,
+          "Commands": 2
+        }
+      ],
+      "ExactControlEvents": [
+        {
+          "Action": "LoadGame",
+          "Tic": 0,
+          "SaveHash": "CBF3FD7457D43EACA5D988638FCA69A33504604EFC6A70CB2537276D0A2A4989"
+        },
+        {
+          "Action": "LoadGame",
+          "Tic": 175,
+          "SaveHash": "63A4358575231D428AC0E523AEB6C93A138EF3D9CB9E6E6C519C1A9278C1F531"
+        }
+      ],
+      "Files": [
+        {
+          "Path": "local/command-burst-readable-Matrix-r1.json",
+          "Sha256": "CB5E599A90B3B0CD01C25449F87D46E5F1A6202E6E0B7C10346A865286544920"
+        },
+        {
+          "Path": "local/command-burst-readable-Matrix-r1-input.json",
+          "Sha256": "637C6C8EBF1163441CF37A4BA3B123A4235199700166A4B4BEF9AE6421054B1D"
+        },
+        {
+          "Path": "local/command-burst-readable-Matrix-r1-evidence.json",
+          "Sha256": "A4E924D51F2CD590512AF72B2FAE8844C996CA6C011D381725BEFD92C94B92E5"
+        }
+      ]
+    },
+    {
+      "Style": "AnsiArt",
+      "Commands": 350,
+      "Checkpoints": 11,
+      "EvidenceChecks": 14,
+      "MaximumCommandsPerPass": 1,
+      "CatchupBursts": [],
+      "ExactControlEvents": [
+        {
+          "SaveHash": "CBF3FD7457D43EACA5D988638FCA69A33504604EFC6A70CB2537276D0A2A4989",
+          "Action": "LoadGame",
+          "Tic": 0
+        },
+        {
+          "SaveHash": "63A4358575231D428AC0E523AEB6C93A138EF3D9CB9E6E6C519C1A9278C1F531",
+          "Action": "LoadGame",
+          "Tic": 175
+        }
+      ],
+      "Files": [
+        {
+          "Path": "local/command-burst-readable-AnsiArt-r1.json",
+          "Sha256": "E40154AD4171A1491037B64D863702FD584B96996DBFCE8844801ECD4BA027CD"
+        },
+        {
+          "Path": "local/command-burst-readable-AnsiArt-r1-input.json",
+          "Sha256": "6E8BADFCFA95778961383ACB552EE007C1A54498DD5248F6832D9197F1E7C16D"
+        },
+        {
+          "Path": "local/command-burst-readable-AnsiArt-r1-evidence.json",
+          "Sha256": "6282FECE98CA4B8B51A6FA3C8C9A61BAC6E448A30D367BCB83BD0E0092A19DD5"
+        }
+      ]
+    }
+  ],
+  "RingChecks": 5,
+  "Viewport": {
+    "ViewportPausedSeconds": 1.840747,
+    "WallSeconds": 5.0016086,
+    "ActiveSeconds": 3.1655943,
+    "Pauses": 2,
+    "Result": "Pass",
+    "History": [
+      {
+        "Left": 0,
+        "Columns": 589,
+        "IssuedCommands": 0,
+        "Fits": false,
+        "PublishedSimulationTics": 0,
+        "Rows": 98,
+        "WallMs": 0.9028,
+        "ActiveMs": 7.2527,
+        "Top": 0
+      },
+      {
+        "Left": 0,
+        "Columns": 320,
+        "IssuedCommands": 0,
+        "Fits": true,
+        "PublishedSimulationTics": 0,
+        "Rows": 100,
+        "WallMs": 862.9984,
+        "ActiveMs": 7.2558,
+        "Top": 0
+      },
+      {
+        "Left": 240,
+        "Columns": 800,
+        "IssuedCommands": 35,
+        "Fits": true,
+        "PublishedSimulationTics": 35,
+        "Rows": 150,
+        "WallMs": 1874.7687,
+        "ActiveMs": 1017.6728,
+        "Top": 25
+      },
+      {
+        "Left": 0,
+        "Columns": 320,
+        "IssuedCommands": 56,
+        "Fits": false,
+        "PublishedSimulationTics": 56,
+        "Rows": 97,
+        "WallMs": 2481.2089,
+        "ActiveMs": 1624.0858,
+        "Top": 0
+      },
+      {
+        "Left": 0,
+        "Columns": 320,
+        "IssuedCommands": 56,
+        "Fits": true,
+        "PublishedSimulationTics": 56,
+        "Rows": 100,
+        "WallMs": 3459.8603,
+        "ActiveMs": 1624.0886,
+        "Top": 0
+      }
+    ]
+  },
+  "SourcesAtAudit": [
+    {
+      "Path": "scripts/Invoke-Doom.ps1",
+      "Sha256": "3EA8E756F3ED2A96776EF57B36FF01B8BC71B36B22E1A729B3546B9315BABD2D"
+    },
+    {
+      "Path": "scripts/Test-CommandAdmissionEvidence.ps1",
+      "Sha256": "7E6E65558EBB3ED240A1C3641B4B682732458764F0C1F52DE1FE2E3CC715651D"
+    },
+    {
+      "Path": "src/GameProcesses.ps1",
+      "Sha256": "F70E59DCA050F89AD579E12D29070F753E063EFF465BA6758D3C18508E2BE2DA"
+    },
+    {
+      "Path": "src/InputReplay.ps1",
+      "Sha256": "0C8ABF378AC10A78925408F1BCE74B365703ABDB7BBEA57F40A72F7ED5CF798C"
+    }
+  ],
+  "Files": [
+    {
+      "Path": "local/player-messages-readable-fixture-r1.json",
+      "Sha256": "0E4EF47E9CDEF4C496602958BBA218A2C440FA4C75AC0B7C227AD83159ABAC00"
+    },
+    {
+      "Path": "local/command-burst-admission-r1.json",
+      "Sha256": "3654B0382D7D80058993DE1EF218E229E009F7D94B612D4DEB437B880DEE7EA7"
+    },
+    {
+      "Path": "local/command-burst-viewport-classic-r1-tests.json",
+      "Sha256": "EA1FDFF0650BA84632232714BAC7E17B7B970D981B68EBE48B269B3475CD4E69"
+    },
+    {
+      "Path": "local/command-burst-viewport-classic-r1-resize-session.json",
+      "Sha256": "D6D90C40342B0831AE2D348F05458F582B1AB0F8AA300B64EDB9D34D12CC5F51"
+    }
+  ],
+  "Audit": {
+    "Path": "local/audit-command-burst-fixtures-r1.py",
+    "Sha256": "1893F3DA420F9667F36A69E6A013AA330739F447BB99CDB5C75F30EB95863569"
+  },
+  "Meaning": "Real headless host/workers and device audio, synthetic viewport grid. All commands, controls, eleven checkpoints per style and credit/frame accounting agree. Only Matrix exercises a two-command burst; no burst crosses a control boundary in these traces, but neither control boundary is itself reached inside a multi-command burst. Queue observations precede publication and are not atomic maxima. Host source stayed unchanged through collection per work history; SourcesAtAudit are subsequent hashes, not run-embedded host provenance. Replay fingerprint excludes the host script. No native-display, acoustic, complete-map or full performance qualification claim."
+}

@@ -319,3 +319,13 @@ startup with every submitted frame returned. The [package receipt](../results/r2
 and [whole-E1 guide](episode1-playtest.md) identify the checked archive/extraction.
 Public release count is25 after this validation commit; Preview.4 remains the
 latest public release and the35-commit rule remains active.
+
+Early-stall diagnosis subsequently finds a command published789 ms late with
+an empty queue and a worker update starting about0.28 ms after signaling in
+one clean route. A bounded host catch-up loop now publishes only already-due
+commands, preserves the two-command window and stops at exact replay-control
+boundaries. All-style headless save/checkpoint/audio and synthetic viewport
+checks pass; Matrix exercises one two-command burst. Native repeated pacing
+and live control qualification follow. [Diagnostic](../results/command-publication-stall-diagnostic-20261002.json),
+[fixture coverage and limits](../results/command-burst-fixtures-20261002.json).
+Public release count reaches27 with this change; R20 remains frozen.

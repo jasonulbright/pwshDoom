@@ -76,6 +76,7 @@ $viewportChanges=[Collections.Generic.List[object]]::new();$pauseStart=$null;$pa
 $completed=0;$tics=0;$exitReason='Error';$terminalWidth=0;$terminalHeight=0;$workerMemory=0;$simMemory=0
 $commandWindow=2;$commandPressureStart=0L;$commandPressure=[Collections.Generic.List[object]]::new()
 $commandDispatchTrace=[Collections.Generic.List[object]]::new()
+$commandPass=0;$commandBurstLimit=4;$maximumCommandsPerPass=0;$commandBursts=[Collections.Generic.List[object]]::new()
 $frameTimes=[Collections.Generic.List[double]]::new();$frameStats=[Collections.Generic.List[object]]::new()
 $captures=[Collections.Generic.List[string]]::new();$nextCapture=$CaptureEveryTics;$snapshot=$null;$replayData=$null
 $interpolationTimes=[Collections.Generic.List[double]]::new();$simulationReport=$null
@@ -348,10 +349,12 @@ try {
             $commandPressure.Add(@{BeforeCommand=$tics;StartQpc=$commandPressureStart;EndQpc=$pressureEnd;Milliseconds=($pressureEnd-$commandPressureStart)*1000.0/[Diagnostics.Stopwatch]::Frequency})
             $commandPressureStart=0L
         }
-        if($commandDue -and $commandWindowOpen) {
+        $commandsThisPass=0;$firstCommandThisPass=$tics;$replayFinished=$false
+        if($commandDue -and $commandWindowOpen){$commandPass++}
+        while($commandDue -and $commandWindowOpen -and $commandsThisPass -lt $commandBurstLimit) {
             $cmd.Clear();$send=$true;$automapMask=0
             if($null -ne $replayData) {
-                if($tics -ge $replayData.InputCommands.Count){$send=$false;if($simulation.View.ReadInt32(20) -ge $tics){$exitReason='ReplayEnd';break}}
+                if($tics -ge $replayData.InputCommands.Count){$send=$false;if($simulation.View.ReadInt32(20) -ge $tics){$exitReason='ReplayEnd';$replayFinished=$true}}
                 else{$entry=$replayData.InputCommands[$tics];$cmd.ForwardMove=$entry[0];$cmd.SideMove=$entry[1];$cmd.AngleTurn=$entry[2];$cmd.Buttons=$entry[3]}
                 if($replayData.Version -eq 4 -and $mapInputIndex -lt $replayData.AutomapCommands.Count -and $replayData.AutomapCommands[$mapInputIndex].Tic -eq $tics){$automapMask=[int]$replayData.AutomapCommands[$mapInputIndex].Mask;$mapInputIndex++}
             } elseif($null -ne $consoleState){$automapMask=Get-DoomAutomapInputMask $consoleState $inputMapVisible;$inputMapVisible=$consoleState.AutomapVisible;Set-DoomInputCommand $consoleState $cmd -AutomapVisible:$inputMapVisible -AlwaysRun:$preferences.AlwaysRun -TurnSpeed $preferences.TurnSpeed}
@@ -364,11 +367,21 @@ try {
                 $issueActiveMs=$clock.Elapsed.TotalMilliseconds;$consumedBefore=$simulation.View.ReadInt32(20);$issueQpc=[Diagnostics.Stopwatch]::GetTimestamp()
                 Send-DoomSimulationCommand $simulation $tics @($cmd.ForwardMove,$cmd.SideMove,$cmd.AngleTurn,$cmd.Buttons) -AutomapMask $automapMask
                 $signalQpc=[Diagnostics.Stopwatch]::GetTimestamp()
-                $commandDispatchTrace.Add(@{Command=$tics;IssueStartQpc=$issueQpc;SignalCompletedQpc=$signalQpc;DecisionActiveMs=$now;IssueActiveMs=$issueActiveMs;
+                $commandDispatchTrace.Add(@{Command=$tics;Pass=$commandPass;CommandInPass=$commandsThisPass;IssueStartQpc=$issueQpc;SignalCompletedQpc=$signalQpc;DecisionActiveMs=$now;IssueActiveMs=$issueActiveMs;
                     DueActiveMs=($tics+1)*1000.0/35;ConsumedBeforeIssue=$consumedBefore;CompletedFramesBeforeIssue=$completed})
-                $tics++
+                $tics++;$commandsThisPass++
             }
+            if(-not $send){break}
+            # Recorded controls own their exact global command boundary. Do not
+            # queue a later command before the outer loop handles that action.
+            if($null -ne $replayData -and $null -ne $replayData.ControlEvents -and $controlIndex -lt $replayData.ControlEvents.Count -and $tics -ge $replayData.ControlEvents[$controlIndex].Tic){break}
+            $now=$clock.Elapsed.TotalMilliseconds
+            $commandDue=$clock.IsRunning -and $viewport.Fits -and $menu.Screen -eq 0 -and $null -eq $pendingAction -and $simulation.View.ReadInt32(12) -eq 1 -and $now -ge ($tics+1)*1000.0/35
+            $commandWindowOpen=Test-DoomSimulationCommandWindow $simulation $tics $commandWindow
         }
+        $maximumCommandsPerPass=[Math]::Max($maximumCommandsPerPass,$commandsThisPass)
+        if($commandsThisPass -gt 1){$commandBursts.Add(@{Pass=$commandPass;FirstCommand=$firstCommandThisPass;Commands=$commandsThisPass;LastSignalQpc=$signalQpc})}
+        if($replayFinished){break}
         $snapshot=Read-DoomSimulationSnapshot $simulation $snapshot
         if($snapshot.Tic -eq $tics){$inputMapVisible=$snapshot.AutomapVisible}
         if($snapshot.Generation -ne $assetGeneration){continue}
@@ -483,6 +496,7 @@ finally {
         DurationSeconds=$clock.Elapsed.TotalSeconds;IssuedCommands=$tics;SimulationTics=$simTics;TicsPerSecond=$simTics/[Math]::Max(.001,$clock.Elapsed.TotalSeconds);
         MaximumPendingCommands=$commandWindow;CommandBackpressure=$commandPressure.ToArray();IncompleteCommandBackpressureStartQpc=$commandPressureStart;
         CommandDispatchTrace=$commandDispatchTrace.ToArray();CommandDispatchTraceMeaning='Host timestamps immediately around command-ring publication/signal. IssueActiveMs uses the active game clock; DecisionActiveMs precedes input sampling. ConsumedBeforeIssue is an earlier observation, not an atomic queue-depth measurement. Publication can precede native worker wakeup; this is not an OS scheduler or physical-input trace.';
+        CommandScheduling=@{CommandsPerPassLimit=$commandBurstLimit;OutstandingCommandLimit=$commandWindow;MaximumCommandsPerPass=$maximumCommandsPerPass;CatchupBursts=$commandBursts.ToArray();Meaning='Only already-due 35-Hz commands; stop at the two-command window, four-per-pass budget, loading status or exact recorded control boundary. No future command is issued for catch-up.'};
         WallDurationSeconds=$wallClock.Elapsed.TotalSeconds;ViewportPausedSeconds=$pausedMs/1000;ViewportPauseCount=$pauseCount;
         MapReloads=$mapReloads.ToArray();RendererAssetsReused=$rendererAssetsReused;RendererAssetsReloaded=$rendererAssetsReloaded;MapReloadPausedSeconds=$loadingMs/1000;DiscardedTransitionFrames=$transitionDiscarded;FinalAssetGeneration=$assetGeneration;
         CompletedUpdatesPerWallSecond=$completed/[Math]::Max(.001,$wallClock.Elapsed.TotalSeconds);DiscardedResizeFrames=$resizeDiscarded;
