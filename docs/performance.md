@@ -1701,3 +1701,30 @@ device scheduling and presentation. One camera/state does not characterize all
 maps or headings, and this run has no independent pixel comparison. The
 [source-pinned phase receipt](../results/renderer-phase-profile-current-wall-u-20261002.json)
 retains 80 samples per stripe, per-stripe stage summaries, hashes and limits.
+
+### Current wall-operation counters — October 2, 2026
+
+A follow-up adds counters to a generated copy of `FastRenderer.ps1` and keeps
+the regular renderer source unchanged. It renders the same fixed E1M2 view once
+after one warmup in each of the 16 production-equivalent stripes. The final
+full-viewport pixel hash exactly matches the earlier uninstrumented 80-frame
+profile. Over the full view, the copy records 212 BSP entries, 294 segment
+visits, 2,744 wall-column attempts, 43 fixed-point wall-U parameter calls,
+938 per-column wall-U calculations, 410 wall texel-step calculations, 14,438
+wall-texture row samples, and 39,322 plane-fill pixels. The 16 disjoint stripes
+sum exactly to the full-view plane and wall-texture pixel counts. Their BSP
+and segment totals are intentionally not additive because each stripe performs
+its own frustum walk.
+
+Across 16 stripes, the prior uninstrumented median wall time has Pearson
+correlation 0.967 with wall-column attempts and 0.991 with three-band branch
+tests. The latter is not independent: each accepted wall column checks up to
+three band cases. Wall-texture row count correlates at −0.598, suggesting that
+per-column setup and band selection outweigh texture sample volume in this
+one view. This supports a disposable trial that preselects active wall bands
+per segment; it does not establish a general renderer bottleneck or a speedup.
+The [source-pinned counter receipt](../results/renderer-work-counters-current-wall-u-20261002.json)
+links the raw run, generated renderer, uninstrumented comparison, hashes,
+per-stripe counts and limitations. Counters add execution overhead; all timing
+inside that run is excluded from performance comparisons. It is a fixed Classic
+state, sequential stripe profile, not a live host or presentation measurement.

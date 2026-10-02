@@ -617,3 +617,20 @@ stripe highest for the captured view. These stripes were measured sequentially,
 not as live concurrent-worker latency. [Profile and limits](../results/renderer-phase-profile-current-wall-u-20261002.json).
 Count reaches31 after Preview.5; measure wall-operation counts before another
 candidate change and release at35 or more.
+
+### Renderer work counters — October 2, 2026
+
+A generated profiling-only renderer copy records geometry-operation counts for
+the fixed E1M2 Classic view without changing production `FastRenderer.ps1`. The
+instrumented full-frame hash matches the prior uninstrumented 80-frame profile.
+The run counts 2,744 wall-column attempts, 938 column wall-U calculations and
+14,438 wall-texture rows; the three-band branch count and wall time co-vary
+across stripes, while texture-row volume does not explain the center cost in
+this view. This evidence motivates a disposable test of selecting active wall
+bands once per segment. No production optimization or general performance
+claim follows yet. See the [counter profile](../results/renderer-work-counters-current-wall-u-20261002.json)
+and [performance interpretation](performance.md#current-wall-operation-counters--october-2-2026).
+This evidence commit reaches32 after Preview.5; three commits remain before the
+next scheduled release. The human Episode 1 route, clean current-source native
+pacing, independent original-renderer comparison, and acoustic review remain
+open.

@@ -15,6 +15,7 @@ param(
     [switch]$BaselineWorkerActorScan,
     [switch]$LegacyWorkerProjection,
     [switch]$GeometryDetails,
+    [switch]$GeometryWorkCounters,
     [string]$Output="$PSScriptRoot/../results/renderer-phases.json"
 )
 $ErrorActionPreference='Stop'
@@ -22,13 +23,103 @@ if($TransportPrepared -and $TransportLegacy){throw 'Choose one transport mode.'}
 if($TransportWorkerMasks -and (-not $TransportPrepared -or $TransportLegacy)){throw 'Worker masks require prepared transport.'}
 if($LegacyWorkerProjection -and -not $TransportWorkerMasks){throw 'The projection-cache control requires worker masks.'}
 if($BaselineWorkerActorScan -and -not $TransportWorkerMasks){throw 'The full-array actor-scan control requires worker masks.'}
+if($GeometryWorkCounters -and -not $GeometryDetails){throw 'Geometry work counters require GeometryDetails.'}
 if(Test-Path -LiteralPath $Output){throw 'Use a fresh report path.'}
 $outputPath=[IO.Path]::GetFullPath($Output)
 [void][IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName($outputPath))
 . "$PSScriptRoot/FrameCodec.ps1"
 $bundle=& "$PSScriptRoot/Build-EngineBundle.ps1"
 . $bundle
-. "$PSScriptRoot/../src/FastRenderer.ps1"
+$rendererSourcePath=[IO.Path]::GetFullPath("$PSScriptRoot/../src/FastRenderer.ps1")
+$rendererSourceText=[IO.File]::ReadAllText($rendererSourcePath)
+$rendererSourceSha256=[Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([Text.Encoding]::UTF8.GetBytes($rendererSourceText)))
+$rendererToLoad=$rendererSourcePath;$instrumentedRendererPath=$null;$instrumentedRendererArtifact=$null
+if($GeometryWorkCounters){
+    function Set-ExpectedRendererLiteral([string]$Text,[string]$Search,[string]$Replacement,[int]$ExpectedCount=1){
+        $count=0;$offset=0
+        while(($found=$Text.IndexOf($Search,$offset,[StringComparison]::Ordinal)) -ge 0){$count++;$offset=$found+$Search.Length}
+        if($count -ne $ExpectedCount){throw "Expected $ExpectedCount renderer instrumentation marker(s), found ${count}: $Search"}
+        return $Text.Replace($Search,$Replacement)
+    }
+    $instrumentation=@(
+        @{
+            Search='    [int]$open=$EndColumn-$FirstColumn'
+            Replace=@'
+    [int]$open=$EndColumn-$FirstColumn
+    [long]$workBspEntriesPopped=0;[long]$workBspInternalNodes=0;[long]$workSubsectors=0;[long]$workSegmentsVisited=0
+    [long]$workBackfaceCulls=0;[long]$workNearPlaneCulls=0;[long]$workScreenCulls=0;[long]$workProjectedColumns=0
+    [long]$workWallColumnAttempts=0;[long]$workWallColumnClipRejects=0;[long]$workWallColumnsAccepted=0
+    [long]$workWallUParameterCalls=0;[long]$workWallColumnUCalculations=0;[long]$workTextureBandTests=0;[long]$workVisibleTexturedBands=0
+    [long]$workWallTexelStepCacheHits=0;[long]$workWallTexelStepComputations=0
+    [long]$workExposedBackgroundSamples=0;[long]$workExposedSkySamples=0;[long]$workExposedFlatSamples=0
+    [long]$workWallTextureRows=0;[long]$workWallTextureWrites=0;[long]$workWallTextureTransparent=0
+    [long]$workMissingTextureDepthTests=0;[long]$workMissingTextureDepthWrites=0
+    [long]$workMaskedColumnsQueued=0;[long]$workMaskedPixelTests=0;[long]$workMaskedDepthRejects=0
+    [long]$workMaskedVClips=0;[long]$workMaskedWrites=0;[long]$workMaskedTransparent=0
+    [long]$workPlanePixelsFilled=0;[long]$workSilhouetteRecords=0;[long]$workColumnsClosed=0
+'@
+        },
+        @{Search='        [int]$nodeIndex=$stack[--$sp]';Replace='        [int]$nodeIndex=$stack[--$sp];$workBspEntriesPopped++'},
+        @{Search='        if($nodeIndex -ge 0 -and $nodeIndex -lt 32768) {';Replace='        if($nodeIndex -ge 0 -and $nodeIndex -lt 32768) {$workBspInternalNodes++'},
+        @{Search='        $ss=$Context.Subsectors[$nodeIndex -band 32767]';Replace='        $workSubsectors++;$ss=$Context.Subsectors[$nodeIndex -band 32767]'},
+        @{Search='        for([int]$segIndex=$ss.FirstSeg;$segIndex -lt ($ss.FirstSeg+$ss.SegCount);$segIndex++) {';Replace='        for([int]$segIndex=$ss.FirstSeg;$segIndex -lt ($ss.FirstSeg+$ss.SegCount);$segIndex++) {$workSegmentsVisited++'},
+        @{Search='            if($ax*$by-$ay*$bx -ge 0){continue}';Replace='            if($ax*$by-$ay*$bx -ge 0){$workBackfaceCulls++;continue}'},
+        @{Search='            if($z1 -lt 1 -and $z2 -lt 1){continue}';Replace='            if($z1 -lt 1 -and $z2 -lt 1){$workNearPlaneCulls++;continue}'},
+        @{Search='            if($sx2 -le $sx1 -or $sx1 -ge $EndColumn -or $sx2 -le $FirstColumn){continue}';Replace='            if($sx2 -le $sx1 -or $sx1 -ge $EndColumn -or $sx2 -le $FirstColumn){$workScreenCulls++;continue}'},
+        @{Search='            [int]$x0=[Math]::Max($FirstColumn,[Math]::Ceiling($sx1-0.5));[int]$x1=[Math]::Min($EndColumn,[Math]::Ceiling($sx2-0.5))';Replace='            [int]$x0=[Math]::Max($FirstColumn,[Math]::Ceiling($sx1-0.5));[int]$x1=[Math]::Min($EndColumn,[Math]::Ceiling($sx2-0.5));$workProjectedColumns+=($x1-$x0)'},
+        @{Search='            for([int]$x=$x0;$x -lt $x1;$x++) {';Replace='            for([int]$x=$x0;$x -lt $x1;$x++) {$workWallColumnAttempts++'},
+        @{Search='                [int]$clipT=$topClip[$x];[int]$clipB=$bottomClip[$x];if($clipT -gt $clipB){continue}';Replace='                [int]$clipT=$topClip[$x];[int]$clipB=$bottomClip[$x];if($clipT -gt $clipB){$workWallColumnClipRejects++;continue};$workWallColumnsAccepted++'},
+        @{Search='                    for([int]$y=$py0;$y -le $py1;$y++) {';Replace='                    for([int]$y=$py0;$y -le $py1;$y++) {$workExposedBackgroundSamples++'},
+        @{Search='                        if($plane -eq 0 -and $isSky){$pixels[$p]=$skyData[$skyColumns[$x]*$skyH+(($y+16)-band 127)];continue}';Replace='                        if($plane -eq 0 -and $isSky){$workExposedSkySamples++;$pixels[$p]=$skyData[$skyColumns[$x]*$skyH+(($y+16)-band 127)];continue}'},
+        @{Search='                        $planes[$p]=$planeId';Replace='                        $workExposedFlatSamples++;$planes[$p]=$planeId'},
+        @{Search='                for([int]$band=0;$band -lt 3;$band++) {';Replace='                for([int]$band=0;$band -lt 3;$band++) {$workTextureBandTests++'},
+        @{Search='                    if($y0 -gt $y1){continue}';Replace='                    if($y0 -gt $y1){continue};$workVisibleTexturedBands++'},
+        @{Search='                            [long[]]$wallParameters=Get-FastWallUParameters $viewXData $viewYData $wallAXData $wallAYData $wallSegmentAngles[$segIndex] $viewAngleData $wallSegOffset $wallSideOffset $Context.TanToAngleTable $fineSine';Replace='                            $workWallUParameterCalls++;[long[]]$wallParameters=Get-FastWallUParameters $viewXData $viewYData $wallAXData $wallAYData $wallSegmentAngles[$segIndex] $viewAngleData $wallSegOffset $wallSideOffset $Context.TanToAngleTable $fineSine'},
+        @{Search='                        if(-not $columnUReady){';Replace='                        if(-not $columnUReady){$workWallColumnUCalculations++'},
+        @{Search='                        if($constantWallScale -and $segmentTexelStep -gt 0){$wallTexelStep=$segmentTexelStep}';Replace='                        if($constantWallScale -and $segmentTexelStep -gt 0){$workWallTexelStepCacheHits++;$wallTexelStep=$segmentTexelStep}'},
+        @{Search='                            [int]$wallScaleData=[Math]::Clamp([int][Math]::Truncate(10485760.0/$distance),256,4194304)';Replace='                            $workWallTexelStepComputations++;[int]$wallScaleData=[Math]::Clamp([int][Math]::Truncate(10485760.0/$distance),256,4194304)'},
+        @{Search='                    for([int]$y=$y0;$y -le $y1;$y++) {';Replace='                    for([int]$y=$y0;$y -le $y1;$y++) {$workWallTextureRows++'},
+        @{Search='                        if($color -ge 0){$p=$y*320+$x;$pixels[$p]=$wallColors[$color];$depthBuffer[$p]=$distance}';Replace='                        if($color -ge 0){$workWallTextureWrites++;$p=$y*320+$x;$pixels[$p]=$wallColors[$color];$depthBuffer[$p]=$distance}else{$workWallTextureTransparent++}'},
+        @{Search='                            [int]$p=$y*320+$x;if($distance -lt $depthBuffer[$p]){$depthBuffer[$p]=$distance}';Replace='                            [int]$p=$y*320+$x;$workMissingTextureDepthTests++;if($distance -lt $depthBuffer[$p]){$workMissingTextureDepthWrites++;$depthBuffer[$p]=$distance}';Expected=3},
+        @{Search='                            $maskedColumnCount++';Replace='                            $maskedColumnCount++;$workMaskedColumnsQueued++'},
+        @{Search='        for([int]$y=$column.Y0;$y -le $column.Y1;$y++){';Replace='        for([int]$y=$column.Y0;$y -le $column.Y1;$y++){$workMaskedPixelTests++'},
+        @{Search='            [int]$p=$y*320+$x;if($distance -ge $depthBuffer[$p]){continue}';Replace='            [int]$p=$y*320+$x;if($distance -ge $depthBuffer[$p]){$workMaskedDepthRejects++;continue}'},
+        @{Search='            if($v -lt 0 -or $v -ge $height){continue}';Replace='            if($v -lt 0 -or $v -ge $height){$workMaskedVClips++;continue}'},
+        @{Search='            if($color -ge 0){$pixels[$p]=$colors[$color];$depthBuffer[$p]=$distance}';Replace='            if($color -ge 0){$workMaskedWrites++;$pixels[$p]=$colors[$color];$depthBuffer[$p]=$distance}else{$workMaskedTransparent++}'},
+        @{Search='                $pixels[$p]=$colors[$flatData[$v+$u]]';Replace='                $workPlanePixelsFilled++;$pixels[$p]=$colors[$flatData[$v+$u]]'},
+        @{Search='                    $spriteClipCounts[$x]=$recordIndex+1';Replace='                    $spriteClipCounts[$x]=$recordIndex+1;$workSilhouetteRecords++'},
+        @{Search='                if($nextTop -gt $nextBottom){$open--}';Replace='                if($nextTop -gt $nextBottom){$open--;$workColumnsClosed++}'},
+        @{
+            Search='    $Context.Profile=@{GeometryMs=$geometryMs;ActorsMs=$actorMs;WeaponMs=$weaponMs;HudMs=$phaseWatch.Elapsed.TotalMilliseconds}'
+            Replace=@'
+    $Context.Profile=@{GeometryMs=$geometryMs;ActorsMs=$actorMs;WeaponMs=$weaponMs;HudMs=$phaseWatch.Elapsed.TotalMilliseconds}
+    $Context.Profile.GeometryWorkCounters=[ordered]@{
+        BspEntriesPopped=$workBspEntriesPopped;BspInternalNodes=$workBspInternalNodes;SubsectorsVisited=$workSubsectors
+        SegmentsVisited=$workSegmentsVisited;BackfaceCulls=$workBackfaceCulls;NearPlaneCulls=$workNearPlaneCulls;ScreenCulls=$workScreenCulls
+        ProjectedColumns=$workProjectedColumns;WallColumnAttempts=$workWallColumnAttempts;WallColumnClipRejects=$workWallColumnClipRejects;WallColumnsAccepted=$workWallColumnsAccepted
+        WallUParameterCalls=$workWallUParameterCalls;WallColumnUCalculations=$workWallColumnUCalculations;TextureBandTests=$workTextureBandTests;VisibleTexturedBands=$workVisibleTexturedBands
+        WallTexelStepCacheHits=$workWallTexelStepCacheHits;WallTexelStepComputations=$workWallTexelStepComputations
+        ExposedBackgroundSamples=$workExposedBackgroundSamples;ExposedSkySamples=$workExposedSkySamples;ExposedFlatSamples=$workExposedFlatSamples
+        WallTextureRows=$workWallTextureRows;WallTextureWrites=$workWallTextureWrites;WallTextureTransparent=$workWallTextureTransparent
+        MissingTextureDepthTests=$workMissingTextureDepthTests;MissingTextureDepthWrites=$workMissingTextureDepthWrites
+        MaskedColumnsQueued=$workMaskedColumnsQueued;MaskedPixelTests=$workMaskedPixelTests;MaskedDepthRejects=$workMaskedDepthRejects;MaskedVClips=$workMaskedVClips;MaskedWrites=$workMaskedWrites;MaskedTransparent=$workMaskedTransparent
+        PlanePixelsFilled=$workPlanePixelsFilled;SilhouetteRecords=$workSilhouetteRecords;ColumnsClosed=$workColumnsClosed
+    }
+'@
+        }
+    )
+    foreach($edit in $instrumentation){$rendererSourceText=Set-ExpectedRendererLiteral $rendererSourceText $edit.Search $edit.Replace ([int]$(if($edit.ContainsKey('Expected')){$edit.Expected}else{1}))}
+    $parseTokens=$null;$parseIssues=$null
+    $null=[Management.Automation.Language.Parser]::ParseInput($rendererSourceText,[ref]$parseTokens,[ref]$parseIssues)
+    if($parseIssues.Count){throw ($parseIssues|ForEach-Object {"Instrumented renderer $($_.Extent.StartLineNumber): $($_.Message)"}|Out-String)}
+    $rendererDirectory=[IO.Path]::GetDirectoryName($rendererSourcePath)
+    $instrumentedRendererArtifact=[IO.Path]::ChangeExtension($outputPath,'.renderer.instrumented.ps1')
+    if(Test-Path -LiteralPath $instrumentedRendererArtifact){throw 'Instrumented renderer artifact path already exists; use a fresh output path.'}
+    $instrumentedRendererPath=Join-Path $rendererDirectory "FastRenderer.instrumented-$PID-$([guid]::NewGuid().ToString('N')).ps1"
+    [IO.File]::WriteAllText($instrumentedRendererPath,$rendererSourceText,[Text.UTF8Encoding]::new($false))
+    $rendererToLoad=$instrumentedRendererPath
+}
+. $rendererToLoad
 . "$PSScriptRoot/../src/GameHost.ps1"
 . "$PSScriptRoot/../src/SnapshotTransport.ps1"
 $content=$null;$failure=$null;$report=$null;$samples=[Collections.Generic.List[object]]::new();$workerProfiles=[Collections.Generic.List[object]]::new();$projectionPacketVersion=-1
@@ -128,6 +219,7 @@ try{
                 HudMs=$context.Profile.HudMs
             }
             if($GeometryDetails){foreach($name in 'SetupMs','WallsMs','PlanesMs','MaskedWallsMs'){$sample[$name]=$context.Profile.GeometryDetails[$name]}}
+            if($GeometryWorkCounters){$sample.GeometryWorkCounters=$context.Profile.GeometryWorkCounters}
             $workerSamples.Add($sample);$samples.Add($sample)
         }
         $workerPhases=[ordered]@{}
@@ -137,6 +229,7 @@ try{
         $workerProfiles.Add(@{
             WorkerIndex=$workerIndex;FirstColumn=$first;EndColumn=$end
             OutputSha256=[Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([byte[]]$context.Pixels))
+            GeometryWorkCounters=if($GeometryWorkCounters){$workerSamples[-1].GeometryWorkCounters}else{$null}
             DecodeStats=Get-PhaseStats ([double[]]$workerDecodeSamples.ToArray())
             PhaseStats=$workerPhases
         })
@@ -154,6 +247,7 @@ try{
         Episode=$Episode;Map=$Map;Skill=$Skill;SetupTics=$Tics
         WarmupFrames=$WarmupFrames;MeasuredFrames=$Frames
         GeometryDetails=$GeometryDetails.IsPresent
+        GeometryWorkCounters=$GeometryWorkCounters.IsPresent
         TransportMode=if($TransportWorkerMasks -and $LegacyWorkerProjection -and $BaselineWorkerActorScan){'NumericV4 worker masks, full actor-array scan, and worker-side projection control'}elseif($TransportWorkerMasks -and $LegacyWorkerProjection){'NumericV4 worker masks with worker-side fixed-point actor projection control'}elseif($TransportWorkerMasks -and $projectionPacketVersion -eq 5 -and $BaselineWorkerActorScan){'adaptive NumericV5 actor projections with the full-array per-worker actor-scan control'}elseif($TransportWorkerMasks -and $projectionPacketVersion -eq 5){'adaptive NumericV5 actor projections with decoded per-worker visible-actor lists'}elseif($TransportWorkerMasks){'adaptive NumericV4 mask-only packet for a sparse scene'}elseif($TransportPrepared){'prepared shared actor order'}elseif($TransportLegacy){'legacy worker-side actor sort'}else{'object snapshot fallback'}
         FullFramePixels=64000;FullFrameSha256=$frameSha256
         SnapshotPreparationStats=Get-PhaseStats ([double[]]$snapshotPreparationSamples.ToArray())
@@ -164,15 +258,17 @@ try{
         ActorCount=@($context.World.Actors).Count
         PhaseStats=$phases
         WorkerPhaseStats=$workerProfiles.ToArray()
+        FullViewportGeometryWorkCounters=if($GeometryWorkCounters){$context.Profile.GeometryWorkCounters}else{$null}
         Samples=$samples.ToArray()
         WadSha256=(Get-FileHash -LiteralPath $Wad).Hash
         BundleSha256=(Get-FileHash -LiteralPath $bundle).Hash
         RendererSha256=(Get-FileHash -LiteralPath "$PSScriptRoot/../src/FastRenderer.ps1").Hash
+        InstrumentedRendererSha256=if($GeometryWorkCounters){(Get-FileHash -LiteralPath $rendererToLoad).Hash}else{$null}
         SnapshotTransportSha256=(Get-FileHash -LiteralPath "$PSScriptRoot/../src/SnapshotTransport.ps1").Hash
         GameHostSha256=(Get-FileHash -LiteralPath "$PSScriptRoot/../src/GameHost.ps1").Hash
         HarnessSha256=(Get-FileHash -LiteralPath $PSCommandPath).Hash
         PowerShell=$PSVersionTable.PSVersion.ToString()
-        Meaning='Attributes PowerShell software-rendering time to the instrumented geometry, actor, player-weapon, and HUD phases at one fixed real-IWAD state. When WorkerCount is greater than one, each production-equivalent column stripe is rendered sequentially in this process: these are not concurrent-worker timings and do not model process scheduling, IPC, or terminal output. TransportLegacy exercises unsorted interpolation followed by each worker sorting locally; TransportPrepared measures repeated interpolation with shared far-to-near fuzz actor order. The LegacyWorkerProjection control forces the prior NumericV4 mask packet so workers repeat transforms locally; current production selects NumericV5 only for snapshots with at least 200 actors, otherwise it keeps the mask-only packet. Snapshot preparation includes host actor projection/mask generation; decode and render phases are reported separately with equal warmup/sample counts. Use live host receipts for pacing.'
+        Meaning='Attributes PowerShell software-rendering time to the instrumented geometry, actor, player-weapon, and HUD phases at one fixed real-IWAD state. When WorkerCount is greater than one, each production-equivalent column stripe is rendered sequentially in this process: these are not concurrent-worker timings and do not model process scheduling, IPC, or terminal output. GeometryWorkCounters adds counters only to a retained disposable FastRenderer copy; its timings are diagnostic overhead and are not comparable with uninstrumented profiles. TransportLegacy exercises unsorted interpolation followed by each worker sorting locally; TransportPrepared measures repeated interpolation with shared far-to-near fuzz actor order. The LegacyWorkerProjection control forces the prior NumericV4 mask packet so workers repeat transforms locally; current production selects NumericV5 only for snapshots with at least 200 actors, otherwise it keeps the mask-only packet. Snapshot preparation includes host actor projection/mask generation; decode and render phases are reported separately with equal warmup/sample counts. Use live host receipts for pacing.'
     }
 }catch{
     $failure=$_.ToString()+"`n"+$_.ScriptStackTrace
@@ -180,6 +276,10 @@ try{
 }finally{
     if($null -ne $content){$content.Dispose()}
     if($null -ne $report){$report.Error=$failure;$report|ConvertTo-Json -Depth 9|Set-Content -LiteralPath $outputPath}
+    if($null -ne $instrumentedRendererPath -and [IO.File]::Exists($instrumentedRendererPath)){
+        if($null -ne $instrumentedRendererArtifact -and -not [IO.File]::Exists($instrumentedRendererArtifact)){[IO.File]::Copy($instrumentedRendererPath,$instrumentedRendererArtifact,$false)}
+        [IO.File]::Delete($instrumentedRendererPath)
+    }
 }
 foreach($phase in $report.PhaseStats.GetEnumerator()){
     "{0,-12} median {1,8:N2} ms  p95 {2,8:N2} ms" -f $phase.Key,$phase.Value.Median,$phase.Value.P95

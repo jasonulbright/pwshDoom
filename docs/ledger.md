@@ -6075,3 +6075,21 @@ substantially cheaper. The harness measures stripes sequentially, so it does not
 establish concurrent-worker pacing. [Pinned profile](../results/renderer-phase-profile-current-wall-u-20261002.json).
 The profile/documentation commit reaches31 after Preview.5; isolate wall work
 counts next, and release again at35 or more.
+
+The profiling-only follow-up counts BSP and segment traversal, projected wall
+columns, fixed-point wall-U setup, wall bands, occlusion/deferred-mask work and
+plane pixels in a generated `FastRenderer.ps1` copy. Its final E1M2 Classic
+frame exactly matches the prior uninstrumented frame hash. Full-view work is
+212 BSP entries, 294 segment visits, 2,744 wall-column attempts, 43 wall-U
+parameter calls, 938 column-U calculations, 410 texel-step calculations,
+14,438 wall-texture rows and 39,322 plane pixels. Across stripes, wall time
+tracks band tests and per-column setup more closely than texture-row count;
+those correlations are one fixed view and the band counter is proportional to
+column attempts. Two harness-only startup errors (string interpolation and
+source-relative imports after relocating the generated copy) were fixed before
+the final sampling run; both corrections are noted in the receipt. The counts
+support a bounded active-band trial, not an assumed speedup. Instrumented
+timings are discarded. See the [counter receipt](../results/renderer-work-counters-current-wall-u-20261002.json).
+Count reaches32 after Preview.5. The human campaign, clean live pacing,
+independent renderer fidelity and acoustic review remain open; release is due
+again at35 commits.
