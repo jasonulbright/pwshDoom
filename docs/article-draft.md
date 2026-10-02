@@ -355,3 +355,11 @@ cases. They establish state-machine paths and trigger behavior, not ordinary-
 input victories, full map routes, or an E1 finale reached by the player. The
 [regression receipt](../results/preview6-session-regression-20261002.json)
 links local reports and source hashes.
+
+The same old progression inputs do not qualify on current source. In the
+preserved HMP replay, a Troop kills the player at tic 1,245; after respawn the
+remaining inputs leave the player in E1M1, and the harness never reaches
+intermission. This invalidates that automated route for the current build but
+does not establish that E1M1 is generally impossible or isolate an engine
+defect. We did not tune the replay. The complete Episode 1 human route remains
+the campaign milestone. [Current-source diagnostic and raw-report hashes](../results/current-source-session-progression-diagnostic-20261002.json).
