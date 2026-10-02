@@ -34,7 +34,17 @@ class Geometry {
         if ($negativeX) { $x = -$x }
         if ($negativeY) { $y = -$y }
         [bool] $wide = $x -gt $y
-        [int] $slope = if ($wide) { [Geometry]::SlopeDiv([int]$y, [int]$x) } else { [Geometry]::SlopeDiv([int]$x, [int]$y) }
+        # Nonnegative magnitudes; the int32-minimum case uses the fallback above.
+        # Preserve uint32 numerator wrap and floor division without ref marshalling.
+        [long] $num = if ($wide) { $y } else { $x }
+        [long] $den = if ($wide) { $x } else { $y }
+        [int] $slope = [Geometry]::slopeRange
+        if ($den -ge 512) {
+            [long] $numerator = ($num -shl 3) -band 0xffffffffL
+            # This domain's double quotient cannot round a noninteger to an integer.
+            [long] $quotient = [Math]::Truncate([double]$numerator / ($den -shr 8))
+            if ($quotient -le $slope) { $slope = [int]$quotient }
+        }
         [long] $angle = [Trig]::tanToAngleTable[$slope]
         if (-not $negativeX) {
             if (-not $negativeY) { if ($wide) { return $angle }; return 0x40000000L - 1 - $angle }

@@ -202,3 +202,11 @@ reveals a larger omitted stage: discovering automap lines costs about5–6 ms pe
 tic even when the automap is hidden. Removing that work would change gameplay
 evidence; the next optimization must preserve complete mapped-line states.
 [Stage accounting and rejected alternatives](../results/e3m6-command-stage-audit-20261002.json).
+
+A subsequent exact-angle optimization replaces generic ref-based integer
+division inside numeric discovery with a bounded floor calculation. Three
+isolated ABBA cycles reduce256-call batch cost about55%, with20,900 angles,
+20,509 quotients, mapped-line oracles and actual save/automap workers checked.
+The [receipt](../results/discovery-slope-production-20261002.json) also retains
+the failed harness and stale E1M3 input. Native pacing still needs a separate
+committed-source measurement; method gains do not establish60 displayed FPS.

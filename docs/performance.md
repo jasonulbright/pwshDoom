@@ -1454,3 +1454,21 @@ The [command-stage audit](../results/e3m6-command-stage-audit-20261002.json) ins
 A [position-keyed vertex-angle trial](../results/discovery-position-angle-trial-20261002.json) preserves420 fresh mapped states/two endpoints plus144 all-map headings and11 invalidations. It retains absolute angles, while visibility/occlusion still run. Only27/420 calls reuse positions; an isolated alternating stream has slightly worse mean4.179→4.227 ms and slightly better median4.404→4.350 ms. It remains unadopted. These preliminary method times disable stationary-view skipping and do not replace native or three-cycle paired evidence. Profile the current traversal next.
 
 The [owned-bundle discovery profile](../results/e3m6-discovery-method-profile-20261002.json) now retains420 full mapped states/two endpoints. Uninstrumented mean4.746 ms rises to5.671 ms with method timers. Inclusive IsPotentiallyVisible2.096 ms and DiscoverIndexedSeg1.851 ms overlap with PointToAngleData1.761 ms (~95 calls/command) and projection0.161 ms. PointOnSide is0.657 ms (~33 calls). These identify angle/bounding-box work for a bounded next trial, not exact loaded costs or a causal speedup. Initial discovery is outside this isolated diagnostic, and all native release denominators remain unchanged. Production instrumentation is not added.
+
+### Exact numeric discovery slope — October 2, 2026
+
+Inlining the discovery helper's nonnegative slope calculation avoids DivRem
+ref marshalling while preserving uint32 wrap and the exact floor quotient.
+The [production receipt](../results/discovery-slope-production-20261002.json)
+retains20,900 previous-method angle comparisons,20,509 independent quotient
+checks and three256-call ABBA cycles. Cycle-median batch cost falls55.76%,
+55.51%,55.47%; these warm method times are not native tic/display rates.
+The general slope/legacy angle methods stay unchanged.
+
+Fresh mapped-line equality passes420 dense commands,144 headings over36 maps
+and11 semantic invalidations. Production moving views and automap/save/audio
+worker checks also pass. Retain the initial harness arithmetic error and an
+unnecessary stale E1M3 run: all24 actual gameplay hashes equal a preexisting
+unchanged-runtime failure, but its23 historical mismatches remain failures.
+Exclude that run's timings/route outcome. Committed-source live pacing and
+separate effects recordings are next; every full release gate remains open.

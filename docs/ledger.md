@@ -5525,3 +5525,42 @@ The finite unpaced420-command baseline and subsequent owned-bundle instrumented 
 Instrumented inclusive means identify IsPotentiallyVisible2.096 ms, DiscoverIndexedSeg1.851 ms, PointToAngleData1.761 ms (~95 calls/command), PointOnSide0.657 ms (~33 calls), and projection0.161 ms (~67 calls). These overlap and include substantial timers; never add them or substitute instrumented means for loaded performance. Solid/pass discovery wall methods are about0.101/0.078 ms here. Source inspection shows the numeric angle helper calls SlopeDiv, including DivRem/ref marshalling. Next investigate a bounded exact-integer slope calculation inside the discovery helper, retaining unsigned wrap, table selection, octant boundaries and int32-minimum fallback; baseline angle/error and mapped-state comparisons must precede adoption. This is a hypothesis for a trial, not an established bottleneck cause or speedup.
 
 This evidence commit reaches8 after Preview.5. All Classic/Matrix/AnsiArt behavior and production algorithms remain unchanged by the rejected trials/profiler. Full Ultimate Doom campaign/fidelity/pacing/physical/acoustic/hardware gates remain active; continue without requesting a milestone approval.
+
+### 2026-10-02 — Adopt exact numeric discovery slope calculation
+
+Inline only the nonnegative slope calculation in Geometry.PointToAngleData.
+The unsigned numerator wrap, denominator cutoff, floor quotient, table,
+octants and int32-minimum fallback stay intact; general SlopeDiv and legacy
+PointToAngle remain unchanged. The algorithm stays PowerShell with standard
+Math.Truncate. Bounded double operands cannot round a noninteger quotient to
+an integer in this domain; the receipt states the error argument and checks
+20,509 quotients independently against DivRem.
+
+The portable production check passes 20,900 prior-numeric angle comparisons,
+including signed-coordinate wrap and boundaries, then three ABBA cycles.
+Median256-call batches improve55.76/55.51/55.47%. The trial retains420 fresh
+E3M6 mapped bitsets/two stored endpoints,144 headings over36 maps and11
+semantic invalidations. Production additionally passes2,139 legacy angle
+comparisons,61 moving full-renderer discovery views/two endpoints, eight
+actual automap save/load/menu/new-game checks and15 audio/music save-worker
+checks. All baseline/candidate full images, validity counters and other flags
+remain covered by the retained map harness. The single alternating E3M6
+discovery timing is diagnostic, not three-cycle native pacing evidence.
+[Source pins and independent audit](../results/discovery-slope-production-20261002.json).
+
+Retain two failures. The first method harness passes equality then fails in
+timing-coordinate array construction; r2 parenthesizes products. The extra
+7,118-command E1M3 run unnecessarily reused the stale historical route despite
+the September27 ledger warning. Its7,118 fresh bitsets agree, but23 of24
+stored checkpoints fail. All24 actual hashes exactly match the September29
+unchanged-runtime report, including the final E1M3 state. No new gameplay
+regression is isolated. Preserve the failure, exclude its timings and route
+outcome from qualification, and do not tune inputs or regenerate expected
+checkpoints. The earlier progress message's7,002 count was historical; this
+trial actually compared7,118 fresh states.
+
+This implementation/evidence commit reaches9 after Preview.5. Next measure
+the committed build live with the unchanged full-catalog dense stress input,
+primary16 workers and all styles, then record effects separately. Full
+Ultimate Doom campaign/fidelity/pacing/physical/acoustic/hardware gates remain
+open; no milestone approval is needed.

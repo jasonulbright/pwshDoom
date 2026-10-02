@@ -425,3 +425,12 @@ and identifies bounding-box/angle work: about95 numeric angle calls per tic,
 with overlapping instrumented scopes and explicit overhead. [Receipt](../results/e3m6-discovery-method-profile-20261002.json).
 Continue a bounded exact slope/angle trial before any source adoption; count
 reaches8 after Preview.5. All full Ultimate Doom gates remain active.
+
+The exact numeric discovery slope calculation is now adopted in PowerShell.
+It passes20,900 prior-method angles,20,509 integer quotients, fresh mapped-line
+oracles and actual automap/save/audio workers. Three method ABBA cycles reduce
+batch time about55%; native pacing is still unmeasured for this change.
+[Production evidence, bounded division argument and retained stale-input failure](../results/discovery-slope-production-20261002.json).
+Count reaches9 after Preview.5. Measure the committed primary16-worker build
+in all modes with the unchanged full-catalog dense input, then record effects
+separately. All full Ultimate Doom gates remain active.

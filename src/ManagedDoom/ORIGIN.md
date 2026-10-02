@@ -176,3 +176,18 @@ Modifications, 2026-09-27 (upstream parity review):
   recording consumes the full stream without exception but no longer matches
   its checkpoints after tic 350 and does not reach E1M2; see the ledger for
   this stale-input comparison.
+
+Modifications, 2026-10-02 (numeric discovery slope):
+
+- `Geometry.PointToAngleData`: inline the nonnegative slope calculation,
+  preserving uint32 numerator wrap, the denominator cutoff, floor quotient,
+  table lookup, octants and int32-minimum fallback. Standard .NET
+  `Math.Truncate` avoids `DivRem` ref marshalling in this bounded domain;
+  general `SlopeDiv` and legacy `PointToAngle` remain unchanged. No compiled
+  game or renderer helper is introduced. The previous numeric method retains
+  its GPL notice in `scripts/fixtures/DiscoveryAngleReference.ps1`.
+- `scripts/Test-DiscoverySlope.ps1` checks 20,900 angles and 20,509 exact
+  quotients before three method ABBA cycles. Fresh mapped-line comparisons,
+  all-map headings, moving full-renderer views and save/automap worker checks
+  are indexed in `results/discovery-slope-production-20261002.json`.
+  Isolated method gains do not establish native release pacing or fidelity.

@@ -1,0 +1,197 @@
+{
+  "FinishedUtc": "2026-10-02T06:28:21.765619+00:00",
+  "BaseCommit": "62576dc3cb111291bfb8a4f6a2e3641a9d9041d2",
+  "ProductionAdopted": true,
+  "Runtime": "7.6.6",
+  "AngleComparisons": 20900,
+  "QuotientComparisons": 20509,
+  "MatchingExceptions": 0,
+  "ProductionLegacyAngleComparisons": 2139,
+  "ProductionMovingRendererViews": 61,
+  "ProductionMovingCheckpoints": 2,
+  "AutomapWorkerChecks": 8,
+  "SaveAudioWorkerChecks": 15,
+  "TrialFreshMappingComparisons": 420,
+  "TrialMapStarts": 36,
+  "TrialHeadings": 144,
+  "TrialSemanticInvalidations": 11,
+  "MethodAbbaCycles": [
+    {
+      "Cycle": 1,
+      "Baseline256CallMedianMs": 6.631875000000001,
+      "Candidate256CallMedianMs": 2.9341,
+      "ChangePercent": -55.75761002733013
+    },
+    {
+      "Cycle": 2,
+      "Baseline256CallMedianMs": 6.58755,
+      "Candidate256CallMedianMs": 2.931,
+      "ChangePercent": -55.50697907416262
+    },
+    {
+      "Cycle": 3,
+      "Baseline256CallMedianMs": 6.551575,
+      "Candidate256CallMedianMs": 2.91725,
+      "ChangePercent": -55.47253904595459
+    }
+  ],
+  "SingleAlternatingTrialDiscoveryMs": {
+    "Baseline": {
+      "Count": 420,
+      "Mean": 4.833565714285717,
+      "Median": 5.2445,
+      "P95": 7.6816,
+      "Max": 17.7577
+    },
+    "Candidate": {
+      "Count": 420,
+      "Mean": 2.9071495238095233,
+      "Median": 3.10005,
+      "P95": 4.9077,
+      "Max": 15.1295
+    },
+    "Meaning": "Single unpaced alternating diagnostic, stationary skip disabled; not paired native pacing evidence."
+  },
+  "StaleE1M3Failure": {
+    "Commands": 7118,
+    "FreshComparisons": 7118,
+    "Checked": 24,
+    "MismatchEntries": 23,
+    "EarlierBaselineCheckpointsEqual": 24,
+    "ReplaySha256": "A9E3E3E48DF5A483D904A412E3AF7A872ED5B5862713A331DC3310007AA09970",
+    "Meaning": "Already documented stale input after arithmetic corrections. This trial unnecessarily reused it despite the ledger warning. All sampled hashes equal the retained Sep29 unchanged-runtime report; retain failure and exclude its timings/route outcome from qualification. No route tuning or regenerated expected checkpoints."
+  },
+  "InitialMethodFailure": "r1 passed equality, then Object[] multiplication error in timing point construction; corrected r2 parenthesizes each product. Original script/report/log retained.",
+  "DivisionArgument": "After signed-coordinate wrap and the int32-minimum fallback, magnitudes are0..2147483647. Wrapped numerator is0..4294967295; den>=512 yields divisor2..8388607. Exact-double integer operands divided produce rounding error smaller than2^-20 times the minimum nonzero distance1/divisor from an integer, so Truncate retains the exact nonnegative floor quotient. General SlopeDiv/legacy angle path/table/octants remain unchanged.",
+  "Decision": "Adopt the narrow pure-PowerShell numeric-discovery slope calculation. Method timing and full mapped-state comparisons support the change. Native committed-source pacing, effect recording, broader gameplay/fidelity and all Ultimate Doom release gates remain separate.",
+  "Files": [
+    {
+      "Path": "scripts/Test-DiscoverySlope.ps1",
+      "Sha256": "0F452BEF28CE4D20568844413025BAF5C40867DE39795D20A7AD2FA5BCBBB7E7"
+    },
+    {
+      "Path": "scripts/fixtures/DiscoveryAngleReference.ps1",
+      "Sha256": "0913F59C89DCCD31A7581AB56AE65AC275FB927A5E4BAADC7CCBDB049615708F"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Math/Geometry.sb.ps1",
+      "Sha256": "0280E1F8DE0FBF3BF1EB37A3CB3E9949D9FA1E98BA6EB6599BD8A8A7731B4BF4"
+    },
+    {
+      "Path": "local/New-DiscoverySlopeTrial-r1.ps1",
+      "Sha256": "8759F901B7C804E758C2A8CE30FE3CE19CCE1BBFF70B7DE9DF7728A4BE4C724E"
+    },
+    {
+      "Path": "local/New-DiscoverySlopeTrial-r2.ps1",
+      "Sha256": "AC609387CF8B3FBA03D958950B879BFBE088D6FC8F30EC7BCE620847BA89C639"
+    },
+    {
+      "Path": "local/Test-DiscoverySlopeTrial-r1.ps1",
+      "Sha256": "4662076FF44146BB5922C67443A330A044D960CC9E4846D2652049DCC6C2133A"
+    },
+    {
+      "Path": "local/Test-DiscoverySlopeTrial-r2.ps1",
+      "Sha256": "9E1ACBE9BF2162217B9585EC60EBCF23DC80C171920D81691E98E35CA4E272FE"
+    },
+    {
+      "Path": "local/discovery-slope-method-r1.json",
+      "Sha256": "D12F337DE99C4D68E0C476F3479C3F51AD54FF480BB06D7394C3E60B14B2992B"
+    },
+    {
+      "Path": "local/discovery-slope-method-r1.log",
+      "Sha256": "0433E6C6A01FD98387E3FD8CD598D1CC23F94C78E71685B6EAC21E577683C50E"
+    },
+    {
+      "Path": "local/discovery-slope-method-r2.json",
+      "Sha256": "3F1E010B6E55FCA640809A63042A61ED56F2C80A3EA6258E05BB544966F7300E"
+    },
+    {
+      "Path": "local/discovery-slope-method-r2.log",
+      "Sha256": "EAC266136FDBAD605F3849964720D677EC37419491403111E22A7C60B07BE782"
+    },
+    {
+      "Path": "local/Test-DiscoverySlopeReplay-r1.ps1",
+      "Sha256": "F85C23B6C3B95066BAB4E7B70D90C4968542DD7D5D2008632B3CA6AF38998A97"
+    },
+    {
+      "Path": "local/Test-DiscoverySlopeMaps-r1.ps1",
+      "Sha256": "6BBB09EBE382DF0F3EDD97D5213BC0A573CBADD5AE2D4BD60F1A12897B9D5FAF"
+    },
+    {
+      "Path": "local/discovery-slope-e3m6-r1.json",
+      "Sha256": "D5C40D52C508789332DB81CC9EE422FA72355D2B9870027BF5A2D3A4A6C346FC"
+    },
+    {
+      "Path": "local/discovery-slope-e3m6-r1.log",
+      "Sha256": "52FD62212CAB9D805363F89C126583D9D40B3CB6FA4698983B7D6C70D14AD4F5"
+    },
+    {
+      "Path": "local/discovery-slope-maps-r1.json",
+      "Sha256": "DB72DD55202C81CC1E878D37749382D877F5BA06A77C7C200D4B00C43F31D6BA"
+    },
+    {
+      "Path": "local/discovery-slope-maps-r1.log",
+      "Sha256": "CDAD39460BD5F84B84314455843DFED6D3B3E69192A552ECE002B6D4FADEB144"
+    },
+    {
+      "Path": "local/discovery-slope-production-r1.json",
+      "Sha256": "79458B6CC0238722DD8BC1E22DEBF245C225248E0D32A8731AA336A15C641884"
+    },
+    {
+      "Path": "local/discovery-slope-production-r1.log",
+      "Sha256": "EAC266136FDBAD605F3849964720D677EC37419491403111E22A7C60B07BE782"
+    },
+    {
+      "Path": "local/Test-DiscoverySlopeMoving-r1.ps1",
+      "Sha256": "E82F4966C2F06EF9FFAB7558A86723CAC6392DC065515F732CF0F616CC1C6D69"
+    },
+    {
+      "Path": "local/prepare-discovery-slope-production-checks-r1.py",
+      "Sha256": "9E0061A8286D4BBF1B2CDF1F60C0A43A18DFDA8FC80988813EFABC36D249365D"
+    },
+    {
+      "Path": "local/discovery-slope-production-moving-r1.json",
+      "Sha256": "D36654C276E5169F2295846E4CAA9491ECCF53B3AC0F5F49E59523A221A57B27"
+    },
+    {
+      "Path": "local/discovery-slope-production-moving-r1.log",
+      "Sha256": "07ACB63A23B944B72555CED6D4B0AB5B003393587F567A42C1A53AF417FAE274"
+    },
+    {
+      "Path": "local/discovery-slope-production-automap-worker-r1.json",
+      "Sha256": "AC8DCAA18FD46EE53BCC3FE6117ACF08AA3926B64B1DBABB950F8C01AC44A3B4"
+    },
+    {
+      "Path": "local/discovery-slope-production-automap-worker-r1.log",
+      "Sha256": "4D49888C08575702BA8A92713A4DA99D22ED5D39B50677865DC29C92BC7B50B5"
+    },
+    {
+      "Path": "local/discovery-slope-production-save-worker-r1.json",
+      "Sha256": "71BC2EFBD2C0E4AE44453C7096394E0E593B0F1B76E42CE95C8CB8279E988968"
+    },
+    {
+      "Path": "local/discovery-slope-production-save-worker-r1.log",
+      "Sha256": "8D610697F1872357933F9AC613FA265001ABB18C9957B8EE79E9DCEF375D8997"
+    },
+    {
+      "Path": "local/discovery-slope-e1m3-full-r1.json",
+      "Sha256": "85976A223E2AEF07E342E050AD43C72D58596206FF0EC4DD3A0B97F476154BB8"
+    },
+    {
+      "Path": "local/discovery-slope-e1m3-full-r1.log",
+      "Sha256": "9CEB53FB9C8DD969BC0C70A06BBC9817FCD3DF12FF5167040CB0B2AF1B801770"
+    },
+    {
+      "Path": "local/e1m3-replay-prechange-7118-20260929.json",
+      "Sha256": "8336CAFAC4CEF480376A03320A0FA5FBD60E56B1E0A9C4FC17C6DFEBDF67D93E"
+    },
+    {
+      "Path": "local/inspect-discovery-slope-e1m3-r1.py",
+      "Sha256": "88A6D3B81BDBA5BED6C67B82E10A5724CE5B30A39BEDD8C3843F02D12C879C21"
+    },
+    {
+      "Path": "local/audit-discovery-slope-production-r1.py",
+      "Sha256": "C8ADB2DE2BBAC1EEB0181E162680BEA1215B69ECA5A523ED6819DA51B82D88C4"
+    }
+  ]
+}
