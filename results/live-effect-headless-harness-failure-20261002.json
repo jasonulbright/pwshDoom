@@ -1,0 +1,108 @@
+{
+  "Error": null,
+  "Passed": false,
+  "Checks": [
+    {
+      "Passed": true,
+      "Name": "Complete captured input replay exits normally"
+    },
+    {
+      "Passed": true,
+      "Name": "Every recorded state checkpoint still matches"
+    },
+    {
+      "Passed": true,
+      "Name": "Live PowerShell sound worker schedules effect events"
+    },
+    {
+      "Passed": true,
+      "Name": "All submitted device frames return and audio shuts down cleanly"
+    },
+    {
+      "Passed": true,
+      "Name": "Process-loopback capture closes for only the simulation process"
+    },
+    {
+      "Passed": true,
+      "Name": "Captured process PCM contains non-silent sound effects"
+    }
+  ],
+  "Details": {
+    "RepositoryCommit": "981e29488ed4dd6446622435adf3eaa4f355e088",
+    "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+    "ReplaySha256": "3C449B3AA71BE042C7FF229AED2F143636ED97A4A4B02562505339B35415DD75",
+    "CommandCount": 420,
+    "Checkpoints": 2,
+    "AudioEvents": 63,
+    "AudioSourcePeak": 15,
+    "SoundVolume": 15,
+    "SubmittedFrames": 636300,
+    "ReturnedCompletedFrames": 636300,
+    "DeviceClosed": true,
+    "CapturedFrames": 881559,
+    "CapturedSeconds": 19.99,
+    "NonzeroSamples": 1328879,
+    "PcmPeak": 5145.0,
+    "PcmRms": 473.83990371756227,
+    "PcmSha256": "6328D76B346A558D836B8033FC1EF451A13D11F158CFF8E146261DB28FDEDE40",
+    "CapturePackets": 1999,
+    "CaptureDiscontinuities": 0,
+    "HostProcessId": 24700,
+    "SimulationProcessId": 34632,
+    "CaptureProcessId": 25332,
+    "SourcePins": [
+      {
+        "Path": "scripts/Invoke-Doom.ps1",
+        "Sha256": "3EA8E756F3ED2A96776EF57B36FF01B8BC71B36B22E1A729B3546B9315BABD2D"
+      },
+      {
+        "Path": "scripts/Invoke-SimulationWorker.ps1",
+        "Sha256": "F253EA6D11C8351A1C589ECA4C96AFE316A70156C6CE071D151F0DBBBA3B8ED9"
+      },
+      {
+        "Path": "scripts/Record-ProcessAudio.ps1",
+        "Sha256": "F50876284D3E3958F2183CB483F13179FABAF45B87B8BCC221BA7F7113EF38CD"
+      },
+      {
+        "Path": "src/AudioMixer.ps1",
+        "Sha256": "38E846CDF04317FBA6DE2EC598F3497EFB6ED97DEE9AB8EEC22D8A94E4421A0B"
+      },
+      {
+        "Path": "src/AudioEvents.ps1",
+        "Sha256": "52E6F728AF88DB21E2BDA5C6065EB3324DFC4A91EA25371DD4DB9889B6BD3BE1"
+      },
+      {
+        "Path": "src/AudioRunspace.ps1",
+        "Sha256": "7907F76AEB92969F36252E86B36A970C359B0AE2D9EC3ACCF1514E2D6ABC7DEE"
+      },
+      {
+        "Path": "src/ProcessAudioCapture.ps1",
+        "Sha256": "A747786A2428F71C907F86AD631983548AAE8C6450F422F64144D367B8E9E321"
+      },
+      {
+        "Path": "src/CaptureClock.ps1",
+        "Sha256": "CED03D531F7C129D9E079F1F3B548DD436EFD81782974A3752D4689FA3E45DFB"
+      }
+    ],
+    "LocalGameReportSha256": "8C1282ED9AB74A9DD93096D7F2F93E24C656427A6E66F298AA5F91266BED781B",
+    "LocalCaptureReportSha256": "8E5488958AC0D34B2C72620F862C2A3619D4435C0F1ACB1EAC6AC0794F5D5453",
+    "LocalWavPath": "C:\\projects\\pwshDoom\\local\\recordings\\current-headless-effects-r1-audio.wav",
+    "Meaning": "Headless current-source E3M6 replay with the actual PowerShell sound mixer and Windows output device. Process-tree WASAPI loopback captures mixed PCM without opening a Terminal window. It does not capture video, qualify acoustic identity/listening, or measure normal interactive pacing."
+  },
+  "Logs": [
+    {
+      "ExitCode": 0,
+      "ProcessId": 24700,
+      "Stderr": "",
+      "Stdout": "Loading the PowerShell simulation and rendering workers...\r\n\r\nReport  : C:\\projects\\pwshDoom\\local\\recordings\\current-headless-effects-r1-game.json\r\nTics    : 420\r\nFrames  : 118\r\nSeconds : 14.3862086\r\nExit    : ReplayEnd\r\n\r\n"
+    },
+    {
+      "ExitCode": 0,
+      "ProcessId": 25332,
+      "Stderr": "",
+      "Stdout": "C:\\projects\\pwshDoom\\local\\recordings\\current-headless-effects-r1-audio.wav\r\n"
+    }
+  ],
+  "HarnessSha256": "1F93C64DB8362FF3127ED667F7E638C0F8185C1B8EEC60FE8D04CAA3A7074D93",
+  "Meaning": "Source-pinned headless live effect/audio replay. Audio is captured digitally from the simulation process tree with Windows WASAPI loopback. No display recording, microphone/acoustic listening, hardware portability, or normal-display performance claim."
+}

@@ -599,3 +599,13 @@ Classic/Matrix/AnsiArt checks. See the [source-pinned integration receipt](../re
 Human route, current-source live effects, acoustic and clean native pacing gates
 remain open; the p99 trial remains above57.2 ms. Count reaches28 after Preview.5.
 Continue those gates and release at35 commits.
+
+The headless live-effect rerun refreshes current-source digital audio evidence
+without opening a Terminal: all 420 replay commands and two checkpoints match,
+63 effect events are scheduled, all 594,720 submitted frames return, and the
+19.99-second process capture has zero discontinuity packets. The initial
+receipt's check-count error is retained; the corrected seven-check run passes.
+[Audio receipt and limits](../results/live-effect-headless-20261002-r2.json).
+This does not provide video or acoustic listening evidence. Count reaches 30
+after Preview.5; publish again by 35 and continue the human campaign, fidelity,
+performance and acoustic gates.

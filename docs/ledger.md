@@ -6056,3 +6056,13 @@ speed. [Attribution receipt](../results/hitscan-path-profile-iterative-20261002.
 The profiler/evidence/documentation commit reaches 29 after Preview.5. Native
 capture, human Episode 1 completion and current-source live effect review remain
 open; release is due again at 35 commits.
+
+A headless current-source run refreshes live effect output evidence without
+opening a Terminal window. It replays 420 commands, matches both endpoints,
+schedules 63 effects, returns all 594,720 submitted frames and captures 19.99
+seconds of process PCM with zero reported discontinuities. A first receipt had
+a check-count mismatch despite all six recorded checks passing; it is preserved
+and the corrected seven-check rerun passes. This verifies digital output, not
+acoustics or video. [Receipt](../results/live-effect-headless-20261002-r2.json).
+The next commit reaches 30 after Preview.5; keep the human route, acoustic
+listening, display and fidelity gates open, and release again at 35.

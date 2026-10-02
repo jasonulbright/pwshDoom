@@ -415,3 +415,27 @@ checks and retains all packet-processing ages, credited controls and original
 PCM/QPC footage. [Recording receipt](../results/audio-recovery-live-20261002.json).
 Early simulation stalls, event-to-speaker acoustics and complete campaigns
 remain unqualified. Timing recovery does not replace those gates.
+
+## Headless live-effect output capture — October 2, 2026
+
+A hidden headless host ran the current 420-command E3M6 replay with the actual
+PowerShell sound worker, Windows output device and a fresh 15% effect-volume
+settings file. No Terminal window or display recording was used. Process-scoped
+WASAPI loopback started before the capture gate released the replay. All 420
+commands and both saved checkpoints matched; the simulation scheduled 63 sound
+events, returned all 594,720 submitted frames and closed the device cleanly.
+The 19.99-second capture contains 1,275,656 nonzero samples, a digital peak of
+5,145, RMS 471.25, 1,999 capture packets and zero reported discontinuities.
+The [seven-check receipt](../results/live-effect-headless-20261002-r2.json)
+pins source and local game/capture reports. The local
+[process WAV](../local/recordings/current-headless-effects-r2-audio.wav) is
+available for review.
+
+The first capture produced the same successful replay/audio accounting, but
+its receipt incorrectly required seven checks after recording six. That
+harness-only accounting miss is retained separately as
+[the failed receipt](../results/live-effect-headless-harness-failure-20261002.json).
+The rerun adds an explicit WAV header/frame-integrity check and passes all
+seven. These process-loopback files confirm non-silent digital output on this
+device; they are not a video recording, human listening/acoustic review,
+full-campaign continuity or native pacing qualification.
