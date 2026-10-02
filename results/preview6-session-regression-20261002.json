@@ -1,5 +1,5 @@
 {
-  "CompletedUtc": "2026-10-02T20:08:19.8542262Z",
+  "CompletedUtc": "2026-10-02T20:14:10.9839341Z",
   "Release": "v0.1.0-preview.6",
   "TestSourceCommit": "0145d751a6f846114eaa6f243296086a3c71dccb",
   "CurrentCheckoutRuntimeAndScriptsMatchPackage": true,
@@ -47,12 +47,71 @@
       "HarnessSha256": "2ACBF4E8414BFDF99DE52A6C80F3838CBC6DA9137513167B2DBCDBCD2030B820",
       "RuntimeSourceSha256": "38E846CDF04317FBA6DE2EC598F3497EFB6ED97DEE9AB8EEC22D8A94E4421A0B",
       "Failed": 0
+    },
+    {
+      "RuntimeSourceSha256": "87368E204F816634FEA245966529892438D698B5ACD8694E370AEC46FB4B6563",
+      "Failed": 0,
+      "Name": "SaveSessionEdges",
+      "ReportSha256": "C9307843D85B5A1F4A4DB61B0A43596CFBAB3B6135C3D27087BE9D18B83DF038",
+      "Report": "local/preview6-save-session-edges.json",
+      "HarnessRecordedSha256": "BB114784972BA3BC35B24F040244E7F5D5A34B2ED003831A43C216DF5A1A7A09",
+      "RunCount": 5,
+      "Passed": 20,
+      "HarnessSha256": "BB114784972BA3BC35B24F040244E7F5D5A34B2ED003831A43C216DF5A1A7A09",
+      "RuntimeFiles": [
+        {
+          "Sha256": "CBADD9B913973D0442B4BE7A45F4C1069FA75B8DCAF78F4A550AE72C4ACED706",
+          "Path": "src/GameHost.ps1"
+        },
+        {
+          "Sha256": "E88163E3D970A02F5D81B9EEDDEB9F7B1E0FE2A90AFCF4019733D423D69E8F8A",
+          "Path": "src/SnapshotTransport.ps1"
+        },
+        {
+          "Sha256": "87368E204F816634FEA245966529892438D698B5ACD8694E370AEC46FB4B6563",
+          "Path": "src/SaveState.ps1"
+        },
+        {
+          "Sha256": "0C8ABF378AC10A78925408F1BCE74B365703ABDB7BBEA57F40A72F7ED5CF798C",
+          "Path": "src/InputReplay.ps1"
+        }
+      ]
+    },
+    {
+      "RuntimeSourceSha256": null,
+      "Failed": 0,
+      "Name": "SaveWorker",
+      "ReportSha256": "20688E70945F34FBA4F1B76EF1306F90F280A4B82CC596241D3862BD9483565E",
+      "Report": "local/preview6-save-worker.json",
+      "HarnessRecordedSha256": "416F14C45D7883A8FE658684852E625C810D84C595D45185D054FD33D90C2112",
+      "RunCount": 0,
+      "Passed": 12,
+      "HarnessSha256": "416F14C45D7883A8FE658684852E625C810D84C595D45185D054FD33D90C2112",
+      "RuntimeFiles": [
+        {
+          "Sha256": "472B67E534DBC1AB262439CCD57E481B472AD3F40761E1B9518B946067E7DEAE",
+          "Path": "src/SimulationProcess.ps1"
+        },
+        {
+          "Sha256": "CA647B604FC51FE1981CD2045D14F90043314DFC09DC5EF298597307D433CAF8",
+          "Path": "src/SessionMenu.ps1"
+        },
+        {
+          "Sha256": "0C8ABF378AC10A78925408F1BCE74B365703ABDB7BBEA57F40A72F7ED5CF798C",
+          "Path": "src/InputReplay.ps1"
+        },
+        {
+          "Sha256": "87368E204F816634FEA245966529892438D698B5ACD8694E370AEC46FB4B6563",
+          "Path": "src/SaveState.ps1"
+        }
+      ]
     }
   ],
   "Boundaries": [
     "Menu input is synthetic KEY_EVENT processing, not desktop keyboard play",
-    "SaveState checks same-process graph reconstruction and 140 continuation commands; process-boundary/menu integration have separate existing evidence",
+    "Same-process SaveState checks cover graph reconstruction and 140-command continuation; the SaveWorker check separately covers simulation-process IPC and atomic save transactions",
+    "Five death/finale save fixtures exercise state restoration near ending boundaries; they are not campaign playthrough or finale pixel-fidelity evidence",
     "Audio mixer tests are deterministic/offline and do not play through a device",
-    "The check set does not finish a human campaign route"
+    "None of these tests completes the human campaign route"
   ]
 }

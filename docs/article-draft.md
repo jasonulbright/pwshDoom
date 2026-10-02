@@ -333,4 +333,4 @@ and 140-command continuation pass 24/24, and the offline PowerShell audio
 mixer passes 27/27. These regressions test menu mechanics, save graphs and
 mixing arithmetic, not physical keys, fresh-process loading, speaker quality or
 the full campaign. Their [source-pinned receipt](../results/preview6-session-regression-20261002.json)
-retains local raw-report hashes and exact boundaries.
+retains local raw-report hashes and exact boundaries. The simulation-worker IPC/atomic-save test adds 12 passing checks; death and finale save-edge fixtures add 20, without claiming that any campaign or ending was played.

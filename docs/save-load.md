@@ -88,3 +88,9 @@ and continues 140 commands. This is same-process state evidence; desktop menu
 play and cross-process continuation remain separate gates. Raw ignored reports
 and source/harness hashes are pinned by the
 [session regression receipt](../results/preview6-session-regression-20261002.json).
+
+The same current-source regression also passes 12 simulation-worker save/session
+IPC checks covering generation handshakes, failed-candidate isolation, atomic
+replacement and immutable replay saves, plus 20 death/finale save-edge checks
+across the actual E1M1 and E1/E2/E3/E4M8 worlds. Those ending-state fixtures do
+not count as episode completions or finale visual-fidelity comparisons.

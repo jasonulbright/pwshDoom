@@ -6161,3 +6161,10 @@ The menu test does not inject physical keys, the save test is same-process, and
 the mixer does not open an audio device. These results do not satisfy the
 pending human Episode 1 route, cross-process save integration, acoustics or
 full-campaign playback gates.
+
+The expanded save qualification adds 12 simulation-worker IPC/atomic-save checks
+and 20 death/finale state-edge checks across E1M1 and the four Episode 1–4
+M8 finales. Both groups pass on the exact Preview.6 runtime; final states are
+restored and continued near their boundaries. This is state/save coverage, not
+map-route completion or finale-image parity. The session regression receipt is
+updated with the new local report hashes.
