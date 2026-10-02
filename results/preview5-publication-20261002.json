@@ -1,0 +1,59 @@
+{
+  "FinishedUtc": "2026-10-02T04:49:58.196283+00:00",
+  "Tag": "v0.1.0-preview.5",
+  "TagCommit": "56e132a39a6ee1ad864df37eca73438c70afa7a8",
+  "PackageSourceCommit": "1681532d0ea63fd4fcdd95e153f74694a3cbb446",
+  "PublishedAt": "2026-10-02T04:48:16Z",
+  "ReleaseUrl": "https://github.com/jasonulbright/pwshDoom/releases/tag/v0.1.0-preview.5",
+  "IsPrerelease": true,
+  "CommitsSincePriorReleaseAtPublication": 35,
+  "PriorRelease": "v0.1.0-preview.4",
+  "FreshPublicDownload": {
+    "Path": "local/preview5-public-download/pwshDoom-0.1.0-preview.5.zip",
+    "Sha256": "3B767865F367A51D00F09BFEC1ECAA8CF9B4E6BDED28943375DA3C69FAEEED0C",
+    "Bytes": 1735913
+  },
+  "ChecksumAsset": {
+    "Path": "local/preview5-public-download/SHA256SUMS.txt",
+    "Sha256": "2B8126D1A67A5C239B2A7ECD5A82560A89837DDF5D19B43D518F5A4E52E402FB"
+  },
+  "Assets": [
+    {
+      "Name": "pwshDoom-0.1.0-preview.5.zip",
+      "Url": "https://github.com/jasonulbright/pwshDoom/releases/download/v0.1.0-preview.5/pwshDoom-0.1.0-preview.5.zip",
+      "Bytes": 1735913,
+      "GitHubDigest": "sha256:3b767865f367a51d00f09bfec1ecaa8cf9b4e6bded28943375da3c69faeeed0c"
+    },
+    {
+      "Name": "SHA256SUMS.txt",
+      "Url": "https://github.com/jasonulbright/pwshDoom/releases/download/v0.1.0-preview.5/SHA256SUMS.txt",
+      "Bytes": 95,
+      "GitHubDigest": "sha256:2b8126d1a67a5c239b2a7ecd5a82560a89837ddf5d19b43d518f5a4e52e402fb"
+    }
+  ],
+  "AllPublicPayloadHashesVerified": 559,
+  "AllPublicRuntimePayloadsMatchReleaseTag": 478,
+  "ExactArchiveContentsVerified": true,
+  "TestedLocalArchiveHashMatchesFreshPublicDownload": true,
+  "ReleaseMetadata": {
+    "Path": "local/preview5-public-release.json",
+    "Sha256": "D5AE99AA9B70792DC753AEF56ABE02C33F55FD33A8F851E1915C7B8C543DD11A"
+  },
+  "RemoteRefs": {
+    "Path": "local/preview5-public-refs.txt",
+    "Sha256": "620E9D9DB1907CFE30698CB80603D91EA6894508FAF0D2A7BC65195231123B97"
+  },
+  "ReleaseNotes": {
+    "Path": "local/preview5-release-notes.md",
+    "Sha256": "2819A4666F480ECC933A578BA06645C1C3D17EFBAC70D639667BC8AF7A358EDF"
+  },
+  "PackageValidation": {
+    "Path": "results/preview5-package-validation-20261002.json",
+    "Sha256": "BD471BE3104200AF49AA791860E4DA19E9FEDE8D0FBEFA984DEFBEB0F6EE767C"
+  },
+  "Audit": {
+    "Path": "local/audit-preview5-publication.py",
+    "Sha256": "F9FD270A1B2B9A586C57036666D9FC4C83F5098743BAC221A1D4069EF3D597EA"
+  },
+  "Meaning": "Public community preview cut immediately on35th post-Preview.4 commit. Fresh downloaded ZIP/checksum agree with tested local files and GitHub asset digests; all559 public payloads pass manifest hashes. Every packaged runtime file matches the release tag modulo checkout newlines; archive source34 and validation/tag35 remain distinct. This resets the public-release cadence, not Ultimate Doom acceptance. Whole campaigns, independent moving-world/raw-framebuffer fidelity, sustained display pacing, physical/1080-DPI/acoustic and second-hardware evidence remain open."
+}

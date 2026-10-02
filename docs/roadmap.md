@@ -365,3 +365,10 @@ returns every submitted frame. [Receipt and exact boundaries](../results/preview
 Count reaches35 with this evidence; tag/publish now and verify the public assets.
 The archive pins preparation source34, while tag35 adds validation. This is a
 cadence community preview; all full Ultimate Doom gates remain active.
+
+Preview.5 is now public at the requested35-commit threshold. A fresh public
+download matches the tested ZIP/checksum and GitHub digests, all559 payloads
+pass, and all478 runtime payloads match the release tag. [Publication receipt](../results/preview5-publication-20261002.json).
+The cadence resets at Preview.5; the evidence commit starts the next count at1.
+The full Ultimate Doom release goal remains active, with the explicit remaining
+campaign/fidelity/pacing/physical/acoustic/hardware gates unchanged.

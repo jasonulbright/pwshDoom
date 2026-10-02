@@ -93,3 +93,12 @@ A wrapper initially captured the build summary as text and failed extraction.
 The failure remains local; the existing archive was verified/extracted directly,
 with no silent rebuild. Publication and fresh public-download verification
 follow this35th commit. The full Ultimate Doom goal remains active.
+
+## Public download verified
+
+[Preview.5 is published](https://github.com/jasonulbright/pwshDoom/releases/tag/v0.1.0-preview.5).
+The [publication receipt](../results/preview5-publication-20261002.json) verifies
+a fresh download against the tested ZIP/checksum and GitHub asset digests,
+all559 payload hashes and478 runtime files against the release tag. Publication
+occurred at35 commits since Preview.4. The tag/manifest source distinction and
+all remaining full-release gates stay explicit.
