@@ -16,3 +16,9 @@ Use the ZIP under `local/episode1-r19-package` and checked extraction under `loc
 - All 36 map starts have smoke coverage; focused progression/boss/menu/save checks and existing normal routes remain evidence. The continuous human E1 secret-map/finale route, remaining Ultimate Doom campaigns, independent original-executable moving-world comparisons, acoustic/physical-input review and second-hardware/display qualification remain open.
 
 This is a development candidate, not a fully qualified Ultimate Doom release candidate. Preview.4 remains the public release. The user's 35-commit release rule remains in force; freezing this local handoff does not reset that count. [Roadmap](roadmap.md), [ledger](ledger.md) and [working article](article-draft.md) retain the broader scope and limitations.
+
+## Extracted validation completed
+
+The [package receipt](../results/r19-playtest-package-validation-20261001.json) identifies source `f0a16af7a289c2f479477eee240e5b3c09d20274`, the 1,695,503-byte ZIP (`CF44D1D7842A48B85ABF8ED70B9E27DE422A50E09896F2CF35F1EA1FBBC47603`) and all 551 verified payloads. The excluded untracked research PDF alone accounts for the manifest's dirty flag. Recorded live-fixture source entries match the extracted package in each style.
+
+Extracted checks pass: 110 terminal byte/ownership/pipe cases, 18 resource-reader boundary cases, 125 menu checks with 46 screens, and 15 music-enabled save-worker checks. Each style's sixteen-worker fixture compares 448,000 pixels and 112 encoded strips across screens and four map reloads, plus 256,000 pixels against freshly converted resources. The short actual-device startup reconciles every submitted/returned frame and closes. Retain the receipt's queue/timing details and narrow startup scope; it does not qualify sustained audio, display pacing or human play.
