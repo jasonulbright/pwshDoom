@@ -1055,3 +1055,24 @@ retain all three modes, 37 source pins and 56 digital consistency checks. Review
 pickup/damage frames preserve the world, pistol, HUD and notices. This supports
 live effect review on the changed renderer; sampling arithmetic and broader
 reference-image qualification remain separate evidence.
+
+### Isolate wall projection components (2026-10-02)
+
+An ignored diagnostic reads actual visible-wall scale history and reconstructs
+the adopted reference's horizontal texture formula at the frozen input-315,
+ceiling-68 view. Its ordinary trace preserves every pixel and depth entry.
+Matching segment/column keys then receive explicit diagnostic texture overrides.
+[Controls, paired fields and source pins](../results/wall-projection-attribution-20261002.json).
+
+| Diagnostic override | Scene disagreement, out of 53,760 |
+| --- | ---: |
+| Ordinary candidate | 4,167 |
+| Actual reference scale only | 3,855 |
+| Reconstructed reference wall-U only | 2,302 |
+| Both | 1,951 |
+
+These contributions interact. HUD remains exact, with geometry/coverage/lighting
+unchanged. Horizontal U is reconstructed from the pinned formula, rather than
+independently observed column calls; the reference itself remains locally
+adapted. This selects the next bounded PowerShell sampling trial and adds no
+production change, pacing, original-executable or campaign qualification.

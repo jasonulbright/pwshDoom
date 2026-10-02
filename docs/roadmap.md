@@ -491,3 +491,12 @@ runs establish neither clean pacing nor acoustic/full-campaign qualification.
 [Recording evidence](../results/wall-vertical-effects-live-20261002.json).
 Count reaches 15 after Preview.5. Continue remaining campaign/fidelity/performance
 and physical qualification; release at 35 commits since the prior release.
+
+The frozen-view wall diagnostic now isolates horizontal texture coordinates as
+the stronger remaining contributor: 4,167 disagreements become 3,855 with actual
+reference scale, 2,302 with reconstructed wall-U, and 1,951 with both. Ordinary
+trace pixels/depth and HUD are exact; these ignored overrides change no production
+code and qualify no campaign, original-image or pacing gate.
+[Attribution evidence](../results/wall-projection-attribution-20261002.json).
+Count reaches 16 after Preview.5. Implement a bounded PowerShell wall-U trial next,
+with independent math/scene controls and cost measurement; all full gates stay open.

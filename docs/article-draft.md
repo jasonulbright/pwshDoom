@@ -262,3 +262,11 @@ interval falls inside their gameplay-write windows; startup coverage and 15–26
 post-game gaps remain. This preserves the evidence for earlier capture failures
 and leaves acoustic continuity and physical timing unqualified.
 [Committed-build recording receipt](../results/wall-vertical-effects-live-20261002.json).
+
+The remaining image error is partly attributable. A frozen-view diagnostic
+preserves ordinary pixels/depth, then replaces selected wall texture parameters.
+Reference scale alone reduces disagreement from 4,167 to 3,855 indices;
+reconstructed horizontal texture coordinates reduce it to 2,302, and both to
+1,951. Their effects interact, leaving substantial error. This selects the next
+sampling change without treating a reference-derived override as production
+compatibility or original-game proof. [Attribution and limitations](../results/wall-projection-attribution-20261002.json).

@@ -5793,3 +5793,35 @@ without repeating this short recording matrix absent a new change. Whole human
 Episode 1/Ultimate Doom qualification, independent moving original frames,
 numerical pacing and physical/acoustic/DPI/second-hardware gates remain open.
 Cut the next public release at 35 commits since the prior release.
+
+### 2026-10-02 — Attribute remaining wall projection differences
+
+Read the adopted renderer's actual visible-wall Scale1/ScaleStep history after
+the frozen E1M1 input-315, ceiling-68 fixture. An ignored candidate trace records
+visible textured bands while preserving all 64,000 ordinary pixels and depth
+entries. Match segment/column keys without changing coverage or the input route.
+Of 656 paired band samples, 618 have different scale and 273 have different
+horizontal texture columns reconstructed from the pinned reference formula.
+The reference contains 45 visible ranges and 1,548 segment/column keys.
+[Attribution controls, failures and source pins](../results/wall-projection-attribution-20261002.json).
+
+Injecting only actual reference scale changes disagreement from 4,167 to 3,855;
+injecting only reconstructed wall-U changes it to 2,302; both yield 1,951.
+HUD stays exact. These interact, so reductions cannot be added. Scale comes
+from actual recorded reference fields; U is derived with its distance, angle,
+tangent and offset formula rather than independently logged column calls.
+Reference endpoint-angle equality and the tangent's angle mask are checked.
+This identifies horizontal sampling as the stronger next bounded implementation
+trial. It leaves 1,951 differences and does not establish original-image parity.
+
+The first ignored diagnostic mistakenly resolves the trace function as its
+ordinary control through dynamic-module exports and fails before creating the
+control's trace fields. Retain that error and source, then module-qualify both
+renders and compare pixels/depth. Align the derived-U angle mask with the actual
+reference; the corrected diagnostic still yields 1,951. Production is unchanged,
+and no performance or campaign qualification follows from these counterfactual
+texture overrides. Preserve every raw run and the prior helper versions.
+
+This evidence commit reaches 16 after Preview.5. Next implement and test bounded
+PowerShell wall-U quantization, with scalar/scene controls and cost measurement
+before adoption. Continue all full-release gates; release again at 35 commits.

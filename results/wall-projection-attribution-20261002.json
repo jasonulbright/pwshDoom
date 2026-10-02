@@ -1,0 +1,206 @@
+{
+  "FinishedUtc": "2026-10-02T08:42:35.801176+00:00",
+  "BaseCommit": "8185b90819d316f83c833da578eb11aa2962deb6",
+  "Runs": [
+    {
+      "Mode": "Scale",
+      "BaselineMismatch": 4167,
+      "OverrideMismatch": 3855,
+      "CandidatePixelsChanged": 355,
+      "HudMismatch": 0,
+      "Raw": {
+        "Path": "local/wall-projection-scale-attribution-r2.json",
+        "Sha256": "17A0D8E8B4A030FE91CD4831955AC140687F56668EB1D4467011182885647F92"
+      }
+    },
+    {
+      "Mode": "Texture",
+      "BaselineMismatch": 4167,
+      "OverrideMismatch": 2302,
+      "CandidatePixelsChanged": 1967,
+      "HudMismatch": 0,
+      "Raw": {
+        "Path": "local/wall-projection-texture-attribution-r1.json",
+        "Sha256": "A7626A7B9393BDFB2A2E045C5F4A8CF2FFE18EC5A70C9464DD3804BB42E7D744"
+      }
+    },
+    {
+      "Mode": "Both",
+      "BaselineMismatch": 4167,
+      "OverrideMismatch": 1951,
+      "CandidatePixelsChanged": 2290,
+      "HudMismatch": 0,
+      "Raw": {
+        "Path": "local/wall-projection-both-attribution-r2.json",
+        "Sha256": "BCD3576475E600E1BBC2767243CE686536EBD6C9928FA1E0314047896DDFC9A8"
+      }
+    }
+  ],
+  "PairedVisibleTexturedBandSamples": 656,
+  "DifferentScaleSamples": 618,
+  "DifferentReconstructedTextureColumns": 273,
+  "ReferenceRanges": 45,
+  "ReferenceSegmentColumnKeys": 1548,
+  "ScaleDifferenceAbsoluteMedian": 13.0,
+  "ScaleDifferenceAbsoluteMax": 382,
+  "SampleExample": [
+    {
+      "Origin": 87.06855773925781,
+      "Distance": 144.39823874388853,
+      "ReferenceScaleData": 72704,
+      "TextureColumnDifference": 63,
+      "Y0": 50,
+      "ScaleDifference": -88,
+      "ReferenceInverseData": 59074,
+      "AnalyticScaleData": 72616,
+      "Y1": 128,
+      "InverseScaleData": 59146,
+      "TextureColumn": 63,
+      "Column": 231,
+      "Band": 0,
+      "ReconstructedReferenceColumn": 0,
+      "Texture": 67,
+      "InverseDifference": 72,
+      "Seg": 164
+    },
+    {
+      "Origin": 87.06855773925781,
+      "Distance": 142.4062881989049,
+      "ReferenceScaleData": 73719,
+      "TextureColumnDifference": -1,
+      "Y0": 49,
+      "ScaleDifference": -87,
+      "ReferenceInverseData": 58261,
+      "AnalyticScaleData": 73632,
+      "Y1": 129,
+      "InverseScaleData": 58330,
+      "TextureColumn": 1,
+      "Column": 232,
+      "Band": 0,
+      "ReconstructedReferenceColumn": 2,
+      "Texture": 67,
+      "InverseDifference": 69,
+      "Seg": 164
+    },
+    {
+      "Origin": 87.06855773925781,
+      "Distance": 140.46854711963664,
+      "ReferenceScaleData": 74734,
+      "TextureColumnDifference": 0,
+      "Y0": 49,
+      "ScaleDifference": -86,
+      "ReferenceInverseData": 57470,
+      "AnalyticScaleData": 74648,
+      "Y1": 130,
+      "InverseScaleData": 57536,
+      "TextureColumn": 3,
+      "Column": 233,
+      "Band": 0,
+      "ReconstructedReferenceColumn": 3,
+      "Texture": 67,
+      "InverseDifference": 66,
+      "Seg": 164
+    }
+  ],
+  "Files": [
+    {
+      "Path": "src/FastRenderer.ps1",
+      "Sha256": "5F50BD8A78B30B863A0E294C600735F13A6539B383F1F7C2B0FFF967B7462CF2"
+    },
+    {
+      "Path": "src/ManagedDoom/Video/ThreeDRenderer.sb.ps1",
+      "Sha256": "9926E254F54250EEDD4F929681026BFF9ECEE7E6A9869FE99114F4FCD0CCF84B"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Math/Geometry.sb.ps1",
+      "Sha256": "0280E1F8DE0FBF3BF1EB37A3CB3E9949D9FA1E98BA6EB6599BD8A8A7731B4BF4"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Math/Trig.ps1",
+      "Sha256": "EBD2108E63D47BD99FA2F533A7D8948AA156530317C95523C98452810F2F876E"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Math/Fixed.ps1",
+      "Sha256": "467B07448D5E2E2F823A5B55136C2B77A0715903B032CAC828746FFB21D4B784"
+    },
+    {
+      "Path": "local/Inspect-WallProjection-r1.ps1",
+      "Sha256": "52780D33894E1D03894D8A5B770508F2ECE7EC2A461E976FB3820108762AF422"
+    },
+    {
+      "Path": "local/Inspect-WallProjection-scale-only-r2.ps1",
+      "Sha256": "6FAC7743F15AE878E94ECDCB3D2E321A1430AD43BB851AF1A26EA267F99DFCB1"
+    },
+    {
+      "Path": "local/Inspect-WallProjection-derived-U-before-mask-r1.ps1",
+      "Sha256": "CBC883C13834BB0EC6806CD3808543EEFCA281AE08F19245CACC6331724DD57F"
+    },
+    {
+      "Path": "local/FastRenderer-wall-projection-trace-r1.ps1",
+      "Sha256": "1B2C5089DA29B8FAEFF6DFD34BEFA831B75F630CC464251FD2B63846F80CBA4E"
+    },
+    {
+      "Path": "local/FastRenderer-wall-projection-trace-r2.ps1",
+      "Sha256": "C22C378F85F3ACA0140C6A48E2CCB029ADA093F1365C44AB2146F7894E59A1CC"
+    },
+    {
+      "Path": "local/prepare-wall-projection-trace-r1.py",
+      "Sha256": "97A1D1E966CF3C1527FD9BB40073E2E0673229D6E9E58E8A52890A851536CF38"
+    },
+    {
+      "Path": "local/prepare-wall-projection-trace-r2.py",
+      "Sha256": "AF9CCF947106DC1A07564FBF3C66D6B99AD57A9EB8323807B8ED63DA5C90FB01"
+    },
+    {
+      "Path": "local/audit-wall-projection-attribution-r1.py",
+      "Sha256": "D4CE98C6C468486584F6C789FEA55F0D8E1B5E1F361A9E4526A110E887D6F471"
+    },
+    {
+      "Path": "local/wall-projection-scale-attribution-r2.json",
+      "Sha256": "17A0D8E8B4A030FE91CD4831955AC140687F56668EB1D4467011182885647F92"
+    },
+    {
+      "Path": "local/wall-projection-texture-attribution-r1.json",
+      "Sha256": "A7626A7B9393BDFB2A2E045C5F4A8CF2FFE18EC5A70C9464DD3804BB42E7D744"
+    },
+    {
+      "Path": "local/wall-projection-both-attribution-r2.json",
+      "Sha256": "BCD3576475E600E1BBC2767243CE686536EBD6C9928FA1E0314047896DDFC9A8"
+    },
+    {
+      "Path": "local/wall-projection-scale-attribution-r2.log",
+      "Sha256": "8E365D9B151D9207088A1A50C543EA1C55B658F6DE33A5C8DFFCCC45248A2FE8"
+    },
+    {
+      "Path": "local/wall-projection-texture-attribution-r1.log",
+      "Sha256": "8E365D9B151D9207088A1A50C543EA1C55B658F6DE33A5C8DFFCCC45248A2FE8"
+    },
+    {
+      "Path": "local/wall-projection-both-attribution-r2.log",
+      "Sha256": "8E365D9B151D9207088A1A50C543EA1C55B658F6DE33A5C8DFFCCC45248A2FE8"
+    },
+    {
+      "Path": "local/wall-projection-scale-attribution-r1.json",
+      "Sha256": "29E15E6D91077F3B706CBA89E2DFC492CEED3DFEA9547F3CC632700364B570F2"
+    },
+    {
+      "Path": "local/wall-projection-scale-attribution-r1.log",
+      "Sha256": "21157A70B37B283241FF3FC4150EA4207FE5FA55D8BC39691F12D7A96A84F07A"
+    },
+    {
+      "Path": "local/Inspect-WallProjection-before-module-control-r1.ps1",
+      "Sha256": "F154B261E7F0E8417CC6D0A0085B1015A6A949D1FA2B2C795B0A63241D560775"
+    },
+    {
+      "Path": "local/wall-projection-both-attribution-r1.json",
+      "Sha256": "79B6C8003909F6C0ADA43727789D5F2D566D450A575A61DA5E86EB6B91827C90"
+    },
+    {
+      "Path": "local/wall-projection-both-attribution-r1.log",
+      "Sha256": "8E365D9B151D9207088A1A50C543EA1C55B658F6DE33A5C8DFFCCC45248A2FE8"
+    }
+  ],
+  "Decision": "Horizontal texture-coordinate quantization is the stronger next bounded candidate trial. Keep production unchanged; these ignored overrides only attribute mismatch sources. Implement reference-compatible coordinates in PowerShell only after scalar/scene checks and finite cost measurement.",
+  "Meaning": "Read actual visible-wall Scale1/ScaleStep fields from the adopted comparator. Reconstruct wall-U using its pinned point-distance, angle, tangent and offset formula; U is derived, not independently logged column calls. Trace real candidate textured bands with exact ordinary64000-pixel and depth controls before injecting matching segment/column overrides. Frozen E1M1 input315 has only the explicitly authored sector26 ceiling68 change; no route/checkpoint expectations tuned. Scale-only changes4167\u21923855 mismatch indices, U-only4167\u21922302, both4167\u21921951. They interact and their reductions must not be added. HUD stays exact;1951 scene mismatches remain. This reference is locally adapted and not independently qualified original-executable output. No pacing/performance gain or campaign completion claim.",
+  "FailureMeaning": "First diagnostic accidentally resolves the trace renderer as its ordinary control through dynamic-module exports, and fails before its control has the trace fields. Its raw error/source are retained. Both ordinary/trace renders are now module-qualified and their pixels/depth compared. The derived U path is then aligned with the actual reference angle mask and endpoint-angle equality checked; output1951 is unchanged from the preceding bounded run."
+}
