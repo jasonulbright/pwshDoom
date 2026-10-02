@@ -1434,3 +1434,15 @@ Startup is28.05–30.13 seconds. Reported private memory3.46–4.16 GiB and CPU4
 A first Classic diagnostic has18.18 ms mean game update and7.12 ms snapshot publication, leaving other stages/scheduling unclassified. Further work should investigate the command pipeline and worker-count alternatives with exact commands/images, then qualify effects separately. It should not tune this stress input into a map route or change failed gate denominators.
 
 Separate [dense WGC/loopback recordings](../results/e3m6-effects-live-20261002.json) now retain all420 commands/two endpoints in all modes,36 unchanged source hashes and complete PCM shutdown. Six reviewed samples show pickup/damage and preserved style/HUD/notice behavior. Independent PCM reconstruction retains startup outside capture coverage and24–26 ms near-tail capture gaps. These loaded recordings do not replace clean pacing, acoustic review, original-binary fidelity or map completion. Next compare16 and8 renderer workers in paired order before changing defaults.
+
+### Eight-worker tradeoff in dense E3M6 — October 2, 2026
+
+The [three-cycle Classic ABBA study](../results/e3m6-worker-count-abba-20261002.json) changes only16/8/8/16 workers. All twelve runs keep420 commands/two endpoints, full resolution/actors, catalog/audio and font/output settings. Independent all-style8-worker palette/fuzz prechecks match960,000 pixels and120 encoded strips. All packet/credit/PCM accounting passes, with zero audio producer backpressure/software starvation/rebuffer.
+
+| Cycle | Active tic-rate change with8 workers | P99 tic-lateness change | Display-event-rate change |
+| --- | --- | --- | --- |
+|1 |+10.47% |−70.33% |−8.26% |
+|2 |+13.71% |−69.22% |−9.99% |
+|3 |+12.12% |−71.64% |−8.03% |
+
+Sampled game private memory falls37.28–39.17% and CPU30.41–33.67%; audio/music are inside the simulation sample. Median critical worker spans increase12.84→16.93 ms. QPC stages include scheduling and are not a causal scheduler diagnosis. Startup varies across cycles. None passes full numerical gates: eight-worker active rates remain32.220–33.737 tics/sec and display events35.465–38.273/sec. Player death and all windows/outliers remain. Keep16 as the primary/default and8 as a documented selectable tradeoff; this Classic comparison does not qualify other modes' live pacing with8. Process cleanup checks both PID and recorded start identity because Windows can reuse IDs.

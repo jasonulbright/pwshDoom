@@ -398,3 +398,11 @@ outside loopback coverage and24–26 ms near-tail capture gaps remain explicit;
 these are loaded effect recordings, not clean pacing/acoustic/navigation proof.
 [Receipt](../results/e3m6-effects-live-20261002.json). Continue paired16/8-worker
 cost investigation; release count reaches4 after Preview.5.
+
+Three paired Classic16/8/8/16 cycles now retain all commands/endpoints/audio.
+Eight workers improve simulation rate10–14% and p99 lateness69–72%, with lower
+sampled CPU/memory, but reduce display-event rate8–10%; no full gate passes.
+[Exact controls, resource tradeoff and retained PID-reuse audit failure](../results/e3m6-worker-count-abba-20261002.json).
+Keep16 primary/default. Continue the ignored current-endpoint snapshot trial
+with all-map/replay byte equality before adoption. Count reaches5 after Preview.5;
+all campaign/fidelity/physical/acoustic/hardware gates remain active.
