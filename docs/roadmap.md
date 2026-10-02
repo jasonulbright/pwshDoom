@@ -589,3 +589,13 @@ slower and still exceeds the frozen57.2 ms limit. Keep the exact timeline and
 all 1,680 update samples in the [trial receipt](../results/visibility-iterative-dispatch-20261002.json).
 Count reaches26 after Preview.5. Integrate this bounded candidate in PowerShell,
 repeat the full regression surface and retain the native performance gate.
+
+Production source commit `c3d0d0c` now uses the PowerShell iterative BSP walk.
+The integrated timeline matches the recorded trial on every one of420 tics,
+and a temporary recursive reference still passes both stored replay endpoints.
+The production build passes the 36-map idle/render smoke and campaign/boss,
+movement, action, menu/save, visibility arithmetic, offline mixer and 16-worker
+Classic/Matrix/AnsiArt checks. See the [source-pinned integration receipt](../results/visibility-iterative-integration-20261002.json).
+Human route, current-source live effects, acoustic and clean native pacing gates
+remain open; the p99 trial remains above57.2 ms. Count reaches28 after Preview.5.
+Continue those gates and release at35 commits.

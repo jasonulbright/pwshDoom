@@ -1643,3 +1643,21 @@ measurement excludes rendering workers, terminal, audio and presentation, and
 only one dense map/input sequence was exercised. The [source-pinned receipt
 and all-tic hashes](../results/visibility-iterative-dispatch-20261002.json)
 retain all samples, run order, gates and limitations.
+
+### Production traversal regression pass — October 2, 2026
+
+The iterative stack walk is now in `VisibilityCheck.sb.ps1`, with its pending
+node stack owned by the PowerShell checker and grown to the loaded map's node
+count when required. Near-side-first order, subsector visitation and line tests
+are preserved. The integrated source matches the trial at every tic of the
+420-command E3M6 state/current-render timeline; the retained recursive reference
+also passes both original checkpoint endpoints. The production build passes all
+36 map load/idle/raster smoke cases, 69 campaign transitions, 97 boss checks,
+27 movement gates, 9 game actions, menu and save/load coverage, 50,200 sight
+bound cases, 50,000 intercept plus 50,121 division parity cases, and 27 audio
+mixer checks. Classic, Matrix and AnsiArt each match 320,000 serial pixels
+across five E1M1 views through sixteen actual process strips. The [integration
+receipt](../results/visibility-iterative-integration-20261002.json) retains the
+full production timeline and source/report pins. The measured p99 gate still
+fails, and no complete human route, current-source live effect recording,
+acoustic test or clean native pacing result follows from this regression pass.

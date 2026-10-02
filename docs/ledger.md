@@ -6031,3 +6031,16 @@ simulation-only evidence for integration testing, not a native pacing claim.
 [All-tic/timing receipt](../results/visibility-iterative-dispatch-20261002.json).
 The test harness and this evidence commit reach26 after Preview.5. Trial the
 same walk in production PowerShell, then rerun broad state and rendering tests.
+
+Production commit `c3d0d0c` replaces recursive BSP calls with the tested
+PowerShell near-first stack walk. Its 420-tic current-render/state hashes match
+the committed trial at every tic; the recursive reference also retains its two
+checkpoint matches. All 36 maps pass 35 idle tics and two serial frames each;
+campaign, boss, movement, actions, save/load, 50,200 visibility bounds, 50,000
+intercepts, 50,121 division cases and 27 offline audio mixer checks pass. Classic,
+Matrix and AnsiArt each retain five-view/320,000-pixel parity through 16 actual
+worker strips. [Integration evidence](../results/visibility-iterative-integration-20261002.json).
+No new live effect recording or completed human route is claimed, and native
+p99 remains open. This test/documentation commit reaches28 after Preview.5;
+resume the isolated three-style pacing and one-session Episode 1 route when the
+exclusive display resource is available. Cut a release at35 commits.

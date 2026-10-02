@@ -12,7 +12,7 @@ A normal completion is enough; 100% kills, items, and secrets are not required. 
 
 ## Build and launch
 
-The current local playtest candidate uses the repository at source commit `5682bc4` (PowerShell state-action dispatch optimization), after the public Preview.5 package. It retains the released features and adds a direct PowerShell route for all 52 vanilla state actions. All 36 maps pass load/idle/serial-render smoke; Classic, Matrix and color art retain exact internal serial/worker parity in five tested views. These do not complete maps or establish original-executable fidelity. The reproducible public fallback remains [`pwshDoom-0.1.0-preview.5.zip`](release-preview5.md); its [package validation](../results/preview5-package-validation-20261002.json) and [publication receipt](../results/preview5-publication-20261002.json) remain available.
+The current local playtest candidate uses repository source commit `c3d0d0c` (PowerShell state-action dispatch and iterative visibility traversal), after the public Preview.5 package. It retains the released features and routes all 52 vanilla state actions directly in PowerShell. The near-side-first BSP walk matches the recursive reference over 420 tics; all 36 maps pass load/idle/serial-render smoke. Classic, Matrix and AnsiArt retain exact internal serial/worker parity in five tested views. These do not complete maps or establish original-executable fidelity. See the [production traversal receipt](../results/visibility-iterative-integration-20261002.json). The reproducible public fallback remains [`pwshDoom-0.1.0-preview.5.zip`](release-preview5.md); its [package validation](../results/preview5-package-validation-20261002.json) and [publication receipt](../results/preview5-publication-20261002.json) remain available.
 
 Use 64-bit PowerShell 7.6.x and Windows Terminal. The required user-owned Ultimate Doom IWAD has SHA-256 `6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F`. WADs, soundfonts, prepared music, media, tools and the research PDF are excluded. The local eleven-track Episode 1 catalog covers this route; omit `-MusicCatalog` for effects-only play. Audio startup rechecks payloads and IWAD score identity.
 
@@ -23,16 +23,16 @@ $root = 'C:\projects\pwshDoom'
 $wad = 'C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\base\DOOM.WAD'
 $local = 'C:\projects\pwshDoom\local'
 $catalog = Join-Path $local 'music-prepared-episode1.json'
-$record = Join-Path $local 'episode1-human-input-dispatch-candidate.json'
-$report = Join-Path $local 'episode1-human-session-dispatch-candidate.json'
-$saves = Join-Path $local 'episode1-human-saves-dispatch-candidate'
-$settings = Join-Path $local 'episode1-human-settings-dispatch-candidate.json'
+$record = Join-Path $local 'episode1-human-input-visibility-candidate.json'
+$report = Join-Path $local 'episode1-human-session-visibility-candidate.json'
+$saves = Join-Path $local 'episode1-human-saves-visibility-candidate'
+$settings = Join-Path $local 'episode1-human-settings-visibility-candidate.json'
 pwsh -NoProfile -File (Join-Path $root 'Start-Doom.ps1') -Wad $wad -Workers 16 -Episode 1 -Map 1 -Skill 3 -Style Classic -Sound -MusicCatalog $catalog -RecordInput $record -Report $report -SaveRoot $saves -SettingsPath $settings -Maximized -FontSize 5
 ~~~
 
 Allow up to 60 seconds for startup. Keep the 16 renderer workers and fit at least 320 columns by 100 rows; maximized with a 5-point font is the tested Classic setting. If the viewport is short, enlarge the window or press Ctrl+- to reduce the font. Blank space around the centered image is expected. Keep generated inputs, reports, saves and settings under the local directory. The launch above uses default Strips output; optional AsyncBatch is experimental and does not close the performance gates.
 
-R19 retains fifty focused notice checks and all-style live fixtures, each consuming 350 commands and eleven checkpoints. Later all-style reload/fault tests preserve sixteen workers and independent image comparisons. Final R20-runtime Classic routes consume all 1747 commands, return all submitted audio and have no producer-backpressure waits. They still miss the frozen pacing gates; packet age excludes the device/acoustic tail. The current dispatch candidate adds exact 421-boundary replay/render parity and all-style worker comparisons, but has no human route or clean native pacing result yet. See [notice evidence](player-notices.md), [audio recovery](audio.md), [performance evidence](performance.md) and the [dispatch measurements](../results/mobj-action-dispatch-20261002.json). The complete route and acoustic/physical-input review remain required.
+R19 retains fifty focused notice checks and all-style live fixtures, each consuming 350 commands and eleven checkpoints. Later all-style reload/fault tests preserve sixteen workers and independent image comparisons. Final R20-runtime Classic routes consume all 1747 commands, return all submitted audio and have no producer-backpressure waits. They still miss the frozen pacing gates; packet age excludes the device/acoustic tail. The current candidate adds exact 421-boundary dispatch replay/render parity, a 420-tic state/render timeline for visibility traversal and all-style worker comparisons, but has no human route or clean native pacing result yet. See [notice evidence](player-notices.md), [audio recovery](audio.md), [performance evidence](performance.md), the [dispatch measurements](../results/mobj-action-dispatch-20261002.json) and the [traversal trial](../results/visibility-iterative-dispatch-20261002.json). The complete route and acoustic/physical-input review remain required.
 
 ## Controls
 
