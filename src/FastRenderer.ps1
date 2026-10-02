@@ -203,6 +203,19 @@ function Get-FastWallUParameters {
     return ,([long[]]@($perp,$offset,$center))
 }
 
+function Get-FastWallScaleData {
+    param([int]$PerpendicularDistance,[uint32]$CenterAngle,[uint32]$ColumnAngle,[int[]]$FineSine)
+    [uint32]$numeratorAngle=([long]$CenterAngle+$ColumnAngle) -band 0xffffffffL
+    [uint32]$denominatorAngle=(0x40000000L+[long]$ColumnAngle) -band 0xffffffffL
+    [int]$numerator=160*$FineSine[$numeratorAngle -shr 19]
+    [long]$denominatorWrapped=((([long]$PerpendicularDistance*$FineSine[$denominatorAngle -shr 19]) -shr 16) -band 0xffffffffL)
+    if($denominatorWrapped -ge 0x80000000L){$denominatorWrapped-=0x100000000L}
+    [int]$denominator=$denominatorWrapped
+    if($denominator -gt ($numerator -shr 16)){$scale=Get-FastFixedDivData $numerator $denominator}
+    else{$scale=4194304}
+    return [Math]::Clamp([int]$scale,256,4194304)
+}
+
 function Update-FastRenderSectorData {
     param($Context,[object[]]$Sectors)
     if(-not $Context.ContainsKey('PlaneFlatData') -or $null -eq $Context.PlaneFlatData) {
@@ -485,11 +498,16 @@ function Invoke-FastRender {
             for([int]$x=$x0;$x -lt $x1;$x++) {
                 [int]$clipT=$topClip[$x];[int]$clipB=$bottomClip[$x];if($clipT -gt $clipB){continue}
                 if($wallAnglesReady -and -not $wallScaleReady){
-                    [double]$f0=($screenScaleX0-$sx1)/($sx2-$sx1);[double]$d0=1/($iz1+($iz2-$iz1)*$f0)
-                    [int]$wallScaleStart=[Math]::Clamp([int][Math]::Truncate(10485760.0/$d0),256,4194304)
+                    if(-not $wallUReady){
+                        [int]$wallAXData=[Math]::Truncate($segAX*65536.0);[int]$wallAYData=[Math]::Truncate($segAY*65536.0)
+                        [int]$wallSegOffset=[Math]::Truncate($Context.SegmentGeometry[$geometryOffset+5]*65536.0)
+                        [int]$wallSideOffset=[Math]::Truncate($side.TextureOffset*65536.0)
+                        [long[]]$wallParameters=Get-FastWallUParameters $viewXData $viewYData $wallAXData $wallAYData $wallSegmentAngles[$segIndex] $viewAngleData $wallSegOffset $wallSideOffset $Context.TanToAngleTable $fineSine
+                        $wallPerpData=$wallParameters[0];$wallOffsetData=$wallParameters[1];$wallCenterAngleData=$wallParameters[2];$wallUReady=$true
+                    }
+                    [int]$wallScaleStart=Get-FastWallScaleData $wallPerpData $wallCenterAngleData $Context.PlaneColumnAngles[$screenScaleX0] $fineSine
                     if($screenScaleX1 -gt $screenScaleX0){
-                        [double]$f1=($screenScaleX1-$sx1)/($sx2-$sx1);[double]$d1=1/($iz1+($iz2-$iz1)*$f1)
-                        [int]$wallScaleEnd=[Math]::Clamp([int][Math]::Truncate(10485760.0/$d1),256,4194304)
+                        [int]$wallScaleEnd=Get-FastWallScaleData $wallPerpData $wallCenterAngleData $Context.PlaneColumnAngles[$screenScaleX1] $fineSine
                         $wallScaleStep=[int][Math]::Truncate(($wallScaleEnd-$wallScaleStart)/[double]($screenScaleX1-$screenScaleX0))
                     }
                     $wallScaleReady=$true

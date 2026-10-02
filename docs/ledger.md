@@ -6343,3 +6343,13 @@ claimed.
 Save creation validates its in-memory graph before encoding and no longer
 re-parses its own temporary file. The E3M6 menu save/load flow passed; its
 single before/after timing pair is too noisy for a performance claim.
+
+### Fixed-point wall-scale endpoints — October 2, 2026
+
+The renderer now derives wall-scale endpoints from Doom's fixed-point sine and
+division tables before its existing column stepping. Six fixed E1M2/E3M6 views
+improve by 21–693 differing scene pixels; HUDs stay exact. Sixteen-worker
+output matches serial across five E3M6 views in Classic, Matrix and AnsiArt.
+One serial E3M6 ABBA sample set measures p50 +1.5% and p95 +6.1%; no speed gain
+is claimed. The adapted reference and fixed views do not qualify original-image
+or moving-world parity.
