@@ -1076,3 +1076,26 @@ unchanged. Horizontal U is reconstructed from the pinned formula, rather than
 independently observed column calls; the reference itself remains locally
 adapted. This selects the next bounded PowerShell sampling trial and adds no
 production change, pacing, original-executable or campaign qualification.
+
+### Quantized horizontal wall sampling (2026-10-02)
+
+The playable renderer now preserves original WAD segment angles and computes
+wall texture columns from the pinned reference's distance, offset and fine
+tangent formula. Numeric PowerShell functions use transported tables in workers;
+the first class-based integration failed there because engine classes are absent.
+Its failed log and source remain. Authored contexts without angle metadata retain
+their analytic sampling. [Implementation and evidence](../results/wall-horizontal-sampling-20261002.json).
+
+All 20,038 returned segment-parameter cases match the class-based formula;
+11 extreme cases retain the same underlying overflow failure. A separate byte
+oracle checks 20,023 signed texture-column wraps. The traced frozen view matches
+656 reconstructed reference columns and 320 camera angles. Production matches
+the class-based trial in 960,000 pixels and depth entries, passes 20 masked-order
+checks and preserves seven million non-power-of-two vertical samples.
+
+All ten E1M2/E3M6 static views improve against unchanged reference pixels.
+The frozen ceiling sweep changes from 12/7/410/4,167 disagreements to
+12/7/344/2,270, with exact HUD. Actual all-style workers match 960,000 pixels
+and 240 encoded strips, including palette/fuzz; all 36 maps pass idle smoke.
+Analytic scale, edge coverage, lighting and full moving/original-image fidelity
+remain unqualified. These tests do not establish campaign navigation or completion.

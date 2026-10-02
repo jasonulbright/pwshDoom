@@ -34,7 +34,7 @@ function Get-FastPlaneTables {
         $dy=[Fixed]::Abs([Fixed]::FromInt($y-84)+([Fixed]::One/2))
         $rowSlope[$y]=([Fixed]::FromInt(160)/$dy).Data
     }
-    $script:FastPlaneTables=@{ColumnAngles=$columnAngle;DistanceScales=$distanceScale;RowSlopes=$rowSlope;FineSine=[int[]][Trig]::fineSine;TanToAngle=[uint32[]][Trig]::tanToAngleTable}
+    $script:FastPlaneTables=@{ColumnAngles=$columnAngle;DistanceScales=$distanceScale;RowSlopes=$rowSlope;FineSine=[int[]][Trig]::fineSine;FineTangent=[int[]][Trig]::fineTangent;TanToAngle=[uint32[]][Trig]::tanToAngleTable}
     return $script:FastPlaneTables
 }
 
@@ -77,6 +77,7 @@ function New-FastRenderContext {
         Stack=[int[]]::new($map.Nodes.Length*2+4);SkyColumns=[int[]]::new(320);RaySin=[int[]]::new(320);RayCos=[int[]]::new(320);
         SpriteClipWalls=[object[]]::new(320);SpriteClipCounts=[int[]]::new(320);ActorClipTop=[int[]]::new(320);ActorClipBottom=[int[]]::new(320);
         MaskedColumns=[Collections.Generic.List[hashtable]]::new();SegmentGeometry=[double[]]::new($map.Segs.Length*6);
+        SegmentAngles=[uint32[]]::new($map.Segs.Length);
         SegmentMetadata=[int[]]::new($map.Segs.Length*4);NodeGeometry=[double[]]::new($map.Nodes.Length*12);
         NodeChildren=[int[]]::new($map.Nodes.Length*2);Subsectors=$map.Subsectors;
         Flats=$Content.Flats.Flats;PlaneFlatData=$planeFlatData;
@@ -91,6 +92,7 @@ function New-FastRenderContext {
     for($i=0;$i -lt $map.Sides.Length;$i++){$sideIndex[$map.Sides[$i]]=$i}
     for($i=0;$i -lt $map.Segs.Length;$i++) {
         $seg=$map.Segs[$i];$ax=$seg.Vertex1.X.Data/65536.0;$ay=$seg.Vertex1.Y.Data/65536.0
+        $ctx.SegmentAngles[$i]=$seg.Angle.Data
         $bx=$seg.Vertex2.X.Data/65536.0;$by=$seg.Vertex2.Y.Data/65536.0
         [int]$geometryOffset=$i*6;[int]$metadataOffset=$i*4
         $ctx.SegmentGeometry[$geometryOffset]=$ax;$ctx.SegmentGeometry[$geometryOffset+1]=$ay
@@ -148,8 +150,57 @@ function New-FastRenderContext {
         $ctx.RenderAssetCache=if($null -ne $Resources -and $Resources.ContainsKey('RenderAssetCache')){$Resources.RenderAssetCache}else{@{}}
     }
     $planeTables=Get-FastPlaneTables
-    $ctx.PlaneColumnAngles=$planeTables.ColumnAngles;$ctx.PlaneDistanceScales=$planeTables.DistanceScales;$ctx.PlaneRowSlopes=$planeTables.RowSlopes;$ctx.PlaneFineSine=$planeTables.FineSine;$ctx.TanToAngleTable=$planeTables.TanToAngle
+    $ctx.PlaneColumnAngles=$planeTables.ColumnAngles;$ctx.PlaneDistanceScales=$planeTables.DistanceScales;$ctx.PlaneRowSlopes=$planeTables.RowSlopes;$ctx.PlaneFineSine=$planeTables.FineSine;$ctx.TanToAngleTable=$planeTables.TanToAngle;$ctx.WallFineTangent=$planeTables.FineTangent
     return $ctx
+}
+
+function Get-FastFixedDivData {
+    param([int]$Numerator,[int]$Denominator)
+    # Preserve Fixed's saturation, truncation and int32-minimum error behavior.
+    [int]$absoluteNumerator=[Math]::Abs([long]$Numerator)
+    [int]$absoluteDenominator=[Math]::Abs([long]$Denominator)
+    if(($absoluteNumerator -shr 14) -ge $absoluteDenominator){
+        if(($Numerator -bxor $Denominator) -lt 0){return [int]::MinValue}
+        return [int]::MaxValue
+    }
+    return [int][Math]::Truncate([double]$Numerator/$Denominator*65536.0)
+}
+
+function Get-FastPointDistData {
+    param([int]$FromX,[int]$FromY,[int]$ToX,[int]$ToY,[uint32[]]$TanToAngle,[int[]]$FineSine)
+    [long]$dx=([long]$ToX-$FromX) -band 0xffffffffL
+    [long]$dy=([long]$ToY-$FromY) -band 0xffffffffL
+    if($dx -ge 0x80000000L){$dx-=0x100000000L};if($dy -ge 0x80000000L){$dy-=0x100000000L}
+    # Fixed.Abs wraps negation at int.MinValue rather than widening its result.
+    if($dx -lt 0 -and $dx -ne -2147483648L){$dx=-$dx}
+    if($dy -lt 0 -and $dy -ne -2147483648L){$dy=-$dy}
+    if($dy -gt $dx){$swap=$dx;$dx=$dy;$dy=$swap}
+    [int]$fraction=0;if($dx -ne 0){$fraction=Get-FastFixedDivData $dy $dx}
+    [uint32]$fractionUnsigned=$fraction
+    [uint32]$angleData=([long]$TanToAngle[$fractionUnsigned -shr 5]+0x40000000L) -band 0xffffffffL
+    return Get-FastFixedDivData $dx $FineSine[$angleData -shr 19]
+}
+
+function Get-FastWallUParameters {
+    param([int]$ViewX,[int]$ViewY,[int]$VertexX,[int]$VertexY,[uint32]$SegmentAngle,
+        [uint32]$ViewAngle,[int]$SegmentOffset,[int]$SideOffset,[uint32[]]$TanToAngle,[int[]]$FineSine)
+    # Numeric equivalent of the pinned GPL ThreeDRenderer wall-U formula.
+    # Worker processes consume transported tables and need no engine classes.
+    [uint32]$normal=([long]$SegmentAngle+0x40000000L) -band 0xffffffffL
+    [uint32]$angle1=Get-FastPointAngleData $ViewX $ViewY $VertexX $VertexY $TanToAngle
+    [uint32]$difference=([long]$normal-$angle1) -band 0xffffffffL
+    [long]$absoluteAngle=$difference
+    if($absoluteAngle -gt 0x80000000L){$absoluteAngle=0x100000000L-$absoluteAngle}
+    if($absoluteAngle -gt 0x40000000L){$absoluteAngle=0x40000000L}
+    [int]$hyp=Get-FastPointDistData $ViewX $ViewY $VertexX $VertexY $TanToAngle $FineSine
+    [long]$perp=(([long]$hyp*$FineSine[(0x40000000L-$absoluteAngle) -shr 19]) -shr 16) -band 0xffffffffL
+    if($perp -ge 0x80000000L){$perp-=0x100000000L}
+    [long]$offset=([long]$hyp*$FineSine[$absoluteAngle -shr 19]) -shr 16
+    if($difference -lt 0x80000000L){$offset=-$offset}
+    $offset=($offset+$SegmentOffset+[long]$SideOffset) -band 0xffffffffL
+    if($offset -ge 0x80000000L){$offset-=0x100000000L}
+    [uint32]$center=(0x40000000L+[long]$ViewAngle-$normal) -band 0xffffffffL
+    return ,([long[]]@($perp,$offset,$center))
 }
 
 function Update-FastRenderSectorData {
@@ -324,6 +375,11 @@ function Invoke-FastRender {
         if(($skyW -band ($skyW-1)) -eq 0){$skyColumns[$x]=$skyAngle -band ($skyW-1)}
         else{$skyColumns[$x]=$skyAngle%$skyW}
     }
+    [uint32[]]$wallSegmentAngles=[uint32[]]::new(0)
+    if($Context.ContainsKey('SegmentAngles')){$wallSegmentAngles=$Context.SegmentAngles}
+    [bool]$wallAnglesReady=$wallSegmentAngles.Length -eq ($Context.SegmentMetadata.Length/4)
+    [int[]]$wallFineTangent=$null
+    if($wallAnglesReady){$wallFineTangent=$Context.WallFineTangent}
     [double]$co=[Math]::Cos($angle);[double]$si=[Math]::Sin($angle)
     [double]$ls=($FirstColumn-161)/160.0;[double]$rs=($EndColumn-159)/160.0
     [double]$lx=$si-$ls*$co;[double]$ly=-$co-$ls*$si;[double]$rx=$rs*$co-$si;[double]$ry=$rs*$si+$co
@@ -408,6 +464,7 @@ function Invoke-FastRender {
             [int]$baseLight=[Math]::Clamp(($front.LightLevel -shr 4)+$player.ExtraLight+$contrast,0,15)
             [int[]]$wallLightTable=$Context.Lighting.Scale[$baseLight]
             [double]$iz1=1/$z1;[double]$iz2=1/$z2;[double]$uz1=$u1/$z1;[double]$uz2=$u2/$z2
+            [bool]$wallUReady=$false;[int]$wallPerpData=0;[int]$wallOffsetData=0;[uint32]$wallCenterAngleData=0
             [double[]]$wallBandOrigins=$null;[int]$wallOriginBits=0
             [bool]$constantWallScale=$iz1 -eq $iz2;[double]$segmentTexelStep=0
             for([int]$x=$x0;$x -lt $x1;$x++) {
@@ -415,7 +472,8 @@ function Invoke-FastRender {
                 # Match Doom's xToAngle lookup: wall rays are defined at integer
                 # screen columns, not at the half-pixel used for edge coverage.
                 [double]$f=($x-$sx1)/($sx2-$sx1);[double]$distance=1/($iz1+($iz2-$iz1)*$f)
-                [double]$texU=($uz1+($uz2-$uz1)*$f)*$distance+$side.TextureOffset
+                [double]$texU=0
+                if(-not $wallAnglesReady){$texU=($uz1+($uz2-$uz1)*$f)*$distance+$side.TextureOffset}
                 [double]$ray=($x-160)/160;[double]$rayX=$co+$si*$ray;[double]$rayY=$si-$co*$ray
                 [int]$wallT=[Math]::Ceiling(84-160*($ch-$cz)/$distance-0.5)
                 [int]$wallB=[Math]::Floor(84-160*($fh-$cz)/$distance-0.5)
@@ -442,6 +500,7 @@ function Invoke-FastRender {
                 if($player.FixedColorMap -gt 0){$wallLight=$player.FixedColorMap}
                 [byte[]]$wallColors=$Context.Colors[$wallLight]
                 [bool]$wallStepReady=$false;[double]$wallTexelStep=0
+                [bool]$columnUReady=$false;[int]$wallTextureColumn=0
                 for([int]$band=0;$band -lt 3;$band++) {
                     [int]$tex=0;[double]$textureTop=$ch
                     if($solid) {
@@ -460,9 +519,30 @@ function Invoke-FastRender {
                     }
                     if($tex -le 0){continue}
                     $texture=$Context.Textures[$tex];[int]$tw=$texture.Width;[int]$th=$texture.Height;[int[]]$td=$texture.Data
-                    [int]$tu=([int][Math]::Floor($texU)%$tw+$tw)%$tw
                     [int]$y0=[Math]::Max($clipT,$wy0);[int]$y1=[Math]::Min($clipB,$wy1)
                     if($y0 -gt $y1){continue}
+                    [int]$tu=0
+                    if($wallAnglesReady){
+                        if(-not $wallUReady){
+                            # GPL reference wall-U math, outside the pixel loop.
+                            [int]$wallAXData=[Math]::Truncate($segAX*65536.0);[int]$wallAYData=[Math]::Truncate($segAY*65536.0)
+                            [int]$wallSegOffset=[Math]::Truncate($Context.SegmentGeometry[$geometryOffset+5]*65536.0)
+                            [int]$wallSideOffset=[Math]::Truncate($side.TextureOffset*65536.0)
+                            [long[]]$wallParameters=Get-FastWallUParameters $viewXData $viewYData $wallAXData $wallAYData $wallSegmentAngles[$segIndex] $viewAngleData $wallSegOffset $wallSideOffset $Context.TanToAngleTable $fineSine
+                            $wallPerpData=$wallParameters[0];$wallOffsetData=$wallParameters[1];$wallCenterAngleData=$wallParameters[2]
+                            $wallUReady=$true
+                        }
+                        if(-not $columnUReady){
+                            [uint32]$wallTanAngleData=([long]$wallCenterAngleData+$Context.PlaneColumnAngles[$x]) -band 0x7fffffffL
+                            [int]$wallTanData=$wallFineTangent[$wallTanAngleData -shr 19]
+                            [long]$wallUData=[long]$wallOffsetData-(([long]$wallTanData*$wallPerpData) -shr 16)
+                            # Signed high16 bits of the wrapped 32-bit fixed result.
+                            $wallTextureColumn=($wallUData -shr 16) -band 65535
+                            if($wallTextureColumn -ge 32768){$wallTextureColumn-=65536}
+                            $columnUReady=$true
+                        }
+                        $tu=($wallTextureColumn%$tw+$tw)%$tw
+                    }else{$tu=([int][Math]::Floor($texU)%$tw+$tw)%$tw}
                     # Only prepare sampling for a visible textured band. Empty
                     # portals and clipped walls need neither anchors nor scale.
                     if(-not $wallStepReady){

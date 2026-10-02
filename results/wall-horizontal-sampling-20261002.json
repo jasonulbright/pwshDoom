@@ -1,0 +1,814 @@
+{
+  "FinishedUtc": "2026-10-02T09:34:51.411534+00:00",
+  "BaseCommit": "b029b2dc7f73e463a3ce661b085ab73b7ee3dac2",
+  "ProductionRendererSha256": "9FCAF0CC8933D4BF562D32CFB172265D92CBEC197C633C0C314ABE1CA0D36E00",
+  "OriginalSegmentAngles": "WAD uint32 angles preserved in parallel immutable array and additive v7 asset metadata; reader validates count. Authored/older contexts without angle metadata retain analytic fallback. No snapshot protocol or binary asset-body change.",
+  "Arithmetic": "Numeric PowerShell functions checked against Geometry/Fixed/Angle/Trig reproduce pinned GPL reference normal/endpoint distance, signed offset and fine-tangent wall coordinate. Compute once per visible segment and textured column, outside pixels. Signed high16 of wrapped32 result independently checked against byte decoding.",
+  "NumericParameterCases": 20049,
+  "NumericReturnedCases": 20038,
+  "MatchedExtremeOverflowErrors": 11,
+  "IndependentWrapSamples": 20023,
+  "DerivedReferenceColumnSamples": 656,
+  "CameraColumnAnglesCompared": 320,
+  "TrialProductionPixelAndDepthSamplesEach": 960000,
+  "Vertical96Samples": 7029760,
+  "MaskedOrderChecks": 20,
+  "AssetChecks": 23,
+  "IdleMaps": 36,
+  "IdleFrames": 72,
+  "Workers": [
+    {
+      "Style": "Classic",
+      "Checks": 5,
+      "ComparedPixels": 320000,
+      "EncodedStripByteChecks": 80,
+      "Raw": {
+        "Path": "local/wall-u-Classic-partitions-r2.json",
+        "Sha256": "FE21BBA20D8D24BF7521A1B5E06E6D6348F176B9578C630A14E0E59192D2D5A4"
+      }
+    },
+    {
+      "Style": "Matrix",
+      "Checks": 5,
+      "ComparedPixels": 320000,
+      "EncodedStripByteChecks": 80,
+      "Raw": {
+        "Path": "local/wall-u-Matrix-partitions-r2.json",
+        "Sha256": "5140BF73B2C5D6085C231B488495FB17290847FE74CF5BEF995E0FC2018D5CEB"
+      }
+    },
+    {
+      "Style": "AnsiArt",
+      "Checks": 5,
+      "ComparedPixels": 320000,
+      "EncodedStripByteChecks": 80,
+      "Raw": {
+        "Path": "local/wall-u-AnsiArt-partitions-r2.json",
+        "Sha256": "3AC4E59BFEBE0069716D912B575A9D8E8E1B15CB057FAD01D6F241E7A4080BBF"
+      }
+    }
+  ],
+  "StaticViews": [
+    {
+      "Map": "E1M2",
+      "Angle": 0,
+      "BaselineMismatch": 5847,
+      "CandidateMismatch": 1907,
+      "ReferencePixelSha256": "9E0BEC0945BB5202DD1ED094E5DC11FEF2F131555EC125DFEAA4370B0A67E675"
+    },
+    {
+      "Map": "E1M2",
+      "Angle": 37,
+      "BaselineMismatch": 3823,
+      "CandidateMismatch": 2518,
+      "ReferencePixelSha256": "4864620351B22DC139B0A56E5E38591E3D46167905BE08FD059779ACE0342B4A"
+    },
+    {
+      "Map": "E1M2",
+      "Angle": 90,
+      "BaselineMismatch": 6301,
+      "CandidateMismatch": 4580,
+      "ReferencePixelSha256": "E4D7B8974498542D118119346C7BB45FBBB9243057AFABA86FFC5A5B57D7E8D7"
+    },
+    {
+      "Map": "E1M2",
+      "Angle": 180,
+      "BaselineMismatch": 4616,
+      "CandidateMismatch": 1719,
+      "ReferencePixelSha256": "FAEA5286152C636CA3DDEF371616DF3BF8CB9842DB1764F51429BE678341FEFB"
+    },
+    {
+      "Map": "E1M2",
+      "Angle": 270,
+      "BaselineMismatch": 5223,
+      "CandidateMismatch": 955,
+      "ReferencePixelSha256": "26A5922BBD9B5317992FE6593B34413E6B1FDF0A1F98A2C2DA83019A520A4BDB"
+    },
+    {
+      "Map": "E3M6",
+      "Angle": 0,
+      "BaselineMismatch": 5049,
+      "CandidateMismatch": 3789,
+      "ReferencePixelSha256": "BE3521F772BD92FEA0758A07EB920FCC457EA1D164DA3533AA359223F6EBDE0B"
+    },
+    {
+      "Map": "E3M6",
+      "Angle": 37,
+      "BaselineMismatch": 4163,
+      "CandidateMismatch": 3499,
+      "ReferencePixelSha256": "33A57BDD216327F379E08A737605CCE2949CD09EEEDD5F250C0C0933B718F8C1"
+    },
+    {
+      "Map": "E3M6",
+      "Angle": 90,
+      "BaselineMismatch": 7408,
+      "CandidateMismatch": 3198,
+      "ReferencePixelSha256": "4DE9F3B49E5C2BFA271D528FC1192B3163B33A5BD32B6E63C3779DBBD9953732"
+    },
+    {
+      "Map": "E3M6",
+      "Angle": 180,
+      "BaselineMismatch": 4493,
+      "CandidateMismatch": 3208,
+      "ReferencePixelSha256": "CE3D7901F39E98BE22D339998B792FABED80D8B11AF9E19E0AD5D2A4AA90A6E1"
+    },
+    {
+      "Map": "E3M6",
+      "Angle": 270,
+      "BaselineMismatch": 4016,
+      "CandidateMismatch": 3397,
+      "ReferencePixelSha256": "DB7AB66BFCE9AAF2B5077867F9B32927BC8BA311F0D19211CAB1A962A983CFD6"
+    }
+  ],
+  "FrozenCeilingHeights": [
+    {
+      "CeilingHeight": 0,
+      "SceneDifferentIndices": 12,
+      "HudDifferentIndices": 0,
+      "SceneMismatchBounds": [
+        281,
+        153,
+        318,
+        163
+      ]
+    },
+    {
+      "CeilingHeight": 6,
+      "SceneDifferentIndices": 7,
+      "HudDifferentIndices": 0,
+      "SceneMismatchBounds": [
+        312,
+        153,
+        318,
+        153
+      ]
+    },
+    {
+      "CeilingHeight": 34,
+      "SceneDifferentIndices": 344,
+      "HudDifferentIndices": 0,
+      "SceneMismatchBounds": [
+        0,
+        153,
+        319,
+        167
+      ]
+    },
+    {
+      "CeilingHeight": 68,
+      "SceneDifferentIndices": 2270,
+      "HudDifferentIndices": 0,
+      "SceneMismatchBounds": [
+        0,
+        0,
+        319,
+        167
+      ]
+    }
+  ],
+  "Costs": [
+    {
+      "Map": "E1M2",
+      "Variant": 1,
+      "Calls": 60,
+      "Summary": {
+        "Candidate": {
+          "Count": 30,
+          "Mean": 65.32734333333335,
+          "Median": 43.70095,
+          "P95": 122.0293,
+          "Max": 157.1585
+        },
+        "Baseline": {
+          "Count": 30,
+          "Mean": 64.73195666666666,
+          "Median": 41.90235,
+          "P95": 111.8187,
+          "Max": 263.1838
+        }
+      },
+      "Cycles": [
+        {
+          "Cycle": 0,
+          "BaselineMeanMs": 85.63276,
+          "CandidateMeanMs": 80.24876,
+          "CandidateMeanChangePercent": -6.287313406691553
+        },
+        {
+          "Cycle": 1,
+          "BaselineMeanMs": 54.16257,
+          "CandidateMeanMs": 58.05006,
+          "CandidateMeanChangePercent": 7.177447451256458
+        },
+        {
+          "Cycle": 2,
+          "BaselineMeanMs": 54.40054,
+          "CandidateMeanMs": 57.68321,
+          "CandidateMeanChangePercent": 6.0342599540372355
+        }
+      ],
+      "Raw": {
+        "Path": "local/wall-u-cost-e1m2-r1.json",
+        "Sha256": "E6101B2FA302F66F7F3253AB98F8C0B5CBB3BE27F92A7196C07A170002257100"
+      }
+    },
+    {
+      "Map": "E3M6",
+      "Variant": 1,
+      "Calls": 60,
+      "Summary": {
+        "Candidate": {
+          "Count": 30,
+          "Mean": 74.43392666666666,
+          "Median": 70.0287,
+          "P95": 93.0941,
+          "Max": 187.3297
+        },
+        "Baseline": {
+          "Count": 30,
+          "Mean": 75.56633666666667,
+          "Median": 68.75395,
+          "P95": 87.3981,
+          "Max": 297.406
+        }
+      },
+      "Cycles": [
+        {
+          "Cycle": 0,
+          "BaselineMeanMs": 99.22071,
+          "CandidateMeanMs": 90.31243,
+          "CandidateMeanChangePercent": -8.978246577755788
+        },
+        {
+          "Cycle": 1,
+          "BaselineMeanMs": 66.04005,
+          "CandidateMeanMs": 68.51451,
+          "CandidateMeanChangePercent": 3.7469081262052395
+        },
+        {
+          "Cycle": 2,
+          "BaselineMeanMs": 61.43825,
+          "CandidateMeanMs": 64.47484,
+          "CandidateMeanChangePercent": 4.942507314254563
+        }
+      ],
+      "Raw": {
+        "Path": "local/wall-u-cost-e3m6-r1.json",
+        "Sha256": "709BD40B543298516FF3E5D89ABC076F93D86F58CAA8DF2AF11C088D03ACFF54"
+      }
+    },
+    {
+      "Map": "E1M2",
+      "Variant": 2,
+      "Calls": 60,
+      "Summary": {
+        "Baseline": {
+          "Count": 30,
+          "Mean": 107.91991999999999,
+          "Median": 91.6871,
+          "P95": 197.4445,
+          "Max": 408.0337
+        },
+        "Candidate": {
+          "Count": 30,
+          "Mean": 110.34245333333334,
+          "Median": 99.4614,
+          "P95": 202.1586,
+          "Max": 312.4861
+        }
+      },
+      "Cycles": [
+        {
+          "Cycle": 0,
+          "BaselineMeanMs": 134.10402,
+          "CandidateMeanMs": 127.5245,
+          "CandidateMeanChangePercent": -4.906280960108422
+        },
+        {
+          "Cycle": 1,
+          "BaselineMeanMs": 104.71249,
+          "CandidateMeanMs": 104.40588000000001,
+          "CandidateMeanChangePercent": -0.29281129691404173
+        },
+        {
+          "Cycle": 2,
+          "BaselineMeanMs": 84.94325,
+          "CandidateMeanMs": 99.09698,
+          "CandidateMeanChangePercent": 16.662571775862123
+        }
+      ],
+      "Raw": {
+        "Path": "local/wall-u-final-cost-e1m2-r1.json",
+        "Sha256": "08E48CBD606F9243FD3BE95ACC1FB9E68601281B526A1B196030508011A458F7"
+      }
+    },
+    {
+      "Map": "E3M6",
+      "Variant": 2,
+      "Calls": 60,
+      "Summary": {
+        "Candidate": {
+          "Count": 30,
+          "Mean": 84.11605999999999,
+          "Median": 76.81004999999999,
+          "P95": 117.0768,
+          "Max": 248.4607
+        },
+        "Baseline": {
+          "Count": 30,
+          "Mean": 83.03671666666666,
+          "Median": 75.0655,
+          "P95": 98.0056,
+          "Max": 387.658
+        }
+      },
+      "Cycles": [
+        {
+          "Cycle": 0,
+          "BaselineMeanMs": 113.24531,
+          "CandidateMeanMs": 106.04709,
+          "CandidateMeanChangePercent": -6.3563073826192085
+        },
+        {
+          "Cycle": 1,
+          "BaselineMeanMs": 66.2847,
+          "CandidateMeanMs": 70.57984,
+          "CandidateMeanChangePercent": 6.479836221631841
+        },
+        {
+          "Cycle": 2,
+          "BaselineMeanMs": 69.58014,
+          "CandidateMeanMs": 75.72125,
+          "CandidateMeanChangePercent": 8.825952347896958
+        }
+      ],
+      "Raw": {
+        "Path": "local/wall-u-final-cost-e3m6-r1.json",
+        "Sha256": "E6A84083E0465DFA9AF360A0C694A8DD3B06220F8BB2E18763AE81019C18C4F3"
+      }
+    },
+    {
+      "Map": "E1M2",
+      "Variant": "numeric",
+      "Calls": 60,
+      "Summary": {
+        "Candidate": {
+          "Count": 30,
+          "Mean": 64.69556666666666,
+          "Median": 42.493849999999995,
+          "P95": 119.6439,
+          "Max": 170.8134
+        },
+        "Baseline": {
+          "Count": 30,
+          "Mean": 66.93769666666668,
+          "Median": 43.8214,
+          "P95": 116.4656,
+          "Max": 279.5146
+        }
+      },
+      "Cycles": [
+        {
+          "Cycle": 0,
+          "BaselineMeanMs": 89.91926,
+          "CandidateMeanMs": 82.66152,
+          "CandidateMeanChangePercent": -8.071396495033433
+        },
+        {
+          "Cycle": 1,
+          "BaselineMeanMs": 55.3235,
+          "CandidateMeanMs": 55.42172,
+          "CandidateMeanChangePercent": 0.17753757444847196
+        },
+        {
+          "Cycle": 2,
+          "BaselineMeanMs": 55.57033,
+          "CandidateMeanMs": 56.003460000000004,
+          "CandidateMeanChangePercent": 0.7794267192582804
+        }
+      ],
+      "Raw": {
+        "Path": "local/wall-u-numeric-cost-e1m2-r1.json",
+        "Sha256": "D268BD25F0369720A31B0125F21CDC7C463A8E5C06D02011A1004614A1AB5B54"
+      }
+    },
+    {
+      "Map": "E3M6",
+      "Variant": "numeric",
+      "Calls": 60,
+      "Summary": {
+        "Baseline": {
+          "Count": 30,
+          "Mean": 74.04699000000001,
+          "Median": 69.8874,
+          "P95": 87.4442,
+          "Max": 250.8174
+        },
+        "Candidate": {
+          "Count": 30,
+          "Mean": 72.55572666666666,
+          "Median": 70.04755,
+          "P95": 87.8924,
+          "Max": 178.2895
+        }
+      },
+      "Cycles": [
+        {
+          "Cycle": 0,
+          "BaselineMeanMs": 95.51698,
+          "CandidateMeanMs": 89.53949,
+          "CandidateMeanChangePercent": -6.258039146547556
+        },
+        {
+          "Cycle": 1,
+          "BaselineMeanMs": 64.09012,
+          "CandidateMeanMs": 65.08837,
+          "CandidateMeanChangePercent": 1.5575723684087217
+        },
+        {
+          "Cycle": 2,
+          "BaselineMeanMs": 62.53387,
+          "CandidateMeanMs": 63.03932,
+          "CandidateMeanChangePercent": 0.8082819758316484
+        }
+      ],
+      "Raw": {
+        "Path": "local/wall-u-numeric-cost-e3m6-r1.json",
+        "Sha256": "AF124B253E936AA53F10182AAFEB6FEAD233A7C32AFBD4785F8D0C5EBE3C1B9D"
+      }
+    }
+  ],
+  "Files": [
+    {
+      "Path": "src/FastRenderer.ps1",
+      "Sha256": "9FCAF0CC8933D4BF562D32CFB172265D92CBEC197C633C0C314ABE1CA0D36E00"
+    },
+    {
+      "Path": "src/RenderAssets.ps1",
+      "Sha256": "CBEE2F476DE24862FA11231B09BBFF041884E6DBC0BFFF923BE1BF4A3536F76F"
+    },
+    {
+      "Path": "scripts/Test-RenderAssetResourceReuse.ps1",
+      "Sha256": "D3A2443BB4EAB6F574C05EC8A8037ED61CBCE8E37C85299B27839091CB196DF9"
+    },
+    {
+      "Path": "scripts/Test-WallTextureColumnWrap.ps1",
+      "Sha256": "CB227554C93AC309512BFB9C54B826B3F49FE95CE737FC5B8A6E912B5DF37035"
+    },
+    {
+      "Path": "scripts/Test-WallVerticalSampling.ps1",
+      "Sha256": "0B8E47DE99E70804EB15EED46EA614D8262784F5DEAA2642D73E959E1B92E224"
+    },
+    {
+      "Path": "scripts/Test-MaskedWallOrder.ps1",
+      "Sha256": "FD12673BF57DD8DC4D4D6786102BB6FF0E77E5E1380B90DC5B36E7076BAAC291"
+    },
+    {
+      "Path": "scripts/Compare-MovingSectorHeightSweep.ps1",
+      "Sha256": "AD48835C7D6FCF337EFCFE7D2D00F2CB505BC87115BAD24A07887850B8D9D186"
+    },
+    {
+      "Path": "scripts/Measure-RendererPair.ps1",
+      "Sha256": "0636194DC759C13A6F2EBFAF633D3206A70B7BE13449E05F3E2DF3ABA985794F"
+    },
+    {
+      "Path": "scripts/Test-CampaignSmoke.ps1",
+      "Sha256": "BA08843A9F1DE4FF8AFCA20B0AB070031F74FD2C3F0B0D5F1E4BAB6F62027FC6"
+    },
+    {
+      "Path": "scripts/Test-RenderPartitions.ps1",
+      "Sha256": "3FB1949F60B76257130A4704A8AB1FE0E7EFACB625F488BFC592625AEABCAF59"
+    },
+    {
+      "Path": "local/audit-wall-u-production-r1.py",
+      "Sha256": "CC0205EBEC731346732094AE0EDD19A38A08699D2FC664242365D6EB24B4F5D5"
+    },
+    {
+      "Path": "local/adopt-wall-u-r1.py",
+      "Sha256": "B39859F7BD8AA66B1D66F15D64B59A08DDA2CA85FEA98C56652444A3DC4FDBF0"
+    },
+    {
+      "Path": "local/test-wall-u-production-r1.ps1",
+      "Sha256": "702726412917CB2DD65D70CD9D861B3DD10C98EED0196CFC7FED41865F48037D"
+    },
+    {
+      "Path": "local/Test-WallVerticalEquivalence-r1.ps1",
+      "Sha256": "B45CDCD6DFDC61BD3E9F9681DBC27F4E7371AE2053B5082374E7E4723063A19F"
+    },
+    {
+      "Path": "local/wall-u-baseline-src-r1/FastRenderer.ps1",
+      "Sha256": "5F50BD8A78B30B863A0E294C600735F13A6539B383F1F7C2B0FFF967B7462CF2"
+    },
+    {
+      "Path": "local/wall-u-production-wrap-r2.json",
+      "Sha256": "5951F3BA75502788A60D2237F3017C1B821FABC477DFFFB1A13E927B77A6401D"
+    },
+    {
+      "Path": "local/wall-u-production-wrap-r2.log",
+      "Sha256": "D9329887161C546BBB09D40A7ED64EBDA82DEC4AAB90736B9F700ED1A5C89D37"
+    },
+    {
+      "Path": "local/wall-u-production-order-r2.json",
+      "Sha256": "61C2689267C9C30DAB25D7C46F6FF5C7935F7116CCD8156914ABE6DF0732FCA9"
+    },
+    {
+      "Path": "local/wall-u-production-order-r2.log",
+      "Sha256": "2670ED06EC7E9502C571FFC8480D3CCBE726461EB7AF6672C247AB072169C51D"
+    },
+    {
+      "Path": "local/wall-u-production-equivalence-r2.json",
+      "Sha256": "2765BED5BA18D3CA8D1E108CF5B32CF7539ED00057172131BAD97EEB5B129EAB"
+    },
+    {
+      "Path": "local/wall-u-production-equivalence-r2.log",
+      "Sha256": "11DEA9D69D25A60A02F1E0D127B5A7DF7D520FED85B4CAC58222D77D37CF62C7"
+    },
+    {
+      "Path": "local/wall-u-production-vertical96-r2.json",
+      "Sha256": "245D79E137EB0EF0DB80121B0E38EF7186DBDF415ECF5F5071E33701973173EA"
+    },
+    {
+      "Path": "local/wall-u-production-vertical96-r2.log",
+      "Sha256": "D3063D424A731FB3A6CBC1CB9B2AF433ED307ED02919FFE314FFAFDA3D670AC2"
+    },
+    {
+      "Path": "local/wall-u-production-assets-r2.json",
+      "Sha256": "830B7A98713D4F82F2FFD5904BC231E372B70009B644766554B2EE1A9719F956"
+    },
+    {
+      "Path": "local/wall-u-production-assets-r2.log",
+      "Sha256": "6B53353750D3E14D819048CD672117796084934FFBECFA2A772C3EAC0097A5BA"
+    },
+    {
+      "Path": "local/wall-u-production-campaign-smoke-r2.json",
+      "Sha256": "6164F821895E7F3915ED8E4E4D453091035E6EFDF7C73A06E40D82E4E4EA5BCD"
+    },
+    {
+      "Path": "local/wall-u-production-campaign-smoke-r2.log",
+      "Sha256": "9FDEC0A06C35EF34E27C9689D78B2BA9392503015712DFAF331297180F1408EB"
+    },
+    {
+      "Path": "local/wall-u-production-moving-r2.json",
+      "Sha256": "D6A04EEC690A029BF7FCC0757371241A84878D3F0D3509D68AFB0AD7AD76E60C"
+    },
+    {
+      "Path": "local/wall-u-production-moving-r2.log",
+      "Sha256": "0C8BF6C76FEFF8B4E6044D6312323DAB1EC82AFFB460C8EC25CD216BDDC3F9C6"
+    },
+    {
+      "Path": "scripts/Test-WallUParameters.ps1",
+      "Sha256": "8EC5F295146A54C851EDAD79828AD94FF2EFE3D0B13518628D4831885BF3CCB1"
+    },
+    {
+      "Path": "local/wall-u-numeric-parameters-r1.json",
+      "Sha256": "66D0CA522D68FB6BA7C004C0A3B088BC6F6ABC25B9862E19E200DAB21D6F3956"
+    },
+    {
+      "Path": "local/wall-u-numeric-parameters-r1.log",
+      "Sha256": "5A45584BB8CE85ECE4BE2C9CB336D38904B9D17EE45717341F3473C64F0AC79A"
+    },
+    {
+      "Path": "local/wall-u-numeric-parameters-r2.json",
+      "Sha256": "BAC079EEDF810F41602AC3C623852BFE5D5A793185064ACF43910861E6A5A532"
+    },
+    {
+      "Path": "local/wall-u-numeric-parameters-r2.log",
+      "Sha256": "0A9CAF665CA2BCEE23599BEFA4E7FB341353E92DBD0F1018C68B45AC888AAC4D"
+    },
+    {
+      "Path": "local/Test-WallUParameters-before-exception-unwrapping-r1.ps1",
+      "Sha256": "EDD66244E93FF71D2CCF7F27ECC0D8A256ABC4AE36F634BC00FA5FC5E31AB2CB"
+    },
+    {
+      "Path": "local/FastRenderer-wall-u-numeric-trial-r1.ps1",
+      "Sha256": "9FCAF0CC8933D4BF562D32CFB172265D92CBEC197C633C0C314ABE1CA0D36E00"
+    },
+    {
+      "Path": "local/test-wall-u-production-r2.ps1",
+      "Sha256": "AFBC59F3CC8F7C1220E379C2EDAD1C918811574B2A05B4E32D6040AC5EECB253"
+    },
+    {
+      "Path": "local/wall-u-production-r1.log",
+      "Sha256": "7F1172B6A16739397E154B106AF2BAC49C946A6C436096D35963CB45E5DB1B93"
+    },
+    {
+      "Path": "local/wall-u-Classic-partitions-r1.log",
+      "Sha256": "1A9CEEE23D0201B308C4A4824F943A4511505A57E5AE1F00FDD381503B5FF68B"
+    },
+    {
+      "Path": "local/wall-u-Classic-partitions-r2.json",
+      "Sha256": "FE21BBA20D8D24BF7521A1B5E06E6D6348F176B9578C630A14E0E59192D2D5A4"
+    },
+    {
+      "Path": "local/wall-u-Classic-partitions-r2.log",
+      "Sha256": "73A89254DE135952A7DCFAA7AA089A6B2E1A5E8041F9F3CFDA2E56203A8A3B19"
+    },
+    {
+      "Path": "local/wall-u-Matrix-partitions-r2.json",
+      "Sha256": "5140BF73B2C5D6085C231B488495FB17290847FE74CF5BEF995E0FC2018D5CEB"
+    },
+    {
+      "Path": "local/wall-u-Matrix-partitions-r2.log",
+      "Sha256": "73A89254DE135952A7DCFAA7AA089A6B2E1A5E8041F9F3CFDA2E56203A8A3B19"
+    },
+    {
+      "Path": "local/wall-u-AnsiArt-partitions-r2.json",
+      "Sha256": "3AC4E59BFEBE0069716D912B575A9D8E8E1B15CB057FAD01D6F241E7A4080BBF"
+    },
+    {
+      "Path": "local/wall-u-AnsiArt-partitions-r2.log",
+      "Sha256": "73A89254DE135952A7DCFAA7AA089A6B2E1A5E8041F9F3CFDA2E56203A8A3B19"
+    },
+    {
+      "Path": "local/wall-u-reference-baseline-e1m2-r1.json",
+      "Sha256": "D1271B695AB7397A2A8D772C09585C16272C14FA1D8CC7DB4D42E8675D2D92A3"
+    },
+    {
+      "Path": "local/wall-u-reference-trial-e1m2-r1.json",
+      "Sha256": "0D931D8C08D9BBBE0DE19B7DF163ECFEEEFABA55E141F537F2108F911D80C1DB"
+    },
+    {
+      "Path": "local/wall-u-reference-baseline-e1m2-r1.log",
+      "Sha256": "6B20D6C7A6F2442A2C0ADFD5E57DCDDF64CCECA2B6C15E4DEA053CAAC4B6A42E"
+    },
+    {
+      "Path": "local/wall-u-reference-trial-e1m2-r1.log",
+      "Sha256": "18FC914B35754D3EAA1DDFA8B1EA5AFB2548CCBBEB58CC1CD4A8B2A6F1C78751"
+    },
+    {
+      "Path": "local/wall-u-reference-baseline-e3m6-r1.json",
+      "Sha256": "848096675B0150EAAF1EDB8E15E76D193130A527492038A1EC2F444EA6CAF4C6"
+    },
+    {
+      "Path": "local/wall-u-reference-trial-e3m6-r1.json",
+      "Sha256": "44A710689538ACE0DE8BD86E7FCA594221887AE9B450308F62B430E3C41B2DEC"
+    },
+    {
+      "Path": "local/wall-u-reference-baseline-e3m6-r1.log",
+      "Sha256": "BB9D86753FBC52D7E68AEC7D354FBC74F3A7F7F498B36418F1ABAF56388F7B4C"
+    },
+    {
+      "Path": "local/wall-u-reference-trial-e3m6-r1.log",
+      "Sha256": "3B659A152627652813E65F30D3846B516F2B041CE9FE184A2237E59963F40BEA"
+    },
+    {
+      "Path": "local/wall-u-cost-e1m2-r1.json",
+      "Sha256": "E6101B2FA302F66F7F3253AB98F8C0B5CBB3BE27F92A7196C07A170002257100"
+    },
+    {
+      "Path": "local/wall-u-cost-e1m2-r1.log",
+      "Sha256": "2F69DA0DB50B18A1D68A4C013506F1757905E5FBF39F4672414AE4926FD0C94A"
+    },
+    {
+      "Path": "local/wall-u-cost-e3m6-r1.json",
+      "Sha256": "709BD40B543298516FF3E5D89ABC076F93D86F58CAA8DF2AF11C088D03ACFF54"
+    },
+    {
+      "Path": "local/wall-u-cost-e3m6-r1.log",
+      "Sha256": "04C0BC7DBA4AE555E9E961154FD2211824C5B213485549EFF5C9F2867BAA6FFC"
+    },
+    {
+      "Path": "local/wall-u-final-cost-e1m2-r1.json",
+      "Sha256": "08E48CBD606F9243FD3BE95ACC1FB9E68601281B526A1B196030508011A458F7"
+    },
+    {
+      "Path": "local/wall-u-final-cost-e1m2-r1.log",
+      "Sha256": "825DBD22D5CF43865421EC9D411B276330474A88C1092A079D0DD5A316F32ED0"
+    },
+    {
+      "Path": "local/wall-u-final-cost-e3m6-r1.json",
+      "Sha256": "E6A84083E0465DFA9AF360A0C694A8DD3B06220F8BB2E18763AE81019C18C4F3"
+    },
+    {
+      "Path": "local/wall-u-final-cost-e3m6-r1.log",
+      "Sha256": "E019DB733E3BAF6A96577E52456999E80BADCA1A12C2250ADDF5DA3298C9CE72"
+    },
+    {
+      "Path": "local/wall-u-numeric-cost-e1m2-r1.json",
+      "Sha256": "D268BD25F0369720A31B0125F21CDC7C463A8E5C06D02011A1004614A1AB5B54"
+    },
+    {
+      "Path": "local/wall-u-numeric-cost-e1m2-r1.log",
+      "Sha256": "E6B6E606ABBE0876C1DAF22A43E23671EF45659FBFFEC415431E4BD71015DE39"
+    },
+    {
+      "Path": "local/wall-u-numeric-cost-e3m6-r1.json",
+      "Sha256": "AF124B253E936AA53F10182AAFEB6FEAD233A7C32AFBD4785F8D0C5EBE3C1B9D"
+    },
+    {
+      "Path": "local/wall-u-numeric-cost-e3m6-r1.log",
+      "Sha256": "D5922230D62368EB62EC9FFC62A15C9D451FAF91145D4BB88E58E165C578E7C0"
+    },
+    {
+      "Path": "local/wall-u-skip-unused-equivalence-r1.json",
+      "Sha256": "6AC2CD2B6AA81D94A564CE8FC9BD5AA62204437B9CEEFF78BAF0F8B2C8A1F17B"
+    },
+    {
+      "Path": "local/wall-u-skip-unused-equivalence-r1.log",
+      "Sha256": "11DEA9D69D25A60A02F1E0D127B5A7DF7D520FED85B4CAC58222D77D37CF62C7"
+    },
+    {
+      "Path": "local/wall-u-trial-wrap-r1.json",
+      "Sha256": "22805D54448F2367CA58D47BD3141875DF3E60898FEECC8D216E5CC1A493E9DF"
+    },
+    {
+      "Path": "local/wall-u-trial-wrap-r1.log",
+      "Sha256": "D9329887161C546BBB09D40A7ED64EBDA82DEC4AAB90736B9F700ED1A5C89D37"
+    },
+    {
+      "Path": "local/wall-u-trial-wrap-r2.json",
+      "Sha256": "724C93D3636B596DEFDC369B2A110159CF209365F9472170355A533BADD2155A"
+    },
+    {
+      "Path": "local/wall-u-trial-wrap-r2.log",
+      "Sha256": "D9329887161C546BBB09D40A7ED64EBDA82DEC4AAB90736B9F700ED1A5C89D37"
+    },
+    {
+      "Path": "local/wall-u-column-reference-r1.json",
+      "Sha256": "FD46CDA6DDBD6F3BB0DC7A238BA8F1C1E3CE5A71E65E78A2878703269FD5AFEE"
+    },
+    {
+      "Path": "local/wall-u-column-reference-r1.log",
+      "Sha256": "8E365D9B151D9207088A1A50C543EA1C55B658F6DE33A5C8DFFCCC45248A2FE8"
+    },
+    {
+      "Path": "local/wall-u-trial-moving-r1.json",
+      "Sha256": "EE5CB8D153BA01289BAEB02202A54E22F5C24B7FC44AB5D327B0097EABBCC831"
+    },
+    {
+      "Path": "local/wall-u-trial-moving-r1.log",
+      "Sha256": "A1A85B6C01593F1FFAE5D2298E5D5C8DAC2802BBA66DF8AC3C2DA390E8ED5CBB"
+    },
+    {
+      "Path": "local/FastRenderer-wall-u-trial-r1.ps1",
+      "Sha256": "7466C52AA9318045CBDCA591BA9C300330D69304FF9B85066EA9189F022107C2"
+    },
+    {
+      "Path": "local/FastRenderer-wall-u-trial-r2.ps1",
+      "Sha256": "99427F8DFCD82E7F6E60C1A02818C3786E22BA0549212EBEED43F9043C724BAE"
+    },
+    {
+      "Path": "local/FastRenderer-wall-u-trace-r1.ps1",
+      "Sha256": "9A525636FB67781078A1592471D34F43477F8957A5DCD10BA52D0D97382E02CF"
+    },
+    {
+      "Path": "local/prepare-wall-u-trial-r1.py",
+      "Sha256": "38FD01FDA2292D36C239F5546D9EAD398F708271493BF09661D32860928877C8"
+    },
+    {
+      "Path": "local/prepare-wall-u-trial-r2.py",
+      "Sha256": "76930ED7AEE9F1CB5596656939F08116D0760C6E4766CB769C4B3C0AAB27ADDA"
+    },
+    {
+      "Path": "local/prepare-wall-u-reference-check-r1.py",
+      "Sha256": "A261E464BBACAC56780BFFFA82A26A0AD4ED8CD14C283ED456E01497A3D34BB8"
+    },
+    {
+      "Path": "local/Test-WallUColumnReference-r1.ps1",
+      "Sha256": "B58F5ABBDA566F2BE2E8BB4C19B240524BC8238C63250CEDA40F520371E8AB29"
+    },
+    {
+      "Path": "src/ManagedDoom/Video/ThreeDRenderer.sb.ps1",
+      "Sha256": "9926E254F54250EEDD4F929681026BFF9ECEE7E6A9869FE99114F4FCD0CCF84B"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Math/Geometry.sb.ps1",
+      "Sha256": "0280E1F8DE0FBF3BF1EB37A3CB3E9949D9FA1E98BA6EB6599BD8A8A7731B4BF4"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Math/Fixed.ps1",
+      "Sha256": "467B07448D5E2E2F823A5B55136C2B77A0715903B032CAC828746FFB21D4B784"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Math/Trig.ps1",
+      "Sha256": "EBD2108E63D47BD99FA2F533A7D8948AA156530317C95523C98452810F2F876E"
+    },
+    {
+      "Path": "src/ManagedDoom/Doom/Math/Angle.ps1",
+      "Sha256": "BEC4D182921EC455E2ED3F398F30C58952F454A2586CACBC9FE6C9281C28642A"
+    },
+    {
+      "Path": "local/wall-u-production-r2.log",
+      "Sha256": "3E6479B08A340071136B1283CF0688AF9454109017BBDD917CBBD4764E17260A"
+    },
+    {
+      "Path": "local/FastRenderer-wall-u-worker-class-failure-r1.ps1",
+      "Sha256": "20C4165550D9327212CF33FCCA0DFACE9C3AE5F70E2FBF6C1BDE8E9EEDA7C53C"
+    },
+    {
+      "Path": "local/run-wall-u-numeric-cost-r1.ps1",
+      "Sha256": "B271D38449F30CFB85583339AA97F081A0F5CBBB342DDBA6998AFAF9E90489A3"
+    },
+    {
+      "Path": "local/wall-u-numeric-cost-r1.log",
+      "Sha256": "AEDAC9FD292CDE273370543BAA8B7B9F59F89CCF41BFCD370F48F2CC19F56A39"
+    }
+  ],
+  "Decision": "Adopt revised trial for measured horizontal-sampling fidelity, retaining all costs. Skipping unused analytic coordinates is exactly output-equivalent; separate unpaired timing batches do not prove it accelerates rendering.",
+  "Meaning": "Ten static views improve against the same adapted reference; frozen input315 ceiling68 disagreement falls4167 to2270. HUD stays exact. Derived reference column equality is narrow arithmetic agreement, not independently logged original column calls or original executable proof. Analytic wall scale/coverage, lighting, BSP and moving-world differences remain. Actual workers preserve Classic/Matrix/AnsiArt including palette/fuzz. All36 maps have bounded idle renders, not navigation or completion. Six serial60-call ABBA datasets retain initial calls/outliers; class-based revised later cycles range-0.29% to+16.66%, E3M6+6.48/+8.83%. Final numeric later cycles range+0.18% to+1.56%, with initial-call asymmetry retained. Across unpaired batches these numbers do not isolate a causal optimization gain. Native pacing/audio/simulation/worker contention are outside these calls; full performance gates remain unpassed. No route expectations tuned. No current-build live recording or acoustic/original-frame/campaign claim.",
+  "Failures": "First worker integration fails because separate rendering processes intentionally do not load engine Trig/Fixed/Angle/Geometry classes. Retain failed Classic log and exact class-based renderer; replace only segment parameter preparation with numeric PowerShell, transport fine-tangent data, and compare all returned parameters/output. First parameter harness sees11 different outer exception wrapper types at extreme int32 coordinates, with neither implementation returning values. Retain its report and source; compare innermost cause types after tracing their identical OverflowException chains. Fresh test retains11 matching failures alongside20038 exact returned cases.",
+  "NumericParameterRaw": {
+    "Path": "local/wall-u-numeric-parameters-r2.json",
+    "Sha256": "BAC079EEDF810F41602AC3C623852BFE5D5A793185064ACF43910861E6A5A532"
+  }
+}

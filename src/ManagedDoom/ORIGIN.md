@@ -203,3 +203,18 @@ Modifications, 2026-10-02 (reference wall inverse scale):
   comparator and leaves FastRenderer unchanged. Frozen-ceiling mismatch counts
   change with the oracle; whole original-frame fidelity remains unqualified.
   See `results/reference-wall-inverse-scale-20261002.json`.
+
+Modifications, 2026-10-02 (playable horizontal wall coordinates):
+
+- `src/FastRenderer.ps1` derives the wall texture coordinate from the GPL
+  ManagedDoom normal, endpoint distance, signed offset and fine-tangent formula
+  in `ThreeDRenderer`. The pinned C# commit remains
+  `9365696eb44326a3aab72c4bab217f7db8a87c96`; its license was checked before
+  adoption. Original WAD segment angles travel with map render assets.
+- All coordinate math stays in numeric PowerShell, checked against the adopted
+  Geometry, Fixed, Angle and Trig classes. Workers consume transported tables
+  without loading those engine classes. Segment/column parameters are reused outside
+  the pixel loop. Coverage, depth, scale and lighting retain their existing
+  implementation. Tests and limits are indexed in
+  `results/wall-horizontal-sampling-20261002.json`; this is not whole original
+  executable compatibility.

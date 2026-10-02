@@ -1507,3 +1507,20 @@ native pacing improvement. All failed alternatives and setup errors remain
 attributable. Module-qualified dispatch is included; snapshots/context creation,
 simulation, audio, worker contention and Terminal display are outside these calls.
 The frozen 35-tic/60-display gates remain unchanged and unpassed.
+
+### Horizontal wall coordinates — October 2, 2026
+
+Six finite serial datasets retain three ABBA cycles and all 60 calls each.
+The first class-based wall-U variants have later-cycle increases of roughly
+4–17%; removing unused analytic coordinates preserves output but the unpaired
+batches do not isolate its speed effect. The actual worker integration fails
+because engine classes are intentionally absent. The adopted numeric PowerShell
+implementation uses transported tables and matches all returned parameters.
+[Costs, failed integration and source pins](../results/wall-horizontal-sampling-20261002.json).
+
+Its later-cycle mean increases are 0.18%/0.78% in E1M2 and 1.56%/0.81% in E3M6.
+Whole-run means are 66.94→64.70 ms and 74.05→72.56 ms, respectively, retaining
+asymmetric initial calls. The implementation is adopted for measured sampling
+fidelity. These isolated calls exclude simulation, audio, worker contention and
+Terminal display; they establish no native pacing improvement. Historical clean
+captures and effect recordings remain pinned to their earlier builds.

@@ -15,6 +15,9 @@ function Write-GameRenderAssets {
         PlaneSpanBoundaries=$planeSpanBoundaries;
         Subsectors=@($Context.Subsectors | ForEach-Object {@{FirstSeg=$_.FirstSeg;SegCount=$_.SegCount}});
         Palette=$Palette;PlayPal=if($Context.ContainsKey('PlayPal')){$Context.PlayPal}else{$Context.Content.Palette.Data};Hud=@{};Textures=@{};SpriteAtlas=[object[]]::new($Context.SpriteAtlas.Length)}
+    # Original WAD segment angles drive quantized wall texture coordinates.
+    # Authored contexts without these angles retain the analytic fallback.
+    if($Context.ContainsKey('SegmentAngles')){$meta.SegmentAngles=$Context.SegmentAngles;$meta.WallFineTangent=$Context.WallFineTangent}
     foreach($key in $Context.Textures.Keys){$meta.Textures[$key.ToString()]=$patchIds[$Context.Textures[$key]]}
     foreach($key in $Context.Hud.get_Keys()) {
         $value=$Context.Hud[$key]
@@ -99,6 +102,12 @@ function Read-GameRenderAssets {
         [double[]]$segmentGeometry=$meta.SegmentGeometry;[int[]]$segmentMetadata=$meta.SegmentMetadata
         [double[]]$nodeGeometry=$meta.NodeGeometry;[int[]]$nodeChildren=$meta.NodeChildren
         if($segmentGeometry.Length%6 -ne 0 -or $segmentMetadata.Length -ne ($segmentGeometry.Length/6)*4){throw 'Invalid packed segment geometry.'}
+        if($meta.ContainsKey('SegmentAngles')){
+            [uint32[]]$segmentAngles=$meta.SegmentAngles
+            if($segmentAngles.Length -ne $segmentGeometry.Length/6){throw 'Invalid packed segment angles.'}
+            [int[]]$wallFineTangent=$meta.WallFineTangent
+            if($wallFineTangent.Length -ne 4096){throw 'Invalid wall tangent table.'}
+        }
         if($nodeGeometry.Length%12 -ne 0 -or $nodeChildren.Length -ne ($nodeGeometry.Length/12)*2){throw 'Invalid packed BSP node geometry.'}
         $bodyHash=$null;$reuse=$false
         if($CacheResources -or $null -ne $Resources){
@@ -139,6 +148,7 @@ function Read-GameRenderAssets {
             Pixels=[byte[]]::new(64000);Depth=[double[]]::new(64000);Planes=[int[]]::new(53760);TopClip=[int[]]::new(320);BottomClip=[int[]]::new(320);
             Stack=[int[]]::new(($nodeGeometry.Length/12)*2+4);SkyColumns=[int[]]::new(320);RaySin=[int[]]::new(320);RayCos=[int[]]::new(320);
             MaskedColumns=[Collections.Generic.List[hashtable]]::new();Textures=@{};Hud=@{};SpriteAtlas=[object[]]::new($meta.SpriteAtlas.Count);Palette=[int[][]]$meta.Palette;PlayPal=[byte[]]$meta.PlayPal}
+        if($meta.ContainsKey('SegmentAngles')){$ctx.SegmentAngles=$segmentAngles;$ctx.WallFineTangent=$wallFineTangent}
         foreach($key in $meta.Textures.Keys){$ctx.Textures[[int]$key]=$patches[[int]$meta.Textures[$key]]}
         foreach($key in $meta.Hud.get_Keys()) {
             $value=$meta.Hud[$key]

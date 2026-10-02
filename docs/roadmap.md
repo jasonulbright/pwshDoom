@@ -500,3 +500,13 @@ code and qualify no campaign, original-image or pacing gate.
 [Attribution evidence](../results/wall-projection-attribution-20261002.json).
 Count reaches 16 after Preview.5. Implement a bounded PowerShell wall-U trial next,
 with independent math/scene controls and cost measurement; all full gates stay open.
+
+Horizontal wall texture quantization is now adopted in numeric PowerShell with
+original WAD angles and transported tangent tables. A worker dependency failure
+and exception-wrapper test correction remain recorded. Returned parameters,
+wrapped columns, all-style workers and 36-map idle smoke pass; all ten static
+views improve and the frozen ceiling-68 view drops from 4,167 to 2,270 differences.
+Final later serial cycles cost 0.18–1.56% more; native pacing remains unqualified.
+[Production evidence and alternatives](../results/wall-horizontal-sampling-20261002.json).
+Count reaches 17 after Preview.5. Record committed-source effects next, then
+continue release work without waiting; cut another release at 35 commits.

@@ -10,26 +10,29 @@ function Check([bool]$Condition,[string]$Name){if(-not $Condition){throw $Name};
 try{
     $patch=@{Width=1;Height=1;Left=0;Top=0;Data=[int[]]@(11);Columns=@(,@(@{TopDelta=0;Length=1;Offset=0;Data=[byte[]]@(11)}))}
     $context=@{Patches=@{Test=$patch};Textures=@{0=$patch};Sky=$patch;SkyFlat=0;Hud=@{};SpriteAtlas=[object[]]::new(0);
-        SegmentGeometry=[double[]]::new(6);SegmentMetadata=[int[]]::new(4);NodeGeometry=[double[]]::new(12);NodeChildren=[int[]]::new(2);Subsectors=@(@{FirstSeg=0;SegCount=1});
+        SegmentGeometry=[double[]]::new(6);SegmentMetadata=[int[]]::new(4);SegmentAngles=[uint32[]]@(4294901760);NodeGeometry=[double[]]::new(12);NodeChildren=[int[]]::new(2);Subsectors=@(@{FirstSeg=0;SegCount=1});
         PlaneColumnAngles=[uint32[]]::new(320);PlaneDistanceScales=[int[]]::new(320);PlaneRowSlopes=[int[]]::new(168);PlaneFineSine=[int[]]::new(10240);
-        TanToAngleTable=[uint32[]]::new(2049);PlaneSpanBoundaries=[int[]]@(160,320);
+        TanToAngleTable=[uint32[]]::new(2049);WallFineTangent=[int[]]::new(4096);PlaneSpanBoundaries=[int[]]@(160,320);
         Flats=@(@{Data=[byte[]]::new(4096)});Colors=[byte[][]]@([byte[]]::new(256));PlayPal=[byte[]]::new(768);RenderAssetCache=@{}}
     $context.TanToAngleTable[2048]=0x20000000
     $palette=[int[][]]::new(256);for($i=0;$i -lt 256;$i++){$palette[$i]=[int[]]@($i,$i,$i)}
     $path=$prefix+'.assets';Write-GameRenderAssets $context $palette $path
     $first=Read-GameRenderAssets $path -CacheResources
     Check (-not $first.AssetBodyReused) 'Initial reader decodes body'
+    Check ($first.SegmentAngles[0] -eq 4294901760 -and $first.SegmentAngles -is [uint32[]]) 'Unsigned WAD angle decoded exactly'
     $cached=Read-GameRenderAssets $path -Resources $first
     Check $cached.AssetBodyReused 'Identical body is reused'
     Check ([object]::ReferenceEquals($cached.AssetPatches,$first.AssetPatches)) 'Patch graph is shared'
-    foreach($field in 'Pixels','Depth','Planes','TopClip','BottomClip','SegmentGeometry','NodeGeometry','Stack'){
+    foreach($field in 'Pixels','Depth','Planes','TopClip','BottomClip','SegmentGeometry','SegmentAngles','NodeGeometry','Stack'){
         Check (-not [object]::ReferenceEquals($cached[$field],$first[$field])) "Private $field"
     }
     $context.SegmentGeometry[0]=123;$context.NodeGeometry[0]=456;$palette[0][0]=99;$context.PlayPal[0]=17
+    $context.SegmentAngles[0]=2147483648
     Write-GameRenderAssets $context $palette $path
     $metadata=Read-GameRenderAssets $path -Resources $first
     Check $metadata.AssetBodyReused 'Metadata change preserves body reuse'
     Check ($metadata.SegmentGeometry[0] -eq 123 -and $metadata.NodeGeometry[0] -eq 456) 'New map geometry decoded'
+    Check ($metadata.SegmentAngles[0] -eq 2147483648 -and $first.SegmentAngles[0] -eq 4294901760) 'New map angle leaves previous context unchanged'
     Check ($metadata.Palette[0][0] -eq 99 -and $metadata.PlayPal[0] -eq 17) 'New palette metadata decoded'
     $fresh=Read-GameRenderAssets $path
     Check (-not [object]::ReferenceEquals($fresh.Textures[0],$first.Textures[0])) 'Default reader remains uncached'
@@ -46,6 +49,12 @@ try{
     try{$stream.SetLength($stream.Length-1)}finally{$stream.Dispose()}
     $rejected=$false;try{$null=Read-GameRenderAssets $path -Resources $first}catch{$rejected=$true}
     Check $rejected 'Truncated color table is rejected after cache invalidation'
+    $context.SegmentAngles=[uint32[]]::new(2);Write-GameRenderAssets $context $palette $path
+    $rejected=$false;try{$null=Read-GameRenderAssets $path}catch{$rejected=$_.Exception.Message -eq 'Invalid packed segment angles.'}
+    Check $rejected 'Mismatched segment angle count rejected'
+    $context.Remove('SegmentAngles');Write-GameRenderAssets $context $palette $path
+    $legacy=Read-GameRenderAssets $path
+    Check (-not $legacy.ContainsKey('SegmentAngles')) 'Authored metadata without angles preserves analytic fallback'
 }catch{$failure=$_.ToString();throw}finally{
     @{Error=$failure;Checks=$checks.ToArray();Runtime=$PSVersionTable.PSVersion.ToString();
         SourceSha256=(Get-FileHash "$PSScriptRoot/../src/RenderAssets.ps1").Hash;HarnessSha256=(Get-FileHash $PSCommandPath).Hash;

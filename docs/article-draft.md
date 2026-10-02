@@ -270,3 +270,18 @@ reconstructed horizontal texture coordinates reduce it to 2,302, and both to
 1,951. Their effects interact, leaving substantial error. This selects the next
 sampling change without treating a reference-derived override as production
 compatibility or original-game proof. [Attribution and limitations](../results/wall-projection-attribution-20261002.json).
+
+The next correction preserves WAD wall angles and quantizes horizontal texture
+coordinates. All ten measured static views improve against the same reference
+pixels; the frozen raised-ceiling view falls from 4,167 to 2,270 disagreements.
+A worker test catches an integration mistake: the class-based trial depends on
+engine classes that the separate render processes never load. Numeric PowerShell
+math and transported tables fix that dependency, with exact returned parameter
+and frame controls. Eleven extreme overflow cases remain explicit.
+[Implementation, failures and measured limits](../results/wall-horizontal-sampling-20261002.json).
+
+The adopted implementation preserves Classic, Matrix and color art in actual
+worker comparisons. Later serial cycles cost 0.2–1.6% more than the old renderer
+in this batch; the earlier alternatives' 4–17% increases remain recorded. Initial
+calls and outliers are retained. Better wall sampling does not yet establish
+original-game image parity, campaign completion or the native 35-tic/60-frame goals.

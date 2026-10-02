@@ -5825,3 +5825,41 @@ texture overrides. Preserve every raw run and the prior helper versions.
 This evidence commit reaches 16 after Preview.5. Next implement and test bounded
 PowerShell wall-U quantization, with scalar/scene controls and cost measurement
 before adoption. Continue all full-release gates; release again at 35 commits.
+
+### 2026-10-02 — Adopt horizontal wall texture quantization
+
+Preserve original WAD segment angles in a uint32 array and additive v7 render
+asset metadata. The visible-segment/column wall-U formula stays PowerShell and
+reuses existing sine/angle tables plus transported fine tangent data. Coverage,
+depth, lighting and vertical sampling retain their existing behavior. Authored
+contexts without angles keep analytic sampling. The pinned GPL reference and
+license attribution are retained. [Full receipt](../results/wall-horizontal-sampling-20261002.json).
+
+The first worker run fails because its class-based preparation requires Trig,
+Fixed, Angle and Geometry, which separate workers do not load. Keep the failed
+Classic log and exact source. Numeric functions remove that dependency and match
+all 20,038 returned class-based parameter cases. Eleven extreme coordinate cases
+fail with the same underlying OverflowException. The first harness falsely
+distinguishes outer method/function wrapper types; retain that report/source,
+inspect the exception chains, then compare their innermost causes explicitly.
+Do not count matching errors as rendered scenes.
+
+The signed wrapped texture column passes 20,023 independent byte-oracle cases.
+The frozen trace agrees in 656 derived reference columns/320 camera lookups;
+production matches the class trial in 960,000 pixels and depth entries. Preserve
+20 masked-order checks, 23 asset checks, seven million height-96 vertical samples,
+36-map idle smoke and all-style actual workers: 960,000 pixels/240 encoded strips.
+Ten static reference views improve; the frozen ceiling sweep changes from
+12/7/410/4,167 to 12/7/344/2,270, with exact HUD. Remaining image differences and
+the adapted reference's independent qualification stay open.
+
+Six finite 60-call serial ABBA datasets retain every initial call and outlier.
+Class-based alternatives have later-cycle costs up to 16.66%; the final numeric
+version's later cycles increase 0.18–1.56%. Whole means include initial-call
+asymmetry; different batches cannot establish a causal optimization gain. Adopt
+for demonstrated sampling fidelity and keep native pacing claims unchanged.
+
+This implementation commit reaches 17 after Preview.5. Record actual effects
+on the committed source next, then continue useful campaign/fidelity/performance
+work. Whole human Episode 1/Ultimate Doom, original-frame, native pacing and
+physical/acoustic/DPI/second-hardware gates remain open. Release at 35 commits.
