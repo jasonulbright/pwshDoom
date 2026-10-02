@@ -1761,3 +1761,21 @@ ABBA sample hashes, the generated variant, per-mode comparisons, and correction
 details. This is a small win on one fixed map and does not establish broader
 map behavior or live pacing. Production integration remains gated on all-map
 smoke and renderer regressions.
+
+### Wall-band production integration — October 2, 2026
+
+The segment-level band preselection is integrated in `FastRenderer.ps1` at
+source commit `05556ee`. The current IWAD passes 36 map starts, 35 idle tics and
+two nonblank serial frames per map. The integrated serial raster also matches
+16 process strips in Classic, Matrix and AnsiArt at five E1M1 headings: 320,000
+pixels per style, no differences. Focused checks pass 20 masked-wall ordering
+cases, 20,023 signed wall-column wraps, 7,029,760 vertical wall-sampling
+comparisons across 176 fixtures, 20,049 wall-U cases (including 11 identically
+matched errors), and 122 fuzz checks.
+
+These are regression and map-load checks, not map completion or external
+framebuffer parity. The [integration receipt](../results/wall-band-renderer-integration-20261002.json)
+pins source and all local raw reports. Its input is the tested Steam IWAD; none
+of the runs opens a game window or tests speaker output. The measured 2.88%
+fixed-view renderer median gain remains workload-specific; clean full-host
+pacing remains unqualified.

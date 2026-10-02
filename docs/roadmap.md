@@ -649,3 +649,17 @@ temporary source-folder copy; no product test was skipped. See the [trial
 receipt](../results/wall-band-preselection-trial-20261002.json). Move the
 bounded optimization into production and rerun all-map/mode regressions before
 the next 35-commit release. This evidence commit reaches33 after Preview.5.
+
+### Wall-band integration — October 2, 2026
+
+PowerShell segment traversal now selects only the wall-texture bands eligible
+to draw, preserving their original order. The production source passes all36
+map load/35-idle-tic/two-heading smokes, all three five-heading 16-worker mode
+comparisons (320,000 pixels per style, zero differences), masked-wall order,
+signed wall-column wrap, vertical wall sampling, wall-U arithmetic and fuzz
+regressions. The [integration receipt](../results/wall-band-renderer-integration-20261002.json)
+pins the source and raw report hashes. These checks do not complete maps or
+establish external reference-frame parity. The ABBA performance gain remains
+limited to a fixed E1M2 camera. This code commit reaches34 after Preview.5; the
+new cumulative preview is due at35, while human route, live pacing, fidelity,
+acoustic and hardware gates remain open.

@@ -12,7 +12,7 @@ A normal completion is enough; 100% kills, items, and secrets are not required. 
 
 ## Build and launch
 
-The current local playtest candidate uses repository source commit `c3d0d0c` (PowerShell state-action dispatch and iterative visibility traversal), after the public Preview.5 package. It retains the released features and routes all 52 vanilla state actions directly in PowerShell. The near-side-first BSP walk matches the recursive reference over 420 tics; all 36 maps pass load/idle/serial-render smoke. Classic, Matrix and AnsiArt retain exact internal serial/worker parity in five tested views. These do not complete maps or establish original-executable fidelity. See the [production traversal receipt](../results/visibility-iterative-integration-20261002.json). The reproducible public fallback remains [`pwshDoom-0.1.0-preview.5.zip`](release-preview5.md); its [package validation](../results/preview5-package-validation-20261002.json) and [publication receipt](../results/preview5-publication-20261002.json) remain available.
+The current local playtest candidate uses repository source commit `05556ee` (PowerShell action dispatch, iterative visibility traversal and segment-level wall-band preselection), after Preview.5. It routes all52 vanilla state actions in PowerShell; the near-first BSP walk matches the recursive reference over420 tics. All36 maps pass the current load/idle/render smoke, and Classic, Matrix and AnsiArt each retain exact serial/16-worker parity at five E1M1 headings. These checks do not complete maps or establish original-executable fidelity. See the [wall-band integration receipt](../results/wall-band-renderer-integration-20261002.json), [traversal receipt](../results/visibility-iterative-integration-20261002.json), and [playthrough performance evidence](performance.md#active-wall-band-preselection-trial--october-2-2026). The reproducible public fallback is [`pwshDoom-0.1.0-preview.6.zip`](release-preview6.md); its package manifest records the exact preview source.
 
 Use 64-bit PowerShell 7.6.x and Windows Terminal. The required user-owned Ultimate Doom IWAD has SHA-256 `6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F`. WADs, soundfonts, prepared music, media, tools and the research PDF are excluded. The local eleven-track Episode 1 catalog covers this route; omit `-MusicCatalog` for effects-only play. Audio startup rechecks payloads and IWAD score identity.
 
@@ -23,10 +23,10 @@ $root = 'C:\projects\pwshDoom'
 $wad = 'C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\base\DOOM.WAD'
 $local = 'C:\projects\pwshDoom\local'
 $catalog = Join-Path $local 'music-prepared-episode1.json'
-$record = Join-Path $local 'episode1-human-input-visibility-candidate.json'
-$report = Join-Path $local 'episode1-human-session-visibility-candidate.json'
-$saves = Join-Path $local 'episode1-human-saves-visibility-candidate'
-$settings = Join-Path $local 'episode1-human-settings-visibility-candidate.json'
+$record = Join-Path $local 'episode1-human-input-wall-band-candidate.json'
+$report = Join-Path $local 'episode1-human-session-wall-band-candidate.json'
+$saves = Join-Path $local 'episode1-human-saves-wall-band-candidate'
+$settings = Join-Path $local 'episode1-human-settings-wall-band-candidate.json'
 pwsh -NoProfile -File (Join-Path $root 'Start-Doom.ps1') -Wad $wad -Workers 16 -Episode 1 -Map 1 -Skill 3 -Style Classic -Sound -MusicCatalog $catalog -RecordInput $record -Report $report -SaveRoot $saves -SettingsPath $settings -Maximized -FontSize 5
 ~~~
 

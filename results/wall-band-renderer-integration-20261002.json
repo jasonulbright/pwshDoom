@@ -1,0 +1,150 @@
+{
+  "FormatVersion": 1,
+  "Title": "Integrated PowerShell wall-band preselection qualification",
+  "Date": "2026-10-02",
+  "SourceCommit": "05556ee274497d53991ae35c48670340933cb220",
+  "FastRendererSha256": "CCF6729A9AFE592040921DEDE697B23F716F3F9977B6BFEE620A2572F7AB3823",
+  "CampaignRendererSha256": "CCF6729A9AFE592040921DEDE697B23F716F3F9977B6BFEE620A2572F7AB3823",
+  "BaselineCommit": "f04994a",
+  "BaselineRendererSha256": "9FCAF0CC8933D4BF562D32CFB172265D92CBEC197C633C0C314ABE1CA0D36E00",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "Optimization": "Select only textured wall bands that satisfy the same solid/opening/sky eligibility checks once per projected segment. Band order and per-column sampling/drawing remain in PowerShell.",
+  "CampaignSmoke": {
+    "Maps": 36,
+    "Passed": 36,
+    "Failed": 0,
+    "IdleTicsPerMap": 35,
+    "ViewsPerMap": 2,
+    "HeadingsDegrees": [
+      0,
+      90
+    ],
+    "ReportSha256": "18362AA2C53D5973E55DBE24243D4BFA9F81041FB29A99199913AF9C58571648",
+    "Meaning": "Map loading, 35 idle tics, and two nonblank serial raster frames per map. WorkerStrips in this harness controls plane-span boundaries; it does not launch render-worker processes or navigate/complete maps."
+  },
+  "ModeParity": [
+    {
+      "Style": "Classic",
+      "Map": "E1M1",
+      "Skill": 3,
+      "Headings": 5,
+      "ComparedPixels": 320000.0,
+      "DifferingPixels": 0.0,
+      "Workers": 16,
+      "EncodedStripByteChecks": 80,
+      "CharacterStripByteChecks": 0,
+      "RendererSha256": "CCF6729A9AFE592040921DEDE697B23F716F3F9977B6BFEE620A2572F7AB3823",
+      "ReportSha256": "75524F62891F5B9BA5ED4E4B5B0BCD3AA06EBCAFAC1A1E1C2BE8B4C1BD7923B1"
+    },
+    {
+      "Style": "Matrix",
+      "Map": "E1M1",
+      "Skill": 3,
+      "Headings": 5,
+      "ComparedPixels": 320000.0,
+      "DifferingPixels": 0.0,
+      "Workers": 16,
+      "EncodedStripByteChecks": 80,
+      "CharacterStripByteChecks": 80,
+      "RendererSha256": "CCF6729A9AFE592040921DEDE697B23F716F3F9977B6BFEE620A2572F7AB3823",
+      "ReportSha256": "FC93EC995B22FDC89B3DCF701B6C818C6220E2A61EDA2044182B76CDB3DADED2"
+    },
+    {
+      "Style": "AnsiArt",
+      "Map": "E1M1",
+      "Skill": 3,
+      "Headings": 5,
+      "ComparedPixels": 320000.0,
+      "DifferingPixels": 0.0,
+      "Workers": 16,
+      "EncodedStripByteChecks": 80,
+      "CharacterStripByteChecks": 80,
+      "RendererSha256": "CCF6729A9AFE592040921DEDE697B23F716F3F9977B6BFEE620A2572F7AB3823",
+      "ReportSha256": "1D87C1977ECB64BF88AB0AA9148C5FCC8949EAC650F4A424A5BC0E10AE7BF925"
+    }
+  ],
+  "FocusedChecks": {
+    "MaskedWallOrder": {
+      "Checks": 20,
+      "Failed": 0,
+      "RendererSha256": "CCF6729A9AFE592040921DEDE697B23F716F3F9977B6BFEE620A2572F7AB3823"
+    },
+    "SignedWallColumnWrap": {
+      "Compared": 20023,
+      "Mismatches": 0,
+      "RendererSha256": "CCF6729A9AFE592040921DEDE697B23F716F3F9977B6BFEE620A2572F7AB3823"
+    },
+    "WallVerticalSampling": {
+      "Fixtures": 176,
+      "Compared": 7029760,
+      "Mismatches": 0,
+      "RendererSha256": "CCF6729A9AFE592040921DEDE697B23F716F3F9977B6BFEE620A2572F7AB3823"
+    },
+    "WallUParameters": {
+      "Compared": 20049,
+      "Mismatches": 0,
+      "MatchedErrors": null,
+      "RendererSha256": "CCF6729A9AFE592040921DEDE697B23F716F3F9977B6BFEE620A2572F7AB3823"
+    },
+    "Fuzz": {
+      "Checks": 122,
+      "Failed": 0,
+      "RendererSha256": "CCF6729A9AFE592040921DEDE697B23F716F3F9977B6BFEE620A2572F7AB3823"
+    }
+  },
+  "TrialReceipt": "../results/wall-band-preselection-trial-20261002.json",
+  "RawReports": [
+    {
+      "Test": "Campaign",
+      "Path": "local/campaign-smoke-wallbands-20261002.json",
+      "Sha256": "18362AA2C53D5973E55DBE24243D4BFA9F81041FB29A99199913AF9C58571648"
+    },
+    {
+      "Test": "Classic",
+      "Path": "local/wall-band-integrated-classic-20261002.json",
+      "Sha256": "75524F62891F5B9BA5ED4E4B5B0BCD3AA06EBCAFAC1A1E1C2BE8B4C1BD7923B1"
+    },
+    {
+      "Test": "Matrix",
+      "Path": "local/wall-band-integrated-matrix-20261002.json",
+      "Sha256": "FC93EC995B22FDC89B3DCF701B6C818C6220E2A61EDA2044182B76CDB3DADED2"
+    },
+    {
+      "Test": "AnsiArt",
+      "Path": "local/wall-band-integrated-ansiart-20261002.json",
+      "Sha256": "1D87C1977ECB64BF88AB0AA9148C5FCC8949EAC650F4A424A5BC0E10AE7BF925"
+    },
+    {
+      "Test": "MaskedWall",
+      "Path": "local/wall-band-masked-wall-order-20261002.json",
+      "Sha256": "FE936B5FDBC34CFB5F98DE412239E1E54F629E6CDBE7484AD649AF3FA1259F1F"
+    },
+    {
+      "Test": "ColumnWrap",
+      "Path": "local/wall-band-column-wrap-20261002.json",
+      "Sha256": "3738A2A052543EA539EB21FF72C678A28777D850ABAFED79286166F8A6102789"
+    },
+    {
+      "Test": "VerticalSampling",
+      "Path": "local/wall-band-vertical-sampling-20261002.json",
+      "Sha256": "B30003511A8B2C986184DF00EBDB0C8064FC56120091074CFA31FDEAE4B733E2"
+    },
+    {
+      "Test": "WallU",
+      "Path": "local/wall-band-u-parameters-20261002.json",
+      "Sha256": "737BF6EC2EAAEB1D5473E3354AA1A62AC14AE51989B234C2FD5E4C4671E8D9D2"
+    },
+    {
+      "Test": "Fuzz",
+      "Path": "local/wall-band-fuzz-rendering-20261002.json",
+      "Sha256": "E39C1CE2E63E72CC0B11EDC05D69E6421FA6E112136F3F528AE2BEA8D9A81C75"
+    }
+  ],
+  "Limits": [
+    "All-map smoke is not ordinary-input route or full-campaign completion.",
+    "Worker parity is against this renderer serial image, not an independent original Doom framebuffer.",
+    "The ABBA performance receipt measures one fixed E1M2 Classic state. No host pacing, live recording, acoustic or optical display measurement is claimed for this renderer change.",
+    "The human Episode 1 route, original moving-world visual fidelity, clean native pacing, acoustic review and second hardware remain open.",
+    "Gameplay, raster, color and mixing algorithms remain authored in PowerShell."
+  ]
+}

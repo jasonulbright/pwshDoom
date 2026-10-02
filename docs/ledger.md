@@ -6107,3 +6107,16 @@ removed. The trial is source-pinned [here](../results/wall-band-preselection-tri
 These are bounded headless results, not native pacing. The modest win moves to
 production qualification; count reaches33 after Preview.5, with two commits
 until the next release. The human campaign and remaining release gates stay open.
+
+Production integration commit `05556ee` now preselects wall-texture bands once
+per projected segment in PowerShell. The Steam IWAD passes all36 map start
+smokes, each with35 idle tics and two serial frame headings. Classic, Matrix
+and AnsiArt each retain320,000 exact serial/16-worker pixels over five E1M1
+headings. Focused checks pass20 masked-wall order cases, 20,023 column-wrap
+cases, 7,029,760 wall vertical-sampling comparisons, 20,049 wall-U comparisons
+(11 matched reference/candidate errors), and122 fuzz checks. All focused
+renderer source pins match the integrated file. This remains map smoke and
+internal worker parity, not route completion or original-framebuffer proof.
+[Source-pinned integration evidence](../results/wall-band-renderer-integration-20261002.json).
+Count reaches34 after Preview.5. Prepare the next cumulative community package
+at35 commits; the full Episode 1 route and original full-release gates stay open.

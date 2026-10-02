@@ -5,6 +5,25 @@
 Full Ultimate Doom campaign, independent fidelity, physical/acoustic review,
 display pacing and second-hardware qualification continue after Preview.5.
 
+## 0.1.0-preview.6 — 2026-10-02
+
+Cumulative community preview after35 commits. Preview.6 preserves Classic,
+Matrix and AnsiArt and integrates the tested PowerShell wall-band preselection
+trial. The bounded E1M2 median improvement does not establish full-host pacing.
+[Scope and evidence](docs/release-preview6.md); the full Ultimate Doom route and
+release gates remain open.
+
+- Select eligible textured wall bands once per projected segment, reducing
+  repeated wall-column branches while preserving band order and raster output.
+  The fixed-view ABBA trial reports total renderer median −2.88% and wall-stage
+  median −5.03%; exact pixels, three-style workers, all-map smoke and focused
+  wall/fuzz regressions pass.
+- Keep the complete Episode 1 human playthrough, original-frame fidelity,
+  repeated 35-tic/60-display pacing, physical/acoustic review and second
+  hardware qualification pending.
+
+The broader Ultimate Doom objective remains active.
+
 ## 0.1.0-preview.5 — 2026-10-02
 
 Community preview following the requested35-commit release cadence. All three
