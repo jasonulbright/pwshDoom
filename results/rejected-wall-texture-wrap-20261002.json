@@ -1,0 +1,339 @@
+{
+  "FinishedUtc": "2026-10-02T00:34:06.160056-04:00",
+  "ParentCommit": "032d00920f853859653147d48799f546ab85d7a0",
+  "Runs": [
+    {
+      "Cycle": 1,
+      "Position": 1,
+      "Role": "baseline",
+      "Path": "local/wall-texture-trial-r1/c1-p1-baseline.json",
+      "Sha256": "4BF6BB2D518EA11A304E7CB6F19F4023FEE37222B935028598B9250FA557A8BA",
+      "RendererSha256": "A6DB1AB19159C30DD72F0D8F0F5348ADCB993E68A6FFE7580B68B839F5E712A0",
+      "HarnessSha256": "DC0766299DAD73EF2CAA9450B757600FBA100F88117D88AE4CAEC2E52ABF5F5A",
+      "Metrics": {
+        "MedianStripeTotalMs": 7.5752,
+        "P95StripeTotalMs": 13.3363,
+        "MedianStripeWallsMs": 4.252400000000001,
+        "SlowestMedianStripeMs": 13.8743,
+        "SumMedianStripeRenderMs": 123.0598,
+        "SnapshotPreparationMedianMs": 3.4879
+      },
+      "FullFrameSha256": "D73C9535BC8339A265D4B268C7B1AEB400D07D36CFCE98B753AEDC8D3DABBB58"
+    },
+    {
+      "Cycle": 1,
+      "Position": 2,
+      "Role": "trial",
+      "Path": "local/wall-texture-trial-r1/c1-p2-trial.json",
+      "Sha256": "7EC04EF7297698947286272AFBE209FE7AC9A810E06437673DB68C8E21EBC671",
+      "RendererSha256": "F1D0A2D11F5B738C53D349664FCDFE9BEF545A59F089E3BF8F996EA4BE51137C",
+      "HarnessSha256": "2A429AAF3533DD61C59E9D931910EAE03131A786FEB788F1D13BEDC7E93AE0CA",
+      "Metrics": {
+        "MedianStripeTotalMs": 7.7644,
+        "P95StripeTotalMs": 13.1906,
+        "MedianStripeWallsMs": 4.2748,
+        "SlowestMedianStripeMs": 13.4673,
+        "SumMedianStripeRenderMs": 124.5446,
+        "SnapshotPreparationMedianMs": 3.5284
+      },
+      "FullFrameSha256": "D73C9535BC8339A265D4B268C7B1AEB400D07D36CFCE98B753AEDC8D3DABBB58"
+    },
+    {
+      "Cycle": 1,
+      "Position": 3,
+      "Role": "trial",
+      "Path": "local/wall-texture-trial-r1/c1-p3-trial.json",
+      "Sha256": "CF95A30C5C621BAEC8D18ACB88DAB19FD94BAAC2837D7A14FEFFC79567ACCDFC",
+      "RendererSha256": "F1D0A2D11F5B738C53D349664FCDFE9BEF545A59F089E3BF8F996EA4BE51137C",
+      "HarnessSha256": "2A429AAF3533DD61C59E9D931910EAE03131A786FEB788F1D13BEDC7E93AE0CA",
+      "Metrics": {
+        "MedianStripeTotalMs": 7.9854,
+        "P95StripeTotalMs": 13.5515,
+        "MedianStripeWallsMs": 4.3077000000000005,
+        "SlowestMedianStripeMs": 13.7049,
+        "SumMedianStripeRenderMs": 130.2391,
+        "SnapshotPreparationMedianMs": 3.5012
+      },
+      "FullFrameSha256": "D73C9535BC8339A265D4B268C7B1AEB400D07D36CFCE98B753AEDC8D3DABBB58"
+    },
+    {
+      "Cycle": 1,
+      "Position": 4,
+      "Role": "baseline",
+      "Path": "local/wall-texture-trial-r1/c1-p4-baseline.json",
+      "Sha256": "5385470A2A19AF9716D725BC459AC7936E902759B63C5A757F4AB5270F2CA7C7",
+      "RendererSha256": "A6DB1AB19159C30DD72F0D8F0F5348ADCB993E68A6FFE7580B68B839F5E712A0",
+      "HarnessSha256": "DC0766299DAD73EF2CAA9450B757600FBA100F88117D88AE4CAEC2E52ABF5F5A",
+      "Metrics": {
+        "MedianStripeTotalMs": 7.6238,
+        "P95StripeTotalMs": 13.4817,
+        "MedianStripeWallsMs": 4.287100000000001,
+        "SlowestMedianStripeMs": 14.0554,
+        "SumMedianStripeRenderMs": 124.4297,
+        "SnapshotPreparationMedianMs": 3.2494
+      },
+      "FullFrameSha256": "D73C9535BC8339A265D4B268C7B1AEB400D07D36CFCE98B753AEDC8D3DABBB58"
+    },
+    {
+      "Cycle": 2,
+      "Position": 1,
+      "Role": "baseline",
+      "Path": "local/wall-texture-trial-r1/c2-p1-baseline.json",
+      "Sha256": "CB0317D98F589F89B61BA29D19846825F4DE42E3FCB4F38212FE4248537CABFE",
+      "RendererSha256": "A6DB1AB19159C30DD72F0D8F0F5348ADCB993E68A6FFE7580B68B839F5E712A0",
+      "HarnessSha256": "DC0766299DAD73EF2CAA9450B757600FBA100F88117D88AE4CAEC2E52ABF5F5A",
+      "Metrics": {
+        "MedianStripeTotalMs": 7.6787,
+        "P95StripeTotalMs": 14.107,
+        "MedianStripeWallsMs": 4.2319,
+        "SlowestMedianStripeMs": 14.3417,
+        "SumMedianStripeRenderMs": 122.03399999999999,
+        "SnapshotPreparationMedianMs": 2.959
+      },
+      "FullFrameSha256": "D73C9535BC8339A265D4B268C7B1AEB400D07D36CFCE98B753AEDC8D3DABBB58"
+    },
+    {
+      "Cycle": 2,
+      "Position": 2,
+      "Role": "trial",
+      "Path": "local/wall-texture-trial-r1/c2-p2-trial.json",
+      "Sha256": "8027E8B24E01CA32EBD3A15F02D471A6DFD00EB6C4C40136DCD75A3C30901A70",
+      "RendererSha256": "F1D0A2D11F5B738C53D349664FCDFE9BEF545A59F089E3BF8F996EA4BE51137C",
+      "HarnessSha256": "2A429AAF3533DD61C59E9D931910EAE03131A786FEB788F1D13BEDC7E93AE0CA",
+      "Metrics": {
+        "MedianStripeTotalMs": 7.5722,
+        "P95StripeTotalMs": 12.9031,
+        "MedianStripeWallsMs": 4.2278,
+        "SlowestMedianStripeMs": 13.849,
+        "SumMedianStripeRenderMs": 121.2474,
+        "SnapshotPreparationMedianMs": 3.4778
+      },
+      "FullFrameSha256": "D73C9535BC8339A265D4B268C7B1AEB400D07D36CFCE98B753AEDC8D3DABBB58"
+    },
+    {
+      "Cycle": 2,
+      "Position": 3,
+      "Role": "trial",
+      "Path": "local/wall-texture-trial-r1/c2-p3-trial.json",
+      "Sha256": "AB5BBAA5E51FD3502AD26ED485429332F1EF8FABEFAE57D384A6BFCB1CFF4C2F",
+      "RendererSha256": "F1D0A2D11F5B738C53D349664FCDFE9BEF545A59F089E3BF8F996EA4BE51137C",
+      "HarnessSha256": "2A429AAF3533DD61C59E9D931910EAE03131A786FEB788F1D13BEDC7E93AE0CA",
+      "Metrics": {
+        "MedianStripeTotalMs": 7.8943,
+        "P95StripeTotalMs": 13.237,
+        "MedianStripeWallsMs": 4.3254,
+        "SlowestMedianStripeMs": 13.4092,
+        "SumMedianStripeRenderMs": 126.6063,
+        "SnapshotPreparationMedianMs": 3.5592
+      },
+      "FullFrameSha256": "D73C9535BC8339A265D4B268C7B1AEB400D07D36CFCE98B753AEDC8D3DABBB58"
+    },
+    {
+      "Cycle": 2,
+      "Position": 4,
+      "Role": "baseline",
+      "Path": "local/wall-texture-trial-r1/c2-p4-baseline.json",
+      "Sha256": "D0235880AB91BA81EEDC8F9AF90E69BED16F859E7076EFDE02A4DC46B1E1CDA0",
+      "RendererSha256": "A6DB1AB19159C30DD72F0D8F0F5348ADCB993E68A6FFE7580B68B839F5E712A0",
+      "HarnessSha256": "DC0766299DAD73EF2CAA9450B757600FBA100F88117D88AE4CAEC2E52ABF5F5A",
+      "Metrics": {
+        "MedianStripeTotalMs": 7.67,
+        "P95StripeTotalMs": 13.2153,
+        "MedianStripeWallsMs": 4.3125,
+        "SlowestMedianStripeMs": 13.5732,
+        "SumMedianStripeRenderMs": 125.0082,
+        "SnapshotPreparationMedianMs": 3.4883
+      },
+      "FullFrameSha256": "D73C9535BC8339A265D4B268C7B1AEB400D07D36CFCE98B753AEDC8D3DABBB58"
+    },
+    {
+      "Cycle": 3,
+      "Position": 1,
+      "Role": "baseline",
+      "Path": "local/wall-texture-trial-r1/c3-p1-baseline.json",
+      "Sha256": "3C7825DAAAEAC291D05BAF1E306493FACBBA0BBD0538D8A2FAE7EC90AB3DB6CE",
+      "RendererSha256": "A6DB1AB19159C30DD72F0D8F0F5348ADCB993E68A6FFE7580B68B839F5E712A0",
+      "HarnessSha256": "DC0766299DAD73EF2CAA9450B757600FBA100F88117D88AE4CAEC2E52ABF5F5A",
+      "Metrics": {
+        "MedianStripeTotalMs": 7.6372,
+        "P95StripeTotalMs": 13.0382,
+        "MedianStripeWallsMs": 4.2319,
+        "SlowestMedianStripeMs": 13.2663,
+        "SumMedianStripeRenderMs": 124.2812,
+        "SnapshotPreparationMedianMs": 3.6046
+      },
+      "FullFrameSha256": "D73C9535BC8339A265D4B268C7B1AEB400D07D36CFCE98B753AEDC8D3DABBB58"
+    },
+    {
+      "Cycle": 3,
+      "Position": 2,
+      "Role": "trial",
+      "Path": "local/wall-texture-trial-r1/c3-p2-trial.json",
+      "Sha256": "102DF5EAF3C11DB824C28CBB8783D975971D5C6EA4DA3B7653B759B31DD71E2B",
+      "RendererSha256": "F1D0A2D11F5B738C53D349664FCDFE9BEF545A59F089E3BF8F996EA4BE51137C",
+      "HarnessSha256": "2A429AAF3533DD61C59E9D931910EAE03131A786FEB788F1D13BEDC7E93AE0CA",
+      "Metrics": {
+        "MedianStripeTotalMs": 7.6521,
+        "P95StripeTotalMs": 13.4917,
+        "MedianStripeWallsMs": 4.2661,
+        "SlowestMedianStripeMs": 13.7111,
+        "SumMedianStripeRenderMs": 124.2517,
+        "SnapshotPreparationMedianMs": 3.4926
+      },
+      "FullFrameSha256": "D73C9535BC8339A265D4B268C7B1AEB400D07D36CFCE98B753AEDC8D3DABBB58"
+    },
+    {
+      "Cycle": 3,
+      "Position": 3,
+      "Role": "trial",
+      "Path": "local/wall-texture-trial-r1/c3-p3-trial.json",
+      "Sha256": "4A23965A705C0DBBE62B3B62701FF40CAD6792C7D6D36D511B34D29B92DCE0F9",
+      "RendererSha256": "F1D0A2D11F5B738C53D349664FCDFE9BEF545A59F089E3BF8F996EA4BE51137C",
+      "HarnessSha256": "2A429AAF3533DD61C59E9D931910EAE03131A786FEB788F1D13BEDC7E93AE0CA",
+      "Metrics": {
+        "MedianStripeTotalMs": 7.744,
+        "P95StripeTotalMs": 13.723,
+        "MedianStripeWallsMs": 4.2941,
+        "SlowestMedianStripeMs": 14.0759,
+        "SumMedianStripeRenderMs": 125.1155,
+        "SnapshotPreparationMedianMs": 4.5483
+      },
+      "FullFrameSha256": "D73C9535BC8339A265D4B268C7B1AEB400D07D36CFCE98B753AEDC8D3DABBB58"
+    },
+    {
+      "Cycle": 3,
+      "Position": 4,
+      "Role": "baseline",
+      "Path": "local/wall-texture-trial-r1/c3-p4-baseline.json",
+      "Sha256": "AD83781CC7EE773C2C123DD80701FC051A21A6AA56F7DD856B244F8E5AE695D6",
+      "RendererSha256": "A6DB1AB19159C30DD72F0D8F0F5348ADCB993E68A6FFE7580B68B839F5E712A0",
+      "HarnessSha256": "DC0766299DAD73EF2CAA9450B757600FBA100F88117D88AE4CAEC2E52ABF5F5A",
+      "Metrics": {
+        "MedianStripeTotalMs": 7.5143,
+        "P95StripeTotalMs": 12.3966,
+        "MedianStripeWallsMs": 4.2403,
+        "SlowestMedianStripeMs": 12.7984,
+        "SumMedianStripeRenderMs": 121.3107,
+        "SnapshotPreparationMedianMs": 2.8697
+      },
+      "FullFrameSha256": "D73C9535BC8339A265D4B268C7B1AEB400D07D36CFCE98B753AEDC8D3DABBB58"
+    }
+  ],
+  "Cycles": [
+    {
+      "Cycle": 1,
+      "RoleMedians": {
+        "baseline": {
+          "MedianStripeTotalMs": 7.5995,
+          "P95StripeTotalMs": 13.408999999999999,
+          "MedianStripeWallsMs": 4.26975,
+          "SlowestMedianStripeMs": 13.96485,
+          "SumMedianStripeRenderMs": 123.74475,
+          "SnapshotPreparationMedianMs": 3.3686499999999997
+        },
+        "trial": {
+          "MedianStripeTotalMs": 7.8749,
+          "P95StripeTotalMs": 13.37105,
+          "MedianStripeWallsMs": 4.29125,
+          "SlowestMedianStripeMs": 13.5861,
+          "SumMedianStripeRenderMs": 127.39185,
+          "SnapshotPreparationMedianMs": 3.5148
+        }
+      },
+      "ReductionPercent": {
+        "MedianStripeTotalMs": -3.623922626488589,
+        "P95StripeTotalMs": 0.28301886792451786,
+        "MedianStripeWallsMs": -0.5035423619649776,
+        "SlowestMedianStripeMs": 2.712166618331025,
+        "SumMedianStripeRenderMs": -2.9472765511264187,
+        "SnapshotPreparationMedianMs": -4.338533240318836
+      }
+    },
+    {
+      "Cycle": 2,
+      "RoleMedians": {
+        "baseline": {
+          "MedianStripeTotalMs": 7.6743500000000004,
+          "P95StripeTotalMs": 13.66115,
+          "MedianStripeWallsMs": 4.2722,
+          "SlowestMedianStripeMs": 13.95745,
+          "SumMedianStripeRenderMs": 123.52109999999999,
+          "SnapshotPreparationMedianMs": 3.22365
+        },
+        "trial": {
+          "MedianStripeTotalMs": 7.73325,
+          "P95StripeTotalMs": 13.07005,
+          "MedianStripeWallsMs": 4.2766,
+          "SlowestMedianStripeMs": 13.629100000000001,
+          "SumMedianStripeRenderMs": 123.92685,
+          "SnapshotPreparationMedianMs": 3.5185
+        }
+      },
+      "ReductionPercent": {
+        "MedianStripeTotalMs": -0.7674917093955775,
+        "P95StripeTotalMs": 4.326868528637773,
+        "MedianStripeWallsMs": -0.10299143298535658,
+        "SlowestMedianStripeMs": 2.3525070840303823,
+        "SumMedianStripeRenderMs": -0.3284863881555555,
+        "SnapshotPreparationMedianMs": -9.146464411459055
+      }
+    },
+    {
+      "Cycle": 3,
+      "RoleMedians": {
+        "baseline": {
+          "MedianStripeTotalMs": 7.57575,
+          "P95StripeTotalMs": 12.7174,
+          "MedianStripeWallsMs": 4.2361,
+          "SlowestMedianStripeMs": 13.032350000000001,
+          "SumMedianStripeRenderMs": 122.79595,
+          "SnapshotPreparationMedianMs": 3.2371499999999997
+        },
+        "trial": {
+          "MedianStripeTotalMs": 7.69805,
+          "P95StripeTotalMs": 13.60735,
+          "MedianStripeWallsMs": 4.2801,
+          "SlowestMedianStripeMs": 13.8935,
+          "SumMedianStripeRenderMs": 124.6836,
+          "SnapshotPreparationMedianMs": 4.02045
+        }
+      },
+      "ReductionPercent": {
+        "MedianStripeTotalMs": -1.6143616143616153,
+        "P95StripeTotalMs": -6.997892651013577,
+        "MedianStripeWallsMs": -1.0386912490262172,
+        "SlowestMedianStripeMs": -6.607787544073006,
+        "SumMedianStripeRenderMs": -1.5372249654813481,
+        "SnapshotPreparationMedianMs": -24.19721050924426
+      }
+    }
+  ],
+  "All12FullIndexedHashesAgree": true,
+  "All12Measured16StripeHashSetsAgree": true,
+  "Sources": [
+    {
+      "Path": "local/wall-texture-trial-r1/baseline.ps1",
+      "Sha256": "A6DB1AB19159C30DD72F0D8F0F5348ADCB993E68A6FFE7580B68B839F5E712A0"
+    },
+    {
+      "Path": "local/wall-texture-trial-r1/FastRenderer.ps1",
+      "Sha256": "F1D0A2D11F5B738C53D349664FCDFE9BEF545A59F089E3BF8F996EA4BE51137C"
+    },
+    {
+      "Path": "local/wall-texture-trial-r1/profile-baseline.ps1",
+      "Sha256": "DC0766299DAD73EF2CAA9450B757600FBA100F88117D88AE4CAEC2E52ABF5F5A"
+    },
+    {
+      "Path": "local/wall-texture-trial-r1/profile-trial.ps1",
+      "Sha256": "2A429AAF3533DD61C59E9D931910EAE03131A786FEB788F1D13BEDC7E93AE0CA"
+    },
+    {
+      "Path": "local/wall-texture-trial-r1/run-abba.ps1",
+      "Sha256": "436758DA262922B30DCBEA71C8139B99AC6F7EDF836008BFF05A05D51560E7F5"
+    }
+  ],
+  "Meaning": "Finite isolated trial: power-of-two wall heights use signed bit masks for normalized texel wrapping; other heights retain normalized modulo. Column source offset is hoisted. No floating sampling arithmetic changes. Three sequential ABBA cycles, fixed E1M2 startup state,16 stripes rendered serially per process, three warmups/twenty measured frames each. All paired frames/stripe hashes agree. These are renderer-only timing distributions; no live simulation/audio/terminal/display speedup is established. Every complete run is retained; per-role medians are two-run summaries, not statistical confidence intervals. Source stays local pending acceptance or rejection.",
+  "Decision": "Rejected; trial never adopted into production. All three cycles have slower median stripe totals and summed stripe medians. First two slowest-stripe reductions reverse in cycle three; total p95 also regresses in cycle three. Exact fixed-state images do not compensate for absent repeatable timing benefit.",
+  "GateEffect": "No change to gameplay, audio, rendering defaults, mode availability or release gate status. No further broad qualification is justified for this discarded trial.",
+  "AuditSha256": "2D96D0EF9306D80EB6F624CCB8CE0B5FFD1F46A3D0F616AB0EED6BB1084CF9FD"
+}
