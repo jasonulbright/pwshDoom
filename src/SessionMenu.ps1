@@ -7,7 +7,7 @@ function New-DoomMenuState {
     return @{Screen=0;Choice=0;Startup=$false;Episode=$Episode;Skill=$Skill;Episodes=$Episodes;Slots=@(1..6|ForEach-Object {@{Slot=$_;State='Empty';Sha256=$null;Episode=0;Map=0;Skill=0;Time='';SourceMatches=$true}});SelectedSlot=1;MessageTitle='';MessageDetail='';ReturnScreen=1;AwaitingBinding=$false;Settings=(New-DoomUserSettings)}
 }
 function Invoke-DoomMenuKey {
-    param($Menu,[ValidateSet('Escape','Pause','Up','Down','Left','Right','Enter','Yes','No','Capture')][string]$Key,[int]$CaptureVirtualKey=0)
+    param($Menu,[ValidateSet('Escape','Pause','F2','F3','Up','Down','Left','Right','Enter','Yes','No','Capture')][string]$Key,[int]$CaptureVirtualKey=0)
     $screen=$Menu.Screen;$settingsChanged=$false
     if($screen -eq 13){return $null}
     if($screen -eq 15 -and $Menu.AwaitingBinding){
@@ -23,7 +23,8 @@ function Invoke-DoomMenuKey {
         }
         return @{Action='ShowMenu';Screen=$Menu.Screen;Choice=$Menu.Choice;Episode=$Menu.Episode;Skill=$Menu.Skill;Slots=$Menu.Slots;SelectedSlot=$Menu.SelectedSlot;MessageTitle=$Menu.MessageTitle;MessageDetail=$Menu.MessageDetail;Settings=$Menu.Settings;AwaitingBinding=$Menu.AwaitingBinding;Startup=$Menu.Startup;SettingsChanged=$settingsChanged}
     }
-    if($screen -eq 0){
+    if($screen -in 0,7 -and $Key -in 'F2','F3'){$Menu.Screen=if($Key -eq 'F2'){8}else{9};$Menu.Choice=$Menu.SelectedSlot-1}
+    elseif($screen -eq 0){
         if($Key -eq 'Escape'){$Menu.Screen=1;$Menu.Choice=0}
         elseif($Key -eq 'Pause'){$Menu.Screen=7;$Menu.Choice=0}else{return $null}
     }elseif($screen -eq 7){
@@ -95,7 +96,7 @@ function Get-DoomCompactMenu {
         2 {@('Knee-Deep in the Dead','The Shores of Hell','Inferno','Thy Flesh Consumed')|Select-Object -First $Menu.Episodes}
         3 {@("I'm too young to die",'Hey, not too rough','Hurt me plenty','Ultra-Violence','Nightmare')}
         {$_ -in 4,6,10,11} {@('No','Yes')}
-        5 {@('Settings can remap game keys','WASD / arrows move and turn','Ctrl fire; E/Space/Enter use','Shift run; 1-7 select weapons','Tab map; +/- zoom; F follow','Map: arrows pan; M mark; C clear','P pause; Esc menu/back')}
+        5 {@('Settings can remap game keys','WASD / arrows move and turn','Ctrl fire; E/Space/Enter use','Shift run; 1-7 select weapons','Tab map; +/- zoom; F follow','Map: arrows pan; M mark; C clear','F2 save; F3 load; P pause; Esc menu')}
         7 {@('P / Enter / Esc to resume')}
         {$_ -in 8,9} {@($Menu.Slots|ForEach-Object {if($_.State -eq 'Ready'){"$($_.Slot)  E$($_.Episode)M$($_.Map)  $($_.Time)"}else{"$($_.Slot)  $($_.State)"}})}
         12 {@($Menu.MessageDetail,'Enter / Esc to return')}
@@ -163,7 +164,7 @@ function Get-DoomMenuPixels {
         5 {
             Draw-DoomMenuText $Graphics 'CONTROLS' 0 6 -Center
             $preferences=Copy-DoomUserSettings $Details.Settings
-            $lines=@("MOVE $(Get-DoomKeyBindingLabel $preferences.Bindings.Forward) / $(Get-DoomKeyBindingLabel $preferences.Bindings.Backward)","STRAFE $(Get-DoomKeyBindingLabel $preferences.Bindings.StrafeLeft) / $(Get-DoomKeyBindingLabel $preferences.Bindings.StrafeRight)","TURN $(Get-DoomKeyBindingLabel $preferences.Bindings.TurnLeft) / $(Get-DoomKeyBindingLabel $preferences.Bindings.TurnRight)","FIRE $(Get-DoomKeyBindingLabel $preferences.Bindings.Fire) / USE $(Get-DoomKeyBindingLabel $preferences.Bindings.Use)","RUN $(Get-DoomKeyBindingLabel $preferences.Bindings.Run) / 1-7 WEAPONS",'TAB MAP / +/- ZOOM','MAP: ARROWS PAN / F FOLLOW','M MARK / C CLEAR / P PAUSE','ESC MENU / REMAP IN SETTINGS')
+            $lines=@("MOVE $(Get-DoomKeyBindingLabel $preferences.Bindings.Forward) / $(Get-DoomKeyBindingLabel $preferences.Bindings.Backward)","STRAFE $(Get-DoomKeyBindingLabel $preferences.Bindings.StrafeLeft) / $(Get-DoomKeyBindingLabel $preferences.Bindings.StrafeRight)","TURN $(Get-DoomKeyBindingLabel $preferences.Bindings.TurnLeft) / $(Get-DoomKeyBindingLabel $preferences.Bindings.TurnRight)","FIRE $(Get-DoomKeyBindingLabel $preferences.Bindings.Fire) / USE $(Get-DoomKeyBindingLabel $preferences.Bindings.Use)","RUN $(Get-DoomKeyBindingLabel $preferences.Bindings.Run) / 1-7 WEAPONS",'TAB MAP / +/- ZOOM','MAP: ARROWS PAN / F FOLLOW','M MARK / C CLEAR / P PAUSE','F2 SAVE / F3 LOAD / ESC MENU')
             for($i=0;$i -lt $lines.Count;$i++){Draw-DoomMenuText $Graphics $lines[$i] 16 (30+18*$i) 1}
         }
         6 {

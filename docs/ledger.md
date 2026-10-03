@@ -1,5 +1,9 @@
 # Investigation ledger
 
+## 2026-10-02 — Direct save/load shortcuts
+
+F2 now opens the existing six-slot save screen and F3 opens load from gameplay or pause. Both preserve overwrite/load confirmations and reserve the keys from user rebinding. Existing menu/input checks pass; no gameplay route was run.
+
 ## 2026-10-02 — Reuse renderer wall-parameter buffers
 
 The live renderer now writes fixed-point wall parameters into per-context buffers instead of allocating two temporary arrays for each visible wall segment. The existing 20,049-case wall-parameter comparison passes, and a current-source E1M2 static render completes with an exact HUD match. This removes repeated allocations by construction; no frame-rate gain is claimed.

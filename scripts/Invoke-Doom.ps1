@@ -278,8 +278,8 @@ try {
                         }
                     }
                 }else{
-                    $keyCodes=if($menu.Screen -eq 0){@(27,80,19)}else{@(27,80,19,38,40,37,39,13,89,78)}
-                    foreach($code in $keyCodes){if($consoleState.Pressed[$code]){$key=switch($code){27{'Escape'};80{'Pause'};19{'Pause'};38{'Up'};40{'Down'};37{'Left'};39{'Right'};13{'Enter'};89{'Yes'};78{'No'}};break}}
+                    $keyCodes=if($menu.Screen -in 0,7){@(27,80,19,113,114)}else{@(27,80,19,38,40,37,39,13,89,78)}
+                    foreach($code in $keyCodes){if($consoleState.Pressed[$code]){$key=switch($code){27{'Escape'};80{'Pause'};19{'Pause'};113{'F2'};114{'F3'};38{'Up'};40{'Down'};37{'Left'};39{'Right'};13{'Enter'};89{'Yes'};78{'No'}};break}}
                 }
             }
             if($null -eq $key -and $scheduleIndex -lt $sessionScheduleData.Count -and $sessionScheduleData[$scheduleIndex].AtSeconds*1000 -le $wallNow){$key=$sessionScheduleData[$scheduleIndex].Key;$scheduleIndex++}
