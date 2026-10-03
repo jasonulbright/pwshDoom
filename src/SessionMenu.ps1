@@ -4,7 +4,7 @@
 . "$PSScriptRoot/SaveSlots.ps1"; . "$PSScriptRoot/UserSettings.ps1"
 function New-DoomMenuState {
     param([ValidateRange(1,4)][int]$Episodes=4,[int]$Episode=1,[int]$Skill=3)
-    return @{Screen=0;Choice=0;Episode=$Episode;Skill=$Skill;Episodes=$Episodes;Slots=@(1..6|ForEach-Object {@{Slot=$_;State='Empty';Sha256=$null;Episode=0;Map=0;Skill=0;Time='';SourceMatches=$true}});SelectedSlot=1;MessageTitle='';MessageDetail='';ReturnScreen=1;AwaitingBinding=$false;Settings=(New-DoomUserSettings)}
+    return @{Screen=0;Choice=0;Startup=$false;Episode=$Episode;Skill=$Skill;Episodes=$Episodes;Slots=@(1..6|ForEach-Object {@{Slot=$_;State='Empty';Sha256=$null;Episode=0;Map=0;Skill=0;Time='';SourceMatches=$true}});SelectedSlot=1;MessageTitle='';MessageDetail='';ReturnScreen=1;AwaitingBinding=$false;Settings=(New-DoomUserSettings)}
 }
 function Invoke-DoomMenuKey {
     param($Menu,[ValidateSet('Escape','Pause','Up','Down','Left','Right','Enter','Yes','No','Capture')][string]$Key,[int]$CaptureVirtualKey=0)
@@ -21,7 +21,7 @@ function Invoke-DoomMenuKey {
             elseif($null -ne $collision){$Menu.MessageTitle='KEY ALREADY USED';$Menu.MessageDetail=(Get-DoomKeyBindingLabel $CaptureVirtualKey)+' IS '+$collision}
             else{$Menu.Settings.Bindings[$name]=$CaptureVirtualKey;$settingsChanged=$true;$Menu.MessageTitle='KEY ASSIGNED';$Menu.MessageDetail="${name}: $(Get-DoomKeyBindingLabel $CaptureVirtualKey)"}
         }
-        return @{Action='ShowMenu';Screen=$Menu.Screen;Choice=$Menu.Choice;Episode=$Menu.Episode;Skill=$Menu.Skill;Slots=$Menu.Slots;SelectedSlot=$Menu.SelectedSlot;MessageTitle=$Menu.MessageTitle;MessageDetail=$Menu.MessageDetail;Settings=$Menu.Settings;AwaitingBinding=$Menu.AwaitingBinding;SettingsChanged=$settingsChanged}
+        return @{Action='ShowMenu';Screen=$Menu.Screen;Choice=$Menu.Choice;Episode=$Menu.Episode;Skill=$Menu.Skill;Slots=$Menu.Slots;SelectedSlot=$Menu.SelectedSlot;MessageTitle=$Menu.MessageTitle;MessageDetail=$Menu.MessageDetail;Settings=$Menu.Settings;AwaitingBinding=$Menu.AwaitingBinding;Startup=$Menu.Startup;SettingsChanged=$settingsChanged}
     }
     if($screen -eq 0){
         if($Key -eq 'Escape'){$Menu.Screen=1;$Menu.Choice=0}
@@ -56,10 +56,10 @@ function Invoke-DoomMenuKey {
     }elseif($Key -eq 'Enter' -or ($Key -eq 'Yes' -and $screen -in 4,6,10,11)){
         if($Key -eq 'Yes'){$Menu.Choice=1}
         switch($screen){
-            1 {switch($Menu.Choice){0{$Menu.Screen=0};1{$Menu.Screen=if($Menu.Episodes -gt 1){2}else{3};$Menu.Choice=if($Menu.Screen -eq 2){$Menu.Episode-1}else{$Menu.Skill-1}};2{$Menu.Screen=8;$Menu.Choice=0};3{$Menu.Screen=9;$Menu.Choice=0};4{$Menu.Screen=5};5{$Menu.Screen=14;$Menu.Choice=0};6{$Menu.Screen=6;$Menu.Choice=0}}}
+            1 {switch($Menu.Choice){0{$Menu.Screen=0;$Menu.Startup=$false};1{$Menu.Screen=if($Menu.Episodes -gt 1){2}else{3};$Menu.Choice=if($Menu.Screen -eq 2){$Menu.Episode-1}else{$Menu.Skill-1}};2{$Menu.Screen=8;$Menu.Choice=0};3{$Menu.Screen=9;$Menu.Choice=0};4{$Menu.Screen=5};5{$Menu.Screen=14;$Menu.Choice=0};6{$Menu.Screen=6;$Menu.Choice=0}}}
             2 {$Menu.Episode=$Menu.Choice+1;$Menu.Screen=3;$Menu.Choice=$Menu.Skill-1}
             3 {$Menu.Skill=$Menu.Choice+1;$Menu.Screen=4;$Menu.Choice=0}
-            4 {if($Menu.Choice -eq 1){$Menu.Screen=0;return @{Action='NewGame';Skill=$Menu.Skill;Episode=$Menu.Episode;Map=1}}else{$Menu.Screen=3;$Menu.Choice=$Menu.Skill-1}}
+            4 {if($Menu.Choice -eq 1){$Menu.Screen=0;$Menu.Startup=$false;return @{Action='NewGame';Skill=$Menu.Skill;Episode=$Menu.Episode;Map=1}}else{$Menu.Screen=3;$Menu.Choice=$Menu.Skill-1}}
             6 {if($Menu.Choice -eq 1){return @{Action='Quit'}}else{$Menu.Screen=1;$Menu.Choice=6}}
             {$_ -in 8,9} {
                 $Menu.SelectedSlot=$Menu.Choice+1;$entry=$Menu.Slots[$Menu.Choice];$Menu.ReturnScreen=$screen
@@ -75,7 +75,7 @@ function Invoke-DoomMenuKey {
             }
         }
     }else{return $null}
-    return @{Action='ShowMenu';Screen=$Menu.Screen;Choice=$Menu.Choice;Episode=$Menu.Episode;Skill=$Menu.Skill;Slots=$Menu.Slots;SelectedSlot=$Menu.SelectedSlot;MessageTitle=$Menu.MessageTitle;MessageDetail=$Menu.MessageDetail;Settings=$Menu.Settings;AwaitingBinding=$Menu.AwaitingBinding;SettingsChanged=$settingsChanged}
+    return @{Action='ShowMenu';Screen=$Menu.Screen;Choice=$Menu.Choice;Episode=$Menu.Episode;Skill=$Menu.Skill;Slots=$Menu.Slots;SelectedSlot=$Menu.SelectedSlot;MessageTitle=$Menu.MessageTitle;MessageDetail=$Menu.MessageDetail;Settings=$Menu.Settings;AwaitingBinding=$Menu.AwaitingBinding;Startup=$Menu.Startup;SettingsChanged=$settingsChanged}
 }
 
 function New-DoomMenuGraphics {
@@ -91,7 +91,7 @@ function Get-DoomCompactMenu {
     param($Menu,[int]$Columns,[int]$Rows)
     $title=switch($Menu.Screen){1{'pwshDoom menu'};2{'Choose episode'};3{'Choose skill'};4{'Start a new game?'};5{'Controls'};6{'Quit Doom?'};7{'Paused'};8{'Save game'};9{'Load game'};10{'Replace this save?'};11{'Load this save?'};12{$Menu.MessageTitle};13{$Menu.MessageTitle};14{'Settings'};15{if($Menu.AwaitingBinding){$bindingNames=Get-DoomKeyBindingNames;"Press key for $($bindingNames[$Menu.Choice])"}elseif($Menu.MessageTitle){$Menu.MessageTitle}else{'Configure keys'}};default{'pwshDoom'}}
     $items=switch($Menu.Screen){
-        1 {@('Resume game','New game','Save game','Load game','Controls','Settings','Quit')}
+        1 {$first=if($Menu.Startup){'Start game'}else{'Resume game'};@($first,'New game','Save game','Load game','Controls','Settings','Quit')}
         2 {@('Knee-Deep in the Dead','The Shores of Hell','Inferno','Thy Flesh Consumed')|Select-Object -First $Menu.Episodes}
         3 {@("I'm too young to die",'Hey, not too rough','Hurt me plenty','Ultra-Violence','Nightmare')}
         {$_ -in 4,6,10,11} {@('No','Yes')}
@@ -138,6 +138,7 @@ function Get-DoomMenuPixels {
         1 {
             $draw.DrawPatch($patches.M_DOOM,94,0,1)
             $labels=@('RESUME GAME','NEW GAME','SAVE GAME','LOAD GAME','CONTROLS','SETTINGS','QUIT')
+            if($null -ne $Details -and $Details.Startup){$labels[0]='START GAME'}
             for($i=0;$i -lt $labels.Count;$i++){Draw-DoomMenuText $Graphics $labels[$i] 66 (64+14*$i) 2}
             $draw.DrawPatch($patches.M_SKULL1,36,(62+14*$Choice),1)
         }

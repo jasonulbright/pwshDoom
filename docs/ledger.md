@@ -6373,4 +6373,9 @@ host attempts exposed a gameplay-only renderer handoff; the startup now passes
 menu pixels through the screen-render path. The current committed source also
 passes the existing all-map startup smoke at one idle tic/two serial views per
 map; raw output: `local/codex-clean-start-all-maps.json`. This does not verify
-physical input or map navigation.
+physical input or map navigation. The first menu action now reads Start Game
+until a session is started or loaded. The existing menu/input suites pass
+139/59 and 10 checks; a no-input host publishes that menu at tic 0. The
+explicit E1M2 launch path also presents gameplay at tic 0 with no startup
+warm-up (two-second idle host: 69 tics/9 headless updates, not a pacing result;
+`local/codex-direct-start-e1m2.json`).

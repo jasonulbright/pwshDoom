@@ -161,7 +161,7 @@ try {
     }
     if($StartupMenu){
         $menuScreen=1;$menuRevision=1;$menuGraphics=New-DoomMenuGraphics $content
-        $initialMenu=New-DoomMenuState $episodeCount $Episode $Skill
+        $initialMenu=New-DoomMenuState $episodeCount $Episode $Skill;$initialMenu.Startup=$true
         $menuPixels=Get-DoomMenuPixels $menuGraphics 1 0 $Episode $Skill $episodeCount -Details $initialMenu
     }
     $game.BeforeLevelLoad={param($LoadingGame) Begin-SimulationLevelLoad}

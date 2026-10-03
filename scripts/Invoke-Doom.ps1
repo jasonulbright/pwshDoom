@@ -138,7 +138,7 @@ try {
     $simulation=New-DoomSimulation $Wad $Skill $Episode $Map -StopAtLevelEnd:$stopAtLevelEnd -ReplayCheckpoints:$withCheckpoints -CheckpointReplay $(if($null -ne $replayData -and $replayData.Checkpoints){$Replay}else{''}) -SaveRoot $SaveRoot -Sound:$Sound -RealtimeAudio:$liveAudioClock -SoundVolume $(if($preferences.SoundMuted){0}else{$preferences.SoundVolume}) -MusicVolume $preferences.MusicVolume -MusicCatalog $MusicCatalog -StartupMenu:$StartupMenu
     $snapshot=Read-DoomSimulationSnapshot $simulation $null
     $menu=New-DoomMenuState ($simulation.View.ReadInt32(80)) $Episode $Skill
-    if($StartupMenu){$menu.Screen=1}
+    if($StartupMenu){$menu.Screen=1;$menu.Startup=$true}
     $menu.Settings=Copy-DoomUserSettings $preferences
     if($null -eq $snapshot){throw 'Initial simulation snapshot was not published.'}
     $context=Read-GameRenderAssets $simulation.Assets
@@ -251,6 +251,7 @@ try {
                 if($pendingAction.Action.Action -in 'SaveGame','LoadGame'){
                     $menu.Screen=[int]$response.Screen;$menu.Choice=[int]$response.Choice;$menu.Episode=[int]$response.Episode;$menu.Skill=[int]$response.Skill
                     $menu.MessageTitle=$response.MessageTitle;$menu.MessageDetail=$response.MessageDetail;$menu.ReturnScreen=[int]$response.ReturnScreen
+                    if($response.Success -and $pendingAction.Action.Action -eq 'LoadGame'){$menu.Startup=$false}
                     if(-not $response.Success -and $pendingAction.FromReplay){throw "Recorded load failed: $($response.Error)"}
                 }
                 if($null -ne $consoleState -and $pendingAction.Action.Action -in 'SaveGame','LoadGame','NewGame'){Reset-DoomInputAfterSessionAction $consoleState}

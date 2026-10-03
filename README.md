@@ -25,7 +25,7 @@ Or, from PowerShell in the extracted folder:
 .\Play.ps1 -Style Matrix -Wad 'D:\Games\DOOM.WAD'
 ```
 
-The normal launch opens the game menu. Choose **Resume Game** to enter the selected starting map or **New Game** to choose an episode and skill. For a direct map launch, pass `-Episode`, `-Map` and `-Skill` to `Start-Doom.ps1`.
+The normal launch opens the game menu. Choose **Start Game** to enter the selected starting map or **New Game** to choose an episode and skill. After starting, that first option becomes **Resume Game**. For a direct map launch, pass `-Episode`, `-Map` and `-Skill` to `Start-Doom.ps1`.
 
 Sound effects are enabled. Add `-Silent` to disable them or `-Ascii` if Japanese glyphs do not display correctly. Optional music requires a local catalog prepared from your own IWAD and soundfont as described in [music preparation](docs/music-preparation.md), then passed with `-MusicCatalog`. Neither assets nor prepared audio are packaged; continuous campaign playback and acoustic quality remain unqualified. No WADs, soundfonts or downloaded tools are distributed.
 
