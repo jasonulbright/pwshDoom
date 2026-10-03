@@ -1,5 +1,9 @@
 # Investigation ledger
 
+## 2026-10-02 — Local storage cleanup
+
+At the user's direction, removed 273 reviewed MP4s (13.34 GiB) while retaining all 2,050 other files under `local/recordings`. Removed ten clean duplicate source checkouts whose commits are present in the main repository. No tracked files, original WADs, downloaded tools, or upstream source assets were removed. The full repo measured 28,327,531,727 bytes (28.328 GB decimal / 26.382 GiB), below the 30 GB cap. Keep all future project work inside this repo and preserve the same cap.
+
 ## 2026-10-02 — Direct save/load shortcuts
 
 During gameplay or pause, F1 opens Controls, F2 opens the existing six-slot save screen, F3 opens load, and F10 opens the existing quit confirmation. Canceling F10 resumes play; menu-origin quit still returns to the menu. Function keys remain reserved from user rebinding. Existing menu/input checks pass; no gameplay route was run.

@@ -10,11 +10,12 @@ Latest steering, 2026-09-27: the next user playtest milestone is one complete Ep
 - Keep author reports, source inspection, measured behavior, and hypotheses distinct.
 - Preserve raw results and exact parameters. Never call completed console writes displayed FPS.
 - Use the user's requested root `C:\projects\pwshDoom`.
+- Keep the entire repo tree, including ignored files and worktrees, below 30 GB decimal. Keep all project work and temporary output inside this repo; never use folders outside it. The user says reviewed MP4s are unnecessary: retain recording metadata/findings, not the video files, unless explicitly asked.
 - Keep WADs, extracted images, original downloaded source checkouts, and downloaded tools in ignored `local/`. An explicitly attributed, licensed source subset adopted for the implementation may live under `src/`; preserve notices and record modifications.
 - Do not adopt external code without checking its license. A runtime adapter may inspect/test a user-local source file while leaving it outside this repository.
 - Keep experiments finite. Clean up only resources created by the study; preserve the user's Terminal profiles and default settings.
 - The user authorized private GitHub backup on 2026-09-11 and public preview publication on 2026-09-19. `origin` is `https://github.com/jasonulbright/pwshDoom.git`; the repository is now public and `v0.1.0-preview.1` is published. Push reviewed milestone commits after checks and verify the remote branch matches. Ignored `local/` assets and recordings remain outside Git; never commit them as part of a routine backup.
-- The user requested screen recordings of live effect test runs. Keep actual window-capture footage and per-run metadata under ignored `local/recordings`; publish only portable findings/hashes to the repo. Label recorded runs separately from clean performance measurements. Retain original footage when making trimmed/cropped viewing copies.
+- Preserve the metadata and portable findings from live effect runs under ignored `local/recordings` or tracked receipts. Do not generate or retain reviewed MP4 footage unless the user explicitly asks for it.
 - Do not change security settings for performance. Record access limitations rather than obscuring them.
 - Pure PowerShell here means game/encoder algorithms written in PowerShell using standard .NET APIs. Any compiled custom helper must be identified separately.
 - Run codec correctness checks when modifying encoding, and appropriate targeted benchmarks when making performance claims.
