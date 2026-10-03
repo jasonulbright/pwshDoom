@@ -1,5 +1,9 @@
 # Investigation ledger
 
+## 2026-10-02 — Reuse renderer wall-parameter buffers
+
+The live renderer now writes fixed-point wall parameters into per-context buffers instead of allocating two temporary arrays for each visible wall segment. The existing 20,049-case wall-parameter comparison passes, and a current-source E1M2 static render completes with an exact HUD match. This removes repeated allocations by construction; no frame-rate gain is claimed.
+
 ## 2026-09-29 — Focused Ultimate Doom skill behavior matrix
 
 The roadmap requires difficulty-dependent gameplay behavior to be separately qualified, while existing campaign and transition coverage primarily exercises Medium. Added a real-IWAD check for all five settings and separate Medium-skill Fast Monsters / Respawn Monsters options. On the installed Steam DOOM.WAD (SHA-256 6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F), all 37 checks pass under PowerShell 7.6.5 at source commit 14feeab05c09cec4315f8060d2852b42008b2356. E1M1 kill counts are 4/4/6/29/29 from Baby through Nightmare; the expected counts are computed from the IWAD THINGS flags and monster kill flags. Ten damage costs five health only on Baby. One shell pickup gives eight shells on Baby/Nightmare and four on other skills. Demon run-state duration is one tic on Nightmare or Fast Monsters, otherwise two; Imp fireball speed doubles from 10 to 20 map units/tic under Nightmare or Fast Monsters. Imp startup reaction delay is zero on Nightmare and its normal eight tics otherwise. The 420-tic respawn boundary passes on Nightmare and with Respawn Monsters; Fast Monsters alone does not enable respawning.

@@ -75,6 +75,7 @@ function New-FastRenderContext {
     $ctx=@{Content=$Content;World=$World;Lighting=(New-FastLightingTables);Pixels=[byte[]]::new(64000);Depth=[double[]]::new(64000);
         TopClip=[int[]]::new(320);BottomClip=[int[]]::new(320);Planes=[int[]]::new(53760);Patches=@{};Textures=@{};Hud=@{};
         Stack=[int[]]::new($map.Nodes.Length*2+4);SkyColumns=[int[]]::new(320);RaySin=[int[]]::new(320);RayCos=[int[]]::new(320);
+        WallPointScratch=[long[]]::new(2);WallParameterScratch=[long[]]::new(3);
         SpriteClipWalls=[object[]]::new(320);SpriteClipCounts=[int[]]::new(320);ActorClipTop=[int[]]::new(320);ActorClipBottom=[int[]]::new(320);
         MaskedColumns=[Collections.Generic.List[hashtable]]::new();SegmentGeometry=[double[]]::new($map.Segs.Length*6);
         SegmentAngles=[uint32[]]::new($map.Segs.Length);
@@ -183,12 +184,15 @@ function Get-FastPointDistData {
 
 function Get-FastWallUParameters {
     param([int]$ViewX,[int]$ViewY,[int]$VertexX,[int]$VertexY,[uint32]$SegmentAngle,
-        [uint32]$ViewAngle,[int]$SegmentOffset,[int]$SideOffset,[uint32[]]$TanToAngle,[int[]]$FineSine)
+        [uint32]$ViewAngle,[int]$SegmentOffset,[int]$SideOffset,[uint32[]]$TanToAngle,[int[]]$FineSine,[long[]]$PointResult,[long[]]$Result)
+    [bool]$ownsPointResult=$null -eq $PointResult;[bool]$ownsResult=$null -eq $Result
+    if($ownsPointResult){$PointResult=[long[]]::new(2)}
+    if($ownsResult){$Result=[long[]]::new(3)}
     # Numeric equivalent of the pinned GPL ThreeDRenderer wall-U formula.
     # Worker processes consume transported tables and need no engine classes.
     [uint32]$normal=([long]$SegmentAngle+0x40000000L) -band 0xffffffffL
-    [long[]]$pointParameters=Get-FastPointAngleDistanceData $ViewX $ViewY $VertexX $VertexY $TanToAngle $FineSine
-    [uint32]$angle1=$pointParameters[0];[int]$hyp=$pointParameters[1]
+    Get-FastPointAngleDistanceData $ViewX $ViewY $VertexX $VertexY $TanToAngle $FineSine -Result $PointResult
+    [uint32]$angle1=$PointResult[0];[int]$hyp=$PointResult[1]
     [uint32]$difference=([long]$normal-$angle1) -band 0xffffffffL
     [long]$absoluteAngle=$difference
     if($absoluteAngle -gt 0x80000000L){$absoluteAngle=0x100000000L-$absoluteAngle}
@@ -200,7 +204,8 @@ function Get-FastWallUParameters {
     $offset=($offset+$SegmentOffset+[long]$SideOffset) -band 0xffffffffL
     if($offset -ge 0x80000000L){$offset-=0x100000000L}
     [uint32]$center=(0x40000000L+[long]$ViewAngle-$normal) -band 0xffffffffL
-    return ,([long[]]@($perp,$offset,$center))
+    $Result[0]=$perp;$Result[1]=$offset;$Result[2]=$center
+    if($ownsResult){return ,$Result}
 }
 
 function Get-FastWallScaleData {
@@ -502,7 +507,8 @@ function Invoke-FastRender {
                         [int]$wallAXData=[Math]::Truncate($segAX*65536.0);[int]$wallAYData=[Math]::Truncate($segAY*65536.0)
                         [int]$wallSegOffset=[Math]::Truncate($Context.SegmentGeometry[$geometryOffset+5]*65536.0)
                         [int]$wallSideOffset=[Math]::Truncate($side.TextureOffset*65536.0)
-                        [long[]]$wallParameters=Get-FastWallUParameters $viewXData $viewYData $wallAXData $wallAYData $wallSegmentAngles[$segIndex] $viewAngleData $wallSegOffset $wallSideOffset $Context.TanToAngleTable $fineSine
+                        Get-FastWallUParameters $viewXData $viewYData $wallAXData $wallAYData $wallSegmentAngles[$segIndex] $viewAngleData $wallSegOffset $wallSideOffset $Context.TanToAngleTable $fineSine -PointResult $Context.WallPointScratch -Result $Context.WallParameterScratch
+                        [long[]]$wallParameters=$Context.WallParameterScratch
                         $wallPerpData=$wallParameters[0];$wallOffsetData=$wallParameters[1];$wallCenterAngleData=$wallParameters[2];$wallUReady=$true
                     }
                     [int]$wallScaleStart=Get-FastWallScaleData $wallPerpData $wallCenterAngleData $Context.PlaneColumnAngles[$screenScaleX0] $fineSine
@@ -571,7 +577,8 @@ function Invoke-FastRender {
                             [int]$wallAXData=[Math]::Truncate($segAX*65536.0);[int]$wallAYData=[Math]::Truncate($segAY*65536.0)
                             [int]$wallSegOffset=[Math]::Truncate($Context.SegmentGeometry[$geometryOffset+5]*65536.0)
                             [int]$wallSideOffset=[Math]::Truncate($side.TextureOffset*65536.0)
-                            [long[]]$wallParameters=Get-FastWallUParameters $viewXData $viewYData $wallAXData $wallAYData $wallSegmentAngles[$segIndex] $viewAngleData $wallSegOffset $wallSideOffset $Context.TanToAngleTable $fineSine
+                            Get-FastWallUParameters $viewXData $viewYData $wallAXData $wallAYData $wallSegmentAngles[$segIndex] $viewAngleData $wallSegOffset $wallSideOffset $Context.TanToAngleTable $fineSine -PointResult $Context.WallPointScratch -Result $Context.WallParameterScratch
+                            [long[]]$wallParameters=$Context.WallParameterScratch
                             $wallPerpData=$wallParameters[0];$wallOffsetData=$wallParameters[1];$wallCenterAngleData=$wallParameters[2];$wallUReady=$true
                         }
                         if(-not $columnUReady){

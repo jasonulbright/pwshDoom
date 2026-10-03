@@ -60,11 +60,15 @@ function Get-FastPointAngleData {
 }
 
 function Get-FastPointAngleDistanceData {
-    param([int]$FromX,[int]$FromY,[int]$ToX,[int]$ToY,[uint32[]]$TanToAngleTable,[int[]]$FineSine)
+    param([int]$FromX,[int]$FromY,[int]$ToX,[int]$ToY,[uint32[]]$TanToAngleTable,[int[]]$FineSine,[long[]]$Result)
+    [bool]$ownsResult=$null -eq $Result
+    if($ownsResult){$Result=[long[]]::new(2)}
     [long]$x=(([long]$ToX-[long]$FromX)-band 0xFFFFFFFFL);[long]$y=(([long]$ToY-[long]$FromY)-band 0xFFFFFFFFL)
     if($x -ge 0x80000000L){$x-=0x100000000L};if($y -ge 0x80000000L){$y-=0x100000000L}
     if($x -eq -2147483648L -or $y -eq -2147483648L){
-        return ,([long[]]@((Get-FastPointAngleData $FromX $FromY $ToX $ToY $TanToAngleTable),(Get-FastPointDistData $FromX $FromY $ToX $ToY $TanToAngleTable $FineSine)))
+        $Result[0]=Get-FastPointAngleData $FromX $FromY $ToX $ToY $TanToAngleTable
+        $Result[1]=Get-FastPointDistData $FromX $FromY $ToX $ToY $TanToAngleTable $FineSine
+        if($ownsResult){return ,$Result};return
     }
     [bool]$negativeX=$x -lt 0;[bool]$negativeY=$y -lt 0
     if($negativeX){$x=-$x};if($negativeY){$y=-$y}
@@ -79,7 +83,8 @@ function Get-FastPointAngleDistanceData {
     [int]$fraction=0;if($major -ne 0){$fraction=Get-FastFixedDivData $minor $major}
     [uint32]$distanceAngle=([long]$TanToAngleTable[[uint32]$fraction -shr 5]+0x40000000L) -band 0xFFFFFFFFL
     [int]$distance=Get-FastFixedDivData $major $FineSine[$distanceAngle -shr 19]
-    return ,([long[]]@($angle,$distance))
+    $Result[0]=$angle;$Result[1]=$distance
+    if($ownsResult){return ,$Result}
 }
 
 function Get-FastSpriteRotation {
