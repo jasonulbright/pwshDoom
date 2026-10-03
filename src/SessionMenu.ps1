@@ -7,7 +7,7 @@ function New-DoomMenuState {
     return @{Screen=0;Choice=0;Startup=$false;Episode=$Episode;Skill=$Skill;Episodes=$Episodes;Slots=@(1..6|ForEach-Object {@{Slot=$_;State='Empty';Sha256=$null;Episode=0;Map=0;Skill=0;Time='';SourceMatches=$true}});SelectedSlot=1;MessageTitle='';MessageDetail='';ReturnScreen=1;AwaitingBinding=$false;Settings=(New-DoomUserSettings)}
 }
 function Invoke-DoomMenuKey {
-    param($Menu,[ValidateSet('Escape','Pause','F2','F3','Up','Down','Left','Right','Enter','Yes','No','Capture')][string]$Key,[int]$CaptureVirtualKey=0)
+    param($Menu,[ValidateSet('Escape','Pause','F1','F2','F3','F10','Up','Down','Left','Right','Enter','Yes','No','Capture')][string]$Key,[int]$CaptureVirtualKey=0)
     $screen=$Menu.Screen;$settingsChanged=$false
     if($screen -eq 13){return $null}
     if($screen -eq 15 -and $Menu.AwaitingBinding){
@@ -23,14 +23,21 @@ function Invoke-DoomMenuKey {
         }
         return @{Action='ShowMenu';Screen=$Menu.Screen;Choice=$Menu.Choice;Episode=$Menu.Episode;Skill=$Menu.Skill;Slots=$Menu.Slots;SelectedSlot=$Menu.SelectedSlot;MessageTitle=$Menu.MessageTitle;MessageDetail=$Menu.MessageDetail;Settings=$Menu.Settings;AwaitingBinding=$Menu.AwaitingBinding;Startup=$Menu.Startup;SettingsChanged=$settingsChanged}
     }
-    if($screen -in 0,7 -and $Key -in 'F2','F3'){$Menu.Screen=if($Key -eq 'F2'){8}else{9};$Menu.Choice=$Menu.SelectedSlot-1}
+    if($screen -in 0,7 -and $Key -in 'F1','F2','F3','F10'){
+        switch($Key){
+            F1 {$Menu.Screen=5;$Menu.Choice=0;$Menu.ReturnScreen=0}
+            F2 {$Menu.Screen=8;$Menu.Choice=$Menu.SelectedSlot-1}
+            F3 {$Menu.Screen=9;$Menu.Choice=$Menu.SelectedSlot-1}
+            F10 {$Menu.Screen=6;$Menu.Choice=0;$Menu.ReturnScreen=0}
+        }
+    }
     elseif($screen -eq 0){
         if($Key -eq 'Escape'){$Menu.Screen=1;$Menu.Choice=0}
         elseif($Key -eq 'Pause'){$Menu.Screen=7;$Menu.Choice=0}else{return $null}
     }elseif($screen -eq 7){
         if($Key -in 'Pause','Escape','Enter'){$Menu.Screen=0}else{return $null}
     }elseif($Key -eq 'Escape' -or ($Key -eq 'No' -and $screen -in 4,6,10,11)){
-        $Menu.Screen=switch($screen){1{0};2{1};3{if($Menu.Episodes -gt 1){2}else{1}};4{3};10{8};11{9};12{$Menu.ReturnScreen};15{14};default{1}}
+        $Menu.Screen=switch($screen){1{0};2{1};3{if($Menu.Episodes -gt 1){2}else{1}};4{3};5{$Menu.ReturnScreen};6{$Menu.ReturnScreen};10{8};11{9};12{$Menu.ReturnScreen};15{14};default{1}}
         $Menu.Choice=if($Menu.Screen -eq 2){$Menu.Episode-1}elseif($Menu.Screen -eq 3){$Menu.Skill-1}elseif($Menu.Screen -in 8,9){$Menu.SelectedSlot-1}elseif($Menu.Screen -eq 14){5}else{0}
     }elseif($screen -eq 14 -and $Key -in 'Left','Right','Enter'){
         switch($Menu.Choice){
@@ -48,7 +55,7 @@ function Invoke-DoomMenuKey {
         elseif($Menu.Choice -eq 9){$Menu.Settings.Bindings=(New-DoomKeyBindings);$settingsChanged=$true;$Menu.MessageTitle='DEFAULT KEYS RESTORED';$Menu.MessageDetail=''}
         else{$Menu.Screen=14;$Menu.Choice=5}
     }elseif($screen -eq 5){
-        if($Key -eq 'Enter'){$Menu.Screen=1;$Menu.Choice=4}else{return $null}
+        if($Key -eq 'Enter'){$Menu.Screen=$Menu.ReturnScreen;$Menu.Choice=if($Menu.Screen -eq 1){4}else{0}}else{return $null}
     }elseif($screen -eq 12){
         if($Key -eq 'Enter'){$Menu.Screen=$Menu.ReturnScreen;$Menu.Choice=if($Menu.Screen -in 8,9){$Menu.SelectedSlot-1}else{0}}else{return $null}
     }elseif($Key -in 'Up','Down'){
@@ -57,7 +64,7 @@ function Invoke-DoomMenuKey {
     }elseif($Key -eq 'Enter' -or ($Key -eq 'Yes' -and $screen -in 4,6,10,11)){
         if($Key -eq 'Yes'){$Menu.Choice=1}
         switch($screen){
-            1 {switch($Menu.Choice){0{$Menu.Screen=0;$Menu.Startup=$false};1{$Menu.Screen=if($Menu.Episodes -gt 1){2}else{3};$Menu.Choice=if($Menu.Screen -eq 2){$Menu.Episode-1}else{$Menu.Skill-1}};2{$Menu.Screen=8;$Menu.Choice=0};3{$Menu.Screen=9;$Menu.Choice=0};4{$Menu.Screen=5};5{$Menu.Screen=14;$Menu.Choice=0};6{$Menu.Screen=6;$Menu.Choice=0}}}
+            1 {switch($Menu.Choice){0{$Menu.Screen=0;$Menu.Startup=$false};1{$Menu.Screen=if($Menu.Episodes -gt 1){2}else{3};$Menu.Choice=if($Menu.Screen -eq 2){$Menu.Episode-1}else{$Menu.Skill-1}};2{$Menu.Screen=8;$Menu.Choice=0};3{$Menu.Screen=9;$Menu.Choice=0};4{$Menu.Screen=5;$Menu.Choice=0;$Menu.ReturnScreen=1};5{$Menu.Screen=14;$Menu.Choice=0};6{$Menu.Screen=6;$Menu.Choice=0;$Menu.ReturnScreen=1}}}
             2 {$Menu.Episode=$Menu.Choice+1;$Menu.Screen=3;$Menu.Choice=$Menu.Skill-1}
             3 {$Menu.Skill=$Menu.Choice+1;$Menu.Screen=4;$Menu.Choice=0}
             4 {if($Menu.Choice -eq 1){$Menu.Screen=0;$Menu.Startup=$false;return @{Action='NewGame';Skill=$Menu.Skill;Episode=$Menu.Episode;Map=1}}else{$Menu.Screen=3;$Menu.Choice=$Menu.Skill-1}}
@@ -96,7 +103,7 @@ function Get-DoomCompactMenu {
         2 {@('Knee-Deep in the Dead','The Shores of Hell','Inferno','Thy Flesh Consumed')|Select-Object -First $Menu.Episodes}
         3 {@("I'm too young to die",'Hey, not too rough','Hurt me plenty','Ultra-Violence','Nightmare')}
         {$_ -in 4,6,10,11} {@('No','Yes')}
-        5 {@('Settings can remap game keys','WASD / arrows move and turn','Ctrl fire; E/Space/Enter use','Shift run; 1-7 select weapons','Tab map; +/- zoom; F follow','Map: arrows pan; M mark; C clear','F2 save; F3 load; P pause; Esc menu')}
+        5 {@('Settings can remap game keys','WASD / arrows move and turn','Ctrl fire; E/Space/Enter use','Shift run; 1-7 select weapons','Tab map; +/- zoom; F follow','Map: arrows pan; M mark; C clear','F1 controls; F2 save; F3 load','F10 quit; P pause; Esc menu')}
         7 {@('P / Enter / Esc to resume')}
         {$_ -in 8,9} {@($Menu.Slots|ForEach-Object {if($_.State -eq 'Ready'){"$($_.Slot)  E$($_.Episode)M$($_.Map)  $($_.Time)"}else{"$($_.Slot)  $($_.State)"}})}
         12 {@($Menu.MessageDetail,'Enter / Esc to return')}
@@ -164,7 +171,7 @@ function Get-DoomMenuPixels {
         5 {
             Draw-DoomMenuText $Graphics 'CONTROLS' 0 6 -Center
             $preferences=Copy-DoomUserSettings $Details.Settings
-            $lines=@("MOVE $(Get-DoomKeyBindingLabel $preferences.Bindings.Forward) / $(Get-DoomKeyBindingLabel $preferences.Bindings.Backward)","STRAFE $(Get-DoomKeyBindingLabel $preferences.Bindings.StrafeLeft) / $(Get-DoomKeyBindingLabel $preferences.Bindings.StrafeRight)","TURN $(Get-DoomKeyBindingLabel $preferences.Bindings.TurnLeft) / $(Get-DoomKeyBindingLabel $preferences.Bindings.TurnRight)","FIRE $(Get-DoomKeyBindingLabel $preferences.Bindings.Fire) / USE $(Get-DoomKeyBindingLabel $preferences.Bindings.Use)","RUN $(Get-DoomKeyBindingLabel $preferences.Bindings.Run) / 1-7 WEAPONS",'TAB MAP / +/- ZOOM','MAP: ARROWS PAN / F FOLLOW','M MARK / C CLEAR / P PAUSE','F2 SAVE / F3 LOAD / ESC MENU')
+            $lines=@("MOVE $(Get-DoomKeyBindingLabel $preferences.Bindings.Forward) / $(Get-DoomKeyBindingLabel $preferences.Bindings.Backward)","STRAFE $(Get-DoomKeyBindingLabel $preferences.Bindings.StrafeLeft) / $(Get-DoomKeyBindingLabel $preferences.Bindings.StrafeRight)","TURN $(Get-DoomKeyBindingLabel $preferences.Bindings.TurnLeft) / $(Get-DoomKeyBindingLabel $preferences.Bindings.TurnRight)","FIRE $(Get-DoomKeyBindingLabel $preferences.Bindings.Fire) / USE $(Get-DoomKeyBindingLabel $preferences.Bindings.Use)","RUN $(Get-DoomKeyBindingLabel $preferences.Bindings.Run) / 1-7 WEAPONS",'TAB MAP / +/- ZOOM','MAP: ARROWS PAN / F FOLLOW','M MARK / C CLEAR / P PAUSE','F1 HELP / F2 SAVE / F3 LOAD / F10 QUIT')
             for($i=0;$i -lt $lines.Count;$i++){Draw-DoomMenuText $Graphics $lines[$i] 16 (30+18*$i) 1}
         }
         6 {

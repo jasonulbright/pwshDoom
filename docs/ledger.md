@@ -2,7 +2,7 @@
 
 ## 2026-10-02 — Direct save/load shortcuts
 
-F2 now opens the existing six-slot save screen and F3 opens load from gameplay or pause. Both preserve overwrite/load confirmations and reserve the keys from user rebinding. Existing menu/input checks pass; no gameplay route was run.
+During gameplay or pause, F1 opens Controls, F2 opens the existing six-slot save screen, F3 opens load, and F10 opens the existing quit confirmation. Canceling F10 resumes play; menu-origin quit still returns to the menu. Function keys remain reserved from user rebinding. Existing menu/input checks pass; no gameplay route was run.
 
 ## 2026-10-02 — Reuse renderer wall-parameter buffers
 
