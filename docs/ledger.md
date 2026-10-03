@@ -6370,4 +6370,7 @@ old hidden 140-tic move/fire sequence that was run and reset before startup.
 The menu-only host starts at tic 0 with the menu screen published; existing
 menu suites pass 139 checks/59 screen fixtures and 10 input checks. Initial
 host attempts exposed a gameplay-only renderer handoff; the startup now passes
-menu pixels through the screen-render path. This does not verify physical input.
+menu pixels through the screen-render path. The current committed source also
+passes the existing all-map startup smoke at one idle tic/two serial views per
+map; raw output: `local/codex-clean-start-all-maps.json`. This does not verify
+physical input or map navigation.
