@@ -3,7 +3,25 @@
 ## Unreleased
 
 Full Ultimate Doom campaign, independent fidelity, physical/acoustic review,
-display pacing and second-hardware qualification continue after Preview.5.
+display pacing and second-hardware qualification continue after Preview.7.
+
+## 0.1.0-preview.7 — 2026-10-02
+
+Cumulative playable community preview after35 commits since Preview.6. Preserves
+Classic, Matrix and AnsiArt and keeps gameplay, rendering and audio mixing in
+PowerShell. See [scope and current limits](docs/release-preview7.md); this is
+not full Ultimate Doom certification.
+
+- Add function-key access to controls (F1), save (F2), load (F3) and confirmed
+  quit (F10). Canceling F10 returns to the game.
+- Reuse per-renderer wall-parameter buffers and cached fixed-point WAD inputs.
+  The E1M2 static image hash is unchanged. The paired benchmark could not reach
+  timing because its isolated module could not resolve `[Patches]`; no speedup
+  or pacing improvement is claimed.
+- Full Episode 1 human completion, original-frame fidelity, audio listening,
+  physical-device review and 35-tic/60-display qualification remain open.
+
+Published package: [v0.1.0-preview.7](https://github.com/jasonulbright/pwshDoom/releases/tag/v0.1.0-preview.7).
 
 ## 0.1.0-preview.6 — 2026-10-02
 

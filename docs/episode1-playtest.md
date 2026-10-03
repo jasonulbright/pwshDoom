@@ -12,7 +12,7 @@ A normal completion is enough; 100% kills, items, and secrets are not required. 
 
 ## Build and launch
 
-Use the published Preview.6 package, whose manifest pins clean source commit 0145d751a6f846114eaa6f243296086a3c71dccb, or the matching current checkout. The packaged PowerShell renderer preselects eligible textured wall bands per segment; its fixed-view E1M2 ABBA trial reports a 2.88% lower median total-render time with exact output hashes. The extracted package passes 36 map-start/35-idle-tic smokes and, in each of Classic, Matrix and AnsiArt, five-view serial/16-worker parity over 320,000 pixels. These checks do not navigate or finish maps. See the [wall-band integration receipt](../results/wall-band-renderer-integration-20261002.json), [package validation](../results/preview6-package-validation-20261002.json), [traversal receipt](../results/visibility-iterative-integration-20261002.json), and [playthrough performance evidence](performance.md#active-wall-band-preselection-trial--october-2-2026). The public [Preview.6 package](https://github.com/jasonulbright/pwshDoom/releases/tag/v0.1.0-preview.6) is the stable handoff for this route.
+Use the published Preview.7 package or the matching current checkout. Its manifest identifies the exact source commit. The earlier Preview.6 package separately passed its pinned 36-map and three-style worker checks; those checks do not navigate or finish maps. Current menu/render changes and their limits are in the [Preview.7 release notes](release-preview7.md); historical evidence remains in the [wall-band integration receipt](../results/wall-band-renderer-integration-20261002.json), [Preview.6 package validation](../results/preview6-package-validation-20261002.json), [traversal receipt](../results/visibility-iterative-integration-20261002.json), and [playthrough performance evidence](performance.md#active-wall-band-preselection-trial--october-2-2026).
 
 Use 64-bit PowerShell 7.6.x and Windows Terminal. The required user-owned Ultimate Doom IWAD has SHA-256 `6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F`. WADs, soundfonts, prepared music, media, tools and the research PDF are excluded. The local eleven-track Episode 1 catalog covers this route; omit `-MusicCatalog` for effects-only play. Audio startup rechecks payloads and IWAD score identity.
 
@@ -23,10 +23,10 @@ $root = 'C:\projects\pwshDoom'
 $wad = 'C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\base\DOOM.WAD'
 $local = 'C:\projects\pwshDoom\local'
 $catalog = Join-Path $local 'music-prepared-episode1.json'
-$record = Join-Path $local 'episode1-human-input-preview6.json'
-$report = Join-Path $local 'episode1-human-session-preview6.json'
-$saves = Join-Path $local 'episode1-human-saves-preview6'
-$settings = Join-Path $local 'episode1-human-settings-preview6.json'
+$record = Join-Path $local 'episode1-human-input-preview7.json'
+$report = Join-Path $local 'episode1-human-session-preview7.json'
+$saves = Join-Path $local 'episode1-human-saves-preview7'
+$settings = Join-Path $local 'episode1-human-settings-preview7.json'
 pwsh -NoProfile -File (Join-Path $root 'Start-Doom.ps1') -Wad $wad -Workers 16 -Episode 1 -Map 1 -Skill 3 -Style Classic -Sound -MusicCatalog $catalog -RecordInput $record -Report $report -SaveRoot $saves -SettingsPath $settings -Maximized -FontSize 5
 ~~~
 
