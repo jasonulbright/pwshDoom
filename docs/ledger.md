@@ -6361,3 +6361,13 @@ and distance. Existing wall-parameter comparisons pass 20,049 cases, including
 the eleven matching overflow errors; sixteen-worker Classic matches serial at
 five E3M6 views. In one fixed-state ABBA set, median render time is flat (+0.5%)
 and p95 is lower (−9%); this is not a live pacing result.
+
+### Launcher menu and clean game start — October 2, 2026
+
+Ordinary launches now open the existing WAD menu before gameplay; explicit
+episode/map/skill launches and replay/scripted runs remain direct. Removed the
+old hidden 140-tic move/fire sequence that was run and reset before startup.
+The menu-only host starts at tic 0 with the menu screen published; existing
+menu suites pass 139 checks/59 screen fixtures and 10 input checks. Initial
+host attempts exposed a gameplay-only renderer handoff; the startup now passes
+menu pixels through the screen-render path. This does not verify physical input.

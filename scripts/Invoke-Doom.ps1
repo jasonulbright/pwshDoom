@@ -10,7 +10,7 @@ param([Parameter(Mandatory)][string]$Wad,[ValidateRange(1,32)][int]$Workers=16,
     [ValidateSet('Strips','Batch','AsyncBatch')][string]$TerminalOutput='Strips',
     [ValidateSet('Pairs','ColorState','Ansi256')][string]$AnsiEncoding='Pairs',
     [string]$Report="$PSScriptRoot/../local/game-session.json",[string]$ReadyFile,[string]$CaptureStartFile,[string]$SaveRoot,[string]$SettingsPath,
-    [switch]$Diagnostics,[string]$ViewportSchedule,[string]$SessionSchedule,[ValidateRange(0,30)][int]$ExitDelaySeconds=0)
+    [switch]$Diagnostics,[string]$ViewportSchedule,[string]$SessionSchedule,[switch]$StartupMenu,[ValidateRange(0,30)][int]$ExitDelaySeconds=0)
 $ErrorActionPreference='Stop'
 if($CaptureStartFile -and (-not $ReadyFile -or (Test-Path -LiteralPath $CaptureStartFile))){throw 'Capture startup gate requires a readiness destination and a fresh start-file path.'}
 if($MusicCatalog){$Sound=$true}
@@ -135,9 +135,10 @@ try {
     # Session recordings explicitly carry ContinueCampaign=true.
     $stopAtLevelEnd=$null -ne $replayData -and -not $replayData.ContinueCampaign
     $liveAudioClock=[bool]($RealtimeAudio -or (-not $Headless -and $Sound))
-    $simulation=New-DoomSimulation $Wad $Skill $Episode $Map -StopAtLevelEnd:$stopAtLevelEnd -ReplayCheckpoints:$withCheckpoints -CheckpointReplay $(if($null -ne $replayData -and $replayData.Checkpoints){$Replay}else{''}) -SaveRoot $SaveRoot -Sound:$Sound -RealtimeAudio:$liveAudioClock -SoundVolume $(if($preferences.SoundMuted){0}else{$preferences.SoundVolume}) -MusicVolume $preferences.MusicVolume -MusicCatalog $MusicCatalog
+    $simulation=New-DoomSimulation $Wad $Skill $Episode $Map -StopAtLevelEnd:$stopAtLevelEnd -ReplayCheckpoints:$withCheckpoints -CheckpointReplay $(if($null -ne $replayData -and $replayData.Checkpoints){$Replay}else{''}) -SaveRoot $SaveRoot -Sound:$Sound -RealtimeAudio:$liveAudioClock -SoundVolume $(if($preferences.SoundMuted){0}else{$preferences.SoundVolume}) -MusicVolume $preferences.MusicVolume -MusicCatalog $MusicCatalog -StartupMenu:$StartupMenu
     $snapshot=Read-DoomSimulationSnapshot $simulation $null
     $menu=New-DoomMenuState ($simulation.View.ReadInt32(80)) $Episode $Skill
+    if($StartupMenu){$menu.Screen=1}
     $menu.Settings=Copy-DoomUserSettings $preferences
     if($null -eq $snapshot){throw 'Initial simulation snapshot was not published.'}
     $context=Read-GameRenderAssets $simulation.Assets
@@ -146,8 +147,11 @@ try {
     for($i=0;$i -lt 256;$i++){for($j=0;$j -lt 3;$j++){$paletteBytes[3*$i+$j]=$context.Palette[$i][$j]}}
     [IO.File]::WriteAllBytes("$PSScriptRoot/../local/palette.bin",$paletteBytes)
     $pool=New-GameRenderPool $context $null $Workers -Style $Style -GlyphSet $GlyphSet -AnsiEncoding $AnsiEncoding
-    $initialBytes=Get-InterpolatedSnapshotBytes $snapshot.Previous $snapshot.Current 1
-    for($i=0;$i -lt 4;$i++){Submit-GameRender $pool $initialBytes;Wait-GameRender $pool}
+    [byte[]]$initialBytes=if($snapshot.ScreenKind -eq 0){Get-InterpolatedSnapshotBytes $snapshot.Previous $snapshot.Current 1}else{$snapshot.Pixels}
+    for($i=0;$i -lt 4;$i++){
+        Submit-GameRender $pool $initialBytes -ScreenPixels:($snapshot.ScreenKind -ne 0) -MenuPixels:($snapshot.ScreenKind -eq 2) -AutomapPixels:($snapshot.ScreenKind -eq 3) -Tic $snapshot.Tic -PaletteNumber $snapshot.PaletteNumber
+        Wait-GameRender $pool
+    }
     if(-not $Headless) {
         $terminalWidth=[Console]::WindowWidth;$terminalHeight=[Console]::WindowHeight
         [Console]::OutputEncoding=[Text.UTF8Encoding]::new($false)

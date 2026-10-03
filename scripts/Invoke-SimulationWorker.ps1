@@ -1,6 +1,6 @@
 #requires -Version 7.4
 # SPDX-License-Identifier: GPL-2.0-or-later
-param([string]$Wad,[int]$Skill,[int]$Episode,[int]$Map,[string]$Channel,[string]$Assets,[string]$Report,[int]$OwnerPid,[switch]$StopAtLevelEnd,[switch]$ReplayCheckpoints,[string]$CheckpointReplay,[string]$SaveRoot,[switch]$Sound,[switch]$RealtimeAudio,[string]$MusicCatalog)
+param([string]$Wad,[int]$Skill,[int]$Episode,[int]$Map,[string]$Channel,[string]$Assets,[string]$Report,[int]$OwnerPid,[switch]$StopAtLevelEnd,[switch]$ReplayCheckpoints,[string]$CheckpointReplay,[string]$SaveRoot,[switch]$Sound,[switch]$RealtimeAudio,[string]$MusicCatalog,[switch]$StartupMenu)
 $ErrorActionPreference='Stop'
 . "$PSScriptRoot/FrameCodec.ps1";. "$PSScriptRoot/../src/GameHost.ps1";. "$PSScriptRoot/../src/FastRenderer.ps1"
 . "$PSScriptRoot/../src/RenderAssets.ps1";. "$PSScriptRoot/../src/SnapshotTransport.ps1"
@@ -141,8 +141,6 @@ try {
     $messageGraphics=@{Screen=[DrawScreen]::new($content.Wad,320,200);Text=$null;Pixels=[byte[]]::new(2560)}
     for($i=0;$i -lt 4;$i++){$commands[$i]=[TicCmd]::new()}
     $game.DeferedInitNew([GameSkill]($Skill-1),$Episode,$Map);$null=$game.Update($commands)
-    for($i=0;$i -lt 140;$i++){$commands[0].ForwardMove=25;$commands[0].Buttons=1;if($i -gt 70){$commands[0].AngleTurn=640};$null=$game.Update($commands)}
-    foreach($cmd in $commands){$cmd.Clear()};$game.DeferedInitNew([GameSkill]($Skill-1),$Episode,$Map);$null=$game.Update($commands)
     $context=New-FastRenderContext $content $game.World -CacheResources;$palette=[int[][]]::new(256)
     for($i=0;$i -lt 256;$i++){$palette[$i]=@($content.Palette.Data[3*$i],$content.Palette.Data[3*$i+1],$content.Palette.Data[3*$i+2])}
     Write-GameRenderAssets $context $palette $Assets
@@ -160,6 +158,11 @@ try {
             $musicEvents=[DoomMusicEvents]::new();$options.Music=$musicEvents;Sync-DoomMusicSession $musicEvents $game
         }
         $audio=Start-DoomAudioRunspace $audioClips -MusicReports $musicReports -Realtime:$RealtimeAudio
+    }
+    if($StartupMenu){
+        $menuScreen=1;$menuRevision=1;$menuGraphics=New-DoomMenuGraphics $content
+        $initialMenu=New-DoomMenuState $episodeCount $Episode $Skill
+        $menuPixels=Get-DoomMenuPixels $menuGraphics 1 0 $Episode $Skill $episodeCount -Details $initialMenu
     }
     $game.BeforeLevelLoad={param($LoadingGame) Begin-SimulationLevelLoad}
     Record-SimulationTransition
@@ -320,7 +323,7 @@ finally {
         if($audio.Shared.Error -and -not $failure){$failure=$audio.Shared.Error;$outcome='Error'}
     }
     if($null -ne $game -and $null -ne $game.World -and -not $failure){try{Record-ReplayCheckpoint}catch{$failure=$_.ToString();$outcome='Error'}}
-    @{FinishedUtc=[DateTime]::UtcNow.ToString('o');ProcessId=$PID;Outcome=$outcome;Error=$failure;Tics=$tick;WarmupTics=140;Skill=$Skill;Episode=$Episode;Map=$Map;
+    @{FinishedUtc=[DateTime]::UtcNow.ToString('o');ProcessId=$PID;Outcome=$outcome;Error=$failure;Tics=$tick;WarmupTics=0;Skill=$Skill;Episode=$Episode;Map=$Map;
         SoundEnabled=[bool]$Sound;Audio=$audioReport;AudioPacketMs=(Get-SampleStats $audioPacketTimes.ToArray());AudioPacketSamplesMs=$audioPacketTimes.ToArray();AudioSourcePeak=if($audioPackets){$audioPackets.MaxSources}else{0};AudioEvents=if($audioPackets){$audioPackets.Events}else{0};
         AudioPublicationTrace=$audioPublicationTrace.ToArray();ShutdownAudioDrain=$shutdownAudioDrain;
         AudioBackpressure=$audioBackpressure.ToArray();IncompleteAudioBackpressureStartQpc=$audioBackpressureStart;

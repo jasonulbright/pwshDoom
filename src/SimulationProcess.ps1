@@ -3,7 +3,7 @@
 . "$PSScriptRoot/SaveSlots.ps1"
 . "$PSScriptRoot/PlayerMessages.ps1"
 function New-DoomSimulation {
-    param([string]$Wad,[int]$Skill,[int]$Episode,[int]$Map,[switch]$StopAtLevelEnd,[switch]$ReplayCheckpoints,[string]$CheckpointReplay,[string]$SaveRoot,[switch]$Sound,[switch]$RealtimeAudio,[ValidateRange(0,100)][int]$SoundVolume=100,[ValidateRange(0,100)][int]$MusicVolume=100,[string]$MusicCatalog)
+    param([string]$Wad,[int]$Skill,[int]$Episode,[int]$Map,[switch]$StopAtLevelEnd,[switch]$ReplayCheckpoints,[string]$CheckpointReplay,[string]$SaveRoot,[switch]$Sound,[switch]$RealtimeAudio,[ValidateRange(0,100)][int]$SoundVolume=100,[ValidateRange(0,100)][int]$MusicVolume=100,[string]$MusicCatalog,[switch]$StartupMenu)
     $root=Split-Path $PSScriptRoot;$id=[guid]::NewGuid().ToString('N');$name='Local\pwshDoom-sim-'+$id
     $state=@{Assets="$root/local/session-$id.assets";Report="$root/local/simulation-$id.json";Name=$name;Process=$null}
     try {
@@ -17,6 +17,7 @@ function New-DoomSimulation {
         $info.RedirectStandardOutput=$true;$info.RedirectStandardError=$true
         foreach($arg in @('-NoProfile','-File',"$root/scripts/Invoke-SimulationWorker.ps1",'-Wad',$Wad,'-Skill',"$Skill",'-Episode',"$Episode",'-Map',"$Map",'-Channel',$name,'-Assets',$state.Assets,'-Report',$state.Report,'-OwnerPid',"$PID")){$info.ArgumentList.Add($arg)}
         if($StopAtLevelEnd){$info.ArgumentList.Add('-StopAtLevelEnd')}
+        if($StartupMenu){$info.ArgumentList.Add('-StartupMenu')}
         if($Sound){$info.ArgumentList.Add('-Sound')}
         if($RealtimeAudio){$info.ArgumentList.Add('-RealtimeAudio')}
         if($MusicCatalog){$info.ArgumentList.Add('-MusicCatalog');$info.ArgumentList.Add([IO.Path]::GetFullPath($MusicCatalog))}

@@ -38,6 +38,8 @@ if($RecordInput -and (Test-Path -LiteralPath $RecordInput)){throw 'Input recordi
 $arguments=@('-Wad',$Wad,'-Workers',"$Workers",'-Skill',"$Skill",'-Episode',"$Episode",'-Map',"$Map",'-Seconds',"$Seconds",'-Style',$Style,'-GlyphSet',$GlyphSet,'-Report',[IO.Path]::GetFullPath($Report))
 $arguments+=@('-TerminalOutput',$TerminalOutput)
 $arguments+=@('-AnsiEncoding',$AnsiEncoding)
+$directLaunch=$PSBoundParameters.ContainsKey('Episode') -or $PSBoundParameters.ContainsKey('Map') -or $PSBoundParameters.ContainsKey('Skill')
+if(-not $directLaunch -and -not $Replay -and -not $Scripted -and -not $SessionSchedule){$arguments+='-StartupMenu'}
 if($ReadyFile){$arguments+=@('-ReadyFile',[IO.Path]::GetFullPath($ReadyFile))}
 if($CaptureStartFile){$arguments+=@('-CaptureStartFile',[IO.Path]::GetFullPath($CaptureStartFile))}
 if($RecordInput){$arguments+=@('-RecordInput',[IO.Path]::GetFullPath($RecordInput))}
