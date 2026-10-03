@@ -78,6 +78,7 @@ function New-FastRenderContext {
         WallPointScratch=[long[]]::new(2);WallParameterScratch=[long[]]::new(3);
         SpriteClipWalls=[object[]]::new(320);SpriteClipCounts=[int[]]::new(320);ActorClipTop=[int[]]::new(320);ActorClipBottom=[int[]]::new(320);
         MaskedColumns=[Collections.Generic.List[hashtable]]::new();SegmentGeometry=[double[]]::new($map.Segs.Length*6);
+        SegmentWallUData=[int[]]::new($map.Segs.Length*4);
         SegmentAngles=[uint32[]]::new($map.Segs.Length);
         SegmentMetadata=[int[]]::new($map.Segs.Length*4);NodeGeometry=[double[]]::new($map.Nodes.Length*12);
         NodeChildren=[int[]]::new($map.Nodes.Length*2);Subsectors=$map.Subsectors;
@@ -100,6 +101,9 @@ function New-FastRenderContext {
         $ctx.SegmentGeometry[$geometryOffset+2]=$bx;$ctx.SegmentGeometry[$geometryOffset+3]=$by
         $ctx.SegmentGeometry[$geometryOffset+4]=[Math]::Sqrt(($bx-$ax)*($bx-$ax)+($by-$ay)*($by-$ay))
         $ctx.SegmentGeometry[$geometryOffset+5]=$seg.Offset.Data/65536.0
+        [int]$wallUOffset=$i*4
+        $ctx.SegmentWallUData[$wallUOffset]=$seg.Vertex1.X.Data;$ctx.SegmentWallUData[$wallUOffset+1]=$seg.Vertex1.Y.Data
+        $ctx.SegmentWallUData[$wallUOffset+2]=$seg.Offset.Data;$ctx.SegmentWallUData[$wallUOffset+3]=$seg.SideDef.TextureOffset.Data
         $ctx.SegmentMetadata[$metadataOffset]=$sideIndex[$seg.SideDef]
         $ctx.SegmentMetadata[$metadataOffset+1]=$sectorIndex[$seg.FrontSector]
         $ctx.SegmentMetadata[$metadataOffset+2]=if($null -eq $seg.BackSector){-1}else{$sectorIndex[$seg.BackSector]}
@@ -448,7 +452,7 @@ function Invoke-FastRender {
         }
         $ss=$Context.Subsectors[$nodeIndex -band 32767]
         for([int]$segIndex=$ss.FirstSeg;$segIndex -lt ($ss.FirstSeg+$ss.SegCount);$segIndex++) {
-            [int]$geometryOffset=$segIndex*6;[int]$metadataOffset=$segIndex*4
+            [int]$geometryOffset=$segIndex*6;[int]$metadataOffset=$segIndex*4;[int]$wallUOffset=$segIndex*4
             [double]$segAX=$Context.SegmentGeometry[$geometryOffset];[double]$segAY=$Context.SegmentGeometry[$geometryOffset+1]
             [double]$segBX=$Context.SegmentGeometry[$geometryOffset+2];[double]$segBY=$Context.SegmentGeometry[$geometryOffset+3]
             [int]$segSide=$Context.SegmentMetadata[$metadataOffset];[int]$segFront=$Context.SegmentMetadata[$metadataOffset+1]
@@ -504,9 +508,8 @@ function Invoke-FastRender {
                 [int]$clipT=$topClip[$x];[int]$clipB=$bottomClip[$x];if($clipT -gt $clipB){continue}
                 if($wallAnglesReady -and -not $wallScaleReady){
                     if(-not $wallUReady){
-                        [int]$wallAXData=[Math]::Truncate($segAX*65536.0);[int]$wallAYData=[Math]::Truncate($segAY*65536.0)
-                        [int]$wallSegOffset=[Math]::Truncate($Context.SegmentGeometry[$geometryOffset+5]*65536.0)
-                        [int]$wallSideOffset=[Math]::Truncate($side.TextureOffset*65536.0)
+                        [int]$wallAXData=$Context.SegmentWallUData[$wallUOffset];[int]$wallAYData=$Context.SegmentWallUData[$wallUOffset+1]
+                        [int]$wallSegOffset=$Context.SegmentWallUData[$wallUOffset+2];[int]$wallSideOffset=$Context.SegmentWallUData[$wallUOffset+3]
                         Get-FastWallUParameters $viewXData $viewYData $wallAXData $wallAYData $wallSegmentAngles[$segIndex] $viewAngleData $wallSegOffset $wallSideOffset $Context.TanToAngleTable $fineSine -PointResult $Context.WallPointScratch -Result $Context.WallParameterScratch
                         [long[]]$wallParameters=$Context.WallParameterScratch
                         $wallPerpData=$wallParameters[0];$wallOffsetData=$wallParameters[1];$wallCenterAngleData=$wallParameters[2];$wallUReady=$true
@@ -574,9 +577,8 @@ function Invoke-FastRender {
                     [int]$tu=0
                     if($wallAnglesReady){
                         if(-not $wallUReady){
-                            [int]$wallAXData=[Math]::Truncate($segAX*65536.0);[int]$wallAYData=[Math]::Truncate($segAY*65536.0)
-                            [int]$wallSegOffset=[Math]::Truncate($Context.SegmentGeometry[$geometryOffset+5]*65536.0)
-                            [int]$wallSideOffset=[Math]::Truncate($side.TextureOffset*65536.0)
+                            [int]$wallAXData=$Context.SegmentWallUData[$wallUOffset];[int]$wallAYData=$Context.SegmentWallUData[$wallUOffset+1]
+                            [int]$wallSegOffset=$Context.SegmentWallUData[$wallUOffset+2];[int]$wallSideOffset=$Context.SegmentWallUData[$wallUOffset+3]
                             Get-FastWallUParameters $viewXData $viewYData $wallAXData $wallAYData $wallSegmentAngles[$segIndex] $viewAngleData $wallSegOffset $wallSideOffset $Context.TanToAngleTable $fineSine -PointResult $Context.WallPointScratch -Result $Context.WallParameterScratch
                             [long[]]$wallParameters=$Context.WallParameterScratch
                             $wallPerpData=$wallParameters[0];$wallOffsetData=$wallParameters[1];$wallCenterAngleData=$wallParameters[2];$wallUReady=$true
