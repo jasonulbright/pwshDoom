@@ -37,7 +37,7 @@ function Open-DoomConsoleInput {
     if(-not [PwshDoomPlatform.ConsoleApi]::GetConsoleMode($handle,[ref]$mode)){throw 'A Windows console input handle is required. Launch from Windows Terminal.'}
     $newMode=($mode -band (-bnot (1+2+4+16+64+512))) -bor 8 -bor 128
     if(-not [PwshDoomPlatform.ConsoleApi]::SetConsoleMode($handle,$newMode)){throw 'Cannot enable console key events.'}
-    return @{Handle=$handle;Mode=$mode;Keys=[bool[]]::new(256);Pressed=[bool[]]::new(256);Suppressed=[bool[]]::new(256);Records=[PwshDoomPlatform.InputRecord[]]::new(128)}
+    return @{Handle=$handle;Mode=$mode;Keys=[bool[]]::new(256);Pressed=[bool[]]::new(256);PressedOrder=[Collections.Generic.List[int]]::new();Suppressed=[bool[]]::new(256);Records=[PwshDoomPlatform.InputRecord[]]::new(128)}
 }
 
 function Read-DoomConsoleInput {
@@ -58,18 +58,39 @@ function Update-DoomInputRecords {
             $event=$Records[$i]
             if($event.EventType -eq 1 -and $event.VirtualKey -lt 256) {
                 $key=[int]$event.VirtualKey;$down=$event.KeyDown -ne 0
-                if($down -and -not $State.Keys[$key]){$State.Pressed[$key]=$true}
+                if($down -and -not $State.Keys[$key] -and -not $State.Pressed[$key]){
+                    $State.Pressed[$key]=$true
+                    if($State.ContainsKey('PressedOrder')){[void]$State.PressedOrder.Add($key)}
+                }
                 $State.Keys[$key]=$down
                 if(-not $down -and $State.ContainsKey('Suppressed')){$State.Suppressed[$key]=$false}
-            } elseif($event.EventType -eq 16 -and $event.KeyDown -eq 0){[Array]::Clear($State.Keys);[Array]::Clear($State.Pressed);if($State.ContainsKey('Suppressed')){[Array]::Clear($State.Suppressed)}}
+            } elseif($event.EventType -eq 16 -and $event.KeyDown -eq 0){[Array]::Clear($State.Keys);[Array]::Clear($State.Pressed);if($State.ContainsKey('PressedOrder')){$State.PressedOrder.Clear()};if($State.ContainsKey('Suppressed')){[Array]::Clear($State.Suppressed)}}
         }
 }
 
-function Reset-DoomInputForMenu {
+function Get-DoomPressedKeysInOrder {
     param($State)
+    $ordered=[Collections.Generic.List[int]]::new()
+    if($State.ContainsKey('PressedOrder')){
+        foreach($key in $State.PressedOrder){if($key -gt 0 -and $key -lt $State.Pressed.Length -and $State.Pressed[$key]){$ordered.Add([int]$key)}}
+    }else{
+        for($key=1;$key -lt $State.Pressed.Length;$key++){if($State.Pressed[$key]){$ordered.Add($key)}}
+    }
+    return ,$ordered.ToArray()
+}
+
+function Remove-DoomInputPress {
+    param($State,[int]$VirtualKey)
+    if($VirtualKey -gt 0 -and $VirtualKey -lt $State.Pressed.Length){$State.Pressed[$VirtualKey]=$false}
+    if($State.ContainsKey('PressedOrder')){[void]$State.PressedOrder.Remove($VirtualKey)}
+}
+
+function Reset-DoomInputForMenu {
+    param($State,[switch]$PreservePending)
     # Keep physical key state for repeat debouncing. Gameplay keys held through
     # a menu remain masked until release, including the Enter used to resume.
-    $State.Suppressed=$State.Keys.Clone();[Array]::Clear($State.Pressed)
+    $State.Suppressed=$State.Keys.Clone()
+    if(-not $PreservePending){[Array]::Clear($State.Pressed);if($State.ContainsKey('PressedOrder')){$State.PressedOrder.Clear()}}
 }
 
 function Reset-DoomInputAfterSessionAction {
@@ -101,7 +122,7 @@ function Set-DoomInputCommand {
     if($keys[[int]$Bindings.Fire]){$Command.Buttons=$Command.Buttons -bor 1}
     if($keys[[int]$Bindings.Use] -or ($keys[32] -and $spaceUseAlias) -or $keys[13]){$Command.Buttons=$Command.Buttons -bor 2}
     for($key=49;$key -le 55;$key++) {if($State.Pressed[$key]){$Command.Buttons=$Command.Buttons -bor 4 -bor (($key-49) -shl 3)}}
-    [Array]::Clear($State.Pressed)
+    [Array]::Clear($State.Pressed);if($State.ContainsKey('PressedOrder')){$State.PressedOrder.Clear()}
 }
 
 function Get-DoomAutomapInputMask {

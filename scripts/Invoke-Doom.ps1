@@ -265,20 +265,23 @@ try {
         }
         $nextAction=$null;$fromReplay=$false
         if($null -eq $pendingAction){
-            $key=$null
+            $key=$null;$menuInputCode=$null
             $captureVirtualKey=0
             if($null -ne $consoleState){
                 Read-DoomConsoleInput $consoleState
+                $pressedOrder=Get-DoomPressedKeysInOrder $consoleState
                 if($menu.Screen -eq 15 -and $menu.AwaitingBinding){
-                    if($consoleState.Pressed[27]){$key='Escape'}
-                    else{
-                        for($code=1;$code -lt $consoleState.Pressed.Length;$code++){
-                            if($consoleState.Pressed[$code]){$captureVirtualKey=$code;$key='Capture';break}
-                        }
+                    foreach($code in $pressedOrder){
+                        if($code -eq 27){$key='Escape'}else{$captureVirtualKey=$code;$key='Capture'}
+                        $menuInputCode=$code;break
                     }
                 }else{
                     $keyCodes=if($menu.Screen -in 0,7){@(27,80,19,112,113,114,121)}else{@(27,80,19,38,40,37,39,13,89,78)}
-                    foreach($code in $keyCodes){if($consoleState.Pressed[$code]){$key=switch($code){27{'Escape'};80{'Pause'};19{'Pause'};112{'F1'};113{'F2'};114{'F3'};121{'F10'};38{'Up'};40{'Down'};37{'Left'};39{'Right'};13{'Enter'};89{'Yes'};78{'No'}};break}}
+                    foreach($code in $pressedOrder){
+                        if($code -notin $keyCodes){if($menu.Screen -gt 0){Remove-DoomInputPress $consoleState $code};continue}
+                        $key=switch($code){27{'Escape'};80{'Pause'};19{'Pause'};112{'F1'};113{'F2'};114{'F3'};121{'F10'};38{'Up'};40{'Down'};37{'Left'};39{'Right'};13{'Enter'};89{'Yes'};78{'No'}}
+                        $menuInputCode=$code;break
+                    }
                 }
             }
             if($null -eq $key -and $scheduleIndex -lt $sessionScheduleData.Count -and $sessionScheduleData[$scheduleIndex].AtSeconds*1000 -le $wallNow){$key=$sessionScheduleData[$scheduleIndex].Key;$scheduleIndex++}
@@ -298,7 +301,13 @@ try {
                     $compactMenuKey=''
                 }
                 if($null -ne $nextAction -and $nextAction.Action -eq 'ShowMenu' -and $nextAction.Screen -in 8,9 -and $priorMenuScreen -notin 8,9){$menu.Slots=Get-DoomSlotSummaries $saveDirectory $wadHash;$nextAction.Slots=$menu.Slots}
-                if($null -ne $consoleState){Reset-DoomInputForMenu $consoleState}
+                if($null -ne $consoleState){
+                    if($null -ne $menuInputCode){
+                        Remove-DoomInputPress $consoleState $menuInputCode
+                        $preservePending=($null -eq $nextAction -or $nextAction.Action -eq 'ShowMenu') -and $menu.Screen -gt 0
+                        Reset-DoomInputForMenu $consoleState -PreservePending:$preservePending
+                    }else{Reset-DoomInputForMenu $consoleState}
+                }
                 if($null -ne $nextAction -and $nextAction.Action -eq 'Quit'){$exitReason='ConfirmedQuit';break}
             }
             if($null -eq $nextAction -and $menu.Screen -eq 0 -and $null -ne $replayData -and $null -ne $replayData.ControlEvents -and $controlIndex -lt $replayData.ControlEvents.Count){

@@ -8,7 +8,7 @@ class MenuInputTestCommand {
     [sbyte]$ForwardMove;[sbyte]$SideMove;[int16]$AngleTurn;[byte]$Buttons
     [void]Clear(){$this.ForwardMove=0;$this.SideMove=0;$this.AngleTurn=0;$this.Buttons=0}
 }
-$checks=[Collections.Generic.List[object]]::new();$state=@{Keys=[bool[]]::new(256);Pressed=[bool[]]::new(256)};$cmd=[MenuInputTestCommand]::new()
+$checks=[Collections.Generic.List[object]]::new();$state=@{Keys=[bool[]]::new(256);Pressed=[bool[]]::new(256);PressedOrder=[Collections.Generic.List[int]]::new()};$cmd=[MenuInputTestCommand]::new()
 function Send-Key([int]$Key,[bool]$Down,[int]$Type=1){
     $record=[PwshDoomPlatform.InputRecord]::new();$record.EventType=$Type;$record.VirtualKey=$Key;$record.KeyDown=[int]$Down
     Update-DoomInputRecords $state ([PwshDoomPlatform.InputRecord[]]@($record)) 1
@@ -18,6 +18,14 @@ function Reset-ForMenu {
     else{[Array]::Clear($state.Keys);[Array]::Clear($state.Pressed)}
 }
 function Check([string]$Name,[bool]$Passed){$checks.Add(@{Name=$Name;Passed=$Passed})}
+$orderedState=@{Keys=[bool[]]::new(256);Pressed=[bool[]]::new(256);Suppressed=[bool[]]::new(256);PressedOrder=[Collections.Generic.List[int]]::new()}
+$orderedRecords=[PwshDoomPlatform.InputRecord[]]::new(3)
+for($i=0;$i -lt 3;$i++){$pair=@(@(40,1),@(13,1),@(40,0))[$i];$record=[PwshDoomPlatform.InputRecord]::new();$record.EventType=1;$record.VirtualKey=$pair[0];$record.KeyDown=$pair[1];$orderedRecords[$i]=$record}
+Update-DoomInputRecords $orderedState $orderedRecords 3
+Check 'Queued presses retain key-down order across a quick release' (($orderedState.PressedOrder -join ',') -eq '40,13' -and (Get-DoomPressedKeysInOrder $orderedState)[0] -eq 40)
+Remove-DoomInputPress $orderedState 40;Reset-DoomInputForMenu $orderedState -PreservePending
+Check 'Menu reset preserves later queued keys after consuming the first' ($orderedState.PressedOrder.Count -eq 1 -and $orderedState.PressedOrder[0] -eq 13 -and $orderedState.Pressed[13])
+Remove-DoomInputPress $orderedState 13
 Send-Key 80 $true;Check 'Pause physical key press is available' $state.Pressed[80]
 Reset-ForMenu;Send-Key 80 $true;Check 'Held pause repeat does not toggle again' (-not $state.Pressed[80])
 Send-Key 80 $false;Send-Key 80 $true;Check 'Released and repressed pause toggles again' $state.Pressed[80]

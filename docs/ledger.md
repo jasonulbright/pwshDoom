@@ -8,6 +8,8 @@ Follow-up source review found the native WAD menu did not render that status. It
 
 The same native screen now explicitly prompts “PRESS KEY; ESC CANCEL” while a binding is being captured. Added offline screen-difference regression cases for the prompt and unavailable-key feedback; these were not run.
 
+Menu input now preserves key-down order instead of choosing simultaneous queued events by virtual-key number. Consumed events are removed individually, and remaining menu events survive a menu-to-menu update; leaving the menu still clears them and masks held keys. Synthetic input cases were added but not run; only parser and diff checks are permitted during the user's live session.
+
 The same review found that Space remains a Use alias and Shift remains a Run alias in gameplay input. Custom bindings for either key now take precedence over that alias, preserving version-four settings without making one physical key trigger two actions. Focused regression cases cover persistence, remapping and generated commands; they were added but not executed. PowerShell parsing and whitespace checks pass; no gameplay tests were run.
 
 ## 2026-10-04 — Simplify wall-column plane writes
