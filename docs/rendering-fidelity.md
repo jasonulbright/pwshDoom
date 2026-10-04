@@ -1135,11 +1135,15 @@ span and table-indexing structure in [id Software's `R_AddLine`](https://github.
 and [texture-mapping table construction](https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/r_main.c#L508-L566),
 without copying their source text.
 
-`scripts/Test-WallScreenProjection.ps1` now contains offline boundary cases for
-full-width, left- and right-clipped, fully offscreen, and back-facing segments.
-They remain unrun under the user's instruction not to run live tests. PowerShell
-AST parsing and `git diff --check` pass. This is an unverified source change; no
-image-parity, original-executable fidelity, or performance claim is made.
+`scripts/Test-WallScreenProjection.ps1` passes seven offline checks covering the
+fine-angle fenceposts and segments at the field-of-view boundary, clipped at
+both/one edge, fully offscreen, and back-facing. Its initial assertion expected
+the exact +45-degree table entry to map to column 0; the generated Doom table
+maps it to column 1, while an angle clipped to the left boundary maps to column
+0. The harness now distinguishes those cases. It uses synthetic coordinates
+and does not launch the game, read a WAD, or exercise full-frame output. PowerShell
+AST parsing and `git diff --check` pass. Image parity, original-executable
+fidelity, and performance remain unverified.
 
 ### Preserve camera-angle units — October 4, 2026
 

@@ -21,10 +21,11 @@ function Assert-Offscreen([string]$Name,[int]$X1,[int]$Y1,[int]$X2,[int]$Y2){
     if($visible){throw "$($Name): expected no visible columns, got [$($range -join ',')]."}
 }
 
-if($angleToX.Length -ne 4096 -or $angleToX[3072] -ne 0 -or $angleToX[1024] -ne 320){
+if($angleToX.Length -ne 4096 -or $angleToX[3073] -ne 0 -or $angleToX[1024] -ne 320){
     throw 'The Doom viewangletox fenceposts do not map the 90-degree viewport to [0,320].'
 }
-Assert-Range 'Full viewport edge-to-edge segment' @(0,320) 100 100 100 -100
+Assert-Range 'Segment at nominal field-of-view edges' @(1,320) 100 100 100 -100
+Assert-Range 'Both endpoints clipped to the viewport' @(0,320) 100 173 100 -173
 Assert-Range 'Segment clipped at the left edge' @(0,160) 100 173 100 0
 Assert-Range 'Segment clipped at the right edge' @(160,320) 100 0 100 -173
 Assert-Offscreen 'Segment fully outside the left edge' 100 173 100 143

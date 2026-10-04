@@ -783,3 +783,12 @@ has not received a rendered-image or runtime check. The production correction
 is commit 27 after Preview.7; this follow-up aligning two actor fixture helpers
 is commit 28. Package validation, human play, image parity, and performance
 remain open; release threshold is 35 commits.
+
+### Offline wall-span boundary verification — October 4, 2026
+
+The synthetic wall-span harness now passes its seven table/fencepost/clipping
+cases. It corrected an overstrict expectation at the exact +45-degree fine
+angle and adds two-sided clipping coverage. This does not render a full frame
+or validate the camera-unit fix. The test and documentation update is commit 29
+after Preview.7; runtime image, package, performance, and human-play gates remain
+open.

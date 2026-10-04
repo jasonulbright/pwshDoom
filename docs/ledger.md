@@ -1,5 +1,15 @@
 # Investigation ledger
 
+## 2026-10-04 — Correct and run fixed-angle span boundary cases offline
+
+The isolated span harness first failed because its exact +45-degree expectation
+assumed column 0. Table inspection showed that the exact fine-angle entry maps to
+column 1; the inverse lookup's clipped left endpoint maps to column 0. Corrected
+that assertion and added a segment with both endpoints outside the viewport to
+exercise two-sided clipping. All seven synthetic table/span cases now pass.
+This did not launch Doom, load a WAD, or render a full frame. The fixed-angle
+helper's broader image behavior and the camera conversion remain unverified.
+
 ## 2026-10-04 — Convert engine camera angles explicitly
 
 `Invoke-FastRender` now calls the engine `Angle.ToRadian()` method for its
