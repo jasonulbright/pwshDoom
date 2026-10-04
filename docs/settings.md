@@ -1,7 +1,9 @@
 # Input and sound settings
 
 Open **Escape → Settings** to change preferences. Up/down chooses an
-item; Left/Right or Enter changes its value. Enter activates
+item; Left/Right or Enter changes its value. Gamma correction ranges from Off
+through levels 1–10; F11 advances one level while playing and wraps to Off.
+Enter activates
 Reset Defaults or Back. Escape returns to the main menu.
 
 Choose **Configure Keys**, select an action, press Enter, then press the new
@@ -20,11 +22,14 @@ Use or Run alias while the key is held.
 | Effects volume | 100% | Changes sound-effect volume in ten-percent steps, clamped to 0–100%. Applies when launched with `-Sound`. |
 | Music volume | 100% | Changes music gain independently, in ten-percent steps. Playback requires a music catalog. |
 | Mute effects | Off | Silences effects while retaining their selected volume and advancing their playback positions; music continues. |
+| Gamma correction | Level 2 | Applies the adopted Doom renderer's palette curve. Off uses raw PLAYPAL colors; levels 1–10 brighten the palette progressively. |
 
 Changes apply after the settings action succeeds. Menus pause simulation and held
 gameplay keys must be released before acting again. Automap arrow capture remains
-in effect; WASD follows the chosen movement preference. Input preferences affect
-keyboard command generation, not monster speed, game physics or the 35 Hz clock.
+in effect; WASD follows the chosen movement preference. Gamma affects all three
+terminal styles and the palette bytes saved beside indexed captures. Input
+preferences affect keyboard command generation, not monster speed, game physics
+or the 35 Hz clock.
 Audio preferences affect the PowerShell mixer. Changing effects volume clears
 device buffers mixed at the previous gain, potentially cutting a short sound tail.
 Active effect positions remain advanced; unmuting does not restart them. Music
@@ -36,12 +41,13 @@ Ordinary interactive launches save to `%LOCALAPPDATA%\pwshDoom\settings.json`.
 Replay, scripted and headless runs use defaults unless explicitly supplied a
 settings file. Tests use fresh paths under ignored `local/`.
 
-Version-four JSON contains `Version`, `AlwaysRun`, `TurnSpeed`, `SoundVolume`,
-`MusicVolume`, `SoundMuted` and the nine virtual-key `Bindings`. Version-one
-files gain default audio and key settings in memory. Version-two volume migrates
-to both new levels, preserving the prior mix; version-three files gain default
-key bindings. Older files remain unchanged until a successful edit saves
-version four.
+Version-five JSON contains `Version`, `AlwaysRun`, `TurnSpeed`, `SoundVolume`,
+`MusicVolume`, `SoundMuted`, `GammaLevel` and the nine virtual-key `Bindings`.
+Version-one files gain default audio, gamma and key settings in memory.
+Version-two volume migrates to both new levels, preserving the prior mix;
+version-three files gain default key bindings; version-four files gain default
+gamma level 2. Older files remain unchanged until a successful edit saves
+version five.
 Only the documented types and choices are accepted. Invalid, unknown-version or
 oversized files produce a warning and default input preferences, preserving the
 file. If saving fails, the attempted change is rolled back and the game shows
@@ -55,12 +61,12 @@ cross-process transaction or a guarantee against every concurrent edit race.
 Settings files and save slots are separate. Input replays already contain final
 movement/turn/button commands, so replaying them bypasses these input preferences.
 
-Initial verification: [47 isolated checks](../results/settings-unit-dictionary.json)
-cover file validation, typed round trips, stale writes, IPC objects, menus, the
-twelve always-run/Shift/turn-speed combinations and held-key suppression. The
-[menu suite](../results/settings-menu-first.json) covers 123 checks and 44 screen
-fixtures, including all four settings choices. Real-host and live recording
-results follow as they are verified. Physical keyboard play remains unobserved.
+Earlier settings receipts cover file validation, typed round trips, stale writes,
+IPC objects, menus, the twelve always-run/Shift/turn-speed combinations and held-
+key suppression before gamma was added. Gamma persistence, migration, menu and
+worker regression cases are now authored but remain unrun under the user's
+instruction not to start tests while they use the computer. Physical keyboard
+play and gamma display review remain unobserved.
 
 Music playback requires `-MusicCatalog`; this setting controls its level and
 does not select or prepare a catalog. Display style, worker count, font and

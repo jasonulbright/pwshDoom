@@ -1,8 +1,8 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 # Bounded terminal notices. Game message timing stays on the 35 Hz simulation.
 function New-DoomPlayerMessageCodecs {
-    param([byte[]]$PlayPal,[ValidateSet('Classic','Matrix','AnsiArt')][string]$Style)
-    $palette=Get-DoomPaletteRgb $PlayPal 0
+    param([byte[]]$PlayPal,[ValidateSet('Classic','Matrix','AnsiArt')][string]$Style,[ValidateRange(0,10)][int]$GammaLevel=0)
+    $palette=Get-DoomPaletteRgb $PlayPal 0 -GammaLevel $GammaLevel
     if($Style -eq 'Classic'){return ,([object[]]@((New-CodecContext $palette -LazyCells)))}
     # The 160-column styles use their larger terminal font for notices; reducing
     # seven-pixel STCFN letters to four pixels makes their shapes unreadable.

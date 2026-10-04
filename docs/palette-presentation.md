@@ -24,12 +24,19 @@ selected image, including HUD colors. This project's full-screen menus deliberat
 palette0 for readability; intermission/finale also return to palette0. The
 menu choice is a presentation difference, not a claim of original-menu parity.
 
-Classic uses uncorrected RGB from the selected PLAYPAL palette. AnsiArt applies
+Classic uses gamma-adjusted RGB from the selected PLAYPAL palette. AnsiArt applies
 its existing color/brightness mapping to those RGB values. Matrix applies its
 existing green mapping to their luminance: damage is a brightness/contrast
 change rather than a literal red screen. These character representations are
-intentional approximations. Gamma controls and original-executable visual
-equivalence remain separate, unfinished work.
+intentional approximations. Gamma level 0 leaves PLAYPAL unchanged; levels 1–10
+use the adopted renderer's exponents 0.95 through 0.50 and round each channel
+with the same byte conversion. The default is level 2, matching the adopted
+renderer configuration. The preference is saved in settings version 5, changed
+from Escape → Settings, and advanced with F11 during play. Worker palette tables,
+player-message colors and capture palette companions use the same selected level.
+The curve/menu/worker regression cases are authored but were not run under the
+user's active-computer instruction. Original-executable visual equivalence and
+human readability remain unverified.
 
 Each worker prepares fourteen small codec contexts. Pair-cell strings are
 created only when encountered, then reused. This avoids eagerly constructing

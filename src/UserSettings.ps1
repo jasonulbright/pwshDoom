@@ -7,7 +7,7 @@ function Get-DoomKeyBindingNames {
     return @('Forward','Backward','StrafeLeft','StrafeRight','TurnLeft','TurnRight','Fire','Use','Run')
 }
 function Get-DoomReservedBindingKeys {
-    return [int[]]@(9,13,19,27,37,38,39,40,43,45,49,50,51,52,53,54,55,67,70,77,78,80,89,107,109,112,113,114,121,187,189)
+    return [int[]]@(9,13,19,27,37,38,39,40,43,45,49,50,51,52,53,54,55,67,70,77,78,80,89,107,109,112,113,114,121,122,187,189)
 }
 function Get-DoomKeyBindingLabel {
     param([int]$VirtualKey)
@@ -55,29 +55,34 @@ function Get-DoomKeyBindingLabel {
         default {return "VK $VirtualKey"}
     }
 }
-function New-DoomUserSettings { return @{Version=4;AlwaysRun=$false;TurnSpeed=100;SoundVolume=100;MusicVolume=100;SoundMuted=$false;Bindings=(New-DoomKeyBindings)} }
+function New-DoomUserSettings { return @{Version=5;AlwaysRun=$false;TurnSpeed=100;SoundVolume=100;MusicVolume=100;SoundMuted=$false;GammaLevel=2;Bindings=(New-DoomKeyBindings)} }
 function Copy-DoomUserSettings {
     param($Settings)
     if($Settings -isnot [Collections.IDictionary] -and $Settings -is [pscustomobject]){$fields=@{};foreach($property in $Settings.PSObject.Properties){$fields[$property.Name]=$property.Value};$Settings=$fields}
     if($Settings -is [Collections.IDictionary] -and $Settings.Contains('Bindings') -and $Settings.Bindings -isnot [Collections.IDictionary] -and $Settings.Bindings -is [pscustomobject]){$fields=@{};foreach($property in $Settings.Bindings.PSObject.Properties){$fields[$property.Name]=$property.Value};$Settings.Bindings=$fields}
     if($Settings -isnot [Collections.IDictionary] -or
         -not $Settings.Contains('Version') -or -not $Settings.Contains('AlwaysRun') -or -not $Settings.Contains('TurnSpeed')){throw 'Invalid settings fields.'}
-    if(($Settings.Version -isnot [int] -and $Settings.Version -isnot [long]) -or $Settings.Version -notin 1,2,3,4 -or
+    if(($Settings.Version -isnot [int] -and $Settings.Version -isnot [long]) -or $Settings.Version -notin 1,2,3,4,5 -or
         $Settings.AlwaysRun -isnot [bool] -or ($Settings.TurnSpeed -isnot [int] -and $Settings.TurnSpeed -isnot [long]) -or
         $Settings.TurnSpeed -notin 50,100,150){throw 'Unsupported settings values.'}
     if($Settings.Version -eq 1){
         if($Settings.Count -ne 3){throw 'Invalid legacy settings fields.'}
-        return @{Version=4;AlwaysRun=[bool]$Settings.AlwaysRun;TurnSpeed=[int]$Settings.TurnSpeed;SoundVolume=100;MusicVolume=100;SoundMuted=$false;Bindings=(New-DoomKeyBindings)}
+        return @{Version=5;AlwaysRun=[bool]$Settings.AlwaysRun;TurnSpeed=[int]$Settings.TurnSpeed;SoundVolume=100;MusicVolume=100;SoundMuted=$false;GammaLevel=2;Bindings=(New-DoomKeyBindings)}
     }
-    $expectedCount=switch($Settings.Version){2{5};3{6};4{7}}
+    $expectedCount=switch($Settings.Version){2{5};3{6};4{7};5{8}}
     if($Settings.Count -ne $expectedCount -or -not $Settings.Contains('SoundVolume') -or -not $Settings.Contains('SoundMuted') -or
         ($Settings.SoundVolume -isnot [int] -and $Settings.SoundVolume -isnot [long]) -or $Settings.SoundVolume -lt 0 -or $Settings.SoundVolume -gt 100 -or $Settings.SoundMuted -isnot [bool]){throw 'Invalid sound preferences.'}
-    if($Settings.Version -eq 2){return @{Version=4;AlwaysRun=[bool]$Settings.AlwaysRun;TurnSpeed=[int]$Settings.TurnSpeed;SoundVolume=[int]$Settings.SoundVolume;MusicVolume=[int]$Settings.SoundVolume;SoundMuted=[bool]$Settings.SoundMuted;Bindings=(New-DoomKeyBindings)}}
+    if($Settings.Version -eq 2){return @{Version=5;AlwaysRun=[bool]$Settings.AlwaysRun;TurnSpeed=[int]$Settings.TurnSpeed;SoundVolume=[int]$Settings.SoundVolume;MusicVolume=[int]$Settings.SoundVolume;SoundMuted=[bool]$Settings.SoundMuted;GammaLevel=2;Bindings=(New-DoomKeyBindings)}}
     if($Settings.Version -eq 3){
         if(-not $Settings.Contains('MusicVolume') -or ($Settings.MusicVolume -isnot [int] -and $Settings.MusicVolume -isnot [long]) -or $Settings.MusicVolume -lt 0 -or $Settings.MusicVolume -gt 100){throw 'Invalid music volume preference.'}
-        return @{Version=4;AlwaysRun=[bool]$Settings.AlwaysRun;TurnSpeed=[int]$Settings.TurnSpeed;SoundVolume=[int]$Settings.SoundVolume;MusicVolume=[int]$Settings.MusicVolume;SoundMuted=[bool]$Settings.SoundMuted;Bindings=(New-DoomKeyBindings)}
+        return @{Version=5;AlwaysRun=[bool]$Settings.AlwaysRun;TurnSpeed=[int]$Settings.TurnSpeed;SoundVolume=[int]$Settings.SoundVolume;MusicVolume=[int]$Settings.MusicVolume;SoundMuted=[bool]$Settings.SoundMuted;GammaLevel=2;Bindings=(New-DoomKeyBindings)}
     }
     if(($Settings.MusicVolume -isnot [int] -and $Settings.MusicVolume -isnot [long]) -or $Settings.MusicVolume -lt 0 -or $Settings.MusicVolume -gt 100){throw 'Invalid music volume preference.'}
+    $gammaLevel=2
+    if($Settings.Version -eq 5){
+        if(-not $Settings.Contains('GammaLevel') -or ($Settings.GammaLevel -isnot [int] -and $Settings.GammaLevel -isnot [long]) -or $Settings.GammaLevel -lt 0 -or $Settings.GammaLevel -gt 10){throw 'Invalid gamma preference.'}
+        $gammaLevel=[int]$Settings.GammaLevel
+    }
     if($Settings.Bindings -isnot [Collections.IDictionary] -or $Settings.Bindings.Count -ne 9){throw 'Invalid key binding preferences.'}
     $bindings=[ordered]@{};$defaults=New-DoomKeyBindings;$reserved=Get-DoomReservedBindingKeys
     foreach($name in Get-DoomKeyBindingNames){
@@ -88,7 +93,7 @@ function Copy-DoomUserSettings {
         if($bindings.Values -contains [int]$key){throw 'Two game actions cannot share a key.'}
         $bindings[$name]=[int]$key
     }
-    return @{Version=4;AlwaysRun=[bool]$Settings.AlwaysRun;TurnSpeed=[int]$Settings.TurnSpeed;SoundVolume=[int]$Settings.SoundVolume;MusicVolume=[int]$Settings.MusicVolume;SoundMuted=[bool]$Settings.SoundMuted;Bindings=$bindings}
+    return @{Version=5;AlwaysRun=[bool]$Settings.AlwaysRun;TurnSpeed=[int]$Settings.TurnSpeed;SoundVolume=[int]$Settings.SoundVolume;MusicVolume=[int]$Settings.MusicVolume;SoundMuted=[bool]$Settings.SoundMuted;GammaLevel=$gammaLevel;Bindings=$bindings}
 }
 function Read-DoomUserSettings {
     param([Parameter(Mandatory)][string]$Path)
@@ -108,7 +113,7 @@ function Write-DoomUserSettings {
     $destination=[IO.Path]::GetFullPath($Path);$directory=[IO.Path]::GetDirectoryName($destination)
     [void][IO.Directory]::CreateDirectory($directory)
     $temporary=Join-Path $directory ('.settings-'+[guid]::NewGuid().ToString('N')+'.tmp')
-    $bytes=[Text.UTF8Encoding]::new($false).GetBytes(([ordered]@{Version=4;AlwaysRun=$values.AlwaysRun;TurnSpeed=$values.TurnSpeed;SoundVolume=$values.SoundVolume;MusicVolume=$values.MusicVolume;SoundMuted=$values.SoundMuted;Bindings=$values.Bindings}|ConvertTo-Json -Depth 4))
+    $bytes=[Text.UTF8Encoding]::new($false).GetBytes(([ordered]@{Version=5;AlwaysRun=$values.AlwaysRun;TurnSpeed=$values.TurnSpeed;SoundVolume=$values.SoundVolume;MusicVolume=$values.MusicVolume;SoundMuted=$values.SoundMuted;GammaLevel=$values.GammaLevel;Bindings=$values.Bindings}|ConvertTo-Json -Depth 4))
     try{
         [IO.File]::WriteAllBytes($temporary,$bytes)
         # Publish a complete file in the same directory. Refuse an unexpected file

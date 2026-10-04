@@ -1,5 +1,16 @@
 # Investigation ledger
 
+## 2026-10-04 — Implement saved gamma correction
+
+Added the adopted renderer's eleven-level PLAYPAL curve (off plus ten brighter
+levels) to Classic, Matrix and AnsiArt palette codecs. Settings version 5 saves
+the selection, the Settings screen edits it, and F11 cycles it in play. Frame
+requests, player-message colors and indexed-capture palette companions follow
+the same level. Regression cases were authored for palette math, settings
+migration/menu behavior and worker encoding; none were run because the user is
+using the computer. Static AST parsing of eleven PowerShell files and `git diff --check` pass. Visual
+output and original-executable equivalence remain unverified.
+
 ## 2026-10-04 — Document ordered menu input behavior
 
 Updated the menu guide to distinguish the ten previously qualified input assertions from five new queue-order and repeated-tap assertions that remain unrun during the user's active computer session. The guide also describes held-key debounce and per-event consumption. Documentation-only; no test process was started.

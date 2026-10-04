@@ -19,8 +19,8 @@ $ready=[Threading.EventWaitHandle]::OpenExisting($Channel+'-ready');$go=[Threadi
 [long]$workerBit=1L -shl $WorkerIndex
 try {
     $owner=if($OwnerPid -gt 0){[Diagnostics.Process]::GetProcessById($OwnerPid)}else{$null}
-    $previousSnapshot=$null;$ctx=Read-GameRenderAssets $Assets -CacheResources
-    $codecs=New-DoomPaletteCodecs $ctx.PlayPal $Style -GlyphSet $GlyphSet -AnsiEncoding $AnsiEncoding
+    $previousSnapshot=$null;$ctx=Read-GameRenderAssets $Assets -CacheResources;$activeGammaLevel=0
+    $codecs=New-DoomPaletteCodecs $ctx.PlayPal $Style -GlyphSet $GlyphSet -AnsiEncoding $AnsiEncoding -GammaLevel $activeGammaLevel
     [void]$ready.Set()
     while($true) {
         if(-not $go.WaitOne(1000)){if($null -ne $owner -and $owner.HasExited){break};continue}
@@ -30,13 +30,16 @@ try {
             $reloadWatch=[Diagnostics.Stopwatch]::StartNew()
             $updated=Read-GameRenderAssets $Assets -Resources $ctx
             if(-not [Linq.Enumerable]::SequenceEqual[byte]($ctx.PlayPal,$updated.PlayPal)){
-                $codecs=New-DoomPaletteCodecs $updated.PlayPal $Style -GlyphSet $GlyphSet -AnsiEncoding $AnsiEncoding
+                $codecs=New-DoomPaletteCodecs $updated.PlayPal $Style -GlyphSet $GlyphSet -AnsiEncoding $AnsiEncoding -GammaLevel $activeGammaLevel
             }
             $ctx=$updated;$previousSnapshot=$null
             $view.Write(88,$reloadWatch.Elapsed.TotalMilliseconds);$view.Write(96,[int][bool]$ctx.AssetBodyReused)
             [void]$done.Set();continue
         }
         if($kind -notin 0,1,3,4){throw 'Unknown rendering job kind.'}
+        $gammaLevel=$view.ReadInt32(88)
+        if($gammaLevel -lt 0 -or $gammaLevel -gt 10){throw 'Invalid rendering gamma level.'}
+        if($gammaLevel -ne $activeGammaLevel){$codecs=New-DoomPaletteCodecs $ctx.PlayPal $Style -GlyphSet $GlyphSet -AnsiEncoding $AnsiEncoding -GammaLevel $gammaLevel;$activeGammaLevel=$gammaLevel}
         $view.Write(48,[long][Diagnostics.Stopwatch]::GetTimestamp())
         $length=$view.ReadInt32(4);if($length -le 0 -or $length -gt 1048448){throw 'Invalid snapshot length.'}
         $bytes=[byte[]]::new($length);[void]$view.ReadArray(128L,$bytes,0,$length)
@@ -51,7 +54,7 @@ try {
             $paletteNumber=$view.ReadInt32(84)
         }
         if($paletteNumber -lt 0 -or $paletteNumber -ge $codecs.Length){throw 'Invalid rendering palette.'}
-        $codec=$codecs[$paletteNumber];$view.Write(36,[int]$paletteNumber)
+        $codec=$codecs[$paletteNumber];$view.Write(36,[int]$paletteNumber);$view.Write(92,$gammaLevel)
         $view.Write(40,$decodeWatch.Elapsed.TotalMilliseconds)
         $watch=[Diagnostics.Stopwatch]::StartNew()
         if($kind -eq 0){Invoke-FastRender $ctx $FirstColumn $EndColumn}

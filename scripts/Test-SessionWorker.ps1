@@ -5,19 +5,20 @@ param([string]$Wad='C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\
 $ErrorActionPreference='Stop'
 if(Test-Path -LiteralPath $Output){throw 'Use a fresh result path.'}
 $sourceRoot=[IO.Path]::GetFullPath("$PSScriptRoot/..")
-$sources=@(foreach($name in 'src/FastRenderer.ps1','src/RenderAssets.ps1','src/GameProcesses.ps1','src/GameHost.ps1','src/SnapshotTransport.ps1','scripts/Invoke-GameRenderWorker.ps1','scripts/Invoke-RenderWorkerWithLogs.ps1','scripts/Test-SessionWorker.ps1'){
+$sources=@(foreach($name in 'src/FastRenderer.ps1','src/RenderAssets.ps1','src/GameProcesses.ps1','src/GameHost.ps1','src/SnapshotTransport.ps1','src/PaletteCodec.ps1','scripts/Invoke-GameRenderWorker.ps1','scripts/Invoke-RenderWorkerWithLogs.ps1','scripts/Test-SessionWorker.ps1'){
     @{Path=$name;Sha256=(Get-FileHash -LiteralPath "$sourceRoot/$name").Hash}
 })
 $bundle=& "$PSScriptRoot/Build-EngineBundle.ps1";. $bundle
-. "$PSScriptRoot/FrameCodec.ps1";. "$PSScriptRoot/../src/CharacterCodec.ps1";. "$PSScriptRoot/../src/FastRenderer.ps1"
+. "$PSScriptRoot/FrameCodec.ps1";. "$PSScriptRoot/../src/CharacterCodec.ps1";. "$PSScriptRoot/../src/PaletteCodec.ps1";. "$PSScriptRoot/../src/FastRenderer.ps1"
 . "$PSScriptRoot/../src/TerminalCodec.ps1"
 . "$PSScriptRoot/../src/GameHost.ps1";. "$PSScriptRoot/../src/GameProcesses.ps1"
 $content=$null;$pool=$null;$failure=$null;$checks=[Collections.Generic.List[object]]::new()
-function Assert-WorkerImage([byte[]]$Expected,[int]$ExpectedTic,[switch]$Screen,[switch]$Menu,[switch]$Automap){
+function Assert-WorkerImage([byte[]]$Expected,[int]$ExpectedTic,[switch]$Screen,[switch]$Menu,[switch]$Automap,[int]$GammaLevel=0){
     $compared=0
     for($i=0;$i -lt $pool.Count;$i++){
         $worker=$pool.Workers[$i];$r=$pool.Results[$i]
         if($r.Tic -ne $ExpectedTic){throw 'Worker returned stale tic metadata.'}
+        if($r.GammaLevel -ne $GammaLevel){throw 'Worker returned stale gamma metadata.'}
         for($x=$worker.First;$x -lt $worker.End;$x++){for($y=0;$y -lt 200;$y++){
             if($r.Pixels[$y*320+$x] -ne $Expected[$y*320+$x]){throw "Worker pixel mismatch at $x,$y"};$compared++
         }}
@@ -26,7 +27,7 @@ function Assert-WorkerImage([byte[]]$Expected,[int]$ExpectedTic,[switch]$Screen,
             else{ConvertTo-CharacterStrip $Expected 320 200 $worker.First $worker.End $codec -ColumnOffset 11 -RowOffset 3 -FrameNumber 321 -HudStart $(if($Screen){200}else{168})}
         if([Convert]::ToBase64String($bytes) -cne [Convert]::ToBase64String($r.Bytes)){throw 'Encoded worker output mismatch.'}
     }
-    $checks.Add(@{Tic=$ExpectedTic;Screen=[bool]$Screen;Menu=[bool]$Menu;Automap=[bool]$Automap;PixelsCompared=$compared;StripBytesCompared=$pool.Count})
+    $checks.Add(@{Tic=$ExpectedTic;Screen=[bool]$Screen;Menu=[bool]$Menu;Automap=[bool]$Automap;GammaLevel=$GammaLevel;PixelsCompared=$compared;StripBytesCompared=$pool.Count})
 }
 try{
     $content=[GameContent]::new(@('-iwad',$Wad));$o=[GameOptions]::new();$o.GameMode=$content.Wad.GameMode
@@ -44,6 +45,10 @@ try{
     Assert-WorkerImage $rows 988 -Menu
     Submit-GameRender $pool $columns -AutomapPixels -Tic 989 -ColumnOffset 11 -RowOffset 3 -FrameNumber 321;Wait-GameRender $pool -ReadPixels
     Assert-WorkerImage $rows 989 -Automap
+    $gammaLevel=2;$gammaPalette=Get-DoomPaletteRgb $content.Palette.Data 0 -GammaLevel $gammaLevel
+    $codec=if($Style -eq 'Classic'){New-CodecContext $gammaPalette}else{New-CharacterCodecContext $gammaPalette $Style -GlyphSet Katakana}
+    Submit-GameRender $pool $columns -ScreenPixels -Tic 990 -ColumnOffset 11 -RowOffset 3 -FrameNumber 321 -GammaLevel $gammaLevel;Wait-GameRender $pool -ReadPixels
+    Assert-WorkerImage $rows 990 -Screen -GammaLevel $gammaLevel
     if($ResourceReuse){$maps=@(@(1,2),@(2,1),@(3,1),@(1,2))}else{$maps=,@(1,2)}
     foreach($target in $maps){
     $oldHash=(Get-FileHash -LiteralPath $pool.Assets).Hash;$previous=$context

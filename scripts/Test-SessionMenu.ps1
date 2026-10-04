@@ -29,6 +29,8 @@ try{
     $bindingMenu=New-DoomMenuState;$bindingMenu.Screen=15;$bindingMenu.AwaitingBinding=$true
     $text=Get-DoomCompactMenu $bindingMenu 28 14;$lines=$text.Split("`r`n")
     Assert-Menu 'Compact key capture identifies the pending action and fits the small window' ($lines.Count -le 14 -and $lines[0] -eq 'Press key for Forward' -and @($lines|Where-Object {$_.Length -ge 28}).Count -eq 0)
+    $settingsMenu=New-DoomMenuState;$settingsMenu.Screen=14;$compactSettings=Get-DoomCompactMenu $settingsMenu 48 16
+    Assert-Menu 'Compact settings include gamma level' ($compactSettings.Contains('Gamma: Level 2'))
     $palette=New-TestPalette 256;$pixels=New-IndexedFrame 32 16 7 -Pattern Entropy -Colors 256
     foreach($style in 'Matrix','AnsiArt'){
         $ctx=New-CharacterCodecContext $palette $style -GlyphSet Katakana
@@ -69,7 +71,7 @@ try{
     Assert-Menu 'Native key capture screen renders unavailable-key feedback' ([Convert]::ToBase64String($unavailableFrame) -cne [Convert]::ToBase64String($idleKeyFrame))
     $details=New-DoomMenuState;$details.MessageTitle='SAVE FAILED';$details.MessageDetail='SELECT SLOT AGAIN';$details.Slots[0]=@{Slot=1;State='Ready';Episode=4;Map=9;Skill=5;Time='23:59';Sha256=('A'*64);SourceMatches=$false}
     for($screen=1;$screen -le 15;$screen++){
-        $count=switch($screen){1{7};14{8};15{11};2{4};3{5};4{2};6{2};8{6};9{6};10{2};11{2};default{1}}
+        $count=switch($screen){1{7};14{9};15{11};2{4};3{5};4{2};6{2};8{6};9{6};10{2};11{2};default{1}}
         for($choice=0;$choice -lt $count;$choice++){
             $frame=Get-DoomMenuPixels $graphics $screen $choice 4 5 4 -Details $details
             Assert-Menu "Menu $screen / choice $choice draws nonblank pixels" (@($frame|Where-Object {$_ -ne 0}).Count -gt 100)

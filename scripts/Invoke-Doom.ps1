@@ -34,15 +34,15 @@ class HostInputCommand {
     [void]Clear(){$this.ForwardMove=0;$this.SideMove=0;$this.AngleTurn=0;$this.Buttons=0}
 }
 function Start-DoomRenderJob {
-    param($Pool,$Snapshot,$Clock,$InterpolationTimes,$Viewport)
+    param($Pool,$Snapshot,$Clock,$InterpolationTimes,$Viewport,[ValidateRange(0,10)][int]$GammaLevel=0)
     $fraction=if($Snapshot.Tic -eq 0){1}else{[Math]::Clamp([double]($Clock.Elapsed.TotalMilliseconds*35/1000-$Snapshot.Tic),[double]0,[double]1)}
     $watch=[Diagnostics.Stopwatch]::StartNew()
     $screenPixels=$Snapshot.ScreenKind -ne 0
     [byte[]]$bytes=if($screenPixels){$Snapshot.Pixels}else{Get-InterpolatedSnapshotBytes $Snapshot.Previous $Snapshot.Current $fraction}
     $InterpolationTimes.Add($watch.Elapsed.TotalMilliseconds)
     $qpc=[Diagnostics.Stopwatch]::GetTimestamp();$watch.Restart()
-    Submit-GameRender $Pool $bytes -ColumnOffset $Viewport.Left -RowOffset $Viewport.Top -FrameNumber ([int][Math]::Floor($Clock.Elapsed.TotalSeconds*60)) -ScreenPixels:$screenPixels -Tic $Snapshot.Tic -MenuPixels:($Snapshot.ScreenKind -eq 2) -AutomapPixels:($Snapshot.ScreenKind -eq 3) -PaletteNumber $Snapshot.PaletteNumber
-    return @{Tic=$Snapshot.Tic;Version=$Snapshot.Version;StartQpc=$qpc;SubmitMs=$watch.Elapsed.TotalMilliseconds;ViewportKey=$Viewport.Key;State=$Snapshot.State;Generation=$Snapshot.Generation;Episode=$Snapshot.Episode;Map=$Snapshot.Map;ScreenKind=$Snapshot.ScreenKind;MenuRevision=$Snapshot.MenuRevision;MenuScreen=$Snapshot.MenuScreen;PaletteNumber=$Snapshot.PaletteNumber;PlayerMessage=$Snapshot.PlayerMessage;PlayerMessageTics=$Snapshot.PlayerMessageTics;PlayerMessagePixels=$Snapshot.PlayerMessagePixels}
+    Submit-GameRender $Pool $bytes -ColumnOffset $Viewport.Left -RowOffset $Viewport.Top -FrameNumber ([int][Math]::Floor($Clock.Elapsed.TotalSeconds*60)) -ScreenPixels:$screenPixels -Tic $Snapshot.Tic -MenuPixels:($Snapshot.ScreenKind -eq 2) -AutomapPixels:($Snapshot.ScreenKind -eq 3) -PaletteNumber $Snapshot.PaletteNumber -GammaLevel $GammaLevel
+    return @{Tic=$Snapshot.Tic;Version=$Snapshot.Version;StartQpc=$qpc;SubmitMs=$watch.Elapsed.TotalMilliseconds;ViewportKey=$Viewport.Key;State=$Snapshot.State;Generation=$Snapshot.Generation;Episode=$Snapshot.Episode;Map=$Snapshot.Map;ScreenKind=$Snapshot.ScreenKind;MenuRevision=$Snapshot.MenuRevision;PaletteNumber=$Snapshot.PaletteNumber;GammaLevel=$GammaLevel;PlayerMessage=$Snapshot.PlayerMessage;PlayerMessageTics=$Snapshot.PlayerMessageTics;PlayerMessagePixels=$Snapshot.PlayerMessagePixels}
 }
 function Add-DoomCompletedFrame {
     param($Present,[long]$EndQpc,[double]$OutputMs,[long]$OutputBytes,[double]$DispatchMs=0,$OutputJob=$null)
@@ -50,7 +50,7 @@ function Add-DoomCompletedFrame {
     $frameStats.Add(@{Tic=$Present.Tic;State=$Present.State;Generation=$Present.Generation;Episode=$Present.Episode;Map=$Present.Map;
         SubmitMs=$Present.SubmitMs;HarvestMs=$Present.HarvestMs;OutputMs=$OutputMs;OutputBytes=$OutputBytes;OutputDispatchMs=$DispatchMs;
         StartQpc=$Present.StartQpc;EndQpc=$EndQpc;ElapsedMs=$clock.Elapsed.TotalMilliseconds;
-        ScreenKind=$Present.ScreenKind;MenuScreen=$Present.MenuScreen;MenuRevision=$Present.MenuRevision;PaletteNumber=$Present.PaletteNumber;
+        ScreenKind=$Present.ScreenKind;MenuScreen=$Present.MenuScreen;MenuRevision=$Present.MenuRevision;PaletteNumber=$Present.PaletteNumber;GammaLevel=$Present.GammaLevel;
         PlayerMessage=$Present.PlayerMessage;PlayerMessageTics=$Present.PlayerMessageTics;
         AsyncOutput=if($null -ne $OutputJob){@{WriteStartQpc=$OutputJob.WriteStartQpc;LastIncompleteQpc=$OutputJob.LastIncompleteQpc;FirstCompletedObservationQpc=$OutputJob.FirstCompletedObservationQpc;CompletionProbes=$OutputJob.CompletionProbes;PendingProbes=$OutputJob.PendingProbes}}else{$null};
         Workers=@($Present.Results | ForEach-Object {,@($_.RenderMs,$_.EncodeMs,$_.DecodeMs,$_.StartedQpc,$_.DoneQpc)})})
@@ -103,7 +103,7 @@ try {
         if((Get-Item -LiteralPath $SessionSchedule).Length -gt 1MB){throw 'Session schedule is too large.'}
         $sessionScheduleData=@(Get-Content -LiteralPath $SessionSchedule -Raw|ConvertFrom-Json -Depth 4|Sort-Object AtSeconds)
         if($sessionScheduleData.Count -gt 1000){throw 'Too many scheduled session keys.'}
-        foreach($entry in $sessionScheduleData){if($entry.AtSeconds -lt 0 -or $entry.Key -notin 'Escape','Pause','Up','Down','Left','Right','Enter','Yes','No'){throw 'Invalid scheduled session key.'}}
+        foreach($entry in $sessionScheduleData){if($entry.AtSeconds -lt 0 -or $entry.Key -notin 'Escape','Pause','F11','Up','Down','Left','Right','Enter','Yes','No'){throw 'Invalid scheduled session key.'}}
     }
     if($ViewportSchedule) {
         if(-not $Headless){throw 'Synthetic viewport schedules are only allowed with -Headless.'}
@@ -142,14 +142,13 @@ try {
     $menu.Settings=Copy-DoomUserSettings $preferences
     if($null -eq $snapshot){throw 'Initial simulation snapshot was not published.'}
     $context=Read-GameRenderAssets $simulation.Assets
-    $messageCodecs=New-DoomPlayerMessageCodecs $context.PlayPal $Style;$context.AssetPath=$simulation.Assets
-    $paletteBytes=[byte[]]::new(768)
-    for($i=0;$i -lt 256;$i++){for($j=0;$j -lt 3;$j++){$paletteBytes[3*$i+$j]=$context.Palette[$i][$j]}}
+    $messageCodecs=New-DoomPlayerMessageCodecs $context.PlayPal $Style -GammaLevel $preferences.GammaLevel;$context.AssetPath=$simulation.Assets
+    $paletteBytes=Get-DoomPaletteBytes $context.PlayPal 0 -GammaLevel $preferences.GammaLevel
     [IO.File]::WriteAllBytes("$PSScriptRoot/../local/palette.bin",$paletteBytes)
     $pool=New-GameRenderPool $context $null $Workers -Style $Style -GlyphSet $GlyphSet -AnsiEncoding $AnsiEncoding
     [byte[]]$initialBytes=if($snapshot.ScreenKind -eq 0){Get-InterpolatedSnapshotBytes $snapshot.Previous $snapshot.Current 1}else{$snapshot.Pixels}
     for($i=0;$i -lt 4;$i++){
-        Submit-GameRender $pool $initialBytes -ScreenPixels:($snapshot.ScreenKind -ne 0) -MenuPixels:($snapshot.ScreenKind -eq 2) -AutomapPixels:($snapshot.ScreenKind -eq 3) -Tic $snapshot.Tic -PaletteNumber $snapshot.PaletteNumber
+        Submit-GameRender $pool $initialBytes -ScreenPixels:($snapshot.ScreenKind -ne 0) -MenuPixels:($snapshot.ScreenKind -eq 2) -AutomapPixels:($snapshot.ScreenKind -eq 3) -Tic $snapshot.Tic -PaletteNumber $snapshot.PaletteNumber -GammaLevel $preferences.GammaLevel
         Wait-GameRender $pool
     }
     if(-not $Headless) {
@@ -276,10 +275,10 @@ try {
                         $menuInputCode=$code;break
                     }
                 }else{
-                    $keyCodes=if($menu.Screen -in 0,7){@(27,80,19,112,113,114,121)}else{@(27,80,19,38,40,37,39,13,89,78)}
+                    $keyCodes=if($menu.Screen -in 0,7){@(27,80,19,112,113,114,121,122)}else{@(27,80,19,38,40,37,39,13,89,78)}
                     foreach($code in $pressedOrder){
                         if($code -notin $keyCodes){if($menu.Screen -gt 0){Remove-DoomInputPress $consoleState $code};continue}
-                        $key=switch($code){27{'Escape'};80{'Pause'};19{'Pause'};112{'F1'};113{'F2'};114{'F3'};121{'F10'};38{'Up'};40{'Down'};37{'Left'};39{'Right'};13{'Enter'};89{'Yes'};78{'No'}}
+                        $key=switch($code){27{'Escape'};80{'Pause'};19{'Pause'};112{'F1'};113{'F2'};114{'F3'};121{'F10'};122{'F11'};38{'Up'};40{'Down'};37{'Left'};39{'Right'};13{'Enter'};89{'Yes'};78{'No'}}
                         $menuInputCode=$code;break
                     }
                 }
@@ -287,11 +286,16 @@ try {
             if($null -eq $key -and $scheduleIndex -lt $sessionScheduleData.Count -and $sessionScheduleData[$scheduleIndex].AtSeconds*1000 -le $wallNow){$key=$sessionScheduleData[$scheduleIndex].Key;$scheduleIndex++}
             if($null -ne $key){
                 $priorMenuScreen=$menu.Screen
+                $priorGammaLevel=$preferences.GammaLevel
                 $nextAction=Invoke-DoomMenuKey $menu $key -CaptureVirtualKey $captureVirtualKey
                 if($null -ne $nextAction -and $nextAction.Action -eq 'ShowMenu' -and $nextAction.SettingsChanged){
                     try{
                         if($SettingsPath){$preferencesHash=Write-DoomUserSettings $SettingsPath $menu.Settings $preferencesHash}
                         $preferences=Copy-DoomUserSettings $menu.Settings
+                        if($preferences.GammaLevel -ne $priorGammaLevel){
+                            $messageCodecs=New-DoomPlayerMessageCodecs $context.PlayPal $Style -GammaLevel $preferences.GammaLevel
+                            $pendingFrame=$null;$lastPresentedVersion=-1
+                        }
                         $preferencesEvents.Add(@{Tic=$tics;WallMs=$wallNow;Success=$true;Values=(Copy-DoomUserSettings $preferences);Persisted=[bool]$SettingsPath})
                     }catch{
                         $preferencesEvents.Add(@{Tic=$tics;WallMs=$wallNow;Success=$false;Error=$_.ToString()})
@@ -418,6 +422,7 @@ try {
         }
         if($null -ne $pendingFrame -and ($pendingFrame.ViewportKey -ne $viewport.Key -or -not $viewport.Fits)){$pendingFrame=$null;$resizeDiscarded++}
         if($null -ne $pendingFrame -and ($pendingFrame.State -ne $snapshot.State -or $pendingFrame.Generation -ne $snapshot.Generation -or $pendingFrame.MenuRevision -ne $snapshot.MenuRevision)){$pendingFrame=$null;$transitionDiscarded++}
+        if($null -ne $pendingFrame -and $pendingFrame.GammaLevel -ne $preferences.GammaLevel){$pendingFrame=$null;$transitionDiscarded++}
         if($null -eq $terminalOutputContext.Pending -and $viewport.Fits -and $null -ne $pendingFrame -and ($needsClear -or $clock.Elapsed.TotalMilliseconds -ge $nextPresentation -or ($snapshot.ScreenKind -eq 2 -and $lastPresentedVersion -ne $snapshot.Version))) {
             $present=$pendingFrame;$pendingFrame=$null;$lastFrameTic=$present.Tic;$lastPresentedVersion=$present.Version
             if($CaptureEveryTics -gt 0 -and $lastFrameTic -ge $nextCapture) {
@@ -425,13 +430,13 @@ try {
                 for($i=0;$i -lt $pool.Count;$i++){$worker=$pool.Workers[$i];for($y=0;$y -lt 200;$y++){[Array]::Copy($pool.Results[$i].Pixels,$y*320+$worker.First,$capture,$y*320+$worker.First,$worker.End-$worker.First)}}
                 [void][IO.Directory]::CreateDirectory($captureDirectory)
                 $capturePath=Join-Path $captureDirectory "capture-$lastFrameTic.bin";[IO.File]::WriteAllBytes($capturePath,$capture)
-                $capturePalette=[byte[]]::new(768);[Buffer]::BlockCopy($context.PlayPal,$present.PaletteNumber*768,$capturePalette,0,768)
+                $capturePalette=Get-DoomPaletteBytes $context.PlayPal $present.PaletteNumber -GammaLevel $present.GammaLevel
                 [IO.File]::WriteAllBytes($capturePath+'.palette.bin',$capturePalette)
                 $captures.Add([IO.Path]::GetFullPath($capturePath));$nextCapture+=$CaptureEveryTics
             }
             # The next render overlaps the current console write. Results are copied
             # out of shared memory before this dispatch, so workers may reuse it.
-            if($menu.Screen -eq 0){$activeFrame=Start-DoomRenderJob $pool $snapshot $clock $interpolationTimes $viewport;$inFlight=$true}
+            if($menu.Screen -eq 0){$activeFrame=Start-DoomRenderJob $pool $snapshot $clock $interpolationTimes $viewport $preferences.GammaLevel;$inFlight=$true}
             $outputWatch=[Diagnostics.Stopwatch]::StartNew()
             $outputBytesBefore=$terminalOutputContext.Bytes
             if(-not $Headless) {
@@ -456,7 +461,7 @@ try {
             $nextPresentation+=1000.0/60
         }
         if($viewport.Fits -and -not $inFlight -and $null -eq $pendingFrame -and ($needsClear -or $menu.Screen -eq 0 -or $lastPresentedVersion -ne $snapshot.Version)) {
-            $activeFrame=Start-DoomRenderJob $pool $snapshot $clock $interpolationTimes $viewport;$inFlight=$true
+            $activeFrame=Start-DoomRenderJob $pool $snapshot $clock $interpolationTimes $viewport $preferences.GammaLevel;$inFlight=$true
         }
         if($inFlight -and ([Diagnostics.Stopwatch]::GetTimestamp()-$activeFrame.StartQpc)/[Diagnostics.Stopwatch]::Frequency -gt 30){throw 'Renderer timed out.'}
         if($viewport.Fits){[Threading.Thread]::Sleep(1)}else{[Threading.Thread]::Sleep(10)}
@@ -484,7 +489,7 @@ finally {
         for($i=0;$i -lt $pool.Count;$i++){$result=$pool.Results[$i];if($null -eq $result -or $null -eq $result.Pixels){continue};$worker=$pool.Workers[$i];for($y=0;$y -lt 200;$y++){[Array]::Copy($result.Pixels,$y*320+$worker.First,$image,$y*320+$worker.First,$worker.End-$worker.First)}}
         [IO.File]::WriteAllBytes("$PSScriptRoot/../local/game-frame.bin",$image)
         if($pool.Results[0]){
-            $finalPalette=[byte[]]::new(768);[Buffer]::BlockCopy($context.PlayPal,$pool.Results[0].PaletteNumber*768,$finalPalette,0,768)
+            $finalPalette=Get-DoomPaletteBytes $context.PlayPal $pool.Results[0].PaletteNumber -GammaLevel $pool.Results[0].GammaLevel
             [IO.File]::WriteAllBytes("$PSScriptRoot/../local/palette.bin",$finalPalette)
         }
         Close-GameRenderPool $pool

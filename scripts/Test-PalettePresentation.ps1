@@ -53,6 +53,23 @@ try{
             foreach($hudStart in -1,12){Check "$style menu/map $number HUD $hudStart" (EqualBytes (ConvertTo-MenuStrip $small 32 16 0 32 $full -HudStart $hudStart) (ConvertTo-MenuStrip $small 32 16 0 32 $sparse -HudStart $hudStart))}
         }
     }
+    $referenceExponents=[double[]]@(1.00,0.95,0.90,0.85,0.80,0.75,0.70,0.65,0.60,0.55,0.50)
+    foreach($level in 0,2,10){
+        $exponent=$referenceExponents[$level];$matches=$true
+        for($number=0;$number -lt 14;$number++){
+            $actual=Get-DoomPaletteRgb $content.Palette.Data $number -GammaLevel $level;$expected=[int[][]]::new(256)
+            for($i=0;$i -lt 256;$i++){
+                $expected[$i]=[int[]]::new(3)
+                for($channel=0;$channel -lt 3;$channel++){
+                    $raw=[int]$content.Palette.Data[$number*768+3*$i+$channel];$expected[$i][$channel]=[int][Math]::Round(255*[Math]::Pow($raw/255.0,$exponent))
+                    if($actual[$i][$channel] -ne $expected[$i][$channel]){$matches=$false}
+                }
+            }
+            if($number -eq 0){$expectedBytes=[byte[]]::new(768);for($i=0;$i -lt 256;$i++){for($channel=0;$channel -lt 3;$channel++){$expectedBytes[3*$i+$channel]=[byte]$expected[$i][$channel]}}}
+        }
+        Check "Gamma level $level uses the adopted renderer curve across all fourteen palettes" $matches
+        Check "Gamma level $level palette bytes match its RGB table" (EqualBytes $expectedBytes (Get-DoomPaletteBytes $content.Palette.Data 0 -GammaLevel $level))
+    }
 }catch{$failure=$_.ToString()+"`n"+$_.ScriptStackTrace;throw}finally{
     if($content){$content.Dispose()}
     @{Error=$failure;Checks=$checks.ToArray();WadSha256=(Get-FileHash $Wad).Hash;BundleSha256=(Get-FileHash $bundle).Hash;

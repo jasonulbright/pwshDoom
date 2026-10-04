@@ -7,7 +7,7 @@ function New-DoomMenuState {
     return @{Screen=0;Choice=0;Startup=$false;Episode=$Episode;Skill=$Skill;Episodes=$Episodes;Slots=@(1..6|ForEach-Object {@{Slot=$_;State='Empty';Sha256=$null;Episode=0;Map=0;Skill=0;Time='';SourceMatches=$true}});SelectedSlot=1;MessageTitle='';MessageDetail='';ReturnScreen=1;AwaitingBinding=$false;Settings=(New-DoomUserSettings)}
 }
 function Invoke-DoomMenuKey {
-    param($Menu,[ValidateSet('Escape','Pause','F1','F2','F3','F10','Up','Down','Left','Right','Enter','Yes','No','Capture')][string]$Key,[int]$CaptureVirtualKey=0)
+    param($Menu,[ValidateSet('Escape','Pause','F1','F2','F3','F10','F11','Up','Down','Left','Right','Enter','Yes','No','Capture')][string]$Key,[int]$CaptureVirtualKey=0)
     $screen=$Menu.Screen;$settingsChanged=$false
     if($screen -eq 13){return $null}
     if($screen -eq 15 -and $Menu.AwaitingBinding){
@@ -25,7 +25,9 @@ function Invoke-DoomMenuKey {
         }
         return @{Action='ShowMenu';Screen=$Menu.Screen;Choice=$Menu.Choice;Episode=$Menu.Episode;Skill=$Menu.Skill;Slots=$Menu.Slots;SelectedSlot=$Menu.SelectedSlot;MessageTitle=$Menu.MessageTitle;MessageDetail=$Menu.MessageDetail;Settings=$Menu.Settings;AwaitingBinding=$Menu.AwaitingBinding;Startup=$Menu.Startup;SettingsChanged=$settingsChanged}
     }
-    if($screen -in 0,7 -and $Key -in 'F1','F2','F3','F10'){
+    if($screen -in 0,7 -and $Key -eq 'F11'){
+        $Menu.Settings.GammaLevel=($Menu.Settings.GammaLevel+1)%11;$settingsChanged=$true
+    }elseif($screen -in 0,7 -and $Key -in 'F1','F2','F3','F10'){
         switch($Key){
             F1 {$Menu.Screen=5;$Menu.Choice=0;$Menu.ReturnScreen=0}
             F2 {$Menu.Screen=8;$Menu.Choice=$Menu.SelectedSlot-1}
@@ -40,7 +42,7 @@ function Invoke-DoomMenuKey {
         if($Key -in 'Pause','Escape','Enter'){$Menu.Screen=0}else{return $null}
     }elseif($Key -eq 'Escape' -or ($Key -eq 'No' -and $screen -in 4,6,10,11)){
         $Menu.Screen=switch($screen){1{0};2{1};3{if($Menu.Episodes -gt 1){2}else{1}};4{3};5{$Menu.ReturnScreen};6{$Menu.ReturnScreen};10{8};11{9};12{$Menu.ReturnScreen};15{14};default{1}}
-        $Menu.Choice=if($Menu.Screen -eq 2){$Menu.Episode-1}elseif($Menu.Screen -eq 3){$Menu.Skill-1}elseif($Menu.Screen -in 8,9){$Menu.SelectedSlot-1}elseif($Menu.Screen -eq 14){5}else{0}
+        $Menu.Choice=if($Menu.Screen -eq 2){$Menu.Episode-1}elseif($Menu.Screen -eq 3){$Menu.Skill-1}elseif($Menu.Screen -in 8,9){$Menu.SelectedSlot-1}elseif($Menu.Screen -eq 14){6}else{0}
     }elseif($screen -eq 14 -and $Key -in 'Left','Right','Enter'){
         switch($Menu.Choice){
             0 {$Menu.Settings.AlwaysRun=-not $Menu.Settings.AlwaysRun;$settingsChanged=$true}
@@ -48,20 +50,21 @@ function Invoke-DoomMenuKey {
             2 {$delta=if($Key -eq 'Left'){-10}else{10};$level=[Math]::Clamp($Menu.Settings.SoundVolume+$delta,0,100);$settingsChanged=$level -ne $Menu.Settings.SoundVolume;$Menu.Settings.SoundVolume=$level}
             3 {$delta=if($Key -eq 'Left'){-10}else{10};$level=[Math]::Clamp($Menu.Settings.MusicVolume+$delta,0,100);$settingsChanged=$level -ne $Menu.Settings.MusicVolume;$Menu.Settings.MusicVolume=$level}
             4 {$Menu.Settings.SoundMuted=-not $Menu.Settings.SoundMuted;$settingsChanged=$true}
-            5 {if($Key -eq 'Enter'){$Menu.Screen=15;$Menu.Choice=0;$Menu.MessageTitle='';$Menu.MessageDetail=''}else{return $null}}
-            6 {if($Key -eq 'Enter'){$Menu.Settings=New-DoomUserSettings;$settingsChanged=$true}else{return $null}}
-            7 {if($Key -eq 'Enter'){$Menu.Screen=1;$Menu.Choice=5}else{return $null}}
+            5 {$delta=if($Key -eq 'Left'){-1}else{1};$level=($Menu.Settings.GammaLevel+$delta+11)%11;$settingsChanged=$level -ne $Menu.Settings.GammaLevel;$Menu.Settings.GammaLevel=$level}
+            6 {if($Key -eq 'Enter'){$Menu.Screen=15;$Menu.Choice=0;$Menu.MessageTitle='';$Menu.MessageDetail=''}else{return $null}}
+            7 {if($Key -eq 'Enter'){$Menu.Settings=New-DoomUserSettings;$settingsChanged=$true}else{return $null}}
+            8 {if($Key -eq 'Enter'){$Menu.Screen=1;$Menu.Choice=5}else{return $null}}
         }
     }elseif($screen -eq 15 -and $Key -eq 'Enter'){
         if($Menu.Choice -lt 9){$Menu.AwaitingBinding=$true;$Menu.MessageTitle='PRESS A KEY';$Menu.MessageDetail='ESC CANCELS'}
         elseif($Menu.Choice -eq 9){$Menu.Settings.Bindings=(New-DoomKeyBindings);$settingsChanged=$true;$Menu.MessageTitle='DEFAULT KEYS RESTORED';$Menu.MessageDetail=''}
-        else{$Menu.Screen=14;$Menu.Choice=5}
+        else{$Menu.Screen=14;$Menu.Choice=6}
     }elseif($screen -eq 5){
         if($Key -eq 'Enter'){$Menu.Screen=$Menu.ReturnScreen;$Menu.Choice=if($Menu.Screen -eq 1){4}else{0}}else{return $null}
     }elseif($screen -eq 12){
         if($Key -eq 'Enter'){$Menu.Screen=$Menu.ReturnScreen;$Menu.Choice=if($Menu.Screen -in 8,9){$Menu.SelectedSlot-1}else{0}}else{return $null}
     }elseif($Key -in 'Up','Down'){
-        $count=switch($screen){1{7};14{8};15{11};2{$Menu.Episodes};3{5};8{6};9{6};default{2}}
+        $count=switch($screen){1{7};14{9};15{11};2{$Menu.Episodes};3{5};8{6};9{6};default{2}}
         $delta=if($Key -eq 'Up'){-1}else{1};$Menu.Choice=($Menu.Choice+$delta+$count)%$count
         if($screen -eq 15){$Menu.MessageTitle='';$Menu.MessageDetail=''}
     }elseif($Key -eq 'Enter' -or ($Key -eq 'Yes' -and $screen -in 4,6,10,11)){
@@ -106,12 +109,12 @@ function Get-DoomCompactMenu {
         2 {@('Knee-Deep in the Dead','The Shores of Hell','Inferno','Thy Flesh Consumed')|Select-Object -First $Menu.Episodes}
         3 {@("I'm too young to die",'Hey, not too rough','Hurt me plenty','Ultra-Violence','Nightmare')}
         {$_ -in 4,6,10,11} {@('No','Yes')}
-        5 {@('Settings can remap game keys','WASD / arrows move and turn','Ctrl fire; E/Space/Enter use','Shift run; 1-7 select weapons','Tab map; +/- zoom; F follow','Map: arrows pan; M mark; C clear','F1 controls; F2 save; F3 load','F10 quit; P pause; Esc menu')}
+        5 {@('Settings can remap game keys','WASD / arrows move and turn','Ctrl fire; E/Space/Enter use','Shift run; 1-7 select weapons','Tab map; +/- zoom; F follow','Map: arrows pan; M mark; C clear','F1 controls; F2 save; F3 load','F10 quit; F11 gamma; P pause; Esc menu')}
         7 {@('P / Enter / Esc to resume')}
         {$_ -in 8,9} {@($Menu.Slots|ForEach-Object {if($_.State -eq 'Ready'){"$($_.Slot)  E$($_.Episode)M$($_.Map)  $($_.Time)"}else{"$($_.Slot)  $($_.State)"}})}
         12 {@($Menu.MessageDetail,'Enter / Esc to return')}
         13 {@('Please wait...')}
-        14 {@("Always run: $(if($Menu.Settings.AlwaysRun){'On'}else{'Off'})","Turn speed: $($Menu.Settings.TurnSpeed)%","Effects volume: $($Menu.Settings.SoundVolume)%","Music volume: $($Menu.Settings.MusicVolume)%","Mute effects: $(if($Menu.Settings.SoundMuted){'On'}else{'Off'})",'Configure keys','Reset defaults','Back')}
+        14 {@("Always run: $(if($Menu.Settings.AlwaysRun){'On'}else{'Off'})","Turn speed: $($Menu.Settings.TurnSpeed)%","Effects volume: $($Menu.Settings.SoundVolume)%","Music volume: $($Menu.Settings.MusicVolume)%","Mute effects: $(if($Menu.Settings.SoundMuted){'On'}else{'Off'})",("Gamma: $(if($Menu.Settings.GammaLevel -eq 0){'Off'}else{'Level '+$Menu.Settings.GammaLevel})"),'Configure keys','Reset defaults','Back')}
         15 {@(Get-DoomKeyBindingNames|ForEach-Object {"$_ : $(Get-DoomKeyBindingLabel $Menu.Settings.Bindings[$_])"})+@('Restore defaults','Back')}
     }
     $lines=@($title)
@@ -174,7 +177,7 @@ function Get-DoomMenuPixels {
         5 {
             Draw-DoomMenuText $Graphics 'CONTROLS' 0 6 -Center
             $preferences=Copy-DoomUserSettings $Details.Settings
-            $lines=@("MOVE $(Get-DoomKeyBindingLabel $preferences.Bindings.Forward) / $(Get-DoomKeyBindingLabel $preferences.Bindings.Backward)","STRAFE $(Get-DoomKeyBindingLabel $preferences.Bindings.StrafeLeft) / $(Get-DoomKeyBindingLabel $preferences.Bindings.StrafeRight)","TURN $(Get-DoomKeyBindingLabel $preferences.Bindings.TurnLeft) / $(Get-DoomKeyBindingLabel $preferences.Bindings.TurnRight)","FIRE $(Get-DoomKeyBindingLabel $preferences.Bindings.Fire) / USE $(Get-DoomKeyBindingLabel $preferences.Bindings.Use)","RUN $(Get-DoomKeyBindingLabel $preferences.Bindings.Run) / 1-7 WEAPONS",'TAB MAP / +/- ZOOM','MAP: ARROWS PAN / F FOLLOW','M MARK / C CLEAR / P PAUSE','F1 HELP / F2 SAVE / F3 LOAD / F10 QUIT')
+            $lines=@("MOVE $(Get-DoomKeyBindingLabel $preferences.Bindings.Forward) / $(Get-DoomKeyBindingLabel $preferences.Bindings.Backward)","STRAFE $(Get-DoomKeyBindingLabel $preferences.Bindings.StrafeLeft) / $(Get-DoomKeyBindingLabel $preferences.Bindings.StrafeRight)","TURN $(Get-DoomKeyBindingLabel $preferences.Bindings.TurnLeft) / $(Get-DoomKeyBindingLabel $preferences.Bindings.TurnRight)","FIRE $(Get-DoomKeyBindingLabel $preferences.Bindings.Fire) / USE $(Get-DoomKeyBindingLabel $preferences.Bindings.Use)","RUN $(Get-DoomKeyBindingLabel $preferences.Bindings.Run) / 1-7 WEAPONS",'TAB MAP / +/- ZOOM','MAP: ARROWS PAN / F FOLLOW','M MARK / C CLEAR / P PAUSE','F1 HELP / F2 SAVE / F3 LOAD / F10 QUIT / F11 GAMMA')
             for($i=0;$i -lt $lines.Count;$i++){Draw-DoomMenuText $Graphics $lines[$i] 16 (30+18*$i) 1}
         }
         6 {
@@ -201,9 +204,9 @@ function Get-DoomMenuPixels {
         14 {
             $preferences=Copy-DoomUserSettings $Details.Settings
             Draw-DoomMenuText $Graphics 'SETTINGS' 0 16 -Center
-            $labels=@("ALWAYS RUN: $(if($preferences.AlwaysRun){'ON'}else{'OFF'})","TURN SPEED: $($preferences.TurnSpeed)%","EFFECTS: $($preferences.SoundVolume)%","MUSIC: $($preferences.MusicVolume)%","SFX MUTE: $(if($preferences.SoundMuted){'ON'}else{'OFF'})",'CONFIGURE KEYS','RESET DEFAULTS','BACK')
-            for($i=0;$i -lt $labels.Count;$i++){Draw-DoomMenuText $Graphics $labels[$i] 48 (36+15*$i)}
-            $draw.DrawPatch($patches.M_SKULL1,16,(34+15*$Choice),1)
+            $labels=@("ALWAYS RUN: $(if($preferences.AlwaysRun){'ON'}else{'OFF'})","TURN SPEED: $($preferences.TurnSpeed)%","EFFECTS: $($preferences.SoundVolume)%","MUSIC: $($preferences.MusicVolume)%","SFX MUTE: $(if($preferences.SoundMuted){'ON'}else{'OFF'})","GAMMA: $(if($preferences.GammaLevel -eq 0){'OFF'}else{'LEVEL '+$preferences.GammaLevel})",'CONFIGURE KEYS','RESET DEFAULTS','BACK')
+            for($i=0;$i -lt $labels.Count;$i++){Draw-DoomMenuText $Graphics $labels[$i] 48 (36+13*$i)}
+            $draw.DrawPatch($patches.M_SKULL1,16,(34+13*$Choice),1)
             Draw-DoomMenuText $Graphics 'LEFT/RIGHT: CHANGE' 0 166 -Center
             Draw-DoomMenuText $Graphics 'ENTER: OK  ESC: BACK' 0 184 -Center
         }
