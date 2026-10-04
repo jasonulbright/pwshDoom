@@ -743,3 +743,22 @@ and findings remain. The local reference PDF was already ignored and is not
 tracked. Continue source fidelity and frame-cost work; the user has prohibited
 live tests while using the computer. The next public release is due at 35
 commits after Preview.7.
+
+### Current source checkpoint — October 4, 2026
+
+At source commit `fbb91d7`, the branch is 23 commits past Preview.7. F11's
+two-second gamma-level notice now remains visible on the pause screen and then
+restores the menu. Regression cases cover the pause behavior but remain unrun;
+PowerShell AST parsing and whitespace checks pass. Documentation revision
+`015fa63` brings the branch to 24 commits after Preview.7. These source changes
+have no extracted-package or live-play validation, and Preview.7 remains the
+latest validated public package. Keep the HMP Episode 1 route and all broader
+release gates open; the next cumulative release threshold is 35 commits.
+
+This roadmap and ledger refresh is the 25th development commit after Preview.7.
+
+The recordings' metadata, receipts, and findings remain available after removing
+reviewed gameplay MP4s. The repository's local-size ceiling remains 30 GB;
+the latest recorded measurement before these small source and documentation
+updates was 28.328 GB. `docs/gebbdoom.pdf` is already ignored by `.gitignore`.
+No live tests were run for this checkpoint.

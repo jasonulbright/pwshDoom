@@ -1,5 +1,15 @@
 # Investigation ledger
 
+## 2026-10-04 — Refresh roadmap after pause-screen gamma fix
+
+Updated the roadmap from its stale 20-commit checkpoint to the source and article
+revisions at 24 commits after Preview.7, recorded the pause-screen gamma notice
+behavior, and kept the package-validation and human-play gates open. This
+documentation checkpoint is the 25th development commit. The local repository ceiling is
+30 GB; the last recorded measurement before these small updates was 28.328 GB.
+The reference PDF already matches the existing `.gitignore` rule. Documentation
+only; no tests ran. `git diff --check` passes.
+
 ## 2026-10-04 — Keep gamma feedback visible and bounded during pause
 
 F11 is accepted on the pause screen, but the shared player-message gate hid all
