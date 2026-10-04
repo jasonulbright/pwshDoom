@@ -1,5 +1,16 @@
 # Investigation ledger
 
+## 2026-10-04 — Map wall spans through fixed-angle projection tables
+
+Retained Doom's normalized angle-to-column table in renderer contexts and
+binary render assets. WAD-backed spans now use fixed-point endpoint angles,
+backface rejection, view-angle clipping, and table-derived screen bounds when
+the metadata is present; synthetic contexts retain their analytic fallback.
+Added offline boundary cases for full-width, clipped, offscreen, and reversed
+segments, but did not run them under the user's no-live-tests instruction.
+PowerShell AST parsing and `git diff --check` pass. Fidelity, parity, and
+performance remain unverified.
+
 ## 2026-10-04 — Refresh roadmap after pause-screen gamma fix
 
 Updated the roadmap from its stale 20-commit checkpoint to the source and article

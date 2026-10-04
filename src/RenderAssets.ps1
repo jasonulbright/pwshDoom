@@ -15,6 +15,7 @@ function Write-GameRenderAssets {
         PlaneSpanBoundaries=$planeSpanBoundaries;
         Subsectors=@($Context.Subsectors | ForEach-Object {@{FirstSeg=$_.FirstSeg;SegCount=$_.SegCount}});
         Palette=$Palette;PlayPal=if($Context.ContainsKey('PlayPal')){$Context.PlayPal}else{$Context.Content.Palette.Data};Hud=@{};Textures=@{};SpriteAtlas=[object[]]::new($Context.SpriteAtlas.Length)}
+    if($Context.ContainsKey('ViewAngleToX')){$meta.ViewAngleToX=$Context.ViewAngleToX}
     # Original WAD segment angles drive quantized wall texture coordinates.
     # Authored contexts without these angles retain the analytic fallback.
     if($Context.ContainsKey('SegmentAngles')){$meta.SegmentAngles=$Context.SegmentAngles;$meta.WallFineTangent=$Context.WallFineTangent}
@@ -108,6 +109,10 @@ function Read-GameRenderAssets {
             [int[]]$wallFineTangent=$meta.WallFineTangent
             if($wallFineTangent.Length -ne 4096){throw 'Invalid wall tangent table.'}
         }
+        if($meta.ContainsKey('ViewAngleToX')){
+            [int[]]$viewAngleToX=$meta.ViewAngleToX
+            if($viewAngleToX.Length -ne 4096 -or @($viewAngleToX | Where-Object {$_ -lt 0 -or $_ -gt 320}).Count -ne 0){throw 'Invalid wall projection table.'}
+        }
         if($nodeGeometry.Length%12 -ne 0 -or $nodeChildren.Length -ne ($nodeGeometry.Length/12)*2){throw 'Invalid packed BSP node geometry.'}
         $bodyHash=$null;$reuse=$false
         if($CacheResources -or $null -ne $Resources){
@@ -148,6 +153,7 @@ function Read-GameRenderAssets {
             Pixels=[byte[]]::new(64000);Depth=[double[]]::new(64000);Planes=[int[]]::new(53760);TopClip=[int[]]::new(320);BottomClip=[int[]]::new(320);
             Stack=[int[]]::new(($nodeGeometry.Length/12)*2+4);SkyColumns=[int[]]::new(320);RaySin=[int[]]::new(320);RayCos=[int[]]::new(320);
             MaskedColumns=[Collections.Generic.List[hashtable]]::new();Textures=@{};Hud=@{};SpriteAtlas=[object[]]::new($meta.SpriteAtlas.Count);Palette=[int[][]]$meta.Palette;PlayPal=[byte[]]$meta.PlayPal}
+        if($meta.ContainsKey('ViewAngleToX')){$ctx.ViewAngleToX=$viewAngleToX}
         if($meta.ContainsKey('SegmentAngles')){$ctx.SegmentAngles=$segmentAngles;$ctx.WallFineTangent=$wallFineTangent}
         foreach($key in $meta.Textures.Keys){$ctx.Textures[[int]$key]=$patches[[int]$meta.Textures[$key]]}
         foreach($key in $meta.Hud.get_Keys()) {

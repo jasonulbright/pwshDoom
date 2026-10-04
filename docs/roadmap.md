@@ -762,3 +762,14 @@ reviewed gameplay MP4s. The repository's local-size ceiling remains 30 GB;
 the latest recorded measurement before these small source and documentation
 updates was 28.328 GB. `docs/gebbdoom.pdf` is already ignored by `.gitignore`.
 No live tests were run for this checkpoint.
+
+### Current renderer source checkpoint — October 4, 2026
+
+Wall spans with preserved WAD geometry now use the Doom-style fixed-angle
+`viewangletox` lookup and view clipping when their metadata is available; other
+contexts keep the analytic fallback. Offline boundary cases were added but
+remain unrun. PowerShell AST parsing and whitespace checks pass. This source
+and documentation update is commit 26 after Preview.7, with no package, image,
+performance, or human-play validation. Keep the complete Episode 1 human route
+and all broader release gates open; the next cumulative release threshold is
+35 commits.

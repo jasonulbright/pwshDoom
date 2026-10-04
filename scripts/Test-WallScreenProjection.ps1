@@ -1,0 +1,33 @@
+#requires -Version 7.4
+$ErrorActionPreference='Stop'
+$bundle=& "$PSScriptRoot/Build-EngineBundle.ps1"
+. $bundle
+. "$PSScriptRoot/../src/FastRenderer.ps1"
+
+$tables=Get-FastPlaneTables
+$clip=[uint32]$tables.ColumnAngles[0]
+$tanto=[uint32[]]$tables.TanToAngle
+$angleToX=[int[]]$tables.AngleToX
+$unit=65536
+$range=[int[]]::new(2)
+function Assert-Range([string]$Name,[int[]]$Expected,[int]$X1,[int]$Y1,[int]$X2,[int]$Y2){
+    $visible=Get-FastWallScreenRange 0 0 ($X1*$unit) ($Y1*$unit) ($X2*$unit) ($Y2*$unit) 0 $clip $tanto $angleToX $range
+    if(-not $visible -or $range[0] -ne $Expected[0] -or $range[1] -ne $Expected[1]){
+        throw "$($Name): expected [$($Expected -join ',')], got [$($range -join ',')]."
+    }
+}
+function Assert-Offscreen([string]$Name,[int]$X1,[int]$Y1,[int]$X2,[int]$Y2){
+    $visible=Get-FastWallScreenRange 0 0 ($X1*$unit) ($Y1*$unit) ($X2*$unit) ($Y2*$unit) 0 $clip $tanto $angleToX $range
+    if($visible){throw "$($Name): expected no visible columns, got [$($range -join ',')]."}
+}
+
+if($angleToX.Length -ne 4096 -or $angleToX[3072] -ne 0 -or $angleToX[1024] -ne 320){
+    throw 'The Doom viewangletox fenceposts do not map the 90-degree viewport to [0,320].'
+}
+Assert-Range 'Full viewport edge-to-edge segment' @(0,320) 100 100 100 -100
+Assert-Range 'Segment clipped at the left edge' @(0,160) 100 173 100 0
+Assert-Range 'Segment clipped at the right edge' @(160,320) 100 0 100 -173
+Assert-Offscreen 'Segment fully outside the left edge' 100 173 100 143
+Assert-Offscreen 'Back-facing segment' 100 -100 100 100
+
+'Wall screen-projection cases passed.'

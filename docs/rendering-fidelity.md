@@ -1122,3 +1122,21 @@ E1M2 views with palette and fuzz effects; twenty masked-wall order checks pass.
 The [receipt](../results/wall-fixed-scale-renderer-20261002.json) records source
 hashes and limits. This narrows fixed-view disagreement but does not establish
 original-executable parity or moving-world fidelity.
+
+### Fixed-angle wall-span lookup — October 4, 2026
+
+WAD-backed render contexts now retain Doom's normalized 4,096-entry
+`viewangletox` table. When segment-angle and projection metadata are present,
+the worker reconstructs the original fixed-point endpoints, rejects back-facing
+spans, clips endpoint angles to the view, and maps the visible angle range to
+columns through that table. Contexts without the metadata retain the analytic
+projection fallback; near-plane sampling remains unchanged. This follows the
+span and table-indexing structure in [id Software's `R_AddLine`](https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/r_bsp.c#L239-L331)
+and [texture-mapping table construction](https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/r_main.c#L508-L566),
+without copying their source text.
+
+`scripts/Test-WallScreenProjection.ps1` now contains offline boundary cases for
+full-width, left- and right-clipped, fully offscreen, and back-facing segments.
+They remain unrun under the user's instruction not to run live tests. PowerShell
+AST parsing and `git diff --check` pass. This is an unverified source change; no
+image-parity, original-executable fidelity, or performance claim is made.

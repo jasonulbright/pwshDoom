@@ -29,12 +29,18 @@ function Get-FastPlaneTables {
         $cos=[Fixed]::Abs([Trig]::Cos($column))
         $distanceScale[$x]=([Fixed]::One/$cos).Data
     }
+    # Match Doom's viewangletox fencepost normalization after deriving
+    # xtoviewangle; both tables describe the same fixed-point projection.
+    for([int]$i=0;$i -lt $angleToX.Length;$i++){
+        if($angleToX[$i] -eq -1){$angleToX[$i]=0}
+        elseif($angleToX[$i] -eq 321){$angleToX[$i]=320}
+    }
     [int[]]$rowSlope=[int[]]::new(168)
     for([int]$y=0;$y -lt 168;$y++){
         $dy=[Fixed]::Abs([Fixed]::FromInt($y-84)+([Fixed]::One/2))
         $rowSlope[$y]=([Fixed]::FromInt(160)/$dy).Data
     }
-    $script:FastPlaneTables=@{ColumnAngles=$columnAngle;DistanceScales=$distanceScale;RowSlopes=$rowSlope;FineSine=[int[]][Trig]::fineSine;FineTangent=[int[]][Trig]::fineTangent;TanToAngle=[uint32[]][Trig]::tanToAngleTable}
+    $script:FastPlaneTables=@{ColumnAngles=$columnAngle;AngleToX=$angleToX;DistanceScales=$distanceScale;RowSlopes=$rowSlope;FineSine=[int[]][Trig]::fineSine;FineTangent=[int[]][Trig]::fineTangent;TanToAngle=[uint32[]][Trig]::tanToAngleTable}
     return $script:FastPlaneTables
 }
 
@@ -155,7 +161,7 @@ function New-FastRenderContext {
         $ctx.RenderAssetCache=if($null -ne $Resources -and $Resources.ContainsKey('RenderAssetCache')){$Resources.RenderAssetCache}else{@{}}
     }
     $planeTables=Get-FastPlaneTables
-    $ctx.PlaneColumnAngles=$planeTables.ColumnAngles;$ctx.PlaneDistanceScales=$planeTables.DistanceScales;$ctx.PlaneRowSlopes=$planeTables.RowSlopes;$ctx.PlaneFineSine=$planeTables.FineSine;$ctx.TanToAngleTable=$planeTables.TanToAngle;$ctx.WallFineTangent=$planeTables.FineTangent
+    $ctx.PlaneColumnAngles=$planeTables.ColumnAngles;$ctx.ViewAngleToX=$planeTables.AngleToX;$ctx.PlaneDistanceScales=$planeTables.DistanceScales;$ctx.PlaneRowSlopes=$planeTables.RowSlopes;$ctx.PlaneFineSine=$planeTables.FineSine;$ctx.TanToAngleTable=$planeTables.TanToAngle;$ctx.WallFineTangent=$planeTables.FineTangent
     return $ctx
 }
 
@@ -223,6 +229,44 @@ function Get-FastWallScaleData {
     if($denominator -gt ($numerator -shr 16)){$scale=Get-FastFixedDivData $numerator $denominator}
     else{$scale=4194304}
     return [Math]::Clamp([int]$scale,256,4194304)
+}
+
+function Get-FastWallScreenRange {
+    param([int]$ViewXData,[int]$ViewYData,[int]$Vertex1XData,[int]$Vertex1YData,
+        [int]$Vertex2XData,[int]$Vertex2YData,[uint32]$ViewAngleData,[uint32]$ClipAngleData,
+        [uint32[]]$TanToAngleTable,[int[]]$AngleToX,[int[]]$Range)
+    if($AngleToX.Length -ne 4096){throw 'Wall projection requires the 4096-entry viewangletox table.'}
+    if($Range.Length -ne 2){throw 'Wall projection requires a two-column result buffer.'}
+    [uint32]$angle1=Get-FastPointAngleData $ViewXData $ViewYData $Vertex1XData $Vertex1YData $TanToAngleTable
+    [uint32]$angle2=Get-FastPointAngleData $ViewXData $ViewYData $Vertex2XData $Vertex2YData $TanToAngleTable
+    [uint32]$span=([long]$angle1-[long]$angle2) -band 0xFFFFFFFFL
+    if($span -ge 0x80000000L){return $false}
+
+    [uint32]$angle1=([long]$angle1-[long]$ViewAngleData) -band 0xFFFFFFFFL
+    [uint32]$angle2=([long]$angle2-[long]$ViewAngleData) -band 0xFFFFFFFFL
+    [uint32]$doubleClip=([long]$ClipAngleData*2) -band 0xFFFFFFFFL
+    [uint32]$tspan=([long]$angle1+[long]$ClipAngleData) -band 0xFFFFFFFFL
+    if($tspan -gt $doubleClip){
+        $tspan=([long]$tspan-[long]$doubleClip) -band 0xFFFFFFFFL
+        if($tspan -ge $span){return $false}
+        $angle1=$ClipAngleData
+    }
+    [uint32]$tspan=([long]$ClipAngleData-[long]$angle2) -band 0xFFFFFFFFL
+    if($tspan -gt $doubleClip){
+        $tspan=([long]$tspan-[long]$doubleClip) -band 0xFFFFFFFFL
+        if($tspan -ge $span){return $false}
+        $angle2=([long]0-[long]$ClipAngleData) -band 0xFFFFFFFFL
+    }
+
+    [int]$fineIndex1=(([long]$angle1+0x40000000L) -band 0xFFFFFFFFL) -shr 19
+    [int]$fineIndex2=(([long]$angle2+0x40000000L) -band 0xFFFFFFFFL) -shr 19
+    if($fineIndex1 -lt 0 -or $fineIndex1 -ge $AngleToX.Length -or $fineIndex2 -lt 0 -or $fineIndex2 -ge $AngleToX.Length){
+        throw 'Clipped wall angle fell outside the viewangletox table.'
+    }
+    [int]$x1=$AngleToX[$fineIndex1];[int]$x2=$AngleToX[$fineIndex2]
+    if($x1 -lt 0 -or $x1 -gt 320 -or $x2 -lt 0 -or $x2 -gt 320 -or $x1 -ge $x2){return $false}
+    $Range[0]=$x1;$Range[1]=$x2
+    return $true
 }
 
 function Update-FastRenderSectorData {
@@ -400,6 +444,9 @@ function Invoke-FastRender {
     [uint32[]]$wallSegmentAngles=[uint32[]]::new(0)
     if($Context.ContainsKey('SegmentAngles')){$wallSegmentAngles=$Context.SegmentAngles}
     [bool]$wallAnglesReady=$wallSegmentAngles.Length -eq ($Context.SegmentMetadata.Length/4)
+    [int[]]$wallAngleToX=[int[]]::new(0)
+    if($Context.ContainsKey('ViewAngleToX')){$wallAngleToX=[int[]]$Context.ViewAngleToX}
+    [bool]$wallProjectionReady=$wallAnglesReady -and $wallAngleToX.Length -eq 4096
     [int[]]$wallFineTangent=$null
     if($wallAnglesReady){$wallFineTangent=$Context.WallFineTangent}
     [double]$co=[Math]::Cos($angle);[double]$si=[Math]::Sin($angle)
@@ -419,6 +466,7 @@ function Invoke-FastRender {
     }
     [object[]]$spriteClipWalls=$Context.SpriteClipWalls
     [int[]]$spriteClipCounts=$Context.SpriteClipCounts
+    [int[]]$wallColumnRange=[int[]]::new(2)
     for([int]$x=$FirstColumn;$x -lt $EndColumn;$x++){$spriteClipCounts[$x]=0}
     [int[]]$planeSpanBoundaries=[int[]]::new(0)
     if($Context.ContainsKey('PlaneSpanBoundaries')){$planeSpanBoundaries=[int[]]$Context.PlaneSpanBoundaries}
@@ -458,7 +506,17 @@ function Invoke-FastRender {
             [int]$segSide=$Context.SegmentMetadata[$metadataOffset];[int]$segFront=$Context.SegmentMetadata[$metadataOffset+1]
             [int]$segBack=$Context.SegmentMetadata[$metadataOffset+2];[int]$segFlags=$Context.SegmentMetadata[$metadataOffset+3]
             [double]$ax=$segAX-$cx;[double]$ay=$segAY-$cy;[double]$bx=$segBX-$cx;[double]$by=$segBY-$cy
-            if($ax*$by-$ay*$bx -ge 0){continue}
+            [int]$screenScaleX0=0;[int]$screenScaleX1=-1
+            if($wallProjectionReady){
+                # SegmentGeometry stores exact 16.16 WAD coordinates as doubles;
+                # multiplying by 65536 recovers the original integer endpoints.
+                [int]$segAXData=[Math]::Truncate($segAX*65536.0);[int]$segAYData=[Math]::Truncate($segAY*65536.0)
+                [int]$segBXData=[Math]::Truncate($segBX*65536.0);[int]$segBYData=[Math]::Truncate($segBY*65536.0)
+                $hasWallColumnRange=Get-FastWallScreenRange $viewXData $viewYData $segAXData $segAYData $segBXData $segBYData $viewAngleData $Context.PlaneColumnAngles[0] $Context.TanToAngleTable $wallAngleToX $wallColumnRange
+                if(-not $hasWallColumnRange){continue}
+                $screenScaleX0=$wallColumnRange[0];$screenScaleX1=$wallColumnRange[1]-1
+                if($screenScaleX1 -lt $screenScaleX0 -or $screenScaleX0 -ge $EndColumn -or ($screenScaleX1+1) -le $FirstColumn){continue}
+            }elseif($ax*$by-$ay*$bx -ge 0){continue}
             [double]$z1=$ax*$co+$ay*$si;[double]$z2=$bx*$co+$by*$si
             if($z1 -lt 1 -and $z2 -lt 1){continue}
             [double]$r1=$ax*$si-$ay*$co;[double]$r2=$bx*$si-$by*$co
@@ -466,10 +524,15 @@ function Invoke-FastRender {
             if($z1 -lt 1){$f=(1-$z1)/($z2-$z1);$r1+=($r2-$r1)*$f;$u1+=($u2-$u1)*$f;$z1=1}
             if($z2 -lt 1){$f=(1-$z2)/($z1-$z2);$r2+=($r1-$r2)*$f;$u2+=($u1-$u2)*$f;$z2=1}
             [double]$sx1=160+160*$r1/$z1;[double]$sx2=160+160*$r2/$z2
-            if($sx2 -le $sx1 -or $sx1 -ge $EndColumn -or $sx2 -le $FirstColumn){continue}
-            [int]$screenScaleX0=[Math]::Clamp([int][Math]::Ceiling($sx1-0.5),0,319)
-            [int]$screenScaleX1=[Math]::Clamp([int][Math]::Ceiling($sx2-0.5)-1,0,319)
-            [int]$x0=[Math]::Max($FirstColumn,[Math]::Ceiling($sx1-0.5));[int]$x1=[Math]::Min($EndColumn,[Math]::Ceiling($sx2-0.5))
+            if($wallProjectionReady){
+                [int]$x0=[Math]::Max($FirstColumn,$screenScaleX0);[int]$x1=[Math]::Min($EndColumn,$screenScaleX1+1)
+            }else{
+                if($sx2 -le $sx1 -or $sx1 -ge $EndColumn -or $sx2 -le $FirstColumn){continue}
+                $screenScaleX0=[Math]::Clamp([int][Math]::Ceiling($sx1-0.5),0,319)
+                $screenScaleX1=[Math]::Clamp([int][Math]::Ceiling($sx2-0.5)-1,0,319)
+                [int]$x0=[Math]::Max($FirstColumn,[Math]::Ceiling($sx1-0.5));[int]$x1=[Math]::Min($EndColumn,[Math]::Ceiling($sx2-0.5))
+            }
+            if($x1 -le $x0){continue}
             $front=$Context.Sectors[$segFront];$back=if($segBack -ge 0){$Context.Sectors[$segBack]}else{$null};$side=$Context.Sides[$segSide]
             [double]$fh=$front.FloorHeight;[double]$ch=$front.CeilingHeight
             [bool]$solid=$null -eq $back;[double]$bf=$fh;[double]$bc=$ch
