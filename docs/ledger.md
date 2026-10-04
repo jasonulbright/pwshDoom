@@ -1,8 +1,12 @@
 # Investigation ledger
 
+## 2026-10-04 — Close a stale palette task entry
+
+Current fidelity review found a roadmap sentence that still listed player palette selection as unfinished. The existing [palette-presentation record](palette-presentation.md) and renderer/snapshot source show that damage, pickup, berserk and radiation selections reach all three styles. Updated the roadmap to mark implementation closed while retaining original-executable, gamma and readability limits. Documentation-only source review; no runtime checks were run.
+
 ## 2026-10-04 — Pin the Episode 1 playtest to the verified package
 
-The development branch had 12 commits after Preview.7 and has no extracted-package validation receipt. Updated the route guide to use the published Preview.7 package from commit `534966a`, and recorded that distinction in the roadmap. This keeps the human campaign handoff tied to the package with authoritative preflight evidence. This documentation commit becomes number 13 after Preview.7. No game or test processes were run.
+The development branch had 12 commits after Preview.7 and has no extracted-package validation receipt. Updated the route guide to use the published Preview.7 package from commit `534966a`, and recorded that distinction in the roadmap. This keeps the human campaign handoff tied to the package with authoritative preflight evidence. This documentation commit became number 13 after Preview.7. No game or test processes were run.
 
 ## 2026-10-04 — Explain unavailable key choices
 
