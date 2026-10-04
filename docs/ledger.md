@@ -1,5 +1,13 @@
 # Investigation ledger
 
+## 2026-10-04 — Cover all cardinal view headings in wall projection
+
+Extended the synthetic fixed-angle span harness from 0°/90° to all four
+cardinal headings. The added 180° and 270° cases verify rotated front-facing
+segments, two-sided clipping and reversed-wall rejection. All 18 checks pass;
+the harness reads no WAD and launches no game. This is only screen-span helper
+coverage, not full-frame or original-executable parity. No live test ran.
+
 ## 2026-10-04 — Correct camera handling for transported snapshots
 
 `Invoke-GameRenderWorker` assigns a decoded snapshot to `Context.World`;

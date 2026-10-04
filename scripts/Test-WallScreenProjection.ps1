@@ -35,5 +35,11 @@ Assert-Range '90-degree view clips both viewport edges' @(0,320) -173 100 173 10
 Assert-Range '90-degree view clips at the ANG90-minus-one fencepost' @(0,161) -173 100 0 100 ([uint32]0x40000000)
 Assert-Range '90-degree view clips the right edge from column 161' @(161,320) 0 100 173 100 ([uint32]0x40000000)
 Assert-Offscreen '90-degree view rejects the reversed wall' 100 100 -100 100 ([uint32]0x40000000)
+Assert-Range '180-degree view at nominal field-of-view edges' @(1,320) -100 -100 -100 100 ([uint32]0x80000000L)
+Assert-Range '180-degree view clips both viewport edges' @(0,320) -100 -173 -100 173 ([uint32]0x80000000L)
+Assert-Offscreen '180-degree view rejects the reversed wall' -100 100 -100 -100 ([uint32]0x80000000L)
+Assert-Range '270-degree view at nominal field-of-view edges' @(1,320) 100 -100 -100 -100 ([uint32]0xC0000000L)
+Assert-Range '270-degree view clips both viewport edges' @(0,320) 173 -100 -173 -100 ([uint32]0xC0000000L)
+Assert-Offscreen '270-degree view rejects the reversed wall' -100 -100 100 -100 ([uint32]0xC0000000L)
 
 'Wall screen-projection cases passed.'

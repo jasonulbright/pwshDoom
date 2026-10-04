@@ -815,3 +815,14 @@ the exact-angle and `ANG90−1` table fenceposts, partial/two-sided clipping,
 offscreen rejection and backface rejection. No WAD or live session is used, and
 this does not establish full-image fidelity. This harness/documentation update
 is commit 33 after Preview.7; the release threshold is 35.
+
+### Four-cardinal wall-span verification — October 4, 2026
+
+The offline projection harness now covers 0°, 90°, 180° and 270° camera
+headings. Its 18 checks cover nominal spans, one- and two-sided clipping,
+offscreen segments and reversed walls, with exact table fenceposts retained.
+The authored coordinates are rotated consistently; no WAD or game session is
+used. This is the 35th development commit after Preview.7 and reaches the next
+community-preview release cadence. The full Episode 1 route and all broader
+fidelity, pacing, physical-input, acoustic and second-hardware gates remain
+open. No live tests ran.
