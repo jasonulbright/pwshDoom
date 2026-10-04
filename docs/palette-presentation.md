@@ -5,6 +5,10 @@ but our terminal path carried only PLAYPAL's base colors. Damage, item bonuses,
 berserk and radiation-suit tints therefore did not reach terminal output. This
 is distinct from fixed COLORMAP effects such as invulnerability.
 
+Media disposition, 2026-10-04: reviewed gameplay MP4s for this work were removed
+at the user's direction. The source-pinned JSON receipts and sampled-frame
+findings remain; historical MP4 paths below are not current storage locations.
+
 ## Implementation and scope
 
 Reuse the attributed PowerShell `Renderer.GetPaletteNumber` selector, checked
@@ -32,8 +36,9 @@ intentional approximations. Gamma level 0 leaves PLAYPAL unchanged; levels 1–1
 use the adopted renderer's exponents 0.95 through 0.50 and round each channel
 with the same byte conversion. The default is level 2, matching the adopted
 renderer configuration. The preference is saved in settings version 5, changed
-from Escape → Settings, and advanced with F11 during play. Worker palette tables,
-player-message colors and capture palette companions use the same selected level.
+from Escape → Settings, and advanced with F11 during play. F11 displays a short
+level notice. Worker palette tables, player-message colors and capture palette
+companions use the same selected level.
 The curve/menu/worker regression cases are authored but were not run under the
 user's active-computer instruction. Original-executable visual equivalence and
 human readability remain unverified.

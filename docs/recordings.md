@@ -1,5 +1,12 @@
 # Katakana and actual screen recordings
 
+As of 2026-10-04, reviewed gameplay MP4s have been removed at the user's
+direction. `local/recordings/` contains no MP4 files; its capture JSON, WAV
+audio, PNG review frames, logs and other metadata remain. Historical paths below
+describe files produced for those reviews, not current storage locations. Other
+MP4s under `local/` are promo assets or tiny FFmpeg reference fixtures, not
+gameplay/effect recordings.
+
 The latest [save/load recordings](save-load.md#remaining-release-work) exercise integrated slots, confirmations, loading and overwrite/cancellation in all three styles. Exact capture/export metadata and failed attempts are in [save-menu-recordings.json](../results/save-menu-recordings.json). These are session/UI demonstrations; menu holds make their aggregate output rates unsuitable for gameplay FPS comparison.
 
 The next session build adds three recordings of E1M1 → intermission → E1M2 in Classic, Matrix and AnsiArt. See [campaign session recordings](campaign-session.md#actual-terminal-recordings) for the current results. The two E1M1-only captures below remain historical evidence for the earlier build. The exporter now also accepts successful full-session replays and checks visible duration against the wall clock, preserving map handoff pauses in the viewing copy.
@@ -20,7 +27,7 @@ MS Gothic is present on the test machine and is the default for the Japanese sty
 
 ## Recording implementation
 
-`scripts/Record-DoomReplay.ps1` launches one finite replay in an isolated Terminal process, selects that process's game window, and passes its actual window handle to FFmpeg's `gfxcapture` source. Video capture is limited to that window. With `-CaptureAudio`, a separate recorder captures audio scoped to the simulation process; it does not capture a microphone or unrelated system audio. The PowerShell sound worker now produces game audio. Captures without `-CaptureAudio` are silent video. The recorder's post-report window delay defaults to three seconds and can be set with `-ExitDelaySeconds`; the default interactive launcher has no delay. Later captures still encounter intermittent native teardown failures, even with a 15-second delay. A successful game/encoder exit plus visual inspection is required before accepting footage. The experimental `-CaptureBackend Gdi` option reproduces black Terminal frames on this setup and is not an accepted recording path here.
+`scripts/Record-DoomReplay.ps1` launches one finite replay in an isolated Terminal process, selects that process's game window, and passes its actual window handle to FFmpeg's `gfxcapture` source. Video capture is limited to that window. With `-CaptureAudio`, a separate recorder captures audio scoped to the simulation process; it does not capture a microphone or unrelated system audio. The PowerShell sound worker now produces game audio. Captures without `-CaptureAudio` are silent video. The recorder's post-report window delay defaults to three seconds and can be set with `-ExitDelaySeconds`; the default interactive launcher has no delay. Later captures still encounter intermittent native teardown failures, even with a 15-second delay. A successful game/encoder exit plus visual inspection is required before accepting footage. After review, remove the MP4 unless the user explicitly asks to keep it; preserve recording JSON, game reports, hashes, timing and findings. The experimental `-CaptureBackend Gdi` option reproduces black Terminal frames on this setup and is not an accepted recording path here.
 
 [FFmpeg documents `gfxcapture`](https://ffmpeg.org/ffmpeg-filters.html#gfxcapture) as Windows.Graphics.Capture producing D3D11 frames. We pass those frames to NVENC for external video encoding. The capture ceiling is 240 arrivals/sec; the MP4 is resampled to 60 FPS. This avoids imposing a second 60 Hz cap on compositor arrivals near the game's 60 Hz cadence, but it does not guarantee one unique game frame per video frame. Capture timestamps and encoder logs are retained, including duplication counts. Movie FPS is not a replacement for PresentMon or an optical/frame-identity experiment.
 
@@ -33,7 +40,7 @@ pwsh -NoProfile -File scripts/Record-DoomReplay.ps1 -Style Matrix -Maximized -Ou
 pwsh -NoProfile -File scripts/Record-DoomReplay.ps1 -Style AnsiArt -Maximized -OutputPrefix local/recordings/my-color-run
 ```
 
-Run sequentially with no existing Terminal process for unambiguous window attribution. A fresh prefix is required. Pass `-Ffmpeg C:\path\ffmpeg.exe` if using another local build with `gfxcapture`/NVENC support. Each run retains the untrimmed MP4, FFmpeg log, game JSON and recording JSON. Hardware/font/display differences affect fit, capture support, and timing. Recorded-run timing must be identified separately from clean performance measurements. The earlier five PresentMon ASCII captures remain historical results, not katakana benchmarks.
+Run sequentially with no existing Terminal process for unambiguous window attribution. A fresh prefix is required. Pass `-Ffmpeg C:\path\ffmpeg.exe` if using another local build with `gfxcapture`/NVENC support. Each run creates an untrimmed MP4, FFmpeg log, game JSON and recording JSON for review. Remove the MP4 after review unless the user asks to retain it. Hardware/font/display differences affect fit, capture support, and timing. Recorded-run timing must be identified separately from clean performance measurements. The earlier five PresentMon ASCII captures remain historical results, not katakana benchmarks.
 
 ## Social style showcase — September 28, 2026
 
@@ -45,9 +52,10 @@ within the conservative 140-second/512-MB X upload allowance. Each individual
 clip has the same resolution, frame rate and audio format. The footage comes
 from previously completed effect-test recordings on September 12 and 19; it
 is not a fresh recording of Preview.3 or the current branch, and it is not
-performance or campaign-completion evidence. Original full recordings remain
-under ignored `local/recordings/`; the share-ready copies, README, and checksum
-file are under ignored `local/social-assets-preview3-20260928/`.
+performance or campaign-completion evidence. The reviewed source recordings
+were later removed; their JSON receipts and sampled-frame findings remain.
+The share-ready copies, README, and checksum file are under ignored
+`local/social-assets-preview3-20260928/`.
 
 ## Completed recordings — 2026-09-10
 

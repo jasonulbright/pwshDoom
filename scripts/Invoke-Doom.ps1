@@ -85,6 +85,7 @@ $assetGeneration=1;$loadingStart=$null;$loadingMs=0.0;$loadingWasRunning=$false;
 $recordingPath=$null;$recordingError=$null;$replayVerification=$null;$sourceFingerprint=$null;$sourceMatches=$null
 $menu=$null;$pendingAction=$null;$sessionStart=$null;$sessionPausedMs=0.0;$sessionEvents=[Collections.Generic.List[object]]::new();$sessionScheduleData=@();$scheduleIndex=0;$controlIndex=0;$lastPresentedVersion=-1
 $compactMenuKey=''
+$gammaNotice=$null;$gammaNoticeUntilTic=0
 $preferences=New-DoomUserSettings;$initialPreferences=$null;$preferencesHash=$null;$preferencesLoadError=$null
 $preferencesEvents=[Collections.Generic.List[object]]::new()
 $mapInputIndex=0;$inputMapVisible=$false
@@ -295,6 +296,7 @@ try {
                         if($preferences.GammaLevel -ne $priorGammaLevel){
                             $messageCodecs=New-DoomPlayerMessageCodecs $context.PlayPal $Style -GammaLevel $preferences.GammaLevel
                             $pendingFrame=$null;$lastPresentedVersion=-1
+                            if($key -eq 'F11'){$gammaNotice=if($preferences.GammaLevel -eq 0){'GAMMA CORRECTION OFF'}else{"GAMMA CORRECTION LEVEL $($preferences.GammaLevel)"};$gammaNoticeUntilTic=$tics+70}
                         }
                         $preferencesEvents.Add(@{Tic=$tics;WallMs=$wallNow;Success=$true;Values=(Copy-DoomUserSettings $preferences);Persisted=[bool]$SettingsPath})
                     }catch{
@@ -442,7 +444,7 @@ try {
             if(-not $Headless) {
                 [byte[]]$clearOutput=$emptyOutput
                 if($needsClear){$clearOutput=[Text.Encoding]::UTF8.GetBytes("$esc[0m$esc[2J")}
-                [byte[]]$statusOutput=Get-DoomPlayerMessageOutput $present.PlayerMessage $present.PlayerMessageTics $present.ScreenKind $viewport -Style $Style -Pixels $present.PlayerMessagePixels -Codecs $messageCodecs
+                [byte[]]$statusOutput=Get-DoomDisplayMessageOutput $present $viewport -GammaNotice $gammaNotice -GammaNoticeUntilTic $gammaNoticeUntilTic -Style $Style -Codecs $messageCodecs
                 if($Diagnostics) {
                     $statusLine="$esc[$($viewport.StatusTop+1);$($viewport.Left+1)H$esc[0mpwshDoom | WASD move | arrows turn | Ctrl fire | E/Space use | Shift run | 1-7 weapons | P pause | Esc menu"
                     $statusLine+="$esc[$($viewport.StatusTop+2);$($viewport.Left+1)Htic $($snapshot.Tic) | $([Math]::Round($completed/[Math]::Max(.01,$clock.Elapsed.TotalSeconds),1)) completed updates/s | health $($snapshot.Health) | kills $($snapshot.Kills)       "

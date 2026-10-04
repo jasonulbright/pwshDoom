@@ -52,3 +52,11 @@ function Get-DoomPlayerMessageOutput {
     # The next complete frame restores scene cells when a message expires.
     return ,([Text.Encoding]::UTF8.GetBytes("$esc[$($Viewport.Top+1);$($Viewport.Left+1)H$esc[0;$color;48;2;0;0;0"+'m'+$text+"$esc[0m"))
 }
+function Get-DoomDisplayMessageOutput {
+    param($Present,$Viewport,[AllowNull()][string]$GammaNotice,[int]$GammaNoticeUntilTic,
+        [ValidateSet('Classic','Matrix','AnsiArt')][string]$Style='Classic',$Codecs)
+    if($GammaNotice -and $Present.Tic -lt $GammaNoticeUntilTic){
+        return ,(Get-DoomPlayerMessageOutput $GammaNotice ($GammaNoticeUntilTic-$Present.Tic) $Present.ScreenKind $Viewport -Style $Style -Codecs $Codecs)
+    }
+    return ,(Get-DoomPlayerMessageOutput $Present.PlayerMessage $Present.PlayerMessageTics $Present.ScreenKind $Viewport -Style $Style -Pixels $Present.PlayerMessagePixels -Codecs $Codecs)
+}

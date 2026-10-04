@@ -1,14 +1,27 @@
 # Investigation ledger
 
+## 2026-10-04 — Confirm recording and reference-file disposition
+
+The exact `/docs/gebbdoom.pdf` rule already exists in `.gitignore` (line 18);
+`git check-ignore` confirms the local PDF is ignored and `git ls-files` confirms
+it is not tracked. The ignored `local/recordings/` folder currently contains no
+MP4s. It retains 172 WAV files, 910 JSON files, 181 PNG review frames, 587 logs
+and 200 extensionless metadata files (2,566,383,413 bytes total). The 30 MP4s
+elsewhere in `local/` are promo assets or tiny FFmpeg reference fixtures, not
+gameplay/effect captures. No media was deleted in this inspection; the
+recordings guide now says to remove reviewed gameplay MP4s while keeping reports
+and findings. No live test was run.
+
 ## 2026-10-04 — Implement saved gamma correction
 
 Added the adopted renderer's eleven-level PLAYPAL curve (off plus ten brighter
 levels) to Classic, Matrix and AnsiArt palette codecs. Settings version 5 saves
 the selection, the Settings screen edits it, and F11 cycles it in play. Frame
 requests, player-message colors and indexed-capture palette companions follow
-the same level. Regression cases were authored for palette math, settings
-migration/menu behavior and worker encoding; none were run because the user is
-using the computer. Static AST parsing of eleven PowerShell files and `git diff --check` pass. Visual
+the same level. F11 also shows a brief notice with the selected level. Regression
+cases were authored for palette math, settings migration/menu behavior, worker
+encoding and notice expiry; none were run because the user is using the computer.
+Static AST parsing of eleven PowerShell files and `git diff --check` pass. Visual
 output and original-executable equivalence remain unverified.
 
 ## 2026-10-04 — Document ordered menu input behavior
