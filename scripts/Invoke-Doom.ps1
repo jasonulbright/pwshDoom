@@ -272,9 +272,8 @@ try {
                 if($menu.Screen -eq 15 -and $menu.AwaitingBinding){
                     if($consoleState.Pressed[27]){$key='Escape'}
                     else{
-                        $reserved=Get-DoomReservedBindingKeys
                         for($code=1;$code -lt $consoleState.Pressed.Length;$code++){
-                            if($consoleState.Pressed[$code] -and $code -notin $reserved){$captureVirtualKey=$code;$key='Capture';break}
+                            if($consoleState.Pressed[$code]){$captureVirtualKey=$code;$key='Capture';break}
                         }
                     }
                 }else{
