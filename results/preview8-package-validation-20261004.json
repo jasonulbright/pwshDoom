@@ -1,0 +1,56 @@
+{
+  "FinishedUtc": "2026-10-04T21:54:46Z",
+  "Version": "0.1.0-preview.8",
+  "SourceCommit": "1b1c424192f4a15f83e3d0ba916007c8ec8a8c41",
+  "WorkingTreeDirty": false,
+  "Package": {
+    "Path": "local/preview8-package/pwshDoom-0.1.0-preview.8.zip",
+    "Bytes": 1852698,
+    "Sha256": "460054B10971C3E9CCA9FF05F9BB3B5155870640F86855BB519F98BB084D0E5D",
+    "PayloadFiles": 572,
+    "ExtractedFiles": 573,
+    "PayloadHashesVerified": 572,
+    "AdjacentChecksumVerified": true,
+    "ChecksumAssetSha256": "99F854E21020A190F6D943146ADF378D161FF48324417A0592676D1E1001260B",
+    "ExcludedContentVerified": [
+      ".wad",
+      ".sf2",
+      ".mp4",
+      ".pdf",
+      ".wav",
+      ".dll",
+      ".exe",
+      "local/"
+    ]
+  },
+  "OfflineChecks": [
+    {
+      "Name": "Test-MaskedWallOrder",
+      "Checks": 24,
+      "Failures": 0,
+      "Receipt": "local/preview8-validation/masked-wall-order.json",
+      "RendererSha256": "4BBE6E92345952F976B35B568F901355A939B53E37455016BF5C1B2E6AC943DD",
+      "HarnessSha256": "E2055FCA7A0093FB26DF5ACF41F7B6B660BB7286B9D224D71CA8F0D49F21F73B"
+    },
+    {
+      "Name": "Test-WallScreenProjection",
+      "Checks": 18,
+      "Result": "Passed",
+      "HarnessSha256": "7F197D1C0FC200FC61A6C409CE175854AFE7BF173D3930F403C8197A04A368DD",
+      "HeadingsDegrees": [
+        0,
+        90,
+        180,
+        270
+      ]
+    }
+  ],
+  "LiveTestsRun": false,
+  "RepositoryFootprintAtVerification": {
+    "Files": 76912,
+    "Bytes": 28355972736,
+    "DecimalGb": 28.356,
+    "LimitBytes": 30000000000,
+    "UnderLimit": true
+  }
+}

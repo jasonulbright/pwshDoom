@@ -1,5 +1,19 @@
 # Investigation ledger
 
+## 2026-10-04 — Validate and publish Preview.8
+
+Preview.8 is published at source commit `1b1c424`, after 36 commits since
+Preview.7. The clean 1.85 MB source package verifies all 572 manifest payload
+hashes after extraction and excludes local assets and media. Its packaged
+synthetic suites pass 24 masked-wall and 18 cardinal wall-span checks; no live
+game, device or performance test ran. GitHub's downloaded ZIP and checksum
+match the validated local assets; the receipts pin both hashes. The entire
+repository measured 28,355,972,736 bytes, below the 30,000,000,000-byte limit.
+An attempted removal of twelve ignored generated promo MP4s was rejected by the
+automatic approval review, so no files were removed. Their content is excluded
+from the release package. Full campaign, original-renderer fidelity, sustained
+pacing, physical-input, acoustic and second-hardware gates remain open.
+
 ## 2026-10-04 — Cover all cardinal view headings in wall projection
 
 Extended the synthetic fixed-angle span harness from 0°/90° to all four
