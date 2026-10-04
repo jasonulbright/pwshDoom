@@ -4,6 +4,8 @@
 
 The live key-capture path previously filtered reserved keys before the menu could validate them, leaving the remap screen stuck on “PRESS A KEY” with no feedback when the player pressed a menu or system key. It now forwards any pressed key (with Escape still canceling) to the existing validator, which reports “KEY NOT AVAILABLE.” Source inspection confirms the validation message path; only PowerShell parsing and whitespace checks are appropriate here. No game or live tests were run.
 
+The same review found that Space remains a fixed Use alias and Shift remains a fixed Run alias in gameplay input. Both are now reserved from other actions, while Shift is still accepted for the Run action itself. Focused regression cases cover the collisions and the default Run binding; they were added but not executed.
+
 ## 2026-10-04 — Simplify wall-column plane writes
 
 Replaced the two-iteration plane dispatcher in the renderer's wall-column loop with explicit upper and lower spans. The pixel ranges and plane identifiers follow the prior branches by source inspection. PowerShell parsing and `git diff --check` pass; runtime image equality and performance were not tested.

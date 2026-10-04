@@ -17,9 +17,11 @@ function Invoke-DoomMenuKey {
             $reserved=Get-DoomReservedBindingKeys
             $collision=$null
             foreach($other in $names){if($other -ne $name -and [int]$Menu.Settings.Bindings[$other] -eq $CaptureVirtualKey){$collision=$other;break}}
-            if($CaptureVirtualKey -lt 1 -or $CaptureVirtualKey -gt 255 -or $CaptureVirtualKey -in $reserved){$Menu.MessageTitle='KEY NOT AVAILABLE';$Menu.MessageDetail='CHOOSE A DIFFERENT KEY'}
+            $defaultBindings=New-DoomKeyBindings
+            $isDefaultBinding=[int]$CaptureVirtualKey -eq [int]$defaultBindings[$name]
+            if($CaptureVirtualKey -lt 1 -or $CaptureVirtualKey -gt 255 -or ($CaptureVirtualKey -in $reserved -and -not $isDefaultBinding)){$Menu.MessageTitle='KEY NOT AVAILABLE';$Menu.MessageDetail='CHOOSE A DIFFERENT KEY'}
             elseif($null -ne $collision){$Menu.MessageTitle='KEY ALREADY USED';$Menu.MessageDetail=(Get-DoomKeyBindingLabel $CaptureVirtualKey)+' IS '+$collision}
-            else{$Menu.Settings.Bindings[$name]=$CaptureVirtualKey;$settingsChanged=$true;$Menu.MessageTitle='KEY ASSIGNED';$Menu.MessageDetail="${name}: $(Get-DoomKeyBindingLabel $CaptureVirtualKey)"}
+            else{$settingsChanged=[int]$Menu.Settings.Bindings[$name] -ne $CaptureVirtualKey;$Menu.Settings.Bindings[$name]=$CaptureVirtualKey;$Menu.MessageTitle='KEY ASSIGNED';$Menu.MessageDetail="${name}: $(Get-DoomKeyBindingLabel $CaptureVirtualKey)"}
         }
         return @{Action='ShowMenu';Screen=$Menu.Screen;Choice=$Menu.Choice;Episode=$Menu.Episode;Skill=$Menu.Skill;Slots=$Menu.Slots;SelectedSlot=$Menu.SelectedSlot;MessageTitle=$Menu.MessageTitle;MessageDetail=$Menu.MessageDetail;Settings=$Menu.Settings;AwaitingBinding=$Menu.AwaitingBinding;Startup=$Menu.Startup;SettingsChanged=$settingsChanged}
     }

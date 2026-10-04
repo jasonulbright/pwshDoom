@@ -7,7 +7,7 @@ function Get-DoomKeyBindingNames {
     return @('Forward','Backward','StrafeLeft','StrafeRight','TurnLeft','TurnRight','Fire','Use','Run')
 }
 function Get-DoomReservedBindingKeys {
-    return [int[]]@(9,13,19,27,37,38,39,40,43,45,49,50,51,52,53,54,55,67,70,77,78,80,89,107,109,112,113,114,121,187,189)
+    return [int[]]@(9,13,16,19,27,32,37,38,39,40,43,45,49,50,51,52,53,54,55,67,70,77,78,80,89,107,109,112,113,114,121,187,189)
 }
 function Get-DoomKeyBindingLabel {
     param([int]$VirtualKey)

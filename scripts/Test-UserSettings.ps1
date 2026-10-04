@@ -36,6 +36,8 @@ try{
     $invalid=New-DoomUserSettings;$invalid.Bindings.Fire=$invalid.Bindings.Forward;$rejected=$false;try{$null=Copy-DoomUserSettings $invalid}catch{$rejected=$true};Check 'Reject conflicting persisted game keys' $rejected
     foreach($badVolume in -1,101,'50',50.5,$true){$invalid=New-DoomUserSettings;$invalid.MusicVolume=$badVolume;$rejected=$false;try{$null=Copy-DoomUserSettings $invalid}catch{$rejected=$true};Check "Reject invalid music volume $badVolume" $rejected}
     $invalid=New-DoomUserSettings;$invalid.SoundMuted='false';$rejected=$false;try{$null=Copy-DoomUserSettings $invalid}catch{$rejected=$true};Check 'Reject string mute value' $rejected
+    $aliasCollision=New-DoomUserSettings;$aliasCollision.Bindings.Forward=32;$rejected=$false;try{$null=Copy-DoomUserSettings $aliasCollision}catch{$rejected=$true}
+    Check 'Reject Space as a second action because it remains Use' $rejected
     $hash2=Write-DoomUserSettings $path $values $hash;$rejected=$false
     try{$null=Write-DoomUserSettings $path $copy $hash}catch{$rejected=$true}
     Check 'Stale writer rejected without changing newer file' ($rejected -and (Get-FileHash $path).Hash -ceq $hash2)
@@ -78,6 +80,14 @@ try{
     Check 'Conflicting key leaves both actions unchanged' ($menu.Settings.Bindings.Forward -eq 82 -and $menu.Settings.Bindings.StrafeRight -eq 68 -and -not $action.SettingsChanged)
     $null=Invoke-DoomMenuKey $menu Enter;$action=Invoke-DoomMenuKey $menu Capture -CaptureVirtualKey 80
     Check 'Pause key remains reserved' ($menu.Settings.Bindings.Forward -eq 82 -and -not $action.SettingsChanged -and $menu.MessageTitle -eq 'KEY NOT AVAILABLE')
+    foreach($aliasKey in 16,32){
+        $aliasMenu=New-DoomMenuState;$aliasMenu.Screen=15;$aliasMenu.Choice=0;$aliasMenu.AwaitingBinding=$true
+        $action=Invoke-DoomMenuKey $aliasMenu Capture -CaptureVirtualKey $aliasKey
+        Check "Reject reserved key $aliasKey as a second action" ($aliasMenu.Settings.Bindings.Forward -eq 87 -and -not $action.SettingsChanged -and $aliasMenu.MessageTitle -eq 'KEY NOT AVAILABLE')
+    }
+    $runMenu=New-DoomMenuState;$runMenu.Screen=15;$runMenu.Choice=8;$runMenu.AwaitingBinding=$true
+    $action=Invoke-DoomMenuKey $runMenu Capture -CaptureVirtualKey 16
+    Check 'Allow Shift as the Run binding' ($runMenu.Settings.Bindings.Run -eq 16 -and -not $action.SettingsChanged -and $runMenu.MessageTitle -eq 'KEY ASSIGNED')
     $null=Invoke-DoomMenuKey $menu Escape
     Check 'Key screen returns to settings' ($menu.Screen -eq 14 -and $menu.Choice -eq 5)
     $null=Invoke-DoomMenuKey $menu Down;$action=Invoke-DoomMenuKey $menu Enter
