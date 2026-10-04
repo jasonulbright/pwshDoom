@@ -16,6 +16,8 @@ Replaced the two-iteration plane dispatcher in the renderer's wall-column loop w
 
 Updated the article lead to identify Preview.7 as the latest public package, cite its manifest/launcher and static-render evidence, and keep the Preview.6 renderer timing scoped to Preview.6 source. This corrects a stale release claim using the roadmap and Preview.7 scope record; no new measurements or live tests were performed.
 
+Also changed the M1 table's “current Preview.6” wording to historical tense. Preview.7 is the latest public package; the cited M1 evidence remains tied to Preview.6 and is not silently upgraded to later source.
+
 ## 2026-10-02 — Local storage cleanup
 
 At the user's direction, removed 273 reviewed MP4s (13.34 GiB) while retaining all 2,050 other files under `local/recordings`. Removed ten clean duplicate source checkouts whose commits are present in the main repository. No tracked files, original WADs, downloaded tools, or upstream source assets were removed. The full repo measured 28,327,531,727 bytes (28.328 GB decimal / 26.382 GiB), below the 30 GB cap. Keep all future project work inside this repo and preserve the same cap.
