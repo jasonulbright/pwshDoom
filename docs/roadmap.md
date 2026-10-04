@@ -773,3 +773,12 @@ and documentation update is commit 26 after Preview.7, with no package, image,
 performance, or human-play validation. Keep the complete Episode 1 human route
 and all broader release gates open; the next cumulative release threshold is
 35 commits.
+
+### Camera-angle conversion checkpoint — October 4, 2026
+
+The fast renderer now converts the engine's 32-bit `Angle` through its explicit
+radians method for floating geometry and uses `Angle.Data` for fixed lookup
+tables. Source inspection identified the prior unit mismatch; this correction
+has not received a rendered-image or runtime check. This source and documentation
+update is commit 27 after Preview.7. Package validation, human play, image parity,
+and performance remain open; release threshold is 35 commits.

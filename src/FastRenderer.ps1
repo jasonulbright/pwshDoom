@@ -413,10 +413,11 @@ function Invoke-FastRender {
     $phaseWatch=[Diagnostics.Stopwatch]::StartNew();$world=$Context.World;$player=$world.ConsolePlayer;$camera=$player.Mobj
     if($GeometryDetails){$geometryStartedQpc=[Diagnostics.Stopwatch]::GetTimestamp()}
     [double]$cx=$camera.X;[double]$cy=$camera.Y;[double]$cz=$player.ViewZ
-    [double]$angle=$camera.Angle
+    [Angle]$cameraAngle=$camera.Angle
+    [double]$angle=$cameraAngle.ToRadian()
     [int]$viewXData=[Math]::Truncate(65536.0*$cx);[int]$viewYData=[Math]::Truncate(65536.0*$cy)
     [int]$viewZData=[Math]::Truncate(65536.0*$cz)
-    [uint32]$viewAngleData=[uint32]([long][Math]::Round(4294967296.0*($angle/(2*[Math]::PI))) -band 0xFFFFFFFFL)
+    [uint32]$viewAngleData=$cameraAngle.Data
     [uint32]$planeBaseAngleData=([long]$viewAngleData-0x40000000L) -band 0xFFFFFFFFL
     # Actor projection follows Doom's 16.16 transform. Keep the floating-point
     # camera values above for the PowerShell BSP/plane path, but use the same

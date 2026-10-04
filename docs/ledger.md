@@ -1,5 +1,15 @@
 # Investigation ledger
 
+## 2026-10-04 — Convert engine camera angles explicitly
+
+`Invoke-FastRender` now calls the engine `Angle.ToRadian()` method for its
+floating-point camera geometry and passes the original 32-bit `Angle.Data` to
+fixed-angle lookup paths. The engine type stores binary turns and formats its
+string representation in degrees, so direct conversion to a double was
+ambiguous and inconsistent with the trigonometric API. PowerShell AST parsing
+and `git diff --check` pass; no renderer, game, or live test ran. Rotated-view
+image impact and performance remain unverified.
+
 ## 2026-10-04 — Map wall spans through fixed-angle projection tables
 
 Retained Doom's normalized angle-to-column table in renderer contexts and

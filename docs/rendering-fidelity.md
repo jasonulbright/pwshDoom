@@ -1140,3 +1140,13 @@ full-width, left- and right-clipped, fully offscreen, and back-facing segments.
 They remain unrun under the user's instruction not to run live tests. PowerShell
 AST parsing and `git diff --check` pass. This is an unverified source change; no
 image-parity, original-executable fidelity, or performance claim is made.
+
+### Preserve camera-angle units — October 4, 2026
+
+Source review found that `Invoke-FastRender` assigned the engine's `Angle`
+object directly to its floating camera angle before calling `Sin` and `Cos`.
+The engine type stores a 32-bit turn angle, exposes `ToRadian()` for geometry,
+and formats `ToString()` as degrees. The renderer now uses `ToRadian()` for its
+floating BSP/plane math and passes the original `Angle.Data` directly to fixed
+lookup paths. This removes a unit-conversion ambiguity in rotated views, but
+the visual effect remains unverified because no renderer or live test was run.
