@@ -485,6 +485,7 @@ function Invoke-FastRender {
                 if($bf -ge $front.CeilingHeight){$upperSilhouette=$true;$upperSilHeight=[double]::NegativeInfinity}
             }
             [bool]$isSky=$front.CeilingFlat -eq $Context.SkyFlat
+            [int]$upperPlaneId=1+($segFront*2);[int]$lowerPlaneId=$upperPlaneId+1
             [bool]$joinedSky=$isSky -and -not $solid -and $back.CeilingFlat -eq $Context.SkyFlat
             if($joinedSky){$ch=$bc}
             [int]$contrast=if($segAY -eq $segBY){-1}elseif($segAX -eq $segBX){1}else{0}
@@ -531,16 +532,16 @@ function Invoke-FastRender {
                 [int]$wallB=[Math]::Floor(84-160*($fh-$cz)/$distance-0.5)
                 # Draw the floor/ceiling exposed before this boundary. Near-first clip intervals
                 # keep each opaque world pixel owned by a single segment.
-                for([int]$plane=0;$plane -lt 2;$plane++) {
-                    if($plane -eq 0){$py0=$clipT;$py1=[Math]::Min($clipB,$wallT-1)}
-                    else{$py0=[Math]::Max($clipT,$wallB+1);$py1=$clipB}
-                    [int]$planeId=1+$segFront*2+$plane
-                    for([int]$y=$py0;$y -le $py1;$y++) {
-                        [int]$p=$y*320+$x
-                        if($plane -eq 0 -and $isSky){$pixels[$p]=$skyData[$skyColumns[$x]*$skyH+(($y+16)-band 127)];continue}
-                        $planes[$p]=$planeId
+                [int]$upperPlaneEnd=[Math]::Min($clipB,$wallT-1)
+                if($isSky){
+                    for([int]$y=$clipT;$y -le $upperPlaneEnd;$y++){
+                        [int]$p=$y*320+$x;$pixels[$p]=$skyData[$skyColumns[$x]*$skyH+(($y+16)-band 127)]
                     }
+                }else{
+                    for([int]$y=$clipT;$y -le $upperPlaneEnd;$y++){$planes[$y*320+$x]=$upperPlaneId}
                 }
+                [int]$lowerPlaneStart=[Math]::Max($clipT,$wallB+1)
+                for([int]$y=$lowerPlaneStart;$y -le $clipB;$y++){$planes[$y*320+$x]=$lowerPlaneId}
                 [int]$portalT=[Math]::Ceiling(84-160*($bc-$cz)/$distance-0.5)
                 [int]$portalB=[Math]::Floor(84-160*($bf-$cz)/$distance-0.5)
                 [int]$wallLightIndex=47
