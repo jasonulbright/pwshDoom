@@ -93,6 +93,15 @@ try{
     Invoke-FastRender $ctx
     Check 'Engine Fixed/Angle camera matches numeric snapshot pixels' ([Linq.Enumerable]::SequenceEqual[byte]($snapshotPixels,$ctx.Pixels)) $true
     Check 'Engine Fixed/Angle camera matches numeric snapshot depth' ([Linq.Enumerable]::SequenceEqual[double]($snapshotDepth,$ctx.Depth)) $true
+    $ctx.World.ConsolePlayer.Mobj.X=0.5;$ctx.World.ConsolePlayer.Mobj.Y=0.25
+    $ctx.World.ConsolePlayer.Mobj.Angle=[Math]::PI/2;$ctx.World.ConsolePlayer.ViewZ=41.5
+    Invoke-FastRender $ctx
+    [byte[]]$rotatedSnapshotPixels=$ctx.Pixels.Clone();[double[]]$rotatedSnapshotDepth=$ctx.Depth.Clone()
+    $ctx.World.ConsolePlayer.Mobj.X=[Fixed]::FromDouble(0.5);$ctx.World.ConsolePlayer.Mobj.Y=[Fixed]::FromDouble(0.25)
+    $ctx.World.ConsolePlayer.Mobj.Angle=[Angle]::Ang90;$ctx.World.ConsolePlayer.ViewZ=[Fixed]::FromDouble(41.5)
+    Invoke-FastRender $ctx
+    Check 'Rotated native camera matches fractional snapshot pixels' ([Linq.Enumerable]::SequenceEqual[byte]($rotatedSnapshotPixels,$ctx.Pixels)) $true
+    Check 'Rotated native camera matches fractional snapshot depth' ([Linq.Enumerable]::SequenceEqual[double]($rotatedSnapshotDepth,$ctx.Depth)) $true
 }catch{$failure=$_.ToString();throw}finally{
     @{Error=$failure;Checks=$checks.ToArray();RendererSha256=(Get-FileHash $Renderer).Hash;HarnessSha256=(Get-FileHash $PSCommandPath).Hash;Meaning='Authored synthetic geometry exercises the real whole-scene rasterizer: transparent fence before opaque and untextured solid walls/floor, billboard depth on either side and uneven strips. HUD/weapon calls replaced with no-ops. No game session, recording, WAD assets or performance claim.'}|ConvertTo-Json -Depth 5|Set-Content $Output
 }

@@ -1157,7 +1157,8 @@ original `Data`, while snapshot numbers retain their existing units and are
 converted only where fixed-point routines require it. The two snapshot-based
 actor fixtures likewise pass their already-radian angles directly. This
 corrects the mistaken representation assumption. The authored synthetic
-masked-wall suite passes 22 checks, including identical full-frame pixels and
-depth when the zero-angle camera is supplied as numeric snapshot values or as
-native `Fixed`/`Angle` objects. It uses no WAD; rotated WAD views and performance
-remain unverified. No live test ran.
+masked-wall suite passes 24 checks, including identical full-frame pixels and
+depth when camera values are supplied as snapshot doubles or native
+`Fixed`/`Angle` objects. This parity holds at zero angle and at 90° with
+fractional camera coordinates/view height. It uses no WAD; rotated WAD views
+and performance remain unverified. No live test ran.

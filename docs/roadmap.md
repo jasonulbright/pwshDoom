@@ -781,12 +781,23 @@ and view height are doubles and whose angle is in radians. Earlier follow-ups
 at commits 27, 28 and 30 incorrectly assumed these transport fields were
 engine `Fixed`/`Angle` instances. The renderer now handles both representations,
 and snapshot fixtures use their existing radian values. The authored-geometry
-masked-wall suite passes 22 checks, including pixel/depth parity between
-numeric snapshot and native `Fixed`/`Angle` camera inputs. It does not load a WAD
-or validate rotated views. The source correction is commit 31; this follow-up
-and evidence update is commit 32 after Preview.7. AST parsing and whitespace
-checks pass; no live test ran. Package, human-play, fidelity and performance
-gates remain open; release threshold is 35 commits.
+masked-wall suite passes 24 checks, including pixel/depth parity between
+numeric snapshot and native `Fixed`/`Angle` inputs at zero and 90° headings with
+fractional camera values. It does not load a WAD. The source correction is
+commit 31; parity and rotated-span follow-ups are commits 32–34 after Preview.7.
+AST parsing and whitespace checks pass; no live test ran. Package, human-play,
+WAD-image fidelity and performance gates remain open; release threshold is 35
+commits.
+
+### Rotated camera representation parity — October 4, 2026
+
+The authored masked-wall rasterizer now compares numeric snapshot camera fields
+against native `Fixed`/`Angle` objects at 0° and 90°, including fractional X/Y
+and view height. All 24 checks pass with exact scene-pixel and depth equality.
+The fixture uses no WAD or live session and replaces HUD/weapon drawing with
+no-ops. This narrows the transport-representation check but is not Doom-map or
+rotated-view fidelity evidence. This test/documentation checkpoint is commit 34;
+the release threshold is 35.
 
 ### Offline wall-span boundary verification — October 4, 2026
 
