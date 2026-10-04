@@ -1156,5 +1156,8 @@ representation: native engine objects use `ToDouble()`/`ToRadian()` and their
 original `Data`, while snapshot numbers retain their existing units and are
 converted only where fixed-point routines require it. The two snapshot-based
 actor fixtures likewise pass their already-radian angles directly. This
-corrects the representation mismatch found in source review; no renderer or
-live test ran, so output and performance remain unverified.
+corrects the mistaken representation assumption. The authored synthetic
+masked-wall suite passes 22 checks, including identical full-frame pixels and
+depth when the zero-angle camera is supplied as numeric snapshot values or as
+native `Fixed`/`Angle` objects. It uses no WAD; rotated WAD views and performance
+remain unverified. No live test ran.

@@ -8,8 +8,12 @@ and camera angle as radians. The recent renderer change had incorrectly
 assumed those fields were engine `Fixed`/`Angle` instances. Replaced the
 unconditional typed conversion with representation-aware handling and restored
 the snapshot fixtures to use radian values. PowerShell parsing and whitespace
-checks pass. No renderer, game, or live test ran; image and performance impact
-remain unverified.
+checks pass. The authored-geometry masked-wall regression passes all 22 checks
+with numeric camera fields and a direct comparison against native
+`Fixed`/`Angle` camera objects. The two representations produce identical
+pixels and depth in this authored zero-angle scene. It loads no WAD and starts no
+game session; rotated WAD images and performance remain unverified. No live test
+ran.
 
 ## 2026-10-04 — Preserve fixed camera coordinates explicitly
 

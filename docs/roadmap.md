@@ -780,10 +780,13 @@ and all broader release gates open; the next cumulative release threshold is
 and view height are doubles and whose angle is in radians. Earlier follow-ups
 at commits 27, 28 and 30 incorrectly assumed these transport fields were
 engine `Fixed`/`Angle` instances. The renderer now handles both representations,
-and snapshot fixtures use their existing radian values. This source correction
-is commit 31 after Preview.7; AST parsing and whitespace checks pass, but no
-rendered image or runtime check was run. Package, human-play, fidelity and
-performance gates remain open; the next release threshold is 35 commits.
+and snapshot fixtures use their existing radian values. The authored-geometry
+masked-wall suite passes 22 checks, including pixel/depth parity between
+numeric snapshot and native `Fixed`/`Angle` camera inputs. It does not load a WAD
+or validate rotated views. The source correction is commit 31; this follow-up
+and evidence update is commit 32 after Preview.7. AST parsing and whitespace
+checks pass; no live test ran. Package, human-play, fidelity and performance
+gates remain open; release threshold is 35 commits.
 
 ### Offline wall-span boundary verification — October 4, 2026
 

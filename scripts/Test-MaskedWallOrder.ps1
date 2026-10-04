@@ -87,6 +87,12 @@ try{
     Check 'Untextured solid wall retains sprite depth' ([Math]::Abs($ctx.Depth[25774]-128) -lt 0.01) $true
     [byte]$untexturedBackground=$ctx.Pixels[25774];$actor.X=200;$ctx.World.Actors=@($actor);Invoke-FastRender $ctx
     Check 'Untextured solid wall still hides a farther sprite' $ctx.Pixels[25774] $untexturedBackground
+    [byte[]]$snapshotPixels=$ctx.Pixels.Clone();[double[]]$snapshotDepth=$ctx.Depth.Clone()
+    $ctx.World.ConsolePlayer.Mobj.X=[Fixed]::new(0);$ctx.World.ConsolePlayer.Mobj.Y=[Fixed]::new(0)
+    $ctx.World.ConsolePlayer.Mobj.Angle=[Angle]::new([uint32]0);$ctx.World.ConsolePlayer.ViewZ=[Fixed]::FromInt(41)
+    Invoke-FastRender $ctx
+    Check 'Engine Fixed/Angle camera matches numeric snapshot pixels' ([Linq.Enumerable]::SequenceEqual[byte]($snapshotPixels,$ctx.Pixels)) $true
+    Check 'Engine Fixed/Angle camera matches numeric snapshot depth' ([Linq.Enumerable]::SequenceEqual[double]($snapshotDepth,$ctx.Depth)) $true
 }catch{$failure=$_.ToString();throw}finally{
     @{Error=$failure;Checks=$checks.ToArray();RendererSha256=(Get-FileHash $Renderer).Hash;HarnessSha256=(Get-FileHash $PSCommandPath).Hash;Meaning='Authored synthetic geometry exercises the real whole-scene rasterizer: transparent fence before opaque and untextured solid walls/floor, billboard depth on either side and uneven strips. HUD/weapon calls replaced with no-ops. No game session, recording, WAD assets or performance claim.'}|ConvertTo-Json -Depth 5|Set-Content $Output
 }
