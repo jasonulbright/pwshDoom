@@ -20,6 +20,8 @@ Updated the article lead to identify Preview.7 as the latest public package, cit
 
 Also changed the M1 table's “current Preview.6” wording to historical tense. Preview.7 is the latest public package; the cited M1 evidence remains tied to Preview.6 and is not silently upgraded to later source.
 
+Corrected two more stale Preview.4 “current” statements in the article. The overview now uses Preview.7's recorded package and static-render evidence, and the all-map sweep is attributed to its historical Preview.4 extraction. R20 candidate checks remain scoped to their own receipt. No measurements or live tests were performed.
+
 ## 2026-10-02 — Local storage cleanup
 
 At the user's direction, removed 273 reviewed MP4s (13.34 GiB) while retaining all 2,050 other files under `local/recordings`. Removed ten clean duplicate source checkouts whose commits are present in the main repository. No tracked files, original WADs, downloaded tools, or upstream source assets were removed. The full repo measured 28,327,531,727 bytes (28.328 GB decimal / 26.382 GiB), below the 30 GB cap. Keep all future project work inside this repo and preserve the same cap.

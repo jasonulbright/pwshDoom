@@ -10,7 +10,7 @@ A later three-cycle live comparison holds AsyncBatch fixed and varies only the e
 
 Could PowerShell run Doom's game logic and draw its world inside Windows Terminal? The experiment uses a 320×200 Doom image, preserves the game's 35-tic simulation, and targets 60 displayed updates per second. A second goal grew out of it: turn the same world into a green Matrix view with Japanese characters, plus a full-color character-art mode.
 
-The answer is a qualified yes. A real Doom-derived game foundation, renderer, gameplay loop, terminal encoders and audio algorithms now run in PowerShell. Preview.4 freshly passes the 36-map load/idle/render sweep under PowerShell 7.6.6. Focused tests cover campaign transitions, menus, saves, boss progression and all three display styles. That is meaningful engine work, but it is not proof that a human can finish every map. The one continuous Episode 1 playthrough, including its secret-map detour and finale, remains the current human test.
+The answer is a qualified yes. A real Doom-derived game foundation, renderer, gameplay loop, terminal encoders and audio algorithms run in PowerShell, with Classic, Matrix and AnsiArt preserved. The latest public package, Preview.7, passes extracted manifest/hash verification and launcher preflight; its installed-IWAD check detects 36 maps. A packaged static E1M2 render matches the HUD, while 1,576 of 53,760 scene indices differ. Focused campaign, menu, save and boss checks establish useful behaviors, but none proves that a human can finish every map. The complete Episode 1 playthrough, including its secret-map detour and finale, remains unqualified. See the [Preview.7 scope](release-preview7.md) for the package boundary and claims.
 
 ## What runs where
 
@@ -66,7 +66,7 @@ The October 1 audio-loaded Classic route repeats show why averages alone are ins
 
 ## A room is not a campaign
 
-The all-map sweep loads each of the 36 Ultimate Doom maps, advances a short simulation, and renders frames. Preview.4 repeats that sweep on its packaged implementation source. Separate HMP input routes complete E1M1–E1M4 through ordinary exits; transition tests cover the E1M3 secret path, return to E1M4, map-8 boss triggers and finale states. These checks find structural defects quickly, but none substitute for ordinary play across a complete episode.
+The all-map sweep loads each of the 36 Ultimate Doom maps, advances a short simulation, and renders frames. Preview.4's extracted package was checked with that sweep. Separate HMP input routes complete E1M1–E1M4 through ordinary exits; transition tests cover the E1M3 secret path, return to E1M4, map-8 boss triggers and finale states. These checks find structural defects quickly, but none substitute for ordinary play across a complete episode.
 
 The R17 human route is:
 
@@ -104,7 +104,7 @@ For the narrow requirement “real Doom-derived gameplay in Windows Terminal, wi
 
 ## What a preview does and does not claim
 
-The current public package is [Preview.4](https://github.com/jasonulbright/pwshDoom/releases/tag/v0.1.0-preview.4), with 544 manifest-verified payload files and a matching fresh public download. The local R20 handoff adds readable notices, resource reuse, optional asynchronous output, loading feedback and realtime audio recovery. Its [receipt](../results/r20-playtest-package-validation-20261002.json) pins 557 payload files and extracted menu/save/worker/audio checks. R19 and earlier archives remain comparison builds. This development archive is separate from a tagged release; full campaign and performance gates stay open.
+The latest public package is [Preview.7](https://github.com/jasonulbright/pwshDoom/releases/tag/v0.1.0-preview.7), a 570-file archive with extracted manifest/hash verification and launcher preflight. Its release record preserves the static E1M2 comparison and explicitly makes no renderer-speedup, 35-tic or 60-displayed-frame claim. Earlier Preview.4, Preview.5 and Preview.6 archives remain historical comparison builds. The R20 handoff receipt documents a prior 557-payload candidate and its menu/save/worker/audio checks; those checks stay scoped to that candidate. Full campaign and performance gates remain open. See the [Preview.7 scope](release-preview7.md).
 
 Later map-handoff profiling identifies repeated WAD-resource conversion and serialization as a concrete cost. Three paired ABBA stage cycles reduce preparation from 4.09–4.90 seconds to 81–112 ms by retaining immutable resource data, with identical direct/read-back frame hashes. Initial cache construction still costs about five seconds and retains 35.87 MiB; each map gets private geometry and raster scratch. A complete live audio route then measures a 102 ms preparation stage but still a 4.517-second total load, with worker-side deserialization remaining. This demonstrates a specific optimization under the PowerShell constraint; it does not establish 60 displayed game frames/sec. [Stage and worker evidence](../results/map-render-resource-cache-20261001.json), [live timing](../results/resource-cache-loaded-classic-20261001-r1.json).
 
