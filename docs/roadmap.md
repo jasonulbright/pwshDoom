@@ -779,6 +779,7 @@ and all broader release gates open; the next cumulative release threshold is
 The fast renderer now converts the engine's 32-bit `Angle` through its explicit
 radians method for floating geometry and uses `Angle.Data` for fixed lookup
 tables. Source inspection identified the prior unit mismatch; this correction
-has not received a rendered-image or runtime check. This source and documentation
-update is commit 27 after Preview.7. Package validation, human play, image parity,
-and performance remain open; release threshold is 35 commits.
+has not received a rendered-image or runtime check. The production correction
+is commit 27 after Preview.7; this follow-up aligning two actor fixture helpers
+is commit 28. Package validation, human play, image parity, and performance
+remain open; release threshold is 35 commits.

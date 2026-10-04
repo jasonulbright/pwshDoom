@@ -39,7 +39,7 @@ try {
         if($Fuzz){
             $snapshot.ConsolePlayer.Invisibility=@{0=129;37=128;89=120;173=8;269=0}[$angle]
             $shadow=$snapshot.Actors[0];$shadow.Flags=$shadow.Flags -bor 0x40000;$shadow.Sprite=[int][Sprite]::SARG;$shadow.Frame=0
-            $a=$snapshot.ConsolePlayer.Mobj.Angle;$shadow.X=$snapshot.ConsolePlayer.Mobj.X+32*[Math]::Cos($a)
+            $a=$snapshot.ConsolePlayer.Mobj.Angle.ToRadian();$shadow.X=$snapshot.ConsolePlayer.Mobj.X+32*[Math]::Cos($a)
             $shadow.Y=$snapshot.ConsolePlayer.Mobj.Y+32*[Math]::Sin($a);$shadow.Z=$snapshot.ConsolePlayer.ViewZ-41
         }
         if($angle -eq 37){$snapshot.ConsolePlayer.ExtraLight=2;foreach($sector in $snapshot.Sectors){$sector.LightLevel=255}}

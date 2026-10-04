@@ -1150,3 +1150,5 @@ and formats `ToString()` as degrees. The renderer now uses `ToRadian()` for its
 floating BSP/plane math and passes the original `Angle.Data` directly to fixed
 lookup paths. This removes a unit-conversion ambiguity in rotated views, but
 the visual effect remains unverified because no renderer or live test was run.
+The synthetic actor-placement/depth-order helpers now make the same explicit
+conversion.

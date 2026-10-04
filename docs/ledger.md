@@ -7,8 +7,9 @@ floating-point camera geometry and passes the original 32-bit `Angle.Data` to
 fixed-angle lookup paths. The engine type stores binary turns and formats its
 string representation in degrees, so direct conversion to a double was
 ambiguous and inconsistent with the trigonometric API. PowerShell AST parsing
-and `git diff --check` pass; no renderer, game, or live test ran. Rotated-view
-image impact and performance remain unverified.
+and `git diff --check` pass. Two renderer fixture helpers now convert angles
+explicitly as well. No renderer, game, or live test ran. Rotated-view image
+impact and performance remain unverified.
 
 ## 2026-10-04 — Map wall spans through fixed-angle projection tables
 
