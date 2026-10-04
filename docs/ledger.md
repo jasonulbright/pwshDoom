@@ -11,6 +11,13 @@ menu. Added all-style pause/show/expiry cases; they remain unrun under the user'
 active-computer instruction. PowerShell AST parsing and `git diff --check` pass;
 no live test or game process ran.
 
+## 2026-10-04 — Sync article with the current gamma behavior
+
+The article now records the pause-screen notice and two-second wall-clock
+expiry, identifies `fbb91d7` as the development source head, and keeps those
+unverified changes separate from Preview.7. Documentation-only; no tests ran.
+`git diff --check` passes.
+
 ## 2026-10-04 — Bring article status up to date
 
 The article still identified R19 as the current local package and did not

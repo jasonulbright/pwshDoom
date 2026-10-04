@@ -10,11 +10,12 @@ Since Preview.7, the local development branch added saved gamma correction
 (Off and levels 1–10, default level 2) to Escape → Settings and F11 cycling in
 play, with a brief on-screen level notice. The selected curve reaches rendered
 worker palettes, player-message colors and indexed-capture palette companions.
-This is development-source behavior, not a Preview.7 claim: its regression
-cases remain unrun under the user's no-live-tests instruction, and visual
-compatibility remains unverified. At HEAD `133bf44`, the branch is 21 commits
-after Preview.7, below the requested 35-commit release cadence, and has no
-extracted-package validation.
+The notice also appears on pause and expires after two wall-clock seconds. This
+is development-source behavior, not a Preview.7 claim: its regression cases
+remain unrun under the user's no-live-tests instruction, and visual
+compatibility remains unverified. At source HEAD `fbb91d7`, the branch is 23
+commits after Preview.7, below the requested 35-commit release cadence, and has
+no extracted-package validation.
 
 ## The question
 
