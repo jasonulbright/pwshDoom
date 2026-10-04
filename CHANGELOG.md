@@ -3,7 +3,26 @@
 ## Unreleased
 
 Full Ultimate Doom campaign, independent fidelity, physical/acoustic review,
-display pacing and second-hardware qualification continue after Preview.7.
+display pacing and second-hardware qualification continue after Preview.8.
+
+## 0.1.0-preview.8 — 2026-10-04
+
+Cumulative playable community preview after36 commits since Preview.7. It
+preserves Classic, Matrix and AnsiArt. Gameplay, rendering and audio mixing
+remain in PowerShell. See [scope and current limits](docs/release-preview8.md);
+this is not full Ultimate Doom certification.
+
+- Add saved gamma levels and an F11 shortcut; custom key bindings now report
+  reserved keys and preserve rapid repeated menu taps.
+- Use Doom's fixed-angle wall-span lookup when WAD geometry metadata is
+  present. Numeric snapshot camera values retain their world-unit/radian form.
+- Add offline synthetic renderer checks for wall order, camera representation
+  parity and all four cardinal projection headings. No live game/device test or
+  renderer-speed claim is included in this package preparation.
+- Full Episode 1 human completion, original-frame fidelity, audio listening,
+  physical-device review and 35-tic/60-display qualification remain open.
+
+Published package: [v0.1.0-preview.8](https://github.com/jasonulbright/pwshDoom/releases/tag/v0.1.0-preview.8).
 
 ## 0.1.0-preview.7 — 2026-10-02
 
