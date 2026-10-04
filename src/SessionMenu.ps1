@@ -63,6 +63,7 @@ function Invoke-DoomMenuKey {
     }elseif($Key -in 'Up','Down'){
         $count=switch($screen){1{7};14{8};15{11};2{$Menu.Episodes};3{5};8{6};9{6};default{2}}
         $delta=if($Key -eq 'Up'){-1}else{1};$Menu.Choice=($Menu.Choice+$delta+$count)%$count
+        if($screen -eq 15){$Menu.MessageTitle='';$Menu.MessageDetail=''}
     }elseif($Key -eq 'Enter' -or ($Key -eq 'Yes' -and $screen -in 4,6,10,11)){
         if($Key -eq 'Yes'){$Menu.Choice=1}
         switch($screen){
@@ -222,7 +223,7 @@ function Get-DoomMenuPixels {
     }
     if($Screen -in 1,2,3,4,6,8,9,10,11,15){
         if($Screen -ne 15){Draw-DoomMenuText $Graphics 'ARROWS: CHOOSE' 0 166 -Center}
-        $footer=if($Screen -eq 15 -and $Details.AwaitingBinding){'ESC: CANCEL'}else{'ENTER: OK  ESC: BACK'}
+        $footer=if($Screen -eq 15 -and $Details.AwaitingBinding){'ESC: CANCEL'}elseif($Screen -eq 15 -and $Details.MessageTitle){if($Details.MessageTitle -in 'KEY ALREADY USED','KEY ASSIGNED' -and $Details.MessageDetail){$Details.MessageDetail}else{$Details.MessageTitle}}else{'ENTER: OK  ESC: BACK'}
         Draw-DoomMenuText $Graphics $footer 0 184 -Center
     }
     return ,$draw.Data
