@@ -1,5 +1,9 @@
 # Investigation ledger
 
+## 2026-10-04 — Preserve repeated menu taps on the same key
+
+The ordered menu-input queue still coalesced a rapid key-up/key-down pair when both taps used the same virtual key, because the per-key `Pressed` bit also gated queue insertion. Fresh physical key-down edges now append independently, and consuming one removes only one queued occurrence while preserving the pending bit if another remains. Added synthetic regression cases for two Down taps and one-at-a-time consumption; they were not run during the user's active computer session. Only parser and whitespace checks are permitted for this change.
+
 ## 2026-10-04 — Close a stale palette task entry
 
 Current fidelity review found a roadmap sentence that still listed player palette selection as unfinished. The existing [palette-presentation record](palette-presentation.md) and renderer/snapshot source show that damage, pickup, berserk and radiation selections reach all three styles. Updated the roadmap to mark implementation closed while retaining original-executable, gamma and readability limits. Documentation-only source review; no runtime checks were run.

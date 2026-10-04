@@ -26,6 +26,15 @@ Check 'Queued presses retain key-down order across a quick release' (($orderedSt
 Remove-DoomInputPress $orderedState 40;Reset-DoomInputForMenu $orderedState -PreservePending
 Check 'Menu reset preserves later queued keys after consuming the first' ($orderedState.PressedOrder.Count -eq 1 -and $orderedState.PressedOrder[0] -eq 13 -and $orderedState.Pressed[13])
 Remove-DoomInputPress $orderedState 13
+$repeatState=@{Keys=[bool[]]::new(256);Pressed=[bool[]]::new(256);Suppressed=[bool[]]::new(256);PressedOrder=[Collections.Generic.List[int]]::new()}
+$repeatRecords=[PwshDoomPlatform.InputRecord[]]::new(3)
+for($i=0;$i -lt 3;$i++){$pair=@(@(40,1),@(40,0),@(40,1))[$i];$record=[PwshDoomPlatform.InputRecord]::new();$record.EventType=1;$record.VirtualKey=$pair[0];$record.KeyDown=$pair[1];$repeatRecords[$i]=$record}
+Update-DoomInputRecords $repeatState $repeatRecords 3
+Check 'Repeated same-key taps remain separate ordered menu events' ($repeatState.PressedOrder.Count -eq 2 -and (Get-DoomPressedKeysInOrder $repeatState).Count -eq 2)
+Remove-DoomInputPress $repeatState 40
+Check 'Consuming one same-key tap leaves the later tap pending' ($repeatState.PressedOrder.Count -eq 1 -and $repeatState.Pressed[40])
+Remove-DoomInputPress $repeatState 40
+Check 'Consuming the final same-key tap clears its pending edge' ($repeatState.PressedOrder.Count -eq 0 -and -not $repeatState.Pressed[40])
 Send-Key 80 $true;Check 'Pause physical key press is available' $state.Pressed[80]
 Reset-ForMenu;Send-Key 80 $true;Check 'Held pause repeat does not toggle again' (-not $state.Pressed[80])
 Send-Key 80 $false;Send-Key 80 $true;Check 'Released and repressed pause toggles again' $state.Pressed[80]

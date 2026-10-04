@@ -58,9 +58,9 @@ function Update-DoomInputRecords {
             $event=$Records[$i]
             if($event.EventType -eq 1 -and $event.VirtualKey -lt 256) {
                 $key=[int]$event.VirtualKey;$down=$event.KeyDown -ne 0
-                if($down -and -not $State.Keys[$key] -and -not $State.Pressed[$key]){
-                    $State.Pressed[$key]=$true
-                    if($State.ContainsKey('PressedOrder')){[void]$State.PressedOrder.Add($key)}
+                if($down -and -not $State.Keys[$key]){
+                    if(-not $State.Pressed[$key]){$State.Pressed[$key]=$true}
+                    if($State.ContainsKey('PressedOrder') -and $key -gt 0){[void]$State.PressedOrder.Add($key)}
                 }
                 $State.Keys[$key]=$down
                 if(-not $down -and $State.ContainsKey('Suppressed')){$State.Suppressed[$key]=$false}
@@ -81,8 +81,10 @@ function Get-DoomPressedKeysInOrder {
 
 function Remove-DoomInputPress {
     param($State,[int]$VirtualKey)
-    if($VirtualKey -gt 0 -and $VirtualKey -lt $State.Pressed.Length){$State.Pressed[$VirtualKey]=$false}
-    if($State.ContainsKey('PressedOrder')){[void]$State.PressedOrder.Remove($VirtualKey)}
+    if($State.ContainsKey('PressedOrder')){
+        [void]$State.PressedOrder.Remove($VirtualKey)
+        if($VirtualKey -gt 0 -and $VirtualKey -lt $State.Pressed.Length){$State.Pressed[$VirtualKey]=$State.PressedOrder.Contains($VirtualKey)}
+    }elseif($VirtualKey -gt 0 -and $VirtualKey -lt $State.Pressed.Length){$State.Pressed[$VirtualKey]=$false}
 }
 
 function Reset-DoomInputForMenu {
