@@ -1156,3 +1156,9 @@ lookup paths. This removes a unit-conversion ambiguity in rotated views, but
 the visual effect remains unverified because no renderer or live test was run.
 The synthetic actor-placement/depth-order helpers now make the same explicit
 conversion.
+
+The fast renderer also now converts camera X/Y/view height through
+`Fixed.ToDouble()` for floating geometry and uses each value's original
+`Fixed.Data` for fixed-point calculations, removing implicit formatted-string
+conversions. This source-level precision cleanup has no rendered-image or
+performance measurement yet.

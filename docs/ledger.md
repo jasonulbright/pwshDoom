@@ -1,5 +1,13 @@
 # Investigation ledger
 
+## 2026-10-04 — Preserve fixed camera coordinates explicitly
+
+`Invoke-FastRender` now converts camera X/Y and view height with
+`Fixed.ToDouble()` and uses their original 16.16 `Data` values for fixed-point
+work, rather than converting through each object's formatted string. AST parsing
+and whitespace checks pass. No renderer or live test ran; image impact and
+performance are unmeasured.
+
 ## 2026-10-04 — Correct and run fixed-angle span boundary cases offline
 
 The isolated span harness first failed because its exact +45-degree expectation

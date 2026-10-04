@@ -412,11 +412,12 @@ function Invoke-FastRender {
     if(-not $Context.ContainsKey('SectorRenderDataReady') -or -not $Context.SectorRenderDataReady){throw 'Update the render-sector cache for the current snapshot before rendering.'}
     $phaseWatch=[Diagnostics.Stopwatch]::StartNew();$world=$Context.World;$player=$world.ConsolePlayer;$camera=$player.Mobj
     if($GeometryDetails){$geometryStartedQpc=[Diagnostics.Stopwatch]::GetTimestamp()}
-    [double]$cx=$camera.X;[double]$cy=$camera.Y;[double]$cz=$player.ViewZ
+    [Fixed]$cameraXFixed=$camera.X;[Fixed]$cameraYFixed=$camera.Y;[Fixed]$cameraViewZFixed=$player.ViewZ
+    [double]$cx=$cameraXFixed.ToDouble();[double]$cy=$cameraYFixed.ToDouble();[double]$cz=$cameraViewZFixed.ToDouble()
     [Angle]$cameraAngle=$camera.Angle
     [double]$angle=$cameraAngle.ToRadian()
-    [int]$viewXData=[Math]::Truncate(65536.0*$cx);[int]$viewYData=[Math]::Truncate(65536.0*$cy)
-    [int]$viewZData=[Math]::Truncate(65536.0*$cz)
+    [int]$viewXData=$cameraXFixed.Data;[int]$viewYData=$cameraYFixed.Data
+    [int]$viewZData=$cameraViewZFixed.Data
     [uint32]$viewAngleData=$cameraAngle.Data
     [uint32]$planeBaseAngleData=([long]$viewAngleData-0x40000000L) -band 0xFFFFFFFFL
     # Actor projection follows Doom's 16.16 transform. Keep the floating-point

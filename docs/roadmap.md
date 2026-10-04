@@ -792,3 +792,11 @@ angle and adds two-sided clipping coverage. This does not render a full frame
 or validate the camera-unit fix. The test and documentation update is commit 29
 after Preview.7; runtime image, package, performance, and human-play gates remain
 open.
+
+### Fixed camera-coordinate conversion — October 4, 2026
+
+The fast renderer now uses explicit `Fixed.ToDouble()` values for floating
+camera geometry and original 16.16 data for fixed-point paths. This removes
+implicit number formatting from the conversion. AST parsing and whitespace
+checks pass; output and performance are unverified. This source/documentation
+checkpoint is commit 30 after Preview.7; the release threshold remains 35.
