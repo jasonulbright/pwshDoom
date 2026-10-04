@@ -12,14 +12,14 @@ A normal completion is enough; 100% kills, items, and secrets are not required. 
 
 ## Build and launch
 
-Use the published Preview.7 package or the matching current checkout. Its manifest identifies the exact source commit. The earlier Preview.6 package separately passed its pinned 36-map and three-style worker checks; those checks do not navigate or finish maps. Current menu/render changes and their limits are in the [Preview.7 release notes](release-preview7.md); historical evidence remains in the [wall-band integration receipt](../results/wall-band-renderer-integration-20261002.json), [Preview.6 package validation](../results/preview6-package-validation-20261002.json), [traversal receipt](../results/visibility-iterative-integration-20261002.json), and [playthrough performance evidence](performance.md#active-wall-band-preselection-trial--october-2-2026).
+Use the published Preview.7 package, source commit `534966a`. The development branch contains post-release source changes and has no extracted-package validation receipt, so it is not the playtest candidate. Extract Preview.7 under `C:\projects\pwshDoom\local\preview7-playtest` and use that folder for `$root` below. The earlier Preview.6 package separately passed its pinned 36-map and three-style worker checks; those checks do not navigate or finish maps. Current menu/render changes and their limits are in the [Preview.7 release notes](release-preview7.md); historical evidence remains in the [wall-band integration receipt](../results/wall-band-renderer-integration-20261002.json), [Preview.6 package validation](../results/preview6-package-validation-20261002.json), [traversal receipt](../results/visibility-iterative-integration-20261002.json), and [playthrough performance evidence](performance.md#active-wall-band-preselection-trial--october-2-2026).
 
 Use 64-bit PowerShell 7.6.x and Windows Terminal. The required user-owned Ultimate Doom IWAD has SHA-256 `6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F`. WADs, soundfonts, prepared music, media, tools and the research PDF are excluded. The local eleven-track Episode 1 catalog covers this route; omit `-MusicCatalog` for effects-only play. Audio startup rechecks payloads and IWAD score identity.
 
-From PowerShell, run the current candidate checkout and use fresh output paths:
+From PowerShell, run the extracted Preview.7 package and use fresh output paths:
 
 ~~~powershell
-$root = 'C:\projects\pwshDoom'
+$root = 'C:\projects\pwshDoom\local\preview7-playtest'
 $wad = 'C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\base\DOOM.WAD'
 $local = 'C:\projects\pwshDoom\local'
 $catalog = Join-Path $local 'music-prepared-episode1.json'

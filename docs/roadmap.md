@@ -705,3 +705,21 @@ It lowers disagreement by 1,322 indices across six E1M2/E3M6 reference views,
 preserves all three styles' worker parity, and costs 2.5% median/2.7% p95 in one
 serial E1M2 profile. The human Episode 1 route, moving/original-frame fidelity,
 live pacing and acoustic review remain open; see the [scale record](rendering-fidelity.md#fixed-point-wall-scale-stepping--october-2-2026).
+
+### Post-Preview.7 development status — October 4, 2026
+
+Preview.7 at commit `534966a` remains the latest public package. This update
+records 13 commits on the development branch after the tag. Since release,
+renderer plane-span dispatch was simplified, custom bindings were made to override
+legacy aliases, key-remap feedback and capture prompts were added to the native
+menu, and queued key presses began following physical key-down order. These
+source changes are not part of Preview.7. The latest input-order change has
+synthetic regression cases, but they were not run during the user's active
+computer session; only PowerShell parsing and whitespace checks were used.
+
+The current branch has no extracted-package validation, so it is not the
+Episode 1 human-play candidate. The playtest guide now pins that handoff to the
+published Preview.7 package. Keep the single complete HMP route and every
+broader campaign, original-renderer fidelity, pacing, physical-input, acoustic,
+and second-hardware gate open. The next cumulative public release is due after
+35 commits from Preview.7; this documentation commit brings the count to 13.

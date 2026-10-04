@@ -1,5 +1,9 @@
 # Investigation ledger
 
+## 2026-10-04 — Pin the Episode 1 playtest to the verified package
+
+The development branch had 12 commits after Preview.7 and has no extracted-package validation receipt. Updated the route guide to use the published Preview.7 package from commit `534966a`, and recorded that distinction in the roadmap. This keeps the human campaign handoff tied to the package with authoritative preflight evidence. This documentation commit becomes number 13 after Preview.7. No game or test processes were run.
+
 ## 2026-10-04 — Explain unavailable key choices
 
 The live key-capture path previously filtered reserved keys before the menu could validate them, leaving the remap screen stuck on “PRESS A KEY” with no feedback when the player pressed a menu or system key. It now forwards any pressed key (with Escape still canceling) to the existing validator, which reports “KEY NOT AVAILABLE.” Source inspection confirms the validation message path; only PowerShell parsing and whitespace checks are appropriate here. No game or live tests were run.
