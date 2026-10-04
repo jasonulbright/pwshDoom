@@ -1135,15 +1135,15 @@ span and table-indexing structure in [id Software's `R_AddLine`](https://github.
 and [texture-mapping table construction](https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/r_main.c#L508-L566),
 without copying their source text.
 
-`scripts/Test-WallScreenProjection.ps1` passes seven offline checks covering the
-fine-angle fenceposts and segments at the field-of-view boundary, clipped at
-both/one edge, fully offscreen, and back-facing. Its initial assertion expected
-the exact +45-degree table entry to map to column 0; the generated Doom table
-maps it to column 1, while an angle clipped to the left boundary maps to column
-0. The harness now distinguishes those cases. It uses synthetic coordinates
-and does not launch the game, read a WAD, or exercise full-frame output. PowerShell
-AST parsing and `git diff --check` pass. Image parity, original-executable
-fidelity, and performance remain unverified.
+`scripts/Test-WallScreenProjection.ps1` passes 12 offline checks at 0° and 90°,
+covering the fine-angle fenceposts, nominal field edges, clipping on either or
+both sides, offscreen rejection and backface rejection. At 0°, the exact +45°
+table entry maps to column 1 while a clipped endpoint maps to 0. At 90°, Doom's
+point-angle convention returns `ANG90−1` for a point on +Y, placing that split
+at column 161. The harness records these quantization edges explicitly. It uses
+synthetic coordinates and does not launch the game, read a WAD or exercise
+full-frame output. PowerShell AST parsing and `git diff --check` pass. Image
+parity, original-executable fidelity and performance remain unverified.
 
 ### Camera snapshot representation correction — October 4, 2026
 

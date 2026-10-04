@@ -23,15 +23,14 @@ this assumption was superseded by the representation-aware branch recorded
 above. Native engine objects still use the explicit conversion; snapshots keep
 their established numeric representation.
 
-## 2026-10-04 — Correct and run fixed-angle span boundary cases offline
+## 2026-10-04 — Exercise rotated fixed-angle spans offline
 
-The isolated span harness first failed because its exact +45-degree expectation
-assumed column 0. Table inspection showed that the exact fine-angle entry maps to
-column 1; the inverse lookup's clipped left endpoint maps to column 0. Corrected
-that assertion and added a segment with both endpoints outside the viewport to
-exercise two-sided clipping. All seven synthetic table/span cases now pass.
-This did not launch Doom, load a WAD, or render a full frame. The fixed-angle
-helper's broader image behavior and the camera conversion remain unverified.
+The isolated span harness corrected two test assumptions: exact +45° maps to
+column 1 before clipping, and `PointToAngle` represents a +Y cardinal as
+`ANG90−1`, which maps the 90° split to column 161. It now covers both 0° and 90°
+headings, two-sided and partial clipping, offscreen rejection and backface
+rejection. All 12 synthetic cases pass. This did not launch Doom, load a WAD or
+render a full frame. Full-image parity and performance remain unverified.
 
 ## 2026-10-04 — Initial camera-angle conversion hypothesis
 

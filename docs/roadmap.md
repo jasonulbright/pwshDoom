@@ -796,3 +796,11 @@ angle and adds two-sided clipping coverage. This does not render a full frame
 or validate the camera-unit fix. The test and documentation update is commit 29
 after Preview.7; runtime image, package, performance, and human-play gates remain
 open.
+
+### Rotated wall-span boundary coverage — October 4, 2026
+
+The synthetic fixed-angle harness now passes 12 cases at 0° and 90°. It records
+the exact-angle and `ANG90−1` table fenceposts, partial/two-sided clipping,
+offscreen rejection and backface rejection. No WAD or live session is used, and
+this does not establish full-image fidelity. This harness/documentation update
+is commit 33 after Preview.7; the release threshold is 35.
