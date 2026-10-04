@@ -732,3 +732,14 @@ broader campaign, original-renderer fidelity, pacing, physical-input, acoustic,
 and second-hardware gate open. This status note was recorded at 14 commits
 after Preview.7; derive the live count from Git and cut the next cumulative
 release at 35.
+
+Current continuation — October 4, 2026: the branch is at 19 commits after
+Preview.7 (source `656e093`) and remains a development handoff without extracted
+package validation. Gamma correction is saved in settings and F11 now displays
+the selected level briefly; the change has PowerShell AST and whitespace checks
+only, with no runtime or visual-compatibility evidence. Reviewed gameplay MP4s
+were removed from `local/recordings`; JSON receipts, audio, review frames, logs
+and findings remain. The local reference PDF was already ignored and is not
+tracked. Continue source fidelity and frame-cost work; the user has prohibited
+live tests while using the computer. The next public release is due at 35
+commits after Preview.7.
