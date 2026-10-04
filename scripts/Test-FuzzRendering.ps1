@@ -105,7 +105,7 @@ try{
     $fuzzSnapshot=Read-GameSnapshotBytes $fuzzFrame $null
     Check 'Interpolated packet marks the shared fuzz actor order' ([bool]$fuzzSnapshot.ActorsDepthSortedForFuzz)
     [double]$viewX=$fuzzSnapshot.ConsolePlayer.Mobj.X;[double]$viewY=$fuzzSnapshot.ConsolePlayer.Mobj.Y
-    [double]$viewAngle=$fuzzSnapshot.ConsolePlayer.Mobj.Angle.ToRadian();$viewCos=[Math]::Cos($viewAngle);$viewSin=[Math]::Sin($viewAngle)
+    [double]$viewAngle=$fuzzSnapshot.ConsolePlayer.Mobj.Angle;$viewCos=[Math]::Cos($viewAngle);$viewSin=[Math]::Sin($viewAngle)
     [double[]]$actorDepths=@(foreach($entry in $fuzzSnapshot.Actors){($entry.X-$viewX)*$viewCos+($entry.Y-$viewY)*$viewSin})
     $depthOrderValid=$true
     for([int]$i=1;$i -lt $actorDepths.Length;$i++){if($actorDepths[$i] -gt $actorDepths[$i-1]){$depthOrderValid=$false;break}}

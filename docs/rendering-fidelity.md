@@ -1145,20 +1145,16 @@ and does not launch the game, read a WAD, or exercise full-frame output. PowerSh
 AST parsing and `git diff --check` pass. Image parity, original-executable
 fidelity, and performance remain unverified.
 
-### Preserve camera-angle units — October 4, 2026
+### Camera snapshot representation correction — October 4, 2026
 
-Source review found that `Invoke-FastRender` assigned the engine's `Angle`
-object directly to its floating camera angle before calling `Sin` and `Cos`.
-The engine type stores a 32-bit turn angle, exposes `ToRadian()` for geometry,
-and formats `ToString()` as degrees. The renderer now uses `ToRadian()` for its
-floating BSP/plane math and passes the original `Angle.Data` directly to fixed
-lookup paths. This removes a unit-conversion ambiguity in rotated views, but
-the visual effect remains unverified because no renderer or live test was run.
-The synthetic actor-placement/depth-order helpers now make the same explicit
-conversion.
-
-The fast renderer also now converts camera X/Y/view height through
-`Fixed.ToDouble()` for floating geometry and uses each value's original
-`Fixed.Data` for fixed-point calculations, removing implicit formatted-string
-conversions. This source-level precision cleanup has no rendered-image or
-performance measurement yet.
+Inspection of `New-GameRenderSnapshot` and `Invoke-GameRenderWorker` shows that
+the render worker receives camera X/Y/view height as world-unit doubles and
+camera angle as radians. An earlier source follow-up incorrectly treated those
+transport fields as engine `Fixed` and `Angle` objects; unconditional casts
+would break the worker path. `Invoke-FastRender` now accepts either
+representation: native engine objects use `ToDouble()`/`ToRadian()` and their
+original `Data`, while snapshot numbers retain their existing units and are
+converted only where fixed-point routines require it. The two snapshot-based
+actor fixtures likewise pass their already-radian angles directly. This
+corrects the representation mismatch found in source review; no renderer or
+live test ran, so output and performance remain unverified.

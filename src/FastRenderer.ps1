@@ -412,13 +412,29 @@ function Invoke-FastRender {
     if(-not $Context.ContainsKey('SectorRenderDataReady') -or -not $Context.SectorRenderDataReady){throw 'Update the render-sector cache for the current snapshot before rendering.'}
     $phaseWatch=[Diagnostics.Stopwatch]::StartNew();$world=$Context.World;$player=$world.ConsolePlayer;$camera=$player.Mobj
     if($GeometryDetails){$geometryStartedQpc=[Diagnostics.Stopwatch]::GetTimestamp()}
-    [Fixed]$cameraXFixed=$camera.X;[Fixed]$cameraYFixed=$camera.Y;[Fixed]$cameraViewZFixed=$player.ViewZ
-    [double]$cx=$cameraXFixed.ToDouble();[double]$cy=$cameraYFixed.ToDouble();[double]$cz=$cameraViewZFixed.ToDouble()
-    [Angle]$cameraAngle=$camera.Angle
-    [double]$angle=$cameraAngle.ToRadian()
-    [int]$viewXData=$cameraXFixed.Data;[int]$viewYData=$cameraYFixed.Data
-    [int]$viewZData=$cameraViewZFixed.Data
-    [uint32]$viewAngleData=$cameraAngle.Data
+    $cameraXValue=$camera.X;$cameraYValue=$camera.Y;$cameraViewZValue=$player.ViewZ
+    if($cameraXValue -is [Fixed]){
+        [double]$cx=$cameraXValue.ToDouble();[int]$viewXData=$cameraXValue.Data
+    }else{
+        [double]$cx=$cameraXValue;[int]$viewXData=[Math]::Truncate(65536.0*$cx)
+    }
+    if($cameraYValue -is [Fixed]){
+        [double]$cy=$cameraYValue.ToDouble();[int]$viewYData=$cameraYValue.Data
+    }else{
+        [double]$cy=$cameraYValue;[int]$viewYData=[Math]::Truncate(65536.0*$cy)
+    }
+    if($cameraViewZValue -is [Fixed]){
+        [double]$cz=$cameraViewZValue.ToDouble();[int]$viewZData=$cameraViewZValue.Data
+    }else{
+        [double]$cz=$cameraViewZValue;[int]$viewZData=[Math]::Truncate(65536.0*$cz)
+    }
+    $cameraAngleValue=$camera.Angle
+    if($cameraAngleValue -is [Angle]){
+        [double]$angle=$cameraAngleValue.ToRadian();[uint32]$viewAngleData=$cameraAngleValue.Data
+    }else{
+        [double]$angle=$cameraAngleValue
+        [uint32]$viewAngleData=[uint32]([long][Math]::Round(4294967296.0*($angle/(2*[Math]::PI))) -band 0xFFFFFFFFL)
+    }
     [uint32]$planeBaseAngleData=([long]$viewAngleData-0x40000000L) -band 0xFFFFFFFFL
     # Actor projection follows Doom's 16.16 transform. Keep the floating-point
     # camera values above for the PowerShell BSP/plane path, but use the same

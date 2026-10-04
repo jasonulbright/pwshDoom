@@ -774,15 +774,16 @@ performance, or human-play validation. Keep the complete Episode 1 human route
 and all broader release gates open; the next cumulative release threshold is
 35 commits.
 
-### Camera-angle conversion checkpoint — October 4, 2026
+### Camera snapshot representation correction — October 4, 2026
 
-The fast renderer now converts the engine's 32-bit `Angle` through its explicit
-radians method for floating geometry and uses `Angle.Data` for fixed lookup
-tables. Source inspection identified the prior unit mismatch; this correction
-has not received a rendered-image or runtime check. The production correction
-is commit 27 after Preview.7; this follow-up aligning two actor fixture helpers
-is commit 28. Package validation, human play, image parity, and performance
-remain open; release threshold is 35 commits.
+`Invoke-GameRenderWorker` renders decoded snapshots whose camera coordinates
+and view height are doubles and whose angle is in radians. Earlier follow-ups
+at commits 27, 28 and 30 incorrectly assumed these transport fields were
+engine `Fixed`/`Angle` instances. The renderer now handles both representations,
+and snapshot fixtures use their existing radian values. This source correction
+is commit 31 after Preview.7; AST parsing and whitespace checks pass, but no
+rendered image or runtime check was run. Package, human-play, fidelity and
+performance gates remain open; the next release threshold is 35 commits.
 
 ### Offline wall-span boundary verification — October 4, 2026
 
@@ -792,11 +793,3 @@ angle and adds two-sided clipping coverage. This does not render a full frame
 or validate the camera-unit fix. The test and documentation update is commit 29
 after Preview.7; runtime image, package, performance, and human-play gates remain
 open.
-
-### Fixed camera-coordinate conversion — October 4, 2026
-
-The fast renderer now uses explicit `Fixed.ToDouble()` values for floating
-camera geometry and original 16.16 data for fixed-point paths. This removes
-implicit number formatting from the conversion. AST parsing and whitespace
-checks pass; output and performance are unverified. This source/documentation
-checkpoint is commit 30 after Preview.7; the release threshold remains 35.

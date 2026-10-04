@@ -1,12 +1,23 @@
 # Investigation ledger
 
+## 2026-10-04 — Correct camera handling for transported snapshots
+
+`Invoke-GameRenderWorker` assigns a decoded snapshot to `Context.World`;
+`New-GameRenderSnapshot` encodes camera coordinates and view height as doubles
+and camera angle as radians. The recent renderer change had incorrectly
+assumed those fields were engine `Fixed`/`Angle` instances. Replaced the
+unconditional typed conversion with representation-aware handling and restored
+the snapshot fixtures to use radian values. PowerShell parsing and whitespace
+checks pass. No renderer, game, or live test ran; image and performance impact
+remain unverified.
+
 ## 2026-10-04 — Preserve fixed camera coordinates explicitly
 
-`Invoke-FastRender` now converts camera X/Y and view height with
-`Fixed.ToDouble()` and uses their original 16.16 `Data` values for fixed-point
-work, rather than converting through each object's formatted string. AST parsing
-and whitespace checks pass. No renderer or live test ran; image impact and
-performance are unmeasured.
+That source follow-up used `Fixed.ToDouble()` and raw `Data` unconditionally.
+Snapshot inspection showed the worker normally receives numeric doubles, so
+this assumption was superseded by the representation-aware branch recorded
+above. Native engine objects still use the explicit conversion; snapshots keep
+their established numeric representation.
 
 ## 2026-10-04 — Correct and run fixed-angle span boundary cases offline
 
@@ -18,16 +29,12 @@ exercise two-sided clipping. All seven synthetic table/span cases now pass.
 This did not launch Doom, load a WAD, or render a full frame. The fixed-angle
 helper's broader image behavior and the camera conversion remain unverified.
 
-## 2026-10-04 — Convert engine camera angles explicitly
+## 2026-10-04 — Initial camera-angle conversion hypothesis
 
-`Invoke-FastRender` now calls the engine `Angle.ToRadian()` method for its
-floating-point camera geometry and passes the original 32-bit `Angle.Data` to
-fixed-angle lookup paths. The engine type stores binary turns and formats its
-string representation in degrees, so direct conversion to a double was
-ambiguous and inconsistent with the trigonometric API. PowerShell AST parsing
-and `git diff --check` pass. Two renderer fixture helpers now convert angles
-explicitly as well. No renderer, game, or live test ran. Rotated-view image
-impact and performance remain unverified.
+The source-only change assumed `Invoke-FastRender` received a native engine
+`Angle`. Inspection of the actual worker transport later showed that its camera
+field is already a radian double. The forced cast and corresponding fixture
+calls were incorrect and have been superseded by representation-aware handling.
 
 ## 2026-10-04 — Map wall spans through fixed-angle projection tables
 
