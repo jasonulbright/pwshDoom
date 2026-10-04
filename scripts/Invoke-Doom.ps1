@@ -42,7 +42,7 @@ function Start-DoomRenderJob {
     $InterpolationTimes.Add($watch.Elapsed.TotalMilliseconds)
     $qpc=[Diagnostics.Stopwatch]::GetTimestamp();$watch.Restart()
     Submit-GameRender $Pool $bytes -ColumnOffset $Viewport.Left -RowOffset $Viewport.Top -FrameNumber ([int][Math]::Floor($Clock.Elapsed.TotalSeconds*60)) -ScreenPixels:$screenPixels -Tic $Snapshot.Tic -MenuPixels:($Snapshot.ScreenKind -eq 2) -AutomapPixels:($Snapshot.ScreenKind -eq 3) -PaletteNumber $Snapshot.PaletteNumber -GammaLevel $GammaLevel
-    return @{Tic=$Snapshot.Tic;Version=$Snapshot.Version;StartQpc=$qpc;SubmitMs=$watch.Elapsed.TotalMilliseconds;ViewportKey=$Viewport.Key;State=$Snapshot.State;Generation=$Snapshot.Generation;Episode=$Snapshot.Episode;Map=$Snapshot.Map;ScreenKind=$Snapshot.ScreenKind;MenuRevision=$Snapshot.MenuRevision;PaletteNumber=$Snapshot.PaletteNumber;GammaLevel=$GammaLevel;PlayerMessage=$Snapshot.PlayerMessage;PlayerMessageTics=$Snapshot.PlayerMessageTics;PlayerMessagePixels=$Snapshot.PlayerMessagePixels}
+    return @{Tic=$Snapshot.Tic;Version=$Snapshot.Version;StartQpc=$qpc;SubmitMs=$watch.Elapsed.TotalMilliseconds;ViewportKey=$Viewport.Key;State=$Snapshot.State;Generation=$Snapshot.Generation;Episode=$Snapshot.Episode;Map=$Snapshot.Map;ScreenKind=$Snapshot.ScreenKind;MenuScreen=$Snapshot.MenuScreen;MenuRevision=$Snapshot.MenuRevision;PaletteNumber=$Snapshot.PaletteNumber;GammaLevel=$GammaLevel;PlayerMessage=$Snapshot.PlayerMessage;PlayerMessageTics=$Snapshot.PlayerMessageTics;PlayerMessagePixels=$Snapshot.PlayerMessagePixels}
 }
 function Add-DoomCompletedFrame {
     param($Present,[long]$EndQpc,[double]$OutputMs,[long]$OutputBytes,[double]$DispatchMs=0,$OutputJob=$null)
@@ -85,7 +85,7 @@ $assetGeneration=1;$loadingStart=$null;$loadingMs=0.0;$loadingWasRunning=$false;
 $recordingPath=$null;$recordingError=$null;$replayVerification=$null;$sourceFingerprint=$null;$sourceMatches=$null
 $menu=$null;$pendingAction=$null;$sessionStart=$null;$sessionPausedMs=0.0;$sessionEvents=[Collections.Generic.List[object]]::new();$sessionScheduleData=@();$scheduleIndex=0;$controlIndex=0;$lastPresentedVersion=-1
 $compactMenuKey=''
-$gammaNotice=$null;$gammaNoticeUntilTic=0
+$gammaNotice=$null;$gammaNoticeUntilWallMs=0.0
 $preferences=New-DoomUserSettings;$initialPreferences=$null;$preferencesHash=$null;$preferencesLoadError=$null
 $preferencesEvents=[Collections.Generic.List[object]]::new()
 $mapInputIndex=0;$inputMapVisible=$false
@@ -296,7 +296,7 @@ try {
                         if($preferences.GammaLevel -ne $priorGammaLevel){
                             $messageCodecs=New-DoomPlayerMessageCodecs $context.PlayPal $Style -GammaLevel $preferences.GammaLevel
                             $pendingFrame=$null;$lastPresentedVersion=-1
-                            if($key -eq 'F11'){$gammaNotice=if($preferences.GammaLevel -eq 0){'GAMMA CORRECTION OFF'}else{"GAMMA CORRECTION LEVEL $($preferences.GammaLevel)"};$gammaNoticeUntilTic=$tics+70}
+                            if($key -eq 'F11'){$gammaNotice=if($preferences.GammaLevel -eq 0){'GAMMA CORRECTION OFF'}else{"GAMMA CORRECTION LEVEL $($preferences.GammaLevel)"};$gammaNoticeUntilWallMs=$wallNow+2000.0}
                         }
                         $preferencesEvents.Add(@{Tic=$tics;WallMs=$wallNow;Success=$true;Values=(Copy-DoomUserSettings $preferences);Persisted=[bool]$SettingsPath})
                     }catch{
@@ -416,6 +416,11 @@ try {
         $snapshot=Read-DoomSimulationSnapshot $simulation $snapshot
         if($snapshot.Tic -eq $tics){$inputMapVisible=$snapshot.AutomapVisible}
         if($snapshot.Generation -ne $assetGeneration){continue}
+        $noticeNowWallMs=$wallClock.Elapsed.TotalMilliseconds
+        if($gammaNotice -and $noticeNowWallMs -ge $gammaNoticeUntilWallMs){
+            $gammaNotice=$null;$gammaNoticeUntilWallMs=0.0
+            if($menu.Screen -eq 7){$lastPresentedVersion=-1}
+        }
         if($inFlight -and (Test-GameRenderCompleted $pool)) {
             $captureDue=$CaptureEveryTics -gt 0 -and $activeFrame.Tic -ge $nextCapture
             $harvestWatch=[Diagnostics.Stopwatch]::StartNew();Wait-GameRender $pool 0 -ReadPixels:$captureDue;$harvestMs=$harvestWatch.Elapsed.TotalMilliseconds
@@ -444,7 +449,7 @@ try {
             if(-not $Headless) {
                 [byte[]]$clearOutput=$emptyOutput
                 if($needsClear){$clearOutput=[Text.Encoding]::UTF8.GetBytes("$esc[0m$esc[2J")}
-                [byte[]]$statusOutput=Get-DoomDisplayMessageOutput $present $viewport -GammaNotice $gammaNotice -GammaNoticeUntilTic $gammaNoticeUntilTic -Style $Style -Codecs $messageCodecs
+                [byte[]]$statusOutput=Get-DoomDisplayMessageOutput $present $viewport -GammaNotice $gammaNotice -GammaNoticeUntilWallMs $gammaNoticeUntilWallMs -NowWallMs $noticeNowWallMs -Style $Style -Codecs $messageCodecs
                 if($Diagnostics) {
                     $statusLine="$esc[$($viewport.StatusTop+1);$($viewport.Left+1)H$esc[0mpwshDoom | WASD move | arrows turn | Ctrl fire | E/Space use | Shift run | 1-7 weapons | P pause | Esc menu"
                     $statusLine+="$esc[$($viewport.StatusTop+2);$($viewport.Left+1)Htic $($snapshot.Tic) | $([Math]::Round($completed/[Math]::Max(.01,$clock.Elapsed.TotalSeconds),1)) completed updates/s | health $($snapshot.Health) | kills $($snapshot.Kills)       "

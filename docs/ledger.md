@@ -1,5 +1,16 @@
 # Investigation ledger
 
+## 2026-10-04 — Keep gamma feedback visible and bounded during pause
+
+F11 is accepted on the pause screen, but the shared player-message gate hid all
+notices on that screen, and the game tic clock stops while paused. The renderer
+now carries the simulation's menu-screen identity, allows only the transient
+gamma notice on the pause screen, and expires it after two wall-clock seconds.
+When it expires in pause, the host requests one replacement frame to restore the
+menu. Added all-style pause/show/expiry cases; they remain unrun under the user's
+active-computer instruction. PowerShell AST parsing and `git diff --check` pass;
+no live test or game process ran.
+
 ## 2026-10-04 — Bring article status up to date
 
 The article still identified R19 as the current local package and did not

@@ -6,8 +6,9 @@ historical.
 
 Open **Escape → Settings** to change preferences. Up/down chooses an
 item; Left/Right or Enter changes its value. Gamma correction ranges from Off
-through levels 1–10; F11 advances one level while playing, shows the selected
-level, and wraps to Off.
+through levels 1–10; F11 advances one level during gameplay or pause, shows the
+selected level, and wraps to Off. Its notice clears after two seconds, including
+while paused.
 Enter activates Reset Defaults or Back. Escape returns to the main menu.
 
 Choose **Configure Keys**, select an action, press Enter, then press the new

@@ -57,14 +57,19 @@ try{
         foreach($kind in 1,2){Check "$style hides notices on screen kind $kind" ((Get-DoomPlayerMessageOutput 'BLUE KEY' 1 $kind $vp -Style $style).Length -eq 0)}
         Check "$style hides expired notice" ((Get-DoomPlayerMessageOutput 'BLUE KEY' 0 0 $vp -Style $style).Length -eq 0)
         Check "$style preserves notices on automap" ((Get-DoomPlayerMessageOutput 'BLUE KEY' 1 3 $vp -Style $style).Length -gt 0)
-        $present=@{Tic=40;ScreenKind=0;PlayerMessage='BLUE KEY';PlayerMessageTics=100;PlayerMessagePixels=$null}
-        $gammaOutput=Get-DoomDisplayMessageOutput $present $vp -GammaNotice 'GAMMA CORRECTION LEVEL 4' -GammaNoticeUntilTic 110 -Style $style
+        $present=@{Tic=40;ScreenKind=0;MenuScreen=0;PlayerMessage='BLUE KEY';PlayerMessageTics=100;PlayerMessagePixels=$null}
+        $gammaOutput=Get-DoomDisplayMessageOutput $present $vp -GammaNotice 'GAMMA CORRECTION LEVEL 4' -GammaNoticeUntilWallMs 2100 -NowWallMs 100 -Style $style
         $gammaText=[Text.Encoding]::UTF8.GetString($gammaOutput)
         Check "$style shows the active gamma level over a game message" ($gammaText.Contains('GAMMA CORRECTION LEVEL 4') -and -not $gammaText.Contains('BLUE KEY'))
-        $expiredOutput=Get-DoomDisplayMessageOutput $present $vp -GammaNotice 'GAMMA CORRECTION LEVEL 4' -GammaNoticeUntilTic 40 -Style $style
+        $expiredOutput=Get-DoomDisplayMessageOutput $present $vp -GammaNotice 'GAMMA CORRECTION LEVEL 4' -GammaNoticeUntilWallMs 100 -NowWallMs 100 -Style $style
         Check "$style restores the game message after the gamma notice expires" ([Text.Encoding]::UTF8.GetString($expiredOutput).Contains('BLUE KEY'))
-        $present.ScreenKind=2
-        Check "$style hides gamma notices on menus" ((Get-DoomDisplayMessageOutput $present $vp -GammaNotice 'GAMMA CORRECTION LEVEL 4' -GammaNoticeUntilTic 110 -Style $style).Length -eq 0)
+        $present.ScreenKind=2;$present.MenuScreen=7
+        $pauseGammaOutput=Get-DoomDisplayMessageOutput $present $vp -GammaNotice 'GAMMA CORRECTION LEVEL 4' -GammaNoticeUntilWallMs 2100 -NowWallMs 100 -Style $style
+        Check "$style shows the gamma level on the pause screen" ([Text.Encoding]::UTF8.GetString($pauseGammaOutput).Contains('GAMMA CORRECTION LEVEL 4'))
+        $expiredPauseOutput=Get-DoomDisplayMessageOutput $present $vp -GammaNotice 'GAMMA CORRECTION LEVEL 4' -GammaNoticeUntilWallMs 100 -NowWallMs 100 -Style $style
+        Check "$style expires the gamma notice while paused" ($expiredPauseOutput.Length -eq 0)
+        $present.MenuScreen=1
+        Check "$style hides gamma notices on other menus" ((Get-DoomDisplayMessageOutput $present $vp -GammaNotice 'GAMMA CORRECTION LEVEL 4' -GammaNoticeUntilWallMs 2100 -NowWallMs 100 -Style $style).Length -eq 0)
         $codecs=New-DoomPlayerMessageCodecs $content.Palette.Data $style
         $pixels=Get-DoomPlayerMessagePixels $font ([Text.Encoding]::ASCII.GetBytes('YOU NEED A RED KEY'))
         $bitmapBytes=Get-DoomPlayerMessageOutput 'YOU NEED A RED KEY' 140 0 $vp -Style $style -Pixels $pixels -Codecs $codecs
