@@ -36,8 +36,8 @@ try{
     $invalid=New-DoomUserSettings;$invalid.Bindings.Fire=$invalid.Bindings.Forward;$rejected=$false;try{$null=Copy-DoomUserSettings $invalid}catch{$rejected=$true};Check 'Reject conflicting persisted game keys' $rejected
     foreach($badVolume in -1,101,'50',50.5,$true){$invalid=New-DoomUserSettings;$invalid.MusicVolume=$badVolume;$rejected=$false;try{$null=Copy-DoomUserSettings $invalid}catch{$rejected=$true};Check "Reject invalid music volume $badVolume" $rejected}
     $invalid=New-DoomUserSettings;$invalid.SoundMuted='false';$rejected=$false;try{$null=Copy-DoomUserSettings $invalid}catch{$rejected=$true};Check 'Reject string mute value' $rejected
-    $aliasCollision=New-DoomUserSettings;$aliasCollision.Bindings.Forward=32;$rejected=$false;try{$null=Copy-DoomUserSettings $aliasCollision}catch{$rejected=$true}
-    Check 'Reject Space as a second action because it remains Use' $rejected
+    $aliasCollision=New-DoomUserSettings;$aliasCollision.Bindings.Forward=32;$compatible=Copy-DoomUserSettings $aliasCollision
+    Check 'Keep a version-four Space movement binding' ($compatible.Bindings.Forward -eq 32 -and $compatible.Version -eq 4)
     $hash2=Write-DoomUserSettings $path $values $hash;$rejected=$false
     try{$null=Write-DoomUserSettings $path $copy $hash}catch{$rejected=$true}
     Check 'Stale writer rejected without changing newer file' ($rejected -and (Get-FileHash $path).Hash -ceq $hash2)
@@ -80,14 +80,12 @@ try{
     Check 'Conflicting key leaves both actions unchanged' ($menu.Settings.Bindings.Forward -eq 82 -and $menu.Settings.Bindings.StrafeRight -eq 68 -and -not $action.SettingsChanged)
     $null=Invoke-DoomMenuKey $menu Enter;$action=Invoke-DoomMenuKey $menu Capture -CaptureVirtualKey 80
     Check 'Pause key remains reserved' ($menu.Settings.Bindings.Forward -eq 82 -and -not $action.SettingsChanged -and $menu.MessageTitle -eq 'KEY NOT AVAILABLE')
-    foreach($aliasKey in 16,32){
-        $aliasMenu=New-DoomMenuState;$aliasMenu.Screen=15;$aliasMenu.Choice=0;$aliasMenu.AwaitingBinding=$true
-        $action=Invoke-DoomMenuKey $aliasMenu Capture -CaptureVirtualKey $aliasKey
-        Check "Reject reserved key $aliasKey as a second action" ($aliasMenu.Settings.Bindings.Forward -eq 87 -and -not $action.SettingsChanged -and $aliasMenu.MessageTitle -eq 'KEY NOT AVAILABLE')
-    }
+    $aliasMenu=New-DoomMenuState;$aliasMenu.Screen=15;$aliasMenu.Choice=0;$aliasMenu.AwaitingBinding=$true
+    $action=Invoke-DoomMenuKey $aliasMenu Capture -CaptureVirtualKey 32
+    Check 'Allow Space as a custom movement binding' ($aliasMenu.Settings.Bindings.Forward -eq 32 -and $action.SettingsChanged -and $aliasMenu.MessageTitle -eq 'KEY ASSIGNED')
     $runMenu=New-DoomMenuState;$runMenu.Screen=15;$runMenu.Choice=8;$runMenu.AwaitingBinding=$true
     $action=Invoke-DoomMenuKey $runMenu Capture -CaptureVirtualKey 16
-    Check 'Allow Shift as the Run binding' ($runMenu.Settings.Bindings.Run -eq 16 -and -not $action.SettingsChanged -and $runMenu.MessageTitle -eq 'KEY ASSIGNED')
+    Check 'Keep Shift as the Run binding' ($runMenu.Settings.Bindings.Run -eq 16 -and -not $action.SettingsChanged -and $runMenu.MessageTitle -eq 'KEY ASSIGNED')
     $null=Invoke-DoomMenuKey $menu Escape
     Check 'Key screen returns to settings' ($menu.Screen -eq 14 -and $menu.Choice -eq 5)
     $null=Invoke-DoomMenuKey $menu Down;$action=Invoke-DoomMenuKey $menu Enter
@@ -98,6 +96,14 @@ try{
     $state=@{Keys=[bool[]]::new(256);Pressed=[bool[]]::new(256);Suppressed=[bool[]]::new(256)};$cmd=[SettingsTestCommand]::new()
     $custom=New-DoomKeyBindings;$custom.Forward=82;$state.Keys[82]=$true;Set-DoomInputCommand $state $cmd -Bindings $custom
     Check 'Custom key reaches gameplay command generation' ($cmd.ForwardMove -eq 25)
+    $aliasState=@{Keys=[bool[]]::new(256);Pressed=[bool[]]::new(256);Suppressed=[bool[]]::new(256)};$aliasCommand=[SettingsTestCommand]::new()
+    $aliasState.Keys[32]=$true;$spaceBindings=New-DoomKeyBindings;$spaceBindings.Forward=32
+    Set-DoomInputCommand $aliasState $aliasCommand -Bindings $spaceBindings
+    Check 'Custom Space movement does not also invoke Use' ($aliasCommand.ForwardMove -eq 25 -and ($aliasCommand.Buttons -band 2) -eq 0)
+    [Array]::Clear($aliasState.Keys);$aliasState.Keys[87]=$true;$aliasState.Keys[16]=$true
+    $shiftBindings=New-DoomKeyBindings;$shiftBindings.Fire=16;$shiftBindings.Run=82
+    Set-DoomInputCommand $aliasState $aliasCommand -Bindings $shiftBindings
+    Check 'Custom Shift fire does not also activate the Run alias' ($aliasCommand.ForwardMove -eq 25 -and ($aliasCommand.Buttons -band 1) -ne 0)
     $state.Keys[82]=$false
     $state.Keys[87]=$true;$state.Keys[68]=$true;$state.Keys[37]=$true
     foreach($always in $false,$true){foreach($shift in $false,$true){foreach($turn in 50,100,150){

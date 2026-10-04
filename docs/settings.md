@@ -9,7 +9,9 @@ key. Escape cancels a pending capture. Movement, strafe, turn, fire, use and run
 bindings persist with the other preferences. Menu, pause, weapon-select and
 automap keys stay reserved; duplicate action keys are rejected. The defaults
 remain W/S/A/D, arrow-key turning, Ctrl fire, E use and Shift run, with the
-existing arrow movement and Space/Enter use aliases retained.
+existing arrow movement and Space/Enter use aliases retained. If Space or Shift
+is assigned to a different action, that custom action takes precedence over its
+Use or Run alias while the key is held.
 
 | Preference | Default | Behavior |
 | --- | --- | --- |

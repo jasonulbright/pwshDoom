@@ -88,7 +88,9 @@ function Set-DoomInputCommand {
         if($State.ContainsKey('Suppressed') -and $State.Suppressed[$key]){$keys[$key]=$false}
         elseif($State.Pressed[$key]){$keys[$key]=$true}
     }
-    $Command.Clear();$run=($keys[[int]$Bindings.Run] -or $keys[16]) -xor [bool]$AlwaysRun
+    $shiftRunAlias=([int]$Bindings.Forward -ne 16 -and [int]$Bindings.Backward -ne 16 -and [int]$Bindings.StrafeLeft -ne 16 -and [int]$Bindings.StrafeRight -ne 16 -and [int]$Bindings.TurnLeft -ne 16 -and [int]$Bindings.TurnRight -ne 16 -and [int]$Bindings.Fire -ne 16 -and [int]$Bindings.Use -ne 16)
+    $spaceUseAlias=([int]$Bindings.Forward -ne 32 -and [int]$Bindings.Backward -ne 32 -and [int]$Bindings.StrafeLeft -ne 32 -and [int]$Bindings.StrafeRight -ne 32 -and [int]$Bindings.TurnLeft -ne 32 -and [int]$Bindings.TurnRight -ne 32 -and [int]$Bindings.Fire -ne 32 -and [int]$Bindings.Run -ne 32)
+    $Command.Clear();$run=($keys[[int]$Bindings.Run] -or ($keys[16] -and $shiftRunAlias)) -xor [bool]$AlwaysRun
     if($AutomapVisible){foreach($key in 37,38,39,40){$keys[$key]=$false}}
     $speed=if($run){50}else{25};$strafe=if($run){40}else{24};$turn=if($run){1280}else{640}
     $turn=[int]($turn*$TurnSpeed/100)
@@ -97,7 +99,7 @@ function Set-DoomInputCommand {
     if($keys[[int]$Bindings.StrafeRight]){$Command.SideMove+=$strafe};if($keys[[int]$Bindings.StrafeLeft]){$Command.SideMove-=$strafe}
     if($keys[[int]$Bindings.TurnLeft]){$Command.AngleTurn+=$turn};if($keys[[int]$Bindings.TurnRight]){$Command.AngleTurn-=$turn}
     if($keys[[int]$Bindings.Fire]){$Command.Buttons=$Command.Buttons -bor 1}
-    if($keys[[int]$Bindings.Use] -or $keys[32] -or $keys[13]){$Command.Buttons=$Command.Buttons -bor 2}
+    if($keys[[int]$Bindings.Use] -or ($keys[32] -and $spaceUseAlias) -or $keys[13]){$Command.Buttons=$Command.Buttons -bor 2}
     for($key=49;$key -le 55;$key++) {if($State.Pressed[$key]){$Command.Buttons=$Command.Buttons -bor 4 -bor (($key-49) -shl 3)}}
     [Array]::Clear($State.Pressed)
 }
