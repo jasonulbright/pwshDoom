@@ -115,7 +115,8 @@ recording results are tracked in the ledger as they are verified.
 
 ## Actual window recordings
 
-The accepted viewing copies are under ignored `local/recordings/`:
+The accepted viewing copies were reviewed and later removed from ignored
+`local/recordings/`; the filenames and measurements below are historical:
 
 | Style | Viewing copy | Duration / decoded frames |
 | --- | --- | --- |
@@ -203,8 +204,8 @@ To repeat the moving comparison from PowerShell 7:
 The optimized Matrix [recorded run](../results/automap-numeric-recorded-matrix-game.json)
 finishes 350 tics in 10.0315 s and writes 599 frames (59.71/s). Its input/mask stream
 matches the replay fixture and both checkpoints match. The actual window-capture
-viewing copy is `local/recordings/automap-numeric-matrix-view.mp4`: 10.0667 s,
-604 fully decoded 60-CFR frames. The original remains alongside it. A contact
+viewing copy `automap-numeric-matrix-view.mp4` was 10.0667 s with 604 fully
+decoded 60-CFR frames. Both reviewed MP4s were later removed. A contact
 sheet confirms map/pan/HUD and return to katakana gameplay; an unused tile is black.
 Small-label loss and dimness remain. This measures completed writes and provides
 visual evidence; it does not identify unique game frames at every monitor refresh.

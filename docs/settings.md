@@ -90,7 +90,7 @@ checks and metadata for three actual window recordings. Each consumes all 350
 fixture commands and map masks, performs five successful persisted edits, and
 matches both gameplay/map checkpoints. No game/recorder processes remain at audit.
 
-| Style | Viewing copy under `local/recordings/` | Duration / decoded frames |
+| Style | Historical viewing-copy name | Duration / decoded frames |
 | --- | --- | --- |
 | Classic | `settings-classic-view.mp4` | 15.00 s / 900 |
 | Matrix | `settings-matrix-view.mp4` | 15.17 s / 910 |
@@ -154,11 +154,11 @@ keeps default sound gain after reset/error recovery and closes the devices.
 The actual color-art recording (`results/sound-settings-recording.json`) performs
 all six edits and retains all eight campaign checkpoints. Full-size samples show
 all six readable settings rows, sound at 70%, mute Off and mute On, and gameplay.
-The separate viewing copy `local/recordings/sound-settings-ansiart-view.mp4`
-fully decodes to 3,668 frames over 61.133 seconds at 1280×800. The original is
-retained. This video is silent, with no tint/speed/scaling change; encoded frame
-count is not a unique-display count. QPC at recorder process creation is not
-assumed to be the first encoded frame's timestamp.
+The separate viewing copy `sound-settings-ansiart-view.mp4` decoded to 3,668
+frames over 61.133 seconds at 1280×800. It and the original MP4 were later
+removed after review. The video was silent, with no tint/speed/scaling change;
+encoded frame count is not a unique-display count. QPC at recorder process
+creation is not assumed to be the first encoded frame's timestamp.
 
 `results/sound-settings-validation.json` pins fourteen current source files and
 passes 26 evidence checks over 207 accepted named checks, the independent PCM

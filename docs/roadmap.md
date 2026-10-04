@@ -297,7 +297,7 @@ The user requested autonomous work across the full Ultimate Doom gates, retainin
 
 Preview.4 was published and its downloaded ZIP verified against the local archive; see the [package receipt](../results/preview4-package-validation-20260929.json). It supersedes the historical Preview.3 publication status in the milestone table above. The full release remains unqualified.
 
-Development now restores [pickup/key-lock notices](player-notices.md) with the original IWAD font in Classic and readable terminal lettering in Matrix/AnsiArt. The first actual Classic performance run exposed a missing host codec import despite passing focused/headless checks. That dependency is fixed, and three live save-fixture recordings now consume all 350 commands and match eleven checkpoints each. Their original media/audio/clock metadata remain local. They do not complete maps. The independent E1M1 route and continuation through intermission into E1M2 remain passing regressions.
+Development now restores [pickup/key-lock notices](player-notices.md) with the original IWAD font in Classic and readable terminal lettering in Matrix/AnsiArt. The first actual Classic performance run exposed a missing host codec import despite passing focused/headless checks. That dependency is fixed, and three live save-fixture recordings now consume all 350 commands and match eleven checkpoints each. Their reviewed MP4s were later removed; audio and clock metadata remain local. They do not complete maps. The independent E1M1 route and continuation through intermission into E1M2 remain passing regressions.
 
 The next performance evidence uses the [frozen numerical protocol](release-performance-protocol.md): sequential live routes with audio, explicit launch timing, owned-process CPU/memory samples and ETW display events, including transition holds. Repeated pacing, full-campaign play, independent original-executable fidelity, acoustic/physical-input review and second-hardware/display qualification remain open. Keep the complete Ultimate Doom scope and the one full Episode 1 human route intact.
 
@@ -733,9 +733,9 @@ and second-hardware gate open. This status note was recorded at 14 commits
 after Preview.7; derive the live count from Git and cut the next cumulative
 release at 35.
 
-Current continuation — October 4, 2026: the branch is at 19 commits after
-Preview.7 (source `656e093`) and remains a development handoff without extracted
-package validation. Gamma correction is saved in settings and F11 now displays
+Current continuation — October 4, 2026: at documentation revision `2107e57`,
+the branch stood at 20 commits after Preview.7; implementation source `656e093`
+remains a development handoff without extracted-package validation. Gamma correction is saved in settings and F11 now displays
 the selected level briefly; the change has PowerShell AST and whitespace checks
 only, with no runtime or visual-compatibility evidence. Reviewed gameplay MP4s
 were removed from `local/recordings`; JSON receipts, audio, review frames, logs

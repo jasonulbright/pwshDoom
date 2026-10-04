@@ -42,7 +42,8 @@ Three actual save-fixture recordings also consume all 350 commands and match
 eleven checkpoints each. Classic and color art use default Strips output;
 Matrix exercises AsyncBatch. Reported game/loading output ownership intervals
 are disjoint, with one-millisecond rounding tolerance. Reviewed samples show
-the banner in every style. Original videos/audio/clock metadata remain local.
+the banner in every style. Reviewed MP4s were later removed; scoped audio and
+clock metadata remain local.
 
 The ordinary route's first loading update takes 7.15 ms to dispatch and has a
 989.6 ms observed completion interval. Later observations are about 100 ms

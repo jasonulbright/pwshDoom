@@ -50,7 +50,7 @@ statistics. It likewise lacks monitor-presentation telemetry because the
 installed PresentMon CLI could not start its ETW trace under the current
 account's permissions.
 
-At 60 seconds in each original movie, the reviewed frames show centered Classic gameplay with the HUD and no visible external occlusion. Different startup durations mean those samples are not the same game state and are not pixel-equivalence evidence. The existing large margins and approximately 1600×900 physical image/aspect issue remain. Raw movies, PCM and extracted review PNGs remain in ignored `local/recordings`; portable receipts are backed up in Git.
+At 60 seconds in each original movie, the reviewed frames showed centered Classic gameplay with the HUD and no visible external occlusion. Different startup durations mean those samples are not the same game state and are not pixel-equivalence evidence. The existing large margins and approximately 1600×900 physical image/aspect issue remain. The reviewed MP4s were later removed; PCM/WAV, extracted review PNGs and portable receipts remain under ignored `local/recordings` and tracked `results/`.
 
 ## Reject StringBuilder ANSI strip assembly (2026-09-27)
 

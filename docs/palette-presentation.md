@@ -112,8 +112,9 @@ All-gap maxima including save handoffs are2.888/3.014 seconds. Both have three
 software audio queue-empty observations; interior capture alignment fills
 1,152/1,158 frames. These are recorded isolated-effect workloads, not a causal
 speedup, uninterrupted audio or60-display certification. Receipts are
-`results/palette-{classic,matrix}-third-{recorded,timing,review}.json`; movies
-remain in `local/recordings/palette-{classic,matrix}-third-av.mp4`.
+`results/palette-{classic,matrix}-third-{recorded,timing,review}.json`; the
+reviewed movies `palette-{classic,matrix}-third-av.mp4` were later removed from
+`local/recordings`.
 
 The first candidate-recorder AnsiArt run passes all55 checks and full movie
 decoding. All five extracted frames were inspected: red damage, gold automap,
@@ -122,13 +123,13 @@ reduces scene/HUD contrast; large surrounding margins remain. The run retains
 three audio queue-empty observations,1,114 internal alignment-fill frames and
 a3.010-second maximum gap including save handoffs. No60-display or acoustic
 continuity claim follows. Receipts: `results/palette-ansiart-pinned-first-{recorded,timing,review}.json`;
-movie: `local/recordings/palette-ansiart-pinned-first-av.mp4`.
+the reviewed movie `palette-ansiart-pinned-first-av.mp4` was later removed.
 
 The already-started repeat also passes55 integrity checks, but is substantially
 slower:22.898tics/25.384writes per active second,63 queue-empty observations,
 66,025 interior alignment-fill frames and5.895seconds maximum gap including
-handoffs. Retain `results/palette-ansiart-pinned-second-{recorded,timing}.json`
-and its original movie. Correct state/input/media accounting is not a pacing
+handoffs. Retain `results/palette-ansiart-pinned-second-{recorded,timing}.json`;
+the reviewed original movie was later removed. Correct state/input/media accounting is not a pacing
 or playability pass. The cause of the run-to-run slowdown is not established.
 
 Two earlier captures (Classic second, AnsiArt third) crashed in external FFmpeg
@@ -152,7 +153,9 @@ and presentation regression, not a physical keyboard playthrough.
 
 ## Reproduce
 
-Use fresh paths; WADs, saves and movies remain user-local and ignored by Git.
+Use fresh paths; WADs and saves remain user-local and ignored by Git. Remove
+reviewed movie outputs, following the recording-retention rule in
+[recordings](recordings.md).
 
 ```powershell
 ./scripts/Test-PalettePresentation.ps1 -Output local/my-palette-checks.json

@@ -1,5 +1,14 @@
 # Investigation ledger
 
+## 2026-10-04 — Correct historical video availability in documentation
+
+After the reviewed gameplay MP4s had been removed, older recording, campaign,
+audio, menu and rendering guides still described some files as retained locally.
+Corrected those 27 guides to make the removal explicit while preserving capture
+names, hashes, timings, receipts and visual/audio findings. WAV/audio, JSON/log
+metadata and review images remain where recorded. This was documentation-only;
+no media changed and no live tests were run. `git diff --check` passes.
+
 ## 2026-10-04 — Confirm recording and reference-file disposition
 
 The exact `/docs/gebbdoom.pdf` rule already exists in `.gitignore` (line 18);

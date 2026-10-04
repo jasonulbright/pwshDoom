@@ -78,7 +78,7 @@ Full recorded playback uses a five-minute safety bound. Recorder validation ceil
 
 The recording does **not** pass full audio qualification. Only 7,095 packets are consumed; 23 remain queued at shutdown. Of 8,939,700 submitted frames, 8,934,660 return and 5,040 are cancelled. The generic campaign audit correctly fails its all-audio-consumed assertion. The existing shutdown sets the audio worker's stop flag immediately; the earlier short prefix happened to empty its queue before close. A successful prefix therefore did not establish that full-route shutdown drains queued audio.
 
-The original movie, scoped PCM and separate transition excerpt remain local. Portable game/capture/mux/input/source receipts and the failed audit are retained under `results/e1m3-matrix-second-*`. Fix bounded replay-end audio draining and repeat recorded qualification before promoting this to a successful audiovisual campaign result.
+The original movie and separate transition excerpt were later removed; scoped PCM remains local. Portable game/capture/mux/input/source receipts and the failed audit are retained under `results/e1m3-matrix-second-*`. Fix bounded replay-end audio draining and repeat recorded qualification before promoting this to a successful audiovisual campaign result.
 
 ## Third recording and pacing variation
 

@@ -40,7 +40,7 @@ continuous playback.
 
 The portable results are `audio-publication-first.json`, `audio-route-early-audio-timing.json` and `music-route-early-audio-evidence.json`. Complete game/audio/capture/merge/source receipts are copied byte-identically into `results/music-route-early-audio-*.json`.
 
-The actual full audiovisual movie is retained locally as `local/recordings/music-route-early-audio-av.mp4`, SHA-256 `54A7D365BE4148EB032638E39C68CDCF4274614195A40783C8D90DFAC8D61698`. Its real-time transition excerpt is `music-route-early-audio-transitions.mp4`, SHA-256 `9BD690113BD1B246649B29628BC1FEE3E43248DEB32FF5B50C464A2739C16498`. Both decode successfully. Sampled actual intermission/E1M2 frames preserve the existing low-contrast block UI and katakana gameplay. This is not a listening test. Media and user assets remain ignored and outside Git backup.
+At review time, the full audiovisual movie `music-route-early-audio-av.mp4` (SHA-256 `54A7D365BE4148EB032638E39C68CDCF4274614195A40783C8D90DFAC8D61698`) and transition excerpt `music-route-early-audio-transitions.mp4` (SHA-256 `9BD690113BD1B246649B29628BC1FEE3E43248DEB32FF5B50C464A2739C16498`) decoded successfully. The reviewed MP4s were later removed; their hashes, receipts and sampled intermission/E1M2 findings remain. The samples show the existing low-contrast block UI and katakana gameplay. This is not a listening test.
 
 Use the [campaign recording command](campaign-music.md), then analyze fresh paths:
 

@@ -39,7 +39,7 @@ Offline images were inspected for E1 stats/next-map and E2–E4 text/E4 artwork.
 
 All three styles completed the same 1,747-command session with no game error, no viewport pause, and E1M2 frames rendered with generation 2. Captures ran sequentially with unchanged runtime source and no concurrent study benchmark or video export. They are silent while audio remains unfinished.
 
-| Style | Viewing copy under `local/recordings/` | Video duration | Active tics/sec | Completed writes/sec | Asset handoff |
+| Style | Historical viewing-copy name | Video duration | Active tics/sec | Completed writes/sec | Asset handoff |
 | --- | --- | ---: | ---: | ---: | ---: |
 | Classic | `session-classic.mp4` | 51.5 s | 34.712 | 58.217 | 0.910 s |
 | Matrix / Katakana | `session-matrix.mp4` | 51.6 s | 34.718 | 59.421 | 0.938 s |
@@ -49,7 +49,7 @@ These recorded-run rates include UI/map-transition work. The explicitly paused a
 
 Viewing copies retain the handoff at its actual speed. Originals retain startup/chrome/margins and console return. Classic's 1600×902 crop includes a one-pixel alignment margin above and below the 1600×900 game image; character copies are 1280×800. Full decode counted 3,090 / 3,096 / 3,102 frames, including possible capture duplicates. Samples at 45.5, 47.5 and 50.5 seconds show stats, next-map screens, and the destination geometry/HUD. Classic's text is readable; character conversion obscures small intermission text, particularly in Matrix. Menu readability is a concrete M2 requirement.
 
-The [recording manifest](../results/session-recordings.json) retains hashes, crop/trim parameters, raw game-report links and inspection scope. The [source manifest](../results/session-sources.json) freezes 224 runtime/capture files. The [final audit](../results/session-validation.json) verifies those hashes, 69 script/bundle parses, six video hashes, the functional result set and zero remaining owned game/recorder processes. Videos and extracted QA images remain ignored/local.
+The reviewed videos were later removed; the [recording manifest](../results/session-recordings.json) retains hashes, crop/trim parameters, raw game-report links and inspection scope. The [source manifest](../results/session-sources.json) freezes 224 runtime/capture files. The [final audit](../results/session-validation.json) verifies those hashes, 69 script/bundle parses, six video hashes, the functional result set and zero remaining owned game/recorder processes. Extracted QA images remain ignored/local.
 
 ## Reproduce targeted checks
 

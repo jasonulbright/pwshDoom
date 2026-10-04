@@ -29,7 +29,9 @@ The initial intermission image was unreadable character noise. Intermission/fina
 
 Both character modes pass the seven-worker screen/menu/automap/map-reload fixture, each comparing 256,000 pixels and 28 encoded strips without restarting workers. The existing menu tests pass 125 checks and 46 screen fixtures; the independent character codec suite also passes. See [character modes](character-modes.md). Those checks support the encoding/transport change, not full rendering fidelity.
 
-Full-window audiovisual movies remain under ignored `local/recordings/`:
+The following full-window audiovisual movies were reviewed and later removed
+from ignored `local/recordings/`; their names, hashes, clocks and findings are
+preserved here and in the JSON receipts:
 
 ```text
 music-route-matrix-first-av.mp4
@@ -40,9 +42,9 @@ music-route-color-ui-av.mp4
   EF9714380BC46A5D7E063986BB3688D7D6238532C3BA2309FDD129B663B3F01F
 ```
 
-Corresponding `-transitions.mp4` excerpts preserve the actual map-handoff time and full window. Their exact offsets, durations and hashes are in `results/music-route-*-viewing.json`. Full movies and excerpts decode successfully. The recording pipeline preserves compressed video packets and clocks while placing captured PCM on the original WGC QPC timeline; see [audiovisual recording](audiovisual-recording.md). Sampled visual review does not establish human listening or physical screen/speaker synchronization.
+The corresponding `-transitions.mp4` excerpts preserved actual map-handoff time and the full window. Their exact offsets, durations and hashes are in `results/music-route-*-viewing.json`. The movies and excerpts decoded successfully when reviewed; those MP4 files were later removed. The recording pipeline's packet and clock findings, including PCM placement on the original WGC QPC timeline, remain documented in [audiovisual recording](audiovisual-recording.md). Sampled visual review does not establish human listening or physical screen/speaker synchronization.
 
-Complete game/capture/audio/merge/source receipts are copied byte-identically into `results/music-route-*.json`. Commercial assets, generated sound and video remain local and outside Git backup.
+Complete game/capture/audio/merge/source receipts are copied byte-identically into `results/music-route-*.json`. Commercial assets and generated sound remain local and outside Git backup; reviewed gameplay video files were removed.
 
 ## Open audio and pacing issue
 

@@ -34,13 +34,13 @@ Aggregate write rates from menu demonstrations are unsuitable for gameplay perfo
 
 The final three finite tests open menus, choose E2M1 at skill 4, resume gameplay, pause/resume, show controls, cancel quit once, then confirm quit. They use the recorded schedule in [menu-demo-schedule.json](../results/menu-demo-schedule.json) and the existing scripted game inputs. This is UI/session evidence, not an E2M1 completion route or a physical keyboard playtest.
 
-| Viewing copy under `local/recordings/` | Duration | Fully decoded movie frames | Crop |
+| Historical viewing-copy name | Duration | Fully decoded movie frames | Crop |
 | --- | ---: | ---: | --- |
 | `menu-verified-classic.mp4` | 18.9 s | 1,134 | 1600×902 |
 | `menu-verified-matrix.mp4` | 19.2 s | 1,152 | 1280×800 |
 | `menu-verified-ansiart.mp4` | 19.9 s | 1,194 | 1280×800 |
 
-The `-full.mp4` originals are actual Windows.Graphics.Capture footage. Viewing copies remove startup/console return and fixed margins, retain the handoff, and make no speed change, rescaling or added effect. Classic includes one alignment pixel above and below the 1600×900 game crop. H.264 re-encoding is lossy; 60 CFR includes duplicate frames and static menus. These clips have no audio. Exact hashes, capture/export arguments, and source references are in [menu-recordings.json](../results/menu-recordings.json).
+The `-full.mp4` originals were actual Windows.Graphics.Capture footage. Viewing copies removed startup/console return and fixed margins, retained the handoff, and made no speed change, rescaling or added effect. The reviewed originals and copies were later removed. Classic includes one alignment pixel above and below the 1600×900 game crop. H.264 re-encoding is lossy; 60 CFR includes duplicate frames and static menus. These clips had no audio. Exact hashes, capture/export arguments, and source references are in [menu-recordings.json](../results/menu-recordings.json).
 
 Six samples per style at viewing seconds 1.8, 4.8, 8.4, 10.2, 12.8 and 14.2 show gameplay, main menus, skill or confirmation screens, pause guidance and controls. Enlarged instructions fit and are readable in these samples. Matrix remains fairly dim; brightness and physical playability remain tuning/qualification work. Sampling does not certify every movie frame.
 

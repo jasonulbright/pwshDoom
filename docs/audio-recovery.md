@@ -30,7 +30,7 @@ The corrected worker also passes ten music/control/independent-PCM checks, six e
 
 ## Recordings and reproduction
 
-Full game, recording, audio, merge and pre-run source receipts for `music-route-isolated-first`, `music-route-rebuffer-first` and `music-route-rebuffer-fixed` are copied byte-identically into `results/`. Raw audiovisual files remain in ignored `local/recordings/`, outside the Git backup. The corrected movie SHA-256 is `62F2CECFD133AEA4AD25E5C6C053DD371819399A012C9B8FDBA954AAB24DEB46`; its real-time transition excerpt is `music-route-rebuffer-fixed-transitions.mp4`, SHA-256 `3099D7BB0C6C13A4F9F09876487627818122F29294D534ADFAD329B573C47A83`.
+Full game, recording, audio, merge and pre-run source receipts for `music-route-isolated-first`, `music-route-rebuffer-first` and `music-route-rebuffer-fixed` are copied byte-identically into `results/`. The reviewed audiovisual MP4s were later removed from ignored `local/recordings/`. The corrected movie had SHA-256 `62F2CECFD133AEA4AD25E5C6C053DD371819399A012C9B8FDBA954AAB24DEB46`; its real-time transition excerpt `music-route-rebuffer-fixed-transitions.mp4` had SHA-256 `3099D7BB0C6C13A4F9F09876487627818122F29294D534ADFAD329B573C47A83`.
 
 The movie and excerpt decode successfully. Sampled intermission and E1M2 frames were visually inspected: block labels remain recognizable but low-contrast in Matrix, and gameplay retains katakana. This is not a human listening or physical speaker/display synchronization test.
 

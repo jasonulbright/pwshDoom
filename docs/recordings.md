@@ -68,7 +68,7 @@ Both captures complete the same E1M1 route with 1,560 simulation tics, five kill
 
 Both files are 1280×800 H.264/yuv420p at an encoded 60 FPS. Full decode counted 2,688 and 2,700 frames respectively. These frame counts include any capture/resampling duplicates; no new PresentMon result or unique displayed-frame-rate claim is made here. The game reports are [Matrix](../results/recorded-matrix-katakana-game.json) and [AnsiArt](../results/recorded-ansiart-katakana-game.json). Recording/export parameters, video hashes and inspection findings are in [the recording manifest](../results/katakana-recordings.json); [the source manifest](../results/katakana-sources.json) fixes the tested runtime bytes.
 
-The original `*-katakana-full.mp4` files retain startup, window chrome, margins and the short return to the console. `scripts/Export-DoomRecording.ps1` makes separate viewing copies. On this machine the observed game rectangle is X=1080, Y=304, width=1280, height=800: 160×50 cells at 8×16 pixels, centered at column 135 / row 17, below 32 pixels of Terminal chrome. These coordinates are specific to this captured window and font, not universal crop defaults.
+The original `*-katakana-full.mp4` files included startup, window chrome, margins and the short return to the console; the reviewed originals and viewing copies were later removed. `scripts/Export-DoomRecording.ps1` made the separate viewing copies. On this machine the observed game rectangle was X=1080, Y=304, width=1280, height=800: 160×50 cells at 8×16 pixels, centered at column 135 / row 17, below 32 pixels of Terminal chrome. These coordinates are specific to that captured window and font, not universal crop defaults.
 
 ```powershell
 pwsh -NoProfile -File scripts/Export-DoomRecording.ps1 -InputPrefix local/recordings/matrix-katakana-full -OutputFile local/recordings/my-matrix-view.mp4 -X 1080 -Y 304 -Width 1280 -Height 800
@@ -79,13 +79,14 @@ The exporter checks the original hash and successful stable-viewport game report
 
 The updated codec passes 144 serial/partition cases across both styles and both alphabets, eight independent brightness/edge probes, six invalid-dimension guards and ten viewport cases. Each katakana style also passes five real worker views: 320,000 source pixels and 35 encoded strip comparisons. Classic's 24 ANSI round trips pass. [The final validation record](../results/katakana-validation.json) records source hashes, syntax checks, result hashes and process cleanup. The recording request is also retained in `AGENTS.md` for future live effect tests.
 
-The newer [menu recordings](menus.md#actual-terminal-recordings) demonstrate all three styles with episode/difficulty selection, pause, readable instructions, and quit confirmation. Their viewing copies are `menu-verified-classic.mp4`, `menu-verified-matrix.mp4` and `menu-verified-ansiart.mp4` under `local/recordings/`. These are finite UI tests with static-menu holds and no audio; their aggregate writes are not gameplay performance measurements. Earlier captures remain available as historical evidence.
+The newer [menu recordings](menus.md#actual-terminal-recordings) demonstrated all three styles with episode/difficulty selection, pause, readable instructions and quit confirmation. Their historical viewing-copy names are `menu-verified-classic.mp4`, `menu-verified-matrix.mp4` and `menu-verified-ansiart.mp4`; the reviewed MP4s were later removed from `local/recordings/`. These were finite UI runs with static-menu holds and no audio; their aggregate writes are not gameplay performance measurements. JSON receipts and review findings remain as historical evidence.
 
 The October2 scheduler fixtures record current Classic, Matrix and AnsiArt
 with actual game loopback audio, two save loads, automap and notice effects.
 Each consumes350 commands, matches eleven checkpoints and exercises catch-up
-bursts. Original movies are `command-burst-readable-{Style}-r1-av.mp4` under
-ignored `local/recordings/`. [Portable validation, media/source hashes and six
+bursts. The historical original-movie names are
+`command-burst-readable-{Style}-r1-av.mp4`; reviewed MP4s were later removed
+from ignored `local/recordings/`. [Portable validation, media/source hashes and six
 reviewed samples](../results/command-burst-live-20261002.json) retain exact
 control/input/audio accounting and the unexercised multi-command boundary
 branch. These recorded tests do not qualify acoustic latency, campaign

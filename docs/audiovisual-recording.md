@@ -22,13 +22,13 @@ This supplies a common clock without estimating the WGC origin from process laun
 
 All three run the same eight-second E1M1 route prefix with qualified E1M1 music and effects. Each finishes 279 simulation/audio packets and returns all 351,540 submitted audio frames. The only reported audio starvation observations occur after final packet 278 during shutdown. Instrumentation and the intermission synthesis job overlap these runs; they are not clean performance trials.
 
-| Style | Full movie under `local/recordings/` | Recorded size | Video frames including startup | Console writes during game |
+| Style | Historical full-movie name | Recorded size | Video frames including startup | Console writes during game |
 | --- | --- | --- | --- | --- |
 | Matrix | `music-matrix-wgc-merged.mp4` | 1472×1006 | 2,373 | 432 |
 | Color-art | `music-color-wgc-first-av.mp4` | 1472×1006 | 2,409 | 389 |
 | Classic | `music-classic-wgc-first-av.mp4` | 2912×1452 | 2,553 | 410 |
 
-Console writes are not distinct displayed updates; recording at 60 fps does not prove the game presents 60 distinct frames/sec. Sampled frames were visually inspected and show the actual scene/HUD in each mode. Classic includes substantial margins and does not qualify 1080p fit. Six-second viewing copies are `music-matrix-wgc-play.mp4`, `music-color-wgc-play.mp4` and `music-classic-wgc-play.mp4`; originals remain intact. Full movies and clips completely decode with picture and audio streams. Nonzero digital game audio is verified; no human-listening or microphone measurement is claimed.
+Console writes are not distinct displayed updates; recording at 60 fps does not prove the game presents 60 distinct frames/sec. Sampled frames were visually inspected and show the actual scene/HUD in each mode. Classic includes substantial margins and does not qualify 1080p fit. Historical six-second viewing-copy names are `music-matrix-wgc-play.mp4`, `music-color-wgc-play.mp4` and `music-classic-wgc-play.mp4`; the reviewed MP4s were later removed. Full movies and clips decoded with picture and audio streams at review time. Nonzero digital game audio is verified; no human-listening or microphone measurement is claimed.
 
 Full movie SHA-256 values:
 
@@ -85,4 +85,4 @@ Use fresh output paths and a valid local music catalog with its qualified payloa
   -OutputPrefix ./local/recordings/new-matrix-audio
 ```
 
-Use `AnsiArt` or `Classic` for the other styles. GraphicsCapture is the default backend. The final `-av.mp4` contains audio; raw `.mp4`, scoped WAV, packet metadata, original clock and errors are retained separately. Qualified music is optional; `-CaptureAudio` alone enables effects. An incomplete music catalog must not be used for a route that selects unavailable tracks. This milestone adds no map completion.
+Use `AnsiArt` or `Classic` for the other styles. GraphicsCapture is the default backend. The final `-av.mp4` contains audio; after review, remove the MP4 while keeping the scoped WAV, packet metadata, original clock and errors. Qualified music is optional; `-CaptureAudio` alone enables effects. An incomplete music catalog must not be used for a route that selects unavailable tracks. This milestone adds no map completion.
