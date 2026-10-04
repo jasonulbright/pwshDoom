@@ -59,6 +59,14 @@ try{
     $bundle=& "$PSScriptRoot/Build-EngineBundle.ps1";. $bundle
     $content=[GameContent]::new(@('-iwad',$Wad));$graphics=New-DoomMenuGraphics $content
     $directory=Join-Path "$PSScriptRoot/../local" ('menu-unit-frames-'+[guid]::NewGuid().ToString('N'));[void][IO.Directory]::CreateDirectory($directory)
+    $captureDetails=New-DoomMenuState;$captureDetails.Screen=15;$captureDetails.AwaitingBinding=$true
+    $captureFrame=Get-DoomMenuPixels $graphics 15 0 1 3 4 -Details $captureDetails
+    $captureDetails.AwaitingBinding=$false;$captureDetails.MessageTitle='';$captureDetails.MessageDetail=''
+    $idleKeyFrame=Get-DoomMenuPixels $graphics 15 0 1 3 4 -Details $captureDetails
+    Assert-Menu 'Native key capture footer differs from idle instructions' ([Convert]::ToBase64String($captureFrame) -cne [Convert]::ToBase64String($idleKeyFrame))
+    $captureDetails.MessageTitle='KEY NOT AVAILABLE';$captureDetails.MessageDetail='CHOOSE A DIFFERENT KEY'
+    $unavailableFrame=Get-DoomMenuPixels $graphics 15 0 1 3 4 -Details $captureDetails
+    Assert-Menu 'Native key capture screen renders unavailable-key feedback' ([Convert]::ToBase64String($unavailableFrame) -cne [Convert]::ToBase64String($idleKeyFrame))
     $details=New-DoomMenuState;$details.MessageTitle='SAVE FAILED';$details.MessageDetail='SELECT SLOT AGAIN';$details.Slots[0]=@{Slot=1;State='Ready';Episode=4;Map=9;Skill=5;Time='23:59';Sha256=('A'*64);SourceMatches=$false}
     for($screen=1;$screen -le 15;$screen++){
         $count=switch($screen){1{7};14{8};15{11};2{4};3{5};4{2};6{2};8{6};9{6};10{2};11{2};default{1}}

@@ -223,7 +223,7 @@ function Get-DoomMenuPixels {
     }
     if($Screen -in 1,2,3,4,6,8,9,10,11,15){
         if($Screen -ne 15){Draw-DoomMenuText $Graphics 'ARROWS: CHOOSE' 0 166 -Center}
-        $footer=if($Screen -eq 15 -and $Details.AwaitingBinding){'ESC: CANCEL'}elseif($Screen -eq 15 -and $Details.MessageTitle){if($Details.MessageTitle -in 'KEY ALREADY USED','KEY ASSIGNED' -and $Details.MessageDetail){$Details.MessageDetail}else{$Details.MessageTitle}}else{'ENTER: OK  ESC: BACK'}
+        $footer=if($Screen -eq 15 -and $Details.AwaitingBinding){'PRESS KEY; ESC CANCEL'}elseif($Screen -eq 15 -and $Details.MessageTitle){if($Details.MessageTitle -in 'KEY ALREADY USED','KEY ASSIGNED' -and $Details.MessageDetail){$Details.MessageDetail}else{$Details.MessageTitle}}else{'ENTER: OK  ESC: BACK'}
         Draw-DoomMenuText $Graphics $footer 0 184 -Center
     }
     return ,$draw.Data

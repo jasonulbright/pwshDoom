@@ -6,6 +6,8 @@ The live key-capture path previously filtered reserved keys before the menu coul
 
 Follow-up source review found the native WAD menu did not render that status. Its footer now shows assignment/error feedback and clears it when the selection changes; compact-menu behavior is unchanged. This is source-reviewed only because no game or live test may run during the user's session.
 
+The same native screen now explicitly prompts “PRESS KEY; ESC CANCEL” while a binding is being captured. Added offline screen-difference regression cases for the prompt and unavailable-key feedback; these were not run.
+
 The same review found that Space remains a Use alias and Shift remains a Run alias in gameplay input. Custom bindings for either key now take precedence over that alias, preserving version-four settings without making one physical key trigger two actions. Focused regression cases cover persistence, remapping and generated commands; they were added but not executed. PowerShell parsing and whitespace checks pass; no gameplay tests were run.
 
 ## 2026-10-04 — Simplify wall-column plane writes
