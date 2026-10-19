@@ -6818,3 +6818,48 @@ window, keyboard or audio device was used.
 The final source-hash refresh reran the saved replay against the exact current
 script bytes. Candidate and reference frame hashes and scene mismatch counts
 match the first receipts; the v2 receipts pin the current source hashes.
+
+### Reference final-writer classification — October 19, 2026
+
+The isolated renderer copy now marks each plane pixel write and later mapped
+column or fuzz write. At height 34, candidate-plane mismatch pixels end as 68
+reference plane writes and 137 mapped-column writes. At height 68, they end as
+800 reference plane writes and 212 mapped-column writes. No mismatching
+candidate-plane pixels end with a fuzz or unmarked writer. The same-owner
+subset therefore remains a plane-sampling candidate; mapped-column cases
+remain a coverage issue whose exact wall, sky, masked, or sprite path is not
+distinguished by this tag.
+
+The saved replay completed at all four heights, and adding the writer tags
+preserves candidate and reference full-frame hashes plus scene mismatch counts.
+The [baseline](../results/moving-sector-reference-plane-final-writer-baseline-20261019-v3.json),
+[instrumented receipt](../results/moving-sector-reference-plane-final-writer-verified-20261019-v3.json)
+and [hash control](../results/moving-sector-reference-plane-final-writer-control-20261019-v3.json)
+pin the result. This is offline evidence; no live game, display, keyboard or
+audio device was used.
+
+### Reference plane sample recurrence experiment — October 19, 2026
+
+The next comparison records the reference plane's distance, fixed-point X/Y
+fractions, selected light bin and light map, flat texel index, and color at each
+write. For the same-owner pixels whose final reference writer is still a plane,
+candidate and reference sample reconstructions each match their actual final
+framebuffer color. Distance, distance light bin and light map agree for all 68
+samples at height 34 and all 666 at height 68; coordinate fractions and flat
+texels differ at every sample. This rules out light-map selection and later
+overdraw for this subset, and narrows the cause to plane-coordinate recurrence.
+
+A reproducible preparation script creates an isolated candidate renderer that
+uses direct per-pixel fixed-point sampling. It matched the reference flat texel
+at 50/68 and 560/666 of the original same-owner mismatch sites, but raised
+whole-scene differences from 307 to 363 at height 34 and from 1,463 to 1,869
+at height 68. The experiment was rejected as a production change; the existing
+horizontal-span sampler remains active. The [control receipt](../results/moving-sector-reference-plane-samples-control-20261019-v7.json)
+cross-checks four heights, confirms instrumentation frame hashes and mismatch
+counts match the standard run, and pins all report and script hashes. See the
+[baseline](../results/moving-sector-reference-plane-samples-baseline-20261019-v7.json),
+[instrumented](../results/moving-sector-reference-plane-samples-verified-20261019-v7.json),
+[direct experiment](../results/moving-sector-reference-plane-samples-direct-20261019-v1.json)
+and [preparation script](../scripts/Prepare-DirectPlaneSamplingDiagnosticRenderer.ps1).
+All comparisons used the saved headless replay; no live game, UI, display,
+keyboard or audio device was used.

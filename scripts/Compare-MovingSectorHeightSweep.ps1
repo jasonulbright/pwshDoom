@@ -14,6 +14,98 @@ param(
     [ValidateRange(-4096,4096)][int[]]$Heights = @(0, 6, 34, 68)
 )
 
+function Get-FastPlaneSample {
+    param(
+        [hashtable]$Context,
+        [int]$X,
+        [int]$Y,
+        [int]$PlaneId,
+        [int]$ViewXData,
+        [int]$ViewYData,
+        [int]$ViewZData,
+        [uint32]$ViewAngleData,
+        [int]$ExtraLight,
+        [int]$FixedColorMap
+    )
+
+    [int]$sectorIndex = ($PlaneId - 1) -shr 1
+    if (($PlaneId - 1) -band 1) {
+        [int]$heightData = $Context.SectorFloorHeightData[$sectorIndex]
+        [int]$flatIndex = $Context.SectorFloorFlatIndex[$sectorIndex]
+    } else {
+        [int]$heightData = $Context.SectorCeilingHeightData[$sectorIndex]
+        [int]$flatIndex = $Context.SectorCeilingFlatIndex[$sectorIndex]
+    }
+    [long]$heightDelta = [long]$heightData - [long]$ViewZData
+    if ($heightDelta -lt 0) { $heightDelta = -$heightDelta }
+    [long]$distanceWide = ([long]$heightDelta * [long]$Context.PlaneRowSlopes[$Y]) -shr 16
+    $distanceWide = $distanceWide -band 0xFFFFFFFFL
+    if ($distanceWide -ge 0x80000000L) { $distanceWide -= 0x100000000L }
+    [int]$distanceData = $distanceWide
+
+    [uint32]$planeBaseAngleData = ([long]$ViewAngleData - 0x40000000L) -band 0xFFFFFFFFL
+    [int]$planeBaseFine = $planeBaseAngleData -shr 19
+    [int[]]$fineSine = $Context.PlaneFineSine
+    [int]$planeBaseX = [Math]::Truncate($fineSine[$planeBaseFine + 2048] / 160.0)
+    [int]$planeBaseY = -[Math]::Truncate($fineSine[$planeBaseFine] / 160.0)
+    [int]$stepX = ([long]$distanceData * [long]$planeBaseX) -shr 16
+    [int]$stepY = ([long]$distanceData * [long]$planeBaseY) -shr 16
+
+    [int]$spanStart = 0
+    if ($Context.ContainsKey('PlaneSpanBoundaries')) {
+        foreach ($boundary in $Context.PlaneSpanBoundaries) {
+            if ($boundary -gt $X) { break }
+            $spanStart = [int]$boundary
+        }
+    }
+    [int]$row = $Y * 320
+    [int]$startX = $X
+    while ($startX -gt $spanStart -and $Context.Planes[$row + $startX - 1] -eq $PlaneId) { $startX-- }
+    [int]$lengthData = ([long]$distanceData * [long]$Context.PlaneDistanceScales[$startX]) -shr 16
+    [long]$xFracWide = [long]$ViewXData + (([long]$Context.RayCos[$startX] * [long]$lengthData) -shr 16)
+    [long]$yFracWide = -[long]$ViewYData - (([long]$Context.RaySin[$startX] * [long]$lengthData) -shr 16)
+    $xFracWide += [long]$stepX * ($X - $startX)
+    $yFracWide += [long]$stepY * ($X - $startX)
+    [int]$textureX = ($xFracWide -shr 16) -band 63
+    [int]$textureY = ($yFracWide -shr 10) -band 4032
+    [int]$spot = $textureY + $textureX
+    [int]$flatTexelIndex = $Context.PlaneFlatData[$flatIndex][$spot]
+    [int]$lightRow = [Math]::Clamp(($Context.SectorLightLevels[$sectorIndex] -shr 4) + $ExtraLight, 0, $Context.Lighting.Distance.Length - 1)
+    [int]$distanceLightBin = [Math]::Clamp(($distanceData -shr 20), 0, $Context.Lighting.Distance[$lightRow].Length - 1)
+    [int]$lightMapIndex = $Context.Lighting.Distance[$lightRow][$distanceLightBin]
+    if ($FixedColorMap -gt 0) { $lightMapIndex = $FixedColorMap }
+    [byte]$color = $Context.Colors[$lightMapIndex][$flatTexelIndex]
+    [int]$directLengthData = ([long]$distanceData * [long]$Context.PlaneDistanceScales[$X]) -shr 16
+    [long]$directXFracWide = [long]$ViewXData + (([long]$Context.RayCos[$X] * [long]$directLengthData) -shr 16)
+    [long]$directYFracWide = -[long]$ViewYData - (([long]$Context.RaySin[$X] * [long]$directLengthData) -shr 16)
+    [int]$directTextureX = ($directXFracWide -shr 16) -band 63
+    [int]$directTextureY = ((($directYFracWide -shr 10) -band 4032) -shr 6)
+    [int]$directSpot = ($directTextureY -shl 6) + $directTextureX
+    [int]$directFlatTexelIndex = $Context.PlaneFlatData[$flatIndex][$directSpot]
+    [byte]$directColor = $Context.Colors[$lightMapIndex][$directFlatTexelIndex]
+
+    return [ordered]@{
+        SectorIndex = $sectorIndex
+        SurfaceType = if (($PlaneId - 1) -band 1) { 1 } else { 2 }
+        DistanceData = $distanceData
+        DistanceLightBin = $distanceLightBin
+        XFracData = [int]($xFracWide -band 0xFFFFFFFFL)
+        YFracData = [int]($yFracWide -band 0xFFFFFFFFL)
+        TextureX = $textureX
+        TextureY = $textureY -shr 6
+        FlatTexelIndex = $flatTexelIndex
+        LightRow = $lightRow
+        LightMapIndex = $lightMapIndex
+        Color = $color
+        DirectXFracData = [int]($directXFracWide -band 0xFFFFFFFFL)
+        DirectYFracData = [int]($directYFracWide -band 0xFFFFFFFFL)
+        DirectTextureX = $directTextureX
+        DirectTextureY = $directTextureY
+        DirectFlatTexelIndex = $directFlatTexelIndex
+        DirectColor = $directColor
+    }
+}
+
 $ErrorActionPreference = 'Stop'
 $root = Split-Path $PSScriptRoot
 $Wad = [IO.Path]::GetFullPath($Wad)
@@ -102,7 +194,14 @@ try {
     $reference = [Renderer]::new($config, $content)
     $reference3D = $reference.ThreeD
     $hasReferencePlaneOwnerFields = $null -ne $reference3D.GetType().GetProperty('DiagnosticPlaneOwners') -and
-        $null -ne $reference3D.GetType().GetProperty('DiagnosticPlaneSurfaceTypes')
+        $null -ne $reference3D.GetType().GetProperty('DiagnosticPlaneSurfaceTypes') -and
+        $null -ne $reference3D.GetType().GetProperty('DiagnosticFinalWriterTypes') -and
+        $null -ne $reference3D.GetType().GetProperty('DiagnosticPlaneDistanceData') -and
+        $null -ne $reference3D.GetType().GetProperty('DiagnosticPlaneXFracData') -and
+        $null -ne $reference3D.GetType().GetProperty('DiagnosticPlaneYFracData') -and
+        $null -ne $reference3D.GetType().GetProperty('DiagnosticPlaneLightIndices') -and
+        $null -ne $reference3D.GetType().GetProperty('DiagnosticPlaneTexelIndices') -and
+        $null -ne $reference3D.GetType().GetProperty('DiagnosticPlaneLightMaps')
     if ($CaptureReferencePlaneOwners -and -not $hasReferencePlaneOwnerFields) {
         throw 'The selected engine source does not contain reference plane-owner diagnostics.'
     }
@@ -110,6 +209,13 @@ try {
         $CaptureReferencePlaneOwners = $true
         $reference3D.DiagnosticPlaneOwners = [Sector[]]::new(320 * 200)
         $reference3D.DiagnosticPlaneSurfaceTypes = [byte[]]::new(320 * 200)
+        $reference3D.DiagnosticFinalWriterTypes = [byte[]]::new(320 * 200)
+        $reference3D.DiagnosticPlaneDistanceData = [int[]]::new(320 * 200)
+        $reference3D.DiagnosticPlaneXFracData = [int[]]::new(320 * 200)
+        $reference3D.DiagnosticPlaneYFracData = [int[]]::new(320 * 200)
+        $reference3D.DiagnosticPlaneLightIndices = [int[]]::new(320 * 200)
+        $reference3D.DiagnosticPlaneTexelIndices = [int[]]::new(320 * 200)
+        $reference3D.DiagnosticPlaneLightMaps = [byte[][]]::new(320 * 200)
     }
         $context = New-FastRenderContext $content $game.World
     $baseSnapshot = New-GameRenderSnapshot $game 1
@@ -126,11 +232,25 @@ try {
         $snapshot.Sectors = $snapshotSectors
 
         Set-GameRenderSnapshot $context $snapshot
+        $candidateCamera = $snapshot.ConsolePlayer.Mobj
+        [int]$candidateViewXData = [Math]::Truncate(65536.0 * $candidateCamera.X)
+        [int]$candidateViewYData = [Math]::Truncate(65536.0 * $candidateCamera.Y)
+        [int]$candidateViewZData = [Math]::Truncate(65536.0 * $snapshot.ConsolePlayer.ViewZ)
+        [uint32]$candidateViewAngleData = [uint32]([long][Math]::Round(4294967296.0 * ($candidateCamera.Angle / (2 * [Math]::PI))) -band 0xFFFFFFFFL)
+        [int]$candidateExtraLight = $snapshot.ConsolePlayer.ExtraLight
+        [int]$candidateFixedColorMap = $snapshot.ConsolePlayer.FixedColorMap
         Invoke-FastRender $context
         [byte[]]$candidate = $context.Pixels.Clone()
         if ($CaptureReferencePlaneOwners) {
             [Array]::Clear($reference3D.DiagnosticPlaneOwners, 0, $reference3D.DiagnosticPlaneOwners.Length)
             [Array]::Clear($reference3D.DiagnosticPlaneSurfaceTypes, 0, $reference3D.DiagnosticPlaneSurfaceTypes.Length)
+            [Array]::Clear($reference3D.DiagnosticFinalWriterTypes, 0, $reference3D.DiagnosticFinalWriterTypes.Length)
+            [Array]::Clear($reference3D.DiagnosticPlaneDistanceData, 0, $reference3D.DiagnosticPlaneDistanceData.Length)
+            [Array]::Clear($reference3D.DiagnosticPlaneXFracData, 0, $reference3D.DiagnosticPlaneXFracData.Length)
+            [Array]::Clear($reference3D.DiagnosticPlaneYFracData, 0, $reference3D.DiagnosticPlaneYFracData.Length)
+            [Array]::Clear($reference3D.DiagnosticPlaneLightIndices, 0, $reference3D.DiagnosticPlaneLightIndices.Length)
+            [Array]::Clear($reference3D.DiagnosticPlaneTexelIndices, 0, $reference3D.DiagnosticPlaneTexelIndices.Length)
+            [Array]::Clear($reference3D.DiagnosticPlaneLightMaps, 0, $reference3D.DiagnosticPlaneLightMaps.Length)
         }
         $reference.RenderGame($game, [Fixed]::One)
         [byte[]]$referencePixels = $reference.Screen.Data.Clone()
@@ -149,7 +269,36 @@ try {
         $candidatePlaneMismatchNoReferencePlaneWrite = 0
         $candidatePlaneMismatchUnknownReferenceOwner = 0
         $candidateNonPlaneMismatchReferencePlaneWrites = 0
+        $candidatePlaneMismatchReferenceFinalPlaneWrites = 0
+        $candidatePlaneMismatchReferenceFinalColumnWrites = 0
+        $candidatePlaneMismatchReferenceFinalFuzzWrites = 0
+        $candidatePlaneMismatchReferenceFinalUnmarkedWrites = 0
+        $candidatePlaneMismatchSameOwnerFinalPlaneWrites = 0
         $referencePlaneOwnerPairCounts = @{}
+        $planeSampleCounts = [ordered]@{
+            SameOwnerSamples = 0
+            SameDistanceData = 0
+            SameDistanceLightBin = 0
+            SameXFraction = 0
+            SameYFraction = 0
+            SameTextureX = 0
+            SameTextureY = 0
+            SameTextureCoordinates = 0
+            SameFlatTexelIndex = 0
+            SameLightMapIndex = 0
+            SamePlaneColor = 0
+            DirectSameXFraction = 0
+            DirectSameYFraction = 0
+            DirectSameTextureX = 0
+            DirectSameTextureY = 0
+            DirectSameFlatTexelIndex = 0
+            DirectSamePlaneColor = 0
+            CandidateFramebufferMatchesPlaneSample = 0
+            ReferenceFramebufferMatchesPlaneSample = 0
+            TextureXDeltaCounts = @{}
+            TextureYDeltaCounts = @{}
+        }
+        $planeSampleExamples = [Collections.Generic.List[object]]::new()
         $bounds = [int[]]@(320, 168, -1, -1)
         for ($y = 0; $y -lt 200; $y++) {
             for ($x = 0; $x -lt 320; $x++) {
@@ -161,6 +310,14 @@ try {
                     if ($CaptureReferencePlaneOwners) {
                         $referencePosition = $x * 200 + $y
                         $referenceOwner = $reference3D.DiagnosticPlaneOwners[$referencePosition]
+                        if ($planeId -gt 0) {
+                            switch ([int]$reference3D.DiagnosticFinalWriterTypes[$referencePosition]) {
+                                1 { $candidatePlaneMismatchReferenceFinalPlaneWrites++ }
+                                2 { $candidatePlaneMismatchReferenceFinalColumnWrites++ }
+                                3 { $candidatePlaneMismatchReferenceFinalFuzzWrites++ }
+                                default { $candidatePlaneMismatchReferenceFinalUnmarkedWrites++ }
+                            }
+                        }
                         if ($null -eq $referenceOwner) {
                             if ($planeId -gt 0) { $candidatePlaneMismatchNoReferencePlaneWrite++ }
                         } else {
@@ -187,6 +344,85 @@ try {
                                     else { $referencePlaneOwnerPairCounts[$pairKey] = 1 }
                                     if ($candidateSectorIndex -eq $referenceOwnerSectorIndex -and $candidateSurfaceType -eq $referenceSurfaceType) {
                                         $candidatePlaneMismatchSameOwnerWrites++
+                                        if ([int]$reference3D.DiagnosticFinalWriterTypes[$referencePosition] -eq 1) {
+                                            $candidatePlaneMismatchSameOwnerFinalPlaneWrites++
+                                            $planeSampleCounts.SameOwnerSamples++
+                                            $candidateSample = Get-FastPlaneSample $context $x $y $planeId $candidateViewXData $candidateViewYData $candidateViewZData $candidateViewAngleData $candidateExtraLight $candidateFixedColorMap
+                                            [int]$referenceDistanceData = $reference3D.DiagnosticPlaneDistanceData[$referencePosition]
+                                            [int]$referenceLightBin = $reference3D.DiagnosticPlaneLightIndices[$referencePosition]
+                                            [int]$referenceXFracData = $reference3D.DiagnosticPlaneXFracData[$referencePosition]
+                                            [int]$referenceYFracData = $reference3D.DiagnosticPlaneYFracData[$referencePosition]
+                                            [int]$referenceTexelIndex = $reference3D.DiagnosticPlaneTexelIndices[$referencePosition]
+                                            [int]$referenceTextureX = ($referenceXFracData -shr 16) -band 63
+                                            [int]$referenceTextureY = ((($referenceYFracData -shr 10) -band 4032) -shr 6)
+                                            $referenceColorMap = $reference3D.DiagnosticPlaneLightMaps[$referencePosition]
+                                            [int]$referenceLightMapIndex = -1
+                                            for ($mapIndex = 0; $mapIndex -lt $content.ColorMap.Data.Length; $mapIndex++) {
+                                                if ([object]::ReferenceEquals($referenceColorMap, $content.ColorMap.Data[$mapIndex])) {
+                                                    $referenceLightMapIndex = $mapIndex
+                                                    break
+                                                }
+                                            }
+                                            [byte]$referencePlaneColor = $referenceColorMap[$referenceTexelIndex]
+                                            if ($candidateSample.DistanceData -eq $referenceDistanceData) { $planeSampleCounts.SameDistanceData++ }
+                                            if ($candidateSample.DistanceLightBin -eq $referenceLightBin) { $planeSampleCounts.SameDistanceLightBin++ }
+                                            if ($candidateSample.XFracData -eq $referenceXFracData) { $planeSampleCounts.SameXFraction++ }
+                                            if ($candidateSample.YFracData -eq $referenceYFracData) { $planeSampleCounts.SameYFraction++ }
+                                            if ($candidateSample.TextureX -eq $referenceTextureX) { $planeSampleCounts.SameTextureX++ }
+                                            if ($candidateSample.TextureY -eq $referenceTextureY) { $planeSampleCounts.SameTextureY++ }
+                                            if ($candidateSample.TextureX -eq $referenceTextureX -and $candidateSample.TextureY -eq $referenceTextureY) { $planeSampleCounts.SameTextureCoordinates++ }
+                                            if ($candidateSample.FlatTexelIndex -eq $referenceTexelIndex) { $planeSampleCounts.SameFlatTexelIndex++ }
+                                            if ($candidateSample.LightMapIndex -eq $referenceLightMapIndex) { $planeSampleCounts.SameLightMapIndex++ }
+                                            if ($candidateSample.Color -eq $referencePlaneColor) { $planeSampleCounts.SamePlaneColor++ }
+                                            if ($candidateSample.DirectXFracData -eq $referenceXFracData) { $planeSampleCounts.DirectSameXFraction++ }
+                                            if ($candidateSample.DirectYFracData -eq $referenceYFracData) { $planeSampleCounts.DirectSameYFraction++ }
+                                            if ($candidateSample.DirectTextureX -eq $referenceTextureX) { $planeSampleCounts.DirectSameTextureX++ }
+                                            if ($candidateSample.DirectTextureY -eq $referenceTextureY) { $planeSampleCounts.DirectSameTextureY++ }
+                                            if ($candidateSample.DirectFlatTexelIndex -eq $referenceTexelIndex) { $planeSampleCounts.DirectSameFlatTexelIndex++ }
+                                            if ($candidateSample.DirectColor -eq $referencePlaneColor) { $planeSampleCounts.DirectSamePlaneColor++ }
+                                            if ($candidate[$candidateIndex] -eq $candidateSample.Color) { $planeSampleCounts.CandidateFramebufferMatchesPlaneSample++ }
+                                            if ($referencePixels[$referencePosition] -eq $referencePlaneColor) { $planeSampleCounts.ReferenceFramebufferMatchesPlaneSample++ }
+                                            [int]$textureXDelta = (($candidateSample.TextureX - $referenceTextureX + 32) -band 63) - 32
+                                            [int]$textureYDelta = (($candidateSample.TextureY - $referenceTextureY + 32) -band 63) - 32
+                                            $textureXDeltaKey = [string]$textureXDelta
+                                            $textureYDeltaKey = [string]$textureYDelta
+                                            if ($planeSampleCounts.TextureXDeltaCounts.ContainsKey($textureXDeltaKey)) { $planeSampleCounts.TextureXDeltaCounts[$textureXDeltaKey]++ }
+                                            else { $planeSampleCounts.TextureXDeltaCounts[$textureXDeltaKey] = 1 }
+                                            if ($planeSampleCounts.TextureYDeltaCounts.ContainsKey($textureYDeltaKey)) { $planeSampleCounts.TextureYDeltaCounts[$textureYDeltaKey]++ }
+                                            else { $planeSampleCounts.TextureYDeltaCounts[$textureYDeltaKey] = 1 }
+                                            if ($planeSampleExamples.Count -lt 16) {
+                                                $planeSampleExamples.Add([ordered]@{
+                                                    X = $x
+                                                    Y = $y
+                                                    CandidateDistanceData = $candidateSample.DistanceData
+                                                    ReferenceDistanceData = $referenceDistanceData
+                                                    CandidateDistanceLightBin = $candidateSample.DistanceLightBin
+                                                    ReferenceDistanceLightBin = $referenceLightBin
+                                                    CandidateXFracData = $candidateSample.XFracData
+                                                    ReferenceXFracData = $referenceXFracData
+                                                    CandidateYFracData = $candidateSample.YFracData
+                                                    ReferenceYFracData = $referenceYFracData
+                                                    CandidateTextureX = $candidateSample.TextureX
+                                                    ReferenceTextureX = $referenceTextureX
+                                                    CandidateTextureY = $candidateSample.TextureY
+                                                    ReferenceTextureY = $referenceTextureY
+                                                    CandidateFlatTexelIndex = $candidateSample.FlatTexelIndex
+                                                    ReferenceFlatTexelIndex = $referenceTexelIndex
+                                                    CandidateLightMapIndex = $candidateSample.LightMapIndex
+                                                    ReferenceLightMapIndex = $referenceLightMapIndex
+                                                    CandidatePlaneColor = $candidateSample.Color
+                                                    ReferencePlaneColor = $referencePlaneColor
+                                                    DirectXFracData = $candidateSample.DirectXFracData
+                                                    DirectYFracData = $candidateSample.DirectYFracData
+                                                    DirectTextureX = $candidateSample.DirectTextureX
+                                                    DirectTextureY = $candidateSample.DirectTextureY
+                                                    DirectFlatTexelIndex = $candidateSample.DirectFlatTexelIndex
+                                                    DirectPlaneColor = $candidateSample.DirectColor
+                                                    CandidateFramebufferMatchesPlaneSample = ($candidate[$candidateIndex] -eq $candidateSample.Color)
+                                                    ReferenceFramebufferMatchesPlaneSample = ($referencePixels[$referencePosition] -eq $referencePlaneColor)
+                                                })
+                                            }
+                                        }
                                     } else {
                                         $candidatePlaneMismatchDifferentOwnerWrites++
                                     }
@@ -216,6 +452,12 @@ try {
         if ($CaptureReferencePlaneOwners) {
             if ($candidatePlaneMismatchReferencePlaneWrites + $candidatePlaneMismatchUnknownReferenceOwner + $candidatePlaneMismatchNoReferencePlaneWrite -ne $candidatePlaneMismatchPixels) {
                 throw "Reference plane-write ownership did not reconcile for candidate planes at ceiling height $height."
+            }
+            if ($candidatePlaneMismatchReferenceFinalPlaneWrites + $candidatePlaneMismatchReferenceFinalColumnWrites + $candidatePlaneMismatchReferenceFinalFuzzWrites + $candidatePlaneMismatchReferenceFinalUnmarkedWrites -ne $candidatePlaneMismatchPixels) {
+                throw "Reference final-writer classes did not reconcile at ceiling height $height."
+            }
+            if ($planeSampleCounts.SameOwnerSamples -ne $candidatePlaneMismatchSameOwnerFinalPlaneWrites) {
+                throw "Same-owner plane sample counts did not reconcile at ceiling height $height."
             }
             if ($candidatePlaneMismatchSameOwnerWrites + $candidatePlaneMismatchDifferentOwnerWrites -ne $candidatePlaneMismatchReferencePlaneWrites) {
                 throw "Reference owner pairs did not reconcile at ceiling height $height."
@@ -254,6 +496,13 @@ try {
             CandidatePlaneMismatchNoReferencePlaneWrite = $candidatePlaneMismatchNoReferencePlaneWrite
             CandidatePlaneMismatchUnknownReferenceOwner = $candidatePlaneMismatchUnknownReferenceOwner
             CandidateNonPlaneMismatchReferencePlaneWrites = $candidateNonPlaneMismatchReferencePlaneWrites
+            CandidatePlaneMismatchReferenceFinalPlaneWrites = $candidatePlaneMismatchReferenceFinalPlaneWrites
+            CandidatePlaneMismatchReferenceFinalColumnWrites = $candidatePlaneMismatchReferenceFinalColumnWrites
+            CandidatePlaneMismatchReferenceFinalFuzzWrites = $candidatePlaneMismatchReferenceFinalFuzzWrites
+            CandidatePlaneMismatchReferenceFinalUnmarkedWrites = $candidatePlaneMismatchReferenceFinalUnmarkedWrites
+            CandidatePlaneMismatchSameOwnerFinalPlaneWrites = $candidatePlaneMismatchSameOwnerFinalPlaneWrites
+            SameOwnerPlaneSampleComparisons = $planeSampleCounts
+            SameOwnerPlaneSampleExamples = $planeSampleExamples.ToArray()
             ReferencePlaneWriteOwnerPairs = @(
                 foreach ($pairKey in @($referencePlaneOwnerPairCounts.Keys | Sort-Object)) {
                     [ordered]@{ Pair = $pairKey; MismatchPixels = $referencePlaneOwnerPairCounts[$pairKey] }
@@ -384,7 +633,8 @@ try {
         Error = $null
         Interpretation = 'A counterfactual surface-fidelity comparison, not a movement/progression test, original-executable parity result, or performance measurement.'
         CandidateOwnershipInterpretation = 'Plane-buffer counts classify the candidate plane ID at mismatch coordinates; a later actor may overlay that plane. The finite-depth count does not distinguish walls from sprites.'
-        ReferencePlaneWritesInterpretation = 'Reference owner buffers record the last floor/ceiling plane write at a pixel; later walls, sprites or weapons may overwrite it, so this is not the final visible owner.'
+        ReferencePlaneWritesInterpretation = 'Plane ownership records the last reference floor/ceiling write. Final-writer tags distinguish that plane write from later mapped-column writes or fuzz writes; unmarked writers may include other compositor paths.'
+        PlaneSampleInterpretation = 'Candidate plane samples are reconstructed from the renderer horizontal plane-run recurrence; reference fractions, distance, light bin and flat texel are recorded at writes. Candidate frame bytes may include later overlays.'
         PlaneMathInterpretation = 'Plane table and per-column fixed sine parity are compared after the final full-width candidate/reference render; this does not compare per-pixel plane fraction recurrence or light selection.'
     }
     $currentHashes = @{}

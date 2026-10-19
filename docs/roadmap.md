@@ -957,3 +957,17 @@ preserves full-frame hashes against the uninstrumented renderer at all four
 heights. Because a later rendering pass can overwrite a recorded plane write,
 final wall/sprite/weapon ownership remains open. See the [plane-write receipt](../results/moving-sector-reference-plane-writes-verified-20261019-v2.json)
 and [output control](../results/moving-sector-reference-plane-writes-control-20261019-v2.json).
+
+The final-writer probe classifies the height-34 candidate-plane mismatches as
+68 final reference plane writes and 137 mapped-column writes; at height 68 the
+split is 800 and 212. The mapped-column class includes several drawing paths,
+so it does not identify whether each case is a wall, masked surface, sky or
+sprite. At the same-owner final-plane pixels, distance, light bin and selected
+light map agree, while texture coordinates and flat texels differ. A direct
+per-pixel sampling experiment worsened whole-scene mismatch counts from 307 to
+363 at height 34 and from 1,463 to 1,869 at height 68, so the production
+horizontal-span sampler remains unchanged. The residual plane gap is narrowed
+to fixed-point coordinate recurrence; mapped-column coverage remains open.
+See the [final-writer receipt](../results/moving-sector-reference-plane-final-writer-verified-20261019-v3.json),
+[sample comparison](../results/moving-sector-reference-plane-samples-verified-20261019-v7.json)
+and [control](../results/moving-sector-reference-plane-samples-control-20261019-v7.json).

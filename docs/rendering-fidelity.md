@@ -1220,5 +1220,38 @@ owner pairs are in the [instrumented receipt](../results/moving-sector-reference
 The diagnostic copy preserves both renderers' full-frame SHA-256 values at
 all four ceiling heights; the [control receipt](../results/moving-sector-reference-plane-writes-control-20261019-v2.json)
 compares them to an uninstrumented run. This narrows some differences to
-plane visibility or sector ownership. Same-owner plane writes can still have
-been overwritten later, so they do not yet prove texture-sampling error.
+plane visibility or sector ownership.
+
+The follow-up final-writer tags show that, among candidate-plane mismatches,
+the reference's final write is a plane at 68 pixels for height 34 and 800
+pixels for height 68. Mapped-column writes account for the other 137 and 212;
+fuzz and unmarked writes account for none. The sample comparison below
+isolates same-owner final-plane differences to texture-coordinate recurrence;
+the mapped-column cases point to a coverage difference. The mapped-column tag groups opaque and
+masked walls, sky, sprites and weapon columns, so the precise source is still
+open. The [baseline](../results/moving-sector-reference-plane-final-writer-baseline-20261019-v3.json),
+[instrumented receipt](../results/moving-sector-reference-plane-final-writer-verified-20261019-v3.json)
+and [hash control](../results/moving-sector-reference-plane-final-writer-control-20261019-v3.json)
+preserve the counts and confirm identical frame hashes.
+
+### Reference plane sample comparison — October 19, 2026
+
+At the same-owner final-plane pixels, the candidate and reference sample
+reconstructions both reproduce their actual framebuffer colors. Their distance,
+distance light bin, and selected light map agree for all 68 pixels at height 34
+and all 666 pixels at height 68. Texture fractions and flat texels differ at
+every such pixel, isolating the remaining plane-owned gap to coordinate
+sampling and its fixed-point recurrence rather than lighting or later
+overdraw.
+
+A copied candidate renderer that computes each plane pixel directly from the
+per-column ray was tested as a counterfactual. It matched the reference flat
+texel at 50 of 68 original mismatch sites at height 34 and 560 of 666 at
+height 68, but whole-scene mismatches increased from 307 to 363 and from 1,463
+to 1,869. The direct variant is therefore not a production fix; the horizontal
+span sampler remains in production while recurrence parity is unresolved.
+This was an offline saved replay only. The [baseline](../results/moving-sector-reference-plane-samples-baseline-20261019-v7.json),
+[instrumented sample receipt](../results/moving-sector-reference-plane-samples-verified-20261019-v7.json),
+[direct-sampling experiment](../results/moving-sector-reference-plane-samples-direct-20261019-v1.json)
+and [control](../results/moving-sector-reference-plane-samples-control-20261019-v7.json)
+record source hashes and per-height results.

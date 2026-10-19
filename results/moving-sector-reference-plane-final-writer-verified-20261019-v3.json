@@ -1,0 +1,340 @@
+{
+  "SchemaVersion": 1,
+  "FinishedUtc": "2026-10-19T13:48:58.0131895Z",
+  "Experiment": "Counterfactual render sweep of the E1M1 moving ceiling at one frozen replay-derived game state",
+  "SourceCommit": "fd3b86b35190ad4fbd06ea5ba4dae606572c3a69",
+  "Episode": 1,
+  "Map": 1,
+  "Skill": 3,
+  "InputTic": 315,
+  "LevelTic": 315,
+  "SectorIndex": 26,
+  "ActualCeilingHeight": 6.0,
+  "ReplayPath": "results/e1m1-route-lineflags.json",
+  "ReplaySha256": "41CF35EDF94C1CABE8C96A1CEEFBCFBF41F20DF24093569B65A1A4C9C56C017B",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "Heights": [
+    {
+      "CeilingHeight": 0,
+      "CandidateFrameSha256": "2BF8E1C7451C581D5F78A759D51ADB740F8218AC80FB8D2DBA2AC57CB95078F0",
+      "ReferenceFrameSha256": "6CB42E3F56904BF394B49B4680C1578DA73D9919F243B92EFBC33D670EA2C010",
+      "SceneDifferentIndices": 0,
+      "HudDifferentIndices": 0,
+      "SceneMismatchBounds": null,
+      "CandidatePlaneBufferMismatchPixels": 0,
+      "CandidatePlaneBufferAndNoDepthMismatchPixels": 0,
+      "CandidateNonPlaneBufferMismatchPixels": 0,
+      "CandidateDepthWrittenMismatchPixels": 0,
+      "CandidatePlaneBufferMismatchBySurface": [],
+      "ReferencePlaneWriteMismatchPixels": 0,
+      "CandidatePlaneMismatchReferencePlaneWrites": 0,
+      "CandidatePlaneMismatchSameOwnerWrites": 0,
+      "CandidatePlaneMismatchDifferentOwnerWrites": 0,
+      "CandidatePlaneMismatchNoReferencePlaneWrite": 0,
+      "CandidatePlaneMismatchUnknownReferenceOwner": 0,
+      "CandidateNonPlaneMismatchReferencePlaneWrites": 0,
+      "CandidatePlaneMismatchReferenceFinalPlaneWrites": 0,
+      "CandidatePlaneMismatchReferenceFinalColumnWrites": 0,
+      "CandidatePlaneMismatchReferenceFinalFuzzWrites": 0,
+      "CandidatePlaneMismatchReferenceFinalUnmarkedWrites": 0,
+      "ReferencePlaneWriteOwnerPairs": []
+    },
+    {
+      "CeilingHeight": 6,
+      "CandidateFrameSha256": "925A5841A8F525E85E970BA32A7DAA9A0AF41542A60F43DCF47E0EB097390994",
+      "ReferenceFrameSha256": "B7DA72BF29AAB1C42324463E253D6B1F3BD834CB383567E83BE59C35C2841A88",
+      "SceneDifferentIndices": 0,
+      "HudDifferentIndices": 0,
+      "SceneMismatchBounds": null,
+      "CandidatePlaneBufferMismatchPixels": 0,
+      "CandidatePlaneBufferAndNoDepthMismatchPixels": 0,
+      "CandidateNonPlaneBufferMismatchPixels": 0,
+      "CandidateDepthWrittenMismatchPixels": 0,
+      "CandidatePlaneBufferMismatchBySurface": [],
+      "ReferencePlaneWriteMismatchPixels": 0,
+      "CandidatePlaneMismatchReferencePlaneWrites": 0,
+      "CandidatePlaneMismatchSameOwnerWrites": 0,
+      "CandidatePlaneMismatchDifferentOwnerWrites": 0,
+      "CandidatePlaneMismatchNoReferencePlaneWrite": 0,
+      "CandidatePlaneMismatchUnknownReferenceOwner": 0,
+      "CandidateNonPlaneMismatchReferencePlaneWrites": 0,
+      "CandidatePlaneMismatchReferenceFinalPlaneWrites": 0,
+      "CandidatePlaneMismatchReferenceFinalColumnWrites": 0,
+      "CandidatePlaneMismatchReferenceFinalFuzzWrites": 0,
+      "CandidatePlaneMismatchReferenceFinalUnmarkedWrites": 0,
+      "ReferencePlaneWriteOwnerPairs": []
+    },
+    {
+      "CeilingHeight": 34,
+      "CandidateFrameSha256": "AA1186EC928856A59849F5DD6B604DD5CE71FCA22A27D3DE1853863B795EBE59",
+      "ReferenceFrameSha256": "D158B11218C76C2CE022F612795BC3DECDD0DCA430CE3DFE4699734CA4557806",
+      "SceneDifferentIndices": 307,
+      "HudDifferentIndices": 0,
+      "SceneMismatchBounds": [
+        0,
+        153,
+        319,
+        167
+      ],
+      "CandidatePlaneBufferMismatchPixels": 205,
+      "CandidatePlaneBufferAndNoDepthMismatchPixels": 205,
+      "CandidateNonPlaneBufferMismatchPixels": 102,
+      "CandidateDepthWrittenMismatchPixels": 102,
+      "CandidatePlaneBufferMismatchBySurface": [
+        {
+          "PlaneId": 46,
+          "SectorIndex": 22,
+          "Surface": "Floor",
+          "MismatchPixels": 205
+        }
+      ],
+      "ReferencePlaneWriteMismatchPixels": 68,
+      "CandidatePlaneMismatchReferencePlaneWrites": 68,
+      "CandidatePlaneMismatchSameOwnerWrites": 68,
+      "CandidatePlaneMismatchDifferentOwnerWrites": 0,
+      "CandidatePlaneMismatchNoReferencePlaneWrite": 137,
+      "CandidatePlaneMismatchUnknownReferenceOwner": 0,
+      "CandidateNonPlaneMismatchReferencePlaneWrites": 0,
+      "CandidatePlaneMismatchReferenceFinalPlaneWrites": 68,
+      "CandidatePlaneMismatchReferenceFinalColumnWrites": 137,
+      "CandidatePlaneMismatchReferenceFinalFuzzWrites": 0,
+      "CandidatePlaneMismatchReferenceFinalUnmarkedWrites": 0,
+      "ReferencePlaneWriteOwnerPairs": [
+        {
+          "Pair": "Candidate S22 Floor -> reference S22 Floor",
+          "MismatchPixels": 68
+        }
+      ]
+    },
+    {
+      "CeilingHeight": 68,
+      "CandidateFrameSha256": "F5420F15256FD54CC6498A112957CED3E9B9A914F0DA97A8D7559E7B89134BFD",
+      "ReferenceFrameSha256": "E62E4EF8887421EF900085790CD5793980ACC074E72E29ED10FDE7D4592AB6C8",
+      "SceneDifferentIndices": 1463,
+      "HudDifferentIndices": 0,
+      "SceneMismatchBounds": [
+        1,
+        0,
+        319,
+        167
+      ],
+      "CandidatePlaneBufferMismatchPixels": 1012,
+      "CandidatePlaneBufferAndNoDepthMismatchPixels": 1012,
+      "CandidateNonPlaneBufferMismatchPixels": 451,
+      "CandidateDepthWrittenMismatchPixels": 451,
+      "CandidatePlaneBufferMismatchBySurface": [
+        {
+          "PlaneId": 29,
+          "SectorIndex": 14,
+          "Surface": "Ceiling",
+          "MismatchPixels": 5
+        },
+        {
+          "PlaneId": 31,
+          "SectorIndex": 15,
+          "Surface": "Ceiling",
+          "MismatchPixels": 6
+        },
+        {
+          "PlaneId": 32,
+          "SectorIndex": 15,
+          "Surface": "Floor",
+          "MismatchPixels": 228
+        },
+        {
+          "PlaneId": 35,
+          "SectorIndex": 17,
+          "Surface": "Ceiling",
+          "MismatchPixels": 1
+        },
+        {
+          "PlaneId": 38,
+          "SectorIndex": 18,
+          "Surface": "Floor",
+          "MismatchPixels": 15
+        },
+        {
+          "PlaneId": 39,
+          "SectorIndex": 19,
+          "Surface": "Ceiling",
+          "MismatchPixels": 10
+        },
+        {
+          "PlaneId": 40,
+          "SectorIndex": 19,
+          "Surface": "Floor",
+          "MismatchPixels": 14
+        },
+        {
+          "PlaneId": 41,
+          "SectorIndex": 20,
+          "Surface": "Ceiling",
+          "MismatchPixels": 71
+        },
+        {
+          "PlaneId": 43,
+          "SectorIndex": 21,
+          "Surface": "Ceiling",
+          "MismatchPixels": 6
+        },
+        {
+          "PlaneId": 44,
+          "SectorIndex": 21,
+          "Surface": "Floor",
+          "MismatchPixels": 6
+        },
+        {
+          "PlaneId": 45,
+          "SectorIndex": 22,
+          "Surface": "Ceiling",
+          "MismatchPixels": 269
+        },
+        {
+          "PlaneId": 46,
+          "SectorIndex": 22,
+          "Surface": "Floor",
+          "MismatchPixels": 331
+        },
+        {
+          "PlaneId": 119,
+          "SectorIndex": 59,
+          "Surface": "Ceiling",
+          "MismatchPixels": 8
+        },
+        {
+          "PlaneId": 121,
+          "SectorIndex": 60,
+          "Surface": "Ceiling",
+          "MismatchPixels": 15
+        },
+        {
+          "PlaneId": 122,
+          "SectorIndex": 60,
+          "Surface": "Floor",
+          "MismatchPixels": 27
+        }
+      ],
+      "ReferencePlaneWriteMismatchPixels": 1155,
+      "CandidatePlaneMismatchReferencePlaneWrites": 800,
+      "CandidatePlaneMismatchSameOwnerWrites": 666,
+      "CandidatePlaneMismatchDifferentOwnerWrites": 134,
+      "CandidatePlaneMismatchNoReferencePlaneWrite": 212,
+      "CandidatePlaneMismatchUnknownReferenceOwner": 0,
+      "CandidateNonPlaneMismatchReferencePlaneWrites": 355,
+      "CandidatePlaneMismatchReferenceFinalPlaneWrites": 800,
+      "CandidatePlaneMismatchReferenceFinalColumnWrites": 212,
+      "CandidatePlaneMismatchReferenceFinalFuzzWrites": 0,
+      "CandidatePlaneMismatchReferenceFinalUnmarkedWrites": 0,
+      "ReferencePlaneWriteOwnerPairs": [
+        {
+          "Pair": "Candidate S15 Ceiling -> reference S22 Ceiling",
+          "MismatchPixels": 6
+        },
+        {
+          "Pair": "Candidate S15 Floor -> reference S15 Floor",
+          "MismatchPixels": 185
+        },
+        {
+          "Pair": "Candidate S15 Floor -> reference S16 Floor",
+          "MismatchPixels": 4
+        },
+        {
+          "Pair": "Candidate S15 Floor -> reference S18 Floor",
+          "MismatchPixels": 8
+        },
+        {
+          "Pair": "Candidate S18 Floor -> reference S15 Floor",
+          "MismatchPixels": 12
+        },
+        {
+          "Pair": "Candidate S18 Floor -> reference S18 Floor",
+          "MismatchPixels": 3
+        },
+        {
+          "Pair": "Candidate S19 Ceiling -> reference S19 Ceiling",
+          "MismatchPixels": 2
+        },
+        {
+          "Pair": "Candidate S19 Floor -> reference S18 Floor",
+          "MismatchPixels": 14
+        },
+        {
+          "Pair": "Candidate S20 Ceiling -> reference S60 Ceiling",
+          "MismatchPixels": 6
+        },
+        {
+          "Pair": "Candidate S22 Ceiling -> reference S22 Ceiling",
+          "MismatchPixels": 269
+        },
+        {
+          "Pair": "Candidate S22 Floor -> reference S15 Floor",
+          "MismatchPixels": 76
+        },
+        {
+          "Pair": "Candidate S22 Floor -> reference S22 Floor",
+          "MismatchPixels": 192
+        },
+        {
+          "Pair": "Candidate S59 Ceiling -> reference S60 Ceiling",
+          "MismatchPixels": 8
+        },
+        {
+          "Pair": "Candidate S60 Ceiling -> reference S60 Ceiling",
+          "MismatchPixels": 15
+        }
+      ]
+    }
+  ],
+  "ComparedScenePixels": 53760,
+  "ComparedHudPixels": 10240,
+  "MismatchMaskLocationsChangedFirstToLast": 1463,
+  "CandidatePixelsChangedFirstToLast": 50739,
+  "ReferencePixelsChangedFirstToLast": 50733,
+  "PlaneMathParity": {
+    "PlaneColumnAngleMismatchXs": [],
+    "PlaneDistanceScaleMismatchXs": [],
+    "PlaneRowSlopeMismatchYs": [],
+    "ViewColumnCosMismatchXs": [],
+    "ViewColumnSinMismatchXs": [],
+    "CandidatePlaneBaseXScale": -1,
+    "ReferencePlaneBaseXScale": -1,
+    "CandidatePlaneBaseYScale": 409,
+    "ReferencePlaneBaseYScale": 409
+  },
+  "ReferenceEngineSourceRoot": "local/moving-ceiling-reference-plane-owner-source-20261019-v3",
+  "ReferenceEngineBundlePath": "local/moving-sector-reference-plane-final-writer-instrumented-20261019-v3.ps1",
+  "ReferenceEngineBundleSha256": "B2A48897E11696A10128F0373E4C16CCAE1B30DF63D42E5EF28429F3E3CD6B1F",
+  "ReferencePlaneOwnershipCaptured": true,
+  "OnlyChangedSectorCeiling": true,
+  "OtherSimulationStateHeldFixed": true,
+  "Reference": "Locally adapted PowerShell ManagedDoom ThreeDRenderer",
+  "OriginalExecutableComparison": false,
+  "Sources": [
+    {
+      "Sha256": "4BBE6E92345952F976B35B568F901355A939B53E37455016BF5C1B2E6AC943DD",
+      "Path": "src/FastRenderer.ps1"
+    },
+    {
+      "Sha256": "CBADD9B913973D0442B4BE7A45F4C1069FA75B8DCAF78F4A550AE72C4ACED706",
+      "Path": "src/GameHost.ps1"
+    },
+    {
+      "Sha256": "0E0BF15D2030EB0E7574EBE8180BE56570C539485D5960F602CEE51DB5E4BE9D",
+      "Path": "local/moving-ceiling-reference-plane-owner-source-20261019-v3/Video/ThreeDRenderer.sb.ps1"
+    },
+    {
+      "Sha256": "9926E254F54250EEDD4F929681026BFF9ECEE7E6A9869FE99114F4FCD0CCF84B",
+      "Path": "src/ManagedDoom/Video/ThreeDRenderer.sb.ps1"
+    },
+    {
+      "Sha256": "B743B0484FF10F79900A9EE1506C860FDBA95B447E2DF3A95C033774CA31FC1D",
+      "Path": "scripts/Compare-MovingSectorHeightSweep.ps1"
+    }
+  ],
+  "DiagnosticImages": [],
+  "Error": null,
+  "Interpretation": "A counterfactual surface-fidelity comparison, not a movement/progression test, original-executable parity result, or performance measurement.",
+  "CandidateOwnershipInterpretation": "Plane-buffer counts classify the candidate plane ID at mismatch coordinates; a later actor may overlay that plane. The finite-depth count does not distinguish walls from sprites.",
+  "ReferencePlaneWritesInterpretation": "Plane ownership records the last reference floor/ceiling write. Final-writer tags distinguish that plane write from later mapped-column writes or fuzz writes; unmarked writers may include other compositor paths.",
+  "PlaneMathInterpretation": "Plane table and per-column fixed sine parity are compared after the final full-width candidate/reference render; this does not compare per-pixel plane fraction recurrence or light selection."
+}
