@@ -18,6 +18,10 @@ Microsoft documents [event callbacks and device opening](https://learn.microsoft
 
 ## Evidence so far
 
+- `results/current-source-audio-mixer-20261019.json`: 27 current-source
+  synthetic checks pass for DMX decoding, resampling, stereo geometry, saturation,
+  voice lifecycle, pause/mute and block-boundary invariance. No audio device,
+  game host, WAD or live listening test was used.
 - `results/audio-mixer-first.json`: 21 independent checks covering malformed DMX data, padding, unsigned conversion, interpolation values, block partition invariance, overlapping saturation, pause/mute advancement, voice replacement, stereo direction, distance and listener rotation.
 - `results/audio-replay-first.json`: preserved failed harness attempt. A legacy replay has null control events; a strict-mode `.Count` access failed before asset decoding. The corrected harness handles null and bounds fixtures to ten minutes.
 - `results/audio-replay-legacy.json`: the ordinary-input E1M1/intermission/E1M2 route emits 75 events, preserves all eight existing checkpoints and produces 2,201,220 stereo frames (49.914286 seconds). Maximum simultaneous voices: five. Sixteen channel samples clip; replacement count is 29. The first sound is near 8.89 seconds, so the opening silence is intentional. ffprobe independently identifies the output as 44.1 kHz stereo PCM signed 16-bit.

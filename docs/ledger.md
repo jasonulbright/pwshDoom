@@ -58,6 +58,16 @@ injected and do not represent map or episode play. The [receipt](../results/curr
 pins the WAD, harness and save-state source hashes. No game host, display,
 audio device or human route was used.
 
+## 2026-10-19 — Recheck current-source audio mixing
+
+`Test-AudioMixer.ps1` passes 27 synthetic checks on source commit `c96415c`.
+Coverage includes DMX decoding, resampling, stereo direction/rotation,
+saturation, same-emitter replacement, voice limits, pause/mute and block
+partition invariance. The [receipt](../results/current-source-audio-mixer-20261019.json)
+pins the mixer source hash. No WAD, game host, display, audio device or human
+listening test was used; Windows playback, sustained continuity, latency and
+acoustic quality remain open.
+
 ## 2026-10-04 — Cover all cardinal view headings in wall projection
 
 Extended the synthetic fixed-angle span harness from 0°/90° to all four

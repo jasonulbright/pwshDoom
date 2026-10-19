@@ -121,6 +121,13 @@ continuation. Death continues through Use and rebirth. Completion is an explicit
 fixture, not map play or finale-fidelity evidence. See the [receipt](../results/current-source-save-session-edges-20261019.json)
 and [save/load record](save-load.md). Physical menu flow remains unverified.
 
+Current-source audio-mixer regression — October 19, 2026: 27 deterministic
+synthetic PCM checks pass for DMX decoding, resampling, stereo geometry,
+saturation, voice replacement, pause/mute and block invariance. No game host or
+audio device was opened. This does not verify score continuity, Windows device
+behavior, latency or acoustic quality. See the [receipt](../results/current-source-audio-mixer-20261019.json)
+and [audio record](audio.md).
+
 The 2026-09-28 audio output-clock change addresses the D_E3M6 packet-queue
 gaps seen in packet-exact headless runs. Interactive PowerShell playback now
 advances active music/effect state when the simulation has not yet published
