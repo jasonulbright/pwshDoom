@@ -13,6 +13,9 @@ Current-source offline fixtures also pass 69 campaign-transition checks, 20
 save/finale-edge checks and 27 synthetic audio-mixer checks. These results are
 recorded against later source commits and do not belong to either Preview.8
 package; they do not certify route completion or audio-device behavior.
+The opt-in input recorder now also writes a checksummed recovery journal and
+can rebuild a replay from complete batches. Its 18 offline contract and static
+wiring checks pass; game-session crash recovery has not yet been exercised.
 
 ## 0.1.0-preview.8 — 2026-10-04
 
