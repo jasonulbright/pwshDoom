@@ -1452,20 +1452,31 @@ no live tests or desktop/device interaction were used.
 
 ### Reference-origin plane-sample counterfactual — October 19, 2026
 
-The refreshed [receipt](../results/moving-sector-portal-owner-segments-20261019-v4.json)
+The refreshed [receipt](../results/moving-sector-portal-owner-segments-20261019-v5.json)
 recomputes the 14 height-68 candidate plane samples from the reference's
 recorded recurrence origin while retaining the candidate plane and its sample
 lighting. The candidate and reference distances match for all 14 pixels; their
 actual-origin fractions, texture coordinates, flat texels and sampled colors do
 not. Using the reference origin reproduces the reference fractions, texture
 coordinates and flat texels for all 14, and the sampled color bytes also match.
-This supports recurrence origin as a cause of the sampled texel differences.
+At all 14 pixels the current candidate framebuffer matches its current-origin
+plane sample; the reference-origin counterfactual sample instead matches the
+reference framebuffer. This supports recurrence origin as the cause of these
+sampled color differences for this saved state.
 
 The candidate light-map index is 0 at these samples, while reference indices
 range from 18 to 40, so equal color bytes here do not establish lighting-table
 parity. The height-68 scene still differs at 353 pixels, including 14 plane
-buffer owner mismatches. This counterfactual does not resolve plane coverage,
-which owner matches the original executable, or overall rendering fidelity;
+buffer owner mismatches. The counterfactual does not resolve plane coverage,
+which owner matches the original executable, or the remaining scene errors;
 production rendering remains unchanged. Candidate and reference frame hashes
 remain identical to the earlier four-height sweep. This was offline saved-replay
 analysis only, with no live test or desktop/device interaction.
+
+The same receipt classifies the 339 height-68 differences without a candidate
+plane ID. The reference's final writer is a plane for 243 pixels and a mapped
+column for 96; the candidate has finite depth at 188 of the former and all 96
+of the latter. The other 55 reference-plane pixels have no candidate depth.
+Reference final passes are BSP traversal for 325 pixels and world sprites for
+14. These counts make candidate depth/coverage the next area to trace; they do
+not by themselves identify which candidate segment or sprite caused a pixel.

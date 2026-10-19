@@ -1135,12 +1135,19 @@ does not determine the original executable's pixel result. See the
 [world-space receipt](../results/moving-sector-portal-owner-segments-20261019-v2.json).
 
 The reference-origin counterfactual then reproduced the reference fractions,
-texture coordinates and flat texels at all 14 height-68 samples. Candidate
-sample color bytes also match, although candidate light-map index 0 differs from
-the reference indices 18–40, so this does not prove lighting parity. The
-height-68 scene still has 353 differing pixels and 14 plane-owner mismatches.
-This is evidence that recurrence origin contributes to the sampled-texture
-difference, not a complete rendering fix or original-executable comparison.
-Production remains unchanged. See the
-[counterfactual receipt](../results/moving-sector-portal-owner-segments-20261019-v4.json)
+texture coordinates and flat texels at all 14 height-68 samples. The current
+candidate framebuffer matches its current-origin sample at each pixel; the
+reference-origin sample matches the reference framebuffer at all 14. Candidate
+light-map index 0 differs from reference indices 18–40, so this does not prove
+lighting parity. The height-68 scene still has 353 differing pixels and 14
+plane-owner mismatches. This isolates the sampled-color difference for those
+pixels, not the coverage error, remaining scene differences or original-
+executable output. Production remains unchanged. See the
+[counterfactual receipt](../results/moving-sector-portal-owner-segments-20261019-v5.json)
 and [fidelity note](rendering-fidelity.md#reference-origin-plane-sample-counterfactual--october-19-2026).
+The same receipt classifies the other 339 height-68 differences: 243 reference
+plane writes and 96 mapped-column writes. Candidate depth is finite for 188 of
+the former and all of the latter, while 55 reference-plane pixels have no
+candidate depth. The next investigation should trace those depth owners and
+missing spans. This remains saved-replay evidence; no live tests or device
+interaction were run.

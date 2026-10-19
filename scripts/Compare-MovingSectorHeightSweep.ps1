@@ -24,6 +24,12 @@ $referenceRenderPassNames = @{
     '5' = 'Back-screen fill'
     '6' = 'Sky column'
 }
+$referenceFinalWriterNames = @{
+    '0' = 'Unmarked'
+    '1' = 'Plane'
+    '2' = 'Mapped column'
+    '3' = 'Fuzz column'
+}
 
 function Get-FastPlaneSample {
     param(
@@ -368,6 +374,10 @@ try {
         $candidatePlaneMismatchBspColumnPixels = 0
         $candidatePlaneMismatchSameOwnerFinalPlaneWrites = 0
         $candidatePlaneMismatchFinalRenderPassCounts = @{}
+        $candidateNonPlaneMismatchFinalWriterCounts = @{}
+        $candidateNonPlaneMismatchFinalRenderPassCounts = @{}
+        $candidateNonPlaneMismatchWriterDepthWrittenCounts = @{}
+        $candidateNonPlaneMismatchWriterNoDepthCounts = @{}
         $candidatePlaneMismatchWallSpanCounts = [ordered]@{
             ReferenceOpaqueWallPixels = 0
             ReferenceWallWriteIntervalContainsPixel = 0
@@ -577,6 +587,32 @@ try {
                                         }
                                     }
                                 }
+                            }
+                        } else {
+                            [string]$writerKey = [string][int]$reference3D.DiagnosticFinalWriterTypes[$referencePosition]
+                            if ($candidateNonPlaneMismatchFinalWriterCounts.ContainsKey($writerKey)) {
+                                $candidateNonPlaneMismatchFinalWriterCounts[$writerKey]++
+                            } else {
+                                $candidateNonPlaneMismatchFinalWriterCounts[$writerKey] = 1
+                            }
+                            if ($context.Depth[$candidateIndex] -eq [double]::PositiveInfinity) {
+                                if ($candidateNonPlaneMismatchWriterNoDepthCounts.ContainsKey($writerKey)) {
+                                    $candidateNonPlaneMismatchWriterNoDepthCounts[$writerKey]++
+                                } else {
+                                    $candidateNonPlaneMismatchWriterNoDepthCounts[$writerKey] = 1
+                                }
+                            } else {
+                                if ($candidateNonPlaneMismatchWriterDepthWrittenCounts.ContainsKey($writerKey)) {
+                                    $candidateNonPlaneMismatchWriterDepthWrittenCounts[$writerKey]++
+                                } else {
+                                    $candidateNonPlaneMismatchWriterDepthWrittenCounts[$writerKey] = 1
+                                }
+                            }
+                            [string]$renderPassKey = [string][int]$reference3D.DiagnosticFinalRenderPassTypes[$referencePosition]
+                            if ($candidateNonPlaneMismatchFinalRenderPassCounts.ContainsKey($renderPassKey)) {
+                                $candidateNonPlaneMismatchFinalRenderPassCounts[$renderPassKey]++
+                            } else {
+                                $candidateNonPlaneMismatchFinalRenderPassCounts[$renderPassKey] = 1
                             }
                         }
                         if ($null -eq $referenceOwner) {
@@ -973,6 +1009,9 @@ try {
                                                     ReferencePlaneSampleFlatTexelIndex = $referencePlaneSampleTexelIndex
                                                     CandidatePlaneSampleColor = $candidateMismatchPlaneSample.Color
                                                     ReferencePlaneSampleColor = $referencePlaneSampleColor
+                                                    CandidateFramebufferColor = [byte]$candidate[$candidateIndex]
+                                                    CandidateFramebufferMatchesCurrentPlaneSample = ([byte]$candidate[$candidateIndex] -eq $candidateMismatchPlaneSample.Color)
+                                                    CandidateFramebufferMatchesReferenceOriginSample = ([byte]$candidate[$candidateIndex] -eq $candidateReferenceOriginColor)
                                                     CandidateSectorFloorHeightData = $context.SectorFloorHeightData[$candidateSectorIndex]
                                                     ReferenceSectorFloorHeightData = $context.SectorFloorHeightData[$referenceOwnerSectorIndex]
                                                     CandidateSectorCeilingHeightData = $context.SectorCeilingHeightData[$candidateSectorIndex]
@@ -1021,6 +1060,16 @@ try {
             foreach ($renderPassCount in $candidatePlaneMismatchFinalRenderPassCounts.Values) { $candidatePlaneMismatchFinalRenderPassTotal += [int]$renderPassCount }
             if ($candidatePlaneMismatchFinalRenderPassTotal -ne $candidatePlaneMismatchPixels) {
                 throw "Reference final render-pass classes did not reconcile at ceiling height $height."
+            }
+            $candidateNonPlaneMismatchFinalWriterTotal = 0
+            foreach ($writerCount in $candidateNonPlaneMismatchFinalWriterCounts.Values) { $candidateNonPlaneMismatchFinalWriterTotal += [int]$writerCount }
+            if ($candidateNonPlaneMismatchFinalWriterTotal -ne $candidateNonPlaneMismatchPixels) {
+                throw "Reference final-writer classes did not reconcile for non-plane mismatches at ceiling height $height."
+            }
+            $candidateNonPlaneMismatchFinalRenderPassTotal = 0
+            foreach ($renderPassCount in $candidateNonPlaneMismatchFinalRenderPassCounts.Values) { $candidateNonPlaneMismatchFinalRenderPassTotal += [int]$renderPassCount }
+            if ($candidateNonPlaneMismatchFinalRenderPassTotal -ne $candidateNonPlaneMismatchPixels) {
+                throw "Reference final render-pass classes did not reconcile for non-plane mismatches at ceiling height $height."
             }
             if ($CaptureWallBoundaryTrace) {
                 if ($candidatePlaneMismatchWallSpanCounts.ReferenceOpaqueWallPixels -ne $candidatePlaneMismatchBspColumnPixels -or
@@ -1089,6 +1138,26 @@ try {
             CandidatePlaneMismatchReferenceFinalFuzzWrites = $candidatePlaneMismatchReferenceFinalFuzzWrites
             CandidatePlaneMismatchReferenceFinalUnmarkedWrites = $candidatePlaneMismatchReferenceFinalUnmarkedWrites
             CandidatePlaneMismatchSameOwnerFinalPlaneWrites = $candidatePlaneMismatchSameOwnerFinalPlaneWrites
+            CandidateNonPlaneMismatchReferenceFinalWriters = @(
+                foreach ($writerKey in @($candidateNonPlaneMismatchFinalWriterCounts.Keys | Sort-Object { [int]$_ })) {
+                    [ordered]@{
+                        WriterType = [int]$writerKey
+                        WriterName = $referenceFinalWriterNames[[string][int]$writerKey]
+                        MismatchPixels = $candidateNonPlaneMismatchFinalWriterCounts[$writerKey]
+                        CandidateDepthWrittenPixels = if ($candidateNonPlaneMismatchWriterDepthWrittenCounts.ContainsKey([string]$writerKey)) { $candidateNonPlaneMismatchWriterDepthWrittenCounts[[string]$writerKey] } else { 0 }
+                        CandidateDepthInfinitePixels = if ($candidateNonPlaneMismatchWriterNoDepthCounts.ContainsKey([string]$writerKey)) { $candidateNonPlaneMismatchWriterNoDepthCounts[[string]$writerKey] } else { 0 }
+                    }
+                }
+            )
+            CandidateNonPlaneMismatchReferenceFinalRenderPasses = @(
+                foreach ($passKey in @($candidateNonPlaneMismatchFinalRenderPassCounts.Keys | Sort-Object { [int]$_ })) {
+                    [ordered]@{
+                        PassType = [int]$passKey
+                        PassName = $referenceRenderPassNames[[string][int]$passKey]
+                        MismatchPixels = $candidateNonPlaneMismatchFinalRenderPassCounts[$passKey]
+                    }
+                }
+            )
             CandidatePlaneMismatchReferenceFinalRenderPasses = @(
                 foreach ($passKey in @($candidatePlaneMismatchFinalRenderPassCounts.Keys | Sort-Object { [int]$_ })) {
                     [ordered]@{

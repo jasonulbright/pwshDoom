@@ -7121,12 +7121,24 @@ candidate plane-buffer mismatches. Candidate and reference distances match at
 all 14, but candidate fractions, texture coordinates, flat texels and sample
 colors at their actual origins do not. Recomputing candidate samples from each
 reference recurrence origin reproduces all 14 reference fractions, texture
-coordinates and flat texels; the resulting candidate sample color bytes also
-match. The candidate uses light-map index 0 while reference indices range from
-18 to 40, so byte equality does not prove lighting parity. The 353 scene-pixel
-difference at height 68 and the 14 owner mismatches remain. This narrows the
-sampled-texture discrepancy without resolving coverage or original-executable
-parity, and does not justify a production change. Frame hashes match the prior
-four-height result. See the [receipt](../results/moving-sector-portal-owner-segments-20261019-v4.json).
+coordinates and flat texels; the resulting sample colors match the reference
+framebuffer for all 14. The current candidate framebuffer matches the current
+candidate sample at all 14, so the counterfactual predicts those bytes would
+change to the reference values. The candidate uses light-map index 0 while
+reference indices range from 18 to 40, so byte equality does not prove lighting
+parity. The 353 scene-pixel difference at height 68 and the 14 owner mismatches
+remain. This isolates the sampled-color difference for those pixels but does
+not resolve coverage, original-executable parity or the remaining scene errors.
+Frame hashes match the prior four-height result. See the
+[receipt](../results/moving-sector-portal-owner-segments-20261019-v5.json).
 This was offline saved-replay analysis only; no live tests or desktop/device
 interaction were used.
+
+The same receipt attributes the 339 height-68 scene differences where the
+candidate plane ID is empty: 243 end with a reference plane write and 96 with a
+reference mapped-column write. Candidate depth is finite for 188 of those
+reference-plane pixels and all 96 mapped-column pixels; 55 reference-plane
+pixels have no candidate depth. Reference final-pass counts are 325 BSP
+traversal and 14 world-sprite writes. This narrows the next trace to candidate
+depth and missing-plane coverage while leaving the responsible candidate
+segments and original-executable output unresolved.
