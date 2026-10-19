@@ -7076,3 +7076,19 @@ found in `local/` are tiny FFmpeg reference fixtures (about 0.01 MB total); no
 reviewed gameplay MP4s are retained there. The branch is 34 commits past
 Preview.8 before this evidence change, so this commit reaches the 35-commit
 release threshold.
+
+### 2026-10-19 — Publish Preview.9 at the 35-commit threshold
+
+Published [Preview.9](https://github.com/jasonulbright/pwshDoom/releases/tag/v0.1.0-preview.9)
+from clean source commit `7d46f621e72d70de88ebf66864f195ef614ff6fa`, exactly 35
+commits after Preview.8. The 1,907,025-byte ZIP contains 581 manifest payloads;
+all 581 extracted hashes and byte counts match, and the package has no IWAD,
+research PDF, executable or video media. The local archive SHA-256 and GitHub
+asset digest both equal
+`8F7CF580A66389DC48C0129AF9BCEBEF4941033E967EB4E632FD2163A2DE33D4`.
+The adjacent `SHA256SUMS.txt` asset also matches its published GitHub digest.
+No live game or device test was run. The [publication receipt](../results/preview9-publication-20261019.json)
+records the release target, asset hashes, clean manifest verification and
+local-tree measurement. The current local tree remains below the
+30,000,000,000-byte cap; the next cumulative release is due after 35 commits
+from Preview.9.
