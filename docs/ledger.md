@@ -6882,3 +6882,17 @@ fixed-point recurrence; it does not prove which candidate boundary rule should
 change. The [origin receipt](../results/moving-sector-reference-plane-recurrence-origin-20261019-v1.json)
 and [control](../results/moving-sector-reference-plane-recurrence-origin-control-20261019-v1.json)
 pin the comparison. No live game, display, keyboard or audio device was used.
+
+### Candidate column-origin sampling counterfactual — October 19, 2026
+
+A copied renderer reconstructs plane call origins by scanning the final
+candidate plane mask as vertical column runs and carries fixed-point
+coordinates across adjacent columns when sector and overlap conditions match.
+The candidate matches the standard scene counts at heights 0, 6 and 34, but
+height 68 rises from 1,463 to 1,798 mismatches. The reference frame hashes
+remain unchanged, and heights 0 and 6 stay exact. This candidate-origin rule
+is rejected; production plane sampling remains unchanged. The
+[variant receipt](../results/moving-sector-plane-column-origin-sampling-20261019-v1.json),
+[control](../results/moving-sector-plane-column-origin-sampling-control-20261019-v1.json)
+and [preparation script](../scripts/Prepare-PlaneColumnOriginSamplingDiagnosticRenderer.ps1)
+preserve the experiment. It used an offline saved replay only.

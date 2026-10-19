@@ -970,6 +970,9 @@ horizontal-span sampler remains unchanged. The residual plane gap is narrowed
 to different fixed-point recurrence origins: the candidate row span starts
 before the reference initialization column at all 68 same-owner samples at
 height 34 and 575 of 666 at height 68. Mapped-column coverage remains open.
+Reconstructing origins from vertical runs in the candidate plane mask leaves
+height 34 unchanged and worsens height 68 to 1,798 mismatches, so that
+counterfactual is rejected.
 See the [final-writer receipt](../results/moving-sector-reference-plane-final-writer-verified-20261019-v3.json),
 [sample comparison](../results/moving-sector-reference-plane-samples-verified-20261019-v7.json)
 and [recurrence-origin control](../results/moving-sector-reference-plane-recurrence-origin-control-20261019-v1.json).

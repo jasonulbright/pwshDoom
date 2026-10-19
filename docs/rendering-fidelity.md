@@ -1265,3 +1265,10 @@ renderers carry the fixed-point recurrence from different span origins; it
 does not yet establish a production-safe correction. See the
 [origin receipt](../results/moving-sector-reference-plane-recurrence-origin-20261019-v1.json)
 and [control](../results/moving-sector-reference-plane-recurrence-origin-control-20261019-v1.json).
+
+A second counterfactual reconstructs candidate origins from vertical runs in
+the final plane mask and applies previous-column recurrence within those runs.
+It leaves height 34 unchanged at 307 scene differences but raises height 68
+from 1,463 to 1,798. This candidate-boundary model is rejected; production
+sampling remains unchanged. See the [variant receipt](../results/moving-sector-plane-column-origin-sampling-20261019-v1.json)
+and [control](../results/moving-sector-plane-column-origin-sampling-control-20261019-v1.json).

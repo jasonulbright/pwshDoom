@@ -1,0 +1,59 @@
+{
+  "SchemaVersion": 1,
+  "FinishedUtc": "2026-10-19T14:26:17.1044869Z",
+  "Scope": "Offline saved headless replay only; no live game, display, keyboard or audio device.",
+  "StandardReceipt": "results/moving-sector-reference-plane-samples-verified-20261019-v7.json",
+  "StandardReceiptSha256": "256EA224A5C719DEC5C978E60E0D09BFD06B1B9E8DDB9F8D4A13211A355E737F",
+  "VariantReceipt": "results/moving-sector-plane-column-origin-sampling-20261019-v1.json",
+  "VariantReceiptSha256": "A61F430A258CF113FF16BAF3D452CC67B40D2B8B3588E946AFDEDA7770FB5EC2",
+  "RendererPreparationScript": "scripts/Prepare-PlaneColumnOriginSamplingDiagnosticRenderer.ps1",
+  "RendererPreparationScriptSha256": "BC3887698789CC78453C03207BA202BFC3262DC23B2090F43C2767675B30CDDC",
+  "ComparisonScript": "scripts/Compare-MovingSectorHeightSweep.ps1",
+  "ComparisonScriptSha256": "4BBFF451A0A5F73369F105422BDD739C2BBD3941E3CA5D17139A7B913AAC6F0A",
+  "VariantRendererSha256": "DD755422C88DC28EDE9CCFC27FF23CF9BF6B043C72C0E52C377FE8167B8F7444",
+  "AllReferenceFrameHashesMatchStandard": true,
+  "HeightsZeroAndSixRemainExact": true,
+  "Rows": [
+    {
+      "CeilingHeight": 0,
+      "StandardSceneMismatchPixels": 0,
+      "VariantSceneMismatchPixels": 0,
+      "MismatchDelta": 0,
+      "StandardCandidatePlaneMismatchPixels": 0,
+      "VariantCandidatePlaneMismatchPixels": 0,
+      "ReferenceFrameHashMatchesStandard": true,
+      "HudMismatchPixels": 0
+    },
+    {
+      "CeilingHeight": 6,
+      "StandardSceneMismatchPixels": 0,
+      "VariantSceneMismatchPixels": 0,
+      "MismatchDelta": 0,
+      "StandardCandidatePlaneMismatchPixels": 0,
+      "VariantCandidatePlaneMismatchPixels": 0,
+      "ReferenceFrameHashMatchesStandard": true,
+      "HudMismatchPixels": 0
+    },
+    {
+      "CeilingHeight": 34,
+      "StandardSceneMismatchPixels": 307,
+      "VariantSceneMismatchPixels": 307,
+      "MismatchDelta": 0,
+      "StandardCandidatePlaneMismatchPixels": 205,
+      "VariantCandidatePlaneMismatchPixels": 205,
+      "ReferenceFrameHashMatchesStandard": true,
+      "HudMismatchPixels": 0
+    },
+    {
+      "CeilingHeight": 68,
+      "StandardSceneMismatchPixels": 1463,
+      "VariantSceneMismatchPixels": 1798,
+      "MismatchDelta": 335,
+      "StandardCandidatePlaneMismatchPixels": 1012,
+      "VariantCandidatePlaneMismatchPixels": 1347,
+      "ReferenceFrameHashMatchesStandard": true,
+      "HudMismatchPixels": 0
+    }
+  ],
+  "Conclusion": "Reconstructing candidate plane origins from vertical runs of the final plane mask leaves height 34 unchanged at 307 scene mismatches and increases height 68 from 1,463 to 1,798. Reject this candidate-origin rule; keep the production horizontal-span sampler unchanged."
+}

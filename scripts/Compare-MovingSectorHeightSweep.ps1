@@ -51,16 +51,21 @@ function Get-FastPlaneSample {
     [int]$stepX = ([long]$distanceData * [long]$planeBaseX) -shr 16
     [int]$stepY = ([long]$distanceData * [long]$planeBaseY) -shr 16
 
-    [int]$spanStart = 0
-    if ($Context.ContainsKey('PlaneSpanBoundaries')) {
-        foreach ($boundary in $Context.PlaneSpanBoundaries) {
-            if ($boundary -gt $X) { break }
-            $spanStart = [int]$boundary
-        }
-    }
     [int]$row = $Y * 320
     [int]$startX = $X
-    while ($startX -gt $spanStart -and $Context.Planes[$row + $startX - 1] -eq $PlaneId) { $startX-- }
+    if ($Context.ContainsKey('PlaneSampleOriginX')) {
+        $startX = [int]$Context.PlaneSampleOriginX[$row + $X]
+        if ($startX -lt 0 -or $startX -gt $X) { throw "Invalid candidate plane sample origin $startX at ($X,$Y)." }
+    } else {
+        [int]$spanStart = 0
+        if ($Context.ContainsKey('PlaneSpanBoundaries')) {
+            foreach ($boundary in $Context.PlaneSpanBoundaries) {
+                if ($boundary -gt $X) { break }
+                $spanStart = [int]$boundary
+            }
+        }
+        while ($startX -gt $spanStart -and $Context.Planes[$row + $startX - 1] -eq $PlaneId) { $startX-- }
+    }
     [int]$lengthData = ([long]$distanceData * [long]$Context.PlaneDistanceScales[$startX]) -shr 16
     [long]$xFracWide = [long]$ViewXData + (([long]$Context.RayCos[$startX] * [long]$lengthData) -shr 16)
     [long]$yFracWide = -[long]$ViewYData - (([long]$Context.RaySin[$startX] * [long]$lengthData) -shr 16)
