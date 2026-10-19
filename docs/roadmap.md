@@ -1133,3 +1133,14 @@ plane spans from both renderers therefore reach another-height subsector at
 these coordinates. This narrows the issue to overlap and span ownership but
 does not determine the original executable's pixel result. See the
 [world-space receipt](../results/moving-sector-portal-owner-segments-20261019-v2.json).
+
+The reference-origin counterfactual then reproduced the reference fractions,
+texture coordinates and flat texels at all 14 height-68 samples. Candidate
+sample color bytes also match, although candidate light-map index 0 differs from
+the reference indices 18–40, so this does not prove lighting parity. The
+height-68 scene still has 353 differing pixels and 14 plane-owner mismatches.
+This is evidence that recurrence origin contributes to the sampled-texture
+difference, not a complete rendering fix or original-executable comparison.
+Production remains unchanged. See the
+[counterfactual receipt](../results/moving-sector-portal-owner-segments-20261019-v4.json)
+and [fidelity note](rendering-fidelity.md#reference-origin-plane-sample-counterfactual--october-19-2026).

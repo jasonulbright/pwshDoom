@@ -7113,3 +7113,20 @@ original executable. The [receipt](../results/moving-sector-portal-owner-segment
 pins the world coordinates, BSP sectors, and segment-side values. This is
 headless saved-replay work only; no live tests or desktop/device interaction
 were used.
+
+### 2026-10-19 — Re-evaluate portal samples from the reference recurrence origin
+
+Extended the saved-replay receipt with a counterfactual for the 14 height-68
+candidate plane-buffer mismatches. Candidate and reference distances match at
+all 14, but candidate fractions, texture coordinates, flat texels and sample
+colors at their actual origins do not. Recomputing candidate samples from each
+reference recurrence origin reproduces all 14 reference fractions, texture
+coordinates and flat texels; the resulting candidate sample color bytes also
+match. The candidate uses light-map index 0 while reference indices range from
+18 to 40, so byte equality does not prove lighting parity. The 353 scene-pixel
+difference at height 68 and the 14 owner mismatches remain. This narrows the
+sampled-texture discrepancy without resolving coverage or original-executable
+parity, and does not justify a production change. Frame hashes match the prior
+four-height result. See the [receipt](../results/moving-sector-portal-owner-segments-20261019-v4.json).
+This was offline saved-replay analysis only; no live tests or desktop/device
+interaction were used.

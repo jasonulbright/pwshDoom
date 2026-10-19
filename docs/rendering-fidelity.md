@@ -1449,3 +1449,23 @@ so no production correction is justified from this evidence. See the
 [world-space receipt](../results/moving-sector-portal-owner-segments-20261019-v2.json).
 The headless saved-replay and local PowerShell reference limits still apply;
 no live tests or desktop/device interaction were used.
+
+### Reference-origin plane-sample counterfactual — October 19, 2026
+
+The refreshed [receipt](../results/moving-sector-portal-owner-segments-20261019-v4.json)
+recomputes the 14 height-68 candidate plane samples from the reference's
+recorded recurrence origin while retaining the candidate plane and its sample
+lighting. The candidate and reference distances match for all 14 pixels; their
+actual-origin fractions, texture coordinates, flat texels and sampled colors do
+not. Using the reference origin reproduces the reference fractions, texture
+coordinates and flat texels for all 14, and the sampled color bytes also match.
+This supports recurrence origin as a cause of the sampled texel differences.
+
+The candidate light-map index is 0 at these samples, while reference indices
+range from 18 to 40, so equal color bytes here do not establish lighting-table
+parity. The height-68 scene still differs at 353 pixels, including 14 plane
+buffer owner mismatches. This counterfactual does not resolve plane coverage,
+which owner matches the original executable, or overall rendering fidelity;
+production rendering remains unchanged. Candidate and reference frame hashes
+remain identical to the earlier four-height sweep. This was offline saved-replay
+analysis only, with no live test or desktop/device interaction.

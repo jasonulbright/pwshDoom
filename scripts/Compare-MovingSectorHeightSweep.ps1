@@ -408,6 +408,17 @@ try {
             ReferencePlaneSampleMapSectorMatchesPlane = 0
             ReferencePlaneSampleMapSectorMatchesReferenceOwner = 0
             ReferencePlaneSampleMapSectorMatchesNeitherOwner = 0
+            CandidateReferencePlaneSameDistance = 0
+            CandidateReferencePlaneSameXFraction = 0
+            CandidateReferencePlaneSameYFraction = 0
+            CandidateReferencePlaneSameTextureCoordinates = 0
+            CandidateReferencePlaneSameFlatTexel = 0
+            CandidateReferencePlaneSameColor = 0
+            CandidateReferenceOriginSameXFraction = 0
+            CandidateReferenceOriginSameYFraction = 0
+            CandidateReferenceOriginSameTextureCoordinates = 0
+            CandidateReferenceOriginSameFlatTexel = 0
+            CandidateReferenceOriginSameColor = 0
         }
         $referencePlaneOwnerPairCounts = @{}
         $planeSampleCounts = [ordered]@{
@@ -726,6 +737,68 @@ try {
                                             $candidateMismatchPlaneSample = Get-FastPlaneSample $context $x $y $planeId $candidateViewXData $candidateViewYData $candidateViewZData $candidateViewAngleData $candidateExtraLight $candidateFixedColorMap
                                             [double]$candidatePlaneSampleWorldX = $candidateMismatchPlaneSample.XFracData / 65536.0
                                             [double]$candidatePlaneSampleWorldY = $candidateMismatchPlaneSample.YFracData / 65536.0
+                                            [int]$referencePlaneSampleDistanceData = $reference3D.DiagnosticPlaneDistanceData[$referencePosition]
+                                            [int]$referencePlaneSampleXFracData = $reference3D.DiagnosticPlaneXFracData[$referencePosition]
+                                            [int]$referencePlaneSampleYFracData = $reference3D.DiagnosticPlaneYFracData[$referencePosition]
+                                            [int]$referencePlaneSampleTexelIndex = $reference3D.DiagnosticPlaneTexelIndices[$referencePosition]
+                                            [byte]$referencePlaneSampleColor = $referencePixels[$referencePosition]
+                                            [int]$candidatePlaneSampleOriginX = $candidateMismatchPlaneSample.SampleOriginX
+                                            [int]$referencePlaneSampleOriginX = $reference3D.DiagnosticPlaneSampleOriginX[$referencePosition]
+                                            [int]$candidateReferenceOriginXFrac = $candidateMismatchPlaneSample.XFracData
+                                            [int]$candidateReferenceOriginYFrac = $candidateMismatchPlaneSample.YFracData
+                                            [int]$candidateReferenceOriginFlatTexelIndex = $candidateMismatchPlaneSample.FlatTexelIndex
+                                            [byte]$candidateReferenceOriginColor = $candidateMismatchPlaneSample.Color
+                                            if ($referencePlaneSampleOriginX -ge 0 -and $referencePlaneSampleOriginX -lt 320) {
+                                                [long]$candidateReferenceOriginLengthData = ([long]$candidateMismatchPlaneSample.DistanceData *
+                                                    [long]$context.PlaneDistanceScales[$referencePlaneSampleOriginX]) -shr 16
+                                                [long]$candidateReferenceOriginXFracWide = [long]$candidateViewXData +
+                                                    (([long]$context.RayCos[$referencePlaneSampleOriginX] * $candidateReferenceOriginLengthData) -shr 16)
+                                                [long]$candidateReferenceOriginYFracWide = -[long]$candidateViewYData -
+                                                    (([long]$context.RaySin[$referencePlaneSampleOriginX] * $candidateReferenceOriginLengthData) -shr 16)
+                                                $candidateReferenceOriginXFracWide += [long]$candidateMismatchPlaneSample.StepX * ($x - $referencePlaneSampleOriginX)
+                                                $candidateReferenceOriginYFracWide += [long]$candidateMismatchPlaneSample.StepY * ($x - $referencePlaneSampleOriginX)
+                                                [int]$candidateReferenceOriginXFrac = [int]($candidateReferenceOriginXFracWide -band 0xFFFFFFFFL)
+                                                [int]$candidateReferenceOriginYFrac = [int]($candidateReferenceOriginYFracWide -band 0xFFFFFFFFL)
+                                                [int]$candidateReferenceTextureX = ($candidateReferenceOriginXFrac -shr 16) -band 63
+                                                [int]$candidateReferenceTextureY = ((($candidateReferenceOriginYFrac -shr 10) -band 4032) -shr 6)
+                                                [int]$candidateReferenceOriginFlatTexelIndex = $context.PlaneFlatData[$candidateMismatchPlaneSample.FlatIndex][($candidateReferenceTextureY -shl 6) + $candidateReferenceTextureX]
+                                                [byte]$candidateReferenceOriginColor = $context.Colors[$candidateMismatchPlaneSample.LightMapIndex][$candidateReferenceOriginFlatTexelIndex]
+                                            }
+                                            if ($candidateMismatchPlaneSample.DistanceData -eq $referencePlaneSampleDistanceData) {
+                                                $candidatePlaneMismatchOwnerSegmentCounts.CandidateReferencePlaneSameDistance++
+                                            }
+                                            if ($candidateMismatchPlaneSample.XFracData -eq $referencePlaneSampleXFracData) {
+                                                $candidatePlaneMismatchOwnerSegmentCounts.CandidateReferencePlaneSameXFraction++
+                                            }
+                                            if ($candidateMismatchPlaneSample.YFracData -eq $referencePlaneSampleYFracData) {
+                                                $candidatePlaneMismatchOwnerSegmentCounts.CandidateReferencePlaneSameYFraction++
+                                            }
+                                            if ($candidateMismatchPlaneSample.TextureX -eq (($referencePlaneSampleXFracData -shr 16) -band 63) -and
+                                                $candidateMismatchPlaneSample.TextureY -eq (((($referencePlaneSampleYFracData -shr 10) -band 4032) -shr 6))) {
+                                                $candidatePlaneMismatchOwnerSegmentCounts.CandidateReferencePlaneSameTextureCoordinates++
+                                            }
+                                            if ($candidateMismatchPlaneSample.FlatTexelIndex -eq $referencePlaneSampleTexelIndex) {
+                                                $candidatePlaneMismatchOwnerSegmentCounts.CandidateReferencePlaneSameFlatTexel++
+                                            }
+                                            if ($candidateMismatchPlaneSample.Color -eq $referencePlaneSampleColor) {
+                                                $candidatePlaneMismatchOwnerSegmentCounts.CandidateReferencePlaneSameColor++
+                                            }
+                                            if ($candidateReferenceOriginXFrac -eq $referencePlaneSampleXFracData) {
+                                                $candidatePlaneMismatchOwnerSegmentCounts.CandidateReferenceOriginSameXFraction++
+                                            }
+                                            if ($candidateReferenceOriginYFrac -eq $referencePlaneSampleYFracData) {
+                                                $candidatePlaneMismatchOwnerSegmentCounts.CandidateReferenceOriginSameYFraction++
+                                            }
+                                            if ($candidateReferenceOriginXFrac -eq $referencePlaneSampleXFracData -and
+                                                $candidateReferenceOriginYFrac -eq $referencePlaneSampleYFracData) {
+                                                $candidatePlaneMismatchOwnerSegmentCounts.CandidateReferenceOriginSameTextureCoordinates++
+                                            }
+                                            if ($candidateReferenceOriginFlatTexelIndex -eq $referencePlaneSampleTexelIndex) {
+                                                $candidatePlaneMismatchOwnerSegmentCounts.CandidateReferenceOriginSameFlatTexel++
+                                            }
+                                            if ($candidateReferenceOriginColor -eq $referencePlaneSampleColor) {
+                                                $candidatePlaneMismatchOwnerSegmentCounts.CandidateReferenceOriginSameColor++
+                                            }
                                             $candidatePlaneSampleSubsector = [Geometry]::PointInSubsector(
                                                 [Fixed]::new([int]$candidateMismatchPlaneSample.XFracData),
                                                 [Fixed]::new([int]$candidateMismatchPlaneSample.YFracData),
@@ -879,6 +952,27 @@ try {
                                                     ReferencePlaneSampleMapSectorIndex = $referencePlaneSampleMapSectorIndex
                                                     ReferencePlaneSampleMapSectorFloorHeightData = if ($referencePlaneSampleMapSectorIndex -ge 0) { $context.SectorFloorHeightData[$referencePlaneSampleMapSectorIndex] } else { -1 }
                                                     ReferencePlaneSampleMapSectorCeilingHeightData = if ($referencePlaneSampleMapSectorIndex -ge 0) { $context.SectorCeilingHeightData[$referencePlaneSampleMapSectorIndex] } else { -1 }
+                                                    CandidatePlaneSampleDistanceData = $candidateMismatchPlaneSample.DistanceData
+                                                    ReferencePlaneSampleDistanceData = $referencePlaneSampleDistanceData
+                                                    CandidatePlaneSampleXFracData = $candidateMismatchPlaneSample.XFracData
+                                                    ReferencePlaneSampleXFracData = $referencePlaneSampleXFracData
+                                                    CandidatePlaneSampleYFracData = $candidateMismatchPlaneSample.YFracData
+                                                    ReferencePlaneSampleYFracData = $referencePlaneSampleYFracData
+                                                    CandidatePlaneSampleOriginX = $candidatePlaneSampleOriginX
+                                                    CandidateAtReferenceOriginXFracData = $candidateReferenceOriginXFrac
+                                                    CandidateAtReferenceOriginYFracData = $candidateReferenceOriginYFrac
+                                                    CandidateAtReferenceOriginFlatTexelIndex = $candidateReferenceOriginFlatTexelIndex
+                                                    CandidateAtReferenceOriginColor = $candidateReferenceOriginColor
+                                                    CandidatePlaneSampleLightMapIndex = $candidateMismatchPlaneSample.LightMapIndex
+                                                    ReferencePlaneSampleLightMapIndex = [int]$reference3D.DiagnosticPlaneLightIndices[$referencePosition]
+                                                    CandidatePlaneSampleTextureX = $candidateMismatchPlaneSample.TextureX
+                                                    ReferencePlaneSampleTextureX = (($referencePlaneSampleXFracData -shr 16) -band 63)
+                                                    CandidatePlaneSampleTextureY = $candidateMismatchPlaneSample.TextureY
+                                                    ReferencePlaneSampleTextureY = (((($referencePlaneSampleYFracData -shr 10) -band 4032) -shr 6))
+                                                    CandidatePlaneSampleFlatTexelIndex = $candidateMismatchPlaneSample.FlatTexelIndex
+                                                    ReferencePlaneSampleFlatTexelIndex = $referencePlaneSampleTexelIndex
+                                                    CandidatePlaneSampleColor = $candidateMismatchPlaneSample.Color
+                                                    ReferencePlaneSampleColor = $referencePlaneSampleColor
                                                     CandidateSectorFloorHeightData = $context.SectorFloorHeightData[$candidateSectorIndex]
                                                     ReferenceSectorFloorHeightData = $context.SectorFloorHeightData[$referenceOwnerSectorIndex]
                                                     CandidateSectorCeilingHeightData = $context.SectorCeilingHeightData[$candidateSectorIndex]
