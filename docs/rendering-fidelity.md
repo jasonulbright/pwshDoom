@@ -1193,6 +1193,12 @@ sprites. At height 34 every plane-owned mismatch is sector 22's floor; at height
 projection tables match exactly: per-column angles, plane distance scales, row
 slopes, view sine/cosine, and both plane-base scales. The evidence points past
 table construction, but does not yet distinguish plane texture coordinates,
-light selection, span recurrence or the finite-depth wall/sprite cases. See the
+per-pixel light-bin selection, span recurrence or the finite-depth wall/sprite cases. See the
 [ownership and table-parity
 receipt](../results/moving-sector-e1m1-height-sweep-plane-math-20261019.json).
+
+A current-source lighting-table check also matches all 768 projected-scale and
+2,048 distance bins to the adopted renderer's palette bytes (720,896 compared
+bytes). It verifies table contents, not the per-pixel bin selection in the
+rasterizer. The [receipt](../results/render-lighting-tables-current-20261019.json)
+pins source, harness, bundle and IWAD hashes.

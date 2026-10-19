@@ -6776,3 +6776,13 @@ The full project tree, including ignored files, measures 28,468,577,605 bytes
 (28.469 GB decimal / 26.513 GiB), below the 30,000,000,000-byte ceiling.
 The reference PDF is present at `docs/gebbdoom.pdf`; the existing exact
 `/docs/gebbdoom.pdf` rule in `.gitignore` ignores it, and it is not tracked.
+### Refresh current-source lighting-table parity — October 19, 2026
+
+The existing offline lighting check was rerun against current source after the
+moving-sector probe. All 768 projected-scale and 2,048 distance bins select
+palette bytes identical to the adopted PowerShell renderer (720,896 bytes
+compared). The receipt pins the current renderer, shared lighting table,
+harness, engine bundle and IWAD hashes. This verifies lookup-table contents,
+not per-pixel table-bin selection, original-executable fidelity or
+performance. No game host, window, keyboard or audio device was started.
+See the [receipt](../results/render-lighting-tables-current-20261019.json).
