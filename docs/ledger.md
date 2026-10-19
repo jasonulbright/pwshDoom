@@ -6989,11 +6989,13 @@ views and two uneven strips, with zero differences; see the
 [partition report](../results/render-partitions-plane-wall-boundary-20261019-r1.json).
 No live game, display, keyboard, audio device or pacing test was used.
 
-The edge fractions now advance as signed 32-bit state from column to column;
-when a worker clip skips columns, the next visible column applies the combined
-step. This recurrence produces byte-identical candidate and reference frame
-hashes to the prior boundary implementation at heights 0, 6, 34 and 68, with
-the same mismatch counts, and the two-worker check remains exact across five
-views (320,000 pixels). This verifies output equivalence for the implementation
-refinement but does not measure a speedup. See the [recurrence comparison](../results/moving-sector-per-call-plane-wall-boundary-20261019-v4.json)
-and [updated partition report](../results/render-partitions-plane-wall-boundary-20261019-r3.json).
+An incremental signed 32-bit recurrence produced the same candidate and
+reference frame hashes as direct offset evaluation at heights 0, 6, 34 and 68,
+with unchanged mismatch counts; the two-worker check also remained exact across
+five views (320,000 pixels). A paired offline profile then found no speedup:
+E1M1 geometry median rose 14.71%, while E1M2 rose 1.29% across 50 samples per
+version. The recurrence was removed and production returned to direct
+fixed-point offset evaluation; the boundary-correction fidelity change stays
+in place. See the [recurrence comparison](../results/moving-sector-per-call-plane-wall-boundary-20261019-v4.json),
+[partition report](../results/render-partitions-plane-wall-boundary-20261019-r3.json)
+and [performance receipt](../results/renderer-wall-boundary-recurrence-performance-20261019.json).

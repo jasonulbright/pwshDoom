@@ -18,6 +18,7 @@ param(
     [switch]$GeometryWorkCounters,
     [switch]$PreselectVisibleWallBands,
     [switch]$MeasureRendererAllocations,
+    [string]$Renderer="$PSScriptRoot/../src/FastRenderer.ps1",
     [string]$Output="$PSScriptRoot/../results/renderer-phases.json"
 )
 $ErrorActionPreference='Stop'
@@ -33,7 +34,8 @@ $outputPath=[IO.Path]::GetFullPath($Output)
 . "$PSScriptRoot/FrameCodec.ps1"
 $bundle=& "$PSScriptRoot/Build-EngineBundle.ps1"
 . $bundle
-$rendererSourcePath=[IO.Path]::GetFullPath("$PSScriptRoot/../src/FastRenderer.ps1")
+$rendererSourcePath=[IO.Path]::GetFullPath($Renderer)
+if(-not (Test-Path -LiteralPath $rendererSourcePath -PathType Leaf)){throw "Renderer source not found: $rendererSourcePath"}
 $rendererSourceText=[IO.File]::ReadAllText($rendererSourcePath)
 $rendererSourceSha256=[Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([Text.Encoding]::UTF8.GetBytes($rendererSourceText)))
 $rendererToLoad=$rendererSourcePath;$instrumentedRendererPath=$null;$instrumentedRendererArtifact=$null
@@ -293,7 +295,7 @@ try{
         Samples=$samples.ToArray()
         WadSha256=(Get-FileHash -LiteralPath $Wad).Hash
         BundleSha256=(Get-FileHash -LiteralPath $bundle).Hash
-        RendererSha256=(Get-FileHash -LiteralPath "$PSScriptRoot/../src/FastRenderer.ps1").Hash
+        RendererSha256=(Get-FileHash -LiteralPath $rendererSourcePath).Hash
         InstrumentedRendererSha256=if($GeometryWorkCounters){(Get-FileHash -LiteralPath $rendererToLoad).Hash}else{$null}
         RendererVariantSha256=if($PreselectVisibleWallBands){(Get-FileHash -LiteralPath $rendererToLoad).Hash}else{$null}
         RendererVariantArtifact=if($PreselectVisibleWallBands){[IO.Path]::GetRelativePath((Get-Location).Path,$instrumentedRendererArtifact)}else{$null}

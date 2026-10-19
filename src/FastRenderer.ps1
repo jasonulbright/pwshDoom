@@ -754,7 +754,7 @@ function Invoke-FastRender {
             [double]$iz1=1/$z1;[double]$iz2=1/$z2;[double]$uz1=$u1/$z1;[double]$uz2=$u2/$z2
             [bool]$wallUReady=$false;[int]$wallPerpData=0;[int]$wallOffsetData=0;[uint32]$wallCenterAngleData=0
             [bool]$wallScaleReady=$false;[int]$wallScaleStart=0;[int]$wallScaleStep=0
-            [bool]$wallBoundaryReady=$false;[int]$wallY1ColumnFracData=0;[int]$wallY1StepData=0;[int]$wallY2ColumnFracData=0;[int]$wallY2StepData=0;[int]$wallBoundaryColumnX=-1
+            [bool]$wallBoundaryReady=$false;[int]$wallY1StartData=0;[int]$wallY1StepData=0;[int]$wallY2StartData=0;[int]$wallY2StepData=0
             [double[]]$wallBandOrigins=$wallBandOriginsScratch;[int]$wallOriginBits=0
             [bool]$constantWallScale=$iz1 -eq $iz2;[double]$segmentTexelStep=0
             # Select eligible textured bands once per segment instead of
@@ -785,58 +785,15 @@ function Invoke-FastRender {
                     if($wallProjectionReady){
                         [int]$ceilingHeightSector=$segFront
                         if($joinedSky){$ceilingHeightSector=$segBack}
-                        [long]$worldFrontZ1Raw=([long]$Context.SectorCeilingHeightData[$ceilingHeightSector]-[long]$viewZData) -band 0xffffffffL
-                        if($worldFrontZ1Raw -ge 0x80000000L){$worldFrontZ1Raw-=0x100000000L}
-                        [long]$worldFrontZ2Raw=([long]$Context.SectorFloorHeightData[$segFront]-[long]$viewZData) -band 0xffffffffL
-                        if($worldFrontZ2Raw -ge 0x80000000L){$worldFrontZ2Raw-=0x100000000L}
-                        [int]$worldFrontZ1Data=[int]$worldFrontZ1Raw -shr 4
-                        [int]$worldFrontZ2Data=[int]$worldFrontZ2Raw -shr 4
+                        [int]$worldFrontZ1Data=[int](([long]$Context.SectorCeilingHeightData[$ceilingHeightSector]-[long]$viewZData) -shr 4)
+                        [int]$worldFrontZ2Data=[int](([long]$Context.SectorFloorHeightData[$segFront]-[long]$viewZData) -shr 4)
                         [int]$centerYFracShiftedData=84 -shl 12
-                        [long]$wallY1StartWide=[long]$centerYFracShiftedData-((([long]$worldFrontZ1Data*[long]$wallScaleStart) -shr 16))
-                        $wallY1StartWide=$wallY1StartWide -band 0xffffffffL
-                        if($wallY1StartWide -ge 0x80000000L){$wallY1StartWide-=0x100000000L}
-                        [long]$wallY2StartWide=[long]$centerYFracShiftedData-((([long]$worldFrontZ2Data*[long]$wallScaleStart) -shr 16))
-                        $wallY2StartWide=$wallY2StartWide -band 0xffffffffL
-                        if($wallY2StartWide -ge 0x80000000L){$wallY2StartWide-=0x100000000L}
-                        [long]$wallY1StepWide=-((([long]$worldFrontZ1Data*[long]$wallScaleStep) -shr 16))
-                        $wallY1StepWide=$wallY1StepWide -band 0xffffffffL
-                        if($wallY1StepWide -ge 0x80000000L){$wallY1StepWide-=0x100000000L}
-                        [long]$wallY2StepWide=-((([long]$worldFrontZ2Data*[long]$wallScaleStep) -shr 16))
-                        $wallY2StepWide=$wallY2StepWide -band 0xffffffffL
-                        if($wallY2StepWide -ge 0x80000000L){$wallY2StepWide-=0x100000000L}
-                        [int]$wallY1StepData=[int]$wallY1StepWide
-                        [int]$wallY2StepData=[int]$wallY2StepWide
-                        [long]$wallBoundaryOffset=$x-$screenScaleX0
-                        [long]$wallY1ColumnWide=$wallY1StartWide+([long]$wallY1StepData*$wallBoundaryOffset)
-                        $wallY1ColumnWide=$wallY1ColumnWide -band 0xffffffffL
-                        if($wallY1ColumnWide -ge 0x80000000L){$wallY1ColumnWide-=0x100000000L}
-                        [long]$wallY2ColumnWide=$wallY2StartWide+([long]$wallY2StepData*$wallBoundaryOffset)
-                        $wallY2ColumnWide=$wallY2ColumnWide -band 0xffffffffL
-                        if($wallY2ColumnWide -ge 0x80000000L){$wallY2ColumnWide-=0x100000000L}
-                        $wallY1ColumnFracData=[int]$wallY1ColumnWide
-                        $wallY2ColumnFracData=[int]$wallY2ColumnWide
-                        $wallBoundaryColumnX=$x
+                        $wallY1StartData=[int]([long]$centerYFracShiftedData-((([long]$worldFrontZ1Data*[long]$wallScaleStart) -shr 16)))
+                        $wallY1StepData=[int](-((([long]$worldFrontZ1Data*[long]$wallScaleStep) -shr 16)))
+                        $wallY2StartData=[int]([long]$centerYFracShiftedData-((([long]$worldFrontZ2Data*[long]$wallScaleStart) -shr 16)))
+                        $wallY2StepData=[int](-((([long]$worldFrontZ2Data*[long]$wallScaleStep) -shr 16)))
                         $wallBoundaryReady=$true
                     }
-                }
-                if($wallBoundaryReady -and $wallBoundaryColumnX -lt $x){
-                    [long]$wallBoundaryAdvance=$x-$wallBoundaryColumnX
-                    if($wallBoundaryAdvance -eq 1){
-                        [long]$wallY1ColumnWide=[long]$wallY1ColumnFracData+[long]$wallY1StepData
-                        if($wallY1ColumnWide -gt 2147483647L){$wallY1ColumnWide-=0x100000000L}elseif($wallY1ColumnWide -lt -2147483648L){$wallY1ColumnWide+=0x100000000L}
-                        [long]$wallY2ColumnWide=[long]$wallY2ColumnFracData+[long]$wallY2StepData
-                        if($wallY2ColumnWide -gt 2147483647L){$wallY2ColumnWide-=0x100000000L}elseif($wallY2ColumnWide -lt -2147483648L){$wallY2ColumnWide+=0x100000000L}
-                    }else{
-                        [long]$wallY1ColumnWide=[long]$wallY1ColumnFracData+([long]$wallY1StepData*$wallBoundaryAdvance)
-                        $wallY1ColumnWide=$wallY1ColumnWide -band 0xffffffffL
-                        if($wallY1ColumnWide -ge 0x80000000L){$wallY1ColumnWide-=0x100000000L}
-                        [long]$wallY2ColumnWide=[long]$wallY2ColumnFracData+([long]$wallY2StepData*$wallBoundaryAdvance)
-                        $wallY2ColumnWide=$wallY2ColumnWide -band 0xffffffffL
-                        if($wallY2ColumnWide -ge 0x80000000L){$wallY2ColumnWide-=0x100000000L}
-                    }
-                    $wallY1ColumnFracData=[int]$wallY1ColumnWide
-                    $wallY2ColumnFracData=[int]$wallY2ColumnWide
-                    $wallBoundaryColumnX=$x
                 }
                 # Match Doom's xToAngle lookup: wall rays are defined at integer
                 # screen columns, not at the half-pixel used for edge coverage.
@@ -845,8 +802,11 @@ function Invoke-FastRender {
                 else{$f=($x-$sx1)/($sx2-$sx1);$distance=1/($iz1+($iz2-$iz1)*$f);$texU=($uz1+($uz2-$uz1)*$f)*$distance+$side.TextureOffset}
                 [double]$ray=($x-160)/160;[double]$rayX=$co+$si*$ray;[double]$rayY=$si-$co*$ray
                 if($wallBoundaryReady){
-                    [int]$wallT=($wallY1ColumnFracData+4095) -shr 12
-                    [int]$wallB=$wallY2ColumnFracData -shr 12
+                    [long]$wallBoundaryOffset=$x-$screenScaleX0
+                    [int]$wallY1FracData=[int]([long]$wallY1StartData+([long]$wallY1StepData*$wallBoundaryOffset))
+                    [int]$wallY2FracData=[int]([long]$wallY2StartData+([long]$wallY2StepData*$wallBoundaryOffset))
+                    [int]$wallT=($wallY1FracData+4095) -shr 12
+                    [int]$wallB=$wallY2FracData -shr 12
                 }else{
                     [int]$wallT=[Math]::Ceiling(84-160*($ch-$cz)/$distance-0.5)
                     [int]$wallB=[Math]::Floor(84-160*($fh-$cz)/$distance-0.5)

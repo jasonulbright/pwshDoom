@@ -1788,3 +1788,26 @@ p95 is 116.12 ms and 119.22 ms. The small cost accompanies fewer reference
 mismatches on six E1M2/E3M6 views. This is a one-map renderer comparison, not
 concurrent-worker or live-host pacing evidence; see the [source-pinned
 receipt](../results/wall-fixed-scale-renderer-20261002.json).
+
+### Reject incremental wall-boundary stepping — October 19, 2026
+
+I compared the signed 32-bit adjacent-column recurrence with the direct
+fixed-point start-plus-offset calculation it replaced. Two alternating runs
+per version on E1M1 and E1M2 used PowerShell 7.6.5, the same Ultimate Doom
+IWAD, five warmups and 25 measured frames per run, with the renderer serially
+timing one full viewport at a fixed map-start state. The baseline is source
+`a83754a`; the recurrence candidate is `ab9164d`.
+
+| Map | Total median, baseline → recurrence | Geometry median, baseline → recurrence | Geometry change |
+| --- | ---: | ---: | ---: |
+| E1M1 | 67.91 → 77.01 ms | 62.90 → 72.15 ms | +14.71% |
+| E1M2 | 101.63 → 101.66 ms | 88.86 → 90.00 ms | +1.29% |
+
+Each version has 50 measured frames per map. Full-frame hashes match between
+the two implementations within each map. The recurrence did not show a
+repeatable speedup and materially regressed the E1M1 median, so it was removed;
+the fixed-point wall-boundary projection remains and uses direct per-column
+offset evaluation. This is serial fixed-state profiling, not concurrent-worker
+or live pacing evidence. No live test, game window, input, audio device or
+display interaction was used. The [receipt](../results/renderer-wall-boundary-recurrence-performance-20261019.json)
+retains all eight profile hashes and per-frame timing samples.

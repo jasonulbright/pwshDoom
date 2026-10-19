@@ -1354,11 +1354,10 @@ The two-worker Classic partition run remains exact across five views and
 [partition report](../results/render-partitions-plane-wall-boundary-20261019-r1.json).
 No live test or desktop/device interaction was used.
 
-The boundary code now advances its signed 32-bit fractions across columns and
-applies skipped-column steps when a worker clip is empty. Candidate and
-reference frame hashes remain identical to the previous boundary version at
-all four heights; scene and HUD counts do not change. The updated two-worker
-partition run still matches 320,000 pixels across five views. This establishes
-output equivalence for the recurrence refinement, not a measured speedup. See
-the [recurrence comparison](../results/moving-sector-per-call-plane-wall-boundary-20261019-v4.json)
-and [partition report](../results/render-partitions-plane-wall-boundary-20261019-r3.json).
+An incremental signed 32-bit edge recurrence also retained those frame hashes
+and partition results, but paired fixed-state profiles found its geometry
+median 14.71% slower on E1M1 and 1.29% slower on E1M2. Production therefore
+uses the direct fixed-point start-plus-offset calculation at each column; the
+fixed-point boundary correction remains. See the [recurrence comparison](../results/moving-sector-per-call-plane-wall-boundary-20261019-v4.json),
+[partition report](../results/render-partitions-plane-wall-boundary-20261019-r3.json)
+and [offline performance receipt](../results/renderer-wall-boundary-recurrence-performance-20261019.json).
