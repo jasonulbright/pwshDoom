@@ -21,6 +21,12 @@ if(Test-Path -LiteralPath $outputPath){throw 'Use a fresh output path.'}
 
 $source=[IO.File]::ReadAllText($sourcePath)
 $newline=if($source.Contains("`r`n")){"`r`n"}else{"`n"}
+$upperPlaneMarker='for([int]$y=$clipT;$y -le $upperPlaneEnd;$y++){$planes[$y*320+$x]=$upperPlaneId}'
+if(([regex]::Matches($source,[regex]::Escape($upperPlaneMarker))).Count -ne 1){throw 'Expected one upper-plane ownership loop.'}
+$source=$source.Replace($upperPlaneMarker,'for([int]$y=$clipT;$y -le $upperPlaneEnd;$y++){$planes[$y*320+$x]=$upperPlaneId;if($Context.ContainsKey(''DiagnosticPlaneOwnerSegIndices'')){$Context.DiagnosticPlaneOwnerSegIndices[$y*320+$x]=$segIndex+1}}')
+$lowerPlaneMarker='for([int]$y=$lowerPlaneStart;$y -le $clipB;$y++){$planes[$y*320+$x]=$lowerPlaneId}'
+if(([regex]::Matches($source,[regex]::Escape($lowerPlaneMarker))).Count -ne 1){throw 'Expected one lower-plane ownership loop.'}
+$source=$source.Replace($lowerPlaneMarker,'for([int]$y=$lowerPlaneStart;$y -le $clipB;$y++){$planes[$y*320+$x]=$lowerPlaneId;if($Context.ContainsKey(''DiagnosticPlaneOwnerSegIndices'')){$Context.DiagnosticPlaneOwnerSegIndices[$y*320+$x]=$segIndex+1}}')
 $boundaryMarker='                [int]$wallLightIndex=47'
 if(([regex]::Matches($source,[regex]::Escape($boundaryMarker))).Count -ne 1){throw 'Expected one wall-light boundary marker.'}
 $boundaryTrace=@'
@@ -59,5 +65,5 @@ $source=$source.Replace($intervalMarker,$intervalMarker+$newline+$intervalTrace)
     InputRendererSha256=(Get-FileHash -LiteralPath $sourcePath).Hash
     DiagnosticRendererSha256=(Get-FileHash -LiteralPath $outputPath).Hash
     BoundaryTraceStride=12
-    Meaning='Disposable source copy only. Captures fixed-point top/bottom boundaries, per-column clip, portal boundaries, and clipped upper/lower/middle texture intervals for each candidate segment-column pair.'
+    Meaning='Disposable source copy only. Captures candidate plane-owner segment indices and fixed-point wall boundaries, per-column clip, portal boundaries, and clipped upper/lower/middle texture intervals for each segment-column pair.'
 }

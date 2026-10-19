@@ -2,24 +2,31 @@
 
 ## Unreleased
 
-Full Ultimate Doom campaign, independent fidelity, physical/acoustic review,
-display pacing and second-hardware qualification continue after Preview.8.
-Post-release source corrects the key-capture prompt and Controls help overflow
-in the 320×200 menu. Offline extracted-candidate checks pass 96 settings, 143
-menu/60 screen-fixture, 286 palette, 24 masked-wall and 18 wall-span cases. The
-refresh package is local and has not replaced the public Preview.8 asset; no
-live game/device test was run.
-Current-source offline fixtures also pass 69 campaign-transition checks, 20
-save/finale-edge checks and 27 synthetic audio-mixer checks. These results are
-recorded against later source commits and do not belong to either Preview.8
-package; they do not certify route completion or audio-device behavior.
-The opt-in input recorder now also writes a checksummed recovery journal and
-can rebuild a replay from complete batches. Its 18 offline contract and static
-wiring checks pass; game-session crash recovery has not yet been exercised.
-A local handoff package at source `524e879` includes this change and verifies
-575 payload hashes; its extracted offline suites pass settings, menu, palette,
-masked-wall, projection, journal, campaign-transition, save-edge and mixer
-checks. The package remains local and the public Preview.8 asset is unchanged.
+Current work continues toward the complete Episode 1 route, independent
+original-executable fidelity, sustained display pacing, and physical/acoustic
+review. The next cumulative release is due after 35 commits since Preview.9.
+
+## 0.1.0-preview.9 — 2026-10-19
+
+Cumulative playable community preview after 35 commits since Preview.8.
+Classic, Matrix and AnsiArt remain supported, with gameplay, rendering and
+audio mixing in PowerShell. See [scope and current limits](docs/release-preview9.md);
+this is not full Ultimate Doom certification.
+
+- Harden the checksummed input-replay journal against malformed commands,
+  stale event tics and unordered transitions. Offline contract evidence covers
+  accepted and rejected records; abrupt process recovery remains unverified.
+- Project moving-sector wall and upper-portal boundaries from fixed-point
+  values. The saved E1M1 tic-315 ceiling comparison improves from 215 to 4
+  scene differences at height 34 and from 440 to 353 at height 68. This is a
+  comparison against the local PowerShell reference, not original-executable
+  parity.
+- Record the remaining 14 height-68 different-owner plane pixels and their
+  portal-segment spans. Production rendering has no correction for this case.
+- No live game, display, input or audio-device test was performed for this
+  release candidate.
+
+Published package: [v0.1.0-preview.9](https://github.com/jasonulbright/pwshDoom/releases/tag/v0.1.0-preview.9).
 
 ## 0.1.0-preview.8 — 2026-10-04
 

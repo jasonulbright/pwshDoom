@@ -7046,3 +7046,33 @@ records exact frame and diagnostic-image hashes. This headless saved-replay
 comparison uses the local PowerShell reference and does not establish original
 executable parity or broad moving-world correctness. No live tests or desktop
 or device interaction were used.
+
+### 2026-10-19 — Attribute the remaining portal plane-owner pixels
+
+Extended the disposable candidate renderer and saved-replay comparator to
+record the segment that last assigned a candidate floor/ceiling pixel and the
+same segment's fixed-point wall, clip, portal and texture-band rows. On the
+frozen E1M1 lineflags replay at tic 315, all 14 height-68 different-owner
+mismatches have a traced candidate segment and a final reference BSP plane
+write; all have infinite candidate depth. Thirteen candidate S19 floor pixels
+are owned by segments 138/141 (front S19, back S18), while the reference writes
+S18 floor; all 13 lie below the candidate portal bottom. The remaining pixel
+is candidate S20 ceiling versus reference S60 ceiling on segment 150 (front
+S20, back S59), above the candidate portal top. Heights 0 and 6 remain exact;
+height 34 has four scene differences and no plane mismatch; height 68 has 353
+scene differences and 14 different-owner plane mismatches.
+
+The diagnostic renderer reproduces the uninstrumented production and reference
+frame hashes at all four heights, so the trace does not change rendering.
+This local PowerShell reference evidence narrows plane coverage/owner selection
+around two-sided portal edges but does not establish a general correction or
+original-executable parity. No live test or desktop/device interaction was
+used. The [receipt](../results/moving-sector-portal-owner-segments-20261019-v1.json)
+records source/replay/WAD hashes and per-pixel segment details. The complete
+local tree measured 27,748,596,821 bytes (27.749 decimal GB), below the
+30,000,000,000-byte cap. The exact `/docs/gebbdoom.pdf` ignore rule already
+exists; the PDF is ignored and untracked. The only 33 video-container files
+found in `local/` are tiny FFmpeg reference fixtures (about 0.01 MB total); no
+reviewed gameplay MP4s are retained there. The branch is 34 commits past
+Preview.8 before this evidence change, so this commit reaches the 35-commit
+release threshold.

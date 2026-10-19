@@ -1404,3 +1404,27 @@ and [pixel-delta receipt](../results/moving-sector-portal-top-boundary-pixel-del
 pin the input, renderer sources and frame hashes. This is one local PowerShell
 reference state, not an original-executable comparison or broad moving-world
 qualification. No live game, display, input or audio device was used.
+
+### Different-owner portal plane spans — October 19, 2026
+
+A diagnostic candidate copy tags the segment that last assigned each candidate
+plane pixel and records that segment's front/back sectors plus its per-column
+wall, clip, portal and texture-band rows. At ceiling height 68, all 14
+remaining candidate plane mismatches are final reference BSP plane writes and
+have no candidate depth. Thirteen are candidate S19 floor versus reference
+S18 floor, assigned by segments 138 or 141 (front S19, back S18); each pixel
+falls below that segment's candidate portal bottom. One is candidate S20
+ceiling versus reference S60 ceiling, assigned by segment 150 (front S20,
+back S59); it falls above the candidate portal top. The segment trace is
+present for all 14 pixels. Heights 0 and 6 remain exact, height 34 remains at
+four scene differences with no plane-owner mismatches, and height 68 remains
+at 353 scene differences.
+
+This narrows the residual to plane coverage and owner selection around
+two-sided portal edges; it does not establish a general owner-selection rule.
+Production rendering is unchanged. The diagnostic and uninstrumented
+production comparison have identical candidate and reference frame hashes at
+all four heights. See the [saved-replay receipt](../results/moving-sector-portal-owner-segments-20261019-v1.json).
+This headless PowerShell reference comparison does not establish
+original-executable parity or broad moving-world qualification. No live tests,
+desktop, display, input or audio device were used.

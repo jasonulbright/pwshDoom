@@ -280,6 +280,7 @@ try {
     if ($CaptureWallBoundaryTrace) {
         $context.DiagnosticWallSpanTrace = [int[]]::new($game.World.Map.Segs.Length * 320 * 12)
         $context.DiagnosticWallSpanTraceSeen = [byte[]]::new($game.World.Map.Segs.Length * 320)
+        $context.DiagnosticPlaneOwnerSegIndices = [int[]]::new(320 * 168)
     }
     $context.PlaneSampleXFracData = [int[]]::new(320 * 168)
     $context.PlaneSampleYFracData = [int[]]::new(320 * 168)
@@ -316,6 +317,7 @@ try {
         if ($CaptureWallBoundaryTrace) {
             [Array]::Clear($context.DiagnosticWallSpanTrace)
             [Array]::Clear($context.DiagnosticWallSpanTraceSeen)
+            [Array]::Clear($context.DiagnosticPlaneOwnerSegIndices)
         }
         [Array]::Fill($context.PlaneSampleOriginX, -1)
         [Array]::Clear($context.PlaneSampleReusedPreviousColumn)
@@ -387,6 +389,15 @@ try {
             CandidateOpaqueBandContainsPixelWithoutCandidateDepth = 0
         }
         $candidatePlaneMismatchWallSpanExamples = [Collections.Generic.List[object]]::new()
+        $candidatePlaneMismatchDifferentOwnerExamples = [Collections.Generic.List[object]]::new()
+        $candidatePlaneMismatchOwnerSegmentCounts = [ordered]@{
+            DifferentOwnerPlanePixels = 0
+            CandidatePlaneOwnerSegmentMissing = 0
+            CandidatePlaneOwnerSegmentFound = 0
+            CandidatePlaneOwnerSegmentTraceMissing = 0
+            CandidatePlaneOwnerSegmentTraceFound = 0
+            CandidatePlaneOwnerSegmentFrontMatchesPlane = 0
+        }
         $referencePlaneOwnerPairCounts = @{}
         $planeSampleCounts = [ordered]@{
             SameOwnerSamples = 0
@@ -691,6 +702,83 @@ try {
                                         }
                                     } else {
                                         $candidatePlaneMismatchDifferentOwnerWrites++
+                                        if ($CaptureWallBoundaryTrace) {
+                                            $candidatePlaneMismatchOwnerSegmentCounts.DifferentOwnerPlanePixels++
+                                            [int]$ownerSegmentEncoded = $context.DiagnosticPlaneOwnerSegIndices[$candidateIndex]
+                                            [int]$ownerSegmentIndex = $ownerSegmentEncoded - 1
+                                            [int]$ownerSegmentSideIndex = -1
+                                            [int]$ownerSegmentFrontSectorIndex = -1
+                                            [int]$ownerSegmentBackSectorIndex = -1
+                                            [int]$ownerSegmentLineFlags = -1
+                                            $ownerSegmentTrace = $null
+                                            if ($ownerSegmentEncoded -le 0 -or $ownerSegmentIndex -ge $game.World.Map.Segs.Length) {
+                                                $candidatePlaneMismatchOwnerSegmentCounts.CandidatePlaneOwnerSegmentMissing++
+                                            } else {
+                                                $candidatePlaneMismatchOwnerSegmentCounts.CandidatePlaneOwnerSegmentFound++
+                                                [int]$ownerSegmentMetadataOffset = $ownerSegmentIndex * 4
+                                                $ownerSegmentSideIndex = $context.SegmentMetadata[$ownerSegmentMetadataOffset]
+                                                $ownerSegmentFrontSectorIndex = $context.SegmentMetadata[$ownerSegmentMetadataOffset + 1]
+                                                $ownerSegmentBackSectorIndex = $context.SegmentMetadata[$ownerSegmentMetadataOffset + 2]
+                                                $ownerSegmentLineFlags = $context.SegmentMetadata[$ownerSegmentMetadataOffset + 3]
+                                                if ($ownerSegmentFrontSectorIndex -eq $candidateSectorIndex) {
+                                                    $candidatePlaneMismatchOwnerSegmentCounts.CandidatePlaneOwnerSegmentFrontMatchesPlane++
+                                                }
+                                                [int]$ownerSegmentTraceCell = $ownerSegmentIndex * 320 + $x
+                                                if ($ownerSegmentTraceCell -ge $context.DiagnosticWallSpanTraceSeen.Length -or
+                                                    $context.DiagnosticWallSpanTraceSeen[$ownerSegmentTraceCell] -eq 0) {
+                                                    $candidatePlaneMismatchOwnerSegmentCounts.CandidatePlaneOwnerSegmentTraceMissing++
+                                                } else {
+                                                    $candidatePlaneMismatchOwnerSegmentCounts.CandidatePlaneOwnerSegmentTraceFound++
+                                                    [int]$ownerSegmentTraceOffset = $ownerSegmentTraceCell * 12
+                                                    [int[]]$ownerSegmentWallTrace = $context.DiagnosticWallSpanTrace
+                                                    $ownerSegmentTrace = [ordered]@{
+                                                        WallTop = $ownerSegmentWallTrace[$ownerSegmentTraceOffset]
+                                                        WallBottom = $ownerSegmentWallTrace[$ownerSegmentTraceOffset + 1]
+                                                        ClipTop = $ownerSegmentWallTrace[$ownerSegmentTraceOffset + 2]
+                                                        ClipBottom = $ownerSegmentWallTrace[$ownerSegmentTraceOffset + 3]
+                                                        PortalTop = $ownerSegmentWallTrace[$ownerSegmentTraceOffset + 4]
+                                                        PortalBottom = $ownerSegmentWallTrace[$ownerSegmentTraceOffset + 5]
+                                                        UpperBandTop = $ownerSegmentWallTrace[$ownerSegmentTraceOffset + 6]
+                                                        UpperBandBottom = $ownerSegmentWallTrace[$ownerSegmentTraceOffset + 7]
+                                                        LowerBandTop = $ownerSegmentWallTrace[$ownerSegmentTraceOffset + 8]
+                                                        LowerBandBottom = $ownerSegmentWallTrace[$ownerSegmentTraceOffset + 9]
+                                                        MiddleBandTop = $ownerSegmentWallTrace[$ownerSegmentTraceOffset + 10]
+                                                        MiddleBandBottom = $ownerSegmentWallTrace[$ownerSegmentTraceOffset + 11]
+                                                    }
+                                                }
+                                            }
+                                            if ($candidatePlaneMismatchDifferentOwnerExamples.Count -lt 64) {
+                                                $candidatePlaneMismatchDifferentOwnerExamples.Add([ordered]@{
+                                                    X = $x
+                                                    Y = $y
+                                                    CandidatePlaneId = $planeId
+                                                    CandidatePlaneSectorIndex = $candidateSectorIndex
+                                                    CandidatePlaneSurface = $candidateSurfaceName
+                                                    ReferencePlaneOwnerSectorIndex = $referenceOwnerSectorIndex
+                                                    ReferencePlaneSurface = $referenceSurfaceName
+                                                    ReferenceFinalWriterType = [int]$reference3D.DiagnosticFinalWriterTypes[$referencePosition]
+                                                    ReferenceFinalRenderPassType = [int]$reference3D.DiagnosticFinalRenderPassTypes[$referencePosition]
+                                                    CandidateDepth = if ($context.Depth[$candidateIndex] -eq [double]::PositiveInfinity) { 'PositiveInfinity' } else { $context.Depth[$candidateIndex] }
+                                                    CandidatePlaneOwnerSegmentIndex = if ($ownerSegmentEncoded -gt 0) { $ownerSegmentIndex } else { -1 }
+                                                    CandidatePlaneOwnerSegmentSideIndex = $ownerSegmentSideIndex
+                                                    CandidatePlaneOwnerSegmentFrontSectorIndex = $ownerSegmentFrontSectorIndex
+                                                    CandidatePlaneOwnerSegmentBackSectorIndex = $ownerSegmentBackSectorIndex
+                                                    CandidatePlaneOwnerSegmentLineFlags = $ownerSegmentLineFlags
+                                                    CandidatePlaneOwnerSegmentFrontMatchesPlane = ($ownerSegmentFrontSectorIndex -eq $candidateSectorIndex)
+                                                    CandidatePlaneOwnerSegmentTrace = $ownerSegmentTrace
+                                                    CandidateSectorFloorHeightData = $context.SectorFloorHeightData[$candidateSectorIndex]
+                                                    ReferenceSectorFloorHeightData = $context.SectorFloorHeightData[$referenceOwnerSectorIndex]
+                                                    CandidateSectorCeilingHeightData = $context.SectorCeilingHeightData[$candidateSectorIndex]
+                                                    ReferenceSectorCeilingHeightData = $context.SectorCeilingHeightData[$referenceOwnerSectorIndex]
+                                                    ReferencePlaneSampleOriginX = $reference3D.DiagnosticPlaneSampleOriginX[$referencePosition]
+                                                    ReferencePlaneSampleReusedPreviousColumn = ($reference3D.DiagnosticPlaneSampleReusedPreviousColumn[$referencePosition] -eq 1)
+                                                    ReferencePlaneDistanceData = $reference3D.DiagnosticPlaneDistanceData[$referencePosition]
+                                                    ReferencePlaneXFracData = $reference3D.DiagnosticPlaneXFracData[$referencePosition]
+                                                    ReferencePlaneYFracData = $reference3D.DiagnosticPlaneYFracData[$referencePosition]
+                                                    ReferencePlaneTexelIndex = $reference3D.DiagnosticPlaneTexelIndices[$referencePosition]
+                                                })
+                                            }
+                                        }
                                     }
                                 }
                             } else {
@@ -737,6 +825,16 @@ try {
                     $candidatePlaneMismatchWallSpanCounts.CandidateSegmentColumnTraceFound -ne
                     $candidatePlaneMismatchWallSpanCounts.ReferenceOpaqueWallPixels) {
                     throw "Candidate segment-column traces did not reconcile at ceiling height $height."
+                }
+                if ($candidatePlaneMismatchOwnerSegmentCounts.CandidatePlaneOwnerSegmentFound +
+                    $candidatePlaneMismatchOwnerSegmentCounts.CandidatePlaneOwnerSegmentMissing -ne
+                    $candidatePlaneMismatchOwnerSegmentCounts.DifferentOwnerPlanePixels) {
+                    throw "Candidate plane-owner segment attribution did not reconcile at ceiling height $height."
+                }
+                if ($candidatePlaneMismatchOwnerSegmentCounts.CandidatePlaneOwnerSegmentTraceFound +
+                    $candidatePlaneMismatchOwnerSegmentCounts.CandidatePlaneOwnerSegmentTraceMissing -ne
+                    $candidatePlaneMismatchOwnerSegmentCounts.CandidatePlaneOwnerSegmentFound) {
+                    throw "Candidate plane-owner segment trace attribution did not reconcile at ceiling height $height."
                 }
             }
             if ($planeSampleCounts.SameOwnerSamples -ne $candidatePlaneMismatchSameOwnerFinalPlaneWrites) {
@@ -795,6 +893,8 @@ try {
             )
             CandidatePlaneMismatchReferenceWallSpanCounts = if ($CaptureWallBoundaryTrace) { $candidatePlaneMismatchWallSpanCounts } else { $null }
             CandidatePlaneMismatchReferenceWallSpanExamples = if ($CaptureWallBoundaryTrace) { $candidatePlaneMismatchWallSpanExamples.ToArray() } else { @() }
+            CandidatePlaneMismatchDifferentOwnerSegmentCounts = if ($CaptureWallBoundaryTrace) { $candidatePlaneMismatchOwnerSegmentCounts } else { $null }
+            CandidatePlaneMismatchDifferentOwnerExamples = if ($CaptureWallBoundaryTrace) { $candidatePlaneMismatchDifferentOwnerExamples.ToArray() } else { @() }
             SameOwnerPlaneSampleComparisons = $planeSampleCounts
             SameOwnerPlaneSampleExamples = $planeSampleExamples.ToArray()
             ReferencePlaneWriteOwnerPairs = @(
