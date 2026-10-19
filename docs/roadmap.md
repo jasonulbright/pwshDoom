@@ -1033,14 +1033,21 @@ The fast renderer now computes wall-derived ceiling and floor spans with the
 reference's fixed-point projected boundary recurrence. The frozen tic-315
 comparison reduces scene differences from 264 to 215 at ceiling height 34 and
 from 963 to 440 at height 68; heights 0 and 6 and HUD pixels stay exact. The
-remaining mismatches include 104 and 339 non-plane-buffer pixels, and this
-report does not enable reference owner tracing or establish original-executable
-parity. See the [fidelity notes](rendering-fidelity.md#fixed-point-wall-derived-plane-boundaries--october-19-2026),
-[ledger](ledger.md#fixed-point-wall-derived-plane-boundaries--october-19-2026)
-and [saved-replay report](../results/moving-sector-per-call-plane-wall-boundary-20261019-v1.json).
+remaining non-plane-buffer differences are 104 and 339. An isolated reference
+trace shows that at height 34 all 111 candidate plane-buffer mismatches have no
+reference plane write and end with mapped column writes. At height 68, 85 of
+101 have that classification, 14 have a different plane owner and two are
+same-owner final plane writes. Both remaining samples start at candidate x=191
+and reference x=192, with equal distance and light selection; the traced
+same-owner gap fell from 194 pixels to two. The mapped-column
+tag does not identify the specific draw primitive, and the adapted PowerShell
+reference does not establish original-executable parity. See the [fidelity
+notes](rendering-fidelity.md#fixed-point-wall-derived-plane-boundaries--october-19-2026),
+[ledger](ledger.md#fixed-point-wall-derived-plane-boundaries--october-19-2026),
+[untraced report](../results/moving-sector-per-call-plane-wall-boundary-20261019-v1.json)
+and [instrumented trace](../results/moving-sector-per-call-plane-wall-boundary-20261019-v2.json).
 The two-worker Classic partition check also matches 320,000 pixels over five
 views and two uneven strips. No live test, UI, display, keyboard or audio device
 was used; see the [partition report](../results/render-partitions-plane-wall-boundary-20261019-r1.json).
-The complete local tree measures 27,729,615,136 bytes, below the hard
-30,000,000,000-byte cap. The branch remains 27 commits past Preview.8 and below
-the release cadence threshold of 35.
+The complete local tree remains about 27.73 GB, below the hard 30 GB decimal
+cap. The branch remains below the release cadence threshold of 35.

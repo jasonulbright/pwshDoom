@@ -1336,11 +1336,19 @@ scale and 20.12 per-column wall-edge recurrence instead of floating-point
 half-pixel rounding. On the frozen E1M1 tic-315 ceiling sweep, scene differences
 fall from 264 to 215 at height 34 and from 963 to 440 at height 68. Plane-buffer
 mismatches fall from 162 to 111 and from 512 to 101. Heights 0 and 6 and all
-HUD pixels remain exact; the reference frame hashes are unchanged. The remaining
-104 and 339 mismatches at heights 34 and 68 are outside the candidate plane
-buffer. The optional reference owner trace was unavailable in the selected
-engine bundle, so this report does not classify those writes or prove original
-executable parity. See the [saved-replay report](../results/moving-sector-per-call-plane-wall-boundary-20261019-v1.json).
+HUD pixels remain exact; the reference frame hashes are unchanged. Non-plane-
+buffer mismatches remain at 104 and 339. An isolated instrumented reference
+copy classifies the remaining plane-buffer differences without changing frame
+hashes: at height 34, all 111 candidate plane mismatches have no reference
+plane write and end with a mapped column write; at height 68, 85 of 101 share
+that classification, 14 have a different plane owner, and two are same-owner
+final plane writes. Those two samples are at (192,57) and (205,57): candidate
+origin x=191, reference origin x=192, with distance and light selection equal.
+This reduces the traced same-owner sample gap from 194 pixels to two.
+The column tag does not distinguish walls, masked surfaces, sky or sprites, and
+the local PowerShell reference does not establish original executable parity.
+See the [untraced comparison](../results/moving-sector-per-call-plane-wall-boundary-20261019-v1.json)
+and [instrumented owner trace](../results/moving-sector-per-call-plane-wall-boundary-20261019-v2.json).
 The two-worker Classic partition run remains exact across five views and
 320,000 pixels, including two uneven strips; see the
 [partition report](../results/render-partitions-plane-wall-boundary-20261019-r1.json).

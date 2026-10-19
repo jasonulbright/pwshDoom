@@ -6970,12 +6970,20 @@ On the frozen E1M1 tic-315 ceiling sweep, scene differences fell from 264 to
 215 at ceiling height 34 and from 963 to 440 at height 68. The plane-buffer
 mismatch counts fell from 162 to 111 and from 512 to 101. Heights 0 and 6
 remain exact, HUD differences remain zero, and the reference frame hashes stay
-unchanged. Non-plane mismatches were 104 and 339 at heights 34 and 68, so the
-remaining gap still includes wall, sprite or other compositor pixels. This is
-an offline comparison against the adapted PowerShell renderer; original
-executable parity is not established. The optional reference plane-owner
-capture was unavailable in the selected engine bundle, so the remaining writes
-are not classified by this run. See the [comparison report](../results/moving-sector-per-call-plane-wall-boundary-20261019-v1.json).
+unchanged. Non-plane-buffer mismatches remain at 104 and 339 at heights 34 and
+68. An isolated instrumented reference copy preserved the same frame hashes
+and classified the remaining plane-buffer differences: at height 34, all 111
+candidate plane mismatches have no reference plane write and end with a mapped
+column write; at height 68, 85 of 101 have the same classification, 14 have a
+different sector or surface owner, and two are same-owner final plane writes.
+Those last two pixels are at (192,57) and (205,57); both candidate samples
+start at x=191 while the reference starts at x=192, with distance and light
+selection equal. The same-owner sample gap fell from 194 traced pixels to two.
+The column-write tag does not identify whether each write is
+a wall, masked surface, sky or sprite. The comparison remains against the
+adapted PowerShell renderer; original executable parity is not established.
+See the [untraced comparison](../results/moving-sector-per-call-plane-wall-boundary-20261019-v1.json)
+and [instrumented owner trace](../results/moving-sector-per-call-plane-wall-boundary-20261019-v2.json).
 The two-worker Classic partition check still matches 320,000 pixels across five
 views and two uneven strips, with zero differences; see the
 [partition report](../results/render-partitions-plane-wall-boundary-20261019-r1.json).
