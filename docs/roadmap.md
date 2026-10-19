@@ -1026,3 +1026,21 @@ record the counterfactual. It is offline saved-replay evidence only.
 The complete local tree measures 27,729,035,869 bytes at this checkpoint,
 below the 30,000,000,000-byte cap. The branch is 26 commits past Preview.8
 before this follow-up commit and remains below the release threshold of 35.
+
+### Fixed-point wall-derived plane boundaries — October 19, 2026
+
+The fast renderer now computes wall-derived ceiling and floor spans with the
+reference's fixed-point projected boundary recurrence. The frozen tic-315
+comparison reduces scene differences from 264 to 215 at ceiling height 34 and
+from 963 to 440 at height 68; heights 0 and 6 and HUD pixels stay exact. The
+remaining mismatches include 104 and 339 non-plane-buffer pixels, and this
+report does not enable reference owner tracing or establish original-executable
+parity. See the [fidelity notes](rendering-fidelity.md#fixed-point-wall-derived-plane-boundaries--october-19-2026),
+[ledger](ledger.md#fixed-point-wall-derived-plane-boundaries--october-19-2026)
+and [saved-replay report](../results/moving-sector-per-call-plane-wall-boundary-20261019-v1.json).
+The two-worker Classic partition check also matches 320,000 pixels over five
+views and two uneven strips. No live test, UI, display, keyboard or audio device
+was used; see the [partition report](../results/render-partitions-plane-wall-boundary-20261019-r1.json).
+The complete local tree measures 27,729,615,136 bytes, below the hard
+30,000,000,000-byte cap. The branch remains 27 commits past Preview.8 and below
+the release cadence threshold of 35.

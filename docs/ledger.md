@@ -6957,3 +6957,26 @@ column or a whole-frame correction. The full scene remains at 264 and 963
 differences. See the
 [counterfactual report](../results/moving-sector-per-call-plane-recurrence-reference-owners-20261019-v6.json)
 and [control receipt](../results/moving-sector-per-call-plane-samples-control-20261019-v2.json).
+
+### Fixed-point wall-derived plane boundaries — October 19, 2026
+
+The fast renderer previously derived wall top and bottom spans with floating-
+point half-pixel rounding. The reference projects them from fixed-point wall
+scale and advances the projected 20.12 fractions by a per-column step. The
+candidate now follows that boundary recurrence for fixed-table wall projection,
+which changes the floor and ceiling plane spans before the plane sampler runs.
+
+On the frozen E1M1 tic-315 ceiling sweep, scene differences fell from 264 to
+215 at ceiling height 34 and from 963 to 440 at height 68. The plane-buffer
+mismatch counts fell from 162 to 111 and from 512 to 101. Heights 0 and 6
+remain exact, HUD differences remain zero, and the reference frame hashes stay
+unchanged. Non-plane mismatches were 104 and 339 at heights 34 and 68, so the
+remaining gap still includes wall, sprite or other compositor pixels. This is
+an offline comparison against the adapted PowerShell renderer; original
+executable parity is not established. The optional reference plane-owner
+capture was unavailable in the selected engine bundle, so the remaining writes
+are not classified by this run. See the [comparison report](../results/moving-sector-per-call-plane-wall-boundary-20261019-v1.json).
+The two-worker Classic partition check still matches 320,000 pixels across five
+views and two uneven strips, with zero differences; see the
+[partition report](../results/render-partitions-plane-wall-boundary-20261019-r1.json).
+No live game, display, keyboard, audio device or pacing test was used.

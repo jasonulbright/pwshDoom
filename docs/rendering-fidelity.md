@@ -1328,3 +1328,20 @@ not show how to derive the reference column from candidate data or establish a
 full-frame production correction. Overall scene differences remain 264 and
 963. See the [origin counterfactual report](../results/moving-sector-per-call-plane-recurrence-reference-owners-20261019-v6.json)
 and [control receipt](../results/moving-sector-per-call-plane-samples-control-20261019-v2.json).
+
+### Fixed-point wall-derived plane boundaries — October 19, 2026
+
+The fast path now derives plane spans from the reference's fixed-point wall
+scale and 20.12 per-column wall-edge recurrence instead of floating-point
+half-pixel rounding. On the frozen E1M1 tic-315 ceiling sweep, scene differences
+fall from 264 to 215 at height 34 and from 963 to 440 at height 68. Plane-buffer
+mismatches fall from 162 to 111 and from 512 to 101. Heights 0 and 6 and all
+HUD pixels remain exact; the reference frame hashes are unchanged. The remaining
+104 and 339 mismatches at heights 34 and 68 are outside the candidate plane
+buffer. The optional reference owner trace was unavailable in the selected
+engine bundle, so this report does not classify those writes or prove original
+executable parity. See the [saved-replay report](../results/moving-sector-per-call-plane-wall-boundary-20261019-v1.json).
+The two-worker Classic partition run remains exact across five views and
+320,000 pixels, including two uneven strips; see the
+[partition report](../results/render-partitions-plane-wall-boundary-20261019-r1.json).
+No live test or desktop/device interaction was used.

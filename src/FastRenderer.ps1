@@ -754,6 +754,7 @@ function Invoke-FastRender {
             [double]$iz1=1/$z1;[double]$iz2=1/$z2;[double]$uz1=$u1/$z1;[double]$uz2=$u2/$z2
             [bool]$wallUReady=$false;[int]$wallPerpData=0;[int]$wallOffsetData=0;[uint32]$wallCenterAngleData=0
             [bool]$wallScaleReady=$false;[int]$wallScaleStart=0;[int]$wallScaleStep=0
+            [bool]$wallBoundaryReady=$false;[int]$wallY1StartData=0;[int]$wallY1StepData=0;[int]$wallY2StartData=0;[int]$wallY2StepData=0
             [double[]]$wallBandOrigins=$wallBandOriginsScratch;[int]$wallOriginBits=0
             [bool]$constantWallScale=$iz1 -eq $iz2;[double]$segmentTexelStep=0
             # Select eligible textured bands once per segment instead of
@@ -781,6 +782,18 @@ function Invoke-FastRender {
                         $wallScaleStep=[int][Math]::Truncate(($wallScaleEnd-$wallScaleStart)/[double]($screenScaleX1-$screenScaleX0))
                     }
                     $wallScaleReady=$true
+                    if($wallProjectionReady){
+                        [int]$ceilingHeightSector=$segFront
+                        if($joinedSky){$ceilingHeightSector=$segBack}
+                        [int]$worldFrontZ1Data=[int](([long]$Context.SectorCeilingHeightData[$ceilingHeightSector]-[long]$viewZData) -shr 4)
+                        [int]$worldFrontZ2Data=[int](([long]$Context.SectorFloorHeightData[$segFront]-[long]$viewZData) -shr 4)
+                        [int]$centerYFracShiftedData=84 -shl 12
+                        $wallY1StartData=[int]([long]$centerYFracShiftedData-((([long]$worldFrontZ1Data*[long]$wallScaleStart) -shr 16)))
+                        $wallY1StepData=[int](-((([long]$worldFrontZ1Data*[long]$wallScaleStep) -shr 16)))
+                        $wallY2StartData=[int]([long]$centerYFracShiftedData-((([long]$worldFrontZ2Data*[long]$wallScaleStart) -shr 16)))
+                        $wallY2StepData=[int](-((([long]$worldFrontZ2Data*[long]$wallScaleStep) -shr 16)))
+                        $wallBoundaryReady=$true
+                    }
                 }
                 # Match Doom's xToAngle lookup: wall rays are defined at integer
                 # screen columns, not at the half-pixel used for edge coverage.
@@ -788,8 +801,16 @@ function Invoke-FastRender {
                 if($wallAnglesReady){[int]$wallScaleData=$wallScaleStart+($x-$screenScaleX0)*$wallScaleStep;$distance=10485760.0/$wallScaleData}
                 else{$f=($x-$sx1)/($sx2-$sx1);$distance=1/($iz1+($iz2-$iz1)*$f);$texU=($uz1+($uz2-$uz1)*$f)*$distance+$side.TextureOffset}
                 [double]$ray=($x-160)/160;[double]$rayX=$co+$si*$ray;[double]$rayY=$si-$co*$ray
-                [int]$wallT=[Math]::Ceiling(84-160*($ch-$cz)/$distance-0.5)
-                [int]$wallB=[Math]::Floor(84-160*($fh-$cz)/$distance-0.5)
+                if($wallBoundaryReady){
+                    [long]$wallBoundaryOffset=$x-$screenScaleX0
+                    [int]$wallY1FracData=[int]([long]$wallY1StartData+([long]$wallY1StepData*$wallBoundaryOffset))
+                    [int]$wallY2FracData=[int]([long]$wallY2StartData+([long]$wallY2StepData*$wallBoundaryOffset))
+                    [int]$wallT=($wallY1FracData+4095) -shr 12
+                    [int]$wallB=$wallY2FracData -shr 12
+                }else{
+                    [int]$wallT=[Math]::Ceiling(84-160*($ch-$cz)/$distance-0.5)
+                    [int]$wallB=[Math]::Floor(84-160*($fh-$cz)/$distance-0.5)
+                }
                 # Draw the floor/ceiling exposed before this boundary. Near-first clip intervals
                 # keep each opaque world pixel owned by a single segment.
                 [int]$upperPlaneEnd=[Math]::Min($clipB,$wallT-1)
