@@ -6678,3 +6678,15 @@ Valid shared-boundary checkpoints remain accepted. The synthetic check uses no
 game, IWAD, user display or audio device; actual host interruption/recovery is
 still unverified. See `results/input-replay-journal-contract.json` and
 `scripts/Test-InputReplayJournal.ps1`.
+
+### Refreshed Preview.8 journal candidate — October 19, 2026
+
+Built the local handoff ZIP from clean source commit `a8c7b87`. All 575 payload
+hashes and the adjacent archive checksum verify; the 1,867,738-byte ZIP is
+`C718F9358E924F02655F59C4E9BAC0878B7033C0B9203A7F76B6AD423D16BD30`. Its
+extracted package passes nine offline suites (705 checks, zero failures),
+including the 22-case journal contract. IWAD-backed checks use in-memory game
+objects. No game host, display, keyboard, audio device or live route was used;
+actual session interruption and the complete human route remain open. Public
+Preview.8 was not replaced. Full details are in
+`results/preview8-journal-bounds-candidate-validation-20261019.json`.
