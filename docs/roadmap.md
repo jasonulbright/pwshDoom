@@ -892,3 +892,13 @@ cadence is 35. The local tree measured 28,424,185,035 bytes, under its decimal
 30,000,000,000-byte ceiling. No game host, user display, audio device or human
 route was used. Keep the complete Episode 1 handoff and all wider release gates
 open.
+
+### Input journal event-boundary validation — October 19, 2026
+
+The recovery reader now rejects control, checkpoint and transition records
+outside the batch that claims them, and rejects out-of-order transitions. Its
+22-check synthetic contract passes, including valid shared-tic boundaries and
+four checksum-valid invalid batch fixtures. No game host, display, audio device
+or live test was used. Actual host interruption and recovered human playthrough
+remain unverified; the local playtest package will be refreshed from this
+source before handoff.

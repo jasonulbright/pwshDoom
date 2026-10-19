@@ -6664,3 +6664,17 @@ until a session is started or loaded. The existing menu/input suites pass
 explicit E1M2 launch path also presents gameplay at tic 0 with no startup
 warm-up (two-second idle host: 69 tics/9 headless updates, not a pacing result;
 `local/codex-direct-start-e1m2.json`).
+
+### Input journal event-boundary validation — October 19, 2026
+
+Recovery previously checked that control events and checkpoints were not after
+the batch end, but it accepted stale tics from an earlier batch; transition
+records had no tic-boundary or ordering validation. The reader now requires
+controls, checkpoints and transitions to lie within their batch's inclusive
+`StartTic`–`EndTic` interval and keeps transitions nondecreasing. The offline
+contract passes 22 checks, including four correctly hashed invalid journals
+with stale controls/checkpoints/transitions and a transition after the batch.
+Valid shared-boundary checkpoints remain accepted. The synthetic check uses no
+game, IWAD, user display or audio device; actual host interruption/recovery is
+still unverified. See `results/input-replay-journal-contract.json` and
+`scripts/Test-InputReplayJournal.ps1`.

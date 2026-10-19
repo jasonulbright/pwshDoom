@@ -1,84 +1,100 @@
 {
-  "CreatedUtc": "2026-10-19T12:25:26.3460592Z",
+  "CreatedUtc": "2026-10-19T12:41:53.1998128Z",
   "Checks": [
     {
-      "Passed": true,
-      "Name": "Journal header is durably created without a game or IWAD"
+      "Name": "Journal header is durably created without a game or IWAD",
+      "Passed": true
     },
     {
-      "Passed": true,
-      "Name": "First append-only command batch is accepted"
+      "Name": "First append-only command batch is accepted",
+      "Passed": true
     },
     {
-      "Passed": true,
-      "Name": "Torn final line is discarded while complete batches survive"
+      "Name": "Torn final line is discarded while complete batches survive",
+      "Passed": true
     },
     {
-      "Passed": true,
-      "Name": "Recovery preserves every consumed command in order"
+      "Name": "Recovery preserves every consumed command in order",
+      "Passed": true
     },
     {
-      "Passed": true,
-      "Name": "Recovery preserves sparse automap input and ordered menu controls"
+      "Name": "Recovery preserves sparse automap input and ordered menu controls",
+      "Passed": true
     },
     {
-      "Passed": true,
-      "Name": "Checkpoint replacement at the same tic keeps the newest state"
+      "Name": "Checkpoint replacement at the same tic keeps the newest state",
+      "Passed": true
     },
     {
-      "Passed": true,
-      "Name": "Recovered output validates as the existing version-4 replay format"
+      "Name": "Recovered output validates as the existing version-4 replay format",
+      "Passed": true
     },
     {
-      "Passed": true,
-      "Name": "Recovered replay retains controls, checkpoints and campaign continuation"
+      "Name": "Recovered replay retains controls, checkpoints and campaign continuation",
+      "Passed": true
     },
     {
-      "Passed": true,
-      "Name": "Recovery marks the artifact as a partial journal prefix"
+      "Name": "Recovery marks the artifact as a partial journal prefix",
+      "Passed": true
     },
     {
-      "Passed": true,
-      "Name": "Recovery CLI emits journal and replay hashes with the recovered tic count"
+      "Name": "Recovery CLI emits journal and replay hashes with the recovered tic count",
+      "Passed": true
     },
     {
-      "Passed": true,
-      "Name": "Recovery never overwrites an existing replay"
+      "Name": "Recovery rejects out-of-batch ControlEvents tic 2",
+      "Passed": true
     },
     {
-      "Passed": true,
-      "Name": "Complete journal record tampering is rejected by its checksum"
+      "Name": "Recovery rejects out-of-batch Checkpoints tic 2",
+      "Passed": true
     },
     {
-      "Passed": true,
-      "Name": "Worker accepts the journal path and source identity"
+      "Name": "Recovery rejects out-of-batch Transitions tic 2",
+      "Passed": true
     },
     {
-      "Passed": true,
-      "Name": "Worker writes the initial state before accepting commands"
+      "Name": "Recovery rejects out-of-batch Transitions tic 6",
+      "Passed": true
     },
     {
-      "Passed": true,
-      "Name": "Worker flushes periodic and transition checkpoints"
+      "Name": "Recovery never overwrites an existing replay",
+      "Passed": true
     },
     {
-      "Passed": true,
-      "Name": "Worker flushes remaining commands during shutdown"
+      "Name": "Complete journal record tampering is rejected by its checksum",
+      "Passed": true
     },
     {
-      "Passed": true,
-      "Name": "Host passes a fresh companion journal path to the worker"
+      "Name": "Worker accepts the journal path and source identity",
+      "Passed": true
     },
     {
-      "Passed": true,
-      "Name": "Host removes the journal only after a replay is written"
+      "Name": "Worker writes the initial state before accepting commands",
+      "Passed": true
+    },
+    {
+      "Name": "Worker flushes periodic and transition checkpoints",
+      "Passed": true
+    },
+    {
+      "Name": "Worker flushes remaining commands during shutdown",
+      "Passed": true
+    },
+    {
+      "Name": "Host passes a fresh companion journal path to the worker",
+      "Passed": true
+    },
+    {
+      "Name": "Host removes the journal only after a replay is written",
+      "Passed": true
     }
   ],
-  "Passed": 18,
+  "Passed": 22,
   "Failed": 0,
-  "JournalSha256": "49479A99231F41905BF2E278CFA6CD8D92FE78E6779607EBCD79CFEB1ADF4D27",
-  "HelperSha256": "158F951DA16F0CEE9E53124C474883450269E3364871B6173835970AFF01B6D6",
-  "HarnessSha256": "0C9C1866489EB009D54CE145ACAF222727BC4B00E2E0FF7751DD4CD64CB80622",
+  "JournalSha256": "200E89568EA0C73F79A0E372662D6517000C30DC94616659A811618DB5792E49",
+  "HelperSha256": "657CB8524BF6ABC8C558F093A2A995670E43B2F713201C4A8DA7A618F81740A3",
+  "HarnessSha256": "58647BE3E881870D2F4AFD3C288FE78F620D929117F2E54ACC5D9BB70FF09BA2",
   "WorkerSha256": "A3B7DC3D661D6965FA8D743448EF9E4413F9549F33AAA98A8E3BDDD54226A273",
   "HostSha256": "CC0DF79E22CEFBE72867008DC4625BAD23B70C7BF6A311BB1959AC8B76098703",
   "ProcessSha256": "53447158702DAEDC4A8B4B026133494471BD4A8F1854E87AAA36B5D505A6B83B",

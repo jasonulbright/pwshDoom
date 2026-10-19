@@ -50,6 +50,17 @@ try{
     Check 'Recovered replay retains controls, checkpoints and campaign continuation' (($replay.ControlEvents.Count -eq 2) -and ($replay.Checkpoints.Count -eq 3) -and $replay.ContinueCampaign)
     Check 'Recovery marks the artifact as a partial journal prefix' ($replay.RecoveredFromJournal -and $replay.ExitReason -eq 'RecoveredInterrupted' -and $replay.TornJournalTailDiscarded)
     Check 'Recovery CLI emits journal and replay hashes with the recovered tic count' ($recoveryReceipt.RecoveredTics -eq 5 -and $recoveryReceipt.ReplaySha256 -eq (Get-FileHash -LiteralPath $recovered).Hash)
+    foreach($case in @(@('ControlEvents',2),@('Checkpoints',2),@('Transitions',2),@('Transitions',6))){
+        $invalidPath=Join-Path $temp ($case[0]+'-'+$case[1]+'.jsonl')
+        Initialize-DoomInputReplayJournal $invalidPath $wadHash $sourceHash 3 1 1
+        Add-DoomInputReplayJournalBatch $invalidPath $first
+        $badSecond=ConvertFrom-Json -InputObject (ConvertTo-Json -InputObject $second -Depth 10 -Compress) -AsHashtable -Depth 10
+        $badSecond[$case[0]][0].Tic=[long]$case[1]
+        Add-DoomInputReplayJournalBatch $invalidPath $badSecond
+        $boundaryRejected=$false
+        try{$null=Read-DoomInputReplayJournal $invalidPath}catch{$boundaryRejected=$_.Exception.Message -match 'boundary in replay journal'}
+        Check "Recovery rejects out-of-batch $($case[0]) tic $($case[1])" $boundaryRejected
+    }
     $before=(Get-FileHash -LiteralPath $recovered).Hash;$overwriteRejected=$false
     try{$null=Write-DoomInputReplay $recovered $data}catch{$overwriteRejected=$_.Exception.Message -match 'never replace|new filename'}
     Check 'Recovery never overwrites an existing replay' ($overwriteRejected -and (Get-FileHash -LiteralPath $recovered).Hash -eq $before)

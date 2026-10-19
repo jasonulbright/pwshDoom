@@ -94,15 +94,27 @@ function Read-DoomInputReplayJournal {
             $automap.Add($entry)
         }
         foreach($entry in @($batch.ControlEvents)){
-            if($entry.Tic -lt 0 -or $entry.Tic -gt $batch.EndTic -or ($controls.Count -gt 0 -and $entry.Tic -lt $controls[$controls.Count-1].Tic)){throw 'Invalid control event in replay journal.'}
+            if($null -eq $entry -or $entry.Tic -isnot [long] -or $entry.Tic -lt $batch.StartTic -or
+                $entry.Tic -gt $batch.EndTic -or ($controls.Count -gt 0 -and $entry.Tic -lt $controls[$controls.Count-1].Tic)){
+                throw 'Invalid control event boundary in replay journal.'
+            }
             $controls.Add($entry)
         }
         foreach($entry in @($batch.Checkpoints)){
-            if($entry.Tic -lt 0 -or $entry.Tic -gt $batch.EndTic -or ($checkpoints.Count -gt 0 -and $entry.Tic -lt $checkpoints[$checkpoints.Count-1].Tic)){throw 'Invalid checkpoint in replay journal.'}
+            if($null -eq $entry -or $entry.Tic -isnot [long] -or $entry.Tic -lt $batch.StartTic -or
+                $entry.Tic -gt $batch.EndTic -or ($checkpoints.Count -gt 0 -and $entry.Tic -lt $checkpoints[$checkpoints.Count-1].Tic)){
+                throw 'Invalid checkpoint boundary in replay journal.'
+            }
             if($checkpoints.Count -gt 0 -and $entry.Tic -eq $checkpoints[$checkpoints.Count-1].Tic){$checkpoints[$checkpoints.Count-1]=$entry}
             else{$checkpoints.Add($entry)}
         }
-        foreach($entry in @($batch.Transitions)){$transitions.Add($entry)}
+        foreach($entry in @($batch.Transitions)){
+            if($null -eq $entry -or $entry.Tic -isnot [long] -or $entry.Tic -lt $batch.StartTic -or
+                $entry.Tic -gt $batch.EndTic -or ($transitions.Count -gt 0 -and $entry.Tic -lt $transitions[$transitions.Count-1].Tic)){
+                throw 'Invalid transition boundary in replay journal.'
+            }
+            $transitions.Add($entry)
+        }
         $covered=$batch.EndTic;$expectedSequence++
         if($batch.Final -isnot [bool]){throw 'Replay journal final marker must be a boolean.'}
         if($batch.Final){if($i -ne $payloads.Count-1){throw 'Replay journal contains records after its final batch.'};$final=$true}
