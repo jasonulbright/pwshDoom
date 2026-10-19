@@ -1,7 +1,8 @@
 # Preview.8 release scope
 
-October 4, 2026. This is a playable cumulative community preview, not full
-Ultimate Doom certification. It preserves Classic, Matrix and AnsiArt, with
+October 4, 2026. This page describes the original published Preview.8 asset,
+a playable cumulative community preview, not full Ultimate Doom certification.
+It preserves Classic, Matrix and AnsiArt, with
 gameplay, rasterization, terminal encoding, music synthesis and audio mixing in
 PowerShell. The source package contains no IWAD, soundfont, prepared music,
 local files, research PDF or downloaded tools.
@@ -16,18 +17,20 @@ that metadata retain the analytic fallback. The renderer accepts both native
 `Fixed`/`Angle` camera objects and transported snapshots whose position and view
 height are numeric world units and whose angle is radians.
 
-The authored-geometry masked-wall harness passes 24 checks, including full-frame
-pixel and depth parity for both camera representations. The synthetic wall-span
-harness passes 18 cases at 0°, 90°, 180° and 270°. These tests use no WAD, game
-session, display or audio device. Offline package checks also pass 96 settings
-assertions, 143 menu assertions with 60 WAD-backed static screen fixtures, and
-286 palette checks. The menu fixtures caught two text-fit defects: the key
-capture prompt now uses the smaller footer scale, and the Controls help wraps
-the final shortcut list across two rows. The test harness copies each frame
-before comparing it so later screen draws cannot overwrite earlier results.
-No live test was run for this package preparation. The focused checks establish
-implementation behavior only; they do not establish map rendering fidelity,
-campaign playability or performance.
+The published package's authored-geometry masked-wall harness passes 24
+checks, including full-frame pixel and depth parity for both camera
+representations. The synthetic wall-span harness passes 18 cases at 0°, 90°,
+180° and 270°. These tests use no WAD, game session, display or audio device.
+
+Post-release source fixes the key-capture prompt and Controls help overflow.
+The local refreshed-package candidate passes 96 settings checks, 143 menu
+checks with 60 WAD-backed static screen fixtures, and 286 palette checks, in
+addition to the 24 masked-wall and 18 wall-span cases. Its manifest pins the
+exact source and payload hashes. The refreshed candidate has not replaced the
+public Preview.8 asset. The fixtures use no game host, display or audio device;
+no live test was run. These focused checks establish implementation behavior
+only; they do not establish map rendering fidelity, campaign playability or
+performance.
 
 ## Remaining release gates
 

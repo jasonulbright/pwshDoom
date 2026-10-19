@@ -4,24 +4,26 @@
 
 Full Ultimate Doom campaign, independent fidelity, physical/acoustic review,
 display pacing and second-hardware qualification continue after Preview.8.
+Post-release source corrects the key-capture prompt and Controls help overflow
+in the 320×200 menu. Offline extracted-candidate checks pass 96 settings, 143
+menu/60 screen-fixture, 286 palette, 24 masked-wall and 18 wall-span cases. The
+refresh package is local and has not replaced the public Preview.8 asset; no
+live game/device test was run.
 
 ## 0.1.0-preview.8 — 2026-10-04
 
-Cumulative playable community preview after36 commits since Preview.7. It
+Cumulative playable community preview after 36 commits since Preview.7. It
 preserves Classic, Matrix and AnsiArt. Gameplay, rendering and audio mixing
 remain in PowerShell. See [scope and current limits](docs/release-preview8.md);
-this is not full Ultimate Doom certification. The ZIP asset was refreshed with
-follow-up menu-fit fixes; its manifest pins the refreshed source commit.
+this is not full Ultimate Doom certification.
 
 - Add saved gamma levels and an F11 shortcut; custom key bindings now report
   reserved keys and preserve rapid repeated menu taps.
-- Keep the key-capture prompt and the complete Controls help within the
-  320×200 menu canvas.
 - Use Doom's fixed-angle wall-span lookup when WAD geometry metadata is
   present. Numeric snapshot camera values retain their world-unit/radian form.
-- Offline checks pass 96 settings, 143 menu/60 screen-fixture, 286 palette,
-  24 masked-wall and 18 four-cardinal wall-span cases. No live game/device test
-  or renderer-speed claim is included in this package preparation.
+- Add offline synthetic renderer checks for wall order, camera-representation
+  parity and all four cardinal projection headings. No live game/device test or
+  renderer-speed claim is included in this package preparation.
 - Full Episode 1 human completion, original-frame fidelity, audio listening,
   physical-device review and 35-tic/60-display qualification remain open.
 
