@@ -6988,3 +6988,12 @@ The two-worker Classic partition check still matches 320,000 pixels across five
 views and two uneven strips, with zero differences; see the
 [partition report](../results/render-partitions-plane-wall-boundary-20261019-r1.json).
 No live game, display, keyboard, audio device or pacing test was used.
+
+The edge fractions now advance as signed 32-bit state from column to column;
+when a worker clip skips columns, the next visible column applies the combined
+step. This recurrence produces byte-identical candidate and reference frame
+hashes to the prior boundary implementation at heights 0, 6, 34 and 68, with
+the same mismatch counts, and the two-worker check remains exact across five
+views (320,000 pixels). This verifies output equivalence for the implementation
+refinement but does not measure a speedup. See the [recurrence comparison](../results/moving-sector-per-call-plane-wall-boundary-20261019-v4.json)
+and [updated partition report](../results/render-partitions-plane-wall-boundary-20261019-r3.json).

@@ -1353,3 +1353,12 @@ The two-worker Classic partition run remains exact across five views and
 320,000 pixels, including two uneven strips; see the
 [partition report](../results/render-partitions-plane-wall-boundary-20261019-r1.json).
 No live test or desktop/device interaction was used.
+
+The boundary code now advances its signed 32-bit fractions across columns and
+applies skipped-column steps when a worker clip is empty. Candidate and
+reference frame hashes remain identical to the previous boundary version at
+all four heights; scene and HUD counts do not change. The updated two-worker
+partition run still matches 320,000 pixels across five views. This establishes
+output equivalence for the recurrence refinement, not a measured speedup. See
+the [recurrence comparison](../results/moving-sector-per-call-plane-wall-boundary-20261019-v4.json)
+and [partition report](../results/render-partitions-plane-wall-boundary-20261019-r3.json).
