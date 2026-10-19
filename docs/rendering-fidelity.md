@@ -1163,3 +1163,23 @@ depth when camera values are supplied as snapshot doubles or native
 `Fixed`/`Angle` objects. This parity holds at zero angle and at 90° with
 fractional camera coordinates/view height. It uses no WAD; rotated WAD views
 and performance remain unverified. No live test ran.
+
+## Current-source moving-ceiling comparison (October 19, 2026)
+
+Refreshed the frozen E1M1 tic-315 ceiling sweep on source commit `18f6ddc`.
+Only sector 26's ceiling height changes; the replay-derived camera, actors and
+other simulation state stay fixed. The current renderer exactly matches the
+adopted renderer at heights 0 and 6, including the actual six-unit opening.
+The 34- and 68-unit counterfactuals differ at 307 and 1,463 scene indices,
+with exact HUD pixels in all four views. The earlier R9 source differed at
+10/7/410/4,166 indices for those heights. Because several renderer changes
+separate the source pins, this is a current-source improvement observation,
+not attribution to one change.
+
+Between heights 0 and 68, the candidate changes 50,739 scene pixels and the
+reference changes 50,733, confirming that both render the opening. This is
+one in-memory counterfactual against the locally adapted PowerShell renderer.
+It does not verify a moving route, other sector effects, original-executable
+parity or performance. The [source-pinned receipt](../results/moving-sector-e1m1-height-sweep-20261019.json)
+retains the replay, IWAD, source and diagnostic-image hashes; the two PNGs
+remain under ignored `local/moving-sector-current-fixed-angle-20261019/`.

@@ -6735,3 +6735,15 @@ to normal renderer timings. This changes profiling code only; it makes no
 fidelity or pacing claim and uses no live game, display, keyboard or audio
 device. The [receipt](../results/renderer-work-counters-fixed-angle-e3m6-20261019.json)
 preserves parameters, hashes and raw samples.
+
+### Recheck the moving E1M1 ceiling on current source — October 19, 2026
+
+The fixed tic-315 replay now exactly matches the adopted renderer at ceiling
+heights 0 and 6, with zero HUD differences. Heights 34 and 68 retain 307 and
+1,463 scene-index differences, compared with 410 and 4,166 on the older R9
+source. Multiple renderer changes separate those source pins, so the reduced
+counts do not isolate one change. Both renderers change about 50.7k pixels
+between heights 0 and 68, confirming this counterfactual exercises the opening.
+The comparison uses the local PowerShell reference, not an original executable
+or live route. Its [receipt](../results/moving-sector-e1m1-height-sweep-20261019.json)
+pins the replay, IWAD, source hashes and local image hashes.

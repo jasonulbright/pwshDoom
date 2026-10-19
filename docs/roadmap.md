@@ -926,3 +926,14 @@ open. This is a bounded operation-count observation, not a production change,
 fidelity result or pacing measurement. No live game, display, keyboard or
 audio device was used. See the [receipt](../results/renderer-work-counters-fixed-angle-e3m6-20261019.json)
 and [investigation record](ledger.md#repair-fixed-angle-renderer-work-counters--october-19-2026).
+
+### Current moving-sector comparison — October 19, 2026
+
+The frozen E1M1 tic-315 ceiling fixture on source `18f6ddc` matches the
+adopted renderer exactly at heights 0 and 6. Counterfactual heights 34 and 68
+have 307 and 1,463 differing scene indices, with exact HUD pixels throughout.
+This is an improvement over the older R9 counts, but several renderer changes
+separate the source revisions. The run is an offline comparison to the local
+PowerShell reference; moving routes and independent original-executable parity
+remain open. See [fidelity evidence](rendering-fidelity.md#current-source-moving-ceiling-comparison-october-19-2026)
+and the [receipt](../results/moving-sector-e1m1-height-sweep-20261019.json).
