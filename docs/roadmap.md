@@ -996,3 +996,33 @@ The complete local tree measures 27,716,928,402 bytes, below the hard decimal
 ignored by the tracked `.gitignore` and is not tracked in Git. The branch is 25
 commits past Preview.8 at this source revision; this feature commit brings it
 to 26, with the release cadence still at 35.
+
+### Actual plane sample trace — October 19, 2026
+
+The offline comparison now records the candidate's actual per-call plane
+coordinates and initialization origins, correcting the old horizontal-span
+reconstruction in the diagnostic. It confirms exact candidate sample colors
+for 194 same-owner mismatch pixels. Candidate and reference distances and
+lighting agree, but coordinates differ at every sample; candidate and
+reference origins vary by one or two columns in most cases, with two 13-column
+outliers. This narrows the remaining gap to plane span initialization and
+leaves the 264/963 scene differences unresolved. The headless two-worker check
+still passes 320,000 pixels with zero differences. See the [ledger](ledger.md#actual-candidate-plane-sample-trace--october-19-2026),
+[fidelity report](rendering-fidelity.md#actual-per-call-plane-sample-origins--october-19-2026)
+and [control receipt](../results/moving-sector-per-call-plane-samples-control-20261019-v1.json).
+No live tests were run.
+
+### Reference-origin counterfactual — October 19, 2026
+
+Recomputing same-owner samples from the reference's recorded initialization
+column matches all 194 reference plane samples exactly, including fractions,
+texels and colors. This isolates those per-pixel differences to origin
+selection, while leaving the candidate-side origin rule and 264/963 full-scene
+differences unresolved. The [ledger](ledger.md#reference-origin-plane-sample-counterfactual--october-19-2026),
+[fidelity notes](rendering-fidelity.md#reference-origin-sampling-counterfactual--october-19-2026)
+and [control receipt](../results/moving-sector-per-call-plane-samples-control-20261019-v2.json)
+record the counterfactual. It is offline saved-replay evidence only.
+
+The complete local tree measures 27,729,035,869 bytes at this checkpoint,
+below the 30,000,000,000-byte cap. The branch is 26 commits past Preview.8
+before this follow-up commit and remains below the release threshold of 35.

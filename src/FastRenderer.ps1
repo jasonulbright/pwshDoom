@@ -436,6 +436,23 @@ function Draw-FastPlaneColumnCalls {
     [int[]]$floorLight = $Context.PlaneFloorLight
     [long[]]$floorXFrac = $Context.PlaneFloorXFrac
     [long[]]$floorYFrac = $Context.PlaneFloorYFrac
+    [int[]]$ceilingOriginRows = [int[]]::new(0)
+    [int[]]$floorOriginRows = [int[]]::new(0)
+    if ($Context.ContainsKey('PlaneCeilingSampleOriginX')) { $ceilingOriginRows = $Context.PlaneCeilingSampleOriginX }
+    if ($Context.ContainsKey('PlaneFloorSampleOriginX')) { $floorOriginRows = $Context.PlaneFloorSampleOriginX }
+    [bool]$captureSampleDetails = $Context.ContainsKey('PlaneSampleXFracData') -and
+        $Context.ContainsKey('PlaneSampleYFracData') -and $Context.ContainsKey('PlaneSampleOriginX') -and
+        $Context.ContainsKey('PlaneSampleReusedPreviousColumn')
+    [int[]]$sampleXFracData = $null
+    [int[]]$sampleYFracData = $null
+    [int[]]$sampleOriginX = $null
+    [byte[]]$sampleReusedPreviousColumn = $null
+    if ($captureSampleDetails) {
+        $sampleXFracData = $Context.PlaneSampleXFracData
+        $sampleYFracData = $Context.PlaneSampleYFracData
+        $sampleOriginX = $Context.PlaneSampleOriginX
+        $sampleReusedPreviousColumn = $Context.PlaneSampleReusedPreviousColumn
+    }
     [int[]]$stripeEnds = @($PlaneSpanBoundaries | Where-Object { $_ -gt 0 -and $_ -le 320 })
     if ($stripeEnds.Length -eq 0 -or $stripeEnds[$stripeEnds.Length - 1] -lt 320) { $stripeEnds += 320 }
     [int]$stripeStart = 0
@@ -498,10 +515,15 @@ function Draw-FastPlaneColumnCalls {
             }
 
             for ([int]$y = $y1; $y -le $y2; $y++) {
-                if ($reusePrevious -and $y -ge $overlapStart -and $y -le $overlapEnd) {
+                [bool]$reuseCurrentRow = $reusePrevious -and $y -ge $overlapStart -and $y -le $overlapEnd
+                if ($reuseCurrentRow) {
                     [long]$xFrac = $xFracRows[$y] + $xStepRows[$y]
                     [long]$yFrac = $yFracRows[$y] + $yStepRows[$y]
                     [int]$light = $lightRows[$y]
+                    if ($captureSampleDetails) {
+                        if ($isFloor) { [int]$sampleOriginColumn = $floorOriginRows[$y] }
+                        else { [int]$sampleOriginColumn = $ceilingOriginRows[$y] }
+                    }
                 } else {
                     [long]$distanceWide = ($heightDelta * [long]$Context.PlaneRowSlopes[$y]) -shr 16
                     $distanceWide = $distanceWide -band 0xffffffffL
@@ -516,6 +538,11 @@ function Draw-FastPlaneColumnCalls {
                     if ($FixedColorMap -gt 0) { $light = $FixedColorMap }
                     $xStepRows[$y] = $stepX
                     $yStepRows[$y] = $stepY
+                    if ($captureSampleDetails) {
+                        $sampleOriginColumn = $x
+                        if ($isFloor) { $floorOriginRows[$y] = $x }
+                        else { $ceilingOriginRows[$y] = $x }
+                    }
                 }
                 $xFracRows[$y] = $xFrac
                 $yFracRows[$y] = $yFrac
@@ -526,6 +553,12 @@ function Draw-FastPlaneColumnCalls {
                 [int]$u = ($xFrac -shr 16) -band 63
                 [int]$v = ($yFrac -shr 10) -band 4032
                 $pixels[$pixelIndex] = $Context.Colors[$light][$flatData[$v + $u]]
+                if ($captureSampleDetails) {
+                    $sampleXFracData[$pixelIndex] = [int]($xFrac -band 0xffffffffL)
+                    $sampleYFracData[$pixelIndex] = [int]($yFrac -band 0xffffffffL)
+                    $sampleOriginX[$pixelIndex] = $sampleOriginColumn
+                    $sampleReusedPreviousColumn[$pixelIndex] = [byte]([int]$reuseCurrentRow)
+                }
             }
 
             if ($isFloor) {

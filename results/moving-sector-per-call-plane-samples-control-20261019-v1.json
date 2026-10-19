@@ -1,0 +1,108 @@
+{
+  "SchemaVersion": 1,
+  "CreatedUtc": "2026-10-19T15:00:16.6518271Z",
+  "Purpose": "Control receipt for actual per-call candidate plane sample tracing.",
+  "SourceCommit": "ab1d875c53d91c187600582433a9a64a5690128a",
+  "Scope": "Headless offline saved replay and process-partition checks only; no live game, UI, display, keyboard, audio device or pacing test.",
+  "CandidateAndReferenceFramesMatchPriorSweep": true,
+  "SameOwnerSampleTrace": [
+    {
+      "CeilingHeight": 34,
+      "SceneDifferences": 264,
+      "SameOwnerSamples": 27,
+      "SameDistanceData": 27,
+      "SameDistanceLightBin": 27,
+      "SameXFraction": 0,
+      "SameYFraction": 0,
+      "SameFlatTexelIndex": 0,
+      "CandidateFramebufferMatchesPlaneSample": 27,
+      "CandidateSampleReusedPreviousColumn": 27,
+      "CandidateSampleInitializedAtCurrentColumn": 0,
+      "ReferenceSampleReusedPreviousColumn": 27,
+      "ReferenceSampleInitializedAtCurrentColumn": 0,
+      "CandidateSampleOriginBeforeReferenceOrigin": 27,
+      "CandidateSampleOriginDeltaCounts": {
+        "-1": 27
+      }
+    },
+    {
+      "CeilingHeight": 68,
+      "SceneDifferences": 963,
+      "SameOwnerSamples": 167,
+      "SameDistanceData": 167,
+      "SameDistanceLightBin": 167,
+      "SameXFraction": 0,
+      "SameYFraction": 0,
+      "SameFlatTexelIndex": 0,
+      "CandidateFramebufferMatchesPlaneSample": 167,
+      "CandidateSampleReusedPreviousColumn": 167,
+      "CandidateSampleInitializedAtCurrentColumn": 0,
+      "ReferenceSampleReusedPreviousColumn": 164,
+      "ReferenceSampleInitializedAtCurrentColumn": 3,
+      "CandidateSampleOriginBeforeReferenceOrigin": 76,
+      "CandidateSampleOriginDeltaCounts": {
+        "-2": 1,
+        "1": 86,
+        "2": 5,
+        "-13": 2,
+        "-1": 73
+      }
+    }
+  ],
+  "PartitionEquivalence": {
+    "Workers": 2,
+    "Style": "Classic",
+    "Views": 5,
+    "ComparedPixels": 320000.0,
+    "PixelDifferences": 0.0,
+    "EncodedStripByteChecks": 10,
+    "Error": null
+  },
+  "Interpretation": "Actual candidate coordinates and origin/reuse state are captured in the production per-call sampler when diagnostic arrays are supplied. Distance and light selection match but texture coordinates differ at all same-owner samples. Candidate/reference origins differ, commonly by one or two columns; this identifies the remaining span-initialization gap without establishing a safe correction.",
+  "Limits": [
+    "The comparison uses one frozen E1M1 state at input tic 315 and the locally adapted ManagedDoom reference.",
+    "This result does not establish original executable parity or full-game readiness."
+  ],
+  "Artifacts": [
+    {
+      "Path": "src/FastRenderer.ps1",
+      "Sha256": "B3A206CB105415BB4BCAC43667ECAA7FEF6280E30A50800EA95574D9B4DF2A01"
+    },
+    {
+      "Path": "src/RenderAssets.ps1",
+      "Sha256": "B1E696588EBA55A174910F168A2FC6E6D076776E94D9EAA6C67D209901E51D30"
+    },
+    {
+      "Path": "scripts/Compare-MovingSectorHeightSweep.ps1",
+      "Sha256": "17444D39900E3068FF73A76FE57B759C5B4D11CCA10517A30CE8E03F7735EA7D"
+    },
+    {
+      "Path": "scripts/Test-RenderPartitions.ps1",
+      "Sha256": "5077A7F41D69A6F5DD9FF61F58D283BEC0FD1D720C2E9B6C030164439259A99B"
+    },
+    {
+      "Path": "results/moving-sector-per-call-plane-recurrence-20261019-v3.json",
+      "Sha256": "479E4BFC844D17288A6E47F493F3481BB44F9E5348551F8AC475FBCB0CDF60A2"
+    },
+    {
+      "Path": "results/moving-sector-per-call-plane-recurrence-reference-owners-20261019-v5.json",
+      "Sha256": "97D47165DF1CD1660DF48690643A82DD7AB35A66A5D1E1650212E6F17752BBE6"
+    },
+    {
+      "Path": "results/render-partitions-per-call-sample-trace-20261019-r9.json",
+      "Sha256": "91070C1DC27A47EBE0C99C8C5B42AE899C7760DCE37669F16D1B3D6CB6B438E2"
+    },
+    {
+      "Path": "results/moving-sector-plane-call-recurrence-control-20261019.json",
+      "Sha256": "56138D0A68987A4C0B6D93FF7D78656CC3CF9EE50D02F2B2445796980377E837"
+    },
+    {
+      "Path": "local/moving-ceiling-reference-plane-recurrence-source-20261019-v2/Video/ThreeDRenderer.sb.ps1",
+      "Sha256": "968B022C25C9A33F13760787557E0389CDA2560DB1C355FC2ED3E6C877E005B1"
+    },
+    {
+      "Path": "local/per-call-recurrence-reference-engine-20261019-v6.ps1",
+      "Sha256": "230CED8391EBD3A25D2368166D3965B7ADB8B930F242B8AB5BB84A09F2E5117A"
+    }
+  ]
+}

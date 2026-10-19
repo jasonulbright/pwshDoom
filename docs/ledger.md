@@ -6922,3 +6922,38 @@ executable parity evidence. The [final sweep](../results/moving-sector-per-call-
 [asset check](../results/render-asset-reuse-wall-u-20261019.json) and
 [control receipt](../results/moving-sector-plane-call-recurrence-control-20261019.json)
 pin the inputs and outcomes.
+
+### Actual candidate plane sample trace — October 19, 2026
+
+The owner diagnostic previously reconstructed candidate samples from the old
+horizontal-span algorithm after production had moved to per-call recurrence.
+The renderer now exposes optional per-pixel fixed-point coordinates, origin
+columns and reuse flags to the offline comparison harness. Captured samples
+reproduce the candidate plane write color at all 27 same-owner mismatches at
+height 34 and all 167 at height 68, confirming the trace follows actual writes.
+
+Candidate and reference distances and light selections agree at all 194
+same-owner samples; fixed-point coordinates and flat texels still differ. All
+27 candidate samples at height 34 start one column before the reference. At
+height 68 the candidate reuses a previous column at all 167 samples, while the
+reference initializes three at the current column. Origin deltas are -1 at 73
+samples, +1 at 86, -2 at one, +2 at five and -13 at two. The evidence points
+to different plane span initialization boundaries; it does not establish a
+safe correction. The per-call sweep remains at 264 and 963 scene differences
+for heights 34 and 68. The [sample report](../results/moving-sector-per-call-plane-recurrence-reference-owners-20261019-v5.json),
+[partition check](../results/render-partitions-per-call-sample-trace-20261019-r9.json)
+and [control receipt](../results/moving-sector-per-call-plane-samples-control-20261019-v1.json)
+record the current trace. The harness is headless and offline.
+
+### Reference-origin plane sample counterfactual — October 19, 2026
+
+The harness recomputes candidate coordinates from each reference sample's
+recorded initialization column, then advances with the candidate plane step.
+All 27 same-owner samples at height 34 and all 167 at height 68 match reference
+fractions, texture coordinates, flat texel and color. This establishes that
+the per-pixel sampling gap at those sites is explained by the initialization
+column alone. It does not provide a candidate-side rule for choosing that
+column or a whole-frame correction. The full scene remains at 264 and 963
+differences. See the
+[counterfactual report](../results/moving-sector-per-call-plane-recurrence-reference-owners-20261019-v6.json)
+and [control receipt](../results/moving-sector-per-call-plane-samples-control-20261019-v2.json).
