@@ -826,3 +826,22 @@ used. This is the 35th development commit after Preview.7 and reaches the next
 community-preview release cadence. The full Episode 1 route and all broader
 fidelity, pacing, physical-input, acoustic and second-hardware gates remain
 open. No live tests ran.
+
+### Current source and repository checkpoint — October 19, 2026
+
+Public Preview.8 remains the original archive at source commit `1b1c424`,
+published after 36 commits since Preview.7. The development branch is at
+validation commit `a3572c1` is four commits beyond that Preview.8 source. Its
+local menu-correction candidate is pinned to clean source commit `82dd23f`. All
+572 payload hashes match after extraction, and its archive checksum is recorded in the
+[candidate validation receipt](../results/preview8-refresh-candidate-validation-20261019.json).
+The extracted candidate passes 96 settings, 143 menu/60 static-screen, 286
+palette, 24 masked-wall and 18 wall-span checks. No live game, display, audio
+device or human route was tested. The candidate has not replaced the public
+asset; the next cumulative release is due after 35 commits from Preview.8.
+
+At this checkpoint, the entire local repository tree, including ignored files,
+measures 28,399,136,182 bytes against the 30,000,000,000-byte ceiling. The
+recordings directory retains its metadata and findings and contains no MP4
+files. Keep the complete HMP Episode 1 route and broader release gates open; the handoff is in
+[`episode1-playtest.md`](episode1-playtest.md).
