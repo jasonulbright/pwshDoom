@@ -7142,3 +7142,25 @@ pixels have no candidate depth. Reference final-pass counts are 325 BSP
 traversal and 14 world-sprite writes. This narrows the next trace to candidate
 depth and missing-plane coverage while leaving the responsible candidate
 segments and original-executable output unresolved.
+
+### 2026-10-19 — Trace candidate depth owners and reject a broad lower-plane rule
+
+Extended the disposable candidate trace to identify the segment and write type
+that last supplied depth at the 339 height-68 pixels without a candidate plane
+ID. The largest group is 76 reference-plane pixels behind untextured wall
+occlusion on segment 166 (front S22/back S15); both floor heights are zero and
+all three textures are absent. Another 62 reference-plane pixels are covered
+by segment 150's opaque lower band, which has bottom texture 71 and unequal
+floor heights. A further 55 reference-plane pixels have no candidate depth.
+The [depth-owner receipt](../results/moving-sector-depth-owner-20261019-v3.json)
+records per-pixel examples and groups; the diagnostic renderer preserves the
+baseline frame hashes.
+
+A disposable counterfactual assigned the back-sector floor to every equal-
+height, one-row, untextured lower band. It leaves heights 0, 6 and 34 unchanged,
+but at height 68 raises scene differences from 353 to 498 and candidate plane
+buffer mismatches from 14 to 285. The broad rule is rejected and production
+rendering is unchanged. See the
+[counterfactual receipt](../results/moving-sector-untextured-lower-plane-20261019-v5.json).
+This was saved-replay analysis only; no live tests or desktop/device
+interaction were used.

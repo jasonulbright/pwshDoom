@@ -30,6 +30,12 @@ $referenceFinalWriterNames = @{
     '2' = 'Mapped column'
     '3' = 'Fuzz column'
 }
+$candidateDepthOwnerWriterNames = @{
+    '0' = 'Unassigned'
+    '1' = 'Opaque wall band'
+    '2' = 'Untextured wall occlusion'
+    '3' = 'Masked middle texture'
+}
 
 function Get-FastPlaneSample {
     param(
@@ -200,7 +206,8 @@ $sourcePaths = @(
     'scripts/Compare-MovingSectorHeightSweep.ps1',
     'scripts/Prepare-ReferencePlaneOwnerDiagnosticSource.ps1',
     'scripts/Prepare-FastRendererWallSpanDiagnosticRenderer.ps1',
-    'scripts/Prepare-FastRendererPortalTopBoundaryCounterfactual.ps1'
+    'scripts/Prepare-FastRendererPortalTopBoundaryCounterfactual.ps1',
+    'scripts/Prepare-FastRendererUntexturedLowerPlaneCounterfactual.ps1'
 )
 $sourcePaths = @($sourcePaths | Select-Object -Unique)
 $sourceHashes = @{}
@@ -287,6 +294,9 @@ try {
         $context.DiagnosticWallSpanTrace = [int[]]::new($game.World.Map.Segs.Length * 320 * 12)
         $context.DiagnosticWallSpanTraceSeen = [byte[]]::new($game.World.Map.Segs.Length * 320)
         $context.DiagnosticPlaneOwnerSegIndices = [int[]]::new(320 * 168)
+        $context.DiagnosticDepthOwnerSegIndices = [int[]]::new(320 * 168)
+        $context.DiagnosticDepthOwnerWriterTypes = [byte[]]::new(320 * 168)
+        [Array]::Fill($context.DiagnosticDepthOwnerSegIndices, -1)
     }
     $context.PlaneSampleXFracData = [int[]]::new(320 * 168)
     $context.PlaneSampleYFracData = [int[]]::new(320 * 168)
@@ -324,6 +334,8 @@ try {
             [Array]::Clear($context.DiagnosticWallSpanTrace)
             [Array]::Clear($context.DiagnosticWallSpanTraceSeen)
             [Array]::Clear($context.DiagnosticPlaneOwnerSegIndices)
+            [Array]::Fill($context.DiagnosticDepthOwnerSegIndices, -1)
+            [Array]::Clear($context.DiagnosticDepthOwnerWriterTypes)
         }
         [Array]::Fill($context.PlaneSampleOriginX, -1)
         [Array]::Clear($context.PlaneSampleReusedPreviousColumn)
@@ -378,6 +390,7 @@ try {
         $candidateNonPlaneMismatchFinalRenderPassCounts = @{}
         $candidateNonPlaneMismatchWriterDepthWrittenCounts = @{}
         $candidateNonPlaneMismatchWriterNoDepthCounts = @{}
+        $candidateNonPlaneMismatchDepthOwnerCounts = @{}
         $candidatePlaneMismatchWallSpanCounts = [ordered]@{
             ReferenceOpaqueWallPixels = 0
             ReferenceWallWriteIntervalContainsPixel = 0
@@ -606,6 +619,109 @@ try {
                                     $candidateNonPlaneMismatchWriterDepthWrittenCounts[$writerKey]++
                                 } else {
                                     $candidateNonPlaneMismatchWriterDepthWrittenCounts[$writerKey] = 1
+                                }
+                            }
+                            if ($CaptureWallBoundaryTrace) {
+                                [int]$candidateDepthOwnerEncoded = $context.DiagnosticDepthOwnerSegIndices[$candidateIndex]
+                                [int]$candidateDepthOwnerSegmentIndex = if ($candidateDepthOwnerEncoded -gt 0) { $candidateDepthOwnerEncoded - 1 } else { -1 }
+                                [int]$candidateDepthOwnerWriterType = $context.DiagnosticDepthOwnerWriterTypes[$candidateIndex]
+                                [int]$candidateDepthOwnerSideIndex = -1
+                                [int]$candidateDepthOwnerFrontSectorIndex = -1
+                                [int]$candidateDepthOwnerBackSectorIndex = -1
+                                [int]$candidateDepthOwnerLineFlags = -1
+                                [int]$candidateDepthOwnerTopTexture = -1
+                                [int]$candidateDepthOwnerBottomTexture = -1
+                                [int]$candidateDepthOwnerMiddleTexture = -1
+                                [int]$candidateDepthOwnerFrontFloorHeightData = -1
+                                [int]$candidateDepthOwnerFrontCeilingHeightData = -1
+                                [int]$candidateDepthOwnerBackFloorHeightData = -1
+                                [int]$candidateDepthOwnerBackCeilingHeightData = -1
+                                if ($candidateDepthOwnerSegmentIndex -ge 0 -and $candidateDepthOwnerSegmentIndex -lt $game.World.Map.Segs.Length) {
+                                    [int]$candidateDepthOwnerMetadataOffset = $candidateDepthOwnerSegmentIndex * 4
+                                    $candidateDepthOwnerSideIndex = $context.SegmentMetadata[$candidateDepthOwnerMetadataOffset]
+                                    $candidateDepthOwnerFrontSectorIndex = $context.SegmentMetadata[$candidateDepthOwnerMetadataOffset + 1]
+                                    $candidateDepthOwnerBackSectorIndex = $context.SegmentMetadata[$candidateDepthOwnerMetadataOffset + 2]
+                                    $candidateDepthOwnerLineFlags = $context.SegmentMetadata[$candidateDepthOwnerMetadataOffset + 3]
+                                    $candidateDepthOwnerSide = $context.Sides[$candidateDepthOwnerSideIndex]
+                                    $candidateDepthOwnerTopTexture = $candidateDepthOwnerSide.TopTexture
+                                    $candidateDepthOwnerBottomTexture = $candidateDepthOwnerSide.BottomTexture
+                                    $candidateDepthOwnerMiddleTexture = $candidateDepthOwnerSide.MiddleTexture
+                                    $candidateDepthOwnerFrontFloorHeightData = $context.SectorFloorHeightData[$candidateDepthOwnerFrontSectorIndex]
+                                    $candidateDepthOwnerFrontCeilingHeightData = $context.SectorCeilingHeightData[$candidateDepthOwnerFrontSectorIndex]
+                                    if ($candidateDepthOwnerBackSectorIndex -ge 0) {
+                                        $candidateDepthOwnerBackFloorHeightData = $context.SectorFloorHeightData[$candidateDepthOwnerBackSectorIndex]
+                                        $candidateDepthOwnerBackCeilingHeightData = $context.SectorCeilingHeightData[$candidateDepthOwnerBackSectorIndex]
+                                    }
+                                }
+                                [string]$candidateDepthOwnerKey = '{0}:{1}:{2}' -f $writerKey,$candidateDepthOwnerWriterType,$candidateDepthOwnerSegmentIndex
+                                if (-not $candidateNonPlaneMismatchDepthOwnerCounts.ContainsKey($candidateDepthOwnerKey)) {
+                                    $candidateNonPlaneMismatchDepthOwnerCounts[$candidateDepthOwnerKey] = @{
+                                        ReferenceFinalWriterType = [int]$writerKey
+                                        CandidateDepthOwnerWriterType = $candidateDepthOwnerWriterType
+                                        CandidateDepthOwnerSegmentIndex = $candidateDepthOwnerSegmentIndex
+                                        CandidateDepthOwnerSideIndex = $candidateDepthOwnerSideIndex
+                                        CandidateDepthOwnerFrontSectorIndex = $candidateDepthOwnerFrontSectorIndex
+                                        CandidateDepthOwnerBackSectorIndex = $candidateDepthOwnerBackSectorIndex
+                                        CandidateDepthOwnerLineFlags = $candidateDepthOwnerLineFlags
+                                        CandidateDepthOwnerTopTexture = $candidateDepthOwnerTopTexture
+                                        CandidateDepthOwnerBottomTexture = $candidateDepthOwnerBottomTexture
+                                        CandidateDepthOwnerMiddleTexture = $candidateDepthOwnerMiddleTexture
+                                        CandidateDepthOwnerFrontFloorHeightData = $candidateDepthOwnerFrontFloorHeightData
+                                        CandidateDepthOwnerFrontCeilingHeightData = $candidateDepthOwnerFrontCeilingHeightData
+                                        CandidateDepthOwnerBackFloorHeightData = $candidateDepthOwnerBackFloorHeightData
+                                        CandidateDepthOwnerBackCeilingHeightData = $candidateDepthOwnerBackCeilingHeightData
+                                        MismatchPixels = 0
+                                        Examples = [Collections.Generic.List[object]]::new()
+                                    }
+                                }
+                                $depthOwnerEntry = $candidateNonPlaneMismatchDepthOwnerCounts[$candidateDepthOwnerKey]
+                                $depthOwnerEntry.MismatchPixels++
+                                if ($depthOwnerEntry.Examples.Count -lt 8) {
+                                    $candidateDepthOwnerTrace = $null
+                                    if ($candidateDepthOwnerSegmentIndex -ge 0 -and $candidateDepthOwnerSegmentIndex -lt $game.World.Map.Segs.Length) {
+                                        [int]$candidateDepthOwnerTraceCell = $candidateDepthOwnerSegmentIndex * 320 + $x
+                                        if ($candidateDepthOwnerTraceCell -lt $context.DiagnosticWallSpanTraceSeen.Length -and
+                                            $context.DiagnosticWallSpanTraceSeen[$candidateDepthOwnerTraceCell] -eq 1) {
+                                            [int]$candidateDepthOwnerTraceOffset = $candidateDepthOwnerTraceCell * 12
+                                            [int[]]$candidateDepthOwnerTraceData = $context.DiagnosticWallSpanTrace
+                                            $candidateDepthOwnerTrace = [ordered]@{
+                                                WallTop = $candidateDepthOwnerTraceData[$candidateDepthOwnerTraceOffset]
+                                                WallBottom = $candidateDepthOwnerTraceData[$candidateDepthOwnerTraceOffset + 1]
+                                                ClipTop = $candidateDepthOwnerTraceData[$candidateDepthOwnerTraceOffset + 2]
+                                                ClipBottom = $candidateDepthOwnerTraceData[$candidateDepthOwnerTraceOffset + 3]
+                                                PortalTop = $candidateDepthOwnerTraceData[$candidateDepthOwnerTraceOffset + 4]
+                                                PortalBottom = $candidateDepthOwnerTraceData[$candidateDepthOwnerTraceOffset + 5]
+                                                UpperBandTop = $candidateDepthOwnerTraceData[$candidateDepthOwnerTraceOffset + 6]
+                                                UpperBandBottom = $candidateDepthOwnerTraceData[$candidateDepthOwnerTraceOffset + 7]
+                                                LowerBandTop = $candidateDepthOwnerTraceData[$candidateDepthOwnerTraceOffset + 8]
+                                                LowerBandBottom = $candidateDepthOwnerTraceData[$candidateDepthOwnerTraceOffset + 9]
+                                                MaskedMiddleBandTop = $candidateDepthOwnerTraceData[$candidateDepthOwnerTraceOffset + 10]
+                                                MaskedMiddleBandBottom = $candidateDepthOwnerTraceData[$candidateDepthOwnerTraceOffset + 11]
+                                            }
+                                        }
+                                    }
+                                    [int]$referenceOwnerSectorForExample = -1
+                                    if ([int]$reference3D.DiagnosticFinalWriterTypes[$referencePosition] -eq 1 -and $null -ne $referenceOwner) {
+                                        for ($sectorForExample = 0; $sectorForExample -lt $game.World.Map.Sectors.Length; $sectorForExample++) {
+                                            if ([object]::ReferenceEquals($referenceOwner, $game.World.Map.Sectors[$sectorForExample])) {
+                                                $referenceOwnerSectorForExample = $sectorForExample
+                                                break
+                                            }
+                                        }
+                                    }
+                                    $depthOwnerEntry.Examples.Add([ordered]@{
+                                        X = $x
+                                        Y = $y
+                                        CandidateFramebufferColor = [byte]$candidate[$candidateIndex]
+                                        ReferenceFramebufferColor = [byte]$referencePixels[$referencePosition]
+                                        CandidateDepth = if ($context.Depth[$candidateIndex] -eq [double]::PositiveInfinity) { 'PositiveInfinity' } else { $context.Depth[$candidateIndex] }
+                                        CandidateDepthOwnerTrace = $candidateDepthOwnerTrace
+                                        ReferencePlaneOwnerSectorIndex = $referenceOwnerSectorForExample
+                                        ReferencePlaneSurfaceType = if ([int]$reference3D.DiagnosticFinalWriterTypes[$referencePosition] -eq 1) { [int]$reference3D.DiagnosticPlaneSurfaceTypes[$referencePosition] } else { 0 }
+                                        ReferencePlaneSampleXFracData = if ([int]$reference3D.DiagnosticFinalWriterTypes[$referencePosition] -eq 1) { [int]$reference3D.DiagnosticPlaneXFracData[$referencePosition] } else { 0 }
+                                        ReferencePlaneSampleYFracData = if ([int]$reference3D.DiagnosticFinalWriterTypes[$referencePosition] -eq 1) { [int]$reference3D.DiagnosticPlaneYFracData[$referencePosition] } else { 0 }
+                                        ReferencePlaneSampleDistanceData = if ([int]$reference3D.DiagnosticFinalWriterTypes[$referencePosition] -eq 1) { [int]$reference3D.DiagnosticPlaneDistanceData[$referencePosition] } else { 0 }
+                                    })
                                 }
                             }
                             [string]$renderPassKey = [string][int]$reference3D.DiagnosticFinalRenderPassTypes[$referencePosition]
@@ -1072,6 +1188,13 @@ try {
                 throw "Reference final render-pass classes did not reconcile for non-plane mismatches at ceiling height $height."
             }
             if ($CaptureWallBoundaryTrace) {
+                $candidateNonPlaneMismatchDepthOwnerTotal = 0
+                foreach ($depthOwnerCount in $candidateNonPlaneMismatchDepthOwnerCounts.Values) {
+                    $candidateNonPlaneMismatchDepthOwnerTotal += [int]$depthOwnerCount.MismatchPixels
+                }
+                if ($candidateNonPlaneMismatchDepthOwnerTotal -ne $candidateNonPlaneMismatchPixels) {
+                    throw "Candidate depth-owner classes did not reconcile for non-plane mismatches at ceiling height $height."
+                }
                 if ($candidatePlaneMismatchWallSpanCounts.ReferenceOpaqueWallPixels -ne $candidatePlaneMismatchBspColumnPixels -or
                     $candidatePlaneMismatchWallSpanCounts.ReferenceWallWriteIntervalContainsPixel -ne $candidatePlaneMismatchWallSpanCounts.ReferenceOpaqueWallPixels) {
                     throw "Reference BSP column wall-span attribution did not reconcile at ceiling height $height."
@@ -1149,6 +1272,33 @@ try {
                     }
                 }
             )
+            CandidateNonPlaneMismatchCandidateDepthOwners = if ($CaptureWallBoundaryTrace) {
+                @(
+                    foreach ($ownerKey in @($candidateNonPlaneMismatchDepthOwnerCounts.Keys | Sort-Object { -[int]$candidateNonPlaneMismatchDepthOwnerCounts[$_].MismatchPixels })) {
+                        $owner = $candidateNonPlaneMismatchDepthOwnerCounts[$ownerKey]
+                        [ordered]@{
+                            ReferenceFinalWriterType = $owner.ReferenceFinalWriterType
+                            ReferenceFinalWriterName = $referenceFinalWriterNames[[string]$owner.ReferenceFinalWriterType]
+                            CandidateDepthOwnerWriterType = $owner.CandidateDepthOwnerWriterType
+                            CandidateDepthOwnerWriterName = $candidateDepthOwnerWriterNames[[string]$owner.CandidateDepthOwnerWriterType]
+                            CandidateDepthOwnerSegmentIndex = $owner.CandidateDepthOwnerSegmentIndex
+                            CandidateDepthOwnerSideIndex = $owner.CandidateDepthOwnerSideIndex
+                            CandidateDepthOwnerFrontSectorIndex = $owner.CandidateDepthOwnerFrontSectorIndex
+                            CandidateDepthOwnerBackSectorIndex = $owner.CandidateDepthOwnerBackSectorIndex
+                            CandidateDepthOwnerLineFlags = $owner.CandidateDepthOwnerLineFlags
+                            CandidateDepthOwnerTopTexture = $owner.CandidateDepthOwnerTopTexture
+                            CandidateDepthOwnerBottomTexture = $owner.CandidateDepthOwnerBottomTexture
+                            CandidateDepthOwnerMiddleTexture = $owner.CandidateDepthOwnerMiddleTexture
+                            CandidateDepthOwnerFrontFloorHeightData = $owner.CandidateDepthOwnerFrontFloorHeightData
+                            CandidateDepthOwnerFrontCeilingHeightData = $owner.CandidateDepthOwnerFrontCeilingHeightData
+                            CandidateDepthOwnerBackFloorHeightData = $owner.CandidateDepthOwnerBackFloorHeightData
+                            CandidateDepthOwnerBackCeilingHeightData = $owner.CandidateDepthOwnerBackCeilingHeightData
+                            MismatchPixels = $owner.MismatchPixels
+                            Examples = $owner.Examples.ToArray()
+                        }
+                    }
+                )
+            } else { $null }
             CandidateNonPlaneMismatchReferenceFinalRenderPasses = @(
                 foreach ($passKey in @($candidateNonPlaneMismatchFinalRenderPassCounts.Keys | Sort-Object { [int]$_ })) {
                     [ordered]@{

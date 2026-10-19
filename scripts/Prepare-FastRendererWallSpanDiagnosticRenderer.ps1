@@ -21,6 +21,24 @@ if(Test-Path -LiteralPath $outputPath){throw 'Use a fresh output path.'}
 
 $source=[IO.File]::ReadAllText($sourcePath)
 $newline=if($source.Contains("`r`n")){"`r`n"}else{"`n"}
+$opaqueDepthMarker='if($color -ge 0){$p=$y*320+$x;$pixels[$p]=$wallColors[$color];$depthBuffer[$p]=$distance}'
+if(([regex]::Matches($source,[regex]::Escape($opaqueDepthMarker))).Count -ne 1){throw 'Expected one opaque wall depth write.'}
+$opaqueDepthTrace='if($color -ge 0){$p=$y*320+$x;$pixels[$p]=$wallColors[$color];$depthBuffer[$p]=$distance;if($Context.ContainsKey(''DiagnosticDepthOwnerSegIndices'')){$Context.DiagnosticDepthOwnerSegIndices[$p]=$segIndex+1;$Context.DiagnosticDepthOwnerWriterTypes[$p]=1}}'
+$source=$source.Replace($opaqueDepthMarker,$opaqueDepthTrace)
+$untexturedDepthMarker='if($distance -lt $depthBuffer[$p]){$depthBuffer[$p]=$distance}'
+if(([regex]::Matches($source,[regex]::Escape($untexturedDepthMarker))).Count -ne 3){throw 'Expected three untextured wall depth writes.'}
+$untexturedDepthTrace='if($distance -lt $depthBuffer[$p]){$depthBuffer[$p]=$distance;if($Context.ContainsKey(''DiagnosticDepthOwnerSegIndices'')){$Context.DiagnosticDepthOwnerSegIndices[$p]=$segIndex+1;$Context.DiagnosticDepthOwnerWriterTypes[$p]=2}}'
+$source=$source.Replace($untexturedDepthMarker,$untexturedDepthTrace)
+$maskedColumnReuseMarker='$maskedColumn.X=$x;$maskedColumn.Y0=$y0;$maskedColumn.Y1=$y1;$maskedColumn.Distance=$distance'
+if(([regex]::Matches($source,[regex]::Escape($maskedColumnReuseMarker))).Count -ne 1){throw 'Expected one reused masked-column initializer.'}
+$source=$source.Replace($maskedColumnReuseMarker,'$maskedColumn.X=$x;$maskedColumn.Y0=$y0;$maskedColumn.Y1=$y1;$maskedColumn.SegIndex=$segIndex;$maskedColumn.Distance=$distance')
+$maskedColumnCreateMarker='@{X=$x;Y0=$y0;Y1=$y1;Distance=$distance'
+if(([regex]::Matches($source,[regex]::Escape($maskedColumnCreateMarker))).Count -ne 1){throw 'Expected one new masked-column initializer.'}
+$source=$source.Replace($maskedColumnCreateMarker,'@{X=$x;Y0=$y0;Y1=$y1;SegIndex=$segIndex;Distance=$distance')
+$maskedDepthMarker='if($color -ge 0){$pixels[$p]=$colors[$color];$depthBuffer[$p]=$distance}'
+if(([regex]::Matches($source,[regex]::Escape($maskedDepthMarker))).Count -ne 1){throw 'Expected one masked-column depth write.'}
+$maskedDepthTrace='if($color -ge 0){$pixels[$p]=$colors[$color];$depthBuffer[$p]=$distance;if($Context.ContainsKey(''DiagnosticDepthOwnerSegIndices'')){$Context.DiagnosticDepthOwnerSegIndices[$p]=$column.SegIndex+1;$Context.DiagnosticDepthOwnerWriterTypes[$p]=3}}'
+$source=$source.Replace($maskedDepthMarker,$maskedDepthTrace)
 $upperPlaneMarker='for([int]$y=$clipT;$y -le $upperPlaneEnd;$y++){$planes[$y*320+$x]=$upperPlaneId}'
 if(([regex]::Matches($source,[regex]::Escape($upperPlaneMarker))).Count -ne 1){throw 'Expected one upper-plane ownership loop.'}
 $source=$source.Replace($upperPlaneMarker,'for([int]$y=$clipT;$y -le $upperPlaneEnd;$y++){$planes[$y*320+$x]=$upperPlaneId;if($Context.ContainsKey(''DiagnosticPlaneOwnerSegIndices'')){$Context.DiagnosticPlaneOwnerSegIndices[$y*320+$x]=$segIndex+1}}')
@@ -65,5 +83,6 @@ $source=$source.Replace($intervalMarker,$intervalMarker+$newline+$intervalTrace)
     InputRendererSha256=(Get-FileHash -LiteralPath $sourcePath).Hash
     DiagnosticRendererSha256=(Get-FileHash -LiteralPath $outputPath).Hash
     BoundaryTraceStride=12
-    Meaning='Disposable source copy only. Captures candidate plane-owner segment indices and fixed-point wall boundaries, per-column clip, portal boundaries, and clipped upper/lower/middle texture intervals for each segment-column pair.'
+    DepthOwnerWriterTypes=[ordered]@{1='Opaque wall band';2='Untextured wall occlusion';3='Masked middle texture'}
+    Meaning='Disposable source copy only. Captures candidate depth-writing segment and writer type alongside plane-owner segment indices, fixed-point wall boundaries, per-column clip, portal boundaries, and clipped upper/lower/middle texture intervals.'
 }

@@ -1151,3 +1151,13 @@ the former and all of the latter, while 55 reference-plane pixels have no
 candidate depth. The next investigation should trace those depth owners and
 missing spans. This remains saved-replay evidence; no live tests or device
 interaction were run.
+
+### Moving-ceiling depth attribution — October 19, 2026
+
+The candidate depth trace now attributes the 339 height-68 scene differences
+without a plane ID. A broad equal-floor, one-row, untextured lower-plane
+counterfactual increases height-68 differences from 353 to 498, so no
+production rule was added. The investigation remains limited to the pinned
+E1M1 replay and adapted local reference; original-executable parity remains
+open. No live tests or desktop/device interaction were used. See the
+[fidelity record](rendering-fidelity.md#candidate-depth-owner-trace-and-lower-plane-counterfactual--october-19-2026).
