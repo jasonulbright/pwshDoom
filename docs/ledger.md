@@ -48,6 +48,16 @@ or establish human input, live display, or audio behavior. The [receipt](../resu
 pins source hashes and the IWAD SHA-256. The complete human Episode 1 route
 remains open.
 
+## 2026-10-19 — Recheck current-source save-state edges
+
+`Test-SaveSessionEdges.ps1` passes 20 checks on source commit `1d5ac5f` across
+a lethal E1M1 death and direct E1/E2/E3/E4M8 completion fixtures. Each state is
+saved, reconstructed, and continued for 16 tics with canonical graph equality;
+the death case continues through Use and rebirth. Completion states are
+injected and do not represent map or episode play. The [receipt](../results/current-source-save-session-edges-20261019.json)
+pins the WAD, harness and save-state source hashes. No game host, display,
+audio device or human route was used.
+
 ## 2026-10-04 — Cover all cardinal view headings in wall projection
 
 Extended the synthetic fixed-angle span harness from 0°/90° to all four

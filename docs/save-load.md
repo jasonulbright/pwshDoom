@@ -129,3 +129,14 @@ replay. The raw report and harness hashes are pinned in the
 The runner now also normalizes comma-delimited values passed through `pwsh -File`
 and rejects negative, repeated or out-of-recording indexes. That exact command
 line form passes 32/32 as well.
+
+## Current-source death and finale save edges — October 19, 2026
+
+The current source passes 20 session-edge checks across a lethal E1M1 death and
+the E1/E2/E3/E4M8 completion-to-finale states. Each fixture saves, reconstructs
+the game model, advances both original and loaded states for 16 tics, and
+compares the canonical graph; the death save continues through Use and rebirth.
+Map completion is injected directly, so these checks do not play maps or
+qualify finale visuals. They run entirely in memory with the installed IWAD,
+without a game host, display, audio device, or human route. See the
+[source-pinned receipt](../results/current-source-save-session-edges-20261019.json).

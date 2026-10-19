@@ -114,6 +114,13 @@ fixture inputs and map state advances in memory; this is not route completion.
 See the [source-pinned receipt](../results/current-source-campaign-transitions-20261019.json)
 and [campaign matrix](campaign-matrix.md). The human Episode 1 gate remains open.
 
+Current-source save-state regression — October 19, 2026: 20 save/load
+continuation checks pass for a lethal E1M1 death and all four episode-finale
+states, including exact canonical graph equality after reload and 16 tics of
+continuation. Death continues through Use and rebirth. Completion is an explicit
+fixture, not map play or finale-fidelity evidence. See the [receipt](../results/current-source-save-session-edges-20261019.json)
+and [save/load record](save-load.md). Physical menu flow remains unverified.
+
 The 2026-09-28 audio output-clock change addresses the D_E3M6 packet-queue
 gaps seen in packet-exact headless runs. Interactive PowerShell playback now
 advances active music/effect state when the simulation has not yet published
