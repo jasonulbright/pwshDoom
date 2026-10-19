@@ -16,6 +16,10 @@ package; they do not certify route completion or audio-device behavior.
 The opt-in input recorder now also writes a checksummed recovery journal and
 can rebuild a replay from complete batches. Its 18 offline contract and static
 wiring checks pass; game-session crash recovery has not yet been exercised.
+A local handoff package at source `524e879` includes this change and verifies
+575 payload hashes; its extracted offline suites pass settings, menu, palette,
+masked-wall, projection and journal checks. The package remains local and the
+public Preview.8 asset is unchanged.
 
 ## 0.1.0-preview.8 — 2026-10-04
 

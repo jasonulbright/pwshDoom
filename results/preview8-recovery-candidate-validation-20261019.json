@@ -1,0 +1,98 @@
+{
+  "FinishedUtc": "2026-10-19T12:29:06.4053996Z",
+  "Version": "0.1.0-preview.8",
+  "Purpose": "Local development candidate containing recoverable input-session journals; public Preview.8 remains unchanged.",
+  "Package": {
+    "Path": "local/preview8-recovery-candidate-20261019/pwshDoom-0.1.0-preview.8.zip",
+    "Bytes": 1865826,
+    "Sha256": "F82BC01D9D83DEDDE9CE6A643172FD8E979ABAA23B2EB0AE20FB0E41E5B6ABB2",
+    "SourceCommit": "524e879ec7ef194a0ddda9bebedefc2bc4b498ca",
+    "WorkingTreeDirty": false,
+    "PayloadFiles": 575,
+    "ExtractedFiles": 576,
+    "PayloadHashesVerified": 575,
+    "AdjacentChecksumVerified": true,
+    "ChecksumFileSha256": "3B0D5207810547EF27F2BA76CBB6B5A2502313A363CDC9372D859AD06B8936A8",
+    "ExcludedContentVerified": [
+      ".wad",
+      ".sf2",
+      ".mp4",
+      ".pdf",
+      ".wav",
+      ".dll",
+      ".exe",
+      "local/"
+    ],
+    "ForbiddenZipPaths": []
+  },
+  "OfflineChecks": [
+    {
+      "Name": "Test-UserSettings",
+      "Passed": 96,
+      "Failures": 0,
+      "Receipt": "local/preview8-recovery-candidate-validation-20261019/user-settings.json",
+      "WadSha256": null
+    },
+    {
+      "Name": "Test-SessionMenu",
+      "Passed": 143,
+      "Failures": 0,
+      "Receipt": "local/preview8-recovery-candidate-validation-20261019/menu-unit.json",
+      "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F"
+    },
+    {
+      "Name": "Test-PalettePresentation",
+      "Passed": 286,
+      "Failures": 0,
+      "Receipt": "local/preview8-recovery-candidate-validation-20261019/palette-presentation.json",
+      "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F"
+    },
+    {
+      "Name": "Test-MaskedWallOrder",
+      "Passed": 24,
+      "Failures": 0,
+      "Receipt": "local/preview8-recovery-candidate-validation-20261019/masked-wall-order.json",
+      "WadSha256": null
+    },
+    {
+      "Name": "Test-InputReplayJournal",
+      "Passed": 18,
+      "Failures": 0,
+      "Receipt": "local/preview8-recovery-candidate-validation-20261019/input-replay-journal.json",
+      "WadSha256": null
+    },
+    {
+      "Name": "Test-WallScreenProjection",
+      "Passed": 18,
+      "Failures": 0,
+      "Receipt": "console output: wall screen-projection cases passed",
+      "WadSha256": null
+    }
+  ],
+  "JournalContract": {
+    "Passed": 18,
+    "Failures": 0,
+    "HostWorkerIntegration": "Static wiring assertions only",
+    "RuntimeCrashRecovery": "Not exercised"
+  },
+  "Wads": {
+    "StaticFixtureSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F"
+  },
+  "LiveTestsRun": false,
+  "GameHostRun": false,
+  "DisplayOrAudioDeviceUsed": false,
+  "PublicAssetReplaced": false,
+  "Limitations": [
+    "No live game or human route",
+    "No IWAD startup smoke",
+    "Input journal host/worker crash recovery is contract-tested and statically wired, but not yet qualified in an actual session",
+    "No pacing, physical-input, or acoustic claim"
+  ],
+  "RepositoryFootprintAtVerification": {
+    "Files": 80832,
+    "Bytes": 28421562095,
+    "DecimalGb": 28.422,
+    "LimitBytes": 30000000000,
+    "UnderLimit": true
+  }
+}

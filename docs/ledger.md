@@ -20,6 +20,19 @@ passes for all six changed scripts. No WAD,
 game host, display, audio device or live test was used. A hard failure can lose
 the current unflushed interval; the route itself remains unqualified.
 
+## 2026-10-19 — Validate the journal-enabled Episode 1 handoff package
+
+Built a clean local Preview.8 development archive from source `524e879` after
+adding the recovery sidecar. The ZIP is 1,865,826 bytes with SHA-256
+`F82BC01D9D83DEDDE9CE6A643172FD8E979ABAA23B2EB0AE20FB0E41E5B6ABB2` and 575
+manifest-pinned payloads; all 575 hashes match after extraction and the
+adjacent checksum matches. Extracted offline suites pass 96 settings, 143
+menu/60 static-screen, 286 palette, 24 masked-wall, 18 projection and 18
+input-journal checks. The menu/palette fixtures read the installed IWAD in
+memory, but no game host, display, audio device, startup smoke or route ran.
+Runtime crash recovery is still unverified. The [receipt](../results/preview8-recovery-candidate-validation-20261019.json)
+records the public asset as unchanged and the repository below its 30 GB cap.
+
 ## 2026-10-04 — Validate and publish Preview.8
 
 Preview.8 is published at source commit `1b1c424`, after 36 commits since
