@@ -915,3 +915,14 @@ passes all nine offline suites (711 checks, zero failures). Archive SHA-256 is
 `C7C955A41FFC4FFD163C194EEB0758116A79EF55F4E6E773E8705A0120EAA851`; the
 validation receipt records all 575 verified payloads and test limits. The
 public Preview.8 asset and all live-test gates are unchanged.
+
+### Fixed-angle renderer work counters — October 19, 2026
+
+The phase profiler now instruments the current fixed-angle wall path and both
+wall-U call sites; all 33 source markers match. A short offline E3M6 render
+preserves the uninstrumented full-frame hash. Per render, 1,682 of 2,066
+projected wall-column visits encounter a closed clip range, while 384 remain
+open. This is a bounded operation-count observation, not a production change,
+fidelity result or pacing measurement. No live game, display, keyboard or
+audio device was used. See the [receipt](../results/renderer-work-counters-fixed-angle-e3m6-20261019.json)
+and [investigation record](ledger.md#repair-fixed-angle-renderer-work-counters--october-19-2026).

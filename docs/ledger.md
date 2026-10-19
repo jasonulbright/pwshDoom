@@ -6713,3 +6713,25 @@ journal cases. No game host, display, keyboard, audio device or map route was
 started. The candidate does not establish real process-interruption recovery
 or human Episode 1 completion; public Preview.8 is unchanged. See
 `results/preview8-journal-writer-guard-candidate-validation-20261019.json`.
+
+### Repair fixed-angle renderer work counters — October 19, 2026
+
+The phase profiler's work-counter markers still targeted the analytic wall
+projection path after production moved to fixed-angle spans. Its first attempt
+stopped at a missing marker before rendering. After updating the hooks, source
+inspection found that the wall-U counter covered only one of two call sites;
+the first successful receipt is retained under ignored `local/` as superseded.
+All 33 markers now match the current renderer, both wall-U call sites are
+counted, and fallback-only cull counters are labeled accordingly.
+
+The corrected fixed-state E3M6 receipt records one warmup and three measured
+headless renders. Its frame hash matches the uninstrumented ten-frame profile
+(`5E89B8625DA24DFEC512994A1827C03FE6BB4E2F2ED900FCDD4CEC3D2F3BC45A`). Per
+render, 302 fixed-angle span calls reject 161 spans; the 2,066 projected
+column attempts include 1,682 columns already closed by nearer geometry. The
+38,044 exposed background samples reconcile to 14,417 sky and 23,627 flat
+samples. Instrumented timings include counter overhead and are not comparable
+to normal renderer timings. This changes profiling code only; it makes no
+fidelity or pacing claim and uses no live game, display, keyboard or audio
+device. The [receipt](../results/renderer-work-counters-fixed-angle-e3m6-20261019.json)
+preserves parameters, hashes and raw samples.
