@@ -1049,11 +1049,13 @@ and [instrumented trace](../results/moving-sector-per-call-plane-wall-boundary-2
 The two-worker Classic partition check also matches 320,000 pixels over five
 views and two uneven strips. No live test, UI, display, keyboard or audio device
 was used; see the [partition report](../results/render-partitions-plane-wall-boundary-20261019-r1.json).
-The reference boundary state now advances incrementally, with skipped columns
-applying the accumulated step. Candidate and reference frame hashes remain
-identical to the prior boundary version at all four heights, and five partition
-views still match 320,000 pixels. This confirms output equivalence but does not
-claim a measured speedup; see the [recurrence report](../results/moving-sector-per-call-plane-wall-boundary-20261019-v4.json)
-and [updated partition report](../results/render-partitions-plane-wall-boundary-20261019-r3.json).
-The complete local tree remains about 27.73 GB, below the hard 30 GB decimal
-cap. The branch remains below the release cadence threshold of 35.
+Paired fixed-state profiling rejected the incremental signed 32-bit edge
+recurrence: geometry medians regressed 14.71% on E1M1 and 1.29% on E1M2,
+with identical full-frame hashes. The recurrence was removed; production keeps
+the fixed-point boundary correction and evaluates each column from its direct
+offset. The eight-run offline timing receipt is in
+[performance evidence](../results/renderer-wall-boundary-recurrence-performance-20261019.json).
+No live test, game window, input, display or audio device was used. The complete
+local tree remains about 27.74 GB, below the hard 30 GB decimal cap. The branch
+is 32 commits past Preview.8 at this checkpoint; the next
+release threshold is 35 commits.
