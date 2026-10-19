@@ -108,12 +108,26 @@ try {
 
         $sceneDifferences = 0
         $hudDifferences = 0
+        $candidatePlaneMismatchPixels = 0
+        $candidatePlaneNoDepthMismatchPixels = 0
+        $candidateNonPlaneMismatchPixels = 0
+        $candidateDepthWrittenMismatchPixels = 0
+        $candidatePlaneMismatchCounts = @{}
         $bounds = [int[]]@(320, 168, -1, -1)
         for ($y = 0; $y -lt 200; $y++) {
             for ($x = 0; $x -lt 320; $x++) {
-                if ($candidate[$y * 320 + $x] -eq $referencePixels[$x * 200 + $y]) { continue }
+                $candidateIndex = $y * 320 + $x
+                if ($candidate[$candidateIndex] -eq $referencePixels[$x * 200 + $y]) { continue }
                 if ($y -lt 168) {
                     $sceneDifferences++
+                    [int]$planeId = $context.Planes[$candidateIndex]
+                    if ($planeId -gt 0) {
+                        $candidatePlaneMismatchPixels++
+                        if ($context.Depth[$candidateIndex] -eq [double]::PositiveInfinity) { $candidatePlaneNoDepthMismatchPixels++ }
+                        if ($candidatePlaneMismatchCounts.ContainsKey($planeId)) { $candidatePlaneMismatchCounts[$planeId]++ }
+                        else { $candidatePlaneMismatchCounts[$planeId] = 1 }
+                    } else { $candidateNonPlaneMismatchPixels++ }
+                    if ($context.Depth[$candidateIndex] -ne [double]::PositiveInfinity) { $candidateDepthWrittenMismatchPixels++ }
                     $bounds[0] = [Math]::Min($bounds[0], $x)
                     $bounds[1] = [Math]::Min($bounds[1], $y)
                     $bounds[2] = [Math]::Max($bounds[2], $x)
@@ -121,11 +135,30 @@ try {
                 } else { $hudDifferences++ }
             }
         }
+        if ($candidatePlaneMismatchPixels + $candidateNonPlaneMismatchPixels -ne $sceneDifferences) {
+            throw "Candidate plane ownership did not reconcile at ceiling height $height."
+        }
+        $candidatePlaneMismatchSurfaces = @(
+            foreach ($planeId in @($candidatePlaneMismatchCounts.Keys | Sort-Object)) {
+                $candidateSectorIndex = ([int]$planeId - 1) -shr 1
+                [ordered]@{
+                    PlaneId = [int]$planeId
+                    SectorIndex = $candidateSectorIndex
+                    Surface = if (([int]$planeId - 1) -band 1) { 'Floor' } else { 'Ceiling' }
+                    MismatchPixels = $candidatePlaneMismatchCounts[$planeId]
+                }
+            }
+        )
         $heightResults.Add([ordered]@{
             CeilingHeight = $height
             SceneDifferentIndices = $sceneDifferences
             HudDifferentIndices = $hudDifferences
             SceneMismatchBounds = if ($sceneDifferences) { $bounds } else { @() }
+            CandidatePlaneBufferMismatchPixels = $candidatePlaneMismatchPixels
+            CandidatePlaneBufferAndNoDepthMismatchPixels = $candidatePlaneNoDepthMismatchPixels
+            CandidateNonPlaneBufferMismatchPixels = $candidateNonPlaneMismatchPixels
+            CandidateDepthWrittenMismatchPixels = $candidateDepthWrittenMismatchPixels
+            CandidatePlaneBufferMismatchBySurface = $candidatePlaneMismatchSurfaces
         })
         $frames[[int]$height] = @{ Candidate = $candidate; Reference = $referencePixels }
     }
@@ -144,6 +177,39 @@ try {
             if ($frames[$firstHeight].Candidate[$index] -ne $frames[$lastHeight].Candidate[$index]) { $candidateChanges++ }
             if ($frames[$firstHeight].Reference[$x * 200 + $y] -ne $frames[$lastHeight].Reference[$x * 200 + $y]) { $referenceChanges++ }
         }
+    }
+
+    $planeDistanceScaleMismatchXs = [Collections.Generic.List[int]]::new()
+    $planeColumnAngleMismatchXs = [Collections.Generic.List[int]]::new()
+    $viewColumnCosMismatchXs = [Collections.Generic.List[int]]::new()
+    $viewColumnSinMismatchXs = [Collections.Generic.List[int]]::new()
+    $reference3D = $reference.ThreeD
+    for ([int]$x = 0; $x -lt 320; $x++) {
+        if ($context.PlaneColumnAngles[$x] -ne $reference3D.xToAngleData[$x]) { $planeColumnAngleMismatchXs.Add($x) }
+        if ($context.PlaneDistanceScales[$x] -ne $reference3D.planeDistScale[$x]) { $planeDistanceScaleMismatchXs.Add($x) }
+        if ($context.RayCos[$x] -ne $reference3D.viewColumnCosData[$x]) { $viewColumnCosMismatchXs.Add($x) }
+        if ($context.RaySin[$x] -ne $reference3D.viewColumnSinData[$x]) { $viewColumnSinMismatchXs.Add($x) }
+    }
+    $planeRowSlopeMismatchYs = [Collections.Generic.List[int]]::new()
+    for ([int]$y = 0; $y -lt 168; $y++) {
+        if ($context.PlaneRowSlopes[$y] -ne $reference3D.planeYSlope[$y]) { $planeRowSlopeMismatchYs.Add($y) }
+    }
+    [uint32]$cameraAngleData = $game.World.ConsolePlayer.Mobj.Angle.Data
+    [uint32]$planeBaseAngleData = ([long]$cameraAngleData - 0x40000000L) -band 0xFFFFFFFFL
+    [int]$planeBaseFine = $planeBaseAngleData -shr 19
+    [int[]]$fineSine = $context.PlaneFineSine
+    [int]$candidatePlaneBaseXScale = [Math]::Truncate([double]$fineSine[$planeBaseFine + 2048] / 160.0)
+    [int]$candidatePlaneBaseYScale = -[Math]::Truncate([double]$fineSine[$planeBaseFine] / 160.0)
+    $planeMathParity = [ordered]@{
+        PlaneColumnAngleMismatchXs = $planeColumnAngleMismatchXs.ToArray()
+        PlaneDistanceScaleMismatchXs = $planeDistanceScaleMismatchXs.ToArray()
+        PlaneRowSlopeMismatchYs = $planeRowSlopeMismatchYs.ToArray()
+        ViewColumnCosMismatchXs = $viewColumnCosMismatchXs.ToArray()
+        ViewColumnSinMismatchXs = $viewColumnSinMismatchXs.ToArray()
+        CandidatePlaneBaseXScale = $candidatePlaneBaseXScale
+        ReferencePlaneBaseXScale = $reference3D.planeBaseXScale
+        CandidatePlaneBaseYScale = $candidatePlaneBaseYScale
+        ReferencePlaneBaseYScale = $reference3D.planeBaseYScale
     }
 
     $diagnosticImages = [Collections.Generic.List[object]]::new()
@@ -200,6 +266,7 @@ try {
         MismatchMaskLocationsChangedFirstToLast = $maskLocationsChanged
         CandidatePixelsChangedFirstToLast = $candidateChanges
         ReferencePixelsChangedFirstToLast = $referenceChanges
+        PlaneMathParity = $planeMathParity
         OnlyChangedSectorCeiling = $true
         OtherSimulationStateHeldFixed = $true
         Reference = 'Locally adapted PowerShell ManagedDoom ThreeDRenderer'
@@ -212,6 +279,8 @@ try {
         DiagnosticImages = $diagnosticImages.ToArray()
         Error = $null
         Interpretation = 'A counterfactual surface-fidelity comparison, not a movement/progression test, original-executable parity result, or performance measurement.'
+        CandidateOwnershipInterpretation = 'Plane-buffer counts classify the candidate plane ID at mismatch coordinates; a later actor may overlay that plane. The finite-depth count does not distinguish walls from sprites.'
+        PlaneMathInterpretation = 'Plane table and per-column fixed sine parity are compared after the final full-width candidate/reference render; this does not compare per-pixel plane fraction recurrence or light selection.'
     }
     $currentHashes = @{}
     foreach ($path in $sourcePaths) {

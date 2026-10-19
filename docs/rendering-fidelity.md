@@ -1183,3 +1183,16 @@ It does not verify a moving route, other sector effects, original-executable
 parity or performance. The [source-pinned receipt](../results/moving-sector-e1m1-height-sweep-20261019.json)
 retains the replay, IWAD, source and diagnostic-image hashes; the two PNGs
 remain under ignored `local/moving-sector-current-fixed-angle-20261019/`.
+
+A follow-up ownership and projection-table probe narrows these residuals. At
+heights 34 and 68, 205 and 1,012 mismatches respectively sit on candidate
+plane-buffer pixels with no finite depth value. The other 102 and 451 mismatches
+have finite depth, which this receipt cannot distinguish between walls and
+sprites. At height 34 every plane-owned mismatch is sector 22's floor; at height
+68 the plane-owned mismatches span sectors 14-22, 59 and 60. All tested
+projection tables match exactly: per-column angles, plane distance scales, row
+slopes, view sine/cosine, and both plane-base scales. The evidence points past
+table construction, but does not yet distinguish plane texture coordinates,
+light selection, span recurrence or the finite-depth wall/sprite cases. See the
+[ownership and table-parity
+receipt](../results/moving-sector-e1m1-height-sweep-plane-math-20261019.json).

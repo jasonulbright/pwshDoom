@@ -937,3 +937,11 @@ separate the source revisions. The run is an offline comparison to the local
 PowerShell reference; moving routes and independent original-executable parity
 remain open. See [fidelity evidence](rendering-fidelity.md#current-source-moving-ceiling-comparison-october-19-2026)
 and the [receipt](../results/moving-sector-e1m1-height-sweep-20261019.json).
+
+The ownership probe places 205/307 mismatches at height 34 and 1,012/1,463 at
+height 68 on candidate plane underlays; the rest have finite depth. Every
+compared projection-table entry matches the reference, so the open investigation
+moves to per-pixel plane sampling/light/recurrence and finite-depth wall or
+sprite pixels. This remains an offline comparison to the adapted PowerShell
+reference. See the [expanded
+receipt](../results/moving-sector-e1m1-height-sweep-plane-math-20261019.json).

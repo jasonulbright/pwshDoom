@@ -6747,3 +6747,32 @@ between heights 0 and 68, confirming this counterfactual exercises the opening.
 The comparison uses the local PowerShell reference, not an original executable
 or live route. Its [receipt](../results/moving-sector-e1m1-height-sweep-20261019.json)
 pins the replay, IWAD, source hashes and local image hashes.
+
+### Moving-sector mismatch ownership and projection-table probe — October 19, 2026
+
+The first parity-probe run stopped before writing a receipt because the harness
+looked for xToAngleData on the Renderer wrapper. Source inspection showed these
+tables belong to its ThreeD property; the harness now reads that object and the
+offline replay comparison completed. No live game, display, keyboard or audio
+device was used.
+
+At ceiling heights 34 and 68, 205 of 307 and 1,012 of 1,463 scene mismatches
+respectively map to candidate plane-buffer IDs, and all of those pixels have no
+finite depth. The remaining 102 and 451 pixels have finite depth, which does not
+distinguish walls from sprites. Every compared column-angle, plane-distance,
+row-slope, view sine/cosine and plane-base projection value exactly matches the
+reference. The plane-owned mismatches are sector 22 floor at height 34, and
+floors/ceilings across sectors 14-22, 59 and 60 at height 68. This narrows the
+remaining work past projection-table construction without proving whether plane
+texture coordinates, lighting, span recurrence, or wall/sprite pixels explain
+each difference. The
+[receipt](../results/moving-sector-e1m1-height-sweep-plane-math-20261019.json)
+pins the replay, IWAD and analysis sources; no production renderer algorithm
+changed.
+
+### Recheck local size and reference PDF ignore rule — October 19, 2026
+
+The full project tree, including ignored files, measures 28,468,577,605 bytes
+(28.469 GB decimal / 26.513 GiB), below the 30,000,000,000-byte ceiling.
+The reference PDF is present at `docs/gebbdoom.pdf`; the existing exact
+`/docs/gebbdoom.pdf` rule in `.gitignore` ignores it, and it is not tracked.
