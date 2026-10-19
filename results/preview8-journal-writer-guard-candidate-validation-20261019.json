@@ -1,0 +1,99 @@
+{
+  "FinishedUtc": "2026-10-19T12:56:27.0829122Z",
+  "Version": "0.1.0-preview.8",
+  "Purpose": "Local development candidate with strict journal writer and recovery validation; public Preview.8 remains unchanged.",
+  "Package": {
+    "Path": "local/preview8-journal-writer-guard-candidate-20261019/pwshDoom-0.1.0-preview.8.zip",
+    "Bytes": 1869287,
+    "Sha256": "C7C955A41FFC4FFD163C194EEB0758116A79EF55F4E6E773E8705A0120EAA851",
+    "SourceCommit": "f70786346a3f032db3d4d32dfed78fc5b22cc923",
+    "WorkingTreeDirty": false,
+    "PayloadFiles": 575,
+    "ExtractedFiles": 576,
+    "PayloadHashesVerified": 575,
+    "PackageManifestSha256": "0EE83DB4E27F22CF215911466FD2EE3BE726EC5224ED25FCE9FAE96BE62E8FF4",
+    "AdjacentChecksumVerified": true,
+    "ChecksumFileSha256": "96D20D54E0246310FD489126F0A556CB3C033B010280B8D96D7D7954BCDC3B01",
+    "ExcludedContentVerified": [
+      ".wad",
+      ".sf2",
+      ".mp4",
+      ".pdf",
+      ".wav",
+      ".dll",
+      ".exe",
+      "local/"
+    ],
+    "ForbiddenZipPaths": []
+  },
+  "OfflineChecks": [
+    {
+      "Name": "Test-UserSettings",
+      "Passed": 96,
+      "Failures": 0,
+      "Receipt": "local/preview8-journal-writer-guard-candidate-suite-20261019/user-settings.json"
+    },
+    {
+      "Name": "Test-SessionMenu",
+      "Passed": 143,
+      "Failures": 0,
+      "Receipt": "local/preview8-journal-writer-guard-candidate-suite-20261019/menu.json",
+      "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+      "StaticScreenFixtures": 60
+    },
+    {
+      "Name": "Test-PalettePresentation",
+      "Passed": 286,
+      "Failures": 0,
+      "Receipt": "local/preview8-journal-writer-guard-candidate-suite-20261019/palette.json",
+      "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F"
+    },
+    {
+      "Name": "Test-MaskedWallOrder",
+      "Passed": 24,
+      "Failures": 0,
+      "Receipt": "local/preview8-journal-writer-guard-candidate-suite-20261019/masked-wall.json"
+    },
+    {
+      "Name": "Test-InputReplayJournal",
+      "Passed": 28,
+      "Failures": 0,
+      "Receipt": "local/preview8-journal-writer-guard-candidate-suite-20261019/input-journal.json"
+    },
+    {
+      "Name": "Test-WallScreenProjection",
+      "Passed": 18,
+      "Failures": 0,
+      "Receipt": "console output: wall screen-projection cases passed"
+    },
+    {
+      "Name": "Test-CampaignTransitions",
+      "Passed": 69,
+      "Failures": 0,
+      "Receipt": "local/preview8-journal-writer-guard-candidate-suite-20261019/campaign.json",
+      "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F"
+    },
+    {
+      "Name": "Test-SaveSessionEdges",
+      "Passed": 20,
+      "Failures": 0,
+      "Receipt": "local/preview8-journal-writer-guard-candidate-suite-20261019/save-edges.json",
+      "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F"
+    },
+    {
+      "Name": "Test-AudioMixer",
+      "Passed": 27,
+      "Failures": 0,
+      "Receipt": "local/preview8-journal-writer-guard-candidate-suite-20261019/audio-mixer.json"
+    }
+  ],
+  "TotalPassed": 711,
+  "TotalFailures": 0,
+  "StaticScreenFixtures": 60,
+  "Limitations": [
+    "No game host, interactive game session, physical keyboard, display, or audio device was started.",
+    "IWAD-backed fixtures use in-memory game objects; they do not complete maps.",
+    "Journal interruption and recovery through an actual simulation worker remain unverified.",
+    "This local candidate does not replace the public Preview.8 release."
+  ]
+}

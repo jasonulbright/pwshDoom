@@ -6702,3 +6702,14 @@ file length. The full offline journal contract passes 28 checks. Reader-side
 validation remains in place for checksummed but invalid records. This does not
 exercise a live worker or interruption; those remain unverified under the
 current no-live-tests constraint.
+
+### Refreshed writer-guard playtest candidate — October 19, 2026
+
+Built the candidate from clean source commit `f707863`. All 575 payload hashes
+verify; the 1,869,287-byte archive SHA-256 is
+`C7C955A41FFC4FFD163C194EEB0758116A79EF55F4E6E773E8705A0120EAA851`. All
+nine extracted offline suites pass (711 checks, zero failures), including 28
+journal cases. No game host, display, keyboard, audio device or map route was
+started. The candidate does not establish real process-interruption recovery
+or human Episode 1 completion; public Preview.8 is unchanged. See
+`results/preview8-journal-writer-guard-candidate-validation-20261019.json`.
