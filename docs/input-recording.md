@@ -23,7 +23,21 @@ A source fingerprint mismatch produces a warning and is retained in the game rep
 
 Version 4 bounds automap entries by command count, requires unique increasing tics, and limits nonzero masks to 1–1023. Optional AutomapSha256 checkpoints cover mapped lines, view, markers and held state separately from existing gameplay hashes; map-only divergence fails verification. See [automap](automap.md) for the bit mapping and actual host checks.
 
-The recorder is currently opt-in and writes at orderly exit. Abrupt process termination or a machine failure may lose the in-memory recording; incremental crash recovery is not implemented. Menu navigation, save writes and wall-clock pauses are omitted from the replay; new-game and load controls preserve their changes to simulation state. Neither video playback nor arbitrary commands embedded in a file are executed by this format.
+The recorder is opt-in. The final versioned replay is written atomically at orderly exit; while the session runs, the simulation worker also appends checksummed batches to `<recording path>.journal`. Batches are flushed at startup, every 350 consumed tics, and at map or session-state transitions. Each journal line is written and flushed to storage before the worker continues. An abrupt process or machine failure can lose the current unflushed interval; the last complete batch remains recoverable, and a torn final line is discarded.
+
+Recover a prefix without replacing either file:
+
+```powershell
+pwsh -NoProfile -File .\scripts\Recover-DoomInputReplayJournal.ps1 `
+  -Journal .\local\my-play-session.json.journal `
+  -Output .\local\my-play-session-recovered.json
+```
+
+Recovery checks each record hash and sequence, then writes the complete batches in the existing version-4 replay format. The recovered replay includes commands, controls, automap changes, checkpoints and transitions from the retained prefix. It can diagnose/replay that prefix but cannot claim map completion. The journal is kept after recovery. A fresh recording refuses to overwrite an existing journal; recover it or move it first. On normal finalization, the standard replay is written before the temporary journal is removed.
+
+The new host/worker hookup is covered by static wiring assertions, but has not yet been exercised during a game session or an actual abrupt process stop. Treat the recovery contract as implementation evidence, not live crash-recovery qualification.
+
+Menu navigation, save writes and wall-clock pauses are omitted from the replay; new-game and load controls preserve their changes to simulation state. Neither video playback nor arbitrary commands embedded in a file are executed by this format.
 
 ## Evidence
 
@@ -47,3 +61,5 @@ Eight checkpoint captures in the full recording have a 3.618 ms median and 66.50
 ```
 
 Checkpoint generation is opt-in with recording or checkpoint-bearing replay. Its measured cost is reported as `Simulation.ReplayCheckpointMs` and individual samples; no clean performance claim follows from these lifecycle tests.
+
+The crash-recovery journal contract passes 18 offline checks covering ordered batches, torn-tail handling, same-tic checkpoint replacement, control/automap recovery, version-4 validation, no-overwrite behavior, record tampering, recovery CLI output, and static worker/host wiring: [receipt](../results/input-replay-journal-contract.json). The harness uses synthetic files and commands; it does not start the game or audio/display devices.

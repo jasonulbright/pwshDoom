@@ -1,0 +1,87 @@
+{
+  "CreatedUtc": "2026-10-19T12:25:26.3460592Z",
+  "Checks": [
+    {
+      "Passed": true,
+      "Name": "Journal header is durably created without a game or IWAD"
+    },
+    {
+      "Passed": true,
+      "Name": "First append-only command batch is accepted"
+    },
+    {
+      "Passed": true,
+      "Name": "Torn final line is discarded while complete batches survive"
+    },
+    {
+      "Passed": true,
+      "Name": "Recovery preserves every consumed command in order"
+    },
+    {
+      "Passed": true,
+      "Name": "Recovery preserves sparse automap input and ordered menu controls"
+    },
+    {
+      "Passed": true,
+      "Name": "Checkpoint replacement at the same tic keeps the newest state"
+    },
+    {
+      "Passed": true,
+      "Name": "Recovered output validates as the existing version-4 replay format"
+    },
+    {
+      "Passed": true,
+      "Name": "Recovered replay retains controls, checkpoints and campaign continuation"
+    },
+    {
+      "Passed": true,
+      "Name": "Recovery marks the artifact as a partial journal prefix"
+    },
+    {
+      "Passed": true,
+      "Name": "Recovery CLI emits journal and replay hashes with the recovered tic count"
+    },
+    {
+      "Passed": true,
+      "Name": "Recovery never overwrites an existing replay"
+    },
+    {
+      "Passed": true,
+      "Name": "Complete journal record tampering is rejected by its checksum"
+    },
+    {
+      "Passed": true,
+      "Name": "Worker accepts the journal path and source identity"
+    },
+    {
+      "Passed": true,
+      "Name": "Worker writes the initial state before accepting commands"
+    },
+    {
+      "Passed": true,
+      "Name": "Worker flushes periodic and transition checkpoints"
+    },
+    {
+      "Passed": true,
+      "Name": "Worker flushes remaining commands during shutdown"
+    },
+    {
+      "Passed": true,
+      "Name": "Host passes a fresh companion journal path to the worker"
+    },
+    {
+      "Passed": true,
+      "Name": "Host removes the journal only after a replay is written"
+    }
+  ],
+  "Passed": 18,
+  "Failed": 0,
+  "JournalSha256": "49479A99231F41905BF2E278CFA6CD8D92FE78E6779607EBCD79CFEB1ADF4D27",
+  "HelperSha256": "158F951DA16F0CEE9E53124C474883450269E3364871B6173835970AFF01B6D6",
+  "HarnessSha256": "0C9C1866489EB009D54CE145ACAF222727BC4B00E2E0FF7751DD4CD64CB80622",
+  "WorkerSha256": "A3B7DC3D661D6965FA8D743448EF9E4413F9549F33AAA98A8E3BDDD54226A273",
+  "HostSha256": "CC0DF79E22CEFBE72867008DC4625BAD23B70C7BF6A311BB1959AC8B76098703",
+  "ProcessSha256": "53447158702DAEDC4A8B4B026133494471BD4A8F1854E87AAA36B5D505A6B83B",
+  "RecoverySha256": "BAE58E71ED168424392E5A22CB0983FF88A8E88CEFB8C25746CB3715A30A48EA",
+  "Meaning": "Offline contract and static wiring checks for append-only input-replay journaling and recovery. Uses synthetic command data and temporary files only; launches no game, user process, display, or audio device."
+}

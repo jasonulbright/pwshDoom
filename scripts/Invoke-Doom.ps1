@@ -21,6 +21,7 @@ if($MusicCatalog){$Sound=$true}
 . "$PSScriptRoot/../src/TerminalCodec.ps1"
 . "$PSScriptRoot/../src/PaletteCodec.ps1"
 . "$PSScriptRoot/../src/InputReplay.ps1"
+. "$PSScriptRoot/../src/InputReplayJournal.ps1"
 . "$PSScriptRoot/../src/SessionMenu.ps1"
 . "$PSScriptRoot/../src/TerminalOutput.ps1"
 . "$PSScriptRoot/../src/LoadingScreen.ps1"
@@ -82,7 +83,7 @@ $captures=[Collections.Generic.List[string]]::new();$nextCapture=$CaptureEveryTi
 $interpolationTimes=[Collections.Generic.List[double]]::new();$simulationReport=$null
 $glyphProbe=$null
 $assetGeneration=1;$loadingStart=$null;$loadingMs=0.0;$loadingWasRunning=$false;$mapReloads=[Collections.Generic.List[object]]::new();$rendererAssetsReused=0;$rendererAssetsReloaded=0;$transitionDiscarded=0
-$recordingPath=$null;$recordingError=$null;$replayVerification=$null;$sourceFingerprint=$null;$sourceMatches=$null
+$recordingPath=$null;$recordingError=$null;$replayVerification=$null;$sourceFingerprint=$null;$sourceMatches=$null;$recordJournalPath=$null
 $menu=$null;$pendingAction=$null;$sessionStart=$null;$sessionPausedMs=0.0;$sessionEvents=[Collections.Generic.List[object]]::new();$sessionScheduleData=@();$scheduleIndex=0;$controlIndex=0;$lastPresentedVersion=-1
 $compactMenuKey=''
 $gammaNotice=$null;$gammaNoticeUntilWallMs=0.0
@@ -116,6 +117,8 @@ try {
     if($RecordInput){
         $RecordInput=[IO.Path]::GetFullPath($RecordInput)
         if((Test-Path -LiteralPath $RecordInput) -or $RecordInput -eq [IO.Path]::GetFullPath($Report)){throw 'Input recording needs a new filename distinct from the game report.'}
+        $recordJournalPath=$RecordInput+'.journal'
+        if((Test-Path -LiteralPath $recordJournalPath) -or $recordJournalPath -eq [IO.Path]::GetFullPath($Report)){throw 'Input recovery journal already exists or conflicts with the game report; recover or move it before starting a new recording.'}
     }
     if($Replay) {
         $replayData=Read-DoomInputReplay $Replay $wadHash
@@ -136,7 +139,7 @@ try {
     # Session recordings explicitly carry ContinueCampaign=true.
     $stopAtLevelEnd=$null -ne $replayData -and -not $replayData.ContinueCampaign
     $liveAudioClock=[bool]($RealtimeAudio -or (-not $Headless -and $Sound))
-    $simulation=New-DoomSimulation $Wad $Skill $Episode $Map -StopAtLevelEnd:$stopAtLevelEnd -ReplayCheckpoints:$withCheckpoints -CheckpointReplay $(if($null -ne $replayData -and $replayData.Checkpoints){$Replay}else{''}) -SaveRoot $SaveRoot -Sound:$Sound -RealtimeAudio:$liveAudioClock -SoundVolume $(if($preferences.SoundMuted){0}else{$preferences.SoundVolume}) -MusicVolume $preferences.MusicVolume -MusicCatalog $MusicCatalog -StartupMenu:$StartupMenu
+    $simulation=New-DoomSimulation $Wad $Skill $Episode $Map -StopAtLevelEnd:$stopAtLevelEnd -ReplayCheckpoints:$withCheckpoints -CheckpointReplay $(if($null -ne $replayData -and $replayData.Checkpoints){$Replay}else{''}) -SaveRoot $SaveRoot -Sound:$Sound -RealtimeAudio:$liveAudioClock -SoundVolume $(if($preferences.SoundMuted){0}else{$preferences.SoundVolume}) -MusicVolume $preferences.MusicVolume -MusicCatalog $MusicCatalog -StartupMenu:$StartupMenu -ReplayJournalPath $recordJournalPath -ReplaySourceFingerprint $sourceFingerprint
     $snapshot=Read-DoomSimulationSnapshot $simulation $null
     $menu=New-DoomMenuState ($simulation.View.ReadInt32(80)) $Episode $Skill
     if($StartupMenu){$menu.Screen=1;$menu.Startup=$true}
@@ -518,6 +521,9 @@ finally {
                     Origin=if($Replay){'Replay'}elseif($Scripted){'Scripted'}elseif($Headless){'HeadlessIdle'}else{'Keyboard'};ExitReason=$exitReason;Error=$failure;InputCommands=$consumed;
                     Checkpoints=$simulationReport.ReplayCheckpoints;Transitions=$simulationReport.Transitions;ControlEvents=$simulationReport.ControlEvents;
                     Meaning='Commands consumed by the simulation, including shutdown drainage. One command per 1/35 second; wall pauses are not commands. Load controls restore the exact hash-addressed save in the matching SaveRoot; the command index remains monotonic across game-clock rewinds. Checkpoints sample state/render data and do not prove vanilla demo compatibility.'})
+                if(Test-Path -LiteralPath $recordJournalPath){
+                    try{Remove-Item -LiteralPath $recordJournalPath}catch{Write-Warning "The completed replay is safe, but its temporary recovery journal could not be removed: $_"}
+                }
             }catch{$recordingError=$_.ToString();[Console]::Error.WriteLine("Input recording failed: $recordingError")}
         }
     }

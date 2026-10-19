@@ -32,6 +32,16 @@ pwsh -NoProfile -File (Join-Path $root 'Start-Doom.ps1') -Wad $wad -Workers 16 -
 
 Allow up to 60 seconds for startup. Keep the 16 renderer workers and fit at least 320 columns by 100 rows; maximized with a 5-point font is the tested Classic setting. If the viewport is short, enlarge the window or press Ctrl+- to reduce the font. Blank space around the centered image is expected. Keep generated inputs, reports, saves and settings under the local directory. The launch above uses default Strips output; optional AsyncBatch is experimental and does not close the performance gates.
 
+The input recording has a checksummed `.journal` sidecar while the session runs. If the game or computer stops unexpectedly, recover its complete recorded prefix with a fresh output path:
+
+~~~powershell
+pwsh -NoProfile -File C:\projects\pwshDoom\scripts\Recover-DoomInputReplayJournal.ps1 `
+  -Journal C:\projects\pwshDoom\local\episode1-human-input-preview8.json.journal `
+  -Output C:\projects\pwshDoom\local\episode1-human-input-preview8-recovered.json
+~~~
+
+The journal is removed after a successful orderly recording. Recovery keeps it and does not overwrite the requested output. The recovery implementation has offline contract and static wiring checks; no game session or actual process interruption has exercised it yet.
+
 R19 retains fifty focused notice checks and all-style live fixtures, each consuming 350 commands and eleven checkpoints. Later all-style reload/fault tests preserve sixteen workers and independent image comparisons. Final R20-runtime Classic routes consume all 1747 commands, return all submitted audio and have no producer-backpressure waits. They still miss the frozen pacing gates; packet age excludes the device/acoustic tail. The current candidate adds exact 421-boundary dispatch replay/render parity, a 420-tic state/render timeline for visibility traversal and all-style worker comparisons, but has no human route or clean native pacing result yet. See [notice evidence](player-notices.md), [audio recovery](audio.md), [performance evidence](performance.md), the [dispatch measurements](../results/mobj-action-dispatch-20261002.json) and the [traversal trial](../results/visibility-iterative-dispatch-20261002.json). The complete route and acoustic/physical-input review remain required.
 
 ## Controls

@@ -1,5 +1,25 @@
 # Investigation ledger
 
+## 2026-10-19 — Preserve long input recordings across abrupt stops
+
+The human Episode 1 handoff recorded its input stream only after orderly exit;
+that left a long playthrough with no usable replay if the host stopped
+unexpectedly. Added an opt-in append-only sidecar journal in the simulation
+worker. It durably flushes checksummed batches every 350 consumed tics and at
+map/session-state transitions, retaining commands, automap masks, control
+events, checkpoints and transitions. Normal finalization still writes the
+existing version-4 replay atomically, then removes the sidecar. The recovery
+command validates line hashes and sequence, drops a torn final line, and writes
+only complete batches to a new replay path.
+
+The synthetic [journal contract](../results/input-replay-journal-contract.json)
+passes 18 offline contract and static wiring checks for interruption recovery,
+checkpoint replacement, controls/automap, version-4 validation, tamper
+rejection, host/worker wiring and no-overwrite behavior. PowerShell AST parsing
+passes for all six changed scripts. No WAD,
+game host, display, audio device or live test was used. A hard failure can lose
+the current unflushed interval; the route itself remains unqualified.
+
 ## 2026-10-04 — Validate and publish Preview.8
 
 Preview.8 is published at source commit `1b1c424`, after 36 commits since

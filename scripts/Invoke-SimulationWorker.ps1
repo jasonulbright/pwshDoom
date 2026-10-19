@@ -1,11 +1,12 @@
 #requires -Version 7.4
 # SPDX-License-Identifier: GPL-2.0-or-later
-param([string]$Wad,[int]$Skill,[int]$Episode,[int]$Map,[string]$Channel,[string]$Assets,[string]$Report,[int]$OwnerPid,[switch]$StopAtLevelEnd,[switch]$ReplayCheckpoints,[string]$CheckpointReplay,[string]$SaveRoot,[switch]$Sound,[switch]$RealtimeAudio,[string]$MusicCatalog,[switch]$StartupMenu)
+param([string]$Wad,[int]$Skill,[int]$Episode,[int]$Map,[string]$Channel,[string]$Assets,[string]$Report,[int]$OwnerPid,[switch]$StopAtLevelEnd,[switch]$ReplayCheckpoints,[string]$CheckpointReplay,[string]$SaveRoot,[switch]$Sound,[switch]$RealtimeAudio,[string]$MusicCatalog,[switch]$StartupMenu,[string]$ReplayJournalPath,[string]$ReplaySourceFingerprint)
 $ErrorActionPreference='Stop'
 . "$PSScriptRoot/FrameCodec.ps1";. "$PSScriptRoot/../src/GameHost.ps1";. "$PSScriptRoot/../src/FastRenderer.ps1"
 . "$PSScriptRoot/../src/RenderAssets.ps1";. "$PSScriptRoot/../src/SnapshotTransport.ps1"
 . "$PSScriptRoot/../src/SessionScreens.ps1"
 . "$PSScriptRoot/../src/InputReplay.ps1"
+. "$PSScriptRoot/../src/InputReplayJournal.ps1"
 . "$PSScriptRoot/../src/SessionMenu.ps1"
 . "$PSScriptRoot/../src/SaveState.ps1"
 . "$PSScriptRoot/../src/AutomapSession.ps1"
@@ -27,6 +28,8 @@ $checkpoints=[Collections.Generic.List[object]]::new();$checkpointTimes=[Collect
 $menuGraphics=$null;$menuPixels=$null;$menuScreen=0;$menuRevision=0;$episodeCount=4;$controlLog=[Collections.Generic.List[object]]::new()
 $saveOperations=[Collections.Generic.List[object]]::new()
 $automapGraphics=$null;$automapCommands=[Collections.Generic.List[object]]::new();$discoveryTimes=[Collections.Generic.List[double]]::new();$automapTimes=[Collections.Generic.List[double]]::new()
+$script:replayJournalPath=$null;$script:replayJournalSequence=1;$script:replayJournalCommandCursor=0
+$script:replayJournalAutomapCursor=0;$script:replayJournalControlCursor=0;$script:replayJournalCheckpointCursor=0;$script:replayJournalTransitionCursor=0
 $messageGraphics=$null
 function Record-ReplayCheckpoint {
     param([switch]$Replace)
@@ -38,6 +41,40 @@ function Record-SimulationTransition {
     $player=$game.World.ConsolePlayer
     $transitions.Add(@{Tic=$script:tick;State=$game.State.ToString();Episode=$game.Options.Episode;Map=$game.Options.Map;Generation=$script:generation;
         Health=$player.Health;Armor=$player.ArmorPoints;Ammo=$player.Ammo.Clone();Weapons=$player.WeaponOwned.Clone();Keys=$player.Cards.Clone();Kills=$player.KillCount;DidSecret=$player.DidSecret})
+}
+function Flush-DoomInputReplayJournal {
+    param([switch]$Final)
+    if(-not $script:replayJournalPath -or -not (Test-Path -LiteralPath $script:replayJournalPath)){return}
+    $endTic=[int]$script:tick;$startTic=[int]$script:replayJournalCommandCursor
+    $automapCursor=$script:replayJournalAutomapCursor;$controlCursor=$script:replayJournalControlCursor
+    $checkpointCursor=$script:replayJournalCheckpointCursor;$transitionCursor=$script:replayJournalTransitionCursor
+    $newCommands=[Collections.Generic.List[object]]::new()
+    for($i=$startTic;$i -lt $endTic;$i++){$newCommands.Add($commandLog[$i])}
+    $newAutomap=[Collections.Generic.List[object]]::new()
+    while($automapCursor -lt $automapCommands.Count -and $automapCommands[$automapCursor].Tic -lt $endTic){
+        $newAutomap.Add($automapCommands[$automapCursor]);$automapCursor++
+    }
+    $newControls=[Collections.Generic.List[object]]::new()
+    while($controlCursor -lt $controlLog.Count -and $controlLog[$controlCursor].Tic -le $endTic){
+        $newControls.Add($controlLog[$controlCursor]);$controlCursor++
+    }
+    $newCheckpoints=[Collections.Generic.List[object]]::new()
+    while($checkpointCursor -lt $checkpoints.Count -and $checkpoints[$checkpointCursor].Tic -le $endTic){
+        $newCheckpoints.Add($checkpoints[$checkpointCursor]);$checkpointCursor++
+    }
+    $newTransitions=[Collections.Generic.List[object]]::new()
+    while($transitionCursor -lt $transitions.Count -and $transitions[$transitionCursor].Tic -le $endTic){
+        $newTransitions.Add($transitions[$transitionCursor]);$transitionCursor++
+    }
+    if($newCommands.Count -eq 0 -and $newAutomap.Count -eq 0 -and $newControls.Count -eq 0 -and
+        $newCheckpoints.Count -eq 0 -and $newTransitions.Count -eq 0 -and -not $Final){return}
+    $batch=[ordered]@{Kind='Batch';Sequence=$script:replayJournalSequence;StartTic=$startTic;EndTic=$endTic;
+        InputCommands=$newCommands.ToArray();AutomapCommands=$newAutomap.ToArray();ControlEvents=$newControls.ToArray();
+        Checkpoints=$newCheckpoints.ToArray();Transitions=$newTransitions.ToArray();Final=[bool]$Final}
+    Add-DoomInputReplayJournalBatch $script:replayJournalPath $batch
+    $script:replayJournalSequence++;$script:replayJournalCommandCursor=$endTic
+    $script:replayJournalAutomapCursor=$automapCursor;$script:replayJournalControlCursor=$controlCursor
+    $script:replayJournalCheckpointCursor=$checkpointCursor;$script:replayJournalTransitionCursor=$transitionCursor
 }
 function Publish-SimulationSnapshot {
     if($null -ne $audio){$audio.Shared.Volume=$view.ReadInt32(88)/100.0;$audio.Shared.MusicVolume=$view.ReadInt32(92)/100.0;$audio.Shared.Paused=$script:menuScreen -ne 0 -or $view.ReadInt32(84) -ne 0 -or $script:audioLoading}
@@ -119,6 +156,7 @@ function Publish-SimulationMapChange {
     $script:automapGraphics.HudKey=''
     if([int]$game.State -eq 0){$automapGraphics.Discovery.DiscoverMap($game.World.ConsolePlayer)}
     Record-SimulationTransition;Record-ReplayCheckpoint -Replace
+    Flush-DoomInputReplayJournal
     $publishWatch=[Diagnostics.Stopwatch]::StartNew();Publish-SimulationSnapshot;$snapshotTimes.Add($publishWatch.Elapsed.TotalMilliseconds)
     $view.Write(24,$script:generation);[Threading.Thread]::MemoryBarrier();$view.Write(12,4)
     while($view.ReadInt32(28) -ne $script:generation -and $view.ReadInt32(4) -eq 0){[void]$go.WaitOne(1000);if($owner.HasExited){$script:outcome='OwnerExited';break}}
@@ -165,8 +203,13 @@ try {
         $menuPixels=Get-DoomMenuPixels $menuGraphics 1 0 $Episode $Skill $episodeCount -Details $initialMenu
     }
     $game.BeforeLevelLoad={param($LoadingGame) Begin-SimulationLevelLoad}
+    if($ReplayJournalPath){
+        Initialize-DoomInputReplayJournal $ReplayJournalPath $wadHash $ReplaySourceFingerprint $Skill $Episode $Map
+        $script:replayJournalPath=[IO.Path]::GetFullPath($ReplayJournalPath)
+    }
     Record-SimulationTransition
     Record-ReplayCheckpoint
+    Flush-DoomInputReplayJournal
     Publish-SimulationSnapshot;$view.Write(12,1);[void]$ready.Set()
     while($view.ReadInt32(4) -eq 0) {
         if($null -ne $audio){
@@ -302,6 +345,7 @@ try {
         }else{
             if($game.State -ne $priorState){Record-SimulationTransition}
             if($tick%350 -eq 0 -or $game.State -ne $priorState -or $extraCheckpoints.ContainsKey($tick)){Record-ReplayCheckpoint}
+            if($tick%350 -eq 0 -or $game.State -ne $priorState -or $extraCheckpoints.ContainsKey($tick)){Flush-DoomInputReplayJournal}
             $watch.Restart();Publish-SimulationSnapshot;$snapshotTimes.Add($watch.Elapsed.TotalMilliseconds)
         }
         $presentationEndQpc=[Diagnostics.Stopwatch]::GetTimestamp()
@@ -322,7 +366,10 @@ finally {
         $audioReport=Stop-DoomAudioRunspace $audio
         if($audio.Shared.Error -and -not $failure){$failure=$audio.Shared.Error;$outcome='Error'}
     }
-    if($null -ne $game -and $null -ne $game.World -and -not $failure){try{Record-ReplayCheckpoint}catch{$failure=$_.ToString();$outcome='Error'}}
+    if($null -ne $game -and $null -ne $game.World){
+        try{if(-not $failure){Record-ReplayCheckpoint};Flush-DoomInputReplayJournal -Final:($outcome -ne 'OwnerExited' -and -not $failure)}
+        catch{$failure=$_.ToString();$outcome='Error'}
+    }
     @{FinishedUtc=[DateTime]::UtcNow.ToString('o');ProcessId=$PID;Outcome=$outcome;Error=$failure;Tics=$tick;WarmupTics=0;Skill=$Skill;Episode=$Episode;Map=$Map;
         SoundEnabled=[bool]$Sound;Audio=$audioReport;AudioPacketMs=(Get-SampleStats $audioPacketTimes.ToArray());AudioPacketSamplesMs=$audioPacketTimes.ToArray();AudioSourcePeak=if($audioPackets){$audioPackets.MaxSources}else{0};AudioEvents=if($audioPackets){$audioPackets.Events}else{0};
         AudioPublicationTrace=$audioPublicationTrace.ToArray();ShutdownAudioDrain=$shutdownAudioDrain;

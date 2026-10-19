@@ -3,7 +3,7 @@
 . "$PSScriptRoot/SaveSlots.ps1"
 . "$PSScriptRoot/PlayerMessages.ps1"
 function New-DoomSimulation {
-    param([string]$Wad,[int]$Skill,[int]$Episode,[int]$Map,[switch]$StopAtLevelEnd,[switch]$ReplayCheckpoints,[string]$CheckpointReplay,[string]$SaveRoot,[switch]$Sound,[switch]$RealtimeAudio,[ValidateRange(0,100)][int]$SoundVolume=100,[ValidateRange(0,100)][int]$MusicVolume=100,[string]$MusicCatalog,[switch]$StartupMenu)
+    param([string]$Wad,[int]$Skill,[int]$Episode,[int]$Map,[switch]$StopAtLevelEnd,[switch]$ReplayCheckpoints,[string]$CheckpointReplay,[string]$SaveRoot,[switch]$Sound,[switch]$RealtimeAudio,[ValidateRange(0,100)][int]$SoundVolume=100,[ValidateRange(0,100)][int]$MusicVolume=100,[string]$MusicCatalog,[switch]$StartupMenu,[string]$ReplayJournalPath,[string]$ReplaySourceFingerprint)
     $root=Split-Path $PSScriptRoot;$id=[guid]::NewGuid().ToString('N');$name='Local\pwshDoom-sim-'+$id
     $state=@{Assets="$root/local/session-$id.assets";Report="$root/local/simulation-$id.json";Name=$name;Process=$null}
     try {
@@ -24,6 +24,8 @@ function New-DoomSimulation {
         if($ReplayCheckpoints){$info.ArgumentList.Add('-ReplayCheckpoints')}
         if($CheckpointReplay){$info.ArgumentList.Add('-CheckpointReplay');$info.ArgumentList.Add([IO.Path]::GetFullPath($CheckpointReplay))}
         if($SaveRoot){$info.ArgumentList.Add('-SaveRoot');$info.ArgumentList.Add([IO.Path]::GetFullPath($SaveRoot))}
+        if($ReplayJournalPath){$info.ArgumentList.Add('-ReplayJournalPath');$info.ArgumentList.Add([IO.Path]::GetFullPath($ReplayJournalPath))}
+        if($ReplaySourceFingerprint){$info.ArgumentList.Add('-ReplaySourceFingerprint');$info.ArgumentList.Add($ReplaySourceFingerprint)}
         $state.Process=[Diagnostics.Process]::Start($info);$state.Stdout=$state.Process.StandardOutput.ReadToEndAsync();$state.Stderr=$state.Process.StandardError.ReadToEndAsync()
         if(-not $state.Ready.WaitOne(60000)){throw 'Simulation startup timed out after 60 seconds.'}
         if($state.View.ReadInt32(12) -eq 3){throw "Simulation startup failed. $($state.Stderr.Result)"}
