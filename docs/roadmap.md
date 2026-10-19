@@ -967,7 +967,9 @@ light map agree, while texture coordinates and flat texels differ. A direct
 per-pixel sampling experiment worsened whole-scene mismatch counts from 307 to
 363 at height 34 and from 1,463 to 1,869 at height 68, so the production
 horizontal-span sampler remains unchanged. The residual plane gap is narrowed
-to fixed-point coordinate recurrence; mapped-column coverage remains open.
+to different fixed-point recurrence origins: the candidate row span starts
+before the reference initialization column at all 68 same-owner samples at
+height 34 and 575 of 666 at height 68. Mapped-column coverage remains open.
 See the [final-writer receipt](../results/moving-sector-reference-plane-final-writer-verified-20261019-v3.json),
 [sample comparison](../results/moving-sector-reference-plane-samples-verified-20261019-v7.json)
-and [control](../results/moving-sector-reference-plane-samples-control-20261019-v7.json).
+and [recurrence-origin control](../results/moving-sector-reference-plane-recurrence-origin-control-20261019-v1.json).

@@ -1255,3 +1255,13 @@ This was an offline saved replay only. The [baseline](../results/moving-sector-r
 [direct-sampling experiment](../results/moving-sector-reference-plane-samples-direct-20261019-v1.json)
 and [control](../results/moving-sector-reference-plane-samples-control-20261019-v7.json)
 record source hashes and per-height results.
+
+The follow-up probe records the reference renderer's actual coordinate
+initialization column and whether each sample reuses the previous column.
+Candidate plane-row runs begin before that reference origin at all 68 same-owner
+samples at height 34 and at 575 of 666 at height 68. Instrumentation leaves
+frame hashes and mismatch counts unchanged. This confirms that the two
+renderers carry the fixed-point recurrence from different span origins; it
+does not yet establish a production-safe correction. See the
+[origin receipt](../results/moving-sector-reference-plane-recurrence-origin-20261019-v1.json)
+and [control](../results/moving-sector-reference-plane-recurrence-origin-control-20261019-v1.json).

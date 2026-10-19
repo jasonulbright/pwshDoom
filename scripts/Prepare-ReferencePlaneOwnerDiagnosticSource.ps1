@@ -30,20 +30,37 @@ class ThreeDRenderer {
     [int[]] $DiagnosticPlaneLightIndices
     [int[]] $DiagnosticPlaneTexelIndices
     [byte[][]] $DiagnosticPlaneLightMaps
+    [int[]] $DiagnosticPlaneSampleOriginX
+    [byte[]] $DiagnosticPlaneSampleReusedPreviousColumn
+    [int[]] $DiagnosticCeilingSampleOriginX
+    [int[]] $DiagnosticFloorSampleOriginX
 '@
 $source=$source.Replace($marker,$fields.TrimEnd([char]13,[char]10))
 $nl=[Environment]::NewLine
 
-function Add-PlaneOwnerWrites([string]$text,[string]$methodStart,[string]$methodEnd,[byte]$surfaceType){
+function Add-PlaneOwnerWrites([string]$text,[string]$methodStart,[string]$methodEnd,[byte]$surfaceType,[string]$planeKind){
     $start=$text.IndexOf($methodStart,[StringComparison]::Ordinal)
     if($start -lt 0){throw "Missing method: $methodStart"}
     $end=$text.IndexOf($methodEnd,$start,[StringComparison]::Ordinal)
     if($end -lt 0){throw "Missing next method: $methodEnd"}
     $segment=$text.Substring($start,$end-$start)
+    $reuseBranchPattern='(?m)^(?<indent>[ \t]*)if \(\$sector -eq \$this\.'+[regex]::Escape($planeKind)+'PrevSector'
+    $reuseBranchMatches=[regex]::Matches($segment,$reuseBranchPattern)
+    if($reuseBranchMatches.Count -ne 1){throw "$methodStart expected one previous-column branch, found $($reuseBranchMatches.Count)."}
+    $reuseBranchEvaluator=[Text.RegularExpressions.MatchEvaluator]{
+        param($match)
+        $indent=$match.Groups['indent'].Value
+        return $indent+'[int]$p1 = 0'+$nl+$indent+'[int]$p2 = -1'+$nl+$match.Value
+    }
+    $segment=[regex]::Replace($segment,$reuseBranchPattern,$reuseBranchEvaluator)
     $pattern='(?m)^(?<indent>[ \t]*)\$pos\+\+\r?$'
     $matches=[regex]::Matches($segment,$pattern)
     if($matches.Count -ne 4){throw "$methodStart expected four plane pixel loops, found $($matches.Count)."}
     $lightMapExpression=if($surfaceType -eq 1){'$localFloorLights[$y]'}else{'$localCeilingLights[$y]'}
+    $previousSectorField='$this.'+$planeKind+'PrevSector'
+    $previousXField='$this.'+$planeKind+'PrevX'
+    $originArrayField='$this.Diagnostic'+$planeKind.Substring(0,1).ToUpperInvariant()+$planeKind.Substring(1)+'SampleOriginX[$y]'
+    $reuseExpression='($sector -eq '+$previousSectorField+' -and '+$previousXField+' -eq ($x - 1) -and $y -ge $p1 -and $y -le $p2)'
     $evaluator=[Text.RegularExpressions.MatchEvaluator]{
         param($match)
         $indent=$match.Groups['indent'].Value
@@ -56,14 +73,22 @@ function Add-PlaneOwnerWrites([string]$text,[string]$methodStart,[string]$method
             $indent+'$this.DiagnosticPlaneLightIndices[$pos] = [Math]::Clamp(($this.DiagnosticPlaneDistanceData[$pos] -shr $localZLightShift), 0, $localMaxZLight - 1)'+$nl+
             $indent+'$this.DiagnosticPlaneTexelIndices[$pos] = $flatData[$spot]'+$nl+
             $indent+'$this.DiagnosticPlaneLightMaps[$pos] = '+$lightMapExpression+$nl+
+            $indent+'if '+$reuseExpression+' {'+$nl+
+            $indent+'    $this.DiagnosticPlaneSampleReusedPreviousColumn[$pos] = 1'+$nl+
+            $indent+'    $this.DiagnosticPlaneSampleOriginX[$pos] = '+$originArrayField+$nl+
+            $indent+'} else {'+$nl+
+            $indent+'    $this.DiagnosticPlaneSampleReusedPreviousColumn[$pos] = 0'+$nl+
+            $indent+'    $this.DiagnosticPlaneSampleOriginX[$pos] = $x'+$nl+
+            $indent+'    '+$originArrayField+' = $x'+$nl+
+            $indent+'}'+$nl+
             $match.Value
     }
     $segment=[regex]::Replace($segment,$pattern,$evaluator)
     return $text.Substring(0,$start)+$segment+$text.Substring($end)
 }
 
-$source=Add-PlaneOwnerWrites $source '    [void] DrawCeilingColumn(' '    [void] DrawFloorColumn(' 2
-$source=Add-PlaneOwnerWrites $source '    [void] DrawFloorColumn(' '    hidden [void] DrawColumnData(' 1
+$source=Add-PlaneOwnerWrites $source '    [void] DrawCeilingColumn(' '    [void] DrawFloorColumn(' 2 'ceiling'
+$source=Add-PlaneOwnerWrites $source '    [void] DrawFloorColumn(' '    hidden [void] DrawColumnData(' 1 'floor'
 
 function Add-FinalWriterMarks([string]$text,[string]$methodStart,[string]$methodEnd,[byte]$writerType){
     $start=$text.IndexOf($methodStart,[StringComparison]::Ordinal)
@@ -93,5 +118,5 @@ $source=Add-FinalWriterMarks $source '    [void] DrawFuzzColumn(' '    [void] Dr
     SourceSha256=(Get-FileHash -LiteralPath $target).Hash
     CeilingWriteLoops=4
     FloorWriteLoops=4
-    Meaning='Isolated copy only. Records the reference row distance, per-pixel fractions, selected light map, flat texel, owner and later mapped-column or fuzz writes; it does not identify every primitive compositor path.'
+    Meaning='Isolated copy only. Records the reference sample initialization column and previous-column reuse branch, row distance, per-pixel fractions, selected light map, flat texel, owner and later mapped-column or fuzz writes; it does not identify every primitive compositor path.'
 }

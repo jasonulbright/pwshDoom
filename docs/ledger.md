@@ -6863,3 +6863,22 @@ counts match the standard run, and pins all report and script hashes. See the
 and [preparation script](../scripts/Prepare-DirectPlaneSamplingDiagnosticRenderer.ps1).
 All comparisons used the saved headless replay; no live game, UI, display,
 keyboard or audio device was used.
+
+### Reference plane recurrence origins — October 19, 2026
+
+The boundary follow-up records the actual reference column that initializes
+each plane sample, along with whether the reference reuses the previous column.
+This replaces the earlier adjacent-owner proxy: equal owners in neighboring
+pixels do not prove that the reference took its reuse branch, because other
+plane calls can intervene.
+
+At the same-owner final-plane mismatch pixels, the candidate's horizontal
+plane-ID run starts before the reference's recorded initialization column at
+all 68 samples at height 34 and 575 of 666 at height 68. The remaining coordinate
+differences are consistent with distinct recurrence origins. The added arrays
+preserve candidate and reference frame hashes and mismatch counts at all four
+heights. This narrows the implementation gap to plane span segmentation and
+fixed-point recurrence; it does not prove which candidate boundary rule should
+change. The [origin receipt](../results/moving-sector-reference-plane-recurrence-origin-20261019-v1.json)
+and [control](../results/moving-sector-reference-plane-recurrence-origin-control-20261019-v1.json)
+pin the comparison. No live game, display, keyboard or audio device was used.

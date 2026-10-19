@@ -93,6 +93,7 @@ function Get-FastPlaneSample {
         YFracData = [int]($yFracWide -band 0xFFFFFFFFL)
         TextureX = $textureX
         TextureY = $textureY -shr 6
+        SpanStartX = $startX
         FlatTexelIndex = $flatTexelIndex
         LightRow = $lightRow
         LightMapIndex = $lightMapIndex
@@ -201,7 +202,11 @@ try {
         $null -ne $reference3D.GetType().GetProperty('DiagnosticPlaneYFracData') -and
         $null -ne $reference3D.GetType().GetProperty('DiagnosticPlaneLightIndices') -and
         $null -ne $reference3D.GetType().GetProperty('DiagnosticPlaneTexelIndices') -and
-        $null -ne $reference3D.GetType().GetProperty('DiagnosticPlaneLightMaps')
+        $null -ne $reference3D.GetType().GetProperty('DiagnosticPlaneLightMaps') -and
+        $null -ne $reference3D.GetType().GetProperty('DiagnosticPlaneSampleOriginX') -and
+        $null -ne $reference3D.GetType().GetProperty('DiagnosticPlaneSampleReusedPreviousColumn') -and
+        $null -ne $reference3D.GetType().GetProperty('DiagnosticCeilingSampleOriginX') -and
+        $null -ne $reference3D.GetType().GetProperty('DiagnosticFloorSampleOriginX')
     if ($CaptureReferencePlaneOwners -and -not $hasReferencePlaneOwnerFields) {
         throw 'The selected engine source does not contain reference plane-owner diagnostics.'
     }
@@ -216,6 +221,10 @@ try {
         $reference3D.DiagnosticPlaneLightIndices = [int[]]::new(320 * 200)
         $reference3D.DiagnosticPlaneTexelIndices = [int[]]::new(320 * 200)
         $reference3D.DiagnosticPlaneLightMaps = [byte[][]]::new(320 * 200)
+        $reference3D.DiagnosticPlaneSampleOriginX = [int[]]::new(320 * 200)
+        $reference3D.DiagnosticPlaneSampleReusedPreviousColumn = [byte[]]::new(320 * 200)
+        $reference3D.DiagnosticCeilingSampleOriginX = [int[]]::new(200)
+        $reference3D.DiagnosticFloorSampleOriginX = [int[]]::new(200)
     }
         $context = New-FastRenderContext $content $game.World
     $baseSnapshot = New-GameRenderSnapshot $game 1
@@ -251,6 +260,10 @@ try {
             [Array]::Clear($reference3D.DiagnosticPlaneLightIndices, 0, $reference3D.DiagnosticPlaneLightIndices.Length)
             [Array]::Clear($reference3D.DiagnosticPlaneTexelIndices, 0, $reference3D.DiagnosticPlaneTexelIndices.Length)
             [Array]::Clear($reference3D.DiagnosticPlaneLightMaps, 0, $reference3D.DiagnosticPlaneLightMaps.Length)
+            [Array]::Clear($reference3D.DiagnosticPlaneSampleOriginX, 0, $reference3D.DiagnosticPlaneSampleOriginX.Length)
+            [Array]::Clear($reference3D.DiagnosticPlaneSampleReusedPreviousColumn, 0, $reference3D.DiagnosticPlaneSampleReusedPreviousColumn.Length)
+            [Array]::Clear($reference3D.DiagnosticCeilingSampleOriginX, 0, $reference3D.DiagnosticCeilingSampleOriginX.Length)
+            [Array]::Clear($reference3D.DiagnosticFloorSampleOriginX, 0, $reference3D.DiagnosticFloorSampleOriginX.Length)
         }
         $reference.RenderGame($game, [Fixed]::One)
         [byte[]]$referencePixels = $reference.Screen.Data.Clone()
@@ -297,6 +310,13 @@ try {
             ReferenceFramebufferMatchesPlaneSample = 0
             TextureXDeltaCounts = @{}
             TextureYDeltaCounts = @{}
+            CandidateSpanAgeCounts = @{}
+            ReferenceSampleReusedPreviousColumn = 0
+            ReferenceSampleInitializedAtCurrentColumn = 0
+            CandidateSpanStartsBeforeReferenceOrigin = 0
+            CandidateSpanStartDeltaCounts = @{}
+            DirectTexelMatchesWithReferenceReuse = 0
+            DirectTexelMatchesAfterReferenceInitialize = 0
         }
         $planeSampleExamples = [Collections.Generic.List[object]]::new()
         $bounds = [int[]]@(320, 168, -1, -1)
@@ -348,6 +368,16 @@ try {
                                             $candidatePlaneMismatchSameOwnerFinalPlaneWrites++
                                             $planeSampleCounts.SameOwnerSamples++
                                             $candidateSample = Get-FastPlaneSample $context $x $y $planeId $candidateViewXData $candidateViewYData $candidateViewZData $candidateViewAngleData $candidateExtraLight $candidateFixedColorMap
+                                            [int]$referenceSampleOriginX = $reference3D.DiagnosticPlaneSampleOriginX[$referencePosition]
+                                            [bool]$referenceSampleReusedPreviousColumn = $reference3D.DiagnosticPlaneSampleReusedPreviousColumn[$referencePosition] -eq 1
+                                            if ($referenceSampleReusedPreviousColumn) { $planeSampleCounts.ReferenceSampleReusedPreviousColumn++ } else { $planeSampleCounts.ReferenceSampleInitializedAtCurrentColumn++ }
+                                            [int]$candidateSpanAge = $x - $candidateSample.SpanStartX
+                                            $candidateSpanAgeKey = [string]$candidateSpanAge
+                                            if ($planeSampleCounts.CandidateSpanAgeCounts.ContainsKey($candidateSpanAgeKey)) { $planeSampleCounts.CandidateSpanAgeCounts[$candidateSpanAgeKey]++ } else { $planeSampleCounts.CandidateSpanAgeCounts[$candidateSpanAgeKey] = 1 }
+                                            [int]$candidateReferenceOriginDelta = $candidateSample.SpanStartX - $referenceSampleOriginX
+                                            if ($candidateReferenceOriginDelta -lt 0) { $planeSampleCounts.CandidateSpanStartsBeforeReferenceOrigin++ }
+                                            $candidateReferenceOriginDeltaKey = [string]$candidateReferenceOriginDelta
+                                            if ($planeSampleCounts.CandidateSpanStartDeltaCounts.ContainsKey($candidateReferenceOriginDeltaKey)) { $planeSampleCounts.CandidateSpanStartDeltaCounts[$candidateReferenceOriginDeltaKey]++ } else { $planeSampleCounts.CandidateSpanStartDeltaCounts[$candidateReferenceOriginDeltaKey] = 1 }
                                             [int]$referenceDistanceData = $reference3D.DiagnosticPlaneDistanceData[$referencePosition]
                                             [int]$referenceLightBin = $reference3D.DiagnosticPlaneLightIndices[$referencePosition]
                                             [int]$referenceXFracData = $reference3D.DiagnosticPlaneXFracData[$referencePosition]
@@ -378,7 +408,10 @@ try {
                                             if ($candidateSample.DirectYFracData -eq $referenceYFracData) { $planeSampleCounts.DirectSameYFraction++ }
                                             if ($candidateSample.DirectTextureX -eq $referenceTextureX) { $planeSampleCounts.DirectSameTextureX++ }
                                             if ($candidateSample.DirectTextureY -eq $referenceTextureY) { $planeSampleCounts.DirectSameTextureY++ }
-                                            if ($candidateSample.DirectFlatTexelIndex -eq $referenceTexelIndex) { $planeSampleCounts.DirectSameFlatTexelIndex++ }
+                                            if ($candidateSample.DirectFlatTexelIndex -eq $referenceTexelIndex) {
+                                                $planeSampleCounts.DirectSameFlatTexelIndex++
+                                                if ($referenceSampleReusedPreviousColumn) { $planeSampleCounts.DirectTexelMatchesWithReferenceReuse++ } else { $planeSampleCounts.DirectTexelMatchesAfterReferenceInitialize++ }
+                                            }
                                             if ($candidateSample.DirectColor -eq $referencePlaneColor) { $planeSampleCounts.DirectSamePlaneColor++ }
                                             if ($candidate[$candidateIndex] -eq $candidateSample.Color) { $planeSampleCounts.CandidateFramebufferMatchesPlaneSample++ }
                                             if ($referencePixels[$referencePosition] -eq $referencePlaneColor) { $planeSampleCounts.ReferenceFramebufferMatchesPlaneSample++ }
@@ -394,6 +427,9 @@ try {
                                                 $planeSampleExamples.Add([ordered]@{
                                                     X = $x
                                                     Y = $y
+                                                    CandidateSpanStartX = $candidateSample.SpanStartX
+                                                    ReferenceSampleOriginX = $referenceSampleOriginX
+                                                    ReferenceSampleReusedPreviousColumn = $referenceSampleReusedPreviousColumn
                                                     CandidateDistanceData = $candidateSample.DistanceData
                                                     ReferenceDistanceData = $referenceDistanceData
                                                     CandidateDistanceLightBin = $candidateSample.DistanceLightBin
