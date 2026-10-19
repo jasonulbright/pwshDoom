@@ -12,21 +12,21 @@ A normal completion is enough; 100% kills, items, and secrets are not required. 
 
 ## Build and launch
 
-Use the published Preview.7 package, source commit `534966a`. The development branch contains post-release source changes and has no extracted-package validation receipt, so it is not the playtest candidate. Extract Preview.7 under `C:\projects\pwshDoom\local\preview7-playtest` and use that folder for `$root` below. The earlier Preview.6 package separately passed its pinned 36-map and three-style worker checks; those checks do not navigate or finish maps. Current menu/render changes and their limits are in the [Preview.7 release notes](release-preview7.md); historical evidence remains in the [wall-band integration receipt](../results/wall-band-renderer-integration-20261002.json), [Preview.6 package validation](../results/preview6-package-validation-20261002.json), [traversal receipt](../results/visibility-iterative-integration-20261002.json), and [playthrough performance evidence](performance.md#active-wall-band-preselection-trial--october-2-2026).
+Use the latest ZIP attached to the public [Preview.8 release](https://github.com/jasonulbright/pwshDoom/releases/tag/v0.1.0-preview.8). Its manifest pins the exact source and payload hashes; the corrected package passes 96 settings checks, 143 menu checks with 60 WAD-backed screen fixtures, 286 palette checks, 24 masked-wall checks, and 18 fixed-angle wall-span cases. These are offline checks only: no full game, user display, audio device, or human route was run for this package. Extract it under `C:\projects\pwshDoom\local\preview8-playtest` and use that folder for `$root` below. The earlier Preview.6 package separately passed its pinned 36-map and three-style worker checks; those checks do not navigate or finish maps. Current menu/render limits are in the [Preview.8 release notes](release-preview8.md); historical evidence remains in the [wall-band integration receipt](../results/wall-band-renderer-integration-20261002.json), [Preview.6 package validation](../results/preview6-package-validation-20261002.json), [traversal receipt](../results/visibility-iterative-integration-20261002.json), and [playthrough performance evidence](performance.md#active-wall-band-preselection-trial--october-2-2026).
 
 Use 64-bit PowerShell 7.6.x and Windows Terminal. The required user-owned Ultimate Doom IWAD has SHA-256 `6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F`. WADs, soundfonts, prepared music, media, tools and the research PDF are excluded. The local eleven-track Episode 1 catalog covers this route; omit `-MusicCatalog` for effects-only play. Audio startup rechecks payloads and IWAD score identity.
 
-From PowerShell, run the extracted Preview.7 package and use fresh output paths:
+From PowerShell, run the extracted Preview.8 package and use fresh output paths:
 
 ~~~powershell
-$root = 'C:\projects\pwshDoom\local\preview7-playtest'
+$root = 'C:\projects\pwshDoom\local\preview8-playtest'
 $wad = 'C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\base\DOOM.WAD'
 $local = 'C:\projects\pwshDoom\local'
 $catalog = Join-Path $local 'music-prepared-episode1.json'
-$record = Join-Path $local 'episode1-human-input-preview7.json'
-$report = Join-Path $local 'episode1-human-session-preview7.json'
-$saves = Join-Path $local 'episode1-human-saves-preview7'
-$settings = Join-Path $local 'episode1-human-settings-preview7.json'
+$record = Join-Path $local 'episode1-human-input-preview8.json'
+$report = Join-Path $local 'episode1-human-session-preview8.json'
+$saves = Join-Path $local 'episode1-human-saves-preview8'
+$settings = Join-Path $local 'episode1-human-settings-preview8.json'
 pwsh -NoProfile -File (Join-Path $root 'Start-Doom.ps1') -Wad $wad -Workers 16 -Episode 1 -Map 1 -Skill 3 -Style Classic -Sound -MusicCatalog $catalog -RecordInput $record -Report $report -SaveRoot $saves -SettingsPath $settings -Maximized -FontSize 5
 ~~~
 
@@ -50,6 +50,10 @@ R19 retains fifty focused notice checks and all-style live fixtures, each consum
 | Ctrl, E, Space, or Enter | Advance intermission |
 | P / Pause | Pause / resume |
 
+The table lists default controls. Use Escape → Settings → Configure keys to
+change movement, strafe, turn, fire, use, or run bindings before starting. Do
+not alter bindings during the route unless needed; if you do, record the choice.
+
 Use brief movement presses, release before changing direction, and tap switches. Report delayed controls or visible stalls.
 
 ## What to report
@@ -60,7 +64,7 @@ Your report will be recorded only for the scope and outcomes you state. Automate
 
 ## Current evidence and limits
 
-The Preview.6 package-validation receipt pins the exact tested archive, source commit and Steam IWAD-backed checks. Extracted-package preflight passes; all 175,140 submitted music frames from the earlier four-second E1M1 actual-device check returned and the device closed cleanly, with one queue-starvation observation after the final packet and no rebuffer resume. That older check is not a sustained audio or audible-quality qualification.
+The Preview.8 package-validation receipt pins the refreshed archive, source commit, manifest, and offline checks. It does not include an IWAD startup smoke or qualify a map route. The Preview.6 package-validation receipt separately pins its older Steam IWAD-backed checks. An earlier four-second E1M1 actual-device check returned all 175,140 submitted music frames and closed cleanly, with one queue-starvation observation after the final packet and no rebuffer resume; that older check is not a sustained audio or audible-quality qualification.
 
 Preview.6 passes 36/36 map-start smokes at 35 idle tics and five-view 16-worker parity in each visual style. These tests do not finish maps. Earlier bounded simulation and audio-host rates were below the frozen 35-tic/60-display target, and neither Terminal writes nor worker parity establish distinct monitor presentations. See the [package receipt](../results/preview6-package-validation-20261002.json), [publication receipt](../results/preview6-publication-20261002.json), and [performance evidence](performance.md).
 

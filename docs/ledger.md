@@ -9,10 +9,27 @@ synthetic suites pass 24 masked-wall and 18 cardinal wall-span checks; no live
 game, device or performance test ran. GitHub's downloaded ZIP and checksum
 match the validated local assets; the receipts pin both hashes. The entire
 repository measured 28,355,972,736 bytes, below the 30,000,000,000-byte limit.
-An attempted removal of twelve ignored generated promo MP4s was rejected by the
-automatic approval review, so no files were removed. Their content is excluded
-from the release package. Full campaign, original-renderer fidelity, sustained
-pacing, physical-input, acoustic and second-hardware gates remain open.
+The actual `local/recordings` folder contains zero MP4s and retains 2,050 files
+(2,566,383,413 bytes), including metadata and findings. My attempted cleanup
+mistakenly targeted twelve promo exports in other folders, not gameplay
+recordings; the automatic review rejected it and changed no files. Those promo
+exports remain outside the recording folder and are excluded from the package.
+Full campaign, original-renderer fidelity, sustained pacing, physical-input,
+acoustic and second-hardware gates remain open.
+
+## 2026-10-04 — Fit key capture and Controls text in the native menu
+
+The offline `Test-SessionMenu` fixture exposed two real screen-boundary defects
+in Preview.8: the key-capture prompt overflowed at the normal footer scale, and
+the final Controls shortcut line was wider than the 320-pixel screen. The
+capture prompt now uses the smaller font scale, and the Controls shortcuts wrap
+over two rows with tighter line spacing. Its test also retained references to
+the renderer's reused pixel array, so later draws erased earlier comparison
+frames; the fixture now clones each frame before drawing the next. The current
+source passes 143 menu assertions and 60 static screen fixtures. Separate
+offline tests pass 96 settings assertions and 286 palette assertions. These
+checks launch no game host and use no display or audio device; campaign and live
+input behavior remain unverified.
 
 ## 2026-10-04 — Cover all cardinal view headings in wall projection
 

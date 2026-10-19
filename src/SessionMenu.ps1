@@ -177,8 +177,8 @@ function Get-DoomMenuPixels {
         5 {
             Draw-DoomMenuText $Graphics 'CONTROLS' 0 6 -Center
             $preferences=Copy-DoomUserSettings $Details.Settings
-            $lines=@("MOVE $(Get-DoomKeyBindingLabel $preferences.Bindings.Forward) / $(Get-DoomKeyBindingLabel $preferences.Bindings.Backward)","STRAFE $(Get-DoomKeyBindingLabel $preferences.Bindings.StrafeLeft) / $(Get-DoomKeyBindingLabel $preferences.Bindings.StrafeRight)","TURN $(Get-DoomKeyBindingLabel $preferences.Bindings.TurnLeft) / $(Get-DoomKeyBindingLabel $preferences.Bindings.TurnRight)","FIRE $(Get-DoomKeyBindingLabel $preferences.Bindings.Fire) / USE $(Get-DoomKeyBindingLabel $preferences.Bindings.Use)","RUN $(Get-DoomKeyBindingLabel $preferences.Bindings.Run) / 1-7 WEAPONS",'TAB MAP / +/- ZOOM','MAP: ARROWS PAN / F FOLLOW','M MARK / C CLEAR / P PAUSE','F1 HELP / F2 SAVE / F3 LOAD / F10 QUIT / F11 GAMMA')
-            for($i=0;$i -lt $lines.Count;$i++){Draw-DoomMenuText $Graphics $lines[$i] 16 (30+18*$i) 1}
+            $lines=@("MOVE $(Get-DoomKeyBindingLabel $preferences.Bindings.Forward) / $(Get-DoomKeyBindingLabel $preferences.Bindings.Backward)","STRAFE $(Get-DoomKeyBindingLabel $preferences.Bindings.StrafeLeft) / $(Get-DoomKeyBindingLabel $preferences.Bindings.StrafeRight)","TURN $(Get-DoomKeyBindingLabel $preferences.Bindings.TurnLeft) / $(Get-DoomKeyBindingLabel $preferences.Bindings.TurnRight)","FIRE $(Get-DoomKeyBindingLabel $preferences.Bindings.Fire) / USE $(Get-DoomKeyBindingLabel $preferences.Bindings.Use)","RUN $(Get-DoomKeyBindingLabel $preferences.Bindings.Run) / 1-7 WEAPONS",'TAB MAP / +/- ZOOM','MAP: ARROWS PAN / F FOLLOW','M MARK / C CLEAR / P PAUSE','F1 HELP / F2 SAVE / F3 LOAD','F10 QUIT / F11 GAMMA')
+            for($i=0;$i -lt $lines.Count;$i++){Draw-DoomMenuText $Graphics $lines[$i] 16 (30+16*$i) 1}
         }
         6 {
             Draw-DoomMenuText $Graphics 'QUIT DOOM?' 0 50 -Center
@@ -227,7 +227,8 @@ function Get-DoomMenuPixels {
     if($Screen -in 1,2,3,4,6,8,9,10,11,15){
         if($Screen -ne 15){Draw-DoomMenuText $Graphics 'ARROWS: CHOOSE' 0 166 -Center}
         $footer=if($Screen -eq 15 -and $Details.AwaitingBinding){'PRESS KEY; ESC CANCEL'}elseif($Screen -eq 15 -and $Details.MessageTitle){if($Details.MessageTitle -in 'KEY ALREADY USED','KEY ASSIGNED' -and $Details.MessageDetail){$Details.MessageDetail}else{$Details.MessageTitle}}else{'ENTER: OK  ESC: BACK'}
-        Draw-DoomMenuText $Graphics $footer 0 184 -Center
+        $footerScale=if($Screen -eq 15 -and $Details.AwaitingBinding){1}else{2}
+        Draw-DoomMenuText -Graphics $Graphics -Text $footer -X 0 -Y 184 -Scale $footerScale -Center
     }
     return ,$draw.Data
 }

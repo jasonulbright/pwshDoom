@@ -19,9 +19,15 @@ height are numeric world units and whose angle is radians.
 The authored-geometry masked-wall harness passes 24 checks, including full-frame
 pixel and depth parity for both camera representations. The synthetic wall-span
 harness passes 18 cases at 0°, 90°, 180° and 270°. These tests use no WAD, game
-session, display or audio device. No live test was run for this package
-preparation. The focused checks establish implementation behavior only; they do
-not establish map rendering fidelity, campaign playability or performance.
+session, display or audio device. Offline package checks also pass 96 settings
+assertions, 143 menu assertions with 60 WAD-backed static screen fixtures, and
+286 palette checks. The menu fixtures caught two text-fit defects: the key
+capture prompt now uses the smaller footer scale, and the Controls help wraps
+the final shortcut list across two rows. The test harness copies each frame
+before comparing it so later screen draws cannot overwrite earlier results.
+No live test was run for this package preparation. The focused checks establish
+implementation behavior only; they do not establish map rendering fidelity,
+campaign playability or performance.
 
 ## Remaining release gates
 
