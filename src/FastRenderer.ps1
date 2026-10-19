@@ -838,6 +838,13 @@ function Invoke-FastRender {
                     $planeSampleCalls[$planeSampleCallCount]=$x;$planeSampleCalls[$planeSampleCallCount+1]=$lowerPlaneStart;$planeSampleCalls[$planeSampleCallCount+2]=$clipB;$planeSampleCalls[$planeSampleCallCount+3]=$lowerPlaneId;$planeSampleCallCount+=4
                 }
                 [int]$portalT=[Math]::Ceiling(84-160*($bc-$cz)/$distance-0.5)
+                if($wallBoundaryReady -and -not $solid -and $bc -lt $ch -and -not $joinedSky -and $side.TopTexture -gt 0){
+                    [int]$portalBackCeilingWorldData=[int](([long]$Context.SectorCeilingHeightData[$segBack]-[long]$viewZData) -shr 4)
+                    [int]$portalFrontFloorWorldData=[int](([long]$Context.SectorFloorHeightData[$segFront]-[long]$viewZData) -shr 4)
+                    [int]$portalTopWorldData=[Math]::Max($portalBackCeilingWorldData,$portalFrontFloorWorldData)
+                    [int]$portalTopFracData=[int]([long](84 -shl 12)-((([long]$portalTopWorldData*[long]$wallScaleData) -shr 16)))
+                    $portalT=$portalTopFracData -shr 12
+                }
                 [int]$portalB=[Math]::Floor(84-160*($bf-$cz)/$distance-0.5)
                 [int]$wallLightIndex=47
                 if($distance -gt 0){
@@ -856,7 +863,7 @@ function Invoke-FastRender {
                         if($band -gt 0){break};$tex=$side.MiddleTexture;$wy0=$wallT;$wy1=$wallB
                         if($tex -gt 0 -and ($segFlags -band 16)){$textureTop=$fh+$Context.Textures[$tex].Height}
                     } elseif($band -eq 0) {
-                        if($bc -ge $ch -or $joinedSky){continue};$tex=$side.TopTexture;$wy0=$wallT;$wy1=$portalT-1
+                        if($bc -ge $ch -or $joinedSky){continue};$tex=$side.TopTexture;$wy0=$wallT;$wy1=$portalT
                         if($tex -gt 0 -and -not ($segFlags -band 8)){$textureTop=$bc+$Context.Textures[$tex].Height}
                     } elseif($band -eq 1) {
                         if($bf -le $fh){continue};$tex=$side.BottomTexture;$wy0=$portalB+1;$wy1=$wallB;$textureTop=$bf
@@ -933,6 +940,7 @@ function Invoke-FastRender {
                 [int]$nextTop=168;[int]$nextBottom=-1
                 if(-not $solid){
                     $nextTop=[Math]::Max($clipT,[Math]::Max($wallT,$portalT))
+                    if($bc -lt $ch -and -not $joinedSky -and $side.TopTexture -gt 0){$nextTop=[Math]::Max($clipT,[Math]::Max($wallT,$portalT+1))}
                     $nextBottom=[Math]::Min($clipB,[Math]::Min($wallB,$portalB))
                 }
                 # Missing wall textures still close the BSP silhouette. Preserve

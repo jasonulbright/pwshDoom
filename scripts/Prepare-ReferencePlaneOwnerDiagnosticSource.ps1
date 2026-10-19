@@ -25,7 +25,11 @@ class ThreeDRenderer {
     [byte[]] $DiagnosticPlaneSurfaceTypes
     [byte[]] $DiagnosticFinalWriterTypes
     [byte[]] $DiagnosticFinalRenderPassTypes
+    [int[]] $DiagnosticFinalWallSegIndices
+    [int[]] $DiagnosticFinalWallTopRows
+    [int[]] $DiagnosticFinalWallBottomRows
     [byte] $DiagnosticCurrentRenderPassType
+    [int] $DiagnosticCurrentWallSegIndex = -1
     [int[]] $DiagnosticPlaneDistanceData
     [int[]] $DiagnosticPlaneXFracData
     [int[]] $DiagnosticPlaneYFracData
@@ -105,7 +109,15 @@ function Add-FinalWriterMarks([string]$text,[string]$methodStart,[string]$method
     $evaluator=[Text.RegularExpressions.MatchEvaluator]{
         param($match)
         $indent=$match.Groups['indent'].Value
-        return $match.Value+$nl+$indent+'$this.DiagnosticFinalWriterTypes[$pos] = '+$writerType+$nl+$indent+'$this.DiagnosticFinalRenderPassTypes[$pos] = $this.DiagnosticCurrentRenderPassType'
+        $wallTraceMarks=''
+        if($writerType -eq 2){
+            $wallTraceMarks=$nl+$indent+'if($this.DiagnosticCurrentRenderPassType -eq 1 -and $this.DiagnosticCurrentWallSegIndex -ge 0){'+$nl+
+                $indent+'    $this.DiagnosticFinalWallSegIndices[$pos] = $this.DiagnosticCurrentWallSegIndex + 1'+$nl+
+                $indent+'    $this.DiagnosticFinalWallTopRows[$pos] = $y1'+$nl+
+                $indent+'    $this.DiagnosticFinalWallBottomRows[$pos] = $y2'+$nl+
+                $indent+'}'
+        }
+        return $match.Value+$nl+$indent+'$this.DiagnosticFinalWriterTypes[$pos] = '+$writerType+$nl+$indent+'$this.DiagnosticFinalRenderPassTypes[$pos] = $this.DiagnosticCurrentRenderPassType'+$wallTraceMarks
     }
     $segment=[regex]::Replace($segment,$pattern,$evaluator)
     return $text.Substring(0,$start)+$segment+$text.Substring($end)
@@ -114,6 +126,10 @@ function Add-FinalWriterMarks([string]$text,[string]$methodStart,[string]$method
 $source=Add-FinalWriterMarks $source '    hidden [void] DrawColumnData(' '    [void] DrawColumn(' 2
 $source=Add-FinalWriterMarks $source '    hidden [void] DrawColumnTranslationData(' '    [void] DrawColumnTranslation(' 2
 $source=Add-FinalWriterMarks $source '    [void] DrawFuzzColumn(' '    [void] DrawSkyColumn(' 3
+
+$segIndexMarker='        $angle1 = [Geometry]::PointToAngle($this.viewX, $this.viewY, $seg.Vertex1.X, $seg.Vertex1.Y)'
+if(([regex]::Matches($source,[regex]::Escape($segIndexMarker))).Count -ne 1){throw 'Expected one DrawSeg angle marker.'}
+$source=$source.Replace($segIndexMarker,'        $this.DiagnosticCurrentWallSegIndex = [Array]::IndexOf($this.world.Map.Segs, $seg)'+$nl+$segIndexMarker)
 
 function Add-RenderPassMarker([string]$text,[string]$call,[byte]$passType){
     $pattern='(?m)^(?<indent>[ \t]*)'+[regex]::Escape($call)+'\r?$'

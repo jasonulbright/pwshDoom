@@ -9,6 +9,7 @@ param(
     [string]$EngineSourceRoot = "$PSScriptRoot/../src/ManagedDoom",
     [string]$EngineBundleOutput = "$PSScriptRoot/../local/engine-bundle.ps1",
     [switch]$CaptureReferencePlaneOwners,
+    [switch]$CaptureWallBoundaryTrace,
     [ValidateRange(2,100000)][int]$InputTic = 315,
     [ValidateRange(0,32767)][int]$SectorIndex = 26,
     [ValidateRange(-4096,4096)][int[]]$Heights = @(0, 6, 34, 68)
@@ -144,6 +145,7 @@ $root = Split-Path $PSScriptRoot
 $Wad = [IO.Path]::GetFullPath($Wad)
 $Replay = [IO.Path]::GetFullPath($Replay)
 $Output = [IO.Path]::GetFullPath($Output)
+$Renderer = [IO.Path]::GetFullPath($Renderer)
 $EngineSourceRoot = [IO.Path]::GetFullPath($EngineSourceRoot)
 $EngineBundleOutput = [IO.Path]::GetFullPath($EngineBundleOutput)
 $engineRelative = [IO.Path]::GetRelativePath($root, $EngineSourceRoot)
@@ -154,6 +156,9 @@ if ([IO.Path]::IsPathRooted($engineRelative) -or $engineRelative -eq '..' -or $e
 }
 $referenceRendererSource = Join-Path $EngineSourceRoot 'Video/ThreeDRenderer.sb.ps1'
 if (-not (Test-Path -LiteralPath $referenceRendererSource -PathType Leaf)) { throw "Reference renderer source not found: $referenceRendererSource" }
+if ($CaptureWallBoundaryTrace -and -not [IO.File]::ReadAllText($Renderer).Contains('DiagnosticWallSpanTrace')) {
+    throw 'Wall-boundary tracing requires the generated diagnostic candidate renderer.'
+}
 if (-not (Test-Path -LiteralPath $Wad -PathType Leaf)) { throw "IWAD not found: $Wad" }
 if (-not (Test-Path -LiteralPath $Replay -PathType Leaf)) { throw "Replay not found: $Replay" }
 if (Test-Path -LiteralPath $Output) { throw 'Use a fresh output path.' }
@@ -182,12 +187,16 @@ $bundle = & "$PSScriptRoot/Build-EngineBundle.ps1" -SourceRoot $EngineSourceRoot
 . "$PSScriptRoot/../src/GameHost.ps1"
 $sourcePaths = @(
     [IO.Path]::GetRelativePath($root, [IO.Path]::GetFullPath($Renderer)).Replace('\', '/'),
+    'src/FastRenderer.ps1',
     'src/GameHost.ps1',
     [IO.Path]::GetRelativePath($root, $referenceRendererSource).Replace('\', '/'),
     'src/ManagedDoom/Video/ThreeDRenderer.sb.ps1',
     'scripts/Compare-MovingSectorHeightSweep.ps1',
-    'scripts/Prepare-ReferencePlaneOwnerDiagnosticSource.ps1'
+    'scripts/Prepare-ReferencePlaneOwnerDiagnosticSource.ps1',
+    'scripts/Prepare-FastRendererWallSpanDiagnosticRenderer.ps1',
+    'scripts/Prepare-FastRendererPortalTopBoundaryCounterfactual.ps1'
 )
+$sourcePaths = @($sourcePaths | Select-Object -Unique)
 $sourceHashes = @{}
 foreach ($path in $sourcePaths) {
     $sourceHashes[$path] = (Get-FileHash -LiteralPath (Join-Path $root $path)).Hash
@@ -231,6 +240,9 @@ try {
         $null -ne $reference3D.GetType().GetProperty('DiagnosticPlaneSurfaceTypes') -and
         $null -ne $reference3D.GetType().GetProperty('DiagnosticFinalWriterTypes') -and
         $null -ne $reference3D.GetType().GetProperty('DiagnosticFinalRenderPassTypes') -and
+        $null -ne $reference3D.GetType().GetProperty('DiagnosticFinalWallSegIndices') -and
+        $null -ne $reference3D.GetType().GetProperty('DiagnosticFinalWallTopRows') -and
+        $null -ne $reference3D.GetType().GetProperty('DiagnosticFinalWallBottomRows') -and
         $null -ne $reference3D.GetType().GetProperty('DiagnosticPlaneDistanceData') -and
         $null -ne $reference3D.GetType().GetProperty('DiagnosticPlaneXFracData') -and
         $null -ne $reference3D.GetType().GetProperty('DiagnosticPlaneYFracData') -and
@@ -250,6 +262,9 @@ try {
         $reference3D.DiagnosticPlaneSurfaceTypes = [byte[]]::new(320 * 200)
         $reference3D.DiagnosticFinalWriterTypes = [byte[]]::new(320 * 200)
         $reference3D.DiagnosticFinalRenderPassTypes = [byte[]]::new(320 * 200)
+        $reference3D.DiagnosticFinalWallSegIndices = [int[]]::new(320 * 200)
+        $reference3D.DiagnosticFinalWallTopRows = [int[]]::new(320 * 200)
+        $reference3D.DiagnosticFinalWallBottomRows = [int[]]::new(320 * 200)
         $reference3D.DiagnosticPlaneDistanceData = [int[]]::new(320 * 200)
         $reference3D.DiagnosticPlaneXFracData = [int[]]::new(320 * 200)
         $reference3D.DiagnosticPlaneYFracData = [int[]]::new(320 * 200)
@@ -262,6 +277,10 @@ try {
         $reference3D.DiagnosticFloorSampleOriginX = [int[]]::new(200)
     }
         $context = New-FastRenderContext $content $game.World
+    if ($CaptureWallBoundaryTrace) {
+        $context.DiagnosticWallSpanTrace = [int[]]::new($game.World.Map.Segs.Length * 320 * 12)
+        $context.DiagnosticWallSpanTraceSeen = [byte[]]::new($game.World.Map.Segs.Length * 320)
+    }
     $context.PlaneSampleXFracData = [int[]]::new(320 * 168)
     $context.PlaneSampleYFracData = [int[]]::new(320 * 168)
     $context.PlaneSampleOriginX = [int[]]::new(320 * 168)
@@ -294,6 +313,10 @@ try {
         [int]$candidateFixedColorMap = $snapshot.ConsolePlayer.FixedColorMap
         [Array]::Clear($context.PlaneSampleXFracData)
         [Array]::Clear($context.PlaneSampleYFracData)
+        if ($CaptureWallBoundaryTrace) {
+            [Array]::Clear($context.DiagnosticWallSpanTrace)
+            [Array]::Clear($context.DiagnosticWallSpanTraceSeen)
+        }
         [Array]::Fill($context.PlaneSampleOriginX, -1)
         [Array]::Clear($context.PlaneSampleReusedPreviousColumn)
         [Array]::Fill($context.PlaneCeilingSampleOriginX, -1)
@@ -305,6 +328,9 @@ try {
             [Array]::Clear($reference3D.DiagnosticPlaneSurfaceTypes, 0, $reference3D.DiagnosticPlaneSurfaceTypes.Length)
             [Array]::Clear($reference3D.DiagnosticFinalWriterTypes, 0, $reference3D.DiagnosticFinalWriterTypes.Length)
             [Array]::Clear($reference3D.DiagnosticFinalRenderPassTypes, 0, $reference3D.DiagnosticFinalRenderPassTypes.Length)
+            [Array]::Clear($reference3D.DiagnosticFinalWallSegIndices, 0, $reference3D.DiagnosticFinalWallSegIndices.Length)
+            [Array]::Clear($reference3D.DiagnosticFinalWallTopRows, 0, $reference3D.DiagnosticFinalWallTopRows.Length)
+            [Array]::Clear($reference3D.DiagnosticFinalWallBottomRows, 0, $reference3D.DiagnosticFinalWallBottomRows.Length)
             [Array]::Clear($reference3D.DiagnosticPlaneDistanceData, 0, $reference3D.DiagnosticPlaneDistanceData.Length)
             [Array]::Clear($reference3D.DiagnosticPlaneXFracData, 0, $reference3D.DiagnosticPlaneXFracData.Length)
             [Array]::Clear($reference3D.DiagnosticPlaneYFracData, 0, $reference3D.DiagnosticPlaneYFracData.Length)
@@ -337,8 +363,30 @@ try {
         $candidatePlaneMismatchReferenceFinalColumnWrites = 0
         $candidatePlaneMismatchReferenceFinalFuzzWrites = 0
         $candidatePlaneMismatchReferenceFinalUnmarkedWrites = 0
+        $candidatePlaneMismatchBspColumnPixels = 0
         $candidatePlaneMismatchSameOwnerFinalPlaneWrites = 0
         $candidatePlaneMismatchFinalRenderPassCounts = @{}
+        $candidatePlaneMismatchWallSpanCounts = [ordered]@{
+            ReferenceOpaqueWallPixels = 0
+            ReferenceWallWriteIntervalContainsPixel = 0
+            ReferenceWallSegmentMissing = 0
+            CandidateSegmentColumnTraceMissing = 0
+            CandidateSegmentColumnTraceFound = 0
+            CandidateWallBoundsContainPixel = 0
+            CandidateClipContainsPixel = 0
+            CandidatePortalTopEqualsPixel = 0
+            ReferenceWallBottomEqualsPixel = 0
+            CandidatePortalTopEqualsReferenceWallBottom = 0
+            CandidateUpperBandEndsImmediatelyAbovePixel = 0
+            CandidateOpaqueWallBandSpanContainsPixel = 0
+            CandidateMaskedMiddleSpanContainsPixel = 0
+            CandidateAnyWallBandSpanContainsPixel = 0
+            ReferenceWallPixelOutsideCandidateWallBounds = 0
+            ReferenceWallPixelOutsideCandidateClip = 0
+            ReferenceWallPixelOutsideCandidateWallBands = 0
+            CandidateOpaqueBandContainsPixelWithoutCandidateDepth = 0
+        }
+        $candidatePlaneMismatchWallSpanExamples = [Collections.Generic.List[object]]::new()
         $referencePlaneOwnerPairCounts = @{}
         $planeSampleCounts = [ordered]@{
             SameOwnerSamples = 0
@@ -398,6 +446,104 @@ try {
                                 2 { $candidatePlaneMismatchReferenceFinalColumnWrites++ }
                                 3 { $candidatePlaneMismatchReferenceFinalFuzzWrites++ }
                                 default { $candidatePlaneMismatchReferenceFinalUnmarkedWrites++ }
+                            }
+                            if ([int]$reference3D.DiagnosticFinalWriterTypes[$referencePosition] -eq 2 -and
+                                [int]$reference3D.DiagnosticFinalRenderPassTypes[$referencePosition] -eq 1) {
+                                $candidatePlaneMismatchBspColumnPixels++
+                            }
+                            if ($CaptureWallBoundaryTrace -and
+                                [int]$reference3D.DiagnosticFinalWriterTypes[$referencePosition] -eq 2 -and
+                                [int]$reference3D.DiagnosticFinalRenderPassTypes[$referencePosition] -eq 1) {
+                                $candidatePlaneMismatchWallSpanCounts.ReferenceOpaqueWallPixels++
+                                [int]$referenceWallSegmentEncoded = $reference3D.DiagnosticFinalWallSegIndices[$referencePosition]
+                                [int]$referenceWallTop = $reference3D.DiagnosticFinalWallTopRows[$referencePosition]
+                                [int]$referenceWallBottom = $reference3D.DiagnosticFinalWallBottomRows[$referencePosition]
+                                if ($y -ge $referenceWallTop -and $y -le $referenceWallBottom) {
+                                    $candidatePlaneMismatchWallSpanCounts.ReferenceWallWriteIntervalContainsPixel++
+                                }
+                                if ($referenceWallSegmentEncoded -le 0) {
+                                    $candidatePlaneMismatchWallSpanCounts.ReferenceWallSegmentMissing++
+                                } else {
+                                    [int]$referenceWallSegmentIndex = $referenceWallSegmentEncoded - 1
+                                    [int]$candidateTraceCell = $referenceWallSegmentIndex * 320 + $x
+                                    if ($referenceWallSegmentIndex -ge $game.World.Map.Segs.Length -or
+                                        $candidateTraceCell -ge $context.DiagnosticWallSpanTraceSeen.Length -or
+                                        $context.DiagnosticWallSpanTraceSeen[$candidateTraceCell] -eq 0) {
+                                        $candidatePlaneMismatchWallSpanCounts.CandidateSegmentColumnTraceMissing++
+                                    } else {
+                                        $candidatePlaneMismatchWallSpanCounts.CandidateSegmentColumnTraceFound++
+                                        [int]$candidateTraceOffset = $candidateTraceCell * 12
+                                        [int[]]$candidateWallTrace = $context.DiagnosticWallSpanTrace
+                                        [int]$candidateWallTop = $candidateWallTrace[$candidateTraceOffset]
+                                        [int]$candidateWallBottom = $candidateWallTrace[$candidateTraceOffset + 1]
+                                        [int]$candidateClipTop = $candidateWallTrace[$candidateTraceOffset + 2]
+                                        [int]$candidateClipBottom = $candidateWallTrace[$candidateTraceOffset + 3]
+                                        [int]$candidatePortalTop = $candidateWallTrace[$candidateTraceOffset + 4]
+                                        [int]$candidatePortalBottom = $candidateWallTrace[$candidateTraceOffset + 5]
+                                        [bool]$candidateWallBoundsContainPixel = $candidateWallTop -le $y -and $y -le $candidateWallBottom
+                                        [bool]$candidateClipContainsPixel = $candidateClipTop -le $y -and $y -le $candidateClipBottom
+                                        if ($candidatePortalTop -eq $y) { $candidatePlaneMismatchWallSpanCounts.CandidatePortalTopEqualsPixel++ }
+                                        if ($referenceWallBottom -eq $y) { $candidatePlaneMismatchWallSpanCounts.ReferenceWallBottomEqualsPixel++ }
+                                        if ($candidatePortalTop -eq $referenceWallBottom) { $candidatePlaneMismatchWallSpanCounts.CandidatePortalTopEqualsReferenceWallBottom++ }
+                                        if ($candidateWallTrace[$candidateTraceOffset + 7] -eq ($y - 1)) { $candidatePlaneMismatchWallSpanCounts.CandidateUpperBandEndsImmediatelyAbovePixel++ }
+                                        [bool]$candidateOpaqueWallBandContainsPixel = $false
+                                        [bool]$candidateMaskedMiddleContainsPixel = $false
+                                        for ([int]$candidateBand = 0; $candidateBand -lt 3; $candidateBand++) {
+                                            [int]$candidateBandTop = $candidateWallTrace[$candidateTraceOffset + 6 + 2 * $candidateBand]
+                                            [int]$candidateBandBottom = $candidateWallTrace[$candidateTraceOffset + 7 + 2 * $candidateBand]
+                                            if ($candidateBandTop -le $y -and $y -le $candidateBandBottom) {
+                                                if ($candidateBand -lt 2) { $candidateOpaqueWallBandContainsPixel = $true }
+                                                else { $candidateMaskedMiddleContainsPixel = $true }
+                                            }
+                                        }
+                                        [bool]$candidateAnyWallBandContainsPixel = $candidateOpaqueWallBandContainsPixel -or $candidateMaskedMiddleContainsPixel
+                                        [bool]$candidateDepthIsInfinite = $context.Depth[$candidateIndex] -eq [double]::PositiveInfinity
+                                        if ($candidateWallBoundsContainPixel) { $candidatePlaneMismatchWallSpanCounts.CandidateWallBoundsContainPixel++ }
+                                        if ($candidateClipContainsPixel) { $candidatePlaneMismatchWallSpanCounts.CandidateClipContainsPixel++ }
+                                        if ($candidateOpaqueWallBandContainsPixel) {
+                                            $candidatePlaneMismatchWallSpanCounts.CandidateOpaqueWallBandSpanContainsPixel++
+                                            if ($candidateDepthIsInfinite) { $candidatePlaneMismatchWallSpanCounts.CandidateOpaqueBandContainsPixelWithoutCandidateDepth++ }
+                                        }
+                                        if ($candidateMaskedMiddleContainsPixel) { $candidatePlaneMismatchWallSpanCounts.CandidateMaskedMiddleSpanContainsPixel++ }
+                                        if ($candidateAnyWallBandContainsPixel) { $candidatePlaneMismatchWallSpanCounts.CandidateAnyWallBandSpanContainsPixel++ }
+                                        if (-not $candidateWallBoundsContainPixel) { $candidatePlaneMismatchWallSpanCounts.ReferenceWallPixelOutsideCandidateWallBounds++ }
+                                        if (-not $candidateClipContainsPixel) { $candidatePlaneMismatchWallSpanCounts.ReferenceWallPixelOutsideCandidateClip++ }
+                                        if (-not $candidateAnyWallBandContainsPixel) { $candidatePlaneMismatchWallSpanCounts.ReferenceWallPixelOutsideCandidateWallBands++ }
+                                        if ($candidatePlaneMismatchWallSpanExamples.Count -lt 32) {
+                                            [int]$candidateMetadataOffset = $referenceWallSegmentIndex * 4
+                                            $candidatePlaneMismatchWallSpanExamples.Add([ordered]@{
+                                                X = $x
+                                                Y = $y
+                                                CandidatePlaneId = $planeId
+                                                CandidateDepth = if ($candidateDepthIsInfinite) { 'PositiveInfinity' } else { $context.Depth[$candidateIndex] }
+                                                ReferenceWallSegmentIndex = $referenceWallSegmentIndex
+                                                ReferenceWallWriteTop = $referenceWallTop
+                                                ReferenceWallWriteBottom = $referenceWallBottom
+                                                ReferenceWriteIntervalContainsPixel = ($y -ge $referenceWallTop -and $y -le $referenceWallBottom)
+                                                CandidateWallTop = $candidateWallTop
+                                                CandidateWallBottom = $candidateWallBottom
+                                                CandidateClipTop = $candidateClipTop
+                                                CandidateClipBottom = $candidateClipBottom
+                                                CandidatePortalTop = $candidatePortalTop
+                                                CandidatePortalBottom = $candidatePortalBottom
+                                                CandidateUpperOrSolidBandTop = $candidateWallTrace[$candidateTraceOffset + 6]
+                                                CandidateUpperOrSolidBandBottom = $candidateWallTrace[$candidateTraceOffset + 7]
+                                                CandidateLowerBandTop = $candidateWallTrace[$candidateTraceOffset + 8]
+                                                CandidateLowerBandBottom = $candidateWallTrace[$candidateTraceOffset + 9]
+                                                CandidateMaskedMiddleBandTop = $candidateWallTrace[$candidateTraceOffset + 10]
+                                                CandidateMaskedMiddleBandBottom = $candidateWallTrace[$candidateTraceOffset + 11]
+                                                CandidateWallBoundsContainPixel = $candidateWallBoundsContainPixel
+                                                CandidateClipContainsPixel = $candidateClipContainsPixel
+                                                CandidateOpaqueWallBandContainsPixel = $candidateOpaqueWallBandContainsPixel
+                                                CandidateMaskedMiddleContainsPixel = $candidateMaskedMiddleContainsPixel
+                                                CandidateSideIndex = $context.SegmentMetadata[$candidateMetadataOffset]
+                                                CandidateFrontSectorIndex = $context.SegmentMetadata[$candidateMetadataOffset + 1]
+                                                CandidateBackSectorIndex = $context.SegmentMetadata[$candidateMetadataOffset + 2]
+                                                CandidateLineFlags = $context.SegmentMetadata[$candidateMetadataOffset + 3]
+                                            })
+                                        }
+                                    }
+                                }
                             }
                         }
                         if ($null -eq $referenceOwner) {
@@ -581,6 +727,18 @@ try {
             if ($candidatePlaneMismatchFinalRenderPassTotal -ne $candidatePlaneMismatchPixels) {
                 throw "Reference final render-pass classes did not reconcile at ceiling height $height."
             }
+            if ($CaptureWallBoundaryTrace) {
+                if ($candidatePlaneMismatchWallSpanCounts.ReferenceOpaqueWallPixels -ne $candidatePlaneMismatchBspColumnPixels -or
+                    $candidatePlaneMismatchWallSpanCounts.ReferenceWallWriteIntervalContainsPixel -ne $candidatePlaneMismatchWallSpanCounts.ReferenceOpaqueWallPixels) {
+                    throw "Reference BSP column wall-span attribution did not reconcile at ceiling height $height."
+                }
+                if ($candidatePlaneMismatchWallSpanCounts.ReferenceWallSegmentMissing +
+                    $candidatePlaneMismatchWallSpanCounts.CandidateSegmentColumnTraceMissing +
+                    $candidatePlaneMismatchWallSpanCounts.CandidateSegmentColumnTraceFound -ne
+                    $candidatePlaneMismatchWallSpanCounts.ReferenceOpaqueWallPixels) {
+                    throw "Candidate segment-column traces did not reconcile at ceiling height $height."
+                }
+            }
             if ($planeSampleCounts.SameOwnerSamples -ne $candidatePlaneMismatchSameOwnerFinalPlaneWrites) {
                 throw "Same-owner plane sample counts did not reconcile at ceiling height $height."
             }
@@ -635,6 +793,8 @@ try {
                     }
                 }
             )
+            CandidatePlaneMismatchReferenceWallSpanCounts = if ($CaptureWallBoundaryTrace) { $candidatePlaneMismatchWallSpanCounts } else { $null }
+            CandidatePlaneMismatchReferenceWallSpanExamples = if ($CaptureWallBoundaryTrace) { $candidatePlaneMismatchWallSpanExamples.ToArray() } else { @() }
             SameOwnerPlaneSampleComparisons = $planeSampleCounts
             SameOwnerPlaneSampleExamples = $planeSampleExamples.ToArray()
             ReferencePlaneWriteOwnerPairs = @(
@@ -770,6 +930,8 @@ try {
         CandidateOwnershipInterpretation = 'Plane-buffer counts classify the candidate plane ID at mismatch coordinates; the separate final-render-pass tags identify which reference render pass supplied the final pixel.'
         ReferencePlaneWritesInterpretation = 'Plane ownership records the last reference floor/ceiling write. Final-writer tags distinguish plane, mapped-column and fuzz writes; final-render-pass tags distinguish BSP traversal, world sprites, masked textures, player sprites, back-screen fill and sky columns.'
         ReferenceFinalRenderPassInterpretation = 'Within BSP traversal, a final plane write is a plane sampler output and a mapped-column write is an opaque wall column; sky columns are tagged separately. Later pass tags distinguish world sprites, masked textures, player sprites and back-screen fill.'
+        ReferenceWallSpanInterpretation = 'For candidate plane-buffer mismatches whose final reference pixel is a BSP mapped-column write, the diagnostic records the reference segment and actual write interval, then compares that pixel with the candidate segment-column wall bounds, clip interval, and upper/solid, lower, and deferred masked-middle bands. Candidate band intervals are clipped raster spans; this classifies geometry coverage and does not by itself prove the texture sample or final candidate color.'
+        CandidatePortalBoundaryInterpretation = 'CandidatePortalTopEqualsPixel counts mismatch pixels that lie exactly on the candidate portal top boundary. CandidateUpperBandEndsImmediatelyAbovePixel counts when the candidate band-0 span ends at y-1; together with ReferenceWallBottomEqualsPixel, these counts isolate a one-row upper-wall versus portal-boundary difference.'
         PlaneSampleInterpretation = 'Candidate plane fractions, recurrence origins and reuse flags are captured from the production per-call plane sampler. Reference fractions, distance, light bin and flat texel are recorded at writes. Candidate frame bytes may include later overlays.'
         PlaneMathInterpretation = 'Plane table and per-column fixed sine parity are compared after the final full-width candidate/reference render; this does not compare per-pixel plane fraction recurrence or light selection.'
     }

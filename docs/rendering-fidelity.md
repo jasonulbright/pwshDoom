@@ -1376,3 +1376,31 @@ gap. Candidate/reference full-frame hashes match the uninstrumented comparison
 at all four heights. The 104/339 non-plane-buffer scene mismatches remain
 unclassified by this pass trace, and original-executable parity remains open.
 See the [offline pass-tag receipt](../results/moving-sector-reference-plane-final-pass-20261019-v1.json).
+
+### Fixed-point inclusive upper-portal boundary — October 19, 2026
+
+The wall-span trace narrowed the mapped-column cases to one inclusive edge
+row. At height 34, all 111 affected pixels, and at height 68 all 85 affected
+pixels, were written by the reference wall segment through its recorded bottom
+row. That row equaled the candidate portal top, while the candidate upper-wall
+band stopped at `portalT - 1`; its wall bounds and clip otherwise contained
+the pixel. The candidate also used floating-point portal projection even
+though its wall scale and the reference portal edge use fixed-point values.
+
+For visible textured upper walls, the fast renderer now computes the portal
+top from the fixed-point back ceiling/front floor and per-column wall scale,
+draws the inclusive projected edge row, and starts the following clip at the
+next row. On the saved E1M1 tic-315 ceiling sweep, scene differences fall from
+215 to 4 at height 34 and from 440 to 353 at height 68. Candidate plane-buffer
+mismatches fall from 111 to zero and from 101 to 14, respectively. Pixel-by-
+pixel comparison resolves 211 and 87 mismatches with no introduced or changed
+mismatch pixels; heights 0 and 6 remain exact. The two previously isolated
+same-owner plane samples now match. The 14 remaining height-68 plane-buffer
+mismatches are reference plane writes from a different sector owner. Four
+height-34 non-plane scene differences and 339 height-68 non-plane
+differences remain. The [baseline wall-span trace](../results/moving-sector-reference-plane-wall-span-20261019-v2.json),
+[production comparison](../results/moving-sector-portal-top-fixedpoint-production-20261019-v1.json)
+and [pixel-delta receipt](../results/moving-sector-portal-top-boundary-pixel-delta-20261019-v1.json)
+pin the input, renderer sources and frame hashes. This is one local PowerShell
+reference state, not an original-executable comparison or broad moving-world
+qualification. No live game, display, input or audio device was used.

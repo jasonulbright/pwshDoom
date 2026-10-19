@@ -7014,3 +7014,35 @@ unmodified candidate/reference frame hashes match this instrumented trace at
 all four heights, with exact outputs at heights 0 and 6. The non-plane-buffer
 differences (104 and 339) remain outside this attribution. No original
 executable comparison or live test was used. See the [pass-tag receipt](../results/moving-sector-reference-plane-final-pass-20261019-v1.json).
+
+### Fixed-point inclusive upper-portal boundary — October 19, 2026
+
+An isolated wall-span trace records the reference BSP segment and actual
+mapped-column write interval alongside the candidate's per-segment projected
+wall, clip, portal and texture-band intervals. At height 34, all 111 candidate
+plane-buffer mismatches ending in reference wall writes, and at height 68 all
+85 such pixels, lie on the candidate portal-top row. The reference writes
+through that row, while the candidate's upper band ended one row earlier.
+Candidate wall bounds and clip intervals already contained these pixels.
+
+The production correction now projects a visible textured upper portal from
+the fixed-point back-ceiling/front-floor heights and the candidate's fixed-point
+wall scale. Its upper wall includes the projected edge row and its next segment
+clip begins one row later, matching the reference's inclusive writer interval.
+The saved E1M1 lineflags replay at tic 315 reduces scene differences from 215
+to 4 at ceiling height 34 and from 440 to 353 at height 68. Plane-buffer
+mismatches fall from 111 to zero and from 101 to 14. A pixel-level before/after
+comparison resolves 211 and 87 pixels, introduces none, and changes no
+remaining mismatch pixel. Heights 0 and 6 remain exact. The remaining 14
+height-68 plane mismatches are different-owner reference plane writes; the two
+previously isolated same-owner samples now match. Four height-34 and 339
+height-68 non-plane scene mismatches remain.
+
+The baseline trace and final production-source comparison are
+[here](../results/moving-sector-reference-plane-wall-span-20261019-v2.json)
+and [here](../results/moving-sector-portal-top-fixedpoint-production-20261019-v1.json);
+the [pixel-delta receipt](../results/moving-sector-portal-top-boundary-pixel-delta-20261019-v1.json)
+records exact frame and diagnostic-image hashes. This headless saved-replay
+comparison uses the local PowerShell reference and does not establish original
+executable parity or broad moving-world correctness. No live tests or desktop
+or device interaction were used.
