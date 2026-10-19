@@ -6979,9 +6979,10 @@ different sector or surface owner, and two are same-owner final plane writes.
 Those last two pixels are at (192,57) and (205,57); both candidate samples
 start at x=191 while the reference starts at x=192, with distance and light
 selection equal. The same-owner sample gap fell from 194 traced pixels to two.
-The column-write tag does not identify whether each write is
-a wall, masked surface, sky or sprite. The comparison remains against the
-adapted PowerShell renderer; original executable parity is not established.
+The first column-write tag grouped multiple draw paths; a later pass-level trace
+below narrows these candidate-plane pixels to BSP wall/plane writes. The
+comparison remains against the adapted PowerShell renderer; original
+executable parity is not established.
 See the [untraced comparison](../results/moving-sector-per-call-plane-wall-boundary-20261019-v1.json)
 and [instrumented owner trace](../results/moving-sector-per-call-plane-wall-boundary-20261019-v2.json).
 The two-worker Classic partition check still matches 320,000 pixels across five
@@ -6999,3 +7000,17 @@ fixed-point offset evaluation; the boundary-correction fidelity change stays
 in place. See the [recurrence comparison](../results/moving-sector-per-call-plane-wall-boundary-20261019-v4.json),
 [partition report](../results/render-partitions-plane-wall-boundary-20261019-r3.json)
 and [performance receipt](../results/renderer-wall-boundary-recurrence-performance-20261019.json).
+### Reference final render-pass attribution — October 19, 2026
+
+A diagnostic-only reference copy now records the render pass responsible for
+each final pixel write. At height 34, all 111 candidate-plane mismatch pixels
+with no reference plane write end in the BSP pass as mapped-column writes; at
+height 68, 85 of 101 do. The other 16 height-68 candidate-plane mismatches end
+in reference plane writes: 14 from a different plane owner and two same-owner
+samples. None of these candidate-plane mismatch pixels is finally written by
+world sprites, masked textures, player sprites, the back-screen fill or sky.
+Within the BSP pass, the mapped-column writes are opaque wall columns. The
+unmodified candidate/reference frame hashes match this instrumented trace at
+all four heights, with exact outputs at heights 0 and 6. The non-plane-buffer
+differences (104 and 339) remain outside this attribution. No original
+executable comparison or live test was used. See the [pass-tag receipt](../results/moving-sector-reference-plane-final-pass-20261019-v1.json).

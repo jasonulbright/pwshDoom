@@ -1345,8 +1345,9 @@ that classification, 14 have a different plane owner, and two are same-owner
 final plane writes. Those two samples are at (192,57) and (205,57): candidate
 origin x=191, reference origin x=192, with distance and light selection equal.
 This reduces the traced same-owner sample gap from 194 pixels to two.
-The column tag does not distinguish walls, masked surfaces, sky or sprites, and
-the local PowerShell reference does not establish original executable parity.
+The initial column tag grouped several draw paths; later pass-level attribution
+below isolates the candidate-plane subset to BSP wall/plane writes. The local
+PowerShell reference does not establish original executable parity.
 See the [untraced comparison](../results/moving-sector-per-call-plane-wall-boundary-20261019-v1.json)
 and [instrumented owner trace](../results/moving-sector-per-call-plane-wall-boundary-20261019-v2.json).
 The two-worker Classic partition run remains exact across five views and
@@ -1361,3 +1362,17 @@ uses the direct fixed-point start-plus-offset calculation at each column; the
 fixed-point boundary correction remains. See the [recurrence comparison](../results/moving-sector-per-call-plane-wall-boundary-20261019-v4.json),
 [partition report](../results/render-partitions-plane-wall-boundary-20261019-r3.json)
 and [offline performance receipt](../results/renderer-wall-boundary-recurrence-performance-20261019.json).
+### Reference final render-pass attribution — October 19, 2026
+
+Pass tags on an isolated reference build show that all 111 candidate-plane
+mismatch pixels at ceiling height 34 and all 101 at height 68 finish in the
+BSP pass. At height 34 they are all mapped-column writes; at height 68, 85 are
+mapped-column writes and 16 are reference plane writes (14 different-owner,
+two same-owner). The sky path has its own tag and does not occur in this
+subset; neither do world sprites, masked textures, player sprites or the
+back-screen fill. Thus the mapped-column cases here are opaque wall columns,
+while the same-owner plane samples remain a separate two-pixel recurrence-origin
+gap. Candidate/reference full-frame hashes match the uninstrumented comparison
+at all four heights. The 104/339 non-plane-buffer scene mismatches remain
+unclassified by this pass trace, and original-executable parity remains open.
+See the [offline pass-tag receipt](../results/moving-sector-reference-plane-final-pass-20261019-v1.json).

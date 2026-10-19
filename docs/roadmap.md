@@ -1039,9 +1039,9 @@ reference plane write and end with mapped column writes. At height 68, 85 of
 101 have that classification, 14 have a different plane owner and two are
 same-owner final plane writes. Both remaining samples start at candidate x=191
 and reference x=192, with equal distance and light selection; the traced
-same-owner gap fell from 194 pixels to two. The mapped-column
-tag does not identify the specific draw primitive, and the adapted PowerShell
-reference does not establish original-executable parity. See the [fidelity
+same-owner gap fell from 194 pixels to two. The initial mapped-column tag grouped draw paths; later pass-level attribution
+below identifies the final BSP wall/plane pass for the candidate-plane subset.
+The adapted PowerShell reference does not establish original-executable parity. See the [fidelity
 notes](rendering-fidelity.md#fixed-point-wall-derived-plane-boundaries--october-19-2026),
 [ledger](ledger.md#fixed-point-wall-derived-plane-boundaries--october-19-2026),
 [untraced report](../results/moving-sector-per-call-plane-wall-boundary-20261019-v1.json)
@@ -1059,3 +1059,19 @@ No live test, game window, input, display or audio device was used. The complete
 local tree remains about 27.74 GB, below the hard 30 GB decimal cap. The branch
 is 32 commits past Preview.8 at this checkpoint; the next
 release threshold is 35 commits.
+### Moving-ceiling final render-pass attribution — October 19, 2026
+
+An isolated reference trace confirms that the 111 candidate-plane mismatch
+pixels at height 34 and 101 at height 68 all finish in the BSP pass. Every
+height-34 case and 85 height-68 cases are opaque wall-column writes; the other
+16 height-68 cases are final plane writes (14 different owner, two same owner).
+No candidate-plane mismatch in this set is finally written by a world sprite,
+masked wall, player sprite, back-screen fill or sky column. The instrumented
+reference retains the same candidate and reference frame hashes as the
+uninstrumented four-height comparison. The remaining non-plane-buffer scene
+differences (104/339), original-executable parity and moving-route fidelity
+remain open. See the [pass-tag receipt](../results/moving-sector-reference-plane-final-pass-20261019-v1.json)
+and the [fidelity note](rendering-fidelity.md#reference-final-render-pass-attribution--october-19-2026).
+No live test or desktop/device interaction was used. The tree remains about
+27.74 GB under the 30 GB cap; the branch is 33 commits past Preview.8, below
+the 35-commit release threshold.

@@ -24,6 +24,8 @@ class ThreeDRenderer {
     [Sector[]] $DiagnosticPlaneOwners
     [byte[]] $DiagnosticPlaneSurfaceTypes
     [byte[]] $DiagnosticFinalWriterTypes
+    [byte[]] $DiagnosticFinalRenderPassTypes
+    [byte] $DiagnosticCurrentRenderPassType
     [int[]] $DiagnosticPlaneDistanceData
     [int[]] $DiagnosticPlaneXFracData
     [int[]] $DiagnosticPlaneYFracData
@@ -67,6 +69,7 @@ function Add-PlaneOwnerWrites([string]$text,[string]$methodStart,[string]$method
         return $indent+'$this.DiagnosticPlaneOwners[$pos] = $sector'+$nl+
             $indent+'$this.DiagnosticPlaneSurfaceTypes[$pos] = '+$surfaceType+$nl+
             $indent+'$this.DiagnosticFinalWriterTypes[$pos] = 1'+$nl+
+            $indent+'$this.DiagnosticFinalRenderPassTypes[$pos] = $this.DiagnosticCurrentRenderPassType'+$nl+
             $indent+'$this.DiagnosticPlaneDistanceData[$pos] = [Fixed]::ToInt32Unchecked((([long]$heightData * [long]$localPlaneYSlope[$y]) -shr $fracBits))'+$nl+
             $indent+'$this.DiagnosticPlaneXFracData[$pos] = $xFracData'+$nl+
             $indent+'$this.DiagnosticPlaneYFracData[$pos] = $yFracData'+$nl+
@@ -102,7 +105,7 @@ function Add-FinalWriterMarks([string]$text,[string]$methodStart,[string]$method
     $evaluator=[Text.RegularExpressions.MatchEvaluator]{
         param($match)
         $indent=$match.Groups['indent'].Value
-        return $match.Value+$nl+$indent+'$this.DiagnosticFinalWriterTypes[$pos] = '+$writerType
+        return $match.Value+$nl+$indent+'$this.DiagnosticFinalWriterTypes[$pos] = '+$writerType+$nl+$indent+'$this.DiagnosticFinalRenderPassTypes[$pos] = $this.DiagnosticCurrentRenderPassType'
     }
     $segment=[regex]::Replace($segment,$pattern,$evaluator)
     return $text.Substring(0,$start)+$segment+$text.Substring($end)
@@ -111,6 +114,40 @@ function Add-FinalWriterMarks([string]$text,[string]$methodStart,[string]$method
 $source=Add-FinalWriterMarks $source '    hidden [void] DrawColumnData(' '    [void] DrawColumn(' 2
 $source=Add-FinalWriterMarks $source '    hidden [void] DrawColumnTranslationData(' '    [void] DrawColumnTranslation(' 2
 $source=Add-FinalWriterMarks $source '    [void] DrawFuzzColumn(' '    [void] DrawSkyColumn(' 3
+
+function Add-RenderPassMarker([string]$text,[string]$call,[byte]$passType){
+    $pattern='(?m)^(?<indent>[ \t]*)'+[regex]::Escape($call)+'\r?$'
+    $matches=[regex]::Matches($text,$pattern)
+    if($matches.Count -ne 1){throw "Expected one render-pass call for $call, found $($matches.Count)."}
+    $evaluator=[Text.RegularExpressions.MatchEvaluator]{
+        param($match)
+        $indent=$match.Groups['indent'].Value
+        return $indent+'$this.DiagnosticCurrentRenderPassType = '+$passType+$nl+$match.Value
+    }
+    return [regex]::Replace($text,$pattern,$evaluator)
+}
+
+$source=Add-RenderPassMarker $source '$this.RenderBspNode($this.world.Map.Nodes.Length - 1)' 1
+$source=Add-RenderPassMarker $source '$this.RenderSprites()' 2
+$source=Add-RenderPassMarker $source '$this.RenderMaskedTextures()' 3
+$source=Add-RenderPassMarker $source '$this.DrawPlayerSprites($player)' 4
+$source=Add-RenderPassMarker $source '$this.FillBackScreen()' 5
+
+$skyStart=$source.IndexOf('    [void] DrawSkyColumn(',[StringComparison]::Ordinal)
+$skyEnd=$source.IndexOf('    [void] DrawMaskedColumn(', $skyStart,[StringComparison]::Ordinal)
+if($skyStart -lt 0 -or $skyEnd -lt 0){throw 'Could not isolate DrawSkyColumn.'}
+$skySegment=$source.Substring($skyStart,$skyEnd-$skyStart)
+$skyCall='$this.DrawColumnData($source[0], $this.defaultColorMap, $x, $y1, $y2, $this.skyInvScale.Data, $this.skyTextureAlt.Data)'
+$skyPattern='(?m)^(?<indent>[ \t]*)'+[regex]::Escape($skyCall)+'\r?$'
+$skyMatches=[regex]::Matches($skySegment,$skyPattern)
+if($skyMatches.Count -ne 1){throw "Expected one sky draw call, found $($skyMatches.Count)."}
+$skyEvaluator=[Text.RegularExpressions.MatchEvaluator]{
+    param($match)
+    $indent=$match.Groups['indent'].Value
+    return $indent+'[byte]$diagnosticPriorPass = $this.DiagnosticCurrentRenderPassType'+$nl+$indent+'$this.DiagnosticCurrentRenderPassType = 6'+$nl+$match.Value+$nl+$indent+'$this.DiagnosticCurrentRenderPassType = $diagnosticPriorPass'
+}
+$skySegment=[regex]::Replace($skySegment,$skyPattern,$skyEvaluator)
+$source=$source.Substring(0,$skyStart)+$skySegment+$source.Substring($skyEnd)
 [IO.File]::WriteAllText($target,$source,[Text.UTF8Encoding]::new($false))
 [pscustomobject]@{
     OutputRoot=$outputRoot
@@ -118,5 +155,5 @@ $source=Add-FinalWriterMarks $source '    [void] DrawFuzzColumn(' '    [void] Dr
     SourceSha256=(Get-FileHash -LiteralPath $target).Hash
     CeilingWriteLoops=4
     FloorWriteLoops=4
-    Meaning='Isolated copy only. Records the reference sample initialization column and previous-column reuse branch, row distance, per-pixel fractions, selected light map, flat texel, owner and later mapped-column or fuzz writes; it does not identify every primitive compositor path.'
+    Meaning='Isolated copy only. Records reference plane samples and owner, mapped-column or fuzz writes, and the final render pass: BSP, world sprites, masked textures, player sprites, back-screen fill, or sky.'
 }

@@ -14,6 +14,16 @@ param(
     [ValidateRange(-4096,4096)][int[]]$Heights = @(0, 6, 34, 68)
 )
 
+$referenceRenderPassNames = @{
+    '0' = 'Unmarked'
+    '1' = 'BSP traversal'
+    '2' = 'World sprites'
+    '3' = 'Masked textures'
+    '4' = 'Player sprites'
+    '5' = 'Back-screen fill'
+    '6' = 'Sky column'
+}
+
 function Get-FastPlaneSample {
     param(
         [hashtable]$Context,
@@ -175,7 +185,8 @@ $sourcePaths = @(
     'src/GameHost.ps1',
     [IO.Path]::GetRelativePath($root, $referenceRendererSource).Replace('\', '/'),
     'src/ManagedDoom/Video/ThreeDRenderer.sb.ps1',
-    'scripts/Compare-MovingSectorHeightSweep.ps1'
+    'scripts/Compare-MovingSectorHeightSweep.ps1',
+    'scripts/Prepare-ReferencePlaneOwnerDiagnosticSource.ps1'
 )
 $sourceHashes = @{}
 foreach ($path in $sourcePaths) {
@@ -219,6 +230,7 @@ try {
     $hasReferencePlaneOwnerFields = $null -ne $reference3D.GetType().GetProperty('DiagnosticPlaneOwners') -and
         $null -ne $reference3D.GetType().GetProperty('DiagnosticPlaneSurfaceTypes') -and
         $null -ne $reference3D.GetType().GetProperty('DiagnosticFinalWriterTypes') -and
+        $null -ne $reference3D.GetType().GetProperty('DiagnosticFinalRenderPassTypes') -and
         $null -ne $reference3D.GetType().GetProperty('DiagnosticPlaneDistanceData') -and
         $null -ne $reference3D.GetType().GetProperty('DiagnosticPlaneXFracData') -and
         $null -ne $reference3D.GetType().GetProperty('DiagnosticPlaneYFracData') -and
@@ -237,6 +249,7 @@ try {
         $reference3D.DiagnosticPlaneOwners = [Sector[]]::new(320 * 200)
         $reference3D.DiagnosticPlaneSurfaceTypes = [byte[]]::new(320 * 200)
         $reference3D.DiagnosticFinalWriterTypes = [byte[]]::new(320 * 200)
+        $reference3D.DiagnosticFinalRenderPassTypes = [byte[]]::new(320 * 200)
         $reference3D.DiagnosticPlaneDistanceData = [int[]]::new(320 * 200)
         $reference3D.DiagnosticPlaneXFracData = [int[]]::new(320 * 200)
         $reference3D.DiagnosticPlaneYFracData = [int[]]::new(320 * 200)
@@ -291,6 +304,7 @@ try {
             [Array]::Clear($reference3D.DiagnosticPlaneOwners, 0, $reference3D.DiagnosticPlaneOwners.Length)
             [Array]::Clear($reference3D.DiagnosticPlaneSurfaceTypes, 0, $reference3D.DiagnosticPlaneSurfaceTypes.Length)
             [Array]::Clear($reference3D.DiagnosticFinalWriterTypes, 0, $reference3D.DiagnosticFinalWriterTypes.Length)
+            [Array]::Clear($reference3D.DiagnosticFinalRenderPassTypes, 0, $reference3D.DiagnosticFinalRenderPassTypes.Length)
             [Array]::Clear($reference3D.DiagnosticPlaneDistanceData, 0, $reference3D.DiagnosticPlaneDistanceData.Length)
             [Array]::Clear($reference3D.DiagnosticPlaneXFracData, 0, $reference3D.DiagnosticPlaneXFracData.Length)
             [Array]::Clear($reference3D.DiagnosticPlaneYFracData, 0, $reference3D.DiagnosticPlaneYFracData.Length)
@@ -324,6 +338,7 @@ try {
         $candidatePlaneMismatchReferenceFinalFuzzWrites = 0
         $candidatePlaneMismatchReferenceFinalUnmarkedWrites = 0
         $candidatePlaneMismatchSameOwnerFinalPlaneWrites = 0
+        $candidatePlaneMismatchFinalRenderPassCounts = @{}
         $referencePlaneOwnerPairCounts = @{}
         $planeSampleCounts = [ordered]@{
             SameOwnerSamples = 0
@@ -375,6 +390,9 @@ try {
                         $referencePosition = $x * 200 + $y
                         $referenceOwner = $reference3D.DiagnosticPlaneOwners[$referencePosition]
                         if ($planeId -gt 0) {
+                            [string]$renderPassKey = [string][int]$reference3D.DiagnosticFinalRenderPassTypes[$referencePosition]
+                            if ($candidatePlaneMismatchFinalRenderPassCounts.ContainsKey($renderPassKey)) { $candidatePlaneMismatchFinalRenderPassCounts[$renderPassKey]++ }
+                            else { $candidatePlaneMismatchFinalRenderPassCounts[$renderPassKey] = 1 }
                             switch ([int]$reference3D.DiagnosticFinalWriterTypes[$referencePosition]) {
                                 1 { $candidatePlaneMismatchReferenceFinalPlaneWrites++ }
                                 2 { $candidatePlaneMismatchReferenceFinalColumnWrites++ }
@@ -558,6 +576,11 @@ try {
             if ($candidatePlaneMismatchReferenceFinalPlaneWrites + $candidatePlaneMismatchReferenceFinalColumnWrites + $candidatePlaneMismatchReferenceFinalFuzzWrites + $candidatePlaneMismatchReferenceFinalUnmarkedWrites -ne $candidatePlaneMismatchPixels) {
                 throw "Reference final-writer classes did not reconcile at ceiling height $height."
             }
+            $candidatePlaneMismatchFinalRenderPassTotal = 0
+            foreach ($renderPassCount in $candidatePlaneMismatchFinalRenderPassCounts.Values) { $candidatePlaneMismatchFinalRenderPassTotal += [int]$renderPassCount }
+            if ($candidatePlaneMismatchFinalRenderPassTotal -ne $candidatePlaneMismatchPixels) {
+                throw "Reference final render-pass classes did not reconcile at ceiling height $height."
+            }
             if ($planeSampleCounts.SameOwnerSamples -ne $candidatePlaneMismatchSameOwnerFinalPlaneWrites) {
                 throw "Same-owner plane sample counts did not reconcile at ceiling height $height."
             }
@@ -603,6 +626,15 @@ try {
             CandidatePlaneMismatchReferenceFinalFuzzWrites = $candidatePlaneMismatchReferenceFinalFuzzWrites
             CandidatePlaneMismatchReferenceFinalUnmarkedWrites = $candidatePlaneMismatchReferenceFinalUnmarkedWrites
             CandidatePlaneMismatchSameOwnerFinalPlaneWrites = $candidatePlaneMismatchSameOwnerFinalPlaneWrites
+            CandidatePlaneMismatchReferenceFinalRenderPasses = @(
+                foreach ($passKey in @($candidatePlaneMismatchFinalRenderPassCounts.Keys | Sort-Object { [int]$_ })) {
+                    [ordered]@{
+                        PassType = [int]$passKey
+                        PassName = $referenceRenderPassNames[[string][int]$passKey]
+                        MismatchPixels = $candidatePlaneMismatchFinalRenderPassCounts[$passKey]
+                    }
+                }
+            )
             SameOwnerPlaneSampleComparisons = $planeSampleCounts
             SameOwnerPlaneSampleExamples = $planeSampleExamples.ToArray()
             ReferencePlaneWriteOwnerPairs = @(
@@ -722,6 +754,7 @@ try {
         ReferenceEngineBundlePath = [IO.Path]::GetRelativePath($root, $bundle).Replace('\', '/')
         ReferenceEngineBundleSha256 = (Get-FileHash -LiteralPath $bundle).Hash
         ReferencePlaneOwnershipCaptured = [bool]$CaptureReferencePlaneOwners
+        ReferenceFinalRenderPassDefinitions = $referenceRenderPassNames
         OnlyChangedSectorCeiling = $true
         OtherSimulationStateHeldFixed = $true
         Reference = 'Locally adapted PowerShell ManagedDoom ThreeDRenderer'
@@ -734,8 +767,9 @@ try {
         DiagnosticImages = $diagnosticImages.ToArray()
         Error = $null
         Interpretation = 'A counterfactual surface-fidelity comparison, not a movement/progression test, original-executable parity result, or performance measurement.'
-        CandidateOwnershipInterpretation = 'Plane-buffer counts classify the candidate plane ID at mismatch coordinates; a later actor may overlay that plane. The finite-depth count does not distinguish walls from sprites.'
-        ReferencePlaneWritesInterpretation = 'Plane ownership records the last reference floor/ceiling write. Final-writer tags distinguish that plane write from later mapped-column writes or fuzz writes; unmarked writers may include other compositor paths.'
+        CandidateOwnershipInterpretation = 'Plane-buffer counts classify the candidate plane ID at mismatch coordinates; the separate final-render-pass tags identify which reference render pass supplied the final pixel.'
+        ReferencePlaneWritesInterpretation = 'Plane ownership records the last reference floor/ceiling write. Final-writer tags distinguish plane, mapped-column and fuzz writes; final-render-pass tags distinguish BSP traversal, world sprites, masked textures, player sprites, back-screen fill and sky columns.'
+        ReferenceFinalRenderPassInterpretation = 'Within BSP traversal, a final plane write is a plane sampler output and a mapped-column write is an opaque wall column; sky columns are tagged separately. Later pass tags distinguish world sprites, masked textures, player sprites and back-screen fill.'
         PlaneSampleInterpretation = 'Candidate plane fractions, recurrence origins and reuse flags are captured from the production per-call plane sampler. Reference fractions, distance, light bin and flat texel are recorded at writes. Candidate frame bytes may include later overlays.'
         PlaneMathInterpretation = 'Plane table and per-column fixed sine parity are compared after the final full-width candidate/reference render; this does not compare per-pixel plane fraction recurrence or light selection.'
     }
