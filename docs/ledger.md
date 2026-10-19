@@ -7092,3 +7092,24 @@ records the release target, asset hashes, clean manifest verification and
 local-tree measurement. The current local tree remains below the
 30,000,000,000-byte cap; the next cumulative release is due after 35 commits
 from Preview.9.
+
+### 2026-10-19 — Check candidate plane sample sides at owner segments
+
+Extended the offline moving-sector receipt with each mismatching candidate
+plane's fixed-point world sample and its signed side relative to the segment
+that last assigned the plane. All 14 height-68 samples are on the same side of
+their segment as the camera; none crosses that segment. This rejects a simple
+plane-depth overrun across the candidate owner line as a common explanation.
+The adapted reference still finishes with S18 floor for 13 candidate S19-floor
+pixels and S60 ceiling for one candidate S20-ceiling pixel. The trace cannot
+establish which owner matches the original executable, so production remains
+unchanged. Candidate/reference frame hashes match the preceding diagnostic at
+all heights. Mapping both candidate and reference plane sample coordinates
+through the map BSP resolves all 14 pixels to S21 (floor 32, ceiling 88),
+while both captured renderer owners are floor 0 or ceiling 152. This confirms
+that both projected plane spans reach a different-height subsector at these
+sample coordinates; it does not tell us which pixel output matches the
+original executable. The [receipt](../results/moving-sector-portal-owner-segments-20261019-v2.json)
+pins the world coordinates, BSP sectors, and segment-side values. This is
+headless saved-replay work only; no live tests or desktop/device interaction
+were used.

@@ -1420,11 +1420,32 @@ present for all 14 pixels. Heights 0 and 6 remain exact, height 34 remains at
 four scene differences with no plane-owner mismatches, and height 68 remains
 at 353 scene differences.
 
-This narrows the residual to plane coverage and owner selection around
-two-sided portal edges; it does not establish a general owner-selection rule.
+This shows differing owner assignments on spans adjacent to two-sided portal
+edges, but by itself does not establish that the candidate is overfilling the
+boundary or that the reference owner is correct.
 Production rendering is unchanged. The diagnostic and uninstrumented
 production comparison have identical candidate and reference frame hashes at
 all four heights. See the [saved-replay receipt](../results/moving-sector-portal-owner-segments-20261019-v1.json).
 This headless PowerShell reference comparison does not establish
 original-executable parity or broad moving-world qualification. No live tests,
 desktop, display, input or audio device were used.
+
+### World-space owner-segment side check — October 19, 2026
+
+The 14 candidate plane intersections were reconstructed from the recorded
+per-pixel fixed-point plane samples and compared with the traced segment lines.
+All 14 intersections are on the same side of their owner segment as the
+camera; none crosses that segment. This rejects a simple explanation that the
+candidate plane sample crosses its own segment. Mapping both candidate and
+reference plane sample coordinates through the map BSP resolves all 14 to S21,
+whose floor and ceiling are at 32 and 88 units. The recorded candidate and
+reference surfaces are floor 0 for 13 pixels and ceiling 152 for one pixel;
+neither recorded owner is S21. This indicates that both renderers' projected
+plane spans reach another-height subsector at these coordinates. The candidate
+still assigns S19 floor where the adapted reference finishes with S18 floor at
+13 pixels, and S20 ceiling where it finishes with S60 ceiling at one pixel.
+This comparison cannot determine which output matches the original executable,
+so no production correction is justified from this evidence. See the
+[world-space receipt](../results/moving-sector-portal-owner-segments-20261019-v2.json).
+The headless saved-replay and local PowerShell reference limits still apply;
+no live tests or desktop/device interaction were used.

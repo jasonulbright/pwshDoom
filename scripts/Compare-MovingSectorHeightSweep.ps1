@@ -397,6 +397,17 @@ try {
             CandidatePlaneOwnerSegmentTraceMissing = 0
             CandidatePlaneOwnerSegmentTraceFound = 0
             CandidatePlaneOwnerSegmentFrontMatchesPlane = 0
+            CandidatePlaneSampleOppositeOwnerSegmentSide = 0
+            CandidatePlaneSampleSameOwnerSegmentSide = 0
+            CandidatePlaneSampleOnOwnerSegmentLine = 0
+            CandidatePlaneSampleProjectionWithinOwnerSegment = 0
+            CandidatePlaneSampleProjectionOutsideOwnerSegment = 0
+            CandidatePlaneSampleMapSectorMatchesPlane = 0
+            CandidatePlaneSampleMapSectorMatchesReferenceOwner = 0
+            CandidatePlaneSampleMapSectorMatchesNeitherOwner = 0
+            ReferencePlaneSampleMapSectorMatchesPlane = 0
+            ReferencePlaneSampleMapSectorMatchesReferenceOwner = 0
+            ReferencePlaneSampleMapSectorMatchesNeitherOwner = 0
         }
         $referencePlaneOwnerPairCounts = @{}
         $planeSampleCounts = [ordered]@{
@@ -711,6 +722,52 @@ try {
                                             [int]$ownerSegmentBackSectorIndex = -1
                                             [int]$ownerSegmentLineFlags = -1
                                             $ownerSegmentTrace = $null
+                                            $ownerSegmentPosition = $null
+                                            $candidateMismatchPlaneSample = Get-FastPlaneSample $context $x $y $planeId $candidateViewXData $candidateViewYData $candidateViewZData $candidateViewAngleData $candidateExtraLight $candidateFixedColorMap
+                                            [double]$candidatePlaneSampleWorldX = $candidateMismatchPlaneSample.XFracData / 65536.0
+                                            [double]$candidatePlaneSampleWorldY = $candidateMismatchPlaneSample.YFracData / 65536.0
+                                            $candidatePlaneSampleSubsector = [Geometry]::PointInSubsector(
+                                                [Fixed]::new([int]$candidateMismatchPlaneSample.XFracData),
+                                                [Fixed]::new([int]$candidateMismatchPlaneSample.YFracData),
+                                                $game.World.Map)
+                                            [int]$candidatePlaneSampleMapSectorIndex = -1
+                                            for ($sampleSectorIndex = 0; $sampleSectorIndex -lt $game.World.Map.Sectors.Length; $sampleSectorIndex++) {
+                                                if ([object]::ReferenceEquals($candidatePlaneSampleSubsector.Sector, $game.World.Map.Sectors[$sampleSectorIndex])) {
+                                                    $candidatePlaneSampleMapSectorIndex = $sampleSectorIndex
+                                                    break
+                                                }
+                                            }
+                                            if ($candidatePlaneSampleMapSectorIndex -eq $candidateSectorIndex) {
+                                                $candidatePlaneMismatchOwnerSegmentCounts.CandidatePlaneSampleMapSectorMatchesPlane++
+                                            }
+                                            if ($candidatePlaneSampleMapSectorIndex -eq $referenceOwnerSectorIndex) {
+                                                $candidatePlaneMismatchOwnerSegmentCounts.CandidatePlaneSampleMapSectorMatchesReferenceOwner++
+                                            }
+                                            if ($candidatePlaneSampleMapSectorIndex -ne $candidateSectorIndex -and
+                                                $candidatePlaneSampleMapSectorIndex -ne $referenceOwnerSectorIndex) {
+                                                $candidatePlaneMismatchOwnerSegmentCounts.CandidatePlaneSampleMapSectorMatchesNeitherOwner++
+                                            }
+                                            $referencePlaneSampleSubsector = [Geometry]::PointInSubsector(
+                                                [Fixed]::new([int]$reference3D.DiagnosticPlaneXFracData[$referencePosition]),
+                                                [Fixed]::new([int]$reference3D.DiagnosticPlaneYFracData[$referencePosition]),
+                                                $game.World.Map)
+                                            [int]$referencePlaneSampleMapSectorIndex = -1
+                                            for ($sampleSectorIndex = 0; $sampleSectorIndex -lt $game.World.Map.Sectors.Length; $sampleSectorIndex++) {
+                                                if ([object]::ReferenceEquals($referencePlaneSampleSubsector.Sector, $game.World.Map.Sectors[$sampleSectorIndex])) {
+                                                    $referencePlaneSampleMapSectorIndex = $sampleSectorIndex
+                                                    break
+                                                }
+                                            }
+                                            if ($referencePlaneSampleMapSectorIndex -eq $candidateSectorIndex) {
+                                                $candidatePlaneMismatchOwnerSegmentCounts.ReferencePlaneSampleMapSectorMatchesPlane++
+                                            }
+                                            if ($referencePlaneSampleMapSectorIndex -eq $referenceOwnerSectorIndex) {
+                                                $candidatePlaneMismatchOwnerSegmentCounts.ReferencePlaneSampleMapSectorMatchesReferenceOwner++
+                                            }
+                                            if ($referencePlaneSampleMapSectorIndex -ne $candidateSectorIndex -and
+                                                $referencePlaneSampleMapSectorIndex -ne $referenceOwnerSectorIndex) {
+                                                $candidatePlaneMismatchOwnerSegmentCounts.ReferencePlaneSampleMapSectorMatchesNeitherOwner++
+                                            }
                                             if ($ownerSegmentEncoded -le 0 -or $ownerSegmentIndex -ge $game.World.Map.Segs.Length) {
                                                 $candidatePlaneMismatchOwnerSegmentCounts.CandidatePlaneOwnerSegmentMissing++
                                             } else {
@@ -720,6 +777,50 @@ try {
                                                 $ownerSegmentFrontSectorIndex = $context.SegmentMetadata[$ownerSegmentMetadataOffset + 1]
                                                 $ownerSegmentBackSectorIndex = $context.SegmentMetadata[$ownerSegmentMetadataOffset + 2]
                                                 $ownerSegmentLineFlags = $context.SegmentMetadata[$ownerSegmentMetadataOffset + 3]
+                                                [int]$ownerSegmentGeometryOffset = $ownerSegmentIndex * 6
+                                                [double]$ownerSegmentX1 = $context.SegmentGeometry[$ownerSegmentGeometryOffset]
+                                                [double]$ownerSegmentY1 = $context.SegmentGeometry[$ownerSegmentGeometryOffset + 1]
+                                                [double]$ownerSegmentX2 = $context.SegmentGeometry[$ownerSegmentGeometryOffset + 2]
+                                                [double]$ownerSegmentY2 = $context.SegmentGeometry[$ownerSegmentGeometryOffset + 3]
+                                                [double]$ownerSegmentDx = $ownerSegmentX2 - $ownerSegmentX1
+                                                [double]$ownerSegmentDy = $ownerSegmentY2 - $ownerSegmentY1
+                                                [double]$ownerSegmentLengthSquared = $ownerSegmentDx * $ownerSegmentDx + $ownerSegmentDy * $ownerSegmentDy
+                                                [double]$ownerSegmentCameraParameter = (($candidateCamera.X - $ownerSegmentX1) * $ownerSegmentDx +
+                                                    ($candidateCamera.Y - $ownerSegmentY1) * $ownerSegmentDy) / $ownerSegmentLengthSquared
+                                                [double]$ownerSegmentSampleParameter = (($candidatePlaneSampleWorldX - $ownerSegmentX1) * $ownerSegmentDx +
+                                                    ($candidatePlaneSampleWorldY - $ownerSegmentY1) * $ownerSegmentDy) / $ownerSegmentLengthSquared
+                                                [double]$ownerSegmentCameraCross = $ownerSegmentDx * ($candidateCamera.Y - $ownerSegmentY1) -
+                                                    $ownerSegmentDy * ($candidateCamera.X - $ownerSegmentX1)
+                                                [double]$ownerSegmentSampleCross = $ownerSegmentDx * ($candidatePlaneSampleWorldY - $ownerSegmentY1) -
+                                                    $ownerSegmentDy * ($candidatePlaneSampleWorldX - $ownerSegmentX1)
+                                                [bool]$sampleOppositeOwnerSegmentSide = $ownerSegmentCameraCross * $ownerSegmentSampleCross -lt 0
+                                                if ([Math]::Abs($ownerSegmentSampleCross) -lt 0.000001) {
+                                                    $candidatePlaneMismatchOwnerSegmentCounts.CandidatePlaneSampleOnOwnerSegmentLine++
+                                                } elseif ($sampleOppositeOwnerSegmentSide) {
+                                                    $candidatePlaneMismatchOwnerSegmentCounts.CandidatePlaneSampleOppositeOwnerSegmentSide++
+                                                } else {
+                                                    $candidatePlaneMismatchOwnerSegmentCounts.CandidatePlaneSampleSameOwnerSegmentSide++
+                                                }
+                                                [bool]$sampleProjectionWithinOwnerSegment = $ownerSegmentSampleParameter -ge 0 -and $ownerSegmentSampleParameter -le 1
+                                                if ($sampleProjectionWithinOwnerSegment) {
+                                                    $candidatePlaneMismatchOwnerSegmentCounts.CandidatePlaneSampleProjectionWithinOwnerSegment++
+                                                } else {
+                                                    $candidatePlaneMismatchOwnerSegmentCounts.CandidatePlaneSampleProjectionOutsideOwnerSegment++
+                                                }
+                                                $ownerSegmentPosition = [ordered]@{
+                                                    Vertex1X = $ownerSegmentX1
+                                                    Vertex1Y = $ownerSegmentY1
+                                                    Vertex2X = $ownerSegmentX2
+                                                    Vertex2Y = $ownerSegmentY2
+                                                    CameraSideCrossProduct = $ownerSegmentCameraCross
+                                                    PlaneSampleSideCrossProduct = $ownerSegmentSampleCross
+                                                    PlaneSampleOppositeCameraSide = $sampleOppositeOwnerSegmentSide
+                                                    CameraProjectionParameter = $ownerSegmentCameraParameter
+                                                    PlaneSampleProjectionParameter = $ownerSegmentSampleParameter
+                                                    PlaneSampleProjectionWithinSegment = $sampleProjectionWithinOwnerSegment
+                                                    PlaneSampleWorldX = $candidatePlaneSampleWorldX
+                                                    PlaneSampleWorldY = $candidatePlaneSampleWorldY
+                                                }
                                                 if ($ownerSegmentFrontSectorIndex -eq $candidateSectorIndex) {
                                                     $candidatePlaneMismatchOwnerSegmentCounts.CandidatePlaneOwnerSegmentFrontMatchesPlane++
                                                 }
@@ -766,6 +867,18 @@ try {
                                                     CandidatePlaneOwnerSegmentLineFlags = $ownerSegmentLineFlags
                                                     CandidatePlaneOwnerSegmentFrontMatchesPlane = ($ownerSegmentFrontSectorIndex -eq $candidateSectorIndex)
                                                     CandidatePlaneOwnerSegmentTrace = $ownerSegmentTrace
+                                                    CandidatePlaneOwnerSegmentPosition = $ownerSegmentPosition
+                                                    CandidatePlaneSampleMapSectorIndex = $candidatePlaneSampleMapSectorIndex
+                                                    CandidatePlaneSampleMapSectorMatchesPlane = ($candidatePlaneSampleMapSectorIndex -eq $candidateSectorIndex)
+                                                    CandidatePlaneSampleMapSectorMatchesReferenceOwner = ($candidatePlaneSampleMapSectorIndex -eq $referenceOwnerSectorIndex)
+                                                    CandidatePlaneSampleMapSectorMatchesNeitherOwner = ($candidatePlaneSampleMapSectorIndex -ne $candidateSectorIndex -and $candidatePlaneSampleMapSectorIndex -ne $referenceOwnerSectorIndex)
+                                                    CandidatePlaneSampleMapSectorFloorHeightData = if ($candidatePlaneSampleMapSectorIndex -ge 0) { $context.SectorFloorHeightData[$candidatePlaneSampleMapSectorIndex] } else { -1 }
+                                                    CandidatePlaneSampleMapSectorCeilingHeightData = if ($candidatePlaneSampleMapSectorIndex -ge 0) { $context.SectorCeilingHeightData[$candidatePlaneSampleMapSectorIndex] } else { -1 }
+                                                    CandidatePlaneSampleMapSectorFloorFlatIndex = if ($candidatePlaneSampleMapSectorIndex -ge 0) { $context.SectorFloorFlatIndex[$candidatePlaneSampleMapSectorIndex] } else { -1 }
+                                                    CandidatePlaneSampleMapSectorCeilingFlatIndex = if ($candidatePlaneSampleMapSectorIndex -ge 0) { $context.SectorCeilingFlatIndex[$candidatePlaneSampleMapSectorIndex] } else { -1 }
+                                                    ReferencePlaneSampleMapSectorIndex = $referencePlaneSampleMapSectorIndex
+                                                    ReferencePlaneSampleMapSectorFloorHeightData = if ($referencePlaneSampleMapSectorIndex -ge 0) { $context.SectorFloorHeightData[$referencePlaneSampleMapSectorIndex] } else { -1 }
+                                                    ReferencePlaneSampleMapSectorCeilingHeightData = if ($referencePlaneSampleMapSectorIndex -ge 0) { $context.SectorCeilingHeightData[$referencePlaneSampleMapSectorIndex] } else { -1 }
                                                     CandidateSectorFloorHeightData = $context.SectorFloorHeightData[$candidateSectorIndex]
                                                     ReferenceSectorFloorHeightData = $context.SectorFloorHeightData[$referenceOwnerSectorIndex]
                                                     CandidateSectorCeilingHeightData = $context.SectorCeilingHeightData[$candidateSectorIndex]
