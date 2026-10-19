@@ -28,8 +28,10 @@ adding the recovery sidecar. The ZIP is 1,865,826 bytes with SHA-256
 manifest-pinned payloads; all 575 hashes match after extraction and the
 adjacent checksum matches. Extracted offline suites pass 96 settings, 143
 menu/60 static-screen, 286 palette, 24 masked-wall, 18 projection and 18
-input-journal checks. The menu/palette fixtures read the installed IWAD in
-memory, but no game host, display, audio device, startup smoke or route ran.
+input-journal checks, plus 69 campaign-transition, 20 save/finale-edge and 27
+synthetic audio-mixer checks. The menu/palette/campaign/save fixtures read the
+installed IWAD in memory, but no game host, display, audio device, startup
+smoke or route ran.
 Runtime crash recovery is still unverified. The [receipt](../results/preview8-recovery-candidate-validation-20261019.json)
 records the public asset as unchanged and the repository below its 30 GB cap.
 
