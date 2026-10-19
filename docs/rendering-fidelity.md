@@ -1202,3 +1202,23 @@ A current-source lighting-table check also matches all 768 projected-scale and
 bytes). It verifies table contents, not the per-pixel bin selection in the
 rasterizer. The [receipt](../results/render-lighting-tables-current-20261019.json)
 pins source, harness, bundle and IWAD hashes.
+### Reference plane-write ownership probe — October 19, 2026
+
+An isolated copy of the reference renderer records the last floor or ceiling
+plane write at each pixel while replaying the same frozen E1M1 state. This is
+a record of plane writes, not final visible ownership: later walls, sprites or
+the weapon may overwrite a pixel.
+
+At ceiling height 34, 68 of 205 candidate plane mismatches had a reference
+plane write, and all 68 were sector 22 floor on both sides; 137 had no
+reference plane write. At height 68, of 1,012 candidate plane mismatches, 666
+had a write for the same sector and surface, 134 had a different reference
+sector or surface, and 212 had no reference plane write. Another 355
+non-plane candidate mismatches had a reference plane write. The detailed
+owner pairs are in the [instrumented receipt](../results/moving-sector-reference-plane-writes-verified-20261019-v2.json).
+
+The diagnostic copy preserves both renderers' full-frame SHA-256 values at
+all four ceiling heights; the [control receipt](../results/moving-sector-reference-plane-writes-control-20261019-v2.json)
+compares them to an uninstrumented run. This narrows some differences to
+plane visibility or sector ownership. Same-owner plane writes can still have
+been overwritten later, so they do not yet prove texture-sampling error.

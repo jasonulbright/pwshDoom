@@ -1,0 +1,59 @@
+{
+  "SchemaVersion": 1,
+  "FinishedUtc": "2026-10-19T13:43:28.6899859Z",
+  "BaselineReceipt": "results/moving-sector-reference-plane-writes-baseline-20261019-v2.json",
+  "BaselineReceiptSha256": "CDA0B62CD9DD4FAE7F58BFB894F6F6AF6A195D72B3A2FD4CA0675022EEAE1C86",
+  "InstrumentedReceipt": "results/moving-sector-reference-plane-writes-verified-20261019-v2.json",
+  "InstrumentedReceiptSha256": "CAD0D15FCE68319DA1A71FA30E113FF9519C96F37910F12135869799E4C315B4",
+  "BaselineEngineBundleSha256": "2419DC7E6C2008B8B5E70A192296104E780E4AD2679A128AF61FD07C325C96D2",
+  "InstrumentedEngineBundleSha256": "DA27CE6FBCDB86E62ABE7949175EF0B423A82B275F7B8DA83B1AE8B92D7BF9B9",
+  "Rows": [
+    {
+      "CeilingHeight": 0,
+      "CandidateFrameSha256": "2BF8E1C7451C581D5F78A759D51ADB740F8218AC80FB8D2DBA2AC57CB95078F0",
+      "InstrumentedCandidateFrameSha256": "2BF8E1C7451C581D5F78A759D51ADB740F8218AC80FB8D2DBA2AC57CB95078F0",
+      "ReferenceFrameSha256": "6CB42E3F56904BF394B49B4680C1578DA73D9919F243B92EFBC33D670EA2C010",
+      "InstrumentedReferenceFrameSha256": "6CB42E3F56904BF394B49B4680C1578DA73D9919F243B92EFBC33D670EA2C010",
+      "CandidateFrameHashMatches": true,
+      "ReferenceFrameHashMatches": true,
+      "SceneMismatchCountMatches": true
+    },
+    {
+      "CeilingHeight": 6,
+      "CandidateFrameSha256": "925A5841A8F525E85E970BA32A7DAA9A0AF41542A60F43DCF47E0EB097390994",
+      "InstrumentedCandidateFrameSha256": "925A5841A8F525E85E970BA32A7DAA9A0AF41542A60F43DCF47E0EB097390994",
+      "ReferenceFrameSha256": "B7DA72BF29AAB1C42324463E253D6B1F3BD834CB383567E83BE59C35C2841A88",
+      "InstrumentedReferenceFrameSha256": "B7DA72BF29AAB1C42324463E253D6B1F3BD834CB383567E83BE59C35C2841A88",
+      "CandidateFrameHashMatches": true,
+      "ReferenceFrameHashMatches": true,
+      "SceneMismatchCountMatches": true
+    },
+    {
+      "CeilingHeight": 34,
+      "CandidateFrameSha256": "AA1186EC928856A59849F5DD6B604DD5CE71FCA22A27D3DE1853863B795EBE59",
+      "InstrumentedCandidateFrameSha256": "AA1186EC928856A59849F5DD6B604DD5CE71FCA22A27D3DE1853863B795EBE59",
+      "ReferenceFrameSha256": "D158B11218C76C2CE022F612795BC3DECDD0DCA430CE3DFE4699734CA4557806",
+      "InstrumentedReferenceFrameSha256": "D158B11218C76C2CE022F612795BC3DECDD0DCA430CE3DFE4699734CA4557806",
+      "CandidateFrameHashMatches": true,
+      "ReferenceFrameHashMatches": true,
+      "SceneMismatchCountMatches": true
+    },
+    {
+      "CeilingHeight": 68,
+      "CandidateFrameSha256": "F5420F15256FD54CC6498A112957CED3E9B9A914F0DA97A8D7559E7B89134BFD",
+      "InstrumentedCandidateFrameSha256": "F5420F15256FD54CC6498A112957CED3E9B9A914F0DA97A8D7559E7B89134BFD",
+      "ReferenceFrameSha256": "E62E4EF8887421EF900085790CD5793980ACC074E72E29ED10FDE7D4592AB6C8",
+      "InstrumentedReferenceFrameSha256": "E62E4EF8887421EF900085790CD5793980ACC074E72E29ED10FDE7D4592AB6C8",
+      "CandidateFrameHashMatches": true,
+      "ReferenceFrameHashMatches": true,
+      "SceneMismatchCountMatches": true
+    }
+  ],
+  "AllCandidateFrameHashesMatch": true,
+  "AllReferenceFrameHashesMatch": true,
+  "AllSceneMismatchCountsMatch": true,
+  "Meaning": "Confirms that adding reference plane-write buffers to an isolated ThreeDRenderer source copy leaves both renderer frame bytes unchanged at all four tested heights. Stored reference owners are plane writes, not the final visible compositor owners.",
+  "DiagnosticSourcePreparationScript": "scripts/Prepare-ReferencePlaneOwnerDiagnosticSource.ps1",
+  "DiagnosticSourcePreparationScriptSha256": null,
+  "InstrumentedThreeDRendererSourceSha256": "2C24C334928108EC63E273254F013C490D78D20D09FB7ECEA7D2F9B236548672"
+}

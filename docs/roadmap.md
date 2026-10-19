@@ -949,3 +949,11 @@ receipt](../results/moving-sector-e1m1-height-sweep-plane-math-20261019.json).
 A current-source lookup check confirms all 2,816 generated lighting bins match
 the reference palette bytes. This verifies table contents, not each raster
 pixel's bin selection. See the [lighting receipt](../results/render-lighting-tables-current-20261019.json).
+The reference plane-write probe further classifies the moving-ceiling gap:
+at height 34, 137 of 205 candidate plane mismatches had no reference plane
+write; at height 68, 212 of 1,012 had no write, 134 had a different sector
+or surface, and 666 had a same-owner plane write. The instrumented reference
+preserves full-frame hashes against the uninstrumented renderer at all four
+heights. Because a later rendering pass can overwrite a recorded plane write,
+final wall/sprite/weapon ownership remains open. See the [plane-write receipt](../results/moving-sector-reference-plane-writes-verified-20261019-v2.json)
+and [output control](../results/moving-sector-reference-plane-writes-control-20261019-v2.json).

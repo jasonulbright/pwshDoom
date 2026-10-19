@@ -6,6 +6,9 @@ param(
     [Parameter(Mandatory)][string]$Output,
     [string]$Images,
     [string]$Renderer = "$PSScriptRoot/../src/FastRenderer.ps1",
+    [string]$EngineSourceRoot = "$PSScriptRoot/../src/ManagedDoom",
+    [string]$EngineBundleOutput = "$PSScriptRoot/../local/engine-bundle.ps1",
+    [switch]$CaptureReferencePlaneOwners,
     [ValidateRange(2,100000)][int]$InputTic = 315,
     [ValidateRange(0,32767)][int]$SectorIndex = 26,
     [ValidateRange(-4096,4096)][int[]]$Heights = @(0, 6, 34, 68)
@@ -16,6 +19,16 @@ $root = Split-Path $PSScriptRoot
 $Wad = [IO.Path]::GetFullPath($Wad)
 $Replay = [IO.Path]::GetFullPath($Replay)
 $Output = [IO.Path]::GetFullPath($Output)
+$EngineSourceRoot = [IO.Path]::GetFullPath($EngineSourceRoot)
+$EngineBundleOutput = [IO.Path]::GetFullPath($EngineBundleOutput)
+$engineRelative = [IO.Path]::GetRelativePath($root, $EngineSourceRoot)
+$bundleRelative = [IO.Path]::GetRelativePath($root, $EngineBundleOutput)
+if ([IO.Path]::IsPathRooted($engineRelative) -or $engineRelative -eq '..' -or $engineRelative.StartsWith("..$([IO.Path]::DirectorySeparatorChar)") -or
+    [IO.Path]::IsPathRooted($bundleRelative) -or $bundleRelative -eq '..' -or $bundleRelative.StartsWith("..$([IO.Path]::DirectorySeparatorChar)")) {
+    throw 'Engine source and bundle output must remain inside the project.'
+}
+$referenceRendererSource = Join-Path $EngineSourceRoot 'Video/ThreeDRenderer.sb.ps1'
+if (-not (Test-Path -LiteralPath $referenceRendererSource -PathType Leaf)) { throw "Reference renderer source not found: $referenceRendererSource" }
 if (-not (Test-Path -LiteralPath $Wad -PathType Leaf)) { throw "IWAD not found: $Wad" }
 if (-not (Test-Path -LiteralPath $Replay -PathType Leaf)) { throw "Replay not found: $Replay" }
 if (Test-Path -LiteralPath $Output) { throw 'Use a fresh output path.' }
@@ -38,13 +51,14 @@ if ($replayData.PSObject.Properties.Name -notcontains 'InputCommands' -or
     throw 'Replay must contain the requested commands and match the selected IWAD.'
 }
 
-$bundle = & "$PSScriptRoot/Build-EngineBundle.ps1"
+$bundle = & "$PSScriptRoot/Build-EngineBundle.ps1" -SourceRoot $EngineSourceRoot -Output $EngineBundleOutput
 . $bundle
 . $Renderer
 . "$PSScriptRoot/../src/GameHost.ps1"
 $sourcePaths = @(
     [IO.Path]::GetRelativePath($root, [IO.Path]::GetFullPath($Renderer)).Replace('\', '/'),
     'src/GameHost.ps1',
+    [IO.Path]::GetRelativePath($root, $referenceRendererSource).Replace('\', '/'),
     'src/ManagedDoom/Video/ThreeDRenderer.sb.ps1',
     'scripts/Compare-MovingSectorHeightSweep.ps1'
 )
@@ -86,7 +100,18 @@ try {
     $config.video_gamescreensize = 7
     $config.video_gammacorrection = 0
     $reference = [Renderer]::new($config, $content)
-    $context = New-FastRenderContext $content $game.World
+    $reference3D = $reference.ThreeD
+    $hasReferencePlaneOwnerFields = $null -ne $reference3D.GetType().GetProperty('DiagnosticPlaneOwners') -and
+        $null -ne $reference3D.GetType().GetProperty('DiagnosticPlaneSurfaceTypes')
+    if ($CaptureReferencePlaneOwners -and -not $hasReferencePlaneOwnerFields) {
+        throw 'The selected engine source does not contain reference plane-owner diagnostics.'
+    }
+    if ($hasReferencePlaneOwnerFields) {
+        $CaptureReferencePlaneOwners = $true
+        $reference3D.DiagnosticPlaneOwners = [Sector[]]::new(320 * 200)
+        $reference3D.DiagnosticPlaneSurfaceTypes = [byte[]]::new(320 * 200)
+    }
+        $context = New-FastRenderContext $content $game.World
     $baseSnapshot = New-GameRenderSnapshot $game 1
 
     foreach ($height in $Heights) {
@@ -103,6 +128,10 @@ try {
         Set-GameRenderSnapshot $context $snapshot
         Invoke-FastRender $context
         [byte[]]$candidate = $context.Pixels.Clone()
+        if ($CaptureReferencePlaneOwners) {
+            [Array]::Clear($reference3D.DiagnosticPlaneOwners, 0, $reference3D.DiagnosticPlaneOwners.Length)
+            [Array]::Clear($reference3D.DiagnosticPlaneSurfaceTypes, 0, $reference3D.DiagnosticPlaneSurfaceTypes.Length)
+        }
         $reference.RenderGame($game, [Fixed]::One)
         [byte[]]$referencePixels = $reference.Screen.Data.Clone()
 
@@ -113,6 +142,14 @@ try {
         $candidateNonPlaneMismatchPixels = 0
         $candidateDepthWrittenMismatchPixels = 0
         $candidatePlaneMismatchCounts = @{}
+        $referencePlaneWriteMismatchPixels = 0
+        $candidatePlaneMismatchReferencePlaneWrites = 0
+        $candidatePlaneMismatchSameOwnerWrites = 0
+        $candidatePlaneMismatchDifferentOwnerWrites = 0
+        $candidatePlaneMismatchNoReferencePlaneWrite = 0
+        $candidatePlaneMismatchUnknownReferenceOwner = 0
+        $candidateNonPlaneMismatchReferencePlaneWrites = 0
+        $referencePlaneOwnerPairCounts = @{}
         $bounds = [int[]]@(320, 168, -1, -1)
         for ($y = 0; $y -lt 200; $y++) {
             for ($x = 0; $x -lt 320; $x++) {
@@ -121,6 +158,44 @@ try {
                 if ($y -lt 168) {
                     $sceneDifferences++
                     [int]$planeId = $context.Planes[$candidateIndex]
+                    if ($CaptureReferencePlaneOwners) {
+                        $referencePosition = $x * 200 + $y
+                        $referenceOwner = $reference3D.DiagnosticPlaneOwners[$referencePosition]
+                        if ($null -eq $referenceOwner) {
+                            if ($planeId -gt 0) { $candidatePlaneMismatchNoReferencePlaneWrite++ }
+                        } else {
+                            $referencePlaneWriteMismatchPixels++
+                            if ($planeId -gt 0) {
+                                $referenceOwnerSectorIndex = -1
+                                for ($referenceSectorIndex = 0; $referenceSectorIndex -lt $game.World.Map.Sectors.Length; $referenceSectorIndex++) {
+                                    if ([object]::ReferenceEquals($referenceOwner, $game.World.Map.Sectors[$referenceSectorIndex])) {
+                                        $referenceOwnerSectorIndex = $referenceSectorIndex
+                                        break
+                                    }
+                                }
+                                if ($referenceOwnerSectorIndex -lt 0) {
+                                    $candidatePlaneMismatchUnknownReferenceOwner++
+                                } else {
+                                    $candidatePlaneMismatchReferencePlaneWrites++
+                                    $candidateSectorIndex = ($planeId - 1) -shr 1
+                                    $candidateSurfaceType = if ((($planeId - 1) -band 1) -ne 0) { 1 } else { 2 }
+                                    $referenceSurfaceType = [int]$reference3D.DiagnosticPlaneSurfaceTypes[$referencePosition]
+                                    $candidateSurfaceName = if ($candidateSurfaceType -eq 1) { 'Floor' } else { 'Ceiling' }
+                                    $referenceSurfaceName = if ($referenceSurfaceType -eq 1) { 'Floor' } else { 'Ceiling' }
+                                    $pairKey = 'Candidate S{0} {1} -> reference S{2} {3}' -f $candidateSectorIndex,$candidateSurfaceName,$referenceOwnerSectorIndex,$referenceSurfaceName
+                                    if ($referencePlaneOwnerPairCounts.ContainsKey($pairKey)) { $referencePlaneOwnerPairCounts[$pairKey]++ }
+                                    else { $referencePlaneOwnerPairCounts[$pairKey] = 1 }
+                                    if ($candidateSectorIndex -eq $referenceOwnerSectorIndex -and $candidateSurfaceType -eq $referenceSurfaceType) {
+                                        $candidatePlaneMismatchSameOwnerWrites++
+                                    } else {
+                                        $candidatePlaneMismatchDifferentOwnerWrites++
+                                    }
+                                }
+                            } else {
+                                $candidateNonPlaneMismatchReferencePlaneWrites++
+                            }
+                        }
+                    }
                     if ($planeId -gt 0) {
                         $candidatePlaneMismatchPixels++
                         if ($context.Depth[$candidateIndex] -eq [double]::PositiveInfinity) { $candidatePlaneNoDepthMismatchPixels++ }
@@ -138,6 +213,17 @@ try {
         if ($candidatePlaneMismatchPixels + $candidateNonPlaneMismatchPixels -ne $sceneDifferences) {
             throw "Candidate plane ownership did not reconcile at ceiling height $height."
         }
+        if ($CaptureReferencePlaneOwners) {
+            if ($candidatePlaneMismatchReferencePlaneWrites + $candidatePlaneMismatchUnknownReferenceOwner + $candidatePlaneMismatchNoReferencePlaneWrite -ne $candidatePlaneMismatchPixels) {
+                throw "Reference plane-write ownership did not reconcile for candidate planes at ceiling height $height."
+            }
+            if ($candidatePlaneMismatchSameOwnerWrites + $candidatePlaneMismatchDifferentOwnerWrites -ne $candidatePlaneMismatchReferencePlaneWrites) {
+                throw "Reference owner pairs did not reconcile at ceiling height $height."
+            }
+            if ($candidatePlaneMismatchReferencePlaneWrites + $candidatePlaneMismatchUnknownReferenceOwner + $candidateNonPlaneMismatchReferencePlaneWrites -ne $referencePlaneWriteMismatchPixels) {
+                throw "Reference plane-write mismatch counts did not reconcile at ceiling height $height."
+            }
+        }
         $candidatePlaneMismatchSurfaces = @(
             foreach ($planeId in @($candidatePlaneMismatchCounts.Keys | Sort-Object)) {
                 $candidateSectorIndex = ([int]$planeId - 1) -shr 1
@@ -151,6 +237,8 @@ try {
         )
         $heightResults.Add([ordered]@{
             CeilingHeight = $height
+            CandidateFrameSha256 = [Convert]::ToHexString([Security.Cryptography.SHA256]::HashData($candidate))
+            ReferenceFrameSha256 = [Convert]::ToHexString([Security.Cryptography.SHA256]::HashData($referencePixels))
             SceneDifferentIndices = $sceneDifferences
             HudDifferentIndices = $hudDifferences
             SceneMismatchBounds = if ($sceneDifferences) { $bounds } else { @() }
@@ -159,6 +247,18 @@ try {
             CandidateNonPlaneBufferMismatchPixels = $candidateNonPlaneMismatchPixels
             CandidateDepthWrittenMismatchPixels = $candidateDepthWrittenMismatchPixels
             CandidatePlaneBufferMismatchBySurface = $candidatePlaneMismatchSurfaces
+            ReferencePlaneWriteMismatchPixels = $referencePlaneWriteMismatchPixels
+            CandidatePlaneMismatchReferencePlaneWrites = $candidatePlaneMismatchReferencePlaneWrites
+            CandidatePlaneMismatchSameOwnerWrites = $candidatePlaneMismatchSameOwnerWrites
+            CandidatePlaneMismatchDifferentOwnerWrites = $candidatePlaneMismatchDifferentOwnerWrites
+            CandidatePlaneMismatchNoReferencePlaneWrite = $candidatePlaneMismatchNoReferencePlaneWrite
+            CandidatePlaneMismatchUnknownReferenceOwner = $candidatePlaneMismatchUnknownReferenceOwner
+            CandidateNonPlaneMismatchReferencePlaneWrites = $candidateNonPlaneMismatchReferencePlaneWrites
+            ReferencePlaneWriteOwnerPairs = @(
+                foreach ($pairKey in @($referencePlaneOwnerPairCounts.Keys | Sort-Object)) {
+                    [ordered]@{ Pair = $pairKey; MismatchPixels = $referencePlaneOwnerPairCounts[$pairKey] }
+                }
+            )
         })
         $frames[[int]$height] = @{ Candidate = $candidate; Reference = $referencePixels }
     }
@@ -267,6 +367,10 @@ try {
         CandidatePixelsChangedFirstToLast = $candidateChanges
         ReferencePixelsChangedFirstToLast = $referenceChanges
         PlaneMathParity = $planeMathParity
+        ReferenceEngineSourceRoot = [IO.Path]::GetRelativePath($root, $EngineSourceRoot).Replace('\', '/')
+        ReferenceEngineBundlePath = [IO.Path]::GetRelativePath($root, $bundle).Replace('\', '/')
+        ReferenceEngineBundleSha256 = (Get-FileHash -LiteralPath $bundle).Hash
+        ReferencePlaneOwnershipCaptured = [bool]$CaptureReferencePlaneOwners
         OnlyChangedSectorCeiling = $true
         OtherSimulationStateHeldFixed = $true
         Reference = 'Locally adapted PowerShell ManagedDoom ThreeDRenderer'
@@ -280,6 +384,7 @@ try {
         Error = $null
         Interpretation = 'A counterfactual surface-fidelity comparison, not a movement/progression test, original-executable parity result, or performance measurement.'
         CandidateOwnershipInterpretation = 'Plane-buffer counts classify the candidate plane ID at mismatch coordinates; a later actor may overlay that plane. The finite-depth count does not distinguish walls from sprites.'
+        ReferencePlaneWritesInterpretation = 'Reference owner buffers record the last floor/ceiling plane write at a pixel; later walls, sprites or weapons may overwrite it, so this is not the final visible owner.'
         PlaneMathInterpretation = 'Plane table and per-column fixed sine parity are compared after the final full-width candidate/reference render; this does not compare per-pixel plane fraction recurrence or light selection.'
     }
     $currentHashes = @{}

@@ -6786,3 +6786,35 @@ harness, engine bundle and IWAD hashes. This verifies lookup-table contents,
 not per-pixel table-bin selection, original-executable fidelity or
 performance. No game host, window, keyboard or audio device was started.
 See the [receipt](../results/render-lighting-tables-current-20261019.json).
+### Reference plane-write ownership probe — October 19, 2026
+
+The first source-copy preparer run stopped at standalone ParseFile validation:
+the class file references Sector, Map and other types that are resolved only
+when the engine bundle is assembled. That was a dependency-resolution failure,
+not a source syntax failure. Removed the standalone type-resolution check,
+rebuilt the complete bundle from the copied source, and loaded it successfully
+in the offline comparison.
+
+The diagnostic copy adds owner and floor/ceiling arrays after each existing
+reference plane pixel write. Its full-frame SHA-256 values for both renderers
+match the uninstrumented comparison at heights 0, 6, 34 and 68; scene mismatch
+counts also match. The [baseline](../results/moving-sector-reference-plane-writes-baseline-20261019-v2.json),
+[instrumented receipt](../results/moving-sector-reference-plane-writes-verified-20261019-v2.json)
+and [hash control](../results/moving-sector-reference-plane-writes-control-20261019-v2.json)
+pin both bundles, reports and per-height hashes.
+
+At height 34, 137 of 205 candidate plane mismatch pixels had no reference
+plane write; the other 68 were written by sector 22 floor in both renderers.
+At height 68, the 1,012 candidate plane mismatches split into 666 last writes
+from the same sector/surface, 134 from a different reference sector/surface,
+and 212 with no reference plane write. A further 355 non-plane candidate
+mismatches did have a reference plane write. These records do not identify the
+final visible owner because later walls, sprites or the weapon may overwrite
+the plane. The results focus the next source investigation on wall clipping
+and final overdraw, while retaining plane sample recurrence as an open cause
+for same-owner cases. This was an offline replay comparison; no live game,
+window, keyboard or audio device was used.
+
+The final source-hash refresh reran the saved replay against the exact current
+script bytes. Candidate and reference frame hashes and scene mismatch counts
+match the first receipts; the v2 receipts pin the current source hashes.
