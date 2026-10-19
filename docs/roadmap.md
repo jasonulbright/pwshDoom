@@ -107,6 +107,13 @@ Release acceptance requires:
 | M8 — Doom II qualification | Doom II campaign, actors/weapons, secret routes, text/cast endings | Expanded campaign matrix and complete route/play evidence with performance checks | After Ultimate Doom release |
 | M9 — MyHouse-based audit | Version-pinned requirements and compatibility/performance audit | Required-feature inventory, reference behavior, supported/unsupported/incorrect classification, scoped extension plan | After Doom II; full mod support not yet promised |
 
+Current-source campaign-transition regression — October 19, 2026: 69 checks
+pass on the installed Ultimate Doom IWAD, including E1M3 → E1M9 → E1M4 real
+map loads, finale selection, inventory carryover, and death/respawn. Exits are
+fixture inputs and map state advances in memory; this is not route completion.
+See the [source-pinned receipt](../results/current-source-campaign-transitions-20261019.json)
+and [campaign matrix](campaign-matrix.md). The human Episode 1 gate remains open.
+
 The 2026-09-28 audio output-clock change addresses the D_E3M6 packet-queue
 gaps seen in packet-exact headless runs. Interactive PowerShell playback now
 advances active music/effect state when the simulation has not yet published

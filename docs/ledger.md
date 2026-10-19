@@ -37,6 +37,17 @@ The candidate has not replaced the public Preview.8 asset. No game host,
 display, audio device or live route was used; campaign and live input behavior
 remain unverified.
 
+## 2026-10-19 — Recheck current-source campaign transitions
+
+`Test-CampaignTransitions.ps1` passes all 69 checks on source commit `371dd34`
+against the installed Ultimate Doom IWAD. This includes normal/secret map
+destinations, finale selection, inventory carryover, death/respawn, and loading
+E1M3 → E1M9 → E1M4 through real IWAD map resources. The fixture sets exits
+directly and advances the engine model in memory; it does not complete any map
+or establish human input, live display, or audio behavior. The [receipt](../results/current-source-campaign-transitions-20261019.json)
+pins source hashes and the IWAD SHA-256. The complete human Episode 1 route
+remains open.
+
 ## 2026-10-04 — Cover all cardinal view headings in wall projection
 
 Extended the synthetic fixed-angle span harness from 0°/90° to all four
