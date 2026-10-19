@@ -39,7 +39,7 @@ broader release acceptance gates below remain intact.
 The opt-in human input recorder now writes a checksummed append-only sidecar
 every 350 consumed tics and at map/session-state transitions. If the process
 stops abruptly, `Recover-DoomInputReplayJournal.ps1` rebuilds a version-4 replay
-from complete batches and discards a torn final line. Its 18 synthetic/offline
+from complete batches and discards a torn final line. Its 28 synthetic/offline
 contract and static wiring checks pass; host/session and abrupt-stop behavior
 remain unverified. This does not replace the human route or prove completion. See the
 [replay recovery contract](../results/input-replay-journal-contract.json).

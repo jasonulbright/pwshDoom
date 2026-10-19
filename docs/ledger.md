@@ -6690,3 +6690,15 @@ objects. No game host, display, keyboard, audio device or live route was used;
 actual session interruption and the complete human route remain open. Public
 Preview.8 was not replaced. Full details are in
 `results/preview8-journal-bounds-candidate-validation-20261019.json`.
+
+### Reject malformed journal batches before append — October 19, 2026
+
+The journal writer now validates required array shapes, four-integer command
+records and their replay ranges, event tic boundaries/order, and checkpoint
+hashes before writing any batch bytes. Six synthetic writer cases verify stale
+control events, late and unordered transitions, malformed and out-of-range
+commands, and a malformed checkpoint hash are rejected without changing the
+file length. The full offline journal contract passes 28 checks. Reader-side
+validation remains in place for checksummed but invalid records. This does not
+exercise a live worker or interruption; those remain unverified under the
+current no-live-tests constraint.

@@ -36,12 +36,55 @@ function Initialize-DoomInputReplayJournal {
 
 function Add-DoomInputReplayJournalBatch {
     param([Parameter(Mandatory)][string]$Path,[Parameter(Mandatory)]$Batch)
-    if($Batch.Kind -ne 'Batch' -or $Batch.Sequence -lt 1 -or $Batch.StartTic -lt 0 -or
-        $Batch.EndTic -lt $Batch.StartTic -or $Batch.EndTic -gt 1260000){
+    if($Batch.Kind -ne 'Batch' -or ($Batch.Sequence -isnot [int] -and $Batch.Sequence -isnot [long]) -or
+        $Batch.Sequence -lt 1 -or ($Batch.StartTic -isnot [int] -and $Batch.StartTic -isnot [long]) -or
+        ($Batch.EndTic -isnot [int] -and $Batch.EndTic -isnot [long]) -or $Batch.StartTic -lt 0 -or
+        $Batch.EndTic -lt $Batch.StartTic -or $Batch.EndTic -gt 1260000 -or $Batch.Final -isnot [bool]){
         throw 'Invalid replay journal batch boundary.'
+    }
+    foreach($field in 'InputCommands','AutomapCommands','ControlEvents','Checkpoints','Transitions'){
+        if($Batch.$field -isnot [array]){throw "Replay journal $field must be an array."}
     }
     if($Batch.InputCommands.Count -ne ($Batch.EndTic-$Batch.StartTic)){
         throw 'Replay journal command count does not match its boundary.'
+    }
+    foreach($command in $Batch.InputCommands){
+        if($command -isnot [array] -or $command.Count -ne 4){throw 'Invalid replay journal command shape.'}
+        foreach($value in $command){if($value -isnot [int] -and $value -isnot [long]){throw 'Replay journal commands must contain integers.'}}
+        if($command[0] -lt -50 -or $command[0] -gt 50 -or $command[1] -lt -50 -or $command[1] -gt 50 -or
+            $command[2] -lt -32768 -or $command[2] -gt 32767 -or $command[3] -lt 0 -or $command[3] -gt 255){
+            throw 'Replay journal command is out of range.'
+        }
+    }
+    foreach($entry in $Batch.AutomapCommands){
+        if($null -eq $entry -or ($entry.Tic -isnot [int] -and $entry.Tic -isnot [long]) -or
+            $entry.Tic -lt $Batch.StartTic -or $entry.Tic -ge $Batch.EndTic -or
+            ($entry.Mask -isnot [int] -and $entry.Mask -isnot [long]) -or $entry.Mask -lt 1 -or $entry.Mask -gt 1023){
+            throw 'Invalid automap command boundary in replay journal batch.'
+        }
+    }
+    foreach($field in 'ControlEvents','Checkpoints'){
+        $previousTic=$null
+        foreach($entry in $Batch.$field){
+            if($null -eq $entry -or ($entry.Tic -isnot [int] -and $entry.Tic -isnot [long]) -or
+                $entry.Tic -lt $Batch.StartTic -or $entry.Tic -gt $Batch.EndTic -or
+                ($null -ne $previousTic -and $entry.Tic -lt $previousTic)){
+                throw "Invalid $field boundary in replay journal batch."
+            }
+            if($field -eq 'Checkpoints' -and ($entry.Sha256 -isnot [string] -or $entry.Sha256 -notmatch '^[a-fA-F0-9]{64}$')){
+                throw 'Invalid checkpoint hash in replay journal batch.'
+            }
+            $previousTic=$entry.Tic
+        }
+    }
+    $previousTransitionTic=$null
+    foreach($entry in $Batch.Transitions){
+        if($null -eq $entry -or ($entry.Tic -isnot [int] -and $entry.Tic -isnot [long]) -or
+            $entry.Tic -lt $Batch.StartTic -or $entry.Tic -gt $Batch.EndTic -or
+            ($null -ne $previousTransitionTic -and $entry.Tic -lt $previousTransitionTic)){
+            throw 'Invalid transition boundary in replay journal batch.'
+        }
+        $previousTransitionTic=$entry.Tic
     }
     Write-DoomReplayJournalLine $Path $Batch
 }

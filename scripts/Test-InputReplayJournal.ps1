@@ -56,10 +56,32 @@ try{
         Add-DoomInputReplayJournalBatch $invalidPath $first
         $badSecond=ConvertFrom-Json -InputObject (ConvertTo-Json -InputObject $second -Depth 10 -Compress) -AsHashtable -Depth 10
         $badSecond[$case[0]][0].Tic=[long]$case[1]
-        Add-DoomInputReplayJournalBatch $invalidPath $badSecond
+        Write-DoomReplayJournalLine $invalidPath $badSecond
         $boundaryRejected=$false
         try{$null=Read-DoomInputReplayJournal $invalidPath}catch{$boundaryRejected=$_.Exception.Message -match 'boundary in replay journal'}
         Check "Recovery rejects out-of-batch $($case[0]) tic $($case[1])" $boundaryRejected
+    }
+    foreach($writerCase in 'stale-control','late-transition','unordered-transitions','bad-command-shape','bad-command-range','bad-checkpoint-hash'){
+        $writerPath=Join-Path $temp ('writer-'+$writerCase+'.jsonl')
+        Initialize-DoomInputReplayJournal $writerPath $wadHash $sourceHash 3 1 1
+        Add-DoomInputReplayJournalBatch $writerPath $first
+        $badBatch=ConvertFrom-Json -InputObject (ConvertTo-Json -InputObject $second -Depth 10 -Compress) -AsHashtable -Depth 10
+        if($writerCase -eq 'stale-control'){$badBatch.ControlEvents[0].Tic=[long]2}
+        elseif($writerCase -eq 'late-transition'){$badBatch.Transitions[0].Tic=[long]6}
+        elseif($writerCase -eq 'unordered-transitions'){$badBatch.Transitions=@([ordered]@{Tic=[long]5;State='Level'},[ordered]@{Tic=[long]4;State='Intermission'})}
+        elseif($writerCase -eq 'bad-command-shape'){$badBatch.InputCommands[0]=[long[]]@(1,2)}
+        elseif($writerCase -eq 'bad-command-range'){$badBatch.InputCommands[0][0]=[long]51}
+        else{$badBatch.Checkpoints[0].Sha256='invalid'}
+        $expectedError=switch($writerCase){
+            'stale-control' {'Invalid ControlEvents boundary'}
+            {$_ -in 'late-transition','unordered-transitions'} {'Invalid transition boundary'}
+            'bad-command-shape' {'Invalid replay journal command shape'}
+            'bad-command-range' {'Replay journal command is out of range'}
+            'bad-checkpoint-hash' {'Invalid checkpoint hash'}
+        }
+        $beforeLength=(Get-Item -LiteralPath $writerPath).Length;$writerRejected=$false
+        try{$null=Add-DoomInputReplayJournalBatch $writerPath $badBatch}catch{$writerRejected=$_.Exception.Message.Contains($expectedError)}
+        Check "Writer rejects $writerCase before appending bytes" ($writerRejected -and (Get-Item -LiteralPath $writerPath).Length -eq $beforeLength)
     }
     $before=(Get-FileHash -LiteralPath $recovered).Hash;$overwriteRejected=$false
     try{$null=Write-DoomInputReplay $recovered $data}catch{$overwriteRejected=$_.Exception.Message -match 'never replace|new filename'}
