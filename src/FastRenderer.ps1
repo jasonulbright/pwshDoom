@@ -407,29 +407,166 @@ function Draw-FastNumber {
     if($negative){Draw-FastHudPatch $Context $Context.Hud.Minus ($Right-8) $Y $FirstColumn $EndColumn}
 }
 
+function Draw-FastPlaneColumnCalls {
+    param(
+        [hashtable]$Context,
+        [int]$CallCount,
+        [int]$ViewXData,
+        [int]$ViewYData,
+        [int]$ViewZData,
+        [int]$PlaneBaseX,
+        [int]$PlaneBaseY,
+        [int]$ExtraLight,
+        [int]$FixedColorMap,
+        [int[]]$PlaneSpanBoundaries
+    )
+
+    [int[]]$calls = $Context.PlaneSampleCalls
+    [int[]]$planes = $Context.Planes
+    [byte[]]$pixels = $Context.Pixels
+    [int[]]$raySin = $Context.RaySin
+    [int[]]$rayCos = $Context.RayCos
+    [int[]]$ceilingXStep = $Context.PlaneCeilingXStep
+    [int[]]$ceilingYStep = $Context.PlaneCeilingYStep
+    [int[]]$ceilingLight = $Context.PlaneCeilingLight
+    [long[]]$ceilingXFrac = $Context.PlaneCeilingXFrac
+    [long[]]$ceilingYFrac = $Context.PlaneCeilingYFrac
+    [int[]]$floorXStep = $Context.PlaneFloorXStep
+    [int[]]$floorYStep = $Context.PlaneFloorYStep
+    [int[]]$floorLight = $Context.PlaneFloorLight
+    [long[]]$floorXFrac = $Context.PlaneFloorXFrac
+    [long[]]$floorYFrac = $Context.PlaneFloorYFrac
+    [int[]]$stripeEnds = @($PlaneSpanBoundaries | Where-Object { $_ -gt 0 -and $_ -le 320 })
+    if ($stripeEnds.Length -eq 0 -or $stripeEnds[$stripeEnds.Length - 1] -lt 320) { $stripeEnds += 320 }
+    [int]$stripeStart = 0
+    foreach ($stripeEnd in $stripeEnds) {
+        if ($stripeEnd -le $stripeStart) { continue }
+        [int]$ceilingPrevSector = -1
+        [int]$ceilingPrevX = -2
+        [int]$ceilingPrevY1 = 0
+        [int]$ceilingPrevY2 = -1
+        [int]$floorPrevSector = -1
+        [int]$floorPrevX = -2
+        [int]$floorPrevY1 = 0
+        [int]$floorPrevY2 = -1
+
+        for ([int]$callOffset = 0; $callOffset -lt $CallCount; $callOffset += 4) {
+            [int]$x = $calls[$callOffset]
+            if ($x -lt $stripeStart -or $x -ge $stripeEnd) { continue }
+            [int]$y1 = $calls[$callOffset + 1]
+            [int]$y2 = $calls[$callOffset + 2]
+            [int]$planeId = $calls[$callOffset + 3]
+            [int]$sectorIndex = ($planeId - 1) -shr 1
+            [bool]$isFloor = (($planeId -band 1) -eq 0)
+
+            if ($isFloor) {
+                [int]$previousSector = $floorPrevSector
+                [int]$previousX = $floorPrevX
+                [int]$previousY1 = $floorPrevY1
+                [int]$previousY2 = $floorPrevY2
+                [int[]]$xStepRows = $floorXStep
+                [int[]]$yStepRows = $floorYStep
+                [int[]]$lightRows = $floorLight
+                [long[]]$xFracRows = $floorXFrac
+                [long[]]$yFracRows = $floorYFrac
+                [int]$heightData = $Context.SectorFloorHeightData[$sectorIndex]
+                [int]$flatIndex = $Context.SectorFloorFlatIndex[$sectorIndex]
+            } else {
+                [int]$previousSector = $ceilingPrevSector
+                [int]$previousX = $ceilingPrevX
+                [int]$previousY1 = $ceilingPrevY1
+                [int]$previousY2 = $ceilingPrevY2
+                [int[]]$xStepRows = $ceilingXStep
+                [int[]]$yStepRows = $ceilingYStep
+                [int[]]$lightRows = $ceilingLight
+                [long[]]$xFracRows = $ceilingXFrac
+                [long[]]$yFracRows = $ceilingYFrac
+                [int]$heightData = $Context.SectorCeilingHeightData[$sectorIndex]
+                [int]$flatIndex = $Context.SectorCeilingFlatIndex[$sectorIndex]
+            }
+            [long]$heightDelta = [long]$heightData - [long]$ViewZData
+            if ($heightDelta -lt 0) { $heightDelta = -$heightDelta }
+            [int]$lightLevel = [Math]::Clamp(($Context.SectorLightLevels[$sectorIndex] -shr 4) + $ExtraLight, 0, 15)
+            [int[]]$distanceLights = $Context.Lighting.Distance[$lightLevel]
+            [byte[]]$flatData = $Context.PlaneFlatData[$flatIndex]
+            [bool]$reusePrevious = $sectorIndex -eq $previousSector -and $previousX -eq ($x - 1)
+            [int]$overlapStart = $y1
+            [int]$overlapEnd = $y2
+            if ($reusePrevious) {
+                if ($overlapStart -lt $previousY1) { $overlapStart = $previousY1 }
+                if ($overlapEnd -gt $previousY2) { $overlapEnd = $previousY2 }
+            }
+
+            for ([int]$y = $y1; $y -le $y2; $y++) {
+                if ($reusePrevious -and $y -ge $overlapStart -and $y -le $overlapEnd) {
+                    [long]$xFrac = $xFracRows[$y] + $xStepRows[$y]
+                    [long]$yFrac = $yFracRows[$y] + $yStepRows[$y]
+                    [int]$light = $lightRows[$y]
+                } else {
+                    [long]$distanceWide = ($heightDelta * [long]$Context.PlaneRowSlopes[$y]) -shr 16
+                    $distanceWide = $distanceWide -band 0xffffffffL
+                    if ($distanceWide -ge 0x80000000L) { $distanceWide -= 0x100000000L }
+                    [int]$distanceData = $distanceWide
+                    [int]$stepX = ([long]$distanceData * [long]$PlaneBaseX) -shr 16
+                    [int]$stepY = ([long]$distanceData * [long]$PlaneBaseY) -shr 16
+                    [int]$lengthData = ([long]$distanceData * [long]$Context.PlaneDistanceScales[$x]) -shr 16
+                    [long]$xFrac = [long]$ViewXData + (([long]$rayCos[$x] * [long]$lengthData) -shr 16)
+                    [long]$yFrac = -[long]$ViewYData - (([long]$raySin[$x] * [long]$lengthData) -shr 16)
+                    [int]$light = $distanceLights[[Math]::Clamp(($distanceData -shr 20), 0, 127)]
+                    if ($FixedColorMap -gt 0) { $light = $FixedColorMap }
+                    $xStepRows[$y] = $stepX
+                    $yStepRows[$y] = $stepY
+                }
+                $xFracRows[$y] = $xFrac
+                $yFracRows[$y] = $yFrac
+                $lightRows[$y] = $light
+
+                [int]$pixelIndex = $y * 320 + $x
+                if ($planes[$pixelIndex] -ne $planeId) { continue }
+                [int]$u = ($xFrac -shr 16) -band 63
+                [int]$v = ($yFrac -shr 10) -band 4032
+                $pixels[$pixelIndex] = $Context.Colors[$light][$flatData[$v + $u]]
+            }
+
+            if ($isFloor) {
+                $floorPrevSector = $sectorIndex
+                $floorPrevX = $x
+                $floorPrevY1 = $y1
+                $floorPrevY2 = $y2
+            } else {
+                $ceilingPrevSector = $sectorIndex
+                $ceilingPrevX = $x
+                $ceilingPrevY1 = $y1
+                $ceilingPrevY2 = $y2
+            }
+        }
+        $stripeStart = $stripeEnd
+    }
+}
+
 function Invoke-FastRender {
     param($Context,[int]$FirstColumn=0,[int]$EndColumn=320,[switch]$GeometryDetails)
     if(-not $Context.ContainsKey('SectorRenderDataReady') -or -not $Context.SectorRenderDataReady){throw 'Update the render-sector cache for the current snapshot before rendering.'}
     $phaseWatch=[Diagnostics.Stopwatch]::StartNew();$world=$Context.World;$player=$world.ConsolePlayer;$camera=$player.Mobj
     if($GeometryDetails){$geometryStartedQpc=[Diagnostics.Stopwatch]::GetTimestamp()}
     $cameraXValue=$camera.X;$cameraYValue=$camera.Y;$cameraViewZValue=$player.ViewZ
-    if($cameraXValue -is [Fixed]){
+    if($null -ne $cameraXValue -and $cameraXValue.GetType().Name -eq 'Fixed'){
         [double]$cx=$cameraXValue.ToDouble();[int]$viewXData=$cameraXValue.Data
     }else{
         [double]$cx=$cameraXValue;[int]$viewXData=[Math]::Truncate(65536.0*$cx)
     }
-    if($cameraYValue -is [Fixed]){
+    if($null -ne $cameraYValue -and $cameraYValue.GetType().Name -eq 'Fixed'){
         [double]$cy=$cameraYValue.ToDouble();[int]$viewYData=$cameraYValue.Data
     }else{
         [double]$cy=$cameraYValue;[int]$viewYData=[Math]::Truncate(65536.0*$cy)
     }
-    if($cameraViewZValue -is [Fixed]){
+    if($null -ne $cameraViewZValue -and $cameraViewZValue.GetType().Name -eq 'Fixed'){
         [double]$cz=$cameraViewZValue.ToDouble();[int]$viewZData=$cameraViewZValue.Data
     }else{
         [double]$cz=$cameraViewZValue;[int]$viewZData=[Math]::Truncate(65536.0*$cz)
     }
     $cameraAngleValue=$camera.Angle
-    if($cameraAngleValue -is [Angle]){
+    if($null -ne $cameraAngleValue -and $cameraAngleValue.GetType().Name -eq 'Angle'){
         [double]$angle=$cameraAngleValue.ToRadian();[uint32]$viewAngleData=$cameraAngleValue.Data
     }else{
         [double]$angle=$cameraAngleValue
@@ -461,7 +598,8 @@ function Invoke-FastRender {
     }
     [uint32[]]$wallSegmentAngles=[uint32[]]::new(0)
     if($Context.ContainsKey('SegmentAngles')){$wallSegmentAngles=$Context.SegmentAngles}
-    [bool]$wallAnglesReady=$wallSegmentAngles.Length -eq ($Context.SegmentMetadata.Length/4)
+    [bool]$wallAnglesReady=$wallSegmentAngles.Length -eq ($Context.SegmentMetadata.Length/4) -and
+        $Context.ContainsKey('SegmentWallUData') -and $Context.SegmentWallUData.Length -eq $Context.SegmentMetadata.Length
     [int[]]$wallAngleToX=[int[]]::new(0)
     if($Context.ContainsKey('ViewAngleToX')){$wallAngleToX=[int[]]$Context.ViewAngleToX}
     [bool]$wallProjectionReady=$wallAnglesReady -and $wallAngleToX.Length -eq 4096
@@ -488,6 +626,14 @@ function Invoke-FastRender {
     for([int]$x=$FirstColumn;$x -lt $EndColumn;$x++){$spriteClipCounts[$x]=0}
     [int[]]$planeSpanBoundaries=[int[]]::new(0)
     if($Context.ContainsKey('PlaneSpanBoundaries')){$planeSpanBoundaries=[int[]]$Context.PlaneSpanBoundaries}
+    if(-not $Context.ContainsKey('PlaneSampleCalls')){
+        $Context.PlaneSampleCalls=[int[]]::new(16384)
+        $Context.PlaneCeilingXFrac=[long[]]::new(168);$Context.PlaneCeilingYFrac=[long[]]::new(168)
+        $Context.PlaneCeilingXStep=[int[]]::new(168);$Context.PlaneCeilingYStep=[int[]]::new(168);$Context.PlaneCeilingLight=[int[]]::new(168)
+        $Context.PlaneFloorXFrac=[long[]]::new(168);$Context.PlaneFloorYFrac=[long[]]::new(168)
+        $Context.PlaneFloorXStep=[int[]]::new(168);$Context.PlaneFloorYStep=[int[]]::new(168);$Context.PlaneFloorLight=[int[]]::new(168)
+    }
+    [int[]]$planeSampleCalls=$Context.PlaneSampleCalls;[int]$planeSampleCallCount=0
     [int[]]$topClip=$Context.TopClip;[int[]]$bottomClip=$Context.BottomClip
     [Collections.Generic.List[hashtable]]$maskedColumns=$Context.MaskedColumns;[int]$maskedColumnCount=0
     [Array]::Clear($pixels);[Array]::Clear($planes);[Array]::Fill($depthBuffer,[double]::PositiveInfinity)
@@ -619,10 +765,24 @@ function Invoke-FastRender {
                         [int]$p=$y*320+$x;$pixels[$p]=$skyData[$skyColumns[$x]*$skyH+(($y+16)-band 127)]
                     }
                 }else{
-                    for([int]$y=$clipT;$y -le $upperPlaneEnd;$y++){$planes[$y*320+$x]=$upperPlaneId}
+                    if($upperPlaneEnd -ge $clipT){
+                        for([int]$y=$clipT;$y -le $upperPlaneEnd;$y++){$planes[$y*320+$x]=$upperPlaneId}
+                        if($planeSampleCallCount+4 -gt $planeSampleCalls.Length){
+                            [int[]]$grownPlaneCalls=[int[]]::new([Math]::Max(16384,$planeSampleCalls.Length*2))
+                            [Array]::Copy($planeSampleCalls,$grownPlaneCalls,$planeSampleCallCount);$Context.PlaneSampleCalls=$grownPlaneCalls;$planeSampleCalls=$grownPlaneCalls
+                        }
+                        $planeSampleCalls[$planeSampleCallCount]=$x;$planeSampleCalls[$planeSampleCallCount+1]=$clipT;$planeSampleCalls[$planeSampleCallCount+2]=$upperPlaneEnd;$planeSampleCalls[$planeSampleCallCount+3]=$upperPlaneId;$planeSampleCallCount+=4
+                    }
                 }
                 [int]$lowerPlaneStart=[Math]::Max($clipT,$wallB+1)
-                for([int]$y=$lowerPlaneStart;$y -le $clipB;$y++){$planes[$y*320+$x]=$lowerPlaneId}
+                if($lowerPlaneStart -le $clipB){
+                    for([int]$y=$lowerPlaneStart;$y -le $clipB;$y++){$planes[$y*320+$x]=$lowerPlaneId}
+                    if($planeSampleCallCount+4 -gt $planeSampleCalls.Length){
+                        [int[]]$grownPlaneCalls=[int[]]::new([Math]::Max(16384,$planeSampleCalls.Length*2))
+                        [Array]::Copy($planeSampleCalls,$grownPlaneCalls,$planeSampleCallCount);$Context.PlaneSampleCalls=$grownPlaneCalls;$planeSampleCalls=$grownPlaneCalls
+                    }
+                    $planeSampleCalls[$planeSampleCallCount]=$x;$planeSampleCalls[$planeSampleCallCount+1]=$lowerPlaneStart;$planeSampleCalls[$planeSampleCallCount+2]=$clipB;$planeSampleCalls[$planeSampleCallCount+3]=$lowerPlaneId;$planeSampleCallCount+=4
+                }
                 [int]$portalT=[Math]::Ceiling(84-160*($bc-$cz)/$distance-0.5)
                 [int]$portalB=[Math]::Floor(84-160*($bf-$cz)/$distance-0.5)
                 [int]$wallLightIndex=47
@@ -762,64 +922,9 @@ function Invoke-FastRender {
         }
     }
     if($GeometryDetails){$planesStartedQpc=[Diagnostics.Stopwatch]::GetTimestamp()}
-    # PowerShell integer casts round to even. Correcting downward yields floor for
-    # these finite Int32-range texture coordinates, avoiding a method binder per pixel.
-    # Visplane-style horizontal spans with Doom's fixed-point plane rays. The
-    # standalone renderer also honors the process pool's strip boundaries so
-    # its spans begin at the same columns as independent render workers.
-    for([int]$y=0;$y -lt 168;$y++) {
-        [int]$row=$y*320;[int]$x=$FirstColumn;[int]$boundaryIndex=0
-        while($boundaryIndex -lt $planeSpanBoundaries.Length -and $planeSpanBoundaries[$boundaryIndex] -le $x){$boundaryIndex++}
-        [int]$planeSpanEnd=$EndColumn
-        if($boundaryIndex -lt $planeSpanBoundaries.Length -and $planeSpanBoundaries[$boundaryIndex] -lt $planeSpanEnd){$planeSpanEnd=$planeSpanBoundaries[$boundaryIndex]}
-        while($x -lt $EndColumn) {
-            if($x -ge $planeSpanEnd){
-                while($boundaryIndex -lt $planeSpanBoundaries.Length -and $planeSpanBoundaries[$boundaryIndex] -le $x){$boundaryIndex++}
-                $planeSpanEnd=$EndColumn
-                if($boundaryIndex -lt $planeSpanBoundaries.Length -and $planeSpanBoundaries[$boundaryIndex] -lt $planeSpanEnd){$planeSpanEnd=$planeSpanBoundaries[$boundaryIndex]}
-            }
-            [int]$id=$planes[$row+$x]
-            if($id -eq 0){$x++;continue}
-            [int]$sectorIndex=($id-1) -shr 1
-            if(($id-1) -band 1){$heightData=$Context.SectorFloorHeightData[$sectorIndex];$flatIndex=$Context.SectorFloorFlatIndex[$sectorIndex]}
-            else{$heightData=$Context.SectorCeilingHeightData[$sectorIndex];$flatIndex=$Context.SectorCeilingFlatIndex[$sectorIndex]}
-            [byte[]]$flat=$Context.PlaneFlatData[$flatIndex];[int]$sectorLightLevel=$Context.SectorLightLevels[$sectorIndex]
-            [long]$heightDelta=[long]$heightData-[long]$viewZData;if($heightDelta -lt 0){$heightDelta=-$heightDelta}
-            [long]$distanceDataWide=([long]$heightDelta*[long]$Context.PlaneRowSlopes[$y]) -shr 16
-            $distanceDataWide=$distanceDataWide -band 0xFFFFFFFFL
-            if($distanceDataWide -ge 0x80000000L){$distanceDataWide-=0x100000000L}
-            [int]$distanceData=$distanceDataWide
-            [int]$stepX=([long]$distanceData*[long]$planeBaseX) -shr 16
-            [int]$stepY=([long]$distanceData*[long]$planeBaseY) -shr 16
-            [int]$light=$Context.Lighting.Distance[[Math]::Clamp(($sectorLightLevel -shr 4)+$player.ExtraLight,0,15)][[Math]::Clamp(($distanceData -shr 20),0,127)]
-            if($player.FixedColorMap -gt 0){$light=$player.FixedColorMap}
-            [byte[]]$colors=$Context.Colors[$light];[byte[]]$flatData=$flat
-            [int]$lengthData=([long]$distanceData*[long]$Context.PlaneDistanceScales[$x]) -shr 16
-            [long]$xFracWide=[long]$viewXData+(([long]$rayCos[$x]*[long]$lengthData) -shr 16)
-            [long]$negViewY=-[long]$viewYData
-            [long]$yFracWide=$negViewY-(([long]$raySin[$x]*[long]$lengthData) -shr 16)
-            # Flats repeat every 64 map units. The texel lookup consumes only
-            # coordinate bits 16..21 for X and 10..15 for Y. Carry the fixed
-            # coordinates in Int64 and select those bits at lookup time rather
-            # than masking the wrapped 22-bit phase after every pixel. Doom's
-            # signed 32-bit wrap cannot change these selected bits because the
-            # flat period (2^22) divides the fixed-point word size (2^32).
-            [long]$xFrac=$xFracWide
-            [long]$yFrac=$yFracWide
-            do {
-                [int]$u=($xFrac -shr 16) -band 63;[int]$v=($yFrac -shr 10) -band 4032
-                [int]$p=$row+$x
-                # Planes are background surfaces in Doom's renderer. They fill
-                # uncovered pixels but do not occlude world sprites or masked
-                # walls drawn later; the depth buffer remains for opaque walls
-                # and already-composited sprites only.
-                $pixels[$p]=$colors[$flatData[$v+$u]]
-                $xFrac+=$stepX
-                $yFrac+=$stepY
-                $x++
-            } while($x -lt $planeSpanEnd -and $planes[$row+$x] -eq $id)
-        }
-    }
+    # The reference carries fixed-point plane coordinates across adjacent
+    # columns only while calls for the same sector have overlapping row spans.
+    Draw-FastPlaneColumnCalls $Context $planeSampleCallCount $viewXData $viewYData $viewZData $planeBaseX $planeBaseY $player.ExtraLight $player.FixedColorMap $planeSpanBoundaries
     if($GeometryDetails){$maskedStartedQpc=[Diagnostics.Stopwatch]::GetTimestamp()}
     for([int]$columnIndex=0;$columnIndex -lt $maskedColumnCount;$columnIndex++){
         $column=$maskedColumns[$columnIndex]

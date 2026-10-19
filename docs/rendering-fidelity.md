@@ -1272,3 +1272,25 @@ It leaves height 34 unchanged at 307 scene differences but raises height 68
 from 1,463 to 1,798. This candidate-boundary model is rejected; production
 sampling remains unchanged. See the [variant receipt](../results/moving-sector-plane-column-origin-sampling-20261019-v1.json)
 and [control](../results/moving-sector-plane-column-origin-sampling-control-20261019-v1.json).
+
+### Per-call plane recurrence — October 19, 2026
+
+The production sampler now retains the ordered ceiling/floor column calls
+created during BSP traversal. For each configured worker stripe it replays the
+reference's previous-column recurrence only when adjacent calls use the same
+sector and overlap in screen rows, then shades the final plane owner. On the
+frozen tic-315 E1M1 ceiling sweep, scene differences fall from 307 to 264 at
+height 34 and from 1,463 to 963 at height 68. Heights 0 and 6 remain exact;
+all HUD pixels are exact and all four reference-frame hashes stay unchanged.
+
+The initial whole-frame recurrence improved those counts but disagreed with a
+two-worker render by 358 pixels at heading 89 degrees. Processing each stripe's
+call stream independently restores exact partition output: five Classic views
+compare 320,000 pixels with zero differences. The local fixed-angle worker
+assets also now carry their precomputed wall-U metadata and private scratch.
+The 23-check asset-reuse suite passes. The [final sweep](../results/moving-sector-per-call-plane-recurrence-20261019-v3.json),
+[partition result](../results/render-partitions-plane-recurrence-20261019-r7.json),
+[asset check](../results/render-asset-reuse-wall-u-20261019.json) and
+[control receipt](../results/moving-sector-plane-call-recurrence-control-20261019.json)
+pin the source and outcomes. These were saved headless/offline checks; no live
+game, display, keyboard, audio device or pacing measurement was used.

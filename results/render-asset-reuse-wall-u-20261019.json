@@ -1,0 +1,32 @@
+{
+  "Meaning": "Synthetic v7 transport: immutable body reuse, independent mutable buffers, regenerated geometry/palette metadata, actual body tamper and truncation. No IWAD pixels, campaign navigation or display timing.",
+  "Runtime": "7.6.5",
+  "Checks": [
+    "Initial reader decodes body",
+    "Unsigned WAD angle decoded exactly",
+    "Identical body is reused",
+    "Patch graph is shared",
+    "Private Pixels",
+    "Private Depth",
+    "Private Planes",
+    "Private TopClip",
+    "Private BottomClip",
+    "Private SegmentGeometry",
+    "Private SegmentAngles",
+    "Private NodeGeometry",
+    "Private Stack",
+    "Metadata change preserves body reuse",
+    "New map geometry decoded",
+    "New map angle leaves previous context unchanged",
+    "New palette metadata decoded",
+    "Default reader remains uncached",
+    "Uncached reader context rejected as resources",
+    "Actual changed body invalidates the cache",
+    "Truncated color table is rejected after cache invalidation",
+    "Mismatched segment angle count rejected",
+    "Authored metadata without angles preserves analytic fallback"
+  ],
+  "Error": null,
+  "SourceSha256": "B1E696588EBA55A174910F168A2FC6E6D076776E94D9EAA6C67D209901E51D30",
+  "HarnessSha256": "D3A2443BB4EAB6F574C05EC8A8037ED61CBCE8E37C85299B27839091CB196DF9"
+}

@@ -19,6 +19,11 @@ function Write-GameRenderAssets {
     # Original WAD segment angles drive quantized wall texture coordinates.
     # Authored contexts without these angles retain the analytic fallback.
     if($Context.ContainsKey('SegmentAngles')){$meta.SegmentAngles=$Context.SegmentAngles;$meta.WallFineTangent=$Context.WallFineTangent}
+    if($Context.ContainsKey('SegmentWallUData')){
+        [int[]]$segmentWallUData=$Context.SegmentWallUData
+        if($segmentWallUData.Length -ne $Context.SegmentMetadata.Length){throw 'Invalid packed segment wall-U data.'}
+        $meta.SegmentWallUData=$segmentWallUData
+    }
     foreach($key in $Context.Textures.Keys){$meta.Textures[$key.ToString()]=$patchIds[$Context.Textures[$key]]}
     foreach($key in $Context.Hud.get_Keys()) {
         $value=$Context.Hud[$key]
@@ -103,6 +108,11 @@ function Read-GameRenderAssets {
         [double[]]$segmentGeometry=$meta.SegmentGeometry;[int[]]$segmentMetadata=$meta.SegmentMetadata
         [double[]]$nodeGeometry=$meta.NodeGeometry;[int[]]$nodeChildren=$meta.NodeChildren
         if($segmentGeometry.Length%6 -ne 0 -or $segmentMetadata.Length -ne ($segmentGeometry.Length/6)*4){throw 'Invalid packed segment geometry.'}
+        [int[]]$segmentWallUData=[int[]]::new(0)
+        if($meta.ContainsKey('SegmentWallUData')){
+            [int[]]$segmentWallUData=$meta.SegmentWallUData
+            if($segmentWallUData.Length -ne $segmentMetadata.Length){throw 'Invalid packed segment wall-U data.'}
+        }
         if($meta.ContainsKey('SegmentAngles')){
             [uint32[]]$segmentAngles=$meta.SegmentAngles
             if($segmentAngles.Length -ne $segmentGeometry.Length/6){throw 'Invalid packed segment angles.'}
@@ -148,10 +158,11 @@ function Read-GameRenderAssets {
             $patches[$i]=@{Width=$w;Height=$h;Left=$left;Top=$top;Data=$data;Columns=$columns}
         }
         }
-        $ctx=@{SegmentGeometry=$segmentGeometry;SegmentMetadata=$segmentMetadata;NodeGeometry=$nodeGeometry;NodeChildren=$nodeChildren;
+        $ctx=@{SegmentGeometry=$segmentGeometry;SegmentMetadata=$segmentMetadata;SegmentWallUData=$segmentWallUData;NodeGeometry=$nodeGeometry;NodeChildren=$nodeChildren;
             Subsectors=$meta.Subsectors;SkyFlat=$meta.SkyFlat;Sky=$patches[[int]$meta.Sky];Lighting=(New-FastLightingTables);
             Pixels=[byte[]]::new(64000);Depth=[double[]]::new(64000);Planes=[int[]]::new(53760);TopClip=[int[]]::new(320);BottomClip=[int[]]::new(320);
             Stack=[int[]]::new(($nodeGeometry.Length/12)*2+4);SkyColumns=[int[]]::new(320);RaySin=[int[]]::new(320);RayCos=[int[]]::new(320);
+            WallPointScratch=[long[]]::new(2);WallParameterScratch=[long[]]::new(3);
             MaskedColumns=[Collections.Generic.List[hashtable]]::new();Textures=@{};Hud=@{};SpriteAtlas=[object[]]::new($meta.SpriteAtlas.Count);Palette=[int[][]]$meta.Palette;PlayPal=[byte[]]$meta.PlayPal}
         if($meta.ContainsKey('ViewAngleToX')){$ctx.ViewAngleToX=$viewAngleToX}
         if($meta.ContainsKey('SegmentAngles')){$ctx.SegmentAngles=$segmentAngles;$ctx.WallFineTangent=$wallFineTangent}

@@ -6896,3 +6896,29 @@ is rejected; production plane sampling remains unchanged. The
 [control](../results/moving-sector-plane-column-origin-sampling-control-20261019-v1.json)
 and [preparation script](../scripts/Prepare-PlaneColumnOriginSamplingDiagnosticRenderer.ps1)
 preserve the experiment. It used an offline saved replay only.
+
+### Per-call plane recurrence — October 19, 2026
+
+The production plane sampler now retains the ordered ceiling and floor column
+calls emitted during BSP traversal and applies the reference's fixed-point
+previous-column recurrence when adjacent calls use the same sector and overlap
+in screen rows. Each worker stripe replays its own filtered call stream, so its
+initialization columns match a serial render. Against the frozen E1M1 tic-315
+ceiling fixture, scene differences fell from 307 to 264 at height 34 and from
+1,463 to 963 at height 68. Heights 0 and 6 remain exact, HUD differences are
+zero, and reference frame hashes match the prior baseline at all four heights.
+
+The first whole-frame recurrence stream differed from the two-worker render by
+358 pixels at heading 89 degrees; stripe-local replay fixed that discrepancy.
+Worker setup also exposed three isolated-context gaps: resolving engine custom
+types, transporting wall-U metadata, and initializing private scratch arrays.
+Those paths were corrected before the final checks. The final two-worker
+Classic partition comparison passes five views (320,000 pixels, zero
+differences and ten encoded-strip byte checks). The synthetic asset-reuse
+check passes 23 assertions. These results
+are headless/offline development checks, not live-game, UI, pacing or original
+executable parity evidence. The [final sweep](../results/moving-sector-per-call-plane-recurrence-20261019-v3.json),
+[partition result](../results/render-partitions-plane-recurrence-20261019-r7.json),
+[asset check](../results/render-asset-reuse-wall-u-20261019.json) and
+[control receipt](../results/moving-sector-plane-call-recurrence-control-20261019.json)
+pin the inputs and outcomes.

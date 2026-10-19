@@ -1,0 +1,122 @@
+{
+  "SchemaVersion": 1,
+  "CreatedUtc": "2026-10-19T14:48:54.4872822Z",
+  "Purpose": "Control receipt for the per-call fixed-point plane recurrence renderer change.",
+  "SourceCommit": "f6ca765a109a01e8f2228f27079f7a1ef9ff3f49",
+  "Scope": "Headless offline saved-replay comparisons and synthetic asset transport checks only; no live game, UI, display, keyboard, audio device or pacing test.",
+  "Sweep": {
+    "InputTic": 315,
+    "Episode": 1,
+    "Map": 1,
+    "SectorIndex": 26,
+    "OnlyChangedSectorCeiling": true,
+    "OtherSimulationStateHeldFixed": true,
+    "ComparedScenePixels": 53760,
+    "ComparedHudPixels": 10240,
+    "ComparedHeights": [
+      {
+        "CeilingHeight": 0,
+        "BaselineSceneDifferences": 0,
+        "FinalSceneDifferences": 0,
+        "Improvement": 0,
+        "HudDifferences": 0,
+        "ReferenceFrameHashUnchanged": true
+      },
+      {
+        "CeilingHeight": 6,
+        "BaselineSceneDifferences": 0,
+        "FinalSceneDifferences": 0,
+        "Improvement": 0,
+        "HudDifferences": 0,
+        "ReferenceFrameHashUnchanged": true
+      },
+      {
+        "CeilingHeight": 34,
+        "BaselineSceneDifferences": 307,
+        "FinalSceneDifferences": 264,
+        "Improvement": 43,
+        "HudDifferences": 0,
+        "ReferenceFrameHashUnchanged": true
+      },
+      {
+        "CeilingHeight": 68,
+        "BaselineSceneDifferences": 1463,
+        "FinalSceneDifferences": 963,
+        "Improvement": 500,
+        "HudDifferences": 0,
+        "ReferenceFrameHashUnchanged": true
+      }
+    ]
+  },
+  "PartitionEquivalence": {
+    "Workers": 2,
+    "Style": "Classic",
+    "Views": 5,
+    "ComparedPixels": 320000.0,
+    "PixelDifferences": 0.0,
+    "EncodedStripByteChecks": 10,
+    "Error": null
+  },
+  "AssetTransport": {
+    "CheckCount": 23,
+    "Error": null,
+    "SourceSha256": "B1E696588EBA55A174910F168A2FC6E6D076776E94D9EAA6C67D209901E51D30",
+    "HarnessSha256": "D3A2443BB4EAB6F574C05EC8A8037ED61CBCE8E37C85299B27839091CB196DF9"
+  },
+  "ResolvedDevelopmentIssue": "A whole-frame recurrence stream caused 358 pixel differences in the two-worker render at heading 89 degrees. Replaying filtered plane calls independently within each worker stripe restored exact partition output.",
+  "Artifacts": [
+    {
+      "Path": "src/FastRenderer.ps1",
+      "Sha256": "8DDE44B549D53EEFE2F98EE807413FFC7DEC6965A4D52B04339BA1AF9C76FD15"
+    },
+    {
+      "Path": "src/RenderAssets.ps1",
+      "Sha256": "B1E696588EBA55A174910F168A2FC6E6D076776E94D9EAA6C67D209901E51D30"
+    },
+    {
+      "Path": "scripts/Compare-MovingSectorHeightSweep.ps1",
+      "Sha256": "4BBFF451A0A5F73369F105422BDD739C2BBD3941E3CA5D17139A7B913AAC6F0A"
+    },
+    {
+      "Path": "scripts/Test-RenderPartitions.ps1",
+      "Sha256": "5077A7F41D69A6F5DD9FF61F58D283BEC0FD1D720C2E9B6C030164439259A99B"
+    },
+    {
+      "Path": "scripts/Test-RenderAssetResourceReuse.ps1",
+      "Sha256": "D3A2443BB4EAB6F574C05EC8A8037ED61CBCE8E37C85299B27839091CB196DF9"
+    },
+    {
+      "Path": "results/moving-sector-per-call-plane-recurrence-20261019-v3.json",
+      "Sha256": "479E4BFC844D17288A6E47F493F3481BB44F9E5348551F8AC475FBCB0CDF60A2"
+    },
+    {
+      "Path": "results/moving-sector-reference-plane-samples-verified-20261019-v7.json",
+      "Sha256": "256EA224A5C719DEC5C978E60E0D09BFD06B1B9E8DDB9F8D4A13211A355E737F"
+    },
+    {
+      "Path": "results/render-partitions-plane-recurrence-20261019-r7.json",
+      "Sha256": "E6B68BB4754EB6FAF05E0373FBA83B9E6C47C0429AB49C13C5E420062344078A"
+    },
+    {
+      "Path": "results/render-asset-reuse-wall-u-20261019.json",
+      "Sha256": "61F4F4A99640A6B904D4F27C48ED439C5B7593D2C86B5A45C5235F0FDC282CA3"
+    },
+    {
+      "Path": "results/moving-sector-per-call-plane-recurrence-20261019-v1.json",
+      "Sha256": "69A6CE21D11A849329525535409DC1F11AD0BD3E2FF4CC2F5AB3E3FE4EC7C3E6"
+    },
+    {
+      "Path": "results/moving-sector-per-call-plane-recurrence-20261019-v2.json",
+      "Sha256": "79AF6A5A28FB58C6CCA24F6EB2A776788BA6BD6615DA3ABE0D215043D85943E4"
+    },
+    {
+      "Path": "results/render-partitions-plane-recurrence-20261019-r6.json",
+      "Sha256": "FFC9DA27235EB07F8F872A6FCC8551FE8A8A89A445714F49BC4300076F5A593D"
+    }
+  ],
+  "Limits": [
+    "The local PowerShell reference is adapted ManagedDoom; the results do not establish parity against the original executable.",
+    "The sweep covers a frozen E1M1 state and changes only sector 26 ceiling height.",
+    "No gameplay route, live rendering, pacing, or hardware behavior is validated."
+  ]
+}

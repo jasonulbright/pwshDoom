@@ -976,3 +976,23 @@ counterfactual is rejected.
 See the [final-writer receipt](../results/moving-sector-reference-plane-final-writer-verified-20261019-v3.json),
 [sample comparison](../results/moving-sector-reference-plane-samples-verified-20261019-v7.json)
 and [recurrence-origin control](../results/moving-sector-reference-plane-recurrence-origin-control-20261019-v1.json).
+
+### Per-call plane recurrence — October 19, 2026
+
+The production plane sampler now follows reference column-call recurrence and
+resets recurrence state at worker stripe boundaries. The frozen moving-ceiling
+comparison improves from 307 to 264 scene differences at height 34 and from
+1,463 to 963 at height 68; the exact heights and HUD remain exact. Two-worker
+partition output matches all five Classic views (320,000 pixels, zero
+differences), and all 23 synthetic asset-reuse checks pass. The failed
+whole-frame/two-worker attempt and its stripe-local correction are recorded in
+the [ledger](ledger.md#per-call-plane-recurrence--october-19-2026) and
+[fidelity notes](rendering-fidelity.md#per-call-plane-recurrence--october-19-2026).
+The final [control receipt](../results/moving-sector-plane-call-recurrence-control-20261019.json)
+pins source and outputs. No live tests or desktop/device interaction were run.
+
+The complete local tree measures 27,716,928,402 bytes, below the hard decimal
+30,000,000,000-byte cap. The reference PDF at `docs/gebbdoom.pdf` is already
+ignored by the tracked `.gitignore` and is not tracked in Git. The branch is 25
+commits past Preview.8 at this source revision; this feature commit brings it
+to 26, with the release cadence still at 35.
