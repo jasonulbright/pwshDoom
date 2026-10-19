@@ -20,18 +20,22 @@ acoustic and second-hardware gates remain open.
 ## 2026-10-19 — Validate the post-Preview.8 menu correction candidate
 
 The offline `Test-SessionMenu` fixture exposed two real screen-boundary defects
-in the post-Preview.8 source: the key-capture prompt overflowed at the normal footer scale, and
-the final Controls shortcut line was wider than the 320-pixel screen. The
-capture prompt now uses the smaller font scale, and the Controls shortcuts wrap
-over two rows with tighter line spacing. Its test also retained references to
-the renderer's reused pixel array, so later draws erased earlier comparison
-frames; the fixture now clones each frame before drawing the next. The current
-clean local refresh candidate passes 143 menu assertions and 60 static screen
-fixtures, 96 settings assertions, 286 palette assertions, 24 masked-wall
-checks and 18 wall-span checks. Its manifest and extracted payload hashes were
-verified. It has not replaced the public Preview.8 asset. No game host, display,
-audio device or live route was used; campaign and live input behavior remain
-unverified.
+in the post-Preview.8 source: the key-capture prompt overflowed at the normal
+footer scale, and the final Controls shortcut line was wider than the 320-pixel
+screen. The capture prompt now uses the smaller font scale, and the Controls
+shortcuts wrap over two rows with tighter line spacing. Its test also retained
+references to the renderer's reused pixel array, so later draws erased earlier
+comparison frames; the fixture now clones each frame before drawing the next.
+
+The clean local candidate at source commit `82dd23f` passes 143 menu assertions
+and 60 static screen fixtures, 96 settings assertions, 286 palette assertions,
+24 masked-wall checks and 18 wall-span checks. The 1,854,145-byte archive has
+SHA-256 `A6DF853927E0B062E95BE30A18C51E5233DC16336D1887D8DE2E34628AFB516A`;
+all 572 payload hashes match after extraction. Its validation receipt is
+[`preview8-refresh-candidate-validation-20261019.json`](../results/preview8-refresh-candidate-validation-20261019.json).
+The candidate has not replaced the public Preview.8 asset. No game host,
+display, audio device or live route was used; campaign and live input behavior
+remain unverified.
 
 ## 2026-10-04 — Cover all cardinal view headings in wall projection
 

@@ -1,0 +1,80 @@
+{
+  "FinishedUtc": "2026-10-19T12:06:36Z",
+  "Version": "0.1.0-preview.8",
+  "Purpose": "Locally validated source refresh candidate; the public Preview.8 asset is unchanged.",
+  "Package": {
+    "Path": "local/preview8-candidate-20261019/pwshDoom-0.1.0-preview.8.zip",
+    "Bytes": 1854145,
+    "Sha256": "A6DF853927E0B062E95BE30A18C51E5233DC16336D1887D8DE2E34628AFB516A",
+    "SourceCommit": "82dd23f9135d92a2d9c4ff4c048efa65d2e9ada6",
+    "WorkingTreeDirty": false,
+    "PayloadFiles": 572,
+    "ExtractedFiles": 573,
+    "PayloadHashesVerified": 572,
+    "AdjacentChecksumVerified": true,
+    "ChecksumFileSha256": "2F7AD4851DC73B65CFBA3D6E461C704E119DEB288E0E7D1157BED3843DCAFEA7",
+    "ExcludedContentVerified": [
+      ".wad",
+      ".sf2",
+      ".mp4",
+      ".pdf",
+      ".wav",
+      ".dll",
+      ".exe",
+      "local/"
+    ]
+  },
+  "OfflineChecks": [
+    {
+      "Failures": 0,
+      "Receipt": "local/preview8-candidate-validation-20261019/user-settings.json",
+      "Passed": 96,
+      "Name": "Test-UserSettings",
+      "Checks": 96
+    },
+    {
+      "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+      "Name": "Test-SessionMenu",
+      "Failures": 0,
+      "Passed": 143,
+      "ScreenFixtures": 60,
+      "Checks": 143,
+      "Receipt": "local/preview8-candidate-validation-20261019/menu-unit.json"
+    },
+    {
+      "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+      "Name": "Test-PalettePresentation",
+      "Failures": 0,
+      "Passed": 286,
+      "Checks": 286,
+      "Receipt": "local/preview8-candidate-validation-20261019/palette-presentation.json"
+    },
+    {
+      "Name": "Test-MaskedWallOrder",
+      "Failures": 0,
+      "Passed": 24,
+      "HarnessSha256": "E2055FCA7A0093FB26DF5ACF41F7B6B660BB7286B9D224D71CA8F0D49F21F73B",
+      "Checks": 24,
+      "Receipt": "local/preview8-candidate-validation-20261019/masked-wall-order.json",
+      "RendererSha256": "4BBE6E92345952F976B35B568F901355A939B53E37455016BF5C1B2E6AC943DD"
+    },
+    {
+      "Name": "Test-WallScreenProjection",
+      "Failures": 0,
+      "Passed": 18,
+      "HarnessSha256": "7F197D1C0FC200FC61A6C409CE175854AFE7BF173D3930F403C8197A04A368DD",
+      "Checks": 18,
+      "Receipt": "console output: passed"
+    }
+  ],
+  "LiveTestsRun": false,
+  "PublicAssetReplaced": false,
+  "PublicReleaseUrl": "https://github.com/jasonulbright/pwshDoom/releases/tag/v0.1.0-preview.8",
+  "RepositoryFootprintAtVerification": {
+    "Files": 79518,
+    "Bytes": 28398725444.0,
+    "DecimalGb": 28.399,
+    "LimitBytes": 30000000000,
+    "UnderLimit": true
+  }
+}
