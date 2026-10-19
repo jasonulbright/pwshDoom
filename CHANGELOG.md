@@ -9,6 +9,10 @@ in the 320×200 menu. Offline extracted-candidate checks pass 96 settings, 143
 menu/60 screen-fixture, 286 palette, 24 masked-wall and 18 wall-span cases. The
 refresh package is local and has not replaced the public Preview.8 asset; no
 live game/device test was run.
+Current-source offline fixtures also pass 69 campaign-transition checks, 20
+save/finale-edge checks and 27 synthetic audio-mixer checks. These results are
+recorded against later source commits and do not belong to either Preview.8
+package; they do not certify route completion or audio-device behavior.
 
 ## 0.1.0-preview.8 — 2026-10-04
 
