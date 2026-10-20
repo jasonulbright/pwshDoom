@@ -7164,3 +7164,22 @@ rendering is unchanged. See the
 [counterfactual receipt](../results/moving-sector-untextured-lower-plane-20261019-v5.json).
 This was saved-replay analysis only; no live tests or desktop/device
 interaction were used.
+
+### 2026-10-19 — Match portal clipping to actual wall steps
+
+Compared the candidate's untextured portal clipping with `ThreeDRenderer`'s
+draw-wall and plane-clip conditions. The candidate had always clipped to both
+projected portal edges, even when a side had no corresponding height step; its
+lower portal also used a floating-point projection. The renderer now applies
+portal clipping only for a real upper/lower step, and projects a real lower
+edge with the reference's fixed-point formula. On the pinned E1M1 replay this
+reduces height-68 scene differences from 353 to 35. Pixelwise triptych
+comparison counts 322 old mismatches fixed, four introduced, and 31 remaining;
+the reference image is unchanged. Heights 0, 6 and 34 retain identical frame
+hashes. The four new errors are different-owner floor samples at (194,105),
+(204,105), (214,105) and (200,107), candidate S19 versus reference S18 on
+segments 138/141. This improves one saved state without establishing broad
+moving-world or original-executable parity. The [comparison receipt](../results/moving-sector-lower-boundary-20261019-v2.json)
+and [pixel-delta receipt](../results/moving-sector-lower-boundary-pixel-delta-20261019-v2.json)
+pin the source, replay, WAD and exact changed-pixel counts. No live tests or
+desktop/device interaction were used.

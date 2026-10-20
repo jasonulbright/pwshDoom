@@ -1502,3 +1502,21 @@ boundary explanation, but it provides no support for applying the rule
 generally. The [counterfactual receipt](../results/moving-sector-untextured-lower-plane-20261019-v5.json)
 pins the saved replay, WAD and source hashes. No live tests or desktop/device
 interaction were used.
+
+### Portal clipping follows actual wall steps — October 19, 2026
+
+Source comparison showed that the candidate clipped every two-sided segment to
+the projected upper and lower portal edges. The adapted renderer only clips
+where a corresponding wall/plane condition is rendered. The candidate now
+gates those boundaries on actual ceiling/floor steps and projects a real lower
+portal edge with the reference's fixed-point calculation. Against the same
+E1M1 tic-315 height sweep, height-68 scene differences fall from 353 to 35.
+Exact mask comparison fixes 322 previous mismatch pixels and introduces four;
+31 remain. The four introduced pixels are different-owner floor samples at
+(194,105), (204,105), (214,105) and (200,107), candidate S19 versus reference
+S18 on segments 138/141. Heights 0, 6 and 34 retain identical candidate and
+reference frame hashes, and the height-68 reference frame is unchanged. See
+the [saved-replay comparison](../results/moving-sector-lower-boundary-20261019-v2.json)
+and [pixel-delta receipt](../results/moving-sector-lower-boundary-pixel-delta-20261019-v2.json).
+This is not original-executable parity or broad moving-world qualification;
+no live tests or desktop/device interaction were used.

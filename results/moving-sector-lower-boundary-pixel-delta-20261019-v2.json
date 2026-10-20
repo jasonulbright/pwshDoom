@@ -1,0 +1,51 @@
+{
+  "SchemaVersion": 1,
+  "FinishedUtc": "2026-10-20T00:01:28.7226656Z",
+  "Height": 68,
+  "SourceCommit": "5f662db0855af2588427799eb86e1b87891d8ca6",
+  "AnalysisScriptSha256": "7D5E854953EE8871CD0E4336CFC336C32F08E790BCF4D223662CA6ADE97FB5B6",
+  "ReplaySha256": "41CF35EDF94C1CABE8C96A1CEEFBCFBF41F20DF24093569B65A1A4C9C56C017B",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "BaselineComparisonReport": "results/moving-sector-depth-owner-20261019-v3.json",
+  "BaselineComparisonReportSha256": "D3EC2DE063B6E1C8B073D89D67889CF0DC4935CF4437B35E4D6419EFD90E5479",
+  "CandidateComparisonReport": "results/moving-sector-lower-boundary-20261019-v2.json",
+  "CandidateComparisonReportSha256": "FC0C6EA7179F9B3DADB6FC9D2ADC4005B2AD176420FED90D46858F548CCAE8BB",
+  "BaselineTriptychSha256": "FBAF826AD3510C24ABBF1BD558276146D8BCD3F3103C5077C0043BA24C08FADD",
+  "CandidateTriptychSha256": "F0AAC34F52C4DCADDB33784766F19156448BAF1BDB6D3C5B83E171F17938EE90",
+  "BaselineRendererSha256": "92DAA139347AB81491AFEA027D3DE586002384A5A08F676AF1482650F919D312",
+  "CandidateRendererSha256": "ADB0CE9F522F6AE1E46B0A3D760741DA9EED01DB8688D9739DD471155CC38117",
+  "BaselineDiagnosticRendererSha256": "5798439F27B258F6409FAE224AFFB0E24A1D6DF661F1A8F34B8F8A0EBD1CA9CB",
+  "CandidateDiagnosticRendererSha256": "D090CAAF98C385363B996BDE415818590332FBCF1EA228EDD78A2F7D3F324C30",
+  "BaselineReferenceFrameSha256": "E62E4EF8887421EF900085790CD5793980ACC074E72E29ED10FDE7D4592AB6C8",
+  "CandidateReferenceFrameSha256": "E62E4EF8887421EF900085790CD5793980ACC074E72E29ED10FDE7D4592AB6C8",
+  "BaselineCandidateFrameSha256": "4F9E83296C20DEDE576F088CDD3F46F321BF00E3F47848788C4B5EAEBE3788BD",
+  "CandidateCandidateFrameSha256": "341CB30362E0C40FE2E0CCB5E506DE3D435B0001871CAADE54FA50E66D9E560A",
+  "BaselineMismatchPixels": 353,
+  "CandidateMismatchPixels": 35,
+  "FixedMismatchPixels": 322,
+  "IntroducedMismatchPixels": 4,
+  "RemainingMismatchPixels": 31,
+  "CandidatePixelsChanged": 330,
+  "ReferencePixelsChanged": 0,
+  "RemainingMismatchPixelsWithChangedCandidateColor": 4,
+  "OtherSweepHeightsFrameHashesUnchanged": true,
+  "IntroducedMismatchExamples": [
+    {
+      "X": 194,
+      "Y": 105
+    },
+    {
+      "X": 204,
+      "Y": 105
+    },
+    {
+      "X": 214,
+      "Y": 105
+    },
+    {
+      "X": 200,
+      "Y": 107
+    }
+  ],
+  "Interpretation": "Pixelwise comparison of saved-replay diagnostic triptychs (reference, candidate, mismatch mask); not a live test or original-executable comparison."
+}

@@ -846,6 +846,16 @@ function Invoke-FastRender {
                     $portalT=$portalTopFracData -shr 12
                 }
                 [int]$portalB=[Math]::Floor(84-160*($bf-$cz)/$distance-0.5)
+                if($wallBoundaryReady -and -not $solid -and $bf -gt $fh){
+                    [int]$portalBottomWorldData=[int](([long]$Context.SectorFloorHeightData[$segBack]-[long]$viewZData) -shr 4)
+                    [int]$portalFrontCeilingHeightData=$Context.SectorCeilingHeightData[$segFront]
+                    if($joinedSky){$portalFrontCeilingHeightData=$Context.SectorCeilingHeightData[$segBack]}
+                    [int]$frontCeilingWorldData=[int](([long]$portalFrontCeilingHeightData-[long]$viewZData) -shr 4)
+                    if($portalBottomWorldData -ge $frontCeilingWorldData){$portalBottomWorldData=$frontCeilingWorldData}
+                    # Match the reference's fixed-point lower portal projection.
+                    [int]$portalBottomFracData=[int]([long](84 -shl 12)-((([long]$portalBottomWorldData*[long]$wallScaleData) -shr 16)))
+                    $portalB=$portalBottomFracData -shr 12
+                }
                 [int]$wallLightIndex=47
                 if($distance -gt 0){
                     [double]$wallLightScale=2560.0/$distance
@@ -939,9 +949,13 @@ function Invoke-FastRender {
                 }
                 [int]$nextTop=168;[int]$nextBottom=-1
                 if(-not $solid){
-                    $nextTop=[Math]::Max($clipT,[Math]::Max($wallT,$portalT))
+                    # A projected boundary only clips farther geometry when that
+                    # side contains a real height step.
+                    $nextTop=[Math]::Max($clipT,$wallT)
+                    if($bc -lt $ch -and -not $joinedSky){$nextTop=[Math]::Max($nextTop,$portalT)}
                     if($bc -lt $ch -and -not $joinedSky -and $side.TopTexture -gt 0){$nextTop=[Math]::Max($clipT,[Math]::Max($wallT,$portalT+1))}
-                    $nextBottom=[Math]::Min($clipB,[Math]::Min($wallB,$portalB))
+                    $nextBottom=[Math]::Min($clipB,$wallB)
+                    if($bf -gt $fh){$nextBottom=[Math]::Min($nextBottom,$portalB)}
                 }
                 # Missing wall textures still close the BSP silhouette. Preserve
                 # those untextured wall bands for sprites without spending a second
@@ -954,13 +968,13 @@ function Invoke-FastRender {
                         }
                     }
                 }else{
-                    if($side.TopTexture -le 0){
+                    if($side.TopTexture -le 0 -and $bc -lt $ch -and -not $joinedSky){
                         [int]$upperTop=[Math]::Max($clipT,$wallT);[int]$upperBottom=[Math]::Min($clipB,$portalT-1)
                         for([int]$y=$upperTop;$y -le $upperBottom;$y++){
                             [int]$p=$y*320+$x;if($distance -lt $depthBuffer[$p]){$depthBuffer[$p]=$distance}
                         }
                     }
-                    if($side.BottomTexture -le 0){
+                    if($side.BottomTexture -le 0 -and $bf -gt $fh){
                         [int]$lowerTop=[Math]::Max($clipT,$portalB+1);[int]$lowerBottom=[Math]::Min($clipB,$wallB)
                         for([int]$y=$lowerTop;$y -le $lowerBottom;$y++){
                             [int]$p=$y*320+$x;if($distance -lt $depthBuffer[$p]){$depthBuffer[$p]=$distance}

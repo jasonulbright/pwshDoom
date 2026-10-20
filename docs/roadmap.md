@@ -1161,3 +1161,13 @@ production rule was added. The investigation remains limited to the pinned
 E1M1 replay and adapted local reference; original-executable parity remains
 open. No live tests or desktop/device interaction were used. See the
 [fidelity record](rendering-fidelity.md#candidate-depth-owner-trace-and-lower-plane-counterfactual--october-19-2026).
+
+### Portal-edge clipping correction — October 19, 2026
+
+The candidate now applies portal clipping only at actual height steps and uses
+the reference's fixed-point lower-edge projection. On the pinned E1M1 replay,
+height-68 scene differences fall from 353 to 35 (322 prior mismatches fixed,
+four introduced); heights 0, 6 and 34 retain identical frames. This advances
+the moving-sector fidelity gate, while the four different-owner floor pixels,
+31 total height-68 mismatches, original-executable parity and broader moving-
+world coverage remain open. See [rendering fidelity](rendering-fidelity.md#portal-clipping-follows-actual-wall-steps--october-19-2026).
