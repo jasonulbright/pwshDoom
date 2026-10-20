@@ -23,7 +23,7 @@ $mask=[int[]]::new(64*128);for($u=0;$u -lt 64;$u++){for($v=0;$v -lt 128;$v++){$m
 $wall=[int[]]::new(64*128);[Array]::Fill($wall,100)
 $flat=[byte[]]::new(4096);[Array]::Fill($flat,[byte]55)
 $colors=@(for($i=0;$i -lt 33;$i++){,[byte[]](0..255)})
-$ctx=@{Pixels=[byte[]]::new(64000);Depth=[double[]]::new(64000);Planes=[int[]]::new(53760);TopClip=[int[]]::new(320);BottomClip=[int[]]::new(320);Stack=[int[]]::new(4);NodeGeometry=[double[]]::new(0);NodeChildren=[int[]]::new(0);
+$ctx=@{Pixels=[byte[]]::new(64000);Depth=[double[]]::new(64000);Planes=[int[]]::new(53760);ActorDepthBypassMask=[byte[]]::new(320*168);ActorDepthBypassLowerHeightData=[int[]]::new(320*168);TopClip=[int[]]::new(320);BottomClip=[int[]]::new(320);Stack=[int[]]::new(4);NodeGeometry=[double[]]::new(0);NodeChildren=[int[]]::new(0);
     SpriteClipWalls=[object[]]::new(320);SpriteClipCounts=[int[]]::new(320);ActorClipTop=[int[]]::new(320);ActorClipBottom=[int[]]::new(320);
     Subsectors=@{32767=@{FirstSeg=0;SegCount=2}};Lighting=(New-FastLightingTables);Colors=$colors;SkyFlat=1;Sky=@{Data=[int[]]@(0);Width=1;Height=1};
     Sectors=@(@{FloorHeight=0;CeilingHeight=128;FloorFlat=0;CeilingFlat=0;LightLevel=255});Flats=@(@{Data=$flat});

@@ -1,5 +1,17 @@
 # Investigation ledger
 
+## 2026-10-20 — Refresh the Episode 1 candidate fixture
+
+The extracted local handoff's offline suite reached the synthetic masked-wall
+renderer check and stopped because its hand-built context lacked the actor
+depth-bypass buffers added with the lower-step sprite-depth correction. Other
+renderer checks construct contexts through `New-FastRenderContext` and already
+receive those buffers. Added the two arrays to this fixture; the focused
+`Test-MaskedWallOrder` run now passes all 24 checks without starting the game
+host or touching a device. Refreshed the playtest handoff to a second candidate
+revision so its package can include the corrected fixture. Full package
+validation is pending; no live tests were run.
+
 ## 2026-10-20 — Trace the remaining plane recurrence boundaries
 
 Extended the saved-replay comparison with candidate plane-call spans and
