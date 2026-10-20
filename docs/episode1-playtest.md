@@ -12,21 +12,21 @@ A normal completion is enough; 100% kills, items, and secrets are not required. 
 
 ## Build and launch
 
-Use the refreshed local Preview.8 development candidate at `C:\projects\pwshDoom\local\preview8-journal-writer-guard-candidate-20261019\pwshDoom-0.1.0-preview.8.zip`. Its manifest pins the exact source and payload hashes. The extracted archive passes 711 checks across settings (96), menus (143 and 60 static screen fixtures), palette (286), masked walls (24), wall projection (18), input journaling (28), campaign transitions (69), save/finale edges (20), and synthetic audio mixing (27). The journal cases verify writer and recovery rejection paths; they do not exercise an actual process interruption. Menu/palette/campaign/save fixtures load the pinned IWAD into in-memory game objects; they do not finish maps or start the game host. See the [candidate validation receipt](../results/preview8-journal-writer-guard-candidate-validation-20261019.json). The public [Preview.8 release](https://github.com/jasonulbright/pwshDoom/releases/tag/v0.1.0-preview.8) still contains its original package; this local development candidate has not replaced it. Extract it under `C:\projects\pwshDoom\local\preview8-journal-writer-guard-candidate-extracted-20261019` and use that folder for `$root` below. The earlier Preview.6 package separately passed its pinned 36-map and three-style worker checks; those checks do not navigate or finish maps. Current menu/render limits are in the [Preview.8 release notes](release-preview8.md); historical evidence remains in the [wall-band integration receipt](../results/wall-band-renderer-integration-20261002.json), [Preview.6 package validation](../results/preview6-package-validation-20261002.json), [traversal receipt](../results/visibility-iterative-integration-20261002.json), and [playthrough performance evidence](performance.md#active-wall-band-preselection-trial--october-2-2026).
+Use the current local development candidate at `C:\projects\pwshDoom\local\episode1-playtest-candidate-20261020\pwshDoom-0.1.0-dev.20261020.e1.zip`. Its clean package manifest pins the source commit and every payload hash. It includes the post-Preview.9 fixed-point portal clipping and lower-step actor-depth corrections; the [candidate receipt](../results/episode1-playtest-candidate-20261020.json) records package integrity and offline checks. The public [Preview.9 release](https://github.com/jasonulbright/pwshDoom/releases/tag/v0.1.0-preview.9) remains unchanged; this package is a local playtest handoff, not a new public release or full certification. Extract it under `C:\projects\pwshDoom\local\episode1-playtest-candidate-20261020-extracted` and use that folder for `$root` below. The package excludes the IWAD, prepared music, tools, research files and media. Historical readiness evidence remains in the [Preview.8 candidate receipt](../results/preview8-journal-writer-guard-candidate-validation-20261019.json), [wall-band integration receipt](../results/wall-band-renderer-integration-20261002.json), [Preview.6 package validation](../results/preview6-package-validation-20261002.json), [traversal receipt](../results/visibility-iterative-integration-20261002.json), and [playthrough performance evidence](performance.md#active-wall-band-preselection-trial--october-2-2026).
 
 Use 64-bit PowerShell 7.6.x and Windows Terminal. The required user-owned Ultimate Doom IWAD has SHA-256 `6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F`. WADs, soundfonts, prepared music, media, tools and the research PDF are excluded. The local eleven-track Episode 1 catalog covers this route; omit `-MusicCatalog` for effects-only play. Audio startup rechecks payloads and IWAD score identity.
 
-From PowerShell, run the extracted Preview.8 package and use fresh output paths:
+From PowerShell, run the extracted local development candidate and use fresh output paths:
 
 ~~~powershell
-$root = 'C:\projects\pwshDoom\local\preview8-journal-writer-guard-candidate-extracted-20261019\pwshDoom-0.1.0-preview.8'
+$root = 'C:\projects\pwshDoom\local\episode1-playtest-candidate-20261020-extracted\pwshDoom-0.1.0-dev.20261020.e1'
 $wad = 'C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\base\DOOM.WAD'
 $local = 'C:\projects\pwshDoom\local'
 $catalog = Join-Path $local 'music-prepared-episode1.json'
-$record = Join-Path $local 'episode1-human-input-preview8.json'
-$report = Join-Path $local 'episode1-human-session-preview8.json'
-$saves = Join-Path $local 'episode1-human-saves-preview8'
-$settings = Join-Path $local 'episode1-human-settings-preview8.json'
+$record = Join-Path $local 'episode1-human-input-dev-20261020.json'
+$report = Join-Path $local 'episode1-human-session-dev-20261020.json'
+$saves = Join-Path $local 'episode1-human-saves-dev-20261020'
+$settings = Join-Path $local 'episode1-human-settings-dev-20261020.json'
 pwsh -NoProfile -File (Join-Path $root 'Start-Doom.ps1') -Wad $wad -Workers 16 -Episode 1 -Map 1 -Skill 3 -Style Classic -Sound -MusicCatalog $catalog -RecordInput $record -Report $report -SaveRoot $saves -SettingsPath $settings -Maximized -FontSize 5
 ~~~
 
@@ -36,13 +36,13 @@ The input recording has a checksummed `.journal` sidecar while the session runs.
 
 ~~~powershell
 pwsh -NoProfile -File C:\projects\pwshDoom\scripts\Recover-DoomInputReplayJournal.ps1 `
-  -Journal C:\projects\pwshDoom\local\episode1-human-input-preview8.json.journal `
-  -Output C:\projects\pwshDoom\local\episode1-human-input-preview8-recovered.json
+  -Journal C:\projects\pwshDoom\local\episode1-human-input-dev-20261020.json.journal `
+  -Output C:\projects\pwshDoom\local\episode1-human-input-dev-20261020-recovered.json
 ~~~
 
 The journal is removed after a successful orderly recording. Recovery keeps it and does not overwrite the requested output. The recovery implementation has offline contract and static wiring checks; no game session or actual process interruption has exercised it yet.
 
-R19 retains fifty focused notice checks and all-style live fixtures, each consuming 350 commands and eleven checkpoints. Later all-style reload/fault tests preserve sixteen workers and independent image comparisons. Final R20-runtime Classic routes consume all 1747 commands, return all submitted audio and have no producer-backpressure waits. They still miss the frozen pacing gates; packet age excludes the device/acoustic tail. The current candidate adds exact 421-boundary dispatch replay/render parity, a 420-tic state/render timeline for visibility traversal and all-style worker comparisons, but has no human route or clean native pacing result yet. See [notice evidence](player-notices.md), [audio recovery](audio.md), [performance evidence](performance.md), the [dispatch measurements](../results/mobj-action-dispatch-20261002.json) and the [traversal trial](../results/visibility-iterative-dispatch-20261002.json). The complete route and acoustic/physical-input review remain required.
+R19 and R20 checks are historical evidence from October 2026, not validation of the current package. Their route, worker, and audio results do not close the campaign or pacing gates. Current saved-replay renderer evidence compares the packaged source at E1M1 tic 315; at ceiling height 68 it records 21 differences against the adapted reference (18 plane-buffer and three mapped-column color differences), with no live game or device used. The current package receipt and [row-trace comparison](../results/moving-sector-lower-boundary-20261020-v17.json) preserve the exact limits. The complete route and acoustic/physical-input review remain required.
 
 ## Controls
 
@@ -74,7 +74,7 @@ Your report will be recorded only for the scope and outcomes you state. Automate
 
 ## Current evidence and limits
 
-The [local recovery-candidate receipt](../results/preview8-recovery-candidate-validation-20261019.json) pins the candidate archive, source commit, manifest, and offline checks. The candidate has not replaced the public Preview.8 asset. It has no IWAD startup smoke and does not qualify a map route. The Preview.6 package-validation receipt separately pins its older Steam IWAD-backed checks. An earlier four-second E1M1 actual-device check returned all 175,140 submitted music frames and closed cleanly, with one queue-starvation observation after the final packet and no rebuffer resume; that older check is not a sustained audio or audible-quality qualification.
+The [current candidate receipt](../results/episode1-playtest-candidate-20261020.json) pins the clean package, source commit, payload hashes and offline checks. It does not start the game host or qualify a map route. The public Preview.9 asset remains unchanged. An earlier four-second E1M1 actual-device check returned all 175,140 submitted music frames and closed cleanly, with one queue-starvation observation after the final packet and no rebuffer resume; that older check is not a sustained audio or audible-quality qualification. No live test is part of this handoff preparation.
 
 Preview.6 passes 36/36 map-start smokes at 35 idle tics and five-view 16-worker parity in each visual style. These tests do not finish maps. Earlier bounded simulation and audio-host rates were below the frozen 35-tic/60-display target, and neither Terminal writes nor worker parity establish distinct monitor presentations. See the [package receipt](../results/preview6-package-validation-20261002.json), [publication receipt](../results/preview6-publication-20261002.json), and [performance evidence](performance.md).
 
