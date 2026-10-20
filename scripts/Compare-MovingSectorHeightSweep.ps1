@@ -256,6 +256,11 @@ try {
         $null -ne $reference3D.GetType().GetProperty('DiagnosticFinalWallSegIndices') -and
         $null -ne $reference3D.GetType().GetProperty('DiagnosticFinalWallTopRows') -and
         $null -ne $reference3D.GetType().GetProperty('DiagnosticFinalWallBottomRows') -and
+        $null -ne $reference3D.GetType().GetProperty('DiagnosticFinalWallTextureRows') -and
+        $null -ne $reference3D.GetType().GetProperty('DiagnosticFinalWallTextureFractions') -and
+        $null -ne $reference3D.GetType().GetProperty('DiagnosticFinalWallSourceColors') -and
+        $null -ne $reference3D.GetType().GetProperty('DiagnosticFinalWallMappedColors') -and
+        $null -ne $reference3D.GetType().GetProperty('DiagnosticFinalWorldSpriteDescriptions') -and
         $null -ne $reference3D.GetType().GetProperty('DiagnosticPlaneDistanceData') -and
         $null -ne $reference3D.GetType().GetProperty('DiagnosticPlaneXFracData') -and
         $null -ne $reference3D.GetType().GetProperty('DiagnosticPlaneYFracData') -and
@@ -278,6 +283,11 @@ try {
         $reference3D.DiagnosticFinalWallSegIndices = [int[]]::new(320 * 200)
         $reference3D.DiagnosticFinalWallTopRows = [int[]]::new(320 * 200)
         $reference3D.DiagnosticFinalWallBottomRows = [int[]]::new(320 * 200)
+        $reference3D.DiagnosticFinalWallTextureRows = [int[]]::new(320 * 200)
+        $reference3D.DiagnosticFinalWallTextureFractions = [int[]]::new(320 * 200)
+        $reference3D.DiagnosticFinalWallSourceColors = [int[]]::new(320 * 200)
+        $reference3D.DiagnosticFinalWallMappedColors = [int[]]::new(320 * 200)
+        $reference3D.DiagnosticFinalWorldSpriteDescriptions = [string[]]::new(320 * 200)
         $reference3D.DiagnosticPlaneDistanceData = [int[]]::new(320 * 200)
         $reference3D.DiagnosticPlaneXFracData = [int[]]::new(320 * 200)
         $reference3D.DiagnosticPlaneYFracData = [int[]]::new(320 * 200)
@@ -296,6 +306,17 @@ try {
         $context.DiagnosticPlaneOwnerSegIndices = [int[]]::new(320 * 168)
         $context.DiagnosticDepthOwnerSegIndices = [int[]]::new(320 * 168)
         $context.DiagnosticDepthOwnerWriterTypes = [byte[]]::new(320 * 168)
+        $context.DiagnosticWallSampleTextureIds = [int[]]::new(320 * 168)
+        $context.DiagnosticWallSampleBands = [int[]]::new(320 * 168)
+        $context.DiagnosticWallSampleColumns = [int[]]::new(320 * 168)
+        $context.DiagnosticWallSampleRows = [int[]]::new(320 * 168)
+        $context.DiagnosticWallSampleFractions = [double[]]::new(320 * 168)
+        $context.DiagnosticWallSampleOrigins = [double[]]::new(320 * 168)
+        $context.DiagnosticWallSampleTexelSteps = [double[]]::new(320 * 168)
+        $context.DiagnosticWallSampleTextureHeights = [int[]]::new(320 * 168)
+        $context.DiagnosticWallSampleSourceColors = [int[]]::new(320 * 168)
+        $context.DiagnosticWallSampleMappedColors = [int[]]::new(320 * 168)
+        $context.DiagnosticWallSampleLightIndexes = [int[]]::new(320 * 168)
         [Array]::Fill($context.DiagnosticDepthOwnerSegIndices, -1)
     }
     $context.PlaneSampleXFracData = [int[]]::new(320 * 168)
@@ -335,6 +356,17 @@ try {
             [Array]::Clear($context.DiagnosticWallSpanTraceSeen)
             [Array]::Clear($context.DiagnosticPlaneOwnerSegIndices)
             [Array]::Fill($context.DiagnosticDepthOwnerSegIndices, -1)
+            [Array]::Fill($context.DiagnosticWallSampleTextureIds, -1)
+            [Array]::Fill($context.DiagnosticWallSampleBands, -1)
+            [Array]::Fill($context.DiagnosticWallSampleColumns, -1)
+            [Array]::Fill($context.DiagnosticWallSampleRows, -1)
+            [Array]::Fill($context.DiagnosticWallSampleFractions, [double](-1))
+            [Array]::Fill($context.DiagnosticWallSampleOrigins, [double](-1))
+            [Array]::Fill($context.DiagnosticWallSampleTexelSteps, [double](-1))
+            [Array]::Fill($context.DiagnosticWallSampleTextureHeights, -1)
+            [Array]::Fill($context.DiagnosticWallSampleSourceColors, -1)
+            [Array]::Fill($context.DiagnosticWallSampleMappedColors, -1)
+            [Array]::Fill($context.DiagnosticWallSampleLightIndexes, -1)
             [Array]::Clear($context.DiagnosticDepthOwnerWriterTypes)
         }
         [Array]::Fill($context.PlaneSampleOriginX, -1)
@@ -351,6 +383,11 @@ try {
             [Array]::Clear($reference3D.DiagnosticFinalWallSegIndices, 0, $reference3D.DiagnosticFinalWallSegIndices.Length)
             [Array]::Clear($reference3D.DiagnosticFinalWallTopRows, 0, $reference3D.DiagnosticFinalWallTopRows.Length)
             [Array]::Clear($reference3D.DiagnosticFinalWallBottomRows, 0, $reference3D.DiagnosticFinalWallBottomRows.Length)
+            [Array]::Clear($reference3D.DiagnosticFinalWallTextureRows, 0, $reference3D.DiagnosticFinalWallTextureRows.Length)
+            [Array]::Clear($reference3D.DiagnosticFinalWallTextureFractions, 0, $reference3D.DiagnosticFinalWallTextureFractions.Length)
+            [Array]::Clear($reference3D.DiagnosticFinalWallSourceColors, 0, $reference3D.DiagnosticFinalWallSourceColors.Length)
+            [Array]::Clear($reference3D.DiagnosticFinalWallMappedColors, 0, $reference3D.DiagnosticFinalWallMappedColors.Length)
+            [Array]::Clear($reference3D.DiagnosticFinalWorldSpriteDescriptions, 0, $reference3D.DiagnosticFinalWorldSpriteDescriptions.Length)
             [Array]::Clear($reference3D.DiagnosticPlaneDistanceData, 0, $reference3D.DiagnosticPlaneDistanceData.Length)
             [Array]::Clear($reference3D.DiagnosticPlaneXFracData, 0, $reference3D.DiagnosticPlaneXFracData.Length)
             [Array]::Clear($reference3D.DiagnosticPlaneYFracData, 0, $reference3D.DiagnosticPlaneYFracData.Length)
@@ -391,6 +428,7 @@ try {
         $candidateNonPlaneMismatchWriterDepthWrittenCounts = @{}
         $candidateNonPlaneMismatchWriterNoDepthCounts = @{}
         $candidateNonPlaneMismatchDepthOwnerCounts = @{}
+        $candidateNonPlaneMismatchReferenceWallSegmentCounts = @{}
         $candidatePlaneMismatchWallSpanCounts = [ordered]@{
             ReferenceOpaqueWallPixels = 0
             ReferenceWallWriteIntervalContainsPixel = 0
@@ -622,6 +660,71 @@ try {
                                 }
                             }
                             if ($CaptureWallBoundaryTrace) {
+                                [int]$referenceFinalWriterType = [int]$reference3D.DiagnosticFinalWriterTypes[$referencePosition]
+                                [int]$referenceFinalRenderPassType = [int]$reference3D.DiagnosticFinalRenderPassTypes[$referencePosition]
+                                [int]$referenceFinalWallSegmentEncoded = if ($referenceFinalWriterType -eq 2 -and $referenceFinalRenderPassType -eq 1) { $reference3D.DiagnosticFinalWallSegIndices[$referencePosition] } else { 0 }
+                                [int]$referenceFinalWallSegmentIndex = if ($referenceFinalWallSegmentEncoded -gt 0) { $referenceFinalWallSegmentEncoded - 1 } else { -1 }
+                                [int]$referenceFinalWallTop = if ($referenceFinalWallSegmentIndex -ge 0) { $reference3D.DiagnosticFinalWallTopRows[$referencePosition] } else { -1 }
+                                [int]$referenceFinalWallBottom = if ($referenceFinalWallSegmentIndex -ge 0) { $reference3D.DiagnosticFinalWallBottomRows[$referencePosition] } else { -1 }
+                                [int]$referenceFinalWallSideIndex = -1
+                                [int]$referenceFinalWallFrontSectorIndex = -1
+                                [int]$referenceFinalWallBackSectorIndex = -1
+                                [int]$referenceFinalWallLineFlags = -1
+                                [int]$referenceFinalWallTopTexture = -1
+                                [int]$referenceFinalWallBottomTexture = -1
+                                [int]$referenceFinalWallMiddleTexture = -1
+                                [int]$referenceFinalWallFrontFloorHeightData = -1
+                                [int]$referenceFinalWallFrontCeilingHeightData = -1
+                                [int]$referenceFinalWallBackFloorHeightData = -1
+                                [int]$referenceFinalWallBackCeilingHeightData = -1
+                                if ($referenceFinalWallSegmentIndex -ge 0 -and $referenceFinalWallSegmentIndex -lt $game.World.Map.Segs.Length) {
+                                    [int]$referenceFinalWallMetadataOffset = $referenceFinalWallSegmentIndex * 4
+                                    $referenceFinalWallSideIndex = $context.SegmentMetadata[$referenceFinalWallMetadataOffset]
+                                    $referenceFinalWallFrontSectorIndex = $context.SegmentMetadata[$referenceFinalWallMetadataOffset + 1]
+                                    $referenceFinalWallBackSectorIndex = $context.SegmentMetadata[$referenceFinalWallMetadataOffset + 2]
+                                    $referenceFinalWallLineFlags = $context.SegmentMetadata[$referenceFinalWallMetadataOffset + 3]
+                                    $referenceFinalWallSide = $context.Sides[$referenceFinalWallSideIndex]
+                                    $referenceFinalWallTopTexture = $referenceFinalWallSide.TopTexture
+                                    $referenceFinalWallBottomTexture = $referenceFinalWallSide.BottomTexture
+                                    $referenceFinalWallMiddleTexture = $referenceFinalWallSide.MiddleTexture
+                                    $referenceFinalWallFrontFloorHeightData = $context.SectorFloorHeightData[$referenceFinalWallFrontSectorIndex]
+                                    $referenceFinalWallFrontCeilingHeightData = $context.SectorCeilingHeightData[$referenceFinalWallFrontSectorIndex]
+                                    if ($referenceFinalWallBackSectorIndex -ge 0) {
+                                        $referenceFinalWallBackFloorHeightData = $context.SectorFloorHeightData[$referenceFinalWallBackSectorIndex]
+                                        $referenceFinalWallBackCeilingHeightData = $context.SectorCeilingHeightData[$referenceFinalWallBackSectorIndex]
+                                    }
+                                }
+                                [string]$referenceFinalWallSegmentKey = '{0}:{1}' -f $referenceFinalWriterType,$referenceFinalWallSegmentIndex
+                                if (-not $candidateNonPlaneMismatchReferenceWallSegmentCounts.ContainsKey($referenceFinalWallSegmentKey)) {
+                                    $candidateNonPlaneMismatchReferenceWallSegmentCounts[$referenceFinalWallSegmentKey] = @{
+                                        ReferenceFinalWriterType = $referenceFinalWriterType
+                                        ReferenceFinalWallSegmentIndex = $referenceFinalWallSegmentIndex
+                                        ReferenceFinalWallSideIndex = $referenceFinalWallSideIndex
+                                        ReferenceFinalWallFrontSectorIndex = $referenceFinalWallFrontSectorIndex
+                                        ReferenceFinalWallBackSectorIndex = $referenceFinalWallBackSectorIndex
+                                        ReferenceFinalWallLineFlags = $referenceFinalWallLineFlags
+                                        ReferenceFinalWallTopTexture = $referenceFinalWallTopTexture
+                                        ReferenceFinalWallBottomTexture = $referenceFinalWallBottomTexture
+                                        ReferenceFinalWallMiddleTexture = $referenceFinalWallMiddleTexture
+                                        ReferenceFinalWallFrontFloorHeightData = $referenceFinalWallFrontFloorHeightData
+                                        ReferenceFinalWallFrontCeilingHeightData = $referenceFinalWallFrontCeilingHeightData
+                                        ReferenceFinalWallBackFloorHeightData = $referenceFinalWallBackFloorHeightData
+                                        ReferenceFinalWallBackCeilingHeightData = $referenceFinalWallBackCeilingHeightData
+                                        MismatchPixels = 0
+                                        Examples = [Collections.Generic.List[object]]::new()
+                                    }
+                                }
+                                $referenceFinalWallEntry = $candidateNonPlaneMismatchReferenceWallSegmentCounts[$referenceFinalWallSegmentKey]
+                                $referenceFinalWallEntry.MismatchPixels++
+                                if ($referenceFinalWallEntry.Examples.Count -lt 8) {
+                                    $referenceFinalWallEntry.Examples.Add([ordered]@{
+                                        X = $x
+                                        Y = $y
+                                        ReferenceFinalWallWriteTop = $referenceFinalWallTop
+                                        ReferenceFinalWallWriteBottom = $referenceFinalWallBottom
+                                        ReferenceWriteIntervalContainsPixel = ($y -ge $referenceFinalWallTop -and $y -le $referenceFinalWallBottom)
+                                    })
+                                }
                                 [int]$candidateDepthOwnerEncoded = $context.DiagnosticDepthOwnerSegIndices[$candidateIndex]
                                 [int]$candidateDepthOwnerSegmentIndex = if ($candidateDepthOwnerEncoded -gt 0) { $candidateDepthOwnerEncoded - 1 } else { -1 }
                                 [int]$candidateDepthOwnerWriterType = $context.DiagnosticDepthOwnerWriterTypes[$candidateIndex]
@@ -716,6 +819,38 @@ try {
                                         ReferenceFramebufferColor = [byte]$referencePixels[$referencePosition]
                                         CandidateDepth = if ($context.Depth[$candidateIndex] -eq [double]::PositiveInfinity) { 'PositiveInfinity' } else { $context.Depth[$candidateIndex] }
                                         CandidateDepthOwnerTrace = $candidateDepthOwnerTrace
+                                        CandidateWallSampleTextureId = $context.DiagnosticWallSampleTextureIds[$candidateIndex]
+                                        CandidateWallSampleBand = $context.DiagnosticWallSampleBands[$candidateIndex]
+                                        CandidateWallSampleColumn = $context.DiagnosticWallSampleColumns[$candidateIndex]
+                                        CandidateWallSampleRow = $context.DiagnosticWallSampleRows[$candidateIndex]
+                                        CandidateWallSampleFraction = $context.DiagnosticWallSampleFractions[$candidateIndex]
+                                        CandidateWallSampleOrigin = $context.DiagnosticWallSampleOrigins[$candidateIndex]
+                                        CandidateWallSampleTexelStep = $context.DiagnosticWallSampleTexelSteps[$candidateIndex]
+                                        CandidateWallSampleTextureHeight = $context.DiagnosticWallSampleTextureHeights[$candidateIndex]
+                                        CandidateWallSampleSourceColor = $context.DiagnosticWallSampleSourceColors[$candidateIndex]
+                                        CandidateWallSampleMappedColor = $context.DiagnosticWallSampleMappedColors[$candidateIndex]
+                                        CandidateWallSampleLightIndex = $context.DiagnosticWallSampleLightIndexes[$candidateIndex]
+                                        ReferenceFinalWallWriterType = $referenceFinalWriterType
+                                        ReferenceFinalRenderPassType = $referenceFinalRenderPassType
+                                        ReferenceFinalWorldSpriteDescription = if ($referenceFinalRenderPassType -eq 2) { $reference3D.DiagnosticFinalWorldSpriteDescriptions[$referencePosition] } else { $null }
+                                        ReferenceFinalWallSegmentIndex = $referenceFinalWallSegmentIndex
+                                        ReferenceFinalWallWriteTop = $referenceFinalWallTop
+                                        ReferenceFinalWallWriteBottom = $referenceFinalWallBottom
+                                        ReferenceFinalWallSideIndex = $referenceFinalWallSideIndex
+                                        ReferenceFinalWallFrontSectorIndex = $referenceFinalWallFrontSectorIndex
+                                        ReferenceFinalWallBackSectorIndex = $referenceFinalWallBackSectorIndex
+                                        ReferenceFinalWallLineFlags = $referenceFinalWallLineFlags
+                                        ReferenceFinalWallTopTexture = $referenceFinalWallTopTexture
+                                        ReferenceFinalWallBottomTexture = $referenceFinalWallBottomTexture
+                                        ReferenceFinalWallMiddleTexture = $referenceFinalWallMiddleTexture
+                                        ReferenceFinalWallFrontFloorHeightData = $referenceFinalWallFrontFloorHeightData
+                                        ReferenceFinalWallFrontCeilingHeightData = $referenceFinalWallFrontCeilingHeightData
+                                        ReferenceFinalWallBackFloorHeightData = $referenceFinalWallBackFloorHeightData
+                                        ReferenceFinalWallBackCeilingHeightData = $referenceFinalWallBackCeilingHeightData
+                                        ReferenceFinalWallTextureRow = if ($referenceFinalWallSegmentIndex -ge 0) { $reference3D.DiagnosticFinalWallTextureRows[$referencePosition] } else { -1 }
+                                        ReferenceFinalWallTextureFraction = if ($referenceFinalWallSegmentIndex -ge 0) { $reference3D.DiagnosticFinalWallTextureFractions[$referencePosition] } else { -1 }
+                                        ReferenceFinalWallSourceColor = if ($referenceFinalWallSegmentIndex -ge 0) { $reference3D.DiagnosticFinalWallSourceColors[$referencePosition] } else { -1 }
+                                        ReferenceFinalWallMappedColor = if ($referenceFinalWallSegmentIndex -ge 0) { $reference3D.DiagnosticFinalWallMappedColors[$referencePosition] } else { -1 }
                                         ReferencePlaneOwnerSectorIndex = $referenceOwnerSectorForExample
                                         ReferencePlaneSurfaceType = if ([int]$reference3D.DiagnosticFinalWriterTypes[$referencePosition] -eq 1) { [int]$reference3D.DiagnosticPlaneSurfaceTypes[$referencePosition] } else { 0 }
                                         ReferencePlaneSampleXFracData = if ([int]$reference3D.DiagnosticFinalWriterTypes[$referencePosition] -eq 1) { [int]$reference3D.DiagnosticPlaneXFracData[$referencePosition] } else { 0 }
@@ -1195,6 +1330,19 @@ try {
                 if ($candidateNonPlaneMismatchDepthOwnerTotal -ne $candidateNonPlaneMismatchPixels) {
                     throw "Candidate depth-owner classes did not reconcile for non-plane mismatches at ceiling height $height."
                 }
+                $candidateNonPlaneMismatchReferenceWallSegmentTotal = 0
+                $candidateNonPlaneMismatchReferenceMappedColumnTotal = 0
+                foreach ($referenceWallSegmentCount in $candidateNonPlaneMismatchReferenceWallSegmentCounts.Values) {
+                    $candidateNonPlaneMismatchReferenceWallSegmentTotal += [int]$referenceWallSegmentCount.MismatchPixels
+                    if ([int]$referenceWallSegmentCount.ReferenceFinalWriterType -eq 2) {
+                        $candidateNonPlaneMismatchReferenceMappedColumnTotal += [int]$referenceWallSegmentCount.MismatchPixels
+                    }
+                }
+                $candidateNonPlaneMismatchMappedColumnTotal = if ($candidateNonPlaneMismatchFinalWriterCounts.ContainsKey('2')) { [int]$candidateNonPlaneMismatchFinalWriterCounts['2'] } else { 0 }
+                if ($candidateNonPlaneMismatchReferenceWallSegmentTotal -ne $candidateNonPlaneMismatchPixels -or
+                    $candidateNonPlaneMismatchMappedColumnTotal -ne $candidateNonPlaneMismatchReferenceMappedColumnTotal) {
+                    throw "Reference final-writer segment attribution did not reconcile for non-plane mismatches at ceiling height $height."
+                }
                 if ($candidatePlaneMismatchWallSpanCounts.ReferenceOpaqueWallPixels -ne $candidatePlaneMismatchBspColumnPixels -or
                     $candidatePlaneMismatchWallSpanCounts.ReferenceWallWriteIntervalContainsPixel -ne $candidatePlaneMismatchWallSpanCounts.ReferenceOpaqueWallPixels) {
                     throw "Reference BSP column wall-span attribution did not reconcile at ceiling height $height."
@@ -1295,6 +1443,31 @@ try {
                             CandidateDepthOwnerBackCeilingHeightData = $owner.CandidateDepthOwnerBackCeilingHeightData
                             MismatchPixels = $owner.MismatchPixels
                             Examples = $owner.Examples.ToArray()
+                        }
+                    }
+                )
+            } else { $null }
+            CandidateNonPlaneMismatchReferenceWallSegments = if ($CaptureWallBoundaryTrace) {
+                @(
+                    foreach ($referenceWallKey in @($candidateNonPlaneMismatchReferenceWallSegmentCounts.Keys | Sort-Object { -[int]$candidateNonPlaneMismatchReferenceWallSegmentCounts[$_].MismatchPixels })) {
+                        $referenceWall = $candidateNonPlaneMismatchReferenceWallSegmentCounts[$referenceWallKey]
+                        [ordered]@{
+                            ReferenceFinalWriterType = $referenceWall.ReferenceFinalWriterType
+                            ReferenceFinalWriterName = $referenceFinalWriterNames[[string]$referenceWall.ReferenceFinalWriterType]
+                            ReferenceFinalWallSegmentIndex = $referenceWall.ReferenceFinalWallSegmentIndex
+                            ReferenceFinalWallSideIndex = $referenceWall.ReferenceFinalWallSideIndex
+                            ReferenceFinalWallFrontSectorIndex = $referenceWall.ReferenceFinalWallFrontSectorIndex
+                            ReferenceFinalWallBackSectorIndex = $referenceWall.ReferenceFinalWallBackSectorIndex
+                            ReferenceFinalWallLineFlags = $referenceWall.ReferenceFinalWallLineFlags
+                            ReferenceFinalWallTopTexture = $referenceWall.ReferenceFinalWallTopTexture
+                            ReferenceFinalWallBottomTexture = $referenceWall.ReferenceFinalWallBottomTexture
+                            ReferenceFinalWallMiddleTexture = $referenceWall.ReferenceFinalWallMiddleTexture
+                            ReferenceFinalWallFrontFloorHeightData = $referenceWall.ReferenceFinalWallFrontFloorHeightData
+                            ReferenceFinalWallFrontCeilingHeightData = $referenceWall.ReferenceFinalWallFrontCeilingHeightData
+                            ReferenceFinalWallBackFloorHeightData = $referenceWall.ReferenceFinalWallBackFloorHeightData
+                            ReferenceFinalWallBackCeilingHeightData = $referenceWall.ReferenceFinalWallBackCeilingHeightData
+                            MismatchPixels = $referenceWall.MismatchPixels
+                            Examples = $referenceWall.Examples.ToArray()
                         }
                     }
                 )

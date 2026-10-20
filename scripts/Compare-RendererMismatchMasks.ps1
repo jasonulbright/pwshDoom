@@ -35,6 +35,8 @@ $outputPath=Resolve-RepoFile $Output $false
 $baseline=[IO.File]::ReadAllText($baselineReportPath)|ConvertFrom-Json
 $candidate=[IO.File]::ReadAllText($candidateReportPath)|ConvertFrom-Json
 if($baseline.Error -or $candidate.Error){throw 'Comparison report contains an error.'}
+$baselineRendererSource=$baseline.Sources|Where-Object Path -eq 'src/FastRenderer.ps1'|Select-Object -First 1
+if($null -eq $baselineRendererSource){throw 'Baseline report does not pin src/FastRenderer.ps1.'}
 foreach($property in @('ReplaySha256','WadSha256','Episode','Map','InputTic','SectorIndex')){
     if($baseline.$property -cne $candidate.$property){throw "Comparison reports differ in $property."}
 }
@@ -108,7 +110,7 @@ $receipt=[ordered]@{
     CandidateComparisonReportSha256=(Get-FileHash -LiteralPath $candidateReportPath).Hash
     BaselineTriptychSha256=(Get-FileHash -LiteralPath $baselineImagePath).Hash
     CandidateTriptychSha256=(Get-FileHash -LiteralPath $candidateImagePath).Hash
-    BaselineRendererSha256=(Get-FileHash -LiteralPath $baselineRendererPath).Hash
+    BaselineRendererSha256=$baselineRendererSource.Sha256
     CandidateRendererSha256=(Get-FileHash -LiteralPath $candidateRendererPath).Hash
     BaselineDiagnosticRendererSha256=($baseline.Sources|Select-Object -First 1 -ExpandProperty Sha256)
     CandidateDiagnosticRendererSha256=($candidate.Sources|Select-Object -First 1 -ExpandProperty Sha256)

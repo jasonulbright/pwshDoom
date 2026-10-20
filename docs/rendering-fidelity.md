@@ -1520,3 +1520,21 @@ the [saved-replay comparison](../results/moving-sector-lower-boundary-20261019-v
 and [pixel-delta receipt](../results/moving-sector-lower-boundary-pixel-delta-20261019-v2.json).
 This is not original-executable parity or broad moving-world qualification;
 no live tests or desktop/device interaction were used.
+
+### Actor depth through lower step walls — October 20, 2026
+
+The 14 height-68 sprite mismatches were caused by the candidate's per-pixel
+wall-depth check blocking actors that the wall silhouette rules already allow
+to pass over a lower step. The renderer now marks pixels actually written by a
+lower wall band and records that segment's front-sector floor height. A world
+sprite may pass the depth check at those pixels when its base is at or above
+that floor; ordinary wall depth and sprite silhouette clipping still apply.
+The saved E1M1 tic-315 comparison reduces height-68 differences from 35 to 21:
+14 fixed, none introduced. The other sweep heights retain their candidate and
+reference frame hashes; height 34 still has four differences. The 21 remaining
+height-68 differences comprise 18 plane-buffer mismatches and three mapped-
+column color differences. See the [four-height comparison receipt](../results/moving-sector-lower-boundary-20261020-v10.json)
+and [pixel-delta receipt](../results/moving-sector-targeted-lower-wall-bypass-pixel-delta-20261020-v1.json).
+This uses the locally adapted reference and does not establish parity with the
+original executable or broader moving-world qualification. No live tests or
+desktop/device interaction were used.

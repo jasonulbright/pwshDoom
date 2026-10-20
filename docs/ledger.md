@@ -1,5 +1,22 @@
 # Investigation ledger
 
+## 2026-10-20 — Let sprites pass lower step walls when their floor supports them
+
+The tic-315 renderer trace identified 14 height-68 mismatches where a lower
+step wall's depth blocked sprite pixels that passed the reference renderer's
+silhouette clipping. The production renderer now records opaque lower-wall
+pixels and their front-sector floor height, then allows world-sprite pixels
+through that depth only when the actor base reaches that floor. The saved
+four-height comparison fixes 14 mismatches with no new ones; the other height
+hashes are unchanged. Height 68 retains 21 differences (18 plane-buffer and
+three mapped-column color differences), and height 34 retains four.
+
+The [comparison receipt](../results/moving-sector-lower-boundary-20261020-v10.json)
+and [pixel-delta receipt](../results/moving-sector-targeted-lower-wall-bypass-pixel-delta-20261020-v1.json)
+pin the saved replay, WAD, renderer sources and changed pixels. This is a
+comparison against the locally adapted PowerShell reference, not the original
+executable. No live tests, game UI or device interaction were used.
+
 ## 2026-10-19 — Preserve long input recordings across abrupt stops
 
 The human Episode 1 handoff recorded its input stream only after orderly exit;

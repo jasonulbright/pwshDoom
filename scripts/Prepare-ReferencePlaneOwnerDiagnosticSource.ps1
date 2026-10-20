@@ -28,8 +28,14 @@ class ThreeDRenderer {
     [int[]] $DiagnosticFinalWallSegIndices
     [int[]] $DiagnosticFinalWallTopRows
     [int[]] $DiagnosticFinalWallBottomRows
+    [int[]] $DiagnosticFinalWallTextureRows
+    [int[]] $DiagnosticFinalWallTextureFractions
+    [int[]] $DiagnosticFinalWallSourceColors
+    [int[]] $DiagnosticFinalWallMappedColors
+    [string[]] $DiagnosticFinalWorldSpriteDescriptions
     [byte] $DiagnosticCurrentRenderPassType
     [int] $DiagnosticCurrentWallSegIndex = -1
+    [string] $DiagnosticCurrentWorldSpriteDescription = ''
     [int[]] $DiagnosticPlaneDistanceData
     [int[]] $DiagnosticPlaneXFracData
     [int[]] $DiagnosticPlaneYFracData
@@ -43,6 +49,32 @@ class ThreeDRenderer {
 '@
 $source=$source.Replace($marker,$fields.TrimEnd([char]13,[char]10))
 $nl=[Environment]::NewLine
+
+function Add-FinalWallTextureSamples([string]$text){
+    $methodStart='    hidden [void] DrawColumnData('
+    $methodEnd='    [void] DrawColumn('
+    $start=$text.IndexOf($methodStart,[StringComparison]::Ordinal)
+    if($start -lt 0){throw 'Missing DrawColumnData for texture sampling.'}
+    $end=$text.IndexOf($methodEnd,$start,[StringComparison]::Ordinal)
+    if($end -lt 0){throw 'Missing DrawColumn after DrawColumnData.'}
+    $segment=$text.Substring($start,$end-$start)
+    $pattern='(?m)^(?<indent>[ \t]*)\$localScreenData\[\$pos\] = \$map\[\$source\[\$offset \+ \(\(\$fracData -shr \$fracBits\) -band 127\)\]\]\r?$'
+    $matches=[regex]::Matches($segment,$pattern)
+    if($matches.Count -ne 1){throw "DrawColumnData expected one texture sample write, found $($matches.Count)."}
+    $evaluator=[Text.RegularExpressions.MatchEvaluator]{
+        param($match)
+        $indent=$match.Groups['indent'].Value
+        return $indent+'[int]$diagnosticWallTextureRow = ($fracData -shr $fracBits) -band 127'+$nl+
+            $indent+'[int]$diagnosticWallSourceColor = $source[$offset + $diagnosticWallTextureRow]'+$nl+
+            $indent+'$localScreenData[$pos] = $map[$diagnosticWallSourceColor]'+$nl+
+            $indent+'$this.DiagnosticFinalWallTextureRows[$pos] = $diagnosticWallTextureRow'+$nl+
+            $indent+'$this.DiagnosticFinalWallTextureFractions[$pos] = $fracData'+$nl+
+            $indent+'$this.DiagnosticFinalWallSourceColors[$pos] = $diagnosticWallSourceColor'+$nl+
+            $indent+'$this.DiagnosticFinalWallMappedColors[$pos] = $localScreenData[$pos]'
+    }
+    $segment=[regex]::Replace($segment,$pattern,$evaluator)
+    return $text.Substring(0,$start)+$segment+$text.Substring($end)
+}
 
 function Add-PlaneOwnerWrites([string]$text,[string]$methodStart,[string]$methodEnd,[byte]$surfaceType,[string]$planeKind){
     $start=$text.IndexOf($methodStart,[StringComparison]::Ordinal)
@@ -96,6 +128,7 @@ function Add-PlaneOwnerWrites([string]$text,[string]$methodStart,[string]$method
 
 $source=Add-PlaneOwnerWrites $source '    [void] DrawCeilingColumn(' '    [void] DrawFloorColumn(' 2 'ceiling'
 $source=Add-PlaneOwnerWrites $source '    [void] DrawFloorColumn(' '    hidden [void] DrawColumnData(' 1 'floor'
+$source=Add-FinalWallTextureSamples $source
 
 function Add-FinalWriterMarks([string]$text,[string]$methodStart,[string]$methodEnd,[byte]$writerType){
     $start=$text.IndexOf($methodStart,[StringComparison]::Ordinal)
@@ -115,7 +148,17 @@ function Add-FinalWriterMarks([string]$text,[string]$methodStart,[string]$method
                 $indent+'    $this.DiagnosticFinalWallSegIndices[$pos] = $this.DiagnosticCurrentWallSegIndex + 1'+$nl+
                 $indent+'    $this.DiagnosticFinalWallTopRows[$pos] = $y1'+$nl+
                 $indent+'    $this.DiagnosticFinalWallBottomRows[$pos] = $y2'+$nl+
-                $indent+'}'
+                $indent+'}else{'+$nl+
+                $indent+'    $this.DiagnosticFinalWallSegIndices[$pos] = 0'+$nl+
+                $indent+'    $this.DiagnosticFinalWallTopRows[$pos] = -1'+$nl+
+                $indent+'    $this.DiagnosticFinalWallBottomRows[$pos] = -1'+$nl+
+                $indent+'}'+$nl+
+                $indent+'$this.DiagnosticFinalWorldSpriteDescriptions[$pos] = if($this.DiagnosticCurrentRenderPassType -eq 2){$this.DiagnosticCurrentWorldSpriteDescription}else{$null}'
+        }else{
+            $wallTraceMarks=$nl+$indent+'$this.DiagnosticFinalWallSegIndices[$pos] = 0'+$nl+
+                $indent+'$this.DiagnosticFinalWallTopRows[$pos] = -1'+$nl+
+                $indent+'$this.DiagnosticFinalWallBottomRows[$pos] = -1'+$nl+
+                $indent+'$this.DiagnosticFinalWorldSpriteDescriptions[$pos] = $null'
         }
         return $match.Value+$nl+$indent+'$this.DiagnosticFinalWriterTypes[$pos] = '+$writerType+$nl+$indent+'$this.DiagnosticFinalRenderPassTypes[$pos] = $this.DiagnosticCurrentRenderPassType'+$wallTraceMarks
     }
@@ -126,6 +169,12 @@ function Add-FinalWriterMarks([string]$text,[string]$methodStart,[string]$method
 $source=Add-FinalWriterMarks $source '    hidden [void] DrawColumnData(' '    [void] DrawColumn(' 2
 $source=Add-FinalWriterMarks $source '    hidden [void] DrawColumnTranslationData(' '    [void] DrawColumnTranslation(' 2
 $source=Add-FinalWriterMarks $source '    [void] DrawFuzzColumn(' '    [void] DrawSkyColumn(' 3
+
+$drawSpriteMarker='    [void] DrawSprite([VisSprite] $sprite) {'
+if(([regex]::Matches($source,[regex]::Escape($drawSpriteMarker))).Count -ne 1){throw 'Expected one world-sprite draw method marker.'}
+$drawSpriteTrace='    [void] DrawSprite([VisSprite] $sprite) {'+$nl+
+    '        $this.DiagnosticCurrentWorldSpriteDescription = ''{0} x={1}..{2} scale={3} world=({4},{5},{6})'' -f $sprite.Patch.Name,$sprite.X1,$sprite.X2,$sprite.Scale.Data,$sprite.GlobalX.Data,$sprite.GlobalY.Data,$sprite.GlobalBottomZ.Data'
+$source=$source.Replace($drawSpriteMarker,$drawSpriteTrace)
 
 $segIndexMarker='        $angle1 = [Geometry]::PointToAngle($this.viewX, $this.viewY, $seg.Vertex1.X, $seg.Vertex1.Y)'
 if(([regex]::Matches($source,[regex]::Escape($segIndexMarker))).Count -ne 1){throw 'Expected one DrawSeg angle marker.'}

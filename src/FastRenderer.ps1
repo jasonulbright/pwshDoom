@@ -79,6 +79,7 @@ function New-FastRenderContext {
         if($null -ne $Content.Flats.Flats[$i]){$planeFlatData[$i]=[byte[]]$Content.Flats.Flats[$i].Data}
     }
     $ctx=@{Content=$Content;World=$World;Lighting=(New-FastLightingTables);Pixels=[byte[]]::new(64000);Depth=[double[]]::new(64000);
+        ActorDepthBypassMask=[byte[]]::new(320*168);ActorDepthBypassLowerHeightData=[int[]]::new(320*168);
         TopClip=[int[]]::new(320);BottomClip=[int[]]::new(320);Planes=[int[]]::new(53760);Patches=@{};Textures=@{};Hud=@{};
         Stack=[int[]]::new($map.Nodes.Length*2+4);SkyColumns=[int[]]::new(320);RaySin=[int[]]::new(320);RayCos=[int[]]::new(320);
         WallPointScratch=[long[]]::new(2);WallParameterScratch=[long[]]::new(3);
@@ -298,7 +299,8 @@ function Update-FastRenderSectorData {
 function Draw-FastPatch {
     param($Context,$Patch,[double]$Left,[double]$Top,[double]$Scale=1,[double]$Distance=0,
         [bool]$Flip=$false,[int]$Light=0,[int]$FirstColumn=0,[int]$EndColumn=320,[int]$MaxY=200,
-    [int]$TextureAltData=0,[int]$CenterY=84,[switch]$FixedVerticalSampling,[int[]]$ClipTopByColumn,[int[]]$ClipBottomByColumn)
+    [int]$TextureAltData=0,[int]$CenterY=84,[switch]$FixedVerticalSampling,[int[]]$ClipTopByColumn,[int[]]$ClipBottomByColumn,
+    [byte[]]$DepthBypassMask,[int[]]$DepthBypassLowerHeightData,[int]$ActorBottomZData=0)
     [int]$pw=$Patch.Width;[int]$ph=$Patch.Height;[int[]]$texels=$Patch.Data
     [byte[]]$pixels=$Context.Pixels;[double[]]$depth=$Context.Depth;[byte[]]$colors=$Context.Colors[$Light]
     if($pw -le 0 -or $ph -le 0 -or $Scale -le 0){return}
@@ -337,10 +339,15 @@ function Draw-FastPatch {
                     [long]$verticalFracData=$postAltData+([long]($postY0-$CenterY)*$invScaleData)
                     for([int]$y=$postY0;$y -le $postY1;$y++){
                         [int]$p=$y*320+$x
-                        if($Distance -lt $depth[$p]){
+                        if($Distance -lt $depth[$p] -or
+                            ($null -ne $DepthBypassMask -and $DepthBypassMask[$p] -ne 0 -and
+                                [long]$ActorBottomZData -ge [long]$DepthBypassLowerHeightData[$p])){
                             [int]$postRow=[int](($verticalFracData -shr 16) -band 127)
                             [int]$color=$post.Data[$post.Offset+$postRow]
-                            if($color -ge 0){$pixels[$p]=$colors[$color];$depth[$p]=$Distance}
+                            if($color -ge 0){
+                                $pixels[$p]=$colors[$color];$depth[$p]=$Distance
+                                if($null -ne $DepthBypassMask){$DepthBypassMask[$p]=0;$DepthBypassLowerHeightData[$p]=0}
+                            }
                         }
                         $verticalFracData+=$invScaleData
                     }
@@ -670,6 +677,7 @@ function Invoke-FastRender {
     [int[]]$topClip=$Context.TopClip;[int[]]$bottomClip=$Context.BottomClip
     [Collections.Generic.List[hashtable]]$maskedColumns=$Context.MaskedColumns;[int]$maskedColumnCount=0
     [Array]::Clear($pixels);[Array]::Clear($planes);[Array]::Fill($depthBuffer,[double]::PositiveInfinity)
+    [Array]::Clear($Context.ActorDepthBypassMask);[Array]::Clear($Context.ActorDepthBypassLowerHeightData)
     [Array]::Clear($topClip);[Array]::Fill($bottomClip,167)
     [int]$open=$EndColumn-$FirstColumn
     [double[]]$nodeGeometry=$Context.NodeGeometry;[int[]]$nodeChildren=$Context.NodeChildren
@@ -944,7 +952,16 @@ function Invoke-FastRender {
                         # the integer column fraction without accumulating roundoff.
                         [double]$vf=$vOrigin+($y-84)*$wallTexelStep;[int]$v=$vf;if($v -gt $vf){$v--}
                         $v=($v%$th+$th)%$th;[int]$color=$td[$tu*$th+$v]
-                        if($color -ge 0){$p=$y*320+$x;$pixels[$p]=$wallColors[$color];$depthBuffer[$p]=$distance}
+                        if($color -ge 0){
+                            $p=$y*320+$x;$pixels[$p]=$wallColors[$color];$depthBuffer[$p]=$distance
+                            if($band -eq 1 -and $bf -gt $fh){
+                                $Context.ActorDepthBypassMask[$p]=1
+                                $Context.ActorDepthBypassLowerHeightData[$p]=$Context.SectorFloorHeightData[$segFront]
+                            }else{
+                                $Context.ActorDepthBypassMask[$p]=0
+                                $Context.ActorDepthBypassLowerHeightData[$p]=0
+                            }
+                        }
                     }
                 }
                 [int]$nextTop=168;[int]$nextBottom=-1
@@ -964,20 +981,20 @@ function Invoke-FastRender {
                     if($side.MiddleTexture -le 0){
                         [int]$occTop=[Math]::Max($clipT,$wallT);[int]$occBottom=[Math]::Min($clipB,$wallB)
                         for([int]$y=$occTop;$y -le $occBottom;$y++){
-                            [int]$p=$y*320+$x;if($distance -lt $depthBuffer[$p]){$depthBuffer[$p]=$distance}
+                            [int]$p=$y*320+$x;if($distance -lt $depthBuffer[$p]){$depthBuffer[$p]=$distance;$Context.ActorDepthBypassMask[$p]=0;$Context.ActorDepthBypassLowerHeightData[$p]=0}
                         }
                     }
                 }else{
                     if($side.TopTexture -le 0 -and $bc -lt $ch -and -not $joinedSky){
                         [int]$upperTop=[Math]::Max($clipT,$wallT);[int]$upperBottom=[Math]::Min($clipB,$portalT-1)
                         for([int]$y=$upperTop;$y -le $upperBottom;$y++){
-                            [int]$p=$y*320+$x;if($distance -lt $depthBuffer[$p]){$depthBuffer[$p]=$distance}
+                            [int]$p=$y*320+$x;if($distance -lt $depthBuffer[$p]){$depthBuffer[$p]=$distance;$Context.ActorDepthBypassMask[$p]=0;$Context.ActorDepthBypassLowerHeightData[$p]=0}
                         }
                     }
                     if($side.BottomTexture -le 0 -and $bf -gt $fh){
                         [int]$lowerTop=[Math]::Max($clipT,$portalB+1);[int]$lowerBottom=[Math]::Min($clipB,$wallB)
                         for([int]$y=$lowerTop;$y -le $lowerBottom;$y++){
-                            [int]$p=$y*320+$x;if($distance -lt $depthBuffer[$p]){$depthBuffer[$p]=$distance}
+                            [int]$p=$y*320+$x;if($distance -lt $depthBuffer[$p]){$depthBuffer[$p]=$distance;$Context.ActorDepthBypassMask[$p]=1;$Context.ActorDepthBypassLowerHeightData[$p]=$Context.SectorFloorHeightData[$segFront]}
                         }
                     }
                 }
@@ -1013,7 +1030,7 @@ function Invoke-FastRender {
             [double]$vf=$origin+($y-84)*$maskedTexelStep;[int]$v=$vf;if($v -gt $vf){$v--}
             if($v -lt 0 -or $v -ge $height){continue}
             [int]$color=$texels[$source+$v]
-            if($color -ge 0){$pixels[$p]=$colors[$color];$depthBuffer[$p]=$distance}
+            if($color -ge 0){$pixels[$p]=$colors[$color];$depthBuffer[$p]=$distance;$Context.ActorDepthBypassMask[$p]=0;$Context.ActorDepthBypassLowerHeightData[$p]=0}
         }
     }
     if($GeometryDetails){$geometryDoneQpc=[Diagnostics.Stopwatch]::GetTimestamp()}
@@ -1112,7 +1129,8 @@ function Invoke-FastRender {
                     Draw-FastFuzzPatch $Context $patch $left $top $scale $distance $frame.Flip[$rotation] $FirstColumn $EndColumn 168 $actorClipTop $actorClipBottom
                 }else{
                     Draw-FastPatch $Context $patch $left $top $scale $distance $frame.Flip[$rotation] $light $FirstColumn $EndColumn 168 `
-                        -TextureAltData $textureAltData -CenterY 84 -FixedVerticalSampling -ClipTopByColumn $actorClipTop -ClipBottomByColumn $actorClipBottom
+                        -TextureAltData $textureAltData -CenterY 84 -FixedVerticalSampling -ClipTopByColumn $actorClipTop -ClipBottomByColumn $actorClipBottom `
+                        -DepthBypassMask $Context.ActorDepthBypassMask -DepthBypassLowerHeightData $Context.ActorDepthBypassLowerHeightData -ActorBottomZData $actorZData
                 }
             }
     }
