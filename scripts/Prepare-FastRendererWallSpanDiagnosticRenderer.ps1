@@ -24,6 +24,10 @@ $newline=if($source.Contains("`r`n")){"`r`n"}else{"`n"}
 $planeCallCountMarker='Draw-FastPlaneColumnCalls $Context $planeSampleCallCount'
 if(([regex]::Matches($source,[regex]::Escape($planeCallCountMarker))).Count -ne 1){throw 'Expected one plane-sample call dispatch.'}
 $source=$source.Replace($planeCallCountMarker,'$Context.PlaneSampleCallCount = $planeSampleCallCount'+$newline+'    '+$planeCallCountMarker)
+$planeCallSegmentMarker='$planeSampleCalls[$planeSampleCallCount]=$x;'
+if(([regex]::Matches($source,[regex]::Escape($planeCallSegmentMarker))).Count -ne 2){throw 'Expected two plane-call append sites.'}
+$planeCallSegmentTrace='$planeSampleCalls[$planeSampleCallCount]=$x;if($Context.ContainsKey(''DiagnosticPlaneCallSegIndices'')){[int]$diagnosticPlaneCallIndex=$planeSampleCallCount -shr 2;[int[]]$diagnosticPlaneCallSegIndices=$Context.DiagnosticPlaneCallSegIndices;if($diagnosticPlaneCallIndex -ge $diagnosticPlaneCallSegIndices.Length){[int[]]$grownDiagnosticPlaneCallSegIndices=[int[]]::new([Math]::Max(64,$diagnosticPlaneCallIndex+1));[Array]::Copy($diagnosticPlaneCallSegIndices,$grownDiagnosticPlaneCallSegIndices,$diagnosticPlaneCallSegIndices.Length);$Context.DiagnosticPlaneCallSegIndices=$grownDiagnosticPlaneCallSegIndices;$diagnosticPlaneCallSegIndices=$grownDiagnosticPlaneCallSegIndices};$diagnosticPlaneCallSegIndices[$diagnosticPlaneCallIndex]=$segIndex}'
+$source=$source.Replace($planeCallSegmentMarker,$planeCallSegmentTrace)
 $opaqueDepthMarker='$p=$y*320+$x;$pixels[$p]=$wallColors[$color];$depthBuffer[$p]=$distance'
 if(([regex]::Matches($source,[regex]::Escape($opaqueDepthMarker))).Count -ne 1){throw 'Expected one opaque wall depth write.'}
 $opaqueDepthTrace='$p=$y*320+$x;$pixels[$p]=$wallColors[$color];$depthBuffer[$p]=$distance;if($Context.ContainsKey(''DiagnosticDepthOwnerSegIndices'')){$Context.DiagnosticDepthOwnerSegIndices[$p]=$segIndex+1;$Context.DiagnosticDepthOwnerWriterTypes[$p]=1}'

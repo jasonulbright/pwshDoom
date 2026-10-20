@@ -69,7 +69,12 @@ height-68 frame still has 18 plane differences. It remains rejected; sharing a
 host-computed span table may avoid repeated worker bookkeeping. Direct
 per-column scale lookup is worse. The [anchor study](../results/moving-sector-wall-scale-anchor-study-20261020.json)
 and [global-span evaluation](../results/moving-sector-global-solid-span-20261020.json)
-record the evidence. No live tests or device interaction were used; the
+record the evidence. A segment-index trace of the remaining 18 plane pixels
+shows candidate/reference sector ownership and BSP call order diverging at the
+sampled rows, so recurrence-only reuse does not justify another production
+change. The [call-trace receipt](../results/moving-sector-reference-plane-call-trace-20261020.json)
+pins the exact calls and unchanged four-height frame hashes. No live tests or
+device interaction were used; the
 complete human Episode 1 route remains the active milestone.
 
 ## Historical Episode 1 handoff — R17 (2026-09-29)

@@ -276,6 +276,7 @@ try {
     }
     if ($hasReferencePlaneOwnerFields) {
         $CaptureReferencePlaneOwners = $true
+        $reference3D.DiagnosticPlaneCallTrace = [Collections.Generic.List[object]]::new()
         $reference3D.DiagnosticPlaneOwners = [Sector[]]::new(320 * 200)
         $reference3D.DiagnosticPlaneSurfaceTypes = [byte[]]::new(320 * 200)
         $reference3D.DiagnosticFinalWriterTypes = [byte[]]::new(320 * 200)
@@ -301,6 +302,7 @@ try {
     }
         $context = New-FastRenderContext $content $game.World
     if ($CaptureWallBoundaryTrace) {
+        $context.DiagnosticPlaneCallSegIndices = [int[]]::new(2048)
         $context.DiagnosticWallSpanTrace = [int[]]::new($game.World.Map.Segs.Length * 320 * 12)
         $context.DiagnosticWallSpanTraceSeen = [byte[]]::new($game.World.Map.Segs.Length * 320)
         $context.DiagnosticPlaneOwnerSegIndices = [int[]]::new(320 * 168)
@@ -374,8 +376,35 @@ try {
         [Array]::Fill($context.PlaneCeilingSampleOriginX, -1)
         [Array]::Fill($context.PlaneFloorSampleOriginX, -1)
         Invoke-FastRender $context
+        $candidatePlaneCallTrace = [Collections.Generic.List[object]]::new()
+        if ($CaptureWallBoundaryTrace -and [int]$height -eq 68 -and $context.ContainsKey('PlaneSampleCallCount')) {
+            [int[]]$candidatePlaneCalls = $context.PlaneSampleCalls
+            [int]$candidatePlaneCallCount = [int]$context.PlaneSampleCallCount
+            if (($candidatePlaneCallCount -band 3) -ne 0) { throw 'Candidate plane-call trace has a truncated record.' }
+            for ([int]$callIndex = 0; $callIndex -lt ($candidatePlaneCallCount -shr 2); $callIndex++) {
+                [int]$callOffset = $callIndex * 4
+                [int]$callX = $candidatePlaneCalls[$callOffset]
+                [int]$callY1 = $candidatePlaneCalls[$callOffset + 1]
+                [int]$callY2 = $candidatePlaneCalls[$callOffset + 2]
+                [int]$planeId = $candidatePlaneCalls[$callOffset + 3]
+                [bool]$crossesFirstTargetRow = $callY1 -le 57 -and $callY2 -ge 55
+                [bool]$crossesSecondTargetRows = $callY1 -le 109 -and $callY2 -ge 98
+                if ($callX -lt 105 -or $callX -gt 230 -or (-not $crossesFirstTargetRow -and -not $crossesSecondTargetRows)) { continue }
+                $candidatePlaneCallTrace.Add([ordered]@{
+                    Ordinal = $callIndex
+                    X = $callX
+                    Y1 = $callY1
+                    Y2 = $callY2
+                    PlaneId = $planeId
+                    SectorIndex = ($planeId - 1) -shr 1
+                    SurfaceType = if (($planeId -band 1) -eq 0) { 'Floor' } else { 'Ceiling' }
+                    SegmentIndex = [int]$context.DiagnosticPlaneCallSegIndices[$callIndex]
+                })
+            }
+        }
         [byte[]]$candidate = $context.Pixels.Clone()
         if ($CaptureReferencePlaneOwners) {
+            $reference3D.DiagnosticPlaneCallTrace.Clear()
             [Array]::Clear($reference3D.DiagnosticPlaneOwners, 0, $reference3D.DiagnosticPlaneOwners.Length)
             [Array]::Clear($reference3D.DiagnosticPlaneSurfaceTypes, 0, $reference3D.DiagnosticPlaneSurfaceTypes.Length)
             [Array]::Clear($reference3D.DiagnosticFinalWriterTypes, 0, $reference3D.DiagnosticFinalWriterTypes.Length)
@@ -1587,6 +1616,30 @@ try {
                     [ordered]@{ Pair = $pairKey; MismatchPixels = $referencePlaneOwnerPairCounts[$pairKey] }
                 }
             )
+            CandidatePlaneCallTrace = $candidatePlaneCallTrace.ToArray()
+            ReferencePlaneCallTrace = if ($CaptureReferencePlaneOwners -and [int]$height -eq 68) {
+                @(
+                    [int]$planeCallOrdinal = 0
+                    foreach ($planeCall in $reference3D.DiagnosticPlaneCallTrace) {
+                        [int]$callOrdinal = $planeCallOrdinal++
+                        [int]$callX = $planeCall[0]
+                        [int]$callY1 = $planeCall[1]
+                        [int]$callY2 = $planeCall[2]
+                        [bool]$crossesFirstTargetRow = $callY1 -le 57 -and $callY2 -ge 55
+                        [bool]$crossesSecondTargetRows = $callY1 -le 109 -and $callY2 -ge 98
+                        if ($callX -lt 105 -or $callX -gt 230 -or (-not $crossesFirstTargetRow -and -not $crossesSecondTargetRows)) { continue }
+                        [ordered]@{
+                            Ordinal = $callOrdinal
+                            X = $callX
+                            Y1 = $callY1
+                            Y2 = $callY2
+                            SectorIndex = [int]$planeCall[3]
+                            SurfaceType = if ([int]$planeCall[4] -eq 1) { 'Floor' } else { 'Ceiling' }
+                            SegmentIndex = [int]$planeCall[5]
+                        }
+                    }
+                )
+            } else { @() }
         })
         $frames[[int]$height] = @{ Candidate = $candidate; Reference = $referencePixels }
     }
@@ -1718,6 +1771,8 @@ try {
         ReferenceWallSpanInterpretation = 'For candidate plane-buffer mismatches whose final reference pixel is a BSP mapped-column write, the diagnostic records the reference segment and actual write interval, then compares that pixel with the candidate segment-column wall bounds, clip interval, and upper/solid, lower, and deferred masked-middle bands. Candidate band intervals are clipped raster spans; this classifies geometry coverage and does not by itself prove the texture sample or final candidate color.'
         CandidatePortalBoundaryInterpretation = 'CandidatePortalTopEqualsPixel counts mismatch pixels that lie exactly on the candidate portal top boundary. CandidateUpperBandEndsImmediatelyAbovePixel counts when the candidate band-0 span ends at y-1; together with ReferenceWallBottomEqualsPixel, these counts isolate a one-row upper-wall versus portal-boundary difference.'
         PlaneSampleInterpretation = 'Candidate plane fractions, recurrence origins and reuse flags are captured from the production per-call plane sampler. Reference fractions, distance, light bin and flat texel are recorded at writes. Candidate frame bytes may include later overlays.'
+        CandidatePlaneCallTraceInterpretation = 'At ceiling height 68, the receipt includes the candidate plane samples selected for target rows by x, y1, y2, plane id, sector index, and surface in their original call order. The trace is emitted only when the wall-span diagnostic renderer is selected.'
+        ReferencePlaneCallTraceInterpretation = 'At ceiling height 68, the receipt includes reference floor/ceiling calls over columns 105–230 when their vertical range intersects rows 55–57 or 98–109. Each record gives x, y1, y2, sector index, and surface. Calls expose visibility boundaries in the adapted renderer; they do not identify final pixel ownership or establish original-executable parity.'
         PlaneMathInterpretation = 'Plane table and per-column fixed sine parity are compared after the final full-width candidate/reference render; this does not compare per-pixel plane fraction recurrence or light selection.'
     }
     $currentHashes = @{}

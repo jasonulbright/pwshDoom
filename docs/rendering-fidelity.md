@@ -1548,19 +1548,23 @@ have matching surface, height, translated flat and light keys. A candidate
 variant that reused recurrence by those keys alone produced the same frame
 hashes, as recorded by the [key-reuse counterfactual](../results/moving-sector-lower-boundary-20261020-v13.json),
 so key equality does not establish that the two renderers share a recurrence
-span.
+span. The newer [segment-index call trace](../results/moving-sector-reference-plane-call-trace-20261020.json)
+also records each renderer's sector and segment for the affected scanlines.
 
-At (163,56), the candidate sample begins at x=112 and the reference begins at
-x=116 after its recorded plane owner changes across that scanline. At
-(206,99), the candidate continues from x=184 while the reference initializes
-again at x=206. The candidate's current plane-call stream does not reproduce
-those reference span boundaries, and the trace does not support another
-production change. The final saved comparison remains at zero differences for
-ceiling heights 0 and 6, four at 34, and 21 at 68 (18 plane-buffer and three
-mapped-column color differences). This is offline comparison against the
-locally adapted PowerShell renderer only; original-executable parity and wider
-moving-world qualification remain open. No live tests or device interaction
-were used.
+At (163,56), the candidate calls sector 20 across x=113–175 and samples from
+x=112, while the reference visits sector 59 at x=113–115 and sector 60 at
+x=116–174, sampling from x=116 at the mismatch. At (206,99), candidate floor
+calls visit sector 18 at x=182–183, sector 19 at x=184–206, then sector 18 at
+x=207–209. The reference visits sector 18 at x=207–209, x=206, then x=181–205
+in BSP call order. The candidate sample continues from x=184 while the
+reference initializes at x=206. These call-owner and visibility differences
+mean the remaining gap is not explained by recurrence boundaries alone, so
+the trace does not support another production change. The final saved
+comparison remains at zero differences for ceiling heights 0 and 6, four at
+34, and 21 at 68 (18 plane-buffer and three mapped-column color differences).
+This is offline comparison against the locally adapted PowerShell renderer
+only; original-executable parity and wider moving-world qualification remain
+open. No live tests or device interaction were used.
 
 ### Wall-scale anchors follow visible wall runs — October 20, 2026
 

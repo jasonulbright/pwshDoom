@@ -1,5 +1,24 @@
 # Investigation ledger
 
+## 2026-10-20 — Compare plane call ownership at remaining moving-ceiling pixels
+
+Added segment-index tracing to the offline saved-replay comparison. At
+(163,56), the candidate calls ceiling plane sector 20 across x=113–175, while
+the adapted reference visits sector 59 at x=113–115 and x=175, then sector 60
+at x=116–174. The mismatch pixel uses candidate sample origin 112 and reference
+owner 60/sample origin 116. At (206,99), candidate floor calls visit sector 18
+at x=182–183, sector 19 at x=184–206, then sector 18 at x=207–209; the
+reference visits sector 18 at x=207–209, x=206, then x=181–205 in BSP call
+order. The candidate and reference sample origins are 184 and 206. These calls
+expose an ownership, visibility, and call-order divergence; they do not support
+a recurrence-only production change. The four candidate/reference frame-hash pairs match the prior receipt
+at all sampled heights; differences remain 0, 0, 4, and 21 pixels at heights
+0, 6, 34, and 68. Production rendering is unchanged. The
+[compact call-trace receipt](../results/moving-sector-reference-plane-call-trace-20261020.json)
+records the exact calls and source hashes. This is offline comparison against
+the locally adapted PowerShell renderer, not original-executable parity; no
+live tests or desktop/device interaction were used.
+
 ## 2026-10-20 — Bring the article's current-state summary up to date
 
 The article opening and current-preview section still described Preview.8 and
@@ -99,13 +118,15 @@ The row traces show that reference sample origins follow its plane-call and
 visibility boundaries: at (163,56), the candidate carries origin 112 while
 the reference starts at 116 after reference plane owners change across the
 row; at (206,99), the candidate carries origin 184 while the reference starts
-a new sample at 206. The current candidate call stream does not expose enough
-of those reference boundaries to support a production correction. No renderer
-change was made. The [row-trace receipt](../results/moving-sector-lower-boundary-20261020-v17.json)
-records exact sources, hashes and parameters; the [key-reuse counterfactual](../results/moving-sector-lower-boundary-20261020-v13.json)
-records the unchanged-hash result. This remains a saved-replay
-comparison against the locally adapted PowerShell reference, not original
-executable parity; no live tests or desktop/device interaction were used.
+a new sample at 206. A follow-up segment-index trace now shows that the
+candidate's plane calls also retain different sector ownership and BSP call
+order at both pixels. This points beyond recurrence reuse, so no production
+renderer change was made. The [call-trace receipt](../results/moving-sector-reference-plane-call-trace-20261020.json)
+records those spans and the unchanged frame hashes; the [row-trace receipt](../results/moving-sector-lower-boundary-20261020-v17.json)
+records the earlier sample and owner data; the [key-reuse counterfactual](../results/moving-sector-lower-boundary-20261020-v13.json)
+records the unchanged-hash result. This remains a saved-replay comparison
+against the locally adapted PowerShell reference, not original-executable
+parity; no live tests or desktop/device interaction were used.
 
 ## 2026-10-20 — Let sprites pass lower step walls when their floor supports them
 

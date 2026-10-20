@@ -1,0 +1,310 @@
+{
+  "SchemaVersion": 1,
+  "FinishedUtc": "2026-10-20T09:31:21.5212078Z",
+  "Experiment": "Trace candidate and locally adapted reference plane calls around remaining E1M1 moving-ceiling mismatches",
+  "SourceCommit": "f8c9004a3e7b65918937960b3519a43d5744eedb",
+  "Episode": 1,
+  "Map": 1,
+  "Skill": 3,
+  "InputTic": 315,
+  "LevelTic": 315,
+  "SectorIndex": 26,
+  "ActualCeilingHeight": 6.0,
+  "ReplayPath": "results/e1m1-route-lineflags.json",
+  "ReplaySha256": "41CF35EDF94C1CABE8C96A1CEEFBCFBF41F20DF24093569B65A1A4C9C56C017B",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "ComparedWithReceipt": "results/moving-sector-lower-boundary-20261020-v17.json",
+  "Heights": [
+    {
+      "CeilingHeight": 0,
+      "SceneDifferentPixels": 0,
+      "PlaneBufferMismatchPixels": 0,
+      "CandidateFrameSha256": "2BF8E1C7451C581D5F78A759D51ADB740F8218AC80FB8D2DBA2AC57CB95078F0",
+      "ReferenceFrameSha256": "6CB42E3F56904BF394B49B4680C1578DA73D9919F243B92EFBC33D670EA2C010",
+      "CandidateHashMatchesPriorReceipt": true,
+      "ReferenceHashMatchesPriorReceipt": true
+    },
+    {
+      "CeilingHeight": 6,
+      "SceneDifferentPixels": 0,
+      "PlaneBufferMismatchPixels": 0,
+      "CandidateFrameSha256": "925A5841A8F525E85E970BA32A7DAA9A0AF41542A60F43DCF47E0EB097390994",
+      "ReferenceFrameSha256": "B7DA72BF29AAB1C42324463E253D6B1F3BD834CB383567E83BE59C35C2841A88",
+      "CandidateHashMatchesPriorReceipt": true,
+      "ReferenceHashMatchesPriorReceipt": true
+    },
+    {
+      "CeilingHeight": 34,
+      "SceneDifferentPixels": 4,
+      "PlaneBufferMismatchPixels": 0,
+      "CandidateFrameSha256": "193C4B251A55E55DBA4E67A3283EF5EAEFCD7704AC0E86BCB04E7BA3E440F16A",
+      "ReferenceFrameSha256": "D158B11218C76C2CE022F612795BC3DECDD0DCA430CE3DFE4699734CA4557806",
+      "CandidateHashMatchesPriorReceipt": true,
+      "ReferenceHashMatchesPriorReceipt": true
+    },
+    {
+      "CeilingHeight": 68,
+      "SceneDifferentPixels": 21,
+      "PlaneBufferMismatchPixels": 18,
+      "CandidateFrameSha256": "C50BF84D66E71D09966BBD08E593FD773E0EBECBF21B0782B514AF6AF5D46242",
+      "ReferenceFrameSha256": "E62E4EF8887421EF900085790CD5793980ACC074E72E29ED10FDE7D4592AB6C8",
+      "CandidateHashMatchesPriorReceipt": true,
+      "ReferenceHashMatchesPriorReceipt": true
+    }
+  ],
+  "Height68CandidatePlaneCallCount": 427,
+  "Height68ReferencePlaneCallCount": 302,
+  "MismatchPixels": [
+    {
+      "X": 163,
+      "Y": 56,
+      "CandidatePlaneId": 41,
+      "CandidateSectorIndex": 20,
+      "CandidateSurface": "Ceiling",
+      "CandidateSampleOriginX": 112,
+      "CandidateColor": 188,
+      "ReferenceOwnerSectorIndex": 60,
+      "ReferenceSampleOriginX": 116,
+      "ReferenceColor": 189,
+      "ReferenceReusedPreviousColumn": true
+    },
+    {
+      "X": 206,
+      "Y": 99,
+      "CandidatePlaneId": 40,
+      "CandidateSectorIndex": 19,
+      "CandidateSurface": "Floor",
+      "CandidateSampleOriginX": 184,
+      "CandidateColor": 102,
+      "ReferenceOwnerSectorIndex": 18,
+      "ReferenceSampleOriginX": 206,
+      "ReferenceColor": 106,
+      "ReferenceReusedPreviousColumn": false
+    }
+  ],
+  "CallOrderSamples": [
+    {
+      "Row": 56,
+      "XRange": [
+        112,
+        175
+      ],
+      "CandidateRuns": [
+        {
+          "FirstOrdinal": 883,
+          "LastOrdinal": 883,
+          "XStart": 112,
+          "XEnd": 112,
+          "Count": 1,
+          "SectorIndex": 20,
+          "SegmentIndex": 147,
+          "PlaneId": 41
+        },
+        {
+          "FirstOrdinal": 884,
+          "LastOrdinal": 946,
+          "XStart": 113,
+          "XEnd": 175,
+          "Count": 63,
+          "SectorIndex": 20,
+          "SegmentIndex": 150,
+          "PlaneId": 41
+        }
+      ],
+      "ReferenceRuns": [
+        {
+          "FirstOrdinal": 817,
+          "LastOrdinal": 817,
+          "XStart": 112,
+          "XEnd": 112,
+          "Count": 1,
+          "SectorIndex": 20,
+          "SegmentIndex": 147,
+          "PlaneId": null
+        },
+        {
+          "FirstOrdinal": 850,
+          "LastOrdinal": 853,
+          "XStart": 113,
+          "XEnd": 115,
+          "Count": 3,
+          "SectorIndex": 59,
+          "SegmentIndex": 501,
+          "PlaneId": null
+        },
+        {
+          "FirstOrdinal": 855,
+          "LastOrdinal": 855,
+          "XStart": 175,
+          "XEnd": 175,
+          "Count": 1,
+          "SectorIndex": 59,
+          "SegmentIndex": 502,
+          "PlaneId": null
+        },
+        {
+          "FirstOrdinal": 916,
+          "LastOrdinal": 920,
+          "XStart": 116,
+          "XEnd": 120,
+          "Count": 5,
+          "SectorIndex": 60,
+          "SegmentIndex": 505,
+          "PlaneId": null
+        },
+        {
+          "FirstOrdinal": 921,
+          "LastOrdinal": 972,
+          "XStart": 121,
+          "XEnd": 172,
+          "Count": 52,
+          "SectorIndex": 60,
+          "SegmentIndex": 506,
+          "PlaneId": null
+        },
+        {
+          "FirstOrdinal": 973,
+          "LastOrdinal": 974,
+          "XStart": 173,
+          "XEnd": 174,
+          "Count": 2,
+          "SectorIndex": 60,
+          "SegmentIndex": 507,
+          "PlaneId": null
+        }
+      ]
+    },
+    {
+      "Row": 99,
+      "XRange": [
+        181,
+        209
+      ],
+      "CandidateRuns": [
+        {
+          "FirstOrdinal": 650,
+          "LastOrdinal": 651,
+          "XStart": 182,
+          "XEnd": 183,
+          "Count": 2,
+          "SectorIndex": 18,
+          "SegmentIndex": 130,
+          "PlaneId": 38
+        },
+        {
+          "FirstOrdinal": 669,
+          "LastOrdinal": 707,
+          "XStart": 184,
+          "XEnd": 203,
+          "Count": 20,
+          "SectorIndex": 19,
+          "SegmentIndex": 138,
+          "PlaneId": 40
+        },
+        {
+          "FirstOrdinal": 709,
+          "LastOrdinal": 713,
+          "XStart": 204,
+          "XEnd": 206,
+          "Count": 3,
+          "SectorIndex": 19,
+          "SegmentIndex": 141,
+          "PlaneId": 40
+        },
+        {
+          "FirstOrdinal": 762,
+          "LastOrdinal": 764,
+          "XStart": 207,
+          "XEnd": 209,
+          "Count": 3,
+          "SectorIndex": 18,
+          "SegmentIndex": 137,
+          "PlaneId": 38
+        },
+        {
+          "FirstOrdinal": 789,
+          "LastOrdinal": 789,
+          "XStart": 181,
+          "XEnd": 181,
+          "Count": 1,
+          "SectorIndex": 18,
+          "SegmentIndex": 129,
+          "PlaneId": 38
+        }
+      ],
+      "ReferenceRuns": [
+        {
+          "FirstOrdinal": 696,
+          "LastOrdinal": 698,
+          "XStart": 207,
+          "XEnd": 209,
+          "Count": 3,
+          "SectorIndex": 18,
+          "SegmentIndex": 137,
+          "PlaneId": null
+        },
+        {
+          "FirstOrdinal": 720,
+          "LastOrdinal": 720,
+          "XStart": 206,
+          "XEnd": 206,
+          "Count": 1,
+          "SectorIndex": 18,
+          "SegmentIndex": 128,
+          "PlaneId": null
+        },
+        {
+          "FirstOrdinal": 723,
+          "LastOrdinal": 747,
+          "XStart": 181,
+          "XEnd": 205,
+          "Count": 25,
+          "SectorIndex": 18,
+          "SegmentIndex": 129,
+          "PlaneId": null
+        }
+      ]
+    }
+  ],
+  "Sources": [
+    {
+      "Path": "scripts/Compare-MovingSectorHeightSweep.ps1",
+      "Sha256": "79509E22813FD5B22EB9E0305D659B9DE0B23427A7F9B1974198FDB33EB8DAE0"
+    },
+    {
+      "Path": "scripts/Prepare-ReferencePlaneOwnerDiagnosticSource.ps1",
+      "Sha256": "0E10EFB66B3609ED197FEE4AA0EFD142F15AD9782A21C98F6B715DE1DDF546BB"
+    },
+    {
+      "Path": "scripts/Prepare-FastRendererWallSpanDiagnosticRenderer.ps1",
+      "Sha256": "9FD49399FAD137C7195D441777455FBA62B8E72C787ED4EB134CCD6C62EEA8FD"
+    },
+    {
+      "Path": "local/fast-renderer-plane-call-trace-segment-20261020.ps1",
+      "Sha256": "7F745BF82C845676437119138174B01FA7707F6B701B6EC930B960914087A229"
+    },
+    {
+      "Path": "src/FastRenderer.ps1",
+      "Sha256": "F94FD419255B80304245C351E6847E78083B1C39689E72777A47CBA863D3FB84"
+    },
+    {
+      "Path": "src/ManagedDoom/Video/ThreeDRenderer.sb.ps1",
+      "Sha256": "9926E254F54250EEDD4F929681026BFF9ECEE7E6A9869FE99114F4FCD0CCF84B"
+    },
+    {
+      "Path": "local/reference-plane-calls-segment-20261020/Video/ThreeDRenderer.sb.ps1",
+      "Sha256": "CAA731EDCEC3CEB6B3CAFF4E28E1705442557A4EF88CF21F5E7B299E6338FFE6"
+    },
+    {
+      "Path": "local/moving-sector-plane-call-trace-segment-20261020.json",
+      "Sha256": "CE7A59BB6934185D3A94CA5D45D22A4EBA5AA1E6D0C4733F05F2C551BB248135"
+    },
+    {
+      "Path": "results/moving-sector-lower-boundary-20261020-v17.json",
+      "Sha256": "E79CE4EE3DE79FC6639CC4EDF295C99A9334DC57AD9EB029828129AA9253BCA0"
+    }
+  ],
+  "Execution": "Offline saved-replay render comparison and in-memory WAD inspection; no live tests, game host, UI, input device, or audio device.",
+  "ReferenceLimit": "The reference is a locally adapted PowerShell ManagedDoom renderer; this does not establish original-executable parity.",
+  "Interpretation": "At the sampled mismatches, candidate plane calls retain different sector/segment ownership and visibility order from the adapted reference calls. This evidence does not support a recurrence-only production change."
+}

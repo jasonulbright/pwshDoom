@@ -21,6 +21,7 @@ if(([regex]::Matches($source,[regex]::Escape($marker))).Count -ne 1){throw 'Unex
 $fields=@'
 class ThreeDRenderer {
     # Diagnostic-only reference plane writes; present only in this copied source.
+    [Collections.Generic.List[object]] $DiagnosticPlaneCallTrace
     [Sector[]] $DiagnosticPlaneOwners
     [byte[]] $DiagnosticPlaneSurfaceTypes
     [byte[]] $DiagnosticFinalWriterTypes
@@ -128,6 +129,26 @@ function Add-PlaneOwnerWrites([string]$text,[string]$methodStart,[string]$method
 
 $source=Add-PlaneOwnerWrites $source '    [void] DrawCeilingColumn(' '    [void] DrawFloorColumn(' 2 'ceiling'
 $source=Add-PlaneOwnerWrites $source '    [void] DrawFloorColumn(' '    hidden [void] DrawColumnData(' 1 'floor'
+
+function Add-PlaneCallTrace([string]$text,[string]$methodStart,[string]$methodEnd,[int]$surfaceType){
+    $start=$text.IndexOf($methodStart,[StringComparison]::Ordinal)
+    if($start -lt 0){throw "Missing plane-call method: $methodStart"}
+    $end=$text.IndexOf($methodEnd,$start,[StringComparison]::Ordinal)
+    if($end -lt 0){throw "Missing next plane-call method: $methodEnd"}
+    $segment=$text.Substring($start,$end-$start)
+    $marker='    ) {'
+    if(([regex]::Matches($segment,[regex]::Escape($marker))).Count -ne 1){throw "$methodStart expected one method body marker."}
+    $trace='    ) {'+$nl+
+        '        if ($null -ne $this.DiagnosticPlaneCallTrace -and $y2 -ge $y1) {'+$nl+
+        '            [int]$diagnosticPlaneCallSectorIndex = [Array]::IndexOf($this.world.Map.Sectors, $sector)'+$nl+
+        '            $this.DiagnosticPlaneCallTrace.Add([int[]]@($x, $y1, $y2, $diagnosticPlaneCallSectorIndex, '+$surfaceType+', $this.DiagnosticCurrentWallSegIndex))'+$nl+
+        '        }'
+    $segment=$segment.Replace($marker,$trace)
+    return $text.Substring(0,$start)+$segment+$text.Substring($end)
+}
+
+$source=Add-PlaneCallTrace $source '    [void] DrawCeilingColumn(' '    [void] DrawFloorColumn(' 2
+$source=Add-PlaneCallTrace $source '    [void] DrawFloorColumn(' '    hidden [void] DrawColumnData(' 1
 $source=Add-FinalWallTextureSamples $source
 
 function Add-FinalWriterMarks([string]$text,[string]$methodStart,[string]$methodEnd,[byte]$writerType){
