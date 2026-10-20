@@ -2,9 +2,9 @@
 
 **Doom, running in PowerShell. In your terminal. With a Matrix mode.**
 
-**Release: [0.1.0-preview.9](https://github.com/jasonulbright/pwshDoom/releases/tag/v0.1.0-preview.9).** This cumulative preview preserves Classic, Matrix and color art, adds fixed-point wall and upper-portal boundary handling, and retains saved gamma controls and configurable keys. The bounded moving-ceiling comparison improves, while broader fidelity remains open. Gameplay, software rendering, terminal encoding, decoding, music synthesis and mixing remain PowerShell. Bring your own Ultimate Doom `DOOM.WAD`.
+**Release: [0.1.0-preview.10](https://github.com/jasonulbright/pwshDoom/releases/tag/v0.1.0-preview.10).** This cumulative preview preserves Classic, Matrix and color art, adds wall and scaled-sprite texture-column offset hoisting, and retains saved gamma controls and configurable keys. The fixed-state E1M2 frame hash is unchanged; timing evidence is inconclusive. Gameplay, software rendering, terminal encoding, decoding, music synthesis and mixing remain PowerShell. Bring your own Ultimate Doom `DOOM.WAD`.
 
-This is a playable community preview. The complete Episode 1 human playthrough and broader Ultimate Doom qualification remain open. See the [playthrough instructions](docs/episode1-playtest.md), [Preview.9 scope and evidence](docs/release-preview9.md), and [roadmap](docs/roadmap.md).
+This is a playable community preview. The complete Episode 1 human playthrough and broader Ultimate Doom qualification remain open. See the [playthrough instructions](docs/episode1-playtest.md), [Preview.10 scope and evidence](docs/release-preview10.md), and [roadmap](docs/roadmap.md).
 
 | Classic | Matrix | Color art |
 | --- | --- | --- |

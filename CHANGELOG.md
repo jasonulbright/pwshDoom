@@ -4,7 +4,23 @@
 
 Current work continues toward the complete Episode 1 route, independent
 original-executable fidelity, sustained display pacing, and physical/acoustic
-review. The next cumulative release is due after 35 commits since Preview.9.
+review. The next cumulative release is due after 35 commits since Preview.10.
+
+## 0.1.0-preview.10 — 2026-10-20
+
+Cumulative playable community preview after 35 commits since Preview.9.
+Classic, Matrix and AnsiArt remain supported, with gameplay, rendering and
+audio mixing in PowerShell. See [scope and current limits](docs/release-preview10.md);
+this is not full Ultimate Doom certification.
+
+- Hoist wall and scaled-sprite texture-column offsets outside their per-pixel
+  loops. The fixed E1M2 serial frame remains byte-identical to the baseline;
+  unpaired timing measurements do not establish a speedup.
+- Repair the disposable renderer work-counter instrumentation so it follows
+  current wall, masked-pixel, and plane-write sites.
+- No live game, display, input, or audio-device test was run for this release.
+
+Published package: [v0.1.0-preview.10](https://github.com/jasonulbright/pwshDoom/releases/tag/v0.1.0-preview.10).
 
 ## 0.1.0-preview.9 — 2026-10-19
 

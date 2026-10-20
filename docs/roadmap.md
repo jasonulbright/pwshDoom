@@ -110,6 +110,15 @@ and [corrected 18-sample receipt](../results/moving-sector-visplane-mismatch-ori
 No live tests or device interaction were used; the complete human Episode 1
 route remains the active milestone.
 
+Current-source renderer update, October 20, 2026: wall and scaled-sprite
+sampling now computes the source texture-column base once per screen column,
+then reuses it for the pixel rows. A fixed E1M2 serial render produced the
+same 64,000-pixel SHA-256 as the baseline. The measured profiles were not
+paired and their phase medians varied substantially, so they do not establish
+a speedup. The disposable work-counter generator was also corrected to match
+the current wall, masked-pixel, and plane-write source. No live game or device
+test was run. See the [source-offset receipt](../results/renderer-source-offset-20261020.json).
+
 ## Historical Episode 1 handoff — R17 (2026-09-29)
 
 The current implementation candidate is commit 00405deebef6b4e8477c9c9316987b82fbc9064d. The clean development package and bounded R17 checks are pinned in the [candidate receipt](../results/episode1-current-human-candidate-20260929-r17.json) and [package receipt](../results/r17-playtest-package-validation-20260929.json). The archive has 543 manifest-verified files, excludes local assets and the research PDF, and passes extracted-package preflight under PowerShell 7.6.6.

@@ -1,0 +1,44 @@
+{
+  "SchemaVersion": 1,
+  "MeasuredUtc": "2026-10-20T12:20:27.9173726Z",
+  "Purpose": "Fixed-state output identity check for wall and scaled-patch texture-column offset hoisting.",
+  "Episode": 1,
+  "Map": 2,
+  "Skill": 3,
+  "Camera": {
+    "XFixed": -2097152,
+    "YFixed": -15728640,
+    "ViewZFixed": 4259840,
+    "Angle": 1073741824
+  },
+  "WarmupFrames": 4,
+  "MeasuredFrames": 20,
+  "WorkerCount": 1,
+  "TransportMode": "object snapshot fallback",
+  "PowerShell": "7.6.5",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "BundleSha256": "2419DC7E6C2008B8B5E70A192296104E780E4AD2679A128AF61FD07C325C96D2",
+  "BaselineRendererSha256": "F94FD419255B80304245C351E6847E78083B1C39689E72777A47CBA863D3FB84",
+  "CandidateRendererSha256": "FD69CA545AD42A57DC62D557993224B8490BD0CC4323C42E4917E1A358338ADB",
+  "BaselineFramePixels": 64000,
+  "CandidateFramePixels": 64000,
+  "BaselineFrameSha256": "7CE121144325FDE8BE39D318B6646C4F9767907886EA2A2EEB40B8CD4D830014",
+  "CandidateFrameSha256": "7CE121144325FDE8BE39D318B6646C4F9767907886EA2A2EEB40B8CD4D830014",
+  "FrameIdentity": true,
+  "BaselineProfile": {
+    "FinishedUtc": "2026-10-20T12:08:30.9547273Z",
+    "WallMedianMs": 103.5153,
+    "GeometryMedianMs": 120.7922,
+    "TotalMedianMs": 138.9702
+  },
+  "CandidateProfile": {
+    "FinishedUtc": "2026-10-20T12:20:27.9173726Z",
+    "WallMedianMs": 134.8223,
+    "GeometryMedianMs": 160.15,
+    "TotalMedianMs": 185.677
+  },
+  "TimingConclusion": "Inconclusive. These are separate, unpaired profiles and phase medians varied substantially; no speedup is claimed.",
+  "LiveTestsRun": false,
+  "DeviceInteraction": false,
+  "Meaning": "One fixed E1M2 serial software-renderer state. This is output-identity evidence, not campaign, worker-parity, pacing, or original-executable evidence."
+}

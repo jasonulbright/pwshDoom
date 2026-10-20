@@ -7520,3 +7520,17 @@ and the replay-journal recovery script are unchanged, so the documented
 launch and recovery paths remain current. This is a source-tree inspection,
 not a game launch or route qualification. The branch is 32 commits past
 Preview.9; the next release threshold is 35 commits.
+
+### 2026-10-20 — Hoist texture-column offsets and repair renderer counters
+
+The wall-texture loop and scaled world-patch loop now calculate each source
+column's base index once and reuse it across scanlines. Four warm-up frames and
+20 measured serial frames at fixed E1M2 produced the same full-frame SHA-256 as
+the baseline (`7CE121144325FDE8BE39D318B6646C4F9767907886EA2A2EEB40B8CD4D830014`).
+The baseline and candidate timings were separate unpaired runs and varied
+substantially; no performance gain is claimed. The renderer work-counter
+generator now instruments the current wall texture, masked-pixel, and plane
+write statements, and the plane counter reads from its render context. The
+[receipt](../results/renderer-source-offset-20261020.json) pins the fixed WAD,
+source hashes, profile settings, and output identity. No game window, input,
+audio device, or live test was used.
