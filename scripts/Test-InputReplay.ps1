@@ -93,6 +93,9 @@ try{
     $large=Join-Path $directory 'large.json';$stream=[IO.File]::Create($large);try{$stream.SetLength(128MB+1)}finally{$stream.Dispose()}
     $rejected=$false;try{$null=Read-DoomInputReplay $large}catch{$rejected=$true}
     if(-not $rejected){throw 'Oversized file accepted.'};$checks.Add(@{Name='128 MiB size guard before JSON parsing';Passed=$true})
+    Remove-Item -LiteralPath $large -Force
+    if(Test-Path -LiteralPath $large){throw 'Oversized fixture cleanup failed.'}
+    $checks.Add(@{Name='Oversized fixture removed after size-guard check';Passed=$true})
     $comparison=Compare-DoomReplayCheckpoints @(@{Tic=0;Sha256=('B'*64)},@{Tic=2;Sha256=('C'*64)}) @(@{Tic=0;Sha256=('B'*64)}) 1
     if(-not $comparison.Matched -or $comparison.Checked -ne 1){throw 'Prefix comparison failed.'}
     $checks.Add(@{Name='Unconsumed future checkpoint excluded';Passed=$true})
@@ -102,7 +105,18 @@ try{
     $comparison=Compare-DoomReplayCheckpoints @(@{Tic=2;Sha256=('C'*64)}) @(@{Tic=2;Sha256=('D'*64)}) 2
     if($comparison.Matched){throw 'Divergence accepted.'};$checks.Add(@{Name='Diverged checkpoint fails';Passed=$true})
 }catch{$failure=$_.ToString();throw}finally{
-    @{FinishedUtc=[DateTime]::UtcNow.ToString('o');Error=$failure;Checks=$checks.ToArray();SourceSha256=(Get-FileHash "$PSScriptRoot/../src/InputReplay.ps1").Hash;
-        Meaning='Data format, bounds, non-overwrite, legacy defaults, launch binding and checkpoint-comparison checks. No WAD or running engine required; separate real-host replay checks establish runtime behavior.'}|ConvertTo-Json -Depth 6|Set-Content -LiteralPath $Output
+    try{
+        @{FinishedUtc=[DateTime]::UtcNow.ToString('o');Error=$failure;Checks=$checks.ToArray();SourceSha256=(Get-FileHash "$PSScriptRoot/../src/InputReplay.ps1").Hash;
+            Meaning='Data format, bounds, non-overwrite, legacy defaults, launch binding and checkpoint-comparison checks. No WAD or running engine required; separate real-host replay checks establish runtime behavior.'}|ConvertTo-Json -Depth 6|Set-Content -LiteralPath $Output
+    }finally{
+        $localRoot=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../local'))
+        $fixturePath=[IO.Path]::GetFullPath($directory)
+        $fixtureParent=[IO.Path]::GetDirectoryName($fixturePath)
+        $fixtureName=[IO.Path]::GetFileName($fixturePath)
+        if($fixtureParent -ine $localRoot -or $fixtureName -notmatch '^replay-format-[0-9a-f]{32}$'){
+            throw "Refusing to remove unexpected replay fixture directory: $fixturePath"
+        }
+        if(Test-Path -LiteralPath $fixturePath){Remove-Item -LiteralPath $fixturePath -Recurse -Force}
+    }
 }
 "PASS: $($checks.Count) input replay format checks."

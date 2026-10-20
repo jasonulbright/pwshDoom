@@ -1,5 +1,16 @@
 # Investigation ledger
 
+## 2026-10-20 — Stop replay-format size-fixture accumulation
+
+`Test-InputReplay.ps1` creates a sparse 128 MiB + 1 byte input to verify the
+replay reader's size bound. Repeated runs had left ten copies in ignored
+`local/replay-format-*` directories, totaling 1,342,177,290 bytes. The test now
+removes its generated oversized file after confirming rejection and asserts
+that the file is gone. The offline format suite passes 59 checks; the oversized
+fixture count stayed at ten before and after the run, so this run added no
+large scratch data. Ten older oversized fixtures remain. The complete tree
+measures 27,899,237,636 bytes, below the 30,000,000,000-byte cap.
+
 ## 2026-10-20 — Compare plane call ownership at remaining moving-ceiling pixels
 
 Added segment-index tracing to the offline saved-replay comparison. At
