@@ -42,6 +42,20 @@ call records and frame counts. This is a frozen saved-replay comparison against
 the local PowerShell reference, not original-executable parity; no live tests or
 device interaction were used.
 
+## 2026-10-20 — Reject direct-per-column plane initialization
+
+The frozen E1M1 sweep tested initializing every visible plane pixel directly
+at its own screen column. It leaves heights 0 and 6 exact, but increases scene
+differences from 4 to 131 at height 34 and from 21 to 1,137 at height 68; the
+height-68 plane-buffer mismatches rise from 18 to 1,134. On the 17 baseline
+different-owner samples, the direct X and Y fractions each match the reference
+at only one sample; texture coordinates, texel and color match at nine. This
+rule is rejected and production sampling is unchanged. The
+[receipt](../results/moving-sector-reference-plane-direct-column-counterfactual-20261020.json)
+pins the direct renderer, generator, full call trace, source hashes, replay/WAD
+hashes and per-height comparisons. This was offline saved-replay analysis only;
+no live tests or device interaction were used.
+
 ## 2026-10-20 — Bring the article's current-state summary up to date
 
 The article opening and current-preview section still described Preview.8 and

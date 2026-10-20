@@ -1577,7 +1577,11 @@ columns. Out-of-row calls can reset global per-surface recurrence even when
 they do not write a target row. A counterfactual that retains a previous sample
 per row and matching height/flat/light key increases scene differences from 21
 to 34 and plane-buffer mismatches from 18 to 31. That rule is rejected; the
-production sampler is unchanged.
+production sampler is unchanged. Direct initialization at each column is also
+rejected: it raises height-68 scene differences to 1,137 and plane-buffer
+mismatches to 1,134, with 131 scene differences at height 34. Only nine of the
+17 original different-owner pixels match the reference texel under this rule.
+See the [direct-sampling receipt](../results/moving-sector-reference-plane-direct-column-counterfactual-20261020.json).
 
 ### Wall-scale anchors follow visible wall runs — October 20, 2026
 

@@ -78,8 +78,10 @@ pins those results and the unchanged four-height frame hashes. The [full-call
 trace](../results/moving-sector-reference-plane-full-call-trace-20261020.json)
 captures 1,227 candidate and 1,037 adapted-reference calls across the frame.
 A per-row height/flat/light reuse rule worsens the saved height-68 comparison
-from 21 to 34 scene differences and is rejected. The next renderer work is to
-derive a correct origin rule from candidate visibility and call boundaries.
+from 21 to 34 scene differences and is rejected. Initializing every plane
+pixel at its own column worsens that comparison to 1,137 differences, so it is
+rejected too. The next renderer work is to derive a correct origin rule from
+candidate visibility and call boundaries.
 No live tests or device interaction were used; the
 complete human Episode 1 route remains the active milestone.
 

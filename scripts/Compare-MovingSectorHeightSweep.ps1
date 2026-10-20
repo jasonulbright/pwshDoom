@@ -208,7 +208,8 @@ $sourcePaths = @(
     'scripts/Prepare-FastRendererWallSpanDiagnosticRenderer.ps1',
     'scripts/Prepare-FastRendererPortalTopBoundaryCounterfactual.ps1',
     'scripts/Prepare-FastRendererUntexturedLowerPlaneCounterfactual.ps1',
-    'scripts/Prepare-FastRendererPerRowPlaneKeyCounterfactual.ps1'
+    'scripts/Prepare-FastRendererPerRowPlaneKeyCounterfactual.ps1',
+    'scripts/Prepare-FastRendererDirectPlaneColumnCounterfactual.ps1'
 )
 $sourcePaths = @($sourcePaths | Select-Object -Unique)
 $sourceHashes = @{}
@@ -1364,6 +1365,17 @@ try {
                                                     CandidateAtReferenceOriginYFracData = $candidateReferenceOriginYFrac
                                                     CandidateAtReferenceOriginFlatTexelIndex = $candidateReferenceOriginFlatTexelIndex
                                                     CandidateAtReferenceOriginColor = $candidateReferenceOriginColor
+                                                    CandidateDirectXFracData = $candidateMismatchPlaneSample.DirectXFracData
+                                                    CandidateDirectYFracData = $candidateMismatchPlaneSample.DirectYFracData
+                                                    CandidateDirectTextureX = $candidateMismatchPlaneSample.DirectTextureX
+                                                    CandidateDirectTextureY = $candidateMismatchPlaneSample.DirectTextureY
+                                                    CandidateDirectFlatTexelIndex = $candidateMismatchPlaneSample.DirectFlatTexelIndex
+                                                    CandidateDirectColor = $candidateMismatchPlaneSample.DirectColor
+                                                    CandidateDirectMatchesReferenceXFrac = ($candidateMismatchPlaneSample.DirectXFracData -eq $referencePlaneSampleXFracData)
+                                                    CandidateDirectMatchesReferenceYFrac = ($candidateMismatchPlaneSample.DirectYFracData -eq $referencePlaneSampleYFracData)
+                                                    CandidateDirectMatchesReferenceTexture = ($candidateMismatchPlaneSample.DirectTextureX -eq (($referencePlaneSampleXFracData -shr 16) -band 63) -and $candidateMismatchPlaneSample.DirectTextureY -eq (((($referencePlaneSampleYFracData -shr 10) -band 4032) -shr 6)))
+                                                    CandidateDirectMatchesReferenceTexel = ($candidateMismatchPlaneSample.DirectFlatTexelIndex -eq $referencePlaneSampleTexelIndex)
+                                                    CandidateDirectMatchesReferenceColor = ($candidateMismatchPlaneSample.DirectColor -eq $referencePlaneSampleColor)
                                                     CandidatePlaneSampleLightMapIndex = $candidateMismatchPlaneSample.LightMapIndex
                                                     ReferencePlaneSampleLightMapIndex = [int]$reference3D.DiagnosticPlaneLightIndices[$referencePosition]
                                                     CandidatePlaneSampleTextureX = $candidateMismatchPlaneSample.TextureX
