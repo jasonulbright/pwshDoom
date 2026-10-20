@@ -65,11 +65,18 @@ interpolation across occlusion-clipped ranges. Reanchoring each visible run
 fixes those three but fails partition parity. A follow-up full-frame solid-span
 prototype restores parity across seven process strips and removes the three
 wall-color mismatches, but its isolated render median is 5.2% slower and its
-height-68 frame still has 18 plane differences. It remains rejected; sharing a
-host-computed span table may avoid repeated worker bookkeeping. Direct
-per-column scale lookup is worse. The [anchor study](../results/moving-sector-wall-scale-anchor-study-20261020.json)
-and [global-span evaluation](../results/moving-sector-global-solid-span-20261020.json)
-record the evidence. A segment-index trace of the remaining 18 plane pixels
+height-68 frame still has 18 plane differences. It remains rejected. A shared
+host-computed span-table prepass preserves 320,000/320,000 serial/partition
+pixels, but adds substantial dispatch-to-harvest time: the four warmed views
+average 126.7 ms versus an embedded baseline of 56.7 ms (+123%). These runs
+were sequential, not paired ABBA trials, so the timing is diagnostic. The
+candidate was reverted; production rendering is unchanged. Direct
+per-column scale lookup is worse. The [anchor study](../results/moving-sector-wall-scale-anchor-study-20261020.json),
+[global-span evaluation](../results/moving-sector-global-solid-span-20261020.json),
+and [shared-prepass receipt](../results/render-partitions-shared-wall-scale-spans-20261020-r3.json)
+record the evidence. The patch is retained for reproducibility at
+[`shared-wall-scale-span-prepass-rejected-20261020.patch.gz`](../results/shared-wall-scale-span-prepass-rejected-20261020.patch.gz).
+A segment-index trace of the remaining 18 plane pixels
 shows candidate/reference sector ownership and BSP call order diverging at the
 sampled rows. An origin counterfactual reproduces the reference fractions,
 flat texel and color for all 17 different-owner plane pixels when the candidate

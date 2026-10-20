@@ -7465,3 +7465,19 @@ moving-world or original-executable parity. The [comparison receipt](../results/
 and [pixel-delta receipt](../results/moving-sector-lower-boundary-pixel-delta-20261019-v2.json)
 pin the source, replay, WAD and exact changed-pixel counts. No live tests or
 desktop/device interaction were used.
+
+### 2026-10-20 — Reject the shared wall-scale prepass on dispatch cost
+
+An offline experiment moved full-frame visible-wall-run discovery into worker
+0 and published scale anchors through shared memory. It preserved exact
+serial/partition pixels across five fixed E1M1 views and seven uneven process
+strips (320,000/320,000), but dispatch-to-harvest measurements were
+979.6/193.9/171.0/88.0/54.0 ms. The four warmed views average 126.7 ms versus
+56.7 ms in the embedded baseline (+123%); prepass time alone ranges from 17.3
+to 342.4 ms. The timing runs were sequential, not paired ABBA trials, so this
+is diagnostic evidence. The candidate was reverted and production rendering
+is unchanged. The evidence compares the adapted renderer with itself for
+partition correctness and is not a live pacing or original-executable result.
+See the [comparison receipt](../results/render-partitions-shared-wall-scale-spans-20261020-r3.json)
+and [compressed reproduction patch](../results/shared-wall-scale-span-prepass-rejected-20261020.patch.gz).
+No live tests, desktop/device interaction, or gameplay occurred.

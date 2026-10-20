@@ -1621,6 +1621,19 @@ host-computed shared span table is a possible lower-cost follow-up. The
 contains the source hashes, partition timings and scope limits. This was saved
 replay/in-memory work only, not live gameplay or a 60-update/display result.
 
+The shared-table follow-up computes full-frame visible wall runs in worker 0
+and publishes their scale anchors to the other workers. Five fixed E1M1 views
+again match serial output across seven uneven process strips (320,000 pixels),
+but dispatch-to-harvest times are 979.6, 193.9, 171.0, 88.0 and 54.0 ms. The
+four warmed views average 126.7 ms against the embedded 56.7 ms baseline, a
+123% increase. The runs were sequential rather than paired ABBA trials, so the
+timing is diagnostic. The visibility prepass alone takes 17.3–342.4 ms. This
+approach is rejected and the experiment was reverted; production remains
+unchanged. The [comparison receipt](../results/render-partitions-shared-wall-scale-spans-20261020-r3.json)
+and [compressed reproduction patch](../results/shared-wall-scale-span-prepass-rejected-20261020.patch.gz)
+preserve its measurements and source. This is offline process testing only;
+it does not measure live pacing or original-executable parity.
+
 ### Same-owner plane color gap follows call order — October 20, 2026
 
 The remaining same-owner height-68 floor color mismatch at (226,105) uses
