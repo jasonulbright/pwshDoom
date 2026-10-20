@@ -1241,3 +1241,12 @@ and [compressed source patch](../results/moving-sector-solid-range-scale-prepass
 This is offline renderer evidence against the adapted reference, not live
 gameplay or original-executable parity. No live tests or device interaction
 were used.
+
+### All-map headless smoke — October 20, 2026
+
+All 36 Ultimate Doom maps loaded, advanced 35 idle tics, and produced two
+serial 320x200 renders each. This qualifies map loading and bounded idle
+simulation only; it does not advance the required human E1 playthrough or
+establish exits, navigation, moving-specials, live input, audio, worker
+rendering, or campaign completion. See the [source-pinned receipt](../results/campaign-smoke-20261020.json).
+No live tests or device interaction were used, and no video was recorded.

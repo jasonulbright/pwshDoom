@@ -7501,3 +7501,13 @@ Immediately before this evidence commit, the complete local project folder
 measured 27,907,421,336 bytes, below the 30,000,000,000-byte limit. The
 reference PDF remains local and is excluded from Git by the existing
 `/docs/gebbdoom.pdf` ignore rule.
+
+### 2026-10-20 — All-map headless smoke
+
+The headless campaign smoke passed all 36 Ultimate Doom map markers. Each
+case loaded a fresh map, advanced 35 idle tics, and rendered two serial
+320x200 frames at 0 and 90 degree heading offsets. The [JSON receipt](../results/campaign-smoke-20261020.json)
+pins all 257 source files and the IWAD hash. This does not test navigation,
+exits, moving-special coverage, input, audio, worker rendering, original-game
+parity, or campaign completion. It used no game window or hardware devices and
+created no video capture.
