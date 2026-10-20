@@ -76,6 +76,12 @@ Your report will be recorded only for the scope and outcomes you state. Automate
 
 The [current candidate receipt](../results/episode1-playtest-candidate-20261020-r3.json) pins the clean package, source commit, payload hashes and offline checks. It does not start the game host or qualify a map route. The public Preview.9 asset remains unchanged. An earlier four-second E1M1 actual-device check returned all 175,140 submitted music frames and closed cleanly, with one queue-starvation observation after the final packet and no rebuffer resume; that older check is not a sustained audio or audible-quality qualification. No live test is part of this handoff preparation.
 
+A current-tree comparison at `de54849` confirms that `Start-Doom.ps1`,
+`src/`, `scripts/Build-EngineBundle.ps1`, and
+`scripts/Recover-DoomInputReplayJournal.ps1` remain identical to the candidate's
+pinned source commit `f89e005`. The documented launch and replay-recovery paths
+therefore remain current; this check does not qualify a live route.
+
 Preview.6 passes 36/36 map-start smokes at 35 idle tics and five-view 16-worker parity in each visual style. These tests do not finish maps. Earlier bounded simulation and audio-host rates were below the frozen 35-tic/60-display target, and neither Terminal writes nor worker parity establish distinct monitor presentations. See the [package receipt](../results/preview6-package-validation-20261002.json), [publication receipt](../results/preview6-publication-20261002.json), and [performance evidence](performance.md).
 
 The former E1M2 chainsaw crash was caused by ordering a custom Angle value that does not implement IComparable. The current wrapped binary-angle comparison passes the focused attack regression against an E1M2 imp, which loses 4 HP after four tics. It is a mechanic check, not a route; later renderer changes do not change that gameplay code.

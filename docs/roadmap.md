@@ -40,7 +40,9 @@ payload hashes, nine offline suites, and seven-worker pixel parity in Classic,
 Matrix, and AnsiArt/Katakana pass across 960,000 pixels; it does not start the
 game or complete a map. See the [current candidate
 receipt](../results/episode1-playtest-candidate-20261020-r3.json). The broader
-release acceptance gates below remain intact.
+release acceptance gates below remain intact. A current-tree diff confirms
+that the handoff's launch, engine-bundle, replay-recovery, and all `src/`
+paths remain identical to the candidate's pinned `f89e005` source.
 
 The opt-in human input recorder now writes a checksummed append-only sidecar
 every 350 consumed tics and at map/session-state transitions. If the process

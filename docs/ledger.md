@@ -7511,3 +7511,12 @@ pins all 257 source files and the IWAD hash. This does not test navigation,
 exits, moving-special coverage, input, audio, worker rendering, original-game
 parity, or campaign completion. It used no game window or hardware devices and
 created no video capture.
+
+### 2026-10-20 — Verify current human-handoff runtime source
+
+Compared the current branch at `de54849` with the handoff candidate's pinned
+source `f89e005`. `Start-Doom.ps1`, all of `src/`, the engine-bundle builder,
+and the replay-journal recovery script are unchanged, so the documented
+launch and recovery paths remain current. This is a source-tree inspection,
+not a game launch or route qualification. The branch is 32 commits past
+Preview.9; the next release threshold is 35 commits.
