@@ -51,6 +51,17 @@ cycles it during play. Worker frames and their palette metadata carry the same
 level. Offline settings and palette suites pass 96 and 286 checks; original-
 executable equivalence and visual inspection remain unverified.
 
+Current-source renderer work, October 20, 2026: the worker asset loader now
+initializes the actor-depth-bypass buffers, and the production renderer matches
+all 320,000 pixels across five offline views and seven process strips. A saved
+E1M1 replay identifies three remaining wall-color mismatches caused by scale
+interpolation across occlusion-clipped ranges. Reanchoring each visible run
+fixes those three but fails partition parity, so it remains rejected pending a
+shared global-span solution. Direct per-column scale lookup is worse. The
+[study receipt](../results/moving-sector-wall-scale-anchor-study-20261020.json)
+records the evidence. No live tests or device interaction were used; the
+complete human Episode 1 route remains the active milestone.
+
 ## Historical Episode 1 handoff — R17 (2026-09-29)
 
 The current implementation candidate is commit 00405deebef6b4e8477c9c9316987b82fbc9064d. The clean development package and bounded R17 checks are pinned in the [candidate receipt](../results/episode1-current-human-candidate-20260929-r17.json) and [package receipt](../results/r17-playtest-package-validation-20260929.json). The archive has 543 manifest-verified files, excludes local assets and the research PDF, and passes extracted-package preflight under PowerShell 7.6.6.

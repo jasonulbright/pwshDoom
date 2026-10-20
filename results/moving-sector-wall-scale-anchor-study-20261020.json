@@ -1,0 +1,105 @@
+{
+  "SchemaVersion": 1,
+  "FinishedUtc": "2026-10-20T01:08:58.5174930Z",
+  "Experiment": "Wall-scale interpolation anchors and worker render-context initialization",
+  "SourceCommit": "1c2e213624ee403db64ee94fb071767944c8d6fe",
+  "Inputs": {
+    "Replay": "results/e1m1-route-lineflags.json",
+    "ReplaySha256": "41CF35EDF94C1CABE8C96A1CEEFBCFBF41F20DF24093569B65A1A4C9C56C017B",
+    "InputTic": 315,
+    "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+    "CeilingHeights": [
+      0,
+      6,
+      34,
+      68
+    ]
+  },
+  "ProductionBaseline": {
+    "RendererSha256": "F94FD419255B80304245C351E6847E78083B1C39689E72777A47CBA863D3FB84",
+    "ComparisonArtifact": "local/moving-sector-wall-scale-20261020-v21-comparison.json",
+    "ComparisonSha256": "64E67B49F179C501CF235CA153FE2998AEC3D1F19F7A436ABFAE96C0290BA0BF",
+    "SceneDifferentPixels": [
+      0,
+      0,
+      4,
+      21
+    ],
+    "PlaneBufferMismatchPixels": [
+      0,
+      0,
+      0,
+      18
+    ],
+    "NonPlaneBufferMismatchPixels": [
+      0,
+      0,
+      4,
+      3
+    ],
+    "ReferenceEngineBundleSha256": "00CFFF5794801C8FE28CB1D51B7FD75BEF3704D63765CC548FCBDD3ED7FDAF5C"
+  },
+  "DirectPerColumnCounterfactual": {
+    "RendererSha256": "B849443F83D9989A7D8537214F975930C78BABD261CFF7DFB6DE0F95130D8C02",
+    "ComparisonArtifact": "local/moving-sector-wall-scale-20261020-v22-direct-scale.json",
+    "ComparisonSha256": "97CC520119A1201E830DC59919E5AAC3878A556FA984F2A31D2F3707F5558388",
+    "SceneDifferentPixels": [
+      28,
+      15,
+      38,
+      444
+    ],
+    "Decision": "Rejected: much worse at every sampled height."
+  },
+  "VisibleRunCounterfactual": {
+    "RendererSha256": "2C1227F976DF0BE007CFA701345577023252512FCE34B9EA2D71F873A1AC8519",
+    "ComparisonArtifact": "local/moving-sector-visible-range-scale-20261020-v23-comparison.json",
+    "ComparisonSha256": "EE9F34E10E1E06932C7156095749871894B4504C4A7AA16A55B2671A943BF4E9",
+    "SceneDifferentPixels": [
+      0,
+      0,
+      4,
+      18
+    ],
+    "PlaneBufferMismatchPixels": [
+      0,
+      0,
+      0,
+      18
+    ],
+    "NonPlaneBufferMismatchPixels": [
+      0,
+      0,
+      4,
+      0
+    ],
+    "ReferenceEngineBundleSha256": "2419DC7E6C2008B8B5E70A192296104E780E4AD2679A128AF61FD07C325C96D2",
+    "ReferenceFrameHashesMatchBaselineAtAllFourHeights": true,
+    "PartitionSelfCheck": {
+      "Result": "Failed",
+      "ViewAngleDegrees": 0,
+      "MismatchPixels": 6,
+      "FirstColumn": 91,
+      "EndColumnExclusive": 137
+    },
+    "Decision": "Rejected for production: it removes three height-68 mapped-column color mismatches but scale anchors split at worker boundaries and break serial/partition pixel equality."
+  },
+  "WorkerContextFix": {
+    "File": "src/RenderAssets.ps1",
+    "Sha256": "C9151B3B1104F3E02E86842D053527488C68B46EE3859873C7F539F67D0DBB6D",
+    "Change": "Initialize actor-depth-bypass mask and lower-height buffers when worker render assets are loaded.",
+    "ProductionPartitionArtifact": "local/render-partitions-worker-context-20261020.json",
+    "ProductionPartitionSha256": "429748DDF7DCCD82CD0CEE66B3ADD115943908F335D5C5B6A1346E1BA72ACD0A",
+    "ComparedPixels": 320000,
+    "ViewCount": 5,
+    "WorkerStrips": 7,
+    "MismatchPixels": 0,
+    "Result": "Passed"
+  },
+  "Limits": [
+    "Saved replay and local in-memory IWAD rendering only.",
+    "No live tests, game window, keyboard, display, or audio device interaction.",
+    "The locally adapted PowerShell renderer is not independent original-executable evidence.",
+    "Production wall-scale interpolation remains unchanged."
+  ]
+}

@@ -1,5 +1,24 @@
 # Investigation ledger
 
+## 2026-10-20 — Trace wall-scale anchors and repair worker contexts
+
+A saved E1M1 tic-315 comparison shows that the candidate interpolates wall scale
+across each full projected segment while the adapted reference restarts scale
+interpolation at contiguous visible wall ranges. A disposable visible-range
+variant reduces height-68 scene differences from 21 to 18 by removing the three
+mapped-column color differences, but its seven-process render fails
+serial/partition equality with six pixels at view angle 0 in columns 91–136.
+Direct per-column scale lookup is worse at every sampled height (28, 15, 38 and
+444 differences). Both scale changes are rejected; production wall scaling
+remains unchanged. The [anchor study receipt](../results/moving-sector-wall-scale-anchor-study-20261020.json)
+pins the replay, WAD and source hashes.
+
+The partition check also exposed that worker asset loading omitted the actor-
+depth-bypass buffers required by the renderer. `src/RenderAssets.ps1` now
+initializes both buffers. The production renderer then passes 320,000 pixel
+comparisons across five views and seven uneven process strips. This is offline
+in-memory work only; no live tests or desktop/device interaction were used.
+
 ## 2026-10-20 — Refresh the Episode 1 candidate fixture
 
 The extracted local handoff's offline suite reached the synthetic masked-wall
@@ -10,7 +29,7 @@ receive those buffers. Added the two arrays to this fixture; the focused
 `Test-MaskedWallOrder` run now passes all 24 checks without starting the game
 host or touching a device. Refreshed the playtest handoff to a second candidate
 revision so its package can include the corrected fixture. Full package
-validation is pending; no live tests were run.
+validation is recorded in the next entry; no live tests were run.
 
 ## 2026-10-20 — Validate the refreshed Episode 1 handoff package
 

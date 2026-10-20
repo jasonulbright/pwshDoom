@@ -1561,3 +1561,26 @@ mapped-column color differences). This is offline comparison against the
 locally adapted PowerShell renderer only; original-executable parity and wider
 moving-world qualification remain open. No live tests or device interaction
 were used.
+
+### Wall-scale anchors follow visible wall runs — October 20, 2026
+
+The remaining three height-68 mapped-column color differences occur where the
+reference recalculates wall-scale interpolation over an occlusion-clipped
+visible range. A disposable variant that reanchors scale at each contiguous
+currently visible column run reduces the saved E1M1 tic-315 sweep from 21 to 18
+scene differences; the 18 plane-buffer mismatches remain, and heights 0, 6 and
+34 are unchanged. Applying the same variant in the host and workers fails
+serial/partition equality at angle 0, with six differing pixels across columns
+91–136. Partition-local runs start at different columns from the full-frame
+run, so this fix needs a shared global-span prepass. A direct per-column scale
+variant regresses the same sweep to 28, 15, 38 and 444 differences. Both scale
+counterfactuals are rejected and production wall interpolation is unchanged.
+See the [anchor study receipt](../results/moving-sector-wall-scale-anchor-study-20261020.json).
+
+The counterfactual partition run exposed an independent worker setup defect:
+asset-loaded render contexts lacked `ActorDepthBypassMask` and
+`ActorDepthBypassLowerHeightData`. `src/RenderAssets.ps1` now allocates both
+buffers. The production renderer passes all 320,000 indexed-pixel comparisons
+across five views and seven uneven process strips. The anchor study receipt
+records the check. All work used saved replay/in-memory WAD data; no live tests
+or device interaction were used.

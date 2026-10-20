@@ -161,6 +161,7 @@ function Read-GameRenderAssets {
         $ctx=@{SegmentGeometry=$segmentGeometry;SegmentMetadata=$segmentMetadata;SegmentWallUData=$segmentWallUData;NodeGeometry=$nodeGeometry;NodeChildren=$nodeChildren;
             Subsectors=$meta.Subsectors;SkyFlat=$meta.SkyFlat;Sky=$patches[[int]$meta.Sky];Lighting=(New-FastLightingTables);
             Pixels=[byte[]]::new(64000);Depth=[double[]]::new(64000);Planes=[int[]]::new(53760);TopClip=[int[]]::new(320);BottomClip=[int[]]::new(320);
+            ActorDepthBypassMask=[byte[]]::new(320*168);ActorDepthBypassLowerHeightData=[int[]]::new(320*168);
             Stack=[int[]]::new(($nodeGeometry.Length/12)*2+4);SkyColumns=[int[]]::new(320);RaySin=[int[]]::new(320);RayCos=[int[]]::new(320);
             WallPointScratch=[long[]]::new(2);WallParameterScratch=[long[]]::new(3);
             MaskedColumns=[Collections.Generic.List[hashtable]]::new();Textures=@{};Hud=@{};SpriteAtlas=[object[]]::new($meta.SpriteAtlas.Count);Palette=[int[][]]$meta.Palette;PlayPal=[byte[]]$meta.PlayPal}
