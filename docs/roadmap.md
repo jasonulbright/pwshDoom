@@ -56,10 +56,14 @@ initializes the actor-depth-bypass buffers, and the production renderer matches
 all 320,000 pixels across five offline views and seven process strips. A saved
 E1M1 replay identifies three remaining wall-color mismatches caused by scale
 interpolation across occlusion-clipped ranges. Reanchoring each visible run
-fixes those three but fails partition parity, so it remains rejected pending a
-shared global-span solution. Direct per-column scale lookup is worse. The
-[study receipt](../results/moving-sector-wall-scale-anchor-study-20261020.json)
-records the evidence. No live tests or device interaction were used; the
+fixes those three but fails partition parity. A follow-up full-frame solid-span
+prototype restores parity across seven process strips and removes the three
+wall-color mismatches, but its isolated render median is 5.2% slower and its
+height-68 frame still has 18 plane differences. It remains rejected; sharing a
+host-computed span table may avoid repeated worker bookkeeping. Direct
+per-column scale lookup is worse. The [anchor study](../results/moving-sector-wall-scale-anchor-study-20261020.json)
+and [global-span evaluation](../results/moving-sector-global-solid-span-20261020.json)
+record the evidence. No live tests or device interaction were used; the
 complete human Episode 1 route remains the active milestone.
 
 ## Historical Episode 1 handoff — R17 (2026-09-29)

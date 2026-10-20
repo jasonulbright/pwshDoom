@@ -1584,3 +1584,18 @@ buffers. The production renderer passes all 320,000 indexed-pixel comparisons
 across five views and seven uneven process strips. The anchor study receipt
 records the check. All work used saved replay/in-memory WAD data; no live tests
 or device interaction were used.
+
+### Full-frame solid-span anchor counterfactual — October 20, 2026
+
+A diagnostic renderer tracks merged solid-wall screen intervals during BSP
+traversal and anchors scale interpolation at the globally visible runs. This
+preserves all five seven-process partition views (320,000 pixels) and removes
+the three mapped-column color differences at ceiling height 68; 18 plane
+pixels remain, and height 34 retains four differences. A four-round ABBA
+serial render comparison measures a 72.141 ms candidate median versus 68.589
+ms baseline (+5.2%); P95 is 104.173 versus 91.282 ms (+14.1%). The candidate
+repeats full-screen clip bookkeeping in each worker, so it is not adopted. A
+host-computed shared span table is a possible lower-cost follow-up. The
+[evaluation receipt](../results/moving-sector-global-solid-span-20261020.json)
+contains the source hashes, partition timings and scope limits. This was saved
+replay/in-memory work only, not live gameplay or a 60-update/display result.

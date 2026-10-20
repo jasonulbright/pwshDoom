@@ -1,5 +1,18 @@
 # Investigation ledger
 
+## 2026-10-20 — Evaluate global solid-wall span anchors
+
+A global solid-span counterfactual gives every renderer worker the same visible
+wall runs. Seven-process output then matches the serial frame across all five
+views and 320,000 pixels, and the saved height-68 comparison removes all three
+mapped-column color differences; its 18 remaining differences are plane
+pixels. The isolated four-round ABBA render median is 72.141 ms versus 68.589
+ms for baseline (+5.2%), with P95 104.173 versus 91.282 ms (+14.1%). The
+candidate is rejected because the repeated full-screen clip bookkeeping costs
+render time. A host-computed span table remains a possible follow-up. The
+[evaluation receipt](../results/moving-sector-global-solid-span-20261020.json)
+records hashes, parity, timings and limits. No live test or device was used.
+
 ## 2026-10-20 — Trace wall-scale anchors and repair worker contexts
 
 A saved E1M1 tic-315 comparison shows that the candidate interpolates wall scale
