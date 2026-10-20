@@ -84,10 +84,14 @@ rejected too. Original Doom groups visplanes by height, flat and light, splits
 them when visible column ranges overlap, and maps their top/bottom masks as
 horizontal spans ([`r_plane.c`](https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/r_plane.c),
 [`r_segs.c`](https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/r_segs.c)).
-The next renderer work is to reconstruct these visplane memberships and span
-starts from candidate visibility and BSP call boundaries; the adapted
-PowerShell reference's column recurrence does not establish original-executable
-sample origins.
+An initial PowerShell reconstruction for the same-owner sample predicts
+candidate span start x=226 and adapted-reference span start x=189 under both
+recorded-call and angular-projection range models; the production candidate
+origin is x=226 and the adapted reference's column sampler starts at x=207.
+Exact post-clip `R_CheckPlane` intervals remain uncaptured, so this does not
+prove original-executable parity. Continue by recovering those ranges and
+extending the visplane analysis across the remaining plane mismatches before
+changing production. See the [analysis receipt](../results/moving-sector-visplane-span-origin-20261020.json).
 No live tests or device interaction were used; the
 complete human Episode 1 route remains the active milestone.
 
