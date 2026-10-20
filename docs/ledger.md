@@ -1,5 +1,23 @@
 # Investigation ledger
 
+## 2026-10-20 — Repository footprint and recording audit
+
+The recursive project tree, including ignored `local/` data and `.git`, measured
+27,905,628,833 bytes (27.906 decimal GB / 25.989 GiB), leaving 2,094,371,167
+bytes below the 30,000,000,000-byte cap. The [footprint receipt](../results/repository-footprint-20261020.json)
+records the measurement and file inventory. It found no gameplay MP4s in
+`local/recordings`; the 18 remaining `.mp4` files are FFmpeg reference fixtures
+totalling 2,853 bytes. The largest local classes are 307 float64 files
+(15,092,098,562 bytes) and 271 WAV files (2,154,516,371 bytes), used by music
+qualification and scoped audio evidence. The reference PDF is already ignored
+and untracked. No local media or cache files were removed in this audit.
+
+The branch was 27 commits after Preview.9 at measurement; this audit brings it
+to 28, below the next 35-commit release threshold. The current human-playtest candidate remains pinned to `f89e005`;
+the product `src/` tree has no changes between that pin and this checkpoint.
+The human Episode 1 route is still the active milestone. No live tests or
+device interaction were performed.
+
 ## 2026-10-20 — Reframe the plane-origin gap against original visplanes
 
 The remaining height-68 sample at (226,105) is not enough to infer the
