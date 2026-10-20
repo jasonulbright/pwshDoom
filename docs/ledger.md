@@ -12,6 +12,24 @@ host or touching a device. Refreshed the playtest handoff to a second candidate
 revision so its package can include the corrected fixture. Full package
 validation is pending; no live tests were run.
 
+## 2026-10-20 — Validate the refreshed Episode 1 handoff package
+
+Built local candidate `0.1.0-dev.20261020.e2` from clean source commit
+`b5fcbdc`. Its 1,951,237-byte ZIP has SHA-256
+`6DBB9E92F1040552EF563F317CE737A854EE3D07274558587F7C3F7E9B691247`;
+all 584 manifest payload hashes and the adjacent checksum match after
+extraction. The package contains no WAD, music, media, research PDF, executable
+or local data. Its offline suite passes 96 settings, 143 menu/60 static-screen,
+286 palette, 24 masked-wall, 18 wall-projection, 28 input-journal, 69 campaign,
+20 save/finale-edge and 27 synthetic audio-mixer checks. IWAD-backed fixtures
+load the installed WAD in memory; no game host, display or audio device ran.
+
+The [candidate receipt](../results/episode1-playtest-candidate-20261020-r2.json)
+records the package hashes, test receipts and limits. The repository measured
+27,842,103,585 bytes (27.842 GB decimal), including ignored files, below the
+30,000,000,000-byte cap. The public Preview.9 asset remains unchanged; the full
+human Episode 1 route is still pending.
+
 ## 2026-10-20 — Trace the remaining plane recurrence boundaries
 
 Extended the saved-replay comparison with candidate plane-call spans and

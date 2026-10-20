@@ -1,0 +1,118 @@
+{
+  "FinishedUtc": "2026-10-20T00:50:22Z",
+  "Version": "0.1.0-dev.20261020.e2",
+  "Purpose": "Local Episode 1 human-playtest handoff candidate; public Preview.9 remains unchanged.",
+  "Package": {
+    "Path": "local/episode1-playtest-candidate-20261020-r2/pwshDoom-0.1.0-dev.20261020.e2.zip",
+    "Bytes": 1951237,
+    "Sha256": "6DBB9E92F1040552EF563F317CE737A854EE3D07274558587F7C3F7E9B691247",
+    "SourceCommit": "b5fcbdc381bd564b4162c79bafb7100511b574e8",
+    "WorkingTreeDirty": false,
+    "PayloadFiles": 584,
+    "ExtractedFiles": 585,
+    "PayloadHashesVerified": 584,
+    "AdjacentChecksumVerified": true,
+    "ChecksumFileSha256": "63F186BABBA32B01A7CE3820B236B6E594876C91D8E98D5DFDDB0F763FFE0B9E",
+    "ExcludedContentVerified": [
+      ".wad",
+      ".sf2",
+      ".mp4",
+      ".pdf",
+      ".wav",
+      ".dll",
+      ".exe",
+      "local/"
+    ],
+    "ForbiddenZipPaths": []
+  },
+  "OfflineChecks": [
+    {
+      "Name": "Test-UserSettings",
+      "Passed": 96,
+      "Failures": 0,
+      "Receipt": "local/episode1-playtest-candidate-20261020-validation-r2/user-settings.json",
+      "WadSha256": null
+    },
+    {
+      "Name": "Test-SessionMenu",
+      "Passed": 143,
+      "Failures": 0,
+      "StaticScreenFixtures": 60,
+      "Receipt": "local/episode1-playtest-candidate-20261020-validation-r2/menu.json",
+      "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F"
+    },
+    {
+      "Name": "Test-PalettePresentation",
+      "Passed": 286,
+      "Failures": 0,
+      "Receipt": "local/episode1-playtest-candidate-20261020-validation-r2/palette.json",
+      "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F"
+    },
+    {
+      "Name": "Test-MaskedWallOrder",
+      "Passed": 24,
+      "Failures": 0,
+      "Receipt": "local/episode1-playtest-candidate-20261020-validation-r2/masked-wall-order.json",
+      "WadSha256": null
+    },
+    {
+      "Name": "Test-WallScreenProjection",
+      "Passed": 18,
+      "Failures": 0,
+      "Receipt": "console output: wall screen-projection cases passed",
+      "WadSha256": null
+    },
+    {
+      "Name": "Test-InputReplayJournal",
+      "Passed": 28,
+      "Failures": 0,
+      "Receipt": "local/episode1-playtest-candidate-20261020-validation-r2/input-replay-journal.json",
+      "WadSha256": null
+    },
+    {
+      "Name": "Test-CampaignTransitions",
+      "Passed": 69,
+      "Failures": 0,
+      "Receipt": "local/episode1-playtest-candidate-20261020-validation-r2/campaign-transitions.json",
+      "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+      "Scope": "In-memory routing and intermission fixtures; no map completion"
+    },
+    {
+      "Name": "Test-SaveSessionEdges",
+      "Passed": 20,
+      "Failures": 0,
+      "Receipt": "local/episode1-playtest-candidate-20261020-validation-r2/save-session-edges.json",
+      "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+      "Scope": "In-memory save/death/finale fixtures; no map completion"
+    },
+    {
+      "Name": "Test-AudioMixer",
+      "Passed": 27,
+      "Failures": 0,
+      "Receipt": "local/episode1-playtest-candidate-20261020-validation-r2/audio-mixer.json",
+      "WadSha256": null,
+      "Scope": "Synthetic PCM only; no audio device"
+    }
+  ],
+  "Wads": {
+    "InstalledFixtureSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F"
+  },
+  "LiveTestsRun": false,
+  "GameHostRun": false,
+  "DisplayOrAudioDeviceUsed": false,
+  "PublicAssetReplaced": false,
+  "RepositoryFootprintAtVerification": {
+    "Files": 90494,
+    "Bytes": 27842103585,
+    "DecimalGb": 27.8421,
+    "LimitBytes": 30000000000,
+    "UnderLimit": true,
+    "Measurement": "Recursive file sizes under the repository, including ignored files"
+  },
+  "Limitations": [
+    "No live game, startup smoke, or human route ran",
+    "IWAD-backed menu, palette, campaign and save fixtures load resources in memory only",
+    "Campaign and save checks do not complete maps",
+    "No pacing, physical-input, or acoustic claim"
+  ]
+}
