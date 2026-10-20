@@ -1620,3 +1620,19 @@ host-computed shared span table is a possible lower-cost follow-up. The
 [evaluation receipt](../results/moving-sector-global-solid-span-20261020.json)
 contains the source hashes, partition timings and scope limits. This was saved
 replay/in-memory work only, not live gameplay or a 60-update/display result.
+
+### Same-owner plane color gap follows call order — October 20, 2026
+
+The remaining same-owner height-68 floor color mismatch at (226,105) uses
+candidate recurrence origin x=226 and adapted-reference origin x=207. The
+full-call receipt shows the candidate reaching x=225 on floor S19, segment 141
+(front S19/back S18), then x=226 on floor S18, segment 137. The reference
+processes floor S18, segment 137, from x=207 through x=229 before visiting
+x=206 and then x=181–205. Both final plane writers at the mismatch are S18
+floor, but the call sequences set different sample origins. This narrows the
+sampled-color error to visibility ownership and call order for this view. It
+does not supply a general ownership rule; production is unchanged. See the
+[full-call receipt](../results/moving-sector-reference-plane-full-call-trace-20261020.json).
+This remains saved-replay evidence against the adapted PowerShell reference;
+original-executable parity is unverified. No live tests or device interaction
+were used.

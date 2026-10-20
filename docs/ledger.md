@@ -1,5 +1,21 @@
 # Investigation ledger
 
+## 2026-10-20 — Attribute the remaining same-owner plane sample to call order
+
+The remaining same-owner height-68 floor mismatch at (226,105) has candidate
+sample origin x=226 and adapted-reference origin x=207. The full call trace
+shows the candidate processing S19 floor calls through x=225 on segment 141
+(front S19/back S18), then switching to S18 on segment 137 at x=226. The
+reference instead processes S18 floor calls on segment 137 from x=207 through
+x=229, then visits x=206 and x=181–205. Thus both final writers are S18 floor,
+but their preceding call histories differ; the candidate initializes at the
+owner boundary while the reference reuses its x=207 recurrence. This narrows
+the mismatch to call-order/visibility ownership. No general rule or production
+change is supported. See the [full-call receipt](../results/moving-sector-reference-plane-full-call-trace-20261020.json)
+and [rendering note](rendering-fidelity.md#same-owner-plane-color-gap-follows-call-order--october-20-2026).
+This is saved-replay comparison against the adapted PowerShell reference only;
+original-executable parity remains open and no live tests were run.
+
 ## 2026-10-20 — Stop replay-format size-fixture accumulation
 
 `Test-InputReplay.ps1` creates a sparse 128 MiB + 1 byte input to verify the
