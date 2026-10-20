@@ -370,13 +370,14 @@ function Draw-FastPatch {
     }
     for([int]$x=$x0;$x -lt $x1;$x++) {
         [int]$u=[Math]::Clamp([int]($fracData -shr 16),0,$pw-1)
+        [int]$sourceColumnOffset=$u*$ph
         [int]$columnY0=$y0;[int]$columnY1=$y1
         if($null -ne $ClipTopByColumn){$columnY0=[Math]::Max($columnY0,$ClipTopByColumn[$x])}
         if($null -ne $ClipBottomByColumn){$columnY1=[Math]::Min($columnY1,$ClipBottomByColumn[$x]+1)}
         for([int]$y=$columnY0;$y -lt $columnY1;$y++) {
             [int]$p=$y*320+$x
             if($Distance -gt 0 -and $Distance -ge $depth[$p]){continue}
-            [double]$vf=($y-$Top)/$Scale;[int]$v=$vf;if($v -gt $vf){$v--};if($v -ge $ph){$v=$ph-1};[int]$color=$texels[$u*$ph+$v]
+            [double]$vf=($y-$Top)/$Scale;[int]$v=$vf;if($v -gt $vf){$v--};if($v -ge $ph){$v=$ph-1};[int]$color=$texels[$sourceColumnOffset+$v]
             if($color -ge 0){$pixels[$p]=$colors[$color];$depth[$p]=$Distance}
         }
         $fracData+=$fracStep
@@ -915,6 +916,7 @@ function Invoke-FastRender {
                         }
                         $tu=($wallTextureColumn%$tw+$tw)%$tw
                     }else{$tu=([int][Math]::Floor($texU)%$tw+$tw)%$tw}
+                    [int]$wallTextureColumnOffset=$tu*$th
                     # Only prepare sampling for a visible textured band. Empty
                     # portals and clipped walls need neither anchors nor scale.
                     if(-not $wallStepReady){
@@ -951,7 +953,7 @@ function Invoke-FastRender {
                         # Binary fractions of 1/65536 are exact here: this evaluates
                         # the integer column fraction without accumulating roundoff.
                         [double]$vf=$vOrigin+($y-84)*$wallTexelStep;[int]$v=$vf;if($v -gt $vf){$v--}
-                        $v=($v%$th+$th)%$th;[int]$color=$td[$tu*$th+$v]
+                        $v=($v%$th+$th)%$th;[int]$color=$td[$wallTextureColumnOffset+$v]
                         if($color -ge 0){
                             $p=$y*320+$x;$pixels[$p]=$wallColors[$color];$depthBuffer[$p]=$distance
                             if($band -eq 1 -and $bf -gt $fh){
