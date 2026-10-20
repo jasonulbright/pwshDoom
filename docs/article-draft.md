@@ -66,7 +66,9 @@ The October 1 audio-loaded Classic route repeats show why averages alone are ins
 
 ## A room is not a campaign
 
-The all-map sweep loads each of the 36 Ultimate Doom maps, advances a short simulation, and renders frames. Preview.4's extracted package was checked with that sweep. Separate HMP input routes complete E1M1–E1M4 through ordinary exits; transition tests cover the E1M3 secret path, return to E1M4, map-8 boss triggers and finale states. These checks find structural defects quickly, but none substitute for ordinary play across a complete episode.
+The October 20 headless sweep loads all 36 Ultimate Doom maps, advances 35 idle tics and renders two serial frames at 0° and 90° view offsets. Current-source HMP routes qualify E1M2–E1M4; the older E1M1 route no longer completes on current source. Transition tests cover the E1M3 secret exit, return to E1M4, map-8 boss triggers and finale states. These checks find structural defects quickly, but none substitute for ordinary play across a complete episode. The [smoke receipt](../results/campaign-smoke-20261020.json) records its narrower scope.
+
+![The HMP campaign route detours from E1M3 through secret map E1M9 before returning to E1M4; separate cards distinguish map-load smoke from the still-pending human route.](figures/episode1-route-and-evidence.svg)
 
 The R17 human route is:
 

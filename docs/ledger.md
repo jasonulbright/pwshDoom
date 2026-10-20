@@ -7548,3 +7548,14 @@ byte limit. No live game or device test was run. The complete human Episode 1
 route and broader release gates remain open. See the
 [publication receipt](../results/preview10-publication-20261020.json) and
 [release scope](release-preview10.md).
+
+### 2026-10-20 — Refresh the research article and route illustration
+
+Updated the article's current-release summary to Preview.10 and corrected its
+campaign statement: current-source HMP routes qualify E1M2–E1M4, while E1M1
+and the complete episode remain unqualified. Added a route diagram that
+separates the 36-map load/render smoke from the requested E1M1–E1M9–E1M4 human
+playthrough. The SVG parses as accessible XML and was rasterized for visual
+inspection. Its claims point to the current [smoke receipt](../results/campaign-smoke-20261020.json)
+and [playtest handoff](episode1-playtest.md); it does not imply route
+completion or any live test.

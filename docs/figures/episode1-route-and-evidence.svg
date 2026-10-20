@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="580" viewBox="0 0 1500 580" role="img" aria-labelledby="title desc">
+  <title id="title">Episode 1 route and the difference between a map smoke and a campaign</title>
+  <desc id="desc">The requested HMP route goes from E1M1 to E1M2 to E1M3, takes the secret exit to E1M9, returns to E1M4, continues through E1M8, and advances to the finale. A separate smoke card says that all 36 maps loaded, advanced 35 idle tics and rendered two serial frames. That smoke does not complete the human route, which remains pending.</desc>
+  <defs>
+    <style>
+      .ink{fill:#17212b;font-family:'Segoe UI',Arial,sans-serif}
+      .muted{fill:#52616d;font-family:'Segoe UI',Arial,sans-serif}
+      .map{fill:#f4f7f9;stroke:#9eabb4;stroke-width:2}
+      .secret{fill:#efe6fb;stroke:#7856a6;stroke-width:2}
+      .finale{fill:#fff0d4;stroke:#a96b08;stroke-width:2}
+      .smoke{fill:#e2f3ea;stroke:#39805a;stroke-width:2}
+      .pending{fill:#fff1e8;stroke:#bd6a35;stroke-width:2}
+      .route{fill:none;stroke:#435766;stroke-width:3;marker-end:url(#arrow)}
+      .branch{fill:none;stroke:#7856a6;stroke-width:3;marker-end:url(#purpleArrow)}
+      .label{font-family:'Segoe UI',Arial,sans-serif;font-size:15px;font-weight:700}
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#435766"/>
+    </marker>
+    <marker id="purpleArrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7856a6"/>
+    </marker>
+  </defs>
+  <rect width="1500" height="580" fill="#fff"/>
+  <text class="ink" x="48" y="52" font-size="30" font-weight="700">A map smoke cannot finish a campaign</text>
+  <text class="muted" x="48" y="82" font-size="17">One requested HMP playthrough includes the secret-map detour, its return, ordinary combat, and the episode ending.</text>
+  <rect class="pending" x="1200" y="32" width="250" height="42" rx="21"/>
+  <text class="ink" x="1325" y="59" text-anchor="middle" font-size="16" font-weight="700">Human route pending</text>
+
+  <g class="ink" font-size="20" font-weight="700" text-anchor="middle">
+    <rect class="map" x="70" y="125" width="120" height="70" rx="12"/><text x="130" y="168">E1M1</text>
+    <rect class="map" x="230" y="125" width="120" height="70" rx="12"/><text x="290" y="168">E1M2</text>
+    <rect class="map" x="390" y="125" width="120" height="70" rx="12"/><text x="450" y="168">E1M3</text>
+    <rect class="secret" x="390" y="290" width="120" height="70" rx="12"/><text x="450" y="333">E1M9</text>
+    <rect class="map" x="550" y="290" width="120" height="70" rx="12"/><text x="610" y="333">E1M4</text>
+    <rect class="map" x="700" y="290" width="120" height="70" rx="12"/><text x="760" y="333">E1M5</text>
+    <rect class="map" x="850" y="290" width="120" height="70" rx="12"/><text x="910" y="333">E1M6</text>
+    <rect class="map" x="1000" y="290" width="120" height="70" rx="12"/><text x="1060" y="333">E1M7</text>
+    <rect class="map" x="1150" y="290" width="120" height="70" rx="12"/><text x="1210" y="333">E1M8</text>
+    <rect class="finale" x="1300" y="290" width="150" height="70" rx="12"/><text x="1375" y="322" font-size="16">EPISODE 1</text><text x="1375" y="344" font-size="16">FINALE</text>
+  </g>
+
+  <path class="route" d="M190 160 H220"/><path class="route" d="M350 160 H380"/>
+  <path class="branch" d="M450 195 V280"/>
+  <text class="label" x="465" y="245" fill="#7856a6">secret exit</text>
+  <path class="route" d="M510 325 H540"/>
+  <path class="route" d="M670 325 H690"/><path class="route" d="M820 325 H840"/>
+  <path class="route" d="M970 325 H990"/><path class="route" d="M1120 325 H1140"/>
+  <path class="route" d="M1270 325 H1290"/>
+  <text class="muted" x="690" y="270" font-size="15">E1M9 exit returns to E1M4; E1M8 boss opens the episode exit.</text>
+
+  <rect class="smoke" x="48" y="415" width="685" height="125" rx="14"/>
+  <text class="ink" x="74" y="450" font-size="19" font-weight="700">What the all-map smoke proves</text>
+  <text class="muted" x="74" y="480" font-size="16">36 fresh map loads · 35 idle tics · two serial 320×200 frames per map</text>
+  <text class="muted" x="74" y="510" font-size="16">It checks basic loading and rendering, not exits or campaign survival.</text>
+
+  <rect class="pending" x="767" y="415" width="685" height="125" rx="14"/>
+  <text class="ink" x="793" y="450" font-size="19" font-weight="700">What only the human route can establish</text>
+  <text class="muted" x="793" y="480" font-size="16">One continuous HMP playthrough through E1M9, the return, boss and finale</text>
+  <text class="muted" x="793" y="510" font-size="16">Keyboard response, survival, visible presentation and campaign-length audio</text>
+  <text class="muted" x="48" y="568" font-size="13">Route: docs/episode1-playtest.md · Smoke: results/campaign-smoke-20261020.json</text>
+</svg>
