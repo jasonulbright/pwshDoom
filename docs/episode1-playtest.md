@@ -12,21 +12,21 @@ A normal completion is enough; 100% kills, items, and secrets are not required. 
 
 ## Build and launch
 
-Use the current local development candidate at `C:\projects\pwshDoom\local\episode1-playtest-candidate-20261020-r3\pwshDoom-0.1.0-dev.20261020.e3.zip`. Its clean package manifest pins the source commit and every payload hash. It includes the post-Preview.9 fixed-point portal clipping and lower-step actor-depth corrections plus the worker asset-context buffer fix; the [candidate receipt](../results/episode1-playtest-candidate-20261020-r3.json) records package integrity and offline checks. The public [Preview.9 release](https://github.com/jasonulbright/pwshDoom/releases/tag/v0.1.0-preview.9) remains unchanged; this package is a local playtest handoff, not a new public release or full certification. Extract it under `C:\projects\pwshDoom\local\episode1-playtest-candidate-20261020-extracted-r3` and use that folder for `$root` below. The package excludes the IWAD, prepared music, tools, research files and media. Historical readiness evidence remains in the [Preview.8 candidate receipt](../results/preview8-journal-writer-guard-candidate-validation-20261019.json), [wall-band integration receipt](../results/wall-band-renderer-integration-20261002.json), [Preview.6 package validation](../results/preview6-package-validation-20261002.json), [traversal receipt](../results/visibility-iterative-integration-20261002.json), and [playthrough performance evidence](performance.md#active-wall-band-preselection-trial--october-2-2026).
+Use the public [Preview.10 release](https://github.com/jasonulbright/pwshDoom/releases/tag/v0.1.0-preview.10), built from source commit `c39f1dc`. Its extracted package has 588 manifest payloads whose SHA-256 hashes verify; the [publication receipt](../results/preview10-publication-20261020.json) records package integrity and the repo footprint. The current local verified extraction is `C:\projects\pwshDoom\local\releases\preview10\validation\pwshDoom-0.1.0-preview.10`; use it for `$root` below. Preview.10 supersedes the older local `e3` candidate. The package excludes the IWAD, prepared music, tools, research files and media. Historical readiness evidence remains in the [earlier candidate receipt](../results/episode1-playtest-candidate-20261020-r3.json), [wall-band integration receipt](../results/wall-band-renderer-integration-20261002.json), [Preview.6 package validation](../results/preview6-package-validation-20261002.json), [traversal receipt](../results/visibility-iterative-integration-20261002.json), and [playthrough performance evidence](performance.md#active-wall-band-preselection-trial--october-2-2026).
 
 Use 64-bit PowerShell 7.6.x and Windows Terminal. The required user-owned Ultimate Doom IWAD has SHA-256 `6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F`. WADs, soundfonts, prepared music, media, tools and the research PDF are excluded. The local eleven-track Episode 1 catalog covers this route; omit `-MusicCatalog` for effects-only play. Audio startup rechecks payloads and IWAD score identity.
 
 From PowerShell, run the extracted local development candidate and use fresh output paths:
 
 ~~~powershell
-$root = 'C:\projects\pwshDoom\local\episode1-playtest-candidate-20261020-extracted-r3\pwshDoom-0.1.0-dev.20261020.e3'
+$root = 'C:\projects\pwshDoom\local\releases\preview10\validation\pwshDoom-0.1.0-preview.10'
 $wad = 'C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\base\DOOM.WAD'
 $local = 'C:\projects\pwshDoom\local'
 $catalog = Join-Path $local 'music-prepared-episode1.json'
-$record = Join-Path $local 'episode1-human-input-dev-20261020-r3.json'
-$report = Join-Path $local 'episode1-human-session-dev-20261020-r3.json'
-$saves = Join-Path $local 'episode1-human-saves-dev-20261020-r3'
-$settings = Join-Path $local 'episode1-human-settings-dev-20261020-r3.json'
+$record = Join-Path $local 'episode1-human-input-preview10-20261020.json'
+$report = Join-Path $local 'episode1-human-session-preview10-20261020.json'
+$saves = Join-Path $local 'episode1-human-saves-preview10-20261020'
+$settings = Join-Path $local 'episode1-human-settings-preview10-20261020.json'
 pwsh -NoProfile -File (Join-Path $root 'Start-Doom.ps1') -Wad $wad -Workers 16 -Episode 1 -Map 1 -Skill 3 -Style Classic -Sound -MusicCatalog $catalog -RecordInput $record -Report $report -SaveRoot $saves -SettingsPath $settings -Maximized -FontSize 5
 ~~~
 
@@ -36,8 +36,8 @@ The input recording has a checksummed `.journal` sidecar while the session runs.
 
 ~~~powershell
 pwsh -NoProfile -File C:\projects\pwshDoom\scripts\Recover-DoomInputReplayJournal.ps1 `
-  -Journal C:\projects\pwshDoom\local\episode1-human-input-dev-20261020.json.journal `
-  -Output C:\projects\pwshDoom\local\episode1-human-input-dev-20261020-recovered.json
+  -Journal C:\projects\pwshDoom\local\episode1-human-input-preview10-20261020.json.journal `
+  -Output C:\projects\pwshDoom\local\episode1-human-input-preview10-20261020-recovered.json
 ~~~
 
 The journal is removed after a successful orderly recording. Recovery keeps it and does not overwrite the requested output. The recovery implementation has offline contract and static wiring checks; no game session or actual process interruption has exercised it yet.
@@ -74,13 +74,12 @@ Your report will be recorded only for the scope and outcomes you state. Automate
 
 ## Current evidence and limits
 
-The [current candidate receipt](../results/episode1-playtest-candidate-20261020-r3.json) pins the clean package, source commit, payload hashes and offline checks. It does not start the game host or qualify a map route. The public Preview.9 asset remains unchanged. An earlier four-second E1M1 actual-device check returned all 175,140 submitted music frames and closed cleanly, with one queue-starvation observation after the final packet and no rebuffer resume; that older check is not a sustained audio or audible-quality qualification. No live test is part of this handoff preparation.
+The [Preview.10 publication receipt](../results/preview10-publication-20261020.json) pins the clean source commit, payload hashes, asset digests and footprint. The [renderer identity receipt](../results/renderer-source-offset-20261020.json) covers one fixed E1M2 frame; it does not start the game host or qualify a route. An earlier four-second E1M1 actual-device check returned all 175,140 submitted music frames and closed cleanly, with one queue-starvation observation after the final packet and no rebuffer resume; that older check is not a sustained audio or audible-quality qualification. No live test is part of this handoff preparation.
 
-A current-tree comparison at `de54849` confirms that `Start-Doom.ps1`,
-`src/`, `scripts/Build-EngineBundle.ps1`, and
-`scripts/Recover-DoomInputReplayJournal.ps1` remain identical to the candidate's
-pinned source commit `f89e005`. The documented launch and replay-recovery paths
-therefore remain current; this check does not qualify a live route.
+The Preview.10 package pins the current launch and replay-recovery code at
+`c39f1dc`. Its single renderer change since the older local `e3` handoff is
+limited to reusing texture-column base indices; the fixed E1M2 frame hash is
+identical. This does not establish a complete human route or live behavior.
 
 Preview.6 passes 36/36 map-start smokes at 35 idle tics and five-view 16-worker parity in each visual style. These tests do not finish maps. Earlier bounded simulation and audio-host rates were below the frozen 35-tic/60-display target, and neither Terminal writes nor worker parity establish distinct monitor presentations. See the [package receipt](../results/preview6-package-validation-20261002.json), [publication receipt](../results/preview6-publication-20261002.json), and [performance evidence](performance.md).
 

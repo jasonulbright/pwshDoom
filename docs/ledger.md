@@ -7534,3 +7534,17 @@ write statements, and the plane counter reads from its render context. The
 [receipt](../results/renderer-source-offset-20261020.json) pins the fixed WAD,
 source hashes, profile settings, and output identity. No game window, input,
 audio device, or live test was used.
+
+### 2026-10-20 — Publish Preview.10 at the 35-commit threshold
+
+Published the cumulative Preview.10 package at source `c39f1dc`, exactly 35
+commits after Preview.9. The extracted source archive verifies all 588
+manifest file hashes, its checksum file matches the local archive, and it
+contains no IWAD, research PDF, executable, recording, or downloaded tool.
+GitHub reports the uploaded ZIP digest as
+`sha256:b38a5a4fab08c7c5e48559634fe0784460194c8bede2ab6393a8dc5bb9aa357f4`.
+The full local tree measured 27,923,504,592 bytes, below the 30,000,000,000-
+byte limit. No live game or device test was run. The complete human Episode 1
+route and broader release gates remain open. See the
+[publication receipt](../results/preview10-publication-20261020.json) and
+[release scope](release-preview10.md).
