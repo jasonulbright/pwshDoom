@@ -63,6 +63,10 @@ if($PreselectVisibleWallBands){
 if($GeometryWorkCounters){
     $instrumentation=@(
         @{
+            Search='    [int[]]$calls = $Context.PlaneSampleCalls'
+            Replace='    $Context.ProfilePlanePixelCounter=0;[int[]]$calls = $Context.PlaneSampleCalls'
+        },
+        @{
             Search='    [int]$open=$EndColumn-$FirstColumn'
             Replace=@'
     [int]$open=$EndColumn-$FirstColumn
@@ -77,7 +81,7 @@ if($GeometryWorkCounters){
     [long]$workMissingTextureDepthTests=0;[long]$workMissingTextureDepthWrites=0
     [long]$workMaskedColumnsQueued=0;[long]$workMaskedPixelTests=0;[long]$workMaskedDepthRejects=0
     [long]$workMaskedVClips=0;[long]$workMaskedWrites=0;[long]$workMaskedTransparent=0
-    [long]$workPlanePixelsFilled=0;[long]$workSilhouetteRecords=0;[long]$workColumnsClosed=0
+    [long]$workSilhouetteRecords=0;[long]$workColumnsClosed=0
 '@
         },
         @{Search='        [int]$nodeIndex=$stack[--$sp]';Replace='        [int]$nodeIndex=$stack[--$sp];$workBspEntriesPopped++'},
@@ -103,14 +107,14 @@ if($GeometryWorkCounters){
         @{Search='                        if($constantWallScale -and $segmentTexelStep -gt 0){$wallTexelStep=$segmentTexelStep}';Replace='                        if($constantWallScale -and $segmentTexelStep -gt 0){$workWallTexelStepCacheHits++;$wallTexelStep=$segmentTexelStep}'},
         @{Search='                            [int]$wallScaleData=[Math]::Clamp([int][Math]::Truncate(10485760.0/$distance),256,4194304)';Replace='                            $workWallTexelStepComputations++;[int]$wallScaleData=[Math]::Clamp([int][Math]::Truncate(10485760.0/$distance),256,4194304)'},
         @{Search='                    for([int]$y=$y0;$y -le $y1;$y++) {';Replace='                    for([int]$y=$y0;$y -le $y1;$y++) {$workWallTextureRows++'},
-        @{Search='                        if($color -ge 0){$p=$y*320+$x;$pixels[$p]=$wallColors[$color];$depthBuffer[$p]=$distance}';Replace='                        if($color -ge 0){$workWallTextureWrites++;$p=$y*320+$x;$pixels[$p]=$wallColors[$color];$depthBuffer[$p]=$distance}else{$workWallTextureTransparent++}'},
-        @{Search='                            [int]$p=$y*320+$x;if($distance -lt $depthBuffer[$p]){$depthBuffer[$p]=$distance}';Replace='                            [int]$p=$y*320+$x;$workMissingTextureDepthTests++;if($distance -lt $depthBuffer[$p]){$workMissingTextureDepthWrites++;$depthBuffer[$p]=$distance}';Expected=3},
+        @{Search='                        $v=($v%$th+$th)%$th;[int]$color=$td[$tu*$th+$v]';Replace='                        $v=($v%$th+$th)%$th;[int]$color=$td[$tu*$th+$v];$workWallTextureWrites+=[int]($color -ge 0)'},
+        @{Search='[int]$p=$y*320+$x;if($distance -lt $depthBuffer[$p]){';Replace='[int]$p=$y*320+$x;$workMissingTextureDepthTests++;if($distance -lt $depthBuffer[$p]){$workMissingTextureDepthWrites++;';Expected=3},
         @{Search='                            $maskedColumnCount++';Replace='                            $maskedColumnCount++;$workMaskedColumnsQueued++'},
         @{Search='        for([int]$y=$column.Y0;$y -le $column.Y1;$y++){';Replace='        for([int]$y=$column.Y0;$y -le $column.Y1;$y++){$workMaskedPixelTests++'},
         @{Search='            [int]$p=$y*320+$x;if($distance -ge $depthBuffer[$p]){continue}';Replace='            [int]$p=$y*320+$x;if($distance -ge $depthBuffer[$p]){$workMaskedDepthRejects++;continue}'},
         @{Search='            if($v -lt 0 -or $v -ge $height){continue}';Replace='            if($v -lt 0 -or $v -ge $height){$workMaskedVClips++;continue}'},
-        @{Search='            if($color -ge 0){$pixels[$p]=$colors[$color];$depthBuffer[$p]=$distance}';Replace='            if($color -ge 0){$workMaskedWrites++;$pixels[$p]=$colors[$color];$depthBuffer[$p]=$distance}else{$workMaskedTransparent++}'},
-        @{Search='                $pixels[$p]=$colors[$flatData[$v+$u]]';Replace='                $workPlanePixelsFilled++;$pixels[$p]=$colors[$flatData[$v+$u]]'},
+        @{Search='            [int]$color=$texels[$source+$v]';Replace='            [int]$color=$texels[$source+$v];$workMaskedWrites+=[int]($color -ge 0)'},
+        @{Search='                $pixels[$pixelIndex] = $Context.Colors[$light][$flatData[$v + $u]]';Replace='                $Context.ProfilePlanePixelCounter++;$pixels[$pixelIndex] = $Context.Colors[$light][$flatData[$v + $u]]'},
         @{Search='                    $spriteClipCounts[$x]=$recordIndex+1';Replace='                    $spriteClipCounts[$x]=$recordIndex+1;$workSilhouetteRecords++'},
         @{Search='                if($nextTop -gt $nextBottom){$open--}';Replace='                if($nextTop -gt $nextBottom){$open--;$workColumnsClosed++}'},
         @{
@@ -125,10 +129,10 @@ if($GeometryWorkCounters){
         WallUParameterCalls=$workWallUParameterCalls;WallColumnUCalculations=$workWallColumnUCalculations;TextureBandTests=$workTextureBandTests;VisibleTexturedBands=$workVisibleTexturedBands
         WallTexelStepCacheHits=$workWallTexelStepCacheHits;WallTexelStepComputations=$workWallTexelStepComputations
         ExposedBackgroundSamples=$workExposedBackgroundSamples;ExposedSkySamples=$workExposedSkySamples;ExposedFlatSamples=$workExposedFlatSamples
-        WallTextureRows=$workWallTextureRows;WallTextureWrites=$workWallTextureWrites;WallTextureTransparent=$workWallTextureTransparent
+        WallTextureRows=$workWallTextureRows;WallTextureWrites=$workWallTextureWrites;WallTextureTransparent=($workWallTextureRows-$workWallTextureWrites)
         MissingTextureDepthTests=$workMissingTextureDepthTests;MissingTextureDepthWrites=$workMissingTextureDepthWrites
-        MaskedColumnsQueued=$workMaskedColumnsQueued;MaskedPixelTests=$workMaskedPixelTests;MaskedDepthRejects=$workMaskedDepthRejects;MaskedVClips=$workMaskedVClips;MaskedWrites=$workMaskedWrites;MaskedTransparent=$workMaskedTransparent
-        PlanePixelsFilled=$workPlanePixelsFilled;SilhouetteRecords=$workSilhouetteRecords;ColumnsClosed=$workColumnsClosed
+        MaskedColumnsQueued=$workMaskedColumnsQueued;MaskedPixelTests=$workMaskedPixelTests;MaskedDepthRejects=$workMaskedDepthRejects;MaskedVClips=$workMaskedVClips;MaskedWrites=$workMaskedWrites;MaskedTransparent=($workMaskedPixelTests-$workMaskedDepthRejects-$workMaskedVClips-$workMaskedWrites)
+        PlanePixelsFilled=$Context.ProfilePlanePixelCounter;SilhouetteRecords=$workSilhouetteRecords;ColumnsClosed=$workColumnsClosed
     }
 '@
         }
