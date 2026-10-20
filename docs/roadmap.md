@@ -84,18 +84,22 @@ rejected too. Original Doom groups visplanes by height, flat and light, splits
 them when visible column ranges overlap, and maps their top/bottom masks as
 horizontal spans ([`r_plane.c`](https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/r_plane.c),
 [`r_segs.c`](https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/r_segs.c)).
-An offline PowerShell reconstruction now covers all 18 recorded plane-mismatch
-samples, with matching candidate/reference material keys. Candidate-call
-visplane spans predict the candidate's recorded origins at all 18 points;
-reference-call spans predict the adapted reference's recorded origins at 8
-points, with a mean absolute difference of 9.22 columns. Observed-call and
-angular-projection bounds give identical predictions for these samples. Exact
-post-clip `R_CheckPlane` intervals remain uncaptured, so the analysis does not
-prove original-executable parity. Recover those intervals before considering a
-production sampling change. See the [analysis script](../scripts/Measure-VisplaneSpanOrigins.ps1)
-and [18-sample receipt](../results/moving-sector-visplane-mismatch-origins-20261020.json).
-No live tests or device interaction were used; the
-complete human Episode 1 route remains the active milestone.
+The first 18-sample reconstruction incorrectly cached visplanes by subsector
+and claimed 18/18 candidate-origin matches. Doom's `R_FindPlane` instead scans
+from the first plane and reuses the first matching height/flat/light key; the
+old receipts from that flawed model have been removed. The corrected lookup
+matches candidate origins at 9/18 samples. A source-based model using 45 exact
+post-clip ranges captured from the adapted renderer maps all 1,037 recorded
+reference plane calls to one range with a matching front sector, then applies
+Doom's `R_FindPlane`/`R_CheckPlane` and floor/ceiling marking order. It matches
+adapted-reference origins at 8/18 samples, with a mean absolute difference of
+9.22 columns. Because the ranges come from the adapted renderer, this remains
+saved-replay evidence and does not establish original-executable parity.
+Production sampling remains unchanged. See the [analysis script](../scripts/Measure-VisplaneSpanOrigins.ps1),
+[range-trace receipt](../results/moving-sector-reference-visible-range-trace-20261020.json),
+and [corrected 18-sample receipt](../results/moving-sector-visplane-mismatch-origins-rfindplane-corrected-20261020.json).
+No live tests or device interaction were used; the complete human Episode 1
+route remains the active milestone.
 
 ## Historical Episode 1 handoff — R17 (2026-09-29)
 

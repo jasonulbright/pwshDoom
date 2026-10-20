@@ -1,7 +1,7 @@
 {
-  "SchemaVersion": 2,
-  "FinishedUtc": "2026-10-20T10:52:27.9370078Z",
-  "Experiment": "Approximate original visplane grouping and horizontal span starts for recorded plane-mismatch samples.",
+  "SchemaVersion": 3,
+  "FinishedUtc": "2026-10-20T11:05:35.3635210Z",
+  "Experiment": "Reconstruct first-match Doom R_FindPlane lookup, overlap-splitting R_CheckPlane ranges, and horizontal span starts for recorded mismatch samples.",
   "InputTic": 315,
   "SectorIndex": 26,
   "CeilingHeight": 68,
@@ -212,6 +212,11 @@
     "AngleData": 4292870144
   },
   "SameOwnerFloorMaterialKey": "0|10|255",
+  "ReferenceClipRangeCount": 45,
+  "ReferencePlaneCallCount": 1037,
+  "RangeTracePath": "results/moving-sector-reference-visible-range-trace-20261020.json",
+  "RangeTraceSha256": "F5229320ECE2A4A35B201BB7421DDD704AAEE6AA6BAD5985DFD42D8E1276B8C7",
+  "RFindPlaneLookupRule": "Search visplanes from first to last and reuse the first matching height/flat/light key; do not cache the selected plane by subsector.",
   "SameOwnerFloorSegments": [
     {
       "SegmentIndex": 137,
@@ -237,11 +242,12 @@
       "Renderer": "candidate",
       "RangeMode": "ObservedCalls",
       "PlaneEvents": 51,
-      "VisplaneInstances": 21,
+      "VisplaneInstances": 31,
       "SampleCount": 18,
-      "CandidateObservedOriginMatches": 18,
+      "UnmatchedSampleCount": 0,
+      "CandidateObservedOriginMatches": 9,
       "ReferenceObservedOriginMatches": 0,
-      "MeanAbsoluteReferenceOriginDelta": 9.17,
+      "MeanAbsoluteReferenceOriginDelta": 4.89,
       "SamplesAtPoints": [
         {
           "SampleId": "same-owner-floor",
@@ -249,12 +255,12 @@
           "Y": 105,
           "SurfaceType": "Floor",
           "MaterialKey": "0|10|255",
-          "VisplaneId": 3,
+          "VisplaneId": 7,
           "PredictedSpanStartX": 226,
           "CandidateObservedOriginX": 226,
           "ReferenceObservedOriginX": 207,
           "CandidateReferencePlaneKeyMatches": true,
-          "MinX": 90,
+          "MinX": 207,
           "MaxX": 230
         },
         {
@@ -263,7 +269,7 @@
           "Y": 56,
           "SurfaceType": "Ceiling",
           "MaterialKey": "9961472|21|255",
-          "VisplaneId": 8,
+          "VisplaneId": 10,
           "PredictedSpanStartX": 112,
           "CandidateObservedOriginX": 112,
           "ReferenceObservedOriginX": 116,
@@ -277,12 +283,12 @@
           "Y": 99,
           "SurfaceType": "Floor",
           "MaterialKey": "0|10|255",
-          "VisplaneId": 6,
-          "PredictedSpanStartX": 184,
+          "VisplaneId": 3,
+          "PredictedSpanStartX": 204,
           "CandidateObservedOriginX": 184,
           "ReferenceObservedOriginX": 206,
           "CandidateReferencePlaneKeyMatches": true,
-          "MinX": 184,
+          "MinX": 90,
           "MaxX": 230
         },
         {
@@ -297,7 +303,7 @@
           "ReferenceObservedOriginX": 182,
           "CandidateReferencePlaneKeyMatches": true,
           "MinX": 184,
-          "MaxX": 230
+          "MaxX": 203
         },
         {
           "SampleId": "different-owner-203-101",
@@ -311,7 +317,7 @@
           "ReferenceObservedOriginX": 184,
           "CandidateReferencePlaneKeyMatches": true,
           "MinX": 184,
-          "MaxX": 230
+          "MaxX": 203
         },
         {
           "SampleId": "different-owner-197-103",
@@ -325,7 +331,7 @@
           "ReferenceObservedOriginX": 186,
           "CandidateReferencePlaneKeyMatches": true,
           "MinX": 184,
-          "MaxX": 230
+          "MaxX": 203
         },
         {
           "SampleId": "different-owner-216-103",
@@ -333,12 +339,12 @@
           "Y": 103,
           "SurfaceType": "Floor",
           "MaterialKey": "0|10|255",
-          "VisplaneId": 6,
-          "PredictedSpanStartX": 190,
+          "VisplaneId": 3,
+          "PredictedSpanStartX": 204,
           "CandidateObservedOriginX": 190,
           "ReferenceObservedOriginX": 207,
           "CandidateReferencePlaneKeyMatches": true,
-          "MinX": 184,
+          "MinX": 90,
           "MaxX": 230
         },
         {
@@ -353,7 +359,7 @@
           "ReferenceObservedOriginX": 189,
           "CandidateReferencePlaneKeyMatches": true,
           "MinX": 184,
-          "MaxX": 230
+          "MaxX": 203
         },
         {
           "SampleId": "different-owner-204-105",
@@ -361,12 +367,12 @@
           "Y": 105,
           "SurfaceType": "Floor",
           "MaterialKey": "0|10|255",
-          "VisplaneId": 6,
-          "PredictedSpanStartX": 193,
+          "VisplaneId": 3,
+          "PredictedSpanStartX": 204,
           "CandidateObservedOriginX": 193,
           "ReferenceObservedOriginX": 189,
           "CandidateReferencePlaneKeyMatches": true,
-          "MinX": 184,
+          "MinX": 90,
           "MaxX": 230
         },
         {
@@ -375,12 +381,12 @@
           "Y": 105,
           "SurfaceType": "Floor",
           "MaterialKey": "0|10|255",
-          "VisplaneId": 6,
-          "PredictedSpanStartX": 193,
+          "VisplaneId": 3,
+          "PredictedSpanStartX": 204,
           "CandidateObservedOriginX": 193,
           "ReferenceObservedOriginX": 207,
           "CandidateReferencePlaneKeyMatches": true,
-          "MinX": 184,
+          "MinX": 90,
           "MaxX": 230
         },
         {
@@ -389,12 +395,12 @@
           "Y": 105,
           "SurfaceType": "Floor",
           "MaterialKey": "0|10|255",
-          "VisplaneId": 6,
-          "PredictedSpanStartX": 193,
+          "VisplaneId": 3,
+          "PredictedSpanStartX": 204,
           "CandidateObservedOriginX": 193,
           "ReferenceObservedOriginX": 207,
           "CandidateReferencePlaneKeyMatches": true,
-          "MinX": 184,
+          "MinX": 90,
           "MaxX": 230
         },
         {
@@ -403,12 +409,12 @@
           "Y": 105,
           "SurfaceType": "Floor",
           "MaterialKey": "0|10|255",
-          "VisplaneId": 6,
-          "PredictedSpanStartX": 193,
+          "VisplaneId": 3,
+          "PredictedSpanStartX": 204,
           "CandidateObservedOriginX": 193,
           "ReferenceObservedOriginX": 207,
           "CandidateReferencePlaneKeyMatches": true,
-          "MinX": 184,
+          "MinX": 90,
           "MaxX": 230
         },
         {
@@ -423,7 +429,7 @@
           "ReferenceObservedOriginX": 191,
           "CandidateReferencePlaneKeyMatches": true,
           "MinX": 184,
-          "MaxX": 230
+          "MaxX": 203
         },
         {
           "SampleId": "different-owner-217-106",
@@ -431,12 +437,12 @@
           "Y": 106,
           "SurfaceType": "Floor",
           "MaterialKey": "0|10|255",
-          "VisplaneId": 6,
-          "PredictedSpanStartX": 195,
+          "VisplaneId": 3,
+          "PredictedSpanStartX": 204,
           "CandidateObservedOriginX": 195,
           "ReferenceObservedOriginX": 207,
           "CandidateReferencePlaneKeyMatches": true,
-          "MinX": 184,
+          "MinX": 90,
           "MaxX": 230
         },
         {
@@ -451,7 +457,7 @@
           "ReferenceObservedOriginX": 192,
           "CandidateReferencePlaneKeyMatches": true,
           "MinX": 184,
-          "MaxX": 230
+          "MaxX": 203
         },
         {
           "SampleId": "different-owner-200-108",
@@ -465,7 +471,7 @@
           "ReferenceObservedOriginX": 193,
           "CandidateReferencePlaneKeyMatches": true,
           "MinX": 184,
-          "MaxX": 230
+          "MaxX": 203
         },
         {
           "SampleId": "different-owner-216-108",
@@ -473,12 +479,12 @@
           "Y": 108,
           "SurfaceType": "Floor",
           "MaterialKey": "0|10|255",
-          "VisplaneId": 6,
-          "PredictedSpanStartX": 198,
+          "VisplaneId": 3,
+          "PredictedSpanStartX": 204,
           "CandidateObservedOriginX": 198,
           "ReferenceObservedOriginX": 207,
           "CandidateReferencePlaneKeyMatches": true,
-          "MinX": 184,
+          "MinX": 90,
           "MaxX": 230
         },
         {
@@ -487,12 +493,12 @@
           "Y": 108,
           "SurfaceType": "Floor",
           "MaterialKey": "0|10|255",
-          "VisplaneId": 6,
-          "PredictedSpanStartX": 198,
+          "VisplaneId": 3,
+          "PredictedSpanStartX": 204,
           "CandidateObservedOriginX": 198,
           "ReferenceObservedOriginX": 207,
           "CandidateReferencePlaneKeyMatches": true,
-          "MinX": 184,
+          "MinX": 90,
           "MaxX": 230
         }
       ]
@@ -501,11 +507,12 @@
       "Renderer": "candidate",
       "RangeMode": "Projected",
       "PlaneEvents": 51,
-      "VisplaneInstances": 21,
+      "VisplaneInstances": 31,
       "SampleCount": 18,
-      "CandidateObservedOriginMatches": 18,
+      "UnmatchedSampleCount": 0,
+      "CandidateObservedOriginMatches": 9,
       "ReferenceObservedOriginMatches": 0,
-      "MeanAbsoluteReferenceOriginDelta": 9.17,
+      "MeanAbsoluteReferenceOriginDelta": 4.89,
       "SamplesAtPoints": [
         {
           "SampleId": "same-owner-floor",
@@ -513,12 +520,12 @@
           "Y": 105,
           "SurfaceType": "Floor",
           "MaterialKey": "0|10|255",
-          "VisplaneId": 3,
+          "VisplaneId": 7,
           "PredictedSpanStartX": 226,
           "CandidateObservedOriginX": 226,
           "ReferenceObservedOriginX": 207,
           "CandidateReferencePlaneKeyMatches": true,
-          "MinX": 47,
+          "MinX": 207,
           "MaxX": 239
         },
         {
@@ -527,7 +534,7 @@
           "Y": 56,
           "SurfaceType": "Ceiling",
           "MaterialKey": "9961472|21|255",
-          "VisplaneId": 8,
+          "VisplaneId": 10,
           "PredictedSpanStartX": 112,
           "CandidateObservedOriginX": 112,
           "ReferenceObservedOriginX": 116,
@@ -541,12 +548,12 @@
           "Y": 99,
           "SurfaceType": "Floor",
           "MaterialKey": "0|10|255",
-          "VisplaneId": 6,
-          "PredictedSpanStartX": 184,
+          "VisplaneId": 3,
+          "PredictedSpanStartX": 204,
           "CandidateObservedOriginX": 184,
           "ReferenceObservedOriginX": 206,
           "CandidateReferencePlaneKeyMatches": true,
-          "MinX": 182,
+          "MinX": 47,
           "MaxX": 234
         },
         {
@@ -561,7 +568,7 @@
           "ReferenceObservedOriginX": 182,
           "CandidateReferencePlaneKeyMatches": true,
           "MinX": 182,
-          "MaxX": 234
+          "MaxX": 203
         },
         {
           "SampleId": "different-owner-203-101",
@@ -575,7 +582,7 @@
           "ReferenceObservedOriginX": 184,
           "CandidateReferencePlaneKeyMatches": true,
           "MinX": 182,
-          "MaxX": 234
+          "MaxX": 203
         },
         {
           "SampleId": "different-owner-197-103",
@@ -589,7 +596,7 @@
           "ReferenceObservedOriginX": 186,
           "CandidateReferencePlaneKeyMatches": true,
           "MinX": 182,
-          "MaxX": 234
+          "MaxX": 203
         },
         {
           "SampleId": "different-owner-216-103",
@@ -597,12 +604,12 @@
           "Y": 103,
           "SurfaceType": "Floor",
           "MaterialKey": "0|10|255",
-          "VisplaneId": 6,
-          "PredictedSpanStartX": 190,
+          "VisplaneId": 3,
+          "PredictedSpanStartX": 204,
           "CandidateObservedOriginX": 190,
           "ReferenceObservedOriginX": 207,
           "CandidateReferencePlaneKeyMatches": true,
-          "MinX": 182,
+          "MinX": 47,
           "MaxX": 234
         },
         {
@@ -617,7 +624,7 @@
           "ReferenceObservedOriginX": 189,
           "CandidateReferencePlaneKeyMatches": true,
           "MinX": 182,
-          "MaxX": 234
+          "MaxX": 203
         },
         {
           "SampleId": "different-owner-204-105",
@@ -625,12 +632,12 @@
           "Y": 105,
           "SurfaceType": "Floor",
           "MaterialKey": "0|10|255",
-          "VisplaneId": 6,
-          "PredictedSpanStartX": 193,
+          "VisplaneId": 3,
+          "PredictedSpanStartX": 204,
           "CandidateObservedOriginX": 193,
           "ReferenceObservedOriginX": 189,
           "CandidateReferencePlaneKeyMatches": true,
-          "MinX": 182,
+          "MinX": 47,
           "MaxX": 234
         },
         {
@@ -639,12 +646,12 @@
           "Y": 105,
           "SurfaceType": "Floor",
           "MaterialKey": "0|10|255",
-          "VisplaneId": 6,
-          "PredictedSpanStartX": 193,
+          "VisplaneId": 3,
+          "PredictedSpanStartX": 204,
           "CandidateObservedOriginX": 193,
           "ReferenceObservedOriginX": 207,
           "CandidateReferencePlaneKeyMatches": true,
-          "MinX": 182,
+          "MinX": 47,
           "MaxX": 234
         },
         {
@@ -653,12 +660,12 @@
           "Y": 105,
           "SurfaceType": "Floor",
           "MaterialKey": "0|10|255",
-          "VisplaneId": 6,
-          "PredictedSpanStartX": 193,
+          "VisplaneId": 3,
+          "PredictedSpanStartX": 204,
           "CandidateObservedOriginX": 193,
           "ReferenceObservedOriginX": 207,
           "CandidateReferencePlaneKeyMatches": true,
-          "MinX": 182,
+          "MinX": 47,
           "MaxX": 234
         },
         {
@@ -667,12 +674,12 @@
           "Y": 105,
           "SurfaceType": "Floor",
           "MaterialKey": "0|10|255",
-          "VisplaneId": 6,
-          "PredictedSpanStartX": 193,
+          "VisplaneId": 3,
+          "PredictedSpanStartX": 204,
           "CandidateObservedOriginX": 193,
           "ReferenceObservedOriginX": 207,
           "CandidateReferencePlaneKeyMatches": true,
-          "MinX": 182,
+          "MinX": 47,
           "MaxX": 234
         },
         {
@@ -687,7 +694,7 @@
           "ReferenceObservedOriginX": 191,
           "CandidateReferencePlaneKeyMatches": true,
           "MinX": 182,
-          "MaxX": 234
+          "MaxX": 203
         },
         {
           "SampleId": "different-owner-217-106",
@@ -695,12 +702,12 @@
           "Y": 106,
           "SurfaceType": "Floor",
           "MaterialKey": "0|10|255",
-          "VisplaneId": 6,
-          "PredictedSpanStartX": 195,
+          "VisplaneId": 3,
+          "PredictedSpanStartX": 204,
           "CandidateObservedOriginX": 195,
           "ReferenceObservedOriginX": 207,
           "CandidateReferencePlaneKeyMatches": true,
-          "MinX": 182,
+          "MinX": 47,
           "MaxX": 234
         },
         {
@@ -715,7 +722,7 @@
           "ReferenceObservedOriginX": 192,
           "CandidateReferencePlaneKeyMatches": true,
           "MinX": 182,
-          "MaxX": 234
+          "MaxX": 203
         },
         {
           "SampleId": "different-owner-200-108",
@@ -729,7 +736,7 @@
           "ReferenceObservedOriginX": 193,
           "CandidateReferencePlaneKeyMatches": true,
           "MinX": 182,
-          "MaxX": 234
+          "MaxX": 203
         },
         {
           "SampleId": "different-owner-216-108",
@@ -737,12 +744,12 @@
           "Y": 108,
           "SurfaceType": "Floor",
           "MaterialKey": "0|10|255",
-          "VisplaneId": 6,
-          "PredictedSpanStartX": 198,
+          "VisplaneId": 3,
+          "PredictedSpanStartX": 204,
           "CandidateObservedOriginX": 198,
           "ReferenceObservedOriginX": 207,
           "CandidateReferencePlaneKeyMatches": true,
-          "MinX": 182,
+          "MinX": 47,
           "MaxX": 234
         },
         {
@@ -751,12 +758,12 @@
           "Y": 108,
           "SurfaceType": "Floor",
           "MaterialKey": "0|10|255",
-          "VisplaneId": 6,
-          "PredictedSpanStartX": 198,
+          "VisplaneId": 3,
+          "PredictedSpanStartX": 204,
           "CandidateObservedOriginX": 198,
           "ReferenceObservedOriginX": 207,
           "CandidateReferencePlaneKeyMatches": true,
-          "MinX": 182,
+          "MinX": 47,
           "MaxX": 234
         }
       ]
@@ -765,8 +772,9 @@
       "Renderer": "reference",
       "RangeMode": "ObservedCalls",
       "PlaneEvents": 44,
-      "VisplaneInstances": 15,
+      "VisplaneInstances": 19,
       "SampleCount": 18,
+      "UnmatchedSampleCount": 0,
       "CandidateObservedOriginMatches": 1,
       "ReferenceObservedOriginMatches": 8,
       "MeanAbsoluteReferenceOriginDelta": 9.22,
@@ -1029,8 +1037,9 @@
       "Renderer": "reference",
       "RangeMode": "Projected",
       "PlaneEvents": 44,
-      "VisplaneInstances": 15,
+      "VisplaneInstances": 19,
       "SampleCount": 18,
+      "UnmatchedSampleCount": 0,
       "CandidateObservedOriginMatches": 1,
       "ReferenceObservedOriginMatches": 8,
       "MeanAbsoluteReferenceOriginDelta": 9.22,
@@ -1288,9 +1297,274 @@
           "MaxX": 239
         }
       ]
+    },
+    {
+      "Renderer": "reference",
+      "RangeMode": "DoomClipIntervals",
+      "PlaneEvents": 81,
+      "VisplaneInstances": 31,
+      "SampleCount": 18,
+      "UnmatchedSampleCount": 0,
+      "CandidateObservedOriginMatches": 1,
+      "ReferenceObservedOriginMatches": 8,
+      "MeanAbsoluteReferenceOriginDelta": 9.22,
+      "SamplesAtPoints": [
+        {
+          "SampleId": "same-owner-floor",
+          "X": 226,
+          "Y": 105,
+          "SurfaceType": "Floor",
+          "MaterialKey": "0|10|255",
+          "VisplaneId": 1,
+          "PredictedSpanStartX": 189,
+          "CandidateObservedOriginX": 226,
+          "ReferenceObservedOriginX": 207,
+          "CandidateReferencePlaneKeyMatches": true,
+          "MinX": 0,
+          "MaxX": 319
+        },
+        {
+          "SampleId": "different-owner-163-56",
+          "X": 163,
+          "Y": 56,
+          "SurfaceType": "Ceiling",
+          "MaterialKey": "9961472|21|255",
+          "VisplaneId": 10,
+          "PredictedSpanStartX": 112,
+          "CandidateObservedOriginX": 112,
+          "ReferenceObservedOriginX": 116,
+          "CandidateReferencePlaneKeyMatches": true,
+          "MinX": 111,
+          "MaxX": 175
+        },
+        {
+          "SampleId": "different-owner-206-99",
+          "X": 206,
+          "Y": 99,
+          "SurfaceType": "Floor",
+          "MaterialKey": "0|10|255",
+          "VisplaneId": 1,
+          "PredictedSpanStartX": 181,
+          "CandidateObservedOriginX": 184,
+          "ReferenceObservedOriginX": 206,
+          "CandidateReferencePlaneKeyMatches": true,
+          "MinX": 0,
+          "MaxX": 319
+        },
+        {
+          "SampleId": "different-owner-186-100",
+          "X": 186,
+          "Y": 100,
+          "SurfaceType": "Floor",
+          "MaterialKey": "0|10|255",
+          "VisplaneId": 1,
+          "PredictedSpanStartX": 182,
+          "CandidateObservedOriginX": 185,
+          "ReferenceObservedOriginX": 182,
+          "CandidateReferencePlaneKeyMatches": true,
+          "MinX": 0,
+          "MaxX": 319
+        },
+        {
+          "SampleId": "different-owner-203-101",
+          "X": 203,
+          "Y": 101,
+          "SurfaceType": "Floor",
+          "MaterialKey": "0|10|255",
+          "VisplaneId": 1,
+          "PredictedSpanStartX": 184,
+          "CandidateObservedOriginX": 187,
+          "ReferenceObservedOriginX": 184,
+          "CandidateReferencePlaneKeyMatches": true,
+          "MinX": 0,
+          "MaxX": 319
+        },
+        {
+          "SampleId": "different-owner-197-103",
+          "X": 197,
+          "Y": 103,
+          "SurfaceType": "Floor",
+          "MaterialKey": "0|10|255",
+          "VisplaneId": 1,
+          "PredictedSpanStartX": 186,
+          "CandidateObservedOriginX": 190,
+          "ReferenceObservedOriginX": 186,
+          "CandidateReferencePlaneKeyMatches": true,
+          "MinX": 0,
+          "MaxX": 319
+        },
+        {
+          "SampleId": "different-owner-216-103",
+          "X": 216,
+          "Y": 103,
+          "SurfaceType": "Floor",
+          "MaterialKey": "0|10|255",
+          "VisplaneId": 1,
+          "PredictedSpanStartX": 186,
+          "CandidateObservedOriginX": 190,
+          "ReferenceObservedOriginX": 207,
+          "CandidateReferencePlaneKeyMatches": true,
+          "MinX": 0,
+          "MaxX": 319
+        },
+        {
+          "SampleId": "different-owner-194-105",
+          "X": 194,
+          "Y": 105,
+          "SurfaceType": "Floor",
+          "MaterialKey": "0|10|255",
+          "VisplaneId": 1,
+          "PredictedSpanStartX": 189,
+          "CandidateObservedOriginX": 193,
+          "ReferenceObservedOriginX": 189,
+          "CandidateReferencePlaneKeyMatches": true,
+          "MinX": 0,
+          "MaxX": 319
+        },
+        {
+          "SampleId": "different-owner-204-105",
+          "X": 204,
+          "Y": 105,
+          "SurfaceType": "Floor",
+          "MaterialKey": "0|10|255",
+          "VisplaneId": 1,
+          "PredictedSpanStartX": 189,
+          "CandidateObservedOriginX": 193,
+          "ReferenceObservedOriginX": 189,
+          "CandidateReferencePlaneKeyMatches": true,
+          "MinX": 0,
+          "MaxX": 319
+        },
+        {
+          "SampleId": "different-owner-214-105",
+          "X": 214,
+          "Y": 105,
+          "SurfaceType": "Floor",
+          "MaterialKey": "0|10|255",
+          "VisplaneId": 1,
+          "PredictedSpanStartX": 189,
+          "CandidateObservedOriginX": 193,
+          "ReferenceObservedOriginX": 207,
+          "CandidateReferencePlaneKeyMatches": true,
+          "MinX": 0,
+          "MaxX": 319
+        },
+        {
+          "SampleId": "different-owner-215-105",
+          "X": 215,
+          "Y": 105,
+          "SurfaceType": "Floor",
+          "MaterialKey": "0|10|255",
+          "VisplaneId": 1,
+          "PredictedSpanStartX": 189,
+          "CandidateObservedOriginX": 193,
+          "ReferenceObservedOriginX": 207,
+          "CandidateReferencePlaneKeyMatches": true,
+          "MinX": 0,
+          "MaxX": 319
+        },
+        {
+          "SampleId": "different-owner-225-105",
+          "X": 225,
+          "Y": 105,
+          "SurfaceType": "Floor",
+          "MaterialKey": "0|10|255",
+          "VisplaneId": 1,
+          "PredictedSpanStartX": 189,
+          "CandidateObservedOriginX": 193,
+          "ReferenceObservedOriginX": 207,
+          "CandidateReferencePlaneKeyMatches": true,
+          "MinX": 0,
+          "MaxX": 319
+        },
+        {
+          "SampleId": "different-owner-195-106",
+          "X": 195,
+          "Y": 106,
+          "SurfaceType": "Floor",
+          "MaterialKey": "0|10|255",
+          "VisplaneId": 1,
+          "PredictedSpanStartX": 191,
+          "CandidateObservedOriginX": 195,
+          "ReferenceObservedOriginX": 191,
+          "CandidateReferencePlaneKeyMatches": true,
+          "MinX": 0,
+          "MaxX": 319
+        },
+        {
+          "SampleId": "different-owner-217-106",
+          "X": 217,
+          "Y": 106,
+          "SurfaceType": "Floor",
+          "MaterialKey": "0|10|255",
+          "VisplaneId": 1,
+          "PredictedSpanStartX": 191,
+          "CandidateObservedOriginX": 195,
+          "ReferenceObservedOriginX": 207,
+          "CandidateReferencePlaneKeyMatches": true,
+          "MinX": 0,
+          "MaxX": 319
+        },
+        {
+          "SampleId": "different-owner-200-107",
+          "X": 200,
+          "Y": 107,
+          "SurfaceType": "Floor",
+          "MaterialKey": "0|10|255",
+          "VisplaneId": 1,
+          "PredictedSpanStartX": 192,
+          "CandidateObservedOriginX": 196,
+          "ReferenceObservedOriginX": 192,
+          "CandidateReferencePlaneKeyMatches": true,
+          "MinX": 0,
+          "MaxX": 319
+        },
+        {
+          "SampleId": "different-owner-200-108",
+          "X": 200,
+          "Y": 108,
+          "SurfaceType": "Floor",
+          "MaterialKey": "0|10|255",
+          "VisplaneId": 1,
+          "PredictedSpanStartX": 193,
+          "CandidateObservedOriginX": 198,
+          "ReferenceObservedOriginX": 193,
+          "CandidateReferencePlaneKeyMatches": true,
+          "MinX": 0,
+          "MaxX": 319
+        },
+        {
+          "SampleId": "different-owner-216-108",
+          "X": 216,
+          "Y": 108,
+          "SurfaceType": "Floor",
+          "MaterialKey": "0|10|255",
+          "VisplaneId": 1,
+          "PredictedSpanStartX": 193,
+          "CandidateObservedOriginX": 198,
+          "ReferenceObservedOriginX": 207,
+          "CandidateReferencePlaneKeyMatches": true,
+          "MinX": 0,
+          "MaxX": 319
+        },
+        {
+          "SampleId": "different-owner-218-108",
+          "X": 218,
+          "Y": 108,
+          "SurfaceType": "Floor",
+          "MaterialKey": "0|10|255",
+          "VisplaneId": 1,
+          "PredictedSpanStartX": 193,
+          "CandidateObservedOriginX": 198,
+          "ReferenceObservedOriginX": 207,
+          "CandidateReferencePlaneKeyMatches": true,
+          "MinX": 0,
+          "MaxX": 319
+        }
+      ]
     }
   ],
-  "MethodLimit": "Projected mode uses angular segment bounds without solid-wall clipping; ObservedCalls mode uses the minimum and maximum recorded nonempty plane-call columns. The model covers the listed mismatch samples only and reconstructs neither exact post-clip R_CheckPlane intervals nor original-executable parity.",
+  "MethodLimit": "ObservedCalls and Projected remain approximate models. DoomClipIntervals applies the original R_FindPlane/R_CheckPlane ordering and mark-floor/ceiling rules to exact clipped ranges captured from the adapted renderer; adapted geometry and clipping can differ from the original executable, so this does not prove original-executable parity.",
   "ReferenceSource": [
     "https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/r_plane.c",
     "https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/r_segs.c"
@@ -1300,8 +1574,8 @@
   "TracePath": "results/moving-sector-reference-plane-full-call-trace-20261020.json",
   "TraceSha256": "0F46D5017DDFD2091445874A7D3A78FBF085DEF0D3AD08DEC4941E4E58EF8B52",
   "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
-  "EngineBundleSha256": "2419DC7E6C2008B8B5E70A192296104E780E4AD2679A128AF61FD07C325C96D2",
-  "AnalysisScriptSha256": "6AE0DB9F4E3CEE68AA59ED21FCA48A8C5E3ACE6A23C25CB1DB79C06745894709",
+  "EngineBundleSha256": "A6CCC07CA5D0E6DAAE759A59DDE743608FBC2810AAC1D26B2EA88267AC3BA88D",
+  "AnalysisScriptSha256": "673B52B75C2419EF51EE55D9069EBF0A384D3900EE8A639B20482B377C669698",
   "ProductionRendererChanged": false,
   "LiveTestsRun": false,
   "DeviceInteraction": false

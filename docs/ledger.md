@@ -16,23 +16,29 @@ a reused plane when its visible column ranges overlap, and turns the resulting
 top/bottom masks into horizontal spans. See the official
 [`r_plane.c`](https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/r_plane.c)
 and its [`r_segs.c` call site](https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/r_segs.c).
-The rejected per-row material-key counterfactual models the key but not the
-overlap split; its worse comparison against the adapted reference does not
-disprove a visplane-based rule. An offline reconstruction now covers all 18
-recorded mismatch samples: one same-owner floor sample and 17 different-owner
-samples, all with matching candidate/reference material keys. Candidate-call
-visplane spans predict the candidate's recorded sample origin at all 18
-points. Reference-call spans predict the adapted reference's recorded origin
-at 8 of 18 points, with a mean absolute difference of 9.22 columns. The
-observed-call and angular-projection bounds produce identical predictions at
-these sample points. This is evidence about the saved traces only; exact
-post-clip `R_CheckPlane` intervals remain uncaptured, so it does not establish
-original-executable parity. Production sampling remains unchanged. See the
-[analysis script](../scripts/Measure-VisplaneSpanOrigins.ps1), the
-[18-sample receipt](../results/moving-sector-visplane-mismatch-origins-20261020.json),
-and the [initial single-sample receipt](../results/moving-sector-visplane-span-origin-20261020.json).
-Next, recover the exact post-clip intervals before considering a production
-sampling change. No live tests or device interaction were used.
+The earlier 18/18 candidate-origin claim was wrong. That reconstruction
+cached a plane by subsector, while Doom's `R_FindPlane` scans existing planes
+from first to last and reuses the first matching height/flat/light key. The
+old receipts using that cache have been removed from the current tree. The
+corrected offline analysis covers all 18 recorded mismatch samples (one
+same-owner floor sample and 17 different-owner samples, all with matching
+candidate/reference material keys). With first-match lookup, the candidate
+call and projected-range models each match the candidate's recorded origin at
+9/18 points. The reference observed-call, projected-range, and source-based
+clipped-interval models each match the adapted reference at 8/18 points; the
+last model's mean absolute origin difference is 9.22 columns.
+
+The range receipt contains 45 post-clip ranges (20 solid and 25 pass) and
+1,037 adapted-reference plane calls. Every call maps to exactly one captured
+range with the same front sector. The source-based counterfactual applies
+Doom's first-match `R_FindPlane`, overlap-aware `R_CheckPlane`, and floor/
+ceiling marking order to those adapted-renderer ranges. Since those ranges
+come from the adapted renderer, this does not establish original-executable
+parity. Production sampling remains unchanged. See the
+[analysis script](../scripts/Measure-VisplaneSpanOrigins.ps1),
+[range-trace receipt](../results/moving-sector-reference-visible-range-trace-20261020.json),
+and [corrected 18-sample receipt](../results/moving-sector-visplane-mismatch-origins-rfindplane-corrected-20261020.json).
+No live tests or device interaction were used.
 
 ## 2026-10-20 — Attribute the remaining same-owner plane sample to call order
 

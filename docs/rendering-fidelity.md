@@ -1653,17 +1653,23 @@ the new range; overlapping ranges create a separate plane, and the final
 top/bottom masks are converted into horizontal spans. See the official
 [`r_plane.c`](https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/r_plane.c)
 and [`r_segs.c`](https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/r_segs.c).
-The tested per-row material-key shortcut did not model those overlap splits,
-so its regression against the adapted reference does not settle the original
-algorithm. The column-call traces still do not prove original-executable
-parity. An offline PowerShell reconstruction covers all 18 recorded plane
-mismatch samples, whose candidate/reference material keys match. Candidate-call
-spans predict the candidate's recorded origins at all 18 points; reference-call
-spans reproduce the adapted reference's recorded origins at 8 points, with a
-mean absolute difference of 9.22 columns. Both approximate range models give
-the same predictions at the sampled points. Exact post-clip
-`R_CheckPlane` intervals remain uncaptured, so original-executable parity is
-unproven and production sampling remains unchanged. See the
-[analysis script](../scripts/Measure-VisplaneSpanOrigins.ps1) and
-[18-sample receipt](../results/moving-sector-visplane-mismatch-origins-20261020.json).
+The first 18-sample reconstruction had a logic error: it cached a selected
+plane by subsector, although `R_FindPlane` scans from the first plane and
+reuses the first matching height/flat/light key. Its 18/18 candidate-origin
+claim was invalid, and the old receipts using that cache have been removed
+from the current tree. With first-match lookup, the candidate call and
+projected-range models each match recorded candidate origins at 9/18 samples.
+The reference observed-call, projected-range, and source-based clipped-range
+models each match adapted-reference origins at 8/18 samples; the clipped-range
+model's mean absolute difference is 9.22 columns.
+
+The clipped-range model uses 45 post-clip solid/pass ranges from the adapted
+renderer. All 1,037 recorded reference plane calls map to exactly one captured
+range with a matching front sector. It then applies original Doom's
+`R_FindPlane` and `R_CheckPlane` ordering and floor/ceiling marking conditions.
+The captured ranges still reflect adapted clipping and geometry, so the model
+does not establish original-executable parity. Production sampling remains
+unchanged. See the [analysis script](../scripts/Measure-VisplaneSpanOrigins.ps1),
+[range-trace receipt](../results/moving-sector-reference-visible-range-trace-20261020.json),
+and [corrected 18-sample receipt](../results/moving-sector-visplane-mismatch-origins-rfindplane-corrected-20261020.json).
 No live tests or device interaction were used.

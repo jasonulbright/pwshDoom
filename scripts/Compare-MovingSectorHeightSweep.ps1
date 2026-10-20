@@ -272,13 +272,15 @@ try {
         $null -ne $reference3D.GetType().GetProperty('DiagnosticPlaneSampleOriginX') -and
         $null -ne $reference3D.GetType().GetProperty('DiagnosticPlaneSampleReusedPreviousColumn') -and
         $null -ne $reference3D.GetType().GetProperty('DiagnosticCeilingSampleOriginX') -and
-        $null -ne $reference3D.GetType().GetProperty('DiagnosticFloorSampleOriginX')
+        $null -ne $reference3D.GetType().GetProperty('DiagnosticFloorSampleOriginX') -and
+        $null -ne $reference3D.GetType().GetProperty('DiagnosticPlaneRangeTrace')
     if ($CaptureReferencePlaneOwners -and -not $hasReferencePlaneOwnerFields) {
         throw 'The selected engine source does not contain reference plane-owner diagnostics.'
     }
     if ($hasReferencePlaneOwnerFields) {
         $CaptureReferencePlaneOwners = $true
         $reference3D.DiagnosticPlaneCallTrace = [Collections.Generic.List[object]]::new()
+        $reference3D.DiagnosticPlaneRangeTrace = [Collections.Generic.List[object]]::new()
         $reference3D.DiagnosticPlaneOwners = [Sector[]]::new(320 * 200)
         $reference3D.DiagnosticPlaneSurfaceTypes = [byte[]]::new(320 * 200)
         $reference3D.DiagnosticFinalWriterTypes = [byte[]]::new(320 * 200)
@@ -405,6 +407,7 @@ try {
         [byte[]]$candidate = $context.Pixels.Clone()
         if ($CaptureReferencePlaneOwners) {
             $reference3D.DiagnosticPlaneCallTrace.Clear()
+            $reference3D.DiagnosticPlaneRangeTrace.Clear()
             [Array]::Clear($reference3D.DiagnosticPlaneOwners, 0, $reference3D.DiagnosticPlaneOwners.Length)
             [Array]::Clear($reference3D.DiagnosticPlaneSurfaceTypes, 0, $reference3D.DiagnosticPlaneSurfaceTypes.Length)
             [Array]::Clear($reference3D.DiagnosticFinalWriterTypes, 0, $reference3D.DiagnosticFinalWriterTypes.Length)
@@ -1649,6 +1652,9 @@ try {
                     }
                 )
             } else { @() }
+            ReferencePlaneRangeTrace = if ($CaptureReferencePlaneOwners -and [int]$height -eq 68) {
+                $reference3D.DiagnosticPlaneRangeTrace.ToArray()
+            } else { @() }
         })
         $frames[[int]$height] = @{ Candidate = $candidate; Reference = $referencePixels }
     }
@@ -1782,6 +1788,7 @@ try {
         PlaneSampleInterpretation = 'Candidate plane fractions, recurrence origins and reuse flags are captured from the production per-call plane sampler. Reference fractions, distance, light bin and flat texel are recorded at writes. Candidate frame bytes may include later overlays.'
         CandidatePlaneCallTraceInterpretation = 'At ceiling height 68, the receipt includes every candidate floor/ceiling plane call across the full 320-column frame in original call order, including vertical spans outside the target mismatch rows. Each record gives x, y1, y2, plane id, sector index, surface, and segment index. Calls outside a target row can still reset per-surface previous-call state.'
         ReferencePlaneCallTraceInterpretation = 'At ceiling height 68, the receipt includes every adapted-reference floor/ceiling call across the full 320-column frame in original call order, including vertical spans outside the target mismatch rows. Each record gives x, y1, y2, sector index, surface, and segment index. Calls expose visibility and recurrence boundaries; they do not establish original-executable parity.'
+        ReferencePlaneRangeTraceInterpretation = 'At ceiling height 68, records the inclusive x ranges after the adapted reference clipper splits solid and pass walls. Each record identifies the segment and front/back sectors. These are exact ranges entering the adapted range-render methods, not captured original-executable R_CheckPlane calls.'
         PlaneMathInterpretation = 'Plane table and per-column fixed sine parity are compared after the final full-width candidate/reference render; this does not compare per-pixel plane fraction recurrence or light selection.'
     }
     $currentHashes = @{}

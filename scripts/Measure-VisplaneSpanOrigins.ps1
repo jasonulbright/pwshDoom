@@ -5,17 +5,18 @@ param(
     [string]$Wad = 'C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\base\DOOM.WAD',
     [string]$Replay = "$PSScriptRoot/../results/e1m1-route-lineflags.json",
     [string]$TraceReceipt = "$PSScriptRoot/../results/moving-sector-reference-plane-full-call-trace-20261020.json",
+    [string]$RangeTraceReceipt = "$PSScriptRoot/../results/moving-sector-reference-visible-range-trace-20261020.json",
     [string]$EngineBundle = "$PSScriptRoot/../local/engine-bundle.ps1",
-    [string]$Output = "$PSScriptRoot/../results/moving-sector-visplane-mismatch-origins-20261020.json",
+    [string]$Output = "$PSScriptRoot/../results/moving-sector-visplane-mismatch-origins-rfindplane-corrected-20261020.json",
     [ValidateSet('candidate', 'reference')][string[]]$Renderers = @('candidate', 'reference')
 )
 
 $ErrorActionPreference = 'Stop'
 $root = Split-Path $PSScriptRoot
-foreach ($pathName in 'Wad', 'Replay', 'TraceReceipt', 'EngineBundle', 'Output') {
+foreach ($pathName in 'Wad', 'Replay', 'TraceReceipt', 'RangeTraceReceipt', 'EngineBundle', 'Output') {
     Set-Variable -Name $pathName -Value ([IO.Path]::GetFullPath((Get-Variable -Name $pathName -ValueOnly)))
 }
-foreach ($path in $Wad, $Replay, $TraceReceipt, $EngineBundle) {
+foreach ($path in $Wad, $Replay, $TraceReceipt, $RangeTraceReceipt, $EngineBundle) {
     if (-not (Test-Path -LiteralPath $path -PathType Leaf)) { throw "Required input not found: $path" }
 }
 $outputRelative = [IO.Path]::GetRelativePath($root, $Output)
@@ -26,14 +27,49 @@ if ([IO.Path]::IsPathRooted($outputRelative) -or $outputRelative -eq '..' -or
 if (Test-Path -LiteralPath $Output) { throw 'Use a fresh analysis output path.' }
 
 $trace = Get-Content -LiteralPath $TraceReceipt -Raw | ConvertFrom-Json
+$rangeTraceData = Get-Content -LiteralPath $RangeTraceReceipt -Raw | ConvertFrom-Json
 $replayData = Get-Content -LiteralPath $Replay -Raw | ConvertFrom-Json
 $wadSha256 = (Get-FileHash -Algorithm SHA256 -LiteralPath $Wad).Hash
 $replaySha256 = (Get-FileHash -Algorithm SHA256 -LiteralPath $Replay).Hash
 if ($trace.WadSha256 -cne $wadSha256 -or $trace.ReplaySha256 -cne $replaySha256) {
     throw 'The trace receipt, replay and IWAD hashes do not match.'
 }
+if ($rangeTraceData.WadSha256 -cne $wadSha256 -or
+    $rangeTraceData.ReplaySha256 -cne $replaySha256 -or
+    $rangeTraceData.InputTic -ne $trace.InputTic -or
+    $rangeTraceData.SectorIndex -ne $trace.SectorIndex) {
+    throw 'The visible-range receipt does not match the replay, IWAD, tic and sector.'
+}
 $heightRecord = $trace.Heights | Where-Object CeilingHeight -eq 68 | Select-Object -First 1
 if ($null -eq $heightRecord) { throw 'The trace receipt has no ceiling-height-68 sample.' }
+$rangeHeightRecord = $rangeTraceData.Heights | Where-Object CeilingHeight -eq 68 | Select-Object -First 1
+if ($null -eq $rangeHeightRecord -or @($rangeHeightRecord.ReferencePlaneRangeTrace).Count -eq 0) {
+    throw 'The visible-range receipt has no height-68 reference intervals.'
+}
+$rangeReferenceCalls = @($rangeHeightRecord.ReferencePlaneCallTrace)
+$rangeEvents = @($rangeHeightRecord.ReferencePlaneRangeTrace)
+if ($rangeReferenceCalls.Count -ne @($heightRecord.ReferencePlaneCallTrace).Count) {
+    throw 'The visible-range receipt has a different reference plane-call count.'
+}
+for ([int]$callIndex = 0; $callIndex -lt $rangeReferenceCalls.Count; $callIndex++) {
+    $expectedCall = $heightRecord.ReferencePlaneCallTrace[$callIndex]
+    $actualCall = $rangeReferenceCalls[$callIndex]
+    foreach ($field in 'Ordinal', 'X', 'Y1', 'Y2', 'SectorIndex', 'SurfaceType', 'SegmentIndex') {
+        if ($actualCall.$field -cne $expectedCall.$field) {
+            throw "The visible-range receipt reference call differs at index $callIndex ($field)."
+        }
+    }
+    $matchingRanges = @($rangeEvents | Where-Object {
+        $_.SegmentIndex -eq $actualCall.SegmentIndex -and
+        $_.StartX -le $actualCall.X -and $_.StopXInclusive -ge $actualCall.X
+    })
+    if ($matchingRanges.Count -ne 1) {
+        throw "Reference plane call $callIndex does not map to exactly one matching clipped range."
+    }
+    if ($matchingRanges[0].FrontSectorIndex -ne $actualCall.SectorIndex) {
+        throw "Reference plane call $callIndex disagrees with its clipped range front sector."
+    }
+}
 $sampleExample = @($heightRecord.SameOwnerPlaneSampleExamples | Select-Object -First 1)
 if ($sampleExample.Count -ne 1) { throw 'The trace must contain a same-owner plane sample.' }
 if ($trace.InputTic -gt $replayData.InputCommands.Count) { throw 'The replay does not contain the trace input tic.' }
@@ -63,43 +99,109 @@ function Get-VisplaneSpanPrediction {
         [hashtable]$ProjectedRanges,
         [int]$SkyFlatNumber,
         [string]$RangeMode,
-        [object[]]$Samples
+        [object[]]$Samples,
+        [object[]]$ExactRanges,
+        [int]$ViewZData
     )
 
-    $segmentToSubsector = @{}
-    for ([int]$subsectorIndex = 0; $subsectorIndex -lt $Map.Subsectors.Length; $subsectorIndex++) {
-        $subsector = $Map.Subsectors[$subsectorIndex]
-        for ([int]$segIndex = $subsector.FirstSeg; $segIndex -lt ($subsector.FirstSeg + $subsector.SegCount); $segIndex++) {
-            $segmentToSubsector[[string]$segIndex] = $subsectorIndex
-        }
-    }
-
-    $callsBySegmentSurface = @{}
-    foreach ($call in $Calls) {
-        if ($call.SurfaceType -notin 'Floor', 'Ceiling') { continue }
-        $bucketKey = "$($call.SegmentIndex)|$($call.SurfaceType)"
-        if (-not $callsBySegmentSurface.ContainsKey($bucketKey)) {
-            $callsBySegmentSurface[$bucketKey] = [Collections.Generic.List[object]]::new()
-        }
-        $callsBySegmentSurface[$bucketKey].Add($call)
-    }
-
     $events = [Collections.Generic.List[object]]::new()
-    foreach ($bucketKey in $callsBySegmentSurface.Keys) {
-        $bucket = $callsBySegmentSurface[$bucketKey]
-        $first = $bucket[0]
-        $events.Add([pscustomobject]@{
-            FirstOrdinal = [int]$first.Ordinal
-            SegmentIndex = [int]$first.SegmentIndex
-            SectorIndex = [int]$first.SectorIndex
-            SurfaceType = [string]$first.SurfaceType
-            Calls = $bucket
-        })
+    if ($RangeMode -eq 'DoomClipIntervals') {
+        foreach ($range in $ExactRanges | Sort-Object Ordinal) {
+            [int]$frontSectorIndex = $range.FrontSectorIndex
+            [int]$backSectorIndex = $range.BackSectorIndex
+            if ($frontSectorIndex -lt 0 -or $frontSectorIndex -ge $Map.Sectors.Length) {
+                throw "Clipped range $($range.Ordinal) has an invalid front sector."
+            }
+            $frontSector = $Map.Sectors[$frontSectorIndex]
+            [int]$frontFloor = $frontSector.FloorHeight.Data
+            [int]$frontCeiling = $frontSector.CeilingHeight.Data
+            [bool]$markFloor = $backSectorIndex -lt 0
+            [bool]$markCeiling = $backSectorIndex -lt 0
+
+            if ($backSectorIndex -ge 0) {
+                if ($backSectorIndex -ge $Map.Sectors.Length) {
+                    throw "Clipped range $($range.Ordinal) has an invalid back sector."
+                }
+                $backSector = $Map.Sectors[$backSectorIndex]
+                [int]$backFloor = $backSector.FloorHeight.Data
+                [int]$backCeiling = $backSector.CeilingHeight.Data
+                [int]$worldBottom = $frontFloor - $ViewZData
+                [int]$worldLow = $backFloor - $ViewZData
+                [int]$worldTop = $frontCeiling - $ViewZData
+                [int]$worldHigh = $backCeiling - $ViewZData
+                if ($frontSector.CeilingFlat -eq $SkyFlatNumber -and
+                    $backSector.CeilingFlat -eq $SkyFlatNumber) {
+                    $worldTop = $worldHigh
+                }
+
+                $markFloor = $worldLow -ne $worldBottom -or
+                    $backSector.FloorFlat -ne $frontSector.FloorFlat -or
+                    $backSector.LightLevel -ne $frontSector.LightLevel
+                $markCeiling = $worldHigh -ne $worldTop -or
+                    $backSector.CeilingFlat -ne $frontSector.CeilingFlat -or
+                    $backSector.LightLevel -ne $frontSector.LightLevel
+                if ($backCeiling -le $frontFloor -or $backFloor -ge $frontCeiling) {
+                    $markFloor = $true
+                    $markCeiling = $true
+                }
+            }
+
+            if ($frontFloor -ge $ViewZData) { $markFloor = $false }
+            if ($frontCeiling -le $ViewZData -and $frontSector.CeilingFlat -ne $SkyFlatNumber) {
+                $markCeiling = $false
+            }
+
+            foreach ($surfaceType in 'Ceiling', 'Floor') {
+                $marked = if ($surfaceType -eq 'Floor') { $markFloor } else { $markCeiling }
+                if (-not $marked) { continue }
+                [int]$surfaceOrder = if ($surfaceType -eq 'Ceiling') { 0 } else { 1 }
+                $rangeCalls = @($Calls | Where-Object {
+                    $_.SegmentIndex -eq $range.SegmentIndex -and
+                    $_.SurfaceType -eq $surfaceType -and
+                    $_.X -ge $range.StartX -and $_.X -le $range.StopXInclusive
+                })
+                foreach ($rangeCall in $rangeCalls) {
+                    if ($rangeCall.SectorIndex -ne $frontSectorIndex) {
+                        throw "Clipped range $($range.Ordinal) disagrees with its plane-call front sector."
+                    }
+                }
+                $events.Add([pscustomobject]@{
+                    FirstOrdinal = ([int]$range.Ordinal * 2) + $surfaceOrder
+                    SegmentIndex = [int]$range.SegmentIndex
+                    SectorIndex = $frontSectorIndex
+                    SurfaceType = $surfaceType
+                    Calls = $rangeCalls
+                    StartX = [int]$range.StartX
+                    StopX = [int]$range.StopXInclusive
+                    RangeOrdinal = [int]$range.Ordinal
+                })
+            }
+        }
+    } else {
+        $callsBySegmentSurface = @{}
+        foreach ($call in $Calls) {
+            if ($call.SurfaceType -notin 'Floor', 'Ceiling') { continue }
+            $bucketKey = "$($call.SegmentIndex)|$($call.SurfaceType)"
+            if (-not $callsBySegmentSurface.ContainsKey($bucketKey)) {
+                $callsBySegmentSurface[$bucketKey] = [Collections.Generic.List[object]]::new()
+            }
+            $callsBySegmentSurface[$bucketKey].Add($call)
+        }
+        foreach ($bucketKey in $callsBySegmentSurface.Keys) {
+            $bucket = $callsBySegmentSurface[$bucketKey]
+            $first = $bucket[0]
+            $events.Add([pscustomobject]@{
+                FirstOrdinal = [int]$first.Ordinal
+                SegmentIndex = [int]$first.SegmentIndex
+                SectorIndex = [int]$first.SectorIndex
+                SurfaceType = [string]$first.SurfaceType
+                Calls = $bucket
+            })
+        }
     }
     $events = @($events | Sort-Object FirstOrdinal)
 
     $visplanes = [Collections.Generic.List[object]]::new()
-    $subsectorPlanes = @{}
     [int]$nextVisplaneId = 0
     foreach ($event in $events) {
         $sector = $Map.Sectors[$event.SectorIndex]
@@ -116,34 +218,32 @@ function Get-VisplaneSpanPrediction {
             $lightLevel = 0
         }
         $materialKey = "$heightData|$flatIndex|$lightLevel"
-        $subsectorId = $segmentToSubsector[[string]$event.SegmentIndex]
-        if ($null -eq $subsectorId) { throw "Segment $($event.SegmentIndex) has no subsector." }
-        $subsectorKey = "$subsectorId|$($event.SurfaceType)"
-
-        if ($subsectorPlanes.ContainsKey($subsectorKey)) {
-            $plane = $subsectorPlanes[$subsectorKey]
-        } else {
-            $plane = $null
-            foreach ($knownPlane in $visplanes) {
-                if ($knownPlane.MaterialKey -ceq $materialKey) { $plane = $knownPlane; break }
-            }
-            if ($null -eq $plane) {
-                $plane = New-VisplaneRecord $nextVisplaneId $materialKey
-                $nextVisplaneId++
-                $visplanes.Add($plane)
-            }
-            $subsectorPlanes[$subsectorKey] = $plane
+        # Doom's R_FindPlane scans from the first visplane and reuses the first
+        # matching height/flat/light key, including after R_CheckPlane has split it.
+        $plane = $null
+        foreach ($knownPlane in $visplanes) {
+            if ($knownPlane.MaterialKey -ceq $materialKey) { $plane = $knownPlane; break }
+        }
+        if ($null -eq $plane) {
+            $plane = New-VisplaneRecord $nextVisplaneId $materialKey
+            $nextVisplaneId++
+            $visplanes.Add($plane)
         }
 
-        $callXs = @($event.Calls | ForEach-Object { [int]$_.X })
-        if ($RangeMode -eq 'ObservedCalls') {
-            [int]$startX = ($callXs | Measure-Object -Minimum).Minimum
-            [int]$stopX = ($callXs | Measure-Object -Maximum).Maximum
+        if ($RangeMode -eq 'DoomClipIntervals') {
+            [int]$startX = $event.StartX
+            [int]$stopX = $event.StopX
         } else {
-            $projectedRange = $ProjectedRanges[[string]$event.SegmentIndex]
-            if ($null -eq $projectedRange) { throw "No projected range for segment $($event.SegmentIndex)." }
-            [int]$startX = $projectedRange[0]
-            [int]$stopX = $projectedRange[1]
+            $callXs = @($event.Calls | ForEach-Object { [int]$_.X })
+            if ($RangeMode -eq 'ObservedCalls') {
+                [int]$startX = ($callXs | Measure-Object -Minimum).Minimum
+                [int]$stopX = ($callXs | Measure-Object -Maximum).Maximum
+            } else {
+                $projectedRange = $ProjectedRanges[[string]$event.SegmentIndex]
+                if ($null -eq $projectedRange) { throw "No projected range for segment $($event.SegmentIndex)." }
+                [int]$startX = $projectedRange[0]
+                [int]$stopX = $projectedRange[1]
+            }
         }
 
         [int]$overlapStart = [Math]::Max($startX, [int]$plane.MinX)
@@ -161,7 +261,6 @@ function Get-VisplaneSpanPrediction {
             $plane.MinX = $startX
             $plane.MaxX = $stopX
             $visplanes.Add($plane)
-            $subsectorPlanes[$subsectorKey] = $plane
         } else {
             $plane.MinX = [Math]::Min([int]$plane.MinX, $startX)
             $plane.MaxX = [Math]::Max([int]$plane.MaxX, $stopX)
@@ -235,6 +334,7 @@ try {
     [int]$sectorIndex = $trace.SectorIndex
     $game.World.Map.Sectors[$sectorIndex].CeilingHeight = [Fixed]::FromInt([int]$heightRecord.CeilingHeight)
     $player = $game.World.ConsolePlayer.Mobj
+    [int]$viewZData = $game.World.ConsolePlayer.ViewZ.Data
     $tables = Get-FastPlaneTables
     $calls = @($heightRecord.CandidatePlaneCallTrace) + @($heightRecord.ReferencePlaneCallTrace)
     $segmentIndexes = @($calls | ForEach-Object { [int]$_.SegmentIndex } | Sort-Object -Unique)
@@ -284,8 +384,12 @@ try {
     $results = [Collections.Generic.List[object]]::new()
     foreach ($renderer in $Renderers) {
         $rendererCalls = if ($renderer -eq 'candidate') { $heightRecord.CandidatePlaneCallTrace } else { $heightRecord.ReferencePlaneCallTrace }
-        foreach ($rangeMode in 'ObservedCalls', 'Projected') {
-            $prediction = Get-VisplaneSpanPrediction @($rendererCalls) $game.World.Map $projectedRanges $content.Flats.SkyFlatNumber $rangeMode @($samples)
+        $rangeModes = @('ObservedCalls', 'Projected')
+        if ($renderer -eq 'reference') { $rangeModes += 'DoomClipIntervals' }
+        foreach ($rangeMode in $rangeModes) {
+            $predictionCalls = if ($rangeMode -eq 'DoomClipIntervals') { $rangeReferenceCalls } else { $rendererCalls }
+            $predictionRanges = if ($rangeMode -eq 'DoomClipIntervals') { $rangeEvents } else { @() }
+            $prediction = Get-VisplaneSpanPrediction @($predictionCalls) $game.World.Map $projectedRanges $content.Flats.SkyFlatNumber $rangeMode @($samples) @($predictionRanges) $viewZData
             $candidateOriginMatches = @($prediction.SamplesAtPoints | Where-Object {
                 $_.PredictedSpanStartX -eq $_.CandidateObservedOriginX
             }).Count
@@ -295,6 +399,8 @@ try {
             $referenceOriginDeltas = @($prediction.SamplesAtPoints | ForEach-Object {
                 [Math]::Abs($_.PredictedSpanStartX - $_.ReferenceObservedOriginX)
             })
+            $matchedSampleIds = @($prediction.SamplesAtPoints | ForEach-Object SampleId | Sort-Object -Unique)
+            $unmatchedSampleCount = @($samples | Where-Object { $_.Id -notin $matchedSampleIds }).Count
             $meanReferenceOriginDelta = if ($referenceOriginDeltas.Count -eq 0) {
                 $null
             } else {
@@ -306,6 +412,7 @@ try {
                 PlaneEvents = $prediction.PlaneEvents
                 VisplaneInstances = $prediction.VisplaneInstances
                 SampleCount = $samples.Count
+                UnmatchedSampleCount = $unmatchedSampleCount
                 CandidateObservedOriginMatches = $candidateOriginMatches
                 ReferenceObservedOriginMatches = $referenceOriginMatches
                 MeanAbsoluteReferenceOriginDelta = $meanReferenceOriginDelta
@@ -315,9 +422,9 @@ try {
     }
 
     $report = [ordered]@{
-        SchemaVersion = 2
+        SchemaVersion = 3
         FinishedUtc = [DateTime]::UtcNow.ToString('o')
-        Experiment = 'Approximate original visplane grouping and horizontal span starts for recorded plane-mismatch samples.'
+        Experiment = 'Reconstruct first-match Doom R_FindPlane lookup, overlap-splitting R_CheckPlane ranges, and horizontal span starts for recorded mismatch samples.'
         InputTic = [int]$trace.InputTic
         SectorIndex = $sectorIndex
         CeilingHeight = [int]$heightRecord.CeilingHeight
@@ -330,6 +437,11 @@ try {
             AngleData = [uint32]$player.Angle.Data
         }
         SameOwnerFloorMaterialKey = $targetMaterialKey
+        ReferenceClipRangeCount = $rangeEvents.Count
+        ReferencePlaneCallCount = $rangeReferenceCalls.Count
+        RangeTracePath = [IO.Path]::GetRelativePath($root, $RangeTraceReceipt).Replace('\', '/')
+        RangeTraceSha256 = (Get-FileHash -Algorithm SHA256 -LiteralPath $RangeTraceReceipt).Hash
+        RFindPlaneLookupRule = 'Search visplanes from first to last and reuse the first matching height/flat/light key; do not cache the selected plane by subsector.'
         SameOwnerFloorSegments = @(
             foreach ($segmentIndex in 137, 141) {
                 $segment = $game.World.Map.Segs[$segmentIndex]
@@ -342,7 +454,7 @@ try {
             }
         )
         RangeModels = @($results)
-        MethodLimit = 'Projected mode uses angular segment bounds without solid-wall clipping; ObservedCalls mode uses the minimum and maximum recorded nonempty plane-call columns. The model covers the listed mismatch samples only and reconstructs neither exact post-clip R_CheckPlane intervals nor original-executable parity.'
+        MethodLimit = 'ObservedCalls and Projected remain approximate models. DoomClipIntervals applies the original R_FindPlane/R_CheckPlane ordering and mark-floor/ceiling rules to exact clipped ranges captured from the adapted renderer; adapted geometry and clipping can differ from the original executable, so this does not prove original-executable parity.'
         ReferenceSource = @(
             'https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/r_plane.c',
             'https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/r_segs.c'
@@ -362,7 +474,9 @@ try {
     [pscustomobject]@{
         Output = [IO.Path]::GetRelativePath($root, $Output).Replace('\', '/')
         SampleCount = $samples.Count
-        RangeModels = @($results)
+        RangeModels = @($results | Select-Object Renderer, RangeMode, PlaneEvents, VisplaneInstances,
+            SampleCount, UnmatchedSampleCount, CandidateObservedOriginMatches,
+            ReferenceObservedOriginMatches, MeanAbsoluteReferenceOriginDelta)
         LiveTestsRun = $false
         DeviceInteraction = $false
     } | ConvertTo-Json -Depth 6

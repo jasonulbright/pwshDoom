@@ -22,6 +22,7 @@ $fields=@'
 class ThreeDRenderer {
     # Diagnostic-only reference plane writes; present only in this copied source.
     [Collections.Generic.List[object]] $DiagnosticPlaneCallTrace
+    [Collections.Generic.List[object]] $DiagnosticPlaneRangeTrace
     [Sector[]] $DiagnosticPlaneOwners
     [byte[]] $DiagnosticPlaneSurfaceTypes
     [byte[]] $DiagnosticFinalWriterTypes
@@ -50,6 +51,45 @@ class ThreeDRenderer {
 '@
 $source=$source.Replace($marker,$fields.TrimEnd([char]13,[char]10))
 $nl=[Environment]::NewLine
+
+function Add-PlaneRangeTrace(
+    [string]$text,
+    [string]$methodStart,
+    [string]$marker,
+    [string]$rangeType,
+    [string]$drawAsSolidWallExpression
+){
+    $start=$text.IndexOf($methodStart,[StringComparison]::Ordinal)
+    if($start -lt 0){throw "Missing range method: $methodStart"}
+    $end=$text.IndexOf($nl+'    [',$start+$methodStart.Length,[StringComparison]::Ordinal)
+    if($end -lt 0){$end=$text.Length}
+    $segment=$text.Substring($start,$end-$start)
+    $pattern='(?m)^(?<indent>[ \t]*)'+[regex]::Escape($marker)+'\r?$'
+    $matches=[regex]::Matches($segment,$pattern)
+    if($matches.Count -ne 1){throw "$methodStart expected one accepted-range marker, found $($matches.Count)."}
+    $evaluator=[Text.RegularExpressions.MatchEvaluator]{
+        param($match)
+        $record='        if ($null -ne $this.DiagnosticPlaneRangeTrace -and $this.DiagnosticCurrentWallSegIndex -ge 0) {'+$nl+
+            '            $rangeTrace = $this.DiagnosticPlaneRangeTrace'+$nl+
+            '            $rangeTrace.Add([ordered]@{'+$nl+
+            '                Ordinal = $rangeTrace.Count'+$nl+
+            '                SegmentIndex = $this.DiagnosticCurrentWallSegIndex'+$nl+
+            '                StartX = $x1'+$nl+
+            '                StopXInclusive = $x2'+$nl+
+            '                FrontSectorIndex = [int]$seg.FrontSector.Number'+$nl+
+            '                BackSectorIndex = if ($null -eq $seg.BackSector) { -1 } else { [int]$seg.BackSector.Number }'+$nl+
+            '                RangeType = '''+$rangeType+''''+$nl+
+            '                DrawAsSolidWall = '+$drawAsSolidWallExpression+$nl+
+            '            })'+$nl+
+            '        }'+$nl
+        return $record+$match.Value
+    }
+    $segment=[regex]::Replace($segment,$pattern,$evaluator)
+    return $text.Substring(0,$start)+$segment+$text.Substring($end)
+}
+
+$source=Add-PlaneRangeTrace $source '    [void] DrawSolidWallRange(' '$samplePerfFrame = $this.perfThreeDSampleFrame' 'Solid' '$null'
+$source=Add-PlaneRangeTrace $source '    [void] DrawPassWallRange(' '$range = $x2 - $x1 + 1' 'Pass' '$drawAsSolidWall'
 
 function Add-FinalWallTextureSamples([string]$text){
     $methodStart='    hidden [void] DrawColumnData('
@@ -241,5 +281,5 @@ $source=$source.Substring(0,$skyStart)+$skySegment+$source.Substring($skyEnd)
     SourceSha256=(Get-FileHash -LiteralPath $target).Hash
     CeilingWriteLoops=4
     FloorWriteLoops=4
-    Meaning='Isolated copy only. Records reference plane samples and owner, mapped-column or fuzz writes, and the final render pass: BSP, world sprites, masked textures, player sprites, back-screen fill, or sky.'
+    Meaning='Isolated copy only. Records post-clip solid/pass wall ranges, reference plane samples and owners, mapped-column or fuzz writes, and the final render pass: BSP, world sprites, masked textures, player sprites, back-screen fill, or sky.'
 }
