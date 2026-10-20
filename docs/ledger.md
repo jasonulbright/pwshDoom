@@ -5,10 +5,12 @@
 Rebuilt the local playtest package from clean source commit `f89e005`, which
 includes the worker asset-context buffers fixed after the previous handoff.
 The 1,953,692-byte ZIP verifies all 584 payload hashes and its adjacent
-checksum. Nine offline suites pass 711 assertions plus 60 menu screen
-fixtures; seven renderer workers exactly match all 320,000 pixels over five
-views. No game host, display, keyboard or audio device was used, and no map
-route was completed. The repository measured 27,871,853,551 bytes, below the
+checksum. Nine offline application suites pass 711 assertions plus 60 menu
+screen fixtures. Seven renderer workers exactly match 960,000 pixels over 15
+views and 105 worker strips in Classic, Matrix and AnsiArt/Katakana. No game
+host, display, keyboard or audio device was used, and no map route was
+completed. After the checks, the repository measured 27,872,305,635 bytes,
+below the
 30,000,000,000-byte limit. The [candidate receipt](../results/episode1-playtest-candidate-20261020-r3.json)
 records the package and evidence; the public Preview.9 release is unchanged.
 

@@ -36,8 +36,9 @@ route ended in player death and did not expose a reproducible product defect;
 it is documented and route automation is stopped for this milestone. The
 current extracted human-playtest handoff is `0.1.0-dev.20261020.e3`, built
 from clean commit `f89e005` after the worker-context buffer fix. Its 584
-payload hashes, nine offline suites, and five-view seven-worker pixel parity
-pass; it does not start the game or complete a map. See the [current candidate
+payload hashes, nine offline suites, and seven-worker pixel parity in Classic,
+Matrix, and AnsiArt/Katakana pass across 960,000 pixels; it does not start the
+game or complete a map. See the [current candidate
 receipt](../results/episode1-playtest-candidate-20261020-r3.json). The broader
 release acceptance gates below remain intact.
 

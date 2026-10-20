@@ -1,5 +1,5 @@
 {
-  "FinishedUtc": "2026-10-20T09:06:24Z",
+  "FinishedUtc": "2026-10-20T09:09:27Z",
   "Version": "0.1.0-dev.20261020.e3",
   "Purpose": "Local Episode 1 human-playtest handoff candidate; public Preview.9 remains unchanged.",
   "Package": {
@@ -35,7 +35,20 @@
     { "Name": "Test-CampaignTransitions", "Passed": 69, "Failures": 0, "Receipt": "local/episode1-playtest-candidate-20261020-validation-r3/campaign-transitions.json", "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F", "Scope": "In-memory routing and intermission fixtures; no map completion" },
     { "Name": "Test-SaveSessionEdges", "Passed": 20, "Failures": 0, "Receipt": "local/episode1-playtest-candidate-20261020-validation-r3/save-session-edges.json", "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F", "Scope": "In-memory save/death/finale fixtures; no map completion" },
     { "Name": "Test-AudioMixer", "Passed": 27, "Failures": 0, "Receipt": "local/episode1-playtest-candidate-20261020-validation-r3/audio-mixer.json", "Scope": "Synthetic PCM only; no audio device" },
-    { "Name": "Test-RenderPartitions", "Passed": 320000, "Failures": 0, "Views": 5, "Workers": 7, "Receipt": "local/episode1-playtest-candidate-20261020-validation-r3/render-partitions.json", "Scope": "Exact indexed-pixel equality between serial rendering and seven uneven worker strips" }
+    {
+      "Name": "Test-RenderPartitions",
+      "PixelMismatches": 0,
+      "MatchedPixels": 960000,
+      "Views": 15,
+      "Workers": 7,
+      "WorkerStripsCompared": 105,
+      "Modes": [
+        { "Style": "Classic", "GlyphSet": "Ascii", "Pixels": 320000, "Views": 5, "WorkerStrips": 35, "Receipt": "local/episode1-playtest-candidate-20261020-validation-r3/render-partitions.json" },
+        { "Style": "Matrix", "GlyphSet": "Ascii", "Pixels": 320000, "Views": 5, "WorkerStrips": 35, "Receipt": "local/episode1-playtest-candidate-20261020-validation-r3/render-partitions-matrix.json" },
+        { "Style": "AnsiArt", "GlyphSet": "Katakana", "Pixels": 320000, "Views": 5, "WorkerStrips": 35, "Receipt": "local/episode1-playtest-candidate-20261020-validation-r3/render-partitions-ansiart.json" }
+      ],
+      "Scope": "Exact indexed-pixel and encoded-strip equality between serial rendering and seven uneven worker strips"
+    }
   ],
   "Wads": {
     "InstalledFixtureSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F"
@@ -45,12 +58,12 @@
   "DisplayOrAudioDeviceUsed": false,
   "PublicAssetReplaced": false,
   "RepositoryFootprintAtVerification": {
-    "Files": 91809,
-    "Bytes": 27871853551,
-    "DecimalGb": 27.871854,
+    "Files": 91819,
+    "Bytes": 27872305635,
+    "DecimalGb": 27.872306,
     "LimitBytes": 30000000000,
     "UnderLimit": true,
-    "Measurement": "Recursive file sizes under the repository, including ignored files"
+    "Measurement": "Recursive file sizes under the repository, including ignored files; after offline checks and before committing this receipt"
   },
   "Limitations": [
     "No live game, startup smoke, human route, physical input or display pacing ran",
