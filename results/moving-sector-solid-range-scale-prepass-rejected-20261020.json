@@ -1,0 +1,102 @@
+{
+  "SchemaVersion": 1,
+  "FinishedUtc": "2026-10-20T11:50:24.7395993Z",
+  "Experiment": "Offline counterfactual: global solid-screen interval wall-scale anchors for E1M1 moving ceiling",
+  "SourceCommit": "74a3fe0c44ecbdd7e96b4fb64f40bd8a9130517f",
+  "Replay": {
+    "Path": "results/e1m1-route-lineflags.json",
+    "Sha256": "41CF35EDF94C1CABE8C96A1CEEFBCFBF41F20DF24093569B65A1A4C9C56C017B",
+    "InputTic": 315,
+    "LevelTic": 315,
+    "Map": "E1M1",
+    "SectorIndex": 26,
+    "CeilingHeight": 6
+  },
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "CandidateRendererSha256": "78BA7793D7F27F16355B6A98B104A3D52B95EE567B0BCB34132711BC39E0D62A",
+  "BaselineRendererSha256": "F94FD419255B80304245C351E6847E78083B1C39689E72777A47CBA863D3FB84",
+  "SourcePatch": {
+    "Path": "moving-sector-solid-range-scale-prepass-rejected-20261020.patch.gz",
+    "UncompressedSha256": "57F47242D3021FBCCC98986849F19394F7E5ECDEACCDF0CCE8044CCD4752611D"
+  },
+  "Comparison": [
+    {
+      "CeilingHeight": 0,
+      "SceneDifferences": 0,
+      "HudDifferences": 0,
+      "PlaneDifferences": 0,
+      "NonPlaneDifferences": 0
+    },
+    {
+      "CeilingHeight": 6,
+      "SceneDifferences": 0,
+      "HudDifferences": 0,
+      "PlaneDifferences": 0,
+      "NonPlaneDifferences": 0
+    },
+    {
+      "CeilingHeight": 34,
+      "SceneDifferences": 4,
+      "HudDifferences": 0,
+      "PlaneDifferences": 0,
+      "NonPlaneDifferences": 4
+    },
+    {
+      "CeilingHeight": 68,
+      "SceneDifferences": 18,
+      "HudDifferences": 0,
+      "PlaneDifferences": 18,
+      "NonPlaneDifferences": 0,
+      "PreviousSceneDifferences": 21,
+      "MappedColumnColorDifferencesRemoved": 3
+    }
+  ],
+  "Partition": {
+    "Workers": 7,
+    "Views": 5,
+    "PixelsCompared": 320000,
+    "Differences": 0,
+    "AnglesDegrees": [
+      0,
+      37,
+      89,
+      173,
+      269
+    ],
+    "BaselineDispatchToHarvestMs": [
+      601.7538,
+      98.0629,
+      57.8512,
+      39.5114,
+      31.4355
+    ],
+    "CandidateDispatchToHarvestMs": [
+      1074.5222,
+      171.1672,
+      139.6728,
+      46.79,
+      58.1655
+    ],
+    "CandidatePrepassMs": [
+      300.8064,
+      52.5552,
+      52.2451,
+      8.0907,
+      2.0393
+    ],
+    "WarmedBaselineMeanMs": 56.71525,
+    "WarmedCandidateMeanMs": 103.948875,
+    "WarmedMeanIncreasePercent": 83.28
+  },
+  "Decision": "Rejected; revert candidate implementation and leave production renderer unchanged.",
+  "Limits": [
+    "Timing trials were sequential and unpaired; performance values are diagnostic.",
+    "Pixel comparisons use the adapted PowerShell reference and do not establish original-executable parity.",
+    "Partition comparisons measure candidate serial/worker equivalence, not gameplay or display pacing.",
+    "Offline saved-replay and in-memory work only; no live tests, game window, input, audio, or display device were used."
+  ],
+  "EvidenceSha256": {
+    "Comparison": "32E4B9EECD1E195D69EA0C4B3DE02DA4E5922FAE96C5103CCBE03EE2254F979C",
+    "Partition": "7360818FD12347C3ADC108743056F752D58863F5E0DFB1926BBA9F4FD47EC1AA"
+  }
+}

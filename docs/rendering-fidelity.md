@@ -1686,3 +1686,20 @@ unchanged. See the [analysis script](../scripts/Measure-VisplaneSpanOrigins.ps1)
 [range-trace receipt](../results/moving-sector-reference-visible-range-trace-20261020.json),
 and [corrected 18-sample receipt](../results/moving-sector-visplane-mismatch-origins-rfindplane-corrected-20261020.json).
 No live tests or device interaction were used.
+
+### Interval-only global wall-scale anchors — October 20, 2026
+
+The follow-up visibility pass records solid screen-column coverage while
+traversing the BSP, then distributes scale anchors for globally visible wall
+runs. In the saved E1M1 tic-315 comparison, scene differences at ceiling
+heights 0/6/34/68 were 0/0/4/18. At height 68 it removes the three mapped-wall
+color differences from the prior total of 21; the 18 remaining differences
+are plane pixels. Five fixed views retain exact serial/worker equivalence
+across seven workers (320,000 pixels). Warmed dispatch-to-harvest mean is
+103.95 ms versus 56.72 ms baseline (+83.28%). Trials were sequential and
+unpaired, so timing is diagnostic. The implementation was rejected and
+production source restored. See the [receipt](../results/moving-sector-solid-range-scale-prepass-rejected-20261020.json)
+and [compressed patch](../results/moving-sector-solid-range-scale-prepass-rejected-20261020.patch.gz).
+These comparisons use an adapted PowerShell reference and do not establish
+original-executable parity, live pacing, or gameplay progression. No live
+tests or device interaction were used.

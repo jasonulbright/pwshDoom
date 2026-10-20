@@ -1228,3 +1228,16 @@ four introduced); heights 0, 6 and 34 retain identical frames. This advances
 the moving-sector fidelity gate, while the four different-owner floor pixels,
 31 total height-68 mismatches, original-executable parity and broader moving-
 world coverage remain open. See [rendering fidelity](rendering-fidelity.md#portal-clipping-follows-actual-wall-steps--october-19-2026).
+
+### Global wall-scale interval experiment — October 20, 2026
+
+The interval-only follow-up removed the three mapped-column color differences
+at ceiling height 68 in the pinned E1M1 replay; 18 plane differences remain.
+Five fixed views matched serial output across seven process workers (320,000
+pixels). Its warmed dispatch-to-harvest mean was 103.95 ms, 83.28% above the
+56.72 ms baseline, so the candidate was rejected and production source
+restored. See the [receipt](../results/moving-sector-solid-range-scale-prepass-rejected-20261020.json)
+and [compressed source patch](../results/moving-sector-solid-range-scale-prepass-rejected-20261020.patch.gz).
+This is offline renderer evidence against the adapted reference, not live
+gameplay or original-executable parity. No live tests or device interaction
+were used.

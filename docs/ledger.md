@@ -7481,3 +7481,23 @@ partition correctness and is not a live pacing or original-executable result.
 See the [comparison receipt](../results/render-partitions-shared-wall-scale-spans-20261020-r3.json)
 and [compressed reproduction patch](../results/shared-wall-scale-span-prepass-rejected-20261020.patch.gz).
 No live tests, desktop/device interaction, or gameplay occurred.
+
+### 2026-10-20 — Reject interval-only shared wall-scale anchors
+
+An offline E1M1 tic-315 replay counterfactual tracked already-covered solid
+screen columns during BSP traversal and published global wall-scale anchors to
+render workers. Against the adapted reference, scene differences at ceiling
+heights 0/6/34/68 were 0/0/4/18; at height 68, all 18 remaining differences
+were plane pixels and the three mapped-column color differences were removed
+from the prior total of 21. Seven-worker output matched serial rendering over
+five fixed views (320,000 pixels, zero differences). The implementation still
+cost too much: warmed dispatch-to-harvest mean was 103.95 ms versus 56.72 ms
+baseline (+83.28%), with sequential unpaired timings. It was rejected and
+production source restored. The [receipt](../results/moving-sector-solid-range-scale-prepass-rejected-20261020.json)
+and [compressed patch](../results/moving-sector-solid-range-scale-prepass-rejected-20261020.patch.gz)
+preserve the source and measurements. This was offline saved-replay and
+in-memory work only; no live tests, media, or device interaction were used.
+Immediately before this evidence commit, the complete local project folder
+measured 27,907,421,336 bytes, below the 30,000,000,000-byte limit. The
+reference PDF remains local and is excluded from Git by the existing
+`/docs/gebbdoom.pdf` ignore rule.
