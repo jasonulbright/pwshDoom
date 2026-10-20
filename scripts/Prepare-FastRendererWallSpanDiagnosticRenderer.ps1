@@ -21,6 +21,9 @@ if(Test-Path -LiteralPath $outputPath){throw 'Use a fresh output path.'}
 
 $source=[IO.File]::ReadAllText($sourcePath)
 $newline=if($source.Contains("`r`n")){"`r`n"}else{"`n"}
+$planeCallCountMarker='Draw-FastPlaneColumnCalls $Context $planeSampleCallCount'
+if(([regex]::Matches($source,[regex]::Escape($planeCallCountMarker))).Count -ne 1){throw 'Expected one plane-sample call dispatch.'}
+$source=$source.Replace($planeCallCountMarker,'$Context.PlaneSampleCallCount = $planeSampleCallCount'+$newline+'    '+$planeCallCountMarker)
 $opaqueDepthMarker='$p=$y*320+$x;$pixels[$p]=$wallColors[$color];$depthBuffer[$p]=$distance'
 if(([regex]::Matches($source,[regex]::Escape($opaqueDepthMarker))).Count -ne 1){throw 'Expected one opaque wall depth write.'}
 $opaqueDepthTrace='$p=$y*320+$x;$pixels[$p]=$wallColors[$color];$depthBuffer[$p]=$distance;if($Context.ContainsKey(''DiagnosticDepthOwnerSegIndices'')){$Context.DiagnosticDepthOwnerSegIndices[$p]=$segIndex+1;$Context.DiagnosticDepthOwnerWriterTypes[$p]=1}'
@@ -89,5 +92,5 @@ $source=$source.Replace($wallSampleMarker,$wallSampleMarker+$newline+'          
     DiagnosticRendererSha256=(Get-FileHash -LiteralPath $outputPath).Hash
     BoundaryTraceStride=12
     DepthOwnerWriterTypes=[ordered]@{1='Opaque wall band';2='Untextured wall occlusion';3='Masked middle texture'}
-    Meaning='Disposable source copy only. Captures candidate depth-writing segment and writer type alongside plane-owner segment indices, fixed-point wall boundaries, per-column clip, portal boundaries, and clipped upper/lower/middle texture intervals.'
+    Meaning='Disposable source copy only. Captures candidate depth-writing segment and writer type alongside plane-owner segment indices, fixed-point wall boundaries, per-column clip, portal boundaries, clipped upper/lower/middle texture intervals, and the plane-sample call count for row-level recurrence traces.'
 }

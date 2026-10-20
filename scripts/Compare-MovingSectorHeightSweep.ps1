@@ -1209,14 +1209,100 @@ try {
                                                 }
                                             }
                                             if ($candidatePlaneMismatchDifferentOwnerExamples.Count -lt 64) {
+                                                [int]$candidatePlaneFlatIndex = if ($candidateSurfaceName -eq 'Floor') { $context.SectorFloorFlatIndex[$candidateSectorIndex] } else { $context.SectorCeilingFlatIndex[$candidateSectorIndex] }
+                                                [int]$candidatePlaneHeightData = if ($candidateSurfaceName -eq 'Floor') { $context.SectorFloorHeightData[$candidateSectorIndex] } else { $context.SectorCeilingHeightData[$candidateSectorIndex] }
+                                                [int]$candidatePlaneLightLevel = $context.SectorLightLevels[$candidateSectorIndex]
+                                                $referenceRowTrace = [Collections.Generic.List[object]]::new()
+                                                [int]$referenceStartX = [Math]::Max(0, [Math]::Min($candidatePlaneSampleOriginX, [int]$reference3D.DiagnosticPlaneSampleOriginX[$referencePosition]) - 2)
+                                                for ([int]$referenceTraceX = $referenceStartX; $referenceTraceX -le $x; $referenceTraceX++) {
+                                                    [int]$referenceTracePosition = $referenceTraceX * 200 + $y
+                                                    if ([int]$reference3D.DiagnosticFinalWriterTypes[$referenceTracePosition] -ne 1) { continue }
+                                                    [int]$referenceTraceOwnerSectorIndex = -1
+                                                    $referenceTraceOwner = $reference3D.DiagnosticPlaneOwners[$referenceTracePosition]
+                                                    for ([int]$referenceTraceSectorIndex = 0; $referenceTraceSectorIndex -lt $game.World.Map.Sectors.Length; $referenceTraceSectorIndex++) {
+                                                        if ([object]::ReferenceEquals($referenceTraceOwner, $game.World.Map.Sectors[$referenceTraceSectorIndex])) {
+                                                            $referenceTraceOwnerSectorIndex = $referenceTraceSectorIndex
+                                                            break
+                                                        }
+                                                    }
+                                                    [int]$referenceTraceCandidatePlaneId = $context.Planes[$y * 320 + $referenceTraceX]
+                                                    [int]$referenceTraceCandidateOrigin = $context.PlaneSampleOriginX[$y * 320 + $referenceTraceX]
+                                                    $referenceRowTrace.Add([ordered]@{
+                                                        X = $referenceTraceX
+                                                        ReferenceOwnerSectorIndex = $referenceTraceOwnerSectorIndex
+                                                        ReferenceSurfaceType = [int]$reference3D.DiagnosticPlaneSurfaceTypes[$referenceTracePosition]
+                                                        ReferencePlaneSampleOriginX = [int]$reference3D.DiagnosticPlaneSampleOriginX[$referenceTracePosition]
+                                                        ReferenceReusedPreviousColumn = ([int]$reference3D.DiagnosticPlaneSampleReusedPreviousColumn[$referenceTracePosition] -eq 1)
+                                                        ReferenceTexel = [int]$reference3D.DiagnosticPlaneTexelIndices[$referenceTracePosition]
+                                                        ReferenceColor = [byte]$referencePixels[$referenceTracePosition]
+                                                        CandidatePlaneId = $referenceTraceCandidatePlaneId
+                                                        CandidatePlaneSampleOriginX = $referenceTraceCandidateOrigin
+                                                        CandidateColor = [byte]$candidate[$y * 320 + $referenceTraceX]
+                                                    })
+                                                }
+                                                $planeSampleCallTrace = [Collections.Generic.List[object]]::new()
+                                                [int]$traceStartX = [Math]::Max(0, $candidatePlaneSampleOriginX - 2)
+                                                [int[]]$traceCalls = $context.PlaneSampleCalls
+                                                for ([int]$traceOffset = 0; $traceOffset -lt $context.PlaneSampleCallCount; $traceOffset += 4) {
+                                                    [int]$traceX = $traceCalls[$traceOffset]
+                                                    [int]$traceY1 = $traceCalls[$traceOffset + 1]
+                                                    [int]$traceY2 = $traceCalls[$traceOffset + 2]
+                                                    if ($traceX -lt $traceStartX -or $traceX -gt $x -or $y -lt $traceY1 -or $y -gt $traceY2) { continue }
+                                                    [int]$tracePlaneId = $traceCalls[$traceOffset + 3]
+                                                    [int]$traceSectorIndex = ($tracePlaneId - 1) -shr 1
+                                                    [bool]$traceIsFloor = (($tracePlaneId -band 1) -eq 0)
+                                                    [string]$traceSurface = if ($traceIsFloor) { 'Floor' } else { 'Ceiling' }
+                                                    [int]$traceHeightData = if ($traceIsFloor) { $context.SectorFloorHeightData[$traceSectorIndex] } else { $context.SectorCeilingHeightData[$traceSectorIndex] }
+                                                    [int]$traceFlatIndex = if ($traceIsFloor) { $context.SectorFloorFlatIndex[$traceSectorIndex] } else { $context.SectorCeilingFlatIndex[$traceSectorIndex] }
+                                                    [int]$traceLightLevel = $context.SectorLightLevels[$traceSectorIndex]
+                                                    [int]$traceFinalPlaneId = $context.Planes[$y * 320 + $traceX]
+                                                    $planeSampleCallTrace.Add([ordered]@{
+                                                        CallIndex = $traceOffset -shr 2
+                                                        X = $traceX
+                                                        Y1 = $traceY1
+                                                        Y2 = $traceY2
+                                                        PlaneId = $tracePlaneId
+                                                        SectorIndex = $traceSectorIndex
+                                                        Surface = $traceSurface
+                                                        HeightData = $traceHeightData
+                                                        FlatIndex = $traceFlatIndex
+                                                        LightLevel = $traceLightLevel
+                                                        FinalPlaneIdAtRow = $traceFinalPlaneId
+                                                        IsFinalOwnerAtRow = ($traceFinalPlaneId -eq $tracePlaneId)
+                                                        MatchesCandidatePlaneKey = ($traceSurface -eq $candidateSurfaceName -and $traceHeightData -eq $candidatePlaneHeightData -and $traceFlatIndex -eq $candidatePlaneFlatIndex -and $traceLightLevel -eq $candidatePlaneLightLevel)
+                                                    })
+                                                }
+                                                [int]$referenceOwnerFlatIndex = -1
+                                                [int]$referenceOwnerLightLevel = -1
+                                                [int]$referenceOwnerHeightData = -1
+                                                if ($referenceOwnerSectorIndex -ge 0) {
+                                                    $referenceOwnerSector = $game.World.Map.Sectors[$referenceOwnerSectorIndex]
+                                                    $referenceOwnerLightLevel = [int]$referenceOwnerSector.LightLevel
+                                                    if ($referenceSurfaceName -eq 'Floor') {
+                                                        $referenceOwnerFlatIndex = [int]$game.World.Specials.FlatTranslation[$referenceOwnerSector.FloorFlat]
+                                                        $referenceOwnerHeightData = $context.SectorFloorHeightData[$referenceOwnerSectorIndex]
+                                                    } else {
+                                                        $referenceOwnerFlatIndex = [int]$game.World.Specials.FlatTranslation[$referenceOwnerSector.CeilingFlat]
+                                                        $referenceOwnerHeightData = $context.SectorCeilingHeightData[$referenceOwnerSectorIndex]
+                                                    }
+                                                }
                                                 $candidatePlaneMismatchDifferentOwnerExamples.Add([ordered]@{
                                                     X = $x
                                                     Y = $y
                                                     CandidatePlaneId = $planeId
                                                     CandidatePlaneSectorIndex = $candidateSectorIndex
                                                     CandidatePlaneSurface = $candidateSurfaceName
+                                                    CandidatePlaneHeightData = $candidatePlaneHeightData
+                                                    CandidatePlaneFlatIndex = $candidatePlaneFlatIndex
+                                                    CandidatePlaneLightLevel = $candidatePlaneLightLevel
+                                                    ReferenceRowTrace = $referenceRowTrace.ToArray()
+                                                    CandidatePlaneSampleCallTrace = $planeSampleCallTrace.ToArray()
                                                     ReferencePlaneOwnerSectorIndex = $referenceOwnerSectorIndex
                                                     ReferencePlaneSurface = $referenceSurfaceName
+                                                    ReferencePlaneHeightData = $referenceOwnerHeightData
+                                                    ReferencePlaneFlatIndex = $referenceOwnerFlatIndex
+                                                    ReferencePlaneLightLevel = $referenceOwnerLightLevel
+                                                    CandidateReferencePlaneKeyMatches = ($candidateSurfaceName -eq $referenceSurfaceName -and $candidatePlaneHeightData -eq $referenceOwnerHeightData -and $candidatePlaneFlatIndex -eq $referenceOwnerFlatIndex -and $candidatePlaneLightLevel -eq $referenceOwnerLightLevel)
                                                     ReferenceFinalWriterType = [int]$reference3D.DiagnosticFinalWriterTypes[$referencePosition]
                                                     ReferenceFinalRenderPassType = [int]$reference3D.DiagnosticFinalRenderPassTypes[$referencePosition]
                                                     CandidateDepth = if ($context.Depth[$candidateIndex] -eq [double]::PositiveInfinity) { 'PositiveInfinity' } else { $context.Depth[$candidateIndex] }

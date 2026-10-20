@@ -1,5 +1,27 @@
 # Investigation ledger
 
+## 2026-10-20 — Trace the remaining plane recurrence boundaries
+
+Extended the saved-replay comparison with candidate plane-call spans and
+reference/candidate sample origins for each affected row. At height 68, the 18
+remaining plane-buffer differences still have identical surface, fixed height,
+translated flat and light keys in the 17 different-owner examples. A
+plane-key-only recurrence reuse variant leaves the four-height frame hashes
+unchanged, so equal render keys do not justify carrying the candidate sample
+recurrence across these spans.
+
+The row traces show that reference sample origins follow its plane-call and
+visibility boundaries: at (163,56), the candidate carries origin 112 while
+the reference starts at 116 after reference plane owners change across the
+row; at (206,99), the candidate carries origin 184 while the reference starts
+a new sample at 206. The current candidate call stream does not expose enough
+of those reference boundaries to support a production correction. No renderer
+change was made. The [row-trace receipt](../results/moving-sector-lower-boundary-20261020-v17.json)
+records exact sources, hashes and parameters; the [key-reuse counterfactual](../results/moving-sector-lower-boundary-20261020-v13.json)
+records the unchanged-hash result. This remains a saved-replay
+comparison against the locally adapted PowerShell reference, not original
+executable parity; no live tests or desktop/device interaction were used.
+
 ## 2026-10-20 — Let sprites pass lower step walls when their floor supports them
 
 The tic-315 renderer trace identified 14 height-68 mismatches where a lower

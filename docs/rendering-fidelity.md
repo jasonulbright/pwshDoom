@@ -1538,3 +1538,26 @@ and [pixel-delta receipt](../results/moving-sector-targeted-lower-wall-bypass-pi
 This uses the locally adapted reference and does not establish parity with the
 original executable or broader moving-world qualification. No live tests or
 desktop/device interaction were used.
+
+### Reference plane recurrence boundaries — October 20, 2026
+
+The detailed [row-trace receipt](../results/moving-sector-lower-boundary-20261020-v17.json)
+captures candidate plane calls and the reference's final plane sample origin
+around the remaining height-68 mismatches. The 17 different-owner examples
+have matching surface, height, translated flat and light keys. A candidate
+variant that reused recurrence by those keys alone produced the same frame
+hashes, as recorded by the [key-reuse counterfactual](../results/moving-sector-lower-boundary-20261020-v13.json),
+so key equality does not establish that the two renderers share a recurrence
+span.
+
+At (163,56), the candidate sample begins at x=112 and the reference begins at
+x=116 after its recorded plane owner changes across that scanline. At
+(206,99), the candidate continues from x=184 while the reference initializes
+again at x=206. The candidate's current plane-call stream does not reproduce
+those reference span boundaries, and the trace does not support another
+production change. The final saved comparison remains at zero differences for
+ceiling heights 0 and 6, four at 34, and 21 at 68 (18 plane-buffer and three
+mapped-column color differences). This is offline comparison against the
+locally adapted PowerShell renderer only; original-executable parity and wider
+moving-world qualification remain open. No live tests or device interaction
+were used.
