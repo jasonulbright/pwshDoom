@@ -6,13 +6,11 @@ param(
     [string]$Replay = "$PSScriptRoot/../results/e1m1-route-lineflags.json",
     [string]$TraceReceipt = "$PSScriptRoot/../results/moving-sector-reference-plane-full-call-trace-20261020.json",
     [string]$EngineBundle = "$PSScriptRoot/../local/engine-bundle.ps1",
-    [string]$Output = "$PSScriptRoot/../results/moving-sector-visplane-span-origin-20261020.json",
+    [string]$Output = "$PSScriptRoot/../results/moving-sector-visplane-mismatch-origins-20261020.json",
     [ValidateSet('candidate', 'reference')][string[]]$Renderers = @('candidate', 'reference')
 )
 
 $ErrorActionPreference = 'Stop'
-$TargetX = 226
-$TargetY = 105
 $root = Split-Path $PSScriptRoot
 foreach ($pathName in 'Wad', 'Replay', 'TraceReceipt', 'EngineBundle', 'Output') {
     Set-Variable -Name $pathName -Value ([IO.Path]::GetFullPath((Get-Variable -Name $pathName -ValueOnly)))
@@ -36,10 +34,8 @@ if ($trace.WadSha256 -cne $wadSha256 -or $trace.ReplaySha256 -cne $replaySha256)
 }
 $heightRecord = $trace.Heights | Where-Object CeilingHeight -eq 68 | Select-Object -First 1
 if ($null -eq $heightRecord) { throw 'The trace receipt has no ceiling-height-68 sample.' }
-$sampleExample = @($heightRecord.SameOwnerPlaneSampleExamples | Where-Object {
-    $_.X -eq $TargetX -and $_.Y -eq $TargetY
-})
-if ($sampleExample.Count -ne 1) { throw 'The selected coordinate must identify one recorded same-owner plane sample.' }
+$sampleExample = @($heightRecord.SameOwnerPlaneSampleExamples | Select-Object -First 1)
+if ($sampleExample.Count -ne 1) { throw 'The trace must contain a same-owner plane sample.' }
 if ($trace.InputTic -gt $replayData.InputCommands.Count) { throw 'The replay does not contain the trace input tic.' }
 
 . $EngineBundle
@@ -67,8 +63,7 @@ function Get-VisplaneSpanPrediction {
         [hashtable]$ProjectedRanges,
         [int]$SkyFlatNumber,
         [string]$RangeMode,
-        [int]$SampleX,
-        [int]$SampleY
+        [object[]]$Samples
     )
 
     $segmentToSubsector = @{}
@@ -81,7 +76,7 @@ function Get-VisplaneSpanPrediction {
 
     $callsBySegmentSurface = @{}
     foreach ($call in $Calls) {
-        if ($call.SurfaceType -ne 'Floor') { continue }
+        if ($call.SurfaceType -notin 'Floor', 'Ceiling') { continue }
         $bucketKey = "$($call.SegmentIndex)|$($call.SurfaceType)"
         if (-not $callsBySegmentSurface.ContainsKey($bucketKey)) {
             $callsBySegmentSurface[$bucketKey] = [Collections.Generic.List[object]]::new()
@@ -108,8 +103,13 @@ function Get-VisplaneSpanPrediction {
     [int]$nextVisplaneId = 0
     foreach ($event in $events) {
         $sector = $Map.Sectors[$event.SectorIndex]
-        [int]$heightData = $sector.FloorHeight.Data
-        [int]$flatIndex = $sector.FloorFlat
+        if ($event.SurfaceType -eq 'Floor') {
+            [int]$heightData = $sector.FloorHeight.Data
+            [int]$flatIndex = $sector.FloorFlat
+        } else {
+            [int]$heightData = $sector.CeilingHeight.Data
+            [int]$flatIndex = $sector.CeilingFlat
+        }
         [int]$lightLevel = $sector.LightLevel
         if ($flatIndex -eq $SkyFlatNumber) {
             $heightData = 0
@@ -118,7 +118,7 @@ function Get-VisplaneSpanPrediction {
         $materialKey = "$heightData|$flatIndex|$lightLevel"
         $subsectorId = $segmentToSubsector[[string]$event.SegmentIndex]
         if ($null -eq $subsectorId) { throw "Segment $($event.SegmentIndex) has no subsector." }
-        $subsectorKey = "$subsectorId|Floor"
+        $subsectorKey = "$subsectorId|$($event.SurfaceType)"
 
         if ($subsectorPlanes.ContainsKey($subsectorKey)) {
             $plane = $subsectorPlanes[$subsectorKey]
@@ -174,27 +174,38 @@ function Get-VisplaneSpanPrediction {
         }
     }
 
-    $spansAtSample = [Collections.Generic.List[object]]::new()
-    foreach ($plane in $visplanes) {
-        if ($plane.Top[$SampleX] -gt $SampleY -or $plane.Bottom[$SampleX] -lt $SampleY) { continue }
-        [int]$spanStart = $SampleX
-        while ($spanStart -gt 0 -and $plane.Top[$spanStart - 1] -le $SampleY -and
-            $plane.Bottom[$spanStart - 1] -ge $SampleY) { $spanStart-- }
-        $spansAtSample.Add([pscustomobject]@{
-            VisplaneId = $plane.Id
-            MaterialKey = $plane.MaterialKey
-            SpanStartX = $spanStart
-            SampleX = $SampleX
-            MinX = $plane.MinX
-            MaxX = $plane.MaxX
-        })
+    $spansAtSamples = [Collections.Generic.List[object]]::new()
+    foreach ($sample in $Samples) {
+        foreach ($plane in $visplanes) {
+            if ($plane.MaterialKey -cne $sample.MaterialKey) { continue }
+            [int]$sampleX = $sample.X
+            [int]$sampleY = $sample.Y
+            if ($plane.Top[$sampleX] -gt $sampleY -or $plane.Bottom[$sampleX] -lt $sampleY) { continue }
+            [int]$spanStart = $sampleX
+            while ($spanStart -gt 0 -and $plane.Top[$spanStart - 1] -le $sampleY -and
+                $plane.Bottom[$spanStart - 1] -ge $sampleY) { $spanStart-- }
+            $spansAtSamples.Add([pscustomobject]@{
+                SampleId = $sample.Id
+                X = $sampleX
+                Y = $sampleY
+                SurfaceType = $sample.SurfaceType
+                MaterialKey = $plane.MaterialKey
+                VisplaneId = $plane.Id
+                PredictedSpanStartX = $spanStart
+                CandidateObservedOriginX = $sample.CandidateObservedOriginX
+                ReferenceObservedOriginX = $sample.ReferenceObservedOriginX
+                CandidateReferencePlaneKeyMatches = $sample.CandidateReferencePlaneKeyMatches
+                MinX = $plane.MinX
+                MaxX = $plane.MaxX
+            })
+        }
     }
 
     return [pscustomobject]@{
         RangeMode = $RangeMode
-        FloorEvents = $events.Count
+        PlaneEvents = $events.Count
         VisplaneInstances = $visplanes.Count
-        SpansAtSample = @($spansAtSample)
+        SamplesAtPoints = @($spansAtSamples)
     }
 }
 
@@ -243,44 +254,83 @@ try {
 
     $targetSector = $game.World.Map.Sectors[18]
     $targetMaterialKey = "$($targetSector.FloorHeight.Data)|$($targetSector.FloorFlat)|$($targetSector.LightLevel)"
+    $samples = [Collections.Generic.List[object]]::new()
+    $seedSample = $sampleExample[0]
+    $samples.Add([pscustomobject]@{
+        Id = 'same-owner-floor'
+        X = [int]$seedSample.X
+        Y = [int]$seedSample.Y
+        SurfaceType = 'Floor'
+        MaterialKey = $targetMaterialKey
+        CandidateObservedOriginX = [int]$seedSample.CandidateSampleOriginX
+        ReferenceObservedOriginX = [int]$seedSample.ReferenceSampleOriginX
+        CandidateReferencePlaneKeyMatches = $true
+    })
+    foreach ($example in $heightRecord.CandidatePlaneMismatchDifferentOwnerExamples) {
+        $referenceMaterialKey = "$($example.ReferencePlaneHeightData)|$($example.ReferencePlaneFlatIndex)|$($example.ReferencePlaneLightLevel)"
+        $candidateMaterialKey = "$($example.CandidatePlaneHeightData)|$($example.CandidatePlaneFlatIndex)|$($example.CandidatePlaneLightLevel)"
+        $samples.Add([pscustomobject]@{
+            Id = "different-owner-$($example.X)-$($example.Y)"
+            X = [int]$example.X
+            Y = [int]$example.Y
+            SurfaceType = [string]$example.CandidatePlaneSurface
+            MaterialKey = $referenceMaterialKey
+            CandidateMaterialKey = $candidateMaterialKey
+            CandidateObservedOriginX = [int]$example.CandidatePlaneSampleOriginX
+            ReferenceObservedOriginX = [int]$example.ReferencePlaneSampleOriginX
+            CandidateReferencePlaneKeyMatches = [bool]$example.CandidateReferencePlaneKeyMatches
+        })
+    }
     $results = [Collections.Generic.List[object]]::new()
     foreach ($renderer in $Renderers) {
         $rendererCalls = if ($renderer -eq 'candidate') { $heightRecord.CandidatePlaneCallTrace } else { $heightRecord.ReferencePlaneCallTrace }
         foreach ($rangeMode in 'ObservedCalls', 'Projected') {
-            $prediction = Get-VisplaneSpanPrediction @($rendererCalls) $game.World.Map $projectedRanges `
-                $content.Flats.SkyFlatNumber $rangeMode $TargetX $TargetY
+            $prediction = Get-VisplaneSpanPrediction @($rendererCalls) $game.World.Map $projectedRanges $content.Flats.SkyFlatNumber $rangeMode @($samples)
+            $candidateOriginMatches = @($prediction.SamplesAtPoints | Where-Object {
+                $_.PredictedSpanStartX -eq $_.CandidateObservedOriginX
+            }).Count
+            $referenceOriginMatches = @($prediction.SamplesAtPoints | Where-Object {
+                $_.PredictedSpanStartX -eq $_.ReferenceObservedOriginX
+            }).Count
+            $referenceOriginDeltas = @($prediction.SamplesAtPoints | ForEach-Object {
+                [Math]::Abs($_.PredictedSpanStartX - $_.ReferenceObservedOriginX)
+            })
+            $meanReferenceOriginDelta = if ($referenceOriginDeltas.Count -eq 0) {
+                $null
+            } else {
+                [Math]::Round(($referenceOriginDeltas | Measure-Object -Average).Average, 2)
+            }
             $results.Add([pscustomobject]@{
                 Renderer = $renderer
                 RangeMode = $rangeMode
-                FloorEvents = $prediction.FloorEvents
+                PlaneEvents = $prediction.PlaneEvents
                 VisplaneInstances = $prediction.VisplaneInstances
-                TargetMaterialKey = $targetMaterialKey
-                SpansAtSample = $prediction.SpansAtSample
+                SampleCount = $samples.Count
+                CandidateObservedOriginMatches = $candidateOriginMatches
+                ReferenceObservedOriginMatches = $referenceOriginMatches
+                MeanAbsoluteReferenceOriginDelta = $meanReferenceOriginDelta
+                SamplesAtPoints = $prediction.SamplesAtPoints
             })
         }
     }
 
     $report = [ordered]@{
-        SchemaVersion = 1
+        SchemaVersion = 2
         FinishedUtc = [DateTime]::UtcNow.ToString('o')
-        Experiment = 'Approximate original visplane grouping and horizontal span starts from the saved full-call trace.'
+        Experiment = 'Approximate original visplane grouping and horizontal span starts for recorded plane-mismatch samples.'
         InputTic = [int]$trace.InputTic
         SectorIndex = $sectorIndex
         CeilingHeight = [int]$heightRecord.CeilingHeight
-        Sample = [ordered]@{
-            X = $TargetX
-            Y = $TargetY
-            CandidateOriginX = [int]$sampleExample[0].CandidateSampleOriginX
-            AdaptedReferenceOriginX = [int]$sampleExample[0].ReferenceSampleOriginX
-        }
+        SampleCount = $samples.Count
+        Samples = @($samples)
         Camera = [ordered]@{
             X = [Math]::Round($player.X.Data / 65536.0, 5)
             Y = [Math]::Round($player.Y.Data / 65536.0, 5)
             Z = [Math]::Round($player.Z.Data / 65536.0, 5)
             AngleData = [uint32]$player.Angle.Data
         }
-        TargetFloorMaterialKey = $targetMaterialKey
-        TargetSegments = @(
+        SameOwnerFloorMaterialKey = $targetMaterialKey
+        SameOwnerFloorSegments = @(
             foreach ($segmentIndex in 137, 141) {
                 $segment = $game.World.Map.Segs[$segmentIndex]
                 [ordered]@{
@@ -292,7 +342,7 @@ try {
             }
         )
         RangeModels = @($results)
-        MethodLimit = 'Projected mode uses angular segment bounds without solid-wall clipping; ObservedCalls mode uses the minimum and maximum recorded nonempty plane-call columns. Neither reconstructs exact post-clip R_CheckPlane intervals or proves original-executable parity.'
+        MethodLimit = 'Projected mode uses angular segment bounds without solid-wall clipping; ObservedCalls mode uses the minimum and maximum recorded nonempty plane-call columns. The model covers the listed mismatch samples only and reconstructs neither exact post-clip R_CheckPlane intervals nor original-executable parity.'
         ReferenceSource = @(
             'https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/r_plane.c',
             'https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/r_segs.c'
@@ -311,7 +361,7 @@ try {
     $report | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath $Output -Encoding utf8
     [pscustomobject]@{
         Output = [IO.Path]::GetRelativePath($root, $Output).Replace('\', '/')
-        TargetMaterialKey = $targetMaterialKey
+        SampleCount = $samples.Count
         RangeModels = @($results)
         LiveTestsRun = $false
         DeviceInteraction = $false

@@ -1656,14 +1656,14 @@ and [`r_segs.c`](https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/
 The tested per-row material-key shortcut did not model those overlap splits,
 so its regression against the adapted reference does not settle the original
 algorithm. The column-call traces still do not prove original-executable
-parity. A PowerShell reconstruction of the candidate and adapted-reference
-call streams predicts horizontal span starts of x=226 and x=189 respectively
-under both the observed-call-column and angular-projection range models. The
-candidate production sampler starts at x=226; the adapted reference's column
-sampler starts at x=207. This supports the candidate origin for this one
-sample under the original-style visplane model, but exact post-clip
-`R_CheckPlane` intervals remain uncaptured. See the
+parity. An offline PowerShell reconstruction covers all 18 recorded plane
+mismatch samples, whose candidate/reference material keys match. Candidate-call
+spans predict the candidate's recorded origins at all 18 points; reference-call
+spans reproduce the adapted reference's recorded origins at 8 points, with a
+mean absolute difference of 9.22 columns. Both approximate range models give
+the same predictions at the sampled points. Exact post-clip
+`R_CheckPlane` intervals remain uncaptured, so original-executable parity is
+unproven and production sampling remains unchanged. See the
 [analysis script](../scripts/Measure-VisplaneSpanOrigins.ps1) and
-[receipt](../results/moving-sector-visplane-span-origin-20261020.json).
-Production sampling remains unchanged pending exact-range analysis across the
-remaining plane mismatches. No live tests or device interaction were used.
+[18-sample receipt](../results/moving-sector-visplane-mismatch-origins-20261020.json).
+No live tests or device interaction were used.

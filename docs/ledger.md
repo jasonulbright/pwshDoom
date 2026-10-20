@@ -18,22 +18,21 @@ top/bottom masks into horizontal spans. See the official
 and its [`r_segs.c` call site](https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/r_segs.c).
 The rejected per-row material-key counterfactual models the key but not the
 overlap split; its worse comparison against the adapted reference does not
-disprove a visplane-based rule. The sample-origin difference remains an
-adapted-renderer observation, not original-executable parity. No production
-sampling change is justified yet. Next, reconstruct the original visplane
-membership and horizontal spans from segment visibility/call boundaries in
-PowerShell, then compare the saved view offline. The first bounded
-reconstruction predicts a span start of x=226 for the candidate and x=189 for
-the adapted-reference call stream under both recorded-call and angular
-projection range models. The production candidate's origin is x=226; the
-adapted reference's column sampler starts at x=207. The model lacks exact
-post-clip `R_CheckPlane` intervals, so this supports the candidate origin for
-this one sample but does not prove original-executable parity. See the
-[analysis script](../scripts/Measure-VisplaneSpanOrigins.ps1) and
-[receipt](../results/moving-sector-visplane-span-origin-20261020.json). Next,
-capture exact post-clip ranges and extend the model across the remaining plane
-mismatches before changing production. No live tests or device interaction
-were used.
+disprove a visplane-based rule. An offline reconstruction now covers all 18
+recorded mismatch samples: one same-owner floor sample and 17 different-owner
+samples, all with matching candidate/reference material keys. Candidate-call
+visplane spans predict the candidate's recorded sample origin at all 18
+points. Reference-call spans predict the adapted reference's recorded origin
+at 8 of 18 points, with a mean absolute difference of 9.22 columns. The
+observed-call and angular-projection bounds produce identical predictions at
+these sample points. This is evidence about the saved traces only; exact
+post-clip `R_CheckPlane` intervals remain uncaptured, so it does not establish
+original-executable parity. Production sampling remains unchanged. See the
+[analysis script](../scripts/Measure-VisplaneSpanOrigins.ps1), the
+[18-sample receipt](../results/moving-sector-visplane-mismatch-origins-20261020.json),
+and the [initial single-sample receipt](../results/moving-sector-visplane-span-origin-20261020.json).
+Next, recover the exact post-clip intervals before considering a production
+sampling change. No live tests or device interaction were used.
 
 ## 2026-10-20 — Attribute the remaining same-owner plane sample to call order
 
