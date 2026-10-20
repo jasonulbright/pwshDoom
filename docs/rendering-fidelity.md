@@ -1636,3 +1636,25 @@ does not supply a general ownership rule; production is unchanged. See the
 This remains saved-replay evidence against the adapted PowerShell reference;
 original-executable parity is unverified. No live tests or device interaction
 were used.
+
+### Plane-origin evidence and original visplane semantics — October 20, 2026
+
+The remaining height-68 sample at (226,105) crosses two distinct but
+material-identical floor owners. In the tic-315 saved view, candidate calls
+assign S19 floor through x=225 and S18 at x=226; the adapted reference assigns
+S18 from x=207 through x=229. S18 and S19 both use floor height 0, flat 10 and
+light level 255. Segment 141 is line 412 (front S19/back S18 at y=-2624); the
+parallel segment 137 is line 415 (front S18/back S15 at y=-2632), 8 map units
+farther away.
+
+Original Doom's regular visplanes are keyed by height, flat and light. A
+matching plane is reused only when its existing column range does not overlap
+the new range; overlapping ranges create a separate plane, and the final
+top/bottom masks are converted into horizontal spans. See the official
+[`r_plane.c`](https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/r_plane.c)
+and [`r_segs.c`](https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/r_segs.c).
+The tested per-row material-key shortcut did not model those overlap splits,
+so its regression against the adapted reference does not settle the original
+algorithm. The column-call traces still do not prove original-executable
+parity, and production sampling remains unchanged pending a PowerShell
+visplane/span reconstruction. No live tests or device interaction were used.

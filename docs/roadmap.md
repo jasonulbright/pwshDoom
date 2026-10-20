@@ -80,8 +80,14 @@ captures 1,227 candidate and 1,037 adapted-reference calls across the frame.
 A per-row height/flat/light reuse rule worsens the saved height-68 comparison
 from 21 to 34 scene differences and is rejected. Initializing every plane
 pixel at its own column worsens that comparison to 1,137 differences, so it is
-rejected too. The next renderer work is to derive a correct origin rule from
-candidate visibility and call boundaries.
+rejected too. Original Doom groups visplanes by height, flat and light, splits
+them when visible column ranges overlap, and maps their top/bottom masks as
+horizontal spans ([`r_plane.c`](https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/r_plane.c),
+[`r_segs.c`](https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/r_segs.c)).
+The next renderer work is to reconstruct these visplane memberships and span
+starts from candidate visibility and BSP call boundaries; the adapted
+PowerShell reference's column recurrence does not establish original-executable
+sample origins.
 No live tests or device interaction were used; the
 complete human Episode 1 route remains the active milestone.
 

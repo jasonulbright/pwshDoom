@@ -1,5 +1,30 @@
 # Investigation ledger
 
+## 2026-10-20 — Reframe the plane-origin gap against original visplanes
+
+The remaining height-68 sample at (226,105) is not enough to infer the
+original renderer's sample origin from the adapted `ThreeDRenderer` call trace.
+At E1M1 tic 315, the candidate calls S19 floor across x=200–225 and S18 at
+x=226; the adapted reference calls S18 from x=207 through x=229. The two
+sectors have the same floor height (0), flat (10), and light level (255).
+Their source segments are distinct parallel lines 8 map units apart: segment
+141 is line 412 (front S19/back S18, y=-2624), and segment 137 is line 415
+(front S18/back S15, y=-2632).
+
+Original Doom groups regular visplanes by height, flat, and light level, splits
+a reused plane when its visible column ranges overlap, and turns the resulting
+top/bottom masks into horizontal spans. See the official
+[`r_plane.c`](https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/r_plane.c)
+and its [`r_segs.c` call site](https://github.com/id-Software/DOOM/blob/master/linuxdoom-1.10/r_segs.c).
+The rejected per-row material-key counterfactual models the key but not the
+overlap split; its worse comparison against the adapted reference does not
+disprove a visplane-based rule. The sample-origin difference remains an
+adapted-renderer observation, not original-executable parity. No production
+sampling change is justified yet. Next, reconstruct the original visplane
+membership and horizontal spans from segment visibility/call boundaries in
+PowerShell, then compare the saved view offline. No live tests or device
+interaction were used.
+
 ## 2026-10-20 — Attribute the remaining same-owner plane sample to call order
 
 The remaining same-owner height-68 floor mismatch at (226,105) has candidate
