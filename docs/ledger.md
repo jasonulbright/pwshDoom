@@ -1,5 +1,17 @@
 # Investigation ledger
 
+## 2026-10-20 — Refresh the Episode 1 handoff after the worker-context fix
+
+Rebuilt the local playtest package from clean source commit `f89e005`, which
+includes the worker asset-context buffers fixed after the previous handoff.
+The 1,953,692-byte ZIP verifies all 584 payload hashes and its adjacent
+checksum. Nine offline suites pass 711 assertions plus 60 menu screen
+fixtures; seven renderer workers exactly match all 320,000 pixels over five
+views. No game host, display, keyboard or audio device was used, and no map
+route was completed. The repository measured 27,871,853,551 bytes, below the
+30,000,000,000-byte limit. The [candidate receipt](../results/episode1-playtest-candidate-20261020-r3.json)
+records the package and evidence; the public Preview.9 release is unchanged.
+
 ## 2026-10-20 — Evaluate global solid-wall span anchors
 
 A global solid-span counterfactual gives every renderer worker the same visible
