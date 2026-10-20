@@ -306,5 +306,15 @@
   ],
   "Execution": "Offline saved-replay render comparison and in-memory WAD inspection; no live tests, game host, UI, input device, or audio device.",
   "ReferenceLimit": "The reference is a locally adapted PowerShell ManagedDoom renderer; this does not establish original-executable parity.",
-  "Interpretation": "At the sampled mismatches, candidate plane calls retain different sector/segment ownership and visibility order from the adapted reference calls. This evidence does not support a recurrence-only production change."
+  "Interpretation": "Candidate and adapted-reference plane call spans differ at the sampled pixels. In the 17 different-owner height-68 mismatches, candidate fixed-point fractions, flat texel and color match the reference when recomputed from the reference-recorded sample origin. This isolates origin/visibility scheduling as the remaining sampled plane-color issue; it does not establish a general fix or original-executable parity.",
+  "OriginCounterfactual": {
+    "PixelCount": 17,
+    "CurrentCandidateColorMatchesReference": 0,
+    "CandidateXFractionMatchesAtReferenceOrigin": 17,
+    "CandidateYFractionMatchesAtReferenceOrigin": 17,
+    "CandidateTextureCoordinatesMatchAtReferenceOrigin": 17,
+    "CandidateFlatTexelMatchesAtReferenceOrigin": 17,
+    "CandidateColorMatchesAtReferenceOrigin": 17,
+    "Basis": "Candidate 16.16 plane sampling recomputed from each reference-recorded origin using candidate height, per-row step, texture and light data; per-pixel counterfactual from the prior offline receipt, not a fresh render."
+  }
 }

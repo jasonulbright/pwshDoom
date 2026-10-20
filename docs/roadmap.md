@@ -71,10 +71,13 @@ per-column scale lookup is worse. The [anchor study](../results/moving-sector-wa
 and [global-span evaluation](../results/moving-sector-global-solid-span-20261020.json)
 record the evidence. A segment-index trace of the remaining 18 plane pixels
 shows candidate/reference sector ownership and BSP call order diverging at the
-sampled rows, so recurrence-only reuse does not justify another production
-change. The [call-trace receipt](../results/moving-sector-reference-plane-call-trace-20261020.json)
-pins the exact calls and unchanged four-height frame hashes. No live tests or
-device interaction were used; the
+sampled rows. An origin counterfactual reproduces the reference fractions,
+flat texel and color for all 17 different-owner plane pixels when the candidate
+uses each reference-recorded sample origin. The [call-trace receipt](../results/moving-sector-reference-plane-call-trace-20261020.json)
+pins those results and the unchanged four-height frame hashes. The next
+renderer work is to derive a correct origin rule from candidate visibility and
+call boundaries; equal material keys alone did not change the frames. No live
+tests or device interaction were used; the
 complete human Episode 1 route remains the active milestone.
 
 ## Historical Episode 1 handoff — R17 (2026-09-29)

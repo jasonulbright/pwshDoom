@@ -9,9 +9,13 @@ at x=116–174. The mismatch pixel uses candidate sample origin 112 and referenc
 owner 60/sample origin 116. At (206,99), candidate floor calls visit sector 18
 at x=182–183, sector 19 at x=184–206, then sector 18 at x=207–209; the
 reference visits sector 18 at x=207–209, x=206, then x=181–205 in BSP call
-order. The candidate and reference sample origins are 184 and 206. These calls
-expose an ownership, visibility, and call-order divergence; they do not support
-a recurrence-only production change. The four candidate/reference frame-hash pairs match the prior receipt
+order. The candidate and reference sample origins are 184 and 206. An origin
+counterfactual in the receipt shows candidate fixed-point fractions, flat texel,
+and color match the reference at all 17 different-owner pixels when evaluated
+from the reference-recorded origin; none match using the current candidate
+origin. This isolates origin/visibility scheduling as the sampled plane-color
+gap, while leaving the correct general boundary rule unresolved. The four
+candidate/reference frame-hash pairs match the prior receipt
 at all sampled heights; differences remain 0, 0, 4, and 21 pixels at heights
 0, 6, 34, and 68. Production rendering is unchanged. The
 [compact call-trace receipt](../results/moving-sector-reference-plane-call-trace-20261020.json)
@@ -119,12 +123,15 @@ visibility boundaries: at (163,56), the candidate carries origin 112 while
 the reference starts at 116 after reference plane owners change across the
 row; at (206,99), the candidate carries origin 184 while the reference starts
 a new sample at 206. A follow-up segment-index trace now shows that the
-candidate's plane calls also retain different sector ownership and BSP call
-order at both pixels. This points beyond recurrence reuse, so no production
-renderer change was made. The [call-trace receipt](../results/moving-sector-reference-plane-call-trace-20261020.json)
-records those spans and the unchanged frame hashes; the [row-trace receipt](../results/moving-sector-lower-boundary-20261020-v17.json)
-records the earlier sample and owner data; the [key-reuse counterfactual](../results/moving-sector-lower-boundary-20261020-v13.json)
-records the unchanged-hash result. This remains a saved-replay comparison
+candidate's plane calls retain different sector ownership and BSP call order at
+both pixels. The candidate's fixed-point samples match all 17 different-owner
+reference pixels when recomputed from the reference-recorded sample origins.
+The unresolved work is to derive those origins from candidate visibility and
+call boundaries; equal material keys alone still do not provide that rule, as
+shown by the unchanged-hash [key-reuse counterfactual](../results/moving-sector-lower-boundary-20261020-v13.json).
+No production renderer change was made. The [call-trace receipt](../results/moving-sector-reference-plane-call-trace-20261020.json)
+records the spans and origin counterfactual; the [row-trace receipt](../results/moving-sector-lower-boundary-20261020-v17.json)
+records the per-pixel inputs. This remains a saved-replay comparison
 against the locally adapted PowerShell reference, not original-executable
 parity; no live tests or desktop/device interaction were used.
 
