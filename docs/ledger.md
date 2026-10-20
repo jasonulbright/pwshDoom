@@ -1,5 +1,17 @@
 # Investigation ledger
 
+## 2026-10-20 — Record Episode 1 launcher prerequisite preflight
+
+Ran `Play.ps1 -Check` against the installed Ultimate Doom IWAD and the prepared
+Episode 1 music catalog. It found all 36 episode maps, Windows Terminal, and a
+working local write probe; qualification metadata for all 11 music tracks
+matches the runtime and source catalog. The launcher exited before starting a
+game session. It did not recheck audio payload hashes or IWAD score identity,
+which are checked at audio startup. This is a source-checkout prerequisite
+preflight only; it does not validate an extracted package launch or human
+gameplay. The [receipt](../results/launcher-preflight-episode1-20261020.json)
+records the exact scope. No live test or device interaction occurred.
+
 ## 2026-10-20 — Repository footprint and recording audit
 
 The recursive project tree, including ignored `local/` data and `.git`, measured
