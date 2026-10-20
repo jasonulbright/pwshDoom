@@ -23,6 +23,25 @@ records the exact calls and source hashes. This is offline comparison against
 the locally adapted PowerShell renderer, not original-executable parity; no
 live tests or desktop/device interaction were used.
 
+## 2026-10-20 — Capture full plane-call order and reject per-row key reuse
+
+The saved-replay trace now captures every floor/ceiling call across all 320
+columns, including spans outside the target mismatch rows. At ceiling height
+68 the candidate issues 1,227 calls and the adapted reference issues 1,037 in
+their original order. Calls that exclude a target row can still change the
+per-surface previous-call state, which the earlier filtered trace omitted.
+
+A disposable per-row material-key variant preserves each row's previous
+fixed-point sample while intervening calls exclude that row. It leaves heights
+0, 6 and 34 unchanged, but increases height-68 scene differences from 21 to 34
+and candidate plane-buffer mismatches from 18 to 31; different-owner plane
+writes rise from 17 to 27. The rule is rejected and production sampling is
+unchanged. The [full-call receipt](../results/moving-sector-reference-plane-full-call-trace-20261020.json)
+pins both renderer variants, the preparation script, replay/WAD hashes, all
+call records and frame counts. This is a frozen saved-replay comparison against
+the local PowerShell reference, not original-executable parity; no live tests or
+device interaction were used.
+
 ## 2026-10-20 — Bring the article's current-state summary up to date
 
 The article opening and current-preview section still described Preview.8 and

@@ -207,7 +207,8 @@ $sourcePaths = @(
     'scripts/Prepare-ReferencePlaneOwnerDiagnosticSource.ps1',
     'scripts/Prepare-FastRendererWallSpanDiagnosticRenderer.ps1',
     'scripts/Prepare-FastRendererPortalTopBoundaryCounterfactual.ps1',
-    'scripts/Prepare-FastRendererUntexturedLowerPlaneCounterfactual.ps1'
+    'scripts/Prepare-FastRendererUntexturedLowerPlaneCounterfactual.ps1',
+    'scripts/Prepare-FastRendererPerRowPlaneKeyCounterfactual.ps1'
 )
 $sourcePaths = @($sourcePaths | Select-Object -Unique)
 $sourceHashes = @{}
@@ -387,9 +388,7 @@ try {
                 [int]$callY1 = $candidatePlaneCalls[$callOffset + 1]
                 [int]$callY2 = $candidatePlaneCalls[$callOffset + 2]
                 [int]$planeId = $candidatePlaneCalls[$callOffset + 3]
-                [bool]$crossesFirstTargetRow = $callY1 -le 57 -and $callY2 -ge 55
-                [bool]$crossesSecondTargetRows = $callY1 -le 109 -and $callY2 -ge 98
-                if ($callX -lt 105 -or $callX -gt 230 -or (-not $crossesFirstTargetRow -and -not $crossesSecondTargetRows)) { continue }
+                if ($callX -lt 0 -or $callX -ge 320) { throw "Candidate plane-call trace contains out-of-frame column $callX." }
                 $candidatePlaneCallTrace.Add([ordered]@{
                     Ordinal = $callIndex
                     X = $callX
@@ -1625,9 +1624,7 @@ try {
                         [int]$callX = $planeCall[0]
                         [int]$callY1 = $planeCall[1]
                         [int]$callY2 = $planeCall[2]
-                        [bool]$crossesFirstTargetRow = $callY1 -le 57 -and $callY2 -ge 55
-                        [bool]$crossesSecondTargetRows = $callY1 -le 109 -and $callY2 -ge 98
-                        if ($callX -lt 105 -or $callX -gt 230 -or (-not $crossesFirstTargetRow -and -not $crossesSecondTargetRows)) { continue }
+                        if ($callX -lt 0 -or $callX -ge 320) { throw "Reference plane-call trace contains out-of-frame column $callX." }
                         [ordered]@{
                             Ordinal = $callOrdinal
                             X = $callX
@@ -1771,8 +1768,8 @@ try {
         ReferenceWallSpanInterpretation = 'For candidate plane-buffer mismatches whose final reference pixel is a BSP mapped-column write, the diagnostic records the reference segment and actual write interval, then compares that pixel with the candidate segment-column wall bounds, clip interval, and upper/solid, lower, and deferred masked-middle bands. Candidate band intervals are clipped raster spans; this classifies geometry coverage and does not by itself prove the texture sample or final candidate color.'
         CandidatePortalBoundaryInterpretation = 'CandidatePortalTopEqualsPixel counts mismatch pixels that lie exactly on the candidate portal top boundary. CandidateUpperBandEndsImmediatelyAbovePixel counts when the candidate band-0 span ends at y-1; together with ReferenceWallBottomEqualsPixel, these counts isolate a one-row upper-wall versus portal-boundary difference.'
         PlaneSampleInterpretation = 'Candidate plane fractions, recurrence origins and reuse flags are captured from the production per-call plane sampler. Reference fractions, distance, light bin and flat texel are recorded at writes. Candidate frame bytes may include later overlays.'
-        CandidatePlaneCallTraceInterpretation = 'At ceiling height 68, the receipt includes the candidate plane samples selected for target rows by x, y1, y2, plane id, sector index, and surface in their original call order. The trace is emitted only when the wall-span diagnostic renderer is selected.'
-        ReferencePlaneCallTraceInterpretation = 'At ceiling height 68, the receipt includes reference floor/ceiling calls over columns 105–230 when their vertical range intersects rows 55–57 or 98–109. Each record gives x, y1, y2, sector index, and surface. Calls expose visibility boundaries in the adapted renderer; they do not identify final pixel ownership or establish original-executable parity.'
+        CandidatePlaneCallTraceInterpretation = 'At ceiling height 68, the receipt includes every candidate floor/ceiling plane call across the full 320-column frame in original call order, including vertical spans outside the target mismatch rows. Each record gives x, y1, y2, plane id, sector index, surface, and segment index. Calls outside a target row can still reset per-surface previous-call state.'
+        ReferencePlaneCallTraceInterpretation = 'At ceiling height 68, the receipt includes every adapted-reference floor/ceiling call across the full 320-column frame in original call order, including vertical spans outside the target mismatch rows. Each record gives x, y1, y2, sector index, surface, and segment index. Calls expose visibility and recurrence boundaries; they do not establish original-executable parity.'
         PlaneMathInterpretation = 'Plane table and per-column fixed sine parity are compared after the final full-width candidate/reference render; this does not compare per-pixel plane fraction recurrence or light selection.'
     }
     $currentHashes = @{}

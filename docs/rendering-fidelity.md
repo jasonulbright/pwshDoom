@@ -1571,6 +1571,14 @@ This is offline comparison against the locally adapted PowerShell renderer
 only; original-executable parity and wider moving-world qualification remain
 open. No live tests or device interaction were used.
 
+The follow-up [full-call receipt](../results/moving-sector-reference-plane-full-call-trace-20261020.json)
+includes 1,227 candidate and 1,037 adapted-reference calls across all 320
+columns. Out-of-row calls can reset global per-surface recurrence even when
+they do not write a target row. A counterfactual that retains a previous sample
+per row and matching height/flat/light key increases scene differences from 21
+to 34 and plane-buffer mismatches from 18 to 31. That rule is rejected; the
+production sampler is unchanged.
+
 ### Wall-scale anchors follow visible wall runs — October 20, 2026
 
 The remaining three height-68 mapped-column color differences occur where the
