@@ -1,5 +1,14 @@
 # Investigation ledger
 
+## 2026-10-20 — Bring the article's current-state summary up to date
+
+The article opening and current-preview section still described Preview.8 and
+the earlier R20 candidate after Preview.9 and handoff e3 had superseded them.
+Updated those current-state claims, added the October 20 global-span
+correctness/performance tradeoff, and linked the current package receipts.
+Historical preview and live-measurement sections remain labeled by their
+original scope; the edit adds no new runtime or campaign claim.
+
 ## 2026-10-20 — Refresh the Episode 1 handoff after the worker-context fix
 
 Rebuilt the local playtest package from clean source commit `f89e005`, which
