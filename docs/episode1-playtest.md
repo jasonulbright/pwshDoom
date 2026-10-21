@@ -19,7 +19,7 @@ Use 64-bit PowerShell 7.6.x and Windows Terminal. The required user-owned Ultima
 From PowerShell, run the extracted local development candidate and use fresh output paths:
 
 ~~~powershell
-$root = 'C:\projects\pwshDoom\local\releases\episode1-candidate-20261020\validation\pwshDoom-0.1.0-episode1-candidate.20261020'
+$root = 'C:\projects\pwshDoom\local\releases\episode1-candidate-20261020\validation\pwshDoom-0.1.0-episode1.20261020'
 $wad = 'C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\base\DOOM.WAD'
 $local = 'C:\projects\pwshDoom\local'
 $catalog = Join-Path $local 'music-prepared-episode1.json'
