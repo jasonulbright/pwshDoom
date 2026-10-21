@@ -7570,3 +7570,16 @@ repository; and refreshed the relevant architecture and limitation notes. The
 article now mirrors these distinctions and avoids presenting the project as
 campaign-complete or as a performance winner. These are source-document checks,
 not independent feature trials. No game, UI, audio device, or live test was run.
+
+### 2026-10-20 — Close the plane-key-only counterfactual
+
+Inspected the retained material-key recurrence counterfactual and its frozen
+E1M1 ceiling sweep. At the same-owner floor sample (226,105), candidate origin
+x=226 and color 106 remain different from the adapted reference origin x=207
+and color 107; the ceiling-height-68 scene still has 18 plane-buffer
+differences. The renderer's per-column calls remain in BSP segment order, so
+matching height/flat/light keys alone do not construct the global visplane
+ranges and spans used by original Doom. Recorded this as a rejected
+cache-key-only fix; production source is unchanged. The receipt pins the
+counterfactual and replay. This was source and receipt inspection only: no game,
+UI, device, or live test was run.

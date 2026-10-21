@@ -1687,6 +1687,23 @@ unchanged. See the [analysis script](../scripts/Measure-VisplaneSpanOrigins.ps1)
 and [corrected 18-sample receipt](../results/moving-sector-visplane-mismatch-origins-rfindplane-corrected-20261020.json).
 No live tests or device interaction were used.
 
+### Material-key recurrence does not recover the reference span origin
+
+An earlier PowerShell counterfactual changed plane-coordinate reuse from a
+sector-index key to the Doom material key (height, flat and light level). It
+does not change the same-owner floor sample at (226,105): the candidate still
+starts at x=226 while the adapted reference starts at x=207, with candidate
+color 106 versus reference color 107. The frozen height sweep retains 18 plane
+buffer differences at ceiling height 68. Since the renderer still processes
+per-column calls in BSP segment order, relaxing the cache key does not build
+the global `R_FindPlane`/`R_CheckPlane` ranges and `R_MakeSpans` sequence.
+This rejects a cache-key-only correction; it does not identify the original
+executable's pixel at this point. The [counterfactual receipt](../results/moving-sector-lower-boundary-20261020-v13.json)
+pins source `9cc92b9` and the fixed replay. Its diagnostic implementation is
+retained in
+[`FastRenderer.plane-key-merge-diagnostic-20261020.ps1`](../src/FastRenderer.plane-key-merge-diagnostic-20261020.ps1);
+production rendering was not changed.
+
 ### Interval-only global wall-scale anchors — October 20, 2026
 
 The follow-up visibility pass records solid screen-column coverage while
