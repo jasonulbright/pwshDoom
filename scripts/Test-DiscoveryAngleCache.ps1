@@ -1,14 +1,19 @@
 #requires -Version 7.4
 # SPDX-License-Identifier: GPL-2.0-or-later
 param([Parameter(Mandatory)][string]$Replay,[Parameter(Mandatory)][string]$Output,
-    [ValidateSet('Dictionary','Indexed')][string]$Candidate='Indexed',
+    [ValidateSet('Dictionary','Indexed','CoordinateArrays')][string]$Candidate='Indexed',
     [ValidateRange(1,1260000)][int]$MaxCommands=1200,[string]$ReferenceReport,
+    [switch]$AllowReplayCheckpointDrift,
     [string]$Wad='C:\Program Files (x86)\Steam\steamapps\common\Ultimate Doom\base\DOOM.WAD')
 $ErrorActionPreference='Stop'
 if(Test-Path -LiteralPath $Output){throw 'Use a fresh cache experiment report.'}
 $owned=Join-Path "$PSScriptRoot/../local" ('discovery-cache-'+[guid]::NewGuid().ToString('N'))
 $original=& "$PSScriptRoot/Build-EngineBundle.ps1" -Output "$owned/baseline.ps1"
-$builder=if($Candidate -eq 'Indexed'){"$PSScriptRoot/experiments/Add-IndexedDiscoveryCache.ps1"}else{"$PSScriptRoot/experiments/Add-DiscoveryAngleCache.ps1"}
+$builder=switch($Candidate){
+    'Indexed' { "$PSScriptRoot/experiments/Add-IndexedDiscoveryCache.ps1"; break }
+    'CoordinateArrays' { "$PSScriptRoot/experiments/Add-IndexedDiscoveryCoordinateArrays.ps1"; break }
+    default { "$PSScriptRoot/experiments/Add-DiscoveryAngleCache.ps1" }
+}
 $bundle=& $builder -Bundle $original -Output "$owned/candidate.ps1"
 . $bundle
 . "$PSScriptRoot/FrameCodec.ps1";. "$PSScriptRoot/../src/InputReplay.ps1"
@@ -29,8 +34,9 @@ try{
     $game=[DoomGame]::new($content,$options);$commands=[TicCmd[]]::new(4);for($j=0;$j -lt 4;$j++){$commands[$j]=[TicCmd]::new()}
     $game.DeferedInitNew([GameSkill]([int]$reference.Skill-1),$reference.Episode,$reference.Map);$null=$game.Update($commands)
     $renderers=@([ThreeDRenderer]::new($content,[DrawScreen]::new($content.Wad,320,200),7),[ThreeDRenderer]::new($content,[DrawScreen]::new($content.Wad,320,200),7))
-    $renderers[0].CacheDiscoveryAngles=$false
+    $renderers[0].CacheDiscoveryAngles=($Candidate -eq 'CoordinateArrays')
     $renderers[1].CacheDiscoveryAngles=$true
+    if($Candidate -eq 'CoordinateArrays'){$renderers[0].CacheDiscoveryCoordinates=$false;$renderers[1].CacheDiscoveryCoordinates=$true}
     $renderers[0].DiscoverMap($game.World.ConsolePlayer)
     $expected=@{};foreach($point in $reference.Checkpoints){$expected[[int]$point.Tic]=$true}
     $points.Add((Get-DoomReplayCheckpoint $game 0))
@@ -50,7 +56,7 @@ try{
                 $hashes[$which]=Mapped-Hash $lines
             }
             if($hashes[0] -cne $hashes[1]){throw "Fresh discovery differs at command $completed"};$freshComparisons++
-            $cacheEntries=if($Candidate -eq 'Indexed'){@($renderers[1].DiscoveryAngleReady|Where-Object {$_}).Count}else{$renderers[1].DiscoveryAngles.Count}
+            $cacheEntries=if($Candidate -in @('Indexed','CoordinateArrays')){@($renderers[1].DiscoveryAngleReady|Where-Object {$_}).Count}else{$renderers[1].DiscoveryAngles.Count}
             # Both passes agree; union current discoveries with the prior map.
             for($j=0;$j -lt $lines.Length;$j++){$lines[$j].Flags=[int]$lines[$j].Flags -bor $saved[$j]}
         }
@@ -63,18 +69,18 @@ try{
     }
     if($points[-1].Tic -ne $completed){$points.Add((Get-DoomReplayCheckpoint $game $completed))}
     $verification=Compare-DoomReplayCheckpoints $reference.Checkpoints $points.ToArray() $completed
-    if(-not $verification.Matched){throw 'Cache experiment differs from original gameplay checkpoints.'}
+    if(-not $verification.Matched -and -not $AllowReplayCheckpointDrift){throw 'Cache experiment differs from original gameplay checkpoints.'}
 }catch{$failure=$_.ToString()+"`n"+$_.ScriptStackTrace}finally{
     if($content){$content.Dispose()}
     $timed=@($samples|Where-Object State -eq 0)
-    @{Error=$failure;Candidate=$Candidate;Commands=$completed;FreshMappingComparisons=$freshComparisons;PriorMappingComparisons=$priorComparisons;
-        CacheSetupSamplesMs=if($Candidate -eq 'Indexed' -and $renderers){$renderers[1].DiscoveryCacheSetupSamples.ToArray()}else{@()};
+    @{Error=$failure;Candidate=$Candidate;Commands=$completed;FreshMappingComparisons=$freshComparisons;PriorMappingComparisons=$priorComparisons;ReplayCheckpointDriftAllowed=[bool]$AllowReplayCheckpointDrift;
+        CacheSetupSamplesMs=if($Candidate -in @('Indexed','CoordinateArrays') -and $renderers){$renderers[1].DiscoveryCacheSetupSamples.ToArray()}else{@()};
         BaselineBundleSha256=(Get-FileHash $original).Hash;ExecutedBundleSha256=(Get-FileHash $bundle).Hash;BuilderSha256=(Get-FileHash $builder).Hash;HarnessSha256=(Get-FileHash $PSCommandPath).Hash;
         ReplaySha256=(Get-FileHash $Replay).Hash;WadSha256=(Get-FileHash $Wad).Hash;ReferenceReportSha256=if($ReferenceReport){(Get-FileHash $ReferenceReport).Hash}else{$null};
         BaselineMs=(Get-SampleStats ([double[]]$timed.BaselineMs));CacheMs=(Get-SampleStats ([double[]]$timed.CacheMs));
         Samples=$samples.ToArray();ReplayVerification=$verification;Checkpoints=$points.ToArray();OwnedBundle=$bundle;
-        Meaning='Experimental owned bundle only. Per-view paired discovery calls alternate order; mapped flags are cleared before each call, freshly discovered bitsets compared, then unioned with prior flags. Optional reference also checks every cumulative hash. Cache validity clears on every call; no cross-tic reuse. Indexed candidate resolves vertex identity once per map, then uses arrays and a dedicated segment call. Timing includes cold calls, cache clear and any lazy per-map index construction; excludes renderer creation/flag reset/hash. Both paths include experimental selection branches. Not loaded-host or display FPS.'}|
+        Meaning=if($Candidate -eq 'CoordinateArrays'){'Experimental owned bundle only. Both renderers use indexed per-view angle caching; the candidate additionally caches primitive vertex coordinates and delays segment-object lookup until the clipped span is on screen. Per-view paired calls alternate order; mapped flags are cleared before each call, fresh discovered bitsets are compared, then unioned with prior flags. Optional reference checks each cumulative hash. Cache validity clears every call; no cross-tic reuse. Timing includes cold calls, cache clear and map index setup; excludes renderer creation, flag reset and hashing. Not loaded-host or display FPS.'}else{'Experimental owned bundle only. Per-view paired discovery calls alternate order; mapped flags are cleared before each call, freshly discovered bitsets compared, then unioned with prior flags. Optional reference also checks every cumulative hash. Cache validity clears on every call; no cross-tic reuse. Indexed candidate resolves vertex identity once per map, then uses arrays and a dedicated segment call. Timing includes cold calls, cache clear and any lazy per-map index construction; excludes renderer creation/flag reset/hash. Both paths include experimental selection branches. Not loaded-host or display FPS.'}}|
         ConvertTo-Json -Depth 10|Set-Content -LiteralPath $Output
 }
 if($failure){throw $failure}
-"PASS: $completed commands, $freshComparisons fresh mapping comparisons, $priorComparisons prior mapping comparisons."
+"PASS: $completed commands, $freshComparisons fresh mapping comparisons, $priorComparisons prior mapping comparisons; recorded checkpoints matched=$($verification.Matched), drift allowed=$([bool]$AllowReplayCheckpointDrift)."

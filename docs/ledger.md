@@ -1,5 +1,31 @@
 # Investigation ledger
 
+## 2026-10-20 — Reject primitive-coordinate automap discovery trial
+
+A disposable indexed-renderer variant cached primitive map-vertex coordinates
+and delayed segment lookup until the projected span survived screen clipping.
+On the saved 1,200-command E1M3 replay, all 1,200 fresh mapped-line bitset
+comparisons matched. Mean discovery time was 4.491 ms on the indexed baseline
+and 4.489 ms on the candidate; median was 3.884/3.877 ms and p95 was
+8.724/8.731 ms. The mixed, negligible result provides no measurable win, so
+the candidate was rejected and production renderer sources remain unchanged.
+The candidate's 10.758 ms one-time map/cache setup is included in its cold
+timing. Three historical gameplay checkpoint mismatches (tics 350, 700 and
+1050) are preserved in the receipt; the run checked renderer mapping parity,
+not current-source campaign parity. It used no game window, live controls,
+audio device or display test. See the
+[automap discovery note](automap-discovery-performance.md#primitive-coordinate-lookup-trial-2026-10-20)
+and [raw receipt](../results/discovery-angle-coordinate-arrays-20261020.json).
+
+## 2026-10-20 — Confirm local reference and recording status
+
+The exact `/docs/gebbdoom.pdf` ignore rule is already present in the tracked
+`.gitignore`; `git check-ignore` confirms the local copy is ignored, and
+`git ls-files` confirms it is not tracked. No duplicate ignore line was added.
+A local inventory found 33 tiny FFmpeg format-test video fixtures totaling
+5,337 bytes and no gameplay video recordings; the fixtures remain available
+for their capture-tool checks. This audit changed no media files.
+
 ## 2026-10-20 — Bring the research article up to date on plane spans
 
 The article's renderer discussion now connects the 18 remaining height-68

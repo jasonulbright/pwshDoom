@@ -75,3 +75,30 @@ The PowerShell 7.6.6 all-map comparison passes all 36 Ultimate Doom map starts a
 A five-second idle E1M1 simulation-host run under PowerShell 7.6.6 performs one discovery traversal followed by 174 cache hits. It advances 174 tics at 34.79 tics/sec; the report records 81 headless render completions (16.20/sec), which are not terminal or display frame rates. Automap discovery reports 0.177 ms mean, 0.123 ms median, and 0.147 ms p95 across the short run. There are no startup or runtime errors.
 
 The alternating static E4M9 method benchmark measured 16.757 ms median without stationary reuse and 0.082 ms with it across 120 calls per path, with zero traversals during cached batches. This is a `DiscoverMap` microbenchmark with an unchanged world, not a whole-game speedup or FPS result. The idle host confirms that reuse occurs in the live simulation loop; it does not establish 60 displayed frames/sec, moving-view benefit, or campaign completion. The compact qualification receipt is `results/stationary-discovery-cache-20260929.json`.
+
+## Primitive-coordinate lookup trial (2026-10-20)
+
+A disposable indexed-path candidate cached map vertex X/Y values in primitive
+arrays and deferred the segment-object lookup until the projected span passed
+the screen clip. The baseline and candidate both used the adopted indexed
+angle cache; only coordinate caching and deferred lookup differed. The
+1,200-command saved E1M3 replay produced identical fresh mapped-line bitsets
+for all 1,200 paired calls.
+
+| Discovery timing | Indexed baseline | Coordinate candidate |
+| --- | ---: | ---: |
+| Mean | 4.491 ms | 4.489 ms |
+| Median | 3.884 ms | 3.877 ms |
+| P95 | 8.724 ms | 8.731 ms |
+
+These differences are negligible and mixed, so the candidate is rejected; the
+production renderer is unchanged. Its one-time map/cache setup sample is
+10.758 ms and the cold setup remains inside the first timed call. The receipt
+also records three mismatches against historical gameplay checkpoints at
+tics 350, 700 and 1050. The paired discovery comparison therefore asserts
+mapped-bit parity, not current-source campaign replay parity. The explicitly
+selected `-AllowReplayCheckpointDrift` option retains those mismatches in the
+report without treating this bounded renderer comparison as a gameplay
+qualification. See [`discovery-angle-coordinate-arrays-20261020.json`](../results/discovery-angle-coordinate-arrays-20261020.json).
+The experiment used only the saved replay and generated in-memory renderer
+state; no live game, UI, controls, audio device or display test was run.

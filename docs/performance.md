@@ -1811,3 +1811,16 @@ offset evaluation. This is serial fixed-state profiling, not concurrent-worker
 or live pacing evidence. No live test, game window, input, audio device or
 display interaction was used. The [receipt](../results/renderer-wall-boundary-recurrence-performance-20261019.json)
 retains all eight profile hashes and per-frame timing samples.
+
+### Reject primitive-coordinate automap lookup — October 20, 2026
+
+On 1,200 saved E1M3 states, the indexed baseline and a candidate with cached
+primitive vertex coordinates produced identical fresh mapped-line bitsets in
+all 1,200 paired comparisons. Mean `DiscoverMap` time was 4.491 ms versus
+4.489 ms; median was 3.884 versus 3.877 ms, and p95 was 8.724 versus 8.731
+ms. This is no measurable improvement, so the candidate was rejected. Three
+historical gameplay checkpoint mismatches remain visible in the receipt; this
+run qualifies paired discovery parity only, not current-source campaign
+replay parity. It is a saved-replay experiment with no live UI, controls,
+audio, device or display test. See the [full discovery note](automap-discovery-performance.md#primitive-coordinate-lookup-trial-2026-10-20)
+and [receipt](../results/discovery-angle-coordinate-arrays-20261020.json).
