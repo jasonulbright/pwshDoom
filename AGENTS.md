@@ -11,7 +11,7 @@ Latest steering, 2026-09-27: the next user playtest milestone is one complete Ep
 - Preserve raw results and exact parameters. Never call completed console writes displayed FPS.
 - Use the user's requested root `C:\projects\pwshDoom`.
 - Keep the entire repo tree, including ignored files and worktrees, below 30 GB decimal. Keep all project work and temporary output inside this repo; never use folders outside it. The user says reviewed MP4s are unnecessary: retain recording metadata/findings, not the video files, unless explicitly asked.
-- Run `pwsh -NoProfile -File scripts/Test-RepositoryFootprint.ps1` before every commit or push. It sums hidden and ignored files, including `.git`, and exits nonzero when the decimal-byte ceiling is exceeded; fix the footprint before continuing.
+- Run `pwsh -NoProfile -File scripts/Test-RepositoryFootprint.ps1` before every commit or push. It sums hidden and ignored files, including `.git`, and exits nonzero if the decimal-byte ceiling is exceeded or enumeration is incomplete; resolve any reported reparse points before measuring again.
 - Keep WADs, extracted images, original downloaded source checkouts, and downloaded tools in ignored `local/`. An explicitly attributed, licensed source subset adopted for the implementation may live under `src/`; preserve notices and record modifications.
 - Do not adopt external code without checking its license. A runtime adapter may inspect/test a user-local source file while leaving it outside this repository.
 - Keep experiments finite. Clean up only resources created by the study; preserve the user's Terminal profiles and default settings.

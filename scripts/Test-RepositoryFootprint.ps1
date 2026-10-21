@@ -11,10 +11,21 @@ if ($MaximumBytes -le 0) { throw 'MaximumBytes must be greater than zero.' }
 
 $rootPath = [IO.Path]::GetFullPath($Root)
 if (-not [IO.Directory]::Exists($rootPath)) { throw "Repository directory not found: $rootPath" }
+$rootAttributes = [IO.File]::GetAttributes($rootPath)
+if (($rootAttributes -band [IO.FileAttributes]::ReparsePoint) -ne 0) {
+    throw "Repository root is a reparse point; resolve it before measuring: $rootPath"
+}
 
 # Force includes hidden items such as .git; no Git-ignore filtering is applied.
-# Stop on enumeration errors so an inaccessible subtree cannot look under-limit.
-$files = @(Get-ChildItem -LiteralPath $rootPath -Force -Recurse -File -ErrorAction Stop)
+# Stop on enumeration errors or links so an inaccessible or untraversed subtree
+# cannot look under-limit. PowerShell does not follow directory symlinks by default.
+$entries = @(Get-ChildItem -LiteralPath $rootPath -Force -Recurse -ErrorAction Stop)
+$reparsePoints = @($entries | Where-Object { ($_.Attributes -band [IO.FileAttributes]::ReparsePoint) -ne 0 })
+if ($reparsePoints.Count -gt 0) {
+    $paths = @($reparsePoints | Select-Object -First 20 -ExpandProperty FullName)
+    throw "Repository contains reparse points whose target sizes are not included. Resolve them before measuring: $($paths -join '; ')"
+}
+$files = @($entries | Where-Object { -not $_.PSIsContainer })
 [long]$totalBytes = 0
 foreach ($file in $files) { $totalBytes += [long]$file.Length }
 

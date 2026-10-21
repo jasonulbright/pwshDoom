@@ -188,7 +188,7 @@ Release acceptance requires:
 - The 60-display/35-tic targets remain goals, not universally certified guarantees. Before a release comparison, freeze a machine/workload/display matrix and numeric pacing acceptance thresholds. Include all measured windows and startup behavior; report warm-up separately. The existing ~57.6 windowed versus ~59.7 maximized results are an open issue.
 - A fresh checkout can be launched with a user-supplied IWAD; missing prerequisites produce actionable messages. Verify physical keyboard play, actual 1080p sizing at declared DPI, windowed/maximized behavior, focus/resize, normal exit, and owned-resource cleanup. Test at least one second hardware configuration before making portability claims.
 - Publish source, licenses, reproducible commands, pinned comparisons, result tables, limitations, and an accessible narrative. No commercial WADs, extracted assets, native binaries, or private test artifacts enter the repository.
-- Keep the entire local project tree, including hidden, ignored, and `.git` files, at or below 30,000,000,000 bytes. Run [`Test-RepositoryFootprint.ps1`](../scripts/Test-RepositoryFootprint.ps1) before every commit or push; it must fail closed if it cannot enumerate the full tree.
+- Keep the entire local project tree, including hidden, ignored, and `.git` files, at or below 30,000,000,000 bytes. Run [`Test-RepositoryFootprint.ps1`](../scripts/Test-RepositoryFootprint.ps1) before every commit or push; it must fail closed on enumeration errors or reparse points.
 
 ## Milestones and dependencies
 

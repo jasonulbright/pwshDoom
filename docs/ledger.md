@@ -14,13 +14,14 @@ it does not test the desktop keyboard or advance the human playthrough.
 
 Added [`Test-RepositoryFootprint.ps1`](../scripts/Test-RepositoryFootprint.ps1)
 to sum file lengths across the entire project tree, including hidden and
-ignored files and `.git`. It stops on enumeration errors and exits nonzero
-when the total exceeds 30,000,000,000 bytes, listing the 20 largest files to
-guide cleanup. `AGENTS.md` and the release acceptance criteria now require
-running it before every commit or push. Its current read-only scan
-counted 94,149 files and 27,934,803,613 bytes (26.016 GiB), leaving
-2,065,196,387 bytes of headroom. The PowerShell parser and diff whitespace
-check pass. No game, UI, audio, device, or live test was run.
+ignored files and `.git`. It stops on enumeration errors and rejects a linked
+root or nested reparse point, avoiding a silent undercount when PowerShell
+would skip a symlink target. It exits nonzero above 30,000,000,000 bytes and
+lists the 20 largest files to guide cleanup. `AGENTS.md` and release criteria
+require running it before every commit or push. The follow-up scan found no
+reparse points; it counted 94,167 files and 27,936,006,670 bytes (26.017 GiB),
+leaving 2,063,993,330 bytes of headroom. The PowerShell parser and diff
+whitespace check pass. No game, UI, audio, device, or live test was run.
 
 ## 2026-10-20 — Reject adapted Doom-style visplane span candidates
 
