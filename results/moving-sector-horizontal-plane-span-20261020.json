@@ -1,0 +1,320 @@
+{
+  "SchemaVersion": 1,
+  "FinishedUtc": "2026-10-21T02:28:35.3884925Z",
+  "Experiment": "Counterfactual render sweep of the E1M1 moving ceiling at one frozen replay-derived game state",
+  "SourceCommit": "198128d9e63cda447957e16e334ddb3d8ca4d517",
+  "Episode": 1,
+  "Map": 1,
+  "Skill": 3,
+  "InputTic": 315,
+  "LevelTic": 315,
+  "SectorIndex": 26,
+  "ActualCeilingHeight": 6.0,
+  "ReplayPath": "results/e1m1-route-lineflags.json",
+  "ReplaySha256": "41CF35EDF94C1CABE8C96A1CEEFBCFBF41F20DF24093569B65A1A4C9C56C017B",
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "Heights": [
+    {
+      "CeilingHeight": 6,
+      "CandidateFrameSha256": "925A5841A8F525E85E970BA32A7DAA9A0AF41542A60F43DCF47E0EB097390994",
+      "ReferenceFrameSha256": "B7DA72BF29AAB1C42324463E253D6B1F3BD834CB383567E83BE59C35C2841A88",
+      "SceneDifferentIndices": 0,
+      "HudDifferentIndices": 0,
+      "SceneMismatchBounds": null,
+      "CandidatePlaneBufferMismatchPixels": 0,
+      "CandidatePlaneBufferAndNoDepthMismatchPixels": 0,
+      "CandidateNonPlaneBufferMismatchPixels": 0,
+      "CandidateDepthWrittenMismatchPixels": 0,
+      "CandidatePlaneBufferMismatchBySurface": [],
+      "ReferencePlaneWriteMismatchPixels": 0,
+      "CandidatePlaneMismatchReferencePlaneWrites": 0,
+      "CandidatePlaneMismatchSameOwnerWrites": 0,
+      "CandidatePlaneMismatchDifferentOwnerWrites": 0,
+      "CandidatePlaneMismatchNoReferencePlaneWrite": 0,
+      "CandidatePlaneMismatchUnknownReferenceOwner": 0,
+      "CandidateNonPlaneMismatchReferencePlaneWrites": 0,
+      "CandidatePlaneMismatchReferenceFinalPlaneWrites": 0,
+      "CandidatePlaneMismatchReferenceFinalColumnWrites": 0,
+      "CandidatePlaneMismatchReferenceFinalFuzzWrites": 0,
+      "CandidatePlaneMismatchReferenceFinalUnmarkedWrites": 0,
+      "CandidatePlaneMismatchSameOwnerFinalPlaneWrites": 0,
+      "CandidateNonPlaneMismatchReferenceFinalWriters": [],
+      "CandidateNonPlaneMismatchCandidateDepthOwners": null,
+      "CandidateNonPlaneMismatchReferenceWallSegments": null,
+      "CandidateNonPlaneMismatchReferenceFinalRenderPasses": [],
+      "CandidatePlaneMismatchReferenceFinalRenderPasses": [],
+      "CandidatePlaneMismatchReferenceWallSpanCounts": null,
+      "CandidatePlaneMismatchReferenceWallSpanExamples": null,
+      "CandidatePlaneMismatchDifferentOwnerSegmentCounts": null,
+      "CandidatePlaneMismatchDifferentOwnerExamples": null,
+      "SameOwnerPlaneSampleComparisons": {
+        "SameOwnerSamples": 0,
+        "SameDistanceData": 0,
+        "SameDistanceLightBin": 0,
+        "SameXFraction": 0,
+        "SameYFraction": 0,
+        "SameTextureX": 0,
+        "SameTextureY": 0,
+        "SameTextureCoordinates": 0,
+        "SameFlatTexelIndex": 0,
+        "SameLightMapIndex": 0,
+        "SamePlaneColor": 0,
+        "ReferenceOriginAlignedSameXFraction": 0,
+        "ReferenceOriginAlignedSameYFraction": 0,
+        "ReferenceOriginAlignedSameTextureCoordinates": 0,
+        "ReferenceOriginAlignedSameFlatTexelIndex": 0,
+        "ReferenceOriginAlignedSamePlaneColor": 0,
+        "DirectSameXFraction": 0,
+        "DirectSameYFraction": 0,
+        "DirectSameTextureX": 0,
+        "DirectSameTextureY": 0,
+        "DirectSameFlatTexelIndex": 0,
+        "DirectSamePlaneColor": 0,
+        "CandidateFramebufferMatchesPlaneSample": 0,
+        "ReferenceFramebufferMatchesPlaneSample": 0,
+        "TextureXDeltaCounts": {},
+        "TextureYDeltaCounts": {},
+        "CandidateSampleAgeCounts": {},
+        "CandidateSampleReusedPreviousColumn": 0,
+        "CandidateSampleInitializedAtCurrentColumn": 0,
+        "ReferenceSampleReusedPreviousColumn": 0,
+        "ReferenceSampleInitializedAtCurrentColumn": 0,
+        "CandidateSampleOriginBeforeReferenceOrigin": 0,
+        "CandidateSampleOriginDeltaCounts": {},
+        "DirectTexelMatchesWithReferenceReuse": 0,
+        "DirectTexelMatchesAfterReferenceInitialize": 0
+      },
+      "SameOwnerPlaneSampleExamples": [],
+      "ReferencePlaneWriteOwnerPairs": [],
+      "CandidatePlaneCallTrace": [],
+      "ReferencePlaneCallTrace": null,
+      "ReferencePlaneRangeTrace": null
+    },
+    {
+      "CeilingHeight": 68,
+      "CandidateFrameSha256": "FA1415E22B9037998A9F033F911EE13D75595C8C322A8BC4835F656043373A74",
+      "ReferenceFrameSha256": "E62E4EF8887421EF900085790CD5793980ACC074E72E29ED10FDE7D4592AB6C8",
+      "SceneDifferentIndices": 527,
+      "HudDifferentIndices": 0,
+      "SceneMismatchBounds": [
+        93,
+        0,
+        318,
+        167
+      ],
+      "CandidatePlaneBufferMismatchPixels": 524,
+      "CandidatePlaneBufferAndNoDepthMismatchPixels": 524,
+      "CandidateNonPlaneBufferMismatchPixels": 3,
+      "CandidateDepthWrittenMismatchPixels": 3,
+      "CandidatePlaneBufferMismatchBySurface": [
+        {
+          "PlaneId": 32,
+          "SectorIndex": 15,
+          "Surface": "Floor",
+          "MismatchPixels": 184
+        },
+        {
+          "PlaneId": 38,
+          "SectorIndex": 18,
+          "Surface": "Floor",
+          "MismatchPixels": 4
+        },
+        {
+          "PlaneId": 40,
+          "SectorIndex": 19,
+          "Surface": "Floor",
+          "MismatchPixels": 19
+        },
+        {
+          "PlaneId": 41,
+          "SectorIndex": 20,
+          "Surface": "Ceiling",
+          "MismatchPixels": 1
+        },
+        {
+          "PlaneId": 45,
+          "SectorIndex": 22,
+          "Surface": "Ceiling",
+          "MismatchPixels": 184
+        },
+        {
+          "PlaneId": 46,
+          "SectorIndex": 22,
+          "Surface": "Floor",
+          "MismatchPixels": 121
+        },
+        {
+          "PlaneId": 119,
+          "SectorIndex": 59,
+          "Surface": "Ceiling",
+          "MismatchPixels": 10
+        },
+        {
+          "PlaneId": 120,
+          "SectorIndex": 59,
+          "Surface": "Floor",
+          "MismatchPixels": 1
+        }
+      ],
+      "ReferencePlaneWriteMismatchPixels": 0,
+      "CandidatePlaneMismatchReferencePlaneWrites": 0,
+      "CandidatePlaneMismatchSameOwnerWrites": 0,
+      "CandidatePlaneMismatchDifferentOwnerWrites": 0,
+      "CandidatePlaneMismatchNoReferencePlaneWrite": 0,
+      "CandidatePlaneMismatchUnknownReferenceOwner": 0,
+      "CandidateNonPlaneMismatchReferencePlaneWrites": 0,
+      "CandidatePlaneMismatchReferenceFinalPlaneWrites": 0,
+      "CandidatePlaneMismatchReferenceFinalColumnWrites": 0,
+      "CandidatePlaneMismatchReferenceFinalFuzzWrites": 0,
+      "CandidatePlaneMismatchReferenceFinalUnmarkedWrites": 0,
+      "CandidatePlaneMismatchSameOwnerFinalPlaneWrites": 0,
+      "CandidateNonPlaneMismatchReferenceFinalWriters": [],
+      "CandidateNonPlaneMismatchCandidateDepthOwners": null,
+      "CandidateNonPlaneMismatchReferenceWallSegments": null,
+      "CandidateNonPlaneMismatchReferenceFinalRenderPasses": [],
+      "CandidatePlaneMismatchReferenceFinalRenderPasses": [],
+      "CandidatePlaneMismatchReferenceWallSpanCounts": null,
+      "CandidatePlaneMismatchReferenceWallSpanExamples": null,
+      "CandidatePlaneMismatchDifferentOwnerSegmentCounts": null,
+      "CandidatePlaneMismatchDifferentOwnerExamples": null,
+      "SameOwnerPlaneSampleComparisons": {
+        "SameOwnerSamples": 0,
+        "SameDistanceData": 0,
+        "SameDistanceLightBin": 0,
+        "SameXFraction": 0,
+        "SameYFraction": 0,
+        "SameTextureX": 0,
+        "SameTextureY": 0,
+        "SameTextureCoordinates": 0,
+        "SameFlatTexelIndex": 0,
+        "SameLightMapIndex": 0,
+        "SamePlaneColor": 0,
+        "ReferenceOriginAlignedSameXFraction": 0,
+        "ReferenceOriginAlignedSameYFraction": 0,
+        "ReferenceOriginAlignedSameTextureCoordinates": 0,
+        "ReferenceOriginAlignedSameFlatTexelIndex": 0,
+        "ReferenceOriginAlignedSamePlaneColor": 0,
+        "DirectSameXFraction": 0,
+        "DirectSameYFraction": 0,
+        "DirectSameTextureX": 0,
+        "DirectSameTextureY": 0,
+        "DirectSameFlatTexelIndex": 0,
+        "DirectSamePlaneColor": 0,
+        "CandidateFramebufferMatchesPlaneSample": 0,
+        "ReferenceFramebufferMatchesPlaneSample": 0,
+        "TextureXDeltaCounts": {},
+        "TextureYDeltaCounts": {},
+        "CandidateSampleAgeCounts": {},
+        "CandidateSampleReusedPreviousColumn": 0,
+        "CandidateSampleInitializedAtCurrentColumn": 0,
+        "ReferenceSampleReusedPreviousColumn": 0,
+        "ReferenceSampleInitializedAtCurrentColumn": 0,
+        "CandidateSampleOriginBeforeReferenceOrigin": 0,
+        "CandidateSampleOriginDeltaCounts": {},
+        "DirectTexelMatchesWithReferenceReuse": 0,
+        "DirectTexelMatchesAfterReferenceInitialize": 0
+      },
+      "SameOwnerPlaneSampleExamples": [],
+      "ReferencePlaneWriteOwnerPairs": [],
+      "CandidatePlaneCallTrace": [],
+      "ReferencePlaneCallTrace": null,
+      "ReferencePlaneRangeTrace": null
+    }
+  ],
+  "ComparedScenePixels": 53760,
+  "ComparedHudPixels": 10240,
+  "MismatchMaskLocationsChangedFirstToLast": 527,
+  "CandidatePixelsChangedFirstToLast": 51346,
+  "ReferencePixelsChangedFirstToLast": 51343,
+  "PlaneMathParity": {
+    "PlaneColumnAngleMismatchXs": [],
+    "PlaneDistanceScaleMismatchXs": [],
+    "PlaneRowSlopeMismatchYs": [],
+    "ViewColumnCosMismatchXs": [],
+    "ViewColumnSinMismatchXs": [],
+    "CandidatePlaneBaseXScale": -1,
+    "ReferencePlaneBaseXScale": -1,
+    "CandidatePlaneBaseYScale": 409,
+    "ReferencePlaneBaseYScale": 409
+  },
+  "ReferenceEngineSourceRoot": "src/ManagedDoom",
+  "ReferenceEngineBundlePath": "local/engine-bundle-horizontal-plane-span-20261020.ps1",
+  "ReferenceEngineBundleSha256": "2419DC7E6C2008B8B5E70A192296104E780E4AD2679A128AF61FD07C325C96D2",
+  "ReferencePlaneOwnershipCaptured": false,
+  "ReferenceFinalRenderPassDefinitions": {
+    "1": "BSP traversal",
+    "4": "Player sprites",
+    "6": "Sky column",
+    "0": "Unmarked",
+    "3": "Masked textures",
+    "5": "Back-screen fill",
+    "2": "World sprites"
+  },
+  "OnlyChangedSectorCeiling": true,
+  "OtherSimulationStateHeldFixed": true,
+  "Reference": "Locally adapted PowerShell ManagedDoom ThreeDRenderer",
+  "OriginalExecutableComparison": false,
+  "Sources": [
+    {
+      "Sha256": "4119FFAEEC378D5FF284C0EC4ED5D09166C907AA57EE700D9C8786C9F966AD4F",
+      "Path": "src/FastRenderer.horizontal-plane-span-counterfactual-20261020.ps1"
+    },
+    {
+      "Sha256": "59C4D2A2FBDF80D48C471A69AAE7CFA84737D57F450E9CCE7472A1A52576CE65",
+      "Path": "src/FastRenderer.ps1"
+    },
+    {
+      "Sha256": "CBADD9B913973D0442B4BE7A45F4C1069FA75B8DCAF78F4A550AE72C4ACED706",
+      "Path": "src/GameHost.ps1"
+    },
+    {
+      "Sha256": "9926E254F54250EEDD4F929681026BFF9ECEE7E6A9869FE99114F4FCD0CCF84B",
+      "Path": "src/ManagedDoom/Video/ThreeDRenderer.sb.ps1"
+    },
+    {
+      "Sha256": "1D941A147B9024CB5882C21C7000A2E3E07B91BB017957D4F9CA45ABAD1138F0",
+      "Path": "scripts/Compare-MovingSectorHeightSweep.ps1"
+    },
+    {
+      "Sha256": "774CCC5BEEBEA231FBD68F33A04A6D0E70FB261C3EBD8EA833C5872F1DBCE6A0",
+      "Path": "scripts/Prepare-ReferencePlaneOwnerDiagnosticSource.ps1"
+    },
+    {
+      "Sha256": "9FD49399FAD137C7195D441777455FBA62B8E72C787ED4EB134CCD6C62EEA8FD",
+      "Path": "scripts/Prepare-FastRendererWallSpanDiagnosticRenderer.ps1"
+    },
+    {
+      "Sha256": "4D8ABA0F1DF8349E7FDD13776A784D07136C16083A53B9CC0971EFCC6ADEC329",
+      "Path": "scripts/Prepare-FastRendererPortalTopBoundaryCounterfactual.ps1"
+    },
+    {
+      "Sha256": "4E39C21208DCA0BD7B2C93373467419C7E5E38CB112D55A8B181E84D0EF1ED09",
+      "Path": "scripts/Prepare-FastRendererUntexturedLowerPlaneCounterfactual.ps1"
+    },
+    {
+      "Sha256": "5ADA3153F98EBC6E6AA99FC64815AD664DECAB453E8B3F2DD37B7E3D3CE385CA",
+      "Path": "scripts/Prepare-FastRendererPerRowPlaneKeyCounterfactual.ps1"
+    },
+    {
+      "Sha256": "6AE55EDEF8C004E85535BBA7D85F1513B9FE88EE16E7B1055A82CC37433D959B",
+      "Path": "scripts/Prepare-FastRendererDirectPlaneColumnCounterfactual.ps1"
+    },
+    {
+      "Sha256": "55C509F91EEAA90C52EAE18C00CAF80AEBE69A8F6FE02424A0E5B5AF70BC209B",
+      "Path": "scripts/Prepare-FastRendererHorizontalPlaneSpanCounterfactual.ps1"
+    }
+  ],
+  "DiagnosticImages": [],
+  "Error": null,
+  "Interpretation": "A counterfactual surface-fidelity comparison, not a movement/progression test, original-executable parity result, or performance measurement.",
+  "CandidateOwnershipInterpretation": "Plane-buffer counts classify the candidate plane ID at mismatch coordinates; the separate final-render-pass tags identify which reference render pass supplied the final pixel.",
+  "ReferencePlaneWritesInterpretation": "Plane ownership records the last reference floor/ceiling write. Final-writer tags distinguish plane, mapped-column and fuzz writes; final-render-pass tags distinguish BSP traversal, world sprites, masked textures, player sprites, back-screen fill and sky columns.",
+  "ReferenceFinalRenderPassInterpretation": "Within BSP traversal, a final plane write is a plane sampler output and a mapped-column write is an opaque wall column; sky columns are tagged separately. Later pass tags distinguish world sprites, masked textures, player sprites and back-screen fill.",
+  "ReferenceWallSpanInterpretation": "For candidate plane-buffer mismatches whose final reference pixel is a BSP mapped-column write, the diagnostic records the reference segment and actual write interval, then compares that pixel with the candidate segment-column wall bounds, clip interval, and upper/solid, lower, and deferred masked-middle bands. Candidate band intervals are clipped raster spans; this classifies geometry coverage and does not by itself prove the texture sample or final candidate color.",
+  "CandidatePortalBoundaryInterpretation": "CandidatePortalTopEqualsPixel counts mismatch pixels that lie exactly on the candidate portal top boundary. CandidateUpperBandEndsImmediatelyAbovePixel counts when the candidate band-0 span ends at y-1; together with ReferenceWallBottomEqualsPixel, these counts isolate a one-row upper-wall versus portal-boundary difference.",
+  "PlaneSampleInterpretation": "Candidate plane fractions, recurrence origins and reuse flags are captured from the selected renderer. Reference fractions, distance, light bin and flat texel are recorded at writes. Candidate frame bytes may include later overlays.",
+  "CandidatePlaneCallTraceInterpretation": "At ceiling height 68, the receipt includes every candidate floor/ceiling plane call across the full 320-column frame in original call order, including vertical spans outside the target mismatch rows. Each record gives x, y1, y2, plane id, sector index, surface, and segment index. Calls outside a target row can still reset per-surface previous-call state.",
+  "ReferencePlaneCallTraceInterpretation": "At ceiling height 68, the receipt includes every adapted-reference floor/ceiling call across the full 320-column frame in original call order, including vertical spans outside the target mismatch rows. Each record gives x, y1, y2, sector index, surface, and segment index. Calls expose visibility and recurrence boundaries; they do not establish original-executable parity.",
+  "ReferencePlaneRangeTraceInterpretation": "At ceiling height 68, records the inclusive x ranges after the adapted reference clipper splits solid and pass walls. Each record identifies the segment and front/back sectors. These are exact ranges entering the adapted range-render methods, not captured original-executable R_CheckPlane calls.",
+  "PlaneMathInterpretation": "Plane table and per-column fixed sine parity are compared after the final full-width candidate/reference render; this does not compare per-pixel plane fraction recurrence or light selection."
+}

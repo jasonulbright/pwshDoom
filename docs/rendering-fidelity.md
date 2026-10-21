@@ -1762,3 +1762,17 @@ all timing samples, the saved height sweep and the reversible patch:
 This is offline renderer evidence only; the reference is locally adapted and
 does not establish original-executable parity. No live test or device
 interaction was used.
+
+### Material-only horizontal plane spans rejected — October 20, 2026
+
+A disposable rasterizer grouped adjacent visible row pixels by plane height,
+flat and light, and mapped each run from its left edge. It keeps the saved
+E1M1 tic-315 height-6 frame exact, but increases height-68 scene differences
+from 21 to 527 (524 plane, three mapped-column). Grouping by material alone
+merges regions whose visible column ranges overlap. Original Doom's
+`R_CheckPlane` splits overlapping ranges before `R_MakeSpans` maps them; the
+counterfactual omits that visibility step and is rejected. Production remains
+unchanged. See the [saved-replay receipt](../results/moving-sector-horizontal-plane-span-20261020.json)
+and [variant generator](../scripts/Prepare-FastRendererHorizontalPlaneSpanCounterfactual.ps1).
+The comparison is against the locally adapted PowerShell renderer, not the
+original executable. No live test or device interaction was used.

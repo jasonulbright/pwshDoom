@@ -129,6 +129,10 @@ fixed-frame hashes are recorded in [rendering fidelity](rendering-fidelity.md).
 A fixed 16.16 wall-V increment experiment also retained its E1M2 frame hash but
 lost nine of ten ABBA pairs by a median 11.696 ms; the source was reverted. See
 its [rendering-fidelity record](rendering-fidelity.md#fixed-fraction-wall-v-stepping-rejected--october-20-2026).
+The first horizontal plane-span candidate then grouped adjacent visible rows
+by material only; it worsened the saved E1M1 height-68 comparison from 21 to
+527 scene differences. Preserve Doom's overlap-based visplane splitting before
+trying span sampling again. See the [rejected result](../results/moving-sector-horizontal-plane-span-20261020.json).
 
 ## Historical Episode 1 handoff — R17 (2026-09-29)
 

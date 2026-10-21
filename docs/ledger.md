@@ -7620,3 +7620,15 @@ The full tree including ignored files measured 27,925,721,305 bytes, leaving
 2,074,278,695 bytes below the 30,000,000,000-byte cap. This evidence commit
 advances the branch to seven commits after Preview.10; the next release is due
 at 35.
+
+### 2026-10-20 — Reject material-only horizontal plane spans
+
+A saved E1M1 tic-315 counterfactual grouped every adjacent visible pixel run by
+plane height, flat and light, then sampled each run horizontally from its left
+edge. Height 6 remains exact, but at height 68 scene differences rise from 21
+to 527: 524 are plane pixels and three are mapped columns. The simple row-run
+grouping merges regions without Doom's overlap-based `R_CheckPlane` split, so
+it is rejected. Production rendering remains unchanged. The [receipt](../results/moving-sector-horizontal-plane-span-20261020.json)
+pins the candidate and saved replay; the [generator](../scripts/Prepare-FastRendererHorizontalPlaneSpanCounterfactual.ps1)
+recreates the disposable renderer. No live test, UI, input, audio or device
+interaction was used.
