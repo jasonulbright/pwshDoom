@@ -1,5 +1,15 @@
 # Investigation ledger
 
+## 2026-10-20 — Recheck ordered menu input events offline
+
+The current `ConsoleInput.ps1` passes all 15 synthetic menu-input assertions,
+including queued key order, repeated taps of one key, pause debouncing, and
+held-key suppression through menu/session resets. Source SHA-256 is
+`FB9572EACE7561FB0BADA7197EEC210FED75174986ECB383465C5245C3AAC366`.
+The [receipt](../results/menu-input-current-20261020.json) records each check.
+The harness mocks the console reader and sends only in-memory input records;
+it does not test the desktop keyboard or advance the human playthrough.
+
 ## 2026-10-20 — Add a local repository footprint guard
 
 Added [`Test-RepositoryFootprint.ps1`](../scripts/Test-RepositoryFootprint.ps1)

@@ -43,6 +43,12 @@ frame hash, but this is not launch, route, worker-parity, or pacing evidence.
 The broader release acceptance gates below remain intact. The complete human
 route is still the active milestone.
 
+Current offline menu-input sequencing coverage passes all 15 synthetic
+assertions, including ordered quick presses, repeated same-key taps, and held
+keys across menu/session resets. This does not verify physical keyboard play;
+see the [source-pinned receipt](../results/menu-input-current-20261020.json)
+and [menu evidence](menus.md).
+
 The opt-in human input recorder now writes a checksummed append-only sidecar
 every 350 consumed tics and at map/session-state transitions. If the process
 stops abruptly, `Recover-DoomInputReplayJournal.ps1` rebuilds a version-4 replay
