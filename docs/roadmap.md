@@ -1276,3 +1276,17 @@ simulation only; it does not advance the required human E1 playthrough or
 establish exits, navigation, moving-specials, live input, audio, worker
 rendering, or campaign completion. See the [source-pinned receipt](../results/campaign-smoke-20261020.json).
 No live tests or device interaction were used, and no video was recorded.
+
+### Doom-style visplane span candidates rejected — October 20, 2026
+
+Two global material-plane candidates produce the same frozen height-68 frame
+with 384 scene differences (381 plane, three mapped-column), versus the
+production baseline of 21. Adding projected-range reconstruction changes
+neither the frame nor the count. A subsector-aware overlap-splitting variant
+keeps height 6 exact but increases height-68 differences to 395 (392 plane,
+three mapped-column). All three are rejected; production stays unchanged.
+They adapt original Doom's plane-key, overlap and span concepts to calls and
+clipping from the current renderer, so they do not establish original-executable
+parity. See the [ledger entry](ledger.md#2026-10-20--reject-adapted-doom-style-visplane-span-candidates)
+and its three saved-replay receipts. No live test or device interaction was
+used.

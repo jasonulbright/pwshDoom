@@ -82,8 +82,13 @@ $intervalTrace=@'
 '@.TrimEnd()
 $source=$source.Replace($intervalMarker,$intervalMarker+$newline+$intervalTrace)
 
-$wallSampleMarker='$v=($v%$th+$th)%$th;[int]$color=$td[$tu*$th+$v]'
-if(([regex]::Matches($source,[regex]::Escape($wallSampleMarker))).Count -ne 1){throw 'Expected one opaque wall texture-sample marker.'}
+$wallSampleMarkers=@(
+    '$v=$v%$th;if($v -lt 0){$v+=$th};[int]$color=$td[$wallTextureColumnOffset+$v]',
+    '$v=($v%$th+$th)%$th;[int]$color=$td[$tu*$th+$v]'
+)
+$wallSampleMatches=@($wallSampleMarkers|Where-Object {([regex]::Matches($source,[regex]::Escape($_))).Count -eq 1})
+if($wallSampleMatches.Count -ne 1){throw 'Expected exactly one supported opaque wall texture-sample marker.'}
+$wallSampleMarker=$wallSampleMatches[0]
 $wallSampleTrace='if($color -ge 0 -and $Context.ContainsKey(''DiagnosticWallSampleTextureIds'')){[int]$diagnosticWallSamplePosition=$y*320+$x;$Context.DiagnosticWallSampleTextureIds[$diagnosticWallSamplePosition]=$tex;$Context.DiagnosticWallSampleBands[$diagnosticWallSamplePosition]=$band;$Context.DiagnosticWallSampleColumns[$diagnosticWallSamplePosition]=$tu;$Context.DiagnosticWallSampleRows[$diagnosticWallSamplePosition]=$v;$Context.DiagnosticWallSampleFractions[$diagnosticWallSamplePosition]=$vf;$Context.DiagnosticWallSampleOrigins[$diagnosticWallSamplePosition]=$vOrigin;$Context.DiagnosticWallSampleTexelSteps[$diagnosticWallSamplePosition]=$wallTexelStep;$Context.DiagnosticWallSampleTextureHeights[$diagnosticWallSamplePosition]=$th;$Context.DiagnosticWallSampleSourceColors[$diagnosticWallSamplePosition]=$color;$Context.DiagnosticWallSampleMappedColors[$diagnosticWallSamplePosition]=$wallColors[$color];$Context.DiagnosticWallSampleLightIndexes[$diagnosticWallSamplePosition]=$wallLight}'
 $source=$source.Replace($wallSampleMarker,$wallSampleMarker+$newline+'                        '+$wallSampleTrace)
 

@@ -210,7 +210,8 @@ $sourcePaths = @(
     'scripts/Prepare-FastRendererUntexturedLowerPlaneCounterfactual.ps1',
     'scripts/Prepare-FastRendererPerRowPlaneKeyCounterfactual.ps1',
     'scripts/Prepare-FastRendererDirectPlaneColumnCounterfactual.ps1',
-    'scripts/Prepare-FastRendererHorizontalPlaneSpanCounterfactual.ps1'
+    'scripts/Prepare-FastRendererHorizontalPlaneSpanCounterfactual.ps1',
+    'scripts/Prepare-FastRendererVisplaneSpanCounterfactual.ps1'
 )
 $sourcePaths = @($sourcePaths | Select-Object -Unique)
 $sourceHashes = @{}
@@ -306,6 +307,7 @@ try {
         $reference3D.DiagnosticFloorSampleOriginX = [int[]]::new(200)
     }
         $context = New-FastRenderContext $content $game.World
+    if ($CaptureWallBoundaryTrace) { $context.CounterfactualSubsectorTrace = [Collections.Generic.List[int]]::new() }
     if ($CaptureWallBoundaryTrace) {
         $context.DiagnosticPlaneCallSegIndices = [int[]]::new(2048)
         $context.DiagnosticWallSpanTrace = [int[]]::new($game.World.Map.Segs.Length * 320 * 12)
@@ -380,6 +382,7 @@ try {
         [Array]::Clear($context.PlaneSampleReusedPreviousColumn)
         [Array]::Fill($context.PlaneCeilingSampleOriginX, -1)
         [Array]::Fill($context.PlaneFloorSampleOriginX, -1)
+        if ($CaptureWallBoundaryTrace) { $context.CounterfactualSubsectorTrace.Clear() }
         Invoke-FastRender $context
         $candidatePlaneCallTrace = [Collections.Generic.List[object]]::new()
         if ($CaptureWallBoundaryTrace -and [int]$height -eq 68 -and $context.ContainsKey('PlaneSampleCallCount')) {
@@ -1519,6 +1522,8 @@ try {
             CeilingHeight = $height
             CandidateFrameSha256 = [Convert]::ToHexString([Security.Cryptography.SHA256]::HashData($candidate))
             ReferenceFrameSha256 = [Convert]::ToHexString([Security.Cryptography.SHA256]::HashData($referencePixels))
+            CandidateVisplaneInstanceCount = if ($context.ContainsKey('CounterfactualVisplaneInstanceCount')) { $context.CounterfactualVisplaneInstanceCount } else { $null }
+            CandidatePlaneSegmentRangeCount = if ($context.ContainsKey('CounterfactualPlaneSegmentRangeCount')) { $context.CounterfactualPlaneSegmentRangeCount } else { $null }
             SceneDifferentIndices = $sceneDifferences
             HudDifferentIndices = $hudDifferences
             SceneMismatchBounds = if ($sceneDifferences) { $bounds } else { @() }

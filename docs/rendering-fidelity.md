@@ -1776,3 +1776,15 @@ unchanged. See the [saved-replay receipt](../results/moving-sector-horizontal-pl
 and [variant generator](../scripts/Prepare-FastRendererHorizontalPlaneSpanCounterfactual.ps1).
 The comparison is against the locally adapted PowerShell renderer, not the
 original executable. No live test or device interaction was used.
+
+### Doom-style visplane span candidates rejected — October 20, 2026
+
+Adapting `R_FindPlane`, `R_CheckPlane` and `R_MakeSpans` to the candidate's
+recorded plane calls did not recover the height-68 frame. Two candidates retain
+384 scene differences (381 plane, three mapped-column), compared with 21 in
+production; a subsector-aware overlap-splitting version increases that to 395
+(392 plane, three mapped-column). Height 6 remains exact. The calls and spans
+come from the adapted PowerShell renderer, so this does not validate the
+original executable's visplane ownership or pixels. All candidates are
+rejected and production remains unchanged. The [ledger entry](ledger.md#2026-10-20--reject-adapted-doom-style-visplane-span-candidates)
+links the receipts and generator. No live test or device interaction was used.

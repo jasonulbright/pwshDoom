@@ -1,5 +1,32 @@
 # Investigation ledger
 
+## 2026-10-20 — Reject adapted Doom-style visplane span candidates
+
+Three disposable span-renderer candidates replayed the frozen E1M1 tic-315
+state against the adapted PowerShell reference. The first two build global
+height/flat/light planes and 51 captured segment ranges; one adds projected
+wall-range reconstruction. Both leave height 6 exact and produce the same
+height-68 frame: 384 scene differences (381 plane and three mapped-column),
+well above the production baseline of 21 (18 plane and three mapped-column).
+The subsector-aware variant initializes floor/ceiling planes in traced BSP
+order and applies overlap splitting, but yields 395 differences (392 plane,
+three mapped-column) with 38 visplane instances. It is also rejected.
+
+These candidates adapt Doom's `R_FindPlane`, `R_CheckPlane` and span traversal
+to calls and clipped ranges from the existing renderer; they do not reproduce
+the original executable's geometry or establish its pixels. Height 6 stays
+exact, but the span candidates do not resolve the height-68 recurrence gap.
+Production `FastRenderer.ps1` remains unchanged. The three full receipts are
+[initial](../results/moving-sector-visplane-span-20261020.json),
+[range-derived](../results/moving-sector-visplane-range-span-20261020.json),
+and [subsector-aware](../results/moving-sector-visplane-subsector-span-20261020.json);
+the [candidate generator](../scripts/Prepare-FastRendererVisplaneSpanCounterfactual.ps1)
+pins the disposable implementation. This is saved-replay offline analysis
+only; no live tests or device interaction were used. After removing the
+generated renderer copy, the full local tree, including ignored files and
+`.git`, measured 27,934,197,882 bytes, 2,065,802,118 bytes below the
+30,000,000,000-byte ceiling.
+
 ## 2026-10-20 — Record Episode 1 launcher prerequisite preflight
 
 Ran `Play.ps1 -Check` against the installed Ultimate Doom IWAD and the prepared
