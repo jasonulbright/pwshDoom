@@ -1,5 +1,15 @@
 # Investigation ledger
 
+## 2026-10-20 — Bring the research article up to date on plane spans
+
+The article's renderer discussion now connects the 18 remaining height-68
+plane pixels to the corrected first-match visplane analysis. It reports the
+8/18 adapted-reference origin match, the rejected 384/395-pixel span candidates,
+and the unchanged 21-pixel production baseline, while stating that adapted
+calls and clips do not establish original-executable output. The article links
+to the analysis, range trace and candidate receipt. No implementation claims
+or live-test claims were added.
+
 ## 2026-10-20 — Recheck ordered menu input events offline
 
 The current `ConsoleInput.ps1` passes all 15 synthetic menu-input assertions,
