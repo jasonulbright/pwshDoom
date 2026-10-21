@@ -94,17 +94,18 @@ The music work proves useful but bounded facts. A loop can be checked through re
 
 ## Existing alternatives
 
-“Doom in a terminal” is no longer novel by itself, and the relevant projects take different paths. The [updated survey](existing-implementations.md) was checked against current repository sources on September 28, 2026.
+“Doom in a terminal” is no longer novel by itself, and the relevant projects take different paths. The [updated survey](existing-implementations.md) was checked against current repository sources on October 20, 2026.
 
 | Project | What it optimizes for | Relationship to this project |
 | --- | --- | --- |
-| [ManagedDoomPowershell](https://github.com/oleyska/ManagedDoomPowershell) | PowerShell gameplay with a Silk.NET/OpenGL window | Important engine lineage, but not a terminal renderer. Its maintainer reports poor Windows performance and documents known transition/frame-cap limitations. |
-| [doom-powershell](https://github.com/nick0451/doom-powershell) | A compact, single-file PowerShell WAD renderer and game | A closer language/display comparison. Its README still lists moving floors, walk-over triggers and sound as unfinished. We have not benchmarked its current source. |
+| [ManagedDoomPowershell](https://github.com/oleyska/ManagedDoomPowershell) | PowerShell gameplay with a Silk.NET/OpenGL window | Important engine lineage, but not a terminal renderer. Its maintainer reports poor performance, a wipe-effect bug, and no frame cap. |
+| [doom-powershell](https://github.com/nick0451/doom-powershell) | A single-file pure-PowerShell WAD renderer with author-described monsters, weapons, doors, exits and HUD | A substantial language/display comparison. Its README still lists lifts, moving floors, walk-over triggers and sound as unfinished; its support and performance are not independently reproduced here. |
+| [platformatic/destino](https://github.com/platformatic/destino) | Native `doomgeneric` with a Node.js/OpenTUI frontend and SDL2_mixer audio | A terminal demo built around a compiled engine; its README requires Kitty keyboard support, outside the PowerShell algorithm and Windows Terminal constraints. |
 | [terminal-doom-pwsh](https://github.com/spidychoipro/terminal-doom-pwsh) | Original Doom engine in Windows Terminal | PowerShell builds and launches it, but the gameplay and half-block renderer are compiled C. It is outside the all-algorithms-in-PowerShell constraint. |
 | [cryptocode/terminal-doom](https://github.com/cryptocode/terminal-doom) | Original graphics and sound in modern terminals | C `doomgeneric` plus a Zig/`libvaxis` frontend and Kitty graphics. Its README reports macOS/Linux testing and says Windows compiles without a compatible local terminal. It is not benchmarked here. |
-| [dcouple/terminal-doom](https://github.com/dcouple/terminal-doom) | Shareware Doom in Kitty-protocol terminals | Chocolate Doom in WebAssembly through a local browser; the README targets macOS/Linux, has sound effects but no music, and keeps saves in the session. |
+| [greenfield-inc/terminal-doom](https://github.com/greenfield-inc/terminal-doom) | Shareware Doom in Kitty-protocol terminals | Chocolate Doom in WebAssembly through a local browser; sound effects work, music is off, and saves last only for the session. The former `dcouple` repository redirects here. |
 
-For the narrow requirement “real Doom-derived gameplay in Windows Terminal, with gameplay/rendering/audio algorithms kept in PowerShell,” pwshDoom is the closest complete implementation found in this survey. That makes it the best fit to this experiment's constraint, not the best Doom port overall. The native ports choose compiled engines and protocols that can carry original pixels more directly; they are the sensible choice when broad compatibility, speed or pixel fidelity matters more than keeping algorithms in PowerShell. No equal-workload comparison has established a universal winner.
+Among the surveyed projects, pwshDoom combines a Doom-derived engine, PowerShell gameplay/rendering/audio algorithms, and Windows Terminal output. The single-file PowerShell alternative documents a substantial playable subset but still lists moving-sector mechanics, walk-over triggers and sound as unfinished. This comparison identifies pwshDoom's language-and-host niche; its full campaign and release gates remain open, and no equal-workload trial establishes a performance or compatibility winner. The compiled-engine ports use protocols that can carry original pixels more directly, which may suit users who prioritize broad compatibility or fidelity over keeping algorithms in PowerShell.
 
 ## What a preview does and does not claim
 

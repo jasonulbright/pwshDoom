@@ -7559,3 +7559,14 @@ playthrough. The SVG parses as accessible XML and was rasterized for visual
 inspection. Its claims point to the current [smoke receipt](../results/campaign-smoke-20261020.json)
 and [playtest handoff](episode1-playtest.md); it does not imply route
 completion or any live test.
+
+### 2026-10-20 — Refresh the existing-implementations survey
+
+Rechecked current upstream project pages and README claims for the alternatives
+survey. Updated the nick0451/doom-powershell entry to reflect its author-described
+combat, HUD and weapon scope as well as its listed gaps; added platformatic/destino;
+corrected the former dcouple/terminal-doom entry to its current greenfield-inc
+repository; and refreshed the relevant architecture and limitation notes. The
+article now mirrors these distinctions and avoids presenting the project as
+campaign-complete or as a performance winner. These are source-document checks,
+not independent feature trials. No game, UI, audio device, or live test was run.
