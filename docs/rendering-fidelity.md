@@ -1743,3 +1743,22 @@ timing change. See the [before](../results/renderer-negative-remainder-before-20
 The comparison only establishes identity against the prior renderer for one
 fixed view; it does not qualify original-executable parity or live pacing. No
 game UI, input, audio device, or live test was used.
+
+### Fixed-fraction wall-V stepping rejected — October 20, 2026
+
+The wall pixel loop was changed experimentally to initialize a band's 16.16
+vertical fraction once and add a fixed step for each row. This preserves the
+fixed E1M2 full-frame hash, but does not change the saved E1M1 comparison:
+height 6 remains exact and height 68 retains 21 scene differences (18 plane
+and three mapped-column pixels). A two-round ABBA run over five E1M2 headings
+measured a +11.696 ms median paired delta; the candidate lost 9 of 10 pairs,
+with 79.308 ms candidate versus 56.595 ms baseline median. The rewrite was
+reverted, leaving production unchanged. The receipts preserve frame identity,
+all timing samples, the saved height sweep and the reversible patch:
+[fixed frame](../results/renderer-wall-v-fixed-fraction-after-20261020.json),
+[ABBA](../results/renderer-wall-v-fixed-fraction-abba-20261020.json),
+[height sweep](../results/moving-sector-wall-v-fixed-fraction-rejected-20261020.json),
+[patch](../results/renderer-wall-v-fixed-fraction-rejected-20261020.patch).
+This is offline renderer evidence only; the reference is locally adapted and
+does not establish original-executable parity. No live test or device
+interaction was used.

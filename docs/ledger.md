@@ -7600,3 +7600,23 @@ earlier unpaired result. Raw fixed-frame and paired reports are in the
 These are offline renderer runs only; no game UI, input, audio, device, or live
 test was used. This advances the branch to six commits after Preview.10; the
 next release is due at 35 commits.
+
+### 2026-10-20 — Reject fixed-fraction wall-V stepping
+
+A wall-V recurrence experiment starts each wall band from its quantized 16.16
+fraction and increments by the fixed step per pixel. Its fixed E1M2 image is
+byte-identical to the baseline, and the saved E1M1 height-68 comparison remains
+at 21 scene differences (18 plane, 3 mapped-column); height 6 remains exact.
+The two-round ABBA comparison across five headings has a median paired delta
+of +11.696 ms, with the candidate slower in 9 of 10 heading-round pairs. Its
+median render time is 79.308 ms against 56.595 ms for baseline. The candidate
+was reverted, and `src/FastRenderer.ps1` returned to its exact pre-trial hash;
+no production behavior changed. See the [fixed-frame receipt](../results/renderer-wall-v-fixed-fraction-after-20261020.json),
+[ABBA receipt](../results/renderer-wall-v-fixed-fraction-abba-20261020.json),
+[saved-replay receipt](../results/moving-sector-wall-v-fixed-fraction-rejected-20261020.json),
+and [rejected patch](../results/renderer-wall-v-fixed-fraction-rejected-20261020.patch).
+This was offline rendering only, with no UI, input, audio, device, or live test.
+The full tree including ignored files measured 27,925,721,305 bytes, leaving
+2,074,278,695 bytes below the 30,000,000,000-byte cap. This evidence commit
+advances the branch to seven commits after Preview.10; the next release is due
+at 35.

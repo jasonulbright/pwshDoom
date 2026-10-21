@@ -126,6 +126,9 @@ remainder and a negative-coordinate correction. Its fixed E1M2 frame hash is
 unchanged; a short paired run likewise found no measurable timing difference.
 These are serial offline renderer comparisons only. The paired receipts and
 fixed-frame hashes are recorded in [rendering fidelity](rendering-fidelity.md).
+A fixed 16.16 wall-V increment experiment also retained its E1M2 frame hash but
+lost nine of ten ABBA pairs by a median 11.696 ms; the source was reverted. See
+its [rendering-fidelity record](rendering-fidelity.md#fixed-fraction-wall-v-stepping-rejected--october-20-2026).
 
 ## Historical Episode 1 handoff — R17 (2026-09-29)
 

@@ -1,0 +1,68 @@
+diff --git a/src/FastRenderer.ps1 b/src/FastRenderer.ps1
+index ec685d2..811cde9 100644
+--- a/src/FastRenderer.ps1
++++ b/src/FastRenderer.ps1
+@@ -765,7 +765,7 @@ function Invoke-FastRender {
+             [bool]$wallScaleReady=$false;[int]$wallScaleStart=0;[int]$wallScaleStep=0
+             [bool]$wallBoundaryReady=$false;[int]$wallY1StartData=0;[int]$wallY1StepData=0;[int]$wallY2StartData=0;[int]$wallY2StepData=0
+             [double[]]$wallBandOrigins=$wallBandOriginsScratch;[int]$wallOriginBits=0
+-            [bool]$constantWallScale=$iz1 -eq $iz2;[double]$segmentTexelStep=0
++            [bool]$constantWallScale=$iz1 -eq $iz2;[double]$segmentTexelStep=0;[int]$segmentTexelStepData=0
+             # Select eligible textured bands once per segment instead of
+             # repeating all three eligibility branches for every column.
+             [int[]]$activeWallBands=$activeWallBandsScratch;[int]$activeWallBandCount=0
+@@ -873,7 +873,7 @@ function Invoke-FastRender {
+                 [int]$wallLight=$wallLightTable[$wallLightIndex]
+                 if($player.FixedColorMap -gt 0){$wallLight=$player.FixedColorMap}
+                 [byte[]]$wallColors=$Context.Colors[$wallLight]
+-                [bool]$wallStepReady=$false;[double]$wallTexelStep=0
++                [bool]$wallStepReady=$false;[double]$wallTexelStep=0;[int]$wallTexelStepData=0
+                 [bool]$columnUReady=$false;[int]$wallTextureColumn=0
+                 for([int]$bandIndex=0;$bandIndex -lt $activeWallBandCount;$bandIndex++) {
+                     [int]$band=$activeWallBands[$bandIndex]
+@@ -920,11 +920,12 @@ function Invoke-FastRender {
+                     # Only prepare sampling for a visible textured band. Empty
+                     # portals and clipped walls need neither anchors nor scale.
+                     if(-not $wallStepReady){
+-                        if($constantWallScale -and $segmentTexelStep -gt 0){$wallTexelStep=$segmentTexelStep}
++                        if($constantWallScale -and $segmentTexelStep -gt 0){$wallTexelStep=$segmentTexelStep;$wallTexelStepData=$segmentTexelStepData}
+                         else{
+                             [int]$wallScaleData=[Math]::Clamp([int][Math]::Truncate(10485760.0/$distance),256,4194304)
+-                            $wallTexelStep=[Math]::Truncate(4294967295.0/$wallScaleData)/65536.0
+-                            if($constantWallScale){$segmentTexelStep=$wallTexelStep}
++                            $wallTexelStepData=[int][Math]::Truncate(4294967295.0/$wallScaleData)
++                            $wallTexelStep=$wallTexelStepData/65536.0
++                            if($constantWallScale){$segmentTexelStep=$wallTexelStep;$segmentTexelStepData=$wallTexelStepData}
+                         }
+                         $wallStepReady=$true
+                     }
+@@ -934,6 +935,8 @@ function Invoke-FastRender {
+                         $wallOriginBits=$wallOriginBits -bor $originBit
+                     }
+                     [double]$vOrigin=$wallBandOrigins[$band]
++                    [long]$vOriginFractionData=[long][Math]::Truncate($vOrigin*65536.0)
++                    [long]$vFractionData=$vOriginFractionData+([long]($y0-84)*[long]$wallTexelStepData)
+                     if(-not $solid -and $band -eq 2){
+                         # Portal openings remain visible to later geometry. Defer
+                         # their transparent textures so that geometry cannot erase them.
+@@ -950,10 +953,8 @@ function Invoke-FastRender {
+                         continue
+                     }
+                     for([int]$y=$y0;$y -le $y1;$y++) {
+-                        # Binary fractions of 1/65536 are exact here: this evaluates
+-                        # the integer column fraction without accumulating roundoff.
+-                        [double]$vf=$vOrigin+($y-84)*$wallTexelStep;[int]$v=$vf;if($v -gt $vf){$v--}
+-                        $v=$v%$th;if($v -lt 0){$v+=$th};[int]$color=$td[$wallTextureColumnOffset+$v]
++                        [long]$v=$vFractionData -shr 16
++                        $v=$v%$th;if($v -lt 0){$v+=$th};[int]$color=$td[$wallTextureColumnOffset+[int]$v]
+                         if($color -ge 0){
+                             $p=$y*320+$x;$pixels[$p]=$wallColors[$color];$depthBuffer[$p]=$distance
+                             if($band -eq 1 -and $bf -gt $fh){
+@@ -964,6 +965,7 @@ function Invoke-FastRender {
+                                 $Context.ActorDepthBypassLowerHeightData[$p]=0
+                             }
+                         }
++                        $vFractionData+=$wallTexelStepData
+                     }
+                 }
+                 [int]$nextTop=168;[int]$nextBottom=-1
