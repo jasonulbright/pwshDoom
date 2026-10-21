@@ -52,10 +52,13 @@ and [menu evidence](menus.md).
 The opt-in human input recorder now writes a checksummed append-only sidecar
 every 350 consumed tics and at map/session-state transitions. If the process
 stops abruptly, `Recover-DoomInputReplayJournal.ps1` rebuilds a version-4 replay
-from complete batches and discards a torn final line. Its 28 synthetic/offline
+from complete batches and discards a torn final line. The packaged launcher now
+detects a stale companion journal before opening Windows Terminal and prints a
+safely quoted recovery command to a fresh output path. Its 33 synthetic/offline
 contract and static wiring checks pass; host/session and abrupt-stop behavior
 remain unverified. This does not replace the human route or prove completion. See the
-[replay recovery contract](../results/input-replay-journal-contract.json).
+[current recovery preflight receipt](../results/input-replay-journal-preflight-20261020.json)
+and [earlier recovery contract](../results/input-replay-journal-contract.json).
 
 Latest local rendering change, 2026-10-04: gamma correction now uses the
 adopted renderer's palette curve in the three presentation styles. Settings

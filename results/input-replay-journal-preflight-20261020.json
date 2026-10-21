@@ -1,0 +1,148 @@
+{
+  "CreatedUtc": "2026-10-21T03:04:01.8646376Z",
+  "Checks": [
+    {
+      "Name": "Fresh input recording has no recovery advice",
+      "Passed": true
+    },
+    {
+      "Name": "Journal header is durably created without a game or IWAD",
+      "Passed": true
+    },
+    {
+      "Name": "First append-only command batch is accepted",
+      "Passed": true
+    },
+    {
+      "Name": "Orphaned journal advice prints a correctly quoted command and fresh output path",
+      "Passed": true
+    },
+    {
+      "Name": "Recovery advice changes no journal or existing replay bytes",
+      "Passed": true
+    },
+    {
+      "Name": "Torn final line is discarded while complete batches survive",
+      "Passed": true
+    },
+    {
+      "Name": "Recovery preserves every consumed command in order",
+      "Passed": true
+    },
+    {
+      "Name": "Recovery preserves sparse automap input and ordered menu controls",
+      "Passed": true
+    },
+    {
+      "Name": "Checkpoint replacement at the same tic keeps the newest state",
+      "Passed": true
+    },
+    {
+      "Name": "Recovered output validates as the existing version-4 replay format",
+      "Passed": true
+    },
+    {
+      "Name": "Recovered replay retains controls, checkpoints and campaign continuation",
+      "Passed": true
+    },
+    {
+      "Name": "Recovery marks the artifact as a partial journal prefix",
+      "Passed": true
+    },
+    {
+      "Name": "Recovery CLI emits journal and replay hashes with the recovered tic count",
+      "Passed": true
+    },
+    {
+      "Name": "Recovery rejects out-of-batch ControlEvents tic 2",
+      "Passed": true
+    },
+    {
+      "Name": "Recovery rejects out-of-batch Checkpoints tic 2",
+      "Passed": true
+    },
+    {
+      "Name": "Recovery rejects out-of-batch Transitions tic 2",
+      "Passed": true
+    },
+    {
+      "Name": "Recovery rejects out-of-batch Transitions tic 6",
+      "Passed": true
+    },
+    {
+      "Name": "Writer rejects stale-control before appending bytes",
+      "Passed": true
+    },
+    {
+      "Name": "Writer rejects late-transition before appending bytes",
+      "Passed": true
+    },
+    {
+      "Name": "Writer rejects unordered-transitions before appending bytes",
+      "Passed": true
+    },
+    {
+      "Name": "Writer rejects bad-command-shape before appending bytes",
+      "Passed": true
+    },
+    {
+      "Name": "Writer rejects bad-command-range before appending bytes",
+      "Passed": true
+    },
+    {
+      "Name": "Writer rejects bad-checkpoint-hash before appending bytes",
+      "Passed": true
+    },
+    {
+      "Name": "Recovery never overwrites an existing replay",
+      "Passed": true
+    },
+    {
+      "Name": "Complete journal record tampering is rejected by its checksum",
+      "Passed": true
+    },
+    {
+      "Name": "Worker accepts the journal path and source identity",
+      "Passed": true
+    },
+    {
+      "Name": "Worker writes the initial state before accepting commands",
+      "Passed": true
+    },
+    {
+      "Name": "Worker flushes periodic and transition checkpoints",
+      "Passed": true
+    },
+    {
+      "Name": "Worker flushes remaining commands during shutdown",
+      "Passed": true
+    },
+    {
+      "Name": "Host passes a fresh companion journal path to the worker",
+      "Passed": true
+    },
+    {
+      "Name": "Packaged launcher displays recovery advice before opening Windows Terminal",
+      "Passed": true
+    },
+    {
+      "Name": "Direct host launch uses the same recovery preflight",
+      "Passed": true
+    },
+    {
+      "Name": "Host removes the journal only after a replay is written",
+      "Passed": true
+    }
+  ],
+  "Passed": 33,
+  "Failed": 0,
+  "JournalSha256": "BF5F2A357240E0BF4F7FE37BC185CE59FB61DBD348FF2BBB2C5CDBC1563AABC7",
+  "HelperSha256": "814972F2D1B05D680436E4DB638A668DDDBC029241CC7CC8A3C0D5F57E653C35",
+  "HarnessSha256": "1DDF6B03ED878E2937828C2031439D0CEE66FA868DEC6BE83600751CD8F713A2",
+  "WorkerSha256": "A3B7DC3D661D6965FA8D743448EF9E4413F9549F33AAA98A8E3BDDD54226A273",
+  "HostSha256": "64793A8F41FBA39BBC36B78AD7A347B17F460BC6702AE0EDA7579DE895E3F42C",
+  "LauncherSha256": "B52DC6DB94ADEB9D10CD676CF5B4061CED17011BAC7FCADD6AA461F94F923C91",
+  "ProcessSha256": "53447158702DAEDC4A8B4B026133494471BD4A8F1854E87AAA36B5D505A6B83B",
+  "RecoverySha256": "BAE58E71ED168424392E5A22CB0983FF88A8E88CEFB8C25746CB3715A30A48EA",
+  "Meaning": "Offline contract, recovery-advice, no-overwrite, and static-wiring checks for append-only input-replay journaling. Uses synthetic command data and temporary files only; launches no game, user process, display, or audio device."
+}

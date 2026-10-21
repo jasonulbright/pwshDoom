@@ -1,5 +1,19 @@
 # Investigation ledger
 
+## 2026-10-20 — Make interrupted-input recovery actionable
+
+When a prior human-session `.journal` exists, the launcher now refuses a new
+recording before opening Windows Terminal and prints a safely quoted
+`Recover-DoomInputReplayJournal.ps1` command. It chooses the first unused
+recovered-output filename and preserves both the journal and any existing
+replay. The direct host entry point uses the same preflight. The offline suite
+passes 33 checks, including a path containing an apostrophe, occupied-output
+collision handling and byte-for-byte preservation of existing files; it opens
+no game, display, user input or audio device. An actual abrupt stop and
+subsequent host recovery remain unverified. See the
+[playtest handoff](episode1-playtest.md) and
+[source-pinned receipt](../results/input-replay-journal-preflight-20261020.json).
+
 ## 2026-10-20 — Reject primitive-coordinate automap discovery trial
 
 A disposable indexed-renderer variant cached primitive map-vertex coordinates

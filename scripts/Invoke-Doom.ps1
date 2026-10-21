@@ -116,9 +116,12 @@ try {
     $saveDirectory=Get-DoomSaveDirectory $SaveRoot $wadHash
     if($RecordInput){
         $RecordInput=[IO.Path]::GetFullPath($RecordInput)
-        if((Test-Path -LiteralPath $RecordInput) -or $RecordInput -eq [IO.Path]::GetFullPath($Report)){throw 'Input recording needs a new filename distinct from the game report.'}
+        $reportPath=[IO.Path]::GetFullPath($Report)
+        if($RecordInput -eq $reportPath){throw 'Input recording needs a new filename distinct from the game report.'}
         $recordJournalPath=$RecordInput+'.journal'
-        if((Test-Path -LiteralPath $recordJournalPath) -or $recordJournalPath -eq [IO.Path]::GetFullPath($Report)){throw 'Input recovery journal already exists or conflicts with the game report; recover or move it before starting a new recording.'}
+        if($recordJournalPath -eq $reportPath){throw 'Input recovery journal conflicts with the game report.'}
+        $recoveryAdvice=Get-DoomInputReplayJournalRecoveryAdvice $RecordInput "$PSScriptRoot/Recover-DoomInputReplayJournal.ps1"
+        if($recoveryAdvice){throw $recoveryAdvice}
     }
     if($Replay) {
         $replayData=Read-DoomInputReplay $Replay $wadHash

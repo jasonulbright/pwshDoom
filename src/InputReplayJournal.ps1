@@ -1,5 +1,38 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 # Append-only recovery journal for long, opt-in human input recordings.
+function ConvertTo-DoomPowerShellArgument {
+    param([Parameter(Mandatory)][string]$Value)
+    return "'" + $Value.Replace("'", "''") + "'"
+}
+
+function Get-DoomInputReplayJournalRecoveryAdvice {
+    param([Parameter(Mandatory)][string]$RecordPath,[Parameter(Mandatory)][string]$RecoveryScriptPath)
+    $record=[IO.Path]::GetFullPath($RecordPath)
+    if(Test-Path -LiteralPath $record){throw 'Input recording destination already exists; choose a new filename.'}
+    $journal=$record+'.journal'
+    if(-not (Test-Path -LiteralPath $journal)){return $null}
+    if(-not (Test-Path -LiteralPath $journal -PathType Leaf)){throw "An unfinished input journal path is not a file: $journal"}
+
+    $output=$record+'.recovered.json';$suffix=1
+    while(Test-Path -LiteralPath $output){$output=$record+".recovered-$suffix.json";$suffix++}
+    $script=[IO.Path]::GetFullPath($RecoveryScriptPath)
+    $command='pwsh -NoProfile -File {0} -Journal {1} -Output {2}' -f `
+        (ConvertTo-DoomPowerShellArgument $script),
+        (ConvertTo-DoomPowerShellArgument $journal),
+        (ConvertTo-DoomPowerShellArgument $output)
+    $message=@"
+An unfinished input recording journal was found and is still available at:
+$journal
+
+Recover its complete prefix to a new file with:
+$command
+
+Recovery preserves the journal and does not overwrite an existing replay.
+After recovery, start a new recording with a fresh -RecordInput path.
+"@
+    return $message.Trim()
+}
+
 function ConvertTo-DoomReplayJournalLine {
     param([Parameter(Mandatory)]$Payload)
     $payloadJson=ConvertTo-Json -InputObject $Payload -Depth 10 -Compress

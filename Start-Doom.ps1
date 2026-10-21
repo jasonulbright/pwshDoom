@@ -34,7 +34,15 @@ if($Replay){
     $settings=Set-DoomReplaySettings $inputReplay $PSBoundParameters $Skill $Episode $Map
     $Skill=$settings.Skill;$Episode=$settings.Episode;$Map=$settings.Map
 }
-if($RecordInput -and (Test-Path -LiteralPath $RecordInput)){throw 'Input recording destination already exists; choose a new filename.'}
+if($RecordInput){
+    . "$PSScriptRoot/src/InputReplayJournal.ps1"
+    $RecordInput=[IO.Path]::GetFullPath($RecordInput)
+    $reportPath=[IO.Path]::GetFullPath($Report)
+    $recordJournalPath=$RecordInput+'.journal'
+    if($RecordInput -eq $reportPath -or $recordJournalPath -eq $reportPath){throw 'Input recording or its recovery journal conflicts with the game report.'}
+    $recoveryAdvice=Get-DoomInputReplayJournalRecoveryAdvice $RecordInput "$PSScriptRoot/scripts/Recover-DoomInputReplayJournal.ps1"
+    if($recoveryAdvice){throw $recoveryAdvice}
+}
 $arguments=@('-Wad',$Wad,'-Workers',"$Workers",'-Skill',"$Skill",'-Episode',"$Episode",'-Map',"$Map",'-Seconds',"$Seconds",'-Style',$Style,'-GlyphSet',$GlyphSet,'-Report',[IO.Path]::GetFullPath($Report))
 $arguments+=@('-TerminalOutput',$TerminalOutput)
 $arguments+=@('-AnsiEncoding',$AnsiEncoding)

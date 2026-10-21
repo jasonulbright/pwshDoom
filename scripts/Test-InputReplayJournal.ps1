@@ -8,6 +8,7 @@ $ErrorActionPreference='Stop'
 
 $root=Split-Path $PSScriptRoot;$temp=Join-Path $root ('local/input-replay-journal-'+[guid]::NewGuid().ToString('N'))
 $journal=Join-Path $temp 'session.jsonl';$recovered=Join-Path $temp 'recovered.json'
+$recoveryScript=Join-Path $PSScriptRoot 'Recover-DoomInputReplayJournal.ps1'
 $checks=[Collections.Generic.List[object]]::new()
 function Check([string]$Name,[bool]$Condition){$checks.Add(@{Name=$Name;Passed=$Condition});if(-not $Condition){throw "FAIL: $Name"}}
 function New-TestCommands([int]$Count,[int]$Seed){
@@ -21,6 +22,8 @@ function New-TestTransition([long]$Tic,[int]$Map){return [ordered]@{Tic=$Tic;Sta
 try{
     [void][IO.Directory]::CreateDirectory($temp)
     $wadHash='A'*64;$sourceHash='B'*64
+    $freshPath=Join-Path $temp 'fresh-session.json'
+    Check 'Fresh input recording has no recovery advice' ($null -eq (Get-DoomInputReplayJournalRecoveryAdvice $freshPath $recoveryScript))
     Initialize-DoomInputReplayJournal $journal $wadHash $sourceHash 3 1 1
     Check 'Journal header is durably created without a game or IWAD' (Test-Path -LiteralPath $journal)
     $first=[ordered]@{Kind='Batch';Sequence=1;StartTic=0;EndTic=3;InputCommands=(New-TestCommands 3 0);
@@ -37,13 +40,25 @@ try{
         Transitions=@((New-TestTransition 4 1));Final=$false}
     Add-DoomInputReplayJournalBatch $journal $second
     [IO.File]::AppendAllText($journal,'{"Payload":"torn-final-record"',[Text.UTF8Encoding]::new($false))
+    $adviceRecord=Join-Path $temp "orphan's session.json";$adviceJournal=$adviceRecord+'.journal'
+    Copy-Item -LiteralPath $journal -Destination $adviceJournal
+    $preferredRecovery=$adviceRecord+'.recovered.json'
+    [IO.File]::WriteAllText($preferredRecovery,'keep existing replay')
+    $journalBeforeAdvice=(Get-FileHash -LiteralPath $adviceJournal).Hash
+    $advice=Get-DoomInputReplayJournalRecoveryAdvice $adviceRecord $recoveryScript
+    $suggestedRecovery=$adviceRecord+'.recovered-1.json'
+    $quotedScript="'"+([IO.Path]::GetFullPath($recoveryScript).Replace("'","''"))+"'"
+    $quotedJournal="'"+$adviceJournal.Replace("'","''")+"'"
+    $quotedOutput="'"+$suggestedRecovery.Replace("'","''")+"'"
+    $expectedRecoveryCommand="pwsh -NoProfile -File $quotedScript -Journal $quotedJournal -Output $quotedOutput"
+    Check 'Orphaned journal advice prints a correctly quoted command and fresh output path' ($advice.Contains($expectedRecoveryCommand) -and $advice.Contains('Recovery preserves the journal') -and $advice.Contains('recovered-1.json'))
+    Check 'Recovery advice changes no journal or existing replay bytes' ((Get-FileHash -LiteralPath $adviceJournal).Hash -eq $journalBeforeAdvice -and [IO.File]::ReadAllText($preferredRecovery) -eq 'keep existing replay' -and -not (Test-Path -LiteralPath $suggestedRecovery))
     $readJournal=Read-DoomInputReplayJournal $journal
     Check 'Torn final line is discarded while complete batches survive' ($readJournal.TornTailDiscarded -and $readJournal.Tics -eq 5)
     Check 'Recovery preserves every consumed command in order' (($readJournal.InputCommands.Count -eq 5) -and $readJournal.InputCommands[4][0] -eq 11)
     Check 'Recovery preserves sparse automap input and ordered menu controls' (($readJournal.AutomapCommands.Count -eq 2) -and ($readJournal.ControlEvents.Count -eq 2) -and $readJournal.ControlEvents[1].Action -eq 'LoadGame')
     Check 'Checkpoint replacement at the same tic keeps the newest state' (($readJournal.Checkpoints.Count -eq 3) -and $readJournal.Checkpoints[1].Sha256 -eq ('F'*64))
     $data=ConvertFrom-DoomInputReplayJournal $journal
-    $recoveryScript=Join-Path $PSScriptRoot 'Recover-DoomInputReplayJournal.ps1'
     $recoveryReceipt=(& $recoveryScript -Journal $journal -Output $recovered | ConvertFrom-Json)
     $replay=Read-DoomInputReplay $recovered $wadHash
     Check 'Recovered output validates as the existing version-4 replay format' ($replay.Format -eq 'pwshDoom.InputReplay' -and $replay.Version -eq 4 -and $replay.InputCommands.Count -eq 5)
@@ -95,19 +110,22 @@ try{
     Check 'Complete journal record tampering is rejected by its checksum' $tamperRejected
     $workerPath=Join-Path $root 'scripts/Invoke-SimulationWorker.ps1';$workerText=Get-Content -LiteralPath $workerPath -Raw
     $hostPath=Join-Path $root 'scripts/Invoke-Doom.ps1';$hostText=Get-Content -LiteralPath $hostPath -Raw
+    $launcherPath=Join-Path $root 'Start-Doom.ps1';$launcherText=Get-Content -LiteralPath $launcherPath -Raw
     Check 'Worker accepts the journal path and source identity' ($workerText.Contains('$ReplayJournalPath') -and $workerText.Contains('$ReplaySourceFingerprint'))
     Check 'Worker writes the initial state before accepting commands' ($workerText -match '(?s)Initialize-DoomInputReplayJournal.*?Record-SimulationTransition\s+Record-ReplayCheckpoint\s+Flush-DoomInputReplayJournal')
     Check 'Worker flushes periodic and transition checkpoints' ($workerText.Contains('if($tick%350 -eq 0 -or $game.State -ne $priorState -or $extraCheckpoints.ContainsKey($tick)){Flush-DoomInputReplayJournal}') -and $workerText -match '(?s)Record-SimulationTransition;Record-ReplayCheckpoint -Replace\s+Flush-DoomInputReplayJournal')
     Check 'Worker flushes remaining commands during shutdown' ($workerText -match '(?s)finally \{.*?Flush-DoomInputReplayJournal -Final:')
     Check 'Host passes a fresh companion journal path to the worker' ($hostText.Contains("`$recordJournalPath=`$RecordInput+'.journal'") -and $hostText.Contains('-ReplayJournalPath $recordJournalPath'))
+    Check 'Packaged launcher displays recovery advice before opening Windows Terminal' ($launcherText.IndexOf('Get-DoomInputReplayJournalRecoveryAdvice') -ge 0 -and $launcherText.IndexOf('Get-DoomInputReplayJournalRecoveryAdvice') -lt $launcherText.IndexOf('$wt=Get-Command'))
+    Check 'Direct host launch uses the same recovery preflight' ($hostText.Contains('Get-DoomInputReplayJournalRecoveryAdvice'))
     Check 'Host removes the journal only after a replay is written' ($hostText -match '(?s)Write-DoomInputReplay \$RecordInput.*?if\(Test-Path -LiteralPath \$recordJournalPath\)')
     $out=[IO.Path]::GetFullPath($Output);[void][IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName($out))
     [ordered]@{CreatedUtc=[DateTime]::UtcNow.ToString('o');Checks=$checks.ToArray();Passed=$checks.Count;Failed=0;
         JournalSha256=(Get-FileHash -LiteralPath $journal).Hash;HelperSha256=(Get-FileHash -LiteralPath "$root/src/InputReplayJournal.ps1").Hash;
         HarnessSha256=(Get-FileHash -LiteralPath $PSCommandPath).Hash;WorkerSha256=(Get-FileHash -LiteralPath $workerPath).Hash;
-        HostSha256=(Get-FileHash -LiteralPath $hostPath).Hash;ProcessSha256=(Get-FileHash -LiteralPath (Join-Path $root 'src/SimulationProcess.ps1')).Hash;
+        HostSha256=(Get-FileHash -LiteralPath $hostPath).Hash;LauncherSha256=(Get-FileHash -LiteralPath $launcherPath).Hash;ProcessSha256=(Get-FileHash -LiteralPath (Join-Path $root 'src/SimulationProcess.ps1')).Hash;
         RecoverySha256=(Get-FileHash -LiteralPath $recoveryScript).Hash;
-        Meaning='Offline contract and static wiring checks for append-only input-replay journaling and recovery. Uses synthetic command data and temporary files only; launches no game, user process, display, or audio device.'} |
+        Meaning='Offline contract, recovery-advice, no-overwrite, and static-wiring checks for append-only input-replay journaling. Uses synthetic command data and temporary files only; launches no game, user process, display, or audio device.'} |
         ConvertTo-Json -Depth 7 | Set-Content -LiteralPath $out
     Write-Output "PASS: $($checks.Count) input replay journal checks."
 }finally{

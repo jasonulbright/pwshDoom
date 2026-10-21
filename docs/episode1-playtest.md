@@ -42,6 +42,13 @@ pwsh -NoProfile -File C:\projects\pwshDoom\scripts\Recover-DoomInputReplayJourna
 
 The journal is removed after a successful orderly recording. Recovery keeps it and does not overwrite the requested output. The recovery implementation has offline contract and static wiring checks; no game session or actual process interruption has exercised it yet.
 
+If the companion journal is still present on a later launch, `Start-Doom.ps1`
+now refuses to start another recording and prints a copyable recovery command.
+It selects the first unused `.recovered.json` output name and leaves the
+journal and any existing replay untouched. The 33-case offline contract covers
+quoting and filename collisions; abrupt-stop recovery through a real game
+session remains unverified.
+
 R19 and R20 checks are historical evidence from October 2026, not validation of the current package. Their route, worker, and audio results do not close the campaign or pacing gates. Current saved-replay renderer evidence compares the packaged source at E1M1 tic 315; at ceiling height 68 it records 21 differences against the adapted reference (18 plane-buffer and three mapped-column color differences), with no live game or device used. The current package receipt and [row-trace comparison](../results/moving-sector-lower-boundary-20261020-v17.json) preserve the exact limits. The complete route and acoustic/physical-input review remain required.
 
 ## Controls
