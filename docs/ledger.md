@@ -1,5 +1,17 @@
 # Investigation ledger
 
+## 2026-10-20 — Prepare current-source Episode 1 handoff
+
+Updated the playtest instructions to use a local source candidate built from a
+clean post-Preview.10 commit, while keeping Preview.10 identified as the latest
+public release. The 2,001,952-byte archive pins source `79ac2cca`; all 593
+manifest payload hashes match the contents read back from the ZIP. The
+[candidate receipt](../results/episode1-candidate-package-20261020.json)
+records its hashes and repository size. The full tree measured 27,946,529,644
+bytes, leaving 2,053,470,356 bytes under the 30,000,000,000-byte cap. This was
+source packaging and archive-hash verification only: the game was not launched
+and no live test, window, input or device was used.
+
 ## 2026-10-20 — Make interrupted-input recovery actionable
 
 When a prior human-session `.journal` exists, the launcher now refuses a new
