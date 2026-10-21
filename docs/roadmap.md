@@ -34,10 +34,13 @@ The exact source, controls, catalog, and single playthrough scope are in
 [`episode1-playtest.md`](episode1-playtest.md). The existing E1M5 continuation
 route ended in player death and did not expose a reproducible product defect;
 it is documented and route automation is stopped for this milestone. The
-current human-playtest handoff is public Preview.10 at source `c39f1dc`. Its
-1,970,047-byte source archive verifies all 588 manifest payload hashes; the
-[publication receipt](../results/preview10-publication-20261020.json) pins the
-uploaded assets. This supersedes the older local `e3` candidate at `f89e005`.
+current human-playtest handoff is a local source candidate built after
+Preview.10; its package manifest pins the source and payload hashes.
+Preview.10 remains the latest public release, with its 1,970,047-byte source
+archive and 588 verified manifest payloads recorded in the
+[publication receipt](../results/preview10-publication-20261020.json). The
+local candidate is development material and makes no route or live-runtime
+claim. This supersedes the older local `e3` candidate at `f89e005`.
 The wall and scaled-sprite source-column indexing preserves the fixed E1M2
 frame hash, but this is not launch, route, worker-parity, or pacing evidence.
 The broader release acceptance gates below remain intact. The complete human
