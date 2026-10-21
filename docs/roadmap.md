@@ -118,6 +118,15 @@ a speedup. The disposable work-counter generator was also corrected to match
 the current wall, masked-pixel, and plane-write source. No live game or device
 test was run. See the [source-offset receipt](../results/renderer-source-offset-20261020.json).
 
+A source-pinned ABBA comparison against the exact parent of the offset-hoist
+commit found no measurable timing change: the median paired delta was
+0.011 ms, with five of ten heading-round pairs favoring each version. A
+separate wall-texture wrap change replaces a double remainder with one
+remainder and a negative-coordinate correction. Its fixed E1M2 frame hash is
+unchanged; a short paired run likewise found no measurable timing difference.
+These are serial offline renderer comparisons only. The paired receipts and
+fixed-frame hashes are recorded in [rendering fidelity](rendering-fidelity.md).
+
 ## Historical Episode 1 handoff — R17 (2026-09-29)
 
 The current implementation candidate is commit 00405deebef6b4e8477c9c9316987b82fbc9064d. The clean development package and bounded R17 checks are pinned in the [candidate receipt](../results/episode1-current-human-candidate-20260929-r17.json) and [package receipt](../results/r17-playtest-package-validation-20260929.json). The archive has 543 manifest-verified files, excludes local assets and the research PDF, and passes extracted-package preflight under PowerShell 7.6.6.

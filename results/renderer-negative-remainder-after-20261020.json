@@ -1,0 +1,172 @@
+{
+  "FinishedUtc": "2026-10-21T02:09:42.7842458Z",
+  "Error": null,
+  "Episode": 1,
+  "Map": 2,
+  "Skill": 3,
+  "SetupTics": 0,
+  "WarmupFrames": 1,
+  "MeasuredFrames": 1,
+  "GeometryDetails": false,
+  "GeometryWorkCounters": false,
+  "PreselectVisibleWallBands": false,
+  "MeasureRendererAllocations": false,
+  "TransportMode": "object snapshot fallback",
+  "FullFramePixels": 64000,
+  "FullFrameSha256": "7CE121144325FDE8BE39D318B6646C4F9767907886EA2A2EEB40B8CD4D830014",
+  "SnapshotPreparationStats": {
+    "Mean": 0.0,
+    "Median": 0.0,
+    "P95": 0.0,
+    "Count": 0,
+    "Max": 0.0,
+    "P99": 0.0
+  },
+  "SnapshotPreparationSamples": [],
+  "FuzzActorCount": 0,
+  "ActorWorkerMaskStats": null,
+  "RenderMode": "Fixed game state and view; renderer phases measured serially for each of 1 production-equivalent column stripe(s); no terminal, audio, or simulation timing. Worker mask snapshot preparation includes host-side actor projection and mask generation.",
+  "WorkerCount": 1,
+  "Camera": {
+    "ViewZ": {
+      "Data": 4259840
+    },
+    "Angle": {
+      "Data": 1073741824
+    },
+    "X": {
+      "Data": -2097152
+    },
+    "Y": {
+      "Data": -15728640
+    }
+  },
+  "ActorCount": 199,
+  "PhaseStats": {
+    "GeometryMs": {
+      "Mean": 101.7847,
+      "Median": 101.7847,
+      "P95": 101.7847,
+      "Count": 1,
+      "Max": 101.7847,
+      "P99": 101.7847
+    },
+    "WeaponMs": {
+      "Mean": 0.0906,
+      "Median": 0.0906,
+      "P95": 0.0906,
+      "Count": 1,
+      "Max": 0.0906,
+      "P99": 0.0906
+    },
+    "HudMs": {
+      "Mean": 1.5076,
+      "Median": 1.5076,
+      "P95": 1.5076,
+      "Count": 1,
+      "Max": 1.5076,
+      "P99": 1.5076
+    },
+    "ActorsMs": {
+      "Mean": 12.9181,
+      "Median": 12.9181,
+      "P95": 12.9181,
+      "Count": 1,
+      "Max": 12.9181,
+      "P99": 12.9181
+    },
+    "TotalMs": {
+      "Mean": 116.9956,
+      "Median": 116.9956,
+      "P95": 116.9956,
+      "Count": 1,
+      "Max": 116.9956,
+      "P99": 116.9956
+    }
+  },
+  "WorkerPhaseStats": [
+    {
+      "GeometryWorkCounters": null,
+      "PhaseStats": {
+        "TotalMs": {
+          "Mean": 116.9956,
+          "Median": 116.9956,
+          "P95": 116.9956,
+          "Count": 1,
+          "Max": 116.9956,
+          "P99": 116.9956
+        },
+        "GeometryMs": {
+          "Mean": 101.7847,
+          "Median": 101.7847,
+          "P95": 101.7847,
+          "Count": 1,
+          "Max": 101.7847,
+          "P99": 101.7847
+        },
+        "ActorsMs": {
+          "Mean": 12.9181,
+          "Median": 12.9181,
+          "P95": 12.9181,
+          "Count": 1,
+          "Max": 12.9181,
+          "P99": 12.9181
+        },
+        "WeaponMs": {
+          "Mean": 0.0906,
+          "Median": 0.0906,
+          "P95": 0.0906,
+          "Count": 1,
+          "Max": 0.0906,
+          "P99": 0.0906
+        },
+        "HudMs": {
+          "Mean": 1.5076,
+          "Median": 1.5076,
+          "P95": 1.5076,
+          "Count": 1,
+          "Max": 1.5076,
+          "P99": 1.5076
+        }
+      },
+      "EndColumn": 320,
+      "FirstColumn": 0,
+      "WorkerIndex": 0,
+      "DecodeStats": {
+        "Mean": 0.0,
+        "Median": 0.0,
+        "P95": 0.0,
+        "Count": 0,
+        "Max": 0.0,
+        "P99": 0.0
+      },
+      "OutputSha256": "7CE121144325FDE8BE39D318B6646C4F9767907886EA2A2EEB40B8CD4D830014"
+    }
+  ],
+  "FullViewportGeometryWorkCounters": null,
+  "RendererAllocationBytesStats": null,
+  "Samples": [
+    {
+      "FirstColumn": 0,
+      "Index": 0,
+      "TotalMs": 116.9956,
+      "WorkerIndex": 0,
+      "ActorsMs": 12.9181,
+      "GeometryMs": 101.7847,
+      "WeaponMs": 0.0906,
+      "EndColumn": 320,
+      "HudMs": 1.5076
+    }
+  ],
+  "WadSha256": "6FDF361847B46228CFEBD9F3AF09CD844282AC75F3EDBB61CA4CB27103CE2E7F",
+  "BundleSha256": "2419DC7E6C2008B8B5E70A192296104E780E4AD2679A128AF61FD07C325C96D2",
+  "RendererSha256": "59C4D2A2FBDF80D48C471A69AAE7CFA84737D57F450E9CCE7472A1A52576CE65",
+  "InstrumentedRendererSha256": null,
+  "RendererVariantSha256": null,
+  "RendererVariantArtifact": null,
+  "SnapshotTransportSha256": "E88163E3D970A02F5D81B9EEDDEB9F7B1E0FE2A90AFCF4019733D423D69E8F8A",
+  "GameHostSha256": "CBADD9B913973D0442B4BE7A45F4C1069FA75B8DCAF78F4A550AE72C4ACED706",
+  "HarnessSha256": "B1D3C29074690DDBCF8A7AED540D83F6634E339E48EAA4D9E9F6871CF5E613A3",
+  "PowerShell": "7.6.6",
+  "Meaning": "Attributes PowerShell software-rendering time to the instrumented geometry, actor, player-weapon, and HUD phases at one fixed real-IWAD state. When WorkerCount is greater than one, each production-equivalent column stripe is rendered sequentially in this process: these are not concurrent-worker timings and do not model process scheduling, IPC, or terminal output. GeometryWorkCounters adds counters only to a retained disposable FastRenderer copy; its timings are diagnostic overhead and are not comparable with uninstrumented profiles. WallScreenRangeCalls and WallScreenRangeRejects count the fixed-angle projection path; ProjectionFallbackBackfaceCulls and ProjectionFallbackScreenCulls apply only when that metadata is unavailable. TextureBandTests counts visits to preselected active bands. PreselectVisibleWallBands is a disposable source variant that selects eligible textured bands once per projected segment; it is an experiment and is not production code unless separately integrated and qualified. MeasureRendererAllocations records per-render thread-local managed-byte deltas outside the timed interval; setup and report allocations are excluded. TransportLegacy exercises unsorted interpolation followed by each worker sorting locally; TransportPrepared measures repeated interpolation with shared far-to-near fuzz actor order. The LegacyWorkerProjection control forces the prior NumericV4 mask packet so workers repeat transforms locally; current production selects NumericV5 only for snapshots with at least 200 actors, otherwise it keeps the mask-only packet. Snapshot preparation includes host actor projection/mask generation; decode and render phases are reported separately with equal warmup/sample counts. Use live host receipts for pacing."
+}

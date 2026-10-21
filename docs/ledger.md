@@ -7583,3 +7583,20 @@ ranges and spans used by original Doom. Recorded this as a rejected
 cache-key-only fix; production source is unchanged. The receipt pins the
 counterfactual and replay. This was source and receipt inspection only: no game,
 UI, device, or live test was run.
+
+### 2026-10-20 — Simplify negative wall-texture wrapping
+
+Changed the wall pixel loop from two modulo operations to one remainder plus
+one correction when that remainder is negative. The before/after fixed E1M2
+frame hashes are identical. A short two-round ABBA comparison across five
+headings showed five wins per version and a 0.130 ms median paired delta, so no
+timing improvement is claimed. The separate offset-hoist ABBA trial also found
+no measurable change when compared with its exact parent; this narrows the
+earlier unpaired result. Raw fixed-frame and paired reports are in the
+[negative-remainder ABBA receipt](../results/renderer-negative-remainder-abba-20261020.json),
+[before](../results/renderer-negative-remainder-before-20261020.json),
+[after](../results/renderer-negative-remainder-after-20261020.json), and
+[offset-hoist ABBA receipt](../results/renderer-source-offset-abba-20261020.json).
+These are offline renderer runs only; no game UI, input, audio, device, or live
+test was used. This advances the branch to six commits after Preview.10; the
+next release is due at 35 commits.

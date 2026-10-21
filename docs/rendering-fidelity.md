@@ -1720,3 +1720,26 @@ and [compressed patch](../results/moving-sector-solid-range-scale-prepass-reject
 These comparisons use an adapted PowerShell reference and do not establish
 original-executable parity, live pacing, or gameplay progression. No live
 tests or device interaction were used.
+
+### Source-column offset and wall texture-wrap measurements — October 20, 2026
+
+A two-round ABBA comparison of commit `c1a716c` with its exact parent isolates
+the wall and scaled-patch source-column offset hoist. It renders E1M2 at five
+static headings with separate renderer contexts and 20 timed calls per
+version. The median paired delta is 0.011 ms, with five of ten pairs favoring
+each version; this does not establish a speedup. The [raw ABBA receipt](../results/renderer-source-offset-abba-20261020.json)
+records all calls and source hashes. The earlier [fixed-frame receipt](../results/renderer-source-offset-20261020.json)
+compares broader source snapshots and has unpaired timing, so it is not a
+direct measurement of that single commit.
+
+Wall texture sampling now wraps a vertical coordinate with one remainder and
+adds the texture height only when the remainder is negative. Before and after
+fixed E1M2 renders have identical 64,000-pixel SHA-256 values. The one-frame
+phase times are diagnostic only. A separate two-round ABBA comparison has a
+0.130 ms median paired delta and five wins per version, with no measurable
+timing change. See the [before](../results/renderer-negative-remainder-before-20261020.json),
+[after](../results/renderer-negative-remainder-after-20261020.json), and
+[paired](../results/renderer-negative-remainder-abba-20261020.json) receipts.
+The comparison only establishes identity against the prior renderer for one
+fixed view; it does not qualify original-executable parity or live pacing. No
+game UI, input, audio device, or live test was used.

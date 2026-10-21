@@ -953,7 +953,7 @@ function Invoke-FastRender {
                         # Binary fractions of 1/65536 are exact here: this evaluates
                         # the integer column fraction without accumulating roundoff.
                         [double]$vf=$vOrigin+($y-84)*$wallTexelStep;[int]$v=$vf;if($v -gt $vf){$v--}
-                        $v=($v%$th+$th)%$th;[int]$color=$td[$wallTextureColumnOffset+$v]
+                        $v=$v%$th;if($v -lt 0){$v+=$th};[int]$color=$td[$wallTextureColumnOffset+$v]
                         if($color -ge 0){
                             $p=$y*320+$x;$pixels[$p]=$wallColors[$color];$depthBuffer[$p]=$distance
                             if($band -eq 1 -and $bf -gt $fh){
